@@ -37,7 +37,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - run: ./gradlew build javadoc --console=plain --no-daemon
+      - run: ./gradlew assemble javadoc --console=plain --no-daemon
         shell: bash
 
   Java22-Linux:
