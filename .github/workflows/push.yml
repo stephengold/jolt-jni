@@ -1,0 +1,75 @@
+---
+# GitHub Actions workflow for commits pushed to the jolt-jni repo - all branches
+
+name: CI at GitHub
+on: [push]
+
+jobs:
+  Java11-Linux:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 11
+      - uses: actions/checkout@v4
+      - uses: gradle/actions/wrapper-validation@v3
+      - run: ./gradlew build javadoc --console=plain --no-daemon
+
+  Java11-MacOS:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: macOS-13
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 11
+      - uses: actions/checkout@v4
+      - run: ./gradlew build javadoc --console=plain --no-daemon
+
+  Java11-Windows:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: windows-2019
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 11
+      - uses: actions/checkout@v4
+      - run: ./gradlew build javadoc --console=plain --no-daemon
+        shell: bash
+
+  Java17-MacOS:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: macOS-14
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 17
+      - uses: actions/checkout@v4
+      - run: ./gradlew build javadoc --console=plain --no-daemon
+
+  Java21-Windows:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: windows-2022
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 21
+      - uses: actions/checkout@v4
+      - run: ./gradlew build javadoc --console=plain --no-daemon
+        shell: bash
+
+  Java22-Linux:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 22
+      - uses: actions/checkout@v4
+      - run: ./gradlew build javadoc --console=plain --no-daemon
