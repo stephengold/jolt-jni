@@ -15,7 +15,9 @@ ext {
 
 sourceSets.main.java {
     srcDir 'src/main/java'
-    srcDir 'src/main/native' // for IDE access (no Java there)
+}
+sourceSets.test.java {
+    srcDir 'src/test/java'
 }
 
 // Regenerate all JNI header files and unpack Jolt before compiling any C++ code.
@@ -148,6 +150,10 @@ model {
     }
 }
 
+dependencies {
+    testImplementation(libs.junit4)
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
@@ -161,6 +167,7 @@ tasks.withType(JavaCompile) { // Java compile-time options:
     options.headerOutputDirectory = new File('src/main/native/auto')
 }
 
+test.dependsOn('assemble')
 javadoc.dependsOn('compileTestJava')
 
 // Download and extract archived JoltPhysics source code
