@@ -13,6 +13,12 @@ ext {
 
 sourceSets.main.java {
     srcDir 'src/main/java'
+    srcDir 'src/main/native' // for IDE access (no Java there)
+}
+
+// Regenerate all JNI header files before compiling any C++ source code.
+tasks.withType(CppCompile) {
+    dependsOn('classes', 'compileTestJava')
 }
 
 java {
@@ -25,5 +31,15 @@ tasks.withType(JavaCompile) { // Java compile-time options:
     options.compilerArgs << '-Xlint:unchecked'
     options.deprecation = true // to provide detailed deprecation warnings
     options.encoding = 'UTF-8'
+    options.headerOutputDirectory = new File('src/main/native/auto')
 }
 
+javadoc.dependsOn('compileTestJava')
+
+// Register cleanup tasks:
+
+clean.dependsOn('cleanAutoHeaders')
+
+tasks.register('cleanAutoHeaders', Delete) { // auto-generated JNI headers
+    delete 'src/main/native/auto'
+}
