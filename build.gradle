@@ -1,6 +1,7 @@
 // Gradle script to build jolt-jni Maven artifacts and desktop native libraries
 
 plugins {
+    id 'application'   // to build JVM applications
     id 'cpp'           // to compile C++ code and link native libraries
     id 'java-library'  // to build JVM libraries
     alias(libs.plugins.download) // to retrieve files from URLs
@@ -166,6 +167,15 @@ tasks.withType(JavaCompile) { // Java compile-time options:
     options.encoding = 'UTF-8'
     options.headerOutputDirectory = new File('src/main/native/auto')
 }
+
+application {
+    mainClass = 'HelloWorld'
+}
+tasks.withType(JavaExec).configureEach { // Java runtime options:
+    classpath sourceSets.test.runtimeClasspath
+    enableAssertions true
+}
+run.dependsOn('assemble')
 
 test.dependsOn('assemble')
 javadoc.dependsOn('compileTestJava')
