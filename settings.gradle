@@ -1,0 +1,11 @@
+// global build settings for the jolt-jni project
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'jolt-jni'
+
+// no subprojects

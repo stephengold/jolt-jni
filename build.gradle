@@ -1,0 +1,29 @@
+// Gradle script to build jolt-jni Maven artifacts
+
+plugins {
+    id 'java-library'  // to build JVM libraries
+}
+
+ext {
+    group = 'com.github.stephengold'
+    artifact = 'joltjni'
+    version = '0.1.0'
+    baseName = "${artifact}-${version}" // for artifacts
+}
+
+sourceSets.main.java {
+    srcDir 'src/main/java'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+tasks.withType(JavaCompile) { // Java compile-time options:
+    options.compilerArgs << '-Xdiags:verbose'
+    options.compilerArgs << '-Xlint:unchecked'
+    options.deprecation = true // to provide detailed deprecation warnings
+    options.encoding = 'UTF-8'
+}
+
