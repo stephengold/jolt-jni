@@ -37,21 +37,35 @@ tasks.withType(JavaCompile) { // Java compile-time options:
 
 javadoc.dependsOn('compileTestJava')
 
-// download archived JoltPhysics source code
+// Download and extract archived JoltPhysics source code
 
 tasks.register('download', Download) {
     src 'https://github.com/jrouwe/JoltPhysics/archive/refs/tags/v5.0.0.zip'
     dest file('downloads/JoltPhysics-5.0.0.zip')
     overwrite false
 }
+tasks.register('unpackJoltSource', Copy) {
+    dependsOn 'download'
+    from (zipTree('downloads/JoltPhysics-5.0.0.zip')) {
+        include 'JoltPhysics-5.0.0/Jolt/**'
+        eachFile { fcd ->
+            fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
+        }
+        includeEmptyDirs = false
+    }
+    into layout.projectDirectory.dir('src/main/native/Jolt')
+}
 
 // Register cleanup tasks:
 
-clean.dependsOn('cleanAutoHeaders', 'cleanDownloads')
+clean.dependsOn('cleanAutoHeaders', 'cleanDownloads', 'cleanJoltSource')
 
 tasks.register('cleanAutoHeaders', Delete) { // auto-generated JNI headers
     delete 'src/main/native/auto'
 }
 tasks.register('cleanDownloads', Delete) { // downloaded files
     delete 'downloads'
+}
+tasks.register('cleanJoltSource', Delete) { // unpacked Jolt Physics source code
+    delete 'src/main/native/Jolt'
 }

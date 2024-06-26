@@ -1,6 +1,7 @@
 /.cxx/
 /downloads/
 /src/main/native/auto/
+/src/main/native/Jolt/
 
 # Ignore Gradle's project-specific cache directory:
 /.gradle/
