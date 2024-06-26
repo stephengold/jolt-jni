@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A {@code Shape} to generate axis-aligned rectangular solids.
+ * A {@code Shape} to represent centered, axis-aligned rectangular solids.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -35,7 +35,7 @@ public class BoxShape extends ConvexShape {
     }
 
     /**
-     * Instantiate a box shape with the specified half extents.
+     * Instantiate a shape with the specified half extents.
      *
      * @param halfExtents the desired half extents on each local axis (not null,
      * all components &ge;0, unaffected)

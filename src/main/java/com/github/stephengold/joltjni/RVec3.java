@@ -71,7 +71,8 @@ final public class RVec3 {
     // new methods exposed
 
     /**
-     * Return the first (X) component at positional precision.
+     * Return the first (X) component at positional precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
@@ -87,7 +88,8 @@ final public class RVec3 {
     }
 
     /**
-     * Return the 2nd (Y) component at positional precision.
+     * Return the 2nd (Y) component at positional precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
@@ -103,7 +105,8 @@ final public class RVec3 {
     }
 
     /**
-     * Return the 3rd (Z) component at positional precision.
+     * Return the 3rd (Z) component at positional precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
@@ -132,7 +135,8 @@ final public class RVec3 {
     }
 
     /**
-     * Return the first (X) component in single precision.
+     * Return the first (X) component in single precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
@@ -141,7 +145,8 @@ final public class RVec3 {
     }
 
     /**
-     * Return the first (X) component in double precision.
+     * Return the first (X) component in double precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
@@ -150,7 +155,8 @@ final public class RVec3 {
     }
 
     /**
-     * Return the 2nd (Y) component in single precision.
+     * Return the 2nd (Y) component in single precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
@@ -159,7 +165,8 @@ final public class RVec3 {
     }
 
     /**
-     * Return the 2nd (Y) component in double precision.
+     * Return the 2nd (Y) component in double precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
@@ -168,7 +175,8 @@ final public class RVec3 {
     }
 
     /**
-     * Return the 3rd (Z) component in single precision.
+     * Return the 3rd (Z) component in single precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
@@ -177,7 +185,8 @@ final public class RVec3 {
     }
 
     /**
-     * Return the 3rd (Z) component in double precision.
+     * Return the 3rd (Z) component in double precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
@@ -187,6 +196,15 @@ final public class RVec3 {
     // *************************************************************************
     // Object methods
 
+    /**
+     * Return a string representation of the vector, which is unaffected. For
+     * example, a zero vector is represented by:
+     * <pre>
+     * RVec3(0.0 0.0 0.0)
+     * </pre>
+     *
+     * @return the string representation (not null, not empty)
+     */
     @Override
     public String toString() {
         String result = "RVec3(" + getX() + " " + getY() + " " + getZ() + ")";

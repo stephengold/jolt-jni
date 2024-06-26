@@ -22,6 +22,12 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
+ * A math object composed of 4 single-precision components, used to represent
+ * rotations and orientations in 3-dimensional space, without risk of gimbal
+ * lock. Each instance has 4 single-precision components: 3 imaginary components
+ * (X, Y, and Z) and a real component (W).
+ * <p>
+ * Mathematically speaking, quaternions are an extension of complex numbers.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -38,7 +44,7 @@ final public class Quat {
      */
     private float x;
     /**
-     * the 2nd imaginary(Y) component
+     * the 2nd imaginary (Y) component
      */
     private float y;
     /**
@@ -91,7 +97,8 @@ final public class Quat {
     }
 
     /**
-     * Return the real (W) component in single precision.
+     * Return the real (W) component in single precision. The quaternion is
+     * unaffected.
      *
      * @return the component value
      */
@@ -100,7 +107,8 @@ final public class Quat {
     }
 
     /**
-     * Return the first imaginary (X) component in single precision.
+     * Return the first imaginary (X) component in single precision. The
+     * quaternion is unaffected.
      *
      * @return the component value
      */
@@ -109,7 +117,8 @@ final public class Quat {
     }
 
     /**
-     * Return the 2nd imaginary (Y) component in single precision.
+     * Return the 2nd imaginary (Y) component in single precision. The
+     * quaternion is unaffected.
      *
      * @return the component value
      */
@@ -118,7 +127,8 @@ final public class Quat {
     }
 
     /**
-     * Return the 3rd imaginary (Y) component in single precision.
+     * Return the 3rd imaginary (Y) component in single precision. The
+     * quaternion is unaffected.
      *
      * @return the component value
      */
@@ -128,6 +138,15 @@ final public class Quat {
     // *************************************************************************
     // Object methods
 
+    /**
+     * Return a string representation of the quaternion, which is unaffected.
+     * For example, an identity quaternion is represented by:
+     * <pre>
+     * Quat(0.0 0.0 0.0 1.0)
+     * </pre>
+     *
+     * @return the string representation (not null, not empty)
+     */
     @Override
     public String toString() {
         String result = "Quat(" + x + " " + y + " " + z + " " + w + ")";

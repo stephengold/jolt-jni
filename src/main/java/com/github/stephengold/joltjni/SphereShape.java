@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A spherical {@code Shape}.
+ * A {@code Shape} to represent centered spheres.
  *
  * @author Stephen Gold sgold@sonic.net
  */

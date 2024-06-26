@@ -22,6 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
+ * Perform simulation on physics objects. Bodies are added via a separate
+ * interface.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -29,6 +31,9 @@ public class PhysicsSystem extends NonCopyable {
     // *************************************************************************
     // fields
 
+    /**
+     * interface for adding/modifying/querying/removing bodies (not null)
+     */
     final private BodyInterface bodyInterface;
     // *************************************************************************
     // constructors

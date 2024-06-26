@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
+ * Settings used to construct a {@code ConvexShape}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

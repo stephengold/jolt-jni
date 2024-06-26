@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
+ * The abstract base class for collision shapes.
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Settings used to create a {@code Shape}.
+ * Settings used to construct a {@code Shape}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

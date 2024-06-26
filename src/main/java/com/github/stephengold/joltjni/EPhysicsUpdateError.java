@@ -55,4 +55,12 @@ final public class EPhysicsUpdateError {
      * {@code PhysicsSystem} constructor.
      */
     final public static int ContactConstraintsFull = 0x4;
+    // *************************************************************************
+    // constructors
+
+    /**
+     * A private constructor to inhibit instantiation of this class.
+     */
+    private EPhysicsUpdateError() {
+    }
 }
