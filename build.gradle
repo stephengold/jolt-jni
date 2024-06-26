@@ -1,6 +1,7 @@
-// Gradle script to build jolt-jni Maven artifacts
+// Gradle script to build jolt-jni Maven artifacts and desktop native libraries
 
 plugins {
+    id 'cpp'           // to compile C++ code and link native libraries
     id 'java-library'  // to build JVM libraries
     alias(libs.plugins.download) // to retrieve files from URLs
 }
@@ -17,9 +18,133 @@ sourceSets.main.java {
     srcDir 'src/main/native' // for IDE access (no Java there)
 }
 
-// Regenerate all JNI header files before compiling any C++ source code.
+// Regenerate all JNI header files and unpack Jolt before compiling any C++ code.
 tasks.withType(CppCompile) {
-    dependsOn('classes', 'compileTestJava')
+    dependsOn('classes', 'compileTestJava', 'unpackJoltSource')
+}
+
+String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
+
+model {
+    buildTypes {
+        Debug
+        Release
+    }
+
+    flavors {
+        Sp   // single-precision arithmetic
+        Dp   // double-precision arithmetic
+    }
+
+    platforms {
+        Linux64 {
+            architecture 'x86_64'
+            operatingSystem 'linux'
+        }
+        MacOSX_ARM64 {
+            architecture 'arm-v8'
+            operatingSystem 'osx'
+        }
+        Windows64 {
+            architecture 'x86_64'
+            operatingSystem 'windows'
+        }
+    }
+
+    toolChains { // prioritize among the native toolchains
+        visualCpp(VisualCpp) // used when compiling on Windows
+        gcc(Gcc) // used when compiling on Linux
+        clang(Clang) // used when compiling on macOS
+    }
+
+    components {
+        joltjni(NativeLibrarySpec) {
+            targetPlatform 'Linux64'
+            targetPlatform 'MacOSX_ARM64'
+            targetPlatform 'Windows64'
+
+            sources.cpp.source {
+                srcDir 'src/main/native/Jolt'
+                srcDir 'src/main/native/glue'
+                include '**/*.cpp'
+            }
+
+            binaries.withType(SharedLibraryBinarySpec) {
+                Boolean isDebug = (buildType == buildTypes.Debug)
+                String pName = targetPlatform.name
+                //println " - $pName  $buildType  $flavor" // to debug this script
+
+                buildable = true
+
+                Boolean isDp = (flavor == flavors.Dp)
+                String os = targetPlatform.operatingSystem.name
+                if (buildable) {
+                    // Decide whether to build the current flavor:
+                    if (project.hasProperty('flavor')) {
+                        // -Pflavor= specified on the command line
+                        String flavorArg = project.ext.flavor
+                        buildable = (flavor.name == flavorArg)
+                    }
+                }
+
+                // flavor-specific defines:
+                if (isDebug) {
+                    cppCompiler.define '_DEBUG'
+                    cppCompiler.define 'JPH_ENABLE_ASSERTS'
+                }
+                if (isDp) {
+                    cppCompiler.define 'JPH_DOUBLE_PRECISION'
+                }
+
+                String q = pName + buildType.name + flavor.name
+                if (toolChain in VisualCpp) {
+                    cppCompiler.define 'WIN32'
+                    cppCompiler.args '/EHsc' // synchronous exceptions only
+                    cppCompiler.args "/I$javaHome/include"
+                    cppCompiler.args "/I$javaHome/include/win32"
+                    cppCompiler.args "/I$projectDir/src/main/native"
+
+                    if (isDebug) {
+                        cppCompiler.args '/MTd' // to use LIBCMTD
+                        linker.args '/DEBUG'
+                    } else { // buildType == Release
+                        cppCompiler.args '/O2'
+                        cppCompiler.args '/Ob3'
+                    }
+
+                } else { // toolChain in Clang or Gcc
+                    cppCompiler.args '-I', "$javaHome/include"
+                    cppCompiler.args '-I', "$projectDir/src/main/native"
+                    cppCompiler.args '-std=c++17'
+
+                    if (isDebug) {
+                        cppCompiler.args '-O0', '-g3'
+                    } else { // buildType == Release
+                        cppCompiler.args '-O3'
+                    }
+
+                    if (os == 'osx') {
+                        cppCompiler.args '-I', "$javaHome/include/darwin"
+                    } else if (os == 'linux') {
+                        cppCompiler.args '-I', "$javaHome/include/linux"
+                        cppCompiler.args '-fPIC'
+                        cppCompiler.args '-fvisibility=hidden'
+                        linker.args '-fvisibility=hidden'
+                    } else {
+                        buildable = false
+                    }
+                }
+
+                if (buildable) {
+                    println 'Build ' + q + ' using ' + toolChain
+                }
+            }
+
+            binaries.withType(StaticLibraryBinarySpec) {
+                buildable = false
+            }
+        }
+    }
 }
 
 java {
