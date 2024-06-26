@@ -2,6 +2,7 @@
 
 plugins {
     id 'java-library'  // to build JVM libraries
+    alias(libs.plugins.download) // to retrieve files from URLs
 }
 
 ext {
@@ -36,10 +37,21 @@ tasks.withType(JavaCompile) { // Java compile-time options:
 
 javadoc.dependsOn('compileTestJava')
 
+// download archived JoltPhysics source code
+
+tasks.register('download', Download) {
+    src 'https://github.com/jrouwe/JoltPhysics/archive/refs/tags/v5.0.0.zip'
+    dest file('downloads/JoltPhysics-5.0.0.zip')
+    overwrite false
+}
+
 // Register cleanup tasks:
 
-clean.dependsOn('cleanAutoHeaders')
+clean.dependsOn('cleanAutoHeaders', 'cleanDownloads')
 
 tasks.register('cleanAutoHeaders', Delete) { // auto-generated JNI headers
     delete 'src/main/native/auto'
+}
+tasks.register('cleanDownloads', Delete) { // downloaded files
+    delete 'downloads'
 }
