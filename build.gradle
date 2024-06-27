@@ -186,6 +186,11 @@ test.dependsOn('assemble')
 
 // Register publishing tasks:
 
+tasks.register('install') {
+    dependsOn 'publishMavenPublicationToMavenLocal'
+    description 'Installs Maven artifacts to the local repository.'
+}
+
 assemble.dependsOn('copyToDistJars')
 tasks.register('copyToDistJars', Copy) {
     dependsOn 'jar', 'javadocJar', 'signArchives', 'signMavenPublication', 'sourcesJar'
@@ -322,14 +327,20 @@ tasks.register('unpackJoltSource', Copy) {
 
 // Register cleanup tasks:
 
-clean.dependsOn('cleanAutoHeaders', 'cleanDownloads', 'cleanJoltSource')
+clean.dependsOn('cleanAutoHeaders', 'cleanDist', 'cleanDownloads', 'cleanJoltSource', 'cleanLogs')
 
 tasks.register('cleanAutoHeaders', Delete) { // auto-generated JNI headers
     delete 'src/main/native/auto'
+}
+tasks.register('cleanDist', Delete) { // files to be distributed
+    delete 'dist'
 }
 tasks.register('cleanDownloads', Delete) { // downloaded files
     delete 'downloads'
 }
 tasks.register('cleanJoltSource', Delete) { // unpacked Jolt Physics source code
     delete 'src/main/native/Jolt'
+}
+tasks.register('cleanLogs', Delete) { // JVM crash logs
+    delete fileTree(dir: '.', include: 'hs_err_pid*.log')
 }
