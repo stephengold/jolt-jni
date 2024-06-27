@@ -151,7 +151,6 @@ public class Test001 {
         objVsObjFilter.close();
         objVsBpFilter.close();
         mapObj2Bp.close();
-        jobSystem.close();
         allocator.close();
 
         Jolt.unregisterTypes();
