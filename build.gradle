@@ -84,13 +84,15 @@ model {
 
                 Boolean isDp = (flavor == flavors.Dp)
                 String os = targetPlatform.operatingSystem.name
-                if (buildable) {
-                    // Decide whether to build the current flavor:
-                    if (project.hasProperty('flavor')) {
-                        // -Pflavor= specified on the command line
-                        String flavorArg = project.ext.flavor
-                        buildable = (flavor.name == flavorArg)
-                    }
+                if (buildable && project.hasProperty('bt')) {
+                    // set in gradle.properties file or -Pbt= on the command line
+                    String btArg = project.ext.bt
+                    buildable = (buildType.name == btArg)
+                }
+                if (buildable && project.hasProperty('flavor')) {
+                    // set in gradle.properties file or -Pflavor= on the command line
+                    String flavorArg = project.ext.flavor
+                    buildable = (flavor.name == flavorArg)
                 }
 
                 // flavor-specific defines:
