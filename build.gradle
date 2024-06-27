@@ -4,6 +4,7 @@ plugins {
     id 'application'   // to build JVM applications
     id 'cpp'           // to compile C++ code and link native libraries
     id 'java-library'  // to build JVM libraries
+    id 'maven-publish' // to publish artifacts to Maven repositories
     alias(libs.plugins.download) // to retrieve files from URLs
 }
 
@@ -12,6 +13,7 @@ ext {
     artifact = 'joltjni'
     version = '0.1.0'
     baseName = "${artifact}-${version}" // for artifacts
+    websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
 
 sourceSets.main.java {
@@ -202,6 +204,46 @@ tasks.register('sourcesJar', Jar) {
 }
 
 javadoc.dependsOn('compileTestJava')
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact sourcesJar
+            artifactId artifact
+            from components.java
+            groupId project.ext.group
+            pom {
+                description = 'a JNI interface to Jolt Physics'
+                developers {
+                    developer {
+                        email = 'sgold@sonic.net'
+                        name = 'Stephen Gold'
+                    }
+                }
+                inceptionYear = '2024'
+                licenses {
+                    license {
+                        distribution = 'repo'
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                name = project.ext.group + ':' + artifact
+                scm {
+                    connection = 'scm:git:git://github.com/stephengold/jolt-jni.git'
+                    developerConnection = 'scm:git:ssh://github.com:stephengold/jolt-jni.git'
+                    url = project.ext.websiteUrl + '/tree/master'
+                }
+                url = project.ext.websiteUrl
+            }
+            version project.ext.version
+        }
+    }
+}
+publishMavenPublicationToMavenLocal.dependsOn('assemble')
+publishMavenPublicationToMavenLocal.doLast {
+    println 'installed locally as ' + project.ext.baseName
+}
 
 // Download and extract archived JoltPhysics source code
 
