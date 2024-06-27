@@ -176,8 +176,30 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
     enableAssertions true
 }
 run.dependsOn('assemble')
-
 test.dependsOn('assemble')
+
+// Register publishing tasks:
+
+jar {
+    archiveBaseName = project.ext.baseName
+    doLast {
+        println "using Java ${JavaVersion.current()} (${System.getProperty("java.vendor")})"
+    }
+    manifest {
+        attributes 'Created-By': "${JavaVersion.current()} (${System.getProperty("java.vendor")})"
+    }
+}
+
+java.withJavadocJar()
+javadocJar { archiveBaseName = project.ext.baseName }
+
+tasks.register('sourcesJar', Jar) {
+    archiveBaseName = project.ext.baseName
+    archiveClassifier = 'sources'
+    description 'Creates a JAR of Java sourcecode.'
+    from 'src/main/java' // default is ".allSource", which includes resources
+}
+
 javadoc.dependsOn('compileTestJava')
 
 // Download and extract archived JoltPhysics source code
