@@ -162,10 +162,11 @@ public class PhysicsSystem extends NonCopyable {
      */
     public int update(float deltaTime, int collisionSteps,
             TempAllocator tempAllocator, JobSystem jobSystem) {
+        long physicsSystemVa = va();
         long allocatorVa = tempAllocator.va();
         long jobSystemVa = jobSystem.va();
-        int result = update(
-                va(), deltaTime, collisionSteps, allocatorVa, jobSystemVa);
+        int result = update(physicsSystemVa, deltaTime, collisionSteps,
+                allocatorVa, jobSystemVa);
 
         return result;
     }
