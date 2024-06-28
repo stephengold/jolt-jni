@@ -125,6 +125,7 @@ model {
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/main/native"
                     cppCompiler.args '-std=c++17'
+                    cppCompiler.args '-Werror=return-type'
 
                     if (isDebug) {
                         cppCompiler.args '-O0', '-g3'
