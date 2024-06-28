@@ -147,6 +147,16 @@ model {
 
                 if (buildable) {
                     println 'Build ' + q + ' using ' + toolChain
+
+                    project.tasks.register('copyToDist' + q, Copy) {
+                        dependsOn "joltjni${q}SharedLibrary"
+                        from sharedLibraryFile
+                        rename { String filename ->
+                            return q + '_' + filename
+                        }
+                        into 'dist'
+                    }
+                    jar.dependsOn('copyToDist' + q)
                 }
             }
 
