@@ -31,6 +31,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    activateBody
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_activateBody
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    pInterface->ActivateBody(*pBodyId);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    addBody
  * Signature: (JJI)V
  */
@@ -197,6 +210,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_removeB
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
     pInterface->RemoveBody(*pBodyId);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setAngularVelocity
+ * Signature: (JJFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setAngularVelocity
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa,
+    jfloat wx, jfloat wy, jfloat wz) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const Vec3 omega(wx, wy, wz);
+    pInterface->SetAngularVelocity(*pBodyId, omega);
 }
 
 /*

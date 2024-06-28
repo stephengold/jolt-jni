@@ -38,6 +38,17 @@ public class BodyInterface extends NonCopyable {
     // new methods exposed
 
     /**
+     * Activate the specified body.
+     *
+     * @param bodyId which body to activate (not null)
+     */
+    public void activateBody(BodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        activateBody(bodyInterfaceVa, bodyIdVa);
+    }
+
+    /**
      * Add the specified body to the physics system.
      *
      * @param bodyId the ID of the body to add (not null)
@@ -156,6 +167,19 @@ public class BodyInterface extends NonCopyable {
      * Alter the linear velocity of the specified body.
      *
      * @param bodyId the ID of the body to test (not null)
+     * @param omega the desired rates (not null, unaffected)
+     */
+    public void setAngularVelocity(BodyId bodyId, Vec3 omega) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        setAngularVelocity(bodyInterfaceVa, bodyIdVa,
+                omega.getX(), omega.getY(), omega.getZ());
+    }
+
+    /**
+     * Alter the linear velocity of the specified body.
+     *
+     * @param bodyId the ID of the body to test (not null)
      * @param velocity the desired velocity (not null, unaffected)
      */
     public void setLinearVelocity(BodyId bodyId, Vec3 velocity) {
@@ -165,6 +189,9 @@ public class BodyInterface extends NonCopyable {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void activateBody(
+            long bodyInterfaceVa, long bodyIdVa);
 
     native private static void addBody(
             long bodyInterfaceVa, long bodyIdVa, int activationOrdinal);
@@ -200,6 +227,9 @@ public class BodyInterface extends NonCopyable {
 
     native private static void removeBody(
             long bodyInterfaceVa, long bodyIdVa);
+
+    native private static void setAngularVelocity(
+            long bodyInterfaceVa, long bodyIdVa, float wx, float wy, float wz);
 
     native private static void setLinearVelocity(
             long bodyInterfaceVa, long bodyIdVa, float vx, float vy, float vz);
