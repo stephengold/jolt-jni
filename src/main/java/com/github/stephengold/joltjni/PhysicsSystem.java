@@ -130,16 +130,6 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Access the system's {@code BodyInterface}.
-     *
-     * @return the pre-existing instance (not null)
-     */
-    public BodyInterface getBodyInterface() {
-        assert bodyInterface != null;
-        return bodyInterface;
-    }
-
-    /**
      * Improve the performance of future collision detections.
      */
     public void optimizeBroadPhase() {
