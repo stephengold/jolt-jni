@@ -22,8 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Perform simulation on physics objects. Bodies are added via a separate
- * interface.
+ * Perform simulation on a collection of physics objects. Bodies are added via a
+ * separate interface.
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -23,7 +23,8 @@ package com.github.stephengold.joltjni;
 
 /**
  * A vector composed of 3 single-precision components, used to represent
- * velocities and directions in 3-dimensional space.
+ * directions, extents, forces, impulses, offsets, scaling factors, torques,
+ * and velocities in 3-dimensional space.
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -31,11 +31,14 @@ public class JobSystemThreadPool extends JobSystem {
     // constructors
 
     /**
-     * Instantiate a system with the specified limits.
+     * Instantiate a job system with the specified limits.
      *
-     * @param maxJobs the maximum number of jobs to be scheduled
-     * @param maxBarriers the maximum number of barriers
-     * @param numThreads the number of worker threads to be created
+     * @param maxJobs the maximum number of jobs that can be allocated at one
+     * time
+     * @param maxBarriers the maximum number of barriers that can be allocated
+     * at one time
+     * @param numThreads the number of worker threads to start (&ge;1) or -1 to
+     * auto detect
      */
     public JobSystemThreadPool(int maxJobs, int maxBarriers, int numThreads) {
         long systemVa = createJobSystem(maxJobs, maxBarriers, numThreads);

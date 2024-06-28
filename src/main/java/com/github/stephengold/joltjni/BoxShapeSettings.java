@@ -31,7 +31,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
-     * Instantiate box settings for the specified half extents.
+     * Instantiate settings for the specified half extents.
      *
      * @param halfExtents the desired half extents on each local axis (not null,
      * all components &ge;0, unaffected)

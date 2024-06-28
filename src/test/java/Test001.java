@@ -72,9 +72,12 @@ public class Test001 {
         JobSystemThreadPool jobSystem
                 = new JobSystemThreadPool(maxJobs, maxBarriers, numThreads);
 
+        // object layers:
         final int objLayerNonMoving = 0;
         final int objLayerMoving = 1;
         final int numObjLayers = 2;
+
+        // broadphase layers:
         final int bpLayerNonMoving = 0;
         final int bpLayerMoving = 1;
         final int numBpLayers = 2;

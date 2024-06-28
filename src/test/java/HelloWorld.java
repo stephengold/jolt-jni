@@ -24,7 +24,7 @@ import com.github.stephengold.joltjni.*;
 
 /**
  * A straightforward Java translation of the Jolt Physics "hello world" sample
- * application. 
+ * application.
  * <p>
  * Derived from HelloWorld/HelloWorld.cpp by Jorrit Rouwe.
  *
