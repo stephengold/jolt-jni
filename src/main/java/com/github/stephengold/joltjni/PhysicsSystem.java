@@ -106,7 +106,7 @@ public class PhysicsSystem extends NonCopyable {
      * @see com.github.stephengold.joltjni.EPhysicsUpdateError
      */
     public int update(float deltaTime, int collisionSteps,
-            TempAllocatorImpl tempAllocator, JobSystemThreadPool jobSystem) {
+            TempAllocator tempAllocator, JobSystem jobSystem) {
         long allocatorVa = tempAllocator.va();
         long jobSystemVa = jobSystem.va();
         int result = update(
