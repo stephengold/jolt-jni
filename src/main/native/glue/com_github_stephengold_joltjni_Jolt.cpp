@@ -35,6 +35,22 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    buildType
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_buildType
+  (JNIEnv *pEnv, jclass) {
+    jstring result;
+#ifdef JPH_ENABLE_ASSERTS
+    result = pEnv->NewStringUTF("Debug");
+#else
+    result = pEnv->NewStringUTF("Release");
+#endif // JPH_ENABLE_ASSERTS
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    destroyFactory
  * Signature: ()V
  */

@@ -39,6 +39,13 @@ final public class Jolt {
     // new methods exposed
 
     /**
+     * Return the jolt-jni build-type string.
+     *
+     * @return either "Debug" or "Release"
+     */
+    final native public static String buildType();
+
+    /**
      * Destroy the factory for deserialization of saved data.
      *
      * @see newFactory()
