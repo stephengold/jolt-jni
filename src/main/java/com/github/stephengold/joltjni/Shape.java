@@ -45,4 +45,21 @@ abstract public class Shape extends NonCopyable {
     protected Shape(long virtualAddress) {
         super(virtualAddress);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Test whether the shape can be used in a dynamic/kinematic body.
+     *
+     * @return true if it can be only be static, otherwise false
+     */
+    public boolean mustBeStatic() {
+        long shapeVa = va();
+        boolean result = mustBeStatic(shapeVa);
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static boolean mustBeStatic(long shapeVa);
 }
