@@ -31,18 +31,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BoxShapeSettings
- * Method:    createBoxShapeSettings
- * Signature: (FFF)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_createBoxShapeSettings
-  (JNIEnv *, jclass, jfloat xHalfExtent, jfloat yHalfExtent, jfloat zHalfExtent) {
-    Vec3 halfExtents(xHalfExtent, yHalfExtent, zHalfExtent);
-    BoxShapeSettings * const pResult = new BoxShapeSettings(halfExtents);
-    return reinterpret_cast<jlong> (pResult);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BoxShapeSettings
  * Method:    createBoxShape
  * Signature: (J)J
  */
@@ -56,4 +44,16 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_cre
         // TODO
     }
     return reinterpret_cast<jlong> (pShape);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShapeSettings
+ * Method:    createBoxShapeSettings
+ * Signature: (FFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_createBoxShapeSettings
+  (JNIEnv *, jclass, jfloat xHalfExtent, jfloat yHalfExtent, jfloat zHalfExtent) {
+    Vec3 halfExtents(xHalfExtent, yHalfExtent, zHalfExtent);
+    BoxShapeSettings * const pResult = new BoxShapeSettings(halfExtents);
+    return reinterpret_cast<jlong> (pResult);
 }

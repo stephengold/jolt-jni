@@ -62,8 +62,8 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     // *************************************************************************
     // native private methods
 
+    native private static long createBoxShape(long settingsVa);
+
     native private static long createBoxShapeSettings(
             float xHalfExtent, float yHalfExtent, float zHalfExtent);
-
-    native private static long createBoxShape(long settingsVa);
 }
