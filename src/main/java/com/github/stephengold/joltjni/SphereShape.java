@@ -31,6 +31,16 @@ public class SphereShape extends ConvexShape {
     // constructors
 
     /**
+     * Instantiate a shape with the specified native object assigned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    SphereShape(long virtualAddress) {
+        super(virtualAddress);
+    }
+
+    /**
      * Instantiate a shape with the specified radius.
      *
      * @param radius the desired radius
