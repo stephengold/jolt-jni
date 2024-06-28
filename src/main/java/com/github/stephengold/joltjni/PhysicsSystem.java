@@ -52,6 +52,58 @@ public class PhysicsSystem extends NonCopyable {
     // new methods exposed
 
     /**
+     * Access the system's {@code BodyInterface}.
+     *
+     * @return the pre-existing instance (not null)
+     */
+    public BodyInterface getBodyInterface() {
+        assert bodyInterface != null;
+        return bodyInterface;
+    }
+
+    /**
+     * Copy the system's gravity vector.
+     *
+     * @return a new vector
+     */
+    public Vec3 getGravity() {
+        long systemVa = va();
+        float x = getGravityX(systemVa);
+        float y = getGravityY(systemVa);
+        float z = getGravityZ(systemVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Counts how many active bodies of the specified type there are in the body
+     * manager.
+     *
+     * @param bodyType which type of body to count (not null)
+     * @return the count (&ge;0)
+     */
+    public int getNumActiveBodies(EBodyType bodyType) {
+        long systemVa = va();
+        int typeOrdinal = bodyType.ordinal();
+        int result = getNumActiveBodies(systemVa, typeOrdinal);
+
+        return result;
+    }
+
+    /**
+     * Counts how many bodies there are in the body manager.
+     *
+     * @return the count (&ge;0)
+     */
+    public int getNumBodies() {
+        long systemVa = va();
+        int result = getNumBodies(systemVa);
+
+        return result;
+    }
+
+    /**
      * Initialize the physics system with the specified limits.
      *
      * @param maxBodies the desired maximum number of rigid bodies that can be
@@ -95,6 +147,19 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Alter the system's gravity vector.
+     *
+     * @param gravity (not null, unaffected)
+     */
+    public void setGravity(Vec3 gravity) {
+        long systemVa = va();
+        float x = gravity.getX();
+        float y = gravity.getY();
+        float z = gravity.getZ();
+        setGravity(systemVa, x, y, z);
+    }
+
+    /**
      * Advance the simulation by the specified amount.
      *
      * @param deltaTime the total time to advance (in seconds)
@@ -121,11 +186,25 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static long getBodyInterface(long systemVa);
 
+    native private static float getGravityX(long systemVa);
+
+    native private static float getGravityY(long systemVa);
+
+    native private static float getGravityZ(long systemVa);
+
+    native private static int getNumActiveBodies(
+            long systemVa, int typeOrdinal);
+
+    native private static int getNumBodies(long systemVa);
+
     native private static void init(long systemVa, int maxBodies,
             int numBodyMutexes, int maxBodyPairs, int maxContactConstraints,
             long mapVa, long ovbFilterVa, long ovoFilterVa);
 
     native private static void optimizeBroadPhase(long systemVa);
+
+    native private static void setGravity(
+            long systemVa, float x, float y, float z);
 
     native private static int update(long physicsSystemVa, float deltaTime,
             int collisionSteps, long allocatorVa, long jobSystemVa);
