@@ -75,3 +75,15 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
             = reinterpret_cast<BodyCreationSettings *> (bodyCreationSettingsVa);
     delete pInstance;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setGravityFactor
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setGravityFactor
+  (JNIEnv *, jclass, jlong bodyCreationSettingsVa, jfloat factor) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodyCreationSettingsVa);
+    pSettings->mGravityFactor = factor;
+}

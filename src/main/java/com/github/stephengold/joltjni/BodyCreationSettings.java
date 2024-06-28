@@ -70,6 +70,18 @@ public class BodyCreationSettings extends JoltPhysicsObject {
         setVirtualAddress(bodySettingsVa, true);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Alter the gravity factor.
+     *
+     * @param factor the desired value
+     */
+    public void setGravityFactor(float factor) {
+        long bodySettingsVa = va();
+        setGravityFactor(bodySettingsVa, factor);
+    }
+    // *************************************************************************
     // JoltPhysicsObject methods
 
     @Override
@@ -95,4 +107,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
             int motionTypeOrdinal, int objLayer);
 
     native private static void free(long bodySettingsVa);
+
+    native private static void setGravityFactor(
+            long bodySettingsVa, float factor);
 }
