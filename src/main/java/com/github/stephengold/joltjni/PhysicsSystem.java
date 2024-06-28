@@ -39,7 +39,20 @@ public class PhysicsSystem extends NonCopyable {
     // constructors
 
     /**
-     * Instantiate a physics system with the specified limits.
+     * Instantiate an uninitialized physics system.
+     */
+    public PhysicsSystem() {
+        long systemVa = createPhysicsSystem();
+        setVirtualAddress(systemVa, true);
+
+        long bodyInterfaceVa = getBodyInterface(systemVa);
+        this.bodyInterface = new BodyInterface(bodyInterfaceVa);
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Initialize the physics system with the specified limits.
      *
      * @param maxBodies the desired maximum number of rigid bodies that can be
      * added
@@ -53,22 +66,16 @@ public class PhysicsSystem extends NonCopyable {
      * @param ovbFilter (not null)
      * @param ovoFilter (not null)
      */
-    public PhysicsSystem(int maxBodies, int numBodyMutexes, int maxBodyPairs,
+    public void init(int maxBodies, int numBodyMutexes, int maxBodyPairs,
             int maxContactConstraints, MapObj2Bp map, ObjVsBpFilter ovbFilter,
             ObjVsObjFilter ovoFilter) {
+        long systemVa = va();
         long mapVa = map.va();
         long ovbFilterVa = ovbFilter.va();
         long ovoFilterVa = ovoFilter.va();
-        long systemVa = createPhysicsSystem(
-                maxBodies, numBodyMutexes, maxBodyPairs, maxContactConstraints,
-                mapVa, ovbFilterVa, ovoFilterVa);
-        setVirtualAddress(systemVa, true);
-
-        long bodyInterfaceVa = getBodyInterface(systemVa);
-        this.bodyInterface = new BodyInterface(bodyInterfaceVa);
+        init(systemVa, maxBodies, numBodyMutexes, maxBodyPairs,
+                maxContactConstraints, mapVa, ovbFilterVa, ovoFilterVa);
     }
-    // *************************************************************************
-    // new methods exposed
 
     /**
      * Access the system's {@code BodyInterface}.
@@ -110,11 +117,13 @@ public class PhysicsSystem extends NonCopyable {
     // *************************************************************************
     // native private methods
 
-    native private static long createPhysicsSystem(int maxBodies,
-            int numBodyMutexes, int maxBodyPairs, int maxContactConstraints,
-            long mapVa, long ovbFilterVa, long ovoFilterVa);
+    native private static long createPhysicsSystem();
 
     native private static long getBodyInterface(long systemVa);
+
+    native private static long init(long systemVa, int maxBodies,
+            int numBodyMutexes, int maxBodyPairs, int maxContactConstraints,
+            long mapVa, long ovbFilterVa, long ovoFilterVa);
 
     native private static void optimizeBroadPhase(long systemVa);
 

@@ -97,8 +97,8 @@ public class Test001 {
         final int numBodyMutexes = 0; // 0 means "use the default value"
         final int maxBodyPairs = 4;
         final int maxContacts = 4;
-        PhysicsSystem physicsSystem = new PhysicsSystem(
-                maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
+        PhysicsSystem physicsSystem = new PhysicsSystem();
+        physicsSystem.init(maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
                 mapObj2Bp, objVsBpFilter, objVsObjFilter);
         BodyInterface bodyInterface = physicsSystem.getBodyInterface();
 

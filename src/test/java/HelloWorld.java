@@ -120,7 +120,8 @@ public static void main(String[] argv)
 	.disablePair(OBJ_LAYER_NON_MOVING, OBJ_LAYER_NON_MOVING);
 
 	// Now we can create the actual physics system.
-	PhysicsSystem physics_system = new PhysicsSystem(cMaxBodies, cNumBodyMutexes, cMaxBodyPairs, cMaxContactConstraints, broad_phase_layer_interface, object_vs_broadphase_layer_filter, object_vs_object_layer_filter);
+	PhysicsSystem physics_system = new PhysicsSystem();
+	physics_system.init(cMaxBodies, cNumBodyMutexes, cMaxBodyPairs, cMaxContactConstraints, broad_phase_layer_interface, object_vs_broadphase_layer_filter, object_vs_object_layer_filter);
 
 	// The main way to interact with the bodies in the physics system is through the body interface. There is a locking and a non-locking
 	// variant of this. We're going to use the locking version (even though we're not planning to access bodies from multiple threads)

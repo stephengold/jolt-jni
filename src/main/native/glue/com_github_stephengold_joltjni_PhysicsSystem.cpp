@@ -33,20 +33,11 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    createPhysicsSystem
- * Signature: (IIIIJJJ)J
+ * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_createPhysicsSystem
-  (JNIEnv *, jclass, jint maxBodies, jint numBodyMutexes, jint maxBodyPairs,
-        jint maxContactConstraints, jlong mapVa, jlong ovbFilterVa, jlong ovoFilterVa) {
+  (JNIEnv *, jclass) {
     PhysicsSystem * const pResult = new PhysicsSystem();
-    const BroadPhaseLayerInterface * const pBpli
-            = reinterpret_cast<BroadPhaseLayerInterface *> (mapVa);
-    const ObjectVsBroadPhaseLayerFilter * const pOvbplf
-            = reinterpret_cast<ObjectVsBroadPhaseLayerFilter *> (ovbFilterVa);
-    const ObjectLayerPairFilter * const pOlpf
-            = reinterpret_cast<ObjectLayerPairFilter *> (ovoFilterVa);
-    pResult->Init(maxBodies, numBodyMutexes, maxBodyPairs, maxContactConstraints,
-            *pBpli, *pOvbplf, *pOlpf);
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -61,6 +52,26 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBod
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     const BodyInterface &result = pSystem->GetBodyInterface();
     return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    init
+ * Signature: (JIIIIJJJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_init
+  (JNIEnv *, jclass, jlong systemVa, jint maxBodies, jint numBodyMutexes, jint maxBodyPairs,
+        jint maxContactConstraints, jlong mapVa, jlong ovbFilterVa, jlong ovoFilterVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const BroadPhaseLayerInterface * const pMap
+            = reinterpret_cast<BroadPhaseLayerInterface *> (mapVa);
+    const ObjectVsBroadPhaseLayerFilter * const pOvbplf
+            = reinterpret_cast<ObjectVsBroadPhaseLayerFilter *> (ovbFilterVa);
+    const ObjectLayerPairFilter * const pOlpf
+            = reinterpret_cast<ObjectLayerPairFilter *> (ovoFilterVa);
+    pSystem->Init(maxBodies, numBodyMutexes, maxBodyPairs,
+            maxContactConstraints, *pMap, *pOvbplf, *pOlpf);
 }
 
 /*
