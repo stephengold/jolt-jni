@@ -38,6 +38,77 @@ public class Body extends NonCopyable {
     // new methods exposed
 
     /**
+     * Return the net force acting on the body.
+     *
+     * @return a new vector
+     */
+    public Vec3 getAccumulatedForce() {
+        long bodyVa = va();
+        float x = getAccumulatedForceX(bodyVa);
+        float y = getAccumulatedForceY(bodyVa);
+        float z = getAccumulatedForceZ(bodyVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the net torque acting on the body.
+     *
+     * @return a new vector
+     */
+    public Vec3 getAccumulatedTorque() {
+        long bodyVa = va();
+        float x = getAccumulatedTorqueX(bodyVa);
+        float y = getAccumulatedTorqueY(bodyVa);
+        float z = getAccumulatedTorqueZ(bodyVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the angular velocity.
+     *
+     * @return a new vector in physics-system coordinates
+     */
+    public Vec3 getAngularVelocity() {
+        long bodyVa = va();
+        float wx = getAngularVelocityX(bodyVa);
+        float wy = getAngularVelocityY(bodyVa);
+        float wz = getAngularVelocityZ(bodyVa);
+        Vec3 result = new Vec3(wx, wy, wz);
+
+        return result;
+    }
+
+    /**
+     * Return the location of the body's center of mass.
+     *
+     * @return a new vector in physics-system coordinates
+     */
+    public RVec3 getCenterOfMassPosition() {
+        long bodyVa = va();
+        double xx = getCenterOfMassPositionX(bodyVa);
+        double yy = getCenterOfMassPositionY(bodyVa);
+        double zz = getCenterOfMassPositionZ(bodyVa);
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Return the body's friction ratio.
+     *
+     * @return the value
+     */
+    public float getFriction() {
+        long bodyVa = va();
+        float result = getFriction(bodyVa);
+        return result;
+    }
+
+    /**
      * Acquire the body's ID for use with {@code BodyInterface}.
      *
      * @return the value
@@ -49,8 +120,197 @@ public class Body extends NonCopyable {
 
         return result;
     }
+
+    /**
+     * Return the linear velocity.
+     *
+     * @return a new vector in physics-system coordinates
+     */
+    public Vec3 getLinearVelocity() {
+        long bodyVa = va();
+        float vx = getLinearVelocityX(bodyVa);
+        float vy = getLinearVelocityY(bodyVa);
+        float vz = getLinearVelocityZ(bodyVa);
+        Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Acquire the body's motion properties.
+     *
+     * @return a new instance, or null if none
+     */
+    public MotionProperties getMotionProperties() {
+        MotionProperties result;
+        long bodyVa = va();
+        if (isStatic(bodyVa)) {
+            result = null;
+        } else {
+            long propertiesVa = getMotionProperties(bodyVa);
+            result = new MotionProperties(propertiesVa);
+        }
+
+        return result;
+    }
+
+    /**
+     * Return the body's restitution ratio.
+     *
+     * @return the value
+     */
+    public float getRestitution() {
+        long bodyVa = va();
+        float result = getRestitution(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Return the body's orientation relative to the physics system axes.
+     *
+     * @return a new quaternion
+     */
+    public Quat getRotation() {
+        long bodyVa = va();
+        float qx = getRotationX(bodyVa);
+        float qy = getRotationY(bodyVa);
+        float qz = getRotationZ(bodyVa);
+        float qw = getRotationW(bodyVa);
+        Quat result = new Quat(qx, qy, qz, qw);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is deactivated.
+     *
+     * @return false if deactivated, otherwise true
+     */
+    public boolean isActive() {
+        long bodyVa = va();
+        boolean result = isActive(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is static.
+     *
+     * @return true if static, otherwise false
+     */
+    public boolean isStatic() {
+        long bodyVa = va();
+        boolean result = isStatic(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Directly alter the angular velocity.
+     *
+     * @param omega the desired angular velocity (not null, unaffected)
+     */
+    public void setAngularVelocity(Vec3 omega) {
+        long bodyVa = va();
+        float wx = omega.getX();
+        float wy = omega.getY();
+        float wz = omega.getZ();
+        setAngularVelocity(bodyVa, wx, wy, wz);
+    }
+
+    /**
+     * Alter the body's friction ratio.
+     *
+     * @param friction the desired value
+     */
+    public void setFriction(float friction) {
+        long bodyVa = va();
+        setFriction(bodyVa, friction);
+    }
+
+    /**
+     * Directly alter the linear velocity.
+     *
+     * @param velocity the desired angular velocity (not null, unaffected)
+     */
+    public void setLinearVelocity(Vec3 velocity) {
+        long bodyVa = va();
+        float vx = velocity.getX();
+        float vy = velocity.getY();
+        float vz = velocity.getZ();
+        setLinearVelocity(bodyVa, vx, vy, vz);
+    }
+
+    /**
+     * Alter the body's restitution ratio.
+     *
+     * @param restitution the desired value
+     */
+    public void setRestitution(float restitution) {
+        long bodyVa = va();
+        setRestitution(bodyVa, restitution);
+    }
     // *************************************************************************
     // native private methods
 
+    native private static float getAccumulatedForceX(long bodyVa);
+
+    native private static float getAccumulatedForceY(long bodyVa);
+
+    native private static float getAccumulatedForceZ(long bodyVa);
+
+    native private static float getAccumulatedTorqueX(long bodyVa);
+
+    native private static float getAccumulatedTorqueY(long bodyVa);
+
+    native private static float getAccumulatedTorqueZ(long bodyVa);
+
+    native private static float getAngularVelocityX(long bodyVa);
+
+    native private static float getAngularVelocityY(long bodyVa);
+
+    native private static float getAngularVelocityZ(long bodyVa);
+
+    native private static double getCenterOfMassPositionX(long bodyVa);
+
+    native private static double getCenterOfMassPositionY(long bodyVa);
+
+    native private static double getCenterOfMassPositionZ(long bodyVa);
+
+    native private static float getFriction(long bodyVa);
+
     native private static long getId(long bodyVa);
+
+    native private static float getLinearVelocityX(long bodyVa);
+
+    native private static float getLinearVelocityY(long bodyVa);
+
+    native private static float getLinearVelocityZ(long bodyVa);
+
+    native private static long getMotionProperties(long bodyVa);
+
+    native private static float getRestitution(long bodyVa);
+
+    native private static float getRotationX(long bodyVa);
+
+    native private static float getRotationY(long bodyVa);
+
+    native private static float getRotationZ(long bodyVa);
+
+    native private static float getRotationW(long bodyVa);
+
+    native private static boolean isActive(long bodyVa);
+
+    native private static boolean isStatic(long bodyVa);
+
+    native private static void setAngularVelocity(
+            long bodyVa, float wx, float wy, float wz);
+
+    native private static void setFriction(long bodyVa, float friction);
+
+    native private static void setLinearVelocity(
+            long bodyVa, float vx, float vy, float vz);
+
+    native private static void setRestitution(long bodyVa, float restitution);
 }
