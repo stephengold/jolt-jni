@@ -57,9 +57,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBod
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    init
- * Signature: (JIIIIJJJ)J
+ * Signature: (JIIIIJJJ)V
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_init
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_init
   (JNIEnv *, jclass, jlong systemVa, jint maxBodies, jint numBodyMutexes, jint maxBodyPairs,
         jint maxContactConstraints, jlong mapVa, jlong ovbFilterVa, jlong ovoFilterVa) {
     PhysicsSystem * const pSystem

@@ -121,7 +121,7 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static long getBodyInterface(long systemVa);
 
-    native private static long init(long systemVa, int maxBodies,
+    native private static void init(long systemVa, int maxBodies,
             int numBodyMutexes, int maxBodyPairs, int maxContactConstraints,
             long mapVa, long ovbFilterVa, long ovoFilterVa);
 
