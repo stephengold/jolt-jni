@@ -133,10 +133,10 @@ public static void main(String[] argv)
 	BoxShapeSettings floor_shape_settings = new BoxShapeSettings(new Vec3(100.0f, 1.0f, 100.0f));
 
 	// Create the settings for the body itself. Note that here you can also set other properties like the restitution / friction.
-	BodyCreationSettings floorBodySettings = new BodyCreationSettings(floor_shape_settings, new RVec3(0.0, -1.0, 0.0), new Quat(), EMotionType.Static, OBJ_LAYER_NON_MOVING);
+	BodyCreationSettings floor_settings = new BodyCreationSettings(floor_shape_settings, new RVec3(0.0, -1.0, 0.0), new Quat(), EMotionType.Static, OBJ_LAYER_NON_MOVING);
 
 	// Create the actual rigid body
-	Body floor = body_interface.createBody(floorBodySettings); // Note that if we run out of bodies this can return nullptr
+	Body floor = body_interface.createBody(floor_settings); // Note that if we run out of bodies this can return nullptr
 
 	// Add it to the world
 	body_interface.addBody(floor.getId(), EActivation.DontActivate);
