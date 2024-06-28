@@ -37,6 +37,18 @@ public class JobSystemThreadPool extends JobSystem {
      * time
      * @param maxBarriers the maximum number of barriers that can be allocated
      * at one time
+     */
+    public JobSystemThreadPool(int maxJobs, int maxBarriers) {
+        this(maxJobs, maxBarriers, -1);
+    }
+
+    /**
+     * Instantiate a job system with the specified limits.
+     *
+     * @param maxJobs the maximum number of jobs that can be allocated at one
+     * time
+     * @param maxBarriers the maximum number of barriers that can be allocated
+     * at one time
      * @param numThreads the number of worker threads to start (&ge;1) or -1 to
      * auto detect
      */
