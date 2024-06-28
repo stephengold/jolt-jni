@@ -101,6 +101,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_destroy
     pInterface->DestroyBody(*pBodyId);
 }
 
+inline static const RVec3& getCenterOfMassPosition(jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const RVec3& result = pInterface->GetCenterOfMassPosition(*pBodyId);
+    return result;
+}
+
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    getCenterOfMassPositionX
@@ -108,10 +116,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_destroy
  */
 JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getCenterOfMassPositionX
   (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
-    RVec3 position = pInterface->GetCenterOfMassPosition(*pBodyId);
+    const RVec3& position = getCenterOfMassPosition(bodyInterfaceVa, bodyIdVa);
     return position.GetX();
 }
 
@@ -122,10 +127,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getC
  */
 JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getCenterOfMassPositionY
   (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
-    RVec3 position = pInterface->GetCenterOfMassPosition(*pBodyId);
+    const RVec3& position = getCenterOfMassPosition(bodyInterfaceVa, bodyIdVa);
     return position.GetY();
 }
 
@@ -136,11 +138,16 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getC
  */
 JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getCenterOfMassPositionZ
   (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const RVec3& position = getCenterOfMassPosition(bodyInterfaceVa, bodyIdVa);
+    return position.GetZ();
+}
+
+inline static const Vec3& getLinearVelocity(jlong bodyInterfaceVa, jlong bodyIdVa) {
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
-    RVec3 position = pInterface->GetCenterOfMassPosition(*pBodyId);
-    return position.GetZ();
+    const Vec3& result = pInterface->GetLinearVelocity(*pBodyId);
+    return result;
 }
 
 /*
@@ -150,10 +157,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getC
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getLinearVelocityX
   (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
-    Vec3 velocity = pInterface->GetLinearVelocity(*pBodyId);
+    const Vec3& velocity = getLinearVelocity(bodyInterfaceVa, bodyIdVa);
     return velocity.GetX();
 }
 
@@ -164,10 +168,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getLi
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getLinearVelocityY
   (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
-    Vec3 velocity = pInterface->GetLinearVelocity(*pBodyId);
+    const Vec3& velocity = getLinearVelocity(bodyInterfaceVa, bodyIdVa);
     return velocity.GetY();
 }
 
@@ -178,10 +179,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getLi
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getLinearVelocityZ
   (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
-    Vec3 velocity = pInterface->GetLinearVelocity(*pBodyId);
+    const Vec3& velocity = getLinearVelocity(bodyInterfaceVa, bodyIdVa);
     return velocity.GetZ();
 }
 
