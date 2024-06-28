@@ -89,4 +89,11 @@ final public class Jolt {
      * @see registerTypes()
      */
     final native public static void unregisterTypes();
+
+    /**
+     * Return the jolt-jni version string.
+     *
+     * @return the version string (not null, not empty)
+     */
+    final native public static String versionString();
 }
