@@ -66,7 +66,7 @@ public class Test001 {
         final int numBytes = 1 << 18; // 256 KiB
         TempAllocatorImpl allocator = new TempAllocatorImpl(numBytes);
 
-        final int maxJobs = 1024;
+        final int maxJobs = 4_096;
         final int maxBarriers = 4;
         int numThreads = Utils.numThreads();
         JobSystemThreadPool jobSystem
