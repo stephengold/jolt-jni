@@ -47,6 +47,10 @@ model {
             architecture 'x86_64'
             operatingSystem 'linux'
         }
+        MacOSX64 {
+            architecture 'x86_64'
+            operatingSystem 'osx'
+        }
         MacOSX_ARM64 {
             architecture 'arm-v8'
             operatingSystem 'osx'
@@ -66,6 +70,7 @@ model {
     components {
         joltjni(NativeLibrarySpec) {
             targetPlatform 'Linux64'
+            targetPlatform 'MacOSX64'
             targetPlatform 'MacOSX_ARM64'
             targetPlatform 'Windows64'
 
