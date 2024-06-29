@@ -132,7 +132,7 @@ final public class Quat implements QuatArg {
     }
 
     /**
-     * Return the 3rd imaginary (Y) component in single precision. The
+     * Return the 3rd imaginary (Z) component in single precision. The
      * quaternion is unaffected.
      *
      * @return the component value

@@ -136,7 +136,7 @@ public class MotionProperties extends JoltPhysicsObject {
         setLinearVelocity(propertiesVa, vx, vy, vz);
     }
     // *************************************************************************
-    // new methods exposed
+    // native private methods
 
     native private static float getAngularDamping(long propertiesVa);
 
