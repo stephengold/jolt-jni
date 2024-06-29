@@ -2,6 +2,7 @@
 
 plugins {
     id 'application'   // to build JVM applications
+    id 'checkstyle'    // to analyze Java sourcecode for style violations
     id 'cpp'           // to compile C++ code and link native libraries
     id 'java-library'  // to build JVM libraries
     id 'maven-publish' // to publish artifacts to Maven repositories
@@ -203,6 +204,14 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
 }
 run.dependsOn('assemble')
 test.dependsOn('assemble')
+
+checkstyle {
+    toolVersion libs.versions.checkstyle.get()
+}
+tasks.register('checkstyle') {
+    dependsOn 'checkstyleMain', 'checkstyleTest'
+    description 'Checks the style of all Java sourcecode.'
+}
 
 // Register publishing tasks:
 
