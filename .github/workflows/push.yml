@@ -15,6 +15,9 @@ jobs:
           java-version: 11
       - uses: actions/checkout@v4
       - uses: gradle/actions/wrapper-validation@v3
+      - uses: mattsb42/not-grep@master
+        with:
+          config-file: .github/not-grep.toml
       - run: ./gradlew -Pflavor=Sp build --console=plain --no-daemon
 
   Java11-MacOS:
