@@ -26,7 +26,7 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - uses: actions/checkout@v4
-      - run: ./gradlew run build --console=plain --no-daemon
+      - run: ./gradlew -Ptarget=MacOSX64 run build --console=plain --no-daemon
 
   Java17-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -37,7 +37,7 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - uses: actions/checkout@v4
-      - run: ./gradlew build --console=plain --no-daemon
+      - run: ./gradlew -Ptarget=MacOSX_ARM64 build --console=plain --no-daemon
 
   Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
