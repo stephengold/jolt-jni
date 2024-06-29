@@ -43,44 +43,44 @@ final public class Jolt {
      *
      * @return either "Debug" or "Release"
      */
-    final native public static String buildType();
+    native public static String buildType();
 
     /**
      * Destroy the factory for deserialization of saved data.
      *
      * @see newFactory()
      */
-    final native public static void destroyFactory();
+    native public static void destroyFactory();
 
     /**
      * Install the default assert callback.
      */
-    final native public static void installDefaultAssertCallback();
+    native public static void installDefaultAssertCallback();
 
     /**
      * Install the default trace callback.
      */
-    final native public static void installDefaultTraceCallback();
+    native public static void installDefaultTraceCallback();
 
     /**
      * Test whether the native library uses double-precision arithmetic.
      *
      * @return true if double-precision, otherwise false
      */
-    final native public static boolean isDoublePrecision();
+    native public static boolean isDoublePrecision();
 
     /**
      * Create a factory for deserialization of saved data.
      *
      * @see destroyFactory()
      */
-    final native public static void newFactory();
+    native public static void newFactory();
 
     /**
      * Register the allocation hook to use malloc/free. This must be done before
      * any other Jolt function is called.
      */
-    final native public static void registerDefaultAllocator();
+    native public static void registerDefaultAllocator();
 
     /**
      * Register all physics types with the factory and install their collision
@@ -88,19 +88,19 @@ final public class Jolt {
      *
      * @see unregisterTypes()
      */
-    final native public static void registerTypes();
+    native public static void registerTypes();
 
     /**
      * Unregister all physics types with the factory.
      *
      * @see registerTypes()
      */
-    final native public static void unregisterTypes();
+    native public static void unregisterTypes();
 
     /**
      * Return the jolt-jni version string.
      *
      * @return the version string (not null, not empty)
      */
-    final native public static String versionString();
+    native public static String versionString();
 }
