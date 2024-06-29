@@ -15,7 +15,7 @@ jobs:
           java-version: 11
       - uses: actions/checkout@v4
       - uses: gradle/actions/wrapper-validation@v3
-      - run: ./gradlew -Pflavor=Sp build javadoc --console=plain --no-daemon
+      - run: ./gradlew -Pflavor=Sp build --console=plain --no-daemon
 
   Java11-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -26,7 +26,7 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - uses: actions/checkout@v4
-      - run: ./gradlew run build javadoc --console=plain --no-daemon
+      - run: ./gradlew run build --console=plain --no-daemon
 
   Java17-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -37,7 +37,7 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - uses: actions/checkout@v4
-      - run: ./gradlew build javadoc --console=plain --no-daemon
+      - run: ./gradlew build --console=plain --no-daemon
 
   Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -48,7 +48,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - run: ./gradlew build javadoc --console=plain --no-daemon
+      - run: ./gradlew build --console=plain --no-daemon
         shell: bash
 
   Java22-Linux:
@@ -60,4 +60,4 @@ jobs:
           distribution: 'zulu'
           java-version: 22
       - uses: actions/checkout@v4
-      - run: ./gradlew -Pflavor=Dp build javadoc --console=plain --no-daemon
+      - run: ./gradlew -Pflavor=Dp build --console=plain --no-daemon
