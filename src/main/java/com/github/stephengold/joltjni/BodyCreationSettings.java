@@ -84,6 +84,10 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     // *************************************************************************
     // JoltPhysicsObject methods
 
+    /**
+     * Unassign the assigned native object, assuming there is one. Free the
+     * native object if the settings instance owns it.
+     */
     @Override
     public void close() {
         if (ownsNativeObject()) {

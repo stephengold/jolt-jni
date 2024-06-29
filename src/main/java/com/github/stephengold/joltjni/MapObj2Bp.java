@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A configurable one-way mapping from object layers to their corresponding broadphase layers.
+ * A configurable one-way mapping from object layers to their corresponding
+ * broadphase layers.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -58,6 +59,10 @@ public class MapObj2Bp extends JoltPhysicsObject {
     // *************************************************************************
     // JoltPhysicsObject methods
 
+    /**
+     * Unassign the assigned native object, assuming there is one. Free the
+     * native object if the map owns it.
+     */
     @Override
     public void close() {
         if (ownsNativeObject()) {

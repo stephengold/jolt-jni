@@ -58,6 +58,10 @@ final public class AaBox extends JoltPhysicsObject {
     // *************************************************************************
     // JoltPhysicsObject methods
 
+    /**
+     * Unassign the assigned native object, assuming there is one. Free the
+     * native object if the box owns it.
+     */
     @Override
     public void close() {
         assert ownsNativeObject();

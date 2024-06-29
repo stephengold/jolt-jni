@@ -129,6 +129,10 @@ abstract public class JoltPhysicsObject implements AutoCloseable {
     // *************************************************************************
     // AutoCloseable methods
 
+    /**
+     * Unassign the assigned native object, assuming there is one. Free the
+     * native object if the current instance owns it.
+     */
     @Override
     public void close() {
         if (isOwner) {

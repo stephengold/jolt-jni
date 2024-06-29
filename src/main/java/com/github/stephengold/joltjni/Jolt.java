@@ -48,7 +48,7 @@ final public class Jolt {
     /**
      * Destroy the factory for deserialization of saved data.
      *
-     * @see newFactory()
+     * @see newFactory
      */
     native public static void destroyFactory();
 
@@ -72,7 +72,7 @@ final public class Jolt {
     /**
      * Create a factory for deserialization of saved data.
      *
-     * @see destroyFactory()
+     * @see destroyFactory
      */
     native public static void newFactory();
 
@@ -86,14 +86,14 @@ final public class Jolt {
      * Register all physics types with the factory and install their collision
      * handlers.
      *
-     * @see unregisterTypes()
+     * @see unregisterTypes
      */
     native public static void registerTypes();
 
     /**
      * Unregister all physics types with the factory.
      *
-     * @see registerTypes()
+     * @see registerTypes
      */
     native public static void unregisterTypes();
 

@@ -58,6 +58,10 @@ public class ObjVsBpFilter extends JoltPhysicsObject {
     // *************************************************************************
     // JoltPhysicsObject methods
 
+    /**
+     * Unassign the assigned native object, assuming there is one. Free the
+     * native object if the filter owns it.
+     */
     @Override
     public void close() {
         if (ownsNativeObject()) {
