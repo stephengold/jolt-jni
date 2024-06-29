@@ -102,7 +102,7 @@ model {
                 if (buildable && project.hasProperty('target')) {
                     // set in gradle.properties file or -Ptarget= on the command line
                     String targetArg = project.ext.target
-                    buildable = (target.name == targetArg)
+                    buildable = (pName == targetArg)
                 }
 
                 // flavor-specific defines:
