@@ -29,7 +29,7 @@
     <!-- Checks for size violations              -->
     <!-- See https://checkstyle.org/checks/sizes -->
     <module name="FileLength">
-        <property name="max" value="550"/>
+        <property name="max" value="350"/>
     </module>
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
@@ -365,8 +365,8 @@
                       value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF"/>
         </module>
         <module name="MissingJavadocMethod">
-            <property name="scope" value="public"/>
-            <property name="minLineCount" value="2"/>
+            <property name="scope" value="private"/>
+            <property name="minLineCount" value="1"/>
             <property name="allowedAnnotations" value=""/>
             <property name="tokens"
                       value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF"/>
@@ -381,7 +381,7 @@
             <property name="checkFirstSentence" value="false"/>
         </module>
         <module name="JavadocVariable">
-            <property name="scope" value="protected"/>
+            <property name="scope" value="private"/>
         </module>
         <module name="SingleLineJavadoc"/>
 
