@@ -40,7 +40,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
      * @param objLayer the ID of the desired object layer
      */
     public BodyCreationSettings(Shape shape,
-            RVec3 loc, Quat orient, EMotionType motionType, int objLayer) {
+            RVec3Arg loc, Quat orient, EMotionType motionType, int objLayer) {
         long shapeVa = shape.va();
         int motionTypeOrdinal = motionType.ordinal();
         long bodySettingsVa = createBodyCreationSettingsFromShape(
@@ -60,7 +60,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
      * @param objLayer the ID of the desired object layer
      */
     public BodyCreationSettings(ShapeSettings shapeSettings,
-            RVec3 loc, Quat orient, EMotionType motionType, int objLayer) {
+            RVec3Arg loc, Quat orient, EMotionType motionType, int objLayer) {
         long shapeSettingsVa = shapeSettings.va();
         int motionTypeOrdinal = motionType.ordinal();
         long bodySettingsVa = createBodyCreationSettingsFromShapeSettings(

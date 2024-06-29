@@ -27,7 +27,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class RVec3 {
+final public class RVec3 implements RVec3Arg {
     // *************************************************************************
     // fields
 
@@ -71,11 +71,27 @@ final public class RVec3 {
     // new methods exposed
 
     /**
+     * Set all 3 components to specified values.
+     *
+     * @param x the desired X component
+     * @param y the desired Y component
+     * @param z the desired Z component
+     */
+    public void set(double x, double y, double z) {
+        this.xx = x;
+        this.yy = y;
+        this.zz = z;
+    }
+    // *************************************************************************
+    // RVec3Arg methods
+
+    /**
      * Return the first (X) component at positional precision. The vector is
      * unaffected.
      *
      * @return the component value
      */
+    @Override
     public Object getX() {
         Object result;
         if (Jolt.isDoublePrecision()) {
@@ -93,6 +109,7 @@ final public class RVec3 {
      *
      * @return the component value
      */
+    @Override
     public Object getY() {
         Object result;
         if (Jolt.isDoublePrecision()) {
@@ -110,6 +127,7 @@ final public class RVec3 {
      *
      * @return the component value
      */
+    @Override
     public Object getZ() {
         Object result;
         if (Jolt.isDoublePrecision()) {
@@ -122,24 +140,12 @@ final public class RVec3 {
     }
 
     /**
-     * Set all 3 components to specified values.
-     *
-     * @param x the desired X component
-     * @param y the desired Y component
-     * @param z the desired Z component
-     */
-    public void set(double x, double y, double z) {
-        this.xx = x;
-        this.yy = y;
-        this.zz = z;
-    }
-
-    /**
      * Return the first (X) component in single precision. The vector is
      * unaffected.
      *
      * @return the component value
      */
+    @Override
     public float x() {
         return (float) xx;
     }
@@ -150,6 +156,7 @@ final public class RVec3 {
      *
      * @return the component value
      */
+    @Override
     public double xx() {
         return xx;
     }
@@ -160,6 +167,7 @@ final public class RVec3 {
      *
      * @return the component value
      */
+    @Override
     public float y() {
         return (float) yy;
     }
@@ -170,6 +178,7 @@ final public class RVec3 {
      *
      * @return the component value
      */
+    @Override
     public double yy() {
         return yy;
     }
@@ -180,6 +189,7 @@ final public class RVec3 {
      *
      * @return the component value
      */
+    @Override
     public float z() {
         return (float) zz;
     }
@@ -190,6 +200,7 @@ final public class RVec3 {
      *
      * @return the component value
      */
+    @Override
     public double zz() {
         return zz;
     }
