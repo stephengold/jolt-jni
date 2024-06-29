@@ -31,7 +31,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class Quat {
+final public class Quat implements QuatArg {
     // *************************************************************************
     // fields
 
@@ -95,6 +95,8 @@ final public class Quat {
         this.z = z;
         this.w = w;
     }
+    // *************************************************************************
+    // QuatArg methods
 
     /**
      * Return the real (W) component in single precision. The quaternion is
@@ -102,6 +104,7 @@ final public class Quat {
      *
      * @return the component value
      */
+    @Override
     public float getW() {
         return w;
     }
@@ -112,6 +115,7 @@ final public class Quat {
      *
      * @return the component value
      */
+    @Override
     public float getX() {
         return x;
     }
@@ -122,6 +126,7 @@ final public class Quat {
      *
      * @return the component value
      */
+    @Override
     public float getY() {
         return y;
     }
@@ -132,6 +137,7 @@ final public class Quat {
      *
      * @return the component value
      */
+    @Override
     public float getZ() {
         return z;
     }
