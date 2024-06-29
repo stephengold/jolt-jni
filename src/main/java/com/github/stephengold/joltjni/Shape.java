@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import java.nio.FloatBuffer;
+
 /**
  * The abstract base class for collision shapes.
  *
@@ -49,6 +51,32 @@ abstract public class Shape extends NonCopyable {
     // new methods exposed
 
     /**
+     * Copy the vertex coordinates of the shape's debug mesh to the specified
+     * buffer.
+     *
+     * @param storeBuffer the buffer to fill with vertex coordinates (not null,
+     * modified)
+     */
+    public void copyDebugTriangles(FloatBuffer storeBuffer) {
+        long shapeVa = va();
+        int numTriangles = storeBuffer.capacity() / 9;
+        copyDebugTriangles(shapeVa, numTriangles, storeBuffer);
+    }
+
+    /**
+     * Return the number of triangles in the shape's debug mesh.
+     *
+     * @return the count (&gt;0)
+     */
+    public int countDebugTriangles() {
+        long shapeVa = va();
+        int result = countDebugTriangles(shapeVa);
+
+        assert result > 0 : "result = " + result;
+        return result;
+    }
+
+    /**
      * Test whether the shape can be used in a dynamic/kinematic body.
      *
      * @return true if it can be only be static, otherwise false
@@ -60,6 +88,11 @@ abstract public class Shape extends NonCopyable {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void copyDebugTriangles(
+            long shapeVa, int numTriangles, FloatBuffer storeBuffer);
+
+    native private static int countDebugTriangles(long shapeVa);
 
     native private static boolean mustBeStatic(long shapeVa);
 }
