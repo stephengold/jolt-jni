@@ -17,6 +17,17 @@ jobs:
       - uses: gradle/actions/wrapper-validation@v3
       - run: ./gradlew -Pflavor=Sp build javadoc --console=plain --no-daemon
 
+  Java11-MacOS:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: macOS-13
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 11
+      - uses: actions/checkout@v4
+      - run: ./gradlew run build javadoc --console=plain --no-daemon
+
   Java17-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-14
