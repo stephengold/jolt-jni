@@ -105,7 +105,7 @@ public class MotionProperties extends JoltPhysicsObject {
      *
      * @param omega the desired velocity (in physics-system coordinates)
      */
-    public void setAngularVelocity(Vec3 omega) {
+    public void setAngularVelocity(Vec3Arg omega) {
         long propertiesVa = va();
         float wx = omega.getX();
         float wy = omega.getY();
@@ -128,7 +128,7 @@ public class MotionProperties extends JoltPhysicsObject {
      *
      * @param velocity the desired velocity (in physics-system coordinates)
      */
-    public void setLinearVelocity(Vec3 velocity) {
+    public void setLinearVelocity(Vec3Arg velocity) {
         long propertiesVa = va();
         float vx = velocity.getX();
         float vy = velocity.getY();

@@ -36,7 +36,7 @@ public class ScaledShape extends DecoratedShape {
      * @param baseShape the unscaled base shape (not null)
      * @param scaleFactors the desired scale factors (not null)
      */
-    public ScaledShape(Shape baseShape, Vec3 scaleFactors) {
+    public ScaledShape(Shape baseShape, Vec3Arg scaleFactors) {
         long baseShapeVa = baseShape.va();
         float scaleX = scaleFactors.getX();
         float scaleY = scaleFactors.getY();

@@ -36,7 +36,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
      * @param halfExtents the desired half extents on each local axis (not null,
      * all components &ge;0, unaffected)
      */
-    public BoxShapeSettings(Vec3 halfExtents) {
+    public BoxShapeSettings(Vec3Arg halfExtents) {
         float xHalfExtent = halfExtents.getX();
         float yHalfExtent = halfExtents.getY();
         float zHalfExtent = halfExtents.getZ();

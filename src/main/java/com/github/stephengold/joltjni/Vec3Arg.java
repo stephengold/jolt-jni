@@ -22,40 +22,35 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A {@code Shape} to represent centered, axis-aligned rectangular solids.
+ * A read-only interface to {@code Vec3} instances.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BoxShape extends ConvexShape {
+public interface Vec3Arg {
     // *************************************************************************
-    // constructors
+    // new methods exposed
 
     /**
-     * Instantiate a shape with the specified native object assigned.
+     * Return the first (X) component in single precision. The vector is
+     * unaffected.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @return the component value
      */
-    BoxShape(long va) {
-        super(va);
-    }
+    float getX();
 
     /**
-     * Instantiate a shape with the specified half extents.
+     * Return the 2nd (Y) component in single precision. The vector is
+     * unaffected.
      *
-     * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &ge;0, unaffected)
+     * @return the component value
      */
-    public BoxShape(Vec3Arg halfExtents) {
-        float xHalfExtent = halfExtents.getX();
-        float yHalfExtent = halfExtents.getY();
-        float zHalfExtent = halfExtents.getZ();
-        long shapeVa = createBoxShape(xHalfExtent, yHalfExtent, zHalfExtent);
-        setVirtualAddress(shapeVa, true);
-    }
-    // *************************************************************************
-    // native private methods
+    float getY();
 
-    native private static long createBoxShape(
-            float xHalfExtent, float yHalfExtent, float zHalfExtent);
+    /**
+     * Return the 3rd (Z) component in single precision. The vector is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    float getZ();
 }

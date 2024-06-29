@@ -169,7 +169,7 @@ public class BodyInterface extends NonCopyable {
      * @param bodyId the ID of the body to test (not null)
      * @param omega the desired rates (not null, unaffected)
      */
-    public void setAngularVelocity(BodyId bodyId, Vec3 omega) {
+    public void setAngularVelocity(BodyId bodyId, Vec3Arg omega) {
         long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.va();
         setAngularVelocity(bodyInterfaceVa, bodyIdVa,
@@ -182,7 +182,7 @@ public class BodyInterface extends NonCopyable {
      * @param bodyId the ID of the body to test (not null)
      * @param velocity the desired velocity (not null, unaffected)
      */
-    public void setLinearVelocity(BodyId bodyId, Vec3 velocity) {
+    public void setLinearVelocity(BodyId bodyId, Vec3Arg velocity) {
         long bodyIdVa = bodyId.va();
         setLinearVelocity(va(), bodyIdVa,
                 velocity.getX(), velocity.getY(), velocity.getZ());

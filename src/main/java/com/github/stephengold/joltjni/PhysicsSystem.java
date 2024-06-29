@@ -141,7 +141,7 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @param gravity (not null, unaffected)
      */
-    public void setGravity(Vec3 gravity) {
+    public void setGravity(Vec3Arg gravity) {
         long systemVa = va();
         float x = gravity.getX();
         float y = gravity.getY();

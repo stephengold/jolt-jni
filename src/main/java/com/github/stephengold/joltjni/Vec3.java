@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class Vec3 {
+final public class Vec3 implements Vec3Arg {
     // *************************************************************************
     // fields
 
@@ -85,36 +85,6 @@ final public class Vec3 {
     // new methods exposed
 
     /**
-     * Return the first (X) component in single precision. The vector is
-     * unaffected.
-     *
-     * @return the component value
-     */
-    public float getX() {
-        return x;
-    }
-
-    /**
-     * Return the 2nd (Y) component in single precision. The vector is
-     * unaffected.
-     *
-     * @return the component value
-     */
-    public float getY() {
-        return y;
-    }
-
-    /**
-     * Return the 3rd (Z) component in single precision. The vector is
-     * unaffected.
-     *
-     * @return the component value
-     */
-    public float getZ() {
-        return z;
-    }
-
-    /**
      * Set all 3 components to specified values.
      *
      * @param x the desired X component
@@ -125,6 +95,41 @@ final public class Vec3 {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+    // *************************************************************************
+    // Vec3Arg methods
+
+    /**
+     * Return the first (X) component in single precision. The vector is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    @Override
+    public float getX() {
+        return x;
+    }
+
+    /**
+     * Return the 2nd (Y) component in single precision. The vector is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    @Override
+    public float getY() {
+        return y;
+    }
+
+    /**
+     * Return the 3rd (Z) component in single precision. The vector is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    @Override
+    public float getZ() {
+        return z;
     }
     // *************************************************************************
     // Object methods

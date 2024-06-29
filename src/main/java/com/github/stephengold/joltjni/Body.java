@@ -211,7 +211,7 @@ public class Body extends NonCopyable {
      *
      * @param omega the desired angular velocity (not null, unaffected)
      */
-    public void setAngularVelocity(Vec3 omega) {
+    public void setAngularVelocity(Vec3Arg omega) {
         long bodyVa = va();
         float wx = omega.getX();
         float wy = omega.getY();
@@ -234,7 +234,7 @@ public class Body extends NonCopyable {
      *
      * @param velocity the desired angular velocity (not null, unaffected)
      */
-    public void setLinearVelocity(Vec3 velocity) {
+    public void setLinearVelocity(Vec3Arg velocity) {
         long bodyVa = va();
         float vx = velocity.getX();
         float vy = velocity.getY();
