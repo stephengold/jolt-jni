@@ -50,7 +50,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBod
   (JNIEnv *, jclass, jlong systemVa) {
     PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
-    const BodyInterface &result = pSystem->GetBodyInterface();
+    BodyInterface &result = pSystem->GetBodyInterface();
     return reinterpret_cast<jlong> (&result);
 }
 
