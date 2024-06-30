@@ -71,6 +71,19 @@ final public class RVec3 implements RVec3Arg {
     // new methods exposed
 
     /**
+     * Test whether all 3 components are finite.
+     *
+     * @return true if all are finite, otherwise false
+     */
+    public boolean isFinite() {
+        if (Double.isFinite(xx) && Double.isFinite(yy) && Double.isFinite(zz)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Set all 3 components to specified values.
      *
      * @param x the desired X component
