@@ -70,9 +70,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_free
-  (JNIEnv *, jclass, jlong bodyCreationSettingsVa) {
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
     BodyCreationSettings * const pSettings
-            = reinterpret_cast<BodyCreationSettings *> (bodyCreationSettingsVa);
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     delete pSettings;
 }
 
@@ -82,8 +82,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setGravityFactor
-  (JNIEnv *, jclass, jlong bodyCreationSettingsVa, jfloat factor) {
+  (JNIEnv *, jclass, jlong bodySettingsVa, jfloat factor) {
     BodyCreationSettings * const pSettings
-            = reinterpret_cast<BodyCreationSettings *> (bodyCreationSettingsVa);
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     pSettings->mGravityFactor = factor;
 }
