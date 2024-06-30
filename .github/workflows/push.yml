@@ -18,7 +18,7 @@ jobs:
       - uses: mattsb42/not-grep@master
         with:
           config-file: .github/not-grep.toml
-      - run: ./gradlew -Pflavor=Sp build --console=plain --no-daemon
+      - run: ./gradlew -Pflavor=Sp build install --console=plain --no-daemon
 
   Java11-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -29,7 +29,7 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - uses: actions/checkout@v4
-      - run: ./gradlew -Ptarget=MacOSX64 run build --console=plain --no-daemon
+      - run: ./gradlew -Ptarget=MacOSX64 run build install --console=plain --no-daemon
 
   Java17-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -40,7 +40,7 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - uses: actions/checkout@v4
-      - run: ./gradlew -Ptarget=MacOSX_ARM64 build --console=plain --no-daemon
+      - run: ./gradlew -Ptarget=MacOSX_ARM64 build install --console=plain --no-daemon
 
   Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -51,7 +51,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - run: ./gradlew build --console=plain --no-daemon
+      - run: ./gradlew build install --console=plain --no-daemon
         shell: bash
 
   Java22-Linux:
@@ -63,4 +63,4 @@ jobs:
           distribution: 'zulu'
           java-version: 22
       - uses: actions/checkout@v4
-      - run: ./gradlew -Pflavor=Dp build --console=plain --no-daemon
+      - run: ./gradlew -Pflavor=Dp build install--console=plain --no-daemon
