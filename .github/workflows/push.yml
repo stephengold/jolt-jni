@@ -63,4 +63,4 @@ jobs:
           distribution: 'zulu'
           java-version: 22
       - uses: actions/checkout@v4
-      - run: ./gradlew -Pflavor=Dp build install--console=plain --no-daemon
+      - run: ./gradlew -Pflavor=Dp build install --console=plain --no-daemon
