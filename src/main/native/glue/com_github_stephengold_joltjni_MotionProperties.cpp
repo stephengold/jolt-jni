@@ -42,10 +42,10 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
     return result;
 }
 
-inline static const Vec3& getAngularVelocity(jlong propertiesVa) {
+inline static const Vec3 getAngularVelocity(jlong propertiesVa) {
     const MotionProperties * const pProperties
             = reinterpret_cast<MotionProperties *> (propertiesVa);
-    const Vec3& result = pProperties->GetAngularVelocity();
+    const Vec3 result = pProperties->GetAngularVelocity();
     return result;
 }
 
@@ -98,10 +98,10 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
     return result;
 }
 
-inline static const Vec3& getLinearVelocity(jlong propertiesVa) {
+inline static const Vec3 getLinearVelocity(jlong propertiesVa) {
     const MotionProperties * const pProperties
             = reinterpret_cast<MotionProperties *> (propertiesVa);
-    const Vec3& result = pProperties->GetLinearVelocity();
+    const Vec3 result = pProperties->GetLinearVelocity();
     return result;
 }
 

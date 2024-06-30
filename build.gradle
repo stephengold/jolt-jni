@@ -144,7 +144,7 @@ model {
                     if (isDebug) {
                         cppCompiler.args '-O0', '-g3'
                     } else { // buildType == Release
-                        cppCompiler.args '-O0' // TODO
+                        cppCompiler.args '-O3'
                     }
 
                     if (os == 'osx') {

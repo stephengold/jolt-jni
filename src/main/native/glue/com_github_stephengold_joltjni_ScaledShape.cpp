@@ -42,10 +42,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShape_createSc
     return reinterpret_cast<jlong> (pResult);
 }
 
-inline static const Vec3& getScale(jlong scaledVa) {
+inline static const Vec3 getScale(jlong scaledVa) {
     const ScaledShape * const pScaled
             = reinterpret_cast<ScaledShape *> (scaledVa);
-    const Vec3& result = pScaled->GetScale();
+    const Vec3 result = pScaled->GetScale();
     return result;
 }
 

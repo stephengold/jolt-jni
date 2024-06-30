@@ -29,9 +29,9 @@ SOFTWARE.
 
 using namespace JPH;
 
-inline static const Vec3& getAccumulatedForce(jlong bodyVa) {
+inline static const Vec3 getAccumulatedForce(jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    const Vec3& result = pBody->GetAccumulatedForce();
+    const Vec3 result = pBody->GetAccumulatedForce();
     return result;
 }
 
@@ -71,9 +71,9 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulated
     return result;
 }
 
-inline static const Vec3& getAccumulatedTorque(jlong bodyVa) {
+inline static const Vec3 getAccumulatedTorque(jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    const Vec3& result = pBody->GetAccumulatedTorque();
+    const Vec3 result = pBody->GetAccumulatedTorque();
     return result;
 }
 
@@ -113,9 +113,9 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulated
     return result;
 }
 
-inline static const Vec3& getAngularVelocity(jlong bodyVa) {
+inline static const Vec3 getAngularVelocity(jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    const Vec3& result = pBody->GetAngularVelocity();
+    const Vec3 result = pBody->GetAngularVelocity();
     return result;
 }
 
@@ -155,9 +155,9 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAngularVelo
     return result;
 }
 
-inline static const RVec3& getCenterOfMassPosition(jlong bodyVa) {
+inline static RVec3 getCenterOfMassPosition(jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    const RVec3& result = pBody->GetCenterOfMassPosition();
+    RVec3 result = pBody->GetCenterOfMassPosition();
     return result;
 }
 
@@ -221,9 +221,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getId
     return reinterpret_cast<jlong> (&result);
 }
 
-inline static const Vec3& getLinearVelocity(jlong bodyVa) {
+inline static const Vec3 getLinearVelocity(jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    const Vec3& result = pBody->GetLinearVelocity();
+    const Vec3 result = pBody->GetLinearVelocity();
     return result;
 }
 
@@ -287,9 +287,9 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getRestitution
     return result;
 }
 
-inline static const Quat& getRotation(jlong bodyVa) {
+inline static const Quat getRotation(jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    const Quat& result = pBody->GetRotation();
+    const Quat result = pBody->GetRotation();
     return result;
 }
 
