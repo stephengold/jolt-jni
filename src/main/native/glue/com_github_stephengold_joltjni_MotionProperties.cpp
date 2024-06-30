@@ -56,7 +56,7 @@ inline static const Vec3 getAngularVelocity(jlong propertiesVa) {
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAngularVelocityX
   (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3& vec3 = getAngularVelocity(propertiesVa);
+    const Vec3 vec3 = getAngularVelocity(propertiesVa);
     float result = vec3.GetX();
     return result;
 }
@@ -68,7 +68,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAngularVelocityY
   (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3 &vec3 = getAngularVelocity(propertiesVa);
+    const Vec3 vec3 = getAngularVelocity(propertiesVa);
     float result = vec3.GetY();
     return result;
 }
@@ -80,7 +80,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAngularVelocityZ
   (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3 &vec3 = getAngularVelocity(propertiesVa);
+    const Vec3 vec3 = getAngularVelocity(propertiesVa);
     float result = vec3.GetZ();
     return result;
 }
@@ -112,7 +112,7 @@ inline static const Vec3 getLinearVelocity(jlong propertiesVa) {
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getLinearVelocityX
   (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3 &vec3 = getLinearVelocity(propertiesVa);
+    const Vec3 vec3 = getLinearVelocity(propertiesVa);
     float result = vec3.GetX();
     return result;
 }
@@ -124,7 +124,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getLinearVelocityY
   (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3 &vec3 = getLinearVelocity(propertiesVa);
+    const Vec3 vec3 = getLinearVelocity(propertiesVa);
     float result = vec3.GetY();
     return result;
 }
@@ -136,7 +136,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getLinearVelocityZ
   (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3 &vec3 = getLinearVelocity(propertiesVa);
+    const Vec3 vec3 = getLinearVelocity(propertiesVa);
     float result = vec3.GetZ();
     return result;
 }

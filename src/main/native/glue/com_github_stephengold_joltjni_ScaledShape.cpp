@@ -56,7 +56,7 @@ inline static const Vec3 getScale(jlong scaledVa) {
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShape_getScaleX
   (JNIEnv *, jclass, jlong scaledVa) {
-    const Vec3& factors = getScale(scaledVa);
+    const Vec3 factors = getScale(scaledVa);
     float result = factors.GetX();
     return result;
 }
@@ -68,7 +68,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShape_getScal
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShape_getScaleY
   (JNIEnv *, jclass, jlong scaledVa) {
-    const Vec3& factors = getScale(scaledVa);
+    const Vec3 factors = getScale(scaledVa);
     float result = factors.GetY();
     return result;
 }
@@ -79,7 +79,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShape_getScal
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShape_getScaleZ
   (JNIEnv *, jclass, jlong scaledVa) {
-    const Vec3& factors = getScale(scaledVa);
+    const Vec3 factors = getScale(scaledVa);
     float result = factors.GetZ();
     return result;
 }
