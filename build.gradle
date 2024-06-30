@@ -140,7 +140,7 @@ model {
                     if (isDebug) {
                         cppCompiler.args '-O0', '-g3'
                     } else { // buildType == Release
-                        cppCompiler.args '-O3'
+                        cppCompiler.args '-O0'
                     }
 
                     if (os == 'osx') {
