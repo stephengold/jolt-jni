@@ -147,7 +147,8 @@ final public class RVec3 implements RVec3Arg {
      */
     @Override
     public float x() {
-        return (float) xx;
+        float result = (float) xx;
+        return result;
     }
 
     /**
@@ -169,7 +170,8 @@ final public class RVec3 implements RVec3Arg {
      */
     @Override
     public float y() {
-        return (float) yy;
+        float result = (float) yy;
+        return result;
     }
 
     /**
@@ -191,7 +193,8 @@ final public class RVec3 implements RVec3Arg {
      */
     @Override
     public float z() {
-        return (float) zz;
+        float result = (float) zz;
+        return result;
     }
 
     /**
