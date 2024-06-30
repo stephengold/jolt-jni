@@ -89,9 +89,16 @@ public class Body extends NonCopyable {
      */
     public RVec3 getCenterOfMassPosition() {
         long bodyVa = va();
+
         double xx = getCenterOfMassPositionX(bodyVa);
+        assert Double.isFinite(xx) : "xx = " + xx;
+
         double yy = getCenterOfMassPositionY(bodyVa);
+        assert Double.isFinite(yy) : "yy = " + yy;
+
         double zz = getCenterOfMassPositionZ(bodyVa);
+        assert Double.isFinite(zz) : "zz = " + zz;
+
         RVec3 result = new RVec3(xx, yy, zz);
 
         return result;
