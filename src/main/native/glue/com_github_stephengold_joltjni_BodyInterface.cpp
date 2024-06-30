@@ -58,23 +58,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addBody
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    createAndAddBody
- * Signature: (JJI)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_createAndAddBody
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong settingsVa, jint activationOrdinal) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyCreationSettings * const pSettings
-            = reinterpret_cast<BodyCreationSettings *> (settingsVa);
-    const EActivation eActivation = (EActivation) activationOrdinal;
-    const BodyID &result
-            = pInterface->CreateAndAddBody(*pSettings, eActivation);
-    return reinterpret_cast<jlong> (&result);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    createBody
  * Signature: (JJ)J
  */

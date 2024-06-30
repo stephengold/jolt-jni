@@ -62,26 +62,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Create a body using the specified settings and add it to the physics
-     * system.
-     *
-     * @param settings the settings to use (not null)
-     * @param activation whether to activate the body (not null)
-     * @return the ID of the new body
-     */
-    public BodyId createAndAddBody(
-            BodyCreationSettings settings, EActivation activation) {
-        long bodyInterfaceVa = va();
-        long settingsVa = settings.va();
-        int activationOrdinal = activation.ordinal();
-        long bodyIdVa = createAndAddBody(
-                bodyInterfaceVa, settingsVa, activationOrdinal);
-        BodyId result = new BodyId(bodyIdVa);
-
-        return result;
-    }
-
-    /**
      * Create a body using the specified settings.
      *
      * @param settings the settings to use (not null)
@@ -195,9 +175,6 @@ public class BodyInterface extends NonCopyable {
 
     native private static void addBody(
             long bodyInterfaceVa, long bodyIdVa, int activationOrdinal);
-
-    native private static long createAndAddBody(
-            long bodyInterfaceVa, long settingsVa, int activationOrdinal);
 
     native private static long createBody(
             long bodyInterfaceVa, long settingsVa);
