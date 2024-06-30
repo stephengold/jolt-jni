@@ -64,6 +64,7 @@ model {
 
     toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp) // used when compiling on Windows
+        //clang(Clang) // to prefer Clang over Gcc
         gcc(Gcc) // used when compiling on Linux
         clang(Clang) // used when compiling on macOS
     }
@@ -132,6 +133,9 @@ model {
                     }
 
                 } else { // toolChain in Clang or Gcc
+                    //cppCompiler.args '-v' // to print compiler invocation
+                    //linker.args '-v' // to print linker invocation
+
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/main/native"
                     cppCompiler.args '-std=c++17'
@@ -140,7 +144,7 @@ model {
                     if (isDebug) {
                         cppCompiler.args '-O0', '-g3'
                     } else { // buildType == Release
-                        cppCompiler.args '-O0'
+                        cppCompiler.args '-O0' // TODO
                     }
 
                     if (os == 'osx') {
@@ -167,6 +171,8 @@ model {
                         into 'dist'
                     }
                     jar.dependsOn('copyToDist' + q)
+                } else {
+                    //println 'Do not build ' + q // to debug this script
                 }
             }
 
