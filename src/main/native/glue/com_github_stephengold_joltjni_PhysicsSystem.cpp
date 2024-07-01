@@ -125,6 +125,20 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getNumA
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getPhysicsSettings
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getPhysicsSettings
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    PhysicsSettings * const pSettings = new PhysicsSettings();
+    *pSettings = pSystem->GetPhysicsSettings();
+    return reinterpret_cast<jlong> (pSettings);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    init
  * Signature: (JIIIIJJJ)V
  */
@@ -166,6 +180,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setGrav
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     Vec3 gravity(x, y, z);
     pSystem->SetGravity(gravity);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    setPhysicsSettings
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setPhysicsSettings
+  (JNIEnv *, jclass, jlong systemVa, jlong settingsVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    pSystem->SetPhysicsSettings(*pSettings);
 }
 
 /*

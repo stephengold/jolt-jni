@@ -104,6 +104,21 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Copy the system's settings.
+     *
+     * @return a new, mutable copy of the settings
+     *
+     * @see setPhysicsSettings
+     */
+    public PhysicsSettings getPhysicsSettings() {
+        long systemVa = va();
+        long settingsVa = getPhysicsSettings(systemVa);
+        PhysicsSettings result = new PhysicsSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Initialize the physics system with the specified limits.
      *
      * @param maxBodies the desired maximum number of rigid bodies that can be
@@ -150,6 +165,19 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Replace the system's settings with the specified ones.
+     *
+     * @param settings the desired settings (not null)
+     *
+     * @see getPhysicsSettings
+     */
+    public void setPhysicsSettings(PhysicsSettings settings) {
+        long systemVa = va();
+        long settingsVa = settings.va();
+        setPhysicsSettings(systemVa, settingsVa);
+    }
+
+    /**
      * Advance the simulation by the specified amount.
      *
      * @param deltaTime the total time to advance (in seconds)
@@ -188,6 +216,8 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static int getNumBodies(long systemVa);
 
+    native private static long getPhysicsSettings(long systemVa);
+
     native private static void init(long systemVa, int maxBodies,
             int numBodyMutexes, int maxBodyPairs, int maxContactConstraints,
             long mapVa, long ovbFilterVa, long ovoFilterVa);
@@ -196,6 +226,9 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static void setGravity(
             long systemVa, float x, float y, float z);
+
+    native private static void setPhysicsSettings(
+            long systemVa, long settingsVa);
 
     native private static int update(long physicsSystemVa, float deltaTime,
             int collisionSteps, long allocatorVa, long jobSystemVa);
