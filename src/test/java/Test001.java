@@ -28,6 +28,7 @@ import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.EActivation;
 import com.github.stephengold.joltjni.EMotionType;
 import com.github.stephengold.joltjni.EPhysicsUpdateError;
+import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.MapObj2Bp;
@@ -38,6 +39,7 @@ import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Shape;
 import com.github.stephengold.joltjni.SphereShape;
+import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorImpl;
 import com.github.stephengold.joltjni.Vec3;
 import org.junit.Assert;
@@ -64,12 +66,12 @@ public class Test001 {
         Jolt.registerTypes();
 
         final int numBytes = 1 << 18; // 256 KiB
-        TempAllocatorImpl allocator = new TempAllocatorImpl(numBytes);
+        TempAllocator allocator = new TempAllocatorImpl(numBytes);
 
         final int maxJobs = 4_096;
         final int maxBarriers = 4;
         int numThreads = Utils.numThreads();
-        JobSystemThreadPool jobSystem
+        JobSystem jobSystem
                 = new JobSystemThreadPool(maxJobs, maxBarriers, numThreads);
 
         // object layers:
