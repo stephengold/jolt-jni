@@ -96,8 +96,10 @@ final public class Float3 {
                 return y;
             case 2:
                 return z;
+            default:
+                throw new IllegalArgumentException(
+                        "index must be either 0, 1 or 2");
         }
-        throw new IllegalArgumentException("index must be either 0, 1 or 2");
     }
     // *************************************************************************
     // Object methods
