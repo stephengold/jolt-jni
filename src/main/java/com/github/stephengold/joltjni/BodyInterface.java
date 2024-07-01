@@ -62,6 +62,22 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Create a body and add it.
+     *
+     * @param settings the settings to use (not null)
+     * @param activationMode whether to activate the body (not null)
+     * @return the ID of the created body, or an invalid ID when out of bodies
+     */
+    public BodyId createAndAddBody(
+            BodyCreationSettings settings, EActivation activationMode) {
+        Body body = createBody(settings);
+        BodyId result = body.getId();
+        addBody(result, activationMode);
+
+        return result;
+    }
+
+    /**
      * Create a body using the specified settings.
      *
      * @param settings the settings to use (not null)

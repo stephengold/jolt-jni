@@ -118,9 +118,8 @@ public class Test001 {
         BodyCreationSettings ballSettings = new BodyCreationSettings(
                 ballShape, ballLocation, orientation,
                 EMotionType.Dynamic, objLayerMoving);
-        Body ball = bodyInterface.createBody(ballSettings);
-        BodyId ballId = ball.getId();
-        bodyInterface.addBody(ballId, EActivation.Activate);
+        BodyId ballId = bodyInterface.createAndAddBody(
+                ballSettings, EActivation.Activate);
         Vec3 ballVelocity = new Vec3(0f, -5f, 0f);
         bodyInterface.setLinearVelocity(ballId, ballVelocity);
 
