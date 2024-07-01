@@ -31,6 +31,14 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public BodyCreationSettings() {
+        long bodySettingsVa = createBodyCreationSettings();
+        setVirtualAddress(bodySettingsVa, true);
+    }
+
+    /**
      * Instantiate settings for the specified shape.
      *
      * @param shape the desired shape (not null)
@@ -73,6 +81,16 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     // new methods exposed
 
     /**
+     * Alter the friction ratio.
+     *
+     * @param friction the desired value
+     */
+    public void setFriction(float friction) {
+        long bodySettingsVa = va();
+        setFriction(bodySettingsVa, friction);
+    }
+
+    /**
      * Alter the gravity factor.
      *
      * @param factor the desired value
@@ -80,6 +98,81 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     public void setGravityFactor(float factor) {
         long bodySettingsVa = va();
         setGravityFactor(bodySettingsVa, factor);
+    }
+
+    /**
+     * Alter the motion quality.
+     *
+     * @param motionQuality the desired quality (not null)
+     */
+    public void setMotionQuality(EMotionQuality motionQuality) {
+        long bodySettingsVa = va();
+        int motionQualityOrdinal = motionQuality.ordinal();
+        setMotionQuality(bodySettingsVa, motionQualityOrdinal);
+    }
+
+    /**
+     * Alter the motion type.
+     *
+     * @param motionType the desired type (not null)
+     */
+    public void setMotionType(EMotionType motionType) {
+        long bodySettingsVa = va();
+        int motionTypeOrdinal = motionType.ordinal();
+        setMotionType(bodySettingsVa, motionTypeOrdinal);
+    }
+
+    /**
+     * Alter the object layer.
+     *
+     * @param objLayer the ID of the desired object layer
+     */
+    public void setObjectLayer(int objLayer) {
+        long bodySettingsVa = va();
+        setObjectLayer(bodySettingsVa, objLayer);
+    }
+
+    /**
+     * Alter the location.
+     *
+     * @param loc the desired location (in physics-system coordinates, not null,
+     * unaffected)
+     */
+    public void setPosition(RVec3Arg loc) {
+        long bodySettingsVa = va();
+        setPosition(bodySettingsVa, loc.xx(), loc.yy(), loc.zz());
+    }
+
+    /**
+     * Alter the restitution ratio.
+     *
+     * @param restitution the desired value
+     */
+    public void setRestitution(float restitution) {
+        long bodySettingsVa = va();
+        setRestitution(bodySettingsVa, restitution);
+    }
+
+    /**
+     * Alter the shape.
+     *
+     * @param shape the desired shape (not null)
+     */
+    public void setShape(Shape shape) {
+        long bodySettingsVa = va();
+        long shapeSettingsVa = shape.va();
+        setShape(bodySettingsVa, shapeSettingsVa);
+    }
+
+    /**
+     * Alter the shape settings.
+     *
+     * @param shapeSettings the desired shape settings (not null)
+     */
+    public void setShapeSettings(ShapeSettings shapeSettings) {
+        long bodySettingsVa = va();
+        long shapeSettingsVa = shapeSettings.va();
+        setShapeSettings(bodySettingsVa, shapeSettingsVa);
     }
     // *************************************************************************
     // JoltPhysicsObject methods
@@ -100,6 +193,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     // *************************************************************************
     // native private methods
 
+    native private static long createBodyCreationSettings();
+
     native private static long createBodyCreationSettingsFromShape(
             long shapeVa, double locX, double locY, double locZ,
             float qx, float qy, float qz, float qw,
@@ -112,6 +207,28 @@ public class BodyCreationSettings extends JoltPhysicsObject {
 
     native private static void free(long bodySettingsVa);
 
+    native private static void setFriction(long bodySettingsVa, float friction);
+
     native private static void setGravityFactor(
             long bodySettingsVa, float factor);
+
+    native private static void setMotionQuality(
+            long bodySettingsVa, int motionQualityOrdinal);
+
+    native private static void setMotionType(
+            long bodySettingsVa, int motionTypeOrdinal);
+
+    native private static void setObjectLayer(
+            long bodySettingsVa, int objLayer);
+
+    native private static void setPosition(
+            long bodySettingsVa, double locX, double locY, double locZ);
+
+    native private static void setRestitution(
+            long bodySettingsVa, float restitution);
+
+    native private static void setShape(long bodySettingsVa, long shapeVa);
+
+    native private static void setShapeSettings(
+            long bodySettingsVa, long shapeSettingsVa);
 }
