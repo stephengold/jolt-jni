@@ -34,8 +34,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
     /**
      * Instantiate with the specified native object assigned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
      */
     PhysicsSettings(long settingsVa) {
         setVirtualAddress(settingsVa, false);

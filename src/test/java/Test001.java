@@ -51,14 +51,18 @@ import org.junit.Test;
  * @author Stephen Gold sgold@sonic.net
  */
 public class Test001 {
+    // *************************************************************************
+    // new methods exposed
+
     /**
-     * Drop a dynamic spherical ball on a static box.
+     * Drop a dynamic spherical ball onto a static box.
      * <p>
      * Derived from HelloWorld.cpp by Jorrit Rouwe.
      */
     @Test
     public void test001() {
         Utils.loadNativeLibrary();
+
         Jolt.registerDefaultAllocator();
         Jolt.installDefaultTraceCallback();
         Jolt.installDefaultAssertCallback();
