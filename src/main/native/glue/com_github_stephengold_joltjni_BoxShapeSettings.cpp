@@ -39,11 +39,13 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_cre
     const BoxShapeSettings * const pSettings
             = reinterpret_cast<BoxShapeSettings *> (settingsVa);
     ShapeSettings::ShapeResult shapeResult = pSettings->Create();
-    BoxShape * const pShape = new BoxShape(*pSettings, shapeResult);
-    if (shapeResult.HasError()) {
-        // TODO
+    if (shapeResult.IsValid()) {
+        Shape * const pShape = shapeResult.Get();
+        JPH_ASSERT(pShape->GetSubType() == EShapeSubType::Box);
+        return reinterpret_cast<jlong> (pShape);
+    } else {
+        return 0L;
     }
-    return reinterpret_cast<jlong> (pShape);
 }
 
 /*

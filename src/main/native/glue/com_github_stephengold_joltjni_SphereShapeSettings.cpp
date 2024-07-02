@@ -39,11 +39,13 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_
     const SphereShapeSettings * const pSettings
             = reinterpret_cast<SphereShapeSettings *> (settingsVa);
     ShapeSettings::ShapeResult shapeResult = pSettings->Create();
-    SphereShape * const pShape = new SphereShape(*pSettings, shapeResult);
-    if (shapeResult.HasError()) {
-        // TODO
+    if (shapeResult.IsValid()) {
+        Shape * const pShape = shapeResult.Get();
+        JPH_ASSERT(pShape->GetSubType() == EShapeSubType::Sphere);
+        return reinterpret_cast<jlong> (pShape);
+    } else {
+        return 0L;
     }
-    return reinterpret_cast<jlong> (pShape);
 }
 
 /*
