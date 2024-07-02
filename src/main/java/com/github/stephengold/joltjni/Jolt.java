@@ -28,6 +28,21 @@ package com.github.stephengold.joltjni;
  */
 final public class Jolt {
     // *************************************************************************
+    // fields
+
+    /**
+     * standard 2nd argument to the {@code JobSystemThreadPool} constructor
+     * <p>
+     * value should match Jolt/Physics/PhysicsSettings.h
+     */
+    final public static int cMaxPhysicsBarriers = 8;
+    /**
+     * standard first argument to the {@code JobSystemThreadPool} constructor
+     * <p>
+     * value should match Jolt/Physics/PhysicsSettings.h
+     */
+    final public static int cMaxPhysicsJobs = 2_048;
+    // *************************************************************************
     // constructors
 
     /**

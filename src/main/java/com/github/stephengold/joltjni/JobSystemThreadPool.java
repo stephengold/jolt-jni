@@ -37,6 +37,9 @@ public class JobSystemThreadPool extends JobSystem {
      * time
      * @param maxBarriers the maximum number of barriers that can be allocated
      * at one time
+     *
+     * @see com.github.stephengold.joltjni.Jolt#cMaxPhysicsBarriers
+     * @see com.github.stephengold.joltjni.Jolt#cMaxPhysicsJobs
      */
     public JobSystemThreadPool(int maxJobs, int maxBarriers) {
         this(maxJobs, maxBarriers, -1);

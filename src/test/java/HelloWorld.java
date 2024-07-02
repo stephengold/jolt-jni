@@ -31,9 +31,6 @@ import com.github.stephengold.joltjni.*;
  * @author Stephen Gold sgold@sonic.net
  */
 public class HelloWorld {
-	public static final int cMaxPhysicsJobs = 2048;
-	public static final int cMaxPhysicsBarriers = 8;
-
 // Layer that objects can be in, determines which other objects it can collide with
 // Typically you at least want to have 1 layer for moving bodies and 1 layer for static bodies, but you can have more
 // layers if you want. E.g. you could have a layer for high detail collision (which is not used by the physics simulation
@@ -83,7 +80,7 @@ public static void main(String[] argv)
 	// We need a job system that will execute physics jobs on multiple threads. Typically
 	// you would implement the JobSystem interface yourself and let Jolt Physics run on top
 	// of your own job scheduler. JobSystemThreadPool is an example implementation.
-	JobSystemThreadPool job_system = new JobSystemThreadPool(cMaxPhysicsJobs, cMaxPhysicsBarriers, Utils.numThreads());
+	JobSystemThreadPool job_system = new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, Utils.numThreads());
 
 	// This is the max amount of rigid bodies that you can add to the physics system. If you try to add more you'll get an error.
 	// Note: This value is low because this is a simple test. For a real project use something in the order of 65536.
