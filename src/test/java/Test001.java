@@ -71,15 +71,6 @@ public class Test001 {
         Jolt.newFactory();
         Jolt.registerTypes();
 
-        final int numBytes = 1 << 18; // 256 KiB
-        TempAllocator allocator = new TempAllocatorImpl(numBytes);
-
-        final int maxJobs = 4_096;
-        final int maxBarriers = 4;
-        int numThreads = Utils.numThreads();
-        JobSystem jobSystem
-                = new JobSystemThreadPool(maxJobs, maxBarriers, numThreads);
-
         // object layers:
         final int objLayerNonMoving = 0;
         final int objLayerMoving = 1;
@@ -135,6 +126,15 @@ public class Test001 {
         bodyInterface.setLinearVelocity(ballId, ballVelocity);
 
         physicsSystem.optimizeBroadPhase();
+
+        final int numBytes = 1 << 18; // 256 KiB
+        TempAllocator allocator = new TempAllocatorImpl(numBytes);
+
+        final int maxJobs = 4_096;
+        final int maxBarriers = 4;
+        int numThreads = Utils.numThreads();
+        JobSystem jobSystem
+                = new JobSystemThreadPool(maxJobs, maxBarriers, numThreads);
 
         int stepCounter = 0;
         while (bodyInterface.isActive(ballId) && stepCounter < 99) {
