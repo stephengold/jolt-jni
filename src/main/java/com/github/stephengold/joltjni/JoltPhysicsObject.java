@@ -141,4 +141,57 @@ abstract public class JoltPhysicsObject implements AutoCloseable {
         }
         unassignNativeObject();
     }
+    // *************************************************************************
+    // Object methods
+
+    /**
+     * Test for type and virtual-address equality with another object.
+     *
+     * @param otherObject the object to compare (may be null, unaffected)
+     * @return true if {@code this} and {@code otherObject} have the same type
+     * and virtual address, otherwise false
+     */
+    @Override
+    public boolean equals(Object otherObject) {
+        boolean result;
+        if (otherObject == this) {
+            result = true;
+        } else if (otherObject != null
+                && otherObject.getClass() == getClass()) {
+            JoltPhysicsObject otherJpo = (JoltPhysicsObject) otherObject;
+            long otherVa = otherJpo.va();
+            result = (virtualAddress == otherVa);
+        } else {
+            result = false;
+        }
+
+        return result;
+    }
+
+    /**
+     * Return the hash code for this instance.
+     * <p>
+     * Note: operations that alter the virtual address are likely to affect the
+     * hash code as well!
+     *
+     * @return a 32-bit value for use in hashing
+     */
+    @Override
+    public int hashCode() {
+        int hash = (int) (virtualAddress >> 4);
+        return hash;
+    }
+
+    /**
+     * Represent this instance as a String.
+     *
+     * @return a descriptive string of text (not null, not empty)
+     */
+    @Override
+    public String toString() {
+        String result = getClass().getSimpleName();
+        result += "#" + Long.toHexString(virtualAddress);
+
+        return result;
+    }
 }
