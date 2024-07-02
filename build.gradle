@@ -204,6 +204,9 @@ tasks.withType(JavaCompile) { // Java compile-time options:
 application {
     mainClass = 'HelloWorld'
 }
+tasks.register('ConvexVsMeshScene', JavaExec) {
+    mainClass = 'ConvexVsMeshScene'
+}
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
     enableAssertions true
