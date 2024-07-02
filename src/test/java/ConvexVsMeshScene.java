@@ -61,7 +61,6 @@ public class ConvexVsMeshScene {
 		physics_system.init(cMaxBodies, cNumBodyMutexes, cMaxBodyPairs, cMaxContactConstraints, broad_phase_layer_interface, object_vs_broadphase_layer_filter, object_vs_object_layer_filter);
 		Load();
 		StartTest(physics_system, EMotionQuality.LinearCast);
-		BodyInterface body_interface = physics_system.getBodyInterface();
 		final float cDeltaTime = 1.0f / 60.0f;
 		physics_system.optimizeBroadPhase();
 		int step = 0;
