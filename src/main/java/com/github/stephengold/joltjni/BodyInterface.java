@@ -87,6 +87,9 @@ public class BodyInterface extends NonCopyable {
         long bodyInterfaceVa = va();
         long settingsVa = settings.va();
         long bodyVa = createBody(bodyInterfaceVa, settingsVa);
+        if (bodyVa == 0L) {
+            throw new IllegalStateException("ran out of bodies");
+        }
         Body result = new Body(bodyVa);
 
         return result;
