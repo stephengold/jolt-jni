@@ -75,6 +75,7 @@ abstract public class Shape extends NonCopyable {
         assert result > 0 : "result = " + result;
         return result;
     }
+
     /**
      * Return the shape's subtype.
      *
