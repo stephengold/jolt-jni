@@ -343,13 +343,13 @@ signMavenPublication.dependsOn('module')
 
 // Download and extract archived JoltPhysics source code
 
-tasks.register('download', Download) {
+tasks.register('downloadJoltSource', Download) {
     src 'https://github.com/jrouwe/JoltPhysics/archive/refs/tags/v5.0.0.zip'
     dest file('downloads/JoltPhysics-5.0.0.zip')
     overwrite false
 }
 tasks.register('unpackJoltSource', Copy) {
-    dependsOn 'download'
+    dependsOn 'downloadJoltSource'
     from (zipTree('downloads/JoltPhysics-5.0.0.zip')) {
         include 'JoltPhysics-5.0.0/Jolt/**'
         eachFile { fcd ->
