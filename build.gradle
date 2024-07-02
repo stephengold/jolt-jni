@@ -207,6 +207,9 @@ application {
 tasks.register('ConvexVsMeshScene', JavaExec) {
     mainClass = 'ConvexVsMeshScene'
 }
+tasks.register('HelloWorld', JavaExec) {
+    mainClass = 'HelloWorld'
+}
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
     enableAssertions true
