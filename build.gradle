@@ -362,7 +362,7 @@ tasks.register('unpackJoltSource', Copy) {
 
 // Register cleanup tasks:
 
-clean.dependsOn('cleanAutoHeaders', 'cleanDist', 'cleanDownloads', 'cleanJoltSource', 'cleanLogs')
+clean.dependsOn('cleanAutoHeaders', 'cleanDist', 'cleanLogs')
 
 tasks.register('cleanAutoHeaders', Delete) { // auto-generated JNI headers
     delete 'src/main/native/auto'
