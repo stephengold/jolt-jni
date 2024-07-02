@@ -97,6 +97,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getMassProperties
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getMassProperties
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    MassProperties * const pProperties = new MassProperties();
+    *pProperties = pShape->GetMassProperties();
+    return reinterpret_cast<jlong> (pProperties);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    getSubType
  * Signature: (J)I
  */

@@ -77,6 +77,19 @@ abstract public class Shape extends NonCopyable {
     }
 
     /**
+     * Return the shape's mass properties.
+     *
+     * @return a new instance
+     */
+    public MassProperties getMassProperties() {
+        long shapeVa = va();
+        long propertiesVa = getMassProperties(shapeVa);
+        MassProperties result = new MassProperties(propertiesVa);
+
+        return result;
+    }
+
+    /**
      * Return the shape's subtype.
      *
      * @return an enum value
@@ -119,6 +132,8 @@ abstract public class Shape extends NonCopyable {
             long shapeVa, int numTriangles, FloatBuffer storeBuffer);
 
     native private static int countDebugTriangles(long shapeVa);
+
+    native private static long getMassProperties(long shapeVa);
 
     native private static int getSubType(long shapeVa);
 
