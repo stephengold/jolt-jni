@@ -51,7 +51,10 @@ public class SphereShapeSettings extends ConvexShapeSettings {
     public SphereShape createShape() {
         long settingsVa = va();
         long shapeVa = createSphereShape(settingsVa);
+        assert shapeVa != 0L;
         SphereShape result = new SphereShape(shapeVa);
+        assert result.getSubType() == EShapeSubType.Sphere :
+                result.getSubType();
 
         return result;
     }

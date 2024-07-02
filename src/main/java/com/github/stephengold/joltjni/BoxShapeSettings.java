@@ -56,7 +56,9 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     public BoxShape createShape() {
         long settingsVa = va();
         long shapeVa = createBoxShape(settingsVa);
+        assert shapeVa != 0L;
         BoxShape result = new BoxShape(shapeVa);
+        assert result.getSubType() == EShapeSubType.Box : result.getSubType();
 
         return result;
     }
