@@ -115,7 +115,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getNumA
  * Method:    getNumBodies
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getNumActiveBodies
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getNumBodies
   (JNIEnv *, jclass, jlong systemVa) {
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
