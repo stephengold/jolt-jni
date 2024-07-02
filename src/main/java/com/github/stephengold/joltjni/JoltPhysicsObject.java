@@ -26,7 +26,8 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class JoltPhysicsObject implements AutoCloseable {
+abstract public class JoltPhysicsObject
+        implements AutoCloseable, Comparable<JoltPhysicsObject> {
     // *************************************************************************
     // fields
 
@@ -140,6 +141,23 @@ abstract public class JoltPhysicsObject implements AutoCloseable {
                     "I don't know how to free " + getClass().getSimpleName());
         }
         unassignNativeObject();
+    }
+    // *************************************************************************
+    // Comparable methods
+
+    /**
+     * Compare (by virtual address) with another native object.
+     *
+     * @param other (not null, unaffected)
+     * @return 0 if the objects have the same virtual address; negative if this
+     * comes before other; positive if this comes after other
+     */
+    @Override
+    public int compareTo(JoltPhysicsObject other) {
+        long otherVa = other.va();
+        int result = Long.compare(virtualAddress, otherVa);
+
+        return result;
     }
     // *************************************************************************
     // Object methods
