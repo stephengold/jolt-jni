@@ -35,4 +35,13 @@ abstract public class ShapeSettings extends SerializableObject {
      */
     protected ShapeSettings() {
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Generate a shape from these settings.
+     *
+     * @return a new instance
+     */
+    abstract public Shape createShape();
 }

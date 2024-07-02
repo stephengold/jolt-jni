@@ -45,14 +45,15 @@ public class BoxShapeSettings extends ConvexShapeSettings {
         setVirtualAddress(settingsVa, true);
     }
     // *************************************************************************
-    // new methods exposed
+    // ShapeSettings methods
 
     /**
      * Generate a shape from these settings.
      *
      * @return a new instance
      */
-    public Shape createShape() {
+    @Override
+    public BoxShape createShape() {
         long settingsVa = va();
         long shapeVa = createBoxShape(settingsVa);
         BoxShape result = new BoxShape(shapeVa);

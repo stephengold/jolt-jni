@@ -40,14 +40,15 @@ public class SphereShapeSettings extends ConvexShapeSettings {
         setVirtualAddress(settingsVa, true);
     }
     // *************************************************************************
-    // new methods exposed
+    // ShapeSettings methods
 
     /**
      * Generate a shape from these settings.
      *
      * @return a new instance
      */
-    public Shape createShape() {
+    @Override
+    public SphereShape createShape() {
         long settingsVa = va();
         long shapeVa = createSphereShape(settingsVa);
         SphereShape result = new SphereShape(shapeVa);
