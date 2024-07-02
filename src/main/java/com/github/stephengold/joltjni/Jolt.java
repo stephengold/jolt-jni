@@ -21,6 +21,11 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+
 /**
  * Utility methods providing JNI access to Jolt Physics.
  *
@@ -83,6 +88,44 @@ final public class Jolt {
      * @return true if double-precision, otherwise false
      */
     native public static boolean isDoublePrecision();
+
+    /**
+     * Create a direct {@code FloatBuffer} with native byte order and the
+     * specified capacity.
+     *
+     * @param numFloats the desired capacity (in floats)
+     * @return a new direct buffer, zeroed and rewound but not flipped
+     */
+    public static FloatBuffer newDirectFloatBuffer(int numFloats) {
+        ByteBuffer byteBuffer
+                = ByteBuffer.allocateDirect(numFloats * Float.BYTES);
+        byteBuffer.order(ByteOrder.nativeOrder());
+        FloatBuffer result = byteBuffer.asFloatBuffer();
+
+        assert result.capacity() == numFloats : result.capacity();
+        assert result.limit() == numFloats : result.limit();
+        assert result.position() == 0 : result.position();
+        return result;
+    }
+
+    /**
+     * Create a direct {@code IntBuffer} with native byte order and the
+     * specified capacity.
+     *
+     * @param numInts the desired capacity (in floats)
+     * @return a new direct buffer, zeroed and rewound but not flipped
+     */
+    public static IntBuffer newDirectIntBuffer(int numInts) {
+        ByteBuffer byteBuffer
+                = ByteBuffer.allocateDirect(numInts * Integer.BYTES);
+        byteBuffer.order(ByteOrder.nativeOrder());
+        IntBuffer result = byteBuffer.asIntBuffer();
+
+        assert result.capacity() == numInts : result.capacity();
+        assert result.limit() == numInts : result.limit();
+        assert result.position() == 0 : result.position();
+        return result;
+    }
 
     /**
      * Create a factory for deserialization of saved data.
