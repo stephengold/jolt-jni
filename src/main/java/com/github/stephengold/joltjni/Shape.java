@@ -125,6 +125,41 @@ abstract public class Shape extends NonCopyable {
         boolean result = mustBeStatic(shapeVa);
         return result;
     }
+
+    /**
+     * Instantiate a Shape from its virtual address.
+     *
+     * @param shapeVa the virtual address of the native object (not zero)
+     * @return a new instance
+     */
+    static Shape newShape(long shapeVa) {
+        int ordinal = getSubType(shapeVa);
+        EShapeSubType subType = EShapeSubType.values()[ordinal];
+        Shape result;
+        switch (subType) {
+            case Box:
+                result = new BoxShape(shapeVa);
+                break;
+            case Capsule:
+                result = new CapsuleShape(shapeVa);
+                break;
+            case ConvexHull:
+                result = new ConvexHullShape(shapeVa);
+                break;
+            case Cylinder:
+                result = new CylinderShape(shapeVa);
+                break;
+            case Mesh:
+                result = new MeshShape(shapeVa);
+                break;
+            case Sphere:
+                result = new SphereShape(shapeVa);
+                break;
+            default:
+                throw new IllegalArgumentException("type = " + subType);
+        }
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
