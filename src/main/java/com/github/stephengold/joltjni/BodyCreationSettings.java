@@ -81,6 +81,18 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     // new methods exposed
 
     /**
+     * Access the shape.
+     *
+     * @return the shape, or null if none
+     */
+    public Shape getShape() {
+        long bodySettingsVa = va();
+        long shapeSettingsVa = getShape(bodySettingsVa);
+        Shape result = Shape.newShape(shapeSettingsVa);
+        return result;
+    }
+
+    /**
      * Alter the friction ratio.
      *
      * @param friction the desired value
@@ -206,6 +218,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
             int motionTypeOrdinal, int objLayer);
 
     native private static void free(long bodySettingsVa);
+
+    native private static long getShape(long bodySettingsVa);
 
     native private static void setFriction(long bodySettingsVa, float friction);
 
