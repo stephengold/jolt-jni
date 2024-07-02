@@ -21,8 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import java.nio.FloatBuffer;
-
 /**
  * A {@code Shape} to represent a surface defined by a collection of triangles.
  *
@@ -33,17 +31,6 @@ public class MeshShape extends Shape {
     // constructors
 
     /**
-     * Instantiate a shape for the specified parameters.
-     *
-     * @param triangles the vertex locations of the defining triangles (not
-     * null, capacity a multiple of 9)
-     */
-    public MeshShape(FloatBuffer triangles) {
-        long shapeVa = createMeshShape(triangles);
-        setVirtualAddress(shapeVa, true);
-    }
-
-    /**
      * Instantiate a shape with the specified native object assigned.
      *
      * @param virtualAddress the virtual address of the native object to assign
@@ -52,8 +39,4 @@ public class MeshShape extends Shape {
     MeshShape(long virtualAddress) {
         super(virtualAddress);
     }
-    // *************************************************************************
-    // native private methods
-
-    native private static long createMeshShape(FloatBuffer triangles);
 }
