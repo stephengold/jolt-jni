@@ -28,6 +28,8 @@ import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.EActivation;
 import com.github.stephengold.joltjni.EMotionType;
 import com.github.stephengold.joltjni.EPhysicsUpdateError;
+import com.github.stephengold.joltjni.EShapeSubType;
+import com.github.stephengold.joltjni.EShapeType;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
 import com.github.stephengold.joltjni.Jolt;
@@ -120,6 +122,9 @@ public class Test001 {
         bodyInterface.addBody(floorId, EActivation.DontActivate);
 
         Shape ballShape = new SphereShape(0.5f);
+        Assert.assertEquals(EShapeSubType.Sphere, ballShape.getSubType());
+        Assert.assertEquals(EShapeType.Convex, ballShape.getType());
+
         RVec3 ballLocation = new RVec3(0.0, 2.0, 0.0);
         BodyCreationSettings ballSettings = new BodyCreationSettings(
                 ballShape, ballLocation, orientation,

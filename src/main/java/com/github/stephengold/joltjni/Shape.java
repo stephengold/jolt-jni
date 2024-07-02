@@ -75,6 +75,31 @@ abstract public class Shape extends NonCopyable {
         assert result > 0 : "result = " + result;
         return result;
     }
+    /**
+     * Return the shape's subtype.
+     *
+     * @return an enum value
+     */
+    public EShapeSubType getSubType() {
+        long shapeVa = va();
+        int ordinal = getSubType(shapeVa);
+        EShapeSubType result = EShapeSubType.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the shape's type.
+     *
+     * @return an enum value
+     */
+    public EShapeType getType() {
+        long shapeVa = va();
+        int ordinal = getType(shapeVa);
+        EShapeType result = EShapeType.values()[ordinal];
+
+        return result;
+    }
 
     /**
      * Test whether the shape can be used in a dynamic/kinematic body.
@@ -93,6 +118,10 @@ abstract public class Shape extends NonCopyable {
             long shapeVa, int numTriangles, FloatBuffer storeBuffer);
 
     native private static int countDebugTriangles(long shapeVa);
+
+    native private static int getSubType(long shapeVa);
+
+    native private static int getType(long shapeVa);
 
     native private static boolean mustBeStatic(long shapeVa);
 }

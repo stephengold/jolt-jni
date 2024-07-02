@@ -97,6 +97,30 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getSubType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getSubType
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    EShapeSubType subType = pShape->GetSubType();
+    return (jint) subType;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getType
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    EShapeType type = pShape->GetType();
+    return (jint) type;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    mustBeStatic
  * Signature: (J)Z
  */
