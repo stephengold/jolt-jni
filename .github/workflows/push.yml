@@ -22,14 +22,14 @@ jobs:
         run: |
           ./gradlew -Pflavor=Sp build install \
             --console=plain \
-            -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
+            -PsigningKey='${{ secrets.SIGNING_KEY }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
       - name: gradlew -Pflavor=Sp release
         if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Pflavor=Sp release \
             --console=plain \
-            -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
+            -PsigningKey='${{ secrets.SIGNING_KEY }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
             -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
@@ -47,14 +47,14 @@ jobs:
         run: |
           ./gradlew -Ptarget=MacOSX64 run build install \
             --console=plain \
-            -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
+            -PsigningKey='${{ secrets.SIGNING_KEY }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
       - name: gradlew -Ptarget=MacOSX64 release
         if: startsWith(github.ref, 'refs/tags/')
         run: |
           ./gradlew -Ptarget=MacOSX64 release \
             --console=plain \
-            -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
+            -PsigningKey='${{ secrets.SIGNING_KEY }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
             -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
