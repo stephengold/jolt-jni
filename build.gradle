@@ -13,7 +13,7 @@ plugins {
 ext {
     group = 'com.github.stephengold'
     artifact = 'joltjni'
-    version = '0.1.6'
+    version = '0.1.7'
     baseName = "${artifact}-${version}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
@@ -341,9 +341,12 @@ publishing {
             version project.ext.version
         }
     }
+
     // Staging to OSSRH relies on the existence of 2 properties
     // (ossrhUsername and ossrhPassword)
     // which should be stored in ~/.gradle/gradle.properties
+    // or passed in the command line
+
     repositories {
         maven {
             credentials {
@@ -362,9 +365,10 @@ publishMavenPublicationToMavenLocal.doLast {
 
 // Register signing tasks:
 
-// Signing relies on the existence of 3 properties
-// (signingKeyId, signingPassword, and signing.secretKeyRingFile)
+// Signing relies on the existence of 2 properties
+// (signingKey and signingPassword)
 // which should be stored in ~/.gradle/gradle.properties
+// or passed in the command line
 
 signing {
     def signingKey = project.findProperty('signingKey')

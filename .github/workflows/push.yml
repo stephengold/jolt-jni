@@ -19,18 +19,20 @@ jobs:
         with:
           config-file: .github/not-grep.toml
       - name: gradlew -Pflavor=Sp build install
-        run: ./gradlew -Pflavor=Sp --console=plain \
+        run: |
+          ./gradlew -Pflavor=Sp build install \
+            --console=plain \
             -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            build install
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
       - name: gradlew -Pflavor=Sp release
         if: startsWith(github.ref, 'refs/tags/')
-        run: ./gradlew -Pflavor=Sp --console=plain \
+        run: |
+          ./gradlew -Pflavor=Sp release \
+            --console=plain \
             -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}' \
-            release
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
   Java11-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -42,18 +44,20 @@ jobs:
           java-version: 11
       - uses: actions/checkout@v4
       - name: gradlew -Ptarget=MacOSX64 run build install
-        run: ./gradlew -Ptarget=MacOSX64 --console=plain \
+        run: |
+          ./gradlew -Ptarget=MacOSX64 run build install \
+            --console=plain \
             -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            run build install
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
       - name: gradlew -Ptarget=MacOSX64 release
         if: startsWith(github.ref, 'refs/tags/')
-        run: ./gradlew -Ptarget=MacOSX64 --console=plain \
+        run: |
+          ./gradlew -Ptarget=MacOSX64 release \
+            --console=plain \
             -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}' \
-            release
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
   Java17-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -65,18 +69,20 @@ jobs:
           java-version: 17
       - uses: actions/checkout@v4
       - name: gradlew -Ptarget=MacOSX_ARM64 build install
-        run: ./gradlew -Ptarget=MacOSX_ARM64 --console=plain \
-            -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            build install
+        run: |
+          ./gradlew -Ptarget=MacOSX_ARM64 build install \
+            --console=plain \
+            -PsigningKey='${{ secrets.SIGNING_KEY }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
       - name: gradlew -Ptarget=MacOSX_ARM64 release
         if: startsWith(github.ref, 'refs/tags/')
-        run: ./gradlew -Ptarget=MacOSX_ARM64 --console=plain \
-            -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
+        run: |
+          ./gradlew -Ptarget=MacOSX_ARM64 release \
+            --console=plain \
+            -PsigningKey='${{ secrets.SIGNING_KEY }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}' \
-            release
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
   Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -88,19 +94,21 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - name: gradlew build install
-        run: ./gradlew --console=plain \
-            -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            build install
+        run: |
+          ./gradlew build install \
+             --console=plain \
+            -PsigningKey='${{ secrets.SIGNING_KEY }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
         shell: bash
       - name: gradlew release
         if: startsWith(github.ref, 'refs/tags/')
-        run: ./gradlew --console=plain \
-            -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
+        run: |
+          ./gradlew release \
+            --console=plain \
+            -PsigningKey='${{ secrets.SIGNING_KEY }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}' \
-            release
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
         shell: bash
 
   Java22-Linux:
@@ -113,15 +121,17 @@ jobs:
           java-version: 22
       - uses: actions/checkout@v4
       - name: gradlew -Pflavor=Dp build install
-        run: ./gradlew -Pflavor=Dp --console=plain \
-            -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            build install
+        run: |
+          ./gradlew -Pflavor=Dp build install \
+            --console=plain \
+            -PsigningKey='${{ secrets.SIGNING_KEY }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
       - name: gradlew -Pflavor=Dp release
         if: startsWith(github.ref, 'refs/tags/')
-        run: ./gradlew -Pflavor=Dp --console=plain \
-            -PsigningKeyId='${{ secrets.SIGNING_KEY }}' \
+        run: |
+          ./gradlew -Pflavor=Dp release \
+            --console=plain \
+            -PsigningKey='${{ secrets.SIGNING_KEY }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}' \
-            release
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
