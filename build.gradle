@@ -231,6 +231,10 @@ tasks.register('install') {
     dependsOn 'publishMavenPublicationToMavenLocal'
     description 'Installs Maven artifacts to the local repository.'
 }
+tasks.register('release') {
+    dependsOn 'publishMavenPublicationToOSSRHRepository'
+    description 'Stages Maven artifacts to Sonatype OSSRH.'
+}
 
 assemble.dependsOn('copyToDistJars')
 tasks.register('copyToDistJars', Copy) {
