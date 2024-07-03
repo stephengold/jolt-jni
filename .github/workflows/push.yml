@@ -19,17 +19,15 @@ jobs:
       - uses: mattsb42/not-grep@master
         with:
           config-file: .github/not-grep.toml
-      - run: ./gradlew -Pflavor=Sp build install --console=plain
-
-      - name: deploy native libraries to a GitHub release
+      - run: ./gradlew -Pflavor=Sp build install --console=plain \
+            -Psigning.keyId='${{ secrets.SIGNING_KEY }}' \
+            -Psigning.password='${{ secrets.SIGNING_PASSWORD }}'
+      - run: ./gradlew -Pflavor=Sp release --console=plain \
+            -Psigning.keyId='${{ secrets.SIGNING_KEY }}' \
+            -Psigning.password='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
         if: startsWith(github.ref, 'refs/tags/')
-        uses: marvinpinto/action-automatic-releases@v1.2.1
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
-            dist/Linux64DebugSp_libjoltjni.so
-            dist/Linux64ReleaseSp_libjoltjni.so
 
   Java11-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -40,19 +38,15 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - uses: actions/checkout@v4
-      - run: ./gradlew -Ptarget=MacOSX64 run build install --console=plain
-
-      - name: deploy native libraries to a GitHub release
+      - run: ./gradlew -Ptarget=MacOSX64 run build install --console=plain \
+            -Psigning.keyId='${{ secrets.SIGNING_KEY }}' \
+            -Psigning.password='${{ secrets.SIGNING_PASSWORD }}'
+      - run: ./gradlew -Ptarget=MacOSX64 release --console=plain \
+            -Psigning.keyId='${{ secrets.SIGNING_KEY }}' \
+            -Psigning.password='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
         if: startsWith(github.ref, 'refs/tags/')
-        uses: marvinpinto/action-automatic-releases@v1.2.1
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
-            dist/MacOSX64DebugDp_libjoltjni.dylib
-            dist/MacOSX64DebugSp_libjoltjni.dylib
-            dist/MacOSX64ReleaseDp_libjoltjni.dylib
-            dist/MacOSX64ReleaseSp_libjoltjni.dylib
 
   Java17-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -63,19 +57,15 @@ jobs:
           distribution: 'zulu'
           java-version: 17
       - uses: actions/checkout@v4
-      - run: ./gradlew -Ptarget=MacOSX_ARM64 build install --console=plain
-
-      - name: deploy native libraries to a GitHub release
+      - run: ./gradlew -Ptarget=MacOSX_ARM64 build install --console=plain \
+            -Psigning.keyId='${{ secrets.SIGNING_KEY }}' \
+            -Psigning.password='${{ secrets.SIGNING_PASSWORD }}'
+      - run: ./gradlew -Ptarget=MacOSX_ARM64 release --console=plain \
+            -Psigning.keyId='${{ secrets.SIGNING_KEY }}' \
+            -Psigning.password='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
         if: startsWith(github.ref, 'refs/tags/')
-        uses: marvinpinto/action-automatic-releases@v1.2.1
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
-            dist/MacOSX64_ARM64DebugDp_libjoltjni.dylib
-            dist/MacOSX64_ARM64DebugSp_libjoltjni.dylib
-            dist/MacOSX64_ARM64ReleaseDp_libjoltjni.dylib
-            dist/MacOSX64_ARM64ReleaseSp_libjoltjni.dylib
 
   Java21-Windows:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -86,20 +76,17 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - run: ./gradlew build install --console=plain
+      - run: ./gradlew build install --console=plain \
+            -Psigning.keyId='${{ secrets.SIGNING_KEY }}' \
+            -Psigning.password='${{ secrets.SIGNING_PASSWORD }}'
         shell: bash
-
-      - name: deploy native libraries to a GitHub release
+      - run: ./gradlew release --console=plain \
+            -Psigning.keyId='${{ secrets.SIGNING_KEY }}' \
+            -Psigning.password='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
         if: startsWith(github.ref, 'refs/tags/')
-        uses: marvinpinto/action-automatic-releases@v1.2.1
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
-            dist/Windows64DebugDp_joltjni.dll
-            dist/Windows64DebugSp_joltjni.dll
-            dist/Windows64ReleaseDp_joltjni.dll
-            dist/Windows64ReleaseSp_joltjni.dll
+        shell: bash
 
   Java22-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -110,23 +97,11 @@ jobs:
           distribution: 'zulu'
           java-version: 22
       - uses: actions/checkout@v4
-      - run: ./gradlew -Pflavor=Dp build install --console=plain
-
-      - name: stage artifacts to Sonatype OSSRH
-        if: startsWith(github.ref, 'refs/tags/')
-        run: ./gradlew -Pflavor=Sp release --console=plain \
-            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}' \
+      - run: ./gradlew -Pflavor=Dp build install --console=plain \
             -Psigning.keyId='${{ secrets.SIGNING_KEY }}' \
             -Psigning.password='${{ secrets.SIGNING_PASSWORD }}'
-
-      - name: deploy artifacts and native libraries to a GitHub release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: marvinpinto/action-automatic-releases@v1.2.1
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: |
-            dist/joltjni-*
-            dist/Linux64DebugSp_libjoltjni.so
-            dist/Linux64ReleaseSp_libjoltjni.so
+      - run: ./gradlew -Pflavor=Dp release --console=plain \
+            -Psigning.keyId='${{ secrets.SIGNING_KEY }}' \
+            -Psigning.password='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'

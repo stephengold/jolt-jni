@@ -13,7 +13,7 @@ plugins {
 ext {
     group = 'com.github.stephengold'
     artifact = 'joltjni'
-    version = '0.1.2'
+    version = '0.1.3'
     baseName = "${artifact}-${version}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
@@ -162,15 +162,26 @@ model {
                 if (buildable) {
                     println 'Build ' + q + ' using ' + toolChain
 
-                    project.tasks.register('copyToDist' + q, Copy) {
+                    String replaceWith = targetPlatform.operatingSystem.name \
+                        + '/' + targetPlatform.architecture.name \
+                        + '/com/github/stephengold/$1'
+                    project.tasks.register('nativesJar' + q, Jar) {
+                        archiveBaseName = project.ext.baseName
+                        archiveClassifier = 'natives-' + q
                         dependsOn "joltjni${q}SharedLibrary"
+                        description "Creates a JAR of the ${q} native library."
                         from sharedLibraryFile
-                        rename { String filename ->
-                            return q + '_' + filename
-                        }
-                        into 'dist'
+                        rename '(.+)', replaceWith
                     }
-                    jar.dependsOn('copyToDist' + q)
+
+                    Task njTask = project.tasks.named('nativesJar' + q, Jar).get()
+                    project.artifacts {
+                        archives njTask.archiveFile
+                    }
+                    project.publishing.publications.maven {
+                        artifact njTask
+                    }
+
                 } else {
                     //println 'Do not build ' + q // to debug this script
                 }
@@ -343,8 +354,8 @@ publishMavenPublicationToMavenLocal.doLast {
 // which should be stored in ~/.gradle/gradle.properties
 
 signing {
-    sign configurations.archives
-    sign publishing.publications.maven
+    sign configurations.archives       // JARs
+    sign publishing.publications.maven // .module and .pom
 }
 tasks.withType(Sign) {
     onlyIf { project.hasProperty('signing.keyId') }
