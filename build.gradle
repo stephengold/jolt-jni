@@ -366,22 +366,31 @@ publishMavenPublicationToMavenLocal.doLast {
 // Register signing tasks:
 
 // Signing relies on the existence of 2 properties
-// (signingKey and signingPassword)
+// (signingKeyEncoded and signingPassword)
 // which should be stored in ~/.gradle/gradle.properties
 // or passed in the command line
 
 signing {
-    def signingKey = project.findProperty('signingKey')
-    def signingPassword = project.findProperty('signingPassword')
+    def signingKey = base64Decode(findProperty("signingKeyEncoded"))
+    def signingPassword = findProperty('signingPassword')
     useInMemoryPgpKeys(signingKey, signingPassword)
 
     sign configurations.archives
     sign publishing.publications.maven
 }
 tasks.withType(Sign) {
-    onlyIf { project.hasProperty('signingKey') }
+    onlyIf { project.hasProperty('signingKeyEncoded') }
 }
 signMavenPublication.dependsOn('module')
+
+def base64Decode(encodedString){
+    if (encodedString != null) {
+        byte[] decoded = encodedString.decodeBase64()
+        String decode = new String(decoded)
+        return decode
+    }
+    return null;
+}
 
 // Download and extract archived JoltPhysics source code
 
