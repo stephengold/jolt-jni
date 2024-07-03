@@ -13,7 +13,7 @@ plugins {
 ext {
     group = 'com.github.stephengold'
     artifact = 'joltjni'
-    version = '0.1.5'
+    version = '0.1.6'
     baseName = "${artifact}-${version}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
@@ -367,15 +367,15 @@ publishMavenPublicationToMavenLocal.doLast {
 // which should be stored in ~/.gradle/gradle.properties
 
 signing {
-    sign configurations.archives       // JARs
-    sign publishing.publications.maven // .module and .pom
+    def signingKey = project.findProperty('signingKey')
+    def signingPassword = project.findProperty('signingPassword')
+    useInMemoryPgpKeys(signingKey, signingPassword)
+
+    sign configurations.archives
+    sign publishing.publications.maven
 }
 tasks.withType(Sign) {
-    onlyIf { project.hasProperty('signingKeyId') }
-
-    String signingKey = gradle.rootProject.findProperty('signingKey')
-    String signingPassword = gradle.rootProject.findProperty('signingPassword')
-    useInMemoryPgpKeys(signingKey, signingPassword)
+    onlyIf { project.hasProperty('signingKey') }
 }
 signMavenPublication.dependsOn('module')
 
