@@ -3,6 +3,7 @@
 
 name: CI at GitHub
 on: [push]
+permissions: write-all
 
 jobs:
   Java11-Linux:
@@ -114,10 +115,10 @@ jobs:
       - name: stage artifacts to Sonatype OSSRH
         if: startsWith(github.ref, 'refs/tags/')
         run: ./gradlew -Pflavor=Sp release --console=plain \
-            -PossrhPassword=${{ secrets.OSSRH_PASSWORD }} \
-            -PossrhUsername=${{ secrets.OSSRH_USERNAME }} \
-            -PsigningKey='${{ secrets.SIGNING_KEY }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}' \
+            -Psigning.keyId='${{ secrets.SIGNING_KEY }}' \
+            -Psigning.password='${{ secrets.SIGNING_PASSWORD }}'
 
       - name: deploy artifacts and native libraries to a GitHub release
         if: startsWith(github.ref, 'refs/tags/')
