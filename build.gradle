@@ -12,8 +12,7 @@ plugins {
 
 ext {
     group = 'com.github.stephengold'
-    artifact = 'joltjni'
-    version = '0.1.8'
+    version = '0.1.9'
     baseName = "${artifact}-${version}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
