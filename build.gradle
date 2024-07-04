@@ -13,7 +13,7 @@ plugins {
 ext {
     group = 'com.github.stephengold'
     artifact = 'joltjni'
-    version = '0.1.7'
+    version = '0.1.8'
     baseName = "${artifact}-${version}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
@@ -371,7 +371,7 @@ publishMavenPublicationToMavenLocal.doLast {
 // or passed in the command line
 
 signing {
-    def signingKey = base64Decode(findProperty("signingKeyEncoded"))
+    def signingKey = base64Decode(findProperty('signingKeyEncoded'))
     def signingPassword = findProperty('signingPassword')
     useInMemoryPgpKeys(signingKey, signingPassword)
 

@@ -7,7 +7,7 @@ on: [push]
 jobs:
   Java11-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -18,16 +18,16 @@ jobs:
       - uses: mattsb42/not-grep@master
         with:
           config-file: .github/not-grep.toml
-      - name: gradlew -Pflavor=Sp build install
+      - name: gradlew build install
         run: |
-          ./gradlew -Pflavor=Sp build install \
+          ./gradlew build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - name: gradlew -Pflavor=Sp release
+      - name: gradlew release
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          ./gradlew -Pflavor=Sp release \
+          ./gradlew release \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
@@ -126,12 +126,3 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
-      - name: gradlew -Pflavor=Dp release
-        if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          ./gradlew -Pflavor=Dp release \
-            --console=plain \
-            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
-            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
-            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
-            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
