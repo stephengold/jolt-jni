@@ -12,7 +12,7 @@ plugins {
 
 ext {
     group = 'com.github.stephengold'
-    version = '0.1.9'
+    version = '0.1.10'
     baseName = "${artifact}-${version}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
@@ -166,7 +166,7 @@ model {
                         + '/com/github/stephengold/$1'
                     project.tasks.register('nativesJar' + q, Jar) {
                         archiveBaseName = project.ext.baseName
-                        archiveClassifier = 'natives-' + q
+                        archiveClassifier = buildType.name + flavor.name
                         dependsOn "joltjni${q}SharedLibrary"
                         description "Creates a JAR of the ${q} native library."
                         from sharedLibraryFile
