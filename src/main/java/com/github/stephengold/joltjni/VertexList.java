@@ -86,6 +86,21 @@ final public class VertexList {
     }
 
     /**
+     * Copy the vertex at the specified index.
+     *
+     * @param listIndex the index from which to get the vertex
+     * @return the vertex
+     */
+    public Float3 get(int listIndex) {
+        float x = buffer.get(numAxes * listIndex);
+        float y = buffer.get(numAxes * listIndex + 1);
+        float z = buffer.get(numAxes * listIndex + 2);
+        Float3 result = new Float3(x, y, z);
+
+        return result;
+    }
+
+    /**
      * Expand or truncate the list, initializing any new vertices to (0,0,0).
      *
      * @param numVertices the desired size (number of vertices)
