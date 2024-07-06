@@ -101,6 +101,19 @@ final public class Float3 {
                         "index must be either 0, 1 or 2");
         }
     }
+
+    /**
+     * Set all 3 components to specified values.
+     *
+     * @param x the desired X component
+     * @param y the desired Y component
+     * @param z the desired Z component
+     */
+    public void set(float x, float y, float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
     // *************************************************************************
     // Object methods
 
