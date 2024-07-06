@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import java.util.Objects;
+
 /**
  * A vector composed of 3 single-precision components, used to represent
  * directions, extents, forces, impulses, offsets, scaling factors, torques, and
@@ -85,6 +87,28 @@ final public class Vec3 implements Vec3Arg {
     // new methods exposed
 
     /**
+     * Return the specified component. The vector is unaffected.
+     *
+     * @param index 0, 1, or 2
+     * @return the X component if index=0, the Y component if index=1, or the Z
+     * component if index=2
+     * @throws IllegalArgumentException if index is not 0, 1, or 2
+     */
+    public float get(int index) {
+        switch (index) {
+            case 0:
+                return x;
+            case 1:
+                return y;
+            case 2:
+                return z;
+            default:
+                throw new IllegalArgumentException(
+                        "index must be either 0, 1 or 2");
+        }
+    }
+
+    /**
      * Set all 3 components to specified values.
      *
      * @param x the desired X component
@@ -94,6 +118,33 @@ final public class Vec3 implements Vec3Arg {
     public void set(float x, float y, float z) {
         this.x = x;
         this.y = y;
+        this.z = z;
+    }
+
+    /**
+     * Alter the first (X) component.
+     *
+     * @param x the desired value
+     */
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    /**
+     * Alter the 2nd (Y) component.
+     *
+     * @param y the desired value
+     */
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    /**
+     * Alter the 3rd (Z) component.
+     *
+     * @param z the desired value
+     */
+    public void setZ(float z) {
         this.z = z;
     }
     // *************************************************************************
@@ -133,6 +184,47 @@ final public class Vec3 implements Vec3Arg {
     }
     // *************************************************************************
     // Object methods
+
+    /**
+     * Return a hash code. If two vectors have identical values, they will have
+     * the same hash code. The current instance is unaffected.
+     *
+     * @return a 32-bit value for use in hashing
+     */
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(x, y, z);
+        return result;
+    }
+
+    /**
+     * Tests for exact equality with the argument, distinguishing -0 from 0. If
+     * {@code other} is null, false is returned. Either way, the current
+     * instance is unaffected.
+     *
+     * @param other the object to compare (may be null, unaffected)
+     * @return true if {@code this} and {@code other} have identical values,
+     * otherwise false
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        } else if (other == null) {
+            return false;
+        } else if (getClass() != other.getClass()) {
+            return false;
+        }
+
+        final Vec3 otherVector = (Vec3) other;
+        if (Float.compare(x, otherVector.getX()) != 0) {
+            return false;
+        } else if (Float.compare(y, otherVector.getY()) != 0) {
+            return false;
+        } else {
+            return Float.compare(z, otherVector.getZ()) == 0;
+        }
+    }
 
     /**
      * Return a string representation of the vector, which is unaffected. For
