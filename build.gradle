@@ -17,13 +17,6 @@ ext {
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
 
-sourceSets.main.java {
-    srcDir 'src/main/java'
-}
-sourceSets.test.java {
-    srcDir 'src/test/java'
-}
-
 // Regenerate all JNI header files and unpack Jolt before compiling any C++ code.
 tasks.withType(CppCompile) {
     dependsOn('classes', 'compileTestJava', 'unpackJoltSource')
