@@ -40,7 +40,6 @@
     <!-- See https://checkstyle.org/checks/header -->
     <module name="Header">
         <property name="headerFile" value="${config_loc}/java-header"/>
-        <property name="ignoreLines" value="2"/>
         <property name="fileExtensions" value="java"/>
     </module>
 
