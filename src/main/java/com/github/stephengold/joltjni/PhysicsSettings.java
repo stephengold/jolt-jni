@@ -166,9 +166,9 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the number of position steps.
+     * Alter the number of solver position iterations per simulation step.
      *
-     * @param numSteps the desired number (default=2)
+     * @param numSteps the desired number (&ge;0, default=2)
      */
     public void setNumPositionSteps(int numSteps) {
         long settingsVa = va();
@@ -178,7 +178,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
     /**
      * Alter the number of velocity steps.
      *
-     * @param numSteps the desired number (default=10)
+     * @param numSteps the desired number (&ge;0, default=10)
      */
     public void setNumVelocitySteps(int numSteps) {
         long settingsVa = va();
