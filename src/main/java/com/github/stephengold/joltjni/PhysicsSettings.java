@@ -72,8 +72,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
     @Override
     public void close() {
         if (ownsNativeObject()) {
-            long virtualAddress = va();
-            free(virtualAddress);
+            long settingsVa = va();
+            free(settingsVa);
         }
 
         unassignNativeObject();
@@ -81,7 +81,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
     // *************************************************************************
     // native private methods
 
-    native private static void free(long virtualAddress);
+    native private static void free(long settingsVa);
 
     native private static void setNumPositionSteps(
             long settingsVa, int numSteps);
