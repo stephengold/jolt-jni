@@ -146,6 +146,17 @@ public class Test002 {
         }
 
         Assert.assertEquals(1_765, physicsSystem.getNumBodies());
+
+        jobSystem.close();
+        tempAllocator.close();
+
+        physicsSystem.close();
+        objVsObjFilter.close();
+        objVsBpFilter.close();
+        mapObj2Bp.close();
+
+        Jolt.unregisterTypes();
+        Jolt.destroyFactory();
     }
     // *************************************************************************
     // private methods
