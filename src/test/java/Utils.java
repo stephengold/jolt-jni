@@ -126,7 +126,7 @@ final public class Utils {
     }
 
     /**
-     * Return the number of threads to use.
+     * Return the recommended number of worker threads to use.
      *
      * @return the count (&ge;1)
      */

@@ -126,9 +126,10 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the angular velocity.
+     * Directly alter the angular velocity.
      *
-     * @param omega the desired velocity (in physics-system coordinates)
+     * @param omega the desired velocity (in physics-system coordinates, not
+     * null, unaffected)
      */
     public void setAngularVelocity(Vec3Arg omega) {
         long propertiesVa = va();
@@ -159,9 +160,10 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the linear velocity.
+     * Directly alter the linear velocity.
      *
-     * @param velocity the desired velocity (in physics-system coordinates)
+     * @param velocity the desired velocity (in physics-system coordinates, not
+     * null, unaffected)
      */
     public void setLinearVelocity(Vec3Arg velocity) {
         long propertiesVa = va();

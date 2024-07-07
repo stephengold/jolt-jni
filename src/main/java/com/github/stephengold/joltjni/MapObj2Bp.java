@@ -48,7 +48,8 @@ public class MapObj2Bp extends JoltPhysicsObject {
      * Add a mapping from the specified object layer to the specified broadphase
      * layer.
      *
-     * @param objLayer the index of the object layer (&lt; numObjectLayers)
+     * @param objLayer the index of the object layer (&ge;0, &lt;
+     * numObjectLayers)
      * @param bpLayer the index of the broadphase layer (&lt; numBpLayers)
      * @return the (modified) current instance (for chaining)
      */

@@ -214,7 +214,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     /**
      * Return the (initial) location. (native field: mPosition)
      *
-     * @return a new location vector (in physics-system coordinates)
+     * @return a new location vector in physics-system coordinates, all
+     * components finite
      */
     public RVec3 getPosition() {
         long bodySettingsVa = va();
@@ -263,7 +264,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     /**
      * Access the shape.
      *
-     * @return the shape, or null if none
+     * @return a new JVM object referencing the pre-existing native object
      */
     public Shape getShape() {
         long bodySettingsVa = va();
@@ -287,7 +288,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
      * Alter the (initial) angular velocity. (native field: mAngularVelocity)
      *
      * @param omega the desired angular velocity (radians per second in
-     * physics-system coordinates, not null, unaffected)
+     * physics-system coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setAngularVelocity(Vec3Arg omega) {
         long bodySettingsVa = va();
@@ -296,9 +297,10 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the friction ratio.
+     * Alter the friction ratio. (native field: mFriction)
      *
-     * @param friction the desired value
+     * @param friction the desired ratio (typically &ge;0 and &le;1,
+     * default=0.2)
      */
     public void setFriction(float friction) {
         long bodySettingsVa = va();
@@ -306,9 +308,9 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the gravity factor.
+     * Alter the gravity multiplier. (native field: mGravityFactor)
      *
-     * @param factor the desired value
+     * @param factor the desired multiplier (default=1)
      */
     public void setGravityFactor(float factor) {
         long bodySettingsVa = va();
@@ -339,9 +341,9 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the motion quality.
+     * Alter the motion quality. (native field: mMotionQuality)
      *
-     * @param motionQuality the desired quality (not null)
+     * @param motionQuality the desired quality (not null, default=Discrete)
      */
     public void setMotionQuality(EMotionQuality motionQuality) {
         long bodySettingsVa = va();
@@ -350,9 +352,9 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the motion type.
+     * Alter the motion type. (native field: mMotionType)
      *
-     * @param motionType the desired type (not null)
+     * @param motionType the desired type (not null, default=Dynamic)
      */
     public void setMotionType(EMotionType motionType) {
         long bodySettingsVa = va();
@@ -361,9 +363,10 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the object layer.
+     * Alter the object layer. (native field: mObjectLayer)
      *
-     * @param objLayer the ID of the desired object layer
+     * @param objLayer the ID of the desired object layer (&ge;0,
+     * &lt;numObjectLayers, default=0)
      */
     public void setObjectLayer(int objLayer) {
         long bodySettingsVa = va();
@@ -371,10 +374,11 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the location.
+     * Alter the (initial) location of the body's origin (which might differ
+     * from its center of mass). (native field: mPosition)
      *
      * @param loc the desired location (in physics-system coordinates, not null,
-     * unaffected)
+     * unaffected, default=(0,0,0))
      */
     public void setPosition(RVec3Arg loc) {
         long bodySettingsVa = va();
@@ -382,9 +386,10 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the restitution ratio.
+     * Alter the restitution ratio. (native field: mRestitution)
      *
-     * @param restitution the desired value
+     * @param restitution the desired ratio (typically &ge;0 and &le;1,
+     * default=0)
      */
     public void setRestitution(float restitution) {
         long bodySettingsVa = va();
@@ -408,7 +413,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the shape.
+     * Replace the shape.
      *
      * @param shape the desired shape (not null)
      */
@@ -419,7 +424,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the shape settings.
+     * Replace the shape settings.
      *
      * @param shapeSettings the desired shape settings (not null)
      */

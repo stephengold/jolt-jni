@@ -40,7 +40,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Activate the specified body.
      *
-     * @param bodyId which body to activate (not null)
+     * @param bodyId the ID of the body to activate (not null)
      */
     public void activateBody(BodyId bodyId) {
         long bodyInterfaceVa = va();

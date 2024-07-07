@@ -68,7 +68,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the angular velocity.
+     * Return the body's angular velocity.
      *
      * @return a new vector in physics-system coordinates
      */
@@ -83,9 +83,11 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the location of the body's center of mass.
+     * Return the location of the body's center of mass (which might differ from
+     * its origin).
      *
-     * @return a new vector in physics-system coordinates
+     * @return a new vector in physics-system coordinates (all components
+     * finite)
      */
     public RVec3 getCenterOfMassPosition() {
         long bodyVa = va();
@@ -107,7 +109,7 @@ public class Body extends NonCopyable {
     /**
      * Return the body's friction ratio.
      *
-     * @return the value
+     * @return the ratio
      */
     public float getFriction() {
         long bodyVa = va();
@@ -129,7 +131,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the linear velocity.
+     * Return the body's linear velocity.
      *
      * @return a new vector in physics-system coordinates
      */
@@ -201,7 +203,7 @@ public class Body extends NonCopyable {
     /**
      * Return the body's restitution ratio.
      *
-     * @return the value
+     * @return the value (typically &ge;0 and &le;1)
      */
     public float getRestitution() {
         long bodyVa = va();
@@ -211,7 +213,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's orientation relative to the physics system axes.
+     * Return the body's orientation relative to the physics-system axes.
      *
      * @return a new quaternion
      */
@@ -251,9 +253,10 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Directly alter the angular velocity.
+     * Directly alter the body's angular velocity.
      *
-     * @param omega the desired angular velocity (not null, unaffected)
+     * @param omega the desired angular velocity (not null, unaffected,
+     * default=(0,0,0))
      */
     public void setAngularVelocity(Vec3Arg omega) {
         long bodyVa = va();
@@ -266,7 +269,8 @@ public class Body extends NonCopyable {
     /**
      * Alter the body's friction ratio.
      *
-     * @param friction the desired value
+     * @param friction the desired ratio (typically &ge;0 and &le;1,
+     * default=0.2)
      */
     public void setFriction(float friction) {
         long bodyVa = va();
@@ -274,9 +278,10 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Directly alter the linear velocity.
+     * Directly alter the body's linear velocity.
      *
-     * @param velocity the desired angular velocity (not null, unaffected)
+     * @param velocity the desired linear velocity (not null, unaffected,
+     * default=(0,0,0))
      */
     public void setLinearVelocity(Vec3Arg velocity) {
         long bodyVa = va();
@@ -289,7 +294,8 @@ public class Body extends NonCopyable {
     /**
      * Alter the body's restitution ratio.
      *
-     * @param restitution the desired value
+     * @param restitution the desired ratio (typically &ge;0 and &le;1,
+     * default=0)
      */
     public void setRestitution(float restitution) {
         long bodyVa = va();
