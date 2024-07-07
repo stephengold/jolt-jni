@@ -249,6 +249,7 @@ jar {
     }
 }
 
+javadoc.dependsOn('compileTestJava')
 java.withJavadocJar()
 javadocJar { archiveBaseName = project.ext.baseName }
 
@@ -258,8 +259,6 @@ tasks.register('sourcesJar', Jar) {
     description 'Creates a JAR of Java sourcecode.'
     from 'src/main/java' // default is ".allSource", which includes resources
 }
-
-javadoc.dependsOn('compileTestJava')
 
 publishing {
     publications {
