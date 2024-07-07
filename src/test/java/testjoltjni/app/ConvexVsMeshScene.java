@@ -19,9 +19,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-
+package testjoltjni.app;
 import com.github.stephengold.joltjni.*;
-
+import testjoltjni.Utils;
 /**
  * A straightforward Java translation of the Jolt Physics "convex vs mesh scene"
  * performance test.

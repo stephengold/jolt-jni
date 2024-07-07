@@ -19,6 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BodyInterface;
@@ -47,6 +48,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VertexList;
 import org.junit.Assert;
 import org.junit.Test;
+import testjoltjni.Utils;
 
 /**
  * An automated test for jolt-jni using JUnit 4: drop 1,764 convex shapes onto a
