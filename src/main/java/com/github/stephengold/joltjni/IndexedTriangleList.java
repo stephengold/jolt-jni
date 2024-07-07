@@ -41,6 +41,30 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
     // new methods exposed
 
     /**
+     * Count how many triangles the currently allocated storage can hold.
+     *
+     * @return the number of triangles (&ge;size)
+     */
+    public int capacity() {
+        long listVa = va();
+        int result = capacity(listVa);
+        return result;
+    }
+
+    /**
+     * Test whether the list contains no triangles.
+     *
+     * @return true if empty, otherwise false
+     */
+    public boolean empty() {
+        if (size() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Return the triangle at the specified index.
      *
      * @param listIndex the index from which to get the triangle
@@ -75,6 +99,17 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
         long triangleVa = triangle.va();
         setTriangle(listVa, listIndex, triangleVa);
     }
+
+    /**
+     * Count how many triangles are in the list.
+     *
+     * @return the number of triangles (&ge;0, &le;capacity)
+     */
+    public int size() {
+        long listVa = va();
+        int result = size(listVa);
+        return result;
+    }
     // *************************************************************************
     // JoltPhysicsObject methods
 
@@ -94,6 +129,8 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
     // *************************************************************************
     // native private methods
 
+    native private static int capacity(long listVa);
+
     native private static long createIndexedTriangleList();
 
     native private static void free(long listVa);
@@ -104,4 +141,6 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
 
     native private static void setTriangle(
             long listVa, int listIndex, long triangleVa);
+
+    native private static int size(long listVa);
 }

@@ -31,6 +31,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_IndexedTriangleList
+ * Method:    capacity
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_capacity
+  (JNIEnv *, jclass, jlong listVa) {
+    const IndexedTriangleList * const pList
+            = reinterpret_cast<IndexedTriangleList *> (listVa);
+    IndexedTriangleList::size_type result = pList->capacity();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_IndexedTriangleList
  * Method:    createIndexedTriangleList
  * Signature: ()J
  */
@@ -90,3 +103,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_s
             = reinterpret_cast<IndexedTriangle *> (triangleVa);
     pList->at(listIndex) = *pTriangle;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_IndexedTriangleList
+ * Method:    size
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_size
+  (JNIEnv *, jclass, jlong listVa) {
+    const IndexedTriangleList * const pList
+            = reinterpret_cast<IndexedTriangleList *> (listVa);
+    IndexedTriangleList::size_type result = pList->size();
+    return result;
+}
+
