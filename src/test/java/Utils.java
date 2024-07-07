@@ -129,7 +129,8 @@ final public class Utils {
      * @return the count (&ge;1)
      */
     public static int numThreads() {
-        int result = Runtime.getRuntime().availableProcessors() - 1;
+        int numCpus = Runtime.getRuntime().availableProcessors();
+        int result = (int) Math.floor(0.9 * numCpus);
         if (result < 1) {
             result = 1;
         }
