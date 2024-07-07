@@ -205,13 +205,13 @@ tasks.withType(JavaCompile) { // Java compile-time options:
 }
 
 application {
-    mainClass = 'HelloWorld'
+    mainClass = 'testjoltjni.app.HelloWorld'
 }
 tasks.register('ConvexVsMeshScene', JavaExec) {
-    mainClass = 'ConvexVsMeshScene'
+    mainClass = 'testjoltjni.app.ConvexVsMeshScene'
 }
 tasks.register('HelloWorld', JavaExec) {
-    mainClass = 'HelloWorld'
+    mainClass = 'testjoltjni.app.HelloWorld'
 }
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
