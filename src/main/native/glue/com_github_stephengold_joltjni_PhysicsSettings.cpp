@@ -43,6 +43,133 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_free
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    getAllowSleeping
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getAllowSleeping
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    bool result = pSettings->mAllowSleeping;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    getBaumgarte
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getBaumgarte
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    float result = pSettings->mBaumgarte;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    getDeterministicSimulation
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getDeterministicSimulation
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    bool result = pSettings->mDeterministicSimulation;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    getNumPositionSteps
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getNumPositionSteps
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    uint result = pSettings->mNumPositionSteps;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    getNumVelocitySteps
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getNumVelocitySteps
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    uint result = pSettings->mNumVelocitySteps;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    getPointVelocitySleepThreshold
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getPointVelocitySleepThreshold
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    float result = pSettings->mPointVelocitySleepThreshold;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    getTimeBeforeSleep
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getTimeBeforeSleep
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    float result = pSettings->mTimeBeforeSleep;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    setAllowSleeping
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setAllowSleeping
+  (JNIEnv *, jclass, jlong settingsVa, jboolean allow) {
+    PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    pSettings->mAllowSleeping = allow;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    setBaumgarte
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setBaumgarte
+  (JNIEnv *, jclass, jlong settingsVa, jfloat fraction) {
+    PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    pSettings->mBaumgarte = fraction;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    setDeterministicSimulation
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setDeterministicSimulation
+  (JNIEnv *, jclass, jlong settingsVa, jboolean setting) {
+    PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    pSettings->mDeterministicSimulation = setting;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
  * Method:    setNumPositionSteps
  * Signature: (JI)V
  */
@@ -63,4 +190,28 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setNu
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
     pSettings->mNumVelocitySteps = numSteps;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    setPointVelocitySleepThreshold
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setPointVelocitySleepThreshold
+  (JNIEnv *, jclass, jlong settingsVa, jfloat speed) {
+    PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    pSettings->mPointVelocitySleepThreshold = speed;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    setTimeBeforeSleep
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setTimeBeforeSleep
+  (JNIEnv *, jclass, jlong settingsVa, jfloat interval) {
+    PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    pSettings->mTimeBeforeSleep = interval;
 }
