@@ -506,8 +506,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
   (JNIEnv *, jclass, jlong bodySettingsVa, jdouble locX, jdouble locY, jdouble locZ) {
     BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
-    RVec3 rvec3(locX, locY, locZ);
-    pSettings->mPosition = rvec3;
+    pSettings->mPosition.Set(locX, locY, locZ);
 }
 
 /*
