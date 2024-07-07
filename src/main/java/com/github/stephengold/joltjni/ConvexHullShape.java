@@ -40,4 +40,45 @@ public class ConvexHullShape extends ConvexShape {
     ConvexHullShape(long virtualAddress) {
         super(virtualAddress);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Count the vertices of the convex hull.
+     *
+     * @return the count (&ge;0)
+     */
+    public int getNumPoints() {
+        long shapeVa = va();
+        int result = getNumPoints(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the location of the specified vertex of the convex hull relative to
+     * its center of mass.
+     *
+     * @param pointIndex the index of the point to locate (&ge;0, &lt;numPoints)
+     * @return a new vector
+     */
+    public Vec3 getPoint(int pointIndex) {
+        long shapeVa = va();
+        float x = getPointX(shapeVa, pointIndex);
+        float y = getPointY(shapeVa, pointIndex);
+        float z = getPointZ(shapeVa, pointIndex);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static int getNumPoints(long shapeVa);
+
+    native private static float getPointX(long shapeVa, int pointIndex);
+
+    native private static float getPointY(long shapeVa, int pointIndex);
+
+    native private static float getPointZ(long shapeVa, int pointIndex);
 }
