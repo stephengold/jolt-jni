@@ -76,7 +76,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * @return a new instance
      */
     @Override
-    public Shape createShape() {
+    public ConvexHullShape createShape() {
         long settingsVa = va();
         long shapeVa = createConvexHullShape(settingsVa);
         assert shapeVa != 0L;
