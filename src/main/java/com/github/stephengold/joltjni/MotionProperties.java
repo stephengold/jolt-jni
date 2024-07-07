@@ -64,6 +64,18 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
+     * Return the gravity factor.
+     *
+     * @return the factor
+     */
+    public float getGravityFactor() {
+        long propertiesVa = va();
+        float result = getGravityFactor(propertiesVa);
+
+        return result;
+    }
+
+    /**
      * Return the linear damping coefficient.
      *
      * @return the coefficient value
@@ -91,6 +103,19 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
+     * Return the motion quality.
+     *
+     * @return an enum value (not null)
+     */
+    public EMotionQuality getMotionQuality() {
+        long propertiesVa = va();
+        int ordinal = getMotionQuality(propertiesVa);
+        EMotionQuality result = EMotionQuality.values()[ordinal];
+
+        return result;
+    }
+
+    /**
      * Alter the angular damping.
      *
      * @param damping the desired coefficient value
@@ -111,6 +136,16 @@ public class MotionProperties extends JoltPhysicsObject {
         float wy = omega.getY();
         float wz = omega.getZ();
         setAngularVelocity(propertiesVa, wx, wy, wz);
+    }
+
+    /**
+     * Alter the gravity factor.
+     *
+     * @param factor the desired factor
+     */
+    public void setGravityFactor(float factor) {
+        long propertiesVa = va();
+        setGravityFactor(propertiesVa, factor);
     }
 
     /**
@@ -146,6 +181,8 @@ public class MotionProperties extends JoltPhysicsObject {
 
     native private static float getAngularVelocityZ(long propertiesVa);
 
+    native private static float getGravityFactor(long propertiesVa);
+
     native private static float getLinearDamping(long propertiesVa);
 
     native private static float getLinearVelocityX(long propertiesVa);
@@ -154,11 +191,16 @@ public class MotionProperties extends JoltPhysicsObject {
 
     native private static float getLinearVelocityZ(long propertiesVa);
 
+    native private static int getMotionQuality(long propertiesVa);
+
     native private static void setAngularDamping(
             long propertiesVa, float damping);
 
     native private static void setAngularVelocity(
             long propertiesVa, float wx, float wy, float wz);
+
+    native private static void setGravityFactor(
+            long propertiesVa, float factor);
 
     native private static void setLinearDamping(
             long propertiesVa, float damping);

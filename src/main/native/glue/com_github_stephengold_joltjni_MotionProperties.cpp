@@ -87,6 +87,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getGravityFactor
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getGravityFactor
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    float result = pProperties->GetGravityFactor();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    getLinearDamping
  * Signature: (J)F
  */
@@ -143,6 +156,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getMotionQuality
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getMotionQuality
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const EMotionQuality result = pProperties->GetMotionQuality();
+    return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    setAngularDamping
  * Signature: (JF)V
  */
@@ -164,6 +190,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setA
             = reinterpret_cast<MotionProperties *> (propertiesVa);
     Vec3 omega(wx, wy, wz);
     pProperties->SetAngularVelocity(omega);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    setGravityFactor
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setGravityFactor
+  (JNIEnv *, jclass, jlong propertiesVa, jfloat factor) {
+    MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    pProperties->SetGravityFactor(factor);
 }
 
 /*
