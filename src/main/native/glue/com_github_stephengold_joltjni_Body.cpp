@@ -277,6 +277,60 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getMotionProper
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getMotionType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Body_getMotionType
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const EMotionType result = pBody->GetMotionType();
+    return (jint) result;
+}
+
+inline static const RVec3 getPosition(jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const RVec3 result = pBody->GetPosition();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getPositionX
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getPositionX
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const RVec3 rvec3 = getPosition(bodyVa);
+    float result = rvec3.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getPositionY
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getPositionY
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const RVec3 rvec3 = getPosition(bodyVa);
+    float result = rvec3.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getPositionZ
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getPositionZ
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const RVec3 rvec3 = getPosition(bodyVa);
+    float result = rvec3.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    getRestitution
  * Signature: (J)F
  */

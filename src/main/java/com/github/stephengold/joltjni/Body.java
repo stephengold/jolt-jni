@@ -162,6 +162,43 @@ public class Body extends NonCopyable {
     }
 
     /**
+     * Return the body's motion type.
+     *
+     * @return an enum value (not null)
+     */
+    public EMotionType getMotionType() {
+        long bodyVa = va();
+        int ordinal = getMotionType(bodyVa);
+        EMotionType result = EMotionType.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the location of the body's origin (which might differ from its
+     * center of mass).
+     *
+     * @return a new vector in physics-system coordinates (all components
+     * finite)
+     */
+    public RVec3 getPosition() {
+        long bodyVa = va();
+
+        double xx = getPositionX(bodyVa);
+        assert Double.isFinite(xx) : "xx = " + xx;
+
+        double yy = getPositionY(bodyVa);
+        assert Double.isFinite(yy) : "yy = " + yy;
+
+        double zz = getPositionZ(bodyVa);
+        assert Double.isFinite(zz) : "zz = " + zz;
+
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
      * Return the body's restitution ratio.
      *
      * @return the value
@@ -296,6 +333,14 @@ public class Body extends NonCopyable {
     native private static float getLinearVelocityZ(long bodyVa);
 
     native private static long getMotionProperties(long bodyVa);
+
+    native private static int getMotionType(long bodyVa);
+
+    native private static double getPositionX(long bodyVa);
+
+    native private static double getPositionY(long bodyVa);
+
+    native private static double getPositionZ(long bodyVa);
 
     native private static float getRestitution(long bodyVa);
 
