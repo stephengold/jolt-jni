@@ -108,16 +108,14 @@ final public class Utils {
      * </ol>
      */
     public static void loadNativeLibrary() {
-        boolean fromDist = false;
         File directory = new File("build/libs/joltjni/shared");
 
-        boolean success = NativeLibraryLoader.loadJoltJni(
-                fromDist, directory, "Debug", "Sp");
+        boolean success
+                = NativeLibraryLoader.loadJoltJni(directory, "Debug", "Sp");
         if (success) {
             Assert.assertFalse(Jolt.isDoublePrecision());
         } else {
-            success = NativeLibraryLoader.loadJoltJni(
-                    fromDist, directory, "Debug", "Dp");
+            success = NativeLibraryLoader.loadJoltJni(directory, "Debug", "Dp");
             if (success) {
                 Assert.assertTrue(Jolt.isDoublePrecision());
             }

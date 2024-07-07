@@ -44,14 +44,13 @@ public final class NativeLibraryLoader {
     /**
      * Load a jolt-jni native library.
      *
-     * @param dist true&rarr;distributed files, false&rarr;as-built files
      * @param directory (not null, readable, unaffected)
      * @param buildType "Debug" or "Release"
      * @param flavor "Sp" or "Dp"
      * @return true after successful load, otherwise false
      */
-    public static boolean loadJoltJni(boolean dist, File directory,
-            String buildType, String flavor) {
+    public static boolean loadJoltJni(
+            File directory, String buildType, String flavor) {
         assert buildType.equals("Debug") || buildType.equals("Release") :
                 buildType;
         assert flavor.equals("Sp") || flavor.equals("Dp") : flavor;
@@ -75,21 +74,14 @@ public final class NativeLibraryLoader {
                 throw new RuntimeException("platform = " + platform);
         }
 
-        File file;
-        if (dist) {
-            name = platform + buildType + flavor + "_" + name;
-            file = directory;
+        String subdirectory = firstToLower(platform.toString());
+        File file = new File(directory, subdirectory);
 
-        } else {
-            String subdirectory = firstToLower(platform.toString());
-            file = new File(directory, subdirectory);
+        String bt = firstToLower(buildType);
+        file = new File(file, bt);
 
-            String bt = firstToLower(buildType);
-            file = new File(file, bt);
-
-            String f = firstToLower(flavor);
-            file = new File(file, f);
-        }
+        String f = firstToLower(flavor);
+        file = new File(file, f);
 
         file = new File(file, name);
         String absoluteFilename = file.getAbsolutePath();
