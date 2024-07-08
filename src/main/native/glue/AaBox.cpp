@@ -34,7 +34,7 @@ using namespace JPH;
  * Method:    createAaBox
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox__
   (JNIEnv *, jclass) {
     AABox * const pBox = new AABox();
     return reinterpret_cast<jlong> (pBox);
