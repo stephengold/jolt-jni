@@ -129,10 +129,14 @@ abstract public class Shape extends NonCopyable {
     /**
      * Instantiate a Shape from its virtual address.
      *
-     * @param shapeVa the virtual address of the native object (not zero)
-     * @return a new instance
+     * @param shapeVa the virtual address of the native object, or zero
+     * @return a new instance, or {@code null} if the argument was zero
      */
     static Shape newShape(long shapeVa) {
+        if (shapeVa == 0L) {
+            return null;
+        }
+
         int ordinal = getSubType(shapeVa);
         EShapeSubType subType = EShapeSubType.values()[ordinal];
         Shape result;
