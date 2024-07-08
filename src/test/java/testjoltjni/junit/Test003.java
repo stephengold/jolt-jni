@@ -21,10 +21,13 @@ SOFTWARE.
  */
 package testjoltjni.junit;
 
+import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemSingleThreaded;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.Vec3Arg;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.Utils;
@@ -52,6 +55,23 @@ public class Test003 {
         Jolt.newFactory();
         Jolt.registerTypes();
 
+        // AaBox:
+        {
+            AaBox box1 = new AaBox();
+            Assert.assertTrue(box1.hasAssignedNativeObject());
+            Assert.assertTrue(box1.ownsNativeObject());
+            Assert.assertNotEquals(0L, box1.va());
+            box1.close();
+
+            Vec3Arg max = new Vec3(1f, 2f, 3f);
+            Vec3Arg min = new Vec3(4f, 5f, 6f);
+            AaBox box2 = new AaBox(min, max);
+            Assert.assertTrue(box2.hasAssignedNativeObject());
+            Assert.assertTrue(box2.ownsNativeObject());
+            Assert.assertNotEquals(0L, box2.va());
+            box2.close();
+        }
+
         // JobSystemSingleThreaded:
         {
             JobSystem jobSystem
@@ -75,6 +95,10 @@ public class Test003 {
             Assert.assertTrue(jobSystem.hasAssignedNativeObject());
             Assert.assertTrue(jobSystem.ownsNativeObject());
             Assert.assertNotEquals(0L, jobSystem.va());
+
+            jobSystem.setNumThreads(3);
+            Assert.assertEquals(4, jobSystem.getMaxConcurrency());
+
             jobSystem.close();
         }
     }
