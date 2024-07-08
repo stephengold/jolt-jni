@@ -102,6 +102,30 @@ public class Test003 {
 
             testClose(jobSystem);
         }
+
+        // TempAllocatorImpl:
+        {
+            int numBytes = 1 << 8;
+            TempAllocator tempAllocator = new TempAllocatorImpl(numBytes);
+
+            Assert.assertTrue(tempAllocator.hasAssignedNativeObject());
+            Assert.assertTrue(tempAllocator.ownsNativeObject());
+            Assert.assertNotEquals(0L, tempAllocator.va());
+
+            testClose(tempAllocator);
+        }
+
+        // TempAllocatorMalloc:
+        {
+            TempAllocator tempAllocator = new TempAllocatorMalloc();
+
+            Assert.assertTrue(tempAllocator.hasAssignedNativeObject());
+            Assert.assertTrue(tempAllocator.ownsNativeObject());
+            Assert.assertNotEquals(0L, tempAllocator.va());
+
+            testClose(tempAllocator);
+        }
+    }
     // *************************************************************************
     // Java private methods
 
