@@ -29,6 +29,7 @@ import com.github.stephengold.joltjni.ConvexHullShapeSettings;
 import com.github.stephengold.joltjni.EActivation;
 import com.github.stephengold.joltjni.EMotionQuality;
 import com.github.stephengold.joltjni.EMotionType;
+import com.github.stephengold.joltjni.EPhysicsUpdateError;
 import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.IndexedTriangle;
 import com.github.stephengold.joltjni.IndexedTriangleList;
@@ -138,11 +139,12 @@ public class Test002 {
                 Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, numThreads);
 
         // Simulate physics for half a second:
-        float deltaTime = 1f / 60;
         for (int stepCounter = 0; stepCounter < 30; ++stepCounter) {
-            int numCollisionSteps = 1;
-            physicsSystem.update(
+            final float deltaTime = 1f / 60;
+            final int numCollisionSteps = 1;
+            int errors = physicsSystem.update(
                     deltaTime, numCollisionSteps, tempAllocator, jobSystem);
+            Assert.assertEquals(EPhysicsUpdateError.None, errors);
         }
         
         jobSystem.close();
