@@ -146,7 +146,7 @@ public class Test002 {
                     deltaTime, numCollisionSteps, tempAllocator, jobSystem);
             Assert.assertEquals(EPhysicsUpdateError.None, errors);
         }
-        
+
         jobSystem.close();
         Assert.assertEquals(1_765, physicsSystem.getNumBodies());
     }
