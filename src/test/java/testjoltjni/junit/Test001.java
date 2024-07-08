@@ -141,9 +141,11 @@ public class Test001 {
         int stepCounter = 0;
         while (bodyInterface.isActive(ballId) && stepCounter < 99) {
             final float deltaTime = 1 / 60f;
-            int errors
-                    = physicsSystem.update(deltaTime, 1, allocator, jobSystem);
+            final int numCollisionSteps = 1;
+            int errors = physicsSystem.update(
+                    deltaTime, numCollisionSteps, allocator, jobSystem);
             Assert.assertEquals(EPhysicsUpdateError.None, errors);
+
             ++stepCounter;
         }
         Assert.assertEquals(48, stepCounter);
