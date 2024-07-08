@@ -19,37 +19,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
 
-/**
- * A system for scheduling units of work for execution.
- *
- * @author Stephen Gold sgold@sonic.net
+/*
+ * Author: Stephen Gold
  */
-abstract public class JobSystem extends NonCopyable {
-    // *************************************************************************
-    // constructors
+#include <Jolt/Jolt.h>
+#include <Jolt/Core/JobSystem.h>
+#include "auto/com_github_stephengold_joltjni_JobSystem.h"
 
-    /**
-     * Instantiate a job system with no native object assigned.
-     */
-    protected JobSystem() {
-    }
-    // *************************************************************************
-    // new methods exposed
+using namespace JPH;
 
-    /**
-     * Return maximum number of jobs that can execute concurrently.
-     *
-     * @return the count (&ge;1)
-     */
-    public int getMaxConcurrency() {
-        long systemVa = va();
-        int result = getMaxConcurrency(systemVa);
-        return result;
-    }
-    // *************************************************************************
-    // native private methods
-
-    native private static int getMaxConcurrency(long systemVa);
+/*
+ * Class:     com_github_stephengold_joltjni_JobSystem
+ * Method:    getMaxConcurrency
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_JobSystem_getMaxConcurrency
+  (JNIEnv *, jclass, jlong systemVa) {
+    const JobSystem * const pSystem = reinterpret_cast<JobSystem *> (systemVa);
+    int result = pSystem->GetMaxConcurrency();
+    return result;
 }
