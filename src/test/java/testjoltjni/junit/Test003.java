@@ -81,7 +81,8 @@ public class Test003 {
             Assert.assertTrue(jobSystem.hasAssignedNativeObject());
             Assert.assertTrue(jobSystem.ownsNativeObject());
             Assert.assertNotEquals(0L, jobSystem.va());
-            jobSystem.close();
+
+            testClose(jobSystem);
         }
 
         // JobSystemThreadPool:
@@ -99,7 +100,19 @@ public class Test003 {
             jobSystem.setNumThreads(3);
             Assert.assertEquals(4, jobSystem.getMaxConcurrency());
 
-            jobSystem.close();
+            testClose(jobSystem);
         }
+    // *************************************************************************
+    // Java private methods
+
+    /**
+     * Test the {@code close()} method of the specified object.
+     *
+     * @param object the object to test (not null)
+     */
+    private static void testClose(JoltPhysicsObject object) {
+        object.close();
+        Assert.assertFalse(object.hasAssignedNativeObject());
+        Assert.assertFalse(object.ownsNativeObject());
     }
 }
