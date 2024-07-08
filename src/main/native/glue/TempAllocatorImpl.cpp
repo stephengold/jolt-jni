@@ -39,15 +39,3 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TempAllocatorImpl_cr
     TempAllocatorImpl *pResult = new TempAllocatorImpl(numBytes);
     return reinterpret_cast<jlong> (pResult);
 }
-
-/*
- * Class:     com_github_stephengold_joltjni_TempAllocatorImpl
- * Method:    destroy
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TempAllocatorImpl_destroy
-  (JNIEnv *, jclass, jlong va) {
-    const TempAllocatorImpl * const pAllocator
-            = reinterpret_cast<TempAllocatorImpl *> (va);
-    delete pAllocator;
-}
