@@ -26,7 +26,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class JobSystemThreadPool extends JobSystem {
+public class JobSystemThreadPool extends JobSystemWithBarrier {
     // *************************************************************************
     // constructors
 
