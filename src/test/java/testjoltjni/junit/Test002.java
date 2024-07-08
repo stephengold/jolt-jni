@@ -146,9 +146,18 @@ public class Test002 {
                     deltaTime, numCollisionSteps, tempAllocator, jobSystem);
             Assert.assertEquals(EPhysicsUpdateError.None, errors);
         }
-
         jobSystem.close();
+        tempAllocator.close();
+
         Assert.assertEquals(1_765, physicsSystem.getNumBodies());
+
+        physicsSystem.close();
+        objVsObjFilter.close();
+        objVsBpFilter.close();
+        mapObj2Bp.close();
+
+        Jolt.unregisterTypes();
+        Jolt.destroyFactory();
     }
     // *************************************************************************
     // private methods
