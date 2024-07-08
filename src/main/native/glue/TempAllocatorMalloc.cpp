@@ -39,3 +39,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TempAllocatorMalloc_
     NonCopyable * const pResult = new TempAllocatorMalloc();
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_TempAllocatorMalloc
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TempAllocatorMalloc_free
+  (JNIEnv *, jclass, jlong allocatorVa) {
+#ifndef WIN32
+    // Attempting to delete a TempAllocatorMalloc on Windows causes deadlock!
+    const NonCopyable * const pAllocator
+            = reinterpret_cast<NonCopyable *> (allocatorVa);
+    delete pAllocator;
+#endif
+}
