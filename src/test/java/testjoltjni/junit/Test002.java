@@ -52,8 +52,7 @@ import org.junit.Test;
 import testjoltjni.Utils;
 
 /**
- * An automated test for jolt-jni using JUnit 4: drop 1,764 convex shapes onto a
- * static mesh shape.
+ * Automated JUnit4 tests for jolt-jni.
  * <p>
  * Derived from PerformanceTest/ConvexVsMeshScene.h by Jorrit Rouwe.
  *

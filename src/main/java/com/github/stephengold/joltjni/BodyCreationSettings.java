@@ -262,9 +262,10 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Access the shape.
+     * Access the {@code Shape}.
      *
-     * @return a new JVM object referencing the pre-existing native object
+     * @return a new JVM object referencing the pre-existing native object, or
+     * {@code null} if the native field is {@code NULL}
      */
     public Shape getShape() {
         long bodySettingsVa = va();

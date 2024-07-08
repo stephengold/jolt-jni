@@ -50,7 +50,7 @@ import org.junit.Test;
 import testjoltjni.Utils;
 
 /**
- * An automated test for jolt-jni using JUnit 4.
+ * Automated JUnit4 tests for jolt-jni.
  *
  * @author Stephen Gold sgold@sonic.net
  */

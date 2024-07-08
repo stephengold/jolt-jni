@@ -37,8 +37,8 @@ import org.junit.Test;
 import testjoltjni.Utils;
 
 /**
- * An automated JUnit4 test for jolt-jni object creation, destruction, and
- * defaults.
+ * Automated JUnit4 tests for jolt-jni object creation, destruction, accessors,
+ * and defaults.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -47,7 +47,7 @@ public class Test003 {
     // new methods exposed
 
     /**
-     * Test jolt-jni object creation, destruction, and defaults.
+     * Test object creation, destruction, accessors, and defaults.
      */
     @Test
     public void test003() {

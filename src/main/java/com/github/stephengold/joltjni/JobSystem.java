@@ -41,7 +41,7 @@ abstract public class JobSystem extends NonCopyable {
     /**
      * Return maximum number of jobs that can execute concurrently.
      *
-     * @return the count (&ge;1)
+     * @return the number (&ge;1)
      */
     public int getMaxConcurrency() {
         long systemVa = va();
