@@ -60,6 +60,19 @@ public class JobSystemThreadPool extends JobSystem {
         setVirtualAddress(systemVa, true);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Alter the number of worker threads. This is one less than the maximum
+     * number of jobs that can execute concurrently.
+     *
+     * @param numThreads the desired number of threads (&ge;0)
+     */
+    public void setNumThreads(int numThreads) {
+        long systemVa = va();
+        setNumThreads(systemVa, numThreads);
+    }
+    // *************************************************************************
     // JobSystem methods
 
     /**
@@ -82,4 +95,6 @@ public class JobSystemThreadPool extends JobSystem {
             int maxJobs, int maxBarriers, int numThreads);
 
     native private static void free(long systemVa);
+
+    native private static void setNumThreads(long systemVa, int numThreads);
 }

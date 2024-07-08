@@ -54,3 +54,15 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JobSystemThreadPool_f
     delete pSystem;
 #endif
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_JobSystemThreadPool
+ * Method:    setNumThreads
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JobSystemThreadPool_setNumThreads
+  (JNIEnv *, jclass, jlong systemVa, jint numThreads) {
+    JobSystemThreadPool * const pSystem
+        = reinterpret_cast<JobSystemThreadPool *> (systemVa);
+    pSystem->SetNumThreads(numThreads);
+}
