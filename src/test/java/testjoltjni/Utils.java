@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni;
 
 import com.github.stephengold.joltjni.Jolt;
-import com.github.stephengold.joltjni.Quat;
-import com.github.stephengold.joltjni.RVec3;
-import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.QuatArg;
+import com.github.stephengold.joltjni.RVec3Arg;
+import com.github.stephengold.joltjni.Vec3Arg;
 import com.jme3.system.NativeLibraryLoader;
 import java.io.File;
 import org.junit.Assert;
@@ -58,7 +58,7 @@ final public class Utils {
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(float x, float y, float z, float w,
-            Quat actual, float tolerance) {
+            QuatArg actual, float tolerance) {
         Assert.assertEquals("x component", x, actual.getX(), tolerance);
         Assert.assertEquals("y component", y, actual.getY(), tolerance);
         Assert.assertEquals("z component", z, actual.getZ(), tolerance);
@@ -76,7 +76,7 @@ final public class Utils {
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(
-            float x, float y, float z, RVec3 actual, float tolerance) {
+            float x, float y, float z, RVec3Arg actual, float tolerance) {
         Assert.assertEquals("x component", x, actual.x(), tolerance);
         Assert.assertEquals("y component", y, actual.y(), tolerance);
         Assert.assertEquals("z component", z, actual.z(), tolerance);
@@ -93,7 +93,7 @@ final public class Utils {
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(
-            float x, float y, float z, Vec3 actual, float tolerance) {
+            float x, float y, float z, Vec3Arg actual, float tolerance) {
         Assert.assertEquals("x component", x, actual.getX(), tolerance);
         Assert.assertEquals("y component", y, actual.getY(), tolerance);
         Assert.assertEquals("z component", z, actual.getZ(), tolerance);
