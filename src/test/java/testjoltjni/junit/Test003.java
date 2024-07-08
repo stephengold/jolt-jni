@@ -54,8 +54,8 @@ public class Test003 {
 
         // JobSystemSingleThreaded:
         {
-            final int maxJobs = 4_096;
-            JobSystem jobSystem = new JobSystemSingleThreaded(maxJobs);
+            JobSystem jobSystem
+                    = new JobSystemSingleThreaded(Jolt.cMaxPhysicsJobs);
 
             Assert.assertEquals(1, jobSystem.getMaxConcurrency());
             Assert.assertTrue(jobSystem.hasAssignedNativeObject());
@@ -66,10 +66,8 @@ public class Test003 {
 
         // JobSystemThreadPool:
         {
-            final int maxJobs = 4_096;
-            final int maxBarriers = 4;
-            JobSystem jobSystem
-                    = new JobSystemThreadPool(maxJobs, maxBarriers);
+            JobSystemThreadPool jobSystem = new JobSystemThreadPool(
+                    Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers);
 
             int numCpus = Runtime.getRuntime().availableProcessors();
             Assert.assertEquals(numCpus, jobSystem.getMaxConcurrency());
