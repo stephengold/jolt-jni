@@ -130,7 +130,7 @@ public class Test001 {
         physicsSystem.optimizeBroadPhase();
 
         final int numBytes = 1 << 18; // 256 KiB
-        TempAllocator allocator = new TempAllocatorImpl(numBytes);
+        TempAllocator tempAllocator = new TempAllocatorImpl(numBytes);
 
         final int maxJobs = 4_096;
         final int maxBarriers = 4;
@@ -143,14 +143,14 @@ public class Test001 {
             final float deltaTime = 1 / 60f;
             final int numCollisionSteps = 1;
             int errors = physicsSystem.update(
-                    deltaTime, numCollisionSteps, allocator, jobSystem);
+                    deltaTime, numCollisionSteps, tempAllocator, jobSystem);
             Assert.assertEquals(EPhysicsUpdateError.None, errors);
 
             ++stepCounter;
         }
         Assert.assertEquals(48, stepCounter);
         jobSystem.close();
-        allocator.close();
+        tempAllocator.close();
 
         ballLocation = bodyInterface.getCenterOfMassPosition(ballId);
         Utils.assertEquals(0f, 0.48f, 0f, ballLocation, 1e-5f);
