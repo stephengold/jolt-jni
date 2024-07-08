@@ -155,8 +155,6 @@ public class Test001 {
         ballVelocity = bodyInterface.getLinearVelocity(ballId);
         Utils.assertEquals(0f, 0f, 0f, ballVelocity, 1e-5f);
 
-        jobSystem.close();
-
         bodyInterface.removeBody(ballId);
         bodyInterface.destroyBody(ballId);
 
