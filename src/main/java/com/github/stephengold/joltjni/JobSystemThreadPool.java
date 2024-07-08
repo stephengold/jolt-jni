@@ -60,8 +60,26 @@ public class JobSystemThreadPool extends JobSystem {
         setVirtualAddress(systemVa, true);
     }
     // *************************************************************************
+    // JobSystem methods
+
+    /**
+     * Unassign the assigned native object, assuming there is one. Free the
+     * native object if the current system owns it.
+     */
+    @Override
+    public void close() {
+        if (ownsNativeObject()) {
+            long systemVa = va();
+            free(systemVa);
+        }
+
+        unassignNativeObject();
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createJobSystem(
             int maxJobs, int maxBarriers, int numThreads);
+
+    native private static void free(long systemVa);
 }

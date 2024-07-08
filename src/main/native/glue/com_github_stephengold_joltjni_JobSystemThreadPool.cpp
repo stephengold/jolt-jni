@@ -40,3 +40,17 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_JobSystemThreadPool_
             = new JobSystemThreadPool(maxJobs, maxBarriers, numThreads);
     return reinterpret_cast<jlong> (pPool);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_JobSystemThreadPool
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JobSystemThreadPool_free
+  (JNIEnv *, jclass, jlong systemVa) {
+#ifndef WIN32
+    // Attempting to delete a JobSystemThreadPool on Windows causes deadlock!
+    const JobSystem * const pSystem = reinterpret_cast<JobSystem *> (systemVa);
+    delete pSystem;
+#endif
+}
