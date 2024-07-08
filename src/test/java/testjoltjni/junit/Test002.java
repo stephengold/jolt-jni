@@ -144,7 +144,8 @@ public class Test002 {
             physicsSystem.update(
                     deltaTime, numCollisionSteps, tempAllocator, jobSystem);
         }
-
+        
+        jobSystem.close();
         Assert.assertEquals(1_765, physicsSystem.getNumBodies());
     }
     // *************************************************************************

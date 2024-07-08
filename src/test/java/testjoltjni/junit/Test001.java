@@ -146,8 +146,9 @@ public class Test001 {
             Assert.assertEquals(EPhysicsUpdateError.None, errors);
             ++stepCounter;
         }
-
         Assert.assertEquals(48, stepCounter);
+        jobSystem.close();
+        allocator.close();
 
         ballLocation = bodyInterface.getCenterOfMassPosition(ballId);
         Utils.assertEquals(0f, 0.48f, 0f, ballLocation, 1e-5f);
@@ -166,7 +167,6 @@ public class Test001 {
         objVsObjFilter.close();
         objVsBpFilter.close();
         mapObj2Bp.close();
-        allocator.close();
 
         Jolt.unregisterTypes();
         Jolt.destroyFactory();
