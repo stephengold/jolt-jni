@@ -28,7 +28,9 @@ SOFTWARE.
 #include <Jolt/Physics/Collision/Shape/Shape.h>
 #include <Jolt/Physics/Collision/Shape/SubShapeID.h>
 #include <Jolt/Physics/Collision/TransformedShape.h>
+
 #include "auto/com_github_stephengold_joltjni_Shape.h"
+#include <algorithm>
 
 using namespace JPH;
 
@@ -51,8 +53,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_copyDebugTriang
         pSh->GetTrianglesStart(context, AABox::sBiggest(),
             Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f));
         while (numTriangles > 0) {
+            int maxRequest = std::max(
+                    numTriangles, Shape::cGetTrianglesMinTrianglesRequested);
             uint numTrianglesCopied
-                    = pSh->GetTrianglesNext(context, numTriangles, pFloat3);
+                    = pSh->GetTrianglesNext(context, maxRequest, pFloat3);
             JPH_ASSERT(numTrianglesCopied <= numTriangles);
             if (numTrianglesCopied == 0) {
                 break;
