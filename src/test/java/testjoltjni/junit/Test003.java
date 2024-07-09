@@ -73,19 +73,24 @@ public class Test003 {
 
         // AaBox:
         {
-            AaBox box1 = new AaBox();
-            Assert.assertTrue(box1.hasAssignedNativeObject());
-            Assert.assertTrue(box1.ownsNativeObject());
-            Assert.assertNotEquals(0L, box1.va());
-            box1.close();
+            AaBox box = new AaBox();
 
+            Assert.assertTrue(box.hasAssignedNativeObject());
+            Assert.assertTrue(box.ownsNativeObject());
+            Assert.assertNotEquals(0L, box.va());
+
+            testClose(box);
+        }
+        {
             Vec3Arg max = new Vec3(1f, 2f, 3f);
             Vec3Arg min = new Vec3(4f, 5f, 6f);
-            AaBox box2 = new AaBox(min, max);
-            Assert.assertTrue(box2.hasAssignedNativeObject());
-            Assert.assertTrue(box2.ownsNativeObject());
-            Assert.assertNotEquals(0L, box2.va());
-            box2.close();
+            AaBox box = new AaBox(min, max);
+
+            Assert.assertTrue(box.hasAssignedNativeObject());
+            Assert.assertTrue(box.ownsNativeObject());
+            Assert.assertNotEquals(0L, box.va());
+
+            testClose(box);
         }
 
         // BodyCreationSettings:
