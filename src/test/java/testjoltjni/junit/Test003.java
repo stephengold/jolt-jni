@@ -32,7 +32,6 @@ import com.github.stephengold.joltjni.JobSystemSingleThreaded;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
 import com.github.stephengold.joltjni.JobSystemWithBarrier;
 import com.github.stephengold.joltjni.Jolt;
-import com.github.stephengold.joltjni.JoltPhysicsObject;
 import com.github.stephengold.joltjni.NonCopyable;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
@@ -79,7 +78,7 @@ public class Test003 {
             Assert.assertTrue(box.ownsNativeObject());
             Assert.assertNotEquals(0L, box.va());
 
-            testClose(box);
+            Utils.testClose(box);
         }
         {
             Vec3Arg max = new Vec3(1f, 2f, 3f);
@@ -90,7 +89,7 @@ public class Test003 {
             Assert.assertTrue(box.ownsNativeObject());
             Assert.assertNotEquals(0L, box.va());
 
-            testClose(box);
+            Utils.testClose(box);
         }
 
         // BodyCreationSettings:
@@ -101,7 +100,7 @@ public class Test003 {
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            testClose(bcs);
+            Utils.testClose(bcs);
         }
         {
             ShapeSettings ss = new BoxShapeSettings(new Vec3(1f, 1f, 1f));
@@ -114,7 +113,7 @@ public class Test003 {
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            testClose(bcs);
+            Utils.testClose(bcs);
         }
         {
             Shape shape = new SphereShape(1f);
@@ -126,7 +125,7 @@ public class Test003 {
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            testClose(bcs);
+            Utils.testClose(bcs);
         }
 
         // JobSystemSingleThreaded:
@@ -140,7 +139,7 @@ public class Test003 {
             Assert.assertTrue(jobSystem.ownsNativeObject());
             Assert.assertNotEquals(0L, jobSystem.va());
 
-            testClose(jobSystem);
+            Utils.testClose(jobSystem);
         }
 
         // JobSystemThreadPool:
@@ -161,7 +160,7 @@ public class Test003 {
             jobSystem.setNumThreads(3);
             Assert.assertEquals(4, jobSystem.getMaxConcurrency());
 
-            testClose(jobSystem);
+            Utils.testClose(jobSystem);
         }
 
         // TempAllocatorImpl:
@@ -173,7 +172,7 @@ public class Test003 {
             Assert.assertTrue(tempAllocator.ownsNativeObject());
             Assert.assertNotEquals(0L, tempAllocator.va());
 
-            testClose(tempAllocator);
+            Utils.testClose(tempAllocator);
         }
 
         // TempAllocatorMalloc:
@@ -184,7 +183,7 @@ public class Test003 {
             Assert.assertTrue(tempAllocator.ownsNativeObject());
             Assert.assertNotEquals(0L, tempAllocator.va());
 
-            testClose(tempAllocator);
+            Utils.testClose(tempAllocator);
         }
     }
     // *************************************************************************
@@ -255,16 +254,5 @@ public class Test003 {
 
         bcs.setRotation(new Quat(0.6f, 0f, 0f, 0.8f));
         Utils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
-    }
-
-    /**
-     * Test the {@code close()} method of the specified object.
-     *
-     * @param object the object to test (not null)
-     */
-    private static void testClose(JoltPhysicsObject object) {
-        object.close();
-        Assert.assertFalse(object.hasAssignedNativeObject());
-        Assert.assertFalse(object.ownsNativeObject());
     }
 }
