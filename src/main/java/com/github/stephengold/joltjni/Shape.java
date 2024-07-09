@@ -153,6 +153,9 @@ abstract public class Shape extends NonCopyable {
             case Cylinder:
                 result = new CylinderShape(shapeVa);
                 break;
+            case HeightField:
+                result = new HeightFieldShape(shapeVa);
+                break;
             case Mesh:
                 result = new MeshShape(shapeVa);
                 break;
