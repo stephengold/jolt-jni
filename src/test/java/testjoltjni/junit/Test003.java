@@ -22,11 +22,23 @@ SOFTWARE.
 package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.AaBox;
+import com.github.stephengold.joltjni.BodyCreationSettings;
+import com.github.stephengold.joltjni.BoxShape;
+import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.EMotionQuality;
+import com.github.stephengold.joltjni.EMotionType;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemSingleThreaded;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
+import com.github.stephengold.joltjni.JobSystemWithBarrier;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JoltPhysicsObject;
+import com.github.stephengold.joltjni.NonCopyable;
+import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.Shape;
+import com.github.stephengold.joltjni.ShapeSettings;
+import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorImpl;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
@@ -76,6 +88,42 @@ public class Test003 {
             box2.close();
         }
 
+        // BodyCreationSettings:
+        {
+            BodyCreationSettings bcs = new BodyCreationSettings();
+
+            Assert.assertNull(bcs.getShape());
+            testBcsDefaults(bcs);
+            testBcsSetters(bcs);
+
+            testClose(bcs);
+        }
+        {
+            ShapeSettings ss = new BoxShapeSettings(new Vec3(1f, 1f, 1f));
+            int objectLayer = 0;
+            BodyCreationSettings bcs = new BodyCreationSettings(ss,
+                    new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
+
+            Assert.assertNotNull(bcs.getShape());
+            Assert.assertTrue(bcs.getShape() instanceof BoxShape);
+            testBcsDefaults(bcs);
+            testBcsSetters(bcs);
+
+            testClose(bcs);
+        }
+        {
+            Shape shape = new SphereShape(1f);
+            int objectLayer = 0;
+            BodyCreationSettings bcs = new BodyCreationSettings(shape,
+                    new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
+
+            Assert.assertEquals(shape, bcs.getShape());
+            testBcsDefaults(bcs);
+            testBcsSetters(bcs);
+
+            testClose(bcs);
+        }
+
         // JobSystemSingleThreaded:
         {
             JobSystem jobSystem
@@ -83,6 +131,7 @@ public class Test003 {
 
             Assert.assertEquals(1, jobSystem.getMaxConcurrency());
             Assert.assertTrue(jobSystem.hasAssignedNativeObject());
+            Assert.assertTrue(jobSystem instanceof NonCopyable);
             Assert.assertTrue(jobSystem.ownsNativeObject());
             Assert.assertNotEquals(0L, jobSystem.va());
 
@@ -98,6 +147,9 @@ public class Test003 {
             Assert.assertEquals(numCpus, jobSystem.getMaxConcurrency());
 
             Assert.assertTrue(jobSystem.hasAssignedNativeObject());
+            Assert.assertTrue(jobSystem instanceof JobSystem);
+            Assert.assertTrue(jobSystem instanceof JobSystemWithBarrier);
+            Assert.assertTrue(jobSystem instanceof NonCopyable);
             Assert.assertTrue(jobSystem.ownsNativeObject());
             Assert.assertNotEquals(0L, jobSystem.va());
 
@@ -132,6 +184,73 @@ public class Test003 {
     }
     // *************************************************************************
     // Java private methods
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code BodyCreationSettings}.
+     *
+     * @param bcs the settings to test (not null, unaffected)
+     */
+    private static void testBcsDefaults(BodyCreationSettings bcs) {
+        Assert.assertTrue(bcs.hasAssignedNativeObject());
+        Assert.assertTrue(bcs.ownsNativeObject());
+
+        Assert.assertEquals(0.05f, bcs.getAngularDamping(), 0f);
+        Utils.assertEquals(0f, 0f, 0f, bcs.getAngularVelocity(), 0f);
+        Assert.assertEquals(0.2f, bcs.getFriction(), 0f);
+        Assert.assertEquals(1f, bcs.getGravityFactor(), 0f);
+        Assert.assertEquals(0.05f, bcs.getLinearDamping(), 0f);
+        Utils.assertEquals(0f, 0f, 0f, bcs.getLinearVelocity(), 0f);
+        Assert.assertEquals(EMotionQuality.Discrete, bcs.getMotionQuality());
+        Assert.assertEquals(EMotionType.Dynamic, bcs.getMotionType());
+        Assert.assertEquals(0, bcs.getObjectLayer());
+        Utils.assertEquals(0f, 0f, 0f, bcs.getPosition(), 0f);
+        Assert.assertEquals(0f, bcs.getRestitution(), 0f);
+        Utils.assertEquals(0f, 0f, 0f, 1f, bcs.getRotation(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code BodyCreationSettings}.
+     *
+     * @param bcs the settings to test (not null, modified)
+     */
+    private static void testBcsSetters(BodyCreationSettings bcs) {
+        bcs.setAngularDamping(0.01f);
+        Assert.assertEquals(0.01f, bcs.getAngularDamping(), 0f);
+
+        bcs.setAngularVelocity(new Vec3(0.02f, 0.03f, 0.04f));
+        Utils.assertEquals(0.02f, 0.03f, 0.04f, bcs.getAngularVelocity(), 0f);
+
+        bcs.setFriction(0.05f);
+        Assert.assertEquals(0.05f, bcs.getFriction(), 0f);
+
+        bcs.setGravityFactor(0.06f);
+        Assert.assertEquals(0.06f, bcs.getGravityFactor(), 0f);
+
+        bcs.setLinearDamping(0.07f);
+        Assert.assertEquals(0.07f, bcs.getLinearDamping(), 0f);
+
+        bcs.setLinearVelocity(new Vec3(0.08f, 0.09f, 0.1f));
+        Utils.assertEquals(0.08f, 0.09f, 0.1f, bcs.getLinearVelocity(), 0f);
+
+        bcs.setMotionQuality(EMotionQuality.LinearCast);
+        Assert.assertEquals(EMotionQuality.LinearCast, bcs.getMotionQuality());
+
+        bcs.setMotionType(EMotionType.Kinematic);
+        Assert.assertEquals(EMotionType.Kinematic, bcs.getMotionType());
+
+        bcs.setObjectLayer(11);
+        Assert.assertEquals(11, bcs.getObjectLayer());
+
+        bcs.setPosition(new RVec3(0.12, 0.13, 0.14));
+        Utils.assertEquals(0.12f, 0.13f, 0.14f, bcs.getPosition(), 0f);
+
+        bcs.setRestitution(0.15f);
+        Assert.assertEquals(0.15f, bcs.getRestitution(), 0f);
+
+        bcs.setRotation(new Quat(0.6f, 0f, 0f, 0.8f));
+        Utils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
+    }
 
     /**
      * Test the {@code close()} method of the specified object.
