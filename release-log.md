@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.2.0 released on TBD
+## Version 0.2.0 released on 9 July 2024
 
 For development only. Not for production use.
 
