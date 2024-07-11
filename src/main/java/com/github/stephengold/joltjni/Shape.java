@@ -28,7 +28,7 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class Shape extends NonCopyable {
+abstract public class Shape extends NonCopyable implements ConstShape {
     // *************************************************************************
     // constructors
 
@@ -49,82 +49,6 @@ abstract public class Shape extends NonCopyable {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Copy the vertex coordinates of the shape's debug mesh to the specified
-     * buffer.
-     *
-     * @param storeBuffer the buffer to fill with vertex coordinates (not null,
-     * modified)
-     */
-    public void copyDebugTriangles(FloatBuffer storeBuffer) {
-        long shapeVa = va();
-        int numTriangles = storeBuffer.capacity() / 9;
-        copyDebugTriangles(shapeVa, numTriangles, storeBuffer);
-    }
-
-    /**
-     * Return the number of triangles in the shape's debug mesh.
-     *
-     * @return the count (&gt;0)
-     */
-    public int countDebugTriangles() {
-        long shapeVa = va();
-        int result = countDebugTriangles(shapeVa);
-
-        assert result > 0 : "result = " + result;
-        return result;
-    }
-
-    /**
-     * Return the shape's mass properties.
-     *
-     * @return a new instance
-     */
-    public MassProperties getMassProperties() {
-        long shapeVa = va();
-        long propertiesVa = getMassProperties(shapeVa);
-        MassProperties result = new MassProperties(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Return the shape's subtype.
-     *
-     * @return an enum value
-     */
-    public EShapeSubType getSubType() {
-        long shapeVa = va();
-        int ordinal = getSubType(shapeVa);
-        EShapeSubType result = EShapeSubType.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the shape's type.
-     *
-     * @return an enum value
-     */
-    public EShapeType getType() {
-        long shapeVa = va();
-        int ordinal = getType(shapeVa);
-        EShapeType result = EShapeType.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Test whether the shape can be used in a dynamic/kinematic body.
-     *
-     * @return true if it can be only be static, otherwise false
-     */
-    public boolean mustBeStatic() {
-        long shapeVa = va();
-        boolean result = mustBeStatic(shapeVa);
-        return result;
-    }
 
     /**
      * Instantiate a Shape from its virtual address.
@@ -165,6 +89,90 @@ abstract public class Shape extends NonCopyable {
             default:
                 throw new IllegalArgumentException("type = " + subType);
         }
+        return result;
+    }
+    // *************************************************************************
+    // ConstShape methods
+
+    /**
+     * Copy the vertex coordinates of the shape's debug mesh to the specified
+     * buffer.
+     *
+     * @param storeBuffer the buffer to fill with vertex coordinates (not null,
+     * modified)
+     */
+    @Override
+    public void copyDebugTriangles(FloatBuffer storeBuffer) {
+        long shapeVa = va();
+        int numTriangles = storeBuffer.capacity() / 9;
+        copyDebugTriangles(shapeVa, numTriangles, storeBuffer);
+    }
+
+    /**
+     * Return the number of triangles in the shape's debug mesh.
+     *
+     * @return the count (&gt;0)
+     */
+    @Override
+    public int countDebugTriangles() {
+        long shapeVa = va();
+        int result = countDebugTriangles(shapeVa);
+
+        assert result > 0 : "result = " + result;
+        return result;
+    }
+
+    /**
+     * Copy the shape's mass properties.
+     *
+     * @return a new instance
+     */
+    @Override
+    public MassProperties getMassProperties() {
+        long shapeVa = va();
+        long propertiesVa = getMassProperties(shapeVa);
+        MassProperties result = new MassProperties(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Return the shape's subtype.
+     *
+     * @return an enum value
+     */
+    @Override
+    public EShapeSubType getSubType() {
+        long shapeVa = va();
+        int ordinal = getSubType(shapeVa);
+        EShapeSubType result = EShapeSubType.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the shape's type.
+     *
+     * @return an enum value
+     */
+    @Override
+    public EShapeType getType() {
+        long shapeVa = va();
+        int ordinal = getType(shapeVa);
+        EShapeType result = EShapeType.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Test whether the shape can be used in a dynamic/kinematic body.
+     *
+     * @return true if it can be only be static, otherwise false
+     */
+    @Override
+    public boolean mustBeStatic() {
+        long shapeVa = va();
+        boolean result = mustBeStatic(shapeVa);
         return result;
     }
     // *************************************************************************
