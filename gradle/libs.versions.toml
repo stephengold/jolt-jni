@@ -12,4 +12,5 @@ junit4 = "junit:junit:4.13.2"
 
 [plugins]
 
+analyze = { id = "ca.cutterslade.analyze", version = "1.9.2" }
 download = { id = "de.undercouch.download", version = "5.6.0" }
