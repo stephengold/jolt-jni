@@ -93,7 +93,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the (initial) angular velocity. (native field: mAngularVelocity)
+     * Copy the (initial) angular velocity. The current instance is unaffected.
+     * (native field: mAngularVelocity)
      *
      * @return a new velocity vector (radians per second in physics-system
      * coordinates)
@@ -109,7 +110,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the friction ratio. (native field: mFriction)
+     * Return the friction ratio. The current instance is unaffected. (native
+     * field: mFriction)
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -121,7 +123,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the gravity factor.
+     * Return the gravity factor. The current instance is unaffected. (native
+     * field: mGravityFactor)
      *
      * @return the factor
      */
@@ -133,7 +136,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the linear damping constant. (native field: mLinearDamping)
+     * Return the linear damping constant. The current instance is unaffected.
+     * (native field: mLinearDamping)
      *
      * @return the constant (in units of 1/second, &ge;0, &le;1)
      */
@@ -145,7 +149,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the (initial) linear velocity. (native field: mLinearVelocity)
+     * Copy the (initial) linear velocity. The current instance is unaffected.
+     * (native field: mLinearVelocity)
      *
      * @return a new velocity vector (meters per second in physics-system
      * coordinates)
@@ -187,7 +192,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the motion type. (native field: mMotionType)
+     * Return the motion type. The current instance is unaffected. (native
+     * field: mMotionType)
      *
      * @return an enum value (not null)
      */
@@ -200,9 +206,10 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the index of the object layer. (native field: mObjectLayer)
+     * Return the index of the object layer. The current instance is unaffected.
+     * (native field: mObjectLayer)
      *
-     * @return the index (&ge;0, &lt;numObjectLayers)
+     * @return the layer index (&ge;0, &lt;numObjectLayers)
      */
     public int getObjectLayer() {
         long bodySettingsVa = va();
@@ -212,7 +219,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the (initial) location. (native field: mPosition)
+     * Return the (initial) location. The current instance is unaffected.
+     * (native field: mPosition)
      *
      * @return a new location vector in physics-system coordinates, all
      * components finite
@@ -234,7 +242,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the restitution ratio. (native field: mRestitution)
+     * Return the restitution ratio. The current instance is unaffected. (native
+     * field: mRestitution)
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -245,8 +254,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the (initial) orientation of the body's axes. (native field:
-     * mRotation)
+     * Copy the (initial) orientation of the body's axes. The current instance
+     * is unaffected. (native field: mRotation)
      *
      * @return a new rotation quaternion (relative to the physics-system axes)
      */

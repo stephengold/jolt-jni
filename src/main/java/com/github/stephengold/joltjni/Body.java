@@ -31,6 +31,12 @@ public class Body extends NonCopyable {
     // *************************************************************************
     // constructors
 
+    /**
+     * Instantiate a body with the specified native object assigned.
+     *
+     * @param bodyVa the virtual address of the native object to assign (not
+     * zero)
+     */
     Body(long bodyVa) {
         super(bodyVa);
     }
@@ -84,7 +90,7 @@ public class Body extends NonCopyable {
 
     /**
      * Return the location of the body's center of mass (which might differ from
-     * its origin).
+     * its origin). The current instance is unaffected.
      *
      * @return a new vector in physics-system coordinates (all components
      * finite)
@@ -107,7 +113,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's friction ratio.
+     * Return the body's friction ratio. The current instance is unaffected.
      *
      * @return the ratio
      */
@@ -118,7 +124,8 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Acquire the body's ID for use with {@code BodyInterface}.
+     * Acquire the body's ID for use with {@code BodyInterface}. The current
+     * instance is unaffected.
      *
      * @return the value
      */
@@ -131,7 +138,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's linear velocity.
+     * Return the body's linear velocity. The current instance is unaffected.
      *
      * @return a new vector in physics-system coordinates
      */
@@ -164,7 +171,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's motion type.
+     * Return the body's motion type. The current instance is unaffected.
      *
      * @return an enum value (not null)
      */
@@ -178,7 +185,7 @@ public class Body extends NonCopyable {
 
     /**
      * Return the location of the body's origin (which might differ from its
-     * center of mass).
+     * center of mass). The current instance is unaffected.
      *
      * @return a new vector in physics-system coordinates (all components
      * finite)
@@ -201,7 +208,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's restitution ratio.
+     * Return the body's restitution ratio. The current instance is unaffected.
      *
      * @return the value (typically &ge;0 and &le;1)
      */
@@ -213,7 +220,8 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's orientation relative to the physics-system axes.
+     * Return the body's orientation relative to the physics-system axes. The
+     * current instance is unaffected.
      *
      * @return a new quaternion
      */
@@ -280,8 +288,8 @@ public class Body extends NonCopyable {
     /**
      * Directly alter the body's linear velocity.
      *
-     * @param velocity the desired linear velocity (not null, unaffected,
-     * default=(0,0,0))
+     * @param velocity the desired linear velocity (in meters/second, not null,
+     * unaffected, default=(0,0,0))
      */
     public void setLinearVelocity(Vec3Arg velocity) {
         long bodyVa = va();
