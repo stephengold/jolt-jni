@@ -39,4 +39,50 @@ public class BodyId extends JoltPhysicsObject {
     BodyId(long virtualAddress) {
         super(virtualAddress);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the body's index in the body array.
+     *
+     * @return the index (&ge;0)
+     */
+    public int getIndex() {
+        long idVa = va();
+        int result = getIndex(idVa);
+
+        return result;
+    }
+
+    /**
+     * Return the body's sequence number.
+     *
+     * @return the sequence number (&ge;0)
+     */
+    public int getSequenceNumber() {
+        long idVa = va();
+        int result = getSequenceNumber(idVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the ID is invalid.
+     *
+     * @return true if invalid, false if valid
+     */
+    public boolean isInvalid() {
+        long idVa = va();
+        boolean result = isInvalid(idVa);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static int getIndex(long idVa);
+
+    native private static int getSequenceNumber(long idVa);
+
+    native private static boolean isInvalid(long idVa);
 }
