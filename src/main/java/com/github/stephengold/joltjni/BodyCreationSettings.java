@@ -81,7 +81,21 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the angular damping constant. (native field: mAngularDamping)
+     * Test whether the created body will be allowed to fall asleep. The current
+     * instance is unaffected. (native field: mAllowSleeping)
+     *
+     * @return true if allowed, otherwise false
+     */
+    public boolean getAllowSleeping() {
+        long bodySettingsVa = va();
+        boolean result = getAllowSleeping(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the angular damping constant. The current instance is unaffected.
+     * (native field: mAngularDamping)
      *
      * @return the constant (in units of 1/second, &ge;0, &le;1)
      */
@@ -179,7 +193,34 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the motion quality. (native field: mMotionQuality)
+     * Return the maximum angular speed. The current instance is unaffected.
+     * (native field: mMaxAngularVelocity)
+     *
+     * @return the maximum speed (in radians/second)
+     */
+    public float getMaxAngularVelocity() {
+        long bodySettingsVa = va();
+        float result = getMaxAngularVelocity(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum linear speed. The current instance is unaffected.
+     * (native field: mMaxLinearVelocity)
+     *
+     * @return the maximum speed (in meters/second)
+     */
+    public float getMaxLinearVelocity() {
+        long bodySettingsVa = va();
+        float result = getMaxLinearVelocity(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the motion quality. The current instance is unaffected. (native
+     * field: mMotionQuality)
      *
      * @return an enum value (not null)
      */
@@ -284,6 +325,28 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Test whether the body's mass properties will be calculated.
+     *
+     * @return true if calculated, otherwise false
+     */
+    public boolean hasMassProperties() {
+        long bodySettingsVa = va();
+        boolean result = hasMassProperties(bodySettingsVa);
+        return result;
+    }
+
+    /**
+     * Alter whether the created body will be allowed to fall asleep. (native
+     * field: mAllowSleeping)
+     *
+     * @param allow true to allow, false to inhibit (default=true)
+     */
+    public void setAllowSleeping(boolean allow) {
+        long bodySettingsVa = va();
+        setAllowSleeping(bodySettingsVa, allow);
+    }
+
+    /**
      * Alter the angular damping constant. (native field: mAngularDamping)
      *
      * @param damping the desired value (in units of 1/second, &ge;0, &le;1,
@@ -348,6 +411,28 @@ public class BodyCreationSettings extends JoltPhysicsObject {
         long bodySettingsVa = va();
         setLinearVelocity(bodySettingsVa,
                 velocity.getX(), velocity.getY(), velocity.getZ());
+    }
+
+    /**
+     * Alter the maximum angular speed. (native field: mMaxAngularVelocity)
+     *
+     * @param maxSpeed the desired maximum speed (in radians/second, &ge;0,
+     * default=15*pi)
+     */
+    public void setMaxAngularVelocity(float maxSpeed) {
+        long bodySettingsVa = va();
+        setMaxAngularVelocity(bodySettingsVa, maxSpeed);
+    }
+
+    /**
+     * Alter the maximum linear speed. (native field: mMaxLinearVelocity)
+     *
+     * @param maxSpeed the desired maximum speed (in meters/second, &ge;0,
+     * default=500)
+     */
+    public void setMaxLinearVelocity(float maxSpeed) {
+        long bodySettingsVa = va();
+        setMaxLinearVelocity(bodySettingsVa, maxSpeed);
     }
 
     /**
@@ -476,6 +561,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
 
     native private static void free(long bodySettingsVa);
 
+    native private static boolean getAllowSleeping(long bodySettingsVa);
+
     native private static float getAngularDamping(long bodySettingsVa);
 
     native private static float getAngularVelocityX(long bodySettingsVa);
@@ -497,6 +584,10 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     native private static float getLinearVelocityZ(long bodySettingsVa);
 
     native private static long getMassProperties(long bodySettingsVa);
+
+    native private static float getMaxAngularVelocity(long bodySettingsVa);
+
+    native private static float getMaxLinearVelocity(long bodySettingsVa);
 
     native private static int getMotionQuality(long bodySettingsVa);
 
@@ -522,6 +613,11 @@ public class BodyCreationSettings extends JoltPhysicsObject {
 
     native private static long getShape(long bodySettingsVa);
 
+    native private static boolean hasMassProperties(long bodySettingsVa);
+
+    native private static void setAllowSleeping(
+            long bodySettingsVa, boolean allow);
+
     native private static void setAngularDamping(
             long bodySettingsVa, float damping);
 
@@ -538,6 +634,12 @@ public class BodyCreationSettings extends JoltPhysicsObject {
 
     native private static void setLinearVelocity(long bodySettingsVa,
             float vx, float vy, float vz);
+
+    native private static void setMaxAngularVelocity(
+            long bodySettingsVa, float maxSpeed);
+
+    native private static void setMaxLinearVelocity(
+            long bodySettingsVa, float maxSpeed);
 
     native private static void setMotionQuality(
             long bodySettingsVa, int motionQualityOrdinal);

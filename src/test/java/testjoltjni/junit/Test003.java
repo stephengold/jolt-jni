@@ -199,18 +199,22 @@ public class Test003 {
         Assert.assertTrue(bcs.hasAssignedNativeObject());
         Assert.assertTrue(bcs.ownsNativeObject());
 
+        Assert.assertTrue(bcs.getAllowSleeping());
         Assert.assertEquals(0.05f, bcs.getAngularDamping(), 0f);
         Utils.assertEquals(0f, 0f, 0f, bcs.getAngularVelocity(), 0f);
         Assert.assertEquals(0.2f, bcs.getFriction(), 0f);
         Assert.assertEquals(1f, bcs.getGravityFactor(), 0f);
         Assert.assertEquals(0.05f, bcs.getLinearDamping(), 0f);
         Utils.assertEquals(0f, 0f, 0f, bcs.getLinearVelocity(), 0f);
+        Assert.assertEquals(15 * Math.PI, bcs.getMaxAngularVelocity(), 1e-6f);
+        Assert.assertEquals(500f, bcs.getMaxLinearVelocity(), 0f);
         Assert.assertEquals(EMotionQuality.Discrete, bcs.getMotionQuality());
         Assert.assertEquals(EMotionType.Dynamic, bcs.getMotionType());
         Assert.assertEquals(0, bcs.getObjectLayer());
         Utils.assertEquals(0f, 0f, 0f, bcs.getPosition(), 0f);
         Assert.assertEquals(0f, bcs.getRestitution(), 0f);
         Utils.assertEquals(0f, 0f, 0f, 1f, bcs.getRotation(), 0f);
+        Assert.assertTrue(bcs.hasMassProperties());
     }
 
     /**
@@ -219,6 +223,9 @@ public class Test003 {
      * @param bcs the settings to test (not null, modified)
      */
     private static void testBcsSetters(BodyCreationSettings bcs) {
+        bcs.setAllowSleeping(false);
+        Assert.assertFalse(bcs.getAllowSleeping());
+
         bcs.setAngularDamping(0.01f);
         Assert.assertEquals(0.01f, bcs.getAngularDamping(), 0f);
 
@@ -236,6 +243,12 @@ public class Test003 {
 
         bcs.setLinearVelocity(new Vec3(0.08f, 0.09f, 0.1f));
         Utils.assertEquals(0.08f, 0.09f, 0.1f, bcs.getLinearVelocity(), 0f);
+
+        bcs.setMaxAngularVelocity(0.101f);
+        Assert.assertEquals(0.101f, bcs.getMaxAngularVelocity(), 0f);
+
+        bcs.setMaxLinearVelocity(0.102f);
+        Assert.assertEquals(0.102f, bcs.getMaxLinearVelocity(), 0f);
 
         bcs.setMotionQuality(EMotionQuality.LinearCast);
         Assert.assertEquals(EMotionQuality.LinearCast, bcs.getMotionQuality());
