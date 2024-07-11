@@ -29,6 +29,94 @@ SOFTWARE.
 
 using namespace JPH;
 
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    addAngularImpulse
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addAngularImpulse
+  (JNIEnv *, jclass, jlong bodyVa, jfloat x, jfloat y, jfloat z) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    Vec3 impulse(x, y, z);
+    pBody->AddAngularImpulse(impulse);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    addForce
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addForce__JFFF
+  (JNIEnv *, jclass, jlong bodyVa, jfloat fx, jfloat fy, jfloat fz) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    Vec3 force(fx, fy, fz);
+    pBody->AddForce(force);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    addForce
+ * Signature: (JFFFDDD)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addForce__JFFFDDD
+  (JNIEnv *, jclass, jlong bodyVa, jfloat fx, jfloat fy, jfloat fz,
+  jdouble posX, jdouble posY, jdouble posZ) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    Vec3 force(fx, fy, fz);
+    RVec3 position(posX, posY, posZ);
+    pBody->AddForce(force, position);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    addImpulse
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addImpulse__JFFF
+  (JNIEnv *, jclass, jlong bodyVa, jfloat jx, jfloat jy, jfloat jz) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    Vec3 impulse(jx, jy, jz);
+    pBody->AddImpulse(impulse);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    addImpulse
+ * Signature: (JFFFDDD)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addImpulse__JFFFDDD
+  (JNIEnv *, jclass, jlong bodyVa, jfloat jx, jfloat jy, jfloat jz,
+  jdouble posX, jdouble posY, jdouble posZ) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    Vec3 impulse(jx, jy, jz);
+    RVec3 position(posX, posY, posZ);
+    pBody->AddImpulse(impulse, position);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    addTorque
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addTorque
+  (JNIEnv *, jclass, jlong bodyVa, jfloat x, jfloat y, jfloat z) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    Vec3 torque(x, y, z);
+    pBody->AddTorque(torque);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    canBeKinematicOrDynamic
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_canBeKinematicOrDynamic
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    bool result = pBody->CanBeKinematicOrDynamic();
+    return result;
+}
+
 inline static const Vec3 getAccumulatedForce(jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     const Vec3 result = pBody->GetAccumulatedForce();
@@ -110,6 +198,18 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulated
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getAccumulatedTorque(bodyVa);
     float result = vec3.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getAllowSleeping
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_getAllowSleeping
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    bool result = pBody->GetAllowSleeping();
     return result;
 }
 
@@ -295,6 +395,18 @@ inline static const RVec3 getPosition(jlong bodyVa) {
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getObjectLayer
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Body_getObjectLayer
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    int result = pBody->GetObjectLayer();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    getPositionX
  * Signature: (J)D
  */
@@ -397,6 +509,42 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getRotationW
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getShape
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getShape
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const Shape * const pResult = pBody->GetShape();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getUserData
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getUserData
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    uint64 result = pBody->GetUserData();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getWorldSpaceBounds
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getWorldSpaceBounds
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const AABox& result = pBody->GetWorldSpaceBounds();
+    return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    isActive
  * Signature: (J)Z
  */
@@ -404,6 +552,42 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isActive
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     bool result = pBody->IsActive();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    isDynamic
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isDynamic
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    bool result = pBody->IsDynamic();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    isKinematic
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isKinematic
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    bool result = pBody->IsKinematic();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    isRigidBody
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isRigidBody
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    bool result = pBody->IsRigidBody();
     return result;
 }
 
@@ -417,6 +601,31 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isStatic
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     bool result = pBody->IsStatic();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    moveKinematic
+ * Signature: (JDDDFFFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_moveKinematic
+  (JNIEnv *, jclass, jlong bodyVa, jdouble xx, jdouble yy, jdouble zz,
+  jfloat qx, jfloat qy, jfloat qz, jfloat qw, jfloat deltaTime) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    RVec3 location(xx, yy, zz);
+    Quat orientation(qx, qy, qz, qw);
+    pBody->MoveKinematic(location, orientation, deltaTime);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    setAllowSleeping
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setAllowSleeping
+  (JNIEnv *, jclass, jlong bodyVa, jboolean allow) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    pBody->SetAllowSleeping(allow);
 }
 
 /*
@@ -456,6 +665,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setLinearVelocit
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    setMotionType
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setMotionType
+  (JNIEnv *, jclass, jlong bodyVa, jint ordinal) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    EMotionType motionType = (EMotionType) ordinal;
+    pBody->SetMotionType(motionType);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    setRestitution
  * Signature: (JF)V
  */
@@ -465,3 +686,13 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setRestitution
     pBody->SetRestitution(restitution);
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    setUserData
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setUserData
+  (JNIEnv *, jclass, jlong bodyVa, jlong value) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    pBody->SetUserData(value);
+}

@@ -44,7 +44,107 @@ public class Body extends NonCopyable {
     // new methods exposed
 
     /**
-     * Return the net force acting on the body.
+     * Apply the specified angular impulse to the body.
+     *
+     * @param impulse the impulse vector (not null, unaffected)
+     */
+    public void addAngularImpulse(Vec3Arg impulse) {
+        long bodyVa = va();
+        float x = impulse.getX();
+        float y = impulse.getY();
+        float z = impulse.getZ();
+        addAngularImpulse(bodyVa, x, y, z);
+    }
+
+    /**
+     * Apply the specified force to the body's center of mass.
+     *
+     * @param force the force vector (not null, unaffected)
+     */
+    public void addForce(Vec3Arg force) {
+        long bodyVa = va();
+        float fx = force.getX();
+        float fy = force.getY();
+        float fz = force.getZ();
+        addForce(bodyVa, fx, fy, fz);
+    }
+
+    /**
+     * Apply the specified force at the specified location.
+     *
+     * @param force the force vector (not null, unaffected)
+     * @param location the location of application (not null, unaffected)
+     */
+    public void addForce(Vec3Arg force, RVec3Arg location) {
+        long bodyVa = va();
+        float fx = force.getX();
+        float fy = force.getY();
+        float fz = force.getZ();
+        double locX = location.xx();
+        double locY = location.yy();
+        double locZ = location.zz();
+        addForce(bodyVa, fx, fy, fz, locX, locY, locZ);
+    }
+
+    /**
+     * Apply the specified impulse to the body's center of mass.
+     *
+     * @param impulse the impulse vector (not null, unaffected)
+     */
+    public void addImpulse(Vec3Arg impulse) {
+        long bodyVa = va();
+        float jx = impulse.getX();
+        float jy = impulse.getY();
+        float jz = impulse.getZ();
+        addImpulse(bodyVa, jx, jy, jz);
+    }
+
+    /**
+     * Apply the specified impulse at the specified location.
+     *
+     * @param impulse the impulse vector (not null, unaffected)
+     * @param location the location of application (not null, unaffected)
+     */
+    public void addImpulse(Vec3Arg impulse, RVec3Arg location) {
+        long bodyVa = va();
+        float jx = impulse.getX();
+        float jy = impulse.getY();
+        float jz = impulse.getZ();
+        double locX = location.xx();
+        double locY = location.yy();
+        double locZ = location.zz();
+        addImpulse(bodyVa, jx, jy, jz, locX, locY, locZ);
+    }
+
+    /**
+     * Apply the specified torque to the body.
+     *
+     * @param torque the torque vector (not null, unaffected)
+     */
+    public void addTorque(Vec3Arg torque) {
+        long bodyVa = va();
+        float x = torque.getX();
+        float y = torque.getY();
+        float z = torque.getZ();
+        addTorque(bodyVa, x, y, z);
+    }
+
+    /**
+     * Test whether the body could be made kinematic or dynamic. The current
+     * instance is unaffected.
+     *
+     * @return true if possible, otherwise false
+     */
+    public boolean canBeKinematicOrDynamic() {
+        long bodyVa = va();
+        boolean result = canBeKinematicOrDynamic(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Return the net force acting on the body. The current instance is
+     * unaffected.
      *
      * @return a new vector
      */
@@ -74,7 +174,20 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's angular velocity.
+     * Test whether the body is allowed to fall asleep. The current instance is
+     * unaffected.
+     *
+     * @return true if allowed, otherwise false
+     */
+    public boolean getAllowSleeping() {
+        long bodyVa = va();
+        boolean result = getAllowSleeping(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Return the body's angular velocity. The current instance is unaffected.
      *
      * @return a new vector in physics-system coordinates
      */
@@ -184,6 +297,18 @@ public class Body extends NonCopyable {
     }
 
     /**
+     * Return the body's object layer. The current instance is unaffected.
+     *
+     * @return a layer index (&ge;0)
+     */
+    public int getObjectLayer() {
+        long bodyVa = va();
+        int result = getObjectLayer(bodyVa);
+
+        return result;
+    }
+
+    /**
      * Return the location of the body's origin (which might differ from its
      * center of mass). The current instance is unaffected.
      *
@@ -237,7 +362,46 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Test whether the body is deactivated.
+     * Return the body's shape.
+     *
+     * @return a new Java instance
+     */
+    public ConstShape getShape() {
+        long bodyVa = va();
+        long shapeVa = getShape(bodyVa);
+        ConstShape result = Shape.newShape(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Return the body's user data: can be used for anything. The current
+     * instance is unaffected.
+     *
+     * @return the value
+     */
+    public long getUserData() {
+        long bodyVa = va();
+        long result = getUserData(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Return the body's bounding box. The current instance is unaffected.
+     *
+     * @return a new JVM instance
+     */
+    public AaBox getWorldSpaceBounds() {
+        long bodyVa = va();
+        long boxVa = getWorldSpaceBounds(bodyVa);
+        AaBox result = new AaBox(boxVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is deactivated. The current instance is unaffected.
      *
      * @return false if deactivated, otherwise true
      */
@@ -249,7 +413,44 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Test whether the body is static.
+     * Test whether the body is dynamic. The current instance is unaffected.
+     *
+     * @return true if dynamic, otherwise false
+     */
+    public boolean isDynamic() {
+        long bodyVa = va();
+        boolean result = isDynamic(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is kinematic. The current instance is unaffected.
+     *
+     * @return true if kinematic, otherwise false
+     */
+    public boolean isKinematic() {
+        long bodyVa = va();
+        boolean result = isKinematic(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is a rigid body. The current instance is
+     * unaffected.
+     *
+     * @return true if rigid body, otherwise false
+     */
+    public boolean isRigidBody() {
+        long bodyVa = va();
+        boolean result = isRigidBody(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is static. The current instance is unaffected.
      *
      * @return true if static, otherwise false
      */
@@ -258,6 +459,39 @@ public class Body extends NonCopyable {
         boolean result = isStatic(bodyVa);
 
         return result;
+    }
+
+    /**
+     * Reposition the body, assuming it's kinematic.
+     *
+     * @param location the desired location (in physics-system coordinates, not
+     * null, unaffected)
+     * @param orientation the desired orientation (relative to the
+     * physics-system axes, not null, unaffected)
+     * @param deltaTime time until the desired position is reached (in seconds,
+     * &gt;0)
+     */
+    public void moveKinematic(
+            RVec3Arg location, Quat orientation, float deltaTime) {
+        long bodyVa = va();
+        double xx = location.xx();
+        double yy = location.yy();
+        double zz = location.zz();
+        float qw = orientation.getW();
+        float qx = orientation.getX();
+        float qy = orientation.getY();
+        float qz = orientation.getZ();
+        moveKinematic(bodyVa, xx, yy, zz, qx, qy, qz, qw, deltaTime);
+    }
+
+    /**
+     * Alter whether the body is allowed to fall asleep.
+     *
+     * @param allow true to allow, false to inhibit
+     */
+    public void setAllowSleeping(boolean allow) {
+        long bodyVa = va();
+        setAllowSleeping(bodyVa, allow);
     }
 
     /**
@@ -300,6 +534,17 @@ public class Body extends NonCopyable {
     }
 
     /**
+     * Alter the body's motion type.
+     *
+     * @param motionType the desired value (not null)
+     */
+    public void setMotionType(EMotionType motionType) {
+        long bodyVa = va();
+        int ordinal = motionType.ordinal();
+        setMotionType(bodyVa, ordinal);
+    }
+
+    /**
      * Alter the body's restitution ratio.
      *
      * @param restitution the desired ratio (typically &ge;0 and &le;1,
@@ -309,8 +554,38 @@ public class Body extends NonCopyable {
         long bodyVa = va();
         setRestitution(bodyVa, restitution);
     }
+
+    /**
+     * Alter the body's user data.
+     *
+     * @param value the desired value (default=0)
+     */
+    public void setUserData(long value) {
+        long bodyVa = va();
+        setUserData(bodyVa, value);
+    }
     // *************************************************************************
     // native private methods
+
+    native private static void addAngularImpulse(
+            long bodyVa, float x, float y, float z);
+
+    native private static void addForce(
+            long bodyVa, float fx, float fy, float fz);
+
+    native private static void addForce(long bodyVa, float fx, float fy,
+            float fz, double locX, double locY, double locZ);
+
+    native private static void addImpulse(
+            long bodyVa, float jx, float jy, float jz);
+
+    native private static void addImpulse(long bodyVa, float jx, float jy,
+            float jz, double locX, double locY, double locZ);
+
+    native private static void addTorque(
+            long bodyVa, float x, float y, float z);
+
+    native private static boolean canBeKinematicOrDynamic(long bodyVa);
 
     native private static float getAccumulatedForceX(long bodyVa);
 
@@ -323,6 +598,8 @@ public class Body extends NonCopyable {
     native private static float getAccumulatedTorqueY(long bodyVa);
 
     native private static float getAccumulatedTorqueZ(long bodyVa);
+
+    native private static boolean getAllowSleeping(long bodyVa);
 
     native private static float getAngularVelocityX(long bodyVa);
 
@@ -350,6 +627,8 @@ public class Body extends NonCopyable {
 
     native private static int getMotionType(long bodyVa);
 
+    native private static int getObjectLayer(long bodyVa);
+
     native private static double getPositionX(long bodyVa);
 
     native private static double getPositionY(long bodyVa);
@@ -366,9 +645,26 @@ public class Body extends NonCopyable {
 
     native private static float getRotationW(long bodyVa);
 
+    native private static long getShape(long bodyVa);
+
+    native private static long getUserData(long bodyVa);
+
+    native private static long getWorldSpaceBounds(long bodyVa);
+
     native private static boolean isActive(long bodyVa);
 
+    native private static boolean isDynamic(long bodyVa);
+
+    native private static boolean isKinematic(long bodyVa);
+
+    native private static boolean isRigidBody(long bodyVa);
+
     native private static boolean isStatic(long bodyVa);
+
+    native private static void moveKinematic(long bodyVa, double xx, double yy,
+            double zz, float qx, float qy, float qz, float qw, float deltaTime);
+
+    native private static void setAllowSleeping(long bodyVa, boolean allow);
 
     native private static void setAngularVelocity(
             long bodyVa, float wx, float wy, float wz);
@@ -378,5 +674,9 @@ public class Body extends NonCopyable {
     native private static void setLinearVelocity(
             long bodyVa, float vx, float vy, float vz);
 
+    native private static void setMotionType(long bodyVa, int ordinal);
+
     native private static void setRestitution(long bodyVa, float restitution);
+
+    native private static void setUserData(long bodyVa, long value);
 }
