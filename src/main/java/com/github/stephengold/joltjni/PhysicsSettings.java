@@ -44,9 +44,11 @@ public class PhysicsSettings extends JoltPhysicsObject {
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
+     * @param owner true &rarr; make the current object the owner, false &rarr;
+     * the current object isn't the owner
      */
-    PhysicsSettings(long settingsVa) {
-        setVirtualAddress(settingsVa, false);
+    PhysicsSettings(long settingsVa, boolean owner) {
+        setVirtualAddress(settingsVa, owner);
     }
     // *************************************************************************
     // new methods exposed

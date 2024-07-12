@@ -113,7 +113,7 @@ public class PhysicsSystem extends NonCopyable {
     public PhysicsSettings getPhysicsSettings() {
         long systemVa = va();
         long settingsVa = getPhysicsSettings(systemVa);
-        PhysicsSettings result = new PhysicsSettings(settingsVa);
+        PhysicsSettings result = new PhysicsSettings(settingsVa, true);
 
         return result;
     }
