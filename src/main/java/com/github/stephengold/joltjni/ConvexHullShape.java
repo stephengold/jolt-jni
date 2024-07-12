@@ -44,7 +44,8 @@ public class ConvexHullShape extends ConvexShape {
     // new methods exposed
 
     /**
-     * Count the vertices of the convex hull.
+     * Count the vertices of the convex hull. The current instance is
+     * unaffected.
      *
      * @return the count (&ge;0)
      */
@@ -57,7 +58,7 @@ public class ConvexHullShape extends ConvexShape {
 
     /**
      * Copy the location of the specified vertex of the convex hull relative to
-     * its center of mass.
+     * its center of mass. The current instance is unaffected.
      *
      * @param pointIndex the index of the point to locate (&ge;0, &lt;numPoints)
      * @return a new vector

@@ -7,7 +7,7 @@ plugins {
     id 'java-library'  // to build JVM libraries
     id 'maven-publish' // to publish artifacts to Maven repositories
     id 'signing'       // to sign artifacts for publication
-    alias(libs.plugins.analyze) // to report undeclared/unused dependencies
+    alias(libs.plugins.analyze) // to catch undeclared/unused dependencies
     alias(libs.plugins.download) // to retrieve files from URLs
 }
 

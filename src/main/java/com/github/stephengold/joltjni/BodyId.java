@@ -42,7 +42,8 @@ public class BodyId extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the body's index in the body array.
+     * Return the body's index in the body array. The current instance is
+     * unaffected.
      *
      * @return the index (&ge;0)
      */
@@ -54,7 +55,7 @@ public class BodyId extends JoltPhysicsObject {
     }
 
     /**
-     * Return the body's sequence number.
+     * Return the body's sequence number. The current instance is unaffected.
      *
      * @return the sequence number (&ge;0)
      */
@@ -66,7 +67,7 @@ public class BodyId extends JoltPhysicsObject {
     }
 
     /**
-     * Test whether the ID is invalid.
+     * Test whether the ID is invalid. The current instance is unaffected.
      *
      * @return true if invalid, false if valid
      */

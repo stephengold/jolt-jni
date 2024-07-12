@@ -33,8 +33,8 @@ public class BoxShape extends ConvexShape {
     /**
      * Instantiate a shape with the specified native object assigned.
      *
-     * @param shapeVa the virtual address of the native object to assign
-     * (not zero)
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
      */
     BoxShape(long shapeVa) {
         super(shapeVa);

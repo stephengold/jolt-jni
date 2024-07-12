@@ -159,7 +159,8 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the net torque acting on the body.
+     * Return the net torque acting on the body. The current instance is
+     * unaffected.
      *
      * @return a new vector
      */
@@ -390,7 +391,7 @@ public class Body extends NonCopyable {
     /**
      * Return the body's bounding box. The current instance is unaffected.
      *
-     * @return a new JVM instance
+     * @return a new JVM instance that references the pre-existing native object
      */
     public ConstAaBox getWorldSpaceBounds() {
         long bodyVa = va();

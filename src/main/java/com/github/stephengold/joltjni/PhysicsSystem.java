@@ -104,7 +104,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Copy the system's settings.
+     * Copy the system's settings. The current instance is unaffected.
      *
      * @return a new, mutable copy of the settings
      *
@@ -165,9 +165,9 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Replace the system's settings with the specified ones.
+     * Copy the specified settings to the system.
      *
-     * @param settings the desired settings (not null)
+     * @param settings the desired settings (not null, unaffected)
      *
      * @see getPhysicsSettings
      */
