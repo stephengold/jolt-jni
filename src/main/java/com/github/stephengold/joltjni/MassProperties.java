@@ -50,8 +50,8 @@ final public class MassProperties extends JoltPhysicsObject {
     @Override
     public void close() {
         if (ownsNativeObject()) {
-            long settingsVa = va();
-            free(settingsVa);
+            long propertiesVa = va();
+            free(propertiesVa);
         }
 
         unassignNativeObject();

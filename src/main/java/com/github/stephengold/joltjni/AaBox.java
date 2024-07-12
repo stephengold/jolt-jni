@@ -230,8 +230,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     @Override
     public void close() {
         assert ownsNativeObject();
-        long virtualAddress = va();
-        free(virtualAddress);
+        long boxVa = va();
+        free(boxVa);
 
         unassignNativeObject();
     }
