@@ -395,7 +395,7 @@ public class Body extends NonCopyable {
     public AaBox getWorldSpaceBounds() {
         long bodyVa = va();
         long boxVa = getWorldSpaceBounds(bodyVa);
-        AaBox result = new AaBox(boxVa);
+        AaBox result = new AaBox(boxVa, false);
 
         return result;
     }

@@ -40,6 +40,19 @@ final public class AaBox extends JoltPhysicsObject {
     }
 
     /**
+     * Instantiate a box with the specified native object assigned.
+     *
+     * @param boxVa the virtual address of the native object to assign (not
+     * zero)
+     * @param owner true &rarr; make the current object the owner, false &rarr;
+     * the current object isn't the owner
+     */
+    AaBox(long boxVa, boolean owner) {
+        super();
+        setVirtualAddress(boxVa, owner);
+    }
+
+    /**
      * Instantiate a box with the specified minimum and maximum coordinates.
      *
      * @param minimum the desired minimum coordinates (not null, unaffected)
