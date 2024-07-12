@@ -101,6 +101,29 @@ final public class Utils {
     }
 
     /**
+     * Load and initialize some flavor of native library.
+     */
+    public static void loadAndInitializeNativeLibrary() {
+        loadNativeLibrary();
+
+        String buildType = Jolt.buildType();
+        if (!buildType.equals("Release")) {
+            System.out.print(buildType + "-");
+        }
+        if (Jolt.isDoublePrecision()) {
+            System.out.print("Dp-");
+        }
+        System.out.println(
+                "jolt-jni version " + Jolt.versionString() + " initializing");
+
+        Jolt.registerDefaultAllocator();
+        Jolt.installDefaultTraceCallback();
+        Jolt.installDefaultAssertCallback();
+        Jolt.newFactory();
+        Jolt.registerTypes();
+    }
+
+    /**
      * Load some flavor of Debug native library.
      * <p>
      * The search order is:

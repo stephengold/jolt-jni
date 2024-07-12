@@ -65,13 +65,7 @@ public class Test001 {
      */
     @Test
     public void test001() {
-        Utils.loadNativeLibrary();
-
-        Jolt.registerDefaultAllocator();
-        Jolt.installDefaultTraceCallback();
-        Jolt.installDefaultAssertCallback();
-        Jolt.newFactory();
-        Jolt.registerTypes();
+        Utils.loadAndInitializeNativeLibrary();
 
         // object layers:
         final int objLayerNonMoving = 0;

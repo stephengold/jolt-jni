@@ -38,12 +38,7 @@ public class ConvexVsMeshScene {
 	private static final int BP_LAYER_MOVING = 1;
 	private static final int BP_NUM_LAYERS = 2;
 	public static void main(String[] argv) {
-		Utils.loadNativeLibrary();
-		Jolt.registerDefaultAllocator();
-		Jolt.installDefaultTraceCallback();
-		Jolt.installDefaultAssertCallback();
-		Jolt.newFactory();
-		Jolt.registerTypes();
+		Utils.loadAndInitializeNativeLibrary();
 		TempAllocatorImpl temp_allocator = new TempAllocatorImpl(32 << 20); // 32 MiB
 		JobSystemThreadPool job_system = new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, Utils.numThreads());
 		final int cMaxBodies = 1_800;

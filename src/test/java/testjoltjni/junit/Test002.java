@@ -95,13 +95,7 @@ public class Test002 {
      */
     @Test
     public void test002() {
-        Utils.loadNativeLibrary();
-
-        Jolt.registerDefaultAllocator();
-        Jolt.installDefaultTraceCallback();
-        Jolt.installDefaultAssertCallback();
-        Jolt.newFactory();
-        Jolt.registerTypes();
+        Utils.loadAndInitializeNativeLibrary();
 
         // broadphase layers:
         int bpLayerNonMoving = 0;

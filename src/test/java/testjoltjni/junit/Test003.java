@@ -62,13 +62,7 @@ public class Test003 {
      */
     @Test
     public void test003() {
-        Utils.loadNativeLibrary();
-
-        Jolt.registerDefaultAllocator();
-        Jolt.installDefaultTraceCallback();
-        Jolt.installDefaultAssertCallback();
-        Jolt.newFactory();
-        Jolt.registerTypes();
+        Utils.loadAndInitializeNativeLibrary();
 
         // AaBox:
         {
