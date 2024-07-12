@@ -32,6 +32,14 @@ public class PhysicsSettings extends JoltPhysicsObject {
     // constructors
 
     /**
+     * Instantiate the default settings.
+     */
+    public PhysicsSettings() {
+        long settingsVa = createPhysicsSettings();
+        setVirtualAddress(settingsVa, true);
+    }
+
+    /**
      * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -224,6 +232,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createPhysicsSettings();
 
     native private static void free(long settingsVa);
 

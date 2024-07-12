@@ -31,6 +31,17 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    createPhysicsSettings
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_createPhysicsSettings
+  (JNIEnv *, jclass) {
+    PhysicsSettings * const pResult = new PhysicsSettings();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
  * Method:    free
  * Signature: (J)V
  */
