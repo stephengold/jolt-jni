@@ -26,7 +26,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class AaBox extends JoltPhysicsObject {
+final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     // *************************************************************************
     // constructors
 
@@ -90,6 +90,8 @@ final public class AaBox extends JoltPhysicsObject {
         long boxVa = va();
         setEmpty(boxVa);
     }
+    // *************************************************************************
+    // ConstAaBox methods
 
     /**
      * Test whether the box contains the specified point. The current instance
@@ -99,6 +101,7 @@ final public class AaBox extends JoltPhysicsObject {
      *
      * @return true if contained, otherwise false
      */
+    @Override
     public boolean contains(Vec3Arg point) {
         long boxVa = va();
         float x = point.getX();
@@ -114,6 +117,7 @@ final public class AaBox extends JoltPhysicsObject {
      *
      * @return a new location vector
      */
+    @Override
     public Vec3 getCenter() {
         long boxVa = va();
         float x = getCenterX(boxVa);
@@ -129,6 +133,7 @@ final public class AaBox extends JoltPhysicsObject {
      *
      * @return a new vector
      */
+    @Override
     public Vec3 getExtent() {
         long boxVa = va();
         float x = getExtentX(boxVa);
@@ -145,6 +150,7 @@ final public class AaBox extends JoltPhysicsObject {
      *
      * @return a new vector
      */
+    @Override
     public Vec3 getMax() {
         long boxVa = va();
         float x = getMaxX(boxVa);
@@ -161,6 +167,7 @@ final public class AaBox extends JoltPhysicsObject {
      *
      * @return a new vector
      */
+    @Override
     public Vec3 getMin() {
         long boxVa = va();
         float x = getMinX(boxVa);
@@ -177,6 +184,7 @@ final public class AaBox extends JoltPhysicsObject {
      *
      * @return a new vector
      */
+    @Override
     public Vec3 getSize() {
         long boxVa = va();
         float x = getSizeX(boxVa);
@@ -192,6 +200,7 @@ final public class AaBox extends JoltPhysicsObject {
      *
      * @return the volume
      */
+    @Override
     public float getVolume() {
         long boxVa = va();
         float result = getVolume(boxVa);
@@ -204,6 +213,7 @@ final public class AaBox extends JoltPhysicsObject {
      *
      * @return true if valid, otherwise false
      */
+    @Override
     public boolean isValid() {
         long boxVa = va();
         boolean result = isValid(boxVa);

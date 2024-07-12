@@ -392,10 +392,10 @@ public class Body extends NonCopyable {
      *
      * @return a new JVM instance
      */
-    public AaBox getWorldSpaceBounds() {
+    public ConstAaBox getWorldSpaceBounds() {
         long bodyVa = va();
         long boxVa = getWorldSpaceBounds(bodyVa);
-        AaBox result = new AaBox(boxVa, false);
+        ConstAaBox result = new AaBox(boxVa, false);
 
         return result;
     }
