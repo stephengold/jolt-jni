@@ -57,17 +57,15 @@ public class ObjVsObjFilter extends JoltPhysicsObject {
     // JoltPhysicsObject methods
 
     /**
-     * Unassign the assigned native object, assuming there is one. Free the
-     * native object if the filter owns it.
+     * Free and unassign the native object if the current filter owns it.
      */
     @Override
     public void close() {
         if (ownsNativeObject()) {
             long filterVa = va();
             free(filterVa);
+            unassignNativeObject();
         }
-
-        unassignNativeObject();
     }
     // *************************************************************************
     // native private methods

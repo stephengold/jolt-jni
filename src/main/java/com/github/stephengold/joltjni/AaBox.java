@@ -224,16 +224,15 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     // JoltPhysicsObject methods
 
     /**
-     * Unassign the assigned native object, assuming there is one. Free the
-     * native object if the box owns it.
+     * Free and unassign the native object if the current box owns it.
      */
     @Override
     public void close() {
-        assert ownsNativeObject();
-        long boxVa = va();
-        free(boxVa);
-
-        unassignNativeObject();
+        if (ownsNativeObject()) {
+            long boxVa = va();
+            free(boxVa);
+            unassignNativeObject();
+        }
     }
     // *************************************************************************
     // native private methods

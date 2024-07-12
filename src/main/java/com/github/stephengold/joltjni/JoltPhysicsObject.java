@@ -131,16 +131,15 @@ abstract public class JoltPhysicsObject
     // AutoCloseable methods
 
     /**
-     * Unassign the assigned native object, assuming there is one. Free the
-     * native object if the current instance owns it.
+     * Free and unassign the native object if the current instance owns it.
      */
     @Override
     public void close() {
         if (isOwner) {
             System.out.println(
                     "I don't know how to free " + getClass().getSimpleName());
+            unassignNativeObject();
         }
-        unassignNativeObject();
     }
     // *************************************************************************
     // Comparable methods

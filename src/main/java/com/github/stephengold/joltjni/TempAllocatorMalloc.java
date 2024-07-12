@@ -41,17 +41,15 @@ public class TempAllocatorMalloc extends TempAllocator {
     // TempAllocator methods
 
     /**
-     * Unassign the assigned native object, assuming there is one. Free the
-     * native object if the current allocator owns it.
+     * Free and unassign the native object if the current allocator owns it.
      */
     @Override
     public void close() {
         if (ownsNativeObject()) {
             long allocatorVa = va();
             free(allocatorVa);
+            unassignNativeObject();
         }
-
-        unassignNativeObject();
     }
     // *************************************************************************
     // private methods

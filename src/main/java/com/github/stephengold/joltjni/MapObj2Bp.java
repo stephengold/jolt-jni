@@ -61,17 +61,15 @@ public class MapObj2Bp extends JoltPhysicsObject {
     // JoltPhysicsObject methods
 
     /**
-     * Unassign the assigned native object, assuming there is one. Free the
-     * native object if the map owns it.
+     * Free and unassign the native object if the current map owns it.
      */
     @Override
     public void close() {
         if (ownsNativeObject()) {
             long mapVa = va();
             free(mapVa);
+            unassignNativeObject();
         }
-
-        unassignNativeObject();
     }
     // *************************************************************************
     // native private methods

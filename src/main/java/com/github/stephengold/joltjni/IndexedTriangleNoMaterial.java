@@ -95,17 +95,15 @@ public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
     // JoltPhysicsObject methods
 
     /**
-     * Unassign the assigned native object, assuming there is one. Free the
-     * native object if the current triangle owns it.
+     * Free and unassign the native object if the current triangle owns it.
      */
     @Override
     public void close() {
         if (ownsNativeObject()) {
             long triangleVa = va();
             free(triangleVa);
+            unassignNativeObject();
         }
-
-        unassignNativeObject();
     }
     // *************************************************************************
     // native private methods

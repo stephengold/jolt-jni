@@ -114,17 +114,15 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
     // JoltPhysicsObject methods
 
     /**
-     * Unassign the assigned native object, assuming there is one. Free the
-     * native object if the current list owns it.
+     * Free and unassign the native object if the current list owns it.
      */
     @Override
     public void close() {
         if (ownsNativeObject()) {
             long listVa = va();
             free(listVa);
+            unassignNativeObject();
         }
-
-        unassignNativeObject();
     }
     // *************************************************************************
     // native private methods

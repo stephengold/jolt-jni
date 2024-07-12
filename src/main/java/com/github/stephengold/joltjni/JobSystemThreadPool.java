@@ -76,17 +76,15 @@ public class JobSystemThreadPool extends JobSystemWithBarrier {
     // JobSystem methods
 
     /**
-     * Unassign the assigned native object, assuming there is one. Free the
-     * native object if the current system owns it.
+     * Free and unassign the native object if the current system owns it.
      */
     @Override
     public void close() {
         if (ownsNativeObject()) {
             long systemVa = va();
             free(systemVa);
+            unassignNativeObject();
         }
-
-        unassignNativeObject();
     }
     // *************************************************************************
     // native private methods
