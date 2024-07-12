@@ -69,6 +69,148 @@ final public class AaBox extends JoltPhysicsObject {
         setVirtualAddress(boxVa, true);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Instantiate the biggest finite box.
+     *
+     * @return a new instance
+     */
+    public static AaBox sBiggest() {
+        long boxVa = sBiggest(true);
+        AaBox result = new AaBox(boxVa, true);
+
+        return result;
+    }
+
+    /**
+     * Alter the box to be empty.
+     */
+    public void setEmpty() {
+        long boxVa = va();
+        setEmpty(boxVa);
+    }
+
+    /**
+     * Test whether the box contains the specified point. The current instance
+     * is unaffected.
+     *
+     * @param point the point to test (not null, unaffected)
+     *
+     * @return true if contained, otherwise false
+     */
+    public boolean contains(Vec3Arg point) {
+        long boxVa = va();
+        float x = point.getX();
+        float y = point.getY();
+        float z = point.getZ();
+        boolean result = contains(boxVa, x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Locate the center of the box. The current instance is unaffected.
+     *
+     * @return a new location vector
+     */
+    public Vec3 getCenter() {
+        long boxVa = va();
+        float x = getCenterX(boxVa);
+        float y = getCenterY(boxVa);
+        float z = getCenterZ(boxVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the (half) extent of the box. The current instance is unaffected.
+     *
+     * @return a new vector
+     */
+    public Vec3 getExtent() {
+        long boxVa = va();
+        float x = getExtentX(boxVa);
+        float y = getExtentY(boxVa);
+        float z = getExtentZ(boxVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum contained coordinate on each axis. The current
+     * instance is unaffected.
+     *
+     * @return a new vector
+     */
+    public Vec3 getMax() {
+        long boxVa = va();
+        float x = getMaxX(boxVa);
+        float y = getMaxY(boxVa);
+        float z = getMaxZ(boxVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the minimum contained coordinate on each axis. The current
+     * instance is unaffected.
+     *
+     * @return a new vector
+     */
+    public Vec3 getMin() {
+        long boxVa = va();
+        float x = getMinX(boxVa);
+        float y = getMinY(boxVa);
+        float z = getMinZ(boxVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the size (full extent) on each axis. The current instance is
+     * unaffected.
+     *
+     * @return a new vector
+     */
+    public Vec3 getSize() {
+        long boxVa = va();
+        float x = getSizeX(boxVa);
+        float y = getSizeY(boxVa);
+        float z = getSizeZ(boxVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the volume of the box. The current instance is unaffected.
+     *
+     * @return the volume
+     */
+    public float getVolume() {
+        long boxVa = va();
+        float result = getVolume(boxVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the box is valid. The current instance is unaffected.
+     *
+     * @return true if valid, otherwise false
+     */
+    public boolean isValid() {
+        long boxVa = va();
+        boolean result = isValid(boxVa);
+
+        return result;
+    }
+    // *************************************************************************
     // JoltPhysicsObject methods
 
     /**
@@ -86,10 +228,51 @@ final public class AaBox extends JoltPhysicsObject {
     // *************************************************************************
     // native private methods
 
+    native private static boolean contains(
+            long boxVa, float x, float y, float z);
+
     native private static long createAaBox();
 
     native private static long createAaBox(float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ);
 
     native private static void free(long virtualAddress);
+
+    native private static float getCenterX(long boxVa);
+
+    native private static float getCenterY(long boxVa);
+
+    native private static float getCenterZ(long boxVa);
+
+    native private static float getExtentX(long boxVa);
+
+    native private static float getExtentY(long boxVa);
+
+    native private static float getExtentZ(long boxVa);
+
+    native private static float getMaxX(long boxVa);
+
+    native private static float getMaxY(long boxVa);
+
+    native private static float getMaxZ(long boxVa);
+
+    native private static float getMinX(long boxVa);
+
+    native private static float getMinY(long boxVa);
+
+    native private static float getMinZ(long boxVa);
+
+    native private static float getSizeX(long boxVa);
+
+    native private static float getSizeY(long boxVa);
+
+    native private static float getSizeZ(long boxVa);
+
+    native private static float getVolume(long boxVa);
+
+    native private static boolean isValid(long boxVa);
+
+    native private static long sBiggest(boolean unused);
+
+    native private static void setEmpty(long boxVa);
 }

@@ -31,6 +31,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    contains
+ * Signature: (JFFF)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_contains
+  (JNIEnv *, jclass, jlong boxVa, jfloat x, jfloat y, jfloat z) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    Vec3 point(x, y, z);
+    bool result = pBox->Contains(point);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    createAaBox
  * Signature: ()J
  */
@@ -62,4 +75,231 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_free
   (JNIEnv *, jclass, jlong virtualAddress) {
     AABox * const pBox = reinterpret_cast<AABox *> (virtualAddress);
     delete pBox;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getCenterX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getCenterX
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->GetCenter().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getCenterY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getCenterY
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->GetCenter().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getCenterZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getCenterZ
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->GetCenter().GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getExtentX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getExtentX
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->GetExtent().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getExtentY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getExtentY
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->GetExtent().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getExtentZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getExtentZ
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->GetExtent().GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getMaxX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMaxX
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->mMax.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getMaxY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMaxY
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->mMax.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getMaxZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMaxZ
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->mMax.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getMinX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMinX
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->mMin.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getMinY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMinY
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->mMin.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getMinZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMinZ
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->mMin.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getSizeX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSizeX
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->GetSize().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getSizeY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSizeY
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->GetSize().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getSizeZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSizeZ
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->GetSize().GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getVolume
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getVolume
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    float result = pBox->GetVolume();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    isValid
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_isValid
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    bool result = pBox->IsValid();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    sBiggest
+ * Signature: (Z)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_sBiggest
+  (JNIEnv *, jclass, jboolean) {
+    AABox * const pResult = new AABox();
+    *pResult = AABox::sBiggest();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    setEmpty
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_setEmpty
+  (JNIEnv *, jclass, jlong boxVa) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    pBox->SetEmpty();
 }
