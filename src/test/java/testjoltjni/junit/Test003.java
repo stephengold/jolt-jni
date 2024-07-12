@@ -75,8 +75,8 @@ public class Test003 {
             Utils.testClose(box);
         }
         {
-            Vec3Arg max = new Vec3(1f, 2f, 3f);
-            Vec3Arg min = new Vec3(4f, 5f, 6f);
+            Vec3Arg max = new Vec3(4f, 5f, 6f);
+            Vec3Arg min = new Vec3(1f, 2f, 3f);
             AaBox box = new AaBox(min, max);
 
             Assert.assertTrue(box.hasAssignedNativeObject());
