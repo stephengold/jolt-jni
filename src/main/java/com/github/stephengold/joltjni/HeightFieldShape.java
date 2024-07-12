@@ -33,10 +33,10 @@ public class HeightFieldShape extends Shape {
     /**
      * Instantiate a shape with the specified native object assigned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
      */
-    HeightFieldShape(long virtualAddress) {
-        super(virtualAddress);
+    HeightFieldShape(long shapeVa) {
+        super(shapeVa);
     }
 }

@@ -246,7 +246,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static long createAaBox(float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ);
 
-    native private static void free(long virtualAddress);
+    native private static void free(long boxVa);
 
     native private static float getCenterX(long boxVa);
 

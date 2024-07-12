@@ -41,11 +41,11 @@ abstract public class Shape extends NonCopyable implements ConstShape {
     /**
      * Instantiate a shape with the specified native object assigned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
      */
-    protected Shape(long virtualAddress) {
-        super(virtualAddress);
+    protected Shape(long shapeVa) {
+        super(shapeVa);
     }
     // *************************************************************************
     // new methods exposed

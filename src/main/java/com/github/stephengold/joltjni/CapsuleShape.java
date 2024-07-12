@@ -31,8 +31,8 @@ public class CapsuleShape extends ConvexShape {
     // *************************************************************************
     // constructors
 
-    CapsuleShape(long virtualAddress) {
-        super(virtualAddress);
+    CapsuleShape(long shapeVa) {
+        super(shapeVa);
     }
 
     /**

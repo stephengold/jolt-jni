@@ -33,11 +33,10 @@ public class BodyId extends JoltPhysicsObject {
     /**
      * Instantiate with the specified native object assigned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param idVa the virtual address of the native object to assign (not zero)
      */
-    BodyId(long virtualAddress) {
-        super(virtualAddress);
+    BodyId(long idVa) {
+        super(idVa);
     }
     // *************************************************************************
     // new methods exposed

@@ -33,11 +33,11 @@ public class SphereShape extends ConvexShape {
     /**
      * Instantiate a shape with the specified native object assigned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
      */
-    SphereShape(long virtualAddress) {
-        super(virtualAddress);
+    SphereShape(long shapeVa) {
+        super(shapeVa);
     }
 
     /**

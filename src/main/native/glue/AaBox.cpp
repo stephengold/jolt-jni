@@ -72,8 +72,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox__F
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_free
-  (JNIEnv *, jclass, jlong virtualAddress) {
-    AABox * const pBox = reinterpret_cast<AABox *> (virtualAddress);
+  (JNIEnv *, jclass, jlong boxVa) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     delete pBox;
 }
 

@@ -39,10 +39,10 @@ public class DecoratedShape extends Shape {
     /**
      * Instantiate a shape with the specified native object assigned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
      */
-    protected DecoratedShape(long virtualAddress) {
-        super(virtualAddress);
+    protected DecoratedShape(long shapeVa) {
+        super(shapeVa);
     }
 }

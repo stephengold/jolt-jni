@@ -34,11 +34,11 @@ final public class MassProperties extends JoltPhysicsObject {
     /**
      * Instantiate with the specified native object assigned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
+     * @param propertiesVa the virtual address of the native object to assign
      * (not zero)
      */
-    MassProperties(long virtualAddress) {
-        super(virtualAddress);
+    MassProperties(long propertiesVa) {
+        super(propertiesVa);
     }
     // *************************************************************************
     // JoltPhysicsObject methods
@@ -59,5 +59,5 @@ final public class MassProperties extends JoltPhysicsObject {
     // *************************************************************************
     // native private methods
 
-    native private static void free(long virtualAddress);
+    native private static void free(long propertiesVa);
 }

@@ -33,11 +33,11 @@ public class CylinderShape extends ConvexShape {
     /**
      * Instantiate a shape with the specified native object assigned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
      */
-    CylinderShape(long virtualAddress) {
-        super(virtualAddress);
+    CylinderShape(long shapeVa) {
+        super(shapeVa);
     }
 
     /**
