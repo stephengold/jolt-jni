@@ -27,7 +27,7 @@ package com.github.stephengold.joltjni;
  * @author Stephen Gold sgold@sonic.net
  */
 abstract public class JoltPhysicsObject
-        implements AutoCloseable, Comparable<JoltPhysicsObject> {
+        implements AutoCloseable, ConstJoltPhysicsObject {
     // *************************************************************************
     // fields
 
@@ -62,42 +62,6 @@ abstract public class JoltPhysicsObject
         this.virtualAddress = virtualAddress;
     }
     // *************************************************************************
-    // new methods exposed
-
-    /**
-     * Test whether a native object is assigned to the current instance.
-     *
-     * @return true if one is assigned, otherwise false
-     */
-    final public boolean hasAssignedNativeObject() {
-        if (virtualAddress == 0L) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    /**
-     * Test whether the current instance owns (is responsible for freeing) its
-     * native object.
-     *
-     * @return true if owner, otherwise false
-     */
-    final public boolean ownsNativeObject() {
-        return isOwner;
-    }
-
-    /**
-     * Return the virtual address of the assigned native object, assuming one is
-     * assigned.
-     *
-     * @return the virtual address (not zero)
-     */
-    final public long va() {
-        assert virtualAddress != 0L;
-        return virtualAddress;
-    }
-    // *************************************************************************
     // new protected methods
 
     /**
@@ -128,7 +92,7 @@ abstract public class JoltPhysicsObject
         this.virtualAddress = 0L;
     }
     // *************************************************************************
-    // AutoCloseable methods
+    // ConstJoltPhysicsObject methods
 
     /**
      * Free and unassign the native object if the current instance owns it.
@@ -141,8 +105,6 @@ abstract public class JoltPhysicsObject
             unassignNativeObject();
         }
     }
-    // *************************************************************************
-    // Comparable methods
 
     /**
      * Compare (by virtual address) with another native object.
@@ -152,17 +114,56 @@ abstract public class JoltPhysicsObject
      * comes before other; positive if this comes after other
      */
     @Override
-    public int compareTo(JoltPhysicsObject other) {
+    public int compareTo(ConstJoltPhysicsObject other) {
         long otherVa = other.va();
         int result = Long.compare(virtualAddress, otherVa);
 
         return result;
     }
+
+    /**
+     * Test whether a native object is assigned. The physics object is
+     * unaffected.
+     *
+     * @return true if one is assigned, otherwise false
+     */
+    @Override
+    final public boolean hasAssignedNativeObject() {
+        if (virtualAddress == 0L) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Test whether the physics object owns (is responsible for freeing) its
+     * native object. The physics object is unaffected.
+     *
+     * @return true if owner, otherwise false
+     */
+    @Override
+    final public boolean ownsNativeObject() {
+        return isOwner;
+    }
+
+    /**
+     * Return the virtual address of the assigned native object, assuming one is
+     * assigned. The physics object is unaffected.
+     *
+     * @return the virtual address (not zero)
+     */
+    @Override
+    final public long va() {
+        assert virtualAddress != 0L;
+        return virtualAddress;
+    }
     // *************************************************************************
     // Object methods
 
     /**
-     * Test for type and virtual-address equality with another object.
+     * Test for type and virtual-address equality with another object. Both the
+     * current instance and the argument are unaffected.
      *
      * @param otherObject the object to compare (may be null, unaffected)
      * @return true if {@code this} and {@code otherObject} have the same type
@@ -175,7 +176,8 @@ abstract public class JoltPhysicsObject
             result = true;
         } else if (otherObject != null
                 && otherObject.getClass() == getClass()) {
-            JoltPhysicsObject otherJpo = (JoltPhysicsObject) otherObject;
+            ConstJoltPhysicsObject otherJpo
+                    = (ConstJoltPhysicsObject) otherObject;
             long otherVa = otherJpo.va();
             result = (virtualAddress == otherVa);
         } else {

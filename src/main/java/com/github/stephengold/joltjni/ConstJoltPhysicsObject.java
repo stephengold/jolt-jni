@@ -21,59 +21,42 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import java.nio.FloatBuffer;
-
 /**
- * An immutable {@code Shape}.
+ * An immutable {@code JoltPhysicsObject}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstShape extends ConstJoltPhysicsObject {
+public interface ConstJoltPhysicsObject
+        extends Comparable<ConstJoltPhysicsObject> {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Copy the vertex coordinates of the shape's debug mesh to the specified
-     * buffer. The current instance is unaffected.
-     *
-     * @param storeBuffer the buffer to fill with vertex coordinates (not null,
-     * modified)
+     * Free and unassign the native object if the current instance owns it.
      */
-    void copyDebugTriangles(FloatBuffer storeBuffer);
+    void close();
 
     /**
-     * Return the number of triangles in the shape's debug mesh. The current
-     * instance is unaffected.
+     * Test whether a native object is assigned. The physics object is
+     * unaffected.
      *
-     * @return the count (&gt;0)
+     * @return true if one is assigned, otherwise false
      */
-    int countDebugTriangles();
+    boolean hasAssignedNativeObject();
 
     /**
-     * Copy the shape's mass properties.
+     * Test whether the physics object owns (is responsible for freeing) its
+     * native object. The physics object is unaffected.
      *
-     * @return a new instance
+     * @return true if owner, otherwise false
      */
-    MassProperties getMassProperties();
+    boolean ownsNativeObject();
 
     /**
-     * Return the shape's subtype. The current instance is unaffected.
+     * Return the virtual address of the assigned native object, assuming one is
+     * assigned. The physics object is unaffected.
      *
-     * @return an enum value
+     * @return the virtual address (not zero)
      */
-    EShapeSubType getSubType();
-
-    /**
-     * Return the shape's type. The current instance is unaffected.
-     *
-     * @return an enum value
-     */
-    EShapeType getType();
-
-    /**
-     * Test whether the shape can be used in a dynamic/kinematic body.
-     *
-     * @return true if it can be only be static, otherwise false
-     */
-    boolean mustBeStatic();
+    long va();
 }
