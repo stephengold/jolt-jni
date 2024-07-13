@@ -22,24 +22,13 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Identify a particular {@code Body} to a {@code BodyInterface}.
+ * An immutable {@code BodyId}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BodyId extends JoltPhysicsObject implements ConstBodyId {
+public interface ConstBodyId extends ConstJoltPhysicsObject {
     // *************************************************************************
-    // constructors
-
-    /**
-     * Instantiate with the specified native object assigned.
-     *
-     * @param idVa the virtual address of the native object to assign (not zero)
-     */
-    BodyId(long idVa) {
-        super(idVa);
-    }
-    // *************************************************************************
-    // ConstBodyId methods
+    // new methods exposed
 
     /**
      * Return the body's index in the body array. The current instance is
@@ -47,45 +36,19 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
      *
      * @return the index (&ge;0)
      */
-    @Override
-    public int getIndex() {
-        long idVa = va();
-        int result = getIndex(idVa);
-
-        return result;
-    }
+    int getIndex();
 
     /**
      * Return the body's sequence number. The current instance is unaffected.
      *
      * @return the sequence number (&ge;0)
      */
-    @Override
-    public int getSequenceNumber() {
-        long idVa = va();
-        int result = getSequenceNumber(idVa);
-
-        return result;
-    }
+    int getSequenceNumber();
 
     /**
-     * Test whether the ID is invalid. The current instance is unaffected.
+     * Test whether the ID is valid. The current instance is unaffected.
      *
      * @return true if invalid, false if valid
      */
-    @Override
-    public boolean isInvalid() {
-        long idVa = va();
-        boolean result = isInvalid(idVa);
-
-        return result;
-    }
-    // *************************************************************************
-    // native private methods
-
-    native private static int getIndex(long idVa);
-
-    native private static int getSequenceNumber(long idVa);
-
-    native private static boolean isInvalid(long idVa);
+    boolean isInvalid();
 }

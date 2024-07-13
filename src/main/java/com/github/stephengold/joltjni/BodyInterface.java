@@ -42,7 +42,7 @@ public class BodyInterface extends NonCopyable {
      *
      * @param bodyId the ID of the body to activate (not null)
      */
-    public void activateBody(BodyId bodyId) {
+    public void activateBody(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.va();
         activateBody(bodyInterfaceVa, bodyIdVa);
@@ -54,7 +54,7 @@ public class BodyInterface extends NonCopyable {
      * @param bodyId the ID of the body to add (not null)
      * @param activation whether to activate the body (not null)
      */
-    public void addBody(BodyId bodyId, EActivation activation) {
+    public void addBody(ConstBodyId bodyId, EActivation activation) {
         long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.va();
         int activationOrdinal = activation.ordinal();
@@ -68,10 +68,10 @@ public class BodyInterface extends NonCopyable {
      * @param activationMode whether to activate the body (not null)
      * @return the ID of the created body, or an invalid ID when out of bodies
      */
-    public BodyId createAndAddBody(
+    public ConstBodyId createAndAddBody(
             BodyCreationSettings settings, EActivation activationMode) {
         Body body = createBody(settings);
-        BodyId result = body.getId();
+        ConstBodyId result = body.getId();
         addBody(result, activationMode);
 
         return result;
@@ -100,7 +100,7 @@ public class BodyInterface extends NonCopyable {
      *
      * @param bodyId the ID of the body to destroy (not null)
      */
-    public void destroyBody(BodyId bodyId) {
+    public void destroyBody(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.va();
         destroyBody(bodyInterfaceVa, bodyIdVa);
@@ -112,7 +112,7 @@ public class BodyInterface extends NonCopyable {
      * @param bodyId the ID of the body to locate (not null)
      * @return a new vector
      */
-    public RVec3 getCenterOfMassPosition(BodyId bodyId) {
+    public RVec3 getCenterOfMassPosition(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.va();
         double xx = getCenterOfMassPositionX(bodyInterfaceVa, bodyIdVa);
@@ -129,7 +129,7 @@ public class BodyInterface extends NonCopyable {
      * @param bodyId the ID of the body (not null)
      * @return a new vector
      */
-    public Vec3 getLinearVelocity(BodyId bodyId) {
+    public Vec3 getLinearVelocity(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.va();
         float x = getLinearVelocityX(bodyInterfaceVa, bodyIdVa);
@@ -145,7 +145,7 @@ public class BodyInterface extends NonCopyable {
      *
      * @param bodyId the ID of the body to remove (not null)
      */
-    public void removeBody(BodyId bodyId) {
+    public void removeBody(ConstBodyId bodyId) {
         long bodyIdVa = bodyId.va();
         removeBody(va(), bodyIdVa);
     }
@@ -156,7 +156,7 @@ public class BodyInterface extends NonCopyable {
      * @param bodyId the ID of the body to test (not null)
      * @return true if active, otherwise false
      */
-    public boolean isActive(BodyId bodyId) {
+    public boolean isActive(ConstBodyId bodyId) {
         long bodyIdVa = bodyId.va();
         boolean result = isActive(va(), bodyIdVa);
         return result;
@@ -168,7 +168,7 @@ public class BodyInterface extends NonCopyable {
      * @param bodyId the ID of the body to test (not null)
      * @param omega the desired rates (not null, unaffected)
      */
-    public void setAngularVelocity(BodyId bodyId, Vec3Arg omega) {
+    public void setAngularVelocity(ConstBodyId bodyId, Vec3Arg omega) {
         long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.va();
         setAngularVelocity(bodyInterfaceVa, bodyIdVa,
@@ -181,7 +181,7 @@ public class BodyInterface extends NonCopyable {
      * @param bodyId the ID of the body to test (not null)
      * @param velocity the desired velocity (not null, unaffected)
      */
-    public void setLinearVelocity(BodyId bodyId, Vec3Arg velocity) {
+    public void setLinearVelocity(ConstBodyId bodyId, Vec3Arg velocity) {
         long bodyIdVa = bodyId.va();
         setLinearVelocity(va(), bodyIdVa,
                 velocity.getX(), velocity.getY(), velocity.getZ());

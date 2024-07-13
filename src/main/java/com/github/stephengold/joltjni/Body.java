@@ -243,10 +243,10 @@ public class Body extends NonCopyable {
      *
      * @return the value
      */
-    public BodyId getId() {
+    public ConstBodyId getId() {
         long bodyVa = va();
         long bodyIdVa = getId(bodyVa);
-        BodyId result = new BodyId(bodyIdVa);
+        ConstBodyId result = new BodyId(bodyIdVa);
 
         return result;
     }

@@ -141,7 +141,7 @@ public static void main(String[] argv)
 	// Now create a dynamic body to bounce on the floor
 	// Note that this uses the shorthand version of creating and adding a body to the world
 	BodyCreationSettings sphere_settings = new BodyCreationSettings(new SphereShape(0.5f), new RVec3(0f, 2f, 0f), new Quat(), EMotionType.Dynamic, OBJ_LAYER_MOVING);
-	BodyId sphere_id = body_interface.createAndAddBody(sphere_settings, EActivation.Activate);
+	ConstBodyId sphere_id = body_interface.createAndAddBody(sphere_settings, EActivation.Activate);
 
 	// Now you can interact with the dynamic body, in this case we're going to give it a velocity.
 	// (note that if we had used CreateBody then we could have set the velocity straight on the body before adding it to the physics system)

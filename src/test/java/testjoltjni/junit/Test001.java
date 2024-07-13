@@ -23,9 +23,9 @@ package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.Body;
 import com.github.stephengold.joltjni.BodyCreationSettings;
-import com.github.stephengold.joltjni.BodyId;
 import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.ConstBodyId;
 import com.github.stephengold.joltjni.EActivation;
 import com.github.stephengold.joltjni.EMotionType;
 import com.github.stephengold.joltjni.EPhysicsUpdateError;
@@ -105,7 +105,7 @@ public class Test001 {
                 = new BodyCreationSettings(floorShapeSettings, floorLocation,
                         orientation, EMotionType.Static, objLayerNonMoving);
         Body floor = bodyInterface.createBody(floorBodySettings);
-        BodyId floorId = floor.getId();
+        ConstBodyId floorId = floor.getId();
         bodyInterface.addBody(floorId, EActivation.DontActivate);
 
         Shape ballShape = new SphereShape(0.5f);
@@ -116,7 +116,7 @@ public class Test001 {
         BodyCreationSettings ballSettings = new BodyCreationSettings(
                 ballShape, ballLocation, orientation,
                 EMotionType.Dynamic, objLayerMoving);
-        BodyId ballId = bodyInterface.createAndAddBody(
+        ConstBodyId ballId = bodyInterface.createAndAddBody(
                 ballSettings, EActivation.Activate);
         Vec3 ballVelocity = new Vec3(0f, -5f, 0f);
         bodyInterface.setLinearVelocity(ballId, ballVelocity);
