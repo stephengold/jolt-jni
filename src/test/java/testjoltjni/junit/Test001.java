@@ -99,10 +99,14 @@ public class Test001 {
 
         BoxShapeSettings floorShapeSettings
                 = new BoxShapeSettings(new Vec3(100f, 1f, 100f));
+        ShapeResult floorShapeResult = floorShapeSettings.create();
+        Assert.assertFalse(floorShapeResult.hasError());
+
+        ShapeRefC floorShapeRef = floorShapeResult.get();
         RVec3 floorLocation = new RVec3(0.0, -1.0, 0.0);
         Quat orientation = new Quat();
         BodyCreationSettings floorBodySettings
-                = new BodyCreationSettings(floorShapeSettings, floorLocation,
+                = new BodyCreationSettings(floorShapeRef, floorLocation,
                         orientation, EMotionType.Static, objLayerNonMoving);
         Body floor = bodyInterface.createBody(floorBodySettings);
         ConstBodyId floorId = floor.getId();
