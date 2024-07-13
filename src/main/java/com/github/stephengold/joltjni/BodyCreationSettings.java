@@ -499,7 +499,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
      * @param quat the desired rotation (relative to the physics-system axes,
      * not null, unaffected, default=(0,0,0,1))
      */
-    public void setRotation(Quat quat) {
+    public void setRotation(QuatArg quat) {
         long bodySettingsVa = va();
         float qw = quat.getW();
         float qx = quat.getX();

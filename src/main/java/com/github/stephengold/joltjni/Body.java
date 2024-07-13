@@ -473,7 +473,7 @@ public class Body extends NonCopyable {
      * &gt;0)
      */
     public void moveKinematic(
-            RVec3Arg location, Quat orientation, float deltaTime) {
+            RVec3Arg location, QuatArg orientation, float deltaTime) {
         long bodyVa = va();
         double xx = location.xx();
         double yy = location.yy();

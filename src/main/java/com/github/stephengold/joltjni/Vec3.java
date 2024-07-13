@@ -216,7 +216,7 @@ final public class Vec3 implements Vec3Arg {
             return false;
         }
 
-        final Vec3 otherVector = (Vec3) other;
+        final Vec3Arg otherVector = (Vec3Arg) other;
         if (Float.compare(x, otherVector.getX()) != 0) {
             return false;
         } else if (Float.compare(y, otherVector.getY()) != 0) {
