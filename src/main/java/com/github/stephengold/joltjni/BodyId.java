@@ -80,7 +80,23 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
         return result;
     }
     // *************************************************************************
+    // JoltPhysicsObject methods
+
+    /**
+     * Free and unassign the native object if the ID owns it.
+     */
+    @Override
+    public void close() {
+        if (ownsNativeObject()) {
+            long idVa = va();
+            free(idVa);
+            unassignNativeObject();
+        }
+    }
+    // *************************************************************************
     // native private methods
+
+    native private static void free(long idVa);
 
     native private static int getIndex(long idVa);
 

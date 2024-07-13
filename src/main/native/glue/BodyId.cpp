@@ -31,6 +31,17 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyId
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyId_free
+  (JNIEnv *, jclass, jlong idVa) {
+    BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
+    delete pBodyId;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyId
  * Method:    getIndex
  * Signature: (J)I
  */
