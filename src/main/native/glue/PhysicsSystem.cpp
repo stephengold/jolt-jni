@@ -102,7 +102,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getGr
  * Signature: (JI)I
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getNumActiveBodies
-  (JNIEnv *, jclass, jlong systemVa, int typeOrdinal) {
+  (JNIEnv *, jclass, jlong systemVa, jint typeOrdinal) {
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     EBodyType bodyType = (EBodyType)typeOrdinal;
