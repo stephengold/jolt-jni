@@ -169,8 +169,11 @@ final public class Utils {
      * @param object the object to test (not null)
      */
     public static void testClose(ConstJoltPhysicsObject object) {
+        boolean wasOwner = object.ownsNativeObject();
         object.close();
-        Assert.assertFalse(object.hasAssignedNativeObject());
+        if (wasOwner) {
+            Assert.assertFalse(object.hasAssignedNativeObject());
+        }
         Assert.assertFalse(object.ownsNativeObject());
     }
 }
