@@ -26,7 +26,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstAaBox {
+public interface ConstAaBox extends ConstJoltPhysicsObject {
     // *************************************************************************
     // new methods exposed
 
