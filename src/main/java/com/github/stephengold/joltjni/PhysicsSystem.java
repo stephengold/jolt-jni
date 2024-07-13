@@ -54,7 +54,7 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Access the system's {@code BodyInterface}.
      *
-     * @return the pre-existing instance (not null)
+     * @return the pre-existing JVM object (not null)
      */
     public BodyInterface getBodyInterface() {
         assert bodyInterface != null;
@@ -62,9 +62,10 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Copy the system's gravity vector.
+     * Copy the gravity vector. The physics system is unaffected.
      *
-     * @return a new vector
+     * @return a new acceleration vector (meters per second squared in
+     * physics-system coordinates)
      */
     public Vec3 getGravity() {
         long systemVa = va();
@@ -77,8 +78,8 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Counts how many active bodies of the specified type there are in the body
-     * manager.
+     * Count how many active bodies of the specified type there are in the body
+     * manager. The physics system is unaffected.
      *
      * @param bodyType which type of body to count (not null)
      * @return the count (&ge;0)
@@ -92,7 +93,8 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Counts how many bodies there are in the body manager.
+     * Count how many bodies there are in the body manager. The physics system
+     * is unaffected.
      *
      * @return the count (&ge;0)
      */
@@ -104,9 +106,9 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Copy the system's settings. The current instance is unaffected.
+     * Copy the system's settings. The physics system is unaffected.
      *
-     * @return a new, mutable copy of the settings
+     * @return a new JVM object with a new native object assigned
      *
      * @see setPhysicsSettings
      */

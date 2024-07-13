@@ -42,8 +42,7 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     // ConstBodyId methods
 
     /**
-     * Return the body's index in the body array. The current instance is
-     * unaffected.
+     * Return the body's index in the array. The ID is unaffected.
      *
      * @return the index (&ge;0)
      */
@@ -56,7 +55,7 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     }
 
     /**
-     * Return the body's sequence number. The current instance is unaffected.
+     * Return the body's sequence number. The ID is unaffected.
      *
      * @return the sequence number (&ge;0)
      */
@@ -69,7 +68,7 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     }
 
     /**
-     * Test whether the ID is invalid. The current instance is unaffected.
+     * Test whether the ID is valid. It is unaffected.
      *
      * @return true if invalid, false if valid
      */

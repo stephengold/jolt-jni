@@ -34,7 +34,7 @@ public interface ConstShape extends ConstJoltPhysicsObject {
 
     /**
      * Copy the vertex coordinates of the shape's debug mesh to the specified
-     * buffer. The current instance is unaffected.
+     * buffer. The shape is unaffected.
      *
      * @param storeBuffer the buffer to fill with vertex coordinates (not null,
      * modified)
@@ -42,8 +42,8 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     void copyDebugTriangles(FloatBuffer storeBuffer);
 
     /**
-     * Return the number of triangles in the shape's debug mesh. The current
-     * instance is unaffected.
+     * Return the number of triangles in the shape's debug mesh. The shape is
+     * unaffected.
      *
      * @return the count (&gt;0)
      */
@@ -57,16 +57,16 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     MassProperties getMassProperties();
 
     /**
-     * Return the shape's subtype. The current instance is unaffected.
+     * Return the shape's subtype. The shape is unaffected.
      *
-     * @return an enum value
+     * @return an enum value (not null)
      */
     EShapeSubType getSubType();
 
     /**
-     * Return the shape's type. The current instance is unaffected.
+     * Return the shape's type. The shape is unaffected.
      *
-     * @return an enum value
+     * @return an enum value (not null)
      */
     EShapeType getType();
 

@@ -31,22 +31,21 @@ public interface ConstBodyId extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the body's index in the body array. The current instance is
-     * unaffected.
+     * Return the body's index in the array. The ID is unaffected.
      *
      * @return the index (&ge;0)
      */
     int getIndex();
 
     /**
-     * Return the body's sequence number. The current instance is unaffected.
+     * Return the body's sequence number. The ID is unaffected.
      *
      * @return the sequence number (&ge;0)
      */
     int getSequenceNumber();
 
     /**
-     * Test whether the ID is valid. The current instance is unaffected.
+     * Test whether the ID is valid. It is unaffected.
      *
      * @return true if invalid, false if valid
      */

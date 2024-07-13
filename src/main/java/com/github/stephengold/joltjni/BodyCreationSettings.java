@@ -81,8 +81,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Test whether the created body will be allowed to fall asleep. The current
-     * instance is unaffected. (native field: mAllowSleeping)
+     * Test whether the created body will be allowed to fall asleep. The
+     * settings are unaffected. (native field: mAllowSleeping)
      *
      * @return true if allowed, otherwise false
      */
@@ -94,8 +94,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the angular damping constant. The current instance is unaffected.
-     * (native field: mAngularDamping)
+     * Return the angular damping constant. The settings are unaffected. (native
+     * field: mAngularDamping)
      *
      * @return the constant (in units of 1/second, &ge;0, &le;1)
      */
@@ -107,8 +107,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the (initial) angular velocity. The current instance is unaffected.
-     * (native field: mAngularVelocity)
+     * Copy the (initial) angular velocity. The settings are unaffected. (native
+     * field: mAngularVelocity)
      *
      * @return a new velocity vector (radians per second in physics-system
      * coordinates)
@@ -124,8 +124,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the friction ratio. The current instance is unaffected. (native
-     * field: mFriction)
+     * Return the friction ratio. The settings are unaffected. (native field:
+     * mFriction)
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -137,8 +137,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the gravity factor. The current instance is unaffected. (native
-     * field: mGravityFactor)
+     * Return the gravity factor. The settings are unaffected. (native field:
+     * mGravityFactor)
      *
      * @return the factor
      */
@@ -150,8 +150,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the linear damping constant. The current instance is unaffected.
-     * (native field: mLinearDamping)
+     * Return the linear damping constant. The settings are unaffected. (native
+     * field: mLinearDamping)
      *
      * @return the constant (in units of 1/second, &ge;0, &le;1)
      */
@@ -163,8 +163,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the (initial) linear velocity. The current instance is unaffected.
-     * (native field: mLinearVelocity)
+     * Copy the (initial) linear velocity. The settings are unaffected. (native
+     * field: mLinearVelocity)
      *
      * @return a new velocity vector (meters per second in physics-system
      * coordinates)
@@ -182,7 +182,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     /**
      * Calculate the mass and inertia.
      *
-     * @return a new instance
+     * @return a new JVM object with a new native object assigned
      */
     public MassProperties getMassProperties() {
         long bodySettingsVa = va();
@@ -193,8 +193,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the maximum angular speed. The current instance is unaffected.
-     * (native field: mMaxAngularVelocity)
+     * Return the maximum angular speed. The settings are unaffected. (native
+     * field: mMaxAngularVelocity)
      *
      * @return the maximum speed (in radians/second)
      */
@@ -206,8 +206,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the maximum linear speed. The current instance is unaffected.
-     * (native field: mMaxLinearVelocity)
+     * Return the maximum linear speed. The settings are unaffected. (native
+     * field: mMaxLinearVelocity)
      *
      * @return the maximum speed (in meters/second)
      */
@@ -219,8 +219,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the motion quality. The current instance is unaffected. (native
-     * field: mMotionQuality)
+     * Return the motion quality. The settings are unaffected. (native field:
+     * mMotionQuality)
      *
      * @return an enum value (not null)
      */
@@ -233,8 +233,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the motion type. The current instance is unaffected. (native
-     * field: mMotionType)
+     * Return the motion type. The settings are unaffected. (native field:
+     * mMotionType)
      *
      * @return an enum value (not null)
      */
@@ -247,7 +247,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the index of the object layer. The current instance is unaffected.
+     * Return the index of the object layer. The settings are unaffected.
      * (native field: mObjectLayer)
      *
      * @return the layer index (&ge;0, &lt;numObjectLayers)
@@ -260,11 +260,11 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the (initial) location. The current instance is unaffected.
-     * (native field: mPosition)
+     * Return the (initial) location. The settings are unaffected. (native
+     * field: mPosition)
      *
-     * @return a new location vector in physics-system coordinates, all
-     * components finite
+     * @return a new location vector (in physics-system coordinates, all
+     * components finite)
      */
     public RVec3 getPosition() {
         long bodySettingsVa = va();
@@ -283,8 +283,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the restitution ratio. The current instance is unaffected. (native
-     * field: mRestitution)
+     * Return the restitution ratio. The settings are unaffected. (native field:
+     * mRestitution)
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -295,8 +295,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the (initial) orientation of the body's axes. The current instance
-     * is unaffected. (native field: mRotation)
+     * Copy the (initial) orientation of the body's axes. The settings are
+     * unaffected. (native field: mRotation)
      *
      * @return a new rotation quaternion (relative to the physics-system axes)
      */
@@ -314,8 +314,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     /**
      * Access the {@code Shape}.
      *
-     * @return a new JVM object referencing the pre-existing native object, or
-     * {@code null} if the native field is {@code NULL}
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null}
      */
     public Shape getShape() {
         long bodySettingsVa = va();
@@ -325,7 +325,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Test whether the body's mass properties will be calculated.
+     * Test whether the body's mass properties will be calculated. The settings
+     * are unaffected.
      *
      * @return true if calculated, otherwise false
      */
@@ -469,8 +470,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the (initial) location of the body's origin (which might differ
-     * from its center of mass). (native field: mPosition)
+     * Alter the (initial) location of the body's origin (which might not
+     * coincide with its center of mass). (native field: mPosition)
      *
      * @param loc the desired location (in physics-system coordinates, not null,
      * unaffected, default=(0,0,0))
@@ -532,8 +533,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     // JoltPhysicsObject methods
 
     /**
-     * Free and unassign the native object if the current settings instance owns
-     * it.
+     * Free and unassign the native object if the settings object owns it.
      */
     @Override
     public void close() {

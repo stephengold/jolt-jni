@@ -51,7 +51,7 @@ public class ScaledShape extends DecoratedShape {
     /**
      * Copy the shape's scale factors.
      *
-     * @return a new vector
+     * @return a new scaling vector
      */
     public Vec3 getScale() {
         long scaledVa = va();

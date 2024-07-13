@@ -49,7 +49,7 @@ abstract public class NonCopyable extends JoltPhysicsObject {
     // JoltPhysicsObject methods
 
     /**
-     * Free and unassign the native object if the current instance owns it.
+     * Free and unassign the native object if the physics object owns it.
      */
     @Override
     public void close() {

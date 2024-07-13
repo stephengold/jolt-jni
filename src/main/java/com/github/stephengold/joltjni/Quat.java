@@ -22,10 +22,9 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A math object composed of 4 single-precision components, used to represent
- * rotations and orientations in 3-dimensional space, without risk of gimbal
- * lock. Each instance has 4 single-precision components: 3 imaginary components
- * (X, Y, and Z) and a real component (W).
+ * A math object used to represent rotations and orientations in 3-dimensional
+ * space, without risk of gimbal lock. Each quaternion has 4 single-precision
+ * components: 3 imaginary ones (X, Y, and Z) and a real one (W).
  * <p>
  * Mathematically speaking, quaternions are an extension of complex numbers.
  *

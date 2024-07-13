@@ -47,7 +47,7 @@ public class ObjVsObjFilter extends JoltPhysicsObject {
      *
      * @param layer1 the index of the first object layer (&lt; numObjectLayers)
      * @param layer2 the index of the 2nd object layer (&lt; numObjectLayers)
-     * @return the (modified) current instance (for chaining)
+     * @return the modified filter (for chaining)
      */
     public ObjVsObjFilter disablePair(int layer1, int layer2) {
         disablePair(va(), layer1, layer2);

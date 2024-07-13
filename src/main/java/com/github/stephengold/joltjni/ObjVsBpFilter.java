@@ -49,7 +49,7 @@ public class ObjVsBpFilter extends JoltPhysicsObject {
      *
      * @param objLayer the index of the object layer (&lt; numObjectLayers)
      * @param bpLayer the index of the broadphase layer (&lt; numBpLayers)
-     * @return the (modified) current instance (for chaining)
+     * @return the modified filter (for chaining)
      */
     public ObjVsBpFilter disablePair(int objLayer, int bpLayer) {
         disablePair(va(), objLayer, bpLayer);

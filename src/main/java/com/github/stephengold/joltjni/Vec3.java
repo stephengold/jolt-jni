@@ -187,7 +187,7 @@ final public class Vec3 implements Vec3Arg {
 
     /**
      * Return a hash code. If two vectors have identical values, they will have
-     * the same hash code. The current instance is unaffected.
+     * the same hash code. The vector is unaffected.
      *
      * @return a 32-bit value for use in hashing
      */

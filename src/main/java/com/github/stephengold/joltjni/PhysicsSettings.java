@@ -220,8 +220,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
     // JoltPhysicsObject methods
 
     /**
-     * Free and unassign the native object if the current settings instance owns
-     * it.
+     * Free and unassign the native object if the settings object owns it.
      */
     @Override
     public void close() {

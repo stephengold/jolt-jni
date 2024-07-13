@@ -50,7 +50,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     /**
      * Generate a shape from these settings.
      *
-     * @return a new instance
+     * @return a new JVM object
      */
     @Override
     public BoxShape createShape() {

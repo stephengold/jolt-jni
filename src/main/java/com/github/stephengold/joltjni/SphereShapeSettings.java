@@ -45,7 +45,7 @@ public class SphereShapeSettings extends ConvexShapeSettings {
     /**
      * Generate a shape from these settings.
      *
-     * @return a new instance
+     * @return a new JVM object
      */
     @Override
     public SphereShape createShape() {

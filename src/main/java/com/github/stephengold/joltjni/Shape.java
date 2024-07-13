@@ -52,10 +52,10 @@ abstract public class Shape extends NonCopyable
     // new methods exposed
 
     /**
-     * Instantiate a Shape from its virtual address.
+     * Instantiate a {@code Shape} from its virtual address.
      *
      * @param shapeVa the virtual address of the native object, or zero
-     * @return a new instance, or {@code null} if the argument was zero
+     * @return a new JVM object, or {@code null} if the argument was zero
      */
     static Shape newShape(long shapeVa) {
         if (shapeVa == 0L) {
@@ -97,7 +97,7 @@ abstract public class Shape extends NonCopyable
 
     /**
      * Copy the vertex coordinates of the shape's debug mesh to the specified
-     * buffer. The current instance is unaffected.
+     * buffer. The shape is unaffected.
      *
      * @param storeBuffer the buffer to fill with vertex coordinates (not null,
      * modified)
@@ -110,8 +110,8 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Return the number of triangles in the shape's debug mesh. The current
-     * instance is unaffected.
+     * Return the number of triangles in the shape's debug mesh. The shape is
+     * unaffected.
      *
      * @return the count (&gt;0)
      */
@@ -152,7 +152,7 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Return the shape's subtype. The current instance is unaffected.
+     * Return the shape's subtype. The shape is unaffected.
      *
      * @return an enum value
      */
@@ -166,7 +166,7 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Return the shape's type. The current instance is unaffected.
+     * Return the shape's type. The shape is unaffected.
      *
      * @return an enum value
      */

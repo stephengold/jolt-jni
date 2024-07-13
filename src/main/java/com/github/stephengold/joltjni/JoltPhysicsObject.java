@@ -32,13 +32,12 @@ abstract public class JoltPhysicsObject
     // fields
 
     /**
-     * true if the current instance owns (is responsible for freeing) its native
-     * object, otherwise false
+     * true if the JVM object owns (is responsible for freeing) its assigned
+     * native object, otherwise false
      */
     private boolean isOwner = false;
     /**
-     * virtual address of the native object assigned to the current instance, or
-     * 0 for none
+     * virtual address of the assigned native object, or 0 for none
      */
     private long virtualAddress;
     // *************************************************************************
@@ -65,13 +64,12 @@ abstract public class JoltPhysicsObject
     // new protected methods
 
     /**
-     * Assign a native object to this instance, assuming none is already
-     * assigned.
+     * Assign a native object, assuming none is already assigned.
      *
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
+     * isn't the owner
      */
     protected void setVirtualAddress(long virtualAddress, boolean owner) {
         assert virtualAddress != 0L : "invalid virtual address";
@@ -95,7 +93,7 @@ abstract public class JoltPhysicsObject
     // ConstJoltPhysicsObject methods
 
     /**
-     * Free and unassign the native object if the current instance owns it.
+     * Free and unassign the native object if the JVM object owns it.
      */
     @Override
     public void close() {
@@ -107,7 +105,8 @@ abstract public class JoltPhysicsObject
     }
 
     /**
-     * Compare (by virtual address) with another native object.
+     * Compare (by virtual address) with another physics object. The current
+     * instance is unaffected.
      *
      * @param other (not null, unaffected)
      * @return 0 if the objects have the same virtual address; negative if this
@@ -122,8 +121,7 @@ abstract public class JoltPhysicsObject
     }
 
     /**
-     * Test whether a native object is assigned. The physics object is
-     * unaffected.
+     * Test whether a native object is assigned. Both objects are unaffected.
      *
      * @return true if one is assigned, otherwise false
      */
@@ -137,8 +135,8 @@ abstract public class JoltPhysicsObject
     }
 
     /**
-     * Test whether the physics object owns (is responsible for freeing) its
-     * native object. The physics object is unaffected.
+     * Test whether the JVM object owns (is responsible for freeing) its
+     * assigned native object. Both objects are unaffected.
      *
      * @return true if owner, otherwise false
      */
@@ -149,7 +147,7 @@ abstract public class JoltPhysicsObject
 
     /**
      * Return the virtual address of the assigned native object, assuming one is
-     * assigned. The physics object is unaffected.
+     * assigned. Both objects are unaffected.
      *
      * @return the virtual address (not zero)
      */
@@ -162,8 +160,8 @@ abstract public class JoltPhysicsObject
     // Object methods
 
     /**
-     * Test for type and virtual-address equality with another object. Both the
-     * current instance and the argument are unaffected.
+     * Test for type and virtual-address equality with another object. The
+     * current instance is unaffected.
      *
      * @param otherObject the object to compare (may be null, unaffected)
      * @return true if {@code this} and {@code otherObject} have the same type
@@ -188,7 +186,7 @@ abstract public class JoltPhysicsObject
     }
 
     /**
-     * Return the hash code for this instance.
+     * Return the hash code of the physics object. The object is unaffected.
      * <p>
      * Note: operations that alter the virtual address are likely to affect the
      * hash code as well!
@@ -202,7 +200,8 @@ abstract public class JoltPhysicsObject
     }
 
     /**
-     * Represent this instance as a String.
+     * Represent the physics object as a String. The physics object is
+     * unaffected.
      *
      * @return a descriptive string of text (not null, not empty)
      */

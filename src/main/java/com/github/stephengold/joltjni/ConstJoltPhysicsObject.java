@@ -32,21 +32,20 @@ public interface ConstJoltPhysicsObject
     // new methods exposed
 
     /**
-     * Free and unassign the native object if the current instance owns it.
+     * Free and unassign the native object if the JVM object owns it.
      */
     void close();
 
     /**
-     * Test whether a native object is assigned. The physics object is
-     * unaffected.
+     * Test whether a native object is assigned. Both objects are unaffected.
      *
      * @return true if one is assigned, otherwise false
      */
     boolean hasAssignedNativeObject();
 
     /**
-     * Test whether the physics object owns (is responsible for freeing) its
-     * native object. The physics object is unaffected.
+     * Test whether the JVM object owns (is responsible for freeing) its
+     * assigned native object. Both objects are unaffected.
      *
      * @return true if owner, otherwise false
      */
@@ -54,7 +53,7 @@ public interface ConstJoltPhysicsObject
 
     /**
      * Return the virtual address of the assigned native object, assuming one is
-     * assigned. The physics object is unaffected.
+     * assigned. Both objects are unaffected.
      *
      * @return the virtual address (not zero)
      */

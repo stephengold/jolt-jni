@@ -74,7 +74,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Instantiate the biggest finite box.
      *
-     * @return a new instance
+     * @return a new JVM object with a new native object assigned
      */
     public static AaBox sBiggest() {
         long boxVa = sBiggest(true);
@@ -94,8 +94,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     // ConstAaBox methods
 
     /**
-     * Test whether the box contains the specified point. The current instance
-     * is unaffected.
+     * Test whether the box contains the specified point. The box is unaffected.
      *
      * @param point the point to test (not null, unaffected)
      *
@@ -113,7 +112,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Locate the center of the box. The current instance is unaffected.
+     * Locate the center of the box. The box is unaffected.
      *
      * @return a new location vector
      */
@@ -129,7 +128,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Return the (half) extent of the box. The current instance is unaffected.
+     * Return the (half) extent of the box. The box is unaffected.
      *
      * @return a new vector
      */
@@ -145,8 +144,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Return the maximum contained coordinate on each axis. The current
-     * instance is unaffected.
+     * Return the maximum contained coordinate on each axis. The box is
+     * unaffected.
      *
      * @return a new vector
      */
@@ -162,8 +161,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Return the minimum contained coordinate on each axis. The current
-     * instance is unaffected.
+     * Return the minimum contained coordinate on each axis. The box is
+     * unaffected.
      *
      * @return a new vector
      */
@@ -179,8 +178,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Return the size (full extent) on each axis. The current instance is
-     * unaffected.
+     * Return the size (full extent) on each axis. The box is unaffected.
      *
      * @return a new vector
      */
@@ -196,7 +194,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Return the volume of the box. The current instance is unaffected.
+     * Return the volume of the box. The box is unaffected.
      *
      * @return the volume
      */
@@ -209,7 +207,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Test whether the box is valid. The current instance is unaffected.
+     * Test whether the box is valid. The box is unaffected.
      *
      * @return true if valid, otherwise false
      */

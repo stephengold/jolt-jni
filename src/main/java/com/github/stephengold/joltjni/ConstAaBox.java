@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * An immutable axis-aligned box.
+ * An immutable {@code AaBox}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -31,8 +31,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Test whether the box contains the specified point. The current instance
-     * is unaffected.
+     * Test whether the box contains the specified point. The box is unaffected.
      *
      * @param point the point to test (not null, unaffected)
      *
@@ -41,52 +40,51 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     boolean contains(Vec3Arg point);
 
     /**
-     * Locate the center of the box. The current instance is unaffected.
+     * Locate the center of the box. The box is unaffected.
      *
      * @return a new location vector
      */
     Vec3 getCenter();
 
     /**
-     * Return the (half) extent of the box. The current instance is unaffected.
+     * Return the (half) extent of the box. The box is unaffected.
      *
      * @return a new vector
      */
     Vec3 getExtent();
 
     /**
-     * Return the maximum contained coordinate on each axis. The current
-     * instance is unaffected.
+     * Return the maximum contained coordinate on each axis. The box is
+     * unaffected.
      *
      * @return a new vector
      */
     Vec3 getMax();
 
     /**
-     * Return the minimum contained coordinate on each axis. The current
-     * instance is unaffected.
+     * Return the minimum contained coordinate on each axis. The box is
+     * unaffected.
      *
      * @return a new vector
      */
     Vec3 getMin();
 
     /**
-     * Return the size (full extent) on each axis. The current instance is
-     * unaffected.
+     * Return the size (full extent) on each axis. The box is unaffected.
      *
      * @return a new vector
      */
     Vec3 getSize();
 
     /**
-     * Return the volume of the box. The current instance is unaffected.
+     * Return the volume of the box. The box is unaffected.
      *
      * @return the volume
      */
     float getVolume();
 
     /**
-     * Test whether the box is valid. The current instance is unaffected.
+     * Test whether the box is valid. It is unaffected.
      *
      * @return true if valid, otherwise false
      */

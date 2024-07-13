@@ -110,7 +110,7 @@ public class BodyInterface extends NonCopyable {
      * Locate the center of mass of the specified body.
      *
      * @param bodyId the ID of the body to locate (not null)
-     * @return a new vector
+     * @return a new location vector (in physics-system coordinates)
      */
     public RVec3 getCenterOfMassPosition(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
@@ -127,7 +127,8 @@ public class BodyInterface extends NonCopyable {
      * Return the linear velocity of the specified body.
      *
      * @param bodyId the ID of the body (not null)
-     * @return a new vector
+     * @return a new velocity vector (meters per second in physics-system
+     * coordinates)
      */
     public Vec3 getLinearVelocity(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();

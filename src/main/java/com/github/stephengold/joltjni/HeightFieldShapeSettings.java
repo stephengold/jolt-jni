@@ -59,7 +59,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Generate a shape from these settings.
      *
-     * @return a new instance
+     * @return a new object
      */
     @Override
     public HeightFieldShape createShape() {

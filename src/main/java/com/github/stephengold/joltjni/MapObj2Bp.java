@@ -35,7 +35,8 @@ public class MapObj2Bp extends JoltPhysicsObject {
      * Instantiate an empty map with the specified capacity.
      *
      * @param numObjLayers the desired capacity (number of object layers)
-     * @param numBpLayers the number of broadphase layers
+     * (&ge;1)
+     * @param numBpLayers the number of broadphase layers (&ge;1)
      */
     public MapObj2Bp(int numObjLayers, int numBpLayers) {
         long mapVa = createMapObj2Bp(numObjLayers, numBpLayers);
@@ -51,7 +52,7 @@ public class MapObj2Bp extends JoltPhysicsObject {
      * @param objLayer the index of the object layer (&ge;0, &lt;
      * numObjectLayers)
      * @param bpLayer the index of the broadphase layer (&lt; numBpLayers)
-     * @return the (modified) current instance (for chaining)
+     * @return the modified map (for chaining)
      */
     public MapObj2Bp add(int objLayer, int bpLayer) {
         add(va(), objLayer, bpLayer);

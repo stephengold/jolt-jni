@@ -130,8 +130,8 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Test whether the body could be made kinematic or dynamic. The current
-     * instance is unaffected.
+     * Test whether the body could be made kinematic or dynamic. The body is
+     * unaffected.
      *
      * @return true if possible, otherwise false
      */
@@ -143,10 +143,9 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the net force acting on the body. The current instance is
-     * unaffected.
+     * Return the net force acting on the body. The body is unaffected.
      *
-     * @return a new vector
+     * @return a new force vector (in physics-system coordinates)
      */
     public Vec3 getAccumulatedForce() {
         long bodyVa = va();
@@ -159,10 +158,9 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the net torque acting on the body. The current instance is
-     * unaffected.
+     * Return the net torque acting on the body. The body is unaffected.
      *
-     * @return a new vector
+     * @return a new torque vector (in physics-system coordinates)
      */
     public Vec3 getAccumulatedTorque() {
         long bodyVa = va();
@@ -175,8 +173,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Test whether the body is allowed to fall asleep. The current instance is
-     * unaffected.
+     * Test whether the body is allowed to fall asleep. The body is unaffected.
      *
      * @return true if allowed, otherwise false
      */
@@ -188,9 +185,10 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's angular velocity. The current instance is unaffected.
+     * Return the body's angular velocity. The body is unaffected.
      *
-     * @return a new vector in physics-system coordinates
+     * @return a new velocity vector (radians per second in physics-system
+     * coordinates
      */
     public Vec3 getAngularVelocity() {
         long bodyVa = va();
@@ -203,11 +201,11 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the location of the body's center of mass (which might differ from
-     * its origin). The current instance is unaffected.
+     * Return the location of the body's center of mass (which might not
+     * coincide with its origin). The body is unaffected.
      *
-     * @return a new vector in physics-system coordinates (all components
-     * finite)
+     * @return a new location vector (in physics-system coordinates, all
+     * components finite)
      */
     public RVec3 getCenterOfMassPosition() {
         long bodyVa = va();
@@ -227,7 +225,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's friction ratio. The current instance is unaffected.
+     * Return the body's friction ratio. The body is unaffected.
      *
      * @return the ratio
      */
@@ -238,8 +236,8 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Acquire the body's ID for use with {@code BodyInterface}. The current
-     * instance is unaffected.
+     * Acquire the body's ID for use with {@code BodyInterface}. The body is
+     * unaffected.
      *
      * @return the value
      */
@@ -252,9 +250,10 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's linear velocity. The current instance is unaffected.
+     * Return the body's linear velocity. The body is unaffected.
      *
-     * @return a new vector in physics-system coordinates
+     * @return a new velocity vector (meters per second in physics-system
+     * coordinates)
      */
     public Vec3 getLinearVelocity() {
         long bodyVa = va();
@@ -267,9 +266,10 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Acquire the body's motion properties.
+     * Access the body's motion properties.
      *
-     * @return a new instance, or null if none
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * null if none
      */
     public MotionProperties getMotionProperties() {
         MotionProperties result;
@@ -285,7 +285,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's motion type. The current instance is unaffected.
+     * Return the body's motion type. The body is unaffected.
      *
      * @return an enum value (not null)
      */
@@ -298,7 +298,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's object layer. The current instance is unaffected.
+     * Return the body's object layer. The body is unaffected.
      *
      * @return a layer index (&ge;0)
      */
@@ -310,11 +310,11 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the location of the body's origin (which might differ from its
-     * center of mass). The current instance is unaffected.
+     * Return the location of the body's origin (which not coincide with its
+     * center of mass). The body is unaffected.
      *
-     * @return a new vector in physics-system coordinates (all components
-     * finite)
+     * @return a new location vector (in physics-system coordinates, all
+     * components finite)
      */
     public RVec3 getPosition() {
         long bodyVa = va();
@@ -334,7 +334,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's restitution ratio. The current instance is unaffected.
+     * Return the body's restitution ratio. The body is unaffected.
      *
      * @return the value (typically &ge;0 and &le;1)
      */
@@ -347,9 +347,9 @@ public class Body extends NonCopyable {
 
     /**
      * Return the body's orientation relative to the physics-system axes. The
-     * current instance is unaffected.
+     * body is unaffected.
      *
-     * @return a new quaternion
+     * @return a new rotation quaternion (relative to the physics-system axes)
      */
     public Quat getRotation() {
         long bodyVa = va();
@@ -363,9 +363,10 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's shape.
+     * Access the body's shape.
      *
-     * @return a new Java instance
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
      */
     public ConstShape getShape() {
         long bodyVa = va();
@@ -376,8 +377,8 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's user data: can be used for anything. The current
-     * instance is unaffected.
+     * Return the body's user data: can be used for anything. The body is
+     * unaffected.
      *
      * @return the value
      */
@@ -389,9 +390,9 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's bounding box. The current instance is unaffected.
+     * Return the body's bounding box. The body is unaffected.
      *
-     * @return a new JVM instance that references the pre-existing native object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     public ConstAaBox getWorldSpaceBounds() {
         long bodyVa = va();
@@ -402,7 +403,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Test whether the body is deactivated. The current instance is unaffected.
+     * Test whether the body is deactivated. The body is unaffected.
      *
      * @return false if deactivated, otherwise true
      */
@@ -414,7 +415,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Test whether the body is dynamic. The current instance is unaffected.
+     * Test whether the body is dynamic. The body is unaffected.
      *
      * @return true if dynamic, otherwise false
      */
@@ -426,7 +427,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Test whether the body is kinematic. The current instance is unaffected.
+     * Test whether the body is kinematic. The body is unaffected.
      *
      * @return true if kinematic, otherwise false
      */
@@ -438,8 +439,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Test whether the body is a rigid body. The current instance is
-     * unaffected.
+     * Test whether the body is a rigid body. The body is unaffected.
      *
      * @return true if rigid body, otherwise false
      */
@@ -451,7 +451,7 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Test whether the body is static. The current instance is unaffected.
+     * Test whether the body is static. The body is unaffected.
      *
      * @return true if static, otherwise false
      */

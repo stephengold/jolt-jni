@@ -44,8 +44,8 @@ final public class MassProperties extends JoltPhysicsObject {
     // JoltPhysicsObject methods
 
     /**
-     * Free and unassign the native object if the current properties instance
-     * owns it.
+     * Free and unassign the native object if the current properties object owns
+     * it.
      */
     @Override
     public void close() {

@@ -73,7 +73,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Generate a shape from these settings.
      *
-     * @return a new instance
+     * @return a new object
      */
     @Override
     public ConvexHullShape createShape() {

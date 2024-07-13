@@ -149,7 +149,7 @@ final public class Utils {
     }
 
     /**
-     * Return the recommended number of worker threads to use.
+     * Return the recommended number of worker threads.
      *
      * @return the count (&ge;1)
      */
@@ -164,7 +164,7 @@ final public class Utils {
     }
 
     /**
-     * Test the {@code close()} method of the specified object.
+     * Test the {@code close()} method of the specified physics object.
      *
      * @param object the object to test (not null)
      */

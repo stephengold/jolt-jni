@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A variable-length vector of {@code IndexedTriangle} instances.
+ * A variable-length vector of indexed triangles.
  *
  * @author Stephen Gold sgold@sonic.net
  */
