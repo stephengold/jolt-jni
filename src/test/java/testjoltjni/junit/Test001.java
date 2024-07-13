@@ -106,6 +106,7 @@ public class Test001 {
                         orientation, EMotionType.Static, objLayerNonMoving);
         Body floor = bodyInterface.createBody(floorBodySettings);
         ConstBodyId floorId = floor.getId();
+        Assert.assertFalse(floorId.isInvalid());
         bodyInterface.addBody(floorId, EActivation.DontActivate);
 
         Shape ballShape = new SphereShape(0.5f);
@@ -118,6 +119,7 @@ public class Test001 {
                 EMotionType.Dynamic, objLayerMoving);
         ConstBodyId ballId = bodyInterface.createAndAddBody(
                 ballSettings, EActivation.Activate);
+        Assert.assertFalse(ballId.isInvalid());
         Vec3 ballVelocity = new Vec3(0f, -5f, 0f);
         bodyInterface.setLinearVelocity(ballId, ballVelocity);
 
@@ -154,9 +156,11 @@ public class Test001 {
 
         bodyInterface.removeBody(ballId);
         bodyInterface.destroyBody(ballId);
+        Utils.testClose(ballId);
 
         bodyInterface.removeBody(floorId);
         bodyInterface.destroyBody(floorId);
+        Utils.testClose(floorId);
 
         Utils.testClose(floorShapeSettings);
         Utils.testClose(physicsSystem);
