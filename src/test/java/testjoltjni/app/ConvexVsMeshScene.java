@@ -133,7 +133,7 @@ public class ConvexVsMeshScene {
 		return true;
 	}
 
-	static void StartTest(PhysicsSystem inPhysicsSystem, EMotionQuality inMotionQuality)
+	static void			StartTest(PhysicsSystem inPhysicsSystem, EMotionQuality inMotionQuality)
 	{
 		// Reduce the solver iteration count, the scene doesn't have any constraints so we don't need the default amount of iterations
 		PhysicsSettings settings = inPhysicsSystem.getPhysicsSettings();

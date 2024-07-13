@@ -342,6 +342,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
         long bodySettingsVa = va();
         long shapeSettingsVa = getShape(bodySettingsVa);
         Shape result = Shape.newShape(shapeSettingsVa);
+
         return result;
     }
 
