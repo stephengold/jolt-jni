@@ -21,8 +21,8 @@ SOFTWARE.
  */
 package testjoltjni;
 
+import com.github.stephengold.joltjni.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.Jolt;
-import com.github.stephengold.joltjni.JoltPhysicsObject;
 import com.github.stephengold.joltjni.QuatArg;
 import com.github.stephengold.joltjni.RVec3Arg;
 import com.github.stephengold.joltjni.Vec3Arg;
@@ -168,7 +168,7 @@ final public class Utils {
      *
      * @param object the object to test (not null)
      */
-    public static void testClose(JoltPhysicsObject object) {
+    public static void testClose(ConstJoltPhysicsObject object) {
         object.close();
         Assert.assertFalse(object.hasAssignedNativeObject());
         Assert.assertFalse(object.ownsNativeObject());
