@@ -45,7 +45,7 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
 
     /**
      * Create a mutable copy.
-     * 
+     *
      * @return a new mutable JVM object with a new native object assigned
      */
     @Override
