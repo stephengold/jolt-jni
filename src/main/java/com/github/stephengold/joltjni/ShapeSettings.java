@@ -26,7 +26,8 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class ShapeSettings extends SerializableObject {
+abstract public class ShapeSettings
+        extends SerializableObject implements RefTarget {
     // *************************************************************************
     // constructors
 
@@ -44,4 +45,23 @@ abstract public class ShapeSettings extends SerializableObject {
      * @return a new instance
      */
     abstract public Shape createShape();
+    // *************************************************************************
+    // RefTarget methods
+
+    /**
+     * Count active references to these settings.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long settingsVa = va();
+        int result = getRefCount(settingsVa);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static int getRefCount(long settingsVa);
 }
