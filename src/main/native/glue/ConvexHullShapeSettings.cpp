@@ -58,7 +58,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
     const jfloat * const pFloats
             = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
     Vec3 * const pPoints = new Vec3[numPoints];
-    for (int i = 0; i < numPoints; ++i) {
+    for (jint i = 0; i < numPoints; ++i) {
         float x = pFloats[3 * i];
         float y = pFloats[3 * i + 1];
         float z = pFloats[3 * i + 2];

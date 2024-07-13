@@ -58,7 +58,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
     const jfloat * const pFloats
         = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
     VertexList vertices;
-    for (int i = 0; i < numVertices; ++i) {
+    for (jint i = 0; i < numVertices; ++i) {
         const float x = pFloats[3 * i];
         const float y = pFloats[3 * i + 1];
         const float z = pFloats[3 * i + 2];

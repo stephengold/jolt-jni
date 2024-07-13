@@ -401,7 +401,7 @@ inline static const RVec3 getPosition(jlong bodyVa) {
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Body_getObjectLayer
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    int result = pBody->GetObjectLayer();
+    ObjectLayer result = pBody->GetObjectLayer();
     return result;
 }
 

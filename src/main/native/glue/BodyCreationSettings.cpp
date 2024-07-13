@@ -305,7 +305,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
   (JNIEnv *, jclass, jlong bodySettingsVa) {
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
-    int result = pSettings->mObjectLayer;
+    ObjectLayer result = pSettings->mObjectLayer;
     return (jint) result;
 }
 

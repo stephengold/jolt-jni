@@ -62,7 +62,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleNoMate
   (JNIEnv *, jclass, jlong triangleVa, jint cornerIndex) {
     const IndexedTriangleNoMaterial * const pTriangle
             = reinterpret_cast<IndexedTriangleNoMaterial *> (triangleVa);
-    int result = pTriangle->mIdx[cornerIndex];
+    uint32 result = pTriangle->mIdx[cornerIndex];
     return result;
 }
 

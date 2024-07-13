@@ -42,7 +42,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getNu
     return result;
 }
 
-inline static const Vec3 getPoint(jlong shapeVa, int pointIndex) {
+inline static const Vec3 getPoint(jlong shapeVa, jint pointIndex) {
     const ConvexHullShape * const pShape
             = reinterpret_cast<ConvexHullShape *> (shapeVa);
     const Vec3 result = pShape->GetPoint(pointIndex);

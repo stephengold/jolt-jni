@@ -50,7 +50,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_IndexedTriangle_getMa
   (JNIEnv *, jclass, jlong triangleVa) {
     const IndexedTriangle * const pTriangle
             = reinterpret_cast<IndexedTriangle *> (triangleVa);
-    int result = pTriangle->mMaterialIndex;
+    uint32 result = pTriangle->mMaterialIndex;
     return result;
 }
 

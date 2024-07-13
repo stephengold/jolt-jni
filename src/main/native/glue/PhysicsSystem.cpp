@@ -212,5 +212,5 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_update
             = reinterpret_cast<JobSystemThreadPool *> (jobSystemVa);
     EPhysicsUpdateError result = pPhysicsSystem->Update(
             deltaTime, collisionSteps, pAllocator, pJobSystem);
-    return (int) result;
+    return (jint) result;
 }
