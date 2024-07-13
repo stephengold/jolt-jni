@@ -93,7 +93,8 @@ abstract public class JoltPhysicsObject
     // ConstJoltPhysicsObject methods
 
     /**
-     * Free and unassign the native object if the JVM object owns it.
+     * Free and unassign the native object if the JVM object owns it. Meant to
+     * be overridden.
      */
     @Override
     public void close() {

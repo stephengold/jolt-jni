@@ -32,7 +32,7 @@ public class PhysicsSystem extends NonCopyable {
     // fields
 
     /**
-     * interface for adding/modifying/querying/removing bodies (not null)
+     * manage bodies associated with this system (not null)
      */
     final private BodyInterface bodyInterface;
     /**

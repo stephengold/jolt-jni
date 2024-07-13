@@ -236,10 +236,11 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Acquire the body's ID for use with {@code BodyInterface}. The body is
+     * Access the body's ID for use with {@code BodyInterface}. The body is
      * unaffected.
      *
-     * @return the value
+     * @return a new immutable JVM object with the pre-existing native object
+     * assigned
      */
     public ConstBodyId getId() {
         long bodyVa = va();
