@@ -28,7 +28,8 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class Shape extends NonCopyable implements ConstShape {
+abstract public class Shape extends NonCopyable
+        implements ConstShape, RefTarget {
     // *************************************************************************
     // constructors
 
@@ -138,7 +139,20 @@ abstract public class Shape extends NonCopyable implements ConstShape {
     }
 
     /**
-     * Return the shape's subtype.
+     * Count known references to the shape.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long shapeVa = va();
+        int result = getRefCount(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Return the shape's subtype. The current instance is unaffected.
      *
      * @return an enum value
      */
@@ -185,6 +199,8 @@ abstract public class Shape extends NonCopyable implements ConstShape {
     native private static int countDebugTriangles(long shapeVa);
 
     native private static long getMassProperties(long shapeVa);
+
+    native private static int getRefCount(long shapeVa);
 
     native private static int getSubType(long shapeVa);
 

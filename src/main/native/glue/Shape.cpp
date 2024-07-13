@@ -114,6 +114,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getMassPropert
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getRefCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getRefCount
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    uint32 result = pShape->GetRefCount();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    getSubType
  * Signature: (J)I
  */
