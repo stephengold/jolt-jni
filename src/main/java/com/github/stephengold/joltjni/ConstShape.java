@@ -34,7 +34,7 @@ public interface ConstShape {
 
     /**
      * Copy the vertex coordinates of the shape's debug mesh to the specified
-     * buffer.
+     * buffer. The current instance is unaffected.
      *
      * @param storeBuffer the buffer to fill with vertex coordinates (not null,
      * modified)
@@ -42,7 +42,8 @@ public interface ConstShape {
     void copyDebugTriangles(FloatBuffer storeBuffer);
 
     /**
-     * Return the number of triangles in the shape's debug mesh.
+     * Return the number of triangles in the shape's debug mesh. The current
+     * instance is unaffected.
      *
      * @return the count (&gt;0)
      */
@@ -56,14 +57,14 @@ public interface ConstShape {
     MassProperties getMassProperties();
 
     /**
-     * Return the shape's subtype.
+     * Return the shape's subtype. The current instance is unaffected.
      *
      * @return an enum value
      */
     EShapeSubType getSubType();
 
     /**
-     * Return the shape's type.
+     * Return the shape's type. The current instance is unaffected.
      *
      * @return an enum value
      */

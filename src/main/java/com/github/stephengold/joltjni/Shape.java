@@ -96,7 +96,7 @@ abstract public class Shape extends NonCopyable implements ConstShape {
 
     /**
      * Copy the vertex coordinates of the shape's debug mesh to the specified
-     * buffer.
+     * buffer. The current instance is unaffected.
      *
      * @param storeBuffer the buffer to fill with vertex coordinates (not null,
      * modified)
@@ -109,7 +109,8 @@ abstract public class Shape extends NonCopyable implements ConstShape {
     }
 
     /**
-     * Return the number of triangles in the shape's debug mesh.
+     * Return the number of triangles in the shape's debug mesh. The current
+     * instance is unaffected.
      *
      * @return the count (&gt;0)
      */
@@ -151,7 +152,7 @@ abstract public class Shape extends NonCopyable implements ConstShape {
     }
 
     /**
-     * Return the shape's type.
+     * Return the shape's type. The current instance is unaffected.
      *
      * @return an enum value
      */
