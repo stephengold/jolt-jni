@@ -143,8 +143,8 @@ public class Test001 {
             ++stepCounter;
         }
         Assert.assertEquals(48, stepCounter);
-        jobSystem.close();
-        tempAllocator.close();
+        Utils.testClose(jobSystem);
+        Utils.testClose(tempAllocator);
 
         ballLocation = bodyInterface.getCenterOfMassPosition(ballId);
         Utils.assertEquals(0f, 0.48f, 0f, ballLocation, 1e-5f);
@@ -158,11 +158,11 @@ public class Test001 {
         bodyInterface.removeBody(floorId);
         bodyInterface.destroyBody(floorId);
 
-        floorShapeSettings.close();
-        physicsSystem.close();
-        objVsObjFilter.close();
-        objVsBpFilter.close();
-        mapObj2Bp.close();
+        Utils.testClose(floorShapeSettings);
+        Utils.testClose(physicsSystem);
+        Utils.testClose(objVsObjFilter);
+        Utils.testClose(objVsBpFilter);
+        Utils.testClose(mapObj2Bp);
 
         Jolt.unregisterTypes();
         Jolt.destroyFactory();

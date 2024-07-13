@@ -84,12 +84,12 @@ public class Test004 {
         Assert.assertNotEquals(settings2.va(), settings3.va());
         testGettersAndDefaults(settings3);
 
-        settings3.close();
-        settings2.close();
-        physicsSystem.close();
-        objVsObjFilter.close();
-        objVsBpFilter.close();
-        mapObj2Bp.close();
+        Utils.testClose(settings3);
+        Utils.testClose(settings2);
+        Utils.testClose(physicsSystem);
+        Utils.testClose(objVsObjFilter);
+        Utils.testClose(objVsBpFilter);
+        Utils.testClose(mapObj2Bp);
     }
     // *************************************************************************
     // Java private methods
@@ -143,8 +143,8 @@ public class Test004 {
             BodyInterface bodyInterface1 = physicsSystem.getBodyInterface();
             Assert.assertEquals(bodyInterface.va(), bodyInterface1.va());
 
-            bodyInterface1.close();
-            bodyInterface.close();
+            Utils.testClose(bodyInterface1);
+            Utils.testClose(bodyInterface);
         }
 
         {
@@ -158,8 +158,8 @@ public class Test004 {
             Assert.assertNotEquals(settings.va(), settings1.va());
             testGettersAndDefaults(settings1);
 
-            settings1.close();
-            settings.close();
+            Utils.testClose(settings1);
+            Utils.testClose(settings);
         }
     }
 

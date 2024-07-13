@@ -139,15 +139,15 @@ public class Test002 {
                     deltaTime, numCollisionSteps, tempAllocator, jobSystem);
             Assert.assertEquals(EPhysicsUpdateError.None, errors);
         }
-        jobSystem.close();
-        tempAllocator.close();
+        Utils.testClose(jobSystem);
+        Utils.testClose(tempAllocator);
 
         Assert.assertEquals(1_765, physicsSystem.getNumBodies());
 
-        physicsSystem.close();
-        objVsObjFilter.close();
-        objVsBpFilter.close();
-        mapObj2Bp.close();
+        Utils.testClose(physicsSystem);
+        Utils.testClose(objVsObjFilter);
+        Utils.testClose(objVsBpFilter);
+        Utils.testClose(mapObj2Bp);
 
         Jolt.unregisterTypes();
         Jolt.destroyFactory();
