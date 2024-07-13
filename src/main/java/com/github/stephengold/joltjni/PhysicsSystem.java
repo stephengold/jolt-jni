@@ -35,6 +35,18 @@ public class PhysicsSystem extends NonCopyable {
      * interface for adding/modifying/querying/removing bodies (not null)
      */
     final private BodyInterface bodyInterface;
+    /**
+     * protect the BroadPhaseLayerInterface from garbage collection
+     */
+    private MapObj2Bp map;
+    /**
+     * protect the ObjectVsBroadPhaseLayerFilter from garbage collection
+     */
+    private ObjVsBpFilter ovbFilter;
+    /**
+     * protect the ObjectLayerPairFilter from getting garbage collection
+     */
+    private ObjVsObjFilter ovoFilter;
     // *************************************************************************
     // constructors
 
@@ -131,13 +143,17 @@ public class PhysicsSystem extends NonCopyable {
      * queued at a time
      * @param maxContactConstraints the desired capacity of the
      * contact-constraint buffer
-     * @param map (not null)
-     * @param ovbFilter (not null)
-     * @param ovoFilter (not null)
+     * @param map (not null, alias created)
+     * @param ovbFilter (not null, alias created)
+     * @param ovoFilter (not null, alias created)
      */
     public void init(int maxBodies, int numBodyMutexes, int maxBodyPairs,
             int maxContactConstraints, MapObj2Bp map, ObjVsBpFilter ovbFilter,
             ObjVsObjFilter ovoFilter) {
+        this.map = map;
+        this.ovbFilter = ovbFilter;
+        this.ovoFilter = ovoFilter;
+
         long systemVa = va();
         long mapVa = map.va();
         long ovbFilterVa = ovbFilter.va();
