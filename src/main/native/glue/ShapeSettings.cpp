@@ -31,6 +31,31 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeSettings
+ * Method:    clearCachedResult
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_clearCachedResult
+  (JNIEnv *, jclass, jlong settingsVa) {
+    ShapeSettings * const pSettings = reinterpret_cast<ShapeSettings *> (settingsVa);
+    pSettings->ClearCachedResult();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeSettings
+ * Method:    create
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_create
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const ShapeSettings * const pSettings
+            = reinterpret_cast<ShapeSettings *> (settingsVa);
+    ShapeSettings::ShapeResult *pResult = new ShapeSettings::ShapeResult();
+    *pResult = pSettings->Create();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeSettings
  * Method:    getRefCount
  * Signature: (J)I
  */

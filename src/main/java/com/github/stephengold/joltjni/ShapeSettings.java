@@ -40,9 +40,31 @@ abstract public class ShapeSettings
     // new methods exposed
 
     /**
-     * Generate a shape from these settings.
+     * Invoke this method after altering the settings but before generating any
+     * new shapes.
+     */
+    public void clearCachedResult() {
+        long settingsVa = va();
+        clearCachedResult(settingsVa);
+    }
+
+    /**
+     * Generate a {@code ShapeResult} from these settings.
      *
-     * @return a new instance
+     * @return a new JVM object with a new native object assigned
+     */
+    public ShapeResult create() {
+        long settingsVa = va();
+        long resultVa = create(settingsVa);
+        ShapeResult result = new ShapeResult(resultVa, true);
+
+        return result;
+    }
+
+    /**
+     * Generate a {@code Shape} from these settings.
+     *
+     * @return a new JVM object
      */
     abstract public Shape createShape();
     // *************************************************************************
@@ -62,6 +84,10 @@ abstract public class ShapeSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static void clearCachedResult(long settingsVa);
+
+    native private static long create(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
 }
