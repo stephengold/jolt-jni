@@ -31,6 +31,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyId
+ * Method:    copy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyId_copy
+  (JNIEnv *, jclass, jlong idVa) {
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
+    BodyID * const pResult = new BodyID();
+    *pResult = *pBodyId;
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyId
  * Method:    free
  * Signature: (J)V
  */

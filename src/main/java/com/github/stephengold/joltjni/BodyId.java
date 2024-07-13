@@ -44,6 +44,20 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     // ConstBodyId methods
 
     /**
+     * Create a mutable copy.
+     * 
+     * @return a new mutable JVM object with a new native object assigned
+     */
+    @Override
+    public BodyId copy() {
+        long idVa = va();
+        long copyVa = copy(idVa);
+        BodyId result = new BodyId(copyVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the body's index in the array. The ID is unaffected.
      *
      * @return the index (&ge;0)
@@ -97,6 +111,8 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long copy(long idVa);
 
     native private static void free(long idVa);
 

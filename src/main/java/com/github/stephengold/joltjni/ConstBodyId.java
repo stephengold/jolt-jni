@@ -31,6 +31,13 @@ public interface ConstBodyId extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
+     * Create a mutable copy.
+     *
+     * @return a new mutable JVM object with a new native object assigned
+     */
+    BodyId copy();
+
+    /**
      * Return the body's index in the array. The ID is unaffected.
      *
      * @return the index (&ge;0)
