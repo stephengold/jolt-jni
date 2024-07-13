@@ -50,9 +50,32 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     int countDebugTriangles();
 
     /**
-     * Copy the shape's mass properties.
+     * Locate the shape's center of mass. The shape is unaffected.
      *
-     * @return a new instance
+     * @return a new location vector
+     */
+    Vec3 getCenterOfMass();
+
+    /**
+     * Return the radius of the largest sphere that fits inside the shape. The
+     * shape is unaffected.
+     *
+     * @return the radius (&ge;0)
+     */
+    float getInnerRadius();
+
+    /**
+     * Return a bounding box that includes the convex radius. The shape is
+     * unaffected.
+     *
+     * @return a new, mutable box
+     */
+    AaBox getLocalBounds();
+
+    /**
+     * Copy the shape's mass properties. The shape is unaffected.
+     *
+     * @return a new, mutable properties object
      */
     MassProperties getMassProperties();
 
@@ -71,9 +94,25 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     EShapeType getType();
 
     /**
-     * Test whether the shape can be used in a dynamic/kinematic body.
+     * Return the shape's user data: can be used for anything. The shape is
+     * unaffected.
+     *
+     * @return the value
+     */
+    long getUserData();
+
+    /**
+     * Test whether the shape can be used in a dynamic/kinematic body. The shape
+     * is unaffected.
      *
      * @return true if it can be only be static, otherwise false
      */
     boolean mustBeStatic();
+
+    /**
+     * Create a counted reference to the native object.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    ShapeRefC toRefC();
 }

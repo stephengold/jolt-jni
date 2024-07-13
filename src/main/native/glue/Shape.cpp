@@ -101,6 +101,67 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getCenterOfMassX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMassX
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    float result = pShape->GetCenterOfMass().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getCenterOfMassY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMassY
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    float result = pShape->GetCenterOfMass().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getCenterOfMassZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMassZ
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    float result = pShape->GetCenterOfMass().GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getInnerRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getInnerRadius
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    float result = pShape->GetInnerRadius();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getLocalBounds
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getLocalBounds
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    AABox *pResult = new AABox();
+    *pResult = pShape->GetLocalBounds();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    getMassProperties
  * Signature: (J)J
  */
@@ -150,6 +211,18 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getType
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getUserData
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getUserData
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    uint64 result = pShape->GetUserData();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    mustBeStatic
  * Signature: (J)Z
  */
@@ -158,4 +231,27 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Shape_mustBeStati
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
     bool result = pShape->MustBeStatic();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    setUserData
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_setUserData
+  (JNIEnv *, jclass, jlong shapeVa, jlong value) {
+    Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    pShape->SetUserData(value);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    toRefC
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_toRefC
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    ShapeRefC * const pResult = new ShapeRefC(pShape);
+    return reinterpret_cast<jlong> (pResult);
 }

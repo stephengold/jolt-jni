@@ -92,6 +92,16 @@ abstract public class Shape extends NonCopyable
         }
         return result;
     }
+
+    /**
+     * Alter the shape's user data.
+     *
+     * @param value the desired value (default=0)
+     */
+    public void setUserData(long value) {
+        long shapeVa = va();
+        setUserData(shapeVa, value);
+    }
     // *************************************************************************
     // ConstShape methods
 
@@ -125,9 +135,54 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Copy the shape's mass properties.
+     * Locate the shape's center of mass. The shape is unaffected.
      *
-     * @return a new instance
+     * @return a new location vector
+     */
+    @Override
+    public Vec3 getCenterOfMass() {
+        long shapeVa = va();
+        float x = getCenterOfMassX(shapeVa);
+        float y = getCenterOfMassY(shapeVa);
+        float z = getCenterOfMassZ(shapeVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the radius of the largest sphere that fits inside the shape. The
+     * shape is unaffected.
+     *
+     * @return the radius (&ge;0)
+     */
+    @Override
+    public float getInnerRadius() {
+        long shapeVa = va();
+        float result = getInnerRadius(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Return a bounding box that includes the convex radius, centered on the
+     * center of mass. The shape is unaffected.
+     *
+     * @return a new, mutable box
+     */
+    @Override
+    public AaBox getLocalBounds() {
+        long shapeVa = va();
+        long boxVa = getLocalBounds(shapeVa);
+        AaBox result = new AaBox(boxVa, true);
+
+        return result;
+    }
+
+    /**
+     * Copy the shape's mass properties. The shape is unaffected.
+     *
+     * @return a new, mutable properties object
      */
     @Override
     public MassProperties getMassProperties() {
@@ -180,7 +235,22 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Test whether the shape can be used in a dynamic/kinematic body.
+     * Return the shape's user data: can be used for anything. The shape is
+     * unaffected.
+     *
+     * @return the value
+     */
+    @Override
+    public long getUserData() {
+        long shapeVa = va();
+        long result = getUserData(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the shape can be used in a dynamic/kinematic body. The shape
+     * is unaffected.
      *
      * @return true if it can be only be static, otherwise false
      */
@@ -188,6 +258,21 @@ abstract public class Shape extends NonCopyable
     public boolean mustBeStatic() {
         long shapeVa = va();
         boolean result = mustBeStatic(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Create a counted reference to the native object.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public ShapeRefC toRefC() {
+        long shapeVa = va();
+        long refVa = toRefC(shapeVa);
+        ShapeRefC result = new ShapeRefC(refVa, true);
+
         return result;
     }
     // *************************************************************************
@@ -198,6 +283,16 @@ abstract public class Shape extends NonCopyable
 
     native private static int countDebugTriangles(long shapeVa);
 
+    native private static float getCenterOfMassX(long shapeVa);
+
+    native private static float getCenterOfMassY(long shapeVa);
+
+    native private static float getCenterOfMassZ(long shapeVa);
+
+    native private static float getInnerRadius(long shapeVa);
+
+    native private static long getLocalBounds(long shapeVa);
+
     native private static long getMassProperties(long shapeVa);
 
     native private static int getRefCount(long shapeVa);
@@ -206,5 +301,11 @@ abstract public class Shape extends NonCopyable
 
     native private static int getType(long shapeVa);
 
+    native private static long getUserData(long shapeVa);
+
     native private static boolean mustBeStatic(long shapeVa);
+
+    native private static void setUserData(long shapeVa, long value);
+
+    native private static long toRefC(long shapeVa);
 }
