@@ -34,9 +34,11 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
      * Instantiate with the specified native object assigned.
      *
      * @param idVa the virtual address of the native object to assign (not zero)
+     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
+     * isn't the owner
      */
-    BodyId(long idVa) {
-        super(idVa);
+    BodyId(long idVa, boolean owner) {
+        setVirtualAddress(idVa, owner);
     }
     // *************************************************************************
     // ConstBodyId methods
