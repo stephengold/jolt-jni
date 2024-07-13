@@ -366,8 +366,8 @@ public class Body extends NonCopyable {
     /**
      * Access the body's shape.
      *
-     * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null} if none
+     * @return a new immutable JVM object with the pre-existing native object
+     * assigned, or {@code null} if none
      */
     public ConstShape getShape() {
         long bodyVa = va();
@@ -391,9 +391,10 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's bounding box. The body is unaffected.
+     * Access the body's bounding box. The body is unaffected.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new immutable JVM object with the pre-existing native object
+     * assigned
      */
     public ConstAaBox getWorldSpaceBounds() {
         long bodyVa = va();
