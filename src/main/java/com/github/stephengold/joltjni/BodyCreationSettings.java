@@ -338,10 +338,10 @@ public class BodyCreationSettings extends JoltPhysicsObject {
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null}
      */
-    public Shape getShape() {
+    public ConstShape getShape() {
         long bodySettingsVa = va();
         long shapeSettingsVa = getShape(bodySettingsVa);
-        Shape result = Shape.newShape(shapeSettingsVa);
+        ConstShape result = Shape.newShape(shapeSettingsVa);
 
         return result;
     }
@@ -533,9 +533,9 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     /**
      * Replace the shape.
      *
-     * @param shape the desired shape (not null)
+     * @param shape the desired shape (not null, unaffected)
      */
-    public void setShape(Shape shape) {
+    public void setShape(ConstShape shape) {
         long bodySettingsVa = va();
         long shapeSettingsVa = shape.va();
         setShape(bodySettingsVa, shapeSettingsVa);
