@@ -54,28 +54,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
         setVirtualAddress(settingsVa, true);
     }
     // *************************************************************************
-    // ShapeSettings methods
-
-    /**
-     * Generate a shape from these settings.
-     *
-     * @return a new object
-     */
-    @Override
-    public HeightFieldShape createShape() {
-        long settingsVa = va();
-        long shapeVa = createHeightFieldShape(settingsVa);
-        assert shapeVa != 0L;
-        HeightFieldShape result = new HeightFieldShape(shapeVa);
-        assert result.getSubType() == EShapeSubType.HeightField :
-                result.getSubType();
-
-        return result;
-    }
-    // *************************************************************************
     // native private methods
-
-    native private static long createHeightFieldShape(long settingsVa);
 
     native private static long createHeightFieldShapeSettings(
             FloatBuffer samples, float offsetX, float offsetY, float offsetZ,

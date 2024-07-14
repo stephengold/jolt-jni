@@ -40,28 +40,7 @@ public class SphereShapeSettings extends ConvexShapeSettings {
         setVirtualAddress(settingsVa, true);
     }
     // *************************************************************************
-    // ShapeSettings methods
-
-    /**
-     * Generate a shape from these settings.
-     *
-     * @return a new JVM object
-     */
-    @Override
-    public SphereShape createShape() {
-        long settingsVa = va();
-        long shapeVa = createSphereShape(settingsVa);
-        assert shapeVa != 0L;
-        SphereShape result = new SphereShape(shapeVa);
-        assert result.getSubType() == EShapeSubType.Sphere :
-                result.getSubType();
-
-        return result;
-    }
-    // *************************************************************************
     // native private methods
-
-    native private static long createSphereShape(long settingsVa);
 
     native private static long createSphereShapeSettings(float radius);
 }

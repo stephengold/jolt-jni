@@ -68,28 +68,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         setVirtualAddress(settingsVa, true);
     }
     // *************************************************************************
-    // ShapeSettings methods
-
-    /**
-     * Generate a shape from these settings.
-     *
-     * @return a new object
-     */
-    @Override
-    public ConvexHullShape createShape() {
-        long settingsVa = va();
-        long shapeVa = createConvexHullShape(settingsVa);
-        assert shapeVa != 0L;
-        ConvexHullShape result = new ConvexHullShape(shapeVa);
-        assert result.getSubType() == EShapeSubType.ConvexHull :
-                result.getSubType();
-
-        return result;
-    }
-    // *************************************************************************
     // native private methods
-
-    native private static long createConvexHullShape(long settingsVa);
 
     native private static long createConvexHullShapeSettings(
             int numPoints, FloatBuffer points);

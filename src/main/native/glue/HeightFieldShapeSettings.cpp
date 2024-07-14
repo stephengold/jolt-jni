@@ -31,25 +31,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
- * Method:    createHeightFieldShape
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_createHeightFieldShape
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HeightFieldShapeSettings * const pSettings
-            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
-    ShapeSettings::ShapeResult shapeResult = pSettings->Create();
-    if (shapeResult.IsValid()) {
-        Shape * const pShape = shapeResult.Get();
-        JPH_ASSERT(pShape->GetSubType() == EShapeSubType::HeightField);
-        return reinterpret_cast<jlong> (pShape);
-    } else {
-        return 0L;
-    }
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
  * Method:    createHeightFieldShapeSettings
  * Signature: (Ljava/nio/FloatBuffer;FFFFFFI)J
  */

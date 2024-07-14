@@ -60,13 +60,6 @@ abstract public class ShapeSettings
 
         return result;
     }
-
-    /**
-     * Generate a {@code Shape} from these settings.
-     *
-     * @return a new JVM object
-     */
-    abstract public Shape createShape();
     // *************************************************************************
     // RefTarget methods
 

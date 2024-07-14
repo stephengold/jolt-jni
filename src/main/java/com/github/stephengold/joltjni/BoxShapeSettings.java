@@ -45,27 +45,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
         setVirtualAddress(settingsVa, true);
     }
     // *************************************************************************
-    // ShapeSettings methods
-
-    /**
-     * Generate a shape from these settings.
-     *
-     * @return a new JVM object
-     */
-    @Override
-    public BoxShape createShape() {
-        long settingsVa = va();
-        long shapeVa = createBoxShape(settingsVa);
-        assert shapeVa != 0L;
-        BoxShape result = new BoxShape(shapeVa);
-        assert result.getSubType() == EShapeSubType.Box : result.getSubType();
-
-        return result;
-    }
-    // *************************************************************************
     // native private methods
-
-    native private static long createBoxShape(long settingsVa);
 
     native private static long createBoxShapeSettings(
             float xHalfExtent, float yHalfExtent, float zHalfExtent);

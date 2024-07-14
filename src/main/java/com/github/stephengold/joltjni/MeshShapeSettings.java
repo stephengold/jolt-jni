@@ -47,23 +47,7 @@ public class MeshShapeSettings extends ShapeSettings {
         setVirtualAddress(settingsVa, true);
     }
     // *************************************************************************
-    // ShapeSettings methods
-
-    /**
-     * Generate a shape from these settings.
-     *
-     * @return a new object
-     */
-    @Override
-    public MeshShape createShape() {
-        long settingsVa = va();
-        long shapeVa = createMeshShape(settingsVa);
-        assert shapeVa != 0L;
-        MeshShape result = new MeshShape(shapeVa);
-        assert result.getSubType() == EShapeSubType.Mesh : result.getSubType();
-
-        return result;
-    }
+    // new public methods
 
     /**
      * Alter the maximum number of triangles per leaf.
@@ -76,8 +60,6 @@ public class MeshShapeSettings extends ShapeSettings {
     }
     // *************************************************************************
     // native private methods
-
-    native private static long createMeshShape(long settingsVa);
 
     native private static long createMeshShapeSettings(
             int numVertices, FloatBuffer vertices, long indicesVa);

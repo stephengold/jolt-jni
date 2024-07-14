@@ -31,25 +31,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BoxShapeSettings
- * Method:    createBoxShape
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_createBoxShape
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const BoxShapeSettings * const pSettings
-            = reinterpret_cast<BoxShapeSettings *> (settingsVa);
-    ShapeSettings::ShapeResult shapeResult = pSettings->Create();
-    if (shapeResult.IsValid()) {
-        Shape * const pShape = shapeResult.Get();
-        JPH_ASSERT(pShape->GetSubType() == EShapeSubType::Box);
-        return reinterpret_cast<jlong> (pShape);
-    } else {
-        return 0L;
-    }
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BoxShapeSettings
  * Method:    createBoxShapeSettings
  * Signature: (FFF)J
  */

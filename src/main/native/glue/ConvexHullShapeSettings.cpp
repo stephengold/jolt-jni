@@ -31,25 +31,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
- * Method:    createConvexHullShape
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_createConvexHullShape
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ConvexHullShapeSettings * const pSettings
-            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
-    ShapeSettings::ShapeResult shapeResult = pSettings->Create();
-    if (shapeResult.IsValid()) {
-        Shape * const pShape = shapeResult.Get();
-        JPH_ASSERT(pShape->GetSubType() == EShapeSubType::ConvexHull);
-        return reinterpret_cast<jlong> (pShape);
-    } else {
-        return 0L;
-    }
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
  * Method:    createConvexHullShapeSettings
  * Signature: (ILjava/nio/FloatBuffer;)J
  */
