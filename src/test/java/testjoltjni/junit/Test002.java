@@ -42,7 +42,7 @@ import com.github.stephengold.joltjni.ObjVsObjFilter;
 import com.github.stephengold.joltjni.PhysicsSettings;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.RVec3;
-import com.github.stephengold.joltjni.Shape;
+import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.TempAllocatorImpl;
 import com.github.stephengold.joltjni.Vec3;
@@ -84,7 +84,7 @@ public class Test002 {
     /**
      * convex shapes for dynamic bodies
      */
-    private static Shape[] dynamicShapes;
+    private static ShapeRefC[] dynamicShapes;
     // *************************************************************************
     // new methods exposed
 
@@ -218,11 +218,11 @@ public class Test002 {
         Vec3[] hullVertices = {new Vec3(0f, 1f, 0f), new Vec3(1f, 0f, 0f),
             new Vec3(-1f, 0f, 0f), new Vec3(0f, 0f, 1f), new Vec3(0f, 0f, -1f)};
 
-        dynamicShapes = new Shape[]{
-            new BoxShape(new Vec3(0.5f, 0.75f, 1f)),
-            new SphereShape(0.5f),
-            new CapsuleShape(0.75f, 0.5f),
-            new ConvexHullShapeSettings(hullVertices).createShape()
+        dynamicShapes = new ShapeRefC[]{
+            new BoxShape(new Vec3(0.5f, 0.75f, 1f)).toRefC(),
+            new SphereShape(0.5f).toRefC(),
+            new CapsuleShape(0.75f, 0.5f).toRefC(),
+            new ConvexHullShapeSettings(hullVertices).create().get()
         };
     }
 

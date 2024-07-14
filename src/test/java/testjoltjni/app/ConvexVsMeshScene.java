@@ -124,11 +124,11 @@ public class ConvexVsMeshScene {
 		mMeshSettings.setShapeSettings(mesh_shape_settings);
 
 		// Create other shapes
-		mShapes = new Shape[] {
-			new BoxShape(new Vec3(0.5f, 0.75f, 1.0f)),
-			new SphereShape(0.5f),
-			new CapsuleShape(0.75f, 0.5f),
-			new ConvexHullShapeSettings(new Vec3(0, 1, 0), new Vec3(1, 0, 0), new Vec3(-1, 0, 0), new Vec3(0, 0, 1), new Vec3(0, 0, -1)).createShape(),
+		mShapes = new ShapeRefC[] {
+			new BoxShape(new Vec3(0.5f, 0.75f, 1.0f)).toRefC(),
+			new SphereShape(0.5f).toRefC(),
+			new CapsuleShape(0.75f, 0.5f).toRefC(),
+			new ConvexHullShapeSettings(new Vec3(0, 1, 0), new Vec3(1, 0, 0), new Vec3(-1, 0, 0), new Vec3(0, 0, 1), new Vec3(0, 0, -1)).create().get(),
 		};
 
 		return true;
@@ -164,5 +164,5 @@ public class ConvexVsMeshScene {
 	}
 
 	static BodyCreationSettings	mMeshSettings;
-	static Shape[]		mShapes;
+	static ShapeRefC[]		mShapes;
 }
