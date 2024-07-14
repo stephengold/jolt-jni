@@ -37,7 +37,7 @@ public class SphereShapeSettings extends ConvexShapeSettings {
      */
     public SphereShapeSettings(float radius) {
         long settingsVa = createSphereShapeSettings(radius);
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddress(settingsVa, false); // not owner due to ref counting
     }
     // *************************************************************************
     // native private methods

@@ -54,7 +54,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
             buffer.put(point.getZ());
         }
         long settingsVa = createConvexHullShapeSettings(numPoints, buffer);
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddress(settingsVa, false); // not owner due to ref counting
     }
 
     /**
@@ -65,7 +65,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      */
     public ConvexHullShapeSettings(int numPoints, FloatBuffer points) {
         long settingsVa = createConvexHullShapeSettings(numPoints, points);
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddress(settingsVa, false); // not owner due to ref counting
     }
     // *************************************************************************
     // native private methods

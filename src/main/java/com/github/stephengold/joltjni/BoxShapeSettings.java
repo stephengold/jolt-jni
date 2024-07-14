@@ -42,7 +42,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
         float zHalfExtent = halfExtents.getZ();
         long settingsVa
                 = createBoxShapeSettings(xHalfExtent, yHalfExtent, zHalfExtent);
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddress(settingsVa, false); // not owner due to ref counting
     }
     // *************************************************************************
     // native private methods

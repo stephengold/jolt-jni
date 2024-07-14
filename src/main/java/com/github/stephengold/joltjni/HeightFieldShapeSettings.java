@@ -51,7 +51,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
         float scaleZ = scale.getZ();
         long settingsVa = createHeightFieldShapeSettings(samples, offsetX,
                 offsetY, offsetZ, scaleX, scaleY, scaleZ, sampleCount);
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddress(settingsVa, false); // not owner due to ref counting
     }
     // *************************************************************************
     // native private methods

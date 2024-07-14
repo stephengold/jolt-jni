@@ -44,7 +44,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long indicesVa = indices.va();
         long settingsVa
                 = createMeshShapeSettings(numVertices, buffer, indicesVa);
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddress(settingsVa, false); // not owner due to ref counting
     }
     // *************************************************************************
     // new public methods
