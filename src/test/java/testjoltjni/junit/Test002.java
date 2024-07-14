@@ -139,6 +139,12 @@ public class Test002 {
                     deltaTime, numCollisionSteps, tempAllocator, jobSystem);
             Assert.assertEquals(EPhysicsUpdateError.None, errors);
         }
+
+        for (ShapeRefC ref : dynamicShapes) {
+            Utils.testClose(ref);
+        }
+        Utils.testClose(meshBodySettings);
+
         Utils.testClose(jobSystem);
         Utils.testClose(tempAllocator);
 
@@ -202,6 +208,11 @@ public class Test002 {
 
         MeshShapeSettings meshShapeSettings
                 = new MeshShapeSettings(vertices, indices);
+        for (int i = 0; i < numTriangles; ++i) {
+            IndexedTriangle it = indices.get(i);
+            Utils.testClose(it);
+        }
+        Utils.testClose(indices);
         meshShapeSettings.setMaxTrianglesPerLeaf(4);
 
         meshBodySettings = new BodyCreationSettings();
@@ -240,6 +251,7 @@ public class Test002 {
         settings.setNumVelocitySteps(4);
         settings.setNumPositionSteps(1);
         physicsSystem.setPhysicsSettings(settings);
+        Utils.testClose(settings);
 
         BodyInterface bi = physicsSystem.getBodyInterface();
         bi.createAndAddBody(meshBodySettings, EActivation.DontActivate);
@@ -262,5 +274,6 @@ public class Test002 {
                 }
             }
         }
+        Utils.testClose(bi);
     }
 }
