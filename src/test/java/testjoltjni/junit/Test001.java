@@ -172,8 +172,13 @@ public class Test001 {
         bodyInterface.removeBody(floorId);
         bodyInterface.destroyBody(floorId);
         Utils.testClose(floorId);
-
+        Utils.testClose(floor);
+        Utils.testClose(floorBodySettings);
+        Utils.testClose(floorShapeRef);
+        Utils.testClose(floorShapeResult);
         Utils.testClose(floorShapeSettings);
+
+        Utils.testClose(bodyInterface);
         Utils.testClose(physicsSystem);
         Utils.testClose(objVsObjFilter);
         Utils.testClose(objVsBpFilter);
