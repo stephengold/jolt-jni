@@ -279,36 +279,36 @@ abstract public class Shape extends NonCopyable
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
-    native private static void copyDebugTriangles(
+    native static void copyDebugTriangles(
             long shapeVa, int numTriangles, FloatBuffer storeBuffer);
 
-    native private static int countDebugTriangles(long shapeVa);
+    native static int countDebugTriangles(long shapeVa);
 
-    native private static float getCenterOfMassX(long shapeVa);
+    native static float getCenterOfMassX(long shapeVa);
 
-    native private static float getCenterOfMassY(long shapeVa);
+    native static float getCenterOfMassY(long shapeVa);
 
-    native private static float getCenterOfMassZ(long shapeVa);
+    native static float getCenterOfMassZ(long shapeVa);
 
-    native private static float getInnerRadius(long shapeVa);
+    native static float getInnerRadius(long shapeVa);
 
-    native private static long getLocalBounds(long shapeVa);
+    native static long getLocalBounds(long shapeVa);
 
-    native private static long getMassProperties(long shapeVa);
+    native static long getMassProperties(long shapeVa);
 
     native private static int getRefCount(long shapeVa);
 
-    native private static int getSubType(long shapeVa);
+    native static int getSubType(long shapeVa);
 
-    native private static int getType(long shapeVa);
+    native static int getType(long shapeVa);
 
-    native private static long getUserData(long shapeVa);
+    native static long getUserData(long shapeVa);
 
-    native private static boolean mustBeStatic(long shapeVa);
+    native static boolean mustBeStatic(long shapeVa);
 
-    native private static void setUserData(long shapeVa, long value);
+    native static void setUserData(long shapeVa, long value);
 
     native private static long toRefC(long shapeVa);
 }
