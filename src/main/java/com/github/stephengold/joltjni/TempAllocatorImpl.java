@@ -40,7 +40,7 @@ public class TempAllocatorImpl extends TempAllocator {
         setVirtualAddress(allocatorVa, true);
     }
     // *************************************************************************
-    // private methods
+    // native private methods
 
     native private static long create(int numBytes);
 }

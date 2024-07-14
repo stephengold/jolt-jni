@@ -57,7 +57,7 @@ abstract public class JoltPhysicsObject
     }
 
     /**
-     * Instantiate with the specified native object assigned.
+     * Instantiate with the specified native object assigned but not owned.
      *
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
@@ -80,7 +80,7 @@ abstract public class JoltPhysicsObject
     // new protected methods
 
     /**
-     * Assign a native object, assuming none is already assigned.
+     * Assign a native object, assuming there's none already assigned.
      *
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
@@ -110,11 +110,10 @@ abstract public class JoltPhysicsObject
         this.freeingAction = null;
     }
     // *************************************************************************
-    // ConstJoltPhysicsObject methods
+    // AutoCloseable/ConstJoltPhysicsObject methods
 
     /**
-     * Free and unassign the native object if the JVM object owns it. Meant to
-     * be overridden.
+     * Free and unassign the native object if the JVM object owns it.
      */
     @Override
     public void close() {

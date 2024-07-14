@@ -33,7 +33,7 @@ import java.nio.IntBuffer;
  */
 final public class Jolt {
     // *************************************************************************
-    // fields
+    // constants
 
     /**
      * standard 2nd argument to the {@code JobSystemThreadPool} constructor

@@ -37,7 +37,8 @@ abstract public class ConvexShape extends Shape {
     }
 
     /**
-     * Instantiate a shape with the specified native object assigned.
+     * Instantiate a shape with the specified native object assigned but not
+     * owned.
      *
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)

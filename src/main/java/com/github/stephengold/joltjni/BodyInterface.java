@@ -31,6 +31,12 @@ public class BodyInterface extends NonCopyable {
     // *************************************************************************
     // constructors
 
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param bodyInterfaceVa the virtual address of the native object to assign
+     * (not zero)
+     */
     BodyInterface(long bodyInterfaceVa) {
         setVirtualAddress(bodyInterfaceVa, null);
     }

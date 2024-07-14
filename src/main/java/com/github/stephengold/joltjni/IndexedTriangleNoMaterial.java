@@ -58,7 +58,8 @@ public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
     }
 
     /**
-     * Instantiate a triangle with the specified native object assigned.
+     * Instantiate a triangle with the specified native object assigned but not
+     * owned.
      *
      * @param triangleVa the virtual address of the native object to assign (not
      * zero)

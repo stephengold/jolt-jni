@@ -32,7 +32,8 @@ public class Body extends NonCopyable {
     // constructors
 
     /**
-     * Instantiate a body with the specified native object assigned.
+     * Instantiate a body with the specified native object assigned but not
+     * owned.
      *
      * @param bodyVa the virtual address of the native object to assign (not
      * zero)
