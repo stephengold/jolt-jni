@@ -168,6 +168,8 @@ public class Test001 {
         Assert.assertEquals(1, ballShape.getRefCount());
         Utils.testClose(ballId);
         Assert.assertEquals(1, ballShape.getRefCount());
+        Utils.testClose(ballSettings);
+        Utils.testClose(ballShape);
 
         bodyInterface.removeBody(floorId);
         bodyInterface.destroyBody(floorId);
