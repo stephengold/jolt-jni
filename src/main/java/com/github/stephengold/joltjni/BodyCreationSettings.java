@@ -542,6 +542,18 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Replace the shape.
+     *
+     * @param shapeRef a reference to the desired shape (not null)
+     */
+    public void setShape(ShapeRefC shapeRef) {
+        long bodySettingsVa = va();
+        ConstShape shape = shapeRef.getPtr();
+        long shapeSettingsVa = shape.va();
+        setShape(bodySettingsVa, shapeSettingsVa);
+    }
+
+    /**
      * Replace the shape settings.
      *
      * @param shapeSettings the desired shape settings (not null)
