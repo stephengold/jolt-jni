@@ -72,6 +72,8 @@ public class Test003 {
             Assert.assertTrue(box.ownsNativeObject());
             Assert.assertNotEquals(0L, box.va());
 
+            Assert.assertFalse(box.isValid());
+
             Utils.testClose(box);
         }
         {
@@ -82,6 +84,13 @@ public class Test003 {
             Assert.assertTrue(box.hasAssignedNativeObject());
             Assert.assertTrue(box.ownsNativeObject());
             Assert.assertNotEquals(0L, box.va());
+
+            Utils.assertEquals(2.5f, 3.5f, 4.5f, box.getCenter(), 0f);
+            Utils.assertEquals(4f, 5f, 6f, box.getMax(), 0f);
+            Utils.assertEquals(1.5f, 1.5f, 1.5f, box.getExtent(), 0f);
+            Utils.assertEquals(1f, 2f, 3f, box.getMin(), 0f);
+            Utils.assertEquals(3f, 3f, 3f, box.getSize(), 0f);
+            Assert.assertTrue(box.isValid());
 
             Utils.testClose(box);
         }
