@@ -195,19 +195,6 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Count known references to the shape.
-     *
-     * @return the count (&ge;0)
-     */
-    @Override
-    public int getRefCount() {
-        long shapeVa = va();
-        int result = getRefCount(shapeVa);
-
-        return result;
-    }
-
-    /**
      * Return the shape's subtype. The shape is unaffected.
      *
      * @return an enum value
@@ -273,6 +260,21 @@ abstract public class Shape extends NonCopyable
         long shapeVa = va();
         long refVa = toRefC(shapeVa);
         ShapeRefC result = new ShapeRefC(refVa, true);
+
+        return result;
+    }
+    // *************************************************************************
+    // RefTarget methods
+
+    /**
+     * Count known references to the shape.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long shapeVa = va();
+        int result = getRefCount(shapeVa);
 
         return result;
     }
