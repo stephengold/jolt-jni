@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import java.lang.ref.Cleaner;
+
 /**
  * An abstract class to represent a (native) Jolt Physics object.
  *
@@ -31,6 +33,10 @@ abstract public class JoltPhysicsObject
     // *************************************************************************
     // fields
 
+    /**
+     * manage references to (native) Jolt Physics objects, or null if none
+     */
+    private static Cleaner cleaner;
     /**
      * virtual address of the assigned native object, or 0 for none
      */
@@ -61,6 +67,16 @@ abstract public class JoltPhysicsObject
         this.virtualAddress = virtualAddress;
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Start a daemon thread to process the phantom reachable objects and invoke
+     * cleaning actions.
+     */
+    public static void startCleaner() {
+        cleaner = Cleaner.create();
+    }
+    // *************************************************************************
     // new protected methods
 
     /**
@@ -78,6 +94,9 @@ abstract public class JoltPhysicsObject
 
         this.virtualAddress = virtualAddress;
         this.freeingAction = action;
+        if (action != null && cleaner != null) {
+            cleaner.register(this, action);
+        }
     }
 
     /**
