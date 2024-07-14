@@ -31,6 +31,18 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeRefC
+ * Method:    copy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_copy
+  (JNIEnv *, jclass, jlong refVa) {
+    ShapeRefC * const pRef = reinterpret_cast<ShapeRefC *> (refVa);
+    ShapeRefC * const pResult = new ShapeRefC(*pRef);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeRefC
  * Method:    free
  * Signature: (J)V
  */

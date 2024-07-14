@@ -57,8 +57,23 @@ final public class ShapeRefC extends JoltPhysicsObject {
 
         return result;
     }
+
+    /**
+     * Create a counted reference to the native {@code Shape}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    public ShapeRefC toRefC() {
+        long refVa = va();
+        long copyVa = copy(refVa);
+        ShapeRefC result = new ShapeRefC(copyVa, true);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
+
+    native private static long copy(long refVa);
 
     native private static void free(long refVa);
 
