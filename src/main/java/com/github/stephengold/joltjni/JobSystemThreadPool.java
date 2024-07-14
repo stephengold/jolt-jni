@@ -57,7 +57,7 @@ public class JobSystemThreadPool extends JobSystemWithBarrier {
      */
     public JobSystemThreadPool(int maxJobs, int maxBarriers, int numThreads) {
         long systemVa = createJobSystem(maxJobs, maxBarriers, numThreads);
-        setVirtualAddress(systemVa, true);
+        setVirtualAddress(systemVa, () -> free(systemVa));
     }
     // *************************************************************************
     // new methods exposed
@@ -71,20 +71,6 @@ public class JobSystemThreadPool extends JobSystemWithBarrier {
     public void setNumThreads(int numThreads) {
         long systemVa = va();
         setNumThreads(systemVa, numThreads);
-    }
-    // *************************************************************************
-    // JobSystem methods
-
-    /**
-     * Free and unassign the native object if the current system owns it.
-     */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long systemVa = va();
-            free(systemVa);
-            unassignNativeObject();
-        }
     }
     // *************************************************************************
     // native private methods

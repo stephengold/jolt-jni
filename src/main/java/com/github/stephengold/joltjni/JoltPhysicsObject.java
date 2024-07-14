@@ -32,14 +32,14 @@ abstract public class JoltPhysicsObject
     // fields
 
     /**
-     * true if the JVM object owns (is responsible for freeing) its assigned
-     * native object, otherwise false
-     */
-    private boolean isOwner = false;
-    /**
      * virtual address of the assigned native object, or 0 for none
      */
     private long virtualAddress;
+    /**
+     * freeing action if the JVM object owns (is responsible for freeing) its
+     * assigned native object, otherwise null
+     */
+    private Runnable freeingAction;
     // *************************************************************************
     // constructors
 
@@ -68,15 +68,16 @@ abstract public class JoltPhysicsObject
      *
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param action freeing action if the JVM object will own (be responsible
+     * for freeing) the native object, or null if none
      */
-    protected void setVirtualAddress(long virtualAddress, boolean owner) {
+    protected void setVirtualAddress(long virtualAddress, Runnable action) {
         assert virtualAddress != 0L : "invalid virtual address";
         assert !hasAssignedNativeObject() : "native object already assigned";
+        assert this.freeingAction == null : this.freeingAction;
 
-        this.isOwner = owner;
         this.virtualAddress = virtualAddress;
+        this.freeingAction = action;
     }
 
     /**
@@ -86,8 +87,8 @@ abstract public class JoltPhysicsObject
     final protected void unassignNativeObject() {
         assert hasAssignedNativeObject() : "no native object is assigned";
 
-        this.isOwner = false;
         this.virtualAddress = 0L;
+        this.freeingAction = null;
     }
     // *************************************************************************
     // ConstJoltPhysicsObject methods
@@ -98,9 +99,8 @@ abstract public class JoltPhysicsObject
      */
     @Override
     public void close() {
-        if (isOwner) {
-            System.out.println(
-                    "I don't know how to free " + getClass().getSimpleName());
+        if (freeingAction != null) {
+            freeingAction.run(); // TODO possible race condition
             unassignNativeObject();
         }
     }
@@ -143,7 +143,11 @@ abstract public class JoltPhysicsObject
      */
     @Override
     final public boolean ownsNativeObject() {
-        return isOwner;
+        if (freeingAction == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**

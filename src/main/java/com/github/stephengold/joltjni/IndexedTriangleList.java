@@ -35,7 +35,7 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
      */
     public IndexedTriangleList() {
         long listVa = createIndexedTriangleList();
-        setVirtualAddress(listVa, true);
+        setVirtualAddress(listVa, () -> free(listVa));
     }
     // *************************************************************************
     // new methods exposed
@@ -109,20 +109,6 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
         long listVa = va();
         int result = size(listVa);
         return result;
-    }
-    // *************************************************************************
-    // JoltPhysicsObject methods
-
-    /**
-     * Free and unassign the native object if the current list owns it.
-     */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long listVa = va();
-            free(listVa);
-            unassignNativeObject();
-        }
     }
     // *************************************************************************
     // native private methods

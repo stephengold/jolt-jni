@@ -38,7 +38,8 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
      * isn't the owner
      */
     BodyId(long idVa, boolean owner) {
-        setVirtualAddress(idVa, owner);
+        Runnable freeingAction = owner ? () -> free(idVa) : null;
+        setVirtualAddress(idVa, freeingAction);
     }
     // *************************************************************************
     // ConstBodyId methods
@@ -94,20 +95,6 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
         boolean result = isInvalid(idVa);
 
         return result;
-    }
-    // *************************************************************************
-    // JoltPhysicsObject methods
-
-    /**
-     * Free and unassign the native object if the ID owns it.
-     */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long idVa = va();
-            free(idVa);
-            unassignNativeObject();
-        }
     }
     // *************************************************************************
     // native private methods

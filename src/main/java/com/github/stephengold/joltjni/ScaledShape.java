@@ -43,7 +43,7 @@ public class ScaledShape extends DecoratedShape {
         float scaleZ = scaleFactors.getZ();
         long scaledShapeVa
                 = createScaledShape(baseShapeVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(scaledShapeVa, false); // no owner due to ref counting
+        setVirtualAddress(scaledShapeVa, null); // no owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

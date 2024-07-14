@@ -32,7 +32,7 @@ public class BodyInterface extends NonCopyable {
     // constructors
 
     BodyInterface(long bodyInterfaceVa) {
-        setVirtualAddress(bodyInterfaceVa, false);
+        setVirtualAddress(bodyInterfaceVa, null);
     }
     // *************************************************************************
     // new methods exposed

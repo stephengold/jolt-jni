@@ -36,7 +36,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
      */
     public PhysicsSettings() {
         long settingsVa = createPhysicsSettings();
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddress(settingsVa, () -> free(settingsVa));
     }
 
     /**
@@ -48,7 +48,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
      * the current object isn't the owner
      */
     PhysicsSettings(long settingsVa, boolean owner) {
-        setVirtualAddress(settingsVa, owner);
+        Runnable freeingAction = owner ? () -> free(settingsVa) : null;
+        setVirtualAddress(settingsVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
@@ -215,20 +216,6 @@ public class PhysicsSettings extends JoltPhysicsObject {
     public void setTimeBeforeSleep(float interval) {
         long settingsVa = va();
         setTimeBeforeSleep(settingsVa, interval);
-    }
-    // *************************************************************************
-    // JoltPhysicsObject methods
-
-    /**
-     * Free and unassign the native object if the settings object owns it.
-     */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long settingsVa = va();
-            free(settingsVa);
-            unassignNativeObject();
-        }
     }
     // *************************************************************************
     // native private methods

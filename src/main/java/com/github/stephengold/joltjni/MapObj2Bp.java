@@ -40,7 +40,7 @@ public class MapObj2Bp extends JoltPhysicsObject {
      */
     public MapObj2Bp(int numObjLayers, int numBpLayers) {
         long mapVa = createMapObj2Bp(numObjLayers, numBpLayers);
-        setVirtualAddress(mapVa, true);
+        setVirtualAddress(mapVa, () -> free(mapVa));
     }
     // *************************************************************************
     // new methods exposed
@@ -57,20 +57,6 @@ public class MapObj2Bp extends JoltPhysicsObject {
     public MapObj2Bp add(int objLayer, int bpLayer) {
         add(va(), objLayer, bpLayer);
         return this;
-    }
-    // *************************************************************************
-    // JoltPhysicsObject methods
-
-    /**
-     * Free and unassign the native object if the current map owns it.
-     */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long mapVa = va();
-            free(mapVa);
-            unassignNativeObject();
-        }
     }
     // *************************************************************************
     // native private methods

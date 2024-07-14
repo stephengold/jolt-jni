@@ -43,7 +43,7 @@ public class CapsuleShape extends ConvexShape {
      */
     public CapsuleShape(float halfHeight, float radius) {
         long shapeVa = createCapsuleShape(halfHeight, radius);
-        setVirtualAddress(shapeVa, false); // not the owner due to ref counting
+        setVirtualAddress(shapeVa, null); // not the owner due to ref counting
     }
     // *************************************************************************
     // native private methods

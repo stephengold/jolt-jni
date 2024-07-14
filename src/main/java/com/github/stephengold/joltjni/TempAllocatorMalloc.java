@@ -35,24 +35,10 @@ public class TempAllocatorMalloc extends TempAllocator {
      */
     public TempAllocatorMalloc() {
         long allocatorVa = create();
-        setVirtualAddress(allocatorVa, true);
+        setVirtualAddress(allocatorVa, () -> free(allocatorVa));
     }
     // *************************************************************************
-    // TempAllocator methods
-
-    /**
-     * Free and unassign the native object if the current allocator owns it.
-     */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long allocatorVa = va();
-            free(allocatorVa);
-            unassignNativeObject();
-        }
-    }
-    // *************************************************************************
-    // private methods
+    // native private methods
 
     native private static long create();
 

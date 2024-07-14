@@ -54,7 +54,7 @@ public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
      */
     public IndexedTriangleNoMaterial(int vi0, int vi1, int vi2) {
         long triangleVa = createIndexedTriangleNoMaterial(vi0, vi1, vi2);
-        setVirtualAddress(triangleVa, true);
+        setVirtualAddress(triangleVa, () -> free(triangleVa));
     }
 
     /**
@@ -92,18 +92,19 @@ public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
         setIdx(triangleVa, cornerIndex, meshVertexIndex);
     }
     // *************************************************************************
-    // JoltPhysicsObject methods
+    // new protected methods
 
     /**
-     * Free and unassign the native object if the current triangle owns it.
+     * Assign a native object, assuming there's none already assigned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
+     * isn't the owner
      */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long triangleVa = va();
-            free(triangleVa);
-            unassignNativeObject();
-        }
+    protected void setVirtualAddress(long virtualAddress, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(virtualAddress) : null;
+        setVirtualAddress(virtualAddress, freeingAction);
     }
     // *************************************************************************
     // native private methods

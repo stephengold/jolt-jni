@@ -39,7 +39,8 @@ final public class ShapeResult extends JoltPhysicsObject {
      * the current object isn't the owner
      */
     ShapeResult(long resultVa, boolean owner) {
-        setVirtualAddress(resultVa, owner);
+        Runnable freeingAction = owner ? () -> free(resultVa) : null;
+        setVirtualAddress(resultVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
@@ -91,20 +92,6 @@ final public class ShapeResult extends JoltPhysicsObject {
         boolean result = isValid(resultVa);
 
         return result;
-    }
-    // *************************************************************************
-    // JoltPhysicsObject methods
-
-    /**
-     * Free and unassign the native object if the current result owns it.
-     */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long resultVa = va();
-            free(resultVa);
-            unassignNativeObject();
-        }
     }
     // *************************************************************************
     // native private methods

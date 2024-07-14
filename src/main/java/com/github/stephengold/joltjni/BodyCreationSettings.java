@@ -35,7 +35,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
      */
     public BodyCreationSettings() {
         long bodySettingsVa = createBodyCreationSettings();
-        setVirtualAddress(bodySettingsVa, true);
+        setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
 
     /**
@@ -55,7 +55,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
                 shapeVa, loc.xx(), loc.yy(), loc.zz(),
                 orient.getX(), orient.getY(), orient.getZ(), orient.getW(),
                 motionTypeOrdinal, objLayer);
-        setVirtualAddress(bodySettingsVa, true);
+        setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
 
     /**
@@ -76,7 +76,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
                 shapeVa, loc.xx(), loc.yy(), loc.zz(),
                 orient.getX(), orient.getY(), orient.getZ(), orient.getW(),
                 motionTypeOrdinal, objLayer);
-        setVirtualAddress(bodySettingsVa, true);
+        setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
 
     /**
@@ -96,7 +96,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
                 shapeSettingsVa, loc.xx(), loc.yy(), loc.zz(),
                 orient.getX(), orient.getY(), orient.getZ(), orient.getW(),
                 motionTypeOrdinal, objLayer);
-        setVirtualAddress(bodySettingsVa, true);
+        setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
     // *************************************************************************
     // new methods exposed
@@ -562,20 +562,6 @@ public class BodyCreationSettings extends JoltPhysicsObject {
         long bodySettingsVa = va();
         long shapeSettingsVa = shapeSettings.va();
         setShapeSettings(bodySettingsVa, shapeSettingsVa);
-    }
-    // *************************************************************************
-    // JoltPhysicsObject methods
-
-    /**
-     * Free and unassign the native object if the settings object owns it.
-     */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long settingsVa = va();
-            free(settingsVa);
-            unassignNativeObject();
-        }
     }
     // *************************************************************************
     // native private methods

@@ -39,7 +39,7 @@ public class ObjVsBpFilter extends JoltPhysicsObject {
      */
     public ObjVsBpFilter(int numObjectLayers, int numBpLayers) {
         long filterVa = createObjVsBpFilter(numObjectLayers, numBpLayers);
-        setVirtualAddress(filterVa, true);
+        setVirtualAddress(filterVa, () -> free(filterVa));
     }
     // *************************************************************************
     // new methods exposed
@@ -54,20 +54,6 @@ public class ObjVsBpFilter extends JoltPhysicsObject {
     public ObjVsBpFilter disablePair(int objLayer, int bpLayer) {
         disablePair(va(), objLayer, bpLayer);
         return this;
-    }
-    // *************************************************************************
-    // JoltPhysicsObject methods
-
-    /**
-     * Free and unassign the native object if the current filter owns it.
-     */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long filterVa = va();
-            free(filterVa);
-            unassignNativeObject();
-        }
     }
     // *************************************************************************
     // native private methods

@@ -51,7 +51,7 @@ public class BoxShape extends ConvexShape {
         float yHalfExtent = halfExtents.getY();
         float zHalfExtent = halfExtents.getZ();
         long shapeVa = createBoxShape(xHalfExtent, yHalfExtent, zHalfExtent);
-        setVirtualAddress(shapeVa, false); // not the owner due to ref counting
+        setVirtualAddress(shapeVa, null); // not the owner due to ref counting
     }
     // *************************************************************************
     // native private methods

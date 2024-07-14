@@ -39,7 +39,8 @@ final public class ShapeRefC extends JoltPhysicsObject {
      * the current object isn't the owner
      */
     ShapeRefC(long refVa, boolean owner) {
-        setVirtualAddress(refVa, owner);
+        Runnable freeingAction = owner ? () -> free(refVa) : null;
+        setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
@@ -55,20 +56,6 @@ final public class ShapeRefC extends JoltPhysicsObject {
         ConstShape result = Shape.newShape(shapeVa);
 
         return result;
-    }
-    // *************************************************************************
-    // JoltPhysicsObject methods
-
-    /**
-     * Free and unassign the native object if the current reference owns it.
-     */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long refVa = va();
-            free(refVa);
-            unassignNativeObject();
-        }
     }
     // *************************************************************************
     // native private methods

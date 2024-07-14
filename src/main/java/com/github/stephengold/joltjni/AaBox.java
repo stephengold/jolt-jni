@@ -36,7 +36,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      */
     public AaBox() {
         long boxVa = createAaBox();
-        setVirtualAddress(boxVa, true);
+        setVirtualAddress(boxVa, () -> free(boxVa));
     }
 
     /**
@@ -48,8 +48,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * the current object isn't the owner
      */
     AaBox(long boxVa, boolean owner) {
-        super();
-        setVirtualAddress(boxVa, owner);
+        Runnable freeingAction = owner ? () -> free(boxVa) : null;
+        setVirtualAddress(boxVa, freeingAction);
     }
 
     /**
@@ -66,7 +66,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         float maxY = maximum.getY();
         float maxZ = maximum.getZ();
         long boxVa = createAaBox(minX, minY, minZ, maxX, maxY, maxZ);
-        setVirtualAddress(boxVa, true);
+        setVirtualAddress(boxVa, () -> free(boxVa));
     }
     // *************************************************************************
     // new methods exposed
@@ -217,20 +217,6 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         boolean result = isValid(boxVa);
 
         return result;
-    }
-    // *************************************************************************
-    // JoltPhysicsObject methods
-
-    /**
-     * Free and unassign the native object if the current box owns it.
-     */
-    @Override
-    public void close() {
-        if (ownsNativeObject()) {
-            long boxVa = va();
-            free(boxVa);
-            unassignNativeObject();
-        }
     }
     // *************************************************************************
     // native private methods
