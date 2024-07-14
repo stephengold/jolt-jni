@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app;
 import com.github.stephengold.joltjni.*;
 import testjoltjni.Utils;
+
 /**
  * A straightforward Java translation of the Jolt Physics "convex vs mesh scene"
  * performance test.
@@ -30,6 +31,7 @@ import testjoltjni.Utils;
  *
  * @author Stephen Gold sgold@sonic.net
  */
+// A scene that drops a number of convex shapes on a sloping terrain made out of a mesh shape
 public class ConvexVsMeshScene {
 	private static final int OBJ_LAYER_NON_MOVING = 0;
 	private static final int OBJ_LAYER_MOVING = 1;
@@ -68,9 +70,8 @@ public class ConvexVsMeshScene {
 			physics_system.update(cDeltaTime, cCollisionSteps, temp_allocator, job_system);
 		}
 	}
-	static BodyCreationSettings mMeshSettings;
-	static Shape[] mShapes;
-	static boolean Load()
+
+        static boolean Load()
 	{
 		final int n = 100;
 		final float cell_size = 3.0f;
@@ -161,4 +162,7 @@ public class ConvexVsMeshScene {
 					bi.createAndAddBody(creation_settings, EActivation.Activate);
 				}
 	}
+
+	static BodyCreationSettings	mMeshSettings;
+	static Shape[]		mShapes;
 }
