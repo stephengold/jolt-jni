@@ -77,6 +77,26 @@ public class Test003 {
             Utils.testClose(box);
         }
         {
+            AaBox box = AaBox.sBiggest();
+
+            Assert.assertTrue(box.hasAssignedNativeObject());
+            Assert.assertTrue(box.ownsNativeObject());
+            Assert.assertNotEquals(0L, box.va());
+
+            Utils.assertEquals(0f, 0f, 0f, box.getCenter(), 0f);
+            Utils.assertEquals(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
+                    Float.POSITIVE_INFINITY, box.getExtent(), 0f);
+            Utils.assertEquals(Float.MAX_VALUE, Float.MAX_VALUE,
+                    Float.MAX_VALUE, box.getMax(), 0f);
+            Utils.assertEquals(-Float.MAX_VALUE, -Float.MAX_VALUE,
+                    -Float.MAX_VALUE, box.getMin(), 0f);
+            Utils.assertEquals(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
+                    Float.POSITIVE_INFINITY, box.getSize(), 0f);
+            Assert.assertTrue(box.isValid());
+
+            Utils.testClose(box);
+        }
+        {
             Vec3Arg max = new Vec3(4f, 5f, 6f);
             Vec3Arg min = new Vec3(1f, 2f, 3f);
             AaBox box = new AaBox(min, max);
