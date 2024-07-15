@@ -68,7 +68,7 @@ public interface ConstShape extends ConstJoltPhysicsObject {
      * Return a bounding box that includes the convex radius. The shape is
      * unaffected.
      *
-     * @return a new, mutable box
+     * @return a new, mutable box (relative to the shape's center of mass)
      */
     AaBox getLocalBounds();
 
@@ -110,7 +110,7 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     boolean mustBeStatic();
 
     /**
-     * Create a counted reference to the native object.
+     * Create a counted reference to the native {@code Shape}.
      *
      * @return a new JVM object with a new native object assigned
      */

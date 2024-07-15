@@ -36,7 +36,7 @@ public class CapsuleShape extends ConvexShape {
     }
 
     /**
-     * Instantiate a shape with the specified radius.
+     * Instantiate a shape with the specified dimensions.
      *
      * @param halfHeight half the desired height of the cylindrical portion
      * @param radius the desired radius

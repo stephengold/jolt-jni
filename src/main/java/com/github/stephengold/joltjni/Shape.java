@@ -166,10 +166,10 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Return a bounding box that includes the convex radius, centered on the
-     * center of mass. The shape is unaffected.
+     * Return a bounding box that includes the convex radius. The shape is
+     * unaffected.
      *
-     * @return a new, mutable box
+     * @return a new, mutable box (relative to the shape's center of mass)
      */
     @Override
     public AaBox getLocalBounds() {
@@ -197,7 +197,7 @@ abstract public class Shape extends NonCopyable
     /**
      * Return the shape's subtype. The shape is unaffected.
      *
-     * @return an enum value
+     * @return an enum value (not null)
      */
     @Override
     public EShapeSubType getSubType() {
@@ -211,7 +211,7 @@ abstract public class Shape extends NonCopyable
     /**
      * Return the shape's type. The shape is unaffected.
      *
-     * @return an enum value
+     * @return an enum value (not null)
      */
     @Override
     public EShapeType getType() {
@@ -251,7 +251,7 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Create a counted reference to the native object.
+     * Create a counted reference to the native {@code Shape}.
      *
      * @return a new JVM object with a new native object assigned
      */

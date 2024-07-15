@@ -72,6 +72,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShape_getScal
     float result = factors.GetY();
     return result;
 }
+
 /*
  * Class:     com_github_stephengold_joltjni_ScaledShape
  * Method:    getScaleZ
