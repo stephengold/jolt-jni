@@ -85,6 +85,9 @@ abstract public class Shape extends NonCopyable
             case Mesh:
                 result = new MeshShape(shapeVa);
                 break;
+            case Scaled:
+                result = new ScaledShape(shapeVa);
+                break;
             case Sphere:
                 result = new SphereShape(shapeVa);
                 break;
