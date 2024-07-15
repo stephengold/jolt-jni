@@ -49,7 +49,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VertexList;
 import org.junit.Assert;
 import org.junit.Test;
-import testjoltjni.Utils;
+import testjoltjni.TestUtils;
 
 /**
  * Automated JUnit4 tests for jolt-jni.
@@ -95,7 +95,7 @@ public class Test002 {
      */
     @Test
     public void test002() {
-        Utils.loadAndInitializeNativeLibrary();
+        TestUtils.loadAndInitializeNativeLibrary();
 
         // broadphase layers:
         int bpLayerNonMoving = 0;
@@ -127,7 +127,7 @@ public class Test002 {
         int numBytes = 32 << 20; // 32 MiB
         TempAllocatorImpl tempAllocator = new TempAllocatorImpl(numBytes);
 
-        int numThreads = Utils.numThreads();
+        int numThreads = TestUtils.numThreads();
         JobSystemThreadPool jobSystem = new JobSystemThreadPool(
                 Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, numThreads);
 
@@ -141,19 +141,19 @@ public class Test002 {
         }
 
         for (ShapeRefC ref : dynamicShapes) {
-            Utils.testClose(ref);
+            TestUtils.testClose(ref);
         }
-        Utils.testClose(meshBodySettings);
+        TestUtils.testClose(meshBodySettings);
 
-        Utils.testClose(jobSystem);
-        Utils.testClose(tempAllocator);
+        TestUtils.testClose(jobSystem);
+        TestUtils.testClose(tempAllocator);
 
         Assert.assertEquals(1_765, physicsSystem.getNumBodies());
 
-        Utils.testClose(physicsSystem);
-        Utils.testClose(objVsObjFilter);
-        Utils.testClose(objVsBpFilter);
-        Utils.testClose(mapObj2Bp);
+        TestUtils.testClose(physicsSystem);
+        TestUtils.testClose(objVsObjFilter);
+        TestUtils.testClose(objVsBpFilter);
+        TestUtils.testClose(mapObj2Bp);
 
         Jolt.unregisterTypes();
         Jolt.destroyFactory();
@@ -210,9 +210,9 @@ public class Test002 {
                 = new MeshShapeSettings(vertices, indices);
         for (int i = 0; i < numTriangles; ++i) {
             IndexedTriangle it = indices.get(i);
-            Utils.testClose(it);
+            TestUtils.testClose(it);
         }
-        Utils.testClose(indices);
+        TestUtils.testClose(indices);
         meshShapeSettings.setMaxTrianglesPerLeaf(4);
 
         meshBodySettings = new BodyCreationSettings();
@@ -251,7 +251,7 @@ public class Test002 {
         settings.setNumVelocitySteps(4);
         settings.setNumPositionSteps(1);
         physicsSystem.setPhysicsSettings(settings);
-        Utils.testClose(settings);
+        TestUtils.testClose(settings);
 
         BodyInterface bi = physicsSystem.getBodyInterface();
         bi.createAndAddBody(meshBodySettings, EActivation.DontActivate);
@@ -274,6 +274,6 @@ public class Test002 {
                 }
             }
         }
-        Utils.testClose(bi);
+        TestUtils.testClose(bi);
     }
 }

@@ -21,7 +21,7 @@ SOFTWARE.
  */
 package testjoltjni.app;
 import com.github.stephengold.joltjni.*;
-import testjoltjni.Utils;
+import testjoltjni.TestUtils;
 /**
  * A straightforward Java translation of the Jolt Physics "hello world" sample
  * application.
@@ -51,7 +51,7 @@ public class HelloWorld {
 // Program entry point
 public static void main(String[] argv)
 {
-	Utils.loadNativeLibrary();
+	TestUtils.loadNativeLibrary();
 
 	// Register allocation hook. In this example we'll just let Jolt use malloc / free but you can override these if you want (see Memory.h).
 	// This needs to be done before any other Jolt function is called.
@@ -80,7 +80,7 @@ public static void main(String[] argv)
 	// We need a job system that will execute physics jobs on multiple threads. Typically
 	// you would implement the JobSystem interface yourself and let Jolt Physics run on top
 	// of your own job scheduler. JobSystemThreadPool is an example implementation.
-	JobSystemThreadPool job_system = new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, Utils.numThreads());
+	JobSystemThreadPool job_system = new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, TestUtils.numThreads());
 
 	// This is the max amount of rigid bodies that you can add to the physics system. If you try to add more you'll get an error.
 	// Note: This value is low because this is a simple test. For a real project use something in the order of 65536.

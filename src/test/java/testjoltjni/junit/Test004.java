@@ -31,7 +31,7 @@ import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Vec3;
 import org.junit.Assert;
 import org.junit.Test;
-import testjoltjni.Utils;
+import testjoltjni.TestUtils;
 
 /**
  * Automated JUnit4 tests for jolt-jni object creation, destruction, accessors,
@@ -49,7 +49,7 @@ public class Test004 {
      */
     @Test
     public void test004() {
-        Utils.loadAndInitializeNativeLibrary();
+        TestUtils.loadAndInitializeNativeLibrary();
 
         int numBpLayers = 2;
         int numObjLayers = 3;
@@ -71,7 +71,7 @@ public class Test004 {
 
         // PhysicsSystem setters:
         physicsSystem.setGravity(new Vec3(0.01f, 0f, -32f));
-        Utils.assertEquals(0.01f, 0f, -32f, physicsSystem.getGravity(), 0f);
+        TestUtils.assertEquals(0.01f, 0f, -32f, physicsSystem.getGravity(), 0f);
 
         // Directly create default PhysicsSettings:
         PhysicsSettings settings2 = new PhysicsSettings();
@@ -84,12 +84,12 @@ public class Test004 {
         Assert.assertNotEquals(settings2.va(), settings3.va());
         testGettersAndDefaults(settings3);
 
-        Utils.testClose(settings3);
-        Utils.testClose(settings2);
-        Utils.testClose(physicsSystem);
-        Utils.testClose(objVsObjFilter);
-        Utils.testClose(objVsBpFilter);
-        Utils.testClose(mapObj2Bp);
+        TestUtils.testClose(settings3);
+        TestUtils.testClose(settings2);
+        TestUtils.testClose(physicsSystem);
+        TestUtils.testClose(objVsObjFilter);
+        TestUtils.testClose(objVsBpFilter);
+        TestUtils.testClose(mapObj2Bp);
     }
     // *************************************************************************
     // Java private methods
@@ -124,7 +124,7 @@ public class Test004 {
         Assert.assertTrue(physicsSystem.hasAssignedNativeObject());
         Assert.assertNotEquals(0L, physicsSystem.va());
 
-        Utils.assertEquals(0f, -9.81f, 0f, physicsSystem.getGravity(), 0f);
+        TestUtils.assertEquals(0f, -9.81f, 0f, physicsSystem.getGravity(), 0f);
         Assert.assertEquals(0,
                 physicsSystem.getNumActiveBodies(EBodyType.RigidBody));
         Assert.assertEquals(0,
@@ -143,8 +143,8 @@ public class Test004 {
             BodyInterface bodyInterface1 = physicsSystem.getBodyInterface();
             Assert.assertEquals(bodyInterface.va(), bodyInterface1.va());
 
-            Utils.testClose(bodyInterface1);
-            Utils.testClose(bodyInterface);
+            TestUtils.testClose(bodyInterface1);
+            TestUtils.testClose(bodyInterface);
         }
 
         {
@@ -158,8 +158,8 @@ public class Test004 {
             Assert.assertNotEquals(settings.va(), settings1.va());
             testGettersAndDefaults(settings1);
 
-            Utils.testClose(settings1);
-            Utils.testClose(settings);
+            TestUtils.testClose(settings1);
+            TestUtils.testClose(settings);
         }
     }
 

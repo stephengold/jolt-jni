@@ -21,7 +21,7 @@ SOFTWARE.
  */
 package testjoltjni.app;
 import com.github.stephengold.joltjni.*;
-import testjoltjni.Utils;
+import testjoltjni.TestUtils;
 
 /**
  * A straightforward Java translation of the Jolt Physics "convex vs mesh scene"
@@ -40,9 +40,9 @@ public class ConvexVsMeshScene {
 	private static final int BP_LAYER_MOVING = 1;
 	private static final int BP_NUM_LAYERS = 2;
 	public static void main(String[] argv) {
-		Utils.loadAndInitializeNativeLibrary();
+		TestUtils.loadAndInitializeNativeLibrary();
 		TempAllocatorImpl temp_allocator = new TempAllocatorImpl(32 << 20); // 32 MiB
-		JobSystemThreadPool job_system = new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, Utils.numThreads());
+		JobSystemThreadPool job_system = new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, TestUtils.numThreads());
 		final int cMaxBodies = 1_800;
 		final int cNumBodyMutexes = 0;
 		final int cMaxBodyPairs = 65_536;

@@ -35,14 +35,14 @@ import org.junit.Assert;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class Utils {
+final public class TestUtils {
     // *************************************************************************
     // constructors
 
     /**
      * A private constructor to inhibit instantiation of this class.
      */
-    private Utils() {
+    private TestUtils() {
         // do nothing
     }
     // *************************************************************************

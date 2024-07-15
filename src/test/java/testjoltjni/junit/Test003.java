@@ -45,7 +45,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.Vec3Arg;
 import org.junit.Assert;
 import org.junit.Test;
-import testjoltjni.Utils;
+import testjoltjni.TestUtils;
 
 /**
  * Automated JUnit4 tests for jolt-jni object creation, destruction, accessors,
@@ -62,7 +62,7 @@ public class Test003 {
      */
     @Test
     public void test003() {
-        Utils.loadAndInitializeNativeLibrary();
+        TestUtils.loadAndInitializeNativeLibrary();
 
         // AaBox:
         {
@@ -74,7 +74,7 @@ public class Test003 {
 
             Assert.assertFalse(box.isValid());
 
-            Utils.testClose(box);
+            TestUtils.testClose(box);
         }
         {
             AaBox box = AaBox.sBiggest();
@@ -83,18 +83,20 @@ public class Test003 {
             Assert.assertTrue(box.ownsNativeObject());
             Assert.assertNotEquals(0L, box.va());
 
-            Utils.assertEquals(0f, 0f, 0f, box.getCenter(), 0f);
-            Utils.assertEquals(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
+            TestUtils.assertEquals(0f, 0f, 0f, box.getCenter(), 0f);
+            TestUtils.assertEquals(
+                    Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
                     Float.POSITIVE_INFINITY, box.getExtent(), 0f);
-            Utils.assertEquals(Float.MAX_VALUE, Float.MAX_VALUE,
+            TestUtils.assertEquals(Float.MAX_VALUE, Float.MAX_VALUE,
                     Float.MAX_VALUE, box.getMax(), 0f);
-            Utils.assertEquals(-Float.MAX_VALUE, -Float.MAX_VALUE,
+            TestUtils.assertEquals(-Float.MAX_VALUE, -Float.MAX_VALUE,
                     -Float.MAX_VALUE, box.getMin(), 0f);
-            Utils.assertEquals(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
+            TestUtils.assertEquals(
+                    Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
                     Float.POSITIVE_INFINITY, box.getSize(), 0f);
             Assert.assertTrue(box.isValid());
 
-            Utils.testClose(box);
+            TestUtils.testClose(box);
         }
         {
             Vec3Arg max = new Vec3(4f, 5f, 6f);
@@ -105,14 +107,14 @@ public class Test003 {
             Assert.assertTrue(box.ownsNativeObject());
             Assert.assertNotEquals(0L, box.va());
 
-            Utils.assertEquals(2.5f, 3.5f, 4.5f, box.getCenter(), 0f);
-            Utils.assertEquals(4f, 5f, 6f, box.getMax(), 0f);
-            Utils.assertEquals(1.5f, 1.5f, 1.5f, box.getExtent(), 0f);
-            Utils.assertEquals(1f, 2f, 3f, box.getMin(), 0f);
-            Utils.assertEquals(3f, 3f, 3f, box.getSize(), 0f);
+            TestUtils.assertEquals(2.5f, 3.5f, 4.5f, box.getCenter(), 0f);
+            TestUtils.assertEquals(4f, 5f, 6f, box.getMax(), 0f);
+            TestUtils.assertEquals(1.5f, 1.5f, 1.5f, box.getExtent(), 0f);
+            TestUtils.assertEquals(1f, 2f, 3f, box.getMin(), 0f);
+            TestUtils.assertEquals(3f, 3f, 3f, box.getSize(), 0f);
             Assert.assertTrue(box.isValid());
 
-            Utils.testClose(box);
+            TestUtils.testClose(box);
         }
 
         // BodyCreationSettings:
@@ -123,7 +125,7 @@ public class Test003 {
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            Utils.testClose(bcs);
+            TestUtils.testClose(bcs);
         }
         {
             ShapeSettings ss = new BoxShapeSettings(new Vec3(1f, 1f, 1f));
@@ -136,7 +138,7 @@ public class Test003 {
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            Utils.testClose(bcs);
+            TestUtils.testClose(bcs);
         }
         {
             Shape shape = new SphereShape(1f);
@@ -148,7 +150,7 @@ public class Test003 {
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            Utils.testClose(bcs);
+            TestUtils.testClose(bcs);
         }
 
         // JobSystemSingleThreaded:
@@ -162,7 +164,7 @@ public class Test003 {
             Assert.assertTrue(jobSystem.ownsNativeObject());
             Assert.assertNotEquals(0L, jobSystem.va());
 
-            Utils.testClose(jobSystem);
+            TestUtils.testClose(jobSystem);
         }
 
         // JobSystemThreadPool:
@@ -183,7 +185,7 @@ public class Test003 {
             jobSystem.setNumThreads(3);
             Assert.assertEquals(4, jobSystem.getMaxConcurrency());
 
-            Utils.testClose(jobSystem);
+            TestUtils.testClose(jobSystem);
         }
 
         // TempAllocatorImpl:
@@ -195,7 +197,7 @@ public class Test003 {
             Assert.assertTrue(tempAllocator.ownsNativeObject());
             Assert.assertNotEquals(0L, tempAllocator.va());
 
-            Utils.testClose(tempAllocator);
+            TestUtils.testClose(tempAllocator);
         }
 
         // TempAllocatorMalloc:
@@ -206,7 +208,7 @@ public class Test003 {
             Assert.assertTrue(tempAllocator.ownsNativeObject());
             Assert.assertNotEquals(0L, tempAllocator.va());
 
-            Utils.testClose(tempAllocator);
+            TestUtils.testClose(tempAllocator);
         }
     }
     // *************************************************************************
@@ -224,19 +226,19 @@ public class Test003 {
 
         Assert.assertTrue(bcs.getAllowSleeping());
         Assert.assertEquals(0.05f, bcs.getAngularDamping(), 0f);
-        Utils.assertEquals(0f, 0f, 0f, bcs.getAngularVelocity(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, bcs.getAngularVelocity(), 0f);
         Assert.assertEquals(0.2f, bcs.getFriction(), 0f);
         Assert.assertEquals(1f, bcs.getGravityFactor(), 0f);
         Assert.assertEquals(0.05f, bcs.getLinearDamping(), 0f);
-        Utils.assertEquals(0f, 0f, 0f, bcs.getLinearVelocity(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, bcs.getLinearVelocity(), 0f);
         Assert.assertEquals(15 * Math.PI, bcs.getMaxAngularVelocity(), 1e-6f);
         Assert.assertEquals(500f, bcs.getMaxLinearVelocity(), 0f);
         Assert.assertEquals(EMotionQuality.Discrete, bcs.getMotionQuality());
         Assert.assertEquals(EMotionType.Dynamic, bcs.getMotionType());
         Assert.assertEquals(0, bcs.getObjectLayer());
-        Utils.assertEquals(0f, 0f, 0f, bcs.getPosition(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, bcs.getPosition(), 0f);
         Assert.assertEquals(0f, bcs.getRestitution(), 0f);
-        Utils.assertEquals(0f, 0f, 0f, 1f, bcs.getRotation(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, 1f, bcs.getRotation(), 0f);
         Assert.assertTrue(bcs.hasMassProperties());
     }
 
@@ -253,7 +255,8 @@ public class Test003 {
         Assert.assertEquals(0.01f, bcs.getAngularDamping(), 0f);
 
         bcs.setAngularVelocity(new Vec3(0.02f, 0.03f, 0.04f));
-        Utils.assertEquals(0.02f, 0.03f, 0.04f, bcs.getAngularVelocity(), 0f);
+        TestUtils.assertEquals(
+                0.02f, 0.03f, 0.04f, bcs.getAngularVelocity(), 0f);
 
         bcs.setFriction(0.05f);
         Assert.assertEquals(0.05f, bcs.getFriction(), 0f);
@@ -265,7 +268,7 @@ public class Test003 {
         Assert.assertEquals(0.07f, bcs.getLinearDamping(), 0f);
 
         bcs.setLinearVelocity(new Vec3(0.08f, 0.09f, 0.1f));
-        Utils.assertEquals(0.08f, 0.09f, 0.1f, bcs.getLinearVelocity(), 0f);
+        TestUtils.assertEquals(0.08f, 0.09f, 0.1f, bcs.getLinearVelocity(), 0f);
 
         bcs.setMaxAngularVelocity(0.101f);
         Assert.assertEquals(0.101f, bcs.getMaxAngularVelocity(), 0f);
@@ -283,12 +286,12 @@ public class Test003 {
         Assert.assertEquals(11, bcs.getObjectLayer());
 
         bcs.setPosition(new RVec3(0.12, 0.13, 0.14));
-        Utils.assertEquals(0.12f, 0.13f, 0.14f, bcs.getPosition(), 0f);
+        TestUtils.assertEquals(0.12f, 0.13f, 0.14f, bcs.getPosition(), 0f);
 
         bcs.setRestitution(0.15f);
         Assert.assertEquals(0.15f, bcs.getRestitution(), 0f);
 
         bcs.setRotation(new Quat(0.6f, 0f, 0f, 0.8f));
-        Utils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
+        TestUtils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
     }
 }

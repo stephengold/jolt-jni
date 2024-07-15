@@ -49,7 +49,7 @@ import com.github.stephengold.joltjni.TempAllocatorImpl;
 import com.github.stephengold.joltjni.Vec3;
 import org.junit.Assert;
 import org.junit.Test;
-import testjoltjni.Utils;
+import testjoltjni.TestUtils;
 
 /**
  * Automated JUnit4 tests for jolt-jni.
@@ -67,7 +67,7 @@ public class Test001 {
      */
     @Test
     public void test001() {
-        Utils.loadAndInitializeNativeLibrary();
+        TestUtils.loadAndInitializeNativeLibrary();
 
         // object layers:
         final int objLayerNonMoving = 0;
@@ -138,7 +138,7 @@ public class Test001 {
 
         final int maxJobs = 4_096;
         final int maxBarriers = 4;
-        int numThreads = Utils.numThreads();
+        int numThreads = TestUtils.numThreads();
         JobSystem jobSystem
                 = new JobSystemThreadPool(maxJobs, maxBarriers, numThreads);
 
@@ -153,38 +153,38 @@ public class Test001 {
             ++stepCounter;
         }
         Assert.assertEquals(48, stepCounter);
-        Utils.testClose(jobSystem);
-        Utils.testClose(tempAllocator);
+        TestUtils.testClose(jobSystem);
+        TestUtils.testClose(tempAllocator);
 
         ballLocation = bodyInterface.getCenterOfMassPosition(ballId);
-        Utils.assertEquals(0f, 0.48f, 0f, ballLocation, 1e-5f);
+        TestUtils.assertEquals(0f, 0.48f, 0f, ballLocation, 1e-5f);
 
         ballVelocity = bodyInterface.getLinearVelocity(ballId);
-        Utils.assertEquals(0f, 0f, 0f, ballVelocity, 1e-5f);
+        TestUtils.assertEquals(0f, 0f, 0f, ballVelocity, 1e-5f);
 
         bodyInterface.removeBody(ballId);
         Assert.assertEquals(2, ballShape.getRefCount());
         bodyInterface.destroyBody(ballId);
         Assert.assertEquals(1, ballShape.getRefCount());
-        Utils.testClose(ballId);
+        TestUtils.testClose(ballId);
         Assert.assertEquals(1, ballShape.getRefCount());
-        Utils.testClose(ballSettings);
-        Utils.testClose(ballShape);
+        TestUtils.testClose(ballSettings);
+        TestUtils.testClose(ballShape);
 
         bodyInterface.removeBody(floorId);
         bodyInterface.destroyBody(floorId);
-        Utils.testClose(floorId);
-        Utils.testClose(floor);
-        Utils.testClose(floorBodySettings);
-        Utils.testClose(floorShapeRef);
-        Utils.testClose(floorShapeResult);
-        Utils.testClose(floorShapeSettings);
+        TestUtils.testClose(floorId);
+        TestUtils.testClose(floor);
+        TestUtils.testClose(floorBodySettings);
+        TestUtils.testClose(floorShapeRef);
+        TestUtils.testClose(floorShapeResult);
+        TestUtils.testClose(floorShapeSettings);
 
-        Utils.testClose(bodyInterface);
-        Utils.testClose(physicsSystem);
-        Utils.testClose(objVsObjFilter);
-        Utils.testClose(objVsBpFilter);
-        Utils.testClose(mapObj2Bp);
+        TestUtils.testClose(bodyInterface);
+        TestUtils.testClose(physicsSystem);
+        TestUtils.testClose(objVsObjFilter);
+        TestUtils.testClose(objVsBpFilter);
+        TestUtils.testClose(mapObj2Bp);
 
         Jolt.unregisterTypes();
         Jolt.destroyFactory();
