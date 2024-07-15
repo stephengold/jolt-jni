@@ -19,37 +19,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
 
-/**
- * Settings used to construct a {@code ConvexShape}.
- *
- * @author Stephen Gold sgold@sonic.net
+/*
+ * Author: Stephen Gold
  */
-abstract public class ConvexShapeSettings extends ShapeSettings {
-    // *************************************************************************
-    // constructors
+#include <Jolt/Jolt.h>
+#include <Jolt/Physics/Collision/Shape/ConvexShape.h>
+#include "auto/com_github_stephengold_joltjni_ConvexShapeSettings.h"
 
-    /**
-     * Instantiate settings with no native object assigned.
-     */
-    protected ConvexShapeSettings() {
-    }
-    // *************************************************************************
-    // new methods exposed
+using namespace JPH;
 
-    /**
-     * Alter the shape's density.
-     *
-     * @param density the desired density (in kilograms per cubic meter,
-     * default=1000)
-     */
-    public void setDensity(float density) {
-        long settingsVa = va();
-        setDensity(settingsVa, density);
-    }
-    // *************************************************************************
-    // native private methods
-
-    native private static void setDensity(long settingsVa, float density);
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexShapeSettings
+ * Method:    setDensity
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexShapeSettings_setDensity
+  (JNIEnv *, jclass, jlong settingsVa, jfloat density) {
+    ConvexShapeSettings * const pSettings
+            = reinterpret_cast<ConvexShapeSettings *> (settingsVa);
+    pSettings->SetDensity(density);
 }
