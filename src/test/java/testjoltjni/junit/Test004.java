@@ -90,6 +90,8 @@ public class Test004 {
         TestUtils.testClose(objVsObjFilter);
         TestUtils.testClose(objVsBpFilter);
         TestUtils.testClose(mapObj2Bp);
+
+        TestUtils.cleanup();
     }
     // *************************************************************************
     // Java private methods

@@ -33,7 +33,6 @@ import com.github.stephengold.joltjni.EShapeSubType;
 import com.github.stephengold.joltjni.EShapeType;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
-import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.MapObj2Bp;
 import com.github.stephengold.joltjni.ObjVsBpFilter;
 import com.github.stephengold.joltjni.ObjVsObjFilter;
@@ -186,7 +185,6 @@ public class Test001 {
         TestUtils.testClose(objVsBpFilter);
         TestUtils.testClose(mapObj2Bp);
 
-        Jolt.unregisterTypes();
-        Jolt.destroyFactory();
+        TestUtils.cleanup();
     }
 }

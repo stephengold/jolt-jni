@@ -155,8 +155,7 @@ public class Test002 {
         TestUtils.testClose(objVsBpFilter);
         TestUtils.testClose(mapObj2Bp);
 
-        Jolt.unregisterTypes();
-        Jolt.destroyFactory();
+        TestUtils.cleanup();
     }
     // *************************************************************************
     // private methods

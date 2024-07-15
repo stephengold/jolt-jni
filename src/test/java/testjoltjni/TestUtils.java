@@ -101,6 +101,16 @@ final public class TestUtils {
     }
 
     /**
+     * Clean up after a test.
+     */
+    public static void cleanup() {
+        Jolt.unregisterTypes();
+        Jolt.destroyFactory();
+
+        System.gc();
+    }
+
+    /**
      * Load and initialize some flavor of native library.
      */
     public static void loadAndInitializeNativeLibrary() {

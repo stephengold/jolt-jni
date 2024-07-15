@@ -69,6 +69,7 @@ public class ConvexVsMeshScene {
 			final int cCollisionSteps = 1;
 			physics_system.update(cDeltaTime, cCollisionSteps, temp_allocator, job_system);
 		}
+		TestUtils.cleanup();
 	}
 
         static boolean Load()

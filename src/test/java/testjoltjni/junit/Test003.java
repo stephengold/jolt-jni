@@ -210,6 +210,8 @@ public class Test003 {
 
             TestUtils.testClose(tempAllocator);
         }
+
+        TestUtils.cleanup();
     }
     // *************************************************************************
     // Java private methods
