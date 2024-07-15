@@ -71,6 +71,23 @@ final public class RVec3 implements RVec3Arg {
     // new methods exposed
 
     /**
+     * Adds specified amounts to the vector's components and returns the
+     * (modified) current instance.
+     *
+     * @param addX the amount to add to the X component
+     * @param addY the amount to add to the Y component
+     * @param addZ the amount to add to the Z component
+     * @return the (modified) current instance (for chaining)
+     */
+    public RVec3 addLocal(double addX, double addY, double addZ) {
+        this.xx += addX;
+        this.yy += addY;
+        this.zz += addZ;
+
+        return this;
+    }
+
+    /**
      * Test whether all 3 components are finite.
      *
      * @return true if all are finite, otherwise false
