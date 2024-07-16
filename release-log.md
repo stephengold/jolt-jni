@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.3.0 released on TBD
+## Version 0.3.0 released on 16 July 2024
 
 + Added a `java.lang.ref.Cleaner` to automatically free native
   objects (as an alternative to explicitly closing each physics object).
