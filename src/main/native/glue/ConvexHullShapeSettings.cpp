@@ -39,15 +39,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
   (JNIEnv *pEnv, jclass, jint numPoints, jobject buffer) {
     const jfloat * const pFloats
             = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
-    Vec3 points[numPoints];
+    Vec3 * const pPoints = new Vec3[numPoints];
+    TRACE_NEW("Vec3[]", pPoints)
     for (jint i = 0; i < numPoints; ++i) {
         float x = pFloats[3 * i];
         float y = pFloats[3 * i + 1];
         float z = pFloats[3 * i + 2];
-        points[i].Set(x, y, z);
+        pPoints[i].Set(x, y, z);
     }
     ConvexHullShapeSettings * const pResult
-            = new ConvexHullShapeSettings(points, numPoints);
+            = new ConvexHullShapeSettings(pPoints, numPoints);
     TRACE_NEW("ConvexHullShapeSettings", pResult)
+    TRACE_DELETE("Vec3[]", pPoints)
+    delete pPoints;
     return reinterpret_cast<jlong> (pResult);
 }
