@@ -1,5 +1,25 @@
 # release log for the jolt-jni project
 
+## Version 0.3.0 released on TBD
+
++ Added a `java.lang.ref.Cleaner` to automatically free native
+  objects (as an alternative to explicitly closing each physics object).
++ Deleted the `JoltPhysicsObject.unassignNativeObject()` method.
++ Deleted the `ShapeSettings.createShape()` method.
++ Added many methods.
++ Added classes and interfaces to the library:
+  + `CapsuleShapeSettings`
+  + `ConstAaBox`
+  + `ConstBodyId`
+  + `ConstJoltPhysicsObject`
+  + `ConstShape`
+  + `CylinderShapeSettings`
+  + `RefTarget`
+  + `ScaledShapeSettings`
+  + `ShapeRefC`
+  + `ShapeResult`
+  + `ShapeSettingsRef`
+
 ## Version 0.2.0 released on 9 July 2024
 
 For development only. Not for production use.
