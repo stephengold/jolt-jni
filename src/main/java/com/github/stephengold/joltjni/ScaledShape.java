@@ -56,6 +56,24 @@ public class ScaledShape extends DecoratedShape {
                 = createScaledShape(baseShapeVa, scaleX, scaleY, scaleZ);
         setVirtualAddress(scaledShapeVa, null); // no owner due to ref counting
     }
+
+    /**
+     * Instantiate a shape based on the specified shape reference and scale
+     * factors.
+     *
+     * @param baseShapeRef a reference to the unscaled base shape (not null)
+     * @param scaleFactors the desired scale factors (not null)
+     */
+    public ScaledShape(ShapeRefC baseShapeRef, Vec3Arg scaleFactors) {
+        ConstShape baseShape = baseShapeRef.getPtr();
+        long baseShapeVa = baseShape.va();
+        float scaleX = scaleFactors.getX();
+        float scaleY = scaleFactors.getY();
+        float scaleZ = scaleFactors.getZ();
+        long scaledShapeVa
+                = createScaledShape(baseShapeVa, scaleX, scaleY, scaleZ);
+        setVirtualAddress(scaledShapeVa, null); // no owner due to ref counting
+    }
     // *************************************************************************
     // new methods exposed
 
