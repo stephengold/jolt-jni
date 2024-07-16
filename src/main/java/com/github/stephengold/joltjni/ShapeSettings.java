@@ -70,6 +70,51 @@ abstract public class ShapeSettings
 
         return result;
     }
+
+    /**
+     * Instantiate a {@code ShapeSettomgs} from its virtual address.
+     *
+     * @param settingsVa the virtual address of the native object, or zero
+     * @return a new JVM object, or {@code null} if the argument was zero
+     */
+    static ShapeSettings newShapeSettings(long settingsVa) {
+        if (settingsVa == 0L) {
+            return null;
+        }
+
+        long ordinal = getUserData(settingsVa);
+        EShapeSubType subType = EShapeSubType.values()[(int) ordinal];
+        ShapeSettings result;
+        switch (subType) {
+            case Box:
+                result = new BoxShapeSettings(settingsVa);
+                break;
+            case Capsule:
+                result = new CapsuleShapeSettings(settingsVa);
+                break;
+            case ConvexHull:
+                result = new ConvexHullShapeSettings(settingsVa);
+                break;
+            case Cylinder:
+                result = new CylinderShapeSettings(settingsVa);
+                break;
+            case HeightField:
+                result = new HeightFieldShapeSettings(settingsVa);
+                break;
+            case Mesh:
+                result = new MeshShapeSettings(settingsVa);
+                break;
+            case Scaled:
+                result = new ScaledShapeSettings(settingsVa);
+                break;
+            case Sphere:
+                result = new SphereShapeSettings(settingsVa);
+                break;
+            default:
+                throw new IllegalArgumentException("type = " + subType);
+        }
+        return result;
+    }
     // *************************************************************************
     // new protected methods
 
