@@ -45,6 +45,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long settingsVa
                 = createMeshShapeSettings(numVertices, buffer, indicesVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.Mesh);
     }
     // *************************************************************************
     // new public methods

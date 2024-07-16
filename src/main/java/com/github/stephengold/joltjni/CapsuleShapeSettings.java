@@ -39,6 +39,7 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     public CapsuleShapeSettings(float halfHeight, float radius) {
         long settingsVa = createCapsuleShapeSettings(halfHeight, radius);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.Capsule);
     }
     // *************************************************************************
     // native private methods

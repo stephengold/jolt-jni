@@ -61,6 +61,19 @@ abstract public class ShapeSettings
         return result;
     }
     // *************************************************************************
+    // new protected methods
+
+    /**
+     * Alter the user data, which holds the EShapeSubType ordinal.
+     *
+     * @param shapeSubType the desired value
+     */
+    protected void setSubType(EShapeSubType shapeSubType) {
+        long shapeVa = va();
+        long ordinal = shapeSubType.ordinal();
+        setUserData(shapeVa, ordinal);
+    }
+    // *************************************************************************
     // RefTarget methods
 
     /**
@@ -83,4 +96,8 @@ abstract public class ShapeSettings
     native private static long create(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
+
+    native private static long getUserData(long settingsVa);
+
+    native private static void setUserData(long settingsVa, long value);
 }

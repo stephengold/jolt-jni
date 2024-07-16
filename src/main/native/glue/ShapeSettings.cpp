@@ -69,3 +69,28 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_getRefC
     return result;
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeSettings
+ * Method:    getUserData
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_getUserData
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const ShapeSettings * const pSettings
+            = reinterpret_cast<ShapeSettings *> (settingsVa);
+    uint64 result = pSettings->mUserData;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeSettings
+ * Method:    setUserData
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_setUserData
+  (JNIEnv *, jclass, jlong settingsVa, jlong value) {
+    ShapeSettings * const pSettings
+            = reinterpret_cast<ShapeSettings *> (settingsVa);
+    pSettings->mUserData = value;
+}
+

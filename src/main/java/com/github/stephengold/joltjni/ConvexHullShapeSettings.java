@@ -55,6 +55,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         }
         long settingsVa = createConvexHullShapeSettings(numPoints, buffer);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.ConvexHull);
     }
 
     /**
@@ -66,6 +67,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     public ConvexHullShapeSettings(int numPoints, FloatBuffer points) {
         long settingsVa = createConvexHullShapeSettings(numPoints, points);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.ConvexHull);
     }
     // *************************************************************************
     // native private methods

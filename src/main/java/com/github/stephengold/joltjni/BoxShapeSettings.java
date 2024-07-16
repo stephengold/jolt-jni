@@ -43,6 +43,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
         long settingsVa
                 = createBoxShapeSettings(xHalfExtent, yHalfExtent, zHalfExtent);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.Box);
     }
     // *************************************************************************
     // native private methods

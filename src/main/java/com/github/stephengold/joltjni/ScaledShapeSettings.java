@@ -44,6 +44,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         long settingsVa = createScaledShapeSettingsFromShape(
                 baseShapeVa, scaleX, scaleY, scaleZ);
         setVirtualAddress(settingsVa, null); // no owner due to ref counting
+        setSubType(EShapeSubType.Scaled);
     }
 
     /**
@@ -61,6 +62,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         long settingsVa = createScaledShapeSettingsFromRef(
                 baseShapeRefVa, scaleX, scaleY, scaleZ);
         setVirtualAddress(settingsVa, null); // no owner due to ref counting
+        setSubType(EShapeSubType.Scaled);
     }
 
     /**
@@ -78,6 +80,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         long settingsVa = createScaledShapeSettingsFromSettings(
                 baseSettingsVa, scaleX, scaleY, scaleZ);
         setVirtualAddress(settingsVa, null); // no owner due to ref counting
+        setSubType(EShapeSubType.Scaled);
     }
     // *************************************************************************
     // new methods exposed

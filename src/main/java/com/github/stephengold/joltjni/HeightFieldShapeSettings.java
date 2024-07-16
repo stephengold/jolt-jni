@@ -52,6 +52,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
         long settingsVa = createHeightFieldShapeSettings(samples, offsetX,
                 offsetY, offsetZ, scaleX, scaleY, scaleZ, sampleCount);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.HeightField);
     }
     // *************************************************************************
     // native private methods
