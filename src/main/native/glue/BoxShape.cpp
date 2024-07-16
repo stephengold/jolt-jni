@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/BoxShape.h>
 #include "auto/com_github_stephengold_joltjni_BoxShape.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -38,5 +39,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShape_createBoxSh
   (JNIEnv *, jclass, jfloat xHalfExtent, jfloat yHalfExtent, jfloat zHalfExtent) {
     Vec3 halfExtents(xHalfExtent, yHalfExtent, zHalfExtent);
     const BoxShape * pResult = new BoxShape(halfExtents);
+    TRACE_NEW("BoxShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

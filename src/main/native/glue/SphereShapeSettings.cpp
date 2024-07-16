@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/SphereShape.h>
 #include "auto/com_github_stephengold_joltjni_SphereShapeSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -37,5 +38,6 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_createSphereShapeSettings
   (JNIEnv *, jclass, jfloat radius) {
     SphereShapeSettings * const pResult = new SphereShapeSettings(radius);
+    TRACE_NEW("SphereShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Core/NonCopyable.h>
 #include "auto/com_github_stephengold_joltjni_NonCopyable.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -38,5 +39,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NonCopyable_free
   (JNIEnv *, jclass, jlong virtualAddress) {
     NonCopyable * const pInstance
             = reinterpret_cast<NonCopyable *> (virtualAddress);
+    TRACE_DELETE("NonCopyable", pInstance)
     delete pInstance;
 }

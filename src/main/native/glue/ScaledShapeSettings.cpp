@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/ScaledShape.h>
 #include "auto/com_github_stephengold_joltjni_ScaledShapeSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -40,6 +41,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_
     Vec3 factors(x, y, z);
     ScaledShapeSettings * const pResult
             = new ScaledShapeSettings(pBaseRef->GetPtr(), factors);
+    TRACE_NEW("ScaledShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -55,6 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_
     Vec3 factors(x, y, z);
     ScaledShapeSettings * const pResult
             = new ScaledShapeSettings(pBaseSettings, factors);
+    TRACE_NEW("ScaledShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -69,6 +72,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_
     Vec3 factors(x, y, z);
     ScaledShapeSettings * const pResult
             = new ScaledShapeSettings(pBaseShape, factors);
+    TRACE_NEW("ScaledShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Geometry/AABox.h>
 #include "auto/com_github_stephengold_joltjni_AaBox.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -50,6 +51,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_contains
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox__
   (JNIEnv *, jclass) {
     AABox * const pBox = new AABox();
+    TRACE_NEW("AABox", pBox)
     return reinterpret_cast<jlong> (pBox);
 }
 
@@ -63,6 +65,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox__F
     Vec3 min(minX, minY, minZ);
     Vec3 max(maxX, maxY, maxZ);
     AABox * const pBox = new AABox(min, max);
+    TRACE_NEW("AABox", pBox)
     return reinterpret_cast<jlong> (pBox);
 }
 
@@ -74,6 +77,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox__F
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_free
   (JNIEnv *, jclass, jlong boxVa) {
     AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    TRACE_DELETE("AABox", pBox)
     delete pBox;
 }
 
@@ -289,6 +293,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_isValid
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_sBiggest
   (JNIEnv *, jclass, jboolean) {
     AABox * const pResult = new AABox();
+    TRACE_NEW("AABox", pResult)
     *pResult = AABox::sBiggest();
     return reinterpret_cast<jlong> (pResult);
 }

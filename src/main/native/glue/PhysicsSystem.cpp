@@ -27,6 +27,7 @@ SOFTWARE.
 #include <Jolt/Core/JobSystemThreadPool.h>
 #include <Jolt/Physics/PhysicsSystem.h>
 #include "auto/com_github_stephengold_joltjni_PhysicsSystem.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -38,6 +39,7 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_createPhysicsSystem
   (JNIEnv *, jclass) {
     PhysicsSystem * const pResult = new PhysicsSystem();
+    TRACE_NEW("PhysicsSystem", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -133,6 +135,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getPhy
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     PhysicsSettings * const pSettings = new PhysicsSettings();
+    TRACE_NEW("PhysicsSettings", pSettings)
     *pSettings = pSystem->GetPhysicsSettings();
     return reinterpret_cast<jlong> (pSettings);
 }

@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/Shape.h>
 #include "auto/com_github_stephengold_joltjni_ShapeSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -50,6 +51,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_create
     const ShapeSettings * const pSettings
             = reinterpret_cast<ShapeSettings *> (settingsVa);
     ShapeSettings::ShapeResult *pResult = new ShapeSettings::ShapeResult();
+    TRACE_NEW("ShapeResult", pResult)
     *pResult = pSettings->Create();
     return reinterpret_cast<jlong> (pResult);
 }

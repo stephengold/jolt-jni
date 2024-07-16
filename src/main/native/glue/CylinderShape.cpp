@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/CylinderShape.h>
 #include "auto/com_github_stephengold_joltjni_CylinderShape.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -37,5 +38,6 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShape_createCylinderShape
   (JNIEnv *, jclass, jfloat halfHeight, jfloat radius) {
     CylinderShape * const pResult = new CylinderShape(halfHeight, radius);
+    TRACE_NEW("CylinderShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

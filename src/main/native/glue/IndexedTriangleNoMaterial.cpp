@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Geometry/IndexedTriangle.h>
 #include "auto/com_github_stephengold_joltjni_IndexedTriangleNoMaterial.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -38,6 +39,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleNoMat
   (JNIEnv *, jclass, jint vi0, jint vi1, jint vi2) {
     IndexedTriangleNoMaterial * const pTriangle
             = new IndexedTriangleNoMaterial(vi0, vi1, vi2);
+    TRACE_NEW("IndexedTriangleNoMaterial", pTriangle)
     return reinterpret_cast<jlong> (pTriangle);
 }
 
@@ -50,6 +52,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleNoMate
   (JNIEnv *, jclass, jlong triangleVa) {
     IndexedTriangleNoMaterial * const pTriangle
            = reinterpret_cast<IndexedTriangleNoMaterial *> (triangleVa);
+    TRACE_DELETE("IndexedTriangleNoMaterial", pTriangle)
     delete pTriangle;
 }
 

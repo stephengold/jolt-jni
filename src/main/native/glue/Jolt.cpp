@@ -29,6 +29,7 @@ SOFTWARE.
 #include <Jolt/RegisterTypes.h>
 
 #include "auto/com_github_stephengold_joltjni_Jolt.h"
+#include "glue/glue.h"
 #include <iostream>
 
 using namespace JPH;
@@ -56,6 +57,7 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_buildType
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_destroyFactory
   (JNIEnv *, jclass) {
+    TRACE_DELETE("Factory", Factory::sInstance)
     delete Factory::sInstance;
     Factory::sInstance = nullptr;
 }
@@ -131,6 +133,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_isDoublePrec
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
   (JNIEnv *, jclass) {
     Factory::sInstance = new Factory();
+    TRACE_NEW("Factory", Factory::sInstance)
 }
 
 /*
@@ -151,6 +154,25 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_registerDefaultA
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_registerTypes
   (JNIEnv *, jclass) {
     RegisterTypes();
+}
+
+#ifdef _DEBUG
+// global flag to enable tracing of new/delete operations in glue code:
+bool gTraceAllocations = false;
+#endif
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    setTraceAllocations
+ * Signature: (Z)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_setTraceAllocations
+  (JNIEnv *, jclass, jboolean setting) {
+#ifdef _DEBUG
+    gTraceAllocations = setting;
+#else
+    Trace("setTraceAlloations() has no effect in a Release native library.");
+#endif
 }
 
 /*

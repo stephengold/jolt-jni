@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Core/TempAllocator.h>
 #include "auto/com_github_stephengold_joltjni_TempAllocatorMalloc.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -37,6 +38,7 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TempAllocatorMalloc_create
   (JNIEnv *, jclass) {
     NonCopyable * const pResult = new TempAllocatorMalloc();
+    TRACE_NEW("TempAllocatorMalloc", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -47,10 +49,11 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TempAllocatorMalloc_
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TempAllocatorMalloc_free
   (JNIEnv *, jclass, jlong allocatorVa) {
-#ifndef WIN32
-    // Attempting to delete a TempAllocatorMalloc on Windows causes deadlock!
     const NonCopyable * const pAllocator
             = reinterpret_cast<NonCopyable *> (allocatorVa);
+    TRACE_DELETE("TempAllocatorMalloc", pAllocator)
+#ifndef WIN32
+    // Attempting to delete a TempAllocatorMalloc on Windows causes deadlock!
     delete pAllocator;
 #endif
 }

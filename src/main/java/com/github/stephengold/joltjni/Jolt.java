@@ -149,6 +149,14 @@ final public class Jolt {
     native public static void registerTypes();
 
     /**
+     * Enable or disable allocation tracing in Debug native libraries.
+     *
+     * @param setting true to enable tracing, false to disable it
+     * (default=false)
+     */
+    native public static void setTraceAllocations(boolean setting);
+
+    /**
      * Unregister all physics types with the factory.
      *
      * @see registerTypes

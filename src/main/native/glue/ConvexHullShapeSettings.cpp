@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/ConvexHullShape.h>
 #include "auto/com_github_stephengold_joltjni_ConvexHullShapeSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -47,5 +48,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
     }
     ConvexHullShapeSettings * const pResult
             = new ConvexHullShapeSettings(points, numPoints);
+    TRACE_NEW("ConvexHullShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

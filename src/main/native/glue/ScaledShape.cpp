@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/ScaledShape.h>
 #include "auto/com_github_stephengold_joltjni_ScaledShape.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -39,6 +40,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShape_createSc
     const Shape * const pBase = reinterpret_cast<Shape *> (baseShapeVa);
     Vec3 factors(x, y, z);
     ScaledShape * const pResult = new ScaledShape(pBase, factors);
+    TRACE_NEW("ScaledShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

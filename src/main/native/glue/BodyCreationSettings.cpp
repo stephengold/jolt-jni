@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Body/BodyCreationSettings.h>
 #include "auto/com_github_stephengold_joltjni_BodyCreationSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -37,6 +38,7 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_createBodyCreationSettings
   (JNIEnv *, jclass) {
     BodyCreationSettings * const pResult = new BodyCreationSettings();
+    TRACE_NEW("BodyCreationSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -54,6 +56,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
     const EMotionType motionType = (EMotionType) motionTypeOrdinal;
     BodyCreationSettings *pResult = new BodyCreationSettings(
             pShape, loc, orient, motionType, objLayer);
+    TRACE_NEW("BodyCreationSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -72,6 +75,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
     const EMotionType motionType = (EMotionType) motionTypeOrdinal;
     BodyCreationSettings *pResult = new BodyCreationSettings(
             pShapeSettings, loc, orient, motionType, objLayer);
+    TRACE_NEW("BodyCreationSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -84,6 +88,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
   (JNIEnv *, jclass, jlong bodySettingsVa) {
     BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    TRACE_DELETE("BodyCreationSettings", pSettings)
     delete pSettings;
 }
 
@@ -240,6 +245,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     MassProperties * const pResult = new MassProperties();
+    TRACE_NEW("MassProperties", pResult)
     *pResult = pSettings->GetMassProperties();
     return reinterpret_cast<jlong> (pResult);
 }

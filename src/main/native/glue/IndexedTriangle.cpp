@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Geometry/IndexedTriangle.h>
 #include "auto/com_github_stephengold_joltjni_IndexedTriangle.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -38,6 +39,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IndexedTriangle_crea
   (JNIEnv *, jclass, jint vi0, jint vi1, jint vi2, jint materialIndex) {
     IndexedTriangle * const pTriangle
             = new IndexedTriangle(vi0, vi1, vi2, materialIndex);
+    TRACE_NEW("IndexedTriangle", pTriangle)
     return reinterpret_cast<jlong> (pTriangle);
 }
 

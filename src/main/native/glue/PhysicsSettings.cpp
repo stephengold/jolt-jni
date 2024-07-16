@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/PhysicsSettings.h>
 #include "auto/com_github_stephengold_joltjni_PhysicsSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -37,6 +38,7 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_createPhysicsSettings
   (JNIEnv *, jclass) {
     PhysicsSettings * const pResult = new PhysicsSettings();
+    TRACE_NEW("PhysicsSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -49,6 +51,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_free
   (JNIEnv *, jclass, jlong settingsVa) {
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    TRACE_DELETE("PhysicsSettings", pSettings)
     delete pSettings;
 }
 

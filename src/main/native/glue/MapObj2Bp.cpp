@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/BroadPhase/BroadPhaseLayer.h>
 #include "auto/com_github_stephengold_joltjni_MapObj2Bp.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -41,6 +42,7 @@ public:
         mNumObjLayers = numObjLayers;
         mNumBpLayers = numBpLayers;
         mpObjToBp = new BroadPhaseLayer[numObjLayers];
+        TRACE_NEW("BroadPhaseLayer[]", mpObjToBp)
         for (ObjectLayer i = 0; i < numObjLayers; ++i) {
             mpObjToBp[i] = BroadPhaseLayer(-1);
         }
@@ -63,6 +65,7 @@ public:
     }
 
     virtual ~MapObj2Bp() {
+        TRACE_DELETE("BroadPhaseLayer[]", mpObjToBp)
         delete[] mpObjToBp;
     }
 };
@@ -86,6 +89,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MapObj2Bp_add
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MapObj2Bp_createMapObj2Bp
   (JNIEnv *, jclass, jint numObjLayers, jint numBpLayers) {
     MapObj2Bp * const pMap = new MapObj2Bp(numObjLayers, numBpLayers);
+    TRACE_NEW("MapObj2Bp", pMap)
     return reinterpret_cast<jlong> (pMap);
 }
 
@@ -97,5 +101,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MapObj2Bp_createMapO
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MapObj2Bp_free
   (JNIEnv *, jclass, jlong mapVa) {
     MapObj2Bp * const pMap = reinterpret_cast<MapObj2Bp *> (mapVa);
+    TRACE_DELETE("MapObj2Bp", pMap)
     delete pMap;
 }

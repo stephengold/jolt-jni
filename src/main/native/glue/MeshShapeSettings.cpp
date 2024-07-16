@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/MeshShape.h>
 #include "auto/com_github_stephengold_joltjni_MeshShapeSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -50,6 +51,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
             = reinterpret_cast<IndexedTriangleList *> (indicesVa);
     MeshShapeSettings * const pSettings
             = new MeshShapeSettings(vertices, *pIndices);
+    TRACE_NEW("MeshShapeSettings", pSettings)
     return reinterpret_cast<jlong> (pSettings);
 }
 

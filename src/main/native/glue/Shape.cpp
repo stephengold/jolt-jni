@@ -30,6 +30,7 @@ SOFTWARE.
 #include <Jolt/Physics/Collision/TransformedShape.h>
 
 #include "auto/com_github_stephengold_joltjni_Shape.h"
+#include "glue/glue.h"
 #include <algorithm>
 
 using namespace JPH;
@@ -156,6 +157,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getLocalBounds
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
     AABox *pResult = new AABox();
+    TRACE_NEW("AABox", pResult)
     *pResult = pShape->GetLocalBounds();
     return reinterpret_cast<jlong> (pResult);
 }
@@ -169,6 +171,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getMassPropert
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
     MassProperties * const pProperties = new MassProperties();
+    TRACE_NEW("MassProperties", pProperties)
     *pProperties = pShape->GetMassProperties();
     return reinterpret_cast<jlong> (pProperties);
 }
@@ -253,5 +256,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_toRefC
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
     ShapeRefC * const pResult = new ShapeRefC(pShape);
+    TRACE_NEW("ShapeRefC", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

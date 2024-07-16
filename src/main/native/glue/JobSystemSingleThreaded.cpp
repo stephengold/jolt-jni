@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Core/JobSystemSingleThreaded.h>
 #include "auto/com_github_stephengold_joltjni_JobSystemSingleThreaded.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -38,5 +39,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_JobSystemSingleThrea
   (JNIEnv *, jclass, jint maxJobs) {
     JobSystemSingleThreaded * const pSystem
             = new JobSystemSingleThreaded(maxJobs);
+    TRACE_NEW("JobSystemSingleThreaded", pSystem)
     return reinterpret_cast<jlong> (pSystem);
 }

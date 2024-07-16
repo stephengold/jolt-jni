@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/HeightFieldShape.h>
 #include "auto/com_github_stephengold_joltjni_HeightFieldShapeSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -43,5 +44,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSett
     Vec3 scale(scaleX, scaleY, scaleZ);
     HeightFieldShapeSettings * const pSettings
             = new HeightFieldShapeSettings(pFloats, offset, scale, sampleCount);
+    TRACE_NEW("HeightFieldShapeSettings", pSettings)
     return reinterpret_cast<jlong> (pSettings);
 }

@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/CapsuleShape.h>
 #include "auto/com_github_stephengold_joltjni_CapsuleShapeSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -38,5 +39,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings
   (JNIEnv *, jclass, jfloat halfHeight, jfloat radius) {
     CapsuleShapeSettings * const pResult
             = new CapsuleShapeSettings(halfHeight, radius);
+    TRACE_NEW("CapsuleShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

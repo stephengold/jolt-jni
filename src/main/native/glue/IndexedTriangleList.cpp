@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Geometry/IndexedTriangle.h>
 #include "auto/com_github_stephengold_joltjni_IndexedTriangleList.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -50,6 +51,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_c
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_createIndexedTriangleList
   (JNIEnv *, jclass) {
     IndexedTriangleList * const pList = new IndexedTriangleList();
+    TRACE_NEW("IndexedTriangleList", pList)
     return reinterpret_cast<jlong> (pList);
 }
 
@@ -62,6 +64,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_f
   (JNIEnv *, jclass, jlong listVa) {
     IndexedTriangleList * const pList
             = reinterpret_cast<IndexedTriangleList *> (listVa);
+    TRACE_DELETE("IndexedTriangleList", pList)
     delete pList;
 }
 

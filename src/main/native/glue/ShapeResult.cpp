@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/Shape.h>
 #include "auto/com_github_stephengold_joltjni_ShapeResult.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -38,6 +39,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeResult_free
   (JNIEnv *, jclass, jlong resultVa) {
     ShapeSettings::ShapeResult * const pResult
             = reinterpret_cast<ShapeSettings::ShapeResult *> (resultVa);
+    TRACE_DELETE("ShapeResult", pResult)
     delete pResult;
 }
 
@@ -51,6 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeResult_get
     const ShapeSettings::ShapeResult * const pResult
             = reinterpret_cast<ShapeSettings::ShapeResult *> (resultVa);
     ShapeRefC * const pRef = new ShapeRefC();
+    TRACE_NEW("ShapeRefC", pRef)
     *pRef = pResult->Get();
     return reinterpret_cast<jlong> (pRef);
 }

@@ -1,3 +1,5 @@
+#ifndef _Included_glue
+#define _Included_glue
 /*
 Copyright (c) 2024 Stephen Gold
 
@@ -23,22 +25,22 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Collision/Shape/BoxShape.h>
-#include "auto/com_github_stephengold_joltjni_BoxShapeSettings.h"
-#include "glue/glue.h"
+#ifdef _DEBUG
 
-using namespace JPH;
+extern bool gTraceAllocations;
 
-/*
- * Class:     com_github_stephengold_joltjni_BoxShapeSettings
- * Method:    createBoxShapeSettings
- * Signature: (FFF)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_createBoxShapeSettings
-  (JNIEnv *, jclass, jfloat xHalfExtent, jfloat yHalfExtent, jfloat zHalfExtent) {
-    Vec3 halfExtents(xHalfExtent, yHalfExtent, zHalfExtent);
-    BoxShapeSettings * const pResult = new BoxShapeSettings(halfExtents);
-    TRACE_NEW("BoxShapeSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+#define TRACE_NEW(className, pointer) \
+    if (gTraceAllocations) { \
+        JPH::Trace("%llx +%s", reinterpret_cast<unsigned long long> (pointer), className); \
+    }
+#define TRACE_DELETE(className, pointer) \
+    if (gTraceAllocations) { \
+        JPH::Trace("%llx -%s", reinterpret_cast<unsigned long long> (pointer), className); \
+    }
+
+#else
+#define TRACE_NEW(className, pointer)
+#define TRACE_DELETE(className, pointer)
+#endif
+
+#endif

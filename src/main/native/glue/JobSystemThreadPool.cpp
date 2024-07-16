@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Core/JobSystemThreadPool.h>
 #include "auto/com_github_stephengold_joltjni_JobSystemThreadPool.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -38,6 +39,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_JobSystemThreadPool_
   (JNIEnv *, jclass, jint maxJobs, jint maxBarriers, jint numThreads) {
     JobSystemThreadPool * const pPool
             = new JobSystemThreadPool(maxJobs, maxBarriers, numThreads);
+    TRACE_NEW("JobSystemThreadPool", pPool)
     return reinterpret_cast<jlong> (pPool);
 }
 
@@ -48,9 +50,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_JobSystemThreadPool_
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JobSystemThreadPool_free
   (JNIEnv *, jclass, jlong systemVa) {
+    const JobSystem * const pSystem = reinterpret_cast<JobSystem *> (systemVa);
+    TRACE_DELETE("JobSystem", pSystem)
 #ifndef WIN32
     // Attempting to delete a JobSystemThreadPool on Windows causes deadlock!
-    const JobSystem * const pSystem = reinterpret_cast<JobSystem *> (systemVa);
     delete pSystem;
 #endif
 }

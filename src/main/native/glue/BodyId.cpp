@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Body/BodyID.h>
 #include "auto/com_github_stephengold_joltjni_BodyId.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -38,6 +39,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyId_copy
   (JNIEnv *, jclass, jlong idVa) {
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
     BodyID * const pResult = new BodyID();
+    TRACE_NEW("BodyID", pResult)
     *pResult = *pBodyId;
     return reinterpret_cast<jlong> (pResult);
 }
@@ -50,6 +52,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyId_copy
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyId_free
   (JNIEnv *, jclass, jlong idVa) {
     BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
+    TRACE_DELETE("BodyID", pBodyId)
     delete pBodyId;
 }
 

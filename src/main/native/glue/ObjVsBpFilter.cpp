@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/BroadPhase/BroadPhaseLayer.h>
 #include "auto/com_github_stephengold_joltjni_ObjVsBpFilter.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -42,8 +43,10 @@ public:
         mNumObjectLayers = numObjectLayers;
         mNumBpLayers = numBpLayers;
         mppEnable = new bool*[numObjectLayers];
+        TRACE_NEW("bool*[]", mppEnable)
         for (ObjectLayer i = 0; i < numObjectLayers; ++i) {
             mppEnable[i] = new bool[numBpLayers];
+            TRACE_NEW("bool[]", mppEnable[i])
             for (uint j = 0; j < numBpLayers; ++j) {
                 mppEnable[i][j] = true;
             }
@@ -63,8 +66,10 @@ public:
 
     virtual ~ObjVsBpFilter() {
         for (ObjectLayer i = 0; i < mNumObjectLayers; ++i) {
+            TRACE_DELETE("bool[]", mppEnable[i])
             delete[] mppEnable[i];
         }
+        TRACE_DELETE("bool*[]", mppEnable)
         delete[] mppEnable;
     }
 };
@@ -78,6 +83,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_create
   (JNIEnv *, jclass, jint numObjectLayers, jint numBpLayers) {
     ObjVsBpFilter * const pFilter
             = new ObjVsBpFilter(numObjectLayers, numBpLayers);
+    TRACE_NEW("ObjVsBpFilter", pFilter)
     return reinterpret_cast<jlong> (pFilter);
 }
 
@@ -90,6 +96,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_free
   (JNIEnv *, jclass, jlong filterVa) {
     ObjVsBpFilter * const pFilter
             = reinterpret_cast<ObjVsBpFilter *> (filterVa);
+    TRACE_DELETE("ObjVsBpFilter", pFilter)
     delete pFilter;
 }
 
