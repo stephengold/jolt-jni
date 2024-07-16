@@ -69,14 +69,7 @@ public class BodyCreationSettings extends JoltPhysicsObject {
      */
     public BodyCreationSettings(ShapeRefC shapeRef, RVec3Arg loc,
             QuatArg orient, EMotionType motionType, int objLayer) {
-        ConstShape shape = shapeRef.getPtr();
-        long shapeVa = shape.va();
-        int motionTypeOrdinal = motionType.ordinal();
-        long bodySettingsVa = createBodyCreationSettingsFromShape(
-                shapeVa, loc.xx(), loc.yy(), loc.zz(),
-                orient.getX(), orient.getY(), orient.getZ(), orient.getW(),
-                motionTypeOrdinal, objLayer);
-        setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
+        this(shapeRef.getPtr(), loc, orient, motionType, objLayer);
     }
 
     /**
@@ -547,10 +540,8 @@ public class BodyCreationSettings extends JoltPhysicsObject {
      * @param shapeRef a reference to the desired shape (not null)
      */
     public void setShape(ShapeRefC shapeRef) {
-        long bodySettingsVa = va();
         ConstShape shape = shapeRef.getPtr();
-        long shapeSettingsVa = shape.va();
-        setShape(bodySettingsVa, shapeSettingsVa);
+        setShape(shape);
     }
 
     /**
