@@ -35,4 +35,14 @@ public class DecoratedShapeSettings extends ShapeSettings {
      */
     protected DecoratedShapeSettings() {
     }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    DecoratedShapeSettings(long virtualAddress) {
+        super(virtualAddress);
+    }
 }

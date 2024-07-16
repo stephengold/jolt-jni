@@ -35,6 +35,16 @@ abstract public class ConvexShapeSettings extends ShapeSettings {
      */
     protected ConvexShapeSettings() {
     }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    protected ConvexShapeSettings(long virtualAddress) {
+        super(virtualAddress);
+    }
     // *************************************************************************
     // new methods exposed
 

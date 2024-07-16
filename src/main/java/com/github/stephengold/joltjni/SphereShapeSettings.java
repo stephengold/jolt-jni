@@ -31,6 +31,17 @@ public class SphereShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    SphereShapeSettings(long virtualAddress) {
+        super(virtualAddress);
+        setSubType(EShapeSubType.Sphere);
+    }
+
+    /**
      * Instantiate settings for the specified radius.
      *
      * @param radius the desired radius (&ge;0)

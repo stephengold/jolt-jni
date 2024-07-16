@@ -36,6 +36,16 @@ abstract public class ShapeSettings
      */
     protected ShapeSettings() {
     }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    protected ShapeSettings(long virtualAddress) {
+        super(virtualAddress);
+    }
     // *************************************************************************
     // new methods exposed
 

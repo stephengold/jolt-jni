@@ -31,6 +31,17 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    CapsuleShapeSettings(long virtualAddress) {
+        super(virtualAddress);
+        setSubType(EShapeSubType.Capsule);
+    }
+
+    /**
      * Instantiate settings for the specified dimensions.
      *
      * @param halfHeight half the desired height of the cylindrical portion

@@ -31,6 +31,17 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
     // constructors
 
     /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    ScaledShapeSettings(long virtualAddress) {
+        super(virtualAddress);
+        setSubType(EShapeSubType.Scaled);
+    }
+
+    /**
      * Instantiate a settings based on the specified shape and scale factors.
      *
      * @param baseShape the unscaled base shape (not null)

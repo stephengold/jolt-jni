@@ -31,6 +31,17 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    BoxShapeSettings(long virtualAddress) {
+        super(virtualAddress);
+        setSubType(EShapeSubType.Box);
+    }
+
+    /**
      * Instantiate settings for the specified half extents.
      *
      * @param halfExtents the desired half extents on each local axis (not null,

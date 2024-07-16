@@ -40,6 +40,17 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    ConvexHullShapeSettings(long virtualAddress) {
+        super(virtualAddress);
+        setSubType(EShapeSubType.ConvexHull);
+    }
+
+    /**
      * Instantiate settings for the specified points.
      *
      * @param points an array of point locations (not null)

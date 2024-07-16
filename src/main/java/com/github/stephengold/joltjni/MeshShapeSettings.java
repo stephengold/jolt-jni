@@ -33,6 +33,17 @@ public class MeshShapeSettings extends ShapeSettings {
     // constructors
 
     /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    MeshShapeSettings(long virtualAddress) {
+        super(virtualAddress);
+        setSubType(EShapeSubType.Mesh);
+    }
+
+    /**
      * Instantiate settings for the specified vertices and indices.
      *
      * @param vertices list of vertex locations (not null)

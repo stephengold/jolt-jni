@@ -35,4 +35,14 @@ abstract public class SerializableObject extends NonCopyable {
      */
     protected SerializableObject() {
     }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    protected SerializableObject(long virtualAddress) {
+        super(virtualAddress);
+    }
 }
