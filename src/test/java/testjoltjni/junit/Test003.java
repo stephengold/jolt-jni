@@ -76,6 +76,9 @@ public class Test003 {
     // *************************************************************************
     // Java private methods
 
+    /**
+     * Test the AaBox class.
+     */
     private void doAaBox() {
         {
             AaBox box = new AaBox();
@@ -130,6 +133,9 @@ public class Test003 {
         }
     }
 
+    /**
+     * Test the BodyCreationSettings class.
+     */
     private void doBodyCreationSettings() {
         {
             BodyCreationSettings bcs = new BodyCreationSettings();
@@ -167,6 +173,9 @@ public class Test003 {
         }
     }
 
+    /**
+     * Test the JobSystemSingleThreaded class.
+     */
     private void doJobSystemSingleThreaded() {
         JobSystem jobSystem
                 = new JobSystemSingleThreaded(Jolt.cMaxPhysicsJobs);
@@ -180,6 +189,9 @@ public class Test003 {
         TestUtils.testClose(jobSystem);
     }
 
+    /**
+     * Test the JobSystemThreadPool class.
+     */
     private void doJobSystemThreadPool() {
         JobSystemThreadPool jobSystem = new JobSystemThreadPool(
                 Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers);
@@ -200,6 +212,9 @@ public class Test003 {
         TestUtils.testClose(jobSystem);
     }
 
+    /**
+     * Test the TempAllocatorImpl class.
+     */
     private void doTempAllocatorImpl() {
         int numBytes = 1 << 8;
         TempAllocator tempAllocator = new TempAllocatorImpl(numBytes);
@@ -211,6 +226,9 @@ public class Test003 {
         TestUtils.testClose(tempAllocator);
     }
 
+    /**
+     * Test the TempAllocatorMalloc class.
+     */
     private void doTempAllocatorMalloc() {
         TempAllocator tempAllocator = new TempAllocatorMalloc();
 
