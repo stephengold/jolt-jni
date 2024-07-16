@@ -91,6 +91,21 @@ public class BodyCreationSettings extends JoltPhysicsObject {
                 motionTypeOrdinal, objLayer);
         setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
+
+    /**
+     * Instantiate settings for the specified shape-settings reference.
+     *
+     * @param shapeSettingsRef a reference to the desired shape settings (not
+     * null)
+     * @param loc the desired location (not null, unaffected)
+     * @param orient the desired orientation (not null, unaffected)
+     * @param motionType the desired motion type (not null)
+     * @param objLayer the ID of the desired object layer
+     */
+    public BodyCreationSettings(ShapeSettingsRef shapeSettingsRef, RVec3Arg loc,
+            QuatArg orient, EMotionType motionType, int objLayer) {
+        this(shapeSettingsRef.getPtr(), loc, orient, motionType, objLayer);
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -553,6 +568,17 @@ public class BodyCreationSettings extends JoltPhysicsObject {
         long bodySettingsVa = va();
         long shapeSettingsVa = shapeSettings.va();
         setShapeSettings(bodySettingsVa, shapeSettingsVa);
+    }
+
+    /**
+     * Replace the shape settings.
+     *
+     * @param shapeSettingsRef a reference to the desired shape settings (not
+     * null)
+     */
+    public void setShapeSettings(ShapeSettingsRef shapeSettingsRef) {
+        ShapeSettings shapeSettings = shapeSettingsRef.getPtr();
+        setShapeSettings(shapeSettings);
     }
     // *************************************************************************
     // native private methods
