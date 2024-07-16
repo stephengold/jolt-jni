@@ -23,6 +23,7 @@ package testjoltjni;
 
 import com.github.stephengold.joltjni.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.JoltPhysicsObject;
 import com.github.stephengold.joltjni.QuatArg;
 import com.github.stephengold.joltjni.RVec3Arg;
 import com.github.stephengold.joltjni.Vec3Arg;
@@ -36,6 +37,14 @@ import org.junit.Assert;
  * @author Stephen Gold sgold@sonic.net
  */
 final public class TestUtils {
+    // *************************************************************************
+    // constants
+
+    /**
+     * false to explicitly free native objects via {@code testClose()}, true to
+     * rely on the automatic {@code java.lang.ref.Cleaner} instead
+     */
+    final static public boolean automateFreeing = true;
     // *************************************************************************
     // constructors
 
@@ -126,6 +135,11 @@ final public class TestUtils {
         System.out.println(
                 "jolt-jni version " + Jolt.versionString() + " initializing");
 
+        //Jolt.setTraceAllocations(true); // to debug native memory allocation
+        if (automateFreeing) {
+            JoltPhysicsObject.startCleaner();
+        }
+
         Jolt.registerDefaultAllocator();
         Jolt.installDefaultTraceCallback();
         Jolt.installDefaultAssertCallback();
@@ -174,16 +188,19 @@ final public class TestUtils {
     }
 
     /**
-     * Test the {@code close()} method of the specified physics object.
+     * Test the {@code close()} method of the specified physics object. If
+     * freeing is automated, {@code close()} is neither invoked or tested.
      *
      * @param object the object to test (not null)
      */
     public static void testClose(ConstJoltPhysicsObject object) {
-        boolean wasOwner = object.ownsNativeObject();
-        object.close();
-        if (wasOwner) {
-            Assert.assertFalse(object.hasAssignedNativeObject());
+        if (!automateFreeing) {
+            boolean wasOwner = object.ownsNativeObject();
+            object.close();
+            if (wasOwner) {
+                Assert.assertFalse(object.hasAssignedNativeObject());
+            }
+            Assert.assertFalse(object.ownsNativeObject());
         }
-        Assert.assertFalse(object.ownsNativeObject());
     }
 }
