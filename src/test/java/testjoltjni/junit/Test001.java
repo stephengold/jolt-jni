@@ -152,8 +152,7 @@ public class Test001 {
             ++stepCounter;
         }
         Assert.assertEquals(48, stepCounter);
-        TestUtils.testClose(jobSystem);
-        TestUtils.testClose(tempAllocator);
+        TestUtils.testClose(jobSystem, tempAllocator);
 
         ballLocation = bodyInterface.getCenterOfMassPosition(ballId);
         TestUtils.assertEquals(0f, 0.48f, 0f, ballLocation, 1e-5f);
@@ -167,23 +166,15 @@ public class Test001 {
         Assert.assertEquals(1, ballShape.getRefCount());
         TestUtils.testClose(ballId);
         Assert.assertEquals(1, ballShape.getRefCount());
-        TestUtils.testClose(ballSettings);
-        TestUtils.testClose(ballShape);
+        TestUtils.testClose(ballSettings, ballShape);
 
         bodyInterface.removeBody(floorId);
         bodyInterface.destroyBody(floorId);
-        TestUtils.testClose(floorId);
-        TestUtils.testClose(floor);
-        TestUtils.testClose(floorBodySettings);
-        TestUtils.testClose(floorShapeRef);
-        TestUtils.testClose(floorShapeResult);
-        TestUtils.testClose(floorShapeSettings);
+        TestUtils.testClose(floorId, floor, floorBodySettings, floorShapeRef,
+                floorShapeResult, floorShapeSettings);
 
-        TestUtils.testClose(bodyInterface);
-        TestUtils.testClose(physicsSystem);
-        TestUtils.testClose(objVsObjFilter);
-        TestUtils.testClose(objVsBpFilter);
-        TestUtils.testClose(mapObj2Bp);
+        TestUtils.testClose(bodyInterface, physicsSystem, objVsObjFilter,
+                objVsBpFilter, mapObj2Bp);
 
         TestUtils.cleanup();
     }

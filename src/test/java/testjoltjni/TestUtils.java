@@ -188,19 +188,23 @@ final public class TestUtils {
     }
 
     /**
-     * Test the {@code close()} method of the specified physics object. If
-     * freeing is automated, {@code close()} is neither invoked or tested.
+     * Test the {@code close()} methods of the specified physics objects.
+     * However, if freeing is automated, {@code close()} is neither invoked or
+     * tested.
      *
-     * @param object the object to test (not null)
+     * @param objects the objects to test (not null)
      */
-    public static void testClose(ConstJoltPhysicsObject object) {
+    public static void testClose(ConstJoltPhysicsObject... objects) {
         if (!automateFreeing) {
-            boolean wasOwner = object.ownsNativeObject();
-            object.close();
-            if (wasOwner) {
-                Assert.assertFalse(object.hasAssignedNativeObject());
+            for (ConstJoltPhysicsObject object : objects) {
+                boolean wasOwner = object.ownsNativeObject();
+                object.close();
+
+                if (wasOwner) {
+                    Assert.assertFalse(object.hasAssignedNativeObject());
+                }
+                Assert.assertFalse(object.ownsNativeObject());
             }
-            Assert.assertFalse(object.ownsNativeObject());
         }
     }
 }

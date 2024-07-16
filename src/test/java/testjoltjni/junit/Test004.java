@@ -84,12 +84,8 @@ public class Test004 {
         Assert.assertNotEquals(settings2.va(), settings3.va());
         testGettersAndDefaults(settings3);
 
-        TestUtils.testClose(settings3);
-        TestUtils.testClose(settings2);
-        TestUtils.testClose(physicsSystem);
-        TestUtils.testClose(objVsObjFilter);
-        TestUtils.testClose(objVsBpFilter);
-        TestUtils.testClose(mapObj2Bp);
+        TestUtils.testClose(settings3, settings2, physicsSystem, objVsObjFilter,
+                objVsBpFilter, mapObj2Bp);
 
         TestUtils.cleanup();
     }

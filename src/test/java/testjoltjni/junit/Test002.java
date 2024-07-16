@@ -140,20 +140,13 @@ public class Test002 {
             Assert.assertEquals(EPhysicsUpdateError.None, errors);
         }
 
-        for (ShapeRefC ref : dynamicShapes) {
-            TestUtils.testClose(ref);
-        }
-        TestUtils.testClose(meshBodySettings);
-
-        TestUtils.testClose(jobSystem);
-        TestUtils.testClose(tempAllocator);
+        TestUtils.testClose(dynamicShapes);
+        TestUtils.testClose(meshBodySettings, jobSystem, tempAllocator);
 
         Assert.assertEquals(1_765, physicsSystem.getNumBodies());
 
-        TestUtils.testClose(physicsSystem);
-        TestUtils.testClose(objVsObjFilter);
-        TestUtils.testClose(objVsBpFilter);
-        TestUtils.testClose(mapObj2Bp);
+        TestUtils.testClose(
+                physicsSystem, objVsObjFilter, objVsBpFilter, mapObj2Bp);
 
         TestUtils.cleanup();
     }
