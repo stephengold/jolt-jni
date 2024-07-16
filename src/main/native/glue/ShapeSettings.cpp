@@ -94,3 +94,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_setUser
     pSettings->mUserData = value;
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeSettings
+ * Method:    toRef
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_toRef
+  (JNIEnv *, jclass, jlong settingsVa) {
+    ShapeSettings * const pSettings
+            = reinterpret_cast<ShapeSettings *> (settingsVa);
+    Ref<ShapeSettings> * const pResult = new Ref<ShapeSettings>(pSettings);
+    TRACE_NEW("Ref<ShapeSettings>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
