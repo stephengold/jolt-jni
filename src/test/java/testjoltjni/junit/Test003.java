@@ -157,7 +157,7 @@ public class Test003 {
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            TestUtils.testClose(bcs);
+            TestUtils.testClose(bcs, ss);
         }
         {
             Shape shape = new SphereShape(1f);
@@ -169,7 +169,7 @@ public class Test003 {
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            TestUtils.testClose(bcs);
+            TestUtils.testClose(bcs, shape);
         }
     }
 
