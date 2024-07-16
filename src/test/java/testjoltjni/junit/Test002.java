@@ -43,6 +43,7 @@ import com.github.stephengold.joltjni.PhysicsSettings;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.ShapeRefC;
+import com.github.stephengold.joltjni.ShapeSettingsRef;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.TempAllocatorImpl;
 import com.github.stephengold.joltjni.Vec3;
@@ -206,16 +207,20 @@ public class Test002 {
         }
         TestUtils.testClose(indices);
         meshShapeSettings.setMaxTrianglesPerLeaf(4);
+        ShapeSettingsRef meshShapeSettingsRef = meshShapeSettings.toRef();
 
         meshBodySettings = new BodyCreationSettings();
+        meshBodySettings.setShapeSettings(meshShapeSettingsRef);
+        TestUtils.testClose(meshShapeSettingsRef, meshShapeSettings);
+
+        meshBodySettings.setFriction(0.5f);
         meshBodySettings.setMotionType(EMotionType.Static);
         meshBodySettings.setObjectLayer(objLayerNonMoving);
+        meshBodySettings.setRestitution(0.6f);
+
         float center = n * cellSize / 2;
         RVec3 rvec3 = new RVec3(-center, maxHeight, -center);
         meshBodySettings.setPosition(rvec3);
-        meshBodySettings.setFriction(0.5f);
-        meshBodySettings.setRestitution(0.6f);
-        meshBodySettings.setShapeSettings(meshShapeSettings);
 
         // Generate 4 convex shapes for dynamic bodies:
         Vec3[] hullVertices = {new Vec3(0f, 1f, 0f), new Vec3(1f, 0f, 0f),

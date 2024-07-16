@@ -112,8 +112,9 @@ public class ConvexVsMeshScene {
 			}
 
 		// Create mesh shape settings
-		MeshShapeSettings mesh_shape_settings = new MeshShapeSettings(vertices, indices);
-		mesh_shape_settings.setMaxTrianglesPerLeaf(4);
+		MeshShapeSettings mss = new MeshShapeSettings(vertices, indices);
+		mss.setMaxTrianglesPerLeaf(4);
+		ShapeSettingsRef mesh_shape_settings = mss.toRef();
 
 		// Create mesh shape creation settings
 		mMeshSettings = new BodyCreationSettings();
