@@ -64,7 +64,19 @@ public class Test003 {
     public void test003() {
         TestUtils.loadAndInitializeNativeLibrary();
 
-        // AaBox:
+        doAaBox();
+        doBodyCreationSettings();
+        doJobSystemSingleThreaded();
+        doJobSystemThreadPool();
+        doTempAllocatorImpl();
+        doTempAllocatorMalloc();
+
+        TestUtils.cleanup();
+    }
+    // *************************************************************************
+    // Java private methods
+
+    private void doAaBox() {
         {
             AaBox box = new AaBox();
 
@@ -116,8 +128,9 @@ public class Test003 {
 
             TestUtils.testClose(box);
         }
+    }
 
-        // BodyCreationSettings:
+    private void doBodyCreationSettings() {
         {
             BodyCreationSettings bcs = new BodyCreationSettings();
 
@@ -152,69 +165,61 @@ public class Test003 {
 
             TestUtils.testClose(bcs);
         }
-
-        // JobSystemSingleThreaded:
-        {
-            JobSystem jobSystem
-                    = new JobSystemSingleThreaded(Jolt.cMaxPhysicsJobs);
-
-            Assert.assertEquals(1, jobSystem.getMaxConcurrency());
-            Assert.assertTrue(jobSystem.hasAssignedNativeObject());
-            Assert.assertTrue(jobSystem instanceof NonCopyable);
-            Assert.assertTrue(jobSystem.ownsNativeObject());
-            Assert.assertNotEquals(0L, jobSystem.va());
-
-            TestUtils.testClose(jobSystem);
-        }
-
-        // JobSystemThreadPool:
-        {
-            JobSystemThreadPool jobSystem = new JobSystemThreadPool(
-                    Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers);
-
-            int numCpus = Runtime.getRuntime().availableProcessors();
-            Assert.assertEquals(numCpus, jobSystem.getMaxConcurrency());
-
-            Assert.assertTrue(jobSystem.hasAssignedNativeObject());
-            Assert.assertTrue(jobSystem instanceof JobSystem);
-            Assert.assertTrue(jobSystem instanceof JobSystemWithBarrier);
-            Assert.assertTrue(jobSystem instanceof NonCopyable);
-            Assert.assertTrue(jobSystem.ownsNativeObject());
-            Assert.assertNotEquals(0L, jobSystem.va());
-
-            jobSystem.setNumThreads(3);
-            Assert.assertEquals(4, jobSystem.getMaxConcurrency());
-
-            TestUtils.testClose(jobSystem);
-        }
-
-        // TempAllocatorImpl:
-        {
-            int numBytes = 1 << 8;
-            TempAllocator tempAllocator = new TempAllocatorImpl(numBytes);
-
-            Assert.assertTrue(tempAllocator.hasAssignedNativeObject());
-            Assert.assertTrue(tempAllocator.ownsNativeObject());
-            Assert.assertNotEquals(0L, tempAllocator.va());
-
-            TestUtils.testClose(tempAllocator);
-        }
-
-        // TempAllocatorMalloc:
-        {
-            TempAllocator tempAllocator = new TempAllocatorMalloc();
-
-            Assert.assertTrue(tempAllocator.hasAssignedNativeObject());
-            Assert.assertTrue(tempAllocator.ownsNativeObject());
-            Assert.assertNotEquals(0L, tempAllocator.va());
-
-            TestUtils.testClose(tempAllocator);
-        }
-
-        TestUtils.cleanup();
     }
-    // *************************************************************************
-    // Java private methods
+
+    private void doJobSystemSingleThreaded() {
+        JobSystem jobSystem
+                = new JobSystemSingleThreaded(Jolt.cMaxPhysicsJobs);
+
+        Assert.assertEquals(1, jobSystem.getMaxConcurrency());
+        Assert.assertTrue(jobSystem.hasAssignedNativeObject());
+        Assert.assertTrue(jobSystem instanceof NonCopyable);
+        Assert.assertTrue(jobSystem.ownsNativeObject());
+        Assert.assertNotEquals(0L, jobSystem.va());
+
+        TestUtils.testClose(jobSystem);
+    }
+
+    private void doJobSystemThreadPool() {
+        JobSystemThreadPool jobSystem = new JobSystemThreadPool(
+                Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers);
+
+        int numCpus = Runtime.getRuntime().availableProcessors();
+        Assert.assertEquals(numCpus, jobSystem.getMaxConcurrency());
+
+        Assert.assertTrue(jobSystem.hasAssignedNativeObject());
+        Assert.assertTrue(jobSystem instanceof JobSystem);
+        Assert.assertTrue(jobSystem instanceof JobSystemWithBarrier);
+        Assert.assertTrue(jobSystem instanceof NonCopyable);
+        Assert.assertTrue(jobSystem.ownsNativeObject());
+        Assert.assertNotEquals(0L, jobSystem.va());
+
+        jobSystem.setNumThreads(3);
+        Assert.assertEquals(4, jobSystem.getMaxConcurrency());
+
+        TestUtils.testClose(jobSystem);
+    }
+
+    private void doTempAllocatorImpl() {
+        int numBytes = 1 << 8;
+        TempAllocator tempAllocator = new TempAllocatorImpl(numBytes);
+
+        Assert.assertTrue(tempAllocator.hasAssignedNativeObject());
+        Assert.assertTrue(tempAllocator.ownsNativeObject());
+        Assert.assertNotEquals(0L, tempAllocator.va());
+
+        TestUtils.testClose(tempAllocator);
+    }
+
+    private void doTempAllocatorMalloc() {
+        TempAllocator tempAllocator = new TempAllocatorMalloc();
+
+        Assert.assertTrue(tempAllocator.hasAssignedNativeObject());
+        Assert.assertTrue(tempAllocator.ownsNativeObject());
+        Assert.assertNotEquals(0L, tempAllocator.va());
+
+        TestUtils.testClose(tempAllocator);
+    }
 
     /**
      * Test the getters and defaults of the specified
