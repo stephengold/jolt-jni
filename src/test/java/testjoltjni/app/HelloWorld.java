@@ -52,7 +52,6 @@ public class HelloWorld {
 public static void main(String[] argv)
 {
 	TestUtils.loadNativeLibrary();
-
 	// Register allocation hook. In this example we'll just let Jolt use malloc / free but you can override these if you want (see Memory.h).
 	// This needs to be done before any other Jolt function is called.
 	Jolt.registerDefaultAllocator();
