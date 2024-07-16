@@ -71,7 +71,7 @@ abstract public class JoltPhysicsObject
 
     /**
      * Start a daemon thread to process the phantom reachable objects and invoke
-     * cleaning actions.
+     * freeing actions.
      */
     public static void startCleaner() {
         cleaner = Cleaner.create();

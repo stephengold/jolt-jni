@@ -48,8 +48,8 @@ import org.junit.Test;
 import testjoltjni.TestUtils;
 
 /**
- * Automated JUnit4 tests for jolt-jni object creation, destruction, accessors,
- * and defaults.
+ * Automated JUnit4 tests for creation, destruction, accessors, and defaults of
+ * Jolt Physics objects.
  *
  * @author Stephen Gold sgold@sonic.net
  */
