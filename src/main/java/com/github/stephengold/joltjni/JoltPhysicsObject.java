@@ -98,17 +98,6 @@ abstract public class JoltPhysicsObject
             cleaner.register(this, action);
         }
     }
-
-    /**
-     * Unassign (but don't free) the assigned native object, assuming one is
-     * assigned.
-     */
-    final protected void unassignNativeObject() {
-        assert hasAssignedNativeObject() : "no native object is assigned";
-
-        this.virtualAddress = 0L;
-        this.freeingAction = null;
-    }
     // *************************************************************************
     // AutoCloseable/ConstJoltPhysicsObject methods
 
@@ -118,8 +107,10 @@ abstract public class JoltPhysicsObject
     @Override
     public void close() {
         if (freeingAction != null) {
+            assert hasAssignedNativeObject() : "no native object is assigned";
             freeingAction.run(); // TODO possible race condition
-            unassignNativeObject();
+            this.freeingAction = null;
+            this.virtualAddress = 0L;
         }
     }
 
