@@ -52,7 +52,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBod
   (JNIEnv *, jclass, jlong systemVa) {
     PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
-    BodyInterface &result = pSystem->GetBodyInterface();
+    const BodyInterface& result = pSystem->GetBodyInterface();
     return reinterpret_cast<jlong> (&result);
 }
 
@@ -65,8 +65,8 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getGr
   (JNIEnv *, jclass, jlong systemVa) {
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
-    Vec3 gravity = pSystem->GetGravity();
-    float result = gravity.GetX();
+    const Vec3 gravity = pSystem->GetGravity();
+    const float result = gravity.GetX();
     return result;
 }
 
@@ -79,8 +79,8 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getGr
   (JNIEnv *, jclass, jlong systemVa) {
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
-    Vec3 gravity = pSystem->GetGravity();
-    float result = gravity.GetY();
+    const Vec3 gravity = pSystem->GetGravity();
+    const float result = gravity.GetY();
     return result;
 }
 
@@ -93,8 +93,8 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getGr
   (JNIEnv *, jclass, jlong systemVa) {
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
-    Vec3 gravity = pSystem->GetGravity();
-    float result = gravity.GetZ();
+    const Vec3 gravity = pSystem->GetGravity();
+    const float result = gravity.GetZ();
     return result;
 }
 
@@ -120,8 +120,8 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getNumA
   (JNIEnv *, jclass, jlong systemVa, jint typeOrdinal) {
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
-    EBodyType bodyType = (EBodyType)typeOrdinal;
-    uint result = pSystem->GetNumActiveBodies(bodyType);
+    const EBodyType bodyType = (EBodyType)typeOrdinal;
+    const uint result = pSystem->GetNumActiveBodies(bodyType);
     return result;
 }
 
@@ -134,7 +134,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getNumB
   (JNIEnv *, jclass, jlong systemVa) {
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
-    uint result = pSystem->GetNumBodies();
+    const uint result = pSystem->GetNumBodies();
     return result;
 }
 
@@ -194,7 +194,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setGrav
   (JNIEnv *, jclass, jlong systemVa, jfloat x, jfloat y, jfloat z) {
     PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
-    Vec3 gravity(x, y, z);
+    const Vec3 gravity(x, y, z);
     pSystem->SetGravity(gravity);
 }
 
@@ -226,7 +226,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_update
             = reinterpret_cast<TempAllocatorImpl *> (allocatorVa);
     JobSystem * const pJobSystem
             = reinterpret_cast<JobSystemThreadPool *> (jobSystemVa);
-    EPhysicsUpdateError result = pPhysicsSystem->Update(
+    const EPhysicsUpdateError result = pPhysicsSystem->Update(
             deltaTime, collisionSteps, pAllocator, pJobSystem);
     return (jint) result;
 }
