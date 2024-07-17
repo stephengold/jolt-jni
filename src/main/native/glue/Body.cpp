@@ -619,6 +619,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_moveKinematic
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    resetSleepTimer
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_resetSleepTimer
+  (JNIEnv *, jclass, jlong bodyVa) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    pBody->ResetSleepTimer();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    setAllowSleeping
  * Signature: (JZ)V
  */

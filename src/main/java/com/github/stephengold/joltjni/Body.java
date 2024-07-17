@@ -489,6 +489,15 @@ public class Body extends NonCopyable {
     }
 
     /**
+     * Reset the body's sleep timer. This does not activate the body, but allows
+     * resetting the system that detects sleeping bodies.
+     */
+    public void resetSleepTimer() {
+        long bodyVa = va();
+        resetSleepTimer(bodyVa);
+    }
+
+    /**
      * Alter whether the body is allowed to fall asleep.
      *
      * @param allow true to allow, false to inhibit
@@ -667,6 +676,8 @@ public class Body extends NonCopyable {
 
     native private static void moveKinematic(long bodyVa, double xx, double yy,
             double zz, float qx, float qy, float qz, float qw, float deltaTime);
+
+    native private static void resetSleepTimer(long bodyVa);
 
     native private static void setAllowSleeping(long bodyVa, boolean allow);
 
