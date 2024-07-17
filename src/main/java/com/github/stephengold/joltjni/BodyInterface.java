@@ -68,7 +68,93 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Create a body and add it.
+     * Apply the specified force to the specified body's center of mass.
+     *
+     * @param bodyId the ID of the body (not null)
+     * @param force the force vector (not null, unaffected)
+     */
+    public void addForce(ConstBodyId bodyId, Vec3Arg force) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        float fx = force.getX();
+        float fy = force.getY();
+        float fz = force.getZ();
+        addForce(bodyInterfaceVa, bodyIdVa, fx, fy, fz);
+    }
+
+    /**
+     * Apply the specified force to the specified body at the specified
+     * location.
+     *
+     * @param bodyId the ID of the body (not null)
+     * @param force the force vector (not null, unaffected)
+     * @param location the location of application (not null, unaffected)
+     */
+    public void addForce(ConstBodyId bodyId, Vec3Arg force, RVec3Arg location) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        float fx = force.getX();
+        float fy = force.getY();
+        float fz = force.getZ();
+        double locX = location.xx();
+        double locY = location.yy();
+        double locZ = location.zz();
+        addForce(bodyInterfaceVa, bodyIdVa, fx, fy, fz, locX, locY, locZ);
+    }
+
+    /**
+     * Apply the specified impulse to the specified body's center of mass.
+     *
+     * @param bodyId the ID of the body (not null)
+     * @param impulse the impulse vector (not null, unaffected)
+     */
+    public void addImpulse(ConstBodyId bodyId, Vec3Arg impulse) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        float jx = impulse.getX();
+        float jy = impulse.getY();
+        float jz = impulse.getZ();
+        addImpulse(bodyInterfaceVa, bodyIdVa, jx, jy, jz);
+    }
+
+    /**
+     * Apply the specified impulse to the specified body at the specified
+     * location.
+     *
+     * @param bodyId the ID of the body (not null)
+     * @param impulse the impulse vector (not null, unaffected)
+     * @param location the location of application (not null, unaffected)
+     */
+    public void addImpulse(ConstBodyId bodyId, Vec3Arg impulse,
+            RVec3Arg location) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        float jx = impulse.getX();
+        float jy = impulse.getY();
+        float jz = impulse.getZ();
+        double locX = location.xx();
+        double locY = location.yy();
+        double locZ = location.zz();
+        addImpulse(bodyInterfaceVa, bodyIdVa, jx, jy, jz, locX, locY, locZ);
+    }
+
+    /**
+     * Apply the specified torque to the specified body.
+     *
+     * @param bodyId the ID of the body (not null)
+     * @param torque the torque vector (not null, unaffected)
+     */
+    public void addTorque(ConstBodyId bodyId, Vec3Arg torque) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        float x = torque.getX();
+        float y = torque.getY();
+        float z = torque.getZ();
+        addTorque(bodyInterfaceVa, bodyIdVa, x, y, z);
+    }
+
+    /**
+     * Create a body and add it to the physics system.
      *
      * @param settings the settings to use (not null)
      * @param activationMode whether to activate the body (not null)
@@ -102,6 +188,17 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Deactivate the specified body.
+     *
+     * @param bodyId the ID of the body to deactivate (not null)
+     */
+    public void deactivateBody(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        deactivateBody(bodyInterfaceVa, bodyIdVa);
+    }
+
+    /**
      * Destroy the specified body.
      *
      * @param bodyId the ID of the body to destroy (not null)
@@ -110,6 +207,39 @@ public class BodyInterface extends NonCopyable {
         long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.va();
         destroyBody(bodyInterfaceVa, bodyIdVa);
+    }
+
+    /**
+     * Return the angular velocity of the specified body.
+     *
+     * @param bodyId the ID of the body (not null)
+     * @return a new velocity vector (radians per second in physics-system
+     * coordinates)
+     */
+    public Vec3 getAngularVelocity(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        float x = getAngularVelocityX(bodyInterfaceVa, bodyIdVa);
+        float y = getAngularVelocityY(bodyInterfaceVa, bodyIdVa);
+        float z = getAngularVelocityZ(bodyInterfaceVa, bodyIdVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the type of the specified body.
+     *
+     * @param bodyId the ID of the body to query (not null)
+     * @return an enum value (not null)
+     */
+    public EBodyType getBodyType(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        int ordinal = getBodyType(bodyInterfaceVa, bodyIdVa);
+        EBodyType result = EBodyType.values()[ordinal];
+
+        return result;
     }
 
     /**
@@ -125,6 +255,33 @@ public class BodyInterface extends NonCopyable {
         double yy = getCenterOfMassPositionY(bodyInterfaceVa, bodyIdVa);
         double zz = getCenterOfMassPositionZ(bodyInterfaceVa, bodyIdVa);
         RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Return the friction ratio of the specified body.
+     *
+     * @param bodyId the ID of the body (not null)
+     * @return the ratio
+     */
+    public float getFriction(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        float result = getFriction(bodyInterfaceVa, bodyIdVa);
+        return result;
+    }
+
+    /**
+     * Return the gravity factor of the specified body.
+     *
+     * @param bodyId the ID of the body (not null)
+     * @return the factor
+     */
+    public float getGravityFactor(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        float result = getGravityFactor(bodyInterfaceVa, bodyIdVa);
 
         return result;
     }
@@ -148,13 +305,32 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Remove the specified body from the physics system.
+     * Return the motion type of the specified body.
      *
-     * @param bodyId the ID of the body to remove (not null)
+     * @param bodyId the ID of the body to query (not null)
+     * @return an enum value (not null)
      */
-    public void removeBody(ConstBodyId bodyId) {
+    public EMotionType getMotionType(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.va();
-        removeBody(va(), bodyIdVa);
+        int ordinal = getMotionType(bodyInterfaceVa, bodyIdVa);
+        EMotionType result = EMotionType.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the restitution ratio of the specified body.
+     *
+     * @param bodyId the ID of the body to query (not null)
+     * @return the value (typically &ge;0 and &le;1)
+     */
+    public float getRestitution(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        float result = getRestitution(bodyInterfaceVa, bodyIdVa);
+
+        return result;
     }
 
     /**
@@ -170,9 +346,58 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Alter the linear velocity of the specified body.
+     * Test whether the specified body is added to the system.
      *
      * @param bodyId the ID of the body to test (not null)
+     * @return true if added, otherwise false
+     */
+    public boolean isAdded(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        boolean result = isAdded(bodyInterfaceVa, bodyIdVa);
+        return result;
+    }
+
+    /**
+     * Reposition the specified body, assuming it's kinematic.
+     *
+     * @param bodyId the ID of the body to reposition (not null)
+     * @param location the desired location (in physics-system coordinates, not
+     * null, unaffected)
+     * @param orientation the desired orientation (relative to the
+     * physics-system axes, not null, unaffected)
+     * @param deltaTime time until the desired position is reached (in seconds,
+     * &gt;0)
+     */
+    public void moveKinematic(ConstBodyId bodyId,
+            RVec3Arg location, QuatArg orientation, float deltaTime) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        double xx = location.xx();
+        double yy = location.yy();
+        double zz = location.zz();
+        float qw = orientation.getW();
+        float qx = orientation.getX();
+        float qy = orientation.getY();
+        float qz = orientation.getZ();
+        moveKinematic(bodyInterfaceVa, bodyIdVa, xx, yy, zz,
+                qx, qy, qz, qw, deltaTime);
+    }
+
+    /**
+     * Remove the specified body from the physics system.
+     *
+     * @param bodyId the ID of the body to remove (not null)
+     */
+    public void removeBody(ConstBodyId bodyId) {
+        long bodyIdVa = bodyId.va();
+        removeBody(va(), bodyIdVa);
+    }
+
+    /**
+     * Alter the linear velocity of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null)
      * @param omega the desired rates (not null, unaffected)
      */
     public void setAngularVelocity(ConstBodyId bodyId, Vec3Arg omega) {
@@ -180,6 +405,31 @@ public class BodyInterface extends NonCopyable {
         long bodyIdVa = bodyId.va();
         setAngularVelocity(bodyInterfaceVa, bodyIdVa,
                 omega.getX(), omega.getY(), omega.getZ());
+    }
+
+    /**
+     * Alter the friction ratio of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null)
+     * @param friction the desired ratio (typically &ge;0 and &le;1,
+     * default=0.2)
+     */
+    public void setFriction(ConstBodyId bodyId, float friction) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        setFriction(bodyInterfaceVa, bodyIdVa, friction);
+    }
+
+    /**
+     * Alter the gravity factor of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null)
+     * @param factor the desired factor (default=1)
+     */
+    public void setGravityFactor(ConstBodyId bodyId, float factor) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        setGravityFactor(bodyInterfaceVa, bodyIdVa, factor);
     }
 
     /**
@@ -193,6 +443,19 @@ public class BodyInterface extends NonCopyable {
         setLinearVelocity(va(), bodyIdVa,
                 velocity.getX(), velocity.getY(), velocity.getZ());
     }
+
+    /**
+     * Alter the restitution ratio of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null)
+     * @param restitution the desired ratio (typically &ge;0 and &le;1,
+     * default=0)
+     */
+    public void setRestitution(ConstBodyId bodyId, float restitution) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        setRestitution(bodyInterfaceVa, bodyIdVa, restitution);
+    }
     // *************************************************************************
     // native private methods
 
@@ -202,11 +465,42 @@ public class BodyInterface extends NonCopyable {
     native private static void addBody(
             long bodyInterfaceVa, long bodyIdVa, int activationOrdinal);
 
+    native private static void addForce(
+            long bodyInterfaceVa, long bodyIdVa, float fx, float fy, float fz);
+
+    native private static void addForce(
+            long bodyInterfaceVa, long bodyIdVa, float fx, float fy, float fz,
+            double locX, double locY, double locZ);
+
+    native private static void addImpulse(
+            long bodyInterfaceVa, long bodyIdVa, float jx, float jy, float jz);
+
+    native private static void addImpulse(
+            long bodyInterfaceVa, long bodyIdVa, float jx, float jy, float jz,
+            double locX, double locY, double locZ);
+
+    native private static void addTorque(
+            long bodyInterfaceVa, long bodyIdVa, float x, float y, float z);
+
     native private static long createBody(
             long bodyInterfaceVa, long settingsVa);
 
+    native private static void deactivateBody(
+            long bodyInterfaceVa, long bodyIdVa);
+
     native private static void destroyBody(
             long bodyInterfaceVa, long bodyIdVa);
+
+    native private static float getAngularVelocityX(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static float getAngularVelocityY(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static float getAngularVelocityZ(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static int getBodyType(long bodyInterfaceVa, long bodyIdVa);
 
     native private static double getCenterOfMassPositionX(
             long bodyInterfaceVa, long bodyIdVa);
@@ -215,6 +509,12 @@ public class BodyInterface extends NonCopyable {
             long bodyInterfaceVa, long bodyIdVa);
 
     native private static double getCenterOfMassPositionZ(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static float getFriction(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static float getGravityFactor(
             long bodyInterfaceVa, long bodyIdVa);
 
     native private static float getLinearVelocityX(
@@ -226,7 +526,19 @@ public class BodyInterface extends NonCopyable {
     native private static float getLinearVelocityZ(
             long bodyInterfaceVa, long bodyIdVa);
 
+    native private static int getMotionType(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static float getRestitution(
+            long bodyInterfaceVa, long bodyIdVa);
+
     native private static boolean isActive(long bodyInterfaceVa, long bodyIdVa);
+
+    native private static boolean isAdded(long bodyInterfaceVa, long bodyIdVa);
+
+    native private static void moveKinematic(long bodyInterfaceVa,
+            long bodyIdVa, double xx, double yy, double zz,
+            float qx, float qy, float qz, float qw, float deltaTime);
 
     native private static void removeBody(
             long bodyInterfaceVa, long bodyIdVa);
@@ -234,6 +546,15 @@ public class BodyInterface extends NonCopyable {
     native private static void setAngularVelocity(
             long bodyInterfaceVa, long bodyIdVa, float wx, float wy, float wz);
 
+    native private static void setFriction(
+            long bodyInterfaceVa, long bodyIdVa, float friction);
+
+    native private static void setGravityFactor(
+            long bodyInterfaceVa, long bodyIdVa, float factor);
+
     native private static void setLinearVelocity(
             long bodyInterfaceVa, long bodyIdVa, float vx, float vy, float vz);
+
+    native private static void setRestitution(
+            long bodyInterfaceVa, long bodyIdVa, float restitution);
 }
