@@ -435,7 +435,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Alter the linear velocity of the specified body.
      *
-     * @param bodyId the ID of the body to test (not null)
+     * @param bodyId the ID of the body to modify (not null)
      * @param velocity the desired velocity (not null, unaffected)
      */
     public void setLinearVelocity(ConstBodyId bodyId, Vec3Arg velocity) {
