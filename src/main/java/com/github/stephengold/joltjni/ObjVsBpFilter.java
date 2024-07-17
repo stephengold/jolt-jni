@@ -22,12 +22,12 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A configurable filter to prevent specific object layers from interacting with
- * specific broadphase layers.
+ * An implementation of {@code ObjectVsBroadPhaseLayerFilter} that can be
+ * configured at runtime.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ObjVsBpFilter extends JoltPhysicsObject {
+public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
     // *************************************************************************
     // constructors
 

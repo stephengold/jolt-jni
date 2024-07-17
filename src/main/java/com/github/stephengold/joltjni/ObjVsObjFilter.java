@@ -22,11 +22,12 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A configurable filter to disable interactions between specific object layers.
+ * An implementation of {@code ObjectLayerPairFilter} that can be configured at
+ * runtime.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ObjVsObjFilter extends JoltPhysicsObject {
+public class ObjVsObjFilter extends ObjectLayerPairFilter {
     // *************************************************************************
     // constructors
 

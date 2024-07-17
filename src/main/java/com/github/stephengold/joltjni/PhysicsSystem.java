@@ -38,15 +38,15 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * protect the BroadPhaseLayerInterface from garbage collection
      */
-    private MapObj2Bp map;
+    private ConstBroadPhaseLayerInterface map;
     /**
      * protect the ObjectVsBroadPhaseLayerFilter from garbage collection
      */
-    private ObjVsBpFilter ovbFilter;
+    private ConstObjectVsBroadPhaseLayerFilter ovbFilter;
     /**
      * protect the ObjectLayerPairFilter from getting garbage collection
      */
-    private ObjVsObjFilter ovoFilter;
+    private ConstObjectLayerPairFilter ovoFilter;
     // *************************************************************************
     // constructors
 
@@ -148,8 +148,9 @@ public class PhysicsSystem extends NonCopyable {
      * @param ovoFilter (not null, alias created)
      */
     public void init(int maxBodies, int numBodyMutexes, int maxBodyPairs,
-            int maxContactConstraints, MapObj2Bp map, ObjVsBpFilter ovbFilter,
-            ObjVsObjFilter ovoFilter) {
+            int maxContactConstraints, ConstBroadPhaseLayerInterface map,
+            ConstObjectVsBroadPhaseLayerFilter ovbFilter,
+            ConstObjectLayerPairFilter ovoFilter) {
         this.map = map;
         this.ovbFilter = ovbFilter;
         this.ovoFilter = ovoFilter;

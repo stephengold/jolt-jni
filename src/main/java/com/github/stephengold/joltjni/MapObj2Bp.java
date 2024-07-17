@@ -22,12 +22,12 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A configurable one-way mapping from object layers to their corresponding
- * broadphase layers.
+ * An implementation of {@code BroadPhaseLayerInterface} that can be configured
+ * at runtime.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MapObj2Bp extends JoltPhysicsObject {
+public class MapObj2Bp extends BroadPhaseLayerInterface {
     // *************************************************************************
     // constructors
 
