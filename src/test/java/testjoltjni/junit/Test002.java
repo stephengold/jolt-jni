@@ -35,10 +35,7 @@ import com.github.stephengold.joltjni.IndexedTriangle;
 import com.github.stephengold.joltjni.IndexedTriangleList;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
 import com.github.stephengold.joltjni.Jolt;
-import com.github.stephengold.joltjni.MapObj2Bp;
 import com.github.stephengold.joltjni.MeshShapeSettings;
-import com.github.stephengold.joltjni.ObjVsBpFilter;
-import com.github.stephengold.joltjni.ObjVsObjFilter;
 import com.github.stephengold.joltjni.PhysicsSettings;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.RVec3;
@@ -60,21 +57,6 @@ import testjoltjni.TestUtils;
  * @author Stephen Gold sgold@sonic.net
  */
 public class Test002 {
-    // *************************************************************************
-    // constants
-
-    /**
-     * object layer for non-moving objects
-     */
-    final private static int objLayerNonMoving = 0;
-    /**
-     * object layer for moving objects
-     */
-    final private static int objLayerMoving = 1;
-    /**
-     * number of object layers
-     */
-    final private static int numObjLayers = 2;
     // *************************************************************************
     // fields
 
@@ -98,27 +80,8 @@ public class Test002 {
     public void test002() {
         TestUtils.loadAndInitializeNativeLibrary();
 
-        // broadphase layers:
-        int bpLayerNonMoving = 0;
-        int bpLayerMoving = 1;
-        int numBpLayers = 2;
-
-        MapObj2Bp mapObj2Bp = new MapObj2Bp(numObjLayers, numBpLayers)
-                .add(objLayerNonMoving, bpLayerNonMoving)
-                .add(objLayerMoving, bpLayerMoving);
-        ObjVsBpFilter objVsBpFilter
-                = new ObjVsBpFilter(numObjLayers, numBpLayers)
-                        .disablePair(objLayerNonMoving, bpLayerNonMoving);
-        ObjVsObjFilter objVsObjFilter = new ObjVsObjFilter(numObjLayers)
-                .disablePair(objLayerNonMoving, objLayerNonMoving);
-
         int maxBodies = 1_800;
-        int numBodyMutexes = 0; // 0 means "use the default value"
-        int maxBodyPairs = 65_536;
-        int maxContacts = 20_480;
-        PhysicsSystem physicsSystem = new PhysicsSystem();
-        physicsSystem.init(maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
-                mapObj2Bp, objVsBpFilter, objVsObjFilter);
+        PhysicsSystem physicsSystem = TestUtils.newPhysicsSystem(maxBodies);
 
         load();
         startTest(physicsSystem, EMotionQuality.LinearCast);
@@ -146,9 +109,7 @@ public class Test002 {
 
         Assert.assertEquals(1_765, physicsSystem.getNumBodies());
 
-        TestUtils.testClose(
-                physicsSystem, objVsObjFilter, objVsBpFilter, mapObj2Bp);
-
+        TestUtils.cleanupPhysicsSystem(physicsSystem);
         TestUtils.cleanup();
     }
     // *************************************************************************
@@ -215,7 +176,7 @@ public class Test002 {
 
         meshBodySettings.setFriction(0.5f);
         meshBodySettings.setMotionType(EMotionType.Static);
-        meshBodySettings.setObjectLayer(objLayerNonMoving);
+        meshBodySettings.setObjectLayer(TestUtils.objLayerNonMoving);
         meshBodySettings.setRestitution(0.6f);
 
         float center = n * cellSize / 2;
@@ -261,7 +222,7 @@ public class Test002 {
                     bodySettings.setFriction(0.5f);
                     bodySettings.setMotionQuality(motionQuality);
                     bodySettings.setMotionType(EMotionType.Dynamic);
-                    bodySettings.setObjectLayer(objLayerMoving);
+                    bodySettings.setObjectLayer(TestUtils.objLayerMoving);
                     RVec3 rvec3 = new RVec3(7.5 * x, 15. + 2. * y, 7.5 * z);
                     bodySettings.setPosition(rvec3);
                     bodySettings.setRestitution(0.6f);
