@@ -44,7 +44,7 @@ public class PhysicsSystem extends NonCopyable {
      */
     private ConstObjectVsBroadPhaseLayerFilter ovbFilter;
     /**
-     * protect the ObjectLayerPairFilter from getting garbage collection
+     * protect the ObjectLayerPairFilter from garbage collection
      */
     private ConstObjectLayerPairFilter ovoFilter;
     // *************************************************************************
@@ -107,7 +107,7 @@ public class PhysicsSystem extends NonCopyable {
      * manager. The physics system is unaffected.
      *
      * @param bodyType which type of body to count (not null)
-     * @return the count (&ge;0)
+     * @return the count (&ge;0, &le;maxBodies)
      */
     public int getNumActiveBodies(EBodyType bodyType) {
         long systemVa = va();
@@ -121,7 +121,7 @@ public class PhysicsSystem extends NonCopyable {
      * Count how many bodies there are in the body manager. The physics system
      * is unaffected.
      *
-     * @return the count (&ge;0)
+     * @return the count (&ge;0, &le;maxBodies)
      */
     public int getNumBodies() {
         long systemVa = va();

@@ -34,8 +34,8 @@ public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
     /**
      * Instantiate a filter with all interactions enabled.
      *
-     * @param numObjectLayers the number of object layers
-     * @param numBpLayers the number of broadphase layers
+     * @param numObjectLayers the number of object layers (&ge;1)
+     * @param numBpLayers the number of broadphase layers (&ge;1)
      */
     public ObjVsBpFilter(int numObjectLayers, int numBpLayers) {
         long filterVa = createObjVsBpFilter(numObjectLayers, numBpLayers);

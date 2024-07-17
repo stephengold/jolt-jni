@@ -34,7 +34,7 @@ public class ObjVsObjFilter extends ObjectLayerPairFilter {
     /**
      * Instantiate a filter with all interactions enabled.
      *
-     * @param numObjectLayers the number of object layers
+     * @param numObjectLayers the number of object layers (&ge;1)
      */
     public ObjVsObjFilter(int numObjectLayers) {
         long filterVa = createObjVsObjFilter(numObjectLayers);
@@ -44,7 +44,7 @@ public class ObjVsObjFilter extends ObjectLayerPairFilter {
     // new methods exposed
 
     /**
-     * Disable interactions between the specified layers.
+     * Disable interactions between the specified object layers.
      *
      * @param layer1 the index of the first object layer (&lt; numObjectLayers)
      * @param layer2 the index of the 2nd object layer (&lt; numObjectLayers)
