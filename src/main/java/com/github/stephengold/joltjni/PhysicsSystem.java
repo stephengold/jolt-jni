@@ -90,6 +90,19 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Return the maximum number of bodies the system supports. The physics
+     * system is unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    public int getMaxBodies() {
+        long systemVa = va();
+        int result = getMaxBodies(systemVa);
+
+        return result;
+    }
+
+    /**
      * Count how many active bodies of the specified type there are in the body
      * manager. The physics system is unaffected.
      *
@@ -229,6 +242,8 @@ public class PhysicsSystem extends NonCopyable {
     native private static float getGravityY(long systemVa);
 
     native private static float getGravityZ(long systemVa);
+
+    native private static int getMaxBodies(long systemVa);
 
     native private static int getNumActiveBodies(
             long systemVa, int typeOrdinal);

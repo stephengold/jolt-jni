@@ -100,6 +100,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getGr
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getMaxBodies
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getMaxBodies
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const uint result = pSystem->GetMaxBodies();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getNumActiveBodies
  * Signature: (JI)I
  */
