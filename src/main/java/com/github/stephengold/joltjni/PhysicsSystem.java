@@ -74,6 +74,15 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Access the BroadPhaseLayerInterface.
+     *
+     * @return the pre-existing instance, or null if none
+     */
+    public ConstBroadPhaseLayerInterface getBroadPhaseLayerInterface() {
+        return map;
+    }
+
+    /**
      * Copy the gravity vector. The physics system is unaffected.
      *
      * @return a new acceleration vector (meters per second squared in
@@ -128,6 +137,24 @@ public class PhysicsSystem extends NonCopyable {
         int result = getNumBodies(systemVa);
 
         return result;
+    }
+
+    /**
+     * Access the ObjectVsBroadPhaseLayerFilter.
+     *
+     * @return the pre-existing instance, or null if none
+     */
+    public ConstObjectVsBroadPhaseLayerFilter getOvbFilter() {
+        return ovbFilter;
+    }
+
+    /**
+     * Access the ObjectLayerPairFilter.
+     *
+     * @return the pre-existing instance, or null if none
+     */
+    public ConstObjectLayerPairFilter getOvoFilter() {
+        return ovoFilter;
     }
 
     /**
