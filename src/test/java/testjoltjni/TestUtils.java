@@ -21,9 +21,16 @@ SOFTWARE.
  */
 package testjoltjni;
 
+import com.github.stephengold.joltjni.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.ConstJoltPhysicsObject;
+import com.github.stephengold.joltjni.ConstObjectLayerPairFilter;
+import com.github.stephengold.joltjni.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JoltPhysicsObject;
+import com.github.stephengold.joltjni.MapObj2Bp;
+import com.github.stephengold.joltjni.ObjVsBpFilter;
+import com.github.stephengold.joltjni.ObjVsObjFilter;
+import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.QuatArg;
 import com.github.stephengold.joltjni.RVec3Arg;
 import com.github.stephengold.joltjni.Vec3Arg;
@@ -45,6 +52,18 @@ final public class TestUtils {
      * rely on the automatic {@code java.lang.ref.Cleaner} instead
      */
     final static public boolean automateFreeing = true;
+    /**
+     * customary number of object layers
+     */
+    final public static int numObjLayers = 2;
+    /**
+     * customary object layer for non-moving objects
+     */
+    final public static int objLayerNonMoving = 0;
+    /**
+     * customary object layer for moving objects
+     */
+    final public static int objLayerMoving = 1;
     // *************************************************************************
     // constructors
 
@@ -120,6 +139,21 @@ final public class TestUtils {
     }
 
     /**
+     * Clean up the specified {@code PhysicsSystem}.
+     *
+     * @param physicsSystem the system to clean up (not null)
+     */
+    static public void cleanupPhysicsSystem(PhysicsSystem physicsSystem) {
+        ConstBroadPhaseLayerInterface mapObj2Bp
+                = physicsSystem.getBroadPhaseLayerInterface();
+        ConstObjectLayerPairFilter ovoFilter = physicsSystem.getOvoFilter();
+        ConstObjectVsBroadPhaseLayerFilter ovbFilter
+                = physicsSystem.getOvbFilter();
+
+        testClose(physicsSystem, ovbFilter, ovoFilter, mapObj2Bp);
+    }
+
+    /**
      * Load and initialize some flavor of native library.
      */
     public static void loadAndInitializeNativeLibrary() {
@@ -170,6 +204,38 @@ final public class TestUtils {
             }
         }
         Assert.assertTrue(success);
+    }
+
+    /**
+     * Allocate and initialize a {@code PhysicsSystem} in the customary
+     * configuration.
+     *
+     * @param maxBodies the desired number of bodies (&ge;1)
+     * @return a new instance
+     */
+    static public PhysicsSystem newPhysicsSystem(int maxBodies) {
+        // broadphase layers:
+        int bpLayerNonMoving = 0;
+        int bpLayerMoving = 1;
+        int numBpLayers = 2;
+
+        MapObj2Bp mapObj2Bp = new MapObj2Bp(numObjLayers, numBpLayers)
+                .add(objLayerNonMoving, bpLayerNonMoving)
+                .add(objLayerMoving, bpLayerMoving);
+        ObjVsBpFilter objVsBpFilter
+                = new ObjVsBpFilter(numObjLayers, numBpLayers)
+                        .disablePair(objLayerNonMoving, bpLayerNonMoving);
+        ObjVsObjFilter objVsObjFilter = new ObjVsObjFilter(numObjLayers)
+                .disablePair(objLayerNonMoving, objLayerNonMoving);
+
+        int numBodyMutexes = 0; // 0 means "use the default value"
+        int maxBodyPairs = 65_536;
+        int maxContacts = 20_480;
+        PhysicsSystem result = new PhysicsSystem();
+        result.init(maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
+                mapObj2Bp, objVsBpFilter, objVsObjFilter);
+
+        return result;
     }
 
     /**
