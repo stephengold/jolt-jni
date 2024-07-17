@@ -54,9 +54,17 @@ public class Test004 {
         int numBpLayers = 2;
         int numObjLayers = 3;
         MapObj2Bp mapObj2Bp = new MapObj2Bp(numObjLayers, numBpLayers);
+        Assert.assertEquals(numBpLayers, mapObj2Bp.getNumBroadPhaseLayers());
+        Assert.assertEquals(255, mapObj2Bp.getBroadPhaseLayer(0));
+        Assert.assertEquals(255, mapObj2Bp.getBroadPhaseLayer(1));
+        Assert.assertEquals(255, mapObj2Bp.getBroadPhaseLayer(2));
+
         ObjVsBpFilter objVsBpFilter
                 = new ObjVsBpFilter(numObjLayers, numBpLayers);
+        Assert.assertTrue(objVsBpFilter.shouldCollide(2, 1));
+
         ObjVsObjFilter objVsObjFilter = new ObjVsObjFilter(numObjLayers);
+        Assert.assertTrue(objVsObjFilter.shouldCollide(2, 2));
 
         int maxBodies = 1_800;
         int numBodyMutexes = 0; // 0 means "use the default value"
@@ -67,6 +75,7 @@ public class Test004 {
                 maxContacts, mapObj2Bp, objVsBpFilter, objVsObjFilter);
 
         Assert.assertTrue(physicsSystem.ownsNativeObject());
+        Assert.assertEquals(maxBodies, physicsSystem.getMaxBodies());
         testGettersAndDefaults(physicsSystem);
 
         // PhysicsSystem setters:
