@@ -26,7 +26,9 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BodyCreationSettings extends JoltPhysicsObject {
+public class BodyCreationSettings
+        extends JoltPhysicsObject
+        implements ConstBodyCreationSettings {
     // *************************************************************************
     // constructors
 
@@ -108,263 +110,6 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Test whether the created body will be allowed to fall asleep. The
-     * settings are unaffected. (native field: mAllowSleeping)
-     *
-     * @return true if allowed, otherwise false
-     */
-    public boolean getAllowSleeping() {
-        long bodySettingsVa = va();
-        boolean result = getAllowSleeping(bodySettingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the angular damping constant. The settings are unaffected. (native
-     * field: mAngularDamping)
-     *
-     * @return the constant (in units of 1/second, &ge;0, &le;1)
-     */
-    public float getAngularDamping() {
-        long bodySettingsVa = va();
-        float result = getAngularDamping(bodySettingsVa);
-
-        return result;
-    }
-
-    /**
-     * Copy the (initial) angular velocity. The settings are unaffected. (native
-     * field: mAngularVelocity)
-     *
-     * @return a new velocity vector (radians per second in physics-system
-     * coordinates)
-     */
-    public Vec3 getAngularVelocity() {
-        long bodySettingsVa = va();
-        float vx = getAngularVelocityX(bodySettingsVa);
-        float vy = getAngularVelocityY(bodySettingsVa);
-        float vz = getAngularVelocityZ(bodySettingsVa);
-        Vec3 result = new Vec3(vx, vy, vz);
-
-        return result;
-    }
-
-    /**
-     * Return the friction ratio. The settings are unaffected. (native field:
-     * mFriction)
-     *
-     * @return the ratio (typically &ge;0 and &le;1)
-     */
-    public float getFriction() {
-        long bodySettingsVa = va();
-        float result = getFriction(bodySettingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the gravity factor. The settings are unaffected. (native field:
-     * mGravityFactor)
-     *
-     * @return the factor
-     */
-    public float getGravityFactor() {
-        long bodySettingsVa = va();
-        float result = getGravityFactor(bodySettingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the linear damping constant. The settings are unaffected. (native
-     * field: mLinearDamping)
-     *
-     * @return the constant (in units of 1/second, &ge;0, &le;1)
-     */
-    public float getLinearDamping() {
-        long bodySettingsVa = va();
-        float result = getLinearDamping(bodySettingsVa);
-
-        return result;
-    }
-
-    /**
-     * Copy the (initial) linear velocity. The settings are unaffected. (native
-     * field: mLinearVelocity)
-     *
-     * @return a new velocity vector (meters per second in physics-system
-     * coordinates)
-     */
-    public Vec3 getLinearVelocity() {
-        long bodySettingsVa = va();
-        float vx = getLinearVelocityX(bodySettingsVa);
-        float vy = getLinearVelocityY(bodySettingsVa);
-        float vz = getLinearVelocityZ(bodySettingsVa);
-        Vec3 result = new Vec3(vx, vy, vz);
-
-        return result;
-    }
-
-    /**
-     * Calculate the mass and inertia.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    public MassProperties getMassProperties() {
-        long bodySettingsVa = va();
-        long propertiesVa = getMassProperties(bodySettingsVa);
-        MassProperties result = new MassProperties(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum angular speed. The settings are unaffected. (native
-     * field: mMaxAngularVelocity)
-     *
-     * @return the maximum speed (in radians/second)
-     */
-    public float getMaxAngularVelocity() {
-        long bodySettingsVa = va();
-        float result = getMaxAngularVelocity(bodySettingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum linear speed. The settings are unaffected. (native
-     * field: mMaxLinearVelocity)
-     *
-     * @return the maximum speed (in meters/second)
-     */
-    public float getMaxLinearVelocity() {
-        long bodySettingsVa = va();
-        float result = getMaxLinearVelocity(bodySettingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the motion quality. The settings are unaffected. (native field:
-     * mMotionQuality)
-     *
-     * @return an enum value (not null)
-     */
-    public EMotionQuality getMotionQuality() {
-        long bodySettingsVa = va();
-        int ordinal = getMotionQuality(bodySettingsVa);
-        EMotionQuality result = EMotionQuality.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the motion type. The settings are unaffected. (native field:
-     * mMotionType)
-     *
-     * @return an enum value (not null)
-     */
-    public EMotionType getMotionType() {
-        long bodySettingsVa = va();
-        int ordinal = getMotionType(bodySettingsVa);
-        EMotionType result = EMotionType.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the index of the object layer. The settings are unaffected.
-     * (native field: mObjectLayer)
-     *
-     * @return the layer index (&ge;0, &lt;numObjectLayers)
-     */
-    public int getObjectLayer() {
-        long bodySettingsVa = va();
-        int result = getObjectLayer(bodySettingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the (initial) location. The settings are unaffected. (native
-     * field: mPosition)
-     *
-     * @return a new location vector (in physics-system coordinates, all
-     * components finite)
-     */
-    public RVec3 getPosition() {
-        long bodySettingsVa = va();
-
-        double xx = getPositionX(bodySettingsVa);
-        assert Double.isFinite(xx) : "xx = " + xx;
-
-        double yy = getPositionY(bodySettingsVa);
-        assert Double.isFinite(yy) : "yy = " + yy;
-
-        double zz = getPositionZ(bodySettingsVa);
-        assert Double.isFinite(zz) : "zz = " + zz;
-
-        RVec3 result = new RVec3(xx, yy, zz);
-        return result;
-    }
-
-    /**
-     * Return the restitution ratio. The settings are unaffected. (native field:
-     * mRestitution)
-     *
-     * @return the ratio (typically &ge;0 and &le;1)
-     */
-    public float getRestitution() {
-        long bodySettingsVa = va();
-        float result = getRestitution(bodySettingsVa);
-        return result;
-    }
-
-    /**
-     * Copy the (initial) orientation of the body's axes. The settings are
-     * unaffected. (native field: mRotation)
-     *
-     * @return a new rotation quaternion (relative to the physics-system axes)
-     */
-    public Quat getRotation() {
-        long bodySettingsVa = va();
-        float qw = getRotationW(bodySettingsVa);
-        float qx = getRotationX(bodySettingsVa);
-        float qy = getRotationY(bodySettingsVa);
-        float qz = getRotationZ(bodySettingsVa);
-        Quat result = new Quat(qx, qy, qz, qw);
-
-        return result;
-    }
-
-    /**
-     * Access the {@code Shape}.
-     *
-     * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null}
-     */
-    public ConstShape getShape() {
-        long bodySettingsVa = va();
-        long shapeSettingsVa = getShape(bodySettingsVa);
-        ConstShape result = Shape.newShape(shapeSettingsVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether the body's mass properties will be calculated. The settings
-     * are unaffected.
-     *
-     * @return true if calculated, otherwise false
-     */
-    public boolean hasMassProperties() {
-        long bodySettingsVa = va();
-        boolean result = hasMassProperties(bodySettingsVa);
-        return result;
-    }
 
     /**
      * Alter whether the created body will be allowed to fall asleep. (native
@@ -579,6 +324,284 @@ public class BodyCreationSettings extends JoltPhysicsObject {
     public void setShapeSettings(ShapeSettingsRef shapeSettingsRef) {
         ShapeSettings shapeSettings = shapeSettingsRef.getPtr();
         setShapeSettings(shapeSettings);
+    }
+    // *************************************************************************
+    // ConstBodyCreationSettings methods
+
+    /**
+     * Test whether the created body will be allowed to fall asleep. The
+     * settings are unaffected. (native field: mAllowSleeping)
+     *
+     * @return true if allowed, otherwise false
+     */
+    @Override
+    public boolean getAllowSleeping() {
+        long bodySettingsVa = va();
+        boolean result = getAllowSleeping(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the angular damping constant. The settings are unaffected. (native
+     * field: mAngularDamping)
+     *
+     * @return the constant (in units of 1/second, &ge;0, &le;1)
+     */
+    @Override
+    public float getAngularDamping() {
+        long bodySettingsVa = va();
+        float result = getAngularDamping(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the (initial) angular velocity. The settings are unaffected. (native
+     * field: mAngularVelocity)
+     *
+     * @return a new velocity vector (radians per second in physics-system
+     * coordinates)
+     */
+    @Override
+    public Vec3 getAngularVelocity() {
+        long bodySettingsVa = va();
+        float vx = getAngularVelocityX(bodySettingsVa);
+        float vy = getAngularVelocityY(bodySettingsVa);
+        float vz = getAngularVelocityZ(bodySettingsVa);
+        Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Return the friction ratio. The settings are unaffected. (native field:
+     * mFriction)
+     *
+     * @return the ratio (typically &ge;0 and &le;1)
+     */
+    @Override
+    public float getFriction() {
+        long bodySettingsVa = va();
+        float result = getFriction(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the gravity factor. The settings are unaffected. (native field:
+     * mGravityFactor)
+     *
+     * @return the factor
+     */
+    @Override
+    public float getGravityFactor() {
+        long bodySettingsVa = va();
+        float result = getGravityFactor(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the linear damping constant. The settings are unaffected. (native
+     * field: mLinearDamping)
+     *
+     * @return the constant (in units of 1/second, &ge;0, &le;1)
+     */
+    @Override
+    public float getLinearDamping() {
+        long bodySettingsVa = va();
+        float result = getLinearDamping(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the (initial) linear velocity. The settings are unaffected. (native
+     * field: mLinearVelocity)
+     *
+     * @return a new velocity vector (meters per second in physics-system
+     * coordinates)
+     */
+    @Override
+    public Vec3 getLinearVelocity() {
+        long bodySettingsVa = va();
+        float vx = getLinearVelocityX(bodySettingsVa);
+        float vy = getLinearVelocityY(bodySettingsVa);
+        float vz = getLinearVelocityZ(bodySettingsVa);
+        Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Calculate the mass and inertia. The settings are unaffected.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public MassProperties getMassProperties() {
+        long bodySettingsVa = va();
+        long propertiesVa = getMassProperties(bodySettingsVa);
+        MassProperties result = new MassProperties(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum angular speed. The settings are unaffected. (native
+     * field: mMaxAngularVelocity)
+     *
+     * @return the maximum speed (in radians/second)
+     */
+    @Override
+    public float getMaxAngularVelocity() {
+        long bodySettingsVa = va();
+        float result = getMaxAngularVelocity(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum linear speed. The settings are unaffected. (native
+     * field: mMaxLinearVelocity)
+     *
+     * @return the maximum speed (in meters/second)
+     */
+    @Override
+    public float getMaxLinearVelocity() {
+        long bodySettingsVa = va();
+        float result = getMaxLinearVelocity(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the motion quality. The settings are unaffected. (native field:
+     * mMotionQuality)
+     *
+     * @return an enum value (not null)
+     */
+    @Override
+    public EMotionQuality getMotionQuality() {
+        long bodySettingsVa = va();
+        int ordinal = getMotionQuality(bodySettingsVa);
+        EMotionQuality result = EMotionQuality.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the motion type. The settings are unaffected. (native field:
+     * mMotionType)
+     *
+     * @return an enum value (not null)
+     */
+    @Override
+    public EMotionType getMotionType() {
+        long bodySettingsVa = va();
+        int ordinal = getMotionType(bodySettingsVa);
+        EMotionType result = EMotionType.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the index of the object layer. The settings are unaffected.
+     * (native field: mObjectLayer)
+     *
+     * @return the layer index (&ge;0, &lt;numObjectLayers)
+     */
+    @Override
+    public int getObjectLayer() {
+        long bodySettingsVa = va();
+        int result = getObjectLayer(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the (initial) location. The settings are unaffected. (native
+     * field: mPosition)
+     *
+     * @return a new location vector (in physics-system coordinates, all
+     * components finite)
+     */
+    @Override
+    public RVec3 getPosition() {
+        long bodySettingsVa = va();
+
+        double xx = getPositionX(bodySettingsVa);
+        assert Double.isFinite(xx) : "xx = " + xx;
+
+        double yy = getPositionY(bodySettingsVa);
+        assert Double.isFinite(yy) : "yy = " + yy;
+
+        double zz = getPositionZ(bodySettingsVa);
+        assert Double.isFinite(zz) : "zz = " + zz;
+
+        RVec3 result = new RVec3(xx, yy, zz);
+        return result;
+    }
+
+    /**
+     * Return the restitution ratio. The settings are unaffected. (native field:
+     * mRestitution)
+     *
+     * @return the ratio (typically &ge;0 and &le;1)
+     */
+    @Override
+    public float getRestitution() {
+        long bodySettingsVa = va();
+        float result = getRestitution(bodySettingsVa);
+        return result;
+    }
+
+    /**
+     * Copy the (initial) orientation of the body's axes. The settings are
+     * unaffected. (native field: mRotation)
+     *
+     * @return a new rotation quaternion (relative to the physics-system axes)
+     */
+    @Override
+    public Quat getRotation() {
+        long bodySettingsVa = va();
+        float qw = getRotationW(bodySettingsVa);
+        float qx = getRotationX(bodySettingsVa);
+        float qy = getRotationY(bodySettingsVa);
+        float qz = getRotationZ(bodySettingsVa);
+        Quat result = new Quat(qx, qy, qz, qw);
+
+        return result;
+    }
+
+    /**
+     * Acquire read-only access to the {@code Shape}. The settings are
+     * unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null}
+     */
+    @Override
+    public ConstShape getShape() {
+        long bodySettingsVa = va();
+        long shapeSettingsVa = getShape(bodySettingsVa);
+        ConstShape result = Shape.newShape(shapeSettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body's mass properties will be calculated. The settings
+     * are unaffected.
+     *
+     * @return true if calculated, otherwise false
+     */
+    @Override
+    public boolean hasMassProperties() {
+        long bodySettingsVa = va();
+        boolean result = hasMassProperties(bodySettingsVa);
+        return result;
     }
     // *************************************************************************
     // native private methods

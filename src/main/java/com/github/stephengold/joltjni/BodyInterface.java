@@ -172,10 +172,10 @@ public class BodyInterface extends NonCopyable {
     /**
      * Create a body using the specified settings.
      *
-     * @param settings the settings to use (not null)
+     * @param settings the settings to use (not null, unaffected)
      * @return the new body
      */
-    public Body createBody(BodyCreationSettings settings) {
+    public Body createBody(ConstBodyCreationSettings settings) {
         long bodyInterfaceVa = va();
         long settingsVa = settings.va();
         long bodyVa = createBody(bodyInterfaceVa, settingsVa);

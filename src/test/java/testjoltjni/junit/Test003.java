@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.EMotionQuality;
 import com.github.stephengold.joltjni.EMotionType;
 import com.github.stephengold.joltjni.JobSystem;
@@ -245,7 +246,7 @@ public class Test003 {
      *
      * @param bcs the settings to test (not null, unaffected)
      */
-    private static void testBcsDefaults(BodyCreationSettings bcs) {
+    private static void testBcsDefaults(ConstBodyCreationSettings bcs) {
         Assert.assertTrue(bcs.hasAssignedNativeObject());
         Assert.assertTrue(bcs.ownsNativeObject());
 
