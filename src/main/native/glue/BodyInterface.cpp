@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Body/BodyInterface.h>
+#include <Jolt/Physics/Collision/Shape/Shape.h>
 #include "auto/com_github_stephengold_joltjni_BodyInterface.h"
 
 using namespace JPH;
@@ -350,6 +351,47 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getMoti
     return (jint) result;
 }
 
+inline static const RVec3 getPosition(jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const RVec3 result = pInterface->GetPosition(*pBodyId);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getPositionX
+ * Signature: (JJ)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getPositionX
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const RVec3 position = getPosition(bodyInterfaceVa, bodyIdVa);
+    return position.GetX();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getPositionY
+ * Signature: (JJ)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getPositionY
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const RVec3 position = getPosition(bodyInterfaceVa, bodyIdVa);
+    return position.GetY();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getPositionZ
+ * Signature: (JJ)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getPositionZ
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const RVec3 position = getPosition(bodyInterfaceVa, bodyIdVa);
+    return position.GetZ();
+}
+
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    getRestitution
@@ -362,6 +404,73 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getRe
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
     const float result = pInterface->GetRestitution(*pBodyId);
     return result;
+}
+
+inline static const Quat getRotation(jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const Quat result = pInterface->GetRotation(*pBodyId);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getRotationW
+ * Signature: (JJ)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getRotationW
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const Quat rotation = getRotation(bodyInterfaceVa, bodyIdVa);
+    return rotation.GetW();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getRotationX
+ * Signature: (JJ)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getRotationX
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const Quat rotation = getRotation(bodyInterfaceVa, bodyIdVa);
+    return rotation.GetX();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getRotationY
+ * Signature: (JJ)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getRotationY
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const Quat rotation = getRotation(bodyInterfaceVa, bodyIdVa);
+    return rotation.GetY();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getRotationZ
+ * Signature: (JJ)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getRotationZ
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const Quat rotation = getRotation(bodyInterfaceVa, bodyIdVa);
+    return rotation.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getShape
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getShape
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    ShapeRefC * const pResult = new ShapeRefC();
+    *pResult = pInterface->GetShape(*pBodyId);
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*

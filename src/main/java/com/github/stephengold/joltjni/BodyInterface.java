@@ -320,6 +320,47 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Locate the specified body.
+     *
+     * @param bodyId the ID of the body to locate (not null, unaffected)
+     * @return a new location vector (in physics-system coordinates)
+     */
+    public RVec3 getPosition(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        double xx = getPositionX(bodyInterfaceVa, bodyIdVa);
+        double yy = getPositionY(bodyInterfaceVa, bodyIdVa);
+        double zz = getPositionZ(bodyInterfaceVa, bodyIdVa);
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Copy the location and orientation of the specified body.
+     *
+     * @param bodyId the ID of the body to locate (not null, unaffected)
+     * @param storeLocation storage for the location (not null, modified)
+     * @param storeOrientation storage for the orientation (not null, modified)
+     */
+    public void getPositionAndRotation(
+            ConstBodyId bodyId, RVec3 storeLocation, Quat storeOrientation) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+
+        double xx = getPositionX(bodyInterfaceVa, bodyIdVa);
+        double yy = getPositionY(bodyInterfaceVa, bodyIdVa);
+        double zz = getPositionZ(bodyInterfaceVa, bodyIdVa);
+        storeLocation.set(xx, yy, zz);
+
+        float qw = getRotationW(bodyInterfaceVa, bodyIdVa);
+        float qx = getRotationX(bodyInterfaceVa, bodyIdVa);
+        float qy = getRotationY(bodyInterfaceVa, bodyIdVa);
+        float qz = getRotationZ(bodyInterfaceVa, bodyIdVa);
+        storeOrientation.set(qx, qy, qz, qw);
+    }
+
+    /**
      * Return the restitution ratio of the specified body.
      *
      * @param bodyId the ID of the body to query (not null)
@@ -329,6 +370,40 @@ public class BodyInterface extends NonCopyable {
         long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.va();
         float result = getRestitution(bodyInterfaceVa, bodyIdVa);
+
+        return result;
+    }
+
+    /**
+     * Return the orientation of the specified body.
+     *
+     * @param bodyId the ID of the body (not null, unaffected)
+     * @return a new rotation quaternion
+     */
+    public Quat getRotation(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+
+        float qw = getRotationW(bodyInterfaceVa, bodyIdVa);
+        float qx = getRotationX(bodyInterfaceVa, bodyIdVa);
+        float qy = getRotationY(bodyInterfaceVa, bodyIdVa);
+        float qz = getRotationZ(bodyInterfaceVa, bodyIdVa);
+        Quat result = new Quat(qx, qy, qz, qw);
+
+        return result;
+    }
+
+    /**
+     * Access the body's shape.
+     *
+     * @param bodyId the ID of the body (not null, unaffected)
+     * @return a new reference
+     */
+    public ShapeRefC getShape(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        long shapeRefVa = getShape(bodyInterfaceVa, bodyIdVa);
+        ShapeRefC result = new ShapeRefC(shapeRefVa, true);
 
         return result;
     }
@@ -529,7 +604,31 @@ public class BodyInterface extends NonCopyable {
     native private static int getMotionType(
             long bodyInterfaceVa, long bodyIdVa);
 
+    native private static double getPositionX(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static double getPositionY(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static double getPositionZ(
+            long bodyInterfaceVa, long bodyIdVa);
+
     native private static float getRestitution(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static float getRotationW(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static float getRotationX(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static float getRotationY(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static float getRotationZ(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static long getShape(
             long bodyInterfaceVa, long bodyIdVa);
 
     native private static boolean isActive(long bodyInterfaceVa, long bodyIdVa);
