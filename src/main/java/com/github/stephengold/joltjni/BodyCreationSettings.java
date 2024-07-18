@@ -443,7 +443,7 @@ public class BodyCreationSettings
     public MassProperties getMassProperties() {
         long bodySettingsVa = va();
         long propertiesVa = getMassProperties(bodySettingsVa);
-        MassProperties result = new MassProperties(propertiesVa);
+        MassProperties result = new MassProperties(propertiesVa, true);
 
         return result;
     }

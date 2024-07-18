@@ -151,7 +151,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
         long refVa = va();
         long shapeVa = getPtr(refVa);
         long propertiesVa = Shape.getMassProperties(shapeVa);
-        MassProperties result = new MassProperties(propertiesVa);
+        MassProperties result = new MassProperties(propertiesVa, true);
 
         return result;
     }

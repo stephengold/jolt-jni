@@ -192,7 +192,7 @@ abstract public class Shape extends NonCopyable
     public MassProperties getMassProperties() {
         long shapeVa = va();
         long propertiesVa = getMassProperties(shapeVa);
-        MassProperties result = new MassProperties(propertiesVa);
+        MassProperties result = new MassProperties(propertiesVa, true);
 
         return result;
     }

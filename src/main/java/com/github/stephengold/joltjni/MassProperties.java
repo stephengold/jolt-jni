@@ -36,9 +36,12 @@ final public class MassProperties extends JoltPhysicsObject {
      *
      * @param propertiesVa the virtual address of the native object to assign
      * (not zero)
+     * @param owner true &rarr; make the current object the owner, false &rarr;
+     * the current object isn't the owner
      */
-    MassProperties(long propertiesVa) {
-        super(propertiesVa);
+    MassProperties(long propertiesVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(propertiesVa) : null;
+        setVirtualAddress(propertiesVa, freeingAction);
     }
     // *************************************************************************
     // native private methods
