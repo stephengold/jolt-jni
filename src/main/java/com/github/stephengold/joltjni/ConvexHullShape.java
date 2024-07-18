@@ -57,8 +57,8 @@ public class ConvexHullShape extends ConvexShape {
     }
 
     /**
-     * Copy the location of the specified vertex of the convex hull relative to
-     * its center of mass. The shape is unaffected.
+     * Locate the specified vertex of the convex hull relative to its center of
+     * mass. The shape is unaffected.
      *
      * @param pointIndex the index of the point to locate (&ge;0, &lt;numPoints)
      * @return a new location vector

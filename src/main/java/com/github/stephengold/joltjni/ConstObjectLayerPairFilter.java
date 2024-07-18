@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * An immutable {@code ObjectLayerPairFilter}.
+ * Read-only access to an {@code ObjectLayerPairFilter}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

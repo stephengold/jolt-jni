@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * An immutable {@code ObjectVsBroadPhaseLayerFilter}.
+ * Read-only access to an {@code ObjectVsBroadPhaseLayerFilter}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

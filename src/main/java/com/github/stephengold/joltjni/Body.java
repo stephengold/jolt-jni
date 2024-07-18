@@ -74,7 +74,7 @@ public class Body extends NonCopyable {
      * Apply the specified force at the specified location.
      *
      * @param force the force vector (not null, unaffected)
-     * @param location the location of application (not null, unaffected)
+     * @param location where to apply the force (not null, unaffected)
      */
     public void addForce(Vec3Arg force, RVec3Arg location) {
         long bodyVa = va();
@@ -104,7 +104,7 @@ public class Body extends NonCopyable {
      * Apply the specified impulse at the specified location.
      *
      * @param impulse the impulse vector (not null, unaffected)
-     * @param location the location of application (not null, unaffected)
+     * @param location where to apply the impulse (not null, unaffected)
      */
     public void addImpulse(Vec3Arg impulse, RVec3Arg location) {
         long bodyVa = va();

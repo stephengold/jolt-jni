@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * An immutable {@code RVec3}.
+ * Read-only access to an {@code RVec3}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * An immutable {@code AaBox}.
+ * Read-only access to an {@code AaBox}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

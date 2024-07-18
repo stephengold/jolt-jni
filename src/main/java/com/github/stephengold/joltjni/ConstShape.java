@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import java.nio.FloatBuffer;
 
 /**
- * An immutable {@code Shape}.
+ * Read-only access to a {@code Shape}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

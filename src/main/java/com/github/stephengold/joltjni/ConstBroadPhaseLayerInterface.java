@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * An immutable {@code BroadPhaseLayerInterface}.
+ * Read-only access to a {@code BroadPhaseLayerInterface}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

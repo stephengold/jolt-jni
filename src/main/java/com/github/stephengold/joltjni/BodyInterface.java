@@ -46,7 +46,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Activate the specified body.
      *
-     * @param bodyId the ID of the body to activate (not null)
+     * @param bodyId the ID of the body to activate (not null, unaffected)
      */
     public void activateBody(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
@@ -57,7 +57,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Add the specified body to the physics system.
      *
-     * @param bodyId the ID of the body to add (not null)
+     * @param bodyId the ID of the body to add (not null, unaffected)
      * @param activation whether to activate the body (not null)
      */
     public void addBody(ConstBodyId bodyId, EActivation activation) {
@@ -70,7 +70,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Apply the specified force to the specified body's center of mass.
      *
-     * @param bodyId the ID of the body (not null)
+     * @param bodyId the ID of the body (not null, unaffected)
      * @param force the force vector (not null, unaffected)
      */
     public void addForce(ConstBodyId bodyId, Vec3Arg force) {
@@ -86,9 +86,9 @@ public class BodyInterface extends NonCopyable {
      * Apply the specified force to the specified body at the specified
      * location.
      *
-     * @param bodyId the ID of the body (not null)
+     * @param bodyId the ID of the body (not null, unaffected)
      * @param force the force vector (not null, unaffected)
-     * @param location the location of application (not null, unaffected)
+     * @param location where to apply the force (not null, unaffected)
      */
     public void addForce(ConstBodyId bodyId, Vec3Arg force, RVec3Arg location) {
         long bodyInterfaceVa = va();
@@ -105,7 +105,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Apply the specified impulse to the specified body's center of mass.
      *
-     * @param bodyId the ID of the body (not null)
+     * @param bodyId the ID of the body (not null, unaffected)
      * @param impulse the impulse vector (not null, unaffected)
      */
     public void addImpulse(ConstBodyId bodyId, Vec3Arg impulse) {
@@ -121,9 +121,9 @@ public class BodyInterface extends NonCopyable {
      * Apply the specified impulse to the specified body at the specified
      * location.
      *
-     * @param bodyId the ID of the body (not null)
+     * @param bodyId the ID of the body (not null, unaffected)
      * @param impulse the impulse vector (not null, unaffected)
-     * @param location the location of application (not null, unaffected)
+     * @param location where to apply the impulse (not null, unaffected)
      */
     public void addImpulse(ConstBodyId bodyId, Vec3Arg impulse,
             RVec3Arg location) {
@@ -141,7 +141,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Apply the specified torque to the specified body.
      *
-     * @param bodyId the ID of the body (not null)
+     * @param bodyId the ID of the body (not null, unaffected)
      * @param torque the torque vector (not null, unaffected)
      */
     public void addTorque(ConstBodyId bodyId, Vec3Arg torque) {
@@ -156,7 +156,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Create a body and add it to the physics system.
      *
-     * @param settings the settings to use (not null)
+     * @param settings the settings to use (not null, unaffected)
      * @param activationMode whether to activate the body (not null)
      * @return the ID of the created body, or an invalid ID when out of bodies
      */
@@ -190,7 +190,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Deactivate the specified body.
      *
-     * @param bodyId the ID of the body to deactivate (not null)
+     * @param bodyId the ID of the body to deactivate (not null, unaffected)
      */
     public void deactivateBody(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
@@ -307,7 +307,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Return the motion type of the specified body.
      *
-     * @param bodyId the ID of the body to query (not null)
+     * @param bodyId the ID of the body to query (not null, unaffected)
      * @return an enum value (not null)
      */
     public EMotionType getMotionType(ConstBodyId bodyId) {
@@ -336,7 +336,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Test whether the specified body is active.
      *
-     * @param bodyId the ID of the body to test (not null)
+     * @param bodyId the ID of the body to test (not null, unaffected)
      * @return true if active, otherwise false
      */
     public boolean isActive(ConstBodyId bodyId) {
@@ -348,7 +348,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Test whether the specified body is added to the system.
      *
-     * @param bodyId the ID of the body to test (not null)
+     * @param bodyId the ID of the body to test (not null, unaffected)
      * @return true if added, otherwise false
      */
     public boolean isAdded(ConstBodyId bodyId) {
@@ -361,7 +361,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Reposition the specified body, assuming it's kinematic.
      *
-     * @param bodyId the ID of the body to reposition (not null)
+     * @param bodyId the ID of the body to reposition (not null, unaffected)
      * @param location the desired location (in physics-system coordinates, not
      * null, unaffected)
      * @param orientation the desired orientation (relative to the
@@ -387,7 +387,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Remove the specified body from the physics system.
      *
-     * @param bodyId the ID of the body to remove (not null)
+     * @param bodyId the ID of the body to remove (not null, unaffected)
      */
     public void removeBody(ConstBodyId bodyId) {
         long bodyIdVa = bodyId.va();
@@ -397,7 +397,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Alter the linear velocity of the specified body.
      *
-     * @param bodyId the ID of the body to modify (not null)
+     * @param bodyId the ID of the body to modify (not null, unaffected)
      * @param omega the desired rates (not null, unaffected)
      */
     public void setAngularVelocity(ConstBodyId bodyId, Vec3Arg omega) {
@@ -410,7 +410,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Alter the friction ratio of the specified body.
      *
-     * @param bodyId the ID of the body to modify (not null)
+     * @param bodyId the ID of the body to modify (not null, unaffected)
      * @param friction the desired ratio (typically &ge;0 and &le;1,
      * default=0.2)
      */
@@ -423,7 +423,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Alter the gravity factor of the specified body.
      *
-     * @param bodyId the ID of the body to modify (not null)
+     * @param bodyId the ID of the body to modify (not null, unaffected)
      * @param factor the desired factor (default=1)
      */
     public void setGravityFactor(ConstBodyId bodyId, float factor) {
@@ -435,7 +435,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Alter the linear velocity of the specified body.
      *
-     * @param bodyId the ID of the body to modify (not null)
+     * @param bodyId the ID of the body to modify (not null, unaffected)
      * @param velocity the desired velocity (not null, unaffected)
      */
     public void setLinearVelocity(ConstBodyId bodyId, Vec3Arg velocity) {
@@ -447,7 +447,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Alter the restitution ratio of the specified body.
      *
-     * @param bodyId the ID of the body to modify (not null)
+     * @param bodyId the ID of the body to modify (not null, unaffected)
      * @param restitution the desired ratio (typically &ge;0 and &le;1,
      * default=0)
      */

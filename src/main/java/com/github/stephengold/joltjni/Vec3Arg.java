@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * An immutable {@code Vec3}.
+ * Read-only access to a {@code Vec3}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

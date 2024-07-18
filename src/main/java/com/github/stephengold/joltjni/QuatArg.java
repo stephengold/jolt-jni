@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * An immutable {@code Quat}.
+ * Read-only access to a {@code Quat}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * An immutable {@code JoltPhysicsObject}.
+ * Read-only access to a {@code JoltPhysicsObject}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
