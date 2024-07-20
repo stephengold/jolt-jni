@@ -53,4 +53,18 @@ public interface Vec3Arg {
      * @return the component value
      */
     float getZ();
+
+    /**
+     * Return the component-wise reciprocal. The vector is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 reciprocal();
+
+    /**
+     * Copy the components to an array. The vector is unaffected.
+     *
+     * @return a new array with length=3
+     */
+    float[] toArray();
 }

@@ -83,6 +83,18 @@ final public class Vec3 implements Vec3Arg {
         this.y = y;
         this.z = z;
     }
+
+    /**
+     * Instantiate a vector from the specified array.
+     *
+     * @param array the desired component values (not null, length&ge;3,
+     * unaffected)
+     */
+    public Vec3(float[] array) {
+        this.x = array[0];
+        this.y = array[1];
+        this.z = array[2];
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -109,6 +121,46 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Return the component-wise product of the specified vectors.
+     *
+     * @param v1 the first vector (not null, unaffected)
+     * @param v2 the 2nd vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 multiply(Vec3Arg v1, Vec3Arg v2) {
+        float x = v1.getX() * v2.getX();
+        float y = v1.getY() * v2.getY();
+        float z = v1.getZ() * v2.getZ();
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the bitwise AND of the specified vectors.
+     *
+     * @param v1 the first vector (not null, unaffected)
+     * @param v2 the 2nd vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 sAnd(Vec3Arg v1, Vec3Arg v2) {
+        int x1 = Float.floatToRawIntBits(v1.getX());
+        int x2 = Float.floatToRawIntBits(v2.getX());
+        float ax = Float.intBitsToFloat(x1 & x2);
+
+        int y1 = Float.floatToRawIntBits(v1.getY());
+        int y2 = Float.floatToRawIntBits(v2.getY());
+        float ay = Float.intBitsToFloat(y1 & y2);
+
+        int z1 = Float.floatToRawIntBits(v1.getZ());
+        int z2 = Float.floatToRawIntBits(v2.getZ());
+        float az = Float.intBitsToFloat(z1 & z2);
+
+        Vec3 result = new Vec3(ax, ay, az);
+        return result;
+    }
+
+    /**
      * Set all 3 components to specified values.
      *
      * @param x the desired X component
@@ -119,6 +171,18 @@ final public class Vec3 implements Vec3Arg {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    /**
+     * Set all 3 components from the specified array.
+     *
+     * @param array the desired component values (not null, length&ge;3,
+     * unaffected)
+     */
+    public void set(float[] array) {
+        this.x = array[0];
+        this.y = array[1];
+        this.z = array[2];
     }
 
     /**
@@ -146,6 +210,30 @@ final public class Vec3 implements Vec3Arg {
      */
     public void setZ(float z) {
         this.z = z;
+    }
+
+    /**
+     * Copy the X component to all components.
+     */
+    public void splatX() {
+        this.y = x;
+        this.z = x;
+    }
+
+    /**
+     * Copy the Y component to all components.
+     */
+    public void splatY() {
+        this.x = y;
+        this.z = y;
+    }
+
+    /**
+     * Copy the Z component to all components.
+     */
+    public void splatZ() {
+        this.x = z;
+        this.y = z;
     }
     // *************************************************************************
     // Vec3Arg methods
@@ -181,6 +269,32 @@ final public class Vec3 implements Vec3Arg {
     @Override
     public float getZ() {
         return z;
+    }
+
+    /**
+     * Return the component-wise reciprocal. The vector is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 reciprocal() {
+        Vec3 result = new Vec3(1f / x, 1f / y, 1f / z);
+        return result;
+    }
+
+    /**
+     * Copy the components to an array. The vector is unaffected.
+     *
+     * @return a new array with length=3
+     */
+    @Override
+    public float[] toArray() {
+        float[] result = new float[3];
+        result[0] = x;
+        result[1] = y;
+        result[2] = z;
+
+        return result;
     }
     // *************************************************************************
     // Object methods
