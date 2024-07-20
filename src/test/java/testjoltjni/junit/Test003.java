@@ -29,6 +29,7 @@ import com.github.stephengold.joltjni.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.ConstMassProperties;
 import com.github.stephengold.joltjni.EMotionQuality;
 import com.github.stephengold.joltjni.EMotionType;
+import com.github.stephengold.joltjni.EOverrideMassProperties;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemSingleThreaded;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
@@ -278,6 +279,8 @@ public class Test003 {
         Assert.assertEquals(EMotionQuality.Discrete, bcs.getMotionQuality());
         Assert.assertEquals(EMotionType.Dynamic, bcs.getMotionType());
         Assert.assertEquals(0, bcs.getObjectLayer());
+        Assert.assertEquals(EOverrideMassProperties.CalculateMassAndInertia,
+                bcs.getOverrideMassProperties());
         TestUtils.assertEquals(0f, 0f, 0f, bcs.getPosition(), 0f);
         Assert.assertEquals(0f, bcs.getRestitution(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, 1f, bcs.getRotation(), 0f);
@@ -326,6 +329,11 @@ public class Test003 {
 
         bcs.setObjectLayer(11);
         Assert.assertEquals(11, bcs.getObjectLayer());
+
+        bcs.setOverrideMassProperties(
+                EOverrideMassProperties.MassAndInertiaProvided);
+        Assert.assertEquals(EOverrideMassProperties.MassAndInertiaProvided,
+                bcs.getOverrideMassProperties());
 
         bcs.setPosition(new RVec3(0.12, 0.13, 0.14));
         TestUtils.assertEquals(0.12f, 0.13f, 0.14f, bcs.getPosition(), 0f);

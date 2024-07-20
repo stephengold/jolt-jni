@@ -111,6 +111,7 @@ public class Test001 {
                 = new BodyCreationSettings(floorShapeRef, floorLocation,
                         orientation, EMotionType.Static, objLayerNonMoving);
         Body floor = bodyInterface.createBody(floorBodySettings);
+        Assert.assertFalse(floor.ownsNativeObject());
         ConstBodyId floorId = floor.getId();
         Assert.assertFalse(floorId.isInvalid());
         bodyInterface.addBody(floorId, EActivation.DontActivate);
