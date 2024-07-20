@@ -1,5 +1,25 @@
 # release log for the jolt-jni project
 
+## Version 0.3.1 released on TBD
+
++ Bugfix:  memory leak in `MassProperties`
++ Added many methods.
++ Added classes and interfaces to the library:
+  + `BroadPhaseLayerInterface`
+  + `ConstBodyCreationSettings`
+  + `ConstBroadPhaseLayerInterface`
+  + `ConstMassProperties`
+  + `ConstObjectLayerPairFilter`
+  + `ConstObjectVsBroadPhaseLayerFilter`
+  + `EAllowedDofs`
+  + `EOverrideMassProperties`
+  + `Mat44`
+  + `Mat44Arg`
+  + `ObjectLayerPairFilter`
+  + `ObjectVsBroadPhaseLayerFilter`
+  + `UVec4`
+  + `UVec4Arg`
+
 ## Version 0.3.0 released on 16 July 2024
 
 + Added a `java.lang.ref.Cleaner` to automatically free native
