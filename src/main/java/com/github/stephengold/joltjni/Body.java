@@ -47,7 +47,8 @@ public class Body extends NonCopyable {
     /**
      * Apply the specified angular impulse to the body.
      *
-     * @param impulse the impulse vector (not null, unaffected)
+     * @param impulse the impulse vector (Newton.meter.seconds in system
+     * coordinates, not null, unaffected)
      */
     public void addAngularImpulse(Vec3Arg impulse) {
         long bodyVa = va();
@@ -60,7 +61,8 @@ public class Body extends NonCopyable {
     /**
      * Apply the specified force to the body's center of mass.
      *
-     * @param force the force vector (not null, unaffected)
+     * @param force the force vector (Newtons in system coordinates, not null,
+     * unaffected)
      */
     public void addForce(Vec3Arg force) {
         long bodyVa = va();
@@ -74,7 +76,8 @@ public class Body extends NonCopyable {
      * Apply the specified force at the specified location.
      *
      * @param force the force vector (not null, unaffected)
-     * @param location where to apply the force (not null, unaffected)
+     * @param location where to apply the force (Newtons in system coordinates
+     * not null, unaffected)
      */
     public void addForce(Vec3Arg force, RVec3Arg location) {
         long bodyVa = va();
@@ -90,7 +93,8 @@ public class Body extends NonCopyable {
     /**
      * Apply the specified impulse to the body's center of mass.
      *
-     * @param impulse the impulse vector (not null, unaffected)
+     * @param impulse the impulse vector (kilogram.meters per second in system
+     * coordinates, not null, unaffected)
      */
     public void addImpulse(Vec3Arg impulse) {
         long bodyVa = va();
@@ -103,7 +107,8 @@ public class Body extends NonCopyable {
     /**
      * Apply the specified impulse at the specified location.
      *
-     * @param impulse the impulse vector (not null, unaffected)
+     * @param impulse the impulse vector (kilogram.meters per second in system
+     * coordinates, not null, unaffected)
      * @param location where to apply the impulse (not null, unaffected)
      */
     public void addImpulse(Vec3Arg impulse, RVec3Arg location) {
@@ -120,7 +125,8 @@ public class Body extends NonCopyable {
     /**
      * Apply the specified torque to the body.
      *
-     * @param torque the torque vector (not null, unaffected)
+     * @param torque the torque vector (Newton.meters in system coordinates, not
+     * null, unaffected)
      */
     public void addTorque(Vec3Arg torque) {
         long bodyVa = va();
@@ -146,7 +152,7 @@ public class Body extends NonCopyable {
     /**
      * Return the net force acting on the body. The body is unaffected.
      *
-     * @return a new force vector (in physics-system coordinates)
+     * @return a new force vector (Newtons in system coordinates)
      */
     public Vec3 getAccumulatedForce() {
         long bodyVa = va();
@@ -161,7 +167,7 @@ public class Body extends NonCopyable {
     /**
      * Return the net torque acting on the body. The body is unaffected.
      *
-     * @return a new torque vector (in physics-system coordinates)
+     * @return a new torque vector (Newton.meters in system coordinates)
      */
     public Vec3 getAccumulatedTorque() {
         long bodyVa = va();
@@ -188,8 +194,7 @@ public class Body extends NonCopyable {
     /**
      * Return the body's angular velocity. The body is unaffected.
      *
-     * @return a new velocity vector (radians per second in physics-system
-     * coordinates
+     * @return a new velocity vector (radians per second in system coordinates)
      */
     public Vec3 getAngularVelocity() {
         long bodyVa = va();
@@ -205,8 +210,8 @@ public class Body extends NonCopyable {
      * Return the location of the body's center of mass (which might not
      * coincide with its origin). The body is unaffected.
      *
-     * @return a new location vector (in physics-system coordinates, all
-     * components finite)
+     * @return a new location vector (in system coordinates, all components
+     * finite)
      */
     public RVec3 getCenterOfMassPosition() {
         long bodyVa = va();
@@ -254,8 +259,7 @@ public class Body extends NonCopyable {
     /**
      * Return the body's linear velocity. The body is unaffected.
      *
-     * @return a new velocity vector (meters per second in physics-system
-     * coordinates)
+     * @return a new velocity vector (meters per second in system coordinates)
      */
     public Vec3 getLinearVelocity() {
         long bodyVa = va();
@@ -315,8 +319,8 @@ public class Body extends NonCopyable {
      * Return the location of the body's origin (which not coincide with its
      * center of mass). The body is unaffected.
      *
-     * @return a new location vector (in physics-system coordinates, all
-     * components finite)
+     * @return a new location vector (in system coordinates, all components
+     * finite)
      */
     public RVec3 getPosition() {
         long bodyVa = va();
@@ -348,10 +352,9 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Return the body's orientation relative to the physics-system axes. The
-     * body is unaffected.
+     * Return the body's orientation. The body is unaffected.
      *
-     * @return a new rotation quaternion (relative to the physics-system axes)
+     * @return a new rotation quaternion (relative to the system axes)
      */
     public Quat getRotation() {
         long bodyVa = va();
@@ -468,10 +471,10 @@ public class Body extends NonCopyable {
     /**
      * Reposition the body, assuming it's kinematic.
      *
-     * @param location the desired location (in physics-system coordinates, not
-     * null, unaffected)
-     * @param orientation the desired orientation (relative to the
-     * physics-system axes, not null, unaffected)
+     * @param location the desired location (in system coordinates, not null,
+     * unaffected)
+     * @param orientation the desired orientation (relative to the system axes,
+     * not null, unaffected)
      * @param deltaTime time until the desired position is reached (in seconds,
      * &gt;0)
      */
