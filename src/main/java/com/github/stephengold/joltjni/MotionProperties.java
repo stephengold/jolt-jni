@@ -275,24 +275,24 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Reposition the body, assuming it's kinematic.
      *
-     * @param location the desired location (in system coordinates, not null,
+     * @param offset the desired offset (from the current location, not null,
      * unaffected)
-     * @param orientation the desired orientation (relative to the system axes,
-     * not null, unaffected)
+     * @param rotation the desired rotation (relative to the current
+     * orientation, not null, unaffected)
      * @param deltaTime time until the desired position is reached (in seconds,
      * &gt;0)
      */
     public void moveKinematic(
-            RVec3Arg location, QuatArg orientation, float deltaTime) {
+            Vec3Arg offset, QuatArg rotation, float deltaTime) {
         long propertiesVa = va();
-        double xx = location.xx();
-        double yy = location.yy();
-        double zz = location.zz();
-        float qw = orientation.getW();
-        float qx = orientation.getX();
-        float qy = orientation.getY();
-        float qz = orientation.getZ();
-        moveKinematic(propertiesVa, xx, yy, zz, qx, qy, qz, qw, deltaTime);
+        float dx = offset.getX();
+        float dy = offset.getY();
+        float dz = offset.getZ();
+        float qw = rotation.getW();
+        float qx = rotation.getX();
+        float qy = rotation.getY();
+        float qz = rotation.getZ();
+        moveKinematic(propertiesVa, dx, dy, dz, qx, qy, qz, qw, deltaTime);
     }
 
     /**
@@ -492,7 +492,7 @@ public class MotionProperties extends JoltPhysicsObject {
     native private static int getNumVelocityStepsOverride(long propertiesVa);
 
     native private static void moveKinematic(long propertiesVa,
-            double xx, double yy, double zz,
+            float dx, float dy, float dz,
             float qx, float qy, float qz, float qw, float deltaTime);
 
     native private static void resetForce(long propertiesVa);

@@ -379,16 +379,16 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getN
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    moveKinematic
- * Signature: (JDDDFFFFF)V
+ * Signature: (JFFFFFFFF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_moveKinematic
-  (JNIEnv *, jclass, jlong propertiesVa, jdouble xx, jdouble yy, jdouble zz,
+  (JNIEnv *, jclass, jlong propertiesVa, jfloat dx, jfloat dy, jfloat dz,
   jfloat qx, jfloat qy, jfloat qz, jfloat qw, jfloat deltaTime) {
     MotionProperties * const pProperties
             = reinterpret_cast<MotionProperties *> (propertiesVa);
-    const RVec3 location(xx, yy, zz);
-    const Quat orientation(qx, qy, qz, qw);
-    pProperties->MoveKinematic(location, orientation, deltaTime);
+    const Vec3 offset(dx, dy, dz);
+    const Quat rotation(qx, qy, qz, qw);
+    pProperties->MoveKinematic(offset, rotation, deltaTime);
 }
 
 /*
