@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.ConstMassProperties;
 import com.github.stephengold.joltjni.EMotionQuality;
 import com.github.stephengold.joltjni.EMotionType;
 import com.github.stephengold.joltjni.JobSystem;
@@ -33,6 +34,8 @@ import com.github.stephengold.joltjni.JobSystemSingleThreaded;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
 import com.github.stephengold.joltjni.JobSystemWithBarrier;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.MassProperties;
+import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.NonCopyable;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
@@ -69,6 +72,7 @@ public class Test003 {
         doBodyCreationSettings();
         doJobSystemSingleThreaded();
         doJobSystemThreadPool();
+        doMassProperties();
         doTempAllocatorImpl();
         doTempAllocatorMalloc();
 
@@ -172,6 +176,18 @@ public class Test003 {
 
             TestUtils.testClose(bcs, shape);
         }
+    }
+
+    /**
+     * Test the MassProperties class.
+     */
+    private void doMassProperties() {
+        MassProperties props = new MassProperties();
+
+        testMpDefaults(props);
+        testMpSetters(props);
+
+        TestUtils.testClose(props);
     }
 
     /**
@@ -319,5 +335,31 @@ public class Test003 {
 
         bcs.setRotation(new Quat(0.6f, 0f, 0f, 0.8f));
         TestUtils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code MassPropertiess}.
+     *
+     * @param props the properties to test (not null, unaffected)
+     */
+    private static void testMpDefaults(ConstMassProperties props) {
+        Assert.assertTrue(props.hasAssignedNativeObject());
+        Assert.assertTrue(props.ownsNativeObject());
+
+        Assert.assertEquals(0f, props.getMass(), 0f);
+        Assert.assertTrue(Mat44.equals(props.getInertia(), Mat44.sZero()));
+    }
+
+    /**
+     * Test the setters of the specified {@code MassPropertiess}.
+     *
+     * @param props properties to test (not null, modified)
+     */
+    private static void testMpSetters(MassProperties props) {
+        props.setMass(2f);
+        Assert.assertEquals(2f, props.getMass(), 0f);
+
+        props.setInertia(Mat44.sIdentity());
+        Assert.assertTrue(Mat44.equals(props.getInertia(), Mat44.sIdentity()));
     }
 }
