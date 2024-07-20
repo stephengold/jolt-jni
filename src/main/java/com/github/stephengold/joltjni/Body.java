@@ -525,6 +525,20 @@ public class Body extends NonCopyable {
     }
 
     /**
+     * Alter the body's angular velocity within limits.
+     *
+     * @param omega the desired angular velocity (not null, unaffected,
+     * default=(0,0,0))
+     */
+    public void setAngularVelocityClamped(Vec3Arg omega) {
+        long bodyVa = va();
+        float wx = omega.getX();
+        float wy = omega.getY();
+        float wz = omega.getZ();
+        setAngularVelocityClamped(bodyVa, wx, wy, wz);
+    }
+
+    /**
      * Alter the body's friction ratio.
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
@@ -547,6 +561,20 @@ public class Body extends NonCopyable {
         float vy = velocity.getY();
         float vz = velocity.getZ();
         setLinearVelocity(bodyVa, vx, vy, vz);
+    }
+
+    /**
+     * Alter the body's linear velocity within limits.
+     *
+     * @param velocity the desired linear velocity (in meters/second, not null,
+     * unaffected, default=(0,0,0))
+     */
+    public void setLinearVelocityClamped(Vec3Arg velocity) {
+        long bodyVa = va();
+        float vx = velocity.getX();
+        float vy = velocity.getY();
+        float vz = velocity.getZ();
+        setLinearVelocityClamped(bodyVa, vx, vy, vz);
     }
 
     /**
@@ -687,9 +715,15 @@ public class Body extends NonCopyable {
     native private static void setAngularVelocity(
             long bodyVa, float wx, float wy, float wz);
 
+    native private static void setAngularVelocityClamped(
+            long bodyVa, float wx, float wy, float wz);
+
     native private static void setFriction(long bodyVa, float friction);
 
     native private static void setLinearVelocity(
+            long bodyVa, float vx, float vy, float vz);
+
+    native private static void setLinearVelocityClamped(
             long bodyVa, float vx, float vy, float vz);
 
     native private static void setMotionType(long bodyVa, int ordinal);

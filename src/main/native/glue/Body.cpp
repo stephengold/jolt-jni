@@ -653,6 +653,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setAngularVeloci
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    setAngularVelocityClamped
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setAngularVelocityClamped
+  (JNIEnv *, jclass, jlong bodyVa, jfloat wx, jfloat wy, jfloat wz) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    Vec3 omega(wx, wy, wz);
+    pBody->SetAngularVelocityClamped(omega);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    setFriction
  * Signature: (JF)V
  */
@@ -673,6 +685,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setLinearVelocit
     Vec3 velocity(vx, vy, vz);
     pBody->SetLinearVelocity(velocity);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    setLinearVelocityClamped
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setLinearVelocityClamped
+  (JNIEnv *, jclass, jlong bodyVa, jfloat vx, jfloat vy, jfloat vz) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    Vec3 velocity(vx, vy, vz);
+    pBody->SetLinearVelocityClamped(velocity);
+}
+
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
