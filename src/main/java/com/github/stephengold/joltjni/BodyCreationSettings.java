@@ -680,8 +680,8 @@ public class BodyCreationSettings
     native private static void setAngularDamping(
             long bodySettingsVa, float damping);
 
-    native private static void setAngularVelocity(long bodySettingsVa,
-            float wx, float wy, float wz);
+    native private static void setAngularVelocity(
+            long bodySettingsVa, float wx, float wy, float wz);
 
     native private static void setFriction(long bodySettingsVa, float friction);
 
@@ -715,8 +715,8 @@ public class BodyCreationSettings
     native private static void setRestitution(
             long bodySettingsVa, float restitution);
 
-    native private static void setRotation(long bodySettingsVa,
-            float qx, float qy, float qz, float qw);
+    native private static void setRotation(
+            long bodySettingsVa, float qx, float qy, float qz, float qw);
 
     native private static void setShape(long bodySettingsVa, long shapeVa);
 
