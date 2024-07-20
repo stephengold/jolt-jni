@@ -27,6 +27,7 @@ SOFTWARE.
 #include <Jolt/Physics/Body/BodyInterface.h>
 #include <Jolt/Physics/Collision/Shape/Shape.h>
 #include "auto/com_github_stephengold_joltjni_BodyInterface.h"
+#include "glue.h"
 
 using namespace JPH;
 
@@ -469,6 +470,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getSha
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
     ShapeRefC * const pResult = new ShapeRefC();
+    TRACE_NEW("ShapeRefC", pResult)
     *pResult = pInterface->GetShape(*pBodyId);
     return reinterpret_cast<jlong> (pResult);
 }
