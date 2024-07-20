@@ -31,8 +31,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     // constructors
 
     /**
-     * Instantiate a box with min=(FLT_MAX,FLT_MAX,FLT_MAX) and
-     * max=(-FLT_MAX,-FLT_MAX,-FLT_MAX).
+     * Instantiate an invalid box.
      */
     public AaBox() {
         long boxVa = createAaBox();
