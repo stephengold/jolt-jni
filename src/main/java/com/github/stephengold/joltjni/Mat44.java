@@ -65,6 +65,21 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     // new methods exposed
 
     /**
+     * Test 2 matrices for equality.
+     *
+     * @param m1 the first matrix (not null, unaffected)
+     * @param m2 the 2nd matrix (not null, unaffected)
+     * @return true if equal, otherwise false
+     */
+    public static boolean equals(Mat44Arg m1, Mat44Arg m2) {
+        long m1va = m1.va();
+        long m2va = m2.va();
+        boolean result = equals(m1va, m2va);
+
+        return result;
+    }
+
+    /**
      * Alter the specified element.
      *
      * @param row the zero-origin index of the row (&ge;0, &lt;4)
@@ -74,6 +89,18 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     public void setElement(int row, int column, float value) {
         long matrixVa = va();
         setElement(matrixVa, row, column, value);
+    }
+
+    /**
+     * Create an identity matrix.
+     *
+     * @return a new instance
+     */
+    public static Mat44 sIdentity() {
+        long matrixVa = createIdentity();
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
     }
 
     /**
@@ -88,6 +115,18 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         float ry = rotation.getY();
         float rz = rotation.getZ();
         long matrixVa = sRotation(rx, ry, rz, rw);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
+     * Create an all-zero matrix.
+     *
+     * @return a new instance
+     */
+    public static Mat44 sZero() {
+        long matrixVa = createZero();
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
@@ -212,7 +251,13 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static long createFromColumnMajor(float[] elements);
 
+    native private static long createIdentity();
+
     native private static long createUninitialized();
+
+    native private static long createZero();
+
+    native private static boolean equals(long m1va, long m2va);
 
     native private static void free(long matrixVa);
 

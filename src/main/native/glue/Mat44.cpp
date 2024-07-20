@@ -52,6 +52,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createFromColu
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    createIdentity
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createIdentity
+  (JNIEnv *, jclass) {
+    Mat44 * const pResult = new Mat44(Mat44::sIdentity());
+    TRACE_NEW("Mat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    createUninitialized
  * Signature: ()J
  */
@@ -60,6 +72,32 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createUninitia
     Mat44 * const pResult = new Mat44();
     TRACE_NEW("Mat44", pResult)
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    createZero
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createZero
+  (JNIEnv *, jclass) {
+    Mat44 * const pResult = new Mat44(Mat44::sZero());
+    TRACE_NEW("Mat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    equals
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Mat44_equals
+  (JNIEnv *, jclass, jlong m1va, jlong m2va) {
+    const Mat44 * const pM1 = reinterpret_cast<Mat44 *> (m1va);
+    const Mat44 * const pM2 = reinterpret_cast<Mat44 *> (m2va);
+    bool result = (*pM1 == *pM2);
+
+    return result;
 }
 
 /*
