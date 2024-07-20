@@ -99,29 +99,6 @@ final public class Vec3 implements Vec3Arg {
     // new methods exposed
 
     /**
-     * Return the specified component. The vector is unaffected.
-     *
-     * @param index 0, 1, or 2
-     * @return the X component if index=0, the Y component if index=1, or the Z
-     * component if index=2
-     * @throws IllegalArgumentException if index is not 0, 1, or 2
-     */
-    @Override
-    public float get(int index) {
-        switch (index) {
-            case 0:
-                return x;
-            case 1:
-                return y;
-            case 2:
-                return z;
-            default:
-                throw new IllegalArgumentException(
-                        "index must be either 0, 1 or 2");
-        }
-    }
-
-    /**
      * Return the component-wise product of the specified vectors.
      *
      * @param v1 the first vector (not null, unaffected)
@@ -240,6 +217,29 @@ final public class Vec3 implements Vec3Arg {
     // Vec3Arg methods
 
     /**
+     * Return the specified component. The vector is unaffected.
+     *
+     * @param index 0, 1, or 2
+     * @return the X component if index=0, the Y component if index=1, or the Z
+     * component if index=2
+     * @throws IllegalArgumentException if index is not 0, 1, or 2
+     */
+    @Override
+    public float get(int index) {
+        switch (index) {
+            case 0:
+                return x;
+            case 1:
+                return y;
+            case 2:
+                return z;
+            default:
+                throw new IllegalArgumentException(
+                        "index must be either 0, 1 or 2");
+        }
+    }
+
+    /**
      * Return the first (X) component in single precision. The vector is
      * unaffected.
      *
@@ -301,18 +301,6 @@ final public class Vec3 implements Vec3Arg {
     // Object methods
 
     /**
-     * Return a hash code. If two vectors have identical values, they will have
-     * the same hash code. The vector is unaffected.
-     *
-     * @return a 32-bit value for use in hashing
-     */
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(x, y, z);
-        return result;
-    }
-
-    /**
      * Tests for exact equality with the argument, distinguishing -0 from 0. If
      * {@code other} is null, false is returned. Either way, the current
      * instance is unaffected.
@@ -339,6 +327,18 @@ final public class Vec3 implements Vec3Arg {
         } else {
             return Float.compare(z, otherVector.getZ()) == 0;
         }
+    }
+
+    /**
+     * Return a hash code. If two vectors have identical values, they will have
+     * the same hash code. The vector is unaffected.
+     *
+     * @return a 32-bit value for use in hashing
+     */
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(x, y, z);
+        return result;
     }
 
     /**
