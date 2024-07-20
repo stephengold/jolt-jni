@@ -122,7 +122,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3__J
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    multiply3x3
- * Signature: (J[F)J
+ * Signature: (J[F)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3__J_3F
   (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray array) {
