@@ -749,8 +749,8 @@ public class BodyCreationSettings
     native private static void setLinearDamping(
             long bodySettingsVa, float damping);
 
-    native private static void setLinearVelocity(long bodySettingsVa,
-            float vx, float vy, float vz);
+    native private static void setLinearVelocity(
+            long bodySettingsVa, float vx, float vy, float vz);
 
     native private static void setMassPropertiesOverride(
             long bodySettingsVa, long propertiesVa);
