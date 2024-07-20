@@ -81,6 +81,33 @@ final public class Quat implements QuatArg {
     // new methods exposed
 
     /**
+     * Return the product of the specified quaternions.
+     *
+     * @param lhs the left factor (not null, unaffected)
+     * @param rhs the right factor (not null, unaffected)
+     * @return a new quaternion
+     */
+    public static Quat multiply(QuatArg lhs, QuatArg rhs) {
+        float lw = lhs.getW();
+        float lx = lhs.getX();
+        float ly = lhs.getY();
+        float lz = lhs.getZ();
+
+        float rw = rhs.getW();
+        float rx = rhs.getX();
+        float ry = rhs.getY();
+        float rz = rhs.getZ();
+
+        float w = lw * rw - lx * rx - ly * ry - lz * rz;
+        float x = lw * rx + lx * rw + ly * rz - lz * ry;
+        float y = lw * ry - lx * rz + ly * rw + lz * rx;
+        float z = lw * rz + lx * ry - ly * rx + lz * rw;
+
+        Quat result = new Quat(x, y, z, w);
+        return result;
+    }
+
+    /**
      * Set all 4 components to specified values.
      *
      * @param x the desired X component
