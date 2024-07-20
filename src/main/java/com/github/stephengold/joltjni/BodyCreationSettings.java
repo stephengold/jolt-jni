@@ -190,6 +190,18 @@ public class BodyCreationSettings
     }
 
     /**
+     * Alter the mass-properties override. (native field:
+     * mMassPropertiesOverride)
+     *
+     * @param properties the desired properties (not null, unaffected)
+     */
+    public void setMassPropertiesOverride(MassProperties properties) {
+        long bodySettingsVa = va();
+        long propertiesVa = properties.va();
+        setMassPropertiesOverride(bodySettingsVa, propertiesVa);
+    }
+
+    /**
      * Alter the maximum angular speed. (native field: mMaxAngularVelocity)
      *
      * @param maxSpeed the desired maximum speed (in radians/second, &ge;0,
@@ -242,6 +254,18 @@ public class BodyCreationSettings
     public void setObjectLayer(int objLayer) {
         long bodySettingsVa = va();
         setObjectLayer(bodySettingsVa, objLayer);
+    }
+
+    /**
+     * Alter how the mass-properties override will be used. (native field:
+     * mOverrideMassProperties)
+     *
+     * @param setting an enum value (not null, default=CalculateMassAndInertia)
+     */
+    public void setOverrideMassProperties(EOverrideMassProperties setting) {
+        long bodySettingsVa = va();
+        int ordinal = setting.ordinal();
+        setOverrideMassProperties(bodySettingsVa, ordinal);
     }
 
     /**
@@ -449,6 +473,21 @@ public class BodyCreationSettings
     }
 
     /**
+     * Copy the mass-properties override. The settings are unaffected. (native
+     * field: mMassPropertiesOverride)
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public MassProperties getMassPropertiesOverride() {
+        long bodySettingsVa = va();
+        long propertiesVa = getMassPropertiesOverride(bodySettingsVa);
+        MassProperties result = new MassProperties(propertiesVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the maximum angular speed. The settings are unaffected. (native
      * field: mMaxAngularVelocity)
      *
@@ -517,6 +556,21 @@ public class BodyCreationSettings
         long bodySettingsVa = va();
         int result = getObjectLayer(bodySettingsVa);
 
+        return result;
+    }
+
+    /**
+     * Return how the mass-properties override will be used. (native field:
+     * mOverrideMassProperties)
+     *
+     * @return an enum value (not null)
+     */
+    @Override
+    public EOverrideMassProperties getOverrideMassProperties() {
+        long bodySettingsVa = va();
+        int ordinal = getOverrideMassProperties(bodySettingsVa);
+        EOverrideMassProperties result
+                = EOverrideMassProperties.values()[ordinal];
         return result;
     }
 
@@ -644,6 +698,8 @@ public class BodyCreationSettings
 
     native private static long getMassProperties(long bodySettingsVa);
 
+    native private static long getMassPropertiesOverride(long bodySettingsVa);
+
     native private static float getMaxAngularVelocity(long bodySettingsVa);
 
     native private static float getMaxLinearVelocity(long bodySettingsVa);
@@ -653,6 +709,8 @@ public class BodyCreationSettings
     native private static int getMotionType(long bodySettingsVa);
 
     native private static int getObjectLayer(long bodySettingsVa);
+
+    native private static int getOverrideMassProperties(long bodySettingsVa);
 
     native private static double getPositionX(long bodySettingsVa);
 
@@ -694,6 +752,9 @@ public class BodyCreationSettings
     native private static void setLinearVelocity(long bodySettingsVa,
             float vx, float vy, float vz);
 
+    native private static void setMassPropertiesOverride(
+            long bodySettingsVa, long propertiesVa);
+
     native private static void setMaxAngularVelocity(
             long bodySettingsVa, float maxSpeed);
 
@@ -708,6 +769,9 @@ public class BodyCreationSettings
 
     native private static void setObjectLayer(
             long bodySettingsVa, int objLayer);
+
+    native private static void setOverrideMassProperties(
+            long bodySettingsVa, int ordinal);
 
     native private static void setPosition(
             long bodySettingsVa, double locX, double locY, double locZ);

@@ -96,6 +96,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     MassProperties getMassProperties();
 
     /**
+     * Copy the mass-properties override. The settings are unaffected. (native
+     * field: mMassPropertiesOverride)
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    MassProperties getMassPropertiesOverride();
+
+    /**
      * Return the maximum angular speed. The settings are unaffected. (native
      * field: mMaxAngularVelocity)
      *
@@ -134,6 +142,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * @return the layer index (&ge;0, &lt;numObjectLayers)
      */
     int getObjectLayer();
+
+    /**
+     * Return how the mass-properties override will be used. (native field:
+     * mOverrideMassProperties)
+     *
+     * @return an enum value (not null)
+     */
+    EOverrideMassProperties getOverrideMassProperties();
 
     /**
      * Return the (initial) location. The settings are unaffected. (native

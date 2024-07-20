@@ -252,6 +252,21 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getMassPropertiesOverride
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getMassPropertiesOverride
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const MassProperties * const pResult
+            = new MassProperties(pSettings->mMassPropertiesOverride);
+    TRACE_NEW("MassProperties", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    getMaxAngularVelocity
  * Signature: (J)F
  */
@@ -312,6 +327,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     ObjectLayer result = pSettings->mObjectLayer;
+    return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getOverrideMassProperties
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getOverrideMassProperties
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const EOverrideMassProperties result = pSettings->mOverrideMassProperties;
     return (jint) result;
 }
 
@@ -531,6 +559,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setMassPropertiesOverride
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setMassPropertiesOverride
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong propertiesVa) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const MassProperties * const pProperties
+            = reinterpret_cast<MassProperties *> (propertiesVa);
+    pSettings->mMassPropertiesOverride = *pProperties;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    setMaxAngularVelocity
  * Signature: (JF)V
  */
@@ -589,6 +631,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
     BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     pSettings->mObjectLayer = objLayer;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setOverrideMassProperties
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setOverrideMassProperties
+  (JNIEnv *, jclass, jlong bodySettingsVa, jint ordinal) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    pSettings->mOverrideMassProperties = (EOverrideMassProperties) ordinal;
 }
 
 /*
