@@ -93,7 +93,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Return the angular damping coefficient.
      *
-     * @return the coefficient value
+     * @return the coefficient value (in units of 1/second, &ge;0, &le;1)
      */
     public float getAngularDamping() {
         long propertiesVa = va();
@@ -129,7 +129,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Return the angular velocity.
      *
-     * @return a new vector in physics-system coordinates
+     * @return a new velocity vector (radians per second in system coordinates)
      */
     public Vec3 getAngularVelocity() {
         long propertiesVa = va();
@@ -184,7 +184,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Return the linear damping coefficient.
      *
-     * @return the coefficient value
+     * @return the coefficient value (in units of 1/second, &ge;0, &le;1)
      */
     public float getLinearDamping() {
         long propertiesVa = va();
@@ -196,7 +196,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Return the linear velocity.
      *
-     * @return a new vector in physics-system coordinates
+     * @return a new velocity vector (distance per second in system coordinates)
      */
     public Vec3 getLinearVelocity() {
         long propertiesVa = va();
@@ -325,8 +325,8 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Directly alter the angular velocity.
      *
-     * @param omega the desired velocity (in physics-system coordinates, not
-     * null, unaffected, default=(0,0,0))
+     * @param omega the desired velocity (distance per second in system
+     * coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setAngularVelocity(Vec3Arg omega) {
         long propertiesVa = va();
@@ -391,8 +391,8 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Directly alter the linear velocity.
      *
-     * @param velocity the desired velocity (in physics-system coordinates, not
-     * null, unaffected, default=(0,0,0))
+     * @param velocity the desired velocity (distance per second in system
+     * coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setLinearVelocity(Vec3Arg velocity) {
         long propertiesVa = va();
