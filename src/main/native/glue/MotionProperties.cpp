@@ -26,8 +26,113 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Body/MotionProperties.h>
 #include "auto/com_github_stephengold_joltjni_MotionProperties.h"
+#include "glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getAccumulatedForceX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAccumulatedForceX
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetAccumulatedForce().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getAccumulatedForceY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAccumulatedForceY
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetAccumulatedForce().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getAccumulatedForceZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAccumulatedForceZ
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetAccumulatedForce().GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getAccumulatedTorqueX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAccumulatedTorqueX
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetAccumulatedTorque().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getAccumulatedTorqueY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAccumulatedTorqueY
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetAccumulatedTorque().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getAccumulatedTorqueZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAccumulatedTorqueZ
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetAccumulatedTorque().GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getAllowedDofs
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAllowedDofs
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const EAllowedDOFs result = pProperties->GetAllowedDOFs();
+    return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getAllowSleeping
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAllowSleeping
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const bool result = pProperties->GetAllowSleeping();
+    return result;
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
@@ -100,6 +205,58 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getInverseInertiaXX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInverseInertiaXX
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetInverseInertiaDiagonal().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getInverseInertiaYY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInverseInertiaYY
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetInverseInertiaDiagonal().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getInverseInertiaZZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInverseInertiaZZ
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetInverseInertiaDiagonal().GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getInverseMass
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInverseMass
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetInverseMass();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    getLinearDamping
  * Signature: (J)F
  */
@@ -156,6 +313,32 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getMaxAngularVelocity
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getMaxAngularVelocity
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetMaxAngularVelocity();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getMaxLinearVelocity
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getMaxLinearVelocity
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetMaxLinearVelocity();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    getMotionQuality
  * Signature: (J)I
  */
@@ -165,6 +348,71 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getM
             = reinterpret_cast<MotionProperties *> (propertiesVa);
     const EMotionQuality result = pProperties->GetMotionQuality();
     return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getNumPositionStepsOverride
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getNumPositionStepsOverride
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const uint result = pProperties->GetNumPositionStepsOverride();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getNumVelocityStepsOverride
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getNumVelocityStepsOverride
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const uint result = pProperties->GetNumVelocityStepsOverride();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    moveKinematic
+ * Signature: (JDDDFFFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_moveKinematic
+  (JNIEnv *, jclass, jlong propertiesVa, jdouble xx, jdouble yy, jdouble zz,
+  jfloat qx, jfloat qy, jfloat qz, jfloat qw, jfloat deltaTime) {
+    MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const RVec3 location(xx, yy, zz);
+    const Quat orientation(qx, qy, qz, qw);
+    pProperties->MoveKinematic(location, orientation, deltaTime);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    resetForce
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_resetForce
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    pProperties->ResetForce();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    resetTorque
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_resetTorque
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    pProperties->ResetTorque();
 }
 
 /*
@@ -202,6 +450,33 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setG
     MotionProperties * const pProperties
             = reinterpret_cast<MotionProperties *> (propertiesVa);
     pProperties->SetGravityFactor(factor);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    setInverseInertia
+ * Signature: (JFFFFFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setInverseInertia
+  (JNIEnv *, jclass, jlong propertiesVa, jfloat dx, jfloat dy, jfloat dz,
+  jfloat rx, jfloat ry, jfloat rz, jfloat rw) {
+    MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const Vec3 diagonal(dx, dy, dz);
+    const Quat rotation(rx, ry, rz, rw);
+    pProperties->SetInverseInertia(diagonal, rotation);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    setInverseMass
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setInverseMass
+  (JNIEnv *, jclass, jlong propertiesVa, jfloat inverseMass) {
+    MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    pProperties->SetInverseMass(inverseMass);
 }
 
 /*
