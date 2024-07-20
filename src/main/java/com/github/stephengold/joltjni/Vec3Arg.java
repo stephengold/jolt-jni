@@ -31,6 +31,16 @@ public interface Vec3Arg {
     // new methods exposed
 
     /**
+     * Return the specified component. The vector is unaffected.
+     *
+     * @param index 0, 1, or 2
+     * @return the X component if index=0, the Y component if index=1, or the Z
+     * component if index=2
+     * @throws IllegalArgumentException if index is not 0, 1, or 2
+     */
+    float get(int index);
+
+    /**
      * Return the first (X) component in single precision. The vector is
      * unaffected.
      *

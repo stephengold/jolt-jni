@@ -106,6 +106,7 @@ final public class Vec3 implements Vec3Arg {
      * component if index=2
      * @throws IllegalArgumentException if index is not 0, 1, or 2
      */
+    @Override
     public float get(int index) {
         switch (index) {
             case 0:
