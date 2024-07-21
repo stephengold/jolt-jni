@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.ConstMassProperties;
+import com.github.stephengold.joltjni.EAllowedDofs;
 import com.github.stephengold.joltjni.EMotionQuality;
 import com.github.stephengold.joltjni.EMotionType;
 import com.github.stephengold.joltjni.EOverrideMassProperties;
@@ -37,6 +38,7 @@ import com.github.stephengold.joltjni.JobSystemWithBarrier;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.Mat44;
+import com.github.stephengold.joltjni.MotionProperties;
 import com.github.stephengold.joltjni.NonCopyable;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
@@ -74,6 +76,7 @@ public class Test003 {
         doJobSystemSingleThreaded();
         doJobSystemThreadPool();
         doMassProperties();
+        doMotionProperties();
         doTempAllocatorImpl();
         doTempAllocatorMalloc();
 
@@ -231,6 +234,18 @@ public class Test003 {
     }
 
     /**
+     * Test the MotionProperties class.
+     */
+    private void doMotionProperties() {
+        MotionProperties props = new MotionProperties();
+
+        testMotionDefaults(props);
+        testMotionSetters(props);
+
+        TestUtils.testClose(props);
+    }
+
+    /**
      * Test the TempAllocatorImpl class.
      */
     private void doTempAllocatorImpl() {
@@ -343,6 +358,69 @@ public class Test003 {
 
         bcs.setRotation(new Quat(0.6f, 0f, 0f, 0.8f));
         TestUtils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code MotionPropertiess}.
+     *
+     * @param props the properties to test (not null, unaffected)
+     */
+    private static void testMotionDefaults(MotionProperties props) {
+        Assert.assertTrue(props.hasAssignedNativeObject());
+        Assert.assertTrue(props.ownsNativeObject());
+
+        TestUtils.assertEquals(0f, 0f, 0f, props.getAccumulatedForce(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, props.getAccumulatedTorque(), 0f);
+        Assert.assertEquals(EAllowedDofs.All, props.getAllowedDofs());
+        Assert.assertFalse(props.getAllowSleeping());
+        Assert.assertEquals(0f, props.getAngularDamping(), 0f);
+        TestUtils.assertEquals(-1, -1, -1, 0, props.getAngularDofsMask());
+        TestUtils.assertEquals(0f, 0f, 0f, props.getAngularVelocity(), 0f);
+        Assert.assertEquals(0f, props.getGravityFactor(), 0f);
+        Assert.assertEquals(0f, props.getInverseMassUnchecked(), 0f);
+        Assert.assertEquals(0f, props.getLinearDamping(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, props.getLinearVelocity(), 0f);
+        Assert.assertEquals(0f, props.getMaxAngularVelocity(), 0f);
+        Assert.assertEquals(0f, props.getMaxLinearVelocity(), 0f);
+        Assert.assertEquals(EMotionQuality.Discrete, props.getMotionQuality());
+        Assert.assertEquals(0, props.getNumPositionStepsOverride());
+        Assert.assertEquals(0, props.getNumVelocityStepsOverride());
+    }
+
+    /**
+     * Test the setters of the specified {@code MotionPropertiess}.
+     *
+     * @param props properties to test (not null, modified)
+     */
+    private static void testMotionSetters(MotionProperties props) {
+        props.setAngularDamping(0.01f);
+        Assert.assertEquals(0.01f, props.getAngularDamping(), 0f);
+
+        props.setMaxAngularVelocity(10f);
+        Assert.assertEquals(10f, props.getMaxAngularVelocity(), 0f);
+
+        props.setAngularVelocity(new Vec3(0.02f, 0.03f, 0.04f));
+        TestUtils.assertEquals(
+                0.02f, 0.03f, 0.04f, props.getAngularVelocity(), 0f);
+
+        props.setGravityFactor(0.05f);
+        Assert.assertEquals(0.05f, props.getGravityFactor(), 0f);
+
+        props.setLinearDamping(0.06f);
+        Assert.assertEquals(0.06f, props.getLinearDamping(), 0f);
+
+        props.setMaxLinearVelocity(11f);
+        Assert.assertEquals(11f, props.getMaxLinearVelocity(), 0f);
+
+        props.setLinearVelocity(new Vec3(0.07f, 0.08f, 0.09f));
+        TestUtils.assertEquals(
+                0.07f, 0.08f, 0.09f, props.getLinearVelocity(), 0f);
+
+        props.setNumPositionStepsOverride(12);
+        Assert.assertEquals(12, props.getNumPositionStepsOverride());
+
+        props.setNumVelocityStepsOverride(13);
+        Assert.assertEquals(13, props.getNumVelocityStepsOverride());
     }
 
     /**
