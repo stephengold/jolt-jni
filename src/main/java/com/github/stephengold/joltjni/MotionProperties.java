@@ -460,7 +460,7 @@ public class MotionProperties extends JoltPhysicsObject {
      * @param numIterations the desired count (&gt;0) or 0 to use the number
      * specified in the {@code PhysicsSettings}
      */
-    public void getNumVelocityStepsOverride(int numIterations) {
+    public void setNumVelocityStepsOverride(int numIterations) {
         long propertiesVa = va();
         setNumVelocityStepsOverride(propertiesVa, numIterations);
     }
