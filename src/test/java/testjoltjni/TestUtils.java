@@ -33,6 +33,7 @@ import com.github.stephengold.joltjni.ObjVsObjFilter;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.QuatArg;
 import com.github.stephengold.joltjni.RVec3Arg;
+import com.github.stephengold.joltjni.UVec4;
 import com.github.stephengold.joltjni.Vec3Arg;
 import com.jme3.system.NativeLibraryLoader;
 import java.io.File;
@@ -126,6 +127,22 @@ final public class TestUtils {
         Assert.assertEquals("x component", x, actual.getX(), tolerance);
         Assert.assertEquals("y component", y, actual.getY(), tolerance);
         Assert.assertEquals("z component", z, actual.getZ(), tolerance);
+    }
+
+    /**
+     * Verify that the specified vector has the expected component values.
+     *
+     * @param x the expected X component
+     * @param y the expected Y component
+     * @param z the expected Z component
+     * @param w the expected W component
+     * @param actual the vector to test (not null, unaffected)
+     */
+    public static void assertEquals(int x, int y, int z, int w, UVec4 actual) {
+        Assert.assertEquals("x component", x, actual.getX());
+        Assert.assertEquals("y component", y, actual.getY());
+        Assert.assertEquals("z component", z, actual.getZ());
+        Assert.assertEquals("w component", w, actual.getW());
     }
 
     /**
