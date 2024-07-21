@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.3.1 released on TBD
+## Version 0.3.1 released on 20 July 2024
 
 + Bugfix:  memory leak in `MassProperties`
 + Added many methods.
