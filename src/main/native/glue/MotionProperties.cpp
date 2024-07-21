@@ -282,6 +282,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getInverseMassUnchecked
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInverseMassUnchecked
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetInverseMassUnchecked();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    getLinearDamping
  * Signature: (J)F
  */

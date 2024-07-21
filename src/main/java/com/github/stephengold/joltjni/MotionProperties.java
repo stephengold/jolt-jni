@@ -196,6 +196,18 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
+     * Return the body's inverse mass.
+     *
+     * @return the value (&ge;0)
+     */
+    public float getInverseMassUnchecked() {
+        long propertiesVa = va();
+        float result = getInverseMassUnchecked(propertiesVa);
+
+        return result;
+    }
+
+    /**
      * Return the linear damping coefficient.
      *
      * @return the coefficient value (in units of 1/second, &ge;0, &le;1)
@@ -511,6 +523,8 @@ public class MotionProperties extends JoltPhysicsObject {
     native private static float getInverseInertiaZZ(long propertiesVa);
 
     native private static float getInverseMass(long propertiesVa);
+
+    native private static float getInverseMassUnchecked(long propertiesVa);
 
     native private static float getLinearDamping(long propertiesVa);
 
