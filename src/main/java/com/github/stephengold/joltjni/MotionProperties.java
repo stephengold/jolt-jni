@@ -168,6 +168,23 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
+     * Return the rotation that takes the inverse-inertia diagonal to local
+     * coordinates.
+     *
+     * @return a new instance
+     */
+    public Quat getInertiaRotation() {
+        long propertiesVa = va();
+        float qw = getInertiaRotationW(propertiesVa);
+        float qx = getInertiaRotationX(propertiesVa);
+        float qy = getInertiaRotationY(propertiesVa);
+        float qz = getInertiaRotationZ(propertiesVa);
+        Quat result = new Quat(qx, qy, qz, qw);
+
+        return result;
+    }
+
+    /**
      * Return the diagonal components of the inverse inertia matrix, assuming a
      * dynamic body.
      *
@@ -515,6 +532,14 @@ public class MotionProperties extends JoltPhysicsObject {
     native private static float getAngularVelocityZ(long propertiesVa);
 
     native private static float getGravityFactor(long propertiesVa);
+
+    native private static float getInertiaRotationW(long propertiesVa);
+
+    native private static float getInertiaRotationX(long propertiesVa);
+
+    native private static float getInertiaRotationY(long propertiesVa);
+
+    native private static float getInertiaRotationZ(long propertiesVa);
 
     native private static float getInverseInertiaXX(long propertiesVa);
 

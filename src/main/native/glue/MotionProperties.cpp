@@ -230,6 +230,59 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getInertiaRotationW
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInertiaRotationW
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetInertiaRotation().GetW();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getInertiaRotationX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInertiaRotationX
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetInertiaRotation().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getInertiaRotationY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInertiaRotationY
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetInertiaRotation().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getInertiaRotationZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInertiaRotationZ
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const float result = pProperties->GetInertiaRotation().GetZ();
+    return result;
+}
+
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    getInverseInertiaXX
  * Signature: (J)F
  */
