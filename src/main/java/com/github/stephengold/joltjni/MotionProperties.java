@@ -38,6 +38,12 @@ public class MotionProperties extends JoltPhysicsObject {
         setVirtualAddress(propertiesVa, () -> free(propertiesVa));
     }
 
+    /**
+     * Instantiate with the specified native object assigned.
+     *
+     * @param propertiesVa the virtual address of the native object to assign
+     * (not zero)
+     */
     MotionProperties(long propertiesVa) {
         super(propertiesVa);
     }
@@ -204,7 +210,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Return the linear velocity.
      *
-     * @return a new velocity vector (distance per second in system coordinates)
+     * @return a new velocity vector (meters per second in system coordinates)
      */
     public Vec3 getLinearVelocity() {
         long propertiesVa = va();
@@ -231,7 +237,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Return the maximum linear speed that the body can achieve.
      *
-     * @return the speed limit (distance per second)
+     * @return the speed limit (in meters per second)
      */
     public float getMaxLinearVelocity() {
         long propertiesVa = va();
@@ -323,7 +329,7 @@ public class MotionProperties extends JoltPhysicsObject {
      * Alter the angular damping.
      *
      * @param damping the desired coefficient value (in units of 1/second,
-     * &ge;0, &le;1, default=0.05)
+     * &ge;0, &le;1, default=0)
      */
     public void setAngularDamping(float damping) {
         long propertiesVa = va();
@@ -333,7 +339,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Directly alter the angular velocity.
      *
-     * @param omega the desired velocity (distance per second in system
+     * @param omega the desired velocity (meters per second in system
      * coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setAngularVelocity(Vec3Arg omega) {
@@ -347,7 +353,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Alter the gravity factor.
      *
-     * @param factor the desired factor (default=1)
+     * @param factor the desired factor (default=0)
      */
     public void setGravityFactor(float factor) {
         long propertiesVa = va();
@@ -389,7 +395,7 @@ public class MotionProperties extends JoltPhysicsObject {
      * Alter the linear damping.
      *
      * @param damping the desired value (in units of 1/second, &ge;0, &le;1,
-     * default=0.05)
+     * default=0)
      */
     public void setLinearDamping(float damping) {
         long propertiesVa = va();
@@ -399,7 +405,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Directly alter the linear velocity.
      *
-     * @param velocity the desired velocity (distance per second in system
+     * @param velocity the desired velocity (meters per second in system
      * coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setLinearVelocity(Vec3Arg velocity) {
@@ -414,6 +420,7 @@ public class MotionProperties extends JoltPhysicsObject {
      * Alter the mass properties.
      *
      * @param allowedDofs logical OR of values defined in {@code EAllowedDofs}
+     * (default=All)
      * @param massProperties the desired mass properties (not null, unaffected)
      */
     public void setMassProperties(
