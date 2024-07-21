@@ -528,6 +528,24 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setL
     Vec3 velocity(vx, vy, vz);
     pProperties->SetLinearVelocity(velocity);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    setMassProperties
+ * Signature: (JIJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setMassProperties
+  (JNIEnv *, jclass, jlong propertiesVa, jint allowedDofs, jlong massPropsVa) {
+    MotionProperties * const pMotionProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    const MassProperties * const pMassProperties
+            = reinterpret_cast<MassProperties *> (massPropsVa);
+    const EAllowedDOFs dofs = (EAllowedDOFs) allowedDofs;
+    pMotionProperties->SetMassProperties(dofs, *pMassProperties);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    setMaxAngularVelocity
  * Signature: (JF)V
  */
@@ -548,4 +566,28 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setM
     MotionProperties * const pMotionProperties
             = reinterpret_cast<MotionProperties *> (propertiesVa);
     pMotionProperties->SetMaxLinearVelocity(maxSpeed);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    setNumPositionStepsOverride
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setNumPositionStepsOverride
+  (JNIEnv *, jclass, jlong propertiesVa, jint numIterations) {
+    MotionProperties * const pMotionProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    pMotionProperties->SetNumPositionStepsOverride(numIterations);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    setNumVelocityStepsOverride
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setNumVelocityStepsOverride
+  (JNIEnv *, jclass, jlong propertiesVa, jint numIterations) {
+    MotionProperties * const pMotionProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    pMotionProperties->SetNumVelocityStepsOverride(numIterations);
 }
