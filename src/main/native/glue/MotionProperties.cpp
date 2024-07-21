@@ -32,6 +32,31 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    createMotionProperties
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotionProperties_createMotionProperties
+  (JNIEnv *, jclass) {
+    MotionProperties * const pProperties = new MotionProperties();
+    TRACE_NEW("MotionProperties", pProperties)
+    return reinterpret_cast<jlong> (pProperties);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_free
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    TRACE_DELETE("MotionProperties", pProperties)
+    delete pProperties;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    getAccumulatedForceX
  * Signature: (J)F
  */

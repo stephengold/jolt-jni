@@ -30,6 +30,14 @@ public class MotionProperties extends JoltPhysicsObject {
     // *************************************************************************
     // constructors
 
+    /**
+     * Instantiate default properties.
+     */
+    public MotionProperties() {
+        long propertiesVa = createMotionProperties();
+        setVirtualAddress(propertiesVa, () -> free(propertiesVa));
+    }
+
     MotionProperties(long propertiesVa) {
         super(propertiesVa);
     }
@@ -438,6 +446,10 @@ public class MotionProperties extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createMotionProperties();
+
+    native private static void free(long propertiesVa);
 
     native private static float getAccumulatedForceX(long propertiesVa);
 
