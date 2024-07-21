@@ -528,3 +528,24 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setL
     Vec3 velocity(vx, vy, vz);
     pProperties->SetLinearVelocity(velocity);
 }
+ * Method:    setMaxAngularVelocity
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setMaxAngularVelocity
+  (JNIEnv *, jclass, jlong propertiesVa, jfloat maxSpeed) {
+    MotionProperties * const pMotionProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    pMotionProperties->SetMaxAngularVelocity(maxSpeed);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    setMaxLinearVelocity
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setMaxLinearVelocity
+  (JNIEnv *, jclass, jlong propertiesVa, jfloat maxSpeed) {
+    MotionProperties * const pMotionProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    pMotionProperties->SetMaxLinearVelocity(maxSpeed);
+}

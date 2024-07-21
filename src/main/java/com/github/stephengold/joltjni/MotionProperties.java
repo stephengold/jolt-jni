@@ -424,6 +424,26 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
+     * Return the maximum angular speed that the body can achieve.
+     *
+     * @param maxSpeed the speed limit (in radians per second, default=0)
+     */
+    public void setMaxAngularVelocity(float maxSpeed) {
+        long propertiesVa = va();
+        setMaxAngularVelocity(propertiesVa, maxSpeed);
+    }
+
+    /**
+     * Return the maximum linear speed that the body can achieve.
+     *
+     * @param maxSpeed the speed limit (in meters per second, default=0)
+     */
+    public void setMaxLinearVelocity(float maxSpeed) {
+        long propertiesVa = va();
+        setMaxLinearVelocity(propertiesVa, maxSpeed);
+    }
+
+    /**
      * Alter the number of position iterations to use in the solver
      *
      * @param numIterations the desired count (&gt;0) or 0 to use the number
@@ -534,6 +554,12 @@ public class MotionProperties extends JoltPhysicsObject {
 
     native private static void setMassProperties(
             long propertiesVa, int allowedDofs, long massPropsVa);
+
+    native private static void setMaxAngularVelocity(
+            long propertiesVa, float maxSpeed);
+
+    native private static void setMaxLinearVelocity(
+            long propertiesVa, float maxSpeed);
 
     native private static void setNumPositionStepsOverride(
             long propertiesVa, int numIterations);
