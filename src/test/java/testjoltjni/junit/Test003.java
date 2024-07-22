@@ -183,18 +183,6 @@ public class Test003 {
     }
 
     /**
-     * Test the MassProperties class.
-     */
-    private void doMassProperties() {
-        MassProperties props = new MassProperties();
-
-        testMpDefaults(props);
-        testMpSetters(props);
-
-        TestUtils.testClose(props);
-    }
-
-    /**
      * Test the JobSystemSingleThreaded class.
      */
     private void doJobSystemSingleThreaded() {
@@ -231,6 +219,18 @@ public class Test003 {
         Assert.assertEquals(4, jobSystem.getMaxConcurrency());
 
         TestUtils.testClose(jobSystem);
+    }
+
+    /**
+     * Test the MassProperties class.
+     */
+    private void doMassProperties() {
+        MassProperties props = new MassProperties();
+
+        testMpDefaults(props);
+        testMpSetters(props);
+
+        TestUtils.testClose(props);
     }
 
     /**
