@@ -126,7 +126,7 @@ public class Test004 {
      *
      * @param physicsSystem the settings to test (not null, unaffected)
      */
-    private void testGettersAndDefaults(PhysicsSystem physicsSystem) {
+    private static void testGettersAndDefaults(PhysicsSystem physicsSystem) {
         Assert.assertNotNull(physicsSystem);
         Assert.assertTrue(physicsSystem.hasAssignedNativeObject());
         Assert.assertNotEquals(0L, physicsSystem.va());

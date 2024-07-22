@@ -88,7 +88,7 @@ public class Test003 {
     /**
      * Test the AaBox class.
      */
-    private void doAaBox() {
+    private static void doAaBox() {
         {
             AaBox box = new AaBox();
 
@@ -145,7 +145,7 @@ public class Test003 {
     /**
      * Test the BodyCreationSettings class.
      */
-    private void doBodyCreationSettings() {
+    private static void doBodyCreationSettings() {
         {
             BodyCreationSettings bcs = new BodyCreationSettings();
 
@@ -185,7 +185,7 @@ public class Test003 {
     /**
      * Test the JobSystemSingleThreaded class.
      */
-    private void doJobSystemSingleThreaded() {
+    private static void doJobSystemSingleThreaded() {
         JobSystem jobSystem
                 = new JobSystemSingleThreaded(Jolt.cMaxPhysicsJobs);
 
@@ -201,7 +201,7 @@ public class Test003 {
     /**
      * Test the JobSystemThreadPool class.
      */
-    private void doJobSystemThreadPool() {
+    private static void doJobSystemThreadPool() {
         JobSystemThreadPool jobSystem = new JobSystemThreadPool(
                 Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers);
 
@@ -224,7 +224,7 @@ public class Test003 {
     /**
      * Test the MassProperties class.
      */
-    private void doMassProperties() {
+    private static void doMassProperties() {
         MassProperties props = new MassProperties();
 
         testMpDefaults(props);
@@ -236,7 +236,7 @@ public class Test003 {
     /**
      * Test the MotionProperties class.
      */
-    private void doMotionProperties() {
+    private static void doMotionProperties() {
         MotionProperties props = new MotionProperties();
 
         testMotionDefaults(props);
@@ -248,7 +248,7 @@ public class Test003 {
     /**
      * Test the TempAllocatorImpl class.
      */
-    private void doTempAllocatorImpl() {
+    private static void doTempAllocatorImpl() {
         int numBytes = 1 << 8;
         TempAllocator tempAllocator = new TempAllocatorImpl(numBytes);
 
@@ -262,7 +262,7 @@ public class Test003 {
     /**
      * Test the TempAllocatorMalloc class.
      */
-    private void doTempAllocatorMalloc() {
+    private static void doTempAllocatorMalloc() {
         TempAllocator tempAllocator = new TempAllocatorMalloc();
 
         Assert.assertTrue(tempAllocator.hasAssignedNativeObject());
