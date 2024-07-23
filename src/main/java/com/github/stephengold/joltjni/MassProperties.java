@@ -175,6 +175,21 @@ final public class MassProperties
         return result;
     }
     // *************************************************************************
+    // Object methods
+
+    /**
+     * Return a string representation of the properties object, which is
+     * unaffected.
+     *
+     * @return the string representation (not null, not empty)
+     */
+    @Override
+    public String toString() {
+        String result = "MassProperties(mass=" + getMass()
+                + " inertia=" + getInertia() + ")";
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createMassProperties();
