@@ -226,6 +226,22 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getUserData
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getWorldSpaceBounds
+ * Signature: (JJFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getWorldSpaceBounds
+  (JNIEnv *, jclass, jlong shapeVa, jlong matrixVa, jfloat sx, jfloat sy, jfloat sz) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    const Vec3 scale(sx, sy, sz);
+    AABox * const pResult = new AABox();
+    TRACE_NEW("AABox", pResult)
+    *pResult = pShape->GetWorldSpaceBounds(*pMatrix, scale);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    mustBeStatic
  * Signature: (J)Z
  */
