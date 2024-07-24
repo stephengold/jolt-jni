@@ -42,7 +42,7 @@ public class CylinderShape extends ConvexShape {
     }
 
     /**
-     * Instantiate a shape with the specified radius.
+     * Instantiate a shape with the specified dimensions.
      *
      * @param halfHeight half the desired height
      * @param radius the desired radius

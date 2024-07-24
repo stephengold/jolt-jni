@@ -47,7 +47,7 @@ public class BodyCreationSettings
      * @param loc the desired location (not null, unaffected)
      * @param orient the desired orientation (not null, unaffected)
      * @param motionType the desired motion type (not null)
-     * @param objLayer the ID of the desired object layer
+     * @param objLayer the ID of the desired object layer (&ge;0)
      */
     public BodyCreationSettings(ConstShape shape, RVec3Arg loc, QuatArg orient,
             EMotionType motionType, int objLayer) {

@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * The interface to a {@code PhysicsSystem} that's used to create, add, modify,
+ * An interface to a {@code PhysicsSystem} that's used to create, add, modify,
  * query, remove, and delete bodies.
  *
  * @author Stephen Gold sgold@sonic.net
