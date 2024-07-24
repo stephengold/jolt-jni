@@ -58,7 +58,7 @@ public class PhysicsSystem extends NonCopyable {
         setVirtualAddress(systemVa, true);
 
         long bodyInterfaceVa = getBodyInterface(systemVa);
-        this.bodyInterface = new BodyInterface(bodyInterfaceVa);
+        this.bodyInterface = new BodyInterface(this, bodyInterfaceVa);
     }
     // *************************************************************************
     // new methods exposed

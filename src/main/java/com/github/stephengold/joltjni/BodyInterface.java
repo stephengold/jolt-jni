@@ -29,15 +29,25 @@ package com.github.stephengold.joltjni;
  */
 public class BodyInterface extends NonCopyable {
     // *************************************************************************
+    // fields
+
+    /**
+     * prevent premature garbage collection of the underlying
+     * {@code PhysicsSystem}
+     */
+    final private PhysicsSystem system;
+    // *************************************************************************
     // constructors
 
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
+     * @param system the underlying {@code PhysicsSystem} (not null)
      * @param bodyInterfaceVa the virtual address of the native object to assign
      * (not zero)
      */
-    BodyInterface(long bodyInterfaceVa) {
+    BodyInterface(PhysicsSystem system, long bodyInterfaceVa) {
+        this.system = system;
         setVirtualAddress(bodyInterfaceVa, null);
     }
     // *************************************************************************
