@@ -48,15 +48,27 @@ public class BoxShape extends ConvexShape {
      * all components &ge;0, unaffected)
      */
     public BoxShape(Vec3Arg halfExtents) {
+        this(halfExtents, PhysicsSettings.cDefaultConvexRadius);
+    }
+
+    /**
+     * Instantiate a shape with the specified half extents and convex radius.
+     *
+     * @param halfExtents the desired half extents on each local axis (not null,
+     * all components &ge;0, unaffected)
+     * @param convexRadius the desired convex radius (default=0.05)
+     */
+    public BoxShape(Vec3Arg halfExtents, float convexRadius) {
         float xHalfExtent = halfExtents.getX();
         float yHalfExtent = halfExtents.getY();
         float zHalfExtent = halfExtents.getZ();
-        long shapeVa = createBoxShape(xHalfExtent, yHalfExtent, zHalfExtent);
+        long shapeVa = createBoxShape(
+                xHalfExtent, yHalfExtent, zHalfExtent, convexRadius);
         setVirtualAddress(shapeVa, null); // not the owner due to ref counting
     }
     // *************************************************************************
     // native private methods
 
-    native private static long createBoxShape(
-            float xHalfExtent, float yHalfExtent, float zHalfExtent);
+    native private static long createBoxShape(float xHalfExtent,
+            float yHalfExtent, float zHalfExtent, float convexRadius);
 }

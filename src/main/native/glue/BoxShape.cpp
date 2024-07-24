@@ -33,12 +33,13 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_BoxShape
  * Method:    createBoxShape
- * Signature: (FFF)J
+ * Signature: (FFFF)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShape_createBoxShape
-  (JNIEnv *, jclass, jfloat xHalfExtent, jfloat yHalfExtent, jfloat zHalfExtent) {
-    Vec3 halfExtents(xHalfExtent, yHalfExtent, zHalfExtent);
-    const BoxShape * pResult = new BoxShape(halfExtents);
+  (JNIEnv *, jclass, jfloat xHalfExtent, jfloat yHalfExtent, jfloat zHalfExtent,
+  jfloat convexRadius) {
+    const Vec3 halfExtents(xHalfExtent, yHalfExtent, zHalfExtent);
+    BoxShape * const pResult = new BoxShape(halfExtents, convexRadius);
     TRACE_NEW("BoxShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
