@@ -48,12 +48,23 @@ public class CylinderShape extends ConvexShape {
      * @param radius the desired radius
      */
     public CylinderShape(float halfHeight, float radius) {
-        long shapeVa = createCylinderShape(halfHeight, radius);
+        this(halfHeight, radius, PhysicsSettings.cDefaultConvexRadius);
+    }
+
+    /**
+     * Instantiate a shape with the specified dimensions and convex radius.
+     *
+     * @param halfHeight half the desired height
+     * @param radius the desired radius
+     * @param convexRadius the desired convex radius (default=0.05)
+     */
+    public CylinderShape(float halfHeight, float radius, float convexRadius) {
+        long shapeVa = createCylinderShape(halfHeight, radius, convexRadius);
         setVirtualAddress(shapeVa, null); // not the owner due to ref counting
     }
     // *************************************************************************
     // native private methods
 
     native private static long createCylinderShape(
-            float halfHeight, float radius);
+            float halfHeight, float radius, float convexRadius);
 }

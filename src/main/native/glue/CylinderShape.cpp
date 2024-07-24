@@ -33,11 +33,12 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_CylinderShape
  * Method:    createCylinderShape
- * Signature: (FF)J
+ * Signature: (FFF)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShape_createCylinderShape
-  (JNIEnv *, jclass, jfloat halfHeight, jfloat radius) {
-    CylinderShape * const pResult = new CylinderShape(halfHeight, radius);
+  (JNIEnv *, jclass, jfloat halfHeight, jfloat radius, jfloat convexRadius) {
+    CylinderShape * const pResult
+            = new CylinderShape(halfHeight, radius, convexRadius);
     TRACE_NEW("CylinderShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
