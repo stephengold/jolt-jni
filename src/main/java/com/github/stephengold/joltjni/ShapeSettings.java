@@ -113,6 +113,9 @@ abstract public class ShapeSettings
             case Sphere:
                 result = new SphereShapeSettings(settingsVa);
                 break;
+            case StaticCompound:
+                result = new StaticCompoundShapeSettings(settingsVa);
+                break;
             case Triangle:
                 result = new TriangleShapeSettings(settingsVa);
                 break;
