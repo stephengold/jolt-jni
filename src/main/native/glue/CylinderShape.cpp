@@ -55,3 +55,29 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CylinderShape_getCo
     const float result = pShape->GetConvexRadius();
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_CylinderShape
+ * Method:    getHalfHeight
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CylinderShape_getHalfHeight
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const CylinderShape * const pShape
+            = reinterpret_cast<CylinderShape *> (shapeVa);
+    const float result = pShape->GetHalfHeight();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CylinderShape
+ * Method:    getRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CylinderShape_getRadius
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const CylinderShape * const pShape
+            = reinterpret_cast<CylinderShape *> (shapeVa);
+    const float result = pShape->GetRadius();
+    return result;
+}

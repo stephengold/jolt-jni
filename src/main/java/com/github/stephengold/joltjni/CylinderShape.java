@@ -76,6 +76,30 @@ public class CylinderShape extends ConvexShape {
 
         return result;
     }
+
+    /**
+     * Return the half height. The shape is unaffected.
+     *
+     * @return 1/2 of the height (&ge;0)
+     */
+    public float getHalfHeight() {
+        long shapeVa = va();
+        float result = getHalfHeight(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Return the radius. The shape is unaffected.
+     *
+     * @return the radius (&ge;0)
+     */
+    public float getRadius() {
+        long shapeVa = va();
+        float result = getRadius(shapeVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -83,4 +107,8 @@ public class CylinderShape extends ConvexShape {
             float halfHeight, float radius, float convexRadius);
 
     native private static float getConvexRadius(long shapeVa);
+
+    native private static float getHalfHeight(long shapeVa);
+
+    native private static float getRadius(long shapeVa);
 }
