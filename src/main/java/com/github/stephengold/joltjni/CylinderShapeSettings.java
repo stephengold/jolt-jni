@@ -53,8 +53,36 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
         setSubType(EShapeSubType.Cylinder);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the convex radius.
+     *
+     * @return the convex radius (&ge;0)
+     */
+    public float getConvexRadius() {
+        long settingsVa = va();
+        float result = getConvexRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Alter the convex radius.
+     *
+     * @param radius the desired convex radius (&ge;0)
+     */
+    public void setConvexRadius(float radius) {
+        long settingsVa = va();
+        setConvexRadius(settingsVa, radius);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createCylinderShapeSettings(
             float halfHeight, float radius);
+
+    native private static float getConvexRadius(long settingsVa);
+
+    native private static void setConvexRadius(long settingsVa, float radius);
 }

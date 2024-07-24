@@ -42,3 +42,28 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_cre
     TRACE_NEW("BoxShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShapeSettings
+ * Method:    getConvexRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_getConvexRadius
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const BoxShapeSettings * const pSettings
+            = reinterpret_cast<BoxShapeSettings *> (settingsVa);
+    float result = pSettings->mConvexRadius;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShapeSettings
+ * Method:    setConvexRadius
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_setConvexRadius
+  (JNIEnv *, jclass, jlong settingsVa, jfloat radius) {
+    BoxShapeSettings * const pSettings
+            = reinterpret_cast<BoxShapeSettings *> (settingsVa);
+    pSettings->mConvexRadius = radius;
+}

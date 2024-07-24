@@ -42,3 +42,28 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSetting
     TRACE_NEW("CylinderShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
+ * Method:    getConvexRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_getConvexRadius
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const CylinderShapeSettings * const pSettings
+            = reinterpret_cast<CylinderShapeSettings *> (settingsVa);
+    const float result = pSettings->mConvexRadius;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
+ * Method:    setConvexRadius
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_setConvexRadius
+  (JNIEnv *, jclass, jlong settingsVa, jfloat radius) {
+    CylinderShapeSettings * const pSettings
+            = reinterpret_cast<CylinderShapeSettings *> (settingsVa);
+    pSettings->mConvexRadius = radius;
+}

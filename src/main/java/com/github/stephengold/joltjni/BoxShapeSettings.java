@@ -57,8 +57,36 @@ public class BoxShapeSettings extends ConvexShapeSettings {
         setSubType(EShapeSubType.Box);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the convex radius. The settings are unaffected.
+     *
+     * @return the convex radius (&ge;0)
+     */
+    public float getConvexRadius() {
+        long settingsVa = va();
+        float result = getConvexRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Alter the convex radius.
+     *
+     * @param radius the desired convex radius (&ge;0)
+     */
+    public void setConvexRadius(float radius) {
+        long settingsVa = va();
+        setConvexRadius(settingsVa, radius);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createBoxShapeSettings(
             float xHalfExtent, float yHalfExtent, float zHalfExtent);
+
+    native private static float getConvexRadius(long settingsVa);
+
+    native private static void setConvexRadius(long settingsVa, float radius);
 }

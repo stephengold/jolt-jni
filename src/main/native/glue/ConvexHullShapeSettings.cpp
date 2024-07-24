@@ -54,3 +54,28 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
     delete pPoints;
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    getMaxConvexRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_getMaxConvexRadius
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    float result = pSettings->mMaxConvexRadius;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    setMaxConvexRadius
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_setMaxConvexRadius
+  (JNIEnv *, jclass, jlong settingsVa, jfloat radius) {
+    ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    pSettings->mMaxConvexRadius = radius;
+}

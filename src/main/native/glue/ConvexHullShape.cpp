@@ -31,6 +31,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShape
+ * Method:    getConvexRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getConvexRadius
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const ConvexHullShape * const pShape
+            = reinterpret_cast<ConvexHullShape *> (shapeVa);
+    float result = pShape->GetConvexRadius();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShape
  * Method:    getNumPoints
  * Signature: (J)I
  */

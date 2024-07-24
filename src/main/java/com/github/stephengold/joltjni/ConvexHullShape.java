@@ -45,6 +45,18 @@ public class ConvexHullShape extends ConvexShape {
     // new methods exposed
 
     /**
+     * Return the convex radius. The shape is unaffected.
+     *
+     * @return the radius (&ge;0)
+     */
+    public float getConvexRadius() {
+        long shapeVa = va();
+        float result = getConvexRadius(shapeVa);
+
+        return result;
+    }
+
+    /**
      * Count the vertices of the convex hull. The shape is unaffected.
      *
      * @return the count (&ge;0)
@@ -74,6 +86,8 @@ public class ConvexHullShape extends ConvexShape {
     }
     // *************************************************************************
     // native private methods
+
+    native private static float getConvexRadius(long shapeVa);
 
     native private static int getNumPoints(long shapeVa);
 

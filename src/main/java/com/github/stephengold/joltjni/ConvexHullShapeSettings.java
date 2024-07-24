@@ -81,8 +81,37 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         setSubType(EShapeSubType.ConvexHull);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the convex radius. The settings are unaffected.
+     *
+     * @return the convex radius (&ge;0)
+     */
+    public float getMaxConvexRadius() {
+        long settingsVa = va();
+        float result = getMaxConvexRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Alter the convex radius.
+     *
+     * @param radius the desired convex radius (&ge;0)
+     */
+    public void setMaxConvexRadius(float radius) {
+        long settingsVa = va();
+        setMaxConvexRadius(settingsVa, radius);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createConvexHullShapeSettings(
             int numPoints, FloatBuffer points);
+
+    native private static float getMaxConvexRadius(long settingsVa);
+
+    native private static void setMaxConvexRadius(
+            long settingsVa, float radius);
 }

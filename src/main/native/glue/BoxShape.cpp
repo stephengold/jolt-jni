@@ -43,3 +43,15 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShape_createBoxSh
     TRACE_NEW("BoxShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShape
+ * Method:    getConvexRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShape_getConvexRadius
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const BoxShape * const pShape = reinterpret_cast<BoxShape *> (shapeVa);
+    float result = pShape->GetConvexRadius();
+    return result;
+}

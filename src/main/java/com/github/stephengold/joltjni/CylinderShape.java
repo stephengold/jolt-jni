@@ -63,8 +63,24 @@ public class CylinderShape extends ConvexShape {
         setVirtualAddress(shapeVa, null); // not the owner due to ref counting
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the convex radius. The shape is unaffected.
+     *
+     * @return the radius (&ge;0)
+     */
+    public float getConvexRadius() {
+        long shapeVa = va();
+        float result = getConvexRadius(shapeVa);
+
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createCylinderShape(
             float halfHeight, float radius, float convexRadius);
+
+    native private static float getConvexRadius(long shapeVa);
 }
