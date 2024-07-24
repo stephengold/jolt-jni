@@ -1,5 +1,25 @@
 # release log for the jolt-jni project
 
+## Version 0.3.2 released on TBD
+
++ Added many methods.
++ Added the `cDefaultConvexRadius` constant.
++ Added classes to the library:
+  + `BodyLockInterface`
+  + `BodyLockInterfaceLocking`
+  + `CompoundShape`
+  + `CompoundShapeSettings`
+  + `MutableCompoundShape`
+  + `MutableCompoundShapeSettings`
+  + `RotatedTranslatedShape`
+  + `RotatedTranslatedShapeSettings`
+  + `SharedMutex`
+  + `SharedMutexBase`
+  + `TriangleShape`
+  + `TriangleShapeSettings`
+  + `StaticCompoundShape`
+  + `StaticCompoundShapeSettings`
+
 ## Version 0.3.1 released on 20 July 2024
 
 + Bugfix:  memory leak in `MassProperties`
