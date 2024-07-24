@@ -74,6 +74,20 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Access the system's {@code BodyLockInterfaceLocking}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public BodyLockInterfaceLocking getBodyLockInterface() {
+        long systemVa = va();
+        long interfaceVa = getBodyLockInterface(systemVa);
+        BodyLockInterfaceLocking result
+                = new BodyLockInterfaceLocking(this, interfaceVa);
+
+        return result;
+    }
+
+    /**
      * Access the BroadPhaseLayerInterface.
      *
      * @return the pre-existing instance, or null if none
@@ -263,6 +277,8 @@ public class PhysicsSystem extends NonCopyable {
     native private static long createPhysicsSystem();
 
     native private static long getBodyInterface(long systemVa);
+
+    native private static long getBodyLockInterface(long systemVa);
 
     native private static float getGravityX(long systemVa);
 

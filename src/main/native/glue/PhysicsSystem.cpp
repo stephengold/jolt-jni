@@ -58,6 +58,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBod
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getBodyLockInterface
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBodyLockInterface
+  (JNIEnv *, jclass, jlong systemVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const BodyLockInterface& result = pSystem->GetBodyLockInterface();
+    return reinterpret_cast<jlong> (&result);
+}
+
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getGravityX
  * Signature: (J)F
  */
