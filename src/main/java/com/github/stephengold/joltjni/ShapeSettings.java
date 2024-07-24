@@ -113,6 +113,9 @@ abstract public class ShapeSettings
             case Sphere:
                 result = new SphereShapeSettings(settingsVa);
                 break;
+            case Triangle:
+                result = new TriangleShapeSettings(settingsVa);
+                break;
             default:
                 throw new IllegalArgumentException("type = " + subType);
         }
