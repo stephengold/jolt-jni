@@ -41,3 +41,29 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShape_createC
     TRACE_NEW("CapsuleShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_CapsuleShape
+ * Method:    getHalfHeightOfCylinder
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CapsuleShape_getHalfHeightOfCylinder
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const CapsuleShape * const pShape
+            = reinterpret_cast<CapsuleShape *> (shapeVa);
+    const float result = pShape->GetHalfHeightOfCylinder();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CapsuleShape
+ * Method:    getRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CapsuleShape_getRadius
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const CapsuleShape * const pShape
+            = reinterpret_cast<CapsuleShape *> (shapeVa);
+    const float result = pShape->GetRadius();
+    return result;
+}

@@ -46,8 +46,39 @@ public class CapsuleShape extends ConvexShape {
         setVirtualAddress(shapeVa, null); // not the owner due to ref counting
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the half height of the cylindrical portion. The shape is
+     * unaffected.
+     *
+     * @return 1/2 of the height (&ge;0)
+     */
+    public float getHalfHeightOfCylinder() {
+        long shapeVa = va();
+        float result = getHalfHeightOfCylinder(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Return the radius. The shape is unaffected.
+     *
+     * @return the radius (&ge;0)
+     */
+    public float getRadius() {
+        long shapeVa = va();
+        float result = getRadius(shapeVa);
+
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createCapsuleShape(
             float halfHeight, float radius);
+
+    native private static float getHalfHeightOfCylinder(long shapeVa);
+
+    native private static float getRadius(long shapeVa);
 }
