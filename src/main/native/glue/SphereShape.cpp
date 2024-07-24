@@ -41,3 +41,15 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShape_createSp
     TRACE_NEW("SphereShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_SphereShape
+ * Method:    getRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SphereShape_getRadius
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const SphereShape * const pShape = reinterpret_cast<SphereShape *> (shapeVa);
+    const float result = pShape->GetRadius();
+    return result;
+}

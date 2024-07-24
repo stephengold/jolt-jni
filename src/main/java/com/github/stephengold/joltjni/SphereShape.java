@@ -51,7 +51,23 @@ public class SphereShape extends ConvexShape {
         setVirtualAddress(shapeVa, null); // not the owner due to ref counting
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the radius. The shape is unaffected.
+     *
+     * @return the radius (&ge;0)
+     */
+    public float getRadius() {
+        long shapeVa = va();
+        float result = getRadius(shapeVa);
+
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createSphereShape(float radius);
+
+    native private static float getRadius(long shapeVa);
 }
