@@ -104,7 +104,7 @@ abstract public class Shape extends NonCopyable
                 result = new TriangleShape(shapeVa);
                 break;
             default:
-                throw new IllegalArgumentException("type = " + subType);
+                throw new IllegalArgumentException("subType = " + subType);
         }
         return result;
     }

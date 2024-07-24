@@ -123,7 +123,7 @@ abstract public class ShapeSettings
                 result = new TriangleShapeSettings(settingsVa);
                 break;
             default:
-                throw new IllegalArgumentException("type = " + subType);
+                throw new IllegalArgumentException("subType = " + subType);
         }
         return result;
     }
