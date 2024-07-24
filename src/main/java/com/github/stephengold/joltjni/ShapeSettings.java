@@ -104,6 +104,9 @@ abstract public class ShapeSettings
             case Mesh:
                 result = new MeshShapeSettings(settingsVa);
                 break;
+            case MutableCompound:
+                result = new MutableCompoundShapeSettings(settingsVa);
+                break;
             case RotatedTranslated:
                 result = new RotatedTranslatedShapeSettings(settingsVa);
                 break;
