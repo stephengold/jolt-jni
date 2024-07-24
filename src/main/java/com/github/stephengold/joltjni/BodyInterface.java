@@ -419,6 +419,15 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Access the underlying {@code PhysicsSystem}.
+     *
+     * @return the pre-existing instance
+     */
+    public PhysicsSystem getSystem() {
+        return system;
+    }
+
+    /**
      * Test whether the specified body is active.
      *
      * @param bodyId the ID of the body to test (not null, unaffected)
