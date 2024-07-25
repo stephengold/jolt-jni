@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.3.2 released on TBD
+## Version 0.3.2 released on 24 July 2024
 
 + Added many methods.
 + Added the `cDefaultConvexRadius` constant.
