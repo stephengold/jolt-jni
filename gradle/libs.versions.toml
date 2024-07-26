@@ -7,6 +7,7 @@ checkstyle = "10.17.0"
 [libraries]
 
 junit4 = "junit:junit:4.13.2"
+jsnaploader = "io.github.electrostat-lab:snaploader:1.0.0-gamma"
 
 [bundles]
 

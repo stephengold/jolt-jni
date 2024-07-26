@@ -188,6 +188,7 @@ model {
 }
 
 dependencies {
+    testImplementation(libs.jsnaploader)
     testImplementation(libs.junit4)
 }
 

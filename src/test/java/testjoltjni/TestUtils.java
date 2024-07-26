@@ -35,8 +35,9 @@ import com.github.stephengold.joltjni.QuatArg;
 import com.github.stephengold.joltjni.RVec3Arg;
 import com.github.stephengold.joltjni.UVec4;
 import com.github.stephengold.joltjni.Vec3Arg;
-import com.jme3.system.NativeLibraryLoader;
+import electrostatic.snaploader.platform.util.NativeVariant;
 import java.io.File;
+import java.util.Locale;
 import org.junit.Assert;
 
 /**
@@ -210,17 +211,71 @@ final public class TestUtils {
     public static void loadNativeLibrary() {
         File directory = new File("build/libs/joltjni/shared");
 
-        boolean success
-                = NativeLibraryLoader.loadJoltJni(directory, "Debug", "Sp");
+        boolean success = loadNativeLibrary(directory, "Debug", "Sp");
         if (success) {
             Assert.assertFalse(Jolt.isDoublePrecision());
         } else {
-            success = NativeLibraryLoader.loadJoltJni(directory, "Debug", "Dp");
+            success = loadNativeLibrary(directory, "Debug", "Dp");
             if (success) {
                 Assert.assertTrue(Jolt.isDoublePrecision());
             }
         }
         Assert.assertTrue(success);
+    }
+
+    /**
+     * Load a specific jolt-jni native library from the filesystem.
+     *
+     * @param directory (not null, readable, unaffected)
+     * @param buildType "Debug" or "Release"
+     * @param flavor "Sp" or "Dp"
+     * @return true after successful load, otherwise false
+     */
+    public static boolean loadNativeLibrary(
+            File directory, String buildType, String flavor) {
+        assert buildType.equals("Debug") || buildType.equals("Release") :
+                buildType;
+        assert flavor.equals("Sp") || flavor.equals("Dp") : flavor;
+
+        String name;
+        String subdirectory;
+        if (NativeVariant.Os.isLinux()) {
+            name = "libjoltjni.so";
+            subdirectory = "linux64";
+
+        } else if (NativeVariant.Os.isMac()) {
+            name = "libjoltjni.dylib";
+            if (NativeVariant.Cpu.isARM()) {
+                subdirectory = "macOSX_ARM64";
+            } else {
+                subdirectory = "macOSX64";
+            }
+
+        } else if (NativeVariant.Os.isWindows()) {
+            name = "joltjni.dll";
+            subdirectory = "windows64";
+
+        } else {
+            String osName = NativeVariant.OS_NAME.getProperty();
+            throw new RuntimeException("osName = " + osName);
+        }
+
+        File file = new File(directory, subdirectory);
+        String bt = firstToLower(buildType);
+        file = new File(file, bt);
+
+        String f = firstToLower(flavor);
+        file = new File(file, f);
+
+        file = new File(file, name);
+        String absoluteFilename = file.getAbsolutePath();
+        boolean success = false;
+        if (file.exists() && file.canRead()) {
+            System.load(absoluteFilename);
+            success = true;
+        }
+
+        return success;
     }
 
     /**
@@ -289,5 +344,25 @@ final public class TestUtils {
                 Assert.assertFalse(object.ownsNativeObject());
             }
         }
+    }
+    // *************************************************************************
+    // private methods
+
+    /**
+     * Convert the first character of the specified text to lower case.
+     *
+     * @param input the input text to convert (not null)
+     * @return the converted text (not null)
+     */
+    private static String firstToLower(String input) {
+        String result = input;
+        if (!input.isEmpty()) {
+            String first = input.substring(0, 1);
+            first = first.toLowerCase(Locale.ROOT);
+            String rest = input.substring(1);
+            result = first + rest;
+        }
+
+        return result;
     }
 }
