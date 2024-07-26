@@ -15,10 +15,10 @@
   + `RotatedTranslatedShapeSettings`
   + `SharedMutex`
   + `SharedMutexBase`
-  + `TriangleShape`
-  + `TriangleShapeSettings`
   + `StaticCompoundShape`
   + `StaticCompoundShapeSettings`
+  + `TriangleShape`
+  + `TriangleShapeSettings`
 
 ## Version 0.3.1 released on 20 July 2024
 
