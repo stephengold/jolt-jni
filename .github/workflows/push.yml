@@ -24,6 +24,7 @@ jobs:
       - uses: mattsb42/not-grep@master
         with:
           config-file: .github/not-grep.toml
+      - run: g++ --version
       - name: gradlew build install
         run: |
           ./gradlew build install \
