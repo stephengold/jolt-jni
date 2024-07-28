@@ -2,7 +2,7 @@
 # configure deployment and continuous integration at travis-ci.com
 
 arch: arm64
-dist: bionic
+dist: focal
 language: cpp
 os: linux
 
@@ -10,36 +10,36 @@ jobs:
   include:
 
     # Linux_ARM32hf:
-    - compiler: arm-linux-gnueabihf-g++-6
+    - compiler: arm-linux-gnueabihf-g++-8
       addons:
         apt:
           packages:
-            - g++-6-arm-linux-gnueabihf
+            - g++-8-arm-linux-gnueabihf
       script:
         - date
-        - arm-linux-gnueabihf-g++-6 -E -v
+        - arm-linux-gnueabihf-g++-8 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain -Ptarget=Linux_ARM32hf
 
     # Linux_ARM64 double-precision:
-    - compiler: gcc-6
+    - compiler: gcc-8
       addons:
         apt:
           packages:
-            - g++-6
+            - g++-8
       script:
         - date
-        - aarch64-linux-gnu-g++-6 -E -v
+        - aarch64-linux-gnu-g++-8 -E -v
         - travis_wait 20 ./gradlew run build --console=plain -Pflavor=Dp -Ptarget=Linux_ARM64
 
     # Linux_ARM64 single-precision:
-    - compiler: gcc-6
+    - compiler: gcc-8
       addons:
         apt:
           packages:
-            - g++-6
+            - g++-8
       script:
         - date
-        - aarch64-linux-gnu-g++-6 -E -v
+        - aarch64-linux-gnu-g++-8 -E -v
         - travis_wait 20 ./gradlew run build --console=plain -Pflavor=Sp -Ptarget=Linux_ARM64
 
 addons:
