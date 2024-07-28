@@ -25,9 +25,9 @@ jobs:
         with:
           config-file: .github/not-grep.toml
       - run: g++ --version
-      - name: gradlew build install
+      - name: gradlew -Ptarget=Linux64 build install
         run: |
-          ./gradlew build install \
+          ./gradlew -Ptarget=Linux64 build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -103,9 +103,9 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - name: gradlew build install
+      - name: gradlew -Ptarget=Windows64 build install
         run: |
-          ./gradlew build install \
+          ./gradlew -Ptarget=Windows64 build install \
              --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -131,9 +131,9 @@ jobs:
           distribution: 'zulu'
           java-version: 22
       - uses: actions/checkout@v4
-      - name: gradlew -Pflavor=Dp build install
+      - name: gradlew -Pflavor=Dp -Ptarget=Linux64 build install
         run: |
-          ./gradlew -Pflavor=Dp build install \
+          ./gradlew -Pflavor=Dp -Ptarget=Linux64 build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
