@@ -1,0 +1,54 @@
+---
+# configure deployment and continuous integration at travis-ci.com
+
+arch: arm64
+dist: bionic
+language: cpp
+os: linux
+
+jobs:
+  include:
+
+    # Linux_ARM32hf:
+    - compiler: arm-linux-gnueabihf-g++-6
+      addons:
+        apt:
+          packages:
+            - g++-6-arm-linux-gnueabihf
+      script:
+        - date
+        - arm-linux-gnueabihf-g++-6 -E -v
+        - travis_wait 20 ./gradlew assemble --console=plain -Ptarget=Linux_ARM32hf
+
+    # Linux_ARM64 double-precision:
+    - compiler: gcc-6
+      addons:
+        apt:
+          packages:
+            - g++-6
+      script:
+        - date
+        - aarch64-linux-gnu-g++-6 -E -v
+        - travis_wait 20 ./gradlew run build --console=plain -Pflavor=Dp -Ptarget=Linux_ARM64
+
+    # Linux_ARM64 single-precision:
+    - compiler: gcc-6
+      addons:
+        apt:
+          packages:
+            - g++-6
+      script:
+        - date
+        - aarch64-linux-gnu-g++-6 -E -v
+        - travis_wait 20 ./gradlew run build --console=plain -Pflavor=Sp -Ptarget=Linux_ARM64
+
+addons:
+  apt:
+    update: true
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/

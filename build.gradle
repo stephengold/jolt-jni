@@ -68,6 +68,17 @@ model {
         //clang(Clang) // to prefer Clang over Gcc
         gcc(Gcc) // used when compiling on Linux
         clang(Clang) // used when compiling on macOS
+
+        gcc6Arm(Gcc) { // used at Travis CI
+            target('Linux_ARM32hf') {
+                cppCompiler.executable = 'arm-linux-gnueabihf-g++-6'
+                linker.executable = 'arm-linux-gnueabihf-g++-6'
+            }
+            target('Linux_ARM64') {
+                cppCompiler.executable = 'aarch64-linux-gnu-g++-6'
+                linker.executable = 'aarch64-linux-gnu-g++-6'
+            }
+        }
     }
 
     components {
