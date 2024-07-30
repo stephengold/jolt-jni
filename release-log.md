@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.4.1 released on TBD
+## Version 0.4.1 released on 30 July 2024
 
 + Split off the read-only interfaces into a "joltjni.readonly" package.
 + Added support for 2 Linux-on-ARM platforms.
