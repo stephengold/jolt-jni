@@ -52,7 +52,7 @@ jobs:
           java-version: 11
       - uses: actions/checkout@v4
       - run: sudo apt install g++-10-arm-linux-gnueabihf
-      - run: g++-10-arm-linux-gnueabihf --version
+      - run: arm-linux-gnueabihf-g++-10 --version
       - name: gradlew -Ptarget=Linux_ARM32hf build assemble
         run: |
           ./gradlew -Ptarget=Linux_ARM32hf build assemble \
@@ -79,7 +79,7 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - uses: actions/checkout@v4
-      - run: sudo apt install aarch64-linux-gnu-g++-10
+      - run: sudo apt install g++-10-aarch64-linux-gnu
       - run: aarch64-linux-gnu-g++-10 --version
       - name: gradlew -Ptarget=Linux_ARM32hf build assemble
         run: |
