@@ -1,13 +1,8 @@
 ---
-# GitHub Actions workflow for commits pushed to the jolt-jni repo - "master" branch
+# GitHub Actions workflow for commits pushed to the jolt-jni repo - all branches
 
 name: CI at GitHub
-on:
-  # trigger this workflow on pushes and also on pull requests
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: [push]
 
 jobs:
   Java11-Linux:
