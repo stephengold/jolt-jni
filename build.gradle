@@ -32,8 +32,8 @@ model {
     }
 
     flavors {
-        Sp   // single-precision arithmetic
         Dp   // double-precision arithmetic
+        Sp   // single-precision arithmetic
     }
 
     platforms {
@@ -147,8 +147,8 @@ model {
                     }
 
                 } else { // toolChain in Clang or Gcc
-                    //cppCompiler.args '-v' // to print compiler invocation
-                    //linker.args '-v' // to print linker invocation
+                    //cppCompiler.args '-v' // to log compiler details
+                    //linker.args '-v' // to log linker details
 
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/main/native"
