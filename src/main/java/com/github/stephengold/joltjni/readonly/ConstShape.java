@@ -19,8 +19,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.AaBox;
+import com.github.stephengold.joltjni.EShapeSubType;
+import com.github.stephengold.joltjni.EShapeType;
+import com.github.stephengold.joltjni.MassProperties;
+import com.github.stephengold.joltjni.ShapeRefC;
+import com.github.stephengold.joltjni.Vec3;
 import java.nio.FloatBuffer;
 
 /**

@@ -19,30 +19,42 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code BroadPhaseLayerInterface}.
+ * Read-only access to a {@code UVec4}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstBroadPhaseLayerInterface extends ConstJoltPhysicsObject {
+public interface UVec4Arg {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Return the broadphase layer for the specified object layer.
+     * Return the 4th (W) component. The vector is unaffected.
      *
-     * @param objectLayer the index of the object layer to query (&ge;0,
-     * &lt;numObjectLayers)
-     * @return the index of the corresponding broadphase layer
+     * @return the component value
      */
-    int getBroadPhaseLayer(int objectLayer);
+    int getW();
 
     /**
-     * Count how many broadphase layers there are.
+     * Return the first (X) component. The vector is unaffected.
      *
-     * @return the count (&ge;0)
+     * @return the component value
      */
-    int getNumBroadPhaseLayers();
+    int getX();
+
+    /**
+     * Return the 2nd (Y) component. The vector is unaffected.
+     *
+     * @return the component value
+     */
+    int getY();
+
+    /**
+     * Return the 3rd (Z) component. The vector is unaffected.
+     *
+     * @return the component value
+     */
+    int getZ();
 }

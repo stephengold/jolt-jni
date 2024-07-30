@@ -19,42 +19,46 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code BodyId}.
+ * Read-only access to a {@code Quat}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstBodyId extends ConstJoltPhysicsObject {
+public interface QuatArg {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Create a mutable copy.
+     * Return the real (W) component in single precision. The quaternion is
+     * unaffected.
      *
-     * @return a new mutable JVM object with a new native object assigned
+     * @return the component value
      */
-    BodyId copy();
+    float getW();
 
     /**
-     * Return the body's index in the array. The ID is unaffected.
+     * Return the first imaginary (X) component in single precision. The
+     * quaternion is unaffected.
      *
-     * @return the index (&ge;0)
+     * @return the component value
      */
-    int getIndex();
+    float getX();
 
     /**
-     * Return the body's sequence number. The ID is unaffected.
+     * Return the 2nd imaginary (Y) component in single precision. The
+     * quaternion is unaffected.
      *
-     * @return the sequence number (&ge;0)
+     * @return the component value
      */
-    int getSequenceNumber();
+    float getY();
 
     /**
-     * Test whether the ID is valid. It is unaffected.
+     * Return the 3rd imaginary (Z) component in single precision. The
+     * quaternion is unaffected.
      *
-     * @return true if invalid, false if valid
+     * @return the component value
      */
-    boolean isInvalid();
+    float getZ();
 }

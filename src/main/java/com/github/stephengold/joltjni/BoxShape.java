@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
+
 /**
  * A {@code Shape} to represent centered, axis-aligned rectangular solids.
  *

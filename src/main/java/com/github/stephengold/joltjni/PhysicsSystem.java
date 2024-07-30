@@ -21,6 +21,11 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
+import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
+import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
+
 /**
  * Perform simulation on a collection of physics objects. Bodies are added via a
  * separate interface.

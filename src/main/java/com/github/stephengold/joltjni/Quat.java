@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.QuatArg;
+
 /**
  * A math object used to represent rotations and orientations in 3-dimensional
  * space, without risk of gimbal lock. Each quaternion has 4 single-precision

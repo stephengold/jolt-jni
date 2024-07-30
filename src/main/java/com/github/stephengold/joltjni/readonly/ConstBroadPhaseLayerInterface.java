@@ -19,25 +19,30 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to an {@code ObjectLayerPairFilter}.
+ * Read-only access to a {@code BroadPhaseLayerInterface}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstObjectLayerPairFilter extends ConstJoltPhysicsObject {
+public interface ConstBroadPhaseLayerInterface extends ConstJoltPhysicsObject {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Test whether the specified layers should collide.
+     * Return the broadphase layer for the specified object layer.
      *
-     * @param layer1 the index of the first object layer (&ge;0,
+     * @param objectLayer the index of the object layer to query (&ge;0,
      * &lt;numObjectLayers)
-     * @param layer2 the index of the 2nd object layer (&ge;0,
-     * &lt;numObjectLayers)
-     * @return true if they should collide, otherwise false
+     * @return the index of the corresponding broadphase layer
      */
-    boolean shouldCollide(int layer1, int layer2);
+    int getBroadPhaseLayer(int objectLayer);
+
+    /**
+     * Count how many broadphase layers there are.
+     *
+     * @return the count (&ge;0)
+     */
+    int getNumBroadPhaseLayers();
 }

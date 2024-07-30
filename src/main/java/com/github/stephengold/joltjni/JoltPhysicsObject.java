@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import java.lang.ref.Cleaner;
 
 /**

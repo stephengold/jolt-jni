@@ -19,7 +19,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
+
+import com.github.stephengold.joltjni.EMotionQuality;
+import com.github.stephengold.joltjni.EMotionType;
+import com.github.stephengold.joltjni.EOverrideMassProperties;
+import com.github.stephengold.joltjni.MassProperties;
+import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.Vec3;
 
 /**
  * Read-only access to a {@code BodyCreationSettings} object.

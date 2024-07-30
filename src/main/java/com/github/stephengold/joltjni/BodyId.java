@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyId;
+
 /**
  * Identify a particular {@code Body} to a {@code BodyInterface}.
  *

@@ -19,24 +19,44 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
+
+import com.github.stephengold.joltjni.BodyId;
 
 /**
- * Read-only access to an {@code ObjectVsBroadPhaseLayerFilter}.
+ * Read-only access to a {@code BodyId}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstObjectVsBroadPhaseLayerFilter
-        extends ConstJoltPhysicsObject {
+public interface ConstBodyId extends ConstJoltPhysicsObject {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Test whether the specified layers should collide.
+     * Create a mutable copy.
      *
-     * @param objLayer the index of a object layer (&ge;0, &lt;numObjectLayers)
-     * @param bpLayer the index of a broadphase layer (&ge;0, &lt;numBpLayers)
-     * @return true if they should collide, otherwise false
+     * @return a new mutable JVM object with a new native object assigned
      */
-    boolean shouldCollide(int objLayer, int bpLayer);
+    BodyId copy();
+
+    /**
+     * Return the body's index in the array. The ID is unaffected.
+     *
+     * @return the index (&ge;0)
+     */
+    int getIndex();
+
+    /**
+     * Return the body's sequence number. The ID is unaffected.
+     *
+     * @return the sequence number (&ge;0)
+     */
+    int getSequenceNumber();
+
+    /**
+     * Test whether the ID is valid. It is unaffected.
+     *
+     * @return true if invalid, false if valid
+     */
+    boolean isInvalid();
 }

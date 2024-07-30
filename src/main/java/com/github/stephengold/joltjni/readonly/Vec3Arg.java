@@ -19,42 +19,64 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
+
+import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to a {@code UVec4}.
+ * Read-only access to a {@code Vec3}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface UVec4Arg {
+public interface Vec3Arg {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Return the 4th (W) component. The vector is unaffected.
+     * Return the specified component. The vector is unaffected.
      *
-     * @return the component value
+     * @param index 0, 1, or 2
+     * @return the X component if index=0, the Y component if index=1, or the Z
+     * component if index=2
+     * @throws IllegalArgumentException if index is not 0, 1, or 2
      */
-    int getW();
+    float get(int index);
 
     /**
-     * Return the first (X) component. The vector is unaffected.
+     * Return the first (X) component in single precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
-    int getX();
+    float getX();
 
     /**
-     * Return the 2nd (Y) component. The vector is unaffected.
+     * Return the 2nd (Y) component in single precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
-    int getY();
+    float getY();
 
     /**
-     * Return the 3rd (Z) component. The vector is unaffected.
+     * Return the 3rd (Z) component in single precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
-    int getZ();
+    float getZ();
+
+    /**
+     * Return the component-wise reciprocal. The vector is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 reciprocal();
+
+    /**
+     * Copy the components to an array. The vector is unaffected.
+     *
+     * @return a new array with length=3
+     */
+    float[] toArray();
 }

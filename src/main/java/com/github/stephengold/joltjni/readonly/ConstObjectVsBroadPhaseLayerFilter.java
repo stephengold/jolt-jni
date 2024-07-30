@@ -19,62 +19,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code Vec3}.
+ * Read-only access to an {@code ObjectVsBroadPhaseLayerFilter}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface Vec3Arg {
+public interface ConstObjectVsBroadPhaseLayerFilter
+        extends ConstJoltPhysicsObject {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Return the specified component. The vector is unaffected.
+     * Test whether the specified layers should collide.
      *
-     * @param index 0, 1, or 2
-     * @return the X component if index=0, the Y component if index=1, or the Z
-     * component if index=2
-     * @throws IllegalArgumentException if index is not 0, 1, or 2
+     * @param objLayer the index of a object layer (&ge;0, &lt;numObjectLayers)
+     * @param bpLayer the index of a broadphase layer (&ge;0, &lt;numBpLayers)
+     * @return true if they should collide, otherwise false
      */
-    float get(int index);
-
-    /**
-     * Return the first (X) component in single precision. The vector is
-     * unaffected.
-     *
-     * @return the component value
-     */
-    float getX();
-
-    /**
-     * Return the 2nd (Y) component in single precision. The vector is
-     * unaffected.
-     *
-     * @return the component value
-     */
-    float getY();
-
-    /**
-     * Return the 3rd (Z) component in single precision. The vector is
-     * unaffected.
-     *
-     * @return the component value
-     */
-    float getZ();
-
-    /**
-     * Return the component-wise reciprocal. The vector is unaffected.
-     *
-     * @return a new vector
-     */
-    Vec3 reciprocal();
-
-    /**
-     * Copy the components to an array. The vector is unaffected.
-     *
-     * @return a new array with length=3
-     */
-    float[] toArray();
+    boolean shouldCollide(int objLayer, int bpLayer);
 }

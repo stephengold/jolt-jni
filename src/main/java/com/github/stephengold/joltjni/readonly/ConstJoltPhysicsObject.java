@@ -19,39 +19,43 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code MassProperties} object.
+ * Read-only access to a {@code JoltPhysicsObject}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstMassProperties extends ConstJoltPhysicsObject {
+public interface ConstJoltPhysicsObject
+        extends Comparable<ConstJoltPhysicsObject> {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Decompose the inertia tensor into a diagonal matrix and a right-handed
-     * rotation matrix.
-     *
-     * @param storeRotation storage for the rotation matrix (not null, modified)
-     * @param storeDiagonal storage for the diagonal matrix (not null, modified)
-     * @return true if successful, otherwise false
+     * Free and unassign the native object if the JVM object owns it.
      */
-    boolean decomposePrincipalMomentsOfInertia(
-            Mat44 storeRotation, Vec3 storeDiagonal);
+    void close();
 
     /**
-     * Copy the inertia tensor.
+     * Test whether a native object is assigned. Both objects are unaffected.
      *
-     * @return a new matrix (in kilogram.meters squared)
+     * @return true if one is assigned, otherwise false
      */
-    Mat44 getInertia();
+    boolean hasAssignedNativeObject();
 
     /**
-     * Return the mass.
+     * Test whether the JVM object owns (is responsible for freeing) its
+     * assigned native object. Both objects are unaffected.
      *
-     * @return the mass (in kilograms, &ge;0)
+     * @return true if owner, otherwise false
      */
-    float getMass();
+    boolean ownsNativeObject();
+
+    /**
+     * Return the virtual address of the assigned native object, assuming one is
+     * assigned. Both objects are unaffected.
+     *
+     * @return the virtual address (not zero)
+     */
+    long va();
 }

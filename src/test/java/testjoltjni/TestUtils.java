@@ -21,20 +21,20 @@ SOFTWARE.
  */
 package testjoltjni;
 
-import com.github.stephengold.joltjni.ConstBroadPhaseLayerInterface;
-import com.github.stephengold.joltjni.ConstJoltPhysicsObject;
-import com.github.stephengold.joltjni.ConstObjectLayerPairFilter;
-import com.github.stephengold.joltjni.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JoltPhysicsObject;
 import com.github.stephengold.joltjni.MapObj2Bp;
 import com.github.stephengold.joltjni.ObjVsBpFilter;
 import com.github.stephengold.joltjni.ObjVsObjFilter;
 import com.github.stephengold.joltjni.PhysicsSystem;
-import com.github.stephengold.joltjni.QuatArg;
-import com.github.stephengold.joltjni.RVec3Arg;
 import com.github.stephengold.joltjni.UVec4;
-import com.github.stephengold.joltjni.Vec3Arg;
+import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
+import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
+import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
+import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
+import com.github.stephengold.joltjni.readonly.QuatArg;
+import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import electrostatic.snaploader.platform.util.NativeVariant;
 import java.io.File;
 import java.util.Locale;

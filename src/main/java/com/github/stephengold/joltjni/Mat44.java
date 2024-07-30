@@ -21,6 +21,10 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.Mat44Arg;
+import com.github.stephengold.joltjni.readonly.QuatArg;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
+
 /**
  * A 4x4 matrix composed of 16 single-precision elements, used to represent
  * transformations of 3-D coordinates.

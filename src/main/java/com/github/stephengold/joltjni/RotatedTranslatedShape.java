@@ -21,6 +21,10 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.QuatArg;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
+
 /**
  * Apply rotation followed by translation to an existing {@code Shape} to create
  * a new shape.

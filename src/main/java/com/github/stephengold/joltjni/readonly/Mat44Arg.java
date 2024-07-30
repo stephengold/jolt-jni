@@ -19,74 +19,58 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
+
+import com.github.stephengold.joltjni.Mat44;
+import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to an {@code AaBox}.
+ * Read-only access to a {@code Mat44}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstAaBox extends ConstJoltPhysicsObject {
+public interface Mat44Arg extends ConstJoltPhysicsObject {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Test whether the box contains the specified point. The box is unaffected.
+     * Return the specified element.
      *
-     * @param point the point to test (not null, unaffected)
-     *
-     * @return true if contained, otherwise false
+     * @param row the zero-origin index of the row (&ge;0, &lt;4)
+     * @param column the zero-origin index of the column (&ge;0, &lt;4)
+     * @return the element's value
      */
-    boolean contains(Vec3Arg point);
+    float getElement(int row, int column);
 
     /**
-     * Locate the center of the box. The box is unaffected.
+     * Convert the rotation to a {@code Quat}.
      *
-     * @return a new location vector
+     * @return a new rotation quaternion
      */
-    Vec3 getCenter();
+    Quat getQuaternion();
 
     /**
-     * Return the (half) extent of the box. The box is unaffected.
+     * Multiply the current 3x3 matrix by the specified 3x3 matrix.
      *
+     * @param arg the factor (not null, unaffected)
+     * @return a new matrix
+     */
+    Mat44 multiply3x3(Mat44Arg arg);
+
+    /**
+     * Multiply the 3x3 matrix by the specified vector.
+     *
+     * @param vec3Arg the right factor (not null, unaffected)
      * @return a new vector
      */
-    Vec3 getExtent();
+    Vec3 multiply3x3(Vec3Arg vec3Arg);
 
     /**
-     * Return the maximum contained coordinate on each axis. The box is
-     * unaffected.
+     * Multiply the transpose of the 3x3 matrix by the specified vector.
      *
+     * @param vec3Arg the right factor (not null, unaffected)
      * @return a new vector
      */
-    Vec3 getMax();
-
-    /**
-     * Return the minimum contained coordinate on each axis. The box is
-     * unaffected.
-     *
-     * @return a new vector
-     */
-    Vec3 getMin();
-
-    /**
-     * Return the size (full extent) on each axis. The box is unaffected.
-     *
-     * @return a new vector
-     */
-    Vec3 getSize();
-
-    /**
-     * Return the volume of the box. The box is unaffected.
-     *
-     * @return the volume
-     */
-    float getVolume();
-
-    /**
-     * Test whether the box is valid. It is unaffected.
-     *
-     * @return true if valid, otherwise false
-     */
-    boolean isValid();
+    Vec3 multiply3x3Transposed(Vec3Arg vec3Arg);
 }

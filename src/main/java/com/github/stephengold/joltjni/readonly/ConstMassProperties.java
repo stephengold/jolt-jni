@@ -19,54 +19,42 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
+
+import com.github.stephengold.joltjni.Mat44;
+import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to a {@code Mat44}.
+ * Read-only access to a {@code MassProperties} object.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface Mat44Arg extends ConstJoltPhysicsObject {
+public interface ConstMassProperties extends ConstJoltPhysicsObject {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Return the specified element.
+     * Decompose the inertia tensor into a diagonal matrix and a right-handed
+     * rotation matrix.
      *
-     * @param row the zero-origin index of the row (&ge;0, &lt;4)
-     * @param column the zero-origin index of the column (&ge;0, &lt;4)
-     * @return the element's value
+     * @param storeRotation storage for the rotation matrix (not null, modified)
+     * @param storeDiagonal storage for the diagonal matrix (not null, modified)
+     * @return true if successful, otherwise false
      */
-    float getElement(int row, int column);
+    boolean decomposePrincipalMomentsOfInertia(
+            Mat44 storeRotation, Vec3 storeDiagonal);
 
     /**
-     * Convert the rotation to a {@code Quat}.
+     * Copy the inertia tensor.
      *
-     * @return a new rotation quaternion
+     * @return a new matrix (in kilogram.meters squared)
      */
-    Quat getQuaternion();
+    Mat44 getInertia();
 
     /**
-     * Multiply the current 3x3 matrix by the specified 3x3 matrix.
+     * Return the mass.
      *
-     * @param arg the factor (not null, unaffected)
-     * @return a new matrix
+     * @return the mass (in kilograms, &ge;0)
      */
-    Mat44 multiply3x3(Mat44Arg arg);
-
-    /**
-     * Multiply the 3x3 matrix by the specified vector.
-     *
-     * @param vec3Arg the right factor (not null, unaffected)
-     * @return a new vector
-     */
-    Vec3 multiply3x3(Vec3Arg vec3Arg);
-
-    /**
-     * Multiply the transpose of the 3x3 matrix by the specified vector.
-     *
-     * @param vec3Arg the right factor (not null, unaffected)
-     * @return a new vector
-     */
-    Vec3 multiply3x3Transposed(Vec3Arg vec3Arg);
+    float getMass();
 }

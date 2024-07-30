@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.RVec3Arg;
+
 /**
  * A vector composed of 3 double-precision components, used to represent
  * locations in 3-dimensional space.

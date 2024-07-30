@@ -19,86 +19,76 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
+
+import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to an {@code RVec3}.
+ * Read-only access to an {@code AaBox}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface RVec3Arg {
+public interface ConstAaBox extends ConstJoltPhysicsObject {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Return the first (X) component at positional precision. The vector is
-     * unaffected.
+     * Test whether the box contains the specified point. The box is unaffected.
      *
-     * @return the component value
+     * @param point the point to test (not null, unaffected)
+     *
+     * @return true if contained, otherwise false
      */
-    Object getX();
+    boolean contains(Vec3Arg point);
 
     /**
-     * Return the 2nd (Y) component at positional precision. The vector is
-     * unaffected.
+     * Locate the center of the box. The box is unaffected.
      *
-     * @return the component value
+     * @return a new location vector
      */
-    Object getY();
+    Vec3 getCenter();
 
     /**
-     * Return the 3rd (Z) component at positional precision. The vector is
-     * unaffected.
+     * Return the (half) extent of the box. The box is unaffected.
      *
-     * @return the component value
+     * @return a new vector
      */
-    Object getZ();
+    Vec3 getExtent();
 
     /**
-     * Return the first (X) component in single precision. The vector is
+     * Return the maximum contained coordinate on each axis. The box is
      * unaffected.
      *
-     * @return the component value
+     * @return a new vector
      */
-    float x();
+    Vec3 getMax();
 
     /**
-     * Return the first (X) component in double precision. The vector is
+     * Return the minimum contained coordinate on each axis. The box is
      * unaffected.
      *
-     * @return the component value
+     * @return a new vector
      */
-    double xx();
+    Vec3 getMin();
 
     /**
-     * Return the 2nd (Y) component in single precision. The vector is
-     * unaffected.
+     * Return the size (full extent) on each axis. The box is unaffected.
      *
-     * @return the component value
+     * @return a new vector
      */
-    float y();
+    Vec3 getSize();
 
     /**
-     * Return the 2nd (Y) component in double precision. The vector is
-     * unaffected.
+     * Return the volume of the box. The box is unaffected.
      *
-     * @return the component value
+     * @return the volume
      */
-    double yy();
+    float getVolume();
 
     /**
-     * Return the 3rd (Z) component in single precision. The vector is
-     * unaffected.
+     * Test whether the box is valid. It is unaffected.
      *
-     * @return the component value
+     * @return true if valid, otherwise false
      */
-    float z();
-
-    /**
-     * Return the 3rd (Z) component in double precision. The vector is
-     * unaffected.
-     *
-     * @return the component value
-     */
-    double zz();
+    boolean isValid();
 }

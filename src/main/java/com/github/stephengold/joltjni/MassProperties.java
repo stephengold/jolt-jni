@@ -21,6 +21,10 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstMassProperties;
+import com.github.stephengold.joltjni.readonly.Mat44Arg;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
+
 /**
  * The mass and inertial tensor of a {@code Body}. Used only during
  * construction.

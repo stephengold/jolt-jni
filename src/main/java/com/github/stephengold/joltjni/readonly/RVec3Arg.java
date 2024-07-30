@@ -19,46 +19,86 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code Quat}.
+ * Read-only access to an {@code RVec3}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface QuatArg {
+public interface RVec3Arg {
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Return the real (W) component in single precision. The quaternion is
+     * Return the first (X) component at positional precision. The vector is
      * unaffected.
      *
      * @return the component value
      */
-    float getW();
+    Object getX();
 
     /**
-     * Return the first imaginary (X) component in single precision. The
-     * quaternion is unaffected.
+     * Return the 2nd (Y) component at positional precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
-    float getX();
+    Object getY();
 
     /**
-     * Return the 2nd imaginary (Y) component in single precision. The
-     * quaternion is unaffected.
+     * Return the 3rd (Z) component at positional precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
-    float getY();
+    Object getZ();
 
     /**
-     * Return the 3rd imaginary (Z) component in single precision. The
-     * quaternion is unaffected.
+     * Return the first (X) component in single precision. The vector is
+     * unaffected.
      *
      * @return the component value
      */
-    float getZ();
+    float x();
+
+    /**
+     * Return the first (X) component in double precision. The vector is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    double xx();
+
+    /**
+     * Return the 2nd (Y) component in single precision. The vector is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    float y();
+
+    /**
+     * Return the 2nd (Y) component in double precision. The vector is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    double yy();
+
+    /**
+     * Return the 3rd (Z) component in single precision. The vector is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    float z();
+
+    /**
+     * Return the 3rd (Z) component in double precision. The vector is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    double zz();
 }

@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
+
 /**
  * Map object layers to broadphase layers.
  *

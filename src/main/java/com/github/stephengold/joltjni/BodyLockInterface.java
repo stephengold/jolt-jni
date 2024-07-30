@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyId;
+
 /**
  * An interface to a {@code PhysicsSystem} that is aware of body locking.
  *
