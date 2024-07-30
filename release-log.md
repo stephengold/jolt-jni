@@ -1,10 +1,10 @@
 # release log for the jolt-jni project
 
-## Version 0.4.0 released on TBD
+## Version 0.4.1 released on TBD
 
 + Split off the read-only interfaces into a "joltjni.readonly" package.
 + Added support for 2 Linux-on-ARM platforms.
-+ Began using jSnapLoader to locate native library for testing.
++ Began using jSnapLoader to select native libraries for testing.
 + Purged JMonkeyEngine code from the project and simplified the license.
 
 ## Version 0.3.2 released on 24 July 2024
