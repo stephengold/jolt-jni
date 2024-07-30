@@ -241,7 +241,15 @@ final public class TestUtils {
         String subdirectory;
         if (NativeVariant.Os.isLinux()) {
             name = "libjoltjni.so";
-            subdirectory = "linux64";
+            if (NativeVariant.Cpu.isARM()) {
+                if (NativeVariant.Cpu.is64()) {
+                    subdirectory = "linux_ARM64";
+                } else {
+                    subdirectory = "linux_ARM32hf";
+                }
+            } else {
+                subdirectory = "linux64";
+            }
 
         } else if (NativeVariant.Os.isMac()) {
             name = "libjoltjni.dylib";
