@@ -370,14 +370,14 @@ def base64Decode(encodedString){
 // Download and extract archived JoltPhysics source code
 
 tasks.register('downloadJoltSource', Download) {
-    src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/arm500+fp.zip'
+    src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/arm500+fp2.zip'
     dest file('downloads/JoltPhysics-5.0.0.zip')
     overwrite false
 }
 tasks.register('unpackJoltSource', Copy) {
     dependsOn 'downloadJoltSource'
     from (zipTree('downloads/JoltPhysics-5.0.0.zip')) {
-        include 'JoltPhysics-arm500-fp/Jolt/**'
+        include 'JoltPhysics-arm500-fp2/Jolt/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
         }
