@@ -10,14 +10,14 @@ jobs:
   include:
 
     # Linux_ARM32hf:
-    - compiler: arm-linux-gnueabihf-g++-10
+    - compiler: arm-linux-gnueabihf-g++-9
       addons:
         apt:
           packages:
-            - g++-10-arm-linux-gnueabihf
+            - g++-9-arm-linux-gnueabihf
       script:
         - date
-        - arm-linux-gnueabihf-g++-10 -E -v
+        - arm-linux-gnueabihf-g++-9 -E -v
         - travis_wait 20 ./gradlew assemble --console=plain -Ptarget=Linux_ARM32hf
 
     # Linux_ARM64 double-precision:

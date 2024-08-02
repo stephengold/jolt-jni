@@ -46,8 +46,8 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - uses: actions/checkout@v4
-      - run: sudo apt install g++-10-arm-linux-gnueabihf
-      - run: arm-linux-gnueabihf-g++-10 --version
+      - run: sudo apt install g++-9-arm-linux-gnueabihf
+      - run: arm-linux-gnueabihf-g++-9 --version
       - name: gradlew -Ptarget=Linux_ARM32hf install
         run: |
           ./gradlew -Ptarget=Linux_ARM32hf install \
