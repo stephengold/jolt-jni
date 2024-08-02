@@ -1,5 +1,15 @@
 # release log for the jolt-jni project
 
+## Version 0.5.0 released on TBD
+
++ Split off the Jolt Physics enums into a "joltjni.enumerate" package.
++ Use GCC v9 when compiling for the Linux_ARM32hf platform.
++ Added the `RefShape` class to the library.
++ Added a no-argument constructor for `MutableCompoundShape`.
++ Added 2 public methods to the library:
+  + `CompoundShape.getNumSubShapes()`
+  + `Shape.toRef()`
+
 ## Version 0.4.1 released on 30 July 2024
 
 + Split off the read-only interfaces into a "joltjni.readonly" package.
