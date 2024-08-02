@@ -62,6 +62,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_
 
 /*
  * Class:     com_github_stephengold_joltjni_MutableCompoundShape
+ * Method:    createMutableCompoundShape
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_createMutableCompoundShape
+  (JNIEnv *, jclass) {
+    MutableCompoundShape * const pCompound = new MutableCompoundShape();
+    return reinterpret_cast<jlong> (pCompound);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MutableCompoundShape
  * Method:    removeShape
  * Signature: (JI)V
  */

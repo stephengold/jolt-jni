@@ -35,6 +35,14 @@ public class MutableCompoundShape extends CompoundShape {
     // constructors
 
     /**
+     * Instantiate an empty compound shape with no sub shapes.
+     */
+    public MutableCompoundShape() {
+        long shapeVa = createMutableCompoundShape();
+        setVirtualAddress(shapeVa, true);
+    }
+
+    /**
      * Instantiate a shape with the specified native object assigned but not
      * owned.
      *
@@ -96,6 +104,8 @@ public class MutableCompoundShape extends CompoundShape {
             float rotX, float rotY, float rotZ, float rotW, long shapeRefVa);
 
     native private static void adjustCenterOfMass(long shapeVa);
+
+    native private static long createMutableCompoundShape();
 
     native private static void removeShape(long shapeVa, int index);
 }
