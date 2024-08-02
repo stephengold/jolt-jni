@@ -265,6 +265,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_setUserData
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    toRef
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_toRef
+  (JNIEnv *, jclass, jlong shapeVa) {
+    Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    Ref<Shape> * const pResult = new Ref<Shape>(pShape);
+    TRACE_NEW("Ref<Shape>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    toRefC
  * Signature: (J)J
  */
