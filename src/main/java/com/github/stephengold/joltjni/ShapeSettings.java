@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+
 /**
  * Settings used to construct a {@code Shape}.
  *

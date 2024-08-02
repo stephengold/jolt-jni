@@ -19,23 +19,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.enumerate;
 
 /**
- * Enumerate types of bodies.
+ * Enumerate actions passed to {@code BodyInterface} when adding a body.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public enum EBodyType {
+public enum EActivation {
     // *************************************************************************
-    // values - order must match <Jolt/Physics/Body/BodyType.h>
+    // values - order must match <Jolt/Physics/EActivation.h>
 
     /**
-     * a body with an unchanging shape
+     * activate the added body
      */
-    RigidBody,
+    Activate,
     /**
-     * a body with a deformable shape
+     * leave the added body's activation state unchanged
      */
-    SoftBody
+    DontActivate
 }

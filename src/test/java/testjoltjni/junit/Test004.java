@@ -22,13 +22,13 @@ SOFTWARE.
 package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.BodyInterface;
-import com.github.stephengold.joltjni.EBodyType;
 import com.github.stephengold.joltjni.MapObj2Bp;
 import com.github.stephengold.joltjni.ObjVsBpFilter;
 import com.github.stephengold.joltjni.ObjVsObjFilter;
 import com.github.stephengold.joltjni.PhysicsSettings;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.enumerate.EBodyType;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;

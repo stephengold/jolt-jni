@@ -19,29 +19,23 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.enumerate;
 
 /**
- * Enumerate ways the {@code mMassPropertiesOverride} field of
- * {@code BodyCreationSettings} can be used.
+ * Enumerate motion types for bodies.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public enum EOverrideMassProperties {
+public enum EMotionQuality {
     // *************************************************************************
-    // values - order must match <Jolt/Physics/Body/BodyCreationSettings.h>
+    // values - order must match <Jolt/Physics/Body/MotionQuality.h>
 
     /**
-     * calculate mass and inertia based on density
+     * update the body in discrete steps
      */
-    CalculateMassAndInertia,
+    Discrete,
     /**
-     * take the mass from {@code mMassPropertiesOverride}; calculate inertia
-     * based on the shape and mass
+     * use linear casting with the body's starting rotation
      */
-    CalculateInertia,
-    /**
-     * take the mass and inertia directly from {@code mMassPropertiesOverride}
-     */
-    MassAndInertiaProvided
+    LinearCast
 }

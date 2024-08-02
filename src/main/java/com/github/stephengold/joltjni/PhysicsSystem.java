@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
@@ -264,7 +265,7 @@ public class PhysicsSystem extends NonCopyable {
      * @param jobSystem the job system to use (not null)
      * @return a bitmask of error conditions, or-ed together
      *
-     * @see com.github.stephengold.joltjni.EPhysicsUpdateError
+     * @see com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError
      */
     public int update(float deltaTime, int collisionSteps,
             TempAllocator tempAllocator, JobSystem jobSystem) {

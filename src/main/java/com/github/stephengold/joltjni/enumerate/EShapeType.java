@@ -19,27 +19,55 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.enumerate;
 
 /**
- * Enumerate motion types for bodies.
+ * Enumerate categories that a {@code Shape} can belong to.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public enum EMotionType {
+public enum EShapeType {
     // *************************************************************************
-    // values - order must match <Jolt/Physics/Body/MotionType.h>
+    // values - order must match <Jolt/Physics/Collision/Shape/Shape.h>
 
     /**
-     * non-moving bodies
+     * convex
      */
-    Static,
+    Convex,
     /**
-     * bodies whose motion can be controlled directly
+     * compound
      */
-    Kinematic,
+    Compound,
     /**
-     * bodies moved by forces, impulses, and torques
+     * decorated
      */
-    Dynamic
+    Decorated,
+    /**
+     * mesh
+     */
+    Mesh,
+    /**
+     * height field
+     */
+    HeightField,
+    /**
+     * soft body
+     */
+    SoftBody,
+    /**
+     * user-defined type #1
+     */
+    User1,
+    /**
+     * user-defined type #2
+     */
+    User2,
+    /**
+     * user-defined type #3
+     */
+    User3,
+    /**
+     * user-defined type #4
+     */
+    User4
 }

@@ -19,55 +19,29 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.enumerate;
 
 /**
- * Enumerate categories that a {@code Shape} can belong to.
+ * Enumerate ways the {@code mMassPropertiesOverride} field of
+ * {@code BodyCreationSettings} can be used.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public enum EShapeType {
+public enum EOverrideMassProperties {
     // *************************************************************************
-    // values - order must match <Jolt/Physics/Collision/Shape/Shape.h>
+    // values - order must match <Jolt/Physics/Body/BodyCreationSettings.h>
 
     /**
-     * convex
+     * calculate mass and inertia based on density
      */
-    Convex,
+    CalculateMassAndInertia,
     /**
-     * compound
+     * take the mass from {@code mMassPropertiesOverride}; calculate inertia
+     * based on the shape and mass
      */
-    Compound,
+    CalculateInertia,
     /**
-     * decorated
+     * take the mass and inertia directly from {@code mMassPropertiesOverride}
      */
-    Decorated,
-    /**
-     * mesh
-     */
-    Mesh,
-    /**
-     * height field
-     */
-    HeightField,
-    /**
-     * soft body
-     */
-    SoftBody,
-    /**
-     * user-defined type #1
-     */
-    User1,
-    /**
-     * user-defined type #2
-     */
-    User2,
-    /**
-     * user-defined type #3
-     */
-    User3,
-    /**
-     * user-defined type #4
-     */
-    User4
+    MassAndInertiaProvided
 }

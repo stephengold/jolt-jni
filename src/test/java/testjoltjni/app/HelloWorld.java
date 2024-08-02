@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package testjoltjni.app;
 import com.github.stephengold.joltjni.*;
+import com.github.stephengold.joltjni.enumerate.*;
 import testjoltjni.TestUtils;
 /**
  * A straightforward Java translation of the Jolt Physics "hello world" sample

@@ -19,48 +19,61 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.enumerate;
 
 /**
- * Error conditions reported by {@code PhysicsSystem.update()}.
+ * Bitmasks to enumerate a body's degrees of freedom among the axes of a
+ * {@code PhysicsSystem}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class EPhysicsUpdateError {
+final public class EAllowedDofs {
     // *************************************************************************
-    // constants
+    // constants - values must match <Jolt/Physics/Body/AllowedDOFs.h>
 
     /**
-     * no errors
+     * no degrees of freedom (an invalid setting; use a static body instead)
      */
-    final public static int None = 0x0;
+    final public static int None = 0b000000;
     /**
-     * manifold cache is full
-     * <p>
-     * Increase the {@code maxContactConstraints} argument to the
-     * {@code PhysicsSystem} constructor.
+     * all degrees of freedom (this is the default)
      */
-    final public static int ManifoldCacheFull = 0x1;
+    final public static int All = 0b111111;
     /**
-     * body pair cache is full
-     * <p>
-     * Increase the {@code maxBodyPairs} argument to the {@code PhysicsSystem}
-     * constructor.
+     * translation parallel to the system's X axis
      */
-    final public static int BodyPairCacheFull = 0x2;
+    final public static int TranslationX = 0b000001;
     /**
-     * contact constraints buffer is full
-     * <p>
-     * Increase {@code maxContactConstraints} argument to the
-     * {@code PhysicsSystem} constructor.
+     * translation parallel to the system's Y axis
      */
-    final public static int ContactConstraintsFull = 0x4;
+    final public static int TranslationY = 0b000010;
+    /**
+     * translation parallel to the system's Z axis
+     */
+    final public static int TranslationZ = 0b000100;
+    /**
+     * rotation around an axis parallel to the system's X axis
+     */
+    final public static int RotationX = 0b001000;
+    /**
+     * rotation around an axis parallel to the system's Y axis
+     */
+    final public static int RotationY = 0b010000;
+    /**
+     * rotation around an axis parallel to the system's Z axis
+     */
+    final public static int RotationZ = 0b100000;
+    /**
+     * translation parallel to the X-Y plane and rotation around an axis
+     * parallel to Z
+     */
+    final public static int Plane2D = TranslationX | TranslationY | RotationZ;
     // *************************************************************************
     // constructors
 
     /**
      * A private constructor to inhibit instantiation of this class.
      */
-    private EPhysicsUpdateError() {
+    private EAllowedDofs() {
     }
 }

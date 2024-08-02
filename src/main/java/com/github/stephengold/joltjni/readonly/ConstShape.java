@@ -22,11 +22,11 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.AaBox;
-import com.github.stephengold.joltjni.EShapeSubType;
-import com.github.stephengold.joltjni.EShapeType;
 import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.enumerate.EShapeType;
 import java.nio.FloatBuffer;
 
 /**

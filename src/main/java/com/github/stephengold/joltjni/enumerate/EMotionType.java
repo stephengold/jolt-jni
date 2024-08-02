@@ -19,23 +19,27 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.enumerate;
 
 /**
  * Enumerate motion types for bodies.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public enum EMotionQuality {
+public enum EMotionType {
     // *************************************************************************
-    // values - order must match <Jolt/Physics/Body/MotionQuality.h>
+    // values - order must match <Jolt/Physics/Body/MotionType.h>
 
     /**
-     * update the body in discrete steps
+     * non-moving bodies
      */
-    Discrete,
+    Static,
     /**
-     * use linear casting with the body's starting rotation
+     * bodies whose motion can be controlled directly
      */
-    LinearCast
+    Kinematic,
+    /**
+     * bodies moved by forces, impulses, and torques
+     */
+    Dynamic
 }

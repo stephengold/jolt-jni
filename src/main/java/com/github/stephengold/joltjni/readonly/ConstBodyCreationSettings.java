@@ -21,13 +21,13 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.EMotionQuality;
-import com.github.stephengold.joltjni.EMotionType;
-import com.github.stephengold.joltjni.EOverrideMassProperties;
 import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.enumerate.EMotionQuality;
+import com.github.stephengold.joltjni.enumerate.EMotionType;
+import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 
 /**
  * Read-only access to a {@code BodyCreationSettings} object.
