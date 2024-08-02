@@ -70,23 +70,15 @@ model {
         clang(Clang) // used when compiling on macOS
 
         gcc10Arm(Gcc) { // used at Travis CI and GitHub Actions
-            target('Linux_ARM32hf') {
-                cppCompiler.executable = 'arm-linux-gnueabihf-g++-10'
-                linker.executable = 'arm-linux-gnueabihf-g++-10'
-            }
             target('Linux_ARM64') {
                 cppCompiler.executable = 'aarch64-linux-gnu-g++-10'
                 linker.executable = 'aarch64-linux-gnu-g++-10'
             }
         }
-        gcc9Arm(Gcc) { // used at GitHub Actions
+        gcc9Arm(Gcc) { // used at Travis CI and GitHub Actions
             target('Linux_ARM32hf') {
                 cppCompiler.executable = 'arm-linux-gnueabihf-g++-9'
                 linker.executable = 'arm-linux-gnueabihf-g++-9'
-            }
-            target('Linux_ARM64') {
-                cppCompiler.executable = 'aarch64-linux-gnu-g++-9'
-                linker.executable = 'aarch64-linux-gnu-g++-9'
             }
         }
     }
