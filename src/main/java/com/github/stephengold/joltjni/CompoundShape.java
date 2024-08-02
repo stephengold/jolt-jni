@@ -46,4 +46,22 @@ abstract public class CompoundShape extends Shape {
     protected CompoundShape(long shapeVa) {
         super(shapeVa);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the number of sub shapes.
+     *
+     * @return the count (&ge;0)
+     */
+    public int getNumSubShapes() {
+        long shapeVa = va();
+        int result = getNumSubShapes(shapeVa);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static int getNumSubShapes(long shapeVa);
 }
