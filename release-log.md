@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.5.0 released on TBD
+## Version 0.5.0 released on 1 August 2024
 
 + Split off the Jolt Physics enums into a "joltjni.enumerate" package.
 + Use GCC v9 when compiling for the Linux_ARM32hf platform.
