@@ -39,8 +39,8 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_
   jfloat rotX, jfloat rotY, jfloat rotZ, jfloat rotW, jlong shapeRefVa) {
     MutableCompoundShape * const pCompound
             = reinterpret_cast<MutableCompoundShape *> (shapeVa);
-    Vec3 offset(offsetX, offsetY, offsetZ);
-    Quat rotation(rotX, rotY, rotZ, rotW);
+    const Vec3 offset(offsetX, offsetY, offsetZ);
+    const Quat rotation(rotX, rotY, rotZ, rotW);
     const ShapeRefC * const pSubShapeRef
             = reinterpret_cast<ShapeRefC *> (shapeRefVa);
     const Shape * const pSubShape = pSubShapeRef->GetPtr();
