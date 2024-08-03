@@ -129,10 +129,10 @@ abstract public class Shape extends NonCopyable
      *
      * @return a new JVM object with a new native object assigned
      */
-    public RefShape toRef() {
+    public ShapeRef toRef() {
         long shapeVa = va();
         long copyVa = toRef(shapeVa);
-        RefShape result = new RefShape(copyVa, true);
+        ShapeRef result = new ShapeRef(copyVa, true);
 
         return result;
     }

@@ -26,7 +26,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class RefShape extends JoltPhysicsObject {
+final public class ShapeRef extends JoltPhysicsObject {
     // *************************************************************************
     // constructors
 
@@ -38,7 +38,7 @@ final public class RefShape extends JoltPhysicsObject {
      * @param owner true &rarr; make the current object the owner, false &rarr;
      * the current object isn't the owner
      */
-    RefShape(long refVa, boolean owner) {
+    ShapeRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
     }
@@ -63,10 +63,10 @@ final public class RefShape extends JoltPhysicsObject {
      *
      * @return a new JVM object with a new native object assigned
      */
-    public RefShape toRef() {
+    public ShapeRef toRef() {
         long refVa = va();
         long copyVa = copy(refVa);
-        RefShape result = new RefShape(copyVa, true);
+        ShapeRef result = new ShapeRef(copyVa, true);
 
         return result;
     }

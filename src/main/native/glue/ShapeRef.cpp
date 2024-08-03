@@ -25,17 +25,17 @@ SOFTWARE.
  */
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/Shape.h>
-#include "auto/com_github_stephengold_joltjni_RefShape.h"
+#include "auto/com_github_stephengold_joltjni_ShapeRef.h"
 #include "glue/glue.h"
 
 using namespace JPH;
 
 /*
- * Class:     com_github_stephengold_joltjni_RefShape
+ * Class:     com_github_stephengold_joltjni_ShapeRef
  * Method:    copy
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RefShape_copy
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRef_copy
   (JNIEnv *, jclass, jlong refVa) {
     Ref<Shape> * const pRef = reinterpret_cast<Ref<Shape> *> (refVa);
     Ref<Shape> * const pResult = new Ref<Shape>(*pRef);
@@ -44,11 +44,11 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RefShape_copy
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_RefShape
+ * Class:     com_github_stephengold_joltjni_ShapeRef
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RefShape_free
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeRef_free
   (JNIEnv *, jclass, jlong refVa) {
     Ref<Shape> * const pRef = reinterpret_cast<Ref<Shape> *> (refVa);
     TRACE_DELETE("Ref<Shape>", pRef)
@@ -56,11 +56,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RefShape_free
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_RefShape
+ * Class:     com_github_stephengold_joltjni_ShapeRef
  * Method:    getPtr
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RefShape_getPtr
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRef_getPtr
   (JNIEnv *, jclass, jlong refVa) {
     Ref<Shape> * const pRef = reinterpret_cast<Ref<Shape> *> (refVa);
     Shape * const pResult = pRef->GetPtr();
