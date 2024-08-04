@@ -131,9 +131,9 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Access the BroadPhaseLayerInterface.
+     * Access the system's {@code BroadPhaseLayerInterface}.
      *
-     * @return the pre-existing instance, or null if none
+     * @return the pre-existing instance, or {@code null} if none
      */
     public ConstBroadPhaseLayerInterface getBroadPhaseLayerInterface() {
         return map;
@@ -197,25 +197,25 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Access the ObjectVsBroadPhaseLayerFilter.
+     * Access the {@code ObjectLayerPairFilter}.
      *
-     * @return the pre-existing instance, or null if none
+     * @return the pre-existing instance, or {@code null} if none
      */
     public ConstObjectVsBroadPhaseLayerFilter getOvbFilter() {
         return ovbFilter;
     }
 
     /**
-     * Access the ObjectLayerPairFilter.
+     * Access the {@code ObjectLayerPairFilter}.
      *
-     * @return the pre-existing instance, or null if none
+     * @return the pre-existing instance, or {@code null} if none
      */
     public ConstObjectLayerPairFilter getOvoFilter() {
         return ovoFilter;
     }
 
     /**
-     * Copy the system's settings. The physics system is unaffected.
+     * Copy the system's settings.
      *
      * @return a new JVM object with a new native object assigned
      *
