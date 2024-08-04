@@ -10,11 +10,11 @@ jobs:
   include:
 
     # Linux_ARM32hf:
-    - compiler: arm-linux-gnueabihf-g++-9
+    - compiler: arm-linux-gnueabihf-g++-8
       addons:
         apt:
           packages:
-            - g++-9-arm-linux-gnueabihf
+            - g++-8-arm-linux-gnueabihf
       script:
         - date
         - arm-linux-gnueabihf-g++-9 -E -v
