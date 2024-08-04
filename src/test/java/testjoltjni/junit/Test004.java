@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package testjoltjni.junit;
 
+import com.github.stephengold.joltjni.AaBox;
+import com.github.stephengold.joltjni.BodyIdVector;
 import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.MapObj2Bp;
 import com.github.stephengold.joltjni.ObjVsBpFilter;
@@ -130,6 +132,19 @@ public class Test004 {
         Assert.assertNotNull(physicsSystem);
         Assert.assertTrue(physicsSystem.hasAssignedNativeObject());
         Assert.assertNotEquals(0L, physicsSystem.va());
+
+        BodyIdVector idVector = new BodyIdVector();
+        physicsSystem.getActiveBodies(EBodyType.RigidBody, idVector);
+        Assert.assertEquals(0, idVector.size());
+        Assert.assertTrue(idVector.empty());
+
+        BodyIdVector idVector2 = new BodyIdVector();
+        physicsSystem.getBodies(idVector2);
+        Assert.assertEquals(0, idVector2.size());
+        Assert.assertTrue(idVector2.empty());
+
+        AaBox bounds = physicsSystem.getBounds();
+        Assert.assertFalse(bounds.isValid());
 
         TestUtils.assertEquals(0f, -9.81f, 0f, physicsSystem.getGravity(), 0f);
         Assert.assertEquals(0,

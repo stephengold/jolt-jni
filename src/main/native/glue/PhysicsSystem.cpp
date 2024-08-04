@@ -33,6 +33,33 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getActiveBodies
+ * Signature: (JIJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getActiveBodies
+  (JNIEnv *, jclass, jlong systemVa, jint ordinal, jlong vectorVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const EBodyType bodyType = (EBodyType)ordinal;
+    BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
+    pSystem->GetActiveBodies(bodyType, *pVector);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getBodies
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBodies
+  (JNIEnv *, jclass, jlong systemVa, jlong vectorVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
+    pSystem->GetBodies(*pVector);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    createPhysicsSystem
  * Signature: ()J
  */
@@ -69,6 +96,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBod
     return reinterpret_cast<jlong> (&result);
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getBounds
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBounds
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    AABox * const pResult = new AABox();
+    *pResult = pSystem->GetBounds();
+    return reinterpret_cast<jlong> (pResult);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem

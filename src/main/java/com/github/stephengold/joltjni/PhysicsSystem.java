@@ -70,6 +70,30 @@ public class PhysicsSystem extends NonCopyable {
     // new methods exposed
 
     /**
+     * Enumerate bodies of the specified type to the specified vector.
+     *
+     * @param bodyType (not null)
+     * @param storeResult storage for the result (not null)
+     */
+    public void getActiveBodies(EBodyType bodyType, BodyIdVector storeResult) {
+        long systemVa = va();
+        int ordinal = bodyType.ordinal();
+        long vectorVa = storeResult.va();
+        getActiveBodies(systemVa, ordinal, vectorVa);
+    }
+
+    /**
+     * Enumerate all bodies to the specified vector.
+     *
+     * @param storeResult storage for the result (not null)
+     */
+    public void getBodies(BodyIdVector storeResult) {
+        long systemVa = va();
+        long resultVa = storeResult.va();
+        getBodies(systemVa, resultVa);
+    }
+
+    /**
      * Access the system's {@code BodyInterface}.
      *
      * @return the pre-existing JVM object (not null)
@@ -77,6 +101,19 @@ public class PhysicsSystem extends NonCopyable {
     public BodyInterface getBodyInterface() {
         assert bodyInterface != null;
         return bodyInterface;
+    }
+
+    /**
+     * Return a bounding box that contains all the bodies in the system.
+     *
+     * @return a new box
+     */
+    public AaBox getBounds() {
+        long systemVa = va();
+        long boxVa = getBounds(systemVa);
+        AaBox result = new AaBox(boxVa, true);
+
+        return result;
     }
 
     /**
@@ -280,11 +317,18 @@ public class PhysicsSystem extends NonCopyable {
     // *************************************************************************
     // native private methods
 
+    native private static void getActiveBodies(
+            long systemVa, int ordinal, long vectorVa);
+
+    native private static void getBodies(long systemVa, long vectorVa);
+
     native private static long createPhysicsSystem();
 
     native private static long getBodyInterface(long systemVa);
 
     native private static long getBodyLockInterface(long systemVa);
+
+    native private static long getBounds(long systemVa);
 
     native private static float getGravityX(long systemVa);
 
