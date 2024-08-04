@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
@@ -35,7 +36,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Body extends NonCopyable {
+public class Body extends NonCopyable implements ConstBody {
     // *************************************************************************
     // constructors
 
@@ -145,141 +146,6 @@ public class Body extends NonCopyable {
     }
 
     /**
-     * Test whether the body could be made kinematic or dynamic. The body is
-     * unaffected.
-     *
-     * @return true if possible, otherwise false
-     */
-    public boolean canBeKinematicOrDynamic() {
-        long bodyVa = va();
-        boolean result = canBeKinematicOrDynamic(bodyVa);
-
-        return result;
-    }
-
-    /**
-     * Return the net force acting on the body. The body is unaffected.
-     *
-     * @return a new force vector (Newtons in system coordinates)
-     */
-    public Vec3 getAccumulatedForce() {
-        long bodyVa = va();
-        float x = getAccumulatedForceX(bodyVa);
-        float y = getAccumulatedForceY(bodyVa);
-        float z = getAccumulatedForceZ(bodyVa);
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
-    }
-
-    /**
-     * Return the net torque acting on the body. The body is unaffected.
-     *
-     * @return a new torque vector (Newton.meters in system coordinates)
-     */
-    public Vec3 getAccumulatedTorque() {
-        long bodyVa = va();
-        float x = getAccumulatedTorqueX(bodyVa);
-        float y = getAccumulatedTorqueY(bodyVa);
-        float z = getAccumulatedTorqueZ(bodyVa);
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
-    }
-
-    /**
-     * Test whether the body is allowed to fall asleep. The body is unaffected.
-     *
-     * @return true if allowed, otherwise false
-     */
-    public boolean getAllowSleeping() {
-        long bodyVa = va();
-        boolean result = getAllowSleeping(bodyVa);
-
-        return result;
-    }
-
-    /**
-     * Return the body's angular velocity. The body is unaffected.
-     *
-     * @return a new velocity vector (radians per second in system coordinates)
-     */
-    public Vec3 getAngularVelocity() {
-        long bodyVa = va();
-        float wx = getAngularVelocityX(bodyVa);
-        float wy = getAngularVelocityY(bodyVa);
-        float wz = getAngularVelocityZ(bodyVa);
-        Vec3 result = new Vec3(wx, wy, wz);
-
-        return result;
-    }
-
-    /**
-     * Return the location of the body's center of mass (which might not
-     * coincide with its origin). The body is unaffected.
-     *
-     * @return a new location vector (in system coordinates, all components
-     * finite)
-     */
-    public RVec3 getCenterOfMassPosition() {
-        long bodyVa = va();
-
-        double xx = getCenterOfMassPositionX(bodyVa);
-        assert Double.isFinite(xx) : "xx = " + xx;
-
-        double yy = getCenterOfMassPositionY(bodyVa);
-        assert Double.isFinite(yy) : "yy = " + yy;
-
-        double zz = getCenterOfMassPositionZ(bodyVa);
-        assert Double.isFinite(zz) : "zz = " + zz;
-
-        RVec3 result = new RVec3(xx, yy, zz);
-
-        return result;
-    }
-
-    /**
-     * Return the body's friction ratio. The body is unaffected.
-     *
-     * @return the ratio
-     */
-    public float getFriction() {
-        long bodyVa = va();
-        float result = getFriction(bodyVa);
-        return result;
-    }
-
-    /**
-     * Access the body's ID for use with {@code BodyInterface}. The body is
-     * unaffected.
-     *
-     * @return a new immutable JVM object with the pre-existing native object
-     * assigned
-     */
-    public ConstBodyId getId() {
-        long bodyVa = va();
-        long bodyIdVa = getId(bodyVa);
-        ConstBodyId result = new BodyId(bodyIdVa, false);
-
-        return result;
-    }
-
-    /**
-     * Return the body's linear velocity. The body is unaffected.
-     *
-     * @return a new velocity vector (meters per second in system coordinates)
-     */
-    public Vec3 getLinearVelocity() {
-        long bodyVa = va();
-        float vx = getLinearVelocityX(bodyVa);
-        float vy = getLinearVelocityY(bodyVa);
-        float vz = getLinearVelocityZ(bodyVa);
-        Vec3 result = new Vec3(vx, vy, vz);
-
-        return result;
-    }
-
-    /**
      * Access the body's motion properties.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
@@ -294,184 +160,6 @@ public class Body extends NonCopyable {
             long propertiesVa = getMotionProperties(bodyVa);
             result = new MotionProperties(propertiesVa);
         }
-
-        return result;
-    }
-
-    /**
-     * Return the body's motion type. The body is unaffected.
-     *
-     * @return an enum value (not null)
-     */
-    public EMotionType getMotionType() {
-        long bodyVa = va();
-        int ordinal = getMotionType(bodyVa);
-        EMotionType result = EMotionType.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the body's object layer. The body is unaffected.
-     *
-     * @return a layer index (&ge;0)
-     */
-    public int getObjectLayer() {
-        long bodyVa = va();
-        int result = getObjectLayer(bodyVa);
-
-        return result;
-    }
-
-    /**
-     * Return the location of the body's origin (which not coincide with its
-     * center of mass). The body is unaffected.
-     *
-     * @return a new location vector (in system coordinates, all components
-     * finite)
-     */
-    public RVec3 getPosition() {
-        long bodyVa = va();
-
-        double xx = getPositionX(bodyVa);
-        assert Double.isFinite(xx) : "xx = " + xx;
-
-        double yy = getPositionY(bodyVa);
-        assert Double.isFinite(yy) : "yy = " + yy;
-
-        double zz = getPositionZ(bodyVa);
-        assert Double.isFinite(zz) : "zz = " + zz;
-
-        RVec3 result = new RVec3(xx, yy, zz);
-
-        return result;
-    }
-
-    /**
-     * Return the body's restitution ratio. The body is unaffected.
-     *
-     * @return the value (typically &ge;0 and &le;1)
-     */
-    public float getRestitution() {
-        long bodyVa = va();
-        float result = getRestitution(bodyVa);
-
-        return result;
-    }
-
-    /**
-     * Return the body's orientation. The body is unaffected.
-     *
-     * @return a new rotation quaternion (relative to the system axes)
-     */
-    public Quat getRotation() {
-        long bodyVa = va();
-        float qx = getRotationX(bodyVa);
-        float qy = getRotationY(bodyVa);
-        float qz = getRotationZ(bodyVa);
-        float qw = getRotationW(bodyVa);
-        Quat result = new Quat(qx, qy, qz, qw);
-
-        return result;
-    }
-
-    /**
-     * Access the body's shape.
-     *
-     * @return a new immutable JVM object with the pre-existing native object
-     * assigned, or {@code null} if none
-     */
-    public ConstShape getShape() {
-        long bodyVa = va();
-        long shapeVa = getShape(bodyVa);
-        ConstShape result = Shape.newShape(shapeVa);
-
-        return result;
-    }
-
-    /**
-     * Return the body's user data: can be used for anything. The body is
-     * unaffected.
-     *
-     * @return the value
-     */
-    public long getUserData() {
-        long bodyVa = va();
-        long result = getUserData(bodyVa);
-
-        return result;
-    }
-
-    /**
-     * Access the body's bounding box. The body is unaffected.
-     *
-     * @return a new immutable JVM object with the pre-existing native object
-     * assigned
-     */
-    public ConstAaBox getWorldSpaceBounds() {
-        long bodyVa = va();
-        long boxVa = getWorldSpaceBounds(bodyVa);
-        ConstAaBox result = new AaBox(boxVa, false);
-
-        return result;
-    }
-
-    /**
-     * Test whether the body is deactivated. The body is unaffected.
-     *
-     * @return false if deactivated, otherwise true
-     */
-    public boolean isActive() {
-        long bodyVa = va();
-        boolean result = isActive(bodyVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether the body is dynamic. The body is unaffected.
-     *
-     * @return true if dynamic, otherwise false
-     */
-    public boolean isDynamic() {
-        long bodyVa = va();
-        boolean result = isDynamic(bodyVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether the body is kinematic. The body is unaffected.
-     *
-     * @return true if kinematic, otherwise false
-     */
-    public boolean isKinematic() {
-        long bodyVa = va();
-        boolean result = isKinematic(bodyVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether the body is a rigid body. The body is unaffected.
-     *
-     * @return true if rigid body, otherwise false
-     */
-    public boolean isRigidBody() {
-        long bodyVa = va();
-        boolean result = isRigidBody(bodyVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether the body is static. The body is unaffected.
-     *
-     * @return true if static, otherwise false
-     */
-    public boolean isStatic() {
-        long bodyVa = va();
-        boolean result = isStatic(bodyVa);
 
         return result;
     }
@@ -615,6 +303,343 @@ public class Body extends NonCopyable {
     public void setUserData(long value) {
         long bodyVa = va();
         setUserData(bodyVa, value);
+    }
+    // *************************************************************************
+    // ConstBody methods
+
+    /**
+     * Test whether the body could be made kinematic or dynamic. The body is
+     * unaffected.
+     *
+     * @return true if possible, otherwise false
+     */
+    @Override
+    public boolean canBeKinematicOrDynamic() {
+        long bodyVa = va();
+        boolean result = canBeKinematicOrDynamic(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Return the net force acting on the body. The body is unaffected.
+     *
+     * @return a new force vector (Newtons in system coordinates)
+     */
+    @Override
+    public Vec3 getAccumulatedForce() {
+        long bodyVa = va();
+        float x = getAccumulatedForceX(bodyVa);
+        float y = getAccumulatedForceY(bodyVa);
+        float z = getAccumulatedForceZ(bodyVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the net torque acting on the body. The body is unaffected.
+     *
+     * @return a new torque vector (Newton.meters in system coordinates)
+     */
+    @Override
+    public Vec3 getAccumulatedTorque() {
+        long bodyVa = va();
+        float x = getAccumulatedTorqueX(bodyVa);
+        float y = getAccumulatedTorqueY(bodyVa);
+        float z = getAccumulatedTorqueZ(bodyVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is allowed to fall asleep. The body is unaffected.
+     *
+     * @return true if allowed, otherwise false
+     */
+    @Override
+    public boolean getAllowSleeping() {
+        long bodyVa = va();
+        boolean result = getAllowSleeping(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Return the body's angular velocity. The body is unaffected.
+     *
+     * @return a new velocity vector (radians per second in system coordinates)
+     */
+    @Override
+    public Vec3 getAngularVelocity() {
+        long bodyVa = va();
+        float wx = getAngularVelocityX(bodyVa);
+        float wy = getAngularVelocityY(bodyVa);
+        float wz = getAngularVelocityZ(bodyVa);
+        Vec3 result = new Vec3(wx, wy, wz);
+
+        return result;
+    }
+
+    /**
+     * Return the location of the body's center of mass (which might not
+     * coincide with its origin). The body is unaffected.
+     *
+     * @return a new location vector (in system coordinates, all components
+     * finite)
+     */
+    @Override
+    public RVec3 getCenterOfMassPosition() {
+        long bodyVa = va();
+
+        double xx = getCenterOfMassPositionX(bodyVa);
+        assert Double.isFinite(xx) : "xx = " + xx;
+
+        double yy = getCenterOfMassPositionY(bodyVa);
+        assert Double.isFinite(yy) : "yy = " + yy;
+
+        double zz = getCenterOfMassPositionZ(bodyVa);
+        assert Double.isFinite(zz) : "zz = " + zz;
+
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Return the body's friction ratio. The body is unaffected.
+     *
+     * @return the ratio
+     */
+    @Override
+    public float getFriction() {
+        long bodyVa = va();
+        float result = getFriction(bodyVa);
+        return result;
+    }
+
+    /**
+     * Access the body's ID for use with {@code BodyInterface}. The body is
+     * unaffected.
+     *
+     * @return a new immutable JVM object with the pre-existing native object
+     * assigned
+     */
+    @Override
+    public ConstBodyId getId() {
+        long bodyVa = va();
+        long bodyIdVa = getId(bodyVa);
+        ConstBodyId result = new BodyId(bodyIdVa, false);
+
+        return result;
+    }
+
+    /**
+     * Return the body's linear velocity. The body is unaffected.
+     *
+     * @return a new velocity vector (meters per second in system coordinates)
+     */
+    @Override
+    public Vec3 getLinearVelocity() {
+        long bodyVa = va();
+        float vx = getLinearVelocityX(bodyVa);
+        float vy = getLinearVelocityY(bodyVa);
+        float vz = getLinearVelocityZ(bodyVa);
+        Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Return the body's motion type. The body is unaffected.
+     *
+     * @return an enum value (not null)
+     */
+    @Override
+    public EMotionType getMotionType() {
+        long bodyVa = va();
+        int ordinal = getMotionType(bodyVa);
+        EMotionType result = EMotionType.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the body's object layer. The body is unaffected.
+     *
+     * @return a layer index (&ge;0)
+     */
+    @Override
+    public int getObjectLayer() {
+        long bodyVa = va();
+        int result = getObjectLayer(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Return the location of the body's origin (which not coincide with its
+     * center of mass). The body is unaffected.
+     *
+     * @return a new location vector (in system coordinates, all components
+     * finite)
+     */
+    @Override
+    public RVec3 getPosition() {
+        long bodyVa = va();
+
+        double xx = getPositionX(bodyVa);
+        assert Double.isFinite(xx) : "xx = " + xx;
+
+        double yy = getPositionY(bodyVa);
+        assert Double.isFinite(yy) : "yy = " + yy;
+
+        double zz = getPositionZ(bodyVa);
+        assert Double.isFinite(zz) : "zz = " + zz;
+
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Return the body's restitution ratio. The body is unaffected.
+     *
+     * @return the value (typically &ge;0 and &le;1)
+     */
+    @Override
+    public float getRestitution() {
+        long bodyVa = va();
+        float result = getRestitution(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Return the body's orientation. The body is unaffected.
+     *
+     * @return a new rotation quaternion (relative to the system axes)
+     */
+    @Override
+    public Quat getRotation() {
+        long bodyVa = va();
+        float qx = getRotationX(bodyVa);
+        float qy = getRotationY(bodyVa);
+        float qz = getRotationZ(bodyVa);
+        float qw = getRotationW(bodyVa);
+        Quat result = new Quat(qx, qy, qz, qw);
+
+        return result;
+    }
+
+    /**
+     * Access the body's shape.
+     *
+     * @return a new immutable JVM object with the pre-existing native object
+     * assigned, or {@code null} if none
+     */
+    @Override
+    public ConstShape getShape() {
+        long bodyVa = va();
+        long shapeVa = getShape(bodyVa);
+        ConstShape result = Shape.newShape(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Return the body's user data: can be used for anything. The body is
+     * unaffected.
+     *
+     * @return the value
+     */
+    @Override
+    public long getUserData() {
+        long bodyVa = va();
+        long result = getUserData(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Access the body's bounding box. The body is unaffected.
+     *
+     * @return a new immutable JVM object with the pre-existing native object
+     * assigned
+     */
+    @Override
+    public ConstAaBox getWorldSpaceBounds() {
+        long bodyVa = va();
+        long boxVa = getWorldSpaceBounds(bodyVa);
+        ConstAaBox result = new AaBox(boxVa, false);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is deactivated. The body is unaffected.
+     *
+     * @return false if deactivated, otherwise true
+     */
+    @Override
+    public boolean isActive() {
+        long bodyVa = va();
+        boolean result = isActive(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is dynamic. The body is unaffected.
+     *
+     * @return true if dynamic, otherwise false
+     */
+    @Override
+    public boolean isDynamic() {
+        long bodyVa = va();
+        boolean result = isDynamic(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is kinematic. The body is unaffected.
+     *
+     * @return true if kinematic, otherwise false
+     */
+    @Override
+    public boolean isKinematic() {
+        long bodyVa = va();
+        boolean result = isKinematic(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is a rigid body. The body is unaffected.
+     *
+     * @return true if rigid body, otherwise false
+     */
+    @Override
+    public boolean isRigidBody() {
+        long bodyVa = va();
+        boolean result = isRigidBody(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is static. The body is unaffected.
+     *
+     * @return true if static, otherwise false
+     */
+    @Override
+    public boolean isStatic() {
+        long bodyVa = va();
+        boolean result = isStatic(bodyVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods
