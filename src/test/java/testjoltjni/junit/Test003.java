@@ -86,7 +86,7 @@ public class Test003 {
     // Java private methods
 
     /**
-     * Test the AaBox class.
+     * Test the {@code AaBox} class.
      */
     private static void doAaBox() {
         {

@@ -52,7 +52,7 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
     }
 
     /**
-     * Test whether the list contains no triangles.
+     * Test whether the list contains any triangles.
      *
      * @return true if empty, otherwise false
      */
@@ -65,10 +65,10 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
     }
 
     /**
-     * Return the triangle at the specified index.
+     * Access the triangle at the specified index.
      *
      * @param listIndex the index from which to get the triangle
-     * @return the triangle
+     * @return a new JVM object with the pre-existing native object assigned
      */
     public IndexedTriangle get(int listIndex) {
         long listVa = va();

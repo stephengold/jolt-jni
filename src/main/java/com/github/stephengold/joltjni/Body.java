@@ -283,7 +283,7 @@ public class Body extends NonCopyable {
      * Access the body's motion properties.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
-     * null if none
+     * {@code null} if none
      */
     public MotionProperties getMotionProperties() {
         MotionProperties result;
