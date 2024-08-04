@@ -75,10 +75,10 @@ model {
                 linker.executable = 'aarch64-linux-gnu-g++-10'
             }
         }
-        gcc8Arm(Gcc) { // used at Travis CI and GitHub Actions
+        gcc9Arm(Gcc) { // used at Travis CI and GitHub Actions
             target('Linux_ARM32hf') {
-                cppCompiler.executable = 'arm-linux-gnueabihf-g++-8'
-                linker.executable = 'arm-linux-gnueabihf-g++-8'
+                cppCompiler.executable = 'arm-linux-gnueabihf-g++-9'
+                linker.executable = 'arm-linux-gnueabihf-g++-9'
             }
         }
     }
