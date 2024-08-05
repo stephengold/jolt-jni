@@ -140,6 +140,32 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Access the combining function for friction.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public CombineFunction getCombineFriction() {
+        long systemVa = va();
+        long functionVa = getCombineFriction(systemVa);
+        CombineFunction result = new CombineFunction(functionVa);
+
+        return result;
+    }
+
+    /**
+     * Access the combining function for restitutions.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public CombineFunction getCombineRestitution() {
+        long systemVa = va();
+        long functionVa = getCombineRestitution(systemVa);
+        CombineFunction result = new CombineFunction(functionVa);
+
+        return result;
+    }
+
+    /**
      * Copy the gravity vector. The physics system is unaffected.
      *
      * @return a new acceleration vector (meters per second squared in
@@ -268,6 +294,28 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Replace the combining function for friction.
+     *
+     * @param function the desired function (not null)
+     */
+    public void setCombineFriction(CombineFunction function) {
+        long systemVa = va();
+        long functionVa = function.va();
+        setCombineFriction(systemVa, functionVa);
+    }
+
+    /**
+     * Replace the combining function for restitutions.
+     *
+     * @param function the desired function (not null)
+     */
+    public void setCombineRestitution(CombineFunction function) {
+        long systemVa = va();
+        long functionVa = function.va();
+        setCombineRestitution(systemVa, functionVa);
+    }
+
+    /**
      * Alter the system's gravity vector.
      *
      * @param gravity (not null, unaffected)
@@ -330,6 +378,10 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static long getBounds(long systemVa);
 
+    native private static long getCombineFriction(long systemVa);
+
+    native private static long getCombineRestitution(long systemVa);
+
     native private static float getGravityX(long systemVa);
 
     native private static float getGravityY(long systemVa);
@@ -350,6 +402,12 @@ public class PhysicsSystem extends NonCopyable {
             long mapVa, long ovbFilterVa, long ovoFilterVa);
 
     native private static void optimizeBroadPhase(long systemVa);
+
+    native private static void setCombineFriction(
+            long systemVa, long functionVa);
+
+    native private static void setCombineRestitution(
+            long systemVa, long functionVa);
 
     native private static void setGravity(
             long systemVa, float x, float y, float z);

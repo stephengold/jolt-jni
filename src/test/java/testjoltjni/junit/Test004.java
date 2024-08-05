@@ -24,6 +24,7 @@ package testjoltjni.junit;
 import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.BodyIdVector;
 import com.github.stephengold.joltjni.BodyInterface;
+import com.github.stephengold.joltjni.CombineFunction;
 import com.github.stephengold.joltjni.MapObj2Bp;
 import com.github.stephengold.joltjni.ObjVsBpFilter;
 import com.github.stephengold.joltjni.ObjVsObjFilter;
@@ -83,6 +84,14 @@ public class Test004 {
         // PhysicsSystem setters:
         physicsSystem.setGravity(new Vec3(0.01f, 0f, -32f));
         TestUtils.assertEquals(0.01f, 0f, -32f, physicsSystem.getGravity(), 0f);
+
+        physicsSystem.setCombineFriction(CombineFunction.min(true));
+        Assert.assertEquals(CombineFunction.min(true),
+                physicsSystem.getCombineFriction());
+
+        physicsSystem.setCombineRestitution(CombineFunction.max(false));
+        Assert.assertEquals(CombineFunction.max(false),
+                physicsSystem.getCombineRestitution());
 
         // Directly create default PhysicsSettings:
         PhysicsSettings settings2 = new PhysicsSettings();
@@ -145,6 +154,9 @@ public class Test004 {
 
         AaBox bounds = physicsSystem.getBounds();
         Assert.assertFalse(bounds.isValid());
+
+        Assert.assertNotNull(physicsSystem.getCombineFriction());
+        Assert.assertNotNull(physicsSystem.getCombineRestitution());
 
         TestUtils.assertEquals(0f, -9.81f, 0f, physicsSystem.getGravity(), 0f);
         Assert.assertEquals(0,

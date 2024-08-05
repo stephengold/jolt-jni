@@ -112,6 +112,34 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBou
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getCombineFriction
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getCombineFriction
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    ContactConstraintManager::CombineFunction pResult
+            = pSystem->GetCombineFriction();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getCombineRestitution
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getCombineRestitution
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    ContactConstraintManager::CombineFunction pResult
+            = pSystem->GetCombineRestitution();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getGravityX
  * Signature: (J)F
  */
@@ -237,6 +265,34 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_optimiz
     PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     pSystem->OptimizeBroadPhase();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    setCombineFriction
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setCombineFriction
+  (JNIEnv *, jclass, jlong systemVa, jlong functionVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const ContactConstraintManager::CombineFunction pFunction
+            = reinterpret_cast<ContactConstraintManager::CombineFunction> (functionVa);
+    pSystem->SetCombineFriction(pFunction);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    setCombineRestitution
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setCombineRestitution
+  (JNIEnv *, jclass, jlong systemVa, jlong functionVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const ContactConstraintManager::CombineFunction pFunction
+            = reinterpret_cast<ContactConstraintManager::CombineFunction> (functionVa);
+    pSystem->SetCombineRestitution(pFunction);
 }
 
 /*
