@@ -22,9 +22,12 @@ SOFTWARE.
 package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.Body;
+import com.github.stephengold.joltjni.BodyActivationListener;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.CustomBodyActivationListener;
+import com.github.stephengold.joltjni.CustomContactListener;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
 import com.github.stephengold.joltjni.MapObj2Bp;
@@ -45,6 +48,7 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
+import com.github.stephengold.joltjni.enumerate.ValidateResult;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import org.junit.Assert;
 import org.junit.Test;
@@ -96,6 +100,44 @@ public class Test001 {
         PhysicsSystem physicsSystem = new PhysicsSystem();
         physicsSystem.init(maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
                 mapObj2Bp, objVsBpFilter, objVsObjFilter);
+        physicsSystem.setContactListener(new CustomContactListener() {
+            @Override
+            public void onContactAdded(long body1Va, long body2Va,
+                    long manifoldVa, long settingsVa) {
+                System.out.println("A contact was added");
+            }
+
+            @Override
+            public void onContactPersisted(long body1Va, long body2Va,
+                    long manifoldVa, long settingsVa) {
+                System.out.println("A contact was persisted");
+            }
+
+            @Override
+            public void onContactRemoved(long pairVa) {
+                System.out.println("A contact was removed");
+            }
+
+            @Override
+            public int onContactValidate(long body1Va, long body2Va,
+                    double x, double y, double z, long resultVa) {
+                System.out.println("Contact validate callback");
+                return ValidateResult.AcceptAllContactsForThisBodyPair
+                        .ordinal();
+            }
+        });
+        BodyActivationListener listener = new CustomBodyActivationListener() {
+            @Override
+            public void onBodyActivated(long idVa, long inBodyUserData) {
+                System.out.println("A body got activated");
+            }
+
+            @Override
+            public void onBodyDeactivated(long idVa, long inBodyUserData) {
+                System.out.println("A body went to sleep");
+            }
+        };
+        physicsSystem.setBodyActivationListener(listener);
         BodyInterface bodyInterface = physicsSystem.getBodyInterface();
 
         BoxShapeSettings floorShapeSettings
