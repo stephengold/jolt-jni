@@ -38,7 +38,6 @@ class CustomContactListener : ContactListener {
     jmethodID mRemovedMethodId;
     jmethodID mValidateMethodId;
     jobject mJavaObject;
-    mutable SharedMutex mMutex;
 
 public:
     CustomContactListener(JNIEnv *pEnv, jobject javaObject) {
@@ -73,10 +72,7 @@ public:
         const jlong body2Va = reinterpret_cast<jlong> (&inBody2);
         const jlong manifoldVa = reinterpret_cast<jlong> (&inManifold);
         const jlong settingsVa = reinterpret_cast<jlong> (&ioSettings);
-        {
-            unique_lock lock(mMutex);
-            pAttachEnv->CallVoidMethod(mJavaObject, mAddedMethodId, body1Va, body2Va, manifoldVa, settingsVa);
-        }
+        pAttachEnv->CallVoidMethod(mJavaObject, mAddedMethodId, body1Va, body2Va, manifoldVa, settingsVa);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
         mpVM->DetachCurrentThread();
     }
@@ -90,10 +86,8 @@ public:
         const jlong body2Va = reinterpret_cast<jlong> (&inBody2);
         const jlong manifoldVa = reinterpret_cast<jlong> (&inManifold);
         const jlong settingsVa = reinterpret_cast<jlong> (&ioSettings);
-        {
-            unique_lock lock(mMutex);
-            pAttachEnv->CallVoidMethod(mJavaObject, mPersistedMethodId, body1Va, body2Va, manifoldVa, settingsVa);
-        }
+        pAttachEnv->CallVoidMethod(mJavaObject, mPersistedMethodId, body1Va,
+                body2Va, manifoldVa, settingsVa);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
         mpVM->DetachCurrentThread();
     }
@@ -104,10 +98,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong pairVa = reinterpret_cast<jlong> (&pair);
-        {
-            unique_lock lock(mMutex);
-            pAttachEnv->CallVoidMethod(mJavaObject, mRemovedMethodId, pairVa);
-        }
+        pAttachEnv->CallVoidMethod(mJavaObject, mRemovedMethodId, pairVa);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
         mpVM->DetachCurrentThread();
     }
@@ -123,11 +114,8 @@ public:
         const double offsetY = inBaseOffset.GetY();
         const double offsetZ = inBaseOffset.GetZ();
         const jlong shapeVa = reinterpret_cast<jlong> (&inCollisionResult);
-        jint jintResult;
-        {
-            unique_lock lock(mMutex);
-            jintResult = pAttachEnv->CallIntMethod(mJavaObject, mValidateMethodId, body1Va, body2Va, offsetX, offsetY, offsetZ, shapeVa);
-        }
+        jint jintResult = pAttachEnv->CallIntMethod(mJavaObject,
+                mValidateMethodId, body1Va, body2Va, offsetX, offsetY, offsetZ, shapeVa);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
         mpVM->DetachCurrentThread();
         return (ValidateResult) jintResult;

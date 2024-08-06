@@ -37,7 +37,6 @@ class CustomBodyActivationListener : BodyActivationListener {
     jmethodID mActivatedMethodId;
     jmethodID mDeactivatedMethodId;
     jobject mJavaObject;
-    mutable SharedMutex mMutex;
 
 public:
     CustomBodyActivationListener(JNIEnv *pEnv, jobject javaObject) {
@@ -64,10 +63,7 @@ public:
 
         const jlong idVa = reinterpret_cast<jlong> (&inBodyID);
         const jlong userData = inBodyUserData;
-        {
-            unique_lock lock(mMutex);
-            pAttachEnv->CallVoidMethod(mJavaObject, mActivatedMethodId, idVa, userData);
-        }
+        pAttachEnv->CallVoidMethod(mJavaObject, mActivatedMethodId, idVa, userData);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
         mpVM->DetachCurrentThread();
     }
@@ -79,10 +75,7 @@ public:
 
         const jlong idVa = reinterpret_cast<jlong> (&inBodyID);
         const jlong userData = inBodyUserData;
-        {
-            unique_lock lock(mMutex);
-            pAttachEnv->CallVoidMethod(mJavaObject, mDeactivatedMethodId, idVa, userData);
-        }
+        pAttachEnv->CallVoidMethod(mJavaObject, mDeactivatedMethodId, idVa, userData);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
         mpVM->DetachCurrentThread();
     }
