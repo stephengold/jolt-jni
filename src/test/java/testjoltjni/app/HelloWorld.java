@@ -49,6 +49,20 @@ public class HelloWorld {
 	private static final int BP_LAYER_MOVING = 1;
 	private static final int BP_NUM_LAYERS = 2;
 
+// An example activation listener
+static class MyBodyActivationListener extends CustomBodyActivationListener
+{
+	public void onBodyActivated(long idVa, long inBodyUserData)
+	{
+		System.out.println("A body got activated");
+	}
+
+	public void onBodyDeactivated(long idVa, long inBodyUserData)
+	{
+		System.out.println("A body went to sleep");
+	}
+};
+
 // Program entry point
 public static void main(String[] argv)
 {
@@ -119,6 +133,12 @@ public static void main(String[] argv)
 	// Now we can create the actual physics system.
 	PhysicsSystem physics_system = new PhysicsSystem();
 	physics_system.init(cMaxBodies, cNumBodyMutexes, cMaxBodyPairs, cMaxContactConstraints, broad_phase_layer_interface, object_vs_broadphase_layer_filter, object_vs_object_layer_filter);
+
+	// A body activation listener gets notified when bodies activate and go to sleep
+	// Note that this is called from a job so whatever you do here needs to be thread safe.
+	// Registering one is entirely optional.
+	MyBodyActivationListener body_activation_listener = new MyBodyActivationListener();
+	physics_system.setBodyActivationListener(body_activation_listener);
 
 	// The main way to interact with the bodies in the physics system is through the body interface. There is a locking and a non-locking
 	// variant of this. We're going to use the locking version (even though we're not planning to access bodies from multiple threads)

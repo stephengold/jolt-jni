@@ -94,6 +94,26 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Access the system's {@code BodyActivationListener}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    public BodyActivationListener getBodyActivationListener() {
+        long systemVa = va();
+        long listenerVa = getBodyActivationListener(systemVa);
+
+        BodyActivationListener result;
+        if (listenerVa == 0L) {
+            result = null;
+        } else {
+            result = new BodyActivationListener(listenerVa, false);
+        }
+
+        return result;
+    }
+
+    /**
      * Access the system's {@code BodyInterface}.
      *
      * @return the pre-existing JVM object (not null)
@@ -294,6 +314,17 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Replace the system's {@code BodyActivationListener}.
+     *
+     * @param listener the desired listener
+     */
+    public void setBodyActivationListener(BodyActivationListener listener) {
+        long systemVa = va();
+        long listenerVa = listener.va();
+        setBodyActivationListener(systemVa, listenerVa);
+    }
+
+    /**
      * Replace the combining function for friction.
      *
      * @param function the desired function (not null)
@@ -372,6 +403,8 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static long createPhysicsSystem();
 
+    native private static long getBodyActivationListener(long systemVa);
+
     native private static long getBodyInterface(long systemVa);
 
     native private static long getBodyLockInterface(long systemVa);
@@ -402,6 +435,9 @@ public class PhysicsSystem extends NonCopyable {
             long mapVa, long ovbFilterVa, long ovoFilterVa);
 
     native private static void optimizeBroadPhase(long systemVa);
+
+    native private static void setBodyActivationListener(
+            long systemVa, long listenerVa);
 
     native private static void setCombineFriction(
             long systemVa, long functionVa);

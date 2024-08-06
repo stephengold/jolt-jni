@@ -72,6 +72,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_create
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getBodyActivationListener
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBodyActivationListener
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    BodyActivationListener * const pResult
+            = pSystem->GetBodyActivationListener();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getBodyInterface
  * Signature: (J)J
  */
@@ -265,6 +279,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_optimiz
     PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     pSystem->OptimizeBroadPhase();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    setBodyActivationListener
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setBodyActivationListener
+  (JNIEnv *, jclass, jlong systemVa, jlong listenerVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    BodyActivationListener * const pListener
+            = reinterpret_cast<BodyActivationListener *> (listenerVa);
+    pSystem->SetBodyActivationListener(pListener);
 }
 
 /*

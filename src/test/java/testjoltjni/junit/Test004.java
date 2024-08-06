@@ -152,6 +152,8 @@ public class Test004 {
         Assert.assertEquals(0, idVector2.size());
         Assert.assertTrue(idVector2.empty());
 
+        Assert.assertNull(physicsSystem.getBodyActivationListener());
+
         AaBox bounds = physicsSystem.getBounds();
         Assert.assertFalse(bounds.isValid());
 
