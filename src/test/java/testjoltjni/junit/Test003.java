@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemSingleThreaded;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
@@ -73,6 +74,7 @@ public class Test003 {
 
         doAaBox();
         doBodyCreationSettings();
+        doContactSettings();
         doJobSystemSingleThreaded();
         doJobSystemThreadPool();
         doMassProperties();
@@ -180,6 +182,18 @@ public class Test003 {
 
             TestUtils.testClose(bcs, shape);
         }
+    }
+
+    /**
+     * Test the {@code ContactSettings} class.
+     */
+    private static void doContactSettings() {
+        ContactSettings settings = new ContactSettings();
+
+        testContactSettingsDefaults(settings);
+        testContactSettingsSetters(settings);
+
+        TestUtils.testClose(settings);
     }
 
     /**
@@ -358,6 +372,54 @@ public class Test003 {
 
         bcs.setRotation(new Quat(0.6f, 0f, 0f, 0.8f));
         TestUtils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code ContactSettings}.
+     *
+     * @param setings the properties to test (not null, unaffected)
+     */
+    private static void testContactSettingsDefaults(ContactSettings settings) {
+        Assert.assertEquals(0f, settings.getCombinedFriction(), 0f);
+        Assert.assertEquals(0f, settings.getCombinedRestitution(), 0f);
+        Assert.assertEquals(1f, settings.getInvInertiaScale1(), 0f);
+        Assert.assertEquals(1f, settings.getInvInertiaScale2(), 0f);
+        Assert.assertEquals(1f, settings.getInvMassScale1(), 0f);
+        Assert.assertEquals(1f, settings.getInvMassScale2(), 0f);
+        Assert.assertFalse(settings.getIsSensor());
+        TestUtils.assertEquals(0f, 0f, 0f,
+                settings.getRelativeAngularSurfaceVelocity(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f,
+                settings.getRelativeLinearSurfaceVelocity(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code ContactSettings}.
+     *
+     * @param setings the properties to test (not null)
+     */
+    private static void testContactSettingsSetters(ContactSettings settings) {
+        settings.setCombinedFriction(11f);
+        settings.setCombinedRestitution(12f);
+        settings.setInvInertiaScale1(13f);
+        settings.setInvInertiaScale2(14f);
+        settings.setInvMassScale1(15f);
+        settings.setInvMassScale2(16f);
+        settings.setIsSensor(true);
+        settings.setRelativeAngularSurfaceVelocity(new Vec3(17f, 18f, 19f));
+        settings.setRelativeLinearSurfaceVelocity(new Vec3(20f, 21f, 22f));
+
+        Assert.assertEquals(11f, settings.getCombinedFriction(), 0f);
+        Assert.assertEquals(12f, settings.getCombinedRestitution(), 0f);
+        Assert.assertEquals(13f, settings.getInvInertiaScale1(), 0f);
+        Assert.assertEquals(14f, settings.getInvInertiaScale2(), 0f);
+        Assert.assertEquals(15f, settings.getInvMassScale1(), 0f);
+        Assert.assertEquals(16f, settings.getInvMassScale2(), 0f);
+        Assert.assertTrue(settings.getIsSensor());
+        TestUtils.assertEquals(17f, 18f, 19f,
+                settings.getRelativeAngularSurfaceVelocity(), 0f);
+        TestUtils.assertEquals(20f, 21f, 22f,
+                settings.getRelativeLinearSurfaceVelocity(), 0f);
     }
 
     /**
