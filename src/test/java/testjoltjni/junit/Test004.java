@@ -159,6 +159,7 @@ public class Test004 {
 
         Assert.assertNotNull(physicsSystem.getCombineFriction());
         Assert.assertNotNull(physicsSystem.getCombineRestitution());
+        Assert.assertNull(physicsSystem.getContactListener());
 
         TestUtils.assertEquals(0f, -9.81f, 0f, physicsSystem.getGravity(), 0f);
         Assert.assertEquals(0,

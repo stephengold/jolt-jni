@@ -154,6 +154,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getCom
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getContactListener
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getContactListener
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    ContactListener * const pResult = pSystem->GetContactListener();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getGravityX
  * Signature: (J)F
  */
@@ -321,6 +334,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setComb
     const ContactConstraintManager::CombineFunction pFunction
             = reinterpret_cast<ContactConstraintManager::CombineFunction> (functionVa);
     pSystem->SetCombineRestitution(pFunction);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    setContactListener
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setContactListener
+  (JNIEnv *, jclass, jlong systemVa, jlong listenerVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    ContactListener * const pListener
+            = reinterpret_cast<ContactListener *> (listenerVa);
+    pSystem->SetContactListener(pListener);
 }
 
 /*

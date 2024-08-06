@@ -186,6 +186,26 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Access the system's {@code ContactListener}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    public ContactListener getContactListener() {
+        long systemVa = va();
+        long listenerVa = getContactListener(systemVa);
+
+        ContactListener result;
+        if (listenerVa == 0L) {
+            result = null;
+        } else {
+            result = new ContactListener(listenerVa, false);
+        }
+
+        return result;
+    }
+
+    /**
      * Copy the gravity vector. The physics system is unaffected.
      *
      * @return a new acceleration vector (meters per second squared in
@@ -347,6 +367,17 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Replace the system's contact listener.
+     *
+     * @param listener the desired listener
+     */
+    public void setContactListener(ContactListener listener) {
+        long systemVa = va();
+        long listenerVa = listener.va();
+        setContactListener(systemVa, listenerVa);
+    }
+
+    /**
      * Alter the system's gravity vector.
      *
      * @param gravity (not null, unaffected)
@@ -415,6 +446,8 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static long getCombineRestitution(long systemVa);
 
+    native private static long getContactListener(long systemVa);
+
     native private static float getGravityX(long systemVa);
 
     native private static float getGravityY(long systemVa);
@@ -444,6 +477,9 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static void setCombineRestitution(
             long systemVa, long functionVa);
+
+    native private static void setContactListener(
+            long systemVa, long listenerVa);
 
     native private static void setGravity(
             long systemVa, float x, float y, float z);

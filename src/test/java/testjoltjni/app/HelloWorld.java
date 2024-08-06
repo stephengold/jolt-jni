@@ -49,6 +49,35 @@ public class HelloWorld {
 	private static final int BP_LAYER_MOVING = 1;
 	private static final int BP_NUM_LAYERS = 2;
 
+
+// An example contact listener
+static class MyContactListener extends CustomContactListener
+{
+	// See: ContactListener
+	public int onContactValidate(long body1Va, long body2Va, double offsetX, double offsetY, double offsetZ, long inCollisionResult)
+	{
+		System.out.println("Contact validate callback");
+
+		// Allows you to ignore a contact before it is created (using layers to not make objects collide is cheaper!)
+		return ValidateResult.AcceptAllContactsForThisBodyPair.ordinal();
+	}
+
+	public void onContactAdded(long body1Va, long body2Va, long manifoldVa, long settingsVa)
+	{
+		System.out.println("A contact was added");
+	}
+
+	public void onContactPersisted(long body1Va, long body2Va, long manifoldVa, long settingsVa)
+	{
+		System.out.println("A contact was persisted");
+	}
+
+	public void onContactRemoved(long pairVa)
+	{
+		System.out.println("A contact was removed");
+	}
+};
+
 // An example activation listener
 static class MyBodyActivationListener extends CustomBodyActivationListener
 {
@@ -139,6 +168,12 @@ public static void main(String[] argv)
 	// Registering one is entirely optional.
 	MyBodyActivationListener body_activation_listener = new MyBodyActivationListener();
 	physics_system.setBodyActivationListener(body_activation_listener);
+
+	// A contact listener gets notified when bodies (are about to) collide, and when they separate again.
+	// Note that this is called from a job so whatever you do here needs to be thread safe.
+	// Registering one is entirely optional.
+	MyContactListener contact_listener = new MyContactListener();
+	physics_system.setContactListener(contact_listener);
 
 	// The main way to interact with the bodies in the physics system is through the body interface. There is a locking and a non-locking
 	// variant of this. We're going to use the locking version (even though we're not planning to access bodies from multiple threads)
