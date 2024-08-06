@@ -98,7 +98,8 @@ public:
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CustomBodyActivationListener_createCustomBodyActivationListener
   (JNIEnv *pEnv, jobject javaObject) {
-    CustomBodyActivationListener * const pResult = new CustomBodyActivationListener(pEnv, javaObject);
+    CustomBodyActivationListener * const pResult
+            = new CustomBodyActivationListener(pEnv, javaObject);
     TRACE_NEW("CustomBodyActivationListener", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
