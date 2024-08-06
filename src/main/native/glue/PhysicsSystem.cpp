@@ -104,7 +104,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBod
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBodyLockInterface
   (JNIEnv *, jclass, jlong systemVa) {
-    PhysicsSystem * const pSystem
+    const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     const BodyLockInterface& result = pSystem->GetBodyLockInterface();
     return reinterpret_cast<jlong> (&result);

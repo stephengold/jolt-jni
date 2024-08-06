@@ -39,7 +39,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_c
   (JNIEnv *, jclass, jlong listVa) {
     const IndexedTriangleList * const pList
             = reinterpret_cast<IndexedTriangleList *> (listVa);
-    IndexedTriangleList::size_type result = pList->capacity();
+    const IndexedTriangleList::size_type result = pList->capacity();
     return result;
 }
 
@@ -116,7 +116,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_s
   (JNIEnv *, jclass, jlong listVa) {
     const IndexedTriangleList * const pList
             = reinterpret_cast<IndexedTriangleList *> (listVa);
-    IndexedTriangleList::size_type result = pList->size();
+    const IndexedTriangleList::size_type result = pList->size();
     return result;
 }
 
