@@ -33,15 +33,16 @@ SOFTWARE.
 using namespace JPH;
 
 class CustomBodyActivationListener : BodyActivationListener {
+    JavaVM *mpVM;
     jmethodID mActivatedMethodId;
     jmethodID mDeactivatedMethodId;
-    JNIEnv *mpEnv;
     jobject mJavaObject;
     mutable SharedMutex mMutex;
 
 public:
-    CustomBodyActivationListener(JNIEnv *pEnv, jobject javaObject)
-    : mpEnv(pEnv) {
+    CustomBodyActivationListener(JNIEnv *pEnv, jobject javaObject) {
+        pEnv->GetJavaVM(&mpVM);
+
         mJavaObject = pEnv->NewGlobalRef(javaObject);
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
@@ -57,28 +58,43 @@ public:
     }
 
     void OnBodyActivated(const BodyID &inBodyID, uint64 inBodyUserData) {
+        JNIEnv *pAttachEnv;
+        jint retCode = mpVM->AttachCurrentThread((void **)&pAttachEnv, NULL);
+        JPH_ASSERT(retCode == JNI_OK);
+
         const jlong idVa = reinterpret_cast<jlong> (&inBodyID);
         const jlong userData = inBodyUserData;
         {
             unique_lock lock(mMutex);
-            mpEnv->CallVoidMethod(mJavaObject, mActivatedMethodId, idVa, userData);
+            pAttachEnv->CallVoidMethod(mJavaObject, mActivatedMethodId, idVa, userData);
         }
-        JPH_ASSERT(!mpEnv->ExceptionCheck());
+        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        mpVM->DetachCurrentThread();
     }
 
     void OnBodyDeactivated(const BodyID &inBodyID, uint64 inBodyUserData) {
+        JNIEnv *pAttachEnv;
+        jint retCode = mpVM->AttachCurrentThread((void **)&pAttachEnv, NULL);
+        JPH_ASSERT(retCode == JNI_OK);
+
         const jlong idVa = reinterpret_cast<jlong> (&inBodyID);
         const jlong userData = inBodyUserData;
         {
             unique_lock lock(mMutex);
-            mpEnv->CallVoidMethod(mJavaObject, mDeactivatedMethodId, idVa, userData);
+            pAttachEnv->CallVoidMethod(mJavaObject, mDeactivatedMethodId, idVa, userData);
         }
-        JPH_ASSERT(!mpEnv->ExceptionCheck());
+        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        mpVM->DetachCurrentThread();
     }
 
     ~CustomBodyActivationListener() {
-        mpEnv->DeleteGlobalRef(mJavaObject);
-        JPH_ASSERT(!mpEnv->ExceptionCheck());
+        JNIEnv *pAttachEnv;
+        jint retCode = mpVM->AttachCurrentThread((void **)&pAttachEnv, NULL);
+        JPH_ASSERT(retCode == JNI_OK);
+
+        pAttachEnv->DeleteGlobalRef(mJavaObject);
+        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        mpVM->DetachCurrentThread();
     }
 };
 
