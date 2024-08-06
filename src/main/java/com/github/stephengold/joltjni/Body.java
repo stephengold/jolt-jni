@@ -47,7 +47,7 @@ public class Body extends NonCopyable implements ConstBody {
      * @param bodyVa the virtual address of the native object to assign (not
      * zero)
      */
-    Body(long bodyVa) {
+    public Body(long bodyVa) {
         super(bodyVa);
     }
     // *************************************************************************
