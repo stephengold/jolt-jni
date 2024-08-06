@@ -377,7 +377,7 @@ public class Test003 {
     /**
      * Test the getters and defaults of the specified {@code ContactSettings}.
      *
-     * @param setings the properties to test (not null, unaffected)
+     * @param settings the settings to test (not null, unaffected)
      */
     private static void testContactSettingsDefaults(ContactSettings settings) {
         Assert.assertEquals(0f, settings.getCombinedFriction(), 0f);
@@ -396,7 +396,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code ContactSettings}.
      *
-     * @param setings the properties to test (not null)
+     * @param settings the settings to test (not null)
      */
     private static void testContactSettingsSetters(ContactSettings settings) {
         settings.setCombinedFriction(11f);
@@ -423,7 +423,7 @@ public class Test003 {
     }
 
     /**
-     * Test the getters and defaults of the specified {@code MotionPropertiess}.
+     * Test the getters and defaults of the specified {@code MotionProperties}.
      *
      * @param props the properties to test (not null, unaffected)
      */
@@ -450,7 +450,7 @@ public class Test003 {
     }
 
     /**
-     * Test the setters of the specified {@code MotionPropertiess}.
+     * Test the setters of the specified {@code MotionProperties}.
      *
      * @param props properties to test (not null, modified)
      */
@@ -486,7 +486,7 @@ public class Test003 {
     }
 
     /**
-     * Test the getters and defaults of the specified {@code MassPropertiess}.
+     * Test the getters and defaults of the specified {@code MassProperties}.
      *
      * @param props the properties to test (not null, unaffected)
      */
@@ -499,7 +499,7 @@ public class Test003 {
     }
 
     /**
-     * Test the setters of the specified {@code MassPropertiess}.
+     * Test the setters of the specified {@code MassProperties}.
      *
      * @param props properties to test (not null, modified)
      */
