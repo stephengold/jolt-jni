@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.BodyActivationListener;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.CollideShapeResult;
 import com.github.stephengold.joltjni.CustomBodyActivationListener;
 import com.github.stephengold.joltjni.CustomContactListener;
 import com.github.stephengold.joltjni.JobSystem;
@@ -121,7 +122,9 @@ public class Test001 {
             @Override
             public int onContactValidate(long body1Va, long body2Va,
                     double x, double y, double z, long resultVa) {
-                System.out.println("Contact validate callback");
+                CollideShapeResult result = new CollideShapeResult(resultVa);
+                System.out.println("Contact validate callback, depth = "
+                        + result.getPenetrationDepth());
                 return ValidateResult.AcceptAllContactsForThisBodyPair
                         .ordinal();
             }
