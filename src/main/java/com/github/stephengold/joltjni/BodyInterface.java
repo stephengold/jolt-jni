@@ -488,6 +488,24 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Notify all systems that the shape of the specified body has changed.
+     *
+     * @param bodyId the ID of the affected body (not null, unaffected)
+     * @param prevCom center of mass prior to the change (not null, unaffected)
+     * @param updateMassProperties true to recalculate mass and inertia
+     * @param activation whether to activate the body (not null)
+     */
+    public void notifyShapeChanged(ConstBodyId bodyId, Vec3Arg prevCom,
+            boolean updateMassProperties, EActivation activation) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        int activationOrdinal = activation.ordinal();
+        notifyShapeChanged(bodyInterfaceVa, bodyIdVa, prevCom.getX(),
+                prevCom.getY(), prevCom.getZ(), updateMassProperties,
+                activationOrdinal);
+    }
+
+    /**
      * Remove the specified body from the physics system.
      *
      * @param bodyId the ID of the body to remove (not null, unaffected)
@@ -666,6 +684,10 @@ public class BodyInterface extends NonCopyable {
     native private static void moveKinematic(long bodyInterfaceVa,
             long bodyIdVa, double xx, double yy, double zz,
             float qx, float qy, float qz, float qw, float deltaTime);
+
+    native private static void notifyShapeChanged(long bodyInterfaceVa,
+            long bodyIdVa, float prevX, float prevY, float prevZ,
+            boolean updateMassProperties, int activationOrdinal);
 
     native private static void removeBody(
             long bodyInterfaceVa, long bodyIdVa);
