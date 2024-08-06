@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstContactSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -29,7 +30,9 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ContactSettings extends JoltPhysicsObject {
+public class ContactSettings
+        extends JoltPhysicsObject
+        implements ConstContactSettings {
     // *************************************************************************
     // constructors
 
