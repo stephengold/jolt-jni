@@ -134,6 +134,8 @@ public class Test001 {
                 ConstBodyId bodyId1 = pair.getBody1Id();
                 ConstBodyId bodyId2 = pair.getBody2Id();
                 Assert.assertNotEquals(bodyId1, bodyId2);
+                TestUtils.testClose(pair, bodyId1, bodyId2);
+
                 System.out.println("A contact was removed");
             }
 
@@ -143,6 +145,8 @@ public class Test001 {
                 CollideShapeResult result = new CollideShapeResult(resultVa);
                 System.out.println("Contact validate callback, depth = "
                         + result.getPenetrationDepth());
+                TestUtils.testClose(result);
+
                 return ValidateResult.AcceptAllContactsForThisBodyPair
                         .ordinal();
             }
