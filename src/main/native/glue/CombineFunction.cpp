@@ -26,7 +26,6 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Constraints/ContactConstraintManager.h>
 #include "auto/com_github_stephengold_joltjni_CombineFunction.h"
-#include "glue/glue.h"
 
 using namespace JPH;
 using CombineFunction = float (*)(const Body&, const SubShapeID&, const Body&, const SubShapeID&);
