@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EBodyType {
     // *************************************************************************
-    // values - order must match <Jolt/Physics/Body/BodyType.h>
+    // values - sequence must match <Jolt/Physics/Body/BodyType.h>
 
     /**
      * a body with an unchanging shape

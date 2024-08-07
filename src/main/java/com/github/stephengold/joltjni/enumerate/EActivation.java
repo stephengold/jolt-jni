@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EActivation {
     // *************************************************************************
-    // values - order must match <Jolt/Physics/EActivation.h>
+    // values - sequence must match <Jolt/Physics/EActivation.h>
 
     /**
      * activate the added body

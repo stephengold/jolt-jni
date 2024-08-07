@@ -29,7 +29,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EOverrideMassProperties {
     // *************************************************************************
-    // values - order must match <Jolt/Physics/Body/BodyCreationSettings.h>
+    // values - sequence must match <Jolt/Physics/Body/BodyCreationSettings.h>
 
     /**
      * calculate mass and inertia based on density

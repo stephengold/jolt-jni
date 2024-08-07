@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum ValidateResult {
     // *************************************************************************
-    // values - order must match <Jolt/Physics/Collision/ContactListener.h>
+    // values - sequence must match <Jolt/Physics/Collision/ContactListener.h>
 
     /**
      * accept this and any future contact points for this pair
