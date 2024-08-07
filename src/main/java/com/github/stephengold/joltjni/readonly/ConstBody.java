@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
@@ -70,6 +71,13 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * @return a new velocity vector (radians per second in system coordinates)
      */
     Vec3 getAngularVelocity();
+
+    /**
+     * Convert the body to a {@code BodyCreationSettings} object.
+     *
+     * @return a new object
+     */
+    BodyCreationSettings getBodyCreationSettings();
 
     /**
      * Return the location of the body's center of mass (which might not

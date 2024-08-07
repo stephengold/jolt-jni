@@ -70,6 +70,19 @@ public class BodyCreationSettings
     }
 
     /**
+     * Instantiate settings with the specified native object assigned.
+     *
+     * @param bodySettingsVa the virtual address of the native object to assign
+     * (not zero)
+     * @param owner true &rarr; make the current object the owner, false &rarr;
+     * the current object isn't the owner
+     */
+    BodyCreationSettings(long bodySettingsVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(bodySettingsVa) : null;
+        setVirtualAddress(bodySettingsVa, freeingAction);
+    }
+
+    /**
      * Instantiate settings for the specified shape reference.
      *
      * @param shapeRef a reference to the desired shape (not null)

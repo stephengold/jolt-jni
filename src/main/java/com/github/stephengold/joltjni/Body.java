@@ -383,6 +383,21 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Convert the body to a {@code BodyCreationSettings} object.
+     *
+     * @return a new object
+     */
+    @Override
+    public BodyCreationSettings getBodyCreationSettings() {
+        long bodyVa = va();
+        long bodySettingsVa = getBodyCreationSettings(bodyVa);
+        BodyCreationSettings result
+                = new BodyCreationSettings(bodySettingsVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the location of the body's center of mass (which might not
      * coincide with its origin). The body is unaffected.
      *
@@ -683,6 +698,8 @@ public class Body extends NonCopyable implements ConstBody {
     native private static float getAngularVelocityY(long bodyVa);
 
     native private static float getAngularVelocityZ(long bodyVa);
+
+    native private static long getBodyCreationSettings(long bodyVa);
 
     native private static double getCenterOfMassPositionX(long bodyVa);
 

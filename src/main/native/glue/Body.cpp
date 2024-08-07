@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Body/Body.h>
+#include <Jolt/Physics/Body/BodyCreationSettings.h>
 #include "auto/com_github_stephengold_joltjni_Body.h"
 
 using namespace JPH;
@@ -253,6 +254,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAngularVelo
     const Vec3 vec3 = getAngularVelocity(bodyVa);
     float result = vec3.GetZ();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getBodyCreationSettings
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getBodyCreationSettings
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    BodyCreationSettings * const pResult = new BodyCreationSettings();
+    *pResult = pBody->GetBodyCreationSettings();
+    return reinterpret_cast<jlong> (pResult);
 }
 
 inline static const RVec3 getCenterOfMassPosition(jlong bodyVa) {
