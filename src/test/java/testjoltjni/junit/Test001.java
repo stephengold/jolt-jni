@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.CollideShapeResult;
+import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.CustomBodyActivationListener;
 import com.github.stephengold.joltjni.CustomContactListener;
 import com.github.stephengold.joltjni.JobSystem;
@@ -50,7 +51,9 @@ import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.enumerate.ValidateResult;
+import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
+import com.github.stephengold.joltjni.readonly.ConstContactSettings;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -105,7 +108,13 @@ public class Test001 {
             @Override
             public void onContactAdded(long body1Va, long body2Va,
                     long manifoldVa, long settingsVa) {
-                System.out.println("A contact was added");
+                ConstBody body1 = new Body(body1Va);
+                ConstBody body2 = new Body(body2Va);
+                Assert.assertNotEquals(body1, body2);
+                ConstContactSettings settings = new ContactSettings(settingsVa);
+                System.out.println("A contact was added, combinedFriction = "
+                        + settings.getCombinedFriction());
+                TestUtils.testClose(body1, body2, settings);
             }
 
             @Override
