@@ -22,8 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A {@code CompoundShape} whose sub shapes cannot be modified after the shape
- * is constructed.
+ * A {@code CompoundShape} whose subshapes cannot be modified after the shape is
+ * constructed.
  *
  * @author Stephen Gold sgold@sonic.net
  */

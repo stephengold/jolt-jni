@@ -52,11 +52,11 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
     // new methods exposed
 
     /**
-     * Add the specified sub shape at the specified position.
+     * Add the specified subshape at the specified position.
      *
      * @param offset (not null, unaffected)
      * @param rotation (not null, not zero, unaffected)
-     * @param subRef a reference to the sub shape (not null)
+     * @param subRef a reference to the subshape (not null)
      */
     public void addShape(Vec3Arg offset, QuatArg rotation, ShapeRefC subRef) {
         long settingsVa = va();
@@ -73,7 +73,7 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Add the specified sub shape at the specified position.
+     * Add the specified subshape at the specified position.
      *
      * @param offset (not null, unaffected)
      * @param rotation (not null, not zero, unaffected)

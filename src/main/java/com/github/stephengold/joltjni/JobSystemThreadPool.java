@@ -34,7 +34,7 @@ public class JobSystemThreadPool extends JobSystemWithBarrier {
      * Instantiate a job system with the specified limits.
      *
      * @param maxJobs the maximum number of jobs that can be allocated at one
-     * time
+     * time (&gt;1)
      * @param maxBarriers the maximum number of barriers that can be allocated
      * at one time
      *

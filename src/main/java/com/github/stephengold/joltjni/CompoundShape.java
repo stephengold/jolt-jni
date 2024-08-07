@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A {@code Shape} composed from a union of simpler sub shapes.
+ * A {@code Shape} composed from a union of simpler subshapes.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -50,7 +50,7 @@ abstract public class CompoundShape extends Shape {
     // new methods exposed
 
     /**
-     * Return the number of sub shapes.
+     * Count the subshapes.
      *
      * @return the count (&ge;0)
      */

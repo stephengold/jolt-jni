@@ -33,7 +33,7 @@ public class StaticCompoundShapeSettings extends CompoundShapeSettings {
     // constructors
 
     /**
-     * Instantiate an empty settings object with no sub shapes.
+     * Instantiate an empty settings object with no subshapes.
      */
     public StaticCompoundShapeSettings() {
         long settingsVa = createStaticCompoundShapeSettings();

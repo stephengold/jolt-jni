@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
- * A {@code CompoundShape} whose sub shapes can be modified after the shape is
+ * A {@code CompoundShape} whose subshapes can be modified after the shape is
  * constructed.
  *
  * @author Stephen Gold sgold@sonic.net
@@ -35,7 +35,7 @@ public class MutableCompoundShape extends CompoundShape {
     // constructors
 
     /**
-     * Instantiate an empty compound shape with no sub shapes.
+     * Instantiate an empty compound shape with no subshapes.
      */
     public MutableCompoundShape() {
         long shapeVa = createMutableCompoundShape();
@@ -56,12 +56,12 @@ public class MutableCompoundShape extends CompoundShape {
     // new methods exposed
 
     /**
-     * Add a sub shape in the specified position.
+     * Add a subshape in the specified position.
      *
      * @param offset the desired offset (not null, unaffected)
      * @param rotation the desired rotation (not null, not zero, unaffected)
-     * @param shapeRef a reference to the desired sub shape (not null)
-     * @return the index of the added sub shape
+     * @param shapeRef a reference to the desired subshape (not null)
+     * @return the index of the added subshape
      */
     public int addShape(Vec3Arg offset, QuatArg rotation, ShapeRefC shapeRef) {
         long shapeVa = va();
@@ -80,7 +80,7 @@ public class MutableCompoundShape extends CompoundShape {
     }
 
     /**
-     * Recalculate the center of mass and shift the sub shapes accordingly.
+     * Recalculate the center of mass and shift the subshapes accordingly.
      */
     public void adjustCenterOfMass() {
         long shapeVa = va();
@@ -88,9 +88,9 @@ public class MutableCompoundShape extends CompoundShape {
     }
 
     /**
-     * Remove the specified sub shape.
+     * Remove the specified subshape.
      *
-     * @param index the index of the sub shape to remove (&ge;0)
+     * @param index the index of the subshape to remove (&ge;0)
      */
     public void removeShape(int index) {
         long shapeVa = va();
