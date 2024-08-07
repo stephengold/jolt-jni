@@ -80,6 +80,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     float getGravityFactor();
 
     /**
+     * Test whether the body will be a sensor. The settings are unaffected.
+     * (native field: mIsSensor)
+     *
+     * @return true for a sensor, otherwise false
+     */
+    boolean getIsSensor();
+
+    /**
      * Return the linear damping constant. The settings are unaffected. (native
      * field: mLinearDamping)
      *

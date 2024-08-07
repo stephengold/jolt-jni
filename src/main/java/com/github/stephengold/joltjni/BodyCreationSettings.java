@@ -176,6 +176,16 @@ public class BodyCreationSettings
     }
 
     /**
+     * Alter whether the body will be a sensor. (native field: mIsSensor)
+     *
+     * @param setting true for a sensor, otherwise false (default=false)
+     */
+    public void setIsSensor(boolean setting) {
+        long bodySettingsVa = va();
+        setIsSensor(bodySettingsVa, setting);
+    }
+
+    /**
      * Alter the linear damping constant. (native field: mLinearDamping)
      *
      * @param damping the desired value (in units of 1/second, &ge;0, &le;1,
@@ -431,6 +441,20 @@ public class BodyCreationSettings
     public float getGravityFactor() {
         long bodySettingsVa = va();
         float result = getGravityFactor(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body will be a sensor. The settings are unaffected.
+     * (native field: mIsSensor)
+     *
+     * @return true for a sensor, otherwise false
+     */
+    @Override
+    public boolean getIsSensor() {
+        long bodySettingsVa = va();
+        boolean result = getIsSensor(bodySettingsVa);
 
         return result;
     }
@@ -697,6 +721,8 @@ public class BodyCreationSettings
 
     native private static float getGravityFactor(long bodySettingsVa);
 
+    native private static boolean getIsSensor(long bodySettingsVa);
+
     native private static float getLinearDamping(long bodySettingsVa);
 
     native private static float getLinearVelocityX(long bodySettingsVa);
@@ -754,6 +780,9 @@ public class BodyCreationSettings
 
     native private static void setGravityFactor(
             long bodySettingsVa, float factor);
+
+    native private static void setIsSensor(
+            long bodySettingsVa, boolean setting);
 
     native private static void setLinearDamping(
             long bodySettingsVa, float damping);

@@ -301,6 +301,7 @@ public class Test003 {
         TestUtils.assertEquals(0f, 0f, 0f, bcs.getAngularVelocity(), 0f);
         Assert.assertEquals(0.2f, bcs.getFriction(), 0f);
         Assert.assertEquals(1f, bcs.getGravityFactor(), 0f);
+        Assert.assertFalse(bcs.getIsSensor());
         Assert.assertEquals(0.05f, bcs.getLinearDamping(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, bcs.getLinearVelocity(), 0f);
         Assert.assertEquals(15 * Math.PI, bcs.getMaxAngularVelocity(), 1e-6f);
@@ -337,6 +338,9 @@ public class Test003 {
 
         bcs.setGravityFactor(0.06f);
         Assert.assertEquals(0.06f, bcs.getGravityFactor(), 0f);
+
+        bcs.setIsSensor(true);
+        Assert.assertTrue(bcs.getIsSensor());
 
         bcs.setLinearDamping(0.07f);
         Assert.assertEquals(0.07f, bcs.getLinearDamping(), 0f);
