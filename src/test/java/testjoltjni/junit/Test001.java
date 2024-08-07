@@ -42,6 +42,7 @@ import com.github.stephengold.joltjni.Shape;
 import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.ShapeResult;
 import com.github.stephengold.joltjni.SphereShape;
+import com.github.stephengold.joltjni.SubShapeIdPair;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorImpl;
 import com.github.stephengold.joltjni.Vec3;
@@ -54,6 +55,7 @@ import com.github.stephengold.joltjni.enumerate.ValidateResult;
 import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstContactSettings;
+import com.github.stephengold.joltjni.readonly.ConstSubShapeIdPair;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -125,6 +127,10 @@ public class Test001 {
 
             @Override
             public void onContactRemoved(long pairVa) {
+                ConstSubShapeIdPair pair = new SubShapeIdPair(pairVa);
+                ConstBodyId bodyId1 = pair.getBody1Id();
+                ConstBodyId bodyId2 = pair.getBody2Id();
+                Assert.assertNotEquals(bodyId1, bodyId2);
                 System.out.println("A contact was removed");
             }
 
