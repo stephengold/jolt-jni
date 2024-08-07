@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/MutableCompoundShape.h>
 #include "auto/com_github_stephengold_joltjni_MutableCompoundShape.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -68,6 +69,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_createMutableCompoundShape
   (JNIEnv *, jclass) {
     MutableCompoundShape * const pCompound = new MutableCompoundShape();
+    TRACE_NEW("MutableCompoundShape", pCompound)
     return reinterpret_cast<jlong> (pCompound);
 }
 

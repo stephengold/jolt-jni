@@ -120,6 +120,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBou
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     AABox * const pResult = new AABox();
+    TRACE_NEW("AABox", pResult)
     *pResult = pSystem->GetBounds();
     return reinterpret_cast<jlong> (pResult);
 }

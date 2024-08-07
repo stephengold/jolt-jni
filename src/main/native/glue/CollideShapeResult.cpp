@@ -40,6 +40,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_g
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
     BodyID * const pResult = new BodyID(pShapeResult->mBodyID2);
+    TRACE_NEW("BodyID", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -183,6 +184,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_g
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
     SubShapeID * const pResult = new SubShapeID(pShapeResult->mSubShapeID1);
+    TRACE_NEW("SubShapeID", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -196,5 +198,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_g
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
     SubShapeID * const pResult = new SubShapeID(pShapeResult->mSubShapeID2);
+    TRACE_NEW("SubShapeID", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

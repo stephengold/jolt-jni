@@ -27,6 +27,7 @@ SOFTWARE.
 #include <Jolt/Physics/Body/Body.h>
 #include <Jolt/Physics/Body/BodyCreationSettings.h>
 #include "auto/com_github_stephengold_joltjni_Body.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -265,6 +266,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getBodyCreation
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     BodyCreationSettings * const pResult = new BodyCreationSettings();
+    TRACE_NEW("BodyCreationSettings", pResult)
     *pResult = pBody->GetBodyCreationSettings();
     return reinterpret_cast<jlong> (pResult);
 }
