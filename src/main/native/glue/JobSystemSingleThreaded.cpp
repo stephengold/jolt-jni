@@ -42,3 +42,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_JobSystemSingleThrea
     TRACE_NEW("JobSystemSingleThreaded", pSystem)
     return reinterpret_cast<jlong> (pSystem);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_JobSystemSingleThreaded
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JobSystemSingleThreaded_free
+  (JNIEnv *, jclass, jlong systemVa) {
+    JobSystemSingleThreaded * const pSystem
+            = reinterpret_cast<JobSystemSingleThreaded *> (systemVa);
+    TRACE_DELETE("JobSystemSingleThreaded", pSystem)
+#ifndef WIN32
+    // Attempting to delete a JobSystemSingleThreaded on Windows causes deadlock!
+    delete pSystem;
+#endif
+}

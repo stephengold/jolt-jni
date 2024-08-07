@@ -41,10 +41,12 @@ public class JobSystemSingleThreaded extends JobSystem {
      */
     public JobSystemSingleThreaded(int maxJobs) {
         long systemVa = createJobSystem(maxJobs);
-        setVirtualAddress(systemVa, true);
+        setVirtualAddress(systemVa, () -> free(systemVa));
     }
     // *************************************************************************
     // native private methods
 
     native private static long createJobSystem(int maxJobs);
+
+    native private static void free(long systemVa);
 }
