@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.CollideShapeResult;
+import com.github.stephengold.joltjni.ContactManifold;
 import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.CustomBodyActivationListener;
 import com.github.stephengold.joltjni.CustomContactListener;
@@ -54,7 +55,7 @@ import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.enumerate.ValidateResult;
 import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
-import com.github.stephengold.joltjni.readonly.ConstContactSettings;
+import com.github.stephengold.joltjni.readonly.ConstContactManifold;
 import com.github.stephengold.joltjni.readonly.ConstSubShapeIdPair;
 import org.junit.Assert;
 import org.junit.Test;
@@ -113,10 +114,12 @@ public class Test001 {
                 ConstBody body1 = new Body(body1Va);
                 ConstBody body2 = new Body(body2Va);
                 Assert.assertNotEquals(body1, body2);
-                ConstContactSettings settings = new ContactSettings(settingsVa);
+                ConstContactManifold manifold = new ContactManifold(manifoldVa);
+                float depth = manifold.getPenetrationDepth();
+                ContactSettings settings = new ContactSettings(settingsVa);
                 System.out.println("A contact was added, combinedFriction = "
-                        + settings.getCombinedFriction());
-                TestUtils.testClose(body1, body2, settings);
+                        + settings.getCombinedFriction() + " depth = " + depth);
+                TestUtils.testClose(body1, body2, manifold, settings);
             }
 
             @Override
