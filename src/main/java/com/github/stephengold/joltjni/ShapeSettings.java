@@ -140,9 +140,9 @@ abstract public class ShapeSettings
      * @param shapeSubType the desired value (not null)
      */
     protected void setSubType(EShapeSubType shapeSubType) {
-        long shapeVa = va();
+        long settingsVa = va();
         long ordinal = shapeSubType.ordinal();
-        setUserData(shapeVa, ordinal);
+        setUserData(settingsVa, ordinal);
     }
     // *************************************************************************
     // RefTarget methods
