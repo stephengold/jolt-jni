@@ -35,7 +35,7 @@ import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilte
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import electrostatic.snaploader.platform.util.NativeVariant;
+import electrostatic4j.snaploader.platform.util.NativeVariant;
 import java.io.File;
 import java.util.Locale;
 import org.junit.Assert;
