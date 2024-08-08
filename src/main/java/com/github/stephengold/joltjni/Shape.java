@@ -123,19 +123,6 @@ abstract public class Shape extends NonCopyable
         long shapeVa = va();
         setUserData(shapeVa, value);
     }
-
-    /**
-     * Create a counted reference to the native {@code Shape}.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    public ShapeRef toRef() {
-        long shapeVa = va();
-        long copyVa = toRef(shapeVa);
-        ShapeRef result = new ShapeRef(copyVa, true);
-
-        return result;
-    }
     // *************************************************************************
     // ConstShape methods
 
@@ -330,6 +317,20 @@ abstract public class Shape extends NonCopyable
     public int getRefCount() {
         long shapeVa = va();
         int result = getRefCount(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Create a counted reference to the native {@code Shape}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public ShapeRef toRef() {
+        long shapeVa = va();
+        long copyVa = toRef(shapeVa);
+        ShapeRef result = new ShapeRef(copyVa, true);
 
         return result;
     }

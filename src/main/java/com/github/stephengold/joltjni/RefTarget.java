@@ -37,4 +37,11 @@ public interface RefTarget {
      * @return the count (&ge;0)
      */
     int getRefCount();
+
+    /**
+     * Create a counted reference to the target.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    JoltPhysicsObject toRef();
 }
