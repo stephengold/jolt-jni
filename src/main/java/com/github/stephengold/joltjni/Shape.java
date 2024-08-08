@@ -322,7 +322,7 @@ abstract public class Shape extends NonCopyable
     // RefTarget methods
 
     /**
-     * Count active references to the shape.
+     * Count the active references to the shape.
      *
      * @return the count (&ge;0)
      */

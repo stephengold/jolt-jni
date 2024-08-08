@@ -29,7 +29,8 @@ import com.github.stephengold.joltjni.enumerate.EShapeSubType;
  * @author Stephen Gold sgold@sonic.net
  */
 abstract public class ShapeSettings
-        extends SerializableObject implements RefTarget {
+        extends SerializableObject
+        implements RefTarget {
     // *************************************************************************
     // constructors
 
@@ -40,7 +41,7 @@ abstract public class ShapeSettings
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate settings with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
@@ -74,7 +75,7 @@ abstract public class ShapeSettings
     }
 
     /**
-     * Instantiate a {@code ShapeSettomgs} from its virtual address.
+     * Instantiate a {@code ShapeSettings} given its virtual address.
      *
      * @param settingsVa the virtual address of the native object, or zero
      * @return a new JVM object, or {@code null} if the argument was zero
@@ -146,9 +147,9 @@ abstract public class ShapeSettings
     // new protected methods
 
     /**
-     * Alter the user data, which holds the EShapeSubType ordinal.
+     * Alter the user data, which holds the {@code EShapeSubType} ordinal.
      *
-     * @param shapeSubType the desired value
+     * @param shapeSubType the desired value (not null)
      */
     protected void setSubType(EShapeSubType shapeSubType) {
         long shapeVa = va();
@@ -159,7 +160,7 @@ abstract public class ShapeSettings
     // RefTarget methods
 
     /**
-     * Count active references to these settings.
+     * Count the active references to these settings.
      *
      * @return the count (&ge;0)
      */

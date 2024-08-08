@@ -23,7 +23,7 @@ package com.github.stephengold.joltjni;
 
 /**
  * Classes that implement this interface maintain a count of active references
- * to each object.
+ * to each instance.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -32,7 +32,7 @@ public interface RefTarget {
     // new methods exposed
 
     /**
-     * Count active references to the target.
+     * Count the active references to the target.
      *
      * @return the count (&ge;0)
      */

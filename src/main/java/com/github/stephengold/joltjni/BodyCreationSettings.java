@@ -606,8 +606,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Return how the mass-properties override will be used. (native field:
-     * mOverrideMassProperties)
+     * Return how the mass-properties override will be used. The settings are
+     * unaffected. (native field: mOverrideMassProperties)
      *
      * @return an enum value (not null)
      */
