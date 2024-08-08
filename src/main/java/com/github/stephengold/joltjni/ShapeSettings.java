@@ -41,7 +41,8 @@ abstract public class ShapeSettings
     }
 
     /**
-     * Instantiate settings with the specified native object assigned but not owned.
+     * Instantiate settings with the specified native object assigned but not
+     * owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
