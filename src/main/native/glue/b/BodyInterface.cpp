@@ -27,7 +27,7 @@ SOFTWARE.
 #include <Jolt/Physics/Body/BodyInterface.h>
 #include <Jolt/Physics/Collision/Shape/Shape.h>
 #include "auto/com_github_stephengold_joltjni_BodyInterface.h"
-#include "glue.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 

@@ -26,7 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Body/MassProperties.h>
 #include "auto/com_github_stephengold_joltjni_MassProperties.h"
-#include "glue.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 

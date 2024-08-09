@@ -26,7 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Constraints/Constraint.h>
 #include "auto/com_github_stephengold_joltjni_Constraint.h"
-#include "glue.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 

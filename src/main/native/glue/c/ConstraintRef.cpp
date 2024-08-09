@@ -25,47 +25,44 @@ SOFTWARE.
  */
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Constraints/Constraint.h>
-#include "auto/com_github_stephengold_joltjni_ConstraintSettingsRef.h"
-#include "glue.h"
+#include "auto/com_github_stephengold_joltjni_ConstraintRef.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
 /*
- * Class:     com_github_stephengold_joltjni_ConstraintSettingsRef
+ * Class:     com_github_stephengold_joltjni_ConstraintRef
  * Method:    copy
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConstraintSettingsRef_copy
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConstraintRef_copy
   (JNIEnv *, jclass, jlong refVa) {
-    Ref<ConstraintSettings> * const pRef
-            = reinterpret_cast<Ref<ConstraintSettings> *> (refVa);
-    Ref<ConstraintSettings> * const pResult = new Ref<ConstraintSettings>(*pRef);
-    TRACE_NEW("Ref<ConstraintSettings>", pResult)
+    Ref<Constraint> * const pRef = reinterpret_cast<Ref<Constraint> *> (refVa);
+    Ref<Constraint> * const pResult = new Ref<Constraint>(*pRef);
+    TRACE_NEW("Ref<Constraint>", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_ConstraintSettingsRef
+ * Class:     com_github_stephengold_joltjni_ConstraintRef
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConstraintSettingsRef_free
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConstraintRef_free
   (JNIEnv *, jclass, jlong refVa) {
-    Ref<ConstraintSettings> * const pRef
-            = reinterpret_cast<Ref<ConstraintSettings> *> (refVa);
-    TRACE_DELETE("Ref<ConstraintSettings>", pRef)
+    Ref<Constraint> * const pRef = reinterpret_cast<Ref<Constraint> *> (refVa);
+    TRACE_DELETE("Ref<Constraint>", pRef)
     delete pRef;
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_ConstraintSettingsRef
+ * Class:     com_github_stephengold_joltjni_ConstraintRef
  * Method:    getPtr
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConstraintSettingsRef_getPtr
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConstraintRef_getPtr
   (JNIEnv *, jclass, jlong refVa) {
-    Ref<ConstraintSettings> * const pRef
-            = reinterpret_cast<Ref<ConstraintSettings> *> (refVa);
-    ConstraintSettings * const pResult = pRef->GetPtr();
+    Ref<Constraint> * const pRef = reinterpret_cast<Ref<Constraint> *> (refVa);
+    Constraint * const pResult = pRef->GetPtr();
     return reinterpret_cast<jlong> (pResult);
 }
