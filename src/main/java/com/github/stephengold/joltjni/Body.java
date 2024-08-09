@@ -304,6 +304,18 @@ public class Body extends NonCopyable implements ConstBody {
         long bodyVa = va();
         setUserData(bodyVa, value);
     }
+
+    /**
+     * Create a dummy body that can be used to attach a constraint to the world.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public static Body sFixedToWorld() {
+        long bodyVa = createFixedToWorld();
+        Body result = new Body(bodyVa);
+
+        return result;
+    }
     // *************************************************************************
     // ConstBody methods
 
@@ -645,6 +657,19 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Test whether the body is a sensor. The body is unaffected.
+     *
+     * @return true if a sensor, otherwise false
+     */
+    @Override
+    public boolean isSensor() {
+        long bodyVa = va();
+        boolean result = isSensor(bodyVa);
+
+        return result;
+    }
+
+    /**
      * Test whether the body is static. The body is unaffected.
      *
      * @return true if static, otherwise false
@@ -678,6 +703,8 @@ public class Body extends NonCopyable implements ConstBody {
             long bodyVa, float x, float y, float z);
 
     native private static boolean canBeKinematicOrDynamic(long bodyVa);
+
+    native private static long createFixedToWorld();
 
     native private static float getAccumulatedForceX(long bodyVa);
 
@@ -752,6 +779,8 @@ public class Body extends NonCopyable implements ConstBody {
     native private static boolean isKinematic(long bodyVa);
 
     native private static boolean isRigidBody(long bodyVa);
+
+    native private static boolean isSensor(long bodyVa);
 
     native private static boolean isStatic(long bodyVa);
 

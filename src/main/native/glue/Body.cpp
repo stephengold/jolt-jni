@@ -119,6 +119,17 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_canBeKinemat
     return result;
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    createFixedToWorld
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_createFixedToWorld
+  (JNIEnv *, jclass) {
+    Body * const pResult = &Body::sFixedToWorld;
+    return reinterpret_cast<jlong> (pResult);
+}
+
 inline static const Vec3 getAccumulatedForce(jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     const Vec3 result = pBody->GetAccumulatedForce();
@@ -604,6 +615,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isRigidBody
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     bool result = pBody->IsRigidBody();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    isSensor
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isSensor
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    bool result = pBody->IsSensor();
     return result;
 }
 

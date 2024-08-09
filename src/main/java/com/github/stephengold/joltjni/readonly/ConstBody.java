@@ -201,6 +201,13 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     boolean isRigidBody();
 
     /**
+     * Test whether the body is a sensor. The body is unaffected.
+     *
+     * @return true if a sensor, otherwise false
+     */
+    boolean isSensor();
+
+    /**
      * Test whether the body is static (non-moving). The body is unaffected.
      *
      * @return true if static, otherwise false
