@@ -135,19 +135,6 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Return a bounding box that contains all the bodies in the system.
-     *
-     * @return a new box
-     */
-    public AaBox getBounds() {
-        long systemVa = va();
-        long boxVa = getBounds(systemVa);
-        AaBox result = new AaBox(boxVa, true);
-
-        return result;
-    }
-
-    /**
      * Access the system's {@code BodyLockInterfaceLocking}.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -157,6 +144,19 @@ public class PhysicsSystem extends NonCopyable {
         long interfaceVa = getBodyLockInterface(systemVa);
         BodyLockInterfaceLocking result
                 = new BodyLockInterfaceLocking(this, interfaceVa);
+
+        return result;
+    }
+
+    /**
+     * Return a bounding box that contains all the bodies in the system.
+     *
+     * @return a new box
+     */
+    public AaBox getBounds() {
+        long systemVa = va();
+        long boxVa = getBounds(systemVa);
+        AaBox result = new AaBox(boxVa, true);
 
         return result;
     }
@@ -464,12 +464,12 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static void addConstraint(long systemVa, long constraintVa);
 
+    native private static long createPhysicsSystem();
+
     native private static void getActiveBodies(
             long systemVa, int ordinal, long vectorVa);
 
     native private static void getBodies(long systemVa, long vectorVa);
-
-    native private static long createPhysicsSystem();
 
     native private static long getBodyActivationListener(long systemVa);
 

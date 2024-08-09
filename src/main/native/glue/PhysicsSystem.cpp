@@ -47,6 +47,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_addCons
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    createPhysicsSystem
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_createPhysicsSystem
+  (JNIEnv *, jclass) {
+    PhysicsSystem * const pResult = new PhysicsSystem();
+    TRACE_NEW("PhysicsSystem", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getActiveBodies
  * Signature: (JIJ)V
  */
@@ -70,18 +82,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBodi
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
     pSystem->GetBodies(*pVector);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSystem
- * Method:    createPhysicsSystem
- * Signature: ()J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_createPhysicsSystem
-  (JNIEnv *, jclass) {
-    PhysicsSystem * const pResult = new PhysicsSystem();
-    TRACE_NEW("PhysicsSystem", pResult)
-    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
