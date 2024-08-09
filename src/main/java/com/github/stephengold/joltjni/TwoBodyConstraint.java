@@ -46,4 +46,68 @@ abstract public class TwoBodyConstraint extends Constraint {
     protected TwoBodyConstraint(long constraintVa) {
         super(constraintVa);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Access the first body in the constraint.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public Body getBody1() {
+        long constraintVa = va();
+        long bodyVa = getBody1(constraintVa);
+        Body result = new Body(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Access the 2nd body in the constraint.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public Body getBody2() {
+        long constraintVa = va();
+        long bodyVa = getBody2(constraintVa);
+        Body result = new Body(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Calculate the coordinate transform from constraint space to body 1.
+     *
+     * @return a new transform matrix
+     */
+    public Mat44 getConstraintToBody1Matrix() {
+        long constraintVa = va();
+        long matrixVa = getConstraintToBody1Matrix(constraintVa);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
+     * Calculate the coordinate transform from constraint space to body 2.
+     *
+     * @return a new transform matrix
+     */
+    public Mat44 getConstraintToBody2Matrix() {
+        long constraintVa = va();
+        long matrixVa = getConstraintToBody2Matrix(constraintVa);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static long getBody1(long constraintVa);
+
+    native private static long getBody2(long constraintVa);
+
+    native private static long getConstraintToBody1Matrix(long constraintVa);
+
+    native private static long getConstraintToBody2Matrix(long constraintVa);
 }
