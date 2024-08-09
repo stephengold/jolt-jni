@@ -70,6 +70,17 @@ public class PhysicsSystem extends NonCopyable {
     // new methods exposed
 
     /**
+     * Add the specified constraint to the system.
+     *
+     * @param constraint the constraint to add (not null)
+     */
+    public void addConstraint(Constraint constraint) {
+        long systemVa = va();
+        long constraintVa = constraint.va();
+        addConstraint(systemVa, constraintVa);
+    }
+
+    /**
      * Enumerate bodies of the specified type to the specified vector.
      *
      * @param bodyType (not null)
@@ -181,6 +192,19 @@ public class PhysicsSystem extends NonCopyable {
         long systemVa = va();
         long functionVa = getCombineRestitution(systemVa);
         CombineFunction result = new CombineFunction(functionVa);
+
+        return result;
+    }
+
+    /**
+     * Enumerate the constraints in the system.
+     *
+     * @return a new object
+     */
+    public Constraints getConstraints() {
+        long systemVa = va();
+        long resultVa = getConstraints(systemVa);
+        Constraints result = new Constraints(resultVa, true);
 
         return result;
     }
@@ -334,6 +358,17 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Remove the specified constraint from the system.
+     *
+     * @param constraint the constraint to remove (not null)
+     */
+    public void removeConstraint(Constraint constraint) {
+        long systemVa = va();
+        long constraintVa = constraint.va();
+        removeConstraint(systemVa, constraintVa);
+    }
+
+    /**
      * Replace the system's {@code BodyActivationListener}.
      *
      * @param listener the desired listener
@@ -427,6 +462,8 @@ public class PhysicsSystem extends NonCopyable {
     // *************************************************************************
     // native private methods
 
+    native private static void addConstraint(long systemVa, long constraintVa);
+
     native private static void getActiveBodies(
             long systemVa, int ordinal, long vectorVa);
 
@@ -445,6 +482,8 @@ public class PhysicsSystem extends NonCopyable {
     native private static long getCombineFriction(long systemVa);
 
     native private static long getCombineRestitution(long systemVa);
+
+    native private static long getConstraints(long systemVa);
 
     native private static long getContactListener(long systemVa);
 
@@ -468,6 +507,9 @@ public class PhysicsSystem extends NonCopyable {
             long mapVa, long ovbFilterVa, long ovoFilterVa);
 
     native private static void optimizeBroadPhase(long systemVa);
+
+    native private static void removeConstraint(
+            long systemVa, long constraintVa);
 
     native private static void setBodyActivationListener(
             long systemVa, long listenerVa);

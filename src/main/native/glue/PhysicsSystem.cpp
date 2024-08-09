@@ -33,6 +33,20 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    addConstraint
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_addConstraint
+  (JNIEnv *, jclass, jlong systemVa, jlong constraintVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    Constraint * const pConstraint
+            = reinterpret_cast<Constraint *> (constraintVa);
+    pSystem->AddConstraint(pConstraint);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getActiveBodies
  * Signature: (JIJ)V
  */
@@ -150,6 +164,21 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getCom
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     ContactConstraintManager::CombineFunction pResult
             = pSystem->GetCombineRestitution();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getConstraints
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getConstraints
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    Constraints * const pResult = new Constraints();
+    TRACE_NEW("Constraints", pResult)
+    *pResult = pSystem->GetConstraints();
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -293,6 +322,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_optimiz
     PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     pSystem->OptimizeBroadPhase();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    removeConstraint
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_removeConstraint
+  (JNIEnv *, jclass, jlong systemVa, jlong constraintVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    Constraint * const pConstraint
+            = reinterpret_cast<Constraint *> (constraintVa);
+    pSystem->RemoveConstraint(pConstraint);
 }
 
 /*
