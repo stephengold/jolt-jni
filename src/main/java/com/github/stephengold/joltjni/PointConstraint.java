@@ -41,9 +41,4 @@ public class PointConstraint extends TwoBodyConstraint {
     PointConstraint(long constraintVa) {
         super(constraintVa);
     }
-    // *************************************************************************
-    // new methods exposed
-
-    // *************************************************************************
-    // native private methods
 }
