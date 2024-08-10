@@ -69,6 +69,9 @@ abstract public class Constraint extends NonCopyable
         EConstraintSubType subType = EConstraintSubType.values()[ordinal];
         Constraint result;
         switch (subType) {
+            case Fixed:
+                result = new FixedConstraint(constraintVa);
+                break;
             case Point:
                 result = new PointConstraint(constraintVa);
                 break;
