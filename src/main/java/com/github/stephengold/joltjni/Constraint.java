@@ -36,12 +36,6 @@ abstract public class Constraint extends NonCopyable
     // constructors
 
     /**
-     * Instantiate a constraint with no native object assigned.
-     */
-    protected Constraint() {
-    }
-
-    /**
      * Instantiate a constraint with the specified native object assigned but
      * not owned.
      *

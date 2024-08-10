@@ -31,12 +31,6 @@ abstract public class TwoBodyConstraint extends Constraint {
     // constructors
 
     /**
-     * Instantiate a constraint with no native object assigned.
-     */
-    protected TwoBodyConstraint() {
-    }
-
-    /**
      * Instantiate a constraint with the specified native object assigned but
      * not owned.
      *
