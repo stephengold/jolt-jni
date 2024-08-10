@@ -105,7 +105,8 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the constraint location for body 1. (native field: mPoint1)
      *
-     * @param location the desired location (not null, unaffected)
+     * @param location the desired location (not null, unaffected,
+     * default=(0,0,0))
      */
     public void setPoint1(RVec3Arg location) {
         long settingsVa = va();
@@ -118,7 +119,8 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the constraint location for body 2. (native field: mPoint2)
      *
-     * @param location the desired location (not null, unaffected)
+     * @param location the desired location (not null, unaffected,
+     * default=(0,0,0))
      */
     public void setPoint2(RVec3Arg location) {
         long settingsVa = va();
@@ -132,7 +134,7 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
      * Alter which space the other properties are specified in. (native field:
      * mSpace)
      *
-     * @param space enum value (not null)
+     * @param space enum value (not null, default=WorldSpace)
      */
     public void setSpace(EConstraintSpace space) {
         long settingsVa = va();

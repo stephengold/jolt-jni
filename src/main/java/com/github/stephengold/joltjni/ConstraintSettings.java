@@ -127,8 +127,9 @@ abstract public class ConstraintSettings
 
     /**
      * Alter the user data, which holds the {@code EConstraintSubType} ordinal.
+     * (native field: mUserData)
      *
-     * @param constraintSubType the desired value (not null)
+     * @param constraintSubType the desired value (not null, default=0)
      */
     protected void setSubType(EConstraintSubType constraintSubType) {
         long settingsVa = va();

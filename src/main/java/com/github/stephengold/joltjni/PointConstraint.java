@@ -22,8 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A {@code Constraint} that constrains 2 bodies on a single point, removing 3
- * degrees of freedom.
+ * A {@code TwoBodyConstraint} that constrains the bodies on a common point,
+ * removing 3 degrees of freedom.
  *
  * @author Stephen Gold sgold@sonic.net
  */

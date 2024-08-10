@@ -50,7 +50,7 @@ abstract public class TwoBodyConstraint extends Constraint {
     // new methods exposed
 
     /**
-     * Access the first body in the constraint.
+     * Access the first body in the constraint. The constraint is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -63,7 +63,7 @@ abstract public class TwoBodyConstraint extends Constraint {
     }
 
     /**
-     * Access the 2nd body in the constraint.
+     * Access the 2nd body in the constraint. The constraint is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -76,7 +76,8 @@ abstract public class TwoBodyConstraint extends Constraint {
     }
 
     /**
-     * Calculate the coordinate transform from constraint space to body 1.
+     * Calculate the coordinate transform from constraint space to body 1. The
+     * constraint is unaffected.
      *
      * @return a new transform matrix
      */
@@ -89,7 +90,8 @@ abstract public class TwoBodyConstraint extends Constraint {
     }
 
     /**
-     * Calculate the coordinate transform from constraint space to body 2.
+     * Calculate the coordinate transform from constraint space to body 2. The
+     * constraint is unaffected.
      *
      * @return a new transform matrix
      */
