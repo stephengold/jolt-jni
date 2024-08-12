@@ -69,6 +69,9 @@ abstract public class Constraint extends NonCopyable
             case Point:
                 result = new PointConstraint(constraintVa);
                 break;
+            case SixDof:
+                result = new SixDofConstraint(constraintVa);
+                break;
             default:
                 throw new IllegalArgumentException("subType = " + subType);
         }

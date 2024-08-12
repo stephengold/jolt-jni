@@ -75,6 +75,9 @@ abstract public class ConstraintSettings
             case Point:
                 result = new PointConstraintSettings(settingsVa);
                 break;
+            case SixDof:
+                result = new SixDofConstraintSettings(settingsVa);
+                break;
             default:
                 throw new IllegalArgumentException("subType = " + subType);
         }
