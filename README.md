@@ -3,7 +3,7 @@
 [JVM](https://en.wikipedia.org/wiki/Java_virtual_machine) bindings
 for [Jolt Physics](https://jrouwe.github.io/JoltPhysics)
 
-currently under construction
+**currently under construction**
 
 ## External links
 
