@@ -715,6 +715,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setFriction
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    setIsSensor
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setIsSensor
+  (JNIEnv *, jclass, jlong bodyVa, jboolean setting) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    pBody->SetIsSensor(setting);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    setLinearVelocity
  * Signature: (JFFF)V
  */

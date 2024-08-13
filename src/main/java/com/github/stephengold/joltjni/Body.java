@@ -246,6 +246,17 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Alter whether the body is a sensor.
+     *
+     * @param setting true to make it a sensor, false for a regular body
+     * (default=false)
+     */
+    public void setIsSensor(boolean setting) {
+        long bodyVa = va();
+        setIsSensor(bodyVa, setting);
+    }
+
+    /**
      * Directly alter the body's linear velocity.
      *
      * @param velocity the desired linear velocity (in meters/second, not null,
@@ -798,6 +809,8 @@ public class Body extends NonCopyable implements ConstBody {
             long bodyVa, float wx, float wy, float wz);
 
     native private static void setFriction(long bodyVa, float friction);
+
+    native private static void setIsSensor(long bodyVa, boolean setting);
 
     native private static void setLinearVelocity(
             long bodyVa, float vx, float vy, float vz);
