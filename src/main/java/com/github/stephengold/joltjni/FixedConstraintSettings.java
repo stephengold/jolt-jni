@@ -58,8 +58,8 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Test whether to configure the attachment points based on the positions of
-     * the bodies when the constraint is created. (native field:
-     * mAutoDetectPoint)
+     * the bodies when the constraint is created. The settings are unaffected.
+     * (native field: mAutoDetectPoint)
      *
      * @return true to use body positions, false for explicit configuration
      */
@@ -71,7 +71,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Return the constraint location for body 1. The settings are unaffected.
+     * Copy the constraint location for body 1. The settings are unaffected.
      * (native field: mPoint1)
      *
      * @return a new location vector
@@ -87,7 +87,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Return the constraint location for body 2. The settings are unaffected.
+     * Copy the constraint location for body 2. The settings are unaffected.
      * (native field: mPoint2)
      *
      * @return a new location vector

@@ -139,7 +139,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Return the constraint location for body 1. The settings are unaffected.
+     * Copy the constraint location for body 1. The settings are unaffected.
      * (native field: mPosition1)
      *
      * @return a new location vector
@@ -155,7 +155,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Return the constraint location for body 2. The settings are unaffected.
+     * Copy the constraint location for body 2. The settings are unaffected.
      * (native field: mPosition2)
      *
      * @return a new location vector
