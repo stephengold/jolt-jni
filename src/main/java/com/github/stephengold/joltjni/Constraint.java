@@ -131,19 +131,6 @@ abstract public class Constraint extends NonCopyable
         long constraintVa = va();
         setUserData(constraintVa, value);
     }
-
-    /**
-     * Create a counted reference to the native {@code Constraint}.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    public ConstraintRef toRef() {
-        long constraintVa = va();
-        long refVa = toRef(constraintVa);
-        ConstraintRef result = new ConstraintRef(refVa, true);
-
-        return result;
-    }
     // *************************************************************************
     // ConstConstraint methods
 
@@ -271,6 +258,20 @@ abstract public class Constraint extends NonCopyable
     public int getRefCount() {
         long constraintVa = va();
         int result = getRefCount(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Create a counted reference to the native {@code Constraint}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public ConstraintRef toRef() {
+        long constraintVa = va();
+        long refVa = toRef(constraintVa);
+        ConstraintRef result = new ConstraintRef(refVa, true);
 
         return result;
     }
