@@ -748,7 +748,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setLinearVelocit
     pBody->SetLinearVelocityClamped(velocity);
 }
 
-
 /*
  * Class:     com_github_stephengold_joltjni_Body
  * Method:    setMotionType

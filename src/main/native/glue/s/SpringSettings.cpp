@@ -118,7 +118,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SpringSettings_setFre
     pSettings->mFrequency = frequency;
 }
 
-
 /*
  * Class:     com_github_stephengold_joltjni_SpringSettings
  * Method:    setMode

@@ -280,7 +280,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
     return result;
 }
 
-
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    getInverseInertiaXX

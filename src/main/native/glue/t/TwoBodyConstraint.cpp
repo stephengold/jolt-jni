@@ -56,7 +56,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TwoBodyConstraint_ge
     return reinterpret_cast<jlong> (pResult);
 }
 
-
 /*
  * Class:     com_github_stephengold_joltjni_TwoBodyConstraint
  * Method:    getConstraintToBody1Matrix

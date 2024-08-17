@@ -248,7 +248,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactSettings_setCo
     pSettings->mCombinedRestitution = restitution;
 }
 
-
 /*
  * Class:     com_github_stephengold_joltjni_ContactSettings
  * Method:    setInvInertiaScale1
