@@ -44,6 +44,72 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSett
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getLimitMax
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getLimitMax
+  (JNIEnv *, jclass, jlong settingsVa, jint dof) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mLimitMax[dof];
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getLimitMin
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getLimitMin
+  (JNIEnv *, jclass, jlong settingsVa, jint dof) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mLimitMin[dof];
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getLimitsSpringSettings
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getLimitsSpringSettings
+  (JNIEnv *, jclass, jlong settingsVa, jint dof) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const SpringSettings * const pResult
+            = &pSettings->mLimitsSpringSettings[dof];
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getMaxFriction
+ * Signature: (JI)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getMaxFriction
+  (JNIEnv *, jclass, jlong settingsVa, jint dof) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mMaxFriction[dof];
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getMotorSettings
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getMotorSettings
+  (JNIEnv *, jclass, jlong settingsVa, jint dof) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const MotorSettings * const pResult = &pSettings->mMotorSettings[dof];
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
  * Method:    getPosition1X
  * Signature: (J)D
  */
@@ -135,6 +201,127 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getSwingType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getSwingType
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const ESwingType result = pSettings->mSwingType;
+    return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    isFixedAxis
+ * Signature: (JI)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_isFixedAxis
+  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const SixDOFConstraintSettings::EAxis axis
+            = (SixDOFConstraintSettings::EAxis) ordinal;
+    const bool result = pSettings->IsFixedAxis(axis);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    isFreeAxis
+ * Signature: (JI)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_isFreeAxis
+  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const SixDOFConstraintSettings::EAxis axis
+            = (SixDOFConstraintSettings::EAxis) ordinal;
+    const bool result = pSettings->IsFreeAxis(axis);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    makeFixedAxis
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_makeFixedAxis
+  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+    SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const SixDOFConstraintSettings::EAxis axis
+            = (SixDOFConstraintSettings::EAxis) ordinal;
+    pSettings->MakeFixedAxis(axis);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    makeFreeAxis
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_makeFreeAxis
+  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+    SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const SixDOFConstraintSettings::EAxis axis
+            = (SixDOFConstraintSettings::EAxis) ordinal;
+    pSettings->MakeFreeAxis(axis);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    setLimitedAxis
+ * Signature: (JIFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setLimitedAxis
+  (JNIEnv *, jclass, jlong settingsVa, jint ordinal, jfloat min, jfloat max) {
+    SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const SixDOFConstraintSettings::EAxis axis
+            = (SixDOFConstraintSettings::EAxis) ordinal;
+    pSettings->SetLimitedAxis(axis, min, max);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    setLimitMax
+ * Signature: (JIF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setLimitMax
+  (JNIEnv *, jclass, jlong settingsVa, jint dof, jfloat max) {
+    SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    pSettings->mLimitMax[dof] = max;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    setLimitMin
+ * Signature: (JIF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setLimitMin
+  (JNIEnv *, jclass, jlong settingsVa, jint dof, jfloat min) {
+    SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    pSettings->mLimitMin[dof] = min;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    setMaxFriction
+ * Signature: (JIF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setMaxFriction
+  (JNIEnv *, jclass, jlong settingsVa, jint dof, jfloat friction) {
+    SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    pSettings->mMaxFriction[dof] = friction;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
  * Method:    setPosition1
  * Signature: (JDDD)V
  */
@@ -169,4 +356,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSetti
     SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
     pSettings->mSpace = (EConstraintSpace) ordinal;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    setSwingType
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setSwingType
+  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+    SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    pSettings->mSwingType = (ESwingType) ordinal;
 }
