@@ -44,6 +44,162 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSett
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisX1X
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX1X
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisX1.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisX1Y
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX1Y
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisX1.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisX1Z
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX1Z
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisX1.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisX2X
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX2X
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisX2.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisX2Y
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX2Y
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisX2.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisX2Z
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX2Z
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisX2.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisY1X
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY1X
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisY1.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisY1Y
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY1Y
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisY1.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisY1Z
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY1Z
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisY1.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisY2X
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY2X
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisY2.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisY2Y
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY2Y
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisY2.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    getAxisY2Z
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY2Z
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const float result = pSettings->mAxisY2.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
  * Method:    getLimitMax
  * Signature: (JI)F
  */
@@ -268,6 +424,58 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSetti
     const SixDOFConstraintSettings::EAxis axis
             = (SixDOFConstraintSettings::EAxis) ordinal;
     pSettings->MakeFreeAxis(axis);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    setAxisX1
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setAxisX1
+  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
+    SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const Vec3 vec3(x, y, z);
+    pSettings->mAxisX1 = vec3;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    setAxisX2
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setAxisX2
+  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
+    SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const Vec3 vec3(x, y, z);
+    pSettings->mAxisX2 = vec3;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    setAxisY1
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setAxisY1
+  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
+    SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const Vec3 vec3(x, y, z);
+    pSettings->mAxisY1 = vec3;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    setAxisY2
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setAxisY2
+  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
+    SixDOFConstraintSettings * const pSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
+    const Vec3 vec3(x, y, z);
+    pSettings->mAxisY2 = vec3;
 }
 
 /*
