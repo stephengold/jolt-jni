@@ -353,14 +353,14 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createSixDofConstraintSettings();
 
-    native private static float getMaxFriction(long settingsVa, int dof);
-
     native private static float getLimitMax(long settingsVa, int dof);
 
     native private static float getLimitMin(long settingsVa, int dof);
 
     native private static long getLimitsSpringSettings(
             long settingsVa, int dof);
+
+    native private static float getMaxFriction(long settingsVa, int dof);
 
     native private static long getMotorSettings(long settingsVa, int dof);
 
