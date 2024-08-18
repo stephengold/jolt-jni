@@ -33,12 +33,32 @@ final public class SpringSettings extends JoltPhysicsObject {
     // fields
 
     /**
+     * prevent premature garbage collection of the underlying {@code Constraint}
+     * if any
+     */
+    final private ConstraintRef constraintRef;
+    /**
      * prevent premature garbage collection of the underlying
-     * {@code ConstraintSettings}
+     * {@code ConstraintSettings} if any
      */
     final private ConstraintSettingsRef constraintSettingsRef;
     // *************************************************************************
     // constructors
+
+    /**
+     * Instantiate settings with the specified native object assigned but not
+     * owned.
+     *
+     * @param constraint the underlying {@code Constraint} (not null)
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    SpringSettings(Constraint constraint, long settingsVa) {
+        this.constraintRef = constraint.toRef();
+        this.constraintSettingsRef = null;
+
+        setVirtualAddress(settingsVa, null);
+    }
 
     /**
      * Instantiate settings with the specified native object assigned but not
@@ -50,16 +70,27 @@ final public class SpringSettings extends JoltPhysicsObject {
      * zero)
      */
     SpringSettings(ConstraintSettings constraintSettings, long settingsVa) {
+        this.constraintRef = null;
         this.constraintSettingsRef = constraintSettings.toRef();
+
         setVirtualAddress(settingsVa, null);
     }
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Access the underlying {@code ConstraintSettings}.
+     * Access the underlying {@code Constraint}, if any.
      *
-     * @return the pre-existing instance
+     * @return the pre-existing instance, or null if none
+     */
+    public Constraint getConstraint() {
+        return constraintRef.getPtr();
+    }
+
+    /**
+     * Access the underlying {@code ConstraintSettings}, if any.
+     *
+     * @return the pre-existing instance, or null if none
      */
     public ConstraintSettings getConstraintSettings() {
         return constraintSettingsRef.getPtr();
