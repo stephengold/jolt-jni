@@ -81,6 +81,9 @@ abstract public class ConstraintSettings
             case SixDof:
                 result = new SixDofConstraintSettings(settingsVa);
                 break;
+            case Slider:
+                result = new SliderConstraintSettings(settingsVa);
+                break;
             default:
                 throw new IllegalArgumentException("subType = " + subType);
         }

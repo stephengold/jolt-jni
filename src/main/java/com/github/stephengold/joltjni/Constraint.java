@@ -75,6 +75,9 @@ abstract public class Constraint extends NonCopyable
             case SixDof:
                 result = new SixDofConstraint(constraintVa);
                 break;
+            case Slider:
+                result = new SliderConstraint(constraintVa);
+                break;
             default:
                 throw new IllegalArgumentException("subType = " + subType);
         }
