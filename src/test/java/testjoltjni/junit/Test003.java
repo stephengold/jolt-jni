@@ -324,57 +324,42 @@ public class Test003 {
      */
     private static void testBcsSetters(BodyCreationSettings bcs) {
         bcs.setAllowSleeping(false);
-        Assert.assertFalse(bcs.getAllowSleeping());
-
         bcs.setAngularDamping(0.01f);
-        Assert.assertEquals(0.01f, bcs.getAngularDamping(), 0f);
-
         bcs.setAngularVelocity(new Vec3(0.02f, 0.03f, 0.04f));
-        TestUtils.assertEquals(
-                0.02f, 0.03f, 0.04f, bcs.getAngularVelocity(), 0f);
-
         bcs.setFriction(0.05f);
-        Assert.assertEquals(0.05f, bcs.getFriction(), 0f);
-
         bcs.setGravityFactor(0.06f);
-        Assert.assertEquals(0.06f, bcs.getGravityFactor(), 0f);
-
         bcs.setIsSensor(true);
-        Assert.assertTrue(bcs.getIsSensor());
-
         bcs.setLinearDamping(0.07f);
-        Assert.assertEquals(0.07f, bcs.getLinearDamping(), 0f);
-
         bcs.setLinearVelocity(new Vec3(0.08f, 0.09f, 0.1f));
-        TestUtils.assertEquals(0.08f, 0.09f, 0.1f, bcs.getLinearVelocity(), 0f);
-
         bcs.setMaxAngularVelocity(0.101f);
-        Assert.assertEquals(0.101f, bcs.getMaxAngularVelocity(), 0f);
-
         bcs.setMaxLinearVelocity(0.102f);
-        Assert.assertEquals(0.102f, bcs.getMaxLinearVelocity(), 0f);
-
         bcs.setMotionQuality(EMotionQuality.LinearCast);
-        Assert.assertEquals(EMotionQuality.LinearCast, bcs.getMotionQuality());
-
         bcs.setMotionType(EMotionType.Kinematic);
-        Assert.assertEquals(EMotionType.Kinematic, bcs.getMotionType());
-
         bcs.setObjectLayer(11);
-        Assert.assertEquals(11, bcs.getObjectLayer());
-
         bcs.setOverrideMassProperties(
                 EOverrideMassProperties.MassAndInertiaProvided);
+        bcs.setPosition(new RVec3(0.12, 0.13, 0.14));
+        bcs.setRestitution(0.15f);
+        bcs.setRotation(new Quat(0.6f, 0f, 0f, 0.8f));
+
+        Assert.assertFalse(bcs.getAllowSleeping());
+        Assert.assertEquals(0.01f, bcs.getAngularDamping(), 0f);
+        TestUtils.assertEquals(
+                0.02f, 0.03f, 0.04f, bcs.getAngularVelocity(), 0f);
+        Assert.assertEquals(0.05f, bcs.getFriction(), 0f);
+        Assert.assertEquals(0.06f, bcs.getGravityFactor(), 0f);
+        Assert.assertTrue(bcs.getIsSensor());
+        Assert.assertEquals(0.07f, bcs.getLinearDamping(), 0f);
+        TestUtils.assertEquals(0.08f, 0.09f, 0.1f, bcs.getLinearVelocity(), 0f);
+        Assert.assertEquals(0.101f, bcs.getMaxAngularVelocity(), 0f);
+        Assert.assertEquals(0.102f, bcs.getMaxLinearVelocity(), 0f);
+        Assert.assertEquals(EMotionQuality.LinearCast, bcs.getMotionQuality());
+        Assert.assertEquals(EMotionType.Kinematic, bcs.getMotionType());
+        Assert.assertEquals(11, bcs.getObjectLayer());
         Assert.assertEquals(EOverrideMassProperties.MassAndInertiaProvided,
                 bcs.getOverrideMassProperties());
-
-        bcs.setPosition(new RVec3(0.12, 0.13, 0.14));
         TestUtils.assertEquals(0.12f, 0.13f, 0.14f, bcs.getPosition(), 0f);
-
-        bcs.setRestitution(0.15f);
         Assert.assertEquals(0.15f, bcs.getRestitution(), 0f);
-
-        bcs.setRotation(new Quat(0.6f, 0f, 0f, 0.8f));
         TestUtils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
     }
 
