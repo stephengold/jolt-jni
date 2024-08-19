@@ -69,6 +69,9 @@ abstract public class ConstraintSettings
         EConstraintSubType subType = EConstraintSubType.values()[(int) ordinal];
         ConstraintSettings result;
         switch (subType) {
+            case Cone:
+                result = new ConeConstraintSettings(settingsVa);
+                break;
             case Fixed:
                 result = new FixedConstraintSettings(settingsVa);
                 break;
