@@ -66,6 +66,9 @@ abstract public class Constraint extends NonCopyable
             case Cone:
                 result = new ConeConstraint(constraintVa);
                 break;
+            case Distance:
+                result = new DistanceConstraint(constraintVa);
+                break;
             case Fixed:
                 result = new FixedConstraint(constraintVa);
                 break;

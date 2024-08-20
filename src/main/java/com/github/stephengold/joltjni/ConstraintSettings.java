@@ -72,6 +72,9 @@ abstract public class ConstraintSettings
             case Cone:
                 result = new ConeConstraintSettings(settingsVa);
                 break;
+            case Distance:
+                result = new DistanceConstraintSettings(settingsVa);
+                break;
             case Fixed:
                 result = new FixedConstraintSettings(settingsVa);
                 break;
