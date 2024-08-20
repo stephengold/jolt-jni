@@ -55,6 +55,7 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 import com.github.stephengold.joltjni.enumerate.ESwingType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import org.junit.Assert;
@@ -415,8 +416,7 @@ public class Test003 {
      * @param settings the settings to test (not null, unaffected)
      */
     private static void testConeCsDefaults(ConeConstraintSettings settings) {
-        Assert.assertTrue(settings.hasAssignedNativeObject());
-        Assert.assertFalse(settings.ownsNativeObject());
+        testCsDefaults(settings);
 
         Assert.assertEquals(0f, settings.getHalfConeAngle(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint1(), 0f);
@@ -496,6 +496,22 @@ public class Test003 {
                 settings.getRelativeAngularSurfaceVelocity(), 0f);
         TestUtils.assertEquals(20f, 21f, 22f,
                 settings.getRelativeLinearSurfaceVelocity(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code ConstraintSettings}.
+     *
+     * @param settings the settings to test (not null, unaffected)
+     */
+    private static void testCsDefaults(ConstConstraintSettings settings) {
+        Assert.assertTrue(settings.hasAssignedNativeObject());
+        Assert.assertFalse(settings.ownsNativeObject());
+
+        Assert.assertEquals(0, settings.getConstraintPriority());
+        Assert.assertTrue(settings.getEnabled());
+        Assert.assertEquals(0, settings.getNumPositionStepsOverride());
+        Assert.assertEquals(0, settings.getNumVelocityStepsOverride());
     }
 
     /**
@@ -595,8 +611,7 @@ public class Test003 {
      */
     private static void testSixDofCsDefaults(
             SixDofConstraintSettings settings) {
-        Assert.assertTrue(settings.hasAssignedNativeObject());
-        Assert.assertFalse(settings.ownsNativeObject());
+        testCsDefaults(settings);
 
         TestUtils.assertEquals(1f, 0f, 0f, settings.getAxisX1(), 0f);
         TestUtils.assertEquals(1f, 0f, 0f, settings.getAxisX2(), 0f);
@@ -676,8 +691,7 @@ public class Test003 {
      */
     private static void testSliderCsDefaults(
             SliderConstraintSettings settings) {
-        Assert.assertTrue(settings.hasAssignedNativeObject());
-        Assert.assertFalse(settings.ownsNativeObject());
+        testCsDefaults(settings);
 
         Assert.assertFalse(settings.getAutoDetectPoint());
         Assert.assertEquals(Float.MAX_VALUE, settings.getLimitsMax(), 0f);
