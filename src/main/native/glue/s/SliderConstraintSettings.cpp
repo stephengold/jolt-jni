@@ -207,7 +207,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPoint1.GetX();
+    const Real result = pSettings->mPoint1.GetX();
     return result;
 }
 
@@ -220,7 +220,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPoint1.GetY();
+    const Real result = pSettings->mPoint1.GetY();
     return result;
 }
 
@@ -233,7 +233,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPoint1.GetZ();
+    const Real result = pSettings->mPoint1.GetZ();
     return result;
 }
 
@@ -246,7 +246,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPoint2.GetX();
+    const Real result = pSettings->mPoint2.GetX();
     return result;
 }
 
@@ -259,7 +259,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPoint2.GetY();
+    const Real result = pSettings->mPoint2.GetY();
     return result;
 }
 
@@ -272,7 +272,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPoint2.GetZ();
+    const Real result = pSettings->mPoint2.GetZ();
     return result;
 }
 
