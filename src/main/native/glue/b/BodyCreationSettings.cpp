@@ -365,7 +365,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettin
   (JNIEnv *, jclass, jlong bodySettingsVa) {
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
-    const double result = pSettings->mPosition.GetX();
+    const Real result = pSettings->mPosition.GetX();
     return result;
 }
 
@@ -378,7 +378,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettin
   (JNIEnv *, jclass, jlong bodySettingsVa) {
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
-    const double result = pSettings->mPosition.GetY();
+    const Real result = pSettings->mPosition.GetY();
     return result;
 }
 
@@ -391,7 +391,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettin
   (JNIEnv *, jclass, jlong bodySettingsVa) {
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
-    const double result = pSettings->mPosition.GetZ();
+    const Real result = pSettings->mPosition.GetZ();
     return result;
 }
 
@@ -417,7 +417,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetting
   (JNIEnv *, jclass, jlong bodySettingsVa) {
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
-    const double result = pSettings->mRotation.GetW();
+    const float result = pSettings->mRotation.GetW();
     return result;
 }
 
@@ -430,7 +430,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetting
   (JNIEnv *, jclass, jlong bodySettingsVa) {
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
-    const double result = pSettings->mRotation.GetX();
+    const float result = pSettings->mRotation.GetX();
     return result;
 }
 
@@ -443,7 +443,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetting
   (JNIEnv *, jclass, jlong bodySettingsVa) {
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
-    const double result = pSettings->mRotation.GetY();
+    const float result = pSettings->mRotation.GetY();
     return result;
 }
 
@@ -456,7 +456,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetting
   (JNIEnv *, jclass, jlong bodySettingsVa) {
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
-    const double result = pSettings->mRotation.GetZ();
+    const float result = pSettings->mRotation.GetZ();
     return result;
 }
 

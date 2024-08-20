@@ -273,7 +273,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const double result = pSettings->mPosition1.GetX();
+    const Real result = pSettings->mPosition1.GetX();
     return result;
 }
 
@@ -286,7 +286,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const double result = pSettings->mPosition1.GetY();
+    const Real result = pSettings->mPosition1.GetY();
     return result;
 }
 
@@ -299,7 +299,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const double result = pSettings->mPosition1.GetZ();
+    const Real result = pSettings->mPosition1.GetZ();
     return result;
 }
 
@@ -312,7 +312,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const double result = pSettings->mPosition2.GetX();
+    const Real result = pSettings->mPosition2.GetX();
     return result;
 }
 
@@ -325,7 +325,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const double result = pSettings->mPosition2.GetY();
+    const Real result = pSettings->mPosition2.GetY();
     return result;
 }
 
@@ -338,7 +338,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSe
   (JNIEnv *, jclass, jlong settingsVa) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const double result = pSettings->mPosition2.GetZ();
+    const Real result = pSettings->mPosition2.GetZ();
     return result;
 }
 
