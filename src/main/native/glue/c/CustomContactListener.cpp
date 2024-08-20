@@ -112,9 +112,9 @@ public:
 
         const jlong body1Va = reinterpret_cast<jlong> (&inBody1);
         const jlong body2Va = reinterpret_cast<jlong> (&inBody2);
-        const double offsetX = inBaseOffset.GetX();
-        const double offsetY = inBaseOffset.GetY();
-        const double offsetZ = inBaseOffset.GetZ();
+        const jdouble offsetX = inBaseOffset.GetX();
+        const jdouble offsetY = inBaseOffset.GetY();
+        const jdouble offsetZ = inBaseOffset.GetZ();
         const jlong shapeVa = reinterpret_cast<jlong> (&inCollisionResult);
         jint jintResult = pAttachEnv->CallIntMethod(mJavaObject,
                 mValidateMethodId, body1Va, body2Va, offsetX, offsetY, offsetZ, shapeVa);
