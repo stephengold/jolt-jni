@@ -78,6 +78,9 @@ abstract public class ConstraintSettings
             case Fixed:
                 result = new FixedConstraintSettings(settingsVa);
                 break;
+            case Hinge:
+                result = new HingeConstraintSettings(settingsVa);
+                break;
             case Point:
                 result = new PointConstraintSettings(settingsVa);
                 break;

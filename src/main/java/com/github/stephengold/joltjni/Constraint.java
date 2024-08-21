@@ -72,6 +72,9 @@ abstract public class Constraint extends NonCopyable
             case Fixed:
                 result = new FixedConstraint(constraintVa);
                 break;
+            case Hinge:
+                result = new HingeConstraint(constraintVa);
+                break;
             case Point:
                 result = new PointConstraint(constraintVa);
                 break;
