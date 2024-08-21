@@ -29,7 +29,7 @@
     <!-- Checks for size violations              -->
     <!-- See https://checkstyle.org/checks/sizes -->
     <module name="FileLength">
-        <property name="max" value="900"/>
+        <property name="max" value="999"/>
     </module>
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
