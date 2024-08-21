@@ -55,7 +55,7 @@ public:
     }
 
     BroadPhaseLayer GetBroadPhaseLayer(ObjectLayer inLayer) const override {
-	JPH_ASSERT(inLayer < mNumObjLayers);
+        JPH_ASSERT(inLayer < mNumObjLayers);
         BroadPhaseLayer result = mpObjToBp[inLayer];
         return result;
     }

@@ -360,7 +360,7 @@ tasks.withType(Sign) {
     onlyIf { project.hasProperty('signingKeyEncoded') }
 }
 
-def base64Decode(encodedString){
+def base64Decode(encodedString) {
     if (encodedString != null) {
         byte[] decoded = encodedString.decodeBase64()
         String decode = new String(decoded)
@@ -369,7 +369,7 @@ def base64Decode(encodedString){
     return null;
 }
 
-// Download and extract archived JoltPhysics source code
+// Tasks to download and unpack JoltPhysics source code:
 
 tasks.register('downloadJoltSource', Download) {
     src 'https://github.com/jrouwe/JoltPhysics/archive/refs/tags/v5.1.0.zip'

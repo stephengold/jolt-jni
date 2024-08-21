@@ -240,7 +240,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the hinge axis of body 1. (native field: mHingeAxis1)
      *
      * @param direction the desired axis direction (not null, unaffected,
-     * default=(1,0,0))
+     * default=(0,1,0))
      */
     public void setHingeAxis1(Vec3Arg direction) {
         long settingsVa = va();
@@ -254,7 +254,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the hinge axis of body 2. (native field: mHingeAxis2)
      *
      * @param direction the desired axis direction (not null, unaffected,
-     * default=(1,0,0))
+     * default=(0,1,0))
      */
     public void setHingeAxis2(Vec3Arg direction) {
         long settingsVa = va();

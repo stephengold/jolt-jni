@@ -63,7 +63,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_copyDebugTriang
             }
             pFloat3 += 3 * numTrianglesCopied;
             numTriangles -= numTrianglesCopied;
-	}
+        }
     }
 }
 
@@ -94,7 +94,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
                 break;
             }
             result += numTrianglesCopied;
-	}
+        }
     }
     return result;
 }

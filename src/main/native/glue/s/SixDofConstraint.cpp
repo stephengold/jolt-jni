@@ -568,7 +568,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_setL
     const SixDOFConstraintSettings::EAxis axis
             = (SixDOFConstraintSettings::EAxis) axisOrdinal;
     const SpringSettings * const pSpringSettings
-            =  reinterpret_cast<SpringSettings *> (springSettingsVa);
+            = reinterpret_cast<SpringSettings *> (springSettingsVa);
     pConstraint->SetLimitsSpringSettings(axis, *pSpringSettings);
 }
 
