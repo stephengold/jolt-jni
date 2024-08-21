@@ -67,9 +67,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisX1() {
         long settingsVa = va();
-        double x = getAxisX1X(settingsVa);
-        double y = getAxisX1Y(settingsVa);
-        double z = getAxisX1Z(settingsVa);
+        float x = getAxisX1X(settingsVa);
+        float y = getAxisX1Y(settingsVa);
+        float z = getAxisX1Z(settingsVa);
         Vec3 result = new Vec3(x, y, z);
 
         return result;
@@ -83,9 +83,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisX2() {
         long settingsVa = va();
-        double x = getAxisX2X(settingsVa);
-        double y = getAxisX2Y(settingsVa);
-        double z = getAxisX2Z(settingsVa);
+        float x = getAxisX2X(settingsVa);
+        float y = getAxisX2Y(settingsVa);
+        float z = getAxisX2Z(settingsVa);
         Vec3 result = new Vec3(x, y, z);
 
         return result;
@@ -99,9 +99,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisY1() {
         long settingsVa = va();
-        double x = getAxisY1X(settingsVa);
-        double y = getAxisY1Y(settingsVa);
-        double z = getAxisY1Z(settingsVa);
+        float x = getAxisY1X(settingsVa);
+        float y = getAxisY1Y(settingsVa);
+        float z = getAxisY1Z(settingsVa);
         Vec3 result = new Vec3(x, y, z);
 
         return result;
@@ -115,9 +115,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisY2() {
         long settingsVa = va();
-        double x = getAxisY2X(settingsVa);
-        double y = getAxisY2Y(settingsVa);
-        double z = getAxisY2Z(settingsVa);
+        float x = getAxisY2X(settingsVa);
+        float y = getAxisY2Y(settingsVa);
+        float z = getAxisY2Z(settingsVa);
         Vec3 result = new Vec3(x, y, z);
 
         return result;
