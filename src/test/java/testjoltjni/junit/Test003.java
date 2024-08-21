@@ -25,10 +25,7 @@ import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
-import com.github.stephengold.joltjni.ConeConstraintSettings;
 import com.github.stephengold.joltjni.ContactSettings;
-import com.github.stephengold.joltjni.DistanceConstraintSettings;
-import com.github.stephengold.joltjni.FixedConstraintSettings;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemSingleThreaded;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
@@ -38,27 +35,20 @@ import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.MotionProperties;
 import com.github.stephengold.joltjni.NonCopyable;
-import com.github.stephengold.joltjni.PointConstraintSettings;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Shape;
 import com.github.stephengold.joltjni.ShapeSettings;
-import com.github.stephengold.joltjni.SixDofConstraintSettings;
-import com.github.stephengold.joltjni.SliderConstraintSettings;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorImpl;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
-import com.github.stephengold.joltjni.enumerate.EAxis;
-import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
-import com.github.stephengold.joltjni.enumerate.ESwingType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
-import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import org.junit.Assert;
@@ -67,7 +57,7 @@ import testjoltjni.TestUtils;
 
 /**
  * Automated JUnit4 tests for creation, destruction, accessors, and defaults of
- * Jolt Physics objects.
+ * Jolt Physics objects other than {@code ConstraintsSettings} subclasses.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -84,17 +74,11 @@ public class Test003 {
 
         doAaBox();
         doBodyCreationSettings();
-        doConeConstraintSettings();
         doContactSettings();
-        doDistanceConstraintSettings();
-        doFixedConstraintSettings();
         doJobSystemSingleThreaded();
         doJobSystemThreadPool();
         doMassProperties();
         doMotionProperties();
-        doPointConstraintSettings();
-        doSixDofConstraintSettings();
-        doSliderConstraintSettings();
         doTempAllocatorImpl();
         doTempAllocatorMalloc();
 
@@ -205,19 +189,6 @@ public class Test003 {
     }
 
     /**
-     * Test the {@code ConeConstraintSettings} class.
-     */
-    private static void doConeConstraintSettings() {
-        ConeConstraintSettings settings = new ConeConstraintSettings();
-
-        testConeCsDefaults(settings);
-        testConeCsSetters(settings);
-
-        TestUtils.testClose(settings);
-        System.gc();
-    }
-
-    /**
      * Test the {@code ContactSettings} class.
      */
     private static void doContactSettings() {
@@ -225,32 +196,6 @@ public class Test003 {
 
         testContactSettingsDefaults(settings);
         testContactSettingsSetters(settings);
-
-        TestUtils.testClose(settings);
-        System.gc();
-    }
-
-    /**
-     * Test the {@code DistanceConstraintSettings} class.
-     */
-    private static void doDistanceConstraintSettings() {
-        DistanceConstraintSettings settings = new DistanceConstraintSettings();
-
-        testDistanceCsDefaults(settings);
-        testDistanceCsSetters(settings);
-
-        TestUtils.testClose(settings);
-        System.gc();
-    }
-
-    /**
-     * Test the {@code FixedConstraintSettings} class.
-     */
-    private static void doFixedConstraintSettings() {
-        FixedConstraintSettings settings = new FixedConstraintSettings();
-
-        testFixedCsDefaults(settings);
-        testFixedCsSetters(settings);
 
         TestUtils.testClose(settings);
         System.gc();
@@ -320,45 +265,6 @@ public class Test003 {
         testMotionSetters(props);
 
         TestUtils.testClose(props);
-        System.gc();
-    }
-
-    /**
-     * Test the {@code PointConstraintSettings} class.
-     */
-    private static void doPointConstraintSettings() {
-        PointConstraintSettings settings = new PointConstraintSettings();
-
-        testPointCsDefaults(settings);
-        testPointCsSetters(settings);
-
-        TestUtils.testClose(settings);
-        System.gc();
-    }
-
-    /**
-     * Test the {@code SixDofConstraintSettings} class.
-     */
-    private static void doSixDofConstraintSettings() {
-        SixDofConstraintSettings settings = new SixDofConstraintSettings();
-
-        testSixDofCsDefaults(settings);
-        testSixDofCsSetters(settings);
-
-        TestUtils.testClose(settings);
-        System.gc();
-    }
-
-    /**
-     * Test the {@code SliderConstraintSettings} class.
-     */
-    private static void doSliderConstraintSettings() {
-        SliderConstraintSettings settings = new SliderConstraintSettings();
-
-        testSliderCsDefaults(settings);
-        testSliderCsSetters(settings);
-
-        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -469,47 +375,6 @@ public class Test003 {
     }
 
     /**
-     * Test the getters and defaults of the specified
-     * {@code ConeConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, unaffected)
-     */
-    private static void testConeCsDefaults(ConeConstraintSettings settings) {
-        testCsDefaults(settings);
-
-        Assert.assertEquals(0f, settings.getHalfConeAngle(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint1(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint2(), 0f);
-        Assert.assertEquals(EConstraintSpace.WorldSpace, settings.getSpace());
-        TestUtils.assertEquals(1f, 0f, 0f, settings.getTwistAxis1(), 0f);
-        TestUtils.assertEquals(1f, 0f, 0f, settings.getTwistAxis2(), 0f);
-    }
-
-    /**
-     * Test the setters of the specified {@code ConeConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, modified)
-     */
-    private static void testConeCsSetters(ConeConstraintSettings settings) {
-        settings.setHalfConeAngle(0.01f);
-        settings.setPoint1(new RVec3(0.02f, 0.03f, 0.04f));
-        settings.setPoint2(new RVec3(0.05f, 0.06f, 0.07f));
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
-        settings.setTwistAxis1(new Vec3(0.12f, 0.13f, 0.14f));
-        settings.setTwistAxis2(new Vec3(0.15f, 0.16f, 0.17f));
-
-        Assert.assertEquals(0.01f, settings.getHalfConeAngle(), 0f);
-        TestUtils.assertEquals(0.02f, 0.03f, 0.04f, settings.getPoint1(), 0f);
-        TestUtils.assertEquals(0.05f, 0.06f, 0.07f, settings.getPoint2(), 0f);
-        Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
-        TestUtils.assertEquals(
-                0.12f, 0.13f, 0.14f, settings.getTwistAxis1(), 0f);
-        TestUtils.assertEquals(
-                0.15f, 0.16f, 0.17f, settings.getTwistAxis2(), 0f);
-    }
-
-    /**
      * Test the getters and defaults of the specified {@code ContactSettings}.
      *
      * @param settings the settings to test (not null, unaffected)
@@ -555,106 +420,6 @@ public class Test003 {
                 settings.getRelativeAngularSurfaceVelocity(), 0f);
         TestUtils.assertEquals(20f, 21f, 22f,
                 settings.getRelativeLinearSurfaceVelocity(), 0f);
-    }
-
-    /**
-     * Test the getters and defaults of the specified
-     * {@code ConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, unaffected)
-     */
-    private static void testCsDefaults(ConstConstraintSettings settings) {
-        Assert.assertTrue(settings.hasAssignedNativeObject());
-        Assert.assertFalse(settings.ownsNativeObject());
-
-        Assert.assertEquals(0, settings.getConstraintPriority());
-        Assert.assertTrue(settings.getEnabled());
-        Assert.assertEquals(0, settings.getNumPositionStepsOverride());
-        Assert.assertEquals(0, settings.getNumVelocityStepsOverride());
-    }
-
-    /**
-     * Test the getters and defaults of the specified
-     * {@code DistanceConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, unaffected)
-     */
-    private static void testDistanceCsDefaults(
-            DistanceConstraintSettings settings) {
-        testCsDefaults(settings);
-
-        Assert.assertNotNull(settings.getLimitsSpringSettings());
-        Assert.assertEquals(-1f, settings.getMaxDistance(), 0f);
-        Assert.assertEquals(-1f, settings.getMinDistance(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint1(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint2(), 0f);
-        Assert.assertEquals(EConstraintSpace.WorldSpace, settings.getSpace());
-    }
-
-    /**
-     * Test the setters of the specified {@code DistanceConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, modified)
-     */
-    private static void testDistanceCsSetters(
-            DistanceConstraintSettings settings) {
-        settings.setMaxDistance(0.1f);
-        settings.setMinDistance(0.01f);
-        settings.setPoint1(new RVec3(0.02f, 0.03f, 0.04f));
-        settings.setPoint2(new RVec3(0.05f, 0.06f, 0.07f));
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
-
-        Assert.assertEquals(0.1f, settings.getMaxDistance(), 0f);
-        Assert.assertEquals(0.01f, settings.getMinDistance(), 0f);
-        TestUtils.assertEquals(0.02f, 0.03f, 0.04f, settings.getPoint1(), 0f);
-        TestUtils.assertEquals(0.05f, 0.06f, 0.07f, settings.getPoint2(), 0f);
-        Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
-    }
-
-    /**
-     * Test the getters and defaults of the specified
-     * {@code FixedConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, unaffected)
-     */
-    private static void testFixedCsDefaults(
-            FixedConstraintSettings settings) {
-        testCsDefaults(settings);
-
-        Assert.assertFalse(settings.getAutoDetectPoint());
-        TestUtils.assertEquals(1f, 0f, 0f, settings.getAxisX1(), 0f);
-        TestUtils.assertEquals(1f, 0f, 0f, settings.getAxisX2(), 0f);
-        TestUtils.assertEquals(0f, 1f, 0f, settings.getAxisY1(), 0f);
-        TestUtils.assertEquals(0f, 1f, 0f, settings.getAxisY2(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint1(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint2(), 0f);
-        Assert.assertEquals(EConstraintSpace.WorldSpace, settings.getSpace());
-    }
-
-    /**
-     * Test the setters of the specified {@code FixedConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, modified)
-     */
-    private static void testFixedCsSetters(
-            FixedConstraintSettings settings) {
-        settings.setAxisX1(new Vec3(0.02f, 0.03f, 0.04f));
-        settings.setAxisX2(new Vec3(0.05f, 0.06f, 0.07f));
-        settings.setAxisY1(new Vec3(0.12f, 0.13f, 0.14f));
-        settings.setAxisY2(new Vec3(0.15f, 0.16f, 0.17f));
-        settings.setPoint1(new RVec3(0.22f, 0.23f, 0.24f));
-        settings.setPoint2(new RVec3(0.25f, 0.26f, 0.27f));
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
-
-        TestUtils.assertEquals(0.02f, 0.03f, 0.04f, settings.getAxisX1(), 0f);
-        TestUtils.assertEquals(0.05f, 0.06f, 0.07f, settings.getAxisX2(), 0f);
-        TestUtils.assertEquals(0.12f, 0.13f, 0.14f, settings.getAxisY1(), 0f);
-        TestUtils.assertEquals(0.15f, 0.16f, 0.17f, settings.getAxisY2(), 0f);
-        TestUtils.assertEquals(0.22f, 0.23f, 0.24f, settings.getPoint1(), 0f);
-        TestUtils.assertEquals(0.25f, 0.26f, 0.27f, settings.getPoint2(), 0f);
-        Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
     }
 
     /**
@@ -744,178 +509,5 @@ public class Test003 {
 
         props.setInertia(Mat44.sIdentity());
         Assert.assertTrue(Mat44.equals(props.getInertia(), Mat44.sIdentity()));
-    }
-
-    /**
-     * Test the getters and defaults of the specified
-     * {@code PointConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, unaffected)
-     */
-    private static void testPointCsDefaults(
-            PointConstraintSettings settings) {
-        testCsDefaults(settings);
-
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint1(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint2(), 0f);
-        Assert.assertEquals(EConstraintSpace.WorldSpace, settings.getSpace());
-    }
-
-    /**
-     * Test the setters of the specified {@code PointConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, modified)
-     */
-    private static void testPointCsSetters(
-            PointConstraintSettings settings) {
-        settings.setPoint1(new RVec3(0.22f, 0.23f, 0.24f));
-        settings.setPoint2(new RVec3(0.25f, 0.26f, 0.27f));
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
-
-        TestUtils.assertEquals(0.22f, 0.23f, 0.24f, settings.getPoint1(), 0f);
-        TestUtils.assertEquals(0.25f, 0.26f, 0.27f, settings.getPoint2(), 0f);
-        Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
-    }
-
-    /**
-     * Test the getters and defaults of the specified
-     * {@code SixDofConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, unaffected)
-     */
-    private static void testSixDofCsDefaults(
-            SixDofConstraintSettings settings) {
-        testCsDefaults(settings);
-
-        TestUtils.assertEquals(1f, 0f, 0f, settings.getAxisX1(), 0f);
-        TestUtils.assertEquals(1f, 0f, 0f, settings.getAxisX2(), 0f);
-        TestUtils.assertEquals(0f, 1f, 0f, settings.getAxisY1(), 0f);
-        TestUtils.assertEquals(0f, 1f, 0f, settings.getAxisY2(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPosition1(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPosition2(), 0f);
-        Assert.assertEquals(EConstraintSpace.WorldSpace, settings.getSpace());
-        Assert.assertEquals(ESwingType.Cone, settings.getSwingType());
-
-        for (int axisIndex = 0; axisIndex < EAxis.Num.ordinal(); ++axisIndex) {
-            EAxis axis = EAxis.values()[axisIndex];
-
-            Assert.assertEquals(
-                    Float.MAX_VALUE, settings.getLimitMax(axis), 0f);
-            Assert.assertEquals(
-                    -Float.MAX_VALUE, settings.getLimitMin(axis), 0f);
-            if (axisIndex < 3) {
-                Assert.assertNotNull(settings.getLimitsSpringSettings(axis));
-            }
-            Assert.assertEquals(0f, settings.getMaxFriction(axis), 0f);
-            Assert.assertNotNull(settings.getMotorSettings(axis));
-            Assert.assertFalse(settings.isFixedAxis(axis));
-            Assert.assertTrue(settings.isFreeAxis(axis));
-        }
-    }
-
-    /**
-     * Test the setters of the specified {@code SixDofConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, modified)
-     */
-    private static void testSixDofCsSetters(SixDofConstraintSettings settings) {
-        settings.setAxisX1(new Vec3(0.01f, 0.02f, 0.03f));
-        settings.setAxisX2(new Vec3(0.04f, 0.05f, 0.06f));
-        settings.setAxisY1(new Vec3(0.07f, 0.08f, 0.09f));
-        settings.setAxisY2(new Vec3(0.11f, 0.12f, 0.13f));
-        settings.setPosition1(new RVec3(0.14f, 0.15f, 0.16f));
-        settings.setPosition2(new RVec3(0.17f, 0.18f, 0.19f));
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
-        settings.setSwingType(ESwingType.Pyramid);
-
-        for (int i = 0; i < EAxis.Num.ordinal(); ++i) {
-            EAxis axis = EAxis.values()[i];
-
-            settings.setLimitMax(axis, i + 1f);
-            settings.setLimitMin(axis, -i - 2f);
-            settings.setMaxFriction(axis, i + 1.5f);
-        }
-
-        TestUtils.assertEquals(0.01f, 0.02f, 0.03f, settings.getAxisX1(), 0f);
-        TestUtils.assertEquals(0.04f, 0.05f, 0.06f, settings.getAxisX2(), 0f);
-        TestUtils.assertEquals(0.07f, 0.08f, 0.09f, settings.getAxisY1(), 0f);
-        TestUtils.assertEquals(0.11f, 0.12f, 0.13f, settings.getAxisY2(), 0f);
-        TestUtils.assertEquals(
-                0.14f, 0.15f, 0.16f, settings.getPosition1(), 0f);
-        TestUtils.assertEquals(
-                0.17f, 0.18f, 0.19f, settings.getPosition2(), 0f);
-        Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
-        Assert.assertEquals(ESwingType.Pyramid, settings.getSwingType());
-
-        for (int i = 0; i < EAxis.Num.ordinal(); ++i) {
-            EAxis axis = EAxis.values()[i];
-
-            settings.setLimitMax(axis, i + 1f);
-            settings.setLimitMin(axis, -i - 2f);
-            settings.setMaxFriction(axis, i + 1.5f);
-        }
-    }
-
-    /**
-     * Test the getters and defaults of the specified
-     * {@code SliderConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, unaffected)
-     */
-    private static void testSliderCsDefaults(
-            SliderConstraintSettings settings) {
-        testCsDefaults(settings);
-
-        Assert.assertFalse(settings.getAutoDetectPoint());
-        Assert.assertEquals(Float.MAX_VALUE, settings.getLimitsMax(), 0f);
-        Assert.assertEquals(-Float.MAX_VALUE, settings.getLimitsMin(), 0f);
-        Assert.assertNotNull(settings.getLimitsSpringSettings());
-        Assert.assertEquals(0f, settings.getMaxFrictionForce(), 0f);
-        TestUtils.assertEquals(0f, 1f, 0f, settings.getNormalAxis1(), 0f);
-        TestUtils.assertEquals(0f, 1f, 0f, settings.getNormalAxis2(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint1(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint2(), 0f);
-        TestUtils.assertEquals(1f, 0f, 0f, settings.getSliderAxis1(), 0f);
-        TestUtils.assertEquals(1f, 0f, 0f, settings.getSliderAxis2(), 0f);
-        Assert.assertEquals(EConstraintSpace.WorldSpace, settings.getSpace());
-    }
-
-    /**
-     * Test the setters of the specified {@code SliderConstraintSettings}.
-     *
-     * @param settings the settings to test (not null, modified)
-     */
-    private static void testSliderCsSetters(SliderConstraintSettings settings) {
-        settings.setAutoDetectPoint(true);
-        settings.setLimitsMax(0.01f);
-        settings.setLimitsMin(-0.02f);
-        settings.setMaxFrictionForce(0.03f);
-
-        settings.setNormalAxis1(new Vec3(0.04f, 0.05f, 0.06f));
-        settings.setNormalAxis2(new Vec3(0.07f, 0.08f, 0.09f));
-        settings.setPoint1(new RVec3(0.14f, 0.15f, 0.16f));
-        settings.setPoint2(new RVec3(0.17f, 0.18f, 0.19f));
-        settings.setSliderAxis1(new Vec3(0.24f, 0.25f, 0.26f));
-        settings.setSliderAxis2(new Vec3(0.27f, 0.28f, 0.29f));
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
-
-        Assert.assertTrue(settings.getAutoDetectPoint());
-        Assert.assertEquals(0.01f, settings.getLimitsMax(), 0f);
-        Assert.assertEquals(-0.02f, settings.getLimitsMin(), 0f);
-        Assert.assertEquals(0.03f, settings.getMaxFrictionForce(), 0f);
-        TestUtils.assertEquals(
-                0.04f, 0.05f, 0.06f, settings.getNormalAxis1(), 0f);
-        TestUtils.assertEquals(
-                0.07f, 0.08f, 0.09f, settings.getNormalAxis2(), 0f);
-        TestUtils.assertEquals(0.14f, 0.15f, 0.16f, settings.getPoint1(), 0f);
-        TestUtils.assertEquals(0.17f, 0.18f, 0.19f, settings.getPoint2(), 0f);
-        TestUtils.assertEquals(
-                0.24f, 0.25f, 0.26f, settings.getSliderAxis1(), 0f);
-        TestUtils.assertEquals(
-                0.27f, 0.28f, 0.29f, settings.getSliderAxis2(), 0f);
-        Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
     }
 }
