@@ -24,6 +24,8 @@ package testjoltjni.junit;
 import com.github.stephengold.joltjni.ConeConstraintSettings;
 import com.github.stephengold.joltjni.DistanceConstraintSettings;
 import com.github.stephengold.joltjni.FixedConstraintSettings;
+import com.github.stephengold.joltjni.GearConstraintSettings;
+import com.github.stephengold.joltjni.HingeConstraintSettings;
 import com.github.stephengold.joltjni.PointConstraintSettings;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.SixDofConstraintSettings;
@@ -57,6 +59,8 @@ public class Test005 {
         doConeConstraintSettings();
         doDistanceConstraintSettings();
         doFixedConstraintSettings();
+        doGearConstraintSettings();
+        doHingeConstraintSettings();
         doPointConstraintSettings();
         doSixDofConstraintSettings();
         doSliderConstraintSettings();
@@ -100,6 +104,32 @@ public class Test005 {
 
         testFixedCsDefaults(settings);
         testFixedCsSetters(settings);
+
+        TestUtils.testClose(settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code GearConstraintSettings} class.
+     */
+    private static void doGearConstraintSettings() {
+        GearConstraintSettings settings = new GearConstraintSettings();
+
+        testGearCsDefaults(settings);
+        testGearCsSetters(settings);
+
+        TestUtils.testClose(settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code HingeConstraintSettings} class.
+     */
+    private static void doHingeConstraintSettings() {
+        HingeConstraintSettings settings = new HingeConstraintSettings();
+
+        testHingeCsDefaults(settings);
+        testHingeCsSetters(settings);
 
         TestUtils.testClose(settings);
         System.gc();
@@ -281,6 +311,99 @@ public class Test005 {
         TestUtils.assertEquals(0.15f, 0.16f, 0.17f, settings.getAxisY2(), 0f);
         TestUtils.assertEquals(0.22f, 0.23f, 0.24f, settings.getPoint1(), 0f);
         TestUtils.assertEquals(0.25f, 0.26f, 0.27f, settings.getPoint2(), 0f);
+        Assert.assertEquals(
+                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code GearConstraintSettings}.
+     *
+     * @param settings the settings to test (not null, unaffected)
+     */
+    private static void testGearCsDefaults(
+            GearConstraintSettings settings) {
+        testCsDefaults(settings);
+
+        TestUtils.assertEquals(1f, 0f, 0f, settings.getHingeAxis1(), 0f);
+        TestUtils.assertEquals(1f, 0f, 0f, settings.getHingeAxis2(), 0f);
+        Assert.assertEquals(1f, settings.getRatio(), 0f);
+        Assert.assertEquals(EConstraintSpace.WorldSpace, settings.getSpace());
+    }
+
+    /**
+     * Test the setters of the specified {@code GearConstraintSettings}.
+     *
+     * @param settings the settings to test (not null, modified)
+     */
+    private static void testGearCsSetters(GearConstraintSettings settings) {
+        settings.setHingeAxis1(new Vec3(0.24f, 0.25f, 0.26f));
+        settings.setHingeAxis2(new Vec3(0.27f, 0.28f, 0.29f));
+        settings.setRatio(0.5f);
+        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
+
+        TestUtils.assertEquals(
+                0.24f, 0.25f, 0.26f, settings.getHingeAxis1(), 0f);
+        TestUtils.assertEquals(
+                0.27f, 0.28f, 0.29f, settings.getHingeAxis2(), 0f);
+        Assert.assertEquals(0.5f, settings.getRatio(), 0f);
+        Assert.assertEquals(
+                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code HingeConstraintSettings}.
+     *
+     * @param settings the settings to test (not null, unaffected)
+     */
+    private static void testHingeCsDefaults(
+            HingeConstraintSettings settings) {
+        testCsDefaults(settings);
+
+        Assert.assertEquals((float) Math.PI, settings.getLimitsMax(), 0f);
+        Assert.assertEquals(-(float) Math.PI, settings.getLimitsMin(), 0f);
+        Assert.assertNotNull(settings.getLimitsSpringSettings());
+        Assert.assertEquals(0f, settings.getMaxFrictionTorque(), 0f);
+        TestUtils.assertEquals(0f, 1f, 0f, settings.getHingeAxis1(), 0f);
+        TestUtils.assertEquals(0f, 1f, 0f, settings.getHingeAxis2(), 0f);
+        TestUtils.assertEquals(1f, 0f, 0f, settings.getNormalAxis1(), 0f);
+        TestUtils.assertEquals(1f, 0f, 0f, settings.getNormalAxis2(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint1(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getPoint2(), 0f);
+        Assert.assertEquals(EConstraintSpace.WorldSpace, settings.getSpace());
+    }
+
+    /**
+     * Test the setters of the specified {@code HingeConstraintSettings}.
+     *
+     * @param settings the settings to test (not null, modified)
+     */
+    private static void testHingeCsSetters(HingeConstraintSettings settings) {
+        settings.setLimitsMax(0.01f);
+        settings.setLimitsMin(-0.02f);
+        settings.setMaxFrictionTorque(0.03f);
+        settings.setHingeAxis1(new Vec3(0.24f, 0.25f, 0.26f));
+        settings.setHingeAxis2(new Vec3(0.27f, 0.28f, 0.29f));
+        settings.setNormalAxis1(new Vec3(0.04f, 0.05f, 0.06f));
+        settings.setNormalAxis2(new Vec3(0.07f, 0.08f, 0.09f));
+        settings.setPoint1(new RVec3(0.14f, 0.15f, 0.16f));
+        settings.setPoint2(new RVec3(0.17f, 0.18f, 0.19f));
+        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
+
+        Assert.assertEquals(0.01f, settings.getLimitsMax(), 0f);
+        Assert.assertEquals(-0.02f, settings.getLimitsMin(), 0f);
+        Assert.assertEquals(0.03f, settings.getMaxFrictionTorque(), 0f);
+        TestUtils.assertEquals(
+                0.24f, 0.25f, 0.26f, settings.getHingeAxis1(), 0f);
+        TestUtils.assertEquals(
+                0.27f, 0.28f, 0.29f, settings.getHingeAxis2(), 0f);
+        TestUtils.assertEquals(
+                0.04f, 0.05f, 0.06f, settings.getNormalAxis1(), 0f);
+        TestUtils.assertEquals(
+                0.07f, 0.08f, 0.09f, settings.getNormalAxis2(), 0f);
+        TestUtils.assertEquals(0.14f, 0.15f, 0.16f, settings.getPoint1(), 0f);
+        TestUtils.assertEquals(0.17f, 0.18f, 0.19f, settings.getPoint2(), 0f);
         Assert.assertEquals(
                 EConstraintSpace.LocalToBodyCOM, settings.getSpace());
     }
