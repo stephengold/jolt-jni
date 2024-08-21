@@ -84,6 +84,19 @@ public class SliderConstraint extends TwoBodyConstraint {
     }
 
     /**
+     * Access the spring settings. The constraint is unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public SpringSettings getLimitsSpringSettings() {
+        long constraintVa = va();
+        long settingsVa = getLimitsSpringSettings(constraintVa);
+        SpringSettings result = new SpringSettings(this, settingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the maximum friction force when not driven by a motor. The
      * constraint is unaffected.
      *
@@ -92,6 +105,19 @@ public class SliderConstraint extends TwoBodyConstraint {
     public float getMaxFrictionForce() {
         long constraintVa = va();
         float result = getMaxFrictionForce(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Access the motor settings. The constraint is unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public MotorSettings getMotorSettings() {
+        long constraintVa = va();
+        long settingsVa = getMotorSettings(constraintVa);
+        MotorSettings result = new MotorSettings(this, settingsVa);
 
         return result;
     }
@@ -205,7 +231,11 @@ public class SliderConstraint extends TwoBodyConstraint {
 
     native private static float getLimitsMin(long constraintVa);
 
+    native private static long getLimitsSpringSettings(long constraintVa);
+
     native private static float getMaxFrictionForce(long constraintVa);
+
+    native private static long getMotorSettings(long constraintVa);
 
     native private static int getMotorState(long constraintVa);
 

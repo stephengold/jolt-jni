@@ -70,6 +70,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraint_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraint
+ * Method:    getLimitsSpringSettings
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SliderConstraint_getLimitsSpringSettings
+  (JNIEnv *, jclass, jlong constraintVa) {
+    SliderConstraint * const pConstraint
+            = reinterpret_cast<SliderConstraint *> (constraintVa);
+    SpringSettings * const pResult = &pConstraint->GetLimitsSpringSettings();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SliderConstraint
  * Method:    getMaxFrictionForce
  * Signature: (J)F
  */
@@ -79,6 +92,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraint_ge
             = reinterpret_cast<SliderConstraint *> (constraintVa);
     const float result = pConstraint->GetMaxFrictionForce();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SliderConstraint
+ * Method:    getMotorSettings
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SliderConstraint_getMotorSettings
+  (JNIEnv *, jclass, jlong constraintVa) {
+    SliderConstraint * const pConstraint
+            = reinterpret_cast<SliderConstraint *> (constraintVa);
+    MotorSettings * const pResult = &pConstraint->GetMotorSettings();
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
