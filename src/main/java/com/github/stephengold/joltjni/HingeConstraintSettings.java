@@ -416,6 +416,12 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static int getSpace(long settingsVa);
 
+    native private static void setHingeAxis1(
+            long settingsVa, float x, float y, float z);
+
+    native private static void setHingeAxis2(
+            long settingsVa, float x, float y, float z);
+
     native private static void setLimitsMax(long settingsVa, float limit);
 
     native private static void setLimitsMin(long settingsVa, float limit);
@@ -434,12 +440,6 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static void setPoint2(
             long settingsVa, double x, double y, double z);
-
-    native private static void setHingeAxis1(
-            long settingsVa, float x, float y, float z);
-
-    native private static void setHingeAxis2(
-            long settingsVa, float x, float y, float z);
 
     native private static void setSpace(long settingsVa, int ordinal);
 }

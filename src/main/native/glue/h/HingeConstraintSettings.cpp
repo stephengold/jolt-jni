@@ -356,6 +356,32 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
+ * Method:    setHingeAxis1
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_setHingeAxis1
+  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
+    HingeConstraintSettings * const pSettings
+            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
+    const Vec3 axis(x, y, z);
+    pSettings->mHingeAxis1 = axis;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
+ * Method:    setHingeAxis2
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_setHingeAxis2
+  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
+    HingeConstraintSettings * const pSettings
+            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
+    const Vec3 axis(x, y, z);
+    pSettings->mHingeAxis2 = axis;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
  * Method:    setLimitsMax
  * Signature: (JF)V
  */
@@ -440,32 +466,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettin
             = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
     const RVec3 rvec3(x, y, z);
     pSettings->mPoint2 = rvec3;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    setHingeAxis1
- * Signature: (JFFF)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_setHingeAxis1
-  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
-    HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const Vec3 axis(x, y, z);
-    pSettings->mHingeAxis1 = axis;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    setHingeAxis2
- * Signature: (JFFF)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_setHingeAxis2
-  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
-    HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const Vec3 axis(x, y, z);
-    pSettings->mHingeAxis2 = axis;
 }
 
 /*
