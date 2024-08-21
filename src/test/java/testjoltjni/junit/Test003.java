@@ -155,7 +155,7 @@ public class Test003 {
     }
 
     /**
-     * Test the BodyCreationSettings class.
+     * Test the {@code BodyCreationSettings} class.
      */
     private static void doBodyCreationSettings() {
         {
@@ -219,7 +219,7 @@ public class Test003 {
     }
 
     /**
-     * Test the JobSystemSingleThreaded class.
+     * Test the {@code JobSystemSingleThreaded} class.
      */
     private static void doJobSystemSingleThreaded() {
         JobSystem jobSystem
@@ -235,7 +235,7 @@ public class Test003 {
     }
 
     /**
-     * Test the JobSystemThreadPool class.
+     * Test the {@code JobSystemThreadPool} class.
      */
     private static void doJobSystemThreadPool() {
         JobSystemThreadPool jobSystem = new JobSystemThreadPool(
@@ -258,7 +258,7 @@ public class Test003 {
     }
 
     /**
-     * Test the MassProperties class.
+     * Test the {@code MassProperties} class.
      */
     private static void doMassProperties() {
         MassProperties props = new MassProperties();
@@ -270,7 +270,7 @@ public class Test003 {
     }
 
     /**
-     * Test the MotionProperties class.
+     * Test the {@code MotionProperties} class.
      */
     private static void doMotionProperties() {
         MotionProperties props = new MotionProperties();
@@ -306,7 +306,7 @@ public class Test003 {
     }
 
     /**
-     * Test the TempAllocatorImpl class.
+     * Test the {@code TempAllocatorImpl} class.
      */
     private static void doTempAllocatorImpl() {
         int numBytes = 1 << 8;
@@ -320,7 +320,7 @@ public class Test003 {
     }
 
     /**
-     * Test the TempAllocatorMalloc class.
+     * Test the {@code TempAllocatorMalloc} class.
      */
     private static void doTempAllocatorMalloc() {
         TempAllocator tempAllocator = new TempAllocatorMalloc();

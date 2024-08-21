@@ -146,7 +146,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the upper limit on distance. (native field: mMaxDistance)
      *
-     * @param distance the upper limit
+     * @param distance the upper limit (default=-1)
      */
     public void setMaxDistance(float distance) {
         long settingsVa = va();
@@ -154,9 +154,9 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the lower limit on distance. (native field: mMaxDistance)
+     * Alter the lower limit on distance. (native field: mMinDistance)
      *
-     * @param distance the upper limit
+     * @param distance the upper limit (default=-1)
      */
     public void setMinDistance(float distance) {
         long settingsVa = va();
