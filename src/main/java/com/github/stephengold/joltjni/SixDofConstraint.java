@@ -79,11 +79,11 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Copy the spring settings of the specified axis. The constraint is
+     * Access the spring settings of the specified axis. The constraint is
      * unaffected.
      *
      * @param axis which axis to query (not null)
-     * @return a new object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     public SpringSettings getLimitsSpringSettings(EAxis axis) {
         long constraintVa = va();
@@ -110,11 +110,11 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Copy the motor settings of the specified axis. The constraint is
+     * Access the motor settings of the specified axis. The constraint is
      * unaffected.
      *
      * @param axis which axis to query (not null)
-     * @return a new object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     public MotorSettings getMotorSettings(EAxis axis) {
         long constraintVa = va();

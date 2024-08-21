@@ -47,10 +47,10 @@ public class SliderConstraint extends TwoBodyConstraint {
     // new methods exposed
 
     /**
-     * Return the current distance from rest position. The constraint is
+     * Return the current offset from rest position. The constraint is
      * unaffected.
      *
-     * @return the distance
+     * @return the offset (in meters)
      */
     public float getCurrentPosition() {
         long constraintVa = va();
@@ -62,7 +62,7 @@ public class SliderConstraint extends TwoBodyConstraint {
     /**
      * Return the upper limit of translation. The constraint is unaffected.
      *
-     * @return the upper limit
+     * @return the upper limit (in meters)
      */
     public float getLimitsMax() {
         long constraintVa = va();
@@ -74,7 +74,7 @@ public class SliderConstraint extends TwoBodyConstraint {
     /**
      * Return the lower limit of translation. The constraint is unaffected.
      *
-     * @return the lower limit
+     * @return the lower limit (in meters)
      */
     public float getLimitsMin() {
         long constraintVa = va();
