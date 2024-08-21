@@ -51,7 +51,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SliderConstraintS
   (JNIEnv *, jclass, jlong settingsVa) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAutoDetectPoint;
+    const bool result = pSettings->mAutoDetectPoint;
     return result;
 }
 
