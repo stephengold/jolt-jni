@@ -152,6 +152,8 @@ public class Test003 {
 
             TestUtils.testClose(box);
         }
+
+        System.gc();
     }
 
     /**
@@ -192,6 +194,8 @@ public class Test003 {
 
             TestUtils.testClose(bcs, shape);
         }
+
+        System.gc();
     }
 
     /**
@@ -204,6 +208,7 @@ public class Test003 {
         testConeCsSetters(settings);
 
         TestUtils.testClose(settings);
+        System.gc();
     }
 
     /**
@@ -216,6 +221,7 @@ public class Test003 {
         testContactSettingsSetters(settings);
 
         TestUtils.testClose(settings);
+        System.gc();
     }
 
     /**
@@ -232,6 +238,7 @@ public class Test003 {
         Assert.assertNotEquals(0L, jobSystem.va());
 
         TestUtils.testClose(jobSystem);
+        System.gc();
     }
 
     /**
@@ -255,6 +262,7 @@ public class Test003 {
         Assert.assertEquals(4, jobSystem.getMaxConcurrency());
 
         TestUtils.testClose(jobSystem);
+        System.gc();
     }
 
     /**
@@ -267,6 +275,7 @@ public class Test003 {
         testMpSetters(props);
 
         TestUtils.testClose(props);
+        System.gc();
     }
 
     /**
@@ -279,6 +288,7 @@ public class Test003 {
         testMotionSetters(props);
 
         TestUtils.testClose(props);
+        System.gc();
     }
 
     /**
@@ -291,6 +301,7 @@ public class Test003 {
         testSixDofCsSetters(settings);
 
         TestUtils.testClose(settings);
+        System.gc();
     }
 
     /**
@@ -303,6 +314,7 @@ public class Test003 {
         testSliderCsSetters(settings);
 
         TestUtils.testClose(settings);
+        System.gc();
     }
 
     /**
@@ -317,6 +329,7 @@ public class Test003 {
         Assert.assertNotEquals(0L, tempAllocator.va());
 
         TestUtils.testClose(tempAllocator);
+        System.gc();
     }
 
     /**
@@ -330,6 +343,7 @@ public class Test003 {
         Assert.assertNotEquals(0L, tempAllocator.va());
 
         TestUtils.testClose(tempAllocator);
+        System.gc();
     }
 
     /**
