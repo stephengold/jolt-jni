@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
  * Settings used to construct a {@code FixedConstraint}.
@@ -66,6 +67,70 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     public boolean getAutoDetectPoint() {
         long settingsVa = va();
         boolean result = getAutoDetectPoint(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the X axis for body 1. The settings are unaffected. (native field:
+     * mAxisX1)
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getAxisX1() {
+        long settingsVa = va();
+        double x = getAxisX1X(settingsVa);
+        double y = getAxisX1Y(settingsVa);
+        double z = getAxisX1Z(settingsVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the X axis for body 2. The settings are unaffected. (native field:
+     * mAxisX2)
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getAxisX2() {
+        long settingsVa = va();
+        double x = getAxisX2X(settingsVa);
+        double y = getAxisX2Y(settingsVa);
+        double z = getAxisX2Z(settingsVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the Y axis for body 1. The settings are unaffected. (native field:
+     * mAxisY1)
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getAxisY1() {
+        long settingsVa = va();
+        double x = getAxisY1X(settingsVa);
+        double y = getAxisY1Y(settingsVa);
+        double z = getAxisY1Z(settingsVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the Y axis for body 2. The settings are unaffected. (native field:
+     * mAxisY2)
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getAxisY2() {
+        long settingsVa = va();
+        double x = getAxisY2X(settingsVa);
+        double y = getAxisY2Y(settingsVa);
+        double z = getAxisY2Z(settingsVa);
+        Vec3 result = new Vec3(x, y, z);
 
         return result;
     }
@@ -130,6 +195,58 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the X axis for body 1. (native field: mAxisX1)
+     *
+     * @param axis the desired direction vector (default=(1,0,0))
+     */
+    public void setAxisX1(Vec3Arg axis) {
+        long settingsVa = va();
+        float x = axis.getX();
+        float y = axis.getY();
+        float z = axis.getZ();
+        setAxisX1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the X axis for body 2. (native field: mAxisX2)
+     *
+     * @param axis the desired direction vector (default=(1,0,0))
+     */
+    public void setAxisX2(Vec3Arg axis) {
+        long settingsVa = va();
+        float x = axis.getX();
+        float y = axis.getY();
+        float z = axis.getZ();
+        setAxisX2(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the Y axis for body 1. (native field: mAxisY1)
+     *
+     * @param axis the desired direction vector (default=(0,1,0))
+     */
+    public void setAxisY1(Vec3Arg axis) {
+        long settingsVa = va();
+        float x = axis.getX();
+        float y = axis.getY();
+        float z = axis.getZ();
+        setAxisY1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the Y axis for body 2. (native field: mAxisY2)
+     *
+     * @param axis the desired direction vector (default=(0,1,0))
+     */
+    public void setAxisY2(Vec3Arg axis) {
+        long settingsVa = va();
+        float x = axis.getX();
+        float y = axis.getY();
+        float z = axis.getZ();
+        setAxisY2(settingsVa, x, y, z);
+    }
+
+    /**
      * Alter the constraint location for body 1. (native field: mPoint1)
      *
      * @param location the desired location (not null, unaffected,
@@ -175,6 +292,30 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static boolean getAutoDetectPoint(long settingsVa);
 
+    native private static float getAxisX1X(long settingsVa);
+
+    native private static float getAxisX1Y(long settingsVa);
+
+    native private static float getAxisX1Z(long settingsVa);
+
+    native private static float getAxisX2X(long settingsVa);
+
+    native private static float getAxisX2Y(long settingsVa);
+
+    native private static float getAxisX2Z(long settingsVa);
+
+    native private static float getAxisY1X(long settingsVa);
+
+    native private static float getAxisY1Y(long settingsVa);
+
+    native private static float getAxisY1Z(long settingsVa);
+
+    native private static float getAxisY2X(long settingsVa);
+
+    native private static float getAxisY2Y(long settingsVa);
+
+    native private static float getAxisY2Z(long settingsVa);
+
     native private static double getPoint1X(long settingsVa);
 
     native private static double getPoint1Y(long settingsVa);
@@ -191,6 +332,18 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static void setAutoDetectPoint(
             long settingsVa, boolean setting);
+
+    native private static void setAxisX1(
+            long settingsVa, float x, float y, float z);
+
+    native private static void setAxisX2(
+            long settingsVa, float x, float y, float z);
+
+    native private static void setAxisY1(
+            long settingsVa, float x, float y, float z);
+
+    native private static void setAxisY2(
+            long settingsVa, float x, float y, float z);
 
     native private static void setPoint1(
             long settingsVa, double x, double y, double z);
