@@ -346,8 +346,8 @@ public class BodyCreationSettings
      */
     public void setShape(ConstShape shape) {
         long bodySettingsVa = va();
-        long shapeSettingsVa = shape.va();
-        setShape(bodySettingsVa, shapeSettingsVa);
+        long shapeVa = shape.va();
+        setShape(bodySettingsVa, shapeVa);
     }
 
     /**
