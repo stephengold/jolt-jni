@@ -65,7 +65,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings
   (JNIEnv *, jclass, jlong settingsVa) {
     const CharacterBaseSettings * const pSettings
             = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
-    const int result = pSettings->GetRefCount();
+    const uint32 result = pSettings->GetRefCount();
     return result;
 }
 

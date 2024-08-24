@@ -39,7 +39,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_ge
   (JNIEnv *, jclass, jlong settingsVa) {
     const ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
-    const int result = pSettings->mConstraintPriority;
+    const uint32 result = pSettings->mConstraintPriority;
     return result;
 }
 

@@ -260,7 +260,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getNumA
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     const EBodyType bodyType = (EBodyType)typeOrdinal;
-    const uint result = pSystem->GetNumActiveBodies(bodyType);
+    const uint32 result = pSystem->GetNumActiveBodies(bodyType);
     return result;
 }
 

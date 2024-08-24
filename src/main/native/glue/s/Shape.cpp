@@ -55,7 +55,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_copyDebugTriang
         while (numTriangles > 0) {
             const int maxRequest = std::max((int) numTriangles,
                     Shape::cGetTrianglesMinTrianglesRequested);
-            const uint numTrianglesCopied
+            const int numTrianglesCopied
                     = pSh->GetTrianglesNext(context, maxRequest, pFloat3);
             JPH_ASSERT(numTrianglesCopied <= numTriangles);
             if (numTrianglesCopied == 0) {
@@ -88,7 +88,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
         for (;;) {
             constexpr uint cMaxTriangles = 1000;
             Float3 vertices[3 * cMaxTriangles];
-            const uint numTrianglesCopied
+            const int numTrianglesCopied
                     = pSh->GetTrianglesNext(context, cMaxTriangles, vertices);
             if (numTrianglesCopied == 0) {
                 break;
