@@ -91,4 +91,11 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdPair_getSu
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdPair_getSubShapeId2
-  (JNIEnv *, jclass, jlong);
+  (JNIEnv *, jclass, jlong pairVa) {
+    const SubShapeIDPair * const pPair
+            = reinterpret_cast<SubShapeIDPair *> (pairVa);
+    SubShapeID * const pResult = new SubShapeID();
+    TRACE_NEW("SubShapeID", pResult)
+    *pResult = pPair->GetSubShapeID2();
+    return reinterpret_cast<jlong> (pResult);
+}
