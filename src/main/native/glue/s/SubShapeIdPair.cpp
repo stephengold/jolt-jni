@@ -40,6 +40,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdPair_getBo
     const SubShapeIDPair * const pPair
             = reinterpret_cast<SubShapeIDPair *> (pairVa);
     BodyID * const pResult = new BodyID();
+    TRACE_NEW("BodyID", pResult)
     *pResult = pPair->GetBody1ID();
     return reinterpret_cast<jlong> (pResult);
 }
@@ -54,6 +55,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdPair_getBo
     const SubShapeIDPair * const pPair
             = reinterpret_cast<SubShapeIDPair *> (pairVa);
     BodyID * const pResult = new BodyID();
+    TRACE_NEW("BodyID", pResult)
     *pResult = pPair->GetBody2ID();
     return reinterpret_cast<jlong> (pResult);
 }
@@ -81,6 +83,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdPair_getSu
     const SubShapeIDPair * const pPair
             = reinterpret_cast<SubShapeIDPair *> (pairVa);
     SubShapeID * const pResult = new SubShapeID();
+    TRACE_NEW("SubShapeID", pResult)
     *pResult = pPair->GetSubShapeID1();
     return reinterpret_cast<jlong> (pResult);
 }
