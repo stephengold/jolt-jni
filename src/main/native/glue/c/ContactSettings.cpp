@@ -142,7 +142,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ContactSettings_g
   (JNIEnv *, jclass, jlong settingsVa) {
     const ContactSettings * const pSettings
             = reinterpret_cast<ContactSettings *> (settingsVa);
-    bool result = pSettings->mIsSensor;
+    const bool result = pSettings->mIsSensor;
     return result;
 }
 

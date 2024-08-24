@@ -64,7 +64,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_g
   (JNIEnv *, jclass, jlong settingsVa) {
     const PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    bool result = pSettings->mAllowSleeping;
+    const bool result = pSettings->mAllowSleeping;
     return result;
 }
 
@@ -77,7 +77,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_get
   (JNIEnv *, jclass, jlong settingsVa) {
     const PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    float result = pSettings->mBaumgarte;
+    const float result = pSettings->mBaumgarte;
     return result;
 }
 
@@ -90,7 +90,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_g
   (JNIEnv *, jclass, jlong settingsVa) {
     const PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    bool result = pSettings->mDeterministicSimulation;
+    const bool result = pSettings->mDeterministicSimulation;
     return result;
 }
 
@@ -103,7 +103,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getNu
   (JNIEnv *, jclass, jlong settingsVa) {
     const PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    uint result = pSettings->mNumPositionSteps;
+    const uint result = pSettings->mNumPositionSteps;
     return result;
 }
 
@@ -116,7 +116,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getNu
   (JNIEnv *, jclass, jlong settingsVa) {
     const PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    uint result = pSettings->mNumVelocitySteps;
+    const uint result = pSettings->mNumVelocitySteps;
     return result;
 }
 
@@ -129,7 +129,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_get
   (JNIEnv *, jclass, jlong settingsVa) {
     const PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    float result = pSettings->mPointVelocitySleepThreshold;
+    const float result = pSettings->mPointVelocitySleepThreshold;
     return result;
 }
 
@@ -142,7 +142,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_get
   (JNIEnv *, jclass, jlong settingsVa) {
     const PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    float result = pSettings->mTimeBeforeSleep;
+    const float result = pSettings->mTimeBeforeSleep;
     return result;
 }
 

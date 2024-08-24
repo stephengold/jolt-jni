@@ -45,13 +45,13 @@ float geometricMeanRestitution(const Body &inBody1, const SubShapeID&, const Bod
 }
 
 float harmonicMeanFriction(const Body &inBody1, const SubShapeID&, const Body &inBody2, const SubShapeID&) {
-    float f1 = inBody1.GetFriction();
-    float f2 = inBody2.GetFriction();
+    const float f1 = inBody1.GetFriction();
+    const float f2 = inBody2.GetFriction();
     return 2.f * f1 * f2 /(f1 + f2);
 }
 float harmonicMeanRestitution(const Body &inBody1, const SubShapeID&, const Body &inBody2, const SubShapeID&) {
-    float f1 = inBody1.GetRestitution();
-    float f2 = inBody2.GetRestitution();
+    const float f1 = inBody1.GetRestitution();
+    const float f2 = inBody2.GetRestitution();
     return 2.f * f1 * f2 /(f1 + f2);
 }
 
@@ -77,13 +77,13 @@ float productRestitution(const Body &inBody1, const SubShapeID&, const Body &inB
 }
 
 float rootMeanSquareFriction(const Body &inBody1, const SubShapeID&, const Body &inBody2, const SubShapeID&) {
-    float f1 = inBody1.GetFriction();
-    float f2 = inBody2.GetFriction();
+    const float f1 = inBody1.GetFriction();
+    const float f2 = inBody2.GetFriction();
     return sqrt((f1 * f1 + f2 * f2)/ 2.f);
 }
 float rootMeanSquareRestitution(const Body &inBody1, const SubShapeID&, const Body &inBody2, const SubShapeID&) {
-    float f1 = inBody1.GetRestitution();
-    float f2 = inBody2.GetRestitution();
+    const float f1 = inBody1.GetRestitution();
+    const float f2 = inBody2.GetRestitution();
     return sqrt((f1 * f1 + f2 * f2)/ 2.f);
 }
 

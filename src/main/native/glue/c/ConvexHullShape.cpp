@@ -38,7 +38,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_get
   (JNIEnv *, jclass, jlong shapeVa) {
     const ConvexHullShape * const pShape
             = reinterpret_cast<ConvexHullShape *> (shapeVa);
-    float result = pShape->GetConvexRadius();
+    const float result = pShape->GetConvexRadius();
     return result;
 }
 
@@ -51,7 +51,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getNu
   (JNIEnv *, jclass, jlong shapeVa) {
     const ConvexHullShape * const pShape
             = reinterpret_cast<ConvexHullShape *> (shapeVa);
-    uint result = pShape->GetNumPoints();
+    const uint result = pShape->GetNumPoints();
     return result;
 }
 
@@ -70,7 +70,7 @@ inline static const Vec3 getPoint(jlong shapeVa, jint pointIndex) {
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getPointX
   (JNIEnv *, jclass, jlong shapeVa, jint pointIndex) {
     const Vec3 point = getPoint(shapeVa, pointIndex);
-    float result = point.GetX();
+    const float result = point.GetX();
     return result;
 }
 
@@ -82,7 +82,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_get
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getPointY
   (JNIEnv *, jclass, jlong shapeVa, jint pointIndex) {
     const Vec3 point = getPoint(shapeVa, pointIndex);
-    float result = point.GetY();
+    const float result = point.GetY();
     return result;
 }
 
@@ -94,6 +94,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_get
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getPointZ
   (JNIEnv *, jclass, jlong shapeVa, jint pointIndex) {
     const Vec3 point = getPoint(shapeVa, pointIndex);
-    float result = point.GetZ();
+    const float result = point.GetZ();
     return result;
 }

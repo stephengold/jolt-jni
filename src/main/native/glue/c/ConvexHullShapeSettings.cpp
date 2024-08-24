@@ -42,9 +42,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
     Vec3 * const pPoints = new Vec3[numPoints];
     TRACE_NEW("Vec3[]", pPoints)
     for (jint i = 0; i < numPoints; ++i) {
-        float x = pFloats[3 * i];
-        float y = pFloats[3 * i + 1];
-        float z = pFloats[3 * i + 2];
+        const float x = pFloats[3 * i];
+        const float y = pFloats[3 * i + 1];
+        const float z = pFloats[3 * i + 2];
         pPoints[i].Set(x, y, z);
     }
     ConvexHullShapeSettings * const pResult
@@ -64,7 +64,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSett
   (JNIEnv *, jclass, jlong settingsVa) {
     const ConvexHullShapeSettings * const pSettings
             = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
-    float result = pSettings->mMaxConvexRadius;
+    const float result = pSettings->mMaxConvexRadius;
     return result;
 }
 

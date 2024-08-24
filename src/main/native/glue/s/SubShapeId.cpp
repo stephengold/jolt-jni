@@ -39,7 +39,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SubShapeId_conten
   (JNIEnv *, jclass, jlong idVa, jlong otherIdVa) {
     const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
     const SubShapeID * const pOtherId = reinterpret_cast<SubShapeID *> (otherIdVa);
-    bool result = (*pId == *pOtherId);
+    const bool result = (*pId == *pOtherId);
     return result;
 }
 

@@ -67,7 +67,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdPair_getHa
   (JNIEnv *, jclass, jlong pairVa) {
     const SubShapeIDPair * const pPair
             = reinterpret_cast<SubShapeIDPair *> (pairVa);
-    uint64 result = pPair->GetHash();
+    const uint64 result = pPair->GetHash();
     return result;
 }
 

@@ -95,7 +95,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Mat44_equals
   (JNIEnv *, jclass, jlong m1va, jlong m2va) {
     const Mat44 * const pM1 = reinterpret_cast<Mat44 *> (m1va);
     const Mat44 * const pM2 = reinterpret_cast<Mat44 *> (m2va);
-    bool result = (*pM1 == *pM2);
+    const bool result = (*pM1 == *pM2);
 
     return result;
 }

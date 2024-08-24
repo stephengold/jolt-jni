@@ -62,7 +62,7 @@ inline static const Vec3 getPosition(jlong rtsVa) {
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getPositionX
   (JNIEnv *, jclass, jlong rtsVa) {
     const Vec3 position = getPosition(rtsVa);
-    float result = position.GetX();
+    const float result = position.GetX();
     return result;
 }
 
@@ -74,7 +74,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getPositionY
   (JNIEnv *, jclass, jlong rtsVa) {
     const Vec3 position = getPosition(rtsVa);
-    float result = position.GetY();
+    const float result = position.GetY();
     return result;
 }
 
@@ -86,7 +86,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getPositionZ
   (JNIEnv *, jclass, jlong rtsVa) {
     const Vec3 position = getPosition(rtsVa);
-    float result = position.GetZ();
+    const float result = position.GetZ();
     return result;
 }
 
@@ -105,7 +105,7 @@ inline static const Quat getRotation(jlong rtsVa) {
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getRotationW
   (JNIEnv *, jclass, jlong rtsVa) {
     const Quat rotation = getRotation(rtsVa);
-    float result = rotation.GetW();
+    const float result = rotation.GetW();
     return result;
 }
 
@@ -117,7 +117,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getRotationX
   (JNIEnv *, jclass, jlong rtsVa) {
     const Quat rotation = getRotation(rtsVa);
-    float result = rotation.GetX();
+    const float result = rotation.GetX();
     return result;
 }
 
@@ -129,7 +129,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getRotationY
   (JNIEnv *, jclass, jlong rtsVa) {
     const Quat rotation = getRotation(rtsVa);
-    float result = rotation.GetY();
+    const float result = rotation.GetY();
     return result;
 }
 
@@ -141,6 +141,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getRotationZ
   (JNIEnv *, jclass, jlong rtsVa) {
     const Quat rotation = getRotation(rtsVa);
-    float result = rotation.GetZ();
+    const float result = rotation.GetZ();
     return result;
 }

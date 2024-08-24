@@ -65,7 +65,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_getRefC
   (JNIEnv *, jclass, jlong settingsVa) {
     const ShapeSettings * const pSettings
             = reinterpret_cast<ShapeSettings *> (settingsVa);
-    uint32 result = pSettings->GetRefCount();
+    const uint32 result = pSettings->GetRefCount();
     return result;
 }
 
@@ -78,7 +78,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_getUse
   (JNIEnv *, jclass, jlong settingsVa) {
     const ShapeSettings * const pSettings
             = reinterpret_cast<ShapeSettings *> (settingsVa);
-    uint64 result = pSettings->mUserData;
+    const uint64 result = pSettings->mUserData;
     return result;
 }
 

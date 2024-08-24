@@ -39,7 +39,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Constraint_getConstra
   (JNIEnv *, jclass, jlong constraintVa) {
     const Constraint * const pConstraint
             = reinterpret_cast<Constraint *> (constraintVa);
-    uint32 result = pConstraint->GetConstraintPriority();
+    const uint32 result = pConstraint->GetConstraintPriority();
     return result;
 }
 
@@ -67,7 +67,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Constraint_getEna
   (JNIEnv *, jclass, jlong constraintVa) {
     const Constraint * const pConstraint
             = reinterpret_cast<Constraint *> (constraintVa);
-    bool result = pConstraint->GetEnabled();
+    const bool result = pConstraint->GetEnabled();
     return result;
 }
 
@@ -80,7 +80,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Constraint_getNumPosi
   (JNIEnv *, jclass, jlong constraintVa) {
     const Constraint * const pConstraint
             = reinterpret_cast<Constraint *> (constraintVa);
-    uint result = pConstraint->GetNumPositionStepsOverride();
+    const uint result = pConstraint->GetNumPositionStepsOverride();
     return result;
 }
 
@@ -93,7 +93,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Constraint_getNumVelo
   (JNIEnv *, jclass, jlong constraintVa) {
     const Constraint * const pConstraint
             = reinterpret_cast<Constraint *> (constraintVa);
-    uint result = pConstraint->GetNumVelocityStepsOverride();
+    const uint result = pConstraint->GetNumVelocityStepsOverride();
     return result;
 }
 
@@ -106,7 +106,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Constraint_getRefCoun
   (JNIEnv *, jclass, jlong constraintVa) {
     const Constraint * const pConstraint
             = reinterpret_cast<Constraint *> (constraintVa);
-    uint32 result = pConstraint->GetRefCount();
+    const uint32 result = pConstraint->GetRefCount();
     return result;
 }
 
@@ -119,7 +119,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Constraint_getSubType
   (JNIEnv *, jclass, jlong constraintVa) {
     const Constraint * const pConstraint
             = reinterpret_cast<Constraint *> (constraintVa);
-    EConstraintSubType result = pConstraint->GetSubType();
+    const EConstraintSubType result = pConstraint->GetSubType();
     return (jint) result;
 }
 
@@ -132,7 +132,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Constraint_getType
   (JNIEnv *, jclass, jlong constraintVa) {
     const Constraint * const pConstraint
             = reinterpret_cast<Constraint *> (constraintVa);
-    EConstraintType result = pConstraint->GetType();
+    const EConstraintType result = pConstraint->GetType();
     return (jint) result;
 }
 
@@ -145,7 +145,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Constraint_getUserDa
   (JNIEnv *, jclass, jlong constraintVa) {
     const Constraint * const pConstraint
             = reinterpret_cast<Constraint *> (constraintVa);
-    uint64 result = pConstraint->GetUserData();
+    const uint64 result = pConstraint->GetUserData();
     return result;
 }
 

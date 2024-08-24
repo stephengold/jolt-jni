@@ -85,7 +85,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings
   (JNIEnv *, jclass, jlong settingsVa) {
     const ScaledShapeSettings * const pSettings
             = reinterpret_cast<ScaledShapeSettings *> (settingsVa);
-    float result = pSettings->mScale.GetX();
+    const float result = pSettings->mScale.GetX();
     return result;
 }
 
@@ -98,7 +98,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings
   (JNIEnv *, jclass, jlong settingsVa) {
     const ScaledShapeSettings * const pSettings
             = reinterpret_cast<ScaledShapeSettings *> (settingsVa);
-    float result = pSettings->mScale.GetY();
+    const float result = pSettings->mScale.GetY();
     return result;
 }
 
@@ -111,6 +111,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings
   (JNIEnv *, jclass, jlong settingsVa) {
     const ScaledShapeSettings * const pSettings
             = reinterpret_cast<ScaledShapeSettings *> (settingsVa);
-    float result = pSettings->mScale.GetZ();
+    const float result = pSettings->mScale.GetZ();
     return result;
 }

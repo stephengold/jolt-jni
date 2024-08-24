@@ -53,7 +53,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    float result = pShapeResult->mContactPointOn1.GetX();
+    const float result = pShapeResult->mContactPointOn1.GetX();
     return result;
 }
 
@@ -66,7 +66,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    float result = pShapeResult->mContactPointOn1.GetY();
+    const float result = pShapeResult->mContactPointOn1.GetY();
     return result;
 }
 
@@ -79,7 +79,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    float result = pShapeResult->mContactPointOn1.GetZ();
+    const float result = pShapeResult->mContactPointOn1.GetZ();
     return result;
 }
 
@@ -92,7 +92,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    float result = pShapeResult->mContactPointOn2.GetX();
+    const float result = pShapeResult->mContactPointOn2.GetX();
     return result;
 }
 
@@ -105,7 +105,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    float result = pShapeResult->mContactPointOn2.GetY();
+    const float result = pShapeResult->mContactPointOn2.GetY();
     return result;
 }
 
@@ -118,7 +118,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    float result = pShapeResult->mContactPointOn2.GetZ();
+    const float result = pShapeResult->mContactPointOn2.GetZ();
     return result;
 }
 
@@ -131,7 +131,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    float result = pShapeResult->mPenetrationAxis.GetX();
+    const float result = pShapeResult->mPenetrationAxis.GetX();
     return result;
 }
 
@@ -144,7 +144,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    float result = pShapeResult->mPenetrationAxis.GetY();
+    const float result = pShapeResult->mPenetrationAxis.GetY();
     return result;
 }
 
@@ -157,7 +157,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    float result = pShapeResult->mPenetrationAxis.GetZ();
+    const float result = pShapeResult->mPenetrationAxis.GetZ();
     return result;
 }
 
@@ -170,7 +170,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    float result = pShapeResult->mPenetrationDepth;
+    const float result = pShapeResult->mPenetrationDepth;
     return result;
 }
 

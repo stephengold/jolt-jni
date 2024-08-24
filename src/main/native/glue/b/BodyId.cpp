@@ -64,7 +64,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyId_free
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyId_getIndex
   (JNIEnv *, jclass, jlong idVa) {
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
-    uint32 result = pBodyId->GetIndex();
+    const uint32 result = pBodyId->GetIndex();
     return result;
 }
 
@@ -76,7 +76,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyId_getIndex
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyId_getSequenceNumber
   (JNIEnv *, jclass, jlong idVa) {
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
-    uint8 result = pBodyId->GetSequenceNumber();
+    const uint8 result = pBodyId->GetSequenceNumber();
     return result;
 }
 
@@ -88,6 +88,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyId_getSequenceNum
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyId_isInvalid
   (JNIEnv *, jclass, jlong idVa) {
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
-    bool result = pBodyId->IsInvalid();
+    const bool result = pBodyId->IsInvalid();
     return result;
 }

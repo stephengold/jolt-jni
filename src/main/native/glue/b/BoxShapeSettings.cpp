@@ -52,7 +52,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_ge
   (JNIEnv *, jclass, jlong settingsVa) {
     const BoxShapeSettings * const pSettings
             = reinterpret_cast<BoxShapeSettings *> (settingsVa);
-    float result = pSettings->mConvexRadius;
+    const float result = pSettings->mConvexRadius;
     return result;
 }
 

@@ -52,6 +52,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInterf
   (JNIEnv *, jclass, jlong mapVa) {
     const BroadPhaseLayerInterface * const pMap
             = reinterpret_cast<BroadPhaseLayerInterface *> (mapVa);
-    uint result = pMap->GetNumBroadPhaseLayers();
+    const uint result = pMap->GetNumBroadPhaseLayers();
     return result;
 }

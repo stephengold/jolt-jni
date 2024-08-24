@@ -53,7 +53,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_MassProperties_de
             = reinterpret_cast<MassProperties *> (propertiesVa);
     Mat44 * const pStoreRotation = reinterpret_cast<Mat44 *> (matrixVa);
     Vec3 diagonal;
-    bool success = pProperties->DecomposePrincipalMomentsOfInertia(
+    const bool success = pProperties->DecomposePrincipalMomentsOfInertia(
             *pStoreRotation, diagonal);
     jboolean isCopy;
     jfloat * const pDiagonal

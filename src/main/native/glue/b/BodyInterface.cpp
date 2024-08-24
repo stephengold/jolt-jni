@@ -485,7 +485,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyInterface_isA
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
-    bool result = pInterface->IsActive(*pBodyId);
+    const bool result = pInterface->IsActive(*pBodyId);
     return result;
 }
 
@@ -499,7 +499,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyInterface_isA
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
-    bool result = pInterface->IsAdded(*pBodyId);
+    const bool result = pInterface->IsAdded(*pBodyId);
     return result;
 }
 

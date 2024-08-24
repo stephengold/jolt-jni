@@ -82,7 +82,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ShapeResult_hasEr
   (JNIEnv *, jclass, jlong resultVa) {
     const ShapeSettings::ShapeResult * const pResult
             = reinterpret_cast<ShapeSettings::ShapeResult *> (resultVa);
-    bool result = pResult->HasError();
+    const bool result = pResult->HasError();
     return result;
 }
 
@@ -95,6 +95,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ShapeResult_isVal
   (JNIEnv *, jclass, jlong resultVa) {
     const ShapeSettings::ShapeResult * const pResult
             = reinterpret_cast<ShapeSettings::ShapeResult *> (resultVa);
-    bool result = pResult->IsValid();
+    const bool result = pResult->IsValid();
     return result;
 }

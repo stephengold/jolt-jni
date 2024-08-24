@@ -39,7 +39,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_contains
   (JNIEnv *, jclass, jlong boxVa, jfloat x, jfloat y, jfloat z) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     Vec3 point(x, y, z);
-    bool result = pBox->Contains(point);
+    const bool result = pBox->Contains(point);
     return result;
 }
 
@@ -89,7 +89,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_free
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getCenterX
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->GetCenter().GetX();
+    const float result = pBox->GetCenter().GetX();
     return result;
 }
 
@@ -101,7 +101,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getCenterX
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getCenterY
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->GetCenter().GetY();
+    const float result = pBox->GetCenter().GetY();
     return result;
 }
 
@@ -113,7 +113,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getCenterY
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getCenterZ
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->GetCenter().GetZ();
+    const float result = pBox->GetCenter().GetZ();
     return result;
 }
 
@@ -125,7 +125,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getCenterZ
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getExtentX
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->GetExtent().GetX();
+    const float result = pBox->GetExtent().GetX();
     return result;
 }
 
@@ -137,7 +137,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getExtentX
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getExtentY
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->GetExtent().GetY();
+    const float result = pBox->GetExtent().GetY();
     return result;
 }
 
@@ -149,7 +149,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getExtentY
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getExtentZ
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->GetExtent().GetZ();
+    const float result = pBox->GetExtent().GetZ();
     return result;
 }
 
@@ -161,7 +161,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getExtentZ
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMaxX
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->mMax.GetX();
+    const float result = pBox->mMax.GetX();
     return result;
 }
 
@@ -173,7 +173,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMaxX
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMaxY
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->mMax.GetY();
+    const float result = pBox->mMax.GetY();
     return result;
 }
 
@@ -185,7 +185,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMaxY
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMaxZ
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->mMax.GetZ();
+    const float result = pBox->mMax.GetZ();
     return result;
 }
 
@@ -197,7 +197,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMaxZ
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMinX
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->mMin.GetX();
+    const float result = pBox->mMin.GetX();
     return result;
 }
 
@@ -209,7 +209,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMinX
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMinY
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->mMin.GetY();
+    const float result = pBox->mMin.GetY();
     return result;
 }
 
@@ -221,7 +221,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMinY
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMinZ
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->mMin.GetZ();
+    const float result = pBox->mMin.GetZ();
     return result;
 }
 
@@ -233,7 +233,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getMinZ
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSizeX
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->GetSize().GetX();
+    const float result = pBox->GetSize().GetX();
     return result;
 }
 
@@ -245,7 +245,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSizeX
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSizeY
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->GetSize().GetY();
+    const float result = pBox->GetSize().GetY();
     return result;
 }
 
@@ -257,7 +257,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSizeY
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSizeZ
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->GetSize().GetZ();
+    const float result = pBox->GetSize().GetZ();
     return result;
 }
 
@@ -269,7 +269,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSizeZ
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getVolume
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    float result = pBox->GetVolume();
+    const float result = pBox->GetVolume();
     return result;
 }
 
@@ -281,7 +281,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getVolume
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_isValid
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    bool result = pBox->IsValid();
+    const bool result = pBox->IsValid();
     return result;
 }
 

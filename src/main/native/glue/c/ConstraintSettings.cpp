@@ -39,7 +39,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_ge
   (JNIEnv *, jclass, jlong settingsVa) {
     const ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
-    int result = pSettings->mConstraintPriority;
+    const int result = pSettings->mConstraintPriority;
     return result;
 }
 
@@ -52,7 +52,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ConstraintSetting
   (JNIEnv *, jclass, jlong settingsVa) {
     const ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
-    bool result = pSettings->mEnabled;
+    const bool result = pSettings->mEnabled;
     return result;
 }
 
@@ -65,7 +65,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_ge
   (JNIEnv *, jclass, jlong settingsVa) {
     const ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
-    uint result = pSettings->mNumPositionStepsOverride;
+    const uint result = pSettings->mNumPositionStepsOverride;
     return result;
 }
 
@@ -78,7 +78,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_ge
   (JNIEnv *, jclass, jlong settingsVa) {
     const ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
-    uint result = pSettings->mNumVelocityStepsOverride;
+    const uint result = pSettings->mNumVelocityStepsOverride;
     return result;
 }
 
@@ -91,7 +91,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_ge
   (JNIEnv *, jclass, jlong settingsVa) {
     const ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
-    uint32 result = pSettings->GetRefCount();
+    const uint32 result = pSettings->GetRefCount();
     return result;
 }
 
@@ -104,7 +104,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_g
   (JNIEnv *, jclass, jlong settingsVa) {
     const ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
-    uint64 result = pSettings->mUserData;
+    const uint64 result = pSettings->mUserData;
     return result;
 }
 

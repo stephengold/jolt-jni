@@ -37,6 +37,6 @@ using namespace JPH;
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_JobSystem_getMaxConcurrency
   (JNIEnv *, jclass, jlong systemVa) {
     const JobSystem * const pSystem = reinterpret_cast<JobSystem *> (systemVa);
-    int result = pSystem->GetMaxConcurrency();
+    const int result = pSystem->GetMaxConcurrency();
     return result;
 }

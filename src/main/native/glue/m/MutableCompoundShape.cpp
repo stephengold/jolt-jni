@@ -45,7 +45,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_
     const ShapeRefC * const pSubShapeRef
             = reinterpret_cast<ShapeRefC *> (shapeRefVa);
     const Shape * const pSubShape = pSubShapeRef->GetPtr();
-    int result = pCompound->AddShape(offset, rotation, pSubShape);
+    const int result = pCompound->AddShape(offset, rotation, pSubShape);
     return result;
 }
 

@@ -53,9 +53,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_copyDebugTriang
         pSh->GetTrianglesStart(context, AABox::sBiggest(),
             Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f));
         while (numTriangles > 0) {
-            int maxRequest = std::max((int) numTriangles,
+            const int maxRequest = std::max((int) numTriangles,
                     Shape::cGetTrianglesMinTrianglesRequested);
-            uint numTrianglesCopied
+            const uint numTrianglesCopied
                     = pSh->GetTrianglesNext(context, maxRequest, pFloat3);
             JPH_ASSERT(numTrianglesCopied <= numTriangles);
             if (numTrianglesCopied == 0) {
@@ -88,7 +88,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
         for (;;) {
             constexpr uint cMaxTriangles = 1000;
             Float3 vertices[3 * cMaxTriangles];
-            uint numTrianglesCopied
+            const uint numTrianglesCopied
                     = pSh->GetTrianglesNext(context, cMaxTriangles, vertices);
             if (numTrianglesCopied == 0) {
                 break;
@@ -107,7 +107,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMassX
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    float result = pShape->GetCenterOfMass().GetX();
+    const float result = pShape->GetCenterOfMass().GetX();
     return result;
 }
 
@@ -119,7 +119,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMa
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMassY
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    float result = pShape->GetCenterOfMass().GetY();
+    const float result = pShape->GetCenterOfMass().GetY();
     return result;
 }
 
@@ -131,7 +131,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMa
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMassZ
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    float result = pShape->GetCenterOfMass().GetZ();
+    const float result = pShape->GetCenterOfMass().GetZ();
     return result;
 }
 
@@ -143,7 +143,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMa
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getInnerRadius
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    float result = pShape->GetInnerRadius();
+    const float result = pShape->GetInnerRadius();
     return result;
 }
 
@@ -183,7 +183,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getMassPropert
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getRefCount
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    uint32 result = pShape->GetRefCount();
+    const uint32 result = pShape->GetRefCount();
     return result;
 }
 
@@ -195,7 +195,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getRefCount
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getSubType
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    EShapeSubType subType = pShape->GetSubType();
+    const EShapeSubType subType = pShape->GetSubType();
     return (jint) subType;
 }
 
@@ -207,7 +207,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getSubType
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getType
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    EShapeType type = pShape->GetType();
+    const EShapeType type = pShape->GetType();
     return (jint) type;
 }
 
@@ -219,7 +219,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getType
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getUserData
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    uint64 result = pShape->GetUserData();
+    const uint64 result = pShape->GetUserData();
     return result;
 }
 
@@ -247,7 +247,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getWorldSpaceB
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Shape_mustBeStatic
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    bool result = pShape->MustBeStatic();
+    const bool result = pShape->MustBeStatic();
     return result;
 }
 

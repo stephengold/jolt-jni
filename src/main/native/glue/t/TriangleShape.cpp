@@ -56,6 +56,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_TriangleShape_getCo
   (JNIEnv *, jclass, jlong shapeVa) {
     const TriangleShape * const pShape
             = reinterpret_cast<TriangleShape *> (shapeVa);
-    float result = pShape->GetConvexRadius();
+    const float result = pShape->GetConvexRadius();
     return result;
 }

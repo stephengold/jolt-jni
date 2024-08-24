@@ -115,7 +115,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addTorque
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_canBeKinematicOrDynamic
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    bool result = pBody->CanBeKinematicOrDynamic();
+    const bool result = pBody->CanBeKinematicOrDynamic();
     return result;
 }
 
@@ -144,7 +144,7 @@ inline static const Vec3 getAccumulatedForce(jlong bodyVa) {
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulatedForceX
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getAccumulatedForce(bodyVa);
-    float result = vec3.GetX();
+    const float result = vec3.GetX();
     return result;
 }
 
@@ -156,7 +156,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulated
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulatedForceY
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getAccumulatedForce(bodyVa);
-    float result = vec3.GetY();
+    const float result = vec3.GetY();
     return result;
 }
 
@@ -168,7 +168,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulated
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulatedForceZ
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getAccumulatedForce(bodyVa);
-    float result = vec3.GetZ();
+    const float result = vec3.GetZ();
     return result;
 }
 
@@ -186,7 +186,7 @@ inline static const Vec3 getAccumulatedTorque(jlong bodyVa) {
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulatedTorqueX
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getAccumulatedTorque(bodyVa);
-    float result = vec3.GetX();
+    const float result = vec3.GetX();
     return result;
 }
 
@@ -198,7 +198,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulated
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulatedTorqueY
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getAccumulatedTorque(bodyVa);
-    float result = vec3.GetY();
+    const float result = vec3.GetY();
     return result;
 }
 
@@ -210,7 +210,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulated
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulatedTorqueZ
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getAccumulatedTorque(bodyVa);
-    float result = vec3.GetZ();
+    const float result = vec3.GetZ();
     return result;
 }
 
@@ -222,7 +222,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAccumulated
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_getAllowSleeping
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    bool result = pBody->GetAllowSleeping();
+    const bool result = pBody->GetAllowSleeping();
     return result;
 }
 
@@ -240,7 +240,7 @@ inline static const Vec3 getAngularVelocity(jlong bodyVa) {
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAngularVelocityX
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getAngularVelocity(bodyVa);
-    float result = vec3.GetX();
+    const float result = vec3.GetX();
     return result;
 }
 
@@ -252,7 +252,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAngularVelo
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAngularVelocityY
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getAngularVelocity(bodyVa);
-    float result = vec3.GetY();
+    const float result = vec3.GetY();
     return result;
 }
 
@@ -264,7 +264,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAngularVelo
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getAngularVelocityZ
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getAngularVelocity(bodyVa);
-    float result = vec3.GetZ();
+    const float result = vec3.GetZ();
     return result;
 }
 
@@ -296,7 +296,7 @@ inline static const RVec3 getCenterOfMassPosition(jlong bodyVa) {
 JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMassPositionX
   (JNIEnv *, jclass, jlong bodyVa) {
     const RVec3 rvec3 = getCenterOfMassPosition(bodyVa);
-    Real result = rvec3.GetX();
+    const Real result = rvec3.GetX();
     return result;
 }
 
@@ -308,7 +308,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMa
 JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMassPositionY
   (JNIEnv *, jclass, jlong bodyVa) {
     const RVec3 rvec3 = getCenterOfMassPosition(bodyVa);
-    Real result = rvec3.GetY();
+    const Real result = rvec3.GetY();
     return result;
 }
 
@@ -320,7 +320,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMa
 JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMassPositionZ
   (JNIEnv *, jclass, jlong bodyVa) {
     const RVec3 rvec3 = getCenterOfMassPosition(bodyVa);
-    Real result = rvec3.GetZ();
+    const Real result = rvec3.GetZ();
     return result;
 }
 
@@ -332,7 +332,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMa
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getFriction
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    float result = pBody->GetFriction();
+    const float result = pBody->GetFriction();
     return result;
 }
 
@@ -362,7 +362,7 @@ inline static const Vec3 getLinearVelocity(jlong bodyVa) {
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getLinearVelocityX
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getLinearVelocity(bodyVa);
-    float result = vec3.GetX();
+    const float result = vec3.GetX();
     return result;
 }
 
@@ -374,7 +374,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getLinearVeloc
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getLinearVelocityY
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getLinearVelocity(bodyVa);
-    float result = vec3.GetY();
+    const float result = vec3.GetY();
     return result;
 }
 
@@ -386,7 +386,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getLinearVeloc
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getLinearVelocityZ
   (JNIEnv *, jclass, jlong bodyVa) {
     const Vec3 vec3 = getLinearVelocity(bodyVa);
-    float result = vec3.GetZ();
+    const float result = vec3.GetZ();
     return result;
 }
 
@@ -428,7 +428,7 @@ inline static const RVec3 getPosition(jlong bodyVa) {
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Body_getObjectLayer
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    ObjectLayer result = pBody->GetObjectLayer();
+    const ObjectLayer result = pBody->GetObjectLayer();
     return result;
 }
 
@@ -440,7 +440,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Body_getObjectLayer
 JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getPositionX
   (JNIEnv *, jclass, jlong bodyVa) {
     const RVec3 rvec3 = getPosition(bodyVa);
-    float result = rvec3.GetX();
+    const float result = rvec3.GetX();
     return result;
 }
 
@@ -452,7 +452,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getPositionX
 JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getPositionY
   (JNIEnv *, jclass, jlong bodyVa) {
     const RVec3 rvec3 = getPosition(bodyVa);
-    float result = rvec3.GetY();
+    const float result = rvec3.GetY();
     return result;
 }
 
@@ -464,7 +464,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getPositionY
 JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getPositionZ
   (JNIEnv *, jclass, jlong bodyVa) {
     const RVec3 rvec3 = getPosition(bodyVa);
-    float result = rvec3.GetZ();
+    const float result = rvec3.GetZ();
     return result;
 }
 
@@ -476,7 +476,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getPositionZ
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getRestitution
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    float result = pBody->GetRestitution();
+    const float result = pBody->GetRestitution();
     return result;
 }
 
@@ -494,7 +494,7 @@ inline static const Quat getRotation(jlong bodyVa) {
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getRotationX
   (JNIEnv *, jclass, jlong bodyVa) {
     const Quat rotation = getRotation(bodyVa);
-    float result = rotation.GetX();
+    const float result = rotation.GetX();
     return result;
 }
 
@@ -506,7 +506,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getRotationX
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getRotationY
   (JNIEnv *, jclass, jlong bodyVa) {
     const Quat rotation = getRotation(bodyVa);
-    float result = rotation.GetY();
+    const float result = rotation.GetY();
     return result;
 }
 
@@ -518,7 +518,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getRotationY
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getRotationZ
   (JNIEnv *, jclass, jlong bodyVa) {
     const Quat rotation = getRotation(bodyVa);
-    float result = rotation.GetZ();
+    const float result = rotation.GetZ();
     return result;
 }
 
@@ -530,7 +530,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getRotationZ
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getRotationW
   (JNIEnv *, jclass, jlong bodyVa) {
     const Quat rotation = getRotation(bodyVa);
-    float result = rotation.GetW();
+    const float result = rotation.GetW();
     return result;
 }
 
@@ -554,7 +554,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getShape
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getUserData
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    uint64 result = pBody->GetUserData();
+    const uint64 result = pBody->GetUserData();
     return result;
 }
 
@@ -578,7 +578,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getWorldSpaceBo
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isActive
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    bool result = pBody->IsActive();
+    const bool result = pBody->IsActive();
     return result;
 }
 
@@ -590,7 +590,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isActive
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isDynamic
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    bool result = pBody->IsDynamic();
+    const bool result = pBody->IsDynamic();
     return result;
 }
 
@@ -602,7 +602,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isDynamic
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isKinematic
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    bool result = pBody->IsKinematic();
+    const bool result = pBody->IsKinematic();
     return result;
 }
 
@@ -614,7 +614,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isKinematic
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isRigidBody
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    bool result = pBody->IsRigidBody();
+    const bool result = pBody->IsRigidBody();
     return result;
 }
 
@@ -626,7 +626,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isRigidBody
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isSensor
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    bool result = pBody->IsSensor();
+    const bool result = pBody->IsSensor();
     return result;
 }
 
@@ -638,7 +638,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isSensor
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isStatic
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    bool result = pBody->IsStatic();
+    const bool result = pBody->IsStatic();
     return result;
 }
 
@@ -651,8 +651,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_moveKinematic
   (JNIEnv *, jclass, jlong bodyVa, jdouble xx, jdouble yy, jdouble zz,
   jfloat qx, jfloat qy, jfloat qz, jfloat qw, jfloat deltaTime) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    RVec3 location(xx, yy, zz);
-    Quat orientation(qx, qy, qz, qw);
+    const RVec3 location(xx, yy, zz);
+    const Quat orientation(qx, qy, qz, qw);
     pBody->MoveKinematic(location, orientation, deltaTime);
 }
 
@@ -698,7 +698,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setAngularVeloci
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setAngularVelocityClamped
   (JNIEnv *, jclass, jlong bodyVa, jfloat wx, jfloat wy, jfloat wz) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    Vec3 omega(wx, wy, wz);
+    const Vec3 omega(wx, wy, wz);
     pBody->SetAngularVelocityClamped(omega);
 }
 
@@ -732,7 +732,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setIsSensor
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setLinearVelocity
   (JNIEnv *, jclass, jlong bodyVa, jfloat vx, jfloat vy, jfloat vz) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    Vec3 velocity(vx, vy, vz);
+    const Vec3 velocity(vx, vy, vz);
     pBody->SetLinearVelocity(velocity);
 }
 
@@ -744,7 +744,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setLinearVelocit
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setLinearVelocityClamped
   (JNIEnv *, jclass, jlong bodyVa, jfloat vx, jfloat vy, jfloat vz) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    Vec3 velocity(vx, vy, vz);
+    const Vec3 velocity(vx, vy, vz);
     pBody->SetLinearVelocityClamped(velocity);
 }
 
@@ -756,7 +756,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setLinearVelocit
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setMotionType
   (JNIEnv *, jclass, jlong bodyVa, jint ordinal) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    EMotionType motionType = (EMotionType) ordinal;
+    const EMotionType motionType = (EMotionType) ordinal;
     pBody->SetMotionType(motionType);
 }
 

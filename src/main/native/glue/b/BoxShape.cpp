@@ -52,6 +52,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShape_createBoxSh
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShape_getConvexRadius
   (JNIEnv *, jclass, jlong shapeVa) {
     const BoxShape * const pShape = reinterpret_cast<BoxShape *> (shapeVa);
-    float result = pShape->GetConvexRadius();
+    const float result = pShape->GetConvexRadius();
     return result;
 }
