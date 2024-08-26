@@ -31,9 +31,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CharacterBase
-        extends NonCopyable
-        implements ConstCharacterBase, RefTarget {
+public class CharacterBase extends NonCopyable implements ConstCharacterBase {
     // *************************************************************************
     // constructors
 
@@ -267,36 +265,6 @@ public class CharacterBase
         return result;
     }
     // *************************************************************************
-    // RefTarget methods
-
-    /**
-     * Count the active references to the character. The character is
-     * unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    @Override
-    public int getRefCount() {
-        long characterVa = va();
-        int result = getRefCount(characterVa);
-
-        return result;
-    }
-
-    /**
-     * Create a counted reference to the character.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    @Override
-    public CharacterBaseRef toRef() {
-        long characterVa = va();
-        long refVa = toRef(characterVa);
-        CharacterBaseRef result = new CharacterBaseRef(refVa, true);
-
-        return result;
-    }
-    // *************************************************************************
     // native private methods
 
     native private static float getCosMaxSlopeAngle(long characterVa);
@@ -327,8 +295,6 @@ public class CharacterBase
 
     native private static float getGroundVelocityZ(long characterVa);
 
-    native private static int getRefCount(long characterVa);
-
     native private static long getShape(long characterVa);
 
     native private static float getUpX(long characterVa);
@@ -346,6 +312,4 @@ public class CharacterBase
 
     native private static void setUp(
             long characterVa, float x, float y, float z);
-
-    native private static long toRef(long characterVa);
 }
