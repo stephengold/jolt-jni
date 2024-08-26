@@ -32,7 +32,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  */
 public class CharacterBaseSettings
         extends JoltPhysicsObject
-        implements ConstCharacterBaseSettings, RefTarget {
+        implements ConstCharacterBaseSettings {
     // *************************************************************************
     // constructors
 
@@ -208,44 +208,12 @@ public class CharacterBaseSettings
         return result;
     }
     // *************************************************************************
-    // RefTarget methods
-
-    /**
-     * Count the active references to these settings.
-     *
-     * @return the count (&ge;0)
-     */
-    @Override
-    public int getRefCount() {
-        long settingsVa = va();
-        int result = getRefCount(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Create a counted reference to these settings.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    @Override
-    public CharacterBaseSettingsRef toRef() {
-        long settingsVa = va();
-        long refVa = toRef(settingsVa);
-        CharacterBaseSettingsRef result
-                = new CharacterBaseSettingsRef(refVa, true);
-
-        return result;
-    }
-    // *************************************************************************
     // native private methods
 
     native private static boolean getEnhancedInternalEdgeRemoval(
             long settingsVa);
 
     native private static float getMaxSlopeAngle(long settingsVa);
-
-    native private static int getRefCount(long settingsVa);
 
     native private static long getShape(long settingsVa);
 
@@ -275,6 +243,4 @@ public class CharacterBaseSettings
 
     native private static void setUp(
             long settingsVa, float dx, float dy, float dz);
-
-    native private static long toRef(long settingsVa);
 }

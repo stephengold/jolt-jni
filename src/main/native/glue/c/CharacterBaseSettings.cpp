@@ -58,19 +58,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
- * Method:    getRefCount
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getRefCount
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterBaseSettings * const pSettings
-            = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
-    const uint32 result = pSettings->GetRefCount();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
  * Method:    getShape
  * Signature: (J)J
  */
@@ -235,19 +222,4 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings
             = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
     const Vec3 direction(dx, dy, dz);
     pSettings->mUp = direction;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
- * Method:    toRef
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_toRef
-  (JNIEnv *, jclass, jlong settingsVa) {
-    CharacterBaseSettings * const pSettings
-            = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
-    Ref<CharacterBaseSettings> * const pResult
-            = new Ref<CharacterBaseSettings>(pSettings);
-    TRACE_NEW("Ref<CharacterBaseSettings>", pResult)
-    return reinterpret_cast<jlong> (pResult);
 }
