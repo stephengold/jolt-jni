@@ -213,6 +213,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_getPosition
 
 /*
  * Class:     com_github_stephengold_joltjni_Character
+ * Method:    getRefCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Character_getRefCount
+  (JNIEnv *, jclass, jlong characterVa) {
+    const Character * const pCharacter
+            = reinterpret_cast<Character *> (characterVa);
+    const uint32 result = pCharacter->GetRefCount();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Character
  * Method:    getRotation
  * Signature: (J[FZ)V
  */
@@ -351,4 +364,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Character_setShap
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
     bool result = pCharacter->SetShape(pShape, maxPenetrationDepth, lockBodies);
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Character
+ * Method:    toRef
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Character_toRef
+  (JNIEnv *, jclass, jlong characterVa) {
+    Character * const pCharacter = reinterpret_cast<Character *> (characterVa);
+    Ref<Character> * const pResult = new Ref<Character>(pCharacter);
+    TRACE_NEW("Ref<Character>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+
 }

@@ -34,7 +34,9 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Character extends CharacterBase implements ConstCharacter {
+public class Character
+        extends CharacterBase
+        implements ConstCharacter, RefTarget {
     // *************************************************************************
     // constructors
 
@@ -425,6 +427,36 @@ public class Character extends CharacterBase implements ConstCharacter {
         return result;
     }
     // *************************************************************************
+    // RefTarget methods
+
+    /**
+     * Count the active references to the character. The character is
+     * unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long characterVa = va();
+        int result = getRefCount(characterVa);
+
+        return result;
+    }
+
+    /**
+     * Create a counted reference to the character.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public CharacterRef toRef() {
+        long characterVa = va();
+        long refVa = toRef(characterVa);
+        CharacterRef result = new CharacterRef(refVa, true);
+
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static void activate(long characterVa, boolean lockBodies);
@@ -458,6 +490,8 @@ public class Character extends CharacterBase implements ConstCharacter {
     native private static void getPositionAndRotation(long characterVa,
             double[] storeDoubles, float[] storeFloats, boolean lockBodies);
 
+    native private static int getRefCount(long characterVa);
+
     native private static void getRotation(
             long characterVa, float[] toreFloats, boolean lockBodies);
 
@@ -489,4 +523,6 @@ public class Character extends CharacterBase implements ConstCharacter {
 
     native private static boolean setShape(long characterVa, long shapeVa,
             float maxPenetrationDepth, boolean lockBodies);
+
+    native private static long toRef(long characterVa);
 }
