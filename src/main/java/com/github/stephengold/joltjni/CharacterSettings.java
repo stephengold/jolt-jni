@@ -30,7 +30,7 @@ import com.github.stephengold.joltjni.readonly.ConstCharacterSettings;
  */
 public class CharacterSettings
         extends CharacterBaseSettings
-        implements ConstCharacterSettings {
+        implements ConstCharacterSettings, RefTarget {
     // *************************************************************************
     // constructors
 
@@ -156,6 +156,35 @@ public class CharacterSettings
         return result;
     }
     // *************************************************************************
+    // RefTarget methods
+
+    /**
+     * Count the active references to the settings. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long settingsVa = va();
+        int result = getRefCount(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Create a counted reference to the settings.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public CharacterSettingsRef toRef() {
+        long settingsVa = va();
+        long refVa = toRef(settingsVa);
+        CharacterSettingsRef result = new CharacterSettingsRef(refVa, true);
+
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createCharacterSettings();
@@ -168,6 +197,8 @@ public class CharacterSettings
 
     native private static float getMass(long settingsVa);
 
+    native private static int getRefCount(long settingsVa);
+
     native private static void setFriction(long settingsVa, float friction);
 
     native private static void setGravityFactor(long settingsVa, float factor);
@@ -175,4 +206,6 @@ public class CharacterSettings
     native private static void setLayer(long settingsVa, int objLayer);
 
     native private static void setMass(long settingsVa, float mass);
+
+    native private static long toRef(long settingsVa);
 }

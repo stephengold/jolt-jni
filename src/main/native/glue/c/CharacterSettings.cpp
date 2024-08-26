@@ -96,6 +96,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_g
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterSettings
+ * Method:    getRefCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_getRefCount
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const CharacterSettings * const pSettings
+            = reinterpret_cast<CharacterSettings *> (settingsVa);
+    const uint32 result = pSettings->GetRefCount();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterSettings
  * Method:    setFriction
  * Signature: (JF)V
  */
@@ -141,4 +154,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_set
     CharacterSettings * const pSettings
             = reinterpret_cast<CharacterSettings *> (settingsVa);
     pSettings->mMass = mass;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterSettings
+ * Method:    toRef
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_toRef
+  (JNIEnv *, jclass, jlong settingsVa) {
+    CharacterSettings * const pSettings
+            = reinterpret_cast<CharacterSettings *> (settingsVa);
+    Ref<CharacterSettings> * const pResult
+            = new Ref<CharacterSettings>(pSettings);
+    TRACE_NEW("Ref<CharacterSettings>", pResult)
+    return reinterpret_cast<jlong> (pResult);
 }
