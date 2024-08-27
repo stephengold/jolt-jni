@@ -31,6 +31,32 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexShapeSettings
+ * Method:    getDensity
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexShapeSettings_getDensity
+  (JNIEnv *, jobject, jlong settingsVa) {
+    const ConvexShapeSettings * const pSettings
+            = reinterpret_cast<ConvexShapeSettings *> (settingsVa);
+    const float result = pSettings->mDensity;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexShapeSettings
+ * Method:    getMaterial
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexShapeSettings_getMaterial
+  (JNIEnv *, jobject, jlong settingsVa) {
+    const ConvexShapeSettings * const pSettings
+            = reinterpret_cast<ConvexShapeSettings *> (settingsVa);
+    const PhysicsMaterial * const pResult = pSettings->mMaterial.GetPtr();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexShapeSettings
  * Method:    setDensity
  * Signature: (JF)V
  */
@@ -39,4 +65,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexShapeSettings_s
     ConvexShapeSettings * const pSettings
             = reinterpret_cast<ConvexShapeSettings *> (settingsVa);
     pSettings->SetDensity(density);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexShapeSettings
+ * Method:    setMaterial
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexShapeSettings_setMaterial
+  (JNIEnv *, jclass, jlong settingsVa, jlong materialVa) {
+    ConvexShapeSettings * const pSettings
+            = reinterpret_cast<ConvexShapeSettings *> (settingsVa);
+    PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    pSettings->mMaterial = pMaterial;
 }

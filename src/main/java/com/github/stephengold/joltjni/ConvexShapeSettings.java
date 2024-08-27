@@ -21,12 +21,17 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstConvexShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
+
 /**
  * Settings used to construct a {@code ConvexShape}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class ConvexShapeSettings extends ShapeSettings {
+abstract public class ConvexShapeSettings
+        extends ShapeSettings
+        implements ConstConvexShapeSettings {
     // *************************************************************************
     // constructors
 
@@ -58,8 +63,61 @@ abstract public class ConvexShapeSettings extends ShapeSettings {
         long settingsVa = va();
         setDensity(settingsVa, density);
     }
+
+    /**
+     * Replace the material. (native field: mMaterial)
+     *
+     * @param material the desired material, or null for none (default=null)
+     */
+    public void setMaterial(PhysicsMaterial material) {
+        long settingsVa = va();
+        long materialVa = (material == null) ? 0L : material.va();
+        setMaterial(settingsVa, materialVa);
+    }
+    // *************************************************************************
+    // ConstConvexShapeSettings methods
+
+    /**
+     * Return the density. The settings are unaffected. (native field: mDensity)
+     *
+     * @return the value
+     */
+    @Override
+    public float getDensity() {
+        long settingsVa = va();
+        float result = getDensity(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the material. The settings are unaffected. (native field:
+     * mMaterial)
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    @Override
+    public ConstPhysicsMaterial getMaterial() {
+        long settingsVa = va();
+        long materialVa = getMaterial(settingsVa);
+        ConstPhysicsMaterial result;
+        if (materialVa == 0L) {
+            result = null;
+        } else {
+            result = new PhysicsMaterial(materialVa);
+        }
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
+    native private float getDensity(long settingsVa);
+
+    native private long getMaterial(long settingsVa);
+
     native private static void setDensity(long settingsVa, float density);
+
+    native private static void setMaterial(long settingsVa, long materialVa);
 }
