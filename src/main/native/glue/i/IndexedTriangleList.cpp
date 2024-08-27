@@ -119,4 +119,3 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_s
     const IndexedTriangleList::size_type result = pList->size();
     return result;
 }
-

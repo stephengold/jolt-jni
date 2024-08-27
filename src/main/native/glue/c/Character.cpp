@@ -377,5 +377,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Character_toRef
     Ref<Character> * const pResult = new Ref<Character>(pCharacter);
     TRACE_NEW("Ref<Character>", pResult)
     return reinterpret_cast<jlong> (pResult);
-
 }

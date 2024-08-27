@@ -90,7 +90,6 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getElement
     return result;
 }
 
-
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    setElement

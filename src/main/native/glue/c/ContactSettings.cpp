@@ -333,4 +333,3 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactSettings_setRe
     const Vec3 velocity(vx, vy, vz);
     pSettings->mRelativeLinearSurfaceVelocity = velocity;
 }
-
