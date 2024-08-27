@@ -50,7 +50,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      *
      * @param samples array of height values (not null, capacity&ge;4,
      * unaffected)
-     * @param offset (not null, unaffected);
+     * @param offset (not null, unaffected)
      * @param scale (not null, unaffected)
      * @param sampleCount the number of height values along each edge (&ge;2)
      */

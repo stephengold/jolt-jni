@@ -100,7 +100,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Alter the convex radius.
      *
-     * @param radius the desired convex radius (&ge;0)
+     * @param radius the desired convex radius (&ge;0, default=0)
      */
     public void setMaxConvexRadius(float radius) {
         long settingsVa = va();
