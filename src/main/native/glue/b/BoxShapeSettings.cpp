@@ -36,9 +36,9 @@ using namespace JPH;
  * Signature: (FFFFJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_createBoxShapeSettings
-  (JNIEnv *, jclass, jfloat xHalfExtent, jfloat yHalfExtent, jfloat zHalfExtent,
+  (JNIEnv *, jclass, jfloat hx, jfloat hy, jfloat hz,
   jfloat convexRadius, jlong materialVa) {
-    const Vec3 halfExtents(xHalfExtent, yHalfExtent, zHalfExtent);
+    const Vec3 halfExtents(hx, hy, hz);
     const PhysicsMaterial * const pMaterial
             = reinterpret_cast<PhysicsMaterial *> (materialVa);
     BoxShapeSettings * const pResult
