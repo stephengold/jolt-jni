@@ -32,6 +32,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    countPoints
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_countPoints
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    const Array<Vec3>::size_type result = pSettings->mPoints.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
  * Method:    createConvexHullShapeSettings
  * Signature: (ILjava/nio/FloatBuffer;)J
  */
@@ -57,6 +70,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    getHullTolerance
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_getHullTolerance
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    const float result = pSettings->mHullTolerance;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
  * Method:    getMaxConvexRadius
  * Signature: (J)F
  */
@@ -70,6 +96,31 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSett
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    getMaxErrorConvexRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_getMaxErrorConvexRadius
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    const float result = pSettings->mMaxErrorConvexRadius;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    setHullTolerance
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_setHullTolerance
+  (JNIEnv *, jclass, jlong settingsVa, jfloat tolerance) {
+    ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    pSettings->mHullTolerance = tolerance;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
  * Method:    setMaxConvexRadius
  * Signature: (JF)V
  */
@@ -78,4 +129,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettin
     ConvexHullShapeSettings * const pSettings
             = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
     pSettings->mMaxConvexRadius = radius;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    setMaxErrorConvexRadius
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_setMaxErrorConvexRadius
+  (JNIEnv *, jclass, jlong settingsVa, jfloat maxError) {
+    ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    pSettings->mMaxErrorConvexRadius = maxError;
 }

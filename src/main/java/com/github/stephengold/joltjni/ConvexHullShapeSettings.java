@@ -86,7 +86,34 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     // new methods exposed
 
     /**
-     * Return the convex radius. The settings are unaffected.
+     * Return the number of points to use when creating the hull. The settings
+     * are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countPoints() {
+        long settingsVa = va();
+        int result = countPoints(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the positional tolerance used when generating the hull. The
+     * settings are unaffected. (native field: mHullTolerance)
+     *
+     * @return the distance (&ge;0)
+     */
+    public float getHullTolerance() {
+        long settingsVa = va();
+        float result = getHullTolerance(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the convex radius. The settings are unaffected. (native field:
+     * mMaxConvexRadius)
      *
      * @return the convex radius (&ge;0)
      */
@@ -98,7 +125,32 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the convex radius.
+     * Return the maximum separation between the shrunk hull + convex radius and
+     * the actual hull. The settings are unaffected. (native field:
+     * mMaxErrorConvexRadius)
+     *
+     * @return the maximum separation (&ge;0)
+     */
+    public float getMaxErrorConvexRadius() {
+        long settingsVa = va();
+        float result = getMaxErrorConvexRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Alter the positional tolerance used when generating generate the hull.
+     * (native field: mHullTolerance)
+     *
+     * @param tolerance the desired tolerance (&ge;0, default=0.001)
+     */
+    public void setHullTolerance(float tolerance) {
+        long settingsVa = va();
+        setHullTolerance(settingsVa, tolerance);
+    }
+
+    /**
+     * Alter the convex radius. (native field: mMaxConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0, default=0)
      */
@@ -106,14 +158,37 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         long settingsVa = va();
         setMaxConvexRadius(settingsVa, radius);
     }
+
+    /**
+     * Alter the maximum separation between the shrunk hull plus convex radius
+     * and the actual hull. (native field: mMaxErrorConvexRadius)
+     *
+     * @param maxError the desired maximum separation (&ge;0, default=0.05)
+     */
+    public void setMaxErrorConvexRadius(float maxError) {
+        long settingsVa = va();
+        setMaxErrorConvexRadius(settingsVa, maxError);
+    }
     // *************************************************************************
     // native private methods
+
+    native private static int countPoints(long settingsVa);
 
     native private static long createConvexHullShapeSettings(
             int numPoints, FloatBuffer points);
 
+    native private static float getHullTolerance(long settingsVa);
+
     native private static float getMaxConvexRadius(long settingsVa);
+
+    native private static float getMaxErrorConvexRadius(long settingsVa);
+
+    native private static void setHullTolerance(
+            long settingsVa, float tolerance);
 
     native private static void setMaxConvexRadius(
             long settingsVa, float radius);
+
+    native private static void setMaxErrorConvexRadius(
+            long settingsVa, float maxError);
 }
