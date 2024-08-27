@@ -39,7 +39,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_g
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    BodyID * const pResult = new BodyID(pShapeResult->mBodyID2);
+    const BodyID id = pShapeResult->mBodyID2;
+    BodyID * const pResult = new BodyID(id);
     TRACE_NEW("BodyID", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

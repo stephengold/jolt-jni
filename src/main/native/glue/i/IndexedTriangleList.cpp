@@ -74,10 +74,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_f
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_getTriangle
-  (JNIEnv *, jclass, jlong listVa, jint listIndex) {
+  (JNIEnv *, jclass, jlong listVa, jint elementIndex) {
     IndexedTriangleList * const pList
             = reinterpret_cast<IndexedTriangleList *> (listVa);
-    IndexedTriangle& result = pList->at(listIndex);
+    IndexedTriangle& result = pList->at(elementIndex);
     return reinterpret_cast<jlong> (&result);
 }
 
@@ -87,10 +87,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_resize
-  (JNIEnv *, jclass, jlong listVa, jint numTriangles) {
+  (JNIEnv *, jclass, jlong listVa, jint numElements) {
     IndexedTriangleList * const pList
             = reinterpret_cast<IndexedTriangleList *> (listVa);
-    pList->resize(numTriangles);
+    pList->resize(numElements);
 }
 
 /*

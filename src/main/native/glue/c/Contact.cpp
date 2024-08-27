@@ -236,7 +236,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Contact_getPositio
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterVirtual::Contact * const pContact
             = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const double result = pContact->mPosition.GetX();
+    const Real result = pContact->mPosition.GetX();
     return result;
 }
 
@@ -249,7 +249,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Contact_getPositio
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterVirtual::Contact * const pContact
             = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const double result = pContact->mPosition.GetY();
+    const Real result = pContact->mPosition.GetY();
     return result;
 }
 
@@ -262,7 +262,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Contact_getPositio
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterVirtual::Contact * const pContact
             = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const double result = pContact->mPosition.GetZ();
+    const Real result = pContact->mPosition.GetZ();
     return result;
 }
 

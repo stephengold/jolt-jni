@@ -38,9 +38,8 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyId_copy
   (JNIEnv *, jclass, jlong idVa) {
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
-    BodyID * const pResult = new BodyID();
+    BodyID * const pResult = new BodyID(*pBodyId);
     TRACE_NEW("BodyID", pResult)
-    *pResult = *pBodyId;
     return reinterpret_cast<jlong> (pResult);
 }
 
