@@ -22,11 +22,11 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A counted reference to a {@code CharacterBase}.
+ * A counted reference to a {@code CharacterVirtualSettings} object.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class CharacterBaseRef extends JoltPhysicsObject {
+final public class CharacterVirtualSettingsRef extends JoltPhysicsObject {
     // *************************************************************************
     // constructors
 
@@ -38,7 +38,7 @@ final public class CharacterBaseRef extends JoltPhysicsObject {
      * @param owner true &rarr; make the current object the owner, false &rarr;
      * the current object isn't the owner
      */
-    CharacterBaseRef(long refVa, boolean owner) {
+    CharacterVirtualSettingsRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
     }
@@ -46,27 +46,29 @@ final public class CharacterBaseRef extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Temporarily access the referenced {@code CharacterBase}.
+     * Temporarily access the referenced {@code CharacterVirtualSettings}.
      *
      * @return a new JVM object that refers to the pre-existing native object
      */
-    public CharacterBase getPtr() {
+    public CharacterVirtualSettings getPtr() {
         long refVa = va();
-        long characterVa = getPtr(refVa);
-        CharacterBase result = new CharacterBase(characterVa);
+        long settingsVa = getPtr(refVa);
+        CharacterVirtualSettings result
+                = new CharacterVirtualSettings(settingsVa);
 
         return result;
     }
 
     /**
-     * Create a counted reference to the native {@code CharacterBase}.
+     * Create a counted reference to the native {@code CharacterSettings}.
      *
      * @return a new JVM object with a new native object assigned
      */
-    public CharacterBaseRef toRef() {
+    public CharacterVirtualSettingsRef toRef() {
         long refVa = va();
         long copyVa = copy(refVa);
-        CharacterBaseRef result = new CharacterBaseRef(copyVa, true);
+        CharacterVirtualSettingsRef result
+                = new CharacterVirtualSettingsRef(copyVa, true);
 
         return result;
     }
