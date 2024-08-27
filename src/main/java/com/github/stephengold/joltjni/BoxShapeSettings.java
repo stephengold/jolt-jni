@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -51,11 +52,38 @@ public class BoxShapeSettings extends ConvexShapeSettings {
      * all components &ge;0, unaffected)
      */
     public BoxShapeSettings(Vec3Arg halfExtents) {
-        float xHalfExtent = halfExtents.getX();
-        float yHalfExtent = halfExtents.getY();
-        float zHalfExtent = halfExtents.getZ();
-        long settingsVa
-                = createBoxShapeSettings(xHalfExtent, yHalfExtent, zHalfExtent);
+        this(halfExtents, 0.05f);
+    }
+
+    /**
+     * Instantiate settings for the specified half extents and convex radius.
+     *
+     * @param halfExtents the desired half extents on each local axis (not null,
+     * all components &ge;0, unaffected)
+     * @param convexRadius the desired convex radius (&ge;0, default=0.05)
+     */
+    public BoxShapeSettings(Vec3Arg halfExtents, float convexRadius) {
+        this(halfExtents, convexRadius, null);
+    }
+
+    /**
+     * Instantiate settings for the specified half extents, convex radius, and
+     * material.
+     *
+     * @param halfExtents the desired half extents on each local axis (not null,
+     * all components &ge;0, unaffected)
+     * @param convexRadius the desired convex radius (&ge;0, default=0.05)
+     * @param material the desired surface properties (not null, unaffected) or
+     * {@code null} for default properties (default=null)
+     */
+    public BoxShapeSettings(Vec3Arg halfExtents, float convexRadius,
+            ConstPhysicsMaterial material) {
+        float hx = halfExtents.getX();
+        float hy = halfExtents.getY();
+        float hz = halfExtents.getZ();
+        long materialVa = (material == null) ? 0L : material.va();
+        long settingsVa = createBoxShapeSettings(
+                hx, hy, hz, convexRadius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EShapeSubType.Box);
     }
@@ -87,7 +115,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     // native private methods
 
     native private static long createBoxShapeSettings(
-            float xHalfExtent, float yHalfExtent, float zHalfExtent);
+            float hx, float hy, float hz, float convexRadius, long materialVa);
 
     native private static float getConvexRadius(long settingsVa);
 
