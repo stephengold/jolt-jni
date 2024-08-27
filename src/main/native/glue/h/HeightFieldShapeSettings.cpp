@@ -40,8 +40,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSett
   jfloat scaleX, jfloat scaleY, jfloat scaleZ, jint sampleCount) {
     const float * const pFloats
         = (float *) pEnv->GetDirectBufferAddress(buffer);
-    Vec3 offset(offsetX, offsetY, offsetZ);
-    Vec3 scale(scaleX, scaleY, scaleZ);
+    const Vec3 offset(offsetX, offsetY, offsetZ);
+    const Vec3 scale(scaleX, scaleY, scaleZ);
     HeightFieldShapeSettings * const pSettings
             = new HeightFieldShapeSettings(pFloats, offset, scale, sampleCount);
     TRACE_NEW("HeightFieldShapeSettings", pSettings)

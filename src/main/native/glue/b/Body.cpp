@@ -39,7 +39,7 @@ using namespace JPH;
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addAngularImpulse
   (JNIEnv *, jclass, jlong bodyVa, jfloat x, jfloat y, jfloat z) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    Vec3 impulse(x, y, z);
+    const Vec3 impulse(x, y, z);
     pBody->AddAngularImpulse(impulse);
 }
 
@@ -51,7 +51,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addAngularImpuls
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addForce__JFFF
   (JNIEnv *, jclass, jlong bodyVa, jfloat fx, jfloat fy, jfloat fz) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    Vec3 force(fx, fy, fz);
+    const Vec3 force(fx, fy, fz);
     pBody->AddForce(force);
 }
 
@@ -64,8 +64,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addForce__JFFFDD
   (JNIEnv *, jclass, jlong bodyVa, jfloat fx, jfloat fy, jfloat fz,
   jdouble posX, jdouble posY, jdouble posZ) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    Vec3 force(fx, fy, fz);
-    RVec3 position(posX, posY, posZ);
+    const Vec3 force(fx, fy, fz);
+    const RVec3 position(posX, posY, posZ);
     pBody->AddForce(force, position);
 }
 
@@ -77,7 +77,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addForce__JFFFDD
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addImpulse__JFFF
   (JNIEnv *, jclass, jlong bodyVa, jfloat jx, jfloat jy, jfloat jz) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    Vec3 impulse(jx, jy, jz);
+    const Vec3 impulse(jx, jy, jz);
     pBody->AddImpulse(impulse);
 }
 
@@ -90,8 +90,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addImpulse__JFFF
   (JNIEnv *, jclass, jlong bodyVa, jfloat jx, jfloat jy, jfloat jz,
   jdouble posX, jdouble posY, jdouble posZ) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    Vec3 impulse(jx, jy, jz);
-    RVec3 position(posX, posY, posZ);
+    const Vec3 impulse(jx, jy, jz);
+    const RVec3 position(posX, posY, posZ);
     pBody->AddImpulse(impulse, position);
 }
 
@@ -103,7 +103,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addImpulse__JFFF
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addTorque
   (JNIEnv *, jclass, jlong bodyVa, jfloat x, jfloat y, jfloat z) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    Vec3 torque(x, y, z);
+    const Vec3 torque(x, y, z);
     pBody->AddTorque(torque);
 }
 
@@ -686,7 +686,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setAllowSleeping
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setAngularVelocity
   (JNIEnv *, jclass, jlong bodyVa, jfloat wx, jfloat wy, jfloat wz) {
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    Vec3 omega(wx, wy, wz);
+    const Vec3 omega(wx, wy, wz);
     pBody->SetAngularVelocity(omega);
 }
 

@@ -38,7 +38,7 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShape_createScaledShape
   (JNIEnv *, jclass, jlong baseShapeVa, jfloat x, jfloat y, jfloat z) {
     const Shape * const pBase = reinterpret_cast<Shape *> (baseShapeVa);
-    Vec3 factors(x, y, z);
+    const Vec3 factors(x, y, z);
     ScaledShape * const pResult = new ScaledShape(pBase, factors);
     TRACE_NEW("ScaledShape", pResult)
     return reinterpret_cast<jlong> (pResult);

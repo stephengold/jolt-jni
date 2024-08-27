@@ -38,7 +38,7 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_createScaledShapeSettingsFromRef
   (JNIEnv *, jclass, jlong baseRefVa, jfloat x, jfloat y, jfloat z) {
     const ShapeRefC * const pBaseRef = reinterpret_cast<ShapeRefC *> (baseRefVa);
-    Vec3 factors(x, y, z);
+    const Vec3 factors(x, y, z);
     ScaledShapeSettings * const pResult
             = new ScaledShapeSettings(pBaseRef->GetPtr(), factors);
     TRACE_NEW("ScaledShapeSettings", pResult)
@@ -54,7 +54,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_
   (JNIEnv *, jclass, jlong baseSettingsVa, jfloat x, jfloat y, jfloat z) {
     const ShapeSettings * const pBaseSettings
             = reinterpret_cast<ShapeSettings *> (baseSettingsVa);
-    Vec3 factors(x, y, z);
+    const Vec3 factors(x, y, z);
     ScaledShapeSettings * const pResult
             = new ScaledShapeSettings(pBaseSettings, factors);
     TRACE_NEW("ScaledShapeSettings", pResult)
@@ -69,7 +69,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_createScaledShapeSettingsFromShape
   (JNIEnv *, jclass, jlong baseShapeVa, jfloat x, jfloat y, jfloat z) {
     const Shape * const pBaseShape = reinterpret_cast<Shape *> (baseShapeVa);
-    Vec3 factors(x, y, z);
+    const Vec3 factors(x, y, z);
     ScaledShapeSettings * const pResult
             = new ScaledShapeSettings(pBaseShape, factors);
     TRACE_NEW("ScaledShapeSettings", pResult)

@@ -38,8 +38,8 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShapeSettings_createSettingsFromShapeRef
   (JNIEnv *, jclass, jfloat offsetX, jfloat offsetY, jfloat offsetZ,
   jfloat rotX, jfloat rotY, jfloat rotZ, jfloat rotW, jlong baseShapeRefVa) {
-    Vec3 offset(offsetX, offsetY, offsetZ);
-    Quat rotation(rotX, rotY, rotZ, rotW);
+    const Vec3 offset(offsetX, offsetY, offsetZ);
+    const Quat rotation(rotX, rotY, rotZ, rotW);
     const ShapeRefC * const pBaseRef
         = reinterpret_cast<ShapeRefC *> (baseShapeRefVa);
     RotatedTranslatedShapeSettings * const pResult
@@ -58,7 +58,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
   (JNIEnv *, jclass, jlong rtsVa) {
     const RotatedTranslatedShapeSettings * const pSettings
         = reinterpret_cast<RotatedTranslatedShapeSettings *> (rtsVa);
-    Vec3 position = pSettings->mPosition;
+    const Vec3 position = pSettings->mPosition;
     return position.GetX();
 }
 
@@ -71,7 +71,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
   (JNIEnv *, jclass, jlong rtsVa) {
     const RotatedTranslatedShapeSettings * const pSettings
         = reinterpret_cast<RotatedTranslatedShapeSettings *> (rtsVa);
-    Vec3 position = pSettings->mPosition;
+    const Vec3 position = pSettings->mPosition;
     return position.GetY();
 }
 
@@ -84,7 +84,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
   (JNIEnv *, jclass, jlong rtsVa) {
     const RotatedTranslatedShapeSettings * const pSettings
         = reinterpret_cast<RotatedTranslatedShapeSettings *> (rtsVa);
-    Vec3 position = pSettings->mPosition;
+    const Vec3 position = pSettings->mPosition;
     return position.GetZ();
 }
 
@@ -97,7 +97,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
   (JNIEnv *, jclass, jlong rtsVa) {
     const RotatedTranslatedShapeSettings * const pSettings
         = reinterpret_cast<RotatedTranslatedShapeSettings *> (rtsVa);
-    Quat rotation = pSettings->mRotation;
+    const Quat rotation = pSettings->mRotation;
     return rotation.GetW();
 }
 
@@ -110,7 +110,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
   (JNIEnv *, jclass, jlong rtsVa) {
     const RotatedTranslatedShapeSettings * const pSettings
         = reinterpret_cast<RotatedTranslatedShapeSettings *> (rtsVa);
-    Quat rotation = pSettings->mRotation;
+    const Quat rotation = pSettings->mRotation;
     return rotation.GetX();
 }
 
@@ -123,7 +123,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
   (JNIEnv *, jclass, jlong rtsVa) {
     const RotatedTranslatedShapeSettings * const pSettings
         = reinterpret_cast<RotatedTranslatedShapeSettings *> (rtsVa);
-    Quat rotation = pSettings->mRotation;
+    const Quat rotation = pSettings->mRotation;
     return rotation.GetY();
 }
 
@@ -136,6 +136,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
   (JNIEnv *, jclass, jlong settingsVa) {
     const RotatedTranslatedShapeSettings * const pSettings
             = reinterpret_cast<RotatedTranslatedShapeSettings *> (settingsVa);
-    Quat rotation = pSettings->mRotation;
+    const Quat rotation = pSettings->mRotation;
     return rotation.GetZ();
 }

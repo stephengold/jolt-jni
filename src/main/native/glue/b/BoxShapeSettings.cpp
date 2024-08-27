@@ -37,7 +37,7 @@ using namespace JPH;
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_createBoxShapeSettings
   (JNIEnv *, jclass, jfloat xHalfExtent, jfloat yHalfExtent, jfloat zHalfExtent) {
-    Vec3 halfExtents(xHalfExtent, yHalfExtent, zHalfExtent);
+    const Vec3 halfExtents(xHalfExtent, yHalfExtent, zHalfExtent);
     BoxShapeSettings * const pResult = new BoxShapeSettings(halfExtents);
     TRACE_NEW("BoxShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);

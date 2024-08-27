@@ -38,8 +38,8 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_createRotatedTranslatedShape
   (JNIEnv *, jclass, jfloat offsetX, jfloat offsetY, jfloat offsetZ,
   jfloat rotX, jfloat rotY, jfloat rotZ, jfloat rotW, jlong baseShapeVa) {
-    Vec3 offset(offsetX, offsetY, offsetZ);
-    Quat rotation(rotX, rotY, rotZ, rotW);
+    const Vec3 offset(offsetX, offsetY, offsetZ);
+    const Quat rotation(rotX, rotY, rotZ, rotW);
     const Shape * const pBase = reinterpret_cast<Shape *> (baseShapeVa);
     RotatedTranslatedShape * const pResult
             = new RotatedTranslatedShape(offset, rotation, pBase);

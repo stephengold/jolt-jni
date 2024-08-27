@@ -132,7 +132,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Mat44_getElement
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_getQuaternion
   (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray storeArray) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    Quat quat = pMatrix->GetQuaternion();
+    const Quat quat = pMatrix->GetQuaternion();
     jboolean isCopy;
     jfloat * const pStore = pEnv->GetFloatArrayElements(storeArray, &isCopy);
     pStore[0] = quat.GetX();
@@ -167,7 +167,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3__J_
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
     jboolean isCopy;
     jfloat * const pArray = pEnv->GetFloatArrayElements(array, &isCopy);
-    Vec3 v(pArray[0], pArray[1], pArray[2]);
+    const Vec3 v(pArray[0], pArray[1], pArray[2]);
     Vec3 result = pMatrix->Multiply3x3(v);
     pArray[0] = result.GetX();
     pArray[1] = result.GetY();
@@ -185,7 +185,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3Tran
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
     jboolean isCopy;
     jfloat * const pArray = pEnv->GetFloatArrayElements(array, &isCopy);
-    Vec3 v(pArray[0], pArray[1], pArray[2]);
+    const Vec3 v(pArray[0], pArray[1], pArray[2]);
     Vec3 result = pMatrix->Multiply3x3Transposed(v);
     pArray[0] = result.GetX();
     pArray[1] = result.GetY();

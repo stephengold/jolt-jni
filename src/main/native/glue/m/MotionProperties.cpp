@@ -590,7 +590,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_setL
   (JNIEnv *, jclass, jlong propertiesVa, jfloat vx, jfloat vy, jfloat vz) {
     MotionProperties * const pProperties
             = reinterpret_cast<MotionProperties *> (propertiesVa);
-    Vec3 velocity(vx, vy, vz);
+    const Vec3 velocity(vx, vy, vz);
     pProperties->SetLinearVelocity(velocity);
 }
 

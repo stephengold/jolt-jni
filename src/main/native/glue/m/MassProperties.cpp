@@ -177,6 +177,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MassProperties_transl
   (JNIEnv *, jclass, jlong propertiesVa, jfloat x, jfloat y, jfloat z) {
     MassProperties * const pProperties
             = reinterpret_cast<MassProperties *> (propertiesVa);
-    Vec3 offset(x, y, z);
+    const Vec3 offset(x, y, z);
     pProperties->Translate(offset);
 }

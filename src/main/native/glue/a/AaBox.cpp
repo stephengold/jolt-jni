@@ -38,7 +38,7 @@ using namespace JPH;
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_contains
   (JNIEnv *, jclass, jlong boxVa, jfloat x, jfloat y, jfloat z) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    Vec3 point(x, y, z);
+    const Vec3 point(x, y, z);
     const bool result = pBox->Contains(point);
     return result;
 }
@@ -62,8 +62,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox__
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox__FFFFFF
   (JNIEnv *, jclass, jfloat minX, jfloat minY, jfloat minZ, jfloat maxX, jfloat maxY, jfloat maxZ) {
-    Vec3 min(minX, minY, minZ);
-    Vec3 max(maxX, maxY, maxZ);
+    const Vec3 min(minX, minY, minZ);
+    const Vec3 max(maxX, maxY, maxZ);
     AABox * const pBox = new AABox(min, max);
     TRACE_NEW("AABox", pBox)
     return reinterpret_cast<jlong> (pBox);

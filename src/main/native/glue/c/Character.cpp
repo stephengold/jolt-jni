@@ -233,7 +233,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_getRotation
   (JNIEnv *pEnv, jclass, jlong characterVa, jfloatArray storeFloats, jboolean lockBodies) {
     const Character * const pCharacter
             = reinterpret_cast<Character *> (characterVa);
-    Quat orientation = pCharacter->GetRotation(lockBodies);
+    const Quat orientation = pCharacter->GetRotation(lockBodies);
     jboolean isCopy;
     jfloat * const pStoreFloats
             = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
