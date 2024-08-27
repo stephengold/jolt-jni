@@ -411,7 +411,7 @@ public class Character
     }
 
     /**
-     * Calculate the character's local-to-world coordinate transform. The
+     * Calculate the character's local-to-system coordinate transform. The
      * character is unaffected.
      *
      * @param lockBodies true&rarr;use the locking body interface,

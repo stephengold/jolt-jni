@@ -91,7 +91,7 @@ public class CharacterSettings
     /**
      * Alter the character's mass. (native field: mMass)
      *
-     * @param mass the desired mass (default=80)
+     * @param mass the desired mass (in kilograms, default=80)
      */
     public void setMass(float mass) {
         long settingsVa = va();
