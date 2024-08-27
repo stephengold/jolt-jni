@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstCharacterBaseSettings;
+import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -103,7 +104,7 @@ public class CharacterBaseSettings
      *
      * @param plane (not null, default={(0,1,0),-1e10})
      */
-    public void setSupportingVolume(Plane plane) {
+    public void setSupportingVolume(ConstPlane plane) {
         long settingsVa = va();
         float nx = plane.getNormalX();
         float ny = plane.getNormalY();

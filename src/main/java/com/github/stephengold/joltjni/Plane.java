@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -28,7 +29,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class Plane {
+final public class Plane implements ConstPlane {
     // *************************************************************************
     // fields
 
@@ -69,55 +70,6 @@ final public class Plane {
     // new methods exposed
 
     /**
-     * Return the constant in single precision. The plane is unaffected.
-     *
-     * @return the constant value
-     */
-    public float getConstant() {
-        return c;
-    }
-
-    /**
-     * Copy the normal direction. The plane is unaffected.
-     *
-     * @return a new vector
-     */
-    public Vec3 getNormal() {
-        Vec3 result = new Vec3(nx, ny, nz);
-        return result;
-    }
-
-    /**
-     * Return the first (X) component of the normal direction. The plane is
-     * unaffected.
-     *
-     * @return the component value
-     */
-    public float getNormalX() {
-        return nx;
-    }
-
-    /**
-     * Return the 2nd (Y) component of the normal direction. The plane is
-     * unaffected.
-     *
-     * @return the component value
-     */
-    public float getNormalY() {
-        return ny;
-    }
-
-    /**
-     * Return the 3rd (Z) component of the normal direction. The plane is
-     * unaffected.
-     *
-     * @return the component value
-     */
-    public float getNormalZ() {
-        return nz;
-    }
-
-    /**
      * Set all 4 components to specified values.
      *
      * @param nx the desired X component of the normal direction
@@ -150,6 +102,62 @@ final public class Plane {
         this.nx = normal.getX();
         this.ny = normal.getY();
         this.nz = normal.getZ();
+    }
+    // *************************************************************************
+    // ConstPlane methods
+
+    /**
+     * Return the constant in single precision. The plane is unaffected.
+     *
+     * @return the constant value
+     */
+    @Override
+    public float getConstant() {
+        return c;
+    }
+
+    /**
+     * Copy the normal direction. The plane is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getNormal() {
+        Vec3 result = new Vec3(nx, ny, nz);
+        return result;
+    }
+
+    /**
+     * Return the first (X) component of the normal direction. The plane is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    @Override
+    public float getNormalX() {
+        return nx;
+    }
+
+    /**
+     * Return the 2nd (Y) component of the normal direction. The plane is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    @Override
+    public float getNormalY() {
+        return ny;
+    }
+
+    /**
+     * Return the 3rd (Z) component of the normal direction. The plane is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    @Override
+    public float getNormalZ() {
+        return nz;
     }
     // *************************************************************************
     // Object methods
