@@ -58,6 +58,32 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
+ * Method:    getHalfHeight
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_getHalfHeight
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const CylinderShapeSettings * const pSettings
+            = reinterpret_cast<CylinderShapeSettings *> (settingsVa);
+    const float result = pSettings->mHalfHeight;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
+ * Method:    getRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_getRadius
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const CylinderShapeSettings * const pSettings
+            = reinterpret_cast<CylinderShapeSettings *> (settingsVa);
+    const float result = pSettings->mRadius;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
  * Method:    setConvexRadius
  * Signature: (JF)V
  */
@@ -66,4 +92,29 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings
     CylinderShapeSettings * const pSettings
             = reinterpret_cast<CylinderShapeSettings *> (settingsVa);
     pSettings->mConvexRadius = radius;
+}
+
+
+/*
+ * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
+ * Method:    setHalfHeight
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_setHalfHeight
+  (JNIEnv *, jclass, jlong settingsVa, jfloat halfHeight) {
+    CylinderShapeSettings * const pSettings
+            = reinterpret_cast<CylinderShapeSettings *> (settingsVa);
+    pSettings->mHalfHeight = halfHeight;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
+ * Method:    setRadius
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_setRadius
+  (JNIEnv *, jclass, jlong settingsVa, jfloat radius) {
+    CylinderShapeSettings * const pSettings
+            = reinterpret_cast<CylinderShapeSettings *> (settingsVa);
+    pSettings->mRadius = radius;
 }

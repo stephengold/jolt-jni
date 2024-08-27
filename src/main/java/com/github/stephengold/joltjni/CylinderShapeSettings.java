@@ -70,13 +70,61 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the convex radius.
+     * Return the half height. The settings are unaffected. (native field:
+     * mHalfHeight)
+     *
+     * @return half the height
+     *
+     */
+    public float getHalfHeight() {
+        long settingsVa = va();
+        float result = getHalfHeight(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the radius of the cylinder. The settings are unaffected (native
+     * field: mRadius)
+     *
+     * @return the radius (&ge;0)
+     */
+    public float getRadius() {
+        long settingsVa = va();
+        float result = getRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Alter the convex radius. (native field: mConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0)
      */
     public void setConvexRadius(float radius) {
         long settingsVa = va();
         setConvexRadius(settingsVa, radius);
+    }
+
+    /**
+     * Alter the half height. (native field: mHalfHeight)
+     *
+     * @param halfHeight one half of the desired height (&ge;0)
+     *
+     */
+    public void setHalfHeight(float halfHeight) {
+        long settingsVa = va();
+        setHalfHeight(settingsVa, halfHeight);
+    }
+
+    /**
+     * Return the radius of the cylinder. (native field: mRadius)
+     *
+     * @param radius the desired radius (&ge;0)
+     */
+    public void setRadius(float radius) {
+        long settingsVa = va();
+        setRadius(settingsVa, radius);
     }
     // *************************************************************************
     // native private methods
@@ -86,5 +134,13 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
 
     native private static float getConvexRadius(long settingsVa);
 
+    native private static float getHalfHeight(long settingsVa);
+
+    native private static float getRadius(long settingsVa);
+
     native private static void setConvexRadius(long settingsVa, float radius);
+
+    native private static void setHalfHeight(long settingsVa, float halfHeight);
+
+    native private static void setRadius(long settingsVa, float radius);
 }
