@@ -103,13 +103,43 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the convex radius.
+     * Copy the extent of the box. The settings are unaffected. (native field:
+     * mHalfExtent)
+     *
+     * @return a new vector: one-half of extent on each local axis
+     */
+    public Vec3 getHalfExtent() {
+        long settingsVa = va();
+        float hx = getHalfExtentX(settingsVa);
+        float hy = getHalfExtentY(settingsVa);
+        float hz = getHalfExtentZ(settingsVa);
+        Vec3 result = new Vec3(hx, hy, hz);
+
+        return result;
+    }
+
+    /**
+     * Alter the convex radius. (native field: mConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0)
      */
     public void setConvexRadius(float radius) {
         long settingsVa = va();
         setConvexRadius(settingsVa, radius);
+    }
+
+    /**
+     * Alter the extent of the box. (native field: mHalfExtent)
+     *
+     * @param halfExtents the desired half extents on each local axis (not null,
+     * all components &ge;0, unaffected, default=(0,0,0))
+     */
+    public void setHalfExtent(Vec3Arg halfExtents) {
+        long settingsVa = va();
+        float hx = halfExtents.getX();
+        float hy = halfExtents.getY();
+        float hz = halfExtents.getZ();
+        setHalfExtent(settingsVa, hx, hy, hz);
     }
     // *************************************************************************
     // native private methods
@@ -119,5 +149,14 @@ public class BoxShapeSettings extends ConvexShapeSettings {
 
     native private static float getConvexRadius(long settingsVa);
 
+    native private static float getHalfExtentX(long settingsVa);
+
+    native private static float getHalfExtentY(long settingsVa);
+
+    native private static float getHalfExtentZ(long settingsVa);
+
     native private static void setConvexRadius(long settingsVa, float radius);
+
+    native private static void setHalfExtent(
+            long settingsVa, float hx, float hy, float hz);
 }

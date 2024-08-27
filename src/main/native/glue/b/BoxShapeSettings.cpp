@@ -62,6 +62,45 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_BoxShapeSettings
+ * Method:    getHalfExtentX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_getHalfExtentX
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const BoxShapeSettings * const pSettings
+            = reinterpret_cast<BoxShapeSettings *> (settingsVa);
+    const float result = pSettings->mHalfExtent.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShapeSettings
+ * Method:    getHalfExtentY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_getHalfExtentY
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const BoxShapeSettings * const pSettings
+            = reinterpret_cast<BoxShapeSettings *> (settingsVa);
+    const float result = pSettings->mHalfExtent.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShapeSettings
+ * Method:    getHalfExtentZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_getHalfExtentZ
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const BoxShapeSettings * const pSettings
+            = reinterpret_cast<BoxShapeSettings *> (settingsVa);
+    const float result = pSettings->mHalfExtent.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShapeSettings
  * Method:    setConvexRadius
  * Signature: (JF)V
  */
@@ -70,4 +109,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_setC
     BoxShapeSettings * const pSettings
             = reinterpret_cast<BoxShapeSettings *> (settingsVa);
     pSettings->mConvexRadius = radius;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShapeSettings
+ * Method:    setHalfExtent
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_setHalfExtent
+  (JNIEnv *, jclass, jlong settingsVa, jfloat hx, jfloat hy, jfloat hz) {
+    BoxShapeSettings * const pSettings
+            = reinterpret_cast<BoxShapeSettings *> (settingsVa);
+    const Vec3 halfExtents(hx, hy, hz);
+    pSettings->mHalfExtent = halfExtents;
 }
