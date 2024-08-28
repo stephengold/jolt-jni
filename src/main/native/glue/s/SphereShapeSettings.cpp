@@ -33,11 +33,14 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_SphereShapeSettings
  * Method:    createSphereShapeSettings
- * Signature: (F)J
+ * Signature: (FJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_createSphereShapeSettings
-  (JNIEnv *, jclass, jfloat radius) {
-    SphereShapeSettings * const pResult = new SphereShapeSettings(radius);
+  (JNIEnv *, jclass, jfloat radius, jlong materialVa) {
+    const PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    SphereShapeSettings * const pResult
+            = new SphereShapeSettings(radius, pMaterial);
     TRACE_NEW("SphereShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

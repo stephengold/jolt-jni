@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 
 /**
  * Settings used to construct a {@code SphereShape}.
@@ -49,12 +50,25 @@ public class SphereShapeSettings extends ConvexShapeSettings {
      * @param radius the desired radius (&ge;0)
      */
     public SphereShapeSettings(float radius) {
-        long settingsVa = createSphereShapeSettings(radius);
+        this(radius, null);
+    }
+
+    /**
+     * Instantiate settings for the specified radius and material.
+     *
+     * @param radius the desired radius (&ge;0)
+     * @param material the desired surface properties (not null, unaffected) or
+     * {@code null} for default properties (default=null)
+     */
+    public SphereShapeSettings(float radius, ConstPhysicsMaterial material) {
+        long materialVa = (material == null) ? 0L : material.va();
+        long settingsVa = createSphereShapeSettings(radius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EShapeSubType.Sphere);
     }
     // *************************************************************************
     // native private methods
 
-    native private static long createSphereShapeSettings(float radius);
+    native private static long createSphereShapeSettings(
+            float radius, long materialVa);
 }
