@@ -57,6 +57,84 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    countTriangles
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_countTriangles
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    const IndexedTriangleList::size_type result
+        = pSettings->mIndexedTriangles.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    countTriangleVertices
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_countTriangleVertices
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    const VertexList::size_type result = pSettings->mTriangleVertices.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    getActiveEdgeCosThresholdAngle
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_getActiveEdgeCosThresholdAngle
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    const float result = pSettings->mActiveEdgeCosThresholdAngle;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    getMaxTrianglesPerLeaf
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_getMaxTrianglesPerLeaf
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    const uint result = pSettings->mMaxTrianglesPerLeaf;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    getPerTriangleUserData
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_getPerTriangleUserData
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    const bool result = pSettings->mPerTriangleUserData;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    setActiveEdgeCosThresholdAngle
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_setActiveEdgeCosThresholdAngle
+  (JNIEnv *, jclass, jlong settingsVa, jfloat cosine) {
+    MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    pSettings->mActiveEdgeCosThresholdAngle = cosine;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
  * Method:    setMaxTrianglesPerLeaf
  * Signature: (JI)V
  */
@@ -65,4 +143,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_set
     MeshShapeSettings * const pSettings
             = reinterpret_cast<MeshShapeSettings *> (settingsVa);
     pSettings->mMaxTrianglesPerLeaf = maxTriangles;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    setPerTriangleUserData
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_setPerTriangleUserData
+  (JNIEnv *, jclass, jlong settingsVa, jboolean include) {
+    MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    pSettings->mPerTriangleUserData = include;
 }

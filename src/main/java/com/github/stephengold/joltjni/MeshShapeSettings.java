@@ -63,7 +63,82 @@ public class MeshShapeSettings extends ShapeSettings {
     // new public methods
 
     /**
-     * Alter the maximum number of triangles per leaf.
+     * Return the number of triangles in the mesh. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countTriangles() {
+        long settingsVa = va();
+        int result = countTriangles(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the number of vertices in the mesh. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countTriangleVertices() {
+        long settingsVa = va();
+        int result = countTriangleVertices(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the cosine of the active-edge threshold angle. The settings are
+     * unaffected. (native field: mActiveEdgeCosThresholdAngle)
+     *
+     * @return the cosine
+     */
+    public float getActiveEdgeCosThresholdAngle() {
+        long settingsVa = va();
+        float result = getActiveEdgeCosThresholdAngle(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum number of triangles per leaf. The settings are
+     * unaffected. (native field: mMaxTrianglesPerLeaf)
+     *
+     * @return the maximum number
+     */
+    public int getMaxTrianglesPerLeaf() {
+        long settingsVa = va();
+        int result = getMaxTrianglesPerLeaf(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether each triangle will include user data. The settings are
+     * unaffected. (native field: mPerTriangleUserData)
+     *
+     * @return true if per-triangle data is included, otherwise false
+     */
+    public boolean getPerTriangleUserData() {
+        long settingsVa = va();
+        boolean result = getPerTriangleUserData(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Alter the active-edge threshold angle. (native field:
+     * mActiveEdgeCosThresholdAngle)
+     *
+     * @param cosine the cosine of the desired angle (default=0.996195)
+     */
+    public void setActiveEdgeCosThresholdAngle(float cosine) {
+        long settingsVa = va();
+        setActiveEdgeCosThresholdAngle(settingsVa, cosine);
+    }
+
+    /**
+     * Alter the maximum number of triangles per leaf. (native field:
+     * mMaxTrianglesPerLeaf)
      *
      * @param numTriangles the desired number (default=8)
      */
@@ -71,12 +146,40 @@ public class MeshShapeSettings extends ShapeSettings {
         long settingsVa = va();
         setMaxTrianglesPerLeaf(settingsVa, numTriangles);
     }
+
+    /**
+     * Alter whether each triangle will include user data. (native field:
+     * mPerTriangleUserData)
+     *
+     * @param include true to include per-triangle data, false to omit it
+     * (default=false)
+     */
+    public void setPerTriangleUserData(boolean include) {
+        long settingsVa = va();
+        setPerTriangleUserData(settingsVa, include);
+    }
     // *************************************************************************
     // native private methods
 
     native private static long createMeshShapeSettings(
             int numVertices, FloatBuffer vertices, long indicesVa);
 
+    native private static int countTriangles(long settingsVa);
+
+    native private static int countTriangleVertices(long settingsVa);
+
+    native private static float getActiveEdgeCosThresholdAngle(long settingsVa);
+
+    native private static int getMaxTrianglesPerLeaf(long settingsVa);
+
+    native private static boolean getPerTriangleUserData(long settingsVa);
+
+    native private static void setActiveEdgeCosThresholdAngle(
+            long settingsVa, float cosine);
+
     native private static void setMaxTrianglesPerLeaf(
             long settingsVa, int numTriangles);
+
+    native private static void setPerTriangleUserData(
+            long settingsVa, boolean include);
 }
