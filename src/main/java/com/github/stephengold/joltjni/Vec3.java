@@ -214,6 +214,17 @@ final public class Vec3 implements Vec3Arg {
         this.x = z;
         this.y = z;
     }
+
+    /**
+     * Create a vector with all components identical.
+     *
+     * @param value the desired component value
+     * @return a new vector
+     */
+    public static Vec3 sReplicate(float value) {
+        Vec3 result = new Vec3(value, value, value);
+        return result;
+    }
     // *************************************************************************
     // Vec3Arg methods
 
