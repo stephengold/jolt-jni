@@ -65,7 +65,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cou
     const MeshShapeSettings * const pSettings
             = reinterpret_cast<MeshShapeSettings *> (settingsVa);
     const IndexedTriangleList::size_type result
-        = pSettings->mIndexedTriangles.size();
+            = pSettings->mIndexedTriangles.size();
     return result;
 }
 
