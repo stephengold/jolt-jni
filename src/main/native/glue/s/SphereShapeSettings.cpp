@@ -44,3 +44,27 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_
     TRACE_NEW("SphereShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+/*
+ * Class:     com_github_stephengold_joltjni_SphereShapeSettings
+ * Method:    getRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_getRadius
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SphereShapeSettings * const pSettings
+            = reinterpret_cast<SphereShapeSettings *> (settingsVa);
+    const float result = pSettings->mRadius;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SphereShapeSettings
+ * Method:    setRadius
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_setRadius
+  (JNIEnv *, jclass, jlong settingsVa, jfloat radius) {
+    SphereShapeSettings * const pSettings
+            = reinterpret_cast<SphereShapeSettings *> (settingsVa);
+    pSettings->mRadius = radius;
+}

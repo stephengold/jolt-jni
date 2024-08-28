@@ -67,8 +67,38 @@ public class SphereShapeSettings extends ConvexShapeSettings {
         setSubType(EShapeSubType.Sphere);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the radius of the sphere. The settings are unaffected. (native
+     * field: mRadius)
+     *
+     *
+     * @return the radius (&ge;0)
+     */
+    public float getRadius() {
+        long settingsVa = va();
+        float result = getRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Alter the radius of the sphere. (native field: mRadius)
+     *
+     * @param radius the desired radius
+     */
+    public void setRadius(float radius) {
+        long settingsVa = va();
+        setRadius(settingsVa, radius);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createSphereShapeSettings(
             float radius, long materialVa);
+
+    native private static float getRadius(long settingsVa);
+
+    native private static void setRadius(long settingsVa, float radius);
 }
