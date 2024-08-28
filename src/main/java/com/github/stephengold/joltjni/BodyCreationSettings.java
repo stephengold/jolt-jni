@@ -91,6 +91,20 @@ public class BodyCreationSettings
      * @param motionType the desired motion type (not null)
      * @param objLayer the ID of the desired object layer
      */
+    public BodyCreationSettings(ShapeRef shapeRef, RVec3Arg loc,
+            QuatArg orient, EMotionType motionType, int objLayer) {
+        this(shapeRef.getPtr(), loc, orient, motionType, objLayer);
+    }
+
+    /**
+     * Instantiate settings for the specified shape reference.
+     *
+     * @param shapeRef a reference to the desired shape (not null)
+     * @param loc the desired location (not null, unaffected)
+     * @param orient the desired orientation (not null, unaffected)
+     * @param motionType the desired motion type (not null)
+     * @param objLayer the ID of the desired object layer
+     */
     public BodyCreationSettings(ShapeRefC shapeRef, RVec3Arg loc,
             QuatArg orient, EMotionType motionType, int objLayer) {
         this(shapeRef.getPtr(), loc, orient, motionType, objLayer);
