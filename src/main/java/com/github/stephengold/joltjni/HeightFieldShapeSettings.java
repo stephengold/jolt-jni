@@ -71,7 +71,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     // new methods exposed
 
     /**
-     * Return the cosine of the active edge threshold angle. The settings are
+     * Return the cosine of the active-edge threshold angle. The settings are
      * unaffected. (native field: mActiveEdgeCosThresholdAngle)
      *
      * @return the cosine
@@ -155,7 +155,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter the active edge threshold angle. (native field:
+     * Alter the active-edge threshold angle. (native field:
      * mActiveEdgeCosThresholdAngle)
      *
      * @param cosine the cosine of the desired angle (default=0.996195)

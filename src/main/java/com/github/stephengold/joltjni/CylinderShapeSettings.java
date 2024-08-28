@@ -58,7 +58,8 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     // new methods exposed
 
     /**
-     * Return the convex radius.
+     * Return the convex radius. The settings are unaffected. (native field:
+     * mConvexRadius)
      *
      * @return the convex radius (&ge;0)
      */
@@ -99,7 +100,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     /**
      * Alter the convex radius. (native field: mConvexRadius)
      *
-     * @param radius the desired convex radius (&ge;0)
+     * @param radius the desired convex radius (&ge;0, default=0.05)
      */
     public void setConvexRadius(float radius) {
         long settingsVa = va();
