@@ -69,7 +69,7 @@ abstract public class ConvexShapeSettings
      *
      * @param material the desired material, or null for none (default=null)
      */
-    public void setMaterial(PhysicsMaterial material) {
+    public void setMaterial(ConstPhysicsMaterial material) {
         long settingsVa = va();
         long materialVa = (material == null) ? 0L : material.va();
         setMaterial(settingsVa, materialVa);
