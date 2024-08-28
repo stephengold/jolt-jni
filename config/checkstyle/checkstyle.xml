@@ -10,7 +10,7 @@
 
     <!-- See https://checkstyle.org/filefilters/beforeexecutionexclusionfilefilter.html -->
     <module name="BeforeExecutionExclusionFileFilter">
-        <property name="fileNamePattern" value="ConvexVsMeshScene|HelloWorld"/>
+        <property name="fileNamePattern" value="ConvexVsMeshScene|HelloWorld|PyramidScene"/>
     </module>
 
     <!-- Checks for whitespace                        -->

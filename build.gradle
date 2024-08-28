@@ -238,6 +238,9 @@ tasks.register('ConvexVsMeshScene', JavaExec) {
 tasks.register('HelloWorld', JavaExec) {
     mainClass = 'testjoltjni.app.HelloWorld'
 }
+tasks.register('PyramidScene', JavaExec) {
+    mainClass = 'testjoltjni.app.PyramidScene'
+}
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
     enableAssertions true
