@@ -111,6 +111,9 @@ abstract public class ShapeSettings
             case MutableCompound:
                 result = new MutableCompoundShapeSettings(settingsVa);
                 break;
+            case Plane:
+                result = new PlaneShapeSettings(settingsVa);
+                break;
             case RotatedTranslated:
                 result = new RotatedTranslatedShapeSettings(settingsVa);
                 break;

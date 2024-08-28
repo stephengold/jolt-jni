@@ -153,5 +153,9 @@ public enum EShapeSubType {
     /**
      * user-defined convex shape #8
      */
-    UserConvex8
+    UserConvex8,
+    /**
+     * plane
+     */
+    Plane
 }

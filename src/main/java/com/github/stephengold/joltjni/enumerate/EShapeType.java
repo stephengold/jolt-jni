@@ -69,5 +69,9 @@ public enum EShapeType {
     /**
      * user-defined type #4
      */
-    User4
+    User4,
+    /**
+     * plane
+     */
+    Plane
 }
