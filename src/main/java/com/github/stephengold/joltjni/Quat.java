@@ -123,6 +123,16 @@ final public class Quat implements QuatArg {
         this.z = z;
         this.w = w;
     }
+
+    /**
+     * Create an identity quaternion (0,0,0,1).
+     *
+     * @return a new quaternion
+     */
+    public static Quat sIdentity() {
+        Quat result = new Quat();
+        return result;
+    }
     // *************************************************************************
     // QuatArg methods
 
