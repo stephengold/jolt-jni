@@ -101,6 +101,34 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
 
         return result;
     }
+
+    /**
+     * Alter the offset relative to the base shape. (native field=mPosition)
+     *
+     * @param offset the desired offset vector (not null, unaffected,
+     * default=(0,0,0))
+     */
+    public void setPosition(Vec3Arg offset) {
+        long rtsVa = va();
+        float offsetX = offset.getX();
+        float offsetY = offset.getY();
+        float offsetZ = offset.getZ();
+        setPosition(rtsVa, offsetX, offsetY, offsetZ);
+    }
+
+    /**
+     * Alter the rotation relative to the base shape. (native field=mRotation)
+     *
+     * @param rotation the desired rotation quaternion (not null, unaffected)
+     */
+    public void setRotation(QuatArg rotation) {
+        long rtsVa = va();
+        float rotW = rotation.getW();
+        float rotX = rotation.getX();
+        float rotY = rotation.getY();
+        float rotZ = rotation.getZ();
+        setRotation(rtsVa, rotX, rotY, rotZ, rotW);
+    }
     // *************************************************************************
     // native private methods
 
@@ -121,4 +149,10 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
     native private static float getRotationY(long rtsVa);
 
     native private static float getRotationZ(long rtsVa);
+
+    native private static void setPosition(
+            long rtsVa, float offsetX, float offsetY, float offsetZ);
+
+    native private static void setRotation(
+            long rtsVa, float rotX, float rotY, float rotZ, float rotW);
 }

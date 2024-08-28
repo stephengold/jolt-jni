@@ -139,3 +139,29 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSh
     const Quat rotation = pSettings->mRotation;
     return rotation.GetZ();
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_RotatedTranslatedShapeSettings
+ * Method:    setPosition
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShapeSettings_setPosition
+  (JNIEnv *, jclass, jlong settingsVa, jfloat offsetX, jfloat offsetY, jfloat offsetZ) {
+    RotatedTranslatedShapeSettings * const pSettings
+            = reinterpret_cast<RotatedTranslatedShapeSettings *> (settingsVa);
+    const Vec3 offset(offsetX, offsetY, offsetZ);
+    pSettings->mPosition = offset;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RotatedTranslatedShapeSettings
+ * Method:    setRotation
+ * Signature: (JFFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShapeSettings_setRotation
+  (JNIEnv *, jclass, jlong settingsVa, jfloat rotX, jfloat rotY, jfloat rotZ, jfloat rotW) {
+    RotatedTranslatedShapeSettings * const pSettings
+            = reinterpret_cast<RotatedTranslatedShapeSettings *> (settingsVa);
+    const Quat rotation(rotX, rotY, rotZ, rotW);
+    pSettings->mRotation = rotation;
+}
