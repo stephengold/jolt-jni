@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
  * A vector composed of 3 double-precision components, used to represent
@@ -68,6 +69,17 @@ final public class RVec3 implements RVec3Arg {
         this.xx = x;
         this.yy = y;
         this.zz = z;
+    }
+
+    /**
+     * Instantiate from a single-precision vector.
+     *
+     * @param vec the vector to copy (not null, unaffected)
+     */
+    public RVec3(Vec3Arg vec) {
+        this.xx = vec.getX();
+        this.yy = vec.getY();
+        this.zz = vec.getZ();
     }
     // *************************************************************************
     // new methods exposed
