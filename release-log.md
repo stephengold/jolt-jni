@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.6.0 released on TBD
+## Version 0.6.0 released on 28 August 2024
 
 + Renamed the `RefShape` class to `ShapeRef`.
 + Bugfix:  JVM crashes when `OnBodyDeactivated()` invoked by a native thread.
