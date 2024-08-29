@@ -8,7 +8,7 @@ jobs:
   Java11-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-20.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -39,7 +39,7 @@ jobs:
   Java17-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-14
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -65,7 +65,7 @@ jobs:
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -93,7 +93,7 @@ jobs:
   Java21-x-Linux_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -121,7 +121,7 @@ jobs:
   Java21-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-13
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/setup-java@v4
         with:
