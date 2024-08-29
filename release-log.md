@@ -1,5 +1,94 @@
 # release log for the jolt-jni project
 
+## Version 0.6.0 released on TBD
+
++ Renamed the `RefShape` class to `ShapeRef`.
++ Bugfix:  JVM crashes when `OnBodyDeactivated()` invoked by a native thread.
++ Bugfix:  work around `JobSystemSingleThreaded` deadlocks on Windows.
+
++ Added classes to the library:
+  + `BodyIdVector`
+  + `Character`
+  + `CharacterBase`
+  + `CharacterBaseSettings`
+  + `CharacterRef`
+  + `CharacterSettings`
+  + `CharacterSettingsRef`
+  + `CharacterVirtual`
+  + `CharacterVirtualRef`
+  + `CharacterVirtualSettings`
+  + `CharacterVirtualSettingsRef`
+  + `ConeConstraint`
+  + `ConeConstraintSettings`
+  + `CollideShapeResult`
+  + `Constraint`
+  + `Constraints`
+  + `ConstraintRef`
+  + `ConstraintSettings`
+  + `ConstraintSettingsRef`
+  + `Contact`
+  + `ContactList`
+  + `ContactManifold`
+  + `ContactSettings`
+  + `DistanceConstraint`
+  + `DistanceConstraintSettings`
+  + `FixedConstraint`
+  + `FixedConstraintSettings`
+  + `GearConstraint`
+  + `GearConstraintSettings`
+  + `HingeConstraint`
+  + `HingeConstraintSettings`
+  + `MotorSettings`
+  + `PhysicsMaterial`
+  + `PhysicsMaterialRef`
+  + `Plane`
+  + `PlaneShape`
+  + `PlaneShapeSettings`
+  + `PointConstraint`
+  + `PointConstraintSettings`
+  + `RMat44`
+  + `SixDofConstraint`
+  + `SixDofConstraintSettings`
+  + `SliderConstraint`
+  + `SliderConstraintSettings`
+  + `SpringSettings`
+  + `SubShapeId`
+  + `SubShapeIdPair`
+  + `TwoBodyConstraint`
+  + `TwoBodyConstraintSettings`
+
++ Added enums to the library:
+  + `EAxis` 
+  + `EBackFaceMode`
+  + `EConstraintSubType`
+  + `EConstraintSpace`
+  + `EConstraintType`
+  + `EGroundState`
+  + `EMotorState`
+  + `ESpringMode`
+  + `ESwingType`
+  + `ValidateResult`
+
++ Added interfaces to the library:
+  + `ConstBody`
+  + `ConstCharacter`
+  + `ConstCharacterBase`
+  + `ConstCharacterBaseSettings`
+  + `ConstCharacterSettings`
+  + `ConstCharacterVirtual`
+  + `ConstCharacterVirtualSettings`
+  + `ConstConstraint`
+  + `ConstConstraintSettings`
+  + `ConstContact`
+  + `ConstPhysicsMaterial`
+  + `ConstPlane`
+  + `ConstRMat44`
+
++ Added many public methods to the library.
++ Updated Jolt source code to 8feb90c (=sg240827).
++ Updated jSnapLoader to v1.0.0-stable .
++ Reorganized the "glue" source files into multiple directories.
+
 ## Version 0.5.0 released on 1 August 2024
 
 + Split off the Jolt Physics enums into a "joltjni.enumerate" package.
