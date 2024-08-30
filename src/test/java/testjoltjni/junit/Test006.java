@@ -330,8 +330,7 @@ public class Test006 {
      *
      * @param settings the settings to test (not null, unaffected)
      */
-    private static void testConvexSsDefaults(
-            ConvexShapeSettings settings) {
+    private static void testConvexSsDefaults(ConvexShapeSettings settings) {
         testSsDefaults(settings);
         Assert.assertEquals(1_000f, settings.getDensity(), 0f);
         Assert.assertNull(settings.getMaterial());
@@ -343,8 +342,7 @@ public class Test006 {
      *
      * @param settings the settings to test (not null, unaffected)
      */
-    private static void testCylinderSsDefaults(
-            CylinderShapeSettings settings) {
+    private static void testCylinderSsDefaults(CylinderShapeSettings settings) {
         testConvexSsDefaults(settings);
 
         Assert.assertEquals(0.05f, settings.getConvexRadius(), 0f);
