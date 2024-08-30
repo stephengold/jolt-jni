@@ -295,6 +295,7 @@
                     RECORD_COMPONENT_DEF"/>
         </module>
         <module name="NoWhitespaceBeforeCaseDefaultColon"/>
+        <module name="ConstructorsDeclarationGrouping"/>
         <module name="VariableDeclarationUsageDistance">
             <property name="allowedDistance" value="5"/>
         </module>
