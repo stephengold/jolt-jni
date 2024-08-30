@@ -164,7 +164,7 @@ public class Test006 {
         testMeshSsDefaults(settings);
         testMeshSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(settings, indices);
         System.gc();
     }
 
@@ -207,7 +207,7 @@ public class Test006 {
         testRotatedTranslatedSsDefaults(settings);
         testRotatedTranslatedSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(settings, baseShapeRef);
         System.gc();
     }
 
@@ -221,7 +221,7 @@ public class Test006 {
 
         testScaledSsDefaults(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(settings, baseShapeRef);
         System.gc();
     }
 
