@@ -26,7 +26,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class ShapeRef extends JoltPhysicsObject {
+final public class ShapeRef extends Ref {
     // *************************************************************************
     // constructors
 
@@ -43,13 +43,14 @@ final public class ShapeRef extends JoltPhysicsObject {
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
-    // new methods exposed
+    // Ref methods
 
     /**
      * Temporarily access the referenced {@code Shape}.
      *
      * @return a new JVM object that refers to the pre-existing native object
      */
+    @Override
     public Shape getPtr() {
         long refVa = va();
         long shapeVa = getPtr(refVa);
@@ -63,6 +64,7 @@ final public class ShapeRef extends JoltPhysicsObject {
      *
      * @return a new JVM object with a new native object assigned
      */
+    @Override
     public ShapeRef toRef() {
         long refVa = va();
         long copyVa = copy(refVa);

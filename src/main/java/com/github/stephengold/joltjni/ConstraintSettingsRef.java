@@ -26,7 +26,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ConstraintSettingsRef extends JoltPhysicsObject {
+public class ConstraintSettingsRef extends Ref {
     // *************************************************************************
     // constructors
 
@@ -43,13 +43,14 @@ public class ConstraintSettingsRef extends JoltPhysicsObject {
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
-    // new methods exposed
+    // Ref methods
 
     /**
      * Temporarily access the referenced {@code ConstraintSettings}.
      *
      * @return a new JVM object that refers to the pre-existing native object
      */
+    @Override
     public ConstraintSettings getPtr() {
         long refVa = va();
         long settingsVa = getPtr(refVa);
@@ -65,6 +66,7 @@ public class ConstraintSettingsRef extends JoltPhysicsObject {
      *
      * @return a new JVM object with a new native object assigned
      */
+    @Override
     public ConstraintSettingsRef toRef() {
         long refVa = va();
         long copyVa = copy(refVa);

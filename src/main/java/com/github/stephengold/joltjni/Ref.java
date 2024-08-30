@@ -22,64 +22,33 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A counted reference to a {@code CharacterVirtualSettings} object.
+ * A counted reference to a {@code RefTarget}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class CharacterVirtualSettingsRef extends Ref {
+abstract public class Ref extends JoltPhysicsObject {
     // *************************************************************************
     // constructors
 
     /**
-     * Instantiate a reference with the specified native object assigned.
-     *
-     * @param refVa the virtual address of the native object to assign (not
-     * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * Instantiate with no native object assigned.
      */
-    CharacterVirtualSettingsRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
-        setVirtualAddress(refVa, freeingAction);
+    protected Ref() {
     }
     // *************************************************************************
-    // Ref methods
+    // new methods exposed
 
     /**
-     * Temporarily access the referenced {@code CharacterVirtualSettings}.
+     * Temporarily access the referenced {@code RefTarget}.
      *
      * @return a new JVM object that refers to the pre-existing native object
      */
-    @Override
-    public CharacterVirtualSettings getPtr() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
-        CharacterVirtualSettings result
-                = new CharacterVirtualSettings(settingsVa);
-
-        return result;
-    }
+    abstract public RefTarget getPtr();
 
     /**
-     * Create a counted reference to the native {@code CharacterSettings}.
+     * Create a counted reference to the native {@code RefTarget}.
      *
      * @return a new JVM object with a new native object assigned
      */
-    @Override
-    public CharacterVirtualSettingsRef toRef() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        CharacterVirtualSettingsRef result
-                = new CharacterVirtualSettingsRef(copyVa, true);
-
-        return result;
-    }
-    // *************************************************************************
-    // native private methods
-
-    native private static long copy(long refVa);
-
-    native private static void free(long refVa);
-
-    native private static long getPtr(long refVa);
+    abstract public Ref toRef();
 }
