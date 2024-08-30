@@ -43,4 +43,22 @@ extern bool gTraceAllocations;
 #define TRACE_DELETE(className, pointer)
 #endif
 
+#define IMPLEMENT_REF(className, copyName, freeName, getPtrName) \
+  JNIEXPORT jlong JNICALL copyName(JNIEnv *, jclass, jlong refVa) { \
+    Ref<className> * const pRef = reinterpret_cast<Ref<className> *> (refVa); \
+    Ref<className> * const pResult = new Ref<className>(*pRef); \
+    TRACE_NEW("Ref<" #className ">", pResult) \
+    return reinterpret_cast<jlong> (pResult); \
+  } \
+  JNIEXPORT void JNICALL freeName(JNIEnv *, jclass, jlong refVa) { \
+    Ref<className> * const pRef = reinterpret_cast<Ref<className> *> (refVa); \
+    TRACE_DELETE("Ref<" #className ">", pRef) \
+    delete pRef; \
+  } \
+  JNIEXPORT jlong JNICALL getPtrName(JNIEnv *, jclass, jlong refVa) { \
+    Ref<className> * const pRef = reinterpret_cast<Ref<className> *> (refVa); \
+    className * const pResult = pRef->GetPtr(); \
+    return reinterpret_cast<jlong> (pResult); \
+  }
+
 #endif
