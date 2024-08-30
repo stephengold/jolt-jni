@@ -29,10 +29,16 @@ SOFTWARE.
 #include <Jolt/Physics/Collision/TransformedShape.h>
 
 #include "auto/com_github_stephengold_joltjni_Shape.h"
+#include "auto/com_github_stephengold_joltjni_ShapeRef.h"
 #include "glue/glue.h"
 #include <algorithm>
 
 using namespace JPH;
+
+IMPLEMENT_REF(Shape,
+  Java_com_github_stephengold_joltjni_ShapeRef_copy,
+  Java_com_github_stephengold_joltjni_ShapeRef_free,
+  Java_com_github_stephengold_joltjni_ShapeRef_getPtr)
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape

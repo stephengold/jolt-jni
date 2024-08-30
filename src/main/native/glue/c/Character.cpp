@@ -26,9 +26,15 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Character/Character.h>
 #include "auto/com_github_stephengold_joltjni_Character.h"
+#include "auto/com_github_stephengold_joltjni_CharacterRef.h"
 #include "glue/glue.h"
 
 using namespace JPH;
+
+IMPLEMENT_REF(Character,
+  Java_com_github_stephengold_joltjni_CharacterRef_copy,
+  Java_com_github_stephengold_joltjni_CharacterRef_free,
+  Java_com_github_stephengold_joltjni_CharacterRef_getPtr)
 
 /*
  * Class:     com_github_stephengold_joltjni_Character

@@ -26,9 +26,15 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/Shape.h>
 #include "auto/com_github_stephengold_joltjni_ShapeSettings.h"
+#include "auto/com_github_stephengold_joltjni_ShapeSettingsRef.h"
 #include "glue/glue.h"
 
 using namespace JPH;
+
+IMPLEMENT_REF(ShapeSettings,
+  Java_com_github_stephengold_joltjni_ShapeSettingsRef_copy,
+  Java_com_github_stephengold_joltjni_ShapeSettingsRef_free,
+  Java_com_github_stephengold_joltjni_ShapeSettingsRef_getPtr)
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeSettings

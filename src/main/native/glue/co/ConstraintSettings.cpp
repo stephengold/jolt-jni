@@ -26,9 +26,15 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Constraints/Constraint.h>
 #include "auto/com_github_stephengold_joltjni_ConstraintSettings.h"
+#include "auto/com_github_stephengold_joltjni_ConstraintSettingsRef.h"
 #include "glue/glue.h"
 
 using namespace JPH;
+
+IMPLEMENT_REF(ConstraintSettings,
+  Java_com_github_stephengold_joltjni_ConstraintSettingsRef_copy,
+  Java_com_github_stephengold_joltjni_ConstraintSettingsRef_free,
+  Java_com_github_stephengold_joltjni_ConstraintSettingsRef_getPtr)
 
 /*
  * Class:     com_github_stephengold_joltjni_ConstraintSettings

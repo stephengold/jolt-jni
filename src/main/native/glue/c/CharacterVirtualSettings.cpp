@@ -26,9 +26,15 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Character/CharacterVirtual.h>
 #include "auto/com_github_stephengold_joltjni_CharacterVirtualSettings.h"
+#include "auto/com_github_stephengold_joltjni_CharacterVirtualSettingsRef.h"
 #include "glue/glue.h"
 
 using namespace JPH;
+
+IMPLEMENT_REF(CharacterVirtualSettings,
+  Java_com_github_stephengold_joltjni_CharacterVirtualSettingsRef_copy,
+  Java_com_github_stephengold_joltjni_CharacterVirtualSettingsRef_free,
+  Java_com_github_stephengold_joltjni_CharacterVirtualSettingsRef_getPtr)
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings

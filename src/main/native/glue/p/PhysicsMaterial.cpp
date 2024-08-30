@@ -26,9 +26,15 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/PhysicsMaterial.h>
 #include "auto/com_github_stephengold_joltjni_PhysicsMaterial.h"
+#include "auto/com_github_stephengold_joltjni_PhysicsMaterialRef.h"
 #include "glue/glue.h"
 
 using namespace JPH;
+
+IMPLEMENT_REF(PhysicsMaterial,
+  Java_com_github_stephengold_joltjni_PhysicsMaterialRef_copy,
+  Java_com_github_stephengold_joltjni_PhysicsMaterialRef_free,
+  Java_com_github_stephengold_joltjni_PhysicsMaterialRef_getPtr)
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterial
