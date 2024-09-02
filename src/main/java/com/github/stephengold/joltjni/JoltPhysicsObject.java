@@ -88,7 +88,8 @@ abstract public class JoltPhysicsObject
      * @param action freeing action if the JVM object will own (be responsible
      * for freeing) the native object, or {@code null} if none
      */
-    protected void setVirtualAddress(long virtualAddress, Runnable action) {
+    final protected void setVirtualAddress(
+            long virtualAddress, Runnable action) {
         assert virtualAddress != 0L : "invalid virtual address";
         assert !hasAssignedNativeObject() : "native object already assigned";
         assert this.freeingAction == null : this.freeingAction;
