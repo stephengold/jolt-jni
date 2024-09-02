@@ -137,6 +137,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installDefaultAs
   (JNIEnv *, jclass) {
 #ifdef JPH_ENABLE_ASSERTS
     AssertFailed = DefaultAssertFailed;
+#else
+    Trace("Jolt.installDefaultAssertCallback() has no effect unless JPH_ENABLE_ASSERTS is defined.");
 #endif
 }
 
@@ -268,7 +270,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_setTraceAllocati
 #ifdef _DEBUG
     gTraceAllocations = setting;
 #else
-    Trace("setTraceAlloations() has no effect in a Release native library.");
+    Trace("Jolt.setTraceAllocations() has no effect in a Release native library.");
 #endif
 }
 
