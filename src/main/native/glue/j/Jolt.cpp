@@ -97,7 +97,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_detLog
 JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_getConfigurationString
   (JNIEnv *pEnv, jclass) {
     const char *pString = GetConfigurationString();
-    jstring result = pEnv->NewStringUTF("pString");
+    jstring result = pEnv->NewStringUTF(pString);
     return result;
 }
 
