@@ -24,8 +24,11 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include <Jolt/Jolt.h>
+#include <Jolt/ConfigurationString.h>
 #include <Jolt/Core/Factory.h>
+#include <Jolt/Core/Profiler.h>
 #include <Jolt/Core/TempAllocator.h>
+#include <Jolt/Physics/DeterminismLog.h>
 #include <Jolt/RegisterTypes.h>
 
 #include "auto/com_github_stephengold_joltjni_Jolt.h"
@@ -60,6 +63,54 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_destroyFactory
     TRACE_DELETE("Factory", Factory::sInstance)
     delete Factory::sInstance;
     Factory::sInstance = nullptr;
+}
+
+#ifndef JPH_ENABLE_DETERMINISM_LOG
+bool gWarnDetLogIneffective = true;
+#endif
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    detLog
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_detLog
+  (JNIEnv *pEnv, jclass, jstring message) {
+#ifdef JPH_ENABLE_DETERMINISM_LOG
+    jboolean isCopy;
+    const char * const pMessage = pEnv->GetStringUTFChars(message, &isCopy);
+    JPH_DET_LOG(pMessage);
+    pEnv->ReleaseStringUTFChars(message, pMessage);
+#else
+    if (gWarnDetLogIneffective) {
+        Trace("Jolt.detLog() has no effect unless JPH_ENABLE_DETERMINISM_LOG is defined.");
+        gWarnDetLogIneffective = false;
+    }
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    getConfigurationString
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_getConfigurationString
+  (JNIEnv *pEnv, jclass) {
+    const char *pString = GetConfigurationString();
+    jstring result = pEnv->NewStringUTF("pString");
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    hashBytes
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__JI
+  (JNIEnv *, jclass, jlong dataVa, jint inSize) {
+    const void * const pData = reinterpret_cast<void *> (dataVa);
+    const uint64 result = HashBytes(pData, inSize);
+    return result;
 }
 
 #ifdef JPH_ENABLE_ASSERTS
@@ -123,6 +174,52 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_isDoublePrec
 #else
     return JNI_FALSE;
 #endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    profileDump
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_profileDump
+  (JNIEnv *pEnv, jclass, jstring message) {
+    jboolean isCopy;
+    const char * const pMessage = pEnv->GetStringUTFChars(message, &isCopy);
+    JPH_PROFILE_DUMP(pMessage);
+    pEnv->ReleaseStringUTFChars(message, pMessage);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    profileEnd
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_profileEnd
+  (JNIEnv *, jclass) {
+    JPH_PROFILE_END();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    profileNextFrame
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_profileNextFrame
+  (JNIEnv *, jclass) {
+    JPH_PROFILE_NEXTFRAME();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    profileStart
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_profileStart
+  (JNIEnv *pEnv, jclass, jstring name) {
+    jboolean isCopy;
+    const char * const pName = pEnv->GetStringUTFChars(name, &isCopy);
+    JPH_PROFILE_START(pName);
+    pEnv->ReleaseStringUTFChars(name, pName);
 }
 
 /*
@@ -193,5 +290,29 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_unregisterTypes
 JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_versionString
   (JNIEnv *pEnv, jclass) {
     jstring result = pEnv->NewStringUTF("0.6.1-SNAPSHOT");
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    hashBytes
+ * Signature: (DDDJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__DDDJ
+  (JNIEnv *, jclass, jdouble xx, jdouble yy, jdouble zz, jlong oldHash) {
+    const RVec3 vector(xx, yy, zz);
+    const uint64 result = HashBytes(&vector, sizeof(RVec3), oldHash);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    hashBytes
+ * Signature: (FFFFJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__FFFFJ
+  (JNIEnv *, jclass, jfloat qx, jfloat qy, jfloat qz, jfloat qw, jlong oldHash) {
+    const Quat quat(qx, qy, qz, qw);
+    const uint64 result = HashBytes(&quat, sizeof(Quat), oldHash);
     return result;
 }

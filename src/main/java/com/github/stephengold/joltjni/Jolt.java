@@ -73,6 +73,62 @@ final public class Jolt {
     native public static void destroyFactory();
 
     /**
+     * Append a message to the determinism log.
+     *
+     * @param message (not null)
+     */
+    native public static void detLog(String message);
+
+    /**
+     * Return a string containing important configuration settings.
+     *
+     * @return the string value
+     */
+    native public static String getConfigurationString();
+
+    /**
+     * Return a hash code for the specified data bytes.
+     *
+     * @param dataVa the virtual address of the data, or 0 for no data
+     * @param inSize the number of data bytes, or 0 for no data
+     * @return the hash code
+     */
+    native public static long hashBytes(long dataVa, int inSize);
+
+    /**
+     * Combine the specified quaternion with the specified hash code.
+     *
+     * @param quaternion the quaternion to combine (not null, unaffected)
+     * @param oldHash the old hash code
+     * @return the new hash code
+     */
+    public static long hashBytes(Quat quaternion, long oldHash) {
+        float qw = quaternion.getW();
+        float qx = quaternion.getX();
+        float qy = quaternion.getY();
+        float qz = quaternion.getZ();
+        long result = hashBytes(qx, qy, qz, qw, oldHash);
+
+        return result;
+    }
+
+    /**
+     * Combine the specified vector with the specified hash code.
+     *
+     * @param vector the vector to combine (not null, unaffected)
+     * @param oldHash the old hash code
+     * @return the new hash code
+     */
+    public static long hashBytes(RVec3 vector, long oldHash) {
+        double xx = vector.xx();
+        double yy = vector.yy();
+        double zz = vector.zz();
+        long result = hashBytes(xx, yy, zz, oldHash);
+
+        return result;
+    }
+
+    /**
      * Install the default assert callback.
      */
     native public static void installDefaultAssertCallback();
@@ -128,6 +184,30 @@ final public class Jolt {
     }
 
     /**
+     * Dump profiler data.
+     *
+     * @param message (not null)
+     */
+    native public static void profileDump(String message);
+
+    /**
+     * Terminate the profiler.
+     */
+    native public static void profileEnd();
+
+    /**
+     * Increment profiler's frame counter.
+     */
+    native public static void profileNextFrame();
+
+    /**
+     * Start an instrumented code section.
+     *
+     * @param name the section name (not null)
+     */
+    native public static void profileStart(String name);
+
+    /**
      * Create a factory for deserialization of saved data.
      *
      * @see destroyFactory
@@ -169,4 +249,12 @@ final public class Jolt {
      * @return the version string (not null, not empty)
      */
     native public static String versionString();
+    // *************************************************************************
+    // new methods exposed
+
+    native private static long hashBytes(
+            double xx, double yy, double zz, long oldHash);
+
+    native private static long hashBytes(
+            float qx, float qy, float qz, float qw, long oldHash);
 }
