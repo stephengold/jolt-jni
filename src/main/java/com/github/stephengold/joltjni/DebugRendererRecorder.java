@@ -22,46 +22,38 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A non-copyable Jolt Physics object.
+ * A {@code DebugRenderer} that records events for future playback.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class NonCopyable extends JoltPhysicsObject {
+public class DebugRendererRecorder extends DebugRenderer {
     // *************************************************************************
     // constructors
 
     /**
-     * Instantiate with no native object assigned.
-     */
-    protected NonCopyable() {
-    }
-
-    /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate a recorder that uses the specified stream for output.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param stream the output stream to use (not null)
      */
-    protected NonCopyable(long virtualAddress) {
-        super(virtualAddress);
+    public DebugRendererRecorder(StreamOut stream) {
+        long streamVa = stream.va();
+        long recorderVa = createDebugRendererRecorder(streamVa);
+        setVirtualAddress(recorderVa, true);
     }
     // *************************************************************************
-    // new protected methods
+    // new methods exposed
 
     /**
-     * Assign a native object, assuming there's none already assigned.
-     *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * Signify the end of a frame.
      */
-    protected void setVirtualAddress(long virtualAddress, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(virtualAddress) : null;
-        setVirtualAddress(virtualAddress, freeingAction);
+    public void endFrame() {
+        long recorderVa = va();
+        endFrame(recorderVa);
     }
     // *************************************************************************
     // native private methods
 
-    native private static void free(long virtualAddress);
+    native private static long createDebugRendererRecorder(long streamVa);
+
+    native private static void endFrame(long recorderVa);
 }

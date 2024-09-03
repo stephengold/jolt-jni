@@ -124,6 +124,7 @@ model {
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 if (isDebug) {
                     cppCompiler.define '_DEBUG'
+                    cppCompiler.define 'JPH_DEBUG_RENDERER'
                     cppCompiler.define 'JPH_ENABLE_ASSERTS'
                 }
                 Boolean isDp = (flavor == flavors.Dp)
@@ -393,7 +394,7 @@ tasks.register('unpackJoltSource', Copy) {
 
 // Register cleanup tasks:
 
-clean.dependsOn('cleanAutoHeaders', 'cleanLogs')
+clean.dependsOn('cleanAutoHeaders', 'cleanLogs', 'cleanRecordings')
 
 tasks.register('cleanAutoHeaders', Delete) { // auto-generated JNI headers
     delete 'src/main/native/auto'
@@ -406,4 +407,7 @@ tasks.register('cleanJoltSource', Delete) { // unpacked Jolt Physics source code
 }
 tasks.register('cleanLogs', Delete) { // JVM crash logs
     delete fileTree(dir: '.', include: 'hs_err_pid*.log')
+}
+tasks.register('cleanRecordings', Delete) { // DebugRenderer recordings
+    delete fileTree(dir: '.', include: 'performance_test_*.jor')
 }

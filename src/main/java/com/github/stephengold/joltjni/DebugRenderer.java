@@ -22,46 +22,52 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A non-copyable Jolt Physics object.
+ * Visualization for debugging purposes.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class NonCopyable extends JoltPhysicsObject {
+abstract public class DebugRenderer extends NonCopyable {
+    // *************************************************************************
+    // fields
+
+    /**
+     * only one instance (singleton class)
+     */
+    private static DebugRenderer instance;
     // *************************************************************************
     // constructors
 
     /**
      * Instantiate with no native object assigned.
      */
-    protected NonCopyable() {
-    }
+    protected DebugRenderer() {
+        // The native object is a singleton.
+        // If a previous instance hasn't been freed,
+        // a (native) assertion failure is possible.
 
-    /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
-     */
-    protected NonCopyable(long virtualAddress) {
-        super(virtualAddress);
+        if (instance != null) {
+            instance.close();
+        }
+        instance = this;
     }
     // *************************************************************************
-    // new protected methods
+    // NonCopyable methods
 
     /**
      * Assign a native object, assuming there's none already assigned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param rendererVa the virtual address of the native object to assign (not
+     * zero)
      * @param owner true &rarr; make the JVM object the owner, false &rarr; it
      * isn't the owner
      */
-    protected void setVirtualAddress(long virtualAddress, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(virtualAddress) : null;
-        setVirtualAddress(virtualAddress, freeingAction);
+    @Override
+    protected void setVirtualAddress(long rendererVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(rendererVa) : null;
+        setVirtualAddress(rendererVa, freeingAction);
     }
     // *************************************************************************
     // native private methods
 
-    native private static void free(long virtualAddress);
+    native private static void free(long rendererVa);
 }
