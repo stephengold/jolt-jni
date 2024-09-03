@@ -168,7 +168,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3__J_
     jboolean isCopy;
     jfloat * const pArray = pEnv->GetFloatArrayElements(array, &isCopy);
     const Vec3 v(pArray[0], pArray[1], pArray[2]);
-    Vec3 result = pMatrix->Multiply3x3(v);
+    const Vec3 result = pMatrix->Multiply3x3(v);
     pArray[0] = result.GetX();
     pArray[1] = result.GetY();
     pArray[2] = result.GetZ();
@@ -186,7 +186,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3Tran
     jboolean isCopy;
     jfloat * const pArray = pEnv->GetFloatArrayElements(array, &isCopy);
     const Vec3 v(pArray[0], pArray[1], pArray[2]);
-    Vec3 result = pMatrix->Multiply3x3Transposed(v);
+    const Vec3 result = pMatrix->Multiply3x3Transposed(v);
     pArray[0] = result.GetX();
     pArray[1] = result.GetY();
     pArray[2] = result.GetZ();

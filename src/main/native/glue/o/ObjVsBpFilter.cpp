@@ -54,7 +54,7 @@ public:
     }
 
     virtual bool ShouldCollide(ObjectLayer inLayer1, BroadPhaseLayer inLayer2) const override {
-        bool result = mppEnable[inLayer1][inLayer2.GetValue()];
+        const bool result = mppEnable[inLayer1][inLayer2.GetValue()];
         return result;
     }
 

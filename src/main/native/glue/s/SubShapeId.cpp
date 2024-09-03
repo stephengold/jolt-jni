@@ -63,6 +63,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SubShapeId_free
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SubShapeId_getValue
   (JNIEnv *, jclass, jlong idVa) {
     const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
-    SubShapeID::Type result = pId->GetValue();
+    const SubShapeID::Type result = pId->GetValue();
     return result;
 }

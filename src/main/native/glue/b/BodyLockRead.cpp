@@ -77,7 +77,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyLockRead_succ
   (JNIEnv *, jclass, jlong lockVa) {
     const BodyLockRead * const pLock
             = reinterpret_cast<BodyLockRead *> (lockVa);
-    bool result = pLock->Succeeded();
+    const bool result = pLock->Succeeded();
     return result;
 }
 
@@ -90,6 +90,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyLockRead_succ
   (JNIEnv *, jclass, jlong lockVa) {
     const BodyLockRead * const pLock
             = reinterpret_cast<BodyLockRead *> (lockVa);
-    bool result = pLock->SucceededAndIsInBroadPhase();
+    const bool result = pLock->SucceededAndIsInBroadPhase();
     return result;
 }

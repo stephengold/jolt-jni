@@ -368,7 +368,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Character_setShap
   jfloat maxPenetrationDepth, jboolean lockBodies) {
     Character * const pCharacter = reinterpret_cast<Character *> (characterVa);
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    bool result = pCharacter->SetShape(pShape, maxPenetrationDepth, lockBodies);
+    const bool result = pCharacter->SetShape(pShape, maxPenetrationDepth, lockBodies);
     return result;
 }
 

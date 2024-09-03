@@ -52,7 +52,7 @@ public:
     }
 
     virtual bool ShouldCollide(ObjectLayer inLayer1, ObjectLayer inLayer2) const override {
-        bool result = mppEnable[inLayer1][inLayer2];
+        const bool result = mppEnable[inLayer1][inLayer2];
         return result;
     }
 
