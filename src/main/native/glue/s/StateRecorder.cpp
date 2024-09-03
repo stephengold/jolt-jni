@@ -36,10 +36,10 @@ using namespace JPH;
  * Signature: (J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_StateRecorder_isValidating
-  (JNIEnv *, jclass, jlong filterVa) {
-    const StateRecorder * const pFilter
-            = reinterpret_cast<StateRecorder *> (filterVa);
-    bool result = pFilter->IsValidating();
+  (JNIEnv *, jclass, jlong recorderVa) {
+    const StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    const bool result = pRecorder->IsValidating();
     return result;
 }
 
@@ -49,8 +49,8 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_StateRecorder_isV
  * Signature: (JZ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_setValidating
-  (JNIEnv *, jclass, jlong filterVa, jboolean setting) {
-    StateRecorder * const pFilter
-            = reinterpret_cast<StateRecorder *> (filterVa);
-    pFilter->SetValidating(setting);
+  (JNIEnv *, jclass, jlong recorderVa, jboolean setting) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    pRecorder->SetValidating(setting);
 }
