@@ -59,6 +59,26 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_create
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    drawBodies
+ * Signature: (JJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_drawBodies
+  (JNIEnv *, jclass, jlong systemVa, jlong settingsVa, jlong rendererVa) {
+#ifdef JPH_DEBUG_RENDERER
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const BodyManager::DrawSettings * const pSettings
+            = reinterpret_cast<BodyManager::DrawSettings *> (settingsVa);
+    DebugRenderer * const pRenderer
+            = reinterpret_cast<DebugRenderer *> (rendererVa);
+    pSystem->DrawBodies(*pSettings, pRenderer);
+#else
+    Trace("PhysicsSystem.drawBodies() has no effect unless JPH_DEBUG_RENDERER is defined.");
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getActiveBodies
  * Signature: (JIJ)V
  */
@@ -113,6 +133,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBod
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getBodyInterfaceNoLock
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBodyInterfaceNoLock
+  (JNIEnv *, jclass, jlong systemVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const BodyInterface& result = pSystem->GetBodyInterfaceNoLock();
+    return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getBodyLockInterface
  * Signature: (J)J
  */
@@ -121,6 +154,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBod
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     const BodyLockInterface& result = pSystem->GetBodyLockInterface();
+    return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getBodyLockInterfaceNoLock
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBodyLockInterfaceNoLock
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const BodyLockInterfaceNoLock& result
+            = pSystem->GetBodyLockInterfaceNoLock();
     return reinterpret_cast<jlong> (&result);
 }
 

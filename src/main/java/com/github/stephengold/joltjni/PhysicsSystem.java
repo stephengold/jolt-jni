@@ -42,6 +42,10 @@ public class PhysicsSystem extends NonCopyable {
      */
     final private BodyInterface bodyInterface;
     /**
+     * manage bodies associated with this system (not null)
+     */
+    final private BodyInterface bodyInterfaceNoLock;
+    /**
      * protect the BroadPhaseLayerInterface from garbage collection
      */
     private ConstBroadPhaseLayerInterface map;
@@ -63,8 +67,11 @@ public class PhysicsSystem extends NonCopyable {
         long systemVa = createPhysicsSystem();
         setVirtualAddress(systemVa, true);
 
-        long bodyInterfaceVa = getBodyInterface(systemVa);
-        this.bodyInterface = new BodyInterface(this, bodyInterfaceVa);
+        long lockingVa = getBodyInterface(systemVa);
+        this.bodyInterface = new BodyInterface(this, lockingVa);
+
+        long noLockVa = getBodyInterfaceNoLock(systemVa);
+        this.bodyInterfaceNoLock = new BodyInterface(this, noLockVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -78,6 +85,19 @@ public class PhysicsSystem extends NonCopyable {
         long systemVa = va();
         long constraintVa = constraint.va();
         addConstraint(systemVa, constraintVa);
+    }
+
+    /**
+     * Render the state of the system, for debugging purposes.
+     *
+     * @param settings the settings to use (not null)
+     * @param renderer the renderer to use (not null)
+     */
+    public void drawBodies(DrawSettings settings, DebugRenderer renderer) {
+        long systemVa = va();
+        long settingsVa = settings.va();
+        long rendererVa = renderer.va();
+        drawBodies(systemVa, settingsVa, rendererVa);
     }
 
     /**
@@ -135,6 +155,17 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Access a version of the system's {@code BodyInterface} that does not use
+     * locks.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public BodyInterface getBodyInterfaceNoLock() {
+        assert bodyInterfaceNoLock != null;
+        return bodyInterfaceNoLock;
+    }
+
+    /**
      * Access the system's {@code BodyLockInterfaceLocking}.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -144,6 +175,20 @@ public class PhysicsSystem extends NonCopyable {
         long interfaceVa = getBodyLockInterface(systemVa);
         BodyLockInterfaceLocking result
                 = new BodyLockInterfaceLocking(this, interfaceVa);
+
+        return result;
+    }
+
+    /**
+     * Access the system's {@code BodyLockInterfaceNoLock}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public BodyLockInterfaceNoLock getBodyLockInterfaceNoLock() {
+        long systemVa = va();
+        long interfaceVa = getBodyLockInterfaceNoLock(systemVa);
+        BodyLockInterfaceNoLock result
+                = new BodyLockInterfaceNoLock(this, interfaceVa);
 
         return result;
     }
@@ -466,6 +511,9 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static long createPhysicsSystem();
 
+    native private static void drawBodies(
+            long systemVa, long settingsVa, long rendererVa);
+
     native private static void getActiveBodies(
             long systemVa, int ordinal, long vectorVa);
 
@@ -475,7 +523,11 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static long getBodyInterface(long systemVa);
 
+    native private static long getBodyInterfaceNoLock(long systemVa);
+
     native private static long getBodyLockInterface(long systemVa);
+
+    native private static long getBodyLockInterfaceNoLock(long systemVa);
 
     native private static long getBounds(long systemVa);
 
