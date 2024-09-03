@@ -140,6 +140,36 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Create a copy of the 1st (X) principal axis.
+     *
+     * @return a new vector
+     */
+    public static Vec3 sAxisX() {
+        Vec3 result = new Vec3(1f, 0f, 0f);
+        return result;
+    }
+
+    /**
+     * Create a copy of the 2nd (Y) principal axis.
+     *
+     * @return a new vector
+     */
+    public static Vec3 sAxisY() {
+        Vec3 result = new Vec3(0f, 1f, 0f);
+        return result;
+    }
+
+    /**
+     * Create a copy of the 3rd (Z) principal axis.
+     *
+     * @return a new vector
+     */
+    public static Vec3 sAxisZ() {
+        Vec3 result = new Vec3(0f, 0f, 1f);
+        return result;
+    }
+
+    /**
      * Set all 3 components to specified values.
      *
      * @param x the desired X component
