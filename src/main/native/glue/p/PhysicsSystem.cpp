@@ -387,6 +387,38 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_removeC
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    restoreState
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_restoreState
+  (JNIEnv *, jclass, jlong systemVa, jlong recorderVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    bool result = pSystem->RestoreState(*pRecorder);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    saveState
+ * Signature: (JJIJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_saveState
+  (JNIEnv *, jclass, jlong systemVa, jlong recorderVa, jint bitmask, jlong filterVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    const EStateRecorderState srs = (EStateRecorderState) bitmask;
+    const StateRecorderFilter * const pFilter
+            = reinterpret_cast<StateRecorderFilter *> (filterVa);
+    pSystem->SaveState(*pRecorder, srs, pFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    setBodyActivationListener
  * Signature: (JJ)V
  */

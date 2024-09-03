@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EBodyType;
+import com.github.stephengold.joltjni.enumerate.EStateRecorderState;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
@@ -414,6 +415,54 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Restore the system's state from the specified recorder, for replay.
+     *
+     * @param recorder where to read the state from (not null)
+     * @return true if successful, otherwise false
+     */
+    public boolean restoreState(StateRecorder recorder) {
+        long systemVa = va();
+        long recorderVa = recorder.va();
+        boolean result = restoreState(systemVa, recorderVa);
+
+        return result;
+    }
+
+    /**
+     * Save the system's state to be replayed later.
+     *
+     * @param recorder where to save the state (not null)
+     */
+    public void saveState(StateRecorder recorder) {
+        saveState(recorder, EStateRecorderState.All);
+    }
+
+    /**
+     * Save the aspects of the system's state to be replayed later.
+     *
+     * @param recorder where to save the state (not null)
+     * @param bitmask which aspects of the simulation to save
+     */
+    public void saveState(StateRecorder recorder, int bitmask) {
+        saveState(recorder, bitmask, null);
+    }
+
+    /**
+     * Save aspects of the system's state to be replayed later.
+     *
+     * @param recorder where to save the state (not null)
+     * @param bitmask which aspects of the simulation to save
+     * @param filter select which parts to save (may be null, unaffected)
+     */
+    public void saveState(
+            StateRecorder recorder, int bitmask, StateRecorderFilter filter) {
+        long systemVa = va();
+        long recorderVa = recorder.va();
+        long filterVa = (filter == null) ? 0L : filter.va();
+        saveState(systemVa, recorderVa, bitmask, filterVa);
+    }
+
+    /**
      * Replace the system's {@code BodyActivationListener}.
      *
      * @param listener the desired listener
@@ -562,6 +611,11 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static void removeConstraint(
             long systemVa, long constraintVa);
+
+    native private static boolean restoreState(long systemVa, long recorderVa);
+
+    native private static void saveState(
+            long systemVa, long recorderVa, int bitmask, long filterVa);
 
     native private static void setBodyActivationListener(
             long systemVa, long listenerVa);
