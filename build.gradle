@@ -233,14 +233,16 @@ tasks.withType(JavaCompile) { // Java compile-time options:
 application {
     mainClass = 'testjoltjni.app.HelloWorld'
 }
-tasks.register('ConvexVsMeshScene', JavaExec) {
-    mainClass = 'testjoltjni.app.ConvexVsMeshScene'
+tasks.register('ConvexVsMesh', JavaExec) {
+    args '-s=ConvexVsMesh'
+    mainClass = 'testjoltjni.app.PerformanceTest'
 }
 tasks.register('HelloWorld', JavaExec) {
     mainClass = 'testjoltjni.app.HelloWorld'
 }
 tasks.register('PyramidScene', JavaExec) {
-    mainClass = 'testjoltjni.app.PyramidScene'
+    args '-s=PyramidScene'
+    mainClass = 'testjoltjni.app.PerformanceTest'
 }
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath

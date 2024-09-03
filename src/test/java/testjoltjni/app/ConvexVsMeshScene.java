@@ -22,7 +22,6 @@ SOFTWARE.
 package testjoltjni.app;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import testjoltjni.TestUtils;
 
 /**
  * A straightforward Java translation of the Jolt Physics "convex vs mesh scene"
@@ -33,47 +32,13 @@ import testjoltjni.TestUtils;
  * @author Stephen Gold sgold@sonic.net
  */
 // A scene that drops a number of convex shapes on a sloping terrain made out of a mesh shape
-public class ConvexVsMeshScene {
-	private static final int OBJ_LAYER_NON_MOVING = 0;
-	private static final int OBJ_LAYER_MOVING = 1;
-	private static final int OBJ_NUM_LAYERS = 2;
-	private static final int BP_LAYER_NON_MOVING = 0;
-	private static final int BP_LAYER_MOVING = 1;
-	private static final int BP_NUM_LAYERS = 2;
-	public static void main(String[] argv) {
-		TestUtils.loadAndInitializeNativeLibrary();
-		TempAllocatorImpl temp_allocator = new TempAllocatorImpl(32 << 20); // 32 MiB
-		JobSystemThreadPool job_system = new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, TestUtils.numThreads());
-		final int cMaxBodies = 1_800;
-		final int cNumBodyMutexes = 0;
-		final int cMaxBodyPairs = 65_536;
-		final int cMaxContactConstraints = 20_480;
-		MapObj2Bp broad_phase_layer_interface = new MapObj2Bp(OBJ_NUM_LAYERS, BP_NUM_LAYERS)
-			.add(OBJ_LAYER_NON_MOVING, BP_LAYER_NON_MOVING)
-			.add(OBJ_LAYER_MOVING, BP_LAYER_MOVING);
-		ObjVsBpFilter object_vs_broadphase_layer_filter = new ObjVsBpFilter(OBJ_NUM_LAYERS, BP_NUM_LAYERS)
-			.disablePair(OBJ_LAYER_NON_MOVING, BP_LAYER_NON_MOVING);
-		ObjVsObjFilter object_vs_object_layer_filter = new ObjVsObjFilter(OBJ_NUM_LAYERS)
-			.disablePair(OBJ_LAYER_NON_MOVING, OBJ_LAYER_NON_MOVING);
-		PhysicsSystem physics_system = new PhysicsSystem();
-		physics_system.init(cMaxBodies, cNumBodyMutexes, cMaxBodyPairs, cMaxContactConstraints, broad_phase_layer_interface, object_vs_broadphase_layer_filter, object_vs_object_layer_filter);
-		Load();
-		StartTest(physics_system, EMotionQuality.LinearCast);
-		final float cDeltaTime = 1.0f / 60.0f;
-		physics_system.optimizeBroadPhase();
-		int step = 0;
-		for (;;) {
-			++step;
-			int numActive = physics_system.getNumActiveBodies(EBodyType.RigidBody);
-			System.out.println("Step " + step + ":  numActive = " + numActive);
-			if (numActive < 800) break;
-			final int cCollisionSteps = 1;
-			physics_system.update(cDeltaTime, cCollisionSteps, temp_allocator, job_system);
-		}
-		TestUtils.cleanup();
+class ConvexVsMeshScene implements PerformanceTestScene {
+	public String GetName()
+	{
+		return "ConvexVsMesh";
 	}
 
-        static boolean Load()
+        public boolean Load()
 	{
 		final int n = 100;
 		final float cell_size = 3.0f;
@@ -120,7 +85,7 @@ public class ConvexVsMeshScene {
 		// Create mesh shape creation settings
 		mMeshSettings = new BodyCreationSettings();
 		mMeshSettings.setMotionType(EMotionType.Static);
-		mMeshSettings.setObjectLayer(OBJ_LAYER_NON_MOVING);
+		mMeshSettings.setObjectLayer(Layers.OBJ_NON_MOVING);
 		mMeshSettings.setPosition(new RVec3(-center, max_height, -center));
 		mMeshSettings.setFriction(0.5f);
 		mMeshSettings.setRestitution(0.6f);
@@ -137,7 +102,7 @@ public class ConvexVsMeshScene {
 		return true;
 	}
 
-	static void			StartTest(PhysicsSystem inPhysicsSystem, EMotionQuality inMotionQuality)
+	public void			StartTest(PhysicsSystem inPhysicsSystem, EMotionQuality inMotionQuality)
 	{
 		// Reduce the solver iteration count, the scene doesn't have any constraints so we don't need the default amount of iterations
 		PhysicsSettings settings = inPhysicsSystem.getPhysicsSettings();
@@ -157,7 +122,7 @@ public class ConvexVsMeshScene {
 					BodyCreationSettings creation_settings = new BodyCreationSettings();
 					creation_settings.setMotionType(EMotionType.Dynamic);
 					creation_settings.setMotionQuality(inMotionQuality);
-					creation_settings.setObjectLayer(OBJ_LAYER_MOVING);
+					creation_settings.setObjectLayer(Layers.OBJ_MOVING);
 					creation_settings.setPosition(new RVec3(7.5 * x, 15.0 + 2.0 * y, 7.5 * z));
 					creation_settings.setFriction(0.5f);
 					creation_settings.setRestitution(0.6f);
@@ -168,4 +133,6 @@ public class ConvexVsMeshScene {
 
 	static BodyCreationSettings	mMeshSettings;
 	static ShapeRefC[]		mShapes;
+	public void StopTest(PhysicsSystem inPhysicsSystem) {
+        }
 }
