@@ -41,6 +41,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyLockRead_createB
             = reinterpret_cast<BodyLockInterface *> (lockVa);
     const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
     BodyLockRead * const pResult = new BodyLockRead(*pInterface, *pId);
+    TRACE_NEW("BodyLockRead", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
