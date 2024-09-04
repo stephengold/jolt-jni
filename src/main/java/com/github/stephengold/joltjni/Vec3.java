@@ -315,6 +315,46 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Test whether the vector is normalized to within a tolerance of 10^-6. The
+     * vector is unaffected.
+     *
+     * @return true if normalized, otherwise false
+     */
+    @Override
+    public boolean isNormalized() {
+        boolean result = isNormalized(1e-6f);
+        return result;
+    }
+
+    /**
+     * Test whether the vector is normalized to within the specified tolerance.
+     * The vector is unaffected.
+     *
+     * @param tolerance the desired tolerance
+     * @return true if normalized, otherwise false
+     */
+    @Override
+    public boolean isNormalized(float tolerance) {
+        float lengthSq = lengthSq();
+        if (Math.abs(lengthSq - 1f) <= tolerance) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Return the squared length. The vector is unaffected.
+     *
+     * @return the squared length
+     */
+    @Override
+    public float lengthSq() {
+        float result = x * x + y * y + z * z;
+        return result;
+    }
+
+    /**
      * Return the component-wise reciprocal. The vector is unaffected.
      *
      * @return a new vector

@@ -67,6 +67,30 @@ public interface Vec3Arg {
     float getZ();
 
     /**
+     * Test whether the vector is normalized to within a tolerance of 10^-6. The
+     * vector is unaffected.
+     *
+     * @return true if normalized, otherwise false
+     */
+    boolean isNormalized();
+
+    /**
+     * Test whether the vector is normalized to within the specified tolerance.
+     * The vector is unaffected.
+     *
+     * @param tolerance the desired tolerance
+     * @return true if normalized, otherwise false
+     */
+    boolean isNormalized(float tolerance);
+
+    /**
+     * Return the squared length. The vector is unaffected.
+     *
+     * @return the squared length
+     */
+    float lengthSq();
+
+    /**
      * Return the component-wise reciprocal. The vector is unaffected.
      *
      * @return a new vector
