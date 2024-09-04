@@ -133,6 +133,25 @@ final public class Quat implements QuatArg {
         Quat result = new Quat();
         return result;
     }
+
+    /**
+     * Create a rotation quaternion from a normalized rotation axis.
+     *
+     * @param axis the desired rotation axis (not null, normalized)
+     * @param angle the desired rotation angle (in radians)
+     * @return a new quaternion
+     */
+    public static Quat sRotation(Vec3 axis, float angle) {
+        assert axis.isNormalized();
+        float qw = (float) Math.cos(0.5 * angle);
+        float s = (float) Math.sin(0.5 * angle);
+        float qx = axis.getX() * s;
+        float qy = axis.getY() * s;
+        float qz = axis.getZ() * s;
+        Quat result = new Quat(qx, qy, qz, qw);
+
+        return result;
+    }
     // *************************************************************************
     // QuatArg methods
 
