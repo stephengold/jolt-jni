@@ -21,12 +21,14 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.template.Array;
+
 /**
  * A variable-length array of references to constraints.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Constraints extends JoltPhysicsObject {
+public class Constraints extends Array<ConstraintRef> {
     // *************************************************************************
     // constructors
 
@@ -43,13 +45,14 @@ public class Constraints extends JoltPhysicsObject {
         setVirtualAddress(arrayVa, freeingAction);
     }
     // *************************************************************************
-    // new methods exposed
+    // Array<ConstrantRef> methods
 
     /**
      * Count how many references the currently allocated storage can hold.
      *
      * @return the number of references (&ge;size)
      */
+    @Override
     public int capacity() {
         long arrayVa = va();
         int result = capacity(arrayVa);
@@ -57,24 +60,12 @@ public class Constraints extends JoltPhysicsObject {
     }
 
     /**
-     * Test whether the array contains any elements.
-     *
-     * @return true if empty, otherwise false
-     */
-    public boolean empty() {
-        if (size() == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Access the constraint at the specified index.
+     * Copy the reference at the specified index.
      *
      * @param elementIndex the index from which to get the reference (&ge;0)
      * @return a new reference to the same constraint
      */
+    @Override
     public ConstraintRef get(int elementIndex) {
         long arrayVa = va();
         long refVa = get(arrayVa, elementIndex);
@@ -88,6 +79,7 @@ public class Constraints extends JoltPhysicsObject {
      *
      * @param numReferences the desired size (number of references, &ge;0)
      */
+    @Override
     public void resize(int numReferences) {
         long arrayVa = va();
         resize(arrayVa, numReferences);
@@ -99,6 +91,7 @@ public class Constraints extends JoltPhysicsObject {
      * @param elementIndex the index at which to put the reference (&ge;0)
      * @param reference the reference to put (not null)
      */
+    @Override
     public void set(int elementIndex, ConstraintRef reference) {
         long arrayVa = va();
         long refVa = reference.va();
@@ -110,6 +103,7 @@ public class Constraints extends JoltPhysicsObject {
      *
      * @return the number of references (&ge;0, &le;capacity)
      */
+    @Override
     public int size() {
         long arrayVa = va();
         int result = size(arrayVa);

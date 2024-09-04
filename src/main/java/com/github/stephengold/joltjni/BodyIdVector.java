@@ -21,12 +21,14 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.template.Array;
+
 /**
  * A variable-length vector (array) of body IDs.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BodyIdVector extends JoltPhysicsObject {
+public class BodyIdVector extends Array<BodyId> {
     // *************************************************************************
     // constructors
 
@@ -38,30 +40,18 @@ public class BodyIdVector extends JoltPhysicsObject {
         setVirtualAddress(vectorVa, () -> free(vectorVa));
     }
     // *************************************************************************
-    // new methods exposed
+    // Array<BodyId> methods
 
     /**
      * Count how many IDs the currently allocated storage can hold.
      *
      * @return the number of IDs (&ge;size)
      */
+    @Override
     public int capacity() {
         long vectorVa = va();
         int result = capacity(vectorVa);
         return result;
-    }
-
-    /**
-     * Test whether the vector contains any elements.
-     *
-     * @return true if empty, otherwise false
-     */
-    public boolean empty() {
-        if (size() == 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
@@ -70,6 +60,7 @@ public class BodyIdVector extends JoltPhysicsObject {
      * @param elementIndex the index from which to get the ID (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public BodyId get(int elementIndex) {
         long vectorVa = va();
         long idVa = getId(vectorVa, elementIndex);
@@ -83,6 +74,7 @@ public class BodyIdVector extends JoltPhysicsObject {
      *
      * @param numIds the desired size (number of IDs, &ge;0)
      */
+    @Override
     public void resize(int numIds) {
         long vectorVa = va();
         resize(vectorVa, numIds);
@@ -94,6 +86,7 @@ public class BodyIdVector extends JoltPhysicsObject {
      * @param elementIndex the index at which to put the ID (&ge;0)
      * @param id the ID to put (not null)
      */
+    @Override
     public void set(int elementIndex, BodyId id) {
         long vectorId = va();
         long idVa = id.va();
@@ -105,6 +98,7 @@ public class BodyIdVector extends JoltPhysicsObject {
      *
      * @return the number of IDs (&ge;0, &le;capacity)
      */
+    @Override
     public int size() {
         long vectorVa = va();
         int result = size(vectorVa);

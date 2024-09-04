@@ -21,12 +21,14 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.template.Array;
+
 /**
  * A variable-length list (array) of character contacts.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ContactList extends JoltPhysicsObject {
+public class ContactList extends Array<Contact> {
     // *************************************************************************
     // constructors
 
@@ -43,30 +45,18 @@ public class ContactList extends JoltPhysicsObject {
         setVirtualAddress(listVa, freeingAction);
     }
     // *************************************************************************
-    // new methods exposed
+    // Array<Contact> methods
 
     /**
      * Count how many contacts the currently allocated storage can hold.
      *
      * @return the number of contacts (&ge;size)
      */
+    @Override
     public int capacity() {
         long listVa = va();
         int result = capacity(listVa);
         return result;
-    }
-
-    /**
-     * Test whether the list contains any elements.
-     *
-     * @return true if empty, otherwise false
-     */
-    public boolean empty() {
-        if (size() == 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
@@ -99,6 +89,7 @@ public class ContactList extends JoltPhysicsObject {
      * @param elementIndex the index at which to put the contact (&ge;0)
      * @param contact the contact to put (not null)
      */
+    @Override
     public void set(int elementIndex, Contact contact) {
         long listVa = va();
         long contactVa = contact.va();
@@ -110,6 +101,7 @@ public class ContactList extends JoltPhysicsObject {
      *
      * @return the number of contacts (&ge;0, &le;capacity)
      */
+    @Override
     public int size() {
         long listVa = va();
         int result = size(listVa);

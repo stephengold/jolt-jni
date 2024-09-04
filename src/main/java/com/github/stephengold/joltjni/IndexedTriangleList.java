@@ -21,12 +21,14 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.template.Array;
+
 /**
  * A variable-length list (array) of indexed triangles.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class IndexedTriangleList extends JoltPhysicsObject {
+final public class IndexedTriangleList extends Array<IndexedTriangle> {
     // *************************************************************************
     // constructors
 
@@ -38,30 +40,18 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
         setVirtualAddress(listVa, () -> free(listVa));
     }
     // *************************************************************************
-    // new methods exposed
+    // Array<IndexedTriangle> methods
 
     /**
      * Count how many triangles the currently allocated storage can hold.
      *
      * @return the number of triangles (&ge;size)
      */
+    @Override
     public int capacity() {
         long listVa = va();
         int result = capacity(listVa);
         return result;
-    }
-
-    /**
-     * Test whether the list contains any triangles.
-     *
-     * @return true if empty, otherwise false
-     */
-    public boolean empty() {
-        if (size() == 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
@@ -70,6 +60,7 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
      * @param elementIndex the index from which to get the triangle (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public IndexedTriangle get(int elementIndex) {
         long listVa = va();
         long triangleVa = getTriangle(listVa, elementIndex);
@@ -83,6 +74,7 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
      *
      * @param numTriangles the desired size (number of triangles, &ge;0)
      */
+    @Override
     public void resize(int numTriangles) {
         long listVa = va();
         resize(listVa, numTriangles);
@@ -94,6 +86,7 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
      * @param elementIndex the index at which to put the triangle (&ge;0)
      * @param triangle the triangle to put (not null)
      */
+    @Override
     public void set(int elementIndex, IndexedTriangle triangle) {
         long listVa = va();
         long triangleVa = triangle.va();
@@ -105,6 +98,7 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
      *
      * @return the number of triangles (&ge;0, &le;capacity)
      */
+    @Override
     public int size() {
         long listVa = va();
         int result = size(listVa);
