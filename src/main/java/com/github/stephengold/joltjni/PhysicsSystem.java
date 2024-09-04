@@ -115,7 +115,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Enumerate all bodies to the specified vector.
+     * Enumerate all bodies to the specified variable-length vector.
      *
      * @param storeResult storage for the result (not null)
      */
@@ -509,7 +509,8 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Alter the system's gravity vector.
      *
-     * @param gravity (not null, unaffected)
+     * @param gravity the desired acceleration vector (in system coordinates,
+     * not null, unaffected)
      */
     public void setGravity(Vec3Arg gravity) {
         long systemVa = va();

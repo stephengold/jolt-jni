@@ -31,7 +31,7 @@ abstract public class Ref extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate with no native object assigned.
+     * Instantiate a counted reference with no native object assigned.
      */
     protected Ref() {
     }

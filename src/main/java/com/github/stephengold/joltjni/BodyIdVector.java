@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A variable-length vector of body IDs.
+ * A variable-length vector (array) of body IDs.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -41,9 +41,9 @@ public class BodyIdVector extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Count how many elements the currently allocated storage can hold.
+     * Count how many IDs the currently allocated storage can hold.
      *
-     * @return the number of elements (&ge;size)
+     * @return the number of IDs (&ge;size)
      */
     public int capacity() {
         long vectorVa = va();
@@ -67,7 +67,7 @@ public class BodyIdVector extends JoltPhysicsObject {
     /**
      * Access the ID at the specified index.
      *
-     * @param elementIndex the index from which to get the ID
+     * @param elementIndex the index from which to get the ID (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public BodyId get(int elementIndex) {
@@ -101,9 +101,9 @@ public class BodyIdVector extends JoltPhysicsObject {
     }
 
     /**
-     * Count how many elements are in the vector.
+     * Count how many IDs are in the vector.
      *
-     * @return the number of elements (&ge;0, &le;capacity)
+     * @return the number of IDs (&ge;0, &le;capacity)
      */
     public int size() {
         long vectorVa = va();

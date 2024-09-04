@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A variable-length vector of indexed triangles.
+ * A variable-length list (array) of indexed triangles.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -81,7 +81,7 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
     /**
      * Expand or truncate the list.
      *
-     * @param numTriangles the desired size (number of triangles)
+     * @param numTriangles the desired size (number of triangles, &ge;0)
      */
     public void resize(int numTriangles) {
         long listVa = va();

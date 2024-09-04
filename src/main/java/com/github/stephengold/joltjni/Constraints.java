@@ -46,9 +46,9 @@ public class Constraints extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Count how many elements the currently allocated storage can hold.
+     * Count how many references the currently allocated storage can hold.
      *
-     * @return the number of elements (&ge;size)
+     * @return the number of references (&ge;size)
      */
     public int capacity() {
         long arrayVa = va();
@@ -72,8 +72,8 @@ public class Constraints extends JoltPhysicsObject {
     /**
      * Access the constraint at the specified index.
      *
-     * @param elementIndex the index from which to get the constraint
-     * @return a new reference to the constraint
+     * @param elementIndex the index from which to get the reference (&ge;0)
+     * @return a new reference to the same constraint
      */
     public ConstraintRef get(int elementIndex) {
         long arrayVa = va();
@@ -106,9 +106,9 @@ public class Constraints extends JoltPhysicsObject {
     }
 
     /**
-     * Count how many elements are in the array.
+     * Count how many references are in the array.
      *
-     * @return the number of elements (&ge;0, &le;capacity)
+     * @return the number of references (&ge;0, &le;capacity)
      */
     public int size() {
         long arrayVa = va();

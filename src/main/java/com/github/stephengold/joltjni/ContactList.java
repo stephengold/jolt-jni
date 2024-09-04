@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A variable-length list of character contacts.
+ * A variable-length list (array) of character contacts.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -46,9 +46,9 @@ public class ContactList extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Count how many elements the currently allocated storage can hold.
+     * Count how many contacts the currently allocated storage can hold.
      *
-     * @return the number of elements (&ge;size)
+     * @return the number of contacts (&ge;size)
      */
     public int capacity() {
         long listVa = va();
@@ -72,8 +72,8 @@ public class ContactList extends JoltPhysicsObject {
     /**
      * Access the contact at the specified index.
      *
-     * @param elementIndex the index from which to get the contact
-     * @return a new reference to the contact
+     * @param elementIndex the index from which to get the contact (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
      */
     public Contact get(int elementIndex) {
         long listVa = va();
@@ -106,9 +106,9 @@ public class ContactList extends JoltPhysicsObject {
     }
 
     /**
-     * Count how many elements are in the list.
+     * Count how many contacts are in the list.
      *
-     * @return the number of elements (&ge;0, &le;capacity)
+     * @return the number of contacts (&ge;0, &le;capacity)
      */
     public int size() {
         long listVa = va();

@@ -24,8 +24,8 @@ package com.github.stephengold.joltjni;
 import java.nio.FloatBuffer;
 
 /**
- * A variable-length vector of Float3 vertices, implemented using a direct
- * FloatBuffer.
+ * A variable-length list of {@code Float3} vertices, implemented using a direct
+ * {@code FloatBuffer}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

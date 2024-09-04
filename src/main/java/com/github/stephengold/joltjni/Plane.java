@@ -119,7 +119,7 @@ final public class Plane implements ConstPlane {
     /**
      * Copy the normal direction. The plane is unaffected.
      *
-     * @return a new vector
+     * @return a new direction vector
      */
     @Override
     public Vec3 getNormal() {
