@@ -105,6 +105,7 @@ public class ContactList extends Array<Contact> {
     public int size() {
         long listVa = va();
         int result = size(listVa);
+
         return result;
     }
     // *************************************************************************

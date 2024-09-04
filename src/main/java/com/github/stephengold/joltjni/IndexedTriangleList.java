@@ -102,6 +102,7 @@ final public class IndexedTriangleList extends Array<IndexedTriangle> {
     public int size() {
         long listVa = va();
         int result = size(listVa);
+
         return result;
     }
     // *************************************************************************

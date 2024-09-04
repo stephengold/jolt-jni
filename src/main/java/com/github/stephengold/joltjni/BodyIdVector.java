@@ -102,6 +102,7 @@ public class BodyIdVector extends Array<BodyId> {
     public int size() {
         long vectorVa = va();
         int result = size(vectorVa);
+
         return result;
     }
     // *************************************************************************

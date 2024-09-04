@@ -94,7 +94,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings
     pSettings->mConvexRadius = radius;
 }
 
-
 /*
  * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
  * Method:    setHalfHeight

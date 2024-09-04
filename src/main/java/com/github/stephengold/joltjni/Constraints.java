@@ -107,6 +107,7 @@ public class Constraints extends Array<ConstraintRef> {
     public int size() {
         long arrayVa = va();
         int result = size(arrayVa);
+
         return result;
     }
     // *************************************************************************
