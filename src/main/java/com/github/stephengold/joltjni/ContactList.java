@@ -94,6 +94,18 @@ public class ContactList extends JoltPhysicsObject {
     }
 
     /**
+     * Put the specified contact at the specified index.
+     *
+     * @param elementIndex the index at which to put the contact (&ge;0)
+     * @param contact the contact to put (not null)
+     */
+    public void set(int elementIndex, Contact contact) {
+        long listVa = va();
+        long contactVa = contact.va();
+        set(listVa, elementIndex, contactVa);
+    }
+
+    /**
      * Count how many elements are in the list.
      *
      * @return the number of elements (&ge;0, &le;capacity)
@@ -113,6 +125,9 @@ public class ContactList extends JoltPhysicsObject {
     native private static long get(long listVa, int elementIndex);
 
     native private static void resize(long listVa, int numElements);
+
+    native private static void set(
+            long listVa, int elementIndex, long contactVa);
 
     native private static int size(long listVa);
 }

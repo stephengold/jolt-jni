@@ -89,6 +89,18 @@ public class BodyIdVector extends JoltPhysicsObject {
     }
 
     /**
+     * Put the specified ID at the specified index.
+     *
+     * @param elementIndex the index at which to put the ID (&ge;0)
+     * @param id the ID to put (not null)
+     */
+    public void set(int elementIndex, BodyId id) {
+        long vectorId = va();
+        long idVa = id.va();
+        setId(vectorId, elementIndex, idVa);
+    }
+
+    /**
      * Count how many elements are in the vector.
      *
      * @return the number of elements (&ge;0, &le;capacity)
@@ -110,6 +122,9 @@ public class BodyIdVector extends JoltPhysicsObject {
     native private static long getId(long vectorVa, int elementIndex);
 
     native private static void resize(long vectorVa, int numElements);
+
+    native private static void setId(
+            long vectorVa, int elementIndex, long idVa);
 
     native private static int size(long vectorVa);
 }

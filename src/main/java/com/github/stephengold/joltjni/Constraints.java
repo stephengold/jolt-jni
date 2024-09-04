@@ -94,6 +94,18 @@ public class Constraints extends JoltPhysicsObject {
     }
 
     /**
+     * Duplicate the specified reference at the specified index.
+     *
+     * @param elementIndex the index at which to put the reference (&ge;0)
+     * @param reference the reference to put (not null)
+     */
+    public void set(int elementIndex, ConstraintRef reference) {
+        long arrayVa = va();
+        long refVa = reference.va();
+        setRef(arrayVa, elementIndex, refVa);
+    }
+
+    /**
      * Count how many elements are in the array.
      *
      * @return the number of elements (&ge;0, &le;capacity)
@@ -113,6 +125,9 @@ public class Constraints extends JoltPhysicsObject {
     native private static long get(long arrayVa, int elementIndex);
 
     native private static void resize(long arrayVa, int numElements);
+
+    native private static void setRef(
+            long arrayVa, int elementIndex, long refVa);
 
     native private static int size(long arrayVa);
 }

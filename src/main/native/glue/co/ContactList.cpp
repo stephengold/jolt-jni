@@ -83,6 +83,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactList_resize
 
 /*
  * Class:     com_github_stephengold_joltjni_ContactList
+ * Method:    set
+ * Signature: (JIJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactList_set
+  (JNIEnv *, jclass, jlong listVa, jint elementIndex, jlong contactVa) {
+    CharacterVirtual::ContactList * const pList
+            = reinterpret_cast<CharacterVirtual::ContactList *> (listVa);
+    const CharacterVirtual::Contact * const pContact
+            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
+    pList->at(elementIndex) = *pContact;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ContactList
  * Method:    size
  * Signature: (J)I
  */

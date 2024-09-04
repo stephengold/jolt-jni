@@ -82,6 +82,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraints_resize
 
 /*
  * Class:     com_github_stephengold_joltjni_Constraints
+ * Method:    setRef
+ * Signature: (JIJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraints_setRef
+  (JNIEnv *, jclass, jlong arrayVa, jint elementIndex, jlong refVa) {
+    Constraints * const pArray = reinterpret_cast<Constraints *> (arrayVa);
+    Ref<Constraint> * const pRef = reinterpret_cast<Ref<Constraint> *> (refVa);
+    Ref<Constraint> * const pNewRef = new Ref<Constraint>(*pRef);
+    TRACE_NEW("Ref<Constraint>", pNewRef)
+    pArray->at(elementIndex) = *pNewRef;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Constraints
  * Method:    size
  * Signature: (J)I
  */
