@@ -73,7 +73,7 @@ public class BodyIdVector extends JoltPhysicsObject {
     public BodyId get(int elementIndex) {
         long vectorVa = va();
         long idVa = getId(vectorVa, elementIndex);
-        BodyId result = new BodyId(idVa, true);
+        BodyId result = new BodyId(idVa, false);
 
         return result;
     }
