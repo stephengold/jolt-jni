@@ -77,8 +77,8 @@ public class ContactList extends JoltPhysicsObject {
      */
     public Contact get(int elementIndex) {
         long listVa = va();
-        long refVa = get(listVa, elementIndex);
-        Contact result = new Contact(refVa, true);
+        long contactVa = get(listVa, elementIndex);
+        Contact result = new Contact(contactVa, true);
 
         return result;
     }
@@ -86,11 +86,11 @@ public class ContactList extends JoltPhysicsObject {
     /**
      * Expand or truncate the list.
      *
-     * @param numElements the desired size (number of elements)
+     * @param numContacts the desired size (number of elements, &ge;0)
      */
-    public void resize(int numElements) {
+    public void resize(int numContacts) {
         long listVa = va();
-        resize(listVa, numElements);
+        resize(listVa, numContacts);
     }
 
     /**
@@ -124,7 +124,7 @@ public class ContactList extends JoltPhysicsObject {
 
     native private static long get(long listVa, int elementIndex);
 
-    native private static void resize(long listVa, int numElements);
+    native private static void resize(long listVa, int numContacts);
 
     native private static void set(
             long listVa, int elementIndex, long contactVa);

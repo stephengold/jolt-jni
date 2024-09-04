@@ -67,12 +67,12 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
     /**
      * Access the triangle at the specified index.
      *
-     * @param listIndex the index from which to get the triangle
+     * @param elementIndex the index from which to get the triangle (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public IndexedTriangle get(int listIndex) {
+    public IndexedTriangle get(int elementIndex) {
         long listVa = va();
-        long triangleVa = getTriangle(listVa, listIndex);
+        long triangleVa = getTriangle(listVa, elementIndex);
         IndexedTriangle result = new IndexedTriangle(triangleVa);
 
         return result;
@@ -91,13 +91,13 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
     /**
      * Put the specified triangle at the specified index.
      *
-     * @param listIndex the index at which to put the triangle
+     * @param elementIndex the index at which to put the triangle (&ge;0)
      * @param triangle the triangle to put (not null)
      */
-    public void set(int listIndex, IndexedTriangle triangle) {
+    public void set(int elementIndex, IndexedTriangle triangle) {
         long listVa = va();
         long triangleVa = triangle.va();
-        setTriangle(listVa, listIndex, triangleVa);
+        setTriangle(listVa, elementIndex, triangleVa);
     }
 
     /**
@@ -119,12 +119,12 @@ final public class IndexedTriangleList extends JoltPhysicsObject {
 
     native private static void free(long listVa);
 
-    native private static long getTriangle(long listVa, int listIndex);
+    native private static long getTriangle(long listVa, int elementIndex);
 
     native private static void resize(long listVa, int numTriangles);
 
     native private static void setTriangle(
-            long listVa, int listIndex, long triangleVa);
+            long listVa, int elementIndex, long triangleVa);
 
     native private static int size(long listVa);
 }

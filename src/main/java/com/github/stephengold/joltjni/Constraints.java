@@ -86,11 +86,11 @@ public class Constraints extends JoltPhysicsObject {
     /**
      * Expand or truncate the array.
      *
-     * @param numElements the desired size (number of elements)
+     * @param numReferences the desired size (number of references, &ge;0)
      */
-    public void resize(int numElements) {
+    public void resize(int numReferences) {
         long arrayVa = va();
-        resize(arrayVa, numElements);
+        resize(arrayVa, numReferences);
     }
 
     /**
@@ -124,7 +124,7 @@ public class Constraints extends JoltPhysicsObject {
 
     native private static long get(long arrayVa, int elementIndex);
 
-    native private static void resize(long arrayVa, int numElements);
+    native private static void resize(long arrayVa, int numReferences);
 
     native private static void setRef(
             long arrayVa, int elementIndex, long refVa);

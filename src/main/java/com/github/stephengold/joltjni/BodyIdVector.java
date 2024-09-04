@@ -81,11 +81,11 @@ public class BodyIdVector extends JoltPhysicsObject {
     /**
      * Expand or truncate the vector.
      *
-     * @param numElements the desired size (number of elements)
+     * @param numIds the desired size (number of IDs, &ge;0)
      */
-    public void resize(int numElements) {
+    public void resize(int numIds) {
         long vectorVa = va();
-        resize(vectorVa, numElements);
+        resize(vectorVa, numIds);
     }
 
     /**
@@ -121,7 +121,7 @@ public class BodyIdVector extends JoltPhysicsObject {
 
     native private static long getId(long vectorVa, int elementIndex);
 
-    native private static void resize(long vectorVa, int numElements);
+    native private static void resize(long vectorVa, int numIds);
 
     native private static void setId(
             long vectorVa, int elementIndex, long idVa);
