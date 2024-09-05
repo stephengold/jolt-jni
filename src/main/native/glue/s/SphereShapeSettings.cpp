@@ -44,6 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_
     TRACE_NEW("SphereShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
 /*
  * Class:     com_github_stephengold_joltjni_SphereShapeSettings
  * Method:    getRadius
