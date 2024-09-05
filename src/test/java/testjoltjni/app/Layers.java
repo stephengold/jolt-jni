@@ -25,16 +25,19 @@ package testjoltjni.app;
  *
  * @author Stephen Gold sgold@sonic.net
  */
+/// Layer that objects can be in, determines which other objects it can collide with
 class Layers
 {
-/// Layer that objects can be in, determines which other objects it can collide with
-	static final int OBJ_NON_MOVING = 0;
-	static final int OBJ_MOVING = 1;
-	static final int OBJ_NUM_LAYERS = 2;
+	static final int NON_MOVING = 0;
+	static final int MOVING = 1;
+	static final int NUM_LAYERS = 2;
+};
 
 
 /// Broadphase layers
-	static final int BP_NON_MOVING = 0;
-	static final int BP_MOVING = 1;
-	static final int BP_NUM_LAYERS = 2;
-}
+class BroadPhaseLayers
+{
+	static final int NON_MOVING = 0;
+	static final int MOVING = 1;
+	static final int NUM_LAYERS = 2;
+};

@@ -85,7 +85,7 @@ class ConvexVsMeshScene implements PerformanceTestScene {
 		// Create mesh shape creation settings
 		mMeshSettings = new BodyCreationSettings();
 		mMeshSettings.setMotionType(EMotionType.Static);
-		mMeshSettings.setObjectLayer(Layers.OBJ_NON_MOVING);
+		mMeshSettings.setObjectLayer(Layers.NON_MOVING);
 		mMeshSettings.setPosition(new RVec3(-center, max_height, -center));
 		mMeshSettings.setFriction(0.5f);
 		mMeshSettings.setRestitution(0.6f);
@@ -122,7 +122,7 @@ class ConvexVsMeshScene implements PerformanceTestScene {
 					BodyCreationSettings creation_settings = new BodyCreationSettings();
 					creation_settings.setMotionType(EMotionType.Dynamic);
 					creation_settings.setMotionQuality(inMotionQuality);
-					creation_settings.setObjectLayer(Layers.OBJ_MOVING);
+					creation_settings.setObjectLayer(Layers.MOVING);
 					creation_settings.setPosition(new RVec3(7.5 * x, 15.0 + 2.0 * y, 7.5 * z));
 					creation_settings.setFriction(0.5f);
 					creation_settings.setRestitution(0.6f);

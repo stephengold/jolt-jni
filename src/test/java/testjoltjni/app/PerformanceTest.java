@@ -181,17 +181,17 @@ public static void main(String[] argv) throws IOException
 	Trace("Running scene: %s", scene.GetName());
 
 	// Create mapping table from object layer to broadphase layer
-	MapObj2Bp broad_phase_layer_interface = new MapObj2Bp(Layers.OBJ_NUM_LAYERS, Layers.BP_NUM_LAYERS)
-	.add(Layers.OBJ_NON_MOVING, Layers.BP_NON_MOVING)
-	.add(Layers.OBJ_MOVING, Layers.BP_MOVING);
+	MapObj2Bp broad_phase_layer_interface = new MapObj2Bp(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS)
+	.add(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING)
+	.add(Layers.MOVING, BroadPhaseLayers.MOVING);
 
 	// Create class that filters object vs broadphase layers
-	ObjVsBpFilter object_vs_broadphase_layer_filter = new ObjVsBpFilter(Layers.OBJ_NUM_LAYERS, Layers.BP_NUM_LAYERS)
-	.disablePair(Layers.OBJ_NON_MOVING, Layers.BP_NON_MOVING);
+	ObjVsBpFilter object_vs_broadphase_layer_filter = new ObjVsBpFilter(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS)
+	.disablePair(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
 
 	// Create class that filters object vs object layers
-	ObjVsObjFilter object_vs_object_layer_filter = new ObjVsObjFilter(Layers.OBJ_NUM_LAYERS)
-	.disablePair(Layers.OBJ_NON_MOVING, Layers.OBJ_NON_MOVING);
+	ObjVsObjFilter object_vs_object_layer_filter = new ObjVsObjFilter(Layers.NUM_LAYERS)
+	.disablePair(Layers.NON_MOVING, Layers.NON_MOVING);
 
 	// Start profiling this program
 	Jolt.profileStart("Main");

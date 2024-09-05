@@ -45,7 +45,7 @@ class PyramidScene implements PerformanceTestScene
 		BodyInterface bi = inPhysicsSystem.getBodyInterface();
 
 		// Floor
-		bi.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(50.0f, 1.0f, 50.0f), 0.0f), new RVec3(new Vec3(0.0f, -1.0f, 0.0f)), Quat.sIdentity(), EMotionType.Static, Layers.OBJ_NON_MOVING), EActivation.DontActivate);
+		bi.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(50.0f, 1.0f, 50.0f), 0.0f), new RVec3(new Vec3(0.0f, -1.0f, 0.0f)), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 
 		final float cBoxSize = 2.0f;
 		final float cBoxSeparation = 0.5f;
@@ -60,7 +60,7 @@ class PyramidScene implements PerformanceTestScene
 				for (int k = i / 2; k < cPyramidHeight - (i + 1) / 2; ++k)
 				{
 					RVec3 position = new RVec3(-cPyramidHeight + cBoxSize * j + (((i & 1)!=0)? cHalfBoxSize : 0.0f), 1.0f + (cBoxSize + cBoxSeparation) * i, -cPyramidHeight + cBoxSize * k + (((i & 1)!=0)? cHalfBoxSize : 0.0f));
-					BodyCreationSettings settings = new BodyCreationSettings(box_shape, position, Quat.sIdentity(), EMotionType.Dynamic, Layers.OBJ_MOVING);
+					BodyCreationSettings settings = new BodyCreationSettings(box_shape, position, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 					settings.setAllowSleeping(false); // No sleeping to force the large island to stay awake
 					bi.createAndAddBody(settings, EActivation.Activate);
 				}
