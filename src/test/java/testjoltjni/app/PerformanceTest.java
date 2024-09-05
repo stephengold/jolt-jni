@@ -240,9 +240,8 @@ public static void main(String[] argv) throws IOException
 					final BodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
 					BodyIdVector body_ids = new BodyIdVector();
 					physics_system.getBodies(body_ids);
-					for (int i = 0; i < body_ids.size(); ++i)
+					for (BodyId id : body_ids.toList())
 					{
-						BodyId id = body_ids.get(i);
 						BodyLockWrite lock = new BodyLockWrite(bli, id);
 						if (lock.succeeded())
 						{
@@ -354,9 +353,8 @@ public static void main(String[] argv) throws IOException
 					final BodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
 					BodyIdVector body_ids = new BodyIdVector();
 					physics_system.getBodies(body_ids);
-					for (int i = 0; i < body_ids.size(); ++i)
+					for (BodyId id : body_ids.toList())
 					{
-						BodyId id = body_ids.get(i);
 						BodyLockRead lock = new BodyLockRead(bli, id);
 						final Body body = lock.getBody();
 						if (!body.isStatic())
@@ -369,9 +367,8 @@ public static void main(String[] argv) throws IOException
 				BodyInterface bi = physics_system.getBodyInterfaceNoLock();
 				BodyIdVector body_ids = new BodyIdVector();
 				physics_system.getBodies(body_ids);
-				for (int i = 0; i < body_ids.size(); ++i)
+				for (BodyId id : body_ids.toList())
 				{
-					BodyId id = body_ids.get(i);
 					RVec3 pos = bi.getPosition(id);
 					hash = Jolt.hashBytes(pos, hash);
 					Quat rot = bi.getRotation(id);
