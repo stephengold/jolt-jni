@@ -87,7 +87,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_free
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_getJoint
   (JNIEnv *, jclass, jlong poseVa, jint jointIndex) {
     SkeletonPose * const pPose = reinterpret_cast<SkeletonPose *> (poseVa);
-    JointState * const pJoint = &pPose->GetJoint(jointIndex);
+    SkeletonPose::JointState * const pJoint = &pPose->GetJoint(jointIndex);
     return reinterpret_cast<jlong> (pJoint);
 }
 
@@ -100,7 +100,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_setRootO
   (JNIEnv *, jclass, jlong poseVa, jdouble xx, jdouble yy, jdouble zz) {
     SkeletonPose * const pPose = reinterpret_cast<SkeletonPose *> (poseVa);
     const RVec3 offset(xx, yy, zz);
-    pPose->setRootOffset(offset);
+    pPose->SetRootOffset(offset);
 }
 
 /*
