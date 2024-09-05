@@ -33,6 +33,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(SkeletalAnimation,
   Java_com_github_stephengold_joltjni_SkeletalAnimationRef_copy,
+  Java_com_github_stephengold_joltjni_SkeletalAnimationRef_createEmpty,
   Java_com_github_stephengold_joltjni_SkeletalAnimationRef_free,
   Java_com_github_stephengold_joltjni_SkeletalAnimationRef_getPtr)
 

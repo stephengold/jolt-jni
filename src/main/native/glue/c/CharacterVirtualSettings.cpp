@@ -33,6 +33,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(CharacterVirtualSettings,
   Java_com_github_stephengold_joltjni_CharacterVirtualSettingsRef_copy,
+  Java_com_github_stephengold_joltjni_CharacterVirtualSettingsRef_createEmpty,
   Java_com_github_stephengold_joltjni_CharacterVirtualSettingsRef_free,
   Java_com_github_stephengold_joltjni_CharacterVirtualSettingsRef_getPtr)
 

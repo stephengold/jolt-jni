@@ -33,6 +33,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(ConstraintSettings,
   Java_com_github_stephengold_joltjni_ConstraintSettingsRef_copy,
+  Java_com_github_stephengold_joltjni_ConstraintSettingsRef_createEmpty,
   Java_com_github_stephengold_joltjni_ConstraintSettingsRef_free,
   Java_com_github_stephengold_joltjni_ConstraintSettingsRef_getPtr)
 

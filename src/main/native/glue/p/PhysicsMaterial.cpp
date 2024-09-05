@@ -33,6 +33,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(PhysicsMaterial,
   Java_com_github_stephengold_joltjni_PhysicsMaterialRef_copy,
+  Java_com_github_stephengold_joltjni_PhysicsMaterialRef_createEmpty,
   Java_com_github_stephengold_joltjni_PhysicsMaterialRef_free,
   Java_com_github_stephengold_joltjni_PhysicsMaterialRef_getPtr)
 
