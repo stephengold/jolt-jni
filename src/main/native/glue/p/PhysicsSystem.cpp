@@ -286,6 +286,33 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getGr
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getNarrowPhaseQuery
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getNarrowPhaseQuery
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const NarrowPhaseQuery * const pResult = &pSystem->GetNarrowPhaseQuery();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getNarrowPhaseQueryNoLock
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getNarrowPhaseQueryNoLock
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const NarrowPhaseQuery * const pResult
+            = &pSystem->GetNarrowPhaseQueryNoLock();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getMaxBodies
  * Signature: (J)I
  */

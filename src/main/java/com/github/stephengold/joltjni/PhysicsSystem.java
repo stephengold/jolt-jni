@@ -58,6 +58,14 @@ public class PhysicsSystem extends NonCopyable {
      * protect the ObjectLayerPairFilter from garbage collection
      */
     private ConstObjectLayerPairFilter ovoFilter;
+    /**
+     * manage narrow-phase queries with locks (not null)
+     */
+    final private NarrowPhaseQuery narrowPhaseQuery;
+    /**
+     * manage narrow-phase queries without locks (not null)
+     */
+    final private NarrowPhaseQuery narrowPhaseQueryNoLock;
     // *************************************************************************
     // constructors
 
@@ -73,6 +81,12 @@ public class PhysicsSystem extends NonCopyable {
 
         long noLockVa = getBodyInterfaceNoLock(systemVa);
         this.bodyInterfaceNoLock = new BodyInterface(this, noLockVa);
+
+        lockingVa = getNarrowPhaseQuery(systemVa);
+        this.narrowPhaseQuery = new NarrowPhaseQuery(this, lockingVa);
+
+        noLockVa = getNarrowPhaseQueryNoLock(systemVa);
+        this.narrowPhaseQueryNoLock = new NarrowPhaseQuery(this, noLockVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -302,6 +316,25 @@ public class PhysicsSystem extends NonCopyable {
         int result = getMaxBodies(systemVa);
 
         return result;
+    }
+
+    /**
+     * Access the system's interface for fine collision queries.
+     *
+     * @return the pre-existing JVM object (not null)
+     */
+    public NarrowPhaseQuery getNarrowPhaseQuery() {
+        return narrowPhaseQuery;
+    }
+
+    /**
+     * Access a version of the system's {@code NarrowPhaseQuery} that does not
+     * lock the bodies.
+     *
+     * @return the pre-existing JVM object (not null)
+     */
+    public NarrowPhaseQuery getNarrowPhaseQueryNoLock() {
+        return narrowPhaseQueryNoLock;
     }
 
     /**
@@ -594,6 +627,10 @@ public class PhysicsSystem extends NonCopyable {
     native private static float getGravityY(long systemVa);
 
     native private static float getGravityZ(long systemVa);
+
+    native private static long getNarrowPhaseQuery(long systemVa);
+
+    native private static long getNarrowPhaseQueryNoLock(long systemVa);
 
     native private static int getMaxBodies(long systemVa);
 
