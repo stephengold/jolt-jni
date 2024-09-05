@@ -54,7 +54,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_copyDebugTriang
             Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f),
             SubShapeIDCreator(), collector, ShapeFilter());
     for (const TransformedShape& transformedShape : collector.mHits) {
-        const Shape *pSh = transformedShape.mShape;
+        const Shape * const pSh = transformedShape.mShape;
         Shape::GetTrianglesContext context;
         pSh->GetTrianglesStart(context, AABox::sBiggest(),
             Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f));
@@ -87,7 +87,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
             Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f),
             SubShapeIDCreator(), collector, ShapeFilter());
     for (const TransformedShape &transformedShape : collector.mHits) {
-        const Shape *pSh = transformedShape.mShape;
+        const Shape * const pSh = transformedShape.mShape;
         Shape::GetTrianglesContext context;
         pSh->GetTrianglesStart(context, AABox::sBiggest(),
             Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f));
@@ -161,7 +161,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getInnerRadiu
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getLocalBounds
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    AABox *pResult = new AABox();
+    AABox * const pResult = new AABox();
     TRACE_NEW("AABox", pResult)
     *pResult = pShape->GetLocalBounds();
     return reinterpret_cast<jlong> (pResult);

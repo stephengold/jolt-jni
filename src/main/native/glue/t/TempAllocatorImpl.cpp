@@ -37,7 +37,7 @@ using namespace JPH;
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TempAllocatorImpl_create
   (JNIEnv *, jclass, jint numBytes) {
-    TempAllocatorImpl *pResult = new TempAllocatorImpl(numBytes);
+    TempAllocatorImpl * const pResult = new TempAllocatorImpl(numBytes);
     TRACE_NEW("TempAllocatorImpl", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

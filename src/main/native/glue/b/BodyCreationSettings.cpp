@@ -54,7 +54,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
     const RVec3 loc(locX, locY, locZ);
     const Quat orient(qx, qy, qz, qw);
     const EMotionType motionType = (EMotionType) motionTypeOrdinal;
-    BodyCreationSettings *pResult = new BodyCreationSettings(
+    BodyCreationSettings * const pResult = new BodyCreationSettings(
             pShape, loc, orient, motionType, objLayer);
     TRACE_NEW("BodyCreationSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
@@ -73,7 +73,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
     const RVec3 loc(locX, locY, locZ);
     const Quat orient(qx, qy, qz, qw);
     const EMotionType motionType = (EMotionType) motionTypeOrdinal;
-    BodyCreationSettings *pResult = new BodyCreationSettings(
+    BodyCreationSettings * const pResult = new BodyCreationSettings(
             pShapeSettings, loc, orient, motionType, objLayer);
     TRACE_NEW("BodyCreationSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
