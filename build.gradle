@@ -240,8 +240,8 @@ tasks.register('ConvexVsMesh', JavaExec) {
 tasks.register('HelloWorld', JavaExec) {
     mainClass = 'testjoltjni.app.HelloWorld'
 }
-tasks.register('PyramidScene', JavaExec) {
-    args '-s=PyramidScene'
+tasks.register('Pyramid', JavaExec) {
+    args '-s=Pyramid'
     mainClass = 'testjoltjni.app.PerformanceTest'
 }
 tasks.withType(JavaExec).configureEach { // Java runtime options:
