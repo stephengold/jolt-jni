@@ -32,9 +32,9 @@ SOFTWARE.
 using namespace JPH;
 
 IMPLEMENT_REF(CharacterSettings,
-  Java_com_github_stephengold_joltjni_CharacterSettings_copy,
-  Java_com_github_stephengold_joltjni_CharacterSettings_free,
-  Java_com_github_stephengold_joltjni_CharacterSettings_getPtr)
+  Java_com_github_stephengold_joltjni_CharacterSettingsRef_copy,
+  Java_com_github_stephengold_joltjni_CharacterSettingsRef_free,
+  Java_com_github_stephengold_joltjni_CharacterSettingsRef_getPtr)
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterSettings
