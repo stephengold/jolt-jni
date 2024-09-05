@@ -246,9 +246,9 @@ tasks.register('PyramidScene', JavaExec) {
 }
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
+    dependsOn('assemble')
     enableAssertions true
 }
-run.dependsOn('assemble')
 test.dependsOn('assemble')
 
 checkstyle {
