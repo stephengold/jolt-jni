@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstCharacterSettings;
+import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * Settings used to create a {@code Character}.

@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EBackFaceMode;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtualSettings;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * Settings used to create a {@code CharacterVirtual}.

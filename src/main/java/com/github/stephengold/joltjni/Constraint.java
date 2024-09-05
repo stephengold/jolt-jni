@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EConstraintType;
 import com.github.stephengold.joltjni.readonly.ConstConstraint;
+import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * The abstract base class for physics constraints.
