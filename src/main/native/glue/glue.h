@@ -50,7 +50,7 @@ extern bool gTraceAllocations;
     TRACE_NEW("Ref<" #className ">", pResult) \
     return reinterpret_cast<jlong> (pResult); \
   } \
-  JNIEXPORT long JNICALL createName(JNIEnv *, jclass) { \
+  JNIEXPORT jlong JNICALL createName(JNIEnv *, jclass) { \
     Ref<className> * const pResult = new Ref<className>(); \
     TRACE_NEW("Ref<" #className ">", pResult) \
     return reinterpret_cast<jlong> (pResult); \
