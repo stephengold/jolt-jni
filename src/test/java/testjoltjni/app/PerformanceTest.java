@@ -62,7 +62,7 @@ public static void main(String[] argv) throws IOException
 	PerformanceTestScene scene = null;
 	String validate_hash = null;
 	int repeat = 1;
-	for (int argidx = 1; argidx < argv.length; ++argidx)
+	for (int argidx = 0; argidx < argv.length; ++argidx)
 	{
 		String arg = argv[argidx];
 
