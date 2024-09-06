@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A filter for physics-object layers.
+ * A collision filter for physics-object layers.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -31,8 +31,41 @@ public class ObjectLayerFilter extends NonCopyable {
     // constructors
 
     /**
-     * Instantiate a filter with no native object assigned.
+     * Instantiate a default filter that selects all layers.
      */
-    ObjectLayerFilter() {
+    public ObjectLayerFilter() {
+        long filterVa = createDefaultFilter();
+        setVirtualAddress(filterVa, true);
     }
+
+    /**
+     * Instantiate a filter with no native object assigned.
+     *
+     * @param dummy unused argument to distinguish the zero-arg constructor
+     */
+    ObjectLayerFilter(boolean dummy) {
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Test whether the specified layer is a candidate for collisions. The
+     * filter is unaffected.
+     *
+     * @param objLayerIndex the index of the object layer to test
+     * @return true if may collide, false if filtered out
+     */
+    public boolean shouldCollide(int objLayerIndex) {
+        long filterVa = va();
+        boolean result = shouldCollide(filterVa, objLayerIndex);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static long createDefaultFilter();
+
+    native private static boolean shouldCollide(
+            long filterVa, int objLayerIndex);
 }

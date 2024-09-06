@@ -36,6 +36,7 @@ public class SpecifiedObjectLayerFilter extends ObjectLayerFilter {
      * @param layerIndex the index of the layer to select
      */
     public SpecifiedObjectLayerFilter(int layerIndex) {
+        super(true);
         long filterVa = createSpecifiedObjectLayerFilter(layerIndex);
         setVirtualAddress(filterVa, true);
     }
