@@ -81,7 +81,7 @@ public static void main(String[] argv) throws IOException
 			// Parse scene
 			if (arg.substring(3).equals("Ragdoll"))
 				scene = create_ragdoll_scene();
-			else if (arg.substring(3).equals("RagdollSinglePile"))
+			else if (arg.substring(3).equals("RagdollSinglePile") && Jolt.supportsObjectStream())
 				scene = new RagdollScene(1, 160, 0.4f);
 			else if (arg.substring(3).equals("ConvexVsMesh"))
 				scene = new ConvexVsMeshScene();
@@ -129,7 +129,7 @@ public static void main(String[] argv) throws IOException
 		{
 			enable_profiler = true;
 		}
-		else if (arg.equals("-r"))
+		else if (arg.equals("-r") && Jolt.implementsDebugRendering())
 		{
 			enable_debug_renderer = true;
 		}
@@ -276,13 +276,11 @@ public static void main(String[] argv) throws IOException
 
 				// Open renderer output
 				if (enable_debug_renderer) {
-					String buildType = Jolt.buildType();
-					assert buildType.equals("Debug") : buildType;
 					String fileName = "performance_test_" + tag + ".jor";
-                                	int mode = StreamOutWrapper.out() | StreamOutWrapper.binary() | StreamOutWrapper.trunc();
+					int mode = StreamOutWrapper.out() | StreamOutWrapper.binary() | StreamOutWrapper.trunc();
 					StreamOutWrapper renderer_stream = new StreamOutWrapper(fileName, mode);
 					renderer = new DebugRendererRecorder(renderer_stream);
-				}
+				} // JPH_DEBUG_RENDERER
 
 				// Open per frame timing output
 				Writer per_frame_file = null;
@@ -326,7 +324,7 @@ public static void main(String[] argv) throws IOException
 
 						// Mark end of frame
 						renderer.endFrame();
-					}
+					} // JPH_DEBUG_RENDERER
 
 					// Record time taken this iteration
 					if (enable_per_frame_recording)
@@ -366,6 +364,7 @@ public static void main(String[] argv) throws IOException
 						physics_system.restoreState(validator);
 					}
 
+				if (Jolt.implementsDeterminismLog()) {
 					final BodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
 					BodyIdVector body_ids = new BodyIdVector();
 					physics_system.getBodies(body_ids);
@@ -376,6 +375,7 @@ public static void main(String[] argv) throws IOException
 						if (!body.isStatic())
 							Jolt.detLog(id + ": p: " + body.getPosition() + " r: " + body.getRotation() + " v: " + body.getLinearVelocity() + " w: " + body.getAngularVelocity());
 					}
+				} // JPH_ENABLE_DETERMINISM_LOG
 				}
 
 				// Calculate hash of all positions and rotations of the bodies
@@ -410,7 +410,9 @@ public static void main(String[] argv) throws IOException
 		}
 	}
 
+if (NarrowPhaseStat.isCollecting()) {
 	NarrowPhaseStat.sReportStats();
+} // JPH_TRACK_NARROWPHASE_STATS
 
 	// Unregisters all types with the factory and cleans up the default material
 	Jolt.unregisterTypes();
