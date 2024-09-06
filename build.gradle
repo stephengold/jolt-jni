@@ -265,18 +265,18 @@ tasks.register('debugRagdoll', JavaExec) {
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runConvexVsMesh', JavaExec) {
-    args '-s=ConvexVsMesh', '-r', '-rs'
+    args '-s=ConvexVsMesh'
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runHelloWorld', JavaExec) {
     mainClass = 'testjoltjni.app.helloworld.HelloWorld'
 }
 tasks.register('runPyramid', JavaExec) {
-    args '-s=Pyramid', '-p', '-r', '-f', '-rs'
+    args '-s=Pyramid'
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runRagdoll', JavaExec) {
-    args '-s=Ragdoll', '-r', '-rs'
+    args '-s=Ragdoll'
     dependsOn('unpackJoltAssets')
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
