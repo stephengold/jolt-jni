@@ -128,6 +128,8 @@ model {
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 if (isDebug) {
                     cppCompiler.define 'JPH_DEBUG_RENDERER'
+                    //cppCompiler.define 'JPH_DET_LOG' // to implement the determinism log
+                    //cppCompiler.define 'JPH_TRACK_NARROWPHASE_STATS' // to collect statistics
                     cppCompiler.define 'JPH_ENABLE_ASSERTS'
                 } else {
                     cppCompiler.define 'JPH_NO_DEBUG'
@@ -149,6 +151,7 @@ model {
                     cppCompiler.args '/std:c++17'
 
                     if (isDebug) {
+                        cppCompiler.define 'JPH_FLOATING_POINT_EXCEPTIONS_ENABLED'
                         cppCompiler.args '/MTd' // to use LIBCMTD
                         linker.args '/DEBUG'
                     } else { // buildType == Release
