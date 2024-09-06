@@ -120,6 +120,8 @@ model {
                     buildable = (pName == targetArg)
                 }
 
+                cppCompiler.define 'JPH_OBJECT_STREAM'
+
                 // flavor-specific CPP defines:
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 if (isDebug) {
