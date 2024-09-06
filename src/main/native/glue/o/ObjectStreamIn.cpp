@@ -43,7 +43,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
     const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy);
     Ref<PhysicsScene> * const pStoreRef
             = reinterpret_cast<Ref<PhysicsScene> *> (refVa);
-    bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
+    const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
     return result;
 }
 
@@ -58,7 +58,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
     const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy);
     Ref<RagdollSettings> * const pStoreRef
             = reinterpret_cast<Ref<RagdollSettings> *> (refVa);
-    bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
+    const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
     return result;
 }
 
@@ -73,6 +73,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
     const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy);
     Ref<SkeletalAnimation> * const pStoreRef
             = reinterpret_cast<Ref<SkeletalAnimation> *> (refVa);
-    bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
+    const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
     return result;
 }

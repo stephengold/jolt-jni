@@ -423,7 +423,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_res
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
-    bool result = pSystem->RestoreState(*pRecorder);
+    const bool result = pSystem->RestoreState(*pRecorder);
     return result;
 }
 

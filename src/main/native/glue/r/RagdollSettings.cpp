@@ -139,7 +139,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_s
   (JNIEnv *, jclass, jlong settingsVa) {
     RagdollSettings * const pSettings
             = reinterpret_cast<RagdollSettings *> (settingsVa);
-    bool result = pSettings->Stabilize();
+    const bool result = pSettings->Stabilize();
     return result;
 }
 

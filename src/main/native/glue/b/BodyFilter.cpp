@@ -51,6 +51,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyFilter_should
   (JNIEnv *, jclass, jlong filterVa, jlong idVa) {
     const BodyFilter * const pFilter = reinterpret_cast<BodyFilter *> (filterVa);
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
-    bool result = pFilter->ShouldCollide(*pBodyId);
+    const bool result = pFilter->ShouldCollide(*pBodyId);
     return result;
 }
