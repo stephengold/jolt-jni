@@ -32,8 +32,8 @@ model {
     }
 
     flavors {
-        Dp   // double-precision arithmetic
-        Sp   // single-precision arithmetic
+        Dp   // double-precision locations
+        Sp   // single-precision locations
     }
 
     platforms {
