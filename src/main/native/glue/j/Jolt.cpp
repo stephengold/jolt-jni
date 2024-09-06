@@ -45,11 +45,11 @@ using namespace JPH;
 JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_buildType
   (JNIEnv *pEnv, jclass) {
     jstring result;
-#ifdef _DEBUG
-    result = pEnv->NewStringUTF("Debug");
-#else
+#ifdef JPH_NO_DEBUG
     result = pEnv->NewStringUTF("Release");
-#endif // _DEBUG
+#else
+    result = pEnv->NewStringUTF("Debug");
+#endif
     return result;
 }
 
