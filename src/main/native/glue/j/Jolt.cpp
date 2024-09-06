@@ -81,7 +81,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_detLog
     const char * const pMessage = pEnv->GetStringUTFChars(message, &isCopy);
     JPH_DET_LOG(pMessage);
     pEnv->ReleaseStringUTFChars(message, pMessage);
-#else
+#elif defined(_DEBUG)
     if (gWarnDetLogIneffective) {
         Trace("Jolt.detLog() has no effect unless JPH_ENABLE_DETERMINISM_LOG is defined.");
         gWarnDetLogIneffective = false;
@@ -151,7 +151,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installDefaultAs
   (JNIEnv *, jclass) {
 #ifdef JPH_ENABLE_ASSERTS
     AssertFailed = DefaultAssertFailed;
-#else
+#elif defined(_DEBUG)
     Trace("Jolt.installDefaultAssertCallback() has no effect unless JPH_ENABLE_ASSERTS is defined.");
 #endif
 }

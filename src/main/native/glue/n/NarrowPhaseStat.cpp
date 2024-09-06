@@ -38,7 +38,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseStat_sRepo
   (JNIEnv *, jclass) {
 #ifdef JPH_TRACK_NARROWPHASE_STATS
     NarrowPhaseStat::sReportStats();
-#else
+#elif defined(_DEBUG)
     Trace("NarrowPhaseStat.sReportStats() has no effect unless JPH_TRACK_NARROWPHASE_STATS is defined.");
 #endif
 }
