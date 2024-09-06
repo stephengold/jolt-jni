@@ -19,15 +19,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package testjoltjni.app;
+package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import java.util.*;
 
 /**
- * Derived from PerformanceTest/RagdollScene.h by Jorrit Rouwe.
- *
- * @author Stephen Gold sgold@sonic.net
+ * A straightforward Java translation of the Jolt Physics "ragdoll scene"
+ * performance test.
+ * <p>
+ * Compare with the original by Jorrit Rouwe at
+ * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/RagdollScene.h
  */
 // A scene that loads a part of a Horizon Zero Dawn level and drops many ragdolls on the terrain (motors enabled)
 class RagdollScene implements PerformanceTestScene

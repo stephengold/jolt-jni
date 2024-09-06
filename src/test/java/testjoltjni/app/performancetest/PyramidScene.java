@@ -19,7 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package testjoltjni.app;
+package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 
@@ -27,9 +27,8 @@ import com.github.stephengold.joltjni.enumerate.*;
  * A straightforward Java translation of the Jolt Physics "pyramid scene"
  * performance test.
  * <p>
- * Derived from PerformanceTest/PyramidScene.h by Jorrit Rouwe.
- *
- * @author Stephen Gold sgold@sonic.net
+ * Compare with the original by Jorrit Rouwe at
+ * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/PyramidScene.h
  */
 // A scene that creates a pyramid of boxes to create a very large island
 class PyramidScene implements PerformanceTestScene

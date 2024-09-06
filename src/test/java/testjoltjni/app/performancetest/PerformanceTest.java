@@ -19,13 +19,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package testjoltjni.app;
+package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import java.io.*;
 import java.util.*;
 import testjoltjni.TestUtils;
 
+/**
+ * A straightforward Java translation of the Jolt Physics performance-test
+ * driver.
+ * <p>
+ * Compare with the original by Jorrit Rouwe at
+ * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/PerformanceTest.h
+ */
 public class PerformanceTest {
     private static DebugRendererRecorder renderer;
     private static PerformanceTestScene create_ragdoll_scene() {

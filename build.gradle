@@ -233,34 +233,49 @@ tasks.withType(JavaCompile) { // Java compile-time options:
 }
 
 application {
-    mainClass = 'testjoltjni.app.HelloWorld'
+    // default settings for the 'run' tasks:
+    mainClass = 'testjoltjni.app.helloworld.HelloWorld'
+}
+tasks.register('debugConvexVsMesh', JavaExec) {
+    args '-s=ConvexVsMesh'
+    debug = true
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
+}
+tasks.register('debugHelloWorld', JavaExec) {
+    debug = true
+    mainClass = 'testjoltjni.app.helloworld.HelloWorld'
+}
+tasks.register('debugPyramid', JavaExec) {
+    args '-s=Pyramid'
+    debug = true
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('debugRagdoll', JavaExec) {
-    args '-s=Ragdoll'
+    args '-s=Ragdoll', '-r', '-rs'
     debug = true
     dependsOn('unpackJoltAssets')
-    mainClass = 'testjoltjni.app.PerformanceTest'
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runConvexVsMesh', JavaExec) {
-    args '-s=ConvexVsMesh'
-    mainClass = 'testjoltjni.app.PerformanceTest'
+    args '-s=ConvexVsMesh', '-r', '-rs'
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runHelloWorld', JavaExec) {
-    mainClass = 'testjoltjni.app.HelloWorld'
+    mainClass = 'testjoltjni.app.helloworld.HelloWorld'
 }
 tasks.register('runPyramid', JavaExec) {
-    args '-s=Pyramid'
-    mainClass = 'testjoltjni.app.PerformanceTest'
+    args '-s=Pyramid', '-p', '-r', '-f', '-rs'
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runRagdoll', JavaExec) {
-    args '-s=Ragdoll'
+    args '-s=Ragdoll', '-r', '-rs'
     dependsOn('unpackJoltAssets')
-    mainClass = 'testjoltjni.app.PerformanceTest'
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runRagdollSinglePile', JavaExec) {
     args '-s=RagdollSinglePile'
     dependsOn('unpackJoltAssets')
-    mainClass = 'testjoltjni.app.PerformanceTest'
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath

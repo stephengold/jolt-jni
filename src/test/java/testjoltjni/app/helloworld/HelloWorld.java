@@ -19,17 +19,17 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package testjoltjni.app;
+package testjoltjni.app.helloworld;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import testjoltjni.TestUtils;
+
 /**
  * A straightforward Java translation of the Jolt Physics "hello world" sample
  * application.
  * <p>
- * Derived from HelloWorld/HelloWorld.cpp by Jorrit Rouwe.
- *
- * @author Stephen Gold sgold@sonic.net
+ * Compare with the original by Jorrit Rouwe at
+ * https://github.com/jrouwe/JoltPhysics/blob/master/HelloWorld/HelloWorld.cpp
  */
 public class HelloWorld {
 // Layer that objects can be in, determines which other objects it can collide with

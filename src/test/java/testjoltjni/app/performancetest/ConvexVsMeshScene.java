@@ -19,7 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package testjoltjni.app;
+package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 
@@ -27,9 +27,8 @@ import com.github.stephengold.joltjni.enumerate.*;
  * A straightforward Java translation of the Jolt Physics "convex vs mesh scene"
  * performance test.
  * <p>
- * Derived from PerformanceTest/ConvexVsMeshScene.h by Jorrit Rouwe.
- *
- * @author Stephen Gold sgold@sonic.net
+ * Compare with the original by Jorrit Rouwe at
+ * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/ConvexVsMeshScene.h
  */
 // A scene that drops a number of convex shapes on a sloping terrain made out of a mesh shape
 class ConvexVsMeshScene implements PerformanceTestScene {

@@ -19,25 +19,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package testjoltjni.app;
+package testjoltjni.app.performancetest;
+import com.github.stephengold.joltjni.PhysicsSystem;
+import com.github.stephengold.joltjni.enumerate.EMotionQuality;
+
 /**
- * Derived from PerformanceTest/Layers.h by Jorrit Rouwe.
- *
- * @author Stephen Gold sgold@sonic.net
+ * A straightforward Java translation of the Jolt Physics test-scene interface.
+ * <p>
+ * Compare with the original by Jorrit Rouwe at
+ * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/PerformanceTestScene.h
  */
-/// Layer that objects can be in, determines which other objects it can collide with
-class Layers
-{
-	static final int NON_MOVING = 0;
-	static final int MOVING = 1;
-	static final int NUM_LAYERS = 2;
-};
+interface PerformanceTestScene {
+	// Get name of test for debug purposes
+ 	String GetName();
 
+	// Load assets for the scene
+	boolean Load();
 
-/// Broadphase layers
-class BroadPhaseLayers
-{
-	static final int NON_MOVING = 0;
-	static final int MOVING = 1;
-	static final int NUM_LAYERS = 2;
+	// Start a new test by adding objects to inPhysicsSystem
+	void StartTest(PhysicsSystem inPhysicsSystem, EMotionQuality inMotionQuality);
+
+	// Stop a test and remove objects from inPhysicsSystem
+	void StopTest(PhysicsSystem inPhysicsSystem);
 };
