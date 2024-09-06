@@ -129,6 +129,14 @@ final public class Jolt {
     }
 
     /**
+     * Test whether the native library implements debug rendering. (native
+     * macro: JPH_DEBUG_RENDERER)
+     *
+     * @return true if implemented, otherwise false
+     */
+    native public static boolean implementsDebugRendering();
+
+    /**
      * Install the default assert callback.
      */
     native public static void installDefaultAssertCallback();

@@ -113,6 +113,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__JI
     return result;
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    implementsDebugRendering
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsDebugRendering
+  (JNIEnv *, jclass) {
+#ifdef JPH_DEBUG_RENDERER
+    return JNI_TRUE;
+#else
+    return JNI_FALSE;
+#endif
+}
+
 #ifdef JPH_ENABLE_ASSERTS
 
 // Callback for asserts
