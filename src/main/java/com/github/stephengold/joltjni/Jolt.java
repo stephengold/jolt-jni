@@ -147,7 +147,8 @@ final public class Jolt {
     native public static void installDefaultTraceCallback();
 
     /**
-     * Test whether the native library uses double-precision arithmetic.
+     * Test whether the native library uses double-precision location vectors.
+     * (native macro: JPH_DOUBLE_PRECISION)
      *
      * @return true if double-precision, otherwise false
      */

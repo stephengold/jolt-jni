@@ -121,9 +121,10 @@ model {
                     buildable = (pName == targetArg)
                 }
 
+                // always-on CPP defines:
                 cppCompiler.define 'JPH_OBJECT_STREAM'
 
-                // flavor-specific CPP defines:
+                // buildtype-specific CPP defines:
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 if (isDebug) {
                     cppCompiler.define 'JPH_DEBUG_RENDERER'
@@ -131,6 +132,8 @@ model {
                 } else {
                     cppCompiler.define 'JPH_NO_DEBUG'
                 }
+
+                // flavor-specific CPP defines:
                 Boolean isDp = (flavor == flavors.Dp)
                 if (isDp) {
                     cppCompiler.define 'JPH_DOUBLE_PRECISION'
@@ -410,7 +413,7 @@ def base64Decode(encodedString) {
     return null;
 }
 
-// Tasks to download and unpack JoltPhysics source code:
+// Tasks to download and unpack JoltPhysics source code and assets:
 
 tasks.register('downloadJoltSource', Download) {
     src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/sg240827.zip'
@@ -460,6 +463,6 @@ tasks.register('cleanLogs', Delete) { // JVM crash logs
     delete fileTree(dir: '.', include: 'hs_err_pid*.log')
 }
 tasks.register('cleanRecordings', Delete) {
-    // DebugRenderer recordings, recorded state, and frame timing output
+    // DebugRenderer recordings, recorded state, and frame timing output:
     delete fileTree(dir: '.', includes: ['performance_test_*.jor', 'per_frame_*.csv', 'state_*.bin'])
 }
