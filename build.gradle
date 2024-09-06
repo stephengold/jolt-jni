@@ -384,6 +384,17 @@ tasks.register('downloadJoltSource', Download) {
     dest file('downloads/JoltPhysics-sg240827.zip')
     overwrite false
 }
+tasks.register('unpackJoltAssets', Copy) {
+    dependsOn 'downloadJoltSource'
+    from (zipTree('downloads/JoltPhysics-sg240827.zip')) {
+        include 'JoltPhysics-sg240827/Assets/**'
+        eachFile { fcd ->
+            fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
+        }
+        includeEmptyDirs = false
+    }
+    into layout.projectDirectory.dir('Assets')
+}
 tasks.register('unpackJoltSource', Copy) {
     dependsOn 'downloadJoltSource'
     from (zipTree('downloads/JoltPhysics-sg240827.zip')) {
@@ -405,6 +416,9 @@ tasks.register('cleanAutoHeaders', Delete) { // auto-generated JNI headers
 }
 tasks.register('cleanDownloads', Delete) { // downloaded files
     delete 'downloads'
+}
+tasks.register('cleanJoltAssets', Delete) { // unpacked Jolt Physics assets
+    delete 'Assets'
 }
 tasks.register('cleanJoltSource', Delete) { // unpacked Jolt Physics source code
     delete 'src/main/native/Jolt'
