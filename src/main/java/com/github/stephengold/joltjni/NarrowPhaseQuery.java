@@ -63,7 +63,7 @@ public class NarrowPhaseQuery extends NonCopyable {
      * @return true if a hit was found, otherwise false
      */
     public boolean castRay(RRayCast ray, RayCastResult hitResult) {
-        boolean result = castRay(ray, hitResult, null);
+        boolean result = castRay(ray, hitResult, new BroadPhaseLayerFilter());
         return result;
     }
 
@@ -73,13 +73,14 @@ public class NarrowPhaseQuery extends NonCopyable {
      * @param ray the desired ray (not null, unaffected)
      * @param hitResult storage for information about the hit, if any (not null,
      * may be modified)
-     * @param bplFilter the broadphase-layer filter to apply (unaffected) or
-     * {@code null} for none
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
      * @return true if a hit was found, otherwise false
      */
     public boolean castRay(RRayCast ray, RayCastResult hitResult,
             BroadPhaseLayerFilter bplFilter) {
-        boolean result = castRay(ray, hitResult, bplFilter, null);
+        boolean result
+                = castRay(ray, hitResult, bplFilter, new ObjectLayerFilter());
         return result;
     }
 
@@ -89,15 +90,15 @@ public class NarrowPhaseQuery extends NonCopyable {
      * @param ray the desired ray (not null, unaffected)
      * @param hitResult storage for information about the hit, if any (not null,
      * may be modified)
-     * @param bplFilter the broadphase-layer filter to apply (unaffected) or
-     * {@code null} for none
-     * @param olFilter the object-layer filter to apply (unaffected) or
-     * {@code null} for none
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not null, unaffected)
      * @return true if a hit was found, otherwise false
      */
     public boolean castRay(RRayCast ray, RayCastResult hitResult,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
-        boolean result = castRay(ray, hitResult, bplFilter, olFilter, null);
+        boolean result = castRay(
+                ray, hitResult, bplFilter, olFilter, new BodyFilter());
         return result;
     }
 
@@ -107,12 +108,10 @@ public class NarrowPhaseQuery extends NonCopyable {
      * @param ray the desired ray (not null, unaffected)
      * @param hitResult storage for information about the hit, if any (not null,
      * may be modified)
-     * @param bplFilter the broadphase-layer filter to apply (unaffected) or
-     * {@code null} for none
-     * @param olFilter the object-layer filter to apply (unaffected) or
-     * {@code null} for none
-     * @param bodyFilter the body filter to apply (unaffected) or {@code null}
-     * for none
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param bodyFilter the body filter to apply (not null, unaffected)
      * @return true if a hit was found, otherwise false
      */
     public boolean castRay(RRayCast ray, RayCastResult hitResult,
@@ -121,9 +120,9 @@ public class NarrowPhaseQuery extends NonCopyable {
         long queryVa = va();
         long rayVa = ray.va();
         long hitResultVa = hitResult.va();
-        long bplFilterVa = (bplFilter == null) ? 0L : bplFilter.va();
-        long olFilterVa = (olFilter == null) ? 0L : olFilter.va();
-        long bodyFilterVa = (bodyFilter == null) ? 0L : bodyFilter.va();
+        long bplFilterVa = bplFilter.va();
+        long olFilterVa = olFilter.va();
+        long bodyFilterVa = bodyFilter.va();
         boolean result = castRay(queryVa, rayVa, hitResultVa, bplFilterVa,
                 olFilterVa, bodyFilterVa);
 
