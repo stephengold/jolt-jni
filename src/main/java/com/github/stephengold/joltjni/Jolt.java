@@ -246,6 +246,14 @@ final public class Jolt {
     native public static void setTraceAllocations(boolean setting);
 
     /**
+     * Test whether the native library supports the ObjectStream format. (native
+     * macro: JPH_OBJECT_STREAM)
+     *
+     * @return true if supported, otherwise false
+     */
+    native public static boolean supportsObjectStream();
+
+    /**
      * Unregister all physics types with the factory.
      *
      * @see registerTypes

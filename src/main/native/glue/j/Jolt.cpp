@@ -290,6 +290,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_setTraceAllocati
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    supportsObjectStream
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_supportsObjectStream
+  (JNIEnv *, jclass) {
+#ifdef JPH_OBJECT_STREAM
+    return JNI_TRUE;
+#else
+    return JNI_FALSE;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    unregisterTypes
  * Signature: ()V
  */
