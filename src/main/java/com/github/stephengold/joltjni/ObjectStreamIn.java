@@ -54,7 +54,7 @@ public class ObjectStreamIn {
         if (storeRef instanceof RagdollSettingsRef) {
             result = sReadRagdollSettings(fileName, refVa);
         } else if (storeRef instanceof PhysicsSceneRef) {
-            result = sReadPhysicsSceneRef(fileName, refVa);
+            result = sReadPhysicsScene(fileName, refVa);
         } else if (storeRef instanceof SkeletalAnimationRef) {
             result = sReadSkeletalAnimation(fileName, refVa);
         } else {
@@ -70,7 +70,7 @@ public class ObjectStreamIn {
     native private static boolean sReadRagdollSettings(
             String fileName, long refVa);
 
-    native private static boolean sReadPhysicsSceneRef(
+    native private static boolean sReadPhysicsScene(
             String fileName, long refVa);
 
     native private static boolean sReadSkeletalAnimation(
