@@ -35,7 +35,7 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the specified element.
+     * Return the specified element. The matrix is unaffected.
      *
      * @param row the zero-origin index of the row (&ge;0, &lt;4)
      * @param column the zero-origin index of the column (&ge;0, &lt;4)
@@ -44,14 +44,15 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     float getElement(int row, int column);
 
     /**
-     * Convert the rotation to a {@code Quat}.
+     * Convert the rotation to a {@code Quat}. The matrix is unaffected.
      *
      * @return a new rotation quaternion
      */
     Quat getQuaternion();
 
     /**
-     * Multiply the current 3x3 matrix by the specified 3x3 matrix.
+     * Multiply the current 3x3 matrix by the specified 3x3 matrix. The matrix
+     * is unaffected.
      *
      * @param arg the factor (not null, unaffected)
      * @return a new matrix
@@ -59,7 +60,8 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     Mat44 multiply3x3(Mat44Arg arg);
 
     /**
-     * Multiply the 3x3 matrix by the specified vector.
+     * Multiply the 3x3 matrix by the specified vector. The matrix is
+     * unaffected.
      *
      * @param vec3Arg the right factor (not null, unaffected)
      * @return a new vector
@@ -67,7 +69,8 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     Vec3 multiply3x3(Vec3Arg vec3Arg);
 
     /**
-     * Multiply the transpose of the 3x3 matrix by the specified vector.
+     * Multiply the transpose of the 3x3 matrix by the specified vector. The
+     * matrix is unaffected.
      *
      * @param vec3Arg the right factor (not null, unaffected)
      * @return a new vector

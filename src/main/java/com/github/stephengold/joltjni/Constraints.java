@@ -48,7 +48,8 @@ public class Constraints extends Array<ConstraintRef> {
     // Array<ConstrantRef> methods
 
     /**
-     * Count how many references the currently allocated storage can hold.
+     * Count how many references the currently allocated storage can hold. The
+     * array is unaffected.
      *
      * @return the number of references (&ge;size)
      */
@@ -99,7 +100,7 @@ public class Constraints extends Array<ConstraintRef> {
     }
 
     /**
-     * Count how many references are in the array.
+     * Count how many references are in the array. The array is unaffected.
      *
      * @return the number of references (&ge;0, &le;capacity)
      */

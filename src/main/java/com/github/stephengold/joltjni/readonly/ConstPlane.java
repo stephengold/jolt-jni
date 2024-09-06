@@ -42,7 +42,7 @@ public interface ConstPlane {
     /**
      * Copy the normal direction. The plane is unaffected.
      *
-     * @return a new vector
+     * @return a new direction vector
      */
     Vec3 getNormal();
 

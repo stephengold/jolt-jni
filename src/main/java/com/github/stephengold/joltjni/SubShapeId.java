@@ -48,7 +48,7 @@ public class SubShapeId extends JoltPhysicsObject implements ConstSubShapeId {
     // ConstSubShapeId methods
 
     /**
-     * Test for equality with the specified ID.
+     * Test for equality with the specified ID. The current ID is unaffected.
      *
      * @param otherId the ID to compare with (not null, unaffected)
      * @return true if equivalent, otherwise false
@@ -63,7 +63,7 @@ public class SubShapeId extends JoltPhysicsObject implements ConstSubShapeId {
     }
 
     /**
-     * Return the bit pattern of the ID.
+     * Return the bit pattern of the ID. The ID is unaffected.
      *
      * @return the raw bit pattern
      */

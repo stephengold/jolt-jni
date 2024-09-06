@@ -149,7 +149,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     Quat getRotation();
 
     /**
-     * Access the body's shape. The body is unaffected.
+     * Access the body's shape.
      *
      * @return a new immutable JVM object with the pre-existing native object
      * assigned, or {@code null} if none
@@ -187,14 +187,14 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     boolean isDynamic();
 
     /**
-     * Test whether the body is kinematic. The body is unaffected.
+     * Test whether the body is kinematic. It is unaffected.
      *
      * @return true if kinematic, otherwise false
      */
     boolean isKinematic();
 
     /**
-     * Test whether the body is a rigid body. The body is unaffected.
+     * Test whether the body is a rigid body. It is unaffected.
      *
      * @return true if rigid body, otherwise false
      */
@@ -208,7 +208,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     boolean isSensor();
 
     /**
-     * Test whether the body is static (non-moving). The body is unaffected.
+     * Test whether the body is static (non-moving). It is unaffected.
      *
      * @return true if static, otherwise false
      */

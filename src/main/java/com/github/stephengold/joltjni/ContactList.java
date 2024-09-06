@@ -48,7 +48,8 @@ public class ContactList extends Array<Contact> {
     // Array<Contact> methods
 
     /**
-     * Count how many contacts the currently allocated storage can hold.
+     * Count how many contacts the currently allocated storage can hold. The
+     * list is unaffected.
      *
      * @return the number of contacts (&ge;size)
      */
@@ -97,7 +98,7 @@ public class ContactList extends Array<Contact> {
     }
 
     /**
-     * Count how many contacts are in the list.
+     * Count how many contacts are in the list. The list is unaffected.
      *
      * @return the number of contacts (&ge;0, &le;capacity)
      */

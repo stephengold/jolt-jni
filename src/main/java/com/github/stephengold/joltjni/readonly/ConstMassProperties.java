@@ -35,7 +35,7 @@ public interface ConstMassProperties extends ConstJoltPhysicsObject {
 
     /**
      * Decompose the inertia tensor into a diagonal matrix and a right-handed
-     * rotation matrix.
+     * rotation matrix. The properties are unaffected.
      *
      * @param storeRotation storage for the rotation matrix (not null, modified)
      * @param storeDiagonal storage for the diagonal matrix (not null, modified)
@@ -45,14 +45,15 @@ public interface ConstMassProperties extends ConstJoltPhysicsObject {
             Mat44 storeRotation, Vec3 storeDiagonal);
 
     /**
-     * Copy the inertia tensor.
+     * Copy the inertia tensor. The properties are unaffected. (native field:
+     * mIntertia)
      *
      * @return a new matrix (in kilogram.meters squared)
      */
     Mat44 getInertia();
 
     /**
-     * Return the mass.
+     * Return the mass. The properties are unaffected. (native field: mMass)
      *
      * @return the mass (in kilograms, &ge;0)
      */

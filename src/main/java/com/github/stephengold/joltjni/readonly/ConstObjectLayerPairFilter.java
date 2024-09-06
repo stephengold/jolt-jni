@@ -31,7 +31,8 @@ public interface ConstObjectLayerPairFilter extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Test whether the specified layers should collide.
+     * Test whether the specified layers should collide. The filter is
+     * unaffected.
      *
      * @param layer1 the index of the first object layer (&ge;0,
      * &lt;numObjectLayers)

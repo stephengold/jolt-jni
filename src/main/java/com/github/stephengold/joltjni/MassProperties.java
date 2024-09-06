@@ -133,7 +133,7 @@ final public class MassProperties
 
     /**
      * Decompose the inertia tensor into a diagonal matrix and a right-handed
-     * rotation matrix.
+     * rotation matrix. The properties are unaffected.
      *
      * @param storeRotation storage for the rotation matrix (not null, modified)
      * @param storeDiagonal storage for the diagonal matrix (not null, modified)
@@ -153,7 +153,8 @@ final public class MassProperties
     }
 
     /**
-     * Copy the inertia tensor. (native field: mIntertia)
+     * Copy the inertia tensor. The properties are unaffected. (native field:
+     * mIntertia)
      *
      * @return a new matrix (in kilogram.meters squared)
      */
@@ -167,7 +168,7 @@ final public class MassProperties
     }
 
     /**
-     * Return the mass. (native field: mMass)
+     * Return the mass. The properties are unaffected. (native field: mMass)
      *
      * @return the mass (in kilograms, &ge;0)
      */

@@ -145,8 +145,8 @@ public class CharacterBaseSettings
     }
 
     /**
-     * Return the maximum slope on which the character can walk. (native field:
-     * mMaxSlopeAngle)
+     * Return the maximum slope on which the character can walk. The settings
+     * are unaffected. (native field: mMaxSlopeAngle)
      *
      * @return the angle (in radians)
      */

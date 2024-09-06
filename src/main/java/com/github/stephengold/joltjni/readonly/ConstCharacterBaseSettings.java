@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.Plane;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to a {@code CharacterBaseSettings}.
+ * Read-only access to a {@code CharacterBaseSettings} object.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -43,8 +43,8 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
     boolean getEnhancedInternalEdgeRemoval();
 
     /**
-     * Return the maximum slope on which the character can walk. (native field:
-     * mMaxSlopeAngle)
+     * Return the maximum slope on which the character can walk. The settings
+     * are unaffected. (native field: mMaxSlopeAngle)
      *
      * @return the angle (in radians)
      */

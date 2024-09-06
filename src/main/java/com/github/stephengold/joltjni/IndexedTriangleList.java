@@ -43,7 +43,8 @@ final public class IndexedTriangleList extends Array<IndexedTriangle> {
     // Array<IndexedTriangle> methods
 
     /**
-     * Count how many triangles the currently allocated storage can hold.
+     * Count how many triangles the currently allocated storage can hold. The
+     * list is unaffected.
      *
      * @return the number of triangles (&ge;size)
      */
@@ -94,7 +95,7 @@ final public class IndexedTriangleList extends Array<IndexedTriangle> {
     }
 
     /**
-     * Count how many triangles are in the list.
+     * Count how many triangles are in the list. The list is unaffected.
      *
      * @return the number of triangles (&ge;0, &le;capacity)
      */

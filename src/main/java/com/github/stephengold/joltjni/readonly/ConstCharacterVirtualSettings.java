@@ -79,7 +79,7 @@ public interface ConstCharacterVirtualSettings
      * Return the character's mass. The settings are unaffected. (native field:
      * mMass)
      *
-     * @return the desired mass (in kilograms)
+     * @return the mass (in kilograms)
      */
     float getMass();
 

@@ -139,7 +139,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     // Mat44Arg methods
 
     /**
-     * Return the specified element.
+     * Return the specified element. The matrix is unaffected.
      *
      * @param row the zero-origin index of the row (&ge;0, &lt;4)
      * @param column the zero-origin index of the column (&ge;0, &lt;4)
@@ -154,7 +154,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
-     * Convert the rotation to a {@code Quat}.
+     * Convert the rotation to a {@code Quat}. The matrix is unaffected.
      *
      * @return a new rotation quaternion
      */
@@ -170,7 +170,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
-     * Multiply the current 3x3 matrix by the specified 3x3 matrix.
+     * Multiply the current 3x3 matrix by the specified 3x3 matrix. The matrix
+     * is unaffected.
      *
      * @param arg the factor (not null, unaffected)
      * @return a new matrix
@@ -186,7 +187,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
-     * Multiply the 3x3 matrix by the specified vector.
+     * Multiply the 3x3 matrix by the specified vector. The matrix is
+     * unaffected.
      *
      * @param vec3Arg the right factor (not null, unaffected)
      * @return a new vector
@@ -202,7 +204,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
-     * Multiply the transpose of the 3x3 matrix by the specified vector.
+     * Multiply the transpose of the 3x3 matrix by the specified vector. The
+     * matrix is unaffected.
      *
      * @param vec3Arg the right factor (not null, unaffected)
      * @return a new vector

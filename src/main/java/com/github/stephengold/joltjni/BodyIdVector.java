@@ -43,7 +43,8 @@ public class BodyIdVector extends Array<BodyId> {
     // Array<BodyId> methods
 
     /**
-     * Count how many IDs the currently allocated storage can hold.
+     * Count how many IDs the currently allocated storage can hold. The vector
+     * is unaffected.
      *
      * @return the number of IDs (&ge;size)
      */
@@ -94,7 +95,7 @@ public class BodyIdVector extends Array<BodyId> {
     }
 
     /**
-     * Count how many IDs are in the vector.
+     * Count how many IDs are in the vector. The vector is unaffected.
      *
      * @return the number of IDs (&ge;0, &le;capacity)
      */

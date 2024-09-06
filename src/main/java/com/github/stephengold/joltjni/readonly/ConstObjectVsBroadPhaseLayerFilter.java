@@ -32,7 +32,8 @@ public interface ConstObjectVsBroadPhaseLayerFilter
     // new methods exposed
 
     /**
-     * Test whether the specified layers should collide.
+     * Test whether the specified layers should collide. The filter is
+     * unaffected.
      *
      * @param objLayer the index of a object layer (&ge;0, &lt;numObjectLayers)
      * @param bpLayer the index of a broadphase layer (&ge;0, &lt;numBpLayers)

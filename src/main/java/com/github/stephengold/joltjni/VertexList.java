@@ -64,6 +64,7 @@ final public class VertexList {
 
     /**
      * Count how many vertices can be held in the currently allocated storage.
+     * The list is unaffected.
      *
      * @return the number of vertices (&ge;0)
      */
@@ -73,7 +74,7 @@ final public class VertexList {
     }
 
     /**
-     * Test whether the list contains no vertices.
+     * Test whether the list contains no vertices. The list is unaffected.
      *
      * @return true if empty, otherwise false
      */
@@ -86,7 +87,7 @@ final public class VertexList {
     }
 
     /**
-     * Copy the vertex at the specified index.
+     * Copy the vertex at the specified index. The list is unaffected.
      *
      * @param listIndex the index from which to get the vertex
      * @return the vertex
@@ -142,7 +143,7 @@ final public class VertexList {
     }
 
     /**
-     * Count how many vertices are in the list.
+     * Count how many vertices are in the list. The list is unaffected.
      *
      * @return the number of vertices (&ge;0)
      */

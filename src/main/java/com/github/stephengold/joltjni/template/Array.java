@@ -45,7 +45,8 @@ abstract public class Array<T extends JoltPhysicsObject>
     // new methods exposed
 
     /**
-     * Count how many elements the currently allocated storage can hold.
+     * Count how many elements the currently allocated storage can hold. The
+     * array is unaffected.
      *
      * @return the number of elements (&ge;size)
      */
@@ -59,7 +60,7 @@ abstract public class Array<T extends JoltPhysicsObject>
     }
 
     /**
-     * Test whether the array contains any elements.
+     * Test whether the array contains any elements. The array is unaffected.
      *
      * @return true if empty, otherwise false
      */
@@ -105,7 +106,7 @@ abstract public class Array<T extends JoltPhysicsObject>
     abstract public void set(int elementIndex, T object);
 
     /**
-     * Count how many elements are in the array.
+     * Count how many elements are in the array. The array is unaffected.
      *
      * @return the number of elements (&ge;0, &le;capacity)
      */

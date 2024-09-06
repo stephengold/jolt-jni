@@ -57,7 +57,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
 
     /**
      * Return the maximum contained coordinate on each axis. The box is
-     * unaffected.
+     * unaffected. (native field: mMax)
      *
      * @return a new vector
      */
@@ -65,7 +65,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
 
     /**
      * Return the minimum contained coordinate on each axis. The box is
-     * unaffected.
+     * unaffected. (native field: mMin)
      *
      * @return a new vector
      */

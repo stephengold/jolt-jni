@@ -31,7 +31,7 @@ public interface ConstSubShapeId extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Test for equality with the specified ID.
+     * Test for equality with the specified ID. The current ID is unaffected.
      *
      * @param otherId the ID to compare with (not null, unaffected)
      * @return true if equivalent, otherwise false
@@ -39,7 +39,7 @@ public interface ConstSubShapeId extends ConstJoltPhysicsObject {
     boolean contentEquals(ConstSubShapeId otherId);
 
     /**
-     * Return the bit pattern of the ID.
+     * Return the bit pattern of the ID. The ID is unaffected.
      *
      * @return the raw bit pattern
      */

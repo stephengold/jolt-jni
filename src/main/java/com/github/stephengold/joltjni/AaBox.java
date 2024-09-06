@@ -147,7 +147,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     /**
      * Return the maximum contained coordinate on each axis. The box is
-     * unaffected.
+     * unaffected. (native field: mMax)
      *
      * @return a new vector
      */
@@ -164,7 +164,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     /**
      * Return the minimum contained coordinate on each axis. The box is
-     * unaffected.
+     * unaffected. (native field: mMin)
      *
      * @return a new vector
      */
@@ -209,7 +209,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Test whether the box is valid. The box is unaffected.
+     * Test whether the box is valid. It is unaffected.
      *
      * @return true if valid, otherwise false
      */

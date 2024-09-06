@@ -642,7 +642,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Test whether the body is kinematic. The body is unaffected.
+     * Test whether the body is kinematic. It is unaffected.
      *
      * @return true if kinematic, otherwise false
      */
@@ -655,7 +655,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Test whether the body is a rigid body. The body is unaffected.
+     * Test whether the body is a rigid body. It is unaffected.
      *
      * @return true if rigid body, otherwise false
      */
@@ -681,7 +681,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Test whether the body is static. The body is unaffected.
+     * Test whether the body is static (non-moving). It is unaffected.
      *
      * @return true if static, otherwise false
      */
