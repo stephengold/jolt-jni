@@ -94,7 +94,8 @@ public class RotatedTranslatedShape extends DecoratedShape {
     // new methods exposed
 
     /**
-     * Copy the shape's offset relative to the base shape.
+     * Copy the shape's offset relative to the base shape. The shape is
+     * unaffected.
      *
      * @return a new, mutable offset vector
      */
@@ -109,7 +110,8 @@ public class RotatedTranslatedShape extends DecoratedShape {
     }
 
     /**
-     * Copy the shape's rotation relative to the base shape.
+     * Copy the shape's rotation relative to the base shape. The shape is
+     * unaffected.
      *
      * @return a new, mutable rotation quaternion
      */

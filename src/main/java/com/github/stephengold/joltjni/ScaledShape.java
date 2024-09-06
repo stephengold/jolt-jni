@@ -81,7 +81,7 @@ public class ScaledShape extends DecoratedShape {
     // new methods exposed
 
     /**
-     * Copy the shape's scale factors.
+     * Copy the shape's scale factors. The shape is unaffected.
      *
      * @return a new scaling vector
      */

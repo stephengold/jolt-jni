@@ -43,10 +43,11 @@ public class BodyFilter extends NonCopyable {
     // new methods exposed
 
     /**
-     * Test whether the specified body should be considered.
+     * Test whether the specified body is a candidate for collisions. The filter
+     * is unaffected.
      *
      * @param bodyId the body to test (not null, unaffected)
-     * @return true to consider it, otherwise false
+     * @return true if may collide, false if filtered out
      */
     public boolean shouldCollide(ConstBodyId bodyId) {
         long filterVa = va();

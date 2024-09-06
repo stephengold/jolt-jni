@@ -74,7 +74,7 @@ public class RagdollSettingsRef extends Ref {
     }
 
     /**
-     * Generate a ragdoll instance from the settings.
+     * Generate a ragdoll instance from the settings, which are unaffected.
      *
      * @param groupId the collision group for the bodies
      * @param userData the desired user-data value

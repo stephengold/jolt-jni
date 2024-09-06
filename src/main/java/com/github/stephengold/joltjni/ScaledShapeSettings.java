@@ -100,7 +100,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
     // new methods exposed
 
     /**
-     * Copy the shape's scale factors.
+     * Copy the scale factors. The settings are unaffected.
      *
      * @return a new scaling vector
      */

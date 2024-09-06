@@ -129,7 +129,8 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Enumerate all bodies to the specified variable-length vector.
+     * Enumerate all bodies to the specified variable-length vector. The system
+     * is unaffected.
      *
      * @param storeResult storage for the result (not null)
      */

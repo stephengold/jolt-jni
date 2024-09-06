@@ -53,7 +53,8 @@ public class RRayCast extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return a point on the ray with the specified fraction.
+     * Return a point on the ray with the specified fraction. The raycast is
+     * unaffected.
      *
      * @param fraction (0&rarr;start of ray, 1&rarr;end of ray)
      * @return a new vector
