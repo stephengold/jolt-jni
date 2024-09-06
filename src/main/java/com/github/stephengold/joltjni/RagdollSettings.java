@@ -39,6 +39,7 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
      * zero)
      */
     RagdollSettings(long settingsVa) {
+        super(settingsVa);
     }
     // *************************************************************************
     // RagdollInterface methods
