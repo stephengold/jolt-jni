@@ -43,6 +43,7 @@ import com.github.stephengold.joltjni.ShapeSettingsRef;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.SphereShapeSettings;
 import com.github.stephengold.joltjni.StaticCompoundShapeSettings;
+import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VertexList;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -80,6 +81,7 @@ public class Test006 {
         doSphereShapeSettings();
         doStaticCompoundShapeSettings();
         doScaledShapeSettings();
+        doTaperedCylinderShapeSettings();
 
         TestUtils.cleanup();
     }
@@ -248,6 +250,20 @@ public class Test006 {
                 = new StaticCompoundShapeSettings();
 
         testStaticCompoundSsDefaults(settings);
+
+        TestUtils.testClose(settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code TaperedCylinderShapeSettings} class.
+     */
+    private static void doTaperedCylinderShapeSettings() {
+        TaperedCylinderShapeSettings settings
+                = new TaperedCylinderShapeSettings(1f, 0f, 1f);
+
+        testTaperedCylinderSsDefaults(settings);
+        testTaperedCylinderSsSetters(settings);
 
         TestUtils.testClose(settings);
         System.gc();
@@ -623,5 +639,45 @@ public class Test006 {
     private static void testStaticCompoundSsDefaults(
             StaticCompoundShapeSettings settings) {
         testSsDefaults(settings);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code TaperedCylinderShapeSettings}.
+     *
+     * @param settings the settings to test (not null, unaffected)
+     */
+    private static void testTaperedCylinderSsDefaults(
+            TaperedCylinderShapeSettings settings) {
+        testConvexSsDefaults(settings);
+
+        Assert.assertEquals(1f, settings.getBottomRadius(), 0f);
+        Assert.assertEquals(0.05f, settings.getConvexRadius(), 0f);
+        Assert.assertEquals(1f, settings.getHalfHeight(), 0f);
+        Assert.assertEquals(0f, settings.getTopRadius(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code TaperedCylinderShapeSettings}.
+     *
+     * @param settings the settings to test (not null, modified)
+     */
+    private static void testTaperedCylinderSsSetters(
+            TaperedCylinderShapeSettings settings) {
+        settings.setBottomRadius(0.08f);
+        settings.setConvexRadius(0.1f);
+        settings.setHalfHeight(0.2f);
+        settings.setMaterial(PhysicsMaterial.sDefault());
+        settings.setTopRadius(0.3f);
+
+        ShapeSettingsRef ref = settings.toRef();
+        Assert.assertEquals(1, settings.getRefCount());
+        Assert.assertEquals(settings, ref.getPtr());
+
+        Assert.assertEquals(0.08f, settings.getBottomRadius(), 0f);
+        Assert.assertEquals(0.1f, settings.getConvexRadius(), 0f);
+        Assert.assertEquals(0.2f, settings.getHalfHeight(), 0f);
+        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        Assert.assertEquals(0.3f, settings.getTopRadius(), 0f);
     }
 }
