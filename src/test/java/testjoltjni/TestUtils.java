@@ -200,12 +200,14 @@ final public class TestUtils {
     }
 
     /**
-     * Load some flavor of Debug native library.
+     * Load some flavor of native library, preferably a Debug build.
      * <p>
      * The search order is:
      * <ol>
      * <li>DebugSp</li>
      * <li>DebugDp</li>
+     * <li>ReleaseSp</li>
+     * <li>ReleaseDp</li>
      * </ol>
      */
     public static void loadNativeLibrary() {
@@ -218,6 +220,16 @@ final public class TestUtils {
             success = loadNativeLibrary(directory, "Debug", "Dp");
             if (success) {
                 Assert.assertTrue(Jolt.isDoublePrecision());
+            } else {
+                success = loadNativeLibrary(directory, "Release", "Sp");
+                if (success) {
+                    Assert.assertFalse(Jolt.isDoublePrecision());
+                } else {
+                    success = loadNativeLibrary(directory, "Release", "Dp");
+                    if (success) {
+                        Assert.assertTrue(Jolt.isDoublePrecision());
+                    }
+                }
             }
         }
         Assert.assertTrue(success);
