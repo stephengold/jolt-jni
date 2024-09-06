@@ -50,7 +50,34 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
      * @param radius the desired radius
      */
     public CylinderShapeSettings(float halfHeight, float radius) {
-        long settingsVa = createCylinderShapeSettings(halfHeight, radius);
+        this(halfHeight, radius, 0.05f);
+    }
+
+    /**
+     * Instantiate settings for the specified dimensions.
+     *
+     * @param halfHeight half the desired height of the cylinder
+     * @param radius the desired radius of the cylinder
+     * @param convexRadius the desired convex radius (default=0.05)
+     */
+    public CylinderShapeSettings(
+            float halfHeight, float radius, float convexRadius) {
+        this(halfHeight, radius, convexRadius, null);
+    }
+
+    /**
+     * Instantiate settings for the specified dimensions and material.
+     *
+     * @param halfHeight half the desired height of the cylinder
+     * @param radius the desired radius of the cylinder
+     * @param convexRadius the desired convex radius (default=0.05)
+     * @param material the desired material (default=null)
+     */
+    public CylinderShapeSettings(float halfHeight, float radius,
+            float convexRadius, PhysicsMaterial material) {
+        long materialVa = (material == null) ? 0L : material.va();
+        long settingsVa = createShapeSettings(
+                halfHeight, radius, convexRadius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EShapeSubType.Cylinder);
     }
@@ -130,8 +157,8 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     // *************************************************************************
     // native private methods
 
-    native private static long createCylinderShapeSettings(
-            float halfHeight, float radius);
+    native private static long createShapeSettings(float halfHeight,
+            float radius, float convexRadius, long materialVa);
 
     native private static float getConvexRadius(long settingsVa);
 
