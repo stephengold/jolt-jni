@@ -12,6 +12,7 @@ plugins {
 }
 
 ext {
+    downloadZip = 'downloads/JoltPhysics-sg240827.zip'
     group = 'com.github.stephengold'
     version = '0.6.1-SNAPSHOT'
     baseName = "${artifact}-${version}" // for artifacts
@@ -412,12 +413,12 @@ def base64Decode(encodedString) {
 
 tasks.register('downloadJoltSource', Download) {
     src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/sg240827.zip'
-    dest file('downloads/JoltPhysics-sg240827.zip')
+    dest file(downloadZip)
     overwrite false
 }
 tasks.register('unpackJoltAssets', Copy) {
     dependsOn 'downloadJoltSource'
-    from (zipTree('downloads/JoltPhysics-sg240827.zip')) {
+    from (zipTree(downloadZip)) {
         include 'JoltPhysics-sg240827/Assets/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
@@ -428,7 +429,7 @@ tasks.register('unpackJoltAssets', Copy) {
 }
 tasks.register('unpackJoltSource', Copy) {
     dependsOn 'downloadJoltSource'
-    from (zipTree('downloads/JoltPhysics-sg240827.zip')) {
+    from (zipTree(downloadZip)) {
         include 'JoltPhysics-sg240827/Jolt/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
