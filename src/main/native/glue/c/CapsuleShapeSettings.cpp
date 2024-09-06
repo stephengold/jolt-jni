@@ -32,13 +32,15 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
- * Method:    createCapsuleShapeSettings
- * Signature: (FF)J
+ * Method:    createShapeSettings
+ * Signature: (FFJ)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_createCapsuleShapeSettings
-  (JNIEnv *, jclass, jfloat halfHeight, jfloat radius) {
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_createShapeSettings
+  (JNIEnv *, jclass, jfloat halfHeight, jfloat radius, jlong materialVa) {
+    const PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
     CapsuleShapeSettings * const pResult
-            = new CapsuleShapeSettings(halfHeight, radius);
+            = new CapsuleShapeSettings(halfHeight, radius, pMaterial);
     TRACE_NEW("CapsuleShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

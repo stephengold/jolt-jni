@@ -50,13 +50,26 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
      * @param radius the desired radius
      */
     public CapsuleShapeSettings(float halfHeight, float radius) {
-        long settingsVa = createCapsuleShapeSettings(halfHeight, radius);
+        this(halfHeight, radius, null);
+    }
+
+    /**
+     * Instantiate settings for the specified dimensions and material.
+     *
+     * @param halfHeight half the desired height of the cylindrical portion
+     * @param radius the desired radius
+     * @param material the desired material (default=null)
+     */
+    public CapsuleShapeSettings(
+            float halfHeight, float radius, PhysicsMaterial material) {
+        long materialVa = (material == null) ? 0L : material.va();
+        long settingsVa = createShapeSettings(halfHeight, radius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EShapeSubType.Capsule);
     }
     // *************************************************************************
     // native private methods
 
-    native private static long createCapsuleShapeSettings(
-            float halfHeight, float radius);
+    native private static long createShapeSettings(
+            float halfHeight, float radius, long materialVa);
 }
