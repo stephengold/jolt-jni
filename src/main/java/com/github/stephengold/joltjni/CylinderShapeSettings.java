@@ -47,7 +47,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
      * Instantiate settings for the specified dimensions.
      *
      * @param halfHeight half the desired height
-     * @param radius the desired radius
+     * @param radius the desired radius of the cylinder
      */
     public CylinderShapeSettings(float halfHeight, float radius) {
         this(halfHeight, radius, 0.05f);
@@ -102,7 +102,6 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
      * mHalfHeight)
      *
      * @return half the height
-     *
      */
     public float getHalfHeight() {
         long settingsVa = va();
@@ -112,7 +111,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the radius of the cylinder. The settings are unaffected (native
+     * Return the radius of the cylinder. The settings are unaffected. (native
      * field: mRadius)
      *
      * @return the radius (&ge;0)
@@ -138,7 +137,6 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
      * Alter the half height. (native field: mHalfHeight)
      *
      * @param halfHeight one half of the desired height (&ge;0)
-     *
      */
     public void setHalfHeight(float halfHeight) {
         long settingsVa = va();
@@ -146,7 +144,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the radius of the cylinder. (native field: mRadius)
+     * Alter the radius of the cylinder. (native field: mRadius)
      *
      * @param radius the desired radius (&ge;0)
      */
