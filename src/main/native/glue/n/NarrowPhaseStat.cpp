@@ -31,6 +31,20 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_NarrowPhaseStat
+ * Method:    isCollecting
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseStat_isCollecting
+  (JNIEnv *, jclass) {
+#ifdef JPH_TRACK_NARROWPHASE_STATS
+    return JNI_TRUE;
+#else
+    return JNI_FALSE;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_NarrowPhaseStat
  * Method:    sReportStats
  * Signature: ()V
  */
