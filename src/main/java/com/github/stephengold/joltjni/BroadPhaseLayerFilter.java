@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A filter for broadphase layers.
+ * A collision filter for broad-phase layers.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -31,8 +31,41 @@ public class BroadPhaseLayerFilter extends NonCopyable {
     // constructors
 
     /**
-     * Instantiate a filter with no native object assigned.
+     * Instantiate a default filter that selects all layers.
      */
-    BroadPhaseLayerFilter() {
+    public BroadPhaseLayerFilter() {
+        long filterVa = createDefaultFilter();
+        setVirtualAddress(filterVa, true);
     }
+
+    /**
+     * Instantiate a filter with no native object assigned.
+     *
+     * @param dummy unused argument to distinguish the zero-arg constructor
+     */
+    BroadPhaseLayerFilter(boolean dummy) {
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Test whether the specified layer is a candidate for collisions. The
+     * filter is unaffected.
+     *
+     * @param bpLayerIndex the index of the broad-phase layer to test
+     * @return true if may collide, false if filtered out
+     */
+    public boolean shouldCollide(int bpLayerIndex) {
+        long filterVa = va();
+        boolean result = shouldCollide(filterVa, bpLayerIndex);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static long createDefaultFilter();
+
+    native private static boolean shouldCollide(
+            long filterVa, int bpLayerIndex);
 }

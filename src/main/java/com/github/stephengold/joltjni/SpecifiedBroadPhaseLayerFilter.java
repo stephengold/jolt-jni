@@ -36,6 +36,7 @@ public class SpecifiedBroadPhaseLayerFilter extends BroadPhaseLayerFilter {
      * @param layerIndex the index of the layer to select
      */
     public SpecifiedBroadPhaseLayerFilter(int layerIndex) {
+        super(true);
         long filterVa = createSpecifiedBroadPhaseLayerFilter(layerIndex);
         setVirtualAddress(filterVa, true);
     }
