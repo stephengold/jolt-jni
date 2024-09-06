@@ -155,7 +155,11 @@ public enum EShapeSubType {
      */
     UserConvex8,
     /**
-     * plane
+     * PlaneShape
      */
-    Plane
+    Plane,
+    /**
+     * TaperedCylinderShape
+     */
+    TaperedCylinder
 }
