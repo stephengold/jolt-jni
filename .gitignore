@@ -1,4 +1,5 @@
 /.cxx/
+/Assets/
 /downloads/
 /src/main/native/auto/
 /src/main/native/Jolt/
@@ -13,3 +14,8 @@
 /.idea/
 /.nb-gradle/
 /private/
+
+# Ignore Jolt Physics output files:
+/performance_test_*.jor
+/per_frame_*.csv
+/state_*.bin
