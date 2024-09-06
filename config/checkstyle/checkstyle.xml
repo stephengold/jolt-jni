@@ -425,7 +425,6 @@
         <!-- Checks for class design                  -->
         <!-- See https://checkstyle.org/checks/design -->
         <module name="DesignForExtension"/>
-        <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
     </module>
