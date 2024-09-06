@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createFromColu
     jboolean isCopy;
     jfloat * const pElements
             = pEnv->GetFloatArrayElements(elementsArray, &isCopy);
-    Vec4 column1(pElements[0], pElements[1], pElements[2], pElements[3]);
-    Vec4 column2(pElements[4], pElements[5], pElements[6], pElements[7]);
-    Vec4 column3(pElements[8], pElements[9], pElements[10], pElements[11]);
-    Vec4 column4(pElements[12], pElements[13], pElements[14], pElements[15]);
+    const Vec4 column1(pElements[0], pElements[1], pElements[2], pElements[3]);
+    const Vec4 column2(pElements[4], pElements[5], pElements[6], pElements[7]);
+    const Vec4 column3(pElements[8], pElements[9], pElements[10], pElements[11]);
+    const Vec4 column4(pElements[12], pElements[13], pElements[14], pElements[15]);
     pEnv->ReleaseFloatArrayElements(elementsArray, pElements, JNI_ABORT);
     Mat44 * const pResult = new Mat44(column1, column2, column3, column4);
     TRACE_NEW("Mat44", pResult)

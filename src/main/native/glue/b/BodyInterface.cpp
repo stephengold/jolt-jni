@@ -531,7 +531,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_notifyS
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
     const Vec3 previous(prevX, prevY, prevZ);
-    EActivation activationMode = (EActivation)activationOrdinal;
+    const EActivation activationMode = (EActivation)activationOrdinal;
     pInterface->NotifyShapeChanged(
             *pBodyId, previous, updateMassProperties, activationMode);
 }
