@@ -235,6 +235,12 @@ tasks.withType(JavaCompile) { // Java compile-time options:
 application {
     mainClass = 'testjoltjni.app.HelloWorld'
 }
+tasks.register('debugRagdoll', JavaExec) {
+    args '-s=Ragdoll'
+    debug = true
+    dependsOn('unpackJoltAssets')
+    mainClass = 'testjoltjni.app.PerformanceTest'
+}
 tasks.register('runConvexVsMesh', JavaExec) {
     args '-s=ConvexVsMesh'
     mainClass = 'testjoltjni.app.PerformanceTest'
@@ -244,6 +250,16 @@ tasks.register('runHelloWorld', JavaExec) {
 }
 tasks.register('runPyramid', JavaExec) {
     args '-s=Pyramid'
+    mainClass = 'testjoltjni.app.PerformanceTest'
+}
+tasks.register('runRagdoll', JavaExec) {
+    args '-s=Ragdoll'
+    dependsOn('unpackJoltAssets')
+    mainClass = 'testjoltjni.app.PerformanceTest'
+}
+tasks.register('runRagdollSinglePile', JavaExec) {
+    args '-s=RagdollSinglePile'
+    dependsOn('unpackJoltAssets')
     mainClass = 'testjoltjni.app.PerformanceTest'
 }
 tasks.withType(JavaExec).configureEach { // Java runtime options:

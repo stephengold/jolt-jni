@@ -28,6 +28,9 @@ import testjoltjni.TestUtils;
 
 public class PerformanceTest {
     private static DebugRendererRecorder renderer;
+    private static PerformanceTestScene create_ragdoll_scene() {
+        return new RagdollScene(4, 10, 0.6f);
+    }
     final private static String endl = System.lineSeparator();
 
 // Time step for physics
@@ -69,7 +72,11 @@ public static void main(String[] argv) throws IOException
 		if (arg.startsWith("-s="))
 		{
 			// Parse scene
-			if (arg.substring(3).equals("ConvexVsMesh"))
+			if (arg.substring(3).equals("Ragdoll"))
+				scene = create_ragdoll_scene();
+			else if (arg.substring(3).equals("RagdollSinglePile"))
+				scene = new RagdollScene(1, 160, 0.4f);
+			else if (arg.substring(3).equals("ConvexVsMesh"))
 				scene = new ConvexVsMeshScene();
 			else if (arg.substring(3).equals("Pyramid"))
 				scene = new PyramidScene();
@@ -144,7 +151,7 @@ public static void main(String[] argv) throws IOException
 		{
 			// Print usage
 			Trace("Usage:\n"
-				 + "-s=<scene>: Select scene (ConvexVsMesh, Pyramid)\n"
+				 + "-s=<scene>: Select scene (Ragdoll, RagdollSinglePile, ConvexVsMesh, Pyramid)\n"
 				 + "-i=<num physics steps>: Number of physics steps to simulate (default 500)\n"
 				 + "-q=<quality>: Test only with specified quality (Discrete, LinearCast)\n"
 				 + "-t=<num threads>: Test only with N threads (default is to iterate over 1 .. num hardware threads)\n"
@@ -171,7 +178,9 @@ public static void main(String[] argv) throws IOException
 	TempAllocatorImpl temp_allocator = new TempAllocatorImpl(32 * 1024 * 1024);
 
 	// Load the scene
-	if (scene == null || !scene.Load())
+	if (scene == null)
+		scene = create_ragdoll_scene();
+	if (!scene.Load())
 		System.exit(1);
 
 	// Show used instruction sets
