@@ -66,6 +66,7 @@ public class ContactList extends Array<Contact> {
      * @param elementIndex the index from which to get the contact (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public Contact get(int elementIndex) {
         long listVa = va();
         long contactVa = get(listVa, elementIndex);
@@ -79,6 +80,7 @@ public class ContactList extends Array<Contact> {
      *
      * @param numContacts the desired size (number of elements, &ge;0)
      */
+    @Override
     public void resize(int numContacts) {
         long listVa = va();
         resize(listVa, numContacts);
