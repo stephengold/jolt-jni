@@ -127,6 +127,9 @@ abstract public class ShapeSettings
             case StaticCompound:
                 result = new StaticCompoundShapeSettings(settingsVa);
                 break;
+            case TaperedCapsule:
+                result = new TaperedCapsuleShapeSettings(settingsVa);
+                break;
             case TaperedCylinder:
                 result = new TaperedCylinderShapeSettings(settingsVa);
                 break;

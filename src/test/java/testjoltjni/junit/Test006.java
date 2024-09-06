@@ -43,6 +43,7 @@ import com.github.stephengold.joltjni.ShapeSettingsRef;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.SphereShapeSettings;
 import com.github.stephengold.joltjni.StaticCompoundShapeSettings;
+import com.github.stephengold.joltjni.TaperedCapsuleShapeSettings;
 import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VertexList;
@@ -81,6 +82,7 @@ public class Test006 {
         doSphereShapeSettings();
         doStaticCompoundShapeSettings();
         doScaledShapeSettings();
+        doTaperedCapsuleShapeSettings();
         doTaperedCylinderShapeSettings();
 
         TestUtils.cleanup();
@@ -250,6 +252,20 @@ public class Test006 {
                 = new StaticCompoundShapeSettings();
 
         testStaticCompoundSsDefaults(settings);
+
+        TestUtils.testClose(settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code TaperedCapsuleShapeSettings} class.
+     */
+    private static void doTaperedCapsuleShapeSettings() {
+        TaperedCapsuleShapeSettings settings
+                = new TaperedCapsuleShapeSettings(1f, 2f, 1f);
+
+        testTaperedCapsuleSsDefaults(settings);
+        testTaperedCapsuleSsSetters(settings);
 
         TestUtils.testClose(settings);
         System.gc();
@@ -639,6 +655,44 @@ public class Test006 {
     private static void testStaticCompoundSsDefaults(
             StaticCompoundShapeSettings settings) {
         testSsDefaults(settings);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code TaperedCapsuleShapeSettings}.
+     *
+     * @param settings the settings to test (not null, unaffected)
+     */
+    private static void testTaperedCapsuleSsDefaults(
+            TaperedCapsuleShapeSettings settings) {
+        testConvexSsDefaults(settings);
+
+        Assert.assertEquals(1f, settings.getBottomRadius(), 0f);
+        Assert.assertEquals(1f, settings.getHalfHeightOfTaperedCylinder(), 0f);
+        Assert.assertEquals(2f, settings.getTopRadius(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code TaperedCapsuleShapeSettings}.
+     *
+     * @param settings the settings to test (not null, modified)
+     */
+    private static void testTaperedCapsuleSsSetters(
+            TaperedCapsuleShapeSettings settings) {
+        settings.setBottomRadius(0.08f);
+        settings.setHalfHeightOfTaperedCylinder(0.2f);
+        settings.setMaterial(PhysicsMaterial.sDefault());
+        settings.setTopRadius(0.3f);
+
+        ShapeSettingsRef ref = settings.toRef();
+        Assert.assertEquals(1, settings.getRefCount());
+        Assert.assertEquals(settings, ref.getPtr());
+
+        Assert.assertEquals(0.08f, settings.getBottomRadius(), 0f);
+        Assert.assertEquals(
+                0.2f, settings.getHalfHeightOfTaperedCylinder(), 0f);
+        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        Assert.assertEquals(0.3f, settings.getTopRadius(), 0f);
     }
 
     /**
