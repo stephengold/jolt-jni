@@ -442,6 +442,7 @@ tasks.register('cleanJoltSource', Delete) { // unpacked Jolt Physics source code
 tasks.register('cleanLogs', Delete) { // JVM crash logs
     delete fileTree(dir: '.', include: 'hs_err_pid*.log')
 }
-tasks.register('cleanRecordings', Delete) { // DebugRenderer recordings
-    delete fileTree(dir: '.', include: 'performance_test_*.jor')
+tasks.register('cleanRecordings', Delete) {
+    // DebugRenderer recordings, recorded state, and frame timing output
+    delete fileTree(dir: '.', includes: ['performance_test_*.jor', 'per_frame_*.csv', 'state_*.bin'])
 }
