@@ -68,8 +68,66 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
         setSubType(EShapeSubType.Capsule);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the half height of the cylindrical portion. The settings are
+     * unaffected. (native field: mHalfHeightOfCylinder)
+     *
+     * @return half the height
+     */
+    public float getHalfHeightOfCylinder() {
+        long settingsVa = va();
+        float result = getHalfHeightOfCylinder(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the radius. The settings are unaffected. (native field: mRadius)
+     *
+     * @return the radius (&ge;0)
+     */
+    public float getRadius() {
+        long settingsVa = va();
+        float result = getRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Alter the half height of the cylindrical portion. (native field:
+     * mHalfHeightOfCylinder)
+     *
+     * @param halfHeight one half of the desired height of the cylindrical
+     * portion (&ge;0)
+     */
+    public void setHalfHeightOfCylinder(float halfHeight) {
+        long settingsVa = va();
+        setHalfHeightOfCylinder(settingsVa, halfHeight);
+    }
+
+    /**
+     * Alter the radius. (native field: mRadius)
+     *
+     * @param radius the radius (&ge;0)
+     */
+    public void setRadius(float radius) {
+        long settingsVa = va();
+        setRadius(settingsVa, radius);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createShapeSettings(
             float halfHeight, float radius, long materialVa);
+
+    native private static float getHalfHeightOfCylinder(long settingsVa);
+
+    native private static float getRadius(long settingsVa);
+
+    native private static void setHalfHeightOfCylinder(
+            long settingsVa, float halfHeight);
+
+    native private static void setRadius(long settingsVa, float radius);
 }

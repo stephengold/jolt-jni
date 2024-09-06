@@ -106,6 +106,7 @@ public class Test006 {
         CapsuleShapeSettings settings = new CapsuleShapeSettings(1f, 1f);
 
         testCapsuleSsDefaults(settings);
+        testCapsuleSsSetters(settings);
 
         TestUtils.testClose(settings);
         System.gc();
@@ -293,6 +294,28 @@ public class Test006 {
      */
     private static void testCapsuleSsDefaults(CapsuleShapeSettings settings) {
         testConvexSsDefaults(settings);
+
+        Assert.assertEquals(1f, settings.getHalfHeightOfCylinder(), 0f);
+        Assert.assertEquals(1f, settings.getRadius(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code CapsuleShapeSettings}.
+     *
+     * @param settings the settings to test (not null, modified)
+     */
+    private static void testCapsuleSsSetters(CapsuleShapeSettings settings) {
+        settings.setHalfHeightOfCylinder(0.2f);
+        settings.setMaterial(PhysicsMaterial.sDefault());
+        settings.setRadius(0.3f);
+
+        ShapeSettingsRef ref = settings.toRef();
+        Assert.assertEquals(1, settings.getRefCount());
+        Assert.assertEquals(settings, ref.getPtr());
+
+        Assert.assertEquals(0.2f, settings.getHalfHeightOfCylinder(), 0f);
+        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        Assert.assertEquals(0.3f, settings.getRadius(), 0f);
     }
 
     /**

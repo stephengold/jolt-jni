@@ -44,3 +44,53 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings
     TRACE_NEW("CapsuleShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
+ * Method:    getHalfHeightOfCylinder
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_getHalfHeightOfCylinder
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const CapsuleShapeSettings * const pSettings
+            = reinterpret_cast<CapsuleShapeSettings *> (settingsVa);
+    const float result = pSettings->mHalfHeightOfCylinder;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
+ * Method:    getRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_getRadius
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const CapsuleShapeSettings * const pSettings
+            = reinterpret_cast<CapsuleShapeSettings *> (settingsVa);
+    const float result = pSettings->mRadius;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
+ * Method:    setHalfHeightOfCylinder
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_setHalfHeightOfCylinder
+  (JNIEnv *, jclass, jlong settingsVa, jfloat halfHeight) {
+    CapsuleShapeSettings * const pSettings
+            = reinterpret_cast<CapsuleShapeSettings *> (settingsVa);
+    pSettings->mHalfHeightOfCylinder = halfHeight;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
+ * Method:    setRadius
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_setRadius
+  (JNIEnv *, jclass, jlong settingsVa, jfloat radius) {
+    CapsuleShapeSettings * const pSettings
+            = reinterpret_cast<CapsuleShapeSettings *> (settingsVa);
+    pSettings->mRadius = radius;
+}
