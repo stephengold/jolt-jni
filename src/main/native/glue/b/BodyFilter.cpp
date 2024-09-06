@@ -26,8 +26,21 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Body/BodyFilter.h>
 #include "auto/com_github_stephengold_joltjni_BodyFilter.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyFilter
+ * Method:    createDefaultFilter
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyFilter_createDefaultFilter
+  (JNIEnv *, jclass) {
+    BodyFilter * const pResult = new BodyFilter();
+    TRACE_NEW("BodyFilter", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyFilter

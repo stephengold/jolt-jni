@@ -33,19 +33,11 @@ public class BodyFilter extends NonCopyable {
     // constructors
 
     /**
-     * Instantiate with no native object assigned.
+     * Instantiate a default filter that selects all layers.
      */
-    BodyFilter() {
-    }
-
-    /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
-     */
-    BodyFilter(long virtualAddress) {
-        super(virtualAddress);
+    public BodyFilter() {
+        long filterVa = createDefaultFilter();
+        setVirtualAddress(filterVa, true);
     }
     // *************************************************************************
     // new methods exposed
@@ -65,6 +57,8 @@ public class BodyFilter extends NonCopyable {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createDefaultFilter();
 
     native private static boolean shouldCollide(long filterVa, long idVa);
 }
