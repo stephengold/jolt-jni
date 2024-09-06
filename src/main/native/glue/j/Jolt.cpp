@@ -127,6 +127,20 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsDe
 #endif
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    implementsDeterminismLog
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsDeterminismLog
+  (JNIEnv *, jclass) {
+#ifdef JPH_DET_LOG
+    return JNI_TRUE;
+#else
+    return JNI_FALSE;
+#endif
+}
+
 #ifdef JPH_ENABLE_ASSERTS
 
 // Callback for asserts

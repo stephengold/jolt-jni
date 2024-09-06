@@ -137,6 +137,14 @@ final public class Jolt {
     native public static boolean implementsDebugRendering();
 
     /**
+     * Test whether the native library implements extra logging to help debug
+     * determinism issues. (native macro: JPH_DET_LOG)
+     *
+     * @return true if implemented, otherwise false
+     */
+    native public static boolean implementsDeterminismLog();
+
+    /**
      * Install the default assert callback.
      */
     native public static void installDefaultAssertCallback();
