@@ -276,7 +276,7 @@ public class Test006 {
      */
     private static void doTaperedCylinderShapeSettings() {
         TaperedCylinderShapeSettings settings
-                = new TaperedCylinderShapeSettings(1f, 0f, 1f);
+                = new TaperedCylinderShapeSettings(1f, 0.05f, 1f);
 
         testTaperedCylinderSsDefaults(settings);
         testTaperedCylinderSsSetters(settings);
@@ -708,7 +708,7 @@ public class Test006 {
         Assert.assertEquals(1f, settings.getBottomRadius(), 0f);
         Assert.assertEquals(0.05f, settings.getConvexRadius(), 0f);
         Assert.assertEquals(1f, settings.getHalfHeight(), 0f);
-        Assert.assertEquals(0f, settings.getTopRadius(), 0f);
+        Assert.assertEquals(0.05f, settings.getTopRadius(), 0f);
     }
 
     /**
