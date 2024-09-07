@@ -55,3 +55,39 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShape_getConvexR
     const float result = pShape->GetConvexRadius();
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShape
+ * Method:    getHalfExtentX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShape_getHalfExtentX
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const BoxShape * const pShape = reinterpret_cast<BoxShape *> (shapeVa);
+    const float result = pShape->GetHalfExtent().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShape
+ * Method:    getHalfExtentY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShape_getHalfExtentY
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const BoxShape * const pShape = reinterpret_cast<BoxShape *> (shapeVa);
+    const float result = pShape->GetHalfExtent().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShape
+ * Method:    getHalfExtentZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShape_getHalfExtentZ
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const BoxShape * const pShape = reinterpret_cast<BoxShape *> (shapeVa);
+    const float result = pShape->GetHalfExtent().GetZ();
+    return result;
+}

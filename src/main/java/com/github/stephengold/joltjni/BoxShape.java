@@ -82,6 +82,21 @@ public class BoxShape extends ConvexShape {
 
         return result;
     }
+
+    /**
+     * Copy the half extents. The shape is unaffected.
+     *
+     * @return a new vector
+     */
+    public Vec3 getHalfExtent() {
+        long shapeVa = va();
+        float hx = getHalfExtentX(shapeVa);
+        float hy = getHalfExtentY(shapeVa);
+        float hz = getHalfExtentZ(shapeVa);
+        Vec3 result = new Vec3(hx, hy, hz);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -89,4 +104,10 @@ public class BoxShape extends ConvexShape {
             float yHalfExtent, float zHalfExtent, float convexRadius);
 
     native private static float getConvexRadius(long shapeVa);
+
+    native private static float getHalfExtentX(long shapeVa);
+
+    native private static float getHalfExtentY(long shapeVa);
+
+    native private static float getHalfExtentZ(long shapeVa);
 }

@@ -420,6 +420,7 @@ public class Test007 {
      */
     private static void testBoxDefaults(BoxShape shape) {
         Assert.assertEquals(0.05f, shape.getConvexRadius(), 0f);
+        TestUtils.assertEquals(1f, 1f, 1f, shape.getHalfExtent(), 0f);
         Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
         Assert.assertEquals(EShapeSubType.Box, shape.getSubType());
         Assert.assertEquals(EShapeType.Convex, shape.getType());
