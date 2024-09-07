@@ -112,6 +112,9 @@ abstract public class Shape extends NonCopyable
             case TaperedCapsule:
                 result = new TaperedCapsuleShape(shapeVa);
                 break;
+            case TaperedCylinder:
+                result = new TaperedCylinderShape(shapeVa);
+                break;
             case Triangle:
                 result = new TriangleShape(shapeVa);
                 break;
