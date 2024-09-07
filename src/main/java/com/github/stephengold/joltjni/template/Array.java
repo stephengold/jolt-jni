@@ -94,6 +94,7 @@ abstract public class Array<T extends JoltPhysicsObject>
      */
     public void pushBack(T object) {
         int numElements = size();
+        resize(numElements + 1);
         set(numElements, object);
     }
 
