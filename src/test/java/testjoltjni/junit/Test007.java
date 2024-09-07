@@ -27,6 +27,8 @@ import com.github.stephengold.joltjni.CapsuleShape;
 import com.github.stephengold.joltjni.CapsuleShapeSettings;
 import com.github.stephengold.joltjni.CylinderShape;
 import com.github.stephengold.joltjni.CylinderShapeSettings;
+import com.github.stephengold.joltjni.ShapeRefC;
+import com.github.stephengold.joltjni.ShapeResult;
 import com.github.stephengold.joltjni.TaperedCapsuleShape;
 import com.github.stephengold.joltjni.TaperedCapsuleShapeSettings;
 import com.github.stephengold.joltjni.TaperedCylinderShape;
@@ -71,13 +73,17 @@ public class Test007 {
      */
     private static void doBoxShape() {
         BoxShapeSettings settings = new BoxShapeSettings(new Vec3(1f, 1f, 1f));
-        BoxShape shape = (BoxShape) settings.create().get().getPtr();
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        BoxShape shape = (BoxShape) ref.getPtr();
         testBoxDefaults(shape);
 
         BoxShape shape2 = new BoxShape(new Vec3(1f, 1f, 1f));
         testBoxDefaults(shape2);
 
-        TestUtils.testClose(shape2, shape, settings);
+        TestUtils.testClose(shape2, shape, ref, result, settings);
         System.gc();
     }
 
@@ -86,13 +92,17 @@ public class Test007 {
      */
     private static void doCapsuleShape() {
         CapsuleShapeSettings settings = new CapsuleShapeSettings(1f, 1f);
-        CapsuleShape shape = (CapsuleShape) settings.create().get().getPtr();
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        CapsuleShape shape = (CapsuleShape) ref.getPtr();
         testCapsuleDefaults(shape);
 
         CapsuleShape shape2 = new CapsuleShape(1f, 1f);
         testCapsuleDefaults(shape2);
 
-        TestUtils.testClose(shape2, shape, settings);
+        TestUtils.testClose(shape2, shape, ref, result, settings);
         System.gc();
     }
 
@@ -101,13 +111,17 @@ public class Test007 {
      */
     private static void doCylinderShape() {
         CylinderShapeSettings settings = new CylinderShapeSettings(1f, 1f);
-        CylinderShape shape = (CylinderShape) settings.create().get().getPtr();
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        CylinderShape shape = (CylinderShape) ref.getPtr();
         testCylinderDefaults(shape);
 
         CylinderShape shape2 = new CylinderShape(1f, 1f);
         testCylinderDefaults(shape2);
 
-        TestUtils.testClose(shape, settings);
+        TestUtils.testClose(shape2, shape, ref, result, settings);
         System.gc();
     }
 
@@ -117,15 +131,18 @@ public class Test007 {
     private static void doTaperedCapsuleShape() {
         TaperedCapsuleShapeSettings settings
                 = new TaperedCapsuleShapeSettings(1f, 2f, 1f);
-        TaperedCapsuleShape shape
-                = (TaperedCapsuleShape) settings.create().get().getPtr();
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        TaperedCapsuleShape shape = (TaperedCapsuleShape) ref.getPtr();
 
         Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
         Assert.assertEquals(EShapeSubType.TaperedCapsule, shape.getSubType());
         Assert.assertEquals(EShapeType.Convex, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
 
-        TestUtils.testClose(shape, settings);
+        TestUtils.testClose(shape, ref, result, settings);
         System.gc();
     }
 
@@ -135,15 +152,18 @@ public class Test007 {
     private static void doTaperedCylinderShape() {
         TaperedCylinderShapeSettings settings
                 = new TaperedCylinderShapeSettings(1f, 0.05f, 1f);
-        TaperedCylinderShape shape
-                = (TaperedCylinderShape) settings.create().get().getPtr();
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        TaperedCylinderShape shape = (TaperedCylinderShape) ref.getPtr();
 
         Assert.assertEquals(0.05f, shape.getInnerRadius(), 0f);
         Assert.assertEquals(EShapeSubType.TaperedCylinder, shape.getSubType());
         Assert.assertEquals(EShapeType.Convex, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
 
-        TestUtils.testClose(shape, settings);
+        TestUtils.testClose(shape, ref, result, settings);
         System.gc();
     }
 
