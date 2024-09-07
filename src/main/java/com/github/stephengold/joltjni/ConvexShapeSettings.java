@@ -38,7 +38,7 @@ abstract public class ConvexShapeSettings
     /**
      * Instantiate settings with no native object assigned.
      */
-    protected ConvexShapeSettings() {
+    ConvexShapeSettings() {
     }
 
     /**

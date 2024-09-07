@@ -38,7 +38,7 @@ abstract public class ShapeSettings
     /**
      * Instantiate settings with no native object assigned.
      */
-    protected ShapeSettings() {
+    ShapeSettings() {
     }
 
     /**

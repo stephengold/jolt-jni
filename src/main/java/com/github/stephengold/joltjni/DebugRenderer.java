@@ -40,7 +40,7 @@ abstract public class DebugRenderer extends NonCopyable {
     /**
      * Instantiate with no native object assigned.
      */
-    protected DebugRenderer() {
+    DebugRenderer() {
         // The native object is a singleton.
         // If a previous instance hasn't been freed,
         // a (native) assertion failure is possible.

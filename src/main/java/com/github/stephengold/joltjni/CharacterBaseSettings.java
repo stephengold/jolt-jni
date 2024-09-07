@@ -40,7 +40,7 @@ public class CharacterBaseSettings
     /**
      * Instantiate settings with no native object assigned.
      */
-    protected CharacterBaseSettings() {
+    CharacterBaseSettings() {
     }
 
     /**

@@ -39,7 +39,7 @@ abstract public class ConstraintSettings
     /**
      * Instantiate settings with no native object assigned.
      */
-    protected ConstraintSettings() {
+    ConstraintSettings() {
     }
 
     /**

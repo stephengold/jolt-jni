@@ -33,7 +33,7 @@ public class DecoratedShape extends Shape {
     /**
      * Instantiate a shape with no native object assigned.
      */
-    protected DecoratedShape() {
+    DecoratedShape() {
     }
 
     /**

@@ -33,7 +33,7 @@ abstract public class TwoBodyConstraintSettings extends ConstraintSettings {
     /**
      * Instantiate settings with no native object assigned.
      */
-    protected TwoBodyConstraintSettings() {
+    TwoBodyConstraintSettings() {
     }
 
     /**

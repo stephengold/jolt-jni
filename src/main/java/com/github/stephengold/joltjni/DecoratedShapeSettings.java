@@ -33,7 +33,7 @@ public class DecoratedShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings with no native object assigned.
      */
-    protected DecoratedShapeSettings() {
+    DecoratedShapeSettings() {
     }
 
     /**

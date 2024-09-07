@@ -33,7 +33,7 @@ abstract public class ConvexShape extends Shape {
     /**
      * Instantiate a shape with no native object assigned.
      */
-    protected ConvexShape() {
+    ConvexShape() {
     }
 
     /**

@@ -36,7 +36,7 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
     /**
      * Instantiate a settings object with no native object assigned.
      */
-    protected CompoundShapeSettings() {
+    CompoundShapeSettings() {
     }
 
     /**

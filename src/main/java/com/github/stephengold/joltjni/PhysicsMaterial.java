@@ -37,7 +37,7 @@ public class PhysicsMaterial extends SerializableObject
     /**
      * Instantiate a material with no native object assigned.
      */
-    protected PhysicsMaterial() {
+    PhysicsMaterial() {
     }
 
     /**

@@ -37,7 +37,7 @@ abstract public class ObjectVsBroadPhaseLayerFilter
     /**
      * Instantiate a filter with no native object assigned.
      */
-    protected ObjectVsBroadPhaseLayerFilter() {
+    ObjectVsBroadPhaseLayerFilter() {
     }
     // *************************************************************************
     // ConstObjectVsBroadPhaseLayerFilter methods

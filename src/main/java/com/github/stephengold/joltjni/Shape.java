@@ -42,7 +42,7 @@ abstract public class Shape extends NonCopyable
     /**
      * Instantiate a shape with no native object assigned.
      */
-    protected Shape() {
+    Shape() {
     }
 
     /**

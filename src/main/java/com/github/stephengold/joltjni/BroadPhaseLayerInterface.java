@@ -37,7 +37,7 @@ abstract public class BroadPhaseLayerInterface
     /**
      * Instantiate a map with no native object assigned.
      */
-    protected BroadPhaseLayerInterface() {
+    BroadPhaseLayerInterface() {
     }
     // *************************************************************************
     // ConstBroadPhaseLayerInterface methods

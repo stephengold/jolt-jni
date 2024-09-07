@@ -34,7 +34,7 @@ public class StateRecorder extends NonCopyable {
     /**
      * Instantiate a recorder with no native object assigned.
      */
-    protected StateRecorder() {
+    StateRecorder() {
     }
     // *************************************************************************
     // new methods exposed

@@ -33,6 +33,6 @@ abstract public class JobSystemWithBarrier extends JobSystem {
     /**
      * Instantiate a job system with no native object assigned.
      */
-    protected JobSystemWithBarrier() {
+    JobSystemWithBarrier() {
     }
 }

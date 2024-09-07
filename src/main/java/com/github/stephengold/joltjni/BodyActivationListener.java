@@ -33,7 +33,7 @@ public class BodyActivationListener extends JoltPhysicsObject {
     /**
      * Instantiate a listener with no native object assigned.
      */
-    protected BodyActivationListener() {
+    BodyActivationListener() {
     }
 
     /**

@@ -33,7 +33,7 @@ abstract public class NonCopyable extends JoltPhysicsObject {
     /**
      * Instantiate with no native object assigned.
      */
-    protected NonCopyable() {
+    NonCopyable() {
     }
 
     /**

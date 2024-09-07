@@ -33,7 +33,7 @@ abstract public class SerializableObject extends NonCopyable {
     /**
      * Instantiate with no native object assigned.
      */
-    protected SerializableObject() {
+    SerializableObject() {
     }
 
     /**

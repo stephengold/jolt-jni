@@ -37,7 +37,7 @@ abstract public class ObjectLayerPairFilter
     /**
      * Instantiate a filter with no native object assigned.
      */
-    protected ObjectLayerPairFilter() {
+    ObjectLayerPairFilter() {
     }
     // *************************************************************************
     // ConstObjectLayerPairFilter methods

@@ -33,7 +33,7 @@ abstract public class JobSystem extends NonCopyable {
     /**
      * Instantiate a job system with no native object assigned.
      */
-    protected JobSystem() {
+    JobSystem() {
     }
     // *************************************************************************
     // new methods exposed

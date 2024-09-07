@@ -33,7 +33,7 @@ abstract public class CompoundShape extends Shape {
     /**
      * Instantiate a shape with no native object assigned.
      */
-    protected CompoundShape() {
+    CompoundShape() {
     }
 
     /**

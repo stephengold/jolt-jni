@@ -33,7 +33,7 @@ public class ContactListener extends JoltPhysicsObject {
     /**
      * Instantiate a listener with no native object assigned.
      */
-    protected ContactListener() {
+    ContactListener() {
     }
 
     /**

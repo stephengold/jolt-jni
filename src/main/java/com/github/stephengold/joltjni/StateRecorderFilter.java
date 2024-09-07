@@ -37,7 +37,7 @@ abstract public class StateRecorderFilter extends JoltPhysicsObject {
     /**
      * Instantiate a filter with no native object assigned.
      */
-    protected StateRecorderFilter() {
+    StateRecorderFilter() {
     }
 
     /**

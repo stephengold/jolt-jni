@@ -33,6 +33,6 @@ public abstract class StreamOut extends NonCopyable {
     /**
      * Instantiate with no native object assigned.
      */
-    protected StreamOut() {
+    StreamOut() {
     }
 }
