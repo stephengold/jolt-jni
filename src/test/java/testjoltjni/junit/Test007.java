@@ -407,8 +407,12 @@ public class Test007 {
         ShapeRefC ref = result.get();
         TaperedCylinderShape shape = (TaperedCylinderShape) ref.getPtr();
 
+        Assert.assertEquals(1f, shape.getBottomRadius(), 0f);
+        Assert.assertEquals(0.05f, shape.getConvexRadius(), 0f);
+        Assert.assertEquals(1f, shape.getHalfHeight(), 0f);
         Assert.assertEquals(0.05f, shape.getInnerRadius(), 0f);
         Assert.assertEquals(EShapeSubType.TaperedCylinder, shape.getSubType());
+        Assert.assertEquals(0.05f, shape.getTopRadius(), 0f);
         Assert.assertEquals(EShapeType.Convex, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
 
