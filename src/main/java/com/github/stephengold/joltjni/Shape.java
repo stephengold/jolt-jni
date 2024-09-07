@@ -109,6 +109,9 @@ abstract public class Shape extends NonCopyable
             case StaticCompound:
                 result = new StaticCompoundShape(shapeVa);
                 break;
+            case TaperedCapsule:
+                result = new TaperedCapsuleShape(shapeVa);
+                break;
             case Triangle:
                 result = new TriangleShape(shapeVa);
                 break;
