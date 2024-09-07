@@ -289,7 +289,7 @@ public class Test007 {
         ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
         RotatedTranslatedShapeSettings settings
                 = new RotatedTranslatedShapeSettings(
-                        new Vec3(), new Quat(), baseShapeRef);
+                        Vec3.sAxisX(), new Quat(), baseShapeRef);
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
         Assert.assertTrue(result.isValid());
