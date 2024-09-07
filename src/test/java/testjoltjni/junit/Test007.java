@@ -25,17 +25,44 @@ import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.CapsuleShape;
 import com.github.stephengold.joltjni.CapsuleShapeSettings;
+import com.github.stephengold.joltjni.ConvexHullShape;
+import com.github.stephengold.joltjni.ConvexHullShapeSettings;
 import com.github.stephengold.joltjni.CylinderShape;
 import com.github.stephengold.joltjni.CylinderShapeSettings;
+import com.github.stephengold.joltjni.Float3;
+import com.github.stephengold.joltjni.HeightFieldShape;
+import com.github.stephengold.joltjni.HeightFieldShapeSettings;
+import com.github.stephengold.joltjni.IndexedTriangle;
+import com.github.stephengold.joltjni.IndexedTriangleList;
+import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.MeshShape;
+import com.github.stephengold.joltjni.MeshShapeSettings;
+import com.github.stephengold.joltjni.MutableCompoundShape;
+import com.github.stephengold.joltjni.MutableCompoundShapeSettings;
+import com.github.stephengold.joltjni.Plane;
+import com.github.stephengold.joltjni.PlaneShape;
+import com.github.stephengold.joltjni.PlaneShapeSettings;
+import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.RotatedTranslatedShape;
+import com.github.stephengold.joltjni.RotatedTranslatedShapeSettings;
+import com.github.stephengold.joltjni.ScaledShape;
+import com.github.stephengold.joltjni.ScaledShapeSettings;
 import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.ShapeResult;
+import com.github.stephengold.joltjni.SphereShape;
+import com.github.stephengold.joltjni.SphereShapeSettings;
+import com.github.stephengold.joltjni.StaticCompoundShape;
+import com.github.stephengold.joltjni.StaticCompoundShapeSettings;
 import com.github.stephengold.joltjni.TaperedCapsuleShape;
 import com.github.stephengold.joltjni.TaperedCapsuleShapeSettings;
 import com.github.stephengold.joltjni.TaperedCylinderShape;
 import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.VertexList;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -59,7 +86,16 @@ public class Test007 {
 
         doBoxShape();
         doCapsuleShape();
+        doConvexHullShape();
         doCylinderShape();
+        doHeightFieldShape();
+        doMeshShape();
+        doMutableCompoundShape();
+        doPlaneShape();
+        doRotatedTranslatedShape();
+        doSphereShape();
+        doStaticCompoundShape();
+        doScaledShape();
         doTaperedCapsuleShape();
         doTaperedCylinderShape();
 
@@ -107,6 +143,29 @@ public class Test007 {
     }
 
     /**
+     * Test the {@code ConvexHullShape} class.
+     */
+    private static void doConvexHullShape() {
+        // Create a tetrahedron:
+        Vec3Arg[] points = {new Vec3(3f, 3f, 3f), new Vec3(-3f, 3f, -3f),
+            new Vec3(3f, -3f, -3f), new Vec3(-3f, -3f, 3f)};
+        ConvexHullShapeSettings settings = new ConvexHullShapeSettings(points);
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        ConvexHullShape shape = (ConvexHullShape) ref.getPtr();
+
+        Assert.assertEquals(Math.sqrt(3.), shape.getInnerRadius(), 1e-6f);
+        Assert.assertEquals(EShapeSubType.ConvexHull, shape.getSubType());
+        Assert.assertEquals(EShapeType.Convex, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+
+        TestUtils.testClose(shape, ref, result, settings);
+        System.gc();
+    }
+
+    /**
      * Test the {@code CylinderShape} class.
      */
     private static void doCylinderShape() {
@@ -122,6 +181,193 @@ public class Test007 {
         testCylinderDefaults(shape2);
 
         TestUtils.testClose(shape2, shape, ref, result, settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code HeightFieldShape} class.
+     */
+    private static void doHeightFieldShape() {
+        int sampleCount = 4;
+        FloatBuffer samples = Jolt.newDirectFloatBuffer(sampleCount);
+        HeightFieldShapeSettings settings = new HeightFieldShapeSettings(
+                samples, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount);
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        HeightFieldShape shape = (HeightFieldShape) ref.getPtr();
+
+        Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(EShapeSubType.HeightField, shape.getSubType());
+        Assert.assertEquals(EShapeType.HeightField, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+
+        TestUtils.testClose(shape, ref, result, settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code MeshShape} class.
+     */
+    private static void doMeshShape() {
+        // Create a square:
+        VertexList vertices = new VertexList();
+        vertices.resize(4);
+        vertices.set(0, new Float3(1f, 0f, 1f));
+        vertices.set(1, new Float3(1f, 0f, -1f));
+        vertices.set(2, new Float3(-1f, 0f, 1f));
+        vertices.set(3, new Float3(-1f, 0f, -1f));
+        IndexedTriangleList indices = new IndexedTriangleList();
+        IndexedTriangle triangle1 = new IndexedTriangle(0, 2, 3);
+        IndexedTriangle triangle2 = new IndexedTriangle(3, 1, 0);
+        indices.pushBack(triangle1);
+        indices.pushBack(triangle2);
+        MeshShapeSettings settings = new MeshShapeSettings(vertices, indices);
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        MeshShape shape = (MeshShape) ref.getPtr();
+
+        Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(EShapeSubType.Mesh, shape.getSubType());
+        Assert.assertEquals(EShapeType.Mesh, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+
+        TestUtils.testClose(
+                shape, ref, result, settings, triangle2, triangle1, indices);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code MutableCompoundShape} class.
+     */
+    private static void doMutableCompoundShape() {
+        MutableCompoundShapeSettings settings
+                = new MutableCompoundShapeSettings();
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        MutableCompoundShape shape = (MutableCompoundShape) ref.getPtr();
+
+        Assert.assertEquals(Float.MAX_VALUE, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(EShapeSubType.MutableCompound, shape.getSubType());
+        Assert.assertEquals(EShapeType.Compound, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+
+        TestUtils.testClose(shape, ref, result, settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code PlaneShape} class.
+     */
+    private static void doPlaneShape() {
+        Plane plane = new Plane(0f, 1f, 0f, 0f);
+        PlaneShapeSettings settings = new PlaneShapeSettings(plane);
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        PlaneShape shape = (PlaneShape) ref.getPtr();
+
+        Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(EShapeSubType.Plane, shape.getSubType());
+        Assert.assertEquals(EShapeType.Plane, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+
+        TestUtils.testClose(shape, result, settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code RotatedTranslatedShape} class.
+     */
+    private static void doRotatedTranslatedShape() {
+        ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
+        RotatedTranslatedShapeSettings settings
+                = new RotatedTranslatedShapeSettings(
+                        new Vec3(), new Quat(), baseShapeRef);
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        RotatedTranslatedShape shape = (RotatedTranslatedShape) ref.getPtr();
+
+        Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(
+                EShapeSubType.RotatedTranslated, shape.getSubType());
+        Assert.assertEquals(EShapeType.Decorated, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+
+        TestUtils.testClose(shape, ref, result, settings, baseShapeRef);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code ScaledShape} class.
+     */
+    private static void doScaledShape() {
+        ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
+        ScaledShapeSettings settings
+                = new ScaledShapeSettings(baseShapeRef, new Vec3(1f, 1f, 1f));
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        ScaledShape shape = (ScaledShape) ref.getPtr();
+
+        Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(EShapeSubType.Scaled, shape.getSubType());
+        Assert.assertEquals(EShapeType.Decorated, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+
+        TestUtils.testClose(shape, ref, result, settings, baseShapeRef);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code SphereShape} class.
+     */
+    private static void doSphereShape() {
+        SphereShapeSettings settings = new SphereShapeSettings(1f);
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        SphereShape shape = (SphereShape) ref.getPtr();
+        testSphereDefaults(shape);
+
+        SphereShape shape2 = new SphereShape(1f);
+        testSphereDefaults(shape2);
+
+        TestUtils.testClose(shape2, shape, result, settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code StaticCompoundShape} class.
+     */
+    private static void doStaticCompoundShape() {
+        StaticCompoundShapeSettings settings
+                = new StaticCompoundShapeSettings();
+        SphereShapeSettings settings1 = new SphereShapeSettings(1f);
+        settings.addShape(Vec3.sAxisX(), Quat.sIdentity(), settings1);
+        settings.addShape(new Vec3(-1f, 0f, 0f), Quat.sIdentity(), settings1);
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        StaticCompoundShape shape = (StaticCompoundShape) ref.getPtr();
+
+        Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(EShapeSubType.StaticCompound, shape.getSubType());
+        Assert.assertEquals(EShapeType.Compound, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+
+        TestUtils.testClose(shape, ref, result, settings1, settings);
         System.gc();
     }
 
@@ -201,6 +447,18 @@ public class Test007 {
         Assert.assertEquals(0.05f, shape.getConvexRadius(), 0f);
         Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
         Assert.assertEquals(EShapeSubType.Cylinder, shape.getSubType());
+        Assert.assertEquals(EShapeType.Convex, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code SphereShape}.
+     *
+     * @param shape the settings to test (not null, unaffected)
+     */
+    private static void testSphereDefaults(SphereShape shape) {
+        Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(EShapeSubType.Sphere, shape.getSubType());
         Assert.assertEquals(EShapeType.Convex, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
     }
