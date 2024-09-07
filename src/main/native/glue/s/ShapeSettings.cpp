@@ -55,11 +55,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_clearCa
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_create
   (JNIEnv *, jclass, jlong settingsVa) {
-    const ShapeSettings * const pSettings
+    ShapeSettings * const pSettings
             = reinterpret_cast<ShapeSettings *> (settingsVa);
+    const uint64 savedUserData = pSettings->mUserData;
+    pSettings->mUserData = 0;
     ShapeSettings::ShapeResult *pResult = new ShapeSettings::ShapeResult();
     TRACE_NEW("ShapeResult", pResult)
     *pResult = pSettings->Create();
+    pSettings->mUserData = savedUserData;
     return reinterpret_cast<jlong> (pResult);
 }
 
