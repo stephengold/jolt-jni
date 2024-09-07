@@ -115,9 +115,11 @@ public class Test007 {
         ShapeRefC ref = result.get();
         BoxShape shape = (BoxShape) ref.getPtr();
         testBoxDefaults(shape);
+        Assert.assertEquals(3, shape.getRefCount());
 
         BoxShape shape2 = new BoxShape(new Vec3(1f, 1f, 1f));
         testBoxDefaults(shape2);
+        Assert.assertEquals(0, shape2.getRefCount());
 
         TestUtils.testClose(shape2, shape, ref, result, settings);
         System.gc();
@@ -134,9 +136,11 @@ public class Test007 {
         ShapeRefC ref = result.get();
         CapsuleShape shape = (CapsuleShape) ref.getPtr();
         testCapsuleDefaults(shape);
+        Assert.assertEquals(3, shape.getRefCount());
 
         CapsuleShape shape2 = new CapsuleShape(1f, 1f);
         testCapsuleDefaults(shape2);
+        Assert.assertEquals(0, shape2.getRefCount());
 
         TestUtils.testClose(shape2, shape, ref, result, settings);
         System.gc();
@@ -158,6 +162,7 @@ public class Test007 {
 
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
         Assert.assertEquals(Math.sqrt(3.), shape.getInnerRadius(), 1e-6f);
+        Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(EShapeSubType.ConvexHull, shape.getSubType());
         Assert.assertEquals(EShapeType.Convex, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
@@ -178,9 +183,11 @@ public class Test007 {
         ShapeRefC ref = result.get();
         CylinderShape shape = (CylinderShape) ref.getPtr();
         testCylinderDefaults(shape);
+        Assert.assertEquals(3, shape.getRefCount());
 
         CylinderShape shape2 = new CylinderShape(1f, 1f);
         testCylinderDefaults(shape2);
+        Assert.assertEquals(0, shape2.getRefCount());
 
         TestUtils.testClose(shape2, shape, ref, result, settings);
         System.gc();
@@ -202,6 +209,7 @@ public class Test007 {
 
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
         Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(EShapeSubType.HeightField, shape.getSubType());
         Assert.assertEquals(EShapeType.HeightField, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
@@ -236,6 +244,7 @@ public class Test007 {
 
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
         Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(EShapeSubType.Mesh, shape.getSubType());
         Assert.assertEquals(EShapeType.Mesh, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
@@ -260,6 +269,7 @@ public class Test007 {
 
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
         Assert.assertEquals(Float.MAX_VALUE, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(EShapeSubType.MutableCompound, shape.getSubType());
         Assert.assertEquals(EShapeType.Compound, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
@@ -283,6 +293,7 @@ public class Test007 {
 
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
         Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(EShapeSubType.Plane, shape.getSubType());
         Assert.assertEquals(EShapeType.Plane, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
@@ -308,6 +319,7 @@ public class Test007 {
 
         TestUtils.assertEquals(1f, 0f, 0f, shape.getCenterOfMass(), 0f);
         Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(
                 EShapeSubType.RotatedTranslated, shape.getSubType());
         Assert.assertEquals(EShapeType.Decorated, shape.getType());
@@ -333,6 +345,7 @@ public class Test007 {
 
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
         Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(EShapeSubType.Scaled, shape.getSubType());
         Assert.assertEquals(EShapeType.Decorated, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
@@ -353,9 +366,11 @@ public class Test007 {
         ShapeRefC ref = result.get();
         SphereShape shape = (SphereShape) ref.getPtr();
         testSphereDefaults(shape);
+        Assert.assertEquals(3, shape.getRefCount());
 
         SphereShape shape2 = new SphereShape(1f);
         testSphereDefaults(shape2);
+        Assert.assertEquals(0, shape2.getRefCount());
 
         TestUtils.testClose(shape2, shape, result, settings);
         System.gc();
@@ -378,6 +393,7 @@ public class Test007 {
 
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
         Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(EShapeSubType.StaticCompound, shape.getSubType());
         Assert.assertEquals(EShapeType.Compound, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
@@ -403,6 +419,7 @@ public class Test007 {
         TestUtils.assertEquals(0f, 0.5f, 0f, shape.getCenterOfMass(), 0f);
         Assert.assertEquals(1f, shape.getHalfHeight(), 0f);
         Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(EShapeSubType.TaperedCapsule, shape.getSubType());
         Assert.assertEquals(2f, shape.getTopRadius(), 0f);
         Assert.assertEquals(EShapeType.Convex, shape.getType());
@@ -431,6 +448,7 @@ public class Test007 {
         Assert.assertEquals(0.05f, shape.getConvexRadius(), 0f);
         Assert.assertEquals(1f, shape.getHalfHeight(), 0f);
         Assert.assertEquals(0.05f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(EShapeSubType.TaperedCylinder, shape.getSubType());
         Assert.assertEquals(0.05f, shape.getTopRadius(), 0f);
         Assert.assertEquals(EShapeType.Convex, shape.getType());
