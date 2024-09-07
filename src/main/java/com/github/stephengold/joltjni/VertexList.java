@@ -102,6 +102,17 @@ final public class VertexList {
     }
 
     /**
+     * Append the specified vertex to the end.
+     *
+     * @param location the vertex to append (not null, unaffected)
+     */
+    public void pushBack(Float3 location) {
+        int numElements = size();
+        resize(numElements + 1);
+        set(numElements, location);
+    }
+
+    /**
      * Expand or truncate the list, initializing any new vertices to (0,0,0).
      *
      * @param numVertices the desired size (number of vertices)
