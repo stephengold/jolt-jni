@@ -383,8 +383,11 @@ public class Test007 {
         ShapeRefC ref = result.get();
         TaperedCapsuleShape shape = (TaperedCapsuleShape) ref.getPtr();
 
+        Assert.assertEquals(1f, shape.getBottomRadius(), 0f);
+        Assert.assertEquals(1f, shape.getHalfHeight(), 0f);
         Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
         Assert.assertEquals(EShapeSubType.TaperedCapsule, shape.getSubType());
+        Assert.assertEquals(2f, shape.getTopRadius(), 0f);
         Assert.assertEquals(EShapeType.Convex, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
 

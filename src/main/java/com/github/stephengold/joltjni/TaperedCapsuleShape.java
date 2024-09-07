@@ -41,4 +41,51 @@ public class TaperedCapsuleShape extends ConvexShape {
     TaperedCapsuleShape(long shapeVa) {
         super(shapeVa);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the bottom radius. The shape is unaffected.
+     *
+     * @return the bottom radius of the tapered cylinder (&ge;0)
+     */
+    public float getBottomRadius() {
+        long shapeVa = va();
+        float result = getBottomRadius(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Return the half height. The shape is unaffected.
+     *
+     * @return half the height
+     */
+    public float getHalfHeight() {
+        long shapeVa = va();
+        float result = getHalfHeight(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Return the top radius. The shape is unaffected. (native field:
+     * mTopRadius)
+     *
+     * @return the top radius (&ge;0)
+     */
+    public float getTopRadius() {
+        long shapeVa = va();
+        float result = getTopRadius(shapeVa);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static float getBottomRadius(long shapeVa);
+
+    native private static float getHalfHeight(long shapeVa);
+
+    native private static float getTopRadius(long shapeVa);
 }
