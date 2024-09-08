@@ -154,8 +154,7 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Count the triangles in the shape's debug mesh. The shape is
-     * unaffected.
+     * Count the triangles in the shape's debug mesh. The shape is unaffected.
      *
      * @return the count (&gt;0)
      */
