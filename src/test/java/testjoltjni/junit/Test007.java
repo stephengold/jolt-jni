@@ -363,6 +363,8 @@ public class Test007 {
         Assert.assertEquals(
                 EShapeSubType.RotatedTranslated, shape.getSubType());
         Assert.assertEquals(EShapeType.Decorated, shape.getType());
+        TestUtils.assertEquals(1f, 0f, 0f, shape.getPosition(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, 1f, shape.getRotation(), 0f);
         Assert.assertEquals(0L, shape.getUserData());
         Assert.assertFalse(shape.mustBeStatic());
 
@@ -386,6 +388,7 @@ public class Test007 {
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
         Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
         Assert.assertEquals(3, shape.getRefCount());
+        TestUtils.assertEquals(1f, 1f, 1f, shape.getScale(), 0f);
         Assert.assertEquals(EShapeSubType.Scaled, shape.getSubType());
         Assert.assertEquals(EShapeType.Decorated, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
