@@ -52,7 +52,7 @@ abstract public class Shape extends NonCopyable
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)
      */
-    protected Shape(long shapeVa) {
+    Shape(long shapeVa) {
         super(shapeVa);
     }
     // *************************************************************************

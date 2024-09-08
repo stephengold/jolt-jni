@@ -43,7 +43,7 @@ abstract public class ConvexShape extends Shape {
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)
      */
-    protected ConvexShape(long shapeVa) {
+    ConvexShape(long shapeVa) {
         super(shapeVa);
     }
 }

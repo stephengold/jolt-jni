@@ -63,7 +63,7 @@ abstract public class JoltPhysicsObject
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
      */
-    protected JoltPhysicsObject(long virtualAddress) {
+    JoltPhysicsObject(long virtualAddress) {
         assert virtualAddress != 0L;
         this.virtualAddress = virtualAddress;
     }

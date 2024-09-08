@@ -49,7 +49,7 @@ abstract public class ConstraintSettings
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
-    protected ConstraintSettings(long settingsVa) {
+    ConstraintSettings(long settingsVa) {
         super(settingsVa);
     }
     // *************************************************************************

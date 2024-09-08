@@ -50,7 +50,7 @@ public class CharacterBaseSettings
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
-    protected CharacterBaseSettings(long settingsVa) {
+    CharacterBaseSettings(long settingsVa) {
         super(settingsVa);
     }
     // *************************************************************************

@@ -47,7 +47,7 @@ abstract public class ConvexShapeSettings
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
      */
-    protected ConvexShapeSettings(long virtualAddress) {
+    ConvexShapeSettings(long virtualAddress) {
         super(virtualAddress);
     }
     // *************************************************************************

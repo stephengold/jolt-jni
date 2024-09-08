@@ -42,7 +42,7 @@ abstract public class SerializableObject extends NonCopyable {
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
      */
-    protected SerializableObject(long virtualAddress) {
+    SerializableObject(long virtualAddress) {
         super(virtualAddress);
     }
 }

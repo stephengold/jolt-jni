@@ -42,7 +42,7 @@ public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
      *
      * @param unused to distinguish from the no-arg constructor
      */
-    protected IndexedTriangleNoMaterial(boolean unused) {
+    IndexedTriangleNoMaterial(boolean unused) {
     }
 
     /**
@@ -64,7 +64,7 @@ public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
      * @param triangleVa the virtual address of the native object to assign (not
      * zero)
      */
-    protected IndexedTriangleNoMaterial(long triangleVa) {
+    IndexedTriangleNoMaterial(long triangleVa) {
         super(triangleVa);
     }
     // *************************************************************************

@@ -45,7 +45,7 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
-    protected CompoundShapeSettings(long settingsVa) {
+    CompoundShapeSettings(long settingsVa) {
         super(settingsVa);
     }
     // *************************************************************************

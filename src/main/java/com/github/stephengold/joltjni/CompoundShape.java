@@ -43,7 +43,7 @@ abstract public class CompoundShape extends Shape {
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)
      */
-    protected CompoundShape(long shapeVa) {
+    CompoundShape(long shapeVa) {
         super(shapeVa);
     }
     // *************************************************************************

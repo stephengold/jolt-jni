@@ -37,7 +37,7 @@ abstract public class TwoBodyConstraint extends Constraint {
      * @param constraintVa the virtual address of the native object to assign
      * (not zero)
      */
-    protected TwoBodyConstraint(long constraintVa) {
+    TwoBodyConstraint(long constraintVa) {
         super(constraintVa);
     }
     // *************************************************************************

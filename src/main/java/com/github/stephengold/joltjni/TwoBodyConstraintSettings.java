@@ -43,7 +43,7 @@ abstract public class TwoBodyConstraintSettings extends ConstraintSettings {
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
-    protected TwoBodyConstraintSettings(long settingsVa) {
+    TwoBodyConstraintSettings(long settingsVa) {
         super(settingsVa);
     }
     // *************************************************************************

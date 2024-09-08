@@ -48,7 +48,7 @@ abstract public class ShapeSettings
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
-    protected ShapeSettings(long settingsVa) {
+    ShapeSettings(long settingsVa) {
         super(settingsVa);
     }
     // *************************************************************************

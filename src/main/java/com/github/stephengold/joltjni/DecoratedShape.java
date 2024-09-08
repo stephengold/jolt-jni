@@ -43,7 +43,7 @@ public class DecoratedShape extends Shape {
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)
      */
-    protected DecoratedShape(long shapeVa) {
+    DecoratedShape(long shapeVa) {
         super(shapeVa);
     }
 }

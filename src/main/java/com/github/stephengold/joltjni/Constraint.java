@@ -43,7 +43,7 @@ abstract public class Constraint extends NonCopyable
      * @param constraintVa the virtual address of the native object to assign
      * (not zero)
      */
-    protected Constraint(long constraintVa) {
+    Constraint(long constraintVa) {
         super(constraintVa);
     }
     // *************************************************************************

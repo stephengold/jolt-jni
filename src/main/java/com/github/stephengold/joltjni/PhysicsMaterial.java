@@ -47,7 +47,7 @@ public class PhysicsMaterial extends SerializableObject
      * @param materialVa the virtual address of the native object to assign (not
      * zero)
      */
-    protected PhysicsMaterial(long materialVa) {
+    PhysicsMaterial(long materialVa) {
         super(materialVa);
     }
     // *************************************************************************

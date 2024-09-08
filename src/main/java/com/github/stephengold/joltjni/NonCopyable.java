@@ -42,7 +42,7 @@ abstract public class NonCopyable extends JoltPhysicsObject {
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
      */
-    protected NonCopyable(long virtualAddress) {
+    NonCopyable(long virtualAddress) {
         super(virtualAddress);
     }
     // *************************************************************************
