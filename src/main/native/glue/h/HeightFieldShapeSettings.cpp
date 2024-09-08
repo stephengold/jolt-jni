@@ -63,6 +63,32 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSet
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    getBitsPerSample
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getBitsPerSample
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const uint32 result = pSettings->mBitsPerSample;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    getBlockSize
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getBlockSize
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    const uint32 result = pSettings->mBlockSize;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
  * Method:    getMaxHeightValue
  * Signature: (J)F
  */
@@ -188,6 +214,30 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSetti
     HeightFieldShapeSettings * const pSettings
             = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
     pSettings->mActiveEdgeCosThresholdAngle = cosine;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    setBitsPerSample
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_setBitsPerSample
+  (JNIEnv *, jclass, jlong settingsVa, jint numBits) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    pSettings->mBitsPerSample = numBits;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    setBlockSize
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_setBlockSize
+  (JNIEnv *, jclass, jlong settingsVa, jint numRows) {
+    HeightFieldShapeSettings * const pSettings
+            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
+    pSettings->mBlockSize = numRows;
 }
 
 /*

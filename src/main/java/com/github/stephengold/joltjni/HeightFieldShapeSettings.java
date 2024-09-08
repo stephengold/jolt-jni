@@ -85,6 +85,37 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Return the number of bits per sample to use during compression. The
+     * settings are unaffected. (native field: mBitsPerSample)
+     *
+     * @return the number of bits (&ge;1, &le;8)
+     */
+    public int getBitsPerSample() {
+        long settingsVa = va();
+        int result = getBitsPerSample(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the block size. The settings are unaffected. (native field:
+     * mBlockSize)
+     * <p>
+     * For culling purposes, the height field is organized in blocks of
+     * {@code 2 * mBlockSize * mBlockSize} triangles.
+     * <p>
+     * Sensible values range from 2 to 8.
+     *
+     * @return the block size (in rows)
+     */
+    public int getBlockSize() {
+        long settingsVa = va();
+        int result = getBlockSize(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the artificial maximum height. The settings are unaffected.
      * (native field: mMaxHeightValue)
      *
@@ -167,6 +198,32 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Alter the number of bits per sample to use during compression. (native
+     * field: mBitsPerSample)
+     *
+     * @param numBits the number of bits (&ge;1, &le;8, default=8)
+     */
+    public void setBitsPerSample(int numBits) {
+        long settingsVa = va();
+        setBitsPerSample(settingsVa, numBits);
+    }
+
+    /**
+     * Alter the block size. (native field: mBlockSize)
+     * <p>
+     * For culling purposes, the height field is organized in blocks of
+     * {@code 2 * mBlockSize * mBlockSize} triangles.
+     * <p>
+     * Sensible values range from 2 to 8.
+     *
+     * @param numRows the desired block size (in rows, default=2)
+     */
+    public void setBlockSize(int numRows) {
+        long settingsVa = va();
+        setBlockSize(settingsVa, numRows);
+    }
+
+    /**
      * Alter the artificial maximum height. (native field: mMaxHeightValue)
      *
      * @param maxHeight the desired height value (default=-MAX_VALUE)
@@ -222,6 +279,10 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     native private static float getActiveEdgeCosThresholdAngle(long settingsVa);
 
+    native private static int getBitsPerSample(long settingsVa);
+
+    native private static int getBlockSize(long settingsVa);
+
     native private static float getMaxHeightValue(long settingsVa);
 
     native private static float getMinHeightValue(long setingsVa);
@@ -242,6 +303,10 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     native private static void setActiveEdgeCosThresholdAngle(
             long settingsVa, float cosine);
+
+    native private static void setBitsPerSample(long settingsVa, int numBits);
+
+    native private static void setBlockSize(long settingsVa, int numRows);
 
     native private static void setMaxHeightValue(
             long settingsVa, float maxHeight);

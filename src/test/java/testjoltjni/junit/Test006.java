@@ -448,6 +448,8 @@ public class Test006 {
 
         Assert.assertEquals(
                 0.996195f, settings.getActiveEdgeCosThresholdAngle(), 0f);
+        Assert.assertEquals(8, settings.getBitsPerSample());
+        Assert.assertEquals(2, settings.getBlockSize());
         Assert.assertEquals(-Float.MAX_VALUE, settings.getMaxHeightValue(), 0f);
         Assert.assertEquals(Float.MAX_VALUE, settings.getMinHeightValue(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, settings.getOffset(), 0f);
@@ -463,6 +465,8 @@ public class Test006 {
     private static void testHeightFieldSsSetters(
             HeightFieldShapeSettings settings) {
         settings.setActiveEdgeCosThresholdAngle(0.5f);
+        settings.setBitsPerSample(7);
+        settings.setBlockSize(3);
         settings.setMaxHeightValue(1f);
         settings.setMinHeightValue(-1f);
         settings.setOffset(new Vec3(2f, 3f, 4f));
@@ -474,6 +478,8 @@ public class Test006 {
 
         Assert.assertEquals(
                 0.5f, settings.getActiveEdgeCosThresholdAngle(), 0f);
+        Assert.assertEquals(7, settings.getBitsPerSample());
+        Assert.assertEquals(3, settings.getBlockSize());
         Assert.assertEquals(1f, settings.getMaxHeightValue(), 0f);
         Assert.assertEquals(-1f, settings.getMinHeightValue(), 0f);
         TestUtils.assertEquals(2f, 3f, 4f, settings.getOffset(), 0f);
