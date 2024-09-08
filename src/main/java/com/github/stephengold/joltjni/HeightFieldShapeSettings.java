@@ -52,7 +52,8 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      * unaffected)
      * @param offset (not null, unaffected)
      * @param scale (not null, unaffected)
-     * @param sampleCount the number of height values along each edge (&ge;2)
+     * @param sampleCount the number of height values along each edge
+     * (&ge;2*blockSize)
      */
     public HeightFieldShapeSettings(FloatBuffer samples, Vec3Arg offset,
             Vec3Arg scale, int sampleCount) {

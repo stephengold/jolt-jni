@@ -63,7 +63,7 @@ public class MeshShapeSettings extends ShapeSettings {
     // new public methods
 
     /**
-     * Return the number of triangles in the mesh. The settings are unaffected.
+     * Count the triangles in the mesh. The settings are unaffected.
      *
      * @return the count (&ge;0)
      */
@@ -75,7 +75,7 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Return the number of vertices in the mesh. The settings are unaffected.
+     * Count the vertices in the mesh. The settings are unaffected.
      *
      * @return the count (&ge;0)
      */

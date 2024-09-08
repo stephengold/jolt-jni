@@ -86,8 +86,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     // new methods exposed
 
     /**
-     * Return the number of points to use when creating the hull. The settings
-     * are unaffected.
+     * Count the points to use when creating the hull. The settings are
+     * unaffected.
      *
      * @return the count (&ge;0)
      */

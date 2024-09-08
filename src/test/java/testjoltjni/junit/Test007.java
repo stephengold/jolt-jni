@@ -78,7 +78,7 @@ public class Test007 {
     // new methods exposed
 
     /**
-     * Test object creation, accessors, and defaults.
+     * Test object creation, destruction, accessors, and defaults.
      */
     @Test
     public void test007() {
