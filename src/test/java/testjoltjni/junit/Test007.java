@@ -204,7 +204,8 @@ public class Test007 {
      */
     private static void doHeightFieldShape() {
         int sampleCount = 4;
-        FloatBuffer samples = Jolt.newDirectFloatBuffer(sampleCount);
+        int numFloats = sampleCount * sampleCount;
+        FloatBuffer samples = Jolt.newDirectFloatBuffer(numFloats);
         HeightFieldShapeSettings settings = new HeightFieldShapeSettings(
                 samples, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount);
         ShapeResult result = settings.create();
