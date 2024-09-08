@@ -59,7 +59,7 @@ public class ContactListener extends JoltPhysicsObject {
      * @param owner true &rarr; make the JVM object the owner, false &rarr; it
      * isn't the owner
      */
-    protected void setVirtualAddress(long virtualAddress, boolean owner) {
+    void setVirtualAddress(long virtualAddress, boolean owner) {
         Runnable freeingAction = owner ? () -> free(virtualAddress) : null;
         setVirtualAddress(virtualAddress, freeingAction);
     }

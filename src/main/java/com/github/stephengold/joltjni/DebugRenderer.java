@@ -62,7 +62,7 @@ abstract public class DebugRenderer extends NonCopyable {
      * isn't the owner
      */
     @Override
-    protected void setVirtualAddress(long rendererVa, boolean owner) {
+    void setVirtualAddress(long rendererVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(rendererVa) : null;
         setVirtualAddress(rendererVa, freeingAction);
     }
