@@ -94,6 +94,9 @@ abstract public class Shape extends NonCopyable
             case MutableCompound:
                 result = new MutableCompoundShape(shapeVa);
                 break;
+            case OffsetCenterOfMass:
+                result = new OffsetCenterOfMassShape(shapeVa);
+                break;
             case Plane:
                 result = new PlaneShape(shapeVa);
                 break;

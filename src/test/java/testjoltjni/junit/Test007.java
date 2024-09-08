@@ -39,6 +39,8 @@ import com.github.stephengold.joltjni.MeshShape;
 import com.github.stephengold.joltjni.MeshShapeSettings;
 import com.github.stephengold.joltjni.MutableCompoundShape;
 import com.github.stephengold.joltjni.MutableCompoundShapeSettings;
+import com.github.stephengold.joltjni.OffsetCenterOfMassShape;
+import com.github.stephengold.joltjni.OffsetCenterOfMassShapeSettings;
 import com.github.stephengold.joltjni.Plane;
 import com.github.stephengold.joltjni.PlaneShape;
 import com.github.stephengold.joltjni.PlaneShapeSettings;
@@ -91,6 +93,7 @@ public class Test007 {
         doHeightFieldShape();
         doMeshShape();
         doMutableCompoundShape();
+        doOffsetCenterOfMassShape();
         doPlaneShape();
         doRotatedTranslatedShape();
         doSphereShape();
@@ -287,6 +290,32 @@ public class Test007 {
         Assert.assertFalse(shape.mustBeStatic());
 
         TestUtils.testClose(shape, ref, result, settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code OffsetCenterOfMassShape} class.
+     */
+    private static void doOffsetCenterOfMassShape() {
+        ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
+        OffsetCenterOfMassShapeSettings settings
+                = new OffsetCenterOfMassShapeSettings(
+                        Vec3.sAxisX(), baseShapeRef);
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        OffsetCenterOfMassShape shape = (OffsetCenterOfMassShape) ref.getPtr();
+
+        testOffsetCenterOfMassDefaults(shape);
+        Assert.assertEquals(3, shape.getRefCount());
+
+        OffsetCenterOfMassShape shape2
+                = new OffsetCenterOfMassShape(baseShapeRef, Vec3.sAxisX());
+        testOffsetCenterOfMassDefaults(shape2);
+        Assert.assertEquals(0, shape2.getRefCount());
+
+        TestUtils.testClose(shape2, shape, ref, result, settings, baseShapeRef);
         System.gc();
     }
 
@@ -516,6 +545,25 @@ public class Test007 {
         Assert.assertEquals(1f, shape.getRadius(), 0f);
         Assert.assertEquals(EShapeSubType.Cylinder, shape.getSubType());
         Assert.assertEquals(EShapeType.Convex, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+        Assert.assertFalse(shape.mustBeStatic());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code OffsetCenterOfMassShape}.
+     *
+     * @param shape the settings to test (not null, unaffected)
+     */
+    private static void testOffsetCenterOfMassDefaults(
+            OffsetCenterOfMassShape shape) {
+
+        TestUtils.assertEquals(1f, 0f, 0f, shape.getCenterOfMass(), 0f);
+        Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
+        TestUtils.assertEquals(1f, 0f, 0f, shape.getOffset(), 0f);
+        Assert.assertEquals(
+                EShapeSubType.OffsetCenterOfMass, shape.getSubType());
+        Assert.assertEquals(EShapeType.Decorated, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
         Assert.assertFalse(shape.mustBeStatic());
     }
