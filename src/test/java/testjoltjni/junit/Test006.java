@@ -31,6 +31,7 @@ import com.github.stephengold.joltjni.IndexedTriangleList;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.MeshShapeSettings;
 import com.github.stephengold.joltjni.MutableCompoundShapeSettings;
+import com.github.stephengold.joltjni.OffsetCenterOfMassShapeSettings;
 import com.github.stephengold.joltjni.PhysicsMaterial;
 import com.github.stephengold.joltjni.Plane;
 import com.github.stephengold.joltjni.PlaneShapeSettings;
@@ -77,6 +78,7 @@ public class Test006 {
         doHeightFieldShapeSettings();
         doMeshShapeSettings();
         doMutableCompoundShapeSettings();
+        doOffsetCenterOfMassShapeSettings();
         doPlaneShapeSettings();
         doRotatedTranslatedShapeSettings();
         doSphereShapeSettings();
@@ -185,6 +187,21 @@ public class Test006 {
         testMutableCompoundSsDefaults(settings);
 
         TestUtils.testClose(settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code OffsetCenterOfMassShapeSettings} class.
+     */
+    private static void doOffsetCenterOfMassShapeSettings() {
+        ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
+        OffsetCenterOfMassShapeSettings settings
+                = new OffsetCenterOfMassShapeSettings(new Vec3(), baseShapeRef);
+
+        testOffsetCenterOfMassSsDefaults(settings);
+        testOffsetCenterOfMassSsSetters(settings);
+
+        TestUtils.testClose(settings, baseShapeRef);
         System.gc();
     }
 
@@ -531,6 +548,35 @@ public class Test006 {
     private static void testMutableCompoundSsDefaults(
             MutableCompoundShapeSettings settings) {
         testSsDefaults(settings);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code OffsetCenterOfMassShapeSettings}.
+     *
+     * @param settings the settings to test (not null, unaffected)
+     */
+    private static void testOffsetCenterOfMassSsDefaults(
+            OffsetCenterOfMassShapeSettings settings) {
+        testSsDefaults(settings);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getOffset(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified
+     * {@code OffsetCenterOfMassShapeSettings}.
+     *
+     * @param settings the settings to test (not null, modified)
+     */
+    private static void testOffsetCenterOfMassSsSetters(
+            OffsetCenterOfMassShapeSettings settings) {
+        settings.setOffset(new Vec3(2f, 3f, 4f));
+
+        ShapeSettingsRef ref = settings.toRef();
+        Assert.assertEquals(1, settings.getRefCount());
+        Assert.assertEquals(settings, ref.getPtr());
+
+        TestUtils.assertEquals(2f, 3f, 4f, settings.getOffset(), 0f);
     }
 
     /**

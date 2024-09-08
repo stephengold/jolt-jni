@@ -112,6 +112,9 @@ abstract public class ShapeSettings
             case MutableCompound:
                 result = new MutableCompoundShapeSettings(settingsVa);
                 break;
+            case OffsetCenterOfMass:
+                result = new OffsetCenterOfMassShapeSettings(settingsVa);
+                break;
             case Plane:
                 result = new PlaneShapeSettings(settingsVa);
                 break;
