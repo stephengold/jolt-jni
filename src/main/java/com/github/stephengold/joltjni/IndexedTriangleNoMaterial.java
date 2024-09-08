@@ -98,14 +98,14 @@ public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
     /**
      * Assign a native object, assuming there's none already assigned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param triangleVa the virtual address of the native object to assign (not
+     * zero)
      * @param owner true &rarr; make the JVM object the owner, false &rarr; it
      * isn't the owner
      */
-    void setVirtualAddress(long virtualAddress, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(virtualAddress) : null;
-        setVirtualAddress(virtualAddress, freeingAction);
+    void setVirtualAddress(long triangleVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(triangleVa) : null;
+        setVirtualAddress(triangleVa, freeingAction);
     }
     // *************************************************************************
     // native private methods

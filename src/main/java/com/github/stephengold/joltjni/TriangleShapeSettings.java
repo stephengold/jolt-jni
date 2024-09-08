@@ -36,11 +36,11 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
      */
-    TriangleShapeSettings(long virtualAddress) {
-        super(virtualAddress);
+    TriangleShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.Triangle);
     }
 

@@ -37,11 +37,11 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param rtssVa the virtual address of the native object to assign (not
+     * zero)
      */
-    RotatedTranslatedShapeSettings(long virtualAddress) {
-        super(virtualAddress);
+    RotatedTranslatedShapeSettings(long rtssVa) {
+        super(rtssVa);
         setSubType(EShapeSubType.RotatedTranslated);
     }
 
@@ -138,23 +138,23 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
             float offsetX, float offsetY, float offsetZ, float rotX, float rotY,
             float rotZ, float rotW, long baseShapeRefVa);
 
-    native private static float getPositionX(long rtsVa);
+    native private static float getPositionX(long rtssVa);
 
-    native private static float getPositionY(long rtsVa);
+    native private static float getPositionY(long rtssVa);
 
-    native private static float getPositionZ(long rtsVa);
+    native private static float getPositionZ(long rtssVa);
 
-    native private static float getRotationW(long rtsVa);
+    native private static float getRotationW(long rtssVa);
 
-    native private static float getRotationX(long rtsVa);
+    native private static float getRotationX(long rtssVa);
 
-    native private static float getRotationY(long rtsVa);
+    native private static float getRotationY(long rtssVa);
 
-    native private static float getRotationZ(long rtsVa);
+    native private static float getRotationZ(long rtssVa);
 
     native private static void setPosition(
-            long rtsVa, float offsetX, float offsetY, float offsetZ);
+            long rtssVa, float offsetX, float offsetY, float offsetZ);
 
     native private static void setRotation(
-            long rtsVa, float rotX, float rotY, float rotZ, float rotW);
+            long rtssVa, float rotX, float rotY, float rotZ, float rotW);
 }

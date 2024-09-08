@@ -35,11 +35,11 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
      */
-    CapsuleShapeSettings(long virtualAddress) {
-        super(virtualAddress);
+    CapsuleShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.Capsule);
     }
 

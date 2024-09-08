@@ -36,11 +36,11 @@ public class SphereShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
      */
-    SphereShapeSettings(long virtualAddress) {
-        super(virtualAddress);
+    SphereShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.Sphere);
     }
 

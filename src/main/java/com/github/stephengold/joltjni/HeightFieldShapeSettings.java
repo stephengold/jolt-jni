@@ -37,11 +37,11 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
      */
-    HeightFieldShapeSettings(long virtualAddress) {
-        super(virtualAddress);
+    HeightFieldShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.HeightField);
     }
 

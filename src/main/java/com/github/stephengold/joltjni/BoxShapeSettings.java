@@ -37,11 +37,11 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
      */
-    BoxShapeSettings(long virtualAddress) {
-        super(virtualAddress);
+    BoxShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.Box);
     }
 

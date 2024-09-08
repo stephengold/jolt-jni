@@ -44,11 +44,11 @@ public class PlaneShapeSettings extends ShapeSettings {
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
      */
-    PlaneShapeSettings(long virtualAddress) {
-        super(virtualAddress);
+    PlaneShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.Plane);
     }
 
