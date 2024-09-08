@@ -161,7 +161,10 @@ public class Test007 {
         ConvexHullShape shape = (ConvexHullShape) ref.getPtr();
 
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
+        Assert.assertEquals(3, shape.getFaceVertices(3, new int[3]));
         Assert.assertEquals(Math.sqrt(3.), shape.getInnerRadius(), 1e-6f);
+        Assert.assertEquals(4, shape.getNumFaces());
+        Assert.assertEquals(3, shape.getNumVerticesInFace(3));
         Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(EShapeSubType.ConvexHull, shape.getSubType());
         Assert.assertEquals(EShapeType.Convex, shape.getType());

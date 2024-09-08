@@ -44,6 +44,42 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_get
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShape
+ * Method:    getFaceVertices
+ * Signature: (JII[I)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getFaceVertices
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jint faceIndex, jint maxVertices,
+  jintArray storeIndices) {
+    const ConvexHullShape * const pShape
+            = reinterpret_cast<ConvexHullShape *> (shapeVa);
+    uint * const pTempArray = new uint[maxVertices];
+    const uint result
+            = pShape->GetFaceVertices(faceIndex, maxVertices, pTempArray);
+    jboolean isCopy;
+    jint * const pStoreJints = pEnv->GetIntArrayElements(storeIndices, &isCopy);
+    for (int i = 0; i < maxVertices; ++i) {
+        pStoreJints[i] = pTempArray[i];
+    }
+    delete[] pTempArray;
+    pEnv->ReleaseIntArrayElements(storeIndices, pStoreJints, 0);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShape
+ * Method:    getNumFaces
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getNumFaces
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const ConvexHullShape * const pShape
+            = reinterpret_cast<ConvexHullShape *> (shapeVa);
+    const uint result = pShape->GetNumFaces();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShape
  * Method:    getNumPoints
  * Signature: (J)I
  */
@@ -52,6 +88,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getNu
     const ConvexHullShape * const pShape
             = reinterpret_cast<ConvexHullShape *> (shapeVa);
     const uint result = pShape->GetNumPoints();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShape
+ * Method:    getNumVerticesInFace
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getNumVerticesInFace
+  (JNIEnv *, jclass, jlong shapeVa, jint faceIndex) {
+    const ConvexHullShape * const pShape
+            = reinterpret_cast<ConvexHullShape *> (shapeVa);
+    const uint result = pShape->GetNumVerticesInFace(faceIndex);
     return result;
 }
 

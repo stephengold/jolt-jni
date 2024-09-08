@@ -57,6 +57,50 @@ public class ConvexHullShape extends ConvexShape {
     }
 
     /**
+     * Enumerate the vertices in the specified face. The shape is unaffected.
+     *
+     * @param faceIndex the index of the face to query (&ge;0, &lt;numFaces)
+     * @param storeIndices storage for the result (not null, modified)
+     * @return the number of vertices in the face
+     */
+    public int getFaceVertices(int faceIndex, int[] storeIndices) {
+        int result = getFaceVertices(
+                faceIndex, storeIndices.length, storeIndices);
+        return result;
+    }
+
+    /**
+     * Enumerate the vertices in the specified face. The shape is unaffected.
+     *
+     * @param faceIndex the index of the face to query (&ge;0, &lt;numFaces)
+     * @param maxVertices the maximum number of vertices to return (&ge;0,
+     * default=storeIndices.length)
+     * @param storeIndices storage for the result (not null,
+     * length&ge;maxVertices, modified)
+     * @return the number of vertices in the face (&ge;0)
+     */
+    public int getFaceVertices(
+            int faceIndex, int maxVertices, int[] storeIndices) {
+        long shapeVa = va();
+        int result = getFaceVertices(
+                shapeVa, faceIndex, maxVertices, storeIndices);
+
+        return result;
+    }
+
+    /**
+     * Count the faces in the convex hull. The shape is unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    public int getNumFaces() {
+        long shapeVa = va();
+        int result = getNumFaces(shapeVa);
+
+        return result;
+    }
+
+    /**
      * Count the vertices of the convex hull. The shape is unaffected.
      *
      * @return the count (&ge;0)
@@ -64,6 +108,19 @@ public class ConvexHullShape extends ConvexShape {
     public int getNumPoints() {
         long shapeVa = va();
         int result = getNumPoints(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Count the vertices in the specified face. The shape is unaffected.
+     *
+     * @param faceIndex the index of the face to query (&ge;0, &lt;numFaces)
+     * @return the count (&ge;0)
+     */
+    public int getNumVerticesInFace(int faceIndex) {
+        long shapeVa = va();
+        int result = getNumVerticesInFace(shapeVa, faceIndex);
 
         return result;
     }
@@ -89,7 +146,14 @@ public class ConvexHullShape extends ConvexShape {
 
     native private static float getConvexRadius(long shapeVa);
 
+    native private static int getFaceVertices(
+            long shapeVa, int faceIndex, int maxVertices, int[] storeIndices);
+
+    native private static int getNumFaces(long shapeVa);
+
     native private static int getNumPoints(long shapeVa);
+
+    native private static int getNumVerticesInFace(long shapeVa, int faceIndex);
 
     native private static float getPointX(long shapeVa, int pointIndex);
 
