@@ -63,9 +63,9 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         float rotY = rotation.getY();
         float rotZ = rotation.getZ();
         long baseShapeRefVa = baseShapeRef.va();
-        long scaledShapeVa = createSettingsFromShapeRef(offsetX, offsetY,
+        long rtssVa = createSettingsFromShapeRef(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeRefVa);
-        setVirtualAddress(scaledShapeVa, null); // no owner due to ref counting
+        setVirtualAddress(rtssVa, null); // no owner due to ref counting
         setSubType(EShapeSubType.RotatedTranslated);
     }
     // *************************************************************************
@@ -78,10 +78,10 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * @return a new, mutable offset vector
      */
     public Vec3 getPosition() {
-        long rtsVa = va();
-        float offsetX = getPositionX(rtsVa);
-        float offsetY = getPositionY(rtsVa);
-        float offsetZ = getPositionZ(rtsVa);
+        long rtssVa = va();
+        float offsetX = getPositionX(rtssVa);
+        float offsetY = getPositionY(rtssVa);
+        float offsetZ = getPositionZ(rtssVa);
         Vec3 result = new Vec3(offsetX, offsetY, offsetZ);
 
         return result;
@@ -94,11 +94,11 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * @return a new, mutable rotation quaternion
      */
     public Quat getRotation() {
-        long rtsVa = va();
-        float rotW = getRotationW(rtsVa);
-        float rotX = getRotationX(rtsVa);
-        float rotY = getRotationY(rtsVa);
-        float rotZ = getRotationZ(rtsVa);
+        long rtssVa = va();
+        float rotW = getRotationW(rtssVa);
+        float rotX = getRotationX(rtssVa);
+        float rotY = getRotationY(rtssVa);
+        float rotZ = getRotationZ(rtssVa);
         Quat result = new Quat(rotX, rotY, rotZ, rotW);
 
         return result;
@@ -111,11 +111,11 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * default=(0,0,0))
      */
     public void setPosition(Vec3Arg offset) {
-        long rtsVa = va();
+        long rtssVa = va();
         float offsetX = offset.getX();
         float offsetY = offset.getY();
         float offsetZ = offset.getZ();
-        setPosition(rtsVa, offsetX, offsetY, offsetZ);
+        setPosition(rtssVa, offsetX, offsetY, offsetZ);
     }
 
     /**
@@ -124,12 +124,12 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * @param rotation the desired rotation quaternion (not null, unaffected)
      */
     public void setRotation(QuatArg rotation) {
-        long rtsVa = va();
+        long rtssVa = va();
         float rotW = rotation.getW();
         float rotX = rotation.getX();
         float rotY = rotation.getY();
         float rotZ = rotation.getZ();
-        setRotation(rtsVa, rotX, rotY, rotZ, rotW);
+        setRotation(rtssVa, rotX, rotY, rotZ, rotW);
     }
     // *************************************************************************
     // native private methods
