@@ -47,7 +47,7 @@ abstract public class BodyLockInterface extends NonCopyable {
      * @param interfaceVa the virtual address of the native object to assign
      * (not zero)
      */
-    protected BodyLockInterface(PhysicsSystem system, long interfaceVa) {
+    BodyLockInterface(PhysicsSystem system, long interfaceVa) {
         this.system = system;
         setVirtualAddress(interfaceVa, null);
     }
