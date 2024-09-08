@@ -126,8 +126,8 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     int getObjectLayer();
 
     /**
-     * Return the location of the body's origin (which not coincide with its
-     * center of mass). The body is unaffected.
+     * Return the location of the body's origin (which might not coincide with
+     * its center of mass). The body is unaffected.
      *
      * @return a new location vector (in system coordinates, all components
      * finite)

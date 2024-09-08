@@ -73,7 +73,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
 
     /**
      * Copy the offset relative to the base shape. The settings are unaffected.
-     * (native field=mPosition)
+     * (native field: mPosition)
      *
      * @return a new, mutable offset vector
      */
@@ -89,7 +89,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
 
     /**
      * Copy the rotation relative to the base shape. The settings are
-     * unaffected. (native field=mRotation)
+     * unaffected. (native field: mRotation)
      *
      * @return a new, mutable rotation quaternion
      */
@@ -105,7 +105,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
     }
 
     /**
-     * Alter the offset relative to the base shape. (native field=mPosition)
+     * Alter the offset relative to the base shape. (native field: mPosition)
      *
      * @param offset the desired offset vector (not null, unaffected,
      * default=(0,0,0))
@@ -119,7 +119,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
     }
 
     /**
-     * Alter the rotation relative to the base shape. (native field=mRotation)
+     * Alter the rotation relative to the base shape. (native field: mRotation)
      *
      * @param rotation the desired rotation quaternion (not null, unaffected)
      */

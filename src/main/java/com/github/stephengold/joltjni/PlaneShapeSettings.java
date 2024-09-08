@@ -35,7 +35,7 @@ public class PlaneShapeSettings extends ShapeSettings {
     // constants
 
     /**
-     * default half-extent for {@code PlaneShape}
+     * default half-extent for the {@code PlaneShape}
      */
     final public static float cDefaultHalfExtent = 1_000f;
     // *************************************************************************
