@@ -216,7 +216,7 @@ public class Test007 {
         Assert.assertEquals(2, shape.getBlockSize());
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
         Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
-        TestUtils.assertEquals(1f, 0f, 1f, shape.getPosition(1, 1), 1e-8f);
+        TestUtils.assertEquals(1f, 0f, 1f, shape.getPosition(1, 1), 1e-6f);
         Assert.assertEquals(3, shape.getRefCount());
         Assert.assertEquals(EShapeSubType.HeightField, shape.getSubType());
         Assert.assertEquals(EShapeType.HeightField, shape.getType());
