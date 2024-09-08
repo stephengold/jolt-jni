@@ -153,7 +153,7 @@ abstract public class ConstraintSettings
      *
      * @param constraintSubType the desired value (not null, default=0)
      */
-    protected void setSubType(EConstraintSubType constraintSubType) {
+    void setSubType(EConstraintSubType constraintSubType) {
         long settingsVa = va();
         long ordinal = constraintSubType.ordinal();
         setUserData(settingsVa, ordinal);
