@@ -40,4 +40,62 @@ public class HeightFieldShape extends Shape {
     HeightFieldShape(long shapeVa) {
         super(shapeVa);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the block size. The shape is unaffected.
+     *
+     * @return the number of height values in a block
+     */
+    public int getBlockSize() {
+        long shapeVa = va();
+        int result = getBlockSize(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the location of specified sample. The shape is unaffected.
+     *
+     * @param x the X coordinate of the sample (&ge;0, &lt;sampleCount)
+     * @param y the Y coordinate of the sample (&ge;0, &lt;sampleCount)
+     * @return a new location vector
+     */
+    public Vec3 getPosition(int x, int y) {
+        long shapeVa = va();
+        float posX = getPositionX(shapeVa, x, y);
+        float posY = getPositionY(shapeVa, x, y);
+        float posZ = getPositionZ(shapeVa, x, y);
+        Vec3 result = new Vec3(posX, posY, posZ);
+
+        return result;
+    }
+
+    /**
+     * Test whether the shape has a hole at the specified sample. The shape is
+     * unaffected.
+     *
+     * @param x the X coordinate of the sample (&ge;0, &lt;sampleCount)
+     * @param y the Y coordinate of the sample (&ge;0, &lt;sampleCount)
+     * @return true if there's a hole, otherwise false
+     */
+    public boolean isNoCollision(int x, int y) {
+        long shapeVa = va();
+        boolean result = isNoCollision(shapeVa, x, y);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static int getBlockSize(long shapeVa);
+
+    native private static float getPositionX(long shapeVa, int x, int y);
+
+    native private static float getPositionY(long shapeVa, int x, int y);
+
+    native private static float getPositionZ(long shapeVa, int x, int y);
+
+    native private static boolean isNoCollision(long shapeVa, int x, int y);
 }
