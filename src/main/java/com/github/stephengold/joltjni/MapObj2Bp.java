@@ -36,7 +36,7 @@ public class MapObj2Bp extends BroadPhaseLayerInterface {
      *
      * @param numObjLayers the desired capacity (number of object layers)
      * (&ge;1)
-     * @param numBpLayers the number of broadphase layers (&ge;1)
+     * @param numBpLayers the number of broad-phase layers (&ge;1)
      */
     public MapObj2Bp(int numObjLayers, int numBpLayers) {
         long mapVa = createMapObj2Bp(numObjLayers, numBpLayers);
@@ -46,12 +46,12 @@ public class MapObj2Bp extends BroadPhaseLayerInterface {
     // new methods exposed
 
     /**
-     * Add a mapping from the specified object layer to the specified broadphase
-     * layer.
+     * Add a mapping from the specified object layer to the specified
+     * broad-phase layer.
      *
      * @param objLayer the index of the object layer (&ge;0, &lt;
      * numObjectLayers)
-     * @param bpLayer the index of the broadphase layer (&lt; numBpLayers)
+     * @param bpLayer the index of the broad-phase layer (&lt; numBpLayers)
      * @return the modified map (for chaining)
      */
     public MapObj2Bp add(int objLayer, int bpLayer) {

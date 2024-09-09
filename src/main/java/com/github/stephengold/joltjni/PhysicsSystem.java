@@ -39,11 +39,11 @@ public class PhysicsSystem extends NonCopyable {
     // fields
 
     /**
-     * manage bodies associated with this system (not null)
+     * cached reference to the system's locking {@code BodyInterface}
      */
     final private BodyInterface bodyInterface;
     /**
-     * manage bodies associated with this system (not null)
+     * cached reference to the system's no-lock {@code BodyInterface}
      */
     final private BodyInterface bodyInterfaceNoLock;
     /**
@@ -59,11 +59,11 @@ public class PhysicsSystem extends NonCopyable {
      */
     private ConstObjectLayerPairFilter ovoFilter;
     /**
-     * manage narrow-phase queries with locks (not null)
+     * cached reference to the system's locking {@code NarrowPhaseQuery}
      */
     final private NarrowPhaseQuery narrowPhaseQuery;
     /**
-     * manage narrow-phase queries without locks (not null)
+     * cached reference to the system's no-lock {@code NarrowPhaseQuery}
      */
     final private NarrowPhaseQuery narrowPhaseQueryNoLock;
     // *************************************************************************

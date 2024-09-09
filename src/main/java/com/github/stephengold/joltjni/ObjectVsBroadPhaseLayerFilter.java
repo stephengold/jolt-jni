@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
 
 /**
- * Filter collisions between objects and broadphase layers.
+ * Filter collisions between objects and broad-phase layers.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -46,7 +46,7 @@ abstract public class ObjectVsBroadPhaseLayerFilter
      * Test whether the specified layers should collide.
      *
      * @param objLayer the index of a object layer (&ge;0, &lt;numObjectLayers)
-     * @param bpLayer the index of a broadphase layer (&ge;0, &lt;numBpLayers)
+     * @param bpLayer the index of a broad-phase layer (&ge;0, &lt;numBpLayers)
      * @return true if they should collide, otherwise false
      */
     @Override

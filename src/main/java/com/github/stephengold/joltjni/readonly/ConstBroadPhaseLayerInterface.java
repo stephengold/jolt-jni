@@ -31,16 +31,16 @@ public interface ConstBroadPhaseLayerInterface extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the broadphase layer for the specified object layer.
+     * Return the broad-phase layer for the specified object layer.
      *
      * @param objectLayer the index of the object layer to query (&ge;0,
      * &lt;numObjectLayers)
-     * @return the index of the corresponding broadphase layer
+     * @return the index of the corresponding broad-phase layer
      */
     int getBroadPhaseLayer(int objectLayer);
 
     /**
-     * Count how many broadphase layers there are.
+     * Count how many broad-phase layers there are.
      *
      * @return the count (&ge;0)
      */

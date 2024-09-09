@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 
 /**
- * Map object layers to broadphase layers.
+ * Map object layers to broad-phase layers.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -43,11 +43,11 @@ abstract public class BroadPhaseLayerInterface
     // ConstBroadPhaseLayerInterface methods
 
     /**
-     * Return the broadphase layer for the specified object layer.
+     * Return the broad-phase layer for the specified object layer.
      *
      * @param objectLayer the index of the object layer to query (&ge;0,
      * &lt;numObjectLayers)
-     * @return the index of the corresponding broadphase layer
+     * @return the index of the corresponding broad-phase layer
      */
     @Override
     public int getBroadPhaseLayer(int objectLayer) {
@@ -58,7 +58,7 @@ abstract public class BroadPhaseLayerInterface
     }
 
     /**
-     * Count how many broadphase layers there are.
+     * Count how many broad-phase layers there are.
      *
      * @return the count (&ge;0)
      */
