@@ -49,7 +49,7 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * protect the BroadPhaseLayerInterface from garbage collection
      */
-    private ConstBroadPhaseLayerInterface map;
+    private ConstBroadPhaseLayerInterface layerMap;
     /**
      * protect the ObjectVsBroadPhaseLayerFilter from garbage collection
      */
@@ -228,7 +228,7 @@ public class PhysicsSystem extends NonCopyable {
      * @return the pre-existing instance, or {@code null} if none
      */
     public ConstBroadPhaseLayerInterface getBroadPhaseLayerInterface() {
-        return map;
+        return layerMap;
     }
 
     /**
@@ -418,7 +418,7 @@ public class PhysicsSystem extends NonCopyable {
             int maxContactConstraints, ConstBroadPhaseLayerInterface map,
             ConstObjectVsBroadPhaseLayerFilter ovbFilter,
             ConstObjectLayerPairFilter ovoFilter) {
-        this.map = map;
+        this.layerMap = map;
         this.ovbFilter = ovbFilter;
         this.ovoFilter = ovoFilter;
 
