@@ -35,7 +35,7 @@ public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
      * Instantiate a filter with all interactions enabled.
      *
      * @param numObjectLayers the number of object layers (&ge;1)
-     * @param numBpLayers the number of broadphase layers (&ge;1)
+     * @param numBpLayers the number of broad-phase layers (&ge;1)
      */
     public ObjVsBpFilter(int numObjectLayers, int numBpLayers) {
         long filterVa = createObjVsBpFilter(numObjectLayers, numBpLayers);
@@ -48,7 +48,7 @@ public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
      * Disable interactions between the specified layers.
      *
      * @param objLayer the index of the object layer (&lt; numObjectLayers)
-     * @param bpLayer the index of the broadphase layer (&lt; numBpLayers)
+     * @param bpLayer the index of the broad-phase layer (&lt; numBpLayers)
      * @return the modified filter (for chaining)
      */
     public ObjVsBpFilter disablePair(int objLayer, int bpLayer) {

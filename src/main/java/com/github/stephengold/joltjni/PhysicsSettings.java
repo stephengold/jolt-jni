@@ -58,6 +58,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
     /**
      * Instantiate with the specified native object assigned.
      *
+     * @param system the underlying {@code PhysicsSystem}, or null if none
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      * @param owner true &rarr; make the current object the owner, false &rarr;
