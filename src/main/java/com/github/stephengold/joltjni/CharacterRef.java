@@ -21,10 +21,12 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.Character;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
- * A counted reference to a {@code Character}.
+ * A counted reference to a {@code Character}. (native class:
+ * {@code Ref<Character>})
  *
  * @author Stephen Gold sgold@sonic.net
  */

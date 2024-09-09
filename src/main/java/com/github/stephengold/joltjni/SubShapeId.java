@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
 
 /**
  * Identify an element (typically a triangle or other primitive type) in a
- * compound shape.
+ * compound shape. (native class: SubShapeID)
  *
  * @author Stephen Gold sgold@sonic.net
  */

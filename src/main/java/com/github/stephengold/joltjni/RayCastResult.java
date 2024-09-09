@@ -40,6 +40,8 @@ public class RayCastResult extends BroadPhaseCastResult {
 
     /**
      * Instantiate with the specified native object assigned but not owned.
+     * <p>
+     * For use in custom collectors.
      *
      * @param castResultVa the virtual address of the native object to assign
      * (not zero)

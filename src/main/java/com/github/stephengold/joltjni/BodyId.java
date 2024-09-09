@@ -24,7 +24,8 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
 
 /**
- * Identify a particular {@code Body} to a {@code BodyInterface}.
+ * Identify a particular {@code Body} to a {@code BodyInterface}. (native class:
+ * BodyID)
  *
  * @author Stephen Gold sgold@sonic.net
  */

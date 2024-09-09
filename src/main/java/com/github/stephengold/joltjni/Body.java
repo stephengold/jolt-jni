@@ -43,6 +43,8 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Instantiate a body with the specified native object assigned but not
      * owned.
+     * <p>
+     * For use in custom contact listeners.
      *
      * @param bodyVa the virtual address of the native object to assign (not
      * zero)

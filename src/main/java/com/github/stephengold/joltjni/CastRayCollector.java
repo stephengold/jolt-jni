@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Collect results from a narrowphase raycast.
+ * Collect results from a narrow-phase raycast.
  *
  * @author Stephen Gold sgold@sonic.net
  */

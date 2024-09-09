@@ -223,7 +223,8 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Access the system's {@code BroadPhaseLayerInterface}.
+     * Access the (application-provided) interface for mapping object layers to
+     * broadphase layers.
      *
      * @return the pre-existing instance, or {@code null} if none
      */
@@ -386,7 +387,8 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Access the {@code ObjectLayerPairFilter}.
+     * Access the (application-provided) interface for testing whether an object
+     * can collide with a broad-phase layer.
      *
      * @return the pre-existing instance, or {@code null} if none
      */
@@ -395,7 +397,8 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Access the {@code ObjectLayerPairFilter}.
+     * Access the (application-provided) interface for testing whether 2 objects
+     * can collide, based on their object layers.
      *
      * @return the pre-existing instance, or {@code null} if none
      */
