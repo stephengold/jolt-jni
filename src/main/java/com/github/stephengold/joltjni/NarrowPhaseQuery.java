@@ -57,37 +57,38 @@ public class NarrowPhaseQuery extends NonCopyable {
     /**
      * Cast a ray and obtain the nearest hit, if any.
      *
-     * @param ray the desired ray (not null, unaffected)
+     * @param raycast the desired ray (not null, unaffected)
      * @param hitResult storage for information about the hit, if any (not null,
      * may be modified)
      * @return true if a hit was found, otherwise false
      */
-    public boolean castRay(RRayCast ray, RayCastResult hitResult) {
-        boolean result = castRay(ray, hitResult, new BroadPhaseLayerFilter());
+    public boolean castRay(RRayCast raycast, RayCastResult hitResult) {
+        boolean result
+                = castRay(raycast, hitResult, new BroadPhaseLayerFilter());
         return result;
     }
 
     /**
      * Cast a ray and obtain the nearest hit, if any.
      *
-     * @param ray the desired ray (not null, unaffected)
+     * @param raycastVa the desired ray (not null, unaffected)
      * @param hitResult storage for information about the hit, if any (not null,
      * may be modified)
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      * @return true if a hit was found, otherwise false
      */
-    public boolean castRay(RRayCast ray, RayCastResult hitResult,
+    public boolean castRay(RRayCast raycastVa, RayCastResult hitResult,
             BroadPhaseLayerFilter bplFilter) {
-        boolean result
-                = castRay(ray, hitResult, bplFilter, new ObjectLayerFilter());
+        boolean result = castRay(raycastVa, hitResult, bplFilter,
+                new ObjectLayerFilter());
         return result;
     }
 
     /**
      * Cast a ray and obtain the nearest hit, if any.
      *
-     * @param ray the desired ray (not null, unaffected)
+     * @param raycast the desired ray (not null, unaffected)
      * @param hitResult storage for information about the hit, if any (not null,
      * may be modified)
      * @param bplFilter the broadphase-layer filter to apply (not null,
@@ -95,17 +96,17 @@ public class NarrowPhaseQuery extends NonCopyable {
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      * @return true if a hit was found, otherwise false
      */
-    public boolean castRay(RRayCast ray, RayCastResult hitResult,
+    public boolean castRay(RRayCast raycast, RayCastResult hitResult,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
         boolean result = castRay(
-                ray, hitResult, bplFilter, olFilter, new BodyFilter());
+                raycast, hitResult, bplFilter, olFilter, new BodyFilter());
         return result;
     }
 
     /**
      * Cast a ray and obtain the nearest hit, if any.
      *
-     * @param ray the desired ray (not null, unaffected)
+     * @param rayCast the desired ray (not null, unaffected)
      * @param hitResult storage for information about the hit, if any (not null,
      * may be modified)
      * @param bplFilter the broadphase-layer filter to apply (not null,
@@ -114,16 +115,16 @@ public class NarrowPhaseQuery extends NonCopyable {
      * @param bodyFilter the body filter to apply (not null, unaffected)
      * @return true if a hit was found, otherwise false
      */
-    public boolean castRay(RRayCast ray, RayCastResult hitResult,
+    public boolean castRay(RRayCast rayCast, RayCastResult hitResult,
             BroadPhaseLayerFilter bplFilter,
             ObjectLayerFilter olFilter, BodyFilter bodyFilter) {
         long queryVa = va();
-        long rayVa = ray.va();
+        long raycastVa = rayCast.va();
         long hitResultVa = hitResult.va();
         long bplFilterVa = bplFilter.va();
         long olFilterVa = olFilter.va();
         long bodyFilterVa = bodyFilter.va();
-        boolean result = castRay(queryVa, rayVa, hitResultVa, bplFilterVa,
+        boolean result = castRay(queryVa, raycastVa, hitResultVa, bplFilterVa,
                 olFilterVa, bodyFilterVa);
 
         return result;
@@ -140,7 +141,7 @@ public class NarrowPhaseQuery extends NonCopyable {
     // *************************************************************************
     // native private methods
 
-    native private static boolean castRay(long queryVa, long rayVa,
+    native private static boolean castRay(long queryVa, long raycastVa,
             long castResultVa, long bplFilterVa, long olFilterVa,
             long bodyFilterVa);
 }
