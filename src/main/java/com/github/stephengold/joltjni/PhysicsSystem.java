@@ -232,6 +232,25 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Access the system's interface for coarse collision queries.
+     *
+     * @return the pre-existing JVM object, or null if the system hasn't be
+     * initialized yet
+     */
+    public BroadPhaseQuery getBroadPhaseQuery() {
+        long systemVa = va();
+        long broadVa = getBroadPhaseQuery(systemVa);
+        BroadPhaseQuery result;
+        if (broadVa == 0L) {
+            result = null;
+        } else {
+            result = new BroadPhaseQuery(this, broadVa);
+        }
+
+        return result;
+    }
+
+    /**
      * Access the combining function for friction.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -614,6 +633,8 @@ public class PhysicsSystem extends NonCopyable {
     native private static long getBodyLockInterfaceNoLock(long systemVa);
 
     native private static long getBounds(long systemVa);
+
+    native private static long getBroadPhaseQuery(long systemVa);
 
     native private static long getCombineFriction(long systemVa);
 

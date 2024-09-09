@@ -188,6 +188,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBou
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    getBroadPhaseQuery
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBroadPhaseQuery
+  (JNIEnv *, jclass, jlong systemVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const BroadPhaseQuery * const pResult = &pSystem->GetBroadPhaseQuery();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getCombineFriction
  * Signature: (J)J
  */
