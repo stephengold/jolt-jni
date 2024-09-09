@@ -44,7 +44,7 @@ public class RayCastResult extends BroadPhaseCastResult {
      * @param castResultVa the virtual address of the native object to assign
      * (not zero)
      */
-    RayCastResult(long castResultVa) {
+    public RayCastResult(long castResultVa) {
         super(castResultVa);
     }
     // *************************************************************************
