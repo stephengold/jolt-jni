@@ -36,7 +36,8 @@ using namespace JPH;
  * Signature: (DDDFFF)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RRayCast_createRRayCast
-  (JNIEnv *, jclass, jdouble xx, jdouble yy, jdouble zz, jfloat dx, jfloat dy, jfloat dz) {
+  (JNIEnv *, jclass, jdouble xx, jdouble yy, jdouble zz,
+  jfloat dx, jfloat dy, jfloat dz) {
     const RVec3 startLocation(xx, yy, zz);
     const Vec3 direction(dx, dy, dz);
     RRayCast * const pResult = new RRayCast(startLocation, direction);
