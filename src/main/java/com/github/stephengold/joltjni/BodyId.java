@@ -74,6 +74,19 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     }
 
     /**
+     * Convert the ID to an integer. The ID is unaffected.
+     *
+     * @return the integer value
+     */
+    @Override
+    public int getIndexAndSequenceNumber() {
+        long idVa = va();
+        int result = getIndexAndSequenceNumber(idVa);
+
+        return result;
+    }
+
+    /**
      * Return the body's sequence number. The ID is unaffected.
      *
      * @return the sequence number (&ge;0)
@@ -106,6 +119,8 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     native private static void free(long idVa);
 
     native private static int getIndex(long idVa);
+
+    native private static int getIndexAndSequenceNumber(long idVa);
 
     native private static int getSequenceNumber(long idVa);
 

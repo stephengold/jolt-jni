@@ -47,6 +47,13 @@ public interface ConstBodyId extends ConstJoltPhysicsObject {
     int getIndex();
 
     /**
+     * Convert the ID to an integer. The ID is unaffected.
+     *
+     * @return the integer value
+     */
+    public int getIndexAndSequenceNumber();
+
+    /**
      * Return the body's sequence number. The ID is unaffected.
      *
      * @return the sequence number (&ge;0)

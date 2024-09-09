@@ -69,6 +69,18 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyId_getIndex
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyId
+ * Method:    getIndexAndSequenceNumber
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyId_getIndexAndSequenceNumber
+  (JNIEnv *, jclass, jlong idVa) {
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
+    const uint32 result = pBodyId->GetIndexAndSequenceNumber();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyId
  * Method:    getSequenceNumber
  * Signature: (J)I
  */
