@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.Character;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
