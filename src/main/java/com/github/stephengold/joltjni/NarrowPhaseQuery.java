@@ -131,6 +131,101 @@ public class NarrowPhaseQuery extends NonCopyable {
     }
 
     /**
+     * Cast a ray and collect the resulting hits.
+     *
+     * @param raycast the desired ray (not null, unaffected)
+     * @param settings the raycast configuration options to use (not null,
+     * unaffected)
+     * @param collector the hit collector to use (not null)
+     */
+    public void castRay(RRayCast raycast, RayCastSettings settings,
+            CastRayCollector collector) {
+        castRay(raycast, settings, collector, new BroadPhaseLayerFilter());
+    }
+
+    /**
+     * Cast a ray and collect the resulting hits.
+     *
+     * @param raycast the desired ray (not null, unaffected)
+     * @param settings the raycast configuration options to use (not null,
+     * unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     */
+    public void castRay(RRayCast raycast, RayCastSettings settings,
+            CastRayCollector collector, BroadPhaseLayerFilter bplFilter) {
+        castRay(raycast, settings, collector, bplFilter,
+                new ObjectLayerFilter());
+    }
+
+    /**
+     * Cast a ray and collect the resulting hits.
+     *
+     * @param raycast the desired ray (not null, unaffected)
+     * @param settings the raycast configuration options to use (not null,
+     * unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     */
+    public void castRay(RRayCast raycast, RayCastSettings settings,
+            CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
+            ObjectLayerFilter olFilter) {
+        castRay(raycast, settings, collector, bplFilter, olFilter,
+                new BodyFilter());
+    }
+
+    /**
+     * Cast a ray and collect the resulting hits.
+     *
+     * @param raycast the desired ray (not null, unaffected)
+     * @param settings the raycast configuration options to use (not null,
+     * unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param bodyFilter the body filter to apply (not null, unaffected)
+     */
+    public void castRay(RRayCast raycast, RayCastSettings settings,
+            CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
+            ObjectLayerFilter olFilter, BodyFilter bodyFilter) {
+        castRay(raycast, settings, collector, bplFilter, olFilter, bodyFilter,
+                new ShapeFilter());
+    }
+
+    /**
+     * Cast a ray and collect the resulting hits.
+     *
+     * @param raycast the desired ray (not null, unaffected)
+     * @param settings the raycast configuration options to use (not null,
+     * unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param bodyFilter the body filter to apply (not null, unaffected)
+     * @param shapeFilter the shape filter to apply (not null, unaffected)
+     */
+    public void castRay(RRayCast raycast, RayCastSettings settings,
+            CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
+            ObjectLayerFilter olFilter, BodyFilter bodyFilter,
+            ShapeFilter shapeFilter) {
+        long queryVa = va();
+        long raycastVa = raycast.va();
+        long settingsVa = settings.va();
+        long collectorVa = collector.va();
+        long bplFilterVa = bplFilter.va();
+        long olFilterVa = olFilter.va();
+        long bodyFilterVa = bodyFilter.va();
+        long shapeFilterVa = shapeFilter.va();
+        castRay(queryVa, raycastVa, settingsVa, collectorVa, bplFilterVa,
+                olFilterVa, bodyFilterVa, shapeFilterVa);
+    }
+
+    /**
      * Access the underlying {@code PhysicsSystem}.
      *
      * @return the pre-existing instance
@@ -144,4 +239,8 @@ public class NarrowPhaseQuery extends NonCopyable {
     native private static boolean castRay(long queryVa, long raycastVa,
             long castResultVa, long bplFilterVa, long olFilterVa,
             long bodyFilterVa);
+
+    native private static void castRay(long queryVa, long raycastVa,
+            long settingsVa, long collectorVa, long bplFilterVa,
+            long olFilterVa, long bodyFilterVa, long shapeFilterVa);
 }

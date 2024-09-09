@@ -34,7 +34,7 @@ using namespace JPH;
  * Method:    castRay
  * Signature: (JJJJJJ)Z
  */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_castRay
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_castRay__JJJJJJ
   (JNIEnv *, jclass, jlong queryVa, jlong raycastVa, jlong hitVa,
    jlong bplFilterVa, jlong olFilterVa, jlong bodyFilterVa) {
     const NarrowPhaseQuery * const pQuery
@@ -50,4 +50,32 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_
     const bool result = pQuery->CastRay(
             *pRayCast, *pHit, *pBplFilter, *pOlFilter, *pBodyFilter);
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_NarrowPhaseQuery
+ * Method:    castRay
+ * Signature: (JJJJJJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_castRay__JJJJJJJJ
+  (JNIEnv *, jclass, jlong queryVa, jlong raycastVa, jlong settingsVa,
+  jlong collectorVa, jlong bplFilterVa, jlong olFilterVa, jlong bodyFilterVa,
+  jlong shapeFilterVa) {
+    const NarrowPhaseQuery * const pQuery
+            = reinterpret_cast<NarrowPhaseQuery *> (queryVa);
+    const RRayCast * const pRayCast = reinterpret_cast<RRayCast *> (raycastVa);
+    const RayCastSettings * const pSettings
+            = reinterpret_cast<RayCastSettings *> (settingsVa);
+    CastRayCollector * const pCollector
+            = reinterpret_cast<CastRayCollector *> (collectorVa);
+    const BroadPhaseLayerFilter * const pBplFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (bplFilterVa);
+    const ObjectLayerFilter * const pOlFilter
+            = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
+    const BodyFilter * const pBodyFilter
+            = reinterpret_cast<BodyFilter *> (bodyFilterVa);
+    const ShapeFilter * const pShapeFilter
+            = reinterpret_cast<ShapeFilter *> (shapeFilterVa);
+    pQuery->CastRay(*pRayCast, *pSettings, *pCollector, *pBplFilter, *pOlFilter,
+            *pBodyFilter, *pShapeFilter);
 }
