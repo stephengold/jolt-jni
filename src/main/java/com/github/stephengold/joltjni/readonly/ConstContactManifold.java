@@ -37,7 +37,7 @@ public interface ConstContactManifold extends ConstJoltPhysicsObject {
 
     /**
      * Return the location from which all contact points are measured. The
-     * manifold is unaffected. (native field: mBaseOffset)
+     * manifold is unaffected.
      *
      * @return a new location vector
      */
@@ -45,7 +45,7 @@ public interface ConstContactManifold extends ConstJoltPhysicsObject {
 
     /**
      * Return the penetration depth: the distance to move body 2 out of
-     * collision. The manifold is unaffected. (native field: mPenetrationDepth)
+     * collision. The manifold is unaffected.
      *
      * @return the signed distance (negative for a speculative contact)
      */
@@ -53,7 +53,7 @@ public interface ConstContactManifold extends ConstJoltPhysicsObject {
 
     /**
      * Return the ID of the first subshape that formed the manifold. The
-     * manifold is unaffected. (native field: mSubShapeId1)
+     * manifold is unaffected.
      *
      * @return a new object
      */
@@ -61,7 +61,7 @@ public interface ConstContactManifold extends ConstJoltPhysicsObject {
 
     /**
      * Return the ID of the 2nd subshape that formed the manifold. The manifold
-     * is unaffected. (native field: mSubShapeId2)
+     * is unaffected.
      *
      * @return a new object
      */
@@ -69,7 +69,7 @@ public interface ConstContactManifold extends ConstJoltPhysicsObject {
 
     /**
      * Return the normal: the direction to move body 2 out of collision. The
-     * manifold is unaffected. (native field: mWorldSpaceNormal)
+     * manifold is unaffected.
      *
      * @return a new direction vector (in system coordinates)
      */

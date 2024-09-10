@@ -37,7 +37,6 @@ public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
 
     /**
      * Identify the body to which shape 2 belongs. The object is unaffected.
-     * (native field: mBodyID2)
      *
      * @return a new ID
      */
@@ -45,7 +44,7 @@ public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
 
     /**
      * Copy the contact location on the surface of shape 1. The object is
-     * unaffected. (native field: mContactPointOn1)
+     * unaffected.
      *
      * @return a new location vector
      */
@@ -53,7 +52,7 @@ public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
 
     /**
      * Copy the contact location on the surface of shape 2. The object is
-     * unaffected. (native field: mContactPointOn2)
+     * unaffected.
      *
      * @return a new location vector
      */
@@ -61,7 +60,7 @@ public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
 
     /**
      * Copy the direction to move shape 2 out of collision along the shortest
-     * path. The object is unaffected. (native field: mPenetrationAxis)
+     * path. The object is unaffected.
      *
      * @return a new direction vector in system coordinates
      */
@@ -69,7 +68,7 @@ public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
 
     /**
      * Return the distance to move shape 2 to resolve the collision. The object
-     * is unaffected. (native field: mPenetrationDepth)
+     * is unaffected.
      *
      * @return the signed distance
      */
@@ -77,7 +76,7 @@ public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
 
     /**
      * Identify the face on shape 1 where the collision occurred. The object is
-     * unaffected. (native field: mSubShapeID1)
+     * unaffected.
      *
      * @return a new ID
      */
@@ -85,7 +84,7 @@ public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
 
     /**
      * Identify the face on shape 2 where the collision occurred. The object is
-     * unaffected. (native field: mSubShapeID2)
+     * unaffected.
      *
      * @return a new ID
      */

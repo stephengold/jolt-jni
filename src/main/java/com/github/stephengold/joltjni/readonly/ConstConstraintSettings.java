@@ -33,7 +33,7 @@ public interface ConstConstraintSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the constraint's priority when solving. The settings are
-     * unaffected. (native field: mConstraintPriority)
+     * unaffected.
      *
      * @return the priority level
      */
@@ -41,7 +41,7 @@ public interface ConstConstraintSettings extends ConstJoltPhysicsObject {
 
     /**
      * Test whether the constraint will be enabled initially. The settings are
-     * unaffected. (native field: mEnabled)
+     * unaffected.
      *
      * @return true if enabled, otherwise false
      */
@@ -49,8 +49,7 @@ public interface ConstConstraintSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the override for the number of position iterations used in the
-     * solver. The settings are unaffected. (native field:
-     * mNumPositionStepsOverride)
+     * solver. The settings are unaffected.
      *
      * @return the number of iterations, or 0 to use the default in
      * {@code PhysicsSettings}
@@ -59,8 +58,7 @@ public interface ConstConstraintSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the override for the number of velocity iterations used in the
-     * solver. The settings are unaffected. (native field:
-     * mNumVelocityStepsOverride)
+     * solver. The settings are unaffected.
      *
      * @return the number of iterations, or 0 to use the default in
      * {@code PhysicsSettings}

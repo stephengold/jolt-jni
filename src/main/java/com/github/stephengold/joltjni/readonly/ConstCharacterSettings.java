@@ -32,16 +32,14 @@ public interface ConstCharacterSettings extends ConstCharacterBaseSettings {
     // new methods exposed
 
     /**
-     * Return the friction ratio. The settings are unaffected. (native field:
-     * mFriction)
+     * Return the friction ratio. The settings are unaffected.
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
     float getFriction();
 
     /**
-     * Return the gravity factor. The settings are unaffected. (native field:
-     * mGravityFactor)
+     * Return the gravity factor. The settings are unaffected.
      *
      * @return the factor
      */
@@ -49,15 +47,13 @@ public interface ConstCharacterSettings extends ConstCharacterBaseSettings {
 
     /**
      * Return the index of the object layer. The settings are unaffected.
-     * (native field: mLayer)
      *
      * @return the layer index (&ge;0, &lt;numObjectLayers)
      */
     int getLayer();
 
     /**
-     * Return the character's mass. The settings are unaffected. (native field:
-     * mMass)
+     * Return the character's mass. The settings are unaffected.
      *
      * @return the mass (in kilograms)
      */

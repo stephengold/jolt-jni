@@ -35,7 +35,7 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the combined friction for the body pair. The settings are
-     * unaffected. (native field: mCombinedFriction)
+     * unaffected.
      *
      * @return the combined friction
      */
@@ -43,7 +43,7 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the combined restitution for the body pair. The settings are
-     * unaffected. (native field: mCombinedRestitution)
+     * unaffected.
      *
      * @return the combined restitution
      */
@@ -51,7 +51,7 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the scale factor for the inverse inertia of body 1. The settings
-     * are unaffected. (native field: mInvInertiaScale1)
+     * are unaffected.
      *
      * @return the factor (0 = infinite inertia, 1 = use original inertia)
      */
@@ -59,7 +59,7 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the scale factor for the inverse inertia of body 2. The settings
-     * are unaffected. (native field: mInvInertiaScale2)
+     * are unaffected.
      *
      * @return the factor (0 = infinite inertia, 1 = use original inertia)
      */
@@ -67,7 +67,7 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the scale factor for the inverse mass of body 1. The settings are
-     * unaffected. (native field: mInvMassScale1)
+     * unaffected.
      *
      * @return the factor (0 = infinite mass, 1 = use original mass)
      */
@@ -75,7 +75,7 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the scale factor for the inverse mass of body 2. The settings are
-     * unaffected. (native field: mInvMassScale2)
+     * unaffected.
      *
      * @return the factor (0 = infinite mass, 1 = use original mass)
      */
@@ -83,7 +83,7 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
 
     /**
      * Test whether the contact should be treated as a sensor (no collision
-     * response). The settings are unaffected. (native field: mIsSensor)
+     * response). The settings are unaffected.
      *
      * @return true if treated as a sensor, otherwise false
      */
@@ -91,7 +91,7 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the relative angular velocity (body 2 minus body 1). The settings
-     * are unaffected. (native field: mRelativeAngularSurfaceVelocity)
+     * are unaffected.
      *
      * @return a new velocity vector (radians per second in system coordinates)
      */
@@ -99,7 +99,7 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the relative linear velocity (body 2 minus body 1). The settings
-     * are unaffected. (native field: mRelativeLinearSurfaceVelocity)
+     * are unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */

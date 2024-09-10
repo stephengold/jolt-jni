@@ -36,8 +36,7 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
 
     /**
      * Test whether to make an extra effort to remove contacts with internal
-     * edges. The settings are unaffected. (native field:
-     * mEnhancedInternalEdgeRemoval)
+     * edges. The settings are unaffected.
      *
      * @return true to remove ghost contacts, otherwise false
      */
@@ -45,7 +44,7 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the maximum slope on which the character can walk. The settings
-     * are unaffected. (native field: mMaxSlopeAngle)
+     * are unaffected.
      *
      * @return the angle (in radians)
      */
@@ -53,7 +52,7 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
 
     /**
      * Acquire read-only access to the {@code Shape}. The settings are
-     * unaffected. (native field: mShape)
+     * unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null}
@@ -61,8 +60,7 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
     ConstShape getShape();
 
     /**
-     * Return the supporting volume. The settings are unaffected. (native field:
-     * mSupportingVolume)
+     * Return the supporting volume. The settings are unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -70,7 +68,6 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the character's "up" direction. The settings are unaffected.
-     * (native field: mUp)
      *
      * @return a new direction vector (in system coordinates)
      */

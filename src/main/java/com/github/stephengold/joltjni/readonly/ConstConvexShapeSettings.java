@@ -32,15 +32,14 @@ public interface ConstConvexShapeSettings extends ConstJoltPhysicsObject {
     // ConstConvexShapeSettings methods
 
     /**
-     * Return the density. The settings are unaffected. (native field: mDensity)
+     * Return the density. The settings are unaffected.
      *
      * @return the value
      */
     float getDensity();
 
     /**
-     * Return the material. The settings are unaffected. (native field:
-     * mMaterial)
+     * Return the material. The settings are unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null} if none

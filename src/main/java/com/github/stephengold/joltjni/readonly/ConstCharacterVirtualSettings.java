@@ -37,15 +37,14 @@ public interface ConstCharacterVirtualSettings
 
     /**
      * Determine whether the character will move through back-facing triangles.
-     * The settings are unaffected. (native field: mBackFaceMode)
+     * The settings are unaffected.
      *
      * @return an enum value (not null)
      */
     EBackFaceMode getBackFaceMode();
 
     /**
-     * Return the collision tolerance. The settings are unaffected. (native
-     * field: mCollisionTolerance)
+     * Return the collision tolerance. The settings are unaffected.
      *
      * @return the allowed penetration distance (in meters)
      */
@@ -53,7 +52,7 @@ public interface ConstCharacterVirtualSettings
 
     /**
      * Return the maximum angle for merging during hit reduction. The settings
-     * are unaffected. (native field: mHitReductionCosMaxAngle)
+     * are unaffected.
      *
      * @return the cosine of the maximum angle, or -1 if hit reduction is
      * disabled
@@ -62,23 +61,22 @@ public interface ConstCharacterVirtualSettings
 
     /**
      * Return the object layer that the inner rigid body will be added to. The
-     * settings are unaffected. (native field: mInnerBodyLayer)
+     * settings are unaffected.
      *
      * @return the index of the object layer
      */
     int getInnerBodyLayer();
 
     /**
-     * Return the shape of the inner rigid body. The settings are unaffected.
-     * (native field: mInnerBodyShape)
+     * Return the shape of the inner rigid body. The settings are unaffected. \
+     *
      *
      * @return the shape, or null for no inner body
      */
     ConstShape getInnerBodyShape();
 
     /**
-     * Return the character's mass. The settings are unaffected. (native field:
-     * mMass)
+     * Return the character's mass. The settings are unaffected.
      *
      * @return the mass (in kilograms)
      */
@@ -86,7 +84,7 @@ public interface ConstCharacterVirtualSettings
 
     /**
      * Return the maximum number of collision iterations. The settings are
-     * unaffected. (native field: mMaxCollisionIterations)
+     * unaffected.
      *
      * @return the number of iterations (&ge;0)
      */
@@ -94,7 +92,7 @@ public interface ConstCharacterVirtualSettings
 
     /**
      * Return how often to try stepping in the constraint solver. The settings
-     * are unaffected. (native field: mMaxConstraintIterations)
+     * are unaffected.
      *
      * @return the number of iterations (&ge;0)
      */
@@ -102,7 +100,7 @@ public interface ConstCharacterVirtualSettings
 
     /**
      * Return the maximum number of hits to be collected. The settings are
-     * unaffected. (native field: mMaxNumHits)
+     * unaffected.
      *
      * @return the limit (&ge;0)
      */
@@ -110,15 +108,14 @@ public interface ConstCharacterVirtualSettings
 
     /**
      * Return the maximum force applied to other bodies. The settings are
-     * unaffected. (native field: mMaxStrength)
+     * unaffected.
      *
      * @return the force (in Newtons)
      */
     float getMaxStrength();
 
     /**
-     * Return the early out threshold. The settings are unaffected. (native
-     * field: mMinTimeRemaining)
+     * Return the early out threshold. The settings are unaffected.
      *
      * @return the simulation time interval (in seconds)
      */
@@ -126,7 +123,6 @@ public interface ConstCharacterVirtualSettings
 
     /**
      * Return how quickly penetration is resolved. The settings are unaffected.
-     * (native field: mPenetrationRecoverySpeed)
      *
      * @return the resolution fraction (0=never resolved, 1=all in one update)
      */
@@ -134,7 +130,7 @@ public interface ConstCharacterVirtualSettings
 
     /**
      * Return the maximum range of predictive contacts. The settings are
-     * unaffected. (native field: mPredictiveContactDistance)
+     * unaffected.
      *
      * @return the distance (in meters)
      */
@@ -142,7 +138,6 @@ public interface ConstCharacterVirtualSettings
 
     /**
      * Copy the local offset applied to the shape. The settings are unaffected.
-     * (native field: mShapeOffset)
      *
      * @return a new offset vector (in local coordinates)
      */

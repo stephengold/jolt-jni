@@ -41,23 +41,21 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
 
     /**
      * Test whether the created body will be allowed to fall asleep. The
-     * settings are unaffected. (native field: mAllowSleeping)
+     * settings are unaffected.
      *
      * @return true if allowed, otherwise false
      */
     boolean getAllowSleeping();
 
     /**
-     * Return the angular damping constant. The settings are unaffected. (native
-     * field: mAngularDamping)
+     * Return the angular damping constant. The settings are unaffected.
      *
      * @return the constant (in units of 1/second, &ge;0, &le;1)
      */
     float getAngularDamping();
 
     /**
-     * Copy the (initial) angular velocity. The settings are unaffected. (native
-     * field: mAngularVelocity)
+     * Copy the (initial) angular velocity. The settings are unaffected.
      *
      * @return a new velocity vector (radians per second in physics-system
      * coordinates)
@@ -65,16 +63,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     Vec3 getAngularVelocity();
 
     /**
-     * Return the friction ratio. The settings are unaffected. (native field:
-     * mFriction)
+     * Return the friction ratio. The settings are unaffected.
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
     float getFriction();
 
     /**
-     * Return the gravity factor. The settings are unaffected. (native field:
-     * mGravityFactor)
+     * Return the gravity factor. The settings are unaffected.
      *
      * @return the factor
      */
@@ -82,23 +78,20 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
 
     /**
      * Test whether the body will be a sensor. The settings are unaffected.
-     * (native field: mIsSensor)
      *
      * @return true for a sensor, otherwise false
      */
     boolean getIsSensor();
 
     /**
-     * Return the linear damping constant. The settings are unaffected. (native
-     * field: mLinearDamping)
+     * Return the linear damping constant. The settings are unaffected.
      *
      * @return the constant (in units of 1/second, &ge;0, &le;1)
      */
     float getLinearDamping();
 
     /**
-     * Copy the (initial) linear velocity. The settings are unaffected. (native
-     * field: mLinearVelocity)
+     * Copy the (initial) linear velocity. The settings are unaffected.
      *
      * @return a new velocity vector (meters per second in physics-system
      * coordinates)
@@ -113,40 +106,35 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     MassProperties getMassProperties();
 
     /**
-     * Copy the mass-properties override. The settings are unaffected. (native
-     * field: mMassPropertiesOverride)
+     * Copy the mass-properties override. The settings are unaffected.
      *
      * @return a new JVM object with a new native object assigned
      */
     MassProperties getMassPropertiesOverride();
 
     /**
-     * Return the maximum angular speed. The settings are unaffected. (native
-     * field: mMaxAngularVelocity)
+     * Return the maximum angular speed. The settings are unaffected.
      *
      * @return the maximum speed (in radians/second)
      */
     float getMaxAngularVelocity();
 
     /**
-     * Return the maximum linear speed. The settings are unaffected. (native
-     * field: mMaxLinearVelocity)
+     * Return the maximum linear speed. The settings are unaffected.
      *
      * @return the maximum speed (in meters/second)
      */
     float getMaxLinearVelocity();
 
     /**
-     * Return the motion quality. The settings are unaffected. (native field:
-     * mMotionQuality)
+     * Return the motion quality. The settings are unaffected.
      *
      * @return an enum value (not null)
      */
     EMotionQuality getMotionQuality();
 
     /**
-     * Return the motion type. The settings are unaffected. (native field:
-     * mMotionType)
+     * Return the motion type. The settings are unaffected.
      *
      * @return an enum value (not null)
      */
@@ -154,7 +142,6 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the index of the object layer. The settings are unaffected.
-     * (native field: mObjectLayer)
      *
      * @return the layer index (&ge;0, &lt;numObjectLayers)
      */
@@ -162,15 +149,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return how the mass-properties override will be used. The settings are
-     * unaffected. (native field: mOverrideMassProperties)
+     * unaffected.
      *
      * @return an enum value (not null)
      */
     EOverrideMassProperties getOverrideMassProperties();
 
     /**
-     * Return the (initial) location. The settings are unaffected. (native
-     * field: mPosition)
+     * Return the (initial) location. The settings are unaffected.
      *
      * @return a new location vector (in physics-system coordinates, all
      * components finite)
@@ -178,8 +164,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     RVec3 getPosition();
 
     /**
-     * Return the restitution ratio. The settings are unaffected. (native field:
-     * mRestitution)
+     * Return the restitution ratio. The settings are unaffected.
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -187,7 +172,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
 
     /**
      * Copy the (initial) orientation of the body's axes. The settings are
-     * unaffected. (native field: mRotation)
+     * unaffected.
      *
      * @return a new rotation quaternion (relative to the physics-system axes)
      */

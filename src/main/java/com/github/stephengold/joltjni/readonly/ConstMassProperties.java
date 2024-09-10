@@ -46,15 +46,14 @@ public interface ConstMassProperties extends ConstJoltPhysicsObject {
             Mat44 storeRotation, Vec3 storeDiagonal);
 
     /**
-     * Copy the inertia tensor. The properties are unaffected. (native field:
-     * mIntertia)
+     * Copy the inertia tensor. The properties are unaffected.
      *
      * @return a new matrix (in kilogram.meters squared)
      */
     Mat44 getInertia();
 
     /**
-     * Return the mass. The properties are unaffected. (native field: mMass)
+     * Return the mass. The properties are unaffected.
      *
      * @return the mass (in kilograms, &ge;0)
      */
