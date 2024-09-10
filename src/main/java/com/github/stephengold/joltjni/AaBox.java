@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
- * An axis-aligned box. (native class: AABox)
+ * An axis-aligned box. (native type: AABox)
  *
  * @author Stephen Gold sgold@sonic.net
  */

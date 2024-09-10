@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
- * A counted reference to a {@code Skeleton}. (native class:
+ * A counted reference to a {@code Skeleton}. (native type:
  * {@code Ref<Skeleton>})
  *
  * @author Stephen Gold sgold@sonic.net

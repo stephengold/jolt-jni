@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Either an error or a {@code ShapeRefC}. (native class:
+ * Either an error or a {@code ShapeRefC}. (native type:
  * {@code Result<Ref<Shape>>})
  *
  * @author Stephen Gold sgold@sonic.net
