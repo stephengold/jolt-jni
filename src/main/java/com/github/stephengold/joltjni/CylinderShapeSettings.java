@@ -85,7 +85,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     // new methods exposed
 
     /**
-     * Return the convex radius. The settings are unaffected. (native field:
+     * Return the convex radius. The settings are unaffected. (native attribute:
      * mConvexRadius)
      *
      * @return the convex radius (&ge;0)
@@ -98,7 +98,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the half height. The settings are unaffected. (native field:
+     * Return the half height. The settings are unaffected. (native attribute:
      * mHalfHeight)
      *
      * @return half the height
@@ -112,7 +112,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
 
     /**
      * Return the radius of the cylinder. The settings are unaffected. (native
-     * field: mRadius)
+     * attribute: mRadius)
      *
      * @return the radius (&ge;0)
      */
@@ -124,7 +124,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the convex radius. (native field: mConvexRadius)
+     * Alter the convex radius. (native attribute: mConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0, default=0.05)
      */
@@ -134,7 +134,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the half height. (native field: mHalfHeight)
+     * Alter the half height. (native attribute: mHalfHeight)
      *
      * @param halfHeight one half of the desired height (&ge;0)
      */
@@ -144,7 +144,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the radius of the cylinder. (native field: mRadius)
+     * Alter the radius of the cylinder. (native attribute: mRadius)
      *
      * @param radius the desired radius (&ge;0)
      */

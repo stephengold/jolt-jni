@@ -75,7 +75,7 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
     // new methods exposed
 
     /**
-     * Return the bottom radius. The settings are unaffected. (native field:
+     * Return the bottom radius. The settings are unaffected. (native attribute:
      * mBottomRadius)
      *
      * @return the bottom radius (&ge;0)
@@ -89,7 +89,7 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
 
     /**
      * Return the half height of the tapered cylinder. The settings are
-     * unaffected. (native field: mHalfHeightOfTaperedCylinder)
+     * unaffected. (native attribute: mHalfHeightOfTaperedCylinder)
      *
      * @return half the height
      */
@@ -101,7 +101,7 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the top radius. The settings are unaffected. (native field:
+     * Return the top radius. The settings are unaffected. (native attribute:
      * mTopRadius)
      *
      * @return the top radius (&ge;0)
@@ -114,7 +114,8 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the bottom radius of the cylinder. (native field: mBottomRadius)
+     * Alter the bottom radius of the cylinder. (native attribute:
+     * mBottomRadius)
      *
      * @param radius the desired bottom radius (&ge;0)
      */
@@ -124,7 +125,7 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the half height of the tapered cylinder. (native field:
+     * Alter the half height of the tapered cylinder. (native attribute:
      * mHalfHeightOfTaperedCylinder)
      *
      * @param halfHeight one half of the desired height (&ge;0)
@@ -135,7 +136,7 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the top radius of the cylinder. (native field: mTopRadius)
+     * Return the top radius of the cylinder. (native attribute: mTopRadius)
      *
      * @param radius the desired top radius (&ge;0)
      */

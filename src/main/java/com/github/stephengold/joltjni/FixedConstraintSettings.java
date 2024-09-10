@@ -60,7 +60,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Test whether to configure the attachment points based on the positions of
      * the bodies when the constraint is created. The settings are unaffected.
-     * (native field: mAutoDetectPoint)
+     * (native attribute: mAutoDetectPoint)
      *
      * @return true to use body positions, false for explicit configuration
      */
@@ -72,8 +72,8 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Copy the X axis for body 1. The settings are unaffected. (native field:
-     * mAxisX1)
+     * Copy the X axis for body 1. The settings are unaffected. (native
+     * attribute: mAxisX1)
      *
      * @return a new direction vector
      */
@@ -88,8 +88,8 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Copy the X axis for body 2. The settings are unaffected. (native field:
-     * mAxisX2)
+     * Copy the X axis for body 2. The settings are unaffected. (native
+     * attribute: mAxisX2)
      *
      * @return a new direction vector
      */
@@ -104,8 +104,8 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Copy the Y axis for body 1. The settings are unaffected. (native field:
-     * mAxisY1)
+     * Copy the Y axis for body 1. The settings are unaffected. (native
+     * attribute: mAxisY1)
      *
      * @return a new direction vector
      */
@@ -120,8 +120,8 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Copy the Y axis for body 2. The settings are unaffected. (native field:
-     * mAxisY2)
+     * Copy the Y axis for body 2. The settings are unaffected. (native
+     * attribute: mAxisY2)
      *
      * @return a new direction vector
      */
@@ -137,7 +137,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 1. The settings are unaffected.
-     * (native field: mPoint1)
+     * (native attribute: mPoint1)
      *
      * @return a new location vector
      */
@@ -153,7 +153,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 2. The settings are unaffected.
-     * (native field: mPoint2)
+     * (native attribute: mPoint2)
      *
      * @return a new location vector
      */
@@ -169,7 +169,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return which space the other properties are specified in. The settings
-     * are unaffected. (native field: mSpace)
+     * are unaffected. (native attribute: mSpace)
      *
      * @return an enum value (not null)
      */
@@ -183,7 +183,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Alter whether to configure the attachment points based on the positions
-     * of the bodies when the constraint is created. (native field:
+     * of the bodies when the constraint is created. (native attribute:
      * mAutoDetectPoint)
      *
      * @param setting true to use body positions, false for explicit
@@ -195,7 +195,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the X axis for body 1. (native field: mAxisX1)
+     * Alter the X axis for body 1. (native attribute: mAxisX1)
      *
      * @param axis the desired direction vector (default=(1,0,0))
      */
@@ -208,7 +208,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the X axis for body 2. (native field: mAxisX2)
+     * Alter the X axis for body 2. (native attribute: mAxisX2)
      *
      * @param axis the desired direction vector (default=(1,0,0))
      */
@@ -221,7 +221,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the Y axis for body 1. (native field: mAxisY1)
+     * Alter the Y axis for body 1. (native attribute: mAxisY1)
      *
      * @param axis the desired direction vector (default=(0,1,0))
      */
@@ -234,7 +234,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the Y axis for body 2. (native field: mAxisY2)
+     * Alter the Y axis for body 2. (native attribute: mAxisY2)
      *
      * @param axis the desired direction vector (default=(0,1,0))
      */
@@ -247,7 +247,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 1. (native field: mPoint1)
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -261,7 +261,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 2. (native field: mPoint2)
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -275,8 +275,8 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter which space the other properties are specified in. (native field:
-     * mSpace)
+     * Alter which space the other properties are specified in. (native
+     * attribute: mSpace)
      *
      * @param space enum value (not null, default=WorldSpace)
      */

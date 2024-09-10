@@ -57,8 +57,8 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
     // new methods exposed
 
     /**
-     * Return the constraint location for body 1. The settings are unaffected.
-     * (native field: mPoint1)
+     * Copy the constraint location for body 1. The settings are unaffected.
+     * (native attribute: mPoint1)
      *
      * @return a new location vector
      */
@@ -73,8 +73,8 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Return the constraint location for body 2. The settings are unaffected.
-     * (native field: mPoint2)
+     * Copy the constraint location for body 2. The settings are unaffected.
+     * (native mPoint1: mPoint2)
      *
      * @return a new location vector
      */
@@ -90,7 +90,7 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return which space the other properties are specified in. The settings
-     * are unaffected. (native field: mSpace)
+     * are unaffected. (native attribute: mSpace)
      *
      * @return an enum value (not null)
      */
@@ -103,7 +103,7 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 1. (native field: mPoint1)
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -117,7 +117,7 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 2. (native field: mPoint2)
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -131,8 +131,8 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter which space the other properties are specified in. (native field:
-     * mSpace)
+     * Alter which space the other properties are specified in. (native
+     * attribute: mSpace)
      *
      * @param space enum value (not null, default=WorldSpace)
      */

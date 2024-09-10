@@ -101,7 +101,7 @@ abstract public class ConstraintSettings
     }
 
     /**
-     * Alter the constraint's priority when solving. (native field:
+     * Alter the constraint's priority when solving. (native attribute:
      * mConstraintPriority)
      *
      * @param level the desired priority level (default=0)
@@ -112,7 +112,7 @@ abstract public class ConstraintSettings
     }
 
     /**
-     * Initially enable or disable the constraint. (native field: mEnabled)
+     * Initially enable or disable the constraint. (native attribute: mEnabled)
      *
      * @param setting true to enable or false to disable (default=true)
      */
@@ -123,7 +123,7 @@ abstract public class ConstraintSettings
 
     /**
      * Alter the override for the number of position iterations used in the
-     * solver. (native field: mNumPositionStepsOverride)
+     * solver. (native attribute: mNumPositionStepsOverride)
      *
      * @param setting the number of iterations, or 0 to use the default in
      * {@code PhysicsSettings} (default=0)
@@ -135,7 +135,7 @@ abstract public class ConstraintSettings
 
     /**
      * Alter the override for the number of velocity iterations used in the
-     * solver. (native field: mNumVelocityStepsOverride)
+     * solver. (native attribute: mNumVelocityStepsOverride)
      *
      * @param setting the number of iterations, or 0 to use the default in
      * {@code PhysicsSettings} (default=0)
@@ -149,7 +149,7 @@ abstract public class ConstraintSettings
 
     /**
      * Alter the user data, which holds the {@code EConstraintSubType} ordinal.
-     * (native field: mUserData)
+     * (native attribute: mUserData)
      *
      * @param constraintSubType the desired value (not null, default=0)
      */
@@ -163,7 +163,7 @@ abstract public class ConstraintSettings
 
     /**
      * Return the constraint's priority when solving. The settings are
-     * unaffected. (native field: mConstraintPriority)
+     * unaffected. (native attribute: mConstraintPriority)
      *
      * @return the priority level
      */
@@ -177,7 +177,7 @@ abstract public class ConstraintSettings
 
     /**
      * Test whether the constraint will be enabled initially. The settings are
-     * unaffected. (native field: mEnabled)
+     * unaffected. (native attribute: mEnabled)
      *
      * @return true if enabled, otherwise false
      */
@@ -191,7 +191,7 @@ abstract public class ConstraintSettings
 
     /**
      * Return the override for the number of position iterations used in the
-     * solver. The settings are unaffected. (native field:
+     * solver. The settings are unaffected. (native attribute:
      * mNumPositionStepsOverride)
      *
      * @return the number of iterations, or 0 to use the default in
@@ -207,7 +207,7 @@ abstract public class ConstraintSettings
 
     /**
      * Return the override for the number of velocity iterations used in the
-     * solver. The settings are unaffected. (native field:
+     * solver. The settings are unaffected. (native attribute:
      * mNumVelocityStepsOverride)
      *
      * @return the number of iterations, or 0 to use the default in

@@ -96,7 +96,7 @@ public class RagdollSettingsRef extends Ref {
     }
 
     /**
-     * Access the parts by way of a Java array. (native field: mParts)
+     * Access the parts by way of a Java array. (native attribute: mParts)
      *
      * @return a new array of new JVM objects with pre-existing native objects
      * assigned
@@ -116,7 +116,7 @@ public class RagdollSettingsRef extends Ref {
     }
 
     /**
-     * Access the skeleton. (native field: mSkeleton)
+     * Access the skeleton. (native attribute: mSkeleton)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */

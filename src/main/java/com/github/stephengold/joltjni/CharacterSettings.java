@@ -57,7 +57,7 @@ public class CharacterSettings
     // new methods exposed
 
     /**
-     * Alter the friction ratio. (native field: mFriction)
+     * Alter the friction ratio. (native attribute: mFriction)
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
      * default=0.2)
@@ -68,7 +68,7 @@ public class CharacterSettings
     }
 
     /**
-     * Alter the gravity multiplier. (native field: mGravityFactor)
+     * Alter the gravity multiplier. (native attribute: mGravityFactor)
      *
      * @param factor the desired multiplier (default=1)
      */
@@ -79,7 +79,7 @@ public class CharacterSettings
 
     /**
      * Alter the object layer to which the character will be added. (native
-     * field: mLayer)
+     * attribute: mLayer)
      *
      * @param objLayer the ID of the desired object layer (&ge;0,
      * &lt;numObjectLayers, default=0)
@@ -90,7 +90,7 @@ public class CharacterSettings
     }
 
     /**
-     * Alter the character's mass. (native field: mMass)
+     * Alter the character's mass. (native attribute: mMass)
      *
      * @param mass the desired mass (in kilograms, default=80)
      */
@@ -102,8 +102,8 @@ public class CharacterSettings
     // ConstCharacterSettings methods
 
     /**
-     * Return the friction ratio. The settings are unaffected. (native field:
-     * mFriction)
+     * Return the friction ratio. The settings are unaffected. (native
+     * attribute: mFriction)
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -116,8 +116,8 @@ public class CharacterSettings
     }
 
     /**
-     * Return the gravity factor. The settings are unaffected. (native field:
-     * mGravityFactor)
+     * Return the gravity factor. The settings are unaffected. (native
+     * attribute: mGravityFactor)
      *
      * @return the factor
      */
@@ -131,7 +131,7 @@ public class CharacterSettings
 
     /**
      * Return the index of the object layer. The settings are unaffected.
-     * (native field: mLayer)
+     * (native attribute: mLayer)
      *
      * @return the layer index (&ge;0, &lt;numObjectLayers)
      */
@@ -144,8 +144,8 @@ public class CharacterSettings
     }
 
     /**
-     * Return the character's mass. The settings are unaffected. (native field:
-     * mMass)
+     * Return the character's mass. The settings are unaffected. (native
+     * attribute: mMass)
      *
      * @return the mass (in kilograms)
      */

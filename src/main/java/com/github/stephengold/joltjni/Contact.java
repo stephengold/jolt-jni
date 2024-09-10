@@ -51,7 +51,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Return the ID of the colliding body. The contact is unaffected. (native
-     * field: mBodyB)
+     * attribute: mBodyB)
      *
      * @return a new ID, or null if no colliding body
      */
@@ -69,7 +69,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Test whether the velocity of the contact point can push the character.
-     * The contact is unaffected. (native field: mCanPushCharacter)
+     * The contact is unaffected. (native attribute: mCanPushCharacter)
      *
      * @return true if can push, otherwise false
      */
@@ -82,8 +82,8 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     }
 
     /**
-     * Return the colliding character. The contact is unaffected. (native field:
-     * mCharacterB)
+     * Return the colliding character. The contact is unaffected. (native
+     * attribute: mCharacterB)
      *
      * @return a new JVM object with the pre-existing native object assigned, or
      * null if no colliding character
@@ -98,7 +98,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     }
 
     /**
-     * Return the contact normal. The contact is unaffected. (native field:
+     * Return the contact normal. The contact is unaffected. (native attribute:
      * mContactNormal)
      *
      * @return a new direction vector, pointing toward the character
@@ -115,8 +115,8 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     }
 
     /**
-     * Return the contact separation. The contact is unaffected. (native field:
-     * mDistance)
+     * Return the contact separation. The contact is unaffected. (native
+     * attribute: mDistance)
      *
      * @return the signed distance (in meters, &le;0&rarr;actual contact,
      * &gt;0&rarr;predictive contact)
@@ -131,7 +131,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Return the fraction along the path where the contact takes place. The
-     * contact is unaffected. (native field: mFraction)
+     * contact is unaffected. (native attribute: mFraction)
      *
      * @return the fraction
      */
@@ -145,7 +145,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Test whether the character has actually collided. The contact is
-     * unaffected. (native field: mHadCollision)
+     * unaffected. (native attribute: mHadCollision)
      *
      * @return true if a real collision, false for a predictive contact that
      * never became a real one
@@ -160,7 +160,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Test whether the colliding object is a sensor. The contact is unaffected.
-     * (native field: mIsSensorB)
+     * (native attribute: mIsSensorB)
      *
      * @return true for a sensor, otherwise false
      */
@@ -174,7 +174,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Return the velocity of the contact point. The contact is unaffected.
-     * (native field: mLinearVelocity)
+     * (native attribute: mLinearVelocity)
      *
      * @return a new velocity vector
      */
@@ -191,7 +191,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Return the motion type of the colliding object. The contact is
-     * unaffected. (native field: mGetMotionTypeB)
+     * unaffected. (native attribute: mGetMotionTypeB)
      *
      * @return an enum value (not null)
      */
@@ -206,7 +206,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Return the location where the contact occurs. The contact is unaffected.
-     * (native field: mPosition)
+     * (native attribute: mPosition)
      *
      * @return a new vector (in system coordinates)
      */
@@ -223,7 +223,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Return the subshape ID of the colliding body. The contact is unaffected.
-     * (native field: mSubShapeIDB)
+     * (native attribute: mSubShapeIDB)
      *
      * @return a new ID, or null if no colliding body
      */
@@ -241,7 +241,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Return the surface normal of the contact. The contact is unaffected.
-     * (native field: mSurfaceNormal)
+     * (native attribute: mSurfaceNormal)
      *
      * @return a new direction vector
      */
@@ -258,7 +258,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Return the user data of the colliding object. The contact is unaffected.
-     * (native field: mUserData)
+     * (native attribute: mUserData)
      *
      * @return the data value
      */
@@ -272,7 +272,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     /**
      * Test whether the contact was discarded by the contact-validate callback.
-     * The contact is unaffected. (native field: mWasDiscarded)
+     * The contact is unaffected. (native attribute: mWasDiscarded)
      *
      * @return true if discarded, otherwise false
      */

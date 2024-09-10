@@ -49,7 +49,7 @@ public class BroadPhaseCastResult extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the ID of the body that was hit. (native field: mBodyID)
+     * Return the ID of the body that was hit. (native attribute: mBodyID)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -63,7 +63,7 @@ public class BroadPhaseCastResult extends JoltPhysicsObject {
 
     /**
      * Return the location of the hit, as a fraction of the cast path. (native
-     * field: mFraction)
+     * attribute: mFraction)
      *
      * @return the fraction (&ge;0)
      */

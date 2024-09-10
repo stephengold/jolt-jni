@@ -60,7 +60,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Test whether to configure the attachment points based on the positions of
      * the bodies when the constraint is created. The settings are unaffected.
-     * (native field: mAutoDetectPoint)
+     * (native attribute: mAutoDetectPoint)
      *
      * @return true to use body positions, false for explicit configuration
      */
@@ -73,7 +73,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return the upper limit of translation. The settings are unaffected.
-     * (native field: mLimitsMax)
+     * (native attribute: mLimitsMax)
      *
      * @return the upper limit
      */
@@ -86,7 +86,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return the lower limit of translation. The settings are unaffected.
-     * (native field: mLimitsMin)
+     * (native attribute: mLimitsMin)
      *
      * @return the lower limit
      */
@@ -99,7 +99,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Access the spring settings. The constraint settings are unaffected.
-     * (native field: mLimitsSpringSettings)
+     * (native attribute: mLimitsSpringSettings)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -114,7 +114,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return the maximum friction force when not driven by a motor. The
-     * settings are unaffected. (native field: mMaxFrictionForce)
+     * settings are unaffected. (native attribute: mMaxFrictionForce)
      *
      * @return the force (in Newtons)
      */
@@ -127,7 +127,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Access the motor settings. The constraint settings are unaffected.
-     * (native field: mMotorSettings)
+     * (native attribute: mMotorSettings)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -142,7 +142,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the normal axis of body 1. The settings are unaffected. (native
-     * field: mNormalAxis1)
+     * attribute: mNormalAxis1)
      *
      * @return a new direction vector
      */
@@ -158,7 +158,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the normal axis of body 2. The settings are unaffected. (native
-     * field: mNormalAxis2)
+     * attribute: mNormalAxis2)
      *
      * @return a new direction vector
      */
@@ -174,7 +174,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 1. The settings are unaffected.
-     * (native field: mPoint1)
+     * (native attribute: mPoint1)
      *
      * @return a new location vector
      */
@@ -190,7 +190,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 2. The settings are unaffected.
-     * (native field: mPoint2)
+     * (native attribute: mPoint2)
      *
      * @return a new location vector
      */
@@ -206,7 +206,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the slider axis of body 1. The settings are unaffected. (native
-     * field: mSliderAxis1)
+     * attribute: mSliderAxis1)
      *
      * @return a new direction vector
      */
@@ -222,7 +222,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the slider axis of body 2. The settings are unaffected. (native
-     * field: mSliderAxis2)
+     * attribute: mSliderAxis2)
      *
      * @return a new direction vector
      */
@@ -238,7 +238,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return which space the other properties are specified in. The settings
-     * are unaffected. (native field: mSpace)
+     * are unaffected. (native attribute: mSpace)
      *
      * @return an enum value (not null)
      */
@@ -252,7 +252,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Alter whether to configure the attachment points based on the positions
-     * of the bodies when the constraint is created. (native field:
+     * of the bodies when the constraint is created. (native attribute:
      * mAutoDetectPoint)
      *
      * @param setting true to use body positions, false for explicit
@@ -264,7 +264,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the upper limit of translation. (native field: mLimitsMax)
+     * Alter the upper limit of translation. (native attribute: mLimitsMax)
      *
      * @param limit the desired upper limit (default=MAX_VALUE)
      */
@@ -274,7 +274,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the lower limit of translation. (native field: mLimitsMin)
+     * Alter the lower limit of translation. (native attribute: mLimitsMin)
      *
      * @param limit the desired lower limit (default=-MAX_VALUE)
      */
@@ -285,7 +285,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Alter the maximum friction force when not driven by a motor. (native
-     * field: mMaxFrictionForce)
+     * attribute: mMaxFrictionForce)
      *
      * @param force the desired force (in Newtons, default=0)
      */
@@ -295,7 +295,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the normal axis of body 1. (native field: mNormalAxis1)
+     * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(0,1,0))
@@ -309,7 +309,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the normal axis of body 2. (native field: mNormalAxis2)
+     * Alter the normal axis of body 2. (native attribute: mNormalAxis2)
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(0,1,0))
@@ -323,7 +323,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 1. (native field: mPoint1)
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -337,7 +337,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 2. (native field: mPoint2)
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -351,7 +351,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the slider axis of body 1. (native field: mSliderAxis1)
+     * Alter the slider axis of body 1. (native attribute: mSliderAxis1)
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(1,0,0))
@@ -365,7 +365,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the slider axis of body 2. (native field: mSliderAxis2)
+     * Alter the slider axis of body 2. (native attribute: mSliderAxis2)
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(1,0,0))
@@ -379,8 +379,8 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter which space the other properties are specified in. (native field:
-     * mSpace)
+     * Alter which space the other properties are specified in. (native
+     * attribute: mSpace)
      *
      * @param space enum value (not null, default=WorldSpace)
      */

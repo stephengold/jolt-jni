@@ -58,7 +58,7 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the hinge axis for body 1. The settings are unaffected. (native
-     * field: mHingeAxis1)
+     * attribute: mHingeAxis1)
      *
      * @return a new direction vector
      */
@@ -74,7 +74,7 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the hinge axis for body 2. The settings are unaffected. (native
-     * field: mHingeAxis2)
+     * attribute: mHingeAxis2)
      *
      * @return a new direction vector
      */
@@ -102,7 +102,7 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return which space the other properties are specified in. The settings
-     * are unaffected. (native field: mSpace)
+     * are unaffected. (native attribute: mSpace)
      *
      * @return an enum value (not null)
      */
@@ -115,7 +115,7 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the hinge axis for body 1. (native field: mHingeAxis1)
+     * Alter the hinge axis for body 1. (native attribute: mHingeAxis1)
      *
      * @param axis the desired direction vector (default=(1,0,0))
      */
@@ -128,7 +128,7 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the hinge axis for body 2. (native field: mHingeAxis2)
+     * Alter the hinge axis for body 2. (native attribute: mHingeAxis2)
      *
      * @param axis the desired direction vector (default=(1,0,0))
      */
@@ -162,8 +162,8 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter which space the other properties are specified in. (native field:
-     * mSpace)
+     * Alter which space the other properties are specified in. (native
+     * attribute: mSpace)
      *
      * @param space enum value (not null, default=WorldSpace)
      */

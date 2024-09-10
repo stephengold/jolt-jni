@@ -48,7 +48,7 @@ public class JointState extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Copy the rotation. The state is unaffected. (native field: mRotation)
+     * Copy the rotation. The state is unaffected. (native attribute: mRotation)
      *
      * @return a new rotation quaternion
      */
@@ -64,7 +64,7 @@ public class JointState extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the translation offset. The state is unaffected. (native field:
+     * Copy the translation offset. The state is unaffected. (native attribute:
      * mTranslation)
      *
      * @return a new offset vector
@@ -80,7 +80,7 @@ public class JointState extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the rotation. (native field: mRotation)
+     * Alter the rotation. (native attribute: mRotation)
      *
      * @param rotation the desired rotation (not null, unaffected)
      */
@@ -94,7 +94,7 @@ public class JointState extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the translation offset. (native field: mTranslation)
+     * Alter the translation offset. (native attribute: mTranslation)
      *
      * @param offset the desired offset (not null, unaffected)
      */

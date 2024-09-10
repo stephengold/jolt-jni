@@ -73,7 +73,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     /**
      * Return the cosine of the active-edge threshold angle. The settings are
-     * unaffected. (native field: mActiveEdgeCosThresholdAngle)
+     * unaffected. (native attribute: mActiveEdgeCosThresholdAngle)
      *
      * @return the cosine
      */
@@ -86,7 +86,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     /**
      * Return the number of bits per sample to use during compression. The
-     * settings are unaffected. (native field: mBitsPerSample)
+     * settings are unaffected. (native attribute: mBitsPerSample)
      *
      * @return the number of bits (&ge;1, &le;8)
      */
@@ -98,7 +98,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Return the block size. The settings are unaffected. (native field:
+     * Return the block size. The settings are unaffected. (native attribute:
      * mBlockSize)
      * <p>
      * For culling purposes, the height field is organized in blocks of
@@ -117,7 +117,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     /**
      * Return the artificial maximum height. The settings are unaffected.
-     * (native field: mMaxHeightValue)
+     * (native attribute: mMaxHeightValue)
      *
      * @return the height value
      */
@@ -130,7 +130,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     /**
      * Return the artificial minimum height. The settings are unaffected.
-     * (native field: mMinHeightValue)
+     * (native attribute: mMinHeightValue)
      *
      * @return the height value
      */
@@ -143,7 +143,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     /**
      * Return the offset of the first sample. The settings are unaffected.
-     * (native field: mOffset)
+     * (native attribute: mOffset)
      *
      * @return a new offset vector
      */
@@ -158,7 +158,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Count the samples. The settings are unaffected. (native field:
+     * Count the samples. The settings are unaffected. (native attribute:
      * mSampleCount)
      *
      * @return the number of samples (&ge;0)
@@ -171,7 +171,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Return the scale factors. The settings are unaffected. (native field:
+     * Return the scale factors. The settings are unaffected. (native attribute:
      * mScale)
      *
      * @return a new scaling vector
@@ -187,7 +187,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter the active-edge threshold angle. (native field:
+     * Alter the active-edge threshold angle. (native attribute:
      * mActiveEdgeCosThresholdAngle)
      *
      * @param cosine the cosine of the desired angle (default=0.996195)
@@ -199,7 +199,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     /**
      * Alter the number of bits per sample to use during compression. (native
-     * field: mBitsPerSample)
+     * attribute: mBitsPerSample)
      *
      * @param numBits the number of bits (&ge;1, &le;8, default=8)
      */
@@ -209,7 +209,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter the block size. (native field: mBlockSize)
+     * Alter the block size. (native attribute: mBlockSize)
      * <p>
      * For culling purposes, the height field is organized in blocks of
      * {@code 2 * mBlockSize * mBlockSize} triangles.
@@ -224,7 +224,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter the artificial maximum height. (native field: mMaxHeightValue)
+     * Alter the artificial maximum height. (native attribute: mMaxHeightValue)
      *
      * @param maxHeight the desired height value (default=-MAX_VALUE)
      */
@@ -234,7 +234,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter the artificial minimum height. (native field: mMinHeightValue)
+     * Alter the artificial minimum height. (native attribute: mMinHeightValue)
      *
      * @param minHeight the desired height value (default=MAX_VALUE)
      */
@@ -244,7 +244,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter the offset of the first sample. (native field: mOffset)
+     * Alter the offset of the first sample. (native attribute: mOffset)
      *
      * @param offset the desired offset vector (not null, unaffected,
      * default=(0,0,0))
@@ -258,7 +258,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter the scale factors. (native field: mScale)
+     * Alter the scale factors. (native attribute: mScale)
      *
      * @param scale the desired scale factors (not null, unaffected,
      * default=(1,1,1))

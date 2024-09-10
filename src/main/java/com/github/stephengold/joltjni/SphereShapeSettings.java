@@ -71,8 +71,7 @@ public class SphereShapeSettings extends ConvexShapeSettings {
 
     /**
      * Return the radius of the sphere. The settings are unaffected. (native
-     * field: mRadius)
-     *
+     * attribute: mRadius)
      *
      * @return the radius (&ge;0)
      */
@@ -84,7 +83,7 @@ public class SphereShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the radius of the sphere. (native field: mRadius)
+     * Alter the radius of the sphere. (native attribute: mRadius)
      *
      * @param radius the desired radius
      */

@@ -49,7 +49,7 @@ final public class ContactManifold
 
     /**
      * Return the location from which all contact points are measured. The
-     * manifold is unaffected. (native field: mBaseOffset)
+     * manifold is unaffected. (native attribute: mBaseOffset)
      *
      * @return a new location vector
      */
@@ -66,7 +66,8 @@ final public class ContactManifold
 
     /**
      * Return the penetration depth: the distance to move body 2 out of
-     * collision. The manifold is unaffected. (native field: mPenetrationDepth)
+     * collision. The manifold is unaffected. (native attribute:
+     * mPenetrationDepth)
      *
      * @return the signed distance (negative for a speculative contact)
      */
@@ -79,7 +80,7 @@ final public class ContactManifold
 
     /**
      * Return the ID of the first subshape that formed the manifold. The
-     * manifold is unaffected. (native field: mSubShapeId1)
+     * manifold is unaffected. (native attribute: mSubShapeID1)
      *
      * @return a new object
      */
@@ -94,7 +95,7 @@ final public class ContactManifold
 
     /**
      * Return the ID of the 2nd subshape that formed the manifold. The manifold
-     * is unaffected. (native field: mSubShapeId2)
+     * is unaffected. (native attribute: mSubShapeID2)
      *
      * @return a new object
      */
@@ -109,7 +110,7 @@ final public class ContactManifold
 
     /**
      * Return the normal: the direction to move body 2 out of collision. The
-     * manifold is unaffected. (native field: mWorldSpaceNormal)
+     * manifold is unaffected. (native attribute: mWorldSpaceNormal)
      *
      * @return a new direction vector (in system coordinates)
      */

@@ -58,7 +58,7 @@ public class ContactSettings
     // new methods exposed
 
     /**
-     * Alter the combined friction for the body pair. (native field:
+     * Alter the combined friction for the body pair. (native attribute:
      * mCombinedFriction)
      *
      * @param friction the desired combined friction (default=0)
@@ -69,7 +69,7 @@ public class ContactSettings
     }
 
     /**
-     * Alter the combined restitution for the body pair. (native field:
+     * Alter the combined restitution for the body pair. (native attribute:
      * mCombinedRestitution)
      *
      * @param restitution the desired combined restitution (default=0)
@@ -80,8 +80,8 @@ public class ContactSettings
     }
 
     /**
-     * Alter the scale factor for the inverse inertia of body 1. (native field:
-     * mInvInertiaScale1)
+     * Alter the scale factor for the inverse inertia of body 1. (native
+     * attribute: mInvInertiaScale1)
      *
      * @param factor the factor (0 = infinite inertia, 1 = use original inertia,
      * default=1)
@@ -92,8 +92,8 @@ public class ContactSettings
     }
 
     /**
-     * Alter the scale factor for the inverse inertia of body 2. (native field:
-     * mInvInertiaScale2)
+     * Alter the scale factor for the inverse inertia of body 2. (native
+     * attribute: mInvInertiaScale2)
      *
      * @param factor the factor (0 = infinite inertia, 1 = use original inertia,
      * default=1)
@@ -104,7 +104,7 @@ public class ContactSettings
     }
 
     /**
-     * Alter the scale factor for the inverse mass of body 1. (native field:
+     * Alter the scale factor for the inverse mass of body 1. (native attribute:
      * mInvMassScale1)
      *
      * @param factor the factor (0 = infinite mass, 1 = use original mass,
@@ -116,7 +116,7 @@ public class ContactSettings
     }
 
     /**
-     * Alter the scale factor for the inverse mass of body 2. (native field:
+     * Alter the scale factor for the inverse mass of body 2. (native attribute:
      * mInvMassScale2)
      *
      * @param factor the factor (0 = infinite mass, 1 = use original mass,
@@ -129,7 +129,7 @@ public class ContactSettings
 
     /**
      * Alter whether the contact should be treated as a sensor (no collision
-     * response). (native field: mIsSensor)
+     * response). (native attribute: mIsSensor)
      *
      * @param setting true to treat as a sensor, otherwise false (default=false)
      */
@@ -139,8 +139,8 @@ public class ContactSettings
     }
 
     /**
-     * Alter the relative angular velocity (body 2 minus body 1). (native field:
-     * mRelativeAngularSurfaceVelocity)
+     * Alter the relative angular velocity (body 2 minus body 1). (native
+     * attribute: mRelativeAngularSurfaceVelocity)
      *
      * @param omega the desired angular velocity (radians per second in system
      * coordinates, default=(0,0,0))
@@ -154,8 +154,8 @@ public class ContactSettings
     }
 
     /**
-     * Alter the relative linear velocity (body 2 minus body 1). (native field:
-     * mRelativeLinearSurfaceVelocity)
+     * Alter the relative linear velocity (body 2 minus body 1). (native
+     * attribute: mRelativeLinearSurfaceVelocity)
      *
      * @param velocity the desired velocity (meters per second in system
      * coordinates, default=(0,0,0))
@@ -172,7 +172,7 @@ public class ContactSettings
 
     /**
      * Return the combined friction for the body pair. The settings are
-     * unaffected. (native field: mCombinedFriction)
+     * unaffected. (native attribute: mCombinedFriction)
      *
      * @return the combined friction
      */
@@ -185,7 +185,7 @@ public class ContactSettings
 
     /**
      * Return the combined restitution for the body pair. The settings are
-     * unaffected. (native field: mCombinedRestitution)
+     * unaffected. (native attribute: mCombinedRestitution)
      *
      * @return the combined restitution
      */
@@ -198,7 +198,7 @@ public class ContactSettings
 
     /**
      * Return the scale factor for the inverse inertia of body 1. The settings
-     * are unaffected. (native field: mInvInertiaScale1)
+     * are unaffected. (native attribute: mInvInertiaScale1)
      *
      * @return the factor (0 = infinite inertia, 1 = use original inertia)
      */
@@ -211,7 +211,7 @@ public class ContactSettings
 
     /**
      * Return the scale factor for the inverse inertia of body 2. The settings
-     * are unaffected. (native field: mInvInertiaScale2)
+     * are unaffected. (native attribute: mInvInertiaScale2)
      *
      * @return the factor (0 = infinite inertia, 1 = use original inertia)
      */
@@ -224,7 +224,7 @@ public class ContactSettings
 
     /**
      * Return the scale factor for the inverse mass of body 1. The settings are
-     * unaffected. (native field: mInvMassScale1)
+     * unaffected. (native attribute: mInvMassScale1)
      *
      * @return the factor (0 = infinite mass, 1 = use original mass)
      */
@@ -237,7 +237,7 @@ public class ContactSettings
 
     /**
      * Return the scale factor for the inverse mass of body 2. The settings are
-     * unaffected. (native field: mInvMassScale2)
+     * unaffected. (native attribute: mInvMassScale2)
      *
      * @return the factor (0 = infinite mass, 1 = use original mass)
      */
@@ -250,7 +250,7 @@ public class ContactSettings
 
     /**
      * Test whether the contact should be treated as a sensor (no collision
-     * response). The settings are unaffected. (native field: mIsSensor)
+     * response). The settings are unaffected. (native attribute: mIsSensor)
      *
      * @return true if treated as a sensor, otherwise false
      */
@@ -263,7 +263,7 @@ public class ContactSettings
 
     /**
      * Return the relative angular velocity (body 2 minus body 1). The settings
-     * are unaffected. (native field: mRelativeAngularSurfaceVelocity)
+     * are unaffected. (native attribute: mRelativeAngularSurfaceVelocity)
      *
      * @return a new velocity vector (radians per second in system coordinates)
      */
@@ -279,7 +279,7 @@ public class ContactSettings
 
     /**
      * Return the relative linear velocity (body 2 minus body 1). The settings
-     * are unaffected. (native field: mRelativeLinearSurfaceVelocity)
+     * are unaffected. (native attribute: mRelativeLinearSurfaceVelocity)
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */

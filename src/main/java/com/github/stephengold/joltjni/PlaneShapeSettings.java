@@ -97,7 +97,7 @@ public class PlaneShapeSettings extends ShapeSettings {
     // new methods exposed
 
     /**
-     * Return the half extent. The settings are unaffected. (native field:
+     * Return the half extent. The settings are unaffected. (native attribute:
      * mHalfExtent)
      *
      * @return half the extent
@@ -110,7 +110,7 @@ public class PlaneShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Return the material. The settings are unaffected. (native field:
+     * Return the material. The settings are unaffected. (native attribute:
      * mMaterial)
      *
      * @return a new JVM object with the pre-existing native object assigned, or
@@ -130,8 +130,8 @@ public class PlaneShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Copy the surface equation. The settings are unaffected. (native field:
-     * mPlane)
+     * Copy the surface equation. The settings are unaffected. (native
+     * attribute: mPlane)
      *
      * @return a new {@code Plane}
      */
@@ -147,7 +147,7 @@ public class PlaneShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter the plane's extent. (native field: mHalfExtent)
+     * Alter the plane's extent. (native attribute: mHalfExtent)
      *
      * @param halfExtent one-half of the desired extent
      */
@@ -157,7 +157,7 @@ public class PlaneShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Replace the material. (native field: mMaterial)
+     * Replace the material. (native attribute: mMaterial)
      *
      * @param material the desired material, or null for none (default=null)
      */
@@ -168,7 +168,7 @@ public class PlaneShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter the surface equation. (native field: mPlane)
+     * Alter the surface equation. (native attribute: mPlane)
      *
      * @param plane the desired surface (not null, unaffected)
      */

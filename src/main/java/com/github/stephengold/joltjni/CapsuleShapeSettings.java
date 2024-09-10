@@ -72,7 +72,7 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
 
     /**
      * Return the half height of the cylindrical portion. The settings are
-     * unaffected. (native field: mHalfHeightOfCylinder)
+     * unaffected. (native attribute: mHalfHeightOfCylinder)
      *
      * @return half the height
      */
@@ -84,7 +84,8 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the radius. The settings are unaffected. (native field: mRadius)
+     * Return the radius. The settings are unaffected. (native attribute:
+     * mRadius)
      *
      * @return the radius (&ge;0)
      */
@@ -96,7 +97,7 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the half height of the cylindrical portion. (native field:
+     * Alter the half height of the cylindrical portion. (native attribute:
      * mHalfHeightOfCylinder)
      *
      * @param halfHeight one half of the desired height of the cylindrical
@@ -108,7 +109,7 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the radius. (native field: mRadius)
+     * Alter the radius. (native attribute: mRadius)
      *
      * @param radius the radius (&ge;0)
      */

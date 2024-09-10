@@ -58,7 +58,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Access the spring settings. The constraint settings are unaffected.
-     * (native field: mLimitsSpringSettings)
+     * (native attribute: mLimitsSpringSettings)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -73,7 +73,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return the upper limit on distance. The settings are unaffected. (native
-     * field: mMaxDistance)
+     * attribute: mMaxDistance)
      *
      * @return the upper limit
      */
@@ -86,7 +86,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return the lower limit on distance. The settings are unaffected. (native
-     * field: mMinDistance)
+     * attribute: mMinDistance)
      *
      * @return the lower limit
      */
@@ -99,7 +99,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 1. The settings are unaffected.
-     * (native field: mPoint1)
+     * (native attribute: mPoint1)
      *
      * @return a new location vector
      */
@@ -115,7 +115,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 2. The settings are unaffected.
-     * (native field: mPoint2)
+     * (native attribute: mPoint2)
      *
      * @return a new location vector
      */
@@ -131,7 +131,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return which space the other properties are specified in. The settings
-     * are unaffected. (native field: mSpace)
+     * are unaffected. (native attribute: mSpace)
      *
      * @return an enum value (not null)
      */
@@ -144,7 +144,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the upper limit on distance. (native field: mMaxDistance)
+     * Alter the upper limit on distance. (native attribute: mMaxDistance)
      *
      * @param distance the upper limit (default=-1)
      */
@@ -154,7 +154,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the lower limit on distance. (native field: mMinDistance)
+     * Alter the lower limit on distance. (native attribute: mMinDistance)
      *
      * @param distance the upper limit (default=-1)
      */
@@ -164,7 +164,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 1. (native field: mPoint1)
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -178,7 +178,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 2. (native field: mPoint2)
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -192,8 +192,8 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter which space the other properties are specified in. (native field:
-     * mSpace)
+     * Alter which space the other properties are specified in. (native
+     * attribute: mSpace)
      *
      * @param space enum value (not null, default=WorldSpace)
      */

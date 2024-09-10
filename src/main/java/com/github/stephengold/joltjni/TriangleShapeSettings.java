@@ -83,7 +83,7 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     // new methods exposed
 
     /**
-     * Return the convex radius. The settings are unaffected. (native field:
+     * Return the convex radius. The settings are unaffected. (native attribute:
      * mConvexRadius)
      *
      * @return the convex radius (&ge;0)
@@ -96,7 +96,7 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the convex radius. (native field: mConvexRadius)
+     * Alter the convex radius. (native attribute: mConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0)
      */

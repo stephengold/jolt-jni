@@ -100,7 +100,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
 
     /**
      * Return the positional tolerance used when generating the hull. The
-     * settings are unaffected. (native field: mHullTolerance)
+     * settings are unaffected. (native attribute: mHullTolerance)
      *
      * @return the distance (&ge;0)
      */
@@ -112,7 +112,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the convex radius. The settings are unaffected. (native field:
+     * Return the convex radius. The settings are unaffected. (native attribute:
      * mMaxConvexRadius)
      *
      * @return the convex radius (&ge;0)
@@ -126,7 +126,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
 
     /**
      * Return the maximum separation between the shrunk hull + convex radius and
-     * the actual hull. The settings are unaffected. (native field:
+     * the actual hull. The settings are unaffected. (native attribute:
      * mMaxErrorConvexRadius)
      *
      * @return the maximum separation (&ge;0)
@@ -140,7 +140,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
 
     /**
      * Alter the positional tolerance used when generating generate the hull.
-     * (native field: mHullTolerance)
+     * (native attribute: mHullTolerance)
      *
      * @param tolerance the desired tolerance (&ge;0, default=0.001)
      */
@@ -150,7 +150,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the convex radius. (native field: mMaxConvexRadius)
+     * Alter the convex radius. (native attribute: mMaxConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0, default=0)
      */
@@ -161,7 +161,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
 
     /**
      * Alter the maximum separation between the shrunk hull plus convex radius
-     * and the actual hull. (native field: mMaxErrorConvexRadius)
+     * and the actual hull. (native attribute: mMaxErrorConvexRadius)
      *
      * @param maxError the desired maximum separation (&ge;0, default=0.05)
      */

@@ -89,7 +89,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     // new methods exposed
 
     /**
-     * Return the bottom radius. The settings are unaffected. (native field:
+     * Return the bottom radius. The settings are unaffected. (native attribute:
      * mRadius)
      *
      * @return the bottom radius of the tapered cylinder (&ge;0)
@@ -102,7 +102,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the convex radius. The settings are unaffected. (native field:
+     * Return the convex radius. The settings are unaffected. (native attribute:
      * mConvexRadius)
      *
      * @return the convex radius (&ge;0)
@@ -115,7 +115,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the half height. The settings are unaffected. (native field:
+     * Return the half height. The settings are unaffected. (native attribute:
      * mHalfHeight)
      *
      * @return half the height
@@ -128,7 +128,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the top radius. The settings are unaffected. (native field:
+     * Return the top radius. The settings are unaffected. (native attribute:
      * mTopRadius)
      *
      * @return the top radius (&ge;0)
@@ -141,7 +141,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the bottom radius. (native field: mBottomRadius)
+     * Alter the bottom radius. (native attribute: mBottomRadius)
      *
      * @param radius the desired bottom radius (&ge;0)
      */
@@ -151,7 +151,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the convex radius. (native field: mConvexRadius)
+     * Alter the convex radius. (native attribute: mConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0, default=0.05)
      */
@@ -161,7 +161,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the half height. (native field: mHalfHeight)
+     * Alter the half height. (native attribute: mHalfHeight)
      *
      * @param halfHeight one half of the desired height (&ge;0)
      */
@@ -171,7 +171,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the top radius. (native field: mTopRadius)
+     * Alter the top radius. (native attribute: mTopRadius)
      *
      * @param radius the desired top radius (&ge;0)
      */

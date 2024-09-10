@@ -91,7 +91,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     // new methods exposed
 
     /**
-     * Return the convex radius. The settings are unaffected. (native field:
+     * Return the convex radius. The settings are unaffected. (native attribute:
      * mConvexRadius)
      *
      * @return the convex radius (&ge;0)
@@ -104,8 +104,8 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Copy the extent of the box. The settings are unaffected. (native field:
-     * mHalfExtent)
+     * Copy the extent of the box. The settings are unaffected. (native
+     * attribute: mHalfExtent)
      *
      * @return a new vector: one-half of extent on each local axis
      */
@@ -120,7 +120,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the convex radius. (native field: mConvexRadius)
+     * Alter the convex radius. (native attribute: mConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0, default=0.05)
      */
@@ -130,7 +130,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the extent of the box. (native field: mHalfExtent)
+     * Alter the extent of the box. (native attribute: mHalfExtent)
      *
      * @param halfExtents the desired half extents on each local axis (not null,
      * all components &ge;0, unaffected, default=(0,0,0))

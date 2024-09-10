@@ -44,7 +44,7 @@ public class RayCastSettings extends JoltPhysicsObject {
 
     /**
      * Return the policy for back-facing triangles in convex shapes. The
-     * settings are unaffected. (native field: mBackFaceModeConvex)
+     * settings are unaffected. (native attribute: mBackFaceModeConvex)
      *
      * @return the enum value (not null)
      */
@@ -58,7 +58,7 @@ public class RayCastSettings extends JoltPhysicsObject {
 
     /**
      * Return the policy for back-facing triangles in non-convex shapes. The
-     * settings are unaffected. (native field: mBackFaceModeTriangles)
+     * settings are unaffected. (native attribute: mBackFaceModeTriangles)
      *
      * @return the enum value (not null)
      */
@@ -72,7 +72,7 @@ public class RayCastSettings extends JoltPhysicsObject {
 
     /**
      * Test whether convex shapes should be treated as solid. The settings are
-     * unaffected. (native field: mTreatConvexAsSolid)
+     * unaffected. (native attribute: mTreatConvexAsSolid)
      *
      * @return true if treated as solid, otherwise false
      */
@@ -85,7 +85,7 @@ public class RayCastSettings extends JoltPhysicsObject {
 
     /**
      * Alter the policy for back-facing triangles in convex shapes. (native
-     * field: mBackFaceModeConvex)
+     * attribute: mBackFaceModeConvex)
      *
      * @param setting the enum value (not null, default=IgnoreBackFaces)
      */
@@ -97,7 +97,7 @@ public class RayCastSettings extends JoltPhysicsObject {
 
     /**
      * Alter the policy for back-facing triangles in non-convex shapes. (native
-     * field: mBackFaceModeTriangles)
+     * attribute: mBackFaceModeTriangles)
      *
      * @param setting the enum value (not null, default=IgnoreBackFaces)
      */
@@ -108,8 +108,8 @@ public class RayCastSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter whether convex shapes should be treated as solid. (native field:
-     * mTreatConvexAsSolid)
+     * Alter whether convex shapes should be treated as solid. (native
+     * attribute: mTreatConvexAsSolid)
      *
      * @param setting true&rarr;solid, false&rarr;hollow (default=true)
      */

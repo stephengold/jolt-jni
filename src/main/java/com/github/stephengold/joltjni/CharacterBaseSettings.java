@@ -58,7 +58,7 @@ public class CharacterBaseSettings
 
     /**
      * Alter whether to make an extra effort to remove contacts with internal
-     * edges. (native field: mEnhancedInternalEdgeRemoval)
+     * edges. (native attribute: mEnhancedInternalEdgeRemoval)
      *
      * @param remove true to remove ghost contacts (default=false)
      */
@@ -68,8 +68,8 @@ public class CharacterBaseSettings
     }
 
     /**
-     * Alter the maximum slope on which the character can walk. (native field:
-     * mMaxSlopeAngle)
+     * Alter the maximum slope on which the character can walk. (native
+     * attribute: mMaxSlopeAngle)
      *
      * @param angle (in radians, default=5*Pi/18)
      */
@@ -79,7 +79,7 @@ public class CharacterBaseSettings
     }
 
     /**
-     * Replace the shape. (native field: mShape)
+     * Replace the shape. (native attribute: mShape)
      *
      * @param shape the desired shape (not null, unaffected)
      */
@@ -90,7 +90,7 @@ public class CharacterBaseSettings
     }
 
     /**
-     * Replace the shape. (native field: mShape)
+     * Replace the shape. (native attribute: mShape)
      *
      * @param shapeRef a reference to the desired shape (not null)
      */
@@ -100,7 +100,7 @@ public class CharacterBaseSettings
     }
 
     /**
-     * Alter the supporting volume. (native field: mSupportingVolume)
+     * Alter the supporting volume. (native attribute: mSupportingVolume)
      *
      * @param plane (not null, default={(0,1,0),-1e10})
      */
@@ -114,7 +114,7 @@ public class CharacterBaseSettings
     }
 
     /**
-     * Alter the character's "up" direction. (native field: mUp)
+     * Alter the character's "up" direction. (native attribute: mUp)
      *
      * @param direction the desired direction (not null, unaffected,
      * default=(0,1,0))
@@ -131,7 +131,7 @@ public class CharacterBaseSettings
 
     /**
      * Test whether to make an extra effort to remove contacts with internal
-     * edges. The settings are unaffected. (native field:
+     * edges. The settings are unaffected. (native attribute:
      * mEnhancedInternalEdgeRemoval)
      *
      * @return true to remove ghost contacts, otherwise false
@@ -146,7 +146,7 @@ public class CharacterBaseSettings
 
     /**
      * Return the maximum slope on which the character can walk. The settings
-     * are unaffected. (native field: mMaxSlopeAngle)
+     * are unaffected. (native attribute: mMaxSlopeAngle)
      *
      * @return the angle (in radians)
      */
@@ -160,7 +160,7 @@ public class CharacterBaseSettings
 
     /**
      * Acquire read-only access to the {@code Shape}. The settings are
-     * unaffected. (native field: mShape)
+     * unaffected. (native attribute: mShape)
      *
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null}
@@ -175,8 +175,8 @@ public class CharacterBaseSettings
     }
 
     /**
-     * Return the supporting volume. The settings are unaffected. (native field:
-     * mSupportingVolume)
+     * Return the supporting volume. The settings are unaffected. (native
+     * attribute: mSupportingVolume)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -194,7 +194,7 @@ public class CharacterBaseSettings
 
     /**
      * Return the character's "up" direction. The settings are unaffected.
-     * (native field: mUp)
+     * (native attribute: mUp)
      *
      * @return a new direction vector (in system coordinates)
      */

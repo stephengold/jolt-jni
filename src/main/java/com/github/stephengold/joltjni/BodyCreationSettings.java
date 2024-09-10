@@ -149,7 +149,7 @@ public class BodyCreationSettings
 
     /**
      * Alter whether the created body will be allowed to fall asleep. (native
-     * field: mAllowSleeping)
+     * attribute: mAllowSleeping)
      *
      * @param allow true to allow, false to inhibit (default=true)
      */
@@ -159,7 +159,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the angular damping constant. (native field: mAngularDamping)
+     * Alter the angular damping constant. (native attribute: mAngularDamping)
      *
      * @param damping the desired value (in units of 1/second, &ge;0, &le;1,
      * default=0.05)
@@ -170,7 +170,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the (initial) angular velocity. (native field: mAngularVelocity)
+     * Alter the (initial) angular velocity. (native attribute:
+     * mAngularVelocity)
      *
      * @param omega the desired angular velocity (radians per second in
      * physics-system coordinates, not null, unaffected, default=(0,0,0))
@@ -182,7 +183,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the friction ratio. (native field: mFriction)
+     * Alter the friction ratio. (native attribute: mFriction)
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
      * default=0.2)
@@ -193,7 +194,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the gravity multiplier. (native field: mGravityFactor)
+     * Alter the gravity multiplier. (native attribute: mGravityFactor)
      *
      * @param factor the desired multiplier (default=1)
      */
@@ -203,7 +204,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter whether the body will be a sensor. (native field: mIsSensor)
+     * Alter whether the body will be a sensor. (native attribute: mIsSensor)
      *
      * @param setting true for a sensor, otherwise false (default=false)
      */
@@ -213,7 +214,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the linear damping constant. (native field: mLinearDamping)
+     * Alter the linear damping constant. (native attribute: mLinearDamping)
      *
      * @param damping the desired value (in units of 1/second, &ge;0, &le;1,
      * default=0.05)
@@ -224,7 +225,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the (initial) linear velocity. (native field: mLinearVelocity)
+     * Alter the (initial) linear velocity. (native attribute: mLinearVelocity)
      *
      * @param velocity the desired velocity (in physics-system coordinates, not
      * null, unaffected, default=(0,0,0))
@@ -236,7 +237,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the mass-properties override. (native field:
+     * Alter the mass-properties override. (native attribute:
      * mMassPropertiesOverride)
      *
      * @param properties the desired properties (not null, unaffected)
@@ -248,7 +249,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the maximum angular speed. (native field: mMaxAngularVelocity)
+     * Alter the maximum angular speed. (native attribute: mMaxAngularVelocity)
      *
      * @param maxSpeed the desired maximum speed (in radians/second, &ge;0,
      * default=15*pi)
@@ -259,7 +260,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the maximum linear speed. (native field: mMaxLinearVelocity)
+     * Alter the maximum linear speed. (native attribute: mMaxLinearVelocity)
      *
      * @param maxSpeed the desired maximum speed (in meters/second, &ge;0,
      * default=500)
@@ -270,7 +271,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the motion quality. (native field: mMotionQuality)
+     * Alter the motion quality. (native attribute: mMotionQuality)
      *
      * @param motionQuality the desired quality (not null, default=Discrete)
      */
@@ -281,7 +282,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the motion type. (native field: mMotionType)
+     * Alter the motion type. (native attribute: mMotionType)
      *
      * @param motionType the desired type (not null, default=Dynamic)
      */
@@ -292,7 +293,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the object layer. (native field: mObjectLayer)
+     * Alter the object layer. (native attribute: mObjectLayer)
      *
      * @param objLayer the ID of the desired object layer (&ge;0,
      * &lt;numObjectLayers, default=0)
@@ -303,7 +304,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter how the mass-properties override will be used. (native field:
+     * Alter how the mass-properties override will be used. (native attribute:
      * mOverrideMassProperties)
      *
      * @param setting an enum value (not null, default=CalculateMassAndInertia)
@@ -316,7 +317,7 @@ public class BodyCreationSettings
 
     /**
      * Alter the (initial) location of the body's origin (which might not
-     * coincide with its center of mass). (native field: mPosition)
+     * coincide with its center of mass). (native attribute: mPosition)
      *
      * @param loc the desired location (in physics-system coordinates, not null,
      * unaffected, default=(0,0,0))
@@ -327,7 +328,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the restitution ratio. (native field: mRestitution)
+     * Alter the restitution ratio. (native attribute: mRestitution)
      *
      * @param restitution the desired ratio (typically &ge;0 and &le;1,
      * default=0)
@@ -338,7 +339,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the (initial) orientation of the body's axes. (native field:
+     * Alter the (initial) orientation of the body's axes. (native attribute:
      * mRotation)
      *
      * @param quat the desired rotation (relative to the physics-system axes,
@@ -400,7 +401,7 @@ public class BodyCreationSettings
 
     /**
      * Test whether the created body will be allowed to fall asleep. The
-     * settings are unaffected. (native field: mAllowSleeping)
+     * settings are unaffected. (native attribute: mAllowSleeping)
      *
      * @return true if allowed, otherwise false
      */
@@ -414,7 +415,7 @@ public class BodyCreationSettings
 
     /**
      * Return the angular damping constant. The settings are unaffected. (native
-     * field: mAngularDamping)
+     * attribute: mAngularDamping)
      *
      * @return the constant (in units of 1/second, &ge;0, &le;1)
      */
@@ -428,7 +429,7 @@ public class BodyCreationSettings
 
     /**
      * Copy the (initial) angular velocity. The settings are unaffected. (native
-     * field: mAngularVelocity)
+     * attribute: mAngularVelocity)
      *
      * @return a new velocity vector (radians per second in physics-system
      * coordinates)
@@ -445,8 +446,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Return the friction ratio. The settings are unaffected. (native field:
-     * mFriction)
+     * Return the friction ratio. The settings are unaffected. (native
+     * attribute: mFriction)
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -459,8 +460,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Return the gravity factor. The settings are unaffected. (native field:
-     * mGravityFactor)
+     * Return the gravity factor. The settings are unaffected. (native
+     * attribute: mGravityFactor)
      *
      * @return the factor
      */
@@ -474,7 +475,7 @@ public class BodyCreationSettings
 
     /**
      * Test whether the body will be a sensor. The settings are unaffected.
-     * (native field: mIsSensor)
+     * (native attribute: mIsSensor)
      *
      * @return true for a sensor, otherwise false
      */
@@ -488,7 +489,7 @@ public class BodyCreationSettings
 
     /**
      * Return the linear damping constant. The settings are unaffected. (native
-     * field: mLinearDamping)
+     * attribute: mLinearDamping)
      *
      * @return the constant (in units of 1/second, &ge;0, &le;1)
      */
@@ -502,7 +503,7 @@ public class BodyCreationSettings
 
     /**
      * Copy the (initial) linear velocity. The settings are unaffected. (native
-     * field: mLinearVelocity)
+     * attribute: mLinearVelocity)
      *
      * @return a new velocity vector (meters per second in physics-system
      * coordinates)
@@ -534,7 +535,7 @@ public class BodyCreationSettings
 
     /**
      * Copy the mass-properties override. The settings are unaffected. (native
-     * field: mMassPropertiesOverride)
+     * attribute: mMassPropertiesOverride)
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -549,7 +550,7 @@ public class BodyCreationSettings
 
     /**
      * Return the maximum angular speed. The settings are unaffected. (native
-     * field: mMaxAngularVelocity)
+     * attribute: mMaxAngularVelocity)
      *
      * @return the maximum speed (in radians/second)
      */
@@ -563,7 +564,7 @@ public class BodyCreationSettings
 
     /**
      * Return the maximum linear speed. The settings are unaffected. (native
-     * field: mMaxLinearVelocity)
+     * attribute: mMaxLinearVelocity)
      *
      * @return the maximum speed (in meters/second)
      */
@@ -576,8 +577,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Return the motion quality. The settings are unaffected. (native field:
-     * mMotionQuality)
+     * Return the motion quality. The settings are unaffected. (native
+     * attribute: mMotionQuality)
      *
      * @return an enum value (not null)
      */
@@ -591,7 +592,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Return the motion type. The settings are unaffected. (native field:
+     * Return the motion type. The settings are unaffected. (native attribute:
      * mMotionType)
      *
      * @return an enum value (not null)
@@ -607,7 +608,7 @@ public class BodyCreationSettings
 
     /**
      * Return the index of the object layer. The settings are unaffected.
-     * (native field: mObjectLayer)
+     * (native attribute: mObjectLayer)
      *
      * @return the layer index (&ge;0, &lt;numObjectLayers)
      */
@@ -621,7 +622,7 @@ public class BodyCreationSettings
 
     /**
      * Return how the mass-properties override will be used. The settings are
-     * unaffected. (native field: mOverrideMassProperties)
+     * unaffected. (native attribute: mOverrideMassProperties)
      *
      * @return an enum value (not null)
      */
@@ -636,7 +637,7 @@ public class BodyCreationSettings
 
     /**
      * Return the (initial) location. The settings are unaffected. (native
-     * field: mPosition)
+     * attribute: mPosition)
      *
      * @return a new location vector (in physics-system coordinates, all
      * components finite)
@@ -659,8 +660,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Return the restitution ratio. The settings are unaffected. (native field:
-     * mRestitution)
+     * Return the restitution ratio. The settings are unaffected. (native
+     * attribute: mRestitution)
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -673,7 +674,7 @@ public class BodyCreationSettings
 
     /**
      * Copy the (initial) orientation of the body's axes. The settings are
-     * unaffected. (native field: mRotation)
+     * unaffected. (native attribute: mRotation)
      *
      * @return a new rotation quaternion (relative to the physics-system axes)
      */

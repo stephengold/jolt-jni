@@ -59,7 +59,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the hinge axis of body 1. The settings are unaffected. (native
-     * field: mHingeAxis1)
+     * attribute: mHingeAxis1)
      *
      * @return a new direction vector
      */
@@ -75,7 +75,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the hinge axis of body 2. The settings are unaffected. (native
-     * field: mHingeAxis2)
+     * attribute: mHingeAxis2)
      *
      * @return a new direction vector
      */
@@ -91,7 +91,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return the upper limit of rotation. The settings are unaffected. (native
-     * field: mLimitsMax)
+     * attribute: mLimitsMax)
      *
      * @return the upper limit (in radians)
      */
@@ -104,7 +104,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return the lower limit of rotation. The settings are unaffected. (native
-     * field: mLimitsMin)
+     * attribute: mLimitsMin)
      *
      * @return the lower limit (in radians)
      */
@@ -117,7 +117,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Access the spring settings. The constraint settings are unaffected.
-     * (native field: mLimitsSpringSettings)
+     * (native attribute: mLimitsSpringSettings)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -132,7 +132,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return the maximum friction torque when not driven by a motor. The
-     * settings are unaffected. (native field: mMaxFrictionTorque)
+     * settings are unaffected. (native attribute: mMaxFrictionTorque)
      *
      * @return the torque (in Newton-meters)
      */
@@ -145,7 +145,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Access the motor settings. The constraint settings are unaffected.
-     * (native field: mMotorSettings)
+     * (native attribute: mMotorSettings)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -160,7 +160,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the normal axis of body 1. The settings are unaffected. (native
-     * field: mNormalAxis1)
+     * attribute: mNormalAxis1)
      *
      * @return a new direction vector
      */
@@ -176,7 +176,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the normal axis of body 2. The settings are unaffected. (native
-     * field: mNormalAxis2)
+     * attribute: mNormalAxis2)
      *
      * @return a new direction vector
      */
@@ -192,7 +192,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 1. The settings are unaffected.
-     * (native field: mPoint1)
+     * (native attribute: mPoint1)
      *
      * @return a new location vector
      */
@@ -208,7 +208,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 2. The settings are unaffected.
-     * (native field: mPoint2)
+     * (native attribute: mPoint2)
      *
      * @return a new location vector
      */
@@ -224,7 +224,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return which space the other properties are specified in. The settings
-     * are unaffected. (native field: mSpace)
+     * are unaffected. (native attribute: mSpace)
      *
      * @return an enum value (not null)
      */
@@ -237,7 +237,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the hinge axis of body 1. (native field: mHingeAxis1)
+     * Alter the hinge axis of body 1. (native attribute: mHingeAxis1)
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(0,1,0))
@@ -251,7 +251,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the hinge axis of body 2. (native field: mHingeAxis2)
+     * Alter the hinge axis of body 2. (native attribute: mHingeAxis2)
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(0,1,0))
@@ -265,7 +265,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the upper limit of rotation. (native field: mLimitsMax)
+     * Alter the upper limit of rotation. (native attribute: mLimitsMax)
      *
      * @param limit the desired upper limit (in radians, default=Pi)
      */
@@ -275,7 +275,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the lower limit of rotation. (native field: mLimitsMin)
+     * Alter the lower limit of rotation. (native attribute: mLimitsMin)
      *
      * @param limit the desired lower limit (default=-Pi)
      */
@@ -286,7 +286,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Alter the maximum friction torque when not driven by a motor. (native
-     * field: mMaxFrictionTorque)
+     * attribute: mMaxFrictionTorque)
      *
      * @param torque the desired torque (in Newton-meters, default=0)
      */
@@ -296,7 +296,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the normal axis of body 1. (native field: mNormalAxis1)
+     * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(0,1,0))
@@ -310,7 +310,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the normal axis of body 2. (native field: mNormalAxis2)
+     * Alter the normal axis of body 2. (native attribute: mNormalAxis2)
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(0,1,0))
@@ -324,7 +324,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 1. (native field: mPoint1)
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -338,7 +338,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 2. (native field: mPoint2)
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -352,8 +352,8 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter which space the other properties are specified in. (native field:
-     * mSpace)
+     * Alter which space the other properties are specified in. (native
+     * attribute: mSpace)
      *
      * @param space enum value (not null, default=WorldSpace)
      */

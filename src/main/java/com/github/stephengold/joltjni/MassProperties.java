@@ -96,7 +96,7 @@ final public class MassProperties
     }
 
     /**
-     * Alter the inertia tensor. (native field: mIntertia)
+     * Alter the inertia tensor. (native attribute: mIntertia)
      *
      * @param inertia the desired value (not null, unaffected, default=zero)
      */
@@ -107,7 +107,7 @@ final public class MassProperties
     }
 
     /**
-     * Alter the mass. (native field: mMass)
+     * Alter the mass. (native attribute: mMass)
      *
      * @param mass the desired mass (in kilograms, &ge;0, default=0)
      */
@@ -153,8 +153,8 @@ final public class MassProperties
     }
 
     /**
-     * Copy the inertia tensor. The properties are unaffected. (native field:
-     * mIntertia)
+     * Copy the inertia tensor. The properties are unaffected. (native
+     * attribute: mIntertia)
      *
      * @return a new matrix (in kilogram.meters squared)
      */
@@ -168,7 +168,7 @@ final public class MassProperties
     }
 
     /**
-     * Return the mass. The properties are unaffected. (native field: mMass)
+     * Return the mass. The properties are unaffected. (native attribute: mMass)
      *
      * @return the mass (in kilograms, &ge;0)
      */

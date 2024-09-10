@@ -66,7 +66,7 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
 
     /**
      * Copy the offset relative to the base shape. The settings are unaffected.
-     * (native field: mOffset)
+     * (native attribute: mOffset)
      *
      * @return a new, mutable offset vector
      */
@@ -81,7 +81,7 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
     }
 
     /**
-     * Alter the offset relative to the base shape. (native field: mOffset)
+     * Alter the offset relative to the base shape. (native attribute: mOffset)
      *
      * @param offset the desired offset vector (not null, unaffected,
      * default=(0,0,0))

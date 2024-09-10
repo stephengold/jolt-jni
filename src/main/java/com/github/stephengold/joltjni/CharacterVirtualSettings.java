@@ -61,7 +61,7 @@ public class CharacterVirtualSettings
 
     /**
      * Alter whether the character will move through back facing triangles.
-     * (native field: mBackFaceMode)
+     * (native attribute: mBackFaceMode)
      *
      * @param mode the desired mode (not null, default=CollideWithBackFaces)
      */
@@ -72,7 +72,7 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter the collision tolerance. (native field: mCollisionTolerance)
+     * Alter the collision tolerance. (native attribute: mCollisionTolerance)
      *
      * @param tolerance the desired penetration distance (in meters,
      * default=0.001)
@@ -83,8 +83,8 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter the maximum angle for merging during hit reduction. (native field:
-     * mHitReductionCosMaxAngle)
+     * Alter the maximum angle for merging during hit reduction. (native
+     * attribute: mHitReductionCosMaxAngle)
      *
      * @param cosine the cosine of the maximum angle, or -1 to disable hit
      * reduction (default=0.999)
@@ -96,7 +96,7 @@ public class CharacterVirtualSettings
 
     /**
      * Alter the object layer that the inner rigid body will be added to.
-     * (native field: mInnerBodyLayer)
+     * (native attribute: mInnerBodyLayer)
      *
      * @param objectLayer the index of the desired object layer (default=0)
      */
@@ -106,7 +106,8 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter the shape of the inner rigid body. (native field: mInnerBodyShape)
+     * Alter the shape of the inner rigid body. (native attribute:
+     * mInnerBodyShape)
      *
      * @param shape the desired shape, or null for no inner body (default=null)
      */
@@ -117,7 +118,7 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter the character's mass. (native field: mMass)
+     * Alter the character's mass. (native attribute: mMass)
      *
      * @param mass the desired mass (in kilograms, default=70)
      */
@@ -127,7 +128,7 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter the maximum number of collision iterations. (native field:
+     * Alter the maximum number of collision iterations. (native attribute:
      * mMaxCollisionIterations)
      *
      * @param numIterations the desired number of iterations (&ge;0, default=5)
@@ -138,8 +139,8 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter how often to try stepping in the constraint solver. (native field:
-     * mMaxConstraintIterations)
+     * Alter how often to try stepping in the constraint solver. (native
+     * attribute: mMaxConstraintIterations)
      *
      * @param numIterations the desired number of iterations (&ge;0, default=15)
      */
@@ -149,7 +150,8 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter the maximum number of hits to collect. (native field: mMaxNumHits)
+     * Alter the maximum number of hits to collect. (native attribute:
+     * mMaxNumHits)
      *
      * @param numHits the desired limit (&ge;0), default=256)
      */
@@ -159,7 +161,7 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter the maximum force applied to other bodies. (native field:
+     * Alter the maximum force applied to other bodies. (native attribute:
      * mMaxStrength)
      *
      * @param force the desired force (in Newtons)
@@ -170,7 +172,7 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter the early out threshold. (native field: mMinTimeRemaining)
+     * Alter the early out threshold. (native attribute: mMinTimeRemaining)
      *
      * @param interval the desired simulation time interval (in seconds,
      * default=0.0001)
@@ -181,7 +183,7 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter how quickly penetration is resolved. (native field:
+     * Alter how quickly penetration is resolved. (native attribute:
      * mPenetrationRecoverySpeed)
      *
      * @param fraction the desired resolution fraction (0=never resolved, 1=all
@@ -193,7 +195,7 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter the maximum range of predictive contacts. (native field:
+     * Alter the maximum range of predictive contacts. (native attribute:
      * mPredictiveContactDistance)
      *
      * @param distance the desired distance (in meters, default=0.1)
@@ -204,7 +206,8 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter the local offset applied to the shape. (native field: mShapeOffset)
+     * Alter the local offset applied to the shape. (native attribute:
+     * mShapeOffset)
      *
      * @param offset the desired offset (in local coordinates, not null,
      * unaffected, default=(0,0,0))
@@ -221,7 +224,7 @@ public class CharacterVirtualSettings
 
     /**
      * Determine whether the character will move through back-facing triangles.
-     * The settings are unaffected. (native field: mBackFaceMode)
+     * The settings are unaffected. (native attribute: mBackFaceMode)
      *
      * @return an enum value (not null)
      */
@@ -236,7 +239,7 @@ public class CharacterVirtualSettings
 
     /**
      * Return the collision tolerance. The settings are unaffected. (native
-     * field: mCollisionTolerance)
+     * attribute: mCollisionTolerance)
      *
      * @return the allowed penetration distance (in meters)
      */
@@ -250,7 +253,7 @@ public class CharacterVirtualSettings
 
     /**
      * Return the maximum angle for merging during hit reduction. The settings
-     * are unaffected. (native field: mHitReductionCosMaxAngle)
+     * are unaffected. (native attribute: mHitReductionCosMaxAngle)
      *
      * @return the cosine of the maximum angle, or -1 if hit reduction is
      * disabled
@@ -265,7 +268,7 @@ public class CharacterVirtualSettings
 
     /**
      * Return the object layer that the inner rigid body will be added to. The
-     * settings are unaffected. (native field: mInnerBodyLayer)
+     * settings are unaffected. (native attribute: mInnerBodyLayer)
      *
      * @return the index of the object layer
      */
@@ -279,7 +282,7 @@ public class CharacterVirtualSettings
 
     /**
      * Return the shape of the inner rigid body. The settings are unaffected.
-     * (native field: mInnerBodyShape)
+     * (native attribute: mInnerBodyShape)
      *
      * @return the shape, or null for no inner body
      */
@@ -293,8 +296,8 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Return the character's mass. The settings are unaffected. (native field:
-     * mMass)
+     * Return the character's mass. The settings are unaffected. (native
+     * attribute: mMass)
      *
      * @return the mass (in kilograms)
      */
@@ -308,7 +311,7 @@ public class CharacterVirtualSettings
 
     /**
      * Return the maximum number of collision iterations. The settings are
-     * unaffected. (native field: mMaxCollisionIterations)
+     * unaffected. (native attribute: mMaxCollisionIterations)
      *
      * @return the number of iterations (&ge;0)
      */
@@ -322,7 +325,7 @@ public class CharacterVirtualSettings
 
     /**
      * Return how often to try stepping in the constraint solver. The settings
-     * are unaffected. (native field: mMaxConstraintIterations)
+     * are unaffected. (native attribute: mMaxConstraintIterations)
      *
      * @return the number of iterations (&ge;0)
      */
@@ -336,7 +339,7 @@ public class CharacterVirtualSettings
 
     /**
      * Return the maximum number of hits to be collected. The settings are
-     * unaffected. (native field: mMaxNumHits)
+     * unaffected. (native attribute: mMaxNumHits)
      *
      * @return the limit (&ge;0)
      */
@@ -350,7 +353,7 @@ public class CharacterVirtualSettings
 
     /**
      * Return the maximum force applied to other bodies. The settings are
-     * unaffected. (native field: mMaxStrength)
+     * unaffected. (native attribute: mMaxStrength)
      *
      * @return the force (in Newtons)
      */
@@ -364,7 +367,7 @@ public class CharacterVirtualSettings
 
     /**
      * Return the early out threshold. The settings are unaffected. (native
-     * field: mMinTimeRemaining)
+     * attribute: mMinTimeRemaining)
      *
      * @return the simulation time interval (in seconds)
      */
@@ -378,7 +381,7 @@ public class CharacterVirtualSettings
 
     /**
      * Return how quickly penetration is resolved. The settings are unaffected.
-     * (native field: mPenetrationRecoverySpeed)
+     * (native attribute: mPenetrationRecoverySpeed)
      *
      * @return the resolution fraction (0=never resolved, 1=all in one update)
      */
@@ -392,7 +395,7 @@ public class CharacterVirtualSettings
 
     /**
      * Return the maximum range of predictive contacts. The settings are
-     * unaffected. (native field: mPredictiveContactDistance)
+     * unaffected. (native attribute: mPredictiveContactDistance)
      *
      * @return the distance (in meters)
      */
@@ -406,7 +409,7 @@ public class CharacterVirtualSettings
 
     /**
      * Copy the local offset applied to the shape. The settings are unaffected.
-     * (native field: mShapeOffset)
+     * (native attribute: mShapeOffset)
      *
      * @return a new offset vector (in local coordinates)
      */

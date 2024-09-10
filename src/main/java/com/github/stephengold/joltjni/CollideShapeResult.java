@@ -49,7 +49,7 @@ public class CollideShapeResult
 
     /**
      * Identify the body to which shape 2 belongs. The object is unaffected.
-     * (native field: mBodyID2)
+     * (native attribute: mBodyID2)
      *
      * @return a new ID
      */
@@ -64,7 +64,7 @@ public class CollideShapeResult
 
     /**
      * Copy the contact location on the surface of shape 1. The object is
-     * unaffected. (native field: mContactPointOn1)
+     * unaffected. (native attribute: mContactPointOn1)
      *
      * @return a new location vector
      */
@@ -81,7 +81,7 @@ public class CollideShapeResult
 
     /**
      * Copy the contact location on the surface of shape 2. The object is
-     * unaffected. (native field: mContactPointOn2)
+     * unaffected. (native attribute: mContactPointOn2)
      *
      * @return a new location vector
      */
@@ -98,7 +98,7 @@ public class CollideShapeResult
 
     /**
      * Copy the direction to move shape 2 out of collision along the shortest
-     * path. The object is unaffected. (native field: mPenetrationAxis)
+     * path. The object is unaffected. (native attribute: mPenetrationAxis)
      *
      * @return a new direction vector in system coordinates
      */
@@ -115,7 +115,7 @@ public class CollideShapeResult
 
     /**
      * Return the distance to move shape 2 to resolve the collision. The object
-     * is unaffected. (native field: mPenetrationDepth)
+     * is unaffected. (native attribute: mPenetrationDepth)
      *
      * @return the signed distance
      */
@@ -129,7 +129,7 @@ public class CollideShapeResult
 
     /**
      * Identify the face on shape 1 where the collision occurred. The object is
-     * unaffected. (native field: mSubShapeID1)
+     * unaffected. (native attribute: mSubShapeID1)
      *
      * @return a new ID
      */
@@ -144,7 +144,7 @@ public class CollideShapeResult
 
     /**
      * Identify the face on shape 2 where the collision occurred. The object is
-     * unaffected. (native field: mSubShapeID2)
+     * unaffected. (native attribute: mSubShapeID2)
      *
      * @return a new ID
      */

@@ -61,8 +61,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     // new methods exposed
 
     /**
-     * Copy the X axis for body 1. The settings are unaffected. (native field:
-     * mAxisX1)
+     * Copy the X axis for body 1. The settings are unaffected. (native
+     * attribute: mAxisX1)
      *
      * @return a new direction vector
      */
@@ -77,8 +77,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Copy the X axis for body 2. The settings are unaffected. (native field:
-     * mAxisX2)
+     * Copy the X axis for body 2. The settings are unaffected. (native
+     * attribute: mAxisX2)
      *
      * @return a new direction vector
      */
@@ -93,8 +93,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Copy the Y axis for body 1. The settings are unaffected. (native field:
-     * mAxisY1)
+     * Copy the Y axis for body 1. The settings are unaffected. (native
+     * attribute: mAxisY1)
      *
      * @return a new direction vector
      */
@@ -109,8 +109,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Copy the Y axis for body 2. The settings are unaffected. (native field:
-     * mAxisY2)
+     * Copy the Y axis for body 2. The settings are unaffected. (native
+     * attribute: mAxisY2)
      *
      * @return a new direction vector
      */
@@ -126,7 +126,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return the upper limit of the specified axis. The settings are
-     * unaffected. (native field: mLimitMax)
+     * unaffected. (native attribute: mLimitMax)
      *
      * @param dof which axis (not null)
      * @return the upper limit
@@ -141,7 +141,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return the lower limit of the specified axis. The settings are
-     * unaffected. (native field: mLimitMin)
+     * unaffected. (native attribute: mLimitMin)
      *
      * @param dof which axis (not null)
      * @return the lower limit
@@ -156,7 +156,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Access the spring settings for the specified axis. The constraint
-     * settings are unaffected. (native field: mLimitsSpringSettings)
+     * settings are unaffected. (native attribute: mLimitsSpringSettings)
      *
      * @param translationAxis which axis (not null, not a rotation axis)
      * @return a new JVM object with the pre-existing native object assigned
@@ -174,7 +174,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return the maximum friction of the specified axis. The settings are
-     * unaffected. (native field: mMaxFriction)
+     * unaffected. (native attribute: mMaxFriction)
      *
      * @param dof which axis (not null)
      * @return the maximum friction value
@@ -189,7 +189,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Access the motor settings for the specified axis. The constraint settings
-     * are unaffected. (native field: mMotorSettings)
+     * are unaffected. (native attribute: mMotorSettings)
      *
      * @param dof which axis (not null)
      * @return a new JVM object with the pre-existing native object assigned
@@ -206,7 +206,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 1. The settings are unaffected.
-     * (native field: mPosition1)
+     * (native attribute: mPosition1)
      *
      * @return a new location vector
      */
@@ -222,7 +222,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 2. The settings are unaffected.
-     * (native field: mPosition2)
+     * (native attribute: mPosition2)
      *
      * @return a new location vector
      */
@@ -238,7 +238,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return which space the other properties are specified in. The settings
-     * are unaffected. (native field: mSpace)
+     * are unaffected. (native attribute: mSpace)
      *
      * @return an enum value (not null)
      */
@@ -252,7 +252,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return type of swing constraint. The settings are unaffected. (native
-     * field: mSwingType)
+     * attribute: mSwingType)
      *
      * @return an enum value (not null)
      */
@@ -315,7 +315,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the X axis for body 1. (native field: mAxisX1)
+     * Alter the X axis for body 1. (native attribute: mAxisX1)
      *
      * @param axis the desired direction vector (default=(1,0,0))
      */
@@ -328,7 +328,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the X axis for body 2. (native field: mAxisX2)
+     * Alter the X axis for body 2. (native attribute: mAxisX2)
      *
      * @param axis the desired direction vector (default=(1,0,0))
      */
@@ -341,7 +341,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the Y axis for body 1. (native field: mAxisY1)
+     * Alter the Y axis for body 1. (native attribute: mAxisY1)
      *
      * @param axis the desired direction vector (default=(0,1,0))
      */
@@ -354,7 +354,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the Y axis for body 2. (native field: mAxisY2)
+     * Alter the Y axis for body 2. (native attribute: mAxisY2)
      *
      * @param axis the desired direction vector (default=(0,1,0))
      */
@@ -380,7 +380,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the upper limit of the specified axis. (native field: mLimitMax)
+     * Alter the upper limit of the specified axis. (native attribute:
+     * mLimitMax)
      *
      * @param dof which axis to modify (not null)
      * @param max the desired limit value (default=MAX_VALUE)
@@ -392,7 +393,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the lower limit of the specified axis. (native field: mLimitMin)
+     * Alter the lower limit of the specified axis. (native attribute:
+     * mLimitMin)
      *
      * @param dof which axis to modify (not null)
      * @param min the desired limit value (default=-MAX_VALUE)
@@ -404,7 +406,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the maximum friction of the specified axis. (native field:
+     * Alter the maximum friction of the specified axis. (native attribute:
      * mMaxFriction)
      *
      * @param dof which axis to modify (not null)
@@ -417,7 +419,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 1. (native field: mPosition1)
+     * Alter the constraint location for body 1. (native attribute: mPosition1)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -431,7 +433,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 2. (native field: mPosition2)
+     * Alter the constraint location for body 2. (native attribute: mPosition2)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -445,8 +447,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter which space the other properties are specified in. (native field:
-     * mSpace)
+     * Alter which space the other properties are specified in. (native
+     * attribute: mSpace)
      *
      * @param space enum value (not null, default=WorldSpace)
      */
@@ -457,7 +459,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the type of swing constraint. (native field: mSwingType)
+     * Alter the type of swing constraint. (native attribute: mSwingType)
      *
      * @param swingType enum value (not null, default=Cone)
      */

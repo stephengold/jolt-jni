@@ -97,8 +97,8 @@ final public class SpringSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the spring's damping. The settings are unaffected. (native field:
-     * mDamping)
+     * Return the spring's damping. The settings are unaffected. (native
+     * attribute: mDamping)
      * <p>
      * When the mode is FrequencyAndDamping, this is the damping ratio (0 = no
      * damping, 1 = critical damping). When the mode is StiffnessAndDamping,
@@ -117,7 +117,7 @@ final public class SpringSettings extends JoltPhysicsObject {
 
     /**
      * Return the spring's frequency. The settings are unaffected. (native
-     * field: mFrequency)
+     * attribute: mFrequency)
      * <p>
      * Effective only when the mode is FrequencyAndDamping. If positive, the
      * constraint will have soft limits, and mFrequency specifies the
@@ -135,7 +135,7 @@ final public class SpringSettings extends JoltPhysicsObject {
 
     /**
      * Return how the spring is specified. The settings are unaffected. (native
-     * field: mMode)
+     * attribute: mMode)
      *
      * @return an enum value (not null)
      */
@@ -149,7 +149,7 @@ final public class SpringSettings extends JoltPhysicsObject {
 
     /**
      * Return the spring's stiffness. The settings are unaffected. (native
-     * field: mStiffness)
+     * attribute: mStiffness)
      * <p>
      * Effective only when the mode is StiffnessAndDamping. If positive, the
      * constraint will have soft limits, and mStiffness specifies the stiffness
@@ -182,7 +182,7 @@ final public class SpringSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the spring's damping. (native field: mDamping)
+     * Alter the spring's damping. (native attribute: mDamping)
      * <p>
      * When the mode is FrequencyAndDamping, this is the damping ratio (0 = no
      * damping, 1 = critical damping). When the mode is StiffnessAndDamping,
@@ -198,7 +198,7 @@ final public class SpringSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the spring's frequency. (native field: mFrequency)
+     * Alter the spring's frequency. (native attribute: mFrequency)
      * <p>
      * Effective only when the mode is FrequencyAndDamping. If positive, the
      * constraint will have soft limits, and mFrequency specifies the
@@ -213,7 +213,7 @@ final public class SpringSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter how the spring is specified. (native field: mMode)
+     * Alter how the spring is specified. (native attribute: mMode)
      *
      * @param mode the desired mode (not null, default=FrequencyAndDamping)
      */
@@ -224,7 +224,7 @@ final public class SpringSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the stiffness of the spring. (native field: mStiffness)
+     * Alter the stiffness of the spring. (native attribute: mStiffness)
      * <p>
      * Effective only when the mode is StiffnessAndDamping. If positive, the
      * constraint will have soft limits, and mStiffness specifies the stiffness

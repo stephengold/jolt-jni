@@ -59,7 +59,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return one-half the maximum angle between the twist axes of body 1 and
-     * body 2. The settings are unaffected. (native field: mHalfConeAngle)
+     * body 2. The settings are unaffected. (native attribute: mHalfConeAngle)
      *
      * @return the half angle (in radians)
      */
@@ -72,7 +72,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 1. The settings are unaffected.
-     * (native field: mPoint1)
+     * (native attribute: mPoint1)
      *
      * @return a new location vector
      */
@@ -88,7 +88,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 2. The settings are unaffected.
-     * (native field: mPoint2)
+     * (native attribute: mPoint2)
      *
      * @return a new location vector
      */
@@ -104,7 +104,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Return which space the other properties are specified in. The settings
-     * are unaffected. (native field: mSpace)
+     * are unaffected. (native attribute: mSpace)
      *
      * @return an enum value (not null)
      */
@@ -118,7 +118,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the twist axis of body 1. The settings are unaffected. (native
-     * field: mTwistAxis1)
+     * attribute: mTwistAxis1)
      *
      * @return a new direction vector
      */
@@ -134,7 +134,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the twist axis of body 2. The settings are unaffected. (native
-     * field: mTwistAxis2)
+     * attribute: mTwistAxis2)
      *
      * @return a new direction vector
      */
@@ -150,7 +150,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Alter the maximum angle between the twist axes of body 1 and body 2.
-     * (native field: mHalfConeAngle)
+     * (native attribute: mHalfConeAngle)
      *
      * @param halfAngle the desired half angle (in radians, default=0)
      */
@@ -160,7 +160,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 1. (native field: mPoint1)
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -174,7 +174,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the constraint location for body 2. (native field: mPoint2)
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
@@ -188,8 +188,8 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter which space the other properties are specified in. (native field:
-     * mSpace)
+     * Alter which space the other properties are specified in. (native
+     * attribute: mSpace)
      *
      * @param space enum value (not null, default=WorldSpace)
      */
@@ -200,7 +200,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the twist axis of body 1. (native field: mTwistAxis1)
+     * Alter the twist axis of body 1. (native attribute: mTwistAxis1)
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(1,0,0))
@@ -214,7 +214,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the twist axis of body 2. (native field: mTwistAxis2)
+     * Alter the twist axis of body 2. (native attribute: mTwistAxis2)
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(1,0,0))

@@ -96,7 +96,7 @@ final public class MotorSettings extends JoltPhysicsObject {
 
     /**
      * Return the maximum force to apply in a linear constraint. Ignored in an
-     * angular motor. The settings are unaffected. (native field:
+     * angular motor. The settings are unaffected. (native attribute:
      * mMaxForceLimit)
      *
      * @return the amount of force (in Newtons, typically positive)
@@ -110,7 +110,7 @@ final public class MotorSettings extends JoltPhysicsObject {
 
     /**
      * Return the maximum torque to apply in an angular constraint. Ignored in a
-     * linear motor. The settings are unaffected. (native field:
+     * linear motor. The settings are unaffected. (native attribute:
      * mMaxTorqueLimit)
      *
      * @return the amount of torque (in Newton-meters, typically positive)
@@ -124,7 +124,7 @@ final public class MotorSettings extends JoltPhysicsObject {
 
     /**
      * Return the minimum force to apply in a linear constraint. Ignored in an
-     * angular motor. The settings are unaffected. (native field:
+     * angular motor. The settings are unaffected. (native attribute:
      * mMinForceLimit)
      *
      * @return the amount of force (in Newtons, typically negative)
@@ -138,7 +138,7 @@ final public class MotorSettings extends JoltPhysicsObject {
 
     /**
      * Return the minimum torque to apply in an angular constraint. Ignored in a
-     * linear motor. The settings are unaffected. (native field:
+     * linear motor. The settings are unaffected. (native attribute:
      * mMinTorqueLimit)
      *
      * @return the amount of torque (in Newton-meters, typically negative)
@@ -153,7 +153,7 @@ final public class MotorSettings extends JoltPhysicsObject {
     /**
      * Access the settings for the spring used to drive to the position target.
      * Ignored in a velocity motor. The motor settings are unaffected. (native
-     * field: mSpringSettings)
+     * attribute: mSpringSettings)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -202,7 +202,7 @@ final public class MotorSettings extends JoltPhysicsObject {
 
     /**
      * Alter the maximum force to apply in a linear constraint. Ignored in an
-     * angular motor. (native field: mMaxForceLimit)
+     * angular motor. (native attribute: mMaxForceLimit)
      *
      * @param force the desired amount of force (in Newtons, typically positive,
      * default=MAX_VALUE)
@@ -214,7 +214,7 @@ final public class MotorSettings extends JoltPhysicsObject {
 
     /**
      * Alter the maximum torque to apply in an angular constraint. Ignored in a
-     * linear motor. (native field: mMaxTorqueLimit)
+     * linear motor. (native attribute: mMaxTorqueLimit)
      *
      * @param torque the desired amount of torque (in Newton-meters, typically
      * positive, default=MAX_VALUE)
@@ -226,7 +226,7 @@ final public class MotorSettings extends JoltPhysicsObject {
 
     /**
      * Alter the minimum force to apply in a linear constraint. Ignored in an
-     * angular motor. (native field: mMinForceLimit)
+     * angular motor. (native attribute: mMinForceLimit)
      *
      * @param force the desired amount of force (in Newtons, typically negative,
      * default=-MAX_VALUE)
@@ -238,7 +238,7 @@ final public class MotorSettings extends JoltPhysicsObject {
 
     /**
      * Alter the minimum torque to apply in an angular constraint. Ignored in a
-     * linear motor. (native field: mMinTorqueLimit)
+     * linear motor. (native attribute: mMinTorqueLimit)
      *
      * @param torque the desired amount of torque (in Newton-meters, typically
      * negative, default=-MAX_VALUE)

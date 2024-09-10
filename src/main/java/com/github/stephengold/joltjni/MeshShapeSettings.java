@@ -88,7 +88,7 @@ public class MeshShapeSettings extends ShapeSettings {
 
     /**
      * Return the cosine of the active-edge threshold angle. The settings are
-     * unaffected. (native field: mActiveEdgeCosThresholdAngle)
+     * unaffected. (native attribute: mActiveEdgeCosThresholdAngle)
      *
      * @return the cosine
      */
@@ -101,7 +101,7 @@ public class MeshShapeSettings extends ShapeSettings {
 
     /**
      * Return the maximum number of triangles per leaf. The settings are
-     * unaffected. (native field: mMaxTrianglesPerLeaf)
+     * unaffected. (native attribute: mMaxTrianglesPerLeaf)
      *
      * @return the maximum number
      */
@@ -114,7 +114,7 @@ public class MeshShapeSettings extends ShapeSettings {
 
     /**
      * Test whether each triangle will include user data. The settings are
-     * unaffected. (native field: mPerTriangleUserData)
+     * unaffected. (native attribute: mPerTriangleUserData)
      *
      * @return true if per-triangle data is included, otherwise false
      */
@@ -126,7 +126,7 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter the active-edge threshold angle. (native field:
+     * Alter the active-edge threshold angle. (native attribute:
      * mActiveEdgeCosThresholdAngle)
      *
      * @param cosine the cosine of the desired angle (default=0.996195)
@@ -137,7 +137,7 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter the maximum number of triangles per leaf. (native field:
+     * Alter the maximum number of triangles per leaf. (native attribute:
      * mMaxTrianglesPerLeaf)
      *
      * @param numTriangles the desired number (default=8)
@@ -148,7 +148,7 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Alter whether each triangle will include user data. (native field:
+     * Alter whether each triangle will include user data. (native attribute:
      * mPerTriangleUserData)
      *
      * @param include true to include per-triangle data, false to omit it

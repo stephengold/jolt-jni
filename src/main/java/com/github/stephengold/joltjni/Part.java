@@ -46,7 +46,7 @@ public class Part extends BodyCreationSettings {
 
     /**
      * Return the settings to create the joint to the part's parent. The part is
-     * unaffected. (native field: mToParent)
+     * unaffected. (native attribute: mToParent)
      *
      * @return a new JVM with the pre-exising native object assigned
      */
@@ -61,7 +61,7 @@ public class Part extends BodyCreationSettings {
 
     /**
      * Alter the settings to create the joint to the part's parent. (native
-     * field: mToParent)
+     * attribute: mToParent)
      *
      * @param settings the desired settings (not null)
      */

@@ -65,7 +65,7 @@ abstract public class ConvexShapeSettings
     }
 
     /**
-     * Replace the material. (native field: mMaterial)
+     * Replace the material. (native attribute: mMaterial)
      *
      * @param material the desired material, or null for none (default=null)
      */
@@ -78,7 +78,8 @@ abstract public class ConvexShapeSettings
     // ConstConvexShapeSettings methods
 
     /**
-     * Return the density. The settings are unaffected. (native field: mDensity)
+     * Return the density. The settings are unaffected. (native attribute:
+     * mDensity)
      *
      * @return the value
      */
@@ -91,7 +92,7 @@ abstract public class ConvexShapeSettings
     }
 
     /**
-     * Return the material. The settings are unaffected. (native field:
+     * Return the material. The settings are unaffected. (native attribute:
      * mMaterial)
      *
      * @return a new JVM object with the pre-existing native object assigned, or
