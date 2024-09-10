@@ -47,7 +47,7 @@ final public class NarrowPhaseStat extends JoltPhysicsObject {
     native public static boolean isCollecting();
 
     /**
-     * Generate a report via the Jolt Physics {@code Trace} function.
+     * Generate a report using the Jolt Physics {@code Trace} function.
      */
     native public static void sReportStats();
 }

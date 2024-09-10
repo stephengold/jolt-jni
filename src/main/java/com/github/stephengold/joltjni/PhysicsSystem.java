@@ -29,8 +29,8 @@ import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilte
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
- * Perform simulation on a collection of physics objects. Bodies are added via a
- * separate interface.
+ * Perform simulation on a collection of physics objects. Bodies are added by
+ * way of a separate interface.
  *
  * @author Stephen Gold sgold@sonic.net
  */

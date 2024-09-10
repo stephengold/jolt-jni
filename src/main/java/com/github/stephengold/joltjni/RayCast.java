@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
- * A raycast using single-precision coordinates.
+ * A ray cast with a single-precision start location.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -33,9 +33,10 @@ public class RayCast extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate a raycast with the specified starting location and direction.
+     * Instantiate a ray cast with the specified starting location and
+     * direction.
      *
-     * @param startLocation the desired starting location (not null, unaffected)
+     * @param startLocation the desired start location (not null, unaffected)
      * @param direction the desired direction (not null, unaffected)
      */
     public RayCast(Vec3Arg startLocation, Vec3Arg direction) {
@@ -52,7 +53,7 @@ public class RayCast extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return a point on the ray with the specified fraction. The raycast is
+     * Return a point on the ray with the specified fraction. The ray cast is
      * unaffected.
      *
      * @param fraction (0&rarr;start of ray, 1&rarr;end of ray)

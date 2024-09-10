@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
- * A raycast using {@code Real} coordinates.
+ * A ray cast with an {@code RVec3} start location.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -34,9 +34,9 @@ public class RRayCast extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate a raycast with the specified starting location and direction.
+     * Instantiate a ray cast with the specified endpoints.
      *
-     * @param startLocation the desired starting location (not null, unaffected)
+     * @param startLocation the desired start location (not null, unaffected)
      * @param direction the desired direction (not null, unaffected)
      */
     public RRayCast(RVec3Arg startLocation, Vec3Arg direction) {
@@ -53,11 +53,11 @@ public class RRayCast extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return a point on the ray with the specified fraction. The raycast is
+     * Return a point on the ray with the specified fraction. The ray cast is
      * unaffected.
      *
      * @param fraction (0&rarr;start of ray, 1&rarr;end of ray)
-     * @return a new vector
+     * @return a new location vector
      */
     public RVec3 getPointOnRay(float fraction) {
         long raycastVa = va();

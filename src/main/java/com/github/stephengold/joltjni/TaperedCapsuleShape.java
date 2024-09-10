@@ -59,7 +59,7 @@ public class TaperedCapsuleShape extends ConvexShape {
     /**
      * Return the half height. The shape is unaffected.
      *
-     * @return half the height
+     * @return half the center-to-center distance between the spheres (&ge;0)
      */
     public float getHalfHeight() {
         long shapeVa = va();
@@ -69,8 +69,7 @@ public class TaperedCapsuleShape extends ConvexShape {
     }
 
     /**
-     * Return the top radius. The shape is unaffected. (native field:
-     * mTopRadius)
+     * Return the top radius. The shape is unaffected.
      *
      * @return the top radius (&ge;0)
      */

@@ -450,7 +450,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Alter which space the other properties are specified in. (native
      * attribute: mSpace)
      *
-     * @param space enum value (not null, default=WorldSpace)
+     * @param space an enum value (not null, default=WorldSpace)
      */
     public void setSpace(EConstraintSpace space) {
         long settingsVa = va();
@@ -461,7 +461,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the type of swing constraint. (native attribute: mSwingType)
      *
-     * @param swingType enum value (not null, default=Cone)
+     * @param swingType an enum value (not null, default=Cone)
      */
     public void setSwingType(ESwingType swingType) {
         long settingsVa = va();

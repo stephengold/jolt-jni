@@ -80,7 +80,7 @@ public class StreamOutWrapper extends StreamOut {
     native public static int out();
 
     /**
-     * Return the mode bit for a stream that discards existing content when
+     * Return the mode bit for a stream that discards pre-existing content when
      * opened.
      *
      * @return the value of {@code std::ofstream::trunc}

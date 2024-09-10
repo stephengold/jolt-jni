@@ -73,6 +73,8 @@ public class BroadPhaseCastResult extends JoltPhysicsObject {
 
         return result;
     }
+    // *************************************************************************
+    // protected methods
 
     /**
      * Assign a native object, assuming there's none already assigned.

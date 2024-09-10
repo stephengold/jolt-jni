@@ -32,35 +32,35 @@ public interface ConstSubShapeIdPair extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the ID of the first body.
+     * Return the ID of the first body. The pair is unaffected.
      *
      * @return a new object
      */
     ConstBodyId getBody1Id();
 
     /**
-     * Return the ID of the 2nd body.
+     * Return the ID of the 2nd body. The pair is unaffected.
      *
      * @return a new object
      */
     ConstBodyId getBody2Id();
 
     /**
-     * Return the hashcode for the pair.
+     * Return the hashcode for the pair. The pair is unaffected.
      *
      * @return the value
      */
     long getHash();
 
     /**
-     * Return the ID of the first subshape.
+     * Return the ID of the first subshape. The pair is unaffected.
      *
      * @return a new object
      */
     ConstSubShapeId getSubShapeId1();
 
     /**
-     * Return the ID of the 2nd subshape.
+     * Return the ID of the 2nd subshape. The pair is unaffected.
      *
      * @return a new object
      */

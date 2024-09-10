@@ -75,8 +75,8 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
     // new methods exposed
 
     /**
-     * Return the bottom radius. The settings are unaffected. (native attribute:
-     * mBottomRadius)
+     * Return the bottom radius of the cylinder. The settings are unaffected.
+     * (native attribute: mBottomRadius)
      *
      * @return the bottom radius (&ge;0)
      */
@@ -101,8 +101,8 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the top radius. The settings are unaffected. (native attribute:
-     * mTopRadius)
+     * Return the top radius of the cylinder. The settings are unaffected.
+     * (native attribute: mTopRadius)
      *
      * @return the top radius (&ge;0)
      */
@@ -136,7 +136,7 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Return the top radius of the cylinder. (native attribute: mTopRadius)
+     * Alter the top radius of the cylinder. (native attribute: mTopRadius)
      *
      * @param radius the desired top radius (&ge;0)
      */
