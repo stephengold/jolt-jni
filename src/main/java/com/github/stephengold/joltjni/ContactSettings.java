@@ -176,6 +176,7 @@ public class ContactSettings
      *
      * @return the combined friction
      */
+    @Override
     public float getCombinedFriction() {
         long settingsVa = va();
         float result = getCombinedFriction(settingsVa);
@@ -189,6 +190,7 @@ public class ContactSettings
      *
      * @return the combined restitution
      */
+    @Override
     public float getCombinedRestitution() {
         long settingsVa = va();
         float result = getCombinedRestitution(settingsVa);
@@ -202,6 +204,7 @@ public class ContactSettings
      *
      * @return the factor (0 = infinite inertia, 1 = use original inertia)
      */
+    @Override
     public float getInvInertiaScale1() {
         long settingsVa = va();
         float result = getInvInertiaScale1(settingsVa);
@@ -215,6 +218,7 @@ public class ContactSettings
      *
      * @return the factor (0 = infinite inertia, 1 = use original inertia)
      */
+    @Override
     public float getInvInertiaScale2() {
         long settingsVa = va();
         float result = getInvInertiaScale2(settingsVa);
@@ -228,6 +232,7 @@ public class ContactSettings
      *
      * @return the factor (0 = infinite mass, 1 = use original mass)
      */
+    @Override
     public float getInvMassScale1() {
         long settingsVa = va();
         float result = getInvMassScale1(settingsVa);
@@ -241,6 +246,7 @@ public class ContactSettings
      *
      * @return the factor (0 = infinite mass, 1 = use original mass)
      */
+    @Override
     public float getInvMassScale2() {
         long settingsVa = va();
         float result = getInvMassScale2(settingsVa);
@@ -254,6 +260,7 @@ public class ContactSettings
      *
      * @return true if treated as a sensor, otherwise false
      */
+    @Override
     public boolean getIsSensor() {
         long settingsVa = va();
         boolean result = getIsSensor(settingsVa);
@@ -267,6 +274,7 @@ public class ContactSettings
      *
      * @return a new velocity vector (radians per second in system coordinates)
      */
+    @Override
     public Vec3 getRelativeAngularSurfaceVelocity() {
         long settingsVa = va();
         float wx = getRelativeAngularSurfaceVelocityX(settingsVa);
@@ -283,6 +291,7 @@ public class ContactSettings
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */
+    @Override
     public Vec3 getRelativeLinearSurfaceVelocity() {
         long settingsVa = va();
         float vx = getRelativeLinearSurfaceVelocityX(settingsVa);
