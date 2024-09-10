@@ -29,7 +29,8 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
 /**
- * A counted reference to a {@code ConstShape}.
+ * A counted reference to a {@code ConstShape}. (native type:
+ * {@code RefConst<Shape>})
  *
  * @author Stephen Gold sgold@sonic.net
  */

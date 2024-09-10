@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Combine the restitution or friction of 2 bodies.
+ * Combine the restitution or friction of 2 bodies. (native type:
+ * ContactConstraintManager::CombineFunction)
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -24,7 +24,8 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
- * A counted reference to a {@code CharacterSettings} object.
+ * A counted reference to a {@code CharacterSettings} object. (native type:
+ * {@code Ref<CharacterSettings>})
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
 import com.github.stephengold.joltjni.readonly.ConstSubShapeIdPair;
 
 /**
- * Identify a pair of colliding subshapes.
+ * Identify a pair of colliding subshapes. (native type: SubShapeIDPair)
  *
  * @author Stephen Gold sgold@sonic.net
  */

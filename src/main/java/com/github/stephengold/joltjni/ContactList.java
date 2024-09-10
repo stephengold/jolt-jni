@@ -24,7 +24,8 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.template.Array;
 
 /**
- * A variable-length list (array) of character contacts.
+ * A variable-length list (array) of character contacts. (native type:
+ * CharacterVirtual::ContactList)
  *
  * @author Stephen Gold sgold@sonic.net
  */

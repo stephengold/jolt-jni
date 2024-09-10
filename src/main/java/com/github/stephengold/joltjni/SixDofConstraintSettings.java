@@ -29,7 +29,8 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
- * Settings used to construct a {@code SixDofConstraint}.
+ * Settings used to construct a {@code SixDofConstraint}. (native type:
+ * SixDOFConstraintSettings)
  *
  * @author Stephen Gold sgold@sonic.net
  */

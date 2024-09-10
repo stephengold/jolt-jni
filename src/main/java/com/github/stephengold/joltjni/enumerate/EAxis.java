@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni.enumerate;
 
 /**
- * Enumerate the degrees of freedom in a {@code SixDofConstraint}.
+ * Enumerate the degrees of freedom in a {@code SixDofConstraint}. (native type:
+ * SixDOFConstraintSettings::EAxis)
  *
  * @author Stephen Gold sgold@sonic.net
  */

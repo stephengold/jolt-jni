@@ -23,7 +23,7 @@ package com.github.stephengold.joltjni;
 
 /**
  * Generate a pseudo-random sequence of integers using a 32-bit Mersenne
- * Twister.
+ * Twister. (native type: std::mt19937)
  * <p>
  * The algorithm isn't specific to Jolt Physics; it's included in jolt-jni for
  * expediency, since RagdollScene.h uses it.

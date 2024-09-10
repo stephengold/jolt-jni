@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Collect results from a broad-phase raycast.
+ * Collect results from a broad-phase raycast. (native type: {@code
+ * CollisionCollector<BroadPhaseCastResult,CollisionCollectorTraitsCastShape>})
  *
  * @author Stephen Gold sgold@sonic.net
  */

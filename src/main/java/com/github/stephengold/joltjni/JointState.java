@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
  * The local-space coordinate transform of an animation joint relative to its
- * parent joint.
+ * parent joint. (native type: SkeletonPose::JointState)
  *
  * @author Stephen Gold sgold@sonic.net
  */

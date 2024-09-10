@@ -24,7 +24,8 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
- * A counted reference to a {@code ConstraintSettings} object.
+ * A counted reference to a {@code ConstraintSettings} object. (native type:
+ * {@code Ref<ConstraintSettings>})
  *
  * @author Stephen Gold sgold@sonic.net
  */

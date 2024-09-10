@@ -28,6 +28,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
  * A {@code TwoBodyConstraint} that can constrain all 6 degrees of freedom.
+ * (native type: SixDOFConstraint)
  *
  * @author Stephen Gold sgold@sonic.net
  */

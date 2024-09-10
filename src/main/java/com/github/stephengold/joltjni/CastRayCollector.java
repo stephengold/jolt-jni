@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Collect results from a narrow-phase raycast.
+ * Collect results from a narrow-phase raycast. (native type:
+ * {@code CollisionCollector<RayCastResult, CollisionCollectorTraitsCastRay>})
  *
  * @author Stephen Gold sgold@sonic.net
  */

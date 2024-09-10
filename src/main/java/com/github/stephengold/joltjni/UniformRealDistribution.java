@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Generate uniformly distributed {@code float} values.
+ * Generate uniformly distributed {@code float} values. (native type:
+ * {@code std::uniform_real_distribution<float>})
  * <p>
  * The algorithm isn't specific to Jolt Physics; it's included in jolt-jni for
  * expediency, since RagdollScene.h uses it.

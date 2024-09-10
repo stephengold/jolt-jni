@@ -23,7 +23,7 @@ package com.github.stephengold.joltjni.enumerate;
 
 /**
  * Bitmasks to enumerate a body's degrees of freedom among the axes of a
- * {@code PhysicsSystem}.
+ * {@code PhysicsSystem}. (native type: EAllowedDOFs)
  *
  * @author Stephen Gold sgold@sonic.net
  */

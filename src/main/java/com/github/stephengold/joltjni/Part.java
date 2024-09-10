@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Settings used to generate a rigid body in a {@code Ragdoll}.
+ * Settings used to generate a rigid body in a {@code Ragdoll}. (native type:
+ * RagdollSettings::Part)
  *
  * @author Stephen Gold sgold@sonic.net
  */

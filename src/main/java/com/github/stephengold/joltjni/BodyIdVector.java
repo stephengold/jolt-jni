@@ -24,7 +24,8 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.template.Array;
 
 /**
- * A variable-length vector (array) of body IDs.
+ * A variable-length vector (array) of body IDs. (native type:
+ * {@code Array<BodyID>})
  *
  * @author Stephen Gold sgold@sonic.net
  */

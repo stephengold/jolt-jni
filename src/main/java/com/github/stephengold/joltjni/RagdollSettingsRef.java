@@ -24,7 +24,8 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
- * A counted reference to a {@code RagdollSettings} object.
+ * A counted reference to a {@code RagdollSettings} object. (native type:
+ * {@code Ref<RagdollSettings>})
  *
  * @author Stephen Gold sgold@sonic.net
  */

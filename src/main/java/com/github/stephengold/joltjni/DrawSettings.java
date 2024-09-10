@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Render settings for debug visualization.
+ * Render settings for debug visualization. (native type:
+ * BodyManager::DrawSettings)
  *
  * @author Stephen Gold sgold@sonic.net
  */
