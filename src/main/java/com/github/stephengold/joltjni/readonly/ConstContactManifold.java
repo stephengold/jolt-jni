@@ -26,7 +26,8 @@ import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to a {@code ContactManifold}.
+ * Read-only access to a {@code ContactManifold}. (native type: const
+ * ContactManifold)
  *
  * @author Stephen Gold sgold@sonic.net
  */

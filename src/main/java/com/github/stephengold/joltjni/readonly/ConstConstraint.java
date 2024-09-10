@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EConstraintType;
 
 /**
- * Read-only access to a {@code Constraint}.
+ * Read-only access to a {@code Constraint}. (native type: const Constraint)
  *
  * @author Stephen Gold sgold@sonic.net
  */

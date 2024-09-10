@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code BroadPhaseLayerInterface}.
+ * Read-only access to a {@code BroadPhaseLayerInterface}. (native type: const
+ * BroadPhaseLayerInterface)
  *
  * @author Stephen Gold sgold@sonic.net
  */

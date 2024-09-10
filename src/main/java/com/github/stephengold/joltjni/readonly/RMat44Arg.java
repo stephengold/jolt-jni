@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to an {@code RMat44}.
+ * Read-only access to an {@code RMat44}. (native type: const RMat44)
  *
  * @author Stephen Gold sgold@sonic.net
  */

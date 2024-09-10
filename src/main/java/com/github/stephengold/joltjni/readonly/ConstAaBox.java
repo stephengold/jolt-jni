@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to an {@code AaBox}.
+ * Read-only access to an {@code AaBox}. (native type: const AABox)
  *
  * @author Stephen Gold sgold@sonic.net
  */

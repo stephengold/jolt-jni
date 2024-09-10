@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.BodyId;
 
 /**
- * Read-only access to a {@code BodyId}.
+ * Read-only access to a {@code BodyId}. (native type: const BodyID)
  *
  * @author Stephen Gold sgold@sonic.net
  */

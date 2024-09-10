@@ -25,7 +25,8 @@ import com.github.stephengold.joltjni.Plane;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to a {@code CharacterBaseSettings} object.
+ * Read-only access to a {@code CharacterBaseSettings} object. (native type:
+ * const CharacterBaseSettings)
  *
  * @author Stephen Gold sgold@sonic.net
  */

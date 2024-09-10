@@ -29,7 +29,8 @@ import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to a {@code CharacterVirtual}.
+ * Read-only access to a {@code CharacterVirtual}. (native type: const
+ * CharacterVirtual)
  *
  * @author Stephen Gold sgold@sonic.net
  */

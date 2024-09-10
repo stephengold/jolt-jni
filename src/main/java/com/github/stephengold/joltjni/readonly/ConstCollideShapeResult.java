@@ -26,7 +26,8 @@ import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to a {@code CollideShapeResult}.
+ * Read-only access to a {@code CollideShapeResult}. (native type: const
+ * CollideShapeResult)
  *
  * @author Stephen Gold sgold@sonic.net
  */

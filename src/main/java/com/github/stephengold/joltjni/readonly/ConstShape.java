@@ -30,7 +30,7 @@ import com.github.stephengold.joltjni.enumerate.EShapeType;
 import java.nio.FloatBuffer;
 
 /**
- * Read-only access to a {@code Shape}.
+ * Read-only access to a {@code Shape}. (native type: const Shape)
  *
  * @author Stephen Gold sgold@sonic.net
  */

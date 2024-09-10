@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code PhysicsMaterial}.
+ * Read-only access to a {@code PhysicsMaterial}. (native type: const
+ * PhysicsMaterial)
  *
  * @author Stephen Gold sgold@sonic.net
  */

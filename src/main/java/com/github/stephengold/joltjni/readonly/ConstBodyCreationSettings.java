@@ -30,7 +30,8 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 
 /**
- * Read-only access to a {@code BodyCreationSettings} object.
+ * Read-only access to a {@code BodyCreationSettings} object. (native type:
+ * const BodyCreationSettings)
  *
  * @author Stephen Gold sgold@sonic.net
  */

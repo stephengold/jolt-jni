@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code SubShapeId}.
+ * Read-only access to a {@code SubShapeId}. (native type: const SubShapeID)
  *
  * @author Stephen Gold sgold@sonic.net
  */

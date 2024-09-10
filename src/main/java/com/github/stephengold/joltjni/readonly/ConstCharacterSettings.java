@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code CharacterSettings} object.
+ * Read-only access to a {@code CharacterSettings} object. (native type: const
+ * CharacterSettings)
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code Quat}.
+ * Read-only access to a {@code Quat}. (native type: const Quat)
  *
  * @author Stephen Gold sgold@sonic.net
  */

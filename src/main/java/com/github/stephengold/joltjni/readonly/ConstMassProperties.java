@@ -25,7 +25,8 @@ import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to a {@code MassProperties} object.
+ * Read-only access to a {@code MassProperties} object. (native type: const
+ * MassProperties)
  *
  * @author Stephen Gold sgold@sonic.net
  */

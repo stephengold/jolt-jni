@@ -29,7 +29,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 
 /**
- * Read-only access to a {@code Contact}.
+ * Read-only access to a {@code Contact}. (native type: const Contact)
  *
  * @author Stephen Gold sgold@sonic.net
  */

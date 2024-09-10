@@ -25,7 +25,8 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EBackFaceMode;
 
 /**
- * Read-only access to a {@code CharacterVirtualSettings} object.
+ * Read-only access to a {@code CharacterVirtualSettings} object. (native type:
+ * const CharacterVirtualSettings)
  *
  * @author Stephen Gold sgold@sonic.net
  */

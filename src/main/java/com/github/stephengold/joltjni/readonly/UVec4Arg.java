@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code UVec4}.
+ * Read-only access to a {@code UVec4}. (native type: const UVec4)
  *
  * @author Stephen Gold sgold@sonic.net
  */

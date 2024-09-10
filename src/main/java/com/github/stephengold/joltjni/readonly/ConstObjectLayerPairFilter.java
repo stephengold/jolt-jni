@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to an {@code ObjectLayerPairFilter}.
+ * Read-only access to an {@code ObjectLayerPairFilter}. (native type: const
+ * ObjectLayerPairFilter)
  *
  * @author Stephen Gold sgold@sonic.net
  */

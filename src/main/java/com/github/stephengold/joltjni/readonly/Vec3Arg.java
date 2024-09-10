@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to a {@code Vec3}.
+ * Read-only access to a {@code Vec3}. (native type: const Vec3)
  *
  * @author Stephen Gold sgold@sonic.net
  */

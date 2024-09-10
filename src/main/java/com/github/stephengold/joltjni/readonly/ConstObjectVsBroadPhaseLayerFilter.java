@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to an {@code ObjectVsBroadPhaseLayerFilter}.
+ * Read-only access to an {@code ObjectVsBroadPhaseLayerFilter}. (native type:
+ * const ObjectVsBroadPhaseLayerFilter)
  *
  * @author Stephen Gold sgold@sonic.net
  */

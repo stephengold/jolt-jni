@@ -28,7 +28,8 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EGroundState;
 
 /**
- * Read-only access to a {@code CharacterBase}.
+ * Read-only access to a {@code CharacterBase}. (native type: const
+ * CharacterBase)
  *
  * @author Stephen Gold sgold@sonic.net
  */

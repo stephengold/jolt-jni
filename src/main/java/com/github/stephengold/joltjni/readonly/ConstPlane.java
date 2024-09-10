@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to an {@code Plane}.
+ * Read-only access to an {@code Plane}. (native type: const Plane)
  *
  * @author Stephen Gold sgold@sonic.net
  */

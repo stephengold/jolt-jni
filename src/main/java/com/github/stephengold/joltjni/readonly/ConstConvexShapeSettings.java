@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code ConvexShapeSettings} object.
+ * Read-only access to a {@code ConvexShapeSettings} object. (native type: const
+ * ConvexShapeSettings)
  *
  * @author Stephen Gold sgold@sonic.net
  */

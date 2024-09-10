@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to a {@code Mat44}.
+ * Read-only access to a {@code Mat44}. (native type: const Mat44)
  *
  * @author Stephen Gold sgold@sonic.net
  */

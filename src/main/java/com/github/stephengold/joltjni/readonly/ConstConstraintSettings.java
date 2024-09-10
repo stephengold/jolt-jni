@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code ConstraintSettings} object.
+ * Read-only access to a {@code ConstraintSettings} object. (native type: const
+ * ConstraintSettings)
  *
  * @author Stephen Gold sgold@sonic.net
  */
