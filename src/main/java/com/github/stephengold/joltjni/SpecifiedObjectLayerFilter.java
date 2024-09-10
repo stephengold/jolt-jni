@@ -43,6 +43,6 @@ public class SpecifiedObjectLayerFilter extends ObjectLayerFilter {
     // *************************************************************************
     // constructors
 
-    private native static long createSpecifiedObjectLayerFilter(
+    native private static long createSpecifiedObjectLayerFilter(
             int layerIndex);
 }

@@ -43,6 +43,6 @@ public class SpecifiedBroadPhaseLayerFilter extends BroadPhaseLayerFilter {
     // *************************************************************************
     // constructors
 
-    private native static long createSpecifiedBroadPhaseLayerFilter(
+    native private static long createSpecifiedBroadPhaseLayerFilter(
             int layerIndex);
 }

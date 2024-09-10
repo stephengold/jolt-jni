@@ -89,6 +89,6 @@ public class StreamOutWrapper extends StreamOut {
     // *************************************************************************
     // native private methods
 
-    private native static long createStreamOutWrapper(
+    native private static long createStreamOutWrapper(
             String fileName, int streamMode);
 }
