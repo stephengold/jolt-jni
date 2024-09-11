@@ -403,7 +403,7 @@
             <property name="max" value="180"/>
         </module>
         <module name="ParameterNumber">
-            <property name="max" value="10"/>
+            <property name="max" value="15"/>
         </module>
 
         <!-- Checks for whitespace                        -->
