@@ -25,7 +25,7 @@ SOFTWARE.
  */
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/BroadPhase/BroadPhaseQuery.h>
-#include "auto/com_github_stephengold_joltjni_RayCastBodyCollector.h"
+#include "auto/com_github_stephengold_joltjni_CollideShapeBodyCollector.h"
 #include "glue/glue.h"
 
 using namespace JPH;
