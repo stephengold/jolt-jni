@@ -27,9 +27,8 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
- * Interface for doing precise collision detection against a
- * {@code PhysicsSpace}, using a broad-phase query followed by a narrow-phase
- * query.
+ * Interface for precise collision detection against the bodies in a
+ * {@code PhysicsSpace}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

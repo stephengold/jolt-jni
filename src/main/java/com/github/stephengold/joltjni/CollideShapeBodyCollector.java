@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Collect body IDs from a broad-phase collision test.
+ * Collect body IDs from a broad-phase collide-shape query. (native type: {@code
+ * CollisionCollector<BodyID,CollisionCollectorTraitsCollideShape>})
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -66,7 +66,7 @@ model {
 
     toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp) // used when compiling on Windows
-        //clang(Clang) // to prefer Clang over Gcc
+        //clang(Clang) // to prefer Clang over Gcc on Linux
         gcc(Gcc) // used when compiling on Linux
         clang(Clang) // used when compiling on macOS
 
