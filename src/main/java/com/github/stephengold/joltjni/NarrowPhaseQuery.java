@@ -71,16 +71,16 @@ public class NarrowPhaseQuery extends NonCopyable {
     /**
      * Cast a ray and obtain the nearest hit, if any.
      *
-     * @param raycastVa the desired ray (not null, unaffected)
+     * @param raycast the desired ray (not null, unaffected)
      * @param hitResult storage for information about the hit, if any (not null,
      * may be modified)
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      * @return true if a hit was found, otherwise false
      */
-    public boolean castRay(RRayCast raycastVa, RayCastResult hitResult,
+    public boolean castRay(RRayCast raycast, RayCastResult hitResult,
             BroadPhaseLayerFilter bplFilter) {
-        boolean result = castRay(raycastVa, hitResult, bplFilter,
+        boolean result = castRay(raycast, hitResult, bplFilter,
                 new ObjectLayerFilter());
         return result;
     }
@@ -106,7 +106,7 @@ public class NarrowPhaseQuery extends NonCopyable {
     /**
      * Cast a ray and obtain the nearest hit, if any.
      *
-     * @param rayCast the desired ray (not null, unaffected)
+     * @param raycast the desired ray (not null, unaffected)
      * @param hitResult storage for information about the hit, if any (not null,
      * may be modified)
      * @param bplFilter the broadphase-layer filter to apply (not null,
@@ -115,11 +115,11 @@ public class NarrowPhaseQuery extends NonCopyable {
      * @param bodyFilter the body filter to apply (not null, unaffected)
      * @return true if a hit was found, otherwise false
      */
-    public boolean castRay(RRayCast rayCast, RayCastResult hitResult,
+    public boolean castRay(RRayCast raycast, RayCastResult hitResult,
             BroadPhaseLayerFilter bplFilter,
             ObjectLayerFilter olFilter, BodyFilter bodyFilter) {
         long queryVa = va();
-        long raycastVa = rayCast.va();
+        long raycastVa = raycast.va();
         long hitResultVa = hitResult.va();
         long bplFilterVa = bplFilter.va();
         long olFilterVa = olFilter.va();

@@ -37,15 +37,16 @@ public class RayCast extends JoltPhysicsObject {
      * direction.
      *
      * @param startLocation the desired start location (not null, unaffected)
-     * @param direction the desired direction (not null, unaffected)
+     * @param offset the desired end offset from the start (not null,
+     * unaffected)
      */
-    public RayCast(Vec3Arg startLocation, Vec3Arg direction) {
+    public RayCast(Vec3Arg startLocation, Vec3Arg offset) {
         float startX = startLocation.getX();
         float startY = startLocation.getY();
         float startZ = startLocation.getZ();
-        float dx = direction.getX();
-        float dy = direction.getY();
-        float dz = direction.getZ();
+        float dx = offset.getX();
+        float dy = offset.getY();
+        float dz = offset.getZ();
         long raycastVa = createRayCast(startX, startY, startZ, dx, dy, dz);
         setVirtualAddress(raycastVa, () -> free(raycastVa));
     }
