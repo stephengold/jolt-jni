@@ -3,8 +3,6 @@
 [JVM](https://en.wikipedia.org/wiki/Java_virtual_machine) bindings
 for [Jolt Physics](https://jrouwe.github.io/JoltPhysics)
 
-**currently under construction**
-
 Jolt-jni provides a thin layer atop Jolt Physics,
 to facilitate physics simulation in JVM languages such as Java and Kotlin.
 
@@ -15,7 +13,7 @@ There’s close correspondence between the class/method names
 of JoltPhysics and jolt-jni.
 For example:
 
-+ The `Body` class in jolt-jni will eventually provide
++ The `Body` class in jolt-jni will (eventually) provide
   all the functionality of the `Body` class in Jolt Physics.
 + The `ConstBody` interface will include all the `const` methods
   of the JoltPhysics `Body` class, such as its `GetPosition()` method,
@@ -56,8 +54,8 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
         mavenCentral()
     }
     dependencies {
-        implementation("com.github.stephengold:jolt-jni-Linux64:0.6.0") // JVM library
-        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.6.0:DebugSp") // native library for Linux
+        implementation("com.github.stephengold:jolt-jni-Linux64:0.7.0") // JVM library
+        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.7.0:DebugSp") // native library for Linux
         // (Native libraries for other platforms could go here.)
     }
 
