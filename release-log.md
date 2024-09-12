@@ -1,5 +1,91 @@
 # release log for the jolt-jni project
 
+## Version 0.7.0 released on 12 September 2024
+
++ Moved the `RefTarget` interface to a new package.
++ Package-protected many methods and no-arg constructors.
++ Bugfix:  `_DEBUG` is #defined in Release builds.
++ Bugfix:  initial user data of a shape isn't always zero.
+
++ Added classes to the library:
+  + `Array`
+  + `BodyFilter`
+  + `BodyLockInterfaceNoLock`
+  + `BodyLockRead`
+  + `BodyLockWrite`
+  + `BroadPhaseCastResult`
+  + `BroadPhaseLayerFilter`
+  + `BroadPhaseQuery`
+  + `CastRayCollector`
+  + `CastShapeCollector`
+  + `CollidePointCollector`
+  + `CollidePointResult`
+  + `CollideSettingsBase`
+  + `CollideShapeBodyCollector`
+  + `CollideShapeCollector`
+  + `CollideShapeSettings`
+  + `CustomCastShapeCollector`
+  + `CustomCollidePointCollector`
+  + `CustomCollideShapeBodyCollector`
+  + `CustomCollideShapeCollector`
+  + `CustomRayCastBodyCollector`
+  + `CustomRayCastCollector`
+  + `DebugRenderer`
+  + `DebugRendererRecorder`
+  + `DrawSettings`
+  + `EStateRecorderState`
+  + `JointState`
+  + `Mt19937`
+  + `NarrowPhaseQuery`
+  + `NarrowPhaseStat`
+  + `ObjectLayerFilter`
+  + `ObjectStreamIn`
+  + `OffsetCenterOfMassShapeSettings`
+  + `OffsetCenterOfMassShape`
+  + `Part`
+  + `PhysicsScene`
+  + `PhysicsSceneRef`
+  + `Ragdoll`
+  + `RagdollRef`
+  + `RagdollSettings`
+  + `RagdollSettingsRef`
+  + `RayCast`
+  + `RayCastBodyCollector`
+  + `RayCastResult`
+  + `RayCastSettings`
+  + `Ref`
+  + `RRayCast`
+  + `RShapeCast`
+  + `ShapeCastResult`
+  + `ShapeCastSettings`
+  + `ShapeFilter`
+  + `Skeleton`
+  + `SkeletonAnimation`
+  + `SkeletonAnimationRef`
+  + `SkeletonPose
+  + `SkeletonRef`
+  + `SpecifiedBroadPhaseLayerFilter`
+  + `SpecifiedObjectLayerFilter`
+  + `StreamOut`
+  + `StreamOutWrapper`
+  + `StateRecorder`
+  + `StateRecorderFilter`
+  + `StateRecorderImpl`
+  + `TaperedCapsuleShape`
+  + `TaperedCapsuleShapeSettings`
+  + `TaperedCylinderShape`
+  + `TaperedCylinderShapeSettings`
+  + `UniformRealDistribution`
+
++ Added 2 enums to the library:
+  + `EActiveEdgeMode`
+  + `ECollectFacesMode`
+
++ Added many public methods to the library.
++ Added package-level javadoc.
++ Merged `Ref<>` implementations into corresponding `RefTarget` source files.
++ Updated Jolt source code and assets to 5da6ac8 (=sg240907).
+
 ## Version 0.6.0 released on 28 August 2024
 
 + Renamed the `RefShape` class to `ShapeRef`.
@@ -58,7 +144,7 @@
   + `TwoBodyConstraintSettings`
 
 + Added enums to the library:
-  + `EAxis` 
+  + `EAxis`
   + `EBackFaceMode`
   + `EConstraintSubType`
   + `EConstraintSpace`

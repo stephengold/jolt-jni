@@ -14,7 +14,7 @@ plugins {
 ext {
     downloadZip = 'downloads/JoltPhysics-sg240907.zip'
     group = 'com.github.stephengold'
-    version = '0.6.1-SNAPSHOT'
+    version = '0.7.0'
     baseName = "${artifact}-${version}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
