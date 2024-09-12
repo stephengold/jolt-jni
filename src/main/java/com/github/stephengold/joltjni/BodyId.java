@@ -36,7 +36,7 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     /**
      * Instantiate with the specified native object assigned but not owned.
      * <p>
-     * For use in custom collectors.
+     * For use in custom collectors and custom listeners.
      *
      * @param idVa the virtual address of the native object to assign (not zero)
      */

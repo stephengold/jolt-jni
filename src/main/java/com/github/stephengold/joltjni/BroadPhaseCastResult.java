@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Information about a broad-phase cast hitting a shape.
+ * Information about a broad-phase cast hit.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -51,7 +51,8 @@ public class BroadPhaseCastResult extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the ID of the body that was hit. (native attribute: mBodyID)
+     * Return the ID of the body that was hit. The result object is unaffected.
+     * (native attribute: mBodyID)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -64,8 +65,8 @@ public class BroadPhaseCastResult extends JoltPhysicsObject {
     }
 
     /**
-     * Return the location of the hit, as a fraction of the cast path. (native
-     * attribute: mFraction)
+     * Return the location of the hit, as a fraction of the cast path. The
+     * result object is unaffected. (native attribute: mFraction)
      *
      * @return the fraction (&ge;0)
      */

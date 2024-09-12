@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Information about a raycast hitting a shape.
+ * Information about a narrow-phase ray cast hitting a shape.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -31,7 +31,7 @@ public class ShapeCastResult extends CollideShapeResult {
     // constructors
 
     /**
-     * Instantiate a shape result with the specified native object assigned but
+     * Instantiate a cast result with the specified native object assigned but
      * not owned.
      * <p>
      * For use in custom collectors.

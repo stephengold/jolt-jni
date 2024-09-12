@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Information about a raycast hitting a shape.
+ * Information about a broad-phase ray-cast hit.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -31,7 +31,7 @@ public class RayCastResult extends BroadPhaseCastResult {
     // constructors
 
     /**
-     * Instantiate a result with the default parameters.
+     * Instantiate a cast result with the default parameters.
      */
     public RayCastResult() {
         long castResultVa = createRayCastResult();
@@ -39,7 +39,8 @@ public class RayCastResult extends BroadPhaseCastResult {
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate a cast result with the specified native object assigned but
+     * not owned.
      * <p>
      * For use in custom collectors.
      *

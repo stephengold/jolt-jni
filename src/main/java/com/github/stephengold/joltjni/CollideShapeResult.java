@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstCollideShapeResult;
 
 /**
- * Properties of a collision between 2 shapes.
+ * Information about a narrow-phase collision by a shape.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -37,6 +37,8 @@ public class CollideShapeResult
     /**
      * Instantiate a shape result with the specified native object assigned but
      * not owned.
+     * <p>
+     * For use in custom collectors.
      *
      * @param shapeResultVa the virtual address of the native object to assign
      * (not zero)
@@ -48,10 +50,10 @@ public class CollideShapeResult
     // ConstCollideShapeResult methods
 
     /**
-     * Identify the body to which shape 2 belongs. The object is unaffected.
-     * (native attribute: mBodyID2)
+     * Identify the body to which shape 2 belongs. The result object is
+     * unaffected. (native attribute: mBodyID2)
      *
-     * @return a new ID
+     * @return a new JVM object with a new native object assigned
      */
     @Override
     public BodyId getBodyId2() {
@@ -143,10 +145,10 @@ public class CollideShapeResult
     }
 
     /**
-     * Identify the face on shape 2 where the collision occurred. The object is
-     * unaffected. (native attribute: mSubShapeID2)
+     * Identify the subshape on shape 2 where the collision occurred. The object
+     * is unaffected. (native attribute: mSubShapeID2)
      *
-     * @return a new ID
+     * @return a new JVM object with a new native object assigned
      */
     @Override
     public SubShapeId getSubShapeId2() {
