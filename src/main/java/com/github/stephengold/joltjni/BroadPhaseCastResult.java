@@ -38,11 +38,13 @@ public class BroadPhaseCastResult extends JoltPhysicsObject {
 
     /**
      * Instantiate with the specified native object assigned but not owned.
+     * <p>
+     * For use in custom collectors.
      *
      * @param castResultVa the virtual address of the native object to assign
      * (not zero)
      */
-    BroadPhaseCastResult(long castResultVa) {
+    public BroadPhaseCastResult(long castResultVa) {
         super(castResultVa);
     }
     // *************************************************************************
