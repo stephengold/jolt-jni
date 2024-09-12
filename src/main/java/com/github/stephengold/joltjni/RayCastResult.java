@@ -50,7 +50,25 @@ public class RayCastResult extends BroadPhaseCastResult {
         super(castResultVa);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the ID of the subshape that was hit. The result object is
+     * unaffected. (native attribute: mSubShapeID2)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public SubShapeId getSubShapeId2() {
+        long castResultVa = va();
+        long idVa = getSubShapeId2(castResultVa);
+        SubShapeId result = new SubShapeId(idVa, false);
+
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createRayCastResult();
+
+    native private static long getSubShapeId2(long castResultVa);
 }

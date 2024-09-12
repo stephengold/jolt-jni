@@ -41,3 +41,17 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RayCastResult_create
     TRACE_NEW("RayCastResult", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_RayCastResult
+ * Method:    getSubShapeId2
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RayCastResult_getSubShapeId2
+  (JNIEnv *, jclass, jlong castResultVa) {
+    const RayCastResult * const pCastResult
+            = reinterpret_cast<RayCastResult *> (castResultVa);
+    SubShapeID * const pResult = new SubShapeID(pCastResult->mSubShapeID2);
+    TRACE_NEW("SubShapeID", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
