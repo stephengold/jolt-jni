@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.Quat;
+
 /**
  * Read-only access to a {@code Quat}. (native type: const Quat)
  *
@@ -29,6 +31,13 @@ package com.github.stephengold.joltjni.readonly;
 public interface QuatArg {
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Return the conjugate. The current object is unaffected.
+     *
+     * @return a new object
+     */
+    Quat conjugated();
 
     /**
      * Return the real (W) component in single precision. The quaternion is

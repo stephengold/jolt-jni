@@ -156,6 +156,17 @@ final public class Quat implements QuatArg {
     // QuatArg methods
 
     /**
+     * Return the conjugate. The current object is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public Quat conjugated() {
+        Quat result = new Quat(-x, -y, -z, w);
+        return result;
+    }
+
+    /**
      * Return the real (W) component in single precision. The quaternion is
      * unaffected.
      *
