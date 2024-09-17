@@ -126,6 +126,16 @@ final public class RVec3 implements RVec3Arg {
         this.yy = y;
         this.zz = z;
     }
+
+    /**
+     * Create a vector with all components zero.
+     *
+     * @return a new vector
+     */
+    public static RVec3 sZero() {
+        RVec3 result = new RVec3();
+        return result;
+    }
     // *************************************************************************
     // RVec3Arg methods
 
