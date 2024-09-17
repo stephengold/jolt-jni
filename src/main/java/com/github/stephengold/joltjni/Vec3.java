@@ -100,6 +100,22 @@ final public class Vec3 implements Vec3Arg {
     // new methods exposed
 
     /**
+     * Return a scaled version of the specified vector.
+     *
+     * @param scale the scale to apply
+     * @param v the input vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 multiply(float scale, Vec3Arg v) {
+        float x = scale * v.getX();
+        float y = scale * v.getY();
+        float z = scale * v.getZ();
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
      * Return the component-wise product of the specified vectors.
      *
      * @param v1 the first vector (not null, unaffected)
@@ -110,6 +126,21 @@ final public class Vec3 implements Vec3Arg {
         float x = v1.getX() * v2.getX();
         float y = v1.getY() * v2.getY();
         float z = v1.getZ() * v2.getZ();
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the negative of the specified vector.
+     *
+     * @param v the input vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 negate(Vec3Arg v) {
+        float x = -v.getX();
+        float y = -v.getY();
+        float z = -v.getZ();
         Vec3 result = new Vec3(x, y, z);
 
         return result;
@@ -253,6 +284,22 @@ final public class Vec3 implements Vec3Arg {
      */
     public static Vec3 sReplicate(float value) {
         Vec3 result = new Vec3(value, value, value);
+        return result;
+    }
+
+    /**
+     * Return the component-wise difference of the specified vectors.
+     *
+     * @param v1 the first vector (not null, unaffected)
+     * @param v2 the vector to subtract (not null, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 subtract(Vec3Arg v1, Vec3Arg v2) {
+        float x = v1.getX() - v2.getX();
+        float y = v1.getY() - v2.getY();
+        float z = v1.getZ() - v2.getZ();
+        Vec3 result = new Vec3(x, y, z);
+
         return result;
     }
     // *************************************************************************
