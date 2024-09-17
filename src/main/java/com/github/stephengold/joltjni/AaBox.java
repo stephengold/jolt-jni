@@ -92,6 +92,34 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         long boxVa = va();
         setEmpty(boxVa);
     }
+
+    /**
+     * Alter the maximum coordinates. (native attribute: mMax)
+     *
+     * @param max the desired maximum coordinate for each axis (not null,
+     * unaffected)
+     */
+    public void setMax(Vec3Arg max) {
+        long boxVa = va();
+        float x = max.getX();
+        float y = max.getY();
+        float z = max.getZ();
+        setMax(boxVa, x, y, z);
+    }
+
+    /**
+     * Alter the minimum coordinates. (native attribute: mMin)
+     *
+     * @param min the desired minimum coordinate for each axis (not null,
+     * unaffected)
+     */
+    public void setMin(Vec3Arg min) {
+        long boxVa = va();
+        float x = min.getX();
+        float y = min.getY();
+        float z = min.getZ();
+        setMin(boxVa, x, y, z);
+    }
     // *************************************************************************
     // ConstAaBox methods
 
@@ -270,4 +298,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static long sBiggest(boolean unused);
 
     native private static void setEmpty(long boxVa);
+
+    native private static void setMax(long boxVa, float x, float y, float z);
+
+    native private static void setMin(long boxVa, float x, float y, float z);
 }

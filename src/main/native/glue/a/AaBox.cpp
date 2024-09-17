@@ -308,3 +308,27 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_setEmpty
     AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     pBox->SetEmpty();
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    setMax
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_setMax
+  (JNIEnv *, jclass, jlong boxVa, jfloat x, jfloat y, jfloat z) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const Vec3 max(x, y, z);
+    pBox->mMax = max;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    setMin
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_setMin
+  (JNIEnv *, jclass, jlong boxVa, jfloat x, jfloat y, jfloat z) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const Vec3 min(x, y, z);
+    pBox->mMin = min;
+}
