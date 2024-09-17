@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.CapsuleShapeSettings;
 import com.github.stephengold.joltjni.ConvexHullShapeSettings;
 import com.github.stephengold.joltjni.ConvexShapeSettings;
 import com.github.stephengold.joltjni.CylinderShapeSettings;
+import com.github.stephengold.joltjni.EmptyShapeSettings;
 import com.github.stephengold.joltjni.HeightFieldShapeSettings;
 import com.github.stephengold.joltjni.IndexedTriangleList;
 import com.github.stephengold.joltjni.Jolt;
@@ -75,6 +76,7 @@ public class Test006 {
         doCapsuleShapeSettings();
         doConvexHullShapeSettings();
         doCylinderShapeSettings();
+        doEmptyShapeSettings();
         doHeightFieldShapeSettings();
         doMeshShapeSettings();
         doMutableCompoundShapeSettings();
@@ -140,6 +142,19 @@ public class Test006 {
 
         testCylinderSsDefaults(settings);
         testCylinderSsSetters(settings);
+
+        TestUtils.testClose(settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code EmptyShapeSettings} class.
+     */
+    private static void doEmptyShapeSettings() {
+        EmptyShapeSettings settings = new EmptyShapeSettings();
+
+        testEmptySsDefaults(settings);
+        testEmptySsSetters(settings);
 
         TestUtils.testClose(settings);
         System.gc();
@@ -501,6 +516,27 @@ public class Test006 {
         Assert.assertEquals(-1f, settings.getMinHeightValue(), 0f);
         TestUtils.assertEquals(2f, 3f, 4f, settings.getOffset(), 0f);
         TestUtils.assertEquals(5f, 6f, 7f, settings.getScale(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code EmptyShapeSettings}.
+     *
+     * @param settings the settings to test (not null, unaffected)
+     */
+    private static void testEmptySsDefaults(EmptyShapeSettings settings) {
+        testSsDefaults(settings);
+    }
+
+    /**
+     * Test the setters of the specified {@code EmptyShapeSettings}.
+     *
+     * @param settings the settings to test (not null, modified)
+     */
+    private static void testEmptySsSetters(EmptyShapeSettings settings) {
+        ShapeSettingsRef ref = settings.toRef();
+        Assert.assertEquals(1, settings.getRefCount());
+        Assert.assertEquals(settings, ref.getPtr());
     }
 
     /**

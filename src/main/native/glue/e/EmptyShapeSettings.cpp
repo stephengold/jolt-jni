@@ -19,63 +19,25 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni.enumerate;
 
-/**
- * Enumerate categories that a {@code Shape} can belong to.
- *
- * @author Stephen Gold sgold@sonic.net
+/*
+ * Author: Stephen Gold
  */
-public enum EShapeType {
-    // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Collision/Shape/Shape.h>
+#include <Jolt/Jolt.h>
+#include <Jolt/Physics/Collision/Shape/EmptyShape.h>
+#include "auto/com_github_stephengold_joltjni_EmptyShapeSettings.h"
+#include "glue/glue.h"
 
-    /**
-     * convex
-     */
-    Convex,
-    /**
-     * compound
-     */
-    Compound,
-    /**
-     * decorated
-     */
-    Decorated,
-    /**
-     * mesh
-     */
-    Mesh,
-    /**
-     * height field
-     */
-    HeightField,
-    /**
-     * soft body
-     */
-    SoftBody,
-    /**
-     * user-defined type #1
-     */
-    User1,
-    /**
-     * user-defined type #2
-     */
-    User2,
-    /**
-     * user-defined type #3
-     */
-    User3,
-    /**
-     * user-defined type #4
-     */
-    User4,
-    /**
-     * plane
-     */
-    Plane,
-    /**
-     * EmptyShape
-     */
-    Empty
+using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_EmptyShapeSettings
+ * Method:    createEmptyShapeSettings
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShapeSettings_createEmptyShapeSettings
+  (JNIEnv *, jclass) {
+    EmptyShapeSettings * const pResult = new EmptyShapeSettings();
+    TRACE_NEW("EmptyShapeSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);
 }

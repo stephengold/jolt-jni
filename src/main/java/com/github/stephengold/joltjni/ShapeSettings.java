@@ -103,6 +103,9 @@ abstract public class ShapeSettings
             case Cylinder:
                 result = new CylinderShapeSettings(settingsVa);
                 break;
+            case Empty:
+                result = new EmptyShapeSettings(settingsVa);
+                break;
             case HeightField:
                 result = new HeightFieldShapeSettings(settingsVa);
                 break;

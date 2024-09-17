@@ -29,6 +29,8 @@ import com.github.stephengold.joltjni.ConvexHullShape;
 import com.github.stephengold.joltjni.ConvexHullShapeSettings;
 import com.github.stephengold.joltjni.CylinderShape;
 import com.github.stephengold.joltjni.CylinderShapeSettings;
+import com.github.stephengold.joltjni.EmptyShape;
+import com.github.stephengold.joltjni.EmptyShapeSettings;
 import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.HeightFieldShape;
 import com.github.stephengold.joltjni.HeightFieldShapeSettings;
@@ -90,6 +92,7 @@ public class Test007 {
         doCapsuleShape();
         doConvexHullShape();
         doCylinderShape();
+        doEmptyShape();
         doHeightFieldShape();
         doMeshShape();
         doMutableCompoundShape();
@@ -199,6 +202,29 @@ public class Test007 {
         Assert.assertEquals(0, shape2.getRefCount());
 
         TestUtils.testClose(shape2, shape, ref, result, settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code EmptyShape} class.
+     */
+    private static void doEmptyShape() {
+        EmptyShapeSettings settings = new EmptyShapeSettings();
+        ShapeResult result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ShapeRefC ref = result.get();
+        EmptyShape shape = (EmptyShape) ref.getPtr();
+
+        TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
+        Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
+        Assert.assertEquals(EShapeSubType.Empty, shape.getSubType());
+        Assert.assertEquals(EShapeType.Empty, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+        Assert.assertFalse(shape.mustBeStatic());
+
+        TestUtils.testClose(shape, ref, result, settings);
         System.gc();
     }
 

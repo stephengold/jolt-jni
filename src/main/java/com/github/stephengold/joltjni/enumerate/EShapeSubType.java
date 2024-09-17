@@ -161,5 +161,9 @@ public enum EShapeSubType {
     /**
      * TaperedCylinderShape
      */
-    TaperedCylinder
+    TaperedCylinder,
+    /**
+     * EmptyShape
+     */
+    Empty
 }

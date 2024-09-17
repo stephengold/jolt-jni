@@ -85,6 +85,9 @@ abstract public class Shape extends NonCopyable
             case Cylinder:
                 result = new CylinderShape(shapeVa);
                 break;
+            case Empty:
+                result = new EmptyShape(shapeVa);
+                break;
             case HeightField:
                 result = new HeightFieldShape(shapeVa);
                 break;

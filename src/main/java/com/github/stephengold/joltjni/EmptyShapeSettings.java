@@ -19,63 +19,40 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni.enumerate;
+package com.github.stephengold.joltjni;
+
+import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 
 /**
- * Enumerate categories that a {@code Shape} can belong to.
+ * Settings used to construct an {@code EmptyShape}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public enum EShapeType {
+public class EmptyShapeSettings extends ShapeSettings {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Collision/Shape/Shape.h>
+    // constructors
 
     /**
-     * convex
+     * Instantiate the default settings.
      */
-    Convex,
+    public EmptyShapeSettings() {
+        long settingsVa = createEmptyShapeSettings();
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.Empty);
+    }
+
     /**
-     * compound
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
      */
-    Compound,
-    /**
-     * decorated
-     */
-    Decorated,
-    /**
-     * mesh
-     */
-    Mesh,
-    /**
-     * height field
-     */
-    HeightField,
-    /**
-     * soft body
-     */
-    SoftBody,
-    /**
-     * user-defined type #1
-     */
-    User1,
-    /**
-     * user-defined type #2
-     */
-    User2,
-    /**
-     * user-defined type #3
-     */
-    User3,
-    /**
-     * user-defined type #4
-     */
-    User4,
-    /**
-     * plane
-     */
-    Plane,
-    /**
-     * EmptyShape
-     */
-    Empty
+    EmptyShapeSettings(long settingsVa) {
+        super(settingsVa);
+        setSubType(EShapeSubType.Empty);
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static long createEmptyShapeSettings();
 }

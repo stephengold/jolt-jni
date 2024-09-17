@@ -19,63 +19,25 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni.enumerate;
+package com.github.stephengold.joltjni;
 
 /**
- * Enumerate categories that a {@code Shape} can belong to.
+ * A {@code Shape} that won't collide with anything and has zero volume.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public enum EShapeType {
+public class EmptyShape extends Shape {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Collision/Shape/Shape.h>
+    // constructors
 
     /**
-     * convex
+     * Instantiate a shape with the specified native object assigned but not
+     * owned.
+     *
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
      */
-    Convex,
-    /**
-     * compound
-     */
-    Compound,
-    /**
-     * decorated
-     */
-    Decorated,
-    /**
-     * mesh
-     */
-    Mesh,
-    /**
-     * height field
-     */
-    HeightField,
-    /**
-     * soft body
-     */
-    SoftBody,
-    /**
-     * user-defined type #1
-     */
-    User1,
-    /**
-     * user-defined type #2
-     */
-    User2,
-    /**
-     * user-defined type #3
-     */
-    User3,
-    /**
-     * user-defined type #4
-     */
-    User4,
-    /**
-     * plane
-     */
-    Plane,
-    /**
-     * EmptyShape
-     */
-    Empty
+    EmptyShape(long shapeVa) {
+        super(shapeVa);
+    }
 }
