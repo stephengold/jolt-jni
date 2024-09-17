@@ -76,18 +76,20 @@ final public class IndexedTriangle extends IndexedTriangleNoMaterial {
     // new public methods
 
     /**
-     * Return the triangle's material index.
+     * Return the triangle's material index. The triangle is unaffected. (native
+     * attribute: mMaterialIndex)
      *
      * @return the index
      */
     public int getMaterialIndex() {
         long triangleVa = va();
         int result = getMaterialIndex(triangleVa);
+
         return result;
     }
 
     /**
-     * Alter the triangle's material index.
+     * Alter the triangle's material index. (native attribute: mMaterialIndex)
      *
      * @param materialIndex the desired material index
      */
