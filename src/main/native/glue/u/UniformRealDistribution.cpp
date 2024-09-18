@@ -68,3 +68,18 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_UniformRealDistribu
     const float result = (*pDistribution)(*pGenerator);
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_UniformRealDistribution
+ * Method:    nextFloatDre
+ * Signature: (JJ)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_UniformRealDistribution_nextFloatDre
+  (JNIEnv *, jclass, jlong distributionVa, jlong generatorVa) {
+    uniform_real_distribution<float> * const pDistribution
+            = reinterpret_cast<uniform_real_distribution<float> *> (distributionVa);
+    default_random_engine * const pGenerator
+            = reinterpret_cast<default_random_engine *> (generatorVa);
+    const float result = (*pDistribution)(*pGenerator);
+    return result;
+}

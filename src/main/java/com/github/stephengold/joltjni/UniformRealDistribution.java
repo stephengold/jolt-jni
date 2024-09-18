@@ -54,6 +54,20 @@ public class UniformRealDistribution extends JoltPhysicsObject {
      * @param generator the sequence generator to use (not null)
      * @return the value
      */
+    public float nextFloat(DefaultRandomEngine generator) {
+        long distributionVa = va();
+        long generatorVa = generator.va();
+        float result = nextFloatDre(distributionVa, generatorVa);
+
+        return result;
+    }
+
+    /**
+     * Iterate and return the next {@code float} value in the sequence.
+     *
+     * @param generator the sequence generator to use (not null)
+     * @return the value
+     */
     public float nextFloat(Mt19937 generator) {
         long distributionVa = va();
         long generatorVa = generator.va();
@@ -69,5 +83,8 @@ public class UniformRealDistribution extends JoltPhysicsObject {
     native private static void free(long distributionVa);
 
     native private static float nextFloat(
+            long distributionVa, long generatorVa);
+
+    native private static float nextFloatDre(
             long distributionVa, long generatorVa);
 }
