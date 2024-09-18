@@ -55,7 +55,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified points.
      *
-     * @param points an array of point locations (not null)
+     * @param points an array of point locations (not null, unaffected)
      */
     public ConvexHullShapeSettings(Vec3Arg... points) {
         int numPoints = points.length;
@@ -72,10 +72,11 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Instantiate settings for the specified points.
+     * Instantiate settings for the points in the specified buffer.
      *
-     * @param numPoints the number of points
-     * @param points a direct buffer containing point locations
+     * @param numPoints the number of points (&ge;0)
+     * @param points a direct buffer containing point locations (not null,
+     * unaffected)
      */
     public ConvexHullShapeSettings(int numPoints, FloatBuffer points) {
         long settingsVa = createConvexHullShapeSettings(numPoints, points);

@@ -72,7 +72,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
 
     /**
      * Test whether to calculate penetration for the starting point. The
-     * settings are unaffected. (native field: mReturnDeepestPoint)
+     * settings are unaffected. (native attribute: mReturnDeepestPoint)
      *
      * @return true to enable, false to disable
      */
@@ -85,7 +85,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
 
     /**
      * Test whether the shape should be shrunk and then expanded by the convex
-     * radius. The settings are unaffected. (native field:
+     * radius. The settings are unaffected. (native attribute:
      * mUseShrunkenShapeAndConvexRadius)
      *
      * @return true to enable, false to disable
@@ -135,7 +135,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
 
     /**
      * Alter whether the shape should be shrunk and then expanded by the convex
-     * radius. (native field: mUseShrunkenShapeAndConvexRadius)
+     * radius. (native attribute: mUseShrunkenShapeAndConvexRadius)
      *
      * @param enable true to enable the feature, false to disable it
      * (default=false)

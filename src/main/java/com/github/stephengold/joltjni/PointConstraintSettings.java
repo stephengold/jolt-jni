@@ -74,7 +74,7 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
 
     /**
      * Copy the constraint location for body 2. The settings are unaffected.
-     * (native mPoint1: mPoint2)
+     * (native attribute: mPoint2)
      *
      * @return a new location vector
      */
