@@ -22,8 +22,10 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
+import java.util.List;
 
 /**
  * Settings used to construct a {@code ConvexHullShape}.
@@ -53,11 +55,83 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     }
 
     /**
+     * Instantiate settings for the specified list of points.
+     *
+     * @param points a list of point locations (not null, unaffected)
+     */
+    public ConvexHullShapeSettings(List<Vec3Arg> points) {
+        this(points, PhysicsSettings.cDefaultConvexRadius);
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param points a list of point locations (not null, unaffected)
+     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
+     * default=0.05)
+     */
+    public ConvexHullShapeSettings(
+            List<Vec3Arg> points, float maxConvexRadius) {
+        this(points, maxConvexRadius, null);
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param points a list of point locations (not null, unaffected)
+     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
+     * default=0.05)
+     * @param material the desired surface properties (not null, unaffected) or
+     * {@code null} for default properties (default=null)
+     */
+    public ConvexHullShapeSettings(List<Vec3Arg> points, float maxConvexRadius,
+            ConstPhysicsMaterial material) {
+        int numPoints = points.size();
+        int numFloats = numAxes * numPoints;
+        FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
+        for (Vec3Arg point : points) {
+            buffer.put(point.getX());
+            buffer.put(point.getY());
+            buffer.put(point.getZ());
+        }
+        long materialVa = (material == null) ? 0L : material.va();
+        long settingsVa = createSettings(
+                numPoints, buffer, maxConvexRadius, materialVa);
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.ConvexHull);
+    }
+
+    /**
      * Instantiate settings for the specified points.
      *
      * @param points an array of point locations (not null, unaffected)
      */
     public ConvexHullShapeSettings(Vec3Arg... points) {
+        this(points, PhysicsSettings.cDefaultConvexRadius);
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param points an array of point locations (not null, unaffected)
+     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
+     * default=0.05)
+     */
+    public ConvexHullShapeSettings(Vec3Arg[] points, float maxConvexRadius) {
+        this(points, maxConvexRadius, null);
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param points an array of point locations (not null, unaffected)
+     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
+     * default=0.05)
+     * @param material the desired surface properties (not null, unaffected) or
+     * {@code null} for default properties (default=null)
+     */
+    public ConvexHullShapeSettings(Vec3Arg[] points, float maxConvexRadius,
+            ConstPhysicsMaterial material) {
         int numPoints = points.length;
         int numFloats = numAxes * numPoints;
         FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
@@ -66,8 +140,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
             buffer.put(point.getY());
             buffer.put(point.getZ());
         }
-        float maxConvexRadius = PhysicsSettings.cDefaultConvexRadius;
-        long materialVa = 0L;
+        long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createSettings(
                 numPoints, buffer, maxConvexRadius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
@@ -82,8 +155,37 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * unaffected)
      */
     public ConvexHullShapeSettings(int numPoints, FloatBuffer points) {
-        float maxConvexRadius = PhysicsSettings.cDefaultConvexRadius;
-        long materialVa = 0L;
+        this(numPoints, points, PhysicsSettings.cDefaultConvexRadius);
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param numPoints the number of points (&ge;0)
+     * @param points a direct buffer containing point locations (not null,
+     * unaffected)
+     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
+     * default=0.05)
+     */
+    public ConvexHullShapeSettings(
+            int numPoints, FloatBuffer points, float maxConvexRadius) {
+        this(numPoints, points, maxConvexRadius, null);
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param numPoints the number of points (&ge;0)
+     * @param points a direct buffer containing point locations (not null,
+     * unaffected)
+     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
+     * default=0.05)
+     * @param material the desired surface properties (not null, unaffected) or
+     * {@code null} for default properties (default=null)
+     */
+    public ConvexHullShapeSettings(int numPoints, FloatBuffer points,
+            float maxConvexRadius, ConstPhysicsMaterial material) {
+        long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createSettings(
                 numPoints, points, maxConvexRadius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
