@@ -338,6 +338,15 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
+     * Mark the native {@code Shape} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long shapeVa = va();
+        setEmbedded(shapeVa);
+    }
+
+    /**
      * Create a counted reference to the native {@code Shape}.
      *
      * @return a new JVM object with a new native object assigned
@@ -382,6 +391,8 @@ abstract public class Shape extends NonCopyable
             long shapeVa, long matrixVa, float sx, float sy, float sz);
 
     native static boolean mustBeStatic(long shapeVa);
+
+    native private static void setEmbedded(long shapeVa);
 
     native static void setUserData(long shapeVa, long value);
 

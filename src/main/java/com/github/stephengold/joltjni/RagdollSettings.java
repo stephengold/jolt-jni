@@ -140,7 +140,16 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Create a counted reference to the settings.
+     * Mark the native {@code RagdollSettings} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long settingsVa = va();
+        setEmbedded(settingsVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code RagdollSettings}.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -169,6 +178,8 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     native private static int getRefCount(long settingsVa);
 
     native static long getSkeleton(long settingsVa);
+
+    native private static void setEmbedded(long settingsVa);
 
     native static boolean stabilize(long settingsVa);
 

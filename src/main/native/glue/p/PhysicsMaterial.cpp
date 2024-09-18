@@ -77,6 +77,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterial_sDef
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterial
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterial_setEmbedded
+  (JNIEnv *, jclass, jlong materialVa) {
+    PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    pMaterial->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsMaterial
  * Method:    toRef
  * Signature: (J)J
  */

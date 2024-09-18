@@ -441,7 +441,17 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Create a counted reference to the settings.
+     * Mark the native {@code CharacterVirtualSettings} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long settingsVa = va();
+        setEmbedded(settingsVa);
+    }
+
+    /**
+     * Create a counted reference to the native
+     * {@code CharacterVirtualSettings}.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -497,6 +507,8 @@ public class CharacterVirtualSettings
 
     native private static void setCollisionTolerance(
             long settingsVa, float tolerance);
+
+    native private static void setEmbedded(long settingsVa);
 
     native private static void setHitReductionCosMaxAngle(
             long settingsVa, float cosine);

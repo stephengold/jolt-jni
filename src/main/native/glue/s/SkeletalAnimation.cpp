@@ -78,6 +78,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletalAnimation_sam
 
 /*
  * Class:     com_github_stephengold_joltjni_SkeletalAnimation
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletalAnimation_setEmbedded
+  (JNIEnv *, jclass, jlong animationVa) {
+    SkeletalAnimation * const pAnimation
+            = reinterpret_cast<SkeletalAnimation *> (animationVa);
+    pAnimation->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SkeletalAnimation
  * Method:    toRef
  * Signature: (J)J
  */

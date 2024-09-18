@@ -284,6 +284,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_setEmbedded
+  (JNIEnv *, jclass, jlong settingsVa) {
+    CharacterVirtualSettings * const pSettings
+            = reinterpret_cast<CharacterVirtualSettings *> (settingsVa);
+    pSettings->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
  * Method:    setHitReductionCosMaxAngle
  * Signature: (JF)V
  */

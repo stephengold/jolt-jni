@@ -280,6 +280,15 @@ abstract public class Constraint extends NonCopyable
     }
 
     /**
+     * Mark the native {@code Constraint} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long constraintVa = va();
+        setEmbedded(constraintVa);
+    }
+
+    /**
      * Create a counted reference to the native {@code Constraint}.
      *
      * @return a new JVM object with a new native object assigned
@@ -315,6 +324,8 @@ abstract public class Constraint extends NonCopyable
 
     native private static void setConstraintPriority(
             long constraintVa, int level);
+
+    native private static void setEmbedded(long constraintVa);
 
     native private static void setEnabled(long constraintVa, boolean setting);
 

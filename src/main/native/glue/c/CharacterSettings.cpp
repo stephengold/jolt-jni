@@ -116,6 +116,18 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_get
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterSettings
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_setEmbedded
+  (JNIEnv *, jclass, jlong settingsVa) {
+    CharacterSettings * const pSettings
+            = reinterpret_cast<CharacterSettings *> (settingsVa);
+    pSettings->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterSettings
  * Method:    setFriction
  * Signature: (JF)V
  */

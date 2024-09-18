@@ -63,6 +63,17 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Skeleton_getRefCount
 
 /*
  * Class:     com_github_stephengold_joltjni_Skeleton
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Skeleton_setEmbedded
+  (JNIEnv *, jclass, jlong skeletonVa) {
+    Skeleton * const pSkeleton = reinterpret_cast<Skeleton *> (skeletonVa);
+    pSkeleton->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Skeleton
  * Method:    toRef
  * Signature: (J)J
  */

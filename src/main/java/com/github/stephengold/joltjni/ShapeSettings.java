@@ -179,7 +179,16 @@ abstract public class ShapeSettings
     }
 
     /**
-     * Create a counted reference to these settings.
+     * Mark the native {@code ShapeSettings} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long settingsVa = va();
+        setEmbedded(settingsVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code ShapeSettings}.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -201,6 +210,8 @@ abstract public class ShapeSettings
     native private static int getRefCount(long settingsVa);
 
     native private static long getUserData(long settingsVa);
+
+    native private static void setEmbedded(long settingsVa);
 
     native private static void setUserData(long settingsVa, long value);
 

@@ -132,6 +132,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_getS
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_setEmbedded
+  (JNIEnv *, jclass, jlong settingsVa) {
+    RagdollSettings * const pSettings
+            = reinterpret_cast<RagdollSettings *> (settingsVa);
+    pSettings->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
  * Method:    stabilize
  * Signature: (J)Z
  */

@@ -445,7 +445,16 @@ public class Character
     }
 
     /**
-     * Create a counted reference to the character.
+     * Mark the native {@code Character} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long characterVa = va();
+        setEmbedded(characterVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code Character}.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -501,6 +510,8 @@ public class Character
 
     native private static void removeFromPhysicsSystem(
             long characterVa, boolean lockBodies);
+
+    native private static void setEmbedded(long characterVa);
 
     native private static void setLayer(
             long characterVa, int layer, boolean lockBodies);

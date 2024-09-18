@@ -174,7 +174,16 @@ public class CharacterSettings
     }
 
     /**
-     * Create a counted reference to the settings.
+     * Mark the native {@code CharacterSettings} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long settingsVa = va();
+        setEmbedded(settingsVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code CharacterSettings}.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -200,6 +209,8 @@ public class CharacterSettings
     native private static float getMass(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
+
+    native private static void setEmbedded(long settingsVa);
 
     native private static void setFriction(long settingsVa, float friction);
 

@@ -139,7 +139,16 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Create a counted reference to the scene.
+     * Mark the native {@code PhysicsScene} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long sceneVa = va();
+        setEmbedded(sceneVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code PhysicsScene}.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -172,6 +181,8 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
 
     native private static void saveBinaryState(long sceneVa, long streamVa,
             boolean saveShapes, boolean saveGroupFilter);
+
+    native private static void setEmbedded(long sceneVa);
 
     native private static long toRef(long sceneVa);
 }

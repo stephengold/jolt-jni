@@ -279,6 +279,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_removeFromP
 
 /*
  * Class:     com_github_stephengold_joltjni_Character
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_setEmbedded
+  (JNIEnv *, jclass, jlong characterVa) {
+    Character * const pCharacter = reinterpret_cast<Character *> (characterVa);
+    pCharacter->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Character
  * Method:    setLayer
  * Signature: (JIZ)V
  */

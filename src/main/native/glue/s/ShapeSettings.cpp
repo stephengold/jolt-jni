@@ -94,6 +94,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_getUse
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeSettings
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_setEmbedded
+  (JNIEnv *, jclass, jlong settingsVa) {
+    ShapeSettings * const pSettings
+            = reinterpret_cast<ShapeSettings *> (settingsVa);
+    pSettings->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeSettings
  * Method:    setUserData
  * Signature: (JJ)V
  */

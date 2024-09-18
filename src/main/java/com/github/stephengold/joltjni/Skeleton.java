@@ -70,7 +70,16 @@ public class Skeleton extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Create a counted reference to the skeleton.
+     * Mark the native {@code Skeleton} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long skeletonVa = va();
+        setEmbedded(skeletonVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code Skeleton}.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -88,6 +97,8 @@ public class Skeleton extends JoltPhysicsObject implements RefTarget {
     native private static void calculateParentJointIndices(long skeletonVa);
 
     native private static int getRefCount(long skeletonVa);
+
+    native private static void setEmbedded(long skeletonVa);
 
     native private static long toRef(long skeletonVa);
 }

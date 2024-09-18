@@ -98,6 +98,15 @@ public class PhysicsMaterial extends SerializableObject
     }
 
     /**
+     * Mark the native {@code PhysicsMaterial} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long materialVa = va();
+        setEmbedded(materialVa);
+    }
+
+    /**
      * Create a counted reference to the native {@code PhysicsMaterial}.
      *
      * @return a new JVM object with a new native object assigned
@@ -118,6 +127,8 @@ public class PhysicsMaterial extends SerializableObject
     native private static int getRefCount(long materialVa);
 
     native private static long sDefault(boolean dummy);
+
+    native private static void setEmbedded(long materialVa);
 
     native private static long toRef(long materialVa);
 }

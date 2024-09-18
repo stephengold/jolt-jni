@@ -41,6 +41,11 @@ public interface RefTarget {
     int getRefCount();
 
     /**
+     * Mark the target as embedded.
+     */
+    void setEmbedded();
+
+    /**
      * Create a counted reference to the target.
      *
      * @return a new JVM object with a new native object assigned

@@ -519,6 +519,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_setEmbedded
+  (JNIEnv *, jclass, jlong characterVa) {
+    CharacterVirtual * const pCharacter
+            = reinterpret_cast<CharacterVirtual *> (characterVa);
+    pCharacter->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    setEnhancedInternalEdgeRemoval
  * Signature: (JZ)V
  */

@@ -87,6 +87,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_removeFromPhy
 
 /*
  * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_setEmbedded
+  (JNIEnv *, jclass, jlong ragdollVa) {
+    Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    pRagdoll->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
  * Method:    setPose
  * Signature: (JJZ)V
  */

@@ -86,7 +86,16 @@ public class SkeletalAnimation extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Create a counted reference to the animation.
+     * Mark the native {@code SkeletalAnimation} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long animationVa = va();
+        setEmbedded(animationVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code SkeletalAnimation}.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -106,6 +115,8 @@ public class SkeletalAnimation extends JoltPhysicsObject implements RefTarget {
     native private static int getRefCount(long animationVa);
 
     native static void sample(long animationVa, float time, long poseVa);
+
+    native private static void setEmbedded(long constraintVa);
 
     native private static long toRef(long animationVa);
 }

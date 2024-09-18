@@ -156,6 +156,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_saveBina
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_setEmbedded
+  (JNIEnv *, jclass, jlong sceneVa) {
+    PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
+    pScene->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
  * Method:    toRef
  * Signature: (J)J
  */

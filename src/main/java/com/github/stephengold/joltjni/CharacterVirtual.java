@@ -589,7 +589,16 @@ public class CharacterVirtual
     }
 
     /**
-     * Create a counted reference to the character.
+     * Mark the native {@code CharacterVirtual} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long characterVa = va();
+        setEmbedded(characterVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code CharacterVirtual}.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -681,6 +690,8 @@ public class CharacterVirtual
 
     native private static boolean hasCollidedWithCharacter(
             long characterVa, long otherVa);
+
+    native private static void setEmbedded(long characterVa);
 
     native private static void setEnhancedInternalEdgeRemoval(
             long characterVa, boolean enable);

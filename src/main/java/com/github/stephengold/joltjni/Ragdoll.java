@@ -116,7 +116,16 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
 
     /**
-     * Create a counted reference to the ragdoll.
+     * Mark the native {@code Ragdoll} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long ragdollVa = va();
+        setEmbedded(ragdollVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code Ragdoll}.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -138,6 +147,8 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     native private static int getRefCount(long ragdollVa);
 
     native static void removeFromPhysicsSystem(long ragdollVa);
+
+    native private static void setEmbedded(long ragdollVa);
 
     native static void setPose(long ragdollVa, long poseVa, boolean lockBodies);
 

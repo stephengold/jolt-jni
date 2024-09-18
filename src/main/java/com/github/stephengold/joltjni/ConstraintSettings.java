@@ -238,7 +238,16 @@ abstract public class ConstraintSettings
     }
 
     /**
-     * Create a counted reference to these settings.
+     * Mark the native {@code ConstraintSettings} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long settingsVa = va();
+        setEmbedded(settingsVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code ConstraintSettings}.
      *
      * @return a new JVM object with a new native object assigned
      */
@@ -267,6 +276,8 @@ abstract public class ConstraintSettings
 
     native private static void setConstraintPriority(
             long settingsVa, int level);
+
+    native private static void setEmbedded(long settingsVa);
 
     native private static void setEnabled(long settingsVa, boolean value);
 

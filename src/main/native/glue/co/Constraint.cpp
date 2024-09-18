@@ -170,6 +170,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraint_setConstra
 
 /*
  * Class:     com_github_stephengold_joltjni_Constraint
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraint_setEmbedded
+  (JNIEnv *, jclass, jlong constraintVa) {
+    Constraint * const pConstraint
+            = reinterpret_cast<Constraint *> (constraintVa);
+    pConstraint->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Constraint
  * Method:    setEnabled
  * Signature: (JZ)V
  */
