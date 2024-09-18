@@ -24,7 +24,8 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.template.Array;
 
 /**
- * A variable-length array of references to constraints.
+ * A variable-length array of references to constraints. (native type:
+ * {@code Array<Ref<Constraint>>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -57,6 +58,7 @@ public class Constraints extends Array<ConstraintRef> {
     public int capacity() {
         long arrayVa = va();
         int result = capacity(arrayVa);
+
         return result;
     }
 

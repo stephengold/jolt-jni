@@ -24,7 +24,8 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.template.Array;
 
 /**
- * A variable-length list (array) of indexed triangles.
+ * A variable-length list (array) of indexed triangles. (native type:
+ * {@code Array<IndexedTriangle>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -52,6 +53,7 @@ final public class IndexedTriangleList extends Array<IndexedTriangle> {
     public int capacity() {
         long listVa = va();
         int result = capacity(listVa);
+
         return result;
     }
 

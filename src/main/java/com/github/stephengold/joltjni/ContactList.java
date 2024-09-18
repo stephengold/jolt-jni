@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.template.Array;
 
 /**
  * A variable-length list (array) of character contacts. (native type:
- * CharacterVirtual::ContactList)
+ * {@code Array<Contact>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -58,6 +58,7 @@ public class ContactList extends Array<Contact> {
     public int capacity() {
         long listVa = va();
         int result = capacity(listVa);
+
         return result;
     }
 

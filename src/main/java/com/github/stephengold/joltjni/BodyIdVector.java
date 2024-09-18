@@ -53,6 +53,7 @@ public class BodyIdVector extends Array<BodyId> {
     public int capacity() {
         long vectorVa = va();
         int result = capacity(vectorVa);
+
         return result;
     }
 
