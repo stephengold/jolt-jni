@@ -39,6 +39,14 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     // constructors
 
     /**
+     * Instantiate a null reference.
+     */
+    public ShapeRefC() {
+        long refVa = createNullReference();
+        setVirtualAddress(refVa, () -> free(refVa));
+    }
+
+    /**
      * Instantiate a reference with the specified native object assigned.
      *
      * @param refVa the virtual address of the native object to assign (not
@@ -261,6 +269,8 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     // native private methods
 
     native private static long copy(long refVa);
+
+    native private static long createNullReference();
 
     native private static void free(long refVa);
 

@@ -45,6 +45,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_copy
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeRefC
+ * Method:    createNullReference
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_createNullReference
+  (JNIEnv *, jclass) {
+    ShapeRefC * const pResult = new ShapeRefC();
+    TRACE_NEW("ShapeRefC", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeRefC
  * Method:    free
  * Signature: (J)V
  */
