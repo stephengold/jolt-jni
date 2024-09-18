@@ -102,7 +102,8 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     // RefTarget methods
 
     /**
-     * Count the active references to the ragdoll. The ragdoll is unaffected.
+     * Count the active references to the native {@code Ragdoll}. The ragdoll is
+     * unaffected.
      *
      * @return the count (&ge;0)
      */

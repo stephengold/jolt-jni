@@ -431,8 +431,8 @@ public class Character
     // RefTarget methods
 
     /**
-     * Count the active references to the character. The character is
-     * unaffected.
+     * Count the active references to the native {@code Character}. The
+     * character is unaffected.
      *
      * @return the count (&ge;0)
      */

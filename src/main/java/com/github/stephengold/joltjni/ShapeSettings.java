@@ -152,6 +152,7 @@ abstract public class ShapeSettings
 
     /**
      * Alter the user data, which holds the {@code EShapeSubType} ordinal.
+     * (native attribute: mUserData)
      *
      * @param shapeSubType the desired value (not null)
      */
@@ -164,7 +165,8 @@ abstract public class ShapeSettings
     // RefTarget methods
 
     /**
-     * Count the active references to these settings.
+     * Count the active references to the native {@code ShapeSettings}. The
+     * settings are unaffected.
      *
      * @return the count (&ge;0)
      */

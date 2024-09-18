@@ -92,7 +92,8 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     // RefTarget methods
 
     /**
-     * Count the active references to the scene. The scene is unaffected.
+     * Count the active references to the native {@code PhysicsScene}. The scene
+     * is unaffected.
      *
      * @return the count (&ge;0)
      */

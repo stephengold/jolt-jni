@@ -266,7 +266,8 @@ abstract public class Constraint extends NonCopyable
     // RefTarget methods
 
     /**
-     * Count active references to the constraint.
+     * Count the active references to the native {@code Constraint}. The
+     * constraint is unaffected.
      *
      * @return the count (&ge;0)
      */

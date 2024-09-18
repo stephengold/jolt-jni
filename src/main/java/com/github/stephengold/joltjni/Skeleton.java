@@ -56,7 +56,8 @@ public class Skeleton extends JoltPhysicsObject implements RefTarget {
     // RefTarget methods
 
     /**
-     * Count the active references to the skeleton. The skeleton is unaffected.
+     * Count the active references to the native {@code Skeleton}. The skeleton
+     * is unaffected.
      *
      * @return the count (&ge;0)
      */

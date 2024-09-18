@@ -224,7 +224,8 @@ abstract public class ConstraintSettings
     // RefTarget methods
 
     /**
-     * Count the active references to these settings.
+     * Count the active references to the native {@code ConstraintSettings}. The
+     * settings are unaffected.
      *
      * @return the count (&ge;0)
      */

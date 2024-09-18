@@ -84,7 +84,8 @@ public class PhysicsMaterial extends SerializableObject
     // RefTarget methods
 
     /**
-     * Count the active references to the shape.
+     * Count the active references to the native {@code PhysicsMaterial}. The
+     * material is unaffected.
      *
      * @return the count (&ge;0)
      */

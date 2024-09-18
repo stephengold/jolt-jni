@@ -72,8 +72,8 @@ public class SkeletalAnimation extends JoltPhysicsObject implements RefTarget {
     // RefTarget methods
 
     /**
-     * Count the active references to the animation. The animation is
-     * unaffected.
+     * Count the active references to the native {@code SkeletalAnimation}. The
+     * animation is unaffected.
      *
      * @return the count (&ge;0)
      */

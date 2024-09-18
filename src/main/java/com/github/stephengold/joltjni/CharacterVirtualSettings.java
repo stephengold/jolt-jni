@@ -427,7 +427,8 @@ public class CharacterVirtualSettings
     // RefTarget methods
 
     /**
-     * Count the active references to the settings. The settings are unaffected.
+     * Count the active references to the native
+     * {@code CharacterVirtualSettings}. The settings are unaffected.
      *
      * @return the count (&ge;0)
      */
