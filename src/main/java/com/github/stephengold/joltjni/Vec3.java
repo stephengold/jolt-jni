@@ -47,6 +47,10 @@ final public class Vec3 implements Vec3Arg {
      * the 3rd (Z) component
      */
     private float z;
+    /**
+     * lazily allocated distribution, used in randomization
+     */
+    private static UniformRealDistribution distro = null;
     // *************************************************************************
     // constructors
 
@@ -277,6 +281,27 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Generate a pseudo-random unit vector.
+     * <p>
+     * The results are not uniformly distributed over the unit sphere.
+     *
+     * @param engine the generator to use (not null)
+     * @return a new unit vector
+     */
+    public static Vec3 sRandom(DefaultRandomEngine engine) {
+        assert engine != null;
+        if (distro == null) {
+            distro = new UniformRealDistribution(0f, 1f);
+        }
+
+        float theta = Jolt.JPH_PI * distro.nextFloat(engine);
+        float phi = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
+        Vec3 result = sUnitSpherical(theta, phi);
+
+        return result;
+    }
+
+    /**
      * Create a vector with all components identical.
      *
      * @param value the desired component value
@@ -300,6 +325,33 @@ final public class Vec3 implements Vec3Arg {
         float z = v1.getZ() - v2.getZ();
         Vec3 result = new Vec3(x, y, z);
 
+        return result;
+    }
+
+    /**
+     * Generate a unit vector with the specified spherical coordinates.
+     *
+     * @param theta angle from the +Z axis (in radians)
+     * @param phi angle from the +X axis in the X-Y plane (in radians)
+     * @return a new unit vector
+     */
+    public static Vec3 sUnitSpherical(float theta, float phi) {
+        float sinTheta = (float) Math.sin(theta);
+        float vx = sinTheta * (float) Math.cos(phi);
+        float vy = sinTheta * (float) Math.sin(phi);
+        float vz = (float) Math.cos(theta);
+        Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Create a vector with all components zero.
+     *
+     * @return a new vector
+     */
+    public static Vec3 sZero() {
+        Vec3 result = new Vec3();
         return result;
     }
     // *************************************************************************
