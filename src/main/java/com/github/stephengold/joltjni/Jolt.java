@@ -36,6 +36,10 @@ final public class Jolt {
     // constants
 
     /**
+     * single-precision value of Pi
+     */
+    final public static float JPH_PI = (float) Math.PI;
+    /**
      * standard 2nd argument to the {@code JobSystemThreadPool} constructor
      * <p>
      * value should match Jolt/Physics/PhysicsSettings.h

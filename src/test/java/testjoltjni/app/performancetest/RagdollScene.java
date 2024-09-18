@@ -101,7 +101,7 @@ class RagdollScene implements PerformanceTestScene
 
 		// Create ragdoll piles
 		Mt19937 random = new Mt19937();
-		UniformRealDistribution angle = new UniformRealDistribution(0.0f, (float)Math.PI);
+		UniformRealDistribution angle = new UniformRealDistribution(0.0f, Jolt.JPH_PI);
 		int group_id = 1;
 		for (int row = 0; row < mNumPilesPerAxis; ++row)
 			for (int col = 0; col < mNumPilesPerAxis; ++col)
