@@ -45,11 +45,11 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
- * Method:    createConvexHullShapeSettings
- * Signature: (ILjava/nio/FloatBuffer;)J
+ * Method:    createSettings
+ * Signature: (ILjava/nio/FloatBuffer;FJ)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_createConvexHullShapeSettings
-  (JNIEnv *pEnv, jclass, jint numPoints, jobject buffer) {
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_createSettings
+  (JNIEnv *pEnv, jclass, jint numPoints, jobject buffer, jfloat maxConvexRadius, jlong materialVa) {
     const jfloat * const pFloats
             = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
     Vec3 * const pPoints = new Vec3[numPoints];
@@ -60,8 +60,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
         const float z = pFloats[3 * i + 2];
         pPoints[i].Set(x, y, z);
     }
-    ConvexHullShapeSettings * const pResult
-            = new ConvexHullShapeSettings(pPoints, numPoints);
+    const PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    ConvexHullShapeSettings * const pResult = new ConvexHullShapeSettings(
+            pPoints, numPoints, maxConvexRadius, pMaterial);
     TRACE_NEW("ConvexHullShapeSettings", pResult)
     TRACE_DELETE("Vec3[]", pPoints)
     delete pPoints;

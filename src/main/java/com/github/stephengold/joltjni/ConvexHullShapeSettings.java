@@ -66,7 +66,10 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
             buffer.put(point.getY());
             buffer.put(point.getZ());
         }
-        long settingsVa = createConvexHullShapeSettings(numPoints, buffer);
+        float maxConvexRadius = PhysicsSettings.cDefaultConvexRadius;
+        long materialVa = 0L;
+        long settingsVa = createSettings(
+                numPoints, buffer, maxConvexRadius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EShapeSubType.ConvexHull);
     }
@@ -79,7 +82,10 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * unaffected)
      */
     public ConvexHullShapeSettings(int numPoints, FloatBuffer points) {
-        long settingsVa = createConvexHullShapeSettings(numPoints, points);
+        float maxConvexRadius = PhysicsSettings.cDefaultConvexRadius;
+        long materialVa = 0L;
+        long settingsVa = createSettings(
+                numPoints, points, maxConvexRadius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EShapeSubType.ConvexHull);
     }
@@ -175,8 +181,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
 
     native private static int countPoints(long settingsVa);
 
-    native private static long createConvexHullShapeSettings(
-            int numPoints, FloatBuffer points);
+    native private static long createSettings(int numPoints, FloatBuffer points,
+            float convexRadius, long materialVa);
 
     native private static float getHullTolerance(long settingsVa);
 
