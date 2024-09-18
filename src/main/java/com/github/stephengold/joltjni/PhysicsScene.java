@@ -33,7 +33,15 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     // constructors
 
     /**
-     * Instantiate a state with the specified native object assigned but not
+     * Instantiate an empty scene.
+     */
+    public PhysicsScene() {
+        long sceneVa = createDefaultScene();
+        setVirtualAddress(sceneVa, () -> free(sceneVa));
+    }
+
+    /**
+     * Instantiate a scene with the specified native object assigned but not
      * owned.
      *
      * @param sceneVa the virtual address of the native object to assign (not
@@ -55,6 +63,17 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
         boolean result = fixInvalidScales(sceneVa);
 
         return result;
+    }
+
+    /**
+     * Load the current state of the specified physics system.
+     *
+     * @param system the physics system to load from (not null, unaffected)
+     */
+    public void fromPhysicsSystem(PhysicsSystem system) {
+        long sceneVa = va();
+        long systemVa = system.va();
+        fromPhysicsSystem(sceneVa, systemVa);
     }
 
     /**
@@ -87,6 +106,20 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
         boolean result = createBodies(sceneVa, systemVa);
 
         return result;
+    }
+
+    /**
+     * Save the state of this object in binary form.
+     *
+     * @param stream the stream to write to (not null)
+     * @param saveShapes if true, save the shapes
+     * @param saveGroupFilter if true, save the group filter
+     */
+    public void saveBinaryState(
+            StreamOut stream, boolean saveShapes, boolean saveGroupFilter) {
+        long sceneVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(sceneVa, streamVa, saveShapes, saveGroupFilter);
     }
     // *************************************************************************
     // RefTarget methods
@@ -123,13 +156,22 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
 
     native static boolean createBodies(long sceneVa, long systemVa);
 
+    native private static long createDefaultScene();
+
     native static boolean fixInvalidScales(long sceneVa);
+
+    native private static void free(long sceneVa);
+
+    native private static void fromPhysicsSystem(long sceneVa, long systemVa);
 
     native static long getBody(long sceneVa, int bodyIndex);
 
     native static int getNumBodies(long sceneVa);
 
     native private static int getRefCount(long sceneVa);
+
+    native private static void saveBinaryState(long sceneVa, long streamVa,
+            boolean saveShapes, boolean saveGroupFilter);
 
     native private static long toRef(long sceneVa);
 }

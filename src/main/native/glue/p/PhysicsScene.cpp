@@ -54,6 +54,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_crea
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    createDefaultScene
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_createDefaultScene
+  (JNIEnv *, jclass) {
+    PhysicsScene * const pScene = new PhysicsScene();
+    TRACE_NEW("PhysicsScene", pScene)
+    return reinterpret_cast<jlong> (pScene);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
  * Method:    fixInvalidScales
  * Signature: (J)Z
  */
@@ -62,6 +74,31 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_fixI
     PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
     const bool result = pScene->FixInvalidScales();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_free
+  (JNIEnv *, jclass, jlong sceneVa) {
+    PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
+    TRACE_DELETE("PhysicsScene", pScene)
+    delete pScene;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    fromPhysicsSystem
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_fromPhysicsSystem
+  (JNIEnv *, jclass, jlong sceneVa, jlong systemVa) {
+    PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    pScene->FromPhysicsSystem(pSystem);
 }
 
 /*
@@ -101,6 +138,20 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getRefCo
             = reinterpret_cast<PhysicsScene *> (sceneVa);
     const uint32 result = pScene->GetRefCount();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    saveBinaryState
+ * Signature: (JJZZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_saveBinaryState
+  (JNIEnv *, jclass, jlong sceneVa, jlong streamVa, jboolean saveShapes,
+  jboolean saveGroupFilter) {
+    const PhysicsScene * const pScene
+            = reinterpret_cast<PhysicsScene *> (sceneVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    pScene->SaveBinaryState(*pStream, saveShapes, saveGroupFilter);
 }
 
 /*
