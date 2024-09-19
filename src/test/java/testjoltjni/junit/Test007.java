@@ -269,13 +269,7 @@ public class Test007 {
         ShapeRefC ref = result.get();
         MeshShape shape = (MeshShape) ref.getPtr();
 
-        TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
-        Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
-        Assert.assertEquals(3, shape.getRefCount());
-        Assert.assertEquals(EShapeSubType.Mesh, shape.getSubType());
-        Assert.assertEquals(EShapeType.Mesh, shape.getType());
-        Assert.assertEquals(0L, shape.getUserData());
-        Assert.assertTrue(shape.mustBeStatic());
+        testMeshDefaults(shape);
 
         TestUtils.testClose(
                 shape, ref, result, settings, triangle2, triangle1, indices);
@@ -585,6 +579,21 @@ public class Test007 {
         Assert.assertEquals(EShapeType.Convex, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
         Assert.assertFalse(shape.mustBeStatic());
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code MeshShape}.
+     *
+     * @param shape the shape to test (not null, unaffected)
+     */
+    private static void testMeshDefaults(MeshShape shape) {
+        TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
+        Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
+        Assert.assertEquals(EShapeSubType.Mesh, shape.getSubType());
+        Assert.assertEquals(EShapeType.Mesh, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+        Assert.assertTrue(shape.mustBeStatic());
     }
 
     /**
