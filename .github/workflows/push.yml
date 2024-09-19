@@ -8,12 +8,29 @@ jobs:
   Java11-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-20.04
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 11
+      - uses: actions/checkout@v4
+      - name: gradlew -Pflavor=Dp -Ptarget=Linux64 build install
+        run: |
+          ./gradlew -Pflavor=Dp -Ptarget=Linux64 build install \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+
+  Java21-Linux:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: ubuntu-20.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/wrapper-validation@v4
       - uses: mattsb42/not-grep@master
@@ -36,7 +53,7 @@ jobs:
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
             -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
-  Java17-MacOS:
+  Java21-MacOS:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-14
     timeout-minutes: 20
@@ -44,7 +61,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 17
+          java-version: 21
       - uses: actions/checkout@v4
       - name: gradlew -Ptarget=MacOSX_ARM64 build install
         run: |
