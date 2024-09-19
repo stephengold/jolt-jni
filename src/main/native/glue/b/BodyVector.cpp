@@ -45,30 +45,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyVector_capacity
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyVector
- * Method:    createBodyVector
- * Signature: ()J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyVector_createBodyVector
-  (JNIEnv *, jclass) {
-    BodyVector * const pVector = new BodyVector();
-    TRACE_NEW("BodyVector", pVector)
-    return reinterpret_cast<jlong> (pVector);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BodyVector
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyVector_free
-  (JNIEnv *, jclass, jlong vectorVa) {
-    BodyVector * const pVector = reinterpret_cast<BodyVector *> (vectorVa);
-    TRACE_DELETE("BodyVector", pVector)
-    delete pVector;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BodyVector
  * Method:    getBody
  * Signature: (JI)J
  */

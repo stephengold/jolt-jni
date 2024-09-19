@@ -31,27 +31,38 @@ import com.github.stephengold.joltjni.template.Array;
  */
 public class BodyVector extends Array<Body> {
     // *************************************************************************
+    // fields
+
+    /**
+     * prevent premature garbage collection of the underlying
+     * {@code BodyManager}
+     */
+    final private BodyManager manager;
+    // *************************************************************************
     // constructors
 
     /**
-     * Instantiate an empty vector.
-     */
-    public BodyVector() {
-        long vectorVa = createBodyVector();
-        setVirtualAddress(vectorVa, () -> free(vectorVa));
-    }
-
-    /**
-     * Instantiate a vector with the specified native object assigned.
+     * Instantiate a vector with the specified native object assigned but not
+     * owned.
      *
+     * @param manager the underlying {@code BodyManager} (not null)
      * @param vectorVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
      */
-    BodyVector(long vectorVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(vectorVa) : null;
-        setVirtualAddress(vectorVa, freeingAction);
+    BodyVector(BodyManager manager, long vectorVa) {
+        this.manager = manager;
+        setVirtualAddress(vectorVa, null);
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Access the underlying {@code BodyManager}.
+     *
+     * @return the pre-existing instance (not null)
+     */
+    public BodyManager getManager() {
+        return manager;
     }
     // *************************************************************************
     // Array<Body> methods
@@ -74,13 +85,19 @@ public class BodyVector extends Array<Body> {
      * Access the body at the specified index.
      *
      * @param elementIndex the index from which to get the body (&ge;0)
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * else {@code null}
      */
     @Override
     public Body get(int elementIndex) {
         long vectorVa = va();
         long bodyVa = getBody(vectorVa, elementIndex);
-        Body result = new Body(bodyVa);
+        Body result;
+        if (bodyVa == 0L) {
+            result = null;
+        } else {
+            result = new Body(bodyVa);
+        }
 
         return result;
     }
@@ -125,10 +142,6 @@ public class BodyVector extends Array<Body> {
     // native private methods
 
     native private static int capacity(long vectorVa);
-
-    native private static long createBodyVector();
-
-    native private static void free(long vectorVa);
 
     native private static long getBody(long vectorVa, int elementIndex);
 
