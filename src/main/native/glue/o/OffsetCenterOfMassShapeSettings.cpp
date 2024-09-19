@@ -39,7 +39,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassSh
   (JNIEnv *, jclass, jfloat offsetX, jfloat offsetY, jfloat offsetZ, jlong baseShapeRefVa) {
     const Vec3 offset(offsetX, offsetY, offsetZ);
     const ShapeRefC * const pBaseRef
-        = reinterpret_cast<ShapeRefC *> (baseShapeRefVa);
+            = reinterpret_cast<ShapeRefC *> (baseShapeRefVa);
     OffsetCenterOfMassShapeSettings * const pResult
             = new OffsetCenterOfMassShapeSettings(offset, pBaseRef->GetPtr());
     TRACE_NEW("OffsetCenterOfMassShapeSettings", pResult)
@@ -54,7 +54,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassSh
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_getOffsetX
   (JNIEnv *, jclass, jlong ocomssVa) {
     const OffsetCenterOfMassShapeSettings * const pSettings
-        = reinterpret_cast<OffsetCenterOfMassShapeSettings *> (ocomssVa);
+            = reinterpret_cast<OffsetCenterOfMassShapeSettings *> (ocomssVa);
     const float result = pSettings->mOffset.GetX();
     return result;
 }
@@ -67,7 +67,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassS
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_getOffsetY
   (JNIEnv *, jclass, jlong ocomssVa) {
     const OffsetCenterOfMassShapeSettings * const pSettings
-        = reinterpret_cast<OffsetCenterOfMassShapeSettings *> (ocomssVa);
+            = reinterpret_cast<OffsetCenterOfMassShapeSettings *> (ocomssVa);
     const float result = pSettings->mOffset.GetY();
     return result;
 }
@@ -80,7 +80,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassS
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_getOffsetZ
   (JNIEnv *, jclass, jlong ocomssVa) {
     const OffsetCenterOfMassShapeSettings * const pSettings
-        = reinterpret_cast<OffsetCenterOfMassShapeSettings *> (ocomssVa);
+            = reinterpret_cast<OffsetCenterOfMassShapeSettings *> (ocomssVa);
     const float result = pSettings->mOffset.GetZ();
     return result;
 }
@@ -93,7 +93,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassS
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_setOffset
   (JNIEnv *, jclass, jlong ocomssVa, jfloat offsetX, jfloat offsetY, jfloat offsetZ) {
     OffsetCenterOfMassShapeSettings * const pSettings
-        = reinterpret_cast<OffsetCenterOfMassShapeSettings *> (ocomssVa);
+            = reinterpret_cast<OffsetCenterOfMassShapeSettings *> (ocomssVa);
     const Vec3 offset(offsetX, offsetY, offsetZ);
     pSettings->mOffset = offset;
 }

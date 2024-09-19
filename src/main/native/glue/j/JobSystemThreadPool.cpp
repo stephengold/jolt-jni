@@ -66,6 +66,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JobSystemThreadPool_f
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JobSystemThreadPool_setNumThreads
   (JNIEnv *, jclass, jlong systemVa, jint numThreads) {
     JobSystemThreadPool * const pSystem
-        = reinterpret_cast<JobSystemThreadPool *> (systemVa);
+            = reinterpret_cast<JobSystemThreadPool *> (systemVa);
     pSystem->SetNumThreads(numThreads);
 }

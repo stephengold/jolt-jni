@@ -42,7 +42,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSetting
     const Vec3 v2(v2x, v2y, v2z);
     const Vec3 v3(v3x, v3y, v3z);
     const TriangleShapeSettings * const pSettings
-        = new TriangleShapeSettings(v1, v2, v3, convexRadius);
+            = new TriangleShapeSettings(v1, v2, v3, convexRadius);
     TRACE_NEW("TriangleShapeSettings", pSettings)
     return reinterpret_cast<jlong> (pSettings);
 }
