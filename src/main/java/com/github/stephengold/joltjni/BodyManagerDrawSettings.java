@@ -27,14 +27,14 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class DrawSettings extends JoltPhysicsObject {
+public class BodyManagerDrawSettings extends JoltPhysicsObject {
     // *************************************************************************
     // constructors
 
     /**
      * Instantiate settings with the default values.
      */
-    public DrawSettings() {
+    public BodyManagerDrawSettings() {
         long settingsVa = createDrawSettings();
         setVirtualAddress(settingsVa, () -> free(settingsVa));
     }

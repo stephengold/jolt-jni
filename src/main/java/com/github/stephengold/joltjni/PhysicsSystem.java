@@ -108,7 +108,8 @@ public class PhysicsSystem extends NonCopyable {
      * @param settings the settings to use (not null)
      * @param renderer the renderer to use (not null)
      */
-    public void drawBodies(DrawSettings settings, DebugRenderer renderer) {
+    public void drawBodies(
+            BodyManagerDrawSettings settings, DebugRenderer renderer) {
         long systemVa = va();
         long settingsVa = settings.va();
         long rendererVa = renderer.va();

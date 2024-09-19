@@ -319,7 +319,7 @@ public static void main(String[] argv) throws IOException
 					if (enable_debug_renderer)
 					{
 						// Draw the state of the world
-						DrawSettings settings = new DrawSettings();
+						BodyManagerDrawSettings settings = new BodyManagerDrawSettings();
 						physics_system.drawBodies(settings, renderer);
 
 						// Mark end of frame

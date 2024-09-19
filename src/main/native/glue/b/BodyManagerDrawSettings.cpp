@@ -25,21 +25,21 @@ SOFTWARE.
  */
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Body/BodyManager.h>
-#include "auto/com_github_stephengold_joltjni_DrawSettings.h"
+#include "auto/com_github_stephengold_joltjni_BodyManagerDrawSettings.h"
 #include "glue/glue.h"
 
 using namespace JPH;
 
 /*
- * Class:     com_github_stephengold_joltjni_DrawSettings
+ * Class:     com_github_stephengold_joltjni_BodyManagerDrawSettings
  * Method:    createDrawSettings
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DrawSettings_createDrawSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManagerDrawSettings_createDrawSettings
   (JNIEnv *, jclass) {
 #ifdef JPH_DEBUG_RENDERER
     BodyManager::DrawSettings * const pResult = new BodyManager::DrawSettings();
-    TRACE_NEW("DrawSettings", pResult)
+    TRACE_NEW("BodyManager::DrawSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 #else
     return 0;
@@ -47,16 +47,16 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DrawSettings_createD
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_DrawSettings
+ * Class:     com_github_stephengold_joltjni_BodyManagerDrawSettings
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DrawSettings_free
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyManagerDrawSettings_free
   (JNIEnv *, jclass, jlong settingsVa) {
 #ifdef JPH_DEBUG_RENDERER
     BodyManager::DrawSettings * const pSettings
             = reinterpret_cast<BodyManager::DrawSettings *> (settingsVa);
-    TRACE_DELETE("DrawSettings", pSettings)
+    TRACE_DELETE("BodyManager::DrawSettings", pSettings)
     delete pSettings;
 #endif
 }
