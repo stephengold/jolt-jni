@@ -53,7 +53,7 @@ jobs:
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
             -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
-  Java21-MacOS:
+  Java21-MacOSX_ARM64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-14
     timeout-minutes: 20
@@ -135,7 +135,7 @@ jobs:
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
             -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
-  Java21-MacOS:
+  Java21-MacOSX64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macOS-13
     timeout-minutes: 25
