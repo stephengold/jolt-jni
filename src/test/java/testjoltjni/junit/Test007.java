@@ -61,12 +61,15 @@ import com.github.stephengold.joltjni.TaperedCapsuleShape;
 import com.github.stephengold.joltjni.TaperedCapsuleShapeSettings;
 import com.github.stephengold.joltjni.TaperedCylinderShape;
 import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
+import com.github.stephengold.joltjni.Triangle;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VertexList;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -168,7 +171,21 @@ public class Test007 {
 
         testConvexHullDefaults(shape);
 
-        TestUtils.testClose(shape, ref, result, settings);
+        List<Vec3Arg> list = new ArrayList<>(4);
+        list.add(new Vec3(3f, 3f, 3f));
+        list.add(new Vec3(-3f, 3f, -3f));
+        list.add(new Vec3(3f, -3f, -3f));
+        list.add(new Vec3(-3f, -3f, 3f));
+        settings = new ConvexHullShapeSettings(list);
+        result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ref = result.get();
+        ConvexHullShape shape2 = (ConvexHullShape) ref.getPtr();
+
+        testConvexHullDefaults(shape2);
+
+        TestUtils.testClose(shape2, shape, ref, result, settings);
         System.gc();
     }
 
@@ -271,7 +288,35 @@ public class Test007 {
 
         testMeshDefaults(shape);
 
-        TestUtils.testClose(
+        Float3 v0 = new Float3(1f, 0f, 1f);
+        Float3 v1 = new Float3(1f, 0f, -1f);
+        Float3 v2 = new Float3(-1f, 0f, 1f);
+        Float3 v3 = new Float3(-1f, 0f, -1f);
+        Triangle tri1 = new Triangle(v0, v2, v3);
+        Triangle tri2 = new Triangle(v3, v1, v0);
+        List<Triangle> list = new ArrayList<>(2);
+        list.add(tri1);
+        list.add(tri2);
+        settings = new MeshShapeSettings(list);
+        result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ref = result.get();
+        MeshShape shape2 = (MeshShape) ref.getPtr();
+
+        testMeshDefaults(shape2);
+
+        Triangle[] array = {tri1, tri2};
+        settings = new MeshShapeSettings(array);
+        result = settings.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ref = result.get();
+        MeshShape shape3 = (MeshShape) ref.getPtr();
+
+        testMeshDefaults(shape3);
+
+        TestUtils.testClose(shape3, shape2, tri2, tri1,
                 shape, ref, result, settings, triangle2, triangle1, indices);
         System.gc();
     }

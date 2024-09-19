@@ -47,10 +47,13 @@ import com.github.stephengold.joltjni.SphereShapeSettings;
 import com.github.stephengold.joltjni.StaticCompoundShapeSettings;
 import com.github.stephengold.joltjni.TaperedCapsuleShapeSettings;
 import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
+import com.github.stephengold.joltjni.Triangle;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VertexList;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -130,7 +133,14 @@ public class Test006 {
         testConvexHullSsDefaults(settings);
         testConvexHullSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        List<Vec3Arg> list = new ArrayList<>(1);
+        list.add(new Vec3());
+        ConvexHullShapeSettings settings2 = new ConvexHullShapeSettings(list);
+
+        testConvexHullSsDefaults(settings2);
+        testConvexHullSsSetters(settings2);
+
+        TestUtils.testClose(settings2, settings);
         System.gc();
     }
 
@@ -188,7 +198,19 @@ public class Test006 {
         testMeshSsDefaults(settings);
         testMeshSsSetters(settings);
 
-        TestUtils.testClose(settings, indices);
+        Triangle[] array = new Triangle[0];
+        MeshShapeSettings settings2 = new MeshShapeSettings(array);
+
+        testMeshSsDefaults(settings2);
+        testMeshSsSetters(settings2);
+
+        List<Triangle> list = new ArrayList<>(1);
+        MeshShapeSettings settings3 = new MeshShapeSettings(list);
+
+        testMeshSsDefaults(settings3);
+        testMeshSsSetters(settings3);
+
+        TestUtils.testClose(settings3, settings2, settings, indices);
         System.gc();
     }
 
