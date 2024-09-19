@@ -4,8 +4,9 @@
 [JVM] bindings for [Jolt Physics][jolt],
 to facilitate physics simulation in JVM languages such as [Java] and [Kotlin].
 
-Complete source code is provided under
+Source code is provided under
 [an MIT license][license].
+
 
 ## Translating JoltPhysics applications into Java
 
@@ -20,7 +21,7 @@ For example:
   which in jolt-jni is called `getPosition()`.
 
 Things become slightly more interesting when C++ templates
-and public member data are involved:
+and public member data are involved. For instance:
 
 + An array of body IDs is `Array<BodyID>` in JoltPhysics;
   in jolt-jni it’s called a `BodyIdVector`.
@@ -89,16 +90,17 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
     + `git checkout -b latest 0.7.0`
  + using a web browser:
     + browse to [the latest release][latest]
-    + follow the "Source code (zip)" link
+    + follow the "Source code (zip)" link at the bottom of the page
     + save the ZIP file
     + extract the contents of the saved ZIP file
     + `cd` to the extracted directory/folder
-4. Run the [Gradle] wrapper:
+4. (optional) Edit the "gradle.properties" file to configure the build.
+5. Run the [Gradle] wrapper:
   + using Bash or Fish or PowerShell or Zsh: `./gradlew build`
   + using Windows Command Prompt: `.\gradlew build`
 
 After a successful build,
-Maven artifacts will be found in "build/libs".
+artifacts will be found in "build/libs".
 
 You can run the "hello world" example app:
 + using Bash or Fish or PowerShell or Zsh: `./gradlew runHelloWorld`
