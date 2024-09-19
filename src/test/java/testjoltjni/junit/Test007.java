@@ -132,7 +132,7 @@ public class Test007 {
     }
 
     /**
-     * Test the {@code CapsuleShapeSettings} class.
+     * Test the {@code CapsuleShape} class.
      */
     private static void doCapsuleShape() {
         CapsuleShapeSettings settings = new CapsuleShapeSettings(1f, 1f);
@@ -564,7 +564,7 @@ public class Test007 {
     /**
      * Test the getters and defaults of the specified {@code CylinderShape}.
      *
-     * @param shape the settings to test (not null, unaffected)
+     * @param shape the shape to test (not null, unaffected)
      */
     private static void testCylinderDefaults(CylinderShape shape) {
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
@@ -582,7 +582,7 @@ public class Test007 {
      * Test the getters and defaults of the specified
      * {@code OffsetCenterOfMassShape}.
      *
-     * @param shape the settings to test (not null, unaffected)
+     * @param shape the shape to test (not null, unaffected)
      */
     private static void testOffsetCenterOfMassDefaults(
             OffsetCenterOfMassShape shape) {
@@ -600,7 +600,7 @@ public class Test007 {
     /**
      * Test the getters and defaults of the specified {@code SphereShape}.
      *
-     * @param shape the settings to test (not null, unaffected)
+     * @param shape the shape to test (not null, unaffected)
      */
     private static void testSphereDefaults(SphereShape shape) {
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
