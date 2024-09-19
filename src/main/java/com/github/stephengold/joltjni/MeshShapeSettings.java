@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import java.nio.FloatBuffer;
+import java.util.List;
 
 /**
  * Settings used to construct a {@code MeshShape}.
@@ -45,6 +46,38 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Instantiate settings for the specified list of triangles.
+     *
+     * @param triangleList the list of triangles (not null, unaffected)
+     */
+    public MeshShapeSettings(List<Triangle> triangleList) {
+        this(triangleList, new PhysicsMaterialList());
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param triangleList the list of triangles (not null, unaffected)
+     * @param materials the desired surface properties (not null, unaffected)
+     */
+    public MeshShapeSettings(
+            List<Triangle> triangleList, PhysicsMaterialList materials) {
+        int numTriangles = triangleList.size();
+        int numVertices = 3 * numTriangles;
+        int numFloats = 3 * numVertices;
+        FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
+        for (int i = 0; i < numTriangles; ++i) {
+            Triangle triangle = triangleList.get(i);
+            triangle.putVertices(buffer);
+        }
+        long materialsVa = materials.va();
+        long settingsVa = createSettingsFromTriangles(
+                numTriangles, buffer, materialsVa);
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.Mesh);
+    }
+
+    /**
      * Instantiate settings for the specified vertices and indices.
      *
      * @param vertices list of vertex locations (not null)
@@ -56,6 +89,38 @@ public class MeshShapeSettings extends ShapeSettings {
         long indicesVa = indices.va();
         long settingsVa
                 = createMeshShapeSettings(numVertices, buffer, indicesVa);
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.Mesh);
+    }
+
+    /**
+     * Instantiate settings for the specified array of triangles.
+     *
+     * @param triangleArray the array of triangles (not null, unaffected)
+     */
+    public MeshShapeSettings(Triangle[] triangleArray) {
+        this(triangleArray, new PhysicsMaterialList());
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param triangleArray the array of triangles (not null, unaffected)
+     * @param materials the desired surface properties (not null, unaffected)
+     */
+    public MeshShapeSettings(
+            Triangle[] triangleArray, PhysicsMaterialList materials) {
+        int numTriangles = triangleArray.length;
+        int numVertices = 3 * numTriangles;
+        int numFloats = 3 * numVertices;
+        FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
+        for (int i = 0; i < numTriangles; ++i) {
+            Triangle triangle = triangleArray[i];
+            triangle.putVertices(buffer);
+        }
+        long materialsVa = materials.va();
+        long settingsVa = createSettingsFromTriangles(
+                numTriangles, buffer, materialsVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EShapeSubType.Mesh);
     }
@@ -163,6 +228,9 @@ public class MeshShapeSettings extends ShapeSettings {
 
     native private static long createMeshShapeSettings(
             int numVertices, FloatBuffer vertices, long indicesVa);
+
+    native private static long createSettingsFromTriangles(
+            int numTriangles, FloatBuffer buffer, long materialsVa);
 
     native private static int countTriangles(long settingsVa);
 
