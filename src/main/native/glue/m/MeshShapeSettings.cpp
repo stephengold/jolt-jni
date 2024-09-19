@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
         const float x = pFloats[3 * i];
         const float y = pFloats[3 * i + 1];
         const float z = pFloats[3 * i + 2];
-        Float3 float3(x, y, z);
+        const Float3 float3(x, y, z);
         vertices.push_back(float3);
     }
     IndexedTriangleList * const pIndices
