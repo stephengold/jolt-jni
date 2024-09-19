@@ -1,11 +1,11 @@
 # jolt-jni
 
-[JVM](https://en.wikipedia.org/wiki/Java_virtual_machine) bindings
-for [Jolt Physics](https://jrouwe.github.io/JoltPhysics)
+[The Jolt-jni Project][project] provides
+[JVM] bindings for [Jolt Physics][jolt],
+to facilitate physics simulation in JVM languages such as [Java] and [Kotlin].
 
-Jolt-jni provides a thin layer atop Jolt Physics,
-to facilitate physics simulation in JVM languages such as Java and Kotlin.
-
+Complete source code is provided under
+[an MIT license][license].
 
 ## Translating JoltPhysics applications into Java
 
@@ -67,3 +67,11 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
 ## External links
 
 + [The JoltPhysics repo at GitHub](https://github.com/jrouwe/JoltPhysics)
+
+
+[java]: https://en.wikipedia.org/wiki/Java_(programming_language) "Java programming language"
+[jolt]: https://jrouwe.github.io/JoltPhysics "Jolt Physics project"
+[jvm]: https://en.wikipedia.org/wiki/Java_virtual_machine "Java Virtual Machine"
+[kotlin]: https://en.wikipedia.org/wiki/Kotlin_(programming_language) "Kotlin programming language"
+[license]: https://github.com/stephengold/jolt-jni/blob/master/LICENSE "jolt-jni license"
+[project]: https://github.com/stephengold/jolt-jni "Jolt-jni Project"
