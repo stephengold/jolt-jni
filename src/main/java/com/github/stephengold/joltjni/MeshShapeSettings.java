@@ -80,7 +80,7 @@ public class MeshShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified vertices and indices.
      *
-     * @param vertices list of vertex locations (not null)
+     * @param vertices list of vertex locations (not null, unaffected)
      * @param indices list of triangles that use those vertices (not null)
      */
     public MeshShapeSettings(VertexList vertices, IndexedTriangleList indices) {
