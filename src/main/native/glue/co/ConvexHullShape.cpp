@@ -26,6 +26,7 @@ SOFTWARE.
 #include <Jolt/Jolt.h>
 #include <Jolt/Physics/Collision/Shape/ConvexHullShape.h>
 #include "auto/com_github_stephengold_joltjni_ConvexHullShape.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -53,6 +54,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getFa
     const ConvexHullShape * const pShape
             = reinterpret_cast<ConvexHullShape *> (shapeVa);
     uint * const pTempArray = new uint[maxVertices];
+    TRACE_NEW("uint[]", pTempArray)
     const uint result
             = pShape->GetFaceVertices(faceIndex, maxVertices, pTempArray);
     jboolean isCopy;
@@ -60,6 +62,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getFa
     for (int i = 0; i < maxVertices; ++i) {
         pStoreJints[i] = pTempArray[i];
     }
+    TRACE_DELETE("uint[]", pTempArray)
     delete[] pTempArray;
     pEnv->ReleaseIntArrayElements(storeIndices, pStoreJints, 0);
     return result;
