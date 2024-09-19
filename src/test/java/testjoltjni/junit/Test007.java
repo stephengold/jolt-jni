@@ -166,19 +166,7 @@ public class Test007 {
         ShapeRefC ref = result.get();
         ConvexHullShape shape = (ConvexHullShape) ref.getPtr();
 
-        TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
-        Assert.assertEquals(0.025f, shape.getConvexRadius(), 0f);
-        Assert.assertEquals(3, shape.getFaceVertices(3, new int[3]));
-        Assert.assertEquals(Math.sqrt(3.), shape.getInnerRadius(), 1e-6f);
-        Assert.assertEquals(4, shape.getNumFaces());
-        Assert.assertEquals(4, shape.getNumPoints());
-        Assert.assertEquals(3, shape.getNumVerticesInFace(3));
-        TestUtils.assertEquals(-3f, 3f, -3f, shape.getPoint(1), 0f);
-        Assert.assertEquals(3, shape.getRefCount());
-        Assert.assertEquals(EShapeSubType.ConvexHull, shape.getSubType());
-        Assert.assertEquals(EShapeType.Convex, shape.getType());
-        Assert.assertEquals(0L, shape.getUserData());
-        Assert.assertFalse(shape.mustBeStatic());
+        testConvexHullDefaults(shape);
 
         TestUtils.testClose(shape, ref, result, settings);
         System.gc();
@@ -556,6 +544,27 @@ public class Test007 {
         Assert.assertEquals(1f, shape.getInnerRadius(), 0f);
         Assert.assertEquals(1f, shape.getRadius(), 0f);
         Assert.assertEquals(EShapeSubType.Capsule, shape.getSubType());
+        Assert.assertEquals(EShapeType.Convex, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+        Assert.assertFalse(shape.mustBeStatic());
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code ConvexHullShape}.
+     *
+     * @param shape the shape to test (not null, unaffected)
+     */
+    private static void testConvexHullDefaults(ConvexHullShape shape) {
+        TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
+        Assert.assertEquals(0.025f, shape.getConvexRadius(), 0f);
+        Assert.assertEquals(3, shape.getFaceVertices(3, new int[3]));
+        Assert.assertEquals(Math.sqrt(3.), shape.getInnerRadius(), 1e-6f);
+        Assert.assertEquals(4, shape.getNumFaces());
+        Assert.assertEquals(4, shape.getNumPoints());
+        Assert.assertEquals(3, shape.getNumVerticesInFace(3));
+        TestUtils.assertEquals(-3f, 3f, -3f, shape.getPoint(1), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
+        Assert.assertEquals(EShapeSubType.ConvexHull, shape.getSubType());
         Assert.assertEquals(EShapeType.Convex, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
         Assert.assertFalse(shape.mustBeStatic());
