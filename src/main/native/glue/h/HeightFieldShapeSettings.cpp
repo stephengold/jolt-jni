@@ -32,6 +32,25 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    createSettingsFromArray
+ * Signature: ([FFFFFFFI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_createSettingsFromArray
+  (JNIEnv *pEnv, jclass, jfloatArray samples, jfloat offsetX, jfloat offsetY,
+  jfloat offsetZ, jfloat scaleX, jfloat scaleY, jfloat scaleZ, jint sampleCount) {
+    jboolean isCopy;
+    float * const pSamples = pEnv->GetFloatArrayElements(samples, &isCopy);
+    const Vec3 offset(offsetX, offsetY, offsetZ);
+    const Vec3 scale(scaleX, scaleY, scaleZ);
+    HeightFieldShapeSettings * const pSettings
+            = new HeightFieldShapeSettings(pSamples, offset, scale, sampleCount);
+    TRACE_NEW("HeightFieldShapeSettings", pSettings)
+    pEnv->ReleaseFloatArrayElements(samples, pSamples, JNI_ABORT);
+    return reinterpret_cast<jlong> (pSettings);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
  * Method:    createHeightFieldShapeSettings
  * Signature: (Ljava/nio/FloatBuffer;FFFFFFI)J
  */
@@ -39,7 +58,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSett
   (JNIEnv *pEnv, jclass, jobject buffer, jfloat offsetX, jfloat offsetY, jfloat offsetZ,
   jfloat scaleX, jfloat scaleY, jfloat scaleZ, jint sampleCount) {
     const float * const pFloats
-        = (float *) pEnv->GetDirectBufferAddress(buffer);
+            = (float *) pEnv->GetDirectBufferAddress(buffer);
     const Vec3 offset(offsetX, offsetY, offsetZ);
     const Vec3 scale(scaleX, scaleY, scaleZ);
     HeightFieldShapeSettings * const pSettings

@@ -48,6 +48,29 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified samples.
      *
+     * @param samples array of height values (not null, length&ge;4, unaffected)
+     * @param offset (not null, unaffected)
+     * @param scale (not null, unaffected)
+     * @param sampleCount the number of height values along each edge
+     * (&ge;2*blockSize)
+     */
+    public HeightFieldShapeSettings(float[] samples, Vec3Arg offset,
+            Vec3Arg scale, int sampleCount) {
+        float offsetX = offset.getX();
+        float offsetY = offset.getY();
+        float offsetZ = offset.getZ();
+        float scaleX = scale.getX();
+        float scaleY = scale.getY();
+        float scaleZ = scale.getZ();
+        long settingsVa = createSettingsFromArray(samples, offsetX,
+                offsetY, offsetZ, scaleX, scaleY, scaleZ, sampleCount);
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.HeightField);
+    }
+
+    /**
+     * Instantiate settings for the specified samples.
+     *
      * @param samples array of height values (not null, capacity&ge;4,
      * unaffected)
      * @param offset (not null, unaffected)
@@ -272,6 +295,10 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createSettingsFromArray(
+            float[] samples, float offsetX, float offsetY, float offsetZ,
+            float scaleX, float scaleY, float scaleZ, int sampleCount);
 
     native private static long createHeightFieldShapeSettings(
             FloatBuffer samples, float offsetX, float offsetY, float offsetZ,

@@ -183,7 +183,14 @@ public class Test006 {
         testHeightFieldSsDefaults(settings);
         testHeightFieldSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        float[] array = new float[numFloats];
+        HeightFieldShapeSettings settings2 = new HeightFieldShapeSettings(
+                array, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount);
+
+        testHeightFieldSsDefaults(settings2);
+        testHeightFieldSsSetters(settings2);
+
+        TestUtils.testClose(settings2, settings);
         System.gc();
     }
 

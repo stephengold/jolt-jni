@@ -250,7 +250,18 @@ public class Test007 {
 
         testHeightFieldDefaults(shape);
 
-        TestUtils.testClose(shape, ref, result, settings);
+        float[] array = new float[numFloats];
+        HeightFieldShapeSettings settings2 = new HeightFieldShapeSettings(
+                array, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount);
+        result = settings2.create();
+        Assert.assertFalse(result.hasError());
+        Assert.assertTrue(result.isValid());
+        ref = result.get();
+        HeightFieldShape shape2 = (HeightFieldShape) ref.getPtr();
+
+        testHeightFieldDefaults(shape2);
+
+        TestUtils.testClose(shape2, settings2, shape, ref, result, settings);
         System.gc();
     }
 
