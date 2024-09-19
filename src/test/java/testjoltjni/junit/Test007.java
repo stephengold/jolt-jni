@@ -248,16 +248,7 @@ public class Test007 {
         ShapeRefC ref = result.get();
         HeightFieldShape shape = (HeightFieldShape) ref.getPtr();
 
-        Assert.assertEquals(2, shape.getBlockSize());
-        TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
-        Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
-        TestUtils.assertEquals(3f, 0f, 3f, shape.getPosition(3, 3), 0f);
-        Assert.assertEquals(3, shape.getRefCount());
-        Assert.assertEquals(EShapeSubType.HeightField, shape.getSubType());
-        Assert.assertEquals(EShapeType.HeightField, shape.getType());
-        Assert.assertEquals(0L, shape.getUserData());
-        Assert.assertFalse(shape.isNoCollision(3, 3));
-        Assert.assertTrue(shape.mustBeStatic());
+        testHeightFieldDefaults(shape);
 
         TestUtils.testClose(shape, ref, result, settings);
         System.gc();
@@ -624,6 +615,24 @@ public class Test007 {
         Assert.assertEquals(EShapeType.Convex, shape.getType());
         Assert.assertEquals(0L, shape.getUserData());
         Assert.assertFalse(shape.mustBeStatic());
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code HeightFieldShape}.
+     *
+     * @param shape the shape to test (not null, unaffected)
+     */
+    private static void testHeightFieldDefaults(HeightFieldShape shape) {
+        Assert.assertEquals(2, shape.getBlockSize());
+        TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
+        Assert.assertEquals(0f, shape.getInnerRadius(), 0f);
+        TestUtils.assertEquals(3f, 0f, 3f, shape.getPosition(3, 3), 0f);
+        Assert.assertEquals(3, shape.getRefCount());
+        Assert.assertEquals(EShapeSubType.HeightField, shape.getSubType());
+        Assert.assertEquals(EShapeType.HeightField, shape.getType());
+        Assert.assertEquals(0L, shape.getUserData());
+        Assert.assertFalse(shape.isNoCollision(3, 3));
+        Assert.assertTrue(shape.mustBeStatic());
     }
 
     /**
