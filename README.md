@@ -64,14 +64,72 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
 + The "DebugSp" classifier
   may be replaced by "DebugDp", "ReleaseSp", or "ReleaseDp".
 
+
+## How to build jolt-jni from source
+
+### Initial build
+
+1. Install a [Java Development Kit (JDK)][adoptium],
+   if you don't already have one.
+2. Point the `JAVA_HOME` environment variable to your JDK installation:
+   (In other words, set it to the path of a directory/folder
+   containing a "bin" that contains a Java executable.
+   That path might look something like
+   "C:\Program Files\Eclipse Adoptium\jdk-17.0.3.7-hotspot"
+   or "/usr/lib/jvm/java-17-openjdk-amd64/" or
+   "/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home" .)
+  + using Bash or Zsh: `export JAVA_HOME="` *path to installation* `"`
+  + using [Fish]: `set -g JAVA_HOME "` *path to installation* `"`
+  + using Windows Command Prompt: `set JAVA_HOME="` *path to installation* `"`
+  + using PowerShell: `$env:JAVA_HOME = '` *path to installation* `'`
+3. Download and extract the jolt-jni source code from GitHub:
+  + using [Git]:
+    + `git clone https://github.com/stephengold/jolt-jni.git`
+    + `cd jolt-jni`
+    + `git checkout -b latest 0.7.0`
+ + using a web browser:
+    + browse to [the latest release][latest]
+    + follow the "Source code (zip)" link
+    + save the ZIP file
+    + extract the contents of the saved ZIP file
+    + `cd` to the extracted directory/folder
+4. Run the [Gradle] wrapper:
+  + using Bash or Fish or PowerShell or Zsh: `./gradlew build`
+  + using Windows Command Prompt: `.\gradlew build`
+
+After a successful build,
+Maven artifacts will be found in "build/libs".
+
+You can run the "hello world" example app:
++ using Bash or Fish or PowerShell or Zsh: `./gradlew runHelloWorld`
++ using Windows Command Prompt: `.\gradlew runHelloWorld`
+
+You can run various scenes in the "performance test" example app:
++ the ConvexVsMesh scene:
+  + using Bash or Fish or PowerShell or Zsh: `./gradlew runConvexVsMesh`
+  + using Windows Command Prompt: `.\gradlew runConvexVsMesh`
++ the Pyramid scene:
+  + using Bash or Fish or PowerShell or Zsh: `./gradlew runPyramid`
+  + using Windows Command Prompt: `.\gradlew runPyramid`
++ the Ragdoll scene:
+  + using Bash or Fish or PowerShell or Zsh: `./gradlew runRagdoll`
+  + using Windows Command Prompt: `.\gradlew runRagdoll`
+
+
 ## External links
 
 + [The JoltPhysics repo at GitHub](https://github.com/jrouwe/JoltPhysics)
 
 
+[adoptium]: https://adoptium.net/releases.html "Adoptium Project"
+[fish]: https://fishshell.com/ "Fish command-line shell"
+[git]: https://git-scm.com "Git"
+[github]: https://github.com "GitHub"
+[gradle]: https://gradle.org "Gradle Project"
 [java]: https://en.wikipedia.org/wiki/Java_(programming_language) "Java programming language"
 [jolt]: https://jrouwe.github.io/JoltPhysics "Jolt Physics project"
 [jvm]: https://en.wikipedia.org/wiki/Java_virtual_machine "Java Virtual Machine"
 [kotlin]: https://en.wikipedia.org/wiki/Kotlin_(programming_language) "Kotlin programming language"
+[latest]: https://github.com/stephengold/jolt-jni/releases/latest "latest jolt-jni release"
 [license]: https://github.com/stephengold/jolt-jni/blob/master/LICENSE "jolt-jni license"
 [project]: https://github.com/stephengold/jolt-jni "Jolt-jni Project"
