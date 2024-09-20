@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 
 /**
@@ -52,6 +53,17 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     RMat44(long matrixVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(matrixVa) : null;
         setVirtualAddress(matrixVa, freeingAction);
+    }
+
+    /**
+     * Instantiate from a single-precision matrix.
+     *
+     * @param spMatrix the matrix to copy (not null, unaffected)
+     */
+    public RMat44(Mat44Arg spMatrix) {
+        long spMatrixVa = spMatrix.va();
+        long matrixVa = createFromSpMatrix(spMatrixVa);
+        setVirtualAddress(matrixVa, () -> free(matrixVa));
     }
     // *************************************************************************
     // new methods exposed
@@ -145,6 +157,8 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createFromSpMatrix(long spMatrixVa);
 
     native private static long createIdentity();
 

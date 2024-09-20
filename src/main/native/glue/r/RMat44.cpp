@@ -32,6 +32,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    createFromSpMatrix
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_createFromSpMatrix
+  (JNIEnv *, jclass, jlong spMatrixVa) {
+    const Mat44 * const pSpMatrix = reinterpret_cast<Mat44 *> (spMatrixVa);
+    RMat44 * const pResult = new RMat44(*pSpMatrix);
+    TRACE_NEW("RMat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    createIdentity
  * Signature: ()J
  */
