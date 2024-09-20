@@ -53,6 +53,38 @@ public class RayCast extends JoltPhysicsObject {
     // new methods exposed
 
     /**
+     * Copy the end offset. The ray cast is unaffected. (native attribute:
+     * mDirection)
+     *
+     * @return a new offset vector (relative to the start location)
+     */
+    public Vec3 getDirection() {
+        long raycastVa = va();
+        float x = getDirectionX(raycastVa);
+        float y = getDirectionY(raycastVa);
+        float z = getDirectionZ(raycastVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the start location. The ray cast is unaffected. (native attribute:
+     * mOrigin)
+     *
+     * @return a new location vector
+     */
+    public Vec3 getOrigin() {
+        long raycastVa = va();
+        float x = getOriginX(raycastVa);
+        float y = getOriginY(raycastVa);
+        float z = getOriginZ(raycastVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
      * Return a point on the ray with the specified fraction. The ray cast is
      * unaffected.
      *
@@ -75,6 +107,18 @@ public class RayCast extends JoltPhysicsObject {
             float startZ, float dx, float dy, float dz);
 
     native private static void free(long raycastVa);
+
+    native private static float getDirectionX(long raycastVa);
+
+    native private static float getDirectionY(long raycastVa);
+
+    native private static float getDirectionZ(long raycastVa);
+
+    native private static float getOriginX(long raycastVa);
+
+    native private static float getOriginY(long raycastVa);
+
+    native private static float getOriginZ(long raycastVa);
 
     native private static float getPointOnRayX(long raycastVa, float fraction);
 
