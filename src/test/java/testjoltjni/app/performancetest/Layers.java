@@ -20,6 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package testjoltjni.app.performancetest;
+import com.github.stephengold.joltjni.*;
 
 /**
  * A straightforward Java translation of the Jolt Physics layer definitions for
@@ -36,6 +37,14 @@ class Layers
 	static final int NUM_LAYERS = 2;
 };
 
+/// Class that determines if two object layers can collide
+class ObjectLayerPairFilterImpl extends ObjVsObjFilter
+{
+	ObjectLayerPairFilterImpl() {
+		super(Layers.NUM_LAYERS);
+		disablePair(Layers.NON_MOVING, Layers.NON_MOVING);
+	}
+};
 
 /// Broadphase layers
 class BroadPhaseLayers
@@ -43,4 +52,24 @@ class BroadPhaseLayers
 	static final int NON_MOVING = 0;
 	static final int MOVING = 1;
 	static final int NUM_LAYERS = 2;
+};
+
+/// BroadPhaseLayerInterface implementation
+class BPLayerInterfaceImpl extends MapObj2Bp
+{
+									BPLayerInterfaceImpl()
+	{
+		super(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS);
+		add(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
+		add(Layers.MOVING, BroadPhaseLayers.MOVING);
+	}
+};
+
+/// Class that determines if an object layer can collide with a broadphase layer
+class ObjectVsBroadPhaseLayerFilterImpl extends ObjVsBpFilter
+{
+	ObjectVsBroadPhaseLayerFilterImpl() {
+		super(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS);
+		disablePair(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
+	}
 };

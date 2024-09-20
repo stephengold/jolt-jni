@@ -46,11 +46,12 @@ public class PerformanceTest {
 // Time step for physics
 final static float cDeltaTime = 1.0f / 60.0f;
 
-    private static void Trace(String format, Object... args) {
+private static void Trace(String format, Object... args)
+{
         System.out.printf(format, args);
         System.out.println();
         System.out.flush();
-    }
+}
 
 // Program entry point
 public static void main(String[] argv) throws IOException
@@ -200,17 +201,13 @@ public static void main(String[] argv) throws IOException
 	Trace("Running scene: %s", scene.GetName());
 
 	// Create mapping table from object layer to broadphase layer
-	MapObj2Bp broad_phase_layer_interface = new MapObj2Bp(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS)
-	.add(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING)
-	.add(Layers.MOVING, BroadPhaseLayers.MOVING);
+	BPLayerInterfaceImpl broad_phase_layer_interface = new BPLayerInterfaceImpl();
 
 	// Create class that filters object vs broadphase layers
-	ObjVsBpFilter object_vs_broadphase_layer_filter = new ObjVsBpFilter(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS)
-	.disablePair(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
+	ObjectVsBroadPhaseLayerFilterImpl object_vs_broadphase_layer_filter = new ObjectVsBroadPhaseLayerFilterImpl();
 
 	// Create class that filters object vs object layers
-	ObjVsObjFilter object_vs_object_layer_filter = new ObjVsObjFilter(Layers.NUM_LAYERS)
-	.disablePair(Layers.NON_MOVING, Layers.NON_MOVING);
+	ObjectLayerPairFilterImpl object_vs_object_layer_filter = new ObjectLayerPairFilterImpl();
 
 	// Start profiling this program
 	Jolt.profileStart("Main");
@@ -426,4 +423,6 @@ if (NarrowPhaseStat.isCollecting()) {
 	// End profiling this program
 	Jolt.profileEnd();
 }
+
 }
+
