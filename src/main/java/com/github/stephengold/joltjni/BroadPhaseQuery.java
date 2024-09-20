@@ -42,6 +42,13 @@ public class BroadPhaseQuery extends NonCopyable {
     // constructors
 
     /**
+     * Instantiate with no native object assigned.
+     */
+    BroadPhaseQuery() {
+        this.system = null;
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param system the underlying {@code PhysicsSystem} (not null)
