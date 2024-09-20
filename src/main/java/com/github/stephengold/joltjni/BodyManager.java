@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
+import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 
 /**
  * A container for bodies.
@@ -30,6 +31,13 @@ import com.github.stephengold.joltjni.readonly.ConstBodyId;
  * @author Stephen Gold sgold@sonic.net
  */
 public class BodyManager extends NonCopyable {
+    // *************************************************************************
+    // fields
+
+    /**
+     * protect the BroadPhaseLayerInterface from garbage collection
+     */
+    private ConstBroadPhaseLayerInterface layerMap;
     // *************************************************************************
     // constructors
 
@@ -174,6 +182,16 @@ public class BodyManager extends NonCopyable {
     }
 
     /**
+     * Access the (application-provided) interface for mapping object layers to
+     * broadphase layers.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    public ConstBroadPhaseLayerInterface getBroadPhaseLayerInterface() {
+        return layerMap;
+    }
+
+    /**
      * Return the maximum number of bodies the manager can support.
      *
      * @return the count (&ge;0)
@@ -183,6 +201,24 @@ public class BodyManager extends NonCopyable {
         int result = getMaxBodies(managerVa);
 
         return result;
+    }
+
+    /**
+     * Initialize the manager.
+     *
+     * @param maxBodies the desired maximum number of rigid bodies that can be
+     * added
+     * @param numBodyMutexes the desired number of mutexes to allocate, or 0 for
+     * the default number
+     * @param map the desired map from object layers to broad-phase layers (not
+     * null, alias created)
+     */
+    public void init(int maxBodies, int numBodyMutexes,
+            ConstBroadPhaseLayerInterface map) {
+        this.layerMap = map;
+        long managerVa = va();
+        long mapVa = map.va();
+        init(managerVa, maxBodies, numBodyMutexes, mapVa);
     }
     // *************************************************************************
     // native private methods
@@ -205,4 +241,7 @@ public class BodyManager extends NonCopyable {
     native private static long getBodies(long managerVa);
 
     native private static int getMaxBodies(long managerVa);
+
+    native private static void init(
+            long managerVa, int maxBodies, int numBodyMutexes, long mapVa);
 }

@@ -186,3 +186,16 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyManager_getMaxBod
     const uint result = pManager->GetMaxBodies();
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyManager
+ * Method:    init
+ * Signature: (JIIJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyManager_init
+  (JNIEnv *, jclass, jlong managerVa, jint maxBodies, jint numBodyMutexes, jlong mapVa) {
+    BodyManager * const pManager = reinterpret_cast<BodyManager *> (managerVa);
+    const BroadPhaseLayerInterface * const pMap
+            = reinterpret_cast<BroadPhaseLayerInterface *> (mapVa);
+    pManager->Init(maxBodies, numBodyMutexes, *pMap);
+}
