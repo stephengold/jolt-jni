@@ -35,7 +35,7 @@ public class BroadPhaseQuery extends NonCopyable {
 
     /**
      * prevent premature garbage collection of the underlying
-     * {@code PhysicsSystem}
+     * {@code PhysicsSystem}, if any
      */
     final private PhysicsSystem system;
     // *************************************************************************
@@ -188,7 +188,7 @@ public class BroadPhaseQuery extends NonCopyable {
     /**
      * Access the underlying {@code PhysicsSystem}.
      *
-     * @return the pre-existing instance
+     * @return the pre-existing instance, or null if none
      */
     public PhysicsSystem getSystem() {
         return system;

@@ -150,7 +150,7 @@ static bool DefaultAssertFailed(const char *inExpression, const char *inMessage,
     std::cout << inFile << ":" << inLine << ": (" << inExpression << ") "
             << (inMessage != nullptr ? inMessage : "") << std::endl;
 
-    // Breakpoint:
+    // Request a breakpoint:
     return true;
 };
 

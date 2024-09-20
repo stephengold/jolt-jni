@@ -49,30 +49,30 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     Vec3 getCenter();
 
     /**
-     * Return the (half) extent of the box. The box is unaffected.
+     * Copy the (half) extent of the box. The box is unaffected.
      *
      * @return a new vector
      */
     Vec3 getExtent();
 
     /**
-     * Return the maximum contained coordinate on each axis. The box is
+     * Copy the maximum contained coordinate on each axis. The box is
      * unaffected.
      *
-     * @return a new vector
+     * @return a new location vector
      */
     Vec3 getMax();
 
     /**
-     * Return the minimum contained coordinate on each axis. The box is
+     * Copy the minimum contained coordinate on each axis. The box is
      * unaffected.
      *
-     * @return a new vector
+     * @return a new location vector
      */
     Vec3 getMin();
 
     /**
-     * Return the size (full extent) on each axis. The box is unaffected.
+     * Copy the size (full extent) on each axis. The box is unaffected.
      *
      * @return a new vector
      */

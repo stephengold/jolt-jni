@@ -39,6 +39,9 @@ public class PerformanceTest {
         return new RagdollScene(4, 10, 0.6f);
     }
     final private static String endl = System.lineSeparator();
+// Disable common warnings triggered by Jolt
+
+// Local includes
 
 // Time step for physics
 final static float cDeltaTime = 1.0f / 60.0f;
@@ -324,7 +327,7 @@ public static void main(String[] argv) throws IOException
 
 						// Mark end of frame
 						renderer.endFrame();
-					} // JPH_DEBUG_RENDERER
+					}
 
 					// Record time taken this iteration
 					if (enable_per_frame_recording)

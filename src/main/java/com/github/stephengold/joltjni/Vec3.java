@@ -208,7 +208,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Create a copy of the 1st (X) principal axis.
+     * Create a unit vector along the 1st (X) principal axis.
      *
      * @return a new vector
      */
@@ -218,7 +218,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Create a copy of the 2nd (Y) principal axis.
+     * Create a unit vector along the 2nd (Y) principal axis.
      *
      * @return a new vector
      */
@@ -228,7 +228,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Create a copy of the 3rd (Z) principal axis.
+     * Create a unit vector along the 3rd (Z) principal axis.
      *
      * @return a new vector
      */

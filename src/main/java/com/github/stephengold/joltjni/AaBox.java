@@ -158,7 +158,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Return the (half) extent of the box. The box is unaffected.
+     * Copy the (half) extent of the box. The box is unaffected.
      *
      * @return a new vector
      */
@@ -174,7 +174,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Return the maximum contained coordinate on each axis. The box is
+     * Copy the maximum contained coordinate on each axis. The box is
      * unaffected. (native attribute: mMax)
      *
      * @return a new vector
@@ -191,7 +191,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Return the minimum contained coordinate on each axis. The box is
+     * Copy the minimum contained coordinate on each axis. The box is
      * unaffected. (native attribute: mMin)
      *
      * @return a new vector
@@ -208,7 +208,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Return the size (full extent) on each axis. The box is unaffected.
+     * Copy the size (full extent) on each axis. The box is unaffected.
      *
      * @return a new vector
      */
