@@ -59,6 +59,81 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RRayCast_free
 
 /*
  * Class:     com_github_stephengold_joltjni_RRayCast
+ * Method:    getDirectionX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RRayCast_getDirectionX
+  (JNIEnv *, jclass, jlong raycastVa) {
+    const RRayCast * const pRayCast = reinterpret_cast<RRayCast *> (raycastVa);
+    const float result = pRayCast->mDirection.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RRayCast
+ * Method:    getDirectionY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RRayCast_getDirectionY
+  (JNIEnv *, jclass, jlong raycastVa) {
+    const RRayCast * const pRayCast = reinterpret_cast<RRayCast *> (raycastVa);
+    const float result = pRayCast->mDirection.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RRayCast
+ * Method:    getDirectionZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RRayCast_getDirectionZ
+  (JNIEnv *, jclass, jlong raycastVa) {
+    const RRayCast * const pRayCast = reinterpret_cast<RRayCast *> (raycastVa);
+    const float result = pRayCast->mDirection.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RRayCast
+ * Method:    getOriginX
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RRayCast_getOriginX
+  (JNIEnv *, jclass, jlong raycastVa) {
+    const RRayCast * const pRayCast = reinterpret_cast<RRayCast *> (raycastVa);
+    const RVec3 rvec3 = pRayCast->mOrigin;
+    const double result = rvec3.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RRayCast
+ * Method:    getOriginY
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RRayCast_getOriginY
+  (JNIEnv *, jclass, jlong raycastVa) {
+    const RRayCast * const pRayCast = reinterpret_cast<RRayCast *> (raycastVa);
+    const RVec3 rvec3 = pRayCast->mOrigin;
+    const double result = rvec3.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RRayCast
+ * Method:    getOriginZ
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RRayCast_getOriginZ
+  (JNIEnv *, jclass, jlong raycastVa) {
+    const RRayCast * const pRayCast = reinterpret_cast<RRayCast *> (raycastVa);
+    const RVec3 rvec3 = pRayCast->mOrigin;
+    const double result = rvec3.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RRayCast
  * Method:    getPointOnRayX
  * Signature: (JF)D
  */
