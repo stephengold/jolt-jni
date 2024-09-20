@@ -60,6 +60,29 @@ public class BroadPhaseQuery extends NonCopyable {
      *
      * @param raycast the test ray (not null, unaffected)
      * @param collector the hit collector to use (not null)
+     */
+    public void castRay(RayCast raycast, RayCastBodyCollector collector) {
+        castRay(raycast, collector, new BroadPhaseLayerFilter());
+    }
+
+    /**
+     * Cast a ray and collect the resulting hits.
+     *
+     * @param raycast the test ray (not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     */
+    public void castRay(RayCast raycast, RayCastBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter) {
+        castRay(raycast, collector, bplFilter, new ObjectLayerFilter());
+    }
+
+    /**
+     * Cast a ray and collect the resulting hits.
+     *
+     * @param raycast the test ray (not null, unaffected)
+     * @param collector the hit collector to use (not null)
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
@@ -72,6 +95,29 @@ public class BroadPhaseQuery extends NonCopyable {
         long bplFilterVa = bplFilter.va();
         long olFilterVa = olFilter.va();
         castRay(queryVa, raycastVa, collectorVa, bplFilterVa, olFilterVa);
+    }
+
+    /**
+     * Collect bodies whose bounding boxes overlap with the specified test box.
+     *
+     * @param box the test box (not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     */
+    public void collideAaBox(AaBox box, CollideShapeBodyCollector collector) {
+        collideAaBox(box, collector, new BroadPhaseLayerFilter());
+    }
+
+    /**
+     * Collect bodies whose bounding boxes overlap with the specified test box.
+     *
+     * @param box the test box (not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     */
+    public void collideAaBox(AaBox box, CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter) {
+        collideAaBox(box, collector, bplFilter, new ObjectLayerFilter());
     }
 
     /**
