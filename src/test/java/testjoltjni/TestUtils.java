@@ -299,6 +299,42 @@ final public class TestUtils {
     }
 
     /**
+     * Load some flavor of native library, preferably a Release build.
+     * <p>
+     * The search order is:
+     * <ol>
+     * <li>ReleaseSp</li>
+     * <li>ReleaseDp</li>
+     * <li>DebugSp</li>
+     * <li>DebugDp</li>
+     * </ol>
+     */
+    public static void loadNativeLibraryRelease() {
+        File directory = new File("build/libs/joltjni/shared");
+
+        boolean success = loadNativeLibrary(directory, "Release", "Sp");
+        if (success) {
+            Assert.assertFalse(Jolt.isDoublePrecision());
+        } else {
+            success = loadNativeLibrary(directory, "Release", "Dp");
+            if (success) {
+                Assert.assertTrue(Jolt.isDoublePrecision());
+            } else {
+                success = loadNativeLibrary(directory, "Debug", "Sp");
+                if (success) {
+                    Assert.assertFalse(Jolt.isDoublePrecision());
+                } else {
+                    success = loadNativeLibrary(directory, "Debug", "Dp");
+                    if (success) {
+                        Assert.assertTrue(Jolt.isDoublePrecision());
+                    }
+                }
+            }
+        }
+        Assert.assertTrue(success);
+    }
+
+    /**
      * Allocate and initialize a {@code PhysicsSystem} in the customary
      * configuration.
      *

@@ -56,7 +56,7 @@ private static void Trace(String format, Object... args)
 // Program entry point
 public static void main(String[] argv) throws IOException
 {
-	TestUtils.loadNativeLibrary();
+	TestUtils.loadNativeLibraryRelease();
 	// Install callbacks
 	Jolt.installDefaultTraceCallback();
 
