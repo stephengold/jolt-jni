@@ -36,19 +36,54 @@ public class HelloWorld {
 // Typically you at least want to have 1 layer for moving bodies and 1 layer for static bodies, but you can have more
 // layers if you want. E.g. you could have a layer for high detail collision (which is not used by the physics simulation
 // but only if you do collision testing).
-	private static final int OBJ_LAYER_NON_MOVING = 0;
-	private static final int OBJ_LAYER_MOVING = 1;
-	private static final int OBJ_NUM_LAYERS = 2;
+class Layers
+{
+	static final int NON_MOVING = 0;
+	static final int MOVING = 1;
+	static final int NUM_LAYERS = 2;
+};
+
+/// Class that determines if two object layers can collide
+static class ObjectLayerPairFilterImpl extends ObjVsObjFilter
+{
+	ObjectLayerPairFilterImpl() {
+		super(Layers.NUM_LAYERS);
+		disablePair(Layers.NON_MOVING, Layers.NON_MOVING);
+	}
+};
 
 // Each broadphase layer results in a separate bounding volume tree in the broad phase. You at least want to have
 // a layer for non-moving and moving objects to avoid having to update a tree full of static objects every frame.
 // You can have a 1-on-1 mapping between object layers and broadphase layers (like in this case) but if you have
 // many object layers you'll be creating many broad phase trees, which is not efficient. If you want to fine tune
 // your broadphase layers define JPH_TRACK_BROADPHASE_STATS and look at the stats reported on the TTY.
-	private static final int BP_LAYER_NON_MOVING = 0;
-	private static final int BP_LAYER_MOVING = 1;
-	private static final int BP_NUM_LAYERS = 2;
+class BroadPhaseLayers
+{
+	static final int NON_MOVING = 0;
+	static final int MOVING = 1;
+	static final int NUM_LAYERS = 2;
+};
 
+// BroadPhaseLayerInterface implementation
+// This defines a mapping between object and broadphase layers.
+static class BPLayerInterfaceImpl extends MapObj2Bp
+{
+									BPLayerInterfaceImpl()
+	{
+		super(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS);
+		add(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
+		add(Layers.MOVING, BroadPhaseLayers.MOVING);
+	}
+};
+
+/// Class that determines if an object layer can collide with a broadphase layer
+static class ObjectVsBroadPhaseLayerFilterImpl extends ObjVsBpFilter
+{
+	ObjectVsBroadPhaseLayerFilterImpl() {
+		super(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS);
+		disablePair(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
+	}
+};
 
 // An example contact listener
 static class MyContactListener extends CustomContactListener
@@ -145,19 +180,15 @@ public static void main(String[] argv)
 
 	// Create mapping table from object layer to broadphase layer
 	// Note: As this is an interface, PhysicsSystem will take a reference to this so this instance needs to stay alive!
-	MapObj2Bp broad_phase_layer_interface = new MapObj2Bp(OBJ_NUM_LAYERS, BP_NUM_LAYERS)
-	.add(OBJ_LAYER_NON_MOVING, BP_LAYER_NON_MOVING)
-	.add(OBJ_LAYER_MOVING, BP_LAYER_MOVING);
+	BPLayerInterfaceImpl broad_phase_layer_interface = new BPLayerInterfaceImpl();
 
 	// Create class that filters object vs broadphase layers
 	// Note: As this is an interface, PhysicsSystem will take a reference to this so this instance needs to stay alive!
-	ObjVsBpFilter object_vs_broadphase_layer_filter = new ObjVsBpFilter(OBJ_NUM_LAYERS, BP_NUM_LAYERS)
-	.disablePair(OBJ_LAYER_NON_MOVING, BP_LAYER_NON_MOVING);
+	ObjectVsBroadPhaseLayerFilterImpl object_vs_broadphase_layer_filter = new ObjectVsBroadPhaseLayerFilterImpl();
 
 	// Create class that filters object vs object layers
 	// Note: As this is an interface, PhysicsSystem will take a reference to this so this instance needs to stay alive!
-	ObjVsObjFilter object_vs_object_layer_filter = new ObjVsObjFilter(OBJ_NUM_LAYERS)
-	.disablePair(OBJ_LAYER_NON_MOVING, OBJ_LAYER_NON_MOVING);
+	ObjectLayerPairFilterImpl object_vs_object_layer_filter = new ObjectLayerPairFilterImpl();
 
 	// Now we can create the actual physics system.
 	PhysicsSystem physics_system = new PhysicsSystem();
@@ -183,13 +214,14 @@ public static void main(String[] argv)
 	// Create the settings for the collision volume (the shape).
 	// Note that for simple shapes (like boxes) you can also directly construct a BoxShape.
 	BoxShapeSettings floor_shape_settings = new BoxShapeSettings(new Vec3(100.0f, 1.0f, 100.0f));
+	floor_shape_settings.setEmbedded(); // A ref counted object on the stack (base class RefTarget) should be marked as such to prevent it from being freed when its reference count goes to 0.
 
 	// Create the shape
 	ShapeResult floor_shape_result = floor_shape_settings.create();
 	ShapeRefC floor_shape = floor_shape_result.get(); // We don't expect an error here, but you can check floor_shape_result for HasError() / GetError()
 
 	// Create the settings for the body itself. Note that here you can also set other properties like the restitution / friction.
-	BodyCreationSettings floor_settings = new BodyCreationSettings(floor_shape, new RVec3(0.0, -1.0, 0.0), new Quat(), EMotionType.Static, OBJ_LAYER_NON_MOVING);
+	BodyCreationSettings floor_settings = new BodyCreationSettings(floor_shape, new RVec3(0.0, -1.0, 0.0), new Quat(), EMotionType.Static, Layers.NON_MOVING);
 
 	// Create the actual rigid body
 	Body floor = body_interface.createBody(floor_settings); // Note that if we run out of bodies this can return nullptr
@@ -199,7 +231,7 @@ public static void main(String[] argv)
 
 	// Now create a dynamic body to bounce on the floor
 	// Note that this uses the shorthand version of creating and adding a body to the world
-	BodyCreationSettings sphere_settings = new BodyCreationSettings(new SphereShape(0.5f), new RVec3(0f, 2f, 0f), new Quat(), EMotionType.Dynamic, OBJ_LAYER_MOVING);
+	BodyCreationSettings sphere_settings = new BodyCreationSettings(new SphereShape(0.5f), new RVec3(0f, 2f, 0f), new Quat(), EMotionType.Dynamic, Layers.MOVING);
 	BodyId sphere_id = body_interface.createAndAddBody(sphere_settings, EActivation.Activate).copy();
 
 	// Now you can interact with the dynamic body, in this case we're going to give it a velocity.
