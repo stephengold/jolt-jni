@@ -344,8 +344,10 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getFriction
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getId
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    const BodyID &result = pBody->GetID();
-    return reinterpret_cast<jlong> (&result);
+    const BodyID &id = pBody->GetID();
+    BodyId * pResult = new BodyID(id);
+    TRACE_NEW("BodyID", pResult)
+    return reinterpret_cast<jlong> (pResult);
 }
 
 inline static const Vec3 getLinearVelocity(jlong bodyVa) {

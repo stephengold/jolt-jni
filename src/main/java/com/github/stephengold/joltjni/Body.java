@@ -24,7 +24,6 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBody;
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -460,17 +459,16 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Access the body's ID for use with {@code BodyInterface}. The body is
+     * Copy the body's ID for use with {@code BodyInterface}. The body is
      * unaffected.
      *
-     * @return a new immutable JVM object with the pre-existing native object
-     * assigned
+     * @return a new object
      */
     @Override
-    public ConstBodyId getId() {
+    public BodyId getId() {
         long bodyVa = va();
         long bodyIdVa = getId(bodyVa);
-        ConstBodyId result = new BodyId(bodyIdVa, false);
+        BodyId result = new BodyId(bodyIdVa, true);
 
         return result;
     }
