@@ -25,12 +25,190 @@ SOFTWARE.
  */
 #include <Jolt/Jolt.h>
 #ifdef JPH_DEBUG_RENDERER
-#include <Jolt/Renderer/DebugRendererRecorder.h>
+#include <Jolt/Renderer/DebugRenderer.h>
 #endif
 #include "auto/com_github_stephengold_joltjni_DebugRenderer.h"
 #include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    nextFrame
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_nextFrame
+  (JNIEnv *, jobject) {
+#ifdef JPH_DEBUG_RENDERER
+    DebugRenderer::sInstance->NextFrame();
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawArrow
+ * Signature: (DDDDDDIF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawArrow
+  (JNIEnv *, jclass, jdouble startX, jdouble startY, jdouble startZ,
+  jdouble endX, jdouble endY, jdouble endZ, jint colorInt, jfloat size) {
+#ifdef JPH_DEBUG_RENDERER
+    const RVec3 start(startX, startY, startZ);
+    const RVec3 end(endX, endY, endZ);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawArrow(start, end, color, size);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawCoordinateSystem
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawCoordinateSystem
+  (JNIEnv *, jclass, jlong transformVa, jfloat size) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    DebugRenderer::sInstance->DrawCoordinateSystem(*pTransform, size);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawLine
+ * Signature: (DDDDDDI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawLine
+  (JNIEnv *, jclass, jdouble startX, jdouble startY, jdouble startZ,
+  jdouble endX, jdouble endY, jdouble endZ, jint colorInt) {
+#ifdef JPH_DEBUG_RENDERER
+    const RVec3 start(startX, startY, startZ);
+    const RVec3 end(endX, endY, endZ);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawLine(start, end, color);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawMarker
+ * Signature: (DDDIF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawMarker
+  (JNIEnv *, jclass, jdouble locX, jdouble locY, jdouble locZ, jint colorInt,
+  jfloat size) {
+#ifdef JPH_DEBUG_RENDERER
+    const RVec3 location(locX, locY, locZ);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawMarker(location, color, size);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawPlane
+ * Signature: (DDDFFFIF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawPlane
+  (JNIEnv *, jclass, jdouble locX, jdouble locY, jdouble locZ, jfloat normX,
+  jfloat normY, jfloat normZ, jint colorInt, jfloat size) {
+#ifdef JPH_DEBUG_RENDERER
+    const RVec3 location(locX, locY, locZ);
+    const Vec3 normal(normX, normY, normZ);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawPlane(location, normal, color, size);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawWireBoxAligned
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWireBoxAligned
+  (JNIEnv *, jclass, jlong boxVa, jint colorInt) {
+#ifdef JPH_DEBUG_RENDERER
+    const AABox * pBox = reinterpret_cast<AABox *> (boxVa);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawWireBox(*pBox, color);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawWireBoxOriented
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWireBoxOriented
+  (JNIEnv *, jclass, jlong boxVa, jint colorInt) {
+#ifdef JPH_DEBUG_RENDERER
+    const OrientedBox * pBox = reinterpret_cast<OrientedBox *> (boxVa);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawWireBox(*pBox, color);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawWireBoxTransformed
+ * Signature: (JJI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWireBoxTransformed
+  (JNIEnv *, jclass, jlong transformVa, jlong boxVa, jint colorInt) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawWireBox(*pTransform, *pBox, color);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawWireSphere
+ * Signature: (DDDFII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWireSphere
+  (JNIEnv *, jclass, jdouble locX, jdouble locY, jdouble locZ, jfloat radius,
+  jint colorInt, jint level) {
+#ifdef JPH_DEBUG_RENDERER
+    const RVec3 location(locX, locY, locZ);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawWireSphere(location, radius, color, level);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawWireTriangle
+ * Signature: (DDDDDDDDDI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWireTriangle
+  (JNIEnv *, jclass, jdouble v1x, jdouble v1y, jdouble v1z, jdouble v2x,
+   jdouble v2y, jdouble v2z, jdouble v3x, jdouble v3y, jdouble v3z,
+   jint colorInt) {
+#ifdef JPH_DEBUG_RENDERER
+    const RVec3 v1(v1x, v1y, v1z);
+    const RVec3 v2(v2x, v2y, v2z);
+    const RVec3 v3(v3x, v3y, v3z);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawWireTriangle(v1, v2, v3, color);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawWireUnitSphere
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWireUnitSphere
+  (JNIEnv *, jclass, jlong transformVa, jint colorInt, jint level) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawWireUnitSphere(*pTransform, color, level);
+#endif
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_DebugRenderer
