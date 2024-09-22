@@ -655,6 +655,20 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Test whether the body has been added to its {@code PhysicsSystem}. The
+     * body is unaffected.
+     *
+     * @return true if added, otherwise false
+     */
+    @Override
+    public boolean isInBroadPhase() {
+        long bodyVa = va();
+        boolean result = isInBroadPhase(bodyVa);
+
+        return result;
+    }
+
+    /**
      * Test whether the body is a rigid body. It is unaffected.
      *
      * @return true if rigid body, otherwise false
@@ -786,6 +800,8 @@ public class Body extends NonCopyable implements ConstBody {
     native private static boolean isActive(long bodyVa);
 
     native private static boolean isDynamic(long bodyVa);
+
+    native private static boolean isInBroadPhase(long bodyVa);
 
     native private static boolean isKinematic(long bodyVa);
 

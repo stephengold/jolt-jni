@@ -187,6 +187,14 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     boolean isDynamic();
 
     /**
+     * Test whether the body has been added to its {@code PhysicsSystem}. The
+     * body is unaffected.
+     *
+     * @return true if added, otherwise false
+     */
+    boolean isInBroadPhase();
+
+    /**
      * Test whether the body is kinematic. It is unaffected.
      *
      * @return true if kinematic, otherwise false

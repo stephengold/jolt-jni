@@ -598,6 +598,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isDynamic
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    isInBroadPhase
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isInBroadPhase
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const bool result = pBody->IsInBroadPhase();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    isKinematic
  * Signature: (J)Z
  */
