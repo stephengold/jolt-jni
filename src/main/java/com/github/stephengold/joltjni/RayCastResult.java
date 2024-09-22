@@ -34,6 +34,7 @@ public class RayCastResult extends BroadPhaseCastResult {
      * Instantiate a cast result with the default parameters.
      */
     public RayCastResult() {
+        super(null);
         long castResultVa = createRayCastResult();
         setVirtualAddress(castResultVa, true);
     }
@@ -44,11 +45,13 @@ public class RayCastResult extends BroadPhaseCastResult {
      * <p>
      * For use in custom collectors.
      *
+     * @param collector the underlying {@code RayCastBodyCollector}, or
+     * {@code null if none}
      * @param castResultVa the virtual address of the native object to assign
      * (not zero)
      */
-    public RayCastResult(long castResultVa) {
-        super(castResultVa);
+    public RayCastResult(RayCastBodyCollector collector, long castResultVa) {
+        super(collector, castResultVa);
     }
     // *************************************************************************
     // new methods exposed

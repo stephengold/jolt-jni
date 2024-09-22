@@ -28,12 +28,24 @@ package com.github.stephengold.joltjni;
  */
 public class BroadPhaseCastResult extends JoltPhysicsObject {
     // *************************************************************************
+    // fields
+
+    /**
+     * prevent premature garbage collection of the underlying
+     * {@code RayCastBodyCollector}, if any
+     */
+    final private RayCastBodyCollector collector;
+    // *************************************************************************
     // constructors
 
     /**
      * Instantiate with no native object assigned.
+     *
+     * @param collector the underlying {@code RayCastBodyCollector}, or
+     * {@code null if none}
      */
-    BroadPhaseCastResult() {
+    BroadPhaseCastResult(RayCastBodyCollector collector) {
+        this.collector = collector;
     }
 
     /**
@@ -41,11 +53,15 @@ public class BroadPhaseCastResult extends JoltPhysicsObject {
      * <p>
      * For use in custom collectors.
      *
+     * @param collector the underlying {@code RayCastBodyCollector}, or
+     * {@code null if none}
      * @param castResultVa the virtual address of the native object to assign
      * (not zero)
      */
-    public BroadPhaseCastResult(long castResultVa) {
+    public BroadPhaseCastResult(
+            RayCastBodyCollector collector, long castResultVa) {
         super(castResultVa);
+        this.collector = collector;
     }
     // *************************************************************************
     // new methods exposed
@@ -62,6 +78,15 @@ public class BroadPhaseCastResult extends JoltPhysicsObject {
         BodyId result = new BodyId(idVa, false);
 
         return result;
+    }
+
+    /**
+     * Access the underlying {@code RayCastBodyCollector}.
+     *
+     * @return the pre-existing instance
+     */
+    public RayCastBodyCollector getCollector() {
+        return collector;
     }
 
     /**
