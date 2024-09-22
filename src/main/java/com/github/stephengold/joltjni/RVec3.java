@@ -85,6 +85,23 @@ final public class RVec3 implements RVec3Arg {
     // new methods exposed
 
     /**
+     * Return the component-wise sum of the specified vectors. (native operator:
+     * binary {@code +})
+     *
+     * @param v1 the first vector (not null, unaffected)
+     * @param v2 the 2nd vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 add(RVec3Arg v1, Vec3Arg v2) {
+        double xx = v1.xx() + v2.getX();
+        double yy = v1.yy() + v2.getY();
+        double zz = v1.zz() + v2.getZ();
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
      * Adds specified amounts to the vector's components and returns the
      * (modified) current instance.
      *
