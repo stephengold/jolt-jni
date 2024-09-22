@@ -170,3 +170,4 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     native private static void init(long phaseVa, long managerVa, long mapVa);
 
     native private static void optimize(long phaseVa);
+}
