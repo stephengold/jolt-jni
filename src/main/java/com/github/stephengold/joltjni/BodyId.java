@@ -56,6 +56,33 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
         setVirtualAddress(idVa, freeingAction);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Test whether the specified IDs are equal. (native operator: {@code ==})
+     *
+     * @param id1 the first ID to test (not null, unaffected)
+     * @param id2 the 2nd ID to test (not null, unaffected)
+     * @return true if equal, false if unequal
+     */
+    public static boolean equals(ConstBodyId id1, ConstBodyId id2) {
+        long id1va = id1.va();
+        long id2va = id2.va();
+        boolean result = equals(id1va, id2va);
+
+        return result;
+    }
+
+    /**
+     * Alter the index and sequence number.
+     *
+     * @param value the desired value
+     */
+    public void setIndexAndSequenceNumber(int value) {
+        long idVa = va();
+        setIndexAndSequenceNumber(idVa, value);
+    }
+    // *************************************************************************
     // ConstBodyId methods
 
     /**
@@ -128,6 +155,8 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
 
     native private static long copy(long idVa);
 
+    native private static boolean equals(long id1Va, long id2Va);
+
     native private static void free(long idVa);
 
     native private static int getIndex(long idVa);
@@ -137,4 +166,6 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     native private static int getSequenceNumber(long idVa);
 
     native private static boolean isInvalid(long idVa);
+
+    native private static void setIndexAndSequenceNumber(long idVa, int value);
 }

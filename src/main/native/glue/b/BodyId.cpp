@@ -45,6 +45,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyId_copy
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyId
+ * Method:    equals
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyId_equals
+  (JNIEnv *, jclass, jlong id1Va, jlong id2Va) {
+    const BodyID * const pBodyId1 = reinterpret_cast<BodyID *> (id1Va);
+    const BodyID * const pBodyId2 = reinterpret_cast<BodyID *> (id2Va);
+    const bool result = (*pBodyId1) == (*pBodyId2);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyId
  * Method:    free
  * Signature: (J)V
  */
@@ -101,4 +114,15 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyId_isInvalid
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
     const bool result = pBodyId->IsInvalid();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyId
+ * Method:    setIndexAndSequenceNumber
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyId_setIndexAndSequenceNumber
+  (JNIEnv *, jclass, jlong idVa, jint value) {
+    BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
+    *pBodyId = BodyID(value);
 }
