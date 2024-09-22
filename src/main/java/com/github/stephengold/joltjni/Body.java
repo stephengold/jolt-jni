@@ -359,7 +359,7 @@ public class Body extends NonCopyable implements ConstBody {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public static Body sFixedToWorld() {
+    public static ConstBody sFixedToWorld() {
         long bodyVa = createFixedToWorld();
         Body result = new Body(bodyVa);
 
