@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -236,6 +237,36 @@ final public class Jolt {
     native public static void newFactory();
 
     /**
+     * Intersect the specified axis-aligned box with the specified ray.
+     *
+     * @param startLocation the desired start location (not null, unaffected)
+     * @param offset the desired end offset from the start (not null,
+     * unaffected)
+     * @param minimum the minimum coordinates of the box (not null, unaffected)
+     * @param maximum the maximum coordinates of the box (not null, unaffected)
+     * @return true if there is a hit
+     */
+    public static boolean rayAaBoxHits(Vec3Arg startLocation, Vec3Arg offset,
+            Vec3Arg minimum, Vec3Arg maximum) {
+        float startX = startLocation.getX();
+        float startY = startLocation.getY();
+        float startZ = startLocation.getZ();
+        float offsetX = offset.getX();
+        float offsetY = offset.getY();
+        float offsetZ = offset.getZ();
+        float minX = minimum.getX();
+        float minY = minimum.getY();
+        float minZ = minimum.getZ();
+        float maxX = maximum.getX();
+        float maxY = maximum.getY();
+        float maxZ = maximum.getZ();
+        boolean result = rayAaBoxHits(startX, startY, startZ,
+                offsetX, offsetY, offsetZ, minX, minY, minZ, maxX, maxY, maxZ);
+
+        return result;
+    }
+
+    /**
      * Register the allocation hook to use malloc/free. This must be done before
      * any other Jolt function is called.
      */
@@ -286,4 +317,9 @@ final public class Jolt {
 
     native private static long hashBytes(
             float qx, float qy, float qz, float qw, long oldHash);
+
+    native private static boolean rayAaBoxHits(float startX, float startY,
+            float startZ, float offsetX, float offsetY, float offsetZ,
+            float minX, float minY, float minZ, float maxX, float maxY,
+            float maxZ);
 }

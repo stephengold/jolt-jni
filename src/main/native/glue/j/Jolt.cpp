@@ -28,6 +28,7 @@ SOFTWARE.
 #include <Jolt/Core/Factory.h>
 #include <Jolt/Core/Profiler.h>
 #include <Jolt/Core/TempAllocator.h>
+#include <Jolt/Geometry/RayAABox.h>
 #include <Jolt/Physics/DeterminismLog.h>
 #include <Jolt/RegisterTypes.h>
 
@@ -358,5 +359,22 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__FFFF
   (JNIEnv *, jclass, jfloat qx, jfloat qy, jfloat qz, jfloat qw, jlong oldHash) {
     const Quat quat(qx, qy, qz, qw);
     const uint64 result = HashBytes(&quat, sizeof(Quat), oldHash);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    rayAaBoxHits
+ * Signature: (FFFFFFFFFFFF)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_rayAaBoxHits
+  (JNIEnv *, jclass, jfloat startX, jfloat startY, jfloat startZ,
+  jfloat offsetX, jfloat offsetY, jfloat offsetZ, jfloat minX, jfloat minY,
+  jfloat minZ, jfloat maxX, jfloat maxY, jfloat maxZ) {
+    const Vec3 start(startX, startY, startZ);
+    const Vec3 offset(offsetX, offsetY, offsetZ);
+    const Vec3 min(minX, minY, minZ);
+    const Vec3 max(maxX, maxY, maxZ);
+    bool result = RayAABoxHits(start, offset, min, max);
     return result;
 }
