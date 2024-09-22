@@ -297,6 +297,43 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Re-position the body and reset its sleep timer.
+     *
+     * @param location the desired location (in system coordinates, not null,
+     * unaffected)
+     * @param orientation the desired orientation (relative to the system axes,
+     * not null, unaffected)
+     */
+    public void setPositionAndRotationInternal(
+            RVec3Arg location, QuatArg orientation) {
+        setPositionAndRotationInternal(location, orientation, true);
+    }
+
+    /**
+     * Re-position the body.
+     *
+     * @param location the desired location (in system coordinates, not null,
+     * unaffected)
+     * @param orientation the desired orientation (relative to the system axes,
+     * not null, unaffected)
+     * @param resetSleepTimer true to reset the body's sleep timer, false to
+     * leave the timer unchanged
+     */
+    public void setPositionAndRotationInternal(
+            RVec3Arg location, QuatArg orientation, boolean resetSleepTimer) {
+        long bodyVa = va();
+        double locX = location.xx();
+        double locY = location.yy();
+        double locZ = location.zz();
+        float qw = orientation.getW();
+        float qx = orientation.getX();
+        float qy = orientation.getY();
+        float qz = orientation.getZ();
+        setPositionAndRotationInternal(
+                bodyVa, locX, locY, locZ, qx, qy, qz, qw, resetSleepTimer);
+    }
+
+    /**
      * Alter the body's restitution ratio.
      *
      * @param restitution the desired ratio (typically &ge;0 and &le;1,
@@ -835,6 +872,10 @@ public class Body extends NonCopyable implements ConstBody {
             long bodyVa, float vx, float vy, float vz);
 
     native private static void setMotionType(long bodyVa, int ordinal);
+
+    native private static void setPositionAndRotationInternal(
+            long bodyVa, double locX, double locY, double locZ, float qx,
+            float qy, float qz, float qw, boolean resetSleepTimer);
 
     native private static void setRestitution(long bodyVa, float restitution);
 

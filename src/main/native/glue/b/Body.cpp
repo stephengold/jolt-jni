@@ -776,6 +776,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setMotionType
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    setPositionAndRotationInternal
+ * Signature: (JDDDFFFFZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setPositionAndRotationInternal
+  (JNIEnv *, jclass, jlong bodyVa, jdouble locX, jdouble locY, jdouble locZ,
+  jfloat qx, jfloat qy, jfloat qz, jfloat qw, jboolean resetSleepTimer) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const RVec3 location(locX, locY, locZ);
+    const Quat orient(qx, qy, qz, qw);
+    pBody->SetPositionAndRotationInternal(location, orient, resetSleepTimer);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    setRestitution
  * Signature: (JF)V
  */
