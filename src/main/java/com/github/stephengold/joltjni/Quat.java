@@ -83,7 +83,8 @@ final public class Quat implements QuatArg {
     // new methods exposed
 
     /**
-     * Return the product of the specified quaternions.
+     * Return the product of the specified quaternions. (native operator: binary
+     * {@code *})
      *
      * @param lhs the left factor (not null, unaffected)
      * @param rhs the right factor (not null, unaffected)

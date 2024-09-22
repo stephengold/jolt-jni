@@ -104,7 +104,8 @@ final public class Vec3 implements Vec3Arg {
     // new methods exposed
 
     /**
-     * Return the component-wise sum of the specified vectors.
+     * Return the component-wise sum of the specified vectors. (native operator:
+     * binary {@code +})
      *
      * @param v1 the first vector (not null, unaffected)
      * @param v2 the 2nd vector (not null, unaffected)
@@ -137,7 +138,8 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Return a scaled version of the specified vector.
+     * Return a scaled version of the specified vector. (native operator: binary
+     * {@code *})
      *
      * @param scale the scale to apply
      * @param v the input vector (not null, unaffected)
@@ -153,7 +155,8 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Return the component-wise product of the specified vectors.
+     * Return the component-wise product of the specified vectors. (native
+     * operator: binary {@code *})
      *
      * @param v1 the first vector (not null, unaffected)
      * @param v2 the 2nd vector (not null, unaffected)
@@ -169,7 +172,8 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Return the negative of the specified vector.
+     * Return the negative of the specified vector. (native operator: unary
+     * {@code -})
      *
      * @param v the input vector (not null, unaffected)
      * @return a new vector
@@ -346,7 +350,8 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Return the component-wise difference of the specified vectors.
+     * Return the component-wise difference of the specified vectors. (native
+     * operator: binary {@code -})
      *
      * @param v1 the first vector (not null, unaffected)
      * @param v2 the vector to subtract (not null, unaffected)

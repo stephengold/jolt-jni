@@ -173,7 +173,8 @@ final public class Color implements ConstColor {
     // new methods exposed
 
     /**
-     * Test whether 2 colors are equal.
+     * Test whether the specified colors are equal. (native operator:
+     * {@code ==})
      *
      * @param c1 the first color to test (not null, unaffected)
      * @param c2 the 2nd color to test (not null, unaffected)
@@ -188,7 +189,8 @@ final public class Color implements ConstColor {
     }
 
     /**
-     * Test whether 2 colors are unequal.
+     * Test whether the specified colors are unequal. (native operator:
+     * {@code !=})
      *
      * @param c1 the first color to test (not null, unaffected)
      * @param c2 the 2nd color to test (not null, unaffected)

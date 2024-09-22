@@ -69,7 +69,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     // new methods exposed
 
     /**
-     * Test 2 matrices for equality.
+     * Test whether the specified matrices are equal. (native operator:
+     * {@code ==})
      *
      * @param m1 the first matrix (not null, unaffected)
      * @param m2 the 2nd matrix (not null, unaffected)
