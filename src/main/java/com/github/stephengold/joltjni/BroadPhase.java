@@ -44,78 +44,79 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     /**
      * Abort adding bodies to the phase.
      *
-     * @param bodies the bodies to be added (not null, unmodified since the
-     * handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
-    public void addBodiesAbort(BodyId[] bodies, long addState) {
-        addBodiesAbort(bodies, bodies.length, addState);
+    public void addBodiesAbort(BodyId[] bodyIds, long addState) {
+        addBodiesAbort(bodyIds, bodyIds.length, addState);
     }
 
     /**
      * Abort adding bodies to the phase.
      *
-     * @param bodies the bodies to be added (not null, unmodified since the
-     * handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
     abstract public void addBodiesAbort(
-            BodyId[] bodies, int numBodies, long addState);
+            BodyId[] bodyIds, int numBodies, long addState);
 
     /**
      * Finish adding bodies to the phase.
      *
-     * @param bodies the bodies to be added (not null, unmodified since the
-     * handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
-    public void addBodiesFinalize(BodyId[] bodies, long addState) {
-        addBodiesFinalize(bodies, bodies.length, addState);
+    public void addBodiesFinalize(BodyId[] bodyIds, long addState) {
+        addBodiesFinalize(bodyIds, bodyIds.length, addState);
     }
 
     /**
      * Finish adding bodies to the phase.
      *
-     * @param bodies the bodies to be added (not null, unmodified since the
-     * handle was created)
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
     abstract public void addBodiesFinalize(
-            BodyId[] bodies, int numBodies, long addState);
+            BodyId[] bodyIds, int numBodies, long addState);
 
     /**
      * Prepare to add a batch of bodies to the phase.
      *
-     * @param bodies the bodies to be added (not null)
+     * @param bodyIds the IDs of the bodies to be added (not null)
      * @return a handle to be passed to {@code addBodiesFinalize()} or
      * {@code addBodiesFinalize()}
      */
-    public long addBodiesPrepare(BodyId[] bodies) {
-        long result = addBodiesPrepare(bodies, bodies.length);
+    public long addBodiesPrepare(BodyId[] bodyIds) {
+        long result = addBodiesPrepare(bodyIds, bodyIds.length);
         return result;
     }
 
     /**
      * Prepare for adding multiple bodies to the phase.
      *
-     * @param bodies the bodies to be added (not null)
+     * @param bodyIds the IDs of the bodies to be added (not null, possibly
+     * shuffled)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @return a handle to be passed to {@code addBodiesFinalize()} or
      * {@code addBodiesFinalize()}
      */
-    abstract public long addBodiesPrepare(BodyId[] bodies, int numBodies);
+    abstract public long addBodiesPrepare(BodyId[] bodyIds, int numBodies);
 
     /**
      * Initialize the phase.
      *
-     * @param bodyManager the manager to use (not null)
+     * @param manager the manager to use (not null)
      * @param map the desired map from object layers to broad-phase layers (not
      * null, alias created)
      */
     abstract public void init(
-            BodyManager bodyManager, ConstBroadPhaseLayerInterface map);
+            BodyManager manager, ConstBroadPhaseLayerInterface map);
 
     /**
      * Optimize the phase after adding objects.
