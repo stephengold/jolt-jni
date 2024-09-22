@@ -40,6 +40,14 @@ abstract public class RayCastBodyCollector extends JoltPhysicsObject {
     // new protected methods
 
     /**
+     * Force collision detection to terminate.
+     */
+    protected void forceEarlyOut() {
+        long collectorVa = va();
+        forceEarlyOut(collectorVa);
+    }
+
+    /**
      * Assign a native object, assuming there's none already assigned.
      *
      * @param collectorVa the virtual address of the native object to assign
@@ -53,6 +61,8 @@ abstract public class RayCastBodyCollector extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void forceEarlyOut(long collectorVa);
 
     native private static void free(long collectorVa);
 }

@@ -32,6 +32,18 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_RayCastBodyCollector
+ * Method:    forceEarlyOut
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RayCastBodyCollector_forceEarlyOut
+  (JNIEnv *, jclass, jlong collectorVa) {
+    RayCastBodyCollector * const pCollector
+            = reinterpret_cast<RayCastBodyCollector *> (collectorVa);
+    pCollector->ForceEarlyOut();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RayCastBodyCollector
  * Method:    free
  * Signature: (J)V
  */
