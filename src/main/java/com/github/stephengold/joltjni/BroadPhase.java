@@ -155,6 +155,71 @@ abstract public class BroadPhase extends BroadPhaseQuery {
         long phaseVa = va();
         optimize(phaseVa);
     }
+
+    /**
+     * Invoke whenever the bounding boxes of some bodies change.
+     *
+     * @param bodyIds the IDs of the bodies to be notified (not null)
+     */
+    public void notifyBodiesAabbChanged(BodyId... bodyIds) {
+        notifyBodiesAabbChanged(bodyIds, bodyIds.length, true);
+    }
+
+    /**
+     * Invoke whenever the bounding boxes of some bodies change.
+     *
+     * @param bodyIds the IDs of the bodies to be notified (not null)
+     * @param numBodies the number of bodies to be notified (&ge;0)
+     */
+    public void notifyBodiesAabbChanged(BodyId[] bodyIds, int numBodies) {
+        notifyBodiesAabbChanged(bodyIds, numBodies, true);
+    }
+
+    /**
+     * Invoke whenever the bounding boxes of some bodies change.
+     *
+     * @param bodyIds the IDs of the bodies to be notified (not null)
+     * @param numBodies the number of bodies to be notified (&ge;0)
+     * @param takeLock true to acquire a lock, otherwise false
+     */
+    public void notifyBodiesAabbChanged(
+            BodyId[] bodyIds, int numBodies, boolean takeLock) {
+        long phaseVa = va();
+        int[] iasns = new int[numBodies];
+        for (int i = 0; i < numBodies; ++i) {
+            iasns[i] = bodyIds[i].getIndexAndSequenceNumber();
+        }
+        notifyBodiesAabbChanged(phaseVa, iasns, numBodies, takeLock);
+    }
+
+    /**
+     * Remove multiple bodies from the phase.
+     *
+     * @param bodyIds the IDs of the bodies to be removed (not null)
+     */
+    public void removeBodies(BodyId... bodyIds) {
+        removeBodies(bodyIds, bodyIds.length);
+    }
+
+    /**
+     * Remove multiple bodies from the phase.
+     *
+     * @param bodyIds the IDs of the bodies to be removed (not null, possibly
+     * shuffled)
+     * @param numBodies the number of bodies to be removed (&ge;0)
+     */
+    public void removeBodies(BodyId[] bodyIds, int numBodies) {
+        long phaseVa = va();
+        int[] iasns = new int[numBodies];
+        for (int i = 0; i < numBodies; ++i) {
+            iasns[i] = bodyIds[i].getIndexAndSequenceNumber();
+        }
+        removeBodies(phaseVa, iasns, numBodies);
+        for (int i = 0; i < numBodies; ++i) {
+            int iasn = iasns[i];
+            bodyIds[i].setIndexAndSequenceNumber(iasn);
+        }
+    }
     // *************************************************************************
     // native private methods
 
@@ -170,4 +235,10 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     native private static void init(long phaseVa, long managerVa, long mapVa);
 
     native private static void optimize(long phaseVa);
+
+    native private static void notifyBodiesAabbChanged(
+            long phaseVa, int[] iasns, int numBodies, boolean takeLock);
+
+    native private static void removeBodies(
+            long phaseVa, int[] iasns, int numBodies);
 }
