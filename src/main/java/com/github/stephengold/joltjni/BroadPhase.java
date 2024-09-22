@@ -60,8 +60,14 @@ abstract public class BroadPhase extends BroadPhaseQuery {
      * @param numBodies the number of bodies to be added (&ge;0)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
-    abstract public void addBodiesAbort(
-            BodyId[] bodyIds, int numBodies, long addState);
+    public void addBodiesAbort(BodyId[] bodyIds, int numBodies, long addState) {
+        long phaseVa = va();
+        int[] iasns = new int[numBodies];
+        for (int i = 0; i < numBodies; ++i) {
+            iasns[i] = bodyIds[i].getIndexAndSequenceNumber();
+        }
+        addBodiesAbort(phaseVa, iasns, numBodies, addState);
+    }
 
     /**
      * Finish adding bodies to the phase.
@@ -82,8 +88,15 @@ abstract public class BroadPhase extends BroadPhaseQuery {
      * @param numBodies the number of bodies to be added (&ge;0)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
-    abstract public void addBodiesFinalize(
-            BodyId[] bodyIds, int numBodies, long addState);
+    public void addBodiesFinalize(
+            BodyId[] bodyIds, int numBodies, long addState) {
+        long phaseVa = va();
+        int[] iasns = new int[numBodies];
+        for (int i = 0; i < numBodies; ++i) {
+            iasns[i] = bodyIds[i].getIndexAndSequenceNumber();
+        }
+        addBodiesFinalize(phaseVa, iasns, numBodies, addState);
+    }
 
     /**
      * Prepare to add a batch of bodies to the phase.
@@ -106,7 +119,20 @@ abstract public class BroadPhase extends BroadPhaseQuery {
      * @return a handle to be passed to {@code addBodiesFinalize()} or
      * {@code addBodiesFinalize()}
      */
-    abstract public long addBodiesPrepare(BodyId[] bodyIds, int numBodies);
+    public long addBodiesPrepare(BodyId[] bodyIds, int numBodies) {
+        long phaseVa = va();
+        int[] iasns = new int[numBodies];
+        for (int i = 0; i < numBodies; ++i) {
+            iasns[i] = bodyIds[i].getIndexAndSequenceNumber();
+        }
+        long result = addBodiesPrepare(phaseVa, iasns, numBodies);
+        for (int i = 0; i < numBodies; ++i) {
+            int iasn = iasns[i];
+            bodyIds[i].setIndexAndSequenceNumber(iasn);
+        }
+
+        return result;
+    }
 
     /**
      * Initialize the phase.
@@ -115,11 +141,32 @@ abstract public class BroadPhase extends BroadPhaseQuery {
      * @param map the desired map from object layers to broad-phase layers (not
      * null, alias created)
      */
-    abstract public void init(
-            BodyManager manager, ConstBroadPhaseLayerInterface map);
+    public void init(BodyManager manager, ConstBroadPhaseLayerInterface map) {
+        long phaseVa = va();
+        long managerVa = manager.va();
+        long mapVa = map.va();
+        init(phaseVa, managerVa, mapVa);
+    }
 
     /**
      * Optimize the phase after adding objects.
      */
-    abstract public void optimize();
-}
+    public void optimize() {
+        long phaseVa = va();
+        optimize(phaseVa);
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static void addBodiesAbort(
+            long phaseVa, int[] iasns, int numBodies, long addState);
+
+    native private static void addBodiesFinalize(
+            long phaseVa, int[] iasns, int numBodies, long addState);
+
+    native private static long addBodiesPrepare(
+            long phaseVa, int[] iasns, int numBodies);
+
+    native private static void init(long phaseVa, long managerVa, long mapVa);
+
+    native private static void optimize(long phaseVa);
