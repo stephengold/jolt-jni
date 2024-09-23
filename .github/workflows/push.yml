@@ -15,9 +15,9 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - uses: actions/checkout@v4
-      - name: gradlew -Pflavor=Dp -Ptarget=Linux64 build install
+      - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64 build install
         run: |
-          ./gradlew -Pflavor=Dp -Ptarget=Linux64 build install \
+          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64 build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -199,9 +199,9 @@ jobs:
           distribution: 'zulu'
           java-version: 23
       - uses: actions/checkout@v4
-      - name: gradlew -Pflavor=Dp -Ptarget=Linux64 build install
+      - name: gradlew -Pbt=Release -Pflavor=Sp -Ptarget=Linux64 build install
         run: |
-          ./gradlew -Pflavor=Dp -Ptarget=Linux64 build install \
+          ./gradlew -Pbt=Release -Pflavor=Sp -Ptarget=Linux64 build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
