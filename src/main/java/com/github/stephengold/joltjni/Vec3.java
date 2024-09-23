@@ -505,7 +505,19 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Return the component-wise reciprocal. The vector is unaffected.
+     * Generate a normalized vector with the same direction. The vector is
+     * unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 normalized() {
+        Vec3 result = multiply(1f / length(), this);
+        return result;
+    }
+
+    /**
+     * Generate the component-wise reciprocal. The vector is unaffected.
      *
      * @return a new vector
      */

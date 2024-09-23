@@ -98,7 +98,15 @@ public interface Vec3Arg {
     float lengthSq();
 
     /**
-     * Return the component-wise reciprocal. The vector is unaffected.
+     * Generate a normalized vector with the same direction. The vector is
+     * unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 normalized();
+
+    /**
+     * Generate the component-wise reciprocal. The vector is unaffected.
      *
      * @return a new vector
      */
