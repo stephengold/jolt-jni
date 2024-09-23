@@ -87,6 +87,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ObjVsObjFilter_creat
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjVsObjFilter
+ * Method:    disablePair
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsObjFilter_disablePair
+  (JNIEnv *, jclass, jlong filterVa, jint layer1, jint layer2) {
+    ObjVsObjFilter * const pFilter
+            = reinterpret_cast<ObjVsObjFilter *> (filterVa);
+    pFilter->DisablePair(layer1, layer2);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjVsObjFilter
  * Method:    free
  * Signature: (J)V
  */
@@ -96,16 +108,4 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsObjFilter_free
             = reinterpret_cast<ObjVsObjFilter *> (filterVa);
     TRACE_DELETE("ObjVsObjFilter", pFilter)
     delete pFilter;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ObjVsObjFilter
- * Method:    disablePair
- * Signature: (JII)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsObjFilter_disablePair
-  (JNIEnv *, jclass, jlong filterVa, jint layer1, jint layer2) {
-    ObjVsObjFilter * const pFilter
-            = reinterpret_cast<ObjVsObjFilter *> (filterVa);
-    pFilter->DisablePair(layer1, layer2);
 }
