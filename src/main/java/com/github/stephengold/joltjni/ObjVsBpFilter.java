@@ -45,6 +45,32 @@ public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
     // new methods exposed
 
     /**
+     * Disable interactions with the specified layer.
+     *
+     * @param bpLayer the index of the broad-phase layer (&lt; numBpLayers)
+     * @return the modified filter (for chaining)
+     */
+    public ObjVsBpFilter disableBp(int bpLayer) {
+        long filterVa = va();
+        disableBp(filterVa, bpLayer);
+
+        return this;
+    }
+
+    /**
+     * Disable interactions with the specified layer.
+     *
+     * @param objLayer the index of the object layer (&lt; numObjectLayers)
+     * @return the modified filter (for chaining)
+     */
+    public ObjVsBpFilter disableObj(int objLayer) {
+        long filterVa = va();
+        disableObj(filterVa, objLayer);
+
+        return this;
+    }
+
+    /**
      * Disable interactions between the specified layers.
      *
      * @param objLayer the index of the object layer (&lt; numObjectLayers)
@@ -60,6 +86,10 @@ public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
 
     native private static long createObjVsBpFilter(
             int numObjectLayers, int numBpLayers);
+
+    native private static void disableBp(long filterVa, int bpLayer);
+
+    native private static void disableObj(long filterVa, int objLayer);
 
     native private static void disablePair(
             long filterVa, int objLayer, int bpLayer);

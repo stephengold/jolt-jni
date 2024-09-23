@@ -58,6 +58,20 @@ public:
         return result;
     }
 
+    void DisableBp(BroadPhaseLayer inBpLayer) {
+        JPH_ASSERT(inBpLayer.GetValue() < mNumBpLayers);
+        for (ObjectLayer i = 0; i < mNumObjectLayers; ++i) {
+            mppEnable[i][inBpLayer.GetValue()] = false;
+        }
+    }
+
+    void DisableObj(ObjectLayer inObjectLayer) {
+        JPH_ASSERT(inObjectLayer < mNumObjectLayers);
+        for (uint j = 0; j < mNumBpLayers; ++j) {
+            mppEnable[inObjectLayer][j] = false;
+        }
+    }
+
     void DisablePair(ObjectLayer inObjectLayer, BroadPhaseLayer inBpLayer) {
         JPH_ASSERT(inObjectLayer < mNumObjectLayers);
         JPH_ASSERT(inBpLayer.GetValue() < mNumBpLayers);
@@ -85,6 +99,30 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_create
             = new ObjVsBpFilter(numObjectLayers, numBpLayers);
     TRACE_NEW("ObjVsBpFilter", pFilter)
     return reinterpret_cast<jlong> (pFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjVsBpFilter
+ * Method:    disableBp
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_disableBp
+  (JNIEnv *, jclass, jlong filterVa, jint bpLayer) {
+    ObjVsBpFilter * const pFilter
+            = reinterpret_cast<ObjVsBpFilter *> (filterVa);
+    pFilter->DisableBp(BroadPhaseLayer(bpLayer));
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjVsBpFilter
+ * Method:    disableObj
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_disableObj
+  (JNIEnv *, jclass, jlong filterVa, jint objLayer) {
+    ObjVsBpFilter * const pFilter
+            = reinterpret_cast<ObjVsBpFilter *> (filterVa);
+    pFilter->DisableObj(objLayer);
 }
 
 /*
