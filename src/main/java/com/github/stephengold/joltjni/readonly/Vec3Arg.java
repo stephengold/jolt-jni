@@ -84,6 +84,13 @@ public interface Vec3Arg {
     boolean isNormalized(float tolerance);
 
     /**
+     * Return the length. The vector is unaffected.
+     *
+     * @return the length
+     */
+    float length();
+
+    /**
      * Return the squared length. The vector is unaffected.
      *
      * @return the squared length

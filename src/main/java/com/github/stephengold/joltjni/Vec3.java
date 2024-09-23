@@ -481,6 +481,19 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Return the length. The vector is unaffected.
+     *
+     * @return the length
+     */
+    @Override
+    public float length() {
+        float length = lengthSq();
+        float result = (float) Math.sqrt(length);
+
+        return result;
+    }
+
+    /**
      * Return the squared length. The vector is unaffected.
      *
      * @return the squared length
