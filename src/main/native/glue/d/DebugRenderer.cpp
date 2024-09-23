@@ -62,6 +62,27 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawArr
 
 /*
  * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawBox
+ * Signature: (JJIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawBox
+  (JNIEnv *, jclass, jlong transformVa, jlong boxVa, jint colorInt,
+  jint csOrdinal, jint drawModeOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const Color color(colorInt);
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    const DebugRenderer::EDrawMode drawMode
+            = (DebugRenderer::EDrawMode) drawModeOrdinal;
+    DebugRenderer::sInstance->DrawBox(
+            *pTransform, *pBox, color, castShadow, drawMode);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
  * Method:    drawCoordinateSystem
  * Signature: (JF)V
  */
@@ -117,6 +138,62 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawPla
     const Vec3 normal(normX, normY, normZ);
     const Color color(colorInt);
     DebugRenderer::sInstance->DrawPlane(location, normal, color, size);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawSphere
+ * Signature: (DDDFIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawSphere
+  (JNIEnv *, jclass, jdouble locX, jdouble locY, jdouble locZ, jfloat radius,
+  jint colorInt, jint csOrdinal, jint drawModeOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const RVec3 location(locX, locY, locZ);
+    const Color color(colorInt);
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    const DebugRenderer::EDrawMode drawMode
+            = (DebugRenderer::EDrawMode) drawModeOrdinal;
+    DebugRenderer::sInstance->DrawSphere(
+            location, radius, color, castShadow, drawMode);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawText3d
+ * Signature: (DDDLjava/lang/String;IF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawText3d
+  (JNIEnv *pEnv, jclass, jdouble locX, jdouble locY, jdouble locZ, jstring text,
+  jint colorInt, jfloat size) {
+#ifdef JPH_DEBUG_RENDERER
+    const RVec3 location(locX, locY, locZ);
+    jboolean isCopy;
+    const char * strText = pEnv->GetStringUTFChars(text, &isCopy);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawText3D(location, strText, color, size);
+    pEnv->ReleaseStringUTFChars(text, strText);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawTriangle
+ * Signature: (DDDDDDDDDI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawTriangle
+  (JNIEnv *, jclass, jdouble v1x, jdouble v1y, jdouble v1z, jdouble v2x,
+  jdouble v2y, jdouble v2z, jdouble v3x, jdouble v3y, jdouble v3z,
+  jint colorInt) {
+#ifdef JPH_DEBUG_RENDERER
+    const RVec3 v1(v1x, v1y, v1z);
+    const RVec3 v2(v2x, v2y, v2z);
+    const RVec3 v3(v3x, v3y, v3z);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawTriangle(v1, v2, v3, color);
 #endif
 }
 

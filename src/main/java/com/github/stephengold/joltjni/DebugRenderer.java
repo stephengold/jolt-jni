@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.ECastShadow;
+import com.github.stephengold.joltjni.enumerate.EDrawMode;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstColor;
 import com.github.stephengold.joltjni.readonly.ConstOrientedBox;
@@ -81,10 +83,62 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
+     * Draw the specified 3-D box.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param box the desired geometric properties (not null, unaffected)
+     * @param color the desired color (not null, unaffected)
+     */
+    public void drawBox(RMat44Arg transform, ConstAaBox box, ConstColor color) {
+        drawBox(transform, box, color, ECastShadow.On);
+    }
+
+    /**
+     * Draw the specified 3-D box.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param box the desired geometric properties (not null, unaffected)
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     */
+    public void drawBox(RMat44Arg transform, ConstAaBox box, ConstColor color,
+            ECastShadow castShadow) {
+        drawBox(transform, box, color, castShadow, EDrawMode.Solid);
+    }
+
+    /**
+     * Draw the specified 3-D box.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param box the desired geometric properties (not null, unaffected)
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawBox(RMat44Arg transform, ConstAaBox box, ConstColor color,
+            ECastShadow castShadow, EDrawMode drawMode) {
+        long transformVa = transform.va();
+        long boxVa = box.va();
+        int colorInt = color.getUInt32();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawBox(transformVa, boxVa, colorInt, csOrdinal, drawModeOrdinal);
+    }
+
+    /**
      * Draw the specified 3-D coordinate axes.
      *
      * @param transform the desired coordinate transform (not null, unaffected)
-     * @param size the desired size
+     */
+    public void drawCoordinateSystem(RMat44Arg transform) {
+        drawCoordinateSystem(transform, 1f);
+    }
+
+    /**
+     * Draw the specified 3-D coordinate axes.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param size the desired size (default=1)
      */
     public void drawCoordinateSystem(RMat44Arg transform, float size) {
         long transformVa = transform.va();
@@ -147,6 +201,117 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
+     * Draw the specified sphere.
+     *
+     * @param location the location of the sphere's center (not null,
+     * unaffected)
+     * @param radius the desired radius
+     * @param color the desired color (not null, unaffected)
+     */
+    public void drawSphere(RVec3Arg location, float radius, ConstColor color) {
+        drawSphere(location, radius, color, ECastShadow.On);
+    }
+
+    /**
+     * Draw the specified sphere.
+     *
+     * @param location the location of the sphere's center (not null,
+     * unaffected)
+     * @param radius the desired radius
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     */
+    public void drawSphere(RVec3Arg location, float radius, ConstColor color,
+            ECastShadow castShadow) {
+        drawSphere(location, radius, color, castShadow, EDrawMode.Solid);
+    }
+
+    /**
+     * Draw the specified sphere.
+     *
+     * @param location the location of the sphere's center (not null,
+     * unaffected)
+     * @param radius the desired radius
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawSphere(RVec3Arg location, float radius, ConstColor color,
+            ECastShadow castShadow, EDrawMode drawMode) {
+        double locX = location.xx();
+        double locY = location.yy();
+        double locZ = location.zz();
+        int colorInt = color.getUInt32();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawSphere(
+                locX, locY, locZ, radius, colorInt, csOrdinal, drawModeOrdinal);
+    }
+
+    /**
+     * Draw the specified 3-D text.
+     *
+     * @param location the location of the text (not null, unaffected)
+     * @param text the text to display (not null)
+     */
+    public void drawText3D(RVec3Arg location, String text) {
+        drawText3D(location, text, Color.sWhite);
+    }
+
+    /**
+     * Draw the specified 3-D text.
+     *
+     * @param location the location of the text (not null, unaffected)
+     * @param text the text to display (not null)
+     * @param color the desired text color (not null, unaffected,
+     * default=sWhite)
+     */
+    public void drawText3D(RVec3Arg location, String text, ConstColor color) {
+        drawText3D(location, text, color, 0.5f);
+    }
+
+    /**
+     * Draw the specified 3-D text.
+     *
+     * @param location the location of the text (not null, unaffected)
+     * @param text the text to display (not null)
+     * @param color the desired text color (not null, unaffected,
+     * default=sWhite)
+     * @param height the desired text height (default=0.5)
+     */
+    public void drawText3D(
+            RVec3Arg location, String text, ConstColor color, float height) {
+        double locX = location.xx();
+        double locY = location.yy();
+        double locZ = location.zz();
+        int colorInt = color.getUInt32();
+        drawText3d(locX, locY, locZ, text, colorInt, height);
+    }
+
+    /**
+     * Draw the specified 3-D triangle.
+     *
+     * @param v1 the location of the first vertex (not null, unaffected)
+     * @param v2 the location of the 2nd vertex (not null, unaffected)
+     * @param v3 the location of the 3rd vertex (not null, unaffected)
+     * @param color the desired color (not null, unaffected)
+     */
+    public void drawTriangle(
+            RVec3Arg v1, RVec3Arg v2, RVec3Arg v3, ConstColor color) {
+        double v1x = v1.xx();
+        double v1y = v1.yy();
+        double v1z = v1.zz();
+        double v2x = v2.xx();
+        double v2y = v2.yy();
+        double v2z = v2.zz();
+        double v3x = v3.xx();
+        double v3y = v3.yy();
+        double v3z = v3.zz();
+        int colorInt = color.getUInt32();
+        drawTriangle(v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, colorInt);
+    }
+
+    /**
      * Draw a wire-frame of the specified axis-aligned box.
      *
      * @param box the desired geometric properties (not null, unaffected)
@@ -192,7 +357,20 @@ abstract public class DebugRenderer extends NonCopyable {
      * unaffected)
      * @param radius the desired radius
      * @param color the desired color (not null, unaffected)
-     * @param level the desired level of detail
+     */
+    public void drawWireSphere(
+            RVec3Arg location, float radius, ConstColor color) {
+        drawWireSphere(location, radius, color, 3);
+    }
+
+    /**
+     * Draw a wire frame of the specified sphere.
+     *
+     * @param location the location of the sphere's center (not null,
+     * unaffected)
+     * @param radius the desired radius
+     * @param color the desired color (not null, unaffected)
+     * @param level the desired level of detail (default=3)
      */
     public void drawWireSphere(
             RVec3Arg location, float radius, ConstColor color, int level) {
@@ -231,7 +409,17 @@ abstract public class DebugRenderer extends NonCopyable {
      *
      * @param transform the desired coordinate transform (not null, unaffected)
      * @param color the desired color (not null, unaffected)
-     * @param level the desired level of detail
+     */
+    public void drawWireUnitSphere(RMat44Arg transform, ConstColor color) {
+        drawWireUnitSphere(transform, color, 3);
+    }
+
+    /**
+     * Draw a wire frame of the specified unit sphere.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param color the desired color (not null, unaffected)
+     * @param level the desired level of detail (default=3)
      */
     public void drawWireUnitSphere(
             RMat44Arg transform, ConstColor color, int level) {
@@ -267,6 +455,9 @@ abstract public class DebugRenderer extends NonCopyable {
             double fromX, double fromY, double fromZ, double toX, double toY,
             double toZ, int colorInt, float size);
 
+    native private static void drawBox(long transformVa, long boxVa,
+            int colorInt, int csOrdinal, int drawModeOrdinal);
+
     native private static void drawCoordinateSystem(
             long transformVa, float size);
 
@@ -278,6 +469,16 @@ abstract public class DebugRenderer extends NonCopyable {
 
     native private static void drawPlane(double locX, double locY, double locZ,
             float normX, float normY, float normZ, int colorInt, float size);
+
+    native private static void drawSphere(double locX, double locY, double locZ,
+            float radius, int colorInt, int csOrdinal, int drawModeOrdinal);
+
+    native private static void drawText3d(double locX, double locY, double locZ,
+            String text, int colorInt, float height);
+
+    native private static void drawTriangle(double v1x, double v1y,
+            double v1z, double v2x, double v2y, double v2z, double v3x,
+            double v3y, double v3z, int colorInt);
 
     native private static void drawWireBoxAligned(long boxVa, int colorInt);
 
