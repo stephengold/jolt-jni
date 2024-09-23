@@ -89,6 +89,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_create
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjVsBpFilter
+ * Method:    disablePair
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_disablePair
+  (JNIEnv *, jclass, jlong filterVa, jint objLayer, jint bpLayer) {
+    ObjVsBpFilter * const pFilter
+            = reinterpret_cast<ObjVsBpFilter *> (filterVa);
+    pFilter->DisablePair(objLayer, BroadPhaseLayer(bpLayer));
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjVsBpFilter
  * Method:    free
  * Signature: (J)V
  */
@@ -98,16 +110,4 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_free
             = reinterpret_cast<ObjVsBpFilter *> (filterVa);
     TRACE_DELETE("ObjVsBpFilter", pFilter)
     delete pFilter;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ObjVsBpFilter
- * Method:    disablePair
- * Signature: (JII)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_disablePair
-  (JNIEnv *, jclass, jlong filterVa, jint objLayer, jint bpLayer) {
-    ObjVsBpFilter * const pFilter
-            = reinterpret_cast<ObjVsBpFilter *> (filterVa);
-    pFilter->DisablePair(objLayer, BroadPhaseLayer(bpLayer));
 }
