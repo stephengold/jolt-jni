@@ -56,6 +56,14 @@ public:
         return result;
     }
 
+    void DisableLayer(ObjectLayer inLayer) {
+        JPH_ASSERT(inLayer < mNumObjectLayers);
+        for (ObjectLayer j = 0; j < mNumObjectLayers; ++j) {
+            mppEnable[inLayer][j] = false;
+            mppEnable[j][inLayer] = false;
+        }
+    }
+
     void DisablePair(ObjectLayer inLayer1, ObjectLayer inLayer2) {
         JPH_ASSERT(inLayer1 < mNumObjectLayers);
         JPH_ASSERT(inLayer2 < mNumObjectLayers);
@@ -83,6 +91,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ObjVsObjFilter_creat
     ObjVsObjFilter * const pFilter = new ObjVsObjFilter(numObjectLayers);
     TRACE_NEW("ObjVsObjFilter", pFilter)
     return reinterpret_cast<jlong> (pFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjVsObjFilter
+ * Method:    disableLayer
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsObjFilter_disableLayer
+  (JNIEnv *, jclass, jlong filterVa, jint layer) {
+    ObjVsObjFilter * const pFilter
+            = reinterpret_cast<ObjVsObjFilter *> (filterVa);
+    pFilter->DisableLayer(layer);
 }
 
 /*

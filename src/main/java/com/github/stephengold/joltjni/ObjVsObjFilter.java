@@ -44,6 +44,19 @@ public class ObjVsObjFilter extends ObjectLayerPairFilter {
     // new methods exposed
 
     /**
+     * Disable all interactions with the specified object layer.
+     *
+     * @param layer the index of the layer (&lt; numObjectLayers)
+     * @return the modified filter (for chaining)
+     */
+    public ObjVsObjFilter disableLayer(int layer) {
+        long filterVa = va();
+        disableLayer(filterVa, layer);
+
+        return this;
+    }
+
+    /**
      * Disable interactions between the specified object layers.
      *
      * @param layer1 the index of the first object layer (&lt; numObjectLayers)
@@ -58,6 +71,8 @@ public class ObjVsObjFilter extends ObjectLayerPairFilter {
     // native private methods
 
     native private static long createObjVsObjFilter(int numObjectLayers);
+
+    native private static void disableLayer(long filterVa, int layer);
 
     native private static void disablePair(
             long filterVa, int layer1, int layer2);
