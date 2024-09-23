@@ -71,6 +71,16 @@ final public class Jolt {
     native public static String buildType();
 
     /**
+     * Convert the specified angle from degrees to radians.
+     *
+     * @param degrees the angle to convert (in degrees)
+     * @return the converted angle (in radians)
+     */
+    public static float degreesToRadians(float degrees) {
+        return degrees * (JPH_PI / 180f);
+    }
+
+    /**
      * Destroy the factory for deserialization of saved data.
      *
      * @see newFactory
@@ -235,6 +245,16 @@ final public class Jolt {
      * @see destroyFactory
      */
     native public static void newFactory();
+
+    /**
+     * Convert the specified angle from radians to degrees.
+     *
+     * @param radians the angle to convert (in radians)
+     * @return the converted angle (in degrees)
+     */
+    public static float radiansToDegrees(float radians) {
+        return radians * (180f / JPH_PI);
+    }
 
     /**
      * Intersect the specified axis-aligned box with the specified ray.
