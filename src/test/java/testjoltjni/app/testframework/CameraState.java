@@ -35,9 +35,9 @@ public class CameraState
 {
 									public CameraState() { }
 
-	RVec3							mPos = RVec3.sZero();								///< Camera position
-	Vec3							mForward = new Vec3(0, 0, -1);							///< Camera forward vector
-	Vec3							mUp = new Vec3(0, 1, 0);							///< Camera up vector
-	float							mFOVY = Jolt.degreesToRadians(70.0f);						///< Field of view in radians in up direction
+	public RVec3							mPos = RVec3.sZero();								///< Camera position
+	public Vec3							mForward = new Vec3(0, 0, -1);							///< Camera forward vector
+	public Vec3							mUp = new Vec3(0, 1, 0);							///< Camera up vector
+	public float							mFOVY = Jolt.degreesToRadians(70.0f);						///< Field of view in radians in up direction
 };
 
