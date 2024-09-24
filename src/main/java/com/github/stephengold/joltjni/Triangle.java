@@ -157,8 +157,8 @@ final public class Triangle extends JoltPhysicsObject {
     }
 
     /**
-     * Write the vertex locations to a buffer and advance the buffer's position
-     * by 9.
+     * Write the vertex locations to the specified buffer and advance the
+     * buffer's position by 9. The triangle is unaffected.
      *
      * @param storeBuffer the destination buffer (not null)
      */

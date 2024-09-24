@@ -95,7 +95,7 @@ public interface Vec3Arg {
      * Test whether the vector is normalized to within the specified tolerance.
      * The vector is unaffected.
      *
-     * @param tolerance the desired tolerance
+     * @param tolerance the desired tolerance (default=1e-6)
      * @return true if normalized, otherwise false
      */
     boolean isNormalized(float tolerance);

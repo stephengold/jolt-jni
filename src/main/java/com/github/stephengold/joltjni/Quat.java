@@ -180,6 +180,7 @@ final public class Quat implements QuatArg {
      */
     public static Quat sRotation(Vec3 axis, float angle) {
         assert axis.isNormalized();
+
         float qw = (float) Math.cos(0.5 * angle);
         float s = (float) Math.sin(0.5 * angle);
         float qx = axis.getX() * s;
