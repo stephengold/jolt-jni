@@ -100,6 +100,17 @@ final public class Vec3 implements Vec3Arg {
         this.y = array[1];
         this.z = array[2];
     }
+
+    /**
+     * Instantiate a copy of the argument.
+     *
+     * @param vec the vector to copy (not null, unaffected)
+     */
+    public Vec3(Vec3Arg vec) {
+        this.x = vec.getX();
+        this.y = vec.getY();
+        this.z = vec.getZ();
+    }
     // *************************************************************************
     // new methods exposed
 
