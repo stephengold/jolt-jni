@@ -46,6 +46,49 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Instantiate settings for the specified vertices and triangles.
+     *
+     * @param vertices the array of vertices (not null, unaffected)
+     * @param indices the list of triangles (not null, unaffected)
+     */
+    public MeshShapeSettings(Float3[] vertices, IndexedTriangleList indices) {
+        int numVertices = vertices.length;
+        int numFloats = 3 * numVertices;
+        FloatBuffer vBuffer = Jolt.newDirectFloatBuffer(numFloats);
+        for (int i = 0; i < numVertices; ++i) {
+            Float3 vertex = vertices[i];
+            vertex.put(vBuffer);
+        }
+        long indicesVa = indices.va();
+        long settingsVa
+                = createMeshShapeSettings(numVertices, vBuffer, indicesVa);
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.Mesh);
+    }
+
+    /**
+     * Instantiate settings for the specified lists of vertices and triangles.
+     *
+     * @param vertices the list of vertices (not null, unaffected)
+     * @param indices the list of triangles (not null, unaffected)
+     */
+    public MeshShapeSettings(
+            List<Float3> vertices, IndexedTriangleList indices) {
+        int numVertices = vertices.size();
+        int numFloats = 3 * numVertices;
+        FloatBuffer vBuffer = Jolt.newDirectFloatBuffer(numFloats);
+        for (int i = 0; i < numVertices; ++i) {
+            Float3 vertex = vertices.get(i);
+            vertex.put(vBuffer);
+        }
+        long indicesVa = indices.va();
+        long settingsVa
+                = createMeshShapeSettings(numVertices, vBuffer, indicesVa);
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.Mesh);
+    }
+
+    /**
      * Instantiate settings for the specified list of triangles.
      *
      * @param triangleList the list of triangles (not null, unaffected)
