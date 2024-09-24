@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import java.nio.FloatBuffer;
+
 /**
  * A vector composed of 3 single-precision components, used as a storage class.
  *
@@ -100,6 +102,18 @@ final public class Float3 {
                 throw new IllegalArgumentException(
                         "index must be either 0, 1 or 2");
         }
+    }
+
+    /**
+     * Write all 3 components to the specified buffer and advance the buffer's
+     * position by 3. The vector is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    public void put(FloatBuffer storeBuffer) {
+        storeBuffer.put(x);
+        storeBuffer.put(y);
+        storeBuffer.put(z);
     }
 
     /**
