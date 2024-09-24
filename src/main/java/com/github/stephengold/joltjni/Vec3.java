@@ -452,6 +452,35 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Test whether the vector is zero to within a tolerance of 10^-12. The
+     * vector is unaffected.
+     *
+     * @return true if near zero, otherwise false
+     */
+    @Override
+    public boolean isNearZero() {
+        boolean result = isNearZero(1e-12f);
+        return result;
+    }
+
+    /**
+     * Test whether the vector is zero to within the specified tolerance. The
+     * vector is unaffected.
+     *
+     * @param tolerance the desired tolerance (default=1e-12)
+     * @return true if near zero, otherwise false
+     */
+    @Override
+    public boolean isNearZero(float tolerance) {
+        float lengthSq = lengthSq();
+        if (lengthSq <= tolerance) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Test whether the vector is normalized to within a tolerance of 10^-6. The
      * vector is unaffected.
      *
@@ -513,6 +542,34 @@ final public class Vec3 implements Vec3Arg {
     @Override
     public Vec3 normalized() {
         Vec3 result = multiply(1f / length(), this);
+        return result;
+    }
+
+    /**
+     * Return a copy of the argument if the length of the current vector is
+     * zero. Otherwise, generate a normalized vector with the same direction as
+     * the current vector. The current vector is unaffected.
+     *
+     * @param zeroValue the value to return if the length is zero (not null,
+     * unaffected)
+     * @return a new vector
+     */
+    @Override
+    public Vec3 normalizedOr(Vec3Arg zeroValue) {
+        Vec3 result;
+
+        float lengthSq = lengthSq();
+        if (lengthSq == 0f) {
+            result = new Vec3(zeroValue);
+        } else {
+            float length = (float) Math.sqrt(lengthSq);
+            if (length == 0f) {
+                result = new Vec3(zeroValue);
+            } else {
+                result = multiply(1f / length, this);
+            }
+        }
+
         return result;
     }
 

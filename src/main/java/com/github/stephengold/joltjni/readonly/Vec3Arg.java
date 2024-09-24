@@ -67,6 +67,23 @@ public interface Vec3Arg {
     float getZ();
 
     /**
+     * Test whether the vector is zero to within a tolerance of 10^-12. The
+     * vector is unaffected.
+     *
+     * @return true if near zero, otherwise false
+     */
+    boolean isNearZero();
+
+    /**
+     * Test whether the vector is zero to within the specified tolerance. The
+     * vector is unaffected.
+     *
+     * @param tolerance the desired tolerance (default=1e-12)
+     * @return true if near zero, otherwise false
+     */
+    boolean isNearZero(float tolerance);
+
+    /**
      * Test whether the vector is normalized to within a tolerance of 10^-6. The
      * vector is unaffected.
      *
@@ -104,6 +121,17 @@ public interface Vec3Arg {
      * @return a new vector
      */
     Vec3 normalized();
+
+    /**
+     * Return a copy of the argument if the length of the current vector is
+     * zero. Otherwise, generate a normalized vector with the same direction as
+     * the current vector. The current vector is unaffected.
+     *
+     * @param zeroValue the value to return if the length is zero (not null,
+     * unaffected)
+     * @return a new vector
+     */
+    Vec3 normalizedOr(Vec3Arg zeroValue);
 
     /**
      * Generate the component-wise reciprocal. The vector is unaffected.
