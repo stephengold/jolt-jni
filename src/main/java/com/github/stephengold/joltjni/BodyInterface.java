@@ -179,10 +179,10 @@ public class BodyInterface extends NonCopyable {
      * @param activationMode whether to activate the body (not null)
      * @return the ID of the created body, or an invalid ID when out of bodies
      */
-    public ConstBodyId createAndAddBody(
+    public BodyId createAndAddBody(
             BodyCreationSettings settings, EActivation activationMode) {
         Body body = createBody(settings);
-        ConstBodyId result = body.getId();
+        BodyId result = body.getId();
         addBody(result, activationMode);
 
         return result;
