@@ -34,6 +34,14 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     // constructors
 
     /**
+     * Instantiate a default ID.
+     */
+    public BodyId() {
+        long idVa = createDefault();
+        setVirtualAddress(idVa, () -> free(idVa));
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      * <p>
      * For use in custom collectors and custom listeners.
@@ -154,6 +162,8 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     // native private methods
 
     native private static long copy(long idVa);
+
+    native private static long createDefault();
 
     native private static boolean equals(long id1Va, long id2Va);
 

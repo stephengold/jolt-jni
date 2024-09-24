@@ -45,6 +45,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyId_copy
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyId
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyId_createDefault
+  (JNIEnv *, jclass) {
+    BodyID * const pResult = new BodyID();
+    TRACE_NEW("BodyID", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyId
  * Method:    equals
  * Signature: (JJ)Z
  */
