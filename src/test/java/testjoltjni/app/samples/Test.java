@@ -39,6 +39,7 @@ DebugRenderer mDebugRenderer = null;
 TempAllocator mTempAllocator = null;
 float GetWorldScale() { return 1.0f; }
 
+Body CreateFloor() {return CreateFloor(200.0f);}
 Body CreateFloor(float inSize)
 {
 	final float scale = GetWorldScale();
