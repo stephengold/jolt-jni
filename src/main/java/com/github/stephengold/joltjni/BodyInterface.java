@@ -207,6 +207,29 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Create a two-body constraint using the specified settings.
+     *
+     * @param settings the settings to use (not null, unaffected)
+     * @param body1Id the ID of the first body (not null, unaffected)
+     * @param body2Id the ID of the 2nd body (not null, unaffected)
+     * @return the new constraint
+     */
+    public TwoBodyConstraint createConstraint(
+            TwoBodyConstraintSettings settings,
+            ConstBodyId body1Id, ConstBodyId body2Id) {
+        long bodyInterfaceVa = va();
+        long settingsVa = settings.va();
+        long body1IdVa = body1Id.va();
+        long body2IdVa = body2Id.va();
+        long constraintVa = createConstraint(
+                bodyInterfaceVa, settingsVa, body1IdVa, body2IdVa);
+        TwoBodyConstraint result
+                = (TwoBodyConstraint) Constraint.newConstraint(constraintVa);
+
+        return result;
+    }
+
+    /**
      * Deactivate the specified body.
      *
      * @param bodyId the ID of the body to deactivate (not null, unaffected)
@@ -605,6 +628,9 @@ public class BodyInterface extends NonCopyable {
 
     native private static long createBody(
             long bodyInterfaceVa, long settingsVa);
+
+    native private static long createConstraint(long bodyInterfaceVa,
+            long settingsVa, long body1IdVa, long body2IdVa);
 
     native private static void deactivateBody(
             long bodyInterfaceVa, long bodyIdVa);

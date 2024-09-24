@@ -149,6 +149,27 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_create
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    createConstraint
+ * Signature: (JJJJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_createConstraint
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong settingsVa, jlong body1IdVa,
+  jlong body2IdVa) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const TwoBodyConstraintSettings * const pSettings
+            = reinterpret_cast<TwoBodyConstraintSettings *> (settingsVa);
+    const BodyID * const pBody1Id
+            = reinterpret_cast<BodyID *> (body1IdVa);
+    const BodyID * const pBody2Id
+            = reinterpret_cast<BodyID *> (body2IdVa);
+    TwoBodyConstraint * const pResult
+            = pInterface->CreateConstraint(pSettings, *pBody1Id, *pBody2Id);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    deactivateBody
  * Signature: (JJ)V
  */
