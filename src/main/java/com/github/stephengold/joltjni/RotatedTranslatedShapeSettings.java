@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -42,6 +43,30 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      */
     RotatedTranslatedShapeSettings(long rtssVa) {
         super(rtssVa);
+        setSubType(EShapeSubType.RotatedTranslated);
+    }
+
+    /**
+     * Instantiate a settings object with the specified offset, rotation, and
+     * base shape.
+     *
+     * @param offset (not null, unaffected)
+     * @param rotation (not null, not zero, unaffected)
+     * @param baseShape the base shape (not null, unaffected)
+     */
+    public RotatedTranslatedShapeSettings(
+            Vec3Arg offset, QuatArg rotation, ConstShape baseShape) {
+        float offsetX = offset.getX();
+        float offsetY = offset.getY();
+        float offsetZ = offset.getZ();
+        float rotW = rotation.getW();
+        float rotX = rotation.getX();
+        float rotY = rotation.getY();
+        float rotZ = rotation.getZ();
+        long baseShapeVa = baseShape.va();
+        long rtssVa = createSettingsFromShape(offsetX, offsetY,
+                offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
+        setVirtualAddress(rtssVa, null); // no owner due to ref counting
         setSubType(EShapeSubType.RotatedTranslated);
     }
 
@@ -135,6 +160,10 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createSettingsFromShape(
+            float offsetX, float offsetY, float offsetZ, float rotX, float rotY,
+            float rotZ, float rotW, long baseShapeVa);
 
     native private static long createSettingsFromShapeRef(
             float offsetX, float offsetY, float offsetZ, float rotX, float rotY,

@@ -32,6 +32,23 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_RotatedTranslatedShapeSettings
+ * Method:    createSettingsFromShape
+ * Signature: (FFFFFFFJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShapeSettings_createSettingsFromShape
+  (JNIEnv *, jclass, jfloat offsetX, jfloat offsetY, jfloat offsetZ,
+  jfloat rotX, jfloat rotY, jfloat rotZ, jfloat rotW, jlong baseShapeVa) {
+    const Vec3 offset(offsetX, offsetY, offsetZ);
+    const Quat rotation(rotX, rotY, rotZ, rotW);
+    const Shape * const pBase = reinterpret_cast<Shape *> (baseShapeVa);
+    RotatedTranslatedShapeSettings * const pResult
+            = new RotatedTranslatedShapeSettings(offset, rotation, pBase);
+    TRACE_NEW("RotatedTranslatedShapeSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RotatedTranslatedShapeSettings
  * Method:    createSettingsFromShapeRef
  * Signature: (FFFFFFFJ)J
  */
