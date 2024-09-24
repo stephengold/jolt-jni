@@ -265,48 +265,48 @@ public class CharacterBase extends NonCopyable implements ConstCharacterBase {
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
-    native private static float getCosMaxSlopeAngle(long characterVa);
+    native static float getCosMaxSlopeAngle(long characterVa);
 
-    native private static long getGroundBodyId(long characterVa);
+    native static long getGroundBodyId(long characterVa);
 
-    native private static float getGroundNormalX(long characterVa);
+    native static float getGroundNormalX(long characterVa);
 
-    native private static float getGroundNormalY(long characterVa);
+    native static float getGroundNormalY(long characterVa);
 
-    native private static float getGroundNormalZ(long characterVa);
+    native static float getGroundNormalZ(long characterVa);
 
-    native private static double getGroundPositionX(long characterVa);
+    native static double getGroundPositionX(long characterVa);
 
-    native private static double getGroundPositionY(long characterVa);
+    native static double getGroundPositionY(long characterVa);
 
-    native private static double getGroundPositionZ(long characterVa);
+    native static double getGroundPositionZ(long characterVa);
 
-    native private static int getGroundState(long characterVa);
+    native static int getGroundState(long characterVa);
 
-    native private static long getGroundSubShapeId(long characterVa);
+    native static long getGroundSubShapeId(long characterVa);
 
-    native private static long getGroundUserData(long characterVa);
+    native static long getGroundUserData(long characterVa);
 
-    native private static float getGroundVelocityX(long characterVa);
+    native static float getGroundVelocityX(long characterVa);
 
-    native private static float getGroundVelocityY(long characterVa);
+    native static float getGroundVelocityY(long characterVa);
 
-    native private static float getGroundVelocityZ(long characterVa);
+    native static float getGroundVelocityZ(long characterVa);
 
-    native private static long getShape(long characterVa);
+    native static long getShape(long characterVa);
 
-    native private static float getUpX(long characterVa);
+    native static float getUpX(long characterVa);
 
-    native private static float getUpY(long characterVa);
+    native static float getUpY(long characterVa);
 
-    native private static float getUpZ(long characterVa);
+    native static float getUpZ(long characterVa);
 
-    native private static boolean isSlopeTooSteep(
+    native static boolean isSlopeTooSteep(
             long characterVa, float nx, float ny, float nz);
 
-    native private static boolean isSupported(long characterVa);
+    native static boolean isSupported(long characterVa);
 
     native private static void setMaxSlopeAngle(long characterVa, float angle);
 

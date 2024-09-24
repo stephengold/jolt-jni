@@ -21,6 +21,10 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.EGroundState;
+import com.github.stephengold.joltjni.readonly.ConstCharacter;
+import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
@@ -29,7 +33,7 @@ import com.github.stephengold.joltjni.template.Ref;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class CharacterRef extends Ref {
+final public class CharacterRef extends Ref implements ConstCharacter {
     // *************************************************************************
     // constructors
 
@@ -44,6 +48,357 @@ final public class CharacterRef extends Ref {
     CharacterRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // ConstCharacter methods
+
+    /**
+     * Return the ID of the body associated with this character. The character
+     * is unaffected.
+     *
+     * @return a new ID
+     */
+    @Override
+    public BodyId getBodyId() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        long idVa = Character.getBodyId(characterVa);
+        BodyId result = new BodyId(idVa, true);
+
+        return result;
+    }
+
+    /**
+     * Return the location of the rigid body's center of mass. The character is
+     * unaffected.
+     *
+     * @param lockBodies true&rarr;use the locking body interface,
+     * false&rarr;use the non-locking body interface
+     * @return a new location vector (in system coordinates)
+     */
+    @Override
+    public RVec3 getCenterOfMassPosition(boolean lockBodies) {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        double[] storeDoubles = new double[3];
+        Character.getCenterOfMassPosition(
+                characterVa, storeDoubles, lockBodies);
+        RVec3 result
+                = new RVec3(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum slope the character can walk on. The character is
+     * unaffected.
+     *
+     * @return the cosine of the slope angle
+     */
+    @Override
+    public float getCosMaxSlopeAngle() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        float result = CharacterBase.getCosMaxSlopeAngle(characterVa);
+
+        return result;
+    }
+
+    /**
+     * Return the body ID of the supporting surface. The character is
+     * unaffected.
+     *
+     * @return a new ID
+     */
+    @Override
+    public BodyId getGroundBodyId() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        long idVa = CharacterBase.getGroundBodyId(characterVa);
+        BodyId result = new BodyId(idVa, true);
+
+        return result;
+    }
+
+    /**
+     * Return the normal direction at the point of contact with the supporting
+     * surface. The character is unaffected.
+     *
+     * @return a new direction vector (in system coordinates)
+     */
+    @Override
+    public Vec3 getGroundNormal() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        float nx = CharacterBase.getGroundNormalX(characterVa);
+        float ny = CharacterBase.getGroundNormalY(characterVa);
+        float nz = CharacterBase.getGroundNormalZ(characterVa);
+        Vec3 result = new Vec3(nx, ny, nz);
+
+        return result;
+    }
+
+    /**
+     * Return the location of the point of contact with the supporting surface.
+     * The character is unaffected.
+     *
+     * @return a new location vector (in system coordinates)
+     */
+    @Override
+    public RVec3 getGroundPosition() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        double xx = CharacterBase.getGroundPositionX(characterVa);
+        double yy = CharacterBase.getGroundPositionY(characterVa);
+        double zz = CharacterBase.getGroundPositionZ(characterVa);
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Return the relationship between the character and its supporting surface.
+     * The character is unaffected.
+     *
+     * @return an enum value (not null)
+     */
+    @Override
+    public EGroundState getGroundState() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        int ordinal = CharacterBase.getGroundState(characterVa);
+        EGroundState result = EGroundState.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Identify the face on the supporting surface where contact is occurring.
+     * The character is unaffected.
+     *
+     * @return a new ID
+     */
+    @Override
+    public SubShapeId getGroundSubShapeId() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        long idVa = CharacterBase.getGroundSubShapeId(characterVa);
+        SubShapeId result = new SubShapeId(idVa, true);
+
+        return result;
+    }
+
+    /**
+     * Return the user data of the supporting surface. The character is
+     * unaffected.
+     *
+     * @return the 64-bit value
+     */
+    @Override
+    public long getGroundUserData() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        long result = CharacterBase.getGroundUserData(characterVa);
+
+        return result;
+    }
+
+    /**
+     * Return the world-space velocity of the supporting surface. The character
+     * is unaffected.
+     *
+     * @return a new velocity vector (meters per second in system coordinates)
+     */
+    @Override
+    public Vec3 getGroundVelocity() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        float vx = CharacterBase.getGroundVelocityX(characterVa);
+        float vy = CharacterBase.getGroundVelocityY(characterVa);
+        float vz = CharacterBase.getGroundVelocityZ(characterVa);
+        Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Return the character's object layer. The character is unaffected.
+     *
+     * @param lockBodies true&rarr;use the locking body interface,
+     * false&rarr;use the non-locking body interface
+     * @return a layer index (&ge;0)
+     */
+    @Override
+    public int getLayer(boolean lockBodies) {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        int result = Character.getLayer(characterVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the linear velocity of the character. The character is unaffected.
+     *
+     * @param lockBodies true&rarr;use the locking body interface,
+     * false&rarr;use the non-locking body interface
+     * @return a new velocity vector (meters per second in system coordinates)
+     */
+    @Override
+    public Vec3 getLinearVelocity(boolean lockBodies) {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        float[] storeFloats = new float[3];
+        Character.getLinearVelocity(characterVa, storeFloats, lockBodies);
+        Vec3 result = new Vec3(storeFloats[0], storeFloats[1], storeFloats[2]);
+
+        return result;
+    }
+
+    /**
+     * Copy the location of the character. The character is unaffected.
+     *
+     * @param lockBodies true&rarr;use the locking body interface,
+     * false&rarr;use the non-locking body interface
+     * @return a new location vector (in system coordinates)
+     */
+    @Override
+    public RVec3 getPosition(boolean lockBodies) {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        double[] storeDoubles = new double[3];
+        Character.getPosition(characterVa, storeDoubles, lockBodies);
+        RVec3 result
+                = new RVec3(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
+
+        return result;
+    }
+
+    /**
+     * Copy the position of the associated body. The character is unaffected.
+     *
+     * @param storeLocation the desired location (in system coordinates, not
+     * null, unaffected)
+     * @param storeOrientation the desired orientation (in system coordinates,
+     * not null, unaffected)
+     * @param lockBodies true&rarr;use the locking body interface,
+     * false&rarr;use the non-locking body interface
+     */
+    @Override
+    public void getPositionAndRotation(
+            RVec3 storeLocation, Quat storeOrientation, boolean lockBodies) {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        double[] storeDoubles = new double[3];
+        float[] storeFloats = new float[4];
+        Character.getPositionAndRotation(
+                characterVa, storeDoubles, storeFloats, lockBodies);
+        storeLocation.set(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
+        storeOrientation.set(
+                storeFloats[0], storeFloats[1], storeFloats[2], storeFloats[3]);
+    }
+
+    /**
+     * Copy the orientation of the character. The character is unaffected.
+     *
+     * @param lockBodies true&rarr;use the locking body interface,
+     * false&rarr;use the non-locking body interface
+     * @return a new rotation quaternion (in system coordinates)
+     */
+    @Override
+    public Quat getRotation(boolean lockBodies) {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        float[] storeFloats = new float[4];
+        Character.getRotation(characterVa, storeFloats, lockBodies);
+        Quat result = new Quat(
+                storeFloats[0], storeFloats[1], storeFloats[2], storeFloats[3]);
+
+        return result;
+    }
+
+    /**
+     * Access the character's shape. The character is unaffected.
+     *
+     * @return a new immutable JVM object with the pre-existing native object
+     * assigned, or {@code null} if none
+     */
+    @Override
+    public ConstShape getShape() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        long shapeVa = CharacterBase.getShape(characterVa);
+        ConstShape result = Shape.newShape(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Return the character's "up" direction. The character is unaffected.
+     *
+     * @return a new direction vector
+     */
+    @Override
+    public Vec3 getUp() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        float x = CharacterBase.getUpX(characterVa);
+        float y = CharacterBase.getUpY(characterVa);
+        float z = CharacterBase.getUpZ(characterVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Calculate the character's local-to-system coordinate transform. The
+     * character is unaffected.
+     *
+     * @param lockBodies true&rarr;use the locking body interface,
+     * false&rarr;use the non-locking body interface
+     * @return a new transform matrix
+     */
+    @Override
+    public RMat44 getWorldTransform(boolean lockBodies) {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        long matrixVa = Character.getWorldTransform(characterVa, lockBodies);
+        RMat44 result = new RMat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
+     * Test whether the specified normal direction is too steep. The character
+     * is unaffected.
+     *
+     * @param normal the surface normal to test (not null, unaffected)
+     * @return true if too steep, otherwise false
+     */
+    @Override
+    public boolean isSlopeTooSteep(Vec3Arg normal) {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        float nx = normal.getX();
+        float ny = normal.getY();
+        float nz = normal.getZ();
+        boolean result = CharacterBase.isSlopeTooSteep(characterVa, nx, ny, nz);
+
+        return result;
+    }
+
+    /**
+     * Test whether the character is supported. The character is unaffected.
+     *
+     * @return true if supported, otherwise false
+     */
+    @Override
+    public boolean isSupported() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        boolean result = CharacterBase.isSupported(characterVa);
+
+        return result;
     }
     // *************************************************************************
     // Ref methods

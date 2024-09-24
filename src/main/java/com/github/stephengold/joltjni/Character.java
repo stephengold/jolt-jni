@@ -467,7 +467,7 @@ public class Character
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static void activate(long characterVa, boolean lockBodies);
 
@@ -484,28 +484,28 @@ public class Character
             long settingsVa, double locX, double locY, double locZ, float qx,
             float qy, float qz, float qw, long userData, long systemVa);
 
-    native private static long getBodyId(long characterVa);
+    native static long getBodyId(long characterVa);
 
-    native private static void getCenterOfMassPosition(
+    native static void getCenterOfMassPosition(
             long characterVa, double[] storeDoubles, boolean lockBodies);
 
-    native private static int getLayer(long characterVa);
+    native static int getLayer(long characterVa);
 
-    native private static void getLinearVelocity(
+    native static void getLinearVelocity(
             long characterVa, float[] storeFloats, boolean lockBodies);
 
-    native private static void getPosition(
+    native static void getPosition(
             long characterVa, double[] storeDoubles, boolean lockBodies);
 
-    native private static void getPositionAndRotation(long characterVa,
+    native static void getPositionAndRotation(long characterVa,
             double[] storeDoubles, float[] storeFloats, boolean lockBodies);
 
     native private static int getRefCount(long characterVa);
 
-    native private static void getRotation(
+    native static void getRotation(
             long characterVa, float[] toreFloats, boolean lockBodies);
 
-    native private static long getWorldTransform(
+    native static long getWorldTransform(
             long characterVa, boolean lockBodies);
 
     native private static void removeFromPhysicsSystem(
