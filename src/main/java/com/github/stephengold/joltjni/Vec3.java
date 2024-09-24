@@ -166,6 +166,23 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Return a scaled version of the specified vector. (native operator: binary
+     * {@code *})
+     *
+     * @param v the input vector (not null, unaffected)
+     * @param scale the scale to apply
+     * @return a new vector
+     */
+    public static Vec3 multiply(Vec3Arg v, float scale) {
+        float x = scale * v.getX();
+        float y = scale * v.getY();
+        float z = scale * v.getZ();
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
      * Return the component-wise product of the specified vectors. (native
      * operator: binary {@code *})
      *
