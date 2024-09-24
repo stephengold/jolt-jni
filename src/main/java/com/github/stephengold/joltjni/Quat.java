@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.QuatArg;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
  * A math object used to represent rotations and orientations in 3-dimensional
@@ -107,6 +108,41 @@ final public class Quat implements QuatArg {
         float z = lw * rz + lx * ry - ly * rx + lz * rw;
 
         Quat result = new Quat(x, y, z, w);
+        return result;
+    }
+
+    /**
+     * Rotate the specified vector by the specified unit quaternion. (native
+     * operator: binary {@code *})
+     *
+     * @param lhs the rotation to apply (not null, normalized, unaffected)
+     * @param rhs the vector to apply it to (not null, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 rotate(QuatArg lhs, Vec3Arg rhs) {
+        assert lhs.isNormalized();
+
+        float lw = lhs.getW();
+        float lx = lhs.getX();
+        float ly = lhs.getY();
+        float lz = lhs.getZ();
+
+        float rx = rhs.getX();
+        float ry = rhs.getY();
+        float rz = rhs.getZ();
+
+        // a = lhs x pure(rhs)
+        float aw = -lx * rx - ly * ry - lz * rz;
+        float ax = lw * rx + ly * rz - lz * ry;
+        float ay = lw * ry - lx * rz + lz * rx;
+        float az = lw * rz + lx * ry - ly * rx;
+
+        // result = vec3(a x conjugate(lhs))
+        float x = -aw * lx + ax * lw - ay * lz + az * ly;
+        float y = -aw * ly + ax * lz + ay * lw - az * lx;
+        float z = -aw * lz - ax * ly + ay * lx + az * lw;
+
+        Vec3 result = new Vec3(x, y, z);
         return result;
     }
 
