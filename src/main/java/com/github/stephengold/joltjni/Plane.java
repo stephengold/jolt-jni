@@ -66,6 +66,19 @@ final public class Plane implements ConstPlane {
         this.nz = nz;
         this.c = c;
     }
+
+    /**
+     * Instantiate a plane with specified components.
+     *
+     * @param normal the desired normal direction (not null, unaffected)
+     * @param c the desired constant
+     */
+    public Plane(Vec3Arg normal, float c) {
+        this.nx = normal.getX();
+        this.ny = normal.getY();
+        this.nz = normal.getZ();
+        this.c = c;
+    }
     // *************************************************************************
     // new methods exposed
 
