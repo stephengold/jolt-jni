@@ -210,6 +210,59 @@ final public class Quat implements QuatArg {
     public float getZ() {
         return z;
     }
+
+    /**
+     * Test whether the quaternion is normalized to within a tolerance of 10^-5.
+     * The quaternion is unaffected.
+     *
+     * @return true if normalized, otherwise false
+     */
+    @Override
+    public boolean isNormalized() {
+        boolean result = isNormalized(1e-5f);
+        return result;
+    }
+
+    /**
+     * Test whether the quaternion is normalized to within the specified
+     * tolerance. The quaternion is unaffected.
+     *
+     * @param tolerance the desired tolerance (default=1e-5)
+     * @return true if normalized, otherwise false
+     */
+    @Override
+    public boolean isNormalized(float tolerance) {
+        float lengthSq = lengthSq();
+        if (Math.abs(lengthSq - 1f) <= tolerance) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Return the length. The quaternion is unaffected.
+     *
+     * @return the length
+     */
+    @Override
+    public float length() {
+        float lengthSq = lengthSq();
+        float result = (float) Math.sqrt(lengthSq);
+
+        return result;
+    }
+
+    /**
+     * Return the squared length. The quaternion is unaffected.
+     *
+     * @return the squared length
+     */
+    @Override
+    public float lengthSq() {
+        float result = w * w + x * x + y * y + z * z;
+        return result;
+    }
     // *************************************************************************
     // Object methods
 

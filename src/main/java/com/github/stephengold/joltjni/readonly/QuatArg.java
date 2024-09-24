@@ -70,4 +70,35 @@ public interface QuatArg {
      * @return the component value
      */
     float getZ();
+
+    /**
+     * Test whether the quaternion is normalized to within a tolerance of 10^-5.
+     * The quaternion is unaffected.
+     *
+     * @return true if normalized, otherwise false
+     */
+    boolean isNormalized();
+
+    /**
+     * Test whether the quaternion is normalized to within the specified
+     * tolerance. The quaternion is unaffected.
+     *
+     * @param tolerance the desired tolerance (default=1e-5)
+     * @return true if normalized, otherwise false
+     */
+    boolean isNormalized(float tolerance);
+
+    /**
+     * Return the length. The quaternion is unaffected.
+     *
+     * @return the length
+     */
+    float length();
+
+    /**
+     * Return the squared length. The quaternion is unaffected.
+     *
+     * @return the squared length
+     */
+    float lengthSq();
 }
