@@ -8,27 +8,27 @@ Source code is provided under
 [an MIT license][license].
 
 
-## Translating JoltPhysics applications into Java
+## Translating Jolt Physics applications into Java
 
 There’s close correspondence between the class/method names
-of JoltPhysics and jolt-jni.
+of Jolt Physics and jolt-jni.
 For example:
 
 + The `Body` class in jolt-jni will (eventually) provide
   all the functionality of the `Body` class in Jolt Physics.
 + The `ConstBody` interface will include all the `const` methods
-  of the JoltPhysics `Body` class, such as its `GetPosition()` method,
+  of the Jolt Physics `Body` class, such as its `GetPosition()` method,
   which in jolt-jni is called `getPosition()`.
 
 Things become slightly more interesting when C++ templates
 and public member data are involved. For instance:
 
-+ An array of body IDs is `Array<BodyID>` in JoltPhysics;
++ An array of body IDs is `Array<BodyID>` in Jolt Physics;
   in jolt-jni it’s called a `BodyIdVector`.
-+ The `mConvexRadius` member of the JoltPhysics `BoxShapeSettings` class
++ The `mConvexRadius` member of the Jolt Physics `BoxShapeSettings` class
   is accessed using `getConvexRadius()` and `setConvexRadius()` in jolt-jni.
 
-For a couple well-known JoltPhysics examples,
+For a couple well-known Jolt Physics examples,
 [direct translations into Java](https://github.com/stephengold/jolt-jni/tree/master/src/test/java/testjoltjni/app)
 are provided.
 
@@ -120,7 +120,7 @@ You can run various scenes in the "performance test" example app:
 
 ## External links
 
-+ [The JoltPhysics repo at GitHub](https://github.com/jrouwe/JoltPhysics)
++ [The Jolt Physics repo at GitHub](https://github.com/jrouwe/JoltPhysics)
 
 
 [adoptium]: https://adoptium.net/releases.html "Adoptium Project"
