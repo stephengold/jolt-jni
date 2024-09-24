@@ -199,6 +199,19 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Add the 2nd argument to the first argument. (native operator: binary
+     * {@code +=})
+     *
+     * @param left the accumulating vector (not null, modified)
+     * @param right the vector to add (not null, unaffected)
+     */
+    public static void plusEquals(Vec3 left, Vec3Arg right) {
+        left.setX(left.getX() + right.getX());
+        left.setY(left.getY() + right.getY());
+        left.setZ(left.getZ() + right.getZ());
+    }
+
+    /**
      * Return the bitwise AND of the specified vectors.
      *
      * @param v1 the first vector (not null, unaffected)
