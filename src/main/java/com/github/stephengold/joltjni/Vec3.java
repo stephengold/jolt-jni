@@ -557,8 +557,8 @@ final public class Vec3 implements Vec3Arg {
      */
     @Override
     public float length() {
-        float length = lengthSq();
-        float result = (float) Math.sqrt(length);
+        float lengthSq = lengthSq();
+        float result = (float) Math.sqrt(lengthSq);
 
         return result;
     }
