@@ -42,17 +42,6 @@ public class PlaneShapeSettings extends ShapeSettings {
     // constructors
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    PlaneShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Plane);
-    }
-
-    /**
      * Instantiate settings for the specified plane.
      *
      * @param plane the desired surface plane (not null, unaffected)
@@ -91,6 +80,17 @@ public class PlaneShapeSettings extends ShapeSettings {
         long settingsVa = createPlaneShapeSettings(
                 nx, ny, nz, planeConstant, materialVa, halfExtent);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.Plane);
+    }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    PlaneShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.Plane);
     }
     // *************************************************************************

@@ -34,17 +34,6 @@ public class ScaledShape extends DecoratedShape {
     // constructors
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
-     *
-     * @param shapeVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    ScaledShape(long shapeVa) {
-        super(shapeVa);
-    }
-
-    /**
      * Instantiate a shape based on the specified shape and scale factors.
      *
      * @param baseShape the unscaled base shape (not null)
@@ -58,6 +47,17 @@ public class ScaledShape extends DecoratedShape {
         long scaledShapeVa
                 = createScaledShape(baseShapeVa, scaleX, scaleY, scaleZ);
         setVirtualAddress(scaledShapeVa, null); // no owner due to ref counting
+    }
+
+    /**
+     * Instantiate a shape with the specified native object assigned but not
+     * owned.
+     *
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    ScaledShape(long shapeVa) {
+        super(shapeVa);
     }
 
     /**

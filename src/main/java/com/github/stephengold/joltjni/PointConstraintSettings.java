@@ -35,6 +35,15 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public PointConstraintSettings() {
+        long settingsVa = createPointConstraintSettings();
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EConstraintSubType.Point);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -42,15 +51,6 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
      */
     PointConstraintSettings(long settingsVa) {
         super(settingsVa);
-        setSubType(EConstraintSubType.Point);
-    }
-
-    /**
-     * Instantiate default settings.
-     */
-    public PointConstraintSettings() {
-        long settingsVa = createPointConstraintSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EConstraintSubType.Point);
     }
     // *************************************************************************
