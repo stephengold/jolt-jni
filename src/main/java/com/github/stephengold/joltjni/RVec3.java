@@ -145,6 +145,23 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Return the component-wise difference of the specified vectors. (native
+     * operator: binary {@code -})
+     *
+     * @param base the base vector (not null, unaffected)
+     * @param offset the offset to subtract (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 subtract(RVec3Arg base, Vec3Arg offset) {
+        double xx = base.xx() - offset.getX();
+        double yy = base.yy() - offset.getY();
+        double zz = base.zz() - offset.getZ();
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
      * Create a vector with all components zero.
      *
      * @return a new vector
