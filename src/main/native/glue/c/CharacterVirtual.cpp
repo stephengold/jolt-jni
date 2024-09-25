@@ -93,6 +93,34 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_cre
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
+ * Method:    extendedUpdate
+ * Signature: (JFFFFJJJJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_extendedUpdate
+  (JNIEnv *, jclass, jlong characterVa, jfloat deltaTime, jfloat gravityX,
+  jfloat gravityY, jfloat gravityZ, jlong settingsVa, jlong bpFilterVa,
+  jlong olFilterVa, jlong bodyFilterVa, jlong shapeFilterVa, jlong allocatorVa) {
+    CharacterVirtual * const pCharacter
+            = reinterpret_cast<CharacterVirtual *> (characterVa);
+    const Vec3 gravity(gravityX, gravityY, gravityZ);
+    const CharacterVirtual::ExtendedUpdateSettings * const pSettings
+            = reinterpret_cast<CharacterVirtual::ExtendedUpdateSettings *> (settingsVa);
+    const BroadPhaseLayerFilter * const pBpFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (bpFilterVa);
+    const ObjectLayerFilter * const pOlFilter
+            = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
+    const BodyFilter * const pBodyFilter
+            = reinterpret_cast<BodyFilter *> (bodyFilterVa);
+    const ShapeFilter * const pShapeFilter
+            = reinterpret_cast<ShapeFilter *> (shapeFilterVa);
+    TempAllocator * const pAllocator
+            = reinterpret_cast<TempAllocator *> (allocatorVa);
+    pCharacter->ExtendedUpdate(deltaTime, gravity, *pSettings, *pBpFilter,
+            *pOlFilter, *pBodyFilter, *pShapeFilter, *pAllocator);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    getActiveContacts
  * Signature: (J)J
  */
@@ -515,6 +543,20 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_
             = reinterpret_cast<CharacterVirtual *> (otherVa);
     const bool result = pCharacter->HasCollidedWith(pOther);
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtual
+ * Method:    setCharacterVsCharacterCollision
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_setCharacterVsCharacterCollision
+  (JNIEnv *, jclass, jlong characterVa, jlong interfaceVa) {
+    CharacterVirtual * const pCharacter
+            = reinterpret_cast<CharacterVirtual *> (characterVa);
+    CharacterVsCharacterCollision * const pInterface
+            = reinterpret_cast<CharacterVsCharacterCollision *> (interfaceVa);
+    pCharacter->SetCharacterVsCharacterCollision(pInterface);
 }
 
 /*

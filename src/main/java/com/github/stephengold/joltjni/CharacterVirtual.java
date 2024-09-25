@@ -39,6 +39,14 @@ public class CharacterVirtual
         extends CharacterBase
         implements ConstCharacterVirtual, RefTarget {
     // *************************************************************************
+    // fields
+
+    /**
+     * protect the char-vs-char collision interface (if any) from garbage
+     * collection
+     */
+    private CharacterVsCharacterCollision cvcInterface;
+    // *************************************************************************
     // constructors
 
     /**
@@ -81,6 +89,64 @@ public class CharacterVirtual
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Apply a combination of Update, StickToFloor, and WalkStairs.
+     *
+     * @param deltaTime the time step to simulate
+     * @param gravity the gravity acceleration vector (in meters per second
+     * squared, not null, unaffected)
+     * @param settings settings to use (not null, unaffected)
+     * @param bpFilter to test whether the character collides with a broad-phase
+     * layer (not null, unaffected)
+     * @param olFilter to test whether the character collides with an object
+     * layer (not null, unaffected)
+     * @param bodyFilter to test whether the character collides with a body (not
+     * null, unaffected)
+     * @param shapeFilter to test whether the character collides with a shape
+     * (not null, unaffected)
+     * @param allocator for temporary allocations (not null)
+     */
+    public void extendedUpdate(float deltaTime, Vec3Arg gravity,
+            ExtendedUpdateSettings settings, BroadPhaseLayerFilter bpFilter,
+            ObjectLayerFilter olFilter, BodyFilter bodyFilter,
+            ShapeFilter shapeFilter, TempAllocator allocator) {
+        long characterVa = va();
+        float gravityX = gravity.getX();
+        float gravityY = gravity.getY();
+        float gravityZ = gravity.getZ();
+        long settingsVa = settings.va();
+        long bpFilterVa = bpFilter.va();
+        long olFilterVa = olFilter.va();
+        long bodyFilterVa = bodyFilter.va();
+        long shapeFilterVa = shapeFilter.va();
+        long allocatorVa = allocator.va();
+        extendedUpdate(characterVa, deltaTime, gravityX, gravityY, gravityZ,
+                settingsVa, bpFilterVa, olFilterVa, bodyFilterVa, shapeFilterVa,
+                allocatorVa);
+    }
+
+    /**
+     * Access the char-vs-char collision interface.
+     *
+     * @return the pre-existing object, or {@code null} if none
+     */
+    public CharacterVsCharacterCollision getCharacterVsCharacterCollision() {
+        return cvcInterface;
+    }
+
+    /**
+     * Replace the char-vs-char collision interface.
+     *
+     * @param cvcInterface the desired interface (not null)
+     */
+    public void setCharacterVsCharacterCollision(
+            CharacterVsCharacterCollision cvcInterface) {
+        this.cvcInterface = cvcInterface;
+        long characterVa = va();
+        long interfaceVa = cvcInterface.va();
+        setCharacterVsCharacterCollision(characterVa, interfaceVa);
+    }
 
     /**
      * Enable or disable enhanced internal edge removal.
@@ -624,6 +690,11 @@ public class CharacterVirtual
             long settingsVa, double locX, double locY, double locZ, float qx,
             float qy, float qz, float qw, long userData, long systemVa);
 
+    native private static void extendedUpdate(long characterVa, float deltaTime,
+            float gravityX, float gravityY, float gravityZ, long settingsVa,
+            long bpFilterVa, long olFilterVa, long bodyFilterVa,
+            long shapeFilterVa, long allocatorVa);
+
     native private static long getActiveContacts(long characterVa);
 
     native private static double getCenterOfMassPositionX(long characterVa);
@@ -690,6 +761,9 @@ public class CharacterVirtual
 
     native private static boolean hasCollidedWithCharacter(
             long characterVa, long otherVa);
+
+    native private static void setCharacterVsCharacterCollision(
+            long characterVa, long interfaceVa);
 
     native private static void setEmbedded(long characterVa);
 
