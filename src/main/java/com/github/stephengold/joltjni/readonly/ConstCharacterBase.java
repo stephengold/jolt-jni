@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.BodyId;
 import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.StateRecorder;
 import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EGroundState;
@@ -52,6 +53,15 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * @return a new ID
      */
     BodyId getGroundBodyId();
+
+    /**
+     * Access the material of the supporting surface. The character is
+     * unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * else {@code null}
+     */
+    ConstPhysicsMaterial getGroundMaterial();
 
     /**
      * Return the normal direction at the point of contact with the supporting
@@ -131,4 +141,11 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * @return true if supported, otherwise false
      */
     boolean isSupported();
+
+    /**
+     * Save the character's state to the specified recorder.
+     *
+     * @param recorder the recorder to save to (not null)
+     */
+    void saveState(StateRecorder recorder);
 }

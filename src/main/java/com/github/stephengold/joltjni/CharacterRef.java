@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EGroundState;
 import com.github.stephengold.joltjni.readonly.ConstCharacter;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
@@ -116,6 +117,28 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         long characterVa = getPtr(refVa);
         long idVa = CharacterBase.getGroundBodyId(characterVa);
         BodyId result = new BodyId(idVa, true);
+
+        return result;
+    }
+
+    /**
+     * Access the material of the supporting surface. The character is
+     * unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * else {@code null}
+     */
+    @Override
+    public ConstPhysicsMaterial getGroundMaterial() {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        long materialVa = CharacterBase.getGroundMaterial(characterVa);
+        ConstPhysicsMaterial result;
+        if (materialVa == 0L) {
+            result = null;
+        } else {
+            result = new PhysicsMaterial(materialVa);
+        }
 
         return result;
     }
@@ -399,6 +422,19 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         boolean result = CharacterBase.isSupported(characterVa);
 
         return result;
+    }
+
+    /**
+     * Save the character's state to the specified recorder.
+     *
+     * @param recorder the recorder to save to (not null)
+     */
+    @Override
+    public void saveState(StateRecorder recorder) {
+        long refVa = va();
+        long characterVa = getPtr(refVa);
+        long recorderVa = recorder.va();
+        CharacterBase.saveState(characterVa, recorderVa);
     }
     // *************************************************************************
     // Ref methods

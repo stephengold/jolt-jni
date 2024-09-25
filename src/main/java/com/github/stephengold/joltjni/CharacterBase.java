@@ -109,6 +109,27 @@ public class CharacterBase extends NonCopyable implements ConstCharacterBase {
     }
 
     /**
+     * Access the material of the supporting surface. The character is
+     * unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * else {@code null}
+     */
+    @Override
+    public ConstPhysicsMaterial getGroundMaterial() {
+        long characterVa = va();
+        long materialVa = getGroundMaterial(characterVa);
+        ConstPhysicsMaterial result;
+        if (materialVa == 0L) {
+            result = null;
+        } else {
+            result = new PhysicsMaterial(materialVa);
+        }
+
+        return result;
+    }
+
+    /**
      * Return the normal direction at the point of contact with the supporting
      * surface. The character is unaffected.
      *
@@ -264,12 +285,26 @@ public class CharacterBase extends NonCopyable implements ConstCharacterBase {
 
         return result;
     }
+
+    /**
+     * Save the character's state to the specified recorder.
+     *
+     * @param recorder the recorder to save to (not null)
+     */
+    @Override
+    public void saveState(StateRecorder recorder) {
+        long characterVa = va();
+        long recorderVa = recorder.va();
+        saveState(characterVa, recorderVa);
+    }
     // *************************************************************************
     // native methods
 
     native static float getCosMaxSlopeAngle(long characterVa);
 
     native static long getGroundBodyId(long characterVa);
+
+    native static long getGroundMaterial(long characterVa);
 
     native static float getGroundNormalX(long characterVa);
 
@@ -307,6 +342,8 @@ public class CharacterBase extends NonCopyable implements ConstCharacterBase {
             long characterVa, float nx, float ny, float nz);
 
     native static boolean isSupported(long characterVa);
+
+    native static void saveState(long characterVa, long recorderVa);
 
     native private static void setMaxSlopeAngle(long characterVa, float angle);
 

@@ -60,6 +60,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGro
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBase
+ * Method:    getGroundMaterial
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundMaterial
+  (JNIEnv *, jclass, jlong characterVa) {
+    const CharacterBase * const pCharacter
+            = reinterpret_cast<CharacterBase *> (characterVa);
+    const PhysicsMaterial * const pResult = pCharacter->GetGroundMaterial();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterBase
  * Method:    getGroundNormalX
  * Signature: (J)F
  */
@@ -293,6 +306,20 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterBase_isS
             = reinterpret_cast<CharacterBase *> (characterVa);
     const bool result = pCharacter->IsSupported();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterBase
+ * Method:    saveState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_saveState
+  (JNIEnv *, jclass, jlong characterVa, jlong recorderVa) {
+    const CharacterBase * const pCharacter
+            = reinterpret_cast<CharacterBase *> (characterVa);
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    pCharacter->SaveState(*pRecorder);
 }
 
 /*
