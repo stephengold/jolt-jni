@@ -570,6 +570,23 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_removeB
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setLinearAndAngularVelocity
+ * Signature: (JJFFFFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setLinearAndAngularVelocity
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa, jfloat vx,
+  jfloat vy, jfloat vz, jfloat wx, jfloat wy, jfloat wz) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const Vec3 linearVelocity(vx, vy, vz);
+    const Vec3 angularVelocity(wx, wy, wz);
+    pInterface->SetLinearAndAngularVelocity(
+            *pBodyId, linearVelocity, angularVelocity);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    setAngularVelocity
  * Signature: (JJFFF)V
  */
@@ -622,6 +639,25 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setLine
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
     const Vec3 velocity(vx, vy, vz);
     pInterface->SetLinearVelocity(*pBodyId, velocity);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setPositionAndRotation
+ * Signature: (JJDDDFFFFI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setPositionAndRotation
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa, jdouble locX,
+  jdouble locY, jdouble locZ, jfloat qx, jfloat qy, jfloat qz, jfloat qw,
+  jint ordinal) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const RVec3 location(locX, locY, locZ);
+    const Quat orientation(qx, qy, qz, qw);
+    const EActivation activation = (EActivation) ordinal;
+    pInterface->SetPositionAndRotation(
+            *pBodyId, location, orientation, activation);
 }
 
 /*

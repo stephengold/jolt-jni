@@ -577,6 +577,29 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Alter the linear and angular velocities of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null, unaffected)
+     * @param linearVelocity the desired linear velocity of body's the center of
+     * mass (not null, unaffected)
+     * @param angularVelocity the desired angular velocity (not null,
+     * unaffected)
+     */
+    public void setLinearAndAngularVelocity(ConstBodyId bodyId,
+            Vec3Arg linearVelocity, Vec3Arg angularVelocity) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        float vx = linearVelocity.getX();
+        float vy = linearVelocity.getY();
+        float vz = linearVelocity.getZ();
+        float wx = angularVelocity.getX();
+        float wy = angularVelocity.getY();
+        float wz = angularVelocity.getZ();
+        setLinearAndAngularVelocity(
+                bodyInterfaceVa, bodyIdVa, vx, vy, vz, wx, wy, wz);
+    }
+
+    /**
      * Alter the linear velocity of the specified body.
      *
      * @param bodyId the ID of the body to modify (not null, unaffected)
@@ -586,6 +609,30 @@ public class BodyInterface extends NonCopyable {
         long bodyIdVa = bodyId.va();
         setLinearVelocity(va(), bodyIdVa,
                 velocity.getX(), velocity.getY(), velocity.getZ());
+    }
+
+    /**
+     * Alter the location and orientation of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null, unaffected)
+     * @param location the desired location (not null, unaffected)
+     * @param orientation the desired orientation (not null, unaffected)
+     * @param activationMode whether to activate the body (not null)
+     */
+    public void setPositionAndRotation(ConstBodyId bodyId, RVec3Arg location,
+            QuatArg orientation, EActivation activationMode) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        double locX = location.xx();
+        double locY = location.yy();
+        double locZ = location.zz();
+        float qw = orientation.getW();
+        float qx = orientation.getX();
+        float qy = orientation.getY();
+        float qz = orientation.getZ();
+        int ordinal = activationMode.ordinal();
+        setPositionAndRotation(bodyInterfaceVa, bodyIdVa, locX, locY, locZ,
+                qx, qy, qz, qw, ordinal);
     }
 
     /**
@@ -718,6 +765,10 @@ public class BodyInterface extends NonCopyable {
     native private static void removeBody(
             long bodyInterfaceVa, long bodyIdVa);
 
+    native private static void setLinearAndAngularVelocity(
+            long bodyInterfaceVa, long bodyIdVa, float vx, float vy, float vz,
+            float wx, float wy, float wz);
+
     native private static void setAngularVelocity(
             long bodyInterfaceVa, long bodyIdVa, float wx, float wy, float wz);
 
@@ -729,6 +780,10 @@ public class BodyInterface extends NonCopyable {
 
     native private static void setLinearVelocity(
             long bodyInterfaceVa, long bodyIdVa, float vx, float vy, float vz);
+
+    native private static void setPositionAndRotation(long bodyInterfaceVa,
+            long bodyIdVa, double locX, double locY, double locZ,
+            float qx, float qy, float qz, float qw, int ordinal);
 
     native private static void setRestitution(
             long bodyInterfaceVa, long bodyIdVa, float restitution);
