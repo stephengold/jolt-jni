@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
+import com.github.stephengold.joltjni.readonly.RVec3Arg;
 
 /**
  * A 4x4 matrix composed of 16 {@code Real} elements, used to represent
@@ -93,6 +94,23 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Create a pure translation matrix.
+     *
+     * @param offset the amount to translate (not null, unaffected)
+     * @return a new instance
+     *
+     */
+    public static RMat44 sTranslation(RVec3Arg offset) {
+        double xx = offset.xx();
+        double yy = offset.yy();
+        double zz = offset.zz();
+        long matrixVa = createTranslation(xx, yy, zz);
+        RMat44 result = new RMat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Create an all-zero matrix.
      *
      * @return a new instance
@@ -118,6 +136,22 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     public double getElement(int row, int column) {
         long matrixVa = va();
         double result = getElement(matrixVa, row, column);
+
+        return result;
+    }
+
+    /**
+     * Return the translation component. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public RVec3 getTranslation() {
+        long matrixVa = va();
+        double xx = getTranslationX(matrixVa);
+        double yy = getTranslationY(matrixVa);
+        double zz = getTranslationZ(matrixVa);
+        RVec3 result = new RVec3(xx, yy, zz);
 
         return result;
     }
@@ -162,6 +196,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static long createIdentity();
 
+    native private static long createTranslation(
+            double xx, double yy, double zz);
+
     native private static long createUninitialized();
 
     native private static long createZero();
@@ -169,6 +206,12 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     native private static void free(long matrixVa);
 
     native private static double getElement(long matrixVa, int row, int column);
+
+    native private static double getTranslationX(long matrixVa);
+
+    native private static double getTranslationY(long matrixVa);
+
+    native private static double getTranslationZ(long matrixVa);
 
     native private static void setElement(
             long matrixVa, int row, int column, double value);

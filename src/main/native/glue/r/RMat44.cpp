@@ -57,6 +57,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_createIdentit
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    createTranslation
+ * Signature: (DDD)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_createTranslation
+  (JNIEnv *, jclass, jdouble xx, jdouble yy, jdouble zz) {
+    const RVec3 offset(xx, yy, zz);
+    const RMat44 matrix = RMat44::sTranslation(offset);
+    RMat44 * const pResult = new RMat44(matrix);
+    TRACE_NEW("RMat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    createUninitialized
  * Signature: ()J
  */
@@ -100,6 +114,42 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getElement
   (JNIEnv *, jclass, jlong matrixVa, jint row, jint column) {
     const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
     const Real result = pMatrix->GetColumn4(column)[row];
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    getTranslationX
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getTranslationX
+  (JNIEnv *, jclass, jlong matrixVa) {
+    const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    const Real result = pMatrix->GetTranslation().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    getTranslationY
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getTranslationY
+  (JNIEnv *, jclass, jlong matrixVa) {
+    const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    const Real result = pMatrix->GetTranslation().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    getTranslationZ
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getTranslationZ
+  (JNIEnv *, jclass, jlong matrixVa) {
+    const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    const Real result = pMatrix->GetTranslation().GetZ();
     return result;
 }
 
