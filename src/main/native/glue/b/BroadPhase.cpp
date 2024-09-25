@@ -75,6 +75,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhase_addBodiesF
     TRACE_DELETE("BodyID[]", pTempArray)
     delete[] pTempArray;
 }
+
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhase
  * Method:    addBodiesPrepare

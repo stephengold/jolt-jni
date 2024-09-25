@@ -70,7 +70,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readF
     return result;
 }
 
-
 /*
  * Class:     com_github_stephengold_joltjni_StateRecorder
  * Method:    readVec3

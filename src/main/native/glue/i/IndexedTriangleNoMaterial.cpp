@@ -51,7 +51,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleNoMat
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleNoMaterial_free
   (JNIEnv *, jclass, jlong triangleVa) {
     IndexedTriangleNoMaterial * const pTriangle
-           = reinterpret_cast<IndexedTriangleNoMaterial *> (triangleVa);
+            = reinterpret_cast<IndexedTriangleNoMaterial *> (triangleVa);
     TRACE_DELETE("IndexedTriangleNoMaterial", pTriangle)
     delete pTriangle;
 }
