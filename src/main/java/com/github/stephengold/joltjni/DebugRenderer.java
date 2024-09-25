@@ -126,6 +126,54 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
+     * Draw the specified capsule.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param halfHeight half the desired height of the cylindrical portion
+     * @param radius the desired radius of the capsule
+     * @param color the desired color (not null, unaffected)
+     */
+    public void drawCapsule(RMat44Arg transform, float halfHeight, float radius,
+            ConstColor color) {
+        drawCapsule(transform, halfHeight, radius, color, ECastShadow.On);
+    }
+
+    /**
+     * Draw the specified capsule.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param halfHeight half the desired height of the cylindrical portion
+     * @param radius the desired radius of the capsule
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     */
+    public void drawCapsule(RMat44Arg transform, float halfHeight, float radius,
+            ConstColor color, ECastShadow castShadow) {
+        drawCapsule(transform, halfHeight, radius, color, castShadow,
+                EDrawMode.Solid);
+    }
+
+    /**
+     * Draw the specified capsule.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param halfHeight half the desired height of the cylindrical portion
+     * @param radius the desired radius of the capsule
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawCapsule(RMat44Arg transform, float halfHeight, float radius,
+            ConstColor color, ECastShadow castShadow, EDrawMode drawMode) {
+        long transformVa = transform.va();
+        int colorInt = color.getUInt32();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawCapsule(transformVa, halfHeight, radius, colorInt, csOrdinal,
+                drawModeOrdinal);
+    }
+
+    /**
      * Draw the specified 3-D coordinate axes.
      *
      * @param transform the desired coordinate transform (not null, unaffected)
@@ -457,6 +505,9 @@ abstract public class DebugRenderer extends NonCopyable {
 
     native private static void drawBox(long transformVa, long boxVa,
             int colorInt, int csOrdinal, int drawModeOrdinal);
+
+    native private static void drawCapsule(long transformVa, float halfHeight,
+            float radius, int colorInt, int csOrdinal, int drawModeOrdinal);
 
     native private static void drawCoordinateSystem(
             long transformVa, float size);
