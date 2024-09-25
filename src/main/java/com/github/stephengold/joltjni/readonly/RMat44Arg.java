@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.RVec3;
+
 /**
  * Read-only access to an {@code RMat44}. (native type: const RMat44)
  *
@@ -39,4 +41,11 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * @return the element's value
      */
     double getElement(int row, int column);
+
+    /**
+     * Return the translation component. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    RVec3 getTranslation();
 }
