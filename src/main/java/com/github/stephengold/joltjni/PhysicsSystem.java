@@ -305,6 +305,33 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Generate a broad-phase layer filter using the current pair filter and the
+     * specified layer index.
+     *
+     * @param objectLayer the index of the object layer to use
+     * @return a new filter
+     */
+    public DefaultBroadPhaseLayerFilter getDefaultBroadPhaseLayerFilter(
+            int objectLayer) {
+        DefaultBroadPhaseLayerFilter result
+                = new DefaultBroadPhaseLayerFilter(ovbFilter, objectLayer);
+        return result;
+    }
+
+    /**
+     * Generate an object layer filter using the current pair filter and the
+     * specified layer index.
+     *
+     * @param objectLayer the index of the object layer to use
+     * @return a new filter
+     */
+    public DefaultObjectLayerFilter getDefaultLayerFilter(int objectLayer) {
+        DefaultObjectLayerFilter result
+                = new DefaultObjectLayerFilter(ovoFilter, objectLayer);
+        return result;
+    }
+
+    /**
      * Copy the gravity vector. The physics system is unaffected.
      *
      * @return a new acceleration vector (meters per second squared in
