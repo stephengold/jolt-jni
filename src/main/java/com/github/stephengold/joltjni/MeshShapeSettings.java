@@ -67,6 +67,31 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Instantiate settings for the specified vertices and triangles.
+     *
+     * @param vertexArray the array of vertices (not null, unaffected)
+     * @param itArray the array of triangles (not null, unaffected)
+     */
+    public MeshShapeSettings(Float3[] vertexArray, IndexedTriangle... itArray) {
+        int numVertices = vertexArray.length;
+        int numFloats = 3 * numVertices;
+        FloatBuffer vBuffer = Jolt.newDirectFloatBuffer(numFloats);
+        for (Float3 vertex : vertexArray) {
+            vertex.put(vBuffer);
+        }
+
+        IndexedTriangleList itList = new IndexedTriangleList();
+        for (IndexedTriangle triangle : itArray) {
+            itList.pushBack(triangle);
+        }
+        long indicesVa = itList.va();
+        long settingsVa
+                = createMeshShapeSettings(numVertices, vBuffer, indicesVa);
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.Mesh);
+    }
+
+    /**
      * Instantiate settings for the specified lists of vertices and triangles.
      *
      * @param vertices the list of vertices (not null, unaffected)
