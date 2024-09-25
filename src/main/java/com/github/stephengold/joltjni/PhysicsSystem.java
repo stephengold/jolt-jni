@@ -47,6 +47,10 @@ public class PhysicsSystem extends NonCopyable {
      */
     final private BodyInterface bodyInterfaceNoLock;
     /**
+     * protect the contact listener (if any) from garbage collection
+     */
+    private ContactListener contactListener;
+    /**
      * protect the BroadPhaseLayerInterface from garbage collection
      */
     private ConstBroadPhaseLayerInterface layerMap;
@@ -292,23 +296,12 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Access the system's {@code ContactListener}.
+     * Access the (application-provided) contact listener.
      *
-     * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null} if none
+     * @return the pre-existing instance, or {@code null} if none
      */
     public ContactListener getContactListener() {
-        long systemVa = va();
-        long listenerVa = getContactListener(systemVa);
-
-        ContactListener result;
-        if (listenerVa == 0L) {
-            result = null;
-        } else {
-            result = new ContactListener(listenerVa, false);
-        }
-
-        return result;
+        return contactListener;
     }
 
     /**
@@ -558,6 +551,7 @@ public class PhysicsSystem extends NonCopyable {
      * @param listener the desired listener
      */
     public void setContactListener(ContactListener listener) {
+        this.contactListener = listener;
         long systemVa = va();
         long listenerVa = listener.va();
         setContactListener(systemVa, listenerVa);
@@ -645,8 +639,6 @@ public class PhysicsSystem extends NonCopyable {
     native private static long getCombineRestitution(long systemVa);
 
     native private static long getConstraints(long systemVa);
-
-    native private static long getContactListener(long systemVa);
 
     native private static float getGravityX(long systemVa);
 
