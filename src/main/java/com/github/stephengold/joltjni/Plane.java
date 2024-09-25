@@ -55,9 +55,9 @@ final public class Plane implements ConstPlane {
     /**
      * Instantiate a plane with specified components.
      *
-     * @param nx the desired X component of the normal direction
-     * @param ny the desired Y component of the normal direction
-     * @param nz the desired Z component of the normal direction
+     * @param nx the X component of the desired normal direction
+     * @param ny the Y component of the desired normal direction
+     * @param nz the Z component of the desired normal direction
      * @param c the desired constant
      */
     public Plane(float nx, float ny, float nz, float c) {

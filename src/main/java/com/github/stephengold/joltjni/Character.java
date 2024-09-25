@@ -127,9 +127,10 @@ public class Character
     /**
      * Add the character to its {@code PhysicsSystem}.
      *
-     * @param activation whether to activate the character (not null)
+     * @param activation whether to activate the character (not null,
+     * default=Activate)
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     public void addToPhysicsSystem(EActivation activation, boolean lockBodies) {
         long characterVa = va();
@@ -189,7 +190,7 @@ public class Character
      * @param velocity the desired velocity (meters per second in system
      * coordinates, not null, unaffected)
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     public void setLinearVelocity(Vec3Arg velocity, boolean lockBodies) {
         long characterVa = va();

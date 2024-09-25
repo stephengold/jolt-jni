@@ -54,7 +54,7 @@ public class PhysicsMaterial extends SerializableObject
     // new methods exposed
 
     /**
-     * Return the default material, used when a shape has no materials defined.
+     * Return the default material, used when a shape has no material defined.
      *
      * @return a new immutable JVM object with the pre-existing native object
      * assigned
