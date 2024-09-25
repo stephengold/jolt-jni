@@ -82,14 +82,32 @@ public class Character
     // new methods exposed
 
     /**
+     * Wake up the character using the locking body interface.
+     */
+    public void activate() {
+        activate(true);
+    }
+
+    /**
      * Wake up the character.
      *
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     public void activate(boolean lockBodies) {
         long characterVa = va();
         activate(characterVa, lockBodies);
+    }
+
+    /**
+     * Apply an impulse to the character's center of mass, using the locking
+     * body interface.
+     *
+     * @param impulse the impulse vector (kilogram.meters per second in system
+     * coordinates, not null, unaffected)
+     */
+    public void addImpulse(Vec3Arg impulse) {
+        addImpulse(impulse, true);
     }
 
     /**
@@ -98,7 +116,7 @@ public class Character
      * @param impulse the impulse vector (kilogram.meters per second in system
      * coordinates, not null, unaffected)
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     public void addImpulse(Vec3Arg impulse, boolean lockBodies) {
         long characterVa = va();
@@ -109,12 +127,22 @@ public class Character
     }
 
     /**
+     * Add to the character's linear velocity, using the locking body interface.
+     *
+     * @param deltaV the change in velocity (meters per second in system
+     * coordinates, not null, unaffected)
+     */
+    public void addLinearVelocity(Vec3Arg deltaV) {
+        addLinearVelocity(deltaV, true);
+    }
+
+    /**
      * Add to the character's linear velocity.
      *
      * @param deltaV the change in velocity (meters per second in system
      * coordinates, not null, unaffected)
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     public void addLinearVelocity(Vec3Arg deltaV, boolean lockBodies) {
         long characterVa = va();
@@ -122,6 +150,25 @@ public class Character
         float vy = deltaV.getY();
         float vz = deltaV.getZ();
         addLinearVelocity(characterVa, vx, vy, vz, lockBodies);
+    }
+
+    /**
+     * Add the character to its {@code PhysicsSystem} and activate it, using the
+     * locking body interface.
+     */
+    public void addToPhysicsSystem() {
+        addToPhysicsSystem(EActivation.Activate);
+    }
+
+    /**
+     * Add the character to its {@code PhysicsSystem} using the locking body
+     * interface.
+     *
+     * @param activation whether to activate the character (not null,
+     * default=Activate)
+     */
+    public void addToPhysicsSystem(EActivation activation) {
+        addToPhysicsSystem(activation, true);
     }
 
     /**
@@ -139,10 +186,18 @@ public class Character
     }
 
     /**
+     * Remove the character from its {@code PhysicsSystem} using the locking
+     * body interface.
+     */
+    public void removeFromPhysicsSystem() {
+        removeFromPhysicsSystem(true);
+    }
+
+    /**
      * Remove the character from its {@code PhysicsSystem}.
      *
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     public void removeFromPhysicsSystem(boolean lockBodies) {
         long characterVa = va();
@@ -150,15 +205,37 @@ public class Character
     }
 
     /**
+     * Alter the character's object layer, using the locking body interface.
+     *
+     * @param layer the index of the desired layer
+     */
+    public void setLayer(int layer) {
+        setLayer(layer, true);
+    }
+
+    /**
      * Alter the character's object layer.
      *
      * @param layer the index of the desired layer
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     public void setLayer(int layer, boolean lockBodies) {
         long characterVa = va();
         setLayer(characterVa, layer, lockBodies);
+    }
+
+    /**
+     * Alter the character's motion using the locking body interface.
+     *
+     * @param linearVelocity the desired linear velocity (meters per second in
+     * system coordinates, not null, unaffected)
+     * @param omega the desired angular velocity (radians per second in system
+     * coordinates, not null, unaffected)
+     */
+    public void setLinearAndAngularVelocity(
+            Vec3Arg linearVelocity, Vec3Arg omega) {
+        setLinearAndAngularVelocity(linearVelocity, omega, true);
     }
 
     /**
@@ -169,7 +246,7 @@ public class Character
      * @param omega the desired angular velocity (radians per second in system
      * coordinates, not null, unaffected)
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     public void setLinearAndAngularVelocity(Vec3Arg linearVelocity,
             Vec3Arg omega, boolean lockBodies) {
@@ -182,6 +259,16 @@ public class Character
         float wz = omega.getZ();
         setLinearAndAngularVelocity(
                 characterVa, vx, vy, vz, wx, wy, wz, lockBodies);
+    }
+
+    /**
+     * Alter the character's linear velocity using the locking body interface.
+     *
+     * @param velocity the desired velocity (meters per second in system
+     * coordinates, not null, unaffected)
+     */
+    public void setLinearVelocity(Vec3Arg velocity) {
+        setLinearVelocity(velocity, true);
     }
 
     /**
@@ -201,13 +288,37 @@ public class Character
     }
 
     /**
+     * Re-locate and activate the character using the locking body interface.
+     *
+     * @param location the desired location (in system coordinates, not null,
+     * unaffected)
+     */
+    public void setPosition(RVec3Arg location) {
+        setPosition(location, EActivation.Activate, true);
+    }
+
+    /**
+     * Re-locate the character, optionally activating it, using the locking body
+     * interface.
+     *
+     * @param location the desired location (in system coordinates, not null,
+     * unaffected)
+     * @param activation whether to activate the character (not null,
+     * default=Activate)
+     */
+    public void setPosition(RVec3Arg location, EActivation activation) {
+        setPosition(location, activation, true);
+    }
+
+    /**
      * Re-locate the character, optionally activating it.
      *
      * @param location the desired location (in system coordinates, not null,
      * unaffected)
-     * @param activation whether to activate the character (not null)
+     * @param activation whether to activate the character (not null,
+     * default=Activate)
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     public void setPosition(
             RVec3Arg location, EActivation activation, boolean lockBodies) {
@@ -220,15 +331,43 @@ public class Character
     }
 
     /**
+     * Re-position and activate the character using the locking body interface.
+     *
+     * @param location the desired location (in system coordinates, not null,
+     * unaffected)
+     * @param orientation the desired orientation (in system coordinates, not
+     * null, unaffected)
+     */
+    public void setPositionAndRotation(RVec3Arg location, QuatArg orientation) {
+        setPositionAndRotation(location, orientation, EActivation.Activate);
+    }
+
+    /**
      * Re-position the character, optionally activating it.
      *
      * @param location the desired location (in system coordinates, not null,
      * unaffected)
      * @param orientation the desired orientation (in system coordinates, not
      * null, unaffected)
-     * @param activation whether to activate the character (not null)
+     * @param activation whether to activate the character (not null,
+     * default=Activate)
+     */
+    public void setPositionAndRotation(RVec3Arg location, QuatArg orientation,
+            EActivation activation) {
+        setPositionAndRotation(location, orientation, activation, true);
+    }
+
+    /**
+     * Re-position the character, optionally activating it.
+     *
+     * @param location the desired location (in system coordinates, not null,
+     * unaffected)
+     * @param orientation the desired orientation (in system coordinates, not
+     * null, unaffected)
+     * @param activation whether to activate the character (not null,
+     * default=Activate)
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     public void setPositionAndRotation(RVec3Arg location, QuatArg orientation,
             EActivation activation, boolean lockBodies) {
@@ -246,13 +385,36 @@ public class Character
     }
 
     /**
+     * Re-orient and activate the character using the locking body interface.
+     *
+     * @param orientation the desired orientation (in system coordinates, not
+     * null, unaffected)
+     */
+    public void setRotation(QuatArg orientation) {
+        setRotation(orientation, EActivation.Activate);
+    }
+
+    /**
      * Re-orient the character, optionally activating it.
      *
      * @param orientation the desired orientation (in system coordinates, not
      * null, unaffected)
-     * @param activation whether to activate the character (not null)
+     * @param activation whether to activate the character (not null,
+     * default=Activate)
+     */
+    public void setRotation(QuatArg orientation, EActivation activation) {
+        setRotation(orientation, activation, true);
+    }
+
+    /**
+     * Re-orient the character, optionally activating it.
+     *
+     * @param orientation the desired orientation (in system coordinates, not
+     * null, unaffected)
+     * @param activation whether to activate the character (not null,
+     * default=Activate)
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     public void setRotation(QuatArg orientation, EActivation activation,
             boolean lockBodies) {
@@ -266,13 +428,26 @@ public class Character
     }
 
     /**
+     * Attempt to alter the character's shape using the locking body interface.
+     *
+     * @param shape the desired shape (not null, unaffected)
+     * @param maxPenetrationDepth the maximum penetration to allow, or MAX_VALUE
+     * to skip the penetration check
+     * @return true if the alteration succeeded, otherwise false
+     */
+    public boolean setShape(ConstShape shape, float maxPenetrationDepth) {
+        boolean result = setShape(shape, maxPenetrationDepth, true);
+        return result;
+    }
+
+    /**
      * Attempt to alter the character's shape.
      *
      * @param shape the desired shape (not null, unaffected)
      * @param maxPenetrationDepth the maximum penetration to allow, or MAX_VALUE
      * to skip the penetration check
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      * @return true if the alteration succeeded, otherwise false
      */
     public boolean setShape(
