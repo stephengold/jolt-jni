@@ -141,9 +141,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: sudo apt install g++-9-arm-linux-gnueabihf
       - run: arm-linux-gnueabihf-g++-9 --version
-      - name: gradlew -Ptarget=Linux_ARM32hf install
+      - name: gradlew -Ptarget=Linux_ARM32hf assemble
         run: |
-          ./gradlew -Ptarget=Linux_ARM32hf install \
+          ./gradlew -Ptarget=Linux_ARM32hf assemble \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -169,9 +169,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: sudo apt install g++-10-aarch64-linux-gnu
       - run: aarch64-linux-gnu-g++-10 --version
-      - name: gradlew -Ptarget=Linux_ARM64 install
+      - name: gradlew -Ptarget=Linux_ARM64 assemble
         run: |
-          ./gradlew -Ptarget=Linux_ARM64 install \
+          ./gradlew -Ptarget=Linux_ARM64 assemble \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
