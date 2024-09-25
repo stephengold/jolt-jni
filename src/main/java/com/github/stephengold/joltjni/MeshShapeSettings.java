@@ -55,8 +55,7 @@ public class MeshShapeSettings extends ShapeSettings {
         int numVertices = vertices.length;
         int numFloats = 3 * numVertices;
         FloatBuffer vBuffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (int i = 0; i < numVertices; ++i) {
-            Float3 vertex = vertices[i];
+        for (Float3 vertex : vertices) {
             vertex.put(vBuffer);
         }
         long indicesVa = indices.va();
@@ -102,8 +101,7 @@ public class MeshShapeSettings extends ShapeSettings {
         int numVertices = vertices.size();
         int numFloats = 3 * numVertices;
         FloatBuffer vBuffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (int i = 0; i < numVertices; ++i) {
-            Float3 vertex = vertices.get(i);
+        for (Float3 vertex : vertices) {
             vertex.put(vBuffer);
         }
         long indicesVa = indices.va();
@@ -134,8 +132,7 @@ public class MeshShapeSettings extends ShapeSettings {
         int numVertices = 3 * numTriangles;
         int numFloats = 3 * numVertices;
         FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (int i = 0; i < numTriangles; ++i) {
-            Triangle triangle = triangleList.get(i);
+        for (Triangle triangle : triangleList) {
             triangle.putVertices(buffer);
         }
         long materialsVa = materials.va();
@@ -182,8 +179,7 @@ public class MeshShapeSettings extends ShapeSettings {
         int numVertices = 3 * numTriangles;
         int numFloats = 3 * numVertices;
         FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (int i = 0; i < numTriangles; ++i) {
-            Triangle triangle = triangleArray[i];
+        for (Triangle triangle : triangleArray) {
             triangle.putVertices(buffer);
         }
         long materialsVa = materials.va();
