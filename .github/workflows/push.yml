@@ -32,10 +32,6 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v4
-      - uses: gradle/actions/wrapper-validation@v4
-      - uses: mattsb42/not-grep@master
-        with:
-          config-file: .github/not-grep.toml
       - run: g++ --version
       - name: gradlew -Ptarget=Linux64 build install
         run: |
@@ -199,6 +195,10 @@ jobs:
           distribution: 'zulu'
           java-version: 23
       - uses: actions/checkout@v4
+      - uses: gradle/actions/wrapper-validation@v4
+      - uses: mattsb42/not-grep@master
+        with:
+          config-file: .github/not-grep.toml
       - name: gradlew -Pbt=Release -Pflavor=Sp -Ptarget=Linux64 build install
         run: |
           ./gradlew -Pbt=Release -Pflavor=Sp -Ptarget=Linux64 build install \
