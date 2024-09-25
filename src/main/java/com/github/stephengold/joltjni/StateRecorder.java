@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
+
 /**
  * Record the state of a physics system. Can also compare against an expected
  * state.
@@ -52,6 +54,44 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
+     * Read a boolean.
+     *
+     * @return the value that was read
+     */
+    public boolean readBoolean() {
+        long recorderVa = va();
+        boolean result = readBoolean(recorderVa);
+
+        return result;
+    }
+
+    /**
+     * Read a single-precision floating-point value.
+     *
+     * @return the value that was read
+     */
+    public float readFloat() {
+        long recorderVa = va();
+        float result = readFloat(recorderVa);
+
+        return result;
+    }
+
+    /**
+     * Read a vector.
+     *
+     * @return a new vector
+     */
+    public Vec3 readVec3() {
+        long recorderVa = va();
+        float[] storeFloats = new float[3];
+        readVec3(recorderVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats[0], storeFloats[1], storeFloats[2]);
+
+        return result;
+    }
+
+    /**
      * Alter whether the recorder is validating.
      *
      * @param setting true to begin validating, false to stop validating
@@ -60,10 +100,56 @@ public class StateRecorder extends NonCopyable {
         long recorderVa = va();
         setValidating(recorderVa, setting);
     }
+
+    /**
+     * Write the specified boolean.
+     *
+     * @param b the value to write
+     */
+    public void write(boolean b) {
+        long recorderVa = va();
+        writeBoolean(recorderVa, b);
+    }
+
+    /**
+     * Write the specified single-precision floating-point value.
+     *
+     * @param f the value to write
+     */
+    public void write(float f) {
+        long recorderVa = va();
+        writeFloat(recorderVa, f);
+    }
+
+    /**
+     * Write the value of the specified vector.
+     *
+     * @param v the vector to write (not null, unaffected)
+     */
+    public void write(Vec3Arg v) {
+        long recorderVa = va();
+        float x = v.getX();
+        float y = v.getY();
+        float z = v.getZ();
+        writeVec3(recorderVa, x, y, z);
+    }
     // *************************************************************************
     // native private methods
 
     native private static boolean isValidating(long recorderVa);
 
+    native private static boolean readBoolean(long recorderVa);
+
+    native private static float readFloat(long recorderVa);
+
+    native private static void readVec3(long recorderVa, float[] storeFloats);
+
     native private static void setValidating(long recorderVa, boolean setting);
+
+    native private static void writeBoolean(long recorderVa, boolean b);
+
+    native private static void writeFloat(long recorderVa, float f);
+
+    native private static void writeVec3(
+            long recorderVa, float x, float y, float z);
 }
