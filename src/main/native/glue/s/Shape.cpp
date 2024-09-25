@@ -108,6 +108,28 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    draw
+ * Signature: (JJJFFFIZZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_draw
+  (JNIEnv *, jclass, jlong shapeVa, jlong rendererVa, jlong transformVa,
+  jfloat scaleX, jfloat scaleY, jfloat scaleZ, jint colorInt,
+  jboolean useMaterialColors, jboolean wireframe) {
+#ifdef JPH_DEBUG_RENDERER
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    DebugRenderer * const pRenderer
+            = reinterpret_cast<DebugRenderer *> (rendererVa);
+    const RMat44 * const pTransform
+            = reinterpret_cast<RMat44 *> (transformVa);
+    const Vec3 scale(scaleX, scaleY, scaleZ);
+    const Color color(colorInt);
+    pShape->Draw(
+            pRenderer, *pTransform, scale, color, useMaterialColors, wireframe);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    getCenterOfMassX
  * Signature: (J)F
  */

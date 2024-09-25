@@ -23,8 +23,10 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
+import com.github.stephengold.joltjni.readonly.ConstColor;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
+import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.RefTarget;
 import java.nio.FloatBuffer;
@@ -168,6 +170,33 @@ abstract public class Shape extends NonCopyable
 
         assert result > 0 : "result = " + result;
         return result;
+    }
+
+    /**
+     * Draw the shape using the specified renderer. The shape is unaffected.
+     *
+     * @param renderer the renderer to use (not null)
+     * @param comTransform the coordinate transform from the shape's center of
+     * mass to system coordinates (not null, unaffected)
+     * @param scale the desired scaling (not null, unaffected)
+     * @param color the desired color if {@code useMaterialColors} is false (not
+     * null, unaffected)
+     * @param useMaterialColors true to use the color in the shape's material
+     * @param wireframe true to draw a wire frame, false for solid triangles
+     */
+    @Override
+    public void draw(DebugRenderer renderer, RMat44Arg comTransform,
+            Vec3Arg scale, ConstColor color, boolean useMaterialColors,
+            boolean wireframe) {
+        long shapeVa = va();
+        long rendererVa = renderer.va();
+        long transformVa = comTransform.va();
+        float scaleX = scale.getX();
+        float scaleY = scale.getY();
+        float scaleZ = scale.getZ();
+        int colorInt = color.getUInt32();
+        draw(shapeVa, rendererVa, transformVa, scaleX, scaleY, scaleZ,
+                colorInt, useMaterialColors, wireframe);
     }
 
     /**
@@ -366,6 +395,10 @@ abstract public class Shape extends NonCopyable
             long shapeVa, int numTriangles, FloatBuffer storeBuffer);
 
     native static int countDebugTriangles(long shapeVa);
+
+    native static void draw(long shapeVa, long rendererVa, long transformVa,
+            float scaleX, float scaleY, float scaleZ, int colorInt,
+            boolean useMaterialColors, boolean wireframe);
 
     native static float getCenterOfMassX(long shapeVa);
 
