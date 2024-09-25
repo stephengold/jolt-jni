@@ -310,6 +310,20 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterBase_isS
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBase
+ * Method:    restoreState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_restoreState
+  (JNIEnv *, jclass, jlong characterVa, jlong recorderVa) {
+    CharacterBase * const pCharacter
+            = reinterpret_cast<CharacterBase *> (characterVa);
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    pCharacter->RestoreState(*pRecorder);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterBase
  * Method:    saveState
  * Signature: (JJ)V
  */

@@ -56,6 +56,17 @@ public class CharacterBase extends NonCopyable implements ConstCharacterBase {
     // new methods exposed
 
     /**
+     * Restore the character's state from the specified recorder.
+     *
+     * @param recorder the recorder to restore from (not null)
+     */
+    public void restoreState(StateRecorder recorder) {
+        long characterVa = va();
+        long recorderVa = recorder.va();
+        restoreState(characterVa, recorderVa);
+    }
+
+    /**
      * Alter the maximum slope that character can walk on.
      *
      * @param angle the desired slope angle (in radians, default=5*Pi/18)
@@ -343,6 +354,8 @@ public class CharacterBase extends NonCopyable implements ConstCharacterBase {
             long characterVa, float nx, float ny, float nz);
 
     native static boolean isSupported(long characterVa);
+
+    native private static void restoreState(long characterVa, long recorderVa);
 
     native static void saveState(long characterVa, long recorderVa);
 
