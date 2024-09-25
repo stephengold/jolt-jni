@@ -603,10 +603,10 @@ public class CharacterVirtual
      * @return a new JVM object with a new native object assigned
      */
     @Override
-    public CharacterRef toRef() {
+    public CharacterVirtualRef toRef() {
         long characterVa = va();
         long refVa = toRef(characterVa);
-        CharacterRef result = new CharacterRef(refVa, true);
+        CharacterVirtualRef result = new CharacterVirtualRef(refVa, true);
 
         return result;
     }
