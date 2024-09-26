@@ -105,7 +105,7 @@ abstract public class BroadPhase extends BroadPhaseQuery {
      * @return a handle to be passed to {@code addBodiesFinalize()} or
      * {@code addBodiesFinalize()}
      */
-    public long addBodiesPrepare(BodyId[] bodyIds) {
+    public long addBodiesPrepare(BodyId... bodyIds) {
         long result = addBodiesPrepare(bodyIds, bodyIds.length);
         return result;
     }

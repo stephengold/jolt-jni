@@ -163,7 +163,7 @@ public class MeshShapeSettings extends ShapeSettings {
      *
      * @param triangleArray the array of triangles (not null, unaffected)
      */
-    public MeshShapeSettings(Triangle[] triangleArray) {
+    public MeshShapeSettings(Triangle... triangleArray) {
         this(triangleArray, new PhysicsMaterialList());
     }
 
