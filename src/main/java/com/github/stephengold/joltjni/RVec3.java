@@ -88,14 +88,14 @@ final public class RVec3 implements RVec3Arg {
      * Return the component-wise sum of the specified vectors. (native operator:
      * binary {@code +})
      *
-     * @param base the base vector (not null, unaffected)
-     * @param offset the offset to add (not null, unaffected)
+     * @param left the base vector (not null, unaffected)
+     * @param right the offset to add (not null, unaffected)
      * @return a new vector
      */
-    public static RVec3 add(RVec3Arg base, Vec3Arg offset) {
-        double xx = base.xx() + offset.getX();
-        double yy = base.yy() + offset.getY();
-        double zz = base.zz() + offset.getZ();
+    public static RVec3 add(RVec3Arg left, Vec3Arg right) {
+        double xx = left.xx() + right.getX();
+        double yy = left.yy() + right.getY();
+        double zz = left.zz() + right.getZ();
         RVec3 result = new RVec3(xx, yy, zz);
 
         return result;
@@ -148,14 +148,14 @@ final public class RVec3 implements RVec3Arg {
      * Return the component-wise difference of the specified vectors. (native
      * operator: binary {@code -})
      *
-     * @param base the base vector (not null, unaffected)
-     * @param offset the offset to subtract (not null, unaffected)
+     * @param left the base vector (not null, unaffected)
+     * @param right the offset to subtract (not null, unaffected)
      * @return a new vector
      */
-    public static RVec3 subtract(RVec3Arg base, Vec3Arg offset) {
-        double xx = base.xx() - offset.getX();
-        double yy = base.yy() - offset.getY();
-        double zz = base.zz() - offset.getZ();
+    public static RVec3 subtract(RVec3Arg left, Vec3Arg right) {
+        double xx = left.xx() - right.getX();
+        double yy = left.yy() - right.getY();
+        double zz = left.zz() - right.getZ();
         RVec3 result = new RVec3(xx, yy, zz);
 
         return result;
