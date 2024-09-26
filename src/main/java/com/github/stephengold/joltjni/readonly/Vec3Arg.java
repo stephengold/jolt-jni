@@ -33,6 +33,26 @@ public interface Vec3Arg {
     // new methods exposed
 
     /**
+     * Return the cross product with the specified vector. The current vector is
+     * unaffected.
+     *
+     * @param rightFactor the vector to cross with the current one (not null,
+     * unaffected)
+     * @return a new product vector
+     */
+    Vec3 cross(Vec3Arg rightFactor);
+
+    /**
+     * Return the dot product with the specified vector. The current vector is
+     * unaffected.
+     *
+     * @param factor the vector to dot with the current one (not null,
+     * unaffected)
+     * @return the dot product
+     */
+    float dot(Vec3Arg factor);
+
+    /**
      * Return the specified component. The vector is unaffected.
      *
      * @param index 0, 1, or 2

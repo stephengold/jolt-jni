@@ -437,6 +437,43 @@ final public class Vec3 implements Vec3Arg {
     // Vec3Arg methods
 
     /**
+     * Return the cross product with the specified vector. The current vector is
+     * unaffected.
+     *
+     * @param rightFactor the vector to cross with the current one (not null,
+     * unaffected)
+     * @return a new product vector
+     */
+    @Override
+    public Vec3 cross(Vec3Arg rightFactor) {
+        float rx = rightFactor.getX();
+        float ry = rightFactor.getY();
+        float rz = rightFactor.getZ();
+
+        float px = y * rz - z * ry;
+        float py = z * rx - x * rz;
+        float pz = x * ry - y * rx;
+
+        Vec3 result = new Vec3(px, py, pz);
+        return result;
+    }
+
+    /**
+     * Return the dot product with the specified vector. The current vector is
+     * unaffected.
+     *
+     * @param factor the vector to dot with the current one (not null,
+     * unaffected)
+     * @return the dot product
+     */
+    @Override
+    public float dot(Vec3Arg factor) {
+        float result
+                = x * factor.getX() + y * factor.getY() + z * factor.getZ();
+        return result;
+    }
+
+    /**
      * Return the specified component. The vector is unaffected.
      *
      * @param index 0, 1, or 2
