@@ -37,6 +37,13 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  */
 public class Body extends NonCopyable implements ConstBody {
     // *************************************************************************
+    // fields
+
+    /**
+     * protect the collision group from garbage collection
+     */
+    private CollisionGroup group;
+    // *************************************************************************
     // constructors
 
     /**
@@ -147,6 +154,15 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Access the body's collision group.
+     *
+     * @return the pre-existing group, or {@code null} if none
+     */
+    public CollisionGroup getCollisionGroup() {
+        return group;
+    }
+
+    /**
      * Access the body's motion properties.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
@@ -233,6 +249,18 @@ public class Body extends NonCopyable implements ConstBody {
         float wy = omega.getY();
         float wz = omega.getZ();
         setAngularVelocityClamped(bodyVa, wx, wy, wz);
+    }
+
+    /**
+     * Assign the body to the specified collision group.
+     *
+     * @param group the group to assign (not null, alias created)
+     */
+    public void setCollisionGroup(CollisionGroup group) {
+        this.group = group;
+        long bodyVa = va();
+        long groupVa = group.va();
+        setCollisionGroup(bodyVa, groupVa);
     }
 
     /**
@@ -860,6 +888,8 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static void setAngularVelocityClamped(
             long bodyVa, float wx, float wy, float wz);
+
+    native private static void setCollisionGroup(long bodyVa, long groupVa);
 
     native private static void setFriction(long bodyVa, float friction);
 
