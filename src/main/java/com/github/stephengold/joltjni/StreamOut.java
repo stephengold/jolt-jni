@@ -26,7 +26,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public abstract class StreamOut extends NonCopyable {
+abstract public class StreamOut extends NonCopyable {
     // *************************************************************************
     // constructors
 
