@@ -119,6 +119,20 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Divide the left argument by the right argument. (native operator: binary
+     * {@code /=})
+     *
+     * @param left the accumulating vector (not null, modified)
+     * @param right the denominator (not null, unaffected)
+     */
+    public static void divideEquals(RVec3 left, double right) {
+        double xx = left.xx() / right;
+        double yy = left.yy() / right;
+        double zz = left.zz() / right;
+        left.set(xx, yy, zz);
+    }
+
+    /**
      * Test whether all 3 components are finite.
      *
      * @return true if all are finite, otherwise false
@@ -132,6 +146,34 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Add the right argument to the left argument. (native operator: binary
+     * {@code +=})
+     *
+     * @param left the accumulating vector (not null, modified)
+     * @param right the vector to add (not null, unaffected)
+     */
+    public static void plusEquals(RVec3 left, RVec3Arg right) {
+        double xx = left.xx() + right.xx();
+        double yy = left.yy() + right.yy();
+        double zz = left.zz() + right.zz();
+        left.set(xx, yy, zz);
+    }
+
+    /**
+     * Add the right argument to the left argument. (native operator: binary
+     * {@code +=})
+     *
+     * @param left the accumulating vector (not null, modified)
+     * @param right the vector to add (not null, unaffected)
+     */
+    public static void plusEquals(RVec3 left, Vec3Arg right) {
+        double xx = left.xx() + right.getX();
+        double yy = left.yy() + right.getY();
+        double zz = left.zz() + right.getZ();
+        left.set(xx, yy, zz);
+    }
+
+    /**
      * Set all 3 components to specified values.
      *
      * @param x the desired X component
@@ -142,6 +184,23 @@ final public class RVec3 implements RVec3Arg {
         this.xx = x;
         this.yy = y;
         this.zz = z;
+    }
+
+    /**
+     * Return the component-wise difference of the specified vectors. (native
+     * operator: binary {@code -})
+     *
+     * @param left the base vector (not null, unaffected)
+     * @param right the offset to subtract (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 subtract(RVec3Arg left, RVec3Arg right) {
+        double xx = left.xx() - right.xx();
+        double yy = left.yy() - right.yy();
+        double zz = left.zz() - right.zz();
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
     }
 
     /**
