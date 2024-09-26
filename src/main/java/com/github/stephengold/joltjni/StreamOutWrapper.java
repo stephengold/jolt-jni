@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A wrapper around a {@code std::ostream}.
+ * A wrapper around an {@code std::ofstream}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
