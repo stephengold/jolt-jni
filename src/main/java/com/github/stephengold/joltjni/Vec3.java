@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.util.Objects;
 
@@ -99,6 +100,17 @@ final public class Vec3 implements Vec3Arg {
         this.x = array[0];
         this.y = array[1];
         this.z = array[2];
+    }
+
+    /**
+     * Instantiate from a location vector.
+     *
+     * @param vec the vector to copy (not null, unaffected)
+     */
+    public Vec3(RVec3Arg vec) {
+        this.x = vec.x();
+        this.y = vec.y();
+        this.z = vec.z();
     }
 
     /**
