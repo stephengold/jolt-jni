@@ -26,13 +26,16 @@ import com.github.stephengold.joltjni.readonly.ConstCharacterBase;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.template.Ref;
 
 /**
  * Base class to represent a player navigating a {@code PhysicsSystem}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CharacterBase extends NonCopyable implements ConstCharacterBase {
+abstract public class CharacterBase
+        extends NonCopyable
+        implements ConstCharacterBase {
     // *************************************************************************
     // constructors
 
@@ -88,6 +91,13 @@ public class CharacterBase extends NonCopyable implements ConstCharacterBase {
         float z = up.getZ();
         setUp(characterVa, x, y, z);
     }
+
+    /**
+     * Create a counted reference to the native {@code CharacterBase}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    abstract public Ref toRef();
     // *************************************************************************
     // ConstCharacterBase methods
 
