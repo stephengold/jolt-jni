@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/StateRecorderImpl.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/StateRecorderImpl.h"
 #include "auto/com_github_stephengold_joltjni_StateRecorderImpl.h"
 #include "glue/glue.h"
 

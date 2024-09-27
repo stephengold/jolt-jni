@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Geometry/IndexedTriangle.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Geometry/IndexedTriangle.h"
 #include "auto/com_github_stephengold_joltjni_IndexedTriangleList.h"
 #include "glue/glue.h"
 

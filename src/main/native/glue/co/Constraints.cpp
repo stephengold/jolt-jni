@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Constraints/ConstraintManager.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Constraints/ConstraintManager.h"
 #include "auto/com_github_stephengold_joltjni_Constraints.h"
 #include "glue/glue.h"
 

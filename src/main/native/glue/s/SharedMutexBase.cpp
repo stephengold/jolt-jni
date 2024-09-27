@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Core/Mutex.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Core/Mutex.h"
 #include "auto/com_github_stephengold_joltjni_SharedMutexBase.h"
 #include "glue/glue.h"
 

@@ -23,10 +23,10 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Collision/BroadPhase/BroadPhaseQuery.h>
-#include <Jolt/Physics/Collision/CastResult.h>
-#include <Jolt/Physics/Collision/CollisionCollectorImpl.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/BroadPhase/BroadPhaseQuery.h"
+#include "Jolt/Physics/Collision/CastResult.h"
+#include "Jolt/Physics/Collision/CollisionCollectorImpl.h"
 #include "auto/com_github_stephengold_joltjni_AllHitRayCastBodyCollector.h"
 #include "glue/glue.h"
 

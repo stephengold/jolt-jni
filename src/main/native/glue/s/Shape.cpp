@@ -23,10 +23,10 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Collision/CollisionCollectorImpl.h>
-#include <Jolt/Physics/Collision/Shape/Shape.h>
-#include <Jolt/Physics/Collision/TransformedShape.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/CollisionCollectorImpl.h"
+#include "Jolt/Physics/Collision/Shape/Shape.h"
+#include "Jolt/Physics/Collision/TransformedShape.h"
 
 #include "auto/com_github_stephengold_joltjni_Shape.h"
 #include "auto/com_github_stephengold_joltjni_ShapeRef.h"

@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Collision/Shape/SubShapeID.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/Shape/SubShapeID.h"
 #include "auto/com_github_stephengold_joltjni_SubShapeId.h"
 #include "glue/glue.h"
 

@@ -23,11 +23,11 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/ObjectStream/ObjectStreamIn.h>
-#include <Jolt/Physics/PhysicsScene.h>
-#include <Jolt/Physics/Ragdoll/Ragdoll.h>
-#include <Jolt/Skeleton/SkeletalAnimation.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/ObjectStream/ObjectStreamIn.h"
+#include "Jolt/Physics/PhysicsScene.h"
+#include "Jolt/Physics/Ragdoll/Ragdoll.h"
+#include "Jolt/Skeleton/SkeletalAnimation.h"
 #include "auto/com_github_stephengold_joltjni_ObjectStreamIn.h"
 
 using namespace JPH;

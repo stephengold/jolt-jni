@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Constraints/SliderConstraint.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Constraints/SliderConstraint.h"
 #include "auto/com_github_stephengold_joltjni_SliderConstraint.h"
 
 using namespace JPH;

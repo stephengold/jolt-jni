@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Collision/ContactListener.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/ContactListener.h"
 #include "auto/com_github_stephengold_joltjni_ContactSettings.h"
 #include "glue/glue.h"
 

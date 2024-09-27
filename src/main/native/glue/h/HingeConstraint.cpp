@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Constraints/HingeConstraint.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Constraints/HingeConstraint.h"
 #include "auto/com_github_stephengold_joltjni_HingeConstraint.h"
 
 using namespace JPH;

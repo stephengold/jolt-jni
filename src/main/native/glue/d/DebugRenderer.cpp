@@ -23,9 +23,9 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
+#include "Jolt/Jolt.h"
 #ifdef JPH_DEBUG_RENDERER
-#include <Jolt/Renderer/DebugRenderer.h>
+#include "Jolt/Renderer/DebugRenderer.h"
 #endif
 #include "auto/com_github_stephengold_joltjni_DebugRenderer.h"
 #include "glue/glue.h"

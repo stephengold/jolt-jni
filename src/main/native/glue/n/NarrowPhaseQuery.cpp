@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Collision/NarrowPhaseQuery.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/NarrowPhaseQuery.h"
 #include "auto/com_github_stephengold_joltjni_NarrowPhaseQuery.h"
 
 using namespace JPH;

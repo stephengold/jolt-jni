@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Core/JobSystemThreadPool.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Core/JobSystemThreadPool.h"
 #include "auto/com_github_stephengold_joltjni_JobSystemThreadPool.h"
 #include "glue/glue.h"
 

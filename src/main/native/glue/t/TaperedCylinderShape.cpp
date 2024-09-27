@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Collision/Shape/TaperedCylinderShape.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/Shape/TaperedCylinderShape.h"
 #include "auto/com_github_stephengold_joltjni_TaperedCylinderShape.h"
 
 using namespace JPH;

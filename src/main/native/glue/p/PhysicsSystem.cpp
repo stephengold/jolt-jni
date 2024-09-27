@@ -23,9 +23,9 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Core/JobSystemThreadPool.h>
-#include <Jolt/Physics/PhysicsSystem.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Core/JobSystemThreadPool.h"
+#include "Jolt/Physics/PhysicsSystem.h"
 #include "auto/com_github_stephengold_joltjni_PhysicsSystem.h"
 #include "glue/glue.h"
 

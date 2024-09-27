@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Ragdoll/Ragdoll.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Ragdoll/Ragdoll.h"
 #include "auto/com_github_stephengold_joltjni_RagdollSettings.h"
 #include "auto/com_github_stephengold_joltjni_RagdollSettingsRef.h"
 #include "glue/glue.h"

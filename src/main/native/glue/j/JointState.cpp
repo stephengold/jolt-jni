@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Skeleton/SkeletonPose.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Skeleton/SkeletonPose.h"
 #include "auto/com_github_stephengold_joltjni_JointState.h"
 
 using namespace JPH;

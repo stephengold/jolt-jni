@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Skeleton/Skeleton.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Skeleton/Skeleton.h"
 #include "auto/com_github_stephengold_joltjni_Skeleton.h"
 #include "auto/com_github_stephengold_joltjni_SkeletonRef.h"
 #include "glue/glue.h"

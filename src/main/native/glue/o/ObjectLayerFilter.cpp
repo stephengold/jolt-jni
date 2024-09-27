@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Collision/ObjectLayer.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/ObjectLayer.h"
 #include "auto/com_github_stephengold_joltjni_ObjectLayerFilter.h"
 #include "glue/glue.h"
 

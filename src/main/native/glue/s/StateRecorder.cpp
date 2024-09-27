@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/StateRecorder.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/StateRecorder.h"
 #include "auto/com_github_stephengold_joltjni_StateRecorder.h"
 
 using namespace JPH;

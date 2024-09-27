@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Collision/Shape/Shape.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/Shape/Shape.h"
 #include "auto/com_github_stephengold_joltjni_CollidePointCollector.h"
 #include "glue/glue.h"
 

@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Character/Character.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Character/Character.h"
 #include "auto/com_github_stephengold_joltjni_CharacterSettings.h"
 #include "auto/com_github_stephengold_joltjni_CharacterSettingsRef.h"
 #include "glue/glue.h"

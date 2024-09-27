@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Collision/BroadPhase/BroadPhase.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/BroadPhase/BroadPhase.h"
 #include "auto/com_github_stephengold_joltjni_BroadPhase.h"
 #include "glue/glue.h"
 

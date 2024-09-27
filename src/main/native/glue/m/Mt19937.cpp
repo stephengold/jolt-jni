@@ -23,7 +23,7 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
+#include "Jolt/Jolt.h"
 #include "auto/com_github_stephengold_joltjni_Mt19937.h"
 #include "glue/glue.h"
 

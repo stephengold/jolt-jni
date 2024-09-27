@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Collision/Shape/RotatedTranslatedShape.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/Shape/RotatedTranslatedShape.h"
 #include "auto/com_github_stephengold_joltjni_RotatedTranslatedShapeSettings.h"
 #include "glue/glue.h"
 

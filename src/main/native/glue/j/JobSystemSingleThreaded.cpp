@@ -23,8 +23,8 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Core/JobSystemSingleThreaded.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Core/JobSystemSingleThreaded.h"
 #include "auto/com_github_stephengold_joltjni_JobSystemSingleThreaded.h"
 #include "glue/glue.h"
 

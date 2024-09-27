@@ -23,9 +23,9 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/Physics/Body/Body.h>
-#include <Jolt/Physics/Body/BodyCreationSettings.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Body/Body.h"
+#include "Jolt/Physics/Body/BodyCreationSettings.h"
 #include "auto/com_github_stephengold_joltjni_Body.h"
 #include "glue/glue.h"
 

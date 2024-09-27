@@ -23,14 +23,14 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#include <Jolt/Jolt.h>
-#include <Jolt/ConfigurationString.h>
-#include <Jolt/Core/Factory.h>
-#include <Jolt/Core/Profiler.h>
-#include <Jolt/Core/TempAllocator.h>
-#include <Jolt/Geometry/RayAABox.h>
-#include <Jolt/Physics/DeterminismLog.h>
-#include <Jolt/RegisterTypes.h>
+#include "Jolt/Jolt.h"
+#include "Jolt/ConfigurationString.h"
+#include "Jolt/Core/Factory.h"
+#include "Jolt/Core/Profiler.h"
+#include "Jolt/Core/TempAllocator.h"
+#include "Jolt/Geometry/RayAABox.h"
+#include "Jolt/Physics/DeterminismLog.h"
+#include "Jolt/RegisterTypes.h"
 
 #include "auto/com_github_stephengold_joltjni_Jolt.h"
 #include "glue/glue.h"
