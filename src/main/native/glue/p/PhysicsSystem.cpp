@@ -386,8 +386,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getPhy
  * Signature: (JIIIIJJJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_init
-  (JNIEnv *, jclass, jlong systemVa, jint maxBodies, jint numBodyMutexes, jint maxBodyPairs,
-        jint maxContactConstraints, jlong mapVa, jlong ovbFilterVa, jlong ovoFilterVa) {
+  (JNIEnv *, jclass, jlong systemVa, jint maxBodies, jint numBodyMutexes,
+  jint maxBodyPairs, jint maxContactConstraints, jlong mapVa, jlong ovbFilterVa,
+  jlong ovoFilterVa) {
     PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     const BroadPhaseLayerInterface * const pMap
@@ -547,8 +548,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setPhys
  * Signature: (JFIJJ)I
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_update
-  (JNIEnv *, jclass, jlong physicsSystemVa, jfloat deltaTime, jint collisionSteps,
-    jlong allocatorVa, jlong jobSystemVa) {
+  (JNIEnv *, jclass, jlong physicsSystemVa, jfloat deltaTime,
+  jint collisionSteps, jlong allocatorVa, jlong jobSystemVa) {
     PhysicsSystem * const pPhysicsSystem
             = reinterpret_cast<PhysicsSystem *> (physicsSystemVa);
     TempAllocatorImpl * const pAllocator
