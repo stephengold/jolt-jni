@@ -28,7 +28,7 @@ import com.github.stephengold.joltjni.template.Ref;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class SkeletalAnimationRef extends Ref {
+final public class SkeletalAnimationRef extends Ref {
     // *************************************************************************
     // constructors
 

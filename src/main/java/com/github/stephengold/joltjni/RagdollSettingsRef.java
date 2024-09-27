@@ -29,7 +29,7 @@ import com.github.stephengold.joltjni.template.Ref;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class RagdollSettingsRef extends Ref {
+final public class RagdollSettingsRef extends Ref {
     // *************************************************************************
     // constructors
 

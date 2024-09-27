@@ -29,7 +29,7 @@ import com.github.stephengold.joltjni.template.Ref;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ConstraintSettingsRef extends Ref {
+final public class ConstraintSettingsRef extends Ref {
     // *************************************************************************
     // constructors
 
