@@ -116,6 +116,26 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawCoo
 
 /*
  * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawCylinder
+ * Signature: (JFFIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawCylinder
+  (JNIEnv *, jclass, jlong transformVa, jfloat halfHeight, jfloat radius,
+  jint colorInt, jint csOrdinal, jint drawModeOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    const Color color(colorInt);
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    const DebugRenderer::EDrawMode drawMode
+            = (DebugRenderer::EDrawMode) drawModeOrdinal;
+    DebugRenderer::sInstance->DrawCylinder(
+            *pTransform, halfHeight, radius, color, castShadow, drawMode);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
  * Method:    drawLine
  * Signature: (DDDDDDI)V
  */

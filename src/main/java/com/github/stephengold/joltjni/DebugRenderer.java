@@ -194,6 +194,56 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
+     * Draw the specified cylinder.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param halfHeight half of the desired height
+     * @param radius the desired radius
+     * @param color the desired color (not null, unaffected)
+     */
+    public void drawCylinder(RMat44Arg transform, float halfHeight,
+            float radius, ConstColor color) {
+        drawCylinder(transform, halfHeight, radius, color, ECastShadow.On);
+    }
+
+    /**
+     * Draw the specified cylinder.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param halfHeight half of the desired height
+     * @param radius the desired radius
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     */
+    public void drawCylinder(
+            RMat44Arg transform, float halfHeight, float radius,
+            ConstColor color, ECastShadow castShadow) {
+        drawCylinder(transform, halfHeight, radius, color, castShadow,
+                EDrawMode.Solid);
+    }
+
+    /**
+     * Draw the specified cylinder.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param halfHeight half of the desired height
+     * @param radius the desired radius
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawCylinder(
+            RMat44Arg transform, float halfHeight, float radius,
+            ConstColor color, ECastShadow castShadow, EDrawMode drawMode) {
+        long transformVa = transform.va();
+        int colorInt = color.getUInt32();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawCylinder(transformVa, halfHeight, radius, colorInt, csOrdinal,
+                drawModeOrdinal);
+    }
+
+    /**
      * Draw the specified 3-D line.
      *
      * @param from the desired first endpoint (not null, unaffected)
@@ -511,6 +561,9 @@ abstract public class DebugRenderer extends NonCopyable {
 
     native private static void drawCoordinateSystem(
             long transformVa, float size);
+
+    native private static void drawCylinder(long transformVa, float halfHeight,
+            float radius, int colorInt, int csOrdinal, int drawModeOrdinal);
 
     native private static void drawLine(double fromX, double fromY,
             double fromZ, double toX, double toY, double toZ, int colorInt);
