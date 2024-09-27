@@ -27,6 +27,8 @@ import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Perform simulation on a collection of physics objects. Bodies are added by
@@ -62,6 +64,10 @@ public class PhysicsSystem extends NonCopyable {
      * protect the ObjectLayerPairFilter from garbage collection
      */
     private ConstObjectLayerPairFilter ovoFilter;
+    /**
+     * protect the step listeners from garbage collection
+     */
+    final private List<PhysicsStepListener> stepListeners = new ArrayList<>();
     /**
      * cached reference to the system's locking {@code NarrowPhaseQuery}
      */
@@ -104,6 +110,18 @@ public class PhysicsSystem extends NonCopyable {
         long systemVa = va();
         long constraintVa = constraint.va();
         addConstraint(systemVa, constraintVa);
+    }
+
+    /**
+     * Add the specified step listener to the system.
+     *
+     * @param listener the listener to add (not null, alias created)
+     */
+    public void addStepListener(PhysicsStepListener listener) {
+        stepListeners.add(listener);
+        long systemVa = va();
+        long listenerVa = listener.va();
+        addStepListener(systemVa, listenerVa);
     }
 
     /**
@@ -636,6 +654,8 @@ public class PhysicsSystem extends NonCopyable {
     // native private methods
 
     native private static void addConstraint(long systemVa, long constraintVa);
+
+    native private static void addStepListener(long systemVa, long listenerVa);
 
     native private static long createPhysicsSystem();
 

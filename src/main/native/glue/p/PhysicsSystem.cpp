@@ -47,6 +47,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_addCons
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    addStepListener
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_addStepListener
+  (JNIEnv *, jclass, jlong systemVa, jlong listenerVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    PhysicsStepListener * const pListener
+            = reinterpret_cast<PhysicsStepListener *> (listenerVa);
+    pSystem->AddStepListener(pListener);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    createPhysicsSystem
  * Signature: ()J
  */
