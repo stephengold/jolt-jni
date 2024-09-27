@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
 
@@ -29,7 +30,9 @@ import com.github.stephengold.joltjni.template.Ref;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class WheelSettings extends SerializableObject {
+abstract public class WheelSettings
+        extends SerializableObject
+        implements ConstWheelSettings {
     // *************************************************************************
     // constructors
 
@@ -42,48 +45,6 @@ abstract public class WheelSettings extends SerializableObject {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Copy the location of the attachment point. The settings are unaffected.
-     * (native attribute: mPosition)
-     *
-     * @return a new location vector (in the body's local system)
-     */
-    public Vec3 getPosition() {
-        long settingsVa = va();
-        float x = getPositionX(settingsVa);
-        float y = getPositionY(settingsVa);
-        float z = getPositionZ(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
-    }
-
-    /**
-     * Return the radius of the wheel. The settings are unaffected. (native
-     * attribute: mRadius)
-     *
-     * @return the radius (in maters)
-     */
-    public float getRadius() {
-        long settingsVa = va();
-        float result = getRadius(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the width of the wheel. The settings are unaffected. (native
-     * attribute: mWidth)
-     *
-     * @return the width (in maters)
-     */
-    public float getWidth() {
-        long settingsVa = va();
-        float result = getWidth(settingsVa);
-
-        return result;
-    }
 
     /**
      * Alter the location of the attachment point. (native attribute: mPosition)
@@ -125,6 +86,53 @@ abstract public class WheelSettings extends SerializableObject {
      * @return a new JVM object with a new native object assigned
      */
     abstract public Ref toRef();
+    // *************************************************************************
+    // ConstWheelSettings methods
+
+    /**
+     * Copy the location of the attachment point. The settings are unaffected.
+     * (native attribute: mPosition)
+     *
+     * @return a new location vector (in the body's local system)
+     */
+    @Override
+    public Vec3 getPosition() {
+        long settingsVa = va();
+        float x = getPositionX(settingsVa);
+        float y = getPositionY(settingsVa);
+        float z = getPositionZ(settingsVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the radius of the wheel. The settings are unaffected. (native
+     * attribute: mRadius)
+     *
+     * @return the radius (in maters)
+     */
+    @Override
+    public float getRadius() {
+        long settingsVa = va();
+        float result = getRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the width of the wheel. The settings are unaffected. (native
+     * attribute: mWidth)
+     *
+     * @return the width (in maters)
+     */
+    @Override
+    public float getWidth() {
+        long settingsVa = va();
+        float result = getWidth(settingsVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
