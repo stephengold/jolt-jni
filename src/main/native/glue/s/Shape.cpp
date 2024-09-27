@@ -31,7 +31,6 @@ SOFTWARE.
 #include "auto/com_github_stephengold_joltjni_Shape.h"
 #include "auto/com_github_stephengold_joltjni_ShapeRef.h"
 #include "glue/glue.h"
-#include <algorithm>
 
 using namespace JPH;
 
