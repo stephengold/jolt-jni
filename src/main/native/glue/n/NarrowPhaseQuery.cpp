@@ -36,7 +36,7 @@ using namespace JPH;
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_castRay__JJJJJJ
   (JNIEnv *, jclass, jlong queryVa, jlong raycastVa, jlong hitVa,
-   jlong bplFilterVa, jlong olFilterVa, jlong bodyFilterVa) {
+  jlong bplFilterVa, jlong olFilterVa, jlong bodyFilterVa) {
     const NarrowPhaseQuery * const pQuery
             = reinterpret_cast<NarrowPhaseQuery *> (queryVa);
     const RRayCast * const pRayCast = reinterpret_cast<RRayCast *> (raycastVa);

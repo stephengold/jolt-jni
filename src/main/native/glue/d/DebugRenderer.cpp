@@ -302,8 +302,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWir
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWireTriangle
   (JNIEnv *, jclass, jdouble v1x, jdouble v1y, jdouble v1z, jdouble v2x,
-   jdouble v2y, jdouble v2z, jdouble v3x, jdouble v3y, jdouble v3z,
-   jint colorInt) {
+  jdouble v2y, jdouble v2z, jdouble v3x, jdouble v3y, jdouble v3z,
+  jint colorInt) {
 #ifdef JPH_DEBUG_RENDERER
     const RVec3 v1(v1x, v1y, v1z);
     const RVec3 v2(v2x, v2y, v2z);

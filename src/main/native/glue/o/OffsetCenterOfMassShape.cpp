@@ -37,7 +37,7 @@ using namespace JPH;
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShape_createShape
   (JNIEnv *, jclass, jlong baseShapeVa, jfloat offsetX, jfloat offsetY,
-   jfloat offsetZ) {
+  jfloat offsetZ) {
     const Shape * const pBase = reinterpret_cast<Shape *> (baseShapeVa);
     const Vec3 offset(offsetX, offsetY, offsetZ);
     OffsetCenterOfMassShape * const pResult

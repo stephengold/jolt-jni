@@ -165,7 +165,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MassProperties_setMas
   (JNIEnv *, jclass, jlong propertiesVa, jfloat mass) {
     MassProperties * const pProperties
             = reinterpret_cast<MassProperties *> (propertiesVa);
-   pProperties->mMass = mass;
+    pProperties->mMass = mass;
 }
 
 /*

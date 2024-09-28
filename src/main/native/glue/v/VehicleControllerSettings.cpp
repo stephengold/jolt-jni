@@ -50,7 +50,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleControllerSett
     return result;
 }
 
-
 /*
  * Class:     com_github_stephengold_joltjni_VehicleControllerSettings
  * Method:    setEmbedded
@@ -62,7 +61,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleControllerSett
             = reinterpret_cast<VehicleControllerSettings *> (settingsVa);
     pSettings->SetEmbedded();
 }
-
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleControllerSettings
