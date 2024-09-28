@@ -123,7 +123,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
 
     /**
      * Alter whether to calculate penetration for the starting point. (native
-     * field: mReturnDeepestPoint)
+     * attribute: mReturnDeepestPoint)
      *
      * @param enable true to enable the feature, false to disable it
      * (default=false)
