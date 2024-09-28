@@ -94,6 +94,9 @@ abstract public class ConstraintSettings
             case Slider:
                 result = new SliderConstraintSettings(settingsVa);
                 break;
+            case Vehicle:
+                result = new VehicleConstraintSettings(settingsVa);
+                break;
             default:
                 throw new IllegalArgumentException("subType = " + subType);
         }
