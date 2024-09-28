@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
 
 /**
- * A straightforward Java translation of the single-precision debug-renderer
+ * A line-for-line Java translation of the single-precision debug-renderer
  * functions.
  * <p>
  * Compare with the original by Jorrit Rouwe at

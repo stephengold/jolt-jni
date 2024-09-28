@@ -22,7 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 /**
- * A straightforward Java translation of the Jolt Physics abstract broad phase
+ * A line-for-line Java translation of the Jolt Physics abstract broad phase
  * test class.
  * <p>
  * Compare with the original by Jorrit Rouwe at

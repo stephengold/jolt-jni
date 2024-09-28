@@ -27,7 +27,7 @@ import java.util.*;
 import testjoltjni.app.testframework.*;
 
 /**
- * A straightforward Java translation of the Jolt Physics abstract character
+ * A line-for-line Java translation of the Jolt Physics abstract character
  * test class.
  * <p>
  * Compare with the original by Jorrit Rouwe at

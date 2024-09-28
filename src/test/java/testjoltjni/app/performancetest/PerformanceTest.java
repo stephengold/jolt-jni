@@ -27,7 +27,7 @@ import java.util.*;
 import testjoltjni.TestUtils;
 
 /**
- * A straightforward Java translation of the Jolt Physics performance-test
+ * A line-for-line Java translation of the Jolt Physics performance-test
  * driver.
  * <p>
  * Compare with the original by Jorrit Rouwe at

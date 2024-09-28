@@ -24,7 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 
 /**
- * A straightforward Java translation of the Jolt Physics "convex vs mesh scene"
+ * A line-for-line Java translation of the Jolt Physics "convex vs mesh scene"
  * performance test.
  * <p>
  * Compare with the original by Jorrit Rouwe at

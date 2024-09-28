@@ -23,7 +23,7 @@ package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 
 /**
- * A straightforward Java translation of the Jolt Physics layer definitions for
+ * A line-for-line Java translation of the Jolt Physics layer definitions for
  * the samples app.
  * <p>
  * Compare with the original by Jorrit Rouwe at

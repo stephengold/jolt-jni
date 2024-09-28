@@ -23,7 +23,7 @@ package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 
 /**
- * A straightforward Java translation of the Jolt Physics layer definitions for
+ * A line-for-line Java translation of the Jolt Physics layer definitions for
  * performance testing.
  * <p>
  * Compare with the original by Jorrit Rouwe at

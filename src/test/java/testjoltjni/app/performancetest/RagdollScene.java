@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import java.util.*;
 
 /**
- * A straightforward Java translation of the Jolt Physics "ragdoll scene"
+ * A line-for-line Java translation of the Jolt Physics "ragdoll scene"
  * performance test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
