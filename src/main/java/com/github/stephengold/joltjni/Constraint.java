@@ -37,6 +37,12 @@ abstract public class Constraint extends NonCopyable
     // constructors
 
     /**
+     * Instantiate a constraint with no native object assigned.
+     */
+    Constraint() {
+    }
+
+    /**
      * Instantiate a constraint with the specified native object assigned but
      * not owned.
      *
@@ -87,6 +93,9 @@ abstract public class Constraint extends NonCopyable
                 break;
             case Slider:
                 result = new SliderConstraint(constraintVa);
+                break;
+            case Vehicle:
+                result = new VehicleConstraint(constraintVa);
                 break;
             default:
                 throw new IllegalArgumentException("subType = " + subType);
