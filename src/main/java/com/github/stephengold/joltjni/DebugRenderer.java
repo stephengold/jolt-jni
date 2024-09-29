@@ -83,6 +83,45 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
+     * Draw the specified axis-aligned 3-D box.
+     *
+     * @param box the desired geometric properties (not null, unaffected)
+     * @param color the desired color (not null, unaffected)
+     */
+    public void drawBox(ConstAaBox box, ConstColor color) {
+        drawBox(box, color, ECastShadow.On);
+    }
+
+    /**
+     * Draw the specified axis-aligned 3-D box.
+     *
+     * @param box the desired geometric properties (not null, unaffected)
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     */
+    public void drawBox(
+            ConstAaBox box, ConstColor color, ECastShadow castShadow) {
+        drawBox(box, color, castShadow, EDrawMode.Solid);
+    }
+
+    /**
+     * Draw the specified axis-aligned 3-D box.
+     *
+     * @param box the desired geometric properties (not null, unaffected)
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawBox(ConstAaBox box, ConstColor color,
+            ECastShadow castShadow, EDrawMode drawMode) {
+        long boxVa = box.va();
+        int colorInt = color.getUInt32();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawBox(boxVa, colorInt, csOrdinal, drawModeOrdinal);
+    }
+
+    /**
      * Draw the specified 3-D box.
      *
      * @param transform the desired coordinate transform (not null, unaffected)
@@ -552,6 +591,9 @@ abstract public class DebugRenderer extends NonCopyable {
     native private static void drawArrow(
             double fromX, double fromY, double fromZ, double toX, double toY,
             double toZ, int colorInt, float size);
+
+    native private static void drawBox(
+            long boxVa, int colorInt, int csOrdinal, int drawModeOrdinal);
 
     native private static void drawBox(long transformVa, long boxVa,
             int colorInt, int csOrdinal, int drawModeOrdinal);

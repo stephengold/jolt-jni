@@ -63,6 +63,25 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawArr
 /*
  * Class:     com_github_stephengold_joltjni_DebugRenderer
  * Method:    drawBox
+ * Signature: (JIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawBox__JIII
+  (JNIEnv *, jclass, jlong boxVa, jint colorInt, jint csOrdinal,
+  jint drawModeOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const Color color(colorInt);
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    const DebugRenderer::EDrawMode drawMode
+            = (DebugRenderer::EDrawMode) drawModeOrdinal;
+    DebugRenderer::sInstance->DrawBox(*pBox, color, castShadow, drawMode);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawBox
  * Signature: (JJIII)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawBox
