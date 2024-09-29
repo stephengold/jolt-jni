@@ -122,6 +122,20 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getNu
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    getPenetrationSlop
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getPenetrationSlop
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    const float result = pSettings->mPenetrationSlop;
+    return result;
+}
+
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
  * Method:    getPointVelocitySleepThreshold
  * Signature: (J)F
  */
@@ -205,6 +219,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setNu
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
     pSettings->mNumVelocitySteps = numSteps;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    setPenetrationSlop
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setPenetrationSlop
+  (JNIEnv *, jclass, jlong settingsVa, jfloat slop) {
+    PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    pSettings->mPenetrationSlop = slop;
+}
+
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings

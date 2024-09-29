@@ -142,6 +142,19 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Return the penetration slop. The settings are unaffected. (native
+     * attribute: mPenetrationSlop)
+     *
+     * @return the slop distance (in meters)
+     */
+    public float getPenetrationSlop() {
+        long settingsVa = va();
+        float result = getPenetrationSlop(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Access the underlying {@code PhysicsSystem}.
      *
      * @return the pre-existing instance
@@ -234,6 +247,16 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Alter the penetration slop. (native attribute: mPenetrationSlop)
+     *
+     * @param slop the desired slop distance (in meters, default=0.02)
+     */
+    public void setPenetrationSlop(float slop) {
+        long settingsVa = va();
+        setPenetrationSlop(settingsVa, slop);
+    }
+
+    /**
      * Alter the point-motion threshold, below which an object can fall asleep.
      * (native attribute: mPointVelocitySleepThreshold)
      *
@@ -274,6 +297,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
 
     native private static int getNumVelocitySteps(long settingsVa);
 
+    native private static float getPenetrationSlop(long settingsVa);
+
     native private static float getPointVelocitySleepThreshold(
             long settingsVa);
 
@@ -293,6 +318,9 @@ public class PhysicsSettings extends JoltPhysicsObject {
 
     native private static void setNumVelocitySteps(
             long settingsVa, int numSteps);
+
+    native private static void setPenetrationSlop(
+            long settingsVa, float slop);
 
     native private static void setPointVelocitySleepThreshold(
             long settingsVa, float speed);
