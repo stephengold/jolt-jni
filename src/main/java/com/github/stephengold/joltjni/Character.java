@@ -186,6 +186,29 @@ public class Character
     }
 
     /**
+     * Needs to be invoked after every physics update.
+     *
+     * @param maxSeparation the max distance between the floor and the character
+     * for standing
+     */
+    public void postSimulation(float maxSeparation) {
+        postSimulation(maxSeparation, true);
+    }
+
+    /**
+     * Needs to be invoked after every physics update.
+     *
+     * @param maxSeparation the max distance between the floor and the character
+     * for standing
+     * @param lockBodies true&rarr;use the locking body interface,
+     * false&rarr;use the non-locking body interface (default=true)
+     */
+    public void postSimulation(float maxSeparation, boolean lockBodies) {
+        long characterVa = va();
+        postSimulation(characterVa, maxSeparation, lockBodies);
+    }
+
+    /**
      * Remove the character from its {@code PhysicsSystem} using the locking
      * body interface.
      */
@@ -770,6 +793,9 @@ public class Character
 
     native static long getWorldTransform(
             long characterVa, boolean lockBodies);
+
+    native private static void postSimulation(
+            long characterVa, float maxSeparation, boolean lockBodies);
 
     native private static void removeFromPhysicsSystem(
             long characterVa, boolean lockBodies);

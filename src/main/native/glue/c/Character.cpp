@@ -268,6 +268,17 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Character_getWorldTr
 
 /*
  * Class:     com_github_stephengold_joltjni_Character
+ * Method:    postSimulation
+ * Signature: (JFZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_postSimulation
+  (JNIEnv *, jclass, jlong characterVa, jfloat maxSeparation, jboolean lockBodies) {
+    Character * const pCharacter = reinterpret_cast<Character *> (characterVa);
+    pCharacter->PostSimulation(maxSeparation, lockBodies);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Character
  * Method:    removeFromPhysicsSystem
  * Signature: (JZ)V
  */
