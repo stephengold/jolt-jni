@@ -45,13 +45,13 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_StateRecorder_isV
 /*
  * Class:     com_github_stephengold_joltjni_StateRecorder
  * Method:    readBoolean
- * Signature: (J)Z
+ * Signature: (JZ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readBoolean
-  (JNIEnv *, jclass, jlong recorderVa) {
+  (JNIEnv *, jclass, jlong recorderVa, jboolean b) {
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
-    bool result;
+    bool result = b;
     pRecorder->Read(result);
     return result;
 }
@@ -59,13 +59,13 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_StateRecorder_rea
 /*
  * Class:     com_github_stephengold_joltjni_StateRecorder
  * Method:    readFloat
- * Signature: (J)F
+ * Signature: (JF)F
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readFloat
-  (JNIEnv *, jclass, jlong recorderVa) {
+  (JNIEnv *, jclass, jlong recorderVa, jfloat f) {
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
-    float result;
+    float result = f;
     pRecorder->Read(result);
     return result;
 }
@@ -79,11 +79,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readVec
   (JNIEnv *pEnv, jclass, jlong recorderVa, jfloatArray storeFloats) {
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
-    Vec3 result;
-    pRecorder->Read(result);
     jboolean isCopy;
     jfloat * const pStoreFloats
             = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    Vec3 result(pStoreFloats[0], pStoreFloats[1], pStoreFloats[2]);
+    pRecorder->Read(result);
     pStoreFloats[0] = result.GetX();
     pStoreFloats[1] = result.GetY();
     pStoreFloats[2] = result.GetZ();

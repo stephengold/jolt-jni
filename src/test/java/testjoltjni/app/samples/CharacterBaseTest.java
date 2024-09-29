@@ -783,9 +783,9 @@ void SaveState(StateRecorder inStream)
 
 void RestoreState(StateRecorder inStream)
 {
-	mTime = inStream.readFloat();
-	mRampBlocksTimeLeft = inStream.readFloat();
-	mReversingVerticallyMovingVelocity = inStream.readFloat();
+	mTime = inStream.readFloat(mTime);
+	mRampBlocksTimeLeft = inStream.readFloat(mRampBlocksTimeLeft);
+	mReversingVerticallyMovingVelocity = inStream.readFloat(mReversingVerticallyMovingVelocity);
 
 	if (mAnimatedCharacterVirtual != null)
 		mAnimatedCharacterVirtual.getPtr().restoreState(inStream);
@@ -803,9 +803,9 @@ void SaveInputState(StateRecorder inStream)
 
 void RestoreInputState(StateRecorder inStream)
 {
-	mControlInput = inStream.readVec3();
-	mJump = inStream.readBoolean();
-	mSwitchStance = inStream.readBoolean();
+	inStream.readVec3(mControlInput);
+	mJump = inStream.readBoolean(mJump);
+	mSwitchStance = inStream.readBoolean(mSwitchStance);
 }
 
 void DrawCharacterState(ConstCharacterBase inCharacter, RMat44Arg inCharacterTransform, Vec3Arg inCharacterVelocity)

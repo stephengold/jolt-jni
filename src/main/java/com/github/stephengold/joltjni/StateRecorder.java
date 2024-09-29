@@ -56,11 +56,12 @@ public class StateRecorder extends NonCopyable {
     /**
      * Read a boolean.
      *
+     * @param b the value for validation
      * @return the value that was read
      */
-    public boolean readBoolean() {
+    public boolean readBoolean(boolean b) {
         long recorderVa = va();
-        boolean result = readBoolean(recorderVa);
+        boolean result = readBoolean(recorderVa, b);
 
         return result;
     }
@@ -68,11 +69,12 @@ public class StateRecorder extends NonCopyable {
     /**
      * Read a single-precision floating-point value.
      *
+     * @param f the value for validation
      * @return the value that was read
      */
-    public float readFloat() {
+    public float readFloat(float f) {
         long recorderVa = va();
-        float result = readFloat(recorderVa);
+        float result = readFloat(recorderVa, f);
 
         return result;
     }
@@ -80,15 +82,13 @@ public class StateRecorder extends NonCopyable {
     /**
      * Read a vector.
      *
-     * @return a new vector
+     * @param inOut the value for validation (not null, modified)
      */
-    public Vec3 readVec3() {
+    public void readVec3(Vec3 inOut) {
         long recorderVa = va();
-        float[] storeFloats = new float[3];
+        float[] storeFloats = inOut.toArray();
         readVec3(recorderVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats[0], storeFloats[1], storeFloats[2]);
-
-        return result;
+        inOut.set(storeFloats[0], storeFloats[1], storeFloats[2]);
     }
 
     /**
@@ -138,9 +138,9 @@ public class StateRecorder extends NonCopyable {
 
     native private static boolean isValidating(long recorderVa);
 
-    native private static boolean readBoolean(long recorderVa);
+    native private static boolean readBoolean(long recorderVa, boolean b);
 
-    native private static float readFloat(long recorderVa);
+    native private static float readFloat(long recorderVa, float f);
 
     native private static void readVec3(long recorderVa, float[] storeFloats);
 

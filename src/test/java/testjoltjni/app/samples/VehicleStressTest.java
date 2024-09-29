@@ -184,8 +184,8 @@ void SaveInputState(StateRecorder inStream)
 
 void RestoreInputState(StateRecorder inStream)
 {
-	mForward = inStream.readFloat();
-	mRight = inStream.readFloat();
-	mHandBrake = inStream.readFloat();
+	mForward = inStream.readFloat(mForward);
+	mRight = inStream.readFloat(mRight);
+	mHandBrake = inStream.readFloat(mHandBrake);
 }
 }
