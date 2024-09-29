@@ -63,7 +63,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public BodyId getBodyId() {
         long refVa = va();
         long characterVa = getPtr(refVa);
-        long idVa = Character.getBodyId(characterVa);
+        long idVa
+                = com.github.stephengold.joltjni.Character.getBodyId(characterVa);
         BodyId result = new BodyId(idVa, true);
 
         return result;
@@ -82,7 +83,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         long refVa = va();
         long characterVa = getPtr(refVa);
         double[] storeDoubles = new double[3];
-        Character.getCenterOfMassPosition(
+        com.github.stephengold.joltjni.Character.getCenterOfMassPosition(
                 characterVa, storeDoubles, lockBodies);
         RVec3 result
                 = new RVec3(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
@@ -255,7 +256,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public int getLayer(boolean lockBodies) {
         long refVa = va();
         long characterVa = getPtr(refVa);
-        int result = Character.getLayer(characterVa);
+        int result
+                = com.github.stephengold.joltjni.Character.getLayer(characterVa);
 
         return result;
     }
@@ -272,7 +274,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         long refVa = va();
         long characterVa = getPtr(refVa);
         float[] storeFloats = new float[3];
-        Character.getLinearVelocity(characterVa, storeFloats, lockBodies);
+        com.github.stephengold.joltjni.Character.getLinearVelocity(
+                characterVa, storeFloats, lockBodies);
         Vec3 result = new Vec3(storeFloats[0], storeFloats[1], storeFloats[2]);
 
         return result;
@@ -290,7 +293,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         long refVa = va();
         long characterVa = getPtr(refVa);
         double[] storeDoubles = new double[3];
-        Character.getPosition(characterVa, storeDoubles, lockBodies);
+        com.github.stephengold.joltjni.Character.getPosition(
+                characterVa, storeDoubles, lockBodies);
         RVec3 result
                 = new RVec3(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
 
@@ -314,7 +318,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         long characterVa = getPtr(refVa);
         double[] storeDoubles = new double[3];
         float[] storeFloats = new float[4];
-        Character.getPositionAndRotation(
+        com.github.stephengold.joltjni.Character.getPositionAndRotation(
                 characterVa, storeDoubles, storeFloats, lockBodies);
         storeLocation.set(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
         storeOrientation.set(
@@ -333,7 +337,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         long refVa = va();
         long characterVa = getPtr(refVa);
         float[] storeFloats = new float[4];
-        Character.getRotation(characterVa, storeFloats, lockBodies);
+        com.github.stephengold.joltjni.Character.getRotation(
+                characterVa, storeFloats, lockBodies);
         Quat result = new Quat(
                 storeFloats[0], storeFloats[1], storeFloats[2], storeFloats[3]);
 
@@ -385,7 +390,9 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public RMat44 getWorldTransform(boolean lockBodies) {
         long refVa = va();
         long characterVa = getPtr(refVa);
-        long matrixVa = Character.getWorldTransform(characterVa, lockBodies);
+        long matrixVa
+                = com.github.stephengold.joltjni.Character.getWorldTransform(
+                        characterVa, lockBodies);
         RMat44 result = new RMat44(matrixVa, true);
 
         return result;
@@ -445,10 +452,11 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * @return a new JVM object that refers to the pre-existing native object
      */
     @Override
-    public Character getPtr() {
+    public com.github.stephengold.joltjni.Character getPtr() {
         long refVa = va();
         long settingsVa = getPtr(refVa);
-        Character result = new Character(settingsVa);
+        com.github.stephengold.joltjni.Character result
+                = new com.github.stephengold.joltjni.Character(settingsVa);
 
         return result;
     }
