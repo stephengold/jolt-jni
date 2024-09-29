@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni.enumerate;
 
 /**
- * Enumerate ways of rendering shadows.
+ * Enumerate ways of rendering shadows. (native type:
+ * DebugRenderer::ECastShadow)
  *
  * @author Stephen Gold sgold@sonic.net
  */

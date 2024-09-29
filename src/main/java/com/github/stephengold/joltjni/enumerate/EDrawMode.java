@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.enumerate;
 
 /**
- * Enumerate ways of drawing triangles.
+ * Enumerate ways of drawing triangles. (native type: DebugRenderer::EDrawMode)
  *
  * @author Stephen Gold sgold@sonic.net
  */

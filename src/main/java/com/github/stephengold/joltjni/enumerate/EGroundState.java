@@ -23,7 +23,7 @@ package com.github.stephengold.joltjni.enumerate;
 
 /**
  * Categorize the possible relationships between a character and its supporting
- * surface.
+ * surface. (native type: CharacterBase::EGroundState)
  *
  * @author Stephen Gold sgold@sonic.net
  */

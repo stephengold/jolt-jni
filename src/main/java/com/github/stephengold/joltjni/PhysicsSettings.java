@@ -73,7 +73,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Test whether objects can fall asleep.
+     * Test whether objects can fall asleep. The settings are unaffected.
+     * (native attribute: mAllowSleeping)
      *
      * @return true if sleeping is allowed, otherwise false
      */
@@ -86,7 +87,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
 
     /**
      * Return the Baumgarte stabilization factor, the fraction of position error
-     * that is corrected in each update.
+     * that is corrected in each update. The settings are unaffected. (native
+     * attribute: mBaumgarte)
      *
      * @return the factor (&ge;0, &le;1)
      */
@@ -99,7 +101,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Test whether physics simulation is deterministic.
+     * Test whether physics simulation is deterministic. The settings are
+     * unaffected. (native attribute: mDeterministicSimulation)
      *
      * @return true if it is deterministic, otherwise false
      */
@@ -111,7 +114,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the number of solver position iterations per simulation step.
+     * Return the number of solver position iterations per simulation step. The
+     * settings are unaffected. (native attribute: mNumPositionSteps)
      *
      * @return the number (&ge;0)
      */
@@ -124,7 +128,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the number of velocity iterations per simulation step.
+     * Return the number of velocity iterations per simulation step. The
+     * settings are unaffected. (native attribute: mNumVelocitySteps)
      *
      * @return the number (&ge;0)
      */
@@ -147,6 +152,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
 
     /**
      * Return the point-motion threshold, below which objects can fall asleep.
+     * The settings are unaffected. (native attribute:
+     * mPointVelocitySleepThreshold)
      *
      * @return the speed threshold (in meters/second, &ge;0)
      */
@@ -159,7 +166,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the time interval before an object can fall asleep.
+     * Alter the time interval before an object can fall asleep. The settings
+     * are unaffected. (native attribute: mTimeBeforeSleep)
      *
      * @return the interval (in seconds, &ge;0)
      */
@@ -172,7 +180,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter whether objects can go to sleep.
+     * Alter whether objects can go to sleep. (native attribute: mAllowSleeping)
      *
      * @param allow true to allow sleeping, false to disallow it (default=true)
      */
@@ -183,7 +191,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
 
     /**
      * Alter the Baumgarte stabilization factor, the fraction of position error
-     * to correct in each update.
+     * to correct in each update. (native attribute: mBaumgarte)
      *
      * @param fraction the desired factor (&ge;0, &le;1, default=0.2)
      */
@@ -193,7 +201,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter whether physics simulation is deterministic.
+     * Alter whether physics simulation is deterministic. (native attribute:
+     * mDeterministicSimulation)
      *
      * @param setting true to be deterministic, false to relax this policy
      * (default=true)
@@ -205,6 +214,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
 
     /**
      * Alter the number of solver position iterations per simulation step.
+     * (native attribute: mNumPositionSteps)
      *
      * @param numSteps the desired number (&ge;0, default=2)
      */
@@ -214,7 +224,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the number of velocity steps.
+     * Alter the number of velocity steps. (native attribute: mNumVelocitySteps)
      *
      * @param numSteps the desired number (&ge;0, default=10)
      */
@@ -225,6 +235,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
 
     /**
      * Alter the point-motion threshold, below which an object can fall asleep.
+     * (native attribute: mPointVelocitySleepThreshold)
      *
      * @param speed the desired speed threshold (in meters/second, &ge;0,
      * default=0.03)
@@ -235,7 +246,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the time interval before an object can fall asleep.
+     * Alter the time interval before an object can fall asleep. (native
+     * attribute: mTimeBeforeSleep)
      *
      * @param interval the desired time interval (in seconds, &ge;0,
      * default=0.5)
