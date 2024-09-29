@@ -45,41 +45,84 @@ public interface ConstCharacter extends ConstCharacterBase {
     BodyId getBodyId();
 
     /**
+     * Return the location of the rigid body's center of mass using the locking
+     * body interface. The character is unaffected.
+     *
+     * @return a new location vector (in system coordinates)
+     */
+    RVec3 getCenterOfMassPosition();
+
+    /**
      * Return the location of the rigid body's center of mass. The character is
      * unaffected.
      *
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      * @return a new location vector (in system coordinates)
      */
     RVec3 getCenterOfMassPosition(boolean lockBodies);
 
     /**
+     * Return the character's object layer, using the locking body interface.
+     * The character is unaffected.
+     *
+     * @return a layer index (&ge;0)
+     */
+    int getLayer();
+
+    /**
      * Return the character's object layer. The character is unaffected.
      *
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      * @return a layer index (&ge;0)
      */
     int getLayer(boolean lockBodies);
 
     /**
+     * Copy the linear velocity of the character using the locking body
+     * interface. The character is unaffected.
+     *
+     * @return a new velocity vector (meters per second in system coordinates)
+     */
+    Vec3 getLinearVelocity();
+
+    /**
      * Copy the linear velocity of the character. The character is unaffected.
      *
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      * @return a new velocity vector (meters per second in system coordinates)
      */
     Vec3 getLinearVelocity(boolean lockBodies);
 
     /**
+     * Copy the location of the character using the locking body interface. The
+     * character is unaffected.
+     *
+     * @return a new location vector (in system coordinates)
+     */
+    RVec3 getPosition();
+
+    /**
      * Copy the location of the character. The character is unaffected.
      *
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      * @return a new location vector (in system coordinates)
      */
     RVec3 getPosition(boolean lockBodies);
+
+    /**
+     * Copy the position of the associated body using the locking body
+     * interface. The character is unaffected.
+     *
+     * @param storeLocation the desired location (in system coordinates, not
+     * null, unaffected)
+     * @param storeOrientation the desired orientation (in system coordinates,
+     * not null, unaffected)
+     */
+    void getPositionAndRotation(RVec3 storeLocation, Quat storeOrientation);
 
     /**
      * Copy the position of the associated body. The character is unaffected.
@@ -89,26 +132,42 @@ public interface ConstCharacter extends ConstCharacterBase {
      * @param storeOrientation the desired orientation (in system coordinates,
      * not null, unaffected)
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      */
     void getPositionAndRotation(
             RVec3 storeLocation, Quat storeOrientation, boolean lockBodies);
 
     /**
+     * Copy the orientation of the character using the locking body interface.
+     * The character is unaffected.
+     *
+     * @return a new rotation quaternion (in system coordinates)
+     */
+    Quat getRotation();
+
+    /**
      * Copy the orientation of the character. The character is unaffected.
      *
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      * @return a new rotation quaternion (in system coordinates)
      */
     Quat getRotation(boolean lockBodies);
 
     /**
-     * Calculate the character's local-to-world coordinate transform. The
+     * Calculate the character's local-to-system coordinate transform using the
+     * locking body interface. The character is unaffected.
+     *
+     * @return a new coordinate transform matrix
+     */
+    RMat44 getWorldTransform();
+
+    /**
+     * Calculate the character's local-to-system coordinate transform. The
      * character is unaffected.
      *
      * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface
+     * false&rarr;use the non-locking body interface (default=true)
      * @return a new transform matrix
      */
     RMat44 getWorldTransform(boolean lockBodies);
