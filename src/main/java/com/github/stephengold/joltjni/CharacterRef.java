@@ -63,8 +63,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public BodyId getBodyId() {
         long refVa = va();
         long characterVa = getPtr(refVa);
-        long idVa
-                = com.github.stephengold.joltjni.Character.getBodyId(characterVa);
+        long idVa = com.github.stephengold.joltjni.Character.getBodyId(
+                characterVa);
         BodyId result = new BodyId(idVa, true);
 
         return result;
@@ -256,8 +256,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public int getLayer(boolean lockBodies) {
         long refVa = va();
         long characterVa = getPtr(refVa);
-        int result
-                = com.github.stephengold.joltjni.Character.getLayer(characterVa);
+        int result = com.github.stephengold.joltjni.Character.getLayer(
+                characterVa);
 
         return result;
     }
