@@ -179,6 +179,36 @@ final public class Vec3 implements Vec3Arg {
 
     /**
      * Return a scaled version of the specified vector. (native operator: binary
+     * {@code /})
+     *
+     * @param v the input vector (not null, unaffected)
+     * @param scale the inverse scale to apply
+     * @return a new vector
+     */
+    public static Vec3 divide(Vec3Arg v, float scale) {
+        float x = v.getX() / scale;
+        float y = v.getY() / scale;
+        float z = v.getZ() / scale;
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Subtract the 2nd argument from the first argument. (native operator:
+     * binary {@code -=})
+     *
+     * @param left the accumulating vector (not null, modified)
+     * @param right the vector to subtract (not null, unaffected)
+     */
+    public static void minusEquals(Vec3 left, Vec3Arg right) {
+        left.setX(left.getX() - right.getX());
+        left.setY(left.getY() - right.getY());
+        left.setZ(left.getZ() - right.getZ());
+    }
+
+    /**
+     * Return a scaled version of the specified vector. (native operator: binary
      * {@code *})
      *
      * @param v the input vector (not null, unaffected)
