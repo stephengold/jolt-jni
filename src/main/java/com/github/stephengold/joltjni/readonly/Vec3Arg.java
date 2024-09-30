@@ -143,8 +143,8 @@ public interface Vec3Arg {
     float lengthSq();
 
     /**
-     * Generate a normalized vector with the same direction. The vector is
-     * unaffected.
+     * Generate a normalized vector with the same direction. The current vector
+     * is unaffected.
      *
      * @return a new vector
      */
@@ -162,7 +162,7 @@ public interface Vec3Arg {
     Vec3 normalizedOr(Vec3Arg zeroValue);
 
     /**
-     * Generate the component-wise reciprocal. The vector is unaffected.
+     * Generate the component-wise reciprocal. The current vector is unaffected.
      *
      * @return a new vector
      */

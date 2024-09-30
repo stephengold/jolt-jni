@@ -83,7 +83,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_ge
     VehicleConstraint * const pConstraint
             = reinterpret_cast<VehicleConstraint *> (constraintVa);
     Wheel * const pResult = pConstraint->GetWheel(wheelIndex);
-    return reinterpret_cast<jlong> (pResult); 	
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*

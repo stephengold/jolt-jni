@@ -671,8 +671,8 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Generate a normalized vector with the same direction. The vector is
-     * unaffected.
+     * Generate a normalized vector with the same direction. The current vector
+     * is unaffected.
      *
      * @return a new vector
      */
@@ -711,7 +711,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Generate the component-wise reciprocal. The vector is unaffected.
+     * Generate the component-wise reciprocal. The current vector is unaffected.
      *
      * @return a new vector
      */

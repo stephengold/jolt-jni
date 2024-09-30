@@ -104,8 +104,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Return the maximum slope the character can walk on. The character is
-     * unaffected.
+     * Return the maximum slope on which the character can walk. The character
+     * is unaffected.
      *
      * @return the cosine of the slope angle
      */
