@@ -178,6 +178,21 @@ public class VehicleConstraint
         setVehicleCollisionTester(constraintVa, testerVa);
     }
     // *************************************************************************
+    // PhysicsStepListener methods
+
+    /**
+     * Callback invoked (by native code) each time the system is stepped.
+     *
+     * @param contextVa the virtual address of a
+     * {@code PhysicsStepListenerContext} {@code PhysicsStepListenerContext}
+     * (not zero)
+     */
+    @Override
+    public void onStep(long contextVa) {
+        long constraintVa = va();
+        onStep(constraintVa, contextVa);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createConstraint(long bodyVa, long settingsVa);
@@ -191,6 +206,8 @@ public class VehicleConstraint
     native private static long getWheelWorldTransform(
             long constraintVa, int wheelIndex, float rx, float ry, float rz,
             float ux, float uy, float uz);
+
+    native private static void onStep(long constraintVa, long contextVa);
 
     native private static void setNumStepsBetweenCollisionTestActive(
             long constraintVa, int numSteps);
