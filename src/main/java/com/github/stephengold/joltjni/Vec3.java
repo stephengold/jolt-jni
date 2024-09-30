@@ -539,6 +539,23 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Return an arbitrary unit vector perpendicular to the current vector. The
+     * current vector is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getNormalizedPerpendicular() {
+        if (Math.abs(x) > Math.abs(y)) {
+            float len = (float) Math.sqrt(x * x + z * z);
+            return new Vec3(z / len, 0f, -x / len);
+        } else {
+            float len = (float) Math.sqrt(y * y + z * z);
+            return new Vec3(0f, z / len, -y / len);
+        }
+    }
+
+    /**
      * Return the first (X) component in single precision. The vector is
      * unaffected.
      *

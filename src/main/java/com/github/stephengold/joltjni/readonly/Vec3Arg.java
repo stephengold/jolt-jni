@@ -63,6 +63,14 @@ public interface Vec3Arg {
     float get(int index);
 
     /**
+     * Return an arbitrary unit vector perpendicular to the current vector. The
+     * current vector is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 getNormalizedPerpendicular();
+
+    /**
      * Return the first (X) component in single precision. The vector is
      * unaffected.
      *
