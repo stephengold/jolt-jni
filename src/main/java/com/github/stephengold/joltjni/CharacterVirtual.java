@@ -799,7 +799,7 @@ public class CharacterVirtual
 
     native private static void setUserData(long characterVa, long userData);
 
-    native private static void updateGroundVelocity(long characterVa);
-
     native private static long toRef(long characterVa);
+
+    native private static void updateGroundVelocity(long characterVa);
 }

@@ -722,18 +722,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_setU
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    updateGroundVelocity
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_updateGroundVelocity
-  (JNIEnv *, jclass, jlong characterVa) {
-    CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    pCharacter->UpdateGroundVelocity();
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    toRef
  * Signature: (J)J
  */
@@ -745,4 +733,16 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_toR
             = new Ref<CharacterVirtual>(pCharacter);
     TRACE_NEW("Ref<CharacterVirtual>", pResult)
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtual
+ * Method:    updateGroundVelocity
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_updateGroundVelocity
+  (JNIEnv *, jclass, jlong characterVa) {
+    CharacterVirtual * const pCharacter
+            = reinterpret_cast<CharacterVirtual *> (characterVa);
+    pCharacter->UpdateGroundVelocity();
 }
