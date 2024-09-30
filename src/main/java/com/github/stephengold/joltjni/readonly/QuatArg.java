@@ -101,4 +101,12 @@ public interface QuatArg {
      * @return the squared length
      */
     float lengthSq();
+
+    /**
+     * Generate a normalized quaternion that represents the same rotation. The
+     * current object is unaffected.
+     *
+     * @return a new quaternion
+     */
+    Quat normalized();
 }

@@ -331,6 +331,18 @@ final public class Quat implements QuatArg {
         float result = w * w + x * x + y * y + z * z;
         return result;
     }
+
+    /**
+     * Generate a normalized quaternion that represents the same rotation. The
+     * current object is unaffected.
+     *
+     * @return a new quaternion
+     */
+    @Override
+    public Quat normalized() {
+        Quat result = multiply(1f / length(), this);
+        return result;
+    }
     // *************************************************************************
     // Object methods
 
