@@ -193,6 +193,31 @@ final public class Quat implements QuatArg {
     }
 
     /**
+     * Create a rotation quaternion that rotates {@code from} to {@code to}.
+     *
+     * @param from the first direction vector (not null, unaffected)
+     * @param to the 2nd direction vector (not null, unaffected)
+     * @return a new quaternion
+     */
+    public static Quat sFromTo(Vec3Arg from, Vec3Arg to) {
+        float lenV1V2 = (float) Math.sqrt(from.lengthSq() * to.lengthSq());
+        float w = lenV1V2 + from.dot(to);
+
+        if (w == 0f) {
+            if (lenV1V2 == 0f) { // one of the vectors has zero length
+                return Quat.sIdentity();
+            } else { // vectors are perpendicular
+                Vec3 v = from.getNormalizedPerpendicular();
+                return new Quat(v, 0f);
+            }
+        }
+
+        Vec3 v = from.cross(to);
+        Quat result = new Quat(v, w).normalized();
+        return result;
+    }
+
+    /**
      * Create an identity quaternion (0,0,0,1).
      *
      * @return a new quaternion
