@@ -29,5 +29,14 @@ import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface PhysicsStepListener extends ConstJoltPhysicsObject {
+    // *************************************************************************
+    // new methods exposed
 
+    /**
+     * Callback invoked (by native code) each time the system is stepped.
+     *
+     * @param contextVa the virtual address of the
+     * {@code PhysicsStepListenerContext} (not zero)
+     */
+    void onStep(long contextVa);
 }
