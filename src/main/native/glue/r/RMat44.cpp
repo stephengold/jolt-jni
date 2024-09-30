@@ -57,6 +57,22 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_createIdentit
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    createRotationTranslation
+ * Signature: (FFFFDDD)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_createRotationTranslation
+  (JNIEnv *, jclass, jfloat qx, jfloat qy, jfloat qz, jfloat qw,
+  jdouble xx, jdouble yy, jdouble zz) {
+    const Quat rotation(qx, qy, qz, qw);
+    const RVec3 offset(xx, yy, zz);
+    const RMat44 matrix = RMat44::sRotationTranslation(rotation, offset);
+    RMat44 * const pResult = new RMat44(matrix);
+    TRACE_NEW("RMat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    createTranslation
  * Signature: (DDD)J
  */

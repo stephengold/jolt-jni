@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
+import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 
@@ -88,6 +89,28 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      */
     public static RMat44 sIdentity() {
         long matrixVa = createIdentity();
+        RMat44 result = new RMat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
+     * Create a translation-and-rotation matrix.
+     *
+     * @param rotation the amount to rotate (not null, unaffected)
+     * @param offset the amount to translate (not null, unaffected)
+     * @return a new instance
+     */
+    public static RMat44 sRotationTranslation(
+            QuatArg rotation, RVec3Arg offset) {
+        float qw = rotation.getW();
+        float qx = rotation.getX();
+        float qy = rotation.getY();
+        float qz = rotation.getZ();
+        double xx = offset.xx();
+        double yy = offset.yy();
+        double zz = offset.zz();
+        long matrixVa = createRotationTranslation(qx, qy, qz, qw, xx, yy, zz);
         RMat44 result = new RMat44(matrixVa, true);
 
         return result;
@@ -195,6 +218,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     native private static long createFromSpMatrix(long spMatrixVa);
 
     native private static long createIdentity();
+
+    native private static long createRotationTranslation(float qx, float qy,
+            float qz, float qw, double tx, double ty, double tz);
 
     native private static long createTranslation(
             double xx, double yy, double zz);
