@@ -677,13 +677,13 @@ public class CharacterVirtual
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
-    native private static void cancelVelocityTowardsSteepSlopes(
+    native static void cancelVelocityTowardsSteepSlopes(
             long characterVa, float vx, float vy, float vz,
             float[] storeVelocity);
 
-    native private static boolean canWalkStairs(
+    native static boolean canWalkStairs(
             long characterVa, float vx, float vy, float vz);
 
     native private static long createCharacterVirtual(
@@ -695,71 +695,69 @@ public class CharacterVirtual
             long bpFilterVa, long olFilterVa, long bodyFilterVa,
             long shapeFilterVa, long allocatorVa);
 
-    native private static long getActiveContacts(long characterVa);
+    native static long getActiveContacts(long characterVa);
 
-    native private static double getCenterOfMassPositionX(long characterVa);
+    native static double getCenterOfMassPositionX(long characterVa);
 
-    native private static double getCenterOfMassPositionY(long characterVa);
+    native static double getCenterOfMassPositionY(long characterVa);
 
-    native private static double getCenterOfMassPositionZ(long characterVa);
+    native static double getCenterOfMassPositionZ(long characterVa);
 
-    native private static long getCenterOfMassTransform(long characterVa);
+    native static long getCenterOfMassTransform(long characterVa);
 
-    native private static float getCharacterPadding(long characterVa);
+    native static float getCharacterPadding(long characterVa);
 
-    native private static boolean getEnhancedInternalEdgeRemoval(
-            long characterVa);
+    native static boolean getEnhancedInternalEdgeRemoval(long characterVa);
 
-    native private static float getHitReductionCosMaxAngle(long characterVa);
+    native static float getHitReductionCosMaxAngle(long characterVa);
 
-    native private static long getInnerBodyId(long characterVa);
+    native static long getInnerBodyId(long characterVa);
 
-    native private static float getLinearVelocityX(long characterVa);
+    native static float getLinearVelocityX(long characterVa);
 
-    native private static float getLinearVelocityY(long characterVa);
+    native static float getLinearVelocityY(long characterVa);
 
-    native private static float getLinearVelocityZ(long characterVa);
+    native static float getLinearVelocityZ(long characterVa);
 
-    native private static float getMass(long characterVa);
+    native static float getMass(long characterVa);
 
-    native private static boolean getMaxHitsExceeded(long characterVa);
+    native static boolean getMaxHitsExceeded(long characterVa);
 
-    native private static int getMaxNumHits(long characterVa);
+    native static int getMaxNumHits(long characterVa);
 
-    native private static float getMaxStrength(long characterVa);
+    native static float getMaxStrength(long characterVa);
 
-    native private static float getPenetrationRecoverySpeed(long characterVa);
+    native static float getPenetrationRecoverySpeed(long characterVa);
 
-    native private static double getPositionX(long characterVa);
+    native static double getPositionX(long characterVa);
 
-    native private static double getPositionY(long characterVa);
+    native static double getPositionY(long characterVa);
 
-    native private static double getPositionZ(long characterVa);
+    native static double getPositionZ(long characterVa);
 
     native private static int getRefCount(long characterVa);
 
-    native private static float getRotationW(long characterVa);
+    native static float getRotationW(long characterVa);
 
-    native private static float getRotationX(long characterVa);
+    native static float getRotationX(long characterVa);
 
-    native private static float getRotationY(long characterVa);
+    native static float getRotationY(long characterVa);
 
-    native private static float getRotationZ(long characterVa);
+    native static float getRotationZ(long characterVa);
 
-    native private static float getShapeOffsetX(long characterVa);
+    native static float getShapeOffsetX(long characterVa);
 
-    native private static float getShapeOffsetY(long characterVa);
+    native static float getShapeOffsetY(long characterVa);
 
-    native private static float getShapeOffsetZ(long characterVa);
+    native static float getShapeOffsetZ(long characterVa);
 
-    native private static long getUserData(long characterVa);
+    native static long getUserData(long characterVa);
 
-    native private static long getWorldTransform(long characterVa);
+    native static long getWorldTransform(long characterVa);
 
-    native private static boolean hasCollidedWithBody(
-            long characterVa, long idVa);
+    native static boolean hasCollidedWithBody(long characterVa, long idVa);
 
-    native private static boolean hasCollidedWithCharacter(
+    native static boolean hasCollidedWithCharacter(
             long characterVa, long otherVa);
 
     native private static void setCharacterVsCharacterCollision(
