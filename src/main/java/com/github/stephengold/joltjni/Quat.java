@@ -80,8 +80,39 @@ final public class Quat implements QuatArg {
         this.z = z;
         this.w = w;
     }
+
+    /**
+     * Instantiate a quaternion based on a {@code Vec3Arg}.
+     *
+     * @param v the desired XYZ components
+     * @param w the desired W component
+     */
+    public Quat(Vec3Arg v, float w) {
+        this.x = v.getX();
+        this.y = v.getY();
+        this.z = v.getZ();
+        this.w = w;
+    }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Return a scaled version of the specified quaternion. (native operator:
+     * binary {@code *})
+     *
+     * @param scale the scale to apply
+     * @param v the input quaternion (not null, unaffected)
+     * @return a new quaternion
+     */
+    public static Quat multiply(float scale, QuatArg v) {
+        float w = scale * v.getW();
+        float x = scale * v.getX();
+        float y = scale * v.getY();
+        float z = scale * v.getZ();
+        Quat result = new Quat(x, y, z, w);
+
+        return result;
+    }
 
     /**
      * Return the product of the specified quaternions. (native operator: binary
