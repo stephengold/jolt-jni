@@ -31,7 +31,7 @@ import java.util.List;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/BroadPhase/BroadPhaseCastRayTest.cpp
  */
 class BroadPhaseCastRayTest extends BroadPhaseTest {
-public void Initialize()
+void Initialize()
 {
 	super.Initialize();
 
