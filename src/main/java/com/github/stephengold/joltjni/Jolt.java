@@ -330,7 +330,7 @@ final public class Jolt {
      */
     native public static String versionString();
     // *************************************************************************
-    // new methods exposed
+    // native private methods
 
     native private static long hashBytes(
             double xx, double yy, double zz, long oldHash);

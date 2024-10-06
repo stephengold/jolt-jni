@@ -115,7 +115,7 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
-     * Write the specified boolean.
+     * Write the specified boolean value.
      *
      * @param b the value to write
      */
