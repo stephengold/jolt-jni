@@ -61,6 +61,15 @@ public interface ConstBodyId extends ConstJoltPhysicsObject {
     int getSequenceNumber();
 
     /**
+     * Test whether the current ID is equal to the argument. The current ID is
+     * unaffected.
+     *
+     * @param id2 the 2nd ID to test (not null, unaffected)
+     * @return true if equal, false if unequal
+     */
+    boolean isEqual(ConstBodyId id2);
+
+    /**
      * Test whether the ID is valid. It is unaffected.
      *
      * @return true if invalid, false if valid

@@ -147,6 +147,22 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     }
 
     /**
+     * Test whether the current ID is equal to the argument. The current ID is
+     * unaffected.
+     *
+     * @param id2 the 2nd ID to test (not null, unaffected)
+     * @return true if equal, false if unequal
+     */
+    @Override
+    public boolean isEqual(ConstBodyId id2) {
+        long id1va = va();
+        long id2va = id2.va();
+        boolean result = equals(id1va, id2va);
+
+        return result;
+    }
+
+    /**
      * Test whether the ID is valid. It is unaffected.
      *
      * @return true if invalid, false if valid
