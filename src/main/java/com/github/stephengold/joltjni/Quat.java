@@ -54,6 +54,10 @@ final public class Quat implements QuatArg {
      * the 3rd imaginary (Z) component
      */
     private float z;
+    /**
+     * lazily allocated distribution, used in randomization
+     */
+    private static UniformRealDistribution distro = null;
     // *************************************************************************
     // constructors
 
@@ -144,6 +148,34 @@ final public class Quat implements QuatArg {
      */
     public static Quat sIdentity() {
         Quat result = new Quat();
+        return result;
+    }
+
+    /**
+     * Generate a pseudo-random unit quaternion.
+     *
+     * @param engine the generator to use (not null)
+     * @return a new unit quaternion
+     */
+    public static Quat sRandom(DefaultRandomEngine engine) {
+        assert engine != null;
+        if (distro == null) {
+            distro = new UniformRealDistribution(0f, 1f);
+        }
+
+        float x0 = distro.nextFloat(engine);
+        float r1 = (float) Math.sqrt(1f - x0);
+        float r2 = (float) Math.sqrt(x0);
+
+        float px = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
+        float py = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
+
+        float x = r1 * (float) Math.sin(px);
+        float y = r1 * (float) Math.cos(px);
+        float z = r2 * (float) Math.sin(py);
+        float w = r2 * (float) Math.cos(py);
+        Quat result = new Quat(x, y, z, w);
+
         return result;
     }
 
