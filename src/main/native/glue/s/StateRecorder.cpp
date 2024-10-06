@@ -72,6 +72,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readF
 
 /*
  * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    readInt
+ * Signature: (JI)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readInt
+  (JNIEnv *, jclass, jlong recorderVa, jint i) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    pRecorder->Read(i);
+    return i;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
  * Method:    readVec3
  * Signature: (J[F)V
  */
@@ -126,6 +139,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_writeFl
             = reinterpret_cast<StateRecorder *> (recorderVa);
     const float ff = f;
     pRecorder->Write(ff);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    writeInt
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_writeInt
+  (JNIEnv *, jclass, jlong recorderVa, jint i) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    pRecorder->Write(i);
 }
 
 /*

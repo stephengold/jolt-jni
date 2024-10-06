@@ -80,6 +80,19 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
+     * Read a 32-bit integer value.
+     *
+     * @param i the value for validation
+     * @return the value that was read
+     */
+    public int readInt(int i) {
+        long recorderVa = va();
+        int result = readInt(recorderVa, i);
+
+        return result;
+    }
+
+    /**
      * Read a vector.
      *
      * @param inOut the value for validation (not null, modified)
@@ -122,6 +135,16 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
+     * Write the specified 32-bit integer value.
+     *
+     * @param i the value to write
+     */
+    public void write(int i) {
+        long recorderVa = va();
+        writeInt(recorderVa, i);
+    }
+
+    /**
      * Write the value of the specified vector.
      *
      * @param v the vector to write (not null, unaffected)
@@ -142,6 +165,8 @@ public class StateRecorder extends NonCopyable {
 
     native private static float readFloat(long recorderVa, float f);
 
+    native private static int readInt(long recorderVa, int i);
+
     native private static void readVec3(long recorderVa, float[] storeFloats);
 
     native private static void setValidating(long recorderVa, boolean setting);
@@ -149,6 +174,8 @@ public class StateRecorder extends NonCopyable {
     native private static void writeBoolean(long recorderVa, boolean b);
 
     native private static void writeFloat(long recorderVa, float f);
+
+    native private static void writeInt(long recorderVa, int i);
 
     native private static void writeVec3(
             long recorderVa, float x, float y, float z);
