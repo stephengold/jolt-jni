@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -50,6 +51,28 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Add the specified subshape at the specified position.
+     *
+     * @param offset (not null, unaffected)
+     * @param rotation (not null, not zero, unaffected)
+     * @param subShape a reference to the subshape (not null)
+     */
+    public void addShape(
+            Vec3Arg offset, QuatArg rotation, ConstShape subShape) {
+        long settingsVa = va();
+        float offsetX = offset.getX();
+        float offsetY = offset.getY();
+        float offsetZ = offset.getZ();
+        float rotW = rotation.getW();
+        float rotX = rotation.getX();
+        float rotY = rotation.getY();
+        float rotZ = rotation.getZ();
+        long subShapeVa = subShape.va();
+        addShape(settingsVa, offsetX, offsetY, offsetZ,
+                rotX, rotY, rotZ, rotW, subShapeVa);
+    }
 
     /**
      * Add the specified subshape at the specified position.
@@ -95,6 +118,10 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void addShape(long settingsVa, float offsetX,
+            float offsetY, float offsetZ, float rotX, float rotY, float rotZ,
+            float rotW, long subShapeVa);
 
     native private static void addShapeRef(long settingsVa, float offsetX,
             float offsetY, float offsetZ, float rotX, float rotY, float rotZ,
