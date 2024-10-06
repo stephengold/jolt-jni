@@ -57,13 +57,13 @@ public class PhysicsSystem extends NonCopyable {
      */
     private ConstBroadPhaseLayerInterface layerMap;
     /**
-     * protect the ObjectVsBroadPhaseLayerFilter from garbage collection
-     */
-    private ConstObjectVsBroadPhaseLayerFilter ovbFilter;
-    /**
      * protect the ObjectLayerPairFilter from garbage collection
      */
     private ConstObjectLayerPairFilter ovoFilter;
+    /**
+     * protect the ObjectVsBroadPhaseLayerFilter from garbage collection
+     */
+    private ConstObjectVsBroadPhaseLayerFilter ovbFilter;
     /**
      * protect the step listeners from garbage collection
      */
