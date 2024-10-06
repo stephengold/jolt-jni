@@ -41,3 +41,17 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CompoundShape_getNumS
     const uint result = pShape->GetNumSubShapes();
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_CompoundShape
+ * Method:    getSubShape
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CompoundShape_getSubShape
+  (JNIEnv *, jclass, jlong shapeVa, jint subShapeIndex) {
+    const CompoundShape * const pShape
+            = reinterpret_cast<CompoundShape *> (shapeVa);
+    const CompoundShape::SubShape * const pResult
+            = &pShape->GetSubShape(subShapeIndex);
+    return reinterpret_cast<jlong> (pResult);
+}

@@ -60,8 +60,24 @@ abstract public class CompoundShape extends Shape {
 
         return result;
     }
+
+    /**
+     * Access the specified subshape.
+     *
+     * @param subShapeIndex the index of the subshape (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public SubShape getSubShape(int subShapeIndex) {
+        long shapeVa = va();
+        long subShapeVa = getSubShape(shapeVa, subShapeIndex);
+        SubShape result = new SubShape(subShapeVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
     native private static int getNumSubShapes(long shapeVa);
+
+    native private static long getSubShape(long shapeVa, int subShapeIndex);
 }
