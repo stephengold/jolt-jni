@@ -1,5 +1,68 @@
 # release log for the jolt-jni project
 
+## Version 0.8.0 released on TBD
+
++ Moved all methods equivalent to overloaded operators to a new package.
++ Renamed `DrawSettings` to distinguish it from `SkeletonPose::DrawSettings`.
++ Bugfix: `CharacterVirtual.toRef()` returns the wrong kind of reference
++ Bugfix: `StateRecorder` read methods lack the old values
+
++ Added classes to the library:
+  + `AllHitRayCastBodyCollector`
+  + `BodyManager`
+  + `BodyVector`
+  + `BroadPhase`
+  + `BroadPhaseBruteForce`
+  + `BroadPhaseQuadTree`
+  + `CharacterContactListener`
+  + `CharacterContactSettings`
+  + `CharacterVsCharacterCollision`
+  + `CharacterVsCharacterCollisionSimple`
+  + `CollisionGroup`
+  + `Color`
+  + `CustomCharacterContactListener`
+  + `CustomPhysicsStepListener`
+  + `DefaultBroadPhaseLayerFilter`
+  + `DefaultObjectLayerFilter`
+  + `DefaultRandomEngine`
+  + `EmptyShape`
+  + `EmptyShapeSettings`
+  + `ExtendedUpdateSettings`
+  + `GroupFilter`
+  + `GroupFilterTable`
+  + `GroupFilterTableRef`
+  + `PhysicsMaterialList`
+  + `PhysicsStepListener`
+  + `PhysicsStepListenerContext`
+  + `SkeletonPoseDrawSettings`
+  + `StreamIn`
+  + `SubShape`
+  + `Triangle`
+  + `UniformIntDistribution`
+  + `VehicleCollisionTester`
+  + `VehicleCollisionTesterRay`
+  + `VehicleCollisionTesterRayRef`
+  + `VehicleConstraint`
+  + `VehicleConstraintSettings`
+  + `VehicleController`
+  + `VehicleControllerSettings`
+  + `VehicleControllerSettingsRef`
+  + `Wheel`
+  + `WheeledVehicleController`
+  + `WheeledVehicleControllerRef`
+  + `WheeledVehicleControllerSettings`
+  + `WheelSettings`
+  + `WheelSettingsWv`
+  + `WheelSettingsWvRef`
+  + `WheelWv`
+
++ Added 3 enums to the library:
+  + `ECastShadow`
+  + `ECullMode`
+  + `EDrawMode`
++ Added many public methods to the library.
++ Updated the Jolt source code and assets to fed2b6c (=sg240929).
+
 ## Version 0.7.0 released on 12 September 2024
 
 + Moved the `RefTarget` interface to a new package.
