@@ -623,6 +623,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_setL
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
+ * Method:    setListener
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_setListener
+  (JNIEnv *, jclass, jlong characterVa, jlong listenerVa) {
+    CharacterVirtual * const pCharacter
+            = reinterpret_cast<CharacterVirtual *> (characterVa);
+    CharacterContactListener * const pListener
+            = reinterpret_cast<CharacterContactListener *> (listenerVa);
+    pCharacter->SetListener(pListener);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    setMass
  * Signature: (JF)V
  */

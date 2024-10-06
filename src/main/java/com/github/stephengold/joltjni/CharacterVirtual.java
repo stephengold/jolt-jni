@@ -42,6 +42,10 @@ public class CharacterVirtual
     // fields
 
     /**
+     * protect the contact listener (if any) from garbage collection
+     */
+    private CharacterContactListener contactListener;
+    /**
      * protect the char-vs-char collision interface (if any) from garbage
      * collection
      */
@@ -136,6 +140,15 @@ public class CharacterVirtual
     }
 
     /**
+     * Access the (application-provided) contact listener.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    public CharacterContactListener getListener() {
+        return contactListener;
+    }
+
+    /**
      * Replace the char-vs-char collision interface.
      *
      * @param cvcInterface the desired interface (not null)
@@ -193,6 +206,18 @@ public class CharacterVirtual
         float vy = velocity.getY();
         float vz = velocity.getZ();
         setLinearVelocity(characterVa, vx, vy, vz);
+    }
+
+    /**
+     * Replace the contact listener.
+     *
+     * @param listener the desired listener
+     */
+    public void setListener(CharacterContactListener listener) {
+        this.contactListener = listener;
+        long characterVa = va();
+        long listenerVa = listener.va();
+        setListener(characterVa, listenerVa);
     }
 
     /**
@@ -776,6 +801,8 @@ public class CharacterVirtual
 
     native private static void setLinearVelocity(
             long characterVa, float vx, float vy, float vz);
+
+    native private static void setListener(long characterVa, long listenerVa);
 
     native private static void setMass(long characterVa, float mass);
 
