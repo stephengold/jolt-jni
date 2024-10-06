@@ -51,6 +51,15 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     Quat getQuaternion();
 
     /**
+     * Test whether the current matrix is equal to the argument. The current
+     * matrix is unaffected.
+     *
+     * @param m2 the 2nd matrix to test (not null, unaffected)
+     * @return true if equal, false if unequal
+     */
+    boolean isEqual(Mat44Arg m2);
+
+    /**
      * Multiply the current 3x3 matrix by the specified 3x3 matrix. The matrix
      * is unaffected.
      *

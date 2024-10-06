@@ -171,6 +171,22 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Test whether the current matrix is equal to the argument. The current
+     * matrix is unaffected.
+     *
+     * @param m2 the 2nd matrix to test (not null, unaffected)
+     * @return true if equal, false if unequal
+     */
+    @Override
+    public boolean isEqual(Mat44Arg m2) {
+        long m1Va = va();
+        long m2Va = m2.va();
+        boolean result = equals(m1Va, m2Va);
+
+        return result;
+    }
+
+    /**
      * Multiply the current 3x3 matrix by the specified 3x3 matrix. The matrix
      * is unaffected.
      *
