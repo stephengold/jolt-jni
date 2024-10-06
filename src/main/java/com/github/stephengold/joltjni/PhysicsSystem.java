@@ -29,6 +29,8 @@ import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilte
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
  * Perform simulation on a collection of physics objects. Bodies are added by
@@ -69,6 +71,10 @@ public class PhysicsSystem extends NonCopyable {
      */
     final private List<PhysicsStepListener> stepListeners = new ArrayList<>();
     /**
+     * map virtual address to system
+     */
+    final private static Map<Long, PhysicsSystem> va2ps = new WeakHashMap<>(32);
+    /**
      * cached reference to the system's locking {@code NarrowPhaseQuery}
      */
     final private NarrowPhaseQuery narrowPhaseQuery;
@@ -85,6 +91,7 @@ public class PhysicsSystem extends NonCopyable {
     public PhysicsSystem() {
         long systemVa = createPhysicsSystem();
         setVirtualAddress(systemVa, true);
+        va2ps.put(systemVa, this);
 
         long lockingVa = getBodyInterface(systemVa);
         this.bodyInterface = new BodyInterface(this, lockingVa);
@@ -136,6 +143,17 @@ public class PhysicsSystem extends NonCopyable {
         long settingsVa = settings.va();
         long rendererVa = renderer.va();
         drawBodies(systemVa, settingsVa, rendererVa);
+    }
+
+    /**
+     * Find a pre-existing system given its virtual address.
+     *
+     * @param systemVa the address to search for
+     * @return the pre-existing object, or {@code null} if not found
+     */
+    public static PhysicsSystem find(long systemVa) {
+        PhysicsSystem result = va2ps.get(systemVa);
+        return result;
     }
 
     /**
