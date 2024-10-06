@@ -34,6 +34,18 @@ public class SubShapeId extends JoltPhysicsObject implements ConstSubShapeId {
     // constructors
 
     /**
+     * Instantiate an ID with the specified native object assigned but not
+     * owned.
+     * <p>
+     * For use in custom contact listeners.
+     *
+     * @param idVa the virtual address of the native object to assign (not zero)
+     */
+    public SubShapeId(long idVa) {
+        super(idVa);
+    }
+
+    /**
      * Instantiate an ID with the specified native object assigned.
      *
      * @param idVa the virtual address of the native object to assign (not zero)
