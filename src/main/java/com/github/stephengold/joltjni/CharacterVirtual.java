@@ -56,11 +56,13 @@ public class CharacterVirtual
     /**
      * Instantiate a character with the specified native object assigned but not
      * owned.
+     * <p>
+     * For use in custom contact listeners.
      *
      * @param characterVa the virtual address of the native object to assign
      * (not zero)
      */
-    CharacterVirtual(long characterVa) {
+    public CharacterVirtual(long characterVa) {
         super(characterVa);
     }
 
