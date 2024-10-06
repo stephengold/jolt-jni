@@ -67,21 +67,6 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     // new methods exposed
 
     /**
-     * Test whether the specified IDs are equal. (native operator: {@code ==})
-     *
-     * @param id1 the first ID to test (not null, unaffected)
-     * @param id2 the 2nd ID to test (not null, unaffected)
-     * @return true if equal, false if unequal
-     */
-    public static boolean equals(ConstBodyId id1, ConstBodyId id2) {
-        long id1va = id1.va();
-        long id2va = id2.va();
-        boolean result = equals(id1va, id2va);
-
-        return result;
-    }
-
-    /**
      * Alter the index and sequence number.
      *
      * @param value the desired value

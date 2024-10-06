@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
+import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.ConstBody;
 import java.util.List;
 import testjoltjni.TestUtils;
@@ -62,7 +63,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 		{
 			Body body = body_vector.get(body_selector.nextInt(mRandomGenerator));
 			assert(body.isInBroadPhase());
-			body.setPositionAndRotationInternal(RVec3.add(body.getPosition() , Vec3.multiply(translation_selector.nextFloat(mRandomGenerator) , Vec3.sRandom(mRandomGenerator))), Quat.sIdentity());
+			body.setPositionAndRotationInternal(Op.add(body.getPosition() , Op.multiply(translation_selector.nextFloat(mRandomGenerator) , Vec3.sRandom(mRandomGenerator))), Quat.sIdentity());
 			bodies_to_move[i] = body.getId();
 		}
 		mBroadPhase.notifyBodiesAabbChanged(bodies_to_move, cNumBodiesToMove);
@@ -93,8 +94,8 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 
 	// Create ray
 	DefaultRandomEngine random = new DefaultRandomEngine();
-	Vec3 from = Vec3.multiply(1000.0f , Vec3.sRandom(random));
-	RayCast ray = new RayCast(from, Vec3.multiply(-2.0f, from) );
+	Vec3 from = Op.multiply(1000.0f , Vec3.sRandom(random));
+	RayCast ray = new RayCast(from, Op.multiply(-2.0f, from) );
 
 	// Raycast before update
 	AllHitRayCastBodyCollector hits_before = new AllHitRayCastBodyCollector();
@@ -104,7 +105,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	System.out.printf("Before update: %d results found%n", num_before);
 
 	// Draw results
-	DebugRendererSP.DrawLineSP(mDebugRenderer, ray.getOrigin(), Vec3.add(ray.getOrigin() , ray.getDirection()), Color.sRed);
+	DebugRendererSP.DrawLineSP(mDebugRenderer, ray.getOrigin(), Op.add(ray.getOrigin() , ray.getDirection()), Color.sRed);
 	for (int i = 0; i < num_before; ++i)
 		DebugRendererSP.DrawMarkerSP(mDebugRenderer, ray.getPointOnRay(results_before[i].getFraction()), Color.sGreen, 10.0f);
 
@@ -125,7 +126,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	{
 		boolean found = false;
 		for (BroadPhaseCastResult rb : results_before)
-			if (BodyId.equals(ra.getBodyId() , rb.getBodyId()))
+			if (Op.equals(ra.getBodyId() , rb.getBodyId()))
 			{
 				found = true;
 				break;
@@ -139,7 +140,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	{
 		boolean found = false;
 		for (BroadPhaseCastResult r : results_after)
-			if (BodyId.equals(r.getBodyId() , b.getId()))
+			if (Op.equals(r.getBodyId() , b.getId()))
 			{
 				found = true;
 				break;

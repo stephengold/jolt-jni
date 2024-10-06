@@ -173,38 +173,6 @@ final public class Color implements ConstColor {
     // new methods exposed
 
     /**
-     * Test whether the specified colors are equal. (native operator:
-     * {@code ==})
-     *
-     * @param c1 the first color to test (not null, unaffected)
-     * @param c2 the 2nd color to test (not null, unaffected)
-     * @return true if equal, false if unequal
-     */
-    public static boolean equals(ConstColor c1, ConstColor c2) {
-        boolean result = c1.getA() == c2.getA()
-                && c1.getB() == c2.getB()
-                && c1.getG() == c2.getG()
-                && c1.getR() == c2.getR();
-        return result;
-    }
-
-    /**
-     * Test whether the specified colors are unequal. (native operator:
-     * {@code !=})
-     *
-     * @param c1 the first color to test (not null, unaffected)
-     * @param c2 the 2nd color to test (not null, unaffected)
-     * @return false if equal, true if unequal
-     */
-    public static boolean notEqual(ConstColor c1, ConstColor c2) {
-        boolean result = c1.getA() != c2.getA()
-                || c1.getB() != c2.getB()
-                || c1.getG() != c2.getG()
-                || c1.getR() != c2.getR();
-        return result;
-    }
-
-    /**
      * Alter the 4th (alpha or opacity) component.
      *
      * @param a the desired component value

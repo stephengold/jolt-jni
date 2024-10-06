@@ -48,6 +48,7 @@ import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
+import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -495,7 +496,7 @@ public class Test003 {
         Assert.assertTrue(props.ownsNativeObject());
 
         Assert.assertEquals(0f, props.getMass(), 0f);
-        Assert.assertTrue(Mat44.equals(props.getInertia(), Mat44.sZero()));
+        Assert.assertTrue(Op.equals(props.getInertia(), Mat44.sZero()));
     }
 
     /**
@@ -508,6 +509,6 @@ public class Test003 {
         Assert.assertEquals(2f, props.getMass(), 0f);
 
         props.setInertia(Mat44.sIdentity());
-        Assert.assertTrue(Mat44.equals(props.getInertia(), Mat44.sIdentity()));
+        Assert.assertTrue(Op.equals(props.getInertia(), Mat44.sIdentity()));
     }
 }

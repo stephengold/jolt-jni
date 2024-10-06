@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
 
 /**
@@ -126,7 +127,7 @@ class RagdollScene implements PerformanceTestScene
 					pose_copy.setRootOffset(start);
 					JointState root = pose_copy.getJoint(0);
 					root.setTranslation(new Vec3(0, mVerticalSeparation * (i + 1), 0));
-					root.setRotation(Quat.multiply(Quat.sRotation(Vec3.sAxisY(), angle.nextFloat(random)), root.getRotation()));
+					root.setRotation(Op.multiply(Quat.sRotation(Vec3.sAxisY(), angle.nextFloat(random)), root.getRotation()));
 					pose_copy.calculateJointMatrices();
 
 					// Drive to pose

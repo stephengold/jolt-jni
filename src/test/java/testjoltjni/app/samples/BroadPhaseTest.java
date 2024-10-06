@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
+import com.github.stephengold.joltjni.operator.Op;
 /**
  * A line-for-line Java translation of the Jolt Physics abstract broad phase
  * test class.
@@ -49,12 +50,12 @@ void CreateBalancedDistribution(BodyManager inBodyManager, int inNumBodies, floa
 	float n = (float)(inNumBodies);
 	Vec3 max_box_start = Vec3.sReplicate(inEnvironmentSize * (1.0f - (float)Math.pow(n, -1.0f / 3.0f)));
 	Vec3 min_box_size = Vec3.sReplicate(1.0f / inEnvironmentSize);
-	Vec3 max_box_size = Vec3.subtract(Vec3.sReplicate(inEnvironmentSize * (float)Math.pow(n, -1.0f / 3.0f)), min_box_size);
+	Vec3 max_box_size = Op.subtract(Vec3.sReplicate(inEnvironmentSize * (float)Math.pow(n, -1.0f / 3.0f)), min_box_size);
 	for (int b = 0; b < inNumBodies; ++b)
 	{
 		AaBox box = new AaBox();
-		box.setMin(Vec3.subtract(Vec3.multiply(max_box_start, new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random))), Vec3.sReplicate(0.5f * inEnvironmentSize)));
-		box.setMax(Vec3.add(box.getMin(), min_box_size, Vec3.multiply(max_box_size, new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random)))));
+		box.setMin(Op.subtract(Op.multiply(max_box_start, new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random))), Vec3.sReplicate(0.5f * inEnvironmentSize)));
+		box.setMax(Vec3.add(box.getMin(), min_box_size, Op.multiply(max_box_size, new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random)))));
 
 		BodyCreationSettings s = new BodyCreationSettings();
 		s.setShape(new BoxShape(box.getExtent(), 0.0f));

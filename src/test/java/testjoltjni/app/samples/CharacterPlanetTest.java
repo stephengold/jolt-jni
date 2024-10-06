@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.testframework.CameraState;
 
@@ -57,7 +58,7 @@ void Initialize()
 	{
 		UniformRealDistribution theta=new UniformRealDistribution(0, Jolt.JPH_PI);
 		UniformRealDistribution phi=new UniformRealDistribution(0, 2 * Jolt.JPH_PI);
-		sphere.setPosition (new RVec3(Vec3.multiply(1.1f * cPlanetRadius , Vec3.sUnitSpherical(theta.nextFloat(random), phi.nextFloat(random)))));
+		sphere.setPosition (new RVec3(Op.multiply(1.1f * cPlanetRadius , Vec3.sUnitSpherical(theta.nextFloat(random), phi.nextFloat(random)))));
 		mBodyInterface.createAndAddBody(sphere, EActivation.Activate);
 	}
 
@@ -115,7 +116,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	mCharacter.getPtr().setUp(up);
 
 	// Rotate capsule so it points up relative to the planet surface
-	mCharacter.getPtr().setRotation(Quat.multiply(Quat.sFromTo(old_up, up) , mCharacter.getRotation()).normalized());
+	mCharacter.getPtr().setRotation(Op.multiply(Quat.sFromTo(old_up, up) , mCharacter.getRotation()).normalized());
 
 	// Draw character pre update (the sim is also drawn pre update)
 if (Jolt.implementsDebugRendering()) {
@@ -123,28 +124,28 @@ if (Jolt.implementsDebugRendering()) {
 }
 
 	// Determine new character velocity
-	Vec3 current_vertical_velocity = Vec3.multiply(mCharacter.getLinearVelocity().dot(up) , up);
+	Vec3 current_vertical_velocity = Op.multiply(mCharacter.getLinearVelocity().dot(up) , up);
 	Vec3 ground_velocity = mCharacter.getGroundVelocity();
 	Vec3 new_velocity;
 	if (mCharacter.getGroundState() == EGroundState.OnGround // If on ground
-		&& Vec3.subtract(current_vertical_velocity , ground_velocity).dot(up) < 0.1f) // And not moving away from ground
+		&& Op.subtract(current_vertical_velocity , ground_velocity).dot(up) < 0.1f) // And not moving away from ground
 	{
 		// Assume velocity of ground when on ground
 		new_velocity = ground_velocity;
 
 		// Jump
 		if (mJump)
-			Vec3.plusEquals(new_velocity , Vec3.multiply(cJumpSpeed , up));
+			Op.plusEquals(new_velocity , Op.multiply(cJumpSpeed , up));
 	}
 	else
 		new_velocity = current_vertical_velocity;
 
 	// Apply gravity
-	Vec3 gravity = Vec3.multiply(Vec3.negate(up) , mPhysicsSystem.getGravity().length());
-	Vec3.plusEquals(new_velocity , Vec3.multiply(gravity , inParams.mDeltaTime));
+	Vec3 gravity = Op.multiply(Op.negate(up) , mPhysicsSystem.getGravity().length());
+	Op.plusEquals(new_velocity , Op.multiply(gravity , inParams.mDeltaTime));
 
 	// Apply player input
-	Vec3.plusEquals(new_velocity , mDesiredVelocityWS);
+	Op.plusEquals(new_velocity , mDesiredVelocityWS);
 
 	// Update character velocity
 	mCharacter.getPtr().setLinearVelocity(new_velocity);
@@ -171,7 +172,7 @@ RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of character + distance behind based on the heading and pitch of the camera.
 	Vec3 fwd = new Vec3(Math.cos(inCameraPitch) * Math.cos(inCameraHeading), Math.sin(inCameraPitch), Math.cos(inCameraPitch) * Math.sin(inCameraHeading));
-	RVec3 cam_pos = RVec3.subtract(mCharacter.getPosition() , Vec3.multiply(5.0f , Quat.rotate(mCharacter.getRotation() , fwd)));
+	RVec3 cam_pos = Op.subtract(mCharacter.getPosition() , Op.multiply(5.0f , Op.rotate(mCharacter.getRotation() , fwd)));
 	return RMat44.sRotationTranslation(mCharacter.getRotation(), cam_pos);
 }
 
@@ -228,7 +229,7 @@ void OnStep(PhysicsStepListenerContext inContext)
 			Body body = lock.getBody();
 			RVec3 position = body.getPosition();
 			float mass = 1.0f / body.getMotionProperties().getInverseMass();
-			body.addForce(Vec3.multiply(-gravity * mass , new Vec3(position).normalized()));
+			body.addForce(Op.multiply(-gravity * mass , new Vec3(position).normalized()));
 		}
 	}
 }

@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 
 /**
@@ -98,7 +99,7 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 		normal.setY(0.0f);
 		float dot = normal.dot(movement_direction);
 		if (dot < 0.0f)
-			Vec3.minusEquals(movement_direction , Vec3.divide(Vec3.multiply(dot , normal) , normal.lengthSq()));
+			Op.minusEquals(movement_direction , Op.divide(Op.multiply(dot , normal) , normal.lengthSq()));
 	}
 
 	// Stance switch
@@ -109,14 +110,14 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 	{
 		// Update velocity
 		Vec3 current_velocity =new Vec3(mCharacter.getLinearVelocity());
-		Vec3 desired_velocity =new Vec3(Vec3.multiply(sCharacterSpeed , movement_direction));
+		Vec3 desired_velocity =new Vec3(Op.multiply(sCharacterSpeed , movement_direction));
 		if (!desired_velocity.isNearZero() || current_velocity.getY() < 0.0f || !mCharacter.isSupported())
 			desired_velocity.setY(current_velocity.getY());
-		Vec3 new_velocity =new Vec3(Vec3.add(Vec3.multiply(0.75f , current_velocity) , Vec3.multiply(0.25f , desired_velocity)));
+		Vec3 new_velocity =new Vec3(Op.add(Op.multiply(0.75f , current_velocity) , Op.multiply(0.25f , desired_velocity)));
 
 		// Jump
 		if (inJump && ground_state == EGroundState.OnGround)
-			Vec3.plusEquals(new_velocity ,new Vec3(0, sJumpSpeed, 0));
+			Op.plusEquals(new_velocity ,new Vec3(0, sJumpSpeed, 0));
 
 		// Update the velocity
 		mCharacter.getPtr().setLinearVelocity(new_velocity);

@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -95,87 +96,6 @@ final public class Quat implements QuatArg {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Return a scaled version of the specified quaternion. (native operator:
-     * binary {@code *})
-     *
-     * @param scale the scale to apply
-     * @param v the input quaternion (not null, unaffected)
-     * @return a new quaternion
-     */
-    public static Quat multiply(float scale, QuatArg v) {
-        float w = scale * v.getW();
-        float x = scale * v.getX();
-        float y = scale * v.getY();
-        float z = scale * v.getZ();
-        Quat result = new Quat(x, y, z, w);
-
-        return result;
-    }
-
-    /**
-     * Return the product of the specified quaternions. (native operator: binary
-     * {@code *})
-     *
-     * @param lhs the left factor (not null, unaffected)
-     * @param rhs the right factor (not null, unaffected)
-     * @return a new quaternion
-     */
-    public static Quat multiply(QuatArg lhs, QuatArg rhs) {
-        float lw = lhs.getW();
-        float lx = lhs.getX();
-        float ly = lhs.getY();
-        float lz = lhs.getZ();
-
-        float rw = rhs.getW();
-        float rx = rhs.getX();
-        float ry = rhs.getY();
-        float rz = rhs.getZ();
-
-        float w = lw * rw - lx * rx - ly * ry - lz * rz;
-        float x = lw * rx + lx * rw + ly * rz - lz * ry;
-        float y = lw * ry - lx * rz + ly * rw + lz * rx;
-        float z = lw * rz + lx * ry - ly * rx + lz * rw;
-
-        Quat result = new Quat(x, y, z, w);
-        return result;
-    }
-
-    /**
-     * Rotate the specified vector by the specified unit quaternion. (native
-     * operator: binary {@code *})
-     *
-     * @param lhs the rotation to apply (not null, normalized, unaffected)
-     * @param rhs the vector to apply it to (not null, unaffected)
-     * @return a new vector
-     */
-    public static Vec3 rotate(QuatArg lhs, Vec3Arg rhs) {
-        assert lhs.isNormalized();
-
-        float lw = lhs.getW();
-        float lx = lhs.getX();
-        float ly = lhs.getY();
-        float lz = lhs.getZ();
-
-        float rx = rhs.getX();
-        float ry = rhs.getY();
-        float rz = rhs.getZ();
-
-        // a = lhs x pure(rhs)
-        float aw = -lx * rx - ly * ry - lz * rz;
-        float ax = lw * rx + ly * rz - lz * ry;
-        float ay = lw * ry - lx * rz + lz * rx;
-        float az = lw * rz + lx * ry - ly * rx;
-
-        // result = vec3(a x conjugate(lhs))
-        float x = -aw * lx + ax * lw - ay * lz + az * ly;
-        float y = -aw * ly + ax * lz + ay * lw - az * lx;
-        float z = -aw * lz - ax * ly + ay * lx + az * lw;
-
-        Vec3 result = new Vec3(x, y, z);
-        return result;
-    }
 
     /**
      * Set all 4 components to specified values.
@@ -365,7 +285,7 @@ final public class Quat implements QuatArg {
      */
     @Override
     public Quat normalized() {
-        Quat result = multiply(1f / length(), this);
+        Quat result = Op.multiply(1f / length(), this);
         return result;
     }
     // *************************************************************************
