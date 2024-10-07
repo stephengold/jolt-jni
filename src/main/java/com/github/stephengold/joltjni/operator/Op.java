@@ -52,6 +52,23 @@ final public class Op {
      * Return the component-wise sum of the specified vectors. (native operator:
      * binary {@code +})
      *
+     * @param left the first vector (not null, unaffected)
+     * @param right the 2nd vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 add(RVec3Arg left, RVec3Arg right) {
+        double xx = left.xx() + right.xx();
+        double yy = left.yy() + right.yy();
+        double zz = left.zz() + right.zz();
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Return the component-wise sum of the specified vectors. (native operator:
+     * binary {@code +})
+     *
      * @param left the base vector (not null, unaffected)
      * @param right the offset to add (not null, unaffected)
      * @return a new vector
