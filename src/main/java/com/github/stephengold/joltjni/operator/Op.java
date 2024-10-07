@@ -86,14 +86,14 @@ final public class Op {
      * Return the component-wise sum of the specified vectors. (native operator:
      * binary {@code +})
      *
-     * @param v1 the first vector (not null, unaffected)
-     * @param v2 the 2nd vector (not null, unaffected)
+     * @param left the first vector (not null, unaffected)
+     * @param right the 2nd vector (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 add(Vec3Arg v1, Vec3Arg v2) {
-        float x = v1.getX() + v2.getX();
-        float y = v1.getY() + v2.getY();
-        float z = v1.getZ() + v2.getZ();
+    public static Vec3 add(Vec3Arg left, Vec3Arg right) {
+        float x = left.getX() + right.getX();
+        float y = left.getY() + right.getY();
+        float z = left.getZ() + right.getZ();
         Vec3 result = new Vec3(x, y, z);
 
         return result;
@@ -103,14 +103,14 @@ final public class Op {
      * Return a scaled version of the specified vector. (native operator: binary
      * {@code /})
      *
-     * @param v the input vector (not null, unaffected)
-     * @param scale the inverse scale to apply
+     * @param left the input vector (not null, unaffected)
+     * @param right the inverse scale to apply
      * @return a new vector
      */
-    public static Vec3 divide(Vec3Arg v, float scale) {
-        float x = v.getX() / scale;
-        float y = v.getY() / scale;
-        float z = v.getZ() / scale;
+    public static Vec3 divide(Vec3Arg left, float right) {
+        float x = left.getX() / right;
+        float y = left.getY() / right;
+        float z = left.getZ() / right;
         Vec3 result = new Vec3(x, y, z);
 
         return result;
@@ -133,12 +133,12 @@ final public class Op {
     /**
      * Test whether the specified IDs are equal. (native operator: {@code ==})
      *
-     * @param id1 the first ID to test (not null, unaffected)
-     * @param id2 the 2nd ID to test (not null, unaffected)
+     * @param left the first ID to test (not null, unaffected)
+     * @param right the 2nd ID to test (not null, unaffected)
      * @return true if equal, false if unequal
      */
-    public static boolean equals(ConstBodyId id1, ConstBodyId id2) {
-        boolean result = id1.isEqual(id2);
+    public static boolean equals(ConstBodyId left, ConstBodyId right) {
+        boolean result = left.isEqual(right);
         return result;
     }
 
@@ -146,15 +146,15 @@ final public class Op {
      * Test whether the specified colors are equal. (native operator:
      * {@code ==})
      *
-     * @param c1 the first color to test (not null, unaffected)
-     * @param c2 the 2nd color to test (not null, unaffected)
+     * @param left the first color to test (not null, unaffected)
+     * @param right the 2nd color to test (not null, unaffected)
      * @return true if equal, false if unequal
      */
-    public static boolean equals(ConstColor c1, ConstColor c2) {
-        boolean result = c1.getA() == c2.getA()
-                && c1.getB() == c2.getB()
-                && c1.getG() == c2.getG()
-                && c1.getR() == c2.getR();
+    public static boolean equals(ConstColor left, ConstColor right) {
+        boolean result = left.getA() == right.getA()
+                && left.getB() == right.getB()
+                && left.getG() == right.getG()
+                && left.getR() == right.getR();
         return result;
     }
 
@@ -162,12 +162,12 @@ final public class Op {
      * Test whether the specified matrices are equal. (native operator:
      * {@code ==})
      *
-     * @param m1 the first matrix (not null, unaffected)
-     * @param m2 the 2nd matrix (not null, unaffected)
+     * @param left the first matrix (not null, unaffected)
+     * @param right the 2nd matrix (not null, unaffected)
      * @return true if equal, otherwise false
      */
-    public static boolean equals(Mat44Arg m1, Mat44Arg m2) {
-        boolean result = m1.isEqual(m2);
+    public static boolean equals(Mat44Arg left, Mat44Arg right) {
+        boolean result = left.isEqual(right);
         return result;
     }
 
@@ -188,15 +188,15 @@ final public class Op {
      * Return a scaled version of the specified quaternion. (native operator:
      * binary {@code *})
      *
-     * @param scale the scale to apply
-     * @param v the input quaternion (not null, unaffected)
+     * @param left the scale to apply
+     * @param right the input quaternion (not null, unaffected)
      * @return a new quaternion
      */
-    public static Quat multiply(float scale, QuatArg v) {
-        float w = scale * v.getW();
-        float x = scale * v.getX();
-        float y = scale * v.getY();
-        float z = scale * v.getZ();
+    public static Quat multiply(float left, QuatArg right) {
+        float w = left * right.getW();
+        float x = left * right.getX();
+        float y = left * right.getY();
+        float z = left * right.getZ();
         Quat result = new Quat(x, y, z, w);
 
         return result;
@@ -206,14 +206,14 @@ final public class Op {
      * Return a scaled version of the specified vector. (native operator: binary
      * {@code *})
      *
-     * @param scale the scale to apply
-     * @param v the input vector (not null, unaffected)
+     * @param left the scale to apply
+     * @param right the input vector (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 multiply(float scale, Vec3Arg v) {
-        float x = scale * v.getX();
-        float y = scale * v.getY();
-        float z = scale * v.getZ();
+    public static Vec3 multiply(float left, Vec3Arg right) {
+        float x = left * right.getX();
+        float y = left * right.getY();
+        float z = left * right.getZ();
         Vec3 result = new Vec3(x, y, z);
 
         return result;
@@ -223,20 +223,20 @@ final public class Op {
      * Return the product of the specified quaternions. (native operator: binary
      * {@code *})
      *
-     * @param lhs the left factor (not null, unaffected)
-     * @param rhs the right factor (not null, unaffected)
+     * @param left the left factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
      * @return a new quaternion
      */
-    public static Quat multiply(QuatArg lhs, QuatArg rhs) {
-        float lw = lhs.getW();
-        float lx = lhs.getX();
-        float ly = lhs.getY();
-        float lz = lhs.getZ();
+    public static Quat multiply(QuatArg left, QuatArg right) {
+        float lw = left.getW();
+        float lx = left.getX();
+        float ly = left.getY();
+        float lz = left.getZ();
 
-        float rw = rhs.getW();
-        float rx = rhs.getX();
-        float ry = rhs.getY();
-        float rz = rhs.getZ();
+        float rw = right.getW();
+        float rx = right.getX();
+        float ry = right.getY();
+        float rz = right.getZ();
 
         float w = lw * rw - lx * rx - ly * ry - lz * rz;
         float x = lw * rx + lx * rw + ly * rz - lz * ry;
@@ -251,14 +251,14 @@ final public class Op {
      * Return a scaled version of the specified vector. (native operator: binary
      * {@code *})
      *
-     * @param v the input vector (not null, unaffected)
-     * @param scale the scale to apply
+     * @param left the input vector (not null, unaffected)
+     * @param right the scale to apply
      * @return a new vector
      */
-    public static Vec3 multiply(Vec3Arg v, float scale) {
-        float x = scale * v.getX();
-        float y = scale * v.getY();
-        float z = scale * v.getZ();
+    public static Vec3 multiply(Vec3Arg left, float right) {
+        float x = right * left.getX();
+        float y = right * left.getY();
+        float z = right * left.getZ();
         Vec3 result = new Vec3(x, y, z);
 
         return result;
@@ -268,14 +268,14 @@ final public class Op {
      * Return the component-wise product of the specified vectors. (native
      * operator: binary {@code *})
      *
-     * @param v1 the first vector (not null, unaffected)
-     * @param v2 the 2nd vector (not null, unaffected)
+     * @param left the first vector (not null, unaffected)
+     * @param right the 2nd vector (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 multiply(Vec3Arg v1, Vec3Arg v2) {
-        float x = v1.getX() * v2.getX();
-        float y = v1.getY() * v2.getY();
-        float z = v1.getZ() * v2.getZ();
+    public static Vec3 multiply(Vec3Arg left, Vec3Arg right) {
+        float x = left.getX() * right.getX();
+        float y = left.getY() * right.getY();
+        float z = left.getZ() * right.getZ();
         Vec3 result = new Vec3(x, y, z);
 
         return result;
@@ -285,13 +285,13 @@ final public class Op {
      * Return the negative of the specified vector. (native operator: unary
      * {@code -})
      *
-     * @param v the input vector (not null, unaffected)
+     * @param right the input vector (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 negate(Vec3Arg v) {
-        float x = -v.getX();
-        float y = -v.getY();
-        float z = -v.getZ();
+    public static Vec3 negate(Vec3Arg right) {
+        float x = -right.getX();
+        float y = -right.getY();
+        float z = -right.getZ();
         Vec3 result = new Vec3(x, y, z);
 
         return result;
@@ -301,15 +301,15 @@ final public class Op {
      * Test whether the specified colors are unequal. (native operator:
      * {@code !=})
      *
-     * @param c1 the first color to test (not null, unaffected)
-     * @param c2 the 2nd color to test (not null, unaffected)
+     * @param left the first color to test (not null, unaffected)
+     * @param right the 2nd color to test (not null, unaffected)
      * @return false if equal, true if unequal
      */
-    public static boolean notEqual(ConstColor c1, ConstColor c2) {
-        boolean result = c1.getA() != c2.getA()
-                || c1.getB() != c2.getB()
-                || c1.getG() != c2.getG()
-                || c1.getR() != c2.getR();
+    public static boolean notEqual(ConstColor left, ConstColor right) {
+        boolean result = left.getA() != right.getA()
+                || left.getB() != right.getB()
+                || left.getG() != right.getG()
+                || left.getR() != right.getR();
         return result;
     }
 
@@ -358,21 +358,21 @@ final public class Op {
      * Rotate the specified vector by the specified unit quaternion. (native
      * operator: binary {@code *})
      *
-     * @param lhs the rotation to apply (not null, normalized, unaffected)
-     * @param rhs the vector to apply it to (not null, unaffected)
+     * @param left the rotation to apply (not null, normalized, unaffected)
+     * @param right the vector to apply it to (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 rotate(QuatArg lhs, Vec3Arg rhs) {
-        assert lhs.isNormalized();
+    public static Vec3 rotate(QuatArg left, Vec3Arg right) {
+        assert left.isNormalized();
 
-        float lw = lhs.getW();
-        float lx = lhs.getX();
-        float ly = lhs.getY();
-        float lz = lhs.getZ();
+        float lw = left.getW();
+        float lx = left.getX();
+        float ly = left.getY();
+        float lz = left.getZ();
 
-        float rx = rhs.getX();
-        float ry = rhs.getY();
-        float rz = rhs.getZ();
+        float rx = right.getX();
+        float ry = right.getY();
+        float rz = right.getZ();
 
         // a = lhs x pure(rhs)
         float aw = -lx * rx - ly * ry - lz * rz;
@@ -427,14 +427,14 @@ final public class Op {
      * Return the component-wise difference of the specified vectors. (native
      * operator: binary {@code -})
      *
-     * @param v1 the first vector (not null, unaffected)
-     * @param v2 the vector to subtract (not null, unaffected)
+     * @param left the first vector (not null, unaffected)
+     * @param right the vector to subtract (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 subtract(Vec3Arg v1, Vec3Arg v2) {
-        float x = v1.getX() - v2.getX();
-        float y = v1.getY() - v2.getY();
-        float z = v1.getZ() - v2.getZ();
+    public static Vec3 subtract(Vec3Arg left, Vec3Arg right) {
+        float x = left.getX() - right.getX();
+        float y = left.getY() - right.getY();
+        float z = left.getZ() - right.getZ();
         Vec3 result = new Vec3(x, y, z);
 
         return result;
