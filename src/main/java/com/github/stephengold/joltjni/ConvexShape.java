@@ -46,4 +46,34 @@ abstract public class ConvexShape extends Shape {
     ConvexShape(long shapeVa) {
         super(shapeVa);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the density.
+     *
+     * @return the density
+     */
+    public float getDensity() {
+        long shapeVa = va();
+        float result = getDensity(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Alter the density.
+     *
+     * @param density the desired density
+     */
+    public void setDensity(float density) {
+        long shapeVa = va();
+        setDensity(shapeVa, density);
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static float getDensity(long shapeVa);
+
+    native private static void setDensity(long shapeVa, float density);
 }
