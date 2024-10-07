@@ -29,7 +29,7 @@ and public member data are involved. For instance:
   is accessed using `getConvexRadius()` and `setConvexRadius()` in jolt-jni.
 
 For a couple well-known Jolt Physics examples,
-[direct translations into Java](https://github.com/stephengold/jolt-jni/tree/master/src/test/java/testjoltjni/app)
+[line-for-line translations into Java](https://github.com/stephengold/jolt-jni/tree/master/src/test/java/testjoltjni/app)
 are provided.
 
 
@@ -55,8 +55,8 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
         mavenCentral()
     }
     dependencies {
-        implementation("com.github.stephengold:jolt-jni-Linux64:0.7.0") // JVM library
-        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.7.0:DebugSp") // native library for Linux
+        implementation("com.github.stephengold:jolt-jni-Linux64:0.8.0") // JVM library
+        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.8.0:DebugSp") // native library for Linux
         // (Native libraries for other platforms could go here.)
     }
 
@@ -87,7 +87,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
   + using [Git]:
     + `git clone https://github.com/stephengold/jolt-jni.git`
     + `cd jolt-jni`
-    + `git checkout -b latest 0.7.0`
+    + `git checkout -b latest 0.8.0`
  + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link at the bottom of the page

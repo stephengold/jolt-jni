@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.8.0 released on TBD
+## Version 0.8.0 released on 6 October 2024
 
 + Moved all methods equivalent to overloaded operators to a new package.
 + Renamed `DrawSettings` to distinguish it from `SkeletonPose::DrawSettings`.
