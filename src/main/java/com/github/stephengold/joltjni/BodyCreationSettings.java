@@ -183,6 +183,18 @@ public class BodyCreationSettings
     }
 
     /**
+     * Alter the collision group to which the body will belong. (native
+     * attribute: mCollisionGroup)
+     *
+     * @param group the desired group (not null, unaffected)
+     */
+    public void setCollisionGroup(CollisionGroup group) {
+        long bodySettingsVa = va();
+        long groupVa = group.va();
+        setCollisionGroup(bodySettingsVa, groupVa);
+    }
+
+    /**
      * Alter the friction ratio. (native attribute: mFriction)
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
@@ -803,6 +815,9 @@ public class BodyCreationSettings
 
     native private static void setAngularVelocity(
             long bodySettingsVa, float wx, float wy, float wz);
+
+    native private static void setCollisionGroup(
+            long bodySettingsVa, long groupVa);
 
     native private static void setFriction(long bodySettingsVa, float friction);
 

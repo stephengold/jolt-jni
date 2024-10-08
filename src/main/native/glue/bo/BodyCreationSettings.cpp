@@ -524,6 +524,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setCollisionGroup
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setCollisionGroup
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong groupVa) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const CollisionGroup * const pGroup
+            = reinterpret_cast<CollisionGroup *> (groupVa);
+    pSettings->mCollisionGroup = *pGroup;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    setFriction
  * Signature: (JF)V
  */
