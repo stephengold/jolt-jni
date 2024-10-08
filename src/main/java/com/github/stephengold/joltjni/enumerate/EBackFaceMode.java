@@ -29,7 +29,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EBackFaceMode {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Collision/BackFaceMode.h>
+    // values - sequence must match "Jolt/Physics/Collision/BackFaceMode.h"
 
     /**
      * ignore them

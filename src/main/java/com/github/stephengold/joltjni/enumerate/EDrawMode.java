@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EDrawMode {
     // *************************************************************************
-    // values - sequence must match <Jolt/Renderer/DebugRenderer.h>
+    // values - sequence must match "Jolt/Renderer/DebugRenderer.h"
 
     /**
      * draw solid triangles

@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum ECullMode {
     // *************************************************************************
-    // values - sequence must match <Jolt/Renderer/DebugRenderer.h>
+    // values - sequence must match "Jolt/Renderer/DebugRenderer.h"
 
     /**
      * cull back-facing polygons: render front sides only

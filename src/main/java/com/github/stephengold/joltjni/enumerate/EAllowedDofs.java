@@ -29,7 +29,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 final public class EAllowedDofs {
     // *************************************************************************
-    // constants - values must match <Jolt/Physics/Body/AllowedDOFs.h>
+    // constants - values must match "Jolt/Physics/Body/AllowedDOFs.h"
 
     /**
      * no degrees of freedom (an invalid setting; use a static body instead)

@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EMotorState {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Constraints/MotorSettings.h>
+    // values - sequence must match "Jolt/Physics/Constraints/MotorSettings.h"
 
     /**
      * disabled

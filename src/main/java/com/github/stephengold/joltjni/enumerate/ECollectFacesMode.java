@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum ECollectFacesMode {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Collision/CollectFacesMode.h>
+    // values - sequence must match "Jolt/Physics/Collision/CollectFacesMode.h"
 
     /**
      * faces are desired

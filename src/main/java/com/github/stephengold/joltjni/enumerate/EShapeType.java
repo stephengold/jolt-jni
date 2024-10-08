@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EShapeType {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Collision/Shape/Shape.h>
+    // values - sequence must match "Jolt/Physics/Collision/Shape/Shape.h"
 
     /**
      * convex

@@ -30,7 +30,7 @@ package com.github.stephengold.joltjni.enumerate;
 public enum EAxis {
     // *************************************************************************
     // values
-    // - sequence must match <Jolt/Physics/Constraints/SixDOFConstraint.h>
+    // - sequence must match "Jolt/Physics/Constraints/SixDOFConstraint.h"
 
     /**
      * X-axis translation

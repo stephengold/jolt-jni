@@ -29,7 +29,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EGroundState {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Character/CharacterBase.h>
+    // values - sequence must match "Jolt/Physics/Character/CharacterBase.h"
 
     /**
      * fully supported

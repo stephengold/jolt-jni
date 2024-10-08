@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EMotionQuality {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Body/MotionQuality.h>
+    // values - sequence must match "Jolt/Physics/Body/MotionQuality.h"
 
     /**
      * update the body in discrete steps

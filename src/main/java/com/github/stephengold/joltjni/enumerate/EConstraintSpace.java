@@ -29,7 +29,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EConstraintSpace {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Constraints/Constraint.h>
+    // values - sequence must match "Jolt/Physics/Constraints/Constraint.h"
 
     /**
      * relative to the center of mass of the bodies

@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 final public class EPhysicsUpdateError {
     // *************************************************************************
-    // constants - values must match <Jolt/Physics/EPhysicsUpdateError.h>
+    // constants - values must match "Jolt/Physics/EPhysicsUpdateError.h"
 
     /**
      * no errors

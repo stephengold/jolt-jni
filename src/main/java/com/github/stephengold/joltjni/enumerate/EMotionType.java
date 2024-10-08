@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EMotionType {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Body/MotionType.h>
+    // values - sequence must match "Jolt/Physics/Body/MotionType.h"
 
     /**
      * non-moving bodies

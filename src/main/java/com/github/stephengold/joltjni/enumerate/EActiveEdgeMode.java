@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EActiveEdgeMode {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Collision/ActiveEdgeMode.h>
+    // values - sequence must match "Jolt/Physics/Collision/ActiveEdgeMode.h"
 
     /**
      * do not collide with inactive edges

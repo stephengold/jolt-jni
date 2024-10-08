@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum ESpringMode {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Constraints/SpringSettings.h>
+    // values - sequence must match "Jolt/Physics/Constraints/SpringSettings.h"
 
     /**
      * frequency and damping are specified

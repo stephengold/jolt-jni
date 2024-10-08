@@ -28,7 +28,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EConstraintType {
     // *************************************************************************
-    // values - sequence must match <Jolt/Physics/Constraints/Constraint.h>
+    // values - sequence must match "Jolt/Physics/Constraints/Constraint.h"
 
     /**
      * vehicle constraint (?)

@@ -29,7 +29,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum ECastShadow {
     // *************************************************************************
-    // values - sequence must match <Jolt/Renderer/DebugRenderer.h>
+    // values - sequence must match "Jolt/Renderer/DebugRenderer.h"
 
     /**
      * render shadows

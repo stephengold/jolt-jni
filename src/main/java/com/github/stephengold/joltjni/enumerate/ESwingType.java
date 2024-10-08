@@ -29,7 +29,7 @@ package com.github.stephengold.joltjni.enumerate;
 public enum ESwingType {
     // *************************************************************************
     // values - sequence must match
-    // <Jolt/Physics/Constraints/ConstraintPart/SwingTwistConstraintPart.h>
+    // "Jolt/Physics/Constraints/ConstraintPart/SwingTwistConstraintPart.h"
 
     /**
      * limited by a cone shape, for limits that are symmetric around 0

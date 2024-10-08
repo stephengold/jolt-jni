@@ -29,7 +29,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 final public class EStateRecorderState {
     // *************************************************************************
-    // constants - values must match <Jolt/Physics/StateRecorder.h>
+    // constants - values must match "Jolt/Physics/StateRecorder.h"
 
     /**
      * save nothing
