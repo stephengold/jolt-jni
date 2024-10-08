@@ -173,7 +173,7 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Create a body and add it to the physics system.
+     * Create a rigid body and add it to the physics system.
      *
      * @param settings the settings to use (not null, unaffected)
      * @param activationMode whether to activate the body (not null)
@@ -189,7 +189,7 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Create a body using the specified settings.
+     * Create a rigid body using the specified settings.
      *
      * @param settings the settings to use (not null, unaffected)
      * @return the new body
