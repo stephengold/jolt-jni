@@ -29,7 +29,7 @@ package com.github.stephengold.joltjni.readonly;
  */
 public interface ConstConvexShapeSettings extends ConstJoltPhysicsObject {
     // *************************************************************************
-    // ConstConvexShapeSettings methods
+    // new methods exposed
 
     /**
      * Return the density. The settings are unaffected.

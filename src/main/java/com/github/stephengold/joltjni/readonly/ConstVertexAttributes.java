@@ -57,7 +57,7 @@ public interface ConstVertexAttributes extends ConstJoltPhysicsObject {
     float getLraMaxDistanceMultiplier();
 
     /**
-     * Return the type of the long-range attachment (LRA) constraint. T The
+     * Return the type of the long-range attachment (LRA) constraint. The
      * attributes are unaffected.
      *
      * @return the enum value (not null)

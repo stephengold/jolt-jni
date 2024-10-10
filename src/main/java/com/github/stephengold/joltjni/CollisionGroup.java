@@ -40,7 +40,7 @@ public class CollisionGroup extends JoltPhysicsObject {
     /**
      * Instantiate a group with the specified filter and IDs.
      *
-     * @param filter the collision-group filter
+     * @param filter the collision-group filter (not null)
      * @param groupId the main group ID
      * @param subGroupId the ID of the subgroup to which the body belongs
      */
