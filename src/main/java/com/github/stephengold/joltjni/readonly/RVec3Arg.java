@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.Vec3;
+
 /**
  * Read-only access to an {@code RVec3}. (native type: const RVec3)
  *
@@ -101,4 +103,11 @@ public interface RVec3Arg {
      * @return the component value
      */
     double zz();
+
+    /**
+     * Convert to single-precision vector. The current vector is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 toVec3();
 }

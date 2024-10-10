@@ -261,6 +261,17 @@ final public class RVec3 implements RVec3Arg {
     public double zz() {
         return zz;
     }
+
+    /**
+     * Convert to single-precision vector. The current vector is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 toVec3() {
+        Vec3 result = new Vec3(xx, yy, zz);
+        return result;
+    }
     // *************************************************************************
     // Object methods
 
