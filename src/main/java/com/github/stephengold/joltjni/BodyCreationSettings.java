@@ -331,12 +331,15 @@ public class BodyCreationSettings
      * Alter the (initial) location of the body's origin (which might not
      * coincide with its center of mass). (native attribute: mPosition)
      *
-     * @param loc the desired location (in physics-system coordinates, not null,
-     * unaffected, default=(0,0,0))
+     * @param location the desired location (in physics-system coordinates, not
+     * null, unaffected, default=(0,0,0))
      */
-    public void setPosition(RVec3Arg loc) {
+    public void setPosition(RVec3Arg location) {
         long bodySettingsVa = va();
-        setPosition(bodySettingsVa, loc.xx(), loc.yy(), loc.zz());
+        double xx = location.xx();
+        double yy = location.yy();
+        double zz = location.zz();
+        setPosition(bodySettingsVa, xx, yy, zz);
     }
 
     /**
