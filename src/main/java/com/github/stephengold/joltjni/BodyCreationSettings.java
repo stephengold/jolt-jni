@@ -31,7 +31,7 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
- * Settings used to create a {@code Body}.
+ * Settings used to create a rigid body.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -343,7 +343,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the restitution ratio. (native attribute: mRestitution)
+     * Alter the restitution ratio for collisions. (native attribute:
+     * mRestitution)
      *
      * @param restitution the desired ratio (typically &ge;0 and &le;1,
      * default=0)

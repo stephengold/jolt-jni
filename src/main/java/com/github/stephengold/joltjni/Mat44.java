@@ -185,8 +185,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
-     * Multiply the current 3x3 matrix by the specified 3x3 matrix. The matrix
-     * is unaffected.
+     * Multiply the current 3x3 matrix by the specified 3x3 matrix. The current
+     * matrix is unaffected.
      *
      * @param arg the factor (not null, unaffected)
      * @return a new matrix
