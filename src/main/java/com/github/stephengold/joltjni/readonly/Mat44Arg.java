@@ -51,6 +51,13 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     Quat getQuaternion();
 
     /**
+     * Return the inverse of the 3x3 portion. The current matrix is unaffected.
+     *
+     * @return a new matrix
+     */
+    Mat44 inversed3x3();
+
+    /**
      * Test whether the current matrix is equal to the argument. The current
      * matrix is unaffected.
      *
@@ -85,4 +92,14 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * @return a new vector
      */
     Vec3 multiply3x3Transposed(Vec3Arg vec3Arg);
+
+    /**
+     * Multiply the 3x4 matrix by the specified column vector, with the 4th
+     * component of the right factor implied to be one. The matrix is
+     * unaffected.
+     *
+     * @param arg the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    Vec3 multiply3x4(Vec3Arg arg);
 }

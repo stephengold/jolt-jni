@@ -155,6 +155,20 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Return the inverse of the 3x3 portion. The current matrix is unaffected.
+     *
+     * @return a new matrix
+     */
+    @Override
+    public Mat44 inversed3x3() {
+        long currentVa = va();
+        long resultVa = inversed3x3(currentVa);
+        Mat44 result = new Mat44(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Test whether the current matrix is equal to the argument. The current
      * matrix is unaffected.
      *
@@ -220,6 +234,24 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
         return result;
     }
+
+    /**
+     * Multiply the 3x4 matrix by the specified column vector, with the 4th
+     * component of the right factor implied to be one. The matrix is
+     * unaffected.
+     *
+     * @param arg the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    @Override
+    public Vec3 multiply3x4(Vec3Arg arg) {
+        long matrixVa = va();
+        float[] tmpArray = arg.toArray();
+        multiply3x4(matrixVa, tmpArray);
+        Vec3 result = new Vec3(tmpArray);
+
+        return result;
+    }
     // *************************************************************************
     // Object methods
 
@@ -274,12 +306,16 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     native private static void getQuaternion(
             long matrixVa, float[] storeArray);
 
+    native private static long inversed3x3(long currentVa);
+
     native private static long multiply3x3(long currentVa, long argVa);
 
     native private static void multiply3x3(long matrixVa, float[] array);
 
     native private static void multiply3x3Transposed(
             long matrixVa, float[] array);
+
+    native private static void multiply3x4(long matrixVa, float[] array);
 
     native private static void setElement(
             long matrixVa, int row, int column, float value);

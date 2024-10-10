@@ -144,6 +144,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_getQuaternion
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    inversed3x3
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_inversed3x3
+  (JNIEnv *, jclass, jlong currentVa) {
+    const Mat44 * const pCurrent = reinterpret_cast<Mat44 *> (currentVa);
+    Mat44 * const pResult = new Mat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = pCurrent->Inversed3x3();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    multiply3x3
  * Signature: (JJ)J
  */
@@ -187,6 +201,24 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3Tran
     jfloat * const pArray = pEnv->GetFloatArrayElements(array, &isCopy);
     const Vec3 v(pArray[0], pArray[1], pArray[2]);
     const Vec3 result = pMatrix->Multiply3x3Transposed(v);
+    pArray[0] = result.GetX();
+    pArray[1] = result.GetY();
+    pArray[2] = result.GetZ();
+    pEnv->ReleaseFloatArrayElements(array, pArray, 0);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    multiply3x4
+ * Signature: (J[F)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x4
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray array) {
+    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    jboolean isCopy;
+    jfloat * const pArray = pEnv->GetFloatArrayElements(array, &isCopy);
+    const Vec3 v(pArray[0], pArray[1], pArray[2]);
+    const Vec3 result = (*pMatrix) * v;
     pArray[0] = result.GetX();
     pArray[1] = result.GetY();
     pArray[2] = result.GetZ();
