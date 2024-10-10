@@ -403,6 +403,21 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getLocalSpaceInverseInertia
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getLocalSpaceInverseInertia
+  (JNIEnv *, jclass, jlong propertiesVa) {
+    const MotionProperties * const pProperties
+            = reinterpret_cast<MotionProperties *> (propertiesVa);
+    Mat44 * const pResult = new Mat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = pProperties->GetLocalSpaceInverseInertia();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    getMaxAngularVelocity
  * Signature: (J)F
  */

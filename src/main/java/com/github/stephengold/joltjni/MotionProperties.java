@@ -258,6 +258,19 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
+     * Copy the inverse-inertia matrix.
+     *
+     * @return a new object
+     */
+    public Mat44 getLocalSpaceInverseInertia() {
+        long propertiesVa = va();
+        long matrixVa = getLocalSpaceInverseInertia(propertiesVa);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the maximum angular speed that the body can achieve.
      *
      * @return the speed limit (in radians per second)
@@ -564,6 +577,8 @@ public class MotionProperties extends JoltPhysicsObject {
     native private static float getLinearVelocityY(long propertiesVa);
 
     native private static float getLinearVelocityZ(long propertiesVa);
+
+    native private static long getLocalSpaceInverseInertia(long propertiesVa);
 
     native private static float getMaxAngularVelocity(long propertiesVa);
 
