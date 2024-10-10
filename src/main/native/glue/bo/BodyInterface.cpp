@@ -168,6 +168,21 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_create
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    createSoftBody
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_createSoftBody
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong settingsVa) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (settingsVa);
+    const Body * const pResult = pInterface->CreateSoftBody(*pSettings);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    deactivateBody
  * Signature: (JJ)V
  */

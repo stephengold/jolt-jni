@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -189,6 +190,22 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Create a soft body and add it to the physics system.
+     *
+     * @param settings the settings to use (not null, unaffected)
+     * @param activationMode whether to activate the body (not null)
+     * @return the ID of the created body, or an invalid ID when out of bodies
+     */
+    public BodyId createAndAddSoftBody(ConstSoftBodyCreationSettings settings,
+            EActivation activationMode) {
+        Body body = createSoftBody(settings);
+        BodyId result = body.getId();
+        addBody(result, activationMode);
+
+        return result;
+    }
+
+    /**
      * Create a rigid body using the specified settings.
      *
      * @param settings the settings to use (not null, unaffected)
@@ -225,6 +242,24 @@ public class BodyInterface extends NonCopyable {
                 bodyInterfaceVa, settingsVa, body1IdVa, body2IdVa);
         TwoBodyConstraint result
                 = (TwoBodyConstraint) Constraint.newConstraint(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Create a soft body using the specified settings.
+     *
+     * @param settings the settings to use (not null, unaffected)
+     * @return the new body
+     */
+    public Body createSoftBody(ConstSoftBodyCreationSettings settings) {
+        long bodyInterfaceVa = va();
+        long settingsVa = settings.va();
+        long bodyVa = createSoftBody(bodyInterfaceVa, settingsVa);
+        if (bodyVa == 0L) {
+            throw new IllegalStateException("ran out of bodies");
+        }
+        Body result = new Body(bodyVa);
 
         return result;
     }
@@ -678,6 +713,9 @@ public class BodyInterface extends NonCopyable {
 
     native private static long createConstraint(long bodyInterfaceVa,
             long settingsVa, long body1IdVa, long body2IdVa);
+
+    native private static long createSoftBody(
+            long bodyInterfaceVa, long settingsVa);
 
     native private static void deactivateBody(
             long bodyInterfaceVa, long bodyIdVa);
