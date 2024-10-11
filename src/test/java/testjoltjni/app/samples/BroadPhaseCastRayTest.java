@@ -23,7 +23,6 @@ package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.operator.Op;
 import java.util.List;
-
 /**
  * A line-for-line Java translation of the Jolt Physics broad-phase ray cast
  * test: a simple test that casts a ray through the broadphase.
@@ -31,7 +30,8 @@ import java.util.List;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/BroadPhase/BroadPhaseCastRayTest.cpp
  */
-class BroadPhaseCastRayTest extends BroadPhaseTest {
+class BroadPhaseCastRayTest extends BroadPhaseTest{
+
 void Initialize()
 {
 	super.Initialize();
@@ -58,7 +58,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	// Create ray
 	DefaultRandomEngine random = new DefaultRandomEngine();
 	Vec3 from = Op.multiply(1000.0f , Vec3.sRandom(random));
-	RayCast ray = new RayCast(from, Op.multiply(-2.0f, from) );
+	RayCast ray = new RayCast(from, Op.multiply(-2.0f , from) );
 
 	// Raycast before update
 	AllHitRayCastBodyCollector collector = new AllHitRayCastBodyCollector();

@@ -30,7 +30,7 @@ import com.github.stephengold.joltjni.operator.Op;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/BroadPhase/BroadPhaseTest.cpp
  */
 // Base class for a test involving only the broad phase
-abstract class BroadPhaseTest extends Test {
+abstract class BroadPhaseTest extends Test{
 
 int NUM_BODIES =		10000;
 

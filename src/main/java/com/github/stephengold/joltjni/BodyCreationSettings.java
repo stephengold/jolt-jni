@@ -709,6 +709,7 @@ public class BodyCreationSettings
     public float getRestitution() {
         long bodySettingsVa = va();
         float result = getRestitution(bodySettingsVa);
+
         return result;
     }
 

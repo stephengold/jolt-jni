@@ -34,7 +34,7 @@ import testjoltjni.app.testframework.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Character/CharacterBaseTest.cpp
  */
-abstract class CharacterBaseTest extends Test {
+abstract class CharacterBaseTest extends Test{
 
 abstract RVec3 GetCharacterPosition();
 abstract void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchStance, float inDeltaTime);
@@ -162,17 +162,17 @@ void Initialize()
 		break;
 	}
 
-	if (sSceneName.equals("PerlinMesh"))
+	if (sSceneName.equals( "PerlinMesh") )
 	{
 		// Default terrain
 		CreateMeshTerrain();
 	}
-	else if (sSceneName.equals("PerlinHeightField"))
+	else if (sSceneName.equals( "PerlinHeightField") )
 	{
 		// Default terrain
 		CreateHeightFieldTerrain();
 	}
-	else if (sSceneName.equals("InitiallyIntersecting"))
+	else if (sSceneName.equals( "InitiallyIntersecting") )
 	{
 		CreateFloor();
 
@@ -187,7 +187,7 @@ void Initialize()
 					mBodyInterface.createAndAddBody(settings, EActivation.DontActivate);
 				}
 	}
-	else if (sSceneName.equals("ObstacleCourse"))
+	else if (sSceneName.equals( "ObstacleCourse") )
 	{
 		// Default terrain
 		CreateFloor(350.0f);
@@ -289,10 +289,8 @@ void Initialize()
 
 			// Connect the parts with a hinge
 			HingeConstraintSettings hinge=new HingeConstraintSettings();
-			hinge.setPoint1 ( new RVec3(20.0f, 0.4f, 0.0f));
-                        hinge.setPoint2 ( new RVec3(20.0f, 0.4f, 0.0f));
-			hinge.setHingeAxis1 ( Vec3.sAxisX());
-                        hinge.setHingeAxis2 ( Vec3.sAxisX());
+			hinge.setPoint1 ( new RVec3(20.0f, 0.4f, 0.0f)); hinge.setPoint2 ( new RVec3(20.0f, 0.4f, 0.0f));
+			hinge.setHingeAxis1 ( Vec3.sAxisX()); hinge.setHingeAxis2 ( Vec3.sAxisX());
 			mPhysicsSystem.addConstraint(mBodyInterface.createConstraint(hinge, b1, b2));
 		}
 
@@ -382,7 +380,7 @@ void Initialize()
 
 		// Create stairs from triangles
 		{
-			List<Triangle> triangles = new ArrayList<>();
+			List<Triangle> triangles=new ArrayList<>();
 
 			float rear_z = 10 * cStairsStepHeight;
 
@@ -419,7 +417,7 @@ void Initialize()
 
 			MeshShapeSettings mesh=new MeshShapeSettings(triangles);
 			mesh.setEmbedded();
-			BodyCreationSettings mesh_stairs = new BodyCreationSettings(mesh, cMeshStairsPosition, Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
+			BodyCreationSettings mesh_stairs=new BodyCreationSettings(mesh, cMeshStairsPosition, Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
 			mBodyInterface.createAndAddBody(mesh_stairs, EActivation.DontActivate);
 		}
 
@@ -465,7 +463,7 @@ void Initialize()
 
 			MeshShapeSettings mesh=new MeshShapeSettings(triangles);
 			mesh.setEmbedded();
-			BodyCreationSettings mesh_stairs = new BodyCreationSettings(mesh, cMeshNoStairsPosition, Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
+			BodyCreationSettings mesh_stairs=new BodyCreationSettings(mesh, cMeshNoStairsPosition, Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
 			mBodyInterface.createAndAddBody(mesh_stairs, EActivation.DontActivate);
 		}
 
@@ -527,7 +525,7 @@ void Initialize()
 				triangles.pushBack(new IndexedTriangle(end, end + angle, end + angle + 1));
 			}
 
-			MeshShapeSettings mesh = new MeshShapeSettings(vertices, triangles);
+			MeshShapeSettings mesh=new MeshShapeSettings(vertices, triangles);
 			mesh.setEmbedded();
 			BodyCreationSettings mesh_cylinder=new BodyCreationSettings(mesh, cHalfCylinderPosition, Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
 			mBodyInterface.createAndAddBody(mesh_cylinder, EActivation.DontActivate);
@@ -570,7 +568,7 @@ void Initialize()
 		// Create a sensor
 		{
 			BodyCreationSettings sensor=new BodyCreationSettings(new BoxShape(Vec3.sReplicate(1.0f)), cSensorPosition, Quat.sIdentity(), EMotionType.Kinematic, Layers.SENSOR);
-			sensor.setIsSensor(true);
+			sensor.setIsSensor ( true);
 			mSensorBody = mBodyInterface.createAndAddBody(sensor, EActivation.Activate);
 		}
 
@@ -621,7 +619,7 @@ void Initialize()
 	}
 }
 
-/* TODO
+/*TODO
 void CharacterBaseTest::ProcessInput(const ProcessInputParams &inParams)
 {
 	// Determine controller input
@@ -724,7 +722,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	HandleInput(mControlInput, mJump, mSwitchStance, inParams.mDeltaTime);
 }
 
-/* TODO
+/*TODO
 void CreateSettingsMenu(DebugUI inUI, UIElement inSubMenu)
 {
 	inUI->CreateTextButton(inSubMenu, "Select Scene", [this, inUI]() {
@@ -784,9 +782,9 @@ void SaveState(StateRecorder inStream)
 
 void RestoreState(StateRecorder inStream)
 {
-	mTime = inStream.readFloat(mTime);
-	mRampBlocksTimeLeft = inStream.readFloat(mRampBlocksTimeLeft);
-	mReversingVerticallyMovingVelocity = inStream.readFloat(mReversingVerticallyMovingVelocity);
+	mTime=inStream.readFloat(mTime);
+	mRampBlocksTimeLeft=inStream.readFloat(mRampBlocksTimeLeft);
+	mReversingVerticallyMovingVelocity=inStream.readFloat(mReversingVerticallyMovingVelocity);
 
 	if (mAnimatedCharacterVirtual != null)
 		mAnimatedCharacterVirtual.getPtr().restoreState(inStream);

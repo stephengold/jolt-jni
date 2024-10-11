@@ -31,7 +31,7 @@ import java.util.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Vehicle/VehicleStressTest.cpp
  */
-class VehicleStressTest extends VehicleTest {
+class VehicleStressTest extends VehicleTest{
     List<ConstraintRef> mVehicles = new ArrayList<>();
     float mHandBrake, mForward, mRight;
 
@@ -83,7 +83,7 @@ void Initialize()
 	w4.setPosition (new Vec3(-half_vehicle_width, -0.9f * half_vehicle_height, -half_vehicle_length + 2.0f * wheel_radius));
 	w4.setMaxSteerAngle ( 0.0f);
 
-	vehicle.addWheels( w1, w2, w3, w4 );
+	vehicle.addWheels (   w1, w2, w3, w4 );
 
 	for (WheelSettings w : vehicle.getWheels())
 	{
@@ -184,8 +184,8 @@ void SaveInputState(StateRecorder inStream)
 
 void RestoreInputState(StateRecorder inStream)
 {
-	mForward = inStream.readFloat(mForward);
-	mRight = inStream.readFloat(mRight);
-	mHandBrake = inStream.readFloat(mHandBrake);
+	mForward=inStream.readFloat(mForward);
+	mRight=inStream.readFloat(mRight);
+	mHandBrake=inStream.readFloat(mHandBrake);
 }
 }

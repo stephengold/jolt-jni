@@ -27,7 +27,7 @@ import com.github.stephengold.joltjni.readonly.*;
 import java.io.*;
 import java.util.*;
 
-abstract class VehicleTest extends Test {
+abstract class VehicleTest extends Test{
 
 private String sScenes[] =
 {
@@ -339,7 +339,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 		mDebugRenderer.drawLine(l.mStart, l.mEnd, Color.sBlack);
 }
 
-/* TODO
+/*TODO
 void VehicleTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 {
 	inUI->CreateTextButton(inSubMenu, "Select Scene", [this, inUI]() {
