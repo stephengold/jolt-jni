@@ -131,6 +131,20 @@ final public class Op {
     }
 
     /**
+     * Divide the left argument by the right argument. (native operator: binary
+     * {@code /=})
+     *
+     * @param left the accumulating vector (not null, modified)
+     * @param right the denominator (not null, unaffected)
+     */
+    public static void divideEquals(Vec3 left, float right) {
+        float xx = left.getX() / right;
+        float yy = left.getY() / right;
+        float zz = left.getZ() / right;
+        left.set(xx, yy, zz);
+    }
+
+    /**
      * Test whether the specified IDs are equal. (native operator: {@code ==})
      *
      * @param left the first ID to test (not null, unaffected)
