@@ -25,10 +25,10 @@ import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import com.github.stephengold.joltjni.readonly.Vec4Arg;
 
 /**
- * A 4x4 matrix composed of 16 {@code Real} elements, used to represent
- * transformations of 3-D coordinates.
+ * A 4x4 matrix used to represent transformations of 3-D coordinates.
  *
  * @author Stephen Gold sgold@sonic.net
  */
