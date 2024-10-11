@@ -320,6 +320,66 @@ final public class Quat implements QuatArg {
         Quat result = Op.multiply(1f / length(), this);
         return result;
     }
+
+    /**
+     * Apply the rotation to (1,0,0). The quaternion is assumed to be normalized
+     * and is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 rotateAxisX() {
+        assert isNormalized();
+
+        float tx = x + x;
+        float tw = w + w;
+        float vx = tx * x + tw * w - 1f;
+        float vy = tx * y + tw * z;
+        float vz = tx * z - tw * y;
+        Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Apply the rotation to (0,1,0). The quaternion is assumed to be normalized
+     * and is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 rotateAxisY() {
+        assert isNormalized();
+
+        float ty = y + y;
+        float tw = w + w;
+        float vx = ty * x - tw * z;
+        float vy = ty * y + tw * w - 1f;
+        float vz = ty * z + tw * x;
+        Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Apply the rotation to (0,0,1). The quaternion is assumed to be normalized
+     * and is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 rotateAxisZ() {
+        assert isNormalized();
+
+        float tz = z + z;
+        float tw = w + w;
+        float vx = tz * x + tw * y;
+        float vy = tz * y - tw * x;
+        float vz = tz * z + tw * w - 1f;
+        Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
     // *************************************************************************
     // Object methods
 

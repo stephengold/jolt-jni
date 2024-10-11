@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.Vec3;
 
 /**
  * Read-only access to a {@code Quat}. (native type: const Quat)
@@ -109,4 +110,28 @@ public interface QuatArg {
      * @return a new quaternion
      */
     Quat normalized();
+
+    /**
+     * Apply the rotation to (1,0,0). The quaternion is assumed to be normalized
+     * and is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 rotateAxisX();
+
+    /**
+     * Apply the rotation to (0,1,0). The quaternion is assumed to be normalized
+     * and is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 rotateAxisY();
+
+    /**
+     * Apply the rotation to (0,0,1). The quaternion is assumed to be normalized
+     * and is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 rotateAxisZ();
 }
