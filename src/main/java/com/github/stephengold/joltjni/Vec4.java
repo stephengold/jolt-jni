@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec4Arg;
 import java.util.Objects;
 
@@ -104,6 +105,19 @@ final public class Vec4 implements Vec4Arg {
         this.y = array[1];
         this.z = array[2];
         this.w = array[3];
+    }
+
+    /**
+     * Instantiate from a 3-D vector.
+     *
+     * @param vec the vector to copy (not null, unaffected)
+     * @param w the desired W component
+     */
+    public Vec4(Vec3Arg vec, float w) {
+        this.x = vec.getX();
+        this.y = vec.getY();
+        this.z = vec.getZ();
+        this.w = w;
     }
 
     /**
