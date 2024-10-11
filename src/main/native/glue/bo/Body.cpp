@@ -718,6 +718,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setAngularVeloci
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    setCollisionGroup
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setCollisionGroup
+  (JNIEnv *, jclass, jlong bodyVa, jlong groupVa) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const CollisionGroup * const pGroup
+            = reinterpret_cast<CollisionGroup *> (groupVa);
+    pBody->SetCollisionGroup(*pGroup);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    setFriction
  * Signature: (JF)V
  */
