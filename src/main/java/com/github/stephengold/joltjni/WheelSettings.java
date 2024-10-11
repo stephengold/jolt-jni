@@ -110,7 +110,7 @@ abstract public class WheelSettings
      * Return the radius of the wheel. The settings are unaffected. (native
      * attribute: mRadius)
      *
-     * @return the radius (in maters)
+     * @return the radius (in meters)
      */
     @Override
     public float getRadius() {
@@ -124,7 +124,7 @@ abstract public class WheelSettings
      * Return the width of the wheel. The settings are unaffected. (native
      * attribute: mWidth)
      *
-     * @return the width (in maters)
+     * @return the width (in meters)
      */
     @Override
     public float getWidth() {

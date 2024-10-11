@@ -42,14 +42,14 @@ public interface ConstWheelSettings extends ConstJoltPhysicsObject {
     /**
      * Return the radius of the wheel. The settings are unaffected.
      *
-     * @return the radius (in maters)
+     * @return the radius (in meters)
      */
     float getRadius();
 
     /**
      * Return the width of the wheel. The settings are unaffected.
      *
-     * @return the width (in maters)
+     * @return the width (in meters)
      */
     float getWidth();
 }
