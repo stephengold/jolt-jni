@@ -264,6 +264,17 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Alter whether extra effort should be made to remove ghost contacts.
+     *
+     * @param enhance {@code true} for extra effort, {@code false} for ordinary
+     * effort (default=false)
+     */
+    public void setEnhancedInternalEdgeRemoval(boolean enhance) {
+        long bodySettingsVa = va();
+        setEnhancedInternalEdgeRemoval(bodySettingsVa, enhance);
+    }
+
+    /**
      * Alter the body's friction ratio.
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
@@ -507,6 +518,19 @@ public class Body extends NonCopyable implements ConstBody {
         assert Double.isFinite(zz) : "zz = " + zz;
 
         RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Test whether extra effort should be made to remove ghost contacts.
+     *
+     * @return {@code true} for extra effort, otherwise {@code false}
+     */
+    @Override
+    public boolean getEnhancedInternalEdgeRemoval() {
+        long bodySettingsVa = va();
+        boolean result = getEnhancedInternalEdgeRemoval(bodySettingsVa);
 
         return result;
     }
@@ -824,6 +848,8 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static double getCenterOfMassPositionZ(long bodyVa);
 
+    native private static boolean getEnhancedInternalEdgeRemoval(long bodyVa);
+
     native private static float getFriction(long bodyVa);
 
     native private static long getId(long bodyVa);
@@ -890,6 +916,9 @@ public class Body extends NonCopyable implements ConstBody {
             long bodyVa, float wx, float wy, float wz);
 
     native private static void setCollisionGroup(long bodyVa, long groupVa);
+
+    native private static void setEnhancedInternalEdgeRemoval(
+            long bodySettingsVa, boolean enhance);
 
     native private static void setFriction(long bodyVa, float friction);
 

@@ -326,6 +326,18 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMa
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getEnhancedInternalEdgeRemoval
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_getEnhancedInternalEdgeRemoval
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const bool result = pBody->GetEnhancedInternalEdgeRemoval();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    getFriction
  * Signature: (J)F
  */
@@ -727,6 +739,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setCollisionGrou
     const CollisionGroup * const pGroup
             = reinterpret_cast<CollisionGroup *> (groupVa);
     pBody->SetCollisionGroup(*pGroup);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    setEnhancedInternalEdgeRemoval
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_setEnhancedInternalEdgeRemoval
+  (JNIEnv *, jclass, jlong bodyVa, jboolean enhance) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    pBody->SetEnhancedInternalEdgeRemoval(enhance);
 }
 
 /*

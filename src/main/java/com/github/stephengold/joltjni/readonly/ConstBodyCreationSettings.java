@@ -63,6 +63,13 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     Vec3 getAngularVelocity();
 
     /**
+     * Test whether extra effort should be made to remove ghost contacts.
+     *
+     * @return {@code true} for extra effort, otherwise {@code false}
+     */
+    boolean getEnhancedInternalEdgeRemoval();
+
+    /**
      * Return the friction ratio. The settings are unaffected.
      *
      * @return the ratio (typically &ge;0 and &le;1)

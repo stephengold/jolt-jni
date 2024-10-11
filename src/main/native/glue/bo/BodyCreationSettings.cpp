@@ -159,6 +159,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getEnhancedInternalEdgeRemoval
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getEnhancedInternalEdgeRemoval
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const bool result = pSettings->mEnhancedInternalEdgeRemoval;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    getFriction
  * Signature: (J)F
  */
@@ -534,6 +547,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
     const CollisionGroup * const pGroup
             = reinterpret_cast<CollisionGroup *> (groupVa);
     pSettings->mCollisionGroup = *pGroup;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setEnhancedInternalEdgeRemoval
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setEnhancedInternalEdgeRemoval
+  (JNIEnv *, jclass, jlong bodySettingsVa, jboolean enhance) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    pSettings->mEnhancedInternalEdgeRemoval = enhance;
 }
 
 /*

@@ -89,6 +89,13 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     RVec3 getCenterOfMassPosition();
 
     /**
+     * Test whether extra effort should be made to remove ghost contacts.
+     *
+     * @return {@code true} for extra effort, otherwise {@code false}
+     */
+    boolean getEnhancedInternalEdgeRemoval();
+
+    /**
      * Return the body's friction ratio. The body is unaffected.
      *
      * @return the ratio

@@ -195,6 +195,17 @@ public class BodyCreationSettings
     }
 
     /**
+     * Alter whether extra effort should be made to remove ghost contacts.
+     *
+     * @param enhance {@code true} for extra effort, {@code false} for ordinary
+     * effort (default=false)
+     */
+    public void setEnhancedInternalEdgeRemoval(boolean enhance) {
+        long bodySettingsVa = va();
+        setEnhancedInternalEdgeRemoval(bodySettingsVa, enhance);
+    }
+
+    /**
      * Alter the friction ratio. (native attribute: mFriction)
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
@@ -457,6 +468,19 @@ public class BodyCreationSettings
         float vy = getAngularVelocityY(bodySettingsVa);
         float vz = getAngularVelocityZ(bodySettingsVa);
         Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Test whether extra effort should be made to remove ghost contacts.
+     *
+     * @return {@code true} for extra effort, otherwise {@code false}
+     */
+    @Override
+    public boolean getEnhancedInternalEdgeRemoval() {
+        long bodySettingsVa = va();
+        boolean result = getEnhancedInternalEdgeRemoval(bodySettingsVa);
 
         return result;
     }
@@ -761,6 +785,9 @@ public class BodyCreationSettings
 
     native private static float getAngularVelocityZ(long bodySettingsVa);
 
+    native private static boolean getEnhancedInternalEdgeRemoval(
+            long bodySettingsVa);
+
     native private static float getFriction(long bodySettingsVa);
 
     native private static float getGravityFactor(long bodySettingsVa);
@@ -822,6 +849,9 @@ public class BodyCreationSettings
 
     native private static void setCollisionGroup(
             long bodySettingsVa, long groupVa);
+
+    native private static void setEnhancedInternalEdgeRemoval(
+            long bodySettingsVa, boolean enhance);
 
     native private static void setFriction(long bodySettingsVa, float friction);
 
