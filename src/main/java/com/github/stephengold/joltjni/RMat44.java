@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import com.github.stephengold.joltjni.readonly.Vec4Arg;
 
 /**
  * A 4x4 matrix used to represent transformations of 3-D coordinates.
@@ -64,6 +65,29 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     public RMat44(Mat44Arg spMatrix) {
         long spMatrixVa = spMatrix.va();
         long matrixVa = createFromSpMatrix(spMatrixVa);
+        setVirtualAddress(matrixVa, () -> free(matrixVa));
+    }
+
+    /**
+     * Instantiate from 4 column vectors.
+     *
+     * @param c1 the desired first column (not null, unaffected)
+     * @param c2 the desired 2nd column (not null, unaffected)
+     * @param c3 the desired 3rd column (not null, unaffected)
+     * @param c4 the desired 4th column (not null, unaffected)
+     */
+    public RMat44(Vec4Arg c1, Vec4Arg c2, Vec4Arg c3, RVec3Arg c4) {
+        float[] floatArray = {
+            c1.getX(), c2.getX(), c3.getX(),
+            c1.getY(), c2.getY(), c3.getY(),
+            c1.getZ(), c2.getZ(), c3.getZ(),
+            c1.getW(), c2.getW(), c3.getW()
+        };
+        double m14 = c4.xx();
+        double m24 = c4.yy();
+        double m34 = c4.zz();
+        // a44 is assumed to be 1.
+        long matrixVa = createFromRowMajor(floatArray, m14, m24, m34);
         setVirtualAddress(matrixVa, () -> free(matrixVa));
     }
     // *************************************************************************
@@ -213,6 +237,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createFromRowMajor(
+            float[] floatArray, double m14, double m24, double m34);
 
     native private static long createFromSpMatrix(long spMatrixVa);
 
