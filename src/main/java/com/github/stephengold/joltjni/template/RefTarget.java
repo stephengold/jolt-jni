@@ -21,8 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.template;
 
-import com.github.stephengold.joltjni.JoltPhysicsObject;
-
 /**
  * Classes that implement this interface maintain a count of active references
  * to each instance.
@@ -50,5 +48,5 @@ public interface RefTarget {
      *
      * @return a new JVM object with a new native object assigned
      */
-    JoltPhysicsObject toRef();
+    Ref toRef();
 }
