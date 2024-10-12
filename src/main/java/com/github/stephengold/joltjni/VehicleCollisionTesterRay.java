@@ -39,6 +39,7 @@ public class VehicleCollisionTesterRay
      * Instantiate a tester for the specified layer.
      *
      * @param objectLayer the index of the desired object layer for collisions
+     * (&ge;0)
      */
     public VehicleCollisionTesterRay(int objectLayer) {
         this(objectLayer, Vec3.sAxisY());
@@ -48,6 +49,7 @@ public class VehicleCollisionTesterRay
      * Instantiate a tester with the specified properties.
      *
      * @param objectLayer the index of the desired object layer for collisions
+     * (&ge;0)
      * @param up the "up" direction (in system coordinates, not null,
      * unaffected, default=(0,1,0))
      */

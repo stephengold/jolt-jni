@@ -143,7 +143,7 @@ public class VehicleConstraint
     }
 
     /**
-     * Return the number of simulation steps between wheel collision tests when
+     * Return the number of simulation steps between wheel-collision tests when
      * the vehicle is active.
      *
      * @param numSteps the desired number of steps (0=never test, 1=test every
@@ -155,7 +155,7 @@ public class VehicleConstraint
     }
 
     /**
-     * Return the number of simulation steps between wheel collision tests when
+     * Return the number of simulation steps between wheel-collision tests when
      * the vehicle is inactive.
      *
      * @param numSteps the desired number of steps (0=never, 1=every step,
