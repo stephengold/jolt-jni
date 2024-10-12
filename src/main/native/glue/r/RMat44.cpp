@@ -175,7 +175,7 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getTranslat
  * Signature: (JIID)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_setElement
-  (JNIEnv *, jclass, jlong matrixVa, jint row, jint column, jfloat value) {
+  (JNIEnv *, jclass, jlong matrixVa, jint row, jint column, jdouble value) {
     RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
     pMatrix->GetColumn4(column)[row] = value;
 }
