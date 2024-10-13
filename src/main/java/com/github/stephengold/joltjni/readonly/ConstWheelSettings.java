@@ -33,6 +33,14 @@ public interface ConstWheelSettings extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
+     * Determine where to apply tire forces. The settings are unaffected.
+     *
+     * @return {@code true} if applied at the configured suspension-force point,
+     * {@code false} if applied at the wheel's point of contact
+     */
+    boolean getEnableSuspensionForcePoint();
+
+    /**
      * Copy the location of the attachment point. The settings are unaffected.
      *
      * @return a new location vector (in the body's local system)
@@ -45,6 +53,68 @@ public interface ConstWheelSettings extends ConstJoltPhysicsObject {
      * @return the radius (in meters)
      */
     float getRadius();
+
+    /**
+     * Copy the steering axis (upward direction). The settings are unaffected.
+     *
+     * @return a new direction vector
+     */
+    Vec3 getSteeringAxis();
+
+    /**
+     * Copy the downward direction of the suspension. The settings are
+     * unaffected.
+     *
+     * @return a new direction vector
+     */
+    Vec3 getSuspensionDirection();
+
+    /**
+     * Copy the location where (if enabled) tire forces will be applied. The
+     * settings are unaffected.
+     *
+     * @return a new location vector (in body coordinates)
+     */
+    Vec3 getSuspensionForcePoint();
+
+    /**
+     * Return the maximum displacement from the attachment point. The settings
+     * are unaffected.
+     *
+     * @return the distance (in meters)
+     */
+    float getSuspensionMaxLength();
+
+    /**
+     * Return the minimum displacement from the attachment point. The settings
+     * are unaffected.
+     *
+     * @return the distance (in meters)
+     */
+    float getSuspensionMinLength();
+
+    /**
+     * Return the suspension preload length. The settings are unaffected.
+     *
+     * @return the offset (in meters)
+     */
+    float getSuspensionPreloadLength();
+
+    /**
+     * Copy the forward direction when steering is neutral. The settings are
+     * unaffected.
+     *
+     * @return a new direction vector
+     */
+    Vec3 getWheelForward();
+
+    /**
+     * Copy the "up" direction when steering is neutral. The settings are
+     * unaffected.
+     *
+     * @return a new direction vector
+     */
+    Vec3 getWheelUp();
 
     /**
      * Return the width of the wheel. The settings are unaffected.

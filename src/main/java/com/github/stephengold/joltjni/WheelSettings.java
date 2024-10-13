@@ -48,6 +48,31 @@ abstract public class WheelSettings
     // new methods exposed
 
     /**
+     * Access the settings for the suspension spring.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public SpringSettings getSuspensionSpring() {
+        long wheelSettingsVa = va();
+        long springSettingsVa = getSuspensionSpring(wheelSettingsVa);
+        SpringSettings result = new SpringSettings(this, springSettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Alter where to apply tire forces. (native attribute:
+     * mEnableSuspensionForcePoint)
+     *
+     * @param enable {@code true} to apply at the configured suspension-force
+     * point, {@code false} to apply at the wheel's point of contact
+     */
+    public void setEnableSuspensionForcePoint(boolean enable) {
+        long settingsVa = va();
+        setEnableSuspensionForcePoint(settingsVa, enable);
+    }
+
+    /**
      * Alter the location of the attachment point. (native attribute: mPosition)
      *
      * @param position the location of the attachment point (in the body's local
@@ -72,6 +97,114 @@ abstract public class WheelSettings
     }
 
     /**
+     * Alter the steering axis (upward direction). (native attribute:
+     * mSteeringAxis)
+     *
+     * @param direction the desired direction (not null, unaffected,
+     * default=(0,1,0))
+     */
+    public void setSteeringAxis(Vec3Arg direction) {
+        long settingsVa = va();
+        float dx = direction.getX();
+        float dy = direction.getY();
+        float dz = direction.getZ();
+        setSteeringAxis(settingsVa, dx, dy, dz);
+    }
+
+    /**
+     * Alter the downward direction of the suspension. (native attribute:
+     * mSuspensionDirection)
+     *
+     * @param direction the desired direction (not null, unaffected,
+     * default=(0,-1,0))
+     */
+    public void setSuspensionDirection(Vec3Arg direction) {
+        long settingsVa = va();
+        float dx = direction.getX();
+        float dy = direction.getY();
+        float dz = direction.getZ();
+        setSuspensionDirection(settingsVa, dx, dy, dz);
+    }
+
+    /**
+     * Alter the location where tire forces will be applied if the force-point
+     * option is enabled. (native attribute: mSuspensionForcePoint)
+     *
+     * @param location the desired location (in the body coordinates, not null,
+     * unaffected, default=(0,0,0))
+     */
+    public void setSuspensionForcePoint(Vec3Arg location) {
+        long settingsVa = va();
+        float x = location.getX();
+        float y = location.getY();
+        float z = location.getZ();
+        setSuspensionForcePoint(settingsVa, x, y, z);
+    }
+
+    /**
+     * Alter the maximum displacement from the attachment point. (native
+     * attribute: mSuspensionMaxLength)
+     *
+     * @param length the desired limit (in meters, default=0.5)
+     */
+    public void setSuspensionMaxLength(float length) {
+        long settingsVa = va();
+        setSuspensionMaxLength(settingsVa, length);
+    }
+
+    /**
+     * Alter the minimum displacement from the attachment point. (native
+     * attribute: mSuspensionMinLength)
+     *
+     * @param length the desired limit (in meters, default=0.3)
+     */
+    public void setSuspensionMinLength(float length) {
+        long settingsVa = va();
+        setSuspensionMinLength(settingsVa, length);
+    }
+
+    /**
+     * Alter the suspension preload length. (native attribute:
+     * mSuspensionPreloadLength)
+     *
+     * @param length the desired offset (in meters, default=0)
+     */
+    public void setSuspensionPreloadLength(float length) {
+        long settingsVa = va();
+        setSuspensionPreloadLength(settingsVa, length);
+    }
+
+    /**
+     * Alter the forward direction when steering is neutral. (native attribute:
+     * mWheelForward)
+     *
+     * @param direction the desired direction (not null, unaffected,
+     * default=(0,0,1))
+     */
+    public void setWheelForward(Vec3Arg direction) {
+        long settingsVa = va();
+        float dx = direction.getX();
+        float dy = direction.getY();
+        float dz = direction.getZ();
+        setWheelForward(settingsVa, dx, dy, dz);
+    }
+
+    /**
+     * Alter the "up" direction when steering is neutral. (native attribute:
+     * mWheelUp)
+     *
+     * @param direction the desired direction (not null, unaffected,
+     * default=(0,1,0))
+     */
+    public void setWheelUp(Vec3Arg direction) {
+        long settingsVa = va();
+        float dx = direction.getX();
+        float dy = direction.getY();
+        float dz = direction.getZ();
+        setWheelUp(settingsVa, dx, dy, dz);
+    }
+
+    /**
      * Alter the width of the wheel. (native attribute: mWidth)
      *
      * @param width the desired width (in meters, default=0.1)
@@ -82,6 +215,21 @@ abstract public class WheelSettings
     }
     // *************************************************************************
     // ConstWheelSettings methods
+
+    /**
+     * Determine where to apply tire forces. The settings are unaffected.
+     * (native attribute: mEnableSuspensionForcePoint)
+     *
+     * @return {@code true} if applied at the configured suspension-force point,
+     * {@code false} if applied at the wheel's point of contact
+     */
+    @Override
+    public boolean getEnableSuspensionForcePoint() {
+        long settingsVa = va();
+        boolean result = getEnableSuspensionForcePoint(settingsVa);
+
+        return result;
+    }
 
     /**
      * Copy the location of the attachment point. The settings are unaffected.
@@ -110,6 +258,134 @@ abstract public class WheelSettings
     public float getRadius() {
         long settingsVa = va();
         float result = getRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the steering axis (upward direction). The settings are unaffected.
+     * (native attribute: mSteeringAxis)
+     *
+     * @return a new direction vector
+     */
+    @Override
+    public Vec3 getSteeringAxis() {
+        long settingsVa = va();
+        float dx = getSteeringAxisX(settingsVa);
+        float dy = getSteeringAxisY(settingsVa);
+        float dz = getSteeringAxisZ(settingsVa);
+        Vec3 result = new Vec3(dx, dy, dz);
+
+        return result;
+    }
+
+    /**
+     * Copy the downward direction of the suspension. The settings are
+     * unaffected. (native attribute: mSuspensionDirection)
+     *
+     * @return a new direction vector
+     */
+    @Override
+    public Vec3 getSuspensionDirection() {
+        long settingsVa = va();
+        float dx = getSuspensionDirectionX(settingsVa);
+        float dy = getSuspensionDirectionY(settingsVa);
+        float dz = getSuspensionDirectionZ(settingsVa);
+        Vec3 result = new Vec3(dx, dy, dz);
+
+        return result;
+    }
+
+    /**
+     * Copy the location where tire forces will be applied if the force-point
+     * option is enabled. The settings are unaffected. (native attribute:
+     * mSuspensionForcePoint)
+     *
+     * @return a new location vector (in body coordinates)
+     */
+    @Override
+    public Vec3 getSuspensionForcePoint() {
+        long settingsVa = va();
+        float x = getSuspensionForcePointX(settingsVa);
+        float y = getSuspensionForcePointY(settingsVa);
+        float z = getSuspensionForcePointZ(settingsVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum displacement from the attachment point. The settings
+     * are unaffected. (native attribute: mSuspensionMaxLength)
+     *
+     * @return the distance (in meters)
+     */
+    @Override
+    public float getSuspensionMaxLength() {
+        long settingsVa = va();
+        float result = getSuspensionMaxLength(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the minimum displacement from the attachment point. The settings
+     * are unaffected. (native attribute: mSuspensionMinLength)
+     *
+     * @return the distance (in meters)
+     */
+    @Override
+    public float getSuspensionMinLength() {
+        long settingsVa = va();
+        float result = getSuspensionMinLength(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the suspension preload length. The settings are unaffected.
+     * (native attribute: mSuspensionPreloadLength)
+     *
+     * @return the offset (in meters)
+     */
+    @Override
+    public float getSuspensionPreloadLength() {
+        long settingsVa = va();
+        float result = getSuspensionPreloadLength(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the forward direction when steering is neutral. The settings are
+     * unaffected. (native attribute: mWheelForward)
+     *
+     * @return a new direction vector
+     */
+    @Override
+    public Vec3 getWheelForward() {
+        long settingsVa = va();
+        float dx = getWheelForwardX(settingsVa);
+        float dy = getWheelForwardY(settingsVa);
+        float dz = getWheelForwardZ(settingsVa);
+        Vec3 result = new Vec3(dx, dy, dz);
+
+        return result;
+    }
+
+    /**
+     * Copy the "up" direction when steering is neutral. The settings are
+     * unaffected. (native attribute: mWheelUp)
+     *
+     * @return a new direction vector
+     */
+    @Override
+    public Vec3 getWheelUp() {
+        long settingsVa = va();
+        float dx = getWheelUpX(settingsVa);
+        float dy = getWheelUpY(settingsVa);
+        float dz = getWheelUpZ(settingsVa);
+        Vec3 result = new Vec3(dx, dy, dz);
 
         return result;
     }
@@ -155,6 +431,9 @@ abstract public class WheelSettings
     // *************************************************************************
     // native private methods
 
+    native private static boolean getEnableSuspensionForcePoint(
+            long settingsVa);
+
     native private static float getPositionX(long settingsVa);
 
     native private static float getPositionY(long settingsVa);
@@ -163,12 +442,77 @@ abstract public class WheelSettings
 
     native private static float getRadius(long settingsVa);
 
+    native private static float getSteeringAxisX(long settingsVa);
+
+    native private static float getSteeringAxisY(long settingsVa);
+
+    native private static float getSteeringAxisZ(long settingsVa);
+
+    native private static float getSuspensionDirectionX(long settingsVa);
+
+    native private static float getSuspensionDirectionY(long settingsVa);
+
+    native private static float getSuspensionDirectionZ(long settingsVa);
+
+    native private static float getSuspensionForcePointX(long settingsVa);
+
+    native private static float getSuspensionForcePointY(long settingsVa);
+
+    native private static float getSuspensionForcePointZ(long settingsVa);
+
+    native private static float getSuspensionMaxLength(long settingsVa);
+
+    native private static float getSuspensionMinLength(long settingsVa);
+
+    native private static float getSuspensionPreloadLength(long settingsVa);
+
+    native private static long getSuspensionSpring(long wheelSettingsVa);
+
+    native private static float getWheelForwardX(long settingsVa);
+
+    native private static float getWheelForwardY(long settingsVa);
+
+    native private static float getWheelForwardZ(long settingsVa);
+
+    native private static float getWheelUpX(long settingsVa);
+
+    native private static float getWheelUpY(long settingsVa);
+
+    native private static float getWheelUpZ(long settingsVa);
+
     native private static float getWidth(long settingsVa);
+
+    native private static void setEnableSuspensionForcePoint(
+            long settingsVa, boolean enable);
 
     native private static void setPosition(
             long settingsVa, float x, float y, float z);
 
     native private static void setRadius(long settingsVa, float radius);
+
+    native private static void setSteeringAxis(
+            long settingsVa, float dx, float dy, float dz);
+
+    native private static void setSuspensionDirection(
+            long settingsVa, float dx, float dy, float dz);
+
+    native private static void setSuspensionForcePoint(
+            long settingsVa, float x, float y, float z);
+
+    native private static void setSuspensionMaxLength(
+            long settingsVa, float length);
+
+    native private static void setSuspensionMinLength(
+            long settingsVa, float length);
+
+    native private static void setSuspensionPreloadLength(
+            long settingsVa, float length);
+
+    native private static void setWheelForward(
+            long settingsVa, float dx, float dy, float dz);
+
+    native private static void setWheelUp(
+            long settingsVa, float dx, float dy, float dz);
 
     native private static void setWidth(long settingsVa, float width);
 }
