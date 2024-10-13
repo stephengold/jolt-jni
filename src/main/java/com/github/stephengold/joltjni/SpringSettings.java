@@ -22,6 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.ESpringMode;
+import com.github.stephengold.joltjni.template.Ref;
+import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * Settings used to construct a constraint spring.
@@ -33,15 +35,11 @@ final public class SpringSettings extends JoltPhysicsObject {
     // fields
 
     /**
-     * prevent premature garbage collection of the underlying {@code Constraint}
+     * prevent premature garbage collection of the underlying
+     * {@code Constraint}, {@code ConstraintSettings}, or {@code WheelSettings}
      * if any
      */
-    final private ConstraintRef constraintRef;
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code ConstraintSettings} if any
-     */
-    final private ConstraintSettingsRef constraintSettingsRef;
+    final private Ref underlyingRef;
     // *************************************************************************
     // constructors
 
@@ -49,30 +47,13 @@ final public class SpringSettings extends JoltPhysicsObject {
      * Instantiate settings with the specified native object assigned but not
      * owned.
      *
-     * @param constraint the underlying {@code Constraint} (not null)
+     * @param underlying the underlying {@code Constraint},
+     * {@code ConstraintSettings}, or {@code WheelSettings} (not null)
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
-    SpringSettings(Constraint constraint, long settingsVa) {
-        this.constraintRef = constraint.toRef();
-        this.constraintSettingsRef = null;
-
-        setVirtualAddress(settingsVa, null);
-    }
-
-    /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
-     *
-     * @param constraintSettings the underlying {@code ConstraintSettings} (not
-     * null)
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    SpringSettings(ConstraintSettings constraintSettings, long settingsVa) {
-        this.constraintRef = null;
-        this.constraintSettingsRef = constraintSettings.toRef();
-
+    SpringSettings(RefTarget underlying, long settingsVa) {
+        this.underlyingRef = underlying.toRef();
         setVirtualAddress(settingsVa, null);
     }
     // *************************************************************************
@@ -84,7 +65,11 @@ final public class SpringSettings extends JoltPhysicsObject {
      * @return the pre-existing instance, or null if none
      */
     public Constraint getConstraint() {
-        return constraintRef.getPtr();
+        RefTarget result = underlyingRef.getPtr();
+        if (!(result instanceof Constraint)) {
+            result = null;
+        }
+        return (Constraint) result;
     }
 
     /**
@@ -93,7 +78,11 @@ final public class SpringSettings extends JoltPhysicsObject {
      * @return the pre-existing instance, or null if none
      */
     public ConstraintSettings getConstraintSettings() {
-        return constraintSettingsRef.getPtr();
+        RefTarget result = underlyingRef.getPtr();
+        if (!(result instanceof ConstraintSettings)) {
+            result = null;
+        }
+        return (ConstraintSettings) result;
     }
 
     /**
