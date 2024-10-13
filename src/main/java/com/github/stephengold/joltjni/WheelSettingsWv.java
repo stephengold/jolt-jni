@@ -55,6 +55,19 @@ public class WheelSettingsWv extends WheelSettings implements RefTarget {
     // new methods exposed
 
     /**
+     * Return the maximum torque that the main brake can exert on the wheel. The
+     * settings are unaffected. (native attribute: mMaxBrakeTorque)
+     *
+     * @return the maximum torque (in Newton.meters)
+     */
+    public float getMaxBrakeTorque() {
+        long settingsVa = va();
+        float result = getMaxBrakeTorque(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the maximum torque that the hand brake can exert on the wheel. The
      * settings are unaffected. (native attribute: mMaxHandBrakeTorque)
      *
@@ -78,6 +91,17 @@ public class WheelSettingsWv extends WheelSettings implements RefTarget {
         float result = getMaxSteerAngle(settingsVa);
 
         return result;
+    }
+
+    /**
+     * Alter the maximum torque that the main brake can exert on the wheel.
+     * (native attribute: mMaxBrakeTorque)
+     *
+     * @param torque the desired torque (in Newton.meters, default=1500)
+     */
+    public void setMaxBrakeTorque(float torque) {
+        long settingsVa = va();
+        setMaxBrakeTorque(settingsVa, torque);
     }
 
     /**
@@ -146,6 +170,8 @@ public class WheelSettingsWv extends WheelSettings implements RefTarget {
 
     native static private long createDefault();
 
+    native static private float getMaxBrakeTorque(long settingsVa);
+
     native static private float getMaxHandBrakeTorque(long settingsVa);
 
     native static private float getMaxSteerAngle(long settingsVa);
@@ -153,6 +179,8 @@ public class WheelSettingsWv extends WheelSettings implements RefTarget {
     native private static int getRefCount(long settingsVa);
 
     native private static void setEmbedded(long settingsVa);
+
+    native static private void setMaxBrakeTorque(long settingsVa, float torque);
 
     native static private void setMaxHandBrakeTorque(
             long settingsVa, float torque);

@@ -51,6 +51,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_crea
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettingsWv
+ * Method:    getMaxBrakeTorque
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_getMaxBrakeTorque
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const WheelSettingsWV * const pSettings
+            = reinterpret_cast<WheelSettingsWV *> (settingsVa);
+    const float result = pSettings->mMaxBrakeTorque;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsWv
  * Method:    getMaxHandBrakeTorque
  * Signature: (J)F
  */
@@ -98,6 +111,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_setEm
     WheelSettingsWV * const pSettings
             = reinterpret_cast<WheelSettingsWV *> (settingsVa);
     pSettings->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsWv
+ * Method:    setMaxBrakeTorque
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_setMaxBrakeTorque
+  (JNIEnv *, jclass, jlong settingsVa, jfloat torque) {
+    WheelSettingsWV * const pSettings
+            = reinterpret_cast<WheelSettingsWV *> (settingsVa);
+    pSettings->mMaxBrakeTorque = torque;
 }
 
 /*
