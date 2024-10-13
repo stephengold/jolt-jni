@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
+import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * Settings used to construct a {@code Wheel}.
@@ -32,7 +33,7 @@ import com.github.stephengold.joltjni.template.Ref;
  */
 abstract public class WheelSettings
         extends SerializableObject
-        implements ConstWheelSettings {
+        implements ConstWheelSettings, RefTarget {
     // *************************************************************************
     // constructors
 
@@ -79,13 +80,6 @@ abstract public class WheelSettings
         long settingsVa = va();
         setWidth(settingsVa, width);
     }
-
-    /**
-     * Create a counted reference to the native {@code WheelSettings}.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    abstract public Ref toRef();
     // *************************************************************************
     // ConstWheelSettings methods
 
@@ -133,6 +127,31 @@ abstract public class WheelSettings
 
         return result;
     }
+    // *************************************************************************
+    // RefTarget methods
+
+    /**
+     * Count the active references to the native {@code WheelSettings}. The
+     * settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    abstract public int getRefCount();
+
+    /**
+     * Mark the native {@code WheelSettings} as embedded.
+     */
+    @Override
+    abstract public void setEmbedded();
+
+    /**
+     * Create a counted reference to the native {@code WheelSettings}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    abstract public Ref toRef();
     // *************************************************************************
     // native private methods
 
