@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
+import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * Base class to represent a player navigating a {@code PhysicsSystem}.
@@ -35,7 +36,7 @@ import com.github.stephengold.joltjni.template.Ref;
  */
 abstract public class CharacterBase
         extends NonCopyable
-        implements ConstCharacterBase {
+        implements ConstCharacterBase, RefTarget {
     // *************************************************************************
     // constructors
 
@@ -91,13 +92,6 @@ abstract public class CharacterBase
         float z = up.getZ();
         setUp(characterVa, x, y, z);
     }
-
-    /**
-     * Create a counted reference to the native {@code CharacterBase}.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    abstract public Ref toRef();
     // *************************************************************************
     // ConstCharacterBase methods
 
@@ -319,6 +313,31 @@ abstract public class CharacterBase
         long recorderVa = recorder.va();
         saveState(characterVa, recorderVa);
     }
+    // *************************************************************************
+    // RefTarget methods
+
+    /**
+     * Count the active references to the native {@code CharacterBase}. The
+     * settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    abstract public int getRefCount();
+
+    /**
+     * Mark the native {@code CharacterBase} as embedded.
+     */
+    @Override
+    abstract public void setEmbedded();
+
+    /**
+     * Create a counted reference to the native {@code CharacterBase}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    abstract public Ref toRef();
     // *************************************************************************
     // native methods
 

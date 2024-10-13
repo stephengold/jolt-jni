@@ -28,7 +28,6 @@ import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * A character implemented using a kinematic rigid body.
@@ -37,7 +36,7 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 public class Character
         extends CharacterBase
-        implements ConstCharacter, RefTarget {
+        implements ConstCharacter {
     // *************************************************************************
     // constructors
 
@@ -483,6 +482,45 @@ public class Character
         return result;
     }
     // *************************************************************************
+    // CharacterBase methods
+
+    /**
+     * Count the active references to the native {@code Character}. The
+     * character is unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long characterVa = va();
+        int result = getRefCount(characterVa);
+
+        return result;
+    }
+
+    /**
+     * Mark the native {@code Character} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long characterVa = va();
+        setEmbedded(characterVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code Character}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public CharacterRef toRef() {
+        long characterVa = va();
+        long refVa = toRef(characterVa);
+        CharacterRef result = new CharacterRef(refVa, true);
+
+        return result;
+    }
+    // *************************************************************************
     // ConstCharacter methods
 
     /**
@@ -710,45 +748,6 @@ public class Character
         long characterVa = va();
         long matrixVa = getWorldTransform(characterVa, lockBodies);
         RMat44 result = new RMat44(matrixVa, true);
-
-        return result;
-    }
-    // *************************************************************************
-    // RefTarget methods
-
-    /**
-     * Count the active references to the native {@code Character}. The
-     * character is unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    @Override
-    public int getRefCount() {
-        long characterVa = va();
-        int result = getRefCount(characterVa);
-
-        return result;
-    }
-
-    /**
-     * Mark the native {@code Character} as embedded.
-     */
-    @Override
-    public void setEmbedded() {
-        long characterVa = va();
-        setEmbedded(characterVa);
-    }
-
-    /**
-     * Create a counted reference to the native {@code Character}.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    @Override
-    public CharacterRef toRef() {
-        long characterVa = va();
-        long refVa = toRef(characterVa);
-        CharacterRef result = new CharacterRef(refVa, true);
 
         return result;
     }

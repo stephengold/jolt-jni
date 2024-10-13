@@ -28,7 +28,6 @@ import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * A character implemented without a rigid body.
@@ -37,7 +36,7 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 public class CharacterVirtual
         extends CharacterBase
-        implements ConstCharacterVirtual, RefTarget {
+        implements ConstCharacterVirtual {
     // *************************************************************************
     // fields
 
@@ -320,6 +319,45 @@ public class CharacterVirtual
     public void updateGroundVelocity() {
         long characterVa = va();
         updateGroundVelocity(characterVa);
+    }
+    // *************************************************************************
+    // CharacterBase methods
+
+    /**
+     * Count the active references to the native {@code CharacterVirtual}. The
+     * character is unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long characterVa = va();
+        int result = getRefCount(characterVa);
+
+        return result;
+    }
+
+    /**
+     * Mark the native {@code CharacterVirtual} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long characterVa = va();
+        setEmbedded(characterVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code CharacterVirtual}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public CharacterVirtualRef toRef() {
+        long characterVa = va();
+        long refVa = toRef(characterVa);
+        CharacterVirtualRef result = new CharacterVirtualRef(refVa, true);
+
+        return result;
     }
     // *************************************************************************
     // ConstCharacterVirtual methods
@@ -661,45 +699,6 @@ public class CharacterVirtual
         long characterVa = va();
         long otherVa = otherCharacter.va();
         boolean result = hasCollidedWithCharacter(characterVa, otherVa);
-
-        return result;
-    }
-    // *************************************************************************
-    // RefTarget methods
-
-    /**
-     * Count the active references to the native {@code CharacterVirtual}. The
-     * character is unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    @Override
-    public int getRefCount() {
-        long characterVa = va();
-        int result = getRefCount(characterVa);
-
-        return result;
-    }
-
-    /**
-     * Mark the native {@code CharacterVirtual} as embedded.
-     */
-    @Override
-    public void setEmbedded() {
-        long characterVa = va();
-        setEmbedded(characterVa);
-    }
-
-    /**
-     * Create a counted reference to the native {@code CharacterVirtual}.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    @Override
-    public CharacterVirtualRef toRef() {
-        long characterVa = va();
-        long refVa = toRef(characterVa);
-        CharacterVirtualRef result = new CharacterVirtualRef(refVa, true);
 
         return result;
     }
