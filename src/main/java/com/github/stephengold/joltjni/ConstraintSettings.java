@@ -85,14 +85,26 @@ abstract public class ConstraintSettings
             case Hinge:
                 result = new HingeConstraintSettings(settingsVa);
                 break;
+            case Path:
+                result = new PathConstraintSettings(settingsVa);
+                break;
             case Point:
                 result = new PointConstraintSettings(settingsVa);
+                break;
+            case Pulley:
+                result = new PulleyConstraintSettings(settingsVa);
+                break;
+            case RackAndPinion:
+                result = new RackAndPinionConstraintSettings(settingsVa);
                 break;
             case SixDof:
                 result = new SixDofConstraintSettings(settingsVa);
                 break;
             case Slider:
                 result = new SliderConstraintSettings(settingsVa);
+                break;
+            case SwingTwist:
+                result = new SwingTwistConstraintSettings(settingsVa);
                 break;
             case Vehicle:
                 result = new VehicleConstraintSettings(settingsVa);
