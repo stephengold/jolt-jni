@@ -68,7 +68,7 @@ public interface ConstConstraintSettings extends ConstJoltPhysicsObject {
      * Return the override for the number of velocity iterations used in the
      * solver. The settings are unaffected.
      *
-     * @return the number of iterations, or 0 to use the default in
+     * @return the number of iterations, or 0 to use the default configured in
      * {@code PhysicsSettings}
      */
     int getNumVelocityStepsOverride();

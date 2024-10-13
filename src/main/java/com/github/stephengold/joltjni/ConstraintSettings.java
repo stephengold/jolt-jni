@@ -238,7 +238,7 @@ abstract public class ConstraintSettings
      * solver. The settings are unaffected. (native attribute:
      * mNumVelocityStepsOverride)
      *
-     * @return the number of iterations, or 0 to use the default in
+     * @return the number of iterations, or 0 to use the default configured in
      * {@code PhysicsSettings}
      */
     @Override
