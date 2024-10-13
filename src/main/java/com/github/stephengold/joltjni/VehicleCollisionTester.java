@@ -21,12 +21,17 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.template.Ref;
+import com.github.stephengold.joltjni.template.RefTarget;
+
 /**
  * Detect collisions between vehicle wheels and the environment.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class VehicleCollisionTester extends NonCopyable {
+abstract public class VehicleCollisionTester
+        extends NonCopyable
+        implements RefTarget {
     // *************************************************************************
     // constructors
 
@@ -35,4 +40,29 @@ abstract public class VehicleCollisionTester extends NonCopyable {
      */
     VehicleCollisionTester() {
     }
+    // *************************************************************************
+    // RefTarget methods
+
+    /**
+     * Count the active references to the native {@code VehicleCollisionTester}.
+     * The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    abstract public int getRefCount();
+
+    /**
+     * Mark the native {@code VehicleCollisionTester} as embedded.
+     */
+    @Override
+    abstract public void setEmbedded();
+
+    /**
+     * Create a counted reference to the native {@code VehicleCollisionTester}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    abstract public Ref toRef();
 }

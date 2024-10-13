@@ -22,16 +22,13 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * A {@code VehicleCollisionTester} that uses ray casts.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleCollisionTesterRay
-        extends VehicleCollisionTester
-        implements RefTarget {
+public class VehicleCollisionTesterRay extends VehicleCollisionTester {
     // *************************************************************************
     // constructors
 
@@ -86,7 +83,7 @@ public class VehicleCollisionTesterRay
         setVirtualAddress(testerVa, null);
     }
     // *************************************************************************
-    // RefTarget methods
+    // VehicleCollisionTester methods
 
     /**
      * Count the active references to the native {@code VehicleCollisionTester}.
