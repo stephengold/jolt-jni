@@ -50,7 +50,7 @@ abstract public class WheelSettings
      * Alter the location of the attachment point. (native attribute: mPosition)
      *
      * @param position the location of the attachment point (in the body's local
-     * system, not null, unaffected, default=(0,0,0))
+     * coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setPosition(Vec3Arg position) {
         long settingsVa = va();

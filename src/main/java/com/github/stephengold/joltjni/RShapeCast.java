@@ -56,8 +56,8 @@ public class RShapeCast extends JoltPhysicsObject {
         float dy = offset.getY();
         float dz = offset.getZ();
         long boundsVa = wsBounds.va();
-        long shapeCastVa = createRShapeCast(shapeVa, sx, sy, sz, comStartVa,
-                dx, dy, dz, boundsVa);
+        long shapeCastVa = createRShapeCast(
+                shapeVa, sx, sy, sz, comStartVa, dx, dy, dz, boundsVa);
         setVirtualAddress(shapeCastVa, () -> free(shapeCastVa));
     }
     // *************************************************************************
