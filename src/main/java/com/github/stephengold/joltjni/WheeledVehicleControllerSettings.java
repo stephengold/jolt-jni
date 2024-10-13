@@ -53,6 +53,62 @@ public class WheeledVehicleControllerSettings
     // new methods exposed
 
     /**
+     * Access the settings of the specified differential.
+     *
+     * @param index the index of differential to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public VehicleDifferentialSettings getDifferential(int index) {
+        long vehicleSettingsVa = va();
+        long differentialVa = getDifferential(vehicleSettingsVa, index);
+        VehicleDifferentialSettings result
+                = new VehicleDifferentialSettings(this, differentialVa);
+
+        return result;
+    }
+
+    /**
+     * Access the engine settings.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public VehicleEngineSettings getEngine() {
+        long vehicleSettingsVa = va();
+        long engineVa = getEngine(vehicleSettingsVa);
+        VehicleEngineSettings result
+                = new VehicleEngineSettings(this, engineVa);
+
+        return result;
+    }
+
+    /**
+     * Count how many differentials the vehicle will have. (native attribute:
+     * mDifferentials)
+     *
+     * @return the count (&ge;0)
+     */
+    public int getNumDifferentials() {
+        long vehicleSettingsVa = va();
+        int result = countDifferentials(vehicleSettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Access the transmission (gearbox) settings.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public VehicleTransmissionSettings getTransmission() {
+        long vehicleSettingsVa = va();
+        long transmissionVa = getTransmission(vehicleSettingsVa);
+        VehicleTransmissionSettings result
+                = new VehicleTransmissionSettings(this, transmissionVa);
+
+        return result;
+    }
+
+    /**
      * Alter the left wheel assigned to the specified differential.
      *
      * @param diffIndex the index of the differential (&ge;0)
@@ -86,7 +142,16 @@ public class WheeledVehicleControllerSettings
     // *************************************************************************
     // native private methods
 
+    native private static int countDifferentials(long vehicleSettingsVa);
+
     native private static long createDefault();
+
+    native private static long getDifferential(
+            long vehicleSettingsVa, int diffIndex);
+
+    native private static long getEngine(long vehicleSettingsVa);
+
+    native private static long getTransmission(long vehicleSettingsVa);
 
     native private static void setDifferentialsLeftWheel(
             long settingsVa, int diffIndex, int wheelIndex);
