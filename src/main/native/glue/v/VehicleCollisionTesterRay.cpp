@@ -49,6 +49,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTest
     const Vec3 up(ux, uy, uz);
     VehicleCollisionTesterRay * const pTester
             = new VehicleCollisionTesterRay(objLayer, up, maxSlope);
+    TRACE_NEW("VehicleCollisionTesterRay", pTester)
     return reinterpret_cast<jlong> (pTester);
 }
 

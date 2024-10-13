@@ -45,6 +45,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RShapeCast_createRSh
     const AABox * const pBounds = reinterpret_cast<AABox *> (boundsVa);
     RShapeCast * const pShapeCast
             = new RShapeCast(pShape, scale, *pStart, offset, *pBounds);
+    TRACE_NEW("RShapeCast", pShapeCast)
     return reinterpret_cast<jlong> (pShapeCast);
 }
 
