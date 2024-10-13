@@ -43,6 +43,30 @@ public class RShapeCast extends JoltPhysicsObject {
      * @param comStart the desired start position (not null, unaffected)
      * @param offset the desired end offset from the start (not null,
      * unaffected)
+     */
+    public RShapeCast(ConstShape shape, Vec3Arg scale, RMat44Arg comStart,
+            Vec3Arg offset) {
+        long shapeVa = shape.va();
+        float sx = scale.getX();
+        float sy = scale.getY();
+        float sz = scale.getZ();
+        long comStartVa = comStart.va();
+        float dx = offset.getX();
+        float dy = offset.getY();
+        float dz = offset.getZ();
+        long shapeCastVa = createRShapeCastNoBounds(
+                shapeVa, sx, sy, sz, comStartVa, dx, dy, dz);
+        setVirtualAddress(shapeCastVa, () -> free(shapeCastVa));
+    }
+
+    /**
+     * Instantiate a shape cast with the specified parameters.
+     *
+     * @param shape the shape to use (not null, unaffected)
+     * @param scale the scale vector to use (not null, unaffected)
+     * @param comStart the desired start position (not null, unaffected)
+     * @param offset the desired end offset from the start (not null,
+     * unaffected)
      * @param wsBounds the world-space bounds to use (not null, unaffected)
      */
     public RShapeCast(ConstShape shape, Vec3Arg scale, RMat44Arg comStart,
@@ -66,6 +90,10 @@ public class RShapeCast extends JoltPhysicsObject {
     native private static long createRShapeCast(
             long shapeVa, float sx, float sy, float sz, long comStartVa,
             float dx, float dy, float dz, long boundsVa);
+
+    native private static long createRShapeCastNoBounds(
+            long shapeVa, float sx, float sy, float sz, long comStartVa,
+            float dx, float dy, float dz);
 
     native private static void free(long shapeCastVa);
 }

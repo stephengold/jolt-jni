@@ -51,6 +51,24 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RShapeCast_createRSh
 
 /*
  * Class:     com_github_stephengold_joltjni_RShapeCast
+ * Method:    createRShapeCastNoBounds
+ * Signature: (JFFFJFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RShapeCast_createRShapeCastNoBounds
+  (JNIEnv *, jclass, jlong shapeVa, jfloat sx, jfloat sy, jfloat sz,
+  jlong comStartVa, jfloat dx, jfloat dy, jfloat dz) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    const Vec3 scale(sx, sy, sz);
+    const RMat44 * const pStart = reinterpret_cast<RMat44 *> (comStartVa);
+    const Vec3 offset(dx, dy, dz);
+    RShapeCast * const pShapeCast
+            = new RShapeCast(pShape, scale, *pStart, offset);
+    TRACE_NEW("RShapeCast", pShapeCast)
+    return reinterpret_cast<jlong> (pShapeCast);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RShapeCast
  * Method:    free
  * Signature: (J)V
  */
