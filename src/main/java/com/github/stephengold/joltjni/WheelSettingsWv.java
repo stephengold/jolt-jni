@@ -21,14 +21,12 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.template.RefTarget;
-
 /**
  * Settings used to construct a {@code WheelWv}. (native type: WheelSettingsWV)
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class WheelSettingsWv extends WheelSettings implements RefTarget {
+public class WheelSettingsWv extends WheelSettings {
     // *************************************************************************
     // constructors
 
@@ -126,7 +124,7 @@ public class WheelSettingsWv extends WheelSettings implements RefTarget {
         setMaxSteerAngle(settingsVa, angle);
     }
     // *************************************************************************
-    // RefTarget methods
+    // WheelSettings methods
 
     /**
      * Count the active references to the native {@code WheelSettingsWv}. The
