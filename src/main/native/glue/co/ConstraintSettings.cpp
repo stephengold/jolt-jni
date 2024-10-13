@@ -52,6 +52,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_ConstraintSettings
+ * Method:    getDrawConstraintSize
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_getDrawConstraintSize
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const ConstraintSettings * const pSettings
+            = reinterpret_cast<ConstraintSettings *> (settingsVa);
+    const float result = pSettings->mDrawConstraintSize;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConstraintSettings
  * Method:    getEnabled
  * Signature: (J)Z
  */
@@ -125,6 +138,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_se
     ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
     pSettings->mConstraintPriority = setting;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConstraintSettings
+ * Method:    setDrawConstraintSize
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_setDrawConstraintSize
+  (JNIEnv *, jclass, jlong settingsVa, jfloat size) {
+    ConstraintSettings * const pSettings
+            = reinterpret_cast<ConstraintSettings *> (settingsVa);
+    pSettings->mDrawConstraintSize = size;
 }
 
 /*

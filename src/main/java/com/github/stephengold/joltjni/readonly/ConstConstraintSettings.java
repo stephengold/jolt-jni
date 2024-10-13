@@ -40,6 +40,14 @@ public interface ConstConstraintSettings extends ConstJoltPhysicsObject {
     int getConstraintPriority();
 
     /**
+     * Return the size of the constraint in debug renders. The settings are
+     * unaffected.
+     *
+     * @return the size
+     */
+    float getDrawConstraintSize();
+
+    /**
      * Test whether the constraint will be enabled initially. The settings are
      * unaffected.
      *

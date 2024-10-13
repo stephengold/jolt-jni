@@ -115,6 +115,17 @@ abstract public class ConstraintSettings
     }
 
     /**
+     * Alter the size of constraint in debug renders. (native attribute:
+     * mDrawConstraintSize)
+     *
+     * @param size the desired size (default=1)
+     */
+    public void setDrawConstraintSize(float size) {
+        long settingsVa = va();
+        setDrawConstraintSize(settingsVa, size);
+    }
+
+    /**
      * Initially enable or disable the constraint. (native attribute: mEnabled)
      *
      * @param setting true to enable or false to disable (default=true)
@@ -174,6 +185,20 @@ abstract public class ConstraintSettings
     public int getConstraintPriority() {
         long settingsVa = va();
         int result = getConstraintPriority(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the size of the constraint in debug renders. The settings are
+     * unaffected. (native attribute: mDrawConstraintSize)
+     *
+     * @return the size
+     */
+    @Override
+    public float getDrawConstraintSize() {
+        long settingsVa = va();
+        float result = getDrawConstraintSize(settingsVa);
 
         return result;
     }
@@ -267,6 +292,8 @@ abstract public class ConstraintSettings
 
     native static int getConstraintPriority(long settingsVa);
 
+    native static float getDrawConstraintSize(long settingsVa);
+
     native static boolean getEnabled(long settingsVa);
 
     native static int getNumPositionStepsOverride(long settingsVa);
@@ -279,6 +306,9 @@ abstract public class ConstraintSettings
 
     native private static void setConstraintPriority(
             long settingsVa, int level);
+
+    native private static void setDrawConstraintSize(
+            long settingsVa, float size);
 
     native private static void setEmbedded(long settingsVa);
 
