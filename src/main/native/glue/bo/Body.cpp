@@ -282,6 +282,31 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getBodyCreation
     return reinterpret_cast<jlong> (pResult);
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getBodyType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Body_getBodyType
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    EBodyType bodyType = pBody->GetBodyType();
+    return (jint) bodyType;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getBroadPhaseLayer
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Body_getBroadPhaseLayer
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    BroadPhaseLayer layer = pBody->GetBroadPhaseLayer();
+    jint result = layer.GetValue();
+    return result;
+}
+
 inline static const RVec3 getCenterOfMassPosition(jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     const RVec3 result = pBody->GetCenterOfMassPosition();
@@ -322,6 +347,20 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMa
     const RVec3 rvec3 = getCenterOfMassPosition(bodyVa);
     const Real result = rvec3.GetZ();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getCenterOfMassTransform
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMassTransform
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const RMat44 transform = pBody->GetCenterOfMassTransform();
+    RMat44 * const pResult = new RMat44(transform);
+    TRACE_NEW("RMat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*

@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBody;
@@ -499,6 +500,33 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Return the body type (rigid or soft). The body is unaffected.
+     *
+     * @return an enum value (not null)
+     */
+    @Override
+    public EBodyType getBodyType() {
+        long bodyVa = va();
+        int ordinal = getBodyType(bodyVa);
+        EBodyType result = EBodyType.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the broadphase layer. The body is unaffected.
+     *
+     * @return the layer ID
+     */
+    @Override
+    public int getBroadPhaseLayer() {
+        long bodyVa = va();
+        int result = getBroadPhaseLayer(bodyVa);
+
+        return result;
+    }
+
+    /**
      * Copy the location of the body's center of mass (which might not coincide
      * with its origin). The body is unaffected.
      *
@@ -519,6 +547,21 @@ public class Body extends NonCopyable implements ConstBody {
         assert Double.isFinite(zz) : "zz = " + zz;
 
         RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Copy the coordinate transform of the body's center of mass. The body is
+     * unaffected.
+     *
+     * @return a new transform matrix (relative to system coordinates)
+     */
+    @Override
+    public RMat44 getCenterOfMassTransform() {
+        long bodyVa = va();
+        long matrixVa = getCenterOfMassTransform(bodyVa);
+        RMat44 result = new RMat44(matrixVa, true);
 
         return result;
     }
@@ -844,11 +887,17 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static long getBodyCreationSettings(long bodyVa);
 
+    native private static int getBodyType(long bodyVa);
+
+    native private static int getBroadPhaseLayer(long bodyVa);
+
     native private static double getCenterOfMassPositionX(long bodyVa);
 
     native private static double getCenterOfMassPositionY(long bodyVa);
 
     native private static double getCenterOfMassPositionZ(long bodyVa);
+
+    native private static long getCenterOfMassTransform(long bodyVa);
 
     native private static boolean getEnhancedInternalEdgeRemoval(long bodyVa);
 

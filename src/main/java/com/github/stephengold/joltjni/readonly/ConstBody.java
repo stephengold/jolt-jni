@@ -23,8 +23,10 @@ package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 
 /**
@@ -81,6 +83,20 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     BodyCreationSettings getBodyCreationSettings();
 
     /**
+     * Return the body type (rigid or soft). The body is unaffected.
+     *
+     * @return an enum value (not null)
+     */
+    EBodyType getBodyType();
+
+    /**
+     * Return the broadphase layer. The body is unaffected.
+     *
+     * @return the layer ID
+     */
+    int getBroadPhaseLayer();
+
+    /**
      * Copy the location of the body's center of mass (which might not coincide
      * with its origin). The body is unaffected.
      *
@@ -88,6 +104,14 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * finite)
      */
     RVec3 getCenterOfMassPosition();
+
+    /**
+     * Copy the coordinate transform of the body's center of mass. The body is
+     * unaffected.
+     *
+     * @return a new transform matrix (relative to system coordinates)
+     */
+    RMat44 getCenterOfMassTransform();
 
     /**
      * Test whether extra effort should be made to remove ghost contacts. The
