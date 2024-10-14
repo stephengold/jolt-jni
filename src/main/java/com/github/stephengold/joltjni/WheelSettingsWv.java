@@ -166,24 +166,24 @@ public class WheelSettingsWv extends WheelSettings {
     // *************************************************************************
     // native private methods
 
-    native static private long createDefault();
+    native private static long createDefault();
 
-    native static private float getMaxBrakeTorque(long settingsVa);
+    native private static float getMaxBrakeTorque(long settingsVa);
 
-    native static private float getMaxHandBrakeTorque(long settingsVa);
+    native private static float getMaxHandBrakeTorque(long settingsVa);
 
-    native static private float getMaxSteerAngle(long settingsVa);
+    native private static float getMaxSteerAngle(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
 
     native private static void setEmbedded(long settingsVa);
 
-    native static private void setMaxBrakeTorque(long settingsVa, float torque);
+    native private static void setMaxBrakeTorque(long settingsVa, float torque);
 
-    native static private void setMaxHandBrakeTorque(
+    native private static void setMaxHandBrakeTorque(
             long settingsVa, float torque);
 
-    native static private void setMaxSteerAngle(long settingsVa, float angle);
+    native private static void setMaxSteerAngle(long settingsVa, float angle);
 
     native private static long toRef(long settingsVa);
 }
