@@ -28,14 +28,18 @@ package com.github.stephengold.joltjni;
  */
 public class CollisionGroup extends JoltPhysicsObject {
     // *************************************************************************
-    // fields
+    // constructors
 
     /**
-     * protect the {@code GroupFilter} from garbage collection
+     * Instantiate a group with the specified native object assigned but not
+     * owned.
+     *
+     * @param groupVa the virtual address of the native object to assign (not
+     * zero)
      */
-    private GroupFilter filter;
-    // *************************************************************************
-    // constructors
+    CollisionGroup(long groupVa) {
+        setVirtualAddress(groupVa, null);
+    }
 
     /**
      * Instantiate a group with the specified filter and IDs.
@@ -45,7 +49,6 @@ public class CollisionGroup extends JoltPhysicsObject {
      * @param subGroupId the ID of the subgroup to which the body belongs
      */
     public CollisionGroup(GroupFilter filter, int groupId, int subGroupId) {
-        this.filter = filter;
         long filterVa = filter.va();
         long groupVa = createGroup(filterVa, groupId, subGroupId);
         setVirtualAddress(groupVa, () -> free(groupVa));
@@ -54,12 +57,16 @@ public class CollisionGroup extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Access the group filter. The group is unaffected.
+     * Access the group filter.
      *
-     * @return filter the pre-existing filter (not null)
+     * @return a new JVM object with the pre-existing native object assigned
      */
     public GroupFilter getGroupFilter() {
-        return filter;
+        long groupVa = va();
+        long filterVa = getGroupFilter(groupVa);
+        GroupFilter result = new GroupFilter(filterVa);
+
+        return result;
     }
 
     /**
@@ -92,7 +99,6 @@ public class CollisionGroup extends JoltPhysicsObject {
      * @param filter the desired filter (not null, alias created)
      */
     public void setGroupFilter(GroupFilter filter) {
-        this.filter = filter;
         long groupVa = va();
         long filterVa = filter.va();
         setGroupFilter(groupVa, filterVa);
@@ -124,6 +130,8 @@ public class CollisionGroup extends JoltPhysicsObject {
             long filterVa, int groupId, int subGroupId);
 
     native private static void free(long groupVa);
+
+    native private static long getGroupFilter(long groupVa);
 
     native private static int getGroupId(long groupVa);
 

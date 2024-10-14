@@ -62,6 +62,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_free
 
 /*
  * Class:     com_github_stephengold_joltjni_CollisionGroup
+ * Method:    getGroupFilter
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_getGroupFilter
+  (JNIEnv *, jclass, jlong groupVa) {
+    CollisionGroup * const pGroup
+            = reinterpret_cast<CollisionGroup *> (groupVa);
+    const GroupFilter * const pResult = pGroup->GetGroupFilter();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CollisionGroup
  * Method:    getGroupId
  * Signature: (J)I
  */
