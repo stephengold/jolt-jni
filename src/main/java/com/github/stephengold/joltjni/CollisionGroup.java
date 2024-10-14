@@ -113,7 +113,7 @@ public class CollisionGroup extends JoltPhysicsObject {
      *
      * @param id the desired ID
      */
-    public void setSubGroupID(int id) {
+    public void setSubGroupId(int id) {
         long groupVa = va();
         setSubGroupId(groupVa, id);
     }
