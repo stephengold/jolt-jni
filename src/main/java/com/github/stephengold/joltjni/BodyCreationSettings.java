@@ -148,6 +148,19 @@ public class BodyCreationSettings
     // new methods exposed
 
     /**
+     * Access the collision group.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public CollisionGroup getCollisionGroup() {
+        long bodySettingsVa = va();
+        long groupVa = getCollisionGroup(bodySettingsVa);
+        CollisionGroup result = new CollisionGroup(this, groupVa);
+
+        return result;
+    }
+
+    /**
      * Alter whether the created body will be allowed to fall asleep. (native
      * attribute: mAllowSleeping)
      *
@@ -785,6 +798,8 @@ public class BodyCreationSettings
     native private static float getAngularVelocityY(long bodySettingsVa);
 
     native private static float getAngularVelocityZ(long bodySettingsVa);
+
+    native private static long getCollisionGroup(long bodySettingsVa);
 
     native private static boolean getEnhancedInternalEdgeRemoval(
             long bodySettingsVa);
