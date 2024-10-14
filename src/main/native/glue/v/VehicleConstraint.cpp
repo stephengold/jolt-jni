@@ -122,6 +122,70 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_onS
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getWorldUpX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getWorldUpX
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const float result = pConstraint->GetWorldUp().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getWorldUpY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getWorldUpY
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const float result = pConstraint->GetWorldUp().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getWorldUpZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getWorldUpZ
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const float result = pConstraint->GetWorldUp().GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    overrideGravity
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_overrideGravity
+  (JNIEnv *, jclass, jlong constraintVa, jfloat ax, jfloat ay, jfloat az) {
+    VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const Vec3 acceleration(ax, ay, az);
+    pConstraint->OverrideGravity(acceleration);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    resetGravityOverride
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_resetGravityOverride
+  (JNIEnv *, jclass, jlong constraintVa) {
+    VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    pConstraint->ResetGravityOverride();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
  * Method:    setNumStepsBetweenCollisionTestActive
  * Signature: (JI)V
  */

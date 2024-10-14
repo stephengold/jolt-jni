@@ -144,6 +144,44 @@ public class VehicleConstraint
 
     /**
      * Return the number of simulation steps between wheel-collision tests when
+     * Copy the
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getWorldUp() {
+        long constraintVa = va();
+        float dx = getWorldUpX(constraintVa);
+        float dy = getWorldUpY(constraintVa);
+        float dz = getWorldUpZ(constraintVa);
+        Vec3 result = new Vec3(dx, dy, dz);
+
+        return result;
+    }
+
+    /**
+     * Override the vehicle's gravity vector.
+     *
+     * @param acceleration the desired acceleration vector (not null,
+     * unaffected)
+     */
+    public void overrideGravity(Vec3Arg acceleration) {
+        long constraintVa = va();
+        float ax = acceleration.getX();
+        float ay = acceleration.getY();
+        float az = acceleration.getZ();
+        overrideGravity(constraintVa, ax, ay, az);
+    }
+
+    /**
+     * Remove the gravity override, if any.
+     */
+    public void resetGravityOverride() {
+        long constraintVa = va();
+        resetGravityOverride(constraintVa);
+    }
+
+    /**
+     * Return the number of simulation steps between wheel-collision tests when
      * the vehicle is active.
      *
      * @param numSteps the desired number of steps (0=never test, 1=test every
@@ -208,6 +246,17 @@ public class VehicleConstraint
             float ux, float uy, float uz);
 
     native private static void onStep(long constraintVa, long contextVa);
+
+    native private static float getWorldUpX(long constraintVa);
+
+    native private static float getWorldUpY(long constraintVa);
+
+    native private static float getWorldUpZ(long constraintVa);
+
+    native private static void overrideGravity(
+            long constraintVa, float ax, float ay, float az);
+
+    native private static void resetGravityOverride(long constraintVa);
 
     native private static void setNumStepsBetweenCollisionTestActive(
             long constraintVa, int numSteps);
