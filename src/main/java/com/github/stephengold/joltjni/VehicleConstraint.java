@@ -118,7 +118,8 @@ public class VehicleConstraint
     }
 
     /**
-     * Copy the world transform of the specified wheel.
+     * Copy the world transform of the specified wheel. The constraint is
+     * unaffected.
      *
      * @param wheelIndex the index of the wheel to query (&ge;0)
      * @param right the wheel's axis of rotation (a unit vector in the wheel's
@@ -143,10 +144,9 @@ public class VehicleConstraint
     }
 
     /**
-     * Return the number of simulation steps between wheel-collision tests when
-     * Copy the
+     * Copy the "up" direction based on gravity. The constraint is unaffected.
      *
-     * @return a new direction vector
+     * @return a new direction vector (in system coordinates)
      */
     public Vec3 getWorldUp() {
         long constraintVa = va();
@@ -181,7 +181,7 @@ public class VehicleConstraint
     }
 
     /**
-     * Return the number of simulation steps between wheel-collision tests when
+     * Alter the number of simulation steps between wheel-collision tests when
      * the vehicle is active.
      *
      * @param numSteps the desired number of steps (0=never test, 1=test every
@@ -193,7 +193,7 @@ public class VehicleConstraint
     }
 
     /**
-     * Return the number of simulation steps between wheel-collision tests when
+     * Alter the number of simulation steps between wheel-collision tests when
      * the vehicle is inactive.
      *
      * @param numSteps the desired number of steps (0=never, 1=every step,

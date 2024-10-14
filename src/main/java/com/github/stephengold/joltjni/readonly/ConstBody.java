@@ -73,15 +73,16 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     Vec3 getAngularVelocity();
 
     /**
-     * Convert the body to a {@code BodyCreationSettings} object.
+     * Convert the body to a {@code BodyCreationSettings} object. The body is
+     * unaffected.
      *
      * @return a new object
      */
     BodyCreationSettings getBodyCreationSettings();
 
     /**
-     * Return the location of the body's center of mass (which might not
-     * coincide with its origin). The body is unaffected.
+     * Copy the location of the body's center of mass (which might not coincide
+     * with its origin). The body is unaffected.
      *
      * @return a new location vector (in system coordinates, all components
      * finite)
@@ -89,7 +90,8 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     RVec3 getCenterOfMassPosition();
 
     /**
-     * Test whether extra effort should be made to remove ghost contacts.
+     * Test whether extra effort should be made to remove ghost contacts. The
+     * body is unaffected.
      *
      * @return {@code true} for extra effort, otherwise {@code false}
      */
@@ -103,7 +105,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     float getFriction();
 
     /**
-     * Access the body's ID for use with {@code BodyInterface}. The body is
+     * Copy the body's ID for use with {@code BodyInterface}. The body is
      * unaffected.
      *
      * @return a new immutable JVM object with the pre-existing native object

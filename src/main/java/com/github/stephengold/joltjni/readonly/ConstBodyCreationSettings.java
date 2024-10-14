@@ -63,7 +63,8 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     Vec3 getAngularVelocity();
 
     /**
-     * Test whether extra effort should be made to remove ghost contacts.
+     * Test whether extra effort should be made to remove ghost contacts. The
+     * settings are unaffected.
      *
      * @return {@code true} for extra effort, otherwise {@code false}
      */

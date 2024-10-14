@@ -64,7 +64,8 @@ final public class WheeledVehicleControllerRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code Shape}.
+     * Create a counted reference to the native
+     * {@code WheeledVehicleController}.
      *
      * @return a new JVM object with a new native object assigned
      */

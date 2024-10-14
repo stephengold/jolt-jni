@@ -35,7 +35,8 @@ abstract public class JoltPhysicsObject
     // fields
 
     /**
-     * manage references to (native) Jolt Physics objects, or null if none
+     * manage references to (native) Jolt Physics objects, or {@code null} if
+     * none
      */
     private static Cleaner cleaner;
     /**
@@ -44,7 +45,7 @@ abstract public class JoltPhysicsObject
     private long virtualAddress;
     /**
      * freeing action if the JVM object owns (is responsible for freeing) its
-     * assigned native object, otherwise null
+     * assigned native object, otherwise {@code null}
      */
     private Runnable freeingAction;
     // *************************************************************************

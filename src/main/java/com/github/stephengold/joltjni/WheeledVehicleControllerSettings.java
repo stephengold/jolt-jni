@@ -53,7 +53,7 @@ public class WheeledVehicleControllerSettings
     // new methods exposed
 
     /**
-     * Access the settings of the specified differential. (native field:
+     * Access the settings for the specified differential. (native field:
      * mDifferentials)
      *
      * @param index the index of differential to access (&ge;0)

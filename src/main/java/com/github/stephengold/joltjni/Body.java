@@ -483,7 +483,8 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Convert the body to a {@code BodyCreationSettings} object.
+     * Convert the body to a {@code BodyCreationSettings} object. The body is
+     * unaffected.
      *
      * @return a new object
      */
@@ -498,8 +499,8 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Return the location of the body's center of mass (which might not
-     * coincide with its origin). The body is unaffected.
+     * Copy the location of the body's center of mass (which might not coincide
+     * with its origin). The body is unaffected.
      *
      * @return a new location vector (in system coordinates, all components
      * finite)
@@ -523,7 +524,8 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Test whether extra effort should be made to remove ghost contacts.
+     * Test whether extra effort should be made to remove ghost contacts. The
+     * body is unaffected.
      *
      * @return {@code true} for extra effort, otherwise {@code false}
      */
