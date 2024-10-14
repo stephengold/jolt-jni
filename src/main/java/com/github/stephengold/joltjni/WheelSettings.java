@@ -235,7 +235,7 @@ abstract public class WheelSettings
      * Copy the location of the attachment point. The settings are unaffected.
      * (native attribute: mPosition)
      *
-     * @return a new location vector (in the body's local system)
+     * @return a new location vector (in the body's local coordinates)
      */
     @Override
     public Vec3 getPosition() {

@@ -53,7 +53,8 @@ public class WheeledVehicleControllerSettings
     // new methods exposed
 
     /**
-     * Access the settings of the specified differential.
+     * Access the settings of the specified differential. (native field:
+     * mDifferentials)
      *
      * @param index the index of differential to access (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
@@ -68,7 +69,7 @@ public class WheeledVehicleControllerSettings
     }
 
     /**
-     * Access the engine settings.
+     * Access the engine settings. (native field: mEngine)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -95,7 +96,8 @@ public class WheeledVehicleControllerSettings
     }
 
     /**
-     * Access the transmission (gearbox) settings.
+     * Access the transmission (gearbox) settings. (native attribute:
+     * mTransmission)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
