@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.Vec3;
 
 /**
  * Read-only access to an {@code RMat44}. (native type: const RMat44)
@@ -48,4 +49,14 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * @return a new vector
      */
     RVec3 getTranslation();
+
+    /**
+     * Multiply the 3x4 matrix by the specified column vector, with the 4th
+     * component of the right factor implied to be one. The matrix is
+     * unaffected.
+     *
+     * @param arg the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    RVec3 multiply3x4(Vec3Arg arg);
 }

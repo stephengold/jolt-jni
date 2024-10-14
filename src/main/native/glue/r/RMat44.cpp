@@ -191,6 +191,25 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getTranslat
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    multiply3x4
+ * Signature: (JFFF[D)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x4
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloat x, jfloat y, jfloat z,
+  jdoubleArray array) {
+    const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    jboolean isCopy;
+    jdouble * const pArray = pEnv->GetDoubleArrayElements(array, &isCopy);
+    const Vec3 v(x, y, z);
+    const Vec3 result = (*pMatrix) * v;
+    pArray[0] = result.GetX();
+    pArray[1] = result.GetY();
+    pArray[2] = result.GetZ();
+    pEnv->ReleaseDoubleArrayElements(array, pArray, 0);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    setElement
  * Signature: (JIID)V
  */

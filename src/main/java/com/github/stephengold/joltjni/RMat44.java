@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec4Arg;
 
 /**
@@ -201,6 +202,27 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
         return result;
     }
+
+    /**
+     * Multiply the 3x4 matrix by the specified column vector, with the 4th
+     * component of the right factor implied to be one. The matrix is
+     * unaffected.
+     *
+     * @param arg the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    @Override
+    public RVec3 multiply3x4(Vec3Arg arg) {
+        long matrixVa = va();
+        float x = arg.getX();
+        float y = arg.getY();
+        float z = arg.getZ();
+        double[] storeDoubles = new double[3];
+        multiply3x4(matrixVa, x, y, z, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
+
+        return result;
+    }
     // *************************************************************************
     // Object methods
 
@@ -264,6 +286,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     native private static double getTranslationY(long matrixVa);
 
     native private static double getTranslationZ(long matrixVa);
+
+    native private static void multiply3x4(
+            long matrixVa, float x, float y, float z, double[] storeDoubles);
 
     native private static void setElement(
             long matrixVa, int row, int column, double value);
