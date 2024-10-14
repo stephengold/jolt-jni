@@ -72,6 +72,18 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Instantiate a vector from the specified array.
+     *
+     * @param array the desired component values (not null, length&ge;3,
+     * unaffected)
+     */
+    public RVec3(double[] array) {
+        this.xx = array[0];
+        this.yy = array[1];
+        this.zz = array[2];
+    }
+
+    /**
      * Instantiate from a single-precision vector.
      *
      * @param vec the vector to copy (not null, unaffected)
