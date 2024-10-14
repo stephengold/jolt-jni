@@ -733,19 +733,6 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Test whether the body is kinematic. It is unaffected.
-     *
-     * @return true if kinematic, otherwise false
-     */
-    @Override
-    public boolean isKinematic() {
-        long bodyVa = va();
-        boolean result = isKinematic(bodyVa);
-
-        return result;
-    }
-
-    /**
      * Test whether the body has been added to its {@code PhysicsSystem}. The
      * body is unaffected.
      *
@@ -755,6 +742,19 @@ public class Body extends NonCopyable implements ConstBody {
     public boolean isInBroadPhase() {
         long bodyVa = va();
         boolean result = isInBroadPhase(bodyVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is kinematic. It is unaffected.
+     *
+     * @return true if kinematic, otherwise false
+     */
+    @Override
+    public boolean isKinematic() {
+        long bodyVa = va();
+        boolean result = isKinematic(bodyVa);
 
         return result;
     }
