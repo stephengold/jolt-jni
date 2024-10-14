@@ -109,28 +109,6 @@ public class WheeledVehicleControllerSettings
     }
 
     /**
-     * Alter the left wheel assigned to the specified differential.
-     *
-     * @param diffIndex the index of the differential (&ge;0)
-     * @param wheelIndex the index of the wheel (&ge;0)
-     */
-    public void setDifferentialsLeftWheel(int diffIndex, int wheelIndex) {
-        long settingsVa = va();
-        setDifferentialsLeftWheel(settingsVa, diffIndex, wheelIndex);
-    }
-
-    /**
-     * Alter the right wheel assigned to the specified differential.
-     *
-     * @param diffIndex the index of the differential (&ge;0)
-     * @param wheelIndex the index of the wheel (&ge;0)
-     */
-    public void setDifferentialsRightWheel(int diffIndex, int wheelIndex) {
-        long settingsVa = va();
-        setDifferentialsLRightWheel(settingsVa, diffIndex, wheelIndex);
-    }
-
-    /**
      * Alter the number of differentials. (native attribute: mDifferentials)
      *
      * @param count the desired number (&ge;0)
@@ -152,12 +130,6 @@ public class WheeledVehicleControllerSettings
     native private static long getEngine(long vehicleSettingsVa);
 
     native private static long getTransmission(long vehicleSettingsVa);
-
-    native private static void setDifferentialsLeftWheel(
-            long settingsVa, int diffIndex, int wheelIndex);
-
-    native private static void setDifferentialsLRightWheel(
-            long settingsVa, int diffIndex, int wheelIndex);
 
     native private static void setNumDifferentials(long settingsVa, int count);
 }

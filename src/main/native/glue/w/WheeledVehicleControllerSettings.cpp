@@ -99,30 +99,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContro
 
 /*
  * Class:     com_github_stephengold_joltjni_WheeledVehicleControllerSettings
- * Method:    setDifferentialsLeftWheel
- * Signature: (JII)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_setDifferentialsLeftWheel
-  (JNIEnv *, jclass, jlong settingsVa, jint diffIndex, jint wheelIndex) {
-    WheeledVehicleControllerSettings * const pSettings
-            = reinterpret_cast<WheeledVehicleControllerSettings *> (settingsVa);
-    pSettings->mDifferentials[diffIndex].mLeftWheel = wheelIndex;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheeledVehicleControllerSettings
- * Method:    setDifferentialsLRightWheel
- * Signature: (JII)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_setDifferentialsLRightWheel
-  (JNIEnv *, jclass, jlong settingsVa, jint diffIndex, jint wheelIndex) {
-    WheeledVehicleControllerSettings * const pSettings
-            = reinterpret_cast<WheeledVehicleControllerSettings *> (settingsVa);
-    pSettings->mDifferentials[diffIndex].mRightWheel = wheelIndex;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheeledVehicleControllerSettings
  * Method:    setNumDifferentials
  * Signature: (JI)V
  */

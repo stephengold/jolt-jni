@@ -98,8 +98,8 @@ void Initialize()
 
 	// Differential
 	controller.setNumDifferentials(1);
-	controller.setDifferentialsLeftWheel(0 , 0);
-	controller.setDifferentialsRightWheel(0 , 1);
+	controller.getDifferential(0).setLeftWheel ( 0);
+	controller.getDifferential(0).setRightWheel ( 1);
 
 	for (int x = 0; x < 15; ++x)
 		for (int y = 0; y < 15; ++y)
