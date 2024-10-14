@@ -126,6 +126,17 @@ public class VehicleConstraintSettings extends ConstraintSettings {
     }
 
     /**
+     * Count the wheels. The settings are unaffected. (native attribute:
+     * mWheels)
+     *
+     * @return the count (&ge;0)
+     */
+    public int getNumWheels() {
+        int result = wheelRefs.size();
+        return result;
+    }
+
+    /**
      * Enumerate the wheel settings. The settings are unaffected. (native
      * attribute: mWheels)
      *
