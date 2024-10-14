@@ -22,7 +22,6 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.RVec3;
-import com.github.stephengold.joltjni.Vec3;
 
 /**
  * Read-only access to an {@code RMat44}. (native type: const RMat44)
