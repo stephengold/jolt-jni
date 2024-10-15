@@ -41,6 +41,17 @@ abstract public class Array<T extends JoltPhysicsObject>
      */
     protected Array() {
     }
+
+    /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    protected Array(JoltPhysicsObject container, long virtualAddress) {
+        super(container, virtualAddress);
+    }
     // *************************************************************************
     // new methods exposed
 
