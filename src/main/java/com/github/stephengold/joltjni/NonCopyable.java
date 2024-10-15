@@ -31,9 +31,20 @@ abstract public class NonCopyable extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate with no native object assigned.
+     * Instantiate with no containing object and no native object assigned.
      */
     NonCopyable() {
+    }
+
+    /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    NonCopyable(JoltPhysicsObject container, long virtualAddress) {
+        super(container, virtualAddress);
     }
 
     /**
