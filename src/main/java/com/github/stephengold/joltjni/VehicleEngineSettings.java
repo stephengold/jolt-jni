@@ -28,28 +28,17 @@ package com.github.stephengold.joltjni;
  */
 public class VehicleEngineSettings extends JoltPhysicsObject {
     // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code WheeledVehicleControllerSettings}
-     */
-    final private WheeledVehicleControllerSettings vehicle;
-    // *************************************************************************
     // constructors
 
     /**
-     * Instantiate a settings with the specified native object assigned but not
-     * owned.
+     * Instantiate with the specified container and native object.
      *
-     * @param vehicle the underlying {@code WheeledVehicleControllerSettings}
+     * @param container the containing object, or {@code null} if none
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
-    VehicleEngineSettings(
-            WheeledVehicleControllerSettings vehicle, long settingsVa) {
-        this.vehicle = vehicle;
-        setVirtualAddress(settingsVa, null);
+    VehicleEngineSettings(JoltPhysicsObject container, long settingsVa) {
+        super(container, settingsVa);
     }
     // *************************************************************************
     // new methods exposed
