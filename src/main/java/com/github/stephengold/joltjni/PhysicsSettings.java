@@ -155,15 +155,6 @@ public class PhysicsSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Access the underlying {@code PhysicsSystem}.
-     *
-     * @return the pre-existing instance
-     */
-    public PhysicsSystem getSystem() {
-        return system;
-    }
-
-    /**
      * Return the point-motion threshold, below which objects can fall asleep.
      * The settings are unaffected. (native attribute:
      * mPointVelocitySleepThreshold)
