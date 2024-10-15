@@ -31,27 +31,18 @@ import com.github.stephengold.joltjni.template.Array;
  */
 public class BodyVector extends Array<Body> {
     // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code BodyManager}
-     */
-    final private BodyManager manager;
-    // *************************************************************************
     // constructors
 
     /**
      * Instantiate a vector with the specified native object assigned but not
      * owned.
      *
-     * @param manager the underlying {@code BodyManager} (not null)
+     * @param manager the containing object, or {@code null} if none
      * @param vectorVa the virtual address of the native object to assign (not
      * zero)
      */
     BodyVector(BodyManager manager, long vectorVa) {
-        this.manager = manager;
-        setVirtualAddress(vectorVa, null);
+        super(manager, vectorVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -62,7 +53,7 @@ public class BodyVector extends Array<Body> {
      * @return the pre-existing instance (not null)
      */
     public BodyManager getManager() {
-        return manager;
+        return (BodyManager) getContainingObject();
     }
     // *************************************************************************
     // Array<Body> methods
