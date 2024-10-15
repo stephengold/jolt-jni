@@ -201,7 +201,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x4
     jboolean isCopy;
     jdouble * const pArray = pEnv->GetDoubleArrayElements(array, &isCopy);
     const Vec3 v(x, y, z);
-    const Vec3 result = (*pMatrix) * v;
+    const RVec3 result = (*pMatrix) * v;
     pArray[0] = result.GetX();
     pArray[1] = result.GetY();
     pArray[2] = result.GetZ();
