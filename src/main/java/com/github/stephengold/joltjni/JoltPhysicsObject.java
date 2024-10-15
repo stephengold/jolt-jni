@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
+import com.github.stephengold.joltjni.template.RefTarget;
 import java.lang.ref.Cleaner;
 
 /**
@@ -40,6 +41,11 @@ abstract public class JoltPhysicsObject
      */
     private static Cleaner cleaner;
     /**
+     * containing object or a counted reference thereto (to prevent premature
+     * garbage collection), or {@code null} if none
+     */
+    final private JoltPhysicsObject containingObject;
+    /**
      * virtual address of the assigned native object, or 0 for none
      */
     private long virtualAddress;
@@ -52,14 +58,34 @@ abstract public class JoltPhysicsObject
     // constructors
 
     /**
-     * Instantiate with no native object assigned.
+     * Instantiate with no containing object and no native object assigned.
      */
     protected JoltPhysicsObject() {
         this.virtualAddress = 0L;
+        this.containingObject = null;
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    JoltPhysicsObject(JoltPhysicsObject container, long virtualAddress) {
+        assert virtualAddress != 0L;
+        this.virtualAddress = virtualAddress;
+
+        if (container instanceof RefTarget) {
+            container = ((RefTarget) container).toRef();
+        }
+        assert container == null || container.ownsNativeObject() : container;
+        this.containingObject = container;
+    }
+
+    /**
+     * Instantiate with no containing object and the specified native object
+     * assigned but not owned.
      *
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
@@ -67,6 +93,8 @@ abstract public class JoltPhysicsObject
     JoltPhysicsObject(long virtualAddress) {
         assert virtualAddress != 0L;
         this.virtualAddress = virtualAddress;
+
+        this.containingObject = null;
     }
     // *************************************************************************
     // new methods exposed
@@ -82,6 +110,15 @@ abstract public class JoltPhysicsObject
     // new protected methods
 
     /**
+     * Access the containing object, if any.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    final protected JoltPhysicsObject getContainingObject() {
+        return containingObject;
+    }
+
+    /**
      * Assign a native object, assuming there's none already assigned.
      *
      * @param virtualAddress the virtual address of the native object to assign
@@ -93,11 +130,12 @@ abstract public class JoltPhysicsObject
             long virtualAddress, Runnable action) {
         assert virtualAddress != 0L : "invalid virtual address";
         assert !hasAssignedNativeObject() : "native object already assigned";
-        assert this.freeingAction == null : this.freeingAction;
+        assert freeingAction == null : freeingAction;
 
         this.virtualAddress = virtualAddress;
         this.freeingAction = action;
         if (action != null && cleaner != null) {
+            assert containingObject == null : containingObject;
             cleaner.register(this, action);
         }
     }
