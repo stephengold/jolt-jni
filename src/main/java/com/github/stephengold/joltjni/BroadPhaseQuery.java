@@ -31,33 +31,23 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  */
 public class BroadPhaseQuery extends NonCopyable {
     // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code PhysicsSystem}, if any
-     */
-    final private PhysicsSystem system;
-    // *************************************************************************
     // constructors
 
     /**
      * Instantiate with no native object assigned.
      */
     BroadPhaseQuery() {
-        this.system = null;
     }
 
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param system the underlying {@code PhysicsSystem} (not null)
+     * @param system the containing object, or {@code null} if none
      * @param queryVa the virtual address of the native object to assign (not
      * zero)
      */
     BroadPhaseQuery(PhysicsSystem system, long queryVa) {
-        this.system = system;
-        setVirtualAddress(queryVa, null);
+        super(system, queryVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -198,7 +188,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @return the pre-existing instance, or null if none
      */
     public PhysicsSystem getSystem() {
-        return system;
+        return (PhysicsSystem) getContainingObject();
     }
     // *************************************************************************
     // native private methods
