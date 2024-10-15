@@ -251,7 +251,8 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Return a bounding box that contains all the bodies in the system.
+     * Return a bounding box that contains all the bodies in the system. The
+     * physics system is unaffected.
      *
      * @return a new box
      */
@@ -319,7 +320,8 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Enumerate the constraints in the system.
+     * Enumerate the constraints in the system. The physics system is
+     * unaffected.
      *
      * @return a new object
      */

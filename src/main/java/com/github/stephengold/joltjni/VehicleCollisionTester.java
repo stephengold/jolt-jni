@@ -45,7 +45,7 @@ abstract public class VehicleCollisionTester
 
     /**
      * Count the active references to the native {@code VehicleCollisionTester}.
-     * The settings are unaffected.
+     * The tester is unaffected.
      *
      * @return the count (&ge;0)
      */

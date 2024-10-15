@@ -99,7 +99,7 @@ public class GroupFilterTable extends GroupFilter {
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static long createFilter(int numSubGroups);
 

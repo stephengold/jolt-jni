@@ -41,7 +41,7 @@ public class SpecifiedObjectLayerFilter extends ObjectLayerFilter {
         setVirtualAddress(filterVa, true);
     }
     // *************************************************************************
-    // constructors
+    // native private methods
 
     native private static long createSpecifiedObjectLayerFilter(
             int layerIndex);

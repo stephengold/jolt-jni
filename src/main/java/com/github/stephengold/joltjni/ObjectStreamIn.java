@@ -38,7 +38,7 @@ public class ObjectStreamIn {
     private ObjectStreamIn() {
     }
     // *************************************************************************
-    // constructors
+    // new methods exposed
 
     /**
      * Read an object from the specified file.
