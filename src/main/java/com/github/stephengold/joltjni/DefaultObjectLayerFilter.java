@@ -47,6 +47,6 @@ public class DefaultObjectLayerFilter extends ObjectLayerFilter {
     // *************************************************************************
     // native private methods
 
-    private native static long createFromPairFilter(
+    native private static long createFromPairFilter(
             long pairFilterVa, int objectLayer);
 }
