@@ -26,8 +26,34 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Constraints/MotorSettings.h"
 #include "auto/com_github_stephengold_joltjni_MotorSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotorSettings
+ * Method:    createUnlimited
+ * Signature: (FF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotorSettings_createUnlimited
+  (JNIEnv *, jclass, jfloat frequency, jfloat damping) {
+    MotorSettings * const pResult = new MotorSettings(frequency, damping);
+    TRACE_NEW("MotorSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotorSettings
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotorSettings_free
+  (JNIEnv *, jclass, jlong settingsVa) {
+    MotorSettings * const pSettings
+            = reinterpret_cast<MotorSettings *> (settingsVa);
+    TRACE_DELETE("MotorSettings", pSettings)
+    delete pSettings;
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_MotorSettings

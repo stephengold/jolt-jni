@@ -31,6 +31,17 @@ final public class MotorSettings extends JoltPhysicsObject {
     // constructors
 
     /**
+     * Instantiate settings for the specified spring parameters and no limits.
+     *
+     * @param frequency the desired spring frequency
+     * @param damping the desired damping
+     */
+    public MotorSettings(float frequency, float damping) {
+        long settingsVa = createUnlimited(frequency, damping);
+        setVirtualAddress(settingsVa, () -> free(settingsVa));
+    }
+
+    /**
      * Instantiate settings with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -253,6 +264,10 @@ final public class MotorSettings extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createUnlimited(float frequency, float damping);
+
+    native private static void free(long settingsVa);
 
     native private static float getMaxForceLimit(long settingsVa);
 
