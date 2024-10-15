@@ -241,13 +241,16 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(0,1,0))
+     * @return the argument, for chaining
      */
-    public void setHingeAxis1(Vec3Arg direction) {
+    public Vec3Arg setHingeAxis1(Vec3Arg direction) {
         long settingsVa = va();
         float x = direction.getX();
         float y = direction.getY();
         float z = direction.getZ();
         setHingeAxis1(settingsVa, x, y, z);
+
+        return direction;
     }
 
     /**
@@ -255,13 +258,16 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(0,1,0))
+     * @return the argument, for chaining
      */
-    public void setHingeAxis2(Vec3Arg direction) {
+    public Vec3Arg setHingeAxis2(Vec3Arg direction) {
         long settingsVa = va();
         float x = direction.getX();
         float y = direction.getY();
         float z = direction.getZ();
         setHingeAxis2(settingsVa, x, y, z);
+
+        return direction;
     }
 
     /**
@@ -300,13 +306,16 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(0,1,0))
+     * @return the argument, for chaining
      */
-    public void setNormalAxis1(Vec3Arg direction) {
+    public Vec3Arg setNormalAxis1(Vec3Arg direction) {
         long settingsVa = va();
         float x = direction.getX();
         float y = direction.getY();
         float z = direction.getZ();
         setNormalAxis1(settingsVa, x, y, z);
+
+        return direction;
     }
 
     /**
@@ -314,13 +323,16 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(0,1,0))
+     * @return the argument, for chaining
      */
-    public void setNormalAxis2(Vec3Arg direction) {
+    public Vec3Arg setNormalAxis2(Vec3Arg direction) {
         long settingsVa = va();
         float x = direction.getX();
         float y = direction.getY();
         float z = direction.getZ();
         setNormalAxis2(settingsVa, x, y, z);
+
+        return direction;
     }
 
     /**
@@ -328,13 +340,16 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
+     * @return the argument, for chaining
      */
-    public void setPoint1(RVec3Arg location) {
+    public RVec3Arg setPoint1(RVec3Arg location) {
         long settingsVa = va();
         double x = location.xx();
         double y = location.yy();
         double z = location.zz();
         setPoint1(settingsVa, x, y, z);
+
+        return location;
     }
 
     /**
@@ -342,13 +357,16 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
+     * @return the argument, for chaining
      */
-    public void setPoint2(RVec3Arg location) {
+    public RVec3Arg setPoint2(RVec3Arg location) {
         long settingsVa = va();
         double x = location.xx();
         double y = location.yy();
         double z = location.zz();
         setPoint2(settingsVa, x, y, z);
+
+        return location;
     }
 
     /**
