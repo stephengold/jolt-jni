@@ -28,50 +28,17 @@ package com.github.stephengold.joltjni;
  */
 final public class MotorSettings extends JoltPhysicsObject {
     // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying {@code Constraint}
-     * if any
-     */
-    final private ConstraintRef constraintRef;
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code ConstraintSettings} if any
-     */
-    final private ConstraintSettingsRef constraintSettingsRef;
-    // *************************************************************************
     // constructors
 
     /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
+     * Instantiate settings with the specified container and native object.
      *
-     * @param constraint the underlying {@code Constraint} (not null)
+     * @param container the containing object, or {@code null} if none
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
-    MotorSettings(Constraint constraint, long settingsVa) {
-        this.constraintRef = constraint.toRef();
-        this.constraintSettingsRef = null;
-
-        setVirtualAddress(settingsVa, null);
-    }
-
-    /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
-     *
-     * @param constraintSettings the underlying {@code ConstraintSettings} (not
-     * null)
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    MotorSettings(ConstraintSettings constraintSettings, long settingsVa) {
-        this.constraintRef = null;
-        this.constraintSettingsRef = constraintSettings.toRef();
-
-        setVirtualAddress(settingsVa, null);
+    MotorSettings(JoltPhysicsObject container, long settingsVa) {
+        super(container, settingsVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -79,10 +46,18 @@ final public class MotorSettings extends JoltPhysicsObject {
     /**
      * Access the underlying {@code Constraint}, if any.
      *
-     * @return the pre-existing instance, or null if none
+     * @return the pre-existing instance, or {@code null} if none
      */
     public Constraint getConstraint() {
-        return constraintRef.getPtr();
+        JoltPhysicsObject container = getContainingObject();
+        Constraint result;
+        if (container instanceof ConstraintRef) {
+            result = ((ConstraintRef) container).getPtr();
+        } else {
+            result = null;
+        }
+
+        return result;
     }
 
     /**
@@ -91,7 +66,15 @@ final public class MotorSettings extends JoltPhysicsObject {
      * @return the pre-existing instance, or null if none
      */
     public ConstraintSettings getConstraintSettings() {
-        return constraintSettingsRef.getPtr();
+        JoltPhysicsObject container = getContainingObject();
+        ConstraintSettings result;
+        if (container instanceof ConstraintSettingsRef) {
+            result = ((ConstraintSettingsRef) container).getPtr();
+        } else {
+            result = null;
+        }
+
+        return result;
     }
 
     /**
