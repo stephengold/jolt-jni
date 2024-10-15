@@ -22,57 +22,44 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.template.Ref;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
- * Test whether 2 collision groups can collide.
+ * A counted reference to a {@code GroupFilter}. (native type:
+ * {@code Ref<GroupFilter>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class GroupFilter extends SerializableObject implements RefTarget {
+public class GroupFilterRef extends Ref {
     // *************************************************************************
     // constructors
 
     /**
-     * Instantiate a filter with no native object assigned.
-     */
-    GroupFilter() {
-    }
-
-    /**
-     * Instantiate a filter with the specified native object assigned but not
-     * owned.
+     * Instantiate a reference with the specified native object assigned.
      *
-     * @param materialVa the virtual address of the native object to assign (not
+     * @param refVa the virtual address of the native object to assign (not
      * zero)
+     * @param owner true &rarr; make the current object the owner, false &rarr;
+     * the current object isn't the owner
      */
-    GroupFilter(long materialVa) {
-        super(materialVa);
+    GroupFilterRef(long refVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(refVa) : null;
+        setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
-    // RefTarget methods
+    // Ref methods
 
     /**
-     * Count the active references to the native {@code GroupFilter}. The filter
-     * is unaffected.
+     * Temporarily access the referenced {@code GroupFilter}.
      *
-     * @return the count (&ge;0)
+     * @return a new JVM object that refers to the pre-existing native object
      */
     @Override
-    public int getRefCount() {
-        long filterVa = va();
-        int result = getRefCount(filterVa);
+    public GroupFilter getPtr() {
+        long refVa = va();
+        long filterVa = getPtr(refVa);
+        GroupFilter result = new GroupFilter(filterVa);
 
         return result;
-    }
-
-    /**
-     * Mark the native {@code GroupFilter} as embedded.
-     */
-    @Override
-    public void setEmbedded() {
-        long filterVa = va();
-        setEmbedded(filterVa);
     }
 
     /**
@@ -82,18 +69,18 @@ public class GroupFilter extends SerializableObject implements RefTarget {
      */
     @Override
     public Ref toRef() {
-        long filterVa = va();
-        long copyVa = toRef(filterVa);
-        Ref result = new GroupFilterRef(copyVa, true);
+        long refVa = va();
+        long copyVa = copy(refVa);
+        GroupFilterRef result = new GroupFilterRef(copyVa, true);
 
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
-    native private static int getRefCount(long filterVa);
+    native private static long copy(long refVa);
 
-    native private static void setEmbedded(long filterVa);
+    native private static void free(long refVa);
 
-    native static long toRef(long filterVa);
+    native private static long getPtr(long refVa);
 }

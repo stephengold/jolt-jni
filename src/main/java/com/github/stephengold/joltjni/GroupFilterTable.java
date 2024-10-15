@@ -21,14 +21,12 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.template.RefTarget;
-
 /**
  * A group filter implemented using a table.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class GroupFilterTable extends GroupFilter implements RefTarget {
+public class GroupFilterTable extends GroupFilter {
     // *************************************************************************
     // constructors
 
@@ -85,30 +83,7 @@ public class GroupFilterTable extends GroupFilter implements RefTarget {
         enableCollision(filterVa, subGroup1, subGroup2);
     }
     // *************************************************************************
-    // RefTarget methods
-
-    /**
-     * Count the active references to the native {@code GroupFilterTable}. The
-     * filter is unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    @Override
-    public int getRefCount() {
-        long filterVa = va();
-        int result = getRefCount(filterVa);
-
-        return result;
-    }
-
-    /**
-     * Mark the native {@code GroupFilterTable} as embedded.
-     */
-    @Override
-    public void setEmbedded() {
-        long filterVa = va();
-        setEmbedded(filterVa);
-    }
+    // GroupFilter methods
 
     /**
      * Create a counted reference to the native {@code GroupFilterTable}.
@@ -118,7 +93,7 @@ public class GroupFilterTable extends GroupFilter implements RefTarget {
     @Override
     public GroupFilterTableRef toRef() {
         long filterVa = va();
-        long refVa = toRef(filterVa);
+        long refVa = GroupFilter.toRef(filterVa);
         GroupFilterTableRef result = new GroupFilterTableRef(refVa, true);
 
         return result;
@@ -133,10 +108,4 @@ public class GroupFilterTable extends GroupFilter implements RefTarget {
 
     native static void enableCollision(
             long filterVa, int subGroup1, int subGroup2);
-
-    native private static int getRefCount(long filterVa);
-
-    native private static void setEmbedded(long filterVa);
-
-    native private static long toRef(long filterVa);
 }
