@@ -28,6 +28,7 @@ import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstColor;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
+import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -244,6 +245,20 @@ final public class Op {
      */
     public static Vec3 multiply(Mat44Arg left, Vec3Arg right) {
         Vec3 result = left.multiply3x4(right);
+        return result;
+    }
+
+    /**
+     * Return the specified matrix multiplied by the specified column vector,
+     * with the 4th component of the right factor implied to be one. (native
+     * operator: binary {@code *})
+     *
+     * @param left the left factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 multiply(RMat44Arg left, Vec3Arg right) {
+        RVec3 result = left.multiply3x4(right);
         return result;
     }
 
