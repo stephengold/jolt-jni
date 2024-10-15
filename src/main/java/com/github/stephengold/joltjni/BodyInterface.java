@@ -39,26 +39,17 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  */
 public class BodyInterface extends NonCopyable {
     // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code PhysicsSystem}
-     */
-    final private PhysicsSystem system;
-    // *************************************************************************
     // constructors
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified container and native object.
      *
-     * @param system the underlying {@code PhysicsSystem} (not null)
+     * @param system the containing object, or {@code null} if none
      * @param bodyInterfaceVa the virtual address of the native object to assign
      * (not zero)
      */
     BodyInterface(PhysicsSystem system, long bodyInterfaceVa) {
-        this.system = system;
-        setVirtualAddress(bodyInterfaceVa, null);
+        super(system, bodyInterfaceVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -491,7 +482,8 @@ public class BodyInterface extends NonCopyable {
      * @return the pre-existing instance
      */
     public PhysicsSystem getSystem() {
-        return system;
+        PhysicsSystem result = (PhysicsSystem) getContainingObject();
+        return result;
     }
 
     /**

@@ -33,9 +33,9 @@ public class BodyLockInterfaceLocking extends BodyLockInterface {
     // constructors
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified container and native object.
      *
-     * @param system the underlying {@code PhysicsSystem} (not null)
+     * @param system the containing object, or {@code null} if none
      * @param interfaceVa the virtual address of the native object to assign
      * (not zero)
      */

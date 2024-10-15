@@ -30,26 +30,17 @@ import com.github.stephengold.joltjni.readonly.ConstBodyId;
  */
 abstract public class BodyLockInterface extends NonCopyable {
     // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code PhysicsSystem}
-     */
-    final private PhysicsSystem system;
-    // *************************************************************************
     // constructors
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified container and native object.
      *
-     * @param system the underlying {@code PhysicsSystem} (not null)
+     * @param system the containing object, or {@code null} if none
      * @param interfaceVa the virtual address of the native object to assign
      * (not zero)
      */
     BodyLockInterface(PhysicsSystem system, long interfaceVa) {
-        this.system = system;
-        setVirtualAddress(interfaceVa, null);
+        super(system, interfaceVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -60,7 +51,8 @@ abstract public class BodyLockInterface extends NonCopyable {
      * @return the pre-existing instance
      */
     public PhysicsSystem getSystem() {
-        return system;
+        PhysicsSystem result = (PhysicsSystem) getContainingObject();
+        return result;
     }
 
     /**
