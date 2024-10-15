@@ -26,20 +26,11 @@ import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
- * Settings used to construct a constraint spring.
+ * Settings used to construct a spring.
  *
  * @author Stephen Gold sgold@sonic.net
  */
 final public class SpringSettings extends JoltPhysicsObject {
-    // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code Constraint}, {@code ConstraintSettings}, or {@code WheelSettings}
-     * if any
-     */
-    final private Ref underlyingRef;
     // *************************************************************************
     // constructors
 
@@ -47,14 +38,12 @@ final public class SpringSettings extends JoltPhysicsObject {
      * Instantiate settings with the specified native object assigned but not
      * owned.
      *
-     * @param underlying the underlying {@code Constraint},
-     * {@code ConstraintSettings}, or {@code WheelSettings} (not null)
+     * @param container the containing object, or {@code null} if none
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
-    SpringSettings(RefTarget underlying, long settingsVa) {
-        this.underlyingRef = underlying.toRef();
-        setVirtualAddress(settingsVa, null);
+    SpringSettings(JoltPhysicsObject container, long settingsVa) {
+        super(container, settingsVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -65,10 +54,17 @@ final public class SpringSettings extends JoltPhysicsObject {
      * @return the pre-existing instance, or null if none
      */
     public Constraint getConstraint() {
-        RefTarget result = underlyingRef.getPtr();
-        if (!(result instanceof Constraint)) {
+        JoltPhysicsObject container = getContainingObject();
+        RefTarget result;
+        if (!(container instanceof Ref)) {
             result = null;
+        } else {
+            result = ((Ref) container).getPtr();
+            if (!(result instanceof Constraint)) {
+                result = null;
+            }
         }
+
         return (Constraint) result;
     }
 
@@ -78,10 +74,17 @@ final public class SpringSettings extends JoltPhysicsObject {
      * @return the pre-existing instance, or null if none
      */
     public ConstraintSettings getConstraintSettings() {
-        RefTarget result = underlyingRef.getPtr();
-        if (!(result instanceof ConstraintSettings)) {
+        JoltPhysicsObject container = getContainingObject();
+        RefTarget result;
+        if (!(container instanceof Ref)) {
             result = null;
+        } else {
+            result = ((Ref) container).getPtr();
+            if (!(result instanceof ConstraintSettings)) {
+                result = null;
+            }
         }
+
         return (ConstraintSettings) result;
     }
 
