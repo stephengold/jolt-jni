@@ -289,8 +289,8 @@ void Initialize()
 
 			// Connect the parts with a hinge
 			HingeConstraintSettings hinge=new HingeConstraintSettings();
-			hinge.setPoint1 ( new RVec3(20.0f, 0.4f, 0.0f)); hinge.setPoint2 ( new RVec3(20.0f, 0.4f, 0.0f));
-			hinge.setHingeAxis1 ( Vec3.sAxisX()); hinge.setHingeAxis2 ( Vec3.sAxisX());
+			hinge.setPoint1 (  hinge.setPoint2 ( new RVec3(20.0f, 0.4f, 0.0f)));
+			hinge.setHingeAxis1 ( hinge.setHingeAxis2 ( Vec3.sAxisX()));
 			mPhysicsSystem.addConstraint(mBodyInterface.createConstraint(hinge, b1, b2));
 		}
 

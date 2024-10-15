@@ -65,9 +65,9 @@ void Initialize()
 	RVec3 constraint_position = Op.add(body1_position , new Vec3(0.5f * box_size, 0, 0.5f * box_size));
 
 	HingeConstraintSettings settings = new HingeConstraintSettings();
-	settings.setPoint1 ( constraint_position); settings.setPoint2 ( constraint_position);
-	settings.setHingeAxis1 ( Vec3.sAxisY()); settings.setHingeAxis2 ( Vec3.sAxisY());
-	settings.setNormalAxis1 ( Vec3.sAxisX()); settings.setNormalAxis2 ( Vec3.sAxisX());
+	settings.setPoint1 ( settings.setPoint2 ( constraint_position));
+	settings.setHingeAxis1 ( settings.setHingeAxis2 ( Vec3.sAxisY()));
+	settings.setNormalAxis1 ( settings.setNormalAxis2 ( Vec3.sAxisX()));
 	mConstraint = (HingeConstraint)(settings.create(body1, body2));
 	mConstraint.setMotorState(EMotorState.Velocity);
 	mConstraint.setTargetAngularVelocity(Jolt.degreesToRadians(25));
