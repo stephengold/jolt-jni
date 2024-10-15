@@ -34,26 +34,17 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  */
 public class NarrowPhaseQuery extends NonCopyable {
     // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code PhysicsSystem}
-     */
-    final private PhysicsSystem system;
-    // *************************************************************************
     // constructors
 
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param system the underlying {@code PhysicsSystem} (not null)
+     * @param system the containing object, or {@code null} if none
      * @param queryVa the virtual address of the native object to assign (not
      * zero)
      */
     NarrowPhaseQuery(PhysicsSystem system, long queryVa) {
-        this.system = system;
-        setVirtualAddress(queryVa, null);
+        super(system, queryVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -555,7 +546,7 @@ public class NarrowPhaseQuery extends NonCopyable {
      * @return the pre-existing instance
      */
     public PhysicsSystem getSystem() {
-        return system;
+        return (PhysicsSystem) getContainingObject();
     }
     // *************************************************************************
     // native private methods
