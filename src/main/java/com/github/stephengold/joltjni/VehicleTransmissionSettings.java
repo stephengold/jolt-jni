@@ -31,28 +31,19 @@ import com.github.stephengold.joltjni.enumerate.ETransmissionMode;
  */
 public class VehicleTransmissionSettings extends JoltPhysicsObject {
     // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code WheeledVehicleControllerSettings}
-     */
-    final private WheeledVehicleControllerSettings vehicle;
-    // *************************************************************************
     // constructors
 
     /**
      * Instantiate a settings with the specified native object assigned but not
      * owned.
      *
-     * @param vehicle the underlying {@code WheeledVehicleControllerSettings}
+     * @param vehicle the containing object, or {@code null} if none
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     VehicleTransmissionSettings(
             WheeledVehicleControllerSettings vehicle, long settingsVa) {
-        this.vehicle = vehicle;
-        setVirtualAddress(settingsVa, null);
+        super(vehicle, settingsVa);
     }
     // *************************************************************************
     // new methods exposed
