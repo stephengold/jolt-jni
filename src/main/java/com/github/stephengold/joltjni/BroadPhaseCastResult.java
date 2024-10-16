@@ -28,40 +28,26 @@ package com.github.stephengold.joltjni;
  */
 public class BroadPhaseCastResult extends JoltPhysicsObject {
     // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code RayCastBodyCollector}, if any
-     */
-    final private RayCastBodyCollector collector;
-    // *************************************************************************
     // constructors
 
     /**
-     * Instantiate with no native object assigned.
-     *
-     * @param collector the underlying {@code RayCastBodyCollector}, or
-     * {@code null if none}
+     * Instantiate with no containing object and no native object assigned.
      */
-    BroadPhaseCastResult(RayCastBodyCollector collector) {
-        this.collector = collector;
+    BroadPhaseCastResult() {
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified container and native object.
      * <p>
      * For use in custom collectors.
      *
-     * @param collector the underlying {@code RayCastBodyCollector}, or
-     * {@code null if none}
+     * @param container the containing object, or {@code null} if none
      * @param castResultVa the virtual address of the native object to assign
      * (not zero)
      */
     public BroadPhaseCastResult(
-            RayCastBodyCollector collector, long castResultVa) {
-        super(castResultVa);
-        this.collector = collector;
+            JoltPhysicsObject container, long castResultVa) {
+        super(container, castResultVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -86,7 +72,15 @@ public class BroadPhaseCastResult extends JoltPhysicsObject {
      * @return the pre-existing instance
      */
     public RayCastBodyCollector getCollector() {
-        return collector;
+        JoltPhysicsObject container = this.getContainingObject();
+        RayCastBodyCollector result;
+        if (container instanceof RayCastBodyCollector) {
+            result = (RayCastBodyCollector) container;
+        } else {
+            result = null;
+        }
+
+        return result;
     }
 
     /**
