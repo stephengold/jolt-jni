@@ -31,9 +31,9 @@ final public class MotorSettings extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate settings for the specified spring parameters and no limits.
+     * Instantiate settings for the specified spring parameters with no limits.
      *
-     * @param frequency the desired spring frequency
+     * @param frequency the desired spring frequency (in Hertz)
      * @param damping the desired damping
      */
     public MotorSettings(float frequency, float damping) {

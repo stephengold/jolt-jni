@@ -466,7 +466,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Copy the system's settings.
+     * Copy the system's settings. The physics system is unaffected.
      *
      * @return a new JVM object with a new native object assigned
      *

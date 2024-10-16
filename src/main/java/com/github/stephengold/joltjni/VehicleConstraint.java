@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
- * A constraint used in vehicle simulation.
+ * A special {@code Constraint} used in vehicle simulation.
  *
  * @author Stephen Gold sgold@sonic.net
  */
