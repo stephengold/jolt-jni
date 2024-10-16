@@ -44,13 +44,12 @@ public class RayCastResult extends BroadPhaseCastResult {
      * <p>
      * For use in custom collectors.
      *
-     * @param collector the underlying {@code RayCastBodyCollector}, or
-     * {@code null if none}
+     * @param underlying the containing object, or {@code null} if none
      * @param castResultVa the virtual address of the native object to assign
      * (not zero)
      */
-    public RayCastResult(RayCastBodyCollector collector, long castResultVa) {
-        super(collector, castResultVa);
+    public RayCastResult(JoltPhysicsObject underlying, long castResultVa) {
+        super(underlying, castResultVa);
     }
     // *************************************************************************
     // new methods exposed
