@@ -36,21 +36,12 @@ public class PhysicsSettings extends JoltPhysicsObject {
      */
     final public static float cDefaultConvexRadius = 0.05f;
     // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code PhysicsSystem}
-     */
-    final private PhysicsSystem system;
-    // *************************************************************************
     // constructors
 
     /**
      * Instantiate the default settings.
      */
     public PhysicsSettings() {
-        this.system = null;
         long settingsVa = createPhysicsSettings();
         setVirtualAddress(settingsVa, () -> free(settingsVa));
     }
@@ -58,14 +49,12 @@ public class PhysicsSettings extends JoltPhysicsObject {
     /**
      * Instantiate with the specified native object assigned.
      *
-     * @param system the underlying {@code PhysicsSystem}, or null if none
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      * @param owner true &rarr; make the current object the owner, false &rarr;
      * the current object isn't the owner
      */
-    PhysicsSettings(PhysicsSystem system, long settingsVa, boolean owner) {
-        this.system = system;
+    PhysicsSettings(long settingsVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(settingsVa) : null;
         setVirtualAddress(settingsVa, freeingAction);
     }
