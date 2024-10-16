@@ -31,35 +31,27 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 public class VehicleController extends NonCopyable implements RefTarget {
     // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the underlying
-     * {@code VehicleConstraint}
-     */
-    VehicleConstraint constraint;
-    // *************************************************************************
     // constructors
-
-    /**
-     * Instantiate with no native object assigned.
-     *
-     * @param constraint the underlying {@code VehicleConstraint} (not null)
-     */
-    VehicleController(VehicleConstraint constraint) {
-        this.constraint = constraint;
-    }
 
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param constraint the underlying {@code VehicleConstraint} (not null)
      * @param controllerVa the virtual address of the native object to assign
      * (not zero)
      */
-    VehicleController(VehicleConstraint constraint, long controllerVa) {
-        this.constraint = constraint;
-        setVirtualAddress(controllerVa, null);
+    VehicleController(long controllerVa) {
+        super(controllerVa);
+    }
+
+    /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    VehicleController(VehicleConstraint container, long virtualAddress) {
+        super(container, virtualAddress);
     }
     // *************************************************************************
     // new methods exposed
@@ -67,10 +59,10 @@ public class VehicleController extends NonCopyable implements RefTarget {
     /**
      * Access the underlying constraint.
      *
-     * @return the pre-existing object (not null)
+     * @return the pre-existing object (may be null)
      */
     public VehicleConstraint getConstraint() {
-        return constraint;
+        return (VehicleConstraint) getContainingObject();
     }
     // *************************************************************************
     // RefTarget methods

@@ -57,7 +57,7 @@ final public class VehicleControllerRef extends Ref {
     public VehicleController getPtr() {
         long refVa = va();
         long controllerVa = getPtr(refVa);
-        VehicleController result = new VehicleController(null, controllerVa);
+        VehicleController result = new VehicleController(controllerVa);
 
         return result;
     }

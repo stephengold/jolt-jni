@@ -37,13 +37,12 @@ public class WheeledVehicleController
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param constraint the underlying {@code VehicleConstraint} (not null)
+     * @param constraint the containing object, or {@code null} if none
      * @param controllerVa the virtual address of the native object to assign
      * (not zero)
      */
     WheeledVehicleController(VehicleConstraint constraint, long controllerVa) {
-        super(constraint);
-        setVirtualAddress(controllerVa, null);
+        super(constraint, controllerVa);
     }
     // *************************************************************************
     // new methods exposed
