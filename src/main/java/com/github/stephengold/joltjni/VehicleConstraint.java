@@ -69,6 +69,18 @@ public class VehicleConstraint
     // new methods exposed
 
     /**
+     * Count how many wheels the vehicle has. The constraint is unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countWheels() {
+        long constraintVa = va();
+        int result = countWheels(constraintVa);
+
+        return result;
+    }
+
+    /**
      * Access the controller for this constraint.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -232,6 +244,8 @@ public class VehicleConstraint
     }
     // *************************************************************************
     // native private methods
+
+    native private static int countWheels(long constraintVa);
 
     native private static long createConstraint(long bodyVa, long settingsVa);
 

@@ -33,6 +33,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    countWheels
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_countWheels
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const Wheels::size_type result = pConstraint->GetWheels().size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
  * Method:    createConstraint
  * Signature: (JJ)J
  */
