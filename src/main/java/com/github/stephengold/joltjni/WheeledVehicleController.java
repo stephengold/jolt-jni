@@ -63,30 +63,7 @@ public class WheeledVehicleController
         setDriverInput(controllerVa, forward, right, brake, handBrake);
     }
     // *************************************************************************
-    // RefTarget methods
-
-    /**
-     * Count the active references to the native
-     * {@code WheeledVehicleController}. The controller is unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    @Override
-    public int getRefCount() {
-        long controllerVa = va();
-        int result = getRefCount(controllerVa);
-
-        return result;
-    }
-
-    /**
-     * Mark the native {@code WheeledVehicleController} as embedded.
-     */
-    @Override
-    public void setEmbedded() {
-        long controllerVa = va();
-        setEmbedded(controllerVa);
-    }
+    // VehicleController methods
 
     /**
      * Create a counted reference to the native
@@ -97,7 +74,7 @@ public class WheeledVehicleController
     @Override
     public WheeledVehicleControllerRef toRef() {
         long controllerVa = va();
-        long copyVa = toRef(controllerVa);
+        long copyVa = VehicleController.toRef(controllerVa);
         WheeledVehicleControllerRef result
                 = new WheeledVehicleControllerRef(copyVa, true);
 
@@ -106,12 +83,6 @@ public class WheeledVehicleController
     // *************************************************************************
     // native private methods
 
-    native private static int getRefCount(long shapeVa);
-
     native private static void setDriverInput(long controllerVa, float forward,
             float right, float brake, float handBrake);
-
-    native private static void setEmbedded(long shapeVa);
-
-    native private static long toRef(long shapeVa);
 }

@@ -21,12 +21,15 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.template.Ref;
+import com.github.stephengold.joltjni.template.RefTarget;
+
 /**
  * Control the acceleration and deceleration of a vehicle.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleController extends NonCopyable {
+public class VehicleController extends NonCopyable implements RefTarget {
     // *************************************************************************
     // fields
 
@@ -69,4 +72,51 @@ public class VehicleController extends NonCopyable {
     public VehicleConstraint getConstraint() {
         return constraint;
     }
+    // *************************************************************************
+    // RefTarget methods
+
+    /**
+     * Count the active references to the native {@code VehicleController}. The
+     * controller is unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long controllerVa = va();
+        int result = getRefCount(controllerVa);
+
+        return result;
+    }
+
+    /**
+     * Mark the native {@code VehicleController} as embedded.
+     */
+    @Override
+    public void setEmbedded() {
+        long controllerVa = va();
+        setEmbedded(controllerVa);
+    }
+
+    /**
+     * Create a counted reference to the native {@code VehicleController}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public Ref toRef() {
+        long controllerVa = va();
+        long copyVa = toRef(controllerVa);
+        Ref result = new VehicleControllerRef(copyVa, true);
+
+        return result;
+    }
+    // *************************************************************************
+    // native methods
+
+    native private static int getRefCount(long controllerVa);
+
+    native private static void setEmbedded(long controllerVa);
+
+    native static long toRef(long controllerVa);
 }
