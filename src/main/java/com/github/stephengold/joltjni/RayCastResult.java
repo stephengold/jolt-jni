@@ -34,7 +34,6 @@ public class RayCastResult extends BroadPhaseCastResult {
      * Instantiate a cast result with the default parameters.
      */
     public RayCastResult() {
-        super(null);
         long castResultVa = createRayCastResult();
         setVirtualAddress(castResultVa, true);
     }
