@@ -22,57 +22,44 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.template.Ref;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
- * Detect collisions between vehicle wheels and the environment.
+ * A counted reference to a {@code VehicleCollisionTester}. (native type:
+ * {@code Ref<VehicleCollisionTester>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleCollisionTester extends NonCopyable implements RefTarget {
+final public class VehicleCollisionTesterRef extends Ref {
     // *************************************************************************
     // constructors
 
     /**
-     * Instantiate a tester with no native object assigned.
-     */
-    VehicleCollisionTester() {
-    }
-
-    /**
-     * Instantiate a tester with the specified native object assigned but not
-     * owned.
+     * Instantiate a reference with the specified native object assigned.
      *
-     * @param testerVa the virtual address of the native object to assign (not
+     * @param refVa the virtual address of the native object to assign (not
      * zero)
+     * @param owner true &rarr; make the current object the owner, false &rarr;
+     * the current object isn't the owner
      */
-    VehicleCollisionTester(long testerVa) {
-        super(testerVa);
+    VehicleCollisionTesterRef(long refVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(refVa) : null;
+        setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
-    // RefTarget methods
+    // Ref methods
 
     /**
-     * Count the active references to the native {@code VehicleCollisionTester}.
-     * The tester is unaffected.
+     * Temporarily access the referenced {@code VehicleCollisionTester}.
      *
-     * @return the count (&ge;0)
+     * @return a new JVM object that refers to the pre-existing native object
      */
     @Override
-    public int getRefCount() {
-        long testerVa = va();
-        int result = getRefCount(testerVa);
+    public VehicleCollisionTester getPtr() {
+        long refVa = va();
+        long testerVa = getPtr(refVa);
+        VehicleCollisionTester result = new VehicleCollisionTester(testerVa);
 
         return result;
-    }
-
-    /**
-     * Mark the native {@code VehicleCollisionTester} as embedded.
-     */
-    @Override
-    public void setEmbedded() {
-        long testerVa = va();
-        setEmbedded(testerVa);
     }
 
     /**
@@ -81,20 +68,20 @@ public class VehicleCollisionTester extends NonCopyable implements RefTarget {
      * @return a new JVM object with a new native object assigned
      */
     @Override
-    public Ref toRef() {
-        long testerVa = va();
-        long refVa = toRef(testerVa);
+    public VehicleCollisionTesterRef toRef() {
+        long refVa = va();
+        long copyVa = copy(refVa);
         VehicleCollisionTesterRef result
-                = new VehicleCollisionTesterRef(refVa, true);
+                = new VehicleCollisionTesterRef(copyVa, true);
 
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
-    native private static int getRefCount(long settingsVa);
+    native private static long copy(long refVa);
 
-    native private static void setEmbedded(long settingsVa);
+    native private static void free(long refVa);
 
-    native static long toRef(long settingsVa);
+    native private static long getPtr(long refVa);
 }

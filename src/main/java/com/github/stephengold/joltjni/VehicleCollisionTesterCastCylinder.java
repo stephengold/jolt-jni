@@ -67,29 +67,6 @@ public class VehicleCollisionTesterCastCylinder extends VehicleCollisionTester {
     // VehicleCollisionTester methods
 
     /**
-     * Count the active references to the native {@code VehicleCollisionTester}.
-     * The tester is unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    @Override
-    public int getRefCount() {
-        long testerVa = va();
-        int result = getRefCount(testerVa);
-
-        return result;
-    }
-
-    /**
-     * Mark the native {@code VehicleCollisionTesterCastCylinder} as embedded.
-     */
-    @Override
-    public void setEmbedded() {
-        long testerVa = va();
-        setEmbedded(testerVa);
-    }
-
-    /**
      * Create a counted reference to the native
      * {@code VehicleCollisionTesterCastCylinder}.
      *
@@ -98,7 +75,7 @@ public class VehicleCollisionTesterCastCylinder extends VehicleCollisionTester {
     @Override
     public VehicleCollisionTesterCastCylinderRef toRef() {
         long testerVa = va();
-        long refVa = toRef(testerVa);
+        long refVa = VehicleCollisionTester.toRef(testerVa);
         VehicleCollisionTesterCastCylinderRef result
                 = new VehicleCollisionTesterCastCylinderRef(refVa, true);
 
@@ -109,10 +86,4 @@ public class VehicleCollisionTesterCastCylinder extends VehicleCollisionTester {
 
     native private static long createTester(
             int objectLayer, float convexRadiusFraction);
-
-    native private static int getRefCount(long settingsVa);
-
-    native private static void setEmbedded(long settingsVa);
-
-    native private static long toRef(long settingsVa);
 }
