@@ -57,9 +57,9 @@ final public class VehicleCollisionTesterCastCylinderRef extends Ref {
     @Override
     public VehicleCollisionTesterCastCylinder getPtr() {
         long refVa = va();
-        long controllerVa = getPtr(refVa);
+        long testerVa = getPtr(refVa);
         VehicleCollisionTesterCastCylinder result
-                = new VehicleCollisionTesterCastCylinder(controllerVa);
+                = new VehicleCollisionTesterCastCylinder(testerVa);
 
         return result;
     }
