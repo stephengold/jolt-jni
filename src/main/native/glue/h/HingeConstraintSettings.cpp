@@ -418,6 +418,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
+ * Method:    setMotorSettings
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_setMotorSettings
+  (JNIEnv *, jclass, jlong constraintSettingsVa, jlong motorSettingsVa) {
+    HingeConstraintSettings * const pConstraintSettings
+            = reinterpret_cast<HingeConstraintSettings *> (constraintSettingsVa);
+    const MotorSettings * const pMotorSettings
+            = reinterpret_cast<MotorSettings *> (motorSettingsVa);
+    pConstraintSettings->mMotorSettings = *pMotorSettings;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
  * Method:    setNormalAxis1
  * Signature: (JFFF)V
  */

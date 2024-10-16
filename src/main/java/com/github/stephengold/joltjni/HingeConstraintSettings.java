@@ -302,6 +302,17 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the constraint's motor settings. (native attribute: mMotorSettings)
+     *
+     * @param settings the motor settings to copy (not null, unaffected)
+     */
+    public void setMotorSettings(MotorSettings settings) {
+        long constraintSettingsVa = va();
+        long motorSettingsVa = settings.va();
+        setMotorSettings(constraintSettingsVa, motorSettingsVa);
+    }
+
+    /**
      * Alter the normal axis of body 1. (native attribute: mNormalAxis1)
      *
      * @param direction the desired axis direction (not null, unaffected,
@@ -446,6 +457,9 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static void setMaxFrictionTorque(
             long settingsVa, float torque);
+
+    native private static void setMotorSettings(
+            long constraintSettingsVa, long motorSettingsVa);
 
     native private static void setNormalAxis1(
             long settingsVa, float x, float y, float z);
