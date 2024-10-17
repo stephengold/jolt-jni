@@ -21,30 +21,14 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
-import com.github.stephengold.joltjni.template.Ref;
-
 /**
- * A single wheel of a vehicle.
+ * A single wheel of a {@code TrackedVehicle}. (native type: WheelTV)
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Wheel extends NonCopyable {
-    // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the settings
-     */
-    private Ref settings;
+public class WheelTv extends Wheel {
     // *************************************************************************
     // constructors
-
-    /**
-     * Instantiate with no native object assigned.
-     */
-    Wheel() {
-    }
 
     /**
      * Instantiate with the specified native object assigned but not owned.
@@ -52,31 +36,7 @@ public class Wheel extends NonCopyable {
      * @param wheelVa the virtual address of the native object to assign (not
      * zero)
      */
-    Wheel(long wheelVa) {
+    WheelTv(long wheelVa) {
         setVirtualAddress(wheelVa, null);
-        long settingsVa = getSettings(wheelVa);
-        if (this instanceof WheelTv) {
-            this.settings = new WheelSettingsTv(settingsVa).toRef();
-        } else if (this instanceof WheelWv) {
-            this.settings = new WheelSettingsWv(settingsVa).toRef();
-        } else {
-            throw new IllegalStateException(this.getClass().getSimpleName());
-        }
     }
-    // *************************************************************************
-    // new methods exposed
-
-    /**
-     * Access the settings used to create this wheel.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public ConstWheelSettings getSettings() {
-        WheelSettings result = (WheelSettings) settings.getPtr();
-        return result;
-    }
-    // *************************************************************************
-    // native private methods
-
-    native private static long getSettings(long wheelVa);
 }
