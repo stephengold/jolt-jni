@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
@@ -31,6 +32,16 @@ import com.github.stephengold.joltjni.Vec3;
 public interface RVec3Arg {
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Return the cross product with the specified vector. The current vector is
+     * unaffected.
+     *
+     * @param rightFactor the vector to cross with the current one (not null,
+     * unaffected)
+     * @return a new product vector
+     */
+    RVec3 cross(RVec3Arg rightFactor);
 
     /**
      * Return the first (X) component at positional precision. The vector is

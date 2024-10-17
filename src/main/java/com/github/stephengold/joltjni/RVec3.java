@@ -152,6 +152,28 @@ final public class RVec3 implements RVec3Arg {
     // RVec3Arg methods
 
     /**
+     * Return the cross product with the specified vector. The current vector is
+     * unaffected.
+     *
+     * @param rightFactor the vector to cross with the current one (not null,
+     * unaffected)
+     * @return a new product vector
+     */
+    @Override
+    public RVec3 cross(RVec3Arg rightFactor) {
+        double rx = rightFactor.xx();
+        double ry = rightFactor.yy();
+        double rz = rightFactor.zz();
+
+        double px = yy * rz - zz * ry;
+        double py = zz * rx - xx * rz;
+        double pz = xx * ry - yy * rx;
+
+        RVec3 result = new RVec3(px, py, pz);
+        return result;
+    }
+
+    /**
      * Return the first (X) component at positional precision. The vector is
      * unaffected.
      *
