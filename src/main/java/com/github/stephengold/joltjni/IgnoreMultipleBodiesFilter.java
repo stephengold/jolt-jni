@@ -24,50 +24,61 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
 
 /**
- * Determine which bodies are candidates for a collision test.
+ * A {@code BodyFilter} that ignores specific bodies.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BodyFilter extends NonCopyable {
+public class IgnoreMultipleBodiesFilter extends BodyFilter {
     // *************************************************************************
     // constructors
 
     /**
      * Instantiate a default filter that selects all layers.
      */
-    public BodyFilter() {
-        long filterVa = createDefaultFilter();
+    public IgnoreMultipleBodiesFilter() {
+        super(true);
+        long filterVa = createDefault();
         setVirtualAddress(filterVa, true);
-    }
-
-    /**
-     * Instantiate a filter with no native object assigned.
-     *
-     * @param dummy unused argument to distinguish the zero-arg constructor
-     */
-    BodyFilter(boolean dummy) {
     }
     // *************************************************************************
     // new methods exposed
 
     /**
-     * Test whether the specified body is a candidate for collisions. The filter
-     * is unaffected.
-     *
-     * @param bodyId the body to test (not null, unaffected)
-     * @return true if may collide, false if filtered out
+     * Remove all bodies from the filter.
      */
-    public boolean shouldCollide(ConstBodyId bodyId) {
+    public void clear() {
         long filterVa = va();
-        long idVa = bodyId.va();
-        boolean result = shouldCollide(filterVa, idVa);
+        clear(filterVa);
+    }
 
-        return result;
+    /**
+     * Reserve memory for the specified number of bodies.
+     *
+     * @param capacity the desired capacity (in bodies, &ge;0)
+     */
+    public void reserve(int capacity) {
+        long filterVa = va();
+        reserve(filterVa, capacity);
+    }
+
+    /**
+     * Start ignoring the specified body.
+     *
+     * @param bodyId the ID of the body to ignore (not null, unaffected)
+     */
+    public void ignoreBody(ConstBodyId bodyId) {
+        long filterVa = va();
+        long bodyIdVa = bodyId.va();
+        ignoreBody(filterVa, bodyIdVa);
     }
     // *************************************************************************
     // native private methods
 
-    native private static long createDefaultFilter();
+    native private static void clear(long filterVa);
 
-    native private static boolean shouldCollide(long filterVa, long idVa);
+    native private static long createDefault();
+
+    native private static void ignoreBody(long filterVa, long bodyIdVa);
+
+    native private static void reserve(long filterVa, int capacity);
 }
