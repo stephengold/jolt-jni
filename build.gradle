@@ -9,6 +9,7 @@ plugins {
     id 'signing'       // to sign artifacts for publication
     //alias(libs.plugins.analyze) // to detect undeclared/unused dependencies
     alias(libs.plugins.download) // to retrieve files from URLs
+    alias(libs.plugins.validate.poms) // to verify POMs provide all info required by Maven Central
 }
 
 ext {
