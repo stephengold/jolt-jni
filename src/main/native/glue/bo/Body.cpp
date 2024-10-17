@@ -109,6 +109,26 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_addTorque
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    applyBuoyancyImpulse
+ * Signature: (JDDDFFFFFFFFFFFFF)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_applyBuoyancyImpulse
+  (JNIEnv *, jclass, jlong bodyVa, jdouble surfaceX, jdouble surfaceY,
+  jdouble surfaceZ, jfloat nx, jfloat ny, jfloat nz, jfloat buoyancy,
+  jfloat linearDrag, jfloat angularDrag, jfloat vx, jfloat vy, jfloat vz,
+  jfloat gravityX, jfloat gravityY, jfloat gravityZ, jfloat deltaTime) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const RVec3 surface(surfaceX, surfaceY, surfaceZ);
+    const Vec3 normal(nx, ny, nz);
+    const Vec3 velocity(vx, vy, vz);
+    const Vec3 gravity(gravityX, gravityY, gravityZ);
+    const bool result = pBody->ApplyBuoyancyImpulse(surface, normal, buoyancy,
+            linearDrag, angularDrag, velocity, gravity, deltaTime);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    canBeKinematicOrDynamic
  * Signature: (J)Z
  */

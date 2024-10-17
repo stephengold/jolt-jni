@@ -155,6 +155,49 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Apply an impulse that simulates buoyancy and drag.
+     *
+     * @param surfacePosition the location of the fluid's surface (in system
+     * coordinates, not null, unaffected)
+     * @param surfaceNormal the upward normal direction of the fluid's surface
+     * (in system coordinates, not null, unaffected)
+     * @param buoyancy the mass of the displaced fluid divided by the body's
+     * mass (1&rarr;neutral buoyancy)
+     * @param linearDrag the drag factor for linear motion
+     * @param angularDrag the drag factor for angular motion
+     * @param fluidVelocity the velocity of the fluid (meters per second in
+     * system coordinates, not null, unaffected)
+     * @param gravity the gravity vector (in system coordinates, not null,
+     * unaffected)
+     * @param deltaTime the duration of the simulation step (in seconds)
+     * @return {@code true} if an impulse was applied, {@code false} if not in
+     * the fluid
+     */
+    public boolean applyBuoyancyImpulse(
+            RVec3Arg surfacePosition, Vec3Arg surfaceNormal, float buoyancy,
+            float linearDrag, float angularDrag, Vec3Arg fluidVelocity,
+            Vec3Arg gravity, float deltaTime) {
+        long bodyVa = va();
+        double surfaceX = surfacePosition.xx();
+        double surfaceY = surfacePosition.yy();
+        double surfaceZ = surfacePosition.zz();
+        float nx = surfaceNormal.getX();
+        float ny = surfaceNormal.getY();
+        float nz = surfaceNormal.getZ();
+        float vx = fluidVelocity.getX();
+        float vy = fluidVelocity.getY();
+        float vz = fluidVelocity.getZ();
+        float gravityX = fluidVelocity.getX();
+        float gravityY = fluidVelocity.getY();
+        float gravityZ = fluidVelocity.getZ();
+        boolean result = applyBuoyancyImpulse(bodyVa, surfaceX, surfaceY,
+                surfaceZ, nx, ny, nz, buoyancy, linearDrag, angularDrag,
+                vx, vy, vz, gravityX, gravityY, gravityZ, deltaTime);
+
+        return result;
+    }
+
+    /**
      * Access the body's collision group.
      *
      * @return the pre-existing group, or {@code null} if none
@@ -860,6 +903,12 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static void addTorque(
             long bodyVa, float x, float y, float z);
+
+    native private static boolean applyBuoyancyImpulse(long bodyVa,
+            double surfaceX, double surfaceY, double surfaceZ, float nx,
+            float ny, float nz, float buoyancy, float linearDrag,
+            float angularDrag, float vx, float vy, float vz, float gravityX,
+            float gravityY, float gravityZ, float deltaTime);
 
     native private static boolean canBeKinematicOrDynamic(long bodyVa);
 
