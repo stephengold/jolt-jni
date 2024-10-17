@@ -309,6 +309,17 @@ final public class Jolt {
     native public static void setTraceAllocations(boolean setting);
 
     /**
+     * Return the (binary) sign of the specified single-precision value.
+     *
+     * @param input the input value
+     * @return -1 if the input is negative, otherwise +1
+     */
+    public static float sign(float input) {
+        float result = (input < 0) ? -1f : 1f;
+        return result;
+    }
+
+    /**
      * Test whether the native library supports the ObjectStream format. (native
      * macro: JPH_OBJECT_STREAM)
      *
