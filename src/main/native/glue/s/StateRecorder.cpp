@@ -24,6 +24,7 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
+#include "Jolt/Physics/Body/BodyManager.h"
 #include "Jolt/Physics/StateRecorder.h"
 #include "auto/com_github_stephengold_joltjni_StateRecorder.h"
 
@@ -40,6 +41,19 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_StateRecorder_isV
             = reinterpret_cast<StateRecorder *> (recorderVa);
     const bool result = pRecorder->IsValidating();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    readBodyIdVector
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readBodyIdVector
+  (JNIEnv *, jclass, jlong recorderVa, jlong vectorVa) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
+    pRecorder->Read(*pVector);
 }
 
 /*
@@ -113,6 +127,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_setVali
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
     pRecorder->SetValidating(setting);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    writeBodyIdVector
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_writeBodyIdVector
+  (JNIEnv *, jclass, jlong recorderVa, jlong vectorVa) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    const BodyIDVector * const pVector
+            = reinterpret_cast<BodyIDVector *> (vectorVa);
+    pRecorder->Write(*pVector);
 }
 
 /*

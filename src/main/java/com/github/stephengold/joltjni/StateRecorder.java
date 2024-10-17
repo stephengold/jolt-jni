@@ -54,6 +54,17 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
+     * Read an ID vector.
+     *
+     * @param storeResult storage for the result (not null, modified)
+     */
+    public void readBodyIdVector(BodyIdVector storeResult) {
+        long recorderVa = va();
+        long vectorVa = storeResult.va();
+        readBodyIdVector(recorderVa, vectorVa);
+    }
+
+    /**
      * Read a boolean.
      *
      * @param b the value for validation
@@ -115,6 +126,17 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
+     * Write the specified ID vector.
+     *
+     * @param vector the vector to write (not null, unaffected)
+     */
+    public void write(BodyIdVector vector) {
+        long recorderVa = va();
+        long vectorVa = vector.va();
+        writeBodyIdVector(recorderVa, vectorVa);
+    }
+
+    /**
      * Write the specified boolean value.
      *
      * @param b the value to write
@@ -161,6 +183,8 @@ public class StateRecorder extends NonCopyable {
 
     native private static boolean isValidating(long recorderVa);
 
+    native private static void readBodyIdVector(long recorderVa, long vectorVa);
+
     native private static boolean readBoolean(long recorderVa, boolean b);
 
     native private static float readFloat(long recorderVa, float f);
@@ -170,6 +194,9 @@ public class StateRecorder extends NonCopyable {
     native private static void readVec3(long recorderVa, float[] storeFloats);
 
     native private static void setValidating(long recorderVa, boolean setting);
+
+    native private static void writeBodyIdVector(
+            long recorderVa, long vectorVa);
 
     native private static void writeBoolean(long recorderVa, boolean b);
 
