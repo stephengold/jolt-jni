@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Vehicle/WheeledVehicleController.h"
+
 #include "auto/com_github_stephengold_joltjni_WheelSettingsWv.h"
 #include "auto/com_github_stephengold_joltjni_WheelSettingsWvRef.h"
 #include "glue/glue.h"
