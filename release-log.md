@@ -1,5 +1,64 @@
 # release log for the jolt-jni project
 
+## Version 0.9.0 released on 17 October 2024
+
++ Bugfix:  `Body.setCollisionGroup()` lacks a native implementation
++ Bugfix:  wrong argument type in implementation of `RMat44.setElement()`
++ Bugfix:  2 missing `TRACE_NEW()` macros
++ Renamed the `CollisionGroup.setSubGroupID()` method for style conformance.
++ Removed the `PhysicsSettings.getSystem()` method
+
++ Added classes to the library:
+  + `ClosestHitCastRayCollector`
+  + `ClosestHitCastShapeCollector`
+  + `Edge`
+  + `Face`
+  + `IgnoreMultipleBodiesFilter`
+  + `MotorcycleController`
+  + `MotorcycleControllerSettings`
+  + `Mutex`
+  + `PathConstraint`
+  + `PathConstraintSettings`
+  + `PulleyConstraint`
+  + `PulleyConstraintSettings`
+  + `RackAndPinionConstraint`
+  + `RackAndPinionConstraintSettings`
+  + `SoftBodyCreationSettings`
+  + `SoftBodySharedSettings`
+  + `SoftBodySharedSettingsRef`
+  + `SwingTwistConstraint`
+  + `SwingTwistConstraintSettings`
+  + `TrackedVehicleController`
+  + `TrackedVehicleControllerRef`
+  + `TrackedVehicleControllerSettings`
+  + `WheelSettingsTv`
+  + `WheelSettingsTvRef`
+  + `WheelTv`
+  + `Vec4 `
+  + `VehicleCollisionTesterCastCylinder`
+  + `VehicleCollisionTesterCastCylinderRef`
+  + `VehicleDifferentialSettings`
+  + `VehicleEngineSettings`
+  + `VehicleTrackSettings`
+  + `VehicleTransmissionSettings`
+  + `Vertex`
+  + `VertexAttributes`
+  + `Volume`
+
++ Added 3 enums to the library:
+  + `EBendType`
+  + `ELraType`
+  + `ETransmissionMode`
+
++ Added 4 interfaces to the library:
+  + `ConstVertexAttributes`
+  + `ConstSoftBodySharedSettings`
+  + `ConstSoftBodyCreationSettings`
+  + `TriFunction`
+  + `Vec4Arg`
+
++ Added many public methods to the library.
+
 ## Version 0.8.0 released on 6 October 2024
 
 + Moved all methods equivalent to overloaded operators to a new package.

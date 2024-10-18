@@ -334,7 +334,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_unregisterTypes
  */
 JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_versionString
   (JNIEnv *pEnv, jclass) {
-    const jstring result = pEnv->NewStringUTF("0.8.1-SNAPSHOT");
+    const jstring result = pEnv->NewStringUTF("0.9.0");
     return result;
 }
 
