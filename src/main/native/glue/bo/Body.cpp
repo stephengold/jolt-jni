@@ -652,7 +652,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getWorldTransfo
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     RMat44 * const pResult = new RMat44();
-    TRACE_NEW("RMat44", result)
+    TRACE_NEW("RMat44", pResult)
     *pResult = pBody->GetWorldTransform();
     return reinterpret_cast<jlong> (pResult);
 }
