@@ -85,14 +85,26 @@ abstract public class Constraint extends NonCopyable
             case Hinge:
                 result = new HingeConstraint(constraintVa);
                 break;
+            case Path:
+                result = new PathConstraint(constraintVa);
+                break;
             case Point:
                 result = new PointConstraint(constraintVa);
+                break;
+            case Pulley:
+                result = new PulleyConstraint(constraintVa);
+                break;
+            case RackAndPinion:
+                result = new RackAndPinionConstraint(constraintVa);
                 break;
             case SixDof:
                 result = new SixDofConstraint(constraintVa);
                 break;
             case Slider:
                 result = new SliderConstraint(constraintVa);
+                break;
+            case SwingTwist:
+                result = new SwingTwistConstraint(constraintVa);
                 break;
             case Vehicle:
                 result = new VehicleConstraint(constraintVa);
