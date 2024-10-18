@@ -42,6 +42,17 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param boxVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    AaBox(JoltPhysicsObject container, long boxVa) {
+        super(container, boxVa);
+    }
+
+    /**
      * Instantiate a box with the specified native object assigned.
      *
      * @param boxVa the virtual address of the native object to assign (not
