@@ -77,7 +77,8 @@ final public class Jolt {
      * @return the converted angle (in radians)
      */
     public static float degreesToRadians(float degrees) {
-        return degrees * (JPH_PI / 180f);
+        float result = degrees * (JPH_PI / 180f);
+        return result;
     }
 
     /**
@@ -253,7 +254,8 @@ final public class Jolt {
      * @return the converted angle (in degrees)
      */
     public static float radiansToDegrees(float radians) {
-        return radians * (180f / JPH_PI);
+        float result = radians * (180f / JPH_PI);
+        return result;
     }
 
     /**
