@@ -45,6 +45,18 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyVector_capacity
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyVector
+ * Method:    erase
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyVector_erase
+  (JNIEnv *, jclass, jlong vectorVa, jint startIndex, jint stopIndex) {
+    BodyVector * const pVector = reinterpret_cast<BodyVector *> (vectorVa);
+    BodyVector::iterator origin = pVector->begin();
+    pVector->erase(origin + startIndex, origin + stopIndex);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyVector
  * Method:    getBody
  * Signature: (JI)J
  */

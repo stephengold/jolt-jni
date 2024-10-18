@@ -57,6 +57,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_createB
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector
+ * Method:    erase
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_erase
+  (JNIEnv *, jclass, jlong vectorVa, jint startIndex, jint stopIndex) {
+    BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
+    BodyIDVector::iterator origin = pVector->begin();
+    pVector->erase(origin + startIndex, origin + stopIndex);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyIdVector
  * Method:    free
  * Signature: (J)V
  */

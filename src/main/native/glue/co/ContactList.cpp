@@ -45,6 +45,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactList_capacity
 
 /*
  * Class:     com_github_stephengold_joltjni_ContactList
+ * Method:    erase
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactList_erase
+  (JNIEnv *, jclass, jlong listVa, jint startIndex, jint stopIndex) {
+    CharacterVirtual::ContactList * const pList
+            = reinterpret_cast<CharacterVirtual::ContactList *> (listVa);
+    CharacterVirtual::ContactList::iterator origin = pList->begin();
+    pList->erase(origin + startIndex, origin + stopIndex);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ContactList
  * Method:    free
  * Signature: (J)V
  */

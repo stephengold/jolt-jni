@@ -58,6 +58,18 @@ public class BodyIdVector extends Array<BodyId> {
     }
 
     /**
+     * Remove all IDs in the specified range of indices.
+     *
+     * @param startIndex the index of the first element to remove (&ge;0)
+     * @param stopIndex one plus the index of the last element to remove (&ge;0)
+     */
+    @Override
+    public void erase(int startIndex, int stopIndex) {
+        long vectorVa = va();
+        erase(vectorVa, startIndex, stopIndex);
+    }
+
+    /**
      * Access the ID at the specified index.
      *
      * @param elementIndex the index from which to get the ID (&ge;0)
@@ -114,6 +126,9 @@ public class BodyIdVector extends Array<BodyId> {
     native private static int capacity(long vectorVa);
 
     native private static long createBodyIdVector();
+
+    native private static void erase(
+            long vectorVa, int startIndex, int stopIndex);
 
     native private static void free(long vectorVa);
 

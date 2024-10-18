@@ -63,6 +63,18 @@ public class Constraints extends Array<ConstraintRef> {
     }
 
     /**
+     * Remove all references in the specified range of indices.
+     *
+     * @param startIndex the index of the first element to remove (&ge;0)
+     * @param stopIndex one plus the index of the last element to remove (&ge;0)
+     */
+    @Override
+    public void erase(int startIndex, int stopIndex) {
+        long vectorVa = va();
+        erase(vectorVa, startIndex, stopIndex);
+    }
+
+    /**
      * Copy the reference at the specified index.
      *
      * @param elementIndex the index from which to get the reference (&ge;0)
@@ -119,6 +131,9 @@ public class Constraints extends Array<ConstraintRef> {
     native private static int capacity(long arrayVa);
 
     native private static void free(long arrayVa);
+
+    native private static void erase(
+            long vectorVa, int startIndex, int stopIndex);
 
     native private static long get(long arrayVa, int elementIndex);
 

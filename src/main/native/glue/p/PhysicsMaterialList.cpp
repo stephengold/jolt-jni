@@ -57,6 +57,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialList_
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterialList
+ * Method:    erase
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialList_erase
+  (JNIEnv *, jclass, jlong listVa, jint startIndex, jint stopIndex) {
+    PhysicsMaterialList * const pList
+            = reinterpret_cast<PhysicsMaterialList *> (listVa);
+    PhysicsMaterialList::iterator origin = pList->begin();
+    pList->erase(origin + startIndex, origin + stopIndex);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsMaterialList
  * Method:    free
  * Signature: (J)V
  */

@@ -84,6 +84,23 @@ abstract public class Array<T extends JoltPhysicsObject>
     }
 
     /**
+     * Remove the specified element.
+     *
+     * @param elementIndex the index of the element to remove (&ge;0)
+     */
+    public void erase(int elementIndex) {
+        erase(elementIndex, elementIndex + 1);
+    }
+
+    /**
+     * Remove all elements in the specified range of indices.
+     *
+     * @param startIndex the index of the first element to remove (&ge;0)
+     * @param stopIndex one plus the index of the last element to remove (&ge;0)
+     */
+    abstract public void erase(int startIndex, int stopIndex);
+
+    /**
      * Access or copy the element at the specified index.
      *
      * @param elementIndex the index from which to get the array (&ge;0)

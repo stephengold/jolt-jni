@@ -57,6 +57,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_
 
 /*
  * Class:     com_github_stephengold_joltjni_IndexedTriangleList
+ * Method:    erase
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_erase
+  (JNIEnv *, jclass, jlong listVa, jint startIndex, jint stopIndex) {
+    IndexedTriangleList * const pList
+            = reinterpret_cast<IndexedTriangleList *> (listVa);
+    IndexedTriangleList::iterator origin = pList->begin();
+    pList->erase(origin + startIndex, origin + stopIndex);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_IndexedTriangleList
  * Method:    free
  * Signature: (J)V
  */

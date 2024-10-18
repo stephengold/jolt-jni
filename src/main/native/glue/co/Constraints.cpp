@@ -57,6 +57,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraints_free
 
 /*
  * Class:     com_github_stephengold_joltjni_Constraints
+ * Method:    erase
+ * Signature: (JII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraints_erase
+  (JNIEnv *, jclass, jlong arrayVa, jint startIndex, jint stopIndex) {
+    Constraints * const pArray = reinterpret_cast<Constraints *> (arrayVa);
+    Constraints::iterator origin = pArray->begin();
+    pArray->erase(origin + startIndex, origin + stopIndex);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Constraints
  * Method:    get
  * Signature: (JI)J
  */
