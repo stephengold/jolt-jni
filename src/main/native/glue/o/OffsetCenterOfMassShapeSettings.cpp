@@ -32,6 +32,22 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings
+ * Method:    createSettingsFromSettings
+ * Signature: (FFFJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_createSettingsFromSettings
+  (JNIEnv *, jclass, jfloat offsetX, jfloat offsetY, jfloat offsetZ, jlong baseShapeSettingsVa) {
+    const Vec3 offset(offsetX, offsetY, offsetZ);
+    const ShapeSettings * const pSettings
+            = reinterpret_cast<ShapeSettings *> (baseShapeSettingsVa);
+    OffsetCenterOfMassShapeSettings * const pResult
+            = new OffsetCenterOfMassShapeSettings(offset, pSettings);
+    TRACE_NEW("OffsetCenterOfMassShapeSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings
  * Method:    createSettingsFromShapeRef
  * Signature: (FFFJ)J
  */

@@ -61,6 +61,25 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
         setVirtualAddress(ocomssVa, null); // no owner due to ref counting
         setSubType(EShapeSubType.OffsetCenterOfMass);
     }
+
+    /**
+     * Instantiate a settings object with the specified offset and base-shape
+     * settings.
+     *
+     * @param offset (not null, unaffected)
+     * @param baseShapeSettings settings to create the base shape (not null)
+     */
+    public OffsetCenterOfMassShapeSettings(
+            Vec3Arg offset, ShapeSettings baseShapeSettings) {
+        float offsetX = offset.getX();
+        float offsetY = offset.getY();
+        float offsetZ = offset.getZ();
+        long baseShapeSettingsVa = baseShapeSettings.va();
+        long ocomssVa = createSettingsFromSettings(
+                offsetX, offsetY, offsetZ, baseShapeSettingsVa);
+        setVirtualAddress(ocomssVa, null); // no owner due to ref counting
+        setSubType(EShapeSubType.OffsetCenterOfMass);
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -95,6 +114,9 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createSettingsFromSettings(float offsetX,
+            float offsetY, float offsetZ, long baseShapeSettingsVa);
 
     native private static long createSettingsFromShapeRef(
             float offsetX, float offsetY, float offsetZ, long baseShapeRefVa);
