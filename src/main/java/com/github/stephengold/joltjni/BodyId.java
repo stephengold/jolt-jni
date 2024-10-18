@@ -160,23 +160,23 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static long copy(long idVa);
 
     native private static long createDefault();
 
-    native private static boolean equals(long id1Va, long id2Va);
+    native static boolean equals(long id1Va, long id2Va);
 
     native private static void free(long idVa);
 
     native private static int getIndex(long idVa);
 
-    native private static int getIndexAndSequenceNumber(long idVa);
+    native static int getIndexAndSequenceNumber(long idVa);
 
     native private static int getSequenceNumber(long idVa);
 
     native private static boolean isInvalid(long idVa);
 
-    native private static void setIndexAndSequenceNumber(long idVa, int value);
+    native static void setIndexAndSequenceNumber(long idVa, int value);
 }

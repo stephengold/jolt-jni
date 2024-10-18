@@ -21,7 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.template.Array;
+import java.util.Arrays;
 
 /**
  * A variable-length vector (array) of body IDs. (native type:
@@ -39,6 +41,48 @@ public class BodyIdVector extends Array<BodyId> {
     public BodyIdVector() {
         long vectorVa = createBodyIdVector();
         setVirtualAddress(vectorVa, () -> free(vectorVa));
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Find the element index of the matching ID, if any.
+     *
+     * @param id the ID to search for (not null, unaffected)
+     * @return the index of the matching element, or -1 if not found
+     */
+    public int find(ConstBodyId id) {
+        long vectorVa = va();
+        long idVa = id.va();
+        int numIds = size(vectorVa);
+        for (int i = 0; i < numIds; ++i) {
+            long id2Va = getId(vectorVa, i);
+            if (BodyId.equals(idVa, id2Va)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Arrange the IDs in ascending order.
+     */
+    public void sort() {
+        long vectorVa = va();
+        int numIds = size(vectorVa);
+
+        int[] tempValues = new int[numIds];
+        long[] tempVas = new long[numIds];
+        for (int i = 0; i < numIds; ++i) {
+            long idVa = getId(vectorVa, i);
+            tempVas[i] = idVa;
+            tempValues[i] = BodyId.getIndexAndSequenceNumber(idVa);
+        }
+        Arrays.sort(tempValues);
+        for (int i = 0; i < numIds; ++i) {
+            BodyId.setIndexAndSequenceNumber(tempVas[i], tempValues[i]);
+        }
     }
     // *************************************************************************
     // Array<BodyId> methods
