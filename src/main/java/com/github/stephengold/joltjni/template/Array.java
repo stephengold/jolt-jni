@@ -103,7 +103,7 @@ abstract public class Array<T extends JoltPhysicsObject>
     /**
      * Access or copy the element at the specified index.
      *
-     * @param elementIndex the index from which to get the array (&ge;0)
+     * @param elementIndex the index from which to get the element (&ge;0)
      * @return a new JVM object
      */
     abstract public T get(int elementIndex);

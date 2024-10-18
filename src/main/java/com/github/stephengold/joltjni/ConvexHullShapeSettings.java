@@ -104,7 +104,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified points.
      *
-     * @param points an array of point locations (not null, unaffected)
+     * @param points the array of desired point locations (not null, unaffected)
      */
     public ConvexHullShapeSettings(Vec3Arg... points) {
         this(points, PhysicsSettings.cDefaultConvexRadius);

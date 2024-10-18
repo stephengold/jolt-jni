@@ -57,8 +57,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      *
      * @param boxVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the current object the owner,
+     * {@code false} &rarr; the current object isn't the owner
      */
     AaBox(long boxVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(boxVa) : null;
@@ -139,7 +139,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      *
      * @param point the point to test (not null, unaffected)
      *
-     * @return true if contained, otherwise false
+     * @return {@code true} if contained, otherwise {@code false}
      */
     @Override
     public boolean contains(Vec3Arg point) {
@@ -250,7 +250,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Test whether the box is valid. It is unaffected.
      *
-     * @return true if valid, otherwise false
+     * @return {@code true} if valid, otherwise {@code false}
      */
     @Override
     public boolean isValid() {
