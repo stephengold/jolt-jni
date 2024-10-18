@@ -645,6 +645,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getWorldSpaceBo
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getWorldTransform
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getWorldTransform
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    RMat44 * const pResult = new RMat44();
+    TRACE_NEW("RMat44", result)
+    *pResult = pBody->GetWorldTransform();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    isActive
  * Signature: (J)Z
  */

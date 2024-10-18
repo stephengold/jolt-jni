@@ -206,6 +206,13 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     ConstAaBox getWorldSpaceBounds();
 
     /**
+     * Copy the world transform. The body is unaffected.
+     *
+     * @return a new matrix relative to system coordinates
+     */
+    RMat44 getWorldTransform();
+
+    /**
      * Test whether the body is deactivated. The body is unaffected.
      *
      * @return false if deactivated, otherwise true

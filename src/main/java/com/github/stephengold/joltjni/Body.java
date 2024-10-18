@@ -793,6 +793,20 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Copy the world transform. The body is unaffected.
+     *
+     * @return a new matrix relative to system coordinates
+     */
+    @Override
+    public RMat44 getWorldTransform() {
+        long bodyVa = va();
+        long matrixVa = getWorldTransform(bodyVa);
+        RMat44 result = new RMat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Test whether the body is deactivated. The body is unaffected.
      *
      * @return false if deactivated, otherwise true
@@ -987,6 +1001,8 @@ public class Body extends NonCopyable implements ConstBody {
     native private static long getUserData(long bodyVa);
 
     native private static long getWorldSpaceBounds(long bodyVa);
+
+    native private static long getWorldTransform(long bodyVa);
 
     native private static boolean isActive(long bodyVa);
 
