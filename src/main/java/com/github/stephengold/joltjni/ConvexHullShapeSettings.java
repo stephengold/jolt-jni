@@ -278,6 +278,24 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         long settingsVa = va();
         setMaxErrorConvexRadius(settingsVa, maxError);
     }
+
+    /**
+     * Replace any existing points with the specified ones.
+     *
+     * @param points the array of desired point locations (not null, unaffected)
+     */
+    public void setPoints(Vec3Arg... points) {
+        int numPoints = points.length;
+        int numFloats = numAxes * numPoints;
+        FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
+        for (Vec3Arg point : points) {
+            buffer.put(point.getX());
+            buffer.put(point.getY());
+            buffer.put(point.getZ());
+        }
+        long settingsVa = va();
+        setPoints(settingsVa, numPoints, buffer);
+    }
     // *************************************************************************
     // native private methods
 
@@ -300,4 +318,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
 
     native private static void setMaxErrorConvexRadius(
             long settingsVa, float maxError);
+
+    native private static void setPoints(
+            long settingsVa, int numPoints, FloatBuffer buffer);
 }

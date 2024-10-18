@@ -144,3 +144,25 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettin
             = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
     pSettings->mMaxErrorConvexRadius = maxError;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    setPoints
+ * Signature: (JILjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_setPoints
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jint numPoints, jobject buffer) {
+    ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    pSettings->mPoints.clear();
+    pSettings->mPoints.reserve(numPoints);
+    const jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
+    for (jint i = 0; i < numPoints; ++i) {
+        const float x = pFloats[3 * i];
+        const float y = pFloats[3 * i + 1];
+        const float z = pFloats[3 * i + 2];
+        const Vec3 vec(x, y, z);
+        pSettings->mPoints.push_back(vec);
+    }
+}
