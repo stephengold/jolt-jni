@@ -122,6 +122,80 @@ You can restore the project to a pristine state:
 + using Windows Command Prompt: `.\gradlew cleanAll`
 
 
+## Freeing native objects
+
+In long-running applications,
+it's important to free objects that are no longer in use,
+lest the app run out of memory.
+
+Here it's important to distinguish between JVM objects and native objects.
+A handful jolt-jni classes are implemented entirely in Java, notably:
+`Color`, `Float3`, `Plane`, `Quat`, `RVec3`, `UVec4`, `Vec3`, and `Vec4`.
+Apart from these special classes,
+every JVM object in jolt-jni is an instance of `JoltPhysicsObject`,
+which implies it has a corresponding native object assigned to it.
+
+For instance, when a jolt-jni app instantiates a matrix using `new Mat44()`,
+both a JVM object and a native object are created.
+The app can't access the native object directly;
+it can only invoke methods exposed by the JVM object.
+
+While JVM objects get reclaimed automatically
+(in batches, by a garbage collector) after they become unreachable,
+jolt-jni provides several mechanisms for reclaiming native objects.
+
+In the simple case of a matrix instantiated using `matrix = new Mat44()`,
+the native object can be freed:
++ explicitly using `matrix.close()`,
++ implicitly by `AutoCloseable`
+  (at the end of the `try` block in which the matrix was instantiated), or
++ automatically when the corresponding JVM object is reclaimed
+  (provided a cleaning task has been started
+  by invoking `JoltPhysicsObject.startCleaner()`).
+
+In native code, convention dictates if when a class allocates memory,
+it takes responsibility for freeing it.
+For this reason, jolt-jni applications cannot free objects created
+implicitly by Jolt Physics.
+
+For instance, when an app invokes `getBodyLockInterface()` on a `PhysicsSystem`,
+a new JVM object is returned.
+However, that JVM object refers to a pre-existing native object
+(the one Jolt Physics allocated while initializing the `PhysicsSystem`).
+Thus the application need not (and cannot) free the native object
+separately from the `PhysicsSystem` that contains it.
+On such "contained" objects, `close()` is a no-op,
+because the JVM object doesn't "own" its assigned native object.
+
+Another case where a `JoltPhysicsObject` doesn't own its assigned native object
+is when the object implements reference counting.
+In this case, responsibility for freeing the native object (called the "target")
+is shared among other objects (called "references") that refer to it.
+Jolt-jni classes that implement reference counting
+are exactly those that implement the `RefTarget` interface.
+They include `BaseCharacter`, `Constraint`, `ConstraintSettings`,
+`GroupFilter`, `PhysicsMaterial`, `PhysicsScene`, `Ragdoll`, `Shape`,
+`ShapeSettings`, `VehicleController`, and all their subclasses.
+On `RefTarget` objects, `close()` is (again) a no-op,
+because the JVM object doesn't own its assigned native object.
+
+The simplest way to create a reference is to invoke `target.toRef()`.
+References are themselves instances of `JoltPhysicsObject`, of course.
+(And please note that jolt-jni reference counting is completely orthogonal
+to Java references, strong, weak, or otherwise.)
+
+The only way to free the assigned native object of a `RefTarget`
+is to decrement its reference count from one to zero.
+This implies creating one or more references
+and then freeing them all, either explicitly, implicitly, or automatically.
+
+As long as a reference is active, the target cannot be freed.
+Nor can it be freed if no reference to it has been created
+(because in that case its reference count is already zero).
+Nor can it be freed if reference counting is disabled
+by invoking `target.setEmbedded()`.
+
+
 ## External links
 
 + [The Jolt Physics repo at GitHub](https://github.com/jrouwe/JoltPhysics)
