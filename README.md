@@ -153,8 +153,8 @@ the native object can be freed:
   (provided a cleaning task has been started
   by invoking `JoltPhysicsObject.startCleaner()`).
 
-In native code, convention dictates if when a class allocates memory,
-it takes responsibility for freeing it.
+In native code, convention dictates that when a class allocates memory,
+it assumes responsibility for freeing it.
 For this reason, jolt-jni applications cannot free objects created
 implicitly by Jolt Physics.
 
@@ -189,8 +189,8 @@ is to decrement its reference count from one to zero.
 This implies creating one or more references
 and then freeing them all, either explicitly, implicitly, or automatically.
 
-As long as a reference is active, the target cannot be freed.
-Nor can it be freed if no reference to it has been created
+As long as a reference is active, its target cannot be freed.
+Nor can a target be freed if no reference to it has been created
 (because in that case its reference count is already zero).
 Nor can it be freed if reference counting is disabled
 by invoking `target.setEmbedded()`.
