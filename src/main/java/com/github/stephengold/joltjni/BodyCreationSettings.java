@@ -45,7 +45,7 @@ public class BodyCreationSettings
      * Instantiate default settings.
      */
     public BodyCreationSettings() {
-        long bodySettingsVa = createBodyCreationSettings();
+        long bodySettingsVa = createDefault();
         setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
 
@@ -62,7 +62,7 @@ public class BodyCreationSettings
             EMotionType motionType, int objLayer) {
         long shapeVa = shape.va();
         int motionTypeOrdinal = motionType.ordinal();
-        long bodySettingsVa = createBodyCreationSettingsFromShape(
+        long bodySettingsVa = createFromShape(
                 shapeVa, loc.xx(), loc.yy(), loc.zz(),
                 orient.getX(), orient.getY(), orient.getZ(), orient.getW(),
                 motionTypeOrdinal, objLayer);
@@ -123,7 +123,7 @@ public class BodyCreationSettings
             QuatArg orient, EMotionType motionType, int objLayer) {
         long shapeSettingsVa = shapeSettings.va();
         int motionTypeOrdinal = motionType.ordinal();
-        long bodySettingsVa = createBodyCreationSettingsFromShapeSettings(
+        long bodySettingsVa = createFromShapeSettings(
                 shapeSettingsVa, loc.xx(), loc.yy(), loc.zz(),
                 orient.getX(), orient.getY(), orient.getZ(), orient.getW(),
                 motionTypeOrdinal, objLayer);
@@ -775,14 +775,14 @@ public class BodyCreationSettings
     // *************************************************************************
     // native private methods
 
-    native private static long createBodyCreationSettings();
+    native private static long createDefault();
 
-    native private static long createBodyCreationSettingsFromShape(
+    native private static long createFromShape(
             long shapeVa, double locX, double locY, double locZ,
             float qx, float qy, float qz, float qw,
             int motionTypeOrdinal, int objLayer);
 
-    native private static long createBodyCreationSettingsFromShapeSettings(
+    native private static long createFromShapeSettings(
             long shapeSettingsVa, double locX, double locY, double locZ,
             float qx, float qy, float qz, float qw,
             int motionTypeOrdinal, int objLayer);

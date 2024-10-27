@@ -32,10 +32,10 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
- * Method:    createBodyCreationSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_createBodyCreationSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_createDefault
   (JNIEnv *, jclass) {
     BodyCreationSettings * const pResult = new BodyCreationSettings();
     TRACE_NEW("BodyCreationSettings", pResult)
@@ -44,10 +44,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
- * Method:    createBodyCreationSettingsFromShape
+ * Method:    createFromShape
  * Signature: (JDDDFFFFII)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_createBodyCreationSettingsFromShape
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_createFromShape
   (JNIEnv *, jclass, jlong shapeVa, jdouble locX, jdouble locY, jdouble locZ,
   jfloat qx, jfloat qy, jfloat qz, jfloat qw, jint motionTypeOrdinal, jint objLayer) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
@@ -62,10 +62,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
- * Method:    createBodyCreationSettingsFromShapeSettings
+ * Method:    createFromShapeSettings
  * Signature: (JDDDFFFFII)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_createBodyCreationSettingsFromShapeSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_createFromShapeSettings
   (JNIEnv *, jclass, jlong shapeSettingsVa, jdouble locX, jdouble locY, jdouble locZ,
   jfloat qx, jfloat qy, jfloat qz, jfloat qw, jint motionTypeOrdinal, jint objLayer) {
     const ShapeSettings * const pShapeSettings
