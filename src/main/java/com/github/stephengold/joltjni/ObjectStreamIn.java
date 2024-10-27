@@ -28,7 +28,7 @@ import com.github.stephengold.joltjni.template.Ref;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ObjectStreamIn {
+final public class ObjectStreamIn {
     // *************************************************************************
     // constructors
 
