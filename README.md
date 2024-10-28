@@ -122,6 +122,8 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
 After a successful build,
 artifacts will be found in "build/libs".
 
+### Other tasks
+
 You can run the "hello world" example app:
 + using Bash or Fish or PowerShell or Zsh: `./gradlew runHelloWorld`
 + using Windows Command Prompt: `.\gradlew runHelloWorld`
