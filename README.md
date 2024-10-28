@@ -8,6 +8,19 @@ Source code is provided under
 [an MIT license][license].
 
 
+<a name="toc"></a>
+
+## Contents of this document
+
++ [Translating Jolt Physics applications into Java](#translate)
++ [How to add jolt-jni to an existing project](#add)
++ [How to build jolt-jni from source](#build)
++ [Freeing native objects](#free)
++ [External links](#links)
+
+
+<a name="translate"></a>
+
 ## Translating Jolt Physics applications into Java
 
 There’s close correspondence between the class/method names
@@ -32,8 +45,12 @@ For a couple well-known Jolt Physics examples,
 [line-for-line translations into Java](https://github.com/stephengold/jolt-jni/tree/master/src/test/java/testjoltjni/app)
 are provided.
 
+[Jump to the table of contents](#toc)
 
-## How to add jolt-jni to an existing JVM project
+
+<a name="add"></a>
+
+## How to add jolt-jni to an existing project
 
 Jolt-jni comes pre-built as a platform-independent JVM library
 plus a set of native libraries, all downloadable from Maven Central.
@@ -64,7 +81,10 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
   "MacOSX64", "MacOSX_ARM64", or "Windows64".
 + The "DebugSp" classifier
   may be replaced by "DebugDp", "ReleaseSp", or "ReleaseDp".
+[Jump to the table of contents](#toc)
 
+
+<a name="build"></a>
 
 ## How to build jolt-jni from source
 
@@ -125,6 +145,10 @@ You can restore the project to a pristine state:
 + using Bash or Fish or PowerShell or Zsh: `./gradlew cleanAll`
 + using Windows Command Prompt: `.\gradlew cleanAll`
 
+[Jump to the table of contents](#toc)
+
+
+<a name="free"></a>
 
 ## Freeing native objects
 
@@ -199,10 +223,16 @@ Nor can a target be freed if no reference to it has been created
 Nor can it be freed if reference counting is disabled
 by invoking `target.setEmbedded()`.
 
+[Jump to the table of contents](#toc)
+
+
+<a name="links"></a>
 
 ## External links
 
 + [The Jolt Physics repo at GitHub](https://github.com/jrouwe/JoltPhysics)
+
+[Jump to the table of contents](#toc)
 
 
 [adoptium]: https://adoptium.net/releases.html "Adoptium Project"
