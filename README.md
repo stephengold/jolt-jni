@@ -117,6 +117,10 @@ You can run various scenes in the "performance test" example app:
   + using Bash or Fish or PowerShell or Zsh: `./gradlew runRagdoll`
   + using Windows Command Prompt: `.\gradlew runRagdoll`
 
+You can install the artifacts to your local Maven repository:
++ using Bash or Fish or PowerShell or Zsh: `./gradlew install`
++ using Windows Command Prompt: `.\gradlew install`
+
 You can restore the project to a pristine state:
 + using Bash or Fish or PowerShell or Zsh: `./gradlew cleanAll`
 + using Windows Command Prompt: `.\gradlew cleanAll`
