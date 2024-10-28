@@ -51,10 +51,10 @@ final public class ObjectStreamIn {
     public static boolean sReadObject(String fileName, Ref storeRef) {
         long refVa = storeRef.va();
         boolean result;
-        if (storeRef instanceof RagdollSettingsRef) {
-            result = sReadRagdollSettings(fileName, refVa);
-        } else if (storeRef instanceof PhysicsSceneRef) {
+        if (storeRef instanceof PhysicsSceneRef) {
             result = sReadPhysicsScene(fileName, refVa);
+        } else if (storeRef instanceof RagdollSettingsRef) {
+            result = sReadRagdollSettings(fileName, refVa);
         } else if (storeRef instanceof SkeletalAnimationRef) {
             result = sReadSkeletalAnimation(fileName, refVa);
         } else {
@@ -67,10 +67,10 @@ final public class ObjectStreamIn {
     // *************************************************************************
     // native private methods
 
-    native private static boolean sReadRagdollSettings(
+    native private static boolean sReadPhysicsScene(
             String fileName, long refVa);
 
-    native private static boolean sReadPhysicsScene(
+    native private static boolean sReadRagdollSettings(
             String fileName, long refVa);
 
     native private static boolean sReadSkeletalAnimation(
