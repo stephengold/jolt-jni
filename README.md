@@ -108,7 +108,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
     + `git clone https://github.com/stephengold/jolt-jni.git`
     + `cd jolt-jni`
     + `git checkout -b latest 0.9.0`
- + using a web browser:
+  + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link at the bottom of the page
     + save the ZIP file
