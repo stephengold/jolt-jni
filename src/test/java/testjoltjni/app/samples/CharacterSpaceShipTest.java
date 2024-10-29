@@ -76,23 +76,23 @@ void Initialize()
 }
 
 /*TODO
-void ProcessInput(ProcessInputParams inParams)
+void CharacterSpaceShipTest::ProcessInput(const ProcessInputParams &inParams)
 {
 	// Determine controller input
-	Vec3 control_input = Vec3.sZero();
+	Vec3 control_input = Vec3::sZero();
 	if (inParams.mKeyboard->IsKeyPressed(DIK_LEFT))		control_input.SetZ(-1);
 	if (inParams.mKeyboard->IsKeyPressed(DIK_RIGHT))	control_input.SetZ(1);
 	if (inParams.mKeyboard->IsKeyPressed(DIK_UP))		control_input.SetX(1);
 	if (inParams.mKeyboard->IsKeyPressed(DIK_DOWN))		control_input.SetX(-1);
-	if (control_input != Vec3.sZero())
+	if (control_input != Vec3::sZero())
 		control_input = control_input.Normalized();
 
 	// Calculate the desired velocity in local space to the ship based on the camera forward
 	RMat44 new_space_ship_transform = mBodyInterface->GetCenterOfMassTransform(mSpaceShip);
 	Vec3 cam_fwd = new_space_ship_transform.GetRotation().Multiply3x3Transposed(inParams.mCameraState.mForward);
 	cam_fwd.SetY(0.0f);
-	cam_fwd = cam_fwd.NormalizedOr(Vec3.sAxisX());
-	Quat rotation = Quat.sFromTo(Vec3.sAxisX(), cam_fwd);
+	cam_fwd = cam_fwd.NormalizedOr(Vec3::sAxisX());
+	Quat rotation = Quat::sFromTo(Vec3::sAxisX(), cam_fwd);
 	control_input = rotation * control_input;
 
 	// Smooth the player input in local space to the ship
