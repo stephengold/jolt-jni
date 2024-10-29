@@ -32,6 +32,16 @@ import testjoltjni.TestUtils;
  * https://github.com/jrouwe/JoltPhysics/blob/master/HelloWorld/HelloWorld.cpp
  */
 public class HelloWorld {
+
+
+
+
+
+
+
+
+
+
 // Layer that objects can be in, determines which other objects it can collide with
 // Typically you at least want to have 1 layer for moving bodies and 1 layer for static bodies, but you can have more
 // layers if you want. E.g. you could have a layer for high detail collision (which is not used by the physics simulation
@@ -59,9 +69,9 @@ static class ObjectLayerPairFilterImpl extends ObjVsObjFilter
 // your broadphase layers define JPH_TRACK_BROADPHASE_STATS and look at the stats reported on the TTY.
 class BroadPhaseLayers
 {
-	static final int NON_MOVING = 0;
-	static final int MOVING = 1;
-	static final int NUM_LAYERS = 2;
+	static final int NON_MOVING=0;
+	static final int MOVING=1;
+	static final int NUM_LAYERS=2;
 };
 
 // BroadPhaseLayerInterface implementation
@@ -70,10 +80,10 @@ static class BPLayerInterfaceImpl extends MapObj2Bp
 {
 									BPLayerInterfaceImpl()
 	{
-		super(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS);
+            super(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS);
 		add(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
 		add(Layers.MOVING, BroadPhaseLayers.MOVING);
-	}
+	}                                                                     
 };
 
 /// Class that determines if an object layer can collide with a broadphase layer
@@ -97,17 +107,17 @@ static class MyContactListener extends CustomContactListener
 		return ValidateResult.AcceptAllContactsForThisBodyPair.ordinal();
 	}
 
-	public void onContactAdded(long body1Va, long body2Va, long manifoldVa, long settingsVa)
+	public void			onContactAdded(long body1Va, long body2Va, long manifoldVa, long settingsVa)
 	{
 		System.out.println("A contact was added");
 	}
 
-	public void onContactPersisted(long body1Va, long body2Va, long manifoldVa, long settingsVa)
+	public void			onContactPersisted(long body1Va, long body2Va, long manifoldVa, long settingsVa)
 	{
 		System.out.println("A contact was persisted");
 	}
 
-	public void onContactRemoved(long pairVa)
+	public void			onContactRemoved(long pairVa)
 	{
 		System.out.println("A contact was removed");
 	}
@@ -180,30 +190,30 @@ public static void main(String[] argv)
 
 	// Create mapping table from object layer to broadphase layer
 	// Note: As this is an interface, PhysicsSystem will take a reference to this so this instance needs to stay alive!
-	BPLayerInterfaceImpl broad_phase_layer_interface = new BPLayerInterfaceImpl();
+	BPLayerInterfaceImpl broad_phase_layer_interface=new BPLayerInterfaceImpl();
 
 	// Create class that filters object vs broadphase layers
 	// Note: As this is an interface, PhysicsSystem will take a reference to this so this instance needs to stay alive!
-	ObjectVsBroadPhaseLayerFilterImpl object_vs_broadphase_layer_filter = new ObjectVsBroadPhaseLayerFilterImpl();
+	ObjectVsBroadPhaseLayerFilterImpl object_vs_broadphase_layer_filter=new ObjectVsBroadPhaseLayerFilterImpl();
 
 	// Create class that filters object vs object layers
 	// Note: As this is an interface, PhysicsSystem will take a reference to this so this instance needs to stay alive!
-	ObjectLayerPairFilterImpl object_vs_object_layer_filter = new ObjectLayerPairFilterImpl();
+	ObjectLayerPairFilterImpl object_vs_object_layer_filter=new ObjectLayerPairFilterImpl();
 
 	// Now we can create the actual physics system.
-	PhysicsSystem physics_system = new PhysicsSystem();
+	PhysicsSystem physics_system=new PhysicsSystem();
 	physics_system.init(cMaxBodies, cNumBodyMutexes, cMaxBodyPairs, cMaxContactConstraints, broad_phase_layer_interface, object_vs_broadphase_layer_filter, object_vs_object_layer_filter);
 
 	// A body activation listener gets notified when bodies activate and go to sleep
 	// Note that this is called from a job so whatever you do here needs to be thread safe.
 	// Registering one is entirely optional.
-	MyBodyActivationListener body_activation_listener = new MyBodyActivationListener();
+	MyBodyActivationListener body_activation_listener=new MyBodyActivationListener();
 	physics_system.setBodyActivationListener(body_activation_listener);
 
 	// A contact listener gets notified when bodies (are about to) collide, and when they separate again.
 	// Note that this is called from a job so whatever you do here needs to be thread safe.
 	// Registering one is entirely optional.
-	MyContactListener contact_listener = new MyContactListener();
+	MyContactListener contact_listener=new MyContactListener();
 	physics_system.setContactListener(contact_listener);
 
 	// The main way to interact with the bodies in the physics system is through the body interface. There is a locking and a non-locking
@@ -213,7 +223,7 @@ public static void main(String[] argv)
 	// Next we can create a rigid body to serve as the floor, we make a large box
 	// Create the settings for the collision volume (the shape).
 	// Note that for simple shapes (like boxes) you can also directly construct a BoxShape.
-	BoxShapeSettings floor_shape_settings = new BoxShapeSettings(new Vec3(100.0f, 1.0f, 100.0f));
+	BoxShapeSettings floor_shape_settings=new BoxShapeSettings(new Vec3(100.0f, 1.0f, 100.0f));
 	floor_shape_settings.setEmbedded(); // A ref counted object on the stack (base class RefTarget) should be marked as such to prevent it from being freed when its reference count goes to 0.
 
 	// Create the shape
@@ -221,7 +231,7 @@ public static void main(String[] argv)
 	ShapeRefC floor_shape = floor_shape_result.get(); // We don't expect an error here, but you can check floor_shape_result for HasError() / GetError()
 
 	// Create the settings for the body itself. Note that here you can also set other properties like the restitution / friction.
-	BodyCreationSettings floor_settings = new BodyCreationSettings(floor_shape, new RVec3(0.0, -1.0, 0.0), new Quat(), EMotionType.Static, Layers.NON_MOVING);
+	BodyCreationSettings floor_settings=new BodyCreationSettings(floor_shape,new RVec3(0.0, -1.0, 0.0), new Quat(), EMotionType.Static, Layers.NON_MOVING);
 
 	// Create the actual rigid body
 	Body floor = body_interface.createBody(floor_settings); // Note that if we run out of bodies this can return nullptr
@@ -231,12 +241,12 @@ public static void main(String[] argv)
 
 	// Now create a dynamic body to bounce on the floor
 	// Note that this uses the shorthand version of creating and adding a body to the world
-	BodyCreationSettings sphere_settings = new BodyCreationSettings(new SphereShape(0.5f), new RVec3(0f, 2f, 0f), new Quat(), EMotionType.Dynamic, Layers.MOVING);
+	BodyCreationSettings sphere_settings=new BodyCreationSettings(new SphereShape(0.5f),new RVec3(0f, 2f, 0f), new Quat(), EMotionType.Dynamic, Layers.MOVING);
 	BodyId sphere_id = body_interface.createAndAddBody(sphere_settings, EActivation.Activate).copy();
 
 	// Now you can interact with the dynamic body, in this case we're going to give it a velocity.
 	// (note that if we had used CreateBody then we could have set the velocity straight on the body before adding it to the physics system)
-	body_interface.setLinearVelocity(sphere_id, new Vec3(0.0f, -5.0f, 0.0f));
+	body_interface.setLinearVelocity(sphere_id,new Vec3(0.0f, -5.0f, 0.0f));
 
 	// We simulate the physics world in discrete time steps. 60 Hz is a good rate to update the physics system.
 	final float cDeltaTime = 1.0f / 60.0f;
@@ -280,5 +290,6 @@ public static void main(String[] argv)
 
 	// Destroy the factory
 	Jolt.destroyFactory();
+
 }
 }

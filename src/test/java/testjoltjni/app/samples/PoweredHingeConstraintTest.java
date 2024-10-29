@@ -54,7 +54,7 @@ void Initialize()
 	body1.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 0));
 	mBodyInterface.addBody(body1.getId(), EActivation.DontActivate);
 
-	RVec3 body2_position = Op.add(body1_position , new Vec3(box_size, 0, 0));
+	RVec3 body2_position = Op.add(body1_position ,new Vec3(box_size, 0, 0));
 	Body body2 = mBodyInterface.createBody(new BodyCreationSettings(box, body2_position, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
 	body2.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 0));
 	body2.getMotionProperties().setLinearDamping(0.0f);
@@ -62,7 +62,7 @@ void Initialize()
 	body2.setAllowSleeping(false);
 	mBodyInterface.addBody(body2.getId(), EActivation.Activate);
 
-	RVec3 constraint_position = Op.add(body1_position , new Vec3(0.5f * box_size, 0, 0.5f * box_size));
+	RVec3 constraint_position = Op.add(body1_position ,new Vec3(0.5f * box_size, 0, 0.5f * box_size));
 
 	HingeConstraintSettings settings = new HingeConstraintSettings();
 	settings.setPoint1 ( settings.setPoint2 ( constraint_position));
@@ -74,7 +74,7 @@ void Initialize()
 	mPhysicsSystem.addConstraint(mConstraint);
 
 	// Calculate inertia of body 2 as seen from the constraint
-	MassProperties body2_inertia_from_constraint = new MassProperties();
+	MassProperties body2_inertia_from_constraint=new MassProperties();
 	body2_inertia_from_constraint.setMass ( 1.0f / body2.getMotionProperties().getInverseMass());
 	body2_inertia_from_constraint.setInertia ( body2.getMotionProperties().getLocalSpaceInverseInertia().inversed3x3());
 	body2_inertia_from_constraint.translate(Op.subtract(body2_position , constraint_position).toVec3());
