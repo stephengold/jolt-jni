@@ -266,20 +266,6 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
-     * Return the inverse of the 3x3 portion. The current matrix is unaffected.
-     *
-     * @return a new matrix
-     */
-    @Override
-    public RMat44 inversed3x3() {
-        long currentVa = va();
-        long resultVa = inversed3x3(currentVa);
-        RMat44 result = new RMat44(resultVa, true);
-
-        return result;
-    }
-
-    /**
      * Test whether the current matrix is equal to the argument. The current
      * matrix is unaffected.
      *

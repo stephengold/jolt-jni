@@ -218,20 +218,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_inversed
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
- * Method:    inversed3x3
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_inversed3x3
-  (JNIEnv *, jclass, jlong currentVa) {
-    const RMat44 * const pCurrent = reinterpret_cast<RMat44 *> (currentVa);
-    RMat44 * const pResult = new RMat44();
-    TRACE_NEW("RMat44", pResult)
-    *pResult = pCurrent->Inversed3x3();
-    return reinterpret_cast<jlong> (pResult);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    multiply3x3
  * Signature: (JFFF[D)V
  */
