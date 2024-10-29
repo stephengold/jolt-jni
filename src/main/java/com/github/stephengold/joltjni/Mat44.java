@@ -203,6 +203,36 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Copy the translation component. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getTranslation() {
+        long matrixVa = va();
+        float x = getTranslationX(matrixVa);
+        float y = getTranslationY(matrixVa);
+        float z = getTranslationZ(matrixVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the inverse of the current matrix, which is unaffected.
+     *
+     * @return a new matrix
+     */
+    @Override
+    public Mat44 inversed() {
+        long currentVa = va();
+        long resultVa = inversed(currentVa);
+        Mat44 result = new Mat44(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the inverse of the 3x3 portion. The current matrix is unaffected.
      *
      * @return a new matrix
@@ -228,6 +258,23 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         long m1Va = va();
         long m2Va = m2.va();
         boolean result = equals(m1Va, m2Va);
+
+        return result;
+    }
+
+    /**
+     * Multiply the current matrix by the specified matrix. The current matrix
+     * is unaffected.
+     *
+     * @param m2 the right factor (not null, unaffected)
+     * @return a new matrix
+     */
+    @Override
+    public Mat44 multiply(Mat44Arg m2) {
+        long m1Va = va();
+        long m2Va = m2.va();
+        long productVa = multiply(m1Va, m2Va);
+        Mat44 result = new Mat44(productVa, true);
 
         return result;
     }
@@ -354,7 +401,17 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     native private static void getQuaternion(
             long matrixVa, float[] storeArray);
 
+    native private static float getTranslationX(long matrixVa);
+
+    native private static float getTranslationY(long matrixVa);
+
+    native private static float getTranslationZ(long matrixVa);
+
+    native private static long inversed(long currentVa);
+
     native private static long inversed3x3(long currentVa);
+
+    native private static long multiply(long m1Va, long m2Va);
 
     native private static long multiply3x3(long currentVa, long argVa);
 

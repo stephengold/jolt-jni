@@ -72,6 +72,20 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     Quat getQuaternion();
 
     /**
+     * Copy the translation component. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 getTranslation();
+
+    /**
+     * Return the inverse of the current matrix, which is unaffected.
+     *
+     * @return a new matrix
+     */
+    Mat44 inversed();
+
+    /**
      * Return the inverse of the 3x3 portion. The current matrix is unaffected.
      *
      * @return a new matrix
@@ -86,6 +100,15 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * @return true if equal, false if unequal
      */
     boolean isEqual(Mat44Arg m2);
+
+    /**
+     * Multiply the current matrix by the specified matrix. The current matrix
+     * is unaffected.
+     *
+     * @param m2 the right factor (not null, unaffected)
+     * @return a new matrix
+     */
+    Mat44 multiply(Mat44Arg m2);
 
     /**
      * Multiply the current 3x3 matrix by the specified 3x3 matrix. The current

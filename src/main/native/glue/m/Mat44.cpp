@@ -143,6 +143,56 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_getQuaternion
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    getTranslationX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Mat44_getTranslationX
+  (JNIEnv *, jclass, jlong matrixVa) {
+    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    const float result = pMatrix->GetTranslation().GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    getTranslationY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Mat44_getTranslationY
+  (JNIEnv *, jclass, jlong matrixVa) {
+    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    const float result = pMatrix->GetTranslation().GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    getTranslationZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Mat44_getTranslationZ
+  (JNIEnv *, jclass, jlong matrixVa) {
+    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    const float result = pMatrix->GetTranslation().GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    inversed
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_inversed
+  (JNIEnv *, jclass, jlong currentVa) {
+    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (currentVa);
+    Mat44 * const pResult = new Mat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = pMatrix->Inversed();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    inversed3x3
  * Signature: (J)J
  */
@@ -152,6 +202,21 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_inversed3x3
     Mat44 * const pResult = new Mat44();
     TRACE_NEW("Mat44", pResult)
     *pResult = pCurrent->Inversed3x3();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    multiply
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply
+  (JNIEnv *, jclass, jlong m1Va, jlong m2Va) {
+    const Mat44 * const pM1 = reinterpret_cast<Mat44 *> (m1Va);
+    const Mat44 * const pM2 = reinterpret_cast<Mat44 *> (m2Va);
+    Mat44 * const pResult = new Mat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = (*pM1) * (*pM2);
     return reinterpret_cast<jlong> (pResult);
 }
 
