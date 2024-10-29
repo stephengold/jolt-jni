@@ -313,3 +313,35 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_sRotation
     *pResult = Mat44::sRotation(rotation);
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    sRotationTranslation
+ * Signature: ([F)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_sRotationTranslation
+  (JNIEnv *pEnv, jclass, jfloatArray floatArray) {
+    jboolean isCopy;
+    jfloat * const pFloats = pEnv->GetFloatArrayElements(floatArray, &isCopy);
+    const Quat rotation(pFloats[0], pFloats[1], pFloats[2], pFloats[3]);
+    const Vec3 offset(pFloats[4], pFloats[5], pFloats[6]);
+    pEnv->ReleaseFloatArrayElements(floatArray, pFloats, JNI_ABORT);
+    Mat44 * const pResult = new Mat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = Mat44::sRotationTranslation(rotation, offset);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    sTranslation
+ * Signature: (FFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_sTranslation
+  (JNIEnv *, jclass, jfloat x, jfloat y, jfloat z) {
+    const Vec3 offset(x, y, z);
+    Mat44 * const pResult = new Mat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = Mat44::sTranslation(offset);
+    return reinterpret_cast<jlong> (pResult);
+}

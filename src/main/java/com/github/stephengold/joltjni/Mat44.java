@@ -110,6 +110,46 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Create a translation-and-rotation matrix.
+     *
+     * @param rotation the amount to rotate (not null, unaffected)
+     * @param offset the amount to translate (not null, unaffected)
+     * @return a new object
+     */
+    public static Mat44 sRotationTranslation(
+            QuatArg rotation, Vec3Arg offset) {
+        float[] floatArray = new float[7];
+        floatArray[0] = rotation.getX();
+        floatArray[1] = rotation.getY();
+        floatArray[2] = rotation.getZ();
+        floatArray[3] = rotation.getW();
+        floatArray[4] = offset.getX();
+        floatArray[5] = offset.getY();
+        floatArray[6] = offset.getZ();
+        long matrixVa = sRotationTranslation(floatArray);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
+     * Create a pure translation matrix.
+     *
+     * @param offset the amount to translate (not null, unaffected)
+     * @return a new instance
+     *
+     */
+    public static Mat44 sTranslation(Vec3Arg offset) {
+        float x = offset.getX();
+        float y = offset.getY();
+        float z = offset.getZ();
+        long matrixVa = sTranslation(x, y, z);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Create an all-zero matrix.
      *
      * @return a new instance
@@ -426,4 +466,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
             long matrixVa, int row, int column, float value);
 
     native private static long sRotation(float x, float y, float z, float w);
+
+    native private static long sRotationTranslation(float[] floatArray);
+
+    native private static long sTranslation(float x, float y, float z);
 }
