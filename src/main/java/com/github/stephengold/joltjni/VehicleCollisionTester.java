@@ -92,9 +92,9 @@ public class VehicleCollisionTester extends NonCopyable implements RefTarget {
     // *************************************************************************
     // native methods
 
-    native private static int getRefCount(long settingsVa);
+    native private static int getRefCount(long testerVa);
 
-    native private static void setEmbedded(long settingsVa);
+    native private static void setEmbedded(long testerVa);
 
-    native static long toRef(long settingsVa);
+    native static long toRef(long testerVa);
 }
