@@ -42,6 +42,7 @@ import com.github.stephengold.joltjni.ShapeSettings;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorImpl;
+import com.github.stephengold.joltjni.TempAllocatorImplWithMallocFallback;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
@@ -81,6 +82,7 @@ public class Test003 {
         doMassProperties();
         doMotionProperties();
         doTempAllocatorImpl();
+        doTempAllocatorImplWithMallocFallback();
         doTempAllocatorMalloc();
 
         TestUtils.cleanup();
@@ -275,6 +277,22 @@ public class Test003 {
     private static void doTempAllocatorImpl() {
         int numBytes = 1 << 8;
         TempAllocator tempAllocator = new TempAllocatorImpl(numBytes);
+
+        Assert.assertTrue(tempAllocator.hasAssignedNativeObject());
+        Assert.assertTrue(tempAllocator.ownsNativeObject());
+        Assert.assertNotEquals(0L, tempAllocator.va());
+
+        TestUtils.testClose(tempAllocator);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code TempAllocatorImplWithMallocFallback} class.
+     */
+    private static void doTempAllocatorImplWithMallocFallback() {
+        int numBytes = 1 << 8;
+        TempAllocator tempAllocator
+                = new TempAllocatorImplWithMallocFallback(numBytes);
 
         Assert.assertTrue(tempAllocator.hasAssignedNativeObject());
         Assert.assertTrue(tempAllocator.ownsNativeObject());
