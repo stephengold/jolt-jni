@@ -81,7 +81,7 @@ final public class TestUtils {
     // new methods exposed
 
     /**
-     * Verify that 2 quaternions are equal to within some tolerance.
+     * Verify the components of a quaternion to within some tolerance.
      *
      * @param x the expected X component
      * @param y the expected Y component
@@ -99,7 +99,7 @@ final public class TestUtils {
     }
 
     /**
-     * Verify that 2 position-precision vectors are equal to within some
+     * Verify the components of a location-precision vector to within some
      * tolerance.
      *
      * @param x the expected X component
@@ -208,7 +208,7 @@ final public class TestUtils {
     }
 
     /**
-     * Verify that 2 single-precision vectors are equal to within some
+     * Verify the components of a single-precision vector to within some
      * tolerance.
      *
      * @param x the expected X component
@@ -225,7 +225,7 @@ final public class TestUtils {
     }
 
     /**
-     * Verify that the specified vector has the expected component values.
+     * Verify the components of an integer vector.
      *
      * @param x the expected X component
      * @param y the expected Y component
@@ -477,7 +477,7 @@ final public class TestUtils {
 
     /**
      * Test the {@code close()} methods of the specified physics objects.
-     * However, if freeing is automated, {@code close()} is neither invoked or
+     * However, if freeing is automated, {@code close()} is neither invoked nor
      * tested.
      *
      * @param objects the objects to test (not null)
