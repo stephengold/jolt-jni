@@ -99,6 +99,39 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readInt
 
 /*
  * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    readRMat44
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readRMat44
+  (JNIEnv *, jclass, jlong recorderVa, jlong matrixVa) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    pRecorder->Read(*pMatrix);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    readRVec3
+ * Signature: (J[D)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readRVec3
+  (JNIEnv *pEnv, jclass, jlong recorderVa, jdoubleArray tmpDoubles) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    jboolean isCopy;
+    jdouble * const pTmpDoubles
+            = pEnv->GetDoubleArrayElements(tmpDoubles, &isCopy);
+    RVec3 rvec3(pTmpDoubles[0], pTmpDoubles[1], pTmpDoubles[2]);
+    pRecorder->Read(rvec3);
+    pTmpDoubles[0] = rvec3.GetX();
+    pTmpDoubles[1] = rvec3.GetY();
+    pTmpDoubles[2] = rvec3.GetZ();
+    pEnv->ReleaseDoubleArrayElements(tmpDoubles, pTmpDoubles, 0);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
  * Method:    readVec3
  * Signature: (J[F)V
  */
@@ -179,6 +212,32 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_writeIn
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
     pRecorder->Write(i);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    writeRMat44
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_writeRMat44
+  (JNIEnv *, jclass, jlong recorderVa, jlong matrixVa) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    pRecorder->Write(*pMatrix);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    writeRVec3
+ * Signature: (JDDD)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_writeRVec3
+  (JNIEnv *, jclass, jlong recorderVa, jdouble xx, jdouble yy, jdouble zz) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    const RVec3 rvec3(xx, yy, zz);
+    pRecorder->Write(rvec3);
 }
 
 /*

@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.RMat44Arg;
+import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -104,6 +106,29 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
+     * Read a matrix.
+     *
+     * @param inOut the value for validation (not null, modified)
+     */
+    public void readRMat44(RMat44 inOut) {
+        long recorderVa = va();
+        long matrixVa = inOut.va();
+        readRMat44(recorderVa, matrixVa);
+    }
+
+    /**
+     * Read a location vector.
+     *
+     * @param inOut the value for validation (not null, modified)
+     */
+    public void readRVec3(RVec3 inOut) {
+        long recorderVa = va();
+        double[] tmpDoubles = inOut.toArray();
+        readRVec3(recorderVa, tmpDoubles);
+        inOut.set(tmpDoubles[0], tmpDoubles[1], tmpDoubles[2]);
+    }
+
+    /**
      * Read a vector.
      *
      * @param inOut the value for validation (not null, modified)
@@ -167,6 +192,30 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
+     * Write the value of the specified matrix.
+     *
+     * @param matrix the matrix to write (not null, unaffected)
+     */
+    public void write(RMat44Arg matrix) {
+        long recorderVa = va();
+        long matrixVa = matrix.va();
+        writeRMat44(recorderVa, matrixVa);
+    }
+
+    /**
+     * Write the value of the specified vector.
+     *
+     * @param v the vector to write (not null, unaffected)
+     */
+    public void write(RVec3Arg v) {
+        long recorderVa = va();
+        double xx = v.xx();
+        double yy = v.yy();
+        double zz = v.zz();
+        writeRVec3(recorderVa, xx, yy, zz);
+    }
+
+    /**
      * Write the value of the specified vector.
      *
      * @param v the vector to write (not null, unaffected)
@@ -191,6 +240,10 @@ public class StateRecorder extends NonCopyable {
 
     native private static int readInt(long recorderVa, int i);
 
+    native private static void readRMat44(long recorderVa, long matrixVa);
+
+    native private static void readRVec3(long recorderVa, double[] tmpDoubles);
+
     native private static void readVec3(long recorderVa, float[] storeFloats);
 
     native private static void setValidating(long recorderVa, boolean setting);
@@ -203,6 +256,11 @@ public class StateRecorder extends NonCopyable {
     native private static void writeFloat(long recorderVa, float f);
 
     native private static void writeInt(long recorderVa, int i);
+
+    native private static void writeRMat44(long recorderVa, long matrixVa);
+
+    native private static void writeRVec3(
+            long recorderVa, double xx, double yy, double zz);
 
     native private static void writeVec3(
             long recorderVa, float x, float y, float z);
