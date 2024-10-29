@@ -219,20 +219,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_inversed
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    multiply3x3
- * Signature: (JFFF[D)V
+ * Signature: (J[F)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x3
-  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloat x, jfloat y, jfloat z, jdoubleArray storeDoubles) {
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray tmpFloats) {
     const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
-    const Vec3 vec3Arg(x, y, z);
-    const RVec3 result = pMatrix->Multiply3x3(vec3Arg);
     jboolean isCopy;
-    jdouble * const pStoreDoubles
-            = pEnv->GetDoubleArrayElements(storeDoubles, &isCopy);
-    pStoreDoubles[0] = result.GetX();
-    pStoreDoubles[1] = result.GetY();
-    pStoreDoubles[2] = result.GetZ();
-    pEnv->ReleaseDoubleArrayElements(storeDoubles, pStoreDoubles, 0);
+    jfloat * const pTmpFloats
+            = pEnv->GetFloatArrayElements(tmpFloats, &isCopy);
+    const Vec3 vec3Arg(pTmpFloats[0], pTmpFloats[1], pTmpFloats[2]);
+    const Vec3 result = pMatrix->Multiply3x3(vec3Arg);
+    pTmpFloats[0] = result.GetX();
+    pTmpFloats[1] = result.GetY();
+    pTmpFloats[2] = result.GetZ();
+    pEnv->ReleaseFloatArrayElements(tmpFloats, pTmpFloats, 0);
 }
 
 /*

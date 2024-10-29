@@ -289,14 +289,11 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * @return a new vector
      */
     @Override
-    public RVec3 multiply3x3(Vec3Arg vec3Arg) {
+    public Vec3 multiply3x3(Vec3Arg vec3Arg) {
         long matrixVa = va();
-        float x = vec3Arg.getX();
-        float y = vec3Arg.getY();
-        float z = vec3Arg.getZ();
-        double[] storeDoubles = new double[3];
-        multiply3x3(matrixVa, x, y, z, storeDoubles);
-        RVec3 result = new RVec3(storeDoubles);
+        float[] tmpFloats = vec3Arg.toArray();
+        multiply3x3(matrixVa, tmpFloats);
+        Vec3 result = new Vec3(tmpFloats);
 
         return result;
     }
@@ -426,8 +423,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static long inversed3x3(long currentVa);
 
-    native private static void multiply3x3(
-            long matrixVa, float x, float y, float z, double[] storeDoubles);
+    native private static void multiply3x3(long matrixVa, float[] tmpFloats);
 
     native private static void multiply3x3Transposed(
             long matrixVa, float[] tmpFloats);

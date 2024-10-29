@@ -95,7 +95,7 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * @param vec3Arg the right factor (not null, unaffected)
      * @return a new vector
      */
-    RVec3 multiply3x3(Vec3Arg vec3Arg);
+    Vec3 multiply3x3(Vec3Arg vec3Arg);
 
     /**
      * Multiply the transpose of the 3x3 matrix by the specified column vector.
