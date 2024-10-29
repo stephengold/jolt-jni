@@ -335,3 +335,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_setElement
     RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
     pMatrix->GetColumn4(column)[row] = value;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    sRotation
+ * Signature: (FFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_sRotation
+  (JNIEnv *, jclass, jfloat rx, jfloat ry, jfloat rz, jfloat rw) {
+    const Quat quat(rx, ry, rz, rw);
+    RMat44 * const pResult = new RMat44();
+    TRACE_NEW("RMat44", pResult)
+    *pResult = RMat44::sRotation(quat);
+    return reinterpret_cast<jlong> (pResult);
+}
