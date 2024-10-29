@@ -228,6 +228,21 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Copy the components to an array. The vector is unaffected.
+     *
+     * @return a new array with length=3
+     */
+    @Override
+    public double[] toArray() {
+        double[] result = new double[3];
+        result[0] = xx;
+        result[1] = yy;
+        result[2] = zz;
+
+        return result;
+    }
+
+    /**
      * Return the first (X) component in single precision. The vector is
      * unaffected.
      *

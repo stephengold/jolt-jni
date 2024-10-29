@@ -68,6 +68,13 @@ public interface RVec3Arg {
     Object getZ();
 
     /**
+     * Copy the components to an array. The vector is unaffected.
+     *
+     * @return a new array with length=3
+     */
+    double[] toArray();
+
+    /**
      * Return the first (X) component in single precision. The vector is
      * unaffected.
      *
