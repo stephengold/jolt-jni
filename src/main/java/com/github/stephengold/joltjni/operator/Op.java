@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.operator;
 
 import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
@@ -249,6 +250,33 @@ final public class Op {
     }
 
     /**
+     * Return the product of the specified matrices. (native operator: binary
+     * {@code *})
+     *
+     * @param left the left factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    public static RMat44 multiply(RMat44Arg left, RMat44Arg right) {
+        RMat44 result = left.multiply(right);
+        return result;
+    }
+
+    /**
+     * Return the specified matrix multiplied by the specified column vector,
+     * with the 4th component of the right factor implied to be one. (native
+     * operator: binary {@code *})
+     *
+     * @param left the left factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 multiply(RMat44Arg left, RVec3Arg right) {
+        RVec3 result = left.multiply3x4(right);
+        return result;
+    }
+
+    /**
      * Return the specified matrix multiplied by the specified column vector,
      * with the 4th component of the right factor implied to be one. (native
      * operator: binary {@code *})
@@ -382,6 +410,19 @@ final public class Op {
         double yy = left.yy() + right.getY();
         double zz = left.zz() + right.getZ();
         left.set(xx, yy, zz);
+    }
+
+    /**
+     * Add the 2nd argument to the first argument. (native operator: binary
+     * {@code +=})
+     *
+     * @param left the accumulating vector (not null, modified)
+     * @param right the vector to add (not null, unaffected)
+     */
+    public static void plusEquals(Vec3 left, RVec3Arg right) {
+        left.setX(left.getX() + right.x());
+        left.setY(left.getY() + right.y());
+        left.setZ(left.getZ() + right.z());
     }
 
     /**
