@@ -421,8 +421,6 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static long inversed(long currentVa);
 
-    native private static long inversed3x3(long currentVa);
-
     native private static void multiply3x3(long matrixVa, float[] tmpFloats);
 
     native private static void multiply3x3Transposed(
