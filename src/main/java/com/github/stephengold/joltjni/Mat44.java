@@ -288,13 +288,13 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param arg the right factor (not null, unaffected)
+     * @param vec3Arg the right factor (not null, unaffected)
      * @return a new vector
      */
     @Override
-    public Vec3 multiply3x4(Vec3Arg arg) {
+    public Vec3 multiply3x4(Vec3Arg vec3Arg) {
         long matrixVa = va();
-        float[] tmpFloats = arg.toArray();
+        float[] tmpFloats = vec3Arg.toArray();
         multiply3x4(matrixVa, tmpFloats);
         Vec3 result = new Vec3(tmpFloats);
 

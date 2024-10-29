@@ -119,8 +119,8 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param arg the right factor (not null, unaffected)
+     * @param vec3Arg the right factor (not null, unaffected)
      * @return a new vector
      */
-    Vec3 multiply3x4(Vec3Arg arg);
+    Vec3 multiply3x4(Vec3Arg vec3Arg);
 }
