@@ -4,7 +4,7 @@
 [JVM] bindings for [Jolt Physics][jolt],
 to facilitate physics simulation in JVM languages such as [Java] and [Kotlin].
 
-Source code is provided under
+Source code (in Java and [C++]) is provided under
 [an MIT license][license].
 
 
@@ -81,6 +81,9 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
   "MacOSX64", "MacOSX_ARM64", or "Windows64".
 + The "DebugSp" classifier
   may be replaced by "DebugDp", "ReleaseSp", or "ReleaseDp".
++ For some older versions of Gradle,
+  it's necessary to replace `implementation` with `compile`.
+
 [Jump to the table of contents](#toc)
 
 
