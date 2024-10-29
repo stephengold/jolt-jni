@@ -328,6 +328,21 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Return the center-of-mass transform of the specified body.
+     *
+     * @param bodyId the ID of the body to locate (not null)
+     * @return a new transform matrix (relative to physics-system coordinates)
+     */
+    public RMat44 getCenterOfMassTransform(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.va();
+        long matrixVa = getCenterOfMassTransform(bodyInterfaceVa, bodyIdVa);
+        RMat44 result = new RMat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the friction ratio of the specified body.
      *
      * @param bodyId the ID of the body (not null)
@@ -733,6 +748,9 @@ public class BodyInterface extends NonCopyable {
             long bodyInterfaceVa, long bodyIdVa);
 
     native private static double getCenterOfMassPositionZ(
+            long bodyInterfaceVa, long bodyIdVa);
+
+    native private static long getCenterOfMassTransform(
             long bodyInterfaceVa, long bodyIdVa);
 
     native private static float getFriction(

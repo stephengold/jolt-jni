@@ -305,6 +305,22 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getC
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getCenterOfMassTransform
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getCenterOfMassTransform
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    RMat44 * const pResult = new RMat44();
+    TRACE_NEW("RMat44", pResult)
+    *pResult = pInterface->GetCenterOfMassTransform(*pBodyId);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    getFriction
  * Signature: (JJ)F
  */
