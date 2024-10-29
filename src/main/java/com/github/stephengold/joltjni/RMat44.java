@@ -309,7 +309,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
         float y = vec3Arg.getY();
         float z = vec3Arg.getZ();
         double[] storeDoubles = new double[3];
-        multiply3x3v(matrixVa, x, y, z, storeDoubles);
+        multiply3x3(matrixVa, x, y, z, storeDoubles);
         RVec3 result = new RVec3(storeDoubles);
 
         return result;
