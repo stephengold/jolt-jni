@@ -322,6 +322,17 @@ final public class Jolt {
     }
 
     /**
+     * Return the square of the specified single-precision value.
+     *
+     * @param value the value to square
+     * @return the square
+     */
+    public static float square(float value) {
+        float result = value * value;
+        return result;
+    }
+
+    /**
      * Test whether the native library supports the ObjectStream format. (native
      * macro: JPH_OBJECT_STREAM)
      *
