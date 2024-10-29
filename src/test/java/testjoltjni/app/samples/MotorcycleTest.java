@@ -151,23 +151,23 @@ void Initialize()
 }
 
 /*TODO
-void ProcessInput(ProcessInputParams inParams)
+void MotorcycleTest::ProcessInput(const ProcessInputParams &inParams)
 {
 	// Determine acceleration and brake
 	mForward = 0.0f;
 	mBrake = 0.0f;
-	if (inParams.mKeyboard.isKeyPressed(DIK_Z))
+	if (inParams.mKeyboard->IsKeyPressed(DIK_Z))
 		mBrake = 1.0f;
-	else if (inParams.mKeyboard.isKeyPressed(DIK_UP))
+	else if (inParams.mKeyboard->IsKeyPressed(DIK_UP))
 		mForward = 1.0f;
-	else if (inParams.mKeyboard.isKeyPressed(DIK_DOWN))
+	else if (inParams.mKeyboard->IsKeyPressed(DIK_DOWN))
 		mForward = -1.0f;
 
 	// Check if we're reversing direction
 	if (mPreviousForward * mForward < 0.0f)
 	{
 		// Get vehicle velocity in local space to the body of the vehicle
-		float velocity = (mMotorcycleBody.getRotation().conjugated() * mMotorcycleBody.getLinearVelocity()).getZ();
+		float velocity = (mMotorcycleBody->GetRotation().Conjugated() * mMotorcycleBody->GetLinearVelocity()).GetZ();
 		if ((mForward > 0.0f && velocity < -0.1f) || (mForward < 0.0f && velocity > 0.1f))
 		{
 			// Brake while we've not stopped yet
@@ -183,24 +183,24 @@ void ProcessInput(ProcessInputParams inParams)
 
 	// Steering
 	float right = 0.0f;
-	if (inParams.mKeyboard.isKeyPressed(DIK_LEFT))
+	if (inParams.mKeyboard->IsKeyPressed(DIK_LEFT))
 		right = -1.0f;
-	else if (inParams.mKeyboard.isKeyPressed(DIK_RIGHT))
+	else if (inParams.mKeyboard->IsKeyPressed(DIK_RIGHT))
 		right = 1.0f;
-	final float steer_speed = 4.0f;
+	const float steer_speed = 4.0f;
 	if (right > mRight)
-		mRight = Math.min(mRight + steer_speed * inParams.mDeltaTime, right);
+		mRight = min(mRight + steer_speed * inParams.mDeltaTime, right);
 	else if (right < mRight)
-		mRight = Math.max(mRight - steer_speed * inParams.mDeltaTime, right);
+		mRight = max(mRight - steer_speed * inParams.mDeltaTime, right);
 
 	// When leaned, we don't want to use the brakes fully as we'll spin out
 	if (mBrake > 0.0f)
 	{
-		Vec3 world_up = -mPhysicsSystem.getGravity().normalized();
-		Vec3 up = mMotorcycleBody.getRotation() * mVehicleConstraint.getLocalUp();
-		Vec3 fwd = mMotorcycleBody.getRotation() * mVehicleConstraint.getLocalForward();
-		float sin_lean_angle = Math.abs(world_up.cross(up).dot(fwd));
-		float brake_multiplier = Jolt.square(1.0f - sin_lean_angle);
+		Vec3 world_up = -mPhysicsSystem->GetGravity().Normalized();
+		Vec3 up = mMotorcycleBody->GetRotation() * mVehicleConstraint->GetLocalUp();
+		Vec3 fwd = mMotorcycleBody->GetRotation() * mVehicleConstraint->GetLocalForward();
+		float sin_lean_angle = abs(world_up.Cross(up).Dot(fwd));
+		float brake_multiplier = Square(1.0f - sin_lean_angle);
 		mBrake *= brake_multiplier;
 	}
 }
@@ -287,7 +287,7 @@ void UpdateCameraPivot()
 /*TODO
 void MotorcycleTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 {
-	VehicleTest.CreateSettingsMenu(inUI, inSubMenu);
+	VehicleTest::CreateSettingsMenu(inUI, inSubMenu);
 
 	inUI->CreateCheckBox(inSubMenu, "Override Front Suspension Force Point", sOverrideFrontSuspensionForcePoint, [](UICheckBox.EState inState) { sOverrideFrontSuspensionForcePoint = inState == UICheckBox.STATE_CHECKED; });
 	inUI->CreateCheckBox(inSubMenu, "Override Rear Suspension Force Point", sOverrideRearSuspensionForcePoint, [](UICheckBox.EState inState) { sOverrideRearSuspensionForcePoint = inState == UICheckBox.STATE_CHECKED; });
