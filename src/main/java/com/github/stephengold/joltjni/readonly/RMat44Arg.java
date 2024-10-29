@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
@@ -66,6 +67,13 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
     double getElement(int row, int column);
 
     /**
+     * Convert the rotation to a {@code Quat}. The matrix is unaffected.
+     *
+     * @return a new rotation quaternion
+     */
+    Quat getQuaternion();
+
+    /**
      * Copy the translation component. The matrix is unaffected.
      *
      * @return a new vector
@@ -87,6 +95,14 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * @return true if equal, false if unequal
      */
     boolean isEqual(RMat44Arg m2);
+
+    /**
+     * Multiply the current matrix by the argument. The matrix is unaffected.
+     *
+     * @param m2 the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    RMat44 multiply(RMat44Arg m2);
 
     /**
      * Multiply the 3x3 matrix by the specified column vector. The matrix is

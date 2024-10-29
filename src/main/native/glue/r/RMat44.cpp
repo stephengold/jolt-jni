@@ -168,6 +168,25 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getElement
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    getQuaternion
+ * Signature: (J[F)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_getQuaternion
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray storeFloats) {
+    const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    const Quat result = pMatrix->GetQuaternion();
+    jboolean isCopy;
+    jfloat * const pStoreFloats
+            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    pStoreFloats[0] = result.GetX();
+    pStoreFloats[1] = result.GetY();
+    pStoreFloats[2] = result.GetZ();
+    pStoreFloats[3] = result.GetW();
+    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    getTranslationX
  * Signature: (J)D
  */
@@ -213,6 +232,21 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_inversed
     RMat44 * const pResult = new RMat44();
     TRACE_NEW("RMat44", pResult)
     *pResult = pCurrent->Inversed();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    multiply
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply
+  (JNIEnv *, jclass, jlong m1Va, jlong m2Va) {
+    const RMat44 * const pM1 = reinterpret_cast<RMat44 *> (m1Va);
+    const RMat44 * const pM2 = reinterpret_cast<RMat44 *> (m2Va);
+    RMat44 * const pResult = new RMat44();
+    TRACE_NEW("RMat44", pResult)
+    *pResult = (*pM1) * (*pM2);
     return reinterpret_cast<jlong> (pResult);
 }
 

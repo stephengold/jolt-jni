@@ -236,6 +236,22 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Convert the rotation to a {@code Quat}. The matrix is unaffected.
+     *
+     * @return a new rotation quaternion
+     */
+    @Override
+    public Quat getQuaternion() {
+        long matrixVa = va();
+        float[] storeFloats = new float[4];
+        getQuaternion(matrixVa, storeFloats);
+        Quat result = new Quat(
+                storeFloats[0], storeFloats[1], storeFloats[2], storeFloats[3]);
+
+        return result;
+    }
+
+    /**
      * Copy the translation component. The matrix is unaffected.
      *
      * @return a new vector
@@ -277,6 +293,22 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
         long m1Va = va();
         long m2Va = m2.va();
         boolean result = equals(m1Va, m2Va);
+
+        return result;
+    }
+
+    /**
+     * Multiply the current matrix by the argument. The matrix is unaffected.
+     *
+     * @param m2 the right factor (not null, unaffected)
+     * @return a new matrix
+     */
+    @Override
+    public RMat44 multiply(RMat44Arg m2) {
+        long m1Va = va();
+        long m2Va = m2.va();
+        long productVa = multiply(m1Va, m2Va);
+        RMat44 result = new RMat44(productVa, true);
 
         return result;
     }
@@ -413,6 +445,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static double getElement(long matrixVa, int row, int column);
 
+    native private static void getQuaternion(
+            long matrixVa, float[] storeFloats);
+
     native private static double getTranslationX(long matrixVa);
 
     native private static double getTranslationY(long matrixVa);
@@ -420,6 +455,8 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     native private static double getTranslationZ(long matrixVa);
 
     native private static long inversed(long currentVa);
+
+    native private static long multiply(long m1Va, long m2Va);
 
     native private static void multiply3x3(long matrixVa, float[] tmpFloats);
 
