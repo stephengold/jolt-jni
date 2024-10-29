@@ -131,6 +131,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_createZero
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    equals
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_RMat44_equals
+  (JNIEnv *, jclass, jlong m1Va, jlong m2Va) {
+    const RMat44 * const pM1 = reinterpret_cast<RMat44 *> (m1Va);
+    const RMat44 * const pM2 = reinterpret_cast<RMat44 *> (m2Va);
+    const bool result = (*pM1 == *pM2);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    free
  * Signature: (J)V
  */
@@ -186,19 +199,6 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getTranslat
   (JNIEnv *, jclass, jlong matrixVa) {
     const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
     const Real result = pMatrix->GetTranslation().GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RMat44
- * Method:    equals
- * Signature: (JJ)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_RMat44_equals
-  (JNIEnv *, jclass, jlong m1Va, jlong m2Va) {
-    const RMat44 * const pM1 = reinterpret_cast<RMat44 *> (m1Va);
-    const RMat44 * const pM2 = reinterpret_cast<RMat44 *> (m2Va);
-    const bool result = (*pM1 == *pM2);
     return result;
 }
 

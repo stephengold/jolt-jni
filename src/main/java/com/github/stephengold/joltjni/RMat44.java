@@ -407,6 +407,8 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static long createZero();
 
+    native private static boolean equals(long m1Va, long m2Va);
+
     native private static void free(long matrixVa);
 
     native private static double getElement(long matrixVa, int row, int column);
@@ -416,8 +418,6 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     native private static double getTranslationY(long matrixVa);
 
     native private static double getTranslationZ(long matrixVa);
-
-    native private static boolean equals(long m1Va, long m2Va);
 
     native private static long inversed(long currentVa);
 
