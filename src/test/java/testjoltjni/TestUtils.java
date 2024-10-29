@@ -32,7 +32,9 @@ import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
+import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
+import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import electrostatic4j.snaploader.platform.util.NativeVariant;
@@ -111,6 +113,98 @@ final public class TestUtils {
         Assert.assertEquals("x component", x, actual.x(), tolerance);
         Assert.assertEquals("y component", y, actual.y(), tolerance);
         Assert.assertEquals("z component", z, actual.z(), tolerance);
+    }
+
+    /**
+     * Verify the elements of a single-precision matrix to within some
+     * tolerance.
+     *
+     * @param e00 the expected element in row 0 of column 0
+     * @param e01 the expected element in row 0 of column 1
+     * @param e02 the expected element in row 0 of column 2
+     * @param e03 the expected element in row 0 of column 3
+     * @param e10 the expected element in row 1 of column 0
+     * @param e11 the expected element in row 1 of column 1
+     * @param e12 the expected element in row 1 of column 2
+     * @param e13 the expected element in row 1 of column 3
+     * @param e20 the expected element in row 2 of column 0
+     * @param e21 the expected element in row 2 of column 1
+     * @param e22 the expected element in row 2 of column 2
+     * @param e23 the expected element in row 2 of column 3
+     * @param e30 the expected element in row 3 of column 0
+     * @param e31 the expected element in row 3 of column 1
+     * @param e32 the expected element in row 3 of column 2
+     * @param e33 the expected element in row 3 of column 3
+     * @param actual the matrix to test (not null, unaffected)
+     * @param tolerance the allowable difference for each element (&ge;0)
+     */
+    public static void assertEquals(float e00, float e01, float e02, float e03,
+            float e10, float e11, float e12, float e13,
+            float e20, float e21, float e22, float e23,
+            float e30, float e31, float e32, float e33,
+            Mat44Arg actual, float tolerance) {
+        Assert.assertEquals("e00", e00, actual.getElement(0, 0), tolerance);
+        Assert.assertEquals("e01", e01, actual.getElement(0, 1), tolerance);
+        Assert.assertEquals("e02", e02, actual.getElement(0, 2), tolerance);
+        Assert.assertEquals("e03", e03, actual.getElement(0, 3), tolerance);
+        Assert.assertEquals("e10", e10, actual.getElement(1, 0), tolerance);
+        Assert.assertEquals("e11", e11, actual.getElement(1, 1), tolerance);
+        Assert.assertEquals("e12", e12, actual.getElement(1, 2), tolerance);
+        Assert.assertEquals("e13", e13, actual.getElement(1, 3), tolerance);
+        Assert.assertEquals("e20", e20, actual.getElement(2, 0), tolerance);
+        Assert.assertEquals("e21", e21, actual.getElement(2, 1), tolerance);
+        Assert.assertEquals("e22", e22, actual.getElement(2, 2), tolerance);
+        Assert.assertEquals("e23", e23, actual.getElement(2, 3), tolerance);
+        Assert.assertEquals("e30", e30, actual.getElement(3, 0), tolerance);
+        Assert.assertEquals("e31", e31, actual.getElement(3, 1), tolerance);
+        Assert.assertEquals("e32", e32, actual.getElement(3, 2), tolerance);
+        Assert.assertEquals("e33", e33, actual.getElement(3, 3), tolerance);
+    }
+
+    /**
+     * Verify the elements of a location-precision matrix to within some
+     * tolerance.
+     *
+     * @param e00 the expected element in row 0 of column 0
+     * @param e01 the expected element in row 0 of column 1
+     * @param e02 the expected element in row 0 of column 2
+     * @param e03 the expected element in row 0 of column 3
+     * @param e10 the expected element in row 1 of column 0
+     * @param e11 the expected element in row 1 of column 1
+     * @param e12 the expected element in row 1 of column 2
+     * @param e13 the expected element in row 1 of column 3
+     * @param e20 the expected element in row 2 of column 0
+     * @param e21 the expected element in row 2 of column 1
+     * @param e22 the expected element in row 2 of column 2
+     * @param e23 the expected element in row 2 of column 3
+     * @param e30 the expected element in row 3 of column 0
+     * @param e31 the expected element in row 3 of column 1
+     * @param e32 the expected element in row 3 of column 2
+     * @param e33 the expected element in row 3 of column 3
+     * @param actual the matrix to test (not null, unaffected)
+     * @param tolerance the allowable difference for each element (&ge;0)
+     */
+    public static void assertEquals(float e00, float e01, float e02, float e03,
+            float e10, float e11, float e12, float e13,
+            float e20, float e21, float e22, float e23,
+            float e30, float e31, float e32, float e33,
+            RMat44Arg actual, float tolerance) {
+        Assert.assertEquals("e00", e00, actual.getElement(0, 0), tolerance);
+        Assert.assertEquals("e01", e01, actual.getElement(0, 1), tolerance);
+        Assert.assertEquals("e02", e02, actual.getElement(0, 2), tolerance);
+        Assert.assertEquals("e03", e03, actual.getElement(0, 3), tolerance);
+        Assert.assertEquals("e10", e10, actual.getElement(1, 0), tolerance);
+        Assert.assertEquals("e11", e11, actual.getElement(1, 1), tolerance);
+        Assert.assertEquals("e12", e12, actual.getElement(1, 2), tolerance);
+        Assert.assertEquals("e13", e13, actual.getElement(1, 3), tolerance);
+        Assert.assertEquals("e20", e20, actual.getElement(2, 0), tolerance);
+        Assert.assertEquals("e21", e21, actual.getElement(2, 1), tolerance);
+        Assert.assertEquals("e22", e22, actual.getElement(2, 2), tolerance);
+        Assert.assertEquals("e23", e23, actual.getElement(2, 3), tolerance);
+        Assert.assertEquals("e30", e30, actual.getElement(3, 0), tolerance);
+        Assert.assertEquals("e31", e31, actual.getElement(3, 1), tolerance);
+        Assert.assertEquals("e32", e32, actual.getElement(3, 2), tolerance);
+        Assert.assertEquals("e33", e33, actual.getElement(3, 3), tolerance);
     }
 
     /**
