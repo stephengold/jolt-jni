@@ -259,9 +259,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public Vec3 multiply3x3(Vec3Arg vec3Arg) {
         long matrixVa = va();
-        float[] tmpArray = vec3Arg.toArray();
-        multiply3x3(matrixVa, tmpArray);
-        Vec3 result = new Vec3(tmpArray);
+        float[] tmpFloats = vec3Arg.toArray();
+        multiply3x3(matrixVa, tmpFloats);
+        Vec3 result = new Vec3(tmpFloats);
 
         return result;
     }
@@ -276,9 +276,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public Vec3 multiply3x3Transposed(Vec3Arg vec3Arg) {
         long matrixVa = va();
-        float[] tmpArray = vec3Arg.toArray();
-        multiply3x3Transposed(matrixVa, tmpArray);
-        Vec3 result = new Vec3(tmpArray);
+        float[] tmpFloats = vec3Arg.toArray();
+        multiply3x3Transposed(matrixVa, tmpFloats);
+        Vec3 result = new Vec3(tmpFloats);
 
         return result;
     }
@@ -294,9 +294,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public Vec3 multiply3x4(Vec3Arg arg) {
         long matrixVa = va();
-        float[] tmpArray = arg.toArray();
-        multiply3x4(matrixVa, tmpArray);
-        Vec3 result = new Vec3(tmpArray);
+        float[] tmpFloats = arg.toArray();
+        multiply3x4(matrixVa, tmpFloats);
+        Vec3 result = new Vec3(tmpFloats);
 
         return result;
     }

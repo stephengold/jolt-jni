@@ -340,9 +340,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     @Override
     public Vec3 multiply3x3Transposed(Vec3Arg vec3Arg) {
         long matrixVa = va();
-        float[] tmpArray = vec3Arg.toArray();
-        multiply3x3Transposed(matrixVa, tmpArray);
-        Vec3 result = new Vec3(tmpArray);
+        float[] tmpFloats = vec3Arg.toArray();
+        multiply3x3Transposed(matrixVa, tmpFloats);
+        Vec3 result = new Vec3(tmpFloats);
 
         return result;
     }
