@@ -33,6 +33,27 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
+     * Copy the first column to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 getAxisX();
+
+    /**
+     * Copy the 2nd column to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 getAxisY();
+
+    /**
+     * Copy the 3rd column to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 getAxisZ();
+
+    /**
      * Return the specified element in double precision. The matrix is
      * unaffected.
      *

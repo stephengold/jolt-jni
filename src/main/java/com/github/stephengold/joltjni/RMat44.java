@@ -172,6 +172,54 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     // RMat44Arg methods
 
     /**
+     * Copy the first column to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getAxisX() {
+        long matrixVa = va();
+        float x = (float) getElement(matrixVa, 0, 0);
+        float y = (float) getElement(matrixVa, 1, 0);
+        float z = (float) getElement(matrixVa, 2, 0);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the 2nd column to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getAxisY() {
+        long matrixVa = va();
+        float x = (float) getElement(matrixVa, 0, 1);
+        float y = (float) getElement(matrixVa, 1, 1);
+        float z = (float) getElement(matrixVa, 2, 1);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the 3rd column to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getAxisZ() {
+        long matrixVa = va();
+        float x = (float) getElement(matrixVa, 0, 2);
+        float y = (float) getElement(matrixVa, 1, 2);
+        float z = (float) getElement(matrixVa, 2, 2);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
      * Return the specified element in double precision. The matrix is
      * unaffected.
      *

@@ -124,6 +124,54 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     // Mat44Arg methods
 
     /**
+     * Copy the first column to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getAxisX() {
+        long matrixVa = va();
+        float x = getElement(matrixVa, 0, 0);
+        float y = getElement(matrixVa, 1, 0);
+        float z = getElement(matrixVa, 2, 0);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the 2nd column to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getAxisY() {
+        long matrixVa = va();
+        float x = getElement(matrixVa, 0, 1);
+        float y = getElement(matrixVa, 1, 1);
+        float z = getElement(matrixVa, 2, 1);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the 3rd column to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getAxisZ() {
+        long matrixVa = va();
+        float x = getElement(matrixVa, 0, 2);
+        float y = getElement(matrixVa, 1, 2);
+        float z = getElement(matrixVa, 2, 2);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
      * Return the specified element. The matrix is unaffected.
      *
      * @param row the zero-origin index of the row (&ge;0, &lt;4)
