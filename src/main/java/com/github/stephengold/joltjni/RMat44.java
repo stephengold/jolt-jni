@@ -252,6 +252,105 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Return the inverse of the current matrix, which is unaffected.
+     *
+     * @return a new matrix
+     */
+    @Override
+    public RMat44 inversed() {
+        long currentVa = va();
+        long resultVa = inversed(currentVa);
+        RMat44 result = new RMat44(resultVa, true);
+
+        return result;
+    }
+
+    /**
+     * Return the inverse of the 3x3 portion. The current matrix is unaffected.
+     *
+     * @return a new matrix
+     */
+    @Override
+    public RMat44 inversed3x3() {
+        long currentVa = va();
+        long resultVa = inversed3x3(currentVa);
+        RMat44 result = new RMat44(resultVa, true);
+
+        return result;
+    }
+
+    /**
+     * Test whether the current matrix is equal to the argument. The current
+     * matrix is unaffected.
+     *
+     * @param m2 the 2nd matrix to test (not null, unaffected)
+     * @return true if equal, false if unequal
+     */
+    @Override
+    public boolean isEqual(RMat44Arg m2) {
+        long m1Va = va();
+        long m2Va = m2.va();
+        boolean result = equals(m1Va, m2Va);
+
+        return result;
+    }
+
+    /**
+     * Multiply the 3x3 matrix by the specified column vector. The matrix is
+     * unaffected.
+     *
+     * @param vec3Arg the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    @Override
+    public RVec3 multiply3x3(Vec3Arg vec3Arg) {
+        long matrixVa = va();
+        float x = vec3Arg.getX();
+        float y = vec3Arg.getY();
+        float z = vec3Arg.getZ();
+        double[] storeDoubles = new double[3];
+        multiply3x3v(matrixVa, x, y, z, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
+
+        return result;
+    }
+
+    /**
+     * Multiply the transpose of the 3x3 matrix by the specified column vector.
+     * The matrix is unaffected.
+     *
+     * @param vec3Arg the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    @Override
+    public Vec3 multiply3x3Transposed(Vec3Arg vec3Arg) {
+        long matrixVa = va();
+        float[] tmpArray = vec3Arg.toArray();
+        multiply3x3Transposed(matrixVa, tmpArray);
+        Vec3 result = new Vec3(tmpArray);
+
+        return result;
+    }
+
+    /**
+     * Multiply the 3x4 matrix by the specified column vector, with the 4th
+     * component of the right factor implied to be one. The matrix is
+     * unaffected.
+     *
+     * @param rvec3Arg the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    @Override
+    public RVec3 multiply3x4(RVec3Arg rvec3Arg) {
+        long matrixVa = va();
+        double[] tmpDoubles = rvec3Arg.toArray();
+        multiply3x4r(matrixVa, tmpDoubles);
+        RVec3 result = new RVec3(tmpDoubles);
+
+        return result;
+    }
+
+    /**
      * Multiply the 3x4 matrix by the specified column vector, with the 4th
      * component of the right factor implied to be one. The matrix is
      * unaffected.
@@ -335,8 +434,22 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static double getTranslationZ(long matrixVa);
 
+    native private static boolean equals(long m1Va, long m2Va);
+
+    native private static long inversed(long currentVa);
+
+    native private static long inversed3x3(long currentVa);
+
+    native private static void multiply3x3(
+            long matrixVa, float x, float y, float z, double[] storeDoubles);
+
+    native private static void multiply3x3Transposed(
+            long matrixVa, float[] tmpFloats);
+
     native private static void multiply3x4(
             long matrixVa, float x, float y, float z, double[] storeDoubles);
+
+    native private static void multiply3x4r(long matrixVa, double[] tmpDoubles);
 
     native private static void setElement(
             long matrixVa, int row, int column, double value);

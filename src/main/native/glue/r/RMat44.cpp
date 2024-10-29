@@ -191,6 +191,84 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getTranslat
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    equals
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_RMat44_equals
+  (JNIEnv *, jclass, jlong m1Va, jlong m2Va) {
+    const RMat44 * const pM1 = reinterpret_cast<RMat44 *> (m1Va);
+    const RMat44 * const pM2 = reinterpret_cast<RMat44 *> (m2Va);
+    const bool result = (*pM1 == *pM2);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    inversed
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_inversed
+  (JNIEnv *, jclass, jlong currentVa) {
+    const RMat44 * const pCurrent = reinterpret_cast<RMat44 *> (currentVa);
+    RMat44 * const pResult = new RMat44();
+    TRACE_NEW("RMat44", pResult)
+    *pResult = pCurrent->Inversed();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    inversed3x3
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_inversed3x3
+  (JNIEnv *, jclass, jlong currentVa) {
+    const RMat44 * const pCurrent = reinterpret_cast<RMat44 *> (currentVa);
+    RMat44 * const pResult = new RMat44();
+    TRACE_NEW("RMat44", pResult)
+    *pResult = pCurrent->Inversed3x3();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    multiply3x3
+ * Signature: (JFFF[D)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x3
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloat x, jfloat y, jfloat z, jdoubleArray storeDoubles) {
+    const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    const Vec3 vec3Arg(x, y, z);
+    const RVec3 result = pMatrix->Multiply3x3(vec3Arg);
+    jboolean isCopy;
+    jdouble * const pStoreDoubles
+            = pEnv->GetDoubleArrayElements(storeDoubles, &isCopy);
+    pStoreDoubles[0] = result.GetX();
+    pStoreDoubles[1] = result.GetY();
+    pStoreDoubles[2] = result.GetZ();
+    pEnv->ReleaseDoubleArrayElements(storeDoubles, pStoreDoubles, 0);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    multiply3x3Transposed
+ * Signature: (J[F)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x3Transposed
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray tmpFloats) {
+    const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    jboolean isCopy;
+    jfloat * const pTmpFloats = pEnv->GetFloatArrayElements(tmpFloats, &isCopy);
+    const Vec3 vec3Arg(pTmpFloats[0], pTmpFloats[1], pTmpFloats[2]);
+    const Vec3 result = pMatrix->Multiply3x3Transposed(vec3Arg);
+    pTmpFloats[0] = result.GetX();
+    pTmpFloats[1] = result.GetY();
+    pTmpFloats[2] = result.GetZ();
+    pEnv->ReleaseFloatArrayElements(tmpFloats, pTmpFloats, 0);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    multiply3x4
  * Signature: (JFFF[D)V
  */
@@ -206,6 +284,25 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x4
     pArray[1] = result.GetY();
     pArray[2] = result.GetZ();
     pEnv->ReleaseDoubleArrayElements(array, pArray, 0);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    multiply3x4r
+ * Signature: (J[D)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x4r
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jdoubleArray tmpDoubles) {
+    const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    jboolean isCopy;
+    jdouble * const pTmpDoubles
+            = pEnv->GetDoubleArrayElements(tmpDoubles, &isCopy);
+    const RVec3 rvec3Arg(pTmpDoubles[0], pTmpDoubles[1], pTmpDoubles[2]);
+    const RVec3 result = (*pMatrix) * rvec3Arg;
+    pTmpDoubles[0] = result.GetX();
+    pTmpDoubles[1] = result.GetY();
+    pTmpDoubles[2] = result.GetZ();
+    pEnv->ReleaseDoubleArrayElements(tmpDoubles, pTmpDoubles, 0);
 }
 
 /*

@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
 
@@ -70,6 +71,57 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * @return a new vector
      */
     RVec3 getTranslation();
+
+    /**
+     * Return the inverse of the current matrix, which is unaffected.
+     *
+     * @return a new matrix
+     */
+    RMat44 inversed();
+
+    /**
+     * Return the inverse of the 3x3 portion. The current matrix is unaffected.
+     *
+     * @return a new matrix
+     */
+    RMat44 inversed3x3();
+
+    /**
+     * Test whether the current matrix is equal to the argument. The current
+     * matrix is unaffected.
+     *
+     * @param m2 the 2nd matrix to test (not null, unaffected)
+     * @return true if equal, false if unequal
+     */
+    boolean isEqual(RMat44Arg m2);
+
+    /**
+     * Multiply the 3x3 matrix by the specified column vector. The matrix is
+     * unaffected.
+     *
+     * @param vec3Arg the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    RVec3 multiply3x3(Vec3Arg vec3Arg);
+
+    /**
+     * Multiply the transpose of the 3x3 matrix by the specified column vector.
+     * The matrix is unaffected.
+     *
+     * @param vec3Arg the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    Vec3 multiply3x3Transposed(Vec3Arg vec3Arg);
+
+    /**
+     * Multiply the 3x4 matrix by the specified column vector, with the 4th
+     * component of the right factor implied to be one. The matrix is
+     * unaffected.
+     *
+     * @param rvec3Arg the right factor (not null, unaffected)
+     * @return a new vector
+     */
+    RVec3 multiply3x4(RVec3Arg rvec3Arg);
 
     /**
      * Multiply the 3x4 matrix by the specified column vector, with the 4th
