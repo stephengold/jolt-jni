@@ -66,7 +66,7 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
     double getElement(int row, int column);
 
     /**
-     * Return the translation component. The matrix is unaffected.
+     * Copy the translation component. The matrix is unaffected.
      *
      * @return a new vector
      */

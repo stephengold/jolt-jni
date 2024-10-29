@@ -123,7 +123,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      *
      * @param rotation the amount to rotate (not null, unaffected)
      * @param offset the amount to translate (not null, unaffected)
-     * @return a new instance
+     * @return a new object
      */
     public static RMat44 sRotationTranslation(
             QuatArg rotation, RVec3Arg offset) {
@@ -236,7 +236,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
-     * Return the translation component. The matrix is unaffected.
+     * Copy the translation component. The matrix is unaffected.
      *
      * @return a new vector
      */
