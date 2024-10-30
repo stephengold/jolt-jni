@@ -711,6 +711,33 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_setR
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
+ * Method:    setShape
+ * Signature: (JJFJJJJJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_setShape
+  (JNIEnv *, jclass, jlong characterVa, jlong shapeVa,
+  jfloat maxPenetrationDepth, jlong bpFilterVa, jlong olFilterVa,
+  jlong bodyFilterVa, jlong shapeFilterVa, jlong allocatorVa) {
+    CharacterVirtual * const pCharacter
+            = reinterpret_cast<CharacterVirtual *> (characterVa);
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    const BroadPhaseLayerFilter * const pBpFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (bpFilterVa);
+    const ObjectLayerFilter * const pOlFilter
+            = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
+    const BodyFilter * const pBodyFilter
+            = reinterpret_cast<BodyFilter *> (bodyFilterVa);
+    const ShapeFilter * const pShapeFilter
+            = reinterpret_cast<ShapeFilter *> (shapeFilterVa);
+    TempAllocator * const pAllocator
+            = reinterpret_cast<TempAllocator *> (allocatorVa);
+    bool result = pCharacter->SetShape(pShape, maxPenetrationDepth, *pBpFilter,
+            *pOlFilter, *pBodyFilter, *pShapeFilter, *pAllocator);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    setShapeOffset
  * Signature: (JFFF)V
  */

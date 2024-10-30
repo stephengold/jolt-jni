@@ -291,6 +291,40 @@ public class CharacterVirtual
     }
 
     /**
+     * Alter the character's shape.
+     *
+     * @param shape the desired shape (not null)
+     * @param maxPenetrationDepth the maximum acceptable penetration after the
+     * alteration, or {@code Float.MAX_VALUE} to skip the check
+     * @param broadPhaseLayerFilter the broadphase filter used to test for
+     * collisions (not null)
+     * @param objectLayerFilter the object-layer filter used to test for
+     * collisions (not null)
+     * @param bodyFilter the body filter used to test for collisions (not null)
+     * @param shapeFilter the shape filter used to test for collisions (not
+     * null)
+     * @param allocator the desired allocator (not null)
+     * @return true if successful, otherwise false
+     */
+    public boolean setShape(ConstShape shape, float maxPenetrationDepth,
+            BroadPhaseLayerFilter broadPhaseLayerFilter,
+            ObjectLayerFilter objectLayerFilter, BodyFilter bodyFilter,
+            ShapeFilter shapeFilter, TempAllocator allocator) {
+        long characterVa = va();
+        long shapeVa = shape.va();
+        long bplFilterVa = broadPhaseLayerFilter.va();
+        long olFilterVa = objectLayerFilter.va();
+        long bodyFilterVa = bodyFilter.va();
+        long shapeFilterVa = shapeFilter.va();
+        long allocatorVa = allocator.va();
+        boolean result = setShape(
+                characterVa, shapeVa, maxPenetrationDepth, bplFilterVa,
+                olFilterVa, bodyFilterVa, shapeFilterVa, allocatorVa);
+
+        return result;
+    }
+
+    /**
      * Alter the shape offset.
      *
      * @param offset the desired offset (in local coordinates, default=?)
@@ -819,6 +853,10 @@ public class CharacterVirtual
 
     native private static void setRotation(
             long characterVa, float qx, float qy, float qz, float qw);
+
+    native private static boolean setShape(long characterVa, long shapeVa,
+            float maxPenetrationDepth, long bplFilterVa, long olFilterVa,
+            long bodyFilterVa, long shapeFilterVa, long allocatorVa);
 
     native private static void setShapeOffset(
             long characterVa, float dx, float dy, float dz);
