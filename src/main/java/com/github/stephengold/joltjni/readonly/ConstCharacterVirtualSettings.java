@@ -68,8 +68,7 @@ public interface ConstCharacterVirtualSettings
     int getInnerBodyLayer();
 
     /**
-     * Return the shape of the inner rigid body. The settings are unaffected. \
-     *
+     * Return the shape of the inner rigid body. The settings are unaffected.
      *
      * @return the shape, or null for no inner body
      */

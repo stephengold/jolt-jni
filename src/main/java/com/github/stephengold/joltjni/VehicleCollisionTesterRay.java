@@ -80,7 +80,7 @@ public class VehicleCollisionTesterRay extends VehicleCollisionTester {
      * zero)
      */
     VehicleCollisionTesterRay(long testerVa) {
-        setVirtualAddress(testerVa, null);
+        setVirtualAddress(testerVa, null); // not the owner due to ref counting
     }
     // *************************************************************************
     // VehicleCollisionTester methods

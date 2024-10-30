@@ -61,7 +61,7 @@ public class VehicleCollisionTesterCastCylinder extends VehicleCollisionTester {
      * zero)
      */
     VehicleCollisionTesterCastCylinder(long testerVa) {
-        setVirtualAddress(testerVa, null);
+        setVirtualAddress(testerVa, null); // not the owner due to ref counting
     }
     // *************************************************************************
     // VehicleCollisionTester methods
