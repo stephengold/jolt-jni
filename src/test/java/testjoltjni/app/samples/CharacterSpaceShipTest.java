@@ -110,7 +110,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 
 	// Update the character so it stays relative to the space ship
 	RMat44 new_space_ship_transform = mBodyInterface.getCenterOfMassTransform(mSpaceShip);
-	mCharacter.getPtr().setPosition(Op.multiply(Op.multiply(new_space_ship_transform , mSpaceShipPrevTransform.inversed()), mCharacter.getPosition()));
+	mCharacter.getPtr().setPosition(Op.multiply(Op.multiply(new_space_ship_transform , mSpaceShipPrevTransform.inversed()) , mCharacter.getPosition()));
 
 	// Update the character rotation and its up vector to match the new up vector of the ship
 	mCharacter.getPtr().setUp(new_space_ship_transform.getAxisY());

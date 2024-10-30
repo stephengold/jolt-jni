@@ -68,9 +68,8 @@ public interface ConstShape extends ConstJoltPhysicsObject {
      * @param useMaterialColors true to use the color in the shape's material
      * @param wireframe true to draw a wire frame, false for solid triangles
      */
-    void draw(DebugRenderer renderer, RMat44Arg comTransform,
-            Vec3Arg scale, ConstColor color, boolean useMaterialColors,
-            boolean wireframe);
+    void draw(DebugRenderer renderer, RMat44Arg comTransform, Vec3Arg scale,
+            ConstColor color, boolean useMaterialColors, boolean wireframe);
 
     /**
      * Locate the shape's center of mass. The shape is unaffected.

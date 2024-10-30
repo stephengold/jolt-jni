@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Body/BodyManager.h"
 #include "Jolt/Physics/StateRecorder.h"
+
 #include "auto/com_github_stephengold_joltjni_StateRecorder.h"
 #include "glue/glue.h"
 
