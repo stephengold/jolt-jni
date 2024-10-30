@@ -46,6 +46,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVsCharacterC
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVsCharacterCollisionSimple
+ * Method:    countCharacters
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVsCharacterCollisionSimple_countCharacters
+  (JNIEnv *, jclass, jlong interfaceVa) {
+    const CharacterVsCharacterCollisionSimple * const pInterface
+            = reinterpret_cast<CharacterVsCharacterCollisionSimple *> (interfaceVa);
+    const Array<CharacterVirtual *>::size_type result
+            = pInterface->mCharacters.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVsCharacterCollisionSimple
  * Method:    createDefault
  * Signature: ()J
  */
@@ -55,6 +69,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVsCharacter
             = new CharacterVsCharacterCollisionSimple();
     TRACE_NEW("CharacterVsCharacterCollisionSimple", pInterface)
     return reinterpret_cast<jlong> (pInterface);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVsCharacterCollisionSimple
+ * Method:    getCharacter
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVsCharacterCollisionSimple_getCharacter
+  (JNIEnv *, jclass, jlong interfaceVa, jint index) {
+    CharacterVsCharacterCollisionSimple * const pCollision
+            = reinterpret_cast<CharacterVsCharacterCollisionSimple *> (interfaceVa);
+    CharacterVirtual * pResult = pCollision->mCharacters.at(index);
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*

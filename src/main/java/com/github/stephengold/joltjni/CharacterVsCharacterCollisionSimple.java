@@ -22,6 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple implementation of the Character-versus-Character collision
@@ -56,6 +58,25 @@ public class CharacterVsCharacterCollisionSimple
     }
 
     /**
+     * Enumerate the characters in the collision list.
+     *
+     * @return a new, mutable list of new JVM objects with pre-existing native
+     * objects assigned
+     */
+    public List<CharacterVirtual> getCharactersAsList() {
+        long interfaceVa = va();
+        int numCharacters = countCharacters(interfaceVa);
+        List<CharacterVirtual> result = new ArrayList<>(numCharacters);
+        for (int i = 0; i < numCharacters; ++i) {
+            long characterVa = getCharacter(interfaceVa, i);
+            CharacterVirtual character = new CharacterVirtual(characterVa);
+            result.add(character);
+        }
+
+        return result;
+    }
+
+    /**
      * Remove the specified character from the collide list.
      *
      * @param character the character to add (not null)
@@ -70,7 +91,11 @@ public class CharacterVsCharacterCollisionSimple
 
     native private static void add(long interfaceVa, long characterVa);
 
+    native private static int countCharacters(long interfaceVa);
+
     native private static long createDefault();
+
+    native private static long getCharacter(long interfaceVa, int index);
 
     native private static void remove(long interfaceVa, long characterVa);
 }
