@@ -72,6 +72,17 @@ public class CharacterVirtualSettings
     }
 
     /**
+     * Alter how far the character tries to stay away from the geometry. (native
+     * attribute: mCharacterPadding)
+     *
+     * @param padding the desired distance (in meters, default=0.02)
+     */
+    public void setCharacterPadding(float padding) {
+        long settingsVa = va();
+        setCharacterPadding(settingsVa, padding);
+    }
+
+    /**
      * Alter the collision tolerance. (native attribute: mCollisionTolerance)
      *
      * @param tolerance the desired penetration distance (in meters,
@@ -233,6 +244,20 @@ public class CharacterVirtualSettings
         long settingsVa = va();
         int ordinal = getBackFaceMode(settingsVa);
         EBackFaceMode result = EBackFaceMode.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return how far the character tries to stay away from the geometry. The
+     * settings are unaffected. (native attribute: mCharacterPadding)
+     *
+     * @return the desired distance (in meters)
+     */
+    @Override
+    public float getCharacterPadding() {
+        long settingsVa = va();
+        float result = getCharacterPadding(settingsVa);
 
         return result;
     }
@@ -471,6 +496,8 @@ public class CharacterVirtualSettings
 
     native private static int getBackFaceMode(long settingsVa);
 
+    native private static float getCharacterPadding(long settingsVa);
+
     native private static float getCollisionTolerance(long settingsVa);
 
     native private static float getHitReductionCosMaxAngle(long settingsVa);
@@ -504,6 +531,9 @@ public class CharacterVirtualSettings
     native private static float getShapeOffsetZ(long settingsVa);
 
     native private static void setBackFaceMode(long settingsVa, int ordinal);
+
+    native private static void setCharacterPadding(
+            long settingsVa, float padding);
 
     native private static void setCollisionTolerance(
             long settingsVa, float tolerance);

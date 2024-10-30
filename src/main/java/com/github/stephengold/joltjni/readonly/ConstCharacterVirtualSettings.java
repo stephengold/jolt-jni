@@ -44,6 +44,14 @@ public interface ConstCharacterVirtualSettings
     EBackFaceMode getBackFaceMode();
 
     /**
+     * Return how far the character tries to stay away from the geometry. The
+     * settings are unaffected.
+     *
+     * @return the desired distance (in meters)
+     */
+    float getCharacterPadding();
+
+    /**
      * Return the collision tolerance. The settings are unaffected.
      *
      * @return the allowed penetration distance (in meters)

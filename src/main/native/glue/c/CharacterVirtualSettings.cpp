@@ -64,6 +64,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
+ * Method:    getCharacterPadding
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_getCharacterPadding
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const CharacterVirtualSettings * const pSettings
+            = reinterpret_cast<CharacterVirtualSettings *> (settingsVa);
+    const float result = pSettings->mCharacterPadding;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
  * Method:    getCollisionTolerance
  * Signature: (J)F
  */
@@ -268,6 +281,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSetti
             = reinterpret_cast<CharacterVirtualSettings *> (settingsVa);
     const EBackFaceMode mode = (EBackFaceMode) ordinal;
     pSettings->mBackFaceMode = mode;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
+ * Method:    setCharacterPadding
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_setCharacterPadding
+  (JNIEnv *, jclass, jlong settingsVa, jfloat padding) {
+    CharacterVirtualSettings * const pSettings
+            = reinterpret_cast<CharacterVirtualSettings *> (settingsVa);
+    pSettings->mCharacterPadding = padding;
 }
 
 /*
