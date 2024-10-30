@@ -39,7 +39,7 @@ public class MutableCompoundShape extends CompoundShape {
      */
     public MutableCompoundShape() {
         long shapeVa = createMutableCompoundShape();
-        setVirtualAddress(shapeVa, true);
+        setVirtualAddress(shapeVa, null); // not the owner due to ref counting
     }
 
     /**
