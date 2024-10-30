@@ -135,6 +135,17 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     AaBox getWorldSpaceBounds(Mat44Arg comTransform, Vec3Arg scale);
 
     /**
+     * Return the bounding box including convex radius. The shape is unaffected.
+     *
+     * @param comTransform the center-of-mass transform to apply to the shape
+     * (not null, unaffected)
+     * @param scale the scale factors to apply to the shape (not null,
+     * unaffected)
+     * @return a new, mutable box (in system coordinates)
+     */
+    AaBox getWorldSpaceBounds(RMat44Arg comTransform, Vec3Arg scale);
+
+    /**
      * Test whether the shape can be used in a dynamic/kinematic body. The shape
      * is unaffected.
      *

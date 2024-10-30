@@ -268,6 +268,30 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     }
 
     /**
+     * Return the bounding box including convex radius. The shape is unaffected.
+     *
+     * @param comTransform the center-of-mass transform to apply to the shape
+     * (not null, unaffected)
+     * @param scale the scale factors to apply to the shape (not null,
+     * unaffected)
+     * @return a new, mutable box (in system coordinates)
+     */
+    @Override
+    public AaBox getWorldSpaceBounds(RMat44Arg comTransform, Vec3Arg scale) {
+        long refVa = va();
+        long shapeVa = getPtr(refVa);
+        long rMat44Va = comTransform.va();
+        float sx = scale.getX();
+        float sy = scale.getY();
+        float sz = scale.getZ();
+        long boxVa
+                = Shape.getWorldSpaceBoundsReal(shapeVa, rMat44Va, sx, sy, sz);
+        AaBox result = new AaBox(boxVa, true);
+
+        return result;
+    }
+
+    /**
      * Test whether the shape can be used in a dynamic/kinematic body. The shape
      * is unaffected.
      *

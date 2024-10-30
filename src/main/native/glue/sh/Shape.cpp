@@ -269,6 +269,22 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getWorldSpaceB
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getWorldSpaceBoundsReal
+ * Signature: (JJFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getWorldSpaceBoundsReal
+  (JNIEnv *, jclass, jlong shapeVa, jlong rMat44Va, jfloat sx, jfloat sy, jfloat sz) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (rMat44Va);
+    const Vec3 scale(sx, sy, sz);
+    AABox * const pResult = new AABox();
+    TRACE_NEW("AABox", pResult)
+    *pResult = pShape->GetWorldSpaceBounds(*pMatrix, scale);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    mustBeStatic
  * Signature: (J)Z
  */

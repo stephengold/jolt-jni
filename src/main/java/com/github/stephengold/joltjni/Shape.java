@@ -323,6 +323,28 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
+     * Return the bounding box including convex radius. The shape is unaffected.
+     *
+     * @param comTransform the center-of-mass transform to apply to the shape
+     * (not null, unaffected)
+     * @param scale the scale factors to apply to the shape (not null,
+     * unaffected)
+     * @return a new, mutable box (in system coordinates)
+     */
+    @Override
+    public AaBox getWorldSpaceBounds(RMat44Arg comTransform, Vec3Arg scale) {
+        long shapeVa = va();
+        long rMat44Va = comTransform.va();
+        float sx = scale.getX();
+        float sy = scale.getY();
+        float sz = scale.getZ();
+        long boxVa = getWorldSpaceBoundsReal(shapeVa, rMat44Va, sx, sy, sz);
+        AaBox result = new AaBox(boxVa, true);
+
+        return result;
+    }
+
+    /**
      * Test whether the shape can be used in a dynamic/kinematic body. The shape
      * is unaffected.
      *
@@ -422,6 +444,9 @@ abstract public class Shape extends NonCopyable
 
     native static long getWorldSpaceBounds(
             long shapeVa, long matrixVa, float sx, float sy, float sz);
+
+    native static long getWorldSpaceBoundsReal(
+            long shapeVa, long rMat44Va, float sx, float sy, float sz);
 
     native static boolean mustBeStatic(long shapeVa);
 
