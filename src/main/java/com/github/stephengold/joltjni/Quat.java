@@ -117,6 +117,35 @@ final public class Quat implements QuatArg {
     }
 
     /**
+     * Create a rotation quaternion from Euler angles. Rotation order is X then
+     * Y then Z.
+     *
+     * @param angles the desired rotation around each axis (in radians, not
+     * null, unaffected)
+     * @return a new quaternion
+     */
+    public static Quat sEulerAngles(Vec3 angles) {
+        float halfX = 0.5f * angles.getX();
+        float halfY = 0.5f * angles.getY();
+        float halfZ = 0.5f * angles.getZ();
+
+        float cx = (float) Math.cos(halfX);
+        float cy = (float) Math.cos(halfY);
+        float cz = (float) Math.cos(halfZ);
+        float sx = (float) Math.sin(halfX);
+        float sy = (float) Math.sin(halfY);
+        float sz = (float) Math.sin(halfZ);
+
+        Quat result = new Quat(
+                cz * sx * cy - sz * cx * sy,
+                cz * cx * sy + sz * sx * cy,
+                sz * cx * cy - cz * sx * sy,
+                cz * cx * cy + sz * sx * sy);
+
+        return result;
+    }
+
+    /**
      * Create a rotation quaternion that rotates {@code from} to {@code to}.
      *
      * @param from the first direction vector (not null, unaffected)
