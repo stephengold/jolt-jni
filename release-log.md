@@ -1,5 +1,15 @@
 # release log for the jolt-jni project
 
+## Version 0.9.1 released on TBD
+
++ Finalized the `ObjectStreamIn` class.
++ Bugfix:  various methods lack a native implementation
++ Bugfix:  some native objects could be freed more than once
++ Bugfix:  some `NonCopyable` native objects are never freed
++ Added the `TempAllocatorImplWithMallocFeedback` class (issue #3)
++ Added many public methods to the library.
++ Futher reorganization of the "glue" source files.
+
 ## Version 0.9.0 released on 17 October 2024
 
 + Bugfix:  `Body.setCollisionGroup()` lacks a native implementation
