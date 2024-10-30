@@ -440,3 +440,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSetti
     const Vec3 offset(dx, dy, dz);
     pSettings->mShapeOffset = offset;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
+ * Method:    toRef
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_toRef
+  (JNIEnv *, jclass, jlong settingsVa) {
+    CharacterVirtualSettings * const pSettings
+            = reinterpret_cast<CharacterVirtualSettings *> (settingsVa);
+    Ref<CharacterVirtualSettings> * const pResult
+            = new Ref<CharacterVirtualSettings>(pSettings);
+    TRACE_NEW("Ref<CharacterVirtualSettings>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
