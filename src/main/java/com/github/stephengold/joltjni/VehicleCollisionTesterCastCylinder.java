@@ -50,7 +50,7 @@ public class VehicleCollisionTesterCastCylinder extends VehicleCollisionTester {
     public VehicleCollisionTesterCastCylinder(
             int objectLayer, float convexRadiusFraction) {
         long testerVa = createTester(objectLayer, convexRadiusFraction);
-        setVirtualAddress(testerVa, true);
+        setVirtualAddress(testerVa, null); // not the owner due to ref counting
     }
 
     /**
