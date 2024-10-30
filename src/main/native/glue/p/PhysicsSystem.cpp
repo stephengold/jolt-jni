@@ -93,6 +93,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_drawBod
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_free
+  (JNIEnv *, jclass, jlong systemVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    TRACE_DELETE("PhysicsSystem", pSystem)
+    delete pSystem;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getActiveBodies
  * Signature: (JIJ)V
  */

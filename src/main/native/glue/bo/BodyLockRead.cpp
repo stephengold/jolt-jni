@@ -47,6 +47,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyLockRead_createB
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyLockRead
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyLockRead_free
+  (JNIEnv *, jclass, jlong lockVa) {
+    BodyLockRead * const pLock = reinterpret_cast<BodyLockRead *> (lockVa);
+    TRACE_DELETE("BodyLockRead", pLock)
+    delete pLock;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyLockRead
  * Method:    getBody
  * Signature: (J)J
  */

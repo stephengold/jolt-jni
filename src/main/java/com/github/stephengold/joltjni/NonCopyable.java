@@ -56,23 +56,4 @@ abstract public class NonCopyable extends JoltPhysicsObject {
     NonCopyable(long virtualAddress) {
         super(virtualAddress);
     }
-    // *************************************************************************
-    // new protected methods
-
-    /**
-     * Assign a native object, assuming there's none already assigned.
-     *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
-     */
-    void setVirtualAddress(long virtualAddress, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(virtualAddress) : null;
-        setVirtualAddress(virtualAddress, freeingAction);
-    }
-    // *************************************************************************
-    // native private methods
-
-    native private static void free(long virtualAddress);
 }

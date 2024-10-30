@@ -27,8 +27,22 @@ SOFTWARE.
 #include "Jolt/Physics/Body/BodyManager.h"
 #include "Jolt/Physics/StateRecorder.h"
 #include "auto/com_github_stephengold_joltjni_StateRecorder.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_free
+  (JNIEnv *, jclass, jlong recorderVa) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    TRACE_DELETE("StateRecorder", pRecorder)
+    delete pRecorder;
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_StateRecorder

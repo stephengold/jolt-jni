@@ -44,6 +44,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyFilter_createDef
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyFilter
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyFilter_free
+  (JNIEnv *, jclass, jlong filterVa) {
+    BodyFilter * const pFilter = reinterpret_cast<BodyFilter *> (filterVa);
+    TRACE_DELETE("BodyFilter", pFilter)
+    delete pFilter;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyFilter
  * Method:    shouldCollide
  * Signature: (JJ)Z
  */

@@ -24,21 +24,21 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
-#include "Jolt/Core/NonCopyable.h"
-#include "auto/com_github_stephengold_joltjni_NonCopyable.h"
+#include "Jolt/ObjectStream/SerializableObject.h"
+#include "auto/com_github_stephengold_joltjni_SerializableObject.h"
 #include "glue/glue.h"
 
 using namespace JPH;
 
 /*
- * Class:     com_github_stephengold_joltjni_NonCopyable
+ * Class:     com_github_stephengold_joltjni_SerializableObject
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NonCopyable_free
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SerializableObject_free
   (JNIEnv *, jclass, jlong virtualAddress) {
-    NonCopyable * const pInstance
-            = reinterpret_cast<NonCopyable *> (virtualAddress);
-    TRACE_DELETE("NonCopyable", pInstance)
+    SerializableObject * const pInstance
+            = reinterpret_cast<SerializableObject *> (virtualAddress);
+    TRACE_DELETE("SerializableObject", pInstance)
     delete pInstance;
 }

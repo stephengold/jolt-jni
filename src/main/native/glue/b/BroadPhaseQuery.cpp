@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/BroadPhase/BroadPhaseQuery.h"
 #include "auto/com_github_stephengold_joltjni_BroadPhaseQuery.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -108,4 +109,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseQuery_colli
     const ObjectLayerFilter * const pOlFilter
             = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
     pQuery->CollideSphere(center, radius, *pCollector, *pBplFilter, *pOlFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BroadPhaseQuery
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseQuery_free
+  (JNIEnv *, jclass, jlong queryVa) {
+    BroadPhaseQuery * const pQuery
+            = reinterpret_cast<BroadPhaseQuery *> (queryVa);
+    TRACE_DELETE("BroadPhaseQuery", pQuery)
+    delete pQuery;
 }

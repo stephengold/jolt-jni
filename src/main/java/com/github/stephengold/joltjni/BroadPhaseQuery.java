@@ -191,6 +191,21 @@ public class BroadPhaseQuery extends NonCopyable {
         return (PhysicsSystem) getContainingObject();
     }
     // *************************************************************************
+    // protected methods
+
+    /**
+     * Assign a native object, assuming there's none already assigned.
+     *
+     * @param queryVa the virtual address of the native object to assign (not
+     * zero)
+     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
+     * isn't the owner
+     */
+    final void setVirtualAddress(long queryVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(queryVa) : null;
+        setVirtualAddress(queryVa, freeingAction);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static void castRay(long queryVa, long raycastVa,
@@ -206,4 +221,6 @@ public class BroadPhaseQuery extends NonCopyable {
     native private static void collideSphere(long queryVa, float centerX,
             float centerY, float centerZ, float radius, long collectorVa,
             long bplFilterVa, long olFilterVa);
+
+    native private static void free(long queryVa);
 }

@@ -24,32 +24,21 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
-#include "Jolt/Physics/Collision/ShapeFilter.h"
-#include "auto/com_github_stephengold_joltjni_ShapeFilter.h"
+#include "Jolt/Physics/Character/CharacterVirtual.h"
+#include "auto/com_github_stephengold_joltjni_CharacterVsCharacterCollision.h"
 #include "glue/glue.h"
 
 using namespace JPH;
 
 /*
- * Class:     com_github_stephengold_joltjni_ShapeFilter
- * Method:    createDefaultFilter
- * Signature: ()J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeFilter_createDefaultFilter
-  (JNIEnv *, jclass) {
-    ShapeFilter * const pResult = new ShapeFilter();
-    TRACE_NEW("ShapeFilter", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ShapeFilter
+ * Class:     com_github_stephengold_joltjni_CharacterVsCharacterCollision
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeFilter_free
-  (JNIEnv *, jclass, jlong filterVa) {
-    ShapeFilter * const pFilter = reinterpret_cast<ShapeFilter *> (filterVa);
-    TRACE_DELETE("ShapeFilter", pFilter)
-    delete pFilter;
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVsCharacterCollision_free
+  (JNIEnv *, jclass, jlong collisionVa) {
+    CharacterVsCharacterCollision * const pCollision
+            = reinterpret_cast<CharacterVsCharacterCollision *> (collisionVa);
+    TRACE_DELETE("CharacterVsCharacterCollision", pCollision)
+    delete pCollision;
 }

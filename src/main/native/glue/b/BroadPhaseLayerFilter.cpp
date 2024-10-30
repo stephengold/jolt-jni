@@ -44,6 +44,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerFilte
 
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhaseLayerFilter
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerFilter_free
+  (JNIEnv *, jclass, jlong filterVa) {
+    BroadPhaseLayerFilter * const pFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (filterVa);
+    TRACE_DELETE("BroadPhaseLayerFilter", pFilter)
+    delete pFilter;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BroadPhaseLayerFilter
  * Method:    shouldCollide
  * Signature: (JI)Z
  */

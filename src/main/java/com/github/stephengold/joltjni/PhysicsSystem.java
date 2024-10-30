@@ -671,6 +671,21 @@ public class PhysicsSystem extends NonCopyable {
         return result;
     }
     // *************************************************************************
+    // protected methods
+
+    /**
+     * Assign a native object, assuming there's none already assigned.
+     *
+     * @param systemVa the virtual address of the native object to assign (not
+     * zero)
+     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
+     * isn't the owner
+     */
+    final void setVirtualAddress(long systemVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(systemVa) : null;
+        setVirtualAddress(systemVa, freeingAction);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static void addConstraint(long systemVa, long constraintVa);
@@ -681,6 +696,8 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static void drawBodies(
             long systemVa, long settingsVa, long rendererVa);
+
+    native private static void free(long systemVa);
 
     native private static void getActiveBodies(
             long systemVa, int ordinal, long vectorVa);

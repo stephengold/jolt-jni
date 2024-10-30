@@ -570,7 +570,7 @@ abstract public class DebugRenderer extends NonCopyable {
      */
     native public void nextFrame();
     // *************************************************************************
-    // NonCopyable methods
+    // protected methods
 
     /**
      * Assign a native object, assuming there's none already assigned.
@@ -580,8 +580,7 @@ abstract public class DebugRenderer extends NonCopyable {
      * @param owner true &rarr; make the JVM object the owner, false &rarr; it
      * isn't the owner
      */
-    @Override
-    void setVirtualAddress(long rendererVa, boolean owner) {
+    final void setVirtualAddress(long rendererVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(rendererVa) : null;
         setVirtualAddress(rendererVa, freeingAction);
     }

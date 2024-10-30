@@ -92,10 +92,27 @@ public class BodyLockWrite extends NonCopyable {
         return result;
     }
     // *************************************************************************
+    // protected methods
+
+    /**
+     * Assign a native object, assuming there's none already assigned.
+     *
+     * @param lockVa the virtual address of the native object to assign (not
+     * zero)
+     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
+     * isn't the owner
+     */
+    final void setVirtualAddress(long lockVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(lockVa) : null;
+        setVirtualAddress(lockVa, freeingAction);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createBodyLockWrite(
             long interfaceVa, long idVa);
+
+    native private static void free(long lockVa);
 
     native private static long getBody(long lockVa);
 

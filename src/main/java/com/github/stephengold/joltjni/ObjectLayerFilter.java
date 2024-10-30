@@ -62,9 +62,26 @@ public class ObjectLayerFilter extends NonCopyable {
         return result;
     }
     // *************************************************************************
+    // protected methods
+
+    /**
+     * Assign a native object, assuming there's none already assigned.
+     *
+     * @param filterVa the virtual address of the native object to assign (not
+     * zero)
+     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
+     * isn't the owner
+     */
+    final void setVirtualAddress(long filterVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(filterVa) : null;
+        setVirtualAddress(filterVa, freeingAction);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createDefaultFilter();
+
+    native private static void free(long filterVa);
 
     native private static boolean shouldCollide(
             long filterVa, int objLayerIndex);

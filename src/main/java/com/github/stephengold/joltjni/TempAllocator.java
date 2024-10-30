@@ -35,4 +35,23 @@ abstract public class TempAllocator extends NonCopyable {
      */
     TempAllocator() {
     }
+    // *************************************************************************
+    // protected methods
+
+    /**
+     * Assign a native object, assuming there's none already assigned.
+     *
+     * @param allocatorVa the virtual address of the native object to assign
+     * (not zero)
+     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
+     * isn't the owner
+     */
+    final void setVirtualAddress(long allocatorVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(allocatorVa) : null;
+        setVirtualAddress(allocatorVa, freeingAction);
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static void free(long allocatorVa);
 }

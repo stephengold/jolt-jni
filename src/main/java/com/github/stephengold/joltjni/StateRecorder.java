@@ -228,7 +228,24 @@ public class StateRecorder extends NonCopyable {
         writeVec3(recorderVa, x, y, z);
     }
     // *************************************************************************
+    // protected methods
+
+    /**
+     * Assign a native object, assuming there's none already assigned.
+     *
+     * @param recorderVa the virtual address of the native object to assign (not
+     * zero)
+     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
+     * isn't the owner
+     */
+    final void setVirtualAddress(long recorderVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(recorderVa) : null;
+        setVirtualAddress(recorderVa, freeingAction);
+    }
+    // *************************************************************************
     // native private methods
+
+    native private static void free(long recorderVa);
 
     native private static boolean isValidating(long recorderVa);
 
