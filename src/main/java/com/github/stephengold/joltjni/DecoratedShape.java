@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstShape;
+
 /**
  * Add functionality to an existing {@code Shape}.
  *
@@ -46,4 +48,23 @@ public class DecoratedShape extends Shape {
     DecoratedShape(long shapeVa) {
         super(shapeVa);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Access the undecorated shape.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public ConstShape getInnerShape() {
+        long outerVa = va();
+        long innerVa = getInnerShape(outerVa);
+        ConstShape result = Shape.newShape(innerVa);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static long getInnerShape(long outerVa);
 }
