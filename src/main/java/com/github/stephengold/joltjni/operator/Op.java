@@ -109,6 +109,23 @@ final public class Op {
      * @param right the inverse scale to apply
      * @return a new vector
      */
+    public static RVec3 divide(RVec3Arg left, double right) {
+        double xx = left.xx() / right;
+        double yy = left.yy() / right;
+        double zz = left.zz() / right;
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Return a scaled version of the specified vector. (native operator: binary
+     * {@code /})
+     *
+     * @param left the input vector (not null, unaffected)
+     * @param right the inverse scale to apply
+     * @return a new vector
+     */
     public static Vec3 divide(Vec3Arg left, float right) {
         float x = left.getX() / right;
         float y = left.getY() / right;
