@@ -30,7 +30,7 @@ import java.util.List;
  * A line-for-line Java translation of the Jolt Physics constraint-singularity test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
- * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/ConstraintPriorityTest.cpp
+ * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/ConstraintSingularityTest.cpp
  */
 class ConstraintSingularityTest extends Test{
 
