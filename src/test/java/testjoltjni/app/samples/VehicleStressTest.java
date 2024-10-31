@@ -32,7 +32,7 @@ import java.util.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Vehicle/VehicleStressTest.cpp
  */
 class VehicleStressTest extends VehicleTest{
-    List<ConstraintRef> mVehicles = new ArrayList<>();
+    List<VehicleConstraintRef> mVehicles = new ArrayList<>();
     float mHandBrake, mForward, mRight;
 
 void Initialize()
@@ -154,7 +154,7 @@ void ProcessInput(const ProcessInputParams &inParams)
 
 void PrePhysicsUpdate(PreUpdateParams inParams)
 {
-	for (ConstraintRef cr : mVehicles)
+	for (VehicleConstraintRef cr : mVehicles)
 	{
 		VehicleConstraint c = (VehicleConstraint) cr.getPtr();
 		// On user input, assure that the car is active

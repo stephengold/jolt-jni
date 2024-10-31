@@ -30,6 +30,12 @@ SOFTWARE.
 
 using namespace JPH;
 
+IMPLEMENT_REF(TwoBodyConstraint,
+  Java_com_github_stephengold_joltjni_TwoBodyConstraintRef_copy,
+  Java_com_github_stephengold_joltjni_TwoBodyConstraintRef_createEmpty,
+  Java_com_github_stephengold_joltjni_TwoBodyConstraintRef_free,
+  Java_com_github_stephengold_joltjni_TwoBodyConstraintRef_getPtr)
+
 /*
  * Class:     com_github_stephengold_joltjni_TwoBodyConstraint
  * Method:    getBody1
@@ -83,5 +89,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TwoBodyConstraint_ge
     Mat44 * const pResult = new Mat44();
     TRACE_NEW("Mat44", pResult)
     *pResult = pConstraint->GetConstraintToBody2Matrix();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TwoBodyConstraint
+ * Method:    toRef
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TwoBodyConstraint_toRef
+  (JNIEnv *, jclass, jlong constraintVa) {
+    TwoBodyConstraint * const pConstraint
+            = reinterpret_cast<TwoBodyConstraint *> (constraintVa);
+    Ref<TwoBodyConstraint> * const pResult
+            = new Ref<TwoBodyConstraint>(pConstraint);
+    TRACE_NEW("Ref<TwoBodyConstraint>", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

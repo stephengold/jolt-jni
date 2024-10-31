@@ -45,6 +45,22 @@ abstract public class TwoBodyConstraint
         super(constraintVa);
     }
     // *************************************************************************
+    // Constraint methods
+
+    /**
+     * Create a counted reference to the native {@code TwoBodyConstraint}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public TwoBodyConstraintRef toRef() {
+        long constraintVa = va();
+        long refVa = toRef(constraintVa);
+        TwoBodyConstraintRef result = new TwoBodyConstraintRef(refVa, true);
+
+        return result;
+    }
+    // *************************************************************************
     // ConstTwoBodyConstraint methods
 
     /**
@@ -105,13 +121,15 @@ abstract public class TwoBodyConstraint
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
-    native private static long getBody1(long constraintVa);
+    native static long getBody1(long constraintVa);
 
-    native private static long getBody2(long constraintVa);
+    native static long getBody2(long constraintVa);
 
-    native private static long getConstraintToBody1Matrix(long constraintVa);
+    native static long getConstraintToBody1Matrix(long constraintVa);
 
-    native private static long getConstraintToBody2Matrix(long constraintVa);
+    native static long getConstraintToBody2Matrix(long constraintVa);
+
+    native private static long toRef(long constraintVa);
 }

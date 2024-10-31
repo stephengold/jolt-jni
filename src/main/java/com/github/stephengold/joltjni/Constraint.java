@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EConstraintType;
 import com.github.stephengold.joltjni.readonly.ConstConstraint;
+import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
@@ -317,7 +318,7 @@ abstract public class Constraint extends NonCopyable
      * @return a new JVM object with a new native object assigned
      */
     @Override
-    public ConstraintRef toRef() {
+    public Ref toRef() {
         long constraintVa = va();
         long refVa = toRef(constraintVa);
         ConstraintRef result = new ConstraintRef(refVa, true);

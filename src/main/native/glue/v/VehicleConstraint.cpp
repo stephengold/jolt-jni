@@ -31,6 +31,12 @@ SOFTWARE.
 
 using namespace JPH;
 
+IMPLEMENT_REF(VehicleConstraint,
+  Java_com_github_stephengold_joltjni_VehicleConstraintRef_copy,
+  Java_com_github_stephengold_joltjni_VehicleConstraintRef_createEmpty,
+  Java_com_github_stephengold_joltjni_VehicleConstraintRef_free,
+  Java_com_github_stephengold_joltjni_VehicleConstraintRef_getPtr)
+
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraint
  * Method:    countWheels
@@ -233,4 +239,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_set
     const VehicleCollisionTester * const pTester
             = reinterpret_cast<VehicleCollisionTester *> (testerVa);
     pConstraint->SetVehicleCollisionTester(pTester);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    toRef
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_toRef
+  (JNIEnv *, jclass, jlong constraintVa) {
+    VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    Ref<VehicleConstraint> * const pResult
+            = new Ref<VehicleConstraint>(pConstraint);
+    TRACE_NEW("Ref<VehicleConstraint>", pResult)
+    return reinterpret_cast<jlong> (pResult);
 }

@@ -228,6 +228,22 @@ public class VehicleConstraint
         setVehicleCollisionTester(constraintVa, testerVa);
     }
     // *************************************************************************
+    // Constraint methods
+
+    /**
+     * Create a counted reference to the native {@code VehicleConstraint}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public VehicleConstraintRef toRef() {
+        long constraintVa = va();
+        long refVa = toRef(constraintVa);
+        VehicleConstraintRef result = new VehicleConstraintRef(refVa, true);
+
+        return result;
+    }
+    // *************************************************************************
     // PhysicsStepListener methods
 
     /**
@@ -280,4 +296,6 @@ public class VehicleConstraint
 
     native private static void setVehicleCollisionTester(
             long constraintVa, long testerVa);
+
+    native private static long toRef(long constraintVa);
 }
