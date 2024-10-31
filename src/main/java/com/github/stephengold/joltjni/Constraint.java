@@ -172,7 +172,8 @@ abstract public class Constraint extends NonCopyable
     // ConstConstraint methods
 
     /**
-     * Return the constraint's priority when solving.
+     * Return the constraint's priority when solving. The constraint is
+     * unaffected.
      *
      * @return the priority level
      */
@@ -185,7 +186,8 @@ abstract public class Constraint extends NonCopyable
     }
 
     /**
-     * Convert the constraint to a {@code ConstraintSettings} object.
+     * Convert the constraint to a {@code ConstraintSettings} object. The
+     * constraint is unaffected.
      *
      * @return a new reference to a new settings object
      */
@@ -200,7 +202,7 @@ abstract public class Constraint extends NonCopyable
     }
 
     /**
-     * Test whether the constraint is enabled.
+     * Test whether the constraint is enabled. The constraint is unaffected.
      *
      * @return true if enabled, otherwise false
      */
@@ -214,7 +216,7 @@ abstract public class Constraint extends NonCopyable
 
     /**
      * Return the override for the number of position iterations used in the
-     * solver.
+     * solver. The constraint is unaffected.
      *
      * @return the number of iterations, or 0 to use the default in
      * {@code PhysicsSettings}
@@ -229,7 +231,7 @@ abstract public class Constraint extends NonCopyable
 
     /**
      * Return the override for the number of velocity iterations used in the
-     * solver.
+     * solver. The constraint is unaffected.
      *
      * @return the number of iterations, or 0 to use the default in
      * {@code PhysicsSettings}

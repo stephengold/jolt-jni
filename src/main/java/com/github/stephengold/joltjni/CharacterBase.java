@@ -318,7 +318,7 @@ abstract public class CharacterBase
 
     /**
      * Count the active references to the native {@code CharacterBase}. The
-     * settings are unaffected.
+     * character is unaffected.
      *
      * @return the count (&ge;0)
      */

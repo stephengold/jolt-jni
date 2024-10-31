@@ -35,14 +35,16 @@ public interface ConstConstraint extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the constraint's priority when solving.
+     * Return the constraint's priority when solving. The constraint is
+     * unaffected.
      *
      * @return the priority level
      */
     int getConstraintPriority();
 
     /**
-     * Convert the constraint to a {@code ConstraintSettings} object.
+     * Convert the constraint to a {@code ConstraintSettings} object. The
+     * constraint is unaffected.
      *
      * @return a new reference to a new settings object
      */
