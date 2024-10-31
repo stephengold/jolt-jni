@@ -21,12 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstTwoBodyConstraint;
+
 /**
  * A type of {@code Constraint} that joins 2 bodies.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class TwoBodyConstraint extends Constraint {
+abstract public class TwoBodyConstraint
+        extends Constraint
+        implements ConstTwoBodyConstraint {
     // *************************************************************************
     // constructors
 
@@ -41,13 +45,14 @@ abstract public class TwoBodyConstraint extends Constraint {
         super(constraintVa);
     }
     // *************************************************************************
-    // new methods exposed
+    // ConstTwoBodyConstraint methods
 
     /**
      * Access the first body in the constraint. The constraint is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public Body getBody1() {
         long constraintVa = va();
         long bodyVa = getBody1(constraintVa);
@@ -61,6 +66,7 @@ abstract public class TwoBodyConstraint extends Constraint {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public Body getBody2() {
         long constraintVa = va();
         long bodyVa = getBody2(constraintVa);
@@ -75,6 +81,7 @@ abstract public class TwoBodyConstraint extends Constraint {
      *
      * @return a new transform matrix
      */
+    @Override
     public Mat44 getConstraintToBody1Matrix() {
         long constraintVa = va();
         long matrixVa = getConstraintToBody1Matrix(constraintVa);
@@ -89,6 +96,7 @@ abstract public class TwoBodyConstraint extends Constraint {
      *
      * @return a new transform matrix
      */
+    @Override
     public Mat44 getConstraintToBody2Matrix() {
         long constraintVa = va();
         long matrixVa = getConstraintToBody2Matrix(constraintVa);
