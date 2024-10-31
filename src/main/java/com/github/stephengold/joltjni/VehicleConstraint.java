@@ -32,7 +32,7 @@ public class VehicleConstraint
         extends Constraint
         implements PhysicsStepListener {
     // *************************************************************************
-    // constructors
+    // fields
 
     /**
      * protect the collision tester (if any) from garbage collection

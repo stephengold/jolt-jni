@@ -32,7 +32,7 @@ import testjoltjni.app.testframework.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Vehicle/TankTest.cpp
  */
-class TankTest extends VehicleTest {
+class TankTest extends VehicleTest{
 Body mTankBody;
 Body mTurretBody;
 Body mBarrelBody;

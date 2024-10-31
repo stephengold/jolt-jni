@@ -31,7 +31,7 @@ import testjoltjni.app.testframework.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Vehicle/MotorcycleTest.cpp
  */
-class MotorcycleTest extends VehicleTest {
+class MotorcycleTest extends VehicleTest{
 boolean sOverrideFrontSuspensionForcePoint = false;
 boolean sOverrideRearSuspensionForcePoint = false;
 boolean sEnableLeanController = true;

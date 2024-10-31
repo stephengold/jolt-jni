@@ -22,7 +22,9 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A memory allocator suitable for use by {@code PhysicsSystem.update()}.
+ * A memory allocator suitable for use by
+ * {@code PhysicsSystem.update()}, {@code CharacterVirtual.extendedUpdate()}, or
+ * {@code CharacterVirtual.setShape()}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
