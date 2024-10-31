@@ -164,13 +164,16 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
+     * @return the argument, for chaining
      */
-    public void setPoint1(RVec3Arg location) {
+    public RVec3Arg setPoint1(RVec3Arg location) {
         long settingsVa = va();
         double x = location.xx();
         double y = location.yy();
         double z = location.zz();
         setPoint1(settingsVa, x, y, z);
+
+        return location;
     }
 
     /**
@@ -178,13 +181,16 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
+     * @return the argument, for chaining
      */
-    public void setPoint2(RVec3Arg location) {
+    public RVec3Arg setPoint2(RVec3Arg location) {
         long settingsVa = va();
         double x = location.xx();
         double y = location.yy();
         double z = location.zz();
         setPoint2(settingsVa, x, y, z);
+
+        return location;
     }
 
     /**
@@ -204,13 +210,16 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(1,0,0))
+     * @return the argument, for chaining
      */
-    public void setTwistAxis1(Vec3Arg direction) {
+    public Vec3Arg setTwistAxis1(Vec3Arg direction) {
         long settingsVa = va();
         float x = direction.getX();
         float y = direction.getY();
         float z = direction.getZ();
         setTwistAxis1(settingsVa, x, y, z);
+
+        return direction;
     }
 
     /**
@@ -218,13 +227,16 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param direction the desired axis direction (not null, unaffected,
      * default=(1,0,0))
+     * @return the argument, for chaining
      */
-    public void setTwistAxis2(Vec3Arg direction) {
+    public Vec3Arg setTwistAxis2(Vec3Arg direction) {
         long settingsVa = va();
         float x = direction.getX();
         float y = direction.getY();
         float z = direction.getZ();
         setTwistAxis2(settingsVa, x, y, z);
+
+        return direction;
     }
     // *************************************************************************
     // native private methods
