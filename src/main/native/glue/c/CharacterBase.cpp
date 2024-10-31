@@ -231,6 +231,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGr
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBase
+ * Method:    getRefCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getRefCount
+  (JNIEnv *, jclass, jlong characterVa) {
+    const CharacterBase * const pCharacter
+            = reinterpret_cast<CharacterBase *> (characterVa);
+    const uint32 result = pCharacter->GetRefCount();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterBase
  * Method:    getShape
  * Signature: (J)J
  */
@@ -334,6 +347,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_saveSta
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
     pCharacter->SaveState(*pRecorder);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterBase
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_setEmbedded
+  (JNIEnv *, jclass, jlong characterVa) {
+    CharacterBase * const pCharacter
+            = reinterpret_cast<CharacterBase *> (characterVa);
+    pCharacter->SetEmbedded();
 }
 
 /*

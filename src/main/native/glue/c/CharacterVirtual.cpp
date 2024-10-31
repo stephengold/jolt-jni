@@ -386,19 +386,6 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_g
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getRefCount
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getRefCount
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const uint32 result = pCharacter->GetRefCount();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    getRotationW
  * Signature: (J)F
  */
@@ -557,18 +544,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_setC
     CharacterVsCharacterCollision * const pInterface
             = reinterpret_cast<CharacterVsCharacterCollision *> (interfaceVa);
     pCharacter->SetCharacterVsCharacterCollision(pInterface);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    setEmbedded
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_setEmbedded
-  (JNIEnv *, jclass, jlong characterVa) {
-    CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    pCharacter->SetEmbedded();
 }
 
 /*

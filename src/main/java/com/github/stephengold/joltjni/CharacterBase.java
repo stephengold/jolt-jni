@@ -26,7 +26,6 @@ import com.github.stephengold.joltjni.readonly.ConstCharacterBase;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
@@ -323,21 +322,21 @@ abstract public class CharacterBase
      * @return the count (&ge;0)
      */
     @Override
-    abstract public int getRefCount();
+    public int getRefCount() {
+        long characterVa = va();
+        int result = getRefCount(characterVa);
+
+        return result;
+    }
 
     /**
      * Mark the native {@code CharacterBase} as embedded.
      */
     @Override
-    abstract public void setEmbedded();
-
-    /**
-     * Create a counted reference to the native {@code CharacterBase}.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    @Override
-    abstract public Ref toRef();
+    public void setEmbedded() {
+        long characterVa = va();
+        setEmbedded(characterVa);
+    }
     // *************************************************************************
     // native methods
 
@@ -371,6 +370,8 @@ abstract public class CharacterBase
 
     native static float getGroundVelocityZ(long characterVa);
 
+    native private static int getRefCount(long characterVa);
+
     native static long getShape(long characterVa);
 
     native static float getUpX(long characterVa);
@@ -387,6 +388,8 @@ abstract public class CharacterBase
     native private static void restoreState(long characterVa, long recorderVa);
 
     native static void saveState(long characterVa, long recorderVa);
+
+    native private static void setEmbedded(long characterVa);
 
     native private static void setMaxSlopeAngle(long characterVa, float angle);
 

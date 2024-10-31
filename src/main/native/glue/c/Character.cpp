@@ -220,19 +220,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_getPosition
 
 /*
  * Class:     com_github_stephengold_joltjni_Character
- * Method:    getRefCount
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Character_getRefCount
-  (JNIEnv *, jclass, jlong characterVa) {
-    const Character * const pCharacter
-            = reinterpret_cast<Character *> (characterVa);
-    const uint32 result = pCharacter->GetRefCount();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Character
  * Method:    getRotation
  * Signature: (J[FZ)V
  */
@@ -286,17 +273,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_removeFromP
   (JNIEnv *, jclass, jlong characterVa, jboolean lockBodies) {
     Character * const pCharacter = reinterpret_cast<Character *> (characterVa);
     pCharacter->RemoveFromPhysicsSystem(lockBodies);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Character
- * Method:    setEmbedded
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_setEmbedded
-  (JNIEnv *, jclass, jlong characterVa) {
-    Character * const pCharacter = reinterpret_cast<Character *> (characterVa);
-    pCharacter->SetEmbedded();
 }
 
 /*
