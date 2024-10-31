@@ -34,7 +34,6 @@ import testjoltjni.app.testframework.CameraState;
 class CharacterSpaceShipTest extends Test{
 static final float cCharacterHeightStanding = 1.35f;
 static final float cCharacterRadiusStanding = 0.3f;
-static final float cCharacterSpeed = 6.0f;
 static final float cJumpSpeed = 4.0f;
 CharacterVirtualRef mCharacter;
 BodyId mSpaceShip=new BodyId();
@@ -44,7 +43,6 @@ Vec3 mSpaceShipAngularVelocity=new Vec3();
 float mTime = 0.0f;
 Vec3 mDesiredVelocity = Vec3.sZero();
 boolean mJump = false;
-boolean mWasJump = false;
 
 void Initialize()
 {
