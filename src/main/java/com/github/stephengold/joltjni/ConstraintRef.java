@@ -21,6 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
+import com.github.stephengold.joltjni.enumerate.EConstraintType;
+import com.github.stephengold.joltjni.readonly.ConstConstraint;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
@@ -29,7 +32,9 @@ import com.github.stephengold.joltjni.template.Ref;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class ConstraintRef extends Ref {
+final public class ConstraintRef
+        extends Ref
+        implements ConstConstraint {
     // *************************************************************************
     // constructors
 
@@ -44,6 +49,131 @@ final public class ConstraintRef extends Ref {
     ConstraintRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // ConstConstraint methods
+
+    /**
+     * Return the constraint's priority when solving. The constraint is
+     * unaffected.
+     *
+     * @return the priority level
+     */
+    @Override
+    public int getConstraintPriority() {
+        long refVa = va();
+        long constraintVa = getPtr(refVa);
+        int result = Constraint.getConstraintPriority(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Convert the constraint to a {@code ConstraintSettings} object. The
+     * constraint is unaffected.
+     *
+     * @return a new reference to a new settings object
+     */
+    @Override
+    public ConstraintSettingsRef getConstraintSettings() {
+        long refVa = va();
+        long constraintVa = getPtr(refVa);
+        long settingsRefVa = Constraint.getConstraintSettings(constraintVa);
+        ConstraintSettingsRef result
+                = new ConstraintSettingsRef(settingsRefVa, true);
+
+        return result;
+    }
+
+    /**
+     * Test whether the constraint is enabled. The constraint is unaffected.
+     *
+     * @return true if enabled, otherwise false
+     */
+    @Override
+    public boolean getEnabled() {
+        long refVa = va();
+        long constraintVa = getPtr(refVa);
+        boolean result = Constraint.getEnabled(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Return the override for the number of position iterations used in the
+     * solver. The constraint is unaffected.
+     *
+     * @return the number of iterations, or 0 to use the default in
+     * {@code PhysicsSettings}
+     */
+    @Override
+    public int getNumPositionStepsOverride() {
+        long refVa = va();
+        long constraintVa = getPtr(refVa);
+        int result = Constraint.getNumPositionStepsOverride(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Return the override for the number of velocity iterations used in the
+     * solver. The constraint is unaffected.
+     *
+     * @return the number of iterations, or 0 to use the default in
+     * {@code PhysicsSettings}
+     */
+    @Override
+    public int getNumVelocityStepsOverride() {
+        long refVa = va();
+        long constraintVa = getPtr(refVa);
+        int result = Constraint.getNumVelocityStepsOverride(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Return the constraint's subtype. The constraint is unaffected.
+     *
+     * @return an enum value (not null)
+     */
+    @Override
+    public EConstraintSubType getSubType() {
+        long refVa = va();
+        long constraintVa = getPtr(refVa);
+        int ordinal = Constraint.getSubType(constraintVa);
+        EConstraintSubType result = EConstraintSubType.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the constraint's type. The constraint is unaffected.
+     *
+     * @return an enum value (not null)
+     */
+    @Override
+    public EConstraintType getType() {
+        long refVa = va();
+        long constraintVa = getPtr(refVa);
+        int ordinal = Constraint.getType(constraintVa);
+        EConstraintType result = EConstraintType.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the constraint's user data: can be used for anything. The
+     * constraint is unaffected.
+     *
+     * @return the value
+     */
+    @Override
+    public long getUserData() {
+        long refVa = va();
+        long constraintVa = getPtr(refVa);
+        long result = Constraint.getUserData(constraintVa);
+
+        return result;
     }
     // *************************************************************************
     // Ref methods
