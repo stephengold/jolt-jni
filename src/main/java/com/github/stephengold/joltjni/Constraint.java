@@ -23,7 +23,9 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EConstraintType;
+import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstConstraint;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 
@@ -114,6 +116,22 @@ abstract public class Constraint extends NonCopyable
                 throw new IllegalArgumentException("subType = " + subType);
         }
         return result;
+    }
+
+    /**
+     * Notify the constraint that the shape of the specified body has changed
+     * and its center of mass has shifted by deltaCom.
+     *
+     * @param bodyId the ID of the body that changed (not null, unaffected)
+     * @param deltaCom the offset of the shift (not null, unaffected)
+     */
+    public void notifyShapeChanged(ConstBodyId bodyId, Vec3Arg deltaCom) {
+        long constraintVa = va();
+        long idVa = bodyId.va();
+        float dx = deltaCom.getX();
+        float dy = deltaCom.getY();
+        float dz = deltaCom.getZ();
+        notifyShapeChanged(constraintVa, idVa, dx, dy, dz);
     }
 
     /**
@@ -345,6 +363,9 @@ abstract public class Constraint extends NonCopyable
     native static int getType(long constraintVa);
 
     native static long getUserData(long constraintVa);
+
+    native private static void notifyShapeChanged(
+            long constraintVa, long idVa, float dx, float dy, float dz);
 
     native private static void setConstraintPriority(
             long constraintVa, int level);

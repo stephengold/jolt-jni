@@ -158,6 +158,21 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Constraint_getUserDa
 
 /*
  * Class:     com_github_stephengold_joltjni_Constraint
+ * Method:    notifyShapeChanged
+ * Signature: (JJFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraint_notifyShapeChanged
+  (JNIEnv *, jclass, jlong constraintVa, jlong idVa,
+  jfloat dx, jfloat dy, jfloat dz) {
+    Constraint * const pConstraint
+            = reinterpret_cast<Constraint *> (constraintVa);
+    const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
+    const Vec3 delta(dx, dy, dz);
+    pConstraint->NotifyShapeChanged(*pId, delta);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Constraint
  * Method:    setConstraintPriority
  * Signature: (JI)V
  */
