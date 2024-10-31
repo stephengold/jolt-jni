@@ -72,9 +72,12 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
         mavenCentral()
     }
     dependencies {
-        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.1") // JVM library
-        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.1:DebugSp") // native library for Linux
-        // (Native libraries for other platforms could go here.)
+        // JVM library:
+        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.1")
+
+        // native libraries:
+        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.1:DebugSp")
+        // Native libraries for other platforms could be added.
     }
 
 + The "Linux64" platform name may be replaced by "Linux_ARM32hf", "Linux_ARM64",
