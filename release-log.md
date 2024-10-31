@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.9.1 released on TBD
+## Version 0.9.1 released on 30 October 2024
 
 + Finalized the `ObjectStreamIn` class.
 + Bugfix:  various methods lack a native implementation
@@ -44,7 +44,7 @@
   + `WheelSettingsTv`
   + `WheelSettingsTvRef`
   + `WheelTv`
-  + `Vec4 `
+  + `Vec4`
   + `VehicleCollisionTesterCastCylinder`
   + `VehicleCollisionTesterCastCylinderRef`
   + `VehicleDifferentialSettings`
