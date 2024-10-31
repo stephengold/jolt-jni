@@ -218,6 +218,23 @@ final public class Op {
     }
 
     /**
+     * Return a scaled version of the specified vector. (native operator: binary
+     * {@code *})
+     *
+     * @param left the scale to apply
+     * @param right the input vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 multiply(double left, RVec3Arg right) {
+        double x = left * right.xx();
+        double y = left * right.yy();
+        double z = left * right.zz();
+        RVec3 result = new RVec3(x, y, z);
+
+        return result;
+    }
+
+    /**
      * Return a scaled version of the specified quaternion. (native operator:
      * binary {@code *})
      *
