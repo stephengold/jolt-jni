@@ -64,6 +64,12 @@ Your runtime classpath should include
 a JVM library plus 1-to-6 native libraries:
 a native library for each platform on which the code will run.
 
+Build types:  use "Debug" native libraries during development,
+then switch to "Release" libraries for performance testing and production.
+
+Build flavors:  use "Dp" to simulate large worlds (>1000 meters in diameter)
+otherwise use "Sp".
+
 ### Gradle-built projects
 
 Add to the project’s "build.gradle" or "build.gradle.kts" file:
