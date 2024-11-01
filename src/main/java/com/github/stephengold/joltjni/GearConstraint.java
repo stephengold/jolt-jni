@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstConstraint;
+
 /**
  * A {@code TwoBodyConstraint} that links the angular velocities of the bodies.
  * To be used in conjunction with 2 hinge constraints.
@@ -41,4 +43,26 @@ public class GearConstraint extends TwoBodyConstraint {
     GearConstraint(long constraintVa) {
         super(constraintVa);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Specify the hinge constraints for each gear (optional).
+     *
+     * @param hinge1 the desired hinge constraint for the first gear (not null,
+     * unaffected)
+     * @param hinge2 the desired hinge constraint for the 2nd gear (not null,
+     * unaffected)
+     */
+    public void setConstraints(ConstConstraint hinge1, ConstConstraint hinge2) {
+        long gearVa = va();
+        long hinge1Va = hinge1.va();
+        long hinge2Va = hinge2.va();
+        setConstraints(gearVa, hinge1Va, hinge2Va);
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static void setConstraints(
+            long gearVa, long hinge1Va, long hinge2Va);
 }
