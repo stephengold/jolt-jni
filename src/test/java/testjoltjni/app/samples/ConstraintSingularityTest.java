@@ -23,8 +23,6 @@ package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A line-for-line Java translation of the Jolt Physics constraint-singularity test.

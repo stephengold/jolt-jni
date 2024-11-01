@@ -33,7 +33,6 @@ import testjoltjni.app.testframework.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Test.cpp
  */
 abstract class Test {
-JobSystem mJobSystem = null;
 PhysicsSystem mPhysicsSystem = null;
 BodyInterface mBodyInterface = null;
 DebugRenderer mDebugRenderer = null;
