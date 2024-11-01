@@ -4,7 +4,7 @@
 [JVM] bindings for [Jolt Physics][jolt],
 to facilitate physics simulation in JVM languages such as [Java] and [Kotlin].
 
-Source code (in Java and [C++]) is provided under
+Source code (in Java and C++) is provided under
 [an MIT license][license].
 
 
