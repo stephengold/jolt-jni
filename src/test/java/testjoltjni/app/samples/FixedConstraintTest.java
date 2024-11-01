@@ -113,7 +113,7 @@ void Initialize()
 		ShapeRef pillar = new BoxShape(new Vec3(0.1f, 1.0f, 0.1f), 0.0f).toRef();
 		ShapeRef beam = new BoxShape(new Vec3(0.01f, 1.5f, 0.1f), 0.0f).toRef();
 
-		Body[] prev_pillars = { (Body)Body.sFixedToWorld(), (Body)Body.sFixedToWorld(), (Body)Body.sFixedToWorld(), (Body)Body.sFixedToWorld() };
+		Body[] prev_pillars = { Body.sFixedToWorld(), Body.sFixedToWorld(), Body.sFixedToWorld(), Body.sFixedToWorld() };
 
 		Vec3 center = Vec3.sZero();
 		for (int y = 0; y < 10; ++y)
