@@ -78,3 +78,42 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RShapeCast_free
     TRACE_DELETE("RShapeCast", pShapeCast)
     delete pShapeCast;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_RShapeCast
+ * Method:    getPointOnRayX
+ * Signature: (JF)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RShapeCast_getPointOnRayX
+  (JNIEnv *, jclass, jlong castVa, jfloat fraction) {
+    const RShapeCast * const pShapeCast
+            = reinterpret_cast<RShapeCast *> (castVa);
+    const double result = pShapeCast->GetPointOnRay(fraction).GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RShapeCast
+ * Method:    getPointOnRayY
+ * Signature: (JF)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RShapeCast_getPointOnRayY
+  (JNIEnv *, jclass, jlong castVa, jfloat fraction) {
+    const RShapeCast * const pShapeCast
+            = reinterpret_cast<RShapeCast *> (castVa);
+    const double result = pShapeCast->GetPointOnRay(fraction).GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RShapeCast
+ * Method:    getPointOnRayZ
+ * Signature: (JF)D
+ */
+JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RShapeCast_getPointOnRayZ
+  (JNIEnv *, jclass, jlong castVa, jfloat fraction) {
+    const RShapeCast * const pShapeCast
+            = reinterpret_cast<RShapeCast *> (castVa);
+    const double result = pShapeCast->GetPointOnRay(fraction).GetZ();
+    return result;
+}

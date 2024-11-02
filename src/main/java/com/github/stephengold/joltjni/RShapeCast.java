@@ -85,6 +85,25 @@ public class RShapeCast extends JoltPhysicsObject {
         setVirtualAddress(shapeCastVa, () -> free(shapeCastVa));
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return a point on the ray with the specified fraction. The shape cast is
+     * unaffected.
+     *
+     * @param fraction (0&rarr;start of ray, 1&rarr;end of ray)
+     * @return a new location vector
+     */
+    public RVec3 getPointOnRay(float fraction) {
+        long castVa = va();
+        double xx = getPointOnRayX(castVa, fraction);
+        double yy = getPointOnRayY(castVa, fraction);
+        double zz = getPointOnRayZ(castVa, fraction);
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createRShapeCast(
@@ -96,4 +115,10 @@ public class RShapeCast extends JoltPhysicsObject {
             float dx, float dy, float dz);
 
     native private static void free(long shapeCastVa);
+
+    native private static double getPointOnRayX(long castVa, float fraction);
+
+    native private static double getPointOnRayY(long castVa, float fraction);
+
+    native private static double getPointOnRayZ(long castVa, float fraction);
 }
