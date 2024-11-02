@@ -71,6 +71,30 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox__F
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    encapsulate
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulate
+  (JNIEnv *, jclass, jlong boxVa, jfloat locX, jfloat locY, jfloat locZ) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const Vec3 location(locX, locY, locZ);
+    pBox->Encapsulate(location);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    expandBy
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_expandBy
+  (JNIEnv *, jclass, jlong boxVa, jfloat dx, jfloat dy, jfloat dz) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const Vec3 deltas(dx, dy, dz);
+    pBox->ExpandBy(deltas);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    free
  * Signature: (J)V
  */

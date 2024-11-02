@@ -85,6 +85,33 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     // new methods exposed
 
     /**
+     * Enlarge the box to include the specified location.
+     *
+     * @param location the location to include (not null, unaffected)
+     */
+    public void encapsulate(Vec3Arg location) {
+        long boxVa = va();
+        float locX = location.getX();
+        float locY = location.getY();
+        float locZ = location.getZ();
+        encapsulate(boxVa, locX, locY, locZ);
+    }
+
+    /**
+     * Enlarge the box on all sides by the specified amounts.
+     *
+     * @param deltas the amount to increase the half extent on each axis (not
+     * null, unaffected)
+     */
+    public void expandBy(Vec3Arg deltas) {
+        long boxVa = va();
+        float dx = deltas.getX();
+        float dy = deltas.getY();
+        float dz = deltas.getZ();
+        expandBy(boxVa, dx, dy, dz);
+    }
+
+    /**
      * Instantiate the biggest finite box.
      *
      * @return a new JVM object with a new native object assigned
@@ -269,6 +296,12 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     native private static long createAaBox(float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ);
+
+    native private static void encapsulate(
+            long boxVa, float locX, float locY, float locZ);
+
+    native private static void expandBy(
+            long boxVa, float dx, float dy, float dz);
 
     native private static void free(long boxVa);
 
