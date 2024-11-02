@@ -38,17 +38,6 @@ public class WheeledVehicleControllerSettings
         long settingsVa = createDefault();
         setVirtualAddress(settingsVa, true);
     }
-
-    /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    WheeledVehicleControllerSettings(long settingsVa) {
-        super(settingsVa);
-    }
     // *************************************************************************
     // new methods exposed
 
