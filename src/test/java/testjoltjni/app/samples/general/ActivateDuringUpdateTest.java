@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  */
 class ActivateDuringUpdateTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

@@ -134,7 +134,7 @@ static RVec3Arg cCharacterVirtualPosition=new RVec3(-5.0f, 0, 3.0f);
 static RVec3Arg cCharacterVirtualWithInnerBodyPosition=new RVec3(-6.5f, 0, 3.0f);
 static Vec3Arg cCharacterVelocity=new Vec3(0, 0, 2);
 
-void Initialize()
+public void Initialize()
 {
 	// Create capsule shapes for all stances
 	switch (sShapeType)
@@ -752,14 +752,14 @@ void CharacterBaseTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 }
 */
 
-void GetInitialCamera(CameraState ioState)
+public void GetInitialCamera(CameraState ioState)
 {
 	// This will become the local space offset, look down the x axis and slightly down
 	ioState.mPos = RVec3.sZero();
 	ioState.mForward =new Vec3(10.0f, -2.0f, 0).normalized();
 }
 
-RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
+public RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of character + distance behind based on the heading and pitch of the camera
 	Vec3 fwd =new Vec3((float)Math.cos(inCameraPitch) * Math.cos(inCameraHeading), (float)Math.sin(inCameraPitch), (float)Math.cos(inCameraPitch) * Math.sin(inCameraHeading));
@@ -792,14 +792,14 @@ void RestoreState(StateRecorder inStream)
 		mAnimatedCharacterVirtualWithInnerBody.getPtr().restoreState(inStream);
 }
 
-void SaveInputState(StateRecorder inStream)
+public void SaveInputState(StateRecorder inStream)
 {
 	inStream.write(mControlInput);
 	inStream.write(mJump);
 	inStream.write(mSwitchStance);
 }
 
-void RestoreInputState(StateRecorder inStream)
+public void RestoreInputState(StateRecorder inStream)
 {
 	inStream.readVec3(mControlInput);
 	mJump = inStream.readBoolean(mJump);

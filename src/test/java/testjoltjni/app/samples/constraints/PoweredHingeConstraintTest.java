@@ -38,7 +38,7 @@ float sDamping = 1.0f;
 HingeConstraint mConstraint = null;
 float mInertiaBody2AsSeenFromConstraint;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();
@@ -82,7 +82,7 @@ void Initialize()
 	mInertiaBody2AsSeenFromConstraint = Op.multiply(body2_inertia_from_constraint.getInertia() , Vec3.sAxisY()).length();
 }
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Torque = Inertia * Angular Acceleration (alpha)
 	MotorSettings motor_settings = mConstraint.getMotorSettings();

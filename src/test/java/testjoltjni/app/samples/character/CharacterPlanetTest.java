@@ -43,7 +43,7 @@ Vec3 mDesiredVelocity = Vec3.sZero();
 Vec3 mDesiredVelocityWS = Vec3.sZero();
 boolean mJump = false;
 
-void Initialize()
+public void Initialize()
 {
 	// Create planet
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new SphereShape(cPlanetRadius), RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
@@ -109,7 +109,7 @@ void ProcessInput(const ProcessInputParams &inParams)
 }
 */
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Calculate up vector based on position on planet surface
 	Vec3 old_up = mCharacter.getUp();
@@ -163,7 +163,7 @@ if (Jolt.implementsDebugRendering()) {
 		mTempAllocator);
 }
 
-void GetInitialCamera(CameraState ioState)
+public void GetInitialCamera(CameraState ioState)
 {
 	ioState.mPos =new RVec3(0, 0.5f, 0);
 	ioState.mForward =new Vec3(1, -0.3f, 0).normalized();

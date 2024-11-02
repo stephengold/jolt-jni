@@ -71,7 +71,7 @@ void CreateSlidingObjects(RVec3Arg inStart)
 	}
 }
 
-void Initialize()
+public void Initialize()
 {
 	// This test creates a grid of connected boxes and tests that objects don't hit the internal edges
 	{
@@ -205,7 +205,7 @@ void Initialize()
 	}
 }
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Increase rotation speed of the ball on the flat plane
 	mBodyInterface.addTorque(mLevelBall, new Vec3(Jolt.JPH_PI * 4, 0, 0));

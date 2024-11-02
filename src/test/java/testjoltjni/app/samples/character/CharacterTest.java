@@ -38,7 +38,7 @@ static final float cCollisionTolerance = 0.05f;
 CharacterRef mCharacter;
 RVec3 GetCharacterPosition(){return mCharacter.getPosition();}
 
-void Initialize()
+public void Initialize()
 {
 	super.Initialize();
 
@@ -61,7 +61,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	DrawCharacterState(mCharacter, mCharacter.getWorldTransform(), mCharacter.getLinearVelocity());
 }
 
-void PostPhysicsUpdate(float inDeltaTime)
+public void PostPhysicsUpdate(float inDeltaTime)
 {
 	// Fetch the new ground properties
 	mCharacter.getPtr().postSimulation(cCollisionTolerance);

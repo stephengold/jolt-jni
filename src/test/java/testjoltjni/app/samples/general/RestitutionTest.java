@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/RestitutionTest.cpp
  */
 class RestitutionTest extends Test{
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

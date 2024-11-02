@@ -45,7 +45,7 @@ float mTime = 0.0f;
 Vec3 mDesiredVelocity = Vec3.sZero();
 boolean mJump = false;
 
-void Initialize()
+public void Initialize()
 {
 	// Dimensions of our space ship
 	final float cSpaceShipHeight = 2.0f;
@@ -102,7 +102,7 @@ void CharacterSpaceShipTest::ProcessInput(const ProcessInputParams &inParams)
 }
 */
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Update scene time
 	mTime += inParams.mDeltaTime;
@@ -175,7 +175,7 @@ void UpdateShipVelocity()
 	mBodyInterface.setLinearAndAngularVelocity(mSpaceShip, mSpaceShipLinearVelocity, mSpaceShipAngularVelocity);
 }
 
-void GetInitialCamera(CameraState ioState)
+public void GetInitialCamera(CameraState ioState)
 {
 	// This will become the local space offset, look down the x axis and slightly down
 	ioState.mPos = RVec3.sZero();

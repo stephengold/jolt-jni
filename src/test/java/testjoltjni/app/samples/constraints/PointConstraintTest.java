@@ -32,7 +32,7 @@ import testjoltjni.app.samples.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/PointConstraintTest.cpp
  */
 class PointConstraintTest extends Test{
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

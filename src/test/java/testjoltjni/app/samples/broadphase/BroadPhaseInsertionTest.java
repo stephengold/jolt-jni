@@ -38,7 +38,7 @@ void Initialize()
 	CreateBalancedDistribution(mBodyManager, mBodyManager.getMaxBodies());
 }
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Check if we need to change direction
 	if (mDirection == 1 && mCurrentBody >= mBodyManager.getMaxBodies())

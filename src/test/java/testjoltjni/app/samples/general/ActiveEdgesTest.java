@@ -34,7 +34,7 @@ import testjoltjni.app.samples.*;
  */
 class ActiveEdgesTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	final float cWidth = 5.0f;
 	final float cLength = 10.0f;

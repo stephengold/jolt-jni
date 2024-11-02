@@ -35,7 +35,7 @@ import testjoltjni.app.samples.*;
 class ConstraintPriorityTest extends Test{
 List<TwoBodyConstraintRef> mConstraints=new ArrayList<>();
 
-void Initialize()
+public void Initialize()
 {
 	float box_size = 1.0f;
 	ShapeRefC box = new BoxShape(new Vec3(0.5f * box_size, 0.2f, 0.2f)).toRefC();
@@ -69,7 +69,7 @@ void Initialize()
 	}
 }
 
-void PostPhysicsUpdate(float inDeltaTime)
+public void PostPhysicsUpdate(float inDeltaTime)
 {
 	for (TwoBodyConstraintRef c : mConstraints)
 		mDebugRenderer.drawText3D(Op.multiply(0.5f , Op.add(c.getBody1().getCenterOfMassPosition() , c.getBody2().getCenterOfMassPosition())), String.format("Priority: %d", c.getConstraintPriority()), Color.sWhite, 0.2f);

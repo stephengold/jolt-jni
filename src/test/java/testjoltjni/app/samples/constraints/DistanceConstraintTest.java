@@ -33,7 +33,7 @@ import testjoltjni.app.samples.*;
  */
 class DistanceConstraintTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

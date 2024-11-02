@@ -54,7 +54,7 @@ void Initialize()
 	mBroadPhase.optimize();
 }
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Create ray
 	DefaultRandomEngine random = new DefaultRandomEngine();

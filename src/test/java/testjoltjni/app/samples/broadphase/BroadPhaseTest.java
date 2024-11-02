@@ -79,7 +79,7 @@ void Initialize()
 	mBroadPhase.init(mBodyManager, mBroadPhaseLayerInterface);
 }
 
-void PostPhysicsUpdate(float inDeltaTime)
+public void PostPhysicsUpdate(float inDeltaTime)
 {
 if (Jolt.implementsDebugRendering()) {
 	mBodyManager.draw(new BodyManagerDrawSettings(),new PhysicsSettings(), mDebugRenderer);

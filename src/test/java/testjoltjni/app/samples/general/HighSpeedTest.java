@@ -353,7 +353,7 @@ if (Jolt.supportsObjectStream()) {
 	CreateFastSmallConvexObjects();
 }
 
-void Initialize()
+public void Initialize()
 {
 	switch (sSelectedScene)
 	{

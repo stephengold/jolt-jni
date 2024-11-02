@@ -39,7 +39,7 @@ static final float cBoxSize = 2.0f;
 float mTime = 0.0f;
 int mNumShapes = -1;
 
-void Initialize()
+public void Initialize()
 {
 	final int cChainLength = 15;
 	final float cMinAngle = Jolt.degreesToRadians(-10.0f);
@@ -92,7 +92,7 @@ void Initialize()
 	}
 }
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Increment time
 	mTime += inParams.mDeltaTime;
@@ -100,12 +100,12 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	UpdateShapes();
 }
 
-void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 
