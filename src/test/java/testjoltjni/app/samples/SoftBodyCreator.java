@@ -32,7 +32,7 @@ import java.util.function.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Utils/SoftBodyCreator.cpp
  */
-class SoftBodyCreator {
+public class SoftBodyCreator {
 static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ,float inGridSpacing,BiFunction<Integer,Integer,Float>inVertexGetInvMass) {
     return CreateCloth(inGridSizeX,inGridSizeZ,inGridSpacing,inVertexGetInvMass,(Integer a,Integer b)->{return new Vec3();},EBendType.None,new VertexAttributes(1e-5f, 1e-5f, 1e-5f));}
 
@@ -237,7 +237,7 @@ static SoftBodySharedSettingsRef CreateCube(int inGridSize, float inGridSpacing)
 	return settings.toRef();
 }
 
-static SoftBodySharedSettingsRef CreateSphere(float inRadius){return CreateSphere(inRadius,10,20,EBendType.None,new VertexAttributes(1e-4f,1e-4f,1e-3f));}
+public static SoftBodySharedSettingsRef CreateSphere(float inRadius){return CreateSphere(inRadius,10,20,EBendType.None,new VertexAttributes(1e-4f,1e-4f,1e-3f));}
 static SoftBodySharedSettingsRef CreateSphere(float inRadius, int inNumTheta, int inNumPhi, EBendType inBendType, ConstVertexAttributes inVertexAttributes)
 {
 	// Create settings
