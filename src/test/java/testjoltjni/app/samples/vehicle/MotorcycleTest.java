@@ -33,17 +33,14 @@ import testjoltjni.app.testframework.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Vehicle/MotorcycleTest.cpp
  */
 class MotorcycleTest extends VehicleTest{
-boolean sOverrideFrontSuspensionForcePoint = false;
-boolean sOverrideRearSuspensionForcePoint = false;
-boolean sEnableLeanController = true;
-boolean sOverrideGravity = false;
+boolean sOverrideFrontSuspensionForcePoint,sOverrideRearSuspensionForcePoint;
+boolean sEnableLeanController=true;
+boolean sOverrideGravity;
 Body mMotorcycleBody;
 VehicleConstraint mVehicleConstraint;
 RMat44 mCameraPivot = RMat44.sIdentity();
-float mForward = 0.0f;
-float mPreviousForward = 1.0f;
-float mRight = 0.0f;
-float mBrake = 0.0f;
+float mBrake,mForward,mRight;
+float mPreviousForward=1f;
 
 void Initialize()
 {

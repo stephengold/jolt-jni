@@ -38,8 +38,8 @@ abstract class BroadPhaseTest extends Test{
 int NUM_BODIES =		10000;
 
 protected BPLayerInterfaceImpl mBroadPhaseLayerInterface=new BPLayerInterfaceImpl();
-protected BroadPhase			mBroadPhase = null;
-protected BodyManager			mBodyManager = null;
+protected BroadPhase mBroadPhase;
+protected BodyManager mBodyManager;
 //#define BROAD_PHASE		BroadPhaseBruteForce()
 
 
