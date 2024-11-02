@@ -22,21 +22,19 @@ SOFTWARE.
 package testjoltjni.app.samples;
 
 /**
- * A line-for-line Java translation of the Jolt Physics object layer definitions for the samples app.
+ * A line-for-line Java translation of the Jolt Physics broadphase layer definitions for the samples app.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Layers.h
  */
-/// Layer that objects can be in, determines which other objects it can collide with
-public class Layers
+
+/// Broadphase layers
+public class BroadPhaseLayers
 {
-	static final int UNUSED1 = 0; // 4 unused values so that broadphase layers values don't match with object layer values (for testing purposes)
-	static final int UNUSED2 = 1;
-	static final int UNUSED3 = 2;
-	static final int UNUSED4 = 3;
-	public static final int NON_MOVING = 4;
-	public static final int MOVING = 5;
-	static final int DEBRIS = 6; // Example: Debris collides only with NON_MOVING
-	public static final int SENSOR = 7; // Sensors only collide with MOVING objects
-	static final int NUM_LAYERS = 8;
+	public static final int NON_MOVING=(0);
+	public static final int MOVING=(1);
+	static final int DEBRIS=(2);
+	static final int SENSOR=(3);
+	static final int UNUSED=(4);
+	static final int NUM_LAYERS=(5);
 };
