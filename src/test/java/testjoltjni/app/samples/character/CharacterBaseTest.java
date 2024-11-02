@@ -72,9 +72,7 @@ private CharacterVirtualRef mAnimatedCharacterVirtual=new CharacterVirtualRef();
 private CharacterVirtualRef mAnimatedCharacterVirtualWithInnerBody=new CharacterVirtualRef();
 private Vec3 mControlInput = Vec3.sZero();
 private boolean mJump = false;
-private boolean mWasJump = false;
 private boolean mSwitchStance = false;
-private boolean mWasSwitchStance = false;
 
 private String sScenes[] =
 {
