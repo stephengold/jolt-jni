@@ -721,7 +721,8 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	HandleInput(mControlInput, mJump, mSwitchStance, inParams.mDeltaTime);
 }
 /*TODO
-void CreateSettingsMenu(DebugUI inUI, UIElement inSubMenu)
+
+void CharacterBaseTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 {
 	inUI->CreateTextButton(inSubMenu, "Select Scene", [this, inUI]() {
 		UIElement *scene_name = inUI->CreateMenu();

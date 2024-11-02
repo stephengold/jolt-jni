@@ -116,8 +116,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Access the spring settings. The constraint settings are unaffected.
-     * (native attribute: mLimitsSpringSettings)
+     * Access the spring settings. (native attribute: mLimitsSpringSettings)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
