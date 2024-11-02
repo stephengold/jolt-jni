@@ -38,6 +38,18 @@ IMPLEMENT_REF(Character,
   Java_com_github_stephengold_joltjni_CharacterRef_getPtr)
 
 /*
+ * Class:     com_github_stephengold_joltjni_CharacterRef
+ * Method:    createNullReference
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterRef_createNullReference
+  (JNIEnv *, jclass) {
+    Ref<Character> * const pResult = new Ref<Character>();
+    TRACE_NEW("Ref<Character>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
  * Class:     com_github_stephengold_joltjni_Character
  * Method:    activate
  * Signature: (JZ)V

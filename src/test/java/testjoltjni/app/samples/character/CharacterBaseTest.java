@@ -67,7 +67,7 @@ private BodyId mSmoothVerticallyMovingBody = new BodyId();
 private BodyId mReversingVerticallyMovingBody = new BodyId();
 private float mReversingVerticallyMovingVelocity = 1.0f;
 private BodyId mHorizontallyMovingBody = new BodyId();
-private CharacterRef mAnimatedCharacter;
+private CharacterRef mAnimatedCharacter=new CharacterRef();
 private CharacterVirtualRef mAnimatedCharacterVirtual;
 private CharacterVirtualRef mAnimatedCharacterVirtualWithInnerBody;
 private Vec3 mControlInput = Vec3.sZero();
