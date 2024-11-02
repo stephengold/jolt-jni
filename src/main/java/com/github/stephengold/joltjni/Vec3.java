@@ -130,16 +130,14 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Return the component-wise sum of the specified vectors.
      *
-     * @param v1 the first vector (not null, unaffected)
-     * @param v2 the 2nd vector (not null, unaffected)
-     * @param v3 the 3nd vector (not null, unaffected)
+     * @param vArray an array of input vector (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 add(Vec3Arg v1, Vec3Arg v2, Vec3Arg v3) {
-        float x = v1.getX() + v2.getX() + v3.getX();
-        float y = v1.getY() + v2.getY() + v3.getY();
-        float z = v1.getZ() + v2.getZ() + v3.getZ();
-        Vec3 result = new Vec3(x, y, z);
+    public static Vec3 add(Vec3Arg... vArray) {
+        Vec3 result = new Vec3();
+        for (Vec3Arg arg : vArray) {
+            Op.add(result, arg);
+        }
 
         return result;
     }
