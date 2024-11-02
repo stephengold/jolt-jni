@@ -19,12 +19,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package testjoltjni.app.samples;
+package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
+import testjoltjni.app.samples.*;
 /**
- * A line-for-line Java translation of the Jolt Physics powered hinge constraint test.
+ * A line-for-line Java translation of the Jolt Physics powered hinge-constraint test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/PoweredHingeConstraintTest.cpp
