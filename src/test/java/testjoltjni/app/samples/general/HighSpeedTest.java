@@ -374,8 +374,8 @@ void Initialize()
 		break;
 	}
 }
-
 /*TODO
+
 void HighSpeedTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 {
 	inUI->CreateTextButton(inSubMenu, "Select Scene", [this, inUI]() {

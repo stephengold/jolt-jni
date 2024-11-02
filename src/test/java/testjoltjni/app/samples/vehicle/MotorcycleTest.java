@@ -150,8 +150,8 @@ void Initialize()
 
 	UpdateCameraPivot();
 }
-
 /*TODO
+
 void MotorcycleTest::ProcessInput(const ProcessInputParams &inParams)
 {
 	// Determine acceleration and brake
@@ -284,8 +284,8 @@ void UpdateCameraPivot()
 	Vec3 right = up.cross(fwd);
 	mCameraPivot =new RMat44(new Vec4(right, 0), new Vec4(up, 0), new Vec4(fwd, 0), mMotorcycleBody.getPosition());
 }
-
 /*TODO
+
 void MotorcycleTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 {
 	VehicleTest::CreateSettingsMenu(inUI, inSubMenu);

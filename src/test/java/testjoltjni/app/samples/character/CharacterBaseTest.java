@@ -619,8 +619,8 @@ void Initialize()
 		scene.createBodies(mPhysicsSystem);
 	}
 }
-
 /*TODO
+
 void CharacterBaseTest::ProcessInput(const ProcessInputParams &inParams)
 {
 	// Determine controller input
@@ -722,7 +722,6 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	// Call handle input after new velocities have been set to avoid frame delay
 	HandleInput(mControlInput, mJump, mSwitchStance, inParams.mDeltaTime);
 }
-
 /*TODO
 void CreateSettingsMenu(DebugUI inUI, UIElement inSubMenu)
 {

@@ -73,8 +73,8 @@ void Initialize()
 	mSpaceShip = mBodyInterface.createAndAddBody(new BodyCreationSettings(compound, cShipInitialPosition, Quat.sIdentity(), EMotionType.Kinematic, Layers.MOVING), EActivation.Activate);
 	mSpaceShipPrevTransform = mBodyInterface.getCenterOfMassTransform(mSpaceShip);
 }
-
 /*TODO
+
 void CharacterSpaceShipTest::ProcessInput(const ProcessInputParams &inParams)
 {
 	// Determine controller input

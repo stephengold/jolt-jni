@@ -82,8 +82,8 @@ void Initialize()
 			CharacterPlanetTest.this.OnContactAdded(new CharacterVirtual(characterVa), new BodyId(bodyId2Va), new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
 		    }});
 }
-
 /*TODO
+
 void ProcessInput(const ProcessInputParams &inParams)
 {
 	// Determine controller input

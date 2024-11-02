@@ -91,8 +91,8 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	motor_settings.getSpringSettings().setDamping ( sDamping);
 	mConstraint.setMaxFrictionTorque(mInertiaBody2AsSeenFromConstraint * sMaxFrictionAngularAcceleration);
 }
-
 /*TODO
+
 void PoweredHingeConstraintTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 {
 	inUI->CreateComboBox(inSubMenu, "Motor", { "Off", "Velocity", "Position" }, (int)mConstraint->GetMotorState(), [this](int inItem) { mConstraint->SetMotorState((EMotorState)inItem); });
