@@ -328,17 +328,17 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	}
 }
 
-void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mReloadTime);
 }
 
-void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mReloadTime=inStream.readFloat(mReloadTime);
 }
 
-void SaveInputState(StateRecorder inStream)
+public void SaveInputState(StateRecorder inStream)
 {
 	inStream.write(mForward);
 	inStream.write(mPreviousForward);
@@ -350,7 +350,7 @@ void SaveInputState(StateRecorder inStream)
 	inStream.write(mFire);
 }
 
-void RestoreInputState(StateRecorder inStream)
+public void RestoreInputState(StateRecorder inStream)
 {
 	mForward=inStream.readFloat(mForward);
 	mPreviousForward=inStream.readFloat(mPreviousForward);
@@ -362,14 +362,14 @@ void RestoreInputState(StateRecorder inStream)
 	mFire=inStream.readBoolean(mFire);
 }
 
-void GetInitialCamera(CameraState ioState)
+public void GetInitialCamera(CameraState ioState)
 {
 	// Position camera behind tank
 	ioState.mPos =new RVec3(0, 4.0f, 0);
 	ioState.mForward =new Vec3(0, -2.0f, 10.0f).normalized();
 }
 
-RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
+public RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of tank + a distance away from the tank based on the heading and pitch of the camera
 	Vec3 fwd =new Vec3(Math.cos(inCameraPitch) * Math.cos(inCameraHeading), Math.sin(inCameraPitch), Math.cos(inCameraPitch) * Math.sin(inCameraHeading));

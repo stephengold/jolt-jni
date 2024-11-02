@@ -129,7 +129,7 @@ RVec3 GetWaterSurfacePosition(RVec3Arg inXZPosition)
 	return new RVec3(inXZPosition.xx(), cMinWaterHeight + Math.sin(0.1f * (float)(inXZPosition.getZ()) + mTime) * (cMaxWaterHeight - cMinWaterHeight), inXZPosition.zz());
 }
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Update time
 	mTime += inParams.mDeltaTime;
@@ -214,19 +214,19 @@ void RestoreInputState(StateRecorder inStream)
 	mRight=inStream.readFloat(mRight);
 }
 
-void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 	inStream.write(mBodiesInWater);
 }
 
-void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 	inStream.readBodyIdVector(mBodiesInWater);
 }
 
-void GetInitialCamera(CameraState ioState)
+public void GetInitialCamera(CameraState ioState)
 {
 	// Position camera behind boat
 	RVec3 cam_tgt =new RVec3(0, 0, 5);

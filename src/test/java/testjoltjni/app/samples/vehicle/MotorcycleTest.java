@@ -243,7 +243,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	}
 }
 
-void SaveInputState(StateRecorder inStream)
+public void SaveInputState(StateRecorder inStream)
 {
 	inStream.write(mForward);
 	inStream.write(mPreviousForward);
@@ -251,7 +251,7 @@ void SaveInputState(StateRecorder inStream)
 	inStream.write(mBrake);
 }
 
-void RestoreInputState(StateRecorder inStream)
+public void RestoreInputState(StateRecorder inStream)
 {
 	mForward=inStream.readFloat(mForward);
 	mPreviousForward=inStream.readFloat(mPreviousForward);
@@ -259,7 +259,7 @@ void RestoreInputState(StateRecorder inStream)
 	mBrake=inStream.readFloat(mBrake);
 }
 
-void GetInitialCamera(CameraState ioState)
+public void GetInitialCamera(CameraState ioState)
 {
 	// Position camera behind motorcycle
 	RVec3 cam_tgt = new RVec3(0, 0, 5);
