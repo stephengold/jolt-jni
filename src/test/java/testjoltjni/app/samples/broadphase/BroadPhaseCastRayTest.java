@@ -19,10 +19,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package testjoltjni.app.samples;
+package testjoltjni.app.samples.broadphase;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.operator.Op;
 import java.util.List;
+import testjoltjni.app.samples.*;
 /**
  * A line-for-line Java translation of the Jolt Physics broad-phase ray cast
  * test: a simple test that casts a ray through the broadphase.
