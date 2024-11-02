@@ -19,11 +19,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package testjoltjni.app.samples;
+package testjoltjni.app.samples.vehicle;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
+import testjoltjni.app.samples.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics vehicle stress test.
