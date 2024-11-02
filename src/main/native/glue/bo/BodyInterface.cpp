@@ -46,6 +46,24 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_activat
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    activateBodiesInAaBox
+ * Signature: (JJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_activateBodiesInAaBox
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong boxVa, jlong bplFilterVa,
+  jlong olFilterVa) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const BroadPhaseLayerFilter * const pBplFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (bplFilterVa);
+    const ObjectLayerFilter * const pOlFilter
+            = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
+    pInterface->ActivateBodiesInAABox(*pBox, *pBplFilter, *pOlFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    addBody
  * Signature: (JJI)V
  */

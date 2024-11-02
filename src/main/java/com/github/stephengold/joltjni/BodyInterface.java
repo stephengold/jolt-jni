@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
+import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
@@ -63,6 +64,24 @@ public class BodyInterface extends NonCopyable {
         long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.va();
         activateBody(bodyInterfaceVa, bodyIdVa);
+    }
+
+    /**
+     * Active all bodies within the specified bounds that satisfy the specified
+     * filters.
+     *
+     * @param box the bounds to use (not null, unaffected)
+     * @param bplFilter the broadphase layer filter to apply (not null,
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     */
+    public void activateBodiesInAaBox(ConstAaBox box,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
+        long bodyInterfaceVa = va();
+        long boxVa = box.va();
+        long bplFilterVa = bplFilter.va();
+        long olFilterVa = olFilter.va();
+        activateBodiesInAaBox(bodyInterfaceVa, boxVa, bplFilterVa, olFilterVa);
     }
 
     /**
@@ -694,6 +713,9 @@ public class BodyInterface extends NonCopyable {
 
     native private static void activateBody(
             long bodyInterfaceVa, long bodyIdVa);
+
+    native private static void activateBodiesInAaBox(long bodyInterfaceVa,
+            long boxVa, long bplFilterVa, long olFilterVa);
 
     native private static void addBody(
             long bodyInterfaceVa, long bodyIdVa, int activationOrdinal);
