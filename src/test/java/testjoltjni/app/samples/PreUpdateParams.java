@@ -31,7 +31,7 @@ import testjoltjni.app.testframework.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Test.h
  */
 
-	class PreUpdateParams
+	public class PreUpdateParams
 	{
 		public float								mDeltaTime;
 		public CameraState							mCameraState = new CameraState();
