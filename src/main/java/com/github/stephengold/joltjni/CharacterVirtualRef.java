@@ -42,6 +42,14 @@ final public class CharacterVirtualRef
     // constructors
 
     /**
+     * Instantiate a null reference.
+     */
+    public CharacterVirtualRef() {
+        long refVa = createNullReference();
+        setVirtualAddress(refVa, () -> free(refVa));
+    }
+
+    /**
      * Instantiate a reference with the specified native object assigned.
      *
      * @param refVa the virtual address of the native object to assign (not
@@ -690,6 +698,8 @@ final public class CharacterVirtualRef
     // native private methods
 
     native private static long copy(long refVa);
+
+    native private static long createNullReference();
 
     native private static void free(long refVa);
 

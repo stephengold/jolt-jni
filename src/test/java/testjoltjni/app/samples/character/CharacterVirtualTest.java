@@ -48,7 +48,7 @@ static boolean sEnhancedInternalEdgeRemoval = false;
 static boolean sCreateInnerBody = false;
 static boolean sPlayerCanPushOtherCharacters = true;
 static boolean sOtherCharactersCanPushPlayer = true;
-CharacterVirtualRef mCharacter;
+CharacterVirtualRef mCharacter=new CharacterVirtualRef();
 Vec3 mDesiredVelocity = Vec3.sZero();
 boolean mAllowSliding = false;
 RVec3 GetCharacterPosition(){return mCharacter.getPosition();}

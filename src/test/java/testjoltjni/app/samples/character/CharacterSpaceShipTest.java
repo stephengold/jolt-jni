@@ -36,7 +36,7 @@ class CharacterSpaceShipTest extends Test{
 static final float cCharacterHeightStanding = 1.35f;
 static final float cCharacterRadiusStanding = 0.3f;
 static final float cJumpSpeed = 4.0f;
-CharacterVirtualRef mCharacter;
+CharacterVirtualRef mCharacter=new CharacterVirtualRef();
 BodyId mSpaceShip=new BodyId();
 RMat44 mSpaceShipPrevTransform=new RMat44();
 Vec3 mSpaceShipLinearVelocity=new Vec3();

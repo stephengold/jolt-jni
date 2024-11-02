@@ -38,7 +38,7 @@ final float cPlanetRadius = 20.0f;
 final float cCharacterHeightStanding = 1.35f;
 final float cCharacterRadiusStanding = 0.3f;
 final float cJumpSpeed = 4.0f;
-CharacterVirtualRef mCharacter;
+CharacterVirtualRef mCharacter=new CharacterVirtualRef();
 Vec3 mDesiredVelocity = Vec3.sZero();
 Vec3 mDesiredVelocityWS = Vec3.sZero();
 boolean mJump = false;
