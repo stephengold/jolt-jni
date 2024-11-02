@@ -186,8 +186,8 @@ if (Jolt.implementsDebugRendering()){
 	// Update camera pivot
 	mCameraPivot = mTankBody.getPosition();
 }
-
 /*TODO
+
 void TankTest::ProcessInput(const ProcessInputParams &inParams)
 {
 	const float min_velocity_pivot_turn = 1.0f;

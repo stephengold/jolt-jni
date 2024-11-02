@@ -37,34 +37,32 @@ abstract class BroadPhaseTest extends Test{
 
 int NUM_BODIES =		10000;
 
-protected BPLayerInterfaceImpl	mBroadPhaseLayerInterface = new BPLayerInterfaceImpl();
+protected BPLayerInterfaceImpl mBroadPhaseLayerInterface=new BPLayerInterfaceImpl();
 protected BroadPhase			mBroadPhase = null;
 protected BodyManager			mBodyManager = null;
 //#define BROAD_PHASE		BroadPhaseBruteForce()
 
 
-void CreateBalancedDistribution(BodyManager inBodyManager, int inNumBodies) {
-    CreateBalancedDistribution(inBodyManager, inNumBodies, 512f);
-}
+void CreateBalancedDistribution(BodyManager inBodyManager,int inNumBodies){CreateBalancedDistribution(inBodyManager,inNumBodies,512f);}
 void CreateBalancedDistribution(BodyManager inBodyManager, int inNumBodies, float inEnvironmentSize)
 {
-	DefaultRandomEngine random = new DefaultRandomEngine(0x1ee7c0de);
-	UniformRealDistribution zero_to_one = new UniformRealDistribution(0.0f, 1.0f);
+	DefaultRandomEngine random=new DefaultRandomEngine(0x1ee7c0de);
+	UniformRealDistribution zero_to_one=new UniformRealDistribution(0.0f, 1.0f);
 	float n = (float)(inNumBodies);
 	Vec3 max_box_start = Vec3.sReplicate(inEnvironmentSize * (1.0f - (float)Math.pow(n, -1.0f / 3.0f)));
 	Vec3 min_box_size = Vec3.sReplicate(1.0f / inEnvironmentSize);
-	Vec3 max_box_size = Op.subtract(Vec3.sReplicate(inEnvironmentSize * (float)Math.pow(n, -1.0f / 3.0f)), min_box_size);
+	Vec3 max_box_size = Op.subtract(Vec3.sReplicate(inEnvironmentSize * (float)Math.pow(n, -1.0f / 3.0f)) , min_box_size);
 	for (int b = 0; b < inNumBodies; ++b)
 	{
-		AaBox box = new AaBox();
-		box.setMin(Op.subtract(Op.multiply(max_box_start, new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random))), Vec3.sReplicate(0.5f * inEnvironmentSize)));
-		box.setMax(Vec3.add(box.getMin(), min_box_size, Op.multiply(max_box_size, new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random)))));
+		AaBox box=new AaBox();
+		box.setMin ( Op.subtract(Op.multiply(max_box_start, new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random))) , Vec3.sReplicate(0.5f * inEnvironmentSize)));
+		box.setMax ( Vec3.add(box.getMin() , min_box_size , Op.multiply(max_box_size ,new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random)))));
 
-		BodyCreationSettings s = new BodyCreationSettings();
+		BodyCreationSettings s=new BodyCreationSettings();
 		s.setShape(new BoxShape(box.getExtent(), 0.0f));
-		s.setPosition(new RVec3(box.getCenter()));
-		s.setRotation(Quat.sIdentity());
-		s.setObjectLayer((random.nextInt() % 10) == 0? Layers.MOVING : Layers.NON_MOVING);
+		s.setPosition ( new RVec3(box.getCenter()));
+		s.setRotation ( Quat.sIdentity());
+		s.setObjectLayer ( (random.nextInt() % 10) == 0? Layers.MOVING : Layers.NON_MOVING);
 		Body body = inBodyManager.allocateBody(s);
 		inBodyManager.addBody(body);
 	}
@@ -83,8 +81,8 @@ void Initialize()
 
 void PostPhysicsUpdate(float inDeltaTime)
 {
-    if (Jolt.implementsDebugRendering()) {
-	mBodyManager.draw(new BodyManagerDrawSettings(), new PhysicsSettings(), mDebugRenderer);
-    } // JPH_DEBUG_RENDERER
+if (Jolt.implementsDebugRendering()) {
+	mBodyManager.draw(new BodyManagerDrawSettings(),new PhysicsSettings(), mDebugRenderer);
+} // JPH_DEBUG_RENDERER
 }
 }

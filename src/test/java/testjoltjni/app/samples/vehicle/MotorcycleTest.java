@@ -128,12 +128,12 @@ void Initialize()
 
 	MotorcycleControllerSettings controller = new MotorcycleControllerSettings();
 	controller.getEngine().setMaxTorque ( 150.0f);
-	controller.getEngine().setMinRpm( 1000.0f);
+	controller.getEngine().setMinRpm ( 1000.0f);
 	controller.getEngine().setMaxRpm ( 10000.0f);
 	controller.getTransmission().setShiftDownRpm ( 2000.0f);
 	controller.getTransmission().setShiftUpRpm ( 8000.0f);
-	controller.getTransmission().setGearRatios ( 2.27f, 1.63f, 1.3f, 1.09f, 0.96f, 0.88f ); // From: https://www.blocklayer.com/rpm-gear-bikes
-	controller.getTransmission().setReverseGearRatios ( -4.0f );
+	controller.getTransmission().setGearRatios (  2.27f, 1.63f, 1.3f, 1.09f, 0.96f, 0.88f ); // From: https://www.blocklayer.com/rpm-gear-bikes
+	controller.getTransmission().setReverseGearRatios (  -4.0f );
 	controller.getTransmission().setClutchStrength ( 2.0f);
 	vehicle.setController ( controller);
 
@@ -240,7 +240,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	// Draw our wheels (this needs to be done in the pre update since we draw the bodies too in the state before the step)
 	for (int w = 0; w < 2; ++w)
 	{
-		ConstWheelSettings settings = mVehicleConstraint.getWheel(w).getSettings();
+		ConstWheelSettings  settings = mVehicleConstraint.getWheel(w).getSettings();
 		RMat44 wheel_transform = mVehicleConstraint.getWheelWorldTransform(w, Vec3.sAxisY(), Vec3.sAxisX()); // The cylinder we draw is aligned with Y so we specify that as rotational axis
 		mDebugRenderer.drawCylinder(wheel_transform, 0.5f * settings.getWidth(), settings.getRadius(), Color.sGreen);
 	}
