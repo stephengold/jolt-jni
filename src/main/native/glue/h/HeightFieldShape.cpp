@@ -93,3 +93,22 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_
     const bool result = pShape->IsNoCollision(x, y);
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShape
+ * Method:    setHeights
+ * Signature: (JIIIILjava/nio/FloatBuffer;IJF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_setHeights
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jint startX, jint startY, jint sizeX,
+  jint sizeY, jobject floatBuffer, jint stride, jlong allocatorVa,
+  jfloat cosThresholdAngle) {
+    HeightFieldShape * const pShape
+            = reinterpret_cast<HeightFieldShape *> (shapeVa);
+    const float * const pHeightArray
+            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
+    TempAllocator * const pAllocator
+            = reinterpret_cast<TempAllocator *> (allocatorVa);
+    pShape->SetHeights(startX, startY, sizeX, sizeY, pHeightArray, stride,
+            *pAllocator, cosThresholdAngle);
+}

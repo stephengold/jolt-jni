@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import java.nio.FloatBuffer;
+
 /**
  * A {@code Shape} to represent a surface defined by a matrix of heights.
  *
@@ -86,6 +88,54 @@ public class HeightFieldShape extends Shape {
 
         return result;
     }
+
+    /**
+     * Alter the heights for a rectangular sub-matrix.
+     *
+     * @param startX the index of the start row (multiple of the block size,
+     * &ge;0, &lt;{@code sampleCount})
+     * @param startY the index of the start column (multiple of the block size,
+     * &ge;0, &lt;{@code sampleCount})
+     * @param sizeX the number of affected rows (multiple of the block size,
+     * &ge;0, &le;{@code sampleCount-startX})
+     * @param sizeY the number of affected columns (multiple of the block size,
+     * &ge;0, &le;{@code sampleCount-startY})
+     * @param heights the height values to set
+     * @param stride stride between consecutive rows in {@code heights} (in
+     * floats)
+     * @param allocator for temporary allocations (not null)
+     */
+    public void setHeights(int startX, int startY, int sizeX, int sizeY,
+            FloatBuffer heights, int stride, TempAllocator allocator) {
+        setHeights(startX, startY, sizeX, sizeY, heights, stride,
+                allocator, 0.996195f);
+    }
+
+    /**
+     * Alter the heights for a rectangular sub-matrix.
+     *
+     * @param startX the index of the start row (multiple of the block size,
+     * &ge;0, &lt;{@code sampleCount})
+     * @param startY the index of the start column (multiple of the block size,
+     * &ge;0, &lt;{@code sampleCount})
+     * @param sizeX the number of affected rows (multiple of the block size,
+     * &ge;0, &le;{@code sampleCount-startX})
+     * @param sizeY the number of affected columns (multiple of the block size,
+     * &ge;0, &le;{@code sampleCount-startY})
+     * @param heights the height values to set
+     * @param stride stride between consecutive rows in {@code heights} (in
+     * floats)
+     * @param allocator for temporary allocations (not null)
+     * @param cosThresholdAngle cosine of the threshold angle (default=0.996195)
+     */
+    public void setHeights(int startX, int startY, int sizeX, int sizeY,
+            FloatBuffer heights, int stride,
+            TempAllocator allocator, float cosThresholdAngle) {
+        long shapeVa = va();
+        long allocatorVa = allocator.va();
+        setHeights(shapeVa, startX, startY, sizeX, sizeY, heights, stride,
+                allocatorVa, cosThresholdAngle);
+    }
     // *************************************************************************
     // native private methods
 
@@ -98,4 +148,8 @@ public class HeightFieldShape extends Shape {
     native private static float getPositionZ(long shapeVa, int x, int y);
 
     native private static boolean isNoCollision(long shapeVa, int x, int y);
+
+    native private static void setHeights(long shapeVa, int startX, int startY,
+            int sizeX, int sizeY, FloatBuffer heights, int stride,
+            long allocatorVa, float cosThresholdAngle);
 }
