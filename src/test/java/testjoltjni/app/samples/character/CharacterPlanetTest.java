@@ -158,8 +158,8 @@ if (Jolt.implementsDebugRendering()) {
 		update_settings,
 		mPhysicsSystem.getDefaultBroadPhaseLayerFilter(Layers.MOVING),
 		mPhysicsSystem.getDefaultLayerFilter(Layers.MOVING),
-		new BodyFilter(),
-		new ShapeFilter(),
+		new BodyFilter(){ },
+		new ShapeFilter(){ },
 		mTempAllocator);
 }
 

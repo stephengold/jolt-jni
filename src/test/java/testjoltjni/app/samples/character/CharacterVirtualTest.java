@@ -125,8 +125,8 @@ if(Jolt.implementsDebugRendering()){
 		update_settings,
 		mPhysicsSystem.getDefaultBroadPhaseLayerFilter(Layers.MOVING),
 		mPhysicsSystem.getDefaultLayerFilter(Layers.MOVING),
-		new BodyFilter(),
-		new ShapeFilter(),
+		new BodyFilter(){ },
+		new ShapeFilter(){ },
 		mTempAllocator);
 
 	// Calculate effective velocity
@@ -210,7 +210,7 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 	{
 		boolean is_standing = mCharacter.getShape() == mStandingShape;
 		ConstShape shape = is_standing? mCrouchingShape : mStandingShape;
-		if (mCharacter.getPtr().setShape(shape, 1.5f * mPhysicsSystem.getPhysicsSettings().getPenetrationSlop(), mPhysicsSystem.getDefaultBroadPhaseLayerFilter(Layers.MOVING), mPhysicsSystem.getDefaultLayerFilter(Layers.MOVING), new BodyFilter(), new ShapeFilter(), mTempAllocator))
+		if (mCharacter.getPtr().setShape(shape, 1.5f * mPhysicsSystem.getPhysicsSettings().getPenetrationSlop(), mPhysicsSystem.getDefaultBroadPhaseLayerFilter(Layers.MOVING), mPhysicsSystem.getDefaultLayerFilter(Layers.MOVING), new BodyFilter(){ }, new ShapeFilter(){ }, mTempAllocator))
 		{
 			ConstShape inner_shape = is_standing? mInnerCrouchingShape : mInnerStandingShape;
 			mCharacter.getPtr().setInnerBodyShape(inner_shape);
@@ -265,7 +265,7 @@ void RestoreState(StateRecorder inStream)
 	boolean is_standing = mCharacter.getShape() == mStandingShape; // Initialize variable for validation mode
 	is_standing=inStream.readBoolean(is_standing);
 	ConstShape shape = is_standing? mStandingShape : mCrouchingShape;
-	mCharacter.getPtr().setShape(shape, Float.MAX_VALUE, new BroadPhaseLayerFilter(), new ObjectLayerFilter(), new BodyFilter(), new ShapeFilter(), mTempAllocator);
+	mCharacter.getPtr().setShape(shape, Float.MAX_VALUE, new BroadPhaseLayerFilter(){ }, new ObjectLayerFilter(){ }, new BodyFilter(){ }, new ShapeFilter(){ }, mTempAllocator);
 	ConstShape inner_shape = is_standing? mInnerStandingShape : mInnerCrouchingShape;
 	mCharacter.getPtr().setInnerBodyShape(inner_shape);
 
