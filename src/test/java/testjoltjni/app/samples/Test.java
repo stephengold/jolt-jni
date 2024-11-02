@@ -32,15 +32,15 @@ import testjoltjni.app.testframework.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Test.cpp
  */
-abstract class Test {
-PhysicsSystem mPhysicsSystem = null;
-BodyInterface mBodyInterface = null;
-DebugRenderer mDebugRenderer = null;
-TempAllocator mTempAllocator = null;
+abstract public class Test {
+protected PhysicsSystem mPhysicsSystem = null;
+protected BodyInterface mBodyInterface = null;
+protected DebugRenderer mDebugRenderer = null;
+protected TempAllocator mTempAllocator = null;
 float GetWorldScale() { return 1.0f; }
 
-Body CreateFloor() {return CreateFloor(200.0f);}
-Body CreateFloor(float inSize)
+public Body CreateFloor() {return CreateFloor(200.0f);}
+public Body CreateFloor(float inSize)
 {
 	final float scale = GetWorldScale();
 
@@ -49,7 +49,7 @@ Body CreateFloor(float inSize)
 	return floor;
 }
 
-Body CreateLargeTriangleFloor()
+public Body CreateLargeTriangleFloor()
 {
 	Triangle[] triangles = {
 		new Triangle(new Float3(427.941376f, 0.000027f, -456.470642f), new Float3(427.941376f, 0.000024f, -399.411774f), new Float3(512.0f, 0.000031f, -511.999969f)),
@@ -126,7 +126,7 @@ Body CreateLargeTriangleFloor()
 	return floor;
 }
 
-Body CreateMeshTerrain()
+public Body CreateMeshTerrain()
 {
 	final float scale = GetWorldScale();
 
@@ -174,7 +174,7 @@ if (Jolt.buildType().equals("DEBUG")) {
 	return floor;
 }
 
-Body CreateHeightFieldTerrain()
+public Body CreateHeightFieldTerrain()
 {
 	final float scale = GetWorldScale();
 
