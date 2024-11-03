@@ -42,15 +42,14 @@ public class ClosestHitCastShapeCollector extends CastShapeCollector {
     // new methods exposed
 
     /**
-     * Access the result of the latest query. The collector is unaffected.
-     * (native field: mHit)
+     * Access the result of the latest query. (native field: mHit)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
     public ShapeCastResult getHit() {
         long collectorVa = va();
         long hitVa = getHit(collectorVa);
-        ShapeCastResult result = new ShapeCastResult(hitVa);
+        ShapeCastResult result = new ShapeCastResult(this, hitVa);
 
         return result;
     }

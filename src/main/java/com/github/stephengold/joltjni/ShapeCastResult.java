@@ -31,6 +31,17 @@ public class ShapeCastResult extends CollideShapeResult {
     // constructors
 
     /**
+     * Instantiate a result with the specified container and native object.
+     *
+     * @param underlying the containing object, or {@code null} if none
+     * @param castResultVa the virtual address of the native object to assign
+     * (not zero)
+     */
+    ShapeCastResult(JoltPhysicsObject underlying, long castResultVa) {
+        super(underlying, castResultVa);
+    }
+
+    /**
      * Instantiate a cast result with the specified native object assigned but
      * not owned.
      * <p>

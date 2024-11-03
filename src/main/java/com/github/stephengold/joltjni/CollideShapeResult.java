@@ -35,6 +35,17 @@ public class CollideShapeResult
     // constructors
 
     /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param shapeResultVa the virtual address of the native object to assign
+     * (not zero)
+     */
+    CollideShapeResult(JoltPhysicsObject container, long shapeResultVa) {
+        super(container, shapeResultVa);
+    }
+
+    /**
      * Instantiate a shape result with the specified native object assigned but
      * not owned.
      * <p>
