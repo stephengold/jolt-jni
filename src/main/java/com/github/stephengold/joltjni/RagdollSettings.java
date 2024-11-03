@@ -92,7 +92,7 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
         Part[] result = new Part[numParts];
         for (int partIndex = 0; partIndex < numParts; ++partIndex) {
             long partVa = getPart(settingsVa, partIndex);
-            result[partIndex] = new Part(partVa);
+            result[partIndex] = new Part(this, partVa);
         }
 
         return result;

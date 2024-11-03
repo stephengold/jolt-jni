@@ -109,7 +109,7 @@ final public class RagdollSettingsRef extends Ref {
         Part[] result = new Part[numParts];
         for (int partIndex = 0; partIndex < numParts; ++partIndex) {
             long partVa = RagdollSettings.getPart(settingsVa, partIndex);
-            result[partIndex] = new Part(partVa);
+            result[partIndex] = new Part(this, partVa);
         }
 
         return result;

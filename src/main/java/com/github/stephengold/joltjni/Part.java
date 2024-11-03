@@ -32,14 +32,14 @@ public class Part extends BodyCreationSettings {
     // constructors
 
     /**
-     * Instantiate settings with the specified native object assigned, but not
-     * owned.
+     * Instantiate settings with the specified container and native object.
      *
+     * @param container the containing object, or {@code null} if none
      * @param partVa the virtual address of the native object to assign (not
      * zero)
      */
-    Part(long partVa) {
-        super(partVa, false);
+    Part(JoltPhysicsObject container, long partVa) {
+        super(container, partVa);
     }
     // *************************************************************************
     // new methods exposed
