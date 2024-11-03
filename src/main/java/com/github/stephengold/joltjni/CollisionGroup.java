@@ -31,6 +31,14 @@ public class CollisionGroup extends JoltPhysicsObject {
     // constructors
 
     /**
+     * Instantiate a default group.
+     */
+    public CollisionGroup() {
+        long groupVa = createDefault();
+        setVirtualAddress(groupVa, () -> free(groupVa));
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -125,6 +133,8 @@ public class CollisionGroup extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createDefault();
 
     native private static long createGroup(
             long filterVa, int groupId, int subGroupId);

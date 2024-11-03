@@ -32,6 +32,18 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_CollisionGroup
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_createDefault
+  (JNIEnv *, jclass) {
+    CollisionGroup * const pResult = new CollisionGroup();
+    TRACE_NEW("CollisionGroup", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CollisionGroup
  * Method:    createGroup
  * Signature: (JII)J
  */
