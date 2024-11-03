@@ -55,8 +55,8 @@ void Initialize()
 
 	// Create vehicle body
 	ShapeRefC car_shape = new BoxShape(new Vec3(half_vehicle_width, half_vehicle_height, half_vehicle_length)).toRefC();
-	BodyCreationSettings car_body_settings = new BodyCreationSettings(car_shape, RVec3.sZero(), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
-	car_body_settings.setOverrideMassProperties(EOverrideMassProperties.CalculateInertia);
+	BodyCreationSettings car_body_settings=new BodyCreationSettings(car_shape, RVec3.sZero(), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
+	car_body_settings.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
 	car_body_settings.getMassPropertiesOverride().setMass ( 1500.0f);
 
 	// Create vehicle constraint
@@ -157,7 +157,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	for (VehicleConstraintRef cr : mVehicles)
 	{
-		VehicleConstraint c = (VehicleConstraint) cr.getPtr();
+		VehicleConstraint c=(VehicleConstraint)cr.getPtr();
 		// On user input, assure that the car is active
 		if (mRight != 0.0f || mForward != 0.0f)
 			mBodyInterface.activateBody(c.getVehicleBody().getId());
