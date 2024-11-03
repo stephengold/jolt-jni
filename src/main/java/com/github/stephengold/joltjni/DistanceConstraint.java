@@ -45,7 +45,7 @@ public class DistanceConstraint extends TwoBodyConstraint {
     // new methods exposed
 
     /**
-     * Access the spring settings. The constraint settings are unaffected.
+     * Access the spring settings.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */

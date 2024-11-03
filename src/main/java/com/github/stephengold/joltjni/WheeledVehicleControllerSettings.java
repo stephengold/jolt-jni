@@ -72,8 +72,8 @@ public class WheeledVehicleControllerSettings
     }
 
     /**
-     * Count how many differentials the vehicle will have. (native attribute:
-     * mDifferentials)
+     * Count how many differentials the vehicle will have. The settings are
+     * unaffected. (native attribute: mDifferentials)
      *
      * @return the count (&ge;0)
      */

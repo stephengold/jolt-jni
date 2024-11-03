@@ -84,7 +84,7 @@ public class HingeConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Access the spring settings. The constraint is unaffected.
+     * Access the spring settings.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -110,7 +110,7 @@ public class HingeConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Access the motor settings. The constraint is unaffected.
+     * Access the motor settings.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
