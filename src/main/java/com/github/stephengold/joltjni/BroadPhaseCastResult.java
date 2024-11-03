@@ -53,15 +53,15 @@ public class BroadPhaseCastResult extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the ID of the body that was hit. The result object is unaffected.
+     * Copy the ID of the body that was hit. The result object is unaffected.
      * (native attribute: mBodyID)
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new JVM object with a new native object assigned
      */
     public BodyId getBodyId() {
         long castResultVa = va();
         long idVa = getBodyId(castResultVa);
-        BodyId result = new BodyId(idVa, false);
+        BodyId result = new BodyId(idVa, true);
 
         return result;
     }

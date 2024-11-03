@@ -52,7 +52,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BroadPhaseCastResult
   (JNIEnv *, jclass, jlong castResultVa) {
     const BroadPhaseCastResult * const pCastResult
             = reinterpret_cast<BroadPhaseCastResult *> (castResultVa);
-    const BodyID * const pResult = &pCastResult->mBodyID;
+    BodyID * pResult = new BodyID(pCastResult->mBodyID);
+    TRACE_NEW("BodyID", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
