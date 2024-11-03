@@ -82,7 +82,7 @@ final public class PhysicsSceneRef extends Ref {
         BodyCreationSettings[] result = new BodyCreationSettings[numBodies];
         for (int bodyIndex = 0; bodyIndex < numBodies; ++bodyIndex) {
             long settingsVa = PhysicsScene.getBody(sceneVa, bodyIndex);
-            result[bodyIndex] = new BodyCreationSettings(settingsVa, false);
+            result[bodyIndex] = new BodyCreationSettings(this, settingsVa);
         }
 
         return result;

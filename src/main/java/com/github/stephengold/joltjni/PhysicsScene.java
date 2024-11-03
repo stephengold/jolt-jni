@@ -88,7 +88,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
         BodyCreationSettings[] result = new BodyCreationSettings[numBodies];
         for (int bodyIndex = 0; bodyIndex < numBodies; ++bodyIndex) {
             long settingsVa = getBody(sceneVa, bodyIndex);
-            result[bodyIndex] = new BodyCreationSettings(settingsVa, false);
+            result[bodyIndex] = new BodyCreationSettings(this, settingsVa);
         }
 
         return result;

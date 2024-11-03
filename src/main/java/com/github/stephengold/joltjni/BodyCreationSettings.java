@@ -70,6 +70,17 @@ public class BodyCreationSettings
     }
 
     /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param bodySettingsVa the virtual address of the native object to assign
+     * (not zero)
+     */
+    BodyCreationSettings(JoltPhysicsObject container, long bodySettingsVa) {
+        super(container, bodySettingsVa);
+    }
+
+    /**
      * Instantiate settings with the specified native object assigned.
      *
      * @param bodySettingsVa the virtual address of the native object to assign
