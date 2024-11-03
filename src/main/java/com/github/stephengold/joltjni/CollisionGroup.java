@@ -28,6 +28,17 @@ package com.github.stephengold.joltjni;
  */
 public class CollisionGroup extends JoltPhysicsObject {
     // *************************************************************************
+    // constants
+
+    /**
+     * invalid main group
+     */
+    final public static int cInvalidGroup = -1;
+    /**
+     * invalid sub-group
+     */
+    final public static int cInvalidSubGroup = -1;
+    // *************************************************************************
     // constructors
 
     /**
@@ -80,7 +91,7 @@ public class CollisionGroup extends JoltPhysicsObject {
     /**
      * Return the main group ID. The group is unaffected.
      *
-     * @return the ID value
+     * @return the ID value or {@code cInvalidGroup}
      */
     public int getGroupId() {
         long groupVa = va();
@@ -92,7 +103,7 @@ public class CollisionGroup extends JoltPhysicsObject {
     /**
      * Return the sub-group ID. The group is unaffected.
      *
-     * @return the ID value
+     * @return the ID value or {@code cInvalidSubGroup}
      */
     public int getSubGroupId() {
         long groupVa = va();
@@ -115,7 +126,7 @@ public class CollisionGroup extends JoltPhysicsObject {
     /**
      * Alter the main group ID.
      *
-     * @param id the desired ID
+     * @param id the desired ID (default=cInvalidGroup}
      */
     public void setGroupId(int id) {
         long groupVa = va();
@@ -125,7 +136,7 @@ public class CollisionGroup extends JoltPhysicsObject {
     /**
      * Alter the sub-group ID.
      *
-     * @param id the desired ID
+     * @param id the desired ID (default=cInvalidSubGroup}
      */
     public void setSubGroupId(int id) {
         long groupVa = va();
