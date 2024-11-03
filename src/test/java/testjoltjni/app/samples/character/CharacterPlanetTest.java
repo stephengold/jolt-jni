@@ -52,7 +52,7 @@ public void Initialize()
 	BodyCreationSettings sphere=new BodyCreationSettings(new SphereShape(0.5f), RVec3.sZero(), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 	sphere.setGravityFactor ( 0.0f); // We do our own gravity
 	sphere.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
-	sphere.setMassPropertiesOverride(sphere.getMassPropertiesOverride().setMass ( 10.0f));
+	sphere.getMassPropertiesOverride().setMass ( 10.0f);
 	sphere.setAngularDamping ( 0.5f);
 	DefaultRandomEngine random=new DefaultRandomEngine();
 	for (int i = 0; i < 200; ++i)

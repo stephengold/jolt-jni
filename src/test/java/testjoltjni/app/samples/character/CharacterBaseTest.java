@@ -238,7 +238,7 @@ public void Initialize()
 			BodyCreationSettings bcs=new BodyCreationSettings(new SphereShape(0.2f), new RVec3(0.0f, 0.2f, -1.0f), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 			bcs.setLinearVelocity ( new Vec3(0, 0, 2.0f));
 			bcs.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
-			bcs.setMassPropertiesOverride ( bcs.getMassPropertiesOverride().setMass(10.0f));
+			bcs.getMassPropertiesOverride().setMass ( 10.0f);
 			mBodyInterface.createAndAddBody(bcs, EActivation.Activate);
 		}
 
@@ -249,7 +249,7 @@ public void Initialize()
 			{
 				BodyCreationSettings bcs=new BodyCreationSettings(block, new RVec3(5.0f, 0.5f + (float)(y), 0.0f), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 				bcs.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
-				bcs.setMassPropertiesOverride ( bcs.getMassPropertiesOverride().setMass(10.0f));
+				bcs.getMassPropertiesOverride().setMass ( 10.0f);
 				mBodyInterface.createAndAddBody(bcs, EActivation.DontActivate);
 			}
 		}
@@ -259,7 +259,7 @@ public void Initialize()
 			mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(0.5f, 0.15f, 0.5f)), new RVec3(10.0f, 0.15f, 0.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 			BodyCreationSettings bcs=new BodyCreationSettings(new BoxShape(Vec3.sReplicate(0.5f)), new RVec3(10.0f, 0.8f, 0.0f), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 			bcs.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
-			bcs.setMassPropertiesOverride ( bcs.getMassPropertiesOverride().setMass(10.0f));
+			bcs.getMassPropertiesOverride().setMass ( 10.0f);
 			mBodyInterface.createAndAddBody(bcs, EActivation.DontActivate);
 		}
 
@@ -273,7 +273,7 @@ public void Initialize()
 				BodyCreationSettings bcs=new BodyCreationSettings(new SphereShape(r), new RVec3(15.0f, h, 0.0f), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 				h += r;
 				bcs.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
-				bcs.setMassPropertiesOverride ( bcs.getMassPropertiesOverride().setMass(10.0f));
+				bcs.getMassPropertiesOverride().setMass ( 10.0f);
 				mBodyInterface.createAndAddBody(bcs, EActivation.DontActivate);
 			}
 		}
@@ -283,7 +283,7 @@ public void Initialize()
 			BodyId b1 = mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(1.0f, 0.2f, 0.05f)), new RVec3(20.0f, 0.2f, 0.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 			BodyCreationSettings bcs=new BodyCreationSettings(new BoxShape(new Vec3(1.0f, 0.05f, 5.0f)), new RVec3(20.0f, 0.45f, 0.0f), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 			bcs.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
-			bcs.setMassPropertiesOverride ( bcs.getMassPropertiesOverride().setMass(10.0f));
+			bcs.getMassPropertiesOverride().setMass ( 10.0f);
 			BodyId b2 = mBodyInterface.createAndAddBody(bcs, EActivation.Activate);
 
 			// Connect the parts with a hinge
@@ -300,7 +300,7 @@ public void Initialize()
 				mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(1.0f, h, 0.05f)), new RVec3(25.0f, h, x == 0? -0.95f : 0.95f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 			BodyCreationSettings bcs=new BodyCreationSettings(new BoxShape(new Vec3(1.0f, 0.05f, 1.0f)), new RVec3(25.0f, 2.0f * h + 0.05f, 0.0f), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 			bcs.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
-			bcs.setMassPropertiesOverride ( bcs.getMassPropertiesOverride().setMass(10.0f));
+			bcs.getMassPropertiesOverride().setMass ( 10.0f);
 			mBodyInterface.createAndAddBody(bcs, EActivation.Activate);
 		}
 
@@ -318,7 +318,7 @@ public void Initialize()
 			ShapeRef block = new BoxShape(Vec3.sReplicate(0.5f)).toRef();
 			BodyCreationSettings bcs=new BodyCreationSettings(block, cRampBlocksStart, cRampOrientation, EMotionType.Dynamic, Layers.MOVING);
 			bcs.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
-			bcs.setMassPropertiesOverride ( bcs.getMassPropertiesOverride().setMass(10.0f));
+			bcs.getMassPropertiesOverride().setMass ( 10.0f);
 			for (int i = 0; i < 4; ++i)
 			{
 				mRampBlocks.pushBack(mBodyInterface.createAndAddBody(bcs, EActivation.Activate));

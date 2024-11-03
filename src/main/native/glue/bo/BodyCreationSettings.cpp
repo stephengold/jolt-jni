@@ -298,9 +298,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
   (JNIEnv *, jclass, jlong bodySettingsVa) {
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
-    const MassProperties * const pResult
-            = new MassProperties(pSettings->mMassPropertiesOverride);
-    TRACE_NEW("MassProperties", pResult)
+    const MassProperties * const pResult = &pSettings->mMassPropertiesOverride;
     return reinterpret_cast<jlong> (pResult);
 }
 

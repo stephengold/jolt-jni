@@ -46,6 +46,17 @@ final public class MassProperties
     }
 
     /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param propertiesVa the virtual address of the native object to assign
+     * (not zero)
+     */
+    MassProperties(JoltPhysicsObject container, long propertiesVa) {
+        super(container, propertiesVa);
+    }
+
+    /**
      * Instantiate with the specified native object assigned.
      *
      * @param propertiesVa the virtual address of the native object to assign

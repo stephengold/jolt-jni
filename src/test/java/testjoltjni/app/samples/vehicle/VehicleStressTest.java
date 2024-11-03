@@ -57,7 +57,7 @@ void Initialize()
 	ShapeRefC car_shape = new BoxShape(new Vec3(half_vehicle_width, half_vehicle_height, half_vehicle_length)).toRefC();
 	BodyCreationSettings car_body_settings = new BodyCreationSettings(car_shape, RVec3.sZero(), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 	car_body_settings.setOverrideMassProperties(EOverrideMassProperties.CalculateInertia);
-	car_body_settings.setMassPropertiesOverride(car_body_settings.getMassPropertiesOverride().setMass(1500.0f));
+	car_body_settings.getMassPropertiesOverride().setMass ( 1500.0f);
 
 	// Create vehicle constraint
 	VehicleConstraintSettings vehicle=new VehicleConstraintSettings();

@@ -587,16 +587,16 @@ public class BodyCreationSettings
     }
 
     /**
-     * Copy the mass-properties override. The settings are unaffected. (native
-     * attribute: mMassPropertiesOverride)
+     * Access the mass-properties override. (native attribute:
+     * mMassPropertiesOverride)
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
     public MassProperties getMassPropertiesOverride() {
         long bodySettingsVa = va();
         long propertiesVa = getMassPropertiesOverride(bodySettingsVa);
-        MassProperties result = new MassProperties(propertiesVa, true);
+        MassProperties result = new MassProperties(this, propertiesVa);
 
         return result;
     }

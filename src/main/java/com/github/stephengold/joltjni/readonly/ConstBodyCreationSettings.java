@@ -114,9 +114,9 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     MassProperties getMassProperties();
 
     /**
-     * Copy the mass-properties override. The settings are unaffected.
+     * Access the mass-properties override.
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with the pre-existing native object assigned
      */
     MassProperties getMassPropertiesOverride();
 
