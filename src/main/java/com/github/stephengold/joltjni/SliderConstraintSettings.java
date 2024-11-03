@@ -98,8 +98,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Access the spring settings. The constraint settings are unaffected.
-     * (native attribute: mLimitsSpringSettings)
+     * Access the spring settings. (native attribute: mLimitsSpringSettings)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -126,8 +125,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Access the motor settings. The constraint settings are unaffected.
-     * (native attribute: mMotorSettings)
+     * Access the motor settings. (native attribute: mMotorSettings)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */

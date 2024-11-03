@@ -188,8 +188,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Access the motor settings for the specified axis. The constraint settings
-     * are unaffected. (native attribute: mMotorSettings)
+     * Access the motor settings for the specified axis. (native attribute:
+     * mMotorSettings)
      *
      * @param dof which axis (not null)
      * @return a new JVM object with the pre-existing native object assigned

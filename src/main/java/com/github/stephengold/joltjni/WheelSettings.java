@@ -48,7 +48,8 @@ abstract public class WheelSettings
     // new methods exposed
 
     /**
-     * Access the settings for the suspension spring.
+     * Access the settings for the suspension spring. (native attribute:
+     * mSuspensionSpring)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
