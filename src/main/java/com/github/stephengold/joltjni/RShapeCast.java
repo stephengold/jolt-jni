@@ -114,7 +114,7 @@ public class RShapeCast extends JoltPhysicsObject {
             long shapeVa, float sx, float sy, float sz, long comStartVa,
             float dx, float dy, float dz);
 
-    native private static void free(long shapeCastVa);
+    native private static void free(long castVa);
 
     native private static double getPointOnRayX(long castVa, float fraction);
 

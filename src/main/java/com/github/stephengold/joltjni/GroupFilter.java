@@ -43,11 +43,11 @@ public class GroupFilter extends SerializableObject implements RefTarget {
      * Instantiate a filter with the specified native object assigned but not
      * owned.
      *
-     * @param materialVa the virtual address of the native object to assign (not
+     * @param filterVa the virtual address of the native object to assign (not
      * zero)
      */
-    GroupFilter(long materialVa) {
-        super(materialVa);
+    GroupFilter(long filterVa) {
+        super(filterVa);
     }
     // *************************************************************************
     // RefTarget methods
