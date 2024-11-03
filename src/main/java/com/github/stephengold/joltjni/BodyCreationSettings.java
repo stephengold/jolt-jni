@@ -155,7 +155,7 @@ public class BodyCreationSettings
     public CollisionGroup getCollisionGroup() {
         long bodySettingsVa = va();
         long groupVa = getCollisionGroup(bodySettingsVa);
-        CollisionGroup result = new CollisionGroup(groupVa);
+        CollisionGroup result = new CollisionGroup(this, groupVa);
 
         return result;
     }

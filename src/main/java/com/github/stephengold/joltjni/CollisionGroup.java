@@ -31,14 +31,14 @@ public class CollisionGroup extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate a group with the specified native object assigned but not
-     * owned.
+     * Instantiate with the specified container and native object.
      *
+     * @param container the containing object, or {@code null} if none
      * @param groupVa the virtual address of the native object to assign (not
      * zero)
      */
-    CollisionGroup(long groupVa) {
-        setVirtualAddress(groupVa, null);
+    CollisionGroup(JoltPhysicsObject container, long groupVa) {
+        super(container, groupVa);
     }
 
     /**
