@@ -59,7 +59,7 @@ import testjoltjni.TestUtils;
 
 /**
  * Automated JUnit4 tests for creation, destruction, accessors, and defaults of
- * Jolt Physics objects other than {@code ConstraintsSettings} subclasses.
+ * various Jolt Physics objects.
  *
  * @author Stephen Gold sgold@sonic.net
  */

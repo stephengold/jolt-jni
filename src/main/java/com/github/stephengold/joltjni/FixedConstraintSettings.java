@@ -62,7 +62,8 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      * the bodies when the constraint is created. The settings are unaffected.
      * (native attribute: mAutoDetectPoint)
      *
-     * @return true to use body positions, false for explicit configuration
+     * @return true to use body positions, {@code false} for explicit
+     * configuration
      */
     public boolean getAutoDetectPoint() {
         long settingsVa = va();

@@ -450,12 +450,14 @@ public class Character
     }
 
     /**
-     * Attempt to alter the character's shape using the locking body interface.
+     * Attempt to replace the character's shape using the locking body
+     * interface.
      *
      * @param shape the desired shape (not null, unaffected)
      * @param maxPenetrationDepth the maximum penetration to allow, or MAX_VALUE
      * to skip the penetration check
-     * @return true if the alteration succeeded, otherwise false
+     * @return {@code true} if the replacement succeeded, otherwise
+     * {@code false}
      */
     public boolean setShape(ConstShape shape, float maxPenetrationDepth) {
         boolean result = setShape(shape, maxPenetrationDepth, true);
@@ -463,14 +465,15 @@ public class Character
     }
 
     /**
-     * Attempt to alter the character's shape.
+     * Attempt to replace the character's shape.
      *
      * @param shape the desired shape (not null, unaffected)
      * @param maxPenetrationDepth the maximum penetration to allow, or MAX_VALUE
      * to skip the penetration check
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
-     * @return true if the alteration succeeded, otherwise false
+     * @param lockBodies {@code true}&rarr;use the locking body interface,
+     * {@code false}&rarr;use the non-locking body interface (default=true)
+     * @return {@code true} if the replacement succeeded, otherwise
+     * {@code false}
      */
     public boolean setShape(
             ConstShape shape, float maxPenetrationDepth, boolean lockBodies) {

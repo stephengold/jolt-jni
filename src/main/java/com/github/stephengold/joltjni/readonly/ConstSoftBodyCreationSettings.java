@@ -38,7 +38,7 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
      * Test whether the created body will be allowed to fall asleep. The
      * settings are unaffected.
      *
-     * @return true if allowed, otherwise false
+     * @return {@code true} if allowed, otherwise {@code false}
      */
     boolean getAllowSleeping();
 
@@ -59,14 +59,14 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Return the linear damping constant. The settings are unaffected.
      *
-     * @return the constant (in units of 1/second, &ge;0, &le;1)
+     * @return the constant (in units of per second, &ge;0, &le;1)
      */
     float getLinearDamping();
 
     /**
      * Return the maximum linear speed. The settings are unaffected.
      *
-     * @return the maximum speed (in meters/second)
+     * @return the maximum speed (in meters per second)
      */
     float getMaxLinearVelocity();
 

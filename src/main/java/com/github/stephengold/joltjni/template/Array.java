@@ -71,9 +71,10 @@ abstract public class Array<T extends JoltPhysicsObject>
     }
 
     /**
-     * Test whether the array contains any elements. The array is unaffected.
+     * Test whether the array contains one or more elements. The array is
+     * unaffected.
      *
-     * @return true if empty, otherwise false
+     * @return {@code true} if empty, otherwise {@code false}
      */
     public boolean empty() {
         if (size() == 0) {

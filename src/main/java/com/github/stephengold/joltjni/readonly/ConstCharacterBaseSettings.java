@@ -38,7 +38,7 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
      * Test whether to make an extra effort to remove contacts with internal
      * edges. The settings are unaffected.
      *
-     * @return true to remove ghost contacts, otherwise false
+     * @return {@code true} to remove ghost contacts, otherwise {@code false}
      */
     boolean getEnhancedInternalEdgeRemoval();
 

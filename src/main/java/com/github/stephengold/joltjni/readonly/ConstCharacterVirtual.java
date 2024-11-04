@@ -54,7 +54,7 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      *
      * @param desiredVelocity velocity vector (in system coordinates, not null,
      * unaffected)
-     * @return true if too step to walk, otherwise false
+     * @return {@code true} if too step to walk, otherwise {@code false}
      */
     boolean canWalkStairs(Vec3Arg desiredVelocity);
 
@@ -93,7 +93,7 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * Test whether enhanced internal edge removal is enabled. The character is
      * unaffected.
      *
-     * @return true if enabled, otherwise false
+     * @return {@code true} if enabled, otherwise {@code false}
      */
     boolean getEnhancedInternalEdgeRemoval();
 
@@ -131,7 +131,7 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * Test whether the last collision check discarded one or more hits. The
      * character is unaffected.
      *
-     * @return true if discarded hits, otherwise false
+     * @return {@code true} if discarded hits, otherwise {@code false}
      */
     boolean getMaxHitsExceeded();
 
@@ -201,7 +201,7 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * unaffected.
      *
      * @param bodyId the ID of the body to test against (not null, unaffected)
-     * @return true if contact or collision, otherwise false
+     * @return {@code true} if contact or collision, otherwise {@code false}
      */
     boolean hasCollidedWith(ConstBodyId bodyId);
 
@@ -211,7 +211,7 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * is unaffected.
      *
      * @param other the character to test against (not null, unaffected)
-     * @return true if contact or collision, otherwise false
+     * @return {@code true} if contact or collision, otherwise {@code false}
      */
     boolean hasCollidedWith(ConstCharacterVirtual other);
 }

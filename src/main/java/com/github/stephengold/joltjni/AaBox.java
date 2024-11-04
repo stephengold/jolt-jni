@@ -57,8 +57,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      *
      * @param boxVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the current object the owner,
-     * {@code false} &rarr; the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     AaBox(long boxVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(boxVa) : null;

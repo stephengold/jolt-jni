@@ -179,8 +179,8 @@ final public class UVec4 implements UVec4Arg {
      * false is returned. Either way, the current instance is unaffected.
      *
      * @param other the object to compare (may be null, unaffected)
-     * @return true if {@code this} and {@code other} have identical values,
-     * otherwise false
+     * @return {@code true} if {@code this} and {@code other} have identical
+     * values, otherwise {@code false}
      */
     @Override
     public boolean equals(Object other) {

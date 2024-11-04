@@ -38,8 +38,8 @@ public class ContactList extends Array<Contact> {
      *
      * @param listVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     ContactList(long listVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(listVa) : null;

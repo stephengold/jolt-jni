@@ -37,7 +37,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      *
      * @param point the point to test (not null, unaffected)
      *
-     * @return true if contained, otherwise false
+     * @return {@code true} if contained, otherwise {@code false}
      */
     boolean contains(Vec3Arg point);
 
@@ -88,7 +88,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
      * Test whether the box is valid. It is unaffected.
      *
-     * @return true if valid, otherwise false
+     * @return {@code true} if valid, otherwise {@code false}
      */
     boolean isValid();
 }

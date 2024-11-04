@@ -46,7 +46,7 @@ final public class ObjectStreamIn {
      * @param fileName the path to the file (not null)
      * @param storeRef where to store the de-serialized object (not null,
      * modified)
-     * @return true if successful, otherwise false
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(String fileName, Ref storeRef) {
         long refVa = storeRef.va();

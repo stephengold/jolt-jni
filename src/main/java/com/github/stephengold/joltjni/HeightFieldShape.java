@@ -80,7 +80,7 @@ public class HeightFieldShape extends Shape {
      *
      * @param x the X coordinate of the sample (&ge;0, &lt;sampleCount)
      * @param y the Y coordinate of the sample (&ge;0, &lt;sampleCount)
-     * @return true if there's a hole, otherwise false
+     * @return {@code true} if there's a hole, otherwise {@code false}
      */
     public boolean isNoCollision(int x, int y) {
         long shapeVa = va();

@@ -71,7 +71,7 @@ public class Face extends JoltPhysicsObject {
     /**
      * Test whether the face is degenerate. The face is unaffected.
      *
-     * @return true if degenerate, otherwise false
+     * @return {@code true} if degenerate, otherwise {@code false}
      */
     public boolean isDegenerate() {
         long faceVa = va();

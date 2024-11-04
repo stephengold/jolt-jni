@@ -71,7 +71,7 @@ public class BodyLockWrite extends NonCopyable {
     /**
      * Test whether the lock was successfully acquired.
      *
-     * @return true if acquired, otherwise false
+     * @return {@code true} if acquired, otherwise {@code false}
      */
     public boolean succeeded() {
         long lockVa = va();
@@ -83,7 +83,7 @@ public class BodyLockWrite extends NonCopyable {
     /**
      * Test whether the lock was acquired and the body is still in broadphase.
      *
-     * @return true if both conditions are met, otherwise false
+     * @return {@code true} if both conditions are met, otherwise {@code false}
      */
     public boolean succeededAndIsInBroadPhase() {
         long lockVa = va();
@@ -99,8 +99,8 @@ public class BodyLockWrite extends NonCopyable {
      *
      * @param lockVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     final void setVirtualAddress(long lockVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(lockVa) : null;

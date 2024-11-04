@@ -42,7 +42,7 @@ final public class NarrowPhaseStat extends JoltPhysicsObject {
      * Test whether the native library collects narrow-phase statistics. (native
      * macro: JPH_TRACK_NARROWPHASE_STATS)
      *
-     * @return true if collecting statistics, otherwise false
+     * @return {@code true} if collecting statistics, otherwise {@code false}
      */
     native public static boolean isCollecting();
 

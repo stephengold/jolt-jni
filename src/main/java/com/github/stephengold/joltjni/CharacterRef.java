@@ -51,8 +51,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     CharacterRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
@@ -498,7 +498,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * is unaffected.
      *
      * @param normal the surface normal to test (not null, unaffected)
-     * @return true if too steep, otherwise false
+     * @return {@code true} if too steep, otherwise {@code false}
      */
     @Override
     public boolean isSlopeTooSteep(Vec3Arg normal) {
@@ -515,7 +515,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     /**
      * Test whether the character is supported. The character is unaffected.
      *
-     * @return true if supported, otherwise false
+     * @return {@code true} if supported, otherwise {@code false}
      */
     @Override
     public boolean isSupported() {

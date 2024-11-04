@@ -76,7 +76,7 @@ final public class VertexList {
     /**
      * Test whether the list contains no vertices. The list is unaffected.
      *
-     * @return true if empty, otherwise false
+     * @return {@code true} if empty, otherwise {@code false}
      */
     public boolean empty() {
         if (buffer.limit() == 0) {

@@ -61,8 +61,8 @@ final public class MassProperties
      *
      * @param propertiesVa the virtual address of the native object to assign
      * (not zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     MassProperties(long propertiesVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(propertiesVa) : null;
@@ -154,7 +154,7 @@ final public class MassProperties
      *
      * @param storeRotation storage for the rotation matrix (not null, modified)
      * @param storeDiagonal storage for the diagonal matrix (not null, modified)
-     * @return true if successful, otherwise false
+     * @return {@code true} if successful, otherwise {@code false}
      */
     @Override
     public boolean decomposePrincipalMomentsOfInertia(

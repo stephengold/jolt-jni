@@ -223,7 +223,7 @@ abstract public class Constraint extends NonCopyable
     /**
      * Test whether the constraint is enabled. The constraint is unaffected.
      *
-     * @return true if enabled, otherwise false
+     * @return {@code true} if enabled, otherwise {@code false}
      */
     @Override
     public boolean getEnabled() {

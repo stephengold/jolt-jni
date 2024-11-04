@@ -245,7 +245,8 @@ public class MeshShapeSettings extends ShapeSettings {
      * Test whether each triangle will include user data. The settings are
      * unaffected. (native attribute: mPerTriangleUserData)
      *
-     * @return true if per-triangle data is included, otherwise false
+     * @return {@code true} if per-triangle data is included, otherwise
+     * {@code false}
      */
     public boolean getPerTriangleUserData() {
         long settingsVa = va();

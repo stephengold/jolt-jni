@@ -149,7 +149,7 @@ public class CustomCharacterContactListener
      * {@code ConstCharacterVirtual} (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is being hit (not zero)
-     * @return true if the contact is valid, otherwise false
+     * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     @Override
     public boolean onCharacterContactValidate(
@@ -250,7 +250,7 @@ public class CustomCharacterContactListener
      * solved (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is being hit (not zero)
-     * @return true if the contact is valid, otherwise false
+     * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     @Override
     public boolean onContactValidate(

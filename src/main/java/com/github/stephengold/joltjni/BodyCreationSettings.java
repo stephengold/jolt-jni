@@ -85,8 +85,8 @@ public class BodyCreationSettings
      *
      * @param bodySettingsVa the virtual address of the native object to assign
      * (not zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     BodyCreationSettings(long bodySettingsVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(bodySettingsVa) : null;
@@ -185,7 +185,7 @@ public class BodyCreationSettings
     /**
      * Alter the angular damping constant. (native attribute: mAngularDamping)
      *
-     * @param damping the desired value (in units of 1/second, &ge;0, &le;1,
+     * @param damping the desired value (in units of per second, &ge;0, &le;1,
      * default=0.05)
      */
     public void setAngularDamping(float damping) {
@@ -253,7 +253,8 @@ public class BodyCreationSettings
     /**
      * Alter whether the body will be a sensor. (native attribute: mIsSensor)
      *
-     * @param setting true for a sensor, otherwise false (default=false)
+     * @param setting {@code true} for a sensor, otherwise {@code false}
+     * (default=false)
      */
     public void setIsSensor(boolean setting) {
         long bodySettingsVa = va();
@@ -263,7 +264,7 @@ public class BodyCreationSettings
     /**
      * Alter the linear damping constant. (native attribute: mLinearDamping)
      *
-     * @param damping the desired value (in units of 1/second, &ge;0, &le;1,
+     * @param damping the desired value (in units of per second, &ge;0, &le;1,
      * default=0.05)
      */
     public void setLinearDamping(float damping) {
@@ -298,7 +299,7 @@ public class BodyCreationSettings
     /**
      * Alter the maximum angular speed. (native attribute: mMaxAngularVelocity)
      *
-     * @param maxSpeed the desired maximum speed (in radians/second, &ge;0,
+     * @param maxSpeed the desired maximum speed (in radians per second, &ge;0,
      * default=15*pi)
      */
     public void setMaxAngularVelocity(float maxSpeed) {
@@ -309,7 +310,7 @@ public class BodyCreationSettings
     /**
      * Alter the maximum linear speed. (native attribute: mMaxLinearVelocity)
      *
-     * @param maxSpeed the desired maximum speed (in meters/second, &ge;0,
+     * @param maxSpeed the desired maximum speed (in meters per second, &ge;0,
      * default=500)
      */
     public void setMaxLinearVelocity(float maxSpeed) {
@@ -454,7 +455,7 @@ public class BodyCreationSettings
      * Test whether the created body will be allowed to fall asleep. The
      * settings are unaffected. (native attribute: mAllowSleeping)
      *
-     * @return true if allowed, otherwise false
+     * @return {@code true} if allowed, otherwise {@code false}
      */
     @Override
     public boolean getAllowSleeping() {
@@ -468,7 +469,7 @@ public class BodyCreationSettings
      * Return the angular damping constant. The settings are unaffected. (native
      * attribute: mAngularDamping)
      *
-     * @return the constant (in units of 1/second, &ge;0, &le;1)
+     * @return the constant (in units of per second, &ge;0, &le;1)
      */
     @Override
     public float getAngularDamping() {
@@ -541,7 +542,7 @@ public class BodyCreationSettings
      * Test whether the body will be a sensor. The settings are unaffected.
      * (native attribute: mIsSensor)
      *
-     * @return true for a sensor, otherwise false
+     * @return {@code true} for a sensor, otherwise {@code false}
      */
     @Override
     public boolean getIsSensor() {
@@ -555,7 +556,7 @@ public class BodyCreationSettings
      * Return the linear damping constant. The settings are unaffected. (native
      * attribute: mLinearDamping)
      *
-     * @return the constant (in units of 1/second, &ge;0, &le;1)
+     * @return the constant (in units of per second, &ge;0, &le;1)
      */
     @Override
     public float getLinearDamping() {
@@ -616,7 +617,7 @@ public class BodyCreationSettings
      * Return the maximum angular speed. The settings are unaffected. (native
      * attribute: mMaxAngularVelocity)
      *
-     * @return the maximum speed (in radians/second)
+     * @return the maximum speed (in radians per second)
      */
     @Override
     public float getMaxAngularVelocity() {
@@ -630,7 +631,7 @@ public class BodyCreationSettings
      * Return the maximum linear speed. The settings are unaffected. (native
      * attribute: mMaxLinearVelocity)
      *
-     * @return the maximum speed (in meters/second)
+     * @return the maximum speed (in meters per second)
      */
     @Override
     public float getMaxLinearVelocity() {
@@ -775,7 +776,7 @@ public class BodyCreationSettings
      * Test whether the body's mass properties will be calculated. The settings
      * are unaffected.
      *
-     * @return true if calculated, otherwise false
+     * @return {@code true} if calculated, otherwise {@code false}
      */
     @Override
     public boolean hasMassProperties() {

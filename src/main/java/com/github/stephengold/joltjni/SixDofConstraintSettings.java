@@ -268,7 +268,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Test whether the specified axis is fixed. The settings are unaffected.
      *
      * @param dof which axis to test (not null)
-     * @return true if fixed, otherwise false
+     * @return {@code true} if fixed, otherwise {@code false}
      */
     public boolean isFixedAxis(EAxis dof) {
         long settingsVa = va();
@@ -282,7 +282,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Test whether the specified axis is free. The settings are unaffected.
      *
      * @param dof which axis to test (not null)
-     * @return true if free, otherwise false
+     * @return {@code true} if free, otherwise {@code false}
      */
     public boolean isFreeAxis(EAxis dof) {
         long settingsVa = va();

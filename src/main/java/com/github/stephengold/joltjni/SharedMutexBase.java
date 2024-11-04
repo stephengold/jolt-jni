@@ -35,8 +35,8 @@ abstract public class SharedMutexBase extends JoltPhysicsObject {
      *
      * @param mutexVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     SharedMutexBase(long mutexVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(mutexVa) : null;

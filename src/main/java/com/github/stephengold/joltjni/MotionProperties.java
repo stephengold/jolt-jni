@@ -101,7 +101,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Test whether the body is allowed to fall asleep.
      *
-     * @return true if allowed, otherwise false
+     * @return {@code true} if allowed, otherwise {@code false}
      */
     public boolean getAllowSleeping() {
         long propertiesVa = va();
@@ -113,7 +113,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Return the angular damping coefficient.
      *
-     * @return the coefficient value (in units of 1/second, &ge;0, &le;1)
+     * @return the coefficient value (in units of per second, &ge;0, &le;1)
      */
     public float getAngularDamping() {
         long propertiesVa = va();
@@ -233,7 +233,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Return the linear damping coefficient.
      *
-     * @return the coefficient value (in units of 1/second, &ge;0, &le;1)
+     * @return the coefficient value (in units of per second, &ge;0, &le;1)
      */
     public float getLinearDamping() {
         long propertiesVa = va();
@@ -376,7 +376,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Alter the angular damping.
      *
-     * @param damping the desired coefficient value (in units of 1/second,
+     * @param damping the desired coefficient value (in units of per second,
      * &ge;0, &le;1, default=0)
      */
     public void setAngularDamping(float damping) {
@@ -442,7 +442,7 @@ public class MotionProperties extends JoltPhysicsObject {
     /**
      * Alter the linear damping.
      *
-     * @param damping the desired value (in units of 1/second, &ge;0, &le;1,
+     * @param damping the desired value (in units of per second, &ge;0, &le;1,
      * default=0)
      */
     public void setLinearDamping(float damping) {

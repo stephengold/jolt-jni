@@ -164,7 +164,7 @@ final public class MotorSettings extends JoltPhysicsObject {
     /**
      * Test whether the settings are valid. They are unaffected.
      *
-     * @return true if valid, otherwise false
+     * @return {@code true} if valid, otherwise {@code false}
      */
     public boolean isValid() {
         long settingsVa = va();

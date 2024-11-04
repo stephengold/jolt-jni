@@ -48,7 +48,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
      * Test whether the velocity of the contact point can push the character.
      * The contact is unaffected.
      *
-     * @return true if can push, otherwise false
+     * @return {@code true} if can push, otherwise {@code false}
      */
     boolean getCanPushCharacter();
 
@@ -87,15 +87,15 @@ public interface ConstContact extends ConstJoltPhysicsObject {
      * Test whether the character has actually collided. The contact is
      * unaffected.
      *
-     * @return true if a real collision, false for a predictive contact that
-     * never became a real one
+     * @return {@code true} if a real collision, {@code false} for a predictive
+     * contact that never became a real one
      */
     boolean getHadCollision();
 
     /**
      * Test whether the colliding object is a sensor. The contact is unaffected.
      *
-     * @return true for a sensor, otherwise false
+     * @return {@code true} for a sensor, otherwise {@code false}
      */
     boolean getIsSensorB();
 
@@ -146,7 +146,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
      * Test whether the contact was discarded by the contact-validate callback.
      * The contact is unaffected.
      *
-     * @return true if discarded, otherwise false
+     * @return {@code true} if discarded, otherwise {@code false}
      */
     boolean getWasDiscarded();
 }

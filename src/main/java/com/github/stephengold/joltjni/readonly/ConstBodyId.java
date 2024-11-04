@@ -65,14 +65,14 @@ public interface ConstBodyId extends ConstJoltPhysicsObject {
      * unaffected.
      *
      * @param id2 the 2nd ID to test (not null, unaffected)
-     * @return true if equal, false if unequal
+     * @return {@code true} if equal, {@code false} if unequal
      */
     boolean isEqual(ConstBodyId id2);
 
     /**
      * Test whether the ID is valid. It is unaffected.
      *
-     * @return true if invalid, false if valid
+     * @return {@code true} if invalid, {@code false} if valid
      */
     boolean isInvalid();
 }

@@ -219,7 +219,7 @@ abstract public class ConstraintSettings
      * Test whether the constraint will be enabled initially. The settings are
      * unaffected. (native attribute: mEnabled)
      *
-     * @return true if enabled, otherwise false
+     * @return {@code true} if enabled, otherwise {@code false}
      */
     @Override
     public boolean getEnabled() {

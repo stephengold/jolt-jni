@@ -286,7 +286,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Test whether the specified axis is fixed. The constraint is unaffected.
      *
      * @param axis which axis to query (not null)
-     * @return true if fixed, otherwise false
+     * @return {@code true} if fixed, otherwise {@code false}
      */
     public boolean isFixedAxis(EAxis axis) {
         long constraintVa = va();
@@ -300,7 +300,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Test whether the specified axis is free. The constraint is unaffected.
      *
      * @param axis which axis to query (not null)
-     * @return true if free, otherwise false
+     * @return {@code true} if free, otherwise {@code false}
      */
     public boolean isFreeAxis(EAxis axis) {
         long constraintVa = va();

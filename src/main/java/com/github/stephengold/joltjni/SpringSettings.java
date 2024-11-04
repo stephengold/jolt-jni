@@ -163,8 +163,8 @@ final public class SpringSettings extends JoltPhysicsObject {
     /**
      * Test for valid frequency/stiffness. The settings are unaffected.
      *
-     * @return true if valid (the constraint will have soft limits), otherwise
-     * false (hard limits)
+     * @return {@code true} if valid (the constraint will have soft limits),
+     * otherwise {@code false} (hard limits)
      */
     public boolean hasStiffness() {
         long settingsVa = va();

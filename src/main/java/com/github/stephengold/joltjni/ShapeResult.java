@@ -36,8 +36,8 @@ final public class ShapeResult extends JoltPhysicsObject {
      *
      * @param resultVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     ShapeResult(long resultVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(resultVa) : null;
@@ -74,7 +74,7 @@ final public class ShapeResult extends JoltPhysicsObject {
     /**
      * Test whether there was an error.
      *
-     * @return true if error, otherwise false
+     * @return {@code true} if error, otherwise {@code false}
      */
     public boolean hasError() {
         long resultVa = va();
@@ -86,7 +86,7 @@ final public class ShapeResult extends JoltPhysicsObject {
     /**
      * Test whether the {@code ShapeRefC} is valid.
      *
-     * @return true if valid, otherwise false
+     * @return {@code true} if valid, otherwise {@code false}
      */
     public boolean isValid() {
         long resultVa = va();

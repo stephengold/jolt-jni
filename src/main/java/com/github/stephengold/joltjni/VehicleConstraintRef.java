@@ -38,8 +38,8 @@ final public class VehicleConstraintRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     VehicleConstraintRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;

@@ -151,7 +151,7 @@ public class HingeConstraint extends TwoBodyConstraint {
      * Return the target angular velocity of the motor. The constraint is
      * unaffected.
      *
-     * @return the angular velocity (in radians/second)
+     * @return the angular velocity (in radians per second)
      */
     public float getTargetAngularVelocity() {
         long constraintVa = va();
@@ -163,7 +163,7 @@ public class HingeConstraint extends TwoBodyConstraint {
     /**
      * Test whether the constraint has limits. The constraint is unaffected.
      *
-     * @return true if limited, otherwise false
+     * @return {@code true} if limited, otherwise {@code false}
      */
     public boolean hasLimits() {
         long constraintVa = va();

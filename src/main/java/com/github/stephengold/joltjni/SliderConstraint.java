@@ -150,7 +150,7 @@ public class SliderConstraint extends TwoBodyConstraint {
     /**
      * Return the target velocity of the motor. The constraint is unaffected.
      *
-     * @return the velocity (in meters/second)
+     * @return the velocity (in meters per second)
      */
     public float getTargetVelocity() {
         long constraintVa = va();
@@ -162,7 +162,7 @@ public class SliderConstraint extends TwoBodyConstraint {
     /**
      * Test whether the constraint has limits. The constraint is unaffected.
      *
-     * @return true if limited, otherwise false
+     * @return {@code true} if limited, otherwise {@code false}
      */
     public boolean hasLimits() {
         long constraintVa = va();

@@ -49,8 +49,8 @@ public class SubShapeId extends JoltPhysicsObject implements ConstSubShapeId {
      * Instantiate an ID with the specified native object assigned.
      *
      * @param idVa the virtual address of the native object to assign (not zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     SubShapeId(long idVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(idVa) : null;
@@ -63,7 +63,7 @@ public class SubShapeId extends JoltPhysicsObject implements ConstSubShapeId {
      * Test for equality with the specified ID. The current ID is unaffected.
      *
      * @param otherId the ID to compare with (not null, unaffected)
-     * @return true if equivalent, otherwise false
+     * @return {@code true} if equivalent, otherwise {@code false}
      */
     @Override
     public boolean contentEquals(ConstSubShapeId otherId) {

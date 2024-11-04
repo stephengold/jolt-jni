@@ -180,7 +180,7 @@ abstract public class BroadPhase extends BroadPhaseQuery {
      *
      * @param bodyIds the IDs of the bodies to be notified (not null)
      * @param numBodies the number of bodies to be notified (&ge;0)
-     * @param takeLock true to acquire a lock, otherwise false
+     * @param takeLock {@code true} to acquire a lock, otherwise {@code false}
      */
     public void notifyBodiesAabbChanged(
             BodyId[] bodyIds, int numBodies, boolean takeLock) {

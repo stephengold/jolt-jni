@@ -44,8 +44,8 @@ abstract public class CharacterVsCharacterCollision extends NonCopyable {
      *
      * @param collisionVa the virtual address of the native object to assign
      * (not zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     final void setVirtualAddress(long collisionVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(collisionVa) : null;

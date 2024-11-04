@@ -133,7 +133,7 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * {@code ConstCharacterVirtual} (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is being hit (not zero)
-     * @return true if the contact is valid, otherwise false
+     * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     boolean onCharacterContactValidate(
             long characterVa, long otherCharacterVa, long subShapeId2Va);
@@ -225,7 +225,7 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * solved (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is being hit (not zero)
-     * @return true if the contact is valid, otherwise false
+     * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     boolean onContactValidate(
             long characterVa, long bodyId2Va, long subShapeId2Va);

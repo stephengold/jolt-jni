@@ -360,8 +360,8 @@ final public class Vec4 implements Vec4Arg {
      * instance is unaffected.
      *
      * @param other the object to compare (may be null, unaffected)
-     * @return true if {@code this} and {@code other} have identical values,
-     * otherwise false
+     * @return {@code true} if {@code this} and {@code other} have identical
+     * values, otherwise {@code false}
      */
     @Override
     public boolean equals(Object other) {

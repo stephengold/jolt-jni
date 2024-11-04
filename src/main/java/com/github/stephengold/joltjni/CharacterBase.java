@@ -275,7 +275,7 @@ abstract public class CharacterBase
      * is unaffected.
      *
      * @param normal the surface normal to test (not null, unaffected)
-     * @return true if too steep, otherwise false
+     * @return {@code true} if too steep, otherwise {@code false}
      */
     @Override
     public boolean isSlopeTooSteep(Vec3Arg normal) {
@@ -291,7 +291,7 @@ abstract public class CharacterBase
     /**
      * Test whether the character is supported. The character is unaffected.
      *
-     * @return true if supported, otherwise false
+     * @return {@code true} if supported, otherwise {@code false}
      */
     @Override
     public boolean isSupported() {

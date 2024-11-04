@@ -46,8 +46,8 @@ final public class RagdollSettingsRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     RagdollSettingsRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
@@ -132,7 +132,7 @@ final public class RagdollSettingsRef extends Ref {
     /**
      * Stabilize the constraints.
      *
-     * @return true if successful, otherwise false
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean stabilize() {
         long refVa = va();

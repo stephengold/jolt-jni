@@ -43,14 +43,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * Test whether the created body will be allowed to fall asleep. The
      * settings are unaffected.
      *
-     * @return true if allowed, otherwise false
+     * @return {@code true} if allowed, otherwise {@code false}
      */
     boolean getAllowSleeping();
 
     /**
      * Return the angular damping constant. The settings are unaffected.
      *
-     * @return the constant (in units of 1/second, &ge;0, &le;1)
+     * @return the constant (in units of per second, &ge;0, &le;1)
      */
     float getAngularDamping();
 
@@ -87,14 +87,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Test whether the body will be a sensor. The settings are unaffected.
      *
-     * @return true for a sensor, otherwise false
+     * @return {@code true} for a sensor, otherwise {@code false}
      */
     boolean getIsSensor();
 
     /**
      * Return the linear damping constant. The settings are unaffected.
      *
-     * @return the constant (in units of 1/second, &ge;0, &le;1)
+     * @return the constant (in units of per second, &ge;0, &le;1)
      */
     float getLinearDamping();
 
@@ -123,14 +123,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Return the maximum angular speed. The settings are unaffected.
      *
-     * @return the maximum speed (in radians/second)
+     * @return the maximum speed (in radians per second)
      */
     float getMaxAngularVelocity();
 
     /**
      * Return the maximum linear speed. The settings are unaffected.
      *
-     * @return the maximum speed (in meters/second)
+     * @return the maximum speed (in meters per second)
      */
     float getMaxLinearVelocity();
 
@@ -199,7 +199,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * Test whether the body's mass properties will be calculated. The settings
      * are unaffected.
      *
-     * @return true if calculated, otherwise false
+     * @return {@code true} if calculated, otherwise {@code false}
      */
     boolean hasMassProperties();
 }

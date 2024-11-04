@@ -56,8 +56,8 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
      * Instantiate with the specified native object assigned.
      *
      * @param idVa the virtual address of the native object to assign (not zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     BodyId(long idVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(idVa) : null;
@@ -136,7 +136,7 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
      * unaffected.
      *
      * @param id2 the 2nd ID to test (not null, unaffected)
-     * @return true if equal, false if unequal
+     * @return {@code true} if equal, {@code false} if unequal
      */
     @Override
     public boolean isEqual(ConstBodyId id2) {
@@ -150,7 +150,7 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     /**
      * Test whether the ID is valid. It is unaffected.
      *
-     * @return true if invalid, false if valid
+     * @return {@code true} if invalid, {@code false} if valid
      */
     @Override
     public boolean isInvalid() {

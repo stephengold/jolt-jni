@@ -289,7 +289,7 @@ final public class Quat implements QuatArg {
      * Test whether the quaternion is normalized to within a tolerance of 10^-5.
      * The quaternion is unaffected.
      *
-     * @return true if normalized, otherwise false
+     * @return {@code true} if normalized, otherwise {@code false}
      */
     @Override
     public boolean isNormalized() {
@@ -302,7 +302,7 @@ final public class Quat implements QuatArg {
      * tolerance. The quaternion is unaffected.
      *
      * @param tolerance the desired tolerance (default=1e-5)
-     * @return true if normalized, otherwise false
+     * @return {@code true} if normalized, otherwise {@code false}
      */
     @Override
     public boolean isNormalized(float tolerance) {

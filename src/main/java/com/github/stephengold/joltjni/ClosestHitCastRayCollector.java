@@ -22,8 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Collect the closest result from a narrow-phase ray-cast query. (native
- * type: {@code ClosestHitCollisionCollector<CastRayCollector>})
+ * Collect the closest result from a narrow-phase ray-cast query. (native type:
+ * {@code ClosestHitCollisionCollector<CastRayCollector>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -59,7 +59,7 @@ public class ClosestHitCastRayCollector extends CastRayCollector {
      * Test whether the latest query resulted in a hit. The collector is
      * unaffected.
      *
-     * @return true if there was a hit, otherwise false
+     * @return {@code true} if there was a hit, otherwise {@code false}
      */
     public boolean hadHit() {
         long collectorVa = va();

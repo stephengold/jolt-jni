@@ -74,7 +74,7 @@ public class RayCastSettings extends JoltPhysicsObject {
      * Test whether convex shapes should be treated as solid. The settings are
      * unaffected. (native attribute: mTreatConvexAsSolid)
      *
-     * @return true if treated as solid, otherwise false
+     * @return {@code true} if treated as solid, otherwise {@code false}
      */
     public boolean getTreatConvexAsSolid() {
         long settingsVa = va();

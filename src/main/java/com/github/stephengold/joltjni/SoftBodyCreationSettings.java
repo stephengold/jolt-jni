@@ -119,7 +119,7 @@ public class SoftBodyCreationSettings
     /**
      * Alter the linear damping constant. (native attribute: mLinearDamping)
      *
-     * @param damping the desired value (in units of 1/second, &ge;0, &le;1,
+     * @param damping the desired value (in units of 1 per second, &ge;0, &le;1,
      * default=0.1)
      */
     public void setLinearDamping(float damping) {
@@ -217,7 +217,7 @@ public class SoftBodyCreationSettings
      * Test whether the created body will be allowed to fall asleep. The
      * settings are unaffected. (native attribute: mAllowSleeping)
      *
-     * @return true if allowed, otherwise false
+     * @return {@code true} if allowed, otherwise {@code false}
      */
     @Override
     public boolean getAllowSleeping() {
@@ -259,7 +259,7 @@ public class SoftBodyCreationSettings
      * Return the linear damping constant. The settings are unaffected. (native
      * attribute: mLinearDamping)
      *
-     * @return the constant (in units of 1/second, &ge;0, &le;1)
+     * @return the constant (in units of per second, &ge;0, &le;1)
      */
     @Override
     public float getLinearDamping() {
@@ -273,7 +273,7 @@ public class SoftBodyCreationSettings
      * Return the maximum linear speed. The settings are unaffected. (native
      * attribute: mMaxSpeed)
      *
-     * @return the maximum speed (in meters/second)
+     * @return the maximum speed (in meters per second)
      */
     @Override
     public float getMaxLinearVelocity() {

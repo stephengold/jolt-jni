@@ -348,7 +348,7 @@ abstract public class Shape extends NonCopyable
      * Test whether the shape can be used in a dynamic/kinematic body. The shape
      * is unaffected.
      *
-     * @return true if it can be only be static, otherwise false
+     * @return {@code true} if it can be only be static, otherwise {@code false}
      */
     @Override
     public boolean mustBeStatic() {

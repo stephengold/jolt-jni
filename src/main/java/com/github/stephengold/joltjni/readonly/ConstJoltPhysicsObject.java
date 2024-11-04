@@ -39,7 +39,7 @@ public interface ConstJoltPhysicsObject
     /**
      * Test whether a native object is assigned. Both objects are unaffected.
      *
-     * @return true if one is assigned, otherwise false
+     * @return {@code true} if one is assigned, otherwise {@code false}
      */
     boolean hasAssignedNativeObject();
 
@@ -47,7 +47,7 @@ public interface ConstJoltPhysicsObject
      * Test whether the JVM object owns (is responsible for freeing) its
      * assigned native object. Both objects are unaffected.
      *
-     * @return true if owner, otherwise false
+     * @return {@code true} if owner, otherwise {@code false}
      */
     boolean ownsNativeObject();
 

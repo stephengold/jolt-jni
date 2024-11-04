@@ -40,7 +40,7 @@ public interface ConstMassProperties extends ConstJoltPhysicsObject {
      *
      * @param storeRotation storage for the rotation matrix (not null, modified)
      * @param storeDiagonal storage for the diagonal matrix (not null, modified)
-     * @return true if successful, otherwise false
+     * @return {@code true} if successful, otherwise {@code false}
      */
     boolean decomposePrincipalMomentsOfInertia(
             Mat44 storeRotation, Vec3 storeDiagonal);

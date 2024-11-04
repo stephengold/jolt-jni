@@ -34,7 +34,7 @@ public interface ConstSubShapeId extends ConstJoltPhysicsObject {
      * Test for equality with the specified ID. The current ID is unaffected.
      *
      * @param otherId the ID to compare with (not null, unaffected)
-     * @return true if equivalent, otherwise false
+     * @return {@code true} if equivalent, otherwise {@code false}
      */
     boolean contentEquals(ConstSubShapeId otherId);
 

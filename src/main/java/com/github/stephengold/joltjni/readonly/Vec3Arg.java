@@ -98,7 +98,7 @@ public interface Vec3Arg {
      * Test whether the vector is zero to within a tolerance of 10^-12. The
      * vector is unaffected.
      *
-     * @return true if near zero, otherwise false
+     * @return {@code true} if near zero, otherwise {@code false}
      */
     boolean isNearZero();
 
@@ -107,7 +107,7 @@ public interface Vec3Arg {
      * vector is unaffected.
      *
      * @param tolerance the desired tolerance (default=1e-12)
-     * @return true if near zero, otherwise false
+     * @return {@code true} if near zero, otherwise {@code false}
      */
     boolean isNearZero(float tolerance);
 
@@ -115,7 +115,7 @@ public interface Vec3Arg {
      * Test whether the vector is normalized to within a tolerance of 10^-6. The
      * vector is unaffected.
      *
-     * @return true if normalized, otherwise false
+     * @return {@code true} if normalized, otherwise {@code false}
      */
     boolean isNormalized();
 
@@ -124,7 +124,7 @@ public interface Vec3Arg {
      * The vector is unaffected.
      *
      * @param tolerance the desired tolerance (default=1e-6)
-     * @return true if normalized, otherwise false
+     * @return {@code true} if normalized, otherwise {@code false}
      */
     boolean isNormalized(float tolerance);
 

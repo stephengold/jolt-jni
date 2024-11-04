@@ -55,7 +55,7 @@ public class NarrowPhaseQuery extends NonCopyable {
      * @param raycast the desired ray (not null, unaffected)
      * @param hitResult storage for information about the hit, if any (not null,
      * may be modified)
-     * @return true if a hit was found, otherwise false
+     * @return {@code true} if a hit was found, otherwise {@code false}
      */
     public boolean castRay(RRayCast raycast, RayCastResult hitResult) {
         boolean result
@@ -71,7 +71,7 @@ public class NarrowPhaseQuery extends NonCopyable {
      * may be modified)
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
-     * @return true if a hit was found, otherwise false
+     * @return {@code true} if a hit was found, otherwise {@code false}
      */
     public boolean castRay(RRayCast raycast, RayCastResult hitResult,
             BroadPhaseLayerFilter bplFilter) {
@@ -89,7 +89,7 @@ public class NarrowPhaseQuery extends NonCopyable {
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
-     * @return true if a hit was found, otherwise false
+     * @return {@code true} if a hit was found, otherwise {@code false}
      */
     public boolean castRay(RRayCast raycast, RayCastResult hitResult,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
@@ -108,7 +108,7 @@ public class NarrowPhaseQuery extends NonCopyable {
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      * @param bodyFilter the body filter to apply (not null, unaffected)
-     * @return true if a hit was found, otherwise false
+     * @return {@code true} if a hit was found, otherwise {@code false}
      */
     public boolean castRay(RRayCast raycast, RayCastResult hitResult,
             BroadPhaseLayerFilter bplFilter,

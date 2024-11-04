@@ -50,7 +50,7 @@ final public class CharacterContactSettings extends JoltPhysicsObject {
      * Test whether the other object can push the virtual character. The
      * settings are unaffected. (native attribute: mCanPushCharacter)
      *
-     * @return true if pushing is allowed, otherwise false
+     * @return {@code true} if pushing is allowed, otherwise {@code false}
      */
     public boolean getCanPushCharacter() {
         long settingsVa = va();
@@ -63,7 +63,7 @@ final public class CharacterContactSettings extends JoltPhysicsObject {
      * Test whether the virtual character can apply impulses to the body. The
      * settings are unaffected. (native attribute: mCanReceiveImpulses)
      *
-     * @return true if impulses can be applied, otherwise false
+     * @return {@code true} if impulses can be applied, otherwise {@code false}
      */
     public boolean getCanReceiveImpulses() {
         long settingsVa = va();
@@ -76,7 +76,8 @@ final public class CharacterContactSettings extends JoltPhysicsObject {
      * Alter whether the other object can push the virtual character. (native
      * attribute: mCanPushCharacter)
      *
-     * @param setting true to allow pushing, false to prohibit it (default=true)
+     * @param setting {@code true} to allow pushing, {@code false} to prohibit
+     * it (default=true)
      */
     public void setCanPushCharacter(boolean setting) {
         long settingsVa = va();

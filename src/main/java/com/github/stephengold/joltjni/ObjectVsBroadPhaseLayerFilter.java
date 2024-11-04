@@ -47,7 +47,7 @@ abstract public class ObjectVsBroadPhaseLayerFilter
      *
      * @param objLayer the index of a object layer (&ge;0, &lt;numObjectLayers)
      * @param bpLayer the index of a broad-phase layer (&ge;0, &lt;numBpLayers)
-     * @return true if they should collide, otherwise false
+     * @return {@code true} if they should collide, otherwise {@code false}
      */
     @Override
     public boolean shouldCollide(int objLayer, int bpLayer) {

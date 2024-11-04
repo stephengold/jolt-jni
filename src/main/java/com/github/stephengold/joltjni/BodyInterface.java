@@ -524,7 +524,7 @@ public class BodyInterface extends NonCopyable {
      * Test whether the specified body is active.
      *
      * @param bodyId the ID of the body to test (not null, unaffected)
-     * @return true if active, otherwise false
+     * @return {@code true} if active, otherwise {@code false}
      */
     public boolean isActive(ConstBodyId bodyId) {
         long bodyIdVa = bodyId.va();
@@ -536,7 +536,7 @@ public class BodyInterface extends NonCopyable {
      * Test whether the specified body is added to the system.
      *
      * @param bodyId the ID of the body to test (not null, unaffected)
-     * @return true if added, otherwise false
+     * @return {@code true} if added, otherwise {@code false}
      */
     public boolean isAdded(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();

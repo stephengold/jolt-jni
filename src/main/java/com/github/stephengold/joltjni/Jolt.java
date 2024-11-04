@@ -148,7 +148,7 @@ final public class Jolt {
      * Test whether the native library implements debug rendering. (native
      * macro: JPH_DEBUG_RENDERER)
      *
-     * @return true if implemented, otherwise false
+     * @return {@code true} if implemented, otherwise {@code false}
      */
     native public static boolean implementsDebugRendering();
 
@@ -156,7 +156,7 @@ final public class Jolt {
      * Test whether the native library implements extra logging to help debug
      * determinism issues. (native macro: JPH_DET_LOG)
      *
-     * @return true if implemented, otherwise false
+     * @return {@code true} if implemented, otherwise {@code false}
      */
     native public static boolean implementsDeterminismLog();
 
@@ -174,7 +174,7 @@ final public class Jolt {
      * Test whether the native library uses double-precision location vectors.
      * (native macro: JPH_DOUBLE_PRECISION)
      *
-     * @return true if double-precision, otherwise false
+     * @return {@code true} if double-precision, otherwise {@code false}
      */
     native public static boolean isDoublePrecision();
 
@@ -266,7 +266,7 @@ final public class Jolt {
      * unaffected)
      * @param minimum the minimum coordinates of the box (not null, unaffected)
      * @param maximum the maximum coordinates of the box (not null, unaffected)
-     * @return true if there is a hit
+     * @return {@code true} if there is a hit
      */
     public static boolean rayAaBoxHits(Vec3Arg startLocation, Vec3Arg offset,
             Vec3Arg minimum, Vec3Arg maximum) {
@@ -336,7 +336,7 @@ final public class Jolt {
      * Test whether the native library supports the ObjectStream format. (native
      * macro: JPH_OBJECT_STREAM)
      *
-     * @return true if supported, otherwise false
+     * @return {@code true} if supported, otherwise {@code false}
      */
     native public static boolean supportsObjectStream();
 

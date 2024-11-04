@@ -79,7 +79,7 @@ public class BodyManager extends NonCopyable {
      * Add a body, assigning the next available ID.
      *
      * @param body (not null, modified)
-     * @return true if successful, false if no ID is available
+     * @return {@code true} if successful, {@code false} if no ID is available
      */
     public boolean addBody(Body body) {
         long managerVa = va();
@@ -228,8 +228,8 @@ public class BodyManager extends NonCopyable {
      *
      * @param managerVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     final void setVirtualAddress(long managerVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(managerVa) : null;

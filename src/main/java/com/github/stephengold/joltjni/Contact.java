@@ -39,8 +39,8 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
      *
      * @param contactVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     Contact(long contactVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(contactVa) : null;
@@ -71,7 +71,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
      * Test whether the velocity of the contact point can push the character.
      * The contact is unaffected. (native attribute: mCanPushCharacter)
      *
-     * @return true if can push, otherwise false
+     * @return {@code true} if can push, otherwise {@code false}
      */
     @Override
     public boolean getCanPushCharacter() {
@@ -147,8 +147,8 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
      * Test whether the character has actually collided. The contact is
      * unaffected. (native attribute: mHadCollision)
      *
-     * @return true if a real collision, false for a predictive contact that
-     * never became a real one
+     * @return {@code true} if a real collision, {@code false} for a predictive
+     * contact that never became a real one
      */
     @Override
     public boolean getHadCollision() {
@@ -162,7 +162,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
      * Test whether the colliding object is a sensor. The contact is unaffected.
      * (native attribute: mIsSensorB)
      *
-     * @return true for a sensor, otherwise false
+     * @return {@code true} for a sensor, otherwise {@code false}
      */
     @Override
     public boolean getIsSensorB() {
@@ -274,7 +274,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
      * Test whether the contact was discarded by the contact-validate callback.
      * The contact is unaffected. (native attribute: mWasDiscarded)
      *
-     * @return true if discarded, otherwise false
+     * @return {@code true} if discarded, otherwise {@code false}
      */
     @Override
     public boolean getWasDiscarded() {

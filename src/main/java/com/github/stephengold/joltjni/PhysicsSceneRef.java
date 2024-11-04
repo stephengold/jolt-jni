@@ -46,8 +46,8 @@ final public class PhysicsSceneRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     PhysicsSceneRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
@@ -59,7 +59,7 @@ final public class PhysicsSceneRef extends Ref {
     /**
      * Correct any incorrectly scaled shapes in the scene.
      *
-     * @return true if successful, otherwise false
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean fixInvalidScales() {
         long refVa = va();
@@ -92,7 +92,7 @@ final public class PhysicsSceneRef extends Ref {
      * Instantiate the bodies in the scene.
      *
      * @param system where to add the bodies (not null, modified)
-     * @return true if successful, otherwise false
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean createBodies(PhysicsSystem system) {
         long refVa = va();

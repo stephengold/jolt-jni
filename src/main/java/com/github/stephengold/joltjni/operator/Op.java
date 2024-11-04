@@ -168,7 +168,7 @@ final public class Op {
      *
      * @param left the first ID to test (not null, unaffected)
      * @param right the 2nd ID to test (not null, unaffected)
-     * @return true if equal, false if unequal
+     * @return {@code true} if equal, {@code false} if unequal
      */
     public static boolean equals(ConstBodyId left, ConstBodyId right) {
         boolean result = left.isEqual(right);
@@ -181,7 +181,7 @@ final public class Op {
      *
      * @param left the first color to test (not null, unaffected)
      * @param right the 2nd color to test (not null, unaffected)
-     * @return true if equal, false if unequal
+     * @return {@code true} if equal, {@code false} if unequal
      */
     public static boolean equals(ConstColor left, ConstColor right) {
         boolean result = left.getA() == right.getA()
@@ -197,7 +197,7 @@ final public class Op {
      *
      * @param left the first matrix (not null, unaffected)
      * @param right the 2nd matrix (not null, unaffected)
-     * @return true if equal, otherwise false
+     * @return {@code true} if equal, otherwise {@code false}
      */
     public static boolean equals(Mat44Arg left, Mat44Arg right) {
         boolean result = left.isEqual(right);
@@ -408,7 +408,7 @@ final public class Op {
      *
      * @param left the first color to test (not null, unaffected)
      * @param right the 2nd color to test (not null, unaffected)
-     * @return false if equal, true if unequal
+     * @return {@code false} if equal, {@code true} if unequal
      */
     public static boolean notEqual(ConstColor left, ConstColor right) {
         boolean result = left.getA() != right.getA()

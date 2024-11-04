@@ -58,8 +58,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      *
      * @param matrixVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     Mat44(long matrixVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(matrixVa) : null;
@@ -291,7 +291,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * matrix is unaffected.
      *
      * @param m2 the 2nd matrix to test (not null, unaffected)
-     * @return true if equal, false if unequal
+     * @return {@code true} if equal, {@code false} if unequal
      */
     @Override
     public boolean isEqual(Mat44Arg m2) {

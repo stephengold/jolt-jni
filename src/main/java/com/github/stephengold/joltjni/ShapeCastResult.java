@@ -73,7 +73,7 @@ public class ShapeCastResult extends CollideShapeResult {
      * Test whether the shape was hit from its back side. The result object is
      * unaffected. (native attribute: mIsBackFaceHit)
      *
-     * @return true if hit from back side, otherwise false
+     * @return {@code true} if hit from back side, otherwise {@code false}
      */
     public boolean getIsBackFaceHit() {
         long castResultVa = va();

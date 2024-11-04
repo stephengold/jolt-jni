@@ -46,7 +46,7 @@ public class StateRecorder extends NonCopyable {
     /**
      * Test whether the recorder is validating.
      *
-     * @return true if validating, otherwise false
+     * @return {@code true} if validating, otherwise {@code false}
      */
     public boolean isValidating() {
         long recorderVa = va();
@@ -235,8 +235,8 @@ public class StateRecorder extends NonCopyable {
      *
      * @param recorderVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     final void setVirtualAddress(long recorderVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(recorderVa) : null;

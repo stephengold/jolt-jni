@@ -53,8 +53,8 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     ShapeRefC(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
@@ -295,7 +295,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      * Test whether the shape can be used in a dynamic/kinematic body. The shape
      * is unaffected.
      *
-     * @return true if it can be only be static, otherwise false
+     * @return {@code true} if it can be only be static, otherwise {@code false}
      */
     @Override
     public boolean mustBeStatic() {

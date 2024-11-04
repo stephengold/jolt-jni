@@ -131,14 +131,14 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * is unaffected.
      *
      * @param normal the surface normal to test (not null, unaffected)
-     * @return true if too steep, otherwise false
+     * @return {@code true} if too steep, otherwise {@code false}
      */
     boolean isSlopeTooSteep(Vec3Arg normal);
 
     /**
      * Test whether the character is supported. The character is unaffected.
      *
-     * @return true if supported, otherwise false
+     * @return {@code true} if supported, otherwise {@code false}
      */
     boolean isSupported();
 

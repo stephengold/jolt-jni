@@ -58,7 +58,7 @@ public class ClosestHitCastShapeCollector extends CastShapeCollector {
      * Test whether the latest query resulted in a hit. The collector is
      * unaffected.
      *
-     * @return true if there was a hit, otherwise false
+     * @return {@code true} if there was a hit, otherwise {@code false}
      */
     public boolean hadHit() {
         long collectorVa = va();

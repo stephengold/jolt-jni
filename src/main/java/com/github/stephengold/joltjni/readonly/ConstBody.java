@@ -42,7 +42,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * Test whether the body could be made kinematic or dynamic. The body is
      * unaffected.
      *
-     * @return true if possible, otherwise false
+     * @return {@code true} if possible, otherwise {@code false}
      */
     boolean canBeKinematicOrDynamic();
 
@@ -63,7 +63,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     /**
      * Test whether the body is allowed to fall asleep. The body is unaffected.
      *
-     * @return true if allowed, otherwise false
+     * @return {@code true} if allowed, otherwise {@code false}
      */
     boolean getAllowSleeping();
 
@@ -215,14 +215,14 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     /**
      * Test whether the body is deactivated. The body is unaffected.
      *
-     * @return false if deactivated, otherwise true
+     * @return {@code false} if deactivated, otherwise {@code true}
      */
     boolean isActive();
 
     /**
      * Test whether the body is dynamic. The body is unaffected.
      *
-     * @return true if dynamic, otherwise false
+     * @return {@code true} if dynamic, otherwise {@code false}
      */
     boolean isDynamic();
 
@@ -230,35 +230,35 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * Test whether the body has been added to its {@code PhysicsSystem}. The
      * body is unaffected.
      *
-     * @return true if added, otherwise false
+     * @return {@code true} if added, otherwise {@code false}
      */
     boolean isInBroadPhase();
 
     /**
      * Test whether the body is kinematic. It is unaffected.
      *
-     * @return true if kinematic, otherwise false
+     * @return {@code true} if kinematic, otherwise {@code false}
      */
     boolean isKinematic();
 
     /**
      * Test whether the body is a rigid body. It is unaffected.
      *
-     * @return true if rigid body, otherwise false
+     * @return {@code true} if rigid body, otherwise {@code false}
      */
     boolean isRigidBody();
 
     /**
      * Test whether the body is a sensor. The body is unaffected.
      *
-     * @return true if a sensor, otherwise false
+     * @return {@code true} if a sensor, otherwise {@code false}
      */
     boolean isSensor();
 
     /**
      * Test whether the body is static (non-moving). It is unaffected.
      *
-     * @return true if static, otherwise false
+     * @return {@code true} if static, otherwise {@code false}
      */
     boolean isStatic();
 }

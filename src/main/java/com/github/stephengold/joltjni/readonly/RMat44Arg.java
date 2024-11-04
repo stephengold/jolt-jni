@@ -92,7 +92,7 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * matrix is unaffected.
      *
      * @param m2 the 2nd matrix to test (not null, unaffected)
-     * @return true if equal, false if unequal
+     * @return {@code true} if equal, {@code false} if unequal
      */
     boolean isEqual(RMat44Arg m2);
 

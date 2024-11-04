@@ -62,7 +62,7 @@ public class PhysicsStepListenerContext extends JoltPhysicsObject {
      * Test whether this is the first step. The context is unaffected. (native
      * attribute: mIsFirstStep)
      *
-     * @return true if it's the first step, otherwise false
+     * @return {@code true} if it's the first step, otherwise {@code false}
      */
     public boolean getIsFirstStep() {
         long contextVa = va();
@@ -75,7 +75,7 @@ public class PhysicsStepListenerContext extends JoltPhysicsObject {
      * Test whether this is the last step. The context is unaffected. (native
      * attribute: mIsLastStep)
      *
-     * @return true if it's the last step, otherwise false
+     * @return {@code true} if it's the last step, otherwise {@code false}
      */
     public boolean getIsLastStep() {
         long contextVa = va();

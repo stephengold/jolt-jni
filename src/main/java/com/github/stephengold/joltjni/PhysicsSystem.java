@@ -533,7 +533,7 @@ public class PhysicsSystem extends NonCopyable {
      * Restore the system's state from the specified recorder, for replay.
      *
      * @param recorder where to read the state from (not null)
-     * @return true if successful, otherwise false
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean restoreState(StateRecorder recorder) {
         long systemVa = va();
@@ -678,8 +678,8 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @param systemVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     final void setVirtualAddress(long systemVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(systemVa) : null;

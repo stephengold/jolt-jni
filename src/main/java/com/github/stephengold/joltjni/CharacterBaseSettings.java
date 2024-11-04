@@ -134,7 +134,7 @@ public class CharacterBaseSettings
      * edges. The settings are unaffected. (native attribute:
      * mEnhancedInternalEdgeRemoval)
      *
-     * @return true to remove ghost contacts, otherwise false
+     * @return {@code true} to remove ghost contacts, otherwise {@code false}
      */
     @Override
     public boolean getEnhancedInternalEdgeRemoval() {

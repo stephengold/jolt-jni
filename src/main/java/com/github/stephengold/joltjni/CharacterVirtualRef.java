@@ -54,8 +54,8 @@ final public class CharacterVirtualRef
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     CharacterVirtualRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
@@ -93,7 +93,7 @@ final public class CharacterVirtualRef
      *
      * @param desiredVelocity velocity vector (in system coordinates, not null,
      * unaffected)
-     * @return true if too step to walk, otherwise false
+     * @return {@code true} if too step to walk, otherwise {@code false}
      */
     @Override
     public boolean canWalkStairs(Vec3Arg desiredVelocity) {
@@ -191,7 +191,7 @@ final public class CharacterVirtualRef
      * Test whether enhanced internal edge removal is enabled. The character is
      * unaffected.
      *
-     * @return true if enabled, otherwise false
+     * @return {@code true} if enabled, otherwise {@code false}
      */
     @Override
     public boolean getEnhancedInternalEdgeRemoval() {
@@ -408,7 +408,7 @@ final public class CharacterVirtualRef
      * Test whether the last collision check discarded one or more hits. The
      * character is unaffected.
      *
-     * @return true if discarded hits, otherwise false
+     * @return {@code true} if discarded hits, otherwise {@code false}
      */
     @Override
     public boolean getMaxHitsExceeded() {
@@ -586,7 +586,7 @@ final public class CharacterVirtualRef
      * unaffected.
      *
      * @param bodyId the ID of the body to test against (not null, unaffected)
-     * @return true if contact or collision, otherwise false
+     * @return {@code true} if contact or collision, otherwise {@code false}
      */
     @Override
     public boolean hasCollidedWith(ConstBodyId bodyId) {
@@ -606,7 +606,7 @@ final public class CharacterVirtualRef
      *
      * @param otherCharacter the character to test against (not null,
      * unaffected)
-     * @return true if contact or collision, otherwise false
+     * @return {@code true} if contact or collision, otherwise {@code false}
      */
     @Override
     public boolean hasCollidedWith(ConstCharacterVirtual otherCharacter) {
@@ -624,7 +624,7 @@ final public class CharacterVirtualRef
      * is unaffected.
      *
      * @param normal the surface normal to test (not null, unaffected)
-     * @return true if too steep, otherwise false
+     * @return {@code true} if too steep, otherwise {@code false}
      */
     @Override
     public boolean isSlopeTooSteep(Vec3Arg normal) {
@@ -641,7 +641,7 @@ final public class CharacterVirtualRef
     /**
      * Test whether the character is supported. The character is unaffected.
      *
-     * @return true if supported, otherwise false
+     * @return {@code true} if supported, otherwise {@code false}
      */
     @Override
     public boolean isSupported() {

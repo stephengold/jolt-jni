@@ -53,7 +53,7 @@ public interface ConstConstraint extends ConstJoltPhysicsObject {
     /**
      * Test whether the constraint is enabled. The constraint is unaffected.
      *
-     * @return true if enabled, otherwise false
+     * @return {@code true} if enabled, otherwise {@code false}
      */
     boolean getEnabled();
 

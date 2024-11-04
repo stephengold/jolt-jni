@@ -85,7 +85,7 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
      * Test whether the contact should be treated as a sensor (no collision
      * response). The settings are unaffected.
      *
-     * @return true if treated as a sensor, otherwise false
+     * @return {@code true} if treated as a sensor, otherwise {@code false}
      */
     boolean getIsSensor();
 

@@ -55,7 +55,7 @@ public class BodyFilter extends NonCopyable {
      * is unaffected.
      *
      * @param bodyId the body to test (not null, unaffected)
-     * @return true if may collide, false if filtered out
+     * @return {@code true} if may collide, {@code false} if filtered out
      */
     public boolean shouldCollide(ConstBodyId bodyId) {
         long filterVa = va();
@@ -72,8 +72,8 @@ public class BodyFilter extends NonCopyable {
      *
      * @param filterVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     final void setVirtualAddress(long filterVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(filterVa) : null;

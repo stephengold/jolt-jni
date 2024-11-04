@@ -131,7 +131,8 @@ public class ContactSettings
      * Alter whether the contact should be treated as a sensor (no collision
      * response). (native attribute: mIsSensor)
      *
-     * @param setting true to treat as a sensor, otherwise false (default=false)
+     * @param setting {@code true} to treat as a sensor, otherwise {@code false}
+     * (default=false)
      */
     public void setIsSensor(boolean setting) {
         long settingsVa = va();
@@ -258,7 +259,7 @@ public class ContactSettings
      * Test whether the contact should be treated as a sensor (no collision
      * response). The settings are unaffected. (native attribute: mIsSensor)
      *
-     * @return true if treated as a sensor, otherwise false
+     * @return {@code true} if treated as a sensor, otherwise {@code false}
      */
     @Override
     public boolean getIsSensor() {

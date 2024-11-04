@@ -51,7 +51,7 @@ public interface ConstConstraintSettings extends ConstJoltPhysicsObject {
      * Test whether the constraint will be enabled initially. The settings are
      * unaffected.
      *
-     * @return true if enabled, otherwise false
+     * @return {@code true} if enabled, otherwise {@code false}
      */
     boolean getEnabled();
 

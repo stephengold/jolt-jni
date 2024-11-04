@@ -51,8 +51,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the current object the owner, false &rarr;
-     * the current object isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     PhysicsSettings(long settingsVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(settingsVa) : null;
@@ -65,7 +65,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
      * Test whether objects can fall asleep. The settings are unaffected.
      * (native attribute: mAllowSleeping)
      *
-     * @return true if sleeping is allowed, otherwise false
+     * @return {@code true} if sleeping is allowed, otherwise {@code false}
      */
     public boolean getAllowSleeping() {
         long settingsVa = va();
@@ -93,7 +93,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
      * Test whether physics simulation is deterministic. The settings are
      * unaffected. (native attribute: mDeterministicSimulation)
      *
-     * @return true if it is deterministic, otherwise false
+     * @return {@code true} if it is deterministic, otherwise {@code false}
      */
     public boolean getDeterministicSimulation() {
         long settingsVa = va();
@@ -148,7 +148,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
      * The settings are unaffected. (native attribute:
      * mPointVelocitySleepThreshold)
      *
-     * @return the speed threshold (in meters/second, &ge;0)
+     * @return the speed threshold (in meters per second, &ge;0)
      */
     public float getPointVelocitySleepThreshold() {
         long settingsVa = va();
@@ -240,7 +240,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
      * Alter the point-motion threshold, below which an object can fall asleep.
      * (native attribute: mPointVelocitySleepThreshold)
      *
-     * @param speed the desired speed threshold (in meters/second, &ge;0,
+     * @param speed the desired speed threshold (in meters per second, &ge;0,
      * default=0.03)
      */
     public void setPointVelocitySleepThreshold(float speed) {

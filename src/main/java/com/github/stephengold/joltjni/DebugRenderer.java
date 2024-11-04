@@ -577,8 +577,8 @@ abstract public class DebugRenderer extends NonCopyable {
      *
      * @param rendererVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     final void setVirtualAddress(long rendererVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(rendererVa) : null;

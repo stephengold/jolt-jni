@@ -45,8 +45,8 @@ abstract public class StateRecorderFilter extends JoltPhysicsObject {
      *
      * @param filterVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     StateRecorderFilter(long filterVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(filterVa) : null;
@@ -59,7 +59,7 @@ abstract public class StateRecorderFilter extends JoltPhysicsObject {
      * Test whether the specified body should be saved. Meant to be overridden.
      *
      * @param body the body to test (not null, unaffected)
-     * @return true to save, otherwise false
+     * @return {@code true} to save, otherwise {@code false}
      */
     public boolean shouldSaveBody(ConstBody body) {
         return true;
@@ -70,7 +70,7 @@ abstract public class StateRecorderFilter extends JoltPhysicsObject {
      * overridden.
      *
      * @param constraint the constraint to test (not null, unaffected)
-     * @return true to save, otherwise false
+     * @return {@code true} to save, otherwise {@code false}
      */
     public boolean shouldSaveConstraint(ConstConstraint constraint) {
         return true;
@@ -82,7 +82,7 @@ abstract public class StateRecorderFilter extends JoltPhysicsObject {
      *
      * @param bodyId1 the first body (not null, unaffected)
      * @param bodyId2 the second body (not null, unaffected)
-     * @return true to save, otherwise false
+     * @return {@code true} to save, otherwise {@code false}
      */
     public boolean shouldSaveContact(ConstBodyId bodyId1, ConstBodyId bodyId2) {
         return true;

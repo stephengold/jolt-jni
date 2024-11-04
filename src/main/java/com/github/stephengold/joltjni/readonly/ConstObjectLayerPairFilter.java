@@ -39,7 +39,7 @@ public interface ConstObjectLayerPairFilter extends ConstJoltPhysicsObject {
      * &lt;numObjectLayers)
      * @param layer2 the index of the 2nd object layer (&ge;0,
      * &lt;numObjectLayers)
-     * @return true if they should collide, otherwise false
+     * @return {@code true} if they should collide, otherwise {@code false}
      */
     boolean shouldCollide(int layer1, int layer2);
 }

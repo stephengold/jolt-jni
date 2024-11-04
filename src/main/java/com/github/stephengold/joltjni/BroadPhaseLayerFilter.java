@@ -53,7 +53,7 @@ public class BroadPhaseLayerFilter extends NonCopyable {
      * filter is unaffected.
      *
      * @param bpLayerIndex the index of the broad-phase layer to test
-     * @return true if may collide, false if filtered out
+     * @return {@code true} if may collide, {@code false} if filtered out
      */
     public boolean shouldCollide(int bpLayerIndex) {
         long filterVa = va();
@@ -69,8 +69,8 @@ public class BroadPhaseLayerFilter extends NonCopyable {
      *
      * @param filterVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     final void setVirtualAddress(long filterVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(filterVa) : null;

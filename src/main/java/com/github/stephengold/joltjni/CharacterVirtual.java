@@ -304,7 +304,7 @@ public class CharacterVirtual
      * @param shapeFilter the shape filter used to test for collisions (not
      * null)
      * @param allocator the desired allocator (not null)
-     * @return true if successful, otherwise false
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean setShape(ConstShape shape, float maxPenetrationDepth,
             BroadPhaseLayerFilter broadPhaseLayerFilter,
@@ -401,7 +401,7 @@ public class CharacterVirtual
      *
      * @param desiredVelocity velocity vector (in system coordinates, not null,
      * unaffected)
-     * @return true if too step to walk, otherwise false
+     * @return {@code true} if too step to walk, otherwise {@code false}
      */
     @Override
     public boolean canWalkStairs(Vec3Arg desiredVelocity) {
@@ -478,7 +478,7 @@ public class CharacterVirtual
      * Test whether enhanced internal edge removal is enabled. The character is
      * unaffected.
      *
-     * @return true if enabled, otherwise false
+     * @return {@code true} if enabled, otherwise {@code false}
      */
     @Override
     public boolean getEnhancedInternalEdgeRemoval() {
@@ -550,7 +550,7 @@ public class CharacterVirtual
      * Test whether the last collision check discarded one or more hits. The
      * character is unaffected.
      *
-     * @return true if discarded hits, otherwise false
+     * @return {@code true} if discarded hits, otherwise {@code false}
      */
     @Override
     public boolean getMaxHitsExceeded() {
@@ -685,7 +685,7 @@ public class CharacterVirtual
      * unaffected.
      *
      * @param bodyId the ID of the body to test against (not null, unaffected)
-     * @return true if contact or collision, otherwise false
+     * @return {@code true} if contact or collision, otherwise {@code false}
      */
     @Override
     public boolean hasCollidedWith(ConstBodyId bodyId) {
@@ -703,7 +703,7 @@ public class CharacterVirtual
      *
      * @param otherCharacter the character to test against (not null,
      * unaffected)
-     * @return true if contact or collision, otherwise false
+     * @return {@code true} if contact or collision, otherwise {@code false}
      */
     @Override
     public boolean hasCollidedWith(ConstCharacterVirtual otherCharacter) {

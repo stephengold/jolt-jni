@@ -447,7 +447,7 @@ final public class Vec3 implements Vec3Arg {
      * Test whether the vector is zero to within a tolerance of 10^-12. The
      * vector is unaffected.
      *
-     * @return true if near zero, otherwise false
+     * @return {@code true} if near zero, otherwise {@code false}
      */
     @Override
     public boolean isNearZero() {
@@ -460,7 +460,7 @@ final public class Vec3 implements Vec3Arg {
      * vector is unaffected.
      *
      * @param tolerance the desired tolerance (default=1e-12)
-     * @return true if near zero, otherwise false
+     * @return {@code true} if near zero, otherwise {@code false}
      */
     @Override
     public boolean isNearZero(float tolerance) {
@@ -476,7 +476,7 @@ final public class Vec3 implements Vec3Arg {
      * Test whether the vector is normalized to within a tolerance of 10^-6. The
      * vector is unaffected.
      *
-     * @return true if normalized, otherwise false
+     * @return {@code true} if normalized, otherwise {@code false}
      */
     @Override
     public boolean isNormalized() {
@@ -489,7 +489,7 @@ final public class Vec3 implements Vec3Arg {
      * The vector is unaffected.
      *
      * @param tolerance the desired tolerance (default=1e-6)
-     * @return true if normalized, otherwise false
+     * @return {@code true} if normalized, otherwise {@code false}
      */
     @Override
     public boolean isNormalized(float tolerance) {
@@ -599,8 +599,8 @@ final public class Vec3 implements Vec3Arg {
      * instance is unaffected.
      *
      * @param other the object to compare (may be null, unaffected)
-     * @return true if {@code this} and {@code other} have identical values,
-     * otherwise false
+     * @return {@code true} if {@code this} and {@code other} have identical
+     * values, otherwise {@code false}
      */
     @Override
     public boolean equals(Object other) {

@@ -103,8 +103,8 @@ public class BroadPhaseCastResult extends JoltPhysicsObject {
      *
      * @param castResultVa the virtual address of the native object to assign
      * (not zero)
-     * @param owner true &rarr; make the JVM object the owner, false &rarr; it
-     * isn't the owner
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     void setVirtualAddress(long castResultVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(castResultVa) : null;

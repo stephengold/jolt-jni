@@ -114,7 +114,7 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     /**
      * Stabilize the constraints.
      *
-     * @return true if successful, otherwise false
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean stabilize() {
         long settingsVa = va();

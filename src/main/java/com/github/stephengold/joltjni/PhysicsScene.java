@@ -56,7 +56,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     /**
      * Correct any incorrectly scaled shapes in the scene.
      *
-     * @return true if successful, otherwise false
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean fixInvalidScales() {
         long sceneVa = va();
@@ -98,7 +98,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
      * Instantiate the bodies in the scene.
      *
      * @param system where to add the bodies (not null, modified)
-     * @return true if successful, otherwise false
+     * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean createBodies(PhysicsSystem system) {
         long sceneVa = va();

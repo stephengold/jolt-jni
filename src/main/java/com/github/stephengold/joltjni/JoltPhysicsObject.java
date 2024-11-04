@@ -175,7 +175,7 @@ abstract public class JoltPhysicsObject
     /**
      * Test whether a native object is assigned. Both objects are unaffected.
      *
-     * @return true if one is assigned, otherwise false
+     * @return {@code true} if one is assigned, otherwise {@code false}
      */
     @Override
     final public boolean hasAssignedNativeObject() {
@@ -190,7 +190,7 @@ abstract public class JoltPhysicsObject
      * Test whether the JVM object owns (is responsible for freeing) its
      * assigned native object. Both objects are unaffected.
      *
-     * @return true if owner, otherwise false
+     * @return {@code true} if owner, otherwise {@code false}
      */
     @Override
     final public boolean ownsNativeObject() {
@@ -220,8 +220,8 @@ abstract public class JoltPhysicsObject
      * current instance is unaffected.
      *
      * @param otherObject the object to compare (may be null, unaffected)
-     * @return true if {@code this} and {@code otherObject} have the same type
-     * and virtual address, otherwise false
+     * @return {@code true} if {@code this} and {@code otherObject} have the
+     * same type and virtual address, otherwise {@code false}
      */
     @Override
     public boolean equals(Object otherObject) {
