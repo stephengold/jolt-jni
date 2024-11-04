@@ -78,12 +78,18 @@ public class CollisionGroup extends JoltPhysicsObject {
     /**
      * Access the group filter.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
      */
     public GroupFilter getGroupFilter() {
         long groupVa = va();
         long filterVa = getGroupFilter(groupVa);
-        GroupFilter result = new GroupFilter(filterVa);
+        GroupFilter result;
+        if (filterVa == 0L) {
+            result = null;
+        } else {
+            result = new GroupFilter(filterVa);
+        }
 
         return result;
     }
