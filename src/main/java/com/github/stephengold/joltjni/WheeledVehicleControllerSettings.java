@@ -38,6 +38,14 @@ public class WheeledVehicleControllerSettings
         long settingsVa = createDefault();
         setVirtualAddress(settingsVa, true);
     }
+
+    /**
+     * Instantiate settings with no native object assigned.
+     *
+     * @param dummy unused argument to distinguish the zero-arg constructor
+     */
+    WheeledVehicleControllerSettings(boolean dummy) {
+    }
     // *************************************************************************
     // new methods exposed
 

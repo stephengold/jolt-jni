@@ -35,6 +35,7 @@ public class MotorcycleControllerSettings
      * Instantiate default settings.
      */
     public MotorcycleControllerSettings() {
+        super(false);
         long settingsVa = createDefault();
         setVirtualAddress(settingsVa, true);
     }
