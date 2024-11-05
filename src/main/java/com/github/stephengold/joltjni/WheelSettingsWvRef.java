@@ -24,8 +24,8 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
- * A counted reference to a {@code WheelSettingsWv} object. (native
- * type: {@code Ref<WheelSettingsWV>})
+ * A counted reference to a {@code WheelSettingsWv} object. (native type:
+ * {@code Ref<WheelSettingsWV>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -63,8 +63,7 @@ final public class WheelSettingsWvRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native
-     * {@code WheelSettingsWv}.
+     * Create a counted reference to the native {@code WheelSettingsWv}.
      *
      * @return a new JVM object with a new native object assigned
      */

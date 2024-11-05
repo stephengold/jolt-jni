@@ -83,7 +83,7 @@ public:
 
     void OnAdjustBodyVelocity(const CharacterVirtual *inCharacter,
             const Body &inBody2, Vec3 &ioLinearVelocity,
-             Vec3 &ioAngularVelocity) {
+            Vec3 &ioAngularVelocity) {
         JNIEnv *pAttachEnv;
         jint retCode = mpVM->AttachCurrentThread((void **)&pAttachEnv, NULL);
         JPH_ASSERT(retCode == JNI_OK);

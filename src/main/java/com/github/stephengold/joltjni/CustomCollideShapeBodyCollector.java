@@ -42,8 +42,7 @@ abstract public class CustomCollideShapeBodyCollector
     // new methods exposed
 
     /**
-     * Callback invoked (by native code) each time a new collision is
-     * detected.
+     * Callback invoked (by native code) each time a new collision is detected.
      *
      * @param resultVa the virtual address of a {@code BodyId} (not zero)
      */

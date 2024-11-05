@@ -32,9 +32,7 @@ import com.github.stephengold.joltjni.template.Ref;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class ConstraintRef
-        extends Ref
-        implements ConstConstraint {
+final public class ConstraintRef extends Ref implements ConstConstraint {
     // *************************************************************************
     // constructors
 

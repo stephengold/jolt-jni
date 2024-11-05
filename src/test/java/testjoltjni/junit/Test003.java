@@ -208,8 +208,7 @@ public class Test003 {
      * Test the {@code JobSystemSingleThreaded} class.
      */
     private static void doJobSystemSingleThreaded() {
-        JobSystem jobSystem
-                = new JobSystemSingleThreaded(Jolt.cMaxPhysicsJobs);
+        JobSystem jobSystem = new JobSystemSingleThreaded(Jolt.cMaxPhysicsJobs);
 
         Assert.assertEquals(1, jobSystem.getMaxConcurrency());
         Assert.assertTrue(jobSystem.hasAssignedNativeObject());

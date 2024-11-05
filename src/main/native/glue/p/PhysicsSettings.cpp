@@ -133,7 +133,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_get
     return result;
 }
 
-
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
  * Method:    getPointVelocitySleepThreshold
@@ -231,7 +230,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setPe
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
     pSettings->mPenetrationSlop = slop;
 }
-
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
