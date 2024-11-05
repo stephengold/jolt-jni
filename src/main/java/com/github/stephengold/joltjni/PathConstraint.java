@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A {@code TwoBodyConstraint} that constrains the degrees of freedom to a path.
+ * A {@code TwoBodyConstraint} that constrains motion to a path.
  *
  * @author Stephen Gold sgold@sonic.net
  */

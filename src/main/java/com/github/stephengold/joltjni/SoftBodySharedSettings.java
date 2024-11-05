@@ -52,7 +52,7 @@ public class SoftBodySharedSettings
      * zero)
      */
     SoftBodySharedSettings(long settingsVa) {
-        setVirtualAddress(settingsVa, null);
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

@@ -41,7 +41,7 @@ public class BroadPhaseLayerFilter extends NonCopyable {
     /**
      * Instantiate a filter with no native object assigned.
      *
-     * @param dummy unused argument to distinguish the zero-arg constructor
+     * @param dummy unused argument to distinguish from the zero-arg constructor
      */
     BroadPhaseLayerFilter(boolean dummy) {
     }
