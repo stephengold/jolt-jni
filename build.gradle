@@ -23,7 +23,7 @@ ext {
 
 // Regenerate all JNI header files and unpack Jolt before compiling any C++ code.
 tasks.withType(CppCompile) {
-    dependsOn('classes', 'compileTestJava', 'unpackJoltSource')
+    dependsOn('classes', 'compileTestJava', 'unpackJoltSource', 'unpackTestFramework')
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
@@ -97,6 +97,7 @@ model {
 
             sources.cpp.source {
                 srcDir 'src/main/native/Jolt'
+                srcDir 'src/main/native/TestFramework/Math'
                 srcDir 'src/main/native/glue'
                 include '**/*.cpp'
             }
@@ -150,6 +151,7 @@ model {
                     cppCompiler.args "/I$javaHome/include"
                     cppCompiler.args "/I$javaHome/include/win32"
                     cppCompiler.args "/I$projectDir/src/main/native"
+                    cppCompiler.args "/I$projectDir/src/main/native/TestFramework" // for Math/Perlin.h
                     cppCompiler.args '/std:c++17'
 
                     if (isDebug) {
@@ -167,6 +169,7 @@ model {
 
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/main/native"
+                    cppCompiler.args '-I', "$projectDir/src/main/native/TestFramework" // for Math/Perlin.h
                     cppCompiler.args '-std=c++17'
                     cppCompiler.args '-Werror=return-type'
 
@@ -447,6 +450,17 @@ tasks.register('unpackJoltSource', Copy) {
         includeEmptyDirs = false
     }
     into layout.projectDirectory.dir('src/main/native/Jolt')
+}
+tasks.register('unpackTestFramework', Copy) {
+    dependsOn 'downloadJoltSource'
+    from (zipTree(downloadZip)) {
+        include 'JoltPhysics-5.2.0/TestFramework/**'
+        eachFile { fcd ->
+            fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
+        }
+        includeEmptyDirs = false
+    }
+    into layout.projectDirectory.dir('src/main/native/TestFramework')
 }
 
 // Register cleanup tasks:

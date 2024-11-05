@@ -26,7 +26,6 @@ import com.github.stephengold.joltjni.operator.Op;
 import java.nio.FloatBuffer;
 import java.util.function.BiFunction;
 import testjoltjni.app.samples.*;
-import testjoltjni.app.testframework.Perlin;
 /**
  * A line-for-line Java translation of the Jolt Physics deformed heightfield-shape test.
  * <p>
@@ -51,7 +50,7 @@ public void Initialize()
 	mHeightSamples=new float[cSampleCount * cSampleCount];
 	for (int y = 0; y < cSampleCount; ++y)
 		for (int x = 0; x < cSampleCount; ++x)
-			mHeightSamples[y * cSampleCount + x] = cMaxHeight * Perlin.Noise3((float)(x) * 8.0f / cSampleCount, 0, (float)(y) * 8.0f / cSampleCount, 256, 256, 256);
+			mHeightSamples[y * cSampleCount + x] = cMaxHeight * Jolt.perlinNoise3((float)(x) * 8.0f / cSampleCount, 0, (float)(y) * 8.0f / cSampleCount, 256, 256, 256);
 
 	// Determine scale and offset of the terrain
 	Vec3 offset=new Vec3(-0.5f * cCellSize * cSampleCount, 0, -0.5f * cCellSize * cSampleCount);

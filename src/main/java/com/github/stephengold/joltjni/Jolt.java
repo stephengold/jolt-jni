@@ -217,6 +217,23 @@ final public class Jolt {
     }
 
     /**
+     * Generate 3-D Perlin noise.
+     *
+     * @param x the X coordinate
+     * @param y the Y coordinate
+     * @param z the Z coordinate
+     * @param xWrap the wraparound interval for the X coordinate (power of 2) or
+     * 0 for don't care
+     * @param yWrap the wraparound interval for the Y coordinate (power of 2) or
+     * 0 for don't care
+     * @param zWrap the wraparound interval for the Z coordinate (power of 2) or
+     * 0 for don't care
+     * @return a sample value
+     */
+    native public static float perlinNoise3(
+            float x, float y, float z, int xWrap, int yWrap, int zWrap);
+
+    /**
      * Dump profiler data.
      *
      * @param message (not null)

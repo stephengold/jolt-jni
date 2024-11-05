@@ -31,6 +31,7 @@ SOFTWARE.
 #include "Jolt/Geometry/RayAABox.h"
 #include "Jolt/Physics/DeterminismLog.h"
 #include "Jolt/RegisterTypes.h"
+#include "TestFramework/Math/Perlin.h"
 
 #include "auto/com_github_stephengold_joltjni_Jolt.h"
 #include "glue/glue.h"
@@ -205,6 +206,17 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_isDoublePrec
 #else
     return JNI_FALSE;
 #endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    perlinNoise3
+ * Signature: (FFFIII)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_perlinNoise3
+  (JNIEnv *, jclass, jfloat x, jfloat y, jfloat z, jint xWrap, jint yWrap, jint zWrap) {
+    const float result = PerlinNoise3(x, y, z, xWrap, yWrap, zWrap);
+    return result;
 }
 
 /*
