@@ -47,7 +47,7 @@ public class BoxShape extends ConvexShape {
      * Instantiate a shape with the specified half extents.
      *
      * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &ge;0, unaffected)
+     * all components &ge;0.05, unaffected)
      */
     public BoxShape(Vec3Arg halfExtents) {
         this(halfExtents, PhysicsSettings.cDefaultConvexRadius);
@@ -57,13 +57,16 @@ public class BoxShape extends ConvexShape {
      * Instantiate a shape with the specified half extents and convex radius.
      *
      * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &ge;0, unaffected)
+     * all components &ge;convexRadius, unaffected)
      * @param convexRadius the desired convex radius (default=0.05)
      */
     public BoxShape(Vec3Arg halfExtents, float convexRadius) {
         float xHalfExtent = halfExtents.getX();
         float yHalfExtent = halfExtents.getY();
         float zHalfExtent = halfExtents.getZ();
+        assert xHalfExtent >= convexRadius : xHalfExtent;
+        assert yHalfExtent >= convexRadius : yHalfExtent;
+        assert zHalfExtent >= convexRadius : zHalfExtent;
         long shapeVa = createBoxShape(
                 xHalfExtent, yHalfExtent, zHalfExtent, convexRadius);
         setVirtualAddress(shapeVa, null); // not the owner due to ref counting
