@@ -35,16 +35,6 @@ abstract public class WheelSettings
         extends SerializableObject
         implements ConstWheelSettings, RefTarget {
     // *************************************************************************
-    // constructors
-
-    /**
-     * Instantiate settings with no native object assigned.
-     *
-     * @param dummy unused argument to distinguish from the zero-arg constructor
-     */
-    WheelSettings(boolean dummy) {
-    }
-    // *************************************************************************
     // new methods exposed
 
     /**
