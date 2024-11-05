@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.CollideShapeResult;
+import com.github.stephengold.joltjni.ContactListener;
 import com.github.stephengold.joltjni.ContactManifold;
 import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.CustomBodyActivationListener;
@@ -240,9 +241,14 @@ public class Test001 {
         PhysicsSystem physicsSystem = new PhysicsSystem();
         physicsSystem.init(maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
                 mapObj2Bp, objVsBpFilter, objVsObjFilter);
-        physicsSystem.setContactListener(new TestContactListener());
-        BodyActivationListener listener = new TestBodyActivationListener();
-        physicsSystem.setBodyActivationListener(listener);
+
+        ContactListener contactListener = new TestContactListener();
+        physicsSystem.setContactListener(contactListener);
+
+        BodyActivationListener bodyActivationListener
+                = new TestBodyActivationListener();
+        physicsSystem.setBodyActivationListener(bodyActivationListener);
+
         BodyInterface bodyInterface = physicsSystem.getBodyInterface();
 
         BoxShapeSettings floorShapeSettings
