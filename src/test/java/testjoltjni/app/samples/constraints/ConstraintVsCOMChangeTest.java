@@ -34,7 +34,7 @@ import testjoltjni.app.samples.*;
 public class ConstraintVsCOMChangeTest extends Test{
 ShapeRefC mBox=new ShapeRefC();
 List<Body> mBodies=new ArrayList<>();
-List<ConstraintRef> mConstraints=new ArrayList<>();
+List<TwoBodyConstraintRef> mConstraints=new ArrayList<>();
 static final float cBoxSize = 2.0f;
 float mTime = 0.0f;
 int mNumShapes = -1;
@@ -82,10 +82,10 @@ public void Initialize()
 			settings.setNormalAxis1 ( settings.setNormalAxis2 ( Vec3.sAxisX()));
 			settings.setLimitsMin ( cMinAngle);
 			settings.setLimitsMax ( cMaxAngle);
-			Constraint constraint = settings.create(mBodies.get(i), segment);
+			TwoBodyConstraint constraint = settings.create(mBodies.get(mBodies.size()-1), segment);
 			mPhysicsSystem.addConstraint(constraint);
 
-			mConstraints.add((ConstraintRef)constraint.toRef());
+			mConstraints.add(constraint.toRef());
 		}
 
 		mBodies.add(segment);
@@ -145,7 +145,7 @@ void UpdateShapes()
 
 			// Notify the constraints that the shape has changed (this could be done more efficient as we know which constraints are affected)
 			Vec3 delta_com = Op.subtract(s.getCenterOfMass() , prev_com);
-			for (ConstraintRef c : mConstraints)
+			for (TwoBodyConstraintRef c : mConstraints)
 				c.getPtr().notifyShapeChanged(b.getId(), delta_com);
 		}
 	}
