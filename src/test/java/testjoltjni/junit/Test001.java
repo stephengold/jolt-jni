@@ -68,6 +68,138 @@ import testjoltjni.TestUtils;
  */
 public class Test001 {
     // *************************************************************************
+    // inner classes
+
+    /**
+     * An example of a custom activation listener.
+     */
+    final private static class TestBodyActivationListener
+            extends CustomBodyActivationListener {
+
+        /**
+         * Callback invoked (by native code) each time a body is activated.
+         *
+         * @param idVa the virtual address of the body's ID (not zero)
+         * @param bodyUserData the body's user data
+         */
+        @Override
+        public void onBodyActivated(long idVa, long bodyUserData) {
+            System.out.println("A body got activated");
+        }
+
+        /**
+         * Callback invoked (by native code) each time a body is deactivated.
+         *
+         * @param idVa the virtual address of the body's ID (not zero)
+         * @param bodyUserData the body's user data
+         */
+        @Override
+        public void onBodyDeactivated(long idVa, long bodyUserData) {
+            System.out.println("A body went to sleep");
+        }
+    }
+
+    /**
+     * An example of a custom contact listener.
+     */
+    final private static class TestContactListener
+            extends CustomContactListener {
+
+        /**
+         * Callback invoked (by native code) each time a new contact point is
+         * detected.
+         *
+         * @param body1Va the virtual address of the first body in contact (not
+         * zero)
+         * @param body2Va the virtual address of the 2nd body in contact (not
+         * zero)
+         * @param manifoldVa the virtual address of the contact manifold (not
+         * zero)
+         * @param settingsVa the virtual address of the contact settings (not
+         * zero)
+         */
+        @Override
+        public void onContactAdded(
+                long body1Va, long body2Va, long manifoldVa, long settingsVa) {
+            ConstBody body1 = new Body(body1Va);
+            ConstBody body2 = new Body(body2Va);
+            Assert.assertNotEquals(body1, body2);
+            ConstContactManifold manifold = new ContactManifold(manifoldVa);
+            float depth = manifold.getPenetrationDepth();
+            ContactSettings settings = new ContactSettings(settingsVa);
+            System.out.println("A contact was added, combinedFriction = "
+                    + settings.getCombinedFriction() + " depth = " + depth);
+            TestUtils.testClose(body1, body2, manifold, settings);
+        }
+
+        /**
+         * Callback invoked (by native code) each time a contact is detected
+         * that was also detected during the previous update.
+         *
+         * @param body1Va the virtual address of the first body in contact (not
+         * zero)
+         * @param body2Va the virtual address of the 2nd body in contact (not
+         * zero)
+         * @param manifoldVa the virtual address of the contact manifold (not
+         * zero)
+         * @param settingsVa the virtual address of the contact settings (not
+         * zero)
+         */
+        @Override
+        public void onContactPersisted(
+                long body1Va, long body2Va, long manifoldVa, long settingsVa) {
+            System.out.println("A contact was persisted");
+        }
+
+        /**
+         * Callback invoked (by native code) each time a contact that was
+         * detected during the previous update is no longer detected.
+         *
+         * @param pairVa the virtual address of the {@code SubShapeIdPair} (not
+         * zero)
+         */
+        @Override
+        public void onContactRemoved(long pairVa) {
+            ConstSubShapeIdPair pair = new SubShapeIdPair(pairVa);
+            ConstBodyId bodyId1 = pair.getBody1Id();
+            ConstBodyId bodyId2 = pair.getBody2Id();
+            Assert.assertNotEquals(bodyId1, bodyId2);
+            TestUtils.testClose(pair, bodyId1, bodyId2);
+
+            System.out.println("A contact was removed");
+        }
+
+        /**
+         * Callback invoked (by native code) after detecting collision between a
+         * pair of bodies, but before invoking {@code onContactAdded()} and
+         * before adding the contact constraint.
+         *
+         * @param body1Va the virtual address of the first body in contact (not
+         * zero)
+         * @param body2Va the virtual address of the 2nd body in contact (not
+         * zero)
+         * @param offsetX the X component of the base offset
+         * @param offsetY the Y component of the base offset
+         * @param offsetZ the Z component of the base offset
+         * @param collisionResultVa the virtual address of the
+         * {@code CollideShapeResult} (not zero)
+         * @return how to the contact should be processed (an ordinal of
+         * {@code ValidateResult})
+         */
+        @Override
+        public int onContactValidate(long body1Va, long body2Va, double offsetX,
+                double offsetY, double offsetZ, long collisionResultVa) {
+            CollideShapeResult result
+                    = new CollideShapeResult(collisionResultVa);
+            System.out.println("Contact validate callback, depth = "
+                    + result.getPenetrationDepth());
+            TestUtils.testClose(result);
+
+            return ValidateResult.AcceptAllContactsForThisBodyPair
+                    .ordinal();
+        }
+    }
+    // *************************************************************************
     // new methods exposed
 
     /**
@@ -108,61 +240,8 @@ public class Test001 {
         PhysicsSystem physicsSystem = new PhysicsSystem();
         physicsSystem.init(maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
                 mapObj2Bp, objVsBpFilter, objVsObjFilter);
-        physicsSystem.setContactListener(new CustomContactListener() {
-            @Override
-            public void onContactAdded(long body1Va, long body2Va,
-                    long manifoldVa, long settingsVa) {
-                ConstBody body1 = new Body(body1Va);
-                ConstBody body2 = new Body(body2Va);
-                Assert.assertNotEquals(body1, body2);
-                ConstContactManifold manifold = new ContactManifold(manifoldVa);
-                float depth = manifold.getPenetrationDepth();
-                ContactSettings settings = new ContactSettings(settingsVa);
-                System.out.println("A contact was added, combinedFriction = "
-                        + settings.getCombinedFriction() + " depth = " + depth);
-                TestUtils.testClose(body1, body2, manifold, settings);
-            }
-
-            @Override
-            public void onContactPersisted(long body1Va, long body2Va,
-                    long manifoldVa, long settingsVa) {
-                System.out.println("A contact was persisted");
-            }
-
-            @Override
-            public void onContactRemoved(long pairVa) {
-                ConstSubShapeIdPair pair = new SubShapeIdPair(pairVa);
-                ConstBodyId bodyId1 = pair.getBody1Id();
-                ConstBodyId bodyId2 = pair.getBody2Id();
-                Assert.assertNotEquals(bodyId1, bodyId2);
-                TestUtils.testClose(pair, bodyId1, bodyId2);
-
-                System.out.println("A contact was removed");
-            }
-
-            @Override
-            public int onContactValidate(long body1Va, long body2Va,
-                    double x, double y, double z, long resultVa) {
-                CollideShapeResult result = new CollideShapeResult(resultVa);
-                System.out.println("Contact validate callback, depth = "
-                        + result.getPenetrationDepth());
-                TestUtils.testClose(result);
-
-                return ValidateResult.AcceptAllContactsForThisBodyPair
-                        .ordinal();
-            }
-        });
-        BodyActivationListener listener = new CustomBodyActivationListener() {
-            @Override
-            public void onBodyActivated(long idVa, long inBodyUserData) {
-                System.out.println("A body got activated");
-            }
-
-            @Override
-            public void onBodyDeactivated(long idVa, long inBodyUserData) {
-                System.out.println("A body went to sleep");
-            }
-        };
+        physicsSystem.setContactListener(new TestContactListener());
+        BodyActivationListener listener = new TestBodyActivationListener();
         physicsSystem.setBodyActivationListener(listener);
         BodyInterface bodyInterface = physicsSystem.getBodyInterface();
 
