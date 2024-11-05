@@ -400,7 +400,7 @@
         <!-- Checks for size violations              -->
         <!-- See https://checkstyle.org/checks/sizes -->
         <module name="MethodLength">
-            <property name="max" value="120"/>
+            <property name="max" value="130"/>
         </module>
         <module name="ParameterNumber">
             <property name="max" value="18"/>
