@@ -25,7 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Character/CharacterVirtual.h"
-#include "auto/com_github_stephengold_joltjni_Body.h"
+#include "auto/com_github_stephengold_joltjni_CharacterVsCharacterCollisionSimple.h"
 #include "glue/glue.h"
 
 using namespace JPH;

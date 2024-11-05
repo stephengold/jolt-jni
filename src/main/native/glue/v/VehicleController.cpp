@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Vehicle/VehicleController.h"
 #include "auto/com_github_stephengold_joltjni_VehicleController.h"
+#include "auto/com_github_stephengold_joltjni_VehicleControllerRef.h"
 #include "glue/glue.h"
 
 using namespace JPH;
