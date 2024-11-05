@@ -69,7 +69,7 @@ abstract public class Constraint extends NonCopyable
             return null;
         }
 
-        int ordinal = getType(constraintVa);
+        int ordinal = getSubType(constraintVa);
         EConstraintSubType subType = EConstraintSubType.values()[ordinal];
         Constraint result;
         switch (subType) {
