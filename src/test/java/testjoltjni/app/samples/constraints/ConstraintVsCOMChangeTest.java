@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/ConstraintVsCOMChangeTest.cpp
  */
-class ConstraintVsCOMChangeTest extends Test{
+public class ConstraintVsCOMChangeTest extends Test{
 ShapeRefC mBox=new ShapeRefC();
 List<Body> mBodies=new ArrayList<>();
 List<ConstraintRef> mConstraints=new ArrayList<>();

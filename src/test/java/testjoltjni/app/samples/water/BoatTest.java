@@ -32,7 +32,7 @@ import testjoltjni.app.testframework.CameraState;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Water/BoatTest.cpp
  */
-class BoatTest extends Test{
+public class BoatTest extends Test{
 float cMaxWaterHeight = 5.0f;
 float cMinWaterHeight = 3.0f;
 float cWaterWidth = 100.0f;

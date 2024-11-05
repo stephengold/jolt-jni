@@ -32,7 +32,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Vehicle/VehicleStressTest.cpp
  */
-class VehicleStressTest extends VehicleTest{
+public class VehicleStressTest extends VehicleTest{
     List<VehicleConstraintRef> mVehicles = new ArrayList<>();
     float mHandBrake, mForward, mRight;
 

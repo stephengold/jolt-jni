@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/GearConstraintTest.cpp
  */
-class GearConstraintTest extends Test{
+public class GearConstraintTest extends Test{
 
 void Initialize()
 {

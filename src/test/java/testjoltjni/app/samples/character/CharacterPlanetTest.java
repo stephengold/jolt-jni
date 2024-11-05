@@ -33,7 +33,7 @@ import testjoltjni.app.testframework.CameraState;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Character/CharacterPlanetTest.cpp
  */
-class CharacterPlanetTest extends Test{
+public class CharacterPlanetTest extends Test{
 final float cPlanetRadius = 20.0f;
 final float cCharacterHeightStanding = 1.35f;
 final float cCharacterRadiusStanding = 0.3f;

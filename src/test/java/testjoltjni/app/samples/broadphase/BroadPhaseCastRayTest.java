@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/BroadPhase/BroadPhaseCastRayTest.cpp
  */
-class BroadPhaseCastRayTest extends BroadPhaseTest{
+public class BroadPhaseCastRayTest extends BroadPhaseTest{
 
 void Initialize()
 {

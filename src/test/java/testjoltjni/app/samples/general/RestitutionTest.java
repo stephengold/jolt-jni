@@ -30,7 +30,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/RestitutionTest.cpp
  */
-class RestitutionTest extends Test{
+public class RestitutionTest extends Test{
 public void Initialize()
 {
 	// Floor

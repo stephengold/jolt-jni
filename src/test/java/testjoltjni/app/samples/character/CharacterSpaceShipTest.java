@@ -32,7 +32,7 @@ import testjoltjni.app.testframework.CameraState;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Character/CharacterSpaceShipTest.cpp
  */
-class CharacterSpaceShipTest extends Test{
+public class CharacterSpaceShipTest extends Test{
 static final float cCharacterHeightStanding = 1.35f;
 static final float cCharacterRadiusStanding = 0.3f;
 static final float cJumpSpeed = 4.0f;

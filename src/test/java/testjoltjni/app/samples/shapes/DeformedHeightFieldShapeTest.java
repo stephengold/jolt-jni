@@ -33,7 +33,7 @@ import testjoltjni.app.testframework.Perlin;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Shapes/DeformedHeightFieldShapeTest.cpp
  */
-class DeformedHeightFieldShapeTest extends Test{
+public class DeformedHeightFieldShapeTest extends Test{
 BodyId mHeightFieldID=new BodyId();
 float mTime;
 float[]mHeightSamples;

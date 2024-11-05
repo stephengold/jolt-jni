@@ -32,7 +32,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/EnhancedInternalEdgeRemovalTest.cpp
  */
-class EnhancedInternalEdgeRemovalTest extends Test{
+public class EnhancedInternalEdgeRemovalTest extends Test{
 BodyId mLevelBall;
 
 void CreateSlidingObjects(RVec3Arg inStart)

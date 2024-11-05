@@ -32,7 +32,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/ActivateDuringUpdateTest.cpp
  */
-class ActiveEdgesTest extends Test{
+public class ActiveEdgesTest extends Test{
 
 public void Initialize()
 {

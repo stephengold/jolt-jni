@@ -27,7 +27,7 @@ import java.util.List;
 import testjoltjni.TestUtils;
 import testjoltjni.app.samples.*;
 
-class BroadPhaseInsertionTest extends BroadPhaseTest{
+public class BroadPhaseInsertionTest extends BroadPhaseTest{
 DefaultRandomEngine mRandomGenerator = new DefaultRandomEngine();
 int mCurrentBody = 0;
 int mDirection = 1;

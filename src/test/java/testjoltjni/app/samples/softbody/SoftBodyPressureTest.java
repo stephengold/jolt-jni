@@ -29,7 +29,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/SoftBody/SoftBodyPressureTest.cpp
  */
-class SoftBodyPressureTest extends Test{
+public class SoftBodyPressureTest extends Test{
 
 public void Initialize()
 {

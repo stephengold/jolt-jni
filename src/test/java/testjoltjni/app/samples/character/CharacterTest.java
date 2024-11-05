@@ -33,7 +33,7 @@ import testjoltjni.app.samples.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Character/CharacterTest.cpp
  */
 
-class CharacterTest extends CharacterBaseTest{
+public class CharacterTest extends CharacterBaseTest{
 static final float cCollisionTolerance = 0.05f;
 CharacterRef mCharacter;
 RVec3 GetCharacterPosition(){return mCharacter.getPosition();}

@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/ConstraintSingularityTest.cpp
  */
-class ConstraintSingularityTest extends Test{
+public class ConstraintSingularityTest extends Test{
 
 public void Initialize()
 {

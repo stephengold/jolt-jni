@@ -32,7 +32,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Character/CharacterVirtualTest.cpp
  */
-class CharacterVirtualTest extends CharacterBaseTest{
+public class CharacterVirtualTest extends CharacterBaseTest{
 static boolean sEnableCharacterInertia = true;
 static EBackFaceMode sBackFaceMode = EBackFaceMode.CollideWithBackFaces;
 static float sUpRotationX = 0;

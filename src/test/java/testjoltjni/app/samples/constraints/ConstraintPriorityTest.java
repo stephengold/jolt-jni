@@ -32,7 +32,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/ConstraintPriorityTest.cpp
  */
-class ConstraintPriorityTest extends Test{
+public class ConstraintPriorityTest extends Test{
 List<TwoBodyConstraintRef> mConstraints=new ArrayList<>();
 
 public void Initialize()

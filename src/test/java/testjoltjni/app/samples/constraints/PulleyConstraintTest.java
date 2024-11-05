@@ -30,7 +30,7 @@ import testjoltjni.app.samples.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/PulleyConstraintTest.cpp
  */
-class PulleyConstraintTest extends Test{
+public class PulleyConstraintTest extends Test{
 
 public void Initialize()
 {
