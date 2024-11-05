@@ -40,9 +40,9 @@ public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
     /**
      * Instantiate a triangle with no native object assigned.
      *
-     * @param unused to distinguish from the no-arg constructor
+     * @param dummy unused argument to distinguish from the zero-arg constructor
      */
-    IndexedTriangleNoMaterial(boolean unused) {
+    IndexedTriangleNoMaterial(boolean dummy) {
     }
 
     /**

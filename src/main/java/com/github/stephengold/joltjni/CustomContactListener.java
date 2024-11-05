@@ -44,27 +44,27 @@ abstract public class CustomContactListener extends ContactListener {
      * Callback invoked (by native code) each time a new contact point is
      * detected.
      *
-     * @param body1va the virtual address of the first body in contact (not
+     * @param body1Va the virtual address of the first body in contact (not
      * zero)
-     * @param body2va the virtual address of the 2nd body in contact (not zero)
+     * @param body2Va the virtual address of the 2nd body in contact (not zero)
      * @param manifoldVa the virtual address of the contact manifold (not zero)
      * @param settingsVa the virtual address of the contact settings (not zero)
      */
     abstract public void onContactAdded(
-            long body1va, long body2va, long manifoldVa, long settingsVa);
+            long body1Va, long body2Va, long manifoldVa, long settingsVa);
 
     /**
      * Callback invoked (by native code) each time a contact is detected that
      * was also detected during the previous update.
      *
-     * @param body1va the virtual address of the first body in contact (not
+     * @param body1Va the virtual address of the first body in contact (not
      * zero)
-     * @param body2va the virtual address of the 2nd body in contact (not zero)
+     * @param body2Va the virtual address of the 2nd body in contact (not zero)
      * @param manifoldVa the virtual address of the contact manifold (not zero)
      * @param settingsVa the virtual address of the contact settings (not zero)
      */
-    abstract public void onContactPersisted(long body1va, long body2va,
-            long manifoldVa, long settingsVa);
+    abstract public void onContactPersisted(
+            long body1Va, long body2Va, long manifoldVa, long settingsVa);
 
     /**
      * Callback invoked (by native code) each time a contact that was detected
@@ -80,20 +80,20 @@ abstract public class CustomContactListener extends ContactListener {
      * pair of bodies, but before invoking {@code onContactAdded()} and before
      * adding the contact constraint.
      *
-     * @param body1va the virtual address of the first body in contact (not
+     * @param body1Va the virtual address of the first body in contact (not
      * zero)
-     * @param body2va the virtual address of the 2nd body in contact (not zero)
+     * @param body2Va the virtual address of the 2nd body in contact (not zero)
      * @param baseOffsetX the X component of the base offset
      * @param baseOffsetY the Y component of the base offset
      * @param baseOffsetZ the Z component of the base offset
-     * @param shapeVa the virtual address of the {@code CollideShapeResult} (not
-     * zero)
+     * @param collisionResultVa the virtual address of the
+     * {@code CollideShapeResult} (not zero)
      * @return how to the contact should be processed (an ordinal of
      * {@code ValidateResult})
      */
     abstract public int onContactValidate(
-            long body1va, long body2va, double baseOffsetX, double baseOffsetY,
-            double baseOffsetZ, long shapeVa);
+            long body1Va, long body2Va, double baseOffsetX, double baseOffsetY,
+            double baseOffsetZ, long collisionResultVa);
     // *************************************************************************
     // native private methods
 
