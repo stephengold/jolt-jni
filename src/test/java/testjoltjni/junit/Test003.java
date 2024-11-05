@@ -25,7 +25,9 @@ import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.ContactSettings;
+import com.github.stephengold.joltjni.GroupFilterTable;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemSingleThreaded;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
@@ -76,6 +78,7 @@ public class Test003 {
 
         doAaBox();
         doBodyCreationSettings();
+        doCollisionGroup();
         doContactSettings();
         doJobSystemSingleThreaded();
         doJobSystemThreadPool();
@@ -188,6 +191,19 @@ public class Test003 {
             TestUtils.testClose(bcs, shape);
         }
 
+        System.gc();
+    }
+
+    /**
+     * Test the {@code CollisionGroup} class.
+     */
+    private static void doCollisionGroup() {
+        CollisionGroup group = new CollisionGroup();
+
+        testCollisionGroupDefaults(group);
+        testCollisionGroupSetters(group);
+
+        TestUtils.testClose(group);
         System.gc();
     }
 
@@ -390,6 +406,34 @@ public class Test003 {
         TestUtils.assertEquals(0.12f, 0.13f, 0.14f, bcs.getPosition(), 0f);
         Assert.assertEquals(0.15f, bcs.getRestitution(), 0f);
         TestUtils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code CollisionGroup}.
+     *
+     * @param group the group to test (not null, unaffected)
+     */
+    private static void testCollisionGroupDefaults(CollisionGroup group) {
+        Assert.assertNull(group.getGroupFilter());
+        Assert.assertEquals(CollisionGroup.cInvalidGroup, group.getGroupId());
+        Assert.assertEquals(
+                CollisionGroup.cInvalidGroup, group.getSubGroupId());
+    }
+
+    /**
+     * Test the setters of the specified {@code CollisionGroup}.
+     *
+     * @param group the group to test (not null)
+     */
+    private static void testCollisionGroupSetters(CollisionGroup group) {
+        GroupFilterTable filter = new GroupFilterTable();
+        group.setGroupFilter(filter);
+        group.setGroupId(101);
+        group.setSubGroupId(102);
+
+        Assert.assertEquals(filter.va(), group.getGroupFilter().va());
+        Assert.assertEquals(101, group.getGroupId());
+        Assert.assertEquals(102, group.getSubGroupId());
     }
 
     /**
