@@ -36,7 +36,7 @@ public class WheelSettingsTv extends WheelSettings {
     public WheelSettingsTv() {
         super(true);
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddress(settingsVa, false); // not owner due to ref counting
     }
 
     /**

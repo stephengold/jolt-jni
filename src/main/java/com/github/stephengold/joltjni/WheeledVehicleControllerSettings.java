@@ -36,7 +36,7 @@ public class WheeledVehicleControllerSettings
      */
     public WheeledVehicleControllerSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddress(settingsVa, false); // not owner due to ref counting
     }
 
     /**

@@ -42,7 +42,7 @@ public class SoftBodySharedSettings
      */
     public SoftBodySharedSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, () -> free(settingsVa));
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
     }
 
     /**

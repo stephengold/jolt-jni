@@ -37,7 +37,7 @@ public class MotorcycleControllerSettings
     public MotorcycleControllerSettings() {
         super(false);
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddress(settingsVa, false); // not owner due to ref counting
     }
     // *************************************************************************
     // native private methods
