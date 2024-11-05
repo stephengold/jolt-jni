@@ -136,7 +136,7 @@ final public class Vec3 implements Vec3Arg {
     public static Vec3 add(Vec3Arg... vArray) {
         Vec3 result = new Vec3();
         for (Vec3Arg arg : vArray) {
-            Op.add(result, arg);
+            Op.plusEquals(result, arg);
         }
 
         return result;
