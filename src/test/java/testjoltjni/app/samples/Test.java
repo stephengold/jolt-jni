@@ -36,7 +36,9 @@ protected PhysicsSystem mPhysicsSystem = null;
 protected BodyInterface mBodyInterface = null;
 protected DebugRenderer mDebugRenderer = null;
 protected TempAllocator mTempAllocator = null;
+protected JobSystem mJobSystem;
 float GetWorldScale() { return 1.0f; }
+void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
 
 public Body CreateFloor() {return CreateFloor(200.0f);}
 public Body CreateFloor(float inSize)
