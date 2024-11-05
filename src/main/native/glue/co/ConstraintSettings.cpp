@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Constraints/Constraint.h"
+
 #include "auto/com_github_stephengold_joltjni_ConstraintSettings.h"
 #include "auto/com_github_stephengold_joltjni_ConstraintSettingsRef.h"
 #include "glue/glue.h"

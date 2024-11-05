@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/PhysicsScene.h"
+
 #include "auto/com_github_stephengold_joltjni_PhysicsScene.h"
 #include "auto/com_github_stephengold_joltjni_PhysicsSceneRef.h"
 #include "glue/glue.h"

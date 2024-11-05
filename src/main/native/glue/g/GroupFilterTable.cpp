@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/GroupFilterTable.h"
+
 #include "auto/com_github_stephengold_joltjni_GroupFilterTable.h"
 #include "auto/com_github_stephengold_joltjni_GroupFilterTableRef.h"
 #include "glue/glue.h"

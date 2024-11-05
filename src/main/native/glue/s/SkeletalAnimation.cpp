@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Skeleton/SkeletalAnimation.h"
+
 #include "auto/com_github_stephengold_joltjni_SkeletalAnimation.h"
 #include "auto/com_github_stephengold_joltjni_SkeletalAnimationRef.h"
 #include "glue/glue.h"

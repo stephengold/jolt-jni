@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Ragdoll/Ragdoll.h"
+
 #include "auto/com_github_stephengold_joltjni_Ragdoll.h"
 #include "auto/com_github_stephengold_joltjni_RagdollRef.h"
 #include "glue/glue.h"

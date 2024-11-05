@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/GroupFilter.h"
+
 #include "auto/com_github_stephengold_joltjni_GroupFilter.h"
 #include "auto/com_github_stephengold_joltjni_GroupFilterRef.h"
 #include "glue/glue.h"
