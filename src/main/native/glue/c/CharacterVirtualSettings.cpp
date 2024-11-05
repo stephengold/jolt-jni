@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Character/CharacterVirtual.h"
+
 #include "auto/com_github_stephengold_joltjni_CharacterVirtualSettings.h"
 #include "auto/com_github_stephengold_joltjni_CharacterVirtualSettingsRef.h"
 #include "glue/glue.h"

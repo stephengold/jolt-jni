@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Character/Character.h"
+
 #include "auto/com_github_stephengold_joltjni_Character.h"
 #include "auto/com_github_stephengold_joltjni_CharacterRef.h"
 #include "glue/glue.h"

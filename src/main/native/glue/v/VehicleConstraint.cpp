@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/PhysicsStepListener.h"
 #include "Jolt/Physics/Vehicle/VehicleConstraint.h"
+
 #include "auto/com_github_stephengold_joltjni_VehicleConstraint.h"
 #include "auto/com_github_stephengold_joltjni_VehicleConstraintRef.h"
 #include "glue/glue.h"

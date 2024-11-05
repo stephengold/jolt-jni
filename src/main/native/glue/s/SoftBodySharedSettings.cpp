@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/SoftBody/SoftBodySharedSettings.h"
+
 #include "auto/com_github_stephengold_joltjni_SoftBodySharedSettings.h"
 #include "auto/com_github_stephengold_joltjni_SoftBodySharedSettingsRef.h"
 #include "glue/glue.h"

@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Constraints/TwoBodyConstraint.h"
+
 #include "auto/com_github_stephengold_joltjni_TwoBodyConstraint.h"
 #include "auto/com_github_stephengold_joltjni_TwoBodyConstraintRef.h"
 #include "glue/glue.h"
