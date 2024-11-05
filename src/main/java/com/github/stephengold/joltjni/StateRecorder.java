@@ -143,7 +143,8 @@ public class StateRecorder extends NonCopyable {
     /**
      * Alter whether the recorder is validating.
      *
-     * @param setting true to begin validating, false to stop validating
+     * @param setting {@code true} to begin validating, {@code false} to stop
+     * validating
      */
     public void setValidating(boolean setting) {
         long recorderVa = va();

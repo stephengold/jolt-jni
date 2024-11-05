@@ -305,8 +305,8 @@ final public class Jolt {
     /**
      * Enable or disable allocation tracing in Debug native libraries.
      *
-     * @param setting true to enable tracing, false to disable it
-     * (default=false)
+     * @param setting {@code true} to enable tracing, {@code false} to disable
+     * it (default=false)
      */
     native public static void setTraceAllocations(boolean setting);
 

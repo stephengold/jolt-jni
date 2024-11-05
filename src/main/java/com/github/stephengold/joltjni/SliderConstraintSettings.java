@@ -254,8 +254,8 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      * of the bodies when the constraint is created. (native attribute:
      * mAutoDetectPoint)
      *
-     * @param setting true to use body positions, false for explicit
-     * configuration (default=false)
+     * @param setting {@code true} to use body positions, {@code false} for
+     * explicit configuration (default=false)
      */
     public void setAutoDetectPoint(boolean setting) {
         long settingsVa = va();

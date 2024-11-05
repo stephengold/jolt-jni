@@ -56,8 +56,8 @@ public interface ConstCharacter extends ConstCharacterBase {
      * Return the location of the rigid body's center of mass. The character is
      * unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new location vector (in system coordinates)
      */
     RVec3 getCenterOfMassPosition(boolean lockBodies);
@@ -73,8 +73,8 @@ public interface ConstCharacter extends ConstCharacterBase {
     /**
      * Return the character's object layer. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a layer index (&ge;0)
      */
     int getLayer(boolean lockBodies);
@@ -90,8 +90,8 @@ public interface ConstCharacter extends ConstCharacterBase {
     /**
      * Copy the linear velocity of the character. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new velocity vector (meters per second in system coordinates)
      */
     Vec3 getLinearVelocity(boolean lockBodies);
@@ -107,8 +107,8 @@ public interface ConstCharacter extends ConstCharacterBase {
     /**
      * Copy the location of the character. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new location vector (in system coordinates)
      */
     RVec3 getPosition(boolean lockBodies);
@@ -131,8 +131,8 @@ public interface ConstCharacter extends ConstCharacterBase {
      * null, unaffected)
      * @param storeOrientation the desired orientation (in system coordinates,
      * not null, unaffected)
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     void getPositionAndRotation(
             RVec3 storeLocation, Quat storeOrientation, boolean lockBodies);
@@ -148,8 +148,8 @@ public interface ConstCharacter extends ConstCharacterBase {
     /**
      * Copy the orientation of the character. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new rotation quaternion (in system coordinates)
      */
     Quat getRotation(boolean lockBodies);
@@ -166,8 +166,8 @@ public interface ConstCharacter extends ConstCharacterBase {
      * Calculate the character's local-to-system coordinate transform. The
      * character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new transform matrix
      */
     RMat44 getWorldTransform(boolean lockBodies);

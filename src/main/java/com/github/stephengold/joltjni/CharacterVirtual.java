@@ -165,7 +165,8 @@ public class CharacterVirtual
     /**
      * Enable or disable enhanced internal edge removal.
      *
-     * @param enable true to enable, false to disable (default=?)
+     * @param enable {@code true} to enable, {@code false} to disable
+     * (default=false)
      */
     public void setEnhancedInternalEdgeRemoval(boolean enable) {
         long characterVa = va();
@@ -176,7 +177,7 @@ public class CharacterVirtual
      * Alter the maximum angle for merging during hit reduction.
      *
      * @param cosine the cosine of the desired maximum angle, or -1 to disable
-     * hit reduction (default=?)
+     * hit reduction (default=1)
      */
     public void setHitReductionCosMaxAngle(float cosine) {
         long characterVa = va();
@@ -199,7 +200,7 @@ public class CharacterVirtual
      * Alter the character's linear velocity.
      *
      * @param velocity the desired velocity vector (meters per second in system
-     * coordinates, default=?)
+     * coordinates, default=(0,0,0))
      */
     public void setLinearVelocity(Vec3Arg velocity) {
         long characterVa = va();
@@ -224,7 +225,7 @@ public class CharacterVirtual
     /**
      * Alter the character's mass.
      *
-     * @param mass the desired mass (in kilograms, default=?)
+     * @param mass the desired mass (in kilograms, default=70)
      */
     public void setMass(float mass) {
         long characterVa = va();
@@ -234,7 +235,7 @@ public class CharacterVirtual
     /**
      * Alter the maximum number of hits to be collected.
      *
-     * @param maxHits the desired limit (&ge;0, default=?)
+     * @param maxHits the desired limit (&ge;0, default=256)
      */
     public void setMaxNumHits(int maxHits) {
         long characterVa = va();
@@ -244,7 +245,7 @@ public class CharacterVirtual
     /**
      * Alter the maximum force applied to bodies.
      *
-     * @param force the desired force limit (in Newtons, default=?)
+     * @param force the desired force limit (in Newtons, default=100)
      */
     public void setMaxStrength(float force) {
         long characterVa = va();
@@ -255,7 +256,7 @@ public class CharacterVirtual
      * Alter how quickly penetration is resolved.
      *
      * @param fraction the desired resolution fraction (0&rarr;never resolved,
-     * 1&rarr;all in one update, default=?)
+     * 1&rarr;all in one update, default=1)
      */
     public void setPenetrationRecoverySpeed(float fraction) {
         long characterVa = va();
@@ -265,7 +266,8 @@ public class CharacterVirtual
     /**
      * Relocate the character.
      *
-     * @param location the desired location (in system coordinates, default=?)
+     * @param location the desired location (in system coordinates,
+     * default=(0,0,0))
      */
     public void setPosition(RVec3Arg location) {
         long characterVa = va();
@@ -279,7 +281,7 @@ public class CharacterVirtual
      * Re-orient the character.
      *
      * @param orientation the desired orientation (in system coordinates,
-     * default=?)
+     * default=(0,0,0,1))
      */
     public void setRotation(QuatArg orientation) {
         long characterVa = va();
@@ -327,7 +329,7 @@ public class CharacterVirtual
     /**
      * Alter the shape offset.
      *
-     * @param offset the desired offset (in local coordinates, default=?)
+     * @param offset the desired offset (in local coordinates, default=(0,0,0))
      */
     public void setShapeOffset(Vec3Arg offset) {
         long characterVa = va();

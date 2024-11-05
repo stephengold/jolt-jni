@@ -175,7 +175,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
     /**
      * Alter whether objects can go to sleep. (native attribute: mAllowSleeping)
      *
-     * @param allow true to allow sleeping, false to disallow it (default=true)
+     * @param allow {@code true} to allow sleeping, {@code false} to disallow it
+     * (default=true)
      */
     public void setAllowSleeping(boolean allow) {
         long settingsVa = va();
@@ -197,8 +198,8 @@ public class PhysicsSettings extends JoltPhysicsObject {
      * Alter whether physics simulation is deterministic. (native attribute:
      * mDeterministicSimulation)
      *
-     * @param setting true to be deterministic, false to relax this policy
-     * (default=true)
+     * @param setting {@code true} to be deterministic, {@code false} to relax
+     * this policy (default=true)
      */
     public void setDeterministicSimulation(boolean setting) {
         long settingsVa = va();

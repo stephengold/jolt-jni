@@ -90,8 +90,8 @@ public class Character
     /**
      * Wake up the character.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void activate(boolean lockBodies) {
         long characterVa = va();
@@ -114,8 +114,8 @@ public class Character
      *
      * @param impulse the impulse vector (kilogram.meters per second in system
      * coordinates, not null, unaffected)
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void addImpulse(Vec3Arg impulse, boolean lockBodies) {
         long characterVa = va();
@@ -140,8 +140,8 @@ public class Character
      *
      * @param deltaV the change in velocity (meters per second in system
      * coordinates, not null, unaffected)
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void addLinearVelocity(Vec3Arg deltaV, boolean lockBodies) {
         long characterVa = va();
@@ -175,8 +175,8 @@ public class Character
      *
      * @param activation whether to activate the character (not null,
      * default=Activate)
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void addToPhysicsSystem(EActivation activation, boolean lockBodies) {
         long characterVa = va();
@@ -199,8 +199,8 @@ public class Character
      *
      * @param maxSeparation the max distance between the floor and the character
      * for standing
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void postSimulation(float maxSeparation, boolean lockBodies) {
         long characterVa = va();
@@ -218,8 +218,8 @@ public class Character
     /**
      * Remove the character from its {@code PhysicsSystem}.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void removeFromPhysicsSystem(boolean lockBodies) {
         long characterVa = va();
@@ -239,8 +239,8 @@ public class Character
      * Alter the character's object layer.
      *
      * @param layer the index of the desired layer
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setLayer(int layer, boolean lockBodies) {
         long characterVa = va();
@@ -267,8 +267,8 @@ public class Character
      * system coordinates, not null, unaffected)
      * @param omega the desired angular velocity (radians per second in system
      * coordinates, not null, unaffected)
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setLinearAndAngularVelocity(Vec3Arg linearVelocity,
             Vec3Arg omega, boolean lockBodies) {
@@ -298,8 +298,8 @@ public class Character
      *
      * @param velocity the desired velocity (meters per second in system
      * coordinates, not null, unaffected)
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setLinearVelocity(Vec3Arg velocity, boolean lockBodies) {
         long characterVa = va();
@@ -339,8 +339,8 @@ public class Character
      * unaffected)
      * @param activation whether to activate the character (not null,
      * default=Activate)
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setPosition(
             RVec3Arg location, EActivation activation, boolean lockBodies) {
@@ -388,8 +388,8 @@ public class Character
      * null, unaffected)
      * @param activation whether to activate the character (not null,
      * default=Activate)
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setPositionAndRotation(RVec3Arg location, QuatArg orientation,
             EActivation activation, boolean lockBodies) {
@@ -435,8 +435,8 @@ public class Character
      * null, unaffected)
      * @param activation whether to activate the character (not null,
      * default=Activate)
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setRotation(QuatArg orientation, EActivation activation,
             boolean lockBodies) {
@@ -470,8 +470,8 @@ public class Character
      * @param shape the desired shape (not null, unaffected)
      * @param maxPenetrationDepth the maximum penetration to allow, or MAX_VALUE
      * to skip the penetration check
-     * @param lockBodies {@code true}&rarr;use the locking body interface,
-     * {@code false}&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return {@code true} if the replacement succeeded, otherwise
      * {@code false}
      */
@@ -534,8 +534,8 @@ public class Character
      * Return the location of the rigid body's center of mass. The character is
      * unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new location vector (in system coordinates)
      */
     @Override
@@ -564,8 +564,8 @@ public class Character
     /**
      * Return the character's object layer. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a layer index (&ge;0)
      */
     @Override
@@ -591,8 +591,8 @@ public class Character
     /**
      * Copy the linear velocity of the character. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new velocity vector (meters per second in system coordinates)
      */
     @Override
@@ -620,8 +620,8 @@ public class Character
     /**
      * Copy the location of the character. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new location vector (in system coordinates)
      */
     @Override
@@ -657,8 +657,8 @@ public class Character
      * null, unaffected)
      * @param storeOrientation the desired orientation (in system coordinates,
      * not null, unaffected)
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     @Override
     public void getPositionAndRotation(
@@ -688,8 +688,8 @@ public class Character
     /**
      * Copy the orientation of the character. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new rotation quaternion (in system coordinates)
      */
     @Override
@@ -719,8 +719,8 @@ public class Character
      * Calculate the character's local-to-system coordinate transform. The
      * character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new transform matrix
      */
     @Override

@@ -140,7 +140,8 @@ abstract public class ConstraintSettings
     /**
      * Initially enable or disable the constraint. (native attribute: mEnabled)
      *
-     * @param setting true to enable or false to disable (default=true)
+     * @param setting {@code true} to enable or {@code false} to disable
+     * (default=true)
      */
     public void setEnabled(boolean setting) {
         long settingsVa = va();

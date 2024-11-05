@@ -74,7 +74,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
      * Test whether to calculate penetration for the starting point. The
      * settings are unaffected. (native attribute: mReturnDeepestPoint)
      *
-     * @return {@code true} to enable, false to disable
+     * @return {@code true} to enable, {@code false} to disable
      */
     public boolean getReturnDeepestPoint() {
         long settingsVa = va();
@@ -125,8 +125,8 @@ public class ShapeCastSettings extends CollideSettingsBase {
      * Alter whether to calculate penetration for the starting point. (native
      * attribute: mReturnDeepestPoint)
      *
-     * @param enable true to enable the feature, false to disable it
-     * (default=false)
+     * @param enable {@code true} to enable the feature, {@code false} to
+     * disable it (default=false)
      */
     public void setReturnDeepestPoint(boolean enable) {
         long settingsVa = va();
@@ -137,8 +137,8 @@ public class ShapeCastSettings extends CollideSettingsBase {
      * Alter whether the shape should be shrunk and then expanded by the convex
      * radius. (native attribute: mUseShrunkenShapeAndConvexRadius)
      *
-     * @param enable true to enable the feature, false to disable it
-     * (default=false)
+     * @param enable {@code true} to enable the feature, {@code false} to
+     * disable it (default=false)
      */
     public void setUseShrunkenShapeAndConvexRadius(boolean enable) {
         long settingsVa = va();

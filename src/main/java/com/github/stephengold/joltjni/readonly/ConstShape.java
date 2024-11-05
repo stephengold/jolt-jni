@@ -65,8 +65,10 @@ public interface ConstShape extends ConstJoltPhysicsObject {
      * @param scale the desired scaling (not null, unaffected)
      * @param color the desired color if {@code useMaterialColors} is false (not
      * null, unaffected)
-     * @param useMaterialColors true to use the color in the shape's material
-     * @param wireframe true to draw a wire frame, false for solid triangles
+     * @param useMaterialColors {@code true} to use the color in the shape's
+     * material
+     * @param wireframe {@code true} to draw a wire frame, {@code false} for
+     * solid triangles
      */
     void draw(DebugRenderer renderer, RMat44Arg comTransform, Vec3Arg scale,
             ConstColor color, boolean useMaterialColors, boolean wireframe);

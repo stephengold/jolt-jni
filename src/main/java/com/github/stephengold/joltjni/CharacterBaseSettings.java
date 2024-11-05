@@ -60,7 +60,7 @@ public class CharacterBaseSettings
      * Alter whether to make an extra effort to remove contacts with internal
      * edges. (native attribute: mEnhancedInternalEdgeRemoval)
      *
-     * @param remove true to remove ghost contacts (default=false)
+     * @param remove {@code true} to remove ghost contacts (default=false)
      */
     public void setEnhancedInternalEdgeRemoval(boolean remove) {
         long settingsVa = va();

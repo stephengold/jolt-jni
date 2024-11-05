@@ -94,8 +94,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Return the location of the rigid body's center of mass. The character is
      * unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new location vector (in system coordinates)
      */
     @Override
@@ -280,8 +280,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     /**
      * Return the character's object layer. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a layer index (&ge;0)
      */
     @Override
@@ -309,8 +309,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     /**
      * Copy the linear velocity of the character. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new velocity vector (meters per second in system coordinates)
      */
     @Override
@@ -340,8 +340,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     /**
      * Copy the location of the character. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new location vector (in system coordinates)
      */
     @Override
@@ -379,8 +379,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * null, unaffected)
      * @param storeOrientation the desired orientation (in system coordinates,
      * not null, unaffected)
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     @Override
     public void getPositionAndRotation(
@@ -411,8 +411,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     /**
      * Copy the orientation of the character. The character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new rotation quaternion (in system coordinates)
      */
     @Override
@@ -477,8 +477,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Calculate the character's local-to-system coordinate transform. The
      * character is unaffected.
      *
-     * @param lockBodies true&rarr;use the locking body interface,
-     * false&rarr;use the non-locking body interface (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      * @return a new transform matrix
      */
     @Override

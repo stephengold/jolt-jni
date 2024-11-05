@@ -175,7 +175,8 @@ public class BodyCreationSettings
      * Alter whether the created body will be allowed to fall asleep. (native
      * attribute: mAllowSleeping)
      *
-     * @param allow true to allow, false to inhibit (default=true)
+     * @param allow {@code true} to allow, {@code false} to inhibit
+     * (default=true)
      */
     public void setAllowSleeping(boolean allow) {
         long bodySettingsVa = va();

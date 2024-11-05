@@ -117,8 +117,10 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      * @param scale the desired scaling (not null, unaffected)
      * @param color the desired color if {@code useMaterialColors} is false (not
      * null, unaffected)
-     * @param useMaterialColors true to use the color in the shape's material
-     * @param wireframe true to draw a wire frame, false for solid triangles
+     * @param useMaterialColors {@code true} to use the color in the shape's
+     * material
+     * @param wireframe {@code true} to draw a wire frame, {@code false} for
+     * solid triangles
      */
     @Override
     public void draw(DebugRenderer renderer, RMat44Arg comTransform,

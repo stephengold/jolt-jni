@@ -62,7 +62,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      * the bodies when the constraint is created. The settings are unaffected.
      * (native attribute: mAutoDetectPoint)
      *
-     * @return true to use body positions, {@code false} for explicit
+     * @return {@code true} to use body positions, {@code false} for explicit
      * configuration
      */
     public boolean getAutoDetectPoint() {
@@ -187,8 +187,8 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      * of the bodies when the constraint is created. (native attribute:
      * mAutoDetectPoint)
      *
-     * @param setting true to use body positions, false for explicit
-     * configuration (default=false)
+     * @param setting {@code true} to use body positions, {@code false} for
+     * explicit configuration (default=false)
      */
     public void setAutoDetectPoint(boolean setting) {
         long settingsVa = va();

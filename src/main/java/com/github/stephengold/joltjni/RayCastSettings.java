@@ -111,7 +111,8 @@ public class RayCastSettings extends JoltPhysicsObject {
      * Alter whether convex shapes should be treated as solid. (native
      * attribute: mTreatConvexAsSolid)
      *
-     * @param setting true&rarr;solid, false&rarr;hollow (default=true)
+     * @param setting {@code true} &rarr; solid, {@code false} &rarr; hollow
+     * (default=true)
      */
     public void setTreatConvexAsSolid(boolean setting) {
         long settingsVa = va();

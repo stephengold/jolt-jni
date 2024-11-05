@@ -281,8 +281,8 @@ public class MeshShapeSettings extends ShapeSettings {
      * Alter whether each triangle will include user data. (native attribute:
      * mPerTriangleUserData)
      *
-     * @param include true to include per-triangle data, false to omit it
-     * (default=false)
+     * @param include {@code true} to include per-triangle data, {@code false}
+     * to omit it (default=false)
      */
     public void setPerTriangleUserData(boolean include) {
         long settingsVa = va();

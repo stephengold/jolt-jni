@@ -147,7 +147,7 @@ abstract public class Constraint extends NonCopyable
     /**
      * Enable or disable the constraint.
      *
-     * @param setting true to enable or false to disable
+     * @param setting {@code true} to enable or {@code false} to disable
      */
     public void setEnabled(boolean setting) {
         long constraintVa = va();

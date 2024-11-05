@@ -46,7 +46,8 @@ public class CombineFunction extends JoltPhysicsObject {
     /**
      * Create a function that calculates {@code (f1 + f2)/2}.
      *
-     * @param friction true to combine frictions, false to combine restitutions
+     * @param friction {@code true} to combine frictions, {@code false} to
+     * combine restitutions
      * @return a new object
      */
     public static CombineFunction average(boolean friction) {
@@ -59,7 +60,8 @@ public class CombineFunction extends JoltPhysicsObject {
     /**
      * Create a function that calculates {@code sqrt(f1 * f2)}.
      *
-     * @param friction true to combine frictions, false to combine restitutions
+     * @param friction {@code true} to combine frictions, {@code false} to
+     * combine restitutions
      * @return a new object
      */
     public static CombineFunction geometricMean(boolean friction) {
@@ -72,7 +74,8 @@ public class CombineFunction extends JoltPhysicsObject {
     /**
      * Create a function that calculates {@code 2 * f1 * f2/(f1 + f2)}.
      *
-     * @param friction true to combine frictions, false to combine restitutions
+     * @param friction {@code true} to combine frictions, {@code false} to
+     * combine restitutions
      * @return a new object
      */
     public static CombineFunction harmonicMean(boolean friction) {
@@ -85,7 +88,8 @@ public class CombineFunction extends JoltPhysicsObject {
     /**
      * Create a function that calculates {@code max(f1, f2)}.
      *
-     * @param friction true to combine frictions, false to combine restitutions
+     * @param friction {@code true} to combine frictions, {@code false} to
+     * combine restitutions
      * @return a new object
      */
     public static CombineFunction max(boolean friction) {
@@ -98,7 +102,8 @@ public class CombineFunction extends JoltPhysicsObject {
     /**
      * Create a function that calculates {@code min(f1, f2)}.
      *
-     * @param friction true to combine frictions, false to combine restitutions
+     * @param friction {@code true} to combine frictions, {@code false} to
+     * combine restitutions
      * @return a new object
      */
     public static CombineFunction min(boolean friction) {
@@ -111,7 +116,8 @@ public class CombineFunction extends JoltPhysicsObject {
     /**
      * Create a function that calculates {@code f1 * f2}.
      *
-     * @param friction true to combine frictions, false to combine restitutions
+     * @param friction {@code true} to combine frictions, {@code false} to
+     * combine restitutions
      * @return a new object
      */
     public static CombineFunction product(boolean friction) {
@@ -124,7 +130,8 @@ public class CombineFunction extends JoltPhysicsObject {
     /**
      * Create a function that calculates {@code sqrt((f1*f1 + f2*f2)/2)}.
      *
-     * @param friction true to combine frictions, false to combine restitutions
+     * @param friction {@code true} to combine frictions, {@code false} to
+     * combine restitutions
      * @return a new object
      */
     public static CombineFunction rootMeanSquare(boolean friction) {
@@ -137,7 +144,8 @@ public class CombineFunction extends JoltPhysicsObject {
     /**
      * Create a function that calculates {@code f1 + f2}.
      *
-     * @param friction true to combine frictions, false to combine restitutions
+     * @param friction {@code true} to combine frictions, {@code false} to
+     * combine restitutions
      * @return a new object
      */
     public static CombineFunction sum(boolean friction) {

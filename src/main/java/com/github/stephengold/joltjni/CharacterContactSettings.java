@@ -88,8 +88,8 @@ final public class CharacterContactSettings extends JoltPhysicsObject {
      * Alter whether the virtual character can apply impulses to the body.
      * (native attribute: mCanReceiveImpulses)
      *
-     * @param setting true to allow impulses, false to prohibit them
-     * (default=true)
+     * @param setting {@code true} to allow impulses, {@code false} to prohibit
+     * them (default=true)
      */
     public void setCanReceiveImpulses(boolean setting) {
         long settingsVa = va();

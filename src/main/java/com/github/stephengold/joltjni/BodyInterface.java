@@ -576,7 +576,7 @@ public class BodyInterface extends NonCopyable {
      *
      * @param bodyId the ID of the affected body (not null, unaffected)
      * @param prevCom center of mass prior to the change (not null, unaffected)
-     * @param updateMassProperties true to recalculate mass and inertia
+     * @param updateMassProperties {@code true} to recalculate mass and inertia
      * @param activation whether to activate the body (not null)
      */
     public void notifyShapeChanged(ConstBodyId bodyId, Vec3Arg prevCom,
