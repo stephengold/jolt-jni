@@ -25,6 +25,8 @@ import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.CharacterVirtual;
+import com.github.stephengold.joltjni.CharacterVirtualSettings;
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.GroupFilterTable;
@@ -37,6 +39,7 @@ import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.MotionProperties;
 import com.github.stephengold.joltjni.NonCopyable;
+import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Shape;
@@ -78,6 +81,7 @@ public class Test003 {
 
         doAaBox();
         doBodyCreationSettings();
+        doCharacterVirtual();
         doCollisionGroup();
         doContactSettings();
         doJobSystemSingleThreaded();
@@ -191,6 +195,21 @@ public class Test003 {
             TestUtils.testClose(bcs, shape);
         }
 
+        System.gc();
+    }
+
+    /**
+     * Test the {@code CharacterVirtual} class.
+     */
+    private static void doCharacterVirtual() {
+        CharacterVirtualSettings settings = new CharacterVirtualSettings();
+        PhysicsSystem system = new PhysicsSystem();
+        CharacterVirtual character = new CharacterVirtual(
+                settings, new RVec3(), new Quat(), 0L, system);
+
+        testCharacterVirtualDefaults(character);
+
+        TestUtils.testClose(character, system, settings);
         System.gc();
     }
 
@@ -406,6 +425,25 @@ public class Test003 {
         TestUtils.assertEquals(0.12f, 0.13f, 0.14f, bcs.getPosition(), 0f);
         Assert.assertEquals(0.15f, bcs.getRestitution(), 0f);
         TestUtils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code CharacterVirtual}.
+     *
+     * @param character the character to test (not null, unaffected)
+     */
+    private static void testCharacterVirtualDefaults(
+            CharacterVirtual character) {
+        Assert.assertFalse(character.getEnhancedInternalEdgeRemoval());
+        Assert.assertEquals(1f, character.getHitReductionCosMaxAngle(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, character.getLinearVelocity(), 0f);
+        Assert.assertEquals(70f, character.getMass(), 0f);
+        Assert.assertEquals(256, character.getMaxNumHits());
+        Assert.assertEquals(100f, character.getMaxStrength(), 0f);
+        Assert.assertEquals(1f, character.getPenetrationRecoverySpeed(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, character.getPosition(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, 1f, character.getRotation(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, character.getShapeOffset(), 0f);
     }
 
     /**
