@@ -33,7 +33,7 @@ import testjoltjni.app.samples.*;
  */
 public class BroadPhaseCastRayTest extends BroadPhaseTest{
 
-void Initialize()
+public void Initialize()
 {
 	super.Initialize();
 

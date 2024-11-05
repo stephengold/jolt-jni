@@ -48,7 +48,7 @@ class Line {Line(RVec3 s, RVec3 e){mStart=e;mEnd=e;}
 }
 List<Line> mTrackData = new ArrayList<>();
 
-void Initialize()
+public void Initialize()
 {
 	if (sSceneName.equals( "Flat") )
 	{

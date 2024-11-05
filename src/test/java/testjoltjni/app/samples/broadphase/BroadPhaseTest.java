@@ -68,7 +68,7 @@ void CreateBalancedDistribution(BodyManager inBodyManager, int inNumBodies, floa
 	}
 }
 
-void Initialize()
+public void Initialize()
 {
 	// Create body manager
 	mBodyManager = new BodyManager();

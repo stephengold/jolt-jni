@@ -31,7 +31,7 @@ public class BroadPhaseInsertionTest extends BroadPhaseTest{
 DefaultRandomEngine mRandomGenerator = new DefaultRandomEngine();
 int mCurrentBody = 0;
 int mDirection = 1;
-void Initialize()
+public void Initialize()
 {
 	super.Initialize();
 

@@ -51,7 +51,7 @@ float mTurretHeading = 0.0f;
 float mBarrelPitch = 0.0f;
 boolean mFire = false;
 
-void Initialize()
+public void Initialize()
 {
 	super.Initialize();
 

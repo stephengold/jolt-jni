@@ -60,7 +60,7 @@ float mTime = 0.0f;
 float mForward = 0.0f;
 float mRight = 0.0f;
 
-void Initialize()
+public void Initialize()
 {
 	// Create boat
 	ConvexHullShapeSettings boat_hull = new ConvexHullShapeSettings();
