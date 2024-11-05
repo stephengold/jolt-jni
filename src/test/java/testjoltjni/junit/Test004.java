@@ -52,7 +52,8 @@ public class Test004 {
      */
     @Test
     public void test004() {
-        TestUtils.loadAndInitializeNativeLibrary();
+        TestUtils.loadNativeLibrary();
+        TestUtils.initializeNativeLibrary();
 
         int numBpLayers = 2;
         int numObjLayers = 3;

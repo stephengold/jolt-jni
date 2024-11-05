@@ -43,7 +43,8 @@ public class Test008 {
      */
     @Test
     public void test008() {
-        TestUtils.loadAndInitializeNativeLibrary();
+        TestUtils.loadNativeLibrary();
+        TestUtils.initializeNativeLibrary();
 
         testMat44();
         testRMat44();

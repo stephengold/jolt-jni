@@ -77,7 +77,8 @@ public class Test003 {
      */
     @Test
     public void test003() {
-        TestUtils.loadAndInitializeNativeLibrary();
+        TestUtils.loadNativeLibrary();
+        TestUtils.initializeNativeLibrary();
 
         doAaBox();
         doBodyCreationSettings();

@@ -73,7 +73,8 @@ public class Test006 {
      */
     @Test
     public void test006() {
-        TestUtils.loadAndInitializeNativeLibrary();
+        TestUtils.loadNativeLibrary();
+        TestUtils.initializeNativeLibrary();
 
         doBoxShapeSettings();
         doCapsuleShapeSettings();

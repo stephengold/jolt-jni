@@ -78,7 +78,8 @@ public class Test002 {
      */
     @Test
     public void test002() {
-        TestUtils.loadAndInitializeNativeLibrary();
+        TestUtils.loadNativeLibrary();
+        TestUtils.initializeNativeLibrary();
 
         int maxBodies = 1_800;
         PhysicsSystem physicsSystem = TestUtils.newPhysicsSystem(maxBodies);

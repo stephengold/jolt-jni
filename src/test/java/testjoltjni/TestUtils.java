@@ -266,11 +266,9 @@ final public class TestUtils {
     }
 
     /**
-     * Load and initialize some flavor of native library.
+     * Initialize the loaded native library.
      */
-    public static void loadAndInitializeNativeLibrary() {
-        loadNativeLibrary();
-
+    public static void initializeNativeLibrary() {
         String buildType = Jolt.buildType();
         if (!buildType.equals("Release")) {
             System.out.print(buildType + "-");

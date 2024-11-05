@@ -54,7 +54,8 @@ public class Test005 {
      */
     @Test
     public void test005() {
-        TestUtils.loadAndInitializeNativeLibrary();
+        TestUtils.loadNativeLibrary();
+        TestUtils.initializeNativeLibrary();
 
         doConeConstraintSettings();
         doDistanceConstraintSettings();

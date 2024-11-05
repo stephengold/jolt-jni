@@ -77,7 +77,8 @@ public class Test001 {
      */
     @Test
     public void test001() {
-        TestUtils.loadAndInitializeNativeLibrary();
+        TestUtils.loadNativeLibrary();
+        TestUtils.initializeNativeLibrary();
 
         // object layers:
         final int objLayerNonMoving = 0;
