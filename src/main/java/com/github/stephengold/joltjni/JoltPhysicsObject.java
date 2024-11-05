@@ -134,10 +134,13 @@ abstract public class JoltPhysicsObject
         assert freeingAction == null : freeingAction;
 
         this.virtualAddress = virtualAddress;
-        this.freeingAction = action;
-        if (action != null && cleaner != null) {
+        if (action != null) {
             assert containingObject == null : containingObject;
-            cleaner.register(this, action);
+            assert !(this instanceof RefTarget) : "RefTarget cannot be owner";
+            this.freeingAction = action;
+            if (cleaner != null) {
+                cleaner.register(this, action);
+            }
         }
     }
     // *************************************************************************
