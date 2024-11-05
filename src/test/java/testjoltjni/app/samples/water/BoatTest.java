@@ -34,31 +34,29 @@ import testjoltjni.app.testframework.CameraState;
  */
 public class BoatTest extends Test{
 float cMaxWaterHeight = 5.0f;
-float cMinWaterHeight = 3.0f;
-float cWaterWidth = 100.0f;
-float cHalfBoatLength = 4.0f;
+float cMinWaterHeight=3f;
+float cWaterWidth=100f;
+float cHalfBoatLength=4f;
 float cHalfBoatTopWidth = 1.5f;
 float cHalfBoatBottomWidth = 1.2f;
-float cBoatBowLength = 2.0f;
+float cBoatBowLength=2f;
 float cHalfBoatHeight = 0.75f;
-float cBoatMass = 1000.0f;
-float cBoatBuoyancy = 3.0f;
+float cBoatMass=1000f;
+float cBoatBuoyancy=3f;
 float cBoatLinearDrag = 0.5f;
 float cBoatAngularDrag = 0.7f;
-float cBarrelMass = 50.0f;
+float cBarrelMass=50f;
 float cBarrelBuoyancy = 1.5f;
 float cBarrelLinearDrag = 0.5f;
 float cBarrelAngularDrag = 0.1f;
-float cForwardAcceleration = 15.0f;
+float cForwardAcceleration=15f;
 float cSteerAcceleration = 1.5f;
 Body mBoatBody;
 BodyId mWaterSensor=new BodyId();
 RMat44 mCameraPivot = RMat44.sIdentity();
 Mutex mBodiesInWaterMutex=new Mutex();
 BodyIdVector mBodiesInWater=new BodyIdVector();
-float mTime = 0.0f;
-float mForward = 0.0f;
-float mRight = 0.0f;
+float mForward, mRight, mTime;
 
 public void Initialize()
 {
