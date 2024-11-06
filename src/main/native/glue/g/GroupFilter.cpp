@@ -58,8 +58,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_GroupFilter_getRefCou
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_GroupFilter_setEmbedded
   (JNIEnv *, jclass, jlong filterVa) {
-    GroupFilter * const pFilter
-            = reinterpret_cast<GroupFilter *> (filterVa);
+    GroupFilter * const pFilter = reinterpret_cast<GroupFilter *> (filterVa);
     pFilter->SetEmbedded();
 }
 
@@ -70,8 +69,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_GroupFilter_setEmbedd
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GroupFilter_toRef
   (JNIEnv *, jclass, jlong filterVa) {
-    GroupFilter * const pFilter
-            = reinterpret_cast<GroupFilter *> (filterVa);
+    GroupFilter * const pFilter = reinterpret_cast<GroupFilter *> (filterVa);
     Ref<GroupFilter> * const pResult = new Ref<GroupFilter>(pFilter);
     TRACE_NEW("Ref<GroupFilter>", pResult)
     return reinterpret_cast<jlong> (pResult);
