@@ -43,7 +43,7 @@ abstract public class Ref extends JoltPhysicsObject {
     /**
      * Temporarily access the referenced {@code RefTarget}.
      *
-     * @return a new JVM object that refers to the pre-existing native object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     abstract public RefTarget getPtr();
 

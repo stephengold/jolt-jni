@@ -87,7 +87,7 @@ final public class SkeletalAnimationRef extends Ref {
     /**
      * Temporarily access the referenced {@code SkeletalAnimation}.
      *
-     * @return a new JVM object that refers to the pre-existing native object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
     public SkeletalAnimation getPtr() {

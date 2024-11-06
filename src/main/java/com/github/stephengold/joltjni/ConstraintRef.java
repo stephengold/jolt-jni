@@ -179,7 +179,7 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
     /**
      * Temporarily access the referenced {@code Constraint}.
      *
-     * @return a new JVM object that refers to the pre-existing native object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
     public Constraint getPtr() {

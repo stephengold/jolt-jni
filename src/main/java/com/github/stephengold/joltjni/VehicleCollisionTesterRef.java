@@ -51,7 +51,7 @@ final public class VehicleCollisionTesterRef extends Ref {
     /**
      * Temporarily access the referenced {@code VehicleCollisionTester}.
      *
-     * @return a new JVM object that refers to the pre-existing native object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
     public VehicleCollisionTester getPtr() {

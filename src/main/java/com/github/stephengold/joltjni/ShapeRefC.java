@@ -66,7 +66,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     /**
      * Temporarily access the referenced {@code ConstShape}.
      *
-     * @return a new JVM object that refers to the pre-existing native object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     public ConstShape getPtr() {
         long refVa = va();

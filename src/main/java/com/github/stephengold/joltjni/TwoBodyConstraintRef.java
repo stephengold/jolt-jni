@@ -245,7 +245,7 @@ final public class TwoBodyConstraintRef
     /**
      * Temporarily access the referenced {@code TwoBodyConstraint}.
      *
-     * @return a new JVM object that refers to the pre-existing native object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
     public TwoBodyConstraint getPtr() {

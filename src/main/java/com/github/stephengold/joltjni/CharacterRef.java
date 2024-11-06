@@ -544,7 +544,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     /**
      * Temporarily access the referenced {@code Character}.
      *
-     * @return a new JVM object that refers to the pre-existing native object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
     public com.github.stephengold.joltjni.Character getPtr() {

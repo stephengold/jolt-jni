@@ -42,7 +42,7 @@ public class VehicleConstraint
     // constructors
 
     /**
-     * Instantiate a constraint using the specified body and settings.
+     * Instantiate a constraint for the specified body and settings.
      *
      * @param body the body to which the constraint will apply (not null)
      * @param settings the desired settings (not null, unaffected)

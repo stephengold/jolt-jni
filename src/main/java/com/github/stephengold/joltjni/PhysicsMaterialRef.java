@@ -51,7 +51,7 @@ final public class PhysicsMaterialRef extends Ref {
     /**
      * Temporarily access the referenced {@code PhysicsMaterial}.
      *
-     * @return a new JVM object that refers to the pre-existing native object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
     public PhysicsMaterial getPtr() {

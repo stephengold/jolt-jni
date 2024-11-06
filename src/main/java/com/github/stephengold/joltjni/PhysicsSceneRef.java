@@ -108,7 +108,7 @@ final public class PhysicsSceneRef extends Ref {
     /**
      * Temporarily access the referenced {@code PhysicsScene}.
      *
-     * @return a new JVM object that refers to the pre-existing native object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
     public PhysicsScene getPtr() {
