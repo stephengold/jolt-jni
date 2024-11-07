@@ -319,13 +319,17 @@ public class NarrowPhaseQuery extends NonCopyable {
         long queryVa = va();
         long shapeCastVa = shapeCast.va();
         long settingsVa = settings.va();
+        double baseX = base.xx();
+        double baseY = base.yy();
+        double baseZ = base.zz();
         long collectorVa = collector.va();
         long bplFilterVa = bplFilter.va();
         long olFilterVa = olFilter.va();
         long bodyFilterVa = bodyFilter.va();
         long shapeFilterVa = shapeFilter.va();
-        castShape(queryVa, shapeCastVa, settingsVa, collectorVa, bplFilterVa,
-                olFilterVa, bodyFilterVa, shapeFilterVa);
+        castShape(queryVa, shapeCastVa, settingsVa, baseX, baseY, baseZ,
+                collectorVa, bplFilterVa, olFilterVa, bodyFilterVa,
+                shapeFilterVa);
     }
 
     /**
@@ -560,8 +564,9 @@ public class NarrowPhaseQuery extends NonCopyable {
             long olFilterVa, long bodyFilterVa, long shapeFilterVa);
 
     native private static void castShape(long queryVa, long shapeCastVa,
-            long settingsVa, long collectorVa, long bplFilterVa,
-            long olFilterVa, long bodyFilterVa, long shapeFilterVa);
+            long settingsVa, double baseX, double baseY, double baseZ,
+            long collectorVa, long bplFilterVa, long olFilterVa,
+            long bodyFilterVa, long shapeFilterVa);
 
     native private static void collidePoint(long queryVa, double xx, double yy,
             double zz, long collectorVa, long bplFilterVa,

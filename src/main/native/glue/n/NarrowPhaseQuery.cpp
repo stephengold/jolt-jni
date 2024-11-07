@@ -79,3 +79,93 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_cast
     pQuery->CastRay(*pRayCast, *pSettings, *pCollector, *pBplFilter, *pOlFilter,
             *pBodyFilter, *pShapeFilter);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_NarrowPhaseQuery
+ * Method:    castShape
+ * Signature: (JJJDDDJJJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_castShape
+  (JNIEnv *, jclass, jlong queryVa, jlong shapeCastVa, jlong settingsVa,
+  jdouble baseX, jdouble baseY, jdouble baseZ, jlong collectorVa,
+  jlong bplFilterVa, jlong olFilterVa, jlong bodyFilterVa, jlong shapeFilterVa) {
+    const NarrowPhaseQuery * const pQuery
+            = reinterpret_cast<NarrowPhaseQuery *> (queryVa);
+    const RShapeCast * const pShapeCast
+            = reinterpret_cast<RShapeCast *>(shapeCastVa);
+    const ShapeCastSettings * const pSettings
+            = reinterpret_cast<ShapeCastSettings *>(settingsVa);
+    const RVec3 baseOffset(baseX, baseY, baseZ);
+    CastShapeCollector * const pCollector
+            = reinterpret_cast<CastShapeCollector *>(collectorVa);
+    const BroadPhaseLayerFilter * const pBplFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (bplFilterVa);
+    const ObjectLayerFilter * const pOlFilter
+            = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
+    const BodyFilter * const pBodyFilter
+            = reinterpret_cast<BodyFilter *> (bodyFilterVa);
+    const ShapeFilter * const pShapeFilter
+            = reinterpret_cast<ShapeFilter *> (shapeFilterVa);
+    pQuery->CastShape(*pShapeCast, *pSettings, baseOffset, *pCollector,
+            *pBplFilter, *pOlFilter, *pBodyFilter, *pShapeFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_NarrowPhaseQuery
+ * Method:    collidePoint
+ * Signature: (JDDDJJJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_collidePoint
+  (JNIEnv *, jclass, jlong queryVa, jdouble xx, jdouble yy, jdouble zz,
+  jlong collectorVa, jlong bplFilterVa, jlong olFilterVa, jlong bodyFilterVa,
+  jlong shapeFilterVa) {
+    const NarrowPhaseQuery * const pQuery
+            = reinterpret_cast<NarrowPhaseQuery *> (queryVa);
+    const RVec3 point(xx, yy, zz);
+    CollidePointCollector * const pCollector
+            = reinterpret_cast<CollidePointCollector *>(collectorVa);
+    const BroadPhaseLayerFilter * const pBplFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (bplFilterVa);
+    const ObjectLayerFilter * const pOlFilter
+            = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
+    const BodyFilter * const pBodyFilter
+            = reinterpret_cast<BodyFilter *> (bodyFilterVa);
+    const ShapeFilter * const pShapeFilter
+            = reinterpret_cast<ShapeFilter *> (shapeFilterVa);
+    pQuery->CollidePoint(point, *pCollector, *pBplFilter, *pOlFilter,
+            *pBodyFilter, *pShapeFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_NarrowPhaseQuery
+ * Method:    collideShape
+ * Signature: (JJFFFJJDDDJJJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_collideShape
+  (JNIEnv *, jclass, jlong queryVa, jlong shapeVa, jfloat sx, jfloat sy,
+  jfloat sz, jlong transformVa, jlong settingsVa, jdouble baseX, jdouble baseY,
+  jdouble baseZ, jlong collectorVa, jlong bplFilterVa, jlong olFilterVa,
+  jlong bodyFilterVa, jlong shapeFilterVa) {
+    const NarrowPhaseQuery * const pQuery
+            = reinterpret_cast<NarrowPhaseQuery *> (queryVa);
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    const Vec3 shapeScale(sx, sy, sz);
+    const RMat44 * const pComTransform
+            = reinterpret_cast<RMat44 *> (transformVa);
+    const CollideShapeSettings * const pSettings
+            = reinterpret_cast<CollideShapeSettings *> (settingsVa);
+    const RVec3 baseOffset(baseX, baseY, baseZ);
+    CollideShapeCollector * const pCollector
+            = reinterpret_cast<CollideShapeCollector *> (collectorVa);
+    const BroadPhaseLayerFilter * const pBplFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (bplFilterVa);
+    const ObjectLayerFilter * const pOlFilter
+            = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
+    const BodyFilter * const pBodyFilter
+            = reinterpret_cast<BodyFilter *> (bodyFilterVa);
+    const ShapeFilter * const pShapeFilter
+            = reinterpret_cast<ShapeFilter *> (shapeFilterVa);
+    pQuery->CollideShape(pShape, shapeScale, *pComTransform, *pSettings,
+            baseOffset, *pCollector, *pBplFilter, *pOlFilter, *pBodyFilter,
+            *pShapeFilter);
+}
