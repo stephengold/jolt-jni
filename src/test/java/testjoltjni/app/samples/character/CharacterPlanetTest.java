@@ -112,23 +112,23 @@ void ProcessInput(const ProcessInputParams &inParams)
 public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Calculate up vector based on position on planet surface
-	Vec3 old_up = mCharacter.getUp();
-	Vec3 up =new Vec3(mCharacter.getPosition()).normalized();
+	Vec3 old_up = mCharacter.getPtr().getUp();
+	Vec3 up =new Vec3(mCharacter.getPtr().getPosition()).normalized();
 	mCharacter.getPtr().setUp(up);
 
 	// Rotate capsule so it points up relative to the planet surface
-	mCharacter.getPtr().setRotation(Op.multiply(Quat.sFromTo(old_up, up) , mCharacter.getRotation()).normalized());
+	mCharacter.getPtr().setRotation(Op.multiply(Quat.sFromTo(old_up, up) , mCharacter.getPtr().getRotation()).normalized());
 
 	// Draw character pre update (the sim is also drawn pre update)
 if (Jolt.implementsDebugRendering()) {
-	mCharacter.getShape().draw(mDebugRenderer, mCharacter.getCenterOfMassTransform(), Vec3.sReplicate(1.0f), Color.sGreen, false, true);
+	mCharacter.getPtr().getShape().draw(mDebugRenderer, mCharacter.getPtr().getCenterOfMassTransform(), Vec3.sReplicate(1.0f), Color.sGreen, false, true);
 }
 
 	// Determine new character velocity
-	Vec3 current_vertical_velocity = Op.multiply(mCharacter.getLinearVelocity().dot(up) , up);
-	Vec3 ground_velocity = mCharacter.getGroundVelocity();
+	Vec3 current_vertical_velocity = Op.multiply(mCharacter.getPtr().getLinearVelocity().dot(up) , up);
+	Vec3 ground_velocity = mCharacter.getPtr().getGroundVelocity();
 	Vec3 new_velocity;
-	if (mCharacter.getGroundState() == EGroundState.OnGround // If on ground
+	if (mCharacter.getPtr().getGroundState() == EGroundState.OnGround // If on ground
 		&& Op.subtract(current_vertical_velocity , ground_velocity).dot(up) < 0.1f) // And not moving away from ground
 	{
 		// Assume velocity of ground when on ground
@@ -173,23 +173,23 @@ RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of character + distance behind based on the heading and pitch of the camera.
 	Vec3 fwd = new Vec3(Math.cos(inCameraPitch) * Math.cos(inCameraHeading), Math.sin(inCameraPitch), Math.cos(inCameraPitch) * Math.sin(inCameraHeading));
-	RVec3 cam_pos = Op.subtract(mCharacter.getPosition() , Op.multiply(5.0f , Op.rotate(mCharacter.getRotation() , fwd)));
-	return RMat44.sRotationTranslation(mCharacter.getRotation(), cam_pos);
+	RVec3 cam_pos = Op.subtract(mCharacter.getPtr().getPosition() , Op.multiply(5.0f , Op.rotate(mCharacter.getPtr().getRotation() , fwd)));
+	return RMat44.sRotationTranslation(mCharacter.getPtr().getRotation(), cam_pos);
 }
 
 void SaveState(StateRecorder inStream)
 {
-	mCharacter.saveState(inStream);
+	mCharacter.getPtr().saveState(inStream);
 
 	// Save character up, it's not stored by default but we use it in this case update the rotation of the character
-	inStream.write(mCharacter.getUp());
+	inStream.write(mCharacter.getPtr().getUp());
 }
 
 void RestoreState(StateRecorder inStream)
 {
 	mCharacter.getPtr().restoreState(inStream);
 
-	Vec3 up = mCharacter.getUp();
+	Vec3 up = mCharacter.getPtr().getUp();
 	inStream.readVec3(up);
 	mCharacter.getPtr().setUp(up);
 }

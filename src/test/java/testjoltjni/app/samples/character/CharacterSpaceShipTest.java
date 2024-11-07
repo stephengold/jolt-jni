@@ -109,7 +109,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 
 	// Update the character so it stays relative to the space ship
 	RMat44 new_space_ship_transform = mBodyInterface.getCenterOfMassTransform(mSpaceShip);
-	mCharacter.getPtr().setPosition(Op.multiply(Op.multiply(new_space_ship_transform , mSpaceShipPrevTransform.inversed()) , mCharacter.getPosition()));
+	mCharacter.getPtr().setPosition(Op.multiply(Op.multiply(new_space_ship_transform , mSpaceShipPrevTransform.inversed()) , mCharacter.getPtr().getPosition()));
 
 	// Update the character rotation and its up vector to match the new up vector of the ship
 	mCharacter.getPtr().setUp(new_space_ship_transform.getAxisY());
@@ -118,14 +118,14 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	// Draw character pre update (the sim is also drawn pre update)
 	// Note that we have first updated the position so that it matches the new position of the ship
 if(Jolt.implementsDebugRendering()){
-	mCharacter.getShape().draw(mDebugRenderer, mCharacter.getCenterOfMassTransform(), Vec3.sReplicate(1.0f), Color.sGreen, false, true);
+	mCharacter.getPtr().getShape().draw(mDebugRenderer, mCharacter.getPtr().getCenterOfMassTransform(), Vec3.sReplicate(1.0f), Color.sGreen, false, true);
 } // JPH_DEBUG_RENDERER
 
 	// Determine new character velocity
-	Vec3 current_vertical_velocity =Op.multiply( mCharacter.getLinearVelocity().dot(mSpaceShipPrevTransform.getAxisY()) , mCharacter.getUp());
-	Vec3 ground_velocity = mCharacter.getGroundVelocity();
+	Vec3 current_vertical_velocity =Op.multiply( mCharacter.getPtr().getLinearVelocity().dot(mSpaceShipPrevTransform.getAxisY()) , mCharacter.getPtr().getUp());
+	Vec3 ground_velocity = mCharacter.getPtr().getGroundVelocity();
 	Vec3 new_velocity;
-	if (mCharacter.getGroundState() == EGroundState.OnGround // If on ground
+	if (mCharacter.getPtr().getGroundState() == EGroundState.OnGround // If on ground
 		&& (current_vertical_velocity.getY() - ground_velocity.getY()) < 0.1f) // And not moving away from ground
 	{
 		// Assume velocity of ground when on ground
@@ -133,7 +133,7 @@ if(Jolt.implementsDebugRendering()){
 
 		// Jump
 		if (mJump)
-			Op.plusEquals(new_velocity , Op.multiply(cJumpSpeed , mCharacter.getUp()));
+			Op.plusEquals(new_velocity , Op.multiply(cJumpSpeed , mCharacter.getPtr().getUp()));
 	}
 	else
 		new_velocity = current_vertical_velocity;
@@ -186,12 +186,12 @@ RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of character + distance behind based on the heading and pitch of the camera
 	Vec3 fwd =new Vec3(Math.cos(inCameraPitch) * Math.cos(inCameraHeading), Math.sin(inCameraPitch), Math.cos(inCameraPitch) * Math.sin(inCameraHeading));
-	return RMat44.sTranslation(Op.subtract(Op.add(mCharacter.getPosition() ,new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , Op.multiply(5.0f , fwd)));
+	return RMat44.sTranslation(Op.subtract(Op.add(mCharacter.getPtr().getPosition() ,new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , Op.multiply(5.0f , fwd)));
 }
 
 void SaveState(StateRecorder inStream)
 {
-	mCharacter.saveState(inStream);
+	mCharacter.getPtr().saveState(inStream);
 
 	inStream.write(mTime);
 	inStream.write(mSpaceShipPrevTransform);

@@ -36,7 +36,7 @@ import testjoltjni.app.samples.*;
 public class CharacterTest extends CharacterBaseTest{
 static final float cCollisionTolerance = 0.05f;
 CharacterRef mCharacter;
-RVec3 GetCharacterPosition(){return mCharacter.getPosition();}
+RVec3 GetCharacterPosition(){return mCharacter.getPtr().getPosition();}
 
 public void Initialize()
 {
@@ -58,7 +58,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	super.PrePhysicsUpdate(inParams);
 
 	// Draw state of character
-	DrawCharacterState(mCharacter, mCharacter.getWorldTransform(), mCharacter.getLinearVelocity());
+	DrawCharacterState(mCharacter.getPtr(), mCharacter.getPtr().getWorldTransform(), mCharacter.getPtr().getLinearVelocity());
 }
 
 public void PostPhysicsUpdate(float inDeltaTime)
@@ -71,9 +71,9 @@ void SaveState(StateRecorder inStream)
 {
 	super.SaveState(inStream);
 
-	mCharacter.saveState(inStream);
+	mCharacter.getPtr().saveState(inStream);
 
-	boolean is_standing = mCharacter.getShape() == mStandingShape;
+	boolean is_standing = mCharacter.getPtr().getShape() == mStandingShape.getPtr();
 	inStream.write(is_standing);
 }
 
@@ -83,20 +83,20 @@ void RestoreState(StateRecorder inStream)
 
 	mCharacter.getPtr().restoreState(inStream);
 
-	boolean is_standing = mCharacter.getShape() == mStandingShape; // Initialize variable for validation mode
+	boolean is_standing = mCharacter.getPtr().getShape() == mStandingShape.getPtr(); // Initialize variable for validation mode
 	is_standing = inStream.readBoolean(is_standing);
-	mCharacter.getPtr().setShape(is_standing? mStandingShape : mCrouchingShape, Float.MAX_VALUE);
+	mCharacter.getPtr().setShape(is_standing? mStandingShape.getPtr() : mCrouchingShape.getPtr(), Float.MAX_VALUE);
 }
 
 void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchStance, float inDeltaTime)
 {
 	// Cancel movement in opposite direction of normal when touching something we can't walk up
 	Vec3 movement_direction =new Vec3(inMovementDirection);
-	EGroundState ground_state = mCharacter.getGroundState();
+	EGroundState ground_state = mCharacter.getPtr().getGroundState();
 	if (ground_state == EGroundState.OnSteepGround
 		|| ground_state == EGroundState.NotSupported)
 	{
-		Vec3 normal = mCharacter.getGroundNormal();
+		Vec3 normal = mCharacter.getPtr().getGroundNormal();
 		normal.setY(0.0f);
 		float dot = normal.dot(movement_direction);
 		if (dot < 0.0f)
@@ -105,14 +105,14 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 
 	// Stance switch
 	if (inSwitchStance)
-		mCharacter.getPtr().setShape(mCharacter.getShape() == mStandingShape? mCrouchingShape : mStandingShape, 1.5f * mPhysicsSystem.getPhysicsSettings().getPenetrationSlop());
+		mCharacter.getPtr().setShape(mCharacter.getPtr().getShape() == mStandingShape.getPtr()? mCrouchingShape.getPtr() : mStandingShape.getPtr(), 1.5f * mPhysicsSystem.getPhysicsSettings().getPenetrationSlop());
 
-	if (sControlMovementDuringJump || mCharacter.isSupported())
+	if (sControlMovementDuringJump || mCharacter.getPtr().isSupported())
 	{
 		// Update velocity
-		Vec3 current_velocity =new Vec3(mCharacter.getLinearVelocity());
+		Vec3 current_velocity =new Vec3(mCharacter.getPtr().getLinearVelocity());
 		Vec3 desired_velocity =new Vec3(Op.multiply(sCharacterSpeed , movement_direction));
-		if (!desired_velocity.isNearZero() || current_velocity.getY() < 0.0f || !mCharacter.isSupported())
+		if (!desired_velocity.isNearZero() || current_velocity.getY() < 0.0f || !mCharacter.getPtr().isSupported())
 			desired_velocity.setY(current_velocity.getY());
 		Vec3 new_velocity =new Vec3(Op.add(Op.multiply(0.75f , current_velocity) , Op.multiply(0.25f , desired_velocity)));
 

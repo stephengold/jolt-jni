@@ -595,7 +595,7 @@ public void Initialize()
 		{
 			CharacterVirtualSettings settings=new CharacterVirtualSettings();
 			settings.setShape ( mStandingShape);
-			settings.setInnerBodyShape ( mInnerStandingShape);
+			settings.setInnerBodyShape ( mInnerStandingShape.getPtr());
 			settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
 			mAnimatedCharacterVirtualWithInnerBody = new CharacterVirtual(settings, cCharacterVirtualWithInnerBodyPosition, Quat.sIdentity(), 0, mPhysicsSystem).toRef();
 			mAnimatedCharacterVirtualWithInnerBody.getPtr().setCharacterVsCharacterCollision(mCharacterVsCharacterCollision);
@@ -689,7 +689,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 		if (character.getGroundState() == EGroundState.OnGround)
 			velocity = Vec3.sZero();
 		else
-			velocity = Op.add(Op.multiply(character.getLinearVelocity() , mAnimatedCharacter.getUp()) , Op.multiply(mPhysicsSystem.getGravity() , inParams.mDeltaTime));
+			velocity = Op.add(Op.multiply(character.getLinearVelocity() , mAnimatedCharacter.getPtr().getUp()) , Op.multiply(mPhysicsSystem.getGravity() , inParams.mDeltaTime));
 		Op.plusEquals(velocity , Op.multiply((float)Math.sin(mTime) , cCharacterVelocity));
 		character.setLinearVelocity(velocity);
 
