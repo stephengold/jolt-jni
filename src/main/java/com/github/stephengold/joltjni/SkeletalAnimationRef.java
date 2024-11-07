@@ -99,7 +99,7 @@ final public class SkeletalAnimationRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code SkeletalAnimationRef}.
+     * Create another counted reference to the native {@code SkeletalAnimation}.
      *
      * @return a new JVM object with a new native object assigned
      */

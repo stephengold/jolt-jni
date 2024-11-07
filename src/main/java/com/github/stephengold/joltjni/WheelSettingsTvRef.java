@@ -63,7 +63,7 @@ final public class WheelSettingsTvRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code WheelSettingsTV}.
+     * Create another counted reference to the native {@code WheelSettingsTV}.
      *
      * @return a new JVM object with a new native object assigned
      */

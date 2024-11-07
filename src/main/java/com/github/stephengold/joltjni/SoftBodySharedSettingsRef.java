@@ -63,7 +63,8 @@ final public class SoftBodySharedSettingsRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code SoftBodySharedSettings}.
+     * Create another counted reference to the native
+     * {@code SoftBodySharedSettings}.
      *
      * @return a new JVM object with a new native object assigned
      */

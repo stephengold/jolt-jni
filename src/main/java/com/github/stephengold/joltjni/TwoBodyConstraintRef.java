@@ -64,7 +64,7 @@ final public class TwoBodyConstraintRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code TwoBodyConstraint}.
+     * Create another counted reference to the native {@code TwoBodyConstraint}.
      *
      * @return a new JVM object with a new native object assigned
      */

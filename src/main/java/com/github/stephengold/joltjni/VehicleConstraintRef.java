@@ -63,7 +63,7 @@ final public class VehicleConstraintRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code VehicleConstraint}.
+     * Create another counted reference to the native {@code VehicleConstraint}.
      *
      * @return a new JVM object with a new native object assigned
      */

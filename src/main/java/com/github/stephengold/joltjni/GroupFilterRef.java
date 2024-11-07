@@ -63,7 +63,7 @@ final public class GroupFilterRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code GroupFilter}.
+     * Create another counted reference to the native {@code GroupFilter}.
      *
      * @return a new JVM object with a new native object assigned
      */

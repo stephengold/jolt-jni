@@ -151,7 +151,7 @@ public class SoftBodySharedSettings
      * @param bendType the desired type of bend constraint (not null,
      * default=Distance)
      * @param angleTolerance the desired tolerance for creating shear edges (in
-     * radians, default=2/45)
+     * radians, default=2*Pi/45)
      */
     public void createConstraints(ConstVertexAttributes[] vertexAttributes,
             EBendType bendType, float angleTolerance) {

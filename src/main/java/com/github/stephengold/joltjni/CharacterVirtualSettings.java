@@ -117,7 +117,7 @@ public class CharacterVirtualSettings
     }
 
     /**
-     * Alter the shape of the inner rigid body. (native attribute:
+     * Replace the shape of the inner rigid body. (native attribute:
      * mInnerBodyShape)
      *
      * @param shape the desired shape, or null for no inner body (default=null)

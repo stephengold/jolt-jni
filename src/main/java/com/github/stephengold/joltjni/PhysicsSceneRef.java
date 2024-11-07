@@ -120,7 +120,7 @@ final public class PhysicsSceneRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code PhysicsSceneRef}.
+     * Create another counted reference to the native {@code PhysicsScene}.
      *
      * @return a new JVM object with a new native object assigned
      */

@@ -63,7 +63,8 @@ final public class VehicleCollisionTesterRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code VehicleCollisionTester}.
+     * Create another counted reference to the native
+     * {@code VehicleCollisionTester}.
      *
      * @return a new JVM object with a new native object assigned
      */

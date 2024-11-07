@@ -71,7 +71,8 @@ final public class PathConstraintPathRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code PathConstraintPath}.
+     * Create another counted reference to the native
+     * {@code PathConstraintPath}.
      *
      * @return a new JVM object with a new native object assigned
      */

@@ -72,7 +72,7 @@ final public class CharacterRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code Character}.
+     * Create another counted reference to the native {@code Character}.
      *
      * @return a new JVM object with a new native object assigned
      */

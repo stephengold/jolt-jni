@@ -70,7 +70,7 @@ final public class ShapeRefC extends JoltPhysicsObject {
     }
 
     /**
-     * Create a counted reference to the native {@code Shape}.
+     * Create another counted reference to the native {@code Shape}.
      *
      * @return a new JVM object with a new native object assigned
      */

@@ -63,7 +63,7 @@ final public class SkeletonRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code SkeletonRef}.
+     * Create another counted reference to the native {@code Skeleton}.
      *
      * @return a new JVM object with a new native object assigned
      */

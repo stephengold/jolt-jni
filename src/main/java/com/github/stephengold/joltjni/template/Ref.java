@@ -48,7 +48,7 @@ abstract public class Ref extends JoltPhysicsObject {
     abstract public RefTarget getPtr();
 
     /**
-     * Create a counted reference to the native {@code RefTarget}.
+     * Create another counted reference to the native {@code RefTarget}.
      *
      * @return a new JVM object with a new native object assigned
      */

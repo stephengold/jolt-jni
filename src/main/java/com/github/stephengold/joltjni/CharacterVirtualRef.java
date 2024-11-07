@@ -71,7 +71,7 @@ final public class CharacterVirtualRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code CharacterVirtual}.
+     * Create another counted reference to the native {@code CharacterVirtual}.
      *
      * @return a new JVM object with a new native object assigned
      */

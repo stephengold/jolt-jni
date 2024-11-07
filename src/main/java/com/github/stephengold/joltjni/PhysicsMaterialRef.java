@@ -63,7 +63,7 @@ final public class PhysicsMaterialRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code PhysicsMaterial}.
+     * Create another counted reference to the native {@code PhysicsMaterial}.
      *
      * @return a new JVM object with a new native object assigned
      */

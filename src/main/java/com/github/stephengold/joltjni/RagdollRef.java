@@ -122,7 +122,7 @@ final public class RagdollRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code RagdollRef}.
+     * Create another counted reference to the native {@code Ragdoll}.
      *
      * @return a new JVM object with a new native object assigned
      */

@@ -63,7 +63,7 @@ final public class VehicleControllerRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native {@code VehicleController}.
+     * Create another counted reference to the native {@code VehicleController}.
      *
      * @return a new JVM object with a new native object assigned
      */

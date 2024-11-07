@@ -64,7 +64,7 @@ final public class TrackedVehicleControllerRef extends Ref {
     }
 
     /**
-     * Create a counted reference to the native
+     * Create another counted reference to the native
      * {@code TrackedVehicleController}.
      *
      * @return a new JVM object with a new native object assigned
