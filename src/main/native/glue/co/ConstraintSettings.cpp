@@ -38,7 +38,12 @@ IMPLEMENT_REF(ConstraintSettings,
   Java_com_github_stephengold_joltjni_ConstraintSettingsRef_free,
   Java_com_github_stephengold_joltjni_ConstraintSettingsRef_getPtr)
 
+// The constraint subtype occupies the 2 least-significant bytes of mUserData.
 uint64 cstMask = 0xffff;
+
+// The controller type occupies the next byte of mUserData.
+uint64 ctMask = 0xff0000;
+uint32 ctShift = 16;
 
 /*
  * Class:     com_github_stephengold_joltjni_ConstraintSettings
@@ -63,6 +68,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_ge
     const ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
     const jlong result = pSettings->mUserData & cstMask;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConstraintSettings
+ * Method:    getControllerType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_getControllerType
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const ConstraintSettings * const pSettings
+            = reinterpret_cast<ConstraintSettings *> (settingsVa);
+    const jlong result = (pSettings->mUserData & ctMask) >> ctShift;
     return result;
 }
 
@@ -154,6 +172,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_se
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
     pSettings->mUserData
             = pSettings->mUserData & ~cstMask | ((jlong)ordinal) & cstMask;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConstraintSettings
+ * Method:    setControllerType
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_setControllerType
+  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+    ConstraintSettings * const pSettings
+            = reinterpret_cast<ConstraintSettings *> (settingsVa);
+    pSettings->mUserData
+            = pSettings->mUserData & ~ctMask | ( ((jlong)ordinal) << ctShift ) & ctMask;
 }
 
 /*

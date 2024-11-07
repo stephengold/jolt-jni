@@ -307,6 +307,8 @@ abstract public class ConstraintSettings
 
     native private static int getConstraintSubType(long settingsVa);
 
+    native static int getControllerType(long settingsVa);
+
     native static float getDrawConstraintSize(long settingsVa);
 
     native static boolean getEnabled(long settingsVa);
@@ -322,6 +324,8 @@ abstract public class ConstraintSettings
 
     native private static void setConstraintSubType(
             long settingsVa, int ordinal);
+
+    native static void setControllerType(long settingsVa, int ordinal);
 
     native private static void setDrawConstraintSize(
             long settingsVa, float size);
