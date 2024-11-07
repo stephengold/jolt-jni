@@ -413,44 +413,44 @@ abstract public class Shape extends NonCopyable
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
-    native static void copyDebugTriangles(
+    native private static void copyDebugTriangles(
             long shapeVa, int numTriangles, FloatBuffer storeBuffer);
 
-    native static int countDebugTriangles(long shapeVa);
+    native private static int countDebugTriangles(long shapeVa);
 
-    native static void draw(long shapeVa, long rendererVa, long transformVa,
-            float scaleX, float scaleY, float scaleZ, int colorInt,
-            boolean useMaterialColors, boolean wireframe);
+    native private static void draw(long shapeVa, long rendererVa,
+            long transformVa, float scaleX, float scaleY, float scaleZ,
+            int colorInt, boolean useMaterialColors, boolean wireframe);
 
-    native static float getCenterOfMassX(long shapeVa);
+    native private static float getCenterOfMassX(long shapeVa);
 
-    native static float getCenterOfMassY(long shapeVa);
+    native private static float getCenterOfMassY(long shapeVa);
 
-    native static float getCenterOfMassZ(long shapeVa);
+    native private static float getCenterOfMassZ(long shapeVa);
 
-    native static float getInnerRadius(long shapeVa);
+    native private static float getInnerRadius(long shapeVa);
 
-    native static long getLocalBounds(long shapeVa);
+    native private static long getLocalBounds(long shapeVa);
 
-    native static long getMassProperties(long shapeVa);
+    native private static long getMassProperties(long shapeVa);
 
     native private static int getRefCount(long shapeVa);
 
-    native static int getSubType(long shapeVa);
+    native private static int getSubType(long shapeVa);
 
-    native static int getType(long shapeVa);
+    native private static int getType(long shapeVa);
 
-    native static long getUserData(long shapeVa);
+    native private static long getUserData(long shapeVa);
 
-    native static long getWorldSpaceBounds(
+    native private static long getWorldSpaceBounds(
             long shapeVa, long matrixVa, float sx, float sy, float sz);
 
-    native static long getWorldSpaceBoundsReal(
+    native private static long getWorldSpaceBoundsReal(
             long shapeVa, long rMat44Va, float sx, float sy, float sz);
 
-    native static boolean mustBeStatic(long shapeVa);
+    native private static boolean mustBeStatic(long shapeVa);
 
     native private static void setEmbedded(long shapeVa);
 
