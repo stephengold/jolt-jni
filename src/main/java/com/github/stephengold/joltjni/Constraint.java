@@ -320,11 +320,13 @@ abstract public class Constraint extends NonCopyable
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static int getConstraintPriority(long constraintVa);
 
     native private static long getConstraintSettings(long constraintVa);
+
+    native static int getControllerType(long settingsVa);
 
     native private static boolean getEnabled(long constraintVa);
 

@@ -38,6 +38,9 @@ IMPLEMENT_REF(Constraint,
   Java_com_github_stephengold_joltjni_ConstraintRef_free,
   Java_com_github_stephengold_joltjni_ConstraintRef_getPtr)
 
+extern uint64 ctMask;
+extern uint32 ctShift;
+
 /*
  * Class:     com_github_stephengold_joltjni_Constraint
  * Method:    getConstraintPriority
@@ -64,6 +67,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Constraint_getConstr
     TRACE_NEW("Ref<ConstraintSettings>", pResult)
     *pResult = pConstraint->GetConstraintSettings();
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Constraint
+ * Method:    getControllerType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Constraint_getControllerType
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const Constraint * const pConstraint
+            = reinterpret_cast<Constraint *> (constraintVa);
+    const jlong result = (pConstraint->GetUserData() & ctMask) >> ctShift;
+    return result;
 }
 
 /*
