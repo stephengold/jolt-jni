@@ -127,12 +127,13 @@ static class MyContactListener extends CustomContactListener
 // An example activation listener
 static class MyBodyActivationListener extends CustomBodyActivationListener
 {
-	public void onBodyActivated(long idVa, long inBodyUserData)
+public
+	 void		onBodyActivated(long idVa, long inBodyUserData)
 	{
 		System.out.println("A body got activated");
 	}
 
-	public void onBodyDeactivated(long idVa, long inBodyUserData)
+	public void		onBodyDeactivated(long idVa, long inBodyUserData)
 	{
 		System.out.println("A body went to sleep");
 	}
@@ -148,7 +149,7 @@ public static void main(String[] argv)
 
 	// Install trace and assert callbacks
 	Jolt.installDefaultTraceCallback();
-	Jolt.installDefaultAssertCallback();
+	Jolt.installDefaultAssertCallback(  );
 
 	// Create a factory, this class is responsible for creating instances of classes based on their name or hash and is mainly used for deserialization of saved data.
 	// It is not directly used in this example but still required.
@@ -164,12 +165,12 @@ public static void main(String[] argv)
 	// B.t.w. 10 MB is way too much for this example but it is a typical value you can use.
 	// If you don't want to pre-allocate you can also use TempAllocatorMalloc to fall back to
 	// malloc / free.
-	TempAllocatorImpl temp_allocator = new TempAllocatorImpl(10 * 1024 * 1024);
+	TempAllocatorImpl temp_allocator=new TempAllocatorImpl(10 * 1024 * 1024);
 
 	// We need a job system that will execute physics jobs on multiple threads. Typically
 	// you would implement the JobSystem interface yourself and let Jolt Physics run on top
 	// of your own job scheduler. JobSystemThreadPool is an example implementation.
-	JobSystemThreadPool job_system = new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, TestUtils.numThreads());
+	JobSystemThreadPool job_system=new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, TestUtils.numThreads());
 
 	// This is the max amount of rigid bodies that you can add to the physics system. If you try to add more you'll get an error.
 	// Note: This value is low because this is a simple test. For a real project use something in the order of 65536.

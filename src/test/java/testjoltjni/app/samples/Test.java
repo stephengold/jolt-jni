@@ -37,6 +37,7 @@ protected BodyInterface mBodyInterface = null;
 protected DebugRenderer mDebugRenderer = null;
 protected TempAllocator mTempAllocator = null;
 protected JobSystem mJobSystem;
+
 float GetWorldScale() { return 1.0f; }
 void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
 
