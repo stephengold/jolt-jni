@@ -66,8 +66,8 @@ abstract public class ConstraintSettings
             return null;
         }
 
-        long ordinal = getUserData(settingsVa);
-        EConstraintSubType subType = EConstraintSubType.values()[(int) ordinal];
+        int ordinal = getConstraintSubType(settingsVa);
+        EConstraintSubType subType = EConstraintSubType.values()[ordinal];
         ConstraintSettings result;
         switch (subType) {
             case Cone:
@@ -175,15 +175,15 @@ abstract public class ConstraintSettings
     // new protected methods
 
     /**
-     * Alter the user data, which holds the {@code EConstraintSubType} ordinal.
-     * (native attribute: mUserData)
+     * Initialize the {@code EConstraintSubType} ordinal, which is stored in the
+     * user data.
      *
      * @param constraintSubType the desired value (not null, default=0)
      */
     void setSubType(EConstraintSubType constraintSubType) {
         long settingsVa = va();
-        long ordinal = constraintSubType.ordinal();
-        setUserData(settingsVa, ordinal);
+        int ordinal = constraintSubType.ordinal();
+        setConstraintSubType(settingsVa, ordinal);
     }
     // *************************************************************************
     // ConstConstraintSettings methods
@@ -305,6 +305,8 @@ abstract public class ConstraintSettings
 
     native static int getConstraintPriority(long settingsVa);
 
+    native private static int getConstraintSubType(long settingsVa);
+
     native static float getDrawConstraintSize(long settingsVa);
 
     native static boolean getEnabled(long settingsVa);
@@ -315,10 +317,11 @@ abstract public class ConstraintSettings
 
     native static int getRefCount(long settingsVa);
 
-    native static long getUserData(long settingsVa);
-
     native private static void setConstraintPriority(
             long settingsVa, int level);
+
+    native private static void setConstraintSubType(
+            long settingsVa, int ordinal);
 
     native private static void setDrawConstraintSize(
             long settingsVa, float size);
@@ -332,8 +335,6 @@ abstract public class ConstraintSettings
 
     native private static void setNumVelocityStepsOverride(
             long settingsVa, int setting);
-
-    native private static void setUserData(long settingsVa, long value);
 
     native private static long toRef(long settingsVa);
 }

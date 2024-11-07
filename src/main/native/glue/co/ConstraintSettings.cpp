@@ -38,6 +38,8 @@ IMPLEMENT_REF(ConstraintSettings,
   Java_com_github_stephengold_joltjni_ConstraintSettingsRef_free,
   Java_com_github_stephengold_joltjni_ConstraintSettingsRef_getPtr)
 
+uint64 cstMask = 0xffff;
+
 /*
  * Class:     com_github_stephengold_joltjni_ConstraintSettings
  * Method:    getConstraintPriority
@@ -48,6 +50,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_ge
     const ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
     const uint32 result = pSettings->mConstraintPriority;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConstraintSettings
+ * Method:    getConstraintSubType
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_getConstraintSubType
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const ConstraintSettings * const pSettings
+            = reinterpret_cast<ConstraintSettings *> (settingsVa);
+    const jlong result = pSettings->mUserData & cstMask;
     return result;
 }
 
@@ -118,19 +133,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_ConstraintSettings
- * Method:    getUserData
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_getUserData
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ConstraintSettings * const pSettings
-            = reinterpret_cast<ConstraintSettings *> (settingsVa);
-    const uint64 result = pSettings->mUserData;
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConstraintSettings
  * Method:    setConstraintPriority
  * Signature: (JI)V
  */
@@ -139,6 +141,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_se
     ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
     pSettings->mConstraintPriority = setting;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConstraintSettings
+ * Method:    setConstraintSubType
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_setConstraintSubType
+  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+    ConstraintSettings * const pSettings
+            = reinterpret_cast<ConstraintSettings *> (settingsVa);
+    pSettings->mUserData
+            = pSettings->mUserData & ~cstMask | ((jlong)ordinal) & cstMask;
 }
 
 /*
@@ -199,18 +214,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_se
     ConstraintSettings * const pSettings
             = reinterpret_cast<ConstraintSettings *> (settingsVa);
     pSettings->mNumVelocityStepsOverride = setting;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConstraintSettings
- * Method:    setUserData
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_setUserData
-  (JNIEnv *, jclass, jlong settingsVa, jlong value) {
-    ConstraintSettings * const pSettings
-            = reinterpret_cast<ConstraintSettings *> (settingsVa);
-    pSettings->mUserData = value;
 }
 
 /*
