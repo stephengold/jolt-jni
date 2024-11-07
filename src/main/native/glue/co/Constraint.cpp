@@ -146,19 +146,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Constraint_getType
 
 /*
  * Class:     com_github_stephengold_joltjni_Constraint
- * Method:    getUserData
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Constraint_getUserData
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const Constraint * const pConstraint
-            = reinterpret_cast<Constraint *> (constraintVa);
-    const uint64 result = pConstraint->GetUserData();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Constraint
  * Method:    notifyShapeChanged
  * Signature: (JJFFF)V
  */
@@ -230,18 +217,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraint_setNumVelo
     Constraint * const pConstraint
             = reinterpret_cast<Constraint *> (constraintVa);
     pConstraint->SetNumVelocityStepsOverride(setting);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Constraint
- * Method:    setUserData
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraint_setUserData
-  (JNIEnv *, jclass, jlong constraintVa, jlong value) {
-    Constraint * const pConstraint
-            = reinterpret_cast<Constraint *> (constraintVa);
-    pConstraint->SetUserData(value);
 }
 
 /*

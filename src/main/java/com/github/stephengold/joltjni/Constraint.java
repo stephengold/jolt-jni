@@ -177,16 +177,6 @@ abstract public class Constraint extends NonCopyable
         long constraintVa = va();
         setNumVelocityStepsOverride(constraintVa, setting);
     }
-
-    /**
-     * Alter the constraint's user data.
-     *
-     * @param value the desired value (default=0)
-     */
-    public void setUserData(long value) {
-        long constraintVa = va();
-        setUserData(constraintVa, value);
-    }
     // *************************************************************************
     // ConstConstraint methods
 
@@ -290,20 +280,6 @@ abstract public class Constraint extends NonCopyable
 
         return result;
     }
-
-    /**
-     * Return the constraint's user data: can be used for anything. The
-     * constraint is unaffected.
-     *
-     * @return the value
-     */
-    @Override
-    public long getUserData() {
-        long constraintVa = va();
-        long result = getUserData(constraintVa);
-
-        return result;
-    }
     // *************************************************************************
     // RefTarget methods
 
@@ -362,8 +338,6 @@ abstract public class Constraint extends NonCopyable
 
     native private static int getType(long constraintVa);
 
-    native private static long getUserData(long constraintVa);
-
     native private static void notifyShapeChanged(
             long constraintVa, long idVa, float dx, float dy, float dz);
 
@@ -379,8 +353,6 @@ abstract public class Constraint extends NonCopyable
 
     native private static void setNumVelocityStepsOverride(
             long constraintVa, int setting);
-
-    native private static void setUserData(long constraintVa, long value);
 
     native private static long toRef(long constraintVa);
 }

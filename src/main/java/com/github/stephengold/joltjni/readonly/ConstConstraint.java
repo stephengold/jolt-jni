@@ -88,12 +88,4 @@ public interface ConstConstraint extends ConstJoltPhysicsObject {
      * @return an enum value (not null)
      */
     EConstraintType getType();
-
-    /**
-     * Return the constraint's user data: can be used for anything. The
-     * constraint is unaffected.
-     *
-     * @return the value
-     */
-    long getUserData();
 }
