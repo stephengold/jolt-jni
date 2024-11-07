@@ -80,6 +80,7 @@ static class BPLayerInterfaceImpl extends MapObj2Bp
 {
 									BPLayerInterfaceImpl()
 	{
+		// Create a mapping table from object to broad phase layer
             super(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS);
 		add(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
 		add(Layers.MOVING, BroadPhaseLayers.MOVING);
@@ -190,14 +191,17 @@ public static void main(String[] argv)
 
 	// Create mapping table from object layer to broadphase layer
 	// Note: As this is an interface, PhysicsSystem will take a reference to this so this instance needs to stay alive!
+	// Also have a look at BroadPhaseLayerInterfaceTable or BroadPhaseLayerInterfaceMask for a simpler interface.
 	BPLayerInterfaceImpl broad_phase_layer_interface=new BPLayerInterfaceImpl();
 
 	// Create class that filters object vs broadphase layers
 	// Note: As this is an interface, PhysicsSystem will take a reference to this so this instance needs to stay alive!
+	// Also have a look at ObjectVsBroadPhaseLayerFilterTable or ObjectVsBroadPhaseLayerFilterMask for a simpler interface.
 	ObjectVsBroadPhaseLayerFilterImpl object_vs_broadphase_layer_filter=new ObjectVsBroadPhaseLayerFilterImpl();
 
 	// Create class that filters object vs object layers
 	// Note: As this is an interface, PhysicsSystem will take a reference to this so this instance needs to stay alive!
+	// Also have a look at ObjectLayerPairFilterTable or ObjectLayerPairFilterMask for a simpler interface.
 	ObjectLayerPairFilterImpl object_vs_object_layer_filter=new ObjectLayerPairFilterImpl();
 
 	// Now we can create the actual physics system.
