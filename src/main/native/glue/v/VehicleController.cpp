@@ -33,10 +33,10 @@ SOFTWARE.
 using namespace JPH;
 
 IMPLEMENT_REF(VehicleController,
-  Java_com_github_stephengold_joltjni_VehicleController_copy,
-  Java_com_github_stephengold_joltjni_VehicleController_createEmpty,
-  Java_com_github_stephengold_joltjni_VehicleController_free,
-  Java_com_github_stephengold_joltjni_VehicleController_getPtr)
+  Java_com_github_stephengold_joltjni_VehicleControllerRef_copy,
+  Java_com_github_stephengold_joltjni_VehicleControllerRef_createEmpty,
+  Java_com_github_stephengold_joltjni_VehicleControllerRef_free,
+  Java_com_github_stephengold_joltjni_VehicleControllerRef_getPtr)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleController
