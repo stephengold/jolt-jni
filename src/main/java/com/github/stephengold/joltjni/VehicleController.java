@@ -106,6 +106,8 @@ public class VehicleController extends NonCopyable implements RefTarget {
     // *************************************************************************
     // native methods
 
+    native private static long getConstraint(long controllerVa);
+
     native private static int getRefCount(long controllerVa);
 
     native private static void setEmbedded(long controllerVa);

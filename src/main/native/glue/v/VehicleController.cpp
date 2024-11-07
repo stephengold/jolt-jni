@@ -40,6 +40,19 @@ IMPLEMENT_REF(VehicleController,
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleController
+ * Method:    getConstraint
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleController_getConstraint
+  (JNIEnv *, jclass, jlong controllerVa) {
+    VehicleController * const pController
+            = reinterpret_cast<VehicleController *> (controllerVa);
+    VehicleConstraint * const pResult = &pController->GetConstraint();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleController
  * Method:    getRefCount
  * Signature: (J)I
  */
