@@ -69,7 +69,7 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
         float rotX = rotation.getX();
         float rotY = rotation.getY();
         float rotZ = rotation.getZ();
-        long subShapeVa = subShape.va();
+        long subShapeVa = subShape.targetVa();
         addShape(settingsVa, offsetX, offsetY, offsetZ,
                 rotX, rotY, rotZ, rotW, subShapeVa);
     }

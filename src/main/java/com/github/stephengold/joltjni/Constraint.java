@@ -127,7 +127,7 @@ abstract public class Constraint extends NonCopyable
      */
     public void notifyShapeChanged(ConstBodyId bodyId, Vec3Arg deltaCom) {
         long constraintVa = va();
-        long idVa = bodyId.va();
+        long idVa = bodyId.targetVa();
         float dx = deltaCom.getX();
         float dy = deltaCom.getY();
         float dz = deltaCom.getZ();

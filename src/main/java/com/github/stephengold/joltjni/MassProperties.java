@@ -78,7 +78,7 @@ final public class MassProperties
      */
     public void rotate(Mat44Arg rotation) {
         long propertiesVa = va();
-        long matrixVa = rotation.va();
+        long matrixVa = rotation.targetVa();
         rotate(propertiesVa, matrixVa);
     }
 
@@ -114,7 +114,7 @@ final public class MassProperties
      */
     public MassProperties setInertia(Mat44Arg inertia) {
         long propertiesVa = va();
-        long matrixVa = inertia.va();
+        long matrixVa = inertia.targetVa();
         setInertia(propertiesVa, matrixVa);
 
         return this;

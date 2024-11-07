@@ -79,7 +79,7 @@ public class CharacterVirtual
     public CharacterVirtual(
             ConstCharacterVirtualSettings settings, RVec3Arg location,
             QuatArg orientation, long userData, PhysicsSystem system) {
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         double locX = location.xx();
         double locY = location.yy();
         double locZ = location.zz();
@@ -192,7 +192,7 @@ public class CharacterVirtual
      */
     public void setInnerBodyShape(ConstShape shape) {
         long characterVa = va();
-        long shapeVa = shape.va();
+        long shapeVa = shape.targetVa();
         setInnerBodyShape(characterVa, shapeVa);
     }
 
@@ -218,7 +218,7 @@ public class CharacterVirtual
     public void setListener(CharacterContactListener listener) {
         this.contactListener = listener;
         long characterVa = va();
-        long listenerVa = listener.va();
+        long listenerVa = listener.targetVa();
         setListener(characterVa, listenerVa);
     }
 
@@ -313,7 +313,7 @@ public class CharacterVirtual
             ObjectLayerFilter objectLayerFilter, BodyFilter bodyFilter,
             ShapeFilter shapeFilter, TempAllocator allocator) {
         long characterVa = va();
-        long shapeVa = shape.va();
+        long shapeVa = shape.targetVa();
         long bplFilterVa = broadPhaseLayerFilter.va();
         long olFilterVa = objectLayerFilter.va();
         long bodyFilterVa = bodyFilter.va();
@@ -692,7 +692,7 @@ public class CharacterVirtual
     @Override
     public boolean hasCollidedWith(ConstBodyId bodyId) {
         long characterVa = va();
-        long idVa = bodyId.va();
+        long idVa = bodyId.targetVa();
         boolean result = hasCollidedWithBody(characterVa, idVa);
 
         return result;
@@ -710,7 +710,7 @@ public class CharacterVirtual
     @Override
     public boolean hasCollidedWith(ConstCharacterVirtual otherCharacter) {
         long characterVa = va();
-        long otherVa = otherCharacter.va();
+        long otherVa = otherCharacter.targetVa();
         boolean result = hasCollidedWithCharacter(characterVa, otherVa);
 
         return result;

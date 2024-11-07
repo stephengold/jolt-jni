@@ -56,8 +56,8 @@ public class GearConstraint extends TwoBodyConstraint {
      */
     public void setConstraints(ConstConstraint hinge1, ConstConstraint hinge2) {
         long gearVa = va();
-        long hinge1Va = hinge1.va();
-        long hinge2Va = hinge2.va();
+        long hinge1Va = hinge1.targetVa();
+        long hinge2Va = hinge2.targetVa();
         setConstraints(gearVa, hinge1Va, hinge2Va);
     }
     // *************************************************************************

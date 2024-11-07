@@ -62,7 +62,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void activateBody(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         activateBody(bodyInterfaceVa, bodyIdVa);
     }
 
@@ -78,7 +78,7 @@ public class BodyInterface extends NonCopyable {
     public void activateBodiesInAaBox(ConstAaBox box,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
         long bodyInterfaceVa = va();
-        long boxVa = box.va();
+        long boxVa = box.targetVa();
         long bplFilterVa = bplFilter.va();
         long olFilterVa = olFilter.va();
         activateBodiesInAaBox(bodyInterfaceVa, boxVa, bplFilterVa, olFilterVa);
@@ -92,7 +92,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void addBody(ConstBodyId bodyId, EActivation activation) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         int activationOrdinal = activation.ordinal();
         addBody(bodyInterfaceVa, bodyIdVa, activationOrdinal);
     }
@@ -105,7 +105,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void addForce(ConstBodyId bodyId, Vec3Arg force) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         float fx = force.getX();
         float fy = force.getY();
         float fz = force.getZ();
@@ -122,7 +122,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void addForce(ConstBodyId bodyId, Vec3Arg force, RVec3Arg location) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         float fx = force.getX();
         float fy = force.getY();
         float fz = force.getZ();
@@ -140,7 +140,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void addImpulse(ConstBodyId bodyId, Vec3Arg impulse) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         float jx = impulse.getX();
         float jy = impulse.getY();
         float jz = impulse.getZ();
@@ -158,7 +158,7 @@ public class BodyInterface extends NonCopyable {
     public void addImpulse(ConstBodyId bodyId, Vec3Arg impulse,
             RVec3Arg location) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         float jx = impulse.getX();
         float jy = impulse.getY();
         float jz = impulse.getZ();
@@ -176,7 +176,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void addTorque(ConstBodyId bodyId, Vec3Arg torque) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         float x = torque.getX();
         float y = torque.getY();
         float z = torque.getZ();
@@ -223,7 +223,7 @@ public class BodyInterface extends NonCopyable {
      */
     public Body createBody(ConstBodyCreationSettings settings) {
         long bodyInterfaceVa = va();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         long bodyVa = createBody(bodyInterfaceVa, settingsVa);
         if (bodyVa == 0L) {
             throw new IllegalStateException("ran out of bodies");
@@ -246,8 +246,8 @@ public class BodyInterface extends NonCopyable {
             ConstBodyId body1Id, ConstBodyId body2Id) {
         long bodyInterfaceVa = va();
         long settingsVa = settings.va();
-        long body1IdVa = body1Id.va();
-        long body2IdVa = body2Id.va();
+        long body1IdVa = body1Id.targetVa();
+        long body2IdVa = body2Id.targetVa();
         long constraintVa = createConstraint(
                 bodyInterfaceVa, settingsVa, body1IdVa, body2IdVa);
         TwoBodyConstraint result
@@ -264,7 +264,7 @@ public class BodyInterface extends NonCopyable {
      */
     public Body createSoftBody(ConstSoftBodyCreationSettings settings) {
         long bodyInterfaceVa = va();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         long bodyVa = createSoftBody(bodyInterfaceVa, settingsVa);
         if (bodyVa == 0L) {
             throw new IllegalStateException("ran out of bodies");
@@ -281,7 +281,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void deactivateBody(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         deactivateBody(bodyInterfaceVa, bodyIdVa);
     }
 
@@ -292,7 +292,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void destroyBody(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         destroyBody(bodyInterfaceVa, bodyIdVa);
     }
 
@@ -305,7 +305,7 @@ public class BodyInterface extends NonCopyable {
      */
     public Vec3 getAngularVelocity(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         float x = getAngularVelocityX(bodyInterfaceVa, bodyIdVa);
         float y = getAngularVelocityY(bodyInterfaceVa, bodyIdVa);
         float z = getAngularVelocityZ(bodyInterfaceVa, bodyIdVa);
@@ -322,7 +322,7 @@ public class BodyInterface extends NonCopyable {
      */
     public EBodyType getBodyType(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         int ordinal = getBodyType(bodyInterfaceVa, bodyIdVa);
         EBodyType result = EBodyType.values()[ordinal];
 
@@ -337,7 +337,7 @@ public class BodyInterface extends NonCopyable {
      */
     public RVec3 getCenterOfMassPosition(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         double xx = getCenterOfMassPositionX(bodyInterfaceVa, bodyIdVa);
         double yy = getCenterOfMassPositionY(bodyInterfaceVa, bodyIdVa);
         double zz = getCenterOfMassPositionZ(bodyInterfaceVa, bodyIdVa);
@@ -354,7 +354,7 @@ public class BodyInterface extends NonCopyable {
      */
     public RMat44 getCenterOfMassTransform(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         long matrixVa = getCenterOfMassTransform(bodyInterfaceVa, bodyIdVa);
         RMat44 result = new RMat44(matrixVa, true);
 
@@ -369,7 +369,7 @@ public class BodyInterface extends NonCopyable {
      */
     public float getFriction(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         float result = getFriction(bodyInterfaceVa, bodyIdVa);
         return result;
     }
@@ -382,7 +382,7 @@ public class BodyInterface extends NonCopyable {
      */
     public float getGravityFactor(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         float result = getGravityFactor(bodyInterfaceVa, bodyIdVa);
 
         return result;
@@ -397,7 +397,7 @@ public class BodyInterface extends NonCopyable {
      */
     public Vec3 getLinearVelocity(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         float x = getLinearVelocityX(bodyInterfaceVa, bodyIdVa);
         float y = getLinearVelocityY(bodyInterfaceVa, bodyIdVa);
         float z = getLinearVelocityZ(bodyInterfaceVa, bodyIdVa);
@@ -414,7 +414,7 @@ public class BodyInterface extends NonCopyable {
      */
     public EMotionType getMotionType(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         int ordinal = getMotionType(bodyInterfaceVa, bodyIdVa);
         EMotionType result = EMotionType.values()[ordinal];
 
@@ -429,7 +429,7 @@ public class BodyInterface extends NonCopyable {
      */
     public RVec3 getPosition(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         double xx = getPositionX(bodyInterfaceVa, bodyIdVa);
         double yy = getPositionY(bodyInterfaceVa, bodyIdVa);
         double zz = getPositionZ(bodyInterfaceVa, bodyIdVa);
@@ -448,7 +448,7 @@ public class BodyInterface extends NonCopyable {
     public void getPositionAndRotation(
             ConstBodyId bodyId, RVec3 storeLocation, Quat storeOrientation) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
 
         double xx = getPositionX(bodyInterfaceVa, bodyIdVa);
         double yy = getPositionY(bodyInterfaceVa, bodyIdVa);
@@ -470,7 +470,7 @@ public class BodyInterface extends NonCopyable {
      */
     public float getRestitution(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         float result = getRestitution(bodyInterfaceVa, bodyIdVa);
 
         return result;
@@ -484,7 +484,7 @@ public class BodyInterface extends NonCopyable {
      */
     public Quat getRotation(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
 
         float qw = getRotationW(bodyInterfaceVa, bodyIdVa);
         float qx = getRotationX(bodyInterfaceVa, bodyIdVa);
@@ -503,7 +503,7 @@ public class BodyInterface extends NonCopyable {
      */
     public ShapeRefC getShape(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         long shapeRefVa = getShape(bodyInterfaceVa, bodyIdVa);
         ShapeRefC result = new ShapeRefC(shapeRefVa, true);
 
@@ -527,7 +527,7 @@ public class BodyInterface extends NonCopyable {
      * @return {@code true} if active, otherwise {@code false}
      */
     public boolean isActive(ConstBodyId bodyId) {
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         boolean result = isActive(va(), bodyIdVa);
         return result;
     }
@@ -540,7 +540,7 @@ public class BodyInterface extends NonCopyable {
      */
     public boolean isAdded(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         boolean result = isAdded(bodyInterfaceVa, bodyIdVa);
         return result;
     }
@@ -559,7 +559,7 @@ public class BodyInterface extends NonCopyable {
     public void moveKinematic(ConstBodyId bodyId,
             RVec3Arg location, QuatArg orientation, float deltaTime) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         double xx = location.xx();
         double yy = location.yy();
         double zz = location.zz();
@@ -582,7 +582,7 @@ public class BodyInterface extends NonCopyable {
     public void notifyShapeChanged(ConstBodyId bodyId, Vec3Arg prevCom,
             boolean updateMassProperties, EActivation activation) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         int activationOrdinal = activation.ordinal();
         notifyShapeChanged(bodyInterfaceVa, bodyIdVa, prevCom.getX(),
                 prevCom.getY(), prevCom.getZ(), updateMassProperties,
@@ -595,7 +595,7 @@ public class BodyInterface extends NonCopyable {
      * @param bodyId the ID of the body to remove (not null, unaffected)
      */
     public void removeBody(ConstBodyId bodyId) {
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         removeBody(va(), bodyIdVa);
     }
 
@@ -607,7 +607,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void setAngularVelocity(ConstBodyId bodyId, Vec3Arg omega) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         setAngularVelocity(bodyInterfaceVa, bodyIdVa,
                 omega.getX(), omega.getY(), omega.getZ());
     }
@@ -621,7 +621,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void setFriction(ConstBodyId bodyId, float friction) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         setFriction(bodyInterfaceVa, bodyIdVa, friction);
     }
 
@@ -633,7 +633,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void setGravityFactor(ConstBodyId bodyId, float factor) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         setGravityFactor(bodyInterfaceVa, bodyIdVa, factor);
     }
 
@@ -649,7 +649,7 @@ public class BodyInterface extends NonCopyable {
     public void setLinearAndAngularVelocity(ConstBodyId bodyId,
             Vec3Arg linearVelocity, Vec3Arg angularVelocity) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         float vx = linearVelocity.getX();
         float vy = linearVelocity.getY();
         float vz = linearVelocity.getZ();
@@ -667,7 +667,7 @@ public class BodyInterface extends NonCopyable {
      * @param velocity the desired velocity (not null, unaffected)
      */
     public void setLinearVelocity(ConstBodyId bodyId, Vec3Arg velocity) {
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         setLinearVelocity(va(), bodyIdVa,
                 velocity.getX(), velocity.getY(), velocity.getZ());
     }
@@ -683,7 +683,7 @@ public class BodyInterface extends NonCopyable {
     public void setPositionAndRotation(ConstBodyId bodyId, RVec3Arg location,
             QuatArg orientation, EActivation activationMode) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         double locX = location.xx();
         double locY = location.yy();
         double locZ = location.zz();
@@ -705,7 +705,7 @@ public class BodyInterface extends NonCopyable {
      */
     public void setRestitution(ConstBodyId bodyId, float restitution) {
         long bodyInterfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         setRestitution(bodyInterfaceVa, bodyIdVa, restitution);
     }
     // *************************************************************************

@@ -57,7 +57,7 @@ public class SoftBodyCreationSettings
      */
     public SoftBodyCreationSettings(ConstSoftBodySharedSettings settings,
             RVec3Arg location, QuatArg orientation, int objectLayer) {
-        long sharedSettingsVa = settings.va();
+        long sharedSettingsVa = settings.targetVa();
         double xx = location.xx();
         double yy = location.yy();
         double zz = location.zz();

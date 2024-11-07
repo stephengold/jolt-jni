@@ -68,7 +68,7 @@ public class IgnoreMultipleBodiesFilter extends BodyFilter {
      */
     public void ignoreBody(ConstBodyId bodyId) {
         long filterVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         ignoreBody(filterVa, bodyIdVa);
     }
     // *************************************************************************

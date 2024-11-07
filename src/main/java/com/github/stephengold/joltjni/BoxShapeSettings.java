@@ -81,7 +81,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
         float hx = halfExtents.getX();
         float hy = halfExtents.getY();
         float hz = halfExtents.getZ();
-        long materialVa = (material == null) ? 0L : material.va();
+        long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createBoxShapeSettings(
                 hx, hy, hz, convexRadius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting

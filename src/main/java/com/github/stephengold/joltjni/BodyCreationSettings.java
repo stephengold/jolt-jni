@@ -60,7 +60,7 @@ public class BodyCreationSettings
      */
     public BodyCreationSettings(ConstShape shape, RVec3Arg loc, QuatArg orient,
             EMotionType motionType, int objLayer) {
-        long shapeVa = shape.va();
+        long shapeVa = shape.targetVa();
         int motionTypeOrdinal = motionType.ordinal();
         long bodySettingsVa = createFromShape(
                 shapeVa, loc.xx(), loc.yy(), loc.zz(),
@@ -414,7 +414,7 @@ public class BodyCreationSettings
      */
     public void setShape(ConstShape shape) {
         long bodySettingsVa = va();
-        long shapeVa = shape.va();
+        long shapeVa = shape.targetVa();
         setShape(bodySettingsVa, shapeVa);
     }
 

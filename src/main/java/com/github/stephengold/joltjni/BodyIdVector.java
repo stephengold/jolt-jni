@@ -53,7 +53,7 @@ public class BodyIdVector extends Array<BodyId> {
      */
     public int find(ConstBodyId id) {
         long vectorVa = va();
-        long idVa = id.va();
+        long idVa = id.targetVa();
         int numIds = size(vectorVa);
         for (int i = 0; i < numIds; ++i) {
             long id2Va = getId(vectorVa, i);

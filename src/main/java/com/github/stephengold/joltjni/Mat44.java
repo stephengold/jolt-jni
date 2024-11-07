@@ -296,7 +296,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public boolean isEqual(Mat44Arg m2) {
         long m1Va = va();
-        long m2Va = m2.va();
+        long m2Va = m2.targetVa();
         boolean result = equals(m1Va, m2Va);
 
         return result;
@@ -312,7 +312,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public Mat44 multiply(Mat44Arg m2) {
         long m1Va = va();
-        long m2Va = m2.va();
+        long m2Va = m2.targetVa();
         long productVa = multiply(m1Va, m2Va);
         Mat44 result = new Mat44(productVa, true);
 
@@ -329,7 +329,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public Mat44 multiply3x3(Mat44Arg arg) {
         long currentVa = va();
-        long argVa = arg.va();
+        long argVa = arg.targetVa();
         long productVa = multiply3x3(currentVa, argVa);
         Mat44 result = new Mat44(productVa, true);
 

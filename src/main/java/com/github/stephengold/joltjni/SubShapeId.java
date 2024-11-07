@@ -68,7 +68,7 @@ public class SubShapeId extends JoltPhysicsObject implements ConstSubShapeId {
     @Override
     public boolean contentEquals(ConstSubShapeId otherId) {
         long idVa = va();
-        long otherIdVa = otherId.va();
+        long otherIdVa = otherId.targetVa();
         boolean result = contentEquals(idVa, otherIdVa);
 
         return result;

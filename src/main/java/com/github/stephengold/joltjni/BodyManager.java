@@ -70,7 +70,7 @@ public class BodyManager extends NonCopyable {
         long managerVa = va();
         long[] idVas = new long[number];
         for (int i = 0; i < number; ++i) {
-            idVas[i] = idArray[i].va();
+            idVas[i] = idArray[i].targetVa();
         }
         activateBodies(managerVa, idVas);
     }
@@ -97,7 +97,7 @@ public class BodyManager extends NonCopyable {
      */
     public Body allocateBody(ConstBodyCreationSettings settings) {
         long managerVa = va();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         long bodyVa = allocateBody(managerVa, settingsVa);
         Body result = new Body(bodyVa);
 
@@ -123,7 +123,7 @@ public class BodyManager extends NonCopyable {
         long managerVa = va();
         long[] idVas = new long[number];
         for (int i = 0; i < number; ++i) {
-            idVas[i] = idArray[i].va();
+            idVas[i] = idArray[i].targetVa();
         }
         deactivateBodies(managerVa, idVas);
     }
@@ -147,7 +147,7 @@ public class BodyManager extends NonCopyable {
         long managerVa = va();
         long[] idVas = new long[number];
         for (int i = 0; i < number; ++i) {
-            idVas[i] = idArray[i].va();
+            idVas[i] = idArray[i].targetVa();
         }
         destroyBodies(managerVa, idVas);
     }
@@ -217,7 +217,7 @@ public class BodyManager extends NonCopyable {
             ConstBroadPhaseLayerInterface map) {
         this.layerMap = map;
         long managerVa = va();
-        long mapVa = map.va();
+        long mapVa = map.targetVa();
         init(managerVa, maxBodies, numBodyMutexes, mapVa);
     }
     // *************************************************************************

@@ -55,7 +55,7 @@ public class BodyLockInterfaceNoLock extends BodyLockInterface {
     @Override
     public SharedMutex lockRead(ConstBodyId bodyId) {
         long interfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         long mutexVa = lockRead(interfaceVa, bodyIdVa);
         SharedMutex result = new SharedMutex(mutexVa, true);
 
@@ -71,7 +71,7 @@ public class BodyLockInterfaceNoLock extends BodyLockInterface {
     @Override
     public SharedMutex lockWrite(ConstBodyId bodyId) {
         long interfaceVa = va();
-        long bodyIdVa = bodyId.va();
+        long bodyIdVa = bodyId.targetVa();
         long mutexVa = lockWrite(interfaceVa, bodyIdVa);
         SharedMutex result = new SharedMutex(mutexVa, true);
 

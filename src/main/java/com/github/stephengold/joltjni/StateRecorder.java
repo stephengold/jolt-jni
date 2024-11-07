@@ -199,7 +199,7 @@ public class StateRecorder extends NonCopyable {
      */
     public void write(RMat44Arg matrix) {
         long recorderVa = va();
-        long matrixVa = matrix.va();
+        long matrixVa = matrix.targetVa();
         writeRMat44(recorderVa, matrixVa);
     }
 

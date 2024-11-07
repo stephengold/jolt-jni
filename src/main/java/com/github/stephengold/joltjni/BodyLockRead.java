@@ -40,7 +40,7 @@ public class BodyLockRead extends NonCopyable {
      */
     public BodyLockRead(BodyLockInterface bli, ConstBodyId id) {
         long interfaceVa = bli.va();
-        long idVa = id.va();
+        long idVa = id.targetVa();
         long lockVa = createBodyLockRead(interfaceVa, idVa);
         setVirtualAddress(lockVa, true);
     }

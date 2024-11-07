@@ -46,11 +46,11 @@ public class RShapeCast extends JoltPhysicsObject {
      */
     public RShapeCast(ConstShape shape, Vec3Arg scale, RMat44Arg comStart,
             Vec3Arg offset) {
-        long shapeVa = shape.va();
+        long shapeVa = shape.targetVa();
         float sx = scale.getX();
         float sy = scale.getY();
         float sz = scale.getZ();
-        long comStartVa = comStart.va();
+        long comStartVa = comStart.targetVa();
         float dx = offset.getX();
         float dy = offset.getY();
         float dz = offset.getZ();
@@ -71,15 +71,15 @@ public class RShapeCast extends JoltPhysicsObject {
      */
     public RShapeCast(ConstShape shape, Vec3Arg scale, RMat44Arg comStart,
             Vec3Arg offset, ConstAaBox wsBounds) {
-        long shapeVa = shape.va();
+        long shapeVa = shape.targetVa();
         float sx = scale.getX();
         float sy = scale.getY();
         float sz = scale.getZ();
-        long comStartVa = comStart.va();
+        long comStartVa = comStart.targetVa();
         float dx = offset.getX();
         float dy = offset.getY();
         float dz = offset.getZ();
-        long boundsVa = wsBounds.va();
+        long boundsVa = wsBounds.targetVa();
         long castVa = createRShapeCast(
                 shapeVa, sx, sy, sz, comStartVa, dx, dy, dz, boundsVa);
         setVirtualAddress(castVa, () -> free(castVa));

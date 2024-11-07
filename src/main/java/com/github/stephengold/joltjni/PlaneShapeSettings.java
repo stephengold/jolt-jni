@@ -76,7 +76,7 @@ public class PlaneShapeSettings extends ShapeSettings {
         float ny = plane.getNormalY();
         float nz = plane.getNormalZ();
         float planeConstant = plane.getConstant();
-        long materialVa = (material == null) ? 0L : material.va();
+        long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createPlaneShapeSettings(
                 nx, ny, nz, planeConstant, materialVa, halfExtent);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
@@ -163,7 +163,7 @@ public class PlaneShapeSettings extends ShapeSettings {
      */
     public void setMaterial(ConstPhysicsMaterial material) {
         long settingsVa = va();
-        long materialVa = (material == null) ? 0L : material.va();
+        long materialVa = (material == null) ? 0L : material.targetVa();
         setMaterial(settingsVa, materialVa);
     }
 

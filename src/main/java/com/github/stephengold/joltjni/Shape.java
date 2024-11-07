@@ -192,7 +192,7 @@ abstract public class Shape extends NonCopyable
             boolean wireframe) {
         long shapeVa = va();
         long rendererVa = renderer.va();
-        long transformVa = comTransform.va();
+        long transformVa = comTransform.targetVa();
         float scaleX = scale.getX();
         float scaleY = scale.getY();
         float scaleZ = scale.getZ();
@@ -314,7 +314,7 @@ abstract public class Shape extends NonCopyable
     @Override
     public AaBox getWorldSpaceBounds(Mat44Arg comTransform, Vec3Arg scale) {
         long shapeVa = va();
-        long matrixVa = comTransform.va();
+        long matrixVa = comTransform.targetVa();
         float sx = scale.getX();
         float sy = scale.getY();
         float sz = scale.getZ();
@@ -336,7 +336,7 @@ abstract public class Shape extends NonCopyable
     @Override
     public AaBox getWorldSpaceBounds(RMat44Arg comTransform, Vec3Arg scale) {
         long shapeVa = va();
-        long rMat44Va = comTransform.va();
+        long rMat44Va = comTransform.targetVa();
         float sx = scale.getX();
         float sy = scale.getY();
         float sz = scale.getZ();

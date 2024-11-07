@@ -94,7 +94,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
             buffer.put(point.getY());
             buffer.put(point.getZ());
         }
-        long materialVa = (material == null) ? 0L : material.va();
+        long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
                 numPoints, buffer, maxConvexRadius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
@@ -140,7 +140,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
             buffer.put(point.getY());
             buffer.put(point.getZ());
         }
-        long materialVa = (material == null) ? 0L : material.va();
+        long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
                 numPoints, buffer, maxConvexRadius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
@@ -185,7 +185,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      */
     public ConvexHullShapeSettings(int numPoints, FloatBuffer points,
             float maxConvexRadius, ConstPhysicsMaterial material) {
-        long materialVa = (material == null) ? 0L : material.va();
+        long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
                 numPoints, points, maxConvexRadius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting

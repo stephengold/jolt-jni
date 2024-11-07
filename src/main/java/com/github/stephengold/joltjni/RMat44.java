@@ -64,7 +64,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * @param spMatrix the matrix to copy (not null, unaffected)
      */
     public RMat44(Mat44Arg spMatrix) {
-        long spMatrixVa = spMatrix.va();
+        long spMatrixVa = spMatrix.targetVa();
         long matrixVa = createFromSpMatrix(spMatrixVa);
         setVirtualAddress(matrixVa, () -> free(matrixVa));
     }
@@ -308,7 +308,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     @Override
     public boolean isEqual(RMat44Arg m2) {
         long m1Va = va();
-        long m2Va = m2.va();
+        long m2Va = m2.targetVa();
         boolean result = equals(m1Va, m2Va);
 
         return result;
@@ -323,7 +323,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     @Override
     public RMat44 multiply(RMat44Arg m2) {
         long m1Va = va();
-        long m2Va = m2.va();
+        long m2Va = m2.targetVa();
         long productVa = multiply(m1Va, m2Va);
         RMat44 result = new RMat44(productVa, true);
 

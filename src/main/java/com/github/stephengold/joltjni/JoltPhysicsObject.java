@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
+import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 import java.lang.ref.Cleaner;
 
@@ -107,6 +108,17 @@ abstract public class JoltPhysicsObject
     public static void startCleaner() {
         cleaner = Cleaner.create();
     }
+
+    /**
+     * Return the virtual address of the assigned native object, assuming one is
+     * assigned. Both objects are unaffected.
+     *
+     * @return the virtual address (not zero)
+     */
+    final public long va() {
+        assert virtualAddress != 0L;
+        return virtualAddress;
+    }
     // *************************************************************************
     // new protected methods
 
@@ -168,7 +180,7 @@ abstract public class JoltPhysicsObject
      * comes before other; positive if this comes after other
      */
     @Override
-    public int compareTo(ConstJoltPhysicsObject other) {
+    public int compareTo(JoltPhysicsObject other) {
         long otherVa = other.va();
         int result = Long.compare(virtualAddress, otherVa);
 
@@ -205,13 +217,15 @@ abstract public class JoltPhysicsObject
     }
 
     /**
-     * Return the virtual address of the assigned native object, assuming one is
-     * assigned. Both objects are unaffected.
+     * Return the address of the native object, assuming this is not a counted
+     * reference. No objects are affected.
      *
-     * @return the virtual address (not zero)
+     * @return a virtual address (not zero)
      */
     @Override
-    final public long va() {
+    public long targetVa() {
+        assert !(this instanceof Ref) :
+                getClass().getSimpleName() + " must override targetVa()";
         assert virtualAddress != 0L;
         return virtualAddress;
     }
@@ -233,8 +247,7 @@ abstract public class JoltPhysicsObject
             result = true;
         } else if (otherObject != null
                 && otherObject.getClass() == getClass()) {
-            ConstJoltPhysicsObject otherJpo
-                    = (ConstJoltPhysicsObject) otherObject;
+            JoltPhysicsObject otherJpo = (JoltPhysicsObject) otherObject;
             long otherVa = otherJpo.va();
             result = (virtualAddress == otherVa);
         } else {

@@ -114,7 +114,7 @@ abstract public class DebugRenderer extends NonCopyable {
      */
     public void drawBox(ConstAaBox box, ConstColor color,
             ECastShadow castShadow, EDrawMode drawMode) {
-        long boxVa = box.va();
+        long boxVa = box.targetVa();
         int colorInt = color.getUInt32();
         int csOrdinal = castShadow.ordinal();
         int drawModeOrdinal = drawMode.ordinal();
@@ -156,8 +156,8 @@ abstract public class DebugRenderer extends NonCopyable {
      */
     public void drawBox(RMat44Arg transform, ConstAaBox box, ConstColor color,
             ECastShadow castShadow, EDrawMode drawMode) {
-        long transformVa = transform.va();
-        long boxVa = box.va();
+        long transformVa = transform.targetVa();
+        long boxVa = box.targetVa();
         int colorInt = color.getUInt32();
         int csOrdinal = castShadow.ordinal();
         int drawModeOrdinal = drawMode.ordinal();
@@ -204,7 +204,7 @@ abstract public class DebugRenderer extends NonCopyable {
      */
     public void drawCapsule(RMat44Arg transform, float halfHeight, float radius,
             ConstColor color, ECastShadow castShadow, EDrawMode drawMode) {
-        long transformVa = transform.va();
+        long transformVa = transform.targetVa();
         int colorInt = color.getUInt32();
         int csOrdinal = castShadow.ordinal();
         int drawModeOrdinal = drawMode.ordinal();
@@ -228,7 +228,7 @@ abstract public class DebugRenderer extends NonCopyable {
      * @param size the desired size (default=1)
      */
     public void drawCoordinateSystem(RMat44Arg transform, float size) {
-        long transformVa = transform.va();
+        long transformVa = transform.targetVa();
         drawCoordinateSystem(transformVa, size);
     }
 
@@ -274,7 +274,7 @@ abstract public class DebugRenderer extends NonCopyable {
     public void drawCylinder(
             RMat44Arg transform, float halfHeight, float radius,
             ConstColor color, ECastShadow castShadow, EDrawMode drawMode) {
-        long transformVa = transform.va();
+        long transformVa = transform.targetVa();
         int colorInt = color.getUInt32();
         int csOrdinal = castShadow.ordinal();
         int drawModeOrdinal = drawMode.ordinal();
@@ -455,7 +455,7 @@ abstract public class DebugRenderer extends NonCopyable {
      * @param color the desired color (not null, unaffected)
      */
     public void drawWireBox(ConstAaBox box, ConstColor color) {
-        long boxVa = box.va();
+        long boxVa = box.targetVa();
         int colorInt = color.getUInt32();
         drawWireBoxAligned(boxVa, colorInt);
     }
@@ -467,7 +467,7 @@ abstract public class DebugRenderer extends NonCopyable {
      * @param color the desired color (not null, unaffected)
      */
     public void drawWireBox(ConstOrientedBox box, ConstColor color) {
-        long boxVa = box.va();
+        long boxVa = box.targetVa();
         int colorInt = color.getUInt32();
         drawWireBoxOriented(boxVa, colorInt);
     }
@@ -481,8 +481,8 @@ abstract public class DebugRenderer extends NonCopyable {
      */
     public void drawWireBox(
             RMat44Arg transform, ConstAaBox box, ConstColor color) {
-        long transformVa = transform.va();
-        long boxVa = box.va();
+        long transformVa = transform.targetVa();
+        long boxVa = box.targetVa();
         int colorInt = color.getUInt32();
         drawWireBoxTransformed(transformVa, boxVa, colorInt);
     }
@@ -560,7 +560,7 @@ abstract public class DebugRenderer extends NonCopyable {
      */
     public void drawWireUnitSphere(
             RMat44Arg transform, ConstColor color, int level) {
-        long transformVa = transform.va();
+        long transformVa = transform.targetVa();
         int colorInt = color.getUInt32();
         drawWireUnitSphere(transformVa, colorInt, level);
     }

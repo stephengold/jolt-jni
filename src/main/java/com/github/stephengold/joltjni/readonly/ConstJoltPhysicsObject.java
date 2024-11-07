@@ -21,13 +21,14 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.JoltPhysicsObject;
+
 /**
  * Read-only access to a {@code JoltPhysicsObject}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstJoltPhysicsObject
-        extends Comparable<ConstJoltPhysicsObject> {
+public interface ConstJoltPhysicsObject extends Comparable<JoltPhysicsObject> {
     // *************************************************************************
     // new methods exposed
 
@@ -52,10 +53,10 @@ public interface ConstJoltPhysicsObject
     boolean ownsNativeObject();
 
     /**
-     * Return the virtual address of the assigned native object, assuming one is
-     * assigned. Both objects are unaffected.
+     * Return the address of the target object (if this is a counted reference)
+     * or else the address of the native object. No objects are affected.
      *
-     * @return the virtual address (not zero)
+     * @return a virtual address (not zero)
      */
-    long va();
+    long targetVa();
 }

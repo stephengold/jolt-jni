@@ -525,11 +525,11 @@ public class NarrowPhaseQuery extends NonCopyable {
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
             BodyFilter bodyFilter, ShapeFilter shapeFilter) {
         long queryVa = va();
-        long shapeVa = shape.va();
+        long shapeVa = shape.targetVa();
         float sx = shapeScale.getX();
         float sy = shapeScale.getY();
         float sz = shapeScale.getZ();
-        long transformVa = comTransform.va();
+        long transformVa = comTransform.targetVa();
         long settingsVa = settings.va();
         double baseX = base.xx();
         double baseY = base.yy();

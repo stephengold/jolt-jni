@@ -53,7 +53,7 @@ public class CharacterVsCharacterCollisionSimple
      */
     public void add(ConstCharacterVirtual character) {
         long interfaceVa = va();
-        long characterVa = character.va();
+        long characterVa = character.targetVa();
         add(interfaceVa, characterVa);
     }
 
@@ -83,7 +83,7 @@ public class CharacterVsCharacterCollisionSimple
      */
     public void remove(ConstCharacterVirtual character) {
         long interfaceVa = va();
-        long characterVa = character.va();
+        long characterVa = character.targetVa();
         remove(interfaceVa, characterVa);
     }
     // *************************************************************************

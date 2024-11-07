@@ -59,7 +59,7 @@ public class BodyFilter extends NonCopyable {
      */
     public boolean shouldCollide(ConstBodyId bodyId) {
         long filterVa = va();
-        long idVa = bodyId.va();
+        long idVa = bodyId.targetVa();
         boolean result = shouldCollide(filterVa, idVa);
 
         return result;

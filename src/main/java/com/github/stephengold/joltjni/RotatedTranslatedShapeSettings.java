@@ -63,7 +63,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         float rotX = rotation.getX();
         float rotY = rotation.getY();
         float rotZ = rotation.getZ();
-        long baseShapeVa = baseShape.va();
+        long baseShapeVa = baseShape.targetVa();
         long rtssVa = createSettingsFromShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
         setVirtualAddress(rtssVa, null); // no owner due to ref counting

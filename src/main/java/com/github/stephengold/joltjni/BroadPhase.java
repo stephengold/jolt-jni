@@ -144,7 +144,7 @@ abstract public class BroadPhase extends BroadPhaseQuery {
     public void init(BodyManager manager, ConstBroadPhaseLayerInterface map) {
         long phaseVa = va();
         long managerVa = manager.va();
-        long mapVa = map.va();
+        long mapVa = map.targetVa();
         init(phaseVa, managerVa, mapVa);
     }
 

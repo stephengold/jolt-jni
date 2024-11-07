@@ -85,7 +85,7 @@ public class CharacterBaseSettings
      */
     public void setShape(ConstShape shape) {
         long settingsVa = va();
-        long shapeVa = shape.va();
+        long shapeVa = shape.targetVa();
         setShape(settingsVa, shapeVa);
     }
 

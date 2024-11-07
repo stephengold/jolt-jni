@@ -127,7 +127,7 @@ public class PhysicsSystem extends NonCopyable {
     public void addStepListener(PhysicsStepListener listener) {
         stepListeners.add(listener);
         long systemVa = va();
-        long listenerVa = listener.va();
+        long listenerVa = listener.targetVa();
         addStepListener(systemVa, listenerVa);
     }
 
@@ -504,9 +504,9 @@ public class PhysicsSystem extends NonCopyable {
         this.ovoFilter = ovoFilter;
 
         long systemVa = va();
-        long mapVa = map.va();
-        long ovbFilterVa = ovbFilter.va();
-        long ovoFilterVa = ovoFilter.va();
+        long mapVa = map.targetVa();
+        long ovbFilterVa = ovbFilter.targetVa();
+        long ovoFilterVa = ovoFilter.targetVa();
         init(systemVa, maxBodies, numBodyMutexes, maxBodyPairs,
                 maxContactConstraints, mapVa, ovbFilterVa, ovoFilterVa);
     }

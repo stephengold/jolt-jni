@@ -54,7 +54,7 @@ public class OffsetCenterOfMassShape extends DecoratedShape {
         float offsetX = offset.getX();
         float offsetY = offset.getY();
         float offsetZ = offset.getZ();
-        long baseShapeVa = baseShape.va();
+        long baseShapeVa = baseShape.targetVa();
         long ocomShapeVa = createShape(baseShapeVa, offsetX, offsetY, offsetZ);
         setVirtualAddress(ocomShapeVa, null); // no owner due to ref counting
     }
@@ -70,7 +70,7 @@ public class OffsetCenterOfMassShape extends DecoratedShape {
         float offsetY = offset.getY();
         float offsetZ = offset.getZ();
         ConstShape baseShape = baseShapeRef.getPtr();
-        long baseShapeVa = baseShape.va();
+        long baseShapeVa = baseShape.targetVa();
         long ocomShapeVa = createShape(baseShapeVa, offsetX, offsetY, offsetZ);
         setVirtualAddress(ocomShapeVa, null); // no owner due to ref counting
     }

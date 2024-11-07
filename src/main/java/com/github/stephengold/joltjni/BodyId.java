@@ -141,7 +141,7 @@ public class BodyId extends JoltPhysicsObject implements ConstBodyId {
     @Override
     public boolean isEqual(ConstBodyId id2) {
         long id1va = va();
-        long id2va = id2.va();
+        long id2va = id2.targetVa();
         boolean result = equals(id1va, id2va);
 
         return result;

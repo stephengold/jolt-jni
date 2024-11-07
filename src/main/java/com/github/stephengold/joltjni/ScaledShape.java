@@ -40,7 +40,7 @@ public class ScaledShape extends DecoratedShape {
      * @param scaleFactors the desired scale factors (not null)
      */
     public ScaledShape(ConstShape baseShape, Vec3Arg scaleFactors) {
-        long baseShapeVa = baseShape.va();
+        long baseShapeVa = baseShape.targetVa();
         float scaleX = scaleFactors.getX();
         float scaleY = scaleFactors.getY();
         float scaleZ = scaleFactors.getZ();
@@ -69,7 +69,7 @@ public class ScaledShape extends DecoratedShape {
      */
     public ScaledShape(ShapeRefC baseShapeRef, Vec3Arg scaleFactors) {
         ConstShape baseShape = baseShapeRef.getPtr();
-        long baseShapeVa = baseShape.va();
+        long baseShapeVa = baseShape.targetVa();
         float scaleX = scaleFactors.getX();
         float scaleY = scaleFactors.getY();
         float scaleZ = scaleFactors.getZ();

@@ -124,7 +124,7 @@ public class CharacterVirtualSettings
      */
     public void setInnerBodyShape(ConstShape shape) {
         long settingsVa = va();
-        long shapeVa = (shape == null) ? 0L : shape.va();
+        long shapeVa = (shape == null) ? 0L : shape.targetVa();
         setInnerBodyShape(settingsVa, shapeVa);
     }
 

@@ -474,7 +474,7 @@ public class MotionProperties extends JoltPhysicsObject {
     public void setMassProperties(
             int allowedDofs, ConstMassProperties massProperties) {
         long propertiesVa = va();
-        long massPropsVa = massProperties.va();
+        long massPropsVa = massProperties.targetVa();
         setMassProperties(propertiesVa, allowedDofs, massPropsVa);
     }
 

@@ -62,7 +62,7 @@ public class RotatedTranslatedShape extends DecoratedShape {
         float rotX = rotation.getX();
         float rotY = rotation.getY();
         float rotZ = rotation.getZ();
-        long baseShapeVa = baseShape.va();
+        long baseShapeVa = baseShape.targetVa();
         long scaledShapeVa = createRotatedTranslatedShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
         setVirtualAddress(scaledShapeVa, null); // no owner due to ref counting
@@ -85,7 +85,7 @@ public class RotatedTranslatedShape extends DecoratedShape {
         float rotY = rotation.getY();
         float rotZ = rotation.getZ();
         ConstShape baseShape = baseShapeRef.getPtr();
-        long baseShapeVa = baseShape.va();
+        long baseShapeVa = baseShape.targetVa();
         long scaledShapeVa = createRotatedTranslatedShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
         setVirtualAddress(scaledShapeVa, null); // no owner due to ref counting

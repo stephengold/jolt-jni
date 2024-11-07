@@ -159,7 +159,7 @@ public class SoftBodySharedSettings
         int numAttributes = vertexAttributes.length;
         long[] attributeVas = new long[numAttributes];
         for (int i = 0; i < numAttributes; ++i) {
-            attributeVas[i] = vertexAttributes[i].va();
+            attributeVas[i] = vertexAttributes[i].targetVa();
         }
         int ordinal = bendType.ordinal();
         createConstraints(settingsVa, attributeVas, ordinal, angleTolerance);

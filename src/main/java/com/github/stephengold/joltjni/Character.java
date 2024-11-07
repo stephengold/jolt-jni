@@ -64,7 +64,7 @@ public class Character
      */
     public Character(ConstCharacterSettings settings, RVec3Arg location,
             QuatArg orientation, long userData, PhysicsSystem system) {
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         double locX = location.xx();
         double locY = location.yy();
         double locZ = location.zz();
@@ -478,7 +478,7 @@ public class Character
     public boolean setShape(
             ConstShape shape, float maxPenetrationDepth, boolean lockBodies) {
         long characterVa = va();
-        long shapeVa = shape.va();
+        long shapeVa = shape.targetVa();
         boolean result = setShape(
                 characterVa, shapeVa, maxPenetrationDepth, lockBodies);
 
