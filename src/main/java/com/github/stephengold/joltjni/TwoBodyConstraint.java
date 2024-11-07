@@ -121,15 +121,15 @@ abstract public class TwoBodyConstraint
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
-    native static long getBody1(long constraintVa);
+    native private static long getBody1(long constraintVa);
 
-    native static long getBody2(long constraintVa);
+    native private static long getBody2(long constraintVa);
 
-    native static long getConstraintToBody1Matrix(long constraintVa);
+    native private static long getConstraintToBody1Matrix(long constraintVa);
 
-    native static long getConstraintToBody2Matrix(long constraintVa);
+    native private static long getConstraintToBody2Matrix(long constraintVa);
 
     native private static long toRef(long constraintVa);
 }
