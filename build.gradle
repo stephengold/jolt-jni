@@ -14,7 +14,7 @@ plugins {
 }
 
 ext {
-    downloadZip = 'downloads/JoltPhysics-5.2.0.zip'
+    downloadZip = 'downloads/JoltPhysics-sg241107.zip'
     group = 'com.github.stephengold'
     version = '0.9.2-SNAPSHOT'
     baseName = "${artifact}-${version}" // for artifacts
@@ -425,14 +425,14 @@ def base64Decode(encodedString) {
 // Tasks to download and unpack JoltPhysics source code and assets:
 
 tasks.register('downloadJoltSource', Download) {
-    src 'https://github.com/jrouwe/JoltPhysics/archive/refs/tags/v5.2.0.zip'
+    src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/sg241107.zip'
     dest file(downloadZip)
     overwrite false
 }
 tasks.register('unpackJoltAssets', Copy) {
     dependsOn 'downloadJoltSource'
     from (zipTree(downloadZip)) {
-        include 'JoltPhysics-5.2.0/Assets/**'
+        include 'JoltPhysics-sg241107/Assets/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
         }
@@ -443,7 +443,7 @@ tasks.register('unpackJoltAssets', Copy) {
 tasks.register('unpackJoltSource', Copy) {
     dependsOn 'downloadJoltSource'
     from (zipTree(downloadZip)) {
-        include 'JoltPhysics-5.2.0/Jolt/**'
+        include 'JoltPhysics-sg241107/Jolt/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
         }
@@ -454,7 +454,7 @@ tasks.register('unpackJoltSource', Copy) {
 tasks.register('unpackTestFramework', Copy) {
     dependsOn 'downloadJoltSource'
     from (zipTree(downloadZip)) {
-        include 'JoltPhysics-5.2.0/TestFramework/**'
+        include 'JoltPhysics-sg241107/TestFramework/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
         }
