@@ -63,9 +63,22 @@ final public class PathConstraintPathRef extends Ref {
      */
     @Override
     public PathConstraintPath getPtr() {
-        long refVa = va();
-        long pathVa = getPtr(refVa);
+        long pathVa = targetVa();
         PathConstraintPath result = new PathConstraintPath(pathVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code PathConstraintPath}. No objects
+     * are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

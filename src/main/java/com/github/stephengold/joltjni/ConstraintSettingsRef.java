@@ -55,8 +55,7 @@ final public class ConstraintSettingsRef extends Ref {
      */
     @Override
     public ConstraintSettings getPtr() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
+        long settingsVa = targetVa();
         ConstraintSettings result
                 = ConstraintSettings.newConstraintSettings(settingsVa);
 
@@ -64,7 +63,21 @@ final public class ConstraintSettingsRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the referenced
+     * Return the address of the native {@code ConstraintSettings}. No objects
+     * are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
+
+        return result;
+    }
+
+    /**
+     * Create another counted reference to the native
      * {@code ConstraintSettings}.
      *
      * @return a new JVM object with a new native object assigned

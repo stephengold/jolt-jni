@@ -63,10 +63,23 @@ final public class CharacterRef extends Ref {
      */
     @Override
     public com.github.stephengold.joltjni.Character getPtr() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
+        long settingsVa = targetVa();
         com.github.stephengold.joltjni.Character result
                 = new com.github.stephengold.joltjni.Character(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code Character}. No objects are
+     * affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

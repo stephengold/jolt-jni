@@ -55,9 +55,22 @@ final public class VehicleCollisionTesterRef extends Ref {
      */
     @Override
     public VehicleCollisionTester getPtr() {
-        long refVa = va();
-        long testerVa = getPtr(refVa);
+        long testerVa = targetVa();
         VehicleCollisionTester result = new VehicleCollisionTester(testerVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code VehicleCollisionTester}. No
+     * objects are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

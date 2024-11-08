@@ -55,8 +55,7 @@ final public class RagdollRef extends Ref {
      * @param activation whether to activate bodies (not null)
      */
     public void addToPhysicsSystem(EActivation activation) {
-        long refVa = va();
-        long ragdollVa = getPtr(refVa);
+        long ragdollVa = targetVa();
         int ordinal = activation.ordinal();
         Ragdoll.addToPhysicsSystem(ragdollVa, ordinal);
     }
@@ -67,8 +66,7 @@ final public class RagdollRef extends Ref {
      * @param pose the desired pose (not null, unaffected)
      */
     public void driveToPoseUsingMotors(SkeletonPose pose) {
-        long refVa = va();
-        long ragdollVa = getPtr(refVa);
+        long ragdollVa = targetVa();
         long poseVa = pose.va();
         Ragdoll.driveToPoseUsingMotors(ragdollVa, poseVa);
     }
@@ -77,8 +75,7 @@ final public class RagdollRef extends Ref {
      * Remove bodies and constraints from the physics system.
      */
     public void removeFromPhysicsSystem() {
-        long refVa = va();
-        long ragdollVa = getPtr(refVa);
+        long ragdollVa = targetVa();
         Ragdoll.removeFromPhysicsSystem(ragdollVa);
     }
 
@@ -99,8 +96,7 @@ final public class RagdollRef extends Ref {
      * false&rarr;use the non-locking body interface
      */
     public void setPose(SkeletonPose pose, boolean lockBodies) {
-        long refVa = va();
-        long ragdollVa = getPtr(refVa);
+        long ragdollVa = targetVa();
         long poseVa = pose.va();
         Ragdoll.setPose(ragdollVa, poseVa, lockBodies);
     }
@@ -114,9 +110,22 @@ final public class RagdollRef extends Ref {
      */
     @Override
     public Ragdoll getPtr() {
-        long refVa = va();
-        long ragdollVa = getPtr(refVa);
+        long ragdollVa = targetVa();
         Ragdoll result = new Ragdoll(ragdollVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code Ragdoll}. No objects are
+     * affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

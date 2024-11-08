@@ -55,9 +55,22 @@ final public class VehicleConstraintRef extends Ref {
      */
     @Override
     public VehicleConstraint getPtr() {
+        long constraintVa = targetVa();
+        VehicleConstraint result = new VehicleConstraint(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code VehicleConstraint}. No objects
+     * are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
         long refVa = va();
-        long constaintVa = getPtr(refVa);
-        VehicleConstraint result = new VehicleConstraint(constaintVa);
+        long result = getPtr(refVa);
 
         return result;
     }

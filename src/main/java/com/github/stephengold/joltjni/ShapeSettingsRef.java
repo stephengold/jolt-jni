@@ -55,9 +55,22 @@ final public class ShapeSettingsRef extends Ref {
      */
     @Override
     public ShapeSettings getPtr() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
+        long settingsVa = targetVa();
         ShapeSettings result = ShapeSettings.newShapeSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code ShapeSettings}. No objects are
+     * affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

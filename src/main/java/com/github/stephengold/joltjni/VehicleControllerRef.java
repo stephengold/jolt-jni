@@ -55,9 +55,22 @@ final public class VehicleControllerRef extends Ref {
      */
     @Override
     public VehicleController getPtr() {
-        long refVa = va();
-        long controllerVa = getPtr(refVa);
+        long controllerVa = targetVa();
         VehicleController result = new VehicleController(controllerVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code VehicleController}. No objects
+     * are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

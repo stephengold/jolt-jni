@@ -61,8 +61,7 @@ final public class SkeletalAnimationRef extends Ref {
      * @return the duration (in seconds)
      */
     public float getDuration() {
-        long refVa = va();
-        long animationVa = getPtr(refVa);
+        long animationVa = targetVa();
         float result = SkeletalAnimation.getDuration(animationVa);
 
         return result;
@@ -76,8 +75,7 @@ final public class SkeletalAnimationRef extends Ref {
      * @param storePose storage for the interpolated pose (not null, modified)
      */
     public void sample(float time, SkeletonPose storePose) {
-        long refVa = va();
-        long animationVa = getPtr(refVa);
+        long animationVa = targetVa();
         long poseVa = storePose.va();
         SkeletalAnimation.sample(animationVa, time, poseVa);
     }
@@ -91,9 +89,22 @@ final public class SkeletalAnimationRef extends Ref {
      */
     @Override
     public SkeletalAnimation getPtr() {
-        long refVa = va();
-        long animationVa = getPtr(refVa);
+        long animationVa = targetVa();
         SkeletalAnimation result = new SkeletalAnimation(animationVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code SkeletalAnimation}. No objects
+     * are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

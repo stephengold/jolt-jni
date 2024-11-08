@@ -55,9 +55,22 @@ final public class SkeletonRef extends Ref {
      */
     @Override
     public Skeleton getPtr() {
-        long refVa = va();
-        long skeletonVa = getPtr(refVa);
+        long skeletonVa = targetVa();
         Skeleton result = new Skeleton(skeletonVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code Skeleton}. No objects are
+     * affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

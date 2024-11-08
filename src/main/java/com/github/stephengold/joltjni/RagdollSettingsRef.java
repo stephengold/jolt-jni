@@ -60,8 +60,7 @@ final public class RagdollSettingsRef extends Ref {
      * Pre-calculate the map used by {@code getBodyIndexToConstraintIndex()}.
      */
     public void calculateBodyIndexToConstraintIndex() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
+        long settingsVa = targetVa();
         RagdollSettings.calculateBodyIndexToConstraintIndex(settingsVa);
     }
 
@@ -69,8 +68,7 @@ final public class RagdollSettingsRef extends Ref {
      * Pre-calculate the map used by {@code getConstraintIndexToBodyIdxPair()}.
      */
     public void calculateConstraintIndexToBodyIdxPair() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
+        long settingsVa = targetVa();
         RagdollSettings.calculateConstraintIndexToBodyIdxPair(settingsVa);
     }
 
@@ -85,8 +83,7 @@ final public class RagdollSettingsRef extends Ref {
      */
     public Ragdoll createRagdoll(
             int groupId, long userData, PhysicsSystem physicsSystem) {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
+        long settingsVa = targetVa();
         long systemVa = physicsSystem.va();
         long resultVa = RagdollSettings.createRagdoll(
                 settingsVa, groupId, userData, systemVa);
@@ -102,8 +99,7 @@ final public class RagdollSettingsRef extends Ref {
      * assigned
      */
     public Part[] getParts() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
+        long settingsVa = targetVa();
         int numParts = RagdollSettings.getNumParts(settingsVa);
 
         Part[] result = new Part[numParts];
@@ -121,8 +117,7 @@ final public class RagdollSettingsRef extends Ref {
      * @return a new JVM object with the pre-existing native object assigned
      */
     public Skeleton getSkeleton() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
+        long settingsVa = targetVa();
         long skeletonVa = RagdollSettings.getSkeleton(settingsVa);
         Skeleton result = new Skeleton(skeletonVa);
 
@@ -135,8 +130,7 @@ final public class RagdollSettingsRef extends Ref {
      * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean stabilize() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
+        long settingsVa = targetVa();
         boolean result = RagdollSettings.stabilize(settingsVa);
 
         return result;
@@ -151,9 +145,22 @@ final public class RagdollSettingsRef extends Ref {
      */
     @Override
     public RagdollSettings getPtr() {
+        long settingsVa = targetVa();
+        RagdollSettings result = new RagdollSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code RagdollSettings}. No objects are
+     * affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
         long refVa = va();
-        long animationVa = getPtr(refVa);
-        RagdollSettings result = new RagdollSettings(animationVa);
+        long result = getPtr(refVa);
 
         return result;
     }

@@ -55,9 +55,22 @@ final public class SoftBodySharedSettingsRef extends Ref {
      */
     @Override
     public SoftBodySharedSettings getPtr() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
+        long settingsVa = targetVa();
         SoftBodySharedSettings result = new SoftBodySharedSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code SoftBodySharedSettings}. No
+     * objects are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

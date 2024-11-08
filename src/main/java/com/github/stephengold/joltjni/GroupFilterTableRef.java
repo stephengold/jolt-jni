@@ -55,8 +55,7 @@ final public class GroupFilterTableRef extends Ref {
      * @param subGroup2 the ID of the 2nd subgroup
      */
     public void disableCollision(int subGroup1, int subGroup2) {
-        long refVa = va();
-        long filterVa = getPtr(refVa);
+        long filterVa = targetVa();
         GroupFilterTable.disableCollision(filterVa, subGroup1, subGroup2);
     }
 
@@ -67,8 +66,7 @@ final public class GroupFilterTableRef extends Ref {
      * @param subGroup2 the ID of the 2nd subgroup
      */
     public void enableCollision(int subGroup1, int subGroup2) {
-        long refVa = va();
-        long filterVa = getPtr(refVa);
+        long filterVa = targetVa();
         GroupFilterTable.enableCollision(filterVa, subGroup1, subGroup2);
     }
     // *************************************************************************
@@ -81,15 +79,28 @@ final public class GroupFilterTableRef extends Ref {
      */
     @Override
     public GroupFilterTable getPtr() {
-        long refVa = va();
-        long filterVa = getPtr(refVa);
+        long filterVa = targetVa();
         GroupFilterTable result = new GroupFilterTable(filterVa);
 
         return result;
     }
 
     /**
-     * Create another counted reference to the referenced {@code GroupFilter}.
+     * Return the address of the native {@code GroupFilterTable}. No objects are
+     * affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
+
+        return result;
+    }
+
+    /**
+     * Create another counted reference to the native {@code GroupFilterTable}.
      *
      * @return a new JVM object with a new native object assigned
      */

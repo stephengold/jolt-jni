@@ -55,9 +55,22 @@ final public class PhysicsMaterialRef extends Ref {
      */
     @Override
     public PhysicsMaterial getPtr() {
-        long refVa = va();
-        long materialVa = getPtr(refVa);
+        long materialVa = targetVa();
         PhysicsMaterial result = new PhysicsMaterial(materialVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the the native {@code PhysicsMaterial}. No objects
+     * are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

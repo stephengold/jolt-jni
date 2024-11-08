@@ -55,9 +55,22 @@ final public class GroupFilterRef extends Ref {
      */
     @Override
     public GroupFilter getPtr() {
-        long refVa = va();
-        long filterVa = getPtr(refVa);
+        long filterVa = targetVa();
         GroupFilter result = new GroupFilter(filterVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code GroupFilter}. No objects are
+     * affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

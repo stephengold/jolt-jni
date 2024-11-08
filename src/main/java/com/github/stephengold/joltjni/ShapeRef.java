@@ -62,9 +62,21 @@ final public class ShapeRef extends Ref {
      */
     @Override
     public Shape getPtr() {
-        long refVa = va();
-        long shapeVa = getPtr(refVa);
+        long shapeVa = targetVa();
         Shape result = Shape.newShape(shapeVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code Shape}. No objects are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

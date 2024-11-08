@@ -55,9 +55,22 @@ final public class CharacterSettingsRef extends Ref {
      */
     @Override
     public CharacterSettings getPtr() {
-        long refVa = va();
-        long settingsVa = getPtr(refVa);
+        long settingsVa = targetVa();
         CharacterSettings result = new CharacterSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of native {@code CharacterSettings}. No objects are
+     * affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

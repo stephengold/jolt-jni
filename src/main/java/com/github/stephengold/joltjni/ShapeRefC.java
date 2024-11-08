@@ -34,7 +34,7 @@ final public class ShapeRefC extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate a null reference.
+     * Instantiate an empty reference.
      */
     public ShapeRefC() {
         long refVa = createNullReference();
@@ -62,8 +62,7 @@ final public class ShapeRefC extends JoltPhysicsObject {
      * @return a new JVM object with the pre-existing native object assigned
      */
     public ConstShape getPtr() {
-        long refVa = va();
-        long shapeVa = getPtr(refVa);
+        long shapeVa = targetVa();
         ConstShape result = Shape.newShape(shapeVa);
 
         return result;
@@ -78,6 +77,21 @@ final public class ShapeRefC extends JoltPhysicsObject {
         long refVa = va();
         long copyVa = copy(refVa);
         ShapeRefC result = new ShapeRefC(copyVa, true);
+
+        return result;
+    }
+    // *************************************************************************
+    // JoltPhysicsObject methods
+
+    /**
+     * Return the address of the native {@code Shape}. No objects are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

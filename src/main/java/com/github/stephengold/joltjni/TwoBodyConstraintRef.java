@@ -55,10 +55,23 @@ final public class TwoBodyConstraintRef extends Ref {
      */
     @Override
     public TwoBodyConstraint getPtr() {
-        long refVa = va();
-        long constaintVa = getPtr(refVa);
+        long constraintVa = targetVa();
         TwoBodyConstraint result
-                = (TwoBodyConstraint) Constraint.newConstraint(constaintVa);
+                = (TwoBodyConstraint) Constraint.newConstraint(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code TwoBodyConstraint}. No objects
+     * are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

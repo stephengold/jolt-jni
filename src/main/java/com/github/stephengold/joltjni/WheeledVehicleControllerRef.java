@@ -55,10 +55,23 @@ final public class WheeledVehicleControllerRef extends Ref {
      */
     @Override
     public WheeledVehicleController getPtr() {
-        long refVa = va();
-        long controllerVa = getPtr(refVa);
+        long controllerVa = targetVa();
         WheeledVehicleController result
                 = new WheeledVehicleController(null, controllerVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code WheeledVehicleController}. No
+     * objects are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }

@@ -55,9 +55,22 @@ final public class ConstraintRef extends Ref {
      */
     @Override
     public Constraint getPtr() {
+        long constraintVa = targetVa();
+        Constraint result = Constraint.newConstraint(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code Constraint}. No objects are
+     * affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
         long refVa = va();
-        long constaintVa = getPtr(refVa);
-        Constraint result = Constraint.newConstraint(constaintVa);
+        long result = getPtr(refVa);
 
         return result;
     }
