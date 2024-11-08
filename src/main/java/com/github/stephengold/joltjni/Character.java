@@ -740,7 +740,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     native private static void addLinearVelocity(
             long characterVa, float vx, float vy, float vz, boolean lockBodies);
 
-    native private static void addToPhysicsSystem(
+    native static void addToPhysicsSystem(
             long characterVa, int ordinal, boolean lockBodies);
 
     native private static long createCharacter(
@@ -766,10 +766,9 @@ public class Character extends CharacterBase implements ConstCharacter {
     native static void getRotation(
             long characterVa, float[] toreFloats, boolean lockBodies);
 
-    native static long getWorldTransform(
-            long characterVa, boolean lockBodies);
+    native static long getWorldTransform(long characterVa, boolean lockBodies);
 
-    native private static void postSimulation(
+    native static void postSimulation(
             long characterVa, float maxSeparation, boolean lockBodies);
 
     native private static void removeFromPhysicsSystem(
@@ -782,7 +781,7 @@ public class Character extends CharacterBase implements ConstCharacter {
             long characterVa, float vx, float vy, float vz,
             float wx, float wy, float wz, boolean lockBodies);
 
-    native private static void setLinearVelocity(
+    native static void setLinearVelocity(
             long characterVa, float vx, float vy, float vz, boolean lockBodies);
 
     native private static void setPosition(long characterVa, double locX,
@@ -795,7 +794,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     native private static void setRotation(long characterVa, float qx, float qy,
             float qz, float qw, int ordinal, boolean lockBodies);
 
-    native private static boolean setShape(long characterVa, long shapeVa,
+    native static boolean setShape(long characterVa, long shapeVa,
             float maxPenetrationDepth, boolean lockBodies);
 
     native private static long toRef(long characterVa);

@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.Character;
+import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EGroundState;
 import com.github.stephengold.joltjni.readonly.ConstCharacter;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
@@ -57,6 +59,137 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     CharacterRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Add the character to its {@code PhysicsSystem} and activate it, using the
+     * locking body interface.
+     */
+    public void addToPhysicsSystem() {
+        addToPhysicsSystem(EActivation.Activate);
+    }
+
+    /**
+     * Add the character to its {@code PhysicsSystem} using the locking body
+     * interface.
+     *
+     * @param activation whether to activate the character (not null,
+     * default=Activate)
+     */
+    public void addToPhysicsSystem(EActivation activation) {
+        addToPhysicsSystem(activation, true);
+    }
+
+    /**
+     * Add the character to its {@code PhysicsSystem}.
+     *
+     * @param activation whether to activate the character (not null,
+     * default=Activate)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void addToPhysicsSystem(EActivation activation, boolean lockBodies) {
+        long characterVa = targetVa();
+        int ordinal = activation.ordinal();
+        Character.addToPhysicsSystem(characterVa, ordinal, lockBodies);
+    }
+
+    /**
+     * Needs to be invoked after every physics update.
+     *
+     * @param maxSeparation the max distance between the floor and the character
+     * for standing
+     */
+    public void postSimulation(float maxSeparation) {
+        postSimulation(maxSeparation, true);
+    }
+
+    /**
+     * Needs to be invoked after every physics update.
+     *
+     * @param maxSeparation the max distance between the floor and the character
+     * for standing
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void postSimulation(float maxSeparation, boolean lockBodies) {
+        long characterVa = targetVa();
+        Character.postSimulation(characterVa, maxSeparation, lockBodies);
+    }
+
+    /**
+     * Restore the character's state from the specified recorder.
+     *
+     * @param recorder the recorder to restore from (not null)
+     */
+    public void restoreState(StateRecorder recorder) {
+        long characterVa = targetVa();
+        long recorderVa = recorder.va();
+        CharacterBase.restoreState(characterVa, recorderVa);
+    }
+
+    /**
+     * Alter the character's linear velocity using the locking body interface.
+     *
+     * @param velocity the desired velocity (meters per second in system
+     * coordinates, not null, unaffected)
+     */
+    public void setLinearVelocity(Vec3Arg velocity) {
+        setLinearVelocity(velocity, true);
+    }
+
+    /**
+     * Alter the character's linear velocity.
+     *
+     * @param velocity the desired velocity (meters per second in system
+     * coordinates, not null, unaffected)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void setLinearVelocity(Vec3Arg velocity, boolean lockBodies) {
+        long characterVa = targetVa();
+        float vx = velocity.getX();
+        float vy = velocity.getY();
+        float vz = velocity.getZ();
+        Character.setLinearVelocity(characterVa, vx, vy, vz, lockBodies);
+    }
+
+    /**
+     * Attempt to replace the character's shape using the locking body
+     * interface.
+     *
+     * @param shape the desired shape (not null, unaffected)
+     * @param maxPenetrationDepth the maximum penetration to allow, or MAX_VALUE
+     * to skip the penetration check
+     * @return {@code true} if the replacement succeeded, otherwise
+     * {@code false}
+     */
+    public boolean setShape(ConstShape shape, float maxPenetrationDepth) {
+        boolean result = setShape(shape, maxPenetrationDepth, true);
+        return result;
+    }
+
+    /**
+     * Attempt to replace the character's shape.
+     *
+     * @param shape the desired shape (not null, unaffected)
+     * @param maxPenetrationDepth the maximum penetration to allow, or MAX_VALUE
+     * to skip the penetration check
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @return {@code true} if the replacement succeeded, otherwise
+     * {@code false}
+     */
+    public boolean setShape(
+            ConstShape shape, float maxPenetrationDepth, boolean lockBodies) {
+        long characterVa = targetVa();
+        long shapeVa = shape.targetVa();
+        boolean result = Character.setShape(
+                characterVa, shapeVa, maxPenetrationDepth, lockBodies);
+
+        return result;
     }
     // *************************************************************************
     // ConstCharacter methods

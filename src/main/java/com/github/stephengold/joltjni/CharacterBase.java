@@ -385,7 +385,7 @@ abstract public class CharacterBase
 
     native static boolean isSupported(long characterVa);
 
-    native private static void restoreState(long characterVa, long recorderVa);
+    native static void restoreState(long characterVa, long recorderVa);
 
     native static void saveState(long characterVa, long recorderVa);
 
