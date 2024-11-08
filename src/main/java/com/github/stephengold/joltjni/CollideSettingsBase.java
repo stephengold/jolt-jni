@@ -38,7 +38,6 @@ public class CollideSettingsBase extends JoltPhysicsObject {
      * Instantiate a settings object with no native object assigned.
      */
     CollideSettingsBase() {
-        super();
     }
     // *************************************************************************
     // new methods exposed

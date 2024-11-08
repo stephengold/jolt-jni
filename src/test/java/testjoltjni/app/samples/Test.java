@@ -32,9 +32,9 @@ import java.util.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Test.cpp
  */
 abstract public class Test {
-protected PhysicsSystem mPhysicsSystem = null;
-protected BodyInterface mBodyInterface = null;
-protected DebugRenderer mDebugRenderer = null;
+protected PhysicsSystem mPhysicsSystem;
+protected BodyInterface mBodyInterface;
+protected DebugRenderer mDebugRenderer;
 protected TempAllocator mTempAllocator = null;
 protected JobSystem mJobSystem;
 
