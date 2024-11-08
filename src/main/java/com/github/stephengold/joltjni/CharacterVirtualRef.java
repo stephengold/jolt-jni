@@ -37,7 +37,7 @@ final public class CharacterVirtualRef extends Ref {
      * Instantiate an empty reference.
      */
     public CharacterVirtualRef() {
-        long refVa = createNullReference();
+        long refVa = createEmpty();
         setVirtualAddress(refVa, () -> free(refVa));
     }
 
@@ -101,7 +101,7 @@ final public class CharacterVirtualRef extends Ref {
 
     native private static long copy(long refVa);
 
-    native private static long createNullReference();
+    native private static long createEmpty();
 
     native private static void free(long refVa);
 

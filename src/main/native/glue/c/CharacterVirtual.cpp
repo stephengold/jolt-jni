@@ -39,18 +39,6 @@ IMPLEMENT_REF(CharacterVirtual,
   Java_com_github_stephengold_joltjni_CharacterVirtualRef_getPtr)
 
 /*
- * Class:     com_github_stephengold_joltjni_CharacterVirtualRef
- * Method:    createNullReference
- * Signature: ()J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualRef_createNullReference
-  (JNIEnv *, jclass) {
-    Ref<CharacterVirtual> * const pResult = new Ref<CharacterVirtual>();
-    TRACE_NEW("Ref<CharacterVirtual>", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
-
-/*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    cancelVelocityTowardsSteepSlopes
  * Signature: (JFFF[F)V

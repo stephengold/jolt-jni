@@ -37,7 +37,7 @@ final public class ShapeRefC extends JoltPhysicsObject {
      * Instantiate an empty reference.
      */
     public ShapeRefC() {
-        long refVa = createNullReference();
+        long refVa = createEmpty();
         setVirtualAddress(refVa, () -> free(refVa));
     }
 
@@ -100,7 +100,7 @@ final public class ShapeRefC extends JoltPhysicsObject {
 
     native private static long copy(long refVa);
 
-    native private static long createNullReference();
+    native private static long createEmpty();
 
     native private static void free(long refVa);
 
