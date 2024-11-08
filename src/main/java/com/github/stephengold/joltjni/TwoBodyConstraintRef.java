@@ -23,7 +23,9 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EConstraintType;
+import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstTwoBodyConstraint;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
@@ -57,6 +59,24 @@ final public class TwoBodyConstraintRef
     TwoBodyConstraintRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Notify the constraint that the shape of the specified body has changed
+     * and its center of mass has shifted by deltaCom.
+     *
+     * @param bodyId the ID of the body that changed (not null, unaffected)
+     * @param deltaCom the offset of the shift (not null, unaffected)
+     */
+    public void notifyShapeChanged(ConstBodyId bodyId, Vec3Arg deltaCom) {
+        long constraintVa = targetVa();
+        long idVa = bodyId.targetVa();
+        float dx = deltaCom.getX();
+        float dy = deltaCom.getY();
+        float dz = deltaCom.getZ();
+        Constraint.notifyShapeChanged(constraintVa, idVa, dx, dy, dz);
     }
     // *************************************************************************
     // ConstTwoBodyConstraint methods

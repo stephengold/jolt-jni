@@ -341,7 +341,7 @@ abstract public class Constraint extends NonCopyable
 
     native static int getType(long constraintVa);
 
-    native private static void notifyShapeChanged(
+    native static void notifyShapeChanged(
             long constraintVa, long idVa, float dx, float dy, float dz);
 
     native private static void setConstraintPriority(
