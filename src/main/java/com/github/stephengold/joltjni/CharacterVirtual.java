@@ -729,7 +729,7 @@ public class CharacterVirtual
             long settingsVa, double locX, double locY, double locZ, float qx,
             float qy, float qz, float qw, long userData, long systemVa);
 
-    native private static void extendedUpdate(long characterVa, float deltaTime,
+    native static void extendedUpdate(long characterVa, float deltaTime,
             float gravityX, float gravityY, float gravityZ, long settingsVa,
             long bpFilterVa, long olFilterVa, long bodyFilterVa,
             long shapeFilterVa, long allocatorVa);
@@ -806,10 +806,9 @@ public class CharacterVirtual
     native private static void setHitReductionCosMaxAngle(
             long characterVa, float cosine);
 
-    native private static void setInnerBodyShape(
-            long characterVa, long shapeVa);
+    native static void setInnerBodyShape(long characterVa, long shapeVa);
 
-    native private static void setLinearVelocity(
+    native static void setLinearVelocity(
             long characterVa, float vx, float vy, float vz);
 
     native private static void setListener(long characterVa, long listenerVa);
@@ -823,13 +822,13 @@ public class CharacterVirtual
     native private static void setPenetrationRecoverySpeed(
             long characterVa, float fraction);
 
-    native private static void setPosition(
+    native static void setPosition(
             long characterVa, double locX, double locY, double locZ);
 
-    native private static void setRotation(
+    native static void setRotation(
             long characterVa, float qx, float qy, float qz, float qw);
 
-    native private static boolean setShape(long characterVa, long shapeVa,
+    native static boolean setShape(long characterVa, long shapeVa,
             float maxPenetrationDepth, long bplFilterVa, long olFilterVa,
             long bodyFilterVa, long shapeFilterVa, long allocatorVa);
 
@@ -840,5 +839,5 @@ public class CharacterVirtual
 
     native private static long toRef(long characterVa);
 
-    native private static void updateGroundVelocity(long characterVa);
+    native static void updateGroundVelocity(long characterVa);
 }

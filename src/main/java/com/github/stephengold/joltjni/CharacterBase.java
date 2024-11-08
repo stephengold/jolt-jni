@@ -393,6 +393,5 @@ abstract public class CharacterBase
 
     native private static void setMaxSlopeAngle(long characterVa, float angle);
 
-    native private static void setUp(
-            long characterVa, float x, float y, float z);
+    native static void setUp(long characterVa, float x, float y, float z);
 }

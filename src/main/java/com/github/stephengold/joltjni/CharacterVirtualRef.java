@@ -26,6 +26,8 @@ import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.QuatArg;
+import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
 
@@ -60,6 +62,166 @@ final public class CharacterVirtualRef
     CharacterVirtualRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Apply a combination of Update, StickToFloor, and WalkStairs.
+     *
+     * @param deltaTime the time step to simulate
+     * @param gravity the gravity acceleration vector (in meters per second
+     * squared, not null, unaffected)
+     * @param settings settings to use (not null, unaffected)
+     * @param bpFilter to test whether the character collides with a broad-phase
+     * layer (not null, unaffected)
+     * @param olFilter to test whether the character collides with an object
+     * layer (not null, unaffected)
+     * @param bodyFilter to test whether the character collides with a body (not
+     * null, unaffected)
+     * @param shapeFilter to test whether the character collides with a shape
+     * (not null, unaffected)
+     * @param allocator for temporary allocations (not null)
+     */
+    public void extendedUpdate(float deltaTime, Vec3Arg gravity,
+            ExtendedUpdateSettings settings, BroadPhaseLayerFilter bpFilter,
+            ObjectLayerFilter olFilter, BodyFilter bodyFilter,
+            ShapeFilter shapeFilter, TempAllocator allocator) {
+        long characterVa = targetVa();
+        float gravityX = gravity.getX();
+        float gravityY = gravity.getY();
+        float gravityZ = gravity.getZ();
+        long settingsVa = settings.va();
+        long bpFilterVa = bpFilter.va();
+        long olFilterVa = olFilter.va();
+        long bodyFilterVa = bodyFilter.va();
+        long shapeFilterVa = shapeFilter.va();
+        long allocatorVa = allocator.va();
+        CharacterVirtual.extendedUpdate(
+                characterVa, deltaTime, gravityX, gravityY, gravityZ,
+                settingsVa, bpFilterVa, olFilterVa, bodyFilterVa, shapeFilterVa,
+                allocatorVa);
+    }
+
+    /**
+     * Restore the character's state from the specified recorder.
+     *
+     * @param recorder the recorder to restore from (not null)
+     */
+    public void restoreState(StateRecorder recorder) {
+        long characterVa = targetVa();
+        long recorderVa = recorder.va();
+        CharacterBase.restoreState(characterVa, recorderVa);
+    }
+
+    /**
+     * Alter the character's linear velocity.
+     *
+     * @param velocity the desired velocity vector (meters per second in system
+     * coordinates, default=(0,0,0))
+     */
+    public void setLinearVelocity(Vec3Arg velocity) {
+        long characterVa = targetVa();
+        float vx = velocity.getX();
+        float vy = velocity.getY();
+        float vz = velocity.getZ();
+        CharacterVirtual.setLinearVelocity(characterVa, vx, vy, vz);
+    }
+
+    /**
+     * Relocate the character.
+     *
+     * @param location the desired location (in system coordinates,
+     * default=(0,0,0))
+     */
+    public void setPosition(RVec3Arg location) {
+        long characterVa = targetVa();
+        double locX = location.xx();
+        double locY = location.yy();
+        double locZ = location.zz();
+        CharacterVirtual.setPosition(characterVa, locX, locY, locZ);
+    }
+
+    /**
+     * Re-orient the character.
+     *
+     * @param orientation the desired orientation (in system coordinates,
+     * default=(0,0,0,1))
+     */
+    public void setRotation(QuatArg orientation) {
+        long characterVa = targetVa();
+        float qw = orientation.getW();
+        float qx = orientation.getX();
+        float qy = orientation.getY();
+        float qz = orientation.getZ();
+        CharacterVirtual.setRotation(characterVa, qx, qy, qz, qw);
+    }
+
+    /**
+     * Alter the character's shape.
+     *
+     * @param shape the desired shape (not null)
+     * @param maxPenetrationDepth the maximum acceptable penetration after the
+     * alteration, or {@code Float.MAX_VALUE} to skip the check
+     * @param broadPhaseLayerFilter the broadphase filter used to test for
+     * collisions (not null)
+     * @param objectLayerFilter the object-layer filter used to test for
+     * collisions (not null)
+     * @param bodyFilter the body filter used to test for collisions (not null)
+     * @param shapeFilter the shape filter used to test for collisions (not
+     * null)
+     * @param allocator the desired allocator (not null)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public boolean setShape(ConstShape shape, float maxPenetrationDepth,
+            BroadPhaseLayerFilter broadPhaseLayerFilter,
+            ObjectLayerFilter objectLayerFilter, BodyFilter bodyFilter,
+            ShapeFilter shapeFilter, TempAllocator allocator) {
+        long characterVa = targetVa();
+        long shapeVa = shape.targetVa();
+        long bplFilterVa = broadPhaseLayerFilter.va();
+        long olFilterVa = objectLayerFilter.va();
+        long bodyFilterVa = bodyFilter.va();
+        long shapeFilterVa = shapeFilter.va();
+        long allocatorVa = allocator.va();
+        boolean result = CharacterVirtual.setShape(
+                characterVa, shapeVa, maxPenetrationDepth, bplFilterVa,
+                olFilterVa, bodyFilterVa, shapeFilterVa, allocatorVa);
+
+        return result;
+    }
+
+    /**
+     * Alter the shape of the inner body. Invoke this after a successful
+     * invocation of {@code setShape()}.
+     *
+     * @param shape the desired shape (not null, unaffected, default=?)
+     */
+    public void setInnerBodyShape(ConstShape shape) {
+        long characterVa = targetVa();
+        long shapeVa = shape.targetVa();
+        CharacterVirtual.setInnerBodyShape(characterVa, shapeVa);
+    }
+
+    /**
+     * Alter the character's "up" direction.
+     *
+     * @param up the desired direction (not null, unaffected, default=(0,1,0))
+     */
+    public void setUp(Vec3Arg up) {
+        long characterVa = targetVa();
+        float x = up.getX();
+        float y = up.getY();
+        float z = up.getZ();
+        CharacterBase.setUp(characterVa, x, y, z);
+    }
+
+    /**
+     * Update the estimated ground velocity.
+     */
+    public void updateGroundVelocity() {
+        long characterVa = targetVa();
+        CharacterVirtual.updateGroundVelocity(characterVa);
     }
     // *************************************************************************
     // ConstCharacterVirtual methods
