@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.Character;
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EGroundState;
 import com.github.stephengold.joltjni.readonly.ConstCharacter;
@@ -93,7 +92,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public void addToPhysicsSystem(EActivation activation, boolean lockBodies) {
         long characterVa = targetVa();
         int ordinal = activation.ordinal();
-        Character.addToPhysicsSystem(characterVa, ordinal, lockBodies);
+        com.github.stephengold.joltjni.Character.addToPhysicsSystem(
+                characterVa, ordinal, lockBodies);
     }
 
     /**
@@ -116,7 +116,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      */
     public void postSimulation(float maxSeparation, boolean lockBodies) {
         long characterVa = targetVa();
-        Character.postSimulation(characterVa, maxSeparation, lockBodies);
+        com.github.stephengold.joltjni.Character.postSimulation(
+                characterVa, maxSeparation, lockBodies);
     }
 
     /**
@@ -153,7 +154,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         float vx = velocity.getX();
         float vy = velocity.getY();
         float vz = velocity.getZ();
-        Character.setLinearVelocity(characterVa, vx, vy, vz, lockBodies);
+        com.github.stephengold.joltjni.Character.setLinearVelocity(
+                characterVa, vx, vy, vz, lockBodies);
     }
 
     /**
@@ -186,7 +188,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
             ConstShape shape, float maxPenetrationDepth, boolean lockBodies) {
         long characterVa = targetVa();
         long shapeVa = shape.targetVa();
-        boolean result = Character.setShape(
+        boolean result = com.github.stephengold.joltjni.Character.setShape(
                 characterVa, shapeVa, maxPenetrationDepth, lockBodies);
 
         return result;
@@ -203,7 +205,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     @Override
     public BodyId getBodyId() {
         long characterVa = targetVa();
-        long idVa = Character.getBodyId(characterVa);
+        long idVa = com.github.stephengold.joltjni.Character.getBodyId(
+                characterVa);
         BodyId result = new BodyId(idVa, true);
 
         return result;
@@ -233,7 +236,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public RVec3 getCenterOfMassPosition(boolean lockBodies) {
         long characterVa = targetVa();
         double[] storeDoubles = new double[3];
-        Character.getCenterOfMassPosition(characterVa, storeDoubles, lockBodies);
+        com.github.stephengold.joltjni.Character.getCenterOfMassPosition(
+                characterVa, storeDoubles, lockBodies);
         RVec3 result
                 = new RVec3(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
 
@@ -407,7 +411,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     @Override
     public int getLayer(boolean lockBodies) {
         long characterVa = targetVa();
-        int result = Character.getLayer(characterVa);
+        int result = com.github.stephengold.joltjni.Character.getLayer(
+                characterVa);
 
         return result;
     }
@@ -435,7 +440,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public Vec3 getLinearVelocity(boolean lockBodies) {
         long characterVa = targetVa();
         float[] storeFloats = new float[3];
-        Character.getLinearVelocity(characterVa, storeFloats, lockBodies);
+        com.github.stephengold.joltjni.Character.getLinearVelocity(
+                characterVa, storeFloats, lockBodies);
         Vec3 result = new Vec3(storeFloats[0], storeFloats[1], storeFloats[2]);
 
         return result;
@@ -464,7 +470,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public RVec3 getPosition(boolean lockBodies) {
         long characterVa = targetVa();
         double[] storeDoubles = new double[3];
-        Character.getPosition(characterVa, storeDoubles, lockBodies);
+        com.github.stephengold.joltjni.Character.getPosition(
+                characterVa, storeDoubles, lockBodies);
         RVec3 result
                 = new RVec3(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
 
@@ -502,7 +509,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         long characterVa = targetVa();
         double[] storeDoubles = new double[3];
         float[] storeFloats = new float[4];
-        Character.getPositionAndRotation(
+        com.github.stephengold.joltjni.Character.getPositionAndRotation(
                 characterVa, storeDoubles, storeFloats, lockBodies);
         storeLocation.set(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
         storeOrientation.set(
@@ -532,7 +539,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public Quat getRotation(boolean lockBodies) {
         long characterVa = targetVa();
         float[] storeFloats = new float[4];
-        Character.getRotation(characterVa, storeFloats, lockBodies);
+        com.github.stephengold.joltjni.Character.getRotation(
+                characterVa, storeFloats, lockBodies);
         Quat result = new Quat(
                 storeFloats[0], storeFloats[1], storeFloats[2], storeFloats[3]);
 
@@ -593,7 +601,9 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     @Override
     public RMat44 getWorldTransform(boolean lockBodies) {
         long characterVa = targetVa();
-        long matrixVa = Character.getWorldTransform(characterVa, lockBodies);
+        long matrixVa
+                = com.github.stephengold.joltjni.Character.getWorldTransform(
+                        characterVa, lockBodies);
         RMat44 result = new RMat44(matrixVa, true);
 
         return result;
