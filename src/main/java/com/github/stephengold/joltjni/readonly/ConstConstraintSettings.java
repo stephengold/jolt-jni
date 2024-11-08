@@ -40,6 +40,13 @@ public interface ConstConstraintSettings extends ConstJoltPhysicsObject {
     int getConstraintPriority();
 
     /**
+     * Return the constraint's controller type. The settings are unaffected.
+     *
+     * @return a numeric code, such as {@code VehicleController.motorcycleType}
+     */
+    int getControllerType();
+
+    /**
      * Return the size of the constraint in debug renders. The settings are
      * unaffected.
      *

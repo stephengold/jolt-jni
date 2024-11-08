@@ -203,6 +203,19 @@ abstract public class ConstraintSettings
     }
 
     /**
+     * Return the constraint's controller type. The settings are unaffected.
+     *
+     * @return a numeric code, such as {@code VehicleController.motorcycleType}
+     */
+    @Override
+    public int getControllerType() {
+        long settingsVa = va();
+        int result = getConstraintPriority(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the size of the constraint in debug renders. The settings are
      * unaffected. (native attribute: mDrawConstraintSize)
      *
