@@ -219,19 +219,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_free
-  (JNIEnv *, jclass, jlong settingsVa) {
-    SoftBodySharedSettings * const pSettings
-            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
-    TRACE_DELETE("SoftBodySharedSettings", pSettings)
-    delete pSettings;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    getRefCount
  * Signature: (J)I
  */

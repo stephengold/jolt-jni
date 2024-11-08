@@ -310,8 +310,6 @@ public class SoftBodySharedSettings
 
     native private static long createDefault();
 
-    native private static void free(long settingsVa);
-
     native private static int getRefCount(long settingsVa);
 
     native static float getVertexRadius(long settingsVa);
