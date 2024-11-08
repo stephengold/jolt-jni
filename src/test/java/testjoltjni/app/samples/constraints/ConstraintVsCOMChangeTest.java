@@ -70,7 +70,7 @@ public void Initialize()
 
 		// Create body
 		Body segment = mBodyInterface.createBody(new BodyCreationSettings(compound_shape, position, rotation, i == 0 ? EMotionType.Static : EMotionType.Dynamic, i == 0 ? Layers.NON_MOVING : Layers.MOVING));
-		segment.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, (i)));
+		segment.setCollisionGroup(new CollisionGroup(group_filter, 0, (i)));
 		mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 
 		if (i > 0)
@@ -146,7 +146,7 @@ void UpdateShapes()
 			// Notify the constraints that the shape has changed (this could be done more efficient as we know which constraints are affected)
 			Vec3 delta_com = Op.subtract(s.getCenterOfMass() , prev_com);
 			for (TwoBodyConstraintRef c : mConstraints)
-				c.getPtr().notifyShapeChanged(b.getId(), delta_com);
+				c.notifyShapeChanged(b.getId(), delta_com);
 		}
 	}
 }

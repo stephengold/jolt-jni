@@ -52,12 +52,12 @@ public void Initialize()
 
 	RVec3 body1_position=new RVec3(0, 10, 0);
 	Body body1 = mBodyInterface.createBody(new BodyCreationSettings(box, body1_position, Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
-	body1.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 0));
+	body1.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 	mBodyInterface.addBody(body1.getId(), EActivation.DontActivate);
 
 	RVec3 body2_position = Op.add(body1_position ,new Vec3(box_size, 0, 0));
 	Body body2 = mBodyInterface.createBody(new BodyCreationSettings(box, body2_position, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
-	body2.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 0));
+	body2.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 	body2.getMotionProperties().setLinearDamping(0.0f);
 	body2.getMotionProperties().setAngularDamping(0.0f);
 	body2.setAllowSleeping(false);

@@ -54,11 +54,11 @@ public void Initialize()
 			RVec3 test_position=new RVec3(10.0f * constraint_type, 10.0f + 10.0f * configuration, 0);
 
 			Body body1 = mBodyInterface.createBody(new BodyCreationSettings(box, test_position, Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
-			body1.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), group_id, 0));
+			body1.setCollisionGroup(new CollisionGroup(group_filter, group_id, 0));
 			mBodyInterface.addBody(body1.getId(), EActivation.DontActivate);
 
 			Body body2 = mBodyInterface.createBody(new BodyCreationSettings(box, Op.add(test_position ,new Vec3(box_size, 0, 0)), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
-			body2.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), group_id, 0));
+			body2.setCollisionGroup(new CollisionGroup(group_filter, group_id, 0));
 			mBodyInterface.addBody(body2.getId(), EActivation.Activate);
 
 			Constraint constraint;

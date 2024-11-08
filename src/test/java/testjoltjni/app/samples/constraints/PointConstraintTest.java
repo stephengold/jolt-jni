@@ -50,7 +50,7 @@ public void Initialize()
 	Quat rotation = Quat.sRotation(Vec3.sAxisZ(), 0.5f * Jolt.JPH_PI);
 	RVec3 position=new RVec3(0, 50, 0);
 	Body top = mBodyInterface.createBody(new BodyCreationSettings(new CapsuleShape(half_cylinder_height, 1), position, rotation, EMotionType.Static, Layers.NON_MOVING));
-	top.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 0));
+	top.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 	mBodyInterface.addBody(top.getId(), EActivation.DontActivate);
 
 	Body prev = top;
@@ -59,7 +59,7 @@ public void Initialize()
 		Op.plusEquals(position , new Vec3(2.0f * half_cylinder_height, 0, 0));
 
 		Body segment = mBodyInterface.createBody(new BodyCreationSettings(new CapsuleShape(half_cylinder_height, 1), position, rotation, EMotionType.Dynamic, Layers.MOVING));
-		segment.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, i));
+		segment.setCollisionGroup(new CollisionGroup(group_filter, 0, i));
 		mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 
 		PointConstraintSettings settings=new PointConstraintSettings();

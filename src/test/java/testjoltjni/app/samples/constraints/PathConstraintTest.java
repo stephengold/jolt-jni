@@ -74,7 +74,7 @@ public void Initialize()
 		settings.setPathPosition (new Vec3(0, 15, 0));
 		settings.setRotationConstraintType ( sOrientationType);
 		mConstraints[0] =  (settings.create(body1, body2).toRef());
-		mPhysicsSystem.addConstraint(mConstraints[0].getPtr());
+		mPhysicsSystem.addConstraint(mConstraints[0]);
 	}
 
 	{
@@ -111,7 +111,7 @@ public void Initialize()
 		settings.setPathRotation ( Quat.sRotation(Vec3.sAxisX(), -0.1f * Jolt.JPH_PI));
 		settings.setRotationConstraintType ( sOrientationType);
 		mConstraints[1] =  (settings.create(body1, body2)).toRef();
-		mPhysicsSystem.addConstraint(mConstraints[1].getPtr());
+		mPhysicsSystem.addConstraint(mConstraints[1]);
 	}
 
 }

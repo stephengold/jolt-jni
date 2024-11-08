@@ -578,7 +578,7 @@ public void Initialize()
 			settings.setShape ( mStandingShape);
 			settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
 			mAnimatedCharacter = new com.github.stephengold.joltjni.Character(settings, cCharacterPosition, Quat.sIdentity(), 0, mPhysicsSystem).toRef();
-			mAnimatedCharacter.getPtr().addToPhysicsSystem();
+			mAnimatedCharacter.addToPhysicsSystem();
 		}
 
 		// Create CharacterVirtual
@@ -588,18 +588,18 @@ public void Initialize()
 			settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
 			mAnimatedCharacterVirtual = new CharacterVirtual(settings, cCharacterVirtualPosition, Quat.sIdentity(), 0, mPhysicsSystem).toRef();
 			mAnimatedCharacterVirtual.getPtr().setCharacterVsCharacterCollision(mCharacterVsCharacterCollision);
-			mCharacterVsCharacterCollision.add(mAnimatedCharacterVirtual.getPtr());
+			mCharacterVsCharacterCollision.add(mAnimatedCharacterVirtual);
 		}
 
 		// Create CharacterVirtual with inner rigid body
 		{
 			CharacterVirtualSettings settings=new CharacterVirtualSettings();
 			settings.setShape ( mStandingShape);
-			settings.setInnerBodyShape ( mInnerStandingShape.getPtr());
+			settings.setInnerBodyShape ( mInnerStandingShape);
 			settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
 			mAnimatedCharacterVirtualWithInnerBody = new CharacterVirtual(settings, cCharacterVirtualWithInnerBodyPosition, Quat.sIdentity(), 0, mPhysicsSystem).toRef();
 			mAnimatedCharacterVirtualWithInnerBody.getPtr().setCharacterVsCharacterCollision(mCharacterVsCharacterCollision);
-			mCharacterVsCharacterCollision.add(mAnimatedCharacterVirtualWithInnerBody.getPtr());
+			mCharacterVsCharacterCollision.add(mAnimatedCharacterVirtualWithInnerBody);
 		}
 	}
         else if (Jolt.supportsObjectStream())
@@ -674,10 +674,10 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 
 	// Animate character
 	if (mAnimatedCharacter != null)
-		mAnimatedCharacter.getPtr().setLinearVelocity(Op.multiply((float)Math.sin(mTime) , cCharacterVelocity));
+		mAnimatedCharacter.setLinearVelocity(Op.multiply((float)Math.sin(mTime) , cCharacterVelocity));
 
 	// Animate character virtual
-	for (CharacterVirtual character : new CharacterVirtual[]{ mAnimatedCharacterVirtual.getPtr(), mAnimatedCharacterVirtualWithInnerBody.getPtr() })
+	for (CharacterVirtualRef character : new CharacterVirtualRef[]{ mAnimatedCharacterVirtual, mAnimatedCharacterVirtualWithInnerBody })
 	{
 	if (Jolt.implementsDebugRendering())
 		character.getShape().draw(mDebugRenderer, character.getCenterOfMassTransform(), Vec3.sReplicate(1.0f), Color.sOrange, false, true);
@@ -689,7 +689,7 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 		if (character.getGroundState() == EGroundState.OnGround)
 			velocity = Vec3.sZero();
 		else
-			velocity = Op.add(Op.multiply(character.getLinearVelocity() , mAnimatedCharacter.getPtr().getUp()) , Op.multiply(mPhysicsSystem.getGravity() , inParams.mDeltaTime));
+			velocity = Op.add(Op.multiply(character.getLinearVelocity() , mAnimatedCharacter.getUp()) , Op.multiply(mPhysicsSystem.getGravity() , inParams.mDeltaTime));
 		Op.plusEquals(velocity , Op.multiply((float)Math.sin(mTime) , cCharacterVelocity));
 		character.setLinearVelocity(velocity);
 
@@ -773,10 +773,10 @@ void SaveState(StateRecorder inStream)
 	inStream.write(mReversingVerticallyMovingVelocity);
 
 	if (mAnimatedCharacterVirtual != null)
-		mAnimatedCharacterVirtual.getPtr().saveState(inStream);
+		mAnimatedCharacterVirtual.saveState(inStream);
 
 	if (mAnimatedCharacterVirtualWithInnerBody != null)
-		mAnimatedCharacterVirtualWithInnerBody.getPtr().saveState(inStream);
+		mAnimatedCharacterVirtualWithInnerBody.saveState(inStream);
 }
 
 void RestoreState(StateRecorder inStream)
@@ -786,10 +786,10 @@ void RestoreState(StateRecorder inStream)
 	mReversingVerticallyMovingVelocity=inStream.readFloat(mReversingVerticallyMovingVelocity);
 
 	if (mAnimatedCharacterVirtual != null)
-		mAnimatedCharacterVirtual.getPtr().restoreState(inStream);
+		mAnimatedCharacterVirtual.restoreState(inStream);
 
 	if (mAnimatedCharacterVirtualWithInnerBody != null)
-		mAnimatedCharacterVirtualWithInnerBody.getPtr().restoreState(inStream);
+		mAnimatedCharacterVirtualWithInnerBody.restoreState(inStream);
 }
 
 public void SaveInputState(StateRecorder inStream)

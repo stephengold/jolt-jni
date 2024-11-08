@@ -72,7 +72,7 @@ public void Initialize()
 		Vec3 center = Op.add(offset , GetPathCenter(t));
 
 		// Cast a ray onto the terrain
-		RShapeCast shape_cast=new RShapeCast(sphere_shape.getPtr(), Vec3.sReplicate(1.0f), RMat44.sTranslation(Op.add(new RVec3(0, 10, 0) , center)),new Vec3(0, -20, 0));
+		RShapeCast shape_cast=new RShapeCast(sphere_shape, Vec3.sReplicate(1.0f), RMat44.sTranslation(Op.add(new RVec3(0, 10, 0) , center)),new Vec3(0, -20, 0));
 		ClosestHitCastShapeCollector collector=new ClosestHitCastShapeCollector();
 		mPhysicsSystem.getNarrowPhaseQuery().castShape(shape_cast,new ShapeCastSettings(){ }, RVec3.sZero(), collector);
 		if (collector.getHit().getBodyId2() == mHeightFieldID)
@@ -117,7 +117,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	if (count_x > 0 && count_y > 0)
 	{
 		// Remember COM before we change the height field
-		Vec3 old_com = mHeightField.getPtr().getCenterOfMass();
+		Vec3 old_com = mHeightField.getCenterOfMass();
 
 		// A function to calculate the delta height at a certain distance from the center of the pit
 		final float cHalfPi = 0.5f * Jolt.JPH_PI;

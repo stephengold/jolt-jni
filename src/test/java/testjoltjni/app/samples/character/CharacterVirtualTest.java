@@ -51,7 +51,7 @@ static boolean sOtherCharactersCanPushPlayer = true;
 CharacterVirtualRef mCharacter=new CharacterVirtualRef();
 Vec3 mDesiredVelocity = Vec3.sZero();
 boolean mAllowSliding = false;
-RVec3 GetCharacterPosition(){return mCharacter.getPtr().getPosition();}
+RVec3 GetCharacterPosition(){return mCharacter.getPosition();}
 
 public void Initialize()
 {
@@ -68,11 +68,11 @@ public void Initialize()
 	settings.setPredictiveContactDistance ( sPredictiveContactDistance);
 	settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
 	settings.setEnhancedInternalEdgeRemoval ( sEnhancedInternalEdgeRemoval);
-	settings.setInnerBodyShape ( sCreateInnerBody? mInnerStandingShape.getPtr() : null);
+	settings.setInnerBodyShape ( sCreateInnerBody? mInnerStandingShape : null);
 	settings.setInnerBodyLayer ( Layers.MOVING);
 	mCharacter = new CharacterVirtual(settings, RVec3.sZero(), Quat.sIdentity(), 0, mPhysicsSystem).toRef();
 	mCharacter.getPtr().setCharacterVsCharacterCollision(mCharacterVsCharacterCollision);
-	mCharacterVsCharacterCollision.add(mCharacter.getPtr());
+	mCharacterVsCharacterCollision.add(mCharacter);
 
 	// Install contact listener for all characters
 	for (CharacterVirtual character : mCharacterVsCharacterCollision.getCharactersAsList())
@@ -90,38 +90,38 @@ void PrePhysicsUpdate(PreUpdateParams inParams)
 	super.PrePhysicsUpdate(inParams);
 
 	// Draw character pre update (the sim is also drawn pre update)
-	RMat44 com = mCharacter.getPtr().getCenterOfMassTransform();
-	RMat44 world_transform = mCharacter.getPtr().getWorldTransform();
+	RMat44 com = mCharacter.getCenterOfMassTransform();
+	RMat44 world_transform = mCharacter.getWorldTransform();
 if(Jolt.implementsDebugRendering()){
-	mCharacter.getPtr().getShape().draw(mDebugRenderer, com, Vec3.sReplicate(1.0f), Color.sGreen, false, true);
+	mCharacter.getShape().draw(mDebugRenderer, com, Vec3.sReplicate(1.0f), Color.sGreen, false, true);
 } // JPH_DEBUG_RENDERER
 
 	// Draw shape including padding (only implemented for capsules right now)
-	if (((RotatedTranslatedShape)mCharacter.getPtr().getShape()).getInnerShape().getSubType() == EShapeSubType.Capsule)
+	if (((RotatedTranslatedShape)mCharacter.getShape()).getInnerShape().getSubType() == EShapeSubType.Capsule)
 	{
-		if (mCharacter.getPtr().getShape() == mStandingShape.getPtr())
-			mDebugRenderer.drawCapsule(com, 0.5f * cCharacterHeightStanding, cCharacterRadiusStanding + mCharacter.getPtr().getCharacterPadding(), Color.sGrey, ECastShadow.Off, EDrawMode.Wireframe);
+		if (mCharacter.getShape() == mStandingShape.getPtr())
+			mDebugRenderer.drawCapsule(com, 0.5f * cCharacterHeightStanding, cCharacterRadiusStanding + mCharacter.getCharacterPadding(), Color.sGrey, ECastShadow.Off, EDrawMode.Wireframe);
 		else
-			mDebugRenderer.drawCapsule(com, 0.5f * cCharacterHeightCrouching, cCharacterRadiusCrouching + mCharacter.getPtr().getCharacterPadding(), Color.sGrey, ECastShadow.Off, EDrawMode.Wireframe);
+			mDebugRenderer.drawCapsule(com, 0.5f * cCharacterHeightCrouching, cCharacterRadiusCrouching + mCharacter.getCharacterPadding(), Color.sGrey, ECastShadow.Off, EDrawMode.Wireframe);
 	}
 
 	// Remember old position
-	RVec3 old_position = mCharacter.getPtr().getPosition();
+	RVec3 old_position = mCharacter.getPosition();
 
 	// Settings for our update function
 	ExtendedUpdateSettings update_settings=new ExtendedUpdateSettings();
 	if (!sEnableStickToFloor)
 		update_settings.setStickToFloorStepDown ( Vec3.sZero());
 	else
-		update_settings.setStickToFloorStepDown ( Op.multiply(Op.negate(mCharacter.getPtr().getUp()) , update_settings.getStickToFloorStepDown().length()));
+		update_settings.setStickToFloorStepDown ( Op.multiply(Op.negate(mCharacter.getUp()) , update_settings.getStickToFloorStepDown().length()));
 	if (!sEnableWalkStairs)
 		update_settings.setWalkStairsStepUp ( Vec3.sZero());
 	else
-		update_settings.setWalkStairsStepUp ( Op.multiply(mCharacter.getPtr().getUp() , update_settings.getWalkStairsStepUp().length()));
+		update_settings.setWalkStairsStepUp ( Op.multiply(mCharacter.getUp() , update_settings.getWalkStairsStepUp().length()));
 
 	// Update the character position
-	mCharacter.getPtr().extendedUpdate(inParams.mDeltaTime,
-		Op.multiply(Op.negate(mCharacter.getPtr().getUp()) , mPhysicsSystem.getGravity().length()),
+	mCharacter.extendedUpdate(inParams.mDeltaTime,
+		Op.multiply(Op.negate(mCharacter.getUp()) , mPhysicsSystem.getGravity().length()),
 		update_settings,
 		mPhysicsSystem.getDefaultBroadPhaseLayerFilter(Layers.MOVING),
 		mPhysicsSystem.getDefaultLayerFilter(Layers.MOVING),
@@ -130,11 +130,11 @@ if(Jolt.implementsDebugRendering()){
 		mTempAllocator);
 
 	// Calculate effective velocity
-	RVec3 new_position = mCharacter.getPtr().getPosition();
+	RVec3 new_position = mCharacter.getPosition();
 	Vec3 velocity = Op.divide(Op.subtract(new_position , old_position) , inParams.mDeltaTime).toVec3();
 
 	// Draw state of character
-	DrawCharacterState(mCharacter.getPtr(), world_transform, velocity);
+	DrawCharacterState(mCharacter, world_transform, velocity);
 
 	// Draw labels on ramp blocks
 	for (int i = 0; i < mRampBlocks.size(); ++i)
@@ -143,7 +143,7 @@ if(Jolt.implementsDebugRendering()){
 
 void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchStance, float inDeltaTime)
 {
-	boolean player_controls_horizontal_velocity = sControlMovementDuringJump || mCharacter.getPtr().isSupported();
+	boolean player_controls_horizontal_velocity = sControlMovementDuringJump || mCharacter.isSupported();
 	if (player_controls_horizontal_velocity)
 	{
 		// Smooth the player input
@@ -160,29 +160,29 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 
 	// Update the character rotation and its up vector to match the up vector set by the user settings
 	Quat character_up_rotation = Quat.sEulerAngles(new Vec3(sUpRotationX, 0, sUpRotationZ));
-	mCharacter.getPtr().setUp(character_up_rotation.rotateAxisY());
-	mCharacter.getPtr().setRotation(character_up_rotation);
+	mCharacter.setUp(character_up_rotation.rotateAxisY());
+	mCharacter.setRotation(character_up_rotation);
 
 	// A cheaper way to update the character's ground velocity,
 	// the platforms that the character is standing on may have changed velocity
-	mCharacter.getPtr().updateGroundVelocity();
+	mCharacter.updateGroundVelocity();
 
 	// Determine new basic velocity
-	Vec3 current_vertical_velocity = Op.multiply(mCharacter.getPtr().getLinearVelocity().dot(mCharacter.getPtr().getUp()) , mCharacter.getPtr().getUp());
-	Vec3 ground_velocity = mCharacter.getPtr().getGroundVelocity();
+	Vec3 current_vertical_velocity = Op.multiply(mCharacter.getLinearVelocity().dot(mCharacter.getUp()) , mCharacter.getUp());
+	Vec3 ground_velocity = mCharacter.getGroundVelocity();
 	Vec3 new_velocity;
 	boolean moving_towards_ground = (current_vertical_velocity.getY() - ground_velocity.getY()) < 0.1f;
-	if (mCharacter.getPtr().getGroundState() == EGroundState.OnGround	// If on ground
+	if (mCharacter.getGroundState() == EGroundState.OnGround	// If on ground
 		&& (sEnableCharacterInertia?
 			moving_towards_ground													// Inertia enabled: And not moving away from ground
-			: !mCharacter.getPtr().isSlopeTooSteep(mCharacter.getPtr().getGroundNormal())))			// Inertia disabled: And not on a slope that is too steep
+			: !mCharacter.isSlopeTooSteep(mCharacter.getGroundNormal())))			// Inertia disabled: And not on a slope that is too steep
 	{
 		// Assume velocity of ground when on ground
 		new_velocity = ground_velocity;
 
 		// Jump
 		if (inJump && moving_towards_ground)
-			Op.plusEquals(new_velocity , Op.multiply(sJumpSpeed , mCharacter.getPtr().getUp()));
+			Op.plusEquals(new_velocity , Op.multiply(sJumpSpeed , mCharacter.getUp()));
 	}
 	else
 		new_velocity = current_vertical_velocity;
@@ -198,22 +198,22 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 	else
 	{
 		// Preserve horizontal velocity
-		Vec3 current_horizontal_velocity = Op.subtract(mCharacter.getPtr().getLinearVelocity() , current_vertical_velocity);
+		Vec3 current_horizontal_velocity = Op.subtract(mCharacter.getLinearVelocity() , current_vertical_velocity);
 		Op.plusEquals(new_velocity , current_horizontal_velocity);
 	}
 
 	// Update character velocity
-	mCharacter.getPtr().setLinearVelocity(new_velocity);
+	mCharacter.setLinearVelocity(new_velocity);
 
 	// Stance switch
 	if (inSwitchStance)
 	{
-		boolean is_standing = mCharacter.getPtr().getShape() == mStandingShape.getPtr();
-		ConstShape shape = is_standing? mCrouchingShape.getPtr() : mStandingShape.getPtr();
-		if (mCharacter.getPtr().setShape(shape, 1.5f * mPhysicsSystem.getPhysicsSettings().getPenetrationSlop(), mPhysicsSystem.getDefaultBroadPhaseLayerFilter(Layers.MOVING), mPhysicsSystem.getDefaultLayerFilter(Layers.MOVING), new BodyFilter(){ }, new ShapeFilter(){ }, mTempAllocator))
+		boolean is_standing = mCharacter.getShape() == mStandingShape.getPtr();
+		ConstShape shape = is_standing? mCrouchingShape : mStandingShape;
+		if (mCharacter.setShape(shape, 1.5f * mPhysicsSystem.getPhysicsSettings().getPenetrationSlop(), mPhysicsSystem.getDefaultBroadPhaseLayerFilter(Layers.MOVING), mPhysicsSystem.getDefaultLayerFilter(Layers.MOVING), new BodyFilter(){ }, new ShapeFilter(){ }, mTempAllocator))
 		{
-			ConstShape inner_shape = is_standing? mInnerCrouchingShape.getPtr() : mInnerStandingShape.getPtr();
-			mCharacter.getPtr().setInnerBodyShape(inner_shape);
+			ConstShape inner_shape = is_standing? mInnerCrouchingShape : mInnerStandingShape;
+			mCharacter.setInnerBodyShape(inner_shape);
 		}
 	}
 }
@@ -247,9 +247,9 @@ void SaveState(StateRecorder inStream)
 {
 	super.SaveState(inStream);
 
-	mCharacter.getPtr().saveState(inStream);
+	mCharacter.saveState(inStream);
 
-	boolean is_standing = mCharacter.getPtr().getShape() == mStandingShape.getPtr();
+	boolean is_standing = mCharacter.getShape() == mStandingShape.getPtr();
 	inStream.write(is_standing);
 
 	inStream.write(mAllowSliding);
@@ -260,14 +260,14 @@ void RestoreState(StateRecorder inStream)
 {
 	super.RestoreState(inStream);
 
-	mCharacter.getPtr().restoreState(inStream);
+	mCharacter.restoreState(inStream);
 
-	boolean is_standing = mCharacter.getPtr().getShape() == mStandingShape.getPtr(); // Initialize variable for validation mode
+	boolean is_standing = mCharacter.getShape() == mStandingShape.getPtr(); // Initialize variable for validation mode
 	is_standing=inStream.readBoolean(is_standing);
-	ConstShape shape = is_standing? mStandingShape.getPtr() : mCrouchingShape.getPtr();
-	mCharacter.getPtr().setShape(shape, Float.MAX_VALUE, new BroadPhaseLayerFilter(){ }, new ObjectLayerFilter(){ }, new BodyFilter(){ }, new ShapeFilter(){ }, mTempAllocator);
-	ConstShape inner_shape = is_standing? mInnerStandingShape.getPtr() : mInnerCrouchingShape.getPtr();
-	mCharacter.getPtr().setInnerBodyShape(inner_shape);
+	ConstShape shape = is_standing? mStandingShape : mCrouchingShape;
+	mCharacter.setShape(shape, Float.MAX_VALUE, new BroadPhaseLayerFilter(){ }, new ObjectLayerFilter(){ }, new BodyFilter(){ }, new ShapeFilter(){ }, mTempAllocator);
+	ConstShape inner_shape = is_standing? mInnerStandingShape : mInnerCrouchingShape;
+	mCharacter.setInnerBodyShape(inner_shape);
 
 	mAllowSliding=inStream.readBoolean(mAllowSliding);
 	inStream.readVec3(mDesiredVelocity);

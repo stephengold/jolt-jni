@@ -61,7 +61,7 @@ public void Initialize()
 			settings.setAutoDetectPoint ( true);
 			settings.setConstraintPriority ( priority == 0? i : num_bodies - i); // Priority is reversed for one chain compared to the other
 			TwoBodyConstraintRef c = ((TwoBodyConstraint)settings.create(prev, segment)).toRef();
-			mPhysicsSystem.addConstraint(c.getPtr());
+			mPhysicsSystem.addConstraint(c);
 			mConstraints.add((c));
 
 			prev = segment;
@@ -72,6 +72,6 @@ public void Initialize()
 public void PostPhysicsUpdate(float inDeltaTime)
 {
 	for (TwoBodyConstraintRef c : mConstraints)
-		mDebugRenderer.drawText3D(Op.multiply(0.5f , Op.add(c.getPtr().getBody1().getCenterOfMassPosition() , c.getPtr().getBody2().getCenterOfMassPosition())), String.format("Priority: %d", c.getPtr().getConstraintPriority()), Color.sWhite, 0.2f);
+		mDebugRenderer.drawText3D(Op.multiply(0.5f , Op.add(c.getBody1().getCenterOfMassPosition() , c.getBody2().getCenterOfMassPosition())), String.format("Priority: %d", c.getConstraintPriority()), Color.sWhite, 0.2f);
 }
 }

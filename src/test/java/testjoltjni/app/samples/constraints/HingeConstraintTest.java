@@ -56,7 +56,7 @@ public void Initialize()
 
 		RVec3 position=new RVec3(0, 50, -randomness * 20.0f);
 		Body top = mBodyInterface.createBody(new BodyCreationSettings(box, position, Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
-		top.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), group_id, 0));
+		top.setCollisionGroup(new CollisionGroup(group_filter, group_id, 0));
 		mBodyInterface.addBody(top.getId(), EActivation.DontActivate);
 
 		DefaultRandomEngine random=new DefaultRandomEngine();
@@ -78,7 +78,7 @@ public void Initialize()
 			}
 
 			Body segment = mBodyInterface.createBody(new BodyCreationSettings(box, position, rotation, EMotionType.Dynamic, Layers.MOVING));
-			segment.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), group_id, (i)));
+			segment.setCollisionGroup(new CollisionGroup(group_filter, group_id, (i)));
 			mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 
 			HingeConstraintSettings settings=new HingeConstraintSettings();
@@ -105,10 +105,10 @@ public void Initialize()
 	{
 		// Two bodies connected with a hard hinge
 		Body body1 = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Vec3.sReplicate(1.0f)),new RVec3(4, 5, 0), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
-		body1.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 0));
+		body1.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 		mBodyInterface.addBody(body1.getId(), EActivation.DontActivate);
 		Body body2 = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Vec3.sReplicate(1.0f)),new RVec3(6, 5, 0), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
-		body2.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 1));
+		body2.setCollisionGroup(new CollisionGroup(group_filter, 0, 1));
 		mBodyInterface.addBody(body2.getId(), EActivation.Activate);
 
 		HingeConstraintSettings hinge=new HingeConstraintSettings();
@@ -123,10 +123,10 @@ public void Initialize()
 	{
 		// Two bodies connected with a soft hinge
 		Body body1 = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Vec3.sReplicate(1.0f)),new RVec3(10, 5, 0), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
-		body1.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 0));
+		body1.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 		mBodyInterface.addBody(body1.getId(), EActivation.DontActivate);
 		Body body2 = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Vec3.sReplicate(1.0f)),new RVec3(12, 5, 0), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
-		body2.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 1));
+		body2.setCollisionGroup(new CollisionGroup(group_filter, 0, 1));
 		mBodyInterface.addBody(body2.getId(), EActivation.Activate);
 
 		HingeConstraintSettings hinge=new HingeConstraintSettings();

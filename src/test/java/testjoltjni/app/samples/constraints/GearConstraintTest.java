@@ -121,8 +121,8 @@ public void Initialize()
 	// Disable collision between gears
 	GroupFilterTableRef group_filter = new GroupFilterTable(2).toRef();
 	group_filter.disableCollision(0, 1);
-	gear1.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 0));
-	gear2.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 1));
+	gear1.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
+	gear2.setCollisionGroup(new CollisionGroup(group_filter, 0, 1));
 
 	// Create gear constraint to constrain the two bodies
 	GearConstraintSettings gear=new GearConstraintSettings();

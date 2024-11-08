@@ -37,7 +37,7 @@ public void Initialize()
 	CreateFloor();
 
 	// Bodies with increasing pressure
-	SoftBodyCreationSettings sphere=new SoftBodyCreationSettings(SoftBodyCreator.CreateSphere(2.0f).getPtr(), RVec3.sZero(), Quat.sIdentity(), Layers.MOVING);
+	SoftBodyCreationSettings sphere=new SoftBodyCreationSettings(SoftBodyCreator.CreateSphere(2.0f), RVec3.sZero(), Quat.sIdentity(), Layers.MOVING);
 
 	for (int i = 0; i <= 10; ++i)
 	{

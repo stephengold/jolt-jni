@@ -207,7 +207,7 @@ void CreateBridge()
 
 		Body part = i == 0? mBodyInterface.createBody(new BodyCreationSettings(large_part_shape, Op.subtract(pos , Op.rotate(first_part_rot , new Vec3(0, large_part_half_size.getY() - part_half_size.getY(), large_part_half_size.getZ() - part_half_size.getZ()))), first_part_rot, EMotionType.Static, Layers.NON_MOVING))
 					: mBodyInterface.createBody(new BodyCreationSettings(part_shape, pos, Quat.sIdentity(), i == 19? EMotionType.Static : EMotionType.Dynamic, i == 19? Layers.NON_MOVING : Layers.MOVING));
-		part.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 1, (i)));
+		part.setCollisionGroup(new CollisionGroup(group_filter, 1, (i)));
 		part.setFriction(1.0f);
 		mBodyInterface.addBody(part.getId(), EActivation.Activate);
 

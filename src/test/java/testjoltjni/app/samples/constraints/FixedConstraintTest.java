@@ -54,7 +54,7 @@ public void Initialize()
 
 		RVec3 position=new RVec3(0, 25.0f, -randomness * 20.0f);
 		Body top = mBodyInterface.createBody(new BodyCreationSettings(box, position, Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
-		top.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), group_id, 0));
+		top.setCollisionGroup(new CollisionGroup(group_filter, group_id, 0));
 		mBodyInterface.addBody(top.getId(), EActivation.DontActivate);
 
 		DefaultRandomEngine random=new DefaultRandomEngine();
@@ -76,7 +76,7 @@ public void Initialize()
 			}
 
 			Body segment = mBodyInterface.createBody(new BodyCreationSettings(box, position, rotation, EMotionType.Dynamic, Layers.MOVING));
-			segment.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), group_id, (i)));
+			segment.setCollisionGroup(new CollisionGroup(group_filter, group_id, (i)));
 			mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 
 			FixedConstraintSettings settings=new FixedConstraintSettings();
@@ -126,7 +126,7 @@ public void Initialize()
 				Quat rotation = Quat.sRotation(Vec3.sAxisY(), i * 0.5f * Jolt.JPH_PI);
 
 				pillars[i] = mBodyInterface.createBody(new BodyCreationSettings(pillar, Op.add(base_position , Op.rotate(base_rotation , Op.add(center , Op.rotate(rotation ,new Vec3(1.0f, 1.0f, 1.0f))))), base_rotation, EMotionType.Dynamic, Layers.MOVING));
-				pillars[i].setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 0)); // For convenience, we disable collisions between all objects in the tower
+				pillars[i].setCollisionGroup(new CollisionGroup(group_filter, 0, 0)); // For convenience, we disable collisions between all objects in the tower
 				mBodyInterface.addBody(pillars[i].getId(), EActivation.Activate);
 			}
 
@@ -136,7 +136,7 @@ public void Initialize()
 
 				// Create cross beam
 				Body cross = mBodyInterface.createBody(new BodyCreationSettings(beam, Op.add(base_position , Op.rotate(base_rotation , Op.add(center , Op.rotate(rotation ,new Vec3(1.105f, 1.0f, 0.0f))))), Op.multiply(base_rotation , Op.multiply(rotation , Quat.sRotation(Vec3.sAxisX(), 0.3f * Jolt.JPH_PI))), EMotionType.Dynamic, Layers.MOVING));
-				cross.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 0));
+				cross.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 				mBodyInterface.addBody(cross.getId(), EActivation.Activate);
 
 				// Attach cross beam to pillars
@@ -167,7 +167,7 @@ public void Initialize()
 
 		// Create top
 		Body top = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1.2f, 0.1f, 1.2f)), Op.add(base_position , Op.rotate(base_rotation , Op.add(center ,new Vec3(0.0f, 0.1f, 0.0f)))), base_rotation, EMotionType.Dynamic, Layers.MOVING));
-		top.setCollisionGroup(new CollisionGroup(group_filter.getPtr(), 0, 0));
+		top.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 		mBodyInterface.addBody(top.getId(), EActivation.Activate);
 
 		// Attach top to pillars
