@@ -297,13 +297,13 @@ public class SoftBodySharedSettings
     native private static void calculateVolumeConstraintVolumes(
             long settingsVa);
 
-    native private static int countEdgeConstraints(long settingsVa);
+    native static int countEdgeConstraints(long settingsVa);
 
-    native private static int countFaces(long settingsVa);
+    native static int countFaces(long settingsVa);
 
-    native private static int countVertices(long settingsVa);
+    native static int countVertices(long settingsVa);
 
-    native private static int countVolumeConstraints(long settingsVa);
+    native static int countVolumeConstraints(long settingsVa);
 
     native private static void createConstraints(long settingsVa,
             long[] attributeVas, int ordinal, float angleTolerance);
@@ -314,7 +314,7 @@ public class SoftBodySharedSettings
 
     native private static int getRefCount(long settingsVa);
 
-    native private static float getVertexRadius(long settingsVa);
+    native static float getVertexRadius(long settingsVa);
 
     native private static void optimize(long settingsVa);
 

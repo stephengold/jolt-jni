@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
@@ -29,7 +30,9 @@ import com.github.stephengold.joltjni.template.Ref;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class SoftBodySharedSettingsRef extends Ref {
+final public class SoftBodySharedSettingsRef
+        extends Ref
+        implements ConstSoftBodySharedSettings {
     // *************************************************************************
     // constructors
 
@@ -52,6 +55,74 @@ final public class SoftBodySharedSettingsRef extends Ref {
     SoftBodySharedSettingsRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // ConstSoftBodySharedSettings methods
+
+    /**
+     * Count the edge constraints. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countEdgeConstraints() {
+        long settingsVa = targetVa();
+        int result = SoftBodySharedSettings.countEdgeConstraints(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the faces. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countFaces() {
+        long settingsVa = targetVa();
+        int result = SoftBodySharedSettings.countFaces(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the vertices. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countVertices() {
+        long settingsVa = targetVa();
+        int result = SoftBodySharedSettings.countVertices(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the volume constraints. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countVolumeConstraints() {
+        long settingsVa = targetVa();
+        int result = SoftBodySharedSettings.countVolumeConstraints(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the radius of each particle. The settings are unaffected. (native
+     * attribute: mVertexRadius)
+     *
+     * @return the radius (in meters)
+     */
+    @Override
+    public float getVertexRadius() {
+        long settingsVa = targetVa();
+        float result = SoftBodySharedSettings.getVertexRadius(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // Ref methods
