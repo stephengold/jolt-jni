@@ -117,6 +117,18 @@ public class WheeledVehicleControllerSettings
         setNumDifferentials(settingsVa, count);
     }
     // *************************************************************************
+    // VehicleControllerSettings methods
+
+    /**
+     * Identify the type of {@code VehicleController} to be constructed.
+     *
+     * @return a numeric code
+     */
+    @Override
+    int controllerTypeOrdinal() {
+        return VehicleController.wheeledVehicleType;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static int countDifferentials(long vehicleSettingsVa);

@@ -51,6 +51,17 @@ public class VehicleControllerSettings
         super(settingsVa);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Identify the type of {@code VehicleController} to be constructed.
+     *
+     * @return a numeric code
+     */
+    int controllerTypeOrdinal() {
+        return VehicleController.genericType;
+    }
+    // *************************************************************************
     // RefTarget methods
 
     /**

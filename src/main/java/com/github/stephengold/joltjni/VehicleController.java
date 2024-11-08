@@ -31,6 +31,25 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 public class VehicleController extends NonCopyable implements RefTarget {
     // *************************************************************************
+    // constants
+
+    /**
+     * controller type for a generic vehicle
+     */
+    final static int genericType = 1;
+    /**
+     * controller type for a motorcycle
+     */
+    final static int motorcycleType = 2;
+    /**
+     * controller type for a tracked vehicle
+     */
+    final static int trackedVehicleType = 3;
+    /**
+     * controller type for a wheeled vehicle that isn't a motorcycle
+     */
+    final static int wheeledVehicleType = 4;
+    // *************************************************************************
     // constructors
 
     /**

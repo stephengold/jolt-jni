@@ -79,6 +79,18 @@ public class TrackedVehicleControllerSettings
         return result;
     }
     // *************************************************************************
+    // VehicleControllerSettings methods
+
+    /**
+     * Identify the type of {@code VehicleController} to be constructed.
+     *
+     * @return a numeric code
+     */
+    @Override
+    int controllerTypeOrdinal() {
+        return VehicleController.trackedVehicleType;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createDefault();

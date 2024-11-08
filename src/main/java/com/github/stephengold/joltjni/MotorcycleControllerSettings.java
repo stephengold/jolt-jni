@@ -40,6 +40,18 @@ public class MotorcycleControllerSettings
         setVirtualAddress(settingsVa, false); // not owner due to ref counting
     }
     // *************************************************************************
+    // WheeledVehicleControllerSettings methods
+
+    /**
+     * Identify the type of {@code VehicleController} to be constructed.
+     *
+     * @return a numeric code
+     */
+    @Override
+    int controllerTypeOrdinal() {
+        return VehicleController.motorcycleType;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createDefault();
