@@ -34,6 +34,14 @@ final public class VehicleCollisionTesterRef extends Ref {
     // constructors
 
     /**
+     * Instantiate an empty reference.
+     */
+    public VehicleCollisionTesterRef() {
+        long refVa = createEmpty();
+        setVirtualAddress(refVa, () -> free(refVa));
+    }
+
+    /**
      * Instantiate a reference with the specified native object assigned.
      *
      * @param refVa the virtual address of the native object to assign (not
@@ -94,6 +102,8 @@ final public class VehicleCollisionTesterRef extends Ref {
     // native private methods
 
     native private static long copy(long refVa);
+
+    native private static long createEmpty();
 
     native private static void free(long refVa);
 
