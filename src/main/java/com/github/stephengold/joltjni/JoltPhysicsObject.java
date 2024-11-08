@@ -137,7 +137,7 @@ abstract public class JoltPhysicsObject
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
      * @param action freeing action if the JVM object will own (be responsible
-     * for freeing) the native object, or {@code null} if none
+     * for freeing) the native object, or {@code null} if not responsible
      */
     final protected void setVirtualAddress(
             long virtualAddress, Runnable action) {

@@ -73,7 +73,7 @@ final public class GroupFilterTableRef extends Ref {
     // Ref methods
 
     /**
-     * Temporarily access the referenced {@code GroupFilter}.
+     * Temporarily access the referenced {@code GroupFilterTable}.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */

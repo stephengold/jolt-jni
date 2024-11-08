@@ -99,8 +99,9 @@ static class ObjectVsBroadPhaseLayerFilterImpl extends ObjVsBpFilter
 // An example contact listener
 static class MyContactListener extends CustomContactListener
 {
+public
 	// See: ContactListener
-	public int onContactValidate(long body1Va, long body2Va, double offsetX, double offsetY, double offsetZ, long inCollisionResult)
+	int onContactValidate(long body1Va, long body2Va, double offsetX, double offsetY, double offsetZ, long inCollisionResult)
 	{
 		System.out.println("Contact validate callback");
 

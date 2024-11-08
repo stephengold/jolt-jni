@@ -29,7 +29,7 @@ package com.github.stephengold.joltjni.enumerate;
  */
 public enum EPathRotationConstraintType {
     // *************************************************************************
-    // values - sequence must match "Jolt/Physics/Constaints/PathConstraint.h"
+    // values - sequence must match "Jolt/Physics/Constraints/PathConstraint.h"
 
     /**
      * don't constrain body rotation

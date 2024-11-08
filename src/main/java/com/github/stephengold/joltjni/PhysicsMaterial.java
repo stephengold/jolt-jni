@@ -120,7 +120,7 @@ public class PhysicsMaterial extends SerializableObject
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
     native private static String getDebugName(long materialVa);
 

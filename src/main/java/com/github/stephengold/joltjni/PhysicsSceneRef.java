@@ -116,7 +116,8 @@ final public class PhysicsSceneRef extends Ref {
     }
 
     /**
-     * Return the address of the target object. No objects are affected.
+     * Return the address of the native {@code PhysicsScene}. No objects are
+     * affected.
      *
      * @return a virtual address (not zero)
      */

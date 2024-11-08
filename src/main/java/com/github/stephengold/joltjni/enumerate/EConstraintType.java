@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.enumerate;
 
 /**
- * Enumerate categories that a {@code Constaint} can belong to.
+ * Enumerate categories that a {@code Constraint} can belong to.
  *
  * @author Stephen Gold sgold@sonic.net
  */

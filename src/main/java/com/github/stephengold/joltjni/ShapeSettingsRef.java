@@ -76,7 +76,7 @@ final public class ShapeSettingsRef extends Ref {
     }
 
     /**
-     * Create another counted reference to the native {@code Shape}.
+     * Create another counted reference to the native {@code ShapeSettings}.
      *
      * @return a new JVM object with a new native object assigned
      */

@@ -34,7 +34,7 @@ final public class CharacterVirtualRef extends Ref {
     // constructors
 
     /**
-     * Instantiate a null reference.
+     * Instantiate an empty reference.
      */
     public CharacterVirtualRef() {
         long refVa = createNullReference();
