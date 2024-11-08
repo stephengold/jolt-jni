@@ -88,7 +88,8 @@ public class VehicleConstraint
     public VehicleController getController() {
         long constraintVa = va();
         long controllerVa = getController(constraintVa);
-        VehicleController result = new VehicleController(this, controllerVa);
+        VehicleController result
+                = VehicleController.newController(this, controllerVa);
 
         return result;
     }
