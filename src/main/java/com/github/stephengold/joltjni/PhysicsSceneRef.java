@@ -62,8 +62,7 @@ final public class PhysicsSceneRef extends Ref {
      * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean fixInvalidScales() {
-        long refVa = va();
-        long sceneVa = getPtr(refVa);
+        long sceneVa = targetVa();
         boolean result = PhysicsScene.fixInvalidScales(sceneVa);
 
         return result;
@@ -76,8 +75,7 @@ final public class PhysicsSceneRef extends Ref {
      * objects assigned
      */
     public BodyCreationSettings[] getBodies() {
-        long refVa = va();
-        long sceneVa = getPtr(refVa);
+        long sceneVa = targetVa();
         int numBodies = PhysicsScene.getNumBodies(sceneVa);
         BodyCreationSettings[] result = new BodyCreationSettings[numBodies];
         for (int bodyIndex = 0; bodyIndex < numBodies; ++bodyIndex) {
@@ -95,8 +93,7 @@ final public class PhysicsSceneRef extends Ref {
      * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean createBodies(PhysicsSystem system) {
-        long refVa = va();
-        long sceneVa = getPtr(refVa);
+        long sceneVa = targetVa();
         long systemVa = system.va();
         boolean result = PhysicsScene.createBodies(sceneVa, systemVa);
 
@@ -112,9 +109,21 @@ final public class PhysicsSceneRef extends Ref {
      */
     @Override
     public PhysicsScene getPtr() {
-        long refVa = va();
-        long sceneVa = getPtr(refVa);
+        long sceneVa = targetVa();
         PhysicsScene result = new PhysicsScene(sceneVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the target object. No objects are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
 
         return result;
     }
