@@ -84,6 +84,42 @@ public class VehicleController extends NonCopyable implements RefTarget {
         return (VehicleConstraint) getContainingObject();
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Instantiate a {@code VehicleController} from its virtual address.
+     *
+     * @param container the constraint that contains the controller
+     * @param controllerVa the virtual address of the native object, or zero
+     * @return a new JVM object, or {@code null} if {@code controllerVa} was
+     * zero
+     */
+    static VehicleController newController(
+            VehicleConstraint container, long controllerVa) {
+        if (controllerVa == 0L) {
+            return null;
+        }
+
+        long constraintVa = getConstraint(controllerVa);
+        int ordinal = Constraint.getControllerType(constraintVa);
+        VehicleController result;
+        switch (ordinal) {
+            case motorcycleType:
+                result = new MotorcycleController(container, controllerVa);
+                break;
+            case trackedVehicleType:
+                result = new TrackedVehicleController(container, controllerVa);
+                break;
+            case wheeledVehicleType:
+                result = new WheeledVehicleController(container, controllerVa);
+                break;
+            default:
+                throw new IllegalArgumentException("ordinal = " + ordinal);
+        }
+
+        return result;
+    }
+    // *************************************************************************
     // RefTarget methods
 
     /**

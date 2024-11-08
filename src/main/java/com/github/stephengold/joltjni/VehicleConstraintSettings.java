@@ -181,6 +181,10 @@ public class VehicleConstraintSettings extends ConstraintSettings {
         long constraintSettingsVa = va();
         long controllerSettingsVa = controllerSettings.va();
         setController(constraintSettingsVa, controllerSettingsVa);
+
+        int controllerType = controllerSettings.controllerTypeOrdinal();
+        ConstraintSettings.setControllerType(
+                constraintSettingsVa, controllerType);
     }
 
     /**
