@@ -323,23 +323,23 @@ abstract public class Constraint extends NonCopyable
     // *************************************************************************
     // native methods
 
-    native private static int getConstraintPriority(long constraintVa);
+    native static int getConstraintPriority(long constraintVa);
 
-    native private static long getConstraintSettings(long constraintVa);
+    native static long getConstraintSettings(long constraintVa);
 
     native static int getControllerType(long settingsVa);
 
-    native private static boolean getEnabled(long constraintVa);
+    native static boolean getEnabled(long constraintVa);
 
-    native private static int getNumPositionStepsOverride(long constraintVa);
+    native static int getNumPositionStepsOverride(long constraintVa);
 
-    native private static int getNumVelocityStepsOverride(long constraintVa);
+    native static int getNumVelocityStepsOverride(long constraintVa);
 
     native private static int getRefCount(long constraintVa);
 
-    native private static int getSubType(long constraintVa);
+    native static int getSubType(long constraintVa);
 
-    native private static int getType(long constraintVa);
+    native static int getType(long constraintVa);
 
     native private static void notifyShapeChanged(
             long constraintVa, long idVa, float dx, float dy, float dz);
