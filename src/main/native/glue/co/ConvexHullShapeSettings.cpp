@@ -45,6 +45,18 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_createDefault
+  (JNIEnv *, jclass) {
+    ConvexHullShapeSettings * const pResult = new ConvexHullShapeSettings();
+    TRACE_NEW("ConvexHullShapeSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
  * Method:    createSettings
  * Signature: (ILjava/nio/FloatBuffer;FJ)J
  */

@@ -107,7 +107,23 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * @param points the array of desired point locations (not null, unaffected)
      */
     public ConvexHullShapeSettings(Vec3Arg... points) {
-        this(points, PhysicsSettings.cDefaultConvexRadius);
+        int numPoints = points.length;
+        long settingsVa;
+        if (points.length == 0) {
+            settingsVa = createDefault();
+        } else {
+            int numFloats = numAxes * numPoints;
+            FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
+            for (Vec3Arg point : points) {
+                buffer.put(point.getX());
+                buffer.put(point.getY());
+                buffer.put(point.getZ());
+            }
+            settingsVa = createSettings(numPoints, buffer,
+                    PhysicsSettings.cDefaultConvexRadius, 0L);
+        }
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EShapeSubType.ConvexHull);
     }
 
     /**
@@ -300,6 +316,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     // native private methods
 
     native private static int countPoints(long settingsVa);
+
+    native private static long createDefault();
 
     native private static long createSettings(int numPoints, FloatBuffer points,
             float convexRadius, long materialVa);
