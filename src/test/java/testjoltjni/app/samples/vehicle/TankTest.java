@@ -72,7 +72,7 @@ public void Initialize()
 	final float barrel_radius = 0.1f;
 	final float barrel_rotation_offset = 0.2f;
 
-	Vec3 wheel_pos[] = {
+	 Vec3 wheel_pos[] = {
 		new Vec3(0.0f, -0.0f, 2.95f),
 		new Vec3(0.0f, -0.3f, 2.1f),
 		new Vec3(0.0f, -0.3f, 1.4f),
@@ -91,9 +91,9 @@ public void Initialize()
 	RVec3 body_position=new RVec3(0, 2, 0);
 	ShapeRefC tank_body_shape =new OffsetCenterOfMassShapeSettings(new Vec3(0, -half_vehicle_height, 0), new BoxShape(new Vec3(half_vehicle_width, half_vehicle_height, half_vehicle_length)).toRefC()).create().get();
 	BodyCreationSettings tank_body_settings=new BodyCreationSettings(tank_body_shape, body_position, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
-	tank_body_settings.getCollisionGroup().setGroupFilter ( filter);
-	tank_body_settings.getCollisionGroup().setGroupId ( 0);
-	tank_body_settings.getCollisionGroup().setSubGroupId ( 0);
+	tank_body_settings.getCollisionGroup().setGroupFilter(filter);
+	tank_body_settings.getCollisionGroup().setGroupId(0);
+	tank_body_settings.getCollisionGroup().setSubGroupId(0);
 	tank_body_settings.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
 	tank_body_settings.getMassPropertiesOverride().setMass ( 4000.0f);
 	mTankBody = mBodyInterface.createBody(tank_body_settings);

@@ -34,9 +34,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Character
-        extends CharacterBase
-        implements ConstCharacter {
+public class Character extends CharacterBase implements ConstCharacter {
     // *************************************************************************
     // constructors
 

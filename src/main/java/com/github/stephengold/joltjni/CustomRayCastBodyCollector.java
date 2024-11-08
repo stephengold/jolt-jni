@@ -26,8 +26,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class CustomRayCastBodyCollector
-        extends RayCastBodyCollector {
+abstract public class CustomRayCastBodyCollector extends RayCastBodyCollector {
     // *************************************************************************
     // constructors
 

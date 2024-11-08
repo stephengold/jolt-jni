@@ -115,6 +115,7 @@ abstract public class Constraint extends NonCopyable
             default:
                 throw new IllegalArgumentException("subType = " + subType);
         }
+
         return result;
     }
 
