@@ -38,17 +38,6 @@ public class TrackedVehicleControllerSettings
         long settingsVa = createDefault();
         setVirtualAddress(settingsVa, false); // not owner due to ref counting
     }
-
-    /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    TrackedVehicleControllerSettings(long settingsVa) {
-        super(settingsVa);
-    }
     // *************************************************************************
     // new methods exposed
 

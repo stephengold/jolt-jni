@@ -35,19 +35,6 @@ public class ContactListener extends JoltPhysicsObject {
      */
     ContactListener() {
     }
-
-    /**
-     * Instantiate a listener with the specified native object assigned.
-     *
-     * @param listenerVa the virtual address of the native object to assign (not
-     * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
-     */
-    ContactListener(long listenerVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(listenerVa) : null;
-        setVirtualAddress(listenerVa, freeingAction);
-    }
     // *************************************************************************
     // new protected methods
 

@@ -35,12 +35,6 @@ public class PhysicsMaterial extends SerializableObject
     // constructors
 
     /**
-     * Instantiate a material with no native object assigned.
-     */
-    PhysicsMaterial() {
-    }
-
-    /**
      * Instantiate a material with the specified native object assigned but not
      * owned.
      *

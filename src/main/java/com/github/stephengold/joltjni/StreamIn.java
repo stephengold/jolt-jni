@@ -27,12 +27,4 @@ package com.github.stephengold.joltjni;
  * @author Stephen Gold sgold@sonic.net
  */
 abstract public class StreamIn extends NonCopyable {
-    // *************************************************************************
-    // constructors
-
-    /**
-     * Instantiate with no native object assigned.
-     */
-    StreamIn() {
-    }
 }

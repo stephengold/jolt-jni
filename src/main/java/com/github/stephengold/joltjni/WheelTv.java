@@ -27,16 +27,4 @@ package com.github.stephengold.joltjni;
  * @author Stephen Gold sgold@sonic.net
  */
 public class WheelTv extends Wheel {
-    // *************************************************************************
-    // constructors
-
-    /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param wheelVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    WheelTv(long wheelVa) {
-        setVirtualAddress(wheelVa, null);
-    }
 }
