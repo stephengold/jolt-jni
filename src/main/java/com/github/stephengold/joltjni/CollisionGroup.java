@@ -72,6 +72,21 @@ public class CollisionGroup extends JoltPhysicsObject {
         long groupVa = createGroup(filterVa, groupId, subGroupId);
         setVirtualAddress(groupVa, () -> free(groupVa));
     }
+
+    /**
+     * Instantiate a group with the specified filter and IDs.
+     *
+     * @param filterRef a counted reference to the desired collision-group
+     * filter (not null)
+     * @param groupId the main group ID
+     * @param subGroupId the ID of the subgroup to which the body belongs
+     */
+    public CollisionGroup(
+            GroupFilterTableRef filterRef, int groupId, int subGroupId) {
+        long filterVa = filterRef.targetVa();
+        long groupVa = createGroup(filterVa, groupId, subGroupId);
+        setVirtualAddress(groupVa, () -> free(groupVa));
+    }
     // *************************************************************************
     // new methods exposed
 
