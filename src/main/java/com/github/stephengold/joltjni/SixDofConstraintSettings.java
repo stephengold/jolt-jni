@@ -132,8 +132,21 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * @return the upper limit
      */
     public float getLimitMax(EAxis dof) {
-        long settingsVa = va();
         int dofIndex = dof.ordinal();
+        float result = getLimitMax(dofIndex);
+
+        return result;
+    }
+
+    /**
+     * Return the upper limit of the specified degree of freedom. The settings
+     * are unaffected. (native attribute: mLimitMax)
+     *
+     * @param dofIndex which DOF (&ge;0, &lt;6)
+     * @return the upper limit
+     */
+    public float getLimitMax(int dofIndex) {
+        long settingsVa = va();
         float result = getLimitMax(settingsVa, dofIndex);
 
         return result;
@@ -147,8 +160,21 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * @return the lower limit
      */
     public float getLimitMin(EAxis dof) {
-        long settingsVa = va();
         int dofIndex = dof.ordinal();
+        float result = getLimitMin(dofIndex);
+
+        return result;
+    }
+
+    /**
+     * Return the lower limit of the specified degree of freedom. The settings
+     * are unaffected. (native attribute: mLimitMin)
+     *
+     * @param dofIndex which DOF (&ge;0,&lt;6)
+     * @return the lower limit
+     */
+    public float getLimitMin(int dofIndex) {
+        long settingsVa = va();
         float result = getLimitMin(settingsVa, dofIndex);
 
         return result;
@@ -196,8 +222,21 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * @return a new JVM object with the pre-existing native object assigned
      */
     public MotorSettings getMotorSettings(EAxis dof) {
-        long constraintSettingsVa = va();
         int dofIndex = dof.ordinal();
+        MotorSettings result = getMotorSettings(dofIndex);
+
+        return result;
+    }
+
+    /**
+     * Access the motor settings for the specified degree of freedom. (native
+     * attribute: mMotorSettings)
+     *
+     * @param dofIndex which DOF (&ge;0, &lt;6)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public MotorSettings getMotorSettings(int dofIndex) {
+        long constraintSettingsVa = va();
         long motorSettingsVa
                 = getMotorSettings(constraintSettingsVa, dofIndex);
         MotorSettings result = new MotorSettings(this, motorSettingsVa);
@@ -301,8 +340,17 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * @param dof which DOF to modify (not null)
      */
     public void makeFixedAxis(EAxis dof) {
-        long settingsVa = va();
         int dofIndex = dof.ordinal();
+        makeFixedAxis(dofIndex);
+    }
+
+    /**
+     * Make the specified degree of freedom a fixed one.
+     *
+     * @param dofIndex which DOF to modify (&ge;0, &lt;6)
+     */
+    public void makeFixedAxis(int dofIndex) {
+        long settingsVa = va();
         makeFixedAxis(settingsVa, dofIndex);
     }
 
@@ -312,8 +360,17 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * @param dof which DOF to modify (not null)
      */
     public void makeFreeAxis(EAxis dof) {
-        long settingsVa = va();
         int dofIndex = dof.ordinal();
+        makeFreeAxis(dofIndex);
+    }
+
+    /**
+     * Make the specified degree of freedom a free one.
+     *
+     * @param dofIndex which DOF to modify (&ge;0, &lt;5)
+     */
+    public void makeFreeAxis(int dofIndex) {
+        long settingsVa = va();
         makeFreeAxis(settingsVa, dofIndex);
     }
 
@@ -389,8 +446,19 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * @param max the desired maximum value
      */
     public void setLimitedAxis(EAxis dof, float min, float max) {
-        long settingsVa = va();
         int dofIndex = dof.ordinal();
+        setLimitedAxis(dofIndex, min, max);
+    }
+
+    /**
+     * Alter the limits of the specified degree of freedom.
+     *
+     * @param dofIndex which DOF to modify (&ge;0, &lt;6)
+     * @param min the desired minimum value
+     * @param max the desired maximum value
+     */
+    public void setLimitedAxis(int dofIndex, float min, float max) {
+        long settingsVa = va();
         setLimitedAxis(settingsVa, dofIndex, min, max);
     }
 
