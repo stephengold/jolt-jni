@@ -318,52 +318,64 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the X axis for body 1. (native attribute: mAxisX1)
      *
      * @param axis the desired direction vector (default=(1,0,0))
+     * @return the argument, for chaining
      */
-    public void setAxisX1(Vec3Arg axis) {
+    public Vec3Arg setAxisX1(Vec3Arg axis) {
         long settingsVa = va();
         float x = axis.getX();
         float y = axis.getY();
         float z = axis.getZ();
         setAxisX1(settingsVa, x, y, z);
+
+        return axis;
     }
 
     /**
      * Alter the X axis for body 2. (native attribute: mAxisX2)
      *
      * @param axis the desired direction vector (default=(1,0,0))
+     * @return the argument, for chaining
      */
-    public void setAxisX2(Vec3Arg axis) {
+    public Vec3Arg setAxisX2(Vec3Arg axis) {
         long settingsVa = va();
         float x = axis.getX();
         float y = axis.getY();
         float z = axis.getZ();
         setAxisX2(settingsVa, x, y, z);
+
+        return axis;
     }
 
     /**
      * Alter the Y axis for body 1. (native attribute: mAxisY1)
      *
      * @param axis the desired direction vector (default=(0,1,0))
+     * @return the argument, for chaining
      */
-    public void setAxisY1(Vec3Arg axis) {
+    public Vec3Arg setAxisY1(Vec3Arg axis) {
         long settingsVa = va();
         float x = axis.getX();
         float y = axis.getY();
         float z = axis.getZ();
         setAxisY1(settingsVa, x, y, z);
+
+        return axis;
     }
 
     /**
      * Alter the Y axis for body 2. (native attribute: mAxisY2)
      *
      * @param axis the desired direction vector (default=(0,1,0))
+     * @return the argument, for chaining
      */
-    public void setAxisY2(Vec3Arg axis) {
+    public Vec3Arg setAxisY2(Vec3Arg axis) {
         long settingsVa = va();
         float x = axis.getX();
         float y = axis.getY();
         float z = axis.getZ();
         setAxisY2(settingsVa, x, y, z);
+
+        return axis;
     }
 
     /**
@@ -423,13 +435,16 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
+     * @return the argument, for chaining
      */
-    public void setPosition1(RVec3Arg location) {
+    public RVec3Arg setPosition1(RVec3Arg location) {
         long settingsVa = va();
         double x = location.xx();
         double y = location.yy();
         double z = location.zz();
         setPosition1(settingsVa, x, y, z);
+
+        return location;
     }
 
     /**
@@ -437,13 +452,16 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
+     * @return the argument, for chaining
      */
-    public void setPosition2(RVec3Arg location) {
+    public RVec3Arg setPosition2(RVec3Arg location) {
         long settingsVa = va();
         double x = location.xx();
         double y = location.yy();
         double z = location.zz();
         setPosition2(settingsVa, x, y, z);
+
+        return location;
     }
 
     /**
