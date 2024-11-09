@@ -42,3 +42,158 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstra
     TRACE_NEW("RackAndPinionConstraintSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    getHingeAxisX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getHingeAxisX
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    const float result = pSettings->mHingeAxis.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    getHingeAxisY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getHingeAxisY
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    const float result = pSettings->mHingeAxis.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    getHingeAxisZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getHingeAxisZ
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    const float result = pSettings->mHingeAxis.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    getRatio
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getRatio
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    const float result = pSettings->mRatio;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    getSliderAxisX
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getSliderAxisX
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    const float result = pSettings->mSliderAxis.GetX();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    getSliderAxisY
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getSliderAxisY
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    const float result = pSettings->mSliderAxis.GetY();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    getSliderAxisZ
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getSliderAxisZ
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    const float result = pSettings->mSliderAxis.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    getSpace
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getSpace
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    const EConstraintSpace result = pSettings->mSpace;
+    return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    setHingeAxis
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_setHingeAxis
+  (JNIEnv *, jclass, jlong settingsVa, jfloat dx, jfloat dy, jfloat dz) {
+    RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    const Vec3 axisDirection(dx, dy, dz);
+    pSettings->mHingeAxis = axisDirection;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    setRatio
+ * Signature: (JIFI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_setRatio
+  (JNIEnv *, jclass, jlong settingsVa, jint rackTeeth, jfloat rackLength, jint pinionTeeth) {
+    RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    pSettings->SetRatio(rackTeeth, rackLength, pinionTeeth);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    setSliderAxis
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_setSliderAxis
+  (JNIEnv *, jclass, jlong settingsVa, jfloat dx, jfloat dy, jfloat dz) {
+    RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    const Vec3 axisDirection(dx, dy, dz);
+    pSettings->mSliderAxis = axisDirection;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    setSpace
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_setSpace
+  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+    RackAndPinionConstraintSettings * const pSettings
+            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
+    const EConstraintSpace space = (EConstraintSpace) ordinal;
+    pSettings->mSpace = space;
+}
