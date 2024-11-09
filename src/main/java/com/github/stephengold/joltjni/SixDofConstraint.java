@@ -53,13 +53,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Return the upper limit of the specified degree of freedom. The constraint
      * is unaffected.
      *
-     * @param axis which axis to query (not null)
+     * @param dof which DOF to query (not null)
      * @return the limit value
      */
-    public float getLimitsMax(EAxis axis) {
+    public float getLimitsMax(EAxis dof) {
         long constraintVa = va();
-        int axisOrdinal = axis.ordinal();
-        float result = getLimitsMax(constraintVa, axisOrdinal);
+        int dofIndex = dof.ordinal();
+        float result = getLimitsMax(constraintVa, dofIndex);
 
         return result;
     }
@@ -68,13 +68,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Return the lower limit of the specified degree of freedom. The constraint
      * is unaffected.
      *
-     * @param axis which axis to query (not null)
+     * @param dof which DOF to query (not null)
      * @return the limit value
      */
-    public float getLimitsMin(EAxis axis) {
+    public float getLimitsMin(EAxis dof) {
         long constraintVa = va();
-        int axisOrdinal = axis.ordinal();
-        float result = getLimitsMin(constraintVa, axisOrdinal);
+        int dofOrdinal = dof.ordinal();
+        float result = getLimitsMin(constraintVa, dofOrdinal);
 
         return result;
     }
@@ -83,13 +83,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Access the spring settings of the specified degree of freedom. The
      * constraint is unaffected.
      *
-     * @param axis which axis to query (not null)
+     * @param dof which degree of freedom to query (not null)
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public SpringSettings getLimitsSpringSettings(EAxis axis) {
+    public SpringSettings getLimitsSpringSettings(EAxis dof) {
         long constraintVa = va();
-        int axisOrdinal = axis.ordinal();
-        long settingsVa = getLimitsSpringSettings(constraintVa, axisOrdinal);
+        int dofOrdinal = dof.ordinal();
+        long settingsVa = getLimitsSpringSettings(constraintVa, dofOrdinal);
         SpringSettings result = new SpringSettings(this, settingsVa);
 
         return result;
@@ -99,13 +99,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Return the maximum friction of the specified degree of freedom. The
      * constraint is unaffected.
      *
-     * @param axis which axis to alter (not null)
+     * @param dof which DPF to alter (not null)
      * @return the friction value
      */
-    public float getMaxFriction(EAxis axis) {
+    public float getMaxFriction(EAxis dof) {
         long constraintVa = va();
-        int axisOrdinal = axis.ordinal();
-        float result = getMaxFriction(constraintVa, axisOrdinal);
+        int dofIndex = dof.ordinal();
+        float result = getMaxFriction(constraintVa, dofIndex);
 
         return result;
     }
@@ -114,13 +114,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Access the motor settings of the specified degree of freedom. The
      * constraint is unaffected.
      *
-     * @param axis which axis to query (not null)
+     * @param dof which degree of freedom to query (not null)
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public MotorSettings getMotorSettings(EAxis axis) {
+    public MotorSettings getMotorSettings(EAxis dof) {
         long constraintVa = va();
-        int axisOrdinal = axis.ordinal();
-        long settingsVa = getMotorSettings(constraintVa, axisOrdinal);
+        int dofIndex = dof.ordinal();
+        long settingsVa = getMotorSettings(constraintVa, dofIndex);
         MotorSettings result = new MotorSettings(this, settingsVa);
 
         return result;
@@ -129,13 +129,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Return the motor state of the specified degree of freedom.
      *
-     * @param axis which axis to alter (not null)
+     * @param dof which DOF to alter (not null)
      * @return an enum value (not null)
      */
-    public EMotorState getMotorState(EAxis axis) {
+    public EMotorState getMotorState(EAxis dof) {
         long constraintVa = va();
-        int axisOrdinal = axis.ordinal();
-        int stateOrdinal = getMotorState(constraintVa, axisOrdinal);
+        int dofIndex = dof.ordinal();
+        int stateOrdinal = getMotorState(constraintVa, dofIndex);
         EMotorState result = EMotorState.values()[stateOrdinal];
 
         return result;
@@ -286,13 +286,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Test whether the specified degree of freedom is fixed. The constraint is
      * unaffected.
      *
-     * @param axis which axis to query (not null)
+     * @param dof which DOF to query (not null)
      * @return {@code true} if fixed, otherwise {@code false}
      */
-    public boolean isFixedAxis(EAxis axis) {
+    public boolean isFixedAxis(EAxis dof) {
         long constraintVa = va();
-        int axisOrdinal = axis.ordinal();
-        boolean result = isFixedAxis(constraintVa, axisOrdinal);
+        int dofIndex = dof.ordinal();
+        boolean result = isFixedAxis(constraintVa, dofIndex);
 
         return result;
     }
@@ -301,13 +301,13 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * Test whether the specified degree of freedom is free. The constraint is
      * unaffected.
      *
-     * @param axis which axis to query (not null)
+     * @param dof which DOF to query (not null)
      * @return {@code true} if free, otherwise {@code false}
      */
-    public boolean isFreeAxis(EAxis axis) {
+    public boolean isFreeAxis(EAxis dof) {
         long constraintVa = va();
-        int axisOrdinal = axis.ordinal();
-        boolean result = isFreeAxis(constraintVa, axisOrdinal);
+        int dofIndex = dof.ordinal();
+        boolean result = isFreeAxis(constraintVa, dofIndex);
 
         return result;
     }
@@ -315,40 +315,40 @@ public class SixDofConstraint extends TwoBodyConstraint {
     /**
      * Alter the spring settings of the specified degree of freedom.
      *
-     * @param axis which axis to alter (not null)
+     * @param dof which DOF to alter (not null)
      * @param springSettings the desired settings (not null, unaffected)
      */
     public void setLimitsSpringSettings(
-            EAxis axis, SpringSettings springSettings) {
+            EAxis dof, SpringSettings springSettings) {
         long constraintVa = va();
-        int axisOrdinal = axis.ordinal();
+        int dofIndex = dof.ordinal();
         long settingsVa = springSettings.va();
-        setLimitsSpringSettings(constraintVa, axisOrdinal, settingsVa);
+        setLimitsSpringSettings(constraintVa, dofIndex, settingsVa);
     }
 
     /**
      * Alter the maximum friction of the specified degree of freedom.
      *
-     * @param axis which axis to alter (not null)
+     * @param dof which DOF to alter (not null)
      * @param friction the desired value
      */
-    public void setMaxFriction(EAxis axis, float friction) {
+    public void setMaxFriction(EAxis dof, float friction) {
         long constraintVa = va();
-        int axisOrdinal = axis.ordinal();
-        setMaxFriction(constraintVa, axisOrdinal, friction);
+        int dofIndex = dof.ordinal();
+        setMaxFriction(constraintVa, dofIndex, friction);
     }
 
     /**
      * Alter the motor state of the specified degree of freedom.
      *
-     * @param axis which axis to alter (not null)
+     * @param dof which DOF to alter (not null)
      * @param state the desired state (not null)
      */
-    public void setMotorState(EAxis axis, EMotorState state) {
+    public void setMotorState(EAxis dof, EMotorState state) {
         long constraintVa = va();
-        int axisOrdinal = axis.ordinal();
+        int dofIndex = dof.ordinal();
         int stateOrdinal = state.ordinal();
-        setMotorState(constraintVa, axisOrdinal, stateOrdinal);
+        setMotorState(constraintVa, dofIndex, stateOrdinal);
     }
 
     /**
@@ -456,23 +456,20 @@ public class SixDofConstraint extends TwoBodyConstraint {
     // *************************************************************************
     // native private methods
 
-    native private static float getLimitsMax(
-            long constraintVa, int axisOrdinal);
+    native private static float getLimitsMax(long constraintVa, int dofIndex);
 
-    native private static float getLimitsMin(
-            long constraintVa, int axisOrdinal);
+    native private static float getLimitsMin(long constraintVa, int dofIndex);
 
     native private static long getLimitsSpringSettings(
-            long constraintVa, int axisOrdinal);
+            long constraintVa, int dofIndex);
 
     native private static float getMaxFriction(
-            long constraintVa, int axisOrdinal);
+            long constraintVa, int dofIndex);
 
     native private static long getMotorSettings(
-            long constraintVa, int axisOrdinal);
+            long constraintVa, int dofIndex);
 
-    native private static int getMotorState(
-            long constraintVa, int axisOrdinal);
+    native private static int getMotorState(long constraintVa, int dofIndex);
 
     native private static float getRotationInConstraintSpaceW(
             long constraintVa);
@@ -537,19 +534,19 @@ public class SixDofConstraint extends TwoBodyConstraint {
     native private static float getTranslationLimitsMinZ(long constraintVa);
 
     native private static boolean isFixedAxis(
-            long constraintVa, int axisOrdinal);
+            long constraintVa, int dofIndex);
 
     native private static boolean isFreeAxis(
-            long constraintVa, int axisOrdinal);
+            long constraintVa, int dofIndex);
 
     native private static void setLimitsSpringSettings(
-            long constraintVa, int axisOrdinal, long springSettingsVa);
+            long constraintVa, int dofIndex, long springSettingsVa);
 
     native private static void setMaxFriction(
-            long constraintVa, int axisOrdinal, float friction);
+            long constraintVa, int dofIndex, float friction);
 
     native private static void setMotorState(
-            long constraintVa, int axisOrdinal, int stateOrdinal);
+            long constraintVa, int dofIndex, int stateOrdinal);
 
     native private static void setRotationLimits(long constraintVa, float minX,
             float minY, float minZ, float maxX, float maxY, float maxZ);

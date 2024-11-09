@@ -182,8 +182,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public float getMaxFriction(EAxis dof) {
         long settingsVa = va();
-        int ordinal = dof.ordinal();
-        float result = getMaxFriction(settingsVa, ordinal);
+        int dofIndex = dof.ordinal();
+        float result = getMaxFriction(settingsVa, dofIndex);
 
         return result;
     }
@@ -517,16 +517,16 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static float getAxisY2Z(long settingsVa);
 
-    native private static float getLimitMax(long settingsVa, int dof);
+    native private static float getLimitMax(long settingsVa, int dofIndex);
 
-    native private static float getLimitMin(long settingsVa, int dof);
+    native private static float getLimitMin(long settingsVa, int dofIndex);
 
     native private static long getLimitsSpringSettings(
-            long settingsVa, int dof);
+            long settingsVa, int dofIndex);
 
-    native private static float getMaxFriction(long settingsVa, int dof);
+    native private static float getMaxFriction(long settingsVa, int dofIndex);
 
-    native private static long getMotorSettings(long settingsVa, int dof);
+    native private static long getMotorSettings(long settingsVa, int dofIndex);
 
     native private static double getPosition1X(long settingsVa);
 
@@ -544,13 +544,13 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static int getSwingType(long settingsVa);
 
-    native private static boolean isFixedAxis(long settingsVa, int ordinal);
+    native private static boolean isFixedAxis(long settingsVa, int dofIndex);
 
-    native private static boolean isFreeAxis(long settingsVa, int ordinal);
+    native private static boolean isFreeAxis(long settingsVa, int dofIndex);
 
-    native private static void makeFixedAxis(long settingsVa, int ordinal);
+    native private static void makeFixedAxis(long settingsVa, int dofIndex);
 
-    native private static void makeFreeAxis(long settingsVa, int ordinal);
+    native private static void makeFreeAxis(long settingsVa, int dofIndex);
 
     native private static void setAxisX1(
             long settingsVa, float x, float y, float z);
@@ -568,13 +568,13 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
             long settingsVa, int ordinal, float min, float max);
 
     native private static void setLimitMax(
-            long settingsVa, int dof, float max);
+            long settingsVa, int dofIndex, float max);
 
     native private static void setLimitMin(
-            long settingsVa, int dof, float min);
+            long settingsVa, int dofIndex, float min);
 
     native private static void setMaxFriction(
-            long settingsVa, int dof, float friction);
+            long settingsVa, int dofIndex, float friction);
 
     native private static void setPosition1(
             long settingsVa, double x, double y, double z);
