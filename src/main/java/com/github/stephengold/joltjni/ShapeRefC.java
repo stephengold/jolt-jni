@@ -308,6 +308,18 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     }
 
     /**
+     * Save the state of this shape in binary form. The shape is unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long sceneVa = targetVa();
+        long streamVa = stream.va();
+        Shape.saveBinaryState(sceneVa, streamVa);
+    }
+
+    /**
      * Return the address of the native {@code Shape}. No objects are affected.
      *
      * @return a virtual address (not zero)

@@ -297,6 +297,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Shape_mustBeStati
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    saveBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_saveBinaryState
+  (JNIEnv *, jclass, jlong shapeVa, jlong streamVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    pShape->SaveBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    setEmbedded
  * Signature: (J)V
  */

@@ -361,6 +361,18 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
+     * Save the state of this shape in binary form. The shape is unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long sceneVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(sceneVa, streamVa);
+    }
+
+    /**
      * Create a counted reference to the native {@code Shape}.
      *
      * @return a new JVM object with a new native object assigned
@@ -451,6 +463,8 @@ abstract public class Shape extends NonCopyable
             long shapeVa, long rMat44Va, float sx, float sy, float sz);
 
     native static boolean mustBeStatic(long shapeVa);
+
+    native static void saveBinaryState(long sceneVa, long streamVa);
 
     native private static void setEmbedded(long shapeVa);
 

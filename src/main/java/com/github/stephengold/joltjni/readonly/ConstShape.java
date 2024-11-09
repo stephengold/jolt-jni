@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.DebugRenderer;
 import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.ShapeRefC;
+import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
@@ -154,6 +155,13 @@ public interface ConstShape extends ConstJoltPhysicsObject {
      * @return {@code true} if it can be only be static, otherwise {@code false}
      */
     boolean mustBeStatic();
+
+    /**
+     * Save the state of this shape in binary form. The shape is unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    void saveBinaryState(StreamOut stream);
 
     /**
      * Create a counted reference to the native {@code Shape}.
