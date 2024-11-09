@@ -50,8 +50,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     // new methods exposed
 
     /**
-     * Return the upper limit of the specified axis. The constraint is
-     * unaffected.
+     * Return the upper limit of the specified degree of freedom. The constraint
+     * is unaffected.
      *
      * @param axis which axis to query (not null)
      * @return the limit value
@@ -65,8 +65,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Return the lower limit of the specified axis. The constraint is
-     * unaffected.
+     * Return the lower limit of the specified degree of freedom. The constraint
+     * is unaffected.
      *
      * @param axis which axis to query (not null)
      * @return the limit value
@@ -80,8 +80,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Access the spring settings of the specified axis. The constraint is
-     * unaffected.
+     * Access the spring settings of the specified degree of freedom. The
+     * constraint is unaffected.
      *
      * @param axis which axis to query (not null)
      * @return a new JVM object with the pre-existing native object assigned
@@ -96,8 +96,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Return the maximum friction of the specified axis. The constraint is
-     * unaffected.
+     * Return the maximum friction of the specified degree of freedom. The
+     * constraint is unaffected.
      *
      * @param axis which axis to alter (not null)
      * @return the friction value
@@ -111,8 +111,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Access the motor settings of the specified axis. The constraint is
-     * unaffected.
+     * Access the motor settings of the specified degree of freedom. The
+     * constraint is unaffected.
      *
      * @param axis which axis to query (not null)
      * @return a new JVM object with the pre-existing native object assigned
@@ -127,7 +127,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Return the motor state of the specified axis.
+     * Return the motor state of the specified degree of freedom.
      *
      * @param axis which axis to alter (not null)
      * @return an enum value (not null)
@@ -283,7 +283,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Test whether the specified axis is fixed. The constraint is unaffected.
+     * Test whether the specified degree of freedom is fixed. The constraint is
+     * unaffected.
      *
      * @param axis which axis to query (not null)
      * @return {@code true} if fixed, otherwise {@code false}
@@ -297,7 +298,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Test whether the specified axis is free. The constraint is unaffected.
+     * Test whether the specified degree of freedom is free. The constraint is
+     * unaffected.
      *
      * @param axis which axis to query (not null)
      * @return {@code true} if free, otherwise {@code false}
@@ -311,7 +313,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the spring settings of the specified axis.
+     * Alter the spring settings of the specified degree of freedom.
      *
      * @param axis which axis to alter (not null)
      * @param springSettings the desired settings (not null, unaffected)
@@ -325,7 +327,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the maximum friction of the specified axis.
+     * Alter the maximum friction of the specified degree of freedom.
      *
      * @param axis which axis to alter (not null)
      * @param friction the desired value
@@ -337,7 +339,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the motor state of the specified axis.
+     * Alter the motor state of the specified degree of freedom.
      *
      * @param axis which axis to alter (not null)
      * @param state the desired state (not null)

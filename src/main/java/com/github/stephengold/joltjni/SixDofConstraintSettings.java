@@ -125,10 +125,10 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Return the upper limit of the specified axis. The settings are
-     * unaffected. (native attribute: mLimitMax)
+     * Return the upper limit of the specified degree of freedom. The settings
+     * are unaffected. (native attribute: mLimitMax)
      *
-     * @param dof which axis (not null)
+     * @param dof which DOF (not null)
      * @return the upper limit
      */
     public float getLimitMax(EAxis dof) {
@@ -140,10 +140,10 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Return the lower limit of the specified axis. The settings are
-     * unaffected. (native attribute: mLimitMin)
+     * Return the lower limit of the specified degree of freedom. The settings
+     * are unaffected. (native attribute: mLimitMin)
      *
-     * @param dof which axis (not null)
+     * @param dof which DOF (not null)
      * @return the lower limit
      */
     public float getLimitMin(EAxis dof) {
@@ -155,10 +155,11 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Access the spring settings for the specified axis. The constraint
-     * settings are unaffected. (native attribute: mLimitsSpringSettings)
+     * Access the spring settings for the specified degree of freedom. The
+     * constraint settings are unaffected. (native attribute:
+     * mLimitsSpringSettings)
      *
-     * @param translationAxis which axis (not null, not a rotation axis)
+     * @param translationDof which DOF (not null, not a rotation DOF)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public SpringSettings getLimitsSpringSettings(EAxis translationAxis) {
@@ -173,10 +174,10 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Return the maximum friction of the specified axis. The settings are
-     * unaffected. (native attribute: mMaxFriction)
+     * Return the maximum friction of the specified degree of freedom. The
+     * settings are unaffected. (native attribute: mMaxFriction)
      *
-     * @param dof which axis (not null)
+     * @param dof which DOF (not null)
      * @return the maximum friction value
      */
     public float getMaxFriction(EAxis dof) {
@@ -188,10 +189,10 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Access the motor settings for the specified axis. (native attribute:
-     * mMotorSettings)
+     * Access the motor settings for the specified degree of freedom. (native
+     * attribute: mMotorSettings)
      *
-     * @param dof which axis (not null)
+     * @param dof which DOF (not null)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public MotorSettings getMotorSettings(EAxis dof) {
@@ -265,9 +266,10 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Test whether the specified axis is fixed. The settings are unaffected.
+     * Test whether the specified degree of freedom is fixed. The settings are
+     * unaffected.
      *
-     * @param dof which axis to test (not null)
+     * @param dof which DOF to test (not null)
      * @return {@code true} if fixed, otherwise {@code false}
      */
     public boolean isFixedAxis(EAxis dof) {
@@ -279,9 +281,10 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Test whether the specified axis is free. The settings are unaffected.
+     * Test whether the specified degree of freedom is free. The settings are
+     * unaffected.
      *
-     * @param dof which axis to test (not null)
+     * @param dof which DOF to test (not null)
      * @return {@code true} if free, otherwise {@code false}
      */
     public boolean isFreeAxis(EAxis dof) {
@@ -293,9 +296,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Make the specified axis a fixed one.
+     * Make the specified degree of freedom a fixed one.
      *
-     * @param dof which axis to modify (not null)
+     * @param dof which DOF to modify (not null)
      */
     public void makeFixedAxis(EAxis dof) {
         long settingsVa = va();
@@ -304,9 +307,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Make the specified axis a free one.
+     * Make the specified degree of freedom a free one.
      *
-     * @param dof which axis to modify (not null)
+     * @param dof which DOF to modify (not null)
      */
     public void makeFreeAxis(EAxis dof) {
         long settingsVa = va();
@@ -379,9 +382,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the limits of the specified axis.
+     * Alter the limits of the specified degree of freedom.
      *
-     * @param dof which axis to modify (not null)
+     * @param dof which DOF to modify (not null)
      * @param min the desired minimum value
      * @param max the desired maximum value
      */
@@ -392,10 +395,10 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the upper limit of the specified axis. (native attribute:
-     * mLimitMax)
+     * Alter the upper limit of the specified degree of freedom. (native
+     * attribute: mLimitMax)
      *
-     * @param dof which axis to modify (not null)
+     * @param dof which DOF to modify (not null)
      * @param max the desired limit value (default=MAX_VALUE)
      */
     public void setLimitMax(EAxis dof, float max) {
@@ -405,10 +408,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the lower limit of the specified axis. (native attribute:
-     * mLimitMin)
+     * Alter the lower limit of the specified DOF. (native attribute: mLimitMin)
      *
-     * @param dof which axis to modify (not null)
+     * @param dof which DOF to modify (not null)
      * @param min the desired limit value (default=-MAX_VALUE)
      */
     public void setLimitMin(EAxis dof, float min) {
@@ -418,10 +420,10 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the maximum friction of the specified axis. (native attribute:
-     * mMaxFriction)
+     * Alter the maximum friction of the specified degree of freedom. (native
+     * attribute: mMaxFriction)
      *
-     * @param dof which axis to modify (not null)
+     * @param dof which DOF to modify (not null)
      * @param friction the desired value (default=0)
      */
     public void setMaxFriction(EAxis dof, float friction) {
