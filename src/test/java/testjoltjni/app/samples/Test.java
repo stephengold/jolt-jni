@@ -24,7 +24,6 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
-
 /**
  * A line-for-line Java translation of the Jolt Physics abstract test class.
  * <p>

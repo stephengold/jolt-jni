@@ -149,8 +149,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public MotorSettings getMotorSettings() {
         long constraintSettingsVa = va();
-        long motorSettingsVa
-                = getMotorSettings(constraintSettingsVa);
+        long motorSettingsVa = getMotorSettings(constraintSettingsVa);
         MotorSettings result = new MotorSettings(this, motorSettingsVa);
 
         return result;
