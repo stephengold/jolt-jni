@@ -133,8 +133,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public float getLimitMax(EAxis dof) {
         long settingsVa = va();
-        int ordinal = dof.ordinal();
-        float result = getLimitMax(settingsVa, ordinal);
+        int dofIndex = dof.ordinal();
+        float result = getLimitMax(settingsVa, dofIndex);
 
         return result;
     }
@@ -148,8 +148,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public float getLimitMin(EAxis dof) {
         long settingsVa = va();
-        int ordinal = dof.ordinal();
-        float result = getLimitMin(settingsVa, ordinal);
+        int dofIndex = dof.ordinal();
+        float result = getLimitMin(settingsVa, dofIndex);
 
         return result;
     }
@@ -162,12 +162,12 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * @param translationDof which DOF (not null, not a rotation DOF)
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public SpringSettings getLimitsSpringSettings(EAxis translationAxis) {
+    public SpringSettings getLimitsSpringSettings(EAxis translationDof) {
         long constraintSettingsVa = va();
-        int ordinal = translationAxis.ordinal();
-        assert ordinal < 3 : ordinal;
+        int dofIndex = translationDof.ordinal();
+        assert dofIndex < 3 : dofIndex;
         long springSettingsVa
-                = getLimitsSpringSettings(constraintSettingsVa, ordinal);
+                = getLimitsSpringSettings(constraintSettingsVa, dofIndex);
         SpringSettings result = new SpringSettings(this, springSettingsVa);
 
         return result;
@@ -197,9 +197,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public MotorSettings getMotorSettings(EAxis dof) {
         long constraintSettingsVa = va();
-        int ordinal = dof.ordinal();
+        int dofIndex = dof.ordinal();
         long motorSettingsVa
-                = getMotorSettings(constraintSettingsVa, ordinal);
+                = getMotorSettings(constraintSettingsVa, dofIndex);
         MotorSettings result = new MotorSettings(this, motorSettingsVa);
 
         return result;
@@ -274,8 +274,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public boolean isFixedAxis(EAxis dof) {
         long settingsVa = va();
-        int ordinal = dof.ordinal();
-        boolean result = isFixedAxis(settingsVa, ordinal);
+        int dofIndex = dof.ordinal();
+        boolean result = isFixedAxis(settingsVa, dofIndex);
 
         return result;
     }
@@ -289,8 +289,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public boolean isFreeAxis(EAxis dof) {
         long settingsVa = va();
-        int ordinal = dof.ordinal();
-        boolean result = isFreeAxis(settingsVa, ordinal);
+        int dofIndex = dof.ordinal();
+        boolean result = isFreeAxis(settingsVa, dofIndex);
 
         return result;
     }
@@ -302,8 +302,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public void makeFixedAxis(EAxis dof) {
         long settingsVa = va();
-        int ordinal = dof.ordinal();
-        makeFixedAxis(settingsVa, ordinal);
+        int dofIndex = dof.ordinal();
+        makeFixedAxis(settingsVa, dofIndex);
     }
 
     /**
@@ -313,8 +313,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public void makeFreeAxis(EAxis dof) {
         long settingsVa = va();
-        int ordinal = dof.ordinal();
-        makeFreeAxis(settingsVa, ordinal);
+        int dofIndex = dof.ordinal();
+        makeFreeAxis(settingsVa, dofIndex);
     }
 
     /**
@@ -390,8 +390,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public void setLimitedAxis(EAxis dof, float min, float max) {
         long settingsVa = va();
-        int ordinal = dof.ordinal();
-        setLimitedAxis(settingsVa, ordinal, min, max);
+        int dofIndex = dof.ordinal();
+        setLimitedAxis(settingsVa, dofIndex, min, max);
     }
 
     /**
@@ -403,8 +403,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public void setLimitMax(EAxis dof, float max) {
         long settingsVa = va();
-        int ordinal = dof.ordinal();
-        setLimitMax(settingsVa, ordinal, max);
+        int dofIndex = dof.ordinal();
+        setLimitMax(settingsVa, dofIndex, max);
     }
 
     /**
@@ -415,8 +415,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public void setLimitMin(EAxis dof, float min) {
         long settingsVa = va();
-        int ordinal = dof.ordinal();
-        setLimitMin(settingsVa, ordinal, min);
+        int dofIndex = dof.ordinal();
+        setLimitMin(settingsVa, dofIndex, min);
     }
 
     /**
@@ -428,8 +428,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public void setMaxFriction(EAxis dof, float friction) {
         long settingsVa = va();
-        int ordinal = dof.ordinal();
-        setMaxFriction(settingsVa, ordinal, friction);
+        int dofIndex = dof.ordinal();
+        setMaxFriction(settingsVa, dofIndex, friction);
     }
 
     /**
@@ -565,7 +565,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
             long settingsVa, float x, float y, float z);
 
     native private static void setLimitedAxis(
-            long settingsVa, int ordinal, float min, float max);
+            long settingsVa, int dofIndex, float min, float max);
 
     native private static void setLimitMax(
             long settingsVa, int dofIndex, float max);
