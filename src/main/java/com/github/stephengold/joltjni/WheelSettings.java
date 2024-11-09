@@ -35,6 +35,17 @@ abstract public class WheelSettings
         extends SerializableObject
         implements ConstWheelSettings, RefTarget {
     // *************************************************************************
+    // constructors
+
+    /**
+     * Instantiate with no native object assigned.
+     * <p>
+     * This no-arg constructor was made explicit to avoid javadoc warnings from
+     * JDK 18+.
+     */
+    WheelSettings() {
+    }
+    // *************************************************************************
     // new methods exposed
 
     /**

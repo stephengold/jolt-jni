@@ -27,4 +27,15 @@ package com.github.stephengold.joltjni;
  * @author Stephen Gold sgold@sonic.net
  */
 abstract public class StreamIn extends NonCopyable {
+    // *************************************************************************
+    // constructors
+
+    /**
+     * Instantiate with no native object assigned.
+     * <p>
+     * This no-arg constructor was made explicit to avoid javadoc warnings from
+     * JDK 18+.
+     */
+    StreamIn() {
+    }
 }
