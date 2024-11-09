@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstConstraint;
+
 /**
  * A {@code TwoBodyConstraint} that links the rotation of the first body to the
  * linear motion of the 2nd body.
@@ -41,4 +43,26 @@ public class RackAndPinionConstraint extends TwoBodyConstraint {
     RackAndPinionConstraint(long constraintVa) {
         super(constraintVa);
     }
+    // *************************************************************************
+    // new public methods
+
+    /**
+     * Specify the constraints for each body (optional).
+     *
+     * @param pinion the desired hinge constraint for the pinion (not null,
+     * unaffected)
+     * @param rack the desired slider constraint for the rack (not null,
+     * unaffected)
+     */
+    public void setConstraints(ConstConstraint pinion, ConstConstraint rack) {
+        long randpVa = va();
+        long pinionVa = pinion.targetVa();
+        long rackVa = rack.targetVa();
+        setConstraints(randpVa, pinionVa, rackVa);
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static void setConstraints(
+            long randpVa, long pinionVa, long rackVa);
 }
