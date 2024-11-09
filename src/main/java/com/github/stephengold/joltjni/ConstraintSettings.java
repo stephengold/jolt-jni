@@ -210,7 +210,7 @@ abstract public class ConstraintSettings
     @Override
     public int getControllerType() {
         long settingsVa = va();
-        int result = getConstraintPriority(settingsVa);
+        int result = getControllerType(settingsVa);
 
         return result;
     }
