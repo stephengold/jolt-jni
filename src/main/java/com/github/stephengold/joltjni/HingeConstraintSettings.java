@@ -36,6 +36,15 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public HingeConstraintSettings() {
+        long settingsVa = createHingeConstraintSettings();
+        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setSubType(EConstraintSubType.Hinge);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -43,15 +52,6 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      */
     HingeConstraintSettings(long settingsVa) {
         super(settingsVa);
-        setSubType(EConstraintSubType.Hinge);
-    }
-
-    /**
-     * Instantiate default settings.
-     */
-    public HingeConstraintSettings() {
-        long settingsVa = createHingeConstraintSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EConstraintSubType.Hinge);
     }
     // *************************************************************************
