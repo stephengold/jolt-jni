@@ -74,19 +74,6 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
 
         return result;
     }
-
-    /**
-     * Create another counted reference to the native {@code Shape}.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    public ShapeRefC toRefC() {
-        long refVa = va();
-        long copyVa = copy(refVa);
-        ShapeRefC result = new ShapeRefC(copyVa, true);
-
-        return result;
-    }
     // *************************************************************************
     // ConstShape methods
 
@@ -328,6 +315,20 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     public long targetVa() {
         long refVa = va();
         long result = getPtr(refVa);
+
+        return result;
+    }
+
+    /**
+     * Create another counted reference to the native {@code Shape}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public ShapeRefC toRefC() {
+        long refVa = va();
+        long copyVa = copy(refVa);
+        ShapeRefC result = new ShapeRefC(copyVa, true);
 
         return result;
     }
