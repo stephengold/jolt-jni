@@ -350,6 +350,21 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the slider and normal axes, assuming the bodies are correctly
+     * oriented.
+     *
+     * @param sliderAxis the desired slider axis direction (in system
+     * coordinates, not null, unaffected)
+     */
+    public void setSliderAxis(Vec3Arg sliderAxis) {
+        long settingsVa = va();
+        float dx = sliderAxis.getX();
+        float dy = sliderAxis.getY();
+        float dz = sliderAxis.getZ();
+        setSliderAxis(settingsVa, dx, dy, dz);
+    }
+
+    /**
      * Alter the slider axis of body 1. (native attribute: mSliderAxis1)
      *
      * @param direction the desired axis direction (not null, unaffected,
@@ -465,6 +480,9 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static void setPoint2(
             long settingsVa, double x, double y, double z);
+
+    native private static void setSliderAxis(
+            long settingsVa, float dx, float dy, float dz);
 
     native private static void setSliderAxis1(
             long settingsVa, float x, float y, float z);

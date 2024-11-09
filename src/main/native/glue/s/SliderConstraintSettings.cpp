@@ -469,6 +469,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
+ * Method:    setSliderAxis
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_setSliderAxis
+  (JNIEnv *, jclass, jlong settingsVa, jfloat dx, jfloat dy, jfloat dz) {
+    SliderConstraintSettings * const pSettings
+            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
+    const Vec3 sliderAxis(dx, dy, dz);
+    pSettings->SetSliderAxis(sliderAxis);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
  * Method:    setSliderAxis1
  * Signature: (JFFF)V
  */
