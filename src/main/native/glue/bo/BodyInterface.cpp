@@ -722,3 +722,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setRest
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
     pInterface->SetRestitution(*pBodyId, restitution);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setShape
+ * Signature: (JJJZI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setShape
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa, jlong shapeVa,
+  jboolean updateMassProperties, jint ordinal) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    const EActivation activation = (EActivation) ordinal;
+    pInterface->SetShape(*pBodyId, pShape, updateMassProperties, activation);
+}

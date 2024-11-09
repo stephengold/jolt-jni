@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
+import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -708,6 +709,25 @@ public class BodyInterface extends NonCopyable {
         long bodyIdVa = bodyId.targetVa();
         setRestitution(bodyInterfaceVa, bodyIdVa, restitution);
     }
+
+    /**
+     * Replace the shape of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null, unaffected)
+     * @param shape the desired shape to apply (not null)
+     * @param updateMassProperties if {@code true}, recalculate the body's mass
+     * and inertia, otherwise don't recalculate
+     * @param activation whether to activate the body (not null)
+     */
+    public void setShape(ConstBodyId bodyId, ConstShape shape,
+            boolean updateMassProperties, EActivation activation) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.targetVa();
+        long shapeVa = shape.targetVa();
+        int ordinal = activation.ordinal();
+        setShape(bodyInterfaceVa, bodyIdVa, shapeVa, updateMassProperties,
+                ordinal);
+    }
     // *************************************************************************
     // native private methods
 
@@ -857,4 +877,7 @@ public class BodyInterface extends NonCopyable {
 
     native private static void setRestitution(
             long bodyInterfaceVa, long bodyIdVa, float restitution);
+
+    native private static void setShape(long bodyInterfaceVa, long bodyIdVa,
+            long shapeVa, boolean updateMassProperties, int ordinal);
 }
