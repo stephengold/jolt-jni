@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics convex-hull shape test.
  * <p>
@@ -63,18 +64,18 @@ public void Initialize()
 
 	// Add a sphere of many points
 	List<Vec3Arg> sphere=new ArrayList<>();
-	for (float theta = 0.0f; theta <= Jolt.JPH_PI; theta += Jolt.JPH_PI / 20.0f)
-		for (float phi = 0.0f; phi <= 2.0f * Jolt.JPH_PI; phi += 2.0f * Jolt.JPH_PI / 20.0f)
+	for (float theta = 0.0f; theta <= JPH_PI; theta += JPH_PI / 20.0f)
+		for (float phi = 0.0f; phi <= 2.0f * JPH_PI; phi += 2.0f * JPH_PI / 20.0f)
 			sphere.add(Op.multiply(5.0f , Vec3.sUnitSpherical(theta, phi)));
 
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new ConvexHullShapeSettings(sphere),new RVec3(40, 10, 0), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 
 	// Add a tapered cylinder of many points
 	List<Vec3Arg> tapered_cylinder=new ArrayList<>();
-	for (float theta = 0.0f; theta <= 2.0f * Jolt.JPH_PI; theta += Jolt.JPH_PI / 128.0f)
+	for (float theta = 0.0f; theta <= 2.0f * JPH_PI; theta += JPH_PI / 128.0f)
 	{
-		tapered_cylinder.add(Op.multiply(4.0f ,new Vec3(-0.1f, Math.sin(theta), Math.cos(theta))));
-		tapered_cylinder.add(Op.multiply(4.5f ,new Vec3(0.1f, Math.sin(theta), Math.cos(theta))));
+		tapered_cylinder.add(Op.multiply(4.0f ,new Vec3(-0.1f, sin(theta), cos(theta))));
+		tapered_cylinder.add(Op.multiply(4.5f ,new Vec3(0.1f, sin(theta), cos(theta))));
 	}
 
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new ConvexHullShapeSettings(tapered_cylinder),new RVec3(60, 10, 0), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);

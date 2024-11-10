@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics fixed-constraint test.
  * <p>
@@ -109,7 +110,7 @@ public void Initialize()
 	{
 		// A tower of beams and crossbeams (note that it is not recommended to make constructs with this many fixed constraints, this is not always stable)
 		RVec3 base_position=new RVec3(0, 25, -40.0f);
-		Quat base_rotation = Quat.sRotation(Vec3.sAxisZ(), -0.5f * Jolt.JPH_PI);
+		Quat base_rotation = Quat.sRotation(Vec3.sAxisZ(), -0.5f * JPH_PI);
 
 		ShapeRef pillar = new BoxShape(new Vec3(0.1f, 1.0f, 0.1f), 0.0f).toRef();
 		ShapeRef beam = new BoxShape(new Vec3(0.01f, 1.5f, 0.1f), 0.0f).toRef();
@@ -123,7 +124,7 @@ public void Initialize()
 			Body[] pillars=new Body[4];
 			for (int i = 0; i < 4; ++i)
 			{
-				Quat rotation = Quat.sRotation(Vec3.sAxisY(), i * 0.5f * Jolt.JPH_PI);
+				Quat rotation = Quat.sRotation(Vec3.sAxisY(), i * 0.5f * JPH_PI);
 
 				pillars[i] = mBodyInterface.createBody(new BodyCreationSettings(pillar, Op.add(base_position , Op.rotate(base_rotation , Op.add(center , Op.rotate(rotation ,new Vec3(1.0f, 1.0f, 1.0f))))), base_rotation, EMotionType.Dynamic, Layers.MOVING));
 				pillars[i].setCollisionGroup(new CollisionGroup(group_filter, 0, 0)); // For convenience, we disable collisions between all objects in the tower
@@ -132,10 +133,10 @@ public void Initialize()
 
 			for (int i = 0; i < 4; ++i)
 			{
-				Quat rotation = Quat.sRotation(Vec3.sAxisY(), i * 0.5f * Jolt.JPH_PI);
+				Quat rotation = Quat.sRotation(Vec3.sAxisY(), i * 0.5f * JPH_PI);
 
 				// Create cross beam
-				Body cross = mBodyInterface.createBody(new BodyCreationSettings(beam, Op.add(base_position , Op.rotate(base_rotation , Op.add(center , Op.rotate(rotation ,new Vec3(1.105f, 1.0f, 0.0f))))), Op.multiply(base_rotation , Op.multiply(rotation , Quat.sRotation(Vec3.sAxisX(), 0.3f * Jolt.JPH_PI))), EMotionType.Dynamic, Layers.MOVING));
+				Body cross = mBodyInterface.createBody(new BodyCreationSettings(beam, Op.add(base_position , Op.rotate(base_rotation , Op.add(center , Op.rotate(rotation ,new Vec3(1.105f, 1.0f, 0.0f))))), Op.multiply(base_rotation , Op.multiply(rotation , Quat.sRotation(Vec3.sAxisX(), 0.3f * JPH_PI))), EMotionType.Dynamic, Layers.MOVING));
 				cross.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 				mBodyInterface.addBody(cross.getId(), EActivation.Activate);
 
@@ -145,7 +146,7 @@ public void Initialize()
 					FixedConstraintSettings constraint=new FixedConstraintSettings();
 					constraint.setAutoDetectPoint ( true);
 					constraint.setNumVelocityStepsOverride ( 64); // This structure needs more solver steps to be stable
-					constraint.setNumPositionStepsOverride ( Jolt.buildType().equals("Release")? (64) :(8)); // In debug mode use less steps to preserve framerate (at the cost of stability)
+					constraint.setNumPositionStepsOverride ( buildType().equals("Release")? (64) :(8)); // In debug mode use less steps to preserve framerate (at the cost of stability)
 					mPhysicsSystem.addConstraint(constraint.create(pillars[(i + j) % 4], cross));
 				}
 
@@ -155,7 +156,7 @@ public void Initialize()
 					FixedConstraintSettings constraint=new FixedConstraintSettings();
 					constraint.setAutoDetectPoint ( true);
 					constraint.setNumVelocityStepsOverride ( 64);
-					constraint.setNumPositionStepsOverride ( Jolt.buildType().equals("Release")? (64) :(8));
+					constraint.setNumPositionStepsOverride ( buildType().equals("Release")? (64) :(8));
 					mPhysicsSystem.addConstraint(constraint.create(prev_pillars[i], pillars[i]));
 				}
 

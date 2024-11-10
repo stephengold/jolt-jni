@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.CameraState;
+import static com.github.stephengold.joltjni.Jolt.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics character-planet test.
@@ -57,8 +58,8 @@ public void Initialize()
 	DefaultRandomEngine random=new DefaultRandomEngine();
 	for (int i = 0; i < 200; ++i)
 	{
-		UniformRealDistribution theta=new UniformRealDistribution(0, Jolt.JPH_PI);
-		UniformRealDistribution phi=new UniformRealDistribution(0, 2 * Jolt.JPH_PI);
+		UniformRealDistribution theta=new UniformRealDistribution(0, JPH_PI);
+		UniformRealDistribution phi=new UniformRealDistribution(0, 2 * JPH_PI);
 		sphere.setPosition (new RVec3(Op.multiply(1.1f * cPlanetRadius , Vec3.sUnitSpherical(theta.nextFloat(random), phi.nextFloat(random)))));
 		mBodyInterface.createAndAddBody(sphere, EActivation.Activate);
 	}
@@ -120,7 +121,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	mCharacter.setRotation(Op.multiply(Quat.sFromTo(old_up, up) , mCharacter.getRotation()).normalized());
 
 	// Draw character pre update (the sim is also drawn pre update)
-if (Jolt.implementsDebugRendering()) {
+if (implementsDebugRendering()) {
 	mCharacter.getShape().draw(mDebugRenderer, mCharacter.getCenterOfMassTransform(), Vec3.sReplicate(1.0f), Color.sGreen, false, true);
 }
 
@@ -172,7 +173,7 @@ public void GetInitialCamera(CameraState ioState)
 RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of character + distance behind based on the heading and pitch of the camera.
-	Vec3 fwd = new Vec3(Math.cos(inCameraPitch) * Math.cos(inCameraHeading), Math.sin(inCameraPitch), Math.cos(inCameraPitch) * Math.sin(inCameraHeading));
+	Vec3 fwd = new Vec3(cos(inCameraPitch) * cos(inCameraHeading), sin(inCameraPitch), cos(inCameraPitch) * sin(inCameraHeading));
 	RVec3 cam_pos = Op.subtract(mCharacter.getPosition() , Op.multiply(5.0f , Op.rotate(mCharacter.getRotation() , fwd)));
 	return RMat44.sRotationTranslation(mCharacter.getRotation(), cam_pos);
 }

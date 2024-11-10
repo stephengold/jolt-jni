@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics high-speed test.
  * <p>
@@ -62,7 +63,7 @@ void CreateDominoBlocks(RVec3Arg inOffset, int inNumWalls, float inDensity, floa
 	}
 
 	box_settings.setPosition (Op.add( inOffset , new Vec3(-1.1f - inRadius, 1, 0)));
-	box_settings.setRotation ( Quat.sRotation(Vec3.sAxisY(), 0.5f * Jolt.JPH_PI));
+	box_settings.setRotation ( Quat.sRotation(Vec3.sAxisY(), 0.5f * JPH_PI));
 	mBodyInterface.createAndAddBody(box_settings, EActivation.DontActivate);
 }
 
@@ -151,8 +152,8 @@ void CreateSimpleScene()
 		StaticCompoundShapeSettings enclosing_shape = new StaticCompoundShapeSettings();
 		enclosing_shape.addShape(new Vec3(0, 0, 1), Quat.sIdentity(), box_shape);
 		enclosing_shape.addShape(new Vec3(0, 0, -1), Quat.sIdentity(), box_shape);
-		enclosing_shape.addShape(new Vec3(1, 0, 0), Quat.sRotation(Vec3.sAxisY(), 0.5f * Jolt.JPH_PI), box_shape);
-		enclosing_shape.addShape(new Vec3(-1, 0, 0), Quat.sRotation(Vec3.sAxisY(), 0.5f * Jolt.JPH_PI), box_shape);
+		enclosing_shape.addShape(new Vec3(1, 0, 0), Quat.sRotation(Vec3.sAxisY(), 0.5f * JPH_PI), box_shape);
+		enclosing_shape.addShape(new Vec3(-1, 0, 0), Quat.sRotation(Vec3.sAxisY(), 0.5f * JPH_PI), box_shape);
 		enclosing_settings.setShapeSettings(enclosing_shape);
 		enclosing_settings.setMotionType ( EMotionType.Kinematic);
 		enclosing_settings.setObjectLayer ( Layers.MOVING);
@@ -209,7 +210,7 @@ void CreateSimpleScene()
 		// Create long thin shape
 		BoxShapeSettings box_settings=new BoxShapeSettings(new Vec3(0.05f, 0.8f, 0.03f), 0.015f);
 		box_settings.setEmbedded();
-		BodyCreationSettings body_settings=new BodyCreationSettings(box_settings, Op.add(offset , new Vec3(0, 1, 0)), Quat.sRotation(Vec3.sAxisX(), 0.5f * Jolt.JPH_PI), EMotionType.Dynamic, Layers.MOVING);
+		BodyCreationSettings body_settings=new BodyCreationSettings(box_settings, Op.add(offset , new Vec3(0, 1, 0)), Quat.sRotation(Vec3.sAxisX(), 0.5f * JPH_PI), EMotionType.Dynamic, Layers.MOVING);
 		body_settings.setMotionQuality ( EMotionQuality.LinearCast);
 		body_settings.setRestitution ( 0.0f);
 		body_settings.setFriction ( 1.0f);
@@ -225,7 +226,7 @@ void CreateSimpleScene()
 		// Create long thin shape under 45 degrees
 		BoxShapeSettings box_settings=new BoxShapeSettings(new Vec3(0.05f, 0.8f, 0.03f), 0.015f);
 		box_settings.setEmbedded();
-		BodyCreationSettings body_settings=new BodyCreationSettings(box_settings, Op.add(offset , new Vec3(0, 1, 0)), Quat.sRotation(Vec3.sAxisX(), 0.25f * Jolt.JPH_PI), EMotionType.Dynamic, Layers.MOVING);
+		BodyCreationSettings body_settings=new BodyCreationSettings(box_settings, Op.add(offset , new Vec3(0, 1, 0)), Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI), EMotionType.Dynamic, Layers.MOVING);
 		body_settings.setMotionQuality ( EMotionQuality.LinearCast);
 		body_settings.setRestitution ( 0.0f);
 		body_settings.setFriction ( 1.0f);
@@ -241,7 +242,7 @@ void CreateSimpleScene()
 		// Create long thin shape with restitution
 		BoxShapeSettings box_settings=new BoxShapeSettings(new Vec3(0.05f, 0.8f, 0.03f), 0.015f);
 		box_settings.setEmbedded();
-		BodyCreationSettings body_settings=new BodyCreationSettings(box_settings, Op.add(offset , new Vec3(0, 1, 0)), Quat.sRotation(Vec3.sAxisX(), 0.5f * Jolt.JPH_PI), EMotionType.Dynamic, Layers.MOVING);
+		BodyCreationSettings body_settings=new BodyCreationSettings(box_settings, Op.add(offset , new Vec3(0, 1, 0)), Quat.sRotation(Vec3.sAxisX(), 0.5f * JPH_PI), EMotionType.Dynamic, Layers.MOVING);
 		body_settings.setMotionQuality ( EMotionQuality.LinearCast);
 		body_settings.setRestitution ( 1.0f);
 		body_settings.setFriction ( 1.0f);
@@ -257,7 +258,7 @@ void CreateSimpleScene()
 		// Create long thin shape under 45 degrees with restitution
 		BoxShapeSettings box_settings=new BoxShapeSettings(new Vec3(0.05f, 0.8f, 0.03f), 0.015f);
 		box_settings.setEmbedded();
-		BodyCreationSettings body_settings=new BodyCreationSettings(box_settings, Op.add(offset , new Vec3(0, 1, 0)), Quat.sRotation(Vec3.sAxisX(), 0.25f * Jolt.JPH_PI), EMotionType.Dynamic, Layers.MOVING);
+		BodyCreationSettings body_settings=new BodyCreationSettings(box_settings, Op.add(offset , new Vec3(0, 1, 0)), Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI), EMotionType.Dynamic, Layers.MOVING);
 		body_settings.setMotionQuality ( EMotionQuality.LinearCast);
 		body_settings.setRestitution ( 1.0f);
 		body_settings.setFriction ( 1.0f);
@@ -337,7 +338,7 @@ void CreateConvexOnLargeTriangles()
 
 void CreateConvexOnTerrain1()
 {
-if (Jolt.supportsObjectStream()) {
+if (supportsObjectStream()) {
 	// Load scene
 	PhysicsSceneRef scene=new PhysicsSceneRef();
 	if (!ObjectStreamIn.sReadObject("Assets/terrain1.bof", scene))

@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.readonly.*;
 import java.io.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 
 abstract class VehicleTest extends Test{
 
@@ -64,25 +65,25 @@ public void Initialize()
 	{
 		final float cSlopeStartDistance = 100.0f;
 		final float cSlopeLength = 100.0f;
-		final float cSlopeAngle = Jolt.degreesToRadians(30.0f);
+		final float cSlopeAngle = degreesToRadians(30.0f);
 
 		// Flat test floor
 		Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1000.0f, 1.0f, 1000.0f), 0.0f), new RVec3(0.0f, -1.0f, 0.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
 		floor.setFriction(1.0f);
 		mBodyInterface.addBody(floor.getId(), EActivation.DontActivate);
 
-		Body slope_up = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(25.0f, 1.0f, cSlopeLength), 0.0f), new RVec3(0.0f, cSlopeLength * (float)Math.sin(cSlopeAngle) - 1.0f, cSlopeStartDistance + cSlopeLength * (float)Math.cos(cSlopeAngle)), Quat.sRotation(Vec3.sAxisX(), -cSlopeAngle), EMotionType.Static, Layers.NON_MOVING));
+		Body slope_up = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(25.0f, 1.0f, cSlopeLength), 0.0f), new RVec3(0.0f, cSlopeLength * sin(cSlopeAngle) - 1.0f, cSlopeStartDistance + cSlopeLength * cos(cSlopeAngle)), Quat.sRotation(Vec3.sAxisX(), -cSlopeAngle), EMotionType.Static, Layers.NON_MOVING));
 		slope_up.setFriction(1.0f);
 		mBodyInterface.addBody(slope_up.getId(), EActivation.DontActivate);
 
-		Body slope_down = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(25.0f, 1.0f, cSlopeLength), 0.0f), new RVec3(0.0f, cSlopeLength * (float)Math.sin(cSlopeAngle) - 1.0f, cSlopeStartDistance + 3.0f * cSlopeLength * (float)Math.cos(cSlopeAngle)), Quat.sRotation(Vec3.sAxisX(), cSlopeAngle), EMotionType.Static, Layers.NON_MOVING));
+		Body slope_down = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(25.0f, 1.0f, cSlopeLength), 0.0f), new RVec3(0.0f, cSlopeLength * sin(cSlopeAngle) - 1.0f, cSlopeStartDistance + 3.0f * cSlopeLength * cos(cSlopeAngle)), Quat.sRotation(Vec3.sAxisX(), cSlopeAngle), EMotionType.Static, Layers.NON_MOVING));
 		slope_down.setFriction(1.0f);
 		mBodyInterface.addBody(slope_down.getId(), EActivation.DontActivate);
 	}
 	else if (sSceneName.equals( "Steep Slope") )
 	{
 		// Steep slope test floor (20 degrees = 36% grade)
-		Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1000.0f, 1.0f, 1000.0f), 0.0f), new RVec3(0.0f, -1.0f, 0.0f), Quat.sRotation(Vec3.sAxisX(), Jolt.degreesToRadians(-20.0f)), EMotionType.Static, Layers.NON_MOVING));
+		Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1000.0f, 1.0f, 1000.0f), 0.0f), new RVec3(0.0f, -1.0f, 0.0f), Quat.sRotation(Vec3.sAxisX(), degreesToRadians(-20.0f)), EMotionType.Static, Layers.NON_MOVING));
 		floor.setFriction(1.0f);
 		mBodyInterface.addBody(floor.getId(), EActivation.DontActivate);
 	}
@@ -95,7 +96,7 @@ public void Initialize()
 
 		// A 5cm step rotated under an angle
 		final float cStepHeight = 0.05f;
-		Body step = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(5.0f, 0.5f * cStepHeight, 5.0f), 0.0f), new RVec3(-2.0f, 0.5f * cStepHeight, 60.0f), Quat.sRotation(Vec3.sAxisY(), -0.3f * Jolt.JPH_PI), EMotionType.Static, Layers.NON_MOVING));
+		Body step = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(5.0f, 0.5f * cStepHeight, 5.0f), 0.0f), new RVec3(-2.0f, 0.5f * cStepHeight, 60.0f), Quat.sRotation(Vec3.sAxisY(), -0.3f * JPH_PI), EMotionType.Static, Layers.NON_MOVING));
 		step.setFriction(1.0f);
 		mBodyInterface.addBody(step.getId(), EActivation.DontActivate);
 	}
@@ -137,8 +138,8 @@ public void Initialize()
 		Vec3 prev_center_bottom = Vec3.sZero();
 		for (int i = 0; i < cNumSegments; ++i)
 		{
-			float angle = i * 2.0f * Jolt.JPH_PI / (cNumSegments - 1);
-			Vec3 radial=new Vec3(0, -(float)Math.cos(angle), (float)Math.sin(angle));
+			float angle = i * 2.0f * JPH_PI / (cNumSegments - 1);
+			Vec3 radial=new Vec3(0, -cos(angle), sin(angle));
 			Vec3 center = Op.add(new Vec3(-i * cLoopWidth / (cNumSegments - 1), cLoopRadius, cLoopRadius) , Op.multiply(cLoopRadius , radial));
 			Vec3 half_width=new Vec3(0.5f * cLoopWidth, 0, 0);
 			Vec3 center_bottom = Op.add(center , Op.multiply(cLoopThickness , radial));
@@ -168,7 +169,7 @@ public void Initialize()
 		loop.setFriction(1.0f);
 		mBodyInterface.addBody(loop.getId(), EActivation.Activate);
 	}
-        else if (Jolt.supportsObjectStream())
+        else if (supportsObjectStream())
 	{
 		// Load scene
 		PhysicsSceneRef scene=new PhysicsSceneRef();
@@ -196,7 +197,7 @@ void CreateBridge()
 	Vec3 large_part_half_size =new Vec3(2.5f, 0.25f, 22.5f);
 	ShapeRefC large_part_shape = new BoxShape(large_part_half_size).toRefC();
 
-	Quat first_part_rot = Quat.sRotation(Vec3.sAxisX(), Jolt.degreesToRadians(-10.0f));
+	Quat first_part_rot = Quat.sRotation(Vec3.sAxisX(), degreesToRadians(-10.0f));
 
 	RVec3 prev_pos=new RVec3(-25, 7, 0);
 	Body prev_part = null;

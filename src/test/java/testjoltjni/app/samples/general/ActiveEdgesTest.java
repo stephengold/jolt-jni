@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics active-edges test.
  * <p>
@@ -61,7 +62,7 @@ public void Initialize()
 		for (int total_angle = 0, cur_segment = 0; Math.abs(total_angle) <= 90 && cur_segment < 90; total_angle += angle, ++cur_segment)
 		{
 			// Determine positions of end of this segment
-			float total_angle_rad = Jolt.degreesToRadians((float)(total_angle));
+			float total_angle_rad = degreesToRadians((float)(total_angle));
 			Quat rotation = Quat.sRotation(Vec3.sAxisX(), total_angle_rad);
 			Vec3 delta = Op.multiply(cLength , rotation.rotateAxisZ());
 			Vec3 v3 = Op.add(v1 , delta);
@@ -106,7 +107,7 @@ public void Initialize()
 	// Mesh shape
 	MeshShapeSettings mesh_shape=new MeshShapeSettings(triangles);
 	mesh_shape.setEmbedded();
-	mesh_shape.setActiveEdgeCosThresholdAngle ( (float)Math.cos(Jolt.degreesToRadians(50.0f)));
+	mesh_shape.setActiveEdgeCosThresholdAngle ( cos(degreesToRadians(50.0f)));
 
 	// Mesh
 	BodyCreationSettings mesh_settings=new BodyCreationSettings(mesh_shape, RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);

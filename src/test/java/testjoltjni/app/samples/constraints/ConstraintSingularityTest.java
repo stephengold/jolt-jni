@@ -24,7 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
-
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics constraint-singularity test.
  * <p>
@@ -93,23 +93,23 @@ public void Initialize()
 			{
 			case 0:
 				position = Op.add(test_position ,new Vec3(0, 0, box_size));
-				orientation = Quat.sRotation(Vec3.sAxisY(), Jolt.degreesToRadians(180.0f));
+				orientation = Quat.sRotation(Vec3.sAxisY(), degreesToRadians(180.0f));
 				break;
 
 			case 1:
 				position = Op.add(test_position ,new Vec3(0, 0, box_size));
-				orientation = Op.multiply(Quat.sRotation(Vec3.sAxisY(), Jolt.degreesToRadians(-90.0f)) , Quat.sRotation(Vec3.sAxisX(), Jolt.degreesToRadians(180.0f)));
+				orientation = Op.multiply(Quat.sRotation(Vec3.sAxisY(), degreesToRadians(-90.0f)) , Quat.sRotation(Vec3.sAxisX(), degreesToRadians(180.0f)));
 				break;
 
 			case 2:
 				position = Op.add(test_position ,new Vec3(box_size, 0, 0));
-				orientation = Op.multiply(Quat.sRotation(Vec3.sAxisY(), Jolt.degreesToRadians(90.0f)) , Quat.sRotation(Vec3.sAxisZ(), Jolt.degreesToRadians(90.0f)));
+				orientation = Op.multiply(Quat.sRotation(Vec3.sAxisY(), degreesToRadians(90.0f)) , Quat.sRotation(Vec3.sAxisZ(), degreesToRadians(90.0f)));
 				break;
 
 			default:
 				assert(configuration == 3);
 				position = Op.add(test_position ,new Vec3(-box_size, 0, 0));
-				orientation = Op.multiply(Quat.sRotation(Vec3.sAxisY(), Jolt.degreesToRadians(90.0f)) , Quat.sRotation(Vec3.sAxisZ(), Jolt.degreesToRadians(90.0f)));
+				orientation = Op.multiply(Quat.sRotation(Vec3.sAxisY(), degreesToRadians(90.0f)) , Quat.sRotation(Vec3.sAxisZ(), degreesToRadians(90.0f)));
 				break;
 			}
 

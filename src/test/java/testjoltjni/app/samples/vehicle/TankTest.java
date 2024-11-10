@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.*;
-
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics tank test.
  * <p>
@@ -102,7 +102,7 @@ public void Initialize()
 	// Create vehicle constraint
 	VehicleConstraintSettings vehicle=new VehicleConstraintSettings();
 	vehicle.setDrawConstraintSize ( 0.1f);
-	vehicle.setMaxPitchRollAngle ( Jolt.degreesToRadians(60.0f));
+	vehicle.setMaxPitchRollAngle ( degreesToRadians(60.0f));
 
 	TrackedVehicleControllerSettings controller = new TrackedVehicleControllerSettings();
 	vehicle.setController ( controller);
@@ -133,7 +133,7 @@ public void Initialize()
 
 	mVehicleConstraint = new VehicleConstraint(mTankBody, vehicle);
 	mVehicleConstraint.setVehicleCollisionTester(new VehicleCollisionTesterRay(Layers.MOVING));
-if (Jolt.implementsDebugRendering()){
+if (implementsDebugRendering()){
 	((TrackedVehicleController )(mVehicleConstraint.getController())).setRpmMeter(new Vec3(0, 2, 0), 0.5f);
 } // JPH_DEBUG_RENDERER
 	mPhysicsSystem.addConstraint(mVehicleConstraint);
@@ -162,7 +162,7 @@ if (Jolt.implementsDebugRendering()){
 
 	// Create barrel
 	RVec3 barrel_position = Op.add(turret_position , new Vec3(0, 0, half_turret_length + half_barrel_length - barrel_rotation_offset));
-	BodyCreationSettings barrel_body_setings=new BodyCreationSettings(new CylinderShape(half_barrel_length, barrel_radius), barrel_position, Quat.sRotation(Vec3.sAxisX(), 0.5f * Jolt.JPH_PI), EMotionType.Dynamic, Layers.MOVING);
+	BodyCreationSettings barrel_body_setings=new BodyCreationSettings(new CylinderShape(half_barrel_length, barrel_radius), barrel_position, Quat.sRotation(Vec3.sAxisX(), 0.5f * JPH_PI), EMotionType.Dynamic, Layers.MOVING);
 	barrel_body_setings.getCollisionGroup().setGroupFilter(filter);
 	barrel_body_setings.getCollisionGroup().setGroupId(0);
 	barrel_body_setings.getCollisionGroup().setSubGroupId(0);
@@ -176,8 +176,8 @@ if (Jolt.implementsDebugRendering()){
 	barrel_hinge.setPoint1 ( barrel_hinge.setPoint2 ( Op.subtract(barrel_position , new Vec3(0, 0, half_barrel_length))));
 	barrel_hinge.setHingeAxis1 ( barrel_hinge.setHingeAxis2 ( Op.negate(Vec3.sAxisX())));
 	barrel_hinge.setNormalAxis1 ( barrel_hinge.setNormalAxis2 ( Vec3.sAxisZ()));
-	barrel_hinge.setLimitsMin ( Jolt.degreesToRadians(-10.0f));
-	barrel_hinge.setLimitsMax ( Jolt.degreesToRadians(40.0f));
+	barrel_hinge.setLimitsMin ( degreesToRadians(-10.0f));
+	barrel_hinge.setLimitsMax ( degreesToRadians(40.0f));
 	barrel_hinge.setMotorSettings (new MotorSettings(10.0f, 1.0f));
 	mBarrelHinge = (HingeConstraint )(barrel_hinge.create(mTurretBody, mBarrelBody));
 	mBarrelHinge.setMotorState(EMotorState.Position);
@@ -372,7 +372,7 @@ public void GetInitialCamera(CameraState ioState)
 public RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of tank + a distance away from the tank based on the heading and pitch of the camera
-	Vec3 fwd =new Vec3(Math.cos(inCameraPitch) * Math.cos(inCameraHeading), Math.sin(inCameraPitch), Math.cos(inCameraPitch) * Math.sin(inCameraHeading));
+	Vec3 fwd =new Vec3(cos(inCameraPitch) * cos(inCameraHeading), sin(inCameraPitch), cos(inCameraPitch) * sin(inCameraHeading));
 	return RMat44.sTranslation(Op.subtract(mCameraPivot , Op.multiply(10.0f , fwd)));
 }
 }

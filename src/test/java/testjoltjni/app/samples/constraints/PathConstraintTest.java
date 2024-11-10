@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics path-constraint test.
  * <p>
@@ -50,8 +51,8 @@ public void Initialize()
 		PathConstraintPathHermite path = new PathConstraintPathHermite();
 		Vec3 normal=new Vec3(0, 1, 0);
 		List<Vec3> positions=new ArrayList<>();
-		for (float a = -0.1f * Jolt.JPH_PI; a < 4.0f * Jolt.JPH_PI; a += 0.1f * Jolt.JPH_PI)
-			positions.add(new Vec3(5.0f * Math.cos(a), -a, 5.0f * Math.sin(a)));
+		for (float a = -0.1f * JPH_PI; a < 4.0f * JPH_PI; a += 0.1f * JPH_PI)
+			positions.add(new Vec3(5.0f * cos(a), -a, 5.0f * sin(a)));
 		for (int i = 1; i < (int)(positions.size() - 1); ++i)
 		{
 			Vec3 tangent = Op.multiply(0.5f , Op.subtract(positions.get(i + 1) , positions.get(i - 1)));
@@ -85,8 +86,8 @@ public void Initialize()
 		List<Vec3> positions=new ArrayList<>(12);
 		for (int i = -1; i < 11; ++i)
 		{
-			float a = 2.0f * Jolt.JPH_PI * i / 10.0f;
-			positions.add(new Vec3(5.0f * Math.cos(a), 0.0f, 5.0f * Math.sin(a)));
+			float a = 2.0f * JPH_PI * i / 10.0f;
+			positions.add(new Vec3(5.0f * cos(a), 0.0f, 5.0f * sin(a)));
 		}
 		for (int i = 1; i < (int)(positions.size() - 1); ++i)
 		{
@@ -108,7 +109,7 @@ public void Initialize()
 		PathConstraintSettings settings=new PathConstraintSettings();
 		settings.setPath ( path);
 		settings.setPathPosition (new Vec3(0, 5, 0));
-		settings.setPathRotation ( Quat.sRotation(Vec3.sAxisX(), -0.1f * Jolt.JPH_PI));
+		settings.setPathRotation ( Quat.sRotation(Vec3.sAxisX(), -0.1f * JPH_PI));
 		settings.setRotationConstraintType ( sOrientationType);
 		mConstraints[1] =  (settings.create(body1, body2)).toRef();
 		mPhysicsSystem.addConstraint(mConstraints[1]);

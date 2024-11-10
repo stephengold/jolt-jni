@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
-
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics virtual-character test.
  * <p>
@@ -37,7 +37,7 @@ static boolean sEnableCharacterInertia = true;
 static EBackFaceMode sBackFaceMode = EBackFaceMode.CollideWithBackFaces;
 static float sUpRotationX = 0;
 static float sUpRotationZ = 0;
-static float sMaxSlopeAngle = Jolt.degreesToRadians(45.0f);
+static float sMaxSlopeAngle = degreesToRadians(45.0f);
 static float sMaxStrength = 100.0f;
 static float sCharacterPadding = 0.02f;
 static float sPenetrationRecoverySpeed = 1.0f;
@@ -92,7 +92,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	// Draw character pre update (the sim is also drawn pre update)
 	RMat44 com = mCharacter.getCenterOfMassTransform();
 	RMat44 world_transform = mCharacter.getWorldTransform();
-if(Jolt.implementsDebugRendering()){
+if(implementsDebugRendering()){
 	mCharacter.getShape().draw(mDebugRenderer, com, Vec3.sReplicate(1.0f), Color.sGreen, false, true);
 } // JPH_DEBUG_RENDERER
 

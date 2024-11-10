@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics hinge-constraint test.
  * <p>
@@ -41,8 +42,8 @@ public void Initialize()
 	ShapeRefC box = new BoxShape(Vec3.sReplicate(0.5f * box_size)).toRefC();
 
 	final int cChainLength = 15;
-	final float cMinAngle = Jolt.degreesToRadians(-10.0f);
-	final float cMaxAngle = Jolt.degreesToRadians(20.0f);
+	final float cMinAngle = degreesToRadians(-10.0f);
+	final float cMaxAngle = degreesToRadians(20.0f);
 
 	// Build a collision group filter that disables collision between adjacent bodies
 	GroupFilterTableRef group_filter = new GroupFilterTable(cChainLength).toRef();
@@ -115,8 +116,8 @@ public void Initialize()
 		hinge.setPoint1 ( hinge.setPoint2 (new RVec3(5, 4, 0)));
 		hinge.setHingeAxis1 ( hinge.setHingeAxis2 ( Vec3.sAxisZ()));
 		hinge.setNormalAxis1 ( hinge.setNormalAxis2 ( Vec3.sAxisY()));
-		hinge.setLimitsMin ( Jolt.degreesToRadians(-10.0f));
-		hinge.setLimitsMax ( Jolt.degreesToRadians(110.0f));
+		hinge.setLimitsMin ( degreesToRadians(-10.0f));
+		hinge.setLimitsMax ( degreesToRadians(110.0f));
 		mPhysicsSystem.addConstraint(hinge.create(body1, body2));
 	}
 
@@ -133,8 +134,8 @@ public void Initialize()
 		hinge.setPoint1 ( hinge.setPoint2 (new RVec3(11, 4, 0)));
 		hinge.setHingeAxis1 ( hinge.setHingeAxis2 ( Vec3.sAxisZ()));
 		hinge.setNormalAxis1 ( hinge.setNormalAxis2 ( Vec3.sAxisY()));
-		hinge.setLimitsMin ( Jolt.degreesToRadians(-10.0f));
-		hinge.setLimitsMax ( Jolt.degreesToRadians(110.0f));
+		hinge.setLimitsMin ( degreesToRadians(-10.0f));
+		hinge.setLimitsMax ( degreesToRadians(110.0f));
 		hinge.getLimitsSpringSettings().setFrequency ( 1.0f);
 		hinge.getLimitsSpringSettings().setDamping ( 0.5f);
 		mPhysicsSystem.addConstraint(hinge.create(body1, body2));

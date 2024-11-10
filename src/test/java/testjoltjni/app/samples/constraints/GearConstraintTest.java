@@ -24,7 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
-
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics gear-constraint test.
  * <p>
@@ -74,12 +74,12 @@ public void Initialize()
 	gear1_settings.addShape(Vec3.sZero(), Quat.sIdentity(), gear1_cylinder);
 	for (int i = 0; i < cGear1NumTeeth; ++i)
 	{
-		Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f * Jolt.JPH_PI * i / cGear1NumTeeth);
+		Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f * JPH_PI * i / cGear1NumTeeth);
 		gear1_settings.addShape(Op.rotate(rotation ,new Vec3(cGear1Radius, 0, 0)), rotation, tooth_settings);
 	}
 
 	RVec3 gear1_initial_p=new RVec3(0, 3.0f, 0);
-	Quat gear1_initial_r = Quat.sRotation(Vec3.sAxisX(), 0.5f * Jolt.JPH_PI);
+	Quat gear1_initial_r = Quat.sRotation(Vec3.sAxisX(), 0.5f * JPH_PI);
 	Body gear1 = mBodyInterface.createBody(new BodyCreationSettings(gear1_settings, gear1_initial_p, gear1_initial_r, EMotionType.Dynamic, Layers.MOVING));
 	mBodyInterface.addBody(gear1.getId(), EActivation.Activate);
 
@@ -93,7 +93,7 @@ public void Initialize()
 	gear2_settings.addShape(Vec3.sZero(), Quat.sIdentity(), gear2_cylinder);
 	for (int i = 0; i < cGear2NumTeeth; ++i)
 	{
-		Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f * Jolt.JPH_PI * (i + 0.5f) / cGear2NumTeeth);
+		Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f * JPH_PI * (i + 0.5f) / cGear2NumTeeth);
 		gear2_settings.addShape(Op.rotate(rotation ,new Vec3(cGear2Radius, 0, 0)), rotation, tooth_settings);
 	}
 

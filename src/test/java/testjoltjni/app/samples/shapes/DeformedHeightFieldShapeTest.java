@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import java.nio.FloatBuffer;
 import java.util.function.BiFunction;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics deformed heightfield-shape test.
  * <p>
@@ -50,7 +51,7 @@ public void Initialize()
 	mHeightSamples=new float[cSampleCount * cSampleCount];
 	for (int y = 0; y < cSampleCount; ++y)
 		for (int x = 0; x < cSampleCount; ++x)
-			mHeightSamples[y * cSampleCount + x] = cMaxHeight * Jolt.perlinNoise3((float)(x) * 8.0f / cSampleCount, 0, (float)(y) * 8.0f / cSampleCount, 256, 256, 256);
+			mHeightSamples[y * cSampleCount + x] = cMaxHeight * perlinNoise3((float)(x) * 8.0f / cSampleCount, 0, (float)(y) * 8.0f / cSampleCount, 256, 256, 256);
 
 	// Determine scale and offset of the terrain
 	Vec3 offset=new Vec3(-0.5f * cCellSize * cSampleCount, 0, -0.5f * cCellSize * cSampleCount);
@@ -95,7 +96,7 @@ Vec3 GetPathCenter(float inTime)
 
 	float fall_off = (float)Math.exp(-cFallOff * inTime);
 	float angle = cAngularSpeed * inTime;
-	return new Vec3(cRadiusX * Math.cos(angle) * fall_off + 64.0f, 0, cOffset + cDisplacementSpeed * inTime + cRadiusY * Math.sin(angle) * fall_off);
+	return new Vec3(cRadiusX * cos(angle) * fall_off + 64.0f, 0, cOffset + cDisplacementSpeed * inTime + cRadiusY * sin(angle) * fall_off);
 }
 
 public void PrePhysicsUpdate(PreUpdateParams inParams)
@@ -120,10 +121,10 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 		Vec3 old_com = mHeightField.getCenterOfMass();
 
 		// A function to calculate the delta height at a certain distance from the center of the pit
-		final float cHalfPi = 0.5f * Jolt.JPH_PI;
-		BiFunction<Float,Float,Float> pit_shape = (Float inDistanceX, Float inDistanceY)-> { return (Float)(float)Math.cos(Math.min(Math.sqrt(Jolt.square(inDistanceX) + Jolt.square(inDistanceY)) * cHalfPi / cPitRadius, cHalfPi)); };
+		final float cHalfPi = 0.5f * JPH_PI;
+		BiFunction<Float,Float,Float> pit_shape = (Float inDistanceX, Float inDistanceY)-> { return (Float)cos(Math.min(sqrt(square(inDistanceX) + square(inDistanceY)) * cHalfPi / cPitRadius, cHalfPi)); };
 
-		AaBox affected_area=new AaBox();FloatBuffer b=Jolt.newDirectFloatBuffer(count_x*count_y);
+		AaBox affected_area=new AaBox();FloatBuffer b=newDirectFloatBuffer(count_x*count_y);
 		for (int y = 0; y < count_y; ++y)
 			for (int x = 0; x < count_x; ++x)
 			{

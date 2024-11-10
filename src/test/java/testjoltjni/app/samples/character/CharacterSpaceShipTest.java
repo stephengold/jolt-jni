@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.CameraState;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics character-spaceship test.
  * <p>
@@ -69,7 +70,7 @@ public void Initialize()
 	StaticCompoundShapeSettings compound=new StaticCompoundShapeSettings();
 	compound.setEmbedded();
 	for (float h = cSpaceShipRingHeight; h < cSpaceShipHeight; h += cSpaceShipRingHeight)
-		compound.addShape(Vec3.sZero(), Quat.sIdentity(), new CylinderShape(h, (float)Math.sqrt(Jolt.square(cSpaceShipRadius) - Jolt.square(cSpaceShipRadius - cSpaceShipHeight - cSpaceShipRingHeight + h))));
+		compound.addShape(Vec3.sZero(), Quat.sIdentity(), new CylinderShape(h, sqrt(square(cSpaceShipRadius) - square(cSpaceShipRadius - cSpaceShipHeight - cSpaceShipRingHeight + h))));
 	mSpaceShip = mBodyInterface.createAndAddBody(new BodyCreationSettings(compound, cShipInitialPosition, Quat.sIdentity(), EMotionType.Kinematic, Layers.MOVING), EActivation.Activate);
 	mSpaceShipPrevTransform = mBodyInterface.getCenterOfMassTransform(mSpaceShip);
 }
@@ -117,7 +118,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 
 	// Draw character pre update (the sim is also drawn pre update)
 	// Note that we have first updated the position so that it matches the new position of the ship
-if(Jolt.implementsDebugRendering()){
+if(implementsDebugRendering()){
 	mCharacter.getShape().draw(mDebugRenderer, mCharacter.getCenterOfMassTransform(), Vec3.sReplicate(1.0f), Color.sGreen, false, true);
 } // JPH_DEBUG_RENDERER
 
@@ -169,8 +170,8 @@ if(Jolt.implementsDebugRendering()){
 void UpdateShipVelocity()
 {
 	// Make it a rocky ride...
-	mSpaceShipLinearVelocity =Op.multiply(new Vec3(Math.sin(mTime), 0, Math.cos(mTime)) , 50.0f);
-	mSpaceShipAngularVelocity =Op.multiply(new Vec3(Math.sin(2.0f * mTime), 1, Math.cos(2.0f * mTime)) , 0.5f);
+	mSpaceShipLinearVelocity =Op.multiply(new Vec3(sin(mTime), 0, cos(mTime)) , 50.0f);
+	mSpaceShipAngularVelocity =Op.multiply(new Vec3(sin(2.0f * mTime), 1, cos(2.0f * mTime)) , 0.5f);
 
 	mBodyInterface.setLinearAndAngularVelocity(mSpaceShip, mSpaceShipLinearVelocity, mSpaceShipAngularVelocity);
 }
@@ -185,7 +186,7 @@ public void GetInitialCamera(CameraState ioState)
 RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of character + distance behind based on the heading and pitch of the camera
-	Vec3 fwd =new Vec3(Math.cos(inCameraPitch) * Math.cos(inCameraHeading), Math.sin(inCameraPitch), Math.cos(inCameraPitch) * Math.sin(inCameraHeading));
+	Vec3 fwd =new Vec3(cos(inCameraPitch) * cos(inCameraHeading), sin(inCameraPitch), cos(inCameraPitch) * sin(inCameraHeading));
 	return RMat44.sTranslation(Op.subtract(Op.add(mCharacter.getPosition() ,new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , Op.multiply(5.0f , fwd)));
 }
 

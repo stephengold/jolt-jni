@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics constraint-singularity test.
  * <p>
@@ -42,8 +43,8 @@ int mNumShapes = -1;
 public void Initialize()
 {
 	final int cChainLength = 15;
-	final float cMinAngle = Jolt.degreesToRadians(-10.0f);
-	final float cMaxAngle = Jolt.degreesToRadians(20.0f);
+	final float cMinAngle = degreesToRadians(-10.0f);
+	final float cMaxAngle = degreesToRadians(20.0f);
 
 	// Floor
 	CreateFloor();
