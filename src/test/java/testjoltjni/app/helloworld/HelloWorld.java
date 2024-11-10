@@ -36,7 +36,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
 public class HelloWorld {
 
     static PrintStream cout=System.out;
-
+static String endl=System.lineSeparator();
 
 
 
@@ -106,7 +106,7 @@ public
 	// See: ContactListener
 	int onContactValidate(long body1Va, long body2Va, double offsetX, double offsetY, double offsetZ, long inCollisionResult)
 	{
-		cout .println( "Contact validate callback" ) ;
+		cout .print( "Contact validate callback" + endl);
 
 		// Allows you to ignore a contact before it is created (using layers to not make objects collide is cheaper!)
 		return ValidateResult.AcceptAllContactsForThisBodyPair.ordinal();
@@ -114,17 +114,17 @@ public
 
 	public void			onContactAdded(long body1Va, long body2Va, long manifoldVa, long settingsVa)
 	{
-		cout .println( "A contact was added" ) ;
+		cout .print( "A contact was added" + endl);
 	}
 
 	public void			onContactPersisted(long body1Va, long body2Va, long manifoldVa, long settingsVa)
 	{
-		cout .println( "A contact was persisted" ) ;
+		cout .print( "A contact was persisted" + endl);
 	}
 
 	public void			onContactRemoved(long pairVa)
 	{
-		cout .println( "A contact was removed" ) ;
+		cout .print( "A contact was removed" + endl);
 	}
 };
 
@@ -134,12 +134,12 @@ static class MyBodyActivationListener extends CustomBodyActivationListener
 public
 	 void		onBodyActivated(long idVa, long inBodyUserData)
 	{
-		cout .println( "A body got activated" ) ;
+		cout .print( "A body got activated" + endl);
 	}
 
 	public void		onBodyDeactivated(long idVa, long inBodyUserData)
 	{
-		cout .println( "A body went to sleep" ) ;
+		cout .print( "A body went to sleep" + endl);
 	}
 };
 
@@ -275,7 +275,7 @@ public static void main(String[] argv)
 		// Output current position and velocity of the sphere
 		RVec3 position = body_interface.getCenterOfMassPosition(sphere_id);
 		Vec3 velocity = body_interface.getLinearVelocity(sphere_id);
-		cout .println( "Step " + step + ": Position = " + position + ", Velocity = " + velocity ) ;
+		cout .print( "Step " + step + ": Position = " + position + ", Velocity = " + velocity + endl) ;
 
 		// If you take larger steps than 1 / 60th of a second you need to do multiple collision steps in order to keep the simulation stable. Do 1 collision step per 1 / 60th of a second (round up).
 		final int cCollisionSteps = 1;
