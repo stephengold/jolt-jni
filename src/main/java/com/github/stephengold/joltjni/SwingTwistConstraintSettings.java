@@ -202,11 +202,14 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * mSwingMotorSettings)
      *
      * @param motorSettings the desired settings (not null, unaffected)
+     * @return the argument, for chaining
      */
-    public void setSwingMotorSettings(MotorSettings motorSettings) {
+    public MotorSettings setSwingMotorSettings(MotorSettings motorSettings) {
         long constraintSettingsVa = va();
         long motorSettingsVa = motorSettings.va();
         setSwingMotorSettings(constraintSettingsVa, motorSettingsVa);
+
+        return motorSettings;
     }
 
     /**
@@ -279,11 +282,14 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * mTwistMotorSetting)
      *
      * @param motorSettings the desired settings (not null, unaffected)
+     * @return the argument, for chaining
      */
-    public void setTwistMotorSettings(MotorSettings motorSettings) {
+    public MotorSettings setTwistMotorSettings(MotorSettings motorSettings) {
         long constraintSettingsVa = va();
         long motorSettingsVa = motorSettings.va();
         setTwistMotorSettings(constraintSettingsVa, motorSettingsVa);
+
+        return motorSettings;
     }
     // *************************************************************************
     // native private methods
