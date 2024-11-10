@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import java.io.PrintStream;
 import testjoltjni.TestUtils;
+import static com.github.stephengold.joltjni.Jolt.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics "hello world" sample
@@ -148,20 +149,20 @@ public static void main(String[] argv)
 	TestUtils.loadNativeLibrary();
 	// Register allocation hook. In this example we'll just let Jolt use malloc / free but you can override these if you want (see Memory.h).
 	// This needs to be done before any other Jolt function is called.
-	Jolt.registerDefaultAllocator();
+	registerDefaultAllocator();
 
 	// Install trace and assert callbacks
-	Jolt.installDefaultTraceCallback();
-	Jolt.installDefaultAssertCallback(  );
+	installDefaultTraceCallback(  );
+	installDefaultAssertCallback(  );
 
 	// Create a factory, this class is responsible for creating instances of classes based on their name or hash and is mainly used for deserialization of saved data.
 	// It is not directly used in this example but still required.
-	Jolt.newFactory();
+	newFactory();
 
 	// Register all physics types with the factory and install their collision handlers with the CollisionDispatch class.
 	// If you have your own custom shape types you probably need to register their handlers with the CollisionDispatch before calling this function.
 	// If you implement your own default material (PhysicsMaterial::sDefault) make sure to initialize it before this function or else this function will create one for you.
-	Jolt.registerTypes();
+	registerTypes();
 
 	// We need a temp allocator for temporary allocations during the physics update. We're
 	// pre-allocating 10 MB to avoid having to do allocations during the physics update.
@@ -173,7 +174,7 @@ public static void main(String[] argv)
 	// We need a job system that will execute physics jobs on multiple threads. Typically
 	// you would implement the JobSystem interface yourself and let Jolt Physics run on top
 	// of your own job scheduler. JobSystemThreadPool is an example implementation.
-	JobSystemThreadPool job_system=new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, TestUtils.numThreads());
+	JobSystemThreadPool job_system=new JobSystemThreadPool(cMaxPhysicsJobs, cMaxPhysicsBarriers, TestUtils.numThreads());
 
 	// This is the max amount of rigid bodies that you can add to the physics system. If you try to add more you'll get an error.
 	// Note: This value is low because this is a simple test. For a real project use something in the order of 65536.
@@ -294,10 +295,10 @@ public static void main(String[] argv)
 	body_interface.destroyBody(floor.getId());
 
 	// Unregisters all types with the factory and cleans up the default material
-	Jolt.unregisterTypes();
+	unregisterTypes();
 
 	// Destroy the factory
-	Jolt.destroyFactory();
+	destroyFactory();
 
 }
 }
