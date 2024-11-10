@@ -39,7 +39,12 @@ protected TempAllocator mTempAllocator = null;
 protected JobSystem mJobSystem;
 
 float GetWorldScale() { return 1.0f; }
+public void Initialize(){}
+public void PrePhysicsUpdate(PreUpdateParams params){}
+void SetDebugRenderer(DebugRenderer renderer){mDebugRenderer = renderer;}
 void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
+void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSystem;mBodyInterface=inPhysicsSystem.getBodyInterface();}
+void SetTempAllocator(TempAllocator inTempAllocator){mTempAllocator=inTempAllocator;}
 
 public Body CreateFloor() {return CreateFloor(200.0f);}
 public Body CreateFloor(float inSize)
