@@ -24,7 +24,6 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
-import testjoltjni.app.testframework.CameraState;
 /**
  * A line-for-line Java translation of the Jolt Physics rack-and-pinion constraint test.
  * <p>
