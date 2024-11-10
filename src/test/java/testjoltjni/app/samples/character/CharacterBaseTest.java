@@ -643,7 +643,7 @@ void CharacterBaseTest::ProcessInput(const ProcessInputParams &inParams)
 }
 */
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Update scene time
 	mTime += inParams.mDeltaTime;

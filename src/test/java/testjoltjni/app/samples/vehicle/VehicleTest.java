@@ -333,7 +333,7 @@ void LoadRaceTrack(String inFileName)
 	}
 }
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Render the track
 	for (Line l : mTrackData)

@@ -204,7 +204,7 @@ void MotorcycleTest::ProcessInput(const ProcessInputParams &inParams)
 }
 */
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	super.PrePhysicsUpdate(inParams);
 

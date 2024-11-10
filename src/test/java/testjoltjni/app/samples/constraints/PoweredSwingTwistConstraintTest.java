@@ -95,7 +95,7 @@ public void Initialize()
 	mInertiaBody2AsSeenFromConstraint = Op.multiply(body2_inertia , Vec3.sAxisY()).length();
 }
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Torque = Inertia * Angular Acceleration (alpha)
 	mConstraint.setMaxFrictionTorque(mInertiaBody2AsSeenFromConstraint * sMaxFrictionAngularAcceleration);

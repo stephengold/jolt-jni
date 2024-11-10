@@ -153,7 +153,7 @@ void ProcessInput(const ProcessInputParams &inParams)
 }
 */
 
-void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	for (VehicleConstraintRef cr : mVehicles)
 	{
