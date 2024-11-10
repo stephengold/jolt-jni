@@ -257,10 +257,10 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSet
  * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getMotorSettings
-  (JNIEnv *, jclass, jlong settingsVa, jint dof) {
+  (JNIEnv *, jclass, jlong settingsVa, jint dofIndex) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const MotorSettings * const pResult = &pSettings->mMotorSettings[dof];
+    const MotorSettings * const pResult = &pSettings->mMotorSettings[dofIndex];
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -374,12 +374,12 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSetti
  * Signature: (JI)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_isFixedAxis
-  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+  (JNIEnv *, jclass, jlong settingsVa, jint dofIndex) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const SixDOFConstraintSettings::EAxis axis
-            = (SixDOFConstraintSettings::EAxis) ordinal;
-    const bool result = pSettings->IsFixedAxis(axis);
+    const SixDOFConstraintSettings::EAxis dof
+            = (SixDOFConstraintSettings::EAxis) dofIndex;
+    const bool result = pSettings->IsFixedAxis(dof);
     return result;
 }
 
@@ -389,12 +389,12 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintS
  * Signature: (JI)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_isFreeAxis
-  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+  (JNIEnv *, jclass, jlong settingsVa, jint dofIndex) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const SixDOFConstraintSettings::EAxis axis
-            = (SixDOFConstraintSettings::EAxis) ordinal;
-    const bool result = pSettings->IsFreeAxis(axis);
+    const SixDOFConstraintSettings::EAxis dof
+            = (SixDOFConstraintSettings::EAxis) dofIndex;
+    const bool result = pSettings->IsFreeAxis(dof);
     return result;
 }
 
@@ -404,12 +404,12 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintS
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_makeFixedAxis
-  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+  (JNIEnv *, jclass, jlong settingsVa, jint dofIndex) {
     SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const SixDOFConstraintSettings::EAxis axis
-            = (SixDOFConstraintSettings::EAxis) ordinal;
-    pSettings->MakeFixedAxis(axis);
+    const SixDOFConstraintSettings::EAxis dof
+            = (SixDOFConstraintSettings::EAxis) dofIndex;
+    pSettings->MakeFixedAxis(dof);
 }
 
 /*
@@ -418,12 +418,12 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSetti
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_makeFreeAxis
-  (JNIEnv *, jclass, jlong settingsVa, jint ordinal) {
+  (JNIEnv *, jclass, jlong settingsVa, jint dofIndex) {
     SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const SixDOFConstraintSettings::EAxis axis
-            = (SixDOFConstraintSettings::EAxis) ordinal;
-    pSettings->MakeFreeAxis(axis);
+    const SixDOFConstraintSettings::EAxis dof
+            = (SixDOFConstraintSettings::EAxis) dofIndex;
+    pSettings->MakeFreeAxis(dof);
 }
 
 /*
@@ -484,12 +484,12 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSetti
  * Signature: (JIFF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setLimitedAxis
-  (JNIEnv *, jclass, jlong settingsVa, jint ordinal, jfloat min, jfloat max) {
+  (JNIEnv *, jclass, jlong settingsVa, jint dofIndex, jfloat min, jfloat max) {
     SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const SixDOFConstraintSettings::EAxis axis
-            = (SixDOFConstraintSettings::EAxis) ordinal;
-    pSettings->SetLimitedAxis(axis, min, max);
+    const SixDOFConstraintSettings::EAxis dof
+            = (SixDOFConstraintSettings::EAxis) dofIndex;
+    pSettings->SetLimitedAxis(dof, min, max);
 }
 
 /*
@@ -498,10 +498,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSetti
  * Signature: (JIF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setLimitMax
-  (JNIEnv *, jclass, jlong settingsVa, jint dof, jfloat max) {
+  (JNIEnv *, jclass, jlong settingsVa, jint dofIndex, jfloat max) {
     SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    pSettings->mLimitMax[dof] = max;
+    pSettings->mLimitMax[dofIndex] = max;
 }
 
 /*
@@ -510,10 +510,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSetti
  * Signature: (JIF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setLimitMin
-  (JNIEnv *, jclass, jlong settingsVa, jint dof, jfloat min) {
+  (JNIEnv *, jclass, jlong settingsVa, jint dofIndex, jfloat min) {
     SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    pSettings->mLimitMin[dof] = min;
+    pSettings->mLimitMin[dofIndex] = min;
 }
 
 /*
@@ -522,10 +522,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSetti
  * Signature: (JIF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setMaxFriction
-  (JNIEnv *, jclass, jlong settingsVa, jint dof, jfloat friction) {
+  (JNIEnv *, jclass, jlong settingsVa, jint dofIndex, jfloat friction) {
     SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    pSettings->mMaxFriction[dof] = friction;
+    pSettings->mMaxFriction[dofIndex] = friction;
 }
 
 /*
