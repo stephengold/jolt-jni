@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.lambda.TriFunction;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.function.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the soft-body creator namespace.
  * <p>
@@ -250,12 +251,12 @@ static SoftBodySharedSettingsRef CreateSphere(float inRadius, int inNumTheta, in
 	Vertex v=new Vertex();
 	v.setPosition(Op.multiply(inRadius , Vec3.sUnitSpherical(0, 0)));
 	settings.addVertex(v);
-	v.setPosition(Op.multiply(inRadius , Vec3.sUnitSpherical(Jolt.JPH_PI, 0)));
+	v.setPosition(Op.multiply(inRadius , Vec3.sUnitSpherical(JPH_PI, 0)));
 	settings.addVertex(v);
 	for (int theta = 1; theta < inNumTheta - 1; ++theta)
 		for (int phi = 0; phi < inNumPhi; ++phi)
 		{
-			v.setPosition(Op.multiply(inRadius , Vec3.sUnitSpherical(Jolt.JPH_PI * theta / (inNumTheta - 1), 2.0f * Jolt.JPH_PI * phi / inNumPhi)));
+			v.setPosition(Op.multiply(inRadius , Vec3.sUnitSpherical(JPH_PI * theta / (inNumTheta - 1), 2.0f * JPH_PI * phi / inNumPhi)));
 			settings.addVertex(v);
 		}
 

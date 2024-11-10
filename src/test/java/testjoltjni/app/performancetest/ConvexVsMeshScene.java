@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics "convex vs mesh scene"
@@ -51,7 +52,7 @@ class ConvexVsMeshScene implements PerformanceTestScene {
 		for (int x = 0; x <= n; ++x)
 			for (int z = 0; z <= n; ++z)
 			{
-				float height = (float) (Math.sin((float)(x) * 50.0f / n) * Math.cos((float)(z) * 50.0f / n));
+				float height = sin((float)(x) * 50.0f / n) * cos((float)(z) * 50.0f / n);
 				vertices.set(z * (n + 1) + x, new Float3(cell_size * x, max_height * height, cell_size * z));
 			}
 

@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics abstract test class.
  * <p>
@@ -133,7 +134,7 @@ public Body CreateMeshTerrain()
 
 	int n;
 	float cell_size;
-if (Jolt.buildType().equals("DEBUG")) {
+if (buildType().equals("DEBUG")) {
 	n = 50;
 	cell_size = scale * 2.0f;
 } else {
@@ -146,7 +147,7 @@ if (Jolt.buildType().equals("DEBUG")) {
 	float[][] heights = new float[n + 1][n + 1];
 	for (int x = 0; x <= n; ++x)
 		for (int z = 0; z <= n; ++z)
-			heights[x][z] = max_height * Jolt.perlinNoise3((float)(x) * 8.0f / n, 0, (float)(z) * 8.0f / n, 256, 256, 256);
+			heights[x][z] = max_height * perlinNoise3((float)(x) * 8.0f / n, 0, (float)(z) * 8.0f / n, 256, 256, 256);
 
 	// Create regular grid of triangles
 	List<Triangle> triangles = new ArrayList<>(2 * n * n);
@@ -187,7 +188,7 @@ public Body CreateHeightFieldTerrain()
 	float[] heights = new float[n * n];
 	for (int y = 0; y < n; ++y)
 		for (int x = 0; x < n; ++x)
-			heights[y * n + x] = max_height * Jolt.perlinNoise3((float)(x) * 8.0f / n, 0, (float)(y) * 8.0f / n, 256, 256, 256);
+			heights[y * n + x] = max_height * perlinNoise3((float)(x) * 8.0f / n, 0, (float)(y) * 8.0f / n, 256, 256, 256);
 
 	// Create height field
 	ShapeSettings height_field = new HeightFieldShapeSettings(heights, new Vec3(-0.5f * cell_size * n, 0.0f, -0.5f * cell_size * n), new Vec3(cell_size, 1.0f, cell_size), n);

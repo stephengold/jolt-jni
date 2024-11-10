@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics abstract character
@@ -98,10 +99,10 @@ static QuatArg cSmoothVerticallyMovingOrientation = Quat.sIdentity();
 static RVec3Arg cReversingVerticallyMovingPosition=new RVec3(0, 0.15f, 25);
 static QuatArg cReversingVerticallyMovingOrientation = Quat.sIdentity();
 static RVec3Arg cHorizontallyMovingPosition=new RVec3(5, 1, 15);
-static QuatArg cHorizontallyMovingOrientation = Quat.sRotation(Vec3.sAxisZ(), 0.5f * Jolt.JPH_PI);
+static QuatArg cHorizontallyMovingOrientation = Quat.sRotation(Vec3.sAxisZ(), 0.5f * JPH_PI);
 static RVec3Arg cConveyorBeltPosition=new RVec3(-10, 0.15f, 15);
 static final RVec3Arg cRampPosition=new RVec3(15, 2.2f, 15);
-static QuatArg cRampOrientation = Quat.sRotation(Vec3.sAxisX(), -0.25f * Jolt.JPH_PI);
+static QuatArg cRampOrientation = Quat.sRotation(Vec3.sAxisX(), -0.25f * JPH_PI);
 static RVec3Arg cRampBlocksStart = Op.add(cRampPosition , new Vec3(-3.0f, 3.0f, 1.5f));
 static Vec3Arg cRampBlocksDelta =new Vec3(2.0f, 0, 0);
 static final float cRampBlocksTime = 5.0f;
@@ -195,7 +196,7 @@ public void Initialize()
 			// Create ramps with different inclinations
 			ShapeRefC ramp =new RotatedTranslatedShapeSettings(new Vec3(0, 0, -2.5f), Quat.sIdentity(), new BoxShape(new Vec3(1.0f, 0.05f, 2.5f))).create().get();
 			for (int angle = 0; angle < 18; ++angle)
-				mBodyInterface.createAndAddBody(new BodyCreationSettings(ramp, new RVec3(-15.0f + angle * 2.0f, 0, -10.0f), Quat.sRotation(Vec3.sAxisX(), Jolt.degreesToRadians(10.0f * angle)), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+				mBodyInterface.createAndAddBody(new BodyCreationSettings(ramp, new RVec3(-15.0f + angle * 2.0f, 0, -10.0f), Quat.sRotation(Vec3.sAxisX(), degreesToRadians(10.0f * angle)), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 		}
 
 		{
@@ -204,8 +205,8 @@ public void Initialize()
 			ShapeRefC ramp2 =new RotatedTranslatedShapeSettings(new Vec3(0, 2.0f, 0), Quat.sIdentity(), new BoxShape(new Vec3(0.05f, 2.0f, 1.0f))).create().get();
 			for (int angle = 0; angle < 9; ++angle)
 			{
-				mBodyInterface.createAndAddBody(new BodyCreationSettings(ramp, new RVec3(-15.0f + angle * 2.0f, 0, -20.0f - angle * 0.1f), Quat.sRotation(Vec3.sAxisX(), Jolt.degreesToRadians(10.0f * angle)), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
-				mBodyInterface.createAndAddBody(new BodyCreationSettings(ramp2, new RVec3(-15.0f + angle * 2.0f, 0, -21.0f), Quat.sRotation(Vec3.sAxisZ(), Jolt.degreesToRadians(20.0f)), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+				mBodyInterface.createAndAddBody(new BodyCreationSettings(ramp, new RVec3(-15.0f + angle * 2.0f, 0, -20.0f - angle * 0.1f), Quat.sRotation(Vec3.sAxisX(), degreesToRadians(10.0f * angle)), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+				mBodyInterface.createAndAddBody(new BodyCreationSettings(ramp2, new RVec3(-15.0f + angle * 2.0f, 0, -21.0f), Quat.sRotation(Vec3.sAxisZ(), degreesToRadians(20.0f)), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 			}
 		}
 
@@ -330,18 +331,18 @@ public void Initialize()
 		ShapeRef funnel = new BoxShape(new Vec3(0.1f, 1.0f, 1.0f)).toRef();
 		for (int i = 0; i < 2; ++i)
 		{
-			Quat rotation = Quat.sRotation(Vec3.sAxisY(), Jolt.JPH_PI * i);
-			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.add(new RVec3(5.0f, 0.1f, 5.0f) , Op.rotate(rotation , new Vec3(0.2f, 0, 0))), Op.multiply(rotation , Quat.sRotation(Vec3.sAxisZ(), -Jolt.degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+			Quat rotation = Quat.sRotation(Vec3.sAxisY(), JPH_PI * i);
+			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.add(new RVec3(5.0f, 0.1f, 5.0f) , Op.rotate(rotation , new Vec3(0.2f, 0, 0))), Op.multiply(rotation , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 		}
 		for (int i = 0; i < 3; ++i)
 		{
-			Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f / 3.0f * Jolt.JPH_PI * i);
-			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.add(new RVec3(7.5f, 0.1f, 5.0f) , Op.rotate(rotation , new Vec3(0.2f, 0, 0))), Op.multiply(rotation , Quat.sRotation(Vec3.sAxisZ(), -Jolt.degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+			Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f / 3.0f * JPH_PI * i);
+			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.add(new RVec3(7.5f, 0.1f, 5.0f) , Op.rotate(rotation , new Vec3(0.2f, 0, 0))), Op.multiply(rotation , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 		}
 		for (int i = 0; i < 4; ++i)
 		{
-			Quat rotation = Quat.sRotation(Vec3.sAxisY(), 0.5f * Jolt.JPH_PI * i);
-			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.add(new RVec3(10.0f, 0.1f, 5.0f) , Op.rotate(rotation , new Vec3(0.2f, 0, 0))), Op.multiply(rotation , Quat.sRotation(Vec3.sAxisZ(), -Jolt.degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+			Quat rotation = Quat.sRotation(Vec3.sAxisY(), 0.5f * JPH_PI * i);
+			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.add(new RVec3(10.0f, 0.1f, 5.0f) , Op.rotate(rotation , new Vec3(0.2f, 0, 0))), Op.multiply(rotation , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 		}
 
 		// Create small bumps
@@ -501,9 +502,9 @@ public void Initialize()
 					int start = (int)vertices.size();
 
 					float radius = cCharacterRadiusStanding + 0.05f;
-					float angle_rad = (-0.5f + (float)(angle) / cAngleSegments) * Jolt.JPH_PI;
-					float s = (float)Math.sin(angle_rad);
-					float c = (float)Math.cos(angle_rad);
+					float angle_rad = (-0.5f + (float)(angle) / cAngleSegments) * JPH_PI;
+					float s = sin(angle_rad);
+					float c = cos(angle_rad);
 					float x = cCylinderLength * (-0.5f + (float)(pos) / (cPosSegments - 1));
 					float y = angle == 0 || angle == cAngleSegments - 1? 0.5f : (1.0f - c) * radius;
 					float z = s * radius;
@@ -602,7 +603,7 @@ public void Initialize()
 			mCharacterVsCharacterCollision.add(mAnimatedCharacterVirtualWithInnerBody);
 		}
 	}
-        else if (Jolt.supportsObjectStream())
+        else if (supportsObjectStream())
 	{
 		// Load scene
 		PhysicsSceneRef scene=new PhysicsSceneRef();
@@ -653,15 +654,15 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 
 	// Animate bodies
 	if (!mRotatingBody.isInvalid())
-		mBodyInterface.moveKinematic(mRotatingBody, cRotatingPosition, Quat.sRotation(Vec3.sAxisY(), Jolt.JPH_PI * (float)Math.sin(mTime)), inParams.mDeltaTime);
+		mBodyInterface.moveKinematic(mRotatingBody, cRotatingPosition, Quat.sRotation(Vec3.sAxisY(), JPH_PI * sin(mTime)), inParams.mDeltaTime);
 	if (!mRotatingWallBody.isInvalid())
-		mBodyInterface.moveKinematic(mRotatingWallBody, cRotatingWallPosition, Quat.sRotation(Vec3.sAxisY(), Jolt.JPH_PI * (float)Math.sin(mTime)), inParams.mDeltaTime);
+		mBodyInterface.moveKinematic(mRotatingWallBody, cRotatingWallPosition, Quat.sRotation(Vec3.sAxisY(), JPH_PI * sin(mTime)), inParams.mDeltaTime);
 	if (!mRotatingAndTranslatingBody.isInvalid())
-		mBodyInterface.moveKinematic(mRotatingAndTranslatingBody, Op.add(cRotatingAndTranslatingPosition , Op.multiply(5.0f , new Vec3((float)Math.sin(Jolt.JPH_PI * mTime), 0, (float)Math.cos(Jolt.JPH_PI * mTime)))), Quat.sRotation(Vec3.sAxisY(), Jolt.JPH_PI * (float)Math.sin(mTime)), inParams.mDeltaTime);
+		mBodyInterface.moveKinematic(mRotatingAndTranslatingBody, Op.add(cRotatingAndTranslatingPosition , Op.multiply(5.0f , new Vec3(sin(JPH_PI * mTime), 0, cos(JPH_PI * mTime)))), Quat.sRotation(Vec3.sAxisY(), JPH_PI * sin(mTime)), inParams.mDeltaTime);
 	if (!mHorizontallyMovingBody.isInvalid())
-		mBodyInterface.moveKinematic(mHorizontallyMovingBody, Op.add(cHorizontallyMovingPosition , new Vec3(3.0f * (float)Math.sin(mTime), 0, 0)), cHorizontallyMovingOrientation, inParams.mDeltaTime);
+		mBodyInterface.moveKinematic(mHorizontallyMovingBody, Op.add(cHorizontallyMovingPosition , new Vec3(3.0f * sin(mTime), 0, 0)), cHorizontallyMovingOrientation, inParams.mDeltaTime);
 	if (!mSmoothVerticallyMovingBody.isInvalid())
-		mBodyInterface.moveKinematic(mSmoothVerticallyMovingBody, Op.add(cSmoothVerticallyMovingPosition , new Vec3(0, 1.75f * (float)Math.sin(mTime), 0)), cSmoothVerticallyMovingOrientation, inParams.mDeltaTime);
+		mBodyInterface.moveKinematic(mSmoothVerticallyMovingBody, Op.add(cSmoothVerticallyMovingPosition , new Vec3(0, 1.75f * sin(mTime), 0)), cSmoothVerticallyMovingOrientation, inParams.mDeltaTime);
 	if (!mReversingVerticallyMovingBody.isInvalid())
 	{
 		RVec3 pos = mBodyInterface.getPosition(mReversingVerticallyMovingBody);
@@ -674,12 +675,12 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 
 	// Animate character
 	if (mAnimatedCharacter != null)
-		mAnimatedCharacter.setLinearVelocity(Op.multiply((float)Math.sin(mTime) , cCharacterVelocity));
+		mAnimatedCharacter.setLinearVelocity(Op.multiply(sin(mTime) , cCharacterVelocity));
 
 	// Animate character virtual
 	for (CharacterVirtualRef character : new CharacterVirtualRef[]{ mAnimatedCharacterVirtual, mAnimatedCharacterVirtualWithInnerBody })
 	{
-	if (Jolt.implementsDebugRendering())
+	if (implementsDebugRendering())
 		character.getShape().draw(mDebugRenderer, character.getCenterOfMassTransform(), Vec3.sReplicate(1.0f), Color.sOrange, false, true);
 	else
 		mDebugRenderer.drawCapsule(character.getCenterOfMassTransform(), 0.5f * cCharacterHeightStanding, cCharacterRadiusStanding + character.getCharacterPadding(), Color.sOrange, ECastShadow.Off, EDrawMode.Wireframe);
@@ -690,7 +691,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 			velocity = Vec3.sZero();
 		else
 			velocity = Op.add(Op.multiply(character.getLinearVelocity() , mAnimatedCharacter.getUp()) , Op.multiply(mPhysicsSystem.getGravity() , inParams.mDeltaTime));
-		Op.plusEquals(velocity , Op.multiply((float)Math.sin(mTime) , cCharacterVelocity));
+		Op.plusEquals(velocity , Op.multiply(sin(mTime) , cCharacterVelocity));
 		character.setLinearVelocity(velocity);
 
 		// Move character
@@ -762,7 +763,7 @@ public void GetInitialCamera(CameraState ioState)
 public RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of character + distance behind based on the heading and pitch of the camera
-	Vec3 fwd =new Vec3((float)Math.cos(inCameraPitch) * Math.cos(inCameraHeading), (float)Math.sin(inCameraPitch), (float)Math.cos(inCameraPitch) * Math.sin(inCameraHeading));
+	Vec3 fwd =new Vec3(cos(inCameraPitch) * cos(inCameraHeading), sin(inCameraPitch), cos(inCameraPitch) * sin(inCameraHeading));
 	return RMat44.sTranslation(Op.subtract(Op.add(mCameraPivot , new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , Op.multiply(5.0f , fwd)));
 }
 
