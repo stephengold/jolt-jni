@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import java.io.*;
 import java.util.*;
 import testjoltjni.TestUtils;
+import static com.github.stephengold.joltjni.Jolt.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics performance-test
@@ -58,10 +59,10 @@ public static void main(String[] argv) throws IOException
 {
 	TestUtils.loadNativeLibraryRelease();
 	// Install callbacks
-	Jolt.installDefaultTraceCallback();
+	installDefaultTraceCallback();
 
 	// Register allocation hook
-	Jolt.registerDefaultAllocator();
+	registerDefaultAllocator();
 
 	// Parse command line parameters
 	int specified_quality = -1;
@@ -85,7 +86,7 @@ public static void main(String[] argv) throws IOException
 			// Parse scene
 			if (arg.substring(3).equals("Ragdoll"))
 				scene = create_ragdoll_scene();
-			else if (arg.substring(3).equals("RagdollSinglePile") && Jolt.supportsObjectStream())
+			else if (arg.substring(3).equals("RagdollSinglePile")&&supportsObjectStream())
 				scene = new RagdollScene(1, 160, 0.4f);
 			else if (arg.substring(3).equals("ConvexVsMesh"))
 				scene = new ConvexVsMeshScene();
@@ -133,7 +134,7 @@ public static void main(String[] argv) throws IOException
 		{
 			enable_profiler = true;
 		}
-		else if (arg.equals("-r") && Jolt.implementsDebugRendering())
+		else if (arg.equals("-r")&&implementsDebugRendering())
 		{
 			enable_debug_renderer = true;
 		}
@@ -180,10 +181,10 @@ public static void main(String[] argv) throws IOException
 	}
 
 	// Create a factory
-	Jolt.newFactory();
+	newFactory();
 
 	// Register all Jolt physics types
-	Jolt.registerTypes();
+	registerTypes();
 
 	// Create temp allocator
 	TempAllocatorImpl temp_allocator = new TempAllocatorImpl(32 * 1024 * 1024);
@@ -195,7 +196,7 @@ public static void main(String[] argv) throws IOException
 		System.exit(1);
 
 	// Show used instruction sets
-	Trace(Jolt.getConfigurationString());
+	Trace(getConfigurationString());
 
 	// Output scene we're running
 	Trace("Running scene: %s", scene.GetName());
@@ -210,7 +211,7 @@ public static void main(String[] argv) throws IOException
 	ObjectLayerPairFilterImpl object_vs_object_layer_filter = new ObjectLayerPairFilterImpl();
 
 	// Start profiling this program
-	Jolt.profileStart("Main");
+	profileStart("Main");
 
 	// Trace header
 	Trace("Motion Quality, Thread Count, Steps / Second, Hash");
@@ -241,7 +242,7 @@ public static void main(String[] argv) throws IOException
 			for (int num_threads : thread_permutations)
 			{
 				// Create job system with desired number of threads
-				JobSystemThreadPool job_system = new JobSystemThreadPool(Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, num_threads);
+				JobSystemThreadPool job_system=new JobSystemThreadPool(cMaxPhysicsJobs, cMaxPhysicsBarriers, num_threads);
 
 				// Create physics system
 				PhysicsSystem physics_system = new PhysicsSystem();
@@ -302,8 +303,8 @@ public static void main(String[] argv) throws IOException
 				// Step the world for a fixed amount of iterations
 				for (int iterations = 0; iterations < max_iterations; ++iterations)
 				{
-					Jolt.profileNextFrame();
-					Jolt.detLog("Iteration: " + iterations);
+					profileNextFrame();
+					detLog("Iteration: " + iterations);
 
 					// Start measuring
 					long clock_start = System.nanoTime();
@@ -333,7 +334,7 @@ public static void main(String[] argv) throws IOException
 					// Dump profile information every 100 iterations
 					if (enable_profiler && iterations % 100 == 0)
 					{
-						Jolt.profileDump(tag + "_it" + (iterations));
+						profileDump(tag + "_it" + (iterations));
 					}
 
 					if (record_state)
@@ -364,7 +365,7 @@ public static void main(String[] argv) throws IOException
 						physics_system.restoreState(validator);
 					}
 
-				if (Jolt.implementsDeterminismLog()) {
+				if (implementsDeterminismLog()) {
 					final BodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
 					BodyIdVector body_ids = new BodyIdVector();
 					physics_system.getBodies(body_ids);
@@ -373,22 +374,22 @@ public static void main(String[] argv) throws IOException
 						BodyLockRead lock = new BodyLockRead(bli, id);
 						final Body body = lock.getBody();
 						if (!body.isStatic())
-							Jolt.detLog(id + ": p: " + body.getPosition() + " r: " + body.getRotation() + " v: " + body.getLinearVelocity() + " w: " + body.getAngularVelocity());
+							detLog(id + ": p: " + body.getPosition() + " r: " + body.getRotation() + " v: " + body.getLinearVelocity() + " w: " + body.getAngularVelocity());
 					}
 				} // JPH_ENABLE_DETERMINISM_LOG
 				}
 
 				// Calculate hash of all positions and rotations of the bodies
-				long hash = Jolt.hashBytes(0L, 0); // Ensure we start with the proper seed
+				long hash = hashBytes(0L, 0); // Ensure we start with the proper seed
 				BodyInterface bi = physics_system.getBodyInterfaceNoLock();
 				BodyIdVector body_ids = new BodyIdVector();
 				physics_system.getBodies(body_ids);
 				for (BodyId id : body_ids.toList())
 				{
 					RVec3 pos = bi.getPosition(id);
-					hash = Jolt.hashBytes(pos, hash);
+					hash = hashBytes(pos, hash);
 					Quat rot = bi.getRotation(id);
-					hash = Jolt.hashBytes(rot, hash);
+					hash = hashBytes(rot, hash);
 				}
 
 				// Convert hash to string
@@ -415,13 +416,13 @@ if (NarrowPhaseStat.isCollecting()) {
 } // JPH_TRACK_NARROWPHASE_STATS
 
 	// Unregisters all types with the factory and cleans up the default material
-	Jolt.unregisterTypes();
+	unregisterTypes();
 
 	// Destroy the factory
-	Jolt.destroyFactory();
+	destroyFactory();
 
 	// End profiling this program
-	Jolt.profileEnd();
+	profileEnd();
 }
 
 }
