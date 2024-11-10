@@ -124,7 +124,7 @@ void BoatTest::ProcessInput(const ProcessInputParams &inParams)
 
 RVec3 GetWaterSurfacePosition(RVec3Arg inXZPosition)
 {
-	return new RVec3(inXZPosition.xx(), cMinWaterHeight + Math.sin(0.1f * (float)(inXZPosition.getZ()) + mTime) * (cMaxWaterHeight - cMinWaterHeight), inXZPosition.zz());
+	return new RVec3(inXZPosition.xx(), cMinWaterHeight + Jolt.sin(0.1f * (float)(inXZPosition.getZ()) + mTime) * (cMaxWaterHeight - cMinWaterHeight), inXZPosition.zz());
 }
 
 public void PrePhysicsUpdate(PreUpdateParams inParams)

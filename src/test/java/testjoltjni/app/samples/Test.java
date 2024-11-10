@@ -32,12 +32,11 @@ import static com.github.stephengold.joltjni.Jolt.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Test.cpp
  */
 abstract public class Test {
-protected PhysicsSystem mPhysicsSystem;
 protected BodyInterface mBodyInterface;
 protected DebugRenderer mDebugRenderer;
-protected TempAllocator mTempAllocator = null;
 protected JobSystem mJobSystem;
-
+protected PhysicsSystem mPhysicsSystem;
+protected TempAllocator mTempAllocator;
 float GetWorldScale() { return 1.0f; }
 public void Initialize(){}
 public void PrePhysicsUpdate(PreUpdateParams params){}
@@ -46,7 +45,7 @@ void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
 void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSystem;mBodyInterface=inPhysicsSystem.getBodyInterface();}
 void SetTempAllocator(TempAllocator inTempAllocator){mTempAllocator=inTempAllocator;}
 
-public Body CreateFloor() {return CreateFloor(200.0f);}
+public Body CreateFloor(){return CreateFloor(200);}
 public Body CreateFloor(float inSize)
 {
 	final float scale = GetWorldScale();

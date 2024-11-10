@@ -82,7 +82,7 @@ private String sScenes[] =
 	"ObstacleCourse",
 	"InitiallyIntersecting",
 	"Terrain1",
-	"Terrain2"
+	"Terrain2",
 };
 
 private String sSceneName = "ObstacleCourse";
