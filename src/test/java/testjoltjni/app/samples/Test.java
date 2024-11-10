@@ -46,7 +46,7 @@ public Body CreateFloor(float inSize)
 {
 	final float scale = GetWorldScale();
 
-	Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Op.multiply(scale, new Vec3(0.5f * inSize, 1.0f, 0.5f * inSize)), 0.0f), new RVec3(Op.multiply(scale, new Vec3(0.0f, -1.0f, 0.0f))), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
+	Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Op.multiply(scale,new Vec3(0.5f * inSize, 1.0f, 0.5f * inSize)), 0.0f),new RVec3(Op.multiply(scale,new Vec3(0.0f, -1.0f, 0.0f))), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
 	mBodyInterface.addBody(floor.getId(), EActivation.DontActivate);
 	return floor;
 }
@@ -54,75 +54,75 @@ public Body CreateFloor(float inSize)
 public Body CreateLargeTriangleFloor()
 {
 	Triangle[] triangles = {
-		new Triangle(new Float3(427.941376f, 0.000027f, -456.470642f), new Float3(427.941376f, 0.000024f, -399.411774f), new Float3(512.0f, 0.000031f, -511.999969f)),
-		new Triangle(new Float3(0.0f, 0.000031f, -511.999969f), new Float3(28.529310f, 0.000027f, -456.470642f), new Float3(427.941376f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(427.941376f, 0.000027f, -456.470642f), new Float3(512.0f, 0.000031f, -511.999969f), new Float3(0.0f, 0.000031f, -511.999969f)),
-		new Triangle(new Float3(285.294067f, 0.000027f, -456.470642f), new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(313.823395f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(313.823395f, 0.000027f, -456.470642f), new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(342.352936f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(342.352936f, 0.000027f, -456.470642f), new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(370.882507f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(427.941376f, 0.000024f, -399.411774f), new Float3(370.882507f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(370.882507f, 0.000027f, -456.470642f), new Float3(427.941376f, 0.000024f, -399.411774f), new Float3(399.411804f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(399.411804f, 0.000027f, -456.470642f), new Float3(427.941376f, 0.000024f, -399.411774f), new Float3(427.941376f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(256.764771f, 0.000027f, -456.470642f), new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(285.294067f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(85.588173f, 0.000027f, -456.470642f), new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(114.117729f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(114.117729f, 0.000027f, -456.470642f), new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(142.647034f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(142.647034f, 0.000027f, -456.470642f), new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(171.176590f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(171.176590f, 0.000027f, -456.470642f), new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(199.705902f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(199.705902f, 0.000027f, -456.470642f), new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(228.235214f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(228.235214f, 0.000027f, -456.470642f), new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(256.764771f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(85.588173f, 0.000024f, -399.411774f), new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(85.588173f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(427.941376f, 0.000024f, -399.411774f), new Float3(512.0f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000031f, -511.999969f)),
-		new Triangle(new Float3(399.411804f, 0.000024f, -399.411774f), new Float3(512.0f, 0.000019f, -313.823364f), new Float3(427.941376f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(285.294067f, 0.000024f, -399.411774f), new Float3(512.0f, 0.000019f, -313.823364f), new Float3(313.823395f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(313.823395f, 0.000024f, -399.411774f), new Float3(512.0f, 0.000019f, -313.823364f), new Float3(342.352936f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(342.352936f, 0.000024f, -399.411774f), new Float3(512.0f, 0.000019f, -313.823364f), new Float3(370.882507f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(370.882507f, 0.000024f, -399.411774f), new Float3(512.0f, 0.000019f, -313.823364f), new Float3(399.411804f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(256.764771f, 0.000024f, -399.411774f), new Float3(512.0f, 0.000019f, -313.823364f), new Float3(285.294067f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(228.235214f, 0.000024f, -399.411774f), new Float3(512.0f, 0.000019f, -313.823364f), new Float3(256.764771f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(199.705902f, 0.000024f, -399.411774f), new Float3(512.0f, 0.000019f, -313.823364f), new Float3(228.235214f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(228.235214f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000019f, -313.823364f), new Float3(199.705902f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(142.647034f, 0.000024f, -399.411774f), new Float3(228.235214f, 0.000019f, -313.823364f), new Float3(171.176590f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(171.176590f, 0.000024f, -399.411774f), new Float3(228.235214f, 0.000019f, -313.823364f), new Float3(199.705902f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(85.588173f, 0.000022f, -370.882477f), new Float3(228.235214f, 0.000019f, -313.823364f), new Float3(142.647034f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(85.588173f, 0.000022f, -370.882477f), new Float3(199.705902f, 0.000019f, -313.823364f), new Float3(228.235214f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(114.117729f, 0.000024f, -399.411774f), new Float3(85.588173f, 0.000022f, -370.882477f), new Float3(142.647034f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(85.588173f, 0.000024f, -399.411774f), new Float3(85.588173f, 0.000022f, -370.882477f), new Float3(114.117729f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(28.529310f, 0.000019f, -313.823364f), new Float3(199.705902f, 0.000019f, -313.823364f), new Float3(85.588173f, 0.000022f, -370.882477f)),
-		new Triangle(new Float3(57.058865f, 0.000019f, -313.823364f), new Float3(0.0f, 0.000017f, -285.294037f), new Float3(85.588173f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(28.529310f, 0.000019f, -313.823364f), new Float3(0.0f, 0.000017f, -285.294037f), new Float3(57.058865f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(28.529310f, 0.000027f, -456.470642f), new Float3(0.0f, 0.000017f, -285.294037f), new Float3(57.058865f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(0.0f, 0.000017f, -285.294037f), new Float3(28.529310f, 0.000027f, -456.470642f), new Float3(0.0f, 0.000031f, -511.999969f)),
-		new Triangle(new Float3(0.0f, 0.000017f, -285.294037f), new Float3(85.588173f, 0.000022f, -370.882477f), new Float3(85.588173f, 0.000024f, -399.411774f)),
-		new Triangle(new Float3(0.0f, 0.000017f, -285.294037f), new Float3(85.588173f, 0.000024f, -399.411774f), new Float3(57.058865f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(57.058865f, 0.000027f, -456.470642f), new Float3(85.588173f, 0.000024f, -399.411774f), new Float3(85.588173f, 0.000027f, -456.470642f)),
-		new Triangle(new Float3(399.411804f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(456.470673f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(456.470673f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(512.0f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(228.235214f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(256.764771f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(256.764771f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(285.294067f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(285.294067f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(313.823395f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(313.823395f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(342.352936f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(342.352936f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(370.882507f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(370.882507f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(399.411804f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(0.0f, 0.000017f, -285.294037f), new Float3(0.0f, 0.000009f, -142.647018f), new Float3(512.0f, 0.000003f, -57.058861f)),
-		new Triangle(new Float3(199.705902f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(228.235214f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(171.176590f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(199.705902f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(0.0f, 0.000017f, -285.294037f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(85.588173f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(85.588173f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(142.647034f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(142.647034f, 0.000019f, -313.823364f), new Float3(512.0f, 0.000003f, -57.058861f), new Float3(171.176590f, 0.000019f, -313.823364f)),
-		new Triangle(new Float3(485.0f, 0.000002f, -28.529308f), new Float3(512.0f, 0.0f, 0.0f), new Float3(512.0f, 0.000002f, -28.529308f)),
-		new Triangle(new Float3(512.0f, 0.0f, 0.0f), new Float3(427.941376f, 0.000002f, -28.529308f), new Float3(285.294067f, 0.000002f, -28.529308f)),
-		new Triangle(new Float3(456.470673f, 0.000002f, -28.529308f), new Float3(512.0f, 0.0f, 0.0f), new Float3(485.0f, 0.000002f, -28.529308f)),
-		new Triangle(new Float3(427.941376f, 0.000002f, -28.529308f), new Float3(512.0f, 0.0f, 0.0f), new Float3(456.470673f, 0.000002f, -28.529308f)),
-		new Triangle(new Float3(171.176590f, 0.0f, 0.0f), new Float3(512.0f, 0.0f, 0.0f), new Float3(285.294067f, 0.000002f, -28.529308f)),
-		new Triangle(new Float3(285.294067f, 0.000002f, -28.529308f), new Float3(512.0f, 0.000002f, -28.529308f), new Float3(512.0f, 0.000003f, -57.058861f)),
-		new Triangle(new Float3(0.0f, 0.000009f, -142.647018f), new Float3(285.294067f, 0.000002f, -28.529308f), new Float3(512.0f, 0.000003f, -57.058861f)),
-		new Triangle(new Float3(0.0f, 0.000007f, -114.117722f), new Float3(171.176590f, 0.0f, 0.0f), new Float3(0.0f, 0.000009f, -142.647018f)),
-		new Triangle(new Float3(0.0f, 0.0f, 0.0f), new Float3(171.176590f, 0.0f, 0.0f), new Float3(0.0f, 0.000007f, -114.117722f)),
-		new Triangle(new Float3(0.0f, 0.000009f, -142.647018f), new Float3(171.176590f, 0.0f, 0.0f), new Float3(285.294067f, 0.000002f, -28.529308f))
+		new Triangle(new Float3(427.941376f, 0.000027f, -456.470642f),new Float3(427.941376f, 0.000024f, -399.411774f),new Float3(512.0f, 0.000031f, -511.999969f)),
+		new Triangle(new Float3(0.0f, 0.000031f, -511.999969f),new Float3(28.529310f, 0.000027f, -456.470642f),new Float3(427.941376f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(427.941376f, 0.000027f, -456.470642f),new Float3(512.0f, 0.000031f, -511.999969f),new Float3(0.0f, 0.000031f, -511.999969f)),
+		new Triangle(new Float3(285.294067f, 0.000027f, -456.470642f),new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(313.823395f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(313.823395f, 0.000027f, -456.470642f),new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(342.352936f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(342.352936f, 0.000027f, -456.470642f),new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(370.882507f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(427.941376f, 0.000024f, -399.411774f),new Float3(370.882507f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(370.882507f, 0.000027f, -456.470642f),new Float3(427.941376f, 0.000024f, -399.411774f),new Float3(399.411804f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(399.411804f, 0.000027f, -456.470642f),new Float3(427.941376f, 0.000024f, -399.411774f),new Float3(427.941376f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(256.764771f, 0.000027f, -456.470642f),new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(285.294067f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(85.588173f, 0.000027f, -456.470642f),new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(114.117729f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(114.117729f, 0.000027f, -456.470642f),new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(142.647034f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(142.647034f, 0.000027f, -456.470642f),new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(171.176590f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(171.176590f, 0.000027f, -456.470642f),new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(199.705902f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(199.705902f, 0.000027f, -456.470642f),new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(228.235214f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(228.235214f, 0.000027f, -456.470642f),new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(256.764771f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(85.588173f, 0.000024f, -399.411774f),new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(85.588173f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(427.941376f, 0.000024f, -399.411774f),new Float3(512.0f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000031f, -511.999969f)),
+		new Triangle(new Float3(399.411804f, 0.000024f, -399.411774f),new Float3(512.0f, 0.000019f, -313.823364f),new Float3(427.941376f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(285.294067f, 0.000024f, -399.411774f),new Float3(512.0f, 0.000019f, -313.823364f),new Float3(313.823395f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(313.823395f, 0.000024f, -399.411774f),new Float3(512.0f, 0.000019f, -313.823364f),new Float3(342.352936f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(342.352936f, 0.000024f, -399.411774f),new Float3(512.0f, 0.000019f, -313.823364f),new Float3(370.882507f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(370.882507f, 0.000024f, -399.411774f),new Float3(512.0f, 0.000019f, -313.823364f),new Float3(399.411804f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(256.764771f, 0.000024f, -399.411774f),new Float3(512.0f, 0.000019f, -313.823364f),new Float3(285.294067f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(228.235214f, 0.000024f, -399.411774f),new Float3(512.0f, 0.000019f, -313.823364f),new Float3(256.764771f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(199.705902f, 0.000024f, -399.411774f),new Float3(512.0f, 0.000019f, -313.823364f),new Float3(228.235214f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(228.235214f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000019f, -313.823364f),new Float3(199.705902f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(142.647034f, 0.000024f, -399.411774f),new Float3(228.235214f, 0.000019f, -313.823364f),new Float3(171.176590f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(171.176590f, 0.000024f, -399.411774f),new Float3(228.235214f, 0.000019f, -313.823364f),new Float3(199.705902f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(85.588173f, 0.000022f, -370.882477f),new Float3(228.235214f, 0.000019f, -313.823364f),new Float3(142.647034f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(85.588173f, 0.000022f, -370.882477f),new Float3(199.705902f, 0.000019f, -313.823364f),new Float3(228.235214f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(114.117729f, 0.000024f, -399.411774f),new Float3(85.588173f, 0.000022f, -370.882477f),new Float3(142.647034f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(85.588173f, 0.000024f, -399.411774f),new Float3(85.588173f, 0.000022f, -370.882477f),new Float3(114.117729f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(28.529310f, 0.000019f, -313.823364f),new Float3(199.705902f, 0.000019f, -313.823364f),new Float3(85.588173f, 0.000022f, -370.882477f)),
+		new Triangle(new Float3(57.058865f, 0.000019f, -313.823364f),new Float3(0.0f, 0.000017f, -285.294037f),new Float3(85.588173f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(28.529310f, 0.000019f, -313.823364f),new Float3(0.0f, 0.000017f, -285.294037f),new Float3(57.058865f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(28.529310f, 0.000027f, -456.470642f),new Float3(0.0f, 0.000017f, -285.294037f),new Float3(57.058865f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(0.0f, 0.000017f, -285.294037f),new Float3(28.529310f, 0.000027f, -456.470642f),new Float3(0.0f, 0.000031f, -511.999969f)),
+		new Triangle(new Float3(0.0f, 0.000017f, -285.294037f),new Float3(85.588173f, 0.000022f, -370.882477f),new Float3(85.588173f, 0.000024f, -399.411774f)),
+		new Triangle(new Float3(0.0f, 0.000017f, -285.294037f),new Float3(85.588173f, 0.000024f, -399.411774f),new Float3(57.058865f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(57.058865f, 0.000027f, -456.470642f),new Float3(85.588173f, 0.000024f, -399.411774f),new Float3(85.588173f, 0.000027f, -456.470642f)),
+		new Triangle(new Float3(399.411804f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(456.470673f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(456.470673f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(512.0f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(228.235214f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(256.764771f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(256.764771f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(285.294067f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(285.294067f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(313.823395f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(313.823395f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(342.352936f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(342.352936f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(370.882507f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(370.882507f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(399.411804f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(0.0f, 0.000017f, -285.294037f),new Float3(0.0f, 0.000009f, -142.647018f),new Float3(512.0f, 0.000003f, -57.058861f)),
+		new Triangle(new Float3(199.705902f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(228.235214f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(171.176590f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(199.705902f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(0.0f, 0.000017f, -285.294037f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(85.588173f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(85.588173f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(142.647034f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(142.647034f, 0.000019f, -313.823364f),new Float3(512.0f, 0.000003f, -57.058861f),new Float3(171.176590f, 0.000019f, -313.823364f)),
+		new Triangle(new Float3(485.0f, 0.000002f, -28.529308f),new Float3(512.0f, 0.0f, 0.0f),new Float3(512.0f, 0.000002f, -28.529308f)),
+		new Triangle(new Float3(512.0f, 0.0f, 0.0f),new Float3(427.941376f, 0.000002f, -28.529308f),new Float3(285.294067f, 0.000002f, -28.529308f)),
+		new Triangle(new Float3(456.470673f, 0.000002f, -28.529308f),new Float3(512.0f, 0.0f, 0.0f),new Float3(485.0f, 0.000002f, -28.529308f)),
+		new Triangle(new Float3(427.941376f, 0.000002f, -28.529308f),new Float3(512.0f, 0.0f, 0.0f),new Float3(456.470673f, 0.000002f, -28.529308f)),
+		new Triangle(new Float3(171.176590f, 0.0f, 0.0f),new Float3(512.0f, 0.0f, 0.0f),new Float3(285.294067f, 0.000002f, -28.529308f)),
+		new Triangle(new Float3(285.294067f, 0.000002f, -28.529308f),new Float3(512.0f, 0.000002f, -28.529308f),new Float3(512.0f, 0.000003f, -57.058861f)),
+		new Triangle(new Float3(0.0f, 0.000009f, -142.647018f),new Float3(285.294067f, 0.000002f, -28.529308f),new Float3(512.0f, 0.000003f, -57.058861f)),
+		new Triangle(new Float3(0.0f, 0.000007f, -114.117722f),new Float3(171.176590f, 0.0f, 0.0f),new Float3(0.0f, 0.000009f, -142.647018f)),
+		new Triangle(new Float3(0.0f, 0.0f, 0.0f),new Float3(171.176590f, 0.0f, 0.0f),new Float3(0.0f, 0.000007f, -114.117722f)),
+		new Triangle(new Float3(0.0f, 0.000009f, -142.647018f),new Float3(171.176590f, 0.0f, 0.0f),new Float3(285.294067f, 0.000002f, -28.529308f))
 	};
-	MeshShapeSettings mesh_settings = new MeshShapeSettings(triangles);
+	MeshShapeSettings mesh_settings=new MeshShapeSettings(triangles);
 	mesh_settings.setEmbedded();
-	BodyCreationSettings floor_settings = new BodyCreationSettings(mesh_settings, new RVec3(-256.0f, 0.0f, 256.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
+	BodyCreationSettings floor_settings=new BodyCreationSettings(mesh_settings,new RVec3(-256.0f, 0.0f, 256.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
 	Body floor = mBodyInterface.createBody(floor_settings);
 	mBodyInterface.addBody(floor.getId(), EActivation.DontActivate);
 	return floor;
@@ -144,13 +144,13 @@ if (buildType().equals("DEBUG")) {
 	final float max_height = scale * 3.0f;
 
 	// Create heights
-	float[][] heights = new float[n + 1][n + 1];
+	float[][] heights=new float[n + 1][n + 1];
 	for (int x = 0; x <= n; ++x)
 		for (int z = 0; z <= n; ++z)
 			heights[x][z] = max_height * perlinNoise3((float)(x) * 8.0f / n, 0, (float)(z) * 8.0f / n, 256, 256, 256);
 
 	// Create regular grid of triangles
-	List<Triangle> triangles = new ArrayList<>(2 * n * n);
+	List<Triangle> triangles=new ArrayList<>(2 * n * n);
 	for (int x = 0; x < n; ++x)
 		for (int z = 0; z < n; ++z)
 		{
@@ -185,13 +185,13 @@ public Body CreateHeightFieldTerrain()
 	final float max_height = scale * 5.0f;
 
 	// Create height samples
-	float[] heights = new float[n * n];
+	float[] heights=new float[n * n];
 	for (int y = 0; y < n; ++y)
 		for (int x = 0; x < n; ++x)
 			heights[y * n + x] = max_height * perlinNoise3((float)(x) * 8.0f / n, 0, (float)(y) * 8.0f / n, 256, 256, 256);
 
 	// Create height field
-	ShapeSettings height_field = new HeightFieldShapeSettings(heights, new Vec3(-0.5f * cell_size * n, 0.0f, -0.5f * cell_size * n), new Vec3(cell_size, 1.0f, cell_size), n);
+	ShapeSettings height_field =new HeightFieldShapeSettings(heights,new Vec3(-0.5f * cell_size * n, 0.0f, -0.5f * cell_size * n),new Vec3(cell_size, 1.0f, cell_size), n);
 
 	// Floor
 	Body floor = mBodyInterface.createBody(new BodyCreationSettings(height_field, RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));

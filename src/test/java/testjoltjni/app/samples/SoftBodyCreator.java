@@ -157,7 +157,7 @@ static SoftBodySharedSettingsRef CreateCube(int inGridSize, float inGridSpacing)
 			for (int x = 0; x < inGridSize - 1; ++x)
 				for (int t = 0; t < 6; ++t)
 				{
-					Volume v = new Volume();
+					Volume v=new Volume();
 					for (int i = 0; i < 4; ++i)
 						v.setVertex(i , vertex_index.apply(x + tetra_indices[t][i][0], y + tetra_indices[t][i][1], z + tetra_indices[t][i][2]));
 					settings.addVolumeConstraint(v);

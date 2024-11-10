@@ -183,7 +183,7 @@ public void Initialize()
 			for (int y = 0; y <= 10; ++y)
 				for (int z = 0; z <= 10; ++z)
 				{
-					settings.setPosition(new RVec3(-0.5f + 0.1f * x, 0.1f + 0.1f * y, -0.5f + 0.1f * z));
+					settings.setPosition (new RVec3(-0.5f + 0.1f * x, 0.1f + 0.1f * y, -0.5f + 0.1f * z));
 					mBodyInterface.createAndAddBody(settings, EActivation.DontActivate);
 				}
 	}
@@ -475,7 +475,7 @@ public void Initialize()
 			for (int i = 0; i < cMeshWallSegments; ++i)
 			{
 				float delta = cMeshWallStepStart + i * (cMeshWallStepEnd - cMeshWallStepStart) / (cMeshWallSegments - 1);
-				Vec3 p2=new Vec3(((i & 1) != 0x0)? 0.5f * cMeshWallWidth : -0.5f * cMeshWallWidth, 0, p1.getZ() + delta);
+				Vec3 p2 =new Vec3(((i & 1) != 0x0)? 0.5f * cMeshWallWidth : -0.5f * cMeshWallWidth, 0, p1.getZ() + delta);
 				triangles.add(new Triangle(p1, Op.add(p1 , h), Op.add(p2 , h)));
 				triangles.add(new Triangle(p1, Op.add(p2 , h), p2));
 				p1 = p2;
@@ -803,8 +803,8 @@ public void SaveInputState(StateRecorder inStream)
 public void RestoreInputState(StateRecorder inStream)
 {
 	inStream.readVec3(mControlInput);
-	mJump = inStream.readBoolean(mJump);
-	mSwitchStance = inStream.readBoolean(mSwitchStance);
+	mJump=inStream.readBoolean(mJump);
+	mSwitchStance=inStream.readBoolean(mSwitchStance);
 }
 
 void DrawCharacterState(ConstCharacterBase inCharacter, RMat44Arg inCharacterTransform, Vec3Arg inCharacterVelocity)

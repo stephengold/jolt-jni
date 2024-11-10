@@ -45,6 +45,7 @@ static String endl=System.lineSeparator();
 
 
 
+
 // Layer that objects can be in, determines which other objects it can collide with
 // Typically you at least want to have 1 layer for moving bodies and 1 layer for static bodies, but you can have more
 // layers if you want. E.g. you could have a layer for high detail collision (which is not used by the physics simulation
@@ -144,7 +145,7 @@ public
 };
 
 // Program entry point
-public static void main(String[] argv)
+public static void main(  String[] argv)
 {
 	TestUtils.loadNativeLibrary();
 	// Register allocation hook. In this example we'll just let Jolt use malloc / free but you can override these if you want (see Memory.h).

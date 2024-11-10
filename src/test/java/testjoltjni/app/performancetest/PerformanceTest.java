@@ -28,8 +28,7 @@ import testjoltjni.TestUtils;
 import static com.github.stephengold.joltjni.Jolt.*;
 
 /**
- * A line-for-line Java translation of the Jolt Physics performance-test
- * driver.
+ * A line-for-line Java translation of the Jolt Physics performance-test driver.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/PerformanceTest.h
@@ -47,7 +46,7 @@ public class PerformanceTest {
 // Time step for physics
 final static float cDeltaTime = 1.0f / 60.0f;
 
-private static void Trace(String format, Object... args)
+private static void Trace(String format, Object...args)
 {
         System.out.printf(format, args);
         System.out.println();
@@ -55,7 +54,7 @@ private static void Trace(String format, Object... args)
 }
 
 // Program entry point
-public static void main(String[] argv) throws IOException
+public static void main(  String[] argv)throws IOException
 {
 	TestUtils.loadNativeLibraryRelease();
 	// Install callbacks
@@ -79,12 +78,12 @@ public static void main(String[] argv) throws IOException
 	int repeat = 1;
 	for (int argidx = 0; argidx < argv.length; ++argidx)
 	{
-		String arg = argv[argidx];
+		String  arg = argv[argidx];
 
-		if (arg.startsWith("-s="))
+		if (arg. startsWith("-s=" )  )
 		{
 			// Parse scene
-			if (arg.substring(3).equals("Ragdoll"))
+			if (arg.  substring(3).equals( "Ragdoll")  )
 				scene = create_ragdoll_scene();
 			else if (arg.substring(3).equals("RagdollSinglePile")&&supportsObjectStream())
 				scene = new RagdollScene(1, 160, 0.4f);
@@ -95,20 +94,20 @@ public static void main(String[] argv) throws IOException
 			else
 			{
 				Trace("Invalid scene");
-				System.exit(1);
+				System.exit( 1);
 			}
 		}
-		else if (arg.startsWith("-i="))
+		else if (arg. startsWith("-i=" )  )
 		{
 			// Parse max iterations
-			max_iterations = Integer.parseInt(arg.substring(3));
+			max_iterations = Integer.parseInt(arg.substring(  3));
 		}
-		else if (arg.startsWith("-q="))
+		else if (arg. startsWith("-q=" )  )
 		{
 			// Parse quality
-			if (arg.substring(3).equals("Discrete"))
+			if (arg  .substring(3).equals( "Discrete")  )
 				specified_quality = 0;
-			else if (arg.substring(3).equals("LinearCast"))
+			else if (arg  .substring(3).equals( "LinearCast")  )
 				specified_quality = 1;
 			else
 			{
@@ -116,21 +115,21 @@ public static void main(String[] argv) throws IOException
 				System.exit(1);
 			}
 		}
-		else if (arg.startsWith("-t=max"))
+		else if (arg. startsWith("-t=max" )  )
 		{
 			// Default to number of threads on the system
 			specified_threads = TestUtils.numThreads();
 		}
-		else if (arg.startsWith("-t="))
+		else if (arg. startsWith("-t=" )  )
 		{
 			// Parse threads
-			specified_threads = Integer.parseInt(arg.substring(3));
+			specified_threads = Integer.parseInt(arg.substring(3)  );
 		}
-		else if (arg.equals("-no_sleep"))
+		else if (arg. equals("-no_sleep")  )
 		{
 			disable_sleep = true;
 		}
-		else if (arg.equals("-p"))
+		else if (arg. equals("-p")  )
 		{
 			enable_profiler = true;
 		}
@@ -142,24 +141,24 @@ public static void main(String[] argv) throws IOException
 		{
 			enable_per_frame_recording = true;
 		}
-		else if (arg.equals("-rs"))
+		else if (arg. equals("-rs")  )
 		{
 			record_state = true;
 		}
-		else if (arg.equals("-vs"))
+		else if (arg. equals("-vs")  )
 		{
 			validate_state = true;
 		}
-		else if (arg.startsWith("-validate_hash="))
+		else if (arg. startsWith("-validate_hash=" )  )
 		{
-			validate_hash = arg.substring(15);
+			validate_hash = arg.substring(  15);
 		}
-		else if (arg.startsWith("-repeat="))
+		else if (arg. startsWith("-repeat=" )  )
 		{
 			// Parse repeat count
-			repeat = Integer.parseInt(arg.substring(8));
+			repeat = Integer.parseInt(arg.substring(  8));
 		}
-		else if (arg.equals("-h"))
+		else if (arg. equals("-h")  )
 		{
 			// Print usage
 			Trace("Usage:\n"
@@ -176,7 +175,7 @@ public static void main(String[] argv) throws IOException
 				 + "-vs: Validate state\n"
 				 + "-validate_hash=<hash>: Validate hash (return 0 if successful, 1 if failed)\n"
 				 + "-repeat=<num>: Repeat all tests <num> times");
-			System.exit(0);
+			System.exit (0);
 		}
 	}
 
@@ -187,13 +186,13 @@ public static void main(String[] argv) throws IOException
 	registerTypes();
 
 	// Create temp allocator
-	TempAllocatorImpl temp_allocator = new TempAllocatorImpl(32 * 1024 * 1024);
+	TempAllocatorImpl temp_allocator=new TempAllocatorImpl(32 * 1024 * 1024);
 
 	// Load the scene
 	if (scene == null)
 		scene = create_ragdoll_scene();
 	if (!scene.Load())
-		System.exit(1);
+		System.exit( 1);
 
 	// Show used instruction sets
 	Trace(getConfigurationString());
@@ -202,13 +201,13 @@ public static void main(String[] argv) throws IOException
 	Trace("Running scene: %s", scene.GetName());
 
 	// Create mapping table from object layer to broadphase layer
-	BPLayerInterfaceImpl broad_phase_layer_interface = new BPLayerInterfaceImpl();
+	BPLayerInterfaceImpl broad_phase_layer_interface=new BPLayerInterfaceImpl();
 
 	// Create class that filters object vs broadphase layers
-	ObjectVsBroadPhaseLayerFilterImpl object_vs_broadphase_layer_filter = new ObjectVsBroadPhaseLayerFilterImpl();
+	ObjectVsBroadPhaseLayerFilterImpl object_vs_broadphase_layer_filter=new ObjectVsBroadPhaseLayerFilterImpl();
 
 	// Create class that filters object vs object layers
-	ObjectLayerPairFilterImpl object_vs_object_layer_filter = new ObjectLayerPairFilterImpl();
+	ObjectLayerPairFilterImpl object_vs_object_layer_filter=new ObjectLayerPairFilterImpl();
 
 	// Start profiling this program
 	profileStart("Main");
@@ -231,7 +230,7 @@ public static void main(String[] argv) throws IOException
 			String motion_quality_str = mq == 0? "Discrete" : "LinearCast";
 
 			// Determine which thread counts to test
-			List<Integer> thread_permutations = new ArrayList<>();
+			List<Integer> thread_permutations=new ArrayList<>();
 			if (specified_threads > 0)
 				thread_permutations.add(specified_threads - 1);
 			else
@@ -245,7 +244,7 @@ public static void main(String[] argv) throws IOException
 				JobSystemThreadPool job_system=new JobSystemThreadPool(cMaxPhysicsJobs, cMaxPhysicsBarriers, num_threads);
 
 				// Create physics system
-				PhysicsSystem physics_system = new PhysicsSystem();
+				PhysicsSystem physics_system=new PhysicsSystem();
 				physics_system.init(10240, 0, 65536, 20480, broad_phase_layer_interface, object_vs_broadphase_layer_filter, object_vs_object_layer_filter);
 
 				// Start test scene
@@ -255,11 +254,11 @@ public static void main(String[] argv) throws IOException
 				if (disable_sleep)
 				{
 					final BodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
-					BodyIdVector body_ids = new BodyIdVector();
+					BodyIdVector body_ids=new BodyIdVector();
 					physics_system.getBodies(body_ids);
 					for (BodyId id : body_ids.toList())
 					{
-						BodyLockWrite lock = new BodyLockWrite(bli, id);
+						BodyLockWrite lock=new BodyLockWrite(bli, id);
 						if (lock.succeeded())
 						{
 							Body body = lock.getBody();
@@ -279,26 +278,26 @@ public static void main(String[] argv) throws IOException
 				if (enable_debug_renderer) {
 					String fileName = "performance_test_" + tag + ".jor";
 					int mode = StreamOutWrapper.out() | StreamOutWrapper.binary() | StreamOutWrapper.trunc();
-					StreamOutWrapper renderer_stream = new StreamOutWrapper(fileName, mode);
-					renderer = new DebugRendererRecorder(renderer_stream);
-				} // JPH_DEBUG_RENDERER
+					StreamOutWrapper renderer_stream=new StreamOutWrapper(fileName, mode);
+					renderer=new DebugRendererRecorder(renderer_stream);
+				}// JPH_DEBUG_RENDERER
 
 				// Open per frame timing output
-				Writer per_frame_file = null;
+				Writer per_frame_file=null;
 				if (enable_per_frame_recording)
 				{
-					per_frame_file = new BufferedWriter(new FileWriter(("per_frame_" + tag + ".csv"), false));
+					per_frame_file=new BufferedWriter(new FileWriter(("per_frame_" + tag + ".csv"), false));
 					per_frame_file.append("Frame, Time (ms)" + endl);
 				}
 
-				DataOutputStream record_state_file = null;
-				DataInputStream validate_state_file = null;
+				DataOutputStream record_state_file=null;
+				DataInputStream validate_state_file=null;
 				if (record_state)
-					record_state_file = new DataOutputStream(new FileOutputStream("state_" + motion_quality_str.toLowerCase() + ".bin", false));
+					record_state_file=new DataOutputStream(new FileOutputStream("state_" + motion_quality_str.toLowerCase() + ".bin", false));
 				else if (validate_state)
-					validate_state_file = new DataInputStream(new FileInputStream("state_" + motion_quality_str.toLowerCase() + ".bin"));
+					validate_state_file=new DataInputStream(new FileInputStream("state_" + motion_quality_str.toLowerCase() + ".bin"));
 
-				long total_duration = 0;
+				long total_duration=0;
 
 				// Step the world for a fixed amount of iterations
 				for (int iterations = 0; iterations < max_iterations; ++iterations)
@@ -329,7 +328,7 @@ public static void main(String[] argv) throws IOException
 
 					// Record time taken this iteration
 					if (enable_per_frame_recording)
-						per_frame_file.append(iterations + ", " + (1.0e-6 * duration) + endl);
+						per_frame_file .append( iterations + ", " + (1.0e-6 * duration) + endl);
 
 					// Dump profile information every 100 iterations
 					if (enable_profiler && iterations % 100 == 0)
@@ -340,14 +339,14 @@ public static void main(String[] argv) throws IOException
 					if (record_state)
 					{
 						// Record state
-						StateRecorderImpl recorder = new StateRecorderImpl();
+						StateRecorderImpl recorder=new StateRecorderImpl();
 						physics_system.saveState(recorder);
 
 						// Write to file
 						byte[] data = recorder.getData();
 						int size = data.length;
-						record_state_file.writeInt(size);
-						record_state_file.write(data);
+						record_state_file.writeInt(size );
+						record_state_file.write(data );
 					}
 					else if (validate_state)
 					{
@@ -357,7 +356,7 @@ public static void main(String[] argv) throws IOException
                                                 validate_state_file.readFully(data);
 
 						// Copy to validator
-						StateRecorderImpl validator = new StateRecorderImpl();
+						StateRecorderImpl validator=new StateRecorderImpl();
 						validator.writeBytes(data, size);
 
 						// Validate state
@@ -367,11 +366,11 @@ public static void main(String[] argv) throws IOException
 
 				if (implementsDeterminismLog()) {
 					final BodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
-					BodyIdVector body_ids = new BodyIdVector();
+					BodyIdVector body_ids=new BodyIdVector();
 					physics_system.getBodies(body_ids);
 					for (BodyId id : body_ids.toList())
 					{
-						BodyLockRead lock = new BodyLockRead(bli, id);
+						BodyLockRead lock=new BodyLockRead(bli, id);
 						final Body body = lock.getBody();
 						if (!body.isStatic())
 							detLog(id + ": p: " + body.getPosition() + " r: " + body.getRotation() + " v: " + body.getLinearVelocity() + " w: " + body.getAngularVelocity());
@@ -382,7 +381,7 @@ public static void main(String[] argv) throws IOException
 				// Calculate hash of all positions and rotations of the bodies
 				long hash = hashBytes(0L, 0); // Ensure we start with the proper seed
 				BodyInterface bi = physics_system.getBodyInterfaceNoLock();
-				BodyIdVector body_ids = new BodyIdVector();
+				BodyIdVector body_ids=new BodyIdVector();
 				physics_system.getBodies(body_ids);
 				for (BodyId id : body_ids.toList())
 				{

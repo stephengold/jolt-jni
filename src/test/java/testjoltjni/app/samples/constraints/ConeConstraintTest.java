@@ -32,6 +32,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/ConeConstraintTest.cpp
  */
 public class ConeConstraintTest extends Test{
+
 public void Initialize()
 {
 	// Floor
