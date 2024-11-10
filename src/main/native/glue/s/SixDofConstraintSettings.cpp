@@ -530,6 +530,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
+ * Method:    setMotorSettings
+ * Signature: (JIJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_setMotorSettings
+  (JNIEnv *, jclass, jlong constraintSettingsVa, jint dofIndex, jlong motorSettingsVa) {
+    SixDOFConstraintSettings * const pConstraintSettings
+            = reinterpret_cast<SixDOFConstraintSettings *> (constraintSettingsVa);
+    const MotorSettings * const pMotorSettings
+            = reinterpret_cast<MotorSettings *> (motorSettingsVa);
+    pConstraintSettings->mMotorSettings[dofIndex] = *pMotorSettings;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
  * Method:    setPosition1
  * Signature: (JDDD)V
  */

@@ -501,6 +501,31 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the motor settings for the specified degree of freedom. (native
+     * attribute: mMotorSettings)
+     *
+     * @param dof which DOF (not null)
+     * @param motorSettings the settings to copy (not null, not affected)
+     */
+    public void setMotorSettings(EAxis dof, MotorSettings motorSettings) {
+        int dofIndex = dof.ordinal();
+        setMotorSettings(dofIndex, motorSettings);
+    }
+
+    /**
+     * Alter the motor settings for the specified degree of freedom. (native
+     * attribute: mMotorSettings)
+     *
+     * @param dofIndex which DOF (&ge;0, &lt;6)
+     * @param motorSettings the settings to copy (not null, not affected)
+     */
+    public void setMotorSettings(int dofIndex, MotorSettings motorSettings) {
+        long constraintSettingsVa = va();
+        long motorSettingsVa = motorSettings.va();
+        setMotorSettings(constraintSettingsVa, dofIndex, motorSettingsVa);
+    }
+
+    /**
      * Alter the constraint location for body 1. (native attribute: mPosition1)
      *
      * @param location the desired location (not null, unaffected,
@@ -643,6 +668,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static void setMaxFriction(
             long settingsVa, int dofIndex, float friction);
+
+    native private static void setMotorSettings(
+            long constraintSettingsVa, int dofIndex, long motorSettingsVa);
 
     native private static void setPosition1(
             long settingsVa, double x, double y, double z);
