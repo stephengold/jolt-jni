@@ -21,30 +21,37 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.template.Ref;
+
 /**
- * Settings used to construct a {@code TwoBodyConstraint}.
+ * A counted reference to a {@code TwoBodyConstraintSettings} object. (native
+ * type: {@code Ref<TwoBodyConstraintSettings>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class TwoBodyConstraintSettings extends ConstraintSettings {
+final public class TwoBodyConstraintSettingsRef extends Ref {
     // *************************************************************************
     // constructors
 
     /**
-     * Instantiate settings with no native object assigned.
+     * Instantiate an empty reference.
      */
-    TwoBodyConstraintSettings() {
+    public TwoBodyConstraintSettingsRef() {
+        long refVa = createEmpty();
+        setVirtualAddress(refVa, () -> free(refVa));
     }
 
     /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
+     * Instantiate a reference with the specified native object assigned.
      *
-     * @param settingsVa the virtual address of the native object to assign (not
+     * @param refVa the virtual address of the native object to assign (not
      * zero)
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
-    TwoBodyConstraintSettings(long settingsVa) {
-        super(settingsVa);
+    TwoBodyConstraintSettingsRef(long refVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(refVa) : null;
+        setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
@@ -57,37 +64,71 @@ abstract public class TwoBodyConstraintSettings extends ConstraintSettings {
      * @return a new constraint
      */
     public TwoBodyConstraint create(Body body1, Body body2) {
-        long settingsVa = va();
+        long settingsVa = targetVa();
         long body1Va = body1.va();
         long body2Va = body2.va();
-        long constraintVa = createConstraint(settingsVa, body1Va, body2Va);
+        long constraintVa = TwoBodyConstraintSettings.createConstraint(
+                settingsVa, body1Va, body2Va);
         TwoBodyConstraint result
                 = (TwoBodyConstraint) Constraint.newConstraint(constraintVa);
 
         return result;
     }
     // *************************************************************************
-    // ConstraintSettings methods
+    // Ref methods
 
     /**
-     * Create a counted reference to the native {@code ConstraintSettings}.
+     * Temporarily access the referenced {@code TwoBodyConstraintSettings}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public TwoBodyConstraintSettings getPtr() {
+        long settingsVa = targetVa();
+        TwoBodyConstraintSettings result
+                = (TwoBodyConstraintSettings) ConstraintSettings
+                        .newConstraintSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the address of the native {@code TwoBodyConstraintSettings}. No
+     * objects are affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
+
+        return result;
+    }
+
+    /**
+     * Create another counted reference to the native
+     * {@code TwoBodyConstraintSettings}.
      *
      * @return a new JVM object with a new native object assigned
      */
     @Override
     public TwoBodyConstraintSettingsRef toRef() {
-        long settingsVa = va();
-        long refVa = toRef(settingsVa);
+        long refVa = va();
+        long copyVa = copy(refVa);
         TwoBodyConstraintSettingsRef result
-                = new TwoBodyConstraintSettingsRef(refVa, true);
+                = new TwoBodyConstraintSettingsRef(copyVa, true);
 
         return result;
     }
     // *************************************************************************
-    // native methods
+    // native private methods
 
-    native static long createConstraint(
-            long settingsVa, long body1Va, long body2Va);
+    native private static long copy(long refVa);
 
-    native private static long toRef(long settingsVa);
+    native private static long createEmpty();
+
+    native private static void free(long refVa);
+
+    native private static long getPtr(long refVa);
 }

@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
+import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
@@ -306,7 +307,7 @@ abstract public class ConstraintSettings
      * @return a new JVM object with a new native object assigned
      */
     @Override
-    public ConstraintSettingsRef toRef() {
+    public Ref toRef() {
         long settingsVa = va();
         long refVa = toRef(settingsVa);
         ConstraintSettingsRef result = new ConstraintSettingsRef(refVa, true);

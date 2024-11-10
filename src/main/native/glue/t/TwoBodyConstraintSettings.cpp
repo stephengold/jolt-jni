@@ -25,9 +25,18 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Constraints/TwoBodyConstraint.h"
+
 #include "auto/com_github_stephengold_joltjni_TwoBodyConstraintSettings.h"
+#include "auto/com_github_stephengold_joltjni_TwoBodyConstraintSettingsRef.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+IMPLEMENT_REF(TwoBodyConstraintSettings,
+  Java_com_github_stephengold_joltjni_TwoBodyConstraintSettingsRef_copy,
+  Java_com_github_stephengold_joltjni_TwoBodyConstraintSettingsRef_createEmpty,
+  Java_com_github_stephengold_joltjni_TwoBodyConstraintSettingsRef_free,
+  Java_com_github_stephengold_joltjni_TwoBodyConstraintSettingsRef_getPtr)
 
 /*
  * Class:     com_github_stephengold_joltjni_TwoBodyConstraintSettings
@@ -41,5 +50,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TwoBodyConstraintSet
     Body * const pBody1 = reinterpret_cast<Body *> (body1Va);
     Body * const pBody2 = reinterpret_cast<Body *> (body2Va);
     TwoBodyConstraint * const pResult = pSettings->Create(*pBody1, *pBody2);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TwoBodyConstraintSettings
+ * Method:    toRef
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TwoBodyConstraintSettings_toRef
+  (JNIEnv *, jclass, jlong settingsVa) {
+    TwoBodyConstraintSettings * const pSettings
+            = reinterpret_cast<TwoBodyConstraintSettings *> (settingsVa);
+    Ref<TwoBodyConstraintSettings> * const pResult
+            = new Ref<TwoBodyConstraintSettings>(pSettings);
+    TRACE_NEW("Ref<TwoBodyConstraintSettings>", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
