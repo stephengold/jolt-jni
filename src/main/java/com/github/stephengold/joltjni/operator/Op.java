@@ -508,6 +508,19 @@ final public class Op {
     }
 
     /**
+     * Scale the left argument by the right argument. (native operator: binary
+     * {@code *=})
+     *
+     * @param left the accumulating vector (not null, modified)
+     * @param right the scale factor to apply (not null, unaffected)
+     */
+    public static void starEquals(Vec3 left, float right) {
+        left.setX(left.getX() * right);
+        left.setY(left.getY() * right);
+        left.setZ(left.getZ() * right);
+    }
+
+    /**
      * Return the component-wise difference of the specified vectors. (native
      * operator: binary {@code -})
      *
