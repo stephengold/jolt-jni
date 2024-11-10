@@ -312,10 +312,10 @@ final public class Vec3 implements Vec3Arg {
      * @return a new unit vector
      */
     public static Vec3 sUnitSpherical(float theta, float phi) {
-        float sinTheta = (float) Math.sin(theta);
-        float vx = sinTheta * (float) Math.cos(phi);
-        float vy = sinTheta * (float) Math.sin(phi);
-        float vz = (float) Math.cos(theta);
+        float sinTheta = Jolt.sin(theta);
+        float vx = sinTheta * Jolt.cos(phi);
+        float vy = sinTheta * Jolt.sin(phi);
+        float vz = Jolt.cos(theta);
         Vec3 result = new Vec3(vx, vy, vz);
 
         return result;
@@ -402,10 +402,10 @@ final public class Vec3 implements Vec3Arg {
     @Override
     public Vec3 getNormalizedPerpendicular() {
         if (Math.abs(x) > Math.abs(y)) {
-            float len = (float) Math.sqrt(x * x + z * z);
+            float len = Jolt.sqrt(x * x + z * z);
             return new Vec3(z / len, 0f, -x / len);
         } else {
-            float len = (float) Math.sqrt(y * y + z * z);
+            float len = Jolt.sqrt(y * y + z * z);
             return new Vec3(0f, z / len, -y / len);
         }
     }
@@ -509,7 +509,7 @@ final public class Vec3 implements Vec3Arg {
     @Override
     public float length() {
         float lengthSq = lengthSq();
-        float result = (float) Math.sqrt(lengthSq);
+        float result = Jolt.sqrt(lengthSq);
 
         return result;
     }
@@ -554,7 +554,7 @@ final public class Vec3 implements Vec3Arg {
         if (lengthSq == 0f) {
             result = new Vec3(zeroValue);
         } else {
-            float length = (float) Math.sqrt(lengthSq);
+            float length = Jolt.sqrt(lengthSq);
             if (length == 0f) {
                 result = new Vec3(zeroValue);
             } else {

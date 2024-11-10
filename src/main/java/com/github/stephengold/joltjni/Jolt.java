@@ -71,6 +71,14 @@ final public class Jolt {
     native public static String buildType();
 
     /**
+     * Return the cosine of the specified single-precision angle.
+     *
+     * @param angle the angle (in radians)
+     * @return the cosine
+     */
+    native public static float cos(float angle);
+
+    /**
      * Convert the specified angle from degrees to radians.
      *
      * @param degrees the angle to convert (in degrees)
@@ -94,6 +102,16 @@ final public class Jolt {
      * @param message (not null)
      */
     native public static void detLog(String message);
+
+    /**
+     * Return the remainder when {@code numerator} is divided by
+     * {@code denominator}.
+     *
+     * @param numerator the numerator
+     * @param denominator the denominator
+     * @return the remainder (with the same sign as {@code numerator})
+     */
+    native public static float fmod(float numerator, float denominator);
 
     /**
      * Return a string containing important configuration settings.
@@ -337,6 +355,22 @@ final public class Jolt {
         float result = (input < 0) ? -1f : 1f;
         return result;
     }
+
+    /**
+     * Return the sine of the specified single-precision angle.
+     *
+     * @param angle the angle (in radians)
+     * @return the sine
+     */
+    native public static float sin(float angle);
+
+    /**
+     * Return the square root of the specified single-precision value.
+     *
+     * @param angle the angle (in radians)
+     * @return the cosine
+     */
+    native public static float sqrt(float angle);
 
     /**
      * Return the square of the specified single-precision value.

@@ -57,6 +57,17 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_buildType
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    cos
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_cos
+  (JNIEnv *, jclass, jfloat angle) {
+    float result = std::cos(angle);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    destroyFactory
  * Signature: ()V
  */
@@ -89,6 +100,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_detLog
         gWarnDetLogIneffective = false;
     }
 #endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    fmod
+ * Signature: (FF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_fmod
+  (JNIEnv *, jclass, jfloat numerator, jfloat denominator) {
+    float result = std::fmod(numerator, denominator);
+    return result;
 }
 
 /*
@@ -313,6 +335,28 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_setTraceAllocati
 #else
     Trace("Jolt.setTraceAllocations() has no effect in a Release native library.");
 #endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    sin
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_sin
+  (JNIEnv *, jclass, jfloat angle) {
+    float result = std::sin(angle);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    sqrt
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_sqrt
+  (JNIEnv *, jclass, jfloat value) {
+    float result = std::sqrt(value);
+    return result;
 }
 
 /*
