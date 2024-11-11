@@ -771,7 +771,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     native static void postSimulation(
             long characterVa, float maxSeparation, boolean lockBodies);
 
-    native private static void removeFromPhysicsSystem(
+    native static void removeFromPhysicsSystem(
             long characterVa, boolean lockBodies);
 
     native private static void setLayer(

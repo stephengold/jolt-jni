@@ -121,6 +121,26 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
+     * Remove the character from its {@code PhysicsSystem} using the locking
+     * body interface.
+     */
+    public void removeFromPhysicsSystem() {
+        removeFromPhysicsSystem(true);
+    }
+
+    /**
+     * Remove the character from its {@code PhysicsSystem}.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void removeFromPhysicsSystem(boolean lockBodies) {
+        long characterVa = targetVa();
+        com.github.stephengold.joltjni.Character.removeFromPhysicsSystem(
+                characterVa, lockBodies);
+    }
+
+    /**
      * Restore the character's state from the specified recorder.
      *
      * @param recorder the recorder to restore from (not null)
