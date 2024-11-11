@@ -41,12 +41,6 @@ public class Wheel extends NonCopyable {
     // constructors
 
     /**
-     * Instantiate with no native object assigned.
-     */
-    Wheel() {
-    }
-
-    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param wheelVa the virtual address of the native object to assign (not
