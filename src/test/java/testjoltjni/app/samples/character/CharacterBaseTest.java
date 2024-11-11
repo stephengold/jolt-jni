@@ -167,17 +167,17 @@ public void Initialize()
 		break;
 	}
 
-	if (sSceneName.equals( "PerlinMesh") )
+	if (sSceneName.equals( "PerlinMesh")  )
 	{
 		// Default terrain
 		CreateMeshTerrain();
 	}
-	else if (sSceneName.equals( "PerlinHeightField") )
+	else if (sSceneName.equals( "PerlinHeightField")  )
 	{
 		// Default terrain
 		CreateHeightFieldTerrain();
 	}
-	else if (sSceneName.equals( "InitiallyIntersecting") )
+	else if (sSceneName.equals( "InitiallyIntersecting")  )
 	{
 		CreateFloor();
 
@@ -192,7 +192,7 @@ public void Initialize()
 					mBodyInterface.createAndAddBody(settings, EActivation.DontActivate);
 				}
 	}
-	else if (sSceneName.equals( "ObstacleCourse") )
+	else if (sSceneName.equals( "ObstacleCourse")  )
 	{
 		// Default terrain
 		CreateFloor(350.0f);
@@ -328,7 +328,7 @@ public void Initialize()
 			for (int i = 0; i < 4; ++i)
 			{
 				mRampBlocks.pushBack(mBodyInterface.createAndAddBody(bcs, EActivation.Activate));
-				bcs.setPosition(Op.add(bcs.getPosition(), cRampBlocksDelta));
+				bcs.setPosition(Op.add(bcs.getPosition() , cRampBlocksDelta));
 			}
 		}
 
@@ -649,7 +649,7 @@ void CharacterBaseTest::ProcessInput(const ProcessInputParams &inParams)
 }
 */
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Update scene time
 	mTime += inParams.mDeltaTime;

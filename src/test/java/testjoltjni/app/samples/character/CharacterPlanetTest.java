@@ -40,8 +40,8 @@ final float cCharacterHeightStanding = 1.35f;
 final float cCharacterRadiusStanding = 0.3f;
 final float cJumpSpeed = 4.0f;
 CharacterVirtualRef mCharacter=new CharacterVirtualRef();
-Vec3 mDesiredVelocity = Vec3.sZero();
-Vec3 mDesiredVelocityWS = Vec3.sZero();
+Vec3 mDesiredVelocity=Vec3.sZero();
+Vec3 mDesiredVelocityWS=Vec3.sZero();
 boolean mJump = false;
 
 public void Initialize()
@@ -110,7 +110,7 @@ void ProcessInput(const ProcessInputParams &inParams)
 }
 */
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Calculate up vector based on position on planet surface
 	Vec3 old_up = mCharacter.getUp();
@@ -209,7 +209,7 @@ void RestoreInputState(StateRecorder inStream)
 	mJump=inStream.readBoolean(mJump);
 }
 
-void OnStep(PhysicsStepListenerContext inContext)
+void OnStep( PhysicsStepListenerContext inContext)
 {
 	// Use the length of the global gravity vector
 	float gravity = inContext.getPhysicsSystem().getGravity().length();
@@ -217,12 +217,12 @@ void OnStep(PhysicsStepListenerContext inContext)
 	// We don't need to lock the bodies since they're already locked in the OnStep callback.
 	// Note that this means we're responsible for avoiding race conditions with other step listeners while accessing bodies.
 	// We know that this is safe because in this demo there's only one step listener.
-	BodyLockInterface body_interface = inContext.getPhysicsSystem().getBodyLockInterfaceNoLock();
+	 BodyLockInterface body_interface = inContext.getPhysicsSystem().getBodyLockInterfaceNoLock();
 
 	// Loop over all active bodies
-	BodyIdVector body_ids = new BodyIdVector();
+	BodyIdVector body_ids=new BodyIdVector();
 	inContext.getPhysicsSystem().getActiveBodies(EBodyType.RigidBody, body_ids);
-	for (ConstBodyId id : body_ids.toList())
+	for ( ConstBodyId id : body_ids.toList())
 	{
 		BodyLockWrite lock = new BodyLockWrite(body_interface, id);
 		if (lock.succeeded())
@@ -236,9 +236,9 @@ void OnStep(PhysicsStepListenerContext inContext)
 	}
 }
 
-void OnContactAdded(ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2, ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+void OnContactAdded( ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2,  ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
 {
 	// We don't want the spheres to push the player character
-	ioSettings.setCanPushCharacter(false);
+	ioSettings.setCanPushCharacter( false);
 }
 }

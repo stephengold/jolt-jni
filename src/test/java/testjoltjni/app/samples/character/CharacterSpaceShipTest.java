@@ -103,7 +103,7 @@ void CharacterSpaceShipTest::ProcessInput(const ProcessInputParams &inParams)
 }
 */
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Update scene time
 	mTime += inParams.mDeltaTime;

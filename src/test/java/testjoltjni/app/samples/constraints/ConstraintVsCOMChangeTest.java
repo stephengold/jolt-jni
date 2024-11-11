@@ -93,7 +93,7 @@ public void Initialize()
 	}
 }
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Increment time
 	mTime += inParams.mDeltaTime;

@@ -25,18 +25,17 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
-
 /**
  * A line-for-line Java translation of the Jolt Physics character test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Character/CharacterTest.cpp
  */
-
 public class CharacterTest extends CharacterBaseTest{
 static final float cCollisionTolerance = 0.05f;
 CharacterRef mCharacter;
 RVec3 GetCharacterPosition(){return mCharacter.getPosition();}
+
 
 public void Cleanup()
 {
@@ -54,12 +53,12 @@ public void Initialize()
 	settings.setLayer ( Layers.MOVING);
 	settings.setShape ( mStandingShape);
 	settings.setFriction ( 0.5f);
-	settings.setSupportingVolume(new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
+	settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
 	mCharacter = new com.github.stephengold.joltjni.Character(settings, RVec3.sZero(), Quat.sIdentity(), 0, mPhysicsSystem).toRef();
 	mCharacter.addToPhysicsSystem(EActivation.Activate);
 }
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	super.PrePhysicsUpdate(inParams);
 
@@ -90,7 +89,7 @@ void RestoreState(StateRecorder inStream)
 	mCharacter.restoreState(inStream);
 
 	boolean is_standing = mCharacter.getShape() == mStandingShape.getPtr(); // Initialize variable for validation mode
-	is_standing = inStream.readBoolean(is_standing);
+	is_standing=inStream.readBoolean(is_standing);
 	mCharacter.setShape(is_standing? mStandingShape : mCrouchingShape, Float.MAX_VALUE);
 }
 

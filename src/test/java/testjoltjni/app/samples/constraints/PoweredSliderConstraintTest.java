@@ -74,7 +74,7 @@ public void Initialize()
 	mPhysicsSystem.addConstraint(mConstraint);
 }
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	MotorSettings motor_settings = mConstraint.getMotorSettings();
 	motor_settings.setForceLimit(sMaxMotorAcceleration / mBody2.getMotionProperties().getInverseMass()); // F = m * a

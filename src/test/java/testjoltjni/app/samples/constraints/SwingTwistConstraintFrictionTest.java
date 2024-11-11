@@ -77,7 +77,7 @@ public void Initialize()
 	mPhysicsSystem.addConstraint(mConstraint);
 }
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	mTime += inParams.mDeltaTime;
 

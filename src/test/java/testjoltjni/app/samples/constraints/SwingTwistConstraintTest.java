@@ -85,7 +85,7 @@ public void Initialize()
 	}
 }
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	for (TwoBodyConstraintRef cr : mConstraints)
 	{
