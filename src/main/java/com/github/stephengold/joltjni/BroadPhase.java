@@ -103,7 +103,7 @@ abstract public class BroadPhase extends BroadPhaseQuery {
      *
      * @param bodyIds the IDs of the bodies to be added (not null)
      * @return a handle to be passed to {@code addBodiesFinalize()} or
-     * {@code addBodiesFinalize()}
+     * {@code addBodiesAbort()}
      */
     public long addBodiesPrepare(BodyId... bodyIds) {
         long result = addBodiesPrepare(bodyIds, bodyIds.length);
@@ -117,7 +117,7 @@ abstract public class BroadPhase extends BroadPhaseQuery {
      * shuffled)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @return a handle to be passed to {@code addBodiesFinalize()} or
-     * {@code addBodiesFinalize()}
+     * {@code addBodiesAbort()}
      */
     public long addBodiesPrepare(BodyId[] bodyIds, int numBodies) {
         long phaseVa = va();
