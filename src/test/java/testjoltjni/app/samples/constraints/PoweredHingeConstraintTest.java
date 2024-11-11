@@ -31,11 +31,11 @@ import testjoltjni.app.samples.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/PoweredHingeConstraintTest.cpp
  */
 public class PoweredHingeConstraintTest extends Test{
-float sMaxAngularAcceleration = Jolt.degreesToRadians(3600.0f);
-float sMaxFrictionAngularAcceleration = 0.0f;
-float sFrequency = 2.0f;
-float sDamping = 1.0f;
-HingeConstraint mConstraint = null;
+float sMaxAngularAcceleration=Jolt.degreesToRadians(3600);
+float sMaxFrictionAngularAcceleration;
+float sFrequency=2;
+float sDamping=1;
+HingeConstraint mConstraint;
 float mInertiaBody2AsSeenFromConstraint;
 
 public void Initialize()

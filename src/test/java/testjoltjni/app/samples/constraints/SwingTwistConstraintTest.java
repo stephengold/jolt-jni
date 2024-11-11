@@ -33,10 +33,10 @@ import static com.github.stephengold.joltjni.Jolt.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/SwingTwistConstraintTest.cpp
  */
 public class SwingTwistConstraintTest extends Test{
-float sNormalHalfConeAngle=Jolt.degreesToRadians(60);
-float sPlaneHalfConeAngle=Jolt.degreesToRadians(20);
-float sTwistMinAngle=Jolt.degreesToRadians(-10);
-float sTwistMaxAngle=Jolt.degreesToRadians(20);
+float sNormalHalfConeAngle=degreesToRadians(60);
+float sPlaneHalfConeAngle=degreesToRadians(20);
+float sTwistMinAngle=degreesToRadians(-10);
+float sTwistMaxAngle=degreesToRadians(20);
 List<TwoBodyConstraintRef>mConstraints=new ArrayList<>();
 
 public void Initialize()
@@ -54,13 +54,13 @@ public void Initialize()
 		group_filter.disableCollision(i, i + 1);
 
 	Body prev = null;
-	Quat rotation = Quat.sRotation(Vec3.sAxisZ(), 0.5f * Jolt.JPH_PI);
+	Quat rotation = Quat.sRotation(Vec3.sAxisZ(), 0.5f * JPH_PI);
 	RVec3 position=new RVec3(0, 25, 0);
 	for (int i = 0; i < cChainLength; ++i)
 	{
 		Op.plusEquals(position ,new Vec3(2.0f * half_cylinder_height, 0, 0));
 
-		Body segment = mBodyInterface.createBody(new BodyCreationSettings(new CapsuleShape(half_cylinder_height, 0.5f), position, Op.multiply(Quat.sRotation(Vec3.sAxisX(), 0.25f * Jolt.JPH_PI * i) , rotation), i == 0? EMotionType.Static : EMotionType.Dynamic, i == 0? Layers.NON_MOVING : Layers.MOVING));
+		Body segment = mBodyInterface.createBody(new BodyCreationSettings(new CapsuleShape(half_cylinder_height, 0.5f), position, Op.multiply(Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI * i) , rotation), i == 0? EMotionType.Static : EMotionType.Dynamic, i == 0? Layers.NON_MOVING : Layers.MOVING));
 		segment.setCollisionGroup(new CollisionGroup(group_filter, 0, (i)));
 		mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 		if (i != 0)

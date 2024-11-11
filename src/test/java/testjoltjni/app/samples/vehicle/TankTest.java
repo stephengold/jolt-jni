@@ -37,19 +37,15 @@ public class TankTest extends VehicleTest{
 Body mTankBody;
 Body mTurretBody;
 Body mBarrelBody;
+boolean mFire;
+float mBarrelPitch, mBrake, mForward, mReloadTime, mTurretHeading;
 VehicleConstraint mVehicleConstraint;
 HingeConstraint mTurretHinge;
 HingeConstraint mBarrelHinge;
-float mReloadTime = 0.0f;
-RVec3 mCameraPivot = RVec3.sZero();
-float mForward = 0.0f;
-float mPreviousForward = 1.0f;
+RVec3 mCameraPivot=RVec3.sZero();
+float mPreviousForward=1;
 float mLeftRatio=1;
 float mRightRatio=1;
-float mBrake = 0.0f;
-float mTurretHeading = 0.0f;
-float mBarrelPitch = 0.0f;
-boolean mFire = false;
 
 public void Initialize()
 {

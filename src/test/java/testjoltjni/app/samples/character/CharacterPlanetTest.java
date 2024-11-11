@@ -35,14 +35,14 @@ import static com.github.stephengold.joltjni.Jolt.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Character/CharacterPlanetTest.cpp
  */
 public class CharacterPlanetTest extends Test{
-final float cPlanetRadius = 20.0f;
+float cPlanetRadius=20;
 final float cCharacterHeightStanding = 1.35f;
 final float cCharacterRadiusStanding = 0.3f;
-final float cJumpSpeed = 4.0f;
+float cJumpSpeed=4;
 CharacterVirtualRef mCharacter=new CharacterVirtualRef();
 Vec3 mDesiredVelocity=Vec3.sZero();
 Vec3 mDesiredVelocityWS=Vec3.sZero();
-boolean mJump = false;
+boolean mJump;
 
 public void Initialize()
 {
