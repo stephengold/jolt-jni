@@ -31,11 +31,12 @@ public class WheelTv extends Wheel {
     // constructors
 
     /**
-     * Instantiate with no native object assigned.
-     * <p>
-     * This no-arg constructor was made explicit to avoid javadoc warnings from
-     * JDK 18+.
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param wheelVa the virtual address of the native object to assign (not
+     * zero)
      */
-    WheelTv() {
+    WheelTv(long wheelVa) {
+        super(wheelVa);
     }
 }

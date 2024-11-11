@@ -75,6 +75,35 @@ public class Wheel extends NonCopyable {
         WheelSettings result = (WheelSettings) settings.getPtr();
         return result;
     }
+
+    /**
+     * Instantiate a {@code Wheel} from its virtual address.
+     *
+     * @param wheelVa the virtual address of the native object, or zero
+     * @param ordinal the type of {@code VehicleController}
+     * @return a new JVM object, or {@code null} if {@code wheelVa} was
+     * zero
+     */
+    public static Wheel newWheel(long wheelVa, int ordinal) {
+        if (wheelVa == 0L) {
+            return null;
+        }
+
+        Wheel result;
+        switch (ordinal) {
+            case VehicleController.motorcycleType:
+            case VehicleController.wheeledVehicleType:
+                result = new WheelWv(wheelVa);
+                break;
+            case VehicleController.trackedVehicleType:
+                result = new WheelTv(wheelVa);
+                break;
+            default:
+                throw new IllegalArgumentException("ordinal = " + ordinal);
+        }
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
