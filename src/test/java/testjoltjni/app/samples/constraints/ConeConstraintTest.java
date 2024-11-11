@@ -61,7 +61,7 @@ public void Initialize()
 			segment.setCollisionGroup(new CollisionGroup(group_filter, j, i));
 			mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 
-			if (prev != null)
+			if (prev != nullptr)
 			{
 				ConeConstraintSettings settings=new ConeConstraintSettings();
 				settings.setPoint1 ( settings.setPoint2 ( Op.add(position ,new Vec3(-half_cylinder_height, 0, 0))));

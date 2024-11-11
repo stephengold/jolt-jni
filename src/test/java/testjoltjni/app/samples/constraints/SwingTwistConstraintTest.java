@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics swing-twist constraint test.
  * <p>
@@ -65,7 +66,7 @@ public void Initialize()
 		if (i != 0)
 			segment.setAllowSleeping(false);
 
-		if (prev != null)
+		if (prev != nullptr)
 		{
 			SwingTwistConstraintSettings settings = new SwingTwistConstraintSettings();
 			settings.setPosition1 ( settings.setPosition2 ( Op.add(position ,new Vec3(-half_cylinder_height, 0, 0))));

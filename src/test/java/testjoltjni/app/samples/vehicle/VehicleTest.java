@@ -212,7 +212,7 @@ void CreateBridge()
 		part.setFriction(1.0f);
 		mBodyInterface.addBody(part.getId(), EActivation.Activate);
 
-		if (prev_part != null)
+		if (prev_part != nullptr)
 		{
 			DistanceConstraintSettings dc=new DistanceConstraintSettings();
 			dc.setPoint1 ( Op.add(prev_pos , new Vec3(-part_half_size.getX(), 0, part_half_size.getZ())));

@@ -189,7 +189,7 @@ public static void main(  String[] argv)throws IOException
 	TempAllocatorImpl temp_allocator=new TempAllocatorImpl(32 * 1024 * 1024);
 
 	// Load the scene
-	if (scene == null)
+	if (scene == nullptr)
 		scene = create_ragdoll_scene();
 	if (!scene.Load())
 		System.exit( 1);
@@ -401,7 +401,7 @@ public static void main(  String[] argv)throws IOException
 				Trace("%s, %d, %f, %s", motion_quality_str, num_threads + 1, ((double)max_iterations) / (1.0e-9 * total_duration), hash_str);
 
 				// Check hash code
-				if (validate_hash != null && !hash_str.equals(validate_hash))
+				if (validate_hash != nullptr && !hash_str.equals(validate_hash))
 				{
 					Trace("Fail hash validation. Was: %s, expected: %s", hash_str, validate_hash);
 					System.exit(1);

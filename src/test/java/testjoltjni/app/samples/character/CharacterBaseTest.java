@@ -679,7 +679,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	}
 
 	// Animate character
-	if (mAnimatedCharacter != null)
+	if (mAnimatedCharacter != nullptr)
 		mAnimatedCharacter.setLinearVelocity(Op.multiply(sin(mTime) , cCharacterVelocity));
 
 	// Animate character virtual
@@ -778,10 +778,10 @@ void SaveState(StateRecorder inStream)
 	inStream.write(mRampBlocksTimeLeft);
 	inStream.write(mReversingVerticallyMovingVelocity);
 
-	if (mAnimatedCharacterVirtual != null)
+	if (mAnimatedCharacterVirtual != nullptr)
 		mAnimatedCharacterVirtual.saveState(inStream);
 
-	if (mAnimatedCharacterVirtualWithInnerBody != null)
+	if (mAnimatedCharacterVirtualWithInnerBody != nullptr)
 		mAnimatedCharacterVirtualWithInnerBody.saveState(inStream);
 }
 
@@ -791,10 +791,10 @@ void RestoreState(StateRecorder inStream)
 	mRampBlocksTimeLeft=inStream.readFloat(mRampBlocksTimeLeft);
 	mReversingVerticallyMovingVelocity=inStream.readFloat(mReversingVerticallyMovingVelocity);
 
-	if (mAnimatedCharacterVirtual != null)
+	if (mAnimatedCharacterVirtual != nullptr)
 		mAnimatedCharacterVirtual.restoreState(inStream);
 
-	if (mAnimatedCharacterVirtualWithInnerBody != null)
+	if (mAnimatedCharacterVirtualWithInnerBody != nullptr)
 		mAnimatedCharacterVirtualWithInnerBody.restoreState(inStream);
 }
 

@@ -151,7 +151,7 @@ public void Initialize()
 				}
 
 				// Attach to previous pillar
-				if (prev_pillars[i] != null)
+				if (prev_pillars[i] != nullptr)
 				{
 					FixedConstraintSettings constraint=new FixedConstraintSettings();
 					constraint.setAutoDetectPoint ( true);
