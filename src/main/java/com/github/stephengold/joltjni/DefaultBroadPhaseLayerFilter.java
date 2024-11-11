@@ -40,6 +40,7 @@ public class DefaultBroadPhaseLayerFilter extends BroadPhaseLayerFilter {
      */
     DefaultBroadPhaseLayerFilter(
             ConstObjectVsBroadPhaseLayerFilter pairFilter, int objectLayer) {
+        super(true);
         long pairFilterVa = pairFilter.targetVa();
         long filterVa = createFromPairFilter(pairFilterVa, objectLayer);
         setVirtualAddress(filterVa, true);

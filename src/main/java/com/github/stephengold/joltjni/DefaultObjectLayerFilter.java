@@ -40,6 +40,7 @@ public class DefaultObjectLayerFilter extends ObjectLayerFilter {
      */
     DefaultObjectLayerFilter(
             ConstObjectLayerPairFilter pairFilter, int objectLayer) {
+        super(true);
         long pairFilterVa = pairFilter.targetVa();
         long filterVa = createFromPairFilter(pairFilterVa, objectLayer);
         setVirtualAddress(filterVa, true);
