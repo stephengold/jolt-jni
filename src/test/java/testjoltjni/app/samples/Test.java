@@ -37,6 +37,7 @@ protected DebugRenderer mDebugRenderer;
 protected JobSystem mJobSystem;
 protected PhysicsSystem mPhysicsSystem;
 protected TempAllocator mTempAllocator;
+public void Cleanup(){}
 float GetWorldScale() { return 1.0f; }
 public void Initialize(){}
 public void PrePhysicsUpdate(PreUpdateParams params){}

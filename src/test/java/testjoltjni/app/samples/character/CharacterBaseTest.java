@@ -135,6 +135,11 @@ static RVec3Arg cCharacterVirtualPosition=new RVec3(-5.0f, 0, 3.0f);
 static RVec3Arg cCharacterVirtualWithInnerBodyPosition=new RVec3(-6.5f, 0, 3.0f);
 static Vec3Arg cCharacterVelocity=new Vec3(0, 0, 2);
 
+public void Cleanup()
+{
+	if (mAnimatedCharacter != nullptr)
+		mAnimatedCharacter.removeFromPhysicsSystem();
+}
 public void Initialize()
 {
 	// Create capsule shapes for all stances

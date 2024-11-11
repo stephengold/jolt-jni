@@ -38,6 +38,12 @@ static final float cCollisionTolerance = 0.05f;
 CharacterRef mCharacter;
 RVec3 GetCharacterPosition(){return mCharacter.getPosition();}
 
+public void Cleanup()
+{
+	mCharacter.removeFromPhysicsSystem();
+	super.Cleanup();
+}
+
 public void Initialize()
 {
 	super.Initialize();
