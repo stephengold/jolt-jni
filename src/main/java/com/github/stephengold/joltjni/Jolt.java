@@ -52,6 +52,10 @@ final public class Jolt {
      * value should match Jolt/Physics/PhysicsSettings.h
      */
     final public static int cMaxPhysicsJobs = 2_048;
+    /**
+     * to expedite translation of C++ code
+     */
+    final public static Object nullptr = null;
     // *************************************************************************
     // constructors
 
