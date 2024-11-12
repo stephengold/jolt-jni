@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.operator.Op;
 import java.util.List;
 import testjoltjni.app.samples.*;
+import static testjoltjni.app.samples.DebugRendererSP.*;
 /**
  * A line-for-line Java translation of the Jolt Physics broad-phase ray cast
  * test: a simple test that casts a ray through the broadphase.
@@ -69,7 +70,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 
 	// Draw results
 	for (int i = 0; i < num_hits; ++i)
-		DebugRendererSP.DrawMarkerSP(mDebugRenderer, ray.getPointOnRay(results[i].getFraction()), Color.sGreen, 10.0f);
-	DebugRendererSP.DrawLineSP(mDebugRenderer, ray.getOrigin(), Op.add(ray.getOrigin() , ray.getDirection()), Color.sRed);
+		DrawMarkerSP(mDebugRenderer, ray.getPointOnRay(results[i].getFraction()), Color.sGreen, 10.0f);
+	DrawLineSP(mDebugRenderer, ray.getOrigin(), Op.add(ray.getOrigin() , ray.getDirection()), Color.sRed);
 }
 }

@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.readonly.ConstBody;
 import java.util.List;
 import testjoltjni.TestUtils;
 import testjoltjni.app.samples.*;
-
+import static testjoltjni.app.samples.DebugRendererSP.*;
 public class BroadPhaseInsertionTest extends BroadPhaseTest{
 DefaultRandomEngine mRandomGenerator=new DefaultRandomEngine();
 int mCurrentBody;
@@ -106,9 +106,9 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	System.out.printf("Before update: %d results found%n", num_before);
 
 	// Draw results
-	DebugRendererSP.DrawLineSP(mDebugRenderer, ray.getOrigin(), Op.add(ray.getOrigin() , ray.getDirection()), Color.sRed);
+	DrawLineSP(mDebugRenderer, ray.getOrigin(), Op.add(ray.getOrigin() , ray.getDirection()), Color.sRed);
 	for (int i = 0; i < num_before; ++i)
-		DebugRendererSP.DrawMarkerSP(mDebugRenderer, ray.getPointOnRay(results_before[i].getFraction()), Color.sGreen, 10.0f);
+		DrawMarkerSP(mDebugRenderer, ray.getPointOnRay(results_before[i].getFraction()), Color.sGreen, 10.0f);
 
 	// Update the broadphase
 	mBroadPhase.optimize();
