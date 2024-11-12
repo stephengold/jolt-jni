@@ -23,6 +23,7 @@ package testjoltjni.app.samples.shapes;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics capsule-shape test.
  * <p>
@@ -42,7 +43,7 @@ public void Initialize()
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(big_capsule,new RVec3(0, 10, 0), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 
 	// Capsule on cylinder
-	mBodyInterface.createAndAddBody(new BodyCreationSettings(big_capsule,new RVec3(10, 10, 0), Quat.sRotation(Vec3.sAxisX(), 0.5f * Jolt.JPH_PI), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
+	mBodyInterface.createAndAddBody(new BodyCreationSettings(big_capsule,new RVec3(10, 10, 0), Quat.sRotation(Vec3.sAxisX(), 0.5f * JPH_PI), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 
 	ShapeRefC long_capsule = new CapsuleShape(5, 1).toRefC();
 
@@ -56,12 +57,12 @@ public void Initialize()
 			if ((i & 1)!=0)
 			{
 				position =new RVec3(-4.0f + 8.0f * j, 2.0f + 3.0f * i, -20.0f);
-				rotation = Quat.sRotation(Vec3.sAxisX(), 0.5f * Jolt.JPH_PI);
+				rotation = Quat.sRotation(Vec3.sAxisX(), 0.5f * JPH_PI);
 			}
 			else
 			{
 				position =new RVec3(0, 2.0f + 3.0f * i, -20.0f - 4.0f + 8.0f * j);
-				rotation = Quat.sRotation(Vec3.sAxisZ(), 0.5f * Jolt.JPH_PI);
+				rotation = Quat.sRotation(Vec3.sAxisZ(), 0.5f * JPH_PI);
 			}
 			mBodyInterface.createAndAddBody(new BodyCreationSettings(long_capsule, position, rotation, EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 		}

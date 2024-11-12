@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics swing-twist constraint friction test.
  * <p>
@@ -62,13 +63,13 @@ public void Initialize()
 	settings.setPosition1 ( settings.setPosition2 ( Op.add(body1_position ,new Vec3(0, -half_cylinder_height, 0))));
 	settings.setTwistAxis1 ( settings.setTwistAxis2 (new Vec3(0, -1, 0)));
 	settings.setPlaneAxis1 ( settings.setPlaneAxis2 (Vec3.sAxisX()));
-	settings.setNormalHalfConeAngle ( Jolt.degreesToRadians(90));
-	settings.setPlaneHalfConeAngle ( Jolt.degreesToRadians(90));
-	settings.setTwistMinAngle ( -Jolt.JPH_PI);
-	settings.setTwistMaxAngle ( Jolt.JPH_PI);
+	settings.setNormalHalfConeAngle ( degreesToRadians(90));
+	settings.setPlaneHalfConeAngle ( degreesToRadians(90));
+	settings.setTwistMinAngle ( -JPH_PI);
+	settings.setTwistMaxAngle ( JPH_PI);
 
 	float body2_inertia = Op.multiply(body2.getMotionProperties().getLocalSpaceInverseInertia().inversed3x3() , Vec3.sAxisY()).length();
-	final float max_angular_acceleration = Jolt.degreesToRadians(90.0f); // rad/s^2
+	final float max_angular_acceleration = degreesToRadians(90.0f); // rad/s^2
 	settings.setMaxFrictionTorque ( body2_inertia * max_angular_acceleration);
 
 	settings.setTwistMotorSettings ( settings.setSwingMotorSettings (new MotorSettings(10.0f, 2.0f)));
@@ -81,7 +82,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	mTime += inParams.mDeltaTime;
 
-	boolean pause = Jolt.fmod(mTime, 5.0f) > 2.5f;
+	boolean pause = fmod(mTime, 5.0f) > 2.5f;
 
 	if (pause)
 	{
@@ -92,7 +93,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	{
 		mConstraint.setSwingMotorState(EMotorState.Velocity);
 		mConstraint.setTwistMotorState(EMotorState.Velocity);
-		mConstraint.setTargetAngularVelocityCs(new Vec3(Jolt.degreesToRadians(180.0f), 0, 0));
+		mConstraint.setTargetAngularVelocityCs(new Vec3(degreesToRadians(180.0f), 0, 0));
 	}
 }
 

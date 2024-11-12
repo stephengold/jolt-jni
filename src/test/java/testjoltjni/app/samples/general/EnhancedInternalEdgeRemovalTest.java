@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics enhanced internal-edge removal test.
  * <p>
@@ -172,7 +173,7 @@ public void Initialize()
 		mLevelBall = mBodyInterface.createAndAddBody(level_ball, EActivation.Activate);
 
 		// Create a sloped plane
-		BodyCreationSettings slope_plane=new BodyCreationSettings(plane_mesh, new RVec3(10, 0, 50), Quat.sRotation(Vec3.sAxisX(), Jolt.degreesToRadians(45)), EMotionType.Static, Layers.NON_MOVING);
+		BodyCreationSettings slope_plane=new BodyCreationSettings(plane_mesh, new RVec3(10, 0, 50), Quat.sRotation(Vec3.sAxisX(), degreesToRadians(45)), EMotionType.Static, Layers.NON_MOVING);
 		slope_plane.setFriction ( 1);
 		mBodyInterface.createAndAddBody(slope_plane, EActivation.DontActivate);
 
@@ -208,6 +209,6 @@ public void Initialize()
 public void PrePhysicsUpdate(PreUpdateParams inParams)
 {
 	// Increase rotation speed of the ball on the flat plane
-	mBodyInterface.addTorque(mLevelBall, new Vec3(Jolt.JPH_PI * 4, 0, 0));
+	mBodyInterface.addTorque(mLevelBall, new Vec3(JPH_PI * 4, 0, 0));
 }
 }

@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.CameraState;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics powered swing-twist constraint test.
  * <p>
@@ -37,15 +38,15 @@ EMotorState sTwistMotorState=EMotorState.Velocity;
 float mInertiaBody2AsSeenFromConstraint;
 float sDamping=2;
 float sFrequency=10;
-float sMaxAngularAcceleration=Jolt.degreesToRadians(36000);
+float sMaxAngularAcceleration=degreesToRadians(36000);
 float sMaxFrictionAngularAcceleration;
-float sNormalHalfConeAngle=Jolt.degreesToRadians(60);
-float sPlaneHalfConeAngle=Jolt.degreesToRadians(45);
-float sTwistMinAngle=Jolt.degreesToRadians(-180);
-float sTwistMaxAngle=Jolt.degreesToRadians(180);
+float sNormalHalfConeAngle=degreesToRadians(60);
+float sPlaneHalfConeAngle=degreesToRadians(45);
+float sTwistMinAngle=degreesToRadians(-180);
+float sTwistMaxAngle=degreesToRadians(180);
 SwingTwistConstraint mConstraint;
 Vec3 sTargetOrientationCS=Vec3.sZero();
-Vec3 sTargetVelocityCS=new Vec3(Jolt.degreesToRadians(90),0,0);
+Vec3 sTargetVelocityCS=new Vec3(degreesToRadians(90),0,0);
 
 Vec3[]sBodyRotation = { Vec3.sZero(), Vec3.sZero() };
 

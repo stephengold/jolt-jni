@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics rack-and-pinion constraint test.
  * <p>
@@ -44,7 +45,7 @@ public void Initialize()
 	final float cRackLength = 10.0f;
 	final float cRackHalfHeight = 0.1f;
 	final float cRackHalfWidth = 0.05f;
-	final int cRackNumTeeth = (int)(cRackLength * cGearNumTeeth / (2.0f * Jolt.JPH_PI * cGearRadius));
+	final int cRackNumTeeth = (int)(cRackLength * cGearNumTeeth / (2.0f * JPH_PI * cGearRadius));
 
 	final float cToothThicknessBottom = 0.01f;
 	final float cToothThicknessTop = 0.005f;
@@ -74,12 +75,12 @@ public void Initialize()
 	gear_settings.addShape(Vec3.sZero(), Quat.sIdentity(), gear_cylinder);
 	for (int i = 0; i < cGearNumTeeth; ++i)
 	{
-		Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f * Jolt.JPH_PI * i / cGearNumTeeth);
+		Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f * JPH_PI * i / cGearNumTeeth);
 		gear_settings.addShape(Op.rotate(rotation ,new Vec3(cGearRadius, 0, 0)), rotation, tooth_settings);
 	}
 
 	RVec3 gear_initial_p=new RVec3(0, 2.0f, 0);
-	Quat gear_initial_r = Quat.sRotation(Vec3.sAxisX(), 0.5f * Jolt.JPH_PI);
+	Quat gear_initial_r = Quat.sRotation(Vec3.sAxisX(), 0.5f * JPH_PI);
 	Body gear = mBodyInterface.createBody(new BodyCreationSettings(gear_settings, gear_initial_p, gear_initial_r, EMotionType.Dynamic, Layers.MOVING));
 	mBodyInterface.addBody(gear.getId(), EActivation.Activate);
 
@@ -95,7 +96,7 @@ public void Initialize()
 		rack_settings.addShape(new Vec3(cRackHalfHeight, 0, -0.5f * cRackLength + (i + 0.5f) * cRackLength / cRackNumTeeth), Quat.sIdentity(), tooth_settings);
 
 	RVec3 slider_initial_p = Op.subtract(gear_initial_p ,new Vec3(0, cGearRadius + cRackHalfHeight + cToothHeight, 0));
-	Quat slider_initial_r = Op.multiply(Quat.sRotation(Vec3.sAxisZ(), 0.5f * Jolt.JPH_PI) , gear_initial_r);
+	Quat slider_initial_r = Op.multiply(Quat.sRotation(Vec3.sAxisZ(), 0.5f * JPH_PI) , gear_initial_r);
 	Body rack = mBodyInterface.createBody(new BodyCreationSettings(rack_settings, slider_initial_p, slider_initial_r, EMotionType.Dynamic, Layers.MOVING));
 	mBodyInterface.addBody(rack.getId(), EActivation.Activate);
 

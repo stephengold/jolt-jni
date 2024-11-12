@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics powered hinge-constraint test.
  * <p>
@@ -31,7 +32,7 @@ import testjoltjni.app.samples.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/PoweredHingeConstraintTest.cpp
  */
 public class PoweredHingeConstraintTest extends Test{
-float sMaxAngularAcceleration=Jolt.degreesToRadians(3600);
+float sMaxAngularAcceleration=degreesToRadians(3600);
 float sMaxFrictionAngularAcceleration;
 float sFrequency=2;
 float sDamping=1;
@@ -71,7 +72,7 @@ public void Initialize()
 	settings.setNormalAxis1 ( settings.setNormalAxis2 ( Vec3.sAxisX()));
 	mConstraint = (HingeConstraint)(settings.create(body1, body2));
 	mConstraint.setMotorState(EMotorState.Velocity);
-	mConstraint.setTargetAngularVelocity(Jolt.degreesToRadians(25));
+	mConstraint.setTargetAngularVelocity(degreesToRadians(25));
 	mPhysicsSystem.addConstraint(mConstraint);
 
 	// Calculate inertia of body 2 as seen from the constraint

@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics motorcycle test.
  * <p>
@@ -67,10 +68,10 @@ public void Initialize()
 	final float half_vehicle_width = 0.2f;
 	final float half_vehicle_height = 0.3f;
 
-	final float max_steering_angle = Jolt.degreesToRadians(30);
+	final float max_steering_angle = degreesToRadians(30);
 
 	// Angle of the front suspension
-	final float caster_angle = Jolt.degreesToRadians(30);
+	final float caster_angle = degreesToRadians(30);
 
 	// Create vehicle body
 	RVec3 position=new RVec3(0, 2, 0);
@@ -84,7 +85,7 @@ public void Initialize()
 	// Create vehicle constraint
 	VehicleConstraintSettings vehicle=new VehicleConstraintSettings();
 	vehicle.setDrawConstraintSize ( 0.1f);
-	vehicle.setMaxPitchRollAngle ( Jolt.degreesToRadians(60.0f));
+	vehicle.setMaxPitchRollAngle ( degreesToRadians(60.0f));
 
 	// Wheels
 	WheelSettingsWv front = new WheelSettingsWv();

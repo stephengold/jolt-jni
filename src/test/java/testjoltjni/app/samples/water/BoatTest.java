@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.CameraState;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics boat test.
  * <p>
@@ -124,7 +125,7 @@ void BoatTest::ProcessInput(const ProcessInputParams &inParams)
 
 RVec3 GetWaterSurfacePosition(RVec3Arg inXZPosition)
 {
-	return new RVec3(inXZPosition.xx(), cMinWaterHeight + Jolt.sin(0.1f * (float)(inXZPosition.getZ()) + mTime) * (cMaxWaterHeight - cMinWaterHeight), inXZPosition.zz());
+	return new RVec3(inXZPosition.xx(), cMinWaterHeight + sin(0.1f * (float)(inXZPosition.getZ()) + mTime) * (cMaxWaterHeight - cMinWaterHeight), inXZPosition.zz());
 }
 
 public void PrePhysicsUpdate(PreUpdateParams inParams)
@@ -194,7 +195,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	{
 		Vec3 forward = mBoatBody.getRotation().rotateAxisZ();
 		Vec3 right = mBoatBody.getRotation().rotateAxisX();
-		mBoatBody.addImpulse(Op.multiply(Op.add(Op.multiply(forward , mForward * cForwardAcceleration) , Op.multiply(right , Jolt.sign(mForward) * mRight * cSteerAcceleration)) , cBoatMass * inParams.mDeltaTime), propeller_position);
+		mBoatBody.addImpulse(Op.multiply(Op.add(Op.multiply(forward , mForward * cForwardAcceleration) , Op.multiply(right , sign(mForward) * mRight * cSteerAcceleration)) , cBoatMass * inParams.mDeltaTime), propeller_position);
 	}
 
 	UpdateCameraPivot();

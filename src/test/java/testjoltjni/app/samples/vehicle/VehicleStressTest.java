@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics vehicle stress test.
@@ -51,7 +52,7 @@ public void Initialize()
 	final float half_vehicle_length = 2.0f;
 	final float half_vehicle_width = 0.9f;
 	final float half_vehicle_height = 0.2f;
-	final float max_steering_angle = Jolt.degreesToRadians(30.0f);
+	final float max_steering_angle = degreesToRadians(30.0f);
 
 	// Create vehicle body
 	ShapeRefC car_shape = new BoxShape(new Vec3(half_vehicle_width, half_vehicle_height, half_vehicle_length)).toRefC();
@@ -95,7 +96,7 @@ public void Initialize()
 	// Controller
 	WheeledVehicleControllerSettings controller = new WheeledVehicleControllerSettings();
 	vehicle.setController(controller);
-	vehicle.setMaxPitchRollAngle ( Jolt.degreesToRadians(60.0f));
+	vehicle.setMaxPitchRollAngle ( degreesToRadians(60.0f));
 
 	// Differential
 	controller.setNumDifferentials(1);
