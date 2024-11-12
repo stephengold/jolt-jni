@@ -28,9 +28,9 @@ import testjoltjni.TestUtils;
 import testjoltjni.app.samples.*;
 
 public class BroadPhaseInsertionTest extends BroadPhaseTest{
-DefaultRandomEngine mRandomGenerator = new DefaultRandomEngine();
+DefaultRandomEngine mRandomGenerator=new DefaultRandomEngine();
 int mCurrentBody;
-int mDirection = 1;
+int mDirection=1;
 public void Initialize()
 {
 	super.Initialize();
@@ -91,18 +91,18 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		mBroadPhase.removeBodies(bodies_to_add_or_remove, num_this_step);
 
 	// Delete temp array
-	TestUtils.testClose(bodies_to_add_or_remove);
+	TestUtils .testClose( bodies_to_add_or_remove);
 
 	// Create ray
-	DefaultRandomEngine random = new DefaultRandomEngine();
+	DefaultRandomEngine random=new DefaultRandomEngine();
 	Vec3 from = Op.multiply(1000.0f , Vec3.sRandom(random));
-	RayCast ray = new RayCast(from, Op.multiply(-2.0f, from) );
+	RayCast ray = new RayCast(from, Op.multiply(-2.0f , from) );
 
 	// Raycast before update
-	AllHitRayCastBodyCollector hits_before = new AllHitRayCastBodyCollector();
+	AllHitRayCastBodyCollector hits_before=new AllHitRayCastBodyCollector();
 	mBroadPhase.castRay(ray, hits_before);
 	int num_before = (int)hits_before.getHits().length;
-	BroadPhaseCastResult[] results_before = hits_before.getHits();
+	BroadPhaseCastResult []results_before = hits_before.getHits();
 	System.out.printf("Before update: %d results found%n", num_before);
 
 	// Draw results
@@ -114,10 +114,10 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	mBroadPhase.optimize();
 
 	// Raycast after update
-	AllHitRayCastBodyCollector hits_after = new AllHitRayCastBodyCollector();
+	AllHitRayCastBodyCollector hits_after=new AllHitRayCastBodyCollector();
 	mBroadPhase.castRay(ray, hits_after);
 	int num_after = (int)hits_after.getHits().length;
-	BroadPhaseCastResult[] results_after = hits_after.getHits();
+	BroadPhaseCastResult []results_after = hits_after.getHits();
 	System.out.printf("After update: %d results found%n", num_after);
 
 	// Before update we may have some false hits, check that there are less hits after update than before
@@ -137,7 +137,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	}
 
 	// Validate with brute force approach
-	for (ConstBody b : mBodyManager.getBodies().toList())
+	for ( ConstBody b : mBodyManager.getBodies().toList())
 	{
 		boolean found = false;
 		for (BroadPhaseCastResult r : results_after)

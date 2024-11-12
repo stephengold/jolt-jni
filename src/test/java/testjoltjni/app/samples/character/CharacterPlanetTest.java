@@ -36,8 +36,8 @@ import static com.github.stephengold.joltjni.Jolt.*;
  */
 public class CharacterPlanetTest extends Test{
 float cPlanetRadius=20;
-final float cCharacterHeightStanding = 1.35f;
-final float cCharacterRadiusStanding = 0.3f;
+float cCharacterHeightStanding=1.35f;
+float cCharacterRadiusStanding=0.3f;
 float cJumpSpeed=4;
 CharacterVirtualRef mCharacter=new CharacterVirtualRef();
 Vec3 mDesiredVelocity=Vec3.sZero();
