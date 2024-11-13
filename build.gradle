@@ -271,6 +271,7 @@ tasks.register('debugRagdoll', JavaExec) {
 }
 tasks.register('runConvexVsMesh', JavaExec) {
     args '-s=ConvexVsMesh'
+    enableAssertions false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runHelloWorld', JavaExec) {
@@ -278,16 +279,19 @@ tasks.register('runHelloWorld', JavaExec) {
 }
 tasks.register('runPyramid', JavaExec) {
     args '-s=Pyramid'
+    enableAssertions false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runRagdoll', JavaExec) {
     args '-s=Ragdoll'
     dependsOn('unpackJoltAssets')
+    enableAssertions false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runRagdollSinglePile', JavaExec) {
     args '-s=RagdollSinglePile'
     dependsOn('unpackJoltAssets')
+    enableAssertions false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runSmokeTestAll', JavaExec) {
