@@ -86,6 +86,7 @@ static class BPLayerInterfaceImpl extends MapObj2Bp
 		add(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
 		add(Layers.MOVING, BroadPhaseLayers.MOVING);
 	}                                                                     
+
 };
 
 /// Class that determines if an object layer can collide with a broadphase layer
@@ -127,7 +128,7 @@ public
 };
 
 // An example activation listener
-static class MyBodyActivationListener extends CustomBodyActivationListener
+static class MyBodyActivationListener extends  CustomBodyActivationListener
 {
 public
 	 void		onBodyActivated(long idVa, long inBodyUserData)
