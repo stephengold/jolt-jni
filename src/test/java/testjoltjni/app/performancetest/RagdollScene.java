@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics "ragdoll scene"
@@ -35,7 +36,7 @@ import java.util.*;
 // A scene that loads a part of a Horizon Zero Dawn level and drops many ragdolls on the terrain (motors enabled)
 class RagdollScene implements PerformanceTestScene
 {
-    final private static String endl = System.lineSeparator();
+
     RagdollScene(int inNumPilesPerAxis, int inPileSize, float inVerticalSeparation) {
         this.mNumPilesPerAxis = inNumPilesPerAxis;
         this.mPileSize = inPileSize;

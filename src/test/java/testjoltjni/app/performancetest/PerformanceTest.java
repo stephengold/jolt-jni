@@ -38,7 +38,6 @@ public class PerformanceTest {
     private static PerformanceTestScene create_ragdoll_scene() {
         return new RagdollScene(4, 10, 0.6f);
     }
-    final private static String endl = System.lineSeparator();
 // Disable common warnings triggered by Jolt
 
 // Local includes

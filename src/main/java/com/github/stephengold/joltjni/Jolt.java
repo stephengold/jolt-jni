@@ -56,6 +56,10 @@ final public class Jolt {
      * to expedite translation of C++ code
      */
     final public static Object nullptr = null;
+    /**
+     * to expedite translation of C++ code
+     */
+    final public static String endl = System.lineSeparator();
     // *************************************************************************
     // constructors
 

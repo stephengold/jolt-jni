@@ -36,7 +36,6 @@ import static com.github.stephengold.joltjni.Jolt.*;
 public class HelloWorld {
 
     static PrintStream cout=System.out;
-static String endl=System.lineSeparator();
 
 
 
