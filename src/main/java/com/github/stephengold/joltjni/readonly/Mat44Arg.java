@@ -146,4 +146,13 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * @return a new vector
      */
     Vec3 multiply3x4(Vec3Arg vec3Arg);
+
+    /**
+     * Post multiply by the specified translation vector. The current matrix is
+     * unaffected.
+     *
+     * @param vecArg the left factor (not null, unaffected)
+     * @return a new matrix
+     */
+    Mat44 postTranslated(Vec3Arg vecArg);
 }

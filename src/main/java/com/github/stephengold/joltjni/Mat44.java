@@ -387,6 +387,26 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
         return result;
     }
+
+    /**
+     * Post multiply by the specified translation vector. The current matrix is
+     * unaffected.
+     *
+     * @param offset the left factor (not null, unaffected)
+     * @return a new matrix
+     */
+    @Override
+    public Mat44 postTranslated(Vec3Arg offset) {
+        long matrixVa = va();
+        float x = offset.getX();
+        float y = offset.getY();
+        float z = offset.getZ();
+        long resultVa = postTranslated(matrixVa, x, y, z);
+        Mat44 result = new Mat44(resultVa, true);
+
+        return result;
+
+    }
     // *************************************************************************
     // Object methods
 
@@ -461,6 +481,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
             long matrixVa, float[] array);
 
     native private static void multiply3x4(long matrixVa, float[] array);
+
+    native private static long postTranslated(
+            long matrixVa, float x, float y, float z);
 
     native private static void setElement(
             long matrixVa, int row, int column, float value);

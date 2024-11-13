@@ -291,6 +291,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x4
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    postTranslated
+ * Signature: (JFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_postTranslated
+  (JNIEnv *, jclass, jlong matrixVa, jfloat x, jfloat y, jfloat z) {
+    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    const Vec3 offset(x, y, z);
+    Mat44 * const pResult = new Mat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = pMatrix->PostTranslated(offset);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    setElement
  * Signature: (JIIF)V
  */
