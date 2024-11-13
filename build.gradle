@@ -290,6 +290,9 @@ tasks.register('runRagdollSinglePile', JavaExec) {
     dependsOn('unpackJoltAssets')
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
+tasks.register('runSmokeTestAll', JavaExec) {
+    mainClass = 'testjoltjni.app.samples.SmokeTestAll'
+}
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
     dependsOn('assemble')
@@ -487,5 +490,5 @@ tasks.register('cleanLogs', Delete) { // JVM crash logs
 }
 tasks.register('cleanRecordings', Delete) {
     // DebugRenderer recordings, recorded state, and frame timing output:
-    delete fileTree(dir: '.', includes: ['performance_test_*.jor', 'per_frame_*.csv', 'state_*.bin'])
+    delete fileTree(dir: '.', includes: ['*.jor', 'per_frame_*.csv', 'state_*.bin'])
 }
