@@ -54,6 +54,21 @@ final public class ShapeSettingsRef extends Ref {
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
+    // public methods
+
+    /**
+     * Generate a {@code ShapeResult} from the referenced {@code ShapeSettings}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    public ShapeResult create() {
+        long settingsVa = targetVa();
+        long resultVa = ShapeSettings.create(settingsVa);
+        ShapeResult result = new ShapeResult(resultVa, true);
+
+        return result;
+    }
+    // *************************************************************************
     // Ref methods
 
     /**

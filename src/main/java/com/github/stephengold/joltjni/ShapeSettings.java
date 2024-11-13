@@ -201,11 +201,11 @@ abstract public class ShapeSettings
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static void clearCachedResult(long settingsVa);
 
-    native private static long create(long settingsVa);
+    native static long create(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
 
