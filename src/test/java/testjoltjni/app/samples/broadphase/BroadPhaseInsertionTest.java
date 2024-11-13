@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.readonly.ConstBody;
 import java.util.List;
 import testjoltjni.TestUtils;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
 /**
  * A line-for-line Java translation of the Jolt Physics broadphase insertion test.
@@ -110,7 +111,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	mBroadPhase.castRay(ray, hits_before);
 	int num_before = (int)hits_before.getHits().length;
 	BroadPhaseCastResult []results_before = hits_before.getHits();
-	System.out.printf("Before update: %d results found%n", num_before);
+	cout.printf("Before update: %d results found%n", num_before);
 
 	// Draw results
 	DrawLineSP(mDebugRenderer, ray.getOrigin(), Op.add(ray.getOrigin() , ray.getDirection()), Color.sRed);
@@ -125,7 +126,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	mBroadPhase.castRay(ray, hits_after);
 	int num_after = (int)hits_after.getHits().length;
 	BroadPhaseCastResult []results_after = hits_after.getHits();
-	System.out.printf("After update: %d results found%n", num_after);
+	cout.printf("After update: %d results found%n", num_after);
 
 	// Before update we may have some false hits, check that there are less hits after update than before
 	if (num_after > num_before)

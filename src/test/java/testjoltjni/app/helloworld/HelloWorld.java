@@ -22,7 +22,6 @@ SOFTWARE.
 package testjoltjni.app.helloworld;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import java.io.PrintStream;
 import testjoltjni.TestUtils;
 import static com.github.stephengold.joltjni.Jolt.*;
 
@@ -35,7 +34,6 @@ import static com.github.stephengold.joltjni.Jolt.*;
  */
 public class HelloWorld {
 
-    static PrintStream cout=System.out;
 
 
 

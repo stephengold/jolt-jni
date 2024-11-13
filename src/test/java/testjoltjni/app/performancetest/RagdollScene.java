@@ -54,7 +54,7 @@ class RagdollScene implements PerformanceTestScene
 		// Load ragdoll
 		if (!ObjectStreamIn.sReadObject("Assets/Human.tof", mRagdollSettings))
 		{
-			System.err.print  ("Unable to load ragdoll" + endl);
+			cerr .print ("Unable to load ragdoll" + endl);
 			return false;
 		}
 		for (BodyCreationSettings body : mRagdollSettings.getParts())
@@ -69,7 +69,7 @@ class RagdollScene implements PerformanceTestScene
 		// Load animation
 		if (!ObjectStreamIn.sReadObject("Assets/Human/dead_pose1.tof", mAnimation))
 		{
-			System.err.print  ("Unable to load animation" + endl);
+			cerr .print ("Unable to load animation" + endl);
 			return false;
 		}
 
@@ -80,7 +80,7 @@ class RagdollScene implements PerformanceTestScene
 		// Read the background scene
 		if (!ObjectStreamIn.sReadObject("Assets/terrain2.bof", mBackground))
 		{
-			System.err.print  ("Unable to load terrain" + endl);
+			cerr .print ("Unable to load terrain" + endl);
 			return false;
 		}
 		for (BodyCreationSettings body : mBackground.getBodies())

@@ -47,9 +47,9 @@ final static float cDeltaTime = 1.0f / 60.0f;
 
 private static void Trace(String format, Object...args)
 {
-        System.out.printf(format, args);
-        System.out.println();
-        System.out.flush();
+        cout.printf(format, args);
+        cout.println();
+        cout.flush();
 }
 
 // Program entry point

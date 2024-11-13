@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -56,6 +57,14 @@ final public class Jolt {
      * to expedite translation of C++ code
      */
     final public static Object nullptr = null;
+    /**
+     * to expedite translation of C++ code
+     */
+    public static final PrintStream cerr = System.err;
+    /**
+     * to expedite translation of C++ code
+     */
+    public static final PrintStream cout = System.out;
     /**
      * to expedite translation of C++ code
      */
