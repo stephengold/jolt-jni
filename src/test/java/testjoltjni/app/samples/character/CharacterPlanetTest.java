@@ -85,7 +85,7 @@ public void Initialize()
 }
 /*TODO
 
-void ProcessInput(const ProcessInputParams &inParams)
+void CharacterPlanetTest::ProcessInput(const ProcessInputParams &inParams)
 {
 	// Determine controller input
 	Vec3 control_input = Vec3::sZero();
