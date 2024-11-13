@@ -34,23 +34,23 @@ import static com.github.stephengold.joltjni.Jolt.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Water/BoatTest.cpp
  */
 public class BoatTest extends Test{
-float cMaxWaterHeight = 5.0f;
-float cMinWaterHeight=3f;
-float cWaterWidth=100f;
-float cHalfBoatLength=4f;
+float cMaxWaterHeight=5;
+float cMinWaterHeight=3;
+float cWaterWidth=100;
+float cHalfBoatLength=4;
 float cHalfBoatTopWidth=1.5f;
 float cHalfBoatBottomWidth=1.2f;
-float cBoatBowLength=2f;
+float cBoatBowLength=2;
 float cHalfBoatHeight=0.75f;
-float cBoatMass=1000f;
-float cBoatBuoyancy=3f;
+float cBoatMass=1000;
+float cBoatBuoyancy=3;
 float cBoatLinearDrag=0.5f;
 float cBoatAngularDrag=0.7f;
-float cBarrelMass=50f;
+float cBarrelMass=50;
 float cBarrelBuoyancy=1.5f;
 float cBarrelLinearDrag=0.5f;
 float cBarrelAngularDrag=0.1f;
-float cForwardAcceleration=15f;
+float cForwardAcceleration=15;
 float cSteerAcceleration=1.5f;
 Body mBoatBody;
 BodyId mWaterSensor=new BodyId();

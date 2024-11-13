@@ -77,7 +77,7 @@ if (Jolt.implementsDebugRendering()) {
 	if (pen_axis_len > 0.0f)
 	{
 		Op.starEquals(pen_axis , hit.getPenetrationDepth() / pen_axis_len);
-		DebugRendererSP.DrawArrowSP(mDebugRenderer, hit.getContactPointOn2(), Op.add(hit.getContactPointOn2() , pen_axis), Color.sYellow, 0.01f);
+		DrawArrowSP(mDebugRenderer, hit.getContactPointOn2(), Op.add(hit.getContactPointOn2() , pen_axis), Color.sYellow, 0.01f);
 
 if (Jolt.implementsDebugRendering()) {
 		Mat44 resolved_box = box_transform.postTranslated(pen_axis);

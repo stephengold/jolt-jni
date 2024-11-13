@@ -21,12 +21,12 @@ SOFTWARE.
  */
 package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
-import static com.github.stephengold.joltjni.PhysicsSettings.cDefaultConvexRadius;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.PhysicsSettings.cDefaultConvexRadius;
 /**
  * A line-for-line Java translation of the Jolt Physics active-edges test.
  * <p>
