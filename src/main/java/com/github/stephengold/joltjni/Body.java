@@ -787,7 +787,8 @@ public class Body extends NonCopyable implements ConstBody {
     public ConstAaBox getWorldSpaceBounds() {
         long bodyVa = va();
         long boxVa = getWorldSpaceBounds(bodyVa);
-        ConstAaBox result = new AaBox(this, boxVa);
+        JoltPhysicsObject container = getContainingObject();
+        ConstAaBox result = new AaBox(container, boxVa);
 
         return result;
     }
