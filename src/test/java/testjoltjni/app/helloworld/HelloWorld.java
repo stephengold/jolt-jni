@@ -111,17 +111,17 @@ public
 		return ValidateResult.AcceptAllContactsForThisBodyPair.ordinal();
 	}
 
-	public void			onContactAdded(long body1Va, long body2Va, long manifoldVa, long settingsVa)
+	public void			onContactAdded(long  inBody1, long  inBody2, long  inManifold, long ioSettings)
 	{
 		cout .print( "A contact was added" + endl);
 	}
 
-	public void			onContactPersisted(long body1Va, long body2Va, long manifoldVa, long settingsVa)
+	public void			onContactPersisted(long  inBody1, long  inBody2, long  inManifold, long ioSettings)
 	{
 		cout .print( "A contact was persisted" + endl);
 	}
 
-	public void			onContactRemoved(long pairVa)
+	public void			onContactRemoved(long  inSubShapePair)
 	{
 		cout .print( "A contact was removed" + endl);
 	}

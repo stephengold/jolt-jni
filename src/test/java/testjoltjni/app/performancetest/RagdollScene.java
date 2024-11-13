@@ -38,10 +38,9 @@ import static com.github.stephengold.joltjni.Jolt.*;
 class RagdollScene implements PerformanceTestScene
 {
 
-    RagdollScene(int inNumPilesPerAxis, int inPileSize, float inVerticalSeparation) {
-        this.mNumPilesPerAxis = inNumPilesPerAxis;
-        this.mPileSize = inPileSize;
-        this.mVerticalSeparation = inVerticalSeparation;
+    RagdollScene(int inNumPilesPerAxis, int inPileSize, float inVerticalSeparation) 
+                                                        {
+        mNumPilesPerAxis=inNumPilesPerAxis;mPileSize=inPileSize;mVerticalSeparation=inVerticalSeparation;
     }
 
 	public String   GetName()  
@@ -104,7 +103,7 @@ class RagdollScene implements PerformanceTestScene
 
 		// Create ragdoll piles
 		Mt19937 random=new Mt19937();
-		UniformRealDistribution angle = new UniformRealDistribution(0.0f, Jolt.JPH_PI);
+		UniformRealDistribution angle=new UniformRealDistribution(0.0f, JPH_PI);
 		int group_id = 1;
 		for (int row = 0; row < mNumPilesPerAxis; ++row)
 			for (int col = 0; col < mNumPilesPerAxis; ++col)
