@@ -32,6 +32,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createCopy
+  (JNIEnv *, jclass, jlong originalVa) {
+    const Mat44 * const pOriginal = reinterpret_cast<Mat44 *> (originalVa);
+    Mat44 * const pResult = new Mat44(*pOriginal);
+    TRACE_NEW("Mat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    createFromColumnMajor
  * Signature: ([F)J
  */

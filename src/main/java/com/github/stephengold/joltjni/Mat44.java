@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.readonly.Vec4Arg;
 
 /**
  * A 4x4 matrix composed of 16 single-precision elements, used to represent
@@ -64,6 +65,32 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     Mat44(long matrixVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(matrixVa) : null;
         setVirtualAddress(matrixVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a copy of the specified matrix.
+     *
+     * @param original the matrix to duplicate (not null, unaffected)
+     */
+    public Mat44(Mat44Arg original) {
+        long originalVa = original.targetVa();
+        long matrixVa = createCopy(originalVa);
+        setVirtualAddress(matrixVa, () -> free(matrixVa));
+    }
+
+    /**
+     * Instantiate a matrix with the specified columns.
+     *
+     * @param c1 the desired first/leftmost column (not null, unaffected)
+     * @param c2 the desired 2nd column (not null, unaffected)
+     * @param c3 the desired 3rd column (not null, unaffected)
+     * @param c4 the desired last/rightmost column (not null, unaffected)
+     */
+    public Mat44(Vec4Arg c1, Vec4Arg c2, Vec4Arg c3, Vec4Arg c4) {
+        this(c1.getX(), c1.getY(), c1.getZ(), c1.getW(),
+                c2.getX(), c2.getY(), c2.getZ(), c2.getW(),
+                c3.getX(), c3.getY(), c3.getZ(), c3.getW(),
+                c4.getX(), c4.getY(), c4.getZ(), c4.getW());
     }
     // *************************************************************************
     // new methods exposed
@@ -443,6 +470,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createFromColumnMajor(float[] elements);
 
