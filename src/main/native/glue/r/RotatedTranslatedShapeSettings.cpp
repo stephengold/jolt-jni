@@ -68,6 +68,26 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSha
 
 /*
  * Class:     com_github_stephengold_joltjni_RotatedTranslatedShapeSettings
+ * Method:    createSettingsFromShapeSettings
+ * Signature: (FFFFFFFJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShapeSettings_createSettingsFromShapeSettings
+  (JNIEnv *, jclass, jfloat offsetX, jfloat offsetY, jfloat offsetZ,
+  jfloat rotX, jfloat rotY, jfloat rotZ, jfloat rotW,
+  jlong baseShapeSettingsVa) {
+    const Vec3 offset(offsetX, offsetY, offsetZ);
+    const Quat rotation(rotX, rotY, rotZ, rotW);
+    const ShapeSettings * const pBaseShapeSettings
+            = reinterpret_cast<ShapeSettings *> (baseShapeSettingsVa);
+    RotatedTranslatedShapeSettings * const pResult
+            = new RotatedTranslatedShapeSettings(
+                    offset, rotation, pBaseShapeSettings);
+    TRACE_NEW("RotatedTranslatedShapeSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RotatedTranslatedShapeSettings
  * Method:    getPositionX
  * Signature: (J)F
  */

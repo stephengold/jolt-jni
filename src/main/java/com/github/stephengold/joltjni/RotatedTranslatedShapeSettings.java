@@ -93,6 +93,30 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         setVirtualAddress(rtssVa, null); // no owner due to ref counting
         setSubType(EShapeSubType.RotatedTranslated);
     }
+
+    /**
+     * Instantiate a settings object with the specified offset, rotation, and
+     * base settings.
+     *
+     * @param offset (not null, unaffected)
+     * @param rotation (not null, not zero, unaffected)
+     * @param baseShapeSettings settings for the base shape (not null)
+     */
+    public RotatedTranslatedShapeSettings(
+            Vec3Arg offset, QuatArg rotation, ShapeSettings baseShapeSettings) {
+        float offsetX = offset.getX();
+        float offsetY = offset.getY();
+        float offsetZ = offset.getZ();
+        float rotW = rotation.getW();
+        float rotX = rotation.getX();
+        float rotY = rotation.getY();
+        float rotZ = rotation.getZ();
+        long baseShapeSettingsVa = baseShapeSettings.va();
+        long rtssVa = createSettingsFromShapeSettings(offsetX, offsetY,
+                offsetZ, rotX, rotY, rotZ, rotW, baseShapeSettingsVa);
+        setVirtualAddress(rtssVa, null); // no owner due to ref counting
+        setSubType(EShapeSubType.RotatedTranslated);
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -168,6 +192,10 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
     native private static long createSettingsFromShapeRef(
             float offsetX, float offsetY, float offsetZ, float rotX, float rotY,
             float rotZ, float rotW, long baseShapeRefVa);
+
+    native private static long createSettingsFromShapeSettings(
+            float offsetX, float offsetY, float offsetZ, float rotX, float rotY,
+            float rotZ, float rotW, long baseShapeSettingsVa);
 
     native private static float getPositionX(long rtssVa);
 
