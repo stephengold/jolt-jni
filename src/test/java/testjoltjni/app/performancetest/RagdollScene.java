@@ -33,6 +33,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/RagdollScene.h
  */
+
 // A scene that loads a part of a Horizon Zero Dawn level and drops many ragdolls on the terrain (motors enabled)
 class RagdollScene implements PerformanceTestScene
 {
@@ -43,17 +44,17 @@ class RagdollScene implements PerformanceTestScene
         this.mVerticalSeparation = inVerticalSeparation;
     }
 
-	public String	GetName()
+	public String   GetName()  
 	{
 		return mNumPilesPerAxis == 1? "RagdollSinglePile" : "Ragdoll";
 	}
 
-	public boolean			Load()
+	public boolean			Load() 
 	{
 		// Load ragdoll
 		if (!ObjectStreamIn.sReadObject("Assets/Human.tof", mRagdollSettings))
 		{
-			System.err.print("Unable to load ragdoll" + endl);
+			System.err.print  ("Unable to load ragdoll" + endl);
 			return false;
 		}
 		for (BodyCreationSettings body : mRagdollSettings.getParts())
@@ -68,7 +69,7 @@ class RagdollScene implements PerformanceTestScene
 		// Load animation
 		if (!ObjectStreamIn.sReadObject("Assets/Human/dead_pose1.tof", mAnimation))
 		{
-			System.err.print("Unable to load animation" + endl);
+			System.err.print  ("Unable to load animation" + endl);
 			return false;
 		}
 
@@ -79,11 +80,11 @@ class RagdollScene implements PerformanceTestScene
 		// Read the background scene
 		if (!ObjectStreamIn.sReadObject("Assets/terrain2.bof", mBackground))
 		{
-			System.err.print("Unable to load terrain" + endl);
+			System.err.print  ("Unable to load terrain" + endl);
 			return false;
 		}
 		for (BodyCreationSettings body : mBackground.getBodies())
-			body.setObjectLayer(Layers.NON_MOVING);
+			body.setObjectLayer ( Layers.NON_MOVING);
 		mBackground.fixInvalidScales();
 
 		return true;
@@ -102,19 +103,19 @@ class RagdollScene implements PerformanceTestScene
 		mBackground.createBodies(inPhysicsSystem);
 
 		// Create ragdoll piles
-		Mt19937 random = new Mt19937();
+		Mt19937 random=new Mt19937();
 		UniformRealDistribution angle = new UniformRealDistribution(0.0f, Jolt.JPH_PI);
 		int group_id = 1;
 		for (int row = 0; row < mNumPilesPerAxis; ++row)
 			for (int col = 0; col < mNumPilesPerAxis; ++col)
 			{
 				// Determine start location of ray
-				RVec3 start = new RVec3(cHorizontalSeparation * (col - (mNumPilesPerAxis - 1) / 2.0), 100, cHorizontalSeparation * (row - (mNumPilesPerAxis - 1) / 2.0));
+				RVec3 start=new RVec3(cHorizontalSeparation * (col - (mNumPilesPerAxis - 1) / 2.0), 100, cHorizontalSeparation * (row - (mNumPilesPerAxis - 1) / 2.0));
 
 				// Cast ray down to terrain
-				RayCastResult hit = new RayCastResult();
-				Vec3 ray_direction = new Vec3(0, -200, 0);
-				RRayCast ray = new RRayCast(start, ray_direction);
+				RayCastResult hit=new RayCastResult();
+				Vec3 ray_direction=new Vec3(0, -200, 0);
+				RRayCast ray =new RRayCast(start, ray_direction);
 				if (inPhysicsSystem.getNarrowPhaseQuery().castRay(ray, hit, new SpecifiedBroadPhaseLayerFilter(BroadPhaseLayers.NON_MOVING), new SpecifiedObjectLayerFilter(Layers.NON_MOVING)))
 					start = ray.getPointOnRay(hit.getFraction());
 
@@ -124,11 +125,11 @@ class RagdollScene implements PerformanceTestScene
 					RagdollRef ragdoll = mRagdollSettings.createRagdoll(group_id++, 0, inPhysicsSystem).toRef();
 
 					// Override root
-					SkeletonPose pose_copy = new SkeletonPose(mPose);
+					SkeletonPose pose_copy =new SkeletonPose(mPose);
 					pose_copy.setRootOffset(start);
 					JointState root = pose_copy.getJoint(0);
-					root.setTranslation(new Vec3(0, mVerticalSeparation * (i + 1), 0));
-					root.setRotation(Op.multiply(Quat.sRotation(Vec3.sAxisY(), angle.nextFloat(random)), root.getRotation()));
+					root.setTranslation (new Vec3(0, mVerticalSeparation * (i + 1), 0));
+					root.setRotation ( Op.multiply(Quat.sRotation(Vec3.sAxisY(), angle.nextFloat(random)), root.getRotation()));
 					pose_copy.calculateJointMatrices();
 
 					// Drive to pose
@@ -142,7 +143,7 @@ class RagdollScene implements PerformanceTestScene
 			}
 	}
 
-        public void			StopTest(PhysicsSystem inPhysicsSystem)
+	public void			StopTest(PhysicsSystem inPhysicsSystem)
 	{
 		// Remove ragdolls
 		for (RagdollRef ragdoll : mRagdolls)
@@ -153,11 +154,11 @@ class RagdollScene implements PerformanceTestScene
 	int						mNumPilesPerAxis;
 	int						mPileSize;
 	float					mVerticalSeparation;
-	RagdollSettingsRef	mRagdollSettings = new RagdollSettingsRef();
-	SkeletalAnimationRef	mAnimation = new SkeletalAnimationRef();
-	SkeletonPose			mPose = new SkeletonPose();
-	PhysicsSceneRef		mBackground = new PhysicsSceneRef();
-	List<RagdollRef>		mRagdolls = new ArrayList<>();
+	RagdollSettingsRef	mRagdollSettings=new RagdollSettingsRef();
+	SkeletalAnimationRef	mAnimation=new SkeletalAnimationRef();
+	SkeletonPose			mPose=new SkeletonPose();
+	PhysicsSceneRef		mBackground=new PhysicsSceneRef();
+	List<RagdollRef>		mRagdolls=new ArrayList<>();
 };
 
 
