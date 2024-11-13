@@ -35,9 +35,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: g++ --version
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=Linux64 build install
+      - name: gradlew -Ptarget=Linux64 runSmokeTestAll build install
         run: |
-          ./gradlew -Ptarget=Linux64 build install \
+          ./gradlew -Ptarget=Linux64 runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -62,9 +62,9 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=MacOSX64 run build install
+      - name: gradlew -Ptarget=MacOSX64 run runSmokeTestAll build install
         run: |
-          ./gradlew -Ptarget=MacOSX64 run build install \
+          ./gradlew -Ptarget=MacOSX64 run runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -89,9 +89,9 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=MacOSX_ARM64 build install
+      - name: gradlew -Ptarget=MacOSX_ARM64 runSmokeTestAll build install
         run: |
-          ./gradlew -Ptarget=MacOSX_ARM64 build install \
+          ./gradlew -Ptarget=MacOSX_ARM64 runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -116,9 +116,9 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=Windows64 build install
+      - name: gradlew -Ptarget=Windows64 runSmokeTestAll build install
         run: |
-          ./gradlew -Ptarget=Windows64 build install \
+          ./gradlew -Ptarget=Windows64 runSmokeTestAll build install \
              --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
