@@ -26,79 +26,51 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/BroadPhase/BroadPhase.h"
 #include "auto/com_github_stephengold_joltjni_BroadPhase.h"
-#include "glue/glue.h"
 
 using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhase
  * Method:    addBodiesAbort
- * Signature: (J[IIJ)V
+ * Signature: (JJIJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhase_addBodiesAbort
-  (JNIEnv *pEnv, jclass, jlong phaseVa, jintArray iasns, jint numBodies,
+  (JNIEnv *, jclass, jlong phaseVa, jlong arrayVa, jint numBodies,
   jlong addState) {
     BroadPhase * const pPhase = reinterpret_cast<BroadPhase *> (phaseVa);
-    BodyID * const pTempArray = new BodyID[numBodies];
-    TRACE_NEW("BodyID[]", pTempArray)
-    jboolean isCopy;
-    jint * const pInts = pEnv->GetIntArrayElements(iasns, &isCopy);
-    for (int i = 0; i < numBodies; ++i) {
-        pTempArray[i] = BodyID(pInts[i]);
-    }
-    pEnv->ReleaseIntArrayElements(iasns, pInts, JNI_ABORT);
-    void * const pState = reinterpret_cast<void *> (addState);
-    pPhase->AddBodiesAbort(pTempArray, numBodies, pState);
-    TRACE_DELETE("BodyID[]", pTempArray)
-    delete[] pTempArray;
+    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
+    BroadPhase::AddState const handle
+            = reinterpret_cast<BroadPhase::AddState> (addState);
+    pPhase->AddBodiesAbort(pArray, numBodies, handle);
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhase
  * Method:    addBodiesFinalize
- * Signature: (J[IIJ)V
+ * Signature: (JJIJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhase_addBodiesFinalize
-  (JNIEnv *pEnv, jclass, jlong phaseVa, jintArray iasns, jint numBodies,
+  (JNIEnv *, jclass, jlong phaseVa, jlong arrayVa, jint numBodies,
   jlong addState) {
     BroadPhase * const pPhase = reinterpret_cast<BroadPhase *> (phaseVa);
-    BodyID * const pTempArray = new BodyID[numBodies];
-    TRACE_NEW("BodyID[]", pTempArray)
-    jboolean isCopy;
-    jint * const pInts = pEnv->GetIntArrayElements(iasns, &isCopy);
-    for (int i = 0; i < numBodies; ++i) {
-        pTempArray[i] = BodyID(pInts[i]);
-    }
-    pEnv->ReleaseIntArrayElements(iasns, pInts, JNI_ABORT);
-    void * const pState = reinterpret_cast<void *> (addState);
-    pPhase->AddBodiesAbort(pTempArray, numBodies, pState);
-    TRACE_DELETE("BodyID[]", pTempArray)
-    delete[] pTempArray;
+    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
+    BroadPhase::AddState const handle
+            = reinterpret_cast<BroadPhase::AddState> (addState);
+    pPhase->AddBodiesFinalize(pArray, numBodies, handle);
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhase
  * Method:    addBodiesPrepare
- * Signature: (J[II)J
+ * Signature: (JJI)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BroadPhase_addBodiesPrepare
-  (JNIEnv *pEnv, jclass, jlong phaseVa, jintArray iasns, jint numBodies) {
+  (JNIEnv *, jclass, jlong phaseVa, jlong arrayVa, jint numBodies) {
     BroadPhase * const pPhase = reinterpret_cast<BroadPhase *> (phaseVa);
-    BodyID * const pTempArray = new BodyID[numBodies];
-    TRACE_NEW("BodyID[]", pTempArray)
-    jboolean isCopy;
-    jint * const pInts = pEnv->GetIntArrayElements(iasns, &isCopy);
-    for (int i = 0; i < numBodies; ++i) {
-        pTempArray[i] = BodyID(pInts[i]);
-    }
-    void * const pResult = pPhase->AddBodiesPrepare(pTempArray, numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pInts[i] = pTempArray[i].GetIndexAndSequenceNumber();
-    }
-    pEnv->ReleaseIntArrayElements(iasns, pInts, 0);
-    TRACE_DELETE("BodyID[]", pTempArray)
-    delete[] pTempArray;
-    return reinterpret_cast<jlong> (pResult);
+    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
+    BroadPhase::AddState const handle
+            = pPhase->AddBodiesPrepare(pArray, numBodies);
+    return reinterpret_cast<jlong> (handle);
 }
 
 /*
@@ -129,45 +101,24 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhase_optimize
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhase
  * Method:    notifyBodiesAabbChanged
- * Signature: (J[IIZ)V
+ * Signature: (JJIZ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhase_notifyBodiesAabbChanged
-  (JNIEnv *pEnv, jclass, jlong phaseVa, jintArray iasns, jint numBodies,
+  (JNIEnv *, jclass, jlong phaseVa, jlong arrayVa, jint numBodies,
   jboolean takeLock) {
     BroadPhase * const pPhase = reinterpret_cast<BroadPhase *> (phaseVa);
-    BodyID * const pTempArray = new BodyID[numBodies];
-    TRACE_NEW("BodyID[]", pTempArray)
-    jboolean isCopy;
-    jint * const pInts = pEnv->GetIntArrayElements(iasns, &isCopy);
-    for (int i = 0; i < numBodies; ++i) {
-        pTempArray[i] = BodyID(pInts[i]);
-    }
-    pEnv->ReleaseIntArrayElements(iasns, pInts, JNI_ABORT);
-    pPhase->NotifyBodiesAABBChanged(pTempArray, numBodies, takeLock);
-    TRACE_DELETE("BodyID[]", pTempArray)
-    delete[] pTempArray;
+    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
+    pPhase->NotifyBodiesAABBChanged(pArray, numBodies, takeLock);
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhase
  * Method:    removeBodies
- * Signature: (J[II)V
+ * Signature: (JJI)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhase_removeBodies
-  (JNIEnv *pEnv, jclass, jlong phaseVa, jintArray iasns, jint numBodies) {
+  (JNIEnv *, jclass, jlong phaseVa, jlong arrayVa, jint numBodies) {
     BroadPhase * const pPhase = reinterpret_cast<BroadPhase *> (phaseVa);
-    BodyID * const pTempArray = new BodyID[numBodies];
-    TRACE_NEW("BodyID[]", pTempArray)
-    jboolean isCopy;
-    jint * const pInts = pEnv->GetIntArrayElements(iasns, &isCopy);
-    for (int i = 0; i < numBodies; ++i) {
-        pTempArray[i] = BodyID(pInts[i]);
-    }
-    pPhase->RemoveBodies(pTempArray, numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pInts[i] = pTempArray[i].GetIndexAndSequenceNumber();
-    }
-    pEnv->ReleaseIntArrayElements(iasns, pInts, 0);
-    TRACE_DELETE("BodyID[]", pTempArray)
-    delete[] pTempArray;
+    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
+    pPhase->RemoveBodies(pArray, numBodies);
 }

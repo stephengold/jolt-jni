@@ -45,9 +45,9 @@ public void Initialize()
 
 	// Add all bodies to the broadphase
 	List<Body> body_vector = mBodyManager.getBodies().toList();
-	BodyId[] bodies_to_add = new BodyId [num_bodies];
+	BodyIdArray bodies_to_add = new BodyIdArray (num_bodies);
 	for (int b = 0; b < num_bodies; ++b)
-		bodies_to_add[b] = body_vector.get(b).getId();
+		bodies_to_add.set(b, body_vector.get(b).getId());
 	long add_state = mBroadPhase.addBodiesPrepare(bodies_to_add, num_bodies);
 	mBroadPhase.addBodiesFinalize(bodies_to_add, num_bodies, add_state);
 
