@@ -65,8 +65,8 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	{
 		final int cNumBodiesToMove = 100;
 		BodyIdArray bodies_to_move = new BodyIdArray (cNumBodiesToMove);
-		UniformIntDistribution body_selector = new UniformIntDistribution(0, (int)mCurrentBody - 1);
-		UniformRealDistribution translation_selector = new UniformRealDistribution(1.0f, 5.0f);
+		UniformIntDistribution body_selector=new UniformIntDistribution(0, (int)mCurrentBody - 1);
+		UniformRealDistribution translation_selector=new UniformRealDistribution(1.0f, 5.0f);
 		for (int i = 0; i < cNumBodiesToMove; ++i)
 		{
 			Body body = body_vector.get(body_selector.nextInt(mRandomGenerator));
@@ -75,7 +75,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 			bodies_to_move.set(i,  body.getId());
 		}
 		mBroadPhase.notifyBodiesAabbChanged(bodies_to_move, cNumBodiesToMove);
-		TestUtils.testClose(bodies_to_move);
+		TestUtils.testClose ( bodies_to_move);
 	}
 
 	// Create batch of bodies
@@ -98,12 +98,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		mBroadPhase.removeBodies(bodies_to_add_or_remove, num_this_step);
 
 	// Delete temp array
-	TestUtils .testClose( bodies_to_add_or_remove);
+	TestUtils.testClose ( bodies_to_add_or_remove);
 
 	// Create ray
 	DefaultRandomEngine random=new DefaultRandomEngine();
 	Vec3 from = Op.multiply(1000.0f , Vec3.sRandom(random));
-	RayCast ray = new RayCast(from, Op.multiply(-2.0f , from) );
+	RayCast ray =new RayCast(from, Op.multiply(-2.0f , from) );
 
 	// Raycast before update
 	AllHitRayCastBodyCollector hits_before=new AllHitRayCastBodyCollector();

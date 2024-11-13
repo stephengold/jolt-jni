@@ -66,7 +66,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	AllHitRayCastBodyCollector collector=new AllHitRayCastBodyCollector();
 	mBroadPhase.castRay(ray, collector);
 	int num_hits = (int)collector.getHits().length;
-	BroadPhaseCastResult[] results = collector.getHits();
+	BroadPhaseCastResult []results = collector.getHits();
 
 	// Draw results
 	for (int i = 0; i < num_hits; ++i)

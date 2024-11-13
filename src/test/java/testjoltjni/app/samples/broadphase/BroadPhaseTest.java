@@ -35,15 +35,15 @@ import testjoltjni.app.samples.Test;
 // Base class for a test involving only the broad phase
 abstract class BroadPhaseTest extends Test{
 
-int NUM_BODIES =		10000;
+int NUM_BODIES =	10000;
 
 protected BPLayerInterfaceImpl mBroadPhaseLayerInterface=new BPLayerInterfaceImpl();
 protected BroadPhase mBroadPhase;
 protected BodyManager mBodyManager;
 //#define BROAD_PHASE		BroadPhaseBruteForce()
 
-
 void CreateBalancedDistribution(BodyManager inBodyManager,int inNumBodies){CreateBalancedDistribution(inBodyManager,inNumBodies,512f);}
+
 void CreateBalancedDistribution(BodyManager inBodyManager, int inNumBodies, float inEnvironmentSize)
 {
 	DefaultRandomEngine random=new DefaultRandomEngine(0x1ee7c0de);
