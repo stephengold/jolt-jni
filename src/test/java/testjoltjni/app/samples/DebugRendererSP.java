@@ -65,6 +65,11 @@ public static void DrawBoxSP(DebugRenderer inRenderer, Mat44Arg inMatrix, ConstA
 	inRenderer.drawBox(new RMat44(inMatrix), inBox, inColor, inCastShadow, inDrawMode);
 }
 
+public static void DrawWireSphereSP(DebugRenderer inRenderer, Vec3Arg inCenter, float inRadius, ConstColor inColor)
+{
+	inRenderer.drawWireSphere(new RVec3(inCenter), inRadius, inColor);
+}
+
 public static void DrawWireSphereSP(DebugRenderer inRenderer, Vec3Arg inCenter, float inRadius, ConstColor inColor, int inLevel)
 {
 	inRenderer.drawWireSphere(new RVec3(inCenter), inRadius, inColor, inLevel);
@@ -73,6 +78,11 @@ public static void DrawWireSphereSP(DebugRenderer inRenderer, Vec3Arg inCenter, 
 public static void DrawSphereSP(DebugRenderer inRenderer, Vec3Arg inCenter, float inRadius, ConstColor inColor, ECastShadow inCastShadow, EDrawMode inDrawMode)
 {
 	inRenderer.drawSphere(new RVec3(inCenter), inRadius, inColor, inCastShadow, inDrawMode);
+}
+
+public static void DrawText3DSP(DebugRenderer inRenderer, Vec3Arg inPosition, String inString)
+{
+	inRenderer.drawText3D(new RVec3(inPosition), inString);
 }
 
 public static void DrawText3DSP(DebugRenderer inRenderer, Vec3Arg inPosition, String inString, ConstColor inColor, float inHeight)
