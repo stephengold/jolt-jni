@@ -58,12 +58,12 @@ public void Initialize()
 public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Create ray
-	DefaultRandomEngine random = new DefaultRandomEngine();
+	DefaultRandomEngine random=new DefaultRandomEngine();
 	Vec3 from = Op.multiply(1000.0f , Vec3.sRandom(random));
 	RayCast ray = new RayCast(from, Op.multiply(-2.0f , from) );
 
 	// Raycast before update
-	AllHitRayCastBodyCollector collector = new AllHitRayCastBodyCollector();
+	AllHitRayCastBodyCollector collector=new AllHitRayCastBodyCollector();
 	mBroadPhase.castRay(ray, collector);
 	int num_hits = (int)collector.getHits().length;
 	BroadPhaseCastResult[] results = collector.getHits();

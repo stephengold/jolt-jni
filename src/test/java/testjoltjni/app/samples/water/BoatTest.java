@@ -62,7 +62,7 @@ float mForward, mRight, mTime;
 public void Initialize()
 {
 	// Create boat
-	ConvexHullShapeSettings boat_hull = new ConvexHullShapeSettings();
+	ConvexHullShapeSettings boat_hull=new ConvexHullShapeSettings();
 	boat_hull.setPoints (
 		new Vec3(-cHalfBoatTopWidth, cHalfBoatHeight, -cHalfBoatLength),
 		new Vec3(cHalfBoatTopWidth, cHalfBoatHeight, -cHalfBoatLength),
@@ -128,7 +128,7 @@ RVec3 GetWaterSurfacePosition(RVec3Arg inXZPosition)
 	return new RVec3(inXZPosition.xx(), cMinWaterHeight + sin(0.1f * (float)(inXZPosition.getZ()) + mTime) * (cMaxWaterHeight - cMinWaterHeight), inXZPosition.zz());
 }
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Update time
 	mTime += inParams.mDeltaTime;
@@ -248,7 +248,7 @@ void UpdateCameraPivot()
 	mCameraPivot =new RMat44(new Vec4(right, 0), new Vec4(up, 0), new Vec4(fwd, 0), mBoatBody.getPosition());
 }
 
-void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
+void OnContactAdded( ConstBody inBody1,  ConstBody inBody2,  ConstContactManifold inManifold, ContactSettings ioSettings)
 {
 	// When a body enters the water add it to the list of bodies in the water
 	mBodiesInWaterMutex.lock();
@@ -260,7 +260,7 @@ void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold i
         mBodiesInWaterMutex.unlock();
 }
 
-void OnContactRemoved(ConstSubShapeIdPair inSubShapePair)
+void OnContactRemoved( ConstSubShapeIdPair inSubShapePair)
 {
 	// When a body leaves the water remove it from the list of bodies in the water
 	mBodiesInWaterMutex.lock();
