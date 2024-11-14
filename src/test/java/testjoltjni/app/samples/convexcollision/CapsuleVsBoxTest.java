@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
 /**
  * A line-for-line Java translation of the Jolt Physics capsule-vs-box test.
@@ -60,7 +61,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	AllHitCollideShapeCollector collector=new AllHitCollideShapeCollector();
 	CollisionDispatch.sCollideShapeVsShape(capsule_shape, box_shape, Vec3.sReplicate(1.0f), Vec3.sReplicate(1.0f), capsule_transform, box_transform,new SubShapeIdCreator(),new SubShapeIdCreator(), settings, collector);
 
-if (Jolt.implementsDebugRendering()) {
+if (implementsDebugRendering()) {
 	// Draw the shapes
 	box_shape.draw(mDebugRenderer,new RMat44(box_transform), Vec3.sReplicate(1.0f), Color.sWhite, false, false);
 	capsule_shape.draw(mDebugRenderer,new RMat44(capsule_transform), Vec3.sReplicate(1.0f), Color.sWhite, false, false);
@@ -79,7 +80,7 @@ if (Jolt.implementsDebugRendering()) {
 		Op.starEquals(pen_axis , hit.getPenetrationDepth() / pen_axis_len);
 		DrawArrowSP(mDebugRenderer, hit.getContactPointOn2(), Op.add(hit.getContactPointOn2() , pen_axis), Color.sYellow, 0.01f);
 
-if (Jolt.implementsDebugRendering()) {
+if (implementsDebugRendering()) {
 		Mat44 resolved_box = box_transform.postTranslated(pen_axis);
 		box_shape.draw(mDebugRenderer,new RMat44(resolved_box), Vec3.sReplicate(1.0f), Color.sGreen, false, false);
 } // JPH_DEBUG_RENDERER

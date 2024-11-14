@@ -50,7 +50,7 @@ public void Initialize()
 
 	// Create 'player' character
 	CharacterSettings settings = new CharacterSettings();
-	settings.setMaxSlopeAngle ( Jolt.degreesToRadians(45.0f));
+	settings.setMaxSlopeAngle ( degreesToRadians(45.0f));
 	settings.setLayer ( Layers.MOVING);
 	settings.setShape ( mStandingShape);
 	settings.setFriction ( 0.5f);

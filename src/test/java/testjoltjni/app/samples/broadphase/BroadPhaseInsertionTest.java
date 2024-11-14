@@ -156,7 +156,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 			}
 
 		if (b.isInBroadPhase()
-			&& Jolt.rayAaBoxHits(ray.getOrigin(), ray.getDirection(), b.getWorldSpaceBounds().getMin(), b.getWorldSpaceBounds().getMax()))
+			&& rayAaBoxHits(ray.getOrigin(), ray.getDirection(), b.getWorldSpaceBounds().getMin(), b.getWorldSpaceBounds().getMax()))
 		{
 			if (!found)
 				throw new RuntimeException("BroadPhaseInsertionTest: Is intersecting but was not found");
