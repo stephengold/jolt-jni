@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.9.2 released on TBD
+## Version 0.9.3 released on TBD
 
 + API changes:
   + Redesigned the `BroadPhase` class.
