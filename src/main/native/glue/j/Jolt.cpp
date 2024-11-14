@@ -104,6 +104,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_detLog
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    exp
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_exp
+  (JNIEnv *, jclass, jfloat value) {
+    float result = std::exp(value);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    fmod
  * Signature: (FF)F
  */

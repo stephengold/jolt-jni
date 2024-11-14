@@ -94,7 +94,7 @@ Vec3 GetPathCenter(float inTime)
 	final float cAngularSpeed = 2.0f;
 	final float cDisplacementSpeed = 10.0f;
 
-	float fall_off = (float)Math.exp(-cFallOff * inTime);
+	float fall_off = exp(-cFallOff * inTime);
 	float angle = cAngularSpeed * inTime;
 	return new Vec3(cRadiusX * cos(angle) * fall_off + 64.0f, 0, cOffset + cDisplacementSpeed * inTime + cRadiusY * sin(angle) * fall_off);
 }

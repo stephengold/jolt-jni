@@ -125,6 +125,14 @@ final public class Jolt {
     native public static void detLog(String message);
 
     /**
+     * Return the exponential of the specified single-precision value.
+     *
+     * @param value the input value
+     * @return the exponential
+     */
+    native public static float exp(float value);
+
+    /**
      * Return the remainder when {@code numerator} is divided by
      * {@code denominator}.
      *
