@@ -1,5 +1,54 @@
 # release log for the jolt-jni project
 
+## Version 0.9.2 released on TBD
+
++ API changes:
+  + Redesigned the `BroadPhase` class.
+  + Changed the semantics of `BroadPhaseCastResult.getBodyId()` and
+    `ConstBodyCreationSettings.getMassPropertiesOverride()`.
+  + Replaced the `va()` method in the `ConstJoltPhysicsObject` interface
+    with non-final `targetVa()` .
+  + Deleted the `getUserData()` and `setUserData()` methods from
+    the `Constraint` class.
+  + Finalized the `GroupFilterRef` and `WheelSettingsTvRef` classes.
+
++ Bug fixes:
+  + dynamic linkage failures and unimplemented methods
+  + `Vec3.add()` always returns `(0,0,0)`
+  + many premature garbage collection bugs
+  + some ref targets instantiated as owners
+  + native assert while creating an empty `ConvexHullShapeSettings`
+  + crash when a collision group has a `null` filter
+  + assertion failure while instantiating `MotorcycleControllerSettings`
+  + assertion failures in the `JoltPhysicsObject` constructor
+    and `setVirtualAddress()`
+  + index out of range in `ConstraintVsCOMChangeTest.Initialize()`
+  + `Constraint.newConstraint()` returns the wrong subclass
+  + unable to cast `VehicleController`
+  + `ConstraintSettings.getControllerType()` can return wrong values
+  + `IllegalStateException` in `MotorcycleTest`
+
++ Added many public methods to the library.
++ Added chaining capability to many methods.
++ Implemented Perlin noise.
++ Added the `ConstTwoBodyConstraint` interface to the library.
+
++ Added classes to the library:
+  + `AllHitCollideShapeCollector`
+  + `BodyIdArray`
+  + `ClosestPoint`
+  + `CollisionDispatch`
+  + `PathConstraintPath`
+  + `PathConstraintPathRef`
+  + `PathConstraintPathHermite`
+  + `SubShapeIdCreator`
+  + `TwoBodyConstraintRef`
+  + `TwoBodyConstraintSettingsRef`
+  + `VehicleConstraintRef`
+
++ Split the "testjoltjni.app.samples" package into many packages.
++ Updated the Jolt source code and assets to 2d7176a (=sg241107).
+
 ## Version 0.9.1 released on 30 October 2024
 
 + Finalized the `ObjectStreamIn` class.
