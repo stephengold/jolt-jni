@@ -172,6 +172,19 @@ final public class Plane implements ConstPlane {
     public float getNormalZ() {
         return nz;
     }
+
+    /**
+     * Return the signed distance of the specified point.
+     *
+     * @param point the point to measure (not null, unaffected)
+     * @return the signed distance
+     */
+    @Override
+    public float signedDistance(Vec3Arg point) {
+        float result
+                = point.getX() * nx + point.getY() * ny + point.getZ() * nz + c;
+        return result;
+    }
     // *************************************************************************
     // Object methods
 

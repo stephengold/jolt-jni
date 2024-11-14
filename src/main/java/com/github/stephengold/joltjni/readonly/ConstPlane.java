@@ -69,4 +69,12 @@ public interface ConstPlane {
      * @return the component value
      */
     float getNormalZ();
+
+    /**
+     * Return the signed distance of the specified point.
+     *
+     * @param point the point to measure (not null, unaffected)
+     * @return the signed distance
+     */
+    float signedDistance(Vec3Arg point);
 }
