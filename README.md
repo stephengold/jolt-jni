@@ -79,10 +79,10 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
     }
     dependencies {
         // JVM library:
-        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.1")
+        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.3")
 
         // native libraries:
-        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.1:DebugSp")
+        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.3:DebugSp")
         // Native libraries for other platforms could be added.
     }
 
@@ -119,7 +119,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
   + using [Git]:
     + `git clone https://github.com/stephengold/jolt-jni.git`
     + `cd jolt-jni`
-    + `git checkout -b latest 0.9.1`
+    + `git checkout -b latest 0.9.3`
   + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link at the bottom of the page

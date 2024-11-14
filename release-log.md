@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.9.3 released on TBD
+## Version 0.9.3 released on 13 November 2024
 
 + API changes:
   + Redesigned the `BroadPhase` class.
