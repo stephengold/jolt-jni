@@ -128,6 +128,18 @@ final public class Float3 {
         this.y = y;
         this.z = z;
     }
+
+    /**
+     * Set all 3 components from the specified array.
+     *
+     * @param array the desired component values (not null, length&ge;3,
+     * unaffected)
+     */
+    public void set(float[] array) {
+        this.x = array[0];
+        this.y = array[1];
+        this.z = array[2];
+    }
     // *************************************************************************
     // Object methods
 
