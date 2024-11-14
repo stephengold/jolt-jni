@@ -50,6 +50,7 @@ import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
 import com.github.stephengold.joltjni.Triangle;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VertexList;
+import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -254,7 +255,7 @@ public class Test006 {
      * Test the {@code PlaneShapeSettings} class.
      */
     private static void doPlaneShapeSettings() {
-        Plane plane = new Plane(0f, 1f, 0f, 0f);
+        ConstPlane plane = new Plane(0f, 1f, 0f, 0f);
         PlaneShapeSettings settings = new PlaneShapeSettings(plane);
 
         testPlaneSsDefaults(settings);
