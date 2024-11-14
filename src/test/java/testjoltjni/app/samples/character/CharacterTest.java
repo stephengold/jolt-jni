@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics character test.
  * <p>
@@ -90,7 +91,7 @@ void RestoreState(StateRecorder inStream)
 
 	boolean is_standing = mCharacter.getShape() == mStandingShape.getPtr(); // Initialize variable for validation mode
 	is_standing=inStream.readBoolean(is_standing);
-	mCharacter.setShape(is_standing? mStandingShape : mCrouchingShape, Float.MAX_VALUE);
+	mCharacter.setShape(is_standing? mStandingShape : mCrouchingShape, FLT_MAX);
 }
 
 void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchStance, float inDeltaTime)

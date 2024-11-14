@@ -265,7 +265,7 @@ void RestoreState(StateRecorder inStream)
 	boolean is_standing = mCharacter.getShape() == mStandingShape.getPtr(); // Initialize variable for validation mode
 	is_standing=inStream.readBoolean(is_standing);
 	ConstShape shape = is_standing? mStandingShape : mCrouchingShape;
-	mCharacter.setShape(shape, Float.MAX_VALUE, new BroadPhaseLayerFilter(){ }, new ObjectLayerFilter(){ }, new BodyFilter(){ }, new ShapeFilter(){ }, mTempAllocator);
+	mCharacter.setShape(shape, FLT_MAX, new BroadPhaseLayerFilter(){ }, new ObjectLayerFilter(){ }, new BodyFilter(){ }, new ShapeFilter(){ }, mTempAllocator);
 	ConstShape inner_shape = is_standing? mInnerStandingShape : mInnerCrouchingShape;
 	mCharacter.setInnerBodyShape(inner_shape);
 

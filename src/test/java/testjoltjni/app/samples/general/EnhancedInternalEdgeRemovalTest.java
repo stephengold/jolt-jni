@@ -111,7 +111,7 @@ public void Initialize()
 			}
 
 		MeshShapeSettings mesh_settings=new MeshShapeSettings(triangles);
-		mesh_settings.setActiveEdgeCosThresholdAngle ( Float.MAX_VALUE); // Turn off regular active edge determination so that we only rely on the mEnhancedInternalEdgeRemoval flag
+		mesh_settings.setActiveEdgeCosThresholdAngle ( FLT_MAX); // Turn off regular active edge determination so that we only rely on the mEnhancedInternalEdgeRemoval flag
 		mesh_settings.setEmbedded();
 		mBodyInterface.createAndAddBody(new BodyCreationSettings(mesh_settings, RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 

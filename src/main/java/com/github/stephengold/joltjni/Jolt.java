@@ -38,6 +38,10 @@ final public class Jolt {
     // constants
 
     /**
+     * largest finite value of type {@code float}
+     */
+    final public static float FLT_MAX = Float.MAX_VALUE;
+    /**
      * single-precision value of Pi
      */
     final public static float JPH_PI = (float) Math.PI;

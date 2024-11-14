@@ -53,7 +53,7 @@ public void Initialize()
 	{
 		// Under which normal we want to place the block
 		Vec3 desired_normal = angle < 0?new Vec3(0, 1, -1).normalized() :new Vec3(0, 1, 0);
-		float best_dot = -Float.MAX_VALUE;
+		float best_dot = -FLT_MAX;
 
 		// Place segments
 		float x = cWidth * angle;
