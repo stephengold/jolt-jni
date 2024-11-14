@@ -569,6 +569,15 @@ abstract public class DebugRenderer extends NonCopyable {
      * Notify that the current frame is complete.
      */
     native public void nextFrame();
+
+    /**
+     * Access the instance from a static context.
+     *
+     * @return the pre-existing instance
+     */
+    public static DebugRenderer sInstance() {
+        return instance;
+    }
     // *************************************************************************
     // protected methods
 
