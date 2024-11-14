@@ -32,6 +32,9 @@ abstract public class StreamOut extends NonCopyable {
 
     /**
      * Instantiate with no native object assigned.
+     * <p>
+     * This no-arg constructor was made explicit to avoid javadoc warnings from
+     * JDK 18+.
      */
     StreamOut() {
     }

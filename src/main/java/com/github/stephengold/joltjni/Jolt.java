@@ -29,7 +29,8 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 /**
- * Utility methods providing JNI access to Jolt Physics.
+ * Utility methods providing JNI access to Jolt Physics and the C++ {@code std}
+ * namespace.
  *
  * @author Stephen Gold sgold@sonic.net
  */
