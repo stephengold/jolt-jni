@@ -104,6 +104,17 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Instantiate from a {@code Float3}.
+     *
+     * @param float3 the desired component values (not null, unaffected)
+     */
+    public Vec3(Float3 float3) {
+        this.x = float3.x;
+        this.y = float3.y;
+        this.z = float3.z;
+    }
+
+    /**
      * Instantiate from a location vector.
      *
      * @param vec the vector to copy (not null, unaffected)
