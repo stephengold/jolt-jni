@@ -26,7 +26,6 @@ import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
-import static com.github.stephengold.joltjni.PhysicsSettings.cDefaultConvexRadius;
 /**
  * A line-for-line Java translation of the Jolt Physics active-edges test.
  * <p>

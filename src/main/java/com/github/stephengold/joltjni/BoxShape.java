@@ -50,7 +50,7 @@ public class BoxShape extends ConvexShape {
      * all components &ge;0.05, unaffected)
      */
     public BoxShape(Vec3Arg halfExtents) {
-        this(halfExtents, PhysicsSettings.cDefaultConvexRadius);
+        this(halfExtents, Jolt.cDefaultConvexRadius);
     }
 
     /**

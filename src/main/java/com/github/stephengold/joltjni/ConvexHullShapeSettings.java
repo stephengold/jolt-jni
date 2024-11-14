@@ -60,7 +60,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * @param points a list of point locations (not null, unaffected)
      */
     public ConvexHullShapeSettings(List<Vec3Arg> points) {
-        this(points, PhysicsSettings.cDefaultConvexRadius);
+        this(points, Jolt.cDefaultConvexRadius);
     }
 
     /**
@@ -119,8 +119,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
                 buffer.put(point.getY());
                 buffer.put(point.getZ());
             }
-            settingsVa = createSettings(numPoints, buffer,
-                    PhysicsSettings.cDefaultConvexRadius, 0L);
+            settingsVa = createSettings(
+                    numPoints, buffer, Jolt.cDefaultConvexRadius, 0L);
         }
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EShapeSubType.ConvexHull);
@@ -171,7 +171,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * unaffected)
      */
     public ConvexHullShapeSettings(int numPoints, FloatBuffer points) {
-        this(numPoints, points, PhysicsSettings.cDefaultConvexRadius);
+        this(numPoints, points, Jolt.cDefaultConvexRadius);
     }
 
     /**

@@ -38,6 +38,10 @@ final public class Jolt {
     // constants
 
     /**
+     * padding around bodies (in meters)
+     */
+    final public static float cDefaultConvexRadius = 0.05f;
+    /**
      * largest finite value of type {@code float}
      */
     final public static float FLT_MAX = Float.MAX_VALUE;

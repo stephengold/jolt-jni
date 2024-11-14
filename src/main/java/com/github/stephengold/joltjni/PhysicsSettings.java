@@ -29,13 +29,6 @@ package com.github.stephengold.joltjni;
  */
 public class PhysicsSettings extends JoltPhysicsObject {
     // *************************************************************************
-    // constants
-
-    /**
-     * padding around objects (in meters)
-     */
-    final public static float cDefaultConvexRadius = 0.05f;
-    // *************************************************************************
     // constructors
 
     /**

@@ -48,7 +48,7 @@ public class CylinderShape extends ConvexShape {
      * @param radius the desired radius
      */
     public CylinderShape(float halfHeight, float radius) {
-        this(halfHeight, radius, PhysicsSettings.cDefaultConvexRadius);
+        this(halfHeight, radius, Jolt.cDefaultConvexRadius);
     }
 
     /**
