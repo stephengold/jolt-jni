@@ -32,6 +32,26 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShape
+ * Method:    drawShrunkShape
+ * Signature: (JJJFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_drawShrunkShape
+  (JNIEnv *, jclass, jlong shapeVa, jlong rendererVa, jlong transformVa,
+  jfloat scaleX, jfloat scaleY, jfloat scaleZ) {
+#ifdef JPH_DEBUG_RENDERER
+    const ConvexHullShape * const pShape
+            = reinterpret_cast<ConvexHullShape *> (shapeVa);
+    DebugRenderer * const pRenderer
+            = reinterpret_cast<DebugRenderer *> (rendererVa);
+    const RMat44 * const pTransform
+            = reinterpret_cast<RMat44 *> (transformVa);
+    const Vec3 scale(scaleX, scaleY, scaleZ);
+    pShape->DrawShrunkShape(pRenderer, *pTransform, scale);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShape
  * Method:    getConvexRadius
  * Signature: (J)F
  */
@@ -83,6 +103,20 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getNu
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShape
+ * Method:    getNumPlanes
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getNumPlanes
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const ConvexHullShape * const pShape
+            = reinterpret_cast<ConvexHullShape *> (shapeVa);
+    const Array<Plane> &planes = pShape->GetPlanes();
+    const Array<Plane>::size_type result = planes.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShape
  * Method:    getNumPoints
  * Signature: (J)I
  */
@@ -105,6 +139,27 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getNu
             = reinterpret_cast<ConvexHullShape *> (shapeVa);
     const uint result = pShape->GetNumVerticesInFace(faceIndex);
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShape
+ * Method:    getPlanes
+ * Signature: (J[F)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getPlanes
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jfloatArray storeFloats) {
+    const ConvexHullShape * const pShape
+            = reinterpret_cast<ConvexHullShape *> (shapeVa);
+    const Array<Plane> &planes = pShape->GetPlanes();
+    jboolean isCopy;
+    jfloat * const pFloats = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    for (int i = 0; i < planes.size(); ++i) {
+        pFloats[4*i] = planes[i].GetNormal().GetX();
+        pFloats[4*i + 1] = planes[i].GetNormal().GetY();
+        pFloats[4*i + 2] = planes[i].GetNormal().GetZ();
+        pFloats[4*i + 3] = planes[i].GetConstant();
+    }
+    pEnv->ReleaseFloatArrayElements(storeFloats, pFloats, 0);
 }
 
 inline static const Vec3 getPoint(jlong shapeVa, jint pointIndex) {

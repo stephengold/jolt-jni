@@ -21,6 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.RMat44Arg;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
+
 /**
  * A {@code Shape} to represent a convex hull defined by a collection of
  * vertices.
@@ -43,6 +46,26 @@ public class ConvexHullShape extends ConvexShape {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Draw how vertices are moved when the shape is shrunk by the convex
+     * radius. The shape is unaffected.
+     *
+     * @param renderer the renderer to use (not null)
+     * @param comTransform the center-of-mass transform (not null, unaffected)
+     * @param scale the scaling to apply (not null, unaffected)
+     */
+    public void drawShrunkShape(
+            DebugRenderer renderer, RMat44Arg comTransform, Vec3Arg scale) {
+        long shapeVa = va();
+        long rendererVa = renderer.va();
+        long transformVa = comTransform.targetVa();
+        float scaleX = scale.getX();
+        float scaleY = scale.getY();
+        float scaleZ = scale.getZ();
+        drawShrunkShape(
+                shapeVa, rendererVa, transformVa, scaleX, scaleY, scaleZ);
+    }
 
     /**
      * Return the convex radius. The shape is unaffected.
@@ -126,6 +149,31 @@ public class ConvexHullShape extends ConvexShape {
     }
 
     /**
+     * Enumerate the planes of the faces. The shape is unaffected.
+     *
+     * @return a new array of new objects
+     */
+    public Plane[] getPlanes() {
+        long shapeVa = va();
+        int numPlanes = getNumPlanes(shapeVa);
+
+        int numFloats = 4 * numPlanes;
+        float[] storeFloats = new float[numFloats];
+        getPlanes(shapeVa, storeFloats);
+        Plane[] result = new Plane[numPlanes];
+        for (int i = 0; i < numPlanes; ++i) {
+            float nx = storeFloats[4 * i];
+            float ny = storeFloats[4 * i + 1];
+            float nz = storeFloats[4 * i + 2];
+            float c = storeFloats[4 * i + 3];
+            Plane plane = new Plane(nx, ny, nz, c);
+            result[i] = plane;
+        }
+
+        return result;
+    }
+
+    /**
      * Locate the specified vertex of the convex hull relative to its center of
      * mass. The shape is unaffected.
      *
@@ -144,6 +192,9 @@ public class ConvexHullShape extends ConvexShape {
     // *************************************************************************
     // native private methods
 
+    native private static void drawShrunkShape(long shapeVa, long rendererVa,
+            long transformVa, float sx, float sy, float sz);
+
     native private static float getConvexRadius(long shapeVa);
 
     native private static int getFaceVertices(
@@ -151,9 +202,13 @@ public class ConvexHullShape extends ConvexShape {
 
     native private static int getNumFaces(long shapeVa);
 
+    native private static int getNumPlanes(long shapeVa);
+
     native private static int getNumPoints(long shapeVa);
 
     native private static int getNumVerticesInFace(long shapeVa, int faceIndex);
+
+    native private static void getPlanes(long shapeVa, float[] storeFloats);
 
     native private static float getPointX(long shapeVa, int pointIndex);
 
