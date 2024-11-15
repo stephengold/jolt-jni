@@ -21,6 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.ESupportMode;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
+
 /**
  * A type of {@code Shape} that inherently possesses the convex property.
  *
@@ -62,6 +65,30 @@ abstract public class ConvexShape extends Shape {
     }
 
     /**
+     * Access the shape's support function.
+     *
+     * @param supportMode how to handle convex radius (not null)
+     * @param buffer buffer storage (not null)
+     * @param scale scale factors to apply (in local coordinates, not null,
+     * unaffected)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public Support getSupportFunction(
+            ESupportMode supportMode, SupportBuffer buffer, Vec3Arg scale) {
+        long shapeVa = va();
+        int ordinal = supportMode.ordinal();
+        long bufferVa = buffer.va();
+        float sx = scale.getX();
+        float sy = scale.getY();
+        float sz = scale.getZ();
+        long supportVa
+                = getSupportFunction(shapeVa, ordinal, bufferVa, sx, sy, sz);
+        Support result = new Support(this, supportVa);
+
+        return result;
+    }
+
+    /**
      * Alter the density.
      *
      * @param density the desired density
@@ -74,6 +101,9 @@ abstract public class ConvexShape extends Shape {
     // native private methods
 
     native private static float getDensity(long shapeVa);
+
+    native private static long getSupportFunction(long shapeVa, int ordinal,
+            long bufferVa, float sx, float sy, float sz);
 
     native private static void setDensity(long shapeVa, float density);
 }

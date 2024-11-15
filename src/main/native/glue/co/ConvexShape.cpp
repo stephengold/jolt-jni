@@ -44,6 +44,26 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexShape_getDens
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexShape
+ * Method:    getSupportFunction
+ * Signature: (JIJFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexShape_getSupportFunction
+  (JNIEnv *, jclass, jlong shapeVa, jint ordinal, jlong bufferVa,
+  jfloat scaleX, jfloat scaleY, jfloat scaleZ) {
+    const ConvexShape * const pShape
+            = reinterpret_cast<ConvexShape *> (shapeVa);
+    const ConvexShape::ESupportMode supportMode
+            = (ConvexShape::ESupportMode) ordinal;
+    ConvexShape::SupportBuffer * const pBuffer
+            = reinterpret_cast<ConvexShape::SupportBuffer *> (bufferVa);
+    const Vec3 scale(scaleX, scaleY, scaleZ);
+    const ConvexShape::Support * const pResult
+            = pShape->GetSupportFunction(supportMode, *pBuffer, scale);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexShape
  * Method:    setDensity
  * Signature: (JF)V
  */
