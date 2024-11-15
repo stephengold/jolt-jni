@@ -110,6 +110,7 @@ final public class SmokeTestAll {
         // convex collision package:
         smokeTest(new CapsuleVsBoxTest());
         smokeTest(new ClosestPointTest());
+        smokeTest(new ConvexHullShrinkTest());
 
         // general package:
         smokeTest(new ActivateDuringUpdateTest());
@@ -159,7 +160,7 @@ final public class SmokeTestAll {
                 Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, 1);
         test.SetJobSystem(jobSystem);
 
-        PhysicsSystem physicsSystem = newPhysicsSystem(10240);
+        PhysicsSystem physicsSystem = newPhysicsSystem(10_240);
         test.SetPhysicsSystem(physicsSystem);
 
         // Initialize and single-step the test:
