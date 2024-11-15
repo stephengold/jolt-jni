@@ -75,8 +75,7 @@ public class Wheel extends NonCopyable {
      *
      * @param wheelVa the virtual address of the native object, or zero
      * @param ordinal the type of {@code VehicleController}
-     * @return a new JVM object, or {@code null} if {@code wheelVa} was
-     * zero
+     * @return a new JVM object, or {@code null} if {@code wheelVa} was zero
      */
     public static Wheel newWheel(long wheelVa, int ordinal) {
         if (wheelVa == 0L) {

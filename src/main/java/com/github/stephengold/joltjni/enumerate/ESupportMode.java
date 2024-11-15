@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni.enumerate;
 
 /**
  * Enumerate possible behaviors for the {@code Support.getSupport()} function.
+ * (native type: {@code ConvexShape::ESupportMode})
  *
  * @author Stephen Gold sgold@sonic.net
  */
