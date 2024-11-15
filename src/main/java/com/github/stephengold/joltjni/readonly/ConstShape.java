@@ -75,6 +75,20 @@ public interface ConstShape extends ConstJoltPhysicsObject {
             ConstColor color, boolean useMaterialColors, boolean wireframe);
 
     /**
+     * Draw the support function with the convex radius added back on. The shape
+     * is unaffected.
+     *
+     * @param renderer the renderer to use (not null)
+     * @param comTransform transform to apply (not null, unaffected)
+     * @param scale scaling to apply (not null, unaffected)
+     * @param color the color using for drawing (not null, unaffected)
+     * @param drawSupportDirection the direction to draw
+     */
+    void drawGetSupportFunction(
+            DebugRenderer renderer, RMat44Arg comTransform, Vec3Arg scale,
+            ConstColor color, boolean drawSupportDirection);
+
+    /**
      * Locate the shape's center of mass. The shape is unaffected.
      *
      * @return a new location vector

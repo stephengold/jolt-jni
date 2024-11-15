@@ -129,6 +129,28 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_draw
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    drawGetSupportFunction
+ * Signature: (JJJFFFIZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_drawGetSupportFunction
+  (JNIEnv *, jclass, jlong shapeVa, jlong rendererVa, jlong transformVa,
+  jfloat scaleX, jfloat scaleY, jfloat scaleZ, jint colorInt,
+  jboolean drawSupportDirection) {
+#ifdef JPH_DEBUG_RENDERER
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    DebugRenderer * const pRenderer
+            = reinterpret_cast<DebugRenderer *> (rendererVa);
+    const RMat44 * const pTransform
+            = reinterpret_cast<RMat44 *> (transformVa);
+    const Vec3 scale(scaleX, scaleY, scaleZ);
+    const Color color(colorInt);
+    pShape->DrawGetSupportFunction(
+            pRenderer, *pTransform, scale, color, drawSupportDirection);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    getCenterOfMassX
  * Signature: (J)F
  */

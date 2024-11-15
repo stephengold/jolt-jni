@@ -202,6 +202,31 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
+     * Draw the support function with the convex radius added back on. The shape
+     * is unaffected.
+     *
+     * @param renderer the renderer to use (not null)
+     * @param comTransform transform to apply (not null, unaffected)
+     * @param scale scaling to apply (not null, unaffected)
+     * @param color the color using for drawing (not null, unaffected)
+     * @param drawSupportDirection the direction to draw
+     */
+    @Override
+    public void drawGetSupportFunction(
+            DebugRenderer renderer, RMat44Arg comTransform, Vec3Arg scale,
+            ConstColor color, boolean drawSupportDirection) {
+        long shapeVa = va();
+        long rendererVa = renderer.va();
+        long transformVa = comTransform.targetVa();
+        float scaleX = scale.getX();
+        float scaleY = scale.getY();
+        float scaleZ = scale.getZ();
+        int colorInt = color.getUInt32();
+        drawGetSupportFunction(shapeVa, rendererVa, transformVa, scaleX, scaleY,
+                scaleZ, colorInt, drawSupportDirection);
+    }
+
+    /**
      * Locate the shape's center of mass. The shape is unaffected.
      *
      * @return a new location vector
@@ -435,6 +460,10 @@ abstract public class Shape extends NonCopyable
     native static void draw(long shapeVa, long rendererVa,
             long transformVa, float scaleX, float scaleY, float scaleZ,
             int colorInt, boolean useMaterialColors, boolean wireframe);
+
+    native static void drawGetSupportFunction(long shapeVa, long rendererVa,
+            long transformVa, float scaleX, float scaleY, float scaleZ,
+            int colorInt, boolean drawSupportDirection);
 
     native static float getCenterOfMassX(long shapeVa);
 

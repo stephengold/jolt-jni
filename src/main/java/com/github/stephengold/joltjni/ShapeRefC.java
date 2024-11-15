@@ -135,6 +135,31 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     }
 
     /**
+     * Draw the support function with the convex radius added back on. The shape
+     * is unaffected.
+     *
+     * @param renderer the renderer to use (not null)
+     * @param comTransform transform to apply (not null, unaffected)
+     * @param scale scaling to apply (not null, unaffected)
+     * @param color the color using for drawing (not null, unaffected)
+     * @param drawSupportDirection the direction to draw
+     */
+    @Override
+    public void drawGetSupportFunction(
+            DebugRenderer renderer, RMat44Arg comTransform, Vec3Arg scale,
+            ConstColor color, boolean drawSupportDirection) {
+        long shapeVa = targetVa();
+        long rendererVa = renderer.va();
+        long transformVa = comTransform.targetVa();
+        float scaleX = scale.getX();
+        float scaleY = scale.getY();
+        float scaleZ = scale.getZ();
+        int colorInt = color.getUInt32();
+        Shape.drawGetSupportFunction(shapeVa, rendererVa, transformVa,
+                scaleX, scaleY, scaleZ, colorInt, drawSupportDirection);
+    }
+
+    /**
      * Locate the shape's center of mass. The shape is unaffected.
      *
      * @return a new location vector
