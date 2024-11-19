@@ -85,6 +85,11 @@ public static void DrawText3DSP(DebugRenderer inRenderer, Vec3Arg inPosition, St
 	inRenderer.drawText3D(new RVec3(inPosition), inString);
 }
 
+public static void DrawText3DSP(DebugRenderer inRenderer, Vec3Arg inPosition, String inString, ConstColor inColor)
+{
+	inRenderer.drawText3D(new RVec3(inPosition), inString, inColor);
+}
+
 public static void DrawText3DSP(DebugRenderer inRenderer, Vec3Arg inPosition, String inString, ConstColor inColor, float inHeight)
 {
 	inRenderer.drawText3D(new RVec3(inPosition), inString, inColor, inHeight);
