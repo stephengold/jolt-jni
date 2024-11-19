@@ -47,6 +47,10 @@ final public class Jolt {
      */
     final public static float FLT_MAX = Float.MAX_VALUE;
     /**
+     * largest value of type {@code int}
+     */
+    final public static float INT_MAX = Integer.MAX_VALUE;
+    /**
      * single-precision value of Pi
      */
     final public static float JPH_PI = (float) Math.PI;
