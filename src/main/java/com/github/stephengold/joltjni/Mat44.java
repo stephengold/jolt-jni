@@ -137,6 +137,45 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Create a matrix for the specified X-axis rotation.
+     *
+     * @param angle the rotation angle (in radians)
+     * @return a new instance
+     */
+    public static Mat44 sRotationX(float angle) {
+        long matrixVa = createRotationX(angle);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
+     * Create a matrix for the specified Y-axis rotation.
+     *
+     * @param angle the rotation angle (in radians)
+     * @return a new instance
+     */
+    public static Mat44 sRotationY(float angle) {
+        long matrixVa = createRotationY(angle);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
+     * Create a matrix for the specified Z-axis rotation.
+     *
+     * @param angle the rotation angle (in radians)
+     * @return a new instance
+     */
+    public static Mat44 sRotationZ(float angle) {
+        long matrixVa = createRotationZ(angle);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Create a translation-and-rotation matrix.
      *
      * @param rotation the amount to rotate (not null, unaffected)
@@ -476,6 +515,12 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     native private static long createFromColumnMajor(float[] elements);
 
     native private static long createIdentity();
+
+    native private static long createRotationX(float angle);
+
+    native private static long createRotationY(float angle);
+
+    native private static long createRotationZ(float angle);
 
     native private static long createUninitialized();
 

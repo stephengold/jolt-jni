@@ -77,6 +77,42 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createIdentity
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    createRotationX
+ * Signature: (F)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createRotationX
+  (JNIEnv *, jclass, jfloat angle) {
+    Mat44 * const pResult = new Mat44(Mat44::sRotationX(angle));
+    TRACE_NEW("Mat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    createRotationY
+ * Signature: (F)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createRotationY
+  (JNIEnv *, jclass, jfloat angle) {
+    Mat44 * const pResult = new Mat44(Mat44::sRotationY(angle));
+    TRACE_NEW("Mat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    createRotationZ
+ * Signature: (F)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createRotationZ
+  (JNIEnv *, jclass, jfloat angle) {
+    Mat44 * const pResult = new Mat44(Mat44::sRotationZ(angle));
+    TRACE_NEW("Mat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    createUninitialized
  * Signature: ()J
  */
