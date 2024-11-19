@@ -182,8 +182,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * @param offset the amount to translate (not null, unaffected)
      * @return a new object
      */
-    public static Mat44 sRotationTranslation(
-            QuatArg rotation, Vec3Arg offset) {
+    public static Mat44 sRotationTranslation(QuatArg rotation, Vec3Arg offset) {
         float[] floatArray = new float[7];
         floatArray[0] = rotation.getX();
         floatArray[1] = rotation.getY();
