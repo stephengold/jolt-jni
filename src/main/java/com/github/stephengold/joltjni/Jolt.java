@@ -103,8 +103,8 @@ final public class Jolt {
     /**
      * Return the cosine of the specified single-precision angle.
      *
-     * @param angle the angle (in radians)
-     * @return the cosine
+     * @param angle the input angle (in radians)
+     * @return the cosine ratio
      */
     native public static float cos(float angle);
 
@@ -397,23 +397,23 @@ final public class Jolt {
     /**
      * Return the sine of the specified single-precision angle.
      *
-     * @param angle the angle (in radians)
-     * @return the sine
+     * @param angle the input angle (in radians)
+     * @return the sine ratio
      */
     native public static float sin(float angle);
 
     /**
      * Return the square root of the specified single-precision value.
      *
-     * @param angle the angle (in radians)
-     * @return the cosine
+     * @param value the input value
+     * @return the square root
      */
-    native public static float sqrt(float angle);
+    native public static float sqrt(float value);
 
     /**
      * Return the square of the specified single-precision value.
      *
-     * @param value the value to square
+     * @param value the input value
      * @return the square
      */
     public static float square(float value) {
