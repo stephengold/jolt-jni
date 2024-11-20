@@ -111,6 +111,7 @@ final public class SmokeTestAll {
         smokeTest(new CapsuleVsBoxTest());
         smokeTest(new ClosestPointTest());
         smokeTest(new ConvexHullShrinkTest());
+        smokeTest(new ConvexHullTest());
 
         // general package:
         smokeTest(new ActivateDuringUpdateTest());
