@@ -32,13 +32,14 @@ public class ChbEdge extends NonCopyable {
     // constructors
 
     /**
-     * Instantiate an edge with the specified native object assigned.
+     * Instantiate an edge with the specified container and native object.
      *
+     * @param container the containing object, or {@code null} if none
      * @param edgeVa the virtual address of the native object to assign (not
      * zero)
      */
-    ChbEdge(long edgeVa) {
-        setVirtualAddress(edgeVa, null);
+    ChbEdge(JoltPhysicsObject container, long edgeVa) {
+        super(container, edgeVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -53,7 +54,13 @@ public class ChbEdge extends NonCopyable {
     public ChbEdge getNextEdge() {
         long edgeVa = va();
         long nextEdgeVa = getNextEdge(edgeVa);
-        ChbEdge result = (nextEdgeVa == 0L) ? null : new ChbEdge(nextEdgeVa);
+        ChbEdge result;
+        if (nextEdgeVa == 0L) {
+            result = null;
+        } else {
+            JoltPhysicsObject container = getContainingObject();
+            result = new ChbEdge(container, nextEdgeVa);
+        }
 
         return result;
     }

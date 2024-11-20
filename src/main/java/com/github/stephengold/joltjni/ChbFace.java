@@ -34,13 +34,14 @@ public class ChbFace extends NonCopyable {
     // constructors
 
     /**
-     * Instantiate a face with the specified native object assigned.
+     * Instantiate a face with the specified container and native object.
      *
+     * @param container the containing object, or {@code null} if none
      * @param faceVa the virtual address of the native object to assign (not
      * zero)
      */
-    ChbFace(long faceVa) {
-        setVirtualAddress(faceVa, null);
+    ChbFace(JoltPhysicsObject container, long faceVa) {
+        super(container, faceVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -70,7 +71,13 @@ public class ChbFace extends NonCopyable {
     public ChbEdge getFirstEdge() {
         long faceVa = va();
         long edgeVa = getFirstEdge(faceVa);
-        ChbEdge result = (edgeVa == 0L) ? null : new ChbEdge(edgeVa);
+        ChbEdge result;
+        if (edgeVa == 0L) {
+            result = null;
+        } else {
+            JoltPhysicsObject container = getContainingObject();
+            result = new ChbEdge(container, edgeVa);
+        }
 
         return result;
     }
