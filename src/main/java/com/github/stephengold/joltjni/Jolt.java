@@ -43,6 +43,10 @@ final public class Jolt {
      */
     final public static float cDefaultConvexRadius = 0.05f;
     /**
+     * difference between 1 and the smallest float greater than 1
+     */
+    final public static float FLT_EPSILON = 1.1920929e-7f;
+    /**
      * largest finite value of type {@code float}
      */
     final public static float FLT_MAX = Float.MAX_VALUE;
