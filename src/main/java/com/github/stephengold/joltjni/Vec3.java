@@ -139,21 +139,6 @@ final public class Vec3 implements Vec3Arg {
     // new methods exposed
 
     /**
-     * Return the component-wise sum of the specified vectors.
-     *
-     * @param vArray an array of input vector (not null, unaffected)
-     * @return a new vector
-     */
-    public static Vec3 add(Vec3Arg... vArray) {
-        Vec3 result = new Vec3();
-        for (Vec3Arg arg : vArray) {
-            Op.plusEquals(result, arg);
-        }
-
-        return result;
-    }
-
-    /**
      * Return the bitwise AND of the specified vectors.
      *
      * @param v1 the first vector (not null, unaffected)
@@ -312,6 +297,21 @@ final public class Vec3 implements Vec3Arg {
      */
     public static Vec3 sReplicate(float value) {
         Vec3 result = new Vec3(value, value, value);
+        return result;
+    }
+
+    /**
+     * Return the component-wise sum of the specified vectors.
+     *
+     * @param vArray an array of input vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 sum(Vec3Arg... vArray) {
+        Vec3 result = new Vec3();
+        for (Vec3Arg arg : vArray) {
+            Op.plusEquals(result, arg);
+        }
+
         return result;
     }
 

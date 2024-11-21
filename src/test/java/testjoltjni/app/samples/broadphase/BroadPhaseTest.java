@@ -56,7 +56,7 @@ void CreateBalancedDistribution(BodyManager inBodyManager, int inNumBodies, floa
 	{
 		AaBox box=new AaBox();
 		box.setMin ( Op.subtract(Op.multiply(max_box_start, new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random))) , Vec3.sReplicate(0.5f * inEnvironmentSize)));
-		box.setMax ( Vec3.add(box.getMin() , min_box_size , Op.multiply(max_box_size ,new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random)))));
+		box.setMax ( Vec3.sum(box.getMin() , min_box_size , Op.multiply(max_box_size ,new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random)))));
 
 		BodyCreationSettings s=new BodyCreationSettings();
 		s.setShape(new BoxShape(box.getExtent(), 0.0f));

@@ -226,7 +226,7 @@ void TestTri(Vec3Arg inPosition, Vec3Arg inA, Vec3Arg inB, Vec3Arg inC)
 
 	float[] uvw=new float[3];
 	ClosestPoint.getBaryCentricCoordinates(a2, b2, c2, uvw);
-	DrawWireSphereSP(mDebugRenderer, Vec3.add(Op.multiply(uvw[0] , inA) , Op.multiply(uvw[1] , inB) , Op.multiply(uvw[2] , inC)), 0.05f, Color.sGreen);
+	DrawWireSphereSP(mDebugRenderer, Vec3.sum(Op.multiply(uvw[0] , inA) , Op.multiply(uvw[1] , inB) , Op.multiply(uvw[2] , inC)), 0.05f, Color.sGreen);
 
 	DrawText3DSP(mDebugRenderer, inA, "a");
 	DrawText3DSP(mDebugRenderer, inB, "b");

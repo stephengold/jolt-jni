@@ -73,7 +73,7 @@ public void Initialize()
 			if (dot > best_dot)
 			{
 				best_dot = dot;
-				box_settings.setPosition (new RVec3(Op.add(Op.divide(Vec3.add(v1 , v2 , v3 , v4) , 4) , normal)));
+				box_settings.setPosition (new RVec3(Op.add(Op.divide(Vec3.sum(v1 , v2 , v3 , v4) , 4) , normal)));
 				box_settings.setRotation ( rotation);
 			}
 
