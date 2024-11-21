@@ -60,6 +60,11 @@ public static void DrawWireBoxSP(DebugRenderer inRenderer, Mat44Arg inMatrix, Co
 	inRenderer.drawWireBox(new RMat44(inMatrix), inBox, inColor);
 }
 
+public static void DrawBoxSP(DebugRenderer inRenderer, Mat44Arg inMatrix, ConstAaBox inBox, ConstColor inColor)
+{
+	inRenderer.drawBox(new RMat44(inMatrix), inBox, inColor);
+}
+
 public static void DrawBoxSP(DebugRenderer inRenderer, Mat44Arg inMatrix, ConstAaBox inBox, ConstColor inColor, ECastShadow inCastShadow, EDrawMode inDrawMode)
 {
 	inRenderer.drawBox(new RMat44(inMatrix), inBox, inColor, inCastShadow, inDrawMode);
@@ -73,6 +78,11 @@ public static void DrawWireSphereSP(DebugRenderer inRenderer, Vec3Arg inCenter, 
 public static void DrawWireSphereSP(DebugRenderer inRenderer, Vec3Arg inCenter, float inRadius, ConstColor inColor, int inLevel)
 {
 	inRenderer.drawWireSphere(new RVec3(inCenter), inRadius, inColor, inLevel);
+}
+
+public static void DrawSphereSP(DebugRenderer inRenderer, Vec3Arg inCenter, float inRadius, ConstColor inColor)
+{
+	inRenderer.drawSphere(new RVec3(inCenter), inRadius, inColor);
 }
 
 public static void DrawSphereSP(DebugRenderer inRenderer, Vec3Arg inCenter, float inRadius, ConstColor inColor, ECastShadow inCastShadow, EDrawMode inDrawMode)
