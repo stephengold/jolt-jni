@@ -96,6 +96,21 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     // new methods exposed
 
     /**
+     * Return the product of the specified matrices.
+     *
+     * @param mArray an array of input matrices (not null, unaffected)
+     * @return a new matrix
+     */
+    public static Mat44 product(Mat44Arg... mArray) {
+        Mat44 result = Mat44.sIdentity();
+        for (Mat44Arg arg : mArray) {
+            result.multiply(arg);
+        }
+
+        return result;
+    }
+
+    /**
      * Alter the specified element.
      *
      * @param row the zero-origin index of the row (&ge;0, &lt;4)
