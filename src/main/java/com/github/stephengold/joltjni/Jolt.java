@@ -98,6 +98,22 @@ final public class Jolt {
     // new methods exposed
 
     /**
+     * Return the inverse cosine of the specified single-precision ratio.
+     *
+     * @param ratio the input cosine ratio (&ge;-1, &le;1)
+     * @return the angle (in radians)
+     */
+    native public static float acos(float ratio);
+
+    /**
+     * Return the inverse tangent of the specified single-precision ratio.
+     *
+     * @param ratio the input tangent ratio
+     * @return the angle (in radians)
+     */
+    native public static float atan(float ratio);
+
+    /**
      * Return the jolt-jni build-type string.
      *
      * @return either "Debug" or "Release"

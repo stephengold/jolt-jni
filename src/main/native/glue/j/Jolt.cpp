@@ -41,6 +41,28 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    acos
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_acos
+  (JNIEnv *, jclass, jfloat ratio) {
+    float result = std::acos(ratio);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    atan
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_atan
+  (JNIEnv *, jclass, jfloat ratio) {
+    float result = std::atan(ratio);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    buildType
  * Signature: ()Ljava/lang/String;
  */
