@@ -38,7 +38,6 @@ import static testjoltjni.app.samples.DebugRendererSP.*;
 public class ConvexHullShrinkTest extends Test{
 int mIteration=0;
 List<Vec3Arg[]>mPoints;
-void Trace(String format,Object...args){cout.printf(format,args);cout.println();cout.flush();}
 
 public void Initialize()
 {

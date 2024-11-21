@@ -38,7 +38,6 @@ public class ConvexHullTest extends Test{
 DefaultRandomEngine mRandom=new DefaultRandomEngine( 12345 );
 int mIteration=0;
 List<List<Vec3>>mPoints;
-void Trace(String format,Object...args){cout.printf(format,args);cout.println();cout.flush();}
 
 public void Initialize()
 {

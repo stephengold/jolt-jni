@@ -46,6 +46,7 @@ void SetDebugRenderer(DebugRenderer renderer){mDebugRenderer = renderer;}
 void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
 void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSystem;mBodyInterface=inPhysicsSystem.getBodyInterface();}
 void SetTempAllocator(TempAllocator inTempAllocator){mTempAllocator=inTempAllocator;}
+protected void Trace(String format,Object...args){cout.printf(format,args);cout.println();cout.flush();}
 
 public Body CreateFloor(){return CreateFloor(200);}
 public Body CreateFloor(float inSize)
