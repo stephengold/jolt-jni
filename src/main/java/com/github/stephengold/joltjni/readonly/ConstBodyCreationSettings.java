@@ -49,7 +49,6 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the body's degrees of freedom. The settings are unaffected.
-     * (native attribute: mAllowedDOFs)
      *
      * @return a bitmask (see {@code EAllowedDofs} for semantics)
      */

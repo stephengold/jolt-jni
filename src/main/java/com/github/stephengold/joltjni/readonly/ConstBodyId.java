@@ -61,7 +61,7 @@ public interface ConstBodyId extends ConstJoltPhysicsObject {
     int getSequenceNumber();
 
     /**
-     * Test whether the current ID is equal to the argument. The current ID is
+     * Test whether the current ID is equal to the argument. Both IDs are
      * unaffected.
      *
      * @param id2 the 2nd ID to test (not null, unaffected)

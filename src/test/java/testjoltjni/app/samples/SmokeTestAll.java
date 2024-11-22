@@ -107,7 +107,7 @@ final public class SmokeTestAll {
         smokeTest(new SwingTwistConstraintFrictionTest());
         smokeTest(new SwingTwistConstraintTest());
 
-        // convex collision package:
+        // convex-collision package:
         smokeTest(new CapsuleVsBoxTest());
         smokeTest(new ClosestPointTest());
         smokeTest(new ConvexHullShrinkTest());
