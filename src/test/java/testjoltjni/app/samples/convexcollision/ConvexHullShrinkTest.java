@@ -24,7 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
-import java.util.List;
+import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
@@ -42,14 +42,14 @@ List<Vec3Arg[]>mPoints;
 public void Initialize()
 {
 	// First add a list of shapes that were problematic before
-	mPoints = List.of(
-		new Vec3[]{
+	mPoints = new ArrayList<>();
+		mPoints.add(new Vec3[]{
 			new Vec3(1, 1, 1),
 			new Vec3(1, 1, -1),
 			new Vec3(1, -1, 1),
 			new Vec3(1, -1, -1),
-		},
-		new Vec3[]{
+		});
+		mPoints.add(new Vec3[]{
 			new Vec3(1, 1, 1),
 			new Vec3(1, 1, -1),
 			new Vec3(1, -1, 1),
@@ -58,8 +58,8 @@ public void Initialize()
 			new Vec3(-1, 1, -1),
 			new Vec3(-1, -1, 1),
 			new Vec3(-1, -1, -1),
-		},
-		new Vec3[]{
+		});
+		mPoints.add(new Vec3[]{
 			new Vec3(0.24055352f, 0.42262089f, 0.20811508f),
 			new Vec3(0.23034751f, 0.42984104f, -0.21389426f),
 			new Vec3(0.21995061f, 0.43724900f, 0.20929135f),
