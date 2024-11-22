@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  */
 public class ChangeObjectLayerTest extends Test{
 BodyId mMoving;
-BodyIdVector mDebris;
+BodyIdVector mDebris=new BodyIdVector();
 boolean mIsDebris = true;
 float mTime;
 
