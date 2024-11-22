@@ -380,6 +380,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_sRotation
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    sRotationAxisAngle
+ * Signature: (FFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_sRotationAxisAngle
+  (JNIEnv *, jclass, jfloat ax, jfloat ay, jfloat az, jfloat angle) {
+    const Vec3 axis(ax, ay, az);
+    Mat44 * const pResult = new Mat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = Mat44::sRotation(axis, angle);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    sRotationTranslation
  * Signature: ([F)J
  */

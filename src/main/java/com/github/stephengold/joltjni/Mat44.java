@@ -152,6 +152,23 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Create a matrix for the specified rotation.
+     *
+     * @param axis the rotation axis (not null, unaffected)
+     * @param angle the desired rotation angle (in radians)
+     * @return a new instance
+     */
+    public static Mat44 sRotation(Vec3Arg axis, float angle) {
+        float ax = axis.getX();
+        float ay = axis.getY();
+        float az = axis.getZ();
+        long matrixVa = sRotationAxisAngle(ax, ay, az, angle);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Create a matrix for the specified X-axis rotation.
      *
      * @param angle the rotation angle (in radians)
@@ -577,6 +594,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
             long matrixVa, int row, int column, float value);
 
     native private static long sRotation(float x, float y, float z, float w);
+
+    native private static long sRotationAxisAngle(
+            float ax, float ay, float az, float angle);
 
     native private static long sRotationTranslation(float[] floatArray);
 
