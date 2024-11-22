@@ -32,7 +32,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  * A line-for-line Java translation of the Jolt Physics vehicle-test abstract class.
  * <p>
  * Compare with the original by Jorrit Rouwe at
- * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Character/CharacterBaseTest.cpp
+ * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Vehicle/VehicleTest.cpp
  */
 abstract class VehicleTest extends Test{
 

@@ -71,19 +71,19 @@ final public class Jolt {
      */
     final public static int INT_MAX = Integer.MAX_VALUE;
     /**
-     * to expedite translation of C++ code
+     * generic null pointer (to expedite translation of C++ code)
      */
     final public static Object nullptr = null;
     /**
-     * to expedite translation of C++ code
+     * standard error stream (to expedite translation of C++ code)
      */
     public static final PrintStream cerr = System.err;
     /**
-     * to expedite translation of C++ code
+     * standard output stream (to expedite translation of C++ code)
      */
     public static final PrintStream cout = System.out;
     /**
-     * to expedite translation of C++ code
+     * line separator (to expedite translation of C++ code)
      */
     final public static String endl = System.lineSeparator();
     // *************************************************************************
@@ -156,7 +156,7 @@ final public class Jolt {
     /**
      * Return the exponential of the specified single-precision value.
      *
-     * @param value the input value
+     * @param value the input exponent
      * @return the exponential
      */
     native public static float exp(float value);
