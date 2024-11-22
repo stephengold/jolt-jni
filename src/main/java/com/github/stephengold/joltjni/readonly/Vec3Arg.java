@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
@@ -167,6 +168,13 @@ public interface Vec3Arg {
      * @return a new vector
      */
     Vec3 reciprocal();
+
+    /**
+     * Copy to a {@code Float3} object. The vector is unaffected.
+     *
+     * @param target the destination (not null, modified)
+     */
+    void storeFloat3(Float3 target);
 
     /**
      * Copy the components to an array. The vector is unaffected.

@@ -588,6 +588,18 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Copy to a {@code Float3} object. The vector is unaffected.
+     *
+     * @param target the destination (not null, modified)
+     */
+    @Override
+    public void storeFloat3(Float3 target) {
+        target.x = x;
+        target.y = y;
+        target.z = z;
+    }
+
+    /**
      * Copy the components to an array. The vector is unaffected.
      *
      * @return a new array with length=3
