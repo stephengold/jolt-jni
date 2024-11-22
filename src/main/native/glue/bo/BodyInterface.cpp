@@ -409,6 +409,20 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getLi
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getMotionQuality
+ * Signature: (JJ)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getMotionQuality
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const EMotionQuality result = pInterface->GetMotionQuality(*pBodyId);
+    return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    getMotionType
  * Signature: (JJ)I
  */
@@ -689,6 +703,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setLine
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
     const Vec3 velocity(vx, vy, vz);
     pInterface->SetLinearVelocity(*pBodyId, velocity);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setMotionQuality
+ * Signature: (JJI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setMotionQuality
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa, jint ordinal) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const EMotionQuality quality = (EMotionQuality) ordinal;
+    pInterface->SetMotionQuality(*pBodyId, quality);
 }
 
 /*

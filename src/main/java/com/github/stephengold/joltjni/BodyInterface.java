@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EBodyType;
+import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
@@ -408,6 +409,21 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Return the motion quality
+     *
+     * @param bodyId the ID of the body to query (not null, unaffected)
+     * @return an enum value (not null)
+     */
+    public EMotionQuality getMotionQuality(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.targetVa();
+        int ordinal = getMotionQuality(bodyInterfaceVa, bodyIdVa);
+        EMotionQuality result = EMotionQuality.values()[ordinal];
+
+        return result;
+    }
+
+    /**
      * Return the motion type of the specified body.
      *
      * @param bodyId the ID of the body to query (not null, unaffected)
@@ -674,6 +690,19 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Alter the motion quality of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null, unaffected)
+     * @param quality the desired level of quality (not null)
+     */
+    public void setMotionQuality(ConstBodyId bodyId, EMotionQuality quality) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.targetVa();
+        int ordinal = quality.ordinal();
+        setMotionQuality(bodyInterfaceVa, bodyIdVa, ordinal);
+    }
+
+    /**
      * Alter the location and orientation of the specified body.
      *
      * @param bodyId the ID of the body to modify (not null, unaffected)
@@ -810,6 +839,9 @@ public class BodyInterface extends NonCopyable {
     native private static float getLinearVelocityZ(
             long bodyInterfaceVa, long bodyIdVa);
 
+    native private static int getMotionQuality(
+            long bodyInterfaceVa, long bodyIdVa);
+
     native private static int getMotionType(
             long bodyInterfaceVa, long bodyIdVa);
 
@@ -870,6 +902,9 @@ public class BodyInterface extends NonCopyable {
 
     native private static void setLinearVelocity(
             long bodyInterfaceVa, long bodyIdVa, float vx, float vy, float vz);
+
+    native private static void setMotionQuality(
+            long bodyInterfaceVa, long bodyIdVa, int ordinal);
 
     native private static void setPositionAndRotation(long bodyInterfaceVa,
             long bodyIdVa, double locX, double locY, double locZ,
