@@ -172,6 +172,17 @@ public class BodyCreationSettings
     }
 
     /**
+     * Alter the body's degrees of freedom. (native attribute: mAllowedDOFs)
+     *
+     * @param bitmask the desired bitmask (see {@code EAllowedDofs} for
+     * semantics)
+     */
+    public void setAllowedDofs(int bitmask) {
+        long bodySettingsVa = va();
+        setAllowedDofs(bodySettingsVa, bitmask);
+    }
+
+    /**
      * Alter whether the created body will be allowed to fall asleep. (native
      * attribute: mAllowSleeping)
      *
@@ -451,6 +462,20 @@ public class BodyCreationSettings
     }
     // *************************************************************************
     // ConstBodyCreationSettings methods
+
+    /**
+     * Return the body's degrees of freedom. The settings are unaffected.
+     * (native attribute: mAllowedDOFs)
+     *
+     * @return a bitmask (see {@code EAllowedDofs} for semantics)
+     */
+    @Override
+    public int getAllowedDofs() {
+        long bodySettingsVa = va();
+        int result = getAllowedDofs(bodySettingsVa);
+
+        return result;
+    }
 
     /**
      * Test whether the created body will be allowed to fall asleep. The
@@ -802,6 +827,8 @@ public class BodyCreationSettings
 
     native private static void free(long bodySettingsVa);
 
+    native private static int getAllowedDofs(long bodySettingsVa);
+
     native private static boolean getAllowSleeping(long bodySettingsVa);
 
     native private static float getAngularDamping(long bodySettingsVa);
@@ -866,6 +893,8 @@ public class BodyCreationSettings
     native private static long getShape(long bodySettingsVa);
 
     native private static boolean hasMassProperties(long bodySettingsVa);
+
+    native private static void setAllowedDofs(long bodySettingsVa, int bitmask);
 
     native private static void setAllowSleeping(
             long bodySettingsVa, boolean allow);

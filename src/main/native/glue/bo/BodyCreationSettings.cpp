@@ -94,6 +94,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getAllowedDofs
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getAllowedDofs
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const EAllowedDOFs result = pSettings->mAllowedDOFs;
+    return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    getAllowSleeping
  * Signature: (J)Z
  */
@@ -508,6 +521,19 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetti
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     const bool result = pSettings->HasMassProperties();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setAllowedDofs
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setAllowedDofs
+  (JNIEnv *, jclass, jlong bodySettingsVa, jint ordinal) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const EAllowedDOFs dofs = (EAllowedDOFs) ordinal;
+    pSettings->mAllowedDOFs = dofs;
 }
 
 /*

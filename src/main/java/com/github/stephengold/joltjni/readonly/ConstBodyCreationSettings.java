@@ -40,6 +40,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
+     * Return the body's degrees of freedom. The settings are unaffected.
+     * (native attribute: mAllowedDOFs)
+     *
+     * @return a bitmask (see {@code EAllowedDofs} for semantics)
+     */
+    int getAllowedDofs();
+
+    /**
      * Test whether the created body will be allowed to fall asleep. The
      * settings are unaffected.
      *
