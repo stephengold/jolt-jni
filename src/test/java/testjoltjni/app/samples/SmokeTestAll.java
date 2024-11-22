@@ -123,6 +123,10 @@ final public class SmokeTestAll {
         smokeTest(new ChangeMotionTypeTest());
         smokeTest(new ChangeObjectLayerTest());
         smokeTest(new ChangeShapeTest());
+        smokeTest(new ContactManifoldTest());
+        smokeTest(new ConveyorBeltTest());
+        smokeTest(new DampingTest());
+        smokeTest(new DynamicMeshTest());
         smokeTest(new EnhancedInternalEdgeRemovalTest());
         smokeTest(new HighSpeedTest());
         smokeTest(new RestitutionTest());
