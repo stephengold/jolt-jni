@@ -120,6 +120,9 @@ final public class SmokeTestAll {
         smokeTest(new BigVsSmallTest());
         smokeTest(new CenterOfMassTest());
         smokeTest(new ChangeMotionQualityTest());
+        smokeTest(new ChangeMotionTypeTest());
+        smokeTest(new ChangeObjectLayerTest());
+        smokeTest(new ChangeShapeTest());
         smokeTest(new EnhancedInternalEdgeRemovalTest());
         smokeTest(new HighSpeedTest());
         smokeTest(new RestitutionTest());
