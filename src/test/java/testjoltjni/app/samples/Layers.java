@@ -36,7 +36,7 @@ public class Layers
 	static final int UNUSED4 = 3;
 	public static final int NON_MOVING = 4;
 	public static final int MOVING = 5;
-	static final int DEBRIS = 6; // Example: Debris collides only with NON_MOVING
+	public static final int DEBRIS = 6; // Example: Debris collides only with NON_MOVING
 	public static final int SENSOR = 7; // Sensors only collide with MOVING objects
 	static final int NUM_LAYERS = 8;
 };
