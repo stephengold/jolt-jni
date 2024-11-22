@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.BPLayerInterfaceImpl;
 import testjoltjni.app.samples.Layers;
 import testjoltjni.app.samples.Test;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics abstract broad phase
  * test class.
@@ -49,9 +50,9 @@ void CreateBalancedDistribution(BodyManager inBodyManager, int inNumBodies, floa
 	DefaultRandomEngine random=new DefaultRandomEngine(0x1ee7c0de);
 	UniformRealDistribution zero_to_one=new UniformRealDistribution(0.0f, 1.0f);
 	float n = (float)(inNumBodies);
-	Vec3 max_box_start = Vec3.sReplicate(inEnvironmentSize * (1.0f - (float)Math.pow(n, -1.0f / 3.0f)));
+	Vec3 max_box_start = Vec3.sReplicate(inEnvironmentSize * (1.0f - pow(n, -1.0f / 3.0f)));
 	Vec3 min_box_size = Vec3.sReplicate(1.0f / inEnvironmentSize);
-	Vec3 max_box_size = Op.subtract(Vec3.sReplicate(inEnvironmentSize * (float)Math.pow(n, -1.0f / 3.0f)) , min_box_size);
+	Vec3 max_box_size = Op.subtract(Vec3.sReplicate(inEnvironmentSize * pow(n, -1.0f / 3.0f)) , min_box_size);
 	for (int b = 0; b < inNumBodies; ++b)
 	{
 		AaBox box=new AaBox();

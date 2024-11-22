@@ -276,6 +276,17 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_perlinNoise3
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    pow
+ * Signature: (FF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_pow
+  (JNIEnv *, jclass, jfloat base, jfloat exponent) {
+    float result = std::pow(base, exponent);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    profileDump
  * Signature: (Ljava/lang/String;)V
  */

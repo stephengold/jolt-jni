@@ -310,6 +310,15 @@ final public class Jolt {
             float x, float y, float z, int xWrap, int yWrap, int zWrap);
 
     /**
+     * Return the specified power of the specified single-precision base.
+     *
+     * @param base the base value
+     * @param exponent the exponent value
+     * @return the power value
+     */
+    native public static float pow(float base, float exponent);
+
+    /**
      * Dump profiler data.
      *
      * @param message (not null)
