@@ -140,6 +140,39 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Alter the first (X) component.
+     *
+     * @param x the desired value
+     * @return the modified vector, for chaining
+     */
+    public RVec3 setX(double x) {
+        this.xx = x;
+        return this;
+    }
+
+    /**
+     * Alter the 2nd (Y) component.
+     *
+     * @param y the desired value
+     * @return the modified vector, for chaining
+     */
+    public RVec3 setY(double y) {
+        this.yy = y;
+        return this;
+    }
+
+    /**
+     * Alter the 3rd (Z) component.
+     *
+     * @param z the desired value
+     * @return the modified vector, for chaining
+     */
+    public RVec3 setZ(double z) {
+        this.zz = z;
+        return this;
+    }
+
+    /**
      * Create a vector with all components zero.
      *
      * @return a new vector
