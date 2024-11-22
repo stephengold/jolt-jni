@@ -66,7 +66,7 @@ public void Initialize()
 	List<Vec3Arg> sphere=new ArrayList<>();
 	for (float theta = 0.0f; theta <= JPH_PI; theta += JPH_PI / 20.0f)
 		for (float phi = 0.0f; phi <= 2.0f * JPH_PI; phi += 2.0f * JPH_PI / 20.0f)
-			sphere.add(Op.multiply(5.0f , Vec3.sUnitSpherical(theta, phi)));
+			sphere.add(Op.star(5.0f , Vec3.sUnitSpherical(theta, phi)));
 
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new ConvexHullShapeSettings(sphere),new RVec3(40, 10, 0), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 
@@ -74,8 +74,8 @@ public void Initialize()
 	List<Vec3Arg> tapered_cylinder=new ArrayList<>();
 	for (float theta = 0.0f; theta <= 2.0f * JPH_PI; theta += JPH_PI / 128.0f)
 	{
-		tapered_cylinder.add(Op.multiply(4.0f ,new Vec3(-0.1f, sin(theta), cos(theta))));
-		tapered_cylinder.add(Op.multiply(4.5f ,new Vec3(0.1f, sin(theta), cos(theta))));
+		tapered_cylinder.add(Op.star(4.0f ,new Vec3(-0.1f, sin(theta), cos(theta))));
+		tapered_cylinder.add(Op.star(4.5f ,new Vec3(0.1f, sin(theta), cos(theta))));
 	}
 
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new ConvexHullShapeSettings(tapered_cylinder),new RVec3(60, 10, 0), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
@@ -113,7 +113,7 @@ public void Initialize()
 		// Create random points
 		List<Vec3Arg> points=new ArrayList<>(20);
 		for (int j = 0; j < 20; ++j)
-			points.add(Op.multiply(hull_size.nextFloat(random) , Vec3.sRandom(random)));
+			points.add(Op.star(hull_size.nextFloat(random) , Vec3.sRandom(random)));
 
 		mBodyInterface.createAndAddBody(new BodyCreationSettings(new ConvexHullShapeSettings(points),new RVec3(-90.0f + i * 18.0f, 10, 20), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 	}
@@ -125,7 +125,7 @@ public void Initialize()
 		List<Vec3Arg> points=new ArrayList<>(20);
 		for (int j = 0; j < 20; ++j)
 		{
-			Vec3 v = Op.multiply(hull_size.nextFloat(random) , Vec3.sRandom(random));
+			Vec3 v = Op.star(hull_size.nextFloat(random) , Vec3.sRandom(random));
 			v.setZ(0.0f);
 			points.add(v);
 		}

@@ -46,7 +46,7 @@ public void Initialize()
 
 	// Mesh cannot calculate its mass, we must provide it
 	settings.setOverrideMassProperties ( EOverrideMassProperties.MassAndInertiaProvided);
-	settings.getMassPropertiesOverride().setMassAndInertiaOfSolidBox(Op.multiply(2.0f ,new Vec3(cTorusRadius, cTubeRadius, cTorusRadius)), 1000.0f);
+	settings.getMassPropertiesOverride().setMassAndInertiaOfSolidBox(Op.star(2.0f ,new Vec3(cTorusRadius, cTubeRadius, cTorusRadius)), 1000.0f);
 
 	mBodyInterface.createAndAddBody(settings, EActivation.Activate);
 

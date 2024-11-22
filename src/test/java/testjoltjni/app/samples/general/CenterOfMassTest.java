@@ -61,8 +61,8 @@ public void Initialize()
 	StaticCompoundShapeSettings compound_shape2 = new StaticCompoundShapeSettings();
 	Quat rotation = Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI);
 	compound_shape2.addShape(new Vec3(10, 0, 0), rotation, new CapsuleShape(5, 1));
-	compound_shape2.addShape(Op.rotate(rotation ,new Vec3(10, -5, 0)), Quat.sIdentity(), new SphereShape(4));
-	compound_shape2.addShape(Op.rotate(rotation ,new Vec3(10, 5, 0)), Quat.sIdentity(), new SphereShape(2));
+	compound_shape2.addShape(Op.star(rotation ,new Vec3(10, -5, 0)), Quat.sIdentity(), new SphereShape(4));
+	compound_shape2.addShape(Op.star(rotation ,new Vec3(10, 5, 0)), Quat.sIdentity(), new SphereShape(2));
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(compound_shape2,new RVec3(0, 10.0f, 40.0f), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 }
 }

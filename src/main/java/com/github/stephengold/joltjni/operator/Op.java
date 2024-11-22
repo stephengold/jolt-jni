@@ -58,7 +58,7 @@ final public class Op {
      * @param right the 2nd vector (not null, unaffected)
      * @return a new vector
      */
-    public static RVec3 add(RVec3Arg left, RVec3Arg right) {
+    public static RVec3 plus(RVec3Arg left, RVec3Arg right) {
         double xx = left.xx() + right.xx();
         double yy = left.yy() + right.yy();
         double zz = left.zz() + right.zz();
@@ -75,7 +75,7 @@ final public class Op {
      * @param right the offset to add (not null, unaffected)
      * @return a new vector
      */
-    public static RVec3 add(RVec3Arg left, Vec3Arg right) {
+    public static RVec3 plus(RVec3Arg left, Vec3Arg right) {
         double xx = left.xx() + right.getX();
         double yy = left.yy() + right.getY();
         double zz = left.zz() + right.getZ();
@@ -92,7 +92,7 @@ final public class Op {
      * @param right the 2nd vector (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 add(Vec3Arg left, Vec3Arg right) {
+    public static Vec3 plus(Vec3Arg left, Vec3Arg right) {
         float x = left.getX() + right.getX();
         float y = left.getY() + right.getY();
         float z = left.getZ() + right.getZ();
@@ -109,7 +109,7 @@ final public class Op {
      * @param right the inverse scale to apply
      * @return a new vector
      */
-    public static RVec3 divide(RVec3Arg left, double right) {
+    public static RVec3 slash(RVec3Arg left, double right) {
         double xx = left.xx() / right;
         double yy = left.yy() / right;
         double zz = left.zz() / right;
@@ -126,7 +126,7 @@ final public class Op {
      * @param right the inverse scale to apply
      * @return a new vector
      */
-    public static Vec3 divide(Vec3Arg left, float right) {
+    public static Vec3 slash(Vec3Arg left, float right) {
         float x = left.getX() / right;
         float y = left.getY() / right;
         float z = left.getZ() / right;
@@ -142,7 +142,7 @@ final public class Op {
      * @param left the accumulating vector (not null, modified)
      * @param right the denominator (not null, unaffected)
      */
-    public static void divideEquals(RVec3 left, double right) {
+    public static void slashEquals(RVec3 left, double right) {
         double xx = left.xx() / right;
         double yy = left.yy() / right;
         double zz = left.zz() / right;
@@ -156,7 +156,7 @@ final public class Op {
      * @param left the accumulating vector (not null, modified)
      * @param right the denominator (not null, unaffected)
      */
-    public static void divideEquals(Vec3 left, float right) {
+    public static void slashEquals(Vec3 left, float right) {
         float xx = left.getX() / right;
         float yy = left.getY() / right;
         float zz = left.getZ() / right;
@@ -170,7 +170,7 @@ final public class Op {
      * @param right the 2nd ID to test (not null, unaffected)
      * @return {@code true} if equal, {@code false} if unequal
      */
-    public static boolean equals(ConstBodyId left, ConstBodyId right) {
+    public static boolean isEqual(ConstBodyId left, ConstBodyId right) {
         boolean result = left.isEqual(right);
         return result;
     }
@@ -183,7 +183,7 @@ final public class Op {
      * @param right the 2nd color to test (not null, unaffected)
      * @return {@code true} if equal, {@code false} if unequal
      */
-    public static boolean equals(ConstColor left, ConstColor right) {
+    public static boolean isEqual(ConstColor left, ConstColor right) {
         boolean result = left.getA() == right.getA()
                 && left.getB() == right.getB()
                 && left.getG() == right.getG()
@@ -199,7 +199,7 @@ final public class Op {
      * @param right the 2nd matrix (not null, unaffected)
      * @return {@code true} if equal, otherwise {@code false}
      */
-    public static boolean equals(Mat44Arg left, Mat44Arg right) {
+    public static boolean isEqual(Mat44Arg left, Mat44Arg right) {
         boolean result = left.isEqual(right);
         return result;
     }
@@ -225,7 +225,7 @@ final public class Op {
      * @param right the input vector (not null, unaffected)
      * @return a new vector
      */
-    public static RVec3 multiply(double left, RVec3Arg right) {
+    public static RVec3 star(double left, RVec3Arg right) {
         double x = left * right.xx();
         double y = left * right.yy();
         double z = left * right.zz();
@@ -242,7 +242,7 @@ final public class Op {
      * @param right the input quaternion (not null, unaffected)
      * @return a new quaternion
      */
-    public static Quat multiply(float left, QuatArg right) {
+    public static Quat star(float left, QuatArg right) {
         float w = left * right.getW();
         float x = left * right.getX();
         float y = left * right.getY();
@@ -260,7 +260,7 @@ final public class Op {
      * @param right the input vector (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 multiply(float left, Vec3Arg right) {
+    public static Vec3 star(float left, Vec3Arg right) {
         float x = left * right.getX();
         float y = left * right.getY();
         float z = left * right.getZ();
@@ -278,7 +278,7 @@ final public class Op {
      * @param right the right factor (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 multiply(Mat44Arg left, Vec3Arg right) {
+    public static Vec3 star(Mat44Arg left, Vec3Arg right) {
         Vec3 result = left.multiply3x4(right);
         return result;
     }
@@ -291,7 +291,7 @@ final public class Op {
      * @param right the right factor (not null, unaffected)
      * @return a new vector
      */
-    public static RMat44 multiply(RMat44Arg left, RMat44Arg right) {
+    public static RMat44 star(RMat44Arg left, RMat44Arg right) {
         RMat44 result = left.multiply(right);
         return result;
     }
@@ -305,7 +305,7 @@ final public class Op {
      * @param right the right factor (not null, unaffected)
      * @return a new vector
      */
-    public static RVec3 multiply(RMat44Arg left, RVec3Arg right) {
+    public static RVec3 star(RMat44Arg left, RVec3Arg right) {
         RVec3 result = left.multiply3x4(right);
         return result;
     }
@@ -319,7 +319,7 @@ final public class Op {
      * @param right the right factor (not null, unaffected)
      * @return a new vector
      */
-    public static RVec3 multiply(RMat44Arg left, Vec3Arg right) {
+    public static RVec3 star(RMat44Arg left, Vec3Arg right) {
         RVec3 result = left.multiply3x4(right);
         return result;
     }
@@ -332,7 +332,7 @@ final public class Op {
      * @param right the right factor (not null, unaffected)
      * @return a new quaternion
      */
-    public static Quat multiply(QuatArg left, QuatArg right) {
+    public static Quat star(QuatArg left, QuatArg right) {
         float lw = left.getW();
         float lx = left.getX();
         float ly = left.getY();
@@ -360,7 +360,7 @@ final public class Op {
      * @param right the scale to apply
      * @return a new vector
      */
-    public static Vec3 multiply(Vec3Arg left, float right) {
+    public static Vec3 star(Vec3Arg left, float right) {
         float x = right * left.getX();
         float y = right * left.getY();
         float z = right * left.getZ();
@@ -377,7 +377,7 @@ final public class Op {
      * @param right the 2nd vector (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 multiply(Vec3Arg left, Vec3Arg right) {
+    public static Vec3 star(Vec3Arg left, Vec3Arg right) {
         float x = left.getX() * right.getX();
         float y = left.getY() * right.getY();
         float z = left.getZ() * right.getZ();
@@ -393,7 +393,7 @@ final public class Op {
      * @param right the input vector (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 negate(Vec3Arg right) {
+    public static Vec3 minus(Vec3Arg right) {
         float x = -right.getX();
         float y = -right.getY();
         float z = -right.getZ();
@@ -480,7 +480,7 @@ final public class Op {
      * @param right the vector to apply it to (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 rotate(QuatArg left, Vec3Arg right) {
+    public static Vec3 star(QuatArg left, Vec3Arg right) {
         assert left.isNormalized();
 
         float lw = left.getW();
@@ -528,7 +528,7 @@ final public class Op {
      * @param right the offset to subtract (not null, unaffected)
      * @return a new vector
      */
-    public static RVec3 subtract(RVec3Arg left, RVec3Arg right) {
+    public static RVec3 minus(RVec3Arg left, RVec3Arg right) {
         double xx = left.xx() - right.xx();
         double yy = left.yy() - right.yy();
         double zz = left.zz() - right.zz();
@@ -545,7 +545,7 @@ final public class Op {
      * @param right the offset to subtract (not null, unaffected)
      * @return a new vector
      */
-    public static RVec3 subtract(RVec3Arg left, Vec3Arg right) {
+    public static RVec3 minus(RVec3Arg left, Vec3Arg right) {
         double xx = left.xx() - right.getX();
         double yy = left.yy() - right.getY();
         double zz = left.zz() - right.getZ();
@@ -562,7 +562,7 @@ final public class Op {
      * @param right the vector to subtract (not null, unaffected)
      * @return a new vector
      */
-    public static Vec3 subtract(Vec3Arg left, Vec3Arg right) {
+    public static Vec3 minus(Vec3Arg left, Vec3Arg right) {
         float x = left.getX() - right.getX();
         float y = left.getY() - right.getY();
         float z = left.getZ() - right.getZ();

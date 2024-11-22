@@ -76,7 +76,7 @@ public void Initialize()
 			{
 				Op.plusEquals(position ,new Vec3(box_size + Math.abs(displacement.nextFloat(random)), displacement.nextFloat(random), displacement.nextFloat(random)));
 				rotation = Quat.sRandom(random);
-				slider_axis = Op.rotate( Quat.sRotation(Vec3.sAxisY(), displacement.nextFloat(random) * degreesToRadians(20)) , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(10)).rotateAxisX());
+				slider_axis = Op.star( Quat.sRotation(Vec3.sAxisY(), displacement.nextFloat(random) * degreesToRadians(20)) , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(10)).rotateAxisX());
 			}
 
 			Body segment = mBodyInterface.createBody(new BodyCreationSettings(box, position, rotation, EMotionType.Dynamic, Layers.MOVING));

@@ -106,7 +106,7 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 		normal.setY(0.0f);
 		float dot = normal.dot(movement_direction);
 		if (dot < 0.0f)
-			Op.minusEquals(movement_direction , Op.divide(Op.multiply(dot , normal) , normal.lengthSq()));
+			Op.minusEquals(movement_direction , Op.slash(Op.star(dot , normal) , normal.lengthSq()));
 	}
 
 	// Stance switch
@@ -117,10 +117,10 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 	{
 		// Update velocity
 		Vec3 current_velocity =new Vec3(mCharacter.getLinearVelocity());
-		Vec3 desired_velocity =new Vec3(Op.multiply(sCharacterSpeed , movement_direction));
+		Vec3 desired_velocity =new Vec3(Op.star(sCharacterSpeed , movement_direction));
 		if (!desired_velocity.isNearZero() || current_velocity.getY() < 0.0f || !mCharacter.isSupported())
 			desired_velocity.setY(current_velocity.getY());
-		Vec3 new_velocity =new Vec3(Op.add(Op.multiply(0.75f , current_velocity) , Op.multiply(0.25f , desired_velocity)));
+		Vec3 new_velocity =new Vec3(Op.plus(Op.star(0.75f , current_velocity) , Op.star(0.25f , desired_velocity)));
 
 		// Jump
 		if (inJump && ground_state == EGroundState.OnGround)

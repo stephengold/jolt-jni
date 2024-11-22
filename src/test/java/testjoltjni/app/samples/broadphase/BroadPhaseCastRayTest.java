@@ -59,8 +59,8 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Create ray
 	DefaultRandomEngine random=new DefaultRandomEngine();
-	Vec3 from = Op.multiply(1000.0f , Vec3.sRandom(random));
-	RayCast ray = new RayCast(from, Op.multiply(-2.0f , from) );
+	Vec3 from = Op.star(1000.0f , Vec3.sRandom(random));
+	RayCast ray = new RayCast(from, Op.star(-2.0f , from) );
 
 	// Raycast before update
 	AllHitRayCastBodyCollector collector=new AllHitRayCastBodyCollector();
@@ -71,6 +71,6 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	// Draw results
 	for (int i = 0; i < num_hits; ++i)
 		DrawMarkerSP(mDebugRenderer, ray.getPointOnRay(results[i].getFraction()), Color.sGreen, 10.0f);
-	DrawLineSP(mDebugRenderer, ray.getOrigin(), Op.add(ray.getOrigin() , ray.getDirection()), Color.sRed);
+	DrawLineSP(mDebugRenderer, ray.getOrigin(), Op.plus(ray.getOrigin() , ray.getDirection()), Color.sRed);
 }
 }

@@ -61,16 +61,16 @@ public void Initialize()
 	float half_box_height = 1.5f;
 	ShapeRefC box = new BoxShape(new Vec3(0.25f, half_box_height, 0.5f)).toRefC();
 	Quat body1_rotation = Quat.sEulerAngles(sBodyRotation[0]);
-	Quat body2_rotation = Op.multiply(Quat.sEulerAngles(sBodyRotation[1]) , body1_rotation);
+	Quat body2_rotation = Op.star(Quat.sEulerAngles(sBodyRotation[1]) , body1_rotation);
 
 	RVec3 body1_position=new RVec3(0, 20, 0);
 	Body body1 = mBodyInterface.createBody(new BodyCreationSettings(box, body1_position, body1_rotation, EMotionType.Static, Layers.NON_MOVING));
 	body1.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 	mBodyInterface.addBody(body1.getId(), EActivation.DontActivate);
 
-	RVec3 constraint_position = Op.add(body1_position , Op.rotate(body1_rotation ,new Vec3(0, -half_box_height, 0)));
+	RVec3 constraint_position = Op.plus(body1_position , Op.star(body1_rotation ,new Vec3(0, -half_box_height, 0)));
 
-	RVec3 body2_position = Op.add(constraint_position , Op.rotate(body2_rotation ,new Vec3(0, -half_box_height, 0)));
+	RVec3 body2_position = Op.plus(constraint_position , Op.star(body2_rotation ,new Vec3(0, -half_box_height, 0)));
 	Body body2 = mBodyInterface.createBody(new BodyCreationSettings(box, body2_position, body2_rotation, EMotionType.Dynamic, Layers.MOVING));
 	body2.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 	body2.getMotionProperties().setLinearDamping(0.0f);
@@ -85,7 +85,7 @@ public void Initialize()
 	settings.setTwistMaxAngle ( sTwistMaxAngle);
 
 	settings.setPosition1 ( settings.setPosition2 ( constraint_position));
-	settings.setTwistAxis1 ( settings.setTwistAxis2 ( Op.negate(body1_rotation.rotateAxisY())));
+	settings.setTwistAxis1 ( settings.setTwistAxis2 ( Op.minus(body1_rotation.rotateAxisY())));
 	settings.setPlaneAxis1 ( settings.setPlaneAxis2 ( body1_rotation.rotateAxisX()));
 
 	mConstraint = (SwingTwistConstraint) (settings.create(body1, body2));
@@ -93,7 +93,7 @@ public void Initialize()
 
 	// Calculate inertia along the axis of the box, so that the acceleration of the motor / friction are correct for twist
 	Mat44 body2_inertia = body2.getMotionProperties().getLocalSpaceInverseInertia().inversed3x3();
-	mInertiaBody2AsSeenFromConstraint = Op.multiply(body2_inertia , Vec3.sAxisY()).length();
+	mInertiaBody2AsSeenFromConstraint = Op.star(body2_inertia , Vec3.sAxisY()).length();
 }
 
 public void PrePhysicsUpdate( PreUpdateParams inParams)

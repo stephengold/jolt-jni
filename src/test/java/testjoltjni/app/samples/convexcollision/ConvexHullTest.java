@@ -441,7 +441,7 @@ public void Initialize()
 		for (int x = 0; x < 10; ++x)
 			for (int y = 0; y < 10; ++y)
 				for (int z = 0; z < 10; ++z)
-					p.add(Op.multiply(Vec3.sReplicate(-0.5f) , Op.multiply(0.1f ,new Vec3((float)(x), (float)(y), (float)(z)))));
+					p.add(Op.star(Vec3.sReplicate(-0.5f) , Op.star(0.1f ,new Vec3((float)(x), (float)(y), (float)(z)))));
 		mPoints.add(p);
 	}
 
@@ -451,7 +451,7 @@ public void Initialize()
 		Mat44 rot = Mat44.sRotationZ(0.25f * JPH_PI);
 		for (float r = 0.0f; r < 2.0f; r += 0.1f)
 			for (float phi = 0.0f; phi <= 2.0f * JPH_PI; phi += 2.0f * JPH_PI / 20.0f)
-				p.add(Op.multiply(rot ,new Vec3(r * cos(phi), r * sin(phi), 0)));
+				p.add(Op.star(rot ,new Vec3(r * cos(phi), r * sin(phi), 0)));
 		mPoints.add(p);
 	}
 
@@ -462,7 +462,7 @@ public void Initialize()
 		{
 			Vec3 pos=new Vec3(2.0f * cos(phi), 0, 2.0f * sin(phi));
 			p.add(pos);
-			p.add(Op.add(pos ,new Vec3(0, 2.0e-3f * (2.0f + pos.getX()) / 4.0f, 0)));
+			p.add(Op.plus(pos ,new Vec3(0, 2.0e-3f * (2.0f + pos.getX()) / 4.0f, 0)));
 		}
 		mPoints.add(p);
 	}
@@ -537,20 +537,20 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		for (int i = 0; i < 100; ++i)
 		{
 			// Add random point
-			Vec3 p1 = Op.multiply(vertex_scale.nextFloat(mRandom) , Op.multiply(Vec3.sRandom(mRandom) , scale));
+			Vec3 p1 = Op.star(vertex_scale.nextFloat(mRandom) , Op.star(Vec3.sRandom(mRandom) , scale));
 			points.add(p1);
 
 			// Point close to p1
-			Vec3 p2 = Op.add(p1 , Op.multiply(tolerance * zero_two.nextFloat(mRandom) , Vec3.sRandom(mRandom)));
+			Vec3 p2 = Op.plus(p1 , Op.star(tolerance * zero_two.nextFloat(mRandom) , Vec3.sRandom(mRandom)));
 			points.add(p2);
 
 			// Point on a line to another point
 			float fraction = zero_one.nextFloat(mRandom);
-			Vec3 p3 = Op.add(Op.multiply(fraction , p1) , Op.multiply((1.0f - fraction) , points.get(mRandom.nextInt() % points.size())));
+			Vec3 p3 = Op.plus(Op.star(fraction , p1) , Op.star((1.0f - fraction) , points.get(mRandom.nextInt() % points.size())));
 			points.add(p3);
 
 			// Point close to p3
-			Vec3 p4 = Op.add(p3 , Op.multiply(tolerance * zero_two.nextFloat(mRandom) , Vec3.sRandom(mRandom)));
+			Vec3 p4 = Op.plus(p3 , Op.star(tolerance * zero_two.nextFloat(mRandom) , Vec3.sRandom(mRandom)));
 			points.add(p4);
 		}
 	}
@@ -585,23 +585,23 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		Trace("Iteration %d: max_error=%g", mIteration - 1, (double)max_error[0]);
 
 		// Draw point that had the max error
-		Vec3 point = Op.multiply(display_scale , Op.subtract(points.get(max_error_point[0]) , com));
+		Vec3 point = Op.star(display_scale , Op.minus(points.get(max_error_point[0]) , com));
 		DrawMarkerSP(mDebugRenderer, point, Color.sRed, 1.0f);
 		DrawText3DSP(mDebugRenderer, point, String.format("%d: %g", max_error_point[0], (double)max_error[0]), Color.sRed);
 
 		// Length of normal (2x area) for max error face
-		Vec3 centroid = Op.multiply(display_scale , Op.subtract(max_error_face[0].getCentroid() , com));
-		Vec3 centroid_plus_normal = Op.add(centroid , max_error_face[0].getNormal().normalized());
+		Vec3 centroid = Op.star(display_scale , Op.minus(max_error_face[0].getCentroid() , com));
+		Vec3 centroid_plus_normal = Op.plus(centroid , max_error_face[0].getNormal().normalized());
 		DrawArrowSP(mDebugRenderer, centroid, centroid_plus_normal, Color.sGreen, 0.1f);
 		DrawText3DSP(mDebugRenderer, centroid_plus_normal, Float.toString(max_error_face[0].getNormal().length()), Color.sGreen);
 
 		// Draw face that had the max error
 		 ChbEdge e = max_error_face[0].getFirstEdge();
-		Vec3 prev = Op.multiply(display_scale , Op.subtract(points.get(e.getStartIdx()) , com));
+		Vec3 prev = Op.star(display_scale , Op.minus(points.get(e.getStartIdx()) , com));
 		do
 		{
 			ChbEdge  next = e.getNextEdge();
-			Vec3 cur = Op.multiply(display_scale , Op.subtract(points.get(next.getStartIdx()) , com));
+			Vec3 cur = Op.star(display_scale , Op.minus(points.get(next.getStartIdx()) , com));
 			DrawArrowSP(mDebugRenderer, prev, cur, Color.sYellow, 0.01f);
 			DrawText3DSP(mDebugRenderer, prev, Integer.toString(e.getStartIdx()), Color.sYellow);
 			e = next;
@@ -613,7 +613,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 
 	// Draw input points around center of mass
 	for (Vec3 v : points)
-		DrawMarkerSP(mDebugRenderer, Op.multiply(display_scale , Op.subtract(v , com)), Color.sWhite, 0.01f);
+		DrawMarkerSP(mDebugRenderer, Op.star(display_scale , Op.minus(v , com)), Color.sWhite, 0.01f);
 
 	// Draw the hull around center of mass
 	int color_idx = 0;
@@ -623,11 +623,11 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 
 		// First point
 		 ChbEdge e = f.getFirstEdge();
-		Vec3 p1 = Op.multiply(display_scale , Op.subtract(points.get(e.getStartIdx()) , com));
+		Vec3 p1 = Op.star(display_scale , Op.minus(points.get(e.getStartIdx()) , com));
 
 		// Second point
 		e = e.getNextEdge();
-		Vec3 p2 = Op.multiply(display_scale , Op.subtract(points.get(e.getStartIdx()) , com));
+		Vec3 p2 = Op.star(display_scale , Op.minus(points.get(e.getStartIdx()) , com));
 
 		// First line
 		DrawLineSP(mDebugRenderer, p1, p2, Color.sGrey);
@@ -636,7 +636,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		{
 			// Third point
 			e = e.getNextEdge();
-			Vec3 p3 = Op.multiply(display_scale , Op.subtract(points.get(e.getStartIdx()) , com));
+			Vec3 p3 = Op.star(display_scale , Op.minus(points.get(e.getStartIdx()) , com));
 
 			DrawTriangleSP(mDebugRenderer, p1, p2, p3, color);
 

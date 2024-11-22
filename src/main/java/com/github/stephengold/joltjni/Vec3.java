@@ -544,7 +544,7 @@ final public class Vec3 implements Vec3Arg {
      */
     @Override
     public Vec3 normalized() {
-        Vec3 result = Op.multiply(1f / length(), this);
+        Vec3 result = Op.star(1f / length(), this);
         return result;
     }
 
@@ -569,7 +569,7 @@ final public class Vec3 implements Vec3Arg {
             if (length == 0f) {
                 result = new Vec3(zeroValue);
             } else {
-                result = Op.multiply(1f / length, this);
+                result = Op.star(1f / length, this);
             }
         }
 

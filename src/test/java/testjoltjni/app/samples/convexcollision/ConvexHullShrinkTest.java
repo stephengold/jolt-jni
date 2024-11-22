@@ -183,7 +183,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		{
 			Trace("%d, %f, %f", mIteration - 1, (double)convex_radius, (double)max_error);
 			DrawMarkerSP(mDebugRenderer, max_error_support_point, Color.sPurple, 0.1f);
-			DrawArrowSP(mDebugRenderer, max_error_support_point, Op.subtract(max_error_support_point , Op.multiply(max_error , planes[max_error_plane].getNormal())), Color.sPurple, 0.01f);
+			DrawArrowSP(mDebugRenderer, max_error_support_point, Op.minus(max_error_support_point , Op.star(max_error , planes[max_error_plane].getNormal())), Color.sPurple, 0.01f);
 		}
 	}
 

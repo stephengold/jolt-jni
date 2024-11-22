@@ -75,7 +75,7 @@ public void Initialize()
 	for (int i = 0; i < cGear1NumTeeth; ++i)
 	{
 		Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f * JPH_PI * i / cGear1NumTeeth);
-		gear1_settings.addShape(Op.rotate(rotation ,new Vec3(cGear1Radius, 0, 0)), rotation, tooth_settings);
+		gear1_settings.addShape(Op.star(rotation ,new Vec3(cGear1Radius, 0, 0)), rotation, tooth_settings);
 	}
 
 	RVec3 gear1_initial_p=new RVec3(0, 3.0f, 0);
@@ -94,10 +94,10 @@ public void Initialize()
 	for (int i = 0; i < cGear2NumTeeth; ++i)
 	{
 		Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f * JPH_PI * (i + 0.5f) / cGear2NumTeeth);
-		gear2_settings.addShape(Op.rotate(rotation ,new Vec3(cGear2Radius, 0, 0)), rotation, tooth_settings);
+		gear2_settings.addShape(Op.star(rotation ,new Vec3(cGear2Radius, 0, 0)), rotation, tooth_settings);
 	}
 
-	RVec3 gear2_initial_p = Op.add(gear1_initial_p ,new Vec3(cGear1Radius + cGear2Radius + cToothHeight, 0, 0));
+	RVec3 gear2_initial_p = Op.plus(gear1_initial_p ,new Vec3(cGear1Radius + cGear2Radius + cToothHeight, 0, 0));
 	Quat gear2_initial_r = gear1_initial_r;
 	Body gear2 = mBodyInterface.createBody(new BodyCreationSettings(gear2_settings, gear2_initial_p, gear2_initial_r, EMotionType.Dynamic, Layers.MOVING));
 	mBodyInterface.addBody(gear2.getId(), EActivation.Activate);

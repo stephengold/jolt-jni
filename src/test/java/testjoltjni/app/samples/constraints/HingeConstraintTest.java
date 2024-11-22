@@ -85,13 +85,13 @@ public void Initialize()
 			HingeConstraintSettings settings=new HingeConstraintSettings();
 			if ((i & 1) == 0)
 			{
-				settings.setPoint1 ( settings.setPoint2 ( Op.add(position ,new Vec3(-0.5f * box_size, 0, 0.5f * box_size))));
+				settings.setPoint1 ( settings.setPoint2 ( Op.plus(position ,new Vec3(-0.5f * box_size, 0, 0.5f * box_size))));
 				settings.setHingeAxis1 ( settings.setHingeAxis2 ( Vec3.sAxisY()));
 				settings.setNormalAxis1 ( settings.setNormalAxis2 ( Vec3.sAxisX()));
 			}
 			else
 			{
-				settings.setPoint1 ( settings.setPoint2 ( Op.add(position ,new Vec3(-0.5f * box_size, -0.5f * box_size, 0))));
+				settings.setPoint1 ( settings.setPoint2 ( Op.plus(position ,new Vec3(-0.5f * box_size, -0.5f * box_size, 0))));
 				settings.setHingeAxis1 ( settings.setHingeAxis2 ( Vec3.sAxisZ()));
 				settings.setNormalAxis1 ( settings.setNormalAxis2 ( Vec3.sAxisX()));
 			}

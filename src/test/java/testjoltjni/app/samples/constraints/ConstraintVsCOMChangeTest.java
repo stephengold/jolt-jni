@@ -78,7 +78,7 @@ public void Initialize()
 		{
 			// Create hinge
 			HingeConstraintSettings settings=new HingeConstraintSettings();
-			settings.setPoint1 ( settings.setPoint2 ( Op.add(position ,new Vec3(-0.5f * cBoxSize, -0.5f * cBoxSize, 0))));
+			settings.setPoint1 ( settings.setPoint2 ( Op.plus(position ,new Vec3(-0.5f * cBoxSize, -0.5f * cBoxSize, 0))));
 			settings.setHingeAxis1 ( settings.setHingeAxis2 ( Vec3.sAxisZ()));
 			settings.setNormalAxis1 ( settings.setNormalAxis2 ( Vec3.sAxisX()));
 			settings.setLimitsMin ( cMinAngle);
@@ -145,7 +145,7 @@ void UpdateShapes()
 			mBodyInterface.notifyShapeChanged(b.getId(), prev_com, true, EActivation.Activate);
 
 			// Notify the constraints that the shape has changed (this could be done more efficient as we know which constraints are affected)
-			Vec3 delta_com = Op.subtract(s.getCenterOfMass() , prev_com);
+			Vec3 delta_com = Op.minus(s.getCenterOfMass() , prev_com);
 			for (TwoBodyConstraintRef c : mConstraints)
 				c.notifyShapeChanged(b.getId(), delta_com);
 		}

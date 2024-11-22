@@ -53,7 +53,7 @@ public Body CreateFloor(float inSize)
 {
 	final float scale = GetWorldScale();
 
-	Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Op.multiply(scale,new Vec3(0.5f * inSize, 1.0f, 0.5f * inSize)), 0.0f),new RVec3(Op.multiply(scale,new Vec3(0.0f, -1.0f, 0.0f))), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
+	Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Op.star(scale,new Vec3(0.5f * inSize, 1.0f, 0.5f * inSize)), 0.0f),new RVec3(Op.star(scale,new Vec3(0.0f, -1.0f, 0.0f))), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
 	mBodyInterface.addBody(floor.getId(), EActivation.DontActivate);
 	return floor;
 }

@@ -55,7 +55,7 @@ public void Initialize()
 			positions.add(new Vec3(5.0f * cos(a), -a, 5.0f * sin(a)));
 		for (int i = 1; i < (int)(positions.size() - 1); ++i)
 		{
-			Vec3 tangent = Op.multiply(0.5f , Op.subtract(positions.get(i + 1) , positions.get(i - 1)));
+			Vec3 tangent = Op.star(0.5f , Op.minus(positions.get(i + 1) , positions.get(i - 1)));
 			path.addPoint(positions.get(i), tangent, normal);
 		}
 		mPaths[0] = path.toRef();
@@ -91,7 +91,7 @@ public void Initialize()
 		}
 		for (int i = 1; i < (int)(positions.size() - 1); ++i)
 		{
-			Vec3 tangent = Op.multiply(0.5f , Op.subtract(positions.get(i + 1) , positions.get(i - 1)));
+			Vec3 tangent = Op.star(0.5f , Op.minus(positions.get(i + 1) , positions.get(i - 1)));
 			path.addPoint(positions.get(i), tangent, normal);
 		}
 		mPaths[1] = path.toRef();

@@ -113,15 +113,15 @@ if(implementsDebugRendering()){
 	if (!sEnableStickToFloor)
 		update_settings.setStickToFloorStepDown ( Vec3.sZero());
 	else
-		update_settings.setStickToFloorStepDown ( Op.multiply(Op.negate(mCharacter.getUp()) , update_settings.getStickToFloorStepDown().length()));
+		update_settings.setStickToFloorStepDown ( Op.star(Op.minus(mCharacter.getUp()) , update_settings.getStickToFloorStepDown().length()));
 	if (!sEnableWalkStairs)
 		update_settings.setWalkStairsStepUp ( Vec3.sZero());
 	else
-		update_settings.setWalkStairsStepUp ( Op.multiply(mCharacter.getUp() , update_settings.getWalkStairsStepUp().length()));
+		update_settings.setWalkStairsStepUp ( Op.star(mCharacter.getUp() , update_settings.getWalkStairsStepUp().length()));
 
 	// Update the character position
 	mCharacter.extendedUpdate(inParams.mDeltaTime,
-		Op.multiply(Op.negate(mCharacter.getUp()) , mPhysicsSystem.getGravity().length()),
+		Op.star(Op.minus(mCharacter.getUp()) , mPhysicsSystem.getGravity().length()),
 		update_settings,
 		mPhysicsSystem.getDefaultBroadPhaseLayerFilter(Layers.MOVING),
 		mPhysicsSystem.getDefaultLayerFilter(Layers.MOVING),
@@ -131,7 +131,7 @@ if(implementsDebugRendering()){
 
 	// Calculate effective velocity
 	RVec3 new_position = mCharacter.getPosition();
-	Vec3 velocity = Op.divide(Op.subtract(new_position , old_position) , inParams.mDeltaTime).toVec3();
+	Vec3 velocity = Op.slash(Op.minus(new_position , old_position) , inParams.mDeltaTime).toVec3();
 
 	// Draw state of character
 	DrawCharacterState(mCharacter, world_transform, velocity);
@@ -147,7 +147,7 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 	if (player_controls_horizontal_velocity)
 	{
 		// Smooth the player input
-		mDesiredVelocity = sEnableCharacterInertia? Op.add(Op.multiply(Op.multiply(0.25f , inMovementDirection) , sCharacterSpeed) , Op.multiply(0.75f , mDesiredVelocity)) : Op.multiply(inMovementDirection , sCharacterSpeed);
+		mDesiredVelocity = sEnableCharacterInertia? Op.plus(Op.star(Op.star(0.25f , inMovementDirection) , sCharacterSpeed) , Op.star(0.75f , mDesiredVelocity)) : Op.star(inMovementDirection , sCharacterSpeed);
 
 		// True if the player intended to move
 		mAllowSliding = !inMovementDirection.isNearZero();
@@ -168,7 +168,7 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 	mCharacter.updateGroundVelocity();
 
 	// Determine new basic velocity
-	Vec3 current_vertical_velocity = Op.multiply(mCharacter.getLinearVelocity().dot(mCharacter.getUp()) , mCharacter.getUp());
+	Vec3 current_vertical_velocity = Op.star(mCharacter.getLinearVelocity().dot(mCharacter.getUp()) , mCharacter.getUp());
 	Vec3 ground_velocity = mCharacter.getGroundVelocity();
 	Vec3 new_velocity;
 	boolean moving_towards_ground = (current_vertical_velocity.getY() - ground_velocity.getY()) < 0.1f;
@@ -182,23 +182,23 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 
 		// Jump
 		if (inJump && moving_towards_ground)
-			Op.plusEquals(new_velocity , Op.multiply(sJumpSpeed , mCharacter.getUp()));
+			Op.plusEquals(new_velocity , Op.star(sJumpSpeed , mCharacter.getUp()));
 	}
 	else
 		new_velocity = current_vertical_velocity;
 
 	// Gravity
-	Op.plusEquals(new_velocity , Op.multiply(Op.rotate(character_up_rotation , mPhysicsSystem.getGravity()) , inDeltaTime));
+	Op.plusEquals(new_velocity , Op.star(Op.star(character_up_rotation , mPhysicsSystem.getGravity()) , inDeltaTime));
 
 	if (player_controls_horizontal_velocity)
 	{
 		// Player input
-		Op.plusEquals(new_velocity , Op.rotate(character_up_rotation , mDesiredVelocity));
+		Op.plusEquals(new_velocity , Op.star(character_up_rotation , mDesiredVelocity));
 	}
 	else
 	{
 		// Preserve horizontal velocity
-		Vec3 current_horizontal_velocity = Op.subtract(mCharacter.getLinearVelocity() , current_vertical_velocity);
+		Vec3 current_horizontal_velocity = Op.minus(mCharacter.getLinearVelocity() , current_vertical_velocity);
 		Op.plusEquals(new_velocity , current_horizontal_velocity);
 	}
 

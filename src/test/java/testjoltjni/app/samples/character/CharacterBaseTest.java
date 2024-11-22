@@ -102,7 +102,7 @@ static QuatArg cHorizontallyMovingOrientation = Quat.sRotation(Vec3.sAxisZ(), 0.
 static RVec3Arg cConveyorBeltPosition=new RVec3(-10, 0.15f, 15);
 static final RVec3Arg cRampPosition=new RVec3(15, 2.2f, 15);
 static QuatArg cRampOrientation = Quat.sRotation(Vec3.sAxisX(), -0.25f * JPH_PI);
-static RVec3Arg cRampBlocksStart = Op.add(cRampPosition , new Vec3(-3.0f, 3.0f, 1.5f));
+static RVec3Arg cRampBlocksStart = Op.plus(cRampPosition , new Vec3(-3.0f, 3.0f, 1.5f));
 static Vec3Arg cRampBlocksDelta =new Vec3(2.0f, 0, 0);
 static final float cRampBlocksTime = 5.0f;
 static RVec3Arg cSmallBumpsPosition=new RVec3(-5.0f, 0, 2.5f);
@@ -161,8 +161,8 @@ public void Initialize()
 	case Box:
 		mStandingShape =new RotatedTranslatedShapeSettings(new Vec3(0, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, 0), Quat.sIdentity(), new BoxShape(new Vec3(cCharacterRadiusStanding, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, cCharacterRadiusStanding))).create().get();
 		mCrouchingShape =new RotatedTranslatedShapeSettings(new Vec3(0, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, 0), Quat.sIdentity(), new BoxShape(new Vec3(cCharacterRadiusCrouching, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, cCharacterRadiusCrouching))).create().get();
-		mInnerStandingShape =new RotatedTranslatedShapeSettings(new Vec3(0, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, 0), Quat.sIdentity(), new BoxShape(Op.multiply(cInnerShapeFraction , new Vec3(cCharacterRadiusStanding, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, cCharacterRadiusStanding)))).create().get();
-		mInnerCrouchingShape =new RotatedTranslatedShapeSettings(new Vec3(0, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, 0), Quat.sIdentity(), new BoxShape(Op.multiply(cInnerShapeFraction , new Vec3(cCharacterRadiusCrouching, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, cCharacterRadiusCrouching)))).create().get();
+		mInnerStandingShape =new RotatedTranslatedShapeSettings(new Vec3(0, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, 0), Quat.sIdentity(), new BoxShape(Op.star(cInnerShapeFraction , new Vec3(cCharacterRadiusStanding, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, cCharacterRadiusStanding)))).create().get();
+		mInnerCrouchingShape =new RotatedTranslatedShapeSettings(new Vec3(0, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, 0), Quat.sIdentity(), new BoxShape(Op.star(cInnerShapeFraction , new Vec3(cCharacterRadiusCrouching, 0.5f * cCharacterHeightCrouching + cCharacterRadiusCrouching, cCharacterRadiusCrouching)))).create().get();
 		break;
 	}
 
@@ -327,7 +327,7 @@ public void Initialize()
 			for (int i = 0; i < 4; ++i)
 			{
 				mRampBlocks.pushBack(mBodyInterface.createAndAddBody(bcs, EActivation.Activate));
-				bcs.setPosition(Op.add(bcs.getPosition() , cRampBlocksDelta));
+				bcs.setPosition(Op.plus(bcs.getPosition() , cRampBlocksDelta));
 			}
 		}
 
@@ -336,17 +336,17 @@ public void Initialize()
 		for (int i = 0; i < 2; ++i)
 		{
 			Quat rotation = Quat.sRotation(Vec3.sAxisY(), JPH_PI * i);
-			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.add(new RVec3(5.0f, 0.1f, 5.0f) , Op.rotate(rotation , new Vec3(0.2f, 0, 0))), Op.multiply(rotation , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.plus(new RVec3(5.0f, 0.1f, 5.0f) , Op.star(rotation , new Vec3(0.2f, 0, 0))), Op.star(rotation , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 		}
 		for (int i = 0; i < 3; ++i)
 		{
 			Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f / 3.0f * JPH_PI * i);
-			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.add(new RVec3(7.5f, 0.1f, 5.0f) , Op.rotate(rotation , new Vec3(0.2f, 0, 0))), Op.multiply(rotation , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.plus(new RVec3(7.5f, 0.1f, 5.0f) , Op.star(rotation , new Vec3(0.2f, 0, 0))), Op.star(rotation , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 		}
 		for (int i = 0; i < 4; ++i)
 		{
 			Quat rotation = Quat.sRotation(Vec3.sAxisY(), 0.5f * JPH_PI * i);
-			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.add(new RVec3(10.0f, 0.1f, 5.0f) , Op.rotate(rotation , new Vec3(0.2f, 0, 0))), Op.multiply(rotation , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+			mBodyInterface.createAndAddBody(new BodyCreationSettings(funnel, Op.plus(new RVec3(10.0f, 0.1f, 5.0f) , Op.star(rotation , new Vec3(0.2f, 0, 0))), Op.star(rotation , Quat.sRotation(Vec3.sAxisZ(), -degreesToRadians(40.0f))), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 		}
 
 		// Create small bumps
@@ -354,7 +354,7 @@ public void Initialize()
 			BodyCreationSettings step=new BodyCreationSettings(new BoxShape(new Vec3(2.0f, 0.5f * cSmallBumpHeight, 0.5f * cSmallBumpWidth), 0.0f), RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
 			for (int i = 0; i < 10; ++i)
 			{
-				step.setPosition ( Op.add(cSmallBumpsPosition , new Vec3(0, 0.5f * cSmallBumpHeight, cSmallBumpDelta * i)));
+				step.setPosition ( Op.plus(cSmallBumpsPosition , new Vec3(0, 0.5f * cSmallBumpHeight, cSmallBumpDelta * i)));
 				mBodyInterface.createAndAddBody(step, EActivation.DontActivate);
 			}
 		}
@@ -364,7 +364,7 @@ public void Initialize()
 			BodyCreationSettings step=new BodyCreationSettings(new BoxShape(new Vec3(2.0f, 0.5f * cLargeBumpHeight, 0.5f * cLargeBumpWidth)), RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
 			for (int i = 0; i < 5; ++i)
 			{
-				step.setPosition ( Op.add(cLargeBumpsPosition , new Vec3(0, 0.5f * cLargeBumpHeight, cLargeBumpDelta * i)));
+				step.setPosition ( Op.plus(cLargeBumpsPosition , new Vec3(0, 0.5f * cLargeBumpHeight, cLargeBumpDelta * i)));
 				mBodyInterface.createAndAddBody(step, EActivation.DontActivate);
 			}
 		}
@@ -374,13 +374,13 @@ public void Initialize()
 			BodyCreationSettings step = new BodyCreationSettings(new BoxShape(new Vec3(2.0f, 0.5f * cStairsStepHeight, 0.5f * cStairsStepHeight)), RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
 			for (int i = 0; i < 10; ++i)
 			{
-				step.setPosition ( Op.add(cStairsPosition , new Vec3(0, cStairsStepHeight * (0.5f + i), cStairsStepHeight * i)));
+				step.setPosition ( Op.plus(cStairsPosition , new Vec3(0, cStairsStepHeight * (0.5f + i), cStairsStepHeight * i)));
 				mBodyInterface.createAndAddBody(step, EActivation.DontActivate);
 			}
 		}
 
 		// A wall beside the stairs
-		mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(0.5f, 2.0f, 5.0f * cStairsStepHeight)), Op.add(cStairsPosition , new Vec3(-2.5f, 2.0f, 5.0f * cStairsStepHeight)), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+		mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(0.5f, 2.0f, 5.0f * cStairsStepHeight)), Op.plus(cStairsPosition , new Vec3(-2.5f, 2.0f, 5.0f * cStairsStepHeight)), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 
 		// Create stairs from triangles
 		{
@@ -394,15 +394,15 @@ public void Initialize()
 				Vec3 base=new Vec3(0, cStairsStepHeight * i, cStairsStepHeight * i);
 
 				// Left side
-				Vec3 b1 = Op.add(base , new Vec3(2.0f, 0, 0));
-				Vec3 s1 = Op.add(b1 , new Vec3(0, cStairsStepHeight, 0));
-				Vec3 p1 = Op.add(s1 , new Vec3(0, 0, cStairsStepHeight));
+				Vec3 b1 = Op.plus(base , new Vec3(2.0f, 0, 0));
+				Vec3 s1 = Op.plus(b1 , new Vec3(0, cStairsStepHeight, 0));
+				Vec3 p1 = Op.plus(s1 , new Vec3(0, 0, cStairsStepHeight));
 
 				// Right side
 				Vec3 width=new Vec3(-4.0f, 0, 0);
-				Vec3 b2 = Op.add(b1 , width);
-				Vec3 s2 = Op.add(s1 , width);
-				Vec3 p2 = Op.add(p1 , width);
+				Vec3 b2 = Op.plus(b1 , width);
+				Vec3 s2 = Op.plus(s1 , width);
+				Vec3 p2 = Op.plus(p1 , width);
 
 				triangles.add(new Triangle(s1, b1, s2));
 				triangles.add(new Triangle(b1, b2, s2));
@@ -426,14 +426,14 @@ public void Initialize()
 		}
 
 		// A wall to the side and behind the stairs
-		mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(0.5f, 2.0f, 0.25f)), Op.add(cStairsPosition , new Vec3(-7.5f, 2.0f, 10.0f * cStairsStepHeight + 0.25f)), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+		mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(0.5f, 2.0f, 0.25f)), Op.plus(cStairsPosition , new Vec3(-7.5f, 2.0f, 10.0f * cStairsStepHeight + 0.25f)), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 
 		// Create stairs with too little space between the steps
 		{
 			BodyCreationSettings step=new BodyCreationSettings(new BoxShape(new Vec3(2.0f, 0.5f * cNoStairsStepHeight, 0.5f * cNoStairsStepHeight)), RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
 			for (int i = 0; i < 10; ++i)
 			{
-				step.setPosition ( Op.add(cNoStairsPosition , new Vec3(0, cNoStairsStepHeight * (0.5f + i), cNoStairsStepDelta * i)));
+				step.setPosition ( Op.plus(cNoStairsPosition , new Vec3(0, cNoStairsStepHeight * (0.5f + i), cNoStairsStepDelta * i)));
 				mBodyInterface.createAndAddBody(step, EActivation.DontActivate);
 			}
 		}
@@ -448,15 +448,15 @@ public void Initialize()
 				Vec3 base=new Vec3(0, cStairsStepHeight * i, cNoStairsStepDelta * i);
 
 				// Left side
-				Vec3 b1 = Op.subtract(base , new Vec3(2.0f, 0, 0));
-				Vec3 s1 = Op.add(b1 , new Vec3(0, cStairsStepHeight, 0));
-				Vec3 p1 = Op.add(s1 , new Vec3(0, 0, cNoStairsStepDelta));
+				Vec3 b1 = Op.minus(base , new Vec3(2.0f, 0, 0));
+				Vec3 s1 = Op.plus(b1 , new Vec3(0, cStairsStepHeight, 0));
+				Vec3 p1 = Op.plus(s1 , new Vec3(0, 0, cNoStairsStepDelta));
 
 				// Right side
 				Vec3 width=new Vec3(4.0f, 0, 0);
-				Vec3 b2 = Op.add(b1 , width);
-				Vec3 s2 = Op.add(s1 , width);
-				Vec3 p2 = Op.add(p1 , width);
+				Vec3 b2 = Op.plus(b1 , width);
+				Vec3 s2 = Op.plus(s1 , width);
+				Vec3 p2 = Op.plus(p1 , width);
 
 				triangles.add(new Triangle(s1, s2, b1));
 				triangles.add(new Triangle(b1, s2, b2));
@@ -480,8 +480,8 @@ public void Initialize()
 			{
 				float delta = cMeshWallStepStart + i * (cMeshWallStepEnd - cMeshWallStepStart) / (cMeshWallSegments - 1);
 				Vec3 p2 =new Vec3(((i & 1) != 0x0)? 0.5f * cMeshWallWidth : -0.5f * cMeshWallWidth, 0, p1.getZ() + delta);
-				triangles.add(new Triangle(p1, Op.add(p1 , h), Op.add(p2 , h)));
-				triangles.add(new Triangle(p1, Op.add(p2 , h), p2));
+				triangles.add(new Triangle(p1, Op.plus(p1 , h), Op.plus(p2 , h)));
+				triangles.add(new Triangle(p1, Op.plus(p2 , h), p2));
 				p1 = p2;
 			}
 
@@ -662,11 +662,11 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	if (!mRotatingWallBody.isInvalid())
 		mBodyInterface.moveKinematic(mRotatingWallBody, cRotatingWallPosition, Quat.sRotation(Vec3.sAxisY(), JPH_PI * sin(mTime)), inParams.mDeltaTime);
 	if (!mRotatingAndTranslatingBody.isInvalid())
-		mBodyInterface.moveKinematic(mRotatingAndTranslatingBody, Op.add(cRotatingAndTranslatingPosition , Op.multiply(5.0f , new Vec3(sin(JPH_PI * mTime), 0, cos(JPH_PI * mTime)))), Quat.sRotation(Vec3.sAxisY(), JPH_PI * sin(mTime)), inParams.mDeltaTime);
+		mBodyInterface.moveKinematic(mRotatingAndTranslatingBody, Op.plus(cRotatingAndTranslatingPosition , Op.star(5.0f , new Vec3(sin(JPH_PI * mTime), 0, cos(JPH_PI * mTime)))), Quat.sRotation(Vec3.sAxisY(), JPH_PI * sin(mTime)), inParams.mDeltaTime);
 	if (!mHorizontallyMovingBody.isInvalid())
-		mBodyInterface.moveKinematic(mHorizontallyMovingBody, Op.add(cHorizontallyMovingPosition , new Vec3(3.0f * sin(mTime), 0, 0)), cHorizontallyMovingOrientation, inParams.mDeltaTime);
+		mBodyInterface.moveKinematic(mHorizontallyMovingBody, Op.plus(cHorizontallyMovingPosition , new Vec3(3.0f * sin(mTime), 0, 0)), cHorizontallyMovingOrientation, inParams.mDeltaTime);
 	if (!mSmoothVerticallyMovingBody.isInvalid())
-		mBodyInterface.moveKinematic(mSmoothVerticallyMovingBody, Op.add(cSmoothVerticallyMovingPosition , new Vec3(0, 1.75f * sin(mTime), 0)), cSmoothVerticallyMovingOrientation, inParams.mDeltaTime);
+		mBodyInterface.moveKinematic(mSmoothVerticallyMovingBody, Op.plus(cSmoothVerticallyMovingPosition , new Vec3(0, 1.75f * sin(mTime), 0)), cSmoothVerticallyMovingOrientation, inParams.mDeltaTime);
 	if (!mReversingVerticallyMovingBody.isInvalid())
 	{
 		RVec3 pos = mBodyInterface.getPosition(mReversingVerticallyMovingBody);
@@ -674,12 +674,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 			mReversingVerticallyMovingVelocity = 1.0f;
 		else if (pos.yy() > cReversingVerticallyMovingPosition.yy() + 5.0f)
 			mReversingVerticallyMovingVelocity = -1.0f;
-		mBodyInterface.moveKinematic(mReversingVerticallyMovingBody, Op.add(pos, new Vec3(0, mReversingVerticallyMovingVelocity * 3.0f * inParams.mDeltaTime, 0)), cReversingVerticallyMovingOrientation, inParams.mDeltaTime);
+		mBodyInterface.moveKinematic(mReversingVerticallyMovingBody, Op.plus(pos, new Vec3(0, mReversingVerticallyMovingVelocity * 3.0f * inParams.mDeltaTime, 0)), cReversingVerticallyMovingOrientation, inParams.mDeltaTime);
 	}
 
 	// Animate character
 	if (mAnimatedCharacter != nullptr)
-		mAnimatedCharacter.setLinearVelocity(Op.multiply(sin(mTime) , cCharacterVelocity));
+		mAnimatedCharacter.setLinearVelocity(Op.star(sin(mTime) , cCharacterVelocity));
 
 	// Animate character virtual
 	for (CharacterVirtualRef character : new CharacterVirtualRef[]{ mAnimatedCharacterVirtual, mAnimatedCharacterVirtualWithInnerBody })
@@ -694,8 +694,8 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		if (character.getGroundState() == EGroundState.OnGround)
 			velocity = Vec3.sZero();
 		else
-			velocity = Op.add(Op.multiply(character.getLinearVelocity() , mAnimatedCharacter.getUp()) , Op.multiply(mPhysicsSystem.getGravity() , inParams.mDeltaTime));
-		Op.plusEquals(velocity , Op.multiply(sin(mTime) , cCharacterVelocity));
+			velocity = Op.plus(Op.star(character.getLinearVelocity() , mAnimatedCharacter.getUp()) , Op.star(mPhysicsSystem.getGravity() , inParams.mDeltaTime));
+		Op.plusEquals(velocity , Op.star(sin(mTime) , cCharacterVelocity));
 		character.setLinearVelocity(velocity);
 
 		// Move character
@@ -716,7 +716,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	{
 		for (int i = 0; i < mRampBlocks.size(); ++i)
 		{
-			mBodyInterface.setPositionAndRotation(mRampBlocks.get(i), Op.add(cRampBlocksStart , Op.multiply((float)(i) , cRampBlocksDelta)), cRampOrientation, EActivation.Activate);
+			mBodyInterface.setPositionAndRotation(mRampBlocks.get(i), Op.plus(cRampBlocksStart , Op.star((float)(i) , cRampBlocksDelta)), cRampOrientation, EActivation.Activate);
 			mBodyInterface.setLinearAndAngularVelocity(mRampBlocks.get(i), Vec3.sZero(), Vec3.sZero());
 		}
 		mRampBlocksTimeLeft = cRampBlocksTime;
@@ -768,7 +768,7 @@ public RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of character + distance behind based on the heading and pitch of the camera
 	Vec3 fwd =new Vec3(cos(inCameraPitch) * cos(inCameraHeading), sin(inCameraPitch), cos(inCameraPitch) * sin(inCameraHeading));
-	return RMat44.sTranslation(Op.subtract(Op.add(mCameraPivot , new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , Op.multiply(5.0f , fwd)));
+	return RMat44.sTranslation(Op.minus(Op.plus(mCameraPivot , new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , Op.star(5.0f , fwd)));
 }
 
 void SaveState(StateRecorder inStream)
@@ -827,16 +827,16 @@ void DrawCharacterState(ConstCharacterBase inCharacter, RMat44Arg inCharacterTra
 
 		// Draw ground position
 		mDebugRenderer.drawMarker(ground_position, Color.sRed, 0.1f);
-		mDebugRenderer.drawArrow(ground_position, Op.add(ground_position, Op.multiply(2.0f , ground_normal)), Color.sGreen, 0.1f);
+		mDebugRenderer.drawArrow(ground_position, Op.plus(ground_position, Op.star(2.0f , ground_normal)), Color.sGreen, 0.1f);
 
 		// Draw ground velocity
 		if (!ground_velocity.isNearZero())
-			mDebugRenderer.drawArrow(ground_position, Op.add(ground_position , ground_velocity), Color.sBlue, 0.1f);
+			mDebugRenderer.drawArrow(ground_position, Op.plus(ground_position , ground_velocity), Color.sBlue, 0.1f);
 	}
 
 	// Draw provided character velocity
 	if (!inCharacterVelocity.isNearZero())
-		mDebugRenderer.drawArrow(inCharacterTransform.getTranslation(), Op.add(inCharacterTransform.getTranslation(), inCharacterVelocity), Color.sYellow, 0.1f);
+		mDebugRenderer.drawArrow(inCharacterTransform.getTranslation(), Op.plus(inCharacterTransform.getTranslation(), inCharacterVelocity), Color.sYellow, 0.1f);
 
 	// Draw text info
 	ConstPhysicsMaterial ground_material = inCharacter.getGroundMaterial();

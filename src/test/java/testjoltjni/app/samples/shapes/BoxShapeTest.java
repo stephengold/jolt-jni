@@ -43,6 +43,6 @@ public void Initialize()
 
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(2, 3, 4)),new RVec3(0, 10, 10), Quat.sRotation(Vec3.sAxisZ(), 0.25f * JPH_PI), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 
-	mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(0.5f, 0.75f, 1.0f)),new RVec3(0, 10, 20), Op.multiply(Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI) , Quat.sRotation(Vec3.sAxisZ(), 0.25f * JPH_PI)), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
+	mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(0.5f, 0.75f, 1.0f)),new RVec3(0, 10, 20), Op.star(Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI) , Quat.sRotation(Vec3.sAxisZ(), 0.25f * JPH_PI)), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 }
 }

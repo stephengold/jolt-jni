@@ -55,8 +55,8 @@ public void Initialize()
 
 		// Create a constraint
 		DistanceConstraintSettings dcs=new DistanceConstraintSettings();
-		dcs.setPoint1 ( Op.add(bcs.getPosition() ,new Vec3(5, 5, 5)));
-		dcs.setPoint2 ( Op.add(bcs.getPosition() , box_size));
+		dcs.setPoint1 ( Op.plus(bcs.getPosition() ,new Vec3(5, 5, 5)));
+		dcs.setPoint2 ( Op.plus(bcs.getPosition() , box_size));
 		dcs.setMinDistance ( 0.0f);
 		dcs.setMaxDistance ( sqrt(3.0f) * 5.0f + 1.0f);
 		mPhysicsSystem.addConstraint(mBodyInterface.createConstraint(dcs,new BodyId(), id));

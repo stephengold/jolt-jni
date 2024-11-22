@@ -76,7 +76,7 @@ public void Initialize()
 	for (int i = 0; i < cGearNumTeeth; ++i)
 	{
 		Quat rotation = Quat.sRotation(Vec3.sAxisY(), 2.0f * JPH_PI * i / cGearNumTeeth);
-		gear_settings.addShape(Op.rotate(rotation ,new Vec3(cGearRadius, 0, 0)), rotation, tooth_settings);
+		gear_settings.addShape(Op.star(rotation ,new Vec3(cGearRadius, 0, 0)), rotation, tooth_settings);
 	}
 
 	RVec3 gear_initial_p=new RVec3(0, 2.0f, 0);
@@ -95,8 +95,8 @@ public void Initialize()
 	for (int i = 0; i < cRackNumTeeth; ++i)
 		rack_settings.addShape(new Vec3(cRackHalfHeight, 0, -0.5f * cRackLength + (i + 0.5f) * cRackLength / cRackNumTeeth), Quat.sIdentity(), tooth_settings);
 
-	RVec3 slider_initial_p = Op.subtract(gear_initial_p ,new Vec3(0, cGearRadius + cRackHalfHeight + cToothHeight, 0));
-	Quat slider_initial_r = Op.multiply(Quat.sRotation(Vec3.sAxisZ(), 0.5f * JPH_PI) , gear_initial_r);
+	RVec3 slider_initial_p = Op.minus(gear_initial_p ,new Vec3(0, cGearRadius + cRackHalfHeight + cToothHeight, 0));
+	Quat slider_initial_r = Op.star(Quat.sRotation(Vec3.sAxisZ(), 0.5f * JPH_PI) , gear_initial_r);
 	Body rack = mBodyInterface.createBody(new BodyCreationSettings(rack_settings, slider_initial_p, slider_initial_r, EMotionType.Dynamic, Layers.MOVING));
 	mBodyInterface.addBody(rack.getId(), EActivation.Activate);
 

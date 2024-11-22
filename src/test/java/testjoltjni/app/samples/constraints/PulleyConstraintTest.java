@@ -52,10 +52,10 @@ public void Initialize()
 		mBodyInterface.addBody(body2.getId(), EActivation.Activate);
 
 		PulleyConstraintSettings settings=new PulleyConstraintSettings();
-		settings.setBodyPoint1 ( Op.add(position1 ,new Vec3(0, 0.5f, 0))); // Connect at the top of the block
-		settings.setBodyPoint2 ( Op.add(position2 ,new Vec3(0, 0.5f, 0)));
-		settings.setFixedPoint1 ( Op.add(settings.getBodyPoint1() ,new Vec3(0, 10, 0)));
-		settings.setFixedPoint2 ( Op.add(settings.getBodyPoint2() ,new Vec3(0, 10, 0)));
+		settings.setBodyPoint1 ( Op.plus(position1 ,new Vec3(0, 0.5f, 0))); // Connect at the top of the block
+		settings.setBodyPoint2 ( Op.plus(position2 ,new Vec3(0, 0.5f, 0)));
+		settings.setFixedPoint1 ( Op.plus(settings.getBodyPoint1() ,new Vec3(0, 10, 0)));
+		settings.setFixedPoint2 ( Op.plus(settings.getBodyPoint2() ,new Vec3(0, 10, 0)));
 
 		switch (variation)
 		{

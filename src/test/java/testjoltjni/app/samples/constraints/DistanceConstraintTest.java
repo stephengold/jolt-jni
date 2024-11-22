@@ -59,8 +59,8 @@ public void Initialize()
 			mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 
 			DistanceConstraintSettings settings=new DistanceConstraintSettings();
-			settings.setPoint1 ( Op.subtract(position ,new Vec3(5.0f + half_cylinder_height, 0, 0)));
-			settings.setPoint2 ( Op.subtract(position ,new Vec3(half_cylinder_height, 0, 0)));
+			settings.setPoint1 ( Op.minus(position ,new Vec3(5.0f + half_cylinder_height, 0, 0)));
+			settings.setPoint2 ( Op.minus(position ,new Vec3(half_cylinder_height, 0, 0)));
 
 			if (variation == 1)
 			{

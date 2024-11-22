@@ -39,7 +39,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	// Create box
 	Vec3 box_min=new Vec3(-1.0f, -2.0f, 0.5f);
 	Vec3 box_max=new Vec3(2.0f, -0.5f, 3.0f);
-	ShapeSettingsRef box_settings = new RotatedTranslatedShapeSettings(Op.multiply(0.5f , Op.add(box_min , box_max)), Quat.sIdentity(), new BoxShapeSettings(Op.multiply(0.5f , Op.subtract(box_max , box_min)))).toRef();
+	ShapeSettingsRef box_settings = new RotatedTranslatedShapeSettings(Op.star(0.5f , Op.plus(box_min , box_max)), Quat.sIdentity(), new BoxShapeSettings(Op.star(0.5f , Op.minus(box_max , box_min)))).toRef();
 	ShapeRefC box_shape = box_settings.create().get();
 	Mat44 box_transform=new Mat44(new Vec4(0.516170502f, -0.803887904f, -0.295520246f, 0.0f),new Vec4(0.815010250f, 0.354940295f, 0.458012700f, 0.0f),new Vec4(-0.263298869f, -0.477264702f, 0.838386655f, 0.0f),new Vec4(-10.2214508f, -18.6808319f, 40.7468987f, 1.0f));
 
@@ -78,7 +78,7 @@ if (implementsDebugRendering()) {
 	if (pen_axis_len > 0.0f)
 	{
 		Op.starEquals(pen_axis , hit.getPenetrationDepth() / pen_axis_len);
-		DrawArrowSP(mDebugRenderer, hit.getContactPointOn2(), Op.add(hit.getContactPointOn2() , pen_axis), Color.sYellow, 0.01f);
+		DrawArrowSP(mDebugRenderer, hit.getContactPointOn2(), Op.plus(hit.getContactPointOn2() , pen_axis), Color.sYellow, 0.01f);
 
 if (implementsDebugRendering()) {
 		Mat44 resolved_box = box_transform.postTranslated(pen_axis);

@@ -39,7 +39,7 @@ BodyId mLevelBall;
 void CreateSlidingObjects(RVec3Arg inStart)
 {
 	// Slide the shapes over the grid of boxes
-	RVec3 pos = Op.subtract(inStart , new RVec3(0, 0, 12.0));
+	RVec3 pos = Op.minus(inStart , new RVec3(0, 0, 12.0));
 	for (int enhanced_removal = 0; enhanced_removal < 2; ++enhanced_removal)
 	{
 		// A box

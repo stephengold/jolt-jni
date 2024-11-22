@@ -48,8 +48,8 @@ public void Initialize()
 	for (int i = 0; i < 4; ++i)
 	{
 		belt_settings.setFriction ( 0.25f * (i + 1));
-		belt_settings.setRotation ( Op.multiply(Quat.sRotation(Vec3.sAxisY(), 0.5f * JPH_PI * i) , Quat.sRotation(Vec3.sAxisX(), degreesToRadians(1.0f))));
-		belt_settings.setPosition (new RVec3(Op.rotate(belt_settings.getRotation() ,new Vec3(cBeltLength, 6.0f, cBeltWidth))));
+		belt_settings.setRotation ( Op.star(Quat.sRotation(Vec3.sAxisY(), 0.5f * JPH_PI * i) , Quat.sRotation(Vec3.sAxisX(), degreesToRadians(1.0f))));
+		belt_settings.setPosition (new RVec3(Op.star(belt_settings.getRotation() ,new Vec3(cBeltLength, 6.0f, cBeltWidth))));
 		mLinearBelts.pushBack(mBodyInterface.createAndAddBody(belt_settings, EActivation.DontActivate));
 	}
 
@@ -99,29 +99,29 @@ void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold i
 	{
 		// Determine the world space surface velocity of both bodies
 		Vec3Arg cLocalSpaceVelocity=new Vec3(0, 0, -10.0f);
-		Vec3 body1_linear_surface_velocity = body1_linear_belt? Op.rotate(inBody1.getRotation() , cLocalSpaceVelocity) : Vec3.sZero();
-		Vec3 body2_linear_surface_velocity = body2_linear_belt? Op.rotate(inBody2.getRotation() , cLocalSpaceVelocity) : Vec3.sZero();
+		Vec3 body1_linear_surface_velocity = body1_linear_belt? Op.star(inBody1.getRotation() , cLocalSpaceVelocity) : Vec3.sZero();
+		Vec3 body2_linear_surface_velocity = body2_linear_belt? Op.star(inBody2.getRotation() , cLocalSpaceVelocity) : Vec3.sZero();
 
 		// Calculate the relative surface velocity
-		ioSettings.setRelativeLinearSurfaceVelocity (Op.subtract( body2_linear_surface_velocity , body1_linear_surface_velocity));
+		ioSettings.setRelativeLinearSurfaceVelocity (Op.minus( body2_linear_surface_velocity , body1_linear_surface_velocity));
 	}
 
 	// Angular belt
-	boolean body1_angular = Op.equals(inBody1.getId() , mAngularBelt);
-	boolean body2_angular = Op.equals(inBody2.getId() , mAngularBelt);
+	boolean body1_angular = Op.isEqual(inBody1.getId() , mAngularBelt);
+	boolean body2_angular = Op.isEqual(inBody2.getId() , mAngularBelt);
 	if (body1_angular || body2_angular)
 	{
 		// Determine the world space angular surface velocity of both bodies
 		Vec3Arg cLocalSpaceAngularVelocity=new Vec3(0, degreesToRadians(10.0f), 0);
-		Vec3 body1_angular_surface_velocity = body1_angular? Op.rotate(inBody1.getRotation() , cLocalSpaceAngularVelocity) : Vec3.sZero();
-		Vec3 body2_angular_surface_velocity = body2_angular? Op.rotate(inBody2.getRotation() , cLocalSpaceAngularVelocity) : Vec3.sZero();
+		Vec3 body1_angular_surface_velocity = body1_angular? Op.star(inBody1.getRotation() , cLocalSpaceAngularVelocity) : Vec3.sZero();
+		Vec3 body2_angular_surface_velocity = body2_angular? Op.star(inBody2.getRotation() , cLocalSpaceAngularVelocity) : Vec3.sZero();
 
 		// Note that the angular velocity is the angular velocity around body 1's center of mass, so we need to add the linear velocity of body 2's center of mass
-		Vec3 body2_linear_surface_velocity = body2_angular? body2_angular_surface_velocity.cross(new Vec3(Op.subtract(inBody1.getCenterOfMassPosition() , inBody2.getCenterOfMassPosition()))) : Vec3.sZero();
+		Vec3 body2_linear_surface_velocity = body2_angular? body2_angular_surface_velocity.cross(new Vec3(Op.minus(inBody1.getCenterOfMassPosition() , inBody2.getCenterOfMassPosition()))) : Vec3.sZero();
 
 		// Calculate the relative angular surface velocity
 		ioSettings.setRelativeLinearSurfaceVelocity ( body2_linear_surface_velocity);
-		ioSettings.setRelativeAngularSurfaceVelocity ( Op.subtract(body2_angular_surface_velocity , body1_angular_surface_velocity));
+		ioSettings.setRelativeAngularSurfaceVelocity ( Op.minus(body2_angular_surface_velocity , body1_angular_surface_velocity));
 	}
 }
 

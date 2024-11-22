@@ -346,7 +346,7 @@ final public class Quat implements QuatArg {
      */
     @Override
     public Quat normalized() {
-        Quat result = Op.multiply(1f / length(), this);
+        Quat result = Op.star(1f / length(), this);
         return result;
     }
 

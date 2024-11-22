@@ -60,7 +60,7 @@ public void Initialize()
 	{
 		Op.plusEquals(position ,new Vec3(2.0f * half_cylinder_height, 0, 0));
 
-		Body segment = mBodyInterface.createBody(new BodyCreationSettings(new CapsuleShape(half_cylinder_height, 0.5f), position, Op.multiply(Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI * i) , rotation), i == 0? EMotionType.Static : EMotionType.Dynamic, i == 0? Layers.NON_MOVING : Layers.MOVING));
+		Body segment = mBodyInterface.createBody(new BodyCreationSettings(new CapsuleShape(half_cylinder_height, 0.5f), position, Op.star(Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI * i) , rotation), i == 0? EMotionType.Static : EMotionType.Dynamic, i == 0? Layers.NON_MOVING : Layers.MOVING));
 		segment.setCollisionGroup(new CollisionGroup(group_filter, 0, (i)));
 		mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 		if (i != 0)
@@ -69,7 +69,7 @@ public void Initialize()
 		if (prev != nullptr)
 		{
 			SwingTwistConstraintSettings settings = new SwingTwistConstraintSettings();
-			settings.setPosition1 ( settings.setPosition2 ( Op.add(position ,new Vec3(-half_cylinder_height, 0, 0))));
+			settings.setPosition1 ( settings.setPosition2 ( Op.plus(position ,new Vec3(-half_cylinder_height, 0, 0))));
 			settings.setTwistAxis1 ( settings.setTwistAxis2 ( Vec3.sAxisX()));
 			settings.setPlaneAxis1 ( settings.setPlaneAxis2 ( Vec3.sAxisY()));
 			settings.setNormalHalfConeAngle ( sNormalHalfConeAngle);

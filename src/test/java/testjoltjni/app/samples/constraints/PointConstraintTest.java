@@ -63,8 +63,8 @@ public void Initialize()
 		mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 
 		PointConstraintSettings settings=new PointConstraintSettings();
-		settings.setPoint1 ( Op.add(position , new Vec3(-half_cylinder_height, 0, 0)));
-		settings.setPoint2 ( Op.add(position , new Vec3(-half_cylinder_height, 0, 0)));
+		settings.setPoint1 ( Op.plus(position , new Vec3(-half_cylinder_height, 0, 0)));
+		settings.setPoint2 ( Op.plus(position , new Vec3(-half_cylinder_height, 0, 0)));
 		mPhysicsSystem.addConstraint(settings.create(prev, segment));
 
 		prev = segment;

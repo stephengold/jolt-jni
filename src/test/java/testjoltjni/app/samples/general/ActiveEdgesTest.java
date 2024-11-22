@@ -63,17 +63,17 @@ public void Initialize()
 			// Determine positions of end of this segment
 			float total_angle_rad = degreesToRadians((float)(total_angle));
 			Quat rotation = Quat.sRotation(Vec3.sAxisX(), total_angle_rad);
-			Vec3 delta = Op.multiply(cLength , rotation.rotateAxisZ());
-			Vec3 v3 = Op.add(v1 , delta);
-			Vec3 v4 = Op.add(v2 , delta);
+			Vec3 delta = Op.star(cLength , rotation.rotateAxisZ());
+			Vec3 v3 = Op.plus(v1 , delta);
+			Vec3 v4 = Op.plus(v2 , delta);
 
 			// Check if this segment is the best segment to place the dynamic block on
-			Vec3 normal = Op.subtract(v3 , v1).cross(Op.subtract(v2 , v1)).normalized();
+			Vec3 normal = Op.minus(v3 , v1).cross(Op.minus(v2 , v1)).normalized();
 			float dot = normal.dot(desired_normal);
 			if (dot > best_dot)
 			{
 				best_dot = dot;
-				box_settings.setPosition (new RVec3(Op.add(Op.divide(Vec3.sum(v1 , v2 , v3 , v4) , 4) , normal)));
+				box_settings.setPosition (new RVec3(Op.plus(Op.slash(Vec3.sum(v1 , v2 , v3 , v4) , 4) , normal)));
 				box_settings.setRotation ( rotation);
 			}
 
@@ -85,8 +85,8 @@ public void Initialize()
 			if (cur_segment != 0)
 			{
 				Vec3 flip=new Vec3(1, 1, -1);
-				triangles.add(new Triangle(Op.multiply(flip , v1), Op.multiply(flip , v4), Op.multiply(flip , v3)));
-				triangles.add(new Triangle(Op.multiply(flip , v1), Op.multiply(flip , v2), Op.multiply(flip , v4)));
+				triangles.add(new Triangle(Op.star(flip , v1), Op.star(flip , v4), Op.star(flip , v3)));
+				triangles.add(new Triangle(Op.star(flip , v1), Op.star(flip , v2), Op.star(flip , v4)));
 			}
 
 			// The end of the segment will be the start for the next iteration

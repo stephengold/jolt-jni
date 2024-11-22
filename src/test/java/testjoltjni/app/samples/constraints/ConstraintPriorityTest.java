@@ -72,6 +72,6 @@ public void Initialize()
 public void PostPhysicsUpdate(float inDeltaTime)
 {
 	for (TwoBodyConstraintRef c : mConstraints)
-		mDebugRenderer.drawText3D(Op.multiply(0.5f , Op.add(c.getBody1().getCenterOfMassPosition() , c.getBody2().getCenterOfMassPosition())), String.format("Priority: %d", c.getConstraintPriority()), Color.sWhite, 0.2f);
+		mDebugRenderer.drawText3D(Op.star(0.5f , Op.plus(c.getBody1().getCenterOfMassPosition() , c.getBody2().getCenterOfMassPosition())), String.format("Priority: %d", c.getConstraintPriority()), Color.sWhite, 0.2f);
 }
 }

@@ -92,7 +92,7 @@ public void Initialize()
 	front.setPosition (new Vec3(0.0f, -0.9f * half_vehicle_height, front_wheel_pos_z));
 	front.setMaxSteerAngle ( max_steering_angle);
 	front.setSuspensionDirection (new Vec3(0, -1, Math.tan(caster_angle)).normalized());
-	front.setSteeringAxis ( Op.negate(front.getSuspensionDirection()));
+	front.setSteeringAxis ( Op.minus(front.getSuspensionDirection()));
 	front.setRadius ( front_wheel_radius);
 	front.setWidth ( front_wheel_width);
 	front.setSuspensionMinLength ( front_suspension_min_length);
@@ -113,13 +113,13 @@ public void Initialize()
 	if (sOverrideFrontSuspensionForcePoint)
 	{
 		front.setEnableSuspensionForcePoint ( true);
-		front.setSuspensionForcePoint ( Op.add(front.getPosition() , Op.multiply(front.getSuspensionDirection() , front.getSuspensionMinLength())));
+		front.setSuspensionForcePoint ( Op.plus(front.getPosition() , Op.star(front.getSuspensionDirection() , front.getSuspensionMinLength())));
 	}
 
 	if (sOverrideRearSuspensionForcePoint)
 	{
 		back.setEnableSuspensionForcePoint ( true);
-		back.setSuspensionForcePoint ( Op.add(back.getPosition() , Op.multiply(back.getSuspensionDirection() , back.getSuspensionMinLength())));
+		back.setSuspensionForcePoint ( Op.plus(back.getPosition() , Op.star(back.getSuspensionDirection() , back.getSuspensionMinLength())));
 	}
 
 	vehicle.addWheels ( front, back );
@@ -225,12 +225,12 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 		// When overriding gravity is requested, we cast a sphere downwards (opposite to the previous up position) and use the contact normal as the new gravity direction
 		SphereShape sphere=new SphereShape(0.5f);
 		sphere.setEmbedded();
-		RShapeCast shape_cast=new RShapeCast(sphere, Vec3.sReplicate(1.0f), RMat44.sTranslation(mMotorcycleBody.getPosition()), Op.multiply(-3.0f , mVehicleConstraint.getWorldUp()));
+		RShapeCast shape_cast=new RShapeCast(sphere, Vec3.sReplicate(1.0f), RMat44.sTranslation(mMotorcycleBody.getPosition()), Op.star(-3.0f , mVehicleConstraint.getWorldUp()));
 		ShapeCastSettings settings=new ShapeCastSettings();
 		ClosestHitCastShapeCollector collector=new ClosestHitCastShapeCollector();
 		mPhysicsSystem.getNarrowPhaseQuery().castShape(shape_cast, settings, mMotorcycleBody.getPosition(), collector,new SpecifiedBroadPhaseLayerFilter(BroadPhaseLayers.NON_MOVING),new SpecifiedObjectLayerFilter(Layers.NON_MOVING));
 		if (collector.hadHit())
-			mVehicleConstraint.overrideGravity(Op.multiply(9.81f , collector.getHit().getPenetrationAxis().normalized()));
+			mVehicleConstraint.overrideGravity(Op.star(9.81f , collector.getHit().getPenetrationAxis().normalized()));
 		else
 			mVehicleConstraint.resetGravityOverride();
 	}
@@ -265,7 +265,7 @@ public void GetInitialCamera(CameraState ioState)
 	// Position camera behind motorcycle
 	RVec3 cam_tgt = new RVec3(0, 0, 5);
 	ioState.mPos = new RVec3(0, 2.5f, -5);
-	ioState.mForward = Op.subtract(cam_tgt , ioState.mPos).toVec3().normalized();
+	ioState.mForward = Op.minus(cam_tgt , ioState.mPos).toVec3().normalized();
 }
 
 void UpdateCameraPivot()
@@ -275,7 +275,7 @@ void UpdateCameraPivot()
 	fwd.setY(0.0f);
 	float len = fwd.length();
 	if (len != 0.0f)
-		Op.divideEquals(fwd , len);
+		Op.slashEquals(fwd , len);
 	else
 		fwd = Vec3.sAxisZ();
 	Vec3 up = Vec3.sAxisY();

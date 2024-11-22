@@ -126,7 +126,7 @@ public void Initialize()
 			{
 				Quat rotation = Quat.sRotation(Vec3.sAxisY(), i * 0.5f * JPH_PI);
 
-				pillars[i] = mBodyInterface.createBody(new BodyCreationSettings(pillar, Op.add(base_position , Op.rotate(base_rotation , Op.add(center , Op.rotate(rotation ,new Vec3(1.0f, 1.0f, 1.0f))))), base_rotation, EMotionType.Dynamic, Layers.MOVING));
+				pillars[i] = mBodyInterface.createBody(new BodyCreationSettings(pillar, Op.plus(base_position , Op.star(base_rotation , Op.plus(center , Op.star(rotation ,new Vec3(1.0f, 1.0f, 1.0f))))), base_rotation, EMotionType.Dynamic, Layers.MOVING));
 				pillars[i].setCollisionGroup(new CollisionGroup(group_filter, 0, 0)); // For convenience, we disable collisions between all objects in the tower
 				mBodyInterface.addBody(pillars[i].getId(), EActivation.Activate);
 			}
@@ -136,7 +136,7 @@ public void Initialize()
 				Quat rotation = Quat.sRotation(Vec3.sAxisY(), i * 0.5f * JPH_PI);
 
 				// Create cross beam
-				Body cross = mBodyInterface.createBody(new BodyCreationSettings(beam, Op.add(base_position , Op.rotate(base_rotation , Op.add(center , Op.rotate(rotation ,new Vec3(1.105f, 1.0f, 0.0f))))), Op.multiply(base_rotation , Op.multiply(rotation , Quat.sRotation(Vec3.sAxisX(), 0.3f * JPH_PI))), EMotionType.Dynamic, Layers.MOVING));
+				Body cross = mBodyInterface.createBody(new BodyCreationSettings(beam, Op.plus(base_position , Op.star(base_rotation , Op.plus(center , Op.star(rotation ,new Vec3(1.105f, 1.0f, 0.0f))))), Op.star(base_rotation , Op.star(rotation , Quat.sRotation(Vec3.sAxisX(), 0.3f * JPH_PI))), EMotionType.Dynamic, Layers.MOVING));
 				cross.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 				mBodyInterface.addBody(cross.getId(), EActivation.Activate);
 
@@ -167,7 +167,7 @@ public void Initialize()
 		}
 
 		// Create top
-		Body top = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1.2f, 0.1f, 1.2f)), Op.add(base_position , Op.rotate(base_rotation , Op.add(center ,new Vec3(0.0f, 0.1f, 0.0f)))), base_rotation, EMotionType.Dynamic, Layers.MOVING));
+		Body top = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1.2f, 0.1f, 1.2f)), Op.plus(base_position , Op.star(base_rotation , Op.plus(center ,new Vec3(0.0f, 0.1f, 0.0f)))), base_rotation, EMotionType.Dynamic, Layers.MOVING));
 		top.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 		mBodyInterface.addBody(top.getId(), EActivation.Activate);
 
