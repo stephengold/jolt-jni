@@ -116,6 +116,10 @@ final public class SmokeTestAll {
         // general package:
         smokeTest(new ActivateDuringUpdateTest());
         smokeTest(new ActiveEdgesTest());
+        smokeTest(new AllowedDOFsTest());
+        smokeTest(new BigVsSmallTest());
+        smokeTest(new CenterOfMassTest());
+        smokeTest(new ChangeMotionQualityTest());
         smokeTest(new EnhancedInternalEdgeRemovalTest());
         smokeTest(new HighSpeedTest());
         smokeTest(new RestitutionTest());
