@@ -82,7 +82,7 @@ public void Initialize()
 
 public void PostPhysicsUpdate(float inDeltaTime)
 {
-if (Jolt.implementsDebugRendering()) {
+if (implementsDebugRendering()) {
 	mBodyManager.draw(new BodyManagerDrawSettings(),new PhysicsSettings(), mDebugRenderer);
 } // JPH_DEBUG_RENDERER
 }

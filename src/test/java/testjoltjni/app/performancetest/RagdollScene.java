@@ -112,7 +112,7 @@ class RagdollScene implements PerformanceTestScene
 				// Cast ray down to terrain
 				RayCastResult hit=new RayCastResult();
 				Vec3 ray_direction=new Vec3(0, -200, 0);
-				RRayCast ray =new RRayCast(start, ray_direction);
+				RRayCast ray =new RRayCast(start, ray_direction );
 				if (inPhysicsSystem.getNarrowPhaseQuery().castRay(ray, hit, new SpecifiedBroadPhaseLayerFilter(BroadPhaseLayers.NON_MOVING), new SpecifiedObjectLayerFilter(Layers.NON_MOVING)))
 					start = ray.getPointOnRay(hit.getFraction());
 
