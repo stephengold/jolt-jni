@@ -102,8 +102,6 @@ class RagdollScene implements PerformanceTestScene
 		mBackground.createBodies(inPhysicsSystem);
 
 		// Create ragdoll piles
-		Mt19937 random=new Mt19937();
-		UniformRealDistribution angle=new UniformRealDistribution(0.0f, JPH_PI);
 		int group_id = 1;
 		for (int row = 0; row < mNumPilesPerAxis; ++row)
 			for (int col = 0; col < mNumPilesPerAxis; ++col)
@@ -128,7 +126,8 @@ class RagdollScene implements PerformanceTestScene
 					pose_copy.setRootOffset(start);
 					JointState root = pose_copy.getJoint(0);
 					root.setTranslation (new Vec3(0, mVerticalSeparation * (i + 1), 0));
-					root.setRotation ( Op.multiply(Quat.sRotation(Vec3.sAxisY(), angle.nextFloat(random)), root.getRotation()));
+					float angle = 2.0f * JPH_PI * (float)(i) / (float)(mPileSize);
+					root.setRotation ( Op.multiply(Quat.sRotation(Vec3.sAxisY(), angle) , root.getRotation()));
 					pose_copy.calculateJointMatrices();
 
 					// Drive to pose
