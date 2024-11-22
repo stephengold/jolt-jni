@@ -32,6 +32,32 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    addIndexedTriangle
+ * Signature: (JIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_addIndexedTriangle
+  (JNIEnv *, jclass, jlong settingsVa, jint vi0, jint vi1, jint vi2) {
+    MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    const IndexedTriangle triangle(vi0, vi1, vi2);
+    pSettings->mIndexedTriangles.push_back(triangle);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    addTriangleVertex
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_addTriangleVertex
+  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
+    MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    const Float3 vertex(x, y, z);
+    pSettings->mTriangleVertices.push_back(vertex);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
  * Method:    createMeshShapeSettings
  * Signature: (ILjava/nio/FloatBuffer;J)J
  */
@@ -153,6 +179,30 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings
             = reinterpret_cast<MeshShapeSettings *> (settingsVa);
     const bool result = pSettings->mPerTriangleUserData;
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    reserveIndexedTriangles
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_reserveIndexedTriangles
+  (JNIEnv *, jclass, jlong settingsVa, jint numTriangles) {
+    MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    pSettings->mIndexedTriangles.reserve(numTriangles);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    reserveTriangleVertices
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_reserveTriangleVertices
+  (JNIEnv *, jclass, jlong settingsVa, jint numVertices) {
+    MeshShapeSettings * const pSettings
+            = reinterpret_cast<MeshShapeSettings *> (settingsVa);
+    pSettings->mTriangleVertices.reserve(numVertices);
 }
 
 /*

@@ -192,6 +192,28 @@ public class MeshShapeSettings extends ShapeSettings {
     // new public methods
 
     /**
+     * Append the specified triangle to the internal array.
+     *
+     * @param vi0 the desired first mesh-vertex index
+     * @param vi1 the desired 2nd mesh-vertex index
+     * @param vi2 the desired 3rd mesh-vertex index
+     */
+    public void addIndexedTriangle(int vi0, int vi1, int vi2) {
+        long settingsVa = va();
+        addIndexedTriangle(settingsVa, vi0, vi1, vi2);
+    }
+
+    /**
+     * Append the specified vertex to the internal array.
+     *
+     * @param vertex the location of the vertex to add (not null, unaffected)
+     */
+    public void addTriangleVertex(Float3 vertex) {
+        long settingsVa = va();
+        addTriangleVertex(settingsVa, vertex.x, vertex.y, vertex.z);
+    }
+
+    /**
      * Count the triangles in the mesh. The settings are unaffected.
      *
      * @return the count (&ge;0)
@@ -256,6 +278,26 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Reserve storage for the specified number of triangles.
+     *
+     * @param numTriangles the desired capacity
+     */
+    public void reserveIndexedTriangles(int numTriangles) {
+        long settingsVa = va();
+        reserveIndexedTriangles(settingsVa, numTriangles);
+    }
+
+    /**
+     * Reserve storage for the specified number of vertices.
+     *
+     * @param numVertices the desired capacity
+     */
+    public void reserveTriangleVertices(int numVertices) {
+        long settingsVa = va();
+        reserveTriangleVertices(settingsVa, numVertices);
+    }
+
+    /**
      * Alter the active-edge threshold angle. (native attribute:
      * mActiveEdgeCosThresholdAngle)
      *
@@ -291,6 +333,12 @@ public class MeshShapeSettings extends ShapeSettings {
     // *************************************************************************
     // native private methods
 
+    native private static void addIndexedTriangle(
+            long settingsVa, int vi0, int vi1, int vi2);
+
+    native private static void addTriangleVertex(
+            long settingsVa, float x, float y, float z);
+
     native private static long createMeshShapeSettings(
             int numVertices, FloatBuffer vertices, long indicesVa);
 
@@ -306,6 +354,12 @@ public class MeshShapeSettings extends ShapeSettings {
     native private static int getMaxTrianglesPerLeaf(long settingsVa);
 
     native private static boolean getPerTriangleUserData(long settingsVa);
+
+    native private static void reserveIndexedTriangles(
+            long settingsVa, int numTriangles);
+
+    native private static void reserveTriangleVertices(
+            long settingsVa, int numVertices);
 
     native private static void setActiveEdgeCosThresholdAngle(
             long settingsVa, float cosine);
