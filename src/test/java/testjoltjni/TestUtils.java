@@ -424,6 +424,20 @@ final public class TestUtils {
             }
         }
         Assert.assertTrue(success);
+
+        // Print native-library details on the console:
+        System.out.print("jolt-jni version ");
+        System.out.print(Jolt.versionString());
+        String buildType = Jolt.buildType();
+        System.out.print('-');
+        System.out.print(buildType);
+        if (Jolt.isDoublePrecision()) {
+            System.out.print("Dp");
+        } else {
+            System.out.print("Sp");
+        }
+        System.out.println(" initializing");
+        System.out.println();
     }
 
     /**
