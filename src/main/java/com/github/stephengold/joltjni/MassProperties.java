@@ -134,6 +134,21 @@ final public class MassProperties
     }
 
     /**
+     * The the mass and inertia to that of a box with the specified dimensions
+     * and uniform density.
+     *
+     * @param boxSize the edge lengths of the box (not null, unaffected)
+     * @param density the density to use
+     */
+    public void setMassAndInertiaOfSolidBox(Vec3Arg boxSize, float density) {
+        long propertiesVa = va();
+        float sx = boxSize.getX();
+        float sy = boxSize.getY();
+        float sz = boxSize.getZ();
+        setMassAndInertiaOfSolidBox(propertiesVa, sx, sy, sz, density);
+    }
+
+    /**
      * Translate the inertia by the specified offset.
      *
      * @param offset the amount of translation (not null, unaffected)
@@ -235,6 +250,9 @@ final public class MassProperties
     native private static void setInertia(long propertiesVa, long matrixVa);
 
     native private static void setMass(long propertiesVa, float mass);
+
+    native private static void setMassAndInertiaOfSolidBox(
+            long propertiesVa, float sx, float sy, float sz, float density);
 
     native private static void translate(
             long propertiesVa, float x, float y, float z);

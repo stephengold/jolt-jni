@@ -170,6 +170,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MassProperties_setMas
 
 /*
  * Class:     com_github_stephengold_joltjni_MassProperties
+ * Method:    setMassAndInertiaOfSolidBox
+ * Signature: (JFFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MassProperties_setMassAndInertiaOfSolidBox
+  (JNIEnv *, jclass, jlong propertiesVa, jfloat sx, jfloat sy, jfloat sz,
+  jfloat density) {
+    MassProperties * const pProperties
+            = reinterpret_cast<MassProperties *> (propertiesVa);
+    const Vec3 boxSize(sx, sy, sz);
+    pProperties->SetMassAndInertiaOfSolidBox(boxSize, density);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MassProperties
  * Method:    translate
  * Signature: (JFFF)V
  */
