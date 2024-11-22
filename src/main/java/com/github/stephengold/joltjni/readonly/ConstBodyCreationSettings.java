@@ -40,6 +40,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
+     * Test whether a static body can be converted to kinematic or dynamic. The
+     * settings are unaffected.
+     *
+     * @return {@code true} if convertible, otherwise {@code false}
+     */
+    boolean getAllowDynamicOrKinematic();
+
+    /**
      * Return the body's degrees of freedom. The settings are unaffected.
      * (native attribute: mAllowedDOFs)
      *

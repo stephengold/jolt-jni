@@ -172,6 +172,18 @@ public class BodyCreationSettings
     }
 
     /**
+     * Alter whether a static body can be converted to kinematic or dynamic.
+     * (native attribute: mAllowDynamicOrKinematic)
+     *
+     * @param setting {@code true} to allow or {@code false} to inhibit
+     * (default=false)
+     */
+    public void setAllowDynamicOrKinematic(boolean setting) {
+        long bodySettingsVa = va();
+        setAllowDynamicOrKinematic(bodySettingsVa, setting);
+    }
+
+    /**
      * Alter the body's degrees of freedom. (native attribute: mAllowedDOFs)
      *
      * @param bitmask the desired bitmask (see {@code EAllowedDofs} for
@@ -462,6 +474,20 @@ public class BodyCreationSettings
     }
     // *************************************************************************
     // ConstBodyCreationSettings methods
+
+    /**
+     * Test whether a static body can be converted to kinematic or dynamic. The
+     * settings are unaffected. (native attribute: mAllowDynamicOrKinematic)
+     *
+     * @return {@code true} if convertible, otherwise {@code false}
+     */
+    @Override
+    public boolean getAllowDynamicOrKinematic() {
+        long bodySettingsVa = va();
+        boolean result = getAllowDynamicOrKinematic(bodySettingsVa);
+
+        return result;
+    }
 
     /**
      * Return the body's degrees of freedom. The settings are unaffected.
@@ -827,6 +853,9 @@ public class BodyCreationSettings
 
     native private static void free(long bodySettingsVa);
 
+    native private static boolean getAllowDynamicOrKinematic(
+            long bodySettingsVa);
+
     native private static int getAllowedDofs(long bodySettingsVa);
 
     native private static boolean getAllowSleeping(long bodySettingsVa);
@@ -893,6 +922,9 @@ public class BodyCreationSettings
     native private static long getShape(long bodySettingsVa);
 
     native private static boolean hasMassProperties(long bodySettingsVa);
+
+    native private static void setAllowDynamicOrKinematic(
+            long bodySettingsVa, boolean setting);
 
     native private static void setAllowedDofs(long bodySettingsVa, int bitmask);
 

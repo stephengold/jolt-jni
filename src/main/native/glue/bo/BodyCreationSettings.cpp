@@ -94,6 +94,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getAllowDynamicOrKinematic
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getAllowDynamicOrKinematic
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const bool result = pSettings->mAllowDynamicOrKinematic;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    getAllowedDofs
  * Signature: (J)I
  */
@@ -521,6 +534,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetti
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     const bool result = pSettings->HasMassProperties();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setAllowDynamicOrKinematic
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setAllowDynamicOrKinematic
+  (JNIEnv *, jclass, jlong bodySettingsVa, jboolean setting) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    pSettings->mAllowDynamicOrKinematic = setting;
 }
 
 /*
