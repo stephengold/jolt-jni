@@ -435,6 +435,20 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getMoti
     return (jint) result;
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getObjectLayer
+ * Signature: (JJ)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getObjectLayer
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const ObjectLayer  result = pInterface->GetObjectLayer(*pBodyId);
+    return (jint) result;
+}
+
 inline static const RVec3 getPosition(jlong bodyInterfaceVa, jlong bodyIdVa) {
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
@@ -717,6 +731,52 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setMoti
     const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
     const EMotionQuality quality = (EMotionQuality) ordinal;
     pInterface->SetMotionQuality(*pBodyId, quality);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setMotionType
+ * Signature: (JJII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setMotionType
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa, jint motionOrdinal,
+  jint activationOrdinal) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const EMotionType motionType = (EMotionType) motionOrdinal;
+    const EActivation activationType = (EActivation) activationOrdinal;
+    pInterface->SetMotionType(*pBodyId, motionType, activationType);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setObjectLayer
+ * Signature: (JJI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setObjectLayer
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa, jint layerIndex) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const ObjectLayer layer = (ObjectLayer) layerIndex;
+    pInterface->SetObjectLayer(*pBodyId, layer);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setPosition
+ * Signature: (JJDDDI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setPosition
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa, jdouble locX,
+  jdouble locY, jdouble locZ, jint ordinal) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const RVec3 location(locX, locY, locZ);
+    const EActivation activationType = (EActivation) ordinal;
+    pInterface->SetPosition(*pBodyId, location, activationType);
 }
 
 /*

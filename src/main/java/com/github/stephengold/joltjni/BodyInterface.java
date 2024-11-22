@@ -439,6 +439,20 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Return the object layer of the specified body.
+     *
+     * @param bodyId the ID of the body to query (not null, unaffected)
+     * @return an object-layer index
+     */
+    public int getObjectLayer(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.targetVa();
+        int result = getObjectLayer(bodyInterfaceVa, bodyIdVa);
+
+        return result;
+    }
+
+    /**
      * Locate the specified body.
      *
      * @param bodyId the ID of the body to locate (not null, unaffected)
@@ -703,6 +717,53 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Alter the motion type of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null, unaffected)
+     * @param motionType the desired motion type (not null)
+     * @param activationMode whether to activate the body (not null)
+     */
+    public void setMotionType(ConstBodyId bodyId, EMotionType motionType,
+            EActivation activationMode) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.targetVa();
+        int motionOrdinal = motionType.ordinal();
+        int activationOrdinal = activationMode.ordinal();
+        setMotionType(
+                bodyInterfaceVa, bodyIdVa, motionOrdinal, activationOrdinal);
+    }
+
+    /**
+     * Alter the object layer of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null, unaffected)
+     * @param layer the index of the desired object layer
+     */
+    public void setObjectLayer(ConstBodyId bodyId, int layer) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.targetVa();
+        setObjectLayer(bodyInterfaceVa, bodyIdVa, layer);
+    }
+
+    /**
+     * Alter the location of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null, unaffected)
+     * @param location the desired location (not null, unaffected)
+     * @param activationMode whether to activate the body (not null)
+     */
+    public void setPosition(
+            ConstBodyId bodyId, RVec3Arg location, EActivation activationMode) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.targetVa();
+        double locX = location.xx();
+        double locY = location.yy();
+        double locZ = location.zz();
+        int ordinal = activationMode.ordinal();
+        setPosition(bodyInterfaceVa, bodyIdVa, locX, locY, locZ, ordinal);
+    }
+
+    /**
      * Alter the location and orientation of the specified body.
      *
      * @param bodyId the ID of the body to modify (not null, unaffected)
@@ -845,6 +906,9 @@ public class BodyInterface extends NonCopyable {
     native private static int getMotionType(
             long bodyInterfaceVa, long bodyIdVa);
 
+    native private static int getObjectLayer(
+            long bodyInterfaceVa, long bodyIdVa);
+
     native private static double getPositionX(
             long bodyInterfaceVa, long bodyIdVa);
 
@@ -905,6 +969,15 @@ public class BodyInterface extends NonCopyable {
 
     native private static void setMotionQuality(
             long bodyInterfaceVa, long bodyIdVa, int ordinal);
+
+    native private static void setMotionType(long bodyInterfaceVa,
+            long bodyIdVa, int motionOrdinal, int activationOrdinal);
+
+    native private static void setObjectLayer(
+            long bodyInterfaceVa, long bodyIdVa, int layer);
+
+    native private static void setPosition(long bodyInterfaceVa,
+            long bodyIdVa, double locX, double locY, double locZ, int ordinal);
 
     native private static void setPositionAndRotation(long bodyInterfaceVa,
             long bodyIdVa, double locX, double locY, double locZ,
