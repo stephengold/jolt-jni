@@ -51,7 +51,8 @@ final public class Op {
     // new methods exposed
 
     /**
-     * Test whether the specified IDs are equal. (native operator: {@code ==})
+     * Test whether the specified IDs are equal. (native operator: binary
+     * {@code ==})
      *
      * @param left the first ID to test (not null, unaffected)
      * @param right the 2nd ID to test (not null, unaffected)
@@ -63,7 +64,7 @@ final public class Op {
     }
 
     /**
-     * Test whether the specified colors are equal. (native operator:
+     * Test whether the specified colors are equal. (native operator: binary
      * {@code ==})
      *
      * @param left the first color to test (not null, unaffected)
@@ -79,7 +80,7 @@ final public class Op {
     }
 
     /**
-     * Test whether the specified matrices are equal. (native operator:
+     * Test whether the specified matrices are equal. (native operator: binary
      * {@code ==})
      *
      * @param left the first matrix (not null, unaffected)
@@ -172,7 +173,7 @@ final public class Op {
     }
 
     /**
-     * Test whether the specified colors are unequal. (native operator:
+     * Test whether the specified colors are unequal. (native operator: binary
      * {@code !=})
      *
      * @param left the first color to test (not null, unaffected)
