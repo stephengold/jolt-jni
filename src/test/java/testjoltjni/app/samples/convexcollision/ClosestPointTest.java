@@ -21,9 +21,9 @@ SOFTWARE.
  */
 package testjoltjni.app.samples.convexcollision;
 import com.github.stephengold.joltjni.*;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
 /**
  * A line-for-line Java translation of the Jolt Physics closest-point test.
@@ -170,11 +170,11 @@ public void PrePhysicsUpdate(  PreUpdateParams inParams)
 
 void TestLine(Vec3Arg inPosition, Vec3Arg inA, Vec3Arg inB)
 {
-	Vec3 a = Op.minus(inA , inPosition);
-	Vec3 b = Op.minus(inB , inPosition);
+	Vec3 a = minus(inA , inPosition);
+	Vec3 b = minus(inB , inPosition);
 
 	int[] set=new int[1];
-	Vec3 closest = Op.plus(ClosestPoint.getClosestPointOnLine(a, b, set) , inPosition);
+	Vec3 closest = plus(ClosestPoint.getClosestPointOnLine(a, b, set) , inPosition);
 
 	DrawLineSP(mDebugRenderer, inA, inB, Color.sWhite);
 
@@ -185,12 +185,12 @@ void TestLine(Vec3Arg inPosition, Vec3Arg inA, Vec3Arg inB)
 	if ((set[0] & 0b0010)!=0)
 		DrawMarkerSP(mDebugRenderer, inB, Color.sYellow, 0.5f);
 
-	Vec3 a2 = Op.minus(inA , closest);
-	Vec3 b2 = Op.minus(inB , closest);
+	Vec3 a2 = minus(inA , closest);
+	Vec3 b2 = minus(inB , closest);
 
 	float[] uv=new float[2];
 	ClosestPoint.getBaryCentricCoordinates(a2, b2, uv);
-	DrawWireSphereSP(mDebugRenderer, Op.plus(Op.star(uv[0] , inA) , Op.star(uv[1] , inB)), 0.05f, Color.sGreen);
+	DrawWireSphereSP(mDebugRenderer, plus(star(uv[0] , inA) , star(uv[1] , inB)), 0.05f, Color.sGreen);
 
 	DrawText3DSP(mDebugRenderer, inA, "a");
 	DrawText3DSP(mDebugRenderer, inB, "b");
@@ -198,12 +198,12 @@ void TestLine(Vec3Arg inPosition, Vec3Arg inA, Vec3Arg inB)
 
 void TestTri(Vec3Arg inPosition, Vec3Arg inA, Vec3Arg inB, Vec3Arg inC)
 {
-	Vec3 a = Op.minus(inA , inPosition);
-	Vec3 b = Op.minus(inB , inPosition);
-	Vec3 c = Op.minus(inC , inPosition);
+	Vec3 a = minus(inA , inPosition);
+	Vec3 b = minus(inB , inPosition);
+	Vec3 c = minus(inC , inPosition);
 
 	int[] set=new int[1];
-	Vec3 closest = Op.plus(ClosestPoint.getClosestPointOnTriangle(a, b, c, set) , inPosition);
+	Vec3 closest = plus(ClosestPoint.getClosestPointOnTriangle(a, b, c, set) , inPosition);
 
 	DrawLineSP(mDebugRenderer, inA, inB, Color.sWhite);
 	DrawLineSP(mDebugRenderer, inA, inC, Color.sWhite);
@@ -220,13 +220,13 @@ void TestTri(Vec3Arg inPosition, Vec3Arg inA, Vec3Arg inB, Vec3Arg inC)
 	if ((set[0] & 0b0100)!=0)
 		DrawMarkerSP(mDebugRenderer, inC, Color.sYellow, 0.5f);
 
-	Vec3 a2 = Op.minus(inA , closest);
-	Vec3 b2 = Op.minus(inB , closest);
-	Vec3 c2 = Op.minus(inC , closest);
+	Vec3 a2 = minus(inA , closest);
+	Vec3 b2 = minus(inB , closest);
+	Vec3 c2 = minus(inC , closest);
 
 	float[] uvw=new float[3];
 	ClosestPoint.getBaryCentricCoordinates(a2, b2, c2, uvw);
-	DrawWireSphereSP(mDebugRenderer, Vec3.sum(Op.star(uvw[0] , inA) , Op.star(uvw[1] , inB) , Op.star(uvw[2] , inC)), 0.05f, Color.sGreen);
+	DrawWireSphereSP(mDebugRenderer, Vec3.sum(star(uvw[0] , inA) , star(uvw[1] , inB) , star(uvw[2] , inC)), 0.05f, Color.sGreen);
 
 	DrawText3DSP(mDebugRenderer, inA, "a");
 	DrawText3DSP(mDebugRenderer, inB, "b");
@@ -235,13 +235,13 @@ void TestTri(Vec3Arg inPosition, Vec3Arg inA, Vec3Arg inB, Vec3Arg inC)
 
 void TestTetra(Vec3Arg inPosition, Vec3Arg inA, Vec3Arg inB, Vec3Arg inC, Vec3Arg inD)
 {
-	Vec3 a = Op.minus(inA , inPosition);
-	Vec3 b = Op.minus(inB , inPosition);
-	Vec3 c = Op.minus(inC , inPosition);
-	Vec3 d = Op.minus(inD , inPosition);
+	Vec3 a = minus(inA , inPosition);
+	Vec3 b = minus(inB , inPosition);
+	Vec3 c = minus(inC , inPosition);
+	Vec3 d = minus(inD , inPosition);
 
 	int[] set=new int[1];
-	Vec3 closest = Op.plus(ClosestPoint.getClosestPointOnTetrahedron(a, b, c, d, set) , inPosition);
+	Vec3 closest = plus(ClosestPoint.getClosestPointOnTetrahedron(a, b, c, d, set) , inPosition);
 
 	DrawLineSP(mDebugRenderer, inA, inB, Color.sWhite);
 	DrawLineSP(mDebugRenderer, inA, inC, Color.sWhite);

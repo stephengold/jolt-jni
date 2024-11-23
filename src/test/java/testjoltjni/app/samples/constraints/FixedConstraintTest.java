@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics fixed-constraint test.
  * <p>
@@ -67,12 +67,12 @@ public void Initialize()
 			Quat rotation;
 			if (randomness == 0)
 			{
-				Op.plusEquals(position ,new Vec3(box_size, 0, 0));
+				plusEquals(position ,new Vec3(box_size, 0, 0));
 				rotation = Quat.sIdentity();
 			}
 			else
 			{
-				Op.plusEquals(position ,new Vec3(box_size + Math.abs(displacement.nextFloat(random)), displacement.nextFloat(random), displacement.nextFloat(random)));
+				plusEquals(position ,new Vec3(box_size + Math.abs(displacement.nextFloat(random)), displacement.nextFloat(random), displacement.nextFloat(random)));
 				rotation = Quat.sRandom(random);
 			}
 
@@ -126,7 +126,7 @@ public void Initialize()
 			{
 				Quat rotation = Quat.sRotation(Vec3.sAxisY(), i * 0.5f * JPH_PI);
 
-				pillars[i] = mBodyInterface.createBody(new BodyCreationSettings(pillar, Op.plus(base_position , Op.star(base_rotation , Op.plus(center , Op.star(rotation ,new Vec3(1.0f, 1.0f, 1.0f))))), base_rotation, EMotionType.Dynamic, Layers.MOVING));
+				pillars[i] = mBodyInterface.createBody(new BodyCreationSettings(pillar, plus(base_position , star(base_rotation , plus(center , star(rotation ,new Vec3(1.0f, 1.0f, 1.0f))))), base_rotation, EMotionType.Dynamic, Layers.MOVING));
 				pillars[i].setCollisionGroup(new CollisionGroup(group_filter, 0, 0)); // For convenience, we disable collisions between all objects in the tower
 				mBodyInterface.addBody(pillars[i].getId(), EActivation.Activate);
 			}
@@ -136,7 +136,7 @@ public void Initialize()
 				Quat rotation = Quat.sRotation(Vec3.sAxisY(), i * 0.5f * JPH_PI);
 
 				// Create cross beam
-				Body cross = mBodyInterface.createBody(new BodyCreationSettings(beam, Op.plus(base_position , Op.star(base_rotation , Op.plus(center , Op.star(rotation ,new Vec3(1.105f, 1.0f, 0.0f))))), Op.star(base_rotation , Op.star(rotation , Quat.sRotation(Vec3.sAxisX(), 0.3f * JPH_PI))), EMotionType.Dynamic, Layers.MOVING));
+				Body cross = mBodyInterface.createBody(new BodyCreationSettings(beam, plus(base_position , star(base_rotation , plus(center , star(rotation ,new Vec3(1.105f, 1.0f, 0.0f))))), star(base_rotation , star(rotation , Quat.sRotation(Vec3.sAxisX(), 0.3f * JPH_PI))), EMotionType.Dynamic, Layers.MOVING));
 				cross.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 				mBodyInterface.addBody(cross.getId(), EActivation.Activate);
 
@@ -163,11 +163,11 @@ public void Initialize()
 				prev_pillars[i] = pillars[i];
 			}
 
-			Op.plusEquals(center ,new Vec3(0.0f, 2.0f, 0.0f));
+			plusEquals(center ,new Vec3(0.0f, 2.0f, 0.0f));
 		}
 
 		// Create top
-		Body top = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1.2f, 0.1f, 1.2f)), Op.plus(base_position , Op.star(base_rotation , Op.plus(center ,new Vec3(0.0f, 0.1f, 0.0f)))), base_rotation, EMotionType.Dynamic, Layers.MOVING));
+		Body top = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1.2f, 0.1f, 1.2f)), plus(base_position , star(base_rotation , plus(center ,new Vec3(0.0f, 0.1f, 0.0f)))), base_rotation, EMotionType.Dynamic, Layers.MOVING));
 		top.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 		mBodyInterface.addBody(top.getId(), EActivation.Activate);
 

@@ -22,8 +22,8 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics distance-constraint test.
@@ -53,14 +53,14 @@ public void Initialize()
 		Body prev = top;
 		for (int i = 1; i < 15; ++i)
 		{
-			Op.plusEquals(position ,new Vec3(5.0f + 2.0f * half_cylinder_height, 0, 0));
+			plusEquals(position ,new Vec3(5.0f + 2.0f * half_cylinder_height, 0, 0));
 
 			Body segment = mBodyInterface.createBody(new BodyCreationSettings(new CapsuleShape(half_cylinder_height, 1), position, rotation, EMotionType.Dynamic, Layers.MOVING));
 			mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 
 			DistanceConstraintSettings settings=new DistanceConstraintSettings();
-			settings.setPoint1 ( Op.minus(position ,new Vec3(5.0f + half_cylinder_height, 0, 0)));
-			settings.setPoint2 ( Op.minus(position ,new Vec3(half_cylinder_height, 0, 0)));
+			settings.setPoint1 ( minus(position ,new Vec3(5.0f + half_cylinder_height, 0, 0)));
+			settings.setPoint2 ( minus(position ,new Vec3(half_cylinder_height, 0, 0)));
 
 			if (variation == 1)
 			{

@@ -22,10 +22,10 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics constraint-vs-COM change test.
  * <p>
@@ -61,7 +61,7 @@ public void Initialize()
 	RVec3 position=new RVec3(0, 25, 0);
 	for (int i = 0; i < cChainLength; ++i)
 	{
-		Op.plusEquals(position ,new Vec3(cBoxSize, 0, 0));
+		plusEquals(position ,new Vec3(cBoxSize, 0, 0));
 		Quat rotation = Quat.sIdentity();
 
 		// Create compound shape specific for this body
@@ -78,7 +78,7 @@ public void Initialize()
 		{
 			// Create hinge
 			HingeConstraintSettings settings=new HingeConstraintSettings();
-			settings.setPoint1 ( settings.setPoint2 ( Op.plus(position ,new Vec3(-0.5f * cBoxSize, -0.5f * cBoxSize, 0))));
+			settings.setPoint1 ( settings.setPoint2 ( plus(position ,new Vec3(-0.5f * cBoxSize, -0.5f * cBoxSize, 0))));
 			settings.setHingeAxis1 ( settings.setHingeAxis2 ( Vec3.sAxisZ()));
 			settings.setNormalAxis1 ( settings.setNormalAxis2 ( Vec3.sAxisX()));
 			settings.setLimitsMin ( cMinAngle);
@@ -145,7 +145,7 @@ void UpdateShapes()
 			mBodyInterface.notifyShapeChanged(b.getId(), prev_com, true, EActivation.Activate);
 
 			// Notify the constraints that the shape has changed (this could be done more efficient as we know which constraints are affected)
-			Vec3 delta_com = Op.minus(s.getCenterOfMass() , prev_com);
+			Vec3 delta_com = minus(s.getCenterOfMass() , prev_com);
 			for (TwoBodyConstraintRef c : mConstraints)
 				c.notifyShapeChanged(b.getId(), delta_com);
 		}

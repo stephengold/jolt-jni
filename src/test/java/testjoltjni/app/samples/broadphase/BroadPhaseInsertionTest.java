@@ -21,12 +21,12 @@ SOFTWARE.
  */
 package testjoltjni.app.samples.broadphase;
 import com.github.stephengold.joltjni.*;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.ConstBody;
 import java.util.List;
 import testjoltjni.TestUtils;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
 /**
  * A line-for-line Java translation of the Jolt Physics broadphase insertion test.
@@ -72,7 +72,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		{
 			Body body = body_vector.get(body_selector.nextInt(mRandomGenerator));
 			assert(body.isInBroadPhase());
-			body.setPositionAndRotationInternal(Op.plus(body.getPosition() , Op.star(translation_selector.nextFloat(mRandomGenerator) , Vec3.sRandom(mRandomGenerator))), Quat.sIdentity());
+			body.setPositionAndRotationInternal(plus(body.getPosition() , star(translation_selector.nextFloat(mRandomGenerator) , Vec3.sRandom(mRandomGenerator))), Quat.sIdentity());
 			bodies_to_move.set(i,  body.getId());
 		}
 		mBroadPhase.notifyBodiesAabbChanged(bodies_to_move, cNumBodiesToMove);
@@ -103,8 +103,8 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 
 	// Create ray
 	DefaultRandomEngine random=new DefaultRandomEngine();
-	Vec3 from = Op.star(1000.0f , Vec3.sRandom(random));
-	RayCast ray =new RayCast(from, Op.star(-2.0f , from) );
+	Vec3 from = star(1000.0f , Vec3.sRandom(random));
+	RayCast ray =new RayCast(from, star(-2.0f , from) );
 
 	// Raycast before update
 	AllHitRayCastBodyCollector hits_before=new AllHitRayCastBodyCollector();
@@ -114,7 +114,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	cout.printf("Before update: %d results found%n", num_before);
 
 	// Draw results
-	DrawLineSP(mDebugRenderer, ray.getOrigin(), Op.plus(ray.getOrigin() , ray.getDirection()), Color.sRed);
+	DrawLineSP(mDebugRenderer, ray.getOrigin(), plus(ray.getOrigin() , ray.getDirection()), Color.sRed);
 	for (int i = 0; i < num_before; ++i)
 		DrawMarkerSP(mDebugRenderer, ray.getPointOnRay(results_before[i].getFraction()), Color.sGreen, 10.0f);
 
@@ -135,7 +135,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	{
 		boolean found = false;
 		for (BroadPhaseCastResult rb : results_before)
-			if (Op.isEqual(ra.getBodyId() , rb.getBodyId()))
+			if (isEqual(ra.getBodyId() , rb.getBodyId()))
 			{
 				found = true;
 				break;
@@ -149,7 +149,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	{
 		boolean found = false;
 		for (BroadPhaseCastResult r : results_after)
-			if (Op.isEqual(r.getBodyId() , b.getId()))
+			if (isEqual(r.getBodyId() , b.getId()))
 			{
 				found = true;
 				break;

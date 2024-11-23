@@ -22,11 +22,11 @@ SOFTWARE.
 package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics enhanced internal-edge removal test.
  * <p>
@@ -39,7 +39,7 @@ BodyId mLevelBall;
 void CreateSlidingObjects(RVec3Arg inStart)
 {
 	// Slide the shapes over the grid of boxes
-	RVec3 pos = Op.minus(inStart , new RVec3(0, 0, 12.0));
+	RVec3 pos = minus(inStart , new RVec3(0, 0, 12.0));
 	for (int enhanced_removal = 0; enhanced_removal < 2; ++enhanced_removal)
 	{
 		// A box
@@ -47,14 +47,14 @@ void CreateSlidingObjects(RVec3Arg inStart)
 		box_bcs.setLinearVelocity ( new Vec3(20, 0, 0));
 		box_bcs.setEnhancedInternalEdgeRemoval ( enhanced_removal == 1);
 		mBodyInterface.createAndAddBody(box_bcs, EActivation.Activate);
-		Op.plusEquals(pos ,new RVec3(0, 0, 5.0));
+		plusEquals(pos ,new RVec3(0, 0, 5.0));
 
 		// A sphere
 		BodyCreationSettings sphere_bcs=new BodyCreationSettings(new SphereShape(2.0f), pos, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 		sphere_bcs.setLinearVelocity ( new Vec3(20, 0, 0));
 		sphere_bcs.setEnhancedInternalEdgeRemoval ( enhanced_removal == 1);
 		mBodyInterface.createAndAddBody(sphere_bcs, EActivation.Activate);
-		Op.plusEquals(pos ,new RVec3(0, 0, 5.0));
+		plusEquals(pos ,new RVec3(0, 0, 5.0));
 
 		// Compound
 		ShapeRefC box = new BoxShape(Vec3.sReplicate(0.1f)).toRefC();
@@ -68,7 +68,7 @@ void CreateSlidingObjects(RVec3Arg inStart)
 		compound_bcs.setLinearVelocity (new Vec3(20, 0, 0));
 		compound_bcs.setEnhancedInternalEdgeRemoval ( enhanced_removal == 1);
 		mBodyInterface.createAndAddBody(compound_bcs, EActivation.Activate);
-		Op.plusEquals(pos , new RVec3(0, 0, 7.0));
+		plusEquals(pos , new RVec3(0, 0, 7.0));
 	}
 }
 

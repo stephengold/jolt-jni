@@ -22,8 +22,8 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics spring test.
@@ -46,8 +46,8 @@ public void Initialize()
 	for (int i = 0; i < 10; ++i)
 	{
 		// Create body
-		RVec3 attachment_point = Op.plus(position , new Vec3(-100.0f + i * 5.0f, 0, 0));
-		RVec3 body_position = Op.minus(attachment_point , new Vec3(0, 10.0f + i * 2.5f, 0));
+		RVec3 attachment_point = plus(position , new Vec3(-100.0f + i * 5.0f, 0, 0));
+		RVec3 body_position = minus(attachment_point , new Vec3(0, 10.0f + i * 2.5f, 0));
 		Body body = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Vec3.sReplicate(0.75f)), body_position, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
 		body.getMotionProperties().setAngularDamping(0.0f);
 		body.getMotionProperties().setLinearDamping(0.0f);
@@ -61,15 +61,15 @@ public void Initialize()
 		mPhysicsSystem.addConstraint(settings.create(top, body));
 
 		// Move the body up so that it can start oscillating
-		mBodyInterface.setPositionAndRotation(body.getId(), Op.minus(attachment_point , new Vec3(0, 5, 0)), Quat.sIdentity(), EActivation.DontActivate);
+		mBodyInterface.setPositionAndRotation(body.getId(), minus(attachment_point , new Vec3(0, 5, 0)), Quat.sIdentity(), EActivation.DontActivate);
 	}
 
 	// Bodies attached with spring with different frequency and no damping
 	for (int i = 0; i < 10; ++i)
 	{
 		// Create body
-		RVec3 attachment_point = Op.plus(position , new Vec3(-25.0f + i * 5.0f, 0, 0));
-		RVec3 body_position = Op.plus(attachment_point , new Vec3(0, 25.0f, 0));
+		RVec3 attachment_point = plus(position , new Vec3(-25.0f + i * 5.0f, 0, 0));
+		RVec3 body_position = plus(attachment_point , new Vec3(0, 25.0f, 0));
 		Body body = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Vec3.sReplicate(0.75f)), body_position, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
 		body.getMotionProperties().setAngularDamping(0.0f);
 		body.getMotionProperties().setLinearDamping(0.0f);
@@ -83,15 +83,15 @@ public void Initialize()
 		mPhysicsSystem.addConstraint(settings.create(top, body));
 
 		// Move the body up so that it can start oscillating
-		mBodyInterface.setPositionAndRotation(body.getId(), Op.minus(attachment_point , new Vec3(0, 5, 0)), Quat.sIdentity(), EActivation.DontActivate);
+		mBodyInterface.setPositionAndRotation(body.getId(), minus(attachment_point , new Vec3(0, 5, 0)), Quat.sIdentity(), EActivation.DontActivate);
 	}
 
 	// Bodies attached with spring with same spring length, same frequency and different damping
 	for (int i = 0; i < 10; ++i)
 	{
 		// Create body
-		RVec3 attachment_point = Op.plus(position , new Vec3(50.0f + i * 5.0f, 0, 0));
-		RVec3 body_position = Op.minus(attachment_point , new Vec3(0, 25.0f, 0));
+		RVec3 attachment_point = plus(position , new Vec3(50.0f + i * 5.0f, 0, 0));
+		RVec3 body_position = minus(attachment_point , new Vec3(0, 25.0f, 0));
 		Body body = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Vec3.sReplicate(0.75f)), body_position, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
 		body.getMotionProperties().setAngularDamping(0.0f);
 		body.getMotionProperties().setLinearDamping(0.0f);
@@ -106,7 +106,7 @@ public void Initialize()
 		mPhysicsSystem.addConstraint(settings.create(top, body));
 
 		// Move the body up so that it can start oscillating
-		mBodyInterface.setPositionAndRotation(body.getId(), Op.minus(attachment_point , new Vec3(0, 5, 0)), Quat.sIdentity(), EActivation.DontActivate);
+		mBodyInterface.setPositionAndRotation(body.getId(), minus(attachment_point , new Vec3(0, 5, 0)), Quat.sIdentity(), EActivation.DontActivate);
 	}
 }
 }

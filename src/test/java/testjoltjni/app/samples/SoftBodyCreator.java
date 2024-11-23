@@ -23,10 +23,10 @@ package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.lambda.TriFunction;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.function.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the soft-body creator namespace.
  * <p>
@@ -48,7 +48,7 @@ static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX, int inGridSizeZ, f
 		for (int x = 0; x < inGridSizeX; ++x)
 		{
 			Vertex v=new Vertex();
-			Vec3 position = Op.plus(inVertexPerturbation.apply(x, z) , new Vec3(cOffsetX + x * inGridSpacing, 0.0f, cOffsetZ + z * inGridSpacing));
+			Vec3 position = plus(inVertexPerturbation.apply(x, z) , new Vec3(cOffsetX + x * inGridSpacing, 0.0f, cOffsetZ + z * inGridSpacing));
 			v.setPosition(position);
 			v.setInvMass ( inVertexGetInvMass.apply(x, z));
 			settings.addVertex(v);
@@ -107,7 +107,7 @@ static SoftBodySharedSettingsRef CreateCube(int inGridSize, float inGridSpacing)
 			for (int x = 0; x < inGridSize; ++x)
 			{
 				Vertex v=new Vertex();
-                                v.setPosition(Op.plus(cOffset , Op.star(Vec3.sReplicate(inGridSpacing), new Vec3((float)(x), (float)(y), (float)(z)))));
+                                v.setPosition(plus(cOffset , star(Vec3.sReplicate(inGridSpacing), new Vec3((float)(x), (float)(y), (float)(z)))));
 				settings.addVertex(v);
 			}
 
@@ -249,14 +249,14 @@ static SoftBodySharedSettingsRef CreateSphere(float inRadius, int inNumTheta, in
 	// Doing it this way tests the pressure algorithm as it receives non-uniform triangles. Better is to use uniform triangles,
 	// see the use of DebugRenderer::Create8thSphere for an example.
 	Vertex v=new Vertex();
-	v.setPosition(Op.star(inRadius , Vec3.sUnitSpherical(0, 0)));
+	v.setPosition(star(inRadius , Vec3.sUnitSpherical(0, 0)));
 	settings.addVertex(v);
-	v.setPosition(Op.star(inRadius , Vec3.sUnitSpherical(JPH_PI, 0)));
+	v.setPosition(star(inRadius , Vec3.sUnitSpherical(JPH_PI, 0)));
 	settings.addVertex(v);
 	for (int theta = 1; theta < inNumTheta - 1; ++theta)
 		for (int phi = 0; phi < inNumPhi; ++phi)
 		{
-			v.setPosition(Op.star(inRadius , Vec3.sUnitSpherical(JPH_PI * theta / (inNumTheta - 1), 2.0f * JPH_PI * phi / inNumPhi)));
+			v.setPosition(star(inRadius , Vec3.sUnitSpherical(JPH_PI * theta / (inNumTheta - 1), 2.0f * JPH_PI * phi / inNumPhi)));
 			settings.addVertex(v);
 		}
 

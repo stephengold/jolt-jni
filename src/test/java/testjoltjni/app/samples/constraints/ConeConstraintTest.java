@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics cone-constraint test.
  * <p>
@@ -55,16 +55,16 @@ public void Initialize()
 		RVec3 position=new RVec3(0, 20.0f, 10.0f * j);
 		for (int i = 0; i < cChainLength; ++i)
 		{
-			Op.plusEquals(position ,new Vec3(2.0f * half_cylinder_height, 0, 0));
+			plusEquals(position ,new Vec3(2.0f * half_cylinder_height, 0, 0));
 
-			Body segment = mBodyInterface.createBody(new BodyCreationSettings(new CapsuleShape(half_cylinder_height, 1), position, Op.star(Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI * i) , rotation), i == 0? EMotionType.Static : EMotionType.Dynamic, i == 0? Layers.NON_MOVING : Layers.MOVING));
+			Body segment = mBodyInterface.createBody(new BodyCreationSettings(new CapsuleShape(half_cylinder_height, 1), position, star(Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI * i) , rotation), i == 0? EMotionType.Static : EMotionType.Dynamic, i == 0? Layers.NON_MOVING : Layers.MOVING));
 			segment.setCollisionGroup(new CollisionGroup(group_filter, j, i));
 			mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 
 			if (prev != nullptr)
 			{
 				ConeConstraintSettings settings=new ConeConstraintSettings();
-				settings.setPoint1 ( settings.setPoint2 ( Op.plus(position ,new Vec3(-half_cylinder_height, 0, 0))));
+				settings.setPoint1 ( settings.setPoint2 ( plus(position ,new Vec3(-half_cylinder_height, 0, 0))));
 				settings.setTwistAxis1 ( settings.setTwistAxis2 (new Vec3(1, 0, 0)));
 				if (j == 0)
 					settings.setHalfConeAngle ( 0.0f);

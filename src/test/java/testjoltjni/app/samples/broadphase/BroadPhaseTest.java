@@ -21,11 +21,11 @@ SOFTWARE.
  */
 package testjoltjni.app.samples.broadphase;
 import com.github.stephengold.joltjni.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.BPLayerInterfaceImpl;
 import testjoltjni.app.samples.Layers;
 import testjoltjni.app.samples.Test;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics abstract broad phase
  * test class.
@@ -52,12 +52,12 @@ void CreateBalancedDistribution(BodyManager inBodyManager, int inNumBodies, floa
 	float n = (float)(inNumBodies);
 	Vec3 max_box_start = Vec3.sReplicate(inEnvironmentSize * (1.0f - pow(n, -1.0f / 3.0f)));
 	Vec3 min_box_size = Vec3.sReplicate(1.0f / inEnvironmentSize);
-	Vec3 max_box_size = Op.minus(Vec3.sReplicate(inEnvironmentSize * pow(n, -1.0f / 3.0f)) , min_box_size);
+	Vec3 max_box_size = minus(Vec3.sReplicate(inEnvironmentSize * pow(n, -1.0f / 3.0f)) , min_box_size);
 	for (int b = 0; b < inNumBodies; ++b)
 	{
 		AaBox box=new AaBox();
-		box.setMin ( Op.minus(Op.star(max_box_start, new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random))) , Vec3.sReplicate(0.5f * inEnvironmentSize)));
-		box.setMax ( Vec3.sum(box.getMin() , min_box_size , Op.star(max_box_size ,new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random)))));
+		box.setMin ( minus(star(max_box_start, new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random))) , Vec3.sReplicate(0.5f * inEnvironmentSize)));
+		box.setMax ( Vec3.sum(box.getMin() , min_box_size , star(max_box_size ,new Vec3(zero_to_one.nextFloat(random), zero_to_one.nextFloat(random), zero_to_one.nextFloat(random)))));
 
 		BodyCreationSettings s=new BodyCreationSettings();
 		s.setShape(new BoxShape(box.getExtent(), 0.0f));

@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics allowed DOFs test.
  * <p>
@@ -55,8 +55,8 @@ public void Initialize()
 
 		// Create a constraint
 		DistanceConstraintSettings dcs=new DistanceConstraintSettings();
-		dcs.setPoint1 ( Op.plus(bcs.getPosition() ,new Vec3(5, 5, 5)));
-		dcs.setPoint2 ( Op.plus(bcs.getPosition() , box_size));
+		dcs.setPoint1 ( plus(bcs.getPosition() ,new Vec3(5, 5, 5)));
+		dcs.setPoint2 ( plus(bcs.getPosition() , box_size));
 		dcs.setMinDistance ( 0.0f);
 		dcs.setMaxDistance ( sqrt(3.0f) * 5.0f + 1.0f);
 		mPhysicsSystem.addConstraint(mBodyInterface.createConstraint(dcs,new BodyId(), id));

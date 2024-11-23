@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics abstract test class.
  * <p>
@@ -53,7 +53,7 @@ public Body CreateFloor(float inSize)
 {
 	final float scale = GetWorldScale();
 
-	Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(Op.star(scale,new Vec3(0.5f * inSize, 1.0f, 0.5f * inSize)), 0.0f),new RVec3(Op.star(scale,new Vec3(0.0f, -1.0f, 0.0f))), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
+	Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(star(scale,new Vec3(0.5f * inSize, 1.0f, 0.5f * inSize)), 0.0f),new RVec3(star(scale,new Vec3(0.0f, -1.0f, 0.0f))), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
 	mBodyInterface.addBody(floor.getId(), EActivation.DontActivate);
 	return floor;
 }

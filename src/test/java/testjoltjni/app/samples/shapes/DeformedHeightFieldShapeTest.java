@@ -22,11 +22,11 @@ SOFTWARE.
 package testjoltjni.app.samples.shapes;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import java.nio.FloatBuffer;
 import java.util.function.BiFunction;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics deformed heightfield-shape test.
  * <p>
@@ -70,10 +70,10 @@ public void Initialize()
 	for (float t = 0.2f; t < 12.4f; t += 0.1f)
 	{
 		// Get the center of the path
-		Vec3 center = Op.plus(offset , GetPathCenter(t));
+		Vec3 center = plus(offset , GetPathCenter(t));
 
 		// Cast a ray onto the terrain
-		RShapeCast shape_cast=new RShapeCast(sphere_shape, Vec3.sReplicate(1.0f), RMat44.sTranslation(Op.plus(new RVec3(0, 10, 0) , center)),new Vec3(0, -20, 0));
+		RShapeCast shape_cast=new RShapeCast(sphere_shape, Vec3.sReplicate(1.0f), RMat44.sTranslation(plus(new RVec3(0, 10, 0) , center)),new Vec3(0, -20, 0));
 		ClosestHitCastShapeCollector collector=new ClosestHitCastShapeCollector();
 		mPhysicsSystem.getNarrowPhaseQuery().castShape(shape_cast,new ShapeCastSettings(){ }, RVec3.sZero(), collector);
 		if (collector.getHit().getBodyId2() == mHeightFieldID)

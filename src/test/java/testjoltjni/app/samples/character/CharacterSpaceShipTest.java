@@ -22,11 +22,11 @@ SOFTWARE.
 package testjoltjni.app.samples.character;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.CameraState;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics character-spaceship test.
  * <p>
@@ -61,7 +61,7 @@ public void Initialize()
 	CharacterVirtualSettings settings = new CharacterVirtualSettings();
 	settings.setShape (new RotatedTranslatedShapeSettings(new Vec3(0, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, 0), Quat.sIdentity(), new CapsuleShape(0.5f * cCharacterHeightStanding, cCharacterRadiusStanding)).create().get());
 	settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
-	mCharacter = new CharacterVirtual(settings, Op.plus(cShipInitialPosition ,new Vec3(0, cSpaceShipHeight, 0)), Quat.sIdentity(), 0, mPhysicsSystem).toRef();
+	mCharacter = new CharacterVirtual(settings, plus(cShipInitialPosition ,new Vec3(0, cSpaceShipHeight, 0)), Quat.sIdentity(), 0, mPhysicsSystem).toRef();
 	mCharacter.getPtr().setListener(new CustomCharacterContactListener() {
             public void onAdjustBodyVelocity(long characterVa, long body2Va, float[] velocities) {OnAdjustBodyVelocity(new CharacterVirtual(characterVa), new Body(body2Va), new Vec3(), new Vec3());}
         });
@@ -110,7 +110,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 
 	// Update the character so it stays relative to the space ship
 	RMat44 new_space_ship_transform = mBodyInterface.getCenterOfMassTransform(mSpaceShip);
-	mCharacter.setPosition(Op.star(Op.star(new_space_ship_transform , mSpaceShipPrevTransform.inversed()) , mCharacter.getPosition()));
+	mCharacter.setPosition(star(star(new_space_ship_transform , mSpaceShipPrevTransform.inversed()) , mCharacter.getPosition()));
 
 	// Update the character rotation and its up vector to match the new up vector of the ship
 	mCharacter.setUp(new_space_ship_transform.getAxisY());
@@ -123,7 +123,7 @@ if(implementsDebugRendering()){
 } // JPH_DEBUG_RENDERER
 
 	// Determine new character velocity
-	Vec3 current_vertical_velocity =Op.star( mCharacter.getLinearVelocity().dot(mSpaceShipPrevTransform.getAxisY()) , mCharacter.getUp());
+	Vec3 current_vertical_velocity =star( mCharacter.getLinearVelocity().dot(mSpaceShipPrevTransform.getAxisY()) , mCharacter.getUp());
 	Vec3 ground_velocity = mCharacter.getGroundVelocity();
 	Vec3 new_velocity;
 	if (mCharacter.getGroundState() == EGroundState.OnGround // If on ground
@@ -134,17 +134,17 @@ if(implementsDebugRendering()){
 
 		// Jump
 		if (mJump)
-			Op.plusEquals(new_velocity , Op.star(cJumpSpeed , mCharacter.getUp()));
+			plusEquals(new_velocity , star(cJumpSpeed , mCharacter.getUp()));
 	}
 	else
 		new_velocity = current_vertical_velocity;
 
 	// Gravity always acts relative to the ship
 	Vec3 gravity = new_space_ship_transform.multiply3x3(mPhysicsSystem.getGravity());
-	Op.plusEquals(new_velocity , Op.star(gravity , inParams.mDeltaTime));
+	plusEquals(new_velocity , star(gravity , inParams.mDeltaTime));
 
 	// Transform player input to world space
-	Op.plusEquals(new_velocity , new_space_ship_transform.multiply3x3(mDesiredVelocity));
+	plusEquals(new_velocity , new_space_ship_transform.multiply3x3(mDesiredVelocity));
 
 	// Update character velocity
 	mCharacter.setLinearVelocity(new_velocity);
@@ -170,8 +170,8 @@ if(implementsDebugRendering()){
 void UpdateShipVelocity()
 {
 	// Make it a rocky ride...
-	mSpaceShipLinearVelocity =Op.star(new Vec3(sin(mTime), 0, cos(mTime)) , 50.0f);
-	mSpaceShipAngularVelocity =Op.star(new Vec3(sin(2.0f * mTime), 1, cos(2.0f * mTime)) , 0.5f);
+	mSpaceShipLinearVelocity =star(new Vec3(sin(mTime), 0, cos(mTime)) , 50.0f);
+	mSpaceShipAngularVelocity =star(new Vec3(sin(2.0f * mTime), 1, cos(2.0f * mTime)) , 0.5f);
 
 	mBodyInterface.setLinearAndAngularVelocity(mSpaceShip, mSpaceShipLinearVelocity, mSpaceShipAngularVelocity);
 }
@@ -187,7 +187,7 @@ RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of character + distance behind based on the heading and pitch of the camera
 	Vec3 fwd =new Vec3(cos(inCameraPitch) * cos(inCameraHeading), sin(inCameraPitch), cos(inCameraPitch) * sin(inCameraHeading));
-	return RMat44.sTranslation(Op.minus(Op.plus(mCharacter.getPosition() ,new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , Op.star(5.0f , fwd)));
+	return RMat44.sTranslation(minus(plus(mCharacter.getPosition() ,new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , star(5.0f , fwd)));
 }
 
 void SaveState(StateRecorder inStream)
@@ -224,7 +224,7 @@ void RestoreInputState(StateRecorder inStream)
 void OnAdjustBodyVelocity(ConstCharacterVirtual inCharacter, ConstBody inBody2, Vec3 ioLinearVelocity, Vec3 ioAngularVelocity)
 {
 	// Cancel out velocity of space ship, we move relative to this which means we don't feel any of the acceleration of the ship (= engage inertial dampeners!)
-	Op.minusEquals(ioLinearVelocity , mSpaceShipLinearVelocity);
-	Op.minusEquals(ioAngularVelocity , mSpaceShipAngularVelocity);
+	minusEquals(ioLinearVelocity , mSpaceShipLinearVelocity);
+	minusEquals(ioAngularVelocity , mSpaceShipAngularVelocity);
 }
 }

@@ -22,11 +22,11 @@ SOFTWARE.
 package testjoltjni.app.samples.water;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.CameraState;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics boat test.
  * <p>
@@ -158,9 +158,9 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 				RVec3 surface_position = GetWaterSurfacePosition(body.getCenterOfMassPosition());
 
 				// Crude way of approximating the surface normal
-				RVec3 p2 = GetWaterSurfacePosition(Op.plus(body.getCenterOfMassPosition() , new Vec3(0, 0, 1)));
-				RVec3 p3 = GetWaterSurfacePosition(Op.plus(body.getCenterOfMassPosition() , new Vec3(1, 0, 0)));
-				Vec3 surface_normal = Op.minus(p2 , surface_position).cross(Op.minus(p3 , surface_position)).toVec3().normalized();
+				RVec3 p2 = GetWaterSurfacePosition(plus(body.getCenterOfMassPosition() , new Vec3(0, 0, 1)));
+				RVec3 p3 = GetWaterSurfacePosition(plus(body.getCenterOfMassPosition() , new Vec3(1, 0, 0)));
+				Vec3 surface_normal = minus(p2 , surface_position).cross(minus(p3 , surface_position)).toVec3().normalized();
 
 				// Determine buoyancy and drag
 				float buoyancy, linear_drag, angular_drag;
@@ -189,13 +189,13 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		mBodyInterface.activateBody(mBoatBody.getId());
 
 	// Apply forces to rear of boat where the propeller would be but only when the propeller is under water
-	RVec3 propeller_position =Op.star( mBoatBody.getWorldTransform() , new Vec3(0, -cHalfBoatHeight, -cHalfBoatLength));
+	RVec3 propeller_position =star( mBoatBody.getWorldTransform() , new Vec3(0, -cHalfBoatHeight, -cHalfBoatLength));
 	RVec3 propeller_surface_position = GetWaterSurfacePosition(propeller_position);
 	if (propeller_surface_position.yy() > propeller_position.yy())
 	{
 		Vec3 forward = mBoatBody.getRotation().rotateAxisZ();
 		Vec3 right = mBoatBody.getRotation().rotateAxisX();
-		mBoatBody.addImpulse(Op.star(Op.plus(Op.star(forward , mForward * cForwardAcceleration) , Op.star(right , sign(mForward) * mRight * cSteerAcceleration)) , cBoatMass * inParams.mDeltaTime), propeller_position);
+		mBoatBody.addImpulse(star(plus(star(forward , mForward * cForwardAcceleration) , star(right , sign(mForward) * mRight * cSteerAcceleration)) , cBoatMass * inParams.mDeltaTime), propeller_position);
 	}
 
 	UpdateCameraPivot();
@@ -230,7 +230,7 @@ public void GetInitialCamera(CameraState ioState)
 	// Position camera behind boat
 	RVec3 cam_tgt =new RVec3(0, 0, 5);
 	ioState.mPos =new RVec3(0, 5, -10);
-	ioState.mForward = Op.minus( cam_tgt , ioState.mPos).toVec3().normalized();
+	ioState.mForward = minus( cam_tgt , ioState.mPos).toVec3().normalized();
 }
 
 void UpdateCameraPivot()
@@ -240,7 +240,7 @@ void UpdateCameraPivot()
 	fwd.setY(0.0f);
 	float len = fwd.length();
 	if (len != 0.0f)
-		Op.slashEquals(fwd , len);
+		slashEquals(fwd , len);
 	else
 		fwd = Vec3.sAxisZ();
 	Vec3 up = Vec3.sAxisY();

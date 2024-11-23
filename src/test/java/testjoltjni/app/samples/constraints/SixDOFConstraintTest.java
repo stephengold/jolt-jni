@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.CameraState;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics 6DOF constraint test.
  * <p>
@@ -42,7 +42,7 @@ boolean []sEnableLimits = { true, true, true, true, true, true };
 static TwoBodyConstraintSettingsRef sSettings; static {
 		SixDofConstraintSettings settings=new SixDofConstraintSettings();
 		settings.setEmbedded();
-		settings.setAxisX1 ( settings.setAxisX2 ( Op.minus(Vec3.sAxisY())));
+		settings.setAxisX1 ( settings.setAxisX2 ( minus(Vec3.sAxisY())));
 		settings.setAxisY1 ( settings.setAxisY2 ( Vec3.sAxisZ()));
 		for (int i = 0; i < 6; ++i)
 			settings.setMotorSettings(i, new MotorSettings(10.0f, 2.0f));
@@ -75,13 +75,13 @@ public void Initialize()
 	mBodyInterface.addBody(body1.getId(), EActivation.DontActivate);
 
 	// Create dynamic body
-	Body body2 = mBodyInterface.createBody(new BodyCreationSettings(box, Op.minus(position ,new Vec3(0, 2.0f * half_box_height, 0)), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
+	Body body2 = mBodyInterface.createBody(new BodyCreationSettings(box, minus(position ,new Vec3(0, 2.0f * half_box_height, 0)), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
 	body2.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 	body2.setAllowSleeping(false);
 	mBodyInterface.addBody(body2.getId(), EActivation.Activate);
 
 	// Set constraint position
-	((SixDofConstraintSettings)sSettings.getPtr()).setPosition1 ( ((SixDofConstraintSettings)sSettings.getPtr()).setPosition2 ( Op.minus(position ,new Vec3(0, half_box_height, 0))));
+	((SixDofConstraintSettings)sSettings.getPtr()).setPosition1 ( ((SixDofConstraintSettings)sSettings.getPtr()).setPosition2 ( minus(position ,new Vec3(0, half_box_height, 0))));
 
 	// Set force limits
 	final float max_acceleration = 1.0f;

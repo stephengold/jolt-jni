@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics constraint-singularity test.
  * <p>
@@ -57,7 +57,7 @@ public void Initialize()
 			body1.setCollisionGroup(new CollisionGroup(group_filter, group_id, 0));
 			mBodyInterface.addBody(body1.getId(), EActivation.DontActivate);
 
-			Body body2 = mBodyInterface.createBody(new BodyCreationSettings(box, Op.plus(test_position ,new Vec3(box_size, 0, 0)), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
+			Body body2 = mBodyInterface.createBody(new BodyCreationSettings(box, plus(test_position ,new Vec3(box_size, 0, 0)), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
 			body2.setCollisionGroup(new CollisionGroup(group_filter, group_id, 0));
 			mBodyInterface.addBody(body2.getId(), EActivation.Activate);
 
@@ -67,7 +67,7 @@ public void Initialize()
 			case 0:
 				{
 					HingeConstraintSettings settings=new HingeConstraintSettings();
-					settings.setPoint1 ( settings.setPoint2 ( Op.plus(test_position ,new Vec3(0.5f * box_size, 0, 0.5f * box_size))));
+					settings.setPoint1 ( settings.setPoint2 ( plus(test_position ,new Vec3(0.5f * box_size, 0, 0.5f * box_size))));
 					settings.setHingeAxis1 ( settings.setHingeAxis2 ( Vec3.sAxisY()));
 					settings.setNormalAxis1 ( settings.setNormalAxis2 ( Vec3.sAxisX()));
 					settings.setLimitsMin ( -0.01f);
@@ -92,24 +92,24 @@ public void Initialize()
 			switch (configuration)
 			{
 			case 0:
-				position = Op.plus(test_position ,new Vec3(0, 0, box_size));
+				position = plus(test_position ,new Vec3(0, 0, box_size));
 				orientation = Quat.sRotation(Vec3.sAxisY(), degreesToRadians(180.0f));
 				break;
 
 			case 1:
-				position = Op.plus(test_position ,new Vec3(0, 0, box_size));
-				orientation = Op.star(Quat.sRotation(Vec3.sAxisY(), degreesToRadians(-90.0f)) , Quat.sRotation(Vec3.sAxisX(), degreesToRadians(180.0f)));
+				position = plus(test_position ,new Vec3(0, 0, box_size));
+				orientation = star(Quat.sRotation(Vec3.sAxisY(), degreesToRadians(-90.0f)) , Quat.sRotation(Vec3.sAxisX(), degreesToRadians(180.0f)));
 				break;
 
 			case 2:
-				position = Op.plus(test_position ,new Vec3(box_size, 0, 0));
-				orientation = Op.star(Quat.sRotation(Vec3.sAxisY(), degreesToRadians(90.0f)) , Quat.sRotation(Vec3.sAxisZ(), degreesToRadians(90.0f)));
+				position = plus(test_position ,new Vec3(box_size, 0, 0));
+				orientation = star(Quat.sRotation(Vec3.sAxisY(), degreesToRadians(90.0f)) , Quat.sRotation(Vec3.sAxisZ(), degreesToRadians(90.0f)));
 				break;
 
 			default:
 				assert(configuration == 3);
-				position = Op.plus(test_position ,new Vec3(-box_size, 0, 0));
-				orientation = Op.star(Quat.sRotation(Vec3.sAxisY(), degreesToRadians(90.0f)) , Quat.sRotation(Vec3.sAxisZ(), degreesToRadians(90.0f)));
+				position = plus(test_position ,new Vec3(-box_size, 0, 0));
+				orientation = star(Quat.sRotation(Vec3.sAxisY(), degreesToRadians(90.0f)) , Quat.sRotation(Vec3.sAxisZ(), degreesToRadians(90.0f)));
 				break;
 			}
 

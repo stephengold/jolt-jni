@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics powered hinge-constraint test.
  * <p>
@@ -56,7 +56,7 @@ public void Initialize()
 	body1.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 	mBodyInterface.addBody(body1.getId(), EActivation.DontActivate);
 
-	RVec3 body2_position = Op.plus(body1_position ,new Vec3(box_size, 0, 0));
+	RVec3 body2_position = plus(body1_position ,new Vec3(box_size, 0, 0));
 	Body body2 = mBodyInterface.createBody(new BodyCreationSettings(box, body2_position, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
 	body2.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 	body2.getMotionProperties().setLinearDamping(0.0f);
@@ -64,7 +64,7 @@ public void Initialize()
 	body2.setAllowSleeping(false);
 	mBodyInterface.addBody(body2.getId(), EActivation.Activate);
 
-	RVec3 constraint_position = Op.plus(body1_position ,new Vec3(0.5f * box_size, 0, 0.5f * box_size));
+	RVec3 constraint_position = plus(body1_position ,new Vec3(0.5f * box_size, 0, 0.5f * box_size));
 
 	HingeConstraintSettings settings = new HingeConstraintSettings();
 	settings.setPoint1 ( settings.setPoint2 ( constraint_position));
@@ -79,8 +79,8 @@ public void Initialize()
 	MassProperties body2_inertia_from_constraint=new MassProperties();
 	body2_inertia_from_constraint.setMass ( 1.0f / body2.getMotionProperties().getInverseMass());
 	body2_inertia_from_constraint.setInertia ( body2.getMotionProperties().getLocalSpaceInverseInertia().inversed3x3());
-	body2_inertia_from_constraint.translate(Op.minus(body2_position , constraint_position).toVec3());
-	mInertiaBody2AsSeenFromConstraint = Op.star(body2_inertia_from_constraint.getInertia() , Vec3.sAxisY()).length();
+	body2_inertia_from_constraint.translate(minus(body2_position , constraint_position).toVec3());
+	mInertiaBody2AsSeenFromConstraint = star(body2_inertia_from_constraint.getInertia() , Vec3.sAxisY()).length();
 }
 
 public void PrePhysicsUpdate( PreUpdateParams inParams)

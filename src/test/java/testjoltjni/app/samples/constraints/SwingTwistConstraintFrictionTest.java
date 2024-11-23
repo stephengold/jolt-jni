@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics swing-twist constraint friction test.
  * <p>
@@ -51,7 +51,7 @@ public void Initialize()
 	body1.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 	mBodyInterface.addBody(body1.getId(), EActivation.DontActivate);
 
-	RVec3 body2_position = Op.plus(body1_position ,new Vec3(0, -2.0f * half_cylinder_height, 0));
+	RVec3 body2_position = plus(body1_position ,new Vec3(0, -2.0f * half_cylinder_height, 0));
 	Body body2 = mBodyInterface.createBody(new BodyCreationSettings(capsule, body2_position, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING));
 	body2.setCollisionGroup(new CollisionGroup(group_filter, 0, 0));
 	body2.getMotionProperties().setLinearDamping(0.0f);
@@ -60,7 +60,7 @@ public void Initialize()
 	mBodyInterface.addBody(body2.getId(), EActivation.Activate);
 
 	SwingTwistConstraintSettings settings=new SwingTwistConstraintSettings();
-	settings.setPosition1 ( settings.setPosition2 ( Op.plus(body1_position ,new Vec3(0, -half_cylinder_height, 0))));
+	settings.setPosition1 ( settings.setPosition2 ( plus(body1_position ,new Vec3(0, -half_cylinder_height, 0))));
 	settings.setTwistAxis1 ( settings.setTwistAxis2 (new Vec3(0, -1, 0)));
 	settings.setPlaneAxis1 ( settings.setPlaneAxis2 (Vec3.sAxisX()));
 	settings.setNormalHalfConeAngle ( degreesToRadians(90));
@@ -68,7 +68,7 @@ public void Initialize()
 	settings.setTwistMinAngle ( -JPH_PI);
 	settings.setTwistMaxAngle ( JPH_PI);
 
-	float body2_inertia = Op.star(body2.getMotionProperties().getLocalSpaceInverseInertia().inversed3x3() , Vec3.sAxisY()).length();
+	float body2_inertia = star(body2.getMotionProperties().getLocalSpaceInverseInertia().inversed3x3() , Vec3.sAxisY()).length();
 	final float max_angular_acceleration = degreesToRadians(90.0f); // rad/s^2
 	settings.setMaxFrictionTorque ( body2_inertia * max_angular_acceleration);
 

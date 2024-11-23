@@ -22,8 +22,8 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics pulley-constraint test.
  * <p>
@@ -52,10 +52,10 @@ public void Initialize()
 		mBodyInterface.addBody(body2.getId(), EActivation.Activate);
 
 		PulleyConstraintSettings settings=new PulleyConstraintSettings();
-		settings.setBodyPoint1 ( Op.plus(position1 ,new Vec3(0, 0.5f, 0))); // Connect at the top of the block
-		settings.setBodyPoint2 ( Op.plus(position2 ,new Vec3(0, 0.5f, 0)));
-		settings.setFixedPoint1 ( Op.plus(settings.getBodyPoint1() ,new Vec3(0, 10, 0)));
-		settings.setFixedPoint2 ( Op.plus(settings.getBodyPoint2() ,new Vec3(0, 10, 0)));
+		settings.setBodyPoint1 ( plus(position1 ,new Vec3(0, 0.5f, 0))); // Connect at the top of the block
+		settings.setBodyPoint2 ( plus(position2 ,new Vec3(0, 0.5f, 0)));
+		settings.setFixedPoint1 ( plus(settings.getBodyPoint1() ,new Vec3(0, 10, 0)));
+		settings.setFixedPoint2 ( plus(settings.getBodyPoint2() ,new Vec3(0, 10, 0)));
 
 		switch (variation)
 		{

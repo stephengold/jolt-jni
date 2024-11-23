@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics hinge-constraint test.
  * <p>
@@ -69,12 +69,12 @@ public void Initialize()
 			Quat rotation;
 			if (randomness == 0)
 			{
-				Op.plusEquals(position ,new Vec3(box_size, 0, 0));
+				plusEquals(position ,new Vec3(box_size, 0, 0));
 				rotation = Quat.sIdentity();
 			}
 			else
 			{
-				Op.plusEquals(position ,new Vec3(box_size + Math.abs(displacement.nextFloat(random)), displacement.nextFloat(random), displacement.nextFloat(random)));
+				plusEquals(position ,new Vec3(box_size + Math.abs(displacement.nextFloat(random)), displacement.nextFloat(random), displacement.nextFloat(random)));
 				rotation = Quat.sRandom(random);
 			}
 
@@ -85,13 +85,13 @@ public void Initialize()
 			HingeConstraintSettings settings=new HingeConstraintSettings();
 			if ((i & 1) == 0)
 			{
-				settings.setPoint1 ( settings.setPoint2 ( Op.plus(position ,new Vec3(-0.5f * box_size, 0, 0.5f * box_size))));
+				settings.setPoint1 ( settings.setPoint2 ( plus(position ,new Vec3(-0.5f * box_size, 0, 0.5f * box_size))));
 				settings.setHingeAxis1 ( settings.setHingeAxis2 ( Vec3.sAxisY()));
 				settings.setNormalAxis1 ( settings.setNormalAxis2 ( Vec3.sAxisX()));
 			}
 			else
 			{
-				settings.setPoint1 ( settings.setPoint2 ( Op.plus(position ,new Vec3(-0.5f * box_size, -0.5f * box_size, 0))));
+				settings.setPoint1 ( settings.setPoint2 ( plus(position ,new Vec3(-0.5f * box_size, -0.5f * box_size, 0))));
 				settings.setHingeAxis1 ( settings.setHingeAxis2 ( Vec3.sAxisZ()));
 				settings.setNormalAxis1 ( settings.setNormalAxis2 ( Vec3.sAxisX()));
 			}

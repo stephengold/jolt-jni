@@ -22,10 +22,10 @@ SOFTWARE.
 package testjoltjni.app.samples.character;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics character test.
  * <p>
@@ -106,7 +106,7 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 		normal.setY(0.0f);
 		float dot = normal.dot(movement_direction);
 		if (dot < 0.0f)
-			Op.minusEquals(movement_direction , Op.slash(Op.star(dot , normal) , normal.lengthSq()));
+			minusEquals(movement_direction , slash(star(dot , normal) , normal.lengthSq()));
 	}
 
 	// Stance switch
@@ -117,14 +117,14 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 	{
 		// Update velocity
 		Vec3 current_velocity =new Vec3(mCharacter.getLinearVelocity());
-		Vec3 desired_velocity =new Vec3(Op.star(sCharacterSpeed , movement_direction));
+		Vec3 desired_velocity =new Vec3(star(sCharacterSpeed , movement_direction));
 		if (!desired_velocity.isNearZero() || current_velocity.getY() < 0.0f || !mCharacter.isSupported())
 			desired_velocity.setY(current_velocity.getY());
-		Vec3 new_velocity =new Vec3(Op.plus(Op.star(0.75f , current_velocity) , Op.star(0.25f , desired_velocity)));
+		Vec3 new_velocity =new Vec3(plus(star(0.75f , current_velocity) , star(0.25f , desired_velocity)));
 
 		// Jump
 		if (inJump && ground_state == EGroundState.OnGround)
-			Op.plusEquals(new_velocity ,new Vec3(0, sJumpSpeed, 0));
+			plusEquals(new_velocity ,new Vec3(0, sJumpSpeed, 0));
 
 		// Update the velocity
 		mCharacter.setLinearVelocity(new_velocity);

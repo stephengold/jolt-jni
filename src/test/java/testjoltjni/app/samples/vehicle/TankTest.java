@@ -22,11 +22,11 @@ SOFTWARE.
 package testjoltjni.app.samples.vehicle;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics tank test.
  * <p>
@@ -136,7 +136,7 @@ if (implementsDebugRendering()){
 	mPhysicsSystem.addStepListener(mVehicleConstraint);
 
 	// Create turret
-	RVec3 turret_position = Op.plus(body_position , new Vec3(0, half_vehicle_height + half_turret_height, 0));
+	RVec3 turret_position = plus(body_position , new Vec3(0, half_vehicle_height + half_turret_height, 0));
 	BodyCreationSettings turret_body_setings=new BodyCreationSettings(new BoxShape(new Vec3(half_turret_width, half_turret_height, half_turret_length)), turret_position, Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 	turret_body_setings.getCollisionGroup().setGroupFilter(filter);
 	turret_body_setings.getCollisionGroup().setGroupId(0);
@@ -148,7 +148,7 @@ if (implementsDebugRendering()){
 
 	// Attach turret to body
 	HingeConstraintSettings turret_hinge=new HingeConstraintSettings();
-	turret_hinge.setPoint1 ( turret_hinge.setPoint2 ( Op.plus( body_position , new Vec3(0, half_vehicle_height, 0))));
+	turret_hinge.setPoint1 ( turret_hinge.setPoint2 ( plus( body_position , new Vec3(0, half_vehicle_height, 0))));
 	turret_hinge.setHingeAxis1 ( turret_hinge.setHingeAxis2 ( Vec3.sAxisY()));
 	turret_hinge.setNormalAxis1 ( turret_hinge.setNormalAxis2 ( Vec3.sAxisZ()));
 	turret_hinge.setMotorSettings (new MotorSettings(0.5f, 1.0f));
@@ -157,7 +157,7 @@ if (implementsDebugRendering()){
 	mPhysicsSystem.addConstraint(mTurretHinge);
 
 	// Create barrel
-	RVec3 barrel_position = Op.plus(turret_position , new Vec3(0, 0, half_turret_length + half_barrel_length - barrel_rotation_offset));
+	RVec3 barrel_position = plus(turret_position , new Vec3(0, 0, half_turret_length + half_barrel_length - barrel_rotation_offset));
 	BodyCreationSettings barrel_body_setings=new BodyCreationSettings(new CylinderShape(half_barrel_length, barrel_radius), barrel_position, Quat.sRotation(Vec3.sAxisX(), 0.5f * JPH_PI), EMotionType.Dynamic, Layers.MOVING);
 	barrel_body_setings.getCollisionGroup().setGroupFilter(filter);
 	barrel_body_setings.getCollisionGroup().setGroupId(0);
@@ -169,8 +169,8 @@ if (implementsDebugRendering()){
 
 	// Attach barrel to turret
 	HingeConstraintSettings barrel_hinge=new HingeConstraintSettings();
-	barrel_hinge.setPoint1 ( barrel_hinge.setPoint2 ( Op.minus(barrel_position , new Vec3(0, 0, half_barrel_length))));
-	barrel_hinge.setHingeAxis1 ( barrel_hinge.setHingeAxis2 ( Op.minus(Vec3.sAxisX())));
+	barrel_hinge.setPoint1 ( barrel_hinge.setPoint2 ( minus(barrel_position , new Vec3(0, 0, half_barrel_length))));
+	barrel_hinge.setHingeAxis1 ( barrel_hinge.setHingeAxis2 ( minus(Vec3.sAxisX())));
 	barrel_hinge.setNormalAxis1 ( barrel_hinge.setNormalAxis2 ( Vec3.sAxisZ()));
 	barrel_hinge.setLimitsMin ( degreesToRadians(-10.0f));
 	barrel_hinge.setLimitsMax ( degreesToRadians(40.0f));
@@ -298,21 +298,21 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	if (mReloadTime == 0.0f && mFire)
 	{
 		// Create bullet
-		BodyCreationSettings bullet_creation_settings=new BodyCreationSettings(new SphereShape(bullet_radius), Op.star(mBarrelBody.getCenterOfMassTransform() , bullet_pos), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
+		BodyCreationSettings bullet_creation_settings=new BodyCreationSettings(new SphereShape(bullet_radius), star(mBarrelBody.getCenterOfMassTransform() , bullet_pos), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 		bullet_creation_settings.setMotionQuality ( EMotionQuality.LinearCast);
 		bullet_creation_settings.setFriction ( 1.0f);
 		bullet_creation_settings.setRestitution ( 0.0f);
 		bullet_creation_settings.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
 		bullet_creation_settings.getMassPropertiesOverride().setMass ( bullet_mass);
 		Body bullet = mBodyInterface.createBody(bullet_creation_settings);
-		bullet.setLinearVelocity(Op.star(mBarrelBody.getRotation() , bullet_velocity));
+		bullet.setLinearVelocity(star(mBarrelBody.getRotation() , bullet_velocity));
 		mBodyInterface.addBody(bullet.getId(), EActivation.Activate);
 
 		// Start reloading
 		mReloadTime = bullet_reload_time;
 
 		// Apply opposite impulse to turret body
-		mBodyInterface.addImpulse(mTurretBody.getId(), Op.star(bullet.getLinearVelocity() , -bullet_mass));
+		mBodyInterface.addImpulse(mTurretBody.getId(), star(bullet.getLinearVelocity() , -bullet_mass));
 	}
 
 	// Draw our wheels (this needs to be done in the pre update since we draw the bodies too in the state before the step)
@@ -369,6 +369,6 @@ public RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 {
 	// Pivot is center of tank + a distance away from the tank based on the heading and pitch of the camera
 	Vec3 fwd =new Vec3(cos(inCameraPitch) * cos(inCameraHeading), sin(inCameraPitch), cos(inCameraPitch) * sin(inCameraHeading));
-	return RMat44.sTranslation(Op.minus(mCameraPivot , Op.star(10.0f , fwd)));
+	return RMat44.sTranslation(minus(mCameraPivot , star(10.0f , fwd)));
 }
 }

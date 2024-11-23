@@ -22,9 +22,9 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import java.util.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics constraint-priority test.
@@ -52,7 +52,7 @@ public void Initialize()
 		Body prev = top;
 		for (int i = 1; i < num_bodies; ++i)
 		{
-			Op.plusEquals(position ,new Vec3(box_size, 0, 0));
+			plusEquals(position ,new Vec3(box_size, 0, 0));
 
 			Body segment = mBodyInterface.createBody(new BodyCreationSettings(box, position, Quat.sIdentity(), EMotionType.Dynamic, Layers.NON_MOVING)); // Putting all bodies in the NON_MOVING layer so they won't collide
 			mBodyInterface.addBody(segment.getId(), EActivation.Activate);
@@ -72,6 +72,6 @@ public void Initialize()
 public void PostPhysicsUpdate(float inDeltaTime)
 {
 	for (TwoBodyConstraintRef c : mConstraints)
-		mDebugRenderer.drawText3D(Op.star(0.5f , Op.plus(c.getBody1().getCenterOfMassPosition() , c.getBody2().getCenterOfMassPosition())), String.format("Priority: %d", c.getConstraintPriority()), Color.sWhite, 0.2f);
+		mDebugRenderer.drawText3D(star(0.5f , plus(c.getBody1().getCenterOfMassPosition() , c.getBody2().getCenterOfMassPosition())), String.format("Priority: %d", c.getConstraintPriority()), Color.sWhite, 0.2f);
 }
 }

@@ -22,11 +22,11 @@ SOFTWARE.
 package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics center-of-mass test.
  * <p>
@@ -61,8 +61,8 @@ public void Initialize()
 	StaticCompoundShapeSettings compound_shape2 = new StaticCompoundShapeSettings();
 	Quat rotation = Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI);
 	compound_shape2.addShape(new Vec3(10, 0, 0), rotation, new CapsuleShape(5, 1));
-	compound_shape2.addShape(Op.star(rotation ,new Vec3(10, -5, 0)), Quat.sIdentity(), new SphereShape(4));
-	compound_shape2.addShape(Op.star(rotation ,new Vec3(10, 5, 0)), Quat.sIdentity(), new SphereShape(2));
+	compound_shape2.addShape(star(rotation ,new Vec3(10, -5, 0)), Quat.sIdentity(), new SphereShape(4));
+	compound_shape2.addShape(star(rotation ,new Vec3(10, 5, 0)), Quat.sIdentity(), new SphereShape(2));
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(compound_shape2,new RVec3(0, 10.0f, 40.0f), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 }
 }

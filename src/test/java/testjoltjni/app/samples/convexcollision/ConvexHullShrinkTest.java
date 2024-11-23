@@ -22,11 +22,11 @@ SOFTWARE.
 package testjoltjni.app.samples.convexcollision;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
 
 /**
@@ -183,7 +183,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		{
 			Trace("%d, %f, %f", mIteration - 1, (double)convex_radius, (double)max_error);
 			DrawMarkerSP(mDebugRenderer, max_error_support_point, Color.sPurple, 0.1f);
-			DrawArrowSP(mDebugRenderer, max_error_support_point, Op.minus(max_error_support_point , Op.star(max_error , planes[max_error_plane].getNormal())), Color.sPurple, 0.01f);
+			DrawArrowSP(mDebugRenderer, max_error_support_point, minus(max_error_support_point , star(max_error , planes[max_error_plane].getNormal())), Color.sPurple, 0.01f);
 		}
 	}
 

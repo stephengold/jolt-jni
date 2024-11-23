@@ -22,8 +22,8 @@ SOFTWARE.
 package testjoltjni.app.samples.constraints;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics point constraint test.
@@ -56,15 +56,15 @@ public void Initialize()
 	Body prev = top;
 	for (int i = 1; i < cChainLength; ++i)
 	{
-		Op.plusEquals(position , new Vec3(2.0f * half_cylinder_height, 0, 0));
+		plusEquals(position , new Vec3(2.0f * half_cylinder_height, 0, 0));
 
 		Body segment = mBodyInterface.createBody(new BodyCreationSettings(new CapsuleShape(half_cylinder_height, 1), position, rotation, EMotionType.Dynamic, Layers.MOVING));
 		segment.setCollisionGroup(new CollisionGroup(group_filter, 0, i));
 		mBodyInterface.addBody(segment.getId(), EActivation.Activate);
 
 		PointConstraintSettings settings=new PointConstraintSettings();
-		settings.setPoint1 ( Op.plus(position , new Vec3(-half_cylinder_height, 0, 0)));
-		settings.setPoint2 ( Op.plus(position , new Vec3(-half_cylinder_height, 0, 0)));
+		settings.setPoint1 ( plus(position , new Vec3(-half_cylinder_height, 0, 0)));
+		settings.setPoint2 ( plus(position , new Vec3(-half_cylinder_height, 0, 0)));
 		mPhysicsSystem.addConstraint(settings.create(prev, segment));
 
 		prev = segment;

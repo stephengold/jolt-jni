@@ -22,12 +22,12 @@ SOFTWARE.
 package testjoltjni.app.samples.vehicle;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.*;
 import java.io.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.operator.Op.*;
 /**
  * A line-for-line Java translation of the Jolt Physics vehicle-test abstract class.
  * <p>
@@ -145,24 +145,24 @@ public void Initialize()
 		{
 			float angle = i * 2.0f * JPH_PI / (cNumSegments - 1);
 			Vec3 radial=new Vec3(0, -cos(angle), sin(angle));
-			Vec3 center = Op.plus(new Vec3(-i * cLoopWidth / (cNumSegments - 1), cLoopRadius, cLoopRadius) , Op.star(cLoopRadius , radial));
+			Vec3 center = plus(new Vec3(-i * cLoopWidth / (cNumSegments - 1), cLoopRadius, cLoopRadius) , star(cLoopRadius , radial));
 			Vec3 half_width=new Vec3(0.5f * cLoopWidth, 0, 0);
-			Vec3 center_bottom = Op.plus(center , Op.star(cLoopThickness , radial));
+			Vec3 center_bottom = plus(center , star(cLoopThickness , radial));
 			if (i > 0)
 			{
 				// Top surface
-				triangles.add(new Triangle(Op.plus(prev_center , half_width), Op.minus(prev_center , half_width), Op.minus(center , half_width)));
-				triangles.add(new Triangle(Op.plus(prev_center , half_width), Op.minus(center , half_width), Op.plus(center , half_width)));
+				triangles.add(new Triangle(plus(prev_center , half_width), minus(prev_center , half_width), minus(center , half_width)));
+				triangles.add(new Triangle(plus(prev_center , half_width), minus(center , half_width), plus(center , half_width)));
 
 				// Bottom surface
-				triangles.add(new Triangle(Op.plus(prev_center_bottom , half_width), Op.minus(center_bottom , half_width), Op.minus(prev_center_bottom , half_width)));
-				triangles.add(new Triangle(Op.plus(prev_center_bottom , half_width), Op.plus(center_bottom , half_width), Op.minus(center_bottom , half_width)));
+				triangles.add(new Triangle(plus(prev_center_bottom , half_width), minus(center_bottom , half_width), minus(prev_center_bottom , half_width)));
+				triangles.add(new Triangle(plus(prev_center_bottom , half_width), plus(center_bottom , half_width), minus(center_bottom , half_width)));
 
 				// Sides
-				triangles.add(new Triangle(Op.plus(prev_center , half_width), Op.plus(center , half_width), Op.plus(prev_center_bottom , half_width)));
-				triangles.add(new Triangle(Op.plus(prev_center_bottom , half_width), Op.plus(center , half_width), Op.plus(center_bottom , half_width)));
-				triangles.add(new Triangle(Op.minus(prev_center , half_width), Op.minus(prev_center_bottom , half_width), Op.minus(center , half_width)));
-				triangles.add(new Triangle(Op.minus(prev_center_bottom , half_width), Op.minus(center_bottom , half_width), Op.minus(center , half_width)));
+				triangles.add(new Triangle(plus(prev_center , half_width), plus(center , half_width), plus(prev_center_bottom , half_width)));
+				triangles.add(new Triangle(plus(prev_center_bottom , half_width), plus(center , half_width), plus(center_bottom , half_width)));
+				triangles.add(new Triangle(minus(prev_center , half_width), minus(prev_center_bottom , half_width), minus(center , half_width)));
+				triangles.add(new Triangle(minus(prev_center_bottom , half_width), minus(center_bottom , half_width), minus(center , half_width)));
 			}
 			prev_center = center;
 			prev_center_bottom = center_bottom;
@@ -209,9 +209,9 @@ void CreateBridge()
 
 	for (int i = 0; i < cChainLength; ++i)
 	{
-		RVec3 pos = Op.plus(prev_pos , new Vec3(0, 0, 2.0f * part_half_size.getZ()));
+		RVec3 pos = plus(prev_pos , new Vec3(0, 0, 2.0f * part_half_size.getZ()));
 
-		Body part = i == 0? mBodyInterface.createBody(new BodyCreationSettings(large_part_shape, Op.minus(pos , Op.star(first_part_rot , new Vec3(0, large_part_half_size.getY() - part_half_size.getY(), large_part_half_size.getZ() - part_half_size.getZ()))), first_part_rot, EMotionType.Static, Layers.NON_MOVING))
+		Body part = i == 0? mBodyInterface.createBody(new BodyCreationSettings(large_part_shape, minus(pos , star(first_part_rot , new Vec3(0, large_part_half_size.getY() - part_half_size.getY(), large_part_half_size.getZ() - part_half_size.getZ()))), first_part_rot, EMotionType.Static, Layers.NON_MOVING))
 					: mBodyInterface.createBody(new BodyCreationSettings(part_shape, pos, Quat.sIdentity(), i == 19? EMotionType.Static : EMotionType.Dynamic, i == 19? Layers.NON_MOVING : Layers.MOVING));
 		part.setCollisionGroup(new CollisionGroup(group_filter, 1, (i)));
 		part.setFriction(1.0f);
@@ -220,12 +220,12 @@ void CreateBridge()
 		if (prev_part != nullptr)
 		{
 			DistanceConstraintSettings dc=new DistanceConstraintSettings();
-			dc.setPoint1 ( Op.plus(prev_pos , new Vec3(-part_half_size.getX(), 0, part_half_size.getZ())));
-			dc.setPoint2 ( Op.plus(pos , new Vec3(-part_half_size.getX(), 0, -part_half_size.getZ())));
+			dc.setPoint1 ( plus(prev_pos , new Vec3(-part_half_size.getX(), 0, part_half_size.getZ())));
+			dc.setPoint2 ( plus(pos , new Vec3(-part_half_size.getX(), 0, -part_half_size.getZ())));
 			mPhysicsSystem.addConstraint(dc.create(prev_part, part));
 
-			dc.setPoint1 ( Op.plus(prev_pos , new Vec3(part_half_size.getX(), 0, part_half_size.getZ())));
-			dc.setPoint2 ( Op.plus(pos , new Vec3(part_half_size.getX(), 0, -part_half_size.getZ())));
+			dc.setPoint1 ( plus(prev_pos , new Vec3(part_half_size.getX(), 0, part_half_size.getZ())));
+			dc.setPoint2 ( plus(pos , new Vec3(part_half_size.getX(), 0, -part_half_size.getZ())));
 			mPhysicsSystem.addConstraint(dc.create(prev_part, part));
 		}
 
@@ -266,7 +266,7 @@ void CreateRubble()
 			// Create random points
 			List<Vec3Arg> points=new ArrayList<>(20);
 			for (int k = 0; k < 20; ++k)
-				points.add(Op.star(hull_size.nextFloat(random) , Vec3.sRandom(random)));
+				points.add(star(hull_size.nextFloat(random) , Vec3.sRandom(random)));
 
 			mBodyInterface.createAndAddBody(new BodyCreationSettings(new ConvexHullShapeSettings(points), new RVec3(-5.0f + 0.5f * j, 2.0f, 15.0f + 0.5f * i), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 		}
@@ -306,11 +306,11 @@ void LoadRaceTrack(String  inFileName)
 		wr = stream.nextFloat();
 		RVec3 center=new RVec3(x, 0, -y);
 		segments.add(new Segment(center, wl, wr));
-		Op.plusEquals(track_center , center);
+		plusEquals(track_center , center);
 	}catch(NoSuchElementException e){break;}
 	}
 	if (!segments.isEmpty())
-		Op.slashEquals(track_center , (float)segments.size());
+		slashEquals(track_center , (float)segments.size());
 
 	// Convert to line segments
 	RVec3 prev_tleft = RVec3.sZero(), prev_tright = RVec3.sZero();
@@ -320,11 +320,11 @@ void LoadRaceTrack(String  inFileName)
 		Segment next_segment = segments.get((i + 1) % segments.size());
 
 		// Calculate left and right point of the track
-		Vec3 fwd =new Vec3(Op.minus(next_segment.mCenter , segment.mCenter));
+		Vec3 fwd =new Vec3(minus(next_segment.mCenter , segment.mCenter));
 		Vec3 right = fwd.cross(Vec3.sAxisY()).normalized();
-		RVec3 tcenter = Op.minus(segment.mCenter , Op.plus(track_center , new Vec3(0, 0.1f, 0))); // Put a bit above the floor to avoid z fighting
-		RVec3 tleft = Op.minus(tcenter , Op.star(right , segment.mWidthLeft));
-		RVec3 tright = Op.plus(tcenter , Op.star(right , segment.mWidthRight));
+		RVec3 tcenter = minus(segment.mCenter , plus(track_center , new Vec3(0, 0.1f, 0))); // Put a bit above the floor to avoid z fighting
+		RVec3 tleft = minus(tcenter , star(right , segment.mWidthLeft));
+		RVec3 tright = plus(tcenter , star(right , segment.mWidthRight));
 		mTrackData.add(new Line( tleft, tright ));
 
 		// Connect left and right point with the previous left and right point
