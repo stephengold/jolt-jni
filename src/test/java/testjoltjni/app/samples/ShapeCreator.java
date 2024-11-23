@@ -23,6 +23,7 @@ package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.operator.Op;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.std.Std.*;
 /**
  * A line-for-line Java translation of the {@code ShapeCreator} namespace.
  * <p>

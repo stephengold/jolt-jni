@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.std.Std;
 
 /**
  * A math object used to represent rotations and orientations in 3-dimensional
@@ -129,12 +130,12 @@ final public class Quat implements QuatArg {
         float halfY = 0.5f * angles.getY();
         float halfZ = 0.5f * angles.getZ();
 
-        float cx = Jolt.cos(halfX);
-        float cy = Jolt.cos(halfY);
-        float cz = Jolt.cos(halfZ);
-        float sx = Jolt.sin(halfX);
-        float sy = Jolt.sin(halfY);
-        float sz = Jolt.sin(halfZ);
+        float cx = Std.cos(halfX);
+        float cy = Std.cos(halfY);
+        float cz = Std.cos(halfZ);
+        float sx = Std.sin(halfX);
+        float sy = Std.sin(halfY);
+        float sz = Std.sin(halfZ);
 
         Quat result = new Quat(
                 cz * sx * cy - sz * cx * sy,
@@ -153,7 +154,7 @@ final public class Quat implements QuatArg {
      * @return a new quaternion
      */
     public static Quat sFromTo(Vec3Arg from, Vec3Arg to) {
-        float lenV1V2 = Jolt.sqrt(from.lengthSq() * to.lengthSq());
+        float lenV1V2 = Std.sqrt(from.lengthSq() * to.lengthSq());
         float w = lenV1V2 + from.dot(to);
 
         if (w == 0f) {
@@ -193,16 +194,16 @@ final public class Quat implements QuatArg {
         }
 
         float x0 = distro.nextFloat(engine);
-        float r1 = Jolt.sqrt(1f - x0);
-        float r2 = Jolt.sqrt(x0);
+        float r1 = Std.sqrt(1f - x0);
+        float r2 = Std.sqrt(x0);
 
         float px = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
         float py = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
 
-        float x = r1 * Jolt.sin(px);
-        float y = r1 * Jolt.cos(px);
-        float z = r2 * Jolt.sin(py);
-        float w = r2 * Jolt.cos(py);
+        float x = r1 * Std.sin(px);
+        float y = r1 * Std.cos(px);
+        float z = r2 * Std.sin(py);
+        float w = r2 * Std.cos(py);
         Quat result = new Quat(x, y, z, w);
 
         return result;
@@ -218,8 +219,8 @@ final public class Quat implements QuatArg {
     public static Quat sRotation(Vec3 axis, float angle) {
         assert axis.isNormalized();
 
-        float qw = Jolt.cos(0.5f * angle);
-        float s = Jolt.sin(0.5f * angle);
+        float qw = Std.cos(0.5f * angle);
+        float s = Std.sin(0.5f * angle);
         float qx = axis.getX() * s;
         float qy = axis.getY() * s;
         float qz = axis.getZ() * s;
@@ -322,7 +323,7 @@ final public class Quat implements QuatArg {
     @Override
     public float length() {
         float lengthSq = lengthSq();
-        float result = Jolt.sqrt(lengthSq);
+        float result = Std.sqrt(lengthSq);
 
         return result;
     }

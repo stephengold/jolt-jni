@@ -27,6 +27,7 @@ import testjoltjni.TestUtils;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
+import static com.github.stephengold.joltjni.std.Std.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
 /**
  * A line-for-line Java translation of the Jolt Physics broadphase insertion test.

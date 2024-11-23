@@ -24,6 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import testjoltjni.TestUtils;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.std.Std.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics "hello world" sample

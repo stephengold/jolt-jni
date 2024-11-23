@@ -28,6 +28,7 @@ import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
+import static com.github.stephengold.joltjni.std.Std.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics character-test abstract class.

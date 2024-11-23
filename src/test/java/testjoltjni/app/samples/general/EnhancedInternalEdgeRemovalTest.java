@@ -27,6 +27,7 @@ import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
+import static com.github.stephengold.joltjni.std.Std.*;
 /**
  * A line-for-line Java translation of the Jolt Physics enhanced internal-edge removal test.
  * <p>

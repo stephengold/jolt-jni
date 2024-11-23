@@ -22,7 +22,7 @@ SOFTWARE.
 package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.std.Std.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics "convex vs mesh scene"

@@ -41,28 +41,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    acos
- * Signature: (F)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_acos
-  (JNIEnv *, jclass, jfloat ratio) {
-    float result = std::acos(ratio);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    atan
- * Signature: (F)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_atan
-  (JNIEnv *, jclass, jfloat ratio) {
-    float result = std::atan(ratio);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    buildType
  * Signature: ()Ljava/lang/String;
  */
@@ -74,17 +52,6 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_buildType
 #else
     result = pEnv->NewStringUTF("Debug");
 #endif
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    cos
- * Signature: (F)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_cos
-  (JNIEnv *, jclass, jfloat angle) {
-    float result = std::cos(angle);
     return result;
 }
 
@@ -122,28 +89,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_detLog
         gWarnDetLogIneffective = false;
     }
 #endif
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    exp
- * Signature: (F)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_exp
-  (JNIEnv *, jclass, jfloat value) {
-    float result = std::exp(value);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    fmod
- * Signature: (FF)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_fmod
-  (JNIEnv *, jclass, jfloat numerator, jfloat denominator) {
-    float result = std::fmod(numerator, denominator);
-    return result;
 }
 
 /*
@@ -276,17 +221,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_perlinNoise3
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    pow
- * Signature: (FF)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_pow
-  (JNIEnv *, jclass, jfloat base, jfloat exponent) {
-    float result = std::pow(base, exponent);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    profileDump
  * Signature: (Ljava/lang/String;)V
  */
@@ -379,28 +313,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_setTraceAllocati
 #else
     Trace("Jolt.setTraceAllocations() has no effect in a Release native library.");
 #endif
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    sin
- * Signature: (F)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_sin
-  (JNIEnv *, jclass, jfloat angle) {
-    float result = std::sin(angle);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    sqrt
- * Signature: (F)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_sqrt
-  (JNIEnv *, jclass, jfloat value) {
-    float result = std::sqrt(value);
-    return result;
 }
 
 /*

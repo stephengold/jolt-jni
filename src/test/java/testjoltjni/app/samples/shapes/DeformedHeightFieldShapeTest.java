@@ -27,6 +27,7 @@ import java.util.function.BiFunction;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
+import static com.github.stephengold.joltjni.std.Std.*;
 /**
  * A line-for-line Java translation of the Jolt Physics deformed heightfield-shape test.
  * <p>

@@ -26,6 +26,7 @@ import java.io.*;
 import java.util.*;
 import testjoltjni.TestUtils;
 import static com.github.stephengold.joltjni.Jolt.*;
+import static com.github.stephengold.joltjni.std.Std.*;
 
 /**
  * A line-for-line Java translation of the Jolt Physics performance-test driver.

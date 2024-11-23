@@ -22,7 +22,6 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -43,14 +42,6 @@ final public class Jolt {
      */
     final public static float cDefaultConvexRadius = 0.05f;
     /**
-     * difference between 1 and the smallest float greater than 1
-     */
-    final public static float FLT_EPSILON = 1.1920929e-7f;
-    /**
-     * largest finite value of type {@code float}
-     */
-    final public static float FLT_MAX = Float.MAX_VALUE;
-    /**
      * single-precision value of Pi
      */
     final public static float JPH_PI = (float) Math.PI;
@@ -67,25 +58,9 @@ final public class Jolt {
      */
     final public static int cMaxPhysicsJobs = 2_048;
     /**
-     * largest value of type {@code int}
-     */
-    final public static int INT_MAX = Integer.MAX_VALUE;
-    /**
      * generic null pointer (to expedite translation of C++ code)
      */
     final public static Object nullptr = null;
-    /**
-     * standard error stream (to expedite translation of C++ code)
-     */
-    public static final PrintStream cerr = System.err;
-    /**
-     * standard output stream (to expedite translation of C++ code)
-     */
-    public static final PrintStream cout = System.out;
-    /**
-     * line separator (to expedite translation of C++ code)
-     */
-    final public static String endl = System.lineSeparator();
     // *************************************************************************
     // constructors
 
@@ -98,35 +73,11 @@ final public class Jolt {
     // new methods exposed
 
     /**
-     * Return the inverse cosine of the specified single-precision ratio.
-     *
-     * @param ratio the input cosine ratio (&ge;-1, &le;1)
-     * @return the angle (in radians)
-     */
-    native public static float acos(float ratio);
-
-    /**
-     * Return the inverse tangent of the specified single-precision ratio.
-     *
-     * @param ratio the input tangent ratio
-     * @return the angle (in radians)
-     */
-    native public static float atan(float ratio);
-
-    /**
      * Return the jolt-jni build-type string.
      *
      * @return either "Debug" or "Release"
      */
     native public static String buildType();
-
-    /**
-     * Return the cosine of the specified single-precision angle.
-     *
-     * @param angle the input angle (in radians)
-     * @return the cosine ratio
-     */
-    native public static float cos(float angle);
 
     /**
      * Convert the specified angle from degrees to radians.
@@ -152,24 +103,6 @@ final public class Jolt {
      * @param message (not null)
      */
     native public static void detLog(String message);
-
-    /**
-     * Return the exponential of the specified single-precision value.
-     *
-     * @param value the input exponent
-     * @return the exponential
-     */
-    native public static float exp(float value);
-
-    /**
-     * Return the remainder when {@code numerator} is divided by
-     * {@code denominator}.
-     *
-     * @param numerator the numerator
-     * @param denominator the denominator
-     * @return the remainder (with the same sign as {@code numerator})
-     */
-    native public static float fmod(float numerator, float denominator);
 
     /**
      * Return a string containing important configuration settings.
@@ -310,15 +243,6 @@ final public class Jolt {
             float x, float y, float z, int xWrap, int yWrap, int zWrap);
 
     /**
-     * Return the specified power of the specified single-precision base.
-     *
-     * @param base the base value
-     * @param exponent the exponent value
-     * @return the power value
-     */
-    native public static float pow(float base, float exponent);
-
-    /**
      * Dump profiler data.
      *
      * @param message (not null)
@@ -422,22 +346,6 @@ final public class Jolt {
         float result = (input < 0) ? -1f : 1f;
         return result;
     }
-
-    /**
-     * Return the sine of the specified single-precision angle.
-     *
-     * @param angle the input angle (in radians)
-     * @return the sine ratio
-     */
-    native public static float sin(float angle);
-
-    /**
-     * Return the square root of the specified single-precision value.
-     *
-     * @param value the input value
-     * @return the square root
-     */
-    native public static float sqrt(float value);
 
     /**
      * Return the square of the specified single-precision value.

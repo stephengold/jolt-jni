@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.std.Std;
 import java.util.Objects;
 
 /**
@@ -323,10 +324,10 @@ final public class Vec3 implements Vec3Arg {
      * @return a new unit vector
      */
     public static Vec3 sUnitSpherical(float theta, float phi) {
-        float sinTheta = Jolt.sin(theta);
-        float vx = sinTheta * Jolt.cos(phi);
-        float vy = sinTheta * Jolt.sin(phi);
-        float vz = Jolt.cos(theta);
+        float sinTheta = Std.sin(theta);
+        float vx = sinTheta * Std.cos(phi);
+        float vy = sinTheta * Std.sin(phi);
+        float vz = Std.cos(theta);
         Vec3 result = new Vec3(vx, vy, vz);
 
         return result;
@@ -413,10 +414,10 @@ final public class Vec3 implements Vec3Arg {
     @Override
     public Vec3 getNormalizedPerpendicular() {
         if (Math.abs(x) > Math.abs(y)) {
-            float len = Jolt.sqrt(x * x + z * z);
+            float len = Std.sqrt(x * x + z * z);
             return new Vec3(z / len, 0f, -x / len);
         } else {
-            float len = Jolt.sqrt(y * y + z * z);
+            float len = Std.sqrt(y * y + z * z);
             return new Vec3(0f, z / len, -y / len);
         }
     }
@@ -520,7 +521,7 @@ final public class Vec3 implements Vec3Arg {
     @Override
     public float length() {
         float lengthSq = lengthSq();
-        float result = Jolt.sqrt(lengthSq);
+        float result = Std.sqrt(lengthSq);
 
         return result;
     }
@@ -565,7 +566,7 @@ final public class Vec3 implements Vec3Arg {
         if (lengthSq == 0f) {
             result = new Vec3(zeroValue);
         } else {
-            float length = Jolt.sqrt(lengthSq);
+            float length = Std.sqrt(lengthSq);
             if (length == 0f) {
                 result = new Vec3(zeroValue);
             } else {
