@@ -26,8 +26,6 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "auto/com_github_stephengold_joltjni_std_Std.h"
 
-using namespace JPH;
-
 /*
  * Class:     com_github_stephengold_joltjni_std_Std
  * Method:    acos
