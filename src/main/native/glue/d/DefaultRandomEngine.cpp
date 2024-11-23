@@ -24,17 +24,17 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
-#include "auto/com_github_stephengold_joltjni_DefaultRandomEngine.h"
+#include "auto/com_github_stephengold_joltjni_std_DefaultRandomEngine.h"
 #include "glue/glue.h"
 
 using namespace std;
 
 /*
- * Class:     com_github_stephengold_joltjni_DefaultRandomEngine
+ * Class:     com_github_stephengold_joltjni_std_DefaultRandomEngine
  * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DefaultRandomEngine_createDefault
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_createDefault
   (JNIEnv *, jclass) {
     default_random_engine * const pResult = new default_random_engine();
     TRACE_NEW("default_random_engine", pResult)
@@ -42,11 +42,11 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DefaultRandomEngine_
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_DefaultRandomEngine
+ * Class:     com_github_stephengold_joltjni_std_DefaultRandomEngine
  * Method:    createSeeded
  * Signature: (I)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DefaultRandomEngine_createSeeded
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_createSeeded
   (JNIEnv *, jclass, jint seed) {
     default_random_engine * const pResult = new default_random_engine(seed);
     TRACE_NEW("default_random_engine", pResult)
@@ -54,11 +54,11 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DefaultRandomEngine_
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_DefaultRandomEngine
+ * Class:     com_github_stephengold_joltjni_std_DefaultRandomEngine
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DefaultRandomEngine_free
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_free
   (JNIEnv *, jclass, jlong generatorVa) {
     default_random_engine * const pGenerator
             = reinterpret_cast<default_random_engine *> (generatorVa);
@@ -67,11 +67,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DefaultRandomEngine_f
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_DefaultRandomEngine
+ * Class:     com_github_stephengold_joltjni_std_DefaultRandomEngine
  * Method:    nextInt
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_DefaultRandomEngine_nextInt
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_nextInt
   (JNIEnv *, jclass, jlong generatorVa) {
     default_random_engine * const pGenerator
             = reinterpret_cast<default_random_engine *> (generatorVa);

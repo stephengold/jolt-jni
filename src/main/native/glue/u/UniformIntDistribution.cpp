@@ -24,17 +24,17 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
-#include "auto/com_github_stephengold_joltjni_UniformIntDistribution.h"
+#include "auto/com_github_stephengold_joltjni_std_UniformIntDistribution.h"
 #include "glue/glue.h"
 
 using namespace std;
 
 /*
- * Class:     com_github_stephengold_joltjni_UniformIntDistribution
+ * Class:     com_github_stephengold_joltjni_std_UniformIntDistribution
  * Method:    createDistribution
  * Signature: (II)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_UniformIntDistribution_createDistribution
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_UniformIntDistribution_createDistribution
   (JNIEnv *, jclass, jint min, jint max) {
     uniform_int_distribution<int> * const pResult
             = new uniform_int_distribution<int>(min, max);
@@ -43,11 +43,11 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_UniformIntDistributi
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_UniformIntDistribution
+ * Class:     com_github_stephengold_joltjni_std_UniformIntDistribution
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_UniformIntDistribution_free
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_UniformIntDistribution_free
   (JNIEnv *, jclass, jlong distributionVa) {
     uniform_int_distribution<int> * const pDistribution
             = reinterpret_cast<uniform_int_distribution<int> *> (distributionVa);
@@ -56,11 +56,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_UniformIntDistributio
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_UniformIntDistribution
+ * Class:     com_github_stephengold_joltjni_std_UniformIntDistribution
  * Method:    nextIntDre
  * Signature: (JJ)I
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_UniformIntDistribution_nextIntDre
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_UniformIntDistribution_nextIntDre
   (JNIEnv *, jclass, jlong distributionVa, jlong generatorVa) {
     uniform_int_distribution<int> * const pDistribution
             = reinterpret_cast<uniform_int_distribution<int> *> (distributionVa);
@@ -71,11 +71,11 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_UniformIntDistributio
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_UniformIntDistribution
+ * Class:     com_github_stephengold_joltjni_std_UniformIntDistribution
  * Method:    nextIntMt
  * Signature: (JJ)I
  */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_UniformIntDistribution_nextIntMt
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_UniformIntDistribution_nextIntMt
   (JNIEnv *, jclass, jlong distributionVa, jlong generatorVa) {
     uniform_int_distribution<int> * const pDistribution
             = reinterpret_cast<uniform_int_distribution<int> *> (distributionVa);

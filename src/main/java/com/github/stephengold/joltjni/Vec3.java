@@ -24,7 +24,9 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.std.DefaultRandomEngine;
 import com.github.stephengold.joltjni.std.Std;
+import com.github.stephengold.joltjni.std.UniformRealDistribution;
 import java.util.Objects;
 
 /**

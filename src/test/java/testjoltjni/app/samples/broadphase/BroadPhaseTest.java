@@ -21,9 +21,8 @@ SOFTWARE.
  */
 package testjoltjni.app.samples.broadphase;
 import com.github.stephengold.joltjni.*;
-import testjoltjni.app.samples.BPLayerInterfaceImpl;
-import testjoltjni.app.samples.Layers;
-import testjoltjni.app.samples.Test;
+import com.github.stephengold.joltjni.std.*;
+import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 import static com.github.stephengold.joltjni.std.Std.*;

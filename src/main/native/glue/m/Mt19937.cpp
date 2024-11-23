@@ -24,17 +24,17 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
-#include "auto/com_github_stephengold_joltjni_Mt19937.h"
+#include "auto/com_github_stephengold_joltjni_std_Mt19937.h"
 #include "glue/glue.h"
 
 using namespace std;
 
 /*
- * Class:     com_github_stephengold_joltjni_Mt19937
+ * Class:     com_github_stephengold_joltjni_std_Mt19937
  * Method:    createMt19937
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mt19937_createMt19937
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_createMt19937
   (JNIEnv *, jclass) {
     mt19937 * const pResult = new mt19937();
     TRACE_NEW("mt19937", pResult)
@@ -42,11 +42,11 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mt19937_createMt1993
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_Mt19937
+ * Class:     com_github_stephengold_joltjni_std_Mt19937
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mt19937_free
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_free
   (JNIEnv *, jclass, jlong generatorVa) {
     mt19937 * const pGenerator = reinterpret_cast<mt19937 *> (generatorVa);
     TRACE_DELETE("mt19937", pGenerator)

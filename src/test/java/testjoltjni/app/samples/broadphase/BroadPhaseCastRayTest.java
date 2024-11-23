@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package testjoltjni.app.samples.broadphase;
 import com.github.stephengold.joltjni.*;
+import com.github.stephengold.joltjni.std.DefaultRandomEngine;
 import java.util.List;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.operator.Op.*;

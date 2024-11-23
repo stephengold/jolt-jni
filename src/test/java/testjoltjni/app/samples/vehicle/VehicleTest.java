@@ -23,6 +23,7 @@ package testjoltjni.app.samples.vehicle;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
+import com.github.stephengold.joltjni.std.*;
 import java.io.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
