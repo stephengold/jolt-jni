@@ -45,6 +45,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
     Ref<PhysicsScene> * const pStoreRef
             = reinterpret_cast<Ref<PhysicsScene> *> (refVa);
     const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
+    pEnv->ReleaseStringUTFChars(fileName, pFileName);
     return result;
 }
 
@@ -60,6 +61,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
     Ref<RagdollSettings> * const pStoreRef
             = reinterpret_cast<Ref<RagdollSettings> *> (refVa);
     const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
+    pEnv->ReleaseStringUTFChars(fileName, pFileName);
     return result;
 }
 
@@ -75,5 +77,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
     Ref<SkeletalAnimation> * const pStoreRef
             = reinterpret_cast<Ref<SkeletalAnimation> *> (refVa);
     const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
+    pEnv->ReleaseStringUTFChars(fileName, pFileName);
     return result;
 }
