@@ -37,6 +37,17 @@ abstract public class SerializableObject extends NonCopyable {
     }
 
     /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param virtualAddress the virtual address of the native object to assign
+     * (not zero)
+     */
+    SerializableObject(JoltPhysicsObject container, long virtualAddress) {
+        super(container, virtualAddress);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param virtualAddress the virtual address of the native object to assign
