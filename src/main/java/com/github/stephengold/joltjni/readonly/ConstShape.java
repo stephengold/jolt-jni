@@ -119,6 +119,14 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     MassProperties getMassProperties();
 
     /**
+     * Access the material of the specified sub-shape. The shape is unaffected.
+     *
+     * @param id which sub-shape (not null, unaffected)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstPhysicsMaterial getMaterial(ConstSubShapeId id);
+
+    /**
      * Return the shape's subtype. The shape is unaffected.
      *
      * @return an enum value (not null)

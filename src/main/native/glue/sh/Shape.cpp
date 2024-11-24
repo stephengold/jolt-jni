@@ -227,6 +227,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getMassPropert
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getMaterial
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getMaterial
+  (JNIEnv *, jclass, jlong shapeVa, jlong idVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
+    const PhysicsMaterial * const pResult = pShape->GetMaterial(*pId);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    getRefCount
  * Signature: (J)I
  */

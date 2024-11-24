@@ -24,7 +24,9 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.readonly.ConstColor;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -286,6 +288,22 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
+     * Access the material of the specified sub-shape. The shape is unaffected.
+     *
+     * @param id identifies the particular sub-shape (not null, unaffected)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public ConstPhysicsMaterial getMaterial(ConstSubShapeId id) {
+        long shapeVa = va();
+        long idVa = id.targetVa();
+        long materialVa = getMaterial(shapeVa, idVa);
+        ConstPhysicsMaterial result = new PhysicsMaterial(this, materialVa);
+
+        return result;
+    }
+
+    /**
      * Return the shape's subtype. The shape is unaffected.
      *
      * @return an enum value (not null)
@@ -476,6 +494,8 @@ abstract public class Shape extends NonCopyable
     native static long getLocalBounds(long shapeVa);
 
     native static long getMassProperties(long shapeVa);
+
+    native static long getMaterial(long shapeVa, long idVa);
 
     native private static int getRefCount(long shapeVa);
 
