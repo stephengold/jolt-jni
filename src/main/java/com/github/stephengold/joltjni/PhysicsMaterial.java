@@ -35,6 +35,23 @@ public class PhysicsMaterial extends SerializableObject
     // constructors
 
     /**
+     * Instantiate a material with no native object assigned.
+     */
+    PhysicsMaterial() {
+    }
+
+    /**
+     * Instantiate a material with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param materialVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    PhysicsMaterial(JoltPhysicsObject container, long materialVa) {
+        super(container, materialVa);
+    }
+
+    /**
      * Instantiate a material with the specified native object assigned but not
      * owned.
      *
