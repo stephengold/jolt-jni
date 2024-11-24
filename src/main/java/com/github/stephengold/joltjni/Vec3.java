@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import com.github.stephengold.joltjni.readonly.UVec4Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.DefaultRandomEngine;
 import com.github.stephengold.joltjni.std.Std;
@@ -248,6 +249,22 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Component-wise comparison of 2 vectors.
+     *
+     * @param v1 the first vector (not null, unaffected)
+     * @param v2 the 2nd vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static UVec4 sGreaterOrEqual(Vec3Arg v1, Vec3Arg v2) {
+        int x = (v1.getX() >= v2.getX()) ? -1 : 0;
+        int y = (v1.getY() >= v2.getY()) ? -1 : 0;
+        int z = (v1.getZ() >= v2.getZ()) ? -1 : 0;
+        UVec4 result = new UVec4(x, y, z, z);
+
+        return result;
+    }
+
+    /**
      * Copy the X component to all components.
      */
     public void splatX() {
@@ -300,6 +317,25 @@ final public class Vec3 implements Vec3Arg {
      */
     public static Vec3 sReplicate(float value) {
         Vec3 result = new Vec3(value, value, value);
+        return result;
+    }
+
+    /**
+     * Component-wise selection between 2 specified vectors.
+     *
+     * @param notSet components to select where the control is zero (not null,
+     * unaffected)
+     * @param set components to select where the control is non-zero (not null,
+     * unaffected)
+     * @param control to control the selection (not null, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 sSelect(Vec3Arg notSet, Vec3Arg set, UVec4Arg control) {
+        float x = (control.getX() == 0) ? notSet.getX() : set.getX();
+        float y = (control.getY() == 0) ? notSet.getY() : set.getY();
+        float z = (control.getZ() == 0) ? notSet.getZ() : set.getZ();
+
+        Vec3 result = new Vec3(x, y, z);
         return result;
     }
 
