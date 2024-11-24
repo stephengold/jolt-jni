@@ -231,6 +231,18 @@ public class BodyCreationSettings
     }
 
     /**
+     * Alter whether gyroscopic force will be applied. (native attribute:
+     * mApplyGyroscopicForce)
+     *
+     * @param setting {@code true} to enable the force, or {@code false} to
+     * disable it
+     */
+    public void setApplyGyroscopicForce(boolean setting) {
+        long bodySettingsVa = va();
+        setApplyGyroscopicForce(bodySettingsVa, setting);
+    }
+
+    /**
      * Alter the collision group to which the body will belong. (native
      * attribute: mCollisionGroup)
      *
@@ -545,6 +557,20 @@ public class BodyCreationSettings
         float vy = getAngularVelocityY(bodySettingsVa);
         float vz = getAngularVelocityZ(bodySettingsVa);
         Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Test whether the gyroscopic force will be applied. The settings are
+     * unaffected. (native attribute: mApplyGyroscopicForce)
+     *
+     * @return {@code true} if enabled, otherwise {@code false}
+     */
+    @Override
+    public boolean getApplyGyroscopicForce() {
+        long bodySettingsVa = va();
+        boolean result = getApplyGyroscopicForce(bodySettingsVa);
 
         return result;
     }
@@ -868,6 +894,8 @@ public class BodyCreationSettings
 
     native private static float getAngularVelocityZ(long bodySettingsVa);
 
+    native private static boolean getApplyGyroscopicForce(long bodySettingsVa);
+
     native private static long getCollisionGroup(long bodySettingsVa);
 
     native private static boolean getEnhancedInternalEdgeRemoval(
@@ -936,6 +964,9 @@ public class BodyCreationSettings
 
     native private static void setAngularVelocity(
             long bodySettingsVa, float wx, float wy, float wz);
+
+    native private static void setApplyGyroscopicForce(
+            long bodySettingsVa, boolean setting);
 
     native private static void setCollisionGroup(
             long bodySettingsVa, long groupVa);

@@ -185,6 +185,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getApplyGyroscopicForce
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getApplyGyroscopicForce
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const bool result = pSettings->mApplyGyroscopicForce;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    getCollisionGroup
  * Signature: (J)J
  */
@@ -595,6 +608,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
     BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     pSettings->mAngularVelocity.Set(wx, wy, wz);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setApplyGyroscopicForce
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setApplyGyroscopicForce
+  (JNIEnv *, jclass, jlong bodySettingsVa, jboolean setting) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    pSettings->mApplyGyroscopicForce = setting;
 }
 
 /*

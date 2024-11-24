@@ -78,6 +78,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     Vec3 getAngularVelocity();
 
     /**
+     * Test whether the gyroscopic force will be applied. The settings are
+     * unaffected. (native attribute: mApplyGyroscopicForce)
+     *
+     * @return {@code true} if enabled, otherwise {@code false}
+     */
+    boolean getApplyGyroscopicForce();
+
+    /**
      * Test whether extra effort should be made to remove ghost contacts. The
      * settings are unaffected.
      *
