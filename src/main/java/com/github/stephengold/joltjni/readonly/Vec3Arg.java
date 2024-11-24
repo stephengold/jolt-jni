@@ -177,6 +177,20 @@ public interface Vec3Arg {
     void storeFloat3(Float3 target);
 
     /**
+     * Copy the specified components to a new vector. The current vector is
+     * unaffected.
+     *
+     * @param xi index of the component to copy to the first (X) component of
+     * the result (0, 1, or 2)
+     * @param yi index of the component to copy to the 2nd (Y) component of the
+     * result (0, 1, or 2)
+     * @param zi index of the component to copy to the 3rd (Z) component of the
+     * result (0, 1, or 2)
+     * @return the new vector
+     */
+    Vec3 swizzle(int xi, int yi, int zi);
+
+    /**
      * Copy the components to an array. The vector is unaffected.
      *
      * @return a new array with length=3

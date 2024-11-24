@@ -603,6 +603,28 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Copy the specified components to a new vector. The current vector is
+     * unaffected.
+     *
+     * @param xi index of the component to copy to the first (X) component of
+     * the result (0, 1, or 2)
+     * @param yi index of the component to copy to the 2nd (Y) component of the
+     * result (0, 1, or 2)
+     * @param zi index of the component to copy to the 3rd (Z) component of the
+     * result (0, 1, or 2)
+     * @return the new vector
+     */
+    @Override
+    public Vec3 swizzle(int xi, int yi, int zi) {
+        float rx = get(xi);
+        float ry = get(yi);
+        float rz = get(zi);
+        Vec3 result = new Vec3(rx, ry, rz);
+
+        return result;
+    }
+
+    /**
      * Copy the components to an array. The vector is unaffected.
      *
      * @return a new array with length=3
