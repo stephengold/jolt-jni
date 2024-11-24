@@ -24,7 +24,9 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.readonly.ConstColor;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -214,6 +216,22 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
         long shapeVa = targetVa();
         long propertiesVa = Shape.getMassProperties(shapeVa);
         MassProperties result = new MassProperties(propertiesVa, true);
+
+        return result;
+    }
+
+    /**
+     * Access the material of the specified sub-shape. The shape is unaffected.
+     *
+     * @param id which sub-shape (not null, unaffected)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public ConstPhysicsMaterial getMaterial(ConstSubShapeId id) {
+        long shapeVa = targetVa();
+        long idVa = id.targetVa();
+        long materialVa = Shape.getMaterial(shapeVa, idVa);
+        ConstPhysicsMaterial result = new PhysicsMaterial(this, materialVa);
 
         return result;
     }
