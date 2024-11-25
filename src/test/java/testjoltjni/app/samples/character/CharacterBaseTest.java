@@ -140,6 +140,7 @@ public void Cleanup()
 	if (mAnimatedCharacter != nullptr)
 		mAnimatedCharacter.removeFromPhysicsSystem();
 }
+
 public void Initialize()
 {
 	// Create capsule shapes for all stances
@@ -608,7 +609,7 @@ public void Initialize()
 			mCharacterVsCharacterCollision.add(mAnimatedCharacterVirtualWithInnerBody);
 		}
 	}
-        else if (supportsObjectStream())
+        else if(supportsObjectStream())
 	{
 		// Load scene
 		PhysicsSceneRef scene=new PhysicsSceneRef();
