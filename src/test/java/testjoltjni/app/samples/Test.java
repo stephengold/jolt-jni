@@ -39,6 +39,7 @@ protected JobSystem mJobSystem;
 protected PhysicsSystem mPhysicsSystem;
 protected TempAllocator mTempAllocator;
 public void Cleanup(){}
+protected void FatalError(String message){throw new RuntimeException(message);}
 float GetWorldScale() { return 1.0f; }
 public void Initialize(){}
 public void PostPhysicsUpdate(float deltaTime){}

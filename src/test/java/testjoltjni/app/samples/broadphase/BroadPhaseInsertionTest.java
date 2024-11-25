@@ -132,7 +132,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 
 	// Before update we may have some false hits, check that there are less hits after update than before
 	if (num_after > num_before)
-		throw new RuntimeException("BroadPhaseInsertionTest: After has more hits than before");
+		FatalError("BroadPhaseInsertionTest: After has more hits than before");
 	for (BroadPhaseCastResult ra : results_after)
 	{
 		boolean found = false;
@@ -143,7 +143,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 				break;
 			}
 		if (!found)
-			throw new RuntimeException("BroadPhaseInsertionTest: Result after not found in result before");
+			FatalError("BroadPhaseInsertionTest: Result after not found in result before");
 	}
 
 	// Validate with brute force approach
@@ -161,12 +161,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 			&& rayAaBoxHits(ray.getOrigin(), ray.getDirection(), b.getWorldSpaceBounds().getMin(), b.getWorldSpaceBounds().getMax()))
 		{
 			if (!found)
-				throw new RuntimeException("BroadPhaseInsertionTest: Is intersecting but was not found");
+				FatalError("BroadPhaseInsertionTest: Is intersecting but was not found");
 		}
 		else
 		{
 			if (found)
-				throw new RuntimeException("BroadPhaseInsertionTest: Is not intersecting but was found");
+				FatalError("BroadPhaseInsertionTest: Is not intersecting but was found");
 		}
 	}
 

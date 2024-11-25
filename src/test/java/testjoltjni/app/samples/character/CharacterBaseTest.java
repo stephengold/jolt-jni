@@ -614,7 +614,7 @@ public void Initialize()
 		// Load scene
 		PhysicsSceneRef scene=new PhysicsSceneRef();
 		if (!ObjectStreamIn.sReadObject((String)("Assets/") + sSceneName + ".bof", scene))
-			throw new RuntimeException("Failed to load scene");
+			FatalError("Failed to load scene");
 		scene.fixInvalidScales();
 		for (BodyCreationSettings settings : scene.getBodies())
 		{
