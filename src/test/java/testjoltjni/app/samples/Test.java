@@ -143,10 +143,10 @@ public Body CreateMeshTerrain()
 
 	int n;
 	float cell_size;
-if (buildType().equals("DEBUG")) {
+if(buildType().equals("DEBUG")){
 	n = 50;
 	cell_size = scale * 2.0f;
-} else {
+}else{
 	n = 100;
 	cell_size = scale * 1.0f;
 }
@@ -159,7 +159,7 @@ if (buildType().equals("DEBUG")) {
 			heights[x][z] = max_height * perlinNoise3((float)(x) * 8.0f / n, 0, (float)(z) * 8.0f / n, 256, 256, 256);
 
 	// Create regular grid of triangles
-	List<Triangle> triangles=new ArrayList<>(2 * n * n);
+	List<Triangle> triangles=new ArrayList<>(2*n*n);
 	for (int x = 0; x < n; ++x)
 		for (int z = 0; z < n; ++z)
 		{

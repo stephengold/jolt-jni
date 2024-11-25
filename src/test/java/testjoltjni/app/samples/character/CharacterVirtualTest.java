@@ -274,14 +274,14 @@ void RestoreState(StateRecorder inStream)
 	inStream.readVec3(mDesiredVelocity);
 }
 
-void OnAdjustBodyVelocity(ConstCharacterVirtual inCharacter, ConstBody inBody2, Vec3 ioLinearVelocity, Vec3 ioAngularVelocity)
+void OnAdjustBodyVelocity( ConstCharacterVirtual inCharacter, ConstBody inBody2, Vec3 ioLinearVelocity, Vec3 ioAngularVelocity)
 {
 	// Apply artificial velocity to the character when standing on the conveyor belt
 	if (inBody2.getId() == mConveyorBeltBody)
 		plusEquals(ioLinearVelocity ,new Vec3(0, 0, 2));
 }
 
-void OnContactAdded(ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2, ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+void OnContactAdded( ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2, ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
 {
 	// Draw a box around the character when it enters the sensor
 	if (inBodyID2 == mSensorBody)
@@ -294,7 +294,7 @@ void OnContactAdded(ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2, Co
 	int i = mRampBlocks.find(inBodyID2);
 	if (i != mRampBlocks.size())
 	{
-		int index = i;
+		int index = i  ;
 		ioSettings.setCanPushCharacter ( (index & 1) != 0);
 		ioSettings.setCanReceiveImpulses ( (index & 2) != 0);
 	}
@@ -306,7 +306,7 @@ void OnContactAdded(ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2, Co
 		mAllowSliding = true;
 }
 
-void OnCharacterContactAdded(ConstCharacterVirtual inCharacter, ConstCharacterVirtual inOtherCharacter, ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+void OnCharacterContactAdded( ConstCharacterVirtual inCharacter, ConstCharacterVirtual inOtherCharacter, ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
 {
 	// Characters can only be pushed in their own update
 	if (sPlayerCanPushOtherCharacters)
@@ -321,7 +321,7 @@ void OnCharacterContactAdded(ConstCharacterVirtual inCharacter, ConstCharacterVi
 		mAllowSliding = true;
 }
 
-void OnContactSolve(ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2, ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, Vec3Arg inContactVelocity, ConstPhysicsMaterial inContactMaterial, Vec3Arg inCharacterVelocity, Vec3 ioNewCharacterVelocity)
+void OnContactSolve( ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2, ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, Vec3Arg inContactVelocity, ConstPhysicsMaterial inContactMaterial, Vec3Arg inCharacterVelocity, Vec3 ioNewCharacterVelocity)
 {
 	// Ignore callbacks for other characters than the player
 	if (inCharacter != mCharacter.getPtr())

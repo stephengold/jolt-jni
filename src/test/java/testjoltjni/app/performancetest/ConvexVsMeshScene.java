@@ -25,20 +25,20 @@ import com.github.stephengold.joltjni.enumerate.*;
 import static com.github.stephengold.joltjni.std.Std.*;
 
 /**
- * A line-for-line Java translation of the Jolt Physics "convex vs mesh scene"
- * performance test.
+ * A line-for-line Java translation of the Jolt Physics "convex vs mesh scene" performance test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/ConvexVsMeshScene.h
  */
 // A scene that drops a number of convex shapes on a sloping terrain made out of a mesh shape
 class ConvexVsMeshScene implements PerformanceTestScene {
-	public String GetName()
+public
+	String GetName()
 	{
 		return "ConvexVsMesh";
 	}
 
-        public boolean Load()
+	public boolean			Load()
 	{
 		final int n = 100;
 		final float cell_size = 3.0f;
@@ -47,7 +47,7 @@ class ConvexVsMeshScene implements PerformanceTestScene {
 
 		// Create vertices
 		final int num_vertices = (n + 1) * (n + 1);
-		VertexList vertices = new VertexList();
+		VertexList vertices=new VertexList();
 		vertices.resize(num_vertices);
 		for (int x = 0; x <= n; ++x)
 			for (int z = 0; z <= n; ++z)
@@ -58,7 +58,7 @@ class ConvexVsMeshScene implements PerformanceTestScene {
 
 		// Create regular grid of triangles
 		final int num_triangles = n * n * 2;
-		IndexedTriangleList indices = new IndexedTriangleList();
+		IndexedTriangleList indices=new IndexedTriangleList();
 		indices.resize(num_triangles);
 		int next = 0;
 		for (int x = 0; x < n; ++x)
@@ -67,14 +67,14 @@ class ConvexVsMeshScene implements PerformanceTestScene {
 				int start = (n + 1) * z + x;
 
 				IndexedTriangle it = indices.get(next++);
-				it.setIdx(0, start);
-				it.setIdx(1, start + n + 1);
+				it.setIdx(0,  start);
+				it.setIdx(1,  start + n + 1);
 				it.setIdx(2, start + 1);
 
 				it = indices.get(next++);
-				it.setIdx(0, start + 1);
-				it.setIdx(1, start + n + 1);
-				it.setIdx(2, start + n + 2);
+				it.setIdx(0,  start + 1);
+				it.setIdx(1,  start + n + 1);
+				it.setIdx(2,  start + n + 2);
 			}
 
 		// Create mesh shape settings
@@ -83,12 +83,11 @@ class ConvexVsMeshScene implements PerformanceTestScene {
 		ShapeSettingsRef mesh_shape_settings = mss.toRef();
 
 		// Create mesh shape creation settings
-		mMeshSettings = new BodyCreationSettings();
-		mMeshSettings.setMotionType(EMotionType.Static);
-		mMeshSettings.setObjectLayer(Layers.NON_MOVING);
-		mMeshSettings.setPosition(new RVec3(-center, max_height, -center));
-		mMeshSettings.setFriction(0.5f);
-		mMeshSettings.setRestitution(0.6f);
+		mMeshSettings.setMotionType ( EMotionType.Static);
+		mMeshSettings.setObjectLayer ( Layers.NON_MOVING);
+		mMeshSettings.setPosition (new RVec3(-center, max_height, -center));
+		mMeshSettings.setFriction ( 0.5f);
+		mMeshSettings.setRestitution ( 0.6f);
 		mMeshSettings.setShapeSettings(mesh_shape_settings);
 
 		// Create other shapes
@@ -96,7 +95,7 @@ class ConvexVsMeshScene implements PerformanceTestScene {
 			new BoxShape(new Vec3(0.5f, 0.75f, 1.0f)).toRefC(),
 			new SphereShape(0.5f).toRefC(),
 			new CapsuleShape(0.75f, 0.5f).toRefC(),
-			new ConvexHullShapeSettings(new Vec3(0, 1, 0), new Vec3(1, 0, 0), new Vec3(-1, 0, 0), new Vec3(0, 0, 1), new Vec3(0, 0, -1)).create().get(),
+			new ConvexHullShapeSettings(new Vec3(0, 1, 0), new Vec3(1, 0, 0), new Vec3(-1, 0, 0), new Vec3(0, 0, 1), new Vec3(0, 0, -1) ).create().get(),
 		};
 
 		return true;
@@ -106,8 +105,8 @@ class ConvexVsMeshScene implements PerformanceTestScene {
 	{
 		// Reduce the solver iteration count, the scene doesn't have any constraints so we don't need the default amount of iterations
 		PhysicsSettings settings = inPhysicsSystem.getPhysicsSettings();
-		settings.setNumVelocitySteps(4);
-		settings.setNumPositionSteps(1);
+		settings.setNumVelocitySteps ( 4);
+		settings.setNumPositionSteps ( 1);
 		inPhysicsSystem.setPhysicsSettings(settings);
 
 		// Create background
@@ -120,12 +119,12 @@ class ConvexVsMeshScene implements PerformanceTestScene {
 				for (int z = -10; z <= 10; ++z)
 				{
 					BodyCreationSettings creation_settings = new BodyCreationSettings();
-					creation_settings.setMotionType(EMotionType.Dynamic);
-					creation_settings.setMotionQuality(inMotionQuality);
-					creation_settings.setObjectLayer(Layers.MOVING);
-					creation_settings.setPosition(new RVec3(7.5 * x, 15.0 + 2.0 * y, 7.5 * z));
-					creation_settings.setFriction(0.5f);
-					creation_settings.setRestitution(0.6f);
+					creation_settings.setMotionType ( EMotionType.Dynamic);
+					creation_settings.setMotionQuality ( inMotionQuality);
+					creation_settings.setObjectLayer ( Layers.MOVING);
+					creation_settings.setPosition (new RVec3(7.5 * x, 15.0 + 2.0 * y, 7.5 * z));
+					creation_settings.setFriction ( 0.5f);
+					creation_settings.setRestitution ( 0.6f);
 					creation_settings.setShape(mShapes[y]);
 					bi.createAndAddBody(creation_settings, EActivation.Activate);
 				}
@@ -133,6 +132,5 @@ class ConvexVsMeshScene implements PerformanceTestScene {
 
 	static BodyCreationSettings	mMeshSettings;
 	static ShapeRefC[]		mShapes;
-	public void StopTest(PhysicsSystem inPhysicsSystem) {
-        }
+	public void StopTest(PhysicsSystem inPhysicsSystem){}
 }

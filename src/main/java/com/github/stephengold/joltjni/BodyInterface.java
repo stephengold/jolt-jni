@@ -859,8 +859,7 @@ public class BodyInterface extends NonCopyable {
     native private static void deactivateBody(
             long bodyInterfaceVa, long bodyIdVa);
 
-    native private static void destroyBody(
-            long bodyInterfaceVa, long bodyIdVa);
+    native private static void destroyBody(long bodyInterfaceVa, long bodyIdVa);
 
     native private static float getAngularVelocityX(
             long bodyInterfaceVa, long bodyIdVa);
@@ -933,8 +932,8 @@ public class BodyInterface extends NonCopyable {
     native private static float getRotationZ(
             long bodyInterfaceVa, long bodyIdVa);
 
-    native private static long getShape(
-            long bodyInterfaceVa, long bodyIdVa);
+    native private static long getShape(long bodyInterfaceVa, long bodyIdVa);
+
 
     native private static boolean isActive(long bodyInterfaceVa, long bodyIdVa);
 
@@ -948,8 +947,7 @@ public class BodyInterface extends NonCopyable {
             long bodyIdVa, float prevX, float prevY, float prevZ,
             boolean updateMassProperties, int activationOrdinal);
 
-    native private static void removeBody(
-            long bodyInterfaceVa, long bodyIdVa);
+    native private static void removeBody(long bodyInterfaceVa, long bodyIdVa);
 
     native private static void setLinearAndAngularVelocity(
             long bodyInterfaceVa, long bodyIdVa, float vx, float vy, float vz,
