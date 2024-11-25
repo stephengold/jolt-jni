@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -61,14 +62,29 @@ public class BoxShape extends ConvexShape {
      * @param convexRadius the desired convex radius (default=0.05)
      */
     public BoxShape(Vec3Arg halfExtents, float convexRadius) {
+        this(halfExtents, convexRadius, null);
+    }
+
+    /**
+     * Instantiate a shape with the specified parameters.
+     *
+     * @param halfExtents the desired half extents on each local axis (not null,
+     * all components &ge;convexRadius, unaffected)
+     * @param convexRadius the desired convex radius (default=0.05)
+     * @param material the desired material (default=null)
+     */
+    public BoxShape(Vec3Arg halfExtents, float convexRadius,
+            ConstPhysicsMaterial material) {
         float xHalfExtent = halfExtents.getX();
         float yHalfExtent = halfExtents.getY();
         float zHalfExtent = halfExtents.getZ();
         assert xHalfExtent >= convexRadius : xHalfExtent;
         assert yHalfExtent >= convexRadius : yHalfExtent;
         assert zHalfExtent >= convexRadius : zHalfExtent;
-        long shapeVa = createBoxShape(
-                xHalfExtent, yHalfExtent, zHalfExtent, convexRadius);
+
+        long materialVa = (material == null) ? 0L : material.targetVa();
+        long shapeVa = createBoxShape(xHalfExtent, yHalfExtent, zHalfExtent,
+                convexRadius, materialVa);
         setVirtualAddress(shapeVa, null); // not the owner due to ref counting
     }
     // *************************************************************************
@@ -103,8 +119,9 @@ public class BoxShape extends ConvexShape {
     // *************************************************************************
     // native private methods
 
-    native private static long createBoxShape(float xHalfExtent,
-            float yHalfExtent, float zHalfExtent, float convexRadius);
+    native private static long createBoxShape(
+            float xHalfExtent, float yHalfExtent, float zHalfExtent,
+            float convexRadius, long materialVa);
 
     native private static float getConvexRadius(long shapeVa);
 
