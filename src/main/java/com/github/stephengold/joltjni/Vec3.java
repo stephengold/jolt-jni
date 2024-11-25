@@ -255,10 +255,58 @@ final public class Vec3 implements Vec3Arg {
      * @param v2 the 2nd vector (not null, unaffected)
      * @return a new vector
      */
+    public static UVec4 sGreater(Vec3Arg v1, Vec3Arg v2) {
+        int x = (v1.getX() > v2.getX()) ? -1 : 0;
+        int y = (v1.getY() > v2.getY()) ? -1 : 0;
+        int z = (v1.getZ() > v2.getZ()) ? -1 : 0;
+        UVec4 result = new UVec4(x, y, z, z);
+
+        return result;
+    }
+
+    /**
+     * Component-wise comparison of 2 vectors.
+     *
+     * @param v1 the first vector (not null, unaffected)
+     * @param v2 the 2nd vector (not null, unaffected)
+     * @return a new vector (each component 0 or -1)
+     */
     public static UVec4 sGreaterOrEqual(Vec3Arg v1, Vec3Arg v2) {
         int x = (v1.getX() >= v2.getX()) ? -1 : 0;
         int y = (v1.getY() >= v2.getY()) ? -1 : 0;
         int z = (v1.getZ() >= v2.getZ()) ? -1 : 0;
+        UVec4 result = new UVec4(x, y, z, z);
+
+        return result;
+    }
+
+    /**
+     * Component-wise comparison of 2 vectors.
+     *
+     * @param v1 the first vector (not null, unaffected)
+     * @param v2 the 2nd vector (not null, unaffected)
+     * @return a new vector (each component 0 or -1)
+     */
+    public static UVec4 sLess(Vec3Arg v1, Vec3Arg v2) {
+        int x = (v1.getX() < v2.getX()) ? -1 : 0;
+        int y = (v1.getY() < v2.getY()) ? -1 : 0;
+        int z = (v1.getZ() < v2.getZ()) ? -1 : 0;
+        UVec4 result = new UVec4(x, y, z, z);
+
+        return result;
+    }
+
+    /**
+     * Component-wise comparison of 2 vectors.
+     *
+     * @param v1 the first vector (not null, unaffected)
+     * @param v2 the 2nd vector (not null, unaffected)
+     * @return a new vector (each component 0 or -1)
+     */
+    public static UVec4 sLessOrEqual(Vec3Arg v1, Vec3Arg v2) {
+        int x = (v1.getX() <= v2.getX()) ? -1 : 0;
+        int y = (v1.getY() <= v2.getY()) ? -1 : 0;
+        int z = (v1.getZ() <= v2.getZ()) ? -1 : 0;
         UVec4 result = new UVec4(x, y, z, z);
 
         return result;
