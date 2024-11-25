@@ -63,7 +63,7 @@ public void Initialize()
 	ShapeRefC shape=new ShapeRefC();
 	for (int i = 0; i < 1000; ++i)
 	{
-		switch (random.nextInt() % 10)
+		switch (Math.abs(random.nextInt()) % 10)
 		{
 		case 0:
 			{
