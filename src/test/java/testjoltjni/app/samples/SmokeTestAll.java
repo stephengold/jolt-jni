@@ -128,6 +128,11 @@ final public class SmokeTestAll {
         smokeTest(new DampingTest());
         smokeTest(new DynamicMeshTest());
         smokeTest(new EnhancedInternalEdgeRemovalTest());
+        smokeTest(new FrictionPerTriangleTest());
+        smokeTest(new FrictionTest());
+        smokeTest(new FunnelTest());
+        smokeTest(new GravityFactorTest());
+        smokeTest(new GyroscopicForceTest());
         smokeTest(new HighSpeedTest());
         smokeTest(new RestitutionTest());
 
