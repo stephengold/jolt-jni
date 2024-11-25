@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.std.Std;
 
 /**
+ * Constants used with {@code HeightFieldShape}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
