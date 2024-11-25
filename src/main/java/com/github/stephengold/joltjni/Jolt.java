@@ -58,6 +58,18 @@ final public class Jolt {
      */
     final public static int cMaxPhysicsJobs = 2_048;
     /**
+     * index of the X component, for swizzling
+     */
+    final public static int SWIZZLE_X = 0;
+    /**
+     * index of the Y component, for swizzling
+     */
+    final public static int SWIZZLE_Y = 1;
+    /**
+     * index of the Z component, for swizzling
+     */
+    final public static int SWIZZLE_Z = 2; ///< Use the Z component
+    /**
      * generic null pointer (to expedite translation of C++ code)
      */
     final public static Object nullptr = null;

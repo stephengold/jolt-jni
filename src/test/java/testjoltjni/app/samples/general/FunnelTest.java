@@ -68,7 +68,7 @@ public void Initialize()
 		case 0:
 			{
 				shape = new SphereShape(feature_size.nextFloat(random)).toRefC();
-				scale = scale.swizzle(0,0,0); // Only uniform scale supported
+				scale = scale.swizzle(SWIZZLE_X, SWIZZLE_X, SWIZZLE_X); // Only uniform scale supported
 				break;
 			}
 
@@ -91,7 +91,7 @@ public void Initialize()
 		case 3:
 			{
 				shape = new CapsuleShape(0.5f * feature_size.nextFloat(random), feature_size.nextFloat(random)).toRefC();
-				scale = scale.swizzle(0,0,0); // Only uniform scale supported
+				scale = scale.swizzle(SWIZZLE_X, SWIZZLE_X, SWIZZLE_X); // Only uniform scale supported
 				break;
 			}
 
@@ -101,28 +101,28 @@ public void Initialize()
 				float bottom = feature_size.nextFloat(random);
 				float half_height = Math.max(0.5f * feature_size.nextFloat(random), 0.5f * Math.abs(top - bottom) + 0.001f);
 				shape =new TaperedCapsuleShapeSettings(half_height, top, bottom).create().get();
-				scale = scale.swizzle(0,0,0); // Only uniform scale supported
+				scale = scale.swizzle(SWIZZLE_X, SWIZZLE_X, SWIZZLE_X); // Only uniform scale supported
 				break;
 			}
 
 		case 5:
 			{
 				shape = new CylinderShape(0.5f * feature_size.nextFloat(random), feature_size.nextFloat(random)).toRefC();
-				scale = scale.swizzle(0,1,0); // Scale X must be same as Z
+				scale = scale.swizzle(SWIZZLE_X, SWIZZLE_Y, SWIZZLE_X); // Scale X must be same as Z
 				break;
 			}
 
 		case 6:
 			{
 				shape =new TaperedCylinderShapeSettings(0.5f * feature_size.nextFloat(random), feature_size.nextFloat(random), feature_size.nextFloat(random)).create().get();
-				scale = scale.swizzle(0,1,0); // Scale X must be same as Z
+				scale = scale.swizzle(SWIZZLE_X, SWIZZLE_Y, SWIZZLE_X); // Scale X must be same as Z
 				break;
 			}
 
 		case 7:
 			{
 				shape =new TaperedCylinderShapeSettings(0.5f * feature_size.nextFloat(random), 0.0f, feature_size.nextFloat(random), 0.0f).create().get();
-				scale = scale.swizzle(0,0,0); // Scale X must be same as Z
+				scale = scale.swizzle(SWIZZLE_X, SWIZZLE_Y, SWIZZLE_X); // Scale X must be same as Z
 				break;
 			}
 
@@ -134,7 +134,7 @@ public void Initialize()
 				compound_shape_settings.addShape(new Vec3(0, -1, 0), Quat.sIdentity(), new SphereShape(0.5f));
 				compound_shape_settings.addShape(new Vec3(0, 1, 0), Quat.sIdentity(), new SphereShape(0.5f));
 				shape = compound_shape_settings.create().get();
-				scale = scale.swizzle(0,0,0); // Only uniform scale supported
+				scale = scale.swizzle(SWIZZLE_X, SWIZZLE_X, SWIZZLE_X); // Only uniform scale supported
 				break;
 			}
 
@@ -149,7 +149,7 @@ public void Initialize()
 				compound_shape_settings.addShape(new Vec3(0, 0, 0), star(Quat.sRotation(Vec3.sAxisX(), -0.25f * JPH_PI) , Quat.sRotation(Vec3.sAxisZ(), 0.25f * JPH_PI)), sub_compound);
 				compound_shape_settings.addShape(new Vec3(0, -0.1f, 0), star(Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI) , Quat.sRotation(Vec3.sAxisZ(), -0.75f * JPH_PI)), sub_compound);
 				shape = compound_shape_settings.create().get();
-				scale = scale.swizzle(0,0,0); // Only uniform scale supported
+				scale = scale.swizzle(SWIZZLE_X, SWIZZLE_X, SWIZZLE_X); // Only uniform scale supported
 				break;
 			}
 		}
