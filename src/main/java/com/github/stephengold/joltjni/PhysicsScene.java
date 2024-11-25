@@ -171,7 +171,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
 
     native private static void free(long sceneVa);
 
-    native private static void fromPhysicsSystem(long sceneVa, long systemVa);
+    native static void fromPhysicsSystem(long sceneVa, long systemVa);
 
     native static long getBody(long sceneVa, int bodyIndex);
 
@@ -179,7 +179,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
 
     native private static int getRefCount(long sceneVa);
 
-    native private static void saveBinaryState(long sceneVa, long streamVa,
+    native static void saveBinaryState(long sceneVa, long streamVa,
             boolean saveShapes, boolean saveGroupFilter);
 
     native private static void setEmbedded(long sceneVa);

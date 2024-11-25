@@ -69,6 +69,17 @@ final public class PhysicsSceneRef extends Ref {
     }
 
     /**
+     * Load the current state of the specified physics system.
+     *
+     * @param system the physics system to load from (not null, unaffected)
+     */
+    public void fromPhysicsSystem(PhysicsSystem system) {
+        long sceneVa = targetVa();
+        long systemVa = system.va();
+        PhysicsScene.fromPhysicsSystem(sceneVa, systemVa);
+    }
+
+    /**
      * Access the body-creation settings as a Java array.
      *
      * @return a new array of new JVM objects with the pre-existing native
@@ -98,6 +109,21 @@ final public class PhysicsSceneRef extends Ref {
         boolean result = PhysicsScene.createBodies(sceneVa, systemVa);
 
         return result;
+    }
+
+    /**
+     * Save the state of the scene in binary form.
+     *
+     * @param stream the stream to write to (not null)
+     * @param saveShapes if true, save the shapes
+     * @param saveGroupFilter if true, save the group filter
+     */
+    public void saveBinaryState(
+            StreamOut stream, boolean saveShapes, boolean saveGroupFilter) {
+        long sceneVa = targetVa();
+        long streamVa = stream.va();
+        PhysicsScene.saveBinaryState(
+                sceneVa, streamVa, saveShapes, saveGroupFilter);
     }
     // *************************************************************************
     // Ref methods
