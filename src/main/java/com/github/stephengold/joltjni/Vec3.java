@@ -253,7 +253,7 @@ final public class Vec3 implements Vec3Arg {
      *
      * @param v1 the first vector (not null, unaffected)
      * @param v2 the 2nd vector (not null, unaffected)
-     * @return a new vector
+     * @return a new vector (each component 0 or -1)
      */
     public static UVec4 sGreater(Vec3Arg v1, Vec3Arg v2) {
         int x = (v1.getX() > v2.getX()) ? -1 : 0;
@@ -454,7 +454,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Return the dot product with the specified vector. The current vector is
+     * Return the dot product with the specified vector. Both vectors are
      * unaffected.
      *
      * @param factor the vector to dot with the current one (not null,

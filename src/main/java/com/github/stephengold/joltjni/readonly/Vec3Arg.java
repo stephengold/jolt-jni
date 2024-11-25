@@ -44,7 +44,7 @@ public interface Vec3Arg {
     Vec3 cross(Vec3Arg rightFactor);
 
     /**
-     * Return the dot product with the specified vector. The current vector is
+     * Return the dot product with the specified vector. Both vectors are
      * unaffected.
      *
      * @param factor the vector to dot with the current one (not null,
