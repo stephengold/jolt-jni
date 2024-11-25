@@ -371,6 +371,17 @@ final public class Jolt {
     }
 
     /**
+     * Return the square of the specified integer value.
+     *
+     * @param value the input value
+     * @return the square
+     */
+    public static int square(int value) {
+        int result = value * value;
+        return result;
+    }
+
+    /**
      * Test whether the native library supports the ObjectStream format. (native
      * macro: JPH_OBJECT_STREAM)
      *
