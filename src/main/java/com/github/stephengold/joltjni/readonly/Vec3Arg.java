@@ -72,6 +72,14 @@ public interface Vec3Arg {
     Vec3 getNormalizedPerpendicular();
 
     /**
+     * Return the component-wise (binary) sign. The current vector is
+     * unaffected.
+     *
+     * @return a new vector (each component 1 or -1)
+     */
+    Vec3 getSign();
+
+    /**
      * Return the first (X) component in single precision. The vector is
      * unaffected.
      *
@@ -94,6 +102,13 @@ public interface Vec3Arg {
      * @return the component value
      */
     float getZ();
+
+    /**
+     * Test whether the vector contains NaNs. The vector is unaffected.
+     *
+     * @return {@code true} if one or more NaNs, otherwise {@code false}
+     */
+    boolean isNan();
 
     /**
      * Test whether the vector is zero to within a tolerance of 10^-12. The
@@ -168,6 +183,20 @@ public interface Vec3Arg {
      * @return a new vector
      */
     Vec3 reciprocal();
+
+    /**
+     * Return the maximum component. The current vector is unaffected.
+     *
+     * @return a component value
+     */
+    float reduceMax();
+
+    /**
+     * Return the minimum component. The current vector is unaffected.
+     *
+     * @return a component value
+     */
+    float reduceMin();
 
     /**
      * Copy to a {@code Float3} object. The vector is unaffected.

@@ -461,6 +461,22 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Return the component-wise (binary) sign. The current vector is
+     * unaffected.
+     *
+     * @return a new vector (each component 1 or -1)
+     */
+    @Override
+    public Vec3 getSign() {
+        float sx = (x < 0) ? -1f : 1f;
+        float sy = (y < 0) ? -1f : 1f;
+        float sz = (z < 0) ? -1f : 1f;
+        Vec3 result = new Vec3(sx, sy, sz);
+
+        return result;
+    }
+
+    /**
      * Return the first (X) component in single precision. The vector is
      * unaffected.
      *
@@ -491,6 +507,17 @@ final public class Vec3 implements Vec3Arg {
     @Override
     public float getZ() {
         return z;
+    }
+
+    /**
+     * Test whether the vector contains NaNs. The vector is unaffected.
+     *
+     * @return {@code true} if one or more NaNs, otherwise {@code false}
+     */
+    @Override
+    public boolean isNan() {
+        boolean result = Float.isNaN(x) || Float.isNaN(y) || Float.isNaN(z);
+        return result;
     }
 
     /**
@@ -623,6 +650,28 @@ final public class Vec3 implements Vec3Arg {
     @Override
     public Vec3 reciprocal() {
         Vec3 result = new Vec3(1f / x, 1f / y, 1f / z);
+        return result;
+    }
+
+    /**
+     * Return the maximum component. The current vector is unaffected.
+     *
+     * @return a component value
+     */
+    @Override
+    public float reduceMax() {
+        float result = Math.max(Math.max(x, y), z);
+        return result;
+    }
+
+    /**
+     * Return the minimum component. The current vector is unaffected.
+     *
+     * @return a component value
+     */
+    @Override
+    public float reduceMin() {
+        float result = Math.min(Math.min(x, y), z);
         return result;
     }
 
