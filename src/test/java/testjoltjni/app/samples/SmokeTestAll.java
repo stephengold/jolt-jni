@@ -133,7 +133,10 @@ final public class SmokeTestAll {
         smokeTest(new FunnelTest());
         smokeTest(new GravityFactorTest());
         smokeTest(new GyroscopicForceTest());
+        smokeTest(new HeavyOnLightTest());
         smokeTest(new HighSpeedTest());
+        smokeTest(new IslandTest());
+        smokeTest(new KinematicTest());
         smokeTest(new RestitutionTest());
 
         // shapes package:
