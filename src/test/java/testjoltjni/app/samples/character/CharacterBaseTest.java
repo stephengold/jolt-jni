@@ -684,32 +684,33 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 
 	// Animate character virtual
 	for (CharacterVirtualRef character : new CharacterVirtualRef[]{ mAnimatedCharacterVirtual, mAnimatedCharacterVirtualWithInnerBody })
-	{
-	if (implementsDebugRendering())
-		character.getShape().draw(mDebugRenderer, character.getCenterOfMassTransform(), Vec3.sReplicate(1.0f), Color.sOrange, false, true);
-	else
-		mDebugRenderer.drawCapsule(character.getCenterOfMassTransform(), 0.5f * cCharacterHeightStanding, cCharacterRadiusStanding + character.getCharacterPadding(), Color.sOrange, ECastShadow.Off, EDrawMode.Wireframe);
-
-		// Update velocity and apply gravity
-		Vec3 velocity;
-		if (character.getGroundState() == EGroundState.OnGround)
-			velocity = Vec3.sZero();
+		if (character != nullptr)
+		{
+		if (implementsDebugRendering())
+			character.getShape().draw(mDebugRenderer, character.getCenterOfMassTransform(), Vec3.sReplicate(1.0f), Color.sOrange, false, true);
 		else
-			velocity = plus(star(character.getLinearVelocity() , mAnimatedCharacter.getUp()) , star(mPhysicsSystem.getGravity() , inParams.mDeltaTime));
-		plusEquals(velocity , star(sin(mTime) , cCharacterVelocity));
-		character.setLinearVelocity(velocity);
+			mDebugRenderer.drawCapsule(character.getCenterOfMassTransform(), 0.5f * cCharacterHeightStanding, cCharacterRadiusStanding + character.getCharacterPadding(), Color.sOrange, ECastShadow.Off, EDrawMode.Wireframe);
 
-		// Move character
-		ExtendedUpdateSettings update_settings = new ExtendedUpdateSettings();
-		character.extendedUpdate(inParams.mDeltaTime,
-			mPhysicsSystem.getGravity(),
-			update_settings,
-			mPhysicsSystem.getDefaultBroadPhaseLayerFilter(Layers.MOVING),
-			mPhysicsSystem.getDefaultLayerFilter(Layers.MOVING),
-			new BodyFilter(){ },
-			new ShapeFilter(){ },
-			mTempAllocator);
-	}
+			// Update velocity and apply gravity
+			Vec3 velocity;
+			if (character.getGroundState() == EGroundState.OnGround)
+				velocity = Vec3.sZero();
+			else
+				velocity = plus(star(character.getLinearVelocity() , mAnimatedCharacter.getUp()) , star(mPhysicsSystem.getGravity() , inParams.mDeltaTime));
+			plusEquals(velocity , star(sin(mTime) , cCharacterVelocity));
+			character.setLinearVelocity(velocity);
+
+			// Move character
+			ExtendedUpdateSettings update_settings = new ExtendedUpdateSettings();
+			character.extendedUpdate(inParams.mDeltaTime,
+				mPhysicsSystem.getGravity(),
+				update_settings,
+				mPhysicsSystem.getDefaultBroadPhaseLayerFilter(Layers.MOVING),
+				mPhysicsSystem.getDefaultLayerFilter(Layers.MOVING),
+				new BodyFilter(){ },
+				new ShapeFilter(){ },
+				mTempAllocator);
+		}
 
 	// Reset ramp blocks
 	mRampBlocksTimeLeft -= inParams.mDeltaTime;
