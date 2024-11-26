@@ -137,6 +137,10 @@ final public class SmokeTestAll {
         smokeTest(new HighSpeedTest());
         smokeTest(new IslandTest());
         smokeTest(new KinematicTest());
+        smokeTest(new LoadSaveBinaryTest());
+        smokeTest(new LoadSaveSceneTest());
+        smokeTest(new ManifoldReductionTest());
+        smokeTest(new ModifyMassTest());
         smokeTest(new RestitutionTest());
 
         // shapes package:
