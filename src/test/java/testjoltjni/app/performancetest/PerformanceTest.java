@@ -190,17 +190,17 @@ public static void main(  String[] argv)throws IOException
 	// Create temp allocator
 	TempAllocatorImpl temp_allocator=new TempAllocatorImpl(32 * 1024 * 1024);
 
-	// Load the scene
-	if (scene == nullptr)
-		scene = create_ragdoll_scene();
-	if (!scene.Load())
-		System.exit( 1);
-
 	// Show used instruction sets
 	Trace(getConfigurationString());
 
 	// Output scene we're running
 	Trace("Running scene: %s", scene.GetName());
+
+	// Load the scene
+	if (scene == nullptr)
+		scene = create_ragdoll_scene();
+	if (!scene.Load())
+		System.exit( 1);
 
 	// Create mapping table from object layer to broadphase layer
 	BPLayerInterfaceImpl broad_phase_layer_interface=new BPLayerInterfaceImpl();
