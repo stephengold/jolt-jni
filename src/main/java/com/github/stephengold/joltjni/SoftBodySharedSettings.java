@@ -294,19 +294,17 @@ public class SoftBodySharedSettings
     // *************************************************************************
     // native methods
 
-    native private static void addEdgeConstraint(long settingsVa, long edgeVa);
+    native static void addEdgeConstraint(long settingsVa, long edgeVa);
 
-    native private static void addFace(long settingsVa, long faceVa);
+    native static void addFace(long settingsVa, long faceVa);
 
-    native private static void addVertex(long settingsVa, long vertexVa);
+    native static void addVertex(long settingsVa, long vertexVa);
 
-    native private static void addVolumeConstraint(
-            long settingsVa, long volumeVa);
+    native static void addVolumeConstraint(long settingsVa, long volumeVa);
 
-    native private static void calculateEdgeLengths(long settingsVa);
+    native static void calculateEdgeLengths(long settingsVa);
 
-    native private static void calculateVolumeConstraintVolumes(
-            long settingsVa);
+    native static void calculateVolumeConstraintVolumes(long settingsVa);
 
     native static int countEdgeConstraints(long settingsVa);
 
@@ -316,7 +314,7 @@ public class SoftBodySharedSettings
 
     native static int countVolumeConstraints(long settingsVa);
 
-    native private static void createConstraints(long settingsVa,
+    native static void createConstraints(long settingsVa,
             long[] attributeVas, int ordinal, float angleTolerance);
 
     native private static long createDefault();
@@ -325,7 +323,7 @@ public class SoftBodySharedSettings
 
     native static float getVertexRadius(long settingsVa);
 
-    native private static void optimize(long settingsVa);
+    native static void optimize(long settingsVa);
 
     native private static void setEmbedded(long settingsVa);
 

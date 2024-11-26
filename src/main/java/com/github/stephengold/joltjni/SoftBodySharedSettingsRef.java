@@ -21,7 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.EBendType;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
+import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
@@ -55,6 +57,136 @@ final public class SoftBodySharedSettingsRef
     SoftBodySharedSettingsRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Add the specified edge constraint.
+     *
+     * @param edge the edge to add (not null, unaffected)
+     */
+    public void addEdgeConstraint(Edge edge) {
+        long settingsVa = targetVa();
+        long edgeVa = edge.va();
+        SoftBodySharedSettings.addEdgeConstraint(settingsVa, edgeVa);
+    }
+
+    /**
+     * Add the specified face.
+     *
+     * @param face the face to add (not null, unaffected)
+     */
+    public void addFace(Face face) {
+        long settingsVa = targetVa();
+        long faceVa = face.va();
+        SoftBodySharedSettings.addFace(settingsVa, faceVa);
+    }
+
+    /**
+     * Add the specified vertex.
+     *
+     * @param vertex the vertex to add (not null, unaffected)
+     */
+    public void addVertex(Vertex vertex) {
+        long settingsVa = targetVa();
+        long vertexVa = vertex.va();
+        SoftBodySharedSettings.addVertex(settingsVa, vertexVa);
+    }
+
+    /**
+     * Add the specified volume constraint.
+     *
+     * @param volume the constraint to add (not null, unaffected)
+     */
+    public void addVolumeConstraint(Volume volume) {
+        long settingsVa = targetVa();
+        long volumeVa = volume.va();
+        SoftBodySharedSettings.addVolumeConstraint(settingsVa, volumeVa);
+    }
+
+    /**
+     * Calculate the initial lengths of all edges in the body.
+     */
+    public void calculateEdgeLengths() {
+        long settingsVa = targetVa();
+        SoftBodySharedSettings.calculateEdgeLengths(settingsVa);
+    }
+
+    /**
+     * Calculate the initial volumes of all tetrahedra in the body.
+     */
+    public void calculateVolumeConstraintVolumes() {
+        long settingsVa = targetVa();
+        SoftBodySharedSettings.calculateVolumeConstraintVolumes(settingsVa);
+    }
+
+    /**
+     * Automatically generate constraints based on the faces.
+     *
+     * @param vertexAttributes the desired attributes (one for each vertex)
+     * @param numAttributes the number of attributes provided (&ge;0)
+     * @param bendType the desired type of bend constraint (not null,
+     * default=Distance)
+     */
+    public void createConstraints(ConstVertexAttributes vertexAttributes,
+            int numAttributes, EBendType bendType) {
+        createConstraints(
+                new ConstVertexAttributes[]{vertexAttributes}, bendType);
+    }
+
+    /**
+     * Automatically generate constraints based on the faces.
+     *
+     * @param vertexAttributes the desired attributes (one for each vertex)
+     * @param bendType the desired type of bend constraint (not null,
+     * default=Distance)
+     */
+    public void createConstraints(
+            ConstVertexAttributes[] vertexAttributes, EBendType bendType) {
+        createConstraints(
+                vertexAttributes, bendType, Jolt.degreesToRadians(8f));
+    }
+
+    /**
+     * Automatically generate constraints based on the faces.
+     *
+     * @param vertexAttributes the desired attributes (one for each vertex)
+     * @param bendType the desired type of bend constraint (not null,
+     * default=Distance)
+     * @param angleTolerance the desired tolerance for creating shear edges (in
+     * radians, default=2*Pi/45)
+     */
+    public void createConstraints(ConstVertexAttributes[] vertexAttributes,
+            EBendType bendType, float angleTolerance) {
+        long settingsVa = targetVa();
+        int numAttributes = vertexAttributes.length;
+        long[] attributeVas = new long[numAttributes];
+        for (int i = 0; i < numAttributes; ++i) {
+            attributeVas[i] = vertexAttributes[i].targetVa();
+        }
+        int ordinal = bendType.ordinal();
+        SoftBodySharedSettings.createConstraints(
+                settingsVa, attributeVas, ordinal, angleTolerance);
+    }
+
+    /**
+     * Optimize the settings without writing any results.
+     */
+    public void optimize() {
+        long settingsVa = targetVa();
+        SoftBodySharedSettings.optimize(settingsVa);
+    }
+
+    /**
+     * Replace the materials. (native attribute: mMaterials)
+     *
+     * @param material the desired material, or {@code null}
+     */
+    public void setMaterials(PhysicsMaterial material) {
+        long settingsVa = targetVa();
+        long materialVa = (material == null) ? 0L : material.va();
+        SoftBodySharedSettings.setMaterialsSingle(settingsVa, materialVa);
     }
     // *************************************************************************
     // ConstSoftBodySharedSettings methods
