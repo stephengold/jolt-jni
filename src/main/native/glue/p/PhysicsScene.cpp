@@ -111,8 +111,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getNumBo
   (JNIEnv *, jclass, jlong sceneVa) {
     const PhysicsScene * const pScene
             = reinterpret_cast<PhysicsScene *> (sceneVa);
-    const Array<BodyCreationSettings>::size_type result
-            = pScene->GetBodies().size();
+    const size_t result = pScene->GetNumBodies();
     return result;
 }
 
