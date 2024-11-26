@@ -114,7 +114,7 @@ public static void main(  String[] argv)throws IOException
 			else
 			{
 				Trace("Invalid quality");
-				System.exit(1);
+				System.exit( 1);
 			}
 		}
 		else if (arg. startsWith("-t=max" )  )
@@ -182,7 +182,7 @@ public static void main(  String[] argv)throws IOException
 	}
 
 	// Create a factory
-	newFactory();
+	   newFactory();
 
 	// Register all Jolt physics types
 	registerTypes();
@@ -403,10 +403,10 @@ public static void main(  String[] argv)throws IOException
 				Trace("%s, %d, %f, %s", motion_quality_str, num_threads + 1, ((double)max_iterations) / (1.0e-9 * total_duration), hash_str);
 
 				// Check hash code
-				if (validate_hash != nullptr && !hash_str.equals(validate_hash))
+				if (validate_hash != nullptr && !hash_str.equals ( validate_hash))
 				{
 					Trace("Fail hash validation. Was: %s, expected: %s", hash_str, validate_hash);
-					System.exit(1);
+					System.exit( 1);
 				}
 			}
 		}
