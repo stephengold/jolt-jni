@@ -378,6 +378,20 @@ public class SoftBodyCreationSettings
 
         return result;
     }
+
+    /**
+     * Access the shared settings. (native attribute: mSettings)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public SoftBodySharedSettings getSettings() {
+        long bodySettingsVa = va();
+        long sharedSettingsVa = getSettings(bodySettingsVa);
+        SoftBodySharedSettings result
+                = new SoftBodySharedSettings(sharedSettingsVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -418,6 +432,8 @@ public class SoftBodyCreationSettings
     native private static float getRotationY(long bodySettingsVa);
 
     native private static float getRotationZ(long bodySettingsVa);
+
+    native private static long getSettings(long bodySettingsVa);
 
     native private static void setAllowSleeping(
             long bodySettingsVa, boolean allow);
