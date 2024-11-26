@@ -113,7 +113,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	mBroadPhase.castRay(ray, hits_before);
 	int num_before = (int)hits_before.getHits().length;
 	BroadPhaseCastResult []results_before = hits_before.getHits();
-	cout.printf("Before update: %d results found%n", num_before);
+	Trace("Before update: %d results found", num_before);
 
 	// Draw results
 	DrawLineSP(mDebugRenderer, ray.getOrigin(), plus(ray.getOrigin() , ray.getDirection()), Color.sRed);
@@ -128,7 +128,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	mBroadPhase.castRay(ray, hits_after);
 	int num_after = (int)hits_after.getHits().length;
 	BroadPhaseCastResult []results_after = hits_after.getHits();
-	cout.printf("After update: %d results found%n", num_after);
+	Trace("After update: %d results found", num_after);
 
 	// Before update we may have some false hits, check that there are less hits after update than before
 	if (num_after > num_before)
