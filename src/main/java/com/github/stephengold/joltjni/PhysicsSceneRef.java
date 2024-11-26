@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
@@ -55,6 +56,42 @@ final public class PhysicsSceneRef extends Ref {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Add the specified body to the scene.
+     *
+     * @param body the body settings (not null, unaffected)
+     */
+    public void addBody(ConstBodyCreationSettings body) {
+        long sceneVa = targetVa();
+        long bodyVa = body.targetVa();
+        PhysicsScene.addBody(sceneVa, bodyVa);
+    }
+
+    /**
+     * Add the specified constraint to the scene.
+     *
+     * @param constraint the constraint settings (not null, unaffected)
+     * @param body1 the index of the first body in the bodies list
+     * @param body2 the index of the 2nd body in the bodies list
+     */
+    public void addConstraint(
+            TwoBodyConstraintSettings constraint, int body1, int body2) {
+        long sceneVa = targetVa();
+        long constraintVa = constraint.va();
+        PhysicsScene.addConstraint(sceneVa, constraintVa, body1, body2);
+    }
+
+    /**
+     * Add the specified soft body to the scene.
+     *
+     * @param softBody the soft-body settings (not null, unaffected)
+     */
+    public void addSoftBody(SoftBodyCreationSettings softBody) {
+        long sceneVa = targetVa();
+        long bodyVa = softBody.va();
+        PhysicsScene.addSoftBody(sceneVa, bodyVa);
+    }
 
     /**
      * Instantiate the bodies in the scene.
@@ -106,6 +143,25 @@ final public class PhysicsSceneRef extends Ref {
         for (int bodyIndex = 0; bodyIndex < numBodies; ++bodyIndex) {
             long settingsVa = PhysicsScene.getBody(sceneVa, bodyIndex);
             result[bodyIndex] = new BodyCreationSettings(this, settingsVa);
+        }
+
+        return result;
+    }
+
+    /**
+     * Access the soft-body creation settings as a Java array.
+     *
+     * @return a new array of new JVM objects with pre-existing native objects
+     * assigned
+     */
+    public SoftBodyCreationSettings[] getSoftBodies() {
+        long sceneVa = targetVa();
+        int numBodies = PhysicsScene.getNumSoftBodies(sceneVa);
+        SoftBodyCreationSettings[] result
+                = new SoftBodyCreationSettings[numBodies];
+        for (int sbIndex = 0; sbIndex < numBodies; ++sbIndex) {
+            long settingsVa = PhysicsScene.getSoftBody(sceneVa, sbIndex);
+            result[sbIndex] = new SoftBodyCreationSettings(this, settingsVa);
         }
 
         return result;
