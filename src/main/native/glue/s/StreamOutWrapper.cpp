@@ -99,6 +99,20 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_StreamOutWrapper_trun
 
 /*
  * Class:     com_github_stephengold_joltjni_StreamOutWrapper
+ * Method:    createFromStringStream
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_StreamOutWrapper_createFromStringStream
+  (JNIEnv *, jclass, jlong streamVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    StreamOutWrapper * const pResult = new StreamOutWrapper(*pStream);
+    TRACE_NEW("StreamOutWrapper", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StreamOutWrapper
  * Method:    createStreamOutWrapper
  * Signature: (Ljava/lang/String;I)J
  */

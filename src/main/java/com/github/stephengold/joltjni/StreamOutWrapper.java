@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.std.StringStream;
+
 /**
  * A wrapper around an {@code std::ofstream}.
  *
@@ -38,6 +40,17 @@ public class StreamOutWrapper extends StreamOut {
      */
     public StreamOutWrapper(String fileName, int streamMode) {
         long streamVa = createStreamOutWrapper(fileName, streamMode);
+        setVirtualAddress(streamVa, true);
+    }
+
+    /**
+     * Open a {@code StringStream} for output.
+     *
+     * @param data the underlying stream (not null)
+     */
+    public StreamOutWrapper(StringStream data) {
+        long dataVa = data.va();
+        long streamVa = createFromStringStream(dataVa);
         setVirtualAddress(streamVa, true);
     }
     // *************************************************************************
@@ -88,6 +101,8 @@ public class StreamOutWrapper extends StreamOut {
     native public static int trunc();
     // *************************************************************************
     // native private methods
+
+    native private static long createFromStringStream(long dataVa);
 
     native private static long createStreamOutWrapper(
             String fileName, int streamMode);
