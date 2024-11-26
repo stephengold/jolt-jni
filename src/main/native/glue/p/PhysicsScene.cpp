@@ -79,18 +79,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_fixI
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsScene
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_free
-  (JNIEnv *, jclass, jlong sceneVa) {
-    PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
-    TRACE_DELETE("PhysicsScene", pScene)
-    delete pScene;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsScene
  * Method:    fromPhysicsSystem
  * Signature: (JJ)V
  */
