@@ -54,16 +54,51 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      * @param sampleCount the number of height values along each edge
      * (&ge;2*blockSize)
      */
+    public HeightFieldShapeSettings(
+            float[] samples, Vec3Arg offset, Vec3Arg scale, int sampleCount) {
+        this(samples, offset, scale, sampleCount, null);
+    }
+
+    /**
+     * Instantiate settings for the specified samples.
+     *
+     * @param samples array of height values (not null, length&ge;4, unaffected)
+     * @param offset (not null, unaffected)
+     * @param scale (not null, unaffected)
+     * @param sampleCount the number of height values along each edge
+     * (&ge;2*blockSize)
+     * @param materialIndices a material index for each sample (default=null)
+     */
     public HeightFieldShapeSettings(float[] samples, Vec3Arg offset,
-            Vec3Arg scale, int sampleCount) {
+            Vec3Arg scale, int sampleCount, byte[] materialIndices) {
+        this(samples, offset, scale, sampleCount, materialIndices,
+                new PhysicsMaterialList());
+    }
+
+    /**
+     * Instantiate settings for the specified samples.
+     *
+     * @param samples array of height values (not null, length&ge;4, unaffected)
+     * @param offset (not null, unaffected)
+     * @param scale (not null, unaffected)
+     * @param sampleCount the number of height values along each edge
+     * (&ge;2*blockSize)
+     * @param materialIndices a material index for each sample (default=null)
+     * @param materialList the list of materials
+     */
+    public HeightFieldShapeSettings(
+            float[] samples, Vec3Arg offset, Vec3Arg scale, int sampleCount,
+            byte[] materialIndices, PhysicsMaterialList materialList) {
         float offsetX = offset.getX();
         float offsetY = offset.getY();
         float offsetZ = offset.getZ();
         float scaleX = scale.getX();
         float scaleY = scale.getY();
         float scaleZ = scale.getZ();
-        long settingsVa = createSettingsFromArray(samples, offsetX,
-                offsetY, offsetZ, scaleX, scaleY, scaleZ, sampleCount);
+        long listVa = materialList.va();
+        long settingsVa = createSettingsFromArray(
+                samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,
+                sampleCount, materialIndices, listVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EShapeSubType.HeightField);
     }
@@ -80,14 +115,51 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      */
     public HeightFieldShapeSettings(FloatBuffer samples, Vec3Arg offset,
             Vec3Arg scale, int sampleCount) {
+        this(samples, offset, scale, sampleCount, null);
+    }
+
+    /**
+     * Instantiate settings for the specified samples.
+     *
+     * @param samples array of height values (not null, capacity&ge;4,
+     * unaffected)
+     * @param offset (not null, unaffected)
+     * @param scale (not null, unaffected)
+     * @param sampleCount the number of height values along each edge
+     * (&ge;2*blockSize)
+     * @param materialIndices a material index for each sample (default=null)
+     */
+    public HeightFieldShapeSettings(FloatBuffer samples, Vec3Arg offset,
+            Vec3Arg scale, int sampleCount, byte[] materialIndices) {
+        this(samples, offset, scale, sampleCount, materialIndices,
+                new PhysicsMaterialList());
+    }
+
+    /**
+     * Instantiate settings for the specified samples.
+     *
+     * @param samples array of height values (not null, capacity&ge;4,
+     * unaffected)
+     * @param offset (not null, unaffected)
+     * @param scale (not null, unaffected)
+     * @param sampleCount the number of height values along each edge
+     * (&ge;2*blockSize)
+     * @param materialIndices a material index for each sample (default=null)
+     * @param materialList the list of materials
+     */
+    public HeightFieldShapeSettings(
+            FloatBuffer samples, Vec3Arg offset, Vec3Arg scale, int sampleCount,
+            byte[] materialIndices, PhysicsMaterialList materialList) {
         float offsetX = offset.getX();
         float offsetY = offset.getY();
         float offsetZ = offset.getZ();
         float scaleX = scale.getX();
         float scaleY = scale.getY();
         float scaleZ = scale.getZ();
-        long settingsVa = createHeightFieldShapeSettings(samples, offsetX,
-                offsetY, offsetZ, scaleX, scaleY, scaleZ, sampleCount);
+        long listVa = materialList.va();
+        long settingsVa = createSettingsFromBuffer(
+                samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,
+                sampleCount, materialIndices, listVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EShapeSubType.HeightField);
     }
@@ -298,11 +370,13 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     native private static long createSettingsFromArray(
             float[] samples, float offsetX, float offsetY, float offsetZ,
-            float scaleX, float scaleY, float scaleZ, int sampleCount);
+            float scaleX, float scaleY, float scaleZ, int sampleCount,
+            byte[] materialIndices, long listVa);
 
-    native private static long createHeightFieldShapeSettings(
+    native private static long createSettingsFromBuffer(
             FloatBuffer samples, float offsetX, float offsetY, float offsetZ,
-            float scaleX, float scaleY, float scaleZ, int sampleCount);
+            float scaleX, float scaleY, float scaleZ, int sampleCount,
+            byte[] materialIndices, long listVa);
 
     native private static float getActiveEdgeCosThresholdAngle(long settingsVa);
 

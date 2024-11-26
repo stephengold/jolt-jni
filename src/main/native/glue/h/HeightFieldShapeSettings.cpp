@@ -33,37 +33,64 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
  * Method:    createSettingsFromArray
- * Signature: ([FFFFFFFI)J
+ * Signature: ([FFFFFFFI[BJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_createSettingsFromArray
   (JNIEnv *pEnv, jclass, jfloatArray samples, jfloat offsetX, jfloat offsetY,
-  jfloat offsetZ, jfloat scaleX, jfloat scaleY, jfloat scaleZ, jint sampleCount) {
+  jfloat offsetZ, jfloat scaleX, jfloat scaleY, jfloat scaleZ, jint sampleCount,
+  jbyteArray materialIndices, jlong listVa) {
     jboolean isCopy;
-    float * const pSamples = pEnv->GetFloatArrayElements(samples, &isCopy);
+    jfloat * const pSamples = pEnv->GetFloatArrayElements(samples, &isCopy);
     const Vec3 offset(offsetX, offsetY, offsetZ);
     const Vec3 scale(scaleX, scaleY, scaleZ);
+    jbyte *pIndices;
+    if (materialIndices) {
+        pIndices = pEnv->GetByteArrayElements(materialIndices, &isCopy);
+    } else {
+        pIndices = nullptr;
+    }
+    const PhysicsMaterialList * const pList
+            = reinterpret_cast<PhysicsMaterialList *> (listVa);
     HeightFieldShapeSettings * const pSettings
-            = new HeightFieldShapeSettings(pSamples, offset, scale, sampleCount);
+            = new HeightFieldShapeSettings(pSamples, offset, scale, sampleCount,
+                    (unsigned char *) pIndices, *pList);
     TRACE_NEW("HeightFieldShapeSettings", pSettings)
+    if (materialIndices) {
+        pEnv->ReleaseByteArrayElements(materialIndices, pIndices, JNI_ABORT);
+    }
     pEnv->ReleaseFloatArrayElements(samples, pSamples, JNI_ABORT);
     return reinterpret_cast<jlong> (pSettings);
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
- * Method:    createHeightFieldShapeSettings
- * Signature: (Ljava/nio/FloatBuffer;FFFFFFI)J
+ * Method:    createSettingsFromBuffer
+ * Signature: (Ljava/nio/FloatBuffer;FFFFFFI[BJ)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_createHeightFieldShapeSettings
-  (JNIEnv *pEnv, jclass, jobject buffer, jfloat offsetX, jfloat offsetY, jfloat offsetZ,
-  jfloat scaleX, jfloat scaleY, jfloat scaleZ, jint sampleCount) {
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_createSettingsFromBuffer
+  (JNIEnv *pEnv, jclass, jobject buffer, jfloat offsetX, jfloat offsetY,
+  jfloat offsetZ, jfloat scaleX, jfloat scaleY, jfloat scaleZ, jint sampleCount,
+  jbyteArray materialIndices, jlong listVa) {
     const float * const pFloats
             = (float *) pEnv->GetDirectBufferAddress(buffer);
     const Vec3 offset(offsetX, offsetY, offsetZ);
     const Vec3 scale(scaleX, scaleY, scaleZ);
+    jboolean isCopy;
+    jbyte *pIndices;
+    if (materialIndices) {
+        pIndices = pEnv->GetByteArrayElements(materialIndices, &isCopy);
+    } else {
+        pIndices = nullptr;
+    }
+    const PhysicsMaterialList * const pList
+            = reinterpret_cast<PhysicsMaterialList *> (listVa);
     HeightFieldShapeSettings * const pSettings
-            = new HeightFieldShapeSettings(pFloats, offset, scale, sampleCount);
+            = new HeightFieldShapeSettings(pFloats, offset, scale, sampleCount,
+                    (unsigned char *) pIndices, *pList);
     TRACE_NEW("HeightFieldShapeSettings", pSettings)
+    if (materialIndices) {
+        pEnv->ReleaseByteArrayElements(materialIndices, pIndices, JNI_ABORT);
+    }
     return reinterpret_cast<jlong> (pSettings);
 }
 
