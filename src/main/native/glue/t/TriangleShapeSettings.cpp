@@ -33,16 +33,23 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
  * Method:    createTriangleShapeSettings
- * Signature: (FFFFFFFFFF)J
+ * Signature: (FFFFFFFFFFJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings_createTriangleShapeSettings
   (JNIEnv *, jclass, jfloat v1x, jfloat v1y, jfloat v1z, jfloat v2x, jfloat v2y,
-  jfloat v2z, jfloat v3x, jfloat v3y, jfloat v3z, jfloat convexRadius) {
+  jfloat v2z, jfloat v3x, jfloat v3y, jfloat v3z, jfloat convexRadius,
+  jlong materialVa) {
     const Vec3 v1(v1x, v1y, v1z);
     const Vec3 v2(v2x, v2y, v2z);
     const Vec3 v3(v3x, v3y, v3z);
+    const PhysicsMaterial * pMaterial;
+    if (materialVa) {
+        pMaterial = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    } else {
+        pMaterial = nullptr;
+    }
     const TriangleShapeSettings * const pSettings
-            = new TriangleShapeSettings(v1, v2, v3, convexRadius);
+            = new TriangleShapeSettings(v1, v2, v3, convexRadius, pMaterial);
     TRACE_NEW("TriangleShapeSettings", pSettings)
     return reinterpret_cast<jlong> (pSettings);
 }

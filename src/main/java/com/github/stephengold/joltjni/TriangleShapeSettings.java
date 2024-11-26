@@ -65,6 +65,21 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
      */
     public TriangleShapeSettings(
             Vec3Arg v1, Vec3Arg v2, Vec3Arg v3, float convexRadius) {
+        this(v1, v2, v3, convexRadius, null);
+    }
+
+    /**
+     * Instantiate settings for the specified vertices.
+     *
+     * @param v1 the location of the first vertex (not null, unaffected)
+     * @param v2 the location of the 2nd vertex (not null, unaffected)
+     * @param v3 the location of the 3rd vertex (not null, unaffected)
+     * @param convexRadius the desired convex radius (default=0)
+     * @param material the desired surface properties (not null, unaffected) or
+     * {@code null} for default properties (default=null)
+     */
+    public TriangleShapeSettings(Vec3Arg v1, Vec3Arg v2, Vec3Arg v3,
+            float convexRadius, PhysicsMaterial material) {
         float v1x = v1.getX();
         float v1y = v1.getY();
         float v1z = v1.getZ();
@@ -74,8 +89,9 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
         float v3x = v3.getX();
         float v3y = v3.getY();
         float v3z = v3.getZ();
-        long settingsVa = createTriangleShapeSettings(
-                v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, convexRadius);
+        long materialVa = (material == null) ? 0L : material.va();
+        long settingsVa = createTriangleShapeSettings(v1x, v1y, v1z, v2x, v2y,
+                v2z, v3x, v3y, v3z, convexRadius, materialVa);
         setVirtualAddress(settingsVa, null); // not owner due to ref counting
         setSubType(EShapeSubType.Triangle);
     }
@@ -107,9 +123,9 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     // *************************************************************************
     // native private methods
 
-    native private static long createTriangleShapeSettings(
-            float v1x, float v1y, float v1z, float v2x, float v2y, float v2z,
-            float v3x, float v3y, float v3z, float convexRadius);
+    native private static long createTriangleShapeSettings(float v1x, float v1y,
+            float v1z, float v2x, float v2y, float v2z, float v3x, float v3y,
+            float v3z, float convexRadius, long materialVa);
 
     native private static float getConvexRadius(long settingsVa);
 
