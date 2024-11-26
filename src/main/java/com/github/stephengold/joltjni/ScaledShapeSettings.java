@@ -96,6 +96,25 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         setVirtualAddress(settingsVa, null); // no owner due to ref counting
         setSubType(EShapeSubType.Scaled);
     }
+
+    /**
+     * Instantiate a settings based on the specified settings and scale factors.
+     *
+     * @param baseSettingsRef a reference to the unscaled base shape settings
+     * (not null)
+     * @param scaleFactors the desired scale factors (not null)
+     */
+    public ScaledShapeSettings(
+            ShapeSettingsRef baseSettingsRef, Vec3Arg scaleFactors) {
+        long baseSettingsVa = baseSettingsRef.targetVa();
+        float scaleX = scaleFactors.getX();
+        float scaleY = scaleFactors.getY();
+        float scaleZ = scaleFactors.getZ();
+        long settingsVa = createScaledShapeSettingsFromSettings(
+                baseSettingsVa, scaleX, scaleY, scaleZ);
+        setVirtualAddress(settingsVa, null); // no owner due to ref counting
+        setSubType(EShapeSubType.Scaled);
+    }
     // *************************************************************************
     // new methods exposed
 
