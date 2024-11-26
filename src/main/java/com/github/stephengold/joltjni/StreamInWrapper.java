@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.std.StringStream;
+
 /**
  * A wrapper around an {@code std::ifstream}.
  *
@@ -37,6 +39,17 @@ final public class StreamInWrapper extends StreamIn {
      * zero)
      */
     private StreamInWrapper(long streamVa) {
+        setVirtualAddress(streamVa, true);
+    }
+
+    /**
+     * Open a {@code StringStream} for input.
+     *
+     * @param data the underlying stream (not null)
+     */
+    public StreamInWrapper(StringStream data) {
+        long dataVa = data.va();
+        long streamVa = createFromStringStream(dataVa);
         setVirtualAddress(streamVa, true);
     }
     // *************************************************************************
@@ -144,6 +157,8 @@ final public class StreamInWrapper extends StreamIn {
     native public static int trunc();
     // *************************************************************************
     // native private methods
+
+    native private static long createFromStringStream(long dataVa);
 
     native private static long createStreamInWrapper(
             String fileName, int streamMode);
