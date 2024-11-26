@@ -44,6 +44,8 @@ float GetWorldScale() { return 1.0f; }
 public void Initialize(){}
 public void PostPhysicsUpdate(float deltaTime){}
 public void PrePhysicsUpdate(PreUpdateParams params){}
+protected void RestoreState(StateRecorder inStream){}
+protected void SaveState(StateRecorder inStream){}
 void SetDebugRenderer(DebugRenderer renderer){mDebugRenderer = renderer;}
 void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
 void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSystem;mBodyInterface=inPhysicsSystem.getBodyInterface();}

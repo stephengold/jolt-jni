@@ -774,7 +774,7 @@ public RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 	return RMat44.sTranslation(minus(plus(mCameraPivot , new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , star(5.0f , fwd)));
 }
 
-void SaveState(StateRecorder inStream)
+protected void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 	inStream.write(mRampBlocksTimeLeft);
@@ -787,7 +787,7 @@ void SaveState(StateRecorder inStream)
 		mAnimatedCharacterVirtualWithInnerBody.saveState(inStream);
 }
 
-void RestoreState(StateRecorder inStream)
+protected void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 	mRampBlocksTimeLeft=inStream.readFloat(mRampBlocksTimeLeft);

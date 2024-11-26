@@ -191,7 +191,7 @@ RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 	return RMat44.sTranslation(minus(plus(mCharacter.getPosition() ,new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , star(5.0f , fwd)));
 }
 
-void SaveState(StateRecorder inStream)
+protected void SaveState(StateRecorder inStream)
 {
 	mCharacter.saveState(inStream);
 
@@ -199,7 +199,7 @@ void SaveState(StateRecorder inStream)
 	inStream.write(mSpaceShipPrevTransform);
 }
 
-void RestoreState(StateRecorder inStream)
+protected void RestoreState(StateRecorder inStream)
 {
 	mCharacter.restoreState(inStream);
 

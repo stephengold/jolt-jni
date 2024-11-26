@@ -86,13 +86,13 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	}
 }
 
-void SaveState(StateRecorder inStream)
+protected void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 	inStream.write(mIsDebris);
 }
 
-void RestoreState(StateRecorder inStream)
+protected void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 	mIsDebris=inStream.readBoolean(mIsDebris);

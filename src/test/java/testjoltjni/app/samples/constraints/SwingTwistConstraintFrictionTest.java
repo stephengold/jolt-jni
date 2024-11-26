@@ -98,12 +98,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	}
 }
 
-void SaveState(StateRecorder inStream)
+protected void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-void RestoreState(StateRecorder inStream)
+protected void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 }

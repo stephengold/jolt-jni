@@ -244,7 +244,7 @@ void CharacterVirtualTest::AddConfigurationSettings(DebugUI *inUI, UIElement *in
 }
 */
 
-void SaveState(StateRecorder inStream)
+protected void SaveState(StateRecorder inStream)
 {
 	super.SaveState(inStream);
 
@@ -257,7 +257,7 @@ void SaveState(StateRecorder inStream)
 	inStream.write(mDesiredVelocity);
 }
 
-void RestoreState(StateRecorder inStream)
+protected void RestoreState(StateRecorder inStream)
 {
 	super.RestoreState(inStream);
 

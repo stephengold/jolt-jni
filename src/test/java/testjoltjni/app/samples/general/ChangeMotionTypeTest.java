@@ -73,12 +73,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		mBody.moveKinematic(new RVec3(sin(mTime), 10, 0), Quat.sRotation(Vec3.sAxisX(), cos(mTime)), inParams.mDeltaTime);
 }
 
-void SaveState(StateRecorder inStream)
+protected void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-void RestoreState(StateRecorder inStream)
+protected void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 

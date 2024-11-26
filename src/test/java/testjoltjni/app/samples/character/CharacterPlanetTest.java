@@ -180,7 +180,7 @@ RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 	return RMat44.sRotationTranslation(mCharacter.getRotation(), cam_pos);
 }
 
-void SaveState(StateRecorder inStream)
+protected void SaveState(StateRecorder inStream)
 {
 	mCharacter.saveState(inStream);
 
@@ -188,7 +188,7 @@ void SaveState(StateRecorder inStream)
 	inStream.write(mCharacter.getUp());
 }
 
-void RestoreState(StateRecorder inStream)
+protected void RestoreState(StateRecorder inStream)
 {
 	mCharacter.restoreState(inStream);
 
