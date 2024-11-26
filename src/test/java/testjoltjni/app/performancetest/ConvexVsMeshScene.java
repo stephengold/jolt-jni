@@ -130,7 +130,8 @@ public
 				}
 	}
 
-	static BodyCreationSettings	mMeshSettings;
+private
+	static BodyCreationSettings	mMeshSettings=new BodyCreationSettings();
 	static ShapeRefC[]		mShapes;
 	public void StopTest(PhysicsSystem inPhysicsSystem){}
 }
