@@ -277,6 +277,11 @@ tasks.register('runConvexVsMesh', JavaExec) {
 tasks.register('runHelloWorld', JavaExec) {
     mainClass = 'testjoltjni.app.helloworld.HelloWorld'
 }
+tasks.register('runLargeMesh', JavaExec) {
+    args '-s=LargeMesh'
+    enableAssertions false
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
+}
 tasks.register('runPyramid', JavaExec) {
     args '-s=Pyramid'
     enableAssertions false

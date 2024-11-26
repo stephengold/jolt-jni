@@ -46,7 +46,7 @@ public class PerformanceTest {
 // Time step for physics
 final static float cDeltaTime = 1.0f / 60.0f;
 
-private static void Trace(String format, Object...args)
+public static void Trace(String format, Object...args)
 {
         cout.printf(format, args);
         cout.println();
@@ -91,6 +91,8 @@ public static void main(  String[] argv)throws IOException
 				scene = new ConvexVsMeshScene();
 			else if (arg.substring(3).equals("Pyramid"))
 				scene = new PyramidScene();
+			else if (arg.substring(3).equals("LargeMesh"))
+				scene = new LargeMeshScene();
 			else
 			{
 				Trace("Invalid scene");
