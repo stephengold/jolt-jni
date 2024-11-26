@@ -47,23 +47,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CompoundShapeSettings
 
 /*
  * Class:     com_github_stephengold_joltjni_CompoundShapeSettings
- * Method:    addShapeRef
- * Signature: (JFFFFFFFJ)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CompoundShapeSettings_addShapeRef
-  (JNIEnv *, jclass, jlong settingsVa, jfloat offsetX, jfloat offsetY, jfloat offsetZ,
-  jfloat rotX, jfloat rotY, jfloat rotZ, jfloat rotW, jlong subRefVa) {
-    CompoundShapeSettings * const pSettings
-            = reinterpret_cast<CompoundShapeSettings *> (settingsVa);
-    const Vec3 offset(offsetX, offsetY, offsetZ);
-    const Quat rotation(rotX, rotY, rotZ, rotW);
-    const ShapeRefC * const pSubShapeRef = reinterpret_cast<ShapeRefC *> (subRefVa);
-    const Shape * const pSubShape = pSubShapeRef->GetPtr();
-    pSettings->AddShape(offset, rotation, pSubShape);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CompoundShapeSettings
  * Method:    addShapeSettings
  * Signature: (JFFFFFFFJ)V
  */
