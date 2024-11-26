@@ -40,6 +40,45 @@ IMPLEMENT_REF(PhysicsScene,
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    addBody
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_addBody
+  (JNIEnv *, jclass, jlong sceneVa, jlong bodyVa) {
+    PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
+    const BodyCreationSettings * const pBody
+            = reinterpret_cast<BodyCreationSettings *> (bodyVa);
+    pScene->AddBody(*pBody);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    addConstraint
+ * Signature: (JJII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_addConstraint
+  (JNIEnv *, jclass, jlong sceneVa, jlong constraintVa, jint body1, jint body2) {
+    PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
+    const TwoBodyConstraintSettings * const pConstraint
+            = reinterpret_cast<TwoBodyConstraintSettings *> (constraintVa);
+    pScene->AddConstraint(pConstraint, body1, body2);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    addSoftBody
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_addSoftBody
+  (JNIEnv *, jclass, jlong sceneVa, jlong bodyVa) {
+    PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
+    const SoftBodyCreationSettings * const pBody
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodyVa);
+    pScene->AddSoftBody(*pBody);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
  * Method:    createBodies
  * Signature: (JJ)Z
  */
@@ -104,6 +143,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getBody
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    getSoftBody
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getSoftBody
+  (JNIEnv *, jclass, jlong sceneVa, jint sbIndex) {
+    PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
+    SoftBodyCreationSettings * const pResult
+            = &pScene->GetSoftBodies()[sbIndex];
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
  * Method:    getNumBodies
  * Signature: (J)I
  */
@@ -112,6 +164,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getNumBo
     const PhysicsScene * const pScene
             = reinterpret_cast<PhysicsScene *> (sceneVa);
     const size_t result = pScene->GetNumBodies();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    getNumSoftBodies
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_getNumSoftBodies
+  (JNIEnv *, jclass, jlong sceneVa) {
+    const PhysicsScene * const pScene
+            = reinterpret_cast<PhysicsScene *> (sceneVa);
+    const size_t result = pScene->GetNumSoftBodies();
     return result;
 }
 
@@ -151,6 +216,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_setEmbed
   (JNIEnv *, jclass, jlong sceneVa) {
     PhysicsScene * const pScene = reinterpret_cast<PhysicsScene *> (sceneVa);
     pScene->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsScene
+ * Method:    sRestoreFromBinaryState
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_sRestoreFromBinaryState
+  (JNIEnv *, jclass, jlong streamVa) {
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    PhysicsScene::PhysicsSceneResult *pResult
+            = new PhysicsScene::PhysicsSceneResult();
+    TRACE_NEW("PhysicsScene::PhysicsSceneResult", pResult)
+    *pResult = PhysicsScene::sRestoreFromBinaryState(*pStream);
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*

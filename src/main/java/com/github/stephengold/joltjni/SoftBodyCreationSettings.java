@@ -69,6 +69,17 @@ public class SoftBodyCreationSettings
                 sharedSettingsVa, xx, yy, zz, qx, qy, qz, qw, objectLayer);
         setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
+
+    /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param bodySettingsVa the virtual address of the native object to assign
+     * (not zero)
+     */
+    SoftBodyCreationSettings(JoltPhysicsObject container, long bodySettingsVa) {
+        super(container, bodySettingsVa);
+    }
     // *************************************************************************
     // new methods exposed
 

@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
@@ -52,6 +54,42 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Add the specified body to the scene.
+     *
+     * @param body the body settings (not null, unaffected)
+     */
+    public void addBody(ConstBodyCreationSettings body) {
+        long sceneVa = va();
+        long bodyVa = body.targetVa();
+        addBody(sceneVa, bodyVa);
+    }
+
+    /**
+     * Add the specified constraint to the scene.
+     *
+     * @param constraint the constraint settings (not null, unaffected)
+     * @param body1 the index of the first body in the bodies list
+     * @param body2 the index of the 2nd body in the bodies list
+     */
+    public void addConstraint(
+            TwoBodyConstraintSettings constraint, int body1, int body2) {
+        long sceneVa = va();
+        long constraintVa = constraint.va();
+        addConstraint(sceneVa, constraintVa, body1, body2);
+    }
+
+    /**
+     * Add the specified soft body to the scene.
+     *
+     * @param softBody the soft-body settings (not null, unaffected)
+     */
+    public void addSoftBody(ConstSoftBodyCreationSettings softBody) {
+        long sceneVa = va();
+        long bodyVa = softBody.targetVa();
+        addSoftBody(sceneVa, bodyVa);
+    }
 
     /**
      * Instantiate the bodies in the scene.
@@ -109,6 +147,25 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
+     * Access the soft-body creation settings as a Java array.
+     *
+     * @return a new array of new JVM objects with pre-existing native objects
+     * assigned
+     */
+    public SoftBodyCreationSettings[] getSoftBodies() {
+        long sceneVa = va();
+        int numBodies = getNumSoftBodies(sceneVa);
+        SoftBodyCreationSettings[] result
+                = new SoftBodyCreationSettings[numBodies];
+        for (int sbIndex = 0; sbIndex < numBodies; ++sbIndex) {
+            long settingsVa = getSoftBody(sceneVa, sbIndex);
+            result[sbIndex] = new SoftBodyCreationSettings(this, settingsVa);
+        }
+
+        return result;
+    }
+
+    /**
      * Save the state of this object in binary form.
      *
      * @param stream the stream to write to (not null)
@@ -120,6 +177,20 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
         long sceneVa = va();
         long streamVa = stream.va();
         saveBinaryState(sceneVa, streamVa, saveShapes, saveGroupFilter);
+    }
+
+    /**
+     * Attempt to de-serialize a saved scene from a stream.
+     *
+     * @param stream (not null)
+     * @return a new object
+     */
+    public static PhysicsSceneResult sRestoreFromBinaryState(StreamIn stream) {
+        long streamVa = stream.va();
+        long resultVa = sRestoreFromBinaryState(streamVa);
+        PhysicsSceneResult result = new PhysicsSceneResult(resultVa, true);
+
+        return result;
     }
     // *************************************************************************
     // RefTarget methods
@@ -163,6 +234,13 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     // *************************************************************************
     // native methods
 
+    native static void addBody(long sceneVa, long bodyVa);
+
+    native static void addConstraint(
+            long sceneVa, long constraintVa, int body1, int body2);
+
+    native static void addSoftBody(long sceneVa, long bodyVa);
+
     native static boolean createBodies(long sceneVa, long systemVa);
 
     native private static long createDefaultScene();
@@ -173,7 +251,11 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
 
     native static long getBody(long sceneVa, int bodyIndex);
 
+    native static long getSoftBody(long sceneVa, int sbIndex);
+
     native static int getNumBodies(long sceneVa);
+
+    native static int getNumSoftBodies(long sceneVa);
 
     native private static int getRefCount(long sceneVa);
 
@@ -181,6 +263,8 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
             boolean saveShapes, boolean saveGroupFilter);
 
     native private static void setEmbedded(long sceneVa);
+
+    native private static long sRestoreFromBinaryState(long streamVa);
 
     native private static long toRef(long sceneVa);
 }
