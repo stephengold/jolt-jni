@@ -45,3 +45,15 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialSimpl
     TRACE_NEW("PhysicsMaterialSimple", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsMaterialSimple
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialSimple_createDefault
+  (JNIEnv *, jclass) {
+    PhysicsMaterialSimple * pResult = new PhysicsMaterialSimple();
+    TRACE_NEW("PhysicsMaterialSimple", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}

@@ -33,6 +33,14 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
     // constructors
 
     /**
+     * Instantiate a default material.
+     */
+    public PhysicsMaterialSimple() {
+        long materialVa = createDefault();
+        setVirtualAddress(materialVa, null); // not owner due to ref counting
+    }
+
+    /**
      * Instantiate a material.
      *
      * @param name the desired name
@@ -47,4 +55,6 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
     // native private methods
 
     native private static long create(String name, int colorInt);
+
+    native private static long createDefault();
 }
