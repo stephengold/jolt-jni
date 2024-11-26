@@ -574,6 +574,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getSha
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getUserData
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getUserData
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    const uint64 result = pInterface->GetUserData(*pBodyId);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    isActive
  * Signature: (JJ)Z
  */
@@ -825,4 +839,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setShap
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
     const EActivation activation = (EActivation) ordinal;
     pInterface->SetShape(*pBodyId, pShape, updateMassProperties, activation);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setUserData
+ * Signature: (JJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setUserData
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong bodyIdVa, jlong value) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
+    pInterface->SetUserData(*pBodyId, value);
 }

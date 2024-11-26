@@ -552,6 +552,20 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Return the user data of the specified body.
+     *
+     * @param bodyId the ID of the body (not null, unaffected)
+     * @return the value
+     */
+    public long getUserData(ConstBodyId bodyId) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.targetVa();
+        long result = getUserData(bodyInterfaceVa, bodyIdVa);
+
+        return result;
+    }
+
+    /**
      * Test whether the specified body is active.
      *
      * @param bodyId the ID of the body to test (not null, unaffected)
@@ -818,6 +832,18 @@ public class BodyInterface extends NonCopyable {
         setShape(bodyInterfaceVa, bodyIdVa, shapeVa, updateMassProperties,
                 ordinal);
     }
+
+    /**
+     * Alter the user data of the specified body.
+     *
+     * @param bodyId the ID of the body to modify (not null, unaffected)
+     * @param value the desired value
+     */
+    public void setUserData(ConstBodyId bodyId, long value) {
+        long bodyInterfaceVa = va();
+        long bodyIdVa = bodyId.targetVa();
+        setUserData(bodyInterfaceVa, bodyIdVa, value);
+    }
     // *************************************************************************
     // native private methods
 
@@ -934,6 +960,7 @@ public class BodyInterface extends NonCopyable {
 
     native private static long getShape(long bodyInterfaceVa, long bodyIdVa);
 
+    native private static long getUserData(long bodyInterfaceVa, long bodyIdVa);
 
     native private static boolean isActive(long bodyInterfaceVa, long bodyIdVa);
 
@@ -986,4 +1013,7 @@ public class BodyInterface extends NonCopyable {
 
     native private static void setShape(long bodyInterfaceVa, long bodyIdVa,
             long shapeVa, boolean updateMassProperties, int ordinal);
+
+    native private static void setUserData(
+            long bodyInterfaceVa, long bodyIdVa, long value);
 }
