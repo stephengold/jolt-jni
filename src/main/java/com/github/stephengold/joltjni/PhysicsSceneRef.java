@@ -57,6 +57,20 @@ final public class PhysicsSceneRef extends Ref {
     // new methods exposed
 
     /**
+     * Instantiate the bodies in the scene.
+     *
+     * @param system where to add the bodies (not null, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public boolean createBodies(PhysicsSystem system) {
+        long sceneVa = targetVa();
+        long systemVa = system.va();
+        boolean result = PhysicsScene.createBodies(sceneVa, systemVa);
+
+        return result;
+    }
+
+    /**
      * Correct any incorrectly scaled shapes in the scene.
      *
      * @return {@code true} if successful, otherwise {@code false}
@@ -93,20 +107,6 @@ final public class PhysicsSceneRef extends Ref {
             long settingsVa = PhysicsScene.getBody(sceneVa, bodyIndex);
             result[bodyIndex] = new BodyCreationSettings(this, settingsVa);
         }
-
-        return result;
-    }
-
-    /**
-     * Instantiate the bodies in the scene.
-     *
-     * @param system where to add the bodies (not null, modified)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public boolean createBodies(PhysicsSystem system) {
-        long sceneVa = targetVa();
-        long systemVa = system.va();
-        boolean result = PhysicsScene.createBodies(sceneVa, systemVa);
 
         return result;
     }
