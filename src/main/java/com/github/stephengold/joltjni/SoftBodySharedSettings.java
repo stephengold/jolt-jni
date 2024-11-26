@@ -174,7 +174,7 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Alter the materials. (native attribute: mMaterials)
+     * Replace the materials. (native attribute: mMaterials)
      *
      * @param material the desired material, or {@code null}
      */

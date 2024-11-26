@@ -97,7 +97,7 @@ final public class StreamInWrapper extends StreamIn {
     }
 
     /**
-     * Open a new stream.
+     * Open a file for input.
      *
      * @param fileName the name of the file to open (not null)
      * @param streamMode the desired mode bits or-ed together
