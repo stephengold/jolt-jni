@@ -51,6 +51,21 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadPhysicsSceneFromStream
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadPhysicsSceneFromStream
+  (JNIEnv *, jclass, jlong streamVa, jlong refVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    Ref<PhysicsScene> * const pStoreRef
+            = reinterpret_cast<Ref<PhysicsScene> *> (refVa);
+    const bool result = ObjectStreamIn::sReadObject(*pStream, *pStoreRef);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
  * Method:    sReadRagdollSettings
  * Signature: (Ljava/lang/String;J)Z
  */

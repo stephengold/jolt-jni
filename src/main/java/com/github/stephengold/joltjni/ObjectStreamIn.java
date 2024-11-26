@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.std.StringStream;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
@@ -64,11 +65,31 @@ final public class ObjectStreamIn {
 
         return result;
     }
+
+    /**
+     * Read a scene from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param sceneRef where to store the de-serialized scene (not null,
+     * modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, PhysicsSceneRef sceneRef) {
+        long streamVa = stream.va();
+        long refVa = sceneRef.va();
+        boolean result = sReadPhysicsSceneFromStream(streamVa, refVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
     native private static boolean sReadPhysicsScene(
             String fileName, long refVa);
+
+    native private static boolean sReadPhysicsSceneFromStream(
+            long streamVa, long refVa);
 
     native private static boolean sReadRagdollSettings(
             String fileName, long refVa);
