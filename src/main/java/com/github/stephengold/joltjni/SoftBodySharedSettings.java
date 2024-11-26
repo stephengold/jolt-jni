@@ -172,6 +172,17 @@ public class SoftBodySharedSettings
         long settingsVa = va();
         optimize(settingsVa);
     }
+
+    /**
+     * Alter the materials. (native attribute: mMaterials)
+     *
+     * @param material the desired material, or {@code null}
+     */
+    public void setMaterials(PhysicsMaterial material) {
+        long settingsVa = va();
+        long materialVa = (material == null) ? 0L : material.va();
+        setMaterialsSingle(settingsVa, materialVa);
+    }
     // *************************************************************************
     // ConstSoftBodySharedSettings methods
 
@@ -317,6 +328,8 @@ public class SoftBodySharedSettings
     native private static void optimize(long settingsVa);
 
     native private static void setEmbedded(long settingsVa);
+
+    native static void setMaterialsSingle(long settingsVa, long materialVa);
 
     native private static long toRef(long settingsVa);
 }

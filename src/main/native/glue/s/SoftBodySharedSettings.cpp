@@ -269,6 +269,22 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    setMaterialsSingle
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_setMaterialsSingle
+  (JNIEnv *, jclass, jlong settingsVa, jlong materialVa) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    const PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    RefConst<PhysicsMaterial> ref = pMaterial;
+    pSettings->mMaterials.clear();
+    pSettings->mMaterials.push_back(ref);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    toRef
  * Signature: (J)J
  */
