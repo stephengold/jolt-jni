@@ -31,7 +31,7 @@ import com.github.stephengold.joltjni.*;
 /// Class that determines if two object layers can collide
 public class ObjectLayerPairFilterImpl extends ObjVsObjFilter
 {
-	ObjectLayerPairFilterImpl() {
+	public ObjectLayerPairFilterImpl() {
 		super(Layers.NUM_LAYERS);
 		disableLayer(Layers.UNUSED1);
 		disableLayer(Layers.UNUSED2);

@@ -84,7 +84,7 @@ static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX, int inGridSizeZ, f
 	return settings.toRef();
 }
 
-static SoftBodySharedSettingsRef CreateClothWithFixatedCorners(int inGridSizeX, int inGridSizeZ, float inGridSpacing)
+public static SoftBodySharedSettingsRef CreateClothWithFixatedCorners(int inGridSizeX, int inGridSizeZ, float inGridSpacing)
 {
 	BiFunction<Integer,Integer,Float> inv_mass = (Integer inX, Integer inZ) -> {
 		return (inX == 0 && inZ == 0)
@@ -96,7 +96,7 @@ static SoftBodySharedSettingsRef CreateClothWithFixatedCorners(int inGridSizeX, 
 	return CreateCloth(inGridSizeX, inGridSizeZ, inGridSpacing, inv_mass);
 }
 
-static SoftBodySharedSettingsRef CreateCube(int inGridSize, float inGridSpacing)
+public static SoftBodySharedSettingsRef CreateCube(int inGridSize, float inGridSpacing)
 {
 	Vec3Arg cOffset = Vec3.sReplicate(-0.5f * inGridSpacing * (inGridSize - 1));
 

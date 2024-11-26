@@ -32,7 +32,7 @@ import com.github.stephengold.joltjni.*;
 /// Class that determines if an object layer can collide with a broadphase layer
 public class ObjectVsBroadPhaseLayerFilterImpl extends ObjVsBpFilter
 {
-	ObjectVsBroadPhaseLayerFilterImpl() {
+	public ObjectVsBroadPhaseLayerFilterImpl() {
 		super(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS);
 		disableBp(BroadPhaseLayers.UNUSED);
 		disableObj(Layers.UNUSED1);
