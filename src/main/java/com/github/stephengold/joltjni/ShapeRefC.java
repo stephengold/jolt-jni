@@ -237,6 +237,34 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     }
 
     /**
+     * Copy the statistics. The shape is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public Stats getStats() {
+        long shapeVa = targetVa();
+        long statsVa = Shape.getStats(shapeVa);
+        Stats result = new Stats(statsVa, true);
+
+        return result;
+    }
+
+    /**
+     * Count how many bits are used to address leaf shapes. The shape is
+     * unaffected.
+     *
+     * @return the number of bits (&ge;0)
+     */
+    @Override
+    public int getSubShapeIdBitsRecursive() {
+        long shapeVa = targetVa();
+        int result = Shape.getSubShapeIdBitsRecursive(shapeVa);
+
+        return result;
+    }
+
+    /**
      * Return the shape's subtype. The shape is unaffected.
      *
      * @return an enum value (not null)

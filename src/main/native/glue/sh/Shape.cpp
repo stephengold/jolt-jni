@@ -252,6 +252,32 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getRefCount
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getStats
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getStats
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    Shape::Stats * const pResult = new Shape::Stats(0, 0);
+    TRACE_NEW("Shape::Stats", pResult)
+    *pResult = pShape->GetStats();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getSubShapeIdBitsRecursive
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_getSubShapeIdBitsRecursive
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    const uint result = pShape->GetSubShapeIDBitsRecursive();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    getSubType
  * Signature: (J)I
  */

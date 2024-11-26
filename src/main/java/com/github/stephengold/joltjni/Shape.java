@@ -304,6 +304,34 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
+     * Copy the statistics. The shape is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public Stats getStats() {
+        long shapeVa = va();
+        long statsVa = getStats(shapeVa);
+        Stats result = new Stats(statsVa, true);
+
+        return result;
+    }
+
+    /**
+     * Count how many bits are used to address leaf shapes. The shape is
+     * unaffected.
+     *
+     * @return the number of bits (&ge;0)
+     */
+    @Override
+    public int getSubShapeIdBitsRecursive() {
+        long shapeVa = va();
+        int result = getSubShapeIdBitsRecursive(shapeVa);
+
+        return result;
+    }
+
+    /**
      * Return the shape's subtype. The shape is unaffected.
      *
      * @return an enum value (not null)
@@ -498,6 +526,10 @@ abstract public class Shape extends NonCopyable
     native static long getMaterial(long shapeVa, long idVa);
 
     native private static int getRefCount(long shapeVa);
+
+    native static long getStats(long shapeVa);
+
+    native static int getSubShapeIdBitsRecursive(long shapeVa);
 
     native static int getSubType(long shapeVa);
 

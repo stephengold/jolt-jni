@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.DebugRenderer;
 import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.ShapeRefC;
+import com.github.stephengold.joltjni.Stats;
 import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
@@ -125,6 +126,21 @@ public interface ConstShape extends ConstJoltPhysicsObject {
      * @return a new JVM object with the pre-existing native object assigned
      */
     ConstPhysicsMaterial getMaterial(ConstSubShapeId id);
+
+    /**
+     * Copy the statistics. The shape is unaffected.
+     *
+     * @return a new object
+     */
+    Stats getStats();
+
+    /**
+     * Count how many bits are used to address leaf shapes. The shape is
+     * unaffected.
+     *
+     * @return the number of bits (&ge;0)
+     */
+    int getSubShapeIdBitsRecursive();
 
     /**
      * Return the shape's subtype. The shape is unaffected.
