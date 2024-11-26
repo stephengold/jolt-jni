@@ -95,6 +95,20 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
         addShapeSettings(settingsVa, offsetX, offsetY, offsetZ,
                 rotX, rotY, rotZ, rotW, subSettingsVa);
     }
+
+    /**
+     * Add the specified subshape at the specified position.
+     *
+     * @param offset the desired offset for the subshape (not null, unaffected)
+     * @param rotation the desired rotation for the subshape (not null, not
+     * zero, unaffected)
+     * @param subSettingsRef a reference to the subshape settings (not null)
+     */
+    public void addShape(
+            Vec3Arg offset, QuatArg rotation, ShapeSettingsRef subSettingsRef) {
+        ShapeSettings subSettings = subSettingsRef.getPtr();
+        addShape(offset, rotation, subSettings);
+    }
     // *************************************************************************
     // native private methods
 
