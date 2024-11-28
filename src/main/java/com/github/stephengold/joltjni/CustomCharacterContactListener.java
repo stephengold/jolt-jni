@@ -139,7 +139,7 @@ public class CustomCharacterContactListener
             float contactVelocityZ, long materialVa, float characterVelocityX,
             float characterVelocityY, float characterVelocityZ,
             float[] newCharacterVelocity) {
-                logger.info("onCharacterContactSolve called with characterVa: " + characterVa + ", otherCharacterVa: " + otherCharacterVa);
+            logger.info("onCharacterContactSolve called with characterVa: " + characterVa + ", otherCharacterVa: " + otherCharacterVa);
     }
 
     /**
@@ -191,7 +191,7 @@ public class CustomCharacterContactListener
             double contactLocationY, double contactLocationZ,
             float contactNormalX, float contactNormalY, float contactNormalZ,
             long settingsVa) {
-                logger.info("onContactAdded called with characterVa: " + characterVa + ", bodyId2Va: " + bodyId2Va);
+            logger.info("onContactAdded called with characterVa: " + characterVa + ", bodyId2Va: " + bodyId2Va);
     }
 
     /**
