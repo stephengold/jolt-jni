@@ -187,8 +187,6 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         long boxVa = va();
         return new Vec3(getCenterX(boxVa), getCenterY(boxVa), getCenterZ(boxVa));
     }
-
-
     /**
      * Copy the (half) extent of the box. The box is unaffected.
      *
@@ -283,61 +281,33 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     // *************************************************************************
     // native private methods
 
-    native private static boolean contains(
-            long boxVa, float x, float y, float z);
+    private static native boolean contains(long boxVa, float x, float y, float z);
+    private static native long createAaBox();
+    private static native long createAaBox(float minX, float minY, float minZ, float maxX, float maxY, float maxZ);
+    private static native void encapsulate(long boxVa, float locX, float locY, float locZ);
+    private static native void expandBy(long boxVa, float dx, float dy, float dz);
+    private static native void free(long boxVa);
 
-    native private static long createAaBox();
+    private static native float getCenterX(long boxVa);
+    private static native float getCenterY(long boxVa);
+    private static native float getCenterZ(long boxVa);
+    private static native float getExtentX(long boxVa);
+    private static native float getExtentY(long boxVa);
+    private static native float getExtentZ(long boxVa);
+    private static native float getMaxX(long boxVa);
+    private static native float getMaxY(long boxVa);
+    private static native float getMaxZ(long boxVa);
+    private static native float getMinX(long boxVa);
+    private static native float getMinY(long boxVa);
+    private static native float getMinZ(long boxVa);
+    private static native float getSizeX(long boxVa);
+    private static native float getSizeY(long boxVa);
+    private static native float getSizeZ(long boxVa);
+    private static native float getVolume(long boxVa);
+    private static native boolean isValid(long boxVa);
+    private static native long sBiggest(boolean unused);
+    private static native void setEmpty(long boxVa);
+    private static native void setMax(long boxVa, float x, float y, float z);
+    private static native void setMin(long boxVa, float x, float y, float z);
 
-    native private static long createAaBox(float minX, float minY, float minZ,
-            float maxX, float maxY, float maxZ);
-
-    native private static void encapsulate(
-            long boxVa, float locX, float locY, float locZ);
-
-    native private static void expandBy(
-            long boxVa, float dx, float dy, float dz);
-
-    native private static void free(long boxVa);
-
-    native private static float getCenterX(long boxVa);
-
-    native private static float getCenterY(long boxVa);
-
-    native private static float getCenterZ(long boxVa);
-
-    native private static float getExtentX(long boxVa);
-
-    native private static float getExtentY(long boxVa);
-
-    native private static float getExtentZ(long boxVa);
-
-    native private static float getMaxX(long boxVa);
-
-    native private static float getMaxY(long boxVa);
-
-    native private static float getMaxZ(long boxVa);
-
-    native private static float getMinX(long boxVa);
-
-    native private static float getMinY(long boxVa);
-
-    native private static float getMinZ(long boxVa);
-
-    native private static float getSizeX(long boxVa);
-
-    native private static float getSizeY(long boxVa);
-
-    native private static float getSizeZ(long boxVa);
-
-    native private static float getVolume(long boxVa);
-
-    native private static boolean isValid(long boxVa);
-
-    native private static long sBiggest(boolean unused);
-
-    native private static void setEmpty(long boxVa);
-
-    native private static void setMax(long boxVa, float x, float y, float z);
-
-    native private static void setMin(long boxVa, float x, float y, float z);
 }

@@ -925,135 +925,66 @@ public class Body extends NonCopyable implements ConstBody {
             float angularDrag, float vx, float vy, float vz, float gravityX,
             float gravityY, float gravityZ, float deltaTime);
 
-    native private static boolean canBeKinematicOrDynamic(long bodyVa);
-
-    native private static long createFixedToWorld();
-
-    native private static float getAccumulatedForceX(long bodyVa);
-
-    native private static float getAccumulatedForceY(long bodyVa);
-
-    native private static float getAccumulatedForceZ(long bodyVa);
-
-    native private static float getAccumulatedTorqueX(long bodyVa);
-
-    native private static float getAccumulatedTorqueY(long bodyVa);
-
-    native private static float getAccumulatedTorqueZ(long bodyVa);
-
-    native private static boolean getAllowSleeping(long bodyVa);
-
-    native private static float getAngularVelocityX(long bodyVa);
-
-    native private static float getAngularVelocityY(long bodyVa);
-
-    native private static float getAngularVelocityZ(long bodyVa);
-
-    native private static long getBodyCreationSettings(long bodyVa);
-
-    native private static int getBodyType(long bodyVa);
-
-    native private static int getBroadPhaseLayer(long bodyVa);
-
-    native private static double getCenterOfMassPositionX(long bodyVa);
-
-    native private static double getCenterOfMassPositionY(long bodyVa);
-
-    native private static double getCenterOfMassPositionZ(long bodyVa);
-
-    native private static long getCenterOfMassTransform(long bodyVa);
-
-    native private static boolean getEnhancedInternalEdgeRemoval(long bodyVa);
-
-    native private static float getFriction(long bodyVa);
-
-    native private static long getId(long bodyVa);
-
-    native private static float getLinearVelocityX(long bodyVa);
-
-    native private static float getLinearVelocityY(long bodyVa);
-
-    native private static float getLinearVelocityZ(long bodyVa);
-
-    native private static long getMotionProperties(long bodyVa);
-
-    native private static int getMotionType(long bodyVa);
-
-    native private static int getObjectLayer(long bodyVa);
-
-    native private static double getPositionX(long bodyVa);
-
-    native private static double getPositionY(long bodyVa);
-
-    native private static double getPositionZ(long bodyVa);
-
-    native private static float getRestitution(long bodyVa);
-
-    native private static float getRotationX(long bodyVa);
-
-    native private static float getRotationY(long bodyVa);
-
-    native private static float getRotationZ(long bodyVa);
-
-    native private static float getRotationW(long bodyVa);
-
-    native private static long getShape(long bodyVa);
-
-    native private static long getUserData(long bodyVa);
-
-    native private static long getWorldSpaceBounds(long bodyVa);
-
-    native private static long getWorldTransform(long bodyVa);
-
-    native private static boolean isActive(long bodyVa);
-
-    native private static boolean isDynamic(long bodyVa);
-
-    native private static boolean isInBroadPhase(long bodyVa);
-
-    native private static boolean isKinematic(long bodyVa);
-
-    native private static boolean isRigidBody(long bodyVa);
-
-    native private static boolean isSensor(long bodyVa);
-
-    native private static boolean isStatic(long bodyVa);
-
-    native private static void moveKinematic(long bodyVa, double xx, double yy,
-            double zz, float qx, float qy, float qz, float qw, float deltaTime);
-
-    native private static void resetSleepTimer(long bodyVa);
-
-    native private static void setAllowSleeping(long bodyVa, boolean allow);
-
-    native private static void setAngularVelocity(
-            long bodyVa, float wx, float wy, float wz);
-
-    native private static void setAngularVelocityClamped(
-            long bodyVa, float wx, float wy, float wz);
-
-    native private static void setCollisionGroup(long bodyVa, long groupVa);
-
-    native private static void setEnhancedInternalEdgeRemoval(
-            long bodySettingsVa, boolean enhance);
-
-    native private static void setFriction(long bodyVa, float friction);
-
-    native private static void setIsSensor(long bodyVa, boolean setting);
-
-    native private static void setLinearVelocity(
-            long bodyVa, float vx, float vy, float vz);
-
-    native private static void setLinearVelocityClamped(
-            long bodyVa, float vx, float vy, float vz);
-
-    native private static void setMotionType(long bodyVa, int ordinal);
-
-    native private static void setPositionAndRotationInternal(
-            long bodyVa, double locX, double locY, double locZ, float qx,
-            float qy, float qz, float qw, boolean resetSleepTimer);
-
-    native private static void setRestitution(long bodyVa, float restitution);
-
-    native private static void setUserData(long bodyVa, long value);
+    private static native boolean canBeKinematicOrDynamic(long bodyVa);
+    private static native long createFixedToWorld();
+    private static native float getAccumulatedForceX(long bodyVa);
+    private static native float getAccumulatedForceY(long bodyVa);
+    private static native float getAccumulatedForceZ(long bodyVa);
+    private static native float getAccumulatedTorqueX(long bodyVa);
+    private static native float getAccumulatedTorqueY(long bodyVa);
+    private static native float getAccumulatedTorqueZ(long bodyVa);
+    private static native boolean getAllowSleeping(long bodyVa);
+    private static native float getAngularVelocityX(long bodyVa);
+    private static native float getAngularVelocityY(long bodyVa);
+    private static native float getAngularVelocityZ(long bodyVa);
+    private static native long getBodyCreationSettings(long bodyVa);
+    private static native int getBodyType(long bodyVa);
+    private static native int getBroadPhaseLayer(long bodyVa);
+    private static native double getCenterOfMassPositionX(long bodyVa);
+    private static native double getCenterOfMassPositionY(long bodyVa);
+    private static native double getCenterOfMassPositionZ(long bodyVa);
+    private static native long getCenterOfMassTransform(long bodyVa);
+    private static native boolean getEnhancedInternalEdgeRemoval(long bodyVa);
+    private static native float getFriction(long bodyVa);
+    private static native long getId(long bodyVa);
+    private static native float getLinearVelocityX(long bodyVa);
+    private static native float getLinearVelocityY(long bodyVa);
+    private static native float getLinearVelocityZ(long bodyVa);
+    private static native long getMotionProperties(long bodyVa);
+    private static native int getMotionType(long bodyVa);
+    private static native int getObjectLayer(long bodyVa);
+    private static native double getPositionX(long bodyVa);
+    private static native double getPositionY(long bodyVa);
+    private static native double getPositionZ(long bodyVa);
+    private static native float getRestitution(long bodyVa);
+    private static native float getRotationX(long bodyVa);
+    private static native float getRotationY(long bodyVa);
+    private static native float getRotationZ(long bodyVa);
+    private static native float getRotationW(long bodyVa);
+    private static native long getShape(long bodyVa);
+    private static native long getUserData(long bodyVa);
+    private static native long getWorldSpaceBounds(long bodyVa);
+    private static native long getWorldTransform(long bodyVa);
+    private static native boolean isActive(long bodyVa);
+    private static native boolean isDynamic(long bodyVa);
+    private static native boolean isInBroadPhase(long bodyVa);
+    private static native boolean isKinematic(long bodyVa);
+    private static native boolean isRigidBody(long bodyVa);
+    private static native boolean isSensor(long bodyVa);
+    private static native boolean isStatic(long bodyVa);
+    private static native void moveKinematic(long bodyVa, double xx, double yy, double zz, float qx, float qy, float qz, float qw, float deltaTime);
+    private static native void resetSleepTimer(long bodyVa);
+    private static native void setAllowSleeping(long bodyVa, boolean allow);
+    private static native void setAngularVelocity(long bodyVa, float wx, float wy, float wz);
+    private static native void setAngularVelocityClamped(long bodyVa, float wx, float wy, float wz);
+    private static native void setCollisionGroup(long bodyVa, long groupVa);
+    private static native void setEnhancedInternalEdgeRemoval(long bodySettingsVa, boolean enhance);
+    private static native void setFriction(long bodyVa, float friction);
+    private static native void setIsSensor(long bodyVa, boolean setting);
+    private static native void setLinearVelocity(long bodyVa, float vx, float vy, float vz);
+    private static native void setLinearVelocityClamped(long bodyVa, float vx, float vy, float vz);
+    private static native void setMotionType(long bodyVa, int ordinal);
+    private static native void setPositionAndRotationInternal(long bodyVa, double locX, double locY, double locZ, float qx, float qy, float qz, float qw, boolean resetSleepTimer);
+    private static native void setRestitution(long bodyVa, float restitution);
+    private static native void setUserData(long bodyVa, long value);
 }
