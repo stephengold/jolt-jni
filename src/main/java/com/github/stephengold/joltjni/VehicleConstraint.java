@@ -263,41 +263,39 @@ public class VehicleConstraint
     // *************************************************************************
     // native private methods
 
-    native private static int countWheels(long constraintVa);
+    private static native int countWheels(long constraintVa);
 
-    native private static long createConstraint(long bodyVa, long settingsVa);
+    private static native long createConstraint(long bodyVa, long settingsVa);
 
-    native private static long getController(long constraintVa);
+    private static native long getController(long constraintVa);
 
-    native private static long getVehicleBody(long constraintVa);
-
-    native private static long getWheel(long constraintVa, int wheelIndex);
-
-    native private static long getWheelWorldTransform(
-            long constraintVa, int wheelIndex, float rx, float ry, float rz,
+    private static native long getVehicleBody(long constraintVa);
+    
+    private static native long getWheel(long constraintVa, int wheelIndex);
+    
+    private static native long getWheelWorldTransform(long constraintVa, int wheelIndex, float rx, float ry, float rz,
             float ux, float uy, float uz);
+    
+    private static native void onStep(long constraintVa, long contextVa);
+    
+    private static native float getWorldUpX(long constraintVa);
 
-    native private static void onStep(long constraintVa, long contextVa);
+    private static native float getWorldUpY(long constraintVa);
 
-    native private static float getWorldUpX(long constraintVa);
+    private static native float getWorldUpZ(long constraintVa);
 
-    native private static float getWorldUpY(long constraintVa);
+    private static native void overrideGravity(long constraintVa, float ax, float ay, float az);
 
-    native private static float getWorldUpZ(long constraintVa);
+    private static native void resetGravityOverride(long constraintVa);
 
-    native private static void overrideGravity(
-            long constraintVa, float ax, float ay, float az);
-
-    native private static void resetGravityOverride(long constraintVa);
-
-    native private static void setNumStepsBetweenCollisionTestActive(
+    private static native void setNumStepsBetweenCollisionTestActive(
             long constraintVa, int numSteps);
 
-    native private static void setNumStepsBetweenCollisionTestInactive(
+    private static native void setNumStepsBetweenCollisionTestInactive(
             long constraintVa, int numSteps);
 
-    native private static void setVehicleCollisionTester(
+    private static native void setVehicleCollisionTester(
             long constraintVa, long testerVa);
 
-    native private static long toRef(long constraintVa);
+    private static native long toRef(long constraintVa);
 }

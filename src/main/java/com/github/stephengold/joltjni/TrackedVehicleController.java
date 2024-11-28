@@ -89,17 +89,13 @@ public class TrackedVehicleController
     public TrackedVehicleControllerRef toRef() {
         long controllerVa = va();
         long copyVa = VehicleController.toRef(controllerVa);
-        TrackedVehicleControllerRef result
-                = new TrackedVehicleControllerRef(copyVa, true);
-
+        TrackedVehicleControllerRef result = new TrackedVehicleControllerRef(copyVa, true);
         return result;
     }
     // *************************************************************************
-    // native private methods
+    private static native void setDriverInput(long controllerVa, float forward,
+            float leftRatio, float rightRatio, float brake); 
 
-    native private static void setDriverInput(long controllerVa, float forward,
-            float leftRatio, float rightRatio, float brake);
-
-    native private static void setRpmMeter(long controllerVa,
+    private static native void setRpmMeter(long controllerVa,
             float locX, float locY, float locZ, float size);
 }
