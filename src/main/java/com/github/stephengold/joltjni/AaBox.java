@@ -185,13 +185,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     @Override
     public Vec3 getCenter() {
         long boxVa = va();
-        float x = getCenterX(boxVa);
-        float y = getCenterY(boxVa);
-        float z = getCenterZ(boxVa);
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
+        return new Vec3(getCenterX(boxVa), getCenterY(boxVa), getCenterZ(boxVa));
     }
+
 
     /**
      * Copy the (half) extent of the box. The box is unaffected.
