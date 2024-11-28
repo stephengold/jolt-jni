@@ -262,7 +262,6 @@ public class VehicleConstraint
     }
     // *************************************************************************
     // native private methods
-
     private static native int countWheels(long constraintVa);
 
     private static native long createConstraint(long bodyVa, long settingsVa);
@@ -275,6 +274,7 @@ public class VehicleConstraint
     
     private static native long getWheelWorldTransform(long constraintVa, int wheelIndex, float rx, float ry, float rz,
             float ux, float uy, float uz);
+            
     
     private static native void onStep(long constraintVa, long contextVa);
     
