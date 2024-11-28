@@ -117,11 +117,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * @return a new JVM object with a new native object assigned
      */
     public static AaBox sBiggest() {
-        long boxVa = sBiggest(true);
-        AaBox result = new AaBox(boxVa, true);
-
-        return result;
+        return new AaBox(sBiggest(true), true);
     }
+
 
     /**
      * Alter the box to be empty.
