@@ -20,6 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package com.github.stephengold.joltjni;
+import java.util.logging.Logger;
 
 /**
  * A customizable {@code CharacterContactListener}.
@@ -29,6 +30,7 @@ package com.github.stephengold.joltjni;
 public class CustomCharacterContactListener
         extends JoltPhysicsObject
         implements CharacterContactListener {
+        private static final Logger logger = Logger.getLogger(CustomCharacterContactListener.class.getName());
     // *************************************************************************
     // constructors
 
@@ -137,6 +139,7 @@ public class CustomCharacterContactListener
             float contactVelocityZ, long materialVa, float characterVelocityX,
             float characterVelocityY, float characterVelocityZ,
             float[] newCharacterVelocity) {
+                logger.info("onCharacterContactSolve called with characterVa: " + characterVa + ", otherCharacterVa: " + otherCharacterVa);
     }
 
     /**
@@ -188,6 +191,7 @@ public class CustomCharacterContactListener
             double contactLocationY, double contactLocationZ,
             float contactNormalX, float contactNormalY, float contactNormalZ,
             long settingsVa) {
+                logger.info("onContactAdded called with characterVa: " + characterVa + ", bodyId2Va: " + bodyId2Va);
     }
 
     /**
