@@ -193,12 +193,14 @@ public static void main(  String[] argv)throws IOException
 	// Show used instruction sets
 	Trace(getConfigurationString());
 
-	// Output scene we're running
+	// If no scene was specified use the default scene
+	if (scene == nullptr)
+		scene = create_ragdoll_scene();
+
+        // Output scene we're running
 	Trace("Running scene: %s", scene.GetName());
 
 	// Load the scene
-	if (scene == nullptr)
-		scene = create_ragdoll_scene();
 	if (!scene.Load())
 		System.exit( 1);
 
