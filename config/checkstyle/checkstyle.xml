@@ -335,9 +335,7 @@
                     RECORD_COMPONENT_DEF"/>
         </module>
         <module name="ConstructorsDeclarationGrouping"/>
-        <module name="VariableDeclarationUsageDistance">
-            <property name="allowedDistance" value="5"/>
-        </module>
+        <module name="VariableDeclarationUsageDistance"/>
         <module name="AnnotationLocation">
             <property name="id" value="AnnotationLocationMostCases"/>
             <property name="tokens"
