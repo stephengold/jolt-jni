@@ -44,9 +44,7 @@ public class ConvexHullBuilder extends NonCopyable {
         int numFloats = 3 * numPoints;
         FloatBuffer pointBuffer = Jolt.newDirectFloatBuffer(numFloats);
         for (Vec3 point : points) {
-            pointBuffer.put(point.getX());
-            pointBuffer.put(point.getY());
-            pointBuffer.put(point.getZ());
+            point.put(pointBuffer);
         }
         long builderVa = create(pointBuffer);
         setVirtualAddress(builderVa, () -> free(builderVa));

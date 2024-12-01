@@ -90,9 +90,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         int numFloats = numAxes * numPoints;
         FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
         for (Vec3Arg point : points) {
-            buffer.put(point.getX());
-            buffer.put(point.getY());
-            buffer.put(point.getZ());
+            point.put(buffer);
         }
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
@@ -115,9 +113,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
             int numFloats = numAxes * numPoints;
             FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
             for (Vec3Arg point : points) {
-                buffer.put(point.getX());
-                buffer.put(point.getY());
-                buffer.put(point.getZ());
+                point.put(buffer);
             }
             settingsVa = createSettings(
                     numPoints, buffer, Jolt.cDefaultConvexRadius, 0L);
@@ -152,9 +148,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         int numFloats = numAxes * numPoints;
         FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
         for (Vec3Arg point : points) {
-            buffer.put(point.getX());
-            buffer.put(point.getY());
-            buffer.put(point.getZ());
+            point.put(buffer);
         }
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
@@ -305,9 +299,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         int numFloats = numAxes * numPoints;
         FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
         for (Vec3Arg point : points) {
-            buffer.put(point.getX());
-            buffer.put(point.getY());
-            buffer.put(point.getZ());
+            point.put(buffer);
         }
         long settingsVa = va();
         setPoints(settingsVa, numPoints, buffer);

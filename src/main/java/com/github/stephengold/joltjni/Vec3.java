@@ -28,6 +28,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.DefaultRandomEngine;
 import com.github.stephengold.joltjni.std.Std;
 import com.github.stephengold.joltjni.std.UniformRealDistribution;
+import java.nio.FloatBuffer;
 import java.util.Objects;
 
 /**
@@ -688,6 +689,19 @@ final public class Vec3 implements Vec3Arg {
         }
 
         return result;
+    }
+
+    /**
+     * Write all 3 components to the specified buffer and advance the buffer's
+     * position by 3. The vector is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    @Override
+    public void put(FloatBuffer storeBuffer) {
+        storeBuffer.put(x);
+        storeBuffer.put(y);
+        storeBuffer.put(z);
     }
 
     /**

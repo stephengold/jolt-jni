@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.Vec3;
+import java.nio.FloatBuffer;
 
 /**
  * Read-only access to a {@code Vec3}. (native type: const Vec3)
@@ -176,6 +177,14 @@ public interface Vec3Arg {
      * @return a new vector
      */
     Vec3 normalizedOr(Vec3Arg zeroValue);
+
+    /**
+     * Write all 3 components to the specified buffer and advance the buffer's
+     * position by 3. The vector is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    void put(FloatBuffer storeBuffer);
 
     /**
      * Generate the component-wise reciprocal. The current vector is unaffected.
