@@ -128,7 +128,7 @@ final public class IndexedTriangleList extends Array<IndexedTriangle> {
     native private static long createIndexedTriangleList();
 
     native private static void erase(
-            long vectorVa, int startIndex, int stopIndex);
+            long listVa, int startIndex, int stopIndex);
 
     native private static void free(long listVa);
 
