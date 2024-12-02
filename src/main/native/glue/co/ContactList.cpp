@@ -58,19 +58,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactList_erase
 
 /*
  * Class:     com_github_stephengold_joltjni_ContactList
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactList_free
-  (JNIEnv *, jclass, jlong listVa) {
-    CharacterVirtual::ContactList * const pList
-            = reinterpret_cast<CharacterVirtual::ContactList *> (listVa);
-    TRACE_DELETE("ContactList", pList)
-    delete pList;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ContactList
  * Method:    get
  * Signature: (JI)J
  */

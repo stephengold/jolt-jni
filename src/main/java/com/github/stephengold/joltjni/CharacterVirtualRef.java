@@ -277,7 +277,7 @@ final public class CharacterVirtualRef
     public ContactList getActiveContacts() {
         long characterVa = targetVa();
         long listVa = CharacterVirtual.getActiveContacts(characterVa);
-        ContactList result = new ContactList(listVa, false);
+        ContactList result = new ContactList(listVa);
 
         return result;
     }

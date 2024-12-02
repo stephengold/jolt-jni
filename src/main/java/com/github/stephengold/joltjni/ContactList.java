@@ -34,16 +34,14 @@ public class ContactList extends Array<Contact> {
     // constructors
 
     /**
-     * Instantiate a list with the specified native object assigned.
+     * Instantiate a list with the specified native object assigned but not
+     * owned.
      *
      * @param listVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    ContactList(long listVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(listVa) : null;
-        setVirtualAddress(listVa, freeingAction);
+    ContactList(long listVa) {
+        setVirtualAddress(listVa, null);
     }
     // *************************************************************************
     // Array<Contact> methods
@@ -132,8 +130,6 @@ public class ContactList extends Array<Contact> {
 
     native private static void erase(
             long vectorVa, int startIndex, int stopIndex);
-
-    native private static void free(long listVa);
 
     native private static long get(long listVa, int elementIndex);
 

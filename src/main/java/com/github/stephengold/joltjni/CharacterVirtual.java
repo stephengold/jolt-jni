@@ -425,7 +425,7 @@ public class CharacterVirtual
     public ContactList getActiveContacts() {
         long characterVa = va();
         long listVa = getActiveContacts(characterVa);
-        ContactList result = new ContactList(listVa, false);
+        ContactList result = new ContactList(listVa);
 
         return result;
     }
