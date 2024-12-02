@@ -33,12 +33,10 @@ import com.github.stephengold.joltjni.GroupFilterTable;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemSingleThreaded;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
-import com.github.stephengold.joltjni.JobSystemWithBarrier;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.MotionProperties;
-import com.github.stephengold.joltjni.NonCopyable;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
@@ -247,7 +245,6 @@ public class Test003 {
 
         Assert.assertEquals(1, jobSystem.getMaxConcurrency());
         Assert.assertTrue(jobSystem.hasAssignedNativeObject());
-        Assert.assertTrue(jobSystem instanceof NonCopyable);
         Assert.assertTrue(jobSystem.ownsNativeObject());
         Assert.assertNotEquals(0L, jobSystem.va());
 
@@ -266,9 +263,6 @@ public class Test003 {
         Assert.assertEquals(numCpus, jobSystem.getMaxConcurrency());
 
         Assert.assertTrue(jobSystem.hasAssignedNativeObject());
-        Assert.assertTrue(jobSystem instanceof JobSystem);
-        Assert.assertTrue(jobSystem instanceof JobSystemWithBarrier);
-        Assert.assertTrue(jobSystem instanceof NonCopyable);
         Assert.assertTrue(jobSystem.ownsNativeObject());
         Assert.assertNotEquals(0L, jobSystem.va());
 
