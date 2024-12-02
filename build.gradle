@@ -431,7 +431,7 @@ def base64Decode(encodedString) {
         String decode = new String(decoded)
         return decode
     }
-    return null;
+    return null
 }
 
 // Tasks to download and unpack JoltPhysics source code and assets:
