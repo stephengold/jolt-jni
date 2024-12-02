@@ -111,6 +111,17 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Copy all elements of the argument to the current matrix.
+     *
+     * @param source the matrix to copy (not null, unaffected)
+     */
+    public void set(Mat44Arg source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the specified element.
      *
      * @param row the zero-origin index of the row (&ge;0, &lt;4)
@@ -540,6 +551,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long originalVa);
 
     native private static long createCopy(long originalVa);
 

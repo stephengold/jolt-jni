@@ -32,6 +32,18 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    assign
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_assign
+  (JNIEnv *, jclass, jlong targetVa, jlong sourceVa) {
+    Mat44 * const pTarget = reinterpret_cast<Mat44 *> (targetVa);
+    const Mat44 * const pSource = reinterpret_cast<Mat44 *> (sourceVa);
+    *pTarget = *pSource;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    createCopy
  * Signature: (J)J
  */

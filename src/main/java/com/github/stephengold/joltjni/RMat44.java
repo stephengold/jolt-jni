@@ -95,6 +95,17 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     // new methods exposed
 
     /**
+     * Copy all elements of the argument to the current matrix.
+     *
+     * @param source the matrix to copy (not null, unaffected)
+     */
+    public void set(RMat44Arg source) {
+        long targetVa = va();
+        long sourceVa = source.targetVa();
+        assign(targetVa, sourceVa);
+    }
+
+    /**
      * Alter the specified element in double precision.
      *
      * @param row the zero-origin index of the row (&ge;0, &lt;4)
@@ -438,6 +449,8 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
     // *************************************************************************
     // native private methods
+
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createFromRowMajor(
             float[] floatArray, double m14, double m24, double m34);
