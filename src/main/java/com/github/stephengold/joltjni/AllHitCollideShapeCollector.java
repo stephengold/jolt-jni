@@ -56,7 +56,7 @@ public class AllHitCollideShapeCollector extends CollideShapeCollector {
     }
 
     /**
-     * Access all the hits as an array.
+     * Access all the hits as an array. (native attribute: mHits)
      *
      * @return a new array of new JVM objects with pre-existing native objects
      * assigned

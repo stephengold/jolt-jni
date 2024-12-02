@@ -46,7 +46,7 @@ public class Constraints extends Array<ConstraintRef> {
         setVirtualAddress(arrayVa, freeingAction);
     }
     // *************************************************************************
-    // Array<ConstrantRef> methods
+    // Array<ConstraintRef> methods
 
     /**
      * Count how many references the currently allocated storage can hold. The

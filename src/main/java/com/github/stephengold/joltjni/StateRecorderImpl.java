@@ -66,7 +66,7 @@ final public class StateRecorderImpl extends StateRecorder {
     /**
      * Write binary data.
      *
-     * @param data the bytes to write (not nullm unaffected)
+     * @param data the bytes to write (not null, unaffected)
      * @param numBytes the number of byte to write (&ge;0)
      */
     public void writeBytes(byte[] data, int numBytes) {

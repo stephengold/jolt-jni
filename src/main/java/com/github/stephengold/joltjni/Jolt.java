@@ -222,7 +222,7 @@ final public class Jolt {
      * Create a direct {@code IntBuffer} with native byte order and the
      * specified capacity.
      *
-     * @param numInts the desired capacity (in floats)
+     * @param numInts the desired capacity (in ints)
      * @return a new direct buffer, zeroed and rewound but not flipped
      */
     public static IntBuffer newDirectIntBuffer(int numInts) {
