@@ -80,10 +80,10 @@ public void Initialize()
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(box_shape,new RVec3(0, 60.0f, -75.0f), Quat.sRotation(Vec3.sAxisX(), 0.2f * JPH_PI), EMotionType.Dynamic, Layers.MOVING), EActivation.Activate);
 }
 
-void sGetFrictionAndRestitution(ConstBody inBody, ConstSubShapeId inSubShapeID, float []outFriction, float []outRestitution)
+void sGetFrictionAndRestitution(ConstBody  inBody, ConstSubShapeId inSubShapeID, float []outFriction, float []outRestitution)
 {
 	// Get the material that corresponds to the sub shape ID
-	ConstPhysicsMaterial material = inBody.getShape().getMaterial(inSubShapeID);
+	ConstPhysicsMaterial  material = inBody.getShape().getMaterial(inSubShapeID);
 	if (material.targetVa() == PhysicsMaterial.sDefault().targetVa())
 	{
 		// This is the default material, use the settings from the body (note all bodies in our test have a material so this should not happen)
@@ -111,12 +111,12 @@ void sOverrideContactSettings(ConstBody inBody1, ConstBody inBody2, ContactManif
 	ioSettings.setCombinedRestitution ( Math.max(restitution1[0], restitution2[0]));
 }
 
-void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ContactManifold inManifold, ContactSettings ioSettings)
+void OnContactAdded(ConstBody  inBody1, ConstBody  inBody2, ContactManifold inManifold, ContactSettings ioSettings)
 {
 	sOverrideContactSettings(inBody1, inBody2, inManifold, ioSettings);
 }
 
-void OnContactPersisted(ConstBody inBody1, ConstBody inBody2, ContactManifold inManifold, ContactSettings ioSettings)
+void OnContactPersisted(ConstBody  inBody1, ConstBody  inBody2, ContactManifold inManifold, ContactSettings ioSettings)
 {
 	sOverrideContactSettings(inBody1, inBody2, inManifold, ioSettings);
 }

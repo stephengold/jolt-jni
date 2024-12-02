@@ -191,7 +191,7 @@ static PhysicsSceneRef sCreateScene()
 
 	// Add soft body cube
 	SoftBodySharedSettingsRef sb_cube_settings = SoftBodyCreator.CreateCube(5, 0.2f);
-	sb_cube_settings.setMaterials ( new PhysicsMaterialSimple("Soft Body Cube Material", next_color()) );
+	sb_cube_settings.setMaterials (  new PhysicsMaterialSimple("Soft Body Cube Material", next_color()) );
 	SoftBodyCreationSettings sb_cube=new SoftBodyCreationSettings(sb_cube_settings, next_pos(), Quat.sIdentity(), Layers.MOVING);
 	scene.addSoftBody(sb_cube);
 
@@ -201,7 +201,7 @@ static PhysicsSceneRef sCreateScene()
 
 	// Add soft body sphere
 	SoftBodySharedSettingsRef sb_sphere_settings = SoftBodyCreator.CreateSphere(0.5f);
-	sb_sphere_settings.setMaterials ( new PhysicsMaterialSimple("Soft Body Sphere Material", next_color()) );
+	sb_sphere_settings.setMaterials (  new PhysicsMaterialSimple("Soft Body Sphere Material", next_color()) );
 	SoftBodyCreationSettings sb_sphere=new SoftBodyCreationSettings(sb_sphere_settings, next_pos(), Quat.sIdentity(), Layers.MOVING);
 	sb_sphere.setPressure ( 2000.0f);
 	scene.addSoftBody(sb_sphere);
