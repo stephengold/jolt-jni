@@ -204,7 +204,7 @@ For instance, when an app invokes `getBodyLockInterface()` on a `PhysicsSystem`,
 a new JVM object is returned.
 However, that JVM object refers to a pre-existing native object
 (the one Jolt Physics allocated while initializing the `PhysicsSystem`).
-Thus the application need not (and cannot) free the native object
+Thus, the application need not (and cannot) free the native object
 separately from the `PhysicsSystem` that contains it.
 On such "contained" objects, `close()` is a no-op,
 because the JVM object doesn't "own" its assigned native object.

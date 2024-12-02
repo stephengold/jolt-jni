@@ -15,7 +15,7 @@
 + Bug fixes:
   + dynamic linkage failures and unimplemented methods
   + `Vec3.add()` always returns `(0,0,0)`
-  + many premature garbage collection bugs
+  + many premature garbage-collection bugs
   + some ref targets instantiated as owners
   + native assert while creating an empty `ConvexHullShapeSettings`
   + crash when a collision group has a `null` filter
@@ -57,7 +57,7 @@
 + Bugfix:  some `NonCopyable` native objects are never freed
 + Added the `TempAllocatorImplWithMallocFeedback` class (issue #3)
 + Added many public methods to the library.
-+ Futher reorganization of the "glue" source files.
++ Further reorganization of the "glue" source files.
 
 ## Version 0.9.0 released on 17 October 2024
 
