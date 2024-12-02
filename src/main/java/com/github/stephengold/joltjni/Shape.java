@@ -143,6 +143,20 @@ abstract public class Shape extends NonCopyable
         long shapeVa = va();
         setUserData(shapeVa, value);
     }
+
+    /**
+     * Recreate a shape from the specified stream.
+     *
+     * @param stream the stream to read (not null)
+     * @return a new object
+     */
+    public static ShapeResult sRestoreFromBinaryState(StreamIn stream) {
+        long streamVa = stream.va();
+        long resultVa = sRestoreFromBinaryState(streamVa);
+        ShapeResult result = new ShapeResult(resultVa, true);
+
+        return result;
+    }
     // *************************************************************************
     // ConstShape methods
 
@@ -550,6 +564,8 @@ abstract public class Shape extends NonCopyable
     native private static void setEmbedded(long shapeVa);
 
     native static void setUserData(long shapeVa, long value);
+
+    native private static long sRestoreFromBinaryState(long streamVa);
 
     native private static long toRef(long shapeVa);
 

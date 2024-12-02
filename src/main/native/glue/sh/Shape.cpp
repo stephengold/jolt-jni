@@ -392,6 +392,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_setUserData
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    sRestoreFromBinaryState
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_sRestoreFromBinaryState
+  (JNIEnv *, jclass, jlong streamVa) {
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    ShapeSettings::ShapeResult *pResult = new ShapeSettings::ShapeResult();
+    TRACE_NEW("ShapeResult", pResult)
+    *pResult = Shape::sRestoreFromBinaryState(*pStream);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    toRef
  * Signature: (J)J
  */
