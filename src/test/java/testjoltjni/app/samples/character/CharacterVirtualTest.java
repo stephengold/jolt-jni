@@ -329,6 +329,6 @@ void OnContactSolve( ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2, C
 
 	// Don't allow the player to slide down static not-too-steep surfaces when not actively moving and when not on a moving platform
 	if (!mAllowSliding && inContactVelocity.isNearZero() && !inCharacter.isSlopeTooSteep(inContactNormal))
-		ioNewCharacterVelocity = Vec3.sZero();
+		assign(ioNewCharacterVelocity , Vec3.sZero());
 }
 }
