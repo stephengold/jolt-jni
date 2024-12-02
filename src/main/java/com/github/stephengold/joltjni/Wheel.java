@@ -36,7 +36,7 @@ public class Wheel extends NonCopyable {
     /**
      * prevent premature garbage collection of the settings
      */
-    private Ref settings;
+    final private Ref settings;
     // *************************************************************************
     // constructors
 
