@@ -207,7 +207,7 @@ public class PhysicsSystem extends NonCopyable {
         if (listenerVa == 0L) {
             result = null;
         } else {
-            result = new BodyActivationListener(listenerVa, false);
+            result = new BodyActivationListener(listenerVa);
         }
 
         return result;
