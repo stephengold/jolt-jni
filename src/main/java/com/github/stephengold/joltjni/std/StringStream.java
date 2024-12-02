@@ -39,10 +39,38 @@ public class StringStream extends JoltPhysicsObject {
         long streamVa = createDefault();
         setVirtualAddress(streamVa, () -> free(streamVa));
     }
+
+    /**
+     * Instantiate a stream from the specified string of text.
+     *
+     * @param string the desired initial content (not null)
+     */
+    public StringStream(String string) {
+        long streamVa = createFromString(string);
+        setVirtualAddress(streamVa, () -> free(streamVa));
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Convert the stream to a string of text.
+     *
+     * @return the string value
+     */
+    public String str() {
+        long streamVa = va();
+        String result = str(streamVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
     native private static long createDefault();
 
+    native private static long createFromString(String string);
+
     native private static void free(long streamVa);
+
+    native private static String str(long streamVa);
 }

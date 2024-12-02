@@ -43,6 +43,21 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_StringStream_cre
 
 /*
  * Class:     com_github_stephengold_joltjni_std_StringStream
+ * Method:    createFromString
+ * Signature: (Ljava/lang/String;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_StringStream_createFromString
+  (JNIEnv *pEnv, jclass, jstring string) {
+    jboolean isCopy;
+    const char * const cString = pEnv->GetStringUTFChars(string, &isCopy);
+    stringstream * const pResult = new stringstream(cString);
+    TRACE_NEW("stringstream", pResult)
+    pEnv->ReleaseStringUTFChars(string, cString);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_StringStream
  * Method:    free
  * Signature: (J)V
  */
@@ -51,4 +66,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_StringStream_free
     stringstream * const pStream = reinterpret_cast<stringstream *> (streamVa);
     TRACE_DELETE("stringstream", pStream)
     delete pStream;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_StringStream
+ * Method:    str
+ * Signature: (J)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_std_StringStream_str
+  (JNIEnv *pEnv, jclass, jlong streamVa) {
+    const stringstream * const pStream
+            = reinterpret_cast<stringstream *> (streamVa);
+    const string cppString = pStream->str();
+    const char * const cString = cppString.c_str();
+    jstring result = pEnv->NewStringUTF(cString);
+    return result;
 }
