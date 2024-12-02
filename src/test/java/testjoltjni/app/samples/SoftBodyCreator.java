@@ -37,7 +37,7 @@ public class SoftBodyCreator {
 static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ,float inGridSpacing,BiFunction<Integer,Integer,Float>inVertexGetInvMass) {
     return CreateCloth(inGridSizeX,inGridSizeZ,inGridSpacing,inVertexGetInvMass,(Integer a,Integer b)->{return new Vec3();},EBendType.None,new VertexAttributes(1e-5f, 1e-5f, 1e-5f));}
 
-static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX, int inGridSizeZ, float inGridSpacing, BiFunction<Integer,Integer,Float> inVertexGetInvMass, BiFunction<Integer,Integer,Vec3> inVertexPerturbation, EBendType inBendType, ConstVertexAttributes inVertexAttributes)
+static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX, int inGridSizeZ, float inGridSpacing,  BiFunction<Integer, Integer,Float> inVertexGetInvMass, BiFunction<Integer, Integer,Vec3> inVertexPerturbation, EBendType inBendType, ConstVertexAttributes inVertexAttributes)
 {
 	final float cOffsetX = -0.5f * inGridSpacing * (inGridSizeX - 1);
 	final float cOffsetZ = -0.5f * inGridSpacing * (inGridSizeZ - 1);
@@ -55,7 +55,7 @@ static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX, int inGridSizeZ, f
 		}
 
 	// Function to get the vertex index of a point on the cloth
-	BinaryOperator<Integer> vertex_index = (Integer inX, Integer inY) ->
+	BinaryOperator<Integer> vertex_index = (Integer inX, Integer inY)->
 	{
 		return inX + inY * inGridSizeX;
 	};
@@ -86,7 +86,7 @@ static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX, int inGridSizeZ, f
 
 public static SoftBodySharedSettingsRef CreateClothWithFixatedCorners(int inGridSizeX, int inGridSizeZ, float inGridSpacing)
 {
-	BiFunction<Integer,Integer,Float> inv_mass = (Integer inX, Integer inZ) -> {
+	BiFunction<Integer,Integer,Float> inv_mass = (Integer inX, Integer inZ)-> {
 		return (inX == 0 && inZ == 0)
 			|| (inX == inGridSizeX - 1 && inZ == 0)
 			|| (inX == 0 && inZ == inGridSizeZ - 1)
@@ -112,7 +112,8 @@ public static SoftBodySharedSettingsRef CreateCube(int inGridSize, float inGridS
 			}
 
 	// Function to get the vertex index of a point on the cloth
-        TriFunction<Integer,Integer,Integer,Integer> vertex_index = (Integer inX, Integer inY, Integer inZ) -> {
+	TriFunction<Integer,Integer,Integer,Integer> vertex_index = (Integer inX, Integer inY, Integer inZ)->
+	{
 		return inX + inY * inGridSize + inZ * inGridSize * inGridSize;
 	};
 
@@ -261,7 +262,7 @@ static SoftBodySharedSettingsRef CreateSphere(float inRadius, int inNumTheta, in
 		}
 
 	// Function to get the vertex index of a point on the sphere
-        BinaryOperator<Integer> vertex_index = (Integer inTheta, Integer inPhi) ->
+	BinaryOperator<Integer> vertex_index =  (Integer inTheta, Integer inPhi)->
 	{
 		if (inTheta == 0)
 			return 0;
