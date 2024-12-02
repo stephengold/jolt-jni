@@ -173,6 +173,33 @@ final public class Color implements ConstColor {
     // new methods exposed
 
     /**
+     * Set all 4 components to specified values.
+     *
+     * @param r the desired first (red) component
+     * @param g the desired 2nd (green) component
+     * @param b the desired 3rd (blue) component
+     * @param a the desired 4th (alpha or opacity) component
+     */
+    public void set(byte r, byte g, byte b, byte a) {
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.a = a;
+    }
+
+    /**
+     * Copy all components of the argument to the current object.
+     *
+     * @param source the color to copy (not null, unaffected)
+     */
+    public void set(ConstColor source) {
+        this.r = source.getR();
+        this.g = source.getG();
+        this.b = source.getB();
+        this.a = source.getA();
+    }
+
+    /**
      * Alter the 4th (alpha or opacity) component.
      *
      * @param a the desired component value
