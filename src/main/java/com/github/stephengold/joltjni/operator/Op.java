@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.operator;
 
+import com.github.stephengold.joltjni.Color;
+import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
@@ -49,6 +51,62 @@ final public class Op {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Copy the right argument to the left one. (native operator: binary
+     * {@code =})
+     *
+     * @param left the matrix to modify (not null)
+     * @param right the value to assign (not null, unaffected)
+     * @return the assigned value, for chaining
+     */
+    public static ConstColor assign(Color left, ConstColor right) {
+        left.set(right);
+        return right;
+    }
+
+    /**
+     * Copy the right argument to the left one. (native operator: binary
+     * {@code =})
+     *
+     * @param left the matrix to modify (not null)
+     * @param right the value to assign (not null, unaffected)
+     * @return the assigned value, for chaining
+     */
+    public static Mat44Arg assign(Mat44 left, Mat44Arg right) {
+        left.set(right);
+        return right;
+    }
+
+    /**
+     * Copy the right argument to the left one. (native operator: binary
+     * {@code =})
+     *
+     * @param left the matrix to modify (not null)
+     * @param right the value to assign (not null, unaffected)
+     * @return the assigned value, for chaining
+     */
+    public static RMat44Arg assign(RMat44 left, RMat44Arg right) {
+        left.set(right);
+        return right;
+    }
+
+    /**
+     * Copy the right argument to the left one. (native operator: binary
+     * {@code =})
+     *
+     * @param left the vector to modify (not null)
+     * @param right the value to assign (not null, unaffected)
+     * @return the assigned value, for chaining
+     */
+    public static RVec3Arg assign(RVec3 left, RVec3Arg right) {
+        double rx = right.xx();
+        double ry = right.yy();
+        double rz = right.zz();
+        left.set(rx, ry, rz);
+
+        return right;
+    }
 
     /**
      * Copy the right argument to the left one. (native operator: binary
