@@ -51,6 +51,23 @@ final public class Op {
     // new methods exposed
 
     /**
+     * Copy the right argument to the left one. (native operator: binary
+     * {@code =})
+     *
+     * @param left the vector to modify (not null)
+     * @param right the value to assign (not null, unaffected)
+     * @return the assigned value, for chaining
+     */
+    public static Vec3Arg assign(Vec3 left, Vec3Arg right) {
+        float rx = right.getX();
+        float ry = right.getY();
+        float rz = right.getZ();
+        left.set(rx, ry, rz);
+
+        return right;
+    }
+
+    /**
      * Test whether the specified IDs are equal. (native operator: binary
      * {@code ==})
      *
