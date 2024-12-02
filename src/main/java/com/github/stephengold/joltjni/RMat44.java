@@ -72,10 +72,10 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Instantiate from 4 column vectors.
      *
-     * @param c1 the desired first column (not null, unaffected)
+     * @param c1 the desired first/leftmost column (not null, unaffected)
      * @param c2 the desired 2nd column (not null, unaffected)
      * @param c3 the desired 3rd column (not null, unaffected)
-     * @param c4 the desired 4th column (not null, unaffected)
+     * @param c4 the desired 4th/rightmost column (not null, unaffected)
      */
     public RMat44(Vec4Arg c1, Vec4Arg c2, Vec4Arg c3, RVec3Arg c4) {
         float[] floatArray = {
