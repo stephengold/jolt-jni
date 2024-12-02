@@ -124,19 +124,7 @@ public class Test002 {
         final int n = 100;
         final float cellSize = 3f;
         final float maxHeight = 5f;
-        final int numVertices = (n + 1) * (n + 1);
-        VertexList vertices = new VertexList();
-        vertices.resize(numVertices);
-        for (int x = 0; x <= n; ++x) {
-            for (int z = 0; z <= n; ++z) {
-                double sinX = Math.sin(x * 50. / n);
-                double cosZ = Math.cos(z * 50. / n);
-                float height = (float) (sinX * cosZ);
-                Float3 vertex = new Float3(
-                        cellSize * x, maxHeight * height, cellSize * z);
-                vertices.set(z * (n + 1) + x, vertex);
-            }
-        }
+        VertexList vertices = makeVertexList(n, cellSize, maxHeight);
 
         // Create a triangle mesh:
         final int numTriangles = n * n * 2;
@@ -194,6 +182,34 @@ public class Test002 {
             new CapsuleShape(0.75f, 0.5f).toRefC(),
             new ConvexHullShapeSettings(hullVertices).create().get()
         };
+    }
+
+    /**
+     * Generate a vertex list for a square grid.
+     *
+     * @param n the number of squares on each edge of the grid
+     * @param cellSize the width and length of each square
+     * @param maxHeight the maximum (Y) height
+     * @return a new object
+     */
+    private static VertexList makeVertexList(
+            int n, float cellSize, float maxHeight) {
+        final int numVertices = (n + 1) * (n + 1);
+        VertexList result = new VertexList();
+        result.resize(numVertices);
+
+        for (int x = 0; x <= n; ++x) {
+            for (int z = 0; z <= n; ++z) {
+                double sinX = Math.sin(x * 50. / n);
+                double cosZ = Math.cos(z * 50. / n);
+                float height = (float) (sinX * cosZ);
+                Float3 vertex = new Float3(
+                        cellSize * x, maxHeight * height, cellSize * z);
+                result.set(z * (n + 1) + x, vertex);
+            }
+        }
+
+        return result;
     }
 
     /**
