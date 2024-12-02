@@ -425,7 +425,7 @@ tasks.withType(Sign).configureEach {
     onlyIf { project.hasProperty('signingKeyEncoded') }
 }
 
-def base64Decode(encodedString) {
+static def base64Decode(encodedString) {
     if (encodedString != null) {
         byte[] decoded = encodedString.decodeBase64()
         String decode = new String(decoded)
