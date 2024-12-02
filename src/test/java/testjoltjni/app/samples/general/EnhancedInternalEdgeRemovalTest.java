@@ -148,7 +148,7 @@ public void Initialize()
 	// This tests that fast moving spheres rolling over a triangle will not be affected by internal edges
 	{
 		// Create a flat plane
-		MeshShapeSettings plane_mesh=new MeshShapeSettings(new Triangle[]{
+		MeshShapeSettings plane_mesh=new MeshShapeSettings(
 			new Triangle(
 				new Float3(-10, 0, -10),
 				new Float3(-10, 0, 10),
@@ -158,8 +158,8 @@ public void Initialize()
 				new Float3(-10, 0, -10),
 				new Float3(10, 0, 10),
 				new Float3(10, 0, -10)
-			),
-		});
+			)
+		);
 		plane_mesh.setEmbedded();
 		BodyCreationSettings level_plane=new BodyCreationSettings(plane_mesh, new RVec3(-10, 0, 50), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING);
 		level_plane.setFriction ( 1);

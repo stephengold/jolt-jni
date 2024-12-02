@@ -69,7 +69,7 @@ public void Initialize()
 	for (int i = 0; i <= num_sections; ++i)
 	{
 		float friction = (float)(i) / (float)(num_sections);
-		materials.pushBack(new MyMaterial("Friction " + Float.toString(friction), Color.sGetDistinctColor(i), friction, 0.0f).toRef());
+		materials.pushBack(new MyMaterial("Friction " + (friction), Color.sGetDistinctColor(i), friction, 0.0f).toRef());
 	}
 
 	// A ramp

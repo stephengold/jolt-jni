@@ -551,11 +551,7 @@ final public class Op {
      * @return a new vector
      */
     public static Vec3 star(Vec3Arg left, float right) {
-        float x = right * left.getX();
-        float y = right * left.getY();
-        float z = right * left.getZ();
-        Vec3 result = new Vec3(x, y, z);
-
+        Vec3 result = star(right, left);
         return result;
     }
 

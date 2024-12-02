@@ -89,9 +89,9 @@ static MeshShapeSettings sCreateMesh()
 	// Create materials
 	PhysicsMaterialList materials=new PhysicsMaterialList();
 	for (int i = 0; i <= max_material_index; ++i)
-		materials.pushBack(new PhysicsMaterialSimple("Mesh Material " + Integer.toString(i), Color.sGetDistinctColor(i)).toRef());
+		materials.pushBack(new PhysicsMaterialSimple("Mesh Material " + (i), Color.sGetDistinctColor(i)).toRef());
 
-	return new MeshShapeSettings(triangles, materials);
+	return new MeshShapeSettings(triangles, (materials));
 }
 
 static HeightFieldShapeSettings sCreateHeightField()
