@@ -570,7 +570,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static long createZero();
 
-    native private static boolean equals(long m1va, long m2va);
+    native private static boolean equals(long m1Va, long m2Va);
 
     native private static void free(long matrixVa);
 
