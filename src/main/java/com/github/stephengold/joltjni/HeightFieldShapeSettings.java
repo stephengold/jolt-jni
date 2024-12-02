@@ -386,7 +386,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     native private static float getMaxHeightValue(long settingsVa);
 
-    native private static float getMinHeightValue(long setingsVa);
+    native private static float getMinHeightValue(long settingsVa);
 
     native private static float getOffsetX(long settingsVa);
 

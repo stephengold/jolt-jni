@@ -66,11 +66,11 @@ final public class IndexedTriangle extends IndexedTriangleNoMaterial {
      * Instantiate a triangle with the specified native object assigned but not
      * owned.
      *
-     * @param trianglaVa the virtual address of the native object to assign (not
+     * @param triangleVa the virtual address of the native object to assign (not
      * zero)
      */
-    IndexedTriangle(long trianglaVa) {
-        super(trianglaVa);
+    IndexedTriangle(long triangleVa) {
+        super(triangleVa);
     }
     // *************************************************************************
     // new public methods
