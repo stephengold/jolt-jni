@@ -64,15 +64,8 @@ abstract public class SerializableObject extends NonCopyable {
      *
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    final void setVirtualAddress(long virtualAddress, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(virtualAddress) : null;
-        setVirtualAddress(virtualAddress, freeingAction);
+    final void setVirtualAddress(long virtualAddress) {
+        setVirtualAddress(virtualAddress, null);
     }
-    // *************************************************************************
-    // native private methods
-
-    native private static void free(long virtualAddress);
 }

@@ -37,7 +37,7 @@ public class PathConstraintPathHermite extends PathConstraintPath {
      */
     public PathConstraintPathHermite() {
         long pathVa = createDefault();
-        setVirtualAddress(pathVa, false); // not the owner due to ref counting
+        setVirtualAddress(pathVa); // not the owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

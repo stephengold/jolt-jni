@@ -45,7 +45,7 @@ public class GroupFilterTable extends GroupFilter {
      */
     public GroupFilterTable(int numSubGroups) {
         long filterVa = createFilter(numSubGroups);
-        setVirtualAddress(filterVa, false); // not the owner due to ref counting
+        setVirtualAddress(filterVa); // not the owner due to ref counting
     }
 
     /**
@@ -56,7 +56,7 @@ public class GroupFilterTable extends GroupFilter {
      * zero)
      */
     GroupFilterTable(long filterVa) {
-        setVirtualAddress(filterVa, false); // not the owner due to ref counting
+        setVirtualAddress(filterVa); // not the owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

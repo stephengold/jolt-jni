@@ -36,7 +36,7 @@ public class TrackedVehicleControllerSettings
      */
     public TrackedVehicleControllerSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, false); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

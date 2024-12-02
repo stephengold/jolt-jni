@@ -35,7 +35,7 @@ public class WheelSettingsWv extends WheelSettings {
      */
     public WheelSettingsWv() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, false); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
     }
 
     /**
@@ -45,7 +45,7 @@ public class WheelSettingsWv extends WheelSettings {
      * zero)
      */
     WheelSettingsWv(long settingsVa) {
-        setVirtualAddress(settingsVa, false); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed
