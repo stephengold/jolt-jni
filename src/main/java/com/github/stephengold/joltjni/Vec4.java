@@ -359,7 +359,7 @@ final public class Vec4 implements Vec4Arg {
      * {@code other} is null, false is returned. Either way, the current
      * instance is unaffected.
      *
-     * @param other the object to compare (may be null, unaffected)
+     * @param other the object to compare (unaffected) or {@code null}
      * @return {@code true} if {@code this} and {@code other} have identical
      * values, otherwise {@code false}
      */

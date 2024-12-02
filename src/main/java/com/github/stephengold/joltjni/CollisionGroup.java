@@ -147,7 +147,7 @@ public class CollisionGroup extends JoltPhysicsObject {
     /**
      * Alter the main group ID.
      *
-     * @param id the desired ID (default=cInvalidGroup}
+     * @param id the desired ID (default=cInvalidGroup)
      */
     public void setGroupId(int id) {
         long groupVa = va();
@@ -157,7 +157,7 @@ public class CollisionGroup extends JoltPhysicsObject {
     /**
      * Alter the sub-group ID.
      *
-     * @param id the desired ID (default=cInvalidSubGroup}
+     * @param id the desired ID (default=cInvalidSubGroup)
      */
     public void setSubGroupId(int id) {
         long groupVa = va();

@@ -107,7 +107,7 @@ final public class MassProperties
     }
 
     /**
-     * Alter the inertia tensor. (native attribute: mIntertia)
+     * Alter the inertia tensor. (native attribute: mInertia)
      *
      * @param inertia the desired value (not null, unaffected, default=zero)
      * @return the modified properties (for chaining)
@@ -134,7 +134,7 @@ final public class MassProperties
     }
 
     /**
-     * The the mass and inertia to that of a box with the specified dimensions
+     * Alter the mass and inertia to that of a box with the specified dimensions
      * and uniform density.
      *
      * @param boxSize the edge lengths of the box (not null, unaffected)
@@ -186,7 +186,7 @@ final public class MassProperties
 
     /**
      * Copy the inertia tensor. The properties are unaffected. (native
-     * attribute: mIntertia)
+     * attribute: mInertia)
      *
      * @return a new matrix (in kilogram.meters squared)
      */

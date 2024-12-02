@@ -66,7 +66,7 @@ abstract public class StateRecorderFilter extends JoltPhysicsObject {
     }
 
     /**
-     * The whether the specified constraint should be saved. Meant to be
+     * Test whether the specified constraint should be saved. Meant to be
      * overridden.
      *
      * @param constraint the constraint to test (not null, unaffected)

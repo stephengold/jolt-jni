@@ -244,7 +244,7 @@ final public class Color implements ConstColor {
     }
 
     /**
-     * Return the 3th (blue) component. The color is unaffected.
+     * Return the 3rd (blue) component. The color is unaffected.
      *
      * @return the component value
      */

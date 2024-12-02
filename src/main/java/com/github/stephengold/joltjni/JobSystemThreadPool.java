@@ -53,7 +53,7 @@ public class JobSystemThreadPool extends JobSystemWithBarrier {
      * @param maxBarriers the maximum number of barriers that can be allocated
      * at one time
      * @param numThreads the number of worker threads to start (&ge;0) or -1 to
-     * auto detect
+     * autodetect
      */
     public JobSystemThreadPool(int maxJobs, int maxBarriers, int numThreads) {
         long systemVa = createJobSystem(maxJobs, maxBarriers, numThreads);

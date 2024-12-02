@@ -70,8 +70,8 @@ final public class PhysicsMaterialRef extends Ref {
     }
 
     /**
-     * Return the address of the the native {@code PhysicsMaterial}. No objects
-     * are affected.
+     * Return the address of the native {@code PhysicsMaterial}. No objects are
+     * affected.
      *
      * @return a virtual address (not zero)
      */

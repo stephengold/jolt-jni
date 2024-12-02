@@ -79,7 +79,7 @@ public enum EConstraintSubType {
      */
     Gear,
     /**
-     * PullyConstraint
+     * PulleyConstraint
      */
     Pulley,
     /**

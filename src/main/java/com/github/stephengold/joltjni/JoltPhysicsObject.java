@@ -236,7 +236,7 @@ abstract public class JoltPhysicsObject
      * Test for type and virtual-address equality with another object. The
      * current instance is unaffected.
      *
-     * @param otherObject the object to compare (may be null, unaffected)
+     * @param otherObject the object to compare (unaffected) or {@code null}
      * @return {@code true} if {@code this} and {@code otherObject} have the
      * same type and virtual address, otherwise {@code false}
      */

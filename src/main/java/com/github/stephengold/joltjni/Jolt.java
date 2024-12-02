@@ -267,7 +267,7 @@ final public class Jolt {
     native public static void profileEnd();
 
     /**
-     * Increment profiler's frame counter.
+     * Increment the profiler's frame counter.
      */
     native public static void profileNextFrame();
 

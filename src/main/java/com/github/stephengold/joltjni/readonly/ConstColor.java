@@ -38,7 +38,7 @@ public interface ConstColor {
     byte getA();
 
     /**
-     * Return the 3th (blue) component. The color is unaffected.
+     * Return the 3rd (blue) component. The color is unaffected.
      *
      * @return the component value
      */

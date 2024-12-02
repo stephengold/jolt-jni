@@ -78,7 +78,7 @@ public class VehicleController extends NonCopyable implements RefTarget {
     /**
      * Access the underlying constraint.
      *
-     * @return the pre-existing object (may be null)
+     * @return the pre-existing object or {@code null}
      */
     public VehicleConstraint getConstraint() {
         return (VehicleConstraint) getContainingObject();

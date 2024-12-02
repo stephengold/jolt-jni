@@ -258,8 +258,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Alter the positional tolerance used when generating generate the hull.
-     * (native attribute: mHullTolerance)
+     * Alter the positional tolerance used when generating the hull. (native
+     * attribute: mHullTolerance)
      *
      * @param tolerance the desired tolerance (&ge;0, default=0.001)
      */

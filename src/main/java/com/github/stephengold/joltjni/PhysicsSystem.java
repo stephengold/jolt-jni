@@ -289,7 +289,7 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Access the system's interface for coarse collision queries.
      *
-     * @return the pre-existing JVM object, or null if the system hasn't be
+     * @return the pre-existing JVM object, or null if the system hasn't been
      * initialized yet
      */
     public BroadPhaseQuery getBroadPhaseQuery() {
@@ -579,7 +579,7 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @param recorder where to save the state (not null)
      * @param bitmask which aspects of the simulation to save
-     * @param filter select which parts to save (may be null, unaffected)
+     * @param filter select which parts to save (unaffected) or {@code null}
      */
     public void saveState(
             StateRecorder recorder, int bitmask, StateRecorderFilter filter) {

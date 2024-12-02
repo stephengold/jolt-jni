@@ -59,11 +59,11 @@ public enum EShapeSubType {
      */
     ConvexHull,
     /**
-     * StaticCompundShape
+     * StaticCompoundShape
      */
     StaticCompound,
     /**
-     * MutableCompundShape
+     * MutableCompoundShape
      */
     MutableCompound,
     /**

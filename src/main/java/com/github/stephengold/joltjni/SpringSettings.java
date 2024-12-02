@@ -194,7 +194,7 @@ final public class SpringSettings extends JoltPhysicsObject {
      * <p>
      * Effective only when the mode is FrequencyAndDamping. If positive, the
      * constraint will have soft limits, and mFrequency specifies the
-     * oscillation frequency in Hz. Otherwise the constraint will have hard
+     * oscillation frequency in Hz. Otherwise, the constraint will have hard
      * limits.
      *
      * @param frequency the desired frequency (default=0)

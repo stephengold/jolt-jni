@@ -56,7 +56,7 @@ public class PathConstraintPath
 
     /**
      * Return the path amount of the location on the path that's closest to the
-     * specified location. The path is uanffected.
+     * specified location. The path is unaffected.
      *
      * @param location the input location (in system coordinates, not null,
      * unaffected)
