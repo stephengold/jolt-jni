@@ -410,7 +410,7 @@ publishMavenPublicationToMavenLocal.doLast {
 
 // Signing relies on the existence of 2 properties
 // (signingKeyEncoded and signingPassword)
-// which should be stored in ~/.gradle/gradle.properties
+// which should be set in ~/.gradle/gradle.properties
 // or passed in the command line
 
 signing {
