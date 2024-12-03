@@ -513,7 +513,6 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         Mat44 result = new Mat44(resultVa, true);
 
         return result;
-
     }
     // *************************************************************************
     // Object methods

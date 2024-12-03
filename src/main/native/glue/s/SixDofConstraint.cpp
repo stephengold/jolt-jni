@@ -88,7 +88,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_ge
             = (SixDOFConstraintSettings::EAxis) axisOrdinal;
     const float result = pConstraint->GetLimitsMax(axis);
     return result;
- }
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraint
