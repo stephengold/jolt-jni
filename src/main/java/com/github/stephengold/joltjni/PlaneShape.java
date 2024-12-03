@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstPlane;
 
 /**
@@ -31,6 +32,47 @@ import com.github.stephengold.joltjni.readonly.ConstPlane;
 public class PlaneShape extends Shape {
     // *************************************************************************
     // constructors
+
+    /**
+     * Instantiate the specified shape without creating a settings object.
+     *
+     * @param plane the plane to use (not null, unaffected)
+     */
+    public PlaneShape(ConstPlane plane) {
+        this(plane, null);
+    }
+
+    /**
+     * Instantiate the specified shape without creating a settings object.
+     *
+     * @param plane the plane to use (not null, unaffected)
+     * @param material the desired surface properties (unaffected) or
+     * {@code null} for default properties (default=null)
+     */
+    public PlaneShape(ConstPlane plane, ConstPhysicsMaterial material) {
+        this(plane, material, PlaneShapeSettings.cDefaultHalfExtent);
+    }
+
+    /**
+     * Instantiate the specified shape without creating a settings object.
+     *
+     * @param plane the plane to use (not null, unaffected)
+     * @param material the desired surface properties (unaffected) or
+     * {@code null} for default properties (default=null)
+     * @param halfExtent the desired radius of the bounding box (&gt;0,
+     * default=1000)
+     */
+    public PlaneShape(
+            ConstPlane plane, ConstPhysicsMaterial material, float halfExtent) {
+        float nx = plane.getNormalX();
+        float ny = plane.getNormalY();
+        float nz = plane.getNormalZ();
+        float planeConstant = plane.getConstant();
+        long materialVa = (material == null) ? 0L : material.targetVa();
+        long shapeVa = createShape(
+                nx, ny, nz, planeConstant, materialVa, halfExtent);
+        setVirtualAddress(shapeVa, null); // not the owner due to ref counting
+    }
 
     /**
      * Instantiate a shape with the specified native object assigned but not
@@ -62,6 +104,9 @@ public class PlaneShape extends Shape {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createShape(float nx, float ny, float nz,
+            float planeConstant, long materialVa, float halfExtent);
 
     native private static float getPlaneConstant(long shapeVa);
 

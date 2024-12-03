@@ -26,8 +26,26 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/Shape/PlaneShape.h"
 #include "auto/com_github_stephengold_joltjni_PlaneShape.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_PlaneShape
+ * Method:    createShape
+ * Signature: (FFFFJF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShape_createShape
+  (JNIEnv *, jclass, jfloat nx, jfloat ny, jfloat nz, jfloat planeConstant,
+  jlong materialVa, jfloat halfExtent) {
+    const Vec3 normal(nx, ny, nz);
+    const Plane plane(normal, planeConstant);
+    const PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    PlaneShape * const pShape = new PlaneShape(plane, pMaterial, halfExtent);
+    TRACE_NEW("PlaneShape", pShape)
+    return reinterpret_cast<jlong> (pShape);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_PlaneShape
