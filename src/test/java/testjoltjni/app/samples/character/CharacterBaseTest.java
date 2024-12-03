@@ -53,13 +53,13 @@ ShapeRefC mCrouchingShape = new ShapeRefC();
 ShapeRefC mInnerCrouchingShape = new ShapeRefC();
 ShapeRefC mInnerStandingShape = new ShapeRefC();
 BodyIdVector mRampBlocks = new BodyIdVector();
-float mRampBlocksTimeLeft = 0.0f;
+float mRampBlocksTimeLeft;
 BodyId mConveyorBeltBody = new BodyId();
 BodyId mSensorBody = new BodyId();
 CharacterVsCharacterCollisionSimple mCharacterVsCharacterCollision = new CharacterVsCharacterCollisionSimple();
 private enum EType{Capsule, Cylinder, Box};
 private EType sShapeType = EType.Capsule;
-private float mTime = 0f;
+private float mTime;
 private RVec3 mCameraPivot = RVec3.sZero();
 private BodyId mRotatingBody = new BodyId();
 private BodyId mRotatingWallBody = new BodyId();
@@ -72,8 +72,8 @@ private CharacterRef mAnimatedCharacter=new CharacterRef();
 private CharacterVirtualRef mAnimatedCharacterVirtual=new CharacterVirtualRef();
 private CharacterVirtualRef mAnimatedCharacterVirtualWithInnerBody=new CharacterVirtualRef();
 private Vec3 mControlInput = Vec3.sZero();
-private boolean mJump = false;
-private boolean mSwitchStance = false;
+private boolean mJump;
+private boolean mSwitchStance;
 
 private String sScenes[] =
 {
