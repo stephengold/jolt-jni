@@ -200,6 +200,22 @@ final public class Jolt {
     native public static boolean isDoublePrecision();
 
     /**
+     * Create a direct {@code ByteBuffer} with the specified capacity.
+     *
+     * @param numBytes the desired capacity (in bytes)
+     * @return a new direct buffer, zeroed and rewound but not flipped
+     */
+    public static ByteBuffer newDirectByteBuffer(int numBytes) {
+        ByteBuffer result = ByteBuffer.allocateDirect(numBytes);
+        result.order(ByteOrder.nativeOrder());
+
+        assert result.capacity() == numBytes : result.capacity();
+        assert result.limit() == numBytes : result.limit();
+        assert result.position() == 0 : result.position();
+        return result;
+    }
+
+    /**
      * Create a direct {@code FloatBuffer} with native byte order and the
      * specified capacity.
      *
