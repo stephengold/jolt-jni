@@ -19,37 +19,25 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
 
-/**
- * A {@code Shape} that won't collide with anything and has zero volume.
- *
- * @author Stephen Gold sgold@sonic.net
+/*
+ * Author: Stephen Gold
  */
-public class EmptyShape extends Shape {
-    // *************************************************************************
-    // constructors
+#include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/Shape/EmptyShape.h"
+#include "auto/com_github_stephengold_joltjni_EmptyShape.h"
+#include "glue/glue.h"
 
-    /**
-     * Instantiate a default shape without creating a settings object.
-     */
-    public EmptyShape() {
-        long shapeVa = createDefault();
-        setVirtualAddress(shapeVa, null); // not the owner due to ref counting
-    }
+using namespace JPH;
 
-    /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
-     *
-     * @param shapeVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    EmptyShape(long shapeVa) {
-        super(shapeVa);
-    }
-    // *************************************************************************
-    // native private methods
-
-    native private static long createDefault();
+/*
+ * Class:     com_github_stephengold_joltjni_EmptyShape
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShape_createDefault
+  (JNIEnv *, jclass) {
+    EmptyShape * const pResult = new EmptyShape();
+    TRACE_NEW("EmptyShape", pResult)
+    return reinterpret_cast<jlong> (pResult);
 }
