@@ -417,8 +417,6 @@ public void Initialize()
 
 				triangles.add(new Triangle(s2, b2, rs2));
 				triangles.add(new Triangle(rs2, b2, rb2));
-
-				p1 = p2;
 			}
 
 			MeshShapeSettings mesh=new MeshShapeSettings(triangles);
@@ -464,7 +462,6 @@ public void Initialize()
 				triangles.add(new Triangle(b1, s2, b2));
 				triangles.add(new Triangle(s1, p1, p2));
 				triangles.add(new Triangle(s1, p2, s2));
-				p1 = p2;
 			}
 
 			MeshShapeSettings mesh=new MeshShapeSettings(triangles);
