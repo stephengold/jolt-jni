@@ -305,8 +305,8 @@ void CreateFastSmallConvexObjects()
 
 	// Create many instances with high velocity
 	DefaultRandomEngine rnd=new DefaultRandomEngine();
-	UniformRealDistribution restitution_distrib=new UniformRealDistribution(0.0f, 0.1f);
-	UniformRealDistribution velocity_distrib=new UniformRealDistribution(-10.0f, 10.0f);
+	UniformFloatDistribution restitution_distrib=new UniformFloatDistribution(0.0f, 0.1f);
+	UniformFloatDistribution velocity_distrib=new UniformFloatDistribution(-10.0f, 10.0f);
 	for (int x = -25; x < 25; ++x)
 		for (int y = -25 ; y < 25; ++y)
 		{

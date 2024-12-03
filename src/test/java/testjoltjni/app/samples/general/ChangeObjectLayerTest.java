@@ -46,7 +46,7 @@ public void Initialize()
 
 	// Lots of dynamic objects in the DEBRIS layer
 	DefaultRandomEngine random=new DefaultRandomEngine();
-	UniformRealDistribution position_variation=new UniformRealDistribution(-10, 10);
+	UniformFloatDistribution position_variation=new UniformFloatDistribution(-10, 10);
 	for (int i = 0; i < 50; ++i)
 	{
 		RVec3 position=new RVec3(position_variation.nextFloat(random), 2.0f, position_variation.nextFloat(random));
@@ -70,7 +70,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		mBodyInterface.setPosition(mMoving,new RVec3(0, 1.5f, 0), EActivation.Activate);
 
 		DefaultRandomEngine random=new DefaultRandomEngine();
-		UniformRealDistribution position_variation=new UniformRealDistribution(-7.5f, 7.5f);
+		UniformFloatDistribution position_variation=new UniformFloatDistribution(-7.5f, 7.5f);
 		for (BodyId id : mDebris.toList())
 		{
 			// Reposition debris

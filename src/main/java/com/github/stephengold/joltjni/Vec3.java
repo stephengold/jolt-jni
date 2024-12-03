@@ -27,7 +27,7 @@ import com.github.stephengold.joltjni.readonly.UVec4Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.DefaultRandomEngine;
 import com.github.stephengold.joltjni.std.Std;
-import com.github.stephengold.joltjni.std.UniformRealDistribution;
+import com.github.stephengold.joltjni.std.UniformFloatDistribution;
 import java.nio.FloatBuffer;
 import java.util.Objects;
 
@@ -57,7 +57,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * lazily allocated distribution, used in randomization
      */
-    private static UniformRealDistribution distro = null;
+    private static UniformFloatDistribution distro = null;
     // *************************************************************************
     // constructors
 
@@ -348,7 +348,7 @@ final public class Vec3 implements Vec3Arg {
     public static Vec3 sRandom(DefaultRandomEngine engine) {
         assert engine != null;
         if (distro == null) {
-            distro = new UniformRealDistribution(0f, 1f);
+            distro = new UniformFloatDistribution(0f, 1f);
         }
 
         float theta = Jolt.JPH_PI * distro.nextFloat(engine);

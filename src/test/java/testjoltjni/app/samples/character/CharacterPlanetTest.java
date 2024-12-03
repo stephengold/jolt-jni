@@ -60,8 +60,8 @@ public void Initialize()
 	DefaultRandomEngine random=new DefaultRandomEngine();
 	for (int i = 0; i < 200; ++i)
 	{
-		UniformRealDistribution theta=new UniformRealDistribution(0, JPH_PI);
-		UniformRealDistribution phi=new UniformRealDistribution(0, 2 * JPH_PI);
+		UniformFloatDistribution theta=new UniformFloatDistribution(0, JPH_PI);
+		UniformFloatDistribution phi=new UniformFloatDistribution(0, 2 * JPH_PI);
 		sphere.setPosition (new RVec3(star(1.1f * cPlanetRadius , Vec3.sUnitSpherical(theta.nextFloat(random), phi.nextFloat(random)))));
 		mBodyInterface.createAndAddBody(sphere, EActivation.Activate);
 	}

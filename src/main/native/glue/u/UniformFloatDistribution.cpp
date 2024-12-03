@@ -24,17 +24,17 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
-#include "auto/com_github_stephengold_joltjni_std_UniformRealDistribution.h"
+#include "auto/com_github_stephengold_joltjni_std_UniformFloatDistribution.h"
 #include "glue/glue.h"
 
 using namespace std;
 
 /*
- * Class:     com_github_stephengold_joltjni_std_UniformRealDistribution
+ * Class:     com_github_stephengold_joltjni_std_UniformFloatDistribution
  * Method:    createDistribution
  * Signature: (FF)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_UniformRealDistribution_createDistribution
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_UniformFloatDistribution_createDistribution
   (JNIEnv *, jclass, jfloat min, jfloat max) {
     uniform_real_distribution<float> * const pResult
             = new uniform_real_distribution<float>(min, max);
@@ -43,11 +43,11 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_UniformRealDistr
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_std_UniformRealDistribution
+ * Class:     com_github_stephengold_joltjni_std_UniformFloatDistribution
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_UniformRealDistribution_free
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_UniformFloatDistribution_free
   (JNIEnv *, jclass, jlong distributionVa) {
     uniform_real_distribution<float> * const pDistribution
             = reinterpret_cast<uniform_real_distribution<float> *> (distributionVa);
@@ -56,11 +56,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_UniformRealDistri
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_std_UniformRealDistribution
+ * Class:     com_github_stephengold_joltjni_std_UniformFloatDistribution
  * Method:    nextFloat
  * Signature: (JJ)F
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_UniformRealDistribution_nextFloat
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_UniformFloatDistribution_nextFloat
   (JNIEnv *, jclass, jlong distributionVa, jlong generatorVa) {
     uniform_real_distribution<float> * const pDistribution
             = reinterpret_cast<uniform_real_distribution<float> *> (distributionVa);
@@ -70,11 +70,11 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_UniformRealDist
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_std_UniformRealDistribution
+ * Class:     com_github_stephengold_joltjni_std_UniformFloatDistribution
  * Method:    nextFloatDre
  * Signature: (JJ)F
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_UniformRealDistribution_nextFloatDre
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_UniformFloatDistribution_nextFloatDre
   (JNIEnv *, jclass, jlong distributionVa, jlong generatorVa) {
     uniform_real_distribution<float> * const pDistribution
             = reinterpret_cast<uniform_real_distribution<float> *> (distributionVa);

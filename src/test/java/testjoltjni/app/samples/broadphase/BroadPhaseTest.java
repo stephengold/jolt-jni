@@ -48,7 +48,7 @@ void CreateBalancedDistribution(BodyManager inBodyManager,int inNumBodies){Creat
 void CreateBalancedDistribution(BodyManager inBodyManager, int inNumBodies, float inEnvironmentSize)
 {
 	DefaultRandomEngine random=new DefaultRandomEngine(0x1ee7c0de);
-	UniformRealDistribution zero_to_one=new UniformRealDistribution(0.0f, 1.0f);
+	UniformFloatDistribution zero_to_one=new UniformFloatDistribution(0.0f, 1.0f);
 	float n = (float)(inNumBodies);
 	Vec3 max_box_start = Vec3.sReplicate(inEnvironmentSize * (1.0f - pow(n, -1.0f / 3.0f)));
 	Vec3 min_box_size = Vec3.sReplicate(1.0f / inEnvironmentSize);

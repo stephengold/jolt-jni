@@ -68,7 +68,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		final int cNumBodiesToMove = 100;
 		BodyIdArray bodies_to_move = new BodyIdArray (cNumBodiesToMove);
 		UniformIntDistribution body_selector=new UniformIntDistribution(0, (int)mCurrentBody - 1);
-		UniformRealDistribution translation_selector=new UniformRealDistribution(1.0f, 5.0f);
+		UniformFloatDistribution translation_selector=new UniformFloatDistribution(1.0f, 5.0f);
 		for (int i = 0; i < cNumBodiesToMove; ++i)
 		{
 			Body body = body_vector.get(body_selector.nextInt(mRandomGenerator));

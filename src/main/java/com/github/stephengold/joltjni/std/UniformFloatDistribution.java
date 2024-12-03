@@ -32,7 +32,7 @@ import com.github.stephengold.joltjni.JoltPhysicsObject;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class UniformRealDistribution extends JoltPhysicsObject {
+public class UniformFloatDistribution extends JoltPhysicsObject {
     // *************************************************************************
     // constructors
 
@@ -43,7 +43,7 @@ public class UniformRealDistribution extends JoltPhysicsObject {
      * @param min the desired lower limit
      * @param max the desired upper limit
      */
-    public UniformRealDistribution(float min, float max) {
+    public UniformFloatDistribution(float min, float max) {
         long distributionVa = createDistribution(min, max);
         setVirtualAddress(distributionVa, () -> free(distributionVa));
     }

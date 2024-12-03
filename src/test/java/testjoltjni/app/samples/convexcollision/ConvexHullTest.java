@@ -521,17 +521,17 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	}
 	else
 	{
-		UniformRealDistribution zero_one=new UniformRealDistribution(0.0f, 1.0f);
-		UniformRealDistribution zero_two=new UniformRealDistribution(0.0f, 2.0f);
+		UniformFloatDistribution zero_one=new UniformFloatDistribution(0.0f, 1.0f);
+		UniformFloatDistribution zero_two=new UniformFloatDistribution(0.0f, 2.0f);
 
 		// Define vertex scale
-		UniformRealDistribution scale_start=new UniformRealDistribution(0.1f, 0.5f);
-		UniformRealDistribution scale_range=new UniformRealDistribution(0.1f, 2.0f);
+		UniformFloatDistribution scale_start=new UniformFloatDistribution(0.1f, 0.5f);
+		UniformFloatDistribution scale_range=new UniformFloatDistribution(0.1f, 2.0f);
 		float start = scale_start.nextFloat(mRandom);
-		UniformRealDistribution vertex_scale=new UniformRealDistribution(start, start + scale_range.nextFloat(mRandom));
+		UniformFloatDistribution vertex_scale=new UniformFloatDistribution(start, start + scale_range.nextFloat(mRandom));
 
 		// Define shape scale to make shape less sphere like
-		UniformRealDistribution shape_scale=new UniformRealDistribution(0.1f, 1.0f);
+		UniformFloatDistribution shape_scale=new UniformFloatDistribution(0.1f, 1.0f);
 		Vec3 scale=new Vec3(shape_scale.nextFloat(mRandom), shape_scale.nextFloat(mRandom), shape_scale.nextFloat(mRandom));
 
 		// Add some random points

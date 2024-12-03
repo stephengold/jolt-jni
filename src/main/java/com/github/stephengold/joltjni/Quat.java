@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.DefaultRandomEngine;
 import com.github.stephengold.joltjni.std.Std;
-import com.github.stephengold.joltjni.std.UniformRealDistribution;
+import com.github.stephengold.joltjni.std.UniformFloatDistribution;
 
 /**
  * A math object used to represent rotations and orientations in 3-dimensional
@@ -60,7 +60,7 @@ final public class Quat implements QuatArg {
     /**
      * lazily allocated distribution, used in randomization
      */
-    private static UniformRealDistribution distro = null;
+    private static UniformFloatDistribution distro = null;
     // *************************************************************************
     // constructors
 
@@ -192,7 +192,7 @@ final public class Quat implements QuatArg {
     public static Quat sRandom(DefaultRandomEngine engine) {
         assert engine != null;
         if (distro == null) {
-            distro = new UniformRealDistribution(0f, 1f);
+            distro = new UniformFloatDistribution(0f, 1f);
         }
 
         float x0 = distro.nextFloat(engine);

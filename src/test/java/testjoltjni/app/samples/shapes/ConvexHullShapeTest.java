@@ -109,7 +109,7 @@ public void Initialize()
 
 	// Bodies with random convex shapes
 	DefaultRandomEngine random=new DefaultRandomEngine();
-	UniformRealDistribution hull_size=new UniformRealDistribution(0.1f, 10.0f);
+	UniformFloatDistribution hull_size=new UniformFloatDistribution(0.1f, 10.0f);
 	for (int i = 0; i < 10; ++i)
 	{
 		// Create random points

@@ -261,7 +261,7 @@ void CreateRubble()
 
 	// Light convex shapes
 	DefaultRandomEngine random=new DefaultRandomEngine();
-	UniformRealDistribution hull_size=new UniformRealDistribution(0.2f, 0.4f);
+	UniformFloatDistribution hull_size=new UniformFloatDistribution(0.2f, 0.4f);
 	for (int i = 0; i < 10; ++i)
 		for (int j = 0; j < 10; ++j)
 		{

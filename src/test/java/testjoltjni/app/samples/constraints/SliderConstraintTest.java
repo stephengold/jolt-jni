@@ -60,7 +60,7 @@ public void Initialize()
 		mBodyInterface.addBody(top.getId(), EActivation.DontActivate);
 
 		DefaultRandomEngine random=new DefaultRandomEngine();
-		UniformRealDistribution displacement=new UniformRealDistribution(-1.0f, 1.0f);
+		UniformFloatDistribution displacement=new UniformFloatDistribution(-1.0f, 1.0f);
 
 		Body prev = top;
 		for (int i = 1; i < cChainLength; ++i)

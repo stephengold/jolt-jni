@@ -50,9 +50,9 @@ public void Initialize()
 	}
 
 	DefaultRandomEngine random=new DefaultRandomEngine();
-	UniformRealDistribution feature_size=new UniformRealDistribution(0.1f, 2.0f);
-	UniformRealDistribution position_variation=new UniformRealDistribution(-40, 40);
-	UniformRealDistribution scale_variation=new UniformRealDistribution(-1.5f, 1.5f);
+	UniformFloatDistribution feature_size=new UniformFloatDistribution(0.1f, 2.0f);
+	UniformFloatDistribution position_variation=new UniformFloatDistribution(-40, 40);
+	UniformFloatDistribution scale_variation=new UniformFloatDistribution(-1.5f, 1.5f);
 
 	// Random scale
 	Vec3 scale=new Vec3(scale_variation.nextFloat(random), scale_variation.nextFloat(random), scale_variation.nextFloat(random));
