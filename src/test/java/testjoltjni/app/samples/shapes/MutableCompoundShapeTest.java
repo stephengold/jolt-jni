@@ -89,19 +89,20 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 
 			// Animate sub shapes
 			int count = shape.getNumSubShapes();
-			ByteBuffer mPosition=newDirectByteBuffer(28*count);
+			ByteBuffer mPosition=newDirectByteBuffer(32*count);
 			FloatBuffer floatBuffer=mPosition.asFloatBuffer();
 			for (int i = 0; i < count; ++i)
 			{
 				final SubShape sub_shape = shape.getSubShape(i);
 				Vec3.sZero().put(floatBuffer);
+                                floatBuffer.put(0f);
                                 star(Quat.sRotation( Vec3.sRandom(consistent_random), degreesToRadians(10.0f) * inParams.mDeltaTime) , sub_shape.getRotation().normalized()).put(floatBuffer);
 			}
-                        mPosition.position(12);
+                        mPosition.position(16);
 			ByteBuffer mRotation=mPosition.slice();
 
 			// Set the new rotations/orientations on the sub shapes
-			shape.modifyShapes(0, count, mPosition, mRotation, 28, 28);
+			shape.modifyShapes(0, count, mPosition, mRotation, 32, 32);
 
 			// Initialize frame dependent random number generator
 			DefaultRandomEngine frame_random=new DefaultRandomEngine(mFrameNumber++);
