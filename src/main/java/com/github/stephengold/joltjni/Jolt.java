@@ -68,7 +68,7 @@ final public class Jolt {
     /**
      * index of the Z component, for swizzling
      */
-    final public static int SWIZZLE_Z = 2; ///< Use the Z component
+    final public static int SWIZZLE_Z = 2;
     /**
      * generic null pointer (to expedite translation of C++ code)
      */

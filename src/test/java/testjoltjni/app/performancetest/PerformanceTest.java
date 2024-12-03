@@ -197,7 +197,7 @@ public static void main(  String[] argv)throws IOException
 	if (scene == nullptr)
 		scene = create_ragdoll_scene();
 
-        // Output scene we're running
+	// Output scene we're running
 	Trace("Running scene: %s", scene.GetName());
 
 	// Load the scene
