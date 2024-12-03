@@ -35,7 +35,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class SoftBodyCreator {
 static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ,float inGridSpacing,BiFunction<Integer,Integer,Float>inVertexGetInvMass) {
-    return CreateCloth(inGridSizeX,inGridSizeZ,inGridSpacing,inVertexGetInvMass,(Integer a,Integer b)->{return new Vec3();},EBendType.None,new VertexAttributes(1e-5f, 1e-5f, 1e-5f));}
+    return CreateCloth(inGridSizeX,inGridSizeZ,inGridSpacing,inVertexGetInvMass,(Integer a,Integer b)->new Vec3(),EBendType.None,new VertexAttributes(1e-5f, 1e-5f, 1e-5f));}
 
 static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX, int inGridSizeZ, float inGridSpacing,  BiFunction<Integer, Integer,Float> inVertexGetInvMass, BiFunction<Integer, Integer,Vec3> inVertexPerturbation, EBendType inBendType, ConstVertexAttributes inVertexAttributes)
 {
