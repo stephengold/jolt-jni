@@ -58,7 +58,7 @@ List<Line> mTrackData = new ArrayList<>();
 
 public void Initialize()
 {
-	if (sSceneName.equals( "Flat")  )
+	if (strcmp(sSceneName, "Flat") == 0)
 	{
 		// Flat test floor
 		Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1000.0f, 1.0f, 1000.0f), 0.0f), new RVec3(0.0f, -1.0f, 0.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
@@ -68,7 +68,7 @@ public void Initialize()
 		// Load a race track to have something to assess speed and steering behavior
 		LoadRaceTrack("Assets/Racetracks/Zandvoort.csv");
 	}
-	else if (sSceneName.equals( "Flat With Slope")  )
+	else if (strcmp(sSceneName, "Flat With Slope") == 0)
 	{
 		final float cSlopeStartDistance = 100.0f;
 		final float cSlopeLength = 100.0f;
@@ -87,14 +87,14 @@ public void Initialize()
 		slope_down.setFriction(1.0f);
 		mBodyInterface.addBody(slope_down.getId(), EActivation.DontActivate);
 	}
-	else if (sSceneName.equals( "Steep Slope")  )
+	else if (strcmp(sSceneName, "Steep Slope") == 0)
 	{
 		// Steep slope test floor (20 degrees = 36% grade)
 		Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1000.0f, 1.0f, 1000.0f), 0.0f), new RVec3(0.0f, -1.0f, 0.0f), Quat.sRotation(Vec3.sAxisX(), degreesToRadians(-20.0f)), EMotionType.Static, Layers.NON_MOVING));
 		floor.setFriction(1.0f);
 		mBodyInterface.addBody(floor.getId(), EActivation.DontActivate);
 	}
-	else if (sSceneName.equals( "Step")  )
+	else if (strcmp(sSceneName, "Step") == 0)
 	{
 		// Flat test floor
 		Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1000.0f, 1.0f, 1000.0f), 0.0f), new RVec3(0.0f, -1.0f, 0.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
@@ -107,7 +107,7 @@ public void Initialize()
 		step.setFriction(1.0f);
 		mBodyInterface.addBody(step.getId(), EActivation.DontActivate);
 	}
-	else if (sSceneName.equals( "Dynamic Step")  )
+	else if (strcmp(sSceneName, "Dynamic Step") == 0)
 	{
 		// Flat test floor
 		Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(1000.0f, 1.0f, 1000.0f), 0.0f), new RVec3(0.0f, -1.0f, 0.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));
@@ -120,7 +120,7 @@ public void Initialize()
 		step.setFriction(1.0f);
 		mBodyInterface.addBody(step.getId(), EActivation.Activate);
 	}
-	else if (sSceneName.equals( "Playground")  )
+	else if (strcmp(sSceneName, "Playground") == 0)
 	{
 		// Scene with hilly terrain and some objects to drive into
 		Body floor = CreateMeshTerrain();
@@ -132,7 +132,7 @@ public void Initialize()
 
 		CreateRubble();
 	}
-	else if (sSceneName.equals( "Loop")  )
+	else if (strcmp(sSceneName, "Loop") == 0)
 	{
 		CreateFloor();
 

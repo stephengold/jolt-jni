@@ -168,17 +168,17 @@ public void Initialize()
 		break;
 	}
 
-	if (sSceneName.equals( "PerlinMesh")  )
+	if (strcmp(sSceneName, "PerlinMesh") == 0)
 	{
 		// Default terrain
 		CreateMeshTerrain();
 	}
-	else if (sSceneName.equals( "PerlinHeightField")  )
+	else if (strcmp(sSceneName, "PerlinHeightField") == 0)
 	{
 		// Default terrain
 		CreateHeightFieldTerrain();
 	}
-	else if (sSceneName.equals( "InitiallyIntersecting")  )
+	else if (strcmp(sSceneName, "InitiallyIntersecting") == 0)
 	{
 		CreateFloor();
 
@@ -193,7 +193,7 @@ public void Initialize()
 					mBodyInterface.createAndAddBody(settings, EActivation.DontActivate);
 				}
 	}
-	else if (sSceneName.equals( "ObstacleCourse")  )
+	else if (strcmp(sSceneName, "ObstacleCourse") == 0)
 	{
 		// Default terrain
 		CreateFloor(350.0f);

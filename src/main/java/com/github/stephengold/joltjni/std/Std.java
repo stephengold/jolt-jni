@@ -133,4 +133,18 @@ final public class Std {
      * @return the square root
      */
     native public static float sqrt(float value);
+
+    /**
+     * Compare the specified strings lexicographically.
+     *
+     * @param lhs the first string to compare (not null)
+     * @param rhs the 2nd string to compare (not null)
+     * @return a negative value if {@code lhs} precedes {@code rhs} in
+     * lexicographical order, or greater than zero if {@code lhs} follows
+     * {@code rhs}, or zero if they are equal
+     */
+    public static int strcmp(String lhs, String rhs) {
+        int result = lhs.compareTo(rhs);
+        return result;
+    }
 }

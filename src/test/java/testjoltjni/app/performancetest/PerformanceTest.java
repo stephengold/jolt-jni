@@ -127,27 +127,27 @@ public static void main(  String[] argv)throws IOException
 			// Parse threads
 			specified_threads = Integer.parseInt(arg.substring(3)  );
 		}
-		else if (arg. equals("-no_sleep")  )
+		else if (strcmp(arg, "-no_sleep") == 0)
 		{
 			disable_sleep = true;
 		}
-		else if (arg. equals("-p")  )
+		else if (strcmp(arg, "-p") == 0)
 		{
 			enable_profiler = true;
 		}
-		else if (arg.equals("-r")&&implementsDebugRendering())
+		else if (strcmp(arg, "-r") == 0&&implementsDebugRendering())
 		{
 			enable_debug_renderer = true;
 		}
-		else if (arg.equals("-f"))
+		else if (strcmp(arg, "-f") == 0)
 		{
 			enable_per_frame_recording = true;
 		}
-		else if (arg. equals("-rs")  )
+		else if (strcmp(arg, "-rs") == 0)
 		{
 			record_state = true;
 		}
-		else if (arg. equals("-vs")  )
+		else if (strcmp(arg, "-vs") == 0)
 		{
 			validate_state = true;
 		}
@@ -160,7 +160,7 @@ public static void main(  String[] argv)throws IOException
 			// Parse repeat count
 			repeat = Integer.parseInt(arg.substring(  8));
 		}
-		else if (arg. equals("-h")  )
+		else if (strcmp(arg, "-h") == 0)
 		{
 			// Print usage
 			Trace("Usage:\n"
