@@ -75,6 +75,24 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape
 
 /*
  * Class:     com_github_stephengold_joltjni_MutableCompoundShape
+ * Method:    modifyShapes
+ * Signature: (JIILjava/nio/ByteBuffer;Ljava/nio/ByteBuffer;II)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_modifyShapes
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jint startIndex, jint numSubShapes,
+  jobject offsets, jobject rotations, jint offsetStride, jint rotationStride) {
+    MutableCompoundShape * const pCompound
+            = reinterpret_cast<MutableCompoundShape *> (shapeVa);
+    const Vec3 * const pOffsets
+            = (Vec3 *) pEnv->GetDirectBufferAddress(offsets);
+    const Quat * const pRotations
+            = (Quat *) pEnv->GetDirectBufferAddress(rotations);
+    pCompound->ModifyShapes(startIndex, numSubShapes, pOffsets, pRotations,
+            offsetStride, rotationStride);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_MutableCompoundShape
  * Method:    removeShape
  * Signature: (JI)V
  */

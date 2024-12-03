@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.ByteBuffer;
 
 /**
  * A {@code CompoundShape} whose subshapes can be modified after the shape is
@@ -88,6 +89,28 @@ public class MutableCompoundShape extends CompoundShape {
     }
 
     /**
+     * Re-position multiple subshapes.
+     *
+     * @param startIndex index of the first shape to reposition (&ge;0)
+     * @param numSubshapes the number of subshapes to reposition (&ge;0)
+     * @param offsets the desired offsets (not null, unaffected,
+     * length&ge;numSubShapes)
+     * @param rotations the desired rotations (not null, unaffected,
+     * length&ge;numSubShapes)
+     * @param offsetStride the number of bytes between the starting positions of
+     * sequential offsets (&gt;0)
+     * @param rotationStride the number of bytes between the starting positions
+     * of sequential rotations (&gt;0)
+     */
+    public void modifyShapes(
+            int startIndex, int numSubshapes, ByteBuffer offsets,
+            ByteBuffer rotations, int offsetStride, int rotationStride) {
+        long shapeVa = va();
+        modifyShapes(shapeVa, startIndex, numSubshapes, offsets, rotations,
+                offsetStride, rotationStride);
+    }
+
+    /**
      * Remove the specified subshape.
      *
      * @param index the index of the subshape to remove (&ge;0)
@@ -106,6 +129,10 @@ public class MutableCompoundShape extends CompoundShape {
     native private static void adjustCenterOfMass(long shapeVa);
 
     native private static long createMutableCompoundShape();
+
+    native private static void modifyShapes(
+            long shapeVa, int startIndex, int numSubshapes, ByteBuffer offsets,
+            ByteBuffer rotations, int offsetStride, int rotationStide);
 
     native private static void removeShape(long shapeVa, int index);
 }
