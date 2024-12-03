@@ -129,6 +129,19 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
+     * Read a string of text.
+     *
+     * @param javaString the value for validation (not null)
+     * @return the string that was read
+     */
+    public String readString(String javaString) {
+        long recorderVa = va();
+        String result = readString(recorderVa, javaString);
+
+        return result;
+    }
+
+    /**
      * Read a vector.
      *
      * @param inOut the value for validation (not null, modified)
@@ -217,6 +230,16 @@ public class StateRecorder extends NonCopyable {
     }
 
     /**
+     * Write the specified text string.
+     *
+     * @param javaString the string to write (not null)
+     */
+    public void write(String javaString) {
+        long recorderVa = va();
+        writeString(recorderVa, javaString);
+    }
+
+    /**
      * Write the value of the specified vector.
      *
      * @param v the vector to write (not null, unaffected)
@@ -262,6 +285,8 @@ public class StateRecorder extends NonCopyable {
 
     native private static void readRVec3(long recorderVa, double[] tmpDoubles);
 
+    native private static String readString(long recorderVa, String javaString);
+
     native private static void readVec3(long recorderVa, float[] storeFloats);
 
     native private static void setValidating(long recorderVa, boolean setting);
@@ -279,6 +304,8 @@ public class StateRecorder extends NonCopyable {
 
     native private static void writeRVec3(
             long recorderVa, double xx, double yy, double zz);
+
+    native private static void writeString(long recorderVa, String javaString);
 
     native private static void writeVec3(
             long recorderVa, float x, float y, float z);

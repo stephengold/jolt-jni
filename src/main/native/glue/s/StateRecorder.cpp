@@ -147,6 +147,25 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readRVe
 
 /*
  * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    readString
+ * Signature: (JLjava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readString
+  (JNIEnv *pEnv, jclass, jlong recorderVa, jstring javaString) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    jboolean isCopy;
+    const char * const cString = pEnv->GetStringUTFChars(javaString, &isCopy);
+    std::string cppString(cString);
+    pEnv->ReleaseStringUTFChars(javaString, cString);
+    pRecorder->Read(cppString);
+    const char * const pResult = cppString.c_str();
+    jstring result = pEnv->NewStringUTF(pResult);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
  * Method:    readVec3
  * Signature: (J[F)V
  */
@@ -253,6 +272,22 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_writeRV
             = reinterpret_cast<StateRecorder *> (recorderVa);
     const RVec3 rvec3(xx, yy, zz);
     pRecorder->Write(rvec3);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StateRecorder
+ * Method:    writeString
+ * Signature: (JLjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_writeString
+  (JNIEnv *pEnv, jclass, jlong recorderVa, jstring javaString) {
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    jboolean isCopy;
+    const char * const cString = pEnv->GetStringUTFChars(javaString, &isCopy);
+    std::string cppString(cString);
+    pEnv->ReleaseStringUTFChars(javaString, cString);
+    pRecorder->Write(cppString);
 }
 
 /*
