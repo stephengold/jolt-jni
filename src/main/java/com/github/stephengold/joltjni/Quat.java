@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.DefaultRandomEngine;
 import com.github.stephengold.joltjni.std.Std;
 import com.github.stephengold.joltjni.std.UniformFloatDistribution;
+import java.nio.FloatBuffer;
 
 /**
  * A math object used to represent rotations and orientations in 3-dimensional
@@ -351,6 +352,20 @@ final public class Quat implements QuatArg {
     public Quat normalized() {
         Quat result = Op.star(1f / length(), this);
         return result;
+    }
+
+    /**
+     * Write all 4 components to the specified buffer and advance the buffer's
+     * position by 4. The quaternion is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    @Override
+    public void put(FloatBuffer storeBuffer) {
+        storeBuffer.put(x);
+        storeBuffer.put(y);
+        storeBuffer.put(z);
+        storeBuffer.put(w);
     }
 
     /**

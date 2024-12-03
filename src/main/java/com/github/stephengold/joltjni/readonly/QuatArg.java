@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.Vec3;
+import java.nio.FloatBuffer;
 
 /**
  * Read-only access to a {@code Quat}. (native type: const Quat)
@@ -110,6 +111,14 @@ public interface QuatArg {
      * @return a new quaternion
      */
     Quat normalized();
+
+    /**
+     * Write all 4 components to the specified buffer and advance the buffer's
+     * position by 4. The quaternion is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    void put(FloatBuffer storeBuffer);
 
     /**
      * Apply the rotation to (1,0,0). The quaternion is assumed to be normalized
