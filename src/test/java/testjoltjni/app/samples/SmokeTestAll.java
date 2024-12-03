@@ -148,6 +148,7 @@ final public class SmokeTestAll {
         smokeTest(new CapsuleShapeTest());
         smokeTest(new ConvexHullShapeTest());
         smokeTest(new DeformedHeightFieldShapeTest());
+        smokeTest(new MutableCompoundShapeTest());
 
         // softbody package:
         smokeTest(new SoftBodyPressureTest());
