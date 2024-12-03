@@ -55,3 +55,22 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CompoundShape_getSub
             = &pShape->GetSubShape(subShapeIndex);
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_CompoundShape
+ * Method:    restoreSubShapeState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CompoundShape_restoreSubShapeState
+  (JNIEnv *, jclass, jlong shapeVa, jlong listVa) {
+    CompoundShape * const pCompound
+            = reinterpret_cast<CompoundShape *> (shapeVa);
+    const ShapeList * const pList = reinterpret_cast<ShapeList *> (listVa);
+    const uint numShapes = pList->size();
+    ShapeRefC * const pSubShapes = new ShapeRefC[numShapes];
+    for (int i = 0; i < numShapes; ++i) {
+        pSubShapes[i] = pList->at(i);
+    }
+    pCompound->RestoreSubShapeState(pSubShapes, numShapes);
+    delete[] pSubShapes;
+}

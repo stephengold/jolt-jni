@@ -74,10 +74,24 @@ abstract public class CompoundShape extends Shape {
 
         return result;
     }
+
+    /**
+     * Restore the subshape references after invoking
+     * {@code sRestoreFromBinaryState()}.
+     *
+     * @param subshapes the desired subshape references (not null)
+     */
+    public void restoreSubShapeState(ShapeList subshapes) {
+        long shapeVa = va();
+        long listVa = subshapes.va();
+        restoreSubShapeState(shapeVa, listVa);
+    }
     // *************************************************************************
     // native private methods
 
     native private static int getNumSubShapes(long shapeVa);
 
     native private static long getSubShape(long shapeVa, int subShapeIndex);
+
+    native private static void restoreSubShapeState(long shapeVa, long listVa);
 }
