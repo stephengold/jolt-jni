@@ -63,11 +63,11 @@ public class PlaneShape extends Shape {
     // *************************************************************************
     // native private methods
 
-    native private static long getPlaneConstant(long shapeVa);
+    native private static float getPlaneConstant(long shapeVa);
 
-    native private static long getPlaneX(long shapeVa);
+    native private static float getPlaneX(long shapeVa);
 
-    native private static long getPlaneY(long shapeVa);
+    native private static float getPlaneY(long shapeVa);
 
-    native private static long getPlaneZ(long shapeVa);
+    native private static float getPlaneZ(long shapeVa);
 }

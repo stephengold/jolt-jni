@@ -32,9 +32,9 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_PlaneShape
  * Method:    getPlaneConstant
- * Signature: (J)J
+ * Signature: (J)F
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneConstant
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneConstant
   (JNIEnv *, jclass, jlong planeVa) {
     const PlaneShape * const pShape
             = reinterpret_cast<PlaneShape *> (planeVa);
@@ -45,9 +45,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneC
 /*
  * Class:     com_github_stephengold_joltjni_PlaneShape
  * Method:    getPlaneX
- * Signature: (J)J
+ * Signature: (J)F
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneX
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneX
   (JNIEnv *, jclass, jlong planeVa) {
     const PlaneShape * const pShape
             = reinterpret_cast<PlaneShape *> (planeVa);
@@ -58,9 +58,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneX
 /*
  * Class:     com_github_stephengold_joltjni_PlaneShape
  * Method:    getPlaneY
- * Signature: (J)J
+ * Signature: (J)F
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneY
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneY
   (JNIEnv *, jclass, jlong planeVa) {
     const PlaneShape * const pShape
             = reinterpret_cast<PlaneShape *> (planeVa);
@@ -71,9 +71,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneY
 /*
  * Class:     com_github_stephengold_joltjni_PlaneShape
  * Method:    getPlaneZ
- * Signature: (J)J
+ * Signature: (J)F
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneZ
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneZ
   (JNIEnv *, jclass, jlong planeVa) {
     const PlaneShape * const pShape
             = reinterpret_cast<PlaneShape *> (planeVa);
