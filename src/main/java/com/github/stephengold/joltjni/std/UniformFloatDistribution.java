@@ -53,7 +53,7 @@ public class UniformFloatDistribution extends JoltPhysicsObject {
     /**
      * Iterate and return the next {@code float} value in the sequence.
      *
-     * @param generator the sequence generator to use (not null)
+     * @param generator the sequence generator to use (not null, modified)
      * @return the value
      */
     public float nextFloat(DefaultRandomEngine generator) {
@@ -67,7 +67,7 @@ public class UniformFloatDistribution extends JoltPhysicsObject {
     /**
      * Iterate and return the next {@code float} value in the sequence.
      *
-     * @param generator the sequence generator to use (not null)
+     * @param generator the sequence generator to use (not null, modified)
      * @return the value
      */
     public float nextFloat(Mt19937 generator) {

@@ -53,7 +53,7 @@ public class UniformIntDistribution extends JoltPhysicsObject {
     /**
      * Iterate and return the next {@code int} value in the sequence.
      *
-     * @param generator the sequence generator to use (not null)
+     * @param generator the sequence generator to use (not null, modified)
      * @return the value
      */
     public int nextInt(DefaultRandomEngine generator) {
@@ -67,7 +67,7 @@ public class UniformIntDistribution extends JoltPhysicsObject {
     /**
      * Iterate and return the next {@code int} value in the sequence.
      *
-     * @param generator the sequence generator to use (not null)
+     * @param generator the sequence generator to use (not null, modified)
      * @return the value
      */
     public int nextInt(Mt19937 generator) {
