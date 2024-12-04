@@ -94,11 +94,11 @@ public class PlaneShape extends Shape {
      */
     public ConstPlane getPlane() {
         long shapeVa = va();
-        float c = getPlaneConstant(shapeVa);
         float nx = getPlaneX(shapeVa);
         float ny = getPlaneY(shapeVa);
         float nz = getPlaneZ(shapeVa);
-        ConstPlane result = new Plane(nx, ny, nz, c);
+        float planeConstant = getPlaneConstant(shapeVa);
+        ConstPlane result = new Plane(nx, ny, nz, planeConstant);
 
         return result;
     }
