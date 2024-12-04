@@ -150,6 +150,7 @@ final public class SmokeTestAll {
         smokeTest(new CylinderShapeTest());
         smokeTest(new DeformedHeightFieldShapeTest());
         smokeTest(new EmptyShapeTest());
+        smokeTest(new HeightFieldShapeTest());
         smokeTest(new MeshShapeTest());
         smokeTest(new MutableCompoundShapeTest());
         smokeTest(new PlaneShapeTest());
