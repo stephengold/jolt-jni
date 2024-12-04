@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
+
 /**
  * A {@code Shape} to represent a surface defined by a collection of triangles.
  *
@@ -40,4 +42,24 @@ public class MeshShape extends Shape {
     MeshShape(long shapeVa) {
         super(shapeVa);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the user data of the specified subshape. THe shape is unaffected.
+     *
+     * @param id the ID of the subshape to read (not null, unaffected)
+     * @return the value
+     */
+    public int getTriangleUserData(ConstSubShapeId id) {
+        long shapeVa = va();
+        long idVa = id.targetVa();
+        int result = getTriangleUserData(shapeVa, idVa);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static int getTriangleUserData(long shapeVa, long idVa);
 }
