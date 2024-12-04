@@ -45,6 +45,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SubShapeId_conten
 
 /*
  * Class:     com_github_stephengold_joltjni_SubShapeId
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeId_createDefault
+  (JNIEnv *, jclass) {
+    SubShapeID * const pId = new SubShapeID();
+    TRACE_NEW("SubShapeID", pId)
+    return reinterpret_cast<jlong> (pId);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SubShapeId
  * Method:    free
  * Signature: (J)V
  */

@@ -34,6 +34,14 @@ public class SubShapeId extends JoltPhysicsObject implements ConstSubShapeId {
     // constructors
 
     /**
+     * Instantiate a default ID.
+     */
+    public SubShapeId() {
+        long idVa = createDefault();
+        setVirtualAddress(idVa, () -> free(idVa));
+    }
+
+    /**
      * Instantiate an ID with the specified native object assigned but not
      * owned.
      * <p>
@@ -90,6 +98,8 @@ public class SubShapeId extends JoltPhysicsObject implements ConstSubShapeId {
     // native private methods
 
     native private static boolean contentEquals(long idVa, long otherIdVa);
+
+    native private static long createDefault();
 
     native private static void free(long idVa);
 
