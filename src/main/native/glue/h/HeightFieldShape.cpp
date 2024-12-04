@@ -83,6 +83,28 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShape
+ * Method:    getSurfaceNormal
+ * Signature: (JJFFF[F)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_getSurfaceNormal
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jlong idVa, jfloat x, jfloat y, jfloat z,
+  jfloatArray storeFloats) {
+    const HeightFieldShape * const pShape
+            = reinterpret_cast<HeightFieldShape *> (shapeVa);
+    const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
+    const Vec3 localLocation(x, y, z);
+    Vec3 result = pShape->GetSurfaceNormal(*pId, localLocation);
+    jboolean isCopy;
+    jfloat * const pStoreFloats
+            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    pStoreFloats[0] = result.GetX();
+    pStoreFloats[1] = result.GetY();
+    pStoreFloats[2] = result.GetZ();
+    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShape
  * Method:    isNoCollision
  * Signature: (JII)Z
  */
@@ -91,6 +113,30 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_
     const HeightFieldShape * const pShape
             = reinterpret_cast<HeightFieldShape *> (shapeVa);
     const bool result = pShape->IsNoCollision(x, y);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShape
+ * Method:    projectOntoSurface
+ * Signature: (JFFF[FJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_projectOntoSurface
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jfloat x, jfloat y, jfloat z,
+  jfloatArray storeFloats, jlong idVa) {
+    const HeightFieldShape * const pShape
+            = reinterpret_cast<HeightFieldShape *> (shapeVa);
+    const Vec3 localLocation(x, y, z);
+    SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
+    Vec3 outLocation;
+    bool result = pShape->ProjectOntoSurface(localLocation, outLocation, *pId);
+    jboolean isCopy;
+    jfloat * const pStoreFloats
+            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    pStoreFloats[0] = outLocation.GetX();
+    pStoreFloats[1] = outLocation.GetY();
+    pStoreFloats[2] = outLocation.GetZ();
+    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
     return result;
 }
 

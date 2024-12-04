@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
 /**
@@ -75,6 +77,27 @@ public class HeightFieldShape extends Shape {
     }
 
     /**
+     * Calculate the normal to the surface at the specified surface location.
+     *
+     * @param id which subshape to use (not null, unaffected)
+     * @param localLocation the location relative to the shape's center of mass
+     * (not null, unaffected)
+     * @return a new direction vector
+     */
+    public Vec3 getSurfaceNormal(ConstSubShapeId id, Vec3Arg localLocation) {
+        long shapeVa = va();
+        long idVa = id.targetVa();
+        float x = localLocation.getX();
+        float y = localLocation.getY();
+        float z = localLocation.getZ();
+        float[] storeFloats = new float[3];
+        getSurfaceNormal(shapeVa, idVa, x, y, z, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
      * Test whether the shape has a hole at the specified sample. The shape is
      * unaffected.
      *
@@ -86,6 +109,32 @@ public class HeightFieldShape extends Shape {
         long shapeVa = va();
         boolean result = isNoCollision(shapeVa, x, y);
 
+        return result;
+    }
+
+    /**
+     * Project the specified location along the Y axis to find a location on the
+     * surface.
+     *
+     * @param localLocation the location relative to the shape's center of mass
+     * (not null, unaffected)
+     * @param storeSurfaceLocation storage for the surface location (not null,
+     * modified)
+     * @param storeId storage for the subshape (not null, modified)
+     * @return {@code true} if a valid surface location was found, otherwise
+     * {@code false}
+     */
+    public boolean projectOntoSurface(Vec3Arg localLocation,
+            Vec3 storeSurfaceLocation, SubShapeId storeId) {
+        long shapeVa = va();
+        float x = localLocation.getX();
+        float y = localLocation.getY();
+        float z = localLocation.getZ();
+        float[] storeFloats = new float[3];
+        long idVa = storeId.va();
+        boolean result
+                = projectOntoSurface(shapeVa, x, y, z, storeFloats, idVa);
+        storeSurfaceLocation.set(storeFloats);
         return result;
     }
 
@@ -147,7 +196,13 @@ public class HeightFieldShape extends Shape {
 
     native private static float getPositionZ(long shapeVa, int x, int y);
 
+    native private static void getSurfaceNormal(long shapeVa, long idVa,
+            float x, float y, float z, float[] storeFloats);
+
     native private static boolean isNoCollision(long shapeVa, int x, int y);
+
+    native private static boolean projectOntoSurface(long shapeVa,
+            float x, float y, float z, float[] storeFloats, long idVa);
 
     native private static void setHeights(long shapeVa, int startX, int startY,
             int sizeX, int sizeY, FloatBuffer heights, int stride,
