@@ -75,7 +75,7 @@ public class TriangleShape extends ConvexShape {
         float v3z = v3.getZ();
         long shapeVa = createTriangleShape(
                 v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, convexRadius);
-        setVirtualAddress(shapeVa, null); // not the owner due to ref counting
+        setVirtualAddress(shapeVa); // not the owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

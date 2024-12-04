@@ -65,7 +65,7 @@ public class RotatedTranslatedShape extends DecoratedShape {
         long baseShapeVa = baseShape.targetVa();
         long scaledShapeVa = createRotatedTranslatedShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
-        setVirtualAddress(scaledShapeVa, null); // no owner due to ref counting
+        setVirtualAddress(scaledShapeVa); // no owner due to ref counting
     }
 
     /**
@@ -88,7 +88,7 @@ public class RotatedTranslatedShape extends DecoratedShape {
         long baseShapeVa = baseShape.targetVa();
         long scaledShapeVa = createRotatedTranslatedShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
-        setVirtualAddress(scaledShapeVa, null); // no owner due to ref counting
+        setVirtualAddress(scaledShapeVa); // no owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

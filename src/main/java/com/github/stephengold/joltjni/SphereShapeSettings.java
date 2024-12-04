@@ -63,7 +63,7 @@ public class SphereShapeSettings extends ConvexShapeSettings {
     public SphereShapeSettings(float radius, ConstPhysicsMaterial material) {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSphereShapeSettings(radius, materialVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Sphere);
     }
     // *************************************************************************

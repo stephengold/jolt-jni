@@ -51,7 +51,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      */
     public FixedConstraintSettings() {
         long settingsVa = createFixedConstraintSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Fixed);
     }
     // *************************************************************************

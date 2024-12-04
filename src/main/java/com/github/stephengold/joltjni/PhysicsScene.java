@@ -39,7 +39,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
      */
     public PhysicsScene() {
         long sceneVa = createDefaultScene();
-        setVirtualAddress(sceneVa, null); // not the owner due to ref counting
+        setVirtualAddress(sceneVa); // not the owner due to ref counting
     }
 
     /**

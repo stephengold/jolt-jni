@@ -85,7 +85,7 @@ public class BoxShape extends ConvexShape {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long shapeVa = createBoxShape(xHalfExtent, yHalfExtent, zHalfExtent,
                 convexRadius, materialVa);
-        setVirtualAddress(shapeVa, null); // not the owner due to ref counting
+        setVirtualAddress(shapeVa); // not the owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

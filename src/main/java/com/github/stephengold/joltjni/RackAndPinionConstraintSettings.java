@@ -39,7 +39,7 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RackAndPinionConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.RackAndPinion);
     }
 

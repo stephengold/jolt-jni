@@ -40,7 +40,7 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      */
     public PathConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Path);
     }
 

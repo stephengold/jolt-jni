@@ -64,7 +64,7 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
             float halfHeight, float radius, PhysicsMaterial material) {
         long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createShapeSettings(halfHeight, radius, materialVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Capsule);
     }
     // *************************************************************************

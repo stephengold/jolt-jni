@@ -79,7 +79,7 @@ public class PlaneShapeSettings extends ShapeSettings {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createPlaneShapeSettings(
                 nx, ny, nz, planeConstant, materialVa, halfExtent);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Plane);
     }
 

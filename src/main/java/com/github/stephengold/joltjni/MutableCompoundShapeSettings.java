@@ -37,7 +37,7 @@ public class MutableCompoundShapeSettings extends CompoundShapeSettings {
      */
     public MutableCompoundShapeSettings() {
         long settingsVa = createMutableCompoundShapeSettings();
-        setVirtualAddress(settingsVa, null); // no owner due to ref counting
+        setVirtualAddress(settingsVa); // no owner due to ref counting
         setSubType(EShapeSubType.MutableCompound);
     }
 

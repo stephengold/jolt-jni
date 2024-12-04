@@ -40,7 +40,7 @@ public class PhysicsStepListenerContext extends JoltPhysicsObject {
      * zero)
      */
     public PhysicsStepListenerContext(long contextVa) {
-        setVirtualAddress(contextVa, null);
+        setVirtualAddress(contextVa);
     }
     // *************************************************************************
     // new methods exposed

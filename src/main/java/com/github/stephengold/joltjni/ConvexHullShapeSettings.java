@@ -95,7 +95,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
                 numPoints, buffer, maxConvexRadius, materialVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.ConvexHull);
     }
 
@@ -118,7 +118,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
             settingsVa = createSettings(
                     numPoints, buffer, Jolt.cDefaultConvexRadius, 0L);
         }
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.ConvexHull);
     }
 
@@ -153,7 +153,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
                 numPoints, buffer, maxConvexRadius, materialVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.ConvexHull);
     }
 
@@ -198,7 +198,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
                 numPoints, points, maxConvexRadius, materialVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.ConvexHull);
     }
     // *************************************************************************

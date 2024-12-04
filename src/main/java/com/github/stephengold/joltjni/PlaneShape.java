@@ -71,7 +71,7 @@ public class PlaneShape extends Shape {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long shapeVa = createShape(
                 nx, ny, nz, planeConstant, materialVa, halfExtent);
-        setVirtualAddress(shapeVa, null); // not the owner due to ref counting
+        setVirtualAddress(shapeVa); // not the owner due to ref counting
     }
 
     /**

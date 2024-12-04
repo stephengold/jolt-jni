@@ -54,7 +54,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public SixDofConstraintSettings() {
         long settingsVa = createSixDofConstraintSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.SixDof);
     }
     // *************************************************************************

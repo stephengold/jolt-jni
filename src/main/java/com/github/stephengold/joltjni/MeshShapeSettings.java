@@ -61,7 +61,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long indicesVa = indices.va();
         long settingsVa
                 = createMeshShapeSettings(numVertices, vBuffer, indicesVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Mesh);
     }
 
@@ -86,7 +86,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long indicesVa = itList.va();
         long settingsVa
                 = createMeshShapeSettings(numVertices, vBuffer, indicesVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Mesh);
     }
 
@@ -107,7 +107,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long indicesVa = indices.va();
         long settingsVa
                 = createMeshShapeSettings(numVertices, vBuffer, indicesVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Mesh);
     }
 
@@ -138,7 +138,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long materialsVa = materials.va();
         long settingsVa = createSettingsFromTriangles(
                 numTriangles, buffer, materialsVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Mesh);
     }
 
@@ -154,7 +154,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long indicesVa = indices.va();
         long settingsVa
                 = createMeshShapeSettings(numVertices, buffer, indicesVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Mesh);
     }
 
@@ -185,7 +185,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long materialsVa = materials.va();
         long settingsVa = createSettingsFromTriangles(
                 numTriangles, buffer, materialsVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Mesh);
     }
     // *************************************************************************

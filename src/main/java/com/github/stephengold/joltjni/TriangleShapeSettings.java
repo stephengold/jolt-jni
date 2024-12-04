@@ -92,7 +92,7 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createTriangleShapeSettings(v1x, v1y, v1z, v2x, v2y,
                 v2z, v3x, v3y, v3z, convexRadius, materialVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Triangle);
     }
     // *************************************************************************

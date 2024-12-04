@@ -73,7 +73,7 @@ public class Character extends CharacterBase implements ConstCharacter {
         long systemVa = system.va();
         long characterVa = createCharacter(settingsVa, locX, locY, locZ,
                 qx, qy, qz, qw, userData, systemVa);
-        setVirtualAddress(characterVa, null); // not owner due to ref counting
+        setVirtualAddress(characterVa); // not owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

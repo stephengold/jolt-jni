@@ -40,7 +40,7 @@ public class CollidePointResult extends JoltPhysicsObject {
      * (not zero)
      */
     public CollidePointResult(long pointResultVa) {
-        setVirtualAddress(pointResultVa, null);
+        setVirtualAddress(pointResultVa);
     }
     // *************************************************************************
     // new methods exposed

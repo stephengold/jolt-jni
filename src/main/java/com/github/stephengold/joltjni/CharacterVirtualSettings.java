@@ -43,7 +43,7 @@ public class CharacterVirtualSettings
      */
     public CharacterVirtualSettings() {
         long settingsVa = createCharacterVirtualSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
     }
 
     /**

@@ -58,7 +58,7 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
         long baseShapeRefVa = baseShapeRef.va();
         long ocomssVa = createSettingsFromShapeRef(
                 offsetX, offsetY, offsetZ, baseShapeRefVa);
-        setVirtualAddress(ocomssVa, null); // no owner due to ref counting
+        setVirtualAddress(ocomssVa); // no owner due to ref counting
         setSubType(EShapeSubType.OffsetCenterOfMass);
     }
 
@@ -77,7 +77,7 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
         long baseShapeSettingsVa = baseShapeSettings.va();
         long ocomssVa = createSettingsFromSettings(
                 offsetX, offsetY, offsetZ, baseShapeSettingsVa);
-        setVirtualAddress(ocomssVa, null); // no owner due to ref counting
+        setVirtualAddress(ocomssVa); // no owner due to ref counting
         setSubType(EShapeSubType.OffsetCenterOfMass);
     }
     // *************************************************************************

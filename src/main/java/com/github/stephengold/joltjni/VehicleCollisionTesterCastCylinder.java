@@ -50,7 +50,7 @@ public class VehicleCollisionTesterCastCylinder extends VehicleCollisionTester {
     public VehicleCollisionTesterCastCylinder(
             int objectLayer, float convexRadiusFraction) {
         long testerVa = createTester(objectLayer, convexRadiusFraction);
-        setVirtualAddress(testerVa, null); // not the owner due to ref counting
+        setVirtualAddress(testerVa); // not the owner due to ref counting
     }
 
     /**
@@ -61,7 +61,7 @@ public class VehicleCollisionTesterCastCylinder extends VehicleCollisionTester {
      * zero)
      */
     VehicleCollisionTesterCastCylinder(long testerVa) {
-        setVirtualAddress(testerVa, null); // not the owner due to ref counting
+        setVirtualAddress(testerVa); // not the owner due to ref counting
     }
     // *************************************************************************
     // VehicleCollisionTester methods

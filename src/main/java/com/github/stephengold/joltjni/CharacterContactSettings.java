@@ -41,7 +41,7 @@ final public class CharacterContactSettings extends JoltPhysicsObject {
      * zero)
      */
     public CharacterContactSettings(long settingsVa) {
-        setVirtualAddress(settingsVa, null);
+        setVirtualAddress(settingsVa);
     }
     // *************************************************************************
     // new methods exposed

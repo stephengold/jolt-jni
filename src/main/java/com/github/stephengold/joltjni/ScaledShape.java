@@ -46,7 +46,7 @@ public class ScaledShape extends DecoratedShape {
         float scaleZ = scaleFactors.getZ();
         long scaledShapeVa
                 = createScaledShape(baseShapeVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(scaledShapeVa, null); // no owner due to ref counting
+        setVirtualAddress(scaledShapeVa); // no owner due to ref counting
     }
 
     /**
@@ -75,7 +75,7 @@ public class ScaledShape extends DecoratedShape {
         float scaleZ = scaleFactors.getZ();
         long scaledShapeVa
                 = createScaledShape(baseShapeVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(scaledShapeVa, null); // no owner due to ref counting
+        setVirtualAddress(scaledShapeVa); // no owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

@@ -37,7 +37,7 @@ public class EmptyShapeSettings extends ShapeSettings {
      */
     public EmptyShapeSettings() {
         long settingsVa = createEmptyShapeSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Empty);
     }
 

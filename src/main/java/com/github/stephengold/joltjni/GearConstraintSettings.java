@@ -50,7 +50,7 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      */
     public GearConstraintSettings() {
         long settingsVa = createGearConstraintSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Gear);
     }
     // *************************************************************************

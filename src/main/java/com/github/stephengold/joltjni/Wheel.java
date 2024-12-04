@@ -47,7 +47,7 @@ public class Wheel extends NonCopyable {
      * zero)
      */
     Wheel(long wheelVa) {
-        setVirtualAddress(wheelVa, null);
+        setVirtualAddress(wheelVa);
         long settingsVa = getSettings(wheelVa);
         if (this instanceof WheelTv) {
             this.settings = new WheelSettingsTv(settingsVa).toRef();

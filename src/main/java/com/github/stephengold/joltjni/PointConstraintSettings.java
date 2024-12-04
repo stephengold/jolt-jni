@@ -39,7 +39,7 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
      */
     public PointConstraintSettings() {
         long settingsVa = createPointConstraintSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Point);
     }
 

@@ -60,7 +60,7 @@ public class CylinderShape extends ConvexShape {
      */
     public CylinderShape(float halfHeight, float radius, float convexRadius) {
         long shapeVa = createCylinderShape(halfHeight, radius, convexRadius);
-        setVirtualAddress(shapeVa, null); // not the owner due to ref counting
+        setVirtualAddress(shapeVa); // not the owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

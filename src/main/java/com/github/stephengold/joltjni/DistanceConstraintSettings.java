@@ -50,7 +50,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
      */
     public DistanceConstraintSettings() {
         long settingsVa = createDistanceConstraintSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Distance);
     }
     // *************************************************************************

@@ -66,7 +66,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         long baseShapeVa = baseShape.targetVa();
         long rtssVa = createSettingsFromShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
-        setVirtualAddress(rtssVa, null); // no owner due to ref counting
+        setVirtualAddress(rtssVa); // no owner due to ref counting
         setSubType(EShapeSubType.RotatedTranslated);
     }
 
@@ -90,7 +90,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         long baseShapeRefVa = baseShapeRef.va();
         long rtssVa = createSettingsFromShapeRef(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeRefVa);
-        setVirtualAddress(rtssVa, null); // no owner due to ref counting
+        setVirtualAddress(rtssVa); // no owner due to ref counting
         setSubType(EShapeSubType.RotatedTranslated);
     }
 
@@ -114,7 +114,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         long baseShapeSettingsVa = baseShapeSettings.va();
         long rtssVa = createSettingsFromShapeSettings(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeSettingsVa);
-        setVirtualAddress(rtssVa, null); // no owner due to ref counting
+        setVirtualAddress(rtssVa); // no owner due to ref counting
         setSubType(EShapeSubType.RotatedTranslated);
     }
     // *************************************************************************

@@ -56,16 +56,4 @@ abstract public class SerializableObject extends NonCopyable {
     SerializableObject(long virtualAddress) {
         super(virtualAddress);
     }
-    // *************************************************************************
-    // protected methods
-
-    /**
-     * Assign a native object, assuming there's none already assigned.
-     *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
-     */
-    final void setVirtualAddress(long virtualAddress) {
-        setVirtualAddress(virtualAddress, null);
-    }
 }

@@ -57,7 +57,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         float scaleZ = scaleFactors.getZ();
         long settingsVa = createScaledShapeSettingsFromShape(
                 baseShapeVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(settingsVa, null); // no owner due to ref counting
+        setVirtualAddress(settingsVa); // no owner due to ref counting
         setSubType(EShapeSubType.Scaled);
     }
 
@@ -75,7 +75,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         float scaleZ = scaleFactors.getZ();
         long settingsVa = createScaledShapeSettingsFromRef(
                 baseShapeRefVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(settingsVa, null); // no owner due to ref counting
+        setVirtualAddress(settingsVa); // no owner due to ref counting
         setSubType(EShapeSubType.Scaled);
     }
 
@@ -93,7 +93,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         float scaleZ = scaleFactors.getZ();
         long settingsVa = createScaledShapeSettingsFromSettings(
                 baseSettingsVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(settingsVa, null); // no owner due to ref counting
+        setVirtualAddress(settingsVa); // no owner due to ref counting
         setSubType(EShapeSubType.Scaled);
     }
 
@@ -112,7 +112,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         float scaleZ = scaleFactors.getZ();
         long settingsVa = createScaledShapeSettingsFromSettings(
                 baseSettingsVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(settingsVa, null); // no owner due to ref counting
+        setVirtualAddress(settingsVa); // no owner due to ref counting
         setSubType(EShapeSubType.Scaled);
     }
     // *************************************************************************

@@ -37,7 +37,7 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
      */
     public PhysicsMaterialSimple() {
         long materialVa = createDefault();
-        setVirtualAddress(materialVa, null); // not owner due to ref counting
+        setVirtualAddress(materialVa); // not owner due to ref counting
     }
 
     /**
@@ -49,7 +49,7 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
     public PhysicsMaterialSimple(String name, ConstColor color) {
         int colorInt = color.getUInt32();
         long materialVa = create(name, colorInt);
-        setVirtualAddress(materialVa, null); // not owner due to ref counting
+        setVirtualAddress(materialVa); // not owner due to ref counting
     }
     // *************************************************************************
     // native private methods

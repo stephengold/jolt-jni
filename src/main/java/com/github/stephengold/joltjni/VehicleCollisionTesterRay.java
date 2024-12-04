@@ -69,7 +69,7 @@ public class VehicleCollisionTesterRay extends VehicleCollisionTester {
         float uy = up.getY();
         float uz = up.getZ();
         long testerVa = createTester(objectLayer, ux, uy, uz, maxSlopeAngle);
-        setVirtualAddress(testerVa, null); // not the owner due to ref counting
+        setVirtualAddress(testerVa); // not the owner due to ref counting
     }
 
     /**
@@ -80,7 +80,7 @@ public class VehicleCollisionTesterRay extends VehicleCollisionTester {
      * zero)
      */
     VehicleCollisionTesterRay(long testerVa) {
-        setVirtualAddress(testerVa, null); // not the owner due to ref counting
+        setVirtualAddress(testerVa); // not the owner due to ref counting
     }
     // *************************************************************************
     // VehicleCollisionTester methods

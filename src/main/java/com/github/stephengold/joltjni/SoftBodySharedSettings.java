@@ -42,7 +42,7 @@ public class SoftBodySharedSettings
      */
     public SoftBodySharedSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
     }
 
     /**
@@ -52,7 +52,7 @@ public class SoftBodySharedSettings
      * zero)
      */
     SoftBodySharedSettings(long settingsVa) {
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

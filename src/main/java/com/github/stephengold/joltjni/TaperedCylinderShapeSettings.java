@@ -82,7 +82,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createShapeSettings(
                 halfHeight, topRadius, bottomRadius, convexRadius, materialVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.TaperedCylinder);
     }
     // *************************************************************************

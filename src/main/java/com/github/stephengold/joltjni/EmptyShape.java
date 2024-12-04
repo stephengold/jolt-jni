@@ -35,7 +35,7 @@ public class EmptyShape extends Shape {
      */
     public EmptyShape() {
         long shapeVa = createDefault();
-        setVirtualAddress(shapeVa, null); // not the owner due to ref counting
+        setVirtualAddress(shapeVa); // not the owner due to ref counting
     }
 
     /**

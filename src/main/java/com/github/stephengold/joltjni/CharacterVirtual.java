@@ -90,7 +90,7 @@ public class CharacterVirtual
         long systemVa = system.va();
         long characterVa = createCharacterVirtual(settingsVa, locX, locY, locZ,
                 qx, qy, qz, qw, userData, systemVa);
-        setVirtualAddress(characterVa, null); // not owner due to ref counting
+        setVirtualAddress(characterVa); // not owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

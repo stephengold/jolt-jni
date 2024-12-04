@@ -84,7 +84,7 @@ public class BoxShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createBoxShapeSettings(
                 hx, hy, hz, convexRadius, materialVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Box);
     }
     // *************************************************************************

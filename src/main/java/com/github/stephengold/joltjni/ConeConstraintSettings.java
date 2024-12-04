@@ -51,7 +51,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public ConeConstraintSettings() {
         long settingsVa = createConeConstraintSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Cone);
     }
     // *************************************************************************

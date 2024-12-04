@@ -48,7 +48,7 @@ public class SphereShape extends ConvexShape {
      */
     public SphereShape(float radius) {
         long shapeVa = createSphereShape(radius);
-        setVirtualAddress(shapeVa, null); // not the owner due to ref counting
+        setVirtualAddress(shapeVa); // not the owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

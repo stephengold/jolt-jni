@@ -39,7 +39,7 @@ public class SubShape extends JoltPhysicsObject {
      * zero)
      */
     SubShape(long subshapeVa) {
-        setVirtualAddress(subshapeVa, null);
+        setVirtualAddress(subshapeVa);
     }
     // *************************************************************************
     // new methods exposed

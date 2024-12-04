@@ -38,7 +38,7 @@ public class CombineFunction extends JoltPhysicsObject {
      * @param functionVa the virtual address to assign (not zero)
      */
     CombineFunction(long functionVa) {
-        setVirtualAddress(functionVa, null);
+        setVirtualAddress(functionVa);
     }
     // *************************************************************************
     // new methods exposed

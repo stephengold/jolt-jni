@@ -44,7 +44,7 @@ public class BodyActivationListener extends JoltPhysicsObject {
      * zero)
      */
     BodyActivationListener(long listenerVa) {
-        setVirtualAddress(listenerVa, null);
+        setVirtualAddress(listenerVa);
     }
     // *************************************************************************
     // new protected methods

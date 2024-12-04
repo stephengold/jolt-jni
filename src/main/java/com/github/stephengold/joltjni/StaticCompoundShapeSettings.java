@@ -37,7 +37,7 @@ public class StaticCompoundShapeSettings extends CompoundShapeSettings {
      */
     public StaticCompoundShapeSettings() {
         long settingsVa = createStaticCompoundShapeSettings();
-        setVirtualAddress(settingsVa, null); // no owner due to ref counting
+        setVirtualAddress(settingsVa); // no owner due to ref counting
         setSubType(EShapeSubType.StaticCompound);
     }
 

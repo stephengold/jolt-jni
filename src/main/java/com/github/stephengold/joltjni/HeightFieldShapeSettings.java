@@ -99,7 +99,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
         long settingsVa = createSettingsFromArray(
                 samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,
                 sampleCount, materialIndices, listVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.HeightField);
     }
 
@@ -160,7 +160,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
         long settingsVa = createSettingsFromBuffer(
                 samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,
                 sampleCount, materialIndices, listVa);
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.HeightField);
     }
     // *************************************************************************

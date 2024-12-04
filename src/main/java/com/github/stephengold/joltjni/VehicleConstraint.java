@@ -51,8 +51,7 @@ public class VehicleConstraint
         long bodyVa = body.va();
         long settingsVa = settings.va();
         long constraintVa = createConstraint(bodyVa, settingsVa);
-        setVirtualAddress(constraintVa, null);
-        // not the owner due to ref counting
+        setVirtualAddress(constraintVa); // not the owner due to ref counting
     }
 
     /**

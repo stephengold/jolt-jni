@@ -55,7 +55,7 @@ public class CollideShapeResult
      * (not zero)
      */
     public CollideShapeResult(long shapeResultVa) {
-        setVirtualAddress(shapeResultVa, null);
+        setVirtualAddress(shapeResultVa);
     }
     // *************************************************************************
     // ConstCollideShapeResult methods

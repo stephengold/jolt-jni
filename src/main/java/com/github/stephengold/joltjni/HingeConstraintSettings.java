@@ -40,7 +40,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public HingeConstraintSettings() {
         long settingsVa = createHingeConstraintSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Hinge);
     }
 

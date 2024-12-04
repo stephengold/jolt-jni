@@ -42,7 +42,7 @@ final public class ContactManifold
      * zero)
      */
     public ContactManifold(long pairVa) {
-        setVirtualAddress(pairVa, null);
+        setVirtualAddress(pairVa);
     }
     // *************************************************************************
     // ConstContactManifolds methods

@@ -52,7 +52,7 @@ public class ContactSettings
      * zero)
      */
     public ContactSettings(long settingsVa) {
-        setVirtualAddress(settingsVa, null);
+        setVirtualAddress(settingsVa);
     }
     // *************************************************************************
     // new methods exposed

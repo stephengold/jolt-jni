@@ -39,7 +39,7 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      */
     public PulleyConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Pulley);
     }
 

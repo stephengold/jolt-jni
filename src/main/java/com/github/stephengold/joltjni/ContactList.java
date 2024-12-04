@@ -41,7 +41,7 @@ public class ContactList extends Array<Contact> {
      * zero)
      */
     ContactList(long listVa) {
-        setVirtualAddress(listVa, null);
+        setVirtualAddress(listVa);
     }
     // *************************************************************************
     // Array<Contact> methods

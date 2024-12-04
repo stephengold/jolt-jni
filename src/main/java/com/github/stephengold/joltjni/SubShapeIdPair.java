@@ -44,7 +44,7 @@ final public class SubShapeIdPair
      * zero)
      */
     public SubShapeIdPair(long pairVa) {
-        setVirtualAddress(pairVa, null);
+        setVirtualAddress(pairVa);
     }
     // *************************************************************************
     // ConstSubShapeIdPair methods

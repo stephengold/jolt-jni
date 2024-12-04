@@ -51,7 +51,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      */
     public SliderConstraintSettings() {
         long settingsVa = createSliderConstraintSettings();
-        setVirtualAddress(settingsVa, null); // not owner due to ref counting
+        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Slider);
     }
     // *************************************************************************
