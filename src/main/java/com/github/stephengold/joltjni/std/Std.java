@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.std;
 
 import java.io.PrintStream;
+import java.util.List;
 
 /**
  * Java equivalents for features of the {@code std::} namespace.
@@ -119,6 +120,39 @@ final public class Std {
     native public static float pow(float base, float exponent);
 
     /**
+     * Shuffle the specified array.
+     *
+     * @param indices the values to shuffle (not null, modified)
+     * @param generator the sequence generator to use (not null, modified)
+     */
+    public static void shuffle(int[] indices, DefaultRandomEngine generator) {
+        long generatorVa = generator.va();
+        shuffle(indices, generatorVa);
+    }
+
+    /**
+     * Shuffle the specified Java list.
+     *
+     * @param list the list to shuffle (not null, modified)
+     * @param generator the sequence generator to use (not null, modified)
+     */
+    public static void shuffle(
+            List<Object> list, DefaultRandomEngine generator) {
+        int numElements = list.size();
+        int[] indices = new int[numElements];
+        Object[] originals = new Object[numElements];
+        for (int i = 0; i < numElements; ++i) {
+            indices[i] = i;
+            originals[i] = list.get(i);
+        }
+        shuffle(indices, generator);
+        for (int i = 0; i < numElements; ++i) {
+            int newI = indices[i];
+            list.set(newI, originals[i]);
+        }
+    }
+
+    /**
      * Return the sine of the specified single-precision angle.
      *
      * @param angle the input angle (in radians)
@@ -147,4 +181,8 @@ final public class Std {
         int result = lhs.compareTo(rhs);
         return result;
     }
+    // *************************************************************************
+    // native private methods
+
+    native private static void shuffle(int[] indices, long generatorVa);
 }

@@ -113,3 +113,26 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_sqrt
     float result = std::sqrt(value);
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_Std
+ * Method:    shuffle
+ * Signature: ([IJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_Std_shuffle
+  (JNIEnv *pEnv, jclass, jintArray indices, jlong generatorVa) {
+    jboolean isCopy;
+    jint * const pIndices = pEnv->GetIntArrayElements(indices, &isCopy);
+    jsize numIndices = pEnv->GetArrayLength(indices);
+    JPH::Array<jint> arr(numIndices);
+    for (int i = 0; i < numIndices; ++i) {
+        arr[i] = pIndices[i];
+    }
+    std::default_random_engine * const pGenerator
+            = reinterpret_cast<std::default_random_engine *> (generatorVa);
+    std::shuffle(arr.begin(), arr.end(), *pGenerator);
+    for (int i = 0; i < numIndices; ++i) {
+        pIndices[i] = arr[i];
+    }
+    pEnv->ReleaseIntArrayElements(indices, pIndices, 0);
+}
