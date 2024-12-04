@@ -199,6 +199,20 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getInnerRadiu
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    getLeafShape
+ * Signature: (JJJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getLeafShape
+  (JNIEnv *, jclass, jlong currentVa, jlong idVa, jlong remainderVa) {
+    const Shape * const pCurrent = reinterpret_cast<Shape *> (currentVa);
+    const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
+    SubShapeID * const pRemainder = reinterpret_cast<SubShapeID *> (remainderVa);
+    const Shape * const pResult = pCurrent->GetLeafShape(*pId, *pRemainder);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    getLocalBounds
  * Signature: (J)J
  */

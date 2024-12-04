@@ -273,6 +273,28 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
+     * Access the leaf shape for the specified subshape ID.
+     *
+     * @param id an ID that indicates the path to the desired leaf shape (not
+     * null, unaffected)
+     * @param storeRemainder storage for the remainder of the ID after removing
+     * the path to the leaf shape (not null, modified)
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if the ID is invalid
+     */
+    @Override
+    public ConstShape getLeafShape(
+            ConstSubShapeId id, SubShapeId storeRemainder) {
+        long currentVa = va();
+        long idVa = id.targetVa();
+        long remainderVa = storeRemainder.va();
+        long leafVa = getLeafShape(currentVa, idVa, remainderVa);
+        ConstShape result = Shape.newShape(leafVa);
+
+        return result;
+    }
+
+    /**
      * Return a bounding box that includes the convex radius. The shape is
      * unaffected.
      *
@@ -532,6 +554,9 @@ abstract public class Shape extends NonCopyable
     native static float getCenterOfMassZ(long shapeVa);
 
     native static float getInnerRadius(long shapeVa);
+
+    native static long getLeafShape(
+            long currentVa, long idVa, long remainderVa);
 
     native static long getLocalBounds(long shapeVa);
 

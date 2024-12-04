@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.Stats;
 import com.github.stephengold.joltjni.StreamOut;
+import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
@@ -103,6 +104,18 @@ public interface ConstShape extends ConstJoltPhysicsObject {
      * @return the radius (&ge;0)
      */
     float getInnerRadius();
+
+    /**
+     * Access the leaf shape for the specified subshape ID.
+     *
+     * @param id an ID that indicates the path to the desired leaf shape (not
+     * null, unaffected)
+     * @param storeRemainder storage for the remainder of the ID after removing
+     * the path to the leaf shape (not null, modified)
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if the ID is invalid
+     */
+    ConstShape getLeafShape(ConstSubShapeId id, SubShapeId storeRemainder);
 
     /**
      * Return a bounding box that includes the convex radius. The shape is
