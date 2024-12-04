@@ -36,7 +36,8 @@ using namespace JPH;
  * Signature: (FFFFJF)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_createPlaneShapeSettings
-  (JNIEnv *, jclass, jfloat nx, jfloat ny, jfloat nz, jfloat planeConstant, jlong materialVa, jfloat halfExtent) {
+  (JNIEnv *, jclass, jfloat nx, jfloat ny, jfloat nz, jfloat planeConstant,
+  jlong materialVa, jfloat halfExtent) {
     const Vec3 normal(nx, ny, nz);
     const Plane plane(normal, planeConstant);
     const PhysicsMaterial * const pMaterial

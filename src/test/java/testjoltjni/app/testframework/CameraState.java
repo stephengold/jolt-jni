@@ -22,8 +22,7 @@ SOFTWARE.
 package testjoltjni.app.testframework;
 import com.github.stephengold.joltjni.*;
 /**
- * A line-for-line Java translation of the Jolt Physics camera setup for
- * debug rendering.
+ * A line-for-line Java translation of the Jolt Physics camera setup for debug rendering.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/TestFramework/Renderer/Renderer.h
