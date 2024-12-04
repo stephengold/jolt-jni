@@ -47,6 +47,11 @@ final public class SmokeTestAll {
      */
     private static DebugRenderer renderer;
     /**
+     * how many physics steps to simulate for each invocation of
+     * {@code smokeTest()}
+     */
+    private static int numSteps = 1;
+    /**
      * count invocations of {@code smokeTest()}
      */
     private static int numTests;
@@ -152,9 +157,16 @@ final public class SmokeTestAll {
         smokeTest(new EmptyShapeTest());
         smokeTest(new HeightFieldShapeTest());
         smokeTest(new MeshShapeTest());
+        smokeTest(new MeshShapeUserDataTest());
         smokeTest(new MutableCompoundShapeTest());
+        smokeTest(new OffsetCenterOfMassShapeTest());
         smokeTest(new PlaneShapeTest());
         smokeTest(new RotatedTranslatedShapeTest());
+        smokeTest(new SphereShapeTest());
+        smokeTest(new StaticCompoundShapeTest());
+        smokeTest(new TaperedCapsuleShapeTest());
+        smokeTest(new TaperedCylinderShapeTest());
+        smokeTest(new TriangleShapeTest());
 
         // softbody package:
         smokeTest(new SoftBodyPressureTest());
@@ -194,18 +206,20 @@ final public class SmokeTestAll {
         PhysicsSystem physicsSystem = newPhysicsSystem(10_240);
         test.SetPhysicsSystem(physicsSystem);
 
-        // Initialize and single-step the test:
         test.Initialize();
 
-        PreUpdateParams params = new PreUpdateParams();
-        params.mDeltaTime = 0.02f;
-        test.PrePhysicsUpdate(params);
+        // Single-step the physics numSteps times:
+        for (int i = 0; i < numSteps; ++i) {
+            PreUpdateParams params = new PreUpdateParams();
+            params.mDeltaTime = 0.02f;
+            test.PrePhysicsUpdate(params);
 
-        int collisionSteps = 1;
-        physicsSystem.update(
-                params.mDeltaTime, collisionSteps, tempAllocator, jobSystem);
+            int collisionSteps = 1;
+            physicsSystem.update(params.mDeltaTime, collisionSteps,
+                    tempAllocator, jobSystem);
 
-        test.PostPhysicsUpdate(params.mDeltaTime);
+            test.PostPhysicsUpdate(params.mDeltaTime);
+        }
 
         test.Cleanup();
         System.gc();
