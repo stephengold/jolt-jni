@@ -33,6 +33,14 @@ public class Skeleton extends JoltPhysicsObject implements RefTarget {
     // constructors
 
     /**
+     * Instantiate a default skeleton.
+     */
+    public Skeleton() {
+        long skeletonVa = createDefault();
+        setVirtualAddress(skeletonVa); // not owner due to ref counting
+    }
+
+    /**
      * Instantiate a skeleton with the specified native object assigned but not
      * owned.
      *
@@ -46,11 +54,50 @@ public class Skeleton extends JoltPhysicsObject implements RefTarget {
     // new methods exposed
 
     /**
+     * Add a root joint.
+     *
+     * @param name the desired joint name
+     * @return the index of the new joint
+     */
+    public int addJoint(String name) {
+        long skeletonVa = va();
+        int result = addRootJoint(skeletonVa, name);
+
+        return result;
+    }
+
+    /**
+     * Add a non-root joint.
+     *
+     * @param name the desired joint name
+     * @param parentIndex the index of the desired parent joint
+     * @return the index of the new joint
+     */
+    public int addJoint(String name, int parentIndex) {
+        long skeletonVa = va();
+        int result = addJointWithParent(skeletonVa, name, parentIndex);
+
+        return result;
+    }
+
+    /**
      * Fill in the parent joint indices based on name.
      */
     public void calculateParentJointIndices() {
         long skeletonVa = va();
         calculateParentJointIndices(skeletonVa);
+    }
+
+    /**
+     * Count how many joints are in the skeleton.
+     *
+     * @return the count (&ge;0)
+     */
+    public int getJointCount() {
+        long skeletonVa = va();
+        int result = getJointCount(skeletonVa);
+
+        return result;
     }
     // *************************************************************************
     // RefTarget methods
@@ -92,9 +139,18 @@ public class Skeleton extends JoltPhysicsObject implements RefTarget {
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
+
+    native static int addJointWithParent(
+            long skeletonVa, String name, int parentIndex);
+
+    native static int addRootJoint(long skeletonVa, String name);
 
     native private static void calculateParentJointIndices(long skeletonVa);
+
+    native private static long createDefault();
+
+    native static int getJointCount(long skeletonVa);
 
     native private static int getRefCount(long skeletonVa);
 

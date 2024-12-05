@@ -40,6 +40,36 @@ IMPLEMENT_REF(Skeleton,
 
 /*
  * Class:     com_github_stephengold_joltjni_Skeleton
+ * Method:    addJointWithParent
+ * Signature: (JLjava/lang/String;I)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Skeleton_addJointWithParent
+  (JNIEnv *pEnv, jclass, jlong skeletonVa, jstring name, jint parentIndex) {
+    Skeleton * const pSkeleton = reinterpret_cast<Skeleton *> (skeletonVa);
+    jboolean isCopy;
+    const char * pName = pEnv->GetStringUTFChars(name, &isCopy);
+    uint result = pSkeleton->AddJoint(pName, parentIndex);
+    pEnv->ReleaseStringUTFChars(name, pName);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Skeleton
+ * Method:    addRootJoint
+ * Signature: (JLjava/lang/String;)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Skeleton_addRootJoint
+  (JNIEnv *pEnv, jclass, jlong skeletonVa, jstring name) {
+    Skeleton * const pSkeleton = reinterpret_cast<Skeleton *> (skeletonVa);
+    jboolean isCopy;
+    const char * pName = pEnv->GetStringUTFChars(name, &isCopy);
+    uint result = pSkeleton->AddJoint(pName);
+    pEnv->ReleaseStringUTFChars(name, pName);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Skeleton
  * Method:    calculateParentJointIndices
  * Signature: (J)V
  */
@@ -47,6 +77,30 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Skeleton_calculatePar
   (JNIEnv *, jclass, jlong skeletonVa) {
     Skeleton * const pSkeleton = reinterpret_cast<Skeleton *> (skeletonVa);
     pSkeleton->CalculateParentJointIndices();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Skeleton
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skeleton_createDefault
+  (JNIEnv *, jclass) {
+    Skeleton * const pSkeleton = new Skeleton();
+    TRACE_NEW("Skeleton", pSkeleton)
+    return reinterpret_cast<jlong> (pSkeleton);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Skeleton
+ * Method:    getJointCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Skeleton_getJointCount
+  (JNIEnv *, jclass, jlong skeletonVa) {
+    const Skeleton * const pSkeleton = reinterpret_cast<Skeleton *> (skeletonVa);
+    const int result = pSkeleton->GetJointCount();
+    return result;
 }
 
 /*
