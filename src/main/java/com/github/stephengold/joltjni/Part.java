@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
+
 /**
  * Settings used to generate a rigid body in a {@code Ragdoll}. (native type:
  * RagdollSettings::Part)
@@ -48,11 +50,13 @@ public class Part extends BodyCreationSettings {
      * Return the settings to create the joint to the part's parent. The part is
      * unaffected. (native attribute: mToParent)
      *
+     * @param subType foo
      * @return a new JVM with the pre-exising native object assigned
      */
-    public ConstraintSettings getToParent() {
+    public ConstraintSettings getToParent(EConstraintSubType subType) {
         long partVa = va();
-        long settingsVa = getToParent(partVa);
+        int ordinal = subType.ordinal();
+        long settingsVa = getToParent(partVa, ordinal);
         ConstraintSettings result
                 = ConstraintSettings.newConstraintSettings(settingsVa);
 
@@ -73,7 +77,7 @@ public class Part extends BodyCreationSettings {
     // *************************************************************************
     // native private methods
 
-    native private static long getToParent(long partVa);
+    native private static long getToParent(long partVa, int ordinal);
 
     native private static void setToParent(long partVa, long settingsVa);
 }

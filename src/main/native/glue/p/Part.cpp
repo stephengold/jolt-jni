@@ -29,17 +29,23 @@ SOFTWARE.
 
 using namespace JPH;
 
+extern uint64 cstMask;
+
 /*
  * Class:     com_github_stephengold_joltjni_Part
  * Method:    getToParent
- * Signature: (J)J
+ * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Part_getToParent
-  (JNIEnv *, jclass, jlong partVa) {
+  (JNIEnv *, jclass, jlong partVa, jint ordinal) {
     const RagdollSettings::Part * const pPart
             = reinterpret_cast<RagdollSettings::Part *> (partVa);
     Ref<TwoBodyConstraintSettings> ref = pPart->mToParent;
     TwoBodyConstraintSettings * const pResult = ref.GetPtr();
+    if (pResult) {
+        pResult->mUserData
+                = pResult->mUserData & ~cstMask | ((jlong)ordinal) & cstMask;
+    }
     return reinterpret_cast<jlong> (pResult);
 }
 
