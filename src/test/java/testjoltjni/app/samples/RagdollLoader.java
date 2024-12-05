@@ -128,7 +128,7 @@ public static RagdollSettings sLoad(String inFileName, EMotionType inMotionType,
 	return ragdoll.getPtr();
 }
 
-public RagdollSettings sCreate()
+public static RagdollSettings sCreate()
 {
 	// Create skeleton
 	Skeleton skeleton = new Skeleton();
