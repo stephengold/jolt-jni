@@ -59,6 +59,124 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     // new methods exposed
 
     /**
+     * Return the maximum friction torque when not driven by a motor. The
+     * settings are unaffected. (native attribute: mMaxFrictionTorque)
+     *
+     * @return the torque (in Newton-meters)
+     */
+    public float getMaxFrictionTorque() {
+        long settingsVa = va();
+        float result = getMaxFrictionTorque(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the half angle of the normal cone. The settings are unaffected.
+     * (native attribute: mNormalHalfConeAngle)
+     *
+     * @return the half angle (in radians)
+     */
+    public float getNormalHalfConeAngle() {
+        long settingsVa = va();
+        float result = getNormalHalfConeAngle(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the plane axis of body 1. The settings are unaffected. (native
+     * attribute: mPlaneAxis1)
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getPlaneAxis1() {
+        long settingsVa = va();
+        float x = getPlaneAxis1X(settingsVa);
+        float y = getPlaneAxis1Y(settingsVa);
+        float z = getPlaneAxis1Z(settingsVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the plane axis of body 2. The settings are unaffected. (native
+     * attribute: mPlaneAxis2)
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getPlaneAxis2() {
+        long settingsVa = va();
+        float x = getPlaneAxis2X(settingsVa);
+        float y = getPlaneAxis2Y(settingsVa);
+        float z = getPlaneAxis2Z(settingsVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return one-half the maximum angle between the twist axes of body 1 and
+     * body 2. The settings are unaffected. (native attribute:
+     * mPlaneHalfConeAngle)
+     *
+     * @return the half angle (in radians)
+     */
+    public float getPlaneHalfConeAngle() {
+        long settingsVa = va();
+        float result = getPlaneHalfConeAngle(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the initial location of body 1. The settings are unaffected. (native
+     * attribute: mPosition1)
+     *
+     * @return a new location vector
+     */
+    public RVec3 getPosition1() {
+        long settingsVa = va();
+        double xx = getPosition1X(settingsVa);
+        double yy = getPosition1Y(settingsVa);
+        double zz = getPosition1Z(settingsVa);
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Copy the initial location of body 2. The settings are unaffected. (native
+     * attribute: mPosition2)
+     *
+     * @return a new location vector
+     */
+    public RVec3 getPosition2() {
+        long settingsVa = va();
+        double xx = getPosition2X(settingsVa);
+        double yy = getPosition2Y(settingsVa);
+        double zz = getPosition2Z(settingsVa);
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Return which space the other properties are specified in. The settings
+     * are unaffected. (native attribute: mSpace)
+     *
+     * @return an enum value (not null)
+     */
+    public EConstraintSpace getSpace() {
+        long settingsVa = va();
+        int ordinal = getSpace(settingsVa);
+        EConstraintSpace result = EConstraintSpace.values()[ordinal];
+
+        return result;
+    }
+
+    /**
      * Access the swing motor settings. (native attribute: mSwingMotorSettings)
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -67,6 +185,78 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
         long constraintSettingsVa = va();
         long motorSettingsVa = getSwingMotorSettings(constraintSettingsVa);
         MotorSettings result = new MotorSettings(this, motorSettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return type of swing constraint. The settings are unaffected. (native
+     * attribute: mSwingType)
+     *
+     * @return the enum value (not null)
+     */
+    public ESwingType getSwingType() {
+        long settingsVa = va();
+        int ordinal = getSwingType(settingsVa);
+        ESwingType result = ESwingType.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Copy the twist axis of body 1. The settings are unaffected. (native
+     * attribute: mTwistAxis1)
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getTwistAxis1() {
+        long settingsVa = va();
+        float x = getTwistAxis1X(settingsVa);
+        float y = getTwistAxis1Y(settingsVa);
+        float z = getTwistAxis1Z(settingsVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the twist axis of body 2. The settings are unaffected. (native
+     * attribute: mTwistAxis2)
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getTwistAxis2() {
+        long settingsVa = va();
+        float x = getTwistAxis2X(settingsVa);
+        float y = getTwistAxis2Y(settingsVa);
+        float z = getTwistAxis2Z(settingsVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum twist angle. The settings are unaffected. (native
+     * attribute: mTwistMaxAngle)
+     *
+     * @return the angle (in radians)
+     */
+    public float getTwistMaxAngle() {
+        long settingsVa = va();
+        float result = getTwistMaxAngle(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the minimum twist angle. The settings are unaffected. (native
+     * attribute: mTwistMinAngle)
+     *
+     * @return the angle (in radians)
+     */
+    public float getTwistMinAngle() {
+        long settingsVa = va();
+        float result = getTwistMinAngle(settingsVa);
 
         return result;
     }
@@ -296,7 +486,57 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createDefault();
 
+    native private static float getMaxFrictionTorque(long settingsVa);
+
+    native private static float getNormalHalfConeAngle(long settingsVa);
+
+    native private static float getPlaneAxis1X(long settingsVa);
+
+    native private static float getPlaneAxis1Y(long settingsVa);
+
+    native private static float getPlaneAxis1Z(long settingsVa);
+
+    native private static float getPlaneAxis2X(long settingsVa);
+
+    native private static float getPlaneAxis2Y(long settingsVa);
+
+    native private static float getPlaneAxis2Z(long settingsVa);
+
+    native private static float getPlaneHalfConeAngle(long settingsVa);
+
+    native private static double getPosition1X(long settingsVa);
+
+    native private static double getPosition1Y(long settingsVa);
+
+    native private static double getPosition1Z(long settingsVa);
+
+    native private static double getPosition2X(long settingsVa);
+
+    native private static double getPosition2Y(long settingsVa);
+
+    native private static double getPosition2Z(long settingsVa);
+
+    native private static int getSpace(long settingsVa);
+
     native private static long getSwingMotorSettings(long constraintSettingsVa);
+
+    native private static int getSwingType(long settingsVa);
+
+    native private static float getTwistAxis1X(long settingsVa);
+
+    native private static float getTwistAxis1Y(long settingsVa);
+
+    native private static float getTwistAxis1Z(long settingsVa);
+
+    native private static float getTwistAxis2X(long settingsVa);
+
+    native private static float getTwistAxis2Y(long settingsVa);
+
+    native private static float getTwistAxis2Z(long settingsVa);
+
+    native private static float getTwistMaxAngle(long settingsVa);
+
+    native private static float getTwistMinAngle(long settingsVa);
 
     native private static long getTwistMotorSettings(long constraintSettingsVa);
 
