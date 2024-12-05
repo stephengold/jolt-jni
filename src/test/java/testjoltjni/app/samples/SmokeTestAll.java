@@ -28,6 +28,7 @@ import testjoltjni.app.samples.character.*;
 import testjoltjni.app.samples.constraints.*;
 import testjoltjni.app.samples.convexcollision.*;
 import testjoltjni.app.samples.general.*;
+import testjoltjni.app.samples.rig.*;
 import testjoltjni.app.samples.shapes.*;
 import testjoltjni.app.samples.softbody.*;
 import testjoltjni.app.samples.vehicle.*;
@@ -147,6 +148,10 @@ final public class SmokeTestAll {
         smokeTest(new ManifoldReductionTest());
         smokeTest(new ModifyMassTest());
         smokeTest(new RestitutionTest());
+
+        // rig package:
+        smokeTest(new CreateRigTest());
+        smokeTest(new RigPileTest());
 
         // shapes package:
         smokeTest(new BoxShapeTest());
