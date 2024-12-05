@@ -33,6 +33,14 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public RagdollSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -80,6 +88,15 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
+     * Create and add collision filters to all bodies in the ragdoll and
+     * configure them so parents and children don't collide.
+     */
+    public void disableParentChildCollisions() {
+        long settingsVa = va();
+        disableParentChildCollisions(settingsVa);
+    }
+
+    /**
      * Access the parts by way of a Java array. (native attribute: mParts)
      *
      * @return a new array of new JVM objects with pre-existing native objects
@@ -109,6 +126,27 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
         Skeleton result = new Skeleton(skeletonVa);
 
         return result;
+    }
+
+    /**
+     * Resize the parts array.
+     *
+     * @param numParts the desired number of parts (&ge;0)
+     */
+    public void resizeParts(int numParts) {
+        long settingsVa = va();
+        resizeParts(settingsVa, numParts);
+    }
+
+    /**
+     * Replace the skeleton. (native attribute: mSkeleton)
+     *
+     * @param skeleton the desired skeleton (not null)
+     */
+    public void setSkeleton(Skeleton skeleton) {
+        long settingsVa = va();
+        long skeletonVa = skeleton.va();
+        setSkeleton(settingsVa, skeletonVa);
     }
 
     /**
@@ -168,8 +206,12 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
 
     native static void calculateConstraintIndexToBodyIdxPair(long settingsVa);
 
+    native private static long createDefault();
+
     native static long createRagdoll(
             long settingsVa, int groupId, long userData, long systemVa);
+
+    native private static void disableParentChildCollisions(long settingsVa);
 
     native static int getNumParts(long settingsVa);
 
@@ -179,7 +221,11 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
 
     native static long getSkeleton(long settingsVa);
 
+    native static void resizeParts(long settingsVa, int numParts);
+
     native private static void setEmbedded(long settingsVa);
+
+    native static void setSkeleton(long settingsVa, long skeletonVa);
 
     native static boolean stabilize(long settingsVa);
 

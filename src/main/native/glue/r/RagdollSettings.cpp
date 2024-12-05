@@ -64,6 +64,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_calcu
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_createDefault
+  (JNIEnv *, jclass) {
+    RagdollSettings * const pSettings = new RagdollSettings();
+    TRACE_NEW("RagdollSettings", pSettings)
+    return reinterpret_cast<jlong> (pSettings);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
  * Method:    createRagdoll
  * Signature: (JIJJ)J
  */
@@ -76,6 +88,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_crea
     Ragdoll * const pResult
             = pSettings->CreateRagdoll(group, userData, pSystem);
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    disableParentChildCollisions
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_disableParentChildCollisions
+  (JNIEnv *, jclass, jlong settingsVa) {
+    RagdollSettings * const pSettings
+            = reinterpret_cast<RagdollSettings *> (settingsVa);
+    pSettings->DisableParentChildCollisions();
 }
 
 /*
@@ -133,6 +157,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_getS
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    resizeParts
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_resizeParts
+  (JNIEnv *, jclass, jlong settingsVa, jint numParts) {
+    RagdollSettings * const pSettings
+            = reinterpret_cast<RagdollSettings *> (settingsVa);
+    pSettings->mParts.resize(numParts);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
  * Method:    setEmbedded
  * Signature: (J)V
  */
@@ -141,6 +177,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_setEm
     RagdollSettings * const pSettings
             = reinterpret_cast<RagdollSettings *> (settingsVa);
     pSettings->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    setSkeleton
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_setSkeleton
+  (JNIEnv *, jclass, jlong settingsVa, jlong skeletonVa) {
+    RagdollSettings * const pSettings
+            = reinterpret_cast<RagdollSettings *> (settingsVa);
+    Skeleton * const pSkeleton = reinterpret_cast<Skeleton *> (skeletonVa);
+    pSettings->mSkeleton = pSkeleton;
 }
 
 /*
