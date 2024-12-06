@@ -99,6 +99,13 @@ public interface RVec3Arg {
     double[] toArray();
 
     /**
+     * Convert to single-precision vector. The current vector is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 toVec3();
+
+    /**
      * Return the first (X) component in single precision. The vector is
      * unaffected.
      *
@@ -145,11 +152,4 @@ public interface RVec3Arg {
      * @return the component value
      */
     double zz();
-
-    /**
-     * Convert to single-precision vector. The current vector is unaffected.
-     *
-     * @return a new vector
-     */
-    Vec3 toVec3();
 }

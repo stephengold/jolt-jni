@@ -329,6 +329,17 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Convert to single-precision vector. The current vector is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 toVec3() {
+        Vec3 result = new Vec3(xx, yy, zz);
+        return result;
+    }
+
+    /**
      * Return the first (X) component in single precision. The vector is
      * unaffected.
      *
@@ -395,17 +406,6 @@ final public class RVec3 implements RVec3Arg {
     @Override
     public double zz() {
         return zz;
-    }
-
-    /**
-     * Convert to single-precision vector. The current vector is unaffected.
-     *
-     * @return a new vector
-     */
-    @Override
-    public Vec3 toVec3() {
-        Vec3 result = new Vec3(xx, yy, zz);
-        return result;
     }
     // *************************************************************************
     // Object methods
