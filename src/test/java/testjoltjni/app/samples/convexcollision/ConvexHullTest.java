@@ -548,7 +548,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 
 			// Point on a line to another point
 			float fraction = zero_one.nextFloat(mRandom);
-			Vec3 p3 = plus(star(fraction , p1) , star((1.0f - fraction) , points.get(mRandom.nextInt() % points.size())));
+			Vec3 p3 = plus(star(fraction , p1) , star((1.0f - fraction) , points.get(Math.abs(mRandom.nextInt()) % points.size())));
 			points.add(p3);
 
 			// Point close to p3
