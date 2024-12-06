@@ -226,27 +226,33 @@ final public class Vec3 implements Vec3Arg {
      * Alter the first (X) component.
      *
      * @param x the desired value
+     * @return the modified vector, for chaining
      */
-    public void setX(float x) {
+    public Vec3 setX(float x) {
         this.x = x;
+        return this;
     }
 
     /**
      * Alter the 2nd (Y) component.
      *
      * @param y the desired value
+     * @return the modified vector, for chaining
      */
-    public void setY(float y) {
+    public Vec3 setY(float y) {
         this.y = y;
+        return this;
     }
 
     /**
      * Alter the 3rd (Z) component.
      *
      * @param z the desired value
+     * @return the modified vector, for chaining
      */
-    public void setZ(float z) {
+    public Vec3 setZ(float z) {
         this.z = z;
+        return this;
     }
 
     /**
