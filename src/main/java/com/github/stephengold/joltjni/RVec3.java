@@ -140,6 +140,18 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Set all 3 components from the specified array.
+     *
+     * @param array the desired component values (not null, length&ge;3,
+     * unaffected)
+     */
+    public void set(double[] array) {
+        this.xx = array[0];
+        this.yy = array[1];
+        this.zz = array[2];
+    }
+
+    /**
      * Alter the first (X) component.
      *
      * @param x the desired value

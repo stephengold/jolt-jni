@@ -121,6 +121,19 @@ final public class Quat implements QuatArg {
     }
 
     /**
+     * Set all 4 components from the specified array.
+     *
+     * @param array the desired component values (not null, length&ge;4,
+     * unaffected)
+     */
+    public void set(float[] array) {
+        this.x = array[0];
+        this.y = array[1];
+        this.z = array[2];
+        this.w = array[3];
+    }
+
+    /**
      * Create a rotation quaternion from Euler angles. Rotation order is X then
      * Y then Z.
      *
