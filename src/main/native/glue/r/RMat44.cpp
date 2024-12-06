@@ -350,6 +350,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_setElement
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    setTranslation
+ * Signature: (JDDD)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_setTranslation
+  (JNIEnv *, jclass, jlong matrixVa, jdouble xx, jdouble yy, jdouble zz) {
+    RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    const RVec3 offset(xx, yy, zz);
+    pMatrix->SetTranslation(offset);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    sRotation
  * Signature: (FFFF)J
  */

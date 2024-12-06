@@ -118,6 +118,19 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Alter the translation component.
+     *
+     * @param offset the desired translation (not null, unaffected)
+     */
+    public void setTranslation(RVec3Arg offset) {
+        long matrixVa = va();
+        double xx = offset.xx();
+        double yy = offset.yy();
+        double zz = offset.zz();
+        setTranslation(matrixVa, xx, yy, zz);
+    }
+
+    /**
      * Create an identity matrix.
      *
      * @return a new instance
@@ -500,6 +513,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static void setElement(
             long matrixVa, int row, int column, double value);
+
+    native private static void setTranslation(
+            long matrixVa, double xx, double yy, double zz);
 
     native private static long sRotation(
             float rx, float ry, float rz, float rw);
