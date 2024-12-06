@@ -40,8 +40,8 @@ final String sScenes[] =
 {
 	"PerlinMesh",
 	"PerlinHeightField",
-	"Terrain1",
-	"Terrain2",
+	"terrain1",
+	"terrain2",
 };
 
 String sSceneName=buildType().equals("Debug")?"PerlinMesh":"Terrain1";
