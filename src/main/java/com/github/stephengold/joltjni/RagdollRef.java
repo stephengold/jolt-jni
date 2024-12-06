@@ -69,6 +69,30 @@ final public class RagdollRef extends Ref {
     }
 
     /**
+     * Drive the ragdoll to the specified pose by setting velocities.
+     *
+     * @param pose the desired pose
+     * @param time time to achieve the pose (in seconds)
+     */
+    public void driveToPoseUsingKinematics(SkeletonPose pose, float time) {
+        driveToPoseUsingKinematics(pose, time, true);
+    }
+
+    /**
+     * Drive the ragdoll to the specified pose by setting velocities.
+     *
+     * @param pose the desired pose
+     * @param time time to achieve the pose (in seconds)
+     * @param lockBodies (default=true)
+     */
+    public void driveToPoseUsingKinematics(
+            SkeletonPose pose, float time, boolean lockBodies) {
+        long ragdollVa = targetVa();
+        long poseVa = pose.va();
+        Ragdoll.driveToPoseUsingKinematics(ragdollVa, poseVa, time, lockBodies);
+    }
+
+    /**
      * Drive the ragdoll to the specified pose using motors.
      *
      * @param pose the desired pose (not null, unaffected)
@@ -77,6 +101,50 @@ final public class RagdollRef extends Ref {
         long ragdollVa = targetVa();
         long poseVa = pose.va();
         Ragdoll.driveToPoseUsingMotors(ragdollVa, poseVa);
+    }
+
+    /**
+     * Enumerate all bodies in the ragdoll.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public BodyIdVector getBodyIds() {
+        long ragdollVa = targetVa();
+        long vectorVa = Ragdoll.getBodyIds(ragdollVa);
+        BodyIdVector result = new BodyIdVector(this, vectorVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the transform of the ragdoll's root, using the locking body
+     * interface.
+     *
+     * @param storeLocation storage for the root location (not null, modified)
+     * @param storeOrientation storage for the root orientation (not null,
+     * modified)
+     */
+    public void getRootTransform(RVec3 storeLocation, Quat storeOrientation) {
+        getRootTransform(storeLocation, storeOrientation, true);
+    }
+
+    /**
+     * Copy the transform of the ragdoll's root.
+     *
+     * @param storeLocation storage for the root location (not null, modified)
+     * @param storeOrientation storage for the root orientation (not null,
+     * modified)
+     * @param lockBodies (default=true)
+     */
+    public void getRootTransform(
+            RVec3 storeLocation, Quat storeOrientation, boolean lockBodies) {
+        long ragdollVa = targetVa();
+        double[] storeDoubles = new double[3];
+        float[] storeFloats = new float[4];
+        Ragdoll.getRootTransform(
+                ragdollVa, storeDoubles, storeFloats, lockBodies);
+        storeLocation.set(storeDoubles);
+        storeOrientation.set(storeFloats);
     }
 
     /**

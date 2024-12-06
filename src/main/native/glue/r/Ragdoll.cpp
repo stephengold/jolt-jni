@@ -52,6 +52,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_addToPhysicsS
 
 /*
  * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    driveToPoseUsingKinematics
+ * Signature: (JJFZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_driveToPoseUsingKinematics
+  (JNIEnv *, jclass, jlong ragdollVa, jlong poseVa, jfloat time,
+  jboolean lockBodies) {
+    Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    const SkeletonPose * const pPose
+            = reinterpret_cast<SkeletonPose *> (poseVa);
+    pRagdoll->DriveToPoseUsingKinematics(*pPose, time, lockBodies);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
  * Method:    driveToPoseUsingMotors
  * Signature: (JJ)V
  */
@@ -65,6 +79,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_driveToPoseUs
 
 /*
  * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    getBodyIds
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getBodyIds
+  (JNIEnv *, jclass, jlong ragdollVa) {
+    const Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    const Array<BodyID> * const pResult = &pRagdoll->GetBodyIDs();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
  * Method:    getRefCount
  * Signature: (J)I
  */
@@ -73,6 +99,34 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getRefCount
     const Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
     const uint32 result = pRagdoll->GetRefCount();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    getRootTransform
+ * Signature: (J[D[FZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getRootTransform
+  (JNIEnv *pEnv, jclass, jlong ragdollVa, jdoubleArray storeDoubles,
+  jfloatArray storeFloats, jboolean lockBodies) {
+    const Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    RVec3 outPosition;
+    Quat outRotation;
+    pRagdoll->GetRootTransform(outPosition, outRotation, lockBodies);
+    jboolean isCopy;
+    jdouble * const pStoreDoubles
+            = pEnv->GetDoubleArrayElements(storeDoubles, &isCopy);
+    pStoreDoubles[0] = outPosition.GetX();
+    pStoreDoubles[1] = outPosition.GetY();
+    pStoreDoubles[2] = outPosition.GetZ();
+    pEnv->ReleaseDoubleArrayElements(storeDoubles, pStoreDoubles, 0);
+    jfloat * const pStoreFloats
+            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    pStoreFloats[0] = outRotation.GetX();
+    pStoreFloats[1] = outRotation.GetY();
+    pStoreFloats[2] = outRotation.GetZ();
+    pStoreFloats[3] = outRotation.GetW();
+    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
 }
 
 /*
