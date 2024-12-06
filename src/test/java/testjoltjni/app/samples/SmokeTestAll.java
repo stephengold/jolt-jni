@@ -151,6 +151,8 @@ final public class SmokeTestAll {
 
         // rig package:
         smokeTest(new CreateRigTest());
+        smokeTest(new KinematicRigTest());
+        smokeTest(new PoweredRigTest());
         smokeTest(new RigPileTest());
 
         // shapes package:
