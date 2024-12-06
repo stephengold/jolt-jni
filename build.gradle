@@ -300,8 +300,8 @@ tasks.register('runRagdollSinglePile', JavaExec) {
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runSmokeTestAll', JavaExec) {
-    mainClass = 'testjoltjni.app.samples.SmokeTestAll'
     dependsOn('unpackJoltAssets')
+    mainClass = 'testjoltjni.app.samples.SmokeTestAll'
 }
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
