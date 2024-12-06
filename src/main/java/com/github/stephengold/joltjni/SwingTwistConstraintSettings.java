@@ -286,10 +286,10 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Alter the normal half-cone angle. (native attribute:
+     * Alter the half angle of the normal cone. (native attribute:
      * mNormalHalfConeAngle)
      *
-     * @param angle the desired angle (in radians, default=0)
+     * @param angle the desired half angle (in radians, default=0)
      */
     public void setNormalHalfConeAngle(float angle) {
         long settingsVa = va();

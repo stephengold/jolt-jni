@@ -79,7 +79,7 @@ public interface RVec3Arg {
      * Test whether the squared length is within the specified tolerance of
      * zero. The vector is unaffected.
      *
-     * @param tolerance the desired tolerance (&gel0)
+     * @param tolerance the desired tolerance (&ge;0)
      * @return {@code true} if nearly zero, otherwise {@code false}
      */
     boolean isNearZero(double tolerance);

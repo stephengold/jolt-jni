@@ -570,10 +570,10 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Test whether the vector is zero to within a tolerance of 10^-12. The
-     * vector is unaffected.
+     * Test whether the squared length is within 1e-12 of zero. The vector is
+     * unaffected.
      *
-     * @return {@code true} if near zero, otherwise {@code false}
+     * @return {@code true} if nearly zero, otherwise {@code false}
      */
     @Override
     public boolean isNearZero() {
@@ -582,11 +582,11 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Test whether the vector is zero to within the specified tolerance. The
-     * vector is unaffected.
+     * Test whether the the squared length is within the specified tolerance of
+     * zero. The vector is unaffected.
      *
-     * @param tolerance the desired tolerance (default=1e-12)
-     * @return {@code true} if near zero, otherwise {@code false}
+     * @param tolerance the desired tolerance (&ge;0. default=1e-12)
+     * @return {@code true} if nearly zero, otherwise {@code false}
      */
     @Override
     public boolean isNearZero(float tolerance) {
