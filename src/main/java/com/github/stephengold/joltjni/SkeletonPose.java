@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 
 /**
@@ -59,6 +60,44 @@ public class SkeletonPose extends JoltPhysicsObject {
     public void calculateJointMatrices() {
         long poseVa = va();
         calculateJointMatrices(poseVa);
+    }
+
+    /**
+     * Convert the joint matrices to joint states.
+     */
+    public void calculateJointStates() {
+        long poseVa = va();
+        calculateJointStates(poseVa);
+    }
+
+    /**
+     * Draw the current pose using the specified settings and renderer. The pose
+     * is unaffected.
+     *
+     * @param settings the desired settings (not null, unaffected)
+     * @param renderer the renderer to use (not null)
+     */
+    public void draw(
+            SkeletonPoseDrawSettings settings, DebugRenderer renderer) {
+        draw(settings, renderer, RMat44.sIdentity());
+    }
+
+    /**
+     * Draw the current pose using the specified settings and renderer. The pose
+     * is unaffected.
+     *
+     * @param settings the desired settings (not null, unaffected)
+     * @param renderer the renderer to use (not null)
+     * @param transform the transform to apply (not null, unaffected,
+     * default=Identity)
+     */
+    public void draw(SkeletonPoseDrawSettings settings, DebugRenderer renderer,
+            RMat44Arg transform) {
+        long poseVa = va();
+        long settingsVa = settings.va();
+        long rendererVa = renderer.va();
+        long transformVa = transform.targetVa();
+        draw(poseVa, settingsVa, rendererVa, transformVa);
     }
 
     /**
@@ -103,9 +142,14 @@ public class SkeletonPose extends JoltPhysicsObject {
 
     native private static void calculateJointMatrices(long poseVa);
 
+    native private static void calculateJointStates(long poseVa);
+
     native private static long createCopy(long poseVa);
 
     native private static long createSkeletonPoseDefault();
+
+    native private static void draw(
+            long poseVa, long settingsVa, long rendererVa, long transformVa);
 
     native private static void free(long poseVa);
 

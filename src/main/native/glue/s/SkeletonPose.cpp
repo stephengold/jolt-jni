@@ -43,6 +43,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_calculat
 
 /*
  * Class:     com_github_stephengold_joltjni_SkeletonPose
+ * Method:    calculateJointStates
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_calculateJointStates
+  (JNIEnv *, jclass, jlong poseVa) {
+    SkeletonPose * const pPose = reinterpret_cast<SkeletonPose *> (poseVa);
+    pPose->CalculateJointStates();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SkeletonPose
  * Method:    createCopy
  * Signature: (J)J
  */
@@ -65,6 +76,26 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_createS
     SkeletonPose * const pResult = new SkeletonPose();
     TRACE_NEW("SkeletonPose", pResult)
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SkeletonPose
+ * Method:    draw
+ * Signature: (JJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_draw
+  (JNIEnv *, jclass, jlong poseVa, jlong settingsVa, jlong rendererVa,
+  jlong transformVa) {
+#ifdef JPH_DEBUG_RENDERER
+    const SkeletonPose * const pPose = reinterpret_cast<SkeletonPose *> (poseVa);
+    const SkeletonPose::DrawSettings * const pSettings
+            = reinterpret_cast<SkeletonPose::DrawSettings *> (settingsVa);
+    DebugRenderer * const pRenderer
+            = reinterpret_cast<DebugRenderer *> (rendererVa);
+    const RMat44 * const pTransform
+            = reinterpret_cast<RMat44 *> (transformVa);
+    pPose->Draw(*pSettings, pRenderer, *pTransform);
+#endif
 }
 
 /*
