@@ -185,6 +185,17 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Create a vector with all components identical.
+     *
+     * @param value the desired component value
+     * @return a new vector
+     */
+    public static RVec3 sReplicate(double value) {
+        RVec3 result = new RVec3(value, value, value);
+        return result;
+    }
+
+    /**
      * Create a vector with all components zero.
      *
      * @return a new vector
