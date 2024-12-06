@@ -68,6 +68,30 @@ public interface RVec3Arg {
     Object getZ();
 
     /**
+     * Test whether the squared length is within 1e-12 (single-precision) or
+     * 1e-24 (double-precision) of zero. The vector is unaffected.
+     *
+     * @return {@code true} if nearly zero, otherwise {@code false}
+     */
+    boolean isNearZero();
+
+    /**
+     * Test whether the squared length is within the specified tolerance of
+     * zero. The vector is unaffected.
+     *
+     * @param tolerance the desired tolerance (&gel0)
+     * @return {@code true} if nearly zero, otherwise {@code false}
+     */
+    boolean isNearZero(double tolerance);
+
+    /**
+     * Return the squared length. The vector is unaffected.
+     *
+     * @return the squared length
+     */
+    double lengthSq();
+
+    /**
      * Copy the components to an array. The vector is unaffected.
      *
      * @return a new array with length=3

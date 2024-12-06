@@ -273,6 +273,47 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Test whether the squared length is within 1e-12 (single-precision) or
+     * 1e-24 (double-precision) of zero. The vector is unaffected.
+     *
+     * @return {@code true} if nearly zero, otherwise {@code false}
+     */
+    @Override
+    public boolean isNearZero() {
+        double tolerance = Jolt.isDoublePrecision() ? 1e-24 : 1e-12;
+        boolean result = isNearZero(tolerance);
+        return result;
+    }
+
+    /**
+     * Test whether the squared length is within the specified tolerance of
+     * zero. The vector is unaffected.
+     *
+     * @param tolerance the desired tolerance (&ge;0)
+     * @return {@code true} if nearly zero, otherwise {@code false}
+     */
+    @Override
+    public boolean isNearZero(double tolerance) {
+        double lengthSq = lengthSq();
+        if (lengthSq <= tolerance) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Return the squared length. The vector is unaffected.
+     *
+     * @return the squared length
+     */
+    @Override
+    public double lengthSq() {
+        double result = xx * xx + yy * yy + zz * zz;
+        return result;
+    }
+
+    /**
      * Copy the components to an array. The vector is unaffected.
      *
      * @return a new array with length=3
