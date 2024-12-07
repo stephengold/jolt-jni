@@ -166,7 +166,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Save the state of this object in binary form.
+     * Save the scene to the specified binary stream. The scene is unaffected.
      *
      * @param stream the stream to write to (not null)
      * @param saveShapes if true, save the shapes

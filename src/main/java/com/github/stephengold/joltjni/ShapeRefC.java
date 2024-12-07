@@ -388,7 +388,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     }
 
     /**
-     * Save the state of this shape in binary form. The shape is unaffected.
+     * Save the shape to the specified binary stream. The shape is unaffected.
      *
      * @param stream the stream to write to (not null)
      */

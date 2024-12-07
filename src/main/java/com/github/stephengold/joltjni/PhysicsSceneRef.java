@@ -168,7 +168,7 @@ final public class PhysicsSceneRef extends Ref {
     }
 
     /**
-     * Save the state of the scene in binary form.
+     * Write the scene to the specified binary stream.
      *
      * @param stream the stream to write to (not null)
      * @param saveShapes if true, save the shapes
