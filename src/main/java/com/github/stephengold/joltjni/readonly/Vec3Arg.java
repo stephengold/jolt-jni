@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.Float3;
+import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
 import java.nio.FloatBuffer;
 
@@ -234,4 +235,12 @@ public interface Vec3Arg {
      * @return a new array with length=3
      */
     float[] toArray();
+
+    /**
+     * Copy the components to a new location vector. The current vector is
+     * unaffected.
+     *
+     * @return a new vector
+     */
+    RVec3 toRVec3();
 }

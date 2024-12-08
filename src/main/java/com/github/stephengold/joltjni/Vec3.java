@@ -791,6 +791,18 @@ final public class Vec3 implements Vec3Arg {
 
         return result;
     }
+
+    /**
+     * Copy the components to a new location vector. The current vector is
+     * unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public RVec3 toRVec3() {
+        RVec3 result = new RVec3(x, y, z);
+        return result;
+    }
     // *************************************************************************
     // Object methods
 
