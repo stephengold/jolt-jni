@@ -314,6 +314,19 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Return the length. The vector is unaffected.
+     *
+     * @return the length
+     */
+    @Override
+    public double length() {
+        double lengthSq = lengthSq();
+        double result = Math.sqrt(lengthSq);
+
+        return result;
+    }
+
+    /**
      * Return the squared length. The vector is unaffected.
      *
      * @return the squared length

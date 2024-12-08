@@ -85,6 +85,13 @@ public interface RVec3Arg {
     boolean isNearZero(double tolerance);
 
     /**
+     * Return the length. The vector is unaffected.
+     *
+     * @return the length
+     */
+    double length();
+
+    /**
      * Return the squared length. The vector is unaffected.
      *
      * @return the squared length
