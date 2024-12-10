@@ -134,7 +134,8 @@ final public class RagdollRef extends Ref {
      * @param storeLocation storage for the root location (not null, modified)
      * @param storeOrientation storage for the root orientation (not null,
      * modified)
-     * @param lockBodies (default=true)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void getRootTransform(
             RVec3 storeLocation, Quat storeOrientation, boolean lockBodies) {

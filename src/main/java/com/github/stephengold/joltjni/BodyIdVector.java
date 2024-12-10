@@ -151,10 +151,10 @@ public class BodyIdVector extends Array<BodyId> {
     }
 
     /**
-     * Put the specified ID at the specified index.
+     * Store the specified ID at the specified index.
      *
-     * @param elementIndex the index at which to put the ID (&ge;0)
-     * @param id the ID to put (not null)
+     * @param elementIndex the index at which to store the ID (&ge;0)
+     * @param id the ID to store (not null)
      */
     @Override
     public void set(int elementIndex, BodyId id) {
