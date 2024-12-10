@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstSkeleton;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 
@@ -71,6 +72,17 @@ public class SkeletonPose extends JoltPhysicsObject {
     }
 
     /**
+     * Calculate the joint matrices in local space.
+     *
+     * @param storeMatrices storage for the matrices (not null, modified)
+     */
+    public void calculateLocalSpaceJointMatrices(Mat44Array storeMatrices) {
+        long poseVa = va();
+        long storeMatsVa = storeMatrices.va();
+        calculateLocalSpaceJointMatrices(poseVa, storeMatsVa);
+    }
+
+    /**
      * Draw the current pose using the specified settings and renderer. The pose
      * is unaffected.
      *
@@ -115,6 +127,72 @@ public class SkeletonPose extends JoltPhysicsObject {
     }
 
     /**
+     * Count how many joints are in the pose.
+     *
+     * @return the count (&ge;0)
+     */
+    public int getJointCount() {
+        long poseVa = va();
+        int result = getJointCount(poseVa);
+
+        return result;
+    }
+
+    /**
+     * Access the transform matrix for the specified joint.
+     *
+     * @param jointIndex which joint (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public Mat44 getJointMatrix(int jointIndex) {
+        long poseVa = va();
+        long resultVa = getJointMatrix(poseVa, jointIndex);
+        Mat44 result = new Mat44(this, resultVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the joint matrices.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public Mat44Array getJointMatrices() {
+        long poseVa = va();
+        long resultVa = getJointMatrices(poseVa);
+        Mat44Array result = new Mat44Array(this, resultVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the root offset.
+     *
+     * @return a new vector
+     */
+    public RVec3 getRootOffset() {
+        long poseVa = va();
+        double[] storeDoubles = new double[3];
+        getRootOffset(poseVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
+
+        return result;
+    }
+
+    /**
+     * Access the skeleton that underlies this pose.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public ConstSkeleton getSkeleton() {
+        long poseVa = va();
+        long resultVa = getSkeleton(poseVa);
+        ConstSkeleton result = new Skeleton(resultVa);
+
+        return result;
+    }
+
+    /**
      * Alter the root offset.
      *
      * @param offset the desired offset (not null, unaffected)
@@ -144,6 +222,9 @@ public class SkeletonPose extends JoltPhysicsObject {
 
     native private static void calculateJointStates(long poseVa);
 
+    native private static void calculateLocalSpaceJointMatrices(
+            long poseVa, long storeMatsVa);
+
     native private static long createCopy(long poseVa);
 
     native private static long createSkeletonPoseDefault();
@@ -154,6 +235,17 @@ public class SkeletonPose extends JoltPhysicsObject {
     native private static void free(long poseVa);
 
     native private static long getJoint(long poseVa, int jointIndex);
+
+    native private static int getJointCount(long poseVa);
+
+    native private static long getJointMatrices(long poseVa);
+
+    native private static long getJointMatrix(long poseVa, int jointIndex);
+
+    native private static void getRootOffset(
+            long poseVa, double[] storeDoubles);
+
+    native private static long getSkeleton(long poseVa);
 
     native private static void setRootOffset(
             long poseVa, double xx, double yy, double zz);

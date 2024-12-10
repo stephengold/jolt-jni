@@ -54,6 +54,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_calculat
 
 /*
  * Class:     com_github_stephengold_joltjni_SkeletonPose
+ * Method:    calculateLocalSpaceJointMatrices
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_calculateLocalSpaceJointMatrices
+  (JNIEnv *pEnv, jclass, jlong poseVa, jlong storeMatsVa) {
+    SkeletonPose * const pPose = reinterpret_cast<SkeletonPose *> (poseVa);
+    Mat44 * const pStoreMatrices = reinterpret_cast<Mat44 *> (storeMatsVa);
+    pPose->CalculateLocalSpaceJointMatrices(pStoreMatrices);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SkeletonPose
  * Method:    createCopy
  * Signature: (J)J
  */
@@ -120,6 +132,76 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_getJoin
     SkeletonPose * const pPose = reinterpret_cast<SkeletonPose *> (poseVa);
     SkeletonPose::JointState * const pJoint = &pPose->GetJoint(jointIndex);
     return reinterpret_cast<jlong> (pJoint);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SkeletonPose
+ * Method:    getJointCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_getJointCount
+  (JNIEnv *, jclass, jlong poseVa) {
+    const SkeletonPose * const pPose
+            = reinterpret_cast<SkeletonPose *> (poseVa);
+    const uint result = pPose->GetJointCount();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SkeletonPose
+ * Method:    getJointMatrices
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_getJointMatrices
+  (JNIEnv *, jclass, jlong poseVa) {
+    SkeletonPose * const pPose = reinterpret_cast<SkeletonPose *> (poseVa);
+    SkeletonPose::Mat44Vector vec = pPose->GetJointMatrices();
+    Mat44 * pResult = vec.data();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SkeletonPose
+ * Method:    getJointMatrix
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_getJointMatrix
+  (JNIEnv *, jclass, jlong poseVa, jint jointIndex) {
+    SkeletonPose * const pPose = reinterpret_cast<SkeletonPose *> (poseVa);
+    Mat44 * pResult = &pPose->GetJointMatrix(jointIndex);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SkeletonPose
+ * Method:    getRootOffset
+ * Signature: (J[D)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_getRootOffset
+  (JNIEnv *pEnv, jclass, jlong poseVa, jdoubleArray storeDoubles) {
+    const SkeletonPose * const pPose
+            = reinterpret_cast<SkeletonPose *> (poseVa);
+    const RVec3 offset = pPose->GetRootOffset();
+    jboolean isCopy;
+    jdouble * const pStoreDoubles
+            = pEnv->GetDoubleArrayElements(storeDoubles, &isCopy);
+    pStoreDoubles[0] = offset.GetX();
+    pStoreDoubles[1] = offset.GetY();
+    pStoreDoubles[2] = offset.GetZ();
+    pEnv->ReleaseDoubleArrayElements(storeDoubles, pStoreDoubles, 0);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SkeletonPose
+ * Method:    getSkeleton
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_getSkeleton
+  (JNIEnv *, jclass, jlong poseVa) {
+    const SkeletonPose * const pPose
+            = reinterpret_cast<SkeletonPose *> (poseVa);
+    const Skeleton * const pResult = pPose->GetSkeleton();
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
