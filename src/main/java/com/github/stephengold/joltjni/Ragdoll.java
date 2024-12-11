@@ -94,6 +94,18 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
 
     /**
+     * Count how many bodies are in the ragdoll, which is unaffected
+     *
+     * @return the count (&ge;0)
+     */
+    public int getBodyCount() {
+        long ragdollVa = va();
+        int result = getBodyCount(ragdollVa);
+
+        return result;
+    }
+
+    /**
      * Enumerate all bodies in the ragdoll.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -104,6 +116,47 @@ public class Ragdoll extends NonCopyable implements RefTarget {
         BodyIdVector result = new BodyIdVector(this, vectorVa);
 
         return result;
+    }
+
+    /**
+     * Count how many constraints are in the ragdoll, which is unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    public int getConstraintCount() {
+        long ragdollVa = va();
+        int result = getConstraintCount(ragdollVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the low-level pose using a locking body interface.
+     *
+     * @param storeRootOffset storage for the root offset (not null, modified)
+     * @param storeJointMatrices storage for the joint matrices (not null,
+     * modified)
+     */
+    public void getPose(RVec3 storeRootOffset, Mat44Array storeJointMatrices) {
+        getPose(storeRootOffset, storeJointMatrices, true);
+    }
+
+    /**
+     * Copy the low-level pose.
+     *
+     * @param storeRootOffset storage for the root offset (not null, modified)
+     * @param storeJointMatrices storage for the joint matrices (not null,
+     * modified)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void getPose(RVec3 storeRootOffset, Mat44Array storeJointMatrices,
+            boolean lockBodies) {
+        long ragdollVa = va();
+        double[] storeDoubles = new double[3];
+        long storeMatsVa = storeJointMatrices.va();
+        getPose(ragdollVa, storeDoubles, storeMatsVa, lockBodies);
+        storeRootOffset.set(storeDoubles);
     }
 
     /**
@@ -215,7 +268,14 @@ public class Ragdoll extends NonCopyable implements RefTarget {
 
     native static void driveToPoseUsingMotors(long ragdollVa, long poseVa);
 
+    native static int getBodyCount(long ragdollVa);
+
     native static long getBodyIds(long ragdollVa);
+
+    native static int getConstraintCount(long ragdollVa);
+
+    native static void getPose(long ragdollVa, double[] storeDoubles,
+            long storeMatsVa, boolean lockBodies);
 
     native private static int getRefCount(long ragdollVa);
 

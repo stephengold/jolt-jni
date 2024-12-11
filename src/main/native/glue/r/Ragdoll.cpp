@@ -79,6 +79,30 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_driveToPoseUs
 
 /*
  * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    getBodyCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getBodyCount
+  (JNIEnv *, jclass, jlong ragdollVa) {
+    const Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    const size_t result = pRagdoll->GetBodyCount();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    getConstraintCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getConstraintCount
+  (JNIEnv *, jclass, jlong ragdollVa) {
+    const Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    const size_t result = pRagdoll->GetConstraintCount();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
  * Method:    getBodyIds
  * Signature: (J)J
  */
@@ -87,6 +111,27 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getBodyIds
     const Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
     const Array<BodyID> * const pResult = &pRagdoll->GetBodyIDs();
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    getPose
+ * Signature: (J[DJZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getPose
+  (JNIEnv *pEnv, jclass, jlong ragdollVa, jdoubleArray storeDoubles,
+  jlong storeMatsVa, jboolean lockBodies) {
+    Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    RVec3 rootOffset;
+    Mat44 * const pMatrices = reinterpret_cast<Mat44 *> (storeMatsVa);
+    pRagdoll->GetPose(rootOffset, pMatrices, lockBodies);
+    jboolean isCopy;
+    jdouble * const pStoreDoubles
+            = pEnv->GetDoubleArrayElements(storeDoubles, &isCopy);
+    pStoreDoubles[0] = rootOffset.GetX();
+    pStoreDoubles[1] = rootOffset.GetY();
+    pStoreDoubles[2] = rootOffset.GetZ();
+    pEnv->ReleaseDoubleArrayElements(storeDoubles, pStoreDoubles, 0);
 }
 
 /*
