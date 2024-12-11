@@ -58,9 +58,30 @@ final public class ObjectStreamOut {
 
         return result;
     }
+
+    /**
+     * Write the specified ragdoll settings to the specified stream.
+     *
+     * @param stream the stream to write to (not null)
+     * @param streamType the type of stream (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(StringStream stream,
+            EStreamType streamType, RagdollSettings settings) {
+        long streamVa = stream.va();
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.va();
+        boolean result = sWriteRagdollSettings(streamVa, ordinal, settingsVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
     native private static boolean sWritePhysicsScene(
             long streamVa, int ordinal, long sceneVa);
+
+    native private static boolean sWriteRagdollSettings(
+            long streamVa, int ordinal, long settingsVa);
 }

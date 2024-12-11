@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/ObjectStream/ObjectStreamOut.h"
 #include "Jolt/Physics/PhysicsScene.h"
+#include "Jolt/Physics/Ragdoll/Ragdoll.h"
 #include "auto/com_github_stephengold_joltjni_ObjectStreamOut.h"
 
 using namespace JPH;
@@ -45,5 +46,23 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
             = reinterpret_cast<PhysicsScene *> (sceneVa);
     const bool result
             = ObjectStreamOut::sWriteObject(*pStream, streamType, *pScene);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteRagdollSettings
+ * Signature: (JIJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteRagdollSettings
+  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    const ObjectStream::EStreamType streamType
+            = (ObjectStream::EStreamType) ordinal;
+    const RagdollSettings * const pSettings
+            = reinterpret_cast<RagdollSettings *> (settingsVa);
+    const bool result
+            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
     return result;
 }

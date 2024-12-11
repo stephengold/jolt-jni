@@ -84,6 +84,23 @@ final public class ObjectStreamIn {
 
         return result;
     }
+
+    /**
+     * Read ragdoll settings from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param settingsRef where to store the de-serialized settings (not null,
+     * modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, RagdollSettingsRef settingsRef) {
+        long streamVa = stream.va();
+        long refVa = settingsRef.va();
+        boolean result = sReadRagdollSettingsFromStream(streamVa, refVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -95,6 +112,9 @@ final public class ObjectStreamIn {
 
     native private static boolean sReadRagdollSettings(
             String fileName, long refVa);
+
+    native private static boolean sReadRagdollSettingsFromStream(
+            long streamVa, long refVa);
 
     native private static boolean sReadSkeletalAnimation(
             String fileName, long refVa);
