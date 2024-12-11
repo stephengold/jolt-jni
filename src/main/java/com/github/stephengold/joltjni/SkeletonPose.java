@@ -210,9 +210,9 @@ public class SkeletonPose extends JoltPhysicsObject {
      *
      * @param skeleton the desired skeleton (not null)
      */
-    public void setSkeleton(Skeleton skeleton) {
+    public void setSkeleton(ConstSkeleton skeleton) {
         long poseVa = va();
-        long skeletonVa = skeleton.va();
+        long skeletonVa = skeleton.targetVa();
         setSkeleton(poseVa, skeletonVa);
     }
     // *************************************************************************

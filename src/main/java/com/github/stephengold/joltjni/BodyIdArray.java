@@ -64,9 +64,9 @@ public class BodyIdArray extends JoltPhysicsObject {
      * @param elementIndex the index at which to store the ID (&ge;0)
      * @param id the ID to store (not null, unaffected)
      */
-    public void set(int elementIndex, BodyId id) {
+    public void set(int elementIndex, ConstBodyId id) {
         long arrayVa = va();
-        long idVa = id.va();
+        long idVa = id.targetVa();
         setId(arrayVa, elementIndex, idVa);
     }
     // *************************************************************************
