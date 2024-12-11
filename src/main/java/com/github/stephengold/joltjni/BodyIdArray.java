@@ -48,7 +48,7 @@ public class BodyIdArray extends JoltPhysicsObject {
      * Copy the ID at the specified index.
      *
      * @param elementIndex the index from which to copy the ID (&ge;0)
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new object
      */
     public ConstBodyId get(int elementIndex) {
         long arrayVa = va();

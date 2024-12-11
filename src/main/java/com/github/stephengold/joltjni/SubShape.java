@@ -45,9 +45,9 @@ public class SubShape extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Copy the rotation. The subshape is unaffected.
+     * Decompress the rotation. The subshape is unaffected.
      *
-     * @return a new quaternion
+     * @return a new rotation quaternion
      */
     public Quat getRotation() {
         long subShapeVa = va();

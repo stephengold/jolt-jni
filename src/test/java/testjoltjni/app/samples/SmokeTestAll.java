@@ -48,7 +48,7 @@ final public class SmokeTestAll {
      */
     private static DebugRenderer renderer;
     /**
-     * how many physics steps to simulate for each invocation of
+     * number of physics steps to simulate during each invocation of
      * {@code smokeTest()}
      */
     private static int numSteps = 1;
