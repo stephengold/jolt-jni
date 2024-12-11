@@ -93,7 +93,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_getS
             = reinterpret_cast<HeightFieldShape *> (shapeVa);
     const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
     const Vec3 localLocation(x, y, z);
-    Vec3 result = pShape->GetSurfaceNormal(*pId, localLocation);
+    const Vec3 result = pShape->GetSurfaceNormal(*pId, localLocation);
     jboolean isCopy;
     jfloat * const pStoreFloats
             = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
@@ -129,7 +129,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_
     const Vec3 localLocation(x, y, z);
     SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
     Vec3 outLocation;
-    bool result = pShape->ProjectOntoSurface(localLocation, outLocation, *pId);
+    const bool result = pShape->ProjectOntoSurface(localLocation, outLocation, *pId);
     jboolean isCopy;
     jfloat * const pStoreFloats
             = pEnv->GetFloatArrayElements(storeFloats, &isCopy);

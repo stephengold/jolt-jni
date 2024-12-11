@@ -40,7 +40,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getClose
     const Vec3 a(ax, ay, az);
     const Vec3 b(bx, by, bz);
     uint32 outSet;
-    Vec3 result = ClosestPoint::GetClosestPointOnLine(a, b, outSet);
+    const Vec3 result = ClosestPoint::GetClosestPointOnLine(a, b, outSet);
     jboolean isCopy;
     jint * const pSet = pEnv->GetIntArrayElements(storeSet, &isCopy);
     pSet[0] = outSet;
@@ -66,7 +66,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getClose
     const Vec3 c(cx, cy, cz);
     const Vec3 d(dx, dy, dz);
     uint32 outSet;
-    Vec3 result = ClosestPoint::GetClosestPointOnTetrahedron(a, b, c, d, outSet);
+    const Vec3 result = ClosestPoint::GetClosestPointOnTetrahedron(a, b, c, d, outSet);
     jboolean isCopy;
     jint * const pSet = pEnv->GetIntArrayElements(storeSet, &isCopy);
     pSet[0] = outSet;
@@ -91,7 +91,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getClose
     const Vec3 b(bx, by, bz);
     const Vec3 c(cx, cy, cz);
     uint32 outSet;
-    Vec3 result = ClosestPoint::GetClosestPointOnTriangle(a, b, c, outSet);
+    const Vec3 result = ClosestPoint::GetClosestPointOnTriangle(a, b, c, outSet);
     jboolean isCopy;
     jint * const pSet = pEnv->GetIntArrayElements(storeSet, &isCopy);
     pSet[0] = outSet;
@@ -114,7 +114,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getB
     const Vec3 a(ax, ay, az);
     const Vec3 b(bx, by, bz);
     float u, v;
-    bool result = ClosestPoint::GetBaryCentricCoordinates(a, b, u, v);
+    const bool result = ClosestPoint::GetBaryCentricCoordinates(a, b, u, v);
     jboolean isCopy;
     jfloat * const pUv = pEnv->GetFloatArrayElements(storeUv, &isCopy);
     pUv[0] = u;
@@ -135,7 +135,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ClosestPoint_getB
     const Vec3 b(bx, by, bz);
     const Vec3 c(cx, cy, cz);
     float u, v, w;
-    bool result = ClosestPoint::GetBaryCentricCoordinates(a, b, c, u, v, w);
+    const bool result = ClosestPoint::GetBaryCentricCoordinates(a, b, c, u, v, w);
     jboolean isCopy;
     jfloat * const pUvw = pEnv->GetFloatArrayElements(storeUvw, &isCopy);
     pUvw[0] = u;

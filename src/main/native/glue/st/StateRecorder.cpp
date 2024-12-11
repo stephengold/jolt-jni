@@ -160,7 +160,7 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_StateRecorder_read
     pEnv->ReleaseStringUTFChars(javaString, cString);
     pRecorder->Read(cppString);
     const char * const pResult = cppString.c_str();
-    jstring result = pEnv->NewStringUTF(pResult);
+    const jstring result = pEnv->NewStringUTF(pResult);
     return result;
 }
 

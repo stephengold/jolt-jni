@@ -324,7 +324,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Body_getBroadPhaseLay
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     BroadPhaseLayer layer = pBody->GetBroadPhaseLayer();
-    jint result = layer.GetValue();
+    const jint result = layer.GetValue();
     return result;
 }
 

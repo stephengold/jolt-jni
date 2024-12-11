@@ -110,7 +110,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_resize
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_setId
   (JNIEnv *, jclass, jlong vectorVa, jint elementIndex, jlong idVa) {
     BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
-    BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
+    const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
     pVector->at(elementIndex) = *pId;
 }
 

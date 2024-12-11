@@ -55,7 +55,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassS
   (JNIEnv *, jclass, jlong ocomShapeVa) {
     const OffsetCenterOfMassShape * const pShape
             = reinterpret_cast<OffsetCenterOfMassShape *> (ocomShapeVa);
-    float result = pShape->GetOffset().GetX();
+    const float result = pShape->GetOffset().GetX();
     return result;
 }
 
@@ -68,7 +68,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassS
   (JNIEnv *, jclass, jlong ocomShapeVa) {
     const OffsetCenterOfMassShape * const pShape
             = reinterpret_cast<OffsetCenterOfMassShape *> (ocomShapeVa);
-    float result = pShape->GetOffset().GetY();
+    const float result = pShape->GetOffset().GetY();
     return result;
 }
 
@@ -81,6 +81,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassS
   (JNIEnv *, jclass, jlong ocomShapeVa) {
     const OffsetCenterOfMassShape * const pShape
             = reinterpret_cast<OffsetCenterOfMassShape *> (ocomShapeVa);
-    float result = pShape->GetOffset().GetZ();
+    const float result = pShape->GetOffset().GetZ();
     return result;
 }

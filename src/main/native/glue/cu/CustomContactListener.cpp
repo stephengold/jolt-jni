@@ -116,7 +116,7 @@ public:
         const jdouble offsetY = inBaseOffset.GetY();
         const jdouble offsetZ = inBaseOffset.GetZ();
         const jlong shapeVa = reinterpret_cast<jlong> (&inCollisionResult);
-        jint jintResult = pAttachEnv->CallIntMethod(mJavaObject,
+        const jint jintResult = pAttachEnv->CallIntMethod(mJavaObject,
                 mValidateMethodId, body1Va, body2Va, offsetX, offsetY, offsetZ, shapeVa);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
         mpVM->DetachCurrentThread();

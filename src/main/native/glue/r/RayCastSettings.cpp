@@ -90,7 +90,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_RayCastSettings_g
   (JNIEnv *, jclass, jlong settingsVa) {
     const RayCastSettings * const pSettings
             = reinterpret_cast<RayCastSettings *> (settingsVa);
-    bool result = pSettings->mTreatConvexAsSolid;
+    const bool result = pSettings->mTreatConvexAsSolid;
     return result;
 }
 

@@ -212,7 +212,7 @@ public:
         const jlong otherCharacterVa
                 = reinterpret_cast<jlong> (inOtherCharacter);
         const jlong subShapeId2Va = reinterpret_cast<jlong> (&inSubShapeID2);
-        bool result = pAttachEnv->CallBooleanMethod(
+        const bool result = pAttachEnv->CallBooleanMethod(
                 mJavaObject, mCcValidateMethodId, characterVa, otherCharacterVa,
                 subShapeId2Va);
 
@@ -310,7 +310,7 @@ public:
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
         const jlong bodyID2Va = reinterpret_cast<jlong> (&inBodyID2);
         const jlong subShapeId2Va = reinterpret_cast<jlong> (&inSubShapeID2);
-        bool result = pAttachEnv->CallBooleanMethod(mJavaObject,
+        const bool result = pAttachEnv->CallBooleanMethod(mJavaObject,
                 mValidateMethodId, characterVa, bodyID2Va, subShapeId2Va);
 
         mpVM->DetachCurrentThread();

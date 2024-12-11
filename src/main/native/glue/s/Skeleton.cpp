@@ -48,7 +48,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Skeleton_addJointWith
     Skeleton * const pSkeleton = reinterpret_cast<Skeleton *> (skeletonVa);
     jboolean isCopy;
     const char * pName = pEnv->GetStringUTFChars(name, &isCopy);
-    uint result = pSkeleton->AddJoint(pName, parentIndex);
+    const uint result = pSkeleton->AddJoint(pName, parentIndex);
     pEnv->ReleaseStringUTFChars(name, pName);
     return result;
 }
@@ -63,7 +63,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Skeleton_addRootJoint
     Skeleton * const pSkeleton = reinterpret_cast<Skeleton *> (skeletonVa);
     jboolean isCopy;
     const char * pName = pEnv->GetStringUTFChars(name, &isCopy);
-    uint result = pSkeleton->AddJoint(pName);
+    const uint result = pSkeleton->AddJoint(pName);
     pEnv->ReleaseStringUTFChars(name, pName);
     return result;
 }

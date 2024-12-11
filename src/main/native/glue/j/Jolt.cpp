@@ -387,6 +387,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_rayAaBoxHits
     const Vec3 offset(offsetX, offsetY, offsetZ);
     const Vec3 min(minX, minY, minZ);
     const Vec3 max(maxX, maxY, maxZ);
-    bool result = RayAABoxHits(start, offset, min, max);
+    const bool result = RayAABoxHits(start, offset, min, max);
     return result;
 }

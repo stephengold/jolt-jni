@@ -79,6 +79,6 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_std_StringStream_s
             = reinterpret_cast<stringstream *> (streamVa);
     const string cppString = pStream->str();
     const char * const cString = cppString.c_str();
-    jstring result = pEnv->NewStringUTF(cString);
+    const jstring result = pEnv->NewStringUTF(cString);
     return result;
 }

@@ -226,7 +226,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_setEmbed
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_sRestoreFromBinaryState
   (JNIEnv *, jclass, jlong streamVa) {
     StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
-    PhysicsScene::PhysicsSceneResult *pResult
+    PhysicsScene::PhysicsSceneResult * const pResult
             = new PhysicsScene::PhysicsSceneResult();
     TRACE_NEW("PhysicsScene::PhysicsSceneResult", pResult)
     *pResult = PhysicsScene::sRestoreFromBinaryState(*pStream);

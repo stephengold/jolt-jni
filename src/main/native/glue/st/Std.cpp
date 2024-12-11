@@ -33,7 +33,7 @@ SOFTWARE.
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_acos
   (JNIEnv *, jclass, jfloat ratio) {
-    float result = std::acos(ratio);
+    const float result = std::acos(ratio);
     return result;
 }
 
@@ -44,7 +44,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_acos
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_atan
   (JNIEnv *, jclass, jfloat ratio) {
-    float result = std::atan(ratio);
+    const float result = std::atan(ratio);
     return result;
 }
 
@@ -55,7 +55,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_atan
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_cos
   (JNIEnv *, jclass, jfloat angle) {
-    float result = std::cos(angle);
+    const float result = std::cos(angle);
     return result;
 }
 
@@ -66,7 +66,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_cos
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_exp
   (JNIEnv *, jclass, jfloat value) {
-    float result = std::exp(value);
+    const float result = std::exp(value);
     return result;
 }
 
@@ -77,7 +77,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_exp
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_fmod
   (JNIEnv *, jclass, jfloat numerator, jfloat denominator) {
-    float result = std::fmod(numerator, denominator);
+    const float result = std::fmod(numerator, denominator);
     return result;
 }
 
@@ -88,7 +88,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_fmod
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_pow
   (JNIEnv *, jclass, jfloat base, jfloat exponent) {
-    float result = std::pow(base, exponent);
+    const float result = std::pow(base, exponent);
     return result;
 }
 
@@ -99,7 +99,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_pow
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_sin
   (JNIEnv *, jclass, jfloat angle) {
-    float result = std::sin(angle);
+    const float result = std::sin(angle);
     return result;
 }
 
@@ -110,7 +110,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_sin
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_sqrt
   (JNIEnv *, jclass, jfloat value) {
-    float result = std::sqrt(value);
+    const float result = std::sqrt(value);
     return result;
 }
 
@@ -123,7 +123,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_Std_shuffle
   (JNIEnv *pEnv, jclass, jintArray indices, jlong generatorVa) {
     jboolean isCopy;
     jint * const pIndices = pEnv->GetIntArrayElements(indices, &isCopy);
-    jsize numIndices = pEnv->GetArrayLength(indices);
+    const jsize numIndices = pEnv->GetArrayLength(indices);
     JPH::Array<jint> arr(numIndices);
     for (int i = 0; i < numIndices; ++i) {
         arr[i] = pIndices[i];
