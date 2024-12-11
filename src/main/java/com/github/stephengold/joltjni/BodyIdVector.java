@@ -125,16 +125,16 @@ public class BodyIdVector extends Array<BodyId> {
     }
 
     /**
-     * Access the ID at the specified index.
+     * Copy the ID at the specified index.
      *
-     * @param elementIndex the index from which to get the ID (&ge;0)
-     * @return a new JVM object with the pre-existing native object assigned
+     * @param elementIndex the index from which to copy the ID (&ge;0)
+     * @return a new object
      */
     @Override
     public BodyId get(int elementIndex) {
         long vectorVa = va();
         long idVa = getId(vectorVa, elementIndex);
-        BodyId result = new BodyId(idVa, false);
+        BodyId result = new BodyId(idVa, true);
 
         return result;
     }

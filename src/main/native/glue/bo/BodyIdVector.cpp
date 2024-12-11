@@ -87,8 +87,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_free
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_getId
   (JNIEnv *, jclass, jlong vectorVa, jint elementIndex) {
     BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
-    BodyID& result = pVector->at(elementIndex);
-    return reinterpret_cast<jlong> (&result);
+    BodyID * const pResult = new BodyID();
+    TRACE_NEW("BodyID", pResult)
+    *pResult = pVector->at(elementIndex);
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
