@@ -40,6 +40,20 @@ IMPLEMENT_REF(RagdollSettings,
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    addAdditionalConstraint
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_addAdditionalConstraint
+  (JNIEnv *, jclass, jlong settingsVa, jlong constraintVa) {
+    RagdollSettings * const pSettings
+            = reinterpret_cast<RagdollSettings *> (settingsVa);
+    RagdollSettings::AdditionalConstraint * const pConstraint =
+            reinterpret_cast<RagdollSettings::AdditionalConstraint *> (constraintVa);
+    pSettings->mAdditionalConstraints.push_back(*pConstraint);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
  * Method:    calculateBodyIndexToConstraintIndex
  * Signature: (J)V
  */
@@ -169,6 +183,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_resiz
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    saveBinaryState
+ * Signature: (JJZZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_saveBinaryState
+  (JNIEnv *, jclass, jlong settingsVa, jlong streamVa, jboolean saveShapes,
+  jboolean saveGroupFilter) {
+    const RagdollSettings * const pSettings
+            = reinterpret_cast<RagdollSettings *> (settingsVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    pSettings->SaveBinaryState(*pStream, saveShapes, saveGroupFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
  * Method:    setEmbedded
  * Signature: (J)V
  */
@@ -190,6 +218,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_setSk
             = reinterpret_cast<RagdollSettings *> (settingsVa);
     Skeleton * const pSkeleton = reinterpret_cast<Skeleton *> (skeletonVa);
     pSettings->mSkeleton = pSkeleton;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    sRestoreFromBinaryState
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_sRestoreFromBinaryState
+  (JNIEnv *, jclass, jlong streamVa) {
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    RagdollSettings::RagdollResult * const pResult
+            = new RagdollSettings::RagdollResult();
+    TRACE_NEW("RagdollSettings::RagdollResult", pResult)
+    *pResult = RagdollSettings::sRestoreFromBinaryState(*pStream);
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
