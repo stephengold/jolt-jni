@@ -95,3 +95,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
     pEnv->ReleaseStringUTFChars(fileName, pFileName);
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadSkeleton
+ * Signature: (Ljava/lang/String;J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadSkeleton
+  (JNIEnv *pEnv, jclass, jstring fileName, jlong refVa) {
+    jboolean isCopy;
+    const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy);
+    Ref<Skeleton> * const pStoreRef = reinterpret_cast<Ref<Skeleton> *> (refVa);
+    const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
+    pEnv->ReleaseStringUTFChars(fileName, pFileName);
+    return result;
+}

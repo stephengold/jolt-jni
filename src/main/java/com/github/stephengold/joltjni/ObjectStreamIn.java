@@ -58,6 +58,8 @@ final public class ObjectStreamIn {
             result = sReadRagdollSettings(fileName, refVa);
         } else if (storeRef instanceof SkeletalAnimationRef) {
             result = sReadSkeletalAnimation(fileName, refVa);
+        } else if (storeRef instanceof SkeletonRef) {
+            result = sReadSkeleton(fileName, refVa);
         } else {
             throw new IllegalArgumentException(
                     storeRef.getClass().getSimpleName());
@@ -95,5 +97,8 @@ final public class ObjectStreamIn {
             String fileName, long refVa);
 
     native private static boolean sReadSkeletalAnimation(
+            String fileName, long refVa);
+
+    native private static boolean sReadSkeleton(
             String fileName, long refVa);
 }
