@@ -158,9 +158,9 @@ public class BodyIdVector extends Array<BodyId> {
      */
     @Override
     public void set(int elementIndex, BodyId id) {
-        long vectorId = va();
+        long vectorVa = va();
         long idVa = id.va();
-        setId(vectorId, elementIndex, idVa);
+        setId(vectorVa, elementIndex, idVa);
     }
 
     /**

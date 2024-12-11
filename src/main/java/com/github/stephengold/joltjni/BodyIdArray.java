@@ -51,8 +51,8 @@ public class BodyIdArray extends JoltPhysicsObject {
      * @return a new JVM object with the pre-existing native object assigned
      */
     public ConstBodyId get(int elementIndex) {
-        long vectorVa = va();
-        long idVa = getId(vectorVa, elementIndex);
+        long arrayVa = va();
+        long idVa = getId(arrayVa, elementIndex);
         BodyId result = new BodyId(idVa, true);
 
         return result;
@@ -65,19 +65,19 @@ public class BodyIdArray extends JoltPhysicsObject {
      * @param id the ID to store (not null, unaffected)
      */
     public void set(int elementIndex, BodyId id) {
-        long vectorId = va();
+        long arrayVa = va();
         long idVa = id.va();
-        setId(vectorId, elementIndex, idVa);
+        setId(arrayVa, elementIndex, idVa);
     }
     // *************************************************************************
     // native private methods
 
     native private static long create(int length);
 
-    native private static void free(long vectorVa);
+    native private static void free(long arrayVa);
 
-    native private static long getId(long vectorVa, int elementIndex);
+    native private static long getId(long arrayVa, int elementIndex);
 
     native private static void setId(
-            long vectorVa, int elementIndex, long idVa);
+            long arrayVa, int elementIndex, long idVa);
 }
