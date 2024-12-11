@@ -98,7 +98,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public BodyIdVector getBodyIDs() {
+    public BodyIdVector getBodyIds() {
         long ragdollVa = va();
         long vectorVa = getBodyIds(ragdollVa);
         BodyIdVector result = new BodyIdVector(this, vectorVa);
