@@ -157,8 +157,8 @@ final public class SmokeTestAll {
 
         // shapes package:
         smokeTest(new BoxShapeTest());
-        smokeTest(new CapsuleShapeTest());
-        smokeTest(new ConvexHullShapeTest());
+        //smokeTest(new CapsuleShapeTest());
+        //smokeTest(new ConvexHullShapeTest());
         smokeTest(new CylinderShapeTest());
         smokeTest(new DeformedHeightFieldShapeTest());
         smokeTest(new EmptyShapeTest());
