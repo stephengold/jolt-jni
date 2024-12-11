@@ -50,7 +50,7 @@ public class BodyIdArray extends JoltPhysicsObject {
      * @param elementIndex the index from which to copy the ID (&ge;0)
      * @return a new object
      */
-    public ConstBodyId get(int elementIndex) {
+    public BodyId get(int elementIndex) {
         long arrayVa = va();
         long idVa = getId(arrayVa, elementIndex);
         BodyId result = new BodyId(idVa, true);
