@@ -57,6 +57,17 @@ final public class RagdollSettingsRef extends Ref {
     // RagdollInterface methods
 
     /**
+     * Add the specified constraint.
+     *
+     * @param constraint (not null)
+     */
+    public void addAdditionalConstraint(AdditionalConstraint constraint) {
+        long settingsVa = targetVa();
+        long constraintVa = constraint.va();
+        RagdollSettings.addAdditionalConstraint(settingsVa, constraintVa);
+    }
+
+    /**
      * Pre-calculate the map used by {@code getBodyIndexToConstraintIndex()}.
      */
     public void calculateBodyIndexToConstraintIndex() {
@@ -93,6 +104,15 @@ final public class RagdollSettingsRef extends Ref {
     }
 
     /**
+     * Create and add collision filters to all bodies in the ragdoll and
+     * configure them so parents and children don't collide.
+     */
+    public void disableParentChildCollisions() {
+        long settingsVa = targetVa();
+        RagdollSettings.disableParentChildCollisions(settingsVa);
+    }
+
+    /**
      * Access the parts by way of a Java array. (native attribute: mParts)
      *
      * @return a new array of new JVM objects with pre-existing native objects
@@ -120,6 +140,57 @@ final public class RagdollSettingsRef extends Ref {
         long settingsVa = targetVa();
         long skeletonVa = RagdollSettings.getSkeleton(settingsVa);
         Skeleton result = new Skeleton(skeletonVa);
+
+        return result;
+    }
+
+    /**
+     * Resize the parts array.
+     *
+     * @param numParts the desired number of parts (&ge;0)
+     */
+    public void resizeParts(int numParts) {
+        long settingsVa = targetVa();
+        RagdollSettings.resizeParts(settingsVa, numParts);
+    }
+
+    /**
+     * Save the settings to the specified binary stream. The settings are
+     * unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     * @param saveShapes if true, save the shapes
+     * @param saveGroupFilter if true, save the group filter
+     */
+    public void saveBinaryState(
+            StreamOut stream, boolean saveShapes, boolean saveGroupFilter) {
+        long settingsVa = targetVa();
+        long streamVa = stream.va();
+        RagdollSettings.saveBinaryState(
+                settingsVa, streamVa, saveShapes, saveGroupFilter);
+    }
+
+    /**
+     * Replace the skeleton. (native attribute: mSkeleton)
+     *
+     * @param skeleton the desired skeleton (not null)
+     */
+    public void setSkeleton(Skeleton skeleton) {
+        long settingsVa = targetVa();
+        long skeletonVa = skeleton.va();
+        RagdollSettings.setSkeleton(settingsVa, skeletonVa);
+    }
+
+    /**
+     * Read a ragdoll from the specified input stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @return the result of the read (not null)
+     */
+    public static RagdollResult sRestoreFromBinaryState(StreamIn stream) {
+        long streamVa = stream.targetVa();
+        long resultVa = RagdollSettings.sRestoreFromBinaryState(streamVa);
+        RagdollResult result = new RagdollResult(resultVa, true);
 
         return result;
     }

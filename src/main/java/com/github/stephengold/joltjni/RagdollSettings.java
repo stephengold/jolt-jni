@@ -254,7 +254,7 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     native static long createRagdoll(
             long settingsVa, int groupId, long userData, long systemVa);
 
-    native private static void disableParentChildCollisions(long settingsVa);
+    native static void disableParentChildCollisions(long settingsVa);
 
     native static int getNumParts(long settingsVa);
 
