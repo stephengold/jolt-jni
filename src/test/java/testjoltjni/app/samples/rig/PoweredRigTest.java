@@ -105,13 +105,13 @@ if(implementsDebugRendering())
 }
 /*TODO
 
-void PoweredRigTest.CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
+void PoweredRigTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 {
-	inUI.CreateTextButton(inSubMenu, "Select Animation", [this, inUI]() {
-		UIElement *animation_name = inUI.CreateMenu();
+	inUI->CreateTextButton(inSubMenu, "Select Animation", [this, inUI]() {
+		UIElement *animation_name = inUI->CreateMenu();
 		for (uint i = 0; i < size(sAnimations); ++i)
-			inUI.CreateTextButton(animation_name, sAnimations[i], [this, i]() { sAnimationName = sAnimations[i]; RestartTest(); });
-		inUI.ShowMenu(animation_name);
+			inUI->CreateTextButton(animation_name, sAnimations[i], [this, i]() { sAnimationName = sAnimations[i]; RestartTest(); });
+		inUI->ShowMenu(animation_name);
 	});
 }*/
 
