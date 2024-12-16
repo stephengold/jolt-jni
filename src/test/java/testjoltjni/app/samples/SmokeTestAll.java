@@ -194,6 +194,30 @@ final public class SmokeTestAll {
     // private methods
 
     /**
+     * Allocate and initialize a {@code PhysicsSystem} in the customary
+     * configuration.
+     *
+     * @param maxBodies the desired number of bodies (&ge;1)
+     * @return a new instance
+     */
+    static private PhysicsSystem newPhysicsSystem(int maxBodies) {
+        BPLayerInterfaceImpl mapObj2Bp = new BPLayerInterfaceImpl();
+        ObjectVsBroadPhaseLayerFilterImpl objVsBpFilter
+                = new ObjectVsBroadPhaseLayerFilterImpl();
+        ObjectLayerPairFilterImpl objVsObjFilter
+                = new ObjectLayerPairFilterImpl();
+
+        int numBodyMutexes = 0; // 0 means "use the default value"
+        int maxBodyPairs = 65_536;
+        int maxContacts = 20_480;
+        PhysicsSystem result = new PhysicsSystem();
+        result.init(maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
+                mapObj2Bp, objVsBpFilter, objVsObjFilter);
+
+        return result;
+    }
+
+    /**
      * Invoke key methods of the specified Test to see whether they crash.
      *
      * @param test the Test instance to use (not null)
@@ -234,29 +258,5 @@ final public class SmokeTestAll {
 
         test.Cleanup();
         System.gc();
-    }
-
-    /**
-     * Allocate and initialize a {@code PhysicsSystem} in the customary
-     * configuration.
-     *
-     * @param maxBodies the desired number of bodies (&ge;1)
-     * @return a new instance
-     */
-    static private PhysicsSystem newPhysicsSystem(int maxBodies) {
-        BPLayerInterfaceImpl mapObj2Bp = new BPLayerInterfaceImpl();
-        ObjectVsBroadPhaseLayerFilterImpl objVsBpFilter
-                = new ObjectVsBroadPhaseLayerFilterImpl();
-        ObjectLayerPairFilterImpl objVsObjFilter
-                = new ObjectLayerPairFilterImpl();
-
-        int numBodyMutexes = 0; // 0 means "use the default value"
-        int maxBodyPairs = 65_536;
-        int maxContacts = 20_480;
-        PhysicsSystem result = new PhysicsSystem();
-        result.init(maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
-                mapObj2Bp, objVsBpFilter, objVsObjFilter);
-
-        return result;
     }
 }
