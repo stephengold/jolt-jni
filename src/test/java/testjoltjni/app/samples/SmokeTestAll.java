@@ -91,27 +91,7 @@ final public class SmokeTestAll {
         smokeTest(new CharacterTest());
         smokeTest(new CharacterVirtualTest());
 
-        // constraints package:
-        smokeTest(new ConeConstraintTest());
-        smokeTest(new ConstraintPriorityTest());
-        smokeTest(new ConstraintSingularityTest());
-        smokeTest(new ConstraintVsCOMChangeTest());
-        smokeTest(new DistanceConstraintTest());
-        smokeTest(new FixedConstraintTest());
-        smokeTest(new GearConstraintTest());
-        smokeTest(new HingeConstraintTest());
-        smokeTest(new PathConstraintTest());
-        smokeTest(new PointConstraintTest());
-        smokeTest(new PoweredHingeConstraintTest());
-        smokeTest(new PoweredSliderConstraintTest());
-        smokeTest(new PoweredSwingTwistConstraintTest());
-        smokeTest(new PulleyConstraintTest());
-        smokeTest(new RackAndPinionConstraintTest());
-        smokeTest(new SixDOFConstraintTest());
-        smokeTest(new SliderConstraintTest());
-        smokeTest(new SpringTest());
-        smokeTest(new SwingTwistConstraintFrictionTest());
-        smokeTest(new SwingTwistConstraintTest());
+        smokeTestConstraints();
 
         // convex-collision package:
         smokeTest(new CapsuleVsBoxTest());
@@ -119,35 +99,7 @@ final public class SmokeTestAll {
         smokeTest(new ConvexHullShrinkTest());
         smokeTest(new ConvexHullTest());
 
-        // general package:
-        smokeTest(new ActivateDuringUpdateTest());
-        smokeTest(new ActiveEdgesTest());
-        smokeTest(new AllowedDOFsTest());
-        smokeTest(new BigVsSmallTest());
-        smokeTest(new CenterOfMassTest());
-        smokeTest(new ChangeMotionQualityTest());
-        smokeTest(new ChangeMotionTypeTest());
-        smokeTest(new ChangeObjectLayerTest());
-        smokeTest(new ChangeShapeTest());
-        smokeTest(new ContactManifoldTest());
-        smokeTest(new ConveyorBeltTest());
-        smokeTest(new DampingTest());
-        smokeTest(new DynamicMeshTest());
-        smokeTest(new EnhancedInternalEdgeRemovalTest());
-        smokeTest(new FrictionPerTriangleTest());
-        smokeTest(new FrictionTest());
-        smokeTest(new FunnelTest());
-        smokeTest(new GravityFactorTest());
-        smokeTest(new GyroscopicForceTest());
-        smokeTest(new HeavyOnLightTest());
-        smokeTest(new HighSpeedTest());
-        smokeTest(new IslandTest());
-        smokeTest(new KinematicTest());
-        smokeTest(new LoadSaveBinaryTest());
-        smokeTest(new LoadSaveSceneTest());
-        smokeTest(new ManifoldReductionTest());
-        smokeTest(new ModifyMassTest());
-        smokeTest(new RestitutionTest());
+        smokeTestGeneral();
 
         // rig package:
         //smokeTest(new BigWorldTest());
@@ -159,25 +111,7 @@ final public class SmokeTestAll {
         smokeTest(new PoweredRigTest());
         smokeTest(new RigPileTest());
 
-        // shapes package:
-        smokeTest(new BoxShapeTest());
-        //smokeTest(new CapsuleShapeTest());
-        //smokeTest(new ConvexHullShapeTest());
-        smokeTest(new CylinderShapeTest());
-        smokeTest(new DeformedHeightFieldShapeTest());
-        smokeTest(new EmptyShapeTest());
-        smokeTest(new HeightFieldShapeTest());
-        smokeTest(new MeshShapeTest());
-        smokeTest(new MeshShapeUserDataTest());
-        smokeTest(new MutableCompoundShapeTest());
-        smokeTest(new OffsetCenterOfMassShapeTest());
-        smokeTest(new PlaneShapeTest());
-        smokeTest(new RotatedTranslatedShapeTest());
-        smokeTest(new SphereShapeTest());
-        smokeTest(new StaticCompoundShapeTest());
-        smokeTest(new TaperedCapsuleShapeTest());
-        smokeTest(new TaperedCylinderShapeTest());
-        smokeTest(new TriangleShapeTest());
+        smokeTestShapes();
 
         // softbody package:
         smokeTest(new SoftBodyPressureTest());
@@ -258,5 +192,89 @@ final public class SmokeTestAll {
 
         test.Cleanup();
         System.gc();
+    }
+
+    /**
+     * Smoke test the "constraints" package.
+     */
+    private static void smokeTestConstraints() {
+        smokeTest(new ConeConstraintTest());
+        smokeTest(new ConstraintPriorityTest());
+        smokeTest(new ConstraintSingularityTest());
+        smokeTest(new ConstraintVsCOMChangeTest());
+        smokeTest(new DistanceConstraintTest());
+        smokeTest(new FixedConstraintTest());
+        smokeTest(new GearConstraintTest());
+        smokeTest(new HingeConstraintTest());
+        smokeTest(new PathConstraintTest());
+        smokeTest(new PointConstraintTest());
+        smokeTest(new PoweredHingeConstraintTest());
+        smokeTest(new PoweredSliderConstraintTest());
+        smokeTest(new PoweredSwingTwistConstraintTest());
+        smokeTest(new PulleyConstraintTest());
+        smokeTest(new RackAndPinionConstraintTest());
+        smokeTest(new SixDOFConstraintTest());
+        smokeTest(new SliderConstraintTest());
+        smokeTest(new SpringTest());
+        smokeTest(new SwingTwistConstraintFrictionTest());
+        smokeTest(new SwingTwistConstraintTest());
+    }
+
+    /**
+     * Smoke test the "general" package.
+     */
+    private static void smokeTestGeneral() {
+        smokeTest(new ActivateDuringUpdateTest());
+        smokeTest(new ActiveEdgesTest());
+        smokeTest(new AllowedDOFsTest());
+        smokeTest(new BigVsSmallTest());
+        smokeTest(new CenterOfMassTest());
+        smokeTest(new ChangeMotionQualityTest());
+        smokeTest(new ChangeMotionTypeTest());
+        smokeTest(new ChangeObjectLayerTest());
+        smokeTest(new ChangeShapeTest());
+        smokeTest(new ContactManifoldTest());
+        smokeTest(new ConveyorBeltTest());
+        smokeTest(new DampingTest());
+        smokeTest(new DynamicMeshTest());
+        smokeTest(new EnhancedInternalEdgeRemovalTest());
+        smokeTest(new FrictionPerTriangleTest());
+        smokeTest(new FrictionTest());
+        smokeTest(new FunnelTest());
+        smokeTest(new GravityFactorTest());
+        smokeTest(new GyroscopicForceTest());
+        smokeTest(new HeavyOnLightTest());
+        smokeTest(new HighSpeedTest());
+        smokeTest(new IslandTest());
+        smokeTest(new KinematicTest());
+        smokeTest(new LoadSaveBinaryTest());
+        smokeTest(new LoadSaveSceneTest());
+        smokeTest(new ManifoldReductionTest());
+        smokeTest(new ModifyMassTest());
+        smokeTest(new RestitutionTest());
+    }
+
+    /**
+     * Smoke test the "shapes" package.
+     */
+    private static void smokeTestShapes() {
+        smokeTest(new BoxShapeTest());
+        //smokeTest(new CapsuleShapeTest());
+        //smokeTest(new ConvexHullShapeTest());
+        smokeTest(new CylinderShapeTest());
+        smokeTest(new DeformedHeightFieldShapeTest());
+        smokeTest(new EmptyShapeTest());
+        smokeTest(new HeightFieldShapeTest());
+        smokeTest(new MeshShapeTest());
+        smokeTest(new MeshShapeUserDataTest());
+        smokeTest(new MutableCompoundShapeTest());
+        smokeTest(new OffsetCenterOfMassShapeTest());
+        smokeTest(new PlaneShapeTest());
+        smokeTest(new RotatedTranslatedShapeTest());
+        smokeTest(new SphereShapeTest());
+        smokeTest(new StaticCompoundShapeTest());
+        smokeTest(new TaperedCapsuleShapeTest());
+        smokeTest(new TaperedCylinderShapeTest());
+        smokeTest(new TriangleShapeTest());
     }
 }
