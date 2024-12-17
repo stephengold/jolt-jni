@@ -260,7 +260,7 @@ final public class SmokeTestAll {
     private static void smokeTestShapes() {
         smokeTest(new BoxShapeTest());
         smokeTest(new CapsuleShapeTest());
-        //smokeTest(new ConvexHullShapeTest());
+        smokeTest(new ConvexHullShapeTest());
         smokeTest(new CylinderShapeTest());
         smokeTest(new DeformedHeightFieldShapeTest());
         smokeTest(new EmptyShapeTest());
