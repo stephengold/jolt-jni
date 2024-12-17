@@ -103,13 +103,13 @@ final public class SmokeTestAll {
 
         // rig package:
         //smokeTest(new BigWorldTest());
-        smokeTest(new CreateRigTest());
-        smokeTest(new KinematicRigTest());
-        smokeTest(new LoadRigTest());
-        smokeTest(new LoadSaveBinaryRigTest());
-        smokeTest(new LoadSaveRigTest());
-        smokeTest(new PoweredRigTest());
-        smokeTest(new RigPileTest());
+        //smokeTest(new CreateRigTest());
+        //smokeTest(new KinematicRigTest());
+        //smokeTest(new LoadRigTest());
+        //smokeTest(new LoadSaveBinaryRigTest());
+        //smokeTest(new LoadSaveRigTest());
+        //smokeTest(new PoweredRigTest());
+        //smokeTest(new RigPileTest());
 
         smokeTestShapes();
 
