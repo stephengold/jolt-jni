@@ -104,7 +104,7 @@ final public class SmokeTestAll {
         // rig package:
         //smokeTest(new BigWorldTest());
         smokeTest(new CreateRigTest());
-        //smokeTest(new KinematicRigTest());
+        smokeTest(new KinematicRigTest());
         smokeTest(new LoadRigTest());
         smokeTest(new LoadSaveBinaryRigTest());
         smokeTest(new LoadSaveRigTest());
