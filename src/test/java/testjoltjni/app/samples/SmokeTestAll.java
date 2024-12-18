@@ -109,7 +109,7 @@ final public class SmokeTestAll {
         smokeTest(new LoadSaveBinaryRigTest());
         smokeTest(new LoadSaveRigTest());
         smokeTest(new PoweredRigTest());
-        //smokeTest(new RigPileTest());
+        smokeTest(new RigPileTest());
 
         smokeTestShapes();
 
