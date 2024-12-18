@@ -99,8 +99,8 @@ protected void RestoreState(StateRecorder inStream)
 }
 /*TODO
 
-void ChangeShapeTest.CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
+void ChangeShapeTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 {
-	inUI->CreateCheckBox(inSubMenu, "Activate Body After Switch", mActivateAfterSwitch, [this](UICheckBox.EState inState) { mActivateAfterSwitch = inState == UICheckBox.STATE_CHECKED; });
+	inUI->CreateCheckBox(inSubMenu, "Activate Body After Switch", mActivateAfterSwitch, [this](UICheckBox::EState inState) { mActivateAfterSwitch = inState == UICheckBox::STATE_CHECKED; });
 }
 */}

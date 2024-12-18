@@ -84,7 +84,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 }
 /*TODO
 
-void CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
+void PoweredSliderConstraintTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 {
 	inUI->CreateComboBox(inSubMenu, "Motor", { "Off", "Velocity", "Position" }, (int)mConstraint->GetMotorState(), [this](int inItem) { mConstraint->SetMotorState((EMotorState)inItem); });
 	inUI->CreateSlider(inSubMenu, "Target Velocity (m/s)", mConstraint->GetTargetVelocity(), -10.0f, 10.0f, 0.1f, [this](float inValue) { mConstraint->SetTargetVelocity(inValue); });
