@@ -107,7 +107,7 @@ final public class SmokeTestAll {
         //smokeTest(new KinematicRigTest());
         smokeTest(new LoadRigTest());
         smokeTest(new LoadSaveBinaryRigTest());
-        //smokeTest(new LoadSaveRigTest());
+        smokeTest(new LoadSaveRigTest());
         //smokeTest(new PoweredRigTest());
         //smokeTest(new RigPileTest());
 
