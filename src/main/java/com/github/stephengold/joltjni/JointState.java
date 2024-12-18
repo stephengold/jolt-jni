@@ -35,14 +35,14 @@ public class JointState extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate a state with the specified native object assigned but not
-     * owned.
+     * Instantiate a state with the specified container and native object.
      *
-     * @param stateVa the virtual address of the native object to assign (not
+     * @param container the containing object, or {@code null} if none
+     * @param boxVa the virtual address of the native object to assign (not
      * zero)
      */
-    JointState(long stateVa) {
-        super(stateVa);
+    JointState(JoltPhysicsObject container, long boxVa) {
+        super(container, boxVa);
     }
     // *************************************************************************
     // new methods exposed

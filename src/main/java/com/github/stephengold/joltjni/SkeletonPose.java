@@ -121,7 +121,7 @@ public class SkeletonPose extends JoltPhysicsObject {
     public JointState getJoint(int jointIndex) {
         long poseVa = va();
         long stateVa = getJoint(poseVa, jointIndex);
-        JointState result = new JointState(stateVa);
+        JointState result = new JointState(this, stateVa);
 
         return result;
     }
