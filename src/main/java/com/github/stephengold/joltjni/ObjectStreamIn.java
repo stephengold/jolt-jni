@@ -119,6 +119,5 @@ final public class ObjectStreamIn {
     native private static boolean sReadSkeletalAnimation(
             String fileName, long refVa);
 
-    native private static boolean sReadSkeleton(
-            String fileName, long refVa);
+    native private static boolean sReadSkeleton(String fileName, long refVa);
 }
