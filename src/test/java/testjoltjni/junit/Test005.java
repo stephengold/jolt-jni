@@ -298,6 +298,7 @@ public class Test005 {
      */
     private static void testFixedCsSetters(
             FixedConstraintSettings settings) {
+        settings.setAutoDetectPoint(true);
         settings.setAxisX1(new Vec3(0.02f, 0.03f, 0.04f));
         settings.setAxisX2(new Vec3(0.05f, 0.06f, 0.07f));
         settings.setAxisY1(new Vec3(0.12f, 0.13f, 0.14f));
@@ -306,6 +307,7 @@ public class Test005 {
         settings.setPoint2(new RVec3(0.25f, 0.26f, 0.27f));
         settings.setSpace(EConstraintSpace.LocalToBodyCOM);
 
+        Assert.assertTrue(settings.getAutoDetectPoint());
         TestUtils.assertEquals(0.02f, 0.03f, 0.04f, settings.getAxisX1(), 0f);
         TestUtils.assertEquals(0.05f, 0.06f, 0.07f, settings.getAxisX2(), 0f);
         TestUtils.assertEquals(0.12f, 0.13f, 0.14f, settings.getAxisY1(), 0f);
