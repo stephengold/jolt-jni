@@ -30,6 +30,13 @@ import com.github.stephengold.joltjni.readonly.ConstBodyId;
  */
 public class BodyLockRead extends NonCopyable {
     // *************************************************************************
+    // fields
+
+    /**
+     * the interface to use
+     */
+    final private BodyLockInterface bli;
+    // *************************************************************************
     // constructors
 
     /**
@@ -39,6 +46,7 @@ public class BodyLockRead extends NonCopyable {
      * @param id the ID of the body (not null, unaffected)
      */
     public BodyLockRead(BodyLockInterface bli, ConstBodyId id) {
+        this.bli = bli;
         long interfaceVa = bli.va();
         long idVa = id.targetVa();
         long lockVa = createBodyLockRead(interfaceVa, idVa);
@@ -55,7 +63,8 @@ public class BodyLockRead extends NonCopyable {
     public Body getBody() {
         long lockVa = va();
         long bodyVa = getBody(lockVa);
-        Body result = new Body(bodyVa);
+        PhysicsSystem system = bli.getSystem();
+        Body result = new Body(system, bodyVa);
 
         return result;
     }

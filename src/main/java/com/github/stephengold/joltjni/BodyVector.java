@@ -99,7 +99,8 @@ public class BodyVector extends Array<Body> {
         if (bodyVa == 0L) {
             result = null;
         } else {
-            result = new Body(bodyVa);
+            BodyManager manager = getManager();
+            result = new Body(manager, bodyVa);
         }
 
         return result;

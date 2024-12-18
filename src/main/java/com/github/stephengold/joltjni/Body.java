@@ -48,6 +48,19 @@ public class Body extends NonCopyable implements ConstBody {
     // constructors
 
     /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param bodyVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    Body(JoltPhysicsObject container, long bodyVa) {
+        super(container, bodyVa);
+        assert container instanceof PhysicsSystem
+                || container instanceof BodyManager;
+    }
+
+    /**
      * Instantiate a body with the specified native object assigned but not
      * owned.
      * <p>

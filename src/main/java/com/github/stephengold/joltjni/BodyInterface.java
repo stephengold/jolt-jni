@@ -230,7 +230,8 @@ public class BodyInterface extends NonCopyable {
         if (bodyVa == 0L) {
             throw new IllegalStateException("ran out of bodies");
         }
-        Body result = new Body(bodyVa);
+        PhysicsSystem system = getSystem();
+        Body result = new Body(system, bodyVa);
 
         return result;
     }
@@ -271,7 +272,8 @@ public class BodyInterface extends NonCopyable {
         if (bodyVa == 0L) {
             throw new IllegalStateException("ran out of bodies");
         }
-        Body result = new Body(bodyVa);
+        PhysicsSystem system = getSystem();
+        Body result = new Body(system, bodyVa);
 
         return result;
     }

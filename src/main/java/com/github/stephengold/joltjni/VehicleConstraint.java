@@ -35,6 +35,10 @@ public class VehicleConstraint
     // fields
 
     /**
+     * cached reference to the vehicle body
+     */
+    final private Body body;
+    /**
      * protect the collision tester (if any) from garbage collection
      */
     private VehicleCollisionTester tester;
@@ -48,6 +52,7 @@ public class VehicleConstraint
      * @param settings the desired settings (not null, unaffected)
      */
     public VehicleConstraint(Body body, VehicleConstraintSettings settings) {
+        this.body = body;
         long bodyVa = body.va();
         long settingsVa = settings.va();
         long constraintVa = createConstraint(bodyVa, settingsVa);
@@ -63,6 +68,8 @@ public class VehicleConstraint
      */
     VehicleConstraint(long constraintVa) {
         super(constraintVa);
+        long bodyVa = getVehicleBody(constraintVa);
+        this.body = new Body(bodyVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -99,11 +106,7 @@ public class VehicleConstraint
      * @return a new JVM object with the pre-existing native object assigned
      */
     public Body getVehicleBody() {
-        long constraintVa = va();
-        long bodyVa = getVehicleBody(constraintVa);
-        Body result = new Body(bodyVa);
-
-        return result;
+        return body;
     }
 
     /**

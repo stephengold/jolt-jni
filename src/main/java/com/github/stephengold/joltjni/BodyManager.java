@@ -99,7 +99,7 @@ public class BodyManager extends NonCopyable {
         long managerVa = va();
         long settingsVa = settings.targetVa();
         long bodyVa = allocateBody(managerVa, settingsVa);
-        Body result = new Body(bodyVa);
+        Body result = new Body(this, bodyVa);
 
         return result;
     }
