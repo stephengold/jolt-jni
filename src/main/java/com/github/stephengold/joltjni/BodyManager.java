@@ -46,7 +46,7 @@ public class BodyManager extends NonCopyable {
      */
     public BodyManager() {
         long managerVa = createBodyManager();
-        setVirtualAddress(managerVa, true);
+        setVirtualAddress(managerVa, () -> free(managerVa));
     }
     // *************************************************************************
     // new methods exposed
@@ -219,21 +219,6 @@ public class BodyManager extends NonCopyable {
         long managerVa = va();
         long mapVa = map.targetVa();
         init(managerVa, maxBodies, numBodyMutexes, mapVa);
-    }
-    // *************************************************************************
-    // protected methods
-
-    /**
-     * Assign a native object, assuming there's none already assigned.
-     *
-     * @param managerVa the virtual address of the native object to assign (not
-     * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
-     */
-    final void setVirtualAddress(long managerVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(managerVa) : null;
-        setVirtualAddress(managerVa, freeingAction);
     }
     // *************************************************************************
     // native private methods
