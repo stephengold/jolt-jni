@@ -41,17 +41,20 @@ import testjoltjni.app.samples.water.BoatTest;
  */
 final public class SmokeTestAll {
     // *************************************************************************
+    // constants
+
+    /**
+     * default number of physics steps to simulate during each invocation of
+     * {@code smokeTest()}
+     */
+    final private static int defaultNumSteps = 1;
+    // *************************************************************************
     // fields
 
     /**
      * renderer shared by all test objects
      */
     private static DebugRenderer renderer;
-    /**
-     * number of physics steps to simulate during each invocation of
-     * {@code smokeTest()}
-     */
-    private static int numSteps = 1;
     /**
      * count invocations of {@code smokeTest()}
      */
@@ -157,11 +160,23 @@ final public class SmokeTestAll {
      * @param test the Test instance to use (not null)
      */
     static private void smokeTest(Test test) {
+        smokeTest(test, defaultNumSteps);
+    }
+
+    /**
+     * Invoke key methods of the specified Test to see whether they crash.
+     *
+     * @param test the Test instance to use (not null)
+     * @param numSteps the number of physics steps to simulate (&ge;0,
+     * default=defaultNumSteps)
+     */
+    static private void smokeTest(Test test, int numSteps) {
         ++numTests;
 
         // Log the name of the test:
         String testName = test.getClass().getSimpleName();
-        System.out.println("=== Test #" + numTests + ":  " + testName);
+        System.out.printf("=== Test #%d:  %s for %d step%s%n",
+                numTests, testName, numSteps, (numSteps == 1) ? "" : "s");
         System.out.flush();
 
         test.SetDebugRenderer(renderer);
