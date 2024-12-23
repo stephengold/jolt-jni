@@ -201,7 +201,7 @@ model {
                         archiveBaseName = project.ext.baseName
                         archiveClassifier = buildType.name + flavor.name
                         dependsOn "joltjni${q}SharedLibrary"
-                        description "Creates a JAR of the ${q} native library."
+                        description = "Creates a JAR of the ${q} native library."
                         from sharedLibraryFile
                         rename '(.+)', replaceWith
                     }
@@ -271,7 +271,7 @@ tasks.register('debugRagdoll', JavaExec) {
 }
 tasks.register('runConvexVsMesh', JavaExec) {
     args '-s=ConvexVsMesh'
-    enableAssertions false
+    enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runHelloWorld', JavaExec) {
@@ -279,24 +279,24 @@ tasks.register('runHelloWorld', JavaExec) {
 }
 tasks.register('runLargeMesh', JavaExec) {
     args '-s=LargeMesh'
-    enableAssertions false
+    enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runPyramid', JavaExec) {
     args '-s=Pyramid'
-    enableAssertions false
+    enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runRagdoll', JavaExec) {
     args '-s=Ragdoll'
     dependsOn('unpackJoltAssets')
-    enableAssertions false
+    enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runRagdollSinglePile', JavaExec) {
     args '-s=RagdollSinglePile'
     dependsOn('unpackJoltAssets')
-    enableAssertions false
+    enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runSmokeTestAll', JavaExec) {
@@ -306,27 +306,27 @@ tasks.register('runSmokeTestAll', JavaExec) {
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
     dependsOn('assemble')
-    enableAssertions true
+    enableAssertions = true
 }
 test.dependsOn('assemble')
 
 checkstyle {
-    toolVersion libs.versions.checkstyle.get()
+    toolVersion = libs.versions.checkstyle.get()
 }
 tasks.register('checkstyle') {
     dependsOn 'checkstyleMain', 'checkstyleTest'
-    description 'Checks the style of all Java sourcecode.'
+    description = 'Checks the style of all Java sourcecode.'
 }
 
 // Register publishing tasks:
 
 tasks.register('install') {
     dependsOn 'publishMavenPublicationToMavenLocal'
-    description 'Installs Maven artifacts to the local repository.'
+    description = 'Installs Maven artifacts to the local repository.'
 }
 tasks.register('release') {
     dependsOn 'publishMavenPublicationToOSSRHRepository'
-    description 'Stages Maven artifacts to Sonatype OSSRH.'
+    description = 'Stages Maven artifacts to Sonatype OSSRH.'
 }
 
 jar {
@@ -346,7 +346,7 @@ javadocJar { archiveBaseName = project.ext.baseName }
 tasks.register('sourcesJar', Jar) {
     archiveBaseName = project.ext.baseName
     archiveClassifier = 'sources'
-    description 'Creates a JAR of Java sourcecode.'
+    description = 'Creates a JAR of Java sourcecode.'
     from 'src/main/java' // default is ".allSource", which includes resources
 }
 
@@ -354,9 +354,9 @@ publishing {
     publications {
         maven(MavenPublication) {
             artifact sourcesJar
-            artifactId artifact
+            artifactId = artifact
             from components.java
-            groupId project.ext.group
+            groupId = project.ext.group
             pom {
                 description = 'a JNI interface to Jolt Physics'
                 developers {
@@ -382,7 +382,7 @@ publishing {
                 }
                 url = project.ext.websiteUrl
             }
-            version project.ext.version
+            version = project.ext.version
         }
     }
 
