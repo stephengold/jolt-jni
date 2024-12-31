@@ -61,13 +61,13 @@ final public class TestUtils {
      */
     final public static int numObjLayers = 2;
     /**
-     * customary object layer for non-moving objects
-     */
-    final public static int objLayerNonMoving = 0;
-    /**
      * customary object layer for moving objects
      */
     final public static int objLayerMoving = 1;
+    /**
+     * customary object layer for non-moving objects
+     */
+    final public static int objLayerNonMoving = 0;
     // *************************************************************************
     // constructors
 
