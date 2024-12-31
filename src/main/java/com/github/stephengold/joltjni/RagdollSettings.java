@@ -93,8 +93,13 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
         long settingsVa = va();
         long systemVa = physicsSystem.va();
         long resultVa = createRagdoll(settingsVa, groupId, userData, systemVa);
-        Ragdoll result = new Ragdoll(resultVa);
 
+        Ragdoll result;
+        if (resultVa == 0L) {
+            result = null;
+        } else {
+            result = new Ragdoll(resultVa);
+        }
         return result;
     }
 
