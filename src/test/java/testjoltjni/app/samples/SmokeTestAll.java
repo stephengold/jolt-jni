@@ -84,48 +84,7 @@ final public class SmokeTestAll {
         final int numBytes = 1 << 25; // 32 MiB
         tempAllocator = new TempAllocatorImpl(numBytes);
 
-        // broadphase package:
-        smokeTest(new BroadPhaseCastRayTest());
-        smokeTest(new BroadPhaseInsertionTest());
-
-        // character package:
-        smokeTest(new CharacterPlanetTest());
-        smokeTest(new CharacterSpaceShipTest());
-        smokeTest(new CharacterTest());
-        smokeTest(new CharacterVirtualTest());
-
-        smokeTestConstraints();
-
-        // convex-collision package:
-        smokeTest(new CapsuleVsBoxTest());
-        smokeTest(new ClosestPointTest());
-        smokeTest(new ConvexHullShrinkTest());
-        smokeTest(new ConvexHullTest());
-
-        smokeTestGeneral();
-
-        // rig package:
-        smokeTest(new BigWorldTest());
-        smokeTest(new CreateRigTest());
-        smokeTest(new KinematicRigTest());
-        smokeTest(new LoadRigTest());
-        smokeTest(new LoadSaveBinaryRigTest());
-        smokeTest(new LoadSaveRigTest());
-        smokeTest(new PoweredRigTest());
-        smokeTest(new RigPileTest());
-
-        smokeTestShapes();
-
-        // softbody package:
-        smokeTest(new SoftBodyPressureTest());
-
-        // vehicle package:
-        smokeTest(new MotorcycleTest());
-        smokeTest(new TankTest());
-        smokeTest(new VehicleStressTest());
-
-        // water package:
-        smokeTest(new BoatTest());
+        smokeTestAll();
     }
     // *************************************************************************
     // private methods
@@ -207,6 +166,54 @@ final public class SmokeTestAll {
 
         test.Cleanup();
         System.gc();
+    }
+
+    /**
+     * Smoke test all the packages.
+     */
+    private static void smokeTestAll() {
+        // broadphase package:
+        smokeTest(new BroadPhaseCastRayTest());
+        smokeTest(new BroadPhaseInsertionTest());
+
+        // character package:
+        smokeTest(new CharacterPlanetTest());
+        smokeTest(new CharacterSpaceShipTest());
+        smokeTest(new CharacterTest());
+        smokeTest(new CharacterVirtualTest());
+
+        smokeTestConstraints();
+
+        // convex-collision package:
+        smokeTest(new CapsuleVsBoxTest());
+        smokeTest(new ClosestPointTest());
+        smokeTest(new ConvexHullShrinkTest());
+        smokeTest(new ConvexHullTest());
+
+        smokeTestGeneral();
+
+        // rig package:
+        smokeTest(new BigWorldTest());
+        smokeTest(new CreateRigTest());
+        smokeTest(new KinematicRigTest());
+        smokeTest(new LoadRigTest());
+        smokeTest(new LoadSaveBinaryRigTest());
+        smokeTest(new LoadSaveRigTest());
+        smokeTest(new PoweredRigTest());
+        smokeTest(new RigPileTest());
+
+        smokeTestShapes();
+
+        // softbody package:
+        smokeTest(new SoftBodyPressureTest());
+
+        // vehicle package:
+        smokeTest(new MotorcycleTest());
+        smokeTest(new TankTest());
+        smokeTest(new VehicleStressTest());
+
+        // water package:
+        smokeTest(new BoatTest());
     }
 
     /**
