@@ -2,7 +2,7 @@
 
 [versions]
 
-checkstyle = "10.21.0"
+checkstyle = "10.21.1"
 
 [libraries]
 
