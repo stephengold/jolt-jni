@@ -31,12 +31,20 @@ import com.github.stephengold.joltjni.template.Ref;
  */
 final public class RagdollRef extends Ref {
     // *************************************************************************
+    // fields
+
+    /**
+     * where to add the bodies and constraints (may be null)
+     */
+    final private PhysicsSystem system;
+    // *************************************************************************
     // constructors
 
     /**
      * Instantiate an empty reference.
      */
     public RagdollRef() {
+        this.system = null;
         long refVa = createEmpty();
         setVirtualAddress(refVa, () -> free(refVa));
     }
@@ -46,11 +54,17 @@ final public class RagdollRef extends Ref {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param physicsSystem where to add the bodies and constraints
      */
-    RagdollRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    RagdollRef(long refVa, PhysicsSystem physicsSystem) {
+        this.system = physicsSystem;
+        Runnable freeingAction = () -> freeWithSystem(refVa, physicsSystem);
+        /*
+         * Passing physicsSystem to the Runnable ensures that the underlying
+         * system won't get cleaned before the ragdoll.
+         *
+         * See JoltPhysics issue #1428 for more information.
+         */
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -241,7 +255,7 @@ final public class RagdollRef extends Ref {
     @Override
     public Ragdoll getPtr() {
         long ragdollVa = targetVa();
-        Ragdoll result = new Ragdoll(ragdollVa);
+        Ragdoll result = new Ragdoll(ragdollVa, system);
 
         return result;
     }
@@ -269,9 +283,21 @@ final public class RagdollRef extends Ref {
     public RagdollRef toRef() {
         long refVa = va();
         long copyVa = copy(refVa);
-        RagdollRef result = new RagdollRef(copyVa, true);
+        RagdollRef result = new RagdollRef(copyVa, system);
 
         return result;
+    }
+    // *************************************************************************
+    // Java private methods
+
+    /**
+     * Helper function for freeing a reference.
+     *
+     * @param refVa the virtual address of the native object to free
+     * @param unused where the bodies and constraints were added
+     */
+    private void freeWithSystem(long refVa, PhysicsSystem unused) {
+        free(refVa);
     }
     // *************************************************************************
     // native private methods

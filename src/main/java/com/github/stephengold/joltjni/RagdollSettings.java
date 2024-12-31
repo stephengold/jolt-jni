@@ -98,7 +98,7 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
         if (resultVa == 0L) {
             result = null;
         } else {
-            result = new Ragdoll(resultVa);
+            result = new Ragdoll(resultVa, physicsSystem);
         }
         return result;
     }

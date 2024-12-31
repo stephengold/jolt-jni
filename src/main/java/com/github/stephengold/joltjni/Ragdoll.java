@@ -32,6 +32,13 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 public class Ragdoll extends NonCopyable implements RefTarget {
     // *************************************************************************
+    // fields
+
+    /**
+     * where to add the bodies and constraints (not null)
+     */
+    final private PhysicsSystem system;
+    // *************************************************************************
     // constructors
 
     /**
@@ -39,9 +46,11 @@ public class Ragdoll extends NonCopyable implements RefTarget {
      *
      * @param ragdollVa the virtual address of the native object to assign (not
      * zero)
+     * @param physicsSystem where to add the bodies and constraints (not null)
      */
-    Ragdoll(long ragdollVa) {
+    Ragdoll(long ragdollVa, PhysicsSystem physicsSystem) {
         super(ragdollVa);
+        this.system = physicsSystem;
     }
     // *************************************************************************
     // new methods exposed
@@ -254,7 +263,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     public RagdollRef toRef() {
         long ragdollVa = va();
         long refVa = toRef(ragdollVa);
-        RagdollRef result = new RagdollRef(refVa, true);
+        RagdollRef result = new RagdollRef(refVa, system);
 
         return result;
     }

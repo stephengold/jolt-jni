@@ -103,7 +103,7 @@ final public class RagdollSettingsRef extends Ref {
         if (resultVa == 0L) {
             result = null;
         } else {
-            result = new Ragdoll(resultVa);
+            result = new Ragdoll(resultVa, physicsSystem);
         }
         return result;
     }
