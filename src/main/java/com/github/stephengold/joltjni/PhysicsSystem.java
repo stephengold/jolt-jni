@@ -51,10 +51,6 @@ public class PhysicsSystem extends NonCopyable {
      */
     final private BodyInterface bodyInterfaceNoLock;
     /**
-     * protect the contact listener (if any) from garbage collection
-     */
-    private ContactListener contactListener;
-    /**
      * protect the BroadPhaseLayerInterface from garbage collection
      */
     private ConstBroadPhaseLayerInterface layerMap;
@@ -66,6 +62,10 @@ public class PhysicsSystem extends NonCopyable {
      * protect the ObjectVsBroadPhaseLayerFilter from garbage collection
      */
     private ConstObjectVsBroadPhaseLayerFilter ovbFilter;
+    /**
+     * protect the contact listener (if any) from garbage collection
+     */
+    private ContactListener contactListener;
     /**
      * protect the step listeners from garbage collection
      */
