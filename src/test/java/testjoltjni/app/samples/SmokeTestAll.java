@@ -182,7 +182,7 @@ final public class SmokeTestAll {
         test.SetDebugRenderer(renderer);
         test.SetTempAllocator(tempAllocator);
 
-        // Create new job/physics systems for each test:
+        // Create a new job/physics systems for each test:
         JobSystem jobSystem = new JobSystemThreadPool(
                 Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, 1);
         test.SetJobSystem(jobSystem);
