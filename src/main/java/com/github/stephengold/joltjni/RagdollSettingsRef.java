@@ -98,8 +98,13 @@ final public class RagdollSettingsRef extends Ref {
         long systemVa = physicsSystem.va();
         long resultVa = RagdollSettings.createRagdoll(
                 settingsVa, groupId, userData, systemVa);
-        Ragdoll result = new Ragdoll(resultVa);
 
+        Ragdoll result;
+        if (resultVa == 0L) {
+            result = null;
+        } else {
+            result = new Ragdoll(resultVa);
+        }
         return result;
     }
 
