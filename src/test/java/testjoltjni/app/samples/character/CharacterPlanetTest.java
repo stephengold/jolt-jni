@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -82,7 +82,7 @@ public void Initialize()
 			   double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, long settingsVa) {
 			RVec3Arg inContactPosition=new RVec3(contactLocationX, contactLocationY, contactLocationZ);
 			Vec3Arg inContactNormal=new Vec3(contactNormalX, contactNormalY, contactNormalZ);
-			CharacterPlanetTest.this.OnContactAdded(new CharacterVirtual(characterVa), new BodyId(bodyId2Va), new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
+			CharacterPlanetTest.this.OnContactAdded(new CharacterVirtual(characterVa, mPhysicsSystem), new BodyId(bodyId2Va), new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
 		    }});
 }
 /*TODO

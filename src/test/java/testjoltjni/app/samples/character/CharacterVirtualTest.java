@@ -82,7 +82,7 @@ public void Initialize()
 			   double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, long settingsVa) {
 			RVec3Arg inContactPosition=new RVec3(contactLocationX,contactLocationY,contactLocationZ);
 			Vec3Arg inContactNormal=new Vec3(contactNormalX,contactNormalY,contactNormalZ);
-			CharacterVirtualTest.this.OnContactAdded(new CharacterVirtual(characterVa), new BodyId(bodyId2Va), new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
+			CharacterVirtualTest.this.OnContactAdded(new CharacterVirtual(characterVa, mPhysicsSystem), new BodyId(bodyId2Va), new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
 		    }});
 }
 

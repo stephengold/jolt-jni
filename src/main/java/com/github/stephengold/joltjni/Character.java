@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,13 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  */
 public class Character extends CharacterBase implements ConstCharacter {
     // *************************************************************************
+    // fields
+
+    /**
+     * where to add the body (not null)
+     */
+    final private PhysicsSystem system;
+    // *************************************************************************
     // constructors
 
     /**
@@ -44,9 +51,11 @@ public class Character extends CharacterBase implements ConstCharacter {
      *
      * @param characterVa the virtual address of the native object to assign
      * (not zero)
+     * @param physicsSystem where to add the body (not null)
      */
-    Character(long characterVa) {
+    Character(long characterVa, PhysicsSystem physicsSystem) {
         super(characterVa);
+        this.system = physicsSystem;
     }
 
     /**
@@ -62,6 +71,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      */
     public Character(ConstCharacterSettings settings, RVec3Arg location,
             QuatArg orientation, long userData, PhysicsSystem system) {
+        this.system = system;
         long settingsVa = settings.targetVa();
         double locX = location.xx();
         double locY = location.yy();
@@ -494,7 +504,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     public CharacterRef toRef() {
         long characterVa = va();
         long refVa = toRef(characterVa);
-        CharacterRef result = new CharacterRef(refVa, true);
+        CharacterRef result = new CharacterRef(refVa, system);
 
         return result;
     }

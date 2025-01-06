@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,12 +37,20 @@ import com.github.stephengold.joltjni.template.Ref;
  */
 final public class CharacterRef extends Ref implements ConstCharacter {
     // *************************************************************************
+    // fields
+
+    /**
+     * where to add the body (may be null)
+     */
+    final private PhysicsSystem system;
+    // *************************************************************************
     // constructors
 
     /**
      * Instantiate an empty reference.
      */
     public CharacterRef() {
+        this.system = null;
         long refVa = createEmpty();
         setVirtualAddress(refVa, () -> free(refVa));
     }
@@ -52,11 +60,15 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param physicsSystem where to add the body
      */
-    CharacterRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    CharacterRef(long refVa, PhysicsSystem physicsSystem) {
+        this.system = physicsSystem;
+        /*
+         * Passing physicsSystem to the Runnable ensures that the underlying
+         * system won't get cleaned before the character.
+         */
+        Runnable freeingAction = () -> freeWithSystem(refVa, physicsSystem);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -683,7 +695,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public com.github.stephengold.joltjni.Character getPtr() {
         long settingsVa = targetVa();
         com.github.stephengold.joltjni.Character result
-                = new com.github.stephengold.joltjni.Character(settingsVa);
+                = new com.github.stephengold.joltjni.Character(
+                        settingsVa, system);
 
         return result;
     }
@@ -711,7 +724,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     public CharacterRef toRef() {
         long refVa = va();
         long copyVa = copy(refVa);
-        CharacterRef result = new CharacterRef(copyVa, true);
+        CharacterRef result = new CharacterRef(copyVa, system);
 
         return result;
     }
@@ -723,6 +736,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     native private static long createEmpty();
 
     native private static void free(long refVa);
+
+    native private static void freeWithSystem(long refVa, PhysicsSystem unused);
 
     native private static long getPtr(long refVa);
 }

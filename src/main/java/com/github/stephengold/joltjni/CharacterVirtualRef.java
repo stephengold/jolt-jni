@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,12 +41,20 @@ final public class CharacterVirtualRef
         extends Ref
         implements ConstCharacterVirtual {
     // *************************************************************************
+    // fields
+
+    /**
+     * where to add the body (may be null)
+     */
+    final private PhysicsSystem system;
+    // *************************************************************************
     // constructors
 
     /**
      * Instantiate an empty reference.
      */
     public CharacterVirtualRef() {
+        this.system = null;
         long refVa = createEmpty();
         setVirtualAddress(refVa, () -> free(refVa));
     }
@@ -56,11 +64,15 @@ final public class CharacterVirtualRef
      *
      * @param refVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param physicsSystem where to add the body
      */
-    CharacterVirtualRef(long refVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(refVa) : null;
+    CharacterVirtualRef(long refVa, PhysicsSystem physicsSystem) {
+        this.system = physicsSystem;
+        /*
+         * Passing physicsSystem to the Runnable ensures that the underlying
+         * system won't get cleaned before the character.
+         */
+        Runnable freeingAction = () -> freeWithSystem(refVa, physicsSystem);
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
@@ -801,7 +813,7 @@ final public class CharacterVirtualRef
     @Override
     public CharacterVirtual getPtr() {
         long settingsVa = targetVa();
-        CharacterVirtual result = new CharacterVirtual(settingsVa);
+        CharacterVirtual result = new CharacterVirtual(settingsVa, system);
 
         return result;
     }
@@ -829,7 +841,7 @@ final public class CharacterVirtualRef
     public CharacterVirtualRef toRef() {
         long refVa = va();
         long copyVa = copy(refVa);
-        CharacterVirtualRef result = new CharacterVirtualRef(copyVa, true);
+        CharacterVirtualRef result = new CharacterVirtualRef(copyVa, system);
 
         return result;
     }
@@ -841,6 +853,8 @@ final public class CharacterVirtualRef
     native private static long createEmpty();
 
     native private static void free(long refVa);
+
+    native private static void freeWithSystem(long refVa, PhysicsSystem unused);
 
     native private static long getPtr(long refVa);
 }
