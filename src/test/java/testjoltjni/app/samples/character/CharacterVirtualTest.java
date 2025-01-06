@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -76,8 +76,8 @@ public void Initialize()
 	mCharacterVsCharacterCollision.add(mCharacter);
 
 	// Install contact listener for all characters
-	for (CharacterVirtual character : mCharacterVsCharacterCollision.getCharactersAsList())
-		character.setListener(new CustomCharacterContactListener() {
+	for (CharacterVirtualRef character : mCharacterVsCharacterCollision.getCharactersAsArray())
+		character.getPtr().setListener(new CustomCharacterContactListener() {
 		    public void onContactAdded(long characterVa, long bodyId2Va, long subShapeId2Va, double contactLocationX, double contactLocationY,
 			   double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, long settingsVa) {
 			RVec3Arg inContactPosition=new RVec3(contactLocationX,contactLocationY,contactLocationZ);

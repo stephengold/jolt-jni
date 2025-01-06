@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +32,13 @@ import java.util.List;
  */
 public class CharacterVsCharacterCollisionSimple
         extends CharacterVsCharacterCollision {
+    // *************************************************************************
+    // fields
+
+    /**
+     * Java copy of the collision list
+     */
+    final private List<CharacterVirtualRef> collisionList = new ArrayList<>(16);
     // *************************************************************************
     // constructors
 
@@ -49,53 +55,57 @@ public class CharacterVsCharacterCollisionSimple
     /**
      * Add the specified character to the collision list.
      *
-     * @param character the character to add (not null)
+     * @param characterRef a counted reference to the character to add (not
+     * null, alias created)
      */
-    public void add(ConstCharacterVirtual character) {
+    public void add(CharacterVirtualRef characterRef) {
         long interfaceVa = va();
-        long characterVa = character.targetVa();
+        long characterVa = characterRef.targetVa();
         add(interfaceVa, characterVa);
+
+        collisionList.add(characterRef);
     }
 
     /**
      * Enumerate the characters in the collision list.
      *
-     * @return a new, mutable list of new JVM objects with pre-existing native
-     * objects assigned
+     * @return a new array of pre-existing counted references
      */
-    public List<CharacterVirtual> getCharactersAsList() {
-        long interfaceVa = va();
-        int numCharacters = countCharacters(interfaceVa);
-        List<CharacterVirtual> result = new ArrayList<>(numCharacters);
+    public CharacterVirtualRef[] getCharactersAsArray() {
+        int numCharacters = collisionList.size();
+        CharacterVirtualRef[] result = new CharacterVirtualRef[numCharacters];
         for (int i = 0; i < numCharacters; ++i) {
-            long characterVa = getCharacter(interfaceVa, i);
-            CharacterVirtual character = new CharacterVirtual(characterVa);
-            result.add(character);
+            result[i] = collisionList.get(i);
         }
 
         return result;
     }
 
     /**
-     * Remove the specified character from the collide list.
+     * Remove the specified character from the collision list.
      *
-     * @param character the character to add (not null)
+     * @param characterRef a counted reference to the character to remove (not
+     * null)
      */
-    public void remove(ConstCharacterVirtual character) {
+    public void remove(CharacterVirtualRef characterRef) {
         long interfaceVa = va();
-        long characterVa = character.targetVa();
+        long characterVa = characterRef.targetVa();
         remove(interfaceVa, characterVa);
+
+        int numCharacters = collisionList.size();
+        for (int i = 0; i < numCharacters; ++i) {
+            long tmpVa = collisionList.get(i).targetVa();
+            if (tmpVa == characterVa) {
+                collisionList.remove(i);
+            }
+        }
     }
     // *************************************************************************
     // native private methods
 
     native private static void add(long interfaceVa, long characterVa);
 
-    native private static int countCharacters(long interfaceVa);
-
     native private static long createDefault();
-
-    native private static long getCharacter(long interfaceVa, int index);
 
     native private static void remove(long interfaceVa, long characterVa);
 }
