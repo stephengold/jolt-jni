@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -92,7 +92,12 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     public CharacterVirtual getCharacterB() {
         long contactVa = va();
         long characterVa = getCharacterB(contactVa);
-        CharacterVirtual result = new CharacterVirtual(characterVa);
+        CharacterVirtual result;
+        if (characterVa == 0L) {
+            result = null;
+        } else {
+            result = new CharacterVirtual(characterVa, null);
+        }
 
         return result;
     }
