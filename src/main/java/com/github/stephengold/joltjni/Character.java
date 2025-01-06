@@ -67,7 +67,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * @param orientation the desired initial orientation (in system
      * coordinates, not null, unaffected)
      * @param userData the desired user-data value
-     * @param system the system to which the character will be added (not null)
+     * @param system where to add the body (not null)
      */
     public Character(ConstCharacterSettings settings, RVec3Arg location,
             QuatArg orientation, long userData, PhysicsSystem system) {

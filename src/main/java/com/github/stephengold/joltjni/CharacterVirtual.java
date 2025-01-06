@@ -80,7 +80,7 @@ public class CharacterVirtual
      * @param orientation the desired initial orientation (in system
      * coordinates, not null, unaffected)
      * @param userData the desired user-data value
-     * @param system the system to which the character will be added (not null)
+     * @param system where to add the body (not null)
      */
     public CharacterVirtual(
             ConstCharacterVirtualSettings settings, RVec3Arg location,

@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.readonly.ConstContact;
 
 /**
  * Describe a contact between a {@code Character} and a body or another
- * character.
+ * character. (native type: {@code CharacterVirtual::Contact})
  *
  * @author Stephen Gold sgold@sonic.net
  */
