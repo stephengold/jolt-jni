@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -288,18 +288,6 @@ final public class RagdollRef extends Ref {
         return result;
     }
     // *************************************************************************
-    // Java private methods
-
-    /**
-     * Helper function for freeing a reference.
-     *
-     * @param refVa the virtual address of the native object to free
-     * @param unused where the bodies and constraints were added
-     */
-    private void freeWithSystem(long refVa, PhysicsSystem unused) {
-        free(refVa);
-    }
-    // *************************************************************************
     // native private methods
 
     native private static long copy(long refVa);
@@ -307,6 +295,8 @@ final public class RagdollRef extends Ref {
     native private static long createEmpty();
 
     native private static void free(long refVa);
+
+    native private static void freeWithSystem(long refVa, PhysicsSystem unused);
 
     native private static long getPtr(long refVa);
 }
