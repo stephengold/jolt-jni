@@ -80,7 +80,7 @@ public class Wheel extends NonCopyable {
      * @param container the containing object, or {@code null} if none
      * @return a new JVM object, or {@code null} if {@code wheelVa} was zero
      */
-    public static Wheel newWheel(
+    static Wheel newWheel(
             long wheelVa, int ordinal, VehicleConstraint container) {
         if (wheelVa == 0L) {
             return null;
