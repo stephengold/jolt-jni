@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,12 +31,13 @@ public class WheelWv extends Wheel {
     // constructors
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified container and native object.
      *
+     * @param container the containing object, or {@code null} if none
      * @param wheelVa the virtual address of the native object to assign (not
      * zero)
      */
-    WheelWv(long wheelVa) {
-        super(wheelVa);
+    WheelWv(VehicleConstraint container, long wheelVa) {
+        super(container, wheelVa);
     }
 }

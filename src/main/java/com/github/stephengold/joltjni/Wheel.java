@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,13 +41,15 @@ public class Wheel extends NonCopyable {
     // constructors
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified container and native object.
      *
+     * @param container the containing object, or {@code null} if none
      * @param wheelVa the virtual address of the native object to assign (not
      * zero)
      */
-    Wheel(long wheelVa) {
-        setVirtualAddress(wheelVa);
+    Wheel(VehicleConstraint container, long wheelVa) {
+        super(container, wheelVa);
+
         long settingsVa = getSettings(wheelVa);
         if (this instanceof WheelTv) {
             this.settings = new WheelSettingsTv(settingsVa).toRef();
@@ -75,9 +77,11 @@ public class Wheel extends NonCopyable {
      *
      * @param wheelVa the virtual address of the native object, or zero
      * @param ordinal the type of {@code VehicleController}
+     * @param container the containing object, or {@code null} if none
      * @return a new JVM object, or {@code null} if {@code wheelVa} was zero
      */
-    public static Wheel newWheel(long wheelVa, int ordinal) {
+    public static Wheel newWheel(
+            long wheelVa, int ordinal, VehicleConstraint container) {
         if (wheelVa == 0L) {
             return null;
         }
@@ -86,10 +90,10 @@ public class Wheel extends NonCopyable {
         switch (ordinal) {
             case VehicleController.motorcycleType:
             case VehicleController.wheeledVehicleType:
-                result = new WheelWv(wheelVa);
+                result = new WheelWv(container, wheelVa);
                 break;
             case VehicleController.trackedVehicleType:
-                result = new WheelTv(wheelVa);
+                result = new WheelTv(container, wheelVa);
                 break;
             default:
                 throw new IllegalArgumentException("ordinal = " + ordinal);
