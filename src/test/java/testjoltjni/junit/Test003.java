@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -118,16 +118,14 @@ public class Test003 {
             Assert.assertNotEquals(0L, box.va());
 
             TestUtils.assertEquals(0f, 0f, 0f, box.getCenter(), 0f);
+            float halfMax = 0.5f * Float.MAX_VALUE;
             TestUtils.assertEquals(
-                    Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
-                    Float.POSITIVE_INFINITY, box.getExtent(), 0f);
+                    halfMax, halfMax, halfMax, box.getExtent(), 0f);
+            TestUtils.assertEquals(halfMax, halfMax, halfMax, box.getMax(), 0f);
+            TestUtils.assertEquals(
+                    -halfMax, -halfMax, -halfMax, box.getMin(), 0f);
             TestUtils.assertEquals(Float.MAX_VALUE, Float.MAX_VALUE,
-                    Float.MAX_VALUE, box.getMax(), 0f);
-            TestUtils.assertEquals(-Float.MAX_VALUE, -Float.MAX_VALUE,
-                    -Float.MAX_VALUE, box.getMin(), 0f);
-            TestUtils.assertEquals(
-                    Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY,
-                    Float.POSITIVE_INFINITY, box.getSize(), 0f);
+                    Float.MAX_VALUE, box.getSize(), 0f);
             Assert.assertTrue(box.isValid());
 
             TestUtils.testClose(box);

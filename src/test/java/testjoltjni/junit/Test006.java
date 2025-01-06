@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -513,8 +513,8 @@ public class Test006 {
                 0.996195f, settings.getActiveEdgeCosThresholdAngle(), 0f);
         Assert.assertEquals(8, settings.getBitsPerSample());
         Assert.assertEquals(2, settings.getBlockSize());
-        Assert.assertEquals(-Float.MAX_VALUE, settings.getMaxHeightValue(), 0f);
-        Assert.assertEquals(Float.MAX_VALUE, settings.getMinHeightValue(), 0f);
+        Assert.assertEquals(-1e15f, settings.getMaxHeightValue(), 0f);
+        Assert.assertEquals(1e15f, settings.getMinHeightValue(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, settings.getOffset(), 0f);
         Assert.assertEquals(4, settings.getSampleCount());
         TestUtils.assertEquals(1f, 1f, 1f, settings.getScale(), 0f);

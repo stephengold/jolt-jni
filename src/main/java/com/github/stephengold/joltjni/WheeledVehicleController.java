@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,16 +21,12 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.template.RefTarget;
-
 /**
  * Control the acceleration and deceleration of a wheeled vehicle.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class WheeledVehicleController
-        extends VehicleController
-        implements RefTarget {
+public class WheeledVehicleController extends VehicleController {
     // *************************************************************************
     // constructors
 
@@ -60,24 +56,6 @@ public class WheeledVehicleController
             float forward, float right, float brake, float handBrake) {
         long controllerVa = va();
         setDriverInput(controllerVa, forward, right, brake, handBrake);
-    }
-    // *************************************************************************
-    // VehicleController methods
-
-    /**
-     * Create a counted reference to the native
-     * {@code WheeledVehicleController}.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    @Override
-    public WheeledVehicleControllerRef toRef() {
-        long controllerVa = va();
-        long copyVa = VehicleController.toRef(controllerVa);
-        WheeledVehicleControllerRef result
-                = new WheeledVehicleControllerRef(copyVa, true);
-
-        return result;
     }
     // *************************************************************************
     // native private methods

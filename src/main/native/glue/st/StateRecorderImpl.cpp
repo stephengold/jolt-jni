@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_StateRecorderImpl_cou
   (JNIEnv *, jclass, jlong recorderVa) {
     const StateRecorderImpl * const pRecorder
             = reinterpret_cast<StateRecorderImpl *> (recorderVa);
-    const string s = pRecorder->GetData();
+    const std::string s = pRecorder->GetData();
     const size_t result = s.size();
     return result;
 }
@@ -65,7 +65,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorderImpl_get
   (JNIEnv *pEnv, jclass, jlong recorderVa, jbyteArray data, jint numBytes) {
     const StateRecorderImpl * const pRecorder
             = reinterpret_cast<StateRecorderImpl *> (recorderVa);
-    const string s = pRecorder->GetData();
+    const std::string s = pRecorder->GetData();
     size_t numBytesToCopy = s.size();
     if (numBytes > 0 && numBytesToCopy > numBytes) {
         numBytesToCopy = numBytes;

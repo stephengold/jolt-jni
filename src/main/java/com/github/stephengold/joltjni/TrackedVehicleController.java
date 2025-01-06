@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,16 +22,13 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * Control the acceleration and deceleration of a vehicle with tracks.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class TrackedVehicleController
-        extends VehicleController
-        implements RefTarget {
+public class TrackedVehicleController extends VehicleController {
     // *************************************************************************
     // constructors
 
@@ -75,24 +72,6 @@ public class TrackedVehicleController
         float locY = location.getY();
         float locZ = location.getZ();
         setRpmMeter(controllerVa, locX, locY, locZ, size);
-    }
-    // *************************************************************************
-    // VehicleController methods
-
-    /**
-     * Create a counted reference to the native
-     * {@code TrackedVehicleController}.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    @Override
-    public TrackedVehicleControllerRef toRef() {
-        long controllerVa = va();
-        long copyVa = VehicleController.toRef(controllerVa);
-        TrackedVehicleControllerRef result
-                = new TrackedVehicleControllerRef(copyVa, true);
-
-        return result;
     }
     // *************************************************************************
     // native private methods

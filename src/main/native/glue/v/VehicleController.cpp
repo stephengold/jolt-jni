@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,18 +25,10 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Vehicle/VehicleController.h"
-
 #include "auto/com_github_stephengold_joltjni_VehicleController.h"
-#include "auto/com_github_stephengold_joltjni_VehicleControllerRef.h"
 #include "glue/glue.h"
 
 using namespace JPH;
-
-IMPLEMENT_REF(VehicleController,
-  Java_com_github_stephengold_joltjni_VehicleControllerRef_copy,
-  Java_com_github_stephengold_joltjni_VehicleControllerRef_createEmpty,
-  Java_com_github_stephengold_joltjni_VehicleControllerRef_free,
-  Java_com_github_stephengold_joltjni_VehicleControllerRef_getPtr)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleController
@@ -48,45 +40,5 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleController_ge
     VehicleController * const pController
             = reinterpret_cast<VehicleController *> (controllerVa);
     VehicleConstraint * const pResult = &pController->GetConstraint();
-    return reinterpret_cast<jlong> (pResult);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_VehicleController
- * Method:    getRefCount
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleController_getRefCount
-  (JNIEnv *, jclass, jlong controllerVa) {
-    const VehicleController * const pController
-            = reinterpret_cast<VehicleController *> (controllerVa);
-    const uint32 result = pController->GetRefCount();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_VehicleController
- * Method:    setEmbedded
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleController_setEmbedded
-  (JNIEnv *, jclass, jlong controllerVa) {
-    VehicleController * const pController
-            = reinterpret_cast<VehicleController *> (controllerVa);
-    pController->SetEmbedded();
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_VehicleController
- * Method:    toRef
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleController_toRef
-  (JNIEnv *, jclass, jlong controllerVa) {
-    VehicleController * const pController
-            = reinterpret_cast<VehicleController *> (controllerVa);
-    Ref<VehicleController> * const pResult
-            = new Ref<VehicleController>(pController);
-    TRACE_NEW("Ref<VehicleController>", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
