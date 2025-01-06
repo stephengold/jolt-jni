@@ -96,7 +96,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
         if (characterVa == 0L) {
             result = null;
         } else {
-            result = new CharacterVirtual(characterVa, null);
+            result = new CharacterVirtual(characterVa);
         }
 
         return result;
