@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.9.4 released on TBD
+## Version 0.9.4 released on 6 January 2025
 
 + API changes:
  + Renamed 25 public static methods in the `Op` class.
