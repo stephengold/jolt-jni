@@ -97,7 +97,7 @@ model {
 
             sources.cpp.source {
                 srcDir 'src/main/native/Jolt'
-                srcDir 'src/main/native/TestFramework/Math'
+                srcDir 'src/main/native/TestFramework/External'
                 srcDir 'src/main/native/glue'
                 include '**/*.cpp'
             }
