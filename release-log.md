@@ -1,5 +1,75 @@
 # release log for the jolt-jni project
 
+## Version 0.9.4 released on TBD
+
++ API changes:
+ + Renamed 25 public static methods in the `Op` class.
+ + Split off the `Std` class from the `Jolt` class.
+ + Split off the "com.stephengold.joltjni.std" package.
+ + Renamed the `UniformRealDistribution` class.
+ + Renamed the `Vec3.add()` method.
+ + Deleted 3 classes from the libraries:
+   + `TrackedVehicleControllerRef`
+   + `VehicleControllerRef`
+   + `WheeledVehicleControllerRef`
+ + Renamed the `Ragdoll.getBodyIDs()` method.
+ + Moved the `cDefaultConvexRadius` constant to the `Jolt` class.
+ + Altered the value returned by the `AaBox.biggest()` method.
+ + Altered the semantics of the `BodyIdVector.get()` method.
+ + Altered the signature of the `BodyIdArray.set()` method.
+ + Altered the signature of the `SkeletonPose.setSkeleton()` method.
+ + Added an argument to the `Part.getToParent()` method.
+ + Altered the return type of the `BodyIdArray.get()` method.
+ + Altered the default values returned by the `getMaxHeightValue()` and
+   `getMinHeightValue()` methods in the `HeightfiedShapeSettings` class.
+ + Deleted a redundant `addShape()` method from
+   the `CompoundShapeSettings` class.
+ + Redesigned the `CharacterVsCharacterCollisionSimple` class.
+ + Depublicized the `Wheel.newWheel()` method.
+
++ Bug fixes:
+ + crash due to use-after-free when a `PhysicsSystem` gets cleaned
+   before a character or `Ragdoll`
+ + premature cleaning of various physics objects
+ + crash due to uninitialized data in `ConvexHullBuilder.initialize()`
+ + assertion error while instantiating a `PhysicsScene`
+ + lossy casts in 4 `PlaneShape` getters
+ + `SkeletonPose.getJointMatrices()` returns an invalid pointer
+ + methods that should return `null` but are unabled to:
+   + `RagdollSettings.createRagdoll()`
+   + `RagdollSettingsRef.createRagdoll()`
+   + `Contact.getCharacterB()`
+ + memory leaks in `ObjectStreamIn`
+
++ Added classes and enums to the libraries:
+  + `AddConvexRadiusSupport`
+  + `AdditionalConstraint`
+  + `ChbEdge`
+  + `ChbFace`
+  + `ConvexHullBuilder`
+  + `EConstraintOverride`
+  + `EResult`
+  + `EStreamType`
+  + `ESupportMode`
+  + `HeightFieldShapeConstants`
+  + `Joint`
+  + `Mat44Array`
+  + `ObjectStreamOut`
+  + `PhysicsMaterialSimple`
+  + `PhysicsSceneResult`
+  + `RagdollResult`
+  + `ShapeList`
+  + `Sphere`
+  + `Stats`
+  + `StreamInWrapper`
+  + `StringStream`
+  + `Support`
+  + `SupportBuffer`
+
++ Added many public constants and public methods to the libraries.
++ Added chaining capability to 7 methods.
++ Updated the Jolt source code and assets to ba8beb8 (=sg250106).
+
 ## Version 0.9.3 released on 13 November 2024
 
 + API changes:
