@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -321,7 +321,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Alter the artificial maximum height. (native attribute: mMaxHeightValue)
      *
-     * @param maxHeight the desired height value (default=-MAX_VALUE)
+     * @param maxHeight the desired height value (default=-1e15)
      */
     public void setMaxHeightValue(float maxHeight) {
         long settingsVa = va();
@@ -331,7 +331,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     /**
      * Alter the artificial minimum height. (native attribute: mMinHeightValue)
      *
-     * @param minHeight the desired height value (default=MAX_VALUE)
+     * @param minHeight the desired height value (default=1e15)
      */
     public void setMinHeightValue(float minHeight) {
         long settingsVa = va();
