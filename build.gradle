@@ -151,7 +151,7 @@ model {
                     cppCompiler.args "/I$javaHome/include"
                     cppCompiler.args "/I$javaHome/include/win32"
                     cppCompiler.args "/I$projectDir/src/main/native"
-                    cppCompiler.args "/I$projectDir/src/main/native/TestFramework" // for Math/Perlin.h
+                    cppCompiler.args "/I$projectDir/src/main/native/TestFramework" // for External/Perlin.h
                     cppCompiler.args '/std:c++17'
 
                     if (isDebug) {
@@ -169,7 +169,7 @@ model {
 
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/main/native"
-                    cppCompiler.args '-I', "$projectDir/src/main/native/TestFramework" // for Math/Perlin.h
+                    cppCompiler.args '-I', "$projectDir/src/main/native/TestFramework" // for External/Perlin.h
                     cppCompiler.args '-std=c++17'
                     cppCompiler.args '-Werror=return-type'
 

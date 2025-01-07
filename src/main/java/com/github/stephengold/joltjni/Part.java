@@ -50,7 +50,7 @@ public class Part extends BodyCreationSettings {
      * Return the settings to create the joint to the part's parent. The part is
      * unaffected. (native attribute: mToParent)
      *
-     * @param subType foo
+     * @param subType the expected type of constraint (not null)
      * @return a new JVM with the pre-exising native object assigned
      */
     public ConstraintSettings getToParent(EConstraintSubType subType) {
