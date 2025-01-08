@@ -191,18 +191,7 @@ final public class SmokeTestAll {
         smokeTest(new ConvexHullTest());
 
         smokeTestGeneral();
-
-        // rig package:
-        //smokeTest(new BigWorldTest());
-        smokeTest(new CreateRigTest());
-        smokeTest(new KinematicRigTest());
-        smokeTest(new LoadRigTest());
-        smokeTest(new LoadSaveBinaryRigTest());
-        smokeTest(new LoadSaveRigTest());
-        smokeTest(new PoweredRigTest());
-        smokeTest(new RigPileTest());
-        smokeTest(new SkeletonMapperTest());
-
+        smokeTestRig();
         smokeTestShapes();
 
         // softbody package:
@@ -275,6 +264,21 @@ final public class SmokeTestAll {
         smokeTest(new ManifoldReductionTest());
         smokeTest(new ModifyMassTest());
         smokeTest(new RestitutionTest());
+    }
+
+    /**
+     * Smoke test the "rig" package.
+     */
+    private static void smokeTestRig() {
+        //smokeTest(new BigWorldTest());
+        smokeTest(new CreateRigTest());
+        smokeTest(new KinematicRigTest());
+        smokeTest(new LoadRigTest());
+        smokeTest(new LoadSaveBinaryRigTest());
+        smokeTest(new LoadSaveRigTest());
+        smokeTest(new PoweredRigTest());
+        smokeTest(new RigPileTest());
+        smokeTest(new SkeletonMapperTest());
     }
 
     /**
