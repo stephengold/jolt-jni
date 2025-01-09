@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,8 @@ import java.io.PrintStream;
 import java.util.List;
 
 /**
- * Java equivalents for features of the {@code std::} namespace.
+ * Java equivalents for (and access to) certain features of the {@code std::}
+ * namespace.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -70,6 +71,8 @@ final public class Std {
 
     /**
      * Return the inverse cosine of the specified single-precision ratio.
+     * There's evidence this is faster than {@link java.lang.Math#acos(double)}
+     * on Linux and Windows.
      *
      * @param ratio the input cosine ratio (&ge;-1, &le;1)
      * @return the angle (in radians)
@@ -78,6 +81,8 @@ final public class Std {
 
     /**
      * Return the inverse tangent of the specified single-precision ratio.
+     * There's evidence this is faster than {@link java.lang.Math#atan(double)}
+     * on Linux and Windows.
      *
      * @param ratio the input tangent ratio
      * @return the angle (in radians)
@@ -85,7 +90,9 @@ final public class Std {
     native public static float atan(float ratio);
 
     /**
-     * Return the cosine of the specified single-precision angle.
+     * Return the cosine of the specified single-precision angle. There's
+     * evidence this is faster than {@link java.lang.Math#cos(double)} on Linux
+     * and Windows.
      *
      * @param angle the input angle (in radians)
      * @return the cosine ratio
@@ -93,7 +100,8 @@ final public class Std {
     native public static float cos(float angle);
 
     /**
-     * Return the exponential of the specified single-precision value.
+     * Return the exponential of the specified single-precision value. There's
+     * evidence this is faster than {@link java.lang.Math#exp(double)}.
      *
      * @param value the input exponent
      * @return the exponential
@@ -112,6 +120,8 @@ final public class Std {
 
     /**
      * Return the specified power of the specified single-precision base.
+     * There's evidence this is faster than
+     * {@link java.lang.Math#pow(double, double)}.
      *
      * @param base the base value
      * @param exponent the exponent value
@@ -153,7 +163,8 @@ final public class Std {
     }
 
     /**
-     * Return the sine of the specified single-precision angle.
+     * Return the sine of the specified single-precision angle. There's evidence
+     * this is faster than {@link java.lang.Math#sin(double)}.
      *
      * @param angle the input angle (in radians)
      * @return the sine ratio
@@ -161,7 +172,8 @@ final public class Std {
     native public static float sin(float angle);
 
     /**
-     * Return the square root of the specified single-precision value.
+     * Return the square root of the specified single-precision value. There's
+     * evidence this is slower than {@link java.lang.Math#sqrt(double)}.
      *
      * @param value the input value
      * @return the square root
