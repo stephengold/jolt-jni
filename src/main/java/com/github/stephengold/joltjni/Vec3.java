@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -507,10 +507,10 @@ final public class Vec3 implements Vec3Arg {
     @Override
     public Vec3 getNormalizedPerpendicular() {
         if (Math.abs(x) > Math.abs(y)) {
-            float len = Std.sqrt(x * x + z * z);
+            float len = (float) Math.sqrt(x * x + z * z);
             return new Vec3(z / len, 0f, -x / len);
         } else {
-            float len = Std.sqrt(y * y + z * z);
+            float len = (float) Math.sqrt(y * y + z * z);
             return new Vec3(0f, z / len, -y / len);
         }
     }
@@ -641,7 +641,7 @@ final public class Vec3 implements Vec3Arg {
     @Override
     public float length() {
         float lengthSq = lengthSq();
-        float result = Std.sqrt(lengthSq);
+        float result = (float) Math.sqrt(lengthSq);
 
         return result;
     }
@@ -686,7 +686,7 @@ final public class Vec3 implements Vec3Arg {
         if (lengthSq == 0f) {
             result = new Vec3(zeroValue);
         } else {
-            float length = Std.sqrt(lengthSq);
+            float length = (float) Math.sqrt(lengthSq);
             if (length == 0f) {
                 result = new Vec3(zeroValue);
             } else {

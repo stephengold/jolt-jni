@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -170,7 +170,7 @@ final public class Quat implements QuatArg {
      * @return a new quaternion
      */
     public static Quat sFromTo(Vec3Arg from, Vec3Arg to) {
-        float lenV1V2 = Std.sqrt(from.lengthSq() * to.lengthSq());
+        float lenV1V2 = (float) Math.sqrt(from.lengthSq() * to.lengthSq());
         float w = lenV1V2 + from.dot(to);
 
         if (w == 0f) {
@@ -210,8 +210,8 @@ final public class Quat implements QuatArg {
         }
 
         float x0 = distro.nextFloat(engine);
-        float r1 = Std.sqrt(1f - x0);
-        float r2 = Std.sqrt(x0);
+        float r1 = (float) Math.sqrt(1f - x0);
+        float r2 = (float) Math.sqrt(x0);
 
         float px = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
         float py = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
@@ -339,7 +339,7 @@ final public class Quat implements QuatArg {
     @Override
     public float length() {
         float lengthSq = lengthSq();
-        float result = Std.sqrt(lengthSq);
+        float result = (float) Math.sqrt(lengthSq);
 
         return result;
     }
