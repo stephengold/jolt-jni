@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -105,7 +105,8 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 			shape.modifyShapes(0, count, mPosition, mRotation, 32, 32);
 
 			// Initialize frame dependent random number generator
-			DefaultRandomEngine frame_random=new DefaultRandomEngine(mFrameNumber++);
+			// Note: Explicitly using the Mersenne Twister random generator as on some platforms you get the seed back as the first random number
+			Mt19937 frame_random=new Mt19937(mFrameNumber++);
 
 			// Roll the dice
 			float roll = roll_distribution.nextFloat(frame_random);
