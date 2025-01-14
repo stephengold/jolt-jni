@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -81,6 +81,17 @@ final public class RVec3 implements RVec3Arg {
         this.xx = array[0];
         this.yy = array[1];
         this.zz = array[2];
+    }
+
+    /**
+     * Instantiate a copy of the argument.
+     *
+     * @param vec the vector to copy (not null, unaffected)
+     */
+    public RVec3(RVec3Arg vec) {
+        this.xx = vec.xx();
+        this.yy = vec.yy();
+        this.zz = vec.zz();
     }
 
     /**
