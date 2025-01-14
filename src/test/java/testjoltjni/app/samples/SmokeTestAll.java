@@ -32,7 +32,7 @@ import testjoltjni.app.samples.rig.*;
 import testjoltjni.app.samples.shapes.*;
 import testjoltjni.app.samples.softbody.*;
 import testjoltjni.app.samples.vehicle.*;
-import testjoltjni.app.samples.water.BoatTest;
+import testjoltjni.app.samples.water.*;
 
 /**
  * Console app to perform a "smoke test" on each of the Samples tests.
@@ -204,6 +204,7 @@ final public class SmokeTestAll {
 
         // water package:
         smokeTest(new BoatTest());
+        smokeTest(new WaterShapeTest());
     }
 
     /**
