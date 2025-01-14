@@ -1,7 +1,7 @@
 #ifndef _Included_glue
 #define _Included_glue
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -65,5 +65,16 @@ extern bool gTraceAllocations;
     className * const pResult = pRef->GetPtr(); \
     return reinterpret_cast<jlong> (pResult); \
   }
+
+#ifdef ANDROID
+// doesn't match the Invocation API spec
+#define ATTACH_CURRENT_THREAD(mpVM, ppAttachEnv) \
+    (mpVM)->AttachCurrentThread(ppAttachEnv, NULL)
+
+#else
+#define ATTACH_CURRENT_THREAD(mpVM, ppAttachEnv) \
+    (mpVM)->AttachCurrentThread((void **)(ppAttachEnv), NULL)
+
+#endif
 
 #endif

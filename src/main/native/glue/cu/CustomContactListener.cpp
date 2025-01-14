@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -65,7 +65,7 @@ public:
     void OnContactAdded(const Body &inBody1, const Body &inBody2,
             const ContactManifold &inManifold, ContactSettings &ioSettings) {
         JNIEnv *pAttachEnv;
-        jint retCode = mpVM->AttachCurrentThread((void **)&pAttachEnv, NULL);
+        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong body1Va = reinterpret_cast<jlong> (&inBody1);
@@ -80,7 +80,7 @@ public:
     void OnContactPersisted(const Body &inBody1, const Body &inBody2,
             const ContactManifold &inManifold, ContactSettings &ioSettings) {
         JNIEnv *pAttachEnv;
-        jint retCode = mpVM->AttachCurrentThread((void **)&pAttachEnv, NULL);
+        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong body1Va = reinterpret_cast<jlong> (&inBody1);
@@ -95,7 +95,7 @@ public:
 
     void OnContactRemoved(const SubShapeIDPair &pair) {
         JNIEnv *pAttachEnv;
-        jint retCode = mpVM->AttachCurrentThread((void **)&pAttachEnv, NULL);
+        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong pairVa = reinterpret_cast<jlong> (&pair);
@@ -107,7 +107,7 @@ public:
     ValidateResult OnContactValidate(const Body &inBody1, const Body &inBody2,
             RVec3Arg inBaseOffset, const CollideShapeResult &inCollisionResult) {
         JNIEnv *pAttachEnv;
-        jint retCode = mpVM->AttachCurrentThread((void **)&pAttachEnv, NULL);
+        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong body1Va = reinterpret_cast<jlong> (&inBody1);
@@ -125,7 +125,7 @@ public:
 
     ~CustomContactListener() {
         JNIEnv *pAttachEnv;
-        jint retCode = mpVM->AttachCurrentThread((void **)&pAttachEnv, NULL);
+        jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
