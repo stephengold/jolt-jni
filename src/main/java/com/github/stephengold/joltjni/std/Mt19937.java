@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ import com.github.stephengold.joltjni.JoltPhysicsObject;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Mt19937 extends JoltPhysicsObject {
+public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
     // *************************************************************************
     // constructors
 
@@ -43,10 +43,39 @@ public class Mt19937 extends JoltPhysicsObject {
         long generatorVa = createMt19937();
         setVirtualAddress(generatorVa, () -> free(generatorVa));
     }
+
+    /**
+     * Instantiate a generator using the specified 32-bit seed.
+     *
+     * @param seed for initialization
+     */
+    public Mt19937(int seed) {
+        long generatorVa = createSeeded(seed);
+        setVirtualAddress(generatorVa, () -> free(generatorVa));
+    }
+    // *************************************************************************
+    // RandomEngine methods
+
+    /**
+     * Return the next integer in the sequence.
+     *
+     * @return an integer value
+     */
+    @Override
+    public int nextInt() {
+        long generatorVa = va();
+        int result = nextInt(generatorVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
     native private static long createMt19937();
 
+    native private static long createSeeded(int seed);
+
     native private static void free(long generatorVa);
+
+    native private static int nextInt(long generatorVa);
 }

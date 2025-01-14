@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,6 +43,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_createMt
 
 /*
  * Class:     com_github_stephengold_joltjni_std_Mt19937
+ * Method:    createSeeded
+ * Signature: (I)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_createSeeded
+  (JNIEnv *, jclass, jint seed) {
+    mt19937 * const pResult = new mt19937(seed);
+    TRACE_NEW("mt19937", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_Mt19937
  * Method:    free
  * Signature: (J)V
  */
@@ -51,4 +63,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_free
     mt19937 * const pGenerator = reinterpret_cast<mt19937 *> (generatorVa);
     TRACE_DELETE("mt19937", pGenerator)
     delete pGenerator;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_Mt19937
+ * Method:    nextInt
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_nextInt
+  (JNIEnv *, jclass, jlong generatorVa) {
+    mt19937 * const pGenerator
+            = reinterpret_cast<mt19937 *> (generatorVa);
+    mt19937::result_type result = (*pGenerator)();
+    return result;
 }
