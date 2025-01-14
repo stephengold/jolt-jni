@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -355,4 +355,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_setMin
     AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     const Vec3 min(x, y, z);
     pBox->mMin = min;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    translate
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_translate
+  (JNIEnv *, jclass, jlong boxVa, jfloat x, jfloat y, jfloat z) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const Vec3 offset(x, y, z);
+    pBox->Translate(offset);
 }

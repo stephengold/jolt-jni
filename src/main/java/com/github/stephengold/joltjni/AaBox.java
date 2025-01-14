@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -157,6 +157,19 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         float y = min.getY();
         float z = min.getZ();
         setMin(boxVa, x, y, z);
+    }
+
+    /**
+     * Move by the specified offset.
+     *
+     * @param offset the amount to move (not null, unaffected)
+     */
+    public void translate(Vec3Arg offset) {
+        long boxVa = va();
+        float x = offset.getX();
+        float y = offset.getY();
+        float z = offset.getZ();
+        translate(boxVa, x, y, z);
     }
     // *************************************************************************
     // ConstAaBox methods
@@ -346,4 +359,6 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static void setMax(long boxVa, float x, float y, float z);
 
     native private static void setMin(long boxVa, float x, float y, float z);
+
+    native private static void translate(long boxVa, float x, float y, float z);
 }
