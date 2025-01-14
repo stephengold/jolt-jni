@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,9 @@ import com.github.stephengold.joltjni.JoltPhysicsObject;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class DefaultRandomEngine extends JoltPhysicsObject {
+public class DefaultRandomEngine
+        extends JoltPhysicsObject
+        implements RandomNumberEngine {
     // *************************************************************************
     // constructors
 
@@ -54,13 +56,14 @@ public class DefaultRandomEngine extends JoltPhysicsObject {
         setVirtualAddress(generatorVa, () -> free(generatorVa));
     }
     // *************************************************************************
-    // new methods exposed
+    // RandomEngine methods
 
     /**
      * Return the next integer in the sequence.
      *
      * @return an integer value
      */
+    @Override
     public int nextInt() {
         long generatorVa = va();
         int result = nextInt(generatorVa);
