@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import com.github.stephengold.joltjni.std.DefaultRandomEngine;
+import com.github.stephengold.joltjni.std.RandomNumberEngine;
 import com.github.stephengold.joltjni.std.Std;
 import com.github.stephengold.joltjni.std.UniformFloatDistribution;
 import java.nio.FloatBuffer;
@@ -203,7 +203,7 @@ final public class Quat implements QuatArg {
      * @param engine the generator to use (not null)
      * @return a new unit quaternion
      */
-    public static Quat sRandom(DefaultRandomEngine engine) {
+    public static Quat sRandom(RandomNumberEngine engine) {
         assert engine != null;
         if (distro == null) {
             distro = new UniformFloatDistribution(0f, 1f);

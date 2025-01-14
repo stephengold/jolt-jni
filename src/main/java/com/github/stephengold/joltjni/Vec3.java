@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.UVec4Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import com.github.stephengold.joltjni.std.DefaultRandomEngine;
+import com.github.stephengold.joltjni.std.RandomNumberEngine;
 import com.github.stephengold.joltjni.std.Std;
 import com.github.stephengold.joltjni.std.UniformFloatDistribution;
 import java.nio.FloatBuffer;
@@ -351,7 +351,7 @@ final public class Vec3 implements Vec3Arg {
      * @param engine the generator to use (not null)
      * @return a new unit vector
      */
-    public static Vec3 sRandom(DefaultRandomEngine engine) {
+    public static Vec3 sRandom(RandomNumberEngine engine) {
         assert engine != null;
         if (distro == null) {
             distro = new UniformFloatDistribution(0f, 1f);

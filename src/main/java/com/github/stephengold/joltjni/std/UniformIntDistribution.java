@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,24 +56,18 @@ public class UniformIntDistribution extends JoltPhysicsObject {
      * @param generator the sequence generator to use (not null, modified)
      * @return the value
      */
-    public int nextInt(DefaultRandomEngine generator) {
+    public int nextInt(RandomNumberEngine generator) {
         long distributionVa = va();
-        long generatorVa = generator.va();
-        int result = nextIntDre(distributionVa, generatorVa);
-
-        return result;
-    }
-
-    /**
-     * Iterate and return the next {@code int} value in the sequence.
-     *
-     * @param generator the sequence generator to use (not null, modified)
-     * @return the value
-     */
-    public int nextInt(Mt19937 generator) {
-        long distributionVa = va();
-        long generatorVa = generator.va();
-        int result = nextIntMt(distributionVa, generatorVa);
+        long generatorVa = generator.targetVa();
+        int result;
+        if (generator instanceof DefaultRandomEngine) {
+            result = nextIntDre(distributionVa, generatorVa);
+        } else if (generator instanceof Mt19937) {
+            result = nextIntMt(distributionVa, generatorVa);
+        } else {
+            String className = generator.getClass().getSimpleName();
+            throw new IllegalArgumentException("className = " + className);
+        }
 
         return result;
     }
