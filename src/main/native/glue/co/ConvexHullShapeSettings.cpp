@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -78,7 +78,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
             pPoints, numPoints, maxConvexRadius, pMaterial);
     TRACE_NEW("ConvexHullShapeSettings", pResult)
     TRACE_DELETE("Vec3[]", pPoints)
-    delete pPoints;
+    delete[] pPoints;
     return reinterpret_cast<jlong> (pResult);
 }
 
