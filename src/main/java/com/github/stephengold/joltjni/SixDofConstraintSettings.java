@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -506,10 +506,14 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param dof which DOF (not null)
      * @param motorSettings the settings to copy (not null, not affected)
+     * @return the motor settings, for chaining
      */
-    public void setMotorSettings(EAxis dof, MotorSettings motorSettings) {
+    public MotorSettings setMotorSettings(
+            EAxis dof, MotorSettings motorSettings) {
         int dofIndex = dof.ordinal();
         setMotorSettings(dofIndex, motorSettings);
+
+        return motorSettings;
     }
 
     /**
