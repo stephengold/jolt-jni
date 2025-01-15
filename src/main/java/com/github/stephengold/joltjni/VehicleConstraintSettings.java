@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -137,6 +137,22 @@ public class VehicleConstraintSettings extends ConstraintSettings {
     }
 
     /**
+     * Copy the "up" vector. The settings are unaffected. (native attribute:
+     * mUp)
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getUp() {
+        long settingsVa = va();
+        float dx = getUpX(settingsVa);
+        float dy = getUpY(settingsVa);
+        float dz = getUpZ(settingsVa);
+        Vec3 result = new Vec3(dx, dy, dz);
+
+        return result;
+    }
+
+    /**
      * Enumerate the wheel settings. The settings are unaffected. (native
      * attribute: mWheels)
      *
@@ -150,22 +166,6 @@ public class VehicleConstraintSettings extends ConstraintSettings {
             RefTarget t = r.getPtr();
             result[i] = (WheelSettings) t;
         }
-
-        return result;
-    }
-
-    /**
-     * Copy the "up" vector. The settings are unaffected. (native attribute:
-     * mUp)
-     *
-     * @return a new direction vector
-     */
-    public Vec3 getUp() {
-        long settingsVa = va();
-        float dx = getUpX(settingsVa);
-        float dy = getUpY(settingsVa);
-        float dz = getUpZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
 
         return result;
     }
@@ -233,13 +233,13 @@ public class VehicleConstraintSettings extends ConstraintSettings {
 
     native private static long createDefault();
 
-    native private static float getMaxPitchRollAngle(long constraintSettingsVa);
-
     native private static float getForwardX(long settingsVa);
 
     native private static float getForwardY(long settingsVa);
 
     native private static float getForwardZ(long settingsVa);
+
+    native private static float getMaxPitchRollAngle(long constraintSettingsVa);
 
     native private static float getUpX(long settingsVa);
 
