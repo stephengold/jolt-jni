@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -111,6 +111,17 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_sin
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_sqrt
   (JNIEnv *, jclass, jfloat value) {
     const float result = std::sqrt(value);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_Std
+ * Method:    tan
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_tan
+  (JNIEnv *, jclass, jfloat value) {
+    const float result = std::tan(value);
     return result;
 }
 

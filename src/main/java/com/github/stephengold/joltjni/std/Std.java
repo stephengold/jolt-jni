@@ -193,6 +193,14 @@ final public class Std {
         int result = lhs.compareTo(rhs);
         return result;
     }
+
+    /**
+     * Return the tangent ratio of the specified single-precision angle.
+     *
+     * @param angle the input angle (in radians)
+     * @return the tangent ratio
+     */
+    native public static float tan(float angle);
     // *************************************************************************
     // native private methods
 
