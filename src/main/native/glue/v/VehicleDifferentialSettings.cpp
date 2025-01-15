@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,6 +44,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleDifferential
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
+ * Method:    getEngineTorqueRatio
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSettings_getEngineTorqueRatio
+  (JNIEnv *, jclass, jlongjlong settingsVa) {
+    const VehicleDifferentialSettings * const pSettings
+            = reinterpret_cast<VehicleDifferentialSettings *> (settingsVa);
+    const float result = pSettings->mEngineTorqueRatio;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
  * Method:    getLeftWheel
  * Signature: (J)I
  */
@@ -78,6 +91,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSe
     VehicleDifferentialSettings * const pSettings
             = reinterpret_cast<VehicleDifferentialSettings *> (settingsVa);
     pSettings->mDifferentialRatio = ratio;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
+ * Method:    setEngineTorqueRatio
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSettings_setEngineTorqueRatio
+  (JNIEnv *, jclass, jlong settingsVa, jfloat fraction) {
+    VehicleDifferentialSettings * const pSettings
+            = reinterpret_cast<VehicleDifferentialSettings *> (settingsVa);
+    pSettings->mEngineTorqueRatio = fraction;
 }
 
 /*

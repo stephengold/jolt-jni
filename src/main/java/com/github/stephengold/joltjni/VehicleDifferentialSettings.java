@@ -58,6 +58,20 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Return the fraction of the engine's torque that is applied to this
+     * differential. The settings are unaffected. (native attribute:
+     * mEngineTorqueRatio)
+     *
+     * @return the fraction
+     */
+    public float getEngineTorqueRatio() {
+        long settingsVa = va();
+        float result = getEngineTorqueRatio(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the index of the left wheel. The settings are unaffected. (native
      * attribute: mLeftWheel)
      *
@@ -95,6 +109,20 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Alter the fraction of the engine's torque that is applied to this
+     * differential. (native attribute: mEngineTorqueRatio)
+     *
+     * @param fraction the desired ratio (default=1)
+     * @return the fraction, for chaining
+     */
+    public float setEngineTorqueRatio(float fraction) {
+        long settingsVa = va();
+        setEngineTorqueRatio(settingsVa, fraction);
+
+        return fraction;
+    }
+
+    /**
      * Alter which left wheel is assigned to the differential. (native
      * attribute: mLeftWheel)
      *
@@ -122,12 +150,17 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
 
     native private static float getDifferentialRatio(long settingsVa);
 
+    native private static float getEngineTorqueRatio(long settingsVa);
+
     native private static int getLeftWheel(long settingsVa);
 
     native private static int getRightWheel(long settingsVa);
 
     native private static void setDifferentialRatio(
             long settingsVa, float ratio);
+
+    native private static void setEngineTorqueRatio(
+            long settingsVa, float fraction);
 
     native private static void setLeftWheel(long settingsVa, int wheelIndex);
 
