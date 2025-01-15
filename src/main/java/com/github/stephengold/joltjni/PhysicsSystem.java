@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -542,6 +542,18 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Remove the specified step listener from the system.
+     *
+     * @param listener the listener to remove (not null)
+     */
+    public void removeStepListener(PhysicsStepListener listener) {
+        stepListeners.remove(listener);
+        long systemVa = va();
+        long listenerVa = listener.targetVa();
+        removeStepListener(systemVa, listenerVa);
+    }
+
+    /**
      * Restore the system's state from the specified recorder, for replay.
      *
      * @param recorder where to read the state from (not null)
@@ -763,6 +775,9 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static void removeConstraint(
             long systemVa, long constraintVa);
+
+    native private static void removeStepListener(
+            long systemVa, long listenerVa);
 
     native private static boolean restoreState(long systemVa, long recorderVa);
 
