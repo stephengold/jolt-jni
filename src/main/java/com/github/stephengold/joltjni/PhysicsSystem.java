@@ -67,7 +67,7 @@ public class PhysicsSystem extends NonCopyable {
      */
     private ContactListener contactListener;
     /**
-     * protect the step listeners from garbage collection
+     * protect the step listeners (if any) from garbage collection
      */
     final private List<PhysicsStepListener> stepListeners = new ArrayList<>();
     /**

@@ -505,7 +505,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * attribute: mMotorSettings)
      *
      * @param dof which DOF (not null)
-     * @param motorSettings the settings to copy (not null, not affected)
+     * @param motorSettings the settings to copy (not null, unaffected)
      * @return the motor settings, for chaining
      */
     public MotorSettings setMotorSettings(
@@ -521,7 +521,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * attribute: mMotorSettings)
      *
      * @param dofIndex which DOF (&ge;0, &lt;6)
-     * @param motorSettings the settings to copy (not null, not affected)
+     * @param motorSettings the settings to copy (not null, unaffected)
      */
     public void setMotorSettings(int dofIndex, MotorSettings motorSettings) {
         long constraintSettingsVa = va();
