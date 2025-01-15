@@ -66,7 +66,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyLockRead_getBody
   (JNIEnv *, jclass, jlong lockVa) {
     const BodyLockRead * const pLock
             = reinterpret_cast<BodyLockRead *> (lockVa);
-    const Body &result = pLock->GetBody();
+    const Body& result = pLock->GetBody();
     return reinterpret_cast<jlong> (&result);
 }
 

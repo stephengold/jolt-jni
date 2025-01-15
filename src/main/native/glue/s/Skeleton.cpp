@@ -113,7 +113,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skeleton_getJoint
   (JNIEnv *, jclass, jlong skeletonVa, jint jointIndex) {
     Skeleton * const pSkeleton
             = reinterpret_cast<Skeleton *> (skeletonVa);
-    const Skeleton::Joint & result = pSkeleton->GetJoint(jointIndex);
+    const Skeleton::Joint& result = pSkeleton->GetJoint(jointIndex);
     return reinterpret_cast<jlong> (&result);
 }
 
