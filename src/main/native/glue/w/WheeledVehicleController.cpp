@@ -32,6 +32,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    getEngine
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_getEngine
+  (JNIEnv *, jclass, jlong controllerVa) {
+    WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    VehicleEngine& result = pController->GetEngine();
+    return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
  * Method:    setDriverInput
  * Signature: (JFFFF)V
  */

@@ -44,6 +44,19 @@ public class WheeledVehicleController extends VehicleController {
     // new methods exposed
 
     /**
+     * Access the vehicle's engine.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public VehicleEngine getEngine() {
+        long controllerVa = va();
+        long engineVa = getEngine(controllerVa);
+        VehicleEngine result = new VehicleEngine(this, engineVa);
+
+        return result;
+    }
+
+    /**
      * Update the control inputs from the vehicle's driver.
      *
      * @param forward the desired driving direction and amount of acceleration
@@ -59,6 +72,8 @@ public class WheeledVehicleController extends VehicleController {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long getEngine(long controllerVa);
 
     native private static void setDriverInput(long controllerVa, float forward,
             float right, float brake, float handBrake);
