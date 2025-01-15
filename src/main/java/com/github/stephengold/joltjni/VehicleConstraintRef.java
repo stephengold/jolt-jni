@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,6 +52,16 @@ final public class VehicleConstraintRef extends Ref {
     VehicleConstraintRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Remove the gravity override, if any.
+     */
+    public void resetGravityOverride() {
+        long constraintVa = targetVa();
+        VehicleConstraint.resetGravityOverride(constraintVa);
     }
     // *************************************************************************
     // Ref methods

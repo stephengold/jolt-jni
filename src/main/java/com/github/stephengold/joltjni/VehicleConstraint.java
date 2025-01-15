@@ -263,7 +263,7 @@ public class VehicleConstraint
         onStep(constraintVa, contextVa);
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static int countWheels(long constraintVa);
 
@@ -290,7 +290,7 @@ public class VehicleConstraint
     native private static void overrideGravity(
             long constraintVa, float ax, float ay, float az);
 
-    native private static void resetGravityOverride(long constraintVa);
+    native static void resetGravityOverride(long constraintVa);
 
     native private static void setNumStepsBetweenCollisionTestActive(
             long constraintVa, int numSteps);
