@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -53,7 +53,7 @@ public class WheeledVehicleControllerSettings
      * Access the settings for the specified differential. (native field:
      * mDifferentials)
      *
-     * @param index the index of differential to access (&ge;0)
+     * @param index the index of the differential to access (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public VehicleDifferentialSettings getDifferential(int index) {

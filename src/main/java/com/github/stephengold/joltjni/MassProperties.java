@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -110,7 +110,7 @@ final public class MassProperties
      * Alter the inertia tensor. (native attribute: mInertia)
      *
      * @param inertia the desired value (not null, unaffected, default=zero)
-     * @return the modified properties (for chaining)
+     * @return the modified properties, for chaining
      */
     public MassProperties setInertia(Mat44Arg inertia) {
         long propertiesVa = va();
@@ -124,7 +124,7 @@ final public class MassProperties
      * Alter the mass. (native attribute: mMass)
      *
      * @param mass the desired mass (in kilograms, &ge;0, default=0)
-     * @return the modified properties (for chaining)
+     * @return the modified properties, for chaining
      */
     public MassProperties setMass(float mass) {
         long propertiesVa = va();

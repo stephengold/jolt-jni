@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -100,7 +100,7 @@ public class HingeConstraint extends TwoBodyConstraint {
      * Return the maximum friction torque when not driven by a motor. The
      * constraint is unaffected.
      *
-     * @return the torque (in Newton-meters)
+     * @return the torque (in Newton.meters)
      */
     public float getMaxFrictionTorque() {
         long constraintVa = va();
@@ -186,7 +186,7 @@ public class HingeConstraint extends TwoBodyConstraint {
     /**
      * Alter the maximum friction torque when not driven by a motor.
      *
-     * @param torque the desired torque (in Newton-meters)
+     * @param torque the desired torque (in Newton.meters)
      */
     public void setMaxFrictionTorque(float torque) {
         long constraintVa = va();

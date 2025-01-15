@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -48,7 +48,7 @@ public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
      * Disable interactions with the specified layer.
      *
      * @param bpLayer the index of the broad-phase layer (&lt; numBpLayers)
-     * @return the modified filter (for chaining)
+     * @return the modified filter, for chaining
      */
     public ObjVsBpFilter disableBp(int bpLayer) {
         long filterVa = va();
@@ -61,7 +61,7 @@ public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
      * Disable interactions with the specified layer.
      *
      * @param objLayer the index of the object layer (&lt; numObjectLayers)
-     * @return the modified filter (for chaining)
+     * @return the modified filter, for chaining
      */
     public ObjVsBpFilter disableObj(int objLayer) {
         long filterVa = va();
@@ -75,7 +75,7 @@ public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
      *
      * @param objLayer the index of the object layer (&lt; numObjectLayers)
      * @param bpLayer the index of the broad-phase layer (&lt; numBpLayers)
-     * @return the modified filter (for chaining)
+     * @return the modified filter, for chaining
      */
     public ObjVsBpFilter disablePair(int objLayer, int bpLayer) {
         disablePair(va(), objLayer, bpLayer);

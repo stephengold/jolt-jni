@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,7 +47,7 @@ public class ObjVsObjFilter extends ObjectLayerPairFilter {
      * Disable all interactions with the specified object layer.
      *
      * @param layer the index of the layer (&lt; numObjectLayers)
-     * @return the modified filter (for chaining)
+     * @return the modified filter, for chaining
      */
     public ObjVsObjFilter disableLayer(int layer) {
         long filterVa = va();
@@ -61,7 +61,7 @@ public class ObjVsObjFilter extends ObjectLayerPairFilter {
      *
      * @param layer1 the index of the first object layer (&lt; numObjectLayers)
      * @param layer2 the index of the 2nd object layer (&lt; numObjectLayers)
-     * @return the modified filter (for chaining)
+     * @return the modified filter, for chaining
      */
     public ObjVsObjFilter disablePair(int layer1, int layer2) {
         disablePair(va(), layer1, layer2);

@@ -114,7 +114,7 @@ final public class RVec3 implements RVec3Arg {
      * @param addX the amount to add to the X component
      * @param addY the amount to add to the Y component
      * @param addZ the amount to add to the Z component
-     * @return the (modified) current instance (for chaining)
+     * @return the (modified) current instance, for chaining
      */
     public RVec3 addLocal(double addX, double addY, double addZ) {
         this.xx += addX;

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,7 @@ public class MapObj2Bp extends BroadPhaseLayerInterface {
      * @param objLayer the index of the object layer (&ge;0, &lt;
      * numObjectLayers)
      * @param bpLayer the index of the broad-phase layer (&lt; numBpLayers)
-     * @return the modified map (for chaining)
+     * @return the modified map, for chaining
      */
     public MapObj2Bp add(int objLayer, int bpLayer) {
         add(va(), objLayer, bpLayer);

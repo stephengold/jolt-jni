@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -107,7 +107,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      * linear motor. The settings are unaffected. (native attribute:
      * mMaxTorqueLimit)
      *
-     * @return the amount of torque (in Newton-meters, typically positive)
+     * @return the amount of torque (in Newton.meters, typically positive)
      */
     public float getMaxTorqueLimit() {
         long settingsVa = va();
@@ -135,7 +135,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      * linear motor. The settings are unaffected. (native attribute:
      * mMinTorqueLimit)
      *
-     * @return the amount of torque (in Newton-meters, typically negative)
+     * @return the amount of torque (in Newton.meters, typically negative)
      */
     public float getMinTorqueLimit() {
         long settingsVa = va();
@@ -210,7 +210,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      * Alter the maximum torque to apply in an angular constraint. Ignored in a
      * linear motor. (native attribute: mMaxTorqueLimit)
      *
-     * @param torque the desired amount of torque (in Newton-meters, typically
+     * @param torque the desired amount of torque (in Newton.meters, typically
      * positive, default=MAX_VALUE)
      */
     public void setMaxTorqueLimit(float torque) {
@@ -234,7 +234,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      * Alter the minimum torque to apply in an angular constraint. Ignored in a
      * linear motor. (native attribute: mMinTorqueLimit)
      *
-     * @param torque the desired amount of torque (in Newton-meters, typically
+     * @param torque the desired amount of torque (in Newton.meters, typically
      * negative, default=-MAX_VALUE)
      */
     public void setMinTorqueLimit(float torque) {
@@ -245,7 +245,7 @@ final public class MotorSettings extends JoltPhysicsObject {
     /**
      * Alter both torque limits of an angular motor to be symmetrical.
      *
-     * @param limit the desired upper limit (in Newton-meters)
+     * @param limit the desired upper limit (in Newton.meters)
      */
     public void setTorqueLimit(float limit) {
         long settingsVa = va();
@@ -255,8 +255,8 @@ final public class MotorSettings extends JoltPhysicsObject {
     /**
      * Alter both torque limits of an angular motor.
      *
-     * @param min the desired lower limit (in Newton-meters, default=-MAX_FLOAT)
-     * @param max the desired upper limit (in Newton-meters, default=MAX_FLOAT)
+     * @param min the desired lower limit (in Newton.meters, default=-MAX_FLOAT)
+     * @param max the desired upper limit (in Newton.meters, default=MAX_FLOAT)
      */
     public void setTorqueLimits(float min, float max) {
         long settingsVa = va();

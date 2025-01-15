@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -58,7 +58,7 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the index of left wheel. The settings are unaffected. (native
+     * Return the index of the left wheel. The settings are unaffected. (native
      * attribute: mLeftWheel)
      *
      * @return the index of the wheel (&ge;0) or -1 for none
@@ -71,7 +71,7 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the index of right wheel. The settings are unaffected. (native
+     * Return the index of the right wheel. The settings are unaffected. (native
      * attribute: mRightWheel)
      *
      * @return the index of the wheel (&ge;0) or -1 for none
