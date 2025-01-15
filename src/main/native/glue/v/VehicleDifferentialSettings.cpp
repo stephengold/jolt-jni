@@ -48,7 +48,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleDifferential
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSettings_getEngineTorqueRatio
-  (JNIEnv *, jclass, jlongjlong settingsVa) {
+  (JNIEnv *, jclass, jlong settingsVa) {
     const VehicleDifferentialSettings * const pSettings
             = reinterpret_cast<VehicleDifferentialSettings *> (settingsVa);
     const float result = pSettings->mEngineTorqueRatio;
