@@ -275,19 +275,18 @@ public class VehicleConstraint
 
     native private static long getWheel(long constraintVa, int wheelIndex);
 
-    native private static long getWheelWorldTransform(
-            long constraintVa, int wheelIndex, float rx, float ry, float rz,
-            float ux, float uy, float uz);
+    native static long getWheelWorldTransform(long constraintVa, int wheelIndex,
+            float rx, float ry, float rz, float ux, float uy, float uz);
+
+    native static float getWorldUpX(long constraintVa);
+
+    native static float getWorldUpY(long constraintVa);
+
+    native static float getWorldUpZ(long constraintVa);
 
     native private static void onStep(long constraintVa, long contextVa);
 
-    native private static float getWorldUpX(long constraintVa);
-
-    native private static float getWorldUpY(long constraintVa);
-
-    native private static float getWorldUpZ(long constraintVa);
-
-    native private static void overrideGravity(
+    native static void overrideGravity(
             long constraintVa, float ax, float ay, float az);
 
     native static void resetGravityOverride(long constraintVa);
