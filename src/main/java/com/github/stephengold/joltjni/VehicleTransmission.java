@@ -34,12 +34,12 @@ public class VehicleTransmission extends VehicleTransmissionSettings {
      * Instantiate a settings with the specified native object assigned but not
      * owned.
      *
-     * @param vehicle the containing object, or {@code null} if none
+     * @param container the containing object, or {@code null} if none
      * @param transmissionVa the virtual address of the native object to assign
      * (not zero)
      */
-    VehicleTransmission(VehicleController vehicle, long transmissionVa) {
-        super(vehicle, transmissionVa);
+    VehicleTransmission(JoltPhysicsObject container, long transmissionVa) {
+        super(container, transmissionVa);
     }
     // *************************************************************************
     // new methods exposed

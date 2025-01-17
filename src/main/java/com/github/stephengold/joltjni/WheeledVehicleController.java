@@ -67,9 +67,10 @@ public class WheeledVehicleController extends VehicleController {
         int numDifferentials = countDifferentials(controllerVa);
         VehicleDifferentialSettings[] result
                 = new VehicleDifferentialSettings[numDifferentials];
+        JoltPhysicsObject container = getContainingObject();
         for (int i = 0; i < numDifferentials; ++i) {
             long settingsVa = getDifferential(controllerVa, i);
-            result[i] = new VehicleDifferentialSettings(this, settingsVa);
+            result[i] = new VehicleDifferentialSettings(container, settingsVa);
         }
 
         return result;
@@ -83,7 +84,8 @@ public class WheeledVehicleController extends VehicleController {
     public VehicleEngine getEngine() {
         long controllerVa = va();
         long engineVa = getEngine(controllerVa);
-        VehicleEngine result = new VehicleEngine(this, engineVa);
+        JoltPhysicsObject container = getContainingObject();
+        VehicleEngine result = new VehicleEngine(container, engineVa);
 
         return result;
     }
@@ -135,8 +137,9 @@ public class WheeledVehicleController extends VehicleController {
     public VehicleTransmission getTransmission() {
         long controllerVa = va();
         long transmissionVa = getTransmission(controllerVa);
+        JoltPhysicsObject container = getContainingObject();
         VehicleTransmission result
-                = new VehicleTransmission(this, transmissionVa);
+                = new VehicleTransmission(container, transmissionVa);
 
         return result;
     }
