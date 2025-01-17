@@ -70,6 +70,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSe
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
+ * Method:    getLimitedSlipRatio
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSettings_getLimitedSlipRatio
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const VehicleDifferentialSettings * const pSettings
+            = reinterpret_cast<VehicleDifferentialSettings *> (settingsVa);
+    const float result = pSettings->mLimitedSlipRatio;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
  * Method:    getRightWheel
  * Signature: (J)I
  */
@@ -115,6 +128,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSe
     VehicleDifferentialSettings * const pSettings
             = reinterpret_cast<VehicleDifferentialSettings *> (settingsVa);
     pSettings->mLeftWheel = wheelIndex;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
+ * Method:    setLimitedSlipRatio
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSettings_setLimitedSlipRatio
+  (JNIEnv *, jclass, jlong settingsVa, jfloat ratio) {
+    VehicleDifferentialSettings * const pSettings
+            = reinterpret_cast<VehicleDifferentialSettings *> (settingsVa);
+    pSettings->mLimitedSlipRatio = ratio;
 }
 
 /*

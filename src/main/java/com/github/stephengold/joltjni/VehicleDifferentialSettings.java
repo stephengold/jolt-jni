@@ -85,6 +85,19 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Return the ratio of maximum wheel speed to minimum wheel speed. The
+     * settings are unaffected. (native member: mLimitedSlipRatio)
+     *
+     * @return the ratio (&gt;1, {@code FLT_MAX} for an open differential)
+     */
+    public float getLimitedSlipRatio() {
+        long settingsVa = va();
+        float result = getLimitedSlipRatio(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the index of the right wheel. The settings are unaffected. (native
      * attribute: mRightWheel)
      *
@@ -135,6 +148,19 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Alter the ratio of maximum wheel speed to minimum wheel speed. When this
+     * ratio is exceeded, all torque gets distributed to the slowest wheel.
+     * (native member: mLimitedSlipRatio)
+     *
+     * @param ratio the desired ratio (&gt;1, {@code FLT_MAX} for an open
+     * differential, default=1.4)
+     */
+    public void setLimitedSlipRatio(float ratio) {
+        long settingsVa = va();
+        setLimitedSlipRatio(settingsVa, ratio);
+    }
+
+    /**
      * Alter which right wheel is assigned to the differential. (native
      * attribute: mRightWheel)
      *
@@ -154,6 +180,8 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
 
     native private static int getLeftWheel(long settingsVa);
 
+    native private static float getLimitedSlipRatio(long settingsVa);
+
     native private static int getRightWheel(long settingsVa);
 
     native private static void setDifferentialRatio(
@@ -163,6 +191,9 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
             long settingsVa, float fraction);
 
     native private static void setLeftWheel(long settingsVa, int wheelIndex);
+
+    native private static void setLimitedSlipRatio(
+            long settingsVa, float ratio);
 
     native private static void setRightWheel(long settingsVa, int wheelIndex);
 }
