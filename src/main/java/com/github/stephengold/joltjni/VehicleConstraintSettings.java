@@ -134,8 +134,8 @@ public class VehicleConstraintSettings extends ConstraintSettings {
      * @return the angle (in radians)
      */
     public float getMaxPitchRollAngle() {
-        long constraintSettingsVa = va();
-        float result = getMaxPitchRollAngle(constraintSettingsVa);
+        long settingsVa = va();
+        float result = getMaxPitchRollAngle(settingsVa);
 
         return result;
     }
@@ -223,8 +223,8 @@ public class VehicleConstraintSettings extends ConstraintSettings {
      * @param angle the desired limit (in radians, default=Pi)
      */
     public void setMaxPitchRollAngle(float angle) {
-        long constraintSettingsVa = va();
-        setMaxPitchRollAngle(constraintSettingsVa, angle);
+        long settingsVa = va();
+        setMaxPitchRollAngle(settingsVa, angle);
     }
 
     /**
@@ -266,7 +266,7 @@ public class VehicleConstraintSettings extends ConstraintSettings {
 
     native private static float getForwardZ(long settingsVa);
 
-    native private static float getMaxPitchRollAngle(long constraintSettingsVa);
+    native private static float getMaxPitchRollAngle(long settingsVa);
 
     native private static float getUpX(long settingsVa);
 
@@ -281,7 +281,7 @@ public class VehicleConstraintSettings extends ConstraintSettings {
             long settingsVa, float dx, float dy, float dz);
 
     native private static void setMaxPitchRollAngle(
-            long constraintSettingsVa, float angle);
+            long settingsVa, float angle);
 
     native private static void setNumAntiRollBars(long settingsVa, int count);
 
