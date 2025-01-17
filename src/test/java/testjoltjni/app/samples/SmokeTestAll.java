@@ -200,6 +200,8 @@ final public class SmokeTestAll {
         // vehicle package:
         smokeTest(new MotorcycleTest());
         smokeTest(new TankTest());
+        smokeTest(new VehicleConstraintTest());
+        smokeTest(new VehicleSixDOFTest());
         smokeTest(new VehicleStressTest());
 
         // water package:
