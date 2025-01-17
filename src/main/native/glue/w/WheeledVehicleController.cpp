@@ -32,6 +32,49 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    countDifferentials
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_countDifferentials
+  (JNIEnv *, jclass, jlong controllerVa) {
+    const WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    const Array<VehicleDifferentialSettings>& array
+             = pController->GetDifferentials();
+    const size_t result = array.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    getBrakeInput
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_getBrakeInput
+  (JNIEnv *, jclass, jlong controllerVa) {
+    const WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    float result = pController->GetBrakeInput();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    getDifferential
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_getDifferential
+  (JNIEnv *, jclass, jlong controllerVa, jint index) {
+    const WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    const Array<VehicleDifferentialSettings>& array
+             = pController->GetDifferentials();
+    const VehicleDifferentialSettings& result = array[index];
+    return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
  * Method:    getEngine
  * Signature: (J)J
  */
@@ -45,6 +88,82 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContro
 
 /*
  * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    getForwardInput
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_getForwardInput
+  (JNIEnv *, jclass, jlong controllerVa) {
+    const WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    float result = pController->GetForwardInput();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    getHandBrakeInput
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_getHandBrakeInput
+  (JNIEnv *, jclass, jlong controllerVa) {
+    const WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    float result = pController->GetHandBrakeInput();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    getRightInput
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_getRightInput
+  (JNIEnv *, jclass, jlong controllerVa) {
+    const WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    float result = pController->GetRightInput();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    getTransmission
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_getTransmission
+  (JNIEnv *, jclass, jlong controllerVa) {
+    WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    VehicleTransmission& result = pController->GetTransmission();
+    return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    setBrakeInput
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_setBrakeInput
+  (JNIEnv *, jclass, jlong controllerVa, jfloat pressure) {
+    WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    pController->SetBrakeInput(pressure);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    setDifferentialLimitedSlipRatio
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_setDifferentialLimitedSlipRatio
+  (JNIEnv *, jclass, jlong controllerVa, jfloat ratio) {
+    WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    pController->SetDifferentialLimitedSlipRatio(ratio);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
  * Method:    setDriverInput
  * Signature: (JFFFF)V
  */
@@ -54,4 +173,40 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControl
     WheeledVehicleController * const pController
             = reinterpret_cast<WheeledVehicleController *> (controllerVa);
     pController->SetDriverInput(forward, right, brake, handBrake);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    setForwardInput
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_setForwardInput
+  (JNIEnv *, jclass, jlong controllerVa, jfloat forward) {
+    WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    pController->SetForwardInput(forward);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    setHandBrakeInput
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_setHandBrakeInput
+  (JNIEnv *, jclass, jlong controllerVa, jfloat pressure) {
+    WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    pController->SetHandBrakeInput(pressure);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheeledVehicleController
+ * Method:    setRightInput
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleController_setRightInput
+  (JNIEnv *, jclass, jlong controllerVa, jfloat right) {
+    WheeledVehicleController * const pController
+            = reinterpret_cast<WheeledVehicleController *> (controllerVa);
+    pController->SetRightInput(right);
 }
