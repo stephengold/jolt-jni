@@ -208,7 +208,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSett
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_setNumAntiRollBars
-  (JNIEnv *, jclass, jlong settingsVa, int count) {
+  (JNIEnv *, jclass, jlong settingsVa, jint count) {
     VehicleConstraintSettings * const pSettings
             = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
     pSettings->mAntiRollBars.resize(count);
