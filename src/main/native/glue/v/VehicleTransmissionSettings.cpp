@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,7 +68,7 @@ JNIEXPORT jfloatArray JNICALL Java_com_github_stephengold_joltjni_VehicleTransmi
     const jfloatArray result = pEnv->NewFloatArray(numElements);
     jboolean isCopy;
     jfloat * const pFloats = pEnv->GetFloatArrayElements(result, &isCopy);
-    for (int i = 0; i < numElements; ++i) {
+    for (size_t i = 0; i < numElements; ++i) {
         pFloats[i] = pSettings->mGearRatios[i];
     }
     pEnv->ReleaseFloatArrayElements(result, pFloats, 0);
@@ -102,7 +102,7 @@ JNIEXPORT jfloatArray JNICALL Java_com_github_stephengold_joltjni_VehicleTransmi
     const jfloatArray result = pEnv->NewFloatArray(numElements);
     jboolean isCopy;
     jfloat * const pFloats = pEnv->GetFloatArrayElements(result, &isCopy);
-    for (int i = 0; i < numElements; ++i) {
+    for (size_t i = 0; i < numElements; ++i) {
         pFloats[i] = pSettings->mReverseGearRatios[i];
     }
     pEnv->ReleaseFloatArrayElements(result, pFloats, 0);
@@ -186,7 +186,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTransmissionSe
     jboolean isCopy;
     jfloat * const pRatios = pEnv->GetFloatArrayElements(ratios, &isCopy);
     const jsize numElements = pEnv->GetArrayLength(ratios);
-    for (int i = 0; i < numElements; ++i) {
+    for (jsize i = 0; i < numElements; ++i) {
         jfloat ratio = pRatios[i];
         pSettings->mGearRatios.push_back(ratio);
     }
@@ -219,7 +219,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTransmissionSe
     jboolean isCopy;
     jfloat * const pRatios = pEnv->GetFloatArrayElements(ratios, &isCopy);
     const jsize numElements = pEnv->GetArrayLength(ratios);
-    for (int i = 0; i < numElements; ++i) {
+    for (jsize i = 0; i < numElements; ++i) {
         jfloat ratio = pRatios[i];
         pSettings->mReverseGearRatios.push_back(ratio);
     }

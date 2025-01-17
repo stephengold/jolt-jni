@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -79,7 +79,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getFa
             = pShape->GetFaceVertices(faceIndex, maxVertices, pTempArray);
     jboolean isCopy;
     jint * const pStoreJints = pEnv->GetIntArrayElements(storeIndices, &isCopy);
-    for (int i = 0; i < maxVertices; ++i) {
+    for (uint32 i = 0; i < maxVertices; ++i) {
         pStoreJints[i] = pTempArray[i];
     }
     TRACE_DELETE("uint[]", pTempArray)
@@ -153,7 +153,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getPl
     const Array<Plane> &planes = pShape->GetPlanes();
     jboolean isCopy;
     jfloat * const pFloats = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
-    for (int i = 0; i < planes.size(); ++i) {
+    for (size_t i = 0; i < planes.size(); ++i) {
         pFloats[4*i] = planes[i].GetNormal().GetX();
         pFloats[4*i + 1] = planes[i].GetNormal().GetY();
         pFloats[4*i + 2] = planes[i].GetNormal().GetZ();

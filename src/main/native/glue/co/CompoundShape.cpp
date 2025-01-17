@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,7 +68,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CompoundShape_restore
     const ShapeList * const pList = reinterpret_cast<ShapeList *> (listVa);
     const uint numShapes = pList->size();
     ShapeRefC * const pSubShapes = new ShapeRefC[numShapes];
-    for (int i = 0; i < numShapes; ++i) {
+    for (size_t i = 0; i < numShapes; ++i) {
         pSubShapes[i] = pList->at(i);
     }
     pCompound->RestoreSubShapeState(pSubShapes, numShapes);

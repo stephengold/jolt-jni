@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,7 +39,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44Array_create
   (JNIEnv *, jclass, jint length) {
     Mat44 * const pArray = new Mat44[length];
     TRACE_NEW("Mat44[]", pArray)
-    for (int i = 0; i < length; ++i) {
+    for (int32_t i = 0; i < length; ++i) {
         pArray[i] = Mat44::sIdentity();
     }
     return reinterpret_cast<jlong> (pArray);

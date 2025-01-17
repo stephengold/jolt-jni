@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -188,7 +188,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
     TRACE_NEW("SoftBodySharedSettings::VertexAttributes[]", pTempArray)
     jboolean isCopy;
     jlong * const pVas = pEnv->GetLongArrayElements(attributeVas, &isCopy);
-    for (int i = 0; i < numAttributes; ++i) {
+    for (jsize i = 0; i < numAttributes; ++i) {
         const jlong va = pVas[i];
         const SoftBodySharedSettings::VertexAttributes * const pAttribute
                 = reinterpret_cast<SoftBodySharedSettings::VertexAttributes *> (va);

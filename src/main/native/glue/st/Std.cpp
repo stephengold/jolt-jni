@@ -136,13 +136,13 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_Std_shuffle
     jint * const pIndices = pEnv->GetIntArrayElements(indices, &isCopy);
     const jsize numIndices = pEnv->GetArrayLength(indices);
     JPH::Array<jint> arr(numIndices);
-    for (int i = 0; i < numIndices; ++i) {
+    for (jsize i = 0; i < numIndices; ++i) {
         arr[i] = pIndices[i];
     }
     std::default_random_engine * const pGenerator
             = reinterpret_cast<std::default_random_engine *> (generatorVa);
     std::shuffle(arr.begin(), arr.end(), *pGenerator);
-    for (int i = 0; i < numIndices; ++i) {
+    for (jsize i = 0; i < numIndices; ++i) {
         pIndices[i] = arr[i];
     }
     pEnv->ReleaseIntArrayElements(indices, pIndices, 0);

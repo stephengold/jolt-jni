@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,7 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_cr
     const int numPoints = numFloats / 3;
     Array<Vec3> * const pArray = new Array<Vec3>(); // TODO memory leak
     TRACE_NEW("Array<Vec3>", pArray)
-    for (int i = 0; i < numPoints; ++i) {
+    for (uint64 i = 0; i < numPoints; ++i) {
         const jfloat x = pPoints[3 * i];
         const jfloat y = pPoints[3 * i + 1];
         const jfloat z = pPoints[3 * i + 2];
@@ -153,7 +153,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_get
     const Array<ConvexHullBuilder::Face *> &faces = pBuilder->GetFaces();
     jboolean isCopy;
     jlong * const pFaceVas = pEnv->GetLongArrayElements(storeVas, &isCopy);
-    for (int i = 0; i < faces.size(); ++i) {
+    for (size_t i = 0; i < faces.size(); ++i) {
         ConvexHullBuilder::Face * const pFace = faces[i];
         pFaceVas[i] = reinterpret_cast<jlong> (pFace);
     }

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,7 +43,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyManager_activateB
     TRACE_NEW("BodyID[]", pTempArray)
     jboolean isCopy;
     jlong * const pIdVas = pEnv->GetLongArrayElements(idVas, &isCopy);
-    for (int i = 0; i < numBodies; ++i) {
+    for (jsize i = 0; i < numBodies; ++i) {
         const jlong idVa = pIdVas[i];
         BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
         pTempArray[i] = *pId;
@@ -106,7 +106,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyManager_deactivat
     TRACE_NEW("BodyID[]", pTempArray)
     jboolean isCopy;
     jlong * const pIdVas = pEnv->GetLongArrayElements(idVas, &isCopy);
-    for (int i = 0; i < numBodies; ++i) {
+    for (jsize i = 0; i < numBodies; ++i) {
         const jlong idVa = pIdVas[i];
         BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
         pTempArray[i] = *pId;
@@ -130,7 +130,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyManager_destroyBo
     TRACE_NEW("BodyID[]", pTempArray)
     jboolean isCopy;
     jlong * const pIdVas = pEnv->GetLongArrayElements(idVas, &isCopy);
-    for (int i = 0; i < numBodies; ++i) {
+    for (jsize i = 0; i < numBodies; ++i) {
         const jlong idVa = pIdVas[i];
         BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
         pTempArray[i] = *pId;
