@@ -92,12 +92,12 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_cast
     const NarrowPhaseQuery * const pQuery
             = reinterpret_cast<NarrowPhaseQuery *> (queryVa);
     const RShapeCast * const pShapeCast
-            = reinterpret_cast<RShapeCast *>(shapeCastVa);
+            = reinterpret_cast<RShapeCast *> (shapeCastVa);
     const ShapeCastSettings * const pSettings
-            = reinterpret_cast<ShapeCastSettings *>(settingsVa);
+            = reinterpret_cast<ShapeCastSettings *> (settingsVa);
     const RVec3 baseOffset(baseX, baseY, baseZ);
     CastShapeCollector * const pCollector
-            = reinterpret_cast<CastShapeCollector *>(collectorVa);
+            = reinterpret_cast<CastShapeCollector *> (collectorVa);
     const BroadPhaseLayerFilter * const pBplFilter
             = reinterpret_cast<BroadPhaseLayerFilter *> (bplFilterVa);
     const ObjectLayerFilter * const pOlFilter
@@ -123,7 +123,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_coll
             = reinterpret_cast<NarrowPhaseQuery *> (queryVa);
     const RVec3 point(xx, yy, zz);
     CollidePointCollector * const pCollector
-            = reinterpret_cast<CollidePointCollector *>(collectorVa);
+            = reinterpret_cast<CollidePointCollector *> (collectorVa);
     const BroadPhaseLayerFilter * const pBplFilter
             = reinterpret_cast<BroadPhaseLayerFilter *> (bplFilterVa);
     const ObjectLayerFilter * const pOlFilter
