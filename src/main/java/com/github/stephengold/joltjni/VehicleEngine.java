@@ -99,7 +99,7 @@ public class VehicleEngine extends VehicleEngineSettings {
     /**
      * Return the engine's rotation rate in traditional units.
      *
-     * @return the speed (in revolutions per minute)
+     * @return the rate (in revolutions per minute)
      */
     public float getCurrentRpm() {
         long engineVa = va();
