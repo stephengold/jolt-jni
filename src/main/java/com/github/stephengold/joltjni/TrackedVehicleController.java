@@ -35,7 +35,7 @@ public class TrackedVehicleController extends VehicleController {
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param constraint the underlying {@code VehicleConstraint} (not null)
+     * @param constraint the containing object, or {@code null} if none
      * @param controllerVa the virtual address of the native object to assign
      * (not zero)
      */
