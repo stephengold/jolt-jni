@@ -87,6 +87,21 @@ public class VehicleConstraintSettings extends ConstraintSettings {
     }
 
     /**
+     * Access the settings for the specified anti-roll bar. (native field:
+     * mAntiRollBars)
+     *
+     * @param index the index of the anti-roll bar to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public VehicleAntiRollBar getAntiRollBar(int index) {
+        long settingsVa = va();
+        long barVa = getAntiRollBar(settingsVa, index);
+        VehicleAntiRollBar result = new VehicleAntiRollBar(this, barVa);
+
+        return result;
+    }
+
+    /**
      * Access the controller settings.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -213,6 +228,16 @@ public class VehicleConstraintSettings extends ConstraintSettings {
     }
 
     /**
+     * Alter the number of anti-roll bars. (native attribute: mAntiRollBars)
+     *
+     * @param count the desired number (&ge;0)
+     */
+    public void setNumAntiRollBars(int count) {
+        long settingsVa = va();
+        setNumAntiRollBars(settingsVa, count);
+    }
+
+    /**
      * Alter the up direction. (native attribute: mUp)
      *
      * @param up the desired up direction (not null, unaffected,
@@ -232,6 +257,8 @@ public class VehicleConstraintSettings extends ConstraintSettings {
             long constraintSettingsVa, long wheelSettingsVa);
 
     native private static long createDefault();
+
+    native private static long getAntiRollBar(long settingsVa, int index);
 
     native private static float getForwardX(long settingsVa);
 
@@ -255,6 +282,8 @@ public class VehicleConstraintSettings extends ConstraintSettings {
 
     native private static void setMaxPitchRollAngle(
             long constraintSettingsVa, float angle);
+
+    native private static void setNumAntiRollBars(long settingsVa, int count);
 
     native private static void setUp(
             long settingsVa, float dx, float dy, float dz);
