@@ -15,7 +15,7 @@ LOCAL_CFLAGS := \
 -Werror=return-type \
 -std=c++17
 
-LOCAL_CPP_EXTENSION := .cpp .inl
+LOCAL_CPP_EXTENSION := .cpp
 LOCAL_MODULE := joltjni
 
 LOCAL_SRC_FILES := \
@@ -418,20 +418,6 @@ $(N)/Jolt/TriangleSplitter/TriangleSplitterFixedLeafSize.cpp \
 $(N)/Jolt/TriangleSplitter/TriangleSplitterLongestAxis.cpp \
 $(N)/Jolt/TriangleSplitter/TriangleSplitterMean.cpp \
 $(N)/Jolt/TriangleSplitter/TriangleSplitterMorton.cpp \
-$(N)/Jolt/Core/FixedSizeFreeList.inl \
-$(N)/Jolt/Core/JobSystem.inl \
-$(N)/Jolt/Core/LockFreeHashMap.inl \
-$(N)/Jolt/Core/Profiler.inl \
-$(N)/Jolt/Math/BVec16.inl \
-$(N)/Jolt/Math/DMat44.inl \
-$(N)/Jolt/Math/DVec3.inl \
-$(N)/Jolt/Math/Mat44.inl \
-$(N)/Jolt/Math/Quat.inl \
-$(N)/Jolt/Math/UVec4.inl \
-$(N)/Jolt/Math/Vec3.inl \
-$(N)/Jolt/Math/Vec4.inl \
-$(N)/Jolt/Physics/Body/Body.inl \
-$(N)/Jolt/Physics/Body/MotionProperties.inl \
 $(N)/TestFramework/External/Perlin.cpp
 
 include $(BUILD_SHARED_LIBRARY)
