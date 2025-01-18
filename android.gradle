@@ -12,7 +12,8 @@ android {
         debug {
             externalNativeBuild {
                 ndkBuild {
-                    cppFlags '-DJPH_DEBUG_RENDERER -DJPH_ENABLE_ASSERTS'
+                    cppFlags '-DJPH_DEBUG_RENDERER'
+                    cppFlags '-DJPH_ENABLE_ASSERTS'
                 }
             }
             jniDebuggable = true
