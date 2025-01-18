@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -174,6 +174,22 @@ public class SoftBodySharedSettings
     }
 
     /**
+     * Create a cube with edge constraints, volume constraints, and faces.
+     *
+     * @param gridSize the desired number of points on each axis (&ge;1)
+     * @param gridSpacing the distance between adjacent points
+     * @return a counted reference to new settings
+     */
+    public static SoftBodySharedSettingsRef sCreateCube(
+            int gridSize, float gridSpacing) {
+        long refVa = sCreateCubeNative(gridSize, gridSpacing);
+        SoftBodySharedSettingsRef result
+                = new SoftBodySharedSettingsRef(refVa, true);
+
+        return result;
+    }
+
+    /**
      * Replace the materials. (native attribute: mMaterials)
      *
      * @param material the desired material, or {@code null}
@@ -326,6 +342,9 @@ public class SoftBodySharedSettings
     native static void optimize(long settingsVa);
 
     native private static void setEmbedded(long settingsVa);
+
+    native private static long sCreateCubeNative(
+            int gridSize, float gridSpacing);
 
     native static void setMaterialsSingle(long settingsVa, long materialVa);
 

@@ -269,6 +269,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    sCreateCubeNative
+ * Signature: (IF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_sCreateCubeNative
+  (JNIEnv *, jclass, jint gridSize, jfloat gridSpacing) {
+    Ref<SoftBodySharedSettings> ref
+            = SoftBodySharedSettings::sCreateCube(gridSize, gridSpacing);
+    Ref<SoftBodySharedSettings> * const pResult
+            = new Ref<SoftBodySharedSettings>(ref);
+    TRACE_NEW("Ref<SoftBodySharedSettings>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    setMaterialsSingle
  * Signature: (JJ)V
  */
