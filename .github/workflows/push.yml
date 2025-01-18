@@ -35,6 +35,10 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
+      - name: gradlew unpackJoltSource unpackTestFramework
+        run: |
+          ./gradlew unpackJoltSource unpackTestFramework \
+            --console=plain
       - name: gradlew --build-file=android.gradle build
         run: |
           ./gradlew --build-file=android.gradle build \
