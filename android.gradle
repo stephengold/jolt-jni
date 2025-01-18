@@ -1,0 +1,72 @@
+// Gradle script to build Android native libraries
+
+plugins {
+    alias(libs.plugins.android.library) // to build Android libraries
+}
+
+android {
+    buildFeatures {
+        viewBinding = true
+    }
+    buildTypes {
+        debug {
+            externalNativeBuild {
+                ndkBuild {
+                    cppFlags '-DJPH_DEBUG_RENDERER -DJPH_ENABLE_ASSERTS'
+                }
+            }
+            jniDebuggable = true
+        }
+        release {
+            externalNativeBuild {
+                ndkBuild {
+                    cppFlags '-DJPH_NO_DEBUG'
+                }
+            }
+            minifyEnabled = true
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    compileSdk = 35
+    defaultConfig {
+        aarMetadata {
+            minCompileSdk = 33
+        }
+        minSdk = 33
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+        targetSdk = 33
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path 'Android.mk'
+        }
+    }
+    flavorDimensions 'math'
+    namespace = 'com.github.stephengold.joltjni'
+    ndkVersion = '27.2.12479018'
+    productFlavors {
+        Dp {
+            dimension 'math'
+            externalNativeBuild {
+                ndkBuild {
+                    cppFlags '-DJPH_DOUBLE_PRECISION'
+                }
+            }
+        }
+        Sp {
+            dimension 'math'
+        }
+    }
+    publishing {
+        multipleVariants {
+            allVariants()
+            withJavadocJar()
+            withSourcesJar()
+        }
+    }
+}
