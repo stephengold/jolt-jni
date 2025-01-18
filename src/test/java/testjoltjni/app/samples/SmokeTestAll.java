@@ -196,6 +196,7 @@ final public class SmokeTestAll {
 
         // softbody package:
         smokeTest(new SoftBodyPressureTest());
+        smokeTest(new SoftBodyUpdatePositionTest());
 
         // vehicle package:
         smokeTest(new MotorcycleTest());
