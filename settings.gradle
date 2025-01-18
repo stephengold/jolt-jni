@@ -3,6 +3,7 @@
 pluginManagement {
     repositories {
         gradlePluginPortal()
+        google() // to find plugins released to Google's Maven Repository
     }
 }
 
@@ -11,6 +12,7 @@ rootProject.name = 'jolt-jni'
 dependencyResolutionManagement {
     repositories {
         mavenCentral() // to find libraries released to the Maven Central repository
+        google() // to find libraries released to Google's Maven Repository
     }
 }
 
