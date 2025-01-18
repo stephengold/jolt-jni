@@ -54,7 +54,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_cr
     const jfloat * const pPoints
             = (jfloat *) pEnv->GetDirectBufferAddress(pointBuffer);
     const jlong numFloats = pEnv->GetDirectBufferCapacity(pointBuffer);
-    const int numPoints = numFloats / 3;
+    const uint64 numPoints = numFloats / 3;
     Array<Vec3> * const pArray = new Array<Vec3>(); // TODO memory leak
     TRACE_NEW("Array<Vec3>", pArray)
     for (uint64 i = 0; i < numPoints; ++i) {

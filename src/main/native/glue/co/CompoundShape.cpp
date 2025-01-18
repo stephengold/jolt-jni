@@ -66,7 +66,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CompoundShape_restore
     CompoundShape * const pCompound
             = reinterpret_cast<CompoundShape *> (shapeVa);
     const ShapeList * const pList = reinterpret_cast<ShapeList *> (listVa);
-    const uint numShapes = pList->size();
+    const ShapeList::size_type numShapes = pList->size();
     ShapeRefC * const pSubShapes = new ShapeRefC[numShapes];
     for (size_t i = 0; i < numShapes; ++i) {
         pSubShapes[i] = pList->at(i);
