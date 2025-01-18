@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -140,6 +140,18 @@ public class SoftBodyCreationSettings
     }
 
     /**
+     * Alter whether to bake the specified rotation into the vertices and set
+     * the body rotation to identity. (native member: mMakeRotationIdentity)
+     *
+     * @param enable {@code true} to bake and set rotation, or {@code false} to
+     * skip that step (default=true)
+     */
+    public void setMakeRotationIdentity(boolean enable) {
+        long bodySettingsVa = va();
+        setMakeRotationIdentity(bodySettingsVa, enable);
+    }
+
+    /**
      * Alter the maximum speed of vertices. (native attribute: mMaxSpeed)
      *
      * @param maxSpeed the desired maximum speed (in meters per second, &ge;0,
@@ -221,6 +233,18 @@ public class SoftBodyCreationSettings
         float qy = orientation.getY();
         float qz = orientation.getZ();
         setRotation(bodySettingsVa, qx, qy, qz, qw);
+    }
+
+    /**
+     * Alter whether to update the position of the body during simulation.
+     * (native member: mUpdatePosition)
+     *
+     * @param enable {@code true} to update the position, or {@code false} to
+     * skip updating (default=true)
+     */
+    public void setUpdatePosition(boolean enable) {
+        long bodySettingsVa = va();
+        setUpdatePosition(bodySettingsVa, enable);
     }
     // *************************************************************************
     // ConstSoftBodyCreationSettings methods
@@ -449,6 +473,9 @@ public class SoftBodyCreationSettings
     native private static void setLinearDamping(
             long bodySettingsVa, float damping);
 
+    native private static void setMakeRotationIdentity(
+            long bodySettingsVa, boolean enable);
+
     native private static void setMaxLinearVelocity(
             long bodySettingsVa, float maxSpeed);
 
@@ -468,4 +495,7 @@ public class SoftBodyCreationSettings
 
     native private static void setRotation(
             long bodySettingsVa, float qx, float qy, float qz, float qw);
+
+    native private static void setUpdatePosition(
+            long bodySettingsVa, boolean enable);
 }

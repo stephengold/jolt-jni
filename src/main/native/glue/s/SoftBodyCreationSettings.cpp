@@ -346,6 +346,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    setMakeRotationIdentity
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_setMakeRotationIdentity
+  (JNIEnv *, jclass, jlong bodySettingsVa, jboolean enable) {
+    SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    pSettings->mMakeRotationIdentity = enable;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
  * Method:    setMaxLinearVelocity
  * Signature: (JF)V
  */
@@ -428,4 +440,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSetti
             = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
     const Quat orientation(qx, qy, qz, qw);
     pSettings->mRotation = orientation;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    setUpdatePosition
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_setUpdatePosition
+  (JNIEnv *, jclass, jlong bodySettingsVa, jboolean enable) {
+    SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    pSettings->mUpdatePosition = enable;
 }
