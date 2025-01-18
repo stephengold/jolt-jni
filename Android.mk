@@ -15,6 +15,7 @@ LOCAL_CFLAGS := \
 -Werror=return-type \
 -std=c++17
 
+LOCAL_CPP_EXTENSION := .cpp .inl
 LOCAL_MODULE := joltjni
 
 LOCAL_SRC_FILES := \
