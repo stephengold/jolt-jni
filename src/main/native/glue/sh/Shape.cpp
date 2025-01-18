@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -59,8 +59,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_copyDebugTriang
         pSh->GetTrianglesStart(context, AABox::sBiggest(),
             Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f));
         while (numTriangles > 0) {
-            const int32_t maxRequest = std::max(numTriangles,
-                    (int32_t)Shape::cGetTrianglesMinTrianglesRequested);
+            const int maxRequest = std::max((int)numTriangles,
+                    Shape::cGetTrianglesMinTrianglesRequested);
             const int numTrianglesCopied
                     = pSh->GetTrianglesNext(context, maxRequest, pFloat3);
             JPH_ASSERT(numTrianglesCopied <= numTriangles);
