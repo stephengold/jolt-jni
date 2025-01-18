@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -125,7 +125,7 @@ final public class VertexList {
 
         int numFloats = numVertices * numAxes;
         if (numFloats > buffer.capacity()) {
-            FloatBuffer oldBuffer = buffer.rewind();
+            FloatBuffer oldBuffer = (FloatBuffer) buffer.rewind();
             this.buffer = Jolt.newDirectFloatBuffer(numFloats);
             while (oldBuffer.hasRemaining()) {
                 float x = oldBuffer.get();
