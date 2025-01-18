@@ -39,9 +39,9 @@ jobs:
         run: |
           ./gradlew classes unpackJoltSource unpackTestFramework \
             --console=plain
-      - name: gradlew --build-file=android.gradle build
+      - name: gradlew --build-file=android.gradle assemble
         run: |
-          ./gradlew --build-file=android.gradle build \
+          ./gradlew --build-file=android.gradle assemble \
             --console=plain
 
   Java21-Linux:
