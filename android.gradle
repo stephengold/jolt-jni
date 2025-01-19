@@ -47,12 +47,12 @@ android {
             path 'Android.mk'
         }
     }
-    flavorDimensions 'math'
+    flavorDimensions 'precision'
     namespace = 'com.github.stephengold.joltjni'
     ndkVersion = '27.2.12479018'
     productFlavors {
         Dp {
-            dimension 'math'
+            dimension 'precision'
             externalNativeBuild {
                 ndkBuild {
                     cppFlags '-DJPH_DOUBLE_PRECISION'
@@ -60,7 +60,7 @@ android {
             }
         }
         Sp {
-            dimension 'math'
+            dimension 'precision'
         }
     }
     publishing {
