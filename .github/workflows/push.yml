@@ -24,26 +24,6 @@ jobs:
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
 
-  Java21-Android:
-    if: contains(toJson(github.event.commits), '[ci skip] ') == false
-    runs-on: ubuntu-22.04
-    timeout-minutes: 60
-    steps:
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: 21
-      - uses: actions/checkout@v4
-      - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew classes unpackJoltSource unpackTestFramework
-        run: |
-          ./gradlew classes unpackJoltSource unpackTestFramework \
-            --console=plain
-      - name: gradlew --build-file=android.gradle assemble
-        run: |
-          ./gradlew --build-file=android.gradle assemble \
-            --console=plain
-
   Java21-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
@@ -154,6 +134,26 @@ jobs:
             -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
             -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
         shell: bash
+
+  Java21-x-Android:
+    if: contains(toJson(github.event.commits), '[ci skip] ') == false
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 21
+      - uses: actions/checkout@v4
+      - uses: gradle/actions/setup-gradle@v4
+      - name: gradlew classes unpackJoltSource unpackTestFramework
+        run: |
+          ./gradlew classes unpackJoltSource unpackTestFramework \
+            --console=plain
+      - name: gradlew --build-file=android.gradle assemble
+        run: |
+          ./gradlew --build-file=android.gradle assemble \
+            --console=plain
 
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
