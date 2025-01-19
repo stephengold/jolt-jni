@@ -234,7 +234,7 @@ and then freeing them all, either explicitly, implicitly, or automatically.
 As long as a reference is active, its target cannot be freed.
 Nor can a target be freed if no reference to it has been created
 (because in that case its reference count is already zero).
-Nor can it be freed if reference counting is disabled
+Nor can it be freed if reference counting has been disabled
 by invoking `target.setEmbedded()`.
 
 [Jump to the table of contents](#toc)
