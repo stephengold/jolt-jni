@@ -21,7 +21,7 @@ ext {
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
 
-// Regenerate all JNI header files and unpack Jolt before compiling any C++ code.
+// Generate all JNI header files and unpack Jolt before compiling any C++ code:
 tasks.withType(CppCompile).configureEach {
     dependsOn('classes', 'compileTestJava', 'unpackJoltSource', 'unpackTestFramework')
 }
@@ -35,8 +35,8 @@ model {
     }
 
     flavors {
-        Dp   // double-precision locations
-        Sp   // single-precision locations
+        Dp // double-precision locations
+        Sp // single-precision locations
     }
 
     platforms {
@@ -214,7 +214,7 @@ model {
                         artifact njTask
                     }
 
-                } else {
+                } else { // not buildable
                     //println 'Do not build ' + q // to debug this script
                 }
             }
@@ -245,8 +245,10 @@ tasks.withType(JavaCompile).configureEach { // Java compile-time options:
     options.release = 11
 }
 
+// Register test-execution tasks:
+
 application {
-    // default settings for the 'run' tasks:
+    // default settings for the 'run' task:
     mainClass = 'testjoltjni.app.helloworld.HelloWorld'
 }
 tasks.register('debugConvexVsMesh', JavaExec) {
@@ -309,6 +311,8 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
     enableAssertions = true
 }
 test.dependsOn('assemble')
+
+// Register style-checking tasks:
 
 checkstyle {
     toolVersion = libs.versions.checkstyle.get()
@@ -386,13 +390,14 @@ publishing {
         }
     }
 
-    // Staging to OSSRH relies on the existence of 2 properties
-    // (ossrhUsername and ossrhPassword)
-    // which should be stored in ~/.gradle/gradle.properties
-    // or passed in the command line
-
     repositories {
-        maven {
+        maven { // the staging repo of Sonatype OSSRH
+
+            // Staging to OSSRH relies on the existence of 2 properties
+            // (ossrhUsername and ossrhPassword)
+            // which should be stored in ~/.gradle/gradle.properties
+            // or passed in the command line
+
             credentials {
                 username = project.hasProperty('ossrhUsername') ? ossrhUsername : 'Unknown user'
                 password = project.hasProperty('ossrhPassword') ? ossrhPassword : 'Unknown password'
@@ -407,12 +412,12 @@ publishMavenPublicationToMavenLocal.doLast {
     println 'installed locally as ' + project.ext.baseName
 }
 
-// Register signing tasks:
+// Register tasks to sign artifacts for publication:
 
-// Signing relies on the existence of 2 properties
-// (signingKeyEncoded and signingPassword)
-// which should be set in ~/.gradle/gradle.properties
-// or passed in the command line
+//   Signing relies on the existence of 2 properties
+//   (signingKeyEncoded and signingPassword)
+//   which should be set in ~/.gradle/gradle.properties
+//   or set using -P flags on the command line.
 
 signing {
     def signingKey = base64Decode(findProperty('signingKeyEncoded'))
@@ -435,7 +440,7 @@ static def base64Decode(encodedString) {
     return null
 }
 
-// Tasks to download and unpack JoltPhysics source code and assets:
+// Register tasks to download and unpack JoltPhysics source code and assets:
 
 tasks.register('downloadJoltSource', Download) {
     src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/sg250106.zip'
@@ -479,14 +484,15 @@ tasks.register('unpackTestFramework', Copy) {
 // Register cleanup tasks:
 
 clean.dependsOn('cleanAutoHeaders', 'cleanLogs', 'cleanRecordings')
-tasks.register('cleanAll') {
+
+tasks.register('cleanAll') { // restore the project to a pristine state
     dependsOn('clean', 'cleanDownloads', 'cleanJoltAssets', 'cleanJoltSource', 'cleanTestFramework')
 }
 
 tasks.register('cleanAutoHeaders', Delete) { // auto-generated JNI headers
     delete 'src/main/native/auto'
 }
-tasks.register('cleanDownloads', Delete) { // downloaded files
+tasks.register('cleanDownloads', Delete) { // downloaded ZIP archives
     delete 'downloads'
 }
 tasks.register('cleanJoltAssets', Delete) { // unpacked Jolt Physics assets

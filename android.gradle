@@ -1,4 +1,4 @@
-// Gradle script to build Android native libraries
+// Gradle script to build jolt-jni Android native libraries
 
 plugins {
     alias(libs.plugins.android.library) // to build Android libraries
@@ -49,9 +49,9 @@ android {
     }
     flavorDimensions 'precision'
     namespace = 'com.github.stephengold.joltjni'
-    ndkVersion = '27.2.12479018'
+    ndkVersion = '27.2.12479018' // r27c
     productFlavors {
-        Dp {
+        Dp { // double-precision locations
             dimension 'precision'
             externalNativeBuild {
                 ndkBuild {
@@ -59,7 +59,7 @@ android {
                 }
             }
         }
-        Sp {
+        Sp { // single-precision locations
             dimension 'precision'
         }
     }
