@@ -217,7 +217,7 @@ Jolt-jni classes that implement reference counting
 are exactly those that implement the `RefTarget` interface.
 They include `BaseCharacter`, `Constraint`, `ConstraintSettings`,
 `GroupFilter`, `PhysicsMaterial`, `PhysicsScene`, `Ragdoll`, `Shape`,
-`ShapeSettings`, `VehicleController`, and all their subclasses.
+`ShapeSettings`, and all their subclasses.
 On `RefTarget` objects, `close()` is (again) a no-op,
 because the JVM object doesn't own its assigned native object.
 
