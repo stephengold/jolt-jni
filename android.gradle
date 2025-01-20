@@ -88,7 +88,7 @@ android {
         }
     }
     publishing {
-        multipleVariants {
+        multipleVariants('complete') {
             allVariants()
             withJavadocJar()
             withSourcesJar()
@@ -116,7 +116,7 @@ publishing {
     publications {
         maven(MavenPublication) {
             artifactId = artifact
-            afterEvaluate { from components.default }
+            afterEvaluate { from components.complete }
             groupId = groupID
             pom {
                 description = 'a JNI interface to Jolt Physics'
