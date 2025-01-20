@@ -153,7 +153,9 @@ jobs:
       - name: gradlew --build-file=android.gradle -Partifact=jolt-jni-Android_ARM8 install
         run: |
           ./gradlew --build-file=android.gradle -Partifact=jolt-jni-Android_ARM8 install \
-            --console=plain
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
 
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
