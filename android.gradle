@@ -61,16 +61,20 @@ android {
     namespace = 'com.github.stephengold.joltjni'
     ndkVersion = '27.2.12479018' // r27c
     productFlavors {
-        Dp { // flavor with double-precision locations
-            dimension 'precision'
-            externalNativeBuild {
-                ndkBuild {
-                    cppFlags '-DJPH_DOUBLE_PRECISION'
+        if (!project.hasProperty('flavor') || flavor == 'Dp') {
+            Dp { // flavor with double-precision locations
+                dimension 'precision'
+                externalNativeBuild {
+                    ndkBuild {
+                        cppFlags '-DJPH_DOUBLE_PRECISION'
+                    }
                 }
             }
         }
-        Sp { // flavor with single-precision locations
-            dimension 'precision'
+        if (!project.hasProperty('flavor') || flavor == 'Sp') {
+            Sp { // flavor with single-precision locations
+                dimension 'precision'
+            }
         }
     }
     publishing {
