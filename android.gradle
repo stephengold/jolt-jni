@@ -58,7 +58,7 @@ android {
         }
     }
     flavorDimensions 'precision'
-    namespace = 'com.github.stephengold.joltjni'
+    namespace = groupID + '.joltjni'
     ndkVersion = '27.2.12479018' // r27c
     productFlavors {
         if (!project.hasProperty('flavor') || flavor == 'Dp') {
