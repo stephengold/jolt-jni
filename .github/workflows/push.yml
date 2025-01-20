@@ -135,7 +135,7 @@ jobs:
             -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
         shell: bash
 
-  Java21-x-Android:
+  Java21-x-Android_ARM8:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
     timeout-minutes: 60
@@ -150,9 +150,9 @@ jobs:
         run: |
           ./gradlew classes unpackJoltSource unpackTestFramework \
             --console=plain
-      - name: gradlew --build-file=android.gradle -Partifact=jolt-jni-Android_ARM8 install
+      - name: gradlew --build-file=android.gradle -Pflavor=Sp -Ptarget=Android_ARM8 install
         run: |
-          ./gradlew --build-file=android.gradle -Partifact=jolt-jni-Android_ARM8 install \
+          ./gradlew --build-file=android.gradle -Pflavor=Sp -Ptarget=Android_ARM8 install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
