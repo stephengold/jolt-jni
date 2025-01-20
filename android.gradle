@@ -48,7 +48,15 @@ android {
         }
         minSdk = 33
         ndk {
-            abiFilters 'arm64-v8a'
+            if (!project.hasProperty('target')) {
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86'
+            } else if (target == 'Android_ARM7') {
+                abiFilters 'armeabi-v7a'
+            } else if (target == 'Android_ARM8') {
+                abiFilters 'arm64-v8a'
+            } else if (target == 'Android_X86') {
+                abiFilters 'x86'
+            }
         }
         targetSdk = 33
     }
