@@ -1,4 +1,4 @@
-// Gradle script to build jolt-jni Maven artifacts and desktop native libraries
+// Gradle script to build/publish jolt-jni desktop artifacts
 
 plugins {
     id 'application'   // to build JVM applications
@@ -12,6 +12,9 @@ plugins {
     alias(libs.plugins.download) // to retrieve files from URLs
     alias(libs.plugins.validate.poms) // to verify POMs provide all info required by Maven Central
 }
+
+// $artifact is set in the gradle.properties file
+// or by a -Partifact= option on the command line.
 
 ext {
     downloadZip = 'downloads/JoltPhysics-sg250106.zip'
@@ -395,8 +398,8 @@ publishing {
 
             // Staging to OSSRH relies on the existence of 2 properties
             // (ossrhUsername and ossrhPassword)
-            // which should be stored in ~/.gradle/gradle.properties
-            // or passed in the command line
+            // which should be set in the ~/.gradle/gradle.properties file
+            // or by -P options on the command line.
 
             credentials {
                 username = project.hasProperty('ossrhUsername') ? ossrhUsername : 'Unknown user'
@@ -416,8 +419,8 @@ publishMavenPublicationToMavenLocal.doLast {
 
 //   Signing relies on the existence of 2 properties
 //   (signingKeyEncoded and signingPassword)
-//   which should be set in ~/.gradle/gradle.properties
-//   or set using -P flags on the command line.
+//   which should be set in the ~/.gradle/gradle.properties file
+//   or by -P options on the command line.
 
 signing {
     def signingKey = base64Decode(findProperty('signingKeyEncoded'))

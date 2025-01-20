@@ -1,8 +1,11 @@
-// Gradle script to build jolt-jni Android native libraries
+// Gradle script to build/publish jolt-jni Android artifacts
 
 plugins {
     alias(libs.plugins.android.library) // to build Android libraries
 }
+
+// $artifact is set in the gradle.properties file
+// or by a -Partifact= option on the command line.
 
 android {
     buildFeatures {
@@ -51,7 +54,7 @@ android {
     namespace = 'com.github.stephengold.joltjni'
     ndkVersion = '27.2.12479018' // r27c
     productFlavors {
-        Dp { // double-precision locations
+        Dp { // flavor with double-precision locations
             dimension 'precision'
             externalNativeBuild {
                 ndkBuild {
@@ -59,7 +62,7 @@ android {
                 }
             }
         }
-        Sp { // single-precision locations
+        Sp { // flavor with single-precision locations
             dimension 'precision'
         }
     }
