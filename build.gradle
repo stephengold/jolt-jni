@@ -18,9 +18,9 @@ plugins {
 
 ext {
     downloadZip = 'downloads/JoltPhysics-sg250106.zip'
-    group = 'com.github.stephengold'
-    version = '0.9.5-SNAPSHOT'
-    baseName = "${artifact}-${version}" // for artifacts
+    groupID = 'com.github.stephengold'
+    jjVersion = '0.9.5-SNAPSHOT'
+    baseName = "${artifact}-${jjVersion}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
 
@@ -113,17 +113,17 @@ model {
                 String os = targetPlatform.operatingSystem.name
                 if (buildable && project.hasProperty('bt')) {
                     // set in gradle.properties file or -Pbt= on the command line
-                    String btArg = project.ext.bt
+                    String btArg = bt
                     buildable = (buildType.name == btArg)
                 }
                 if (buildable && project.hasProperty('flavor')) {
                     // set in gradle.properties file or -Pflavor= on the command line
-                    String flavorArg = project.ext.flavor
+                    String flavorArg = flavor
                     buildable = (flavor.name == flavorArg)
                 }
                 if (buildable && project.hasProperty('target')) {
                     // set in gradle.properties file or -Ptarget= on the command line
-                    String targetArg = project.ext.target
+                    String targetArg = target
                     buildable = (pName == targetArg)
                 }
 
@@ -201,7 +201,7 @@ model {
                         + '/' + targetPlatform.architecture.name \
                         + '/com/github/stephengold/$1'
                     project.tasks.register('nativesJar' + q, Jar) {
-                        archiveBaseName = project.ext.baseName
+                        archiveBaseName = baseName
                         archiveClassifier = buildType.name + flavor.name
                         dependsOn "joltjni${q}SharedLibrary"
                         description = "Creates a JAR of the ${q} native library."
@@ -337,7 +337,7 @@ tasks.register('release') {
 }
 
 jar {
-    archiveBaseName = project.ext.baseName
+    archiveBaseName = baseName
     doLast {
         println "using Java ${JavaVersion.current()} (${System.getProperty("java.vendor")})"
     }
@@ -348,10 +348,10 @@ jar {
 
 javadoc.dependsOn('compileTestJava')
 java.withJavadocJar()
-javadocJar { archiveBaseName = project.ext.baseName }
+javadocJar { archiveBaseName = baseName }
 
 tasks.register('sourcesJar', Jar) {
-    archiveBaseName = project.ext.baseName
+    archiveBaseName = baseName
     archiveClassifier = 'sources'
     description = 'Creates a JAR of Java sourcecode.'
     from 'src/main/java' // default is ".allSource", which includes resources
@@ -363,7 +363,7 @@ publishing {
             artifact sourcesJar
             artifactId = artifact
             from components.java
-            groupId = project.ext.group
+            groupId = groupID
             pom {
                 description = 'a JNI interface to Jolt Physics'
                 developers {
@@ -381,15 +381,15 @@ publishing {
                         url = 'https://opensource.org/licenses/MIT'
                     }
                 }
-                name = project.ext.group + ':' + artifact
+                name = groupID + ':' + artifact
                 scm {
                     connection = 'scm:git:git://github.com/stephengold/jolt-jni.git'
                     developerConnection = 'scm:git:ssh://github.com:stephengold/jolt-jni.git'
-                    url = project.ext.websiteUrl + '/tree/master'
+                    url = websiteUrl + '/tree/master'
                 }
-                url = project.ext.websiteUrl
+                url = websiteUrl
             }
-            version = project.ext.version
+            version = jjVersion
         }
     }
 
@@ -412,7 +412,7 @@ publishing {
 }
 publishMavenPublicationToMavenLocal.dependsOn('assemble')
 publishMavenPublicationToMavenLocal.doLast {
-    println 'installed locally as ' + project.ext.baseName
+    println 'installed locally as ' + baseName
 }
 
 // Register tasks to sign artifacts for publication:
