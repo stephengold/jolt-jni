@@ -1,11 +1,21 @@
 // Gradle script to build/publish jolt-jni Android artifacts
 
 plugins {
+    id 'maven-publish' // to publish artifacts to Maven repositories
+    id 'signing'       // to sign artifacts for publication
+
     alias(libs.plugins.android.library) // to build Android libraries
 }
 
 // $artifact is set in the gradle.properties file
 // or by a -Partifact= option on the command line.
+
+ext {
+    groupID = 'com.github.stephengold'
+    jjVersion = '0.9.5-SNAPSHOT'
+    baseName = "${artifact}-${jjVersion}" // for artifacts
+    websiteUrl = 'https://github.com/stephengold/jolt-jni'
+}
 
 android {
     buildTypes {
@@ -75,4 +85,100 @@ android {
 dependencies {
     testImplementation(libs.jsnaploader)
     testImplementation(libs.junit4)
+}
+
+// Register publishing tasks:
+
+tasks.register('install') {
+    dependsOn 'publishMavenPublicationToMavenLocal'
+    description = 'Installs Maven artifacts to the local repository.'
+}
+tasks.register('release') {
+    dependsOn 'publishMavenPublicationToOSSRHRepository'
+    description = 'Stages Maven artifacts to Sonatype OSSRH.'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId = artifact
+            afterEvaluate { from components.default }
+            groupId = groupID
+            pom {
+                description = 'a JNI interface to Jolt Physics'
+                developers {
+                    developer {
+                        email = 'sgold@sonic.net'
+                        id = 'stephengold'
+                        name = 'Stephen Gold'
+                    }
+                }
+                inceptionYear = '2024'
+                licenses {
+                    license {
+                        distribution = 'repo'
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                name = groupID + ':' + artifact
+                scm {
+                    connection = 'scm:git:git://github.com/stephengold/jolt-jni.git'
+                    developerConnection = 'scm:git:ssh://github.com:stephengold/jolt-jni.git'
+                    url = websiteUrl + '/tree/master'
+                }
+                url = websiteUrl
+            }
+            version = jjVersion
+        }
+    }
+
+    repositories {
+        maven { // the staging repo of Sonatype OSSRH
+
+            // Staging to OSSRH relies on the existence of 2 properties
+            // (ossrhUsername and ossrhPassword)
+            // which should be set in the ~/.gradle/gradle.properties file
+            // or by -P options on the command line.
+
+            credentials {
+                username = project.hasProperty('ossrhUsername') ? ossrhUsername : 'Unknown user'
+                password = project.hasProperty('ossrhPassword') ? ossrhPassword : 'Unknown password'
+            }
+            name = 'OSSRH'
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2'
+        }
+    }
+}
+publishMavenPublicationToMavenLocal.dependsOn('assemble')
+publishMavenPublicationToMavenLocal.doLast {
+    println 'installed locally as ' + baseName
+}
+
+// Register tasks to sign artifacts for publication:
+
+//   Signing relies on the existence of 2 properties
+//   (signingKeyEncoded and signingPassword)
+//   which should be set in the ~/.gradle/gradle.properties file
+//   or by -P options on the command line.
+
+signing {
+    def signingKey = base64Decode(findProperty('signingKeyEncoded'))
+    def signingPassword = findProperty('signingPassword')
+    useInMemoryPgpKeys(signingKey, signingPassword)
+
+    sign configurations.archives
+    sign publishing.publications.maven
+}
+tasks.withType(Sign).configureEach {
+    onlyIf { project.hasProperty('signingKeyEncoded') }
+}
+
+static def base64Decode(encodedString) {
+    if (encodedString != null) {
+        byte[] decoded = encodedString.decodeBase64()
+        String decode = new String(decoded)
+        return decode
+    }
+    return null
 }

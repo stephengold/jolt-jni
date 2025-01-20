@@ -150,9 +150,9 @@ jobs:
         run: |
           ./gradlew classes unpackJoltSource unpackTestFramework \
             --console=plain
-      - name: gradlew --build-file=android.gradle assemble
+      - name: gradlew --build-file=android.gradle -Partifact=jolt-jni-Android_ARM8 install
         run: |
-          ./gradlew --build-file=android.gradle assemble \
+          ./gradlew --build-file=android.gradle -Partifact=jolt-jni-Android_ARM8 install \
             --console=plain
 
   Java21-x-Linux_ARM32hf:
