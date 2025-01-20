@@ -156,6 +156,15 @@ jobs:
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
+      - name: gradlew --build-file=android.gradle -Partifact=jolt-jni-Android_ARM8 -Pflavor=Sp -Ptarget=Android_ARM8 clean release
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ./gradlew --build-file=android.gradle -Partifact=jolt-jni-Android_ARM8 -Pflavor=Sp -Ptarget=Android_ARM8 clean release \
+            --console=plain \
+            -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
+            -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
+            -PossrhPassword='${{ secrets.OSSRH_PASSWORD }}' \
+            -PossrhUsername='${{ secrets.OSSRH_USERNAME }}'
 
   Java21-x-Linux_ARM32hf:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
