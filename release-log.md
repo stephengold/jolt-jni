@@ -1,5 +1,22 @@
 # release log for the jolt-jni project
 
+## Version 0.9.5 released on TBD
+
++ Bugfix:  heap corruption in `ConvexHullShapeSettings.createSettings()`
++ Bugfix:  `UnsatisfiedLinkError` in `VehicleConstraintSettings` on Windows
+
++ Added support for 4 Android platforms.
++ Added classes and interfaces to the libraries:
+  + `RandomNumberEngine`
+  + `SkeletonMapper`
+  + `SkeletonMapperRef`
+  + `VehicleAntiRollBar`
+  + `VehicleCollisonTesterCastSphere`
+  + `VehicleCollisonTesterCastSphereRef`
+  + `VehicleEngine`
+  + `VehicleTransmission`
++ Added many public methods to the libraries.
+
 ## Version 0.9.4 released on 6 January 2025
 
 + API changes:
