@@ -43,6 +43,7 @@ model {
     }
 
     platforms {
+        // To build native libraries for Android, use "android.gradle" instead.
         Linux64 {
             architecture 'x86_64'
             operatingSystem 'linux'
@@ -90,6 +91,7 @@ model {
     }
 
     components {
+        // To build native libraries for Android, use "android.gradle" instead.
         joltjni(NativeLibrarySpec) {
             targetPlatform 'Linux64'
             targetPlatform 'Linux_ARM32hf'
@@ -110,6 +112,7 @@ model {
                 //println " - $pName  $buildType  $flavor" // to debug this script
 
                 buildable = true
+                // Decide whether to build for the target platform:
                 String os = targetPlatform.operatingSystem.name
                 if (buildable && project.hasProperty('bt')) {
                     // set in gradle.properties file or -Pbt= on the command line
