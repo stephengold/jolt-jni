@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.9.5 released on TBD
+## Version 0.9.5 released on 20 January 2025
 
 + Bugfix:  heap corruption in `ConvexHullShapeSettings.createSettings()`
 + Bugfix:  `UnsatisfiedLinkError` in `VehicleConstraintSettings` on Windows

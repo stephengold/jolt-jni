@@ -13,7 +13,8 @@ Source code (in Java and C++) is provided under
 ## Contents of this document
 
 + [Translating Jolt Physics applications into Java](#translate)
-+ [How to add jolt-jni to an existing project](#add)
++ [How to add jolt-jni to an existing desktop project](#add)
++ [How to add jolt-jni to an existing Android project](#addAndroid)
 + [How to build jolt-jni from source](#build)
 + [Freeing native objects](#free)
 + [External links](#links)
@@ -50,9 +51,9 @@ are provided.
 
 <a name="add"></a>
 
-## How to add jolt-jni to an existing project
+## How to add jolt-jni to an existing desktop project
 
-Jolt-jni comes pre-built as a platform-independent JVM library
+Desktop jolt-jni comes pre-built as a platform-independent JVM library
 plus a set of native libraries, all downloadable from Maven Central.
 
 Current jolt-jni releases provide
@@ -79,10 +80,10 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
     }
     dependencies {
         // JVM library:
-        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.4")
+        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.5")
 
         // native libraries:
-        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.4:DebugSp")
+        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.5:DebugSp")
         // Native libraries for other platforms could be added.
     }
 
@@ -90,6 +91,35 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
   "MacOSX64", "MacOSX_ARM64", or "Windows64".
 + The "DebugSp" classifier
   may be replaced by "DebugDp", "ReleaseSp", or "ReleaseDp".
++ For some older versions of Gradle,
+  it's necessary to replace `implementation` with `compile`.
+
+[Jump to the table of contents](#toc)
+
+
+<a name="addAndroid"></a>
+
+## How to add jolt-jni to an existing Android project
+
+Android jolt-jni comes pre-built as a pair of multi-platform libraries,
+one for each build type.
+(The only build flavor provided is "Sp".)
+Both libraries are downloadable from Maven Central
+under the "jolt-jni-Android" artifact ID.
+
+Build types:  use "Debug" native libraries for development and troubleshooting,
+then switch to "Release" libraries for performance testing and production.
+
+Add to the project’s "build.gradle" or "build.gradle.kts" file:
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        implementation("com.github.stephengold:jolt-jni:0.9.5:SpDebug@aar")
+    }
+
++ The "SpDebug" classifier may be replaced by "SpRelease".
 + For some older versions of Gradle,
   it's necessary to replace `implementation` with `compile`.
 
@@ -119,7 +149,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
   + using [Git]:
     + `git clone https://github.com/stephengold/jolt-jni.git`
     + `cd jolt-jni`
-    + `git checkout -b latest 0.9.4`
+    + `git checkout -b latest 0.9.5`
   + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link at the bottom of the page
@@ -127,12 +157,17 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
     + extract the contents of the saved ZIP file
     + `cd` to the extracted directory/folder
 4. (optional) Edit the "gradle.properties" file to configure the build.
-5. Run the [Gradle] wrapper:
+5. Run the [Gradle] wrapper to build desktop artifacts:
   + using Bash or Fish or PowerShell or Zsh: `./gradlew build`
   + using Windows Command Prompt: `.\gradlew build`
+6. To build Android artifacts, you'll need to install [Android Studio][studio]
+   and point the `ANDROID_HOME` environment variable to that installation.
+7. Run the Gradle wrapper to build Android artifacts:
+  + using Bash or Fish or PowerShell or Zsh: `./gradlew -b android.gradle assemble`
+  + using Windows Command Prompt: `.\gradlew -b android.gradle assemble`
 
 After a successful build,
-artifacts will be found in "build/libs".
+artifacts will be found in "build/libs" (desktop) and "build/outputs/aar" (Android).
 
 ### Other tasks
 
@@ -152,12 +187,16 @@ You can run various scenes in the "performance test" example app:
   + using Windows Command Prompt: `.\gradlew runRagdoll`
 
 You can install the artifacts to your local Maven repository:
-+ using Bash or Fish or PowerShell or Zsh: `./gradlew install`
-+ using Windows Command Prompt: `.\gradlew install`
++ using Bash or Fish or PowerShell or Zsh: `./gradlew install;./gradlew -b android.gradle install`
++ using Windows Command Prompt:
+  + `.\gradlew install`
+  + `.\gradlew -b android.gradle install`
 
 You can restore the project to a pristine state:
-+ using Bash or Fish or PowerShell or Zsh: `./gradlew cleanAll`
-+ using Windows Command Prompt: `.\gradlew cleanAll`
++ using Bash or Fish or PowerShell or Zsh: `./gradlew -b android.gradle clean;./gradlew cleanAll`
++ using Windows Command Prompt:
+  + `.\gradlew -b android.gradle clean`
+  + `.\gradlew cleanAll`
 
 [Jump to the table of contents](#toc)
 
@@ -261,3 +300,4 @@ by invoking `target.setEmbedded()`.
 [latest]: https://github.com/stephengold/jolt-jni/releases/latest "latest jolt-jni release"
 [license]: https://github.com/stephengold/jolt-jni/blob/master/LICENSE "jolt-jni license"
 [project]: https://github.com/stephengold/jolt-jni "Jolt-jni Project"
+[studio]: https://developer.android.com/studio "Android Studio"
