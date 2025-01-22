@@ -112,23 +112,28 @@ model {
                 //println " - $pName  $buildType  $flavor" // to debug this script
 
                 buildable = true
-                // Decide whether to build for the target platform:
-                String os = targetPlatform.operatingSystem.name
+                // Decide whether to build the current type:
                 if (buildable && project.hasProperty('bt')) {
                     // set in gradle.properties file or -Pbt= on the command line
                     String btArg = project.ext.bt
                     buildable = (buildType.name == btArg)
                 }
+
+                // Decide whether to build the current flavor:
                 if (buildable && project.hasProperty('flavor')) {
                     // set in gradle.properties file or -Pflavor= on the command line
                     String flavorArg = project.ext.flavor
                     buildable = (flavor.name == flavorArg)
                 }
+
+                // Decide whether to build for the target platform:
                 if (buildable && project.hasProperty('target')) {
                     // set in gradle.properties file or -Ptarget= on the command line
                     String targetArg = project.ext.target
                     buildable = (pName == targetArg)
                 }
+                Boolean isDp = (flavor == flavors.Dp)
+                String os = targetPlatform.operatingSystem.name
 
                 // always-on CPP defines:
                 cppCompiler.define 'JPH_OBJECT_STREAM'
@@ -145,7 +150,6 @@ model {
                 }
 
                 // flavor-specific CPP defines:
-                Boolean isDp = (flavor == flavors.Dp)
                 if (isDp) {
                     cppCompiler.define 'JPH_DOUBLE_PRECISION'
                 }
