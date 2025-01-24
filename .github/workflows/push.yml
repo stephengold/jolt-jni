@@ -120,7 +120,7 @@ jobs:
       - name: gradlew -Ptarget=Windows64 runSmokeTestAll build install
         run: |
           ./gradlew -Ptarget=Windows64 runSmokeTestAll build install \
-             --console=plain \
+            --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
         shell: bash

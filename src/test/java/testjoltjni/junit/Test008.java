@@ -124,7 +124,8 @@ public class Test008 {
 
         // Test an identity matrix:
         RMat44 identity = RMat44.sIdentity();
-        TestUtils.assertEquals(1f, 0f, 0f, 0f,
+        TestUtils.assertEquals(
+                1f, 0f, 0f, 0f,
                 0f, 1f, 0f, 0f,
                 0f, 0f, 1f, 0f,
                 0f, 0f, 0f, 1f,
@@ -160,7 +161,8 @@ public class Test008 {
 
         // Test an all-zero matrix:
         RMat44 zero = RMat44.sZero();
-        TestUtils.assertEquals(0f, 0f, 0f, 0f,
+        TestUtils.assertEquals(
+                0f, 0f, 0f, 0f,
                 0f, 0f, 0f, 0f,
                 0f, 0f, 0f, 0f,
                 0f, 0f, 0f, 1f,
