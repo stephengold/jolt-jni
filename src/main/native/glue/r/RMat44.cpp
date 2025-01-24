@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -174,7 +174,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_free
 JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RMat44_getElement
   (JNIEnv *, jclass, jlong matrixVa, jint row, jint column) {
     const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
-    const Real result = pMatrix->GetColumn4(column)[row];
+    Real result;
+    if (column == 3) {
+        if (row == 3) {
+            result = 1;
+        } else {
+            result = pMatrix->GetTranslation()[row];
+        }
+    } else {
+        result = pMatrix->GetColumn4(column)[row];
+    }
     return result;
 }
 
@@ -345,7 +354,15 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x4r
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_setElement
   (JNIEnv *, jclass, jlong matrixVa, jint row, jint column, jdouble value) {
     RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
-    pMatrix->GetColumn4(column)[row] = value;
+    if (column == 3) {
+        if (row < 3) {
+            RVec3 copy = pMatrix->GetTranslation();
+            copy.SetComponent(row, value);
+            pMatrix->SetTranslation(copy);
+        }
+    } else {
+        pMatrix->GetColumn4(column)[row] = value;
+    }
 }
 
 /*
