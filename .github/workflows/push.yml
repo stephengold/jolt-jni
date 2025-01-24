@@ -179,9 +179,9 @@ jobs:
       - run: sudo apt install g++-9-arm-linux-gnueabihf
       - run: arm-linux-gnueabihf-g++-9 --version
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=Linux_ARM32hf assemble
+      - name: gradlew -Ptarget=Linux_ARM32hf install
         run: |
-          ./gradlew -Ptarget=Linux_ARM32hf assemble \
+          ./gradlew -Ptarget=Linux_ARM32hf install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
