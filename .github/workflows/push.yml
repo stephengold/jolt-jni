@@ -63,9 +63,9 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=MacOSX64 run runSmokeTestAll build install
+      - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 run runSmokeTestAll build install
         run: |
-          ./gradlew -Ptarget=MacOSX64 run runSmokeTestAll build install \
+          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 run runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
