@@ -90,9 +90,9 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=MacOSX_ARM64 runSmokeTestAll build install
+      - name: gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 runSmokeTestAll build install
         run: |
-          ./gradlew -Ptarget=MacOSX_ARM64 runSmokeTestAll build install \
+          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
