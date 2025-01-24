@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -113,6 +113,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * @param value the desired value
      */
     public void setElement(int row, int column, double value) {
+        assert column >= 0 && column < 4 : "column = " + column;
+        assert row >= 0 && row < 4 : "row = " + row;
+
         long matrixVa = va();
         setElement(matrixVa, row, column, value);
     }
@@ -270,6 +273,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      */
     @Override
     public double getElement(int row, int column) {
+        assert column >= 0 && column < 4 : "column = " + column;
+        assert row >= 0 && row < 4 : "row = " + row;
+
         long matrixVa = va();
         double result = getElement(matrixVa, row, column);
 
