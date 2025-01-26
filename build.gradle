@@ -203,6 +203,14 @@ model {
                 if (buildable) {
                     println 'Build ' + q + ' using ' + toolChain
 
+                    // Generate resource path for native library, one of:
+                    //   linux/x86-64/com/github/stephengold/libjoltjni.so
+                    //   linux/armhf/com/github/stephengold/libjoltjni.so
+                    //   linux/aarch64/com/github/stephengold/libjoltjni.so
+                    //   osx/x86-64/com/github/stephengold/libjoltjni.dylib
+                    //   osx/aarch64/com/github/stephengold/libjoltjni.dylib
+                    //   windows/x86-64/com/github/stephengold/joltjni.dll
+
                     String replaceWith = targetPlatform.operatingSystem.name \
                         + '/' + targetPlatform.architecture.name \
                         + '/com/github/stephengold/$1'
