@@ -17,7 +17,7 @@ plugins {
 // or by -P options on the Gradle command line.
 
 ext {
-    downloadZip = 'downloads/JoltPhysics-sg250106.zip'
+    downloadZip = 'downloads/JoltPhysics-sg250126.zip'
     groupID = 'com.github.stephengold'
     baseName = "${artifact}-${jjVersion}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
@@ -460,14 +460,14 @@ static def base64Decode(encodedString) {
 // Register tasks to download and unpack JoltPhysics source code and assets:
 
 tasks.register('downloadJoltSource', Download) {
-    src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/sg250106.zip'
+    src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/sg250126.zip'
     dest file(downloadZip)
     overwrite false
 }
 tasks.register('unpackJoltAssets', Copy) {
     dependsOn 'downloadJoltSource'
     from (zipTree(downloadZip)) {
-        include 'JoltPhysics-sg250106/Assets/**'
+        include 'JoltPhysics-sg250126/Assets/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
         }
@@ -478,7 +478,7 @@ tasks.register('unpackJoltAssets', Copy) {
 tasks.register('unpackJoltSource', Copy) {
     dependsOn 'downloadJoltSource'
     from (zipTree(downloadZip)) {
-        include 'JoltPhysics-sg250106/Jolt/**'
+        include 'JoltPhysics-sg250126/Jolt/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
         }
@@ -489,7 +489,7 @@ tasks.register('unpackJoltSource', Copy) {
 tasks.register('unpackTestFramework', Copy) {
     dependsOn 'downloadJoltSource'
     from (zipTree(downloadZip)) {
-        include 'JoltPhysics-sg250106/TestFramework/**'
+        include 'JoltPhysics-sg250126/TestFramework/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
         }
