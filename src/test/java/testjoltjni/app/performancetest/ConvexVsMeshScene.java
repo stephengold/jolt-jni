@@ -31,9 +31,10 @@ import static com.github.stephengold.joltjni.std.Std.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/ConvexVsMeshScene.h
  */
 // A scene that drops a number of convex shapes on a sloping terrain made out of a mesh shape
-class ConvexVsMeshScene implements PerformanceTestScene {
+class ConvexVsMeshScene implements PerformanceTestScene
+{
 public
-	String GetName()
+	String	GetName()
 	{
 		return "ConvexVsMesh";
 	}
