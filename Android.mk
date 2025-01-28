@@ -410,14 +410,9 @@ $(N)/Jolt/Skeleton/SkeletalAnimation.cpp \
 $(N)/Jolt/Skeleton/Skeleton.cpp \
 $(N)/Jolt/Skeleton/SkeletonMapper.cpp \
 $(N)/Jolt/Skeleton/SkeletonPose.cpp \
-$(N)/Jolt/TriangleGrouper/TriangleGrouperClosestCentroid.cpp \
-$(N)/Jolt/TriangleGrouper/TriangleGrouperMorton.cpp \
 $(N)/Jolt/TriangleSplitter/TriangleSplitterBinning.cpp \
 $(N)/Jolt/TriangleSplitter/TriangleSplitter.cpp \
-$(N)/Jolt/TriangleSplitter/TriangleSplitterFixedLeafSize.cpp \
-$(N)/Jolt/TriangleSplitter/TriangleSplitterLongestAxis.cpp \
 $(N)/Jolt/TriangleSplitter/TriangleSplitterMean.cpp \
-$(N)/Jolt/TriangleSplitter/TriangleSplitterMorton.cpp \
 $(N)/TestFramework/External/Perlin.cpp
 
 include $(BUILD_SHARED_LIBRARY)
