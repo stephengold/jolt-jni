@@ -32,8 +32,8 @@ String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
 
 model {
     buildTypes {
-        Debug
-        Release
+        Debug   // for development, debugging, and functional testing
+        Release // for performance testing and production
     }
 
     flavors {
