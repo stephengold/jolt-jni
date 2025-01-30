@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -50,7 +50,7 @@ final public class SubShapeIdPair
     // ConstSubShapeIdPair methods
 
     /**
-     * Return the ID of the first body.
+     * Copy the ID of the first body.
      *
      * @return a new object
      */
@@ -64,7 +64,7 @@ final public class SubShapeIdPair
     }
 
     /**
-     * Return the ID of the 2nd body.
+     * Copy the ID of the 2nd body.
      *
      * @return a new object
      */
@@ -91,7 +91,7 @@ final public class SubShapeIdPair
     }
 
     /**
-     * Return the ID of the first subshape.
+     * Copy the ID of the first subshape.
      *
      * @return a new object
      */
@@ -105,7 +105,7 @@ final public class SubShapeIdPair
     }
 
     /**
-     * Return the ID of the 2nd subshape.
+     * Copy the ID of the 2nd subshape.
      *
      * @return a new object
      */

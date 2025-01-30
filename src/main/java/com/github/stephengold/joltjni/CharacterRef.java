@@ -229,10 +229,10 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     // ConstCharacter methods
 
     /**
-     * Return the ID of the body associated with this character. The character
-     * is unaffected.
+     * Copy the ID of the body associated with this character. The character is
+     * unaffected.
      *
-     * @return a new ID
+     * @return a new object
      */
     @Override
     public BodyId getBodyId() {

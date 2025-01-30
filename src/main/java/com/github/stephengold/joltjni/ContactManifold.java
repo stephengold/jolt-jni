@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -79,8 +79,8 @@ final public class ContactManifold
     }
 
     /**
-     * Return the ID of the first subshape that formed the manifold. The
-     * manifold is unaffected. (native attribute: mSubShapeID1)
+     * Copy the ID of the first subshape that formed the manifold. The manifold
+     * is unaffected. (native attribute: mSubShapeID1)
      *
      * @return a new object
      */
@@ -94,8 +94,8 @@ final public class ContactManifold
     }
 
     /**
-     * Return the ID of the 2nd subshape that formed the manifold. The manifold
-     * is unaffected. (native attribute: mSubShapeID2)
+     * Copy the ID of the 2nd subshape that formed the manifold. The manifold is
+     * unaffected. (native attribute: mSubShapeID2)
      *
      * @return a new object
      */

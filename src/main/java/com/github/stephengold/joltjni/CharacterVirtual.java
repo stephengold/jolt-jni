@@ -513,9 +513,9 @@ public class CharacterVirtual
     }
 
     /**
-     * Return the ID of the inner body. The character is unaffected.
+     * Copy the ID of the inner body. The character is unaffected.
      *
-     * @return the ID, or {@code null} if none
+     * @return a new object, or {@code null} if none
      */
     @Override
     public BodyId getInnerBodyId() {

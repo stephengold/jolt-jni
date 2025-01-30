@@ -50,10 +50,10 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     // ConstContact methods
 
     /**
-     * Return the ID of the colliding body. The contact is unaffected. (native
+     * Copy the ID of the colliding body. The contact is unaffected. (native
      * attribute: mBodyB)
      *
-     * @return a new ID, or null if no colliding body
+     * @return a new object, or {@code null} if no colliding body
      */
     @Override
     public BodyId getBodyB() {
