@@ -97,6 +97,7 @@ public class CharacterVsCharacterCollisionSimple
             long tmpVa = collisionList.get(i).targetVa();
             if (tmpVa == characterVa) {
                 collisionList.remove(i);
+                break;
             }
         }
     }
