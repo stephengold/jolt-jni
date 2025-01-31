@@ -63,7 +63,7 @@ public:
     }
 
     void OnContactAdded(const Body &inBody1, const Body &inBody2,
-            const ContactManifold &inManifold, ContactSettings &ioSettings) {
+            const ContactManifold &inManifold, ContactSettings &ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -78,7 +78,7 @@ public:
     }
 
     void OnContactPersisted(const Body &inBody1, const Body &inBody2,
-            const ContactManifold &inManifold, ContactSettings &ioSettings) {
+            const ContactManifold &inManifold, ContactSettings &ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -93,7 +93,7 @@ public:
         mpVM->DetachCurrentThread();
     }
 
-    void OnContactRemoved(const SubShapeIDPair &pair) {
+    void OnContactRemoved(const SubShapeIDPair &pair) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -105,7 +105,7 @@ public:
     }
 
     ValidateResult OnContactValidate(const Body &inBody1, const Body &inBody2,
-            RVec3Arg inBaseOffset, const CollideShapeResult &inCollisionResult) {
+            RVec3Arg inBaseOffset, const CollideShapeResult &inCollisionResult) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);

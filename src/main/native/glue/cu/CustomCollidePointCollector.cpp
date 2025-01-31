@@ -50,7 +50,7 @@ public:
         JPH_ASSERT(!pEnv->ExceptionCheck());
     }
 
-    void AddHit(const CollidePointResult &inResult) {
+    void AddHit(const CollidePointResult &inResult) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);

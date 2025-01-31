@@ -54,7 +54,7 @@ public:
         JPH_ASSERT(!pEnv->ExceptionCheck());
     }
 
-    void OnBodyActivated(const BodyID &inBodyID, uint64 inBodyUserData) {
+    void OnBodyActivated(const BodyID &inBodyID, uint64 inBodyUserData) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -66,7 +66,7 @@ public:
         mpVM->DetachCurrentThread();
     }
 
-    void OnBodyDeactivated(const BodyID &inBodyID, uint64 inBodyUserData) {
+    void OnBodyDeactivated(const BodyID &inBodyID, uint64 inBodyUserData) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);

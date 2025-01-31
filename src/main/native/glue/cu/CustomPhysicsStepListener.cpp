@@ -50,7 +50,7 @@ public:
         JPH_ASSERT(!pEnv->ExceptionCheck());
     }
 
-    void OnStep(const PhysicsStepListenerContext &inContext) {
+    void OnStep(const PhysicsStepListenerContext &inContext) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
