@@ -126,7 +126,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__JI
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombine__JI
   (JNIEnv *, jclass, jlong oldHash, jint iValue) {
     uint64 result = oldHash;
-    HashCombine(result, iValue);
+    HashCombine(result, (uint32)iValue);
     return result;
 }
 
