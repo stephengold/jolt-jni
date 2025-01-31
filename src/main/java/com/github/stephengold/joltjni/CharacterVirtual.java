@@ -527,6 +527,20 @@ public class CharacterVirtual
     }
 
     /**
+     * Copy the character's ID. The character is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public CharacterId getId() {
+        long characterVa = va();
+        long idVa = getId(characterVa);
+        CharacterId result = new CharacterId(idVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the linear velocity of the character. The character is unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
@@ -756,6 +770,8 @@ public class CharacterVirtual
     native static boolean getEnhancedInternalEdgeRemoval(long characterVa);
 
     native static float getHitReductionCosMaxAngle(long characterVa);
+
+    native static long getId(long characterVa);
 
     native static long getInnerBodyId(long characterVa);
 

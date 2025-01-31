@@ -516,6 +516,20 @@ final public class CharacterVirtualRef
     }
 
     /**
+     * Copy the character's ID. The character is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public CharacterId getId() {
+        long characterVa = targetVa();
+        long idVa = CharacterVirtual.getId(characterVa);
+        CharacterId result = new CharacterId(idVa, true);
+
+        return result;
+    }
+
+    /**
      * Copy the ID of the inner body. The character is unaffected.
      *
      * @return a new object, or {@code null} if none
