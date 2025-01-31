@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -87,6 +87,55 @@ public class CustomCharacterContactListener
             double contactLocationY, double contactLocationZ,
             float contactNormalX, float contactNormalY, float contactNormalZ,
             long settingsVa) {
+    }
+
+    /**
+     * Callback invoked (by native code) whenever a contact between 2 characters
+     * becomes persistent.
+     *
+     * @param characterVa the virtual address of the
+     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param otherCharacterVa the virtual address of the other
+     * {@code ConstCharacterVirtual} (not zero)
+     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
+     * of the shape that is in contact (not zero)
+     * @param contactLocationX the X component of the contact location (in
+     * system coordinates)
+     * @param contactLocationY the Y component of the contact location (in
+     * system coordinates)
+     * @param contactLocationZ the Z component of the contact location (in
+     * system coordinates)
+     * @param contactNormalX the X component of the contact normal (in system
+     * coordinates)
+     * @param contactNormalY the Y component of the contact normal (in system
+     * coordinates)
+     * @param contactNormalZ the Z component of the contact normal (in system
+     * coordinates)
+     * @param settingsVa the virtual address of the
+     * {@code CharacterContactSettings} for storing the desired behavior
+     */
+    @Override
+    public void onCharacterContactPersisted(long characterVa,
+            long otherCharacterVa, long subShapeId2Va, double contactLocationX,
+            double contactLocationY, double contactLocationZ,
+            float contactNormalX, float contactNormalY, float contactNormalZ,
+            long settingsVa) {
+    }
+
+    /**
+     * Callback invoked (by native code) whenever a contact between 2 characters
+     * is destroyed.
+     *
+     * @param characterVa the virtual address of the
+     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param otherCharacterVa the virtual address of the other
+     * {@code ConstCharacterVirtual} (not zero)
+     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
+     * of the shape that is in contact (not zero)
+     */
+    @Override
+    public void onCharacterContactRemoved(
+            long characterVa, long otherCharacterVa, long subShapeId2Va) {
     }
 
     /**
@@ -188,6 +237,55 @@ public class CustomCharacterContactListener
             double contactLocationY, double contactLocationZ,
             float contactNormalX, float contactNormalY, float contactNormalZ,
             long settingsVa) {
+    }
+
+    /**
+     * Callback invoked (by native code) whenever a contact between a character
+     * and a body becomes persistent.
+     *
+     * @param characterVa the virtual address of the
+     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param bodyId2Va the virtual address of the {@code ConstBody} being
+     * solved (not zero)
+     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
+     * of the shape that is in contact (not zero)
+     * @param contactLocationX the X component of the contact location (in
+     * system coordinates)
+     * @param contactLocationY the Y component of the contact location (in
+     * system coordinates)
+     * @param contactLocationZ the Z component of the contact location (in
+     * system coordinates)
+     * @param contactNormalX the X component of the contact normal (in system
+     * coordinates)
+     * @param contactNormalY the Y component of the contact normal (in system
+     * coordinates)
+     * @param contactNormalZ the Z component of the contact normal (in system
+     * coordinates)
+     * @param settingsVa the virtual address of the
+     * {@code CharacterContactSettings} for storing the desired behavior
+     */
+    @Override
+    public void onContactPersisted(long characterVa, long bodyId2Va,
+            long subShapeId2Va, double contactLocationX,
+            double contactLocationY, double contactLocationZ,
+            float contactNormalX, float contactNormalY, float contactNormalZ,
+            long settingsVa) {
+    }
+
+    /**
+     * Callback invoked (by native code) whenever a contact between a character
+     * and a body is destroyed.
+     *
+     * @param characterVa the virtual address of the
+     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param bodyId2Va the virtual address of the {@code ConstBody} being
+     * solved (not zero)
+     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
+     * of the shape that is in contact (not zero)
+     */
+    @Override
+    public void onContactRemoved(
+            long characterVa, long bodyId2Va, long subShapeId2Va) {
     }
 
     /**
