@@ -195,19 +195,19 @@ public:
     }
 
     void OnCharacterContactRemoved(const CharacterVirtual *inCharacter,
-            const CharacterVirtual *inOtherCharacter,
+            const CharacterID &inOtherCharacterID,
             const SubShapeID &inSubShapeID2) {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
-        const jlong otherCharacterVa
-                = reinterpret_cast<jlong> (inOtherCharacter);
+        const jlong otherCharacterIdVa
+                = reinterpret_cast<jlong> (&inOtherCharacterID);
         const jlong subShapeId2Va = reinterpret_cast<jlong> (&inSubShapeID2);
 
         pAttachEnv->CallVoidMethod(mJavaObject, mCcRemovedMethodId, characterVa,
-                otherCharacterVa, subShapeId2Va);
+                otherCharacterIdVa, subShapeId2Va);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
 
         mpVM->DetachCurrentThread();
