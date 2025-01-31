@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.PhysicsSystem;
+import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 /**
  * A line-for-line Java translation of the Jolt Physics performance test-scene interface.
@@ -38,6 +39,12 @@ interface PerformanceTestScene
 
 	// Start a new test by adding objects to inPhysicsSystem
 	void			StartTest(PhysicsSystem inPhysicsSystem, EMotionQuality inMotionQuality)  ;
+
+	// Step the test
+	default void			UpdateTest( PhysicsSystem inPhysicsSystem,  TempAllocator ioTempAllocator,  float inDeltaTime) { }
+
+	// Update the hash with the state of the scene
+	default long			UpdateHash(long  ioHash) 	{return ioHash;}
 
 	// Stop a test and remove objects from inPhysicsSystem
 	default void			StopTest(PhysicsSystem inPhysicsSystem)			{ }
