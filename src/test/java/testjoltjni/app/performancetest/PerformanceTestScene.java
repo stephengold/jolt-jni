@@ -34,11 +34,11 @@ interface PerformanceTestScene
 	String   	GetName()   ;
 
 	// Load assets for the scene
-	boolean			Load(   )	   ;
+	default boolean			Load(   )	{ return true; }
 
 	// Start a new test by adding objects to inPhysicsSystem
 	void			StartTest(PhysicsSystem inPhysicsSystem, EMotionQuality inMotionQuality)  ;
 
 	// Stop a test and remove objects from inPhysicsSystem
-	void			StopTest(PhysicsSystem inPhysicsSystem)			 ;
+	default void			StopTest(PhysicsSystem inPhysicsSystem)			{ }
 };
