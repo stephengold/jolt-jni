@@ -93,6 +93,8 @@ public static void main(  String[] argv)throws IOException
 				scene = new PyramidScene();
 			else if (arg.substring(3).equals("LargeMesh"))
 				scene = new LargeMeshScene();
+			else if (arg.substring(3).equals("CharacterVirtual"))
+				scene = new CharacterVirtualScene();
 			else
 			{
 				Trace("Invalid scene");

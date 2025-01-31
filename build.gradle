@@ -290,6 +290,11 @@ tasks.register('debugRagdoll', JavaExec) {
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 
+tasks.register('runCharacterVirtual', JavaExec) {
+    args '-s=CharacterVirtual'
+    enableAssertions = false
+    mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
+}
 tasks.register('runConvexVsMesh', JavaExec) {
     args '-s=ConvexVsMesh'
     enableAssertions = false
