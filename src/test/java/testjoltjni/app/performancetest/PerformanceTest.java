@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -312,6 +312,9 @@ public static void main(  String[] argv)throws IOException
 					// Start measuring
 					long clock_start = System.nanoTime();
 
+					// Update the test
+					scene.UpdateTest(physics_system, temp_allocator, cDeltaTime);
+
 					// Do a physics step
 					physics_system.update(cDeltaTime, 1, temp_allocator, job_system);
 
@@ -394,6 +397,9 @@ public static void main(  String[] argv)throws IOException
 					Quat rot = bi.getRotation(id);
 					hash = hashBytes(rot, hash);
 				}
+
+				// Let the scene hash its own state
+				hash=scene.UpdateHash(hash);
 
 				// Convert hash to string
 				String hash_str = String.format("0x%x", hash);
