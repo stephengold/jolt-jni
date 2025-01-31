@@ -26,9 +26,12 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/ConfigurationString.h"
 #include "Jolt/Core/Factory.h"
+#include "Jolt/Core/HashCombine.h"
 #include "Jolt/Core/Profiler.h"
 #include "Jolt/Core/TempAllocator.h"
 #include "Jolt/Geometry/RayAABox.h"
+#include "Jolt/Physics/Body/BodyID.h"
+#include "Jolt/Physics/Character/CharacterID.h"
 #include "Jolt/Physics/DeterminismLog.h"
 #include "Jolt/RegisterTypes.h"
 #include "TestFramework/External/Perlin.h"
@@ -112,6 +115,30 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__JI
   (JNIEnv *, jclass, jlong dataVa, jint inSize) {
     const void * const pData = reinterpret_cast<void *> (dataVa);
     const uint64 result = HashBytes(pData, inSize);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    hashCombine
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombine__JI
+  (JNIEnv *, jclass, jlong oldHash, jint iValue) {
+    uint64 result = oldHash;
+    HashCombine(result, iValue);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    hashCombine
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombine__JJ
+  (JNIEnv *, jclass, jlong oldHash, jlong lValue) {
+    uint64 result = oldHash;
+    HashCombine(result, (uint64)lValue);
     return result;
 }
 
@@ -371,6 +398,58 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__FFFF
   (JNIEnv *, jclass, jfloat qx, jfloat qy, jfloat qz, jfloat qw, jlong oldHash) {
     const Quat quat(qx, qy, qz, qw);
     const uint64 result = HashBytes(&quat, sizeof(Quat), oldHash);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    hashCombineBodyId
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombineBodyId
+  (JNIEnv *, jclass, jlong oldHash, jlong idVa) {
+    uint64 result = oldHash;
+    const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
+    HashCombine(result, *pId);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    hashCombineCharacterId
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombineCharacterId
+  (JNIEnv *, jclass, jlong oldHash, jlong idVa) {
+    uint64 result = oldHash;
+    const CharacterID * const pId = reinterpret_cast<CharacterID *> (idVa);
+    HashCombine(result, *pId);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    hashCombineRVec3
+ * Signature: (JDDD)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombineRVec3
+  (JNIEnv *, jclass, jlong oldHash, jdouble xx, jdouble yy, jdouble zz) {
+    uint64 result = oldHash;
+    const RVec3 rvec(xx, yy, zz);
+    HashCombine(result, rvec);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    hashCombineVec3
+ * Signature: (JFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombineVec3
+  (JNIEnv *, jclass, jlong oldHash, jfloat x, jfloat y, jfloat z) {
+    uint64 result = oldHash;
+    const Vec3 vec(x, y, z);
+    HashCombine(result, vec);
     return result;
 }
 

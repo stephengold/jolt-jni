@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyId;
+import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -161,6 +163,84 @@ final public class Jolt {
         double yy = vector.yy();
         double zz = vector.zz();
         long result = hashBytes(xx, yy, zz, oldHash);
+
+        return result;
+    }
+
+    /**
+     * Combine the specified character ID with the specified hash code.
+     *
+     * @param id the ID to combine (not null, unaffected)
+     * @param oldHash the old hash code
+     * @return the new hash code
+     */
+    public static long hashCombine(long oldHash, CharacterId id) {
+        long idVa = id.va();
+        long result = hashCombineCharacterId(oldHash, idVa);
+
+        return result;
+    }
+
+    /**
+     * Combine the specified body ID with the specified hash code.
+     *
+     * @param id the ID to combine (not null, unaffected)
+     * @param oldHash the old hash code
+     * @return the new hash code
+     */
+    public static long hashCombine(long oldHash, ConstBodyId id) {
+        long idVa = id.targetVa();
+        long result = hashCombineBodyId(oldHash, idVa);
+
+        return result;
+    }
+
+    /**
+     * Combine the specified 32-bit integer with the specified hash code.
+     *
+     * @param oldHash the old hash code
+     * @param iValue the integer value to combine
+     * @return the new hash code
+     */
+    native public static long hashCombine(long oldHash, int iValue);
+
+    /**
+     * Combine the specified 64-bit integer with the specified hash code.
+     *
+     * @param oldHash the old hash code
+     * @param lValue the integer value to combine
+     * @return the new hash code
+     */
+    native public static long hashCombine(long oldHash, long lValue);
+
+    /**
+     * Combine the specified location vector with the specified hash code.
+     *
+     * @param rvec the vector to combine (not null, unaffected)
+     * @param oldHash the old hash code
+     * @return the new hash code
+     */
+    public static long hashCombine(long oldHash, RVec3Arg rvec) {
+        double xx = rvec.xx();
+        double yy = rvec.yy();
+        double zz = rvec.zz();
+        long result = hashCombineRVec3(oldHash, xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Combine the specified vector with the specified hash code.
+     *
+     * @param vec the vector to combine (not null, unaffected)
+     * @param oldHash the old hash code
+     * @return the new hash code
+     */
+    public static long hashCombine(long oldHash, Vec3Arg vec) {
+        float x = vec.getX();
+        float y = vec.getY();
+        float z = vec.getZ();
+        long result = hashCombineVec3(oldHash, x, y, z);
 
         return result;
     }
@@ -426,6 +506,16 @@ final public class Jolt {
 
     native private static long hashBytes(
             float qx, float qy, float qz, float qw, long oldHash);
+
+    native private static long hashCombineBodyId(long oldHash, long idVa);
+
+    native private static long hashCombineCharacterId(long oldHash, long idVa);
+
+    native private static long hashCombineRVec3(
+            long oldHash, double xx, double yy, double zz);
+
+    native private static long hashCombineVec3(
+            long oldHash, float x, float y, float z);
 
     native private static boolean rayAaBoxHits(float startX, float startY,
             float startZ, float offsetX, float offsetY, float offsetZ,
