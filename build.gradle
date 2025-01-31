@@ -268,6 +268,7 @@ application {
     // default settings for the 'run' task:
     mainClass = 'testjoltjni.app.helloworld.HelloWorld'
 }
+
 tasks.register('debugConvexVsMesh', JavaExec) {
     args '-s=ConvexVsMesh'
     debug = true
@@ -288,6 +289,7 @@ tasks.register('debugRagdoll', JavaExec) {
     dependsOn('unpackJoltAssets')
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
+
 tasks.register('runConvexVsMesh', JavaExec) {
     args '-s=ConvexVsMesh'
     enableAssertions = false
@@ -322,6 +324,7 @@ tasks.register('runSmokeTestAll', JavaExec) {
     dependsOn('unpackJoltAssets')
     mainClass = 'testjoltjni.app.samples.SmokeTestAll'
 }
+
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
     dependsOn('assemble')

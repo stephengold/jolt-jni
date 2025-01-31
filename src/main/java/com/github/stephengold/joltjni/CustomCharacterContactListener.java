@@ -65,7 +65,7 @@ public class CustomCharacterContactListener
      * @param otherCharacterVa the virtual address of the other
      * {@code ConstCharacterVirtual} (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is being hit (not zero)
+     * of the shape that is in contact (not zero)
      * @param contactLocationX the X component of the contact location (in
      * system coordinates)
      * @param contactLocationY the Y component of the contact location (in
@@ -147,7 +147,7 @@ public class CustomCharacterContactListener
      * @param otherCharacterVa the virtual address of the other
      * {@code ConstCharacterVirtual} (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is being hit (not zero)
+     * of the shape that is in contact (not zero)
      * @param contactLocationX the X component of the contact location (in
      * system coordinates)
      * @param contactLocationY the Y component of the contact location (in
@@ -197,7 +197,7 @@ public class CustomCharacterContactListener
      * @param otherCharacterVa the virtual address of the other
      * {@code ConstCharacterVirtual} (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is being hit (not zero)
+     * of the shape that is in contact (not zero)
      * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     @Override
@@ -215,7 +215,7 @@ public class CustomCharacterContactListener
      * @param bodyId2Va the virtual address of the {@code ConstBody} being
      * solved (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is being hit (not zero)
+     * of the shape that is in contact (not zero)
      * @param contactLocationX the X component of the contact location (in
      * system coordinates)
      * @param contactLocationY the Y component of the contact location (in
@@ -297,7 +297,7 @@ public class CustomCharacterContactListener
      * @param bodyId2Va the virtual address of the {@code ConstBody} being
      * solved (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is being hit (not zero)
+     * of the shape that is in contact (not zero)
      * @param contactLocationX the X component of the contact location (in
      * system coordinates)
      * @param contactLocationY the Y component of the contact location (in
@@ -347,7 +347,7 @@ public class CustomCharacterContactListener
      * @param bodyId2Va the virtual address of the {@code ConstBody} being
      * solved (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is being hit (not zero)
+     * of the shape that is in contact (not zero)
      * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     @Override
