@@ -71,9 +71,8 @@ model {
 
     toolChains { // prioritize among the native toolchains
         visualCpp(VisualCpp) // used when compiling on Windows
-        //clang(Clang) // to prefer Clang over Gcc on Linux
-        gcc(Gcc) // default when compiling on Linux
-        clang(Clang) // used when compiling on macOS
+        //gcc(Gcc) // to prefer Gcc over Clang
+        clang(Clang) // the default when compiling on macOS or Linux
 
         gcc10Arm(Gcc) { // used when cross-compiling on Linux
             target('Linux_ARM64') {
