@@ -136,6 +136,13 @@ model {
                 // always-on CPP defines:
                 cppCompiler.define 'JPH_OBJECT_STREAM'
 
+                // ISA extensions:
+                Boolean use_fma = false
+                if (targetPlatform.architecture.name == 'x86-64' && project.hasProperty('use_fma')) {
+                    use_fma = true
+                    cppCompiler.define 'JPH_USE_AVX2'
+                }
+
                 // buildtype-specific CPP defines:
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 if (isDebug) {
@@ -181,6 +188,17 @@ model {
                     cppCompiler.args '-std=c++17'
                     cppCompiler.args '-Werror=return-type'
 
+                    if (use_fma) {
+                        cppCompiler.args '-msse4.1'
+                        cppCompiler.args '-msse4.2'
+                        cppCompiler.args '-mavx'
+                        cppCompiler.args '-mf16c'
+                        cppCompiler.args '-mavx2'
+                        cppCompiler.args '-mbmi'
+                        cppCompiler.args '-mlzcnt'
+                        cppCompiler.args '-mfma'
+                    }
+
                     if (isDebug) {
                         cppCompiler.args '-O0', '-g3'
                     } else { // buildType == Release
@@ -200,7 +218,11 @@ model {
                 }
 
                 if (buildable) {
-                    println 'Build ' + q + ' using ' + toolChain
+                    if (use_fma) {
+                        println 'Build ' + q + '+FMA using ' + toolChain
+                    } else {
+                        println 'Build ' + q + ' using ' + toolChain
+                    }
 
                     // Generate resource path for native library, one of:
                     //   linux/x86-64/com/github/stephengold/libjoltjni.so
