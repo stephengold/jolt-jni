@@ -141,6 +141,7 @@ model {
                 if (targetPlatform.architecture.name == 'x86-64' && project.hasProperty('use_fma')) {
                     use_fma = true
                     cppCompiler.define 'JPH_USE_AVX2' // implies SSE4.1, SSE4.2, AVX, F16C, BMI/TZCNT, and LZCNT
+                    cppCompiler.define 'JPH_USE_FMADD'
                 }
 
                 // buildtype-specific CPP defines:
