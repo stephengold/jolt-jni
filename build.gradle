@@ -70,9 +70,11 @@ model {
     }
 
     toolChains { // prioritize among the native toolchains
-        visualCpp(VisualCpp) // used when compiling on Windows
-        //gcc(Gcc) // to prefer Gcc over Clang
-        clang(Clang) // the default when compiling on macOS or Linux
+        //visualCpp(VisualCpp) // to prefer Visual C++ over Clang
+        //gcc(Gcc)             // to prefer Gcc over Clang
+        clang(Clang) // the default when not cross-compiling
+        gcc(Gcc)
+        visualCpp(VisualCpp)
 
         gcc10Arm(Gcc) { // used when cross-compiling on Linux
             target('Linux_ARM64') {
@@ -213,6 +215,9 @@ model {
                         cppCompiler.args '-fPIC'
                         cppCompiler.args '-fvisibility=hidden'
                         linker.args '-fvisibility=hidden'
+                    } else if (os == 'windows') {
+                        cppCompiler.args '-I', "$javaHome/include"
+                        cppCompiler.args '-I', "$javaHome/include/win32"
                     } else {
                         buildable = false
                     }
