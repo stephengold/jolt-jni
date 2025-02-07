@@ -38,4 +38,11 @@ public interface RandomNumberEngine extends ConstJoltPhysicsObject {
      * @return an integer value
      */
     int nextInt();
+
+    /**
+     * Seed the engine with the specified value.
+     *
+     * @param value the value to set
+     */
+    void seed(int value);
 }

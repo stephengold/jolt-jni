@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -77,4 +77,16 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngi
             = reinterpret_cast<default_random_engine *> (generatorVa);
     default_random_engine::result_type result = (*pGenerator)();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_DefaultRandomEngine
+ * Method:    setSeed
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_setSeed
+  (JNIEnv *, jclass, jlong generatorVa, jint value) {
+    default_random_engine * const pGenerator
+            = reinterpret_cast<default_random_engine *> (generatorVa);
+    pGenerator->seed(value);
 }

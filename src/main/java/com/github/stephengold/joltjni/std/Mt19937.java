@@ -68,6 +68,17 @@ public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
 
         return result;
     }
+
+    /**
+     * Seed the engine with the specified value.
+     *
+     * @param value the value to use
+     */
+    @Override
+    public void seed(int value) {
+        long generatorVa = va();
+        setSeed(generatorVa, value);
+    }
     // *************************************************************************
     // native private methods
 
@@ -78,4 +89,6 @@ public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
     native private static void free(long generatorVa);
 
     native private static int nextInt(long generatorVa);
+
+    native private static void setSeed(long generatorVa, int value);
 }
