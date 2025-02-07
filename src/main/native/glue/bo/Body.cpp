@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -727,6 +727,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isSensor
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     const bool result = pBody->IsSensor();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    isSoftBody
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Body_isSoftBody
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const bool result = pBody->IsSoftBody();
     return result;
 }
 

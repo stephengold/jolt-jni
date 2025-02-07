@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -900,6 +900,19 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Test whether the body is soft. It is unaffected.
+     *
+     * @return {@code true} if soft, otherwise {@code false}
+     */
+    @Override
+    public boolean isSoftBody() {
+        long bodyVa = va();
+        boolean result = isSoftBody(bodyVa);
+
+        return result;
+    }
+
+    /**
      * Test whether the body is static (non-moving). It is unaffected.
      *
      * @return {@code true} if static, otherwise {@code false}
@@ -1029,6 +1042,8 @@ public class Body extends NonCopyable implements ConstBody {
     native private static boolean isRigidBody(long bodyVa);
 
     native private static boolean isSensor(long bodyVa);
+
+    native private static boolean isSoftBody(long bodyVa);
 
     native private static boolean isStatic(long bodyVa);
 
