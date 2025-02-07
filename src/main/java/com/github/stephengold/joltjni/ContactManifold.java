@@ -38,11 +38,11 @@ final public class ContactManifold
      * Instantiate a manifold with the specified native object assigned but not
      * owned.
      *
-     * @param pairVa the virtual address of the native object to assign (not
+     * @param manifoldVa the virtual address of the native object to assign (not
      * zero)
      */
-    public ContactManifold(long pairVa) {
-        setVirtualAddress(pairVa);
+    public ContactManifold(long manifoldVa) {
+        setVirtualAddress(manifoldVa);
     }
     // *************************************************************************
     // ConstContactManifolds methods
@@ -55,10 +55,10 @@ final public class ContactManifold
      */
     @Override
     public RVec3 getBaseOffset() {
-        long pairVa = va();
-        double x = getBaseOffsetX(pairVa);
-        double y = getBaseOffsetY(pairVa);
-        double z = getBaseOffsetZ(pairVa);
+        long manifoldVa = va();
+        double x = getBaseOffsetX(manifoldVa);
+        double y = getBaseOffsetY(manifoldVa);
+        double z = getBaseOffsetZ(manifoldVa);
         RVec3 result = new RVec3(x, y, z);
 
         return result;
@@ -73,8 +73,8 @@ final public class ContactManifold
      */
     @Override
     public float getPenetrationDepth() {
-        long pairVa = va();
-        float result = getPenetrationDepth(pairVa);
+        long manifoldVa = va();
+        float result = getPenetrationDepth(manifoldVa);
         return result;
     }
 
@@ -86,8 +86,8 @@ final public class ContactManifold
      */
     @Override
     public SubShapeId getSubShapeId1() {
-        long pairVa = va();
-        long idVa = getSubShapeId1(pairVa);
+        long manifoldVa = va();
+        long idVa = getSubShapeId1(manifoldVa);
         SubShapeId result = new SubShapeId(idVa, true);
 
         return result;
@@ -101,8 +101,8 @@ final public class ContactManifold
      */
     @Override
     public SubShapeId getSubShapeId2() {
-        long pairVa = va();
-        long idVa = getSubShapeId2(pairVa);
+        long manifoldVa = va();
+        long idVa = getSubShapeId2(manifoldVa);
         SubShapeId result = new SubShapeId(idVa, true);
 
         return result;
@@ -116,10 +116,10 @@ final public class ContactManifold
      */
     @Override
     public Vec3 getWorldSpaceNormal() {
-        long pairVa = va();
-        float x = getWorldSpaceNormalX(pairVa);
-        float y = getWorldSpaceNormalY(pairVa);
-        float z = getWorldSpaceNormalZ(pairVa);
+        long manifoldVa = va();
+        float x = getWorldSpaceNormalX(manifoldVa);
+        float y = getWorldSpaceNormalY(manifoldVa);
+        float z = getWorldSpaceNormalZ(manifoldVa);
         Vec3 result = new Vec3(x, y, z);
 
         return result;
@@ -127,21 +127,21 @@ final public class ContactManifold
     // *************************************************************************
     // native private methods
 
-    native private static double getBaseOffsetX(long pairVa);
+    native private static double getBaseOffsetX(long manifoldVa);
 
-    native private static double getBaseOffsetY(long pairVa);
+    native private static double getBaseOffsetY(long manifoldVa);
 
-    native private static double getBaseOffsetZ(long pairVa);
+    native private static double getBaseOffsetZ(long manifoldVa);
 
-    native private static float getPenetrationDepth(long pairVa);
+    native private static float getPenetrationDepth(long manifoldVa);
 
-    native private static long getSubShapeId1(long pairVa);
+    native private static long getSubShapeId1(long manifoldVa);
 
-    native private static long getSubShapeId2(long pairVa);
+    native private static long getSubShapeId2(long manifoldVa);
 
-    native private static float getWorldSpaceNormalX(long pairVa);
+    native private static float getWorldSpaceNormalX(long manifoldVa);
 
-    native private static float getWorldSpaceNormalY(long pairVa);
+    native private static float getWorldSpaceNormalY(long manifoldVa);
 
-    native private static float getWorldSpaceNormalZ(long pairVa);
+    native private static float getWorldSpaceNormalZ(long manifoldVa);
 }
