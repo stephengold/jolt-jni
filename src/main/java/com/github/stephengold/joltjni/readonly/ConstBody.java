@@ -256,6 +256,13 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     boolean isSensor();
 
     /**
+     * Test whether the body is soft. It is unaffected.
+     *
+     * @return {@code true} if soft, otherwise {@code false}
+     */
+    boolean isSoftBody();
+
+    /**
      * Test whether the body is static (non-moving). It is unaffected.
      *
      * @return {@code true} if static, otherwise {@code false}
