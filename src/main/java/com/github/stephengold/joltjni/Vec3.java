@@ -320,6 +320,16 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Create a vector with all components set to one.
+     *
+     * @return a new vector
+     */
+    public static Vec3 sOne() {
+        Vec3 result = new Vec3(1, 1, 1);
+        return result;
+    }
+
+    /**
      * Copy the X component to all components.
      */
     public void splatX() {
