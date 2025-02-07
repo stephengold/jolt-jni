@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,6 +37,17 @@ public class Face extends JoltPhysicsObject {
     public Face() {
         long faceVa = createDefault();
         setVirtualAddress(faceVa, () -> free(faceVa));
+    }
+
+    /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param faceVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    Face(JoltPhysicsObject container, long faceVa) {
+        super(container, faceVa);
     }
     // *************************************************************************
     // new methods exposed
