@@ -887,7 +887,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Test whether the body is a sensor. The body is unaffected.
+     * Test whether the body is a sensor. It is unaffected.
      *
      * @return {@code true} if a sensor, otherwise {@code false}
      */
