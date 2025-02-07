@@ -232,10 +232,11 @@ public class Body extends NonCopyable implements ConstBody {
             result = null;
         } else {
             long propertiesVa = getMotionProperties(bodyVa);
+            JoltPhysicsObject container = getContainingObject();
             if (isSoftBody(bodyVa)) {
-                result = new SoftBodyMotionProperties(this, propertiesVa);
+                result = new SoftBodyMotionProperties(container, propertiesVa);
             } else {
-                result = new MotionProperties(this, propertiesVa);
+                result = new MotionProperties(container, propertiesVa);
             }
         }
 
