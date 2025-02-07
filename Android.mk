@@ -61,6 +61,7 @@ $(N)/glue/ch/CharacterBase.cpp \
 $(N)/glue/ch/CharacterBaseSettings.cpp \
 $(N)/glue/ch/CharacterContactSettings.cpp \
 $(N)/glue/ch/Character.cpp \
+$(N)/glue/ch/CharacterId.cpp \
 $(N)/glue/ch/CharacterSettings.cpp \
 $(N)/glue/ch/CharacterVirtual.cpp \
 $(N)/glue/ch/CharacterVirtualSettings.cpp \
@@ -216,6 +217,7 @@ $(N)/glue/s/SliderConstraintSettings.cpp \
 $(N)/glue/s/SoftBodyCreationSettings.cpp \
 $(N)/glue/s/SoftBodyMotionProperties.cpp \
 $(N)/glue/s/SoftBodySharedSettings.cpp \
+$(N)/glue/s/SoftBodyVertex.cpp \
 $(N)/glue/s/SpecifiedBroadPhaseLayerFilter.cpp \
 $(N)/glue/s/SpecifiedObjectLayerFilter.cpp \
 $(N)/glue/s/Sphere.cpp \
