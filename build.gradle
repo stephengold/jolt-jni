@@ -145,7 +145,6 @@ model {
 
                 // always-on CPP defines:
                 cppCompiler.define 'JPH_OBJECT_STREAM'
-                cppCompiler.define 'JPH_SHARED_LIBRARY'
 
                 // ISA extensions:
                 Boolean use_fma = false
