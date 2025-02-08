@@ -82,6 +82,10 @@ public class PhysicsSystem extends NonCopyable {
      * cached reference to the system's no-lock {@code NarrowPhaseQuery}
      */
     final private NarrowPhaseQuery narrowPhaseQueryNoLock;
+    /**
+     * protect the soft-body contact listener (if any) from garbage collection
+     */
+    private SoftBodyContactListener softBodyContactListener;
     // *************************************************************************
     // constructors
 
@@ -493,6 +497,15 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Access the (application-provided) soft-body contact listener.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    public SoftBodyContactListener getSoftBodyContactListener() {
+        return softBodyContactListener;
+    }
+
+    /**
      * Initialize the physics system with the specified limits.
      *
      * @param maxBodies the desired maximum number of rigid bodies that can be
@@ -674,6 +687,18 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Replace the system's soft-body contact listener.
+     *
+     * @param listener the desired listener
+     */
+    public void setSoftBodyContactListener(SoftBodyContactListener listener) {
+        this.softBodyContactListener = listener;
+        long systemVa = va();
+        long listenerVa = listener.va();
+        setSoftBodyContactListener(systemVa, listenerVa);
+    }
+
+    /**
      * Advance the simulation by the specified amount.
      *
      * @param deltaTime the total time to advance (in seconds)
@@ -801,6 +826,9 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static void setPhysicsSettings(
             long systemVa, long settingsVa);
+
+    native private static void setSoftBodyContactListener(
+            long systemVa, long listenerVa);
 
     native private static int update(long physicsSystemVa, float deltaTime,
             int collisionSteps, long allocatorVa, long jobSystemVa);

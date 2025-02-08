@@ -572,6 +572,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setPhys
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    setSoftBodyContactListener
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setSoftBodyContactListener
+  (JNIEnv *, jclass, jlong systemVa, jlong listenerVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    SoftBodyContactListener * const pListener
+            = reinterpret_cast<SoftBodyContactListener *> (listenerVa);
+    pSystem->SetSoftBodyContactListener(pListener);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    update
  * Signature: (JFIJJ)I
  */
