@@ -224,7 +224,6 @@ model {
                         cppCompiler.args '-fvisibility=hidden'
                         linker.args '-fvisibility=hidden'
                     } else if (os == 'windows') {
-                        cppCompiler.args '-I', "$javaHome/include"
                         cppCompiler.args '-I', "$javaHome/include/win32"
                     } else {
                         buildable = false
