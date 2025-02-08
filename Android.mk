@@ -106,6 +106,7 @@ $(N)/glue/cu/CustomCollideShapeCollector.cpp \
 $(N)/glue/cu/CustomContactListener.cpp \
 $(N)/glue/cu/CustomPhysicsStepListener.cpp \
 $(N)/glue/cu/CustomRayCastBodyCollector.cpp \
+$(N)/glue/cu/CustomSoftBodyContactListener.cpp \
 $(N)/glue/d/DebugRenderer.cpp \
 $(N)/glue/d/DebugRendererRecorder.cpp \
 $(N)/glue/d/DecoratedShape.cpp \
@@ -214,6 +215,7 @@ $(N)/glue/s/SkeletonPose.cpp \
 $(N)/glue/s/SkeletonPoseDrawSettings.cpp \
 $(N)/glue/s/SliderConstraint.cpp \
 $(N)/glue/s/SliderConstraintSettings.cpp \
+$(N)/glue/s/SoftBodyContactListener.cpp \
 $(N)/glue/s/SoftBodyCreationSettings.cpp \
 $(N)/glue/s/SoftBodyManifold.cpp \
 $(N)/glue/s/SoftBodyMotionProperties.cpp \
