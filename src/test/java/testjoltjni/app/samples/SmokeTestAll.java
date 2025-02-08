@@ -310,6 +310,10 @@ final public class SmokeTestAll {
      * Smoke test the "softbody" package.
      */
     private static void smokeTestSoftBody() {
+        smokeTest(new SoftBodyBendConstraintTest());
+        smokeTest(new SoftBodyContactListenerTest());
+        smokeTest(new SoftBodyCustomUpdateTest());
+        smokeTest(new SoftBodyForceTest());
         smokeTest(new SoftBodyPressureTest());
         smokeTest(new SoftBodyUpdatePositionTest());
     }
