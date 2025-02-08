@@ -193,10 +193,7 @@ final public class SmokeTestAll {
         smokeTestGeneral();
         smokeTestRig();
         smokeTestShapes();
-
-        // softbody package:
-        smokeTest(new SoftBodyPressureTest());
-        smokeTest(new SoftBodyUpdatePositionTest());
+        smokeTestSoftBody();
 
         // vehicle package:
         smokeTest(new MotorcycleTest());
@@ -307,5 +304,13 @@ final public class SmokeTestAll {
         smokeTest(new TaperedCapsuleShapeTest());
         smokeTest(new TaperedCylinderShapeTest());
         smokeTest(new TriangleShapeTest());
+    }
+
+    /**
+     * Smoke test the "softbody" package.
+     */
+    private static void smokeTestSoftBody() {
+        smokeTest(new SoftBodyPressureTest());
+        smokeTest(new SoftBodyUpdatePositionTest());
     }
 }
