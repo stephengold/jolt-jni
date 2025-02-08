@@ -143,7 +143,7 @@ model {
                 Boolean isDp = (flavor == flavors.Dp)
                 String os = targetPlatform.operatingSystem.name
 
-                // always-on CPP defines:
+                // always-on preprocessor defines:
                 cppCompiler.define 'JPH_OBJECT_STREAM'
 
                 // ISA extensions:
@@ -154,7 +154,7 @@ model {
                     cppCompiler.define 'JPH_USE_FMADD'
                 }
 
-                // buildtype-specific CPP defines:
+                // buildtype-specific preprocessor defines:
                 Boolean isDebug = (buildType == buildTypes.Debug)
                 if (isDebug) {
                     cppCompiler.define 'JPH_DEBUG_RENDERER'
@@ -165,7 +165,7 @@ model {
                     cppCompiler.define 'JPH_NO_DEBUG'
                 }
 
-                // flavor-specific CPP defines:
+                // flavor-specific preprocessor defines:
                 if (isDp) {
                     cppCompiler.define 'JPH_DOUBLE_PRECISION'
                 }
