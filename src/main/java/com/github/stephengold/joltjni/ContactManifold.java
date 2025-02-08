@@ -48,7 +48,7 @@ final public class ContactManifold
     // ConstContactManifolds methods
 
     /**
-     * Return the location from which all contact points are measured. The
+     * Copy the location from which all contact points are measured. The
      * manifold is unaffected. (native attribute: mBaseOffset)
      *
      * @return a new location vector
@@ -109,8 +109,8 @@ final public class ContactManifold
     }
 
     /**
-     * Return the normal: the direction to move body 2 out of collision. The
-     * manifold is unaffected. (native attribute: mWorldSpaceNormal)
+     * Copy the normal vector: the direction to move body 2 out of collision.
+     * The manifold is unaffected. (native attribute: mWorldSpaceNormal)
      *
      * @return a new direction vector (in system coordinates)
      */

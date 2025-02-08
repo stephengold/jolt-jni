@@ -237,8 +237,8 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Return the offset of the first sample. The settings are unaffected.
-     * (native attribute: mOffset)
+     * Copy the offset of the first sample. The settings are unaffected. (native
+     * attribute: mOffset)
      *
      * @return a new offset vector
      */
@@ -266,7 +266,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Return the scale factors. The settings are unaffected. (native attribute:
+     * Copy the scale factors. The settings are unaffected. (native attribute:
      * mScale)
      *
      * @return a new scaling vector

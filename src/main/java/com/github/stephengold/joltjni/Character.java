@@ -527,7 +527,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Return the location of the rigid body's center of mass using the locking
+     * Copy the location of the rigid body's center of mass using the locking
      * body interface. The character is unaffected.
      *
      * @return a new location vector (in system coordinates)
@@ -539,7 +539,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Return the location of the rigid body's center of mass. The character is
+     * Copy the location of the rigid body's center of mass. The character is
      * unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,

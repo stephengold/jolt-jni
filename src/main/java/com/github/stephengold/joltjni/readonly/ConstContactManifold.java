@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ public interface ConstContactManifold extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the location from which all contact points are measured. The
+     * Copy the location from which all contact points are measured. The
      * manifold is unaffected.
      *
      * @return a new location vector
@@ -68,7 +68,7 @@ public interface ConstContactManifold extends ConstJoltPhysicsObject {
     SubShapeId getSubShapeId2();
 
     /**
-     * Return the normal: the direction to move body 2 out of collision. The
+     * Copy the normal: the direction to move body 2 out of collision. The
      * manifold is unaffected.
      *
      * @return a new direction vector (in system coordinates)

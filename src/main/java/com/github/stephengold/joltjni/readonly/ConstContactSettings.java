@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -90,7 +90,7 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
     boolean getIsSensor();
 
     /**
-     * Return the relative angular velocity (body 2 minus body 1). The settings
+     * Copy the relative angular velocity (body 2 minus body 1). The settings
      * are unaffected.
      *
      * @return a new velocity vector (radians per second in system coordinates)
@@ -98,8 +98,8 @@ public interface ConstContactSettings extends ConstJoltPhysicsObject {
     Vec3 getRelativeAngularSurfaceVelocity();
 
     /**
-     * Return the relative linear velocity (body 2 minus body 1). The settings
-     * are unaffected.
+     * Copy the relative linear velocity (body 2 minus body 1). The settings are
+     * unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */

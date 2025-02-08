@@ -541,7 +541,7 @@ public class CharacterVirtual
     }
 
     /**
-     * Return the linear velocity of the character. The character is unaffected.
+     * Copy the linear velocity of the character. The character is unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */

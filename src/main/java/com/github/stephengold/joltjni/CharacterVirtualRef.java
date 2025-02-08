@@ -370,10 +370,9 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Return the body ID of the supporting surface. The character is
-     * unaffected.
+     * Copy the body ID of the supporting surface. The character is unaffected.
      *
-     * @return a new ID
+     * @return a new object
      */
     @Override
     public BodyId getGroundBodyId() {
@@ -406,7 +405,7 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Return the normal direction at the point of contact with the supporting
+     * Copy the normal direction at the point of contact with the supporting
      * surface. The character is unaffected.
      *
      * @return a new direction vector (in system coordinates)
@@ -423,7 +422,7 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Return the location of the point of contact with the supporting surface.
+     * Copy the location of the point of contact with the supporting surface.
      * The character is unaffected.
      *
      * @return a new location vector (in system coordinates)
@@ -458,7 +457,7 @@ final public class CharacterVirtualRef
      * Identify the face on the supporting surface where contact is occurring.
      * The character is unaffected.
      *
-     * @return a new ID
+     * @return a new object
      */
     @Override
     public SubShapeId getGroundSubShapeId() {
@@ -484,8 +483,8 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Return the world-space velocity of the supporting surface. The character
-     * is unaffected.
+     * Copy the world-space velocity of the supporting surface. The character is
+     * unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */
@@ -544,7 +543,7 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Return the linear velocity of the character. The character is unaffected.
+     * Copy the linear velocity of the character. The character is unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */
@@ -693,7 +692,7 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Return the character's "up" direction. The character is unaffected.
+     * Copy the character's "up" direction. The character is unaffected.
      *
      * @return a new direction vector
      */

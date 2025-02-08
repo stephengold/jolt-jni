@@ -178,7 +178,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     }
 
     /**
-     * Return the velocity of the contact point. The contact is unaffected.
+     * Copy the velocity of the contact point. The contact is unaffected.
      * (native attribute: mLinearVelocity)
      *
      * @return a new velocity vector
@@ -210,7 +210,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     }
 
     /**
-     * Return the location where the contact occurs. The contact is unaffected.
+     * Copy the location where the contact occurs. The contact is unaffected.
      * (native attribute: mPosition)
      *
      * @return a new vector (in system coordinates)
@@ -227,10 +227,10 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     }
 
     /**
-     * Return the subshape ID of the colliding body. The contact is unaffected.
+     * Copy the subshape ID of the colliding body. The contact is unaffected.
      * (native attribute: mSubShapeIDB)
      *
-     * @return a new ID, or null if no colliding body
+     * @return a new object, or null if no colliding body
      */
     @Override
     public SubShapeId getSubShapeIdB() {
@@ -245,7 +245,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     }
 
     /**
-     * Return the surface normal of the contact. The contact is unaffected.
+     * Copy the surface normal of the contact. The contact is unaffected.
      * (native attribute: mSurfaceNormal)
      *
      * @return a new direction vector

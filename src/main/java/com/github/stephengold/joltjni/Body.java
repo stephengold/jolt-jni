@@ -529,7 +529,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Return the body's angular velocity. The body is unaffected.
+     * Copy the body's angular velocity. The body is unaffected.
      *
      * @return a new velocity vector (radians per second in system coordinates)
      */
@@ -669,7 +669,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Return the body's linear velocity. The body is unaffected.
+     * Copy the body's linear velocity. The body is unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */
@@ -750,7 +750,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Return the body's orientation. The body is unaffected.
+     * Copy the body's orientation. The body is unaffected.
      *
      * @return a new rotation quaternion (relative to the system axes)
      */

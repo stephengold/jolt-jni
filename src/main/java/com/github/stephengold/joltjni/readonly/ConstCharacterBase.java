@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -64,7 +64,7 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     ConstPhysicsMaterial getGroundMaterial();
 
     /**
-     * Return the normal direction at the point of contact with the supporting
+     * Copy the normal direction at the point of contact with the supporting
      * surface. The character is unaffected.
      *
      * @return a new direction vector (in system coordinates)
@@ -72,7 +72,7 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     Vec3 getGroundNormal();
 
     /**
-     * Return the location of the point of contact with the supporting surface.
+     * Copy the location of the point of contact with the supporting surface.
      * The character is unaffected.
      *
      * @return a new location vector (in system coordinates)
@@ -104,8 +104,8 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     long getGroundUserData();
 
     /**
-     * Return the world-space velocity of the supporting surface. The character
-     * is unaffected.
+     * Copy the world-space velocity of the supporting surface. The character is
+     * unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */
@@ -120,7 +120,7 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     ConstShape getShape();
 
     /**
-     * Return the character's "up" direction. The character is unaffected.
+     * Copy the character's "up" direction. The character is unaffected.
      *
      * @return a new direction vector
      */

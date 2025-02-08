@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -144,7 +144,7 @@ public class CollideShapeResult
      * Identify the face on shape 1 where the collision occurred. The object is
      * unaffected. (native attribute: mSubShapeID1)
      *
-     * @return a new ID
+     * @return a new object
      */
     @Override
     public SubShapeId getSubShapeId1() {

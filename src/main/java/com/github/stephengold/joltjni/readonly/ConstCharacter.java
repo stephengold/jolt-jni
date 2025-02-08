@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,15 +37,15 @@ public interface ConstCharacter extends ConstCharacterBase {
     // new methods exposed
 
     /**
-     * Return the ID of the body associated with this character. The character
-     * is unaffected.
+     * Copy the ID of the body associated with this character. The character is
+     * unaffected.
      *
-     * @return a new ID
+     * @return a new object
      */
     BodyId getBodyId();
 
     /**
-     * Return the location of the rigid body's center of mass using the locking
+     * Copy the location of the rigid body's center of mass using the locking
      * body interface. The character is unaffected.
      *
      * @return a new location vector (in system coordinates)
@@ -53,7 +53,7 @@ public interface ConstCharacter extends ConstCharacterBase {
     RVec3 getCenterOfMassPosition();
 
     /**
-     * Return the location of the rigid body's center of mass. The character is
+     * Copy the location of the rigid body's center of mass. The character is
      * unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,

@@ -245,7 +245,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Return the location of the rigid body's center of mass using the locking
+     * Copy the location of the rigid body's center of mass using the locking
      * body interface. The character is unaffected.
      *
      * @return a new location vector (in system coordinates)
@@ -257,7 +257,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Return the location of the rigid body's center of mass. The character is
+     * Copy the location of the rigid body's center of mass. The character is
      * unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -291,10 +291,9 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Return the body ID of the supporting surface. The character is
-     * unaffected.
+     * Copy the body ID of the supporting surface. The character is unaffected.
      *
-     * @return a new ID
+     * @return a new object
      */
     @Override
     public BodyId getGroundBodyId() {
@@ -327,7 +326,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Return the normal direction at the point of contact with the supporting
+     * Copy the normal direction at the point of contact with the supporting
      * surface. The character is unaffected.
      *
      * @return a new direction vector (in system coordinates)
@@ -344,7 +343,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Return the location of the point of contact with the supporting surface.
+     * Copy the location of the point of contact with the supporting surface.
      * The character is unaffected.
      *
      * @return a new location vector (in system coordinates)
@@ -379,7 +378,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Identify the face on the supporting surface where contact is occurring.
      * The character is unaffected.
      *
-     * @return a new ID
+     * @return a new object
      */
     @Override
     public SubShapeId getGroundSubShapeId() {
@@ -405,8 +404,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Return the world-space velocity of the supporting surface. The character
-     * is unaffected.
+     * Copy the world-space velocity of the supporting surface. The character is
+     * unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */
@@ -595,7 +594,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Return the character's "up" direction. The character is unaffected.
+     * Copy the character's "up" direction. The character is unaffected.
      *
      * @return a new direction vector
      */

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -109,10 +109,9 @@ abstract public class CharacterBase
     }
 
     /**
-     * Return the body ID of the supporting surface. The character is
-     * unaffected.
+     * Copy the body ID of the supporting surface. The character is unaffected.
      *
-     * @return a new ID
+     * @return a new object
      */
     @Override
     public BodyId getGroundBodyId() {
@@ -145,7 +144,7 @@ abstract public class CharacterBase
     }
 
     /**
-     * Return the normal direction at the point of contact with the supporting
+     * Copy the normal direction at the point of contact with the supporting
      * surface. The character is unaffected.
      *
      * @return a new direction vector (in system coordinates)
@@ -162,7 +161,7 @@ abstract public class CharacterBase
     }
 
     /**
-     * Return the location of the point of contact with the supporting surface.
+     * Copy the location of the point of contact with the supporting surface.
      * The character is unaffected.
      *
      * @return a new location vector (in system coordinates)
@@ -197,7 +196,7 @@ abstract public class CharacterBase
      * Identify the face on the supporting surface where contact is occurring.
      * The character is unaffected.
      *
-     * @return a new ID
+     * @return a new object
      */
     @Override
     public SubShapeId getGroundSubShapeId() {
@@ -223,8 +222,8 @@ abstract public class CharacterBase
     }
 
     /**
-     * Return the world-space velocity of the supporting surface. The character
-     * is unaffected.
+     * Copy the world-space velocity of the supporting surface. The character is
+     * unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */
@@ -255,7 +254,7 @@ abstract public class CharacterBase
     }
 
     /**
-     * Return the character's "up" direction. The character is unaffected.
+     * Copy the character's "up" direction. The character is unaffected.
      *
      * @return a new direction vector
      */

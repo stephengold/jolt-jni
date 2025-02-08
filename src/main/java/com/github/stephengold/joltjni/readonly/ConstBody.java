@@ -47,14 +47,14 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     boolean canBeKinematicOrDynamic();
 
     /**
-     * Return the net force acting on the body. The body is unaffected.
+     * Copy the net force acting on the body. The body is unaffected.
      *
      * @return a new force vector (Newtons in system coordinates)
      */
     Vec3 getAccumulatedForce();
 
     /**
-     * Return the net torque acting on the body. The body is unaffected.
+     * Copy the net torque acting on the body. The body is unaffected.
      *
      * @return a new torque vector (Newton.meters in system coordinates)
      */
@@ -68,7 +68,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     boolean getAllowSleeping();
 
     /**
-     * Return the body's angular velocity. The body is unaffected.
+     * Copy the body's angular velocity. The body is unaffected.
      *
      * @return a new velocity vector (radians per second in system coordinates)
      */
@@ -138,7 +138,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     ConstBodyId getId();
 
     /**
-     * Return the body's linear velocity. The body is unaffected.
+     * Copy the body's linear velocity. The body is unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */
@@ -159,8 +159,8 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     int getObjectLayer();
 
     /**
-     * Return the location of the body's origin (which might not coincide with
-     * its center of mass). The body is unaffected.
+     * Copy the location of the body's origin (which might not coincide with its
+     * center of mass). The body is unaffected.
      *
      * @return a new location vector (in system coordinates, all components
      * finite)
@@ -175,7 +175,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     float getRestitution();
 
     /**
-     * Return the body's orientation. The body is unaffected.
+     * Copy the body's orientation. The body is unaffected.
      *
      * @return a new rotation quaternion (relative to the system axes)
      */

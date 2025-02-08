@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -61,7 +61,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
     CharacterVirtual getCharacterB();
 
     /**
-     * Return the contact normal. The contact is unaffected.
+     * Copy the contact normal. The contact is unaffected.
      *
      * @return a new direction vector, pointing toward the character
      */
@@ -100,7 +100,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
     boolean getIsSensorB();
 
     /**
-     * Return the velocity of the contact point. The contact is unaffected.
+     * Copy the velocity of the contact point. The contact is unaffected.
      *
      * @return a new velocity vector
      */
@@ -115,7 +115,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
     EMotionType getMotionTypeB();
 
     /**
-     * Return the location where the contact occurs. The contact is unaffected.
+     * Copy the location where the contact occurs. The contact is unaffected.
      *
      * @return a new vector (in system coordinates)
      */
@@ -129,7 +129,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
     SubShapeId getSubShapeIdB();
 
     /**
-     * Return the surface normal of the contact. The contact is unaffected.
+     * Copy the surface normal of the contact. The contact is unaffected.
      *
      * @return a new direction vector
      */

@@ -58,7 +58,7 @@ public class MotionProperties extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the net force acting on the body.
+     * Copy the net force acting on the body. The properties are unaffected.
      *
      * @return a new force vector (Newtons in system coordinates)
      */
@@ -73,7 +73,7 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the net torque acting on the body.
+     * Copy the net torque acting on the body. The properties are unaffected.
      *
      * @return a new torque vector (Newton.meters in system coordinates)
      */
@@ -88,7 +88,7 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the allowed degrees of freedom.
+     * Return the allowed degrees of freedom. The properties are unaffected.
      *
      * @return logical OR of values defined in {@code EAllowedDofs}
      */
@@ -100,7 +100,8 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Test whether the body is allowed to fall asleep.
+     * Test whether the body is allowed to fall asleep. The properties are
+     * unaffected.
      *
      * @return {@code true} if allowed, otherwise {@code false}
      */
@@ -112,7 +113,7 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the angular damping coefficient.
+     * Return the angular damping coefficient. The properties are unaffected.
      *
      * @return the coefficient value (in units of per second, &ge;0, &le;1)
      */
@@ -125,7 +126,7 @@ public class MotionProperties extends JoltPhysicsObject {
 
     /**
      * Returns a vector in which the disabled angular components are set to zero
-     * and enabled ones are set to -1.
+     * and enabled ones are set to -1. The properties are unaffected.
      *
      * @return a new vector
      */
@@ -148,7 +149,7 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the angular velocity.
+     * Copy the angular velocity. The properties are unaffected.
      *
      * @return a new velocity vector (radians per second in system coordinates)
      */
@@ -163,7 +164,7 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the gravity factor.
+     * Return the gravity factor. The properties are unaffected.
      *
      * @return the factor
      */
@@ -176,7 +177,7 @@ public class MotionProperties extends JoltPhysicsObject {
 
     /**
      * Return the rotation that takes the inverse-inertia diagonal to local
-     * coordinates.
+     * coordinates. The properties are unaffected.
      *
      * @return a new instance
      */
@@ -192,8 +193,8 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the diagonal components of the inverse inertia matrix, assuming a
-     * dynamic body.
+     * Copies the diagonal components of the inverse inertia matrix, assuming a
+     * dynamic body. The properties are unaffected.
      *
      * @return a new vector (all components &ge;0)
      */
@@ -208,7 +209,7 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the body's inverse mass.
+     * Return the body's inverse mass. The properties are unaffected.
      *
      * @return the value (&ge;0)
      */
@@ -220,7 +221,7 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the body's inverse mass.
+     * Return the body's inverse mass. The properties are unaffected.
      *
      * @return the value (&ge;0)
      */
@@ -232,7 +233,7 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the linear damping coefficient.
+     * Return the linear damping coefficient. The properties are unaffected.
      *
      * @return the coefficient value (in units of per second, &ge;0, &le;1)
      */
@@ -244,7 +245,7 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the linear velocity.
+     * Copy the linear velocity. The properties are unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */
@@ -259,7 +260,7 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the inverse-inertia matrix.
+     * Copy the inverse-inertia matrix. The properties are unaffected.
      *
      * @return a new object
      */
@@ -272,7 +273,8 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the maximum angular speed that the body can achieve.
+     * Return the maximum angular speed that the body can achieve. The
+     * properties are unaffected.
      *
      * @return the speed limit (in radians per second)
      */
@@ -284,7 +286,8 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the maximum linear speed that the body can achieve.
+     * Return the maximum linear speed that the body can achieve. The properties
+     * are unaffected.
      *
      * @return the speed limit (in meters per second)
      */
@@ -296,7 +299,7 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the motion quality.
+     * Return the motion quality. The properties are unaffected.
      *
      * @return an enum value (not null)
      */
@@ -309,7 +312,8 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the number of position iterations used in the solver.
+     * Return the number of position iterations used in the solver. The
+     * properties are unaffected.
      *
      * @return the count (&gt;0) or 0 to use number specified in the
      * {@code PhysicsSettings}
@@ -322,8 +326,8 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
-     * Return the number of velocity iterations used in the solver, or 0 to use
-     * number specified in the {@code PhysicsSettings}.
+     * Return the number of velocity iterations used in the solver. The
+     * properties are unaffected.
      *
      * @return the count (&gt;0) or 0 to use number specified in the
      * {@code PhysicsSettings}

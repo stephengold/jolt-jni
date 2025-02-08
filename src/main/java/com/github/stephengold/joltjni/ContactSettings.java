@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -270,7 +270,7 @@ public class ContactSettings
     }
 
     /**
-     * Return the relative angular velocity (body 2 minus body 1). The settings
+     * Copy the relative angular velocity (body 2 minus body 1). The settings
      * are unaffected. (native attribute: mRelativeAngularSurfaceVelocity)
      *
      * @return a new velocity vector (radians per second in system coordinates)
@@ -287,8 +287,8 @@ public class ContactSettings
     }
 
     /**
-     * Return the relative linear velocity (body 2 minus body 1). The settings
-     * are unaffected. (native attribute: mRelativeLinearSurfaceVelocity)
+     * Copy the relative linear velocity (body 2 minus body 1). The settings are
+     * unaffected. (native attribute: mRelativeLinearSurfaceVelocity)
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */
