@@ -215,6 +215,7 @@ $(N)/glue/s/SkeletonPoseDrawSettings.cpp \
 $(N)/glue/s/SliderConstraint.cpp \
 $(N)/glue/s/SliderConstraintSettings.cpp \
 $(N)/glue/s/SoftBodyCreationSettings.cpp \
+$(N)/glue/s/SoftBodyManifold.cpp \
 $(N)/glue/s/SoftBodyMotionProperties.cpp \
 $(N)/glue/s/SoftBodySharedSettings.cpp \
 $(N)/glue/s/SoftBodyVertex.cpp \
