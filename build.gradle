@@ -17,7 +17,7 @@ plugins {
 // or by -P options on the Gradle command line.
 
 ext {
-    downloadZip = 'downloads/JoltPhysics-sg250126.zip'
+    downloadedJoltZip = 'downloads/JoltPhysics-sg250126.zip'
     groupID = 'com.github.stephengold'
     baseName = "${artifact}-${jjVersion}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
@@ -501,14 +501,14 @@ static def base64Decode(encodedString) {
 
 // Register tasks to download and unpack JoltPhysics source code and assets:
 
-tasks.register('downloadJoltSource', Download) {
+tasks.register('downloadJoltZip', Download) {
     src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/sg250126.zip'
-    dest file(downloadZip)
+    dest file(downloadedJoltZip)
     overwrite false
 }
 tasks.register('unpackJoltAssets', Copy) {
-    dependsOn 'downloadJoltSource'
-    from (zipTree(downloadZip)) {
+    dependsOn 'downloadJoltZip'
+    from (zipTree(downloadedJoltZip)) {
         include 'JoltPhysics-sg250126/Assets/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
@@ -518,8 +518,8 @@ tasks.register('unpackJoltAssets', Copy) {
     into layout.projectDirectory.dir('Assets')
 }
 tasks.register('unpackJoltSource', Copy) {
-    dependsOn 'downloadJoltSource'
-    from (zipTree(downloadZip)) {
+    dependsOn 'downloadJoltZip'
+    from (zipTree(downloadedJoltZip)) {
         include 'JoltPhysics-sg250126/Jolt/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
@@ -529,8 +529,8 @@ tasks.register('unpackJoltSource', Copy) {
     into layout.projectDirectory.dir('src/main/native/Jolt')
 }
 tasks.register('unpackTestFramework', Copy) {
-    dependsOn 'downloadJoltSource'
-    from (zipTree(downloadZip)) {
+    dependsOn 'downloadJoltZip'
+    from (zipTree(downloadedJoltZip)) {
         include 'JoltPhysics-sg250126/TestFramework/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
