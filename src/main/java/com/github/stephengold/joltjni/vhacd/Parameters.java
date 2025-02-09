@@ -198,10 +198,13 @@ public class Parameters extends JoltPhysicsObject {
      *
      * @param setting {@code true} to run on a new thread, or {@code false} to
      * run on the current thread (default=true)
+     * @return the modified properties, for chaining
      */
-    public void setAsyncAcd(boolean setting) {
+    public Parameters setAsyncAcd(boolean setting) {
         long parametersVa = va();
         setAsyncAcd(parametersVa, setting);
+
+        return this;
     }
 
     /**
@@ -209,9 +212,11 @@ public class Parameters extends JoltPhysicsObject {
      *
      * @param setting {@code true} to enable, otherwise {@code false}
      * (default=false)
+     * @return the modified properties, for chaining
      */
-    public void setDebugOutputEnabled(boolean setting) {
+    public Parameters setDebugOutputEnabled(boolean setting) {
         this.enableDebugOutput = setting;
+        return this;
     }
 
     /**
@@ -219,11 +224,14 @@ public class Parameters extends JoltPhysicsObject {
      * field: m_fillMode)
      *
      * @param mode an enum value (not null, default=FloodFill)
+     * @return the modified properties, for chaining
      */
-    public void setFillMode(FillMode mode) {
+    public Parameters setFillMode(FillMode mode) {
         long parametersVa = va();
         int ordinal = mode.ordinal();
         setFillMode(parametersVa, ordinal);
+
+        return this;
     }
 
     /**
@@ -232,10 +240,13 @@ public class Parameters extends JoltPhysicsObject {
      *
      * @param setting {@code true} to split at the optimal location,
      * {@code false} to split in the middle (default=false)
+     * @return the modified properties, for chaining
      */
-    public void setFindBestPlane(boolean setting) {
+    public Parameters setFindBestPlane(boolean setting) {
         long parameterVa = va();
         setFindBestPlane(parameterVa, setting);
+
+        return this;
     }
 
     /**
@@ -243,12 +254,15 @@ public class Parameters extends JoltPhysicsObject {
      * m_maxConvexHulls)
      *
      * @param number the desired maximum number (&ge;1, &le;1_024, default=64)
+     * @return the modified properties, for chaining
      */
-    public void setMaxConvexHulls(int number) {
+    public Parameters setMaxConvexHulls(int number) {
         assert number >= 1 && number <= 1_024 : "number = " + number;
 
         long parameterVa = va();
         setMaxConvexHulls(parameterVa, number);
+
+        return this;
     }
 
     /**
@@ -256,12 +270,15 @@ public class Parameters extends JoltPhysicsObject {
      * m_maxNumVerticesPerCH)
      *
      * @param number the desired maximum number (&ge;4, &le;2_048, default=64)
+     * @return the modified properties, for chaining
      */
-    public void setMaxNumVerticesPerCh(int number) {
+    public Parameters setMaxNumVerticesPerCh(int number) {
         assert number >= 4 && number <= 2_048 : "number = " + number;
 
         long parameterVa = va();
         setMaxNumVerticesPerCh(parameterVa, number);
+
+        return this;
     }
 
     /**
@@ -269,24 +286,30 @@ public class Parameters extends JoltPhysicsObject {
      *
      * @param depth the desired maximum number of levels (&ge;2, &le;64,
      * default=10)
+     * @return the modified properties, for chaining
      */
-    public void setMaxRecursionDepth(int depth) {
+    public Parameters setMaxRecursionDepth(int depth) {
         assert depth >= 2 && depth <= 64 : "depth = " + depth;
 
         long parameterVa = va();
         setMaxRecursionDepth(parameterVa, depth);
+
+        return this;
     }
 
     /**
      * Alter the minimum edge length. (native field: m_minEdgeLength)
      *
      * @param length the desired minimum (&ge;1, &le;32, default=2)
+     * @return the modified properties, for chaining
      */
-    public void setMinEdgeLength(int length) {
+    public Parameters setMinEdgeLength(int length) {
         assert length >= 1 && length <= 32 : "length = " + length;
 
         long parametersVa = va();
         setMinEdgeLength(parametersVa, length);
+
+        return this;
     }
 
     /**
@@ -296,12 +319,15 @@ public class Parameters extends JoltPhysicsObject {
      *
      * @param percentage the desired maximum error (as a percentage, &gt;0,
      * &lt;100, default=1)
+     * @return the modified properties, for chaining
      */
-    public void setMinimumVolumePercentErrorAllowed(double percentage) {
+    public Parameters setMinimumVolumePercentErrorAllowed(double percentage) {
         assert percentage >= 0 && percentage <= 100 : "percentage" + percentage;
 
         long parameterVa = va();
         setMinimumVolumePercentErrorAllowed(parameterVa, percentage);
+
+        return this;
     }
 
     /**
@@ -310,13 +336,16 @@ public class Parameters extends JoltPhysicsObject {
      *
      * @param maxVoxels the desired maximum number (&ge;10_000, &le; 64_000_000,
      * default=400_000)
+     * @return the modified properties, for chaining
      */
-    public void setResolution(int maxVoxels) {
+    public Parameters setResolution(int maxVoxels) {
         assert maxVoxels >= 10_000 && maxVoxels <= 64_000_000 :
                 "maxVoxels = " + maxVoxels;
 
         long parametersVa = va();
         setResolution(parametersVa, maxVoxels);
+
+        return this;
     }
 
     /**
@@ -325,10 +354,13 @@ public class Parameters extends JoltPhysicsObject {
      *
      * @param setting {@code true} to enable shrinkwrap, otherwise {@code false}
      * (default=true)
+     * @return the modified properties, for chaining
      */
-    public void setShrinkWrap(boolean setting) {
+    public Parameters setShrinkWrap(boolean setting) {
         long parameterVa = va();
         setShrinkWrap(parameterVa, setting);
+
+        return this;
     }
     // *************************************************************************
     // JoltPhysicsObject methods
