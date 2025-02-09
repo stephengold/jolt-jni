@@ -23,6 +23,7 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
+#include "Jolt/Jolt.h"
 #include "VHACD.h"
 #include "auto/com_github_stephengold_joltjni_vhacd_Parameters.h"
 #include "glue/glue.h"
