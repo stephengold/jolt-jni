@@ -91,7 +91,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialList_
     PhysicsMaterialList * const pList
             = reinterpret_cast<PhysicsMaterialList *> (listVa);
     RefConst<PhysicsMaterial>& element = pList->at(elementIndex);
-    RefConst<PhysicsMaterial>* pResult = new RefConst<PhysicsMaterial> (element);
+    RefConst<PhysicsMaterial>* pResult = new RefConst<PhysicsMaterial>(element);
     TRACE_NEW("RefConst<PhysicsMaterial>", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
