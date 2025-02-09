@@ -83,6 +83,7 @@ $(N)/glue/co/ContactListener.cpp \
 $(N)/glue/co/ContactManifold.cpp \
 $(N)/glue/co/ContactSettings.cpp \
 $(N)/glue/co/ConvexHullBuilder.cpp \
+$(N)/glue/co/ConvexHull.cpp \
 $(N)/glue/co/ConvexHullShape.cpp \
 $(N)/glue/co/ConvexHullShapeSettings.cpp \
 $(N)/glue/co/ConvexShape.cpp \
