@@ -172,6 +172,7 @@ $(N)/glue/ph/PhysicsSceneResult.cpp \
 $(N)/glue/ph/PhysicsSettings.cpp \
 $(N)/glue/ph/PhysicsStepListenerContext.cpp \
 $(N)/glue/ph/PhysicsSystem.cpp \
+$(N)/glue/p/Parameters.cpp \
 $(N)/glue/p/Part.cpp \
 $(N)/glue/p/PathConstraint.cpp \
 $(N)/glue/p/PathConstraintPath.cpp \

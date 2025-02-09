@@ -55,6 +55,8 @@ import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.vhacd.FillMode;
+import com.github.stephengold.joltjni.vhacd.Parameters;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -86,6 +88,7 @@ public class Test003 {
         doJobSystemThreadPool();
         doMassProperties();
         doMotionProperties();
+        doParameters();
         doTempAllocatorImpl();
         doTempAllocatorImplWithMallocFallback();
         doTempAllocatorMalloc();
@@ -294,6 +297,19 @@ public class Test003 {
         testMotionSetters(props);
 
         TestUtils.testClose(props);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code Parameters} class.
+     */
+    private static void doParameters() {
+        Parameters parameters = new Parameters();
+
+        testParametersDefaults(parameters);
+        testParametersSetters(parameters);
+
+        TestUtils.testClose(parameters);
         System.gc();
     }
 
@@ -575,6 +591,61 @@ public class Test003 {
 
         props.setNumVelocityStepsOverride(13);
         Assert.assertEquals(13, props.getNumVelocityStepsOverride());
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code Parameters}.
+     *
+     * @param params the parameters to test (not null, unaffected)
+     */
+    private static void testParametersDefaults(Parameters params) {
+        Assert.assertTrue(params.hasAssignedNativeObject());
+        Assert.assertTrue(params.ownsNativeObject());
+
+        Assert.assertTrue(params.getAsyncAcd());
+        Assert.assertFalse(params.isDebugOutputEnabled());
+        Assert.assertEquals(FillMode.FloodFill, params.getFillMode());
+        Assert.assertFalse(params.getFindBestPlane());
+        Assert.assertEquals(64, params.getMaxConvexHulls());
+        Assert.assertEquals(64, params.getMaxNumVerticesPerCh());
+        Assert.assertEquals(10, params.getMaxRecursionDepth());
+        Assert.assertEquals(2, params.getMinEdgeLength());
+        Assert.assertEquals(
+                1., params.getMinimumVolumePercentErrorAllowed(), 0.);
+        Assert.assertEquals(400_000, params.getResolution());
+        Assert.assertTrue(params.getShrinkWrap());
+    }
+
+    /**
+     * Test the setters of the specified {@code Parameters}.
+     *
+     * @param params properties to test (not null, modified)
+     */
+    private static void testParametersSetters(Parameters params) {
+        params.setAsyncAcd(false);
+        params.setDebugOutputEnabled(true);
+        params.setFillMode(FillMode.RaycastFill);
+        params.setFindBestPlane(true);
+        params.setMaxConvexHulls(123);
+        params.setMaxNumVerticesPerCh(67);
+        params.setMaxRecursionDepth(8);
+        params.setMinEdgeLength(9);
+        params.setMinimumVolumePercentErrorAllowed(12.);
+        params.setResolution(345_678);
+        params.setShrinkWrap(false);
+
+        Assert.assertFalse(params.getAsyncAcd());
+        Assert.assertTrue(params.isDebugOutputEnabled());
+        Assert.assertEquals(FillMode.RaycastFill, params.getFillMode());
+        Assert.assertTrue(params.getFindBestPlane());
+        Assert.assertEquals(123, params.getMaxConvexHulls());
+        Assert.assertEquals(67, params.getMaxNumVerticesPerCh());
+        Assert.assertEquals(8, params.getMaxRecursionDepth());
+        Assert.assertEquals(9, params.getMinEdgeLength());
+        Assert.assertEquals(
+                12., params.getMinimumVolumePercentErrorAllowed(), 0.);
+        Assert.assertEquals(345_678, params.getResolution());
+        Assert.assertFalse(params.getShrinkWrap());
     }
 
     /**
