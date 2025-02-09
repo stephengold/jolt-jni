@@ -110,6 +110,7 @@ $(N)/glue/cu/CustomRayCastBodyCollector.cpp \
 $(N)/glue/cu/CustomSoftBodyContactListener.cpp \
 $(N)/glue/d/DebugRenderer.cpp \
 $(N)/glue/d/DebugRendererRecorder.cpp \
+$(N)/glue/d/Decomposer.cpp \
 $(N)/glue/d/DecoratedShape.cpp \
 $(N)/glue/d/DefaultBroadPhaseLayerFilter.cpp \
 $(N)/glue/d/DefaultObjectLayerFilter.cpp \
