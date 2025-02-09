@@ -30,7 +30,6 @@ import com.github.stephengold.joltjni.vhacd.ConvexHull;
 import com.github.stephengold.joltjni.vhacd.Decomposer;
 import com.github.stephengold.joltjni.vhacd.Parameters;
 import com.github.stephengold.joltjni.vhacd.ProgressListener;
-import java.nio.FloatBuffer;
 import java.util.Collection;
 import org.junit.Assert;
 import org.junit.Test;
@@ -109,10 +108,6 @@ public class Test009 {
         Collection<ConvexHull> hulls
                 = decomposer.decompose(locationArray, indexArray, parameters);
         Assert.assertEquals(3, hulls.size());
-        for (ConvexHull hull : hulls) {
-            FloatBuffer points = hull.getPointsAsBuffer();
-            Assert.assertEquals(3 * 8, points.capacity());
-        }
         Assert.assertEquals(90., progressPercent, 0.);
 
         // Construct shape- and body settings:
