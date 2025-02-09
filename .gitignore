@@ -4,6 +4,7 @@
 /src/main/native/auto/
 /src/main/native/Jolt/
 /src/main/native/TestFramework/
+/src/main/native/VHACD.h
 
 # Ignore Gradle's project-specific cache directory:
 /.gradle/

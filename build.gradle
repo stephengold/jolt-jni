@@ -18,6 +18,8 @@ plugins {
 
 ext {
     downloadedJoltZip = 'downloads/JoltPhysics-sg250126.zip'
+    downloadedVhacdZip = 'downloads/v-hacd-4.1.0.zip'
+
     groupID = 'com.github.stephengold'
     baseName = "${artifact}-${jjVersion}" // for artifacts
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
@@ -25,7 +27,8 @@ ext {
 
 // Generate all JNI header files and unpack Jolt before compiling any C++ code:
 tasks.withType(CppCompile).configureEach {
-    dependsOn('classes', 'compileTestJava', 'unpackJoltSource', 'unpackTestFramework')
+    dependsOn('classes', 'compileTestJava', \
+            'unpackJoltSource', 'unpackTestFramework', 'unpackVhacdSource')
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
@@ -499,13 +502,21 @@ static def base64Decode(encodedString) {
     return null
 }
 
-// Register tasks to download and unpack JoltPhysics source code and assets:
+// Register tasks to download ZIP archives:
 
 tasks.register('downloadJoltZip', Download) {
     src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/sg250126.zip'
     dest file(downloadedJoltZip)
     overwrite false
 }
+tasks.register('downloadVhacdZip', Download) {
+    src 'https://github.com/kmammou/v-hacd/archive/refs/tags/v4.1.0.zip'
+    dest file(downloadedVhacdZip)
+    overwrite false
+}
+
+// Register tasks to unpack assets and source code:
+
 tasks.register('unpackJoltAssets', Copy) {
     dependsOn 'downloadJoltZip'
     from (zipTree(downloadedJoltZip)) {
@@ -539,13 +550,25 @@ tasks.register('unpackTestFramework', Copy) {
     }
     into layout.projectDirectory.dir('src/main/native/TestFramework')
 }
+tasks.register('unpackVhacdSource', Copy) {
+    dependsOn 'downloadVhacdZip'
+    from (zipTree(downloadedVhacdZip)) {
+        include 'v-hacd-4.1.0/include/VHACD.h'
+        eachFile { fcd ->
+            fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
+        }
+        includeEmptyDirs = false
+    }
+    into layout.projectDirectory.dir('src/main/native')
+}
 
 // Register cleanup tasks:
 
 clean.dependsOn('cleanAutoHeaders', 'cleanLogs', 'cleanRecordings')
 
 tasks.register('cleanAll') { // restore the project to a pristine state
-    dependsOn('clean', 'cleanDownloads', 'cleanJoltAssets', 'cleanJoltSource', 'cleanTestFramework')
+    dependsOn('clean', 'cleanDownloads', \
+            'cleanJoltAssets', 'cleanJoltSource', 'cleanTestFramework', 'cleanVhacdSource')
 }
 
 tasks.register('cleanAutoHeaders', Delete) { // auto-generated JNI headers
@@ -569,4 +592,7 @@ tasks.register('cleanRecordings', Delete) {
 }
 tasks.register('cleanTestFramework', Delete) { // unpacked Jolt Physics TestFramework source code
     delete 'src/main/native/TestFramework'
+}
+tasks.register('cleanVhacdSource', Delete) { // unpacked V-HACD source code
+    delete 'src/main/native/VHACD.h'
 }
