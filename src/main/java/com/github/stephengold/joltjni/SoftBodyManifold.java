@@ -130,9 +130,11 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
         long manifoldVa = va();
         int numVertices = countVertices(manifoldVa);
         SoftBodyVertex[] result = new SoftBodyVertex[numVertices];
+
+        JoltPhysicsObject container = ownsNativeObject() ? this : null;
         for (int i = 0; i < numVertices; ++i) {
             long vertexVa = getVertex(manifoldVa, i);
-            result[i] = new SoftBodyVertex(this, vertexVa);
+            result[i] = new SoftBodyVertex(container, vertexVa);
         }
 
         return result;
