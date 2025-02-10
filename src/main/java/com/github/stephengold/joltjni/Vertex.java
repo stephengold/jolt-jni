@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,6 +39,17 @@ public class Vertex extends JoltPhysicsObject {
     public Vertex() {
         long vertexVa = createDefault();
         setVirtualAddress(vertexVa, () -> free(vertexVa));
+    }
+
+    /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param vertexVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    Vertex(JoltPhysicsObject container, long vertexVa) {
+        super(container, vertexVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -103,12 +114,39 @@ public class Vertex extends JoltPhysicsObject {
      *
      * @param location the desired location (not null, unaffected)
      */
+    public void setPosition(Float3 location) {
+        long vertexVa = va();
+        float x = location.x;
+        float y = location.y;
+        float z = location.z;
+        setPosition(vertexVa, x, y, z);
+    }
+
+    /**
+     * Alter the initial location of the vertex.
+     *
+     * @param location the desired location (not null, unaffected)
+     */
     public void setPosition(Vec3Arg location) {
         long vertexVa = va();
         float x = location.getX();
         float y = location.getY();
         float z = location.getZ();
         setPosition(vertexVa, x, y, z);
+    }
+
+    /**
+     * Alter the initial velocity of the vertex.
+     *
+     * @param velocity the desired velocity (in meters per second, not null,
+     * unaffected)
+     */
+    public void setVelocity(Float3 velocity) {
+        long vertexVa = va();
+        float vx = velocity.x;
+        float vy = velocity.y;
+        float vz = velocity.z;
+        setVelocity(vertexVa, vx, vy, vz);
     }
 
     /**
