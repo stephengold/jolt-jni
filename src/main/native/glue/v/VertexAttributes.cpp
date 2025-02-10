@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,6 +43,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_cre
     SoftBodySharedSettings::VertexAttributes * const pResult
             = new SoftBodySharedSettings::VertexAttributes(compliance,
                     shearCompliance, bendCompliance, lraType, lraMultiplier);
+    TRACE_NEW("SoftBodySharedSettings::VertexAttributes", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VertexAttributes
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_createDefault
+  (JNIEnv *, jclass) {
+    SoftBodySharedSettings::VertexAttributes * const pResult
+            = new SoftBodySharedSettings::VertexAttributes();
     TRACE_NEW("SoftBodySharedSettings::VertexAttributes", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
@@ -123,4 +136,42 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_ge
             = reinterpret_cast<SoftBodySharedSettings::VertexAttributes *> (attributesVa);
     const float result = pAttributes->mShearCompliance;
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VertexAttributes
+ * Method:    setCompliance
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_setCompliance
+  (JNIEnv *, jclass, jlong attributesVa, jfloat compliance) {
+    SoftBodySharedSettings::VertexAttributes * const pAttributes
+            = reinterpret_cast<SoftBodySharedSettings::VertexAttributes *> (attributesVa);
+    pAttributes->mCompliance = compliance;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VertexAttributes
+ * Method:    setLraType
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_setLraType
+  (JNIEnv *, jclass, jlong attributesVa, jint ordinal) {
+    SoftBodySharedSettings::VertexAttributes * const pAttributes
+            = reinterpret_cast<SoftBodySharedSettings::VertexAttributes *> (attributesVa);
+    const SoftBodySharedSettings::ELRAType value
+            = (SoftBodySharedSettings::ELRAType) ordinal;
+    pAttributes->mLRAType = value;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VertexAttributes
+ * Method:    setShearCompliance
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_setShearCompliance
+  (JNIEnv *, jclass, jlong attributesVa, jfloat compliance) {
+    SoftBodySharedSettings::VertexAttributes * const pAttributes
+            = reinterpret_cast<SoftBodySharedSettings::VertexAttributes *> (attributesVa);
+    pAttributes->mShearCompliance = compliance;
 }

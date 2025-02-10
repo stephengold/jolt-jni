@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,6 +35,14 @@ public class VertexAttributes
         implements ConstVertexAttributes {
     // *************************************************************************
     // constructors
+
+    /**
+     * Instantiate default attributes.
+     */
+    public VertexAttributes() {
+        long attributesVa = createDefault();
+        setVirtualAddress(attributesVa, () -> free(attributesVa));
+    }
 
     /**
      * Instantiate attributes as specified.
@@ -88,6 +96,48 @@ public class VertexAttributes
         long attributesVa = createAttributes(compliance, shearCompliance,
                 bendCompliance, ordinal, lraMultiplier);
         setVirtualAddress(attributesVa, () -> free(attributesVa));
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Alter the compliance of normal/regular edges. (native attribute:
+     * mCompliance)
+     *
+     * @param compliance the desired compliance value
+     * @return the argument, for chaining
+     */
+    public float setCompliance(float compliance) {
+        long attributesVa = va();
+        setCompliance(attributesVa, compliance);
+
+        return compliance;
+    }
+
+    /**
+     * Alter the type of the long-range attachment (LRA) constraint. (native
+     * attribute: mLRAType)
+     *
+     * @param type the desired type (not null)
+     */
+    public void setLraType(ELraType type) {
+        long attributesVa = va();
+        int ordinal = type.ordinal();
+        setLraType(attributesVa, ordinal);
+    }
+
+    /**
+     * Alter the compliance of the shear edges. (native attribute:
+     * mShearCompliance)
+     *
+     * @param compliance the desired compliance value
+     * @return the argument, for chaining
+     */
+    public float setShearCompliance(float compliance) {
+        long attributesVa = va();
+        setShearCompliance(attributesVa, compliance);
+
+        return compliance;
     }
     // *************************************************************************
     // ConstVertexAttributes methods
@@ -170,6 +220,8 @@ public class VertexAttributes
             float compliance, float shearCompliance, float bendCompliance,
             int ordinal, float lraMultiplier);
 
+    native private static long createDefault();
+
     native private static void free(long attributesVa);
 
     native private static float getBendCompliance(long attributesVa);
@@ -181,4 +233,12 @@ public class VertexAttributes
     native private static int getLraType(long attributesVa);
 
     native private static float getShearCompliance(long attributesVa);
+
+    native private static void setCompliance(
+            long attributesVa, float compliance);
+
+    native private static void setLraType(long attributesVa, int ordinal);
+
+    native private static void setShearCompliance(
+            long attributesVa, float compliance);
 }
