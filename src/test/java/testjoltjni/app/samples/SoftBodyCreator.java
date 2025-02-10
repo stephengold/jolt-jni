@@ -41,7 +41,7 @@ public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSi
 public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ,float inGridSpacing,BiFunction<Integer,Integer,Float>inVertexGetInvMass,BiFunction<Integer,Integer,Vec3> inVertexPerturbation, EBendType inBendType) {
     return CreateCloth(inGridSizeX,inGridSizeZ,inGridSpacing,inVertexGetInvMass,inVertexPerturbation,inBendType,new VertexAttributes(1e-5f,1e-5f,1e-5f));}
 
-static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX, int inGridSizeZ, float inGridSpacing,  BiFunction<Integer, Integer,Float> inVertexGetInvMass, BiFunction<Integer, Integer,Vec3> inVertexPerturbation, EBendType inBendType, ConstVertexAttributes inVertexAttributes)
+public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX, int inGridSizeZ, float inGridSpacing,  BiFunction<Integer, Integer,Float> inVertexGetInvMass, BiFunction<Integer, Integer,Vec3> inVertexPerturbation, EBendType inBendType, ConstVertexAttributes inVertexAttributes)
 {
 	final float cOffsetX = -0.5f * inGridSpacing * (inGridSizeX - 1);
 	final float cOffsetZ = -0.5f * inGridSpacing * (inGridSizeZ - 1);
