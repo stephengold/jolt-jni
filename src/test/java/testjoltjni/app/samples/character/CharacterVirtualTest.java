@@ -76,7 +76,7 @@ public void Initialize()
 	mCharacterVsCharacterCollision.add(mCharacter);
 
 	// Install contact listener for all characters
-	for (CharacterVirtualRef character : mCharacterVsCharacterCollision.getCharactersAsArray())
+	for (CharacterVirtualRef character : mCharacterVsCharacterCollision.getCharacters())
 		character.getPtr().setListener(new CustomCharacterContactListener() {
 		    public void onContactAdded(long characterVa, long bodyId2Va, long subShapeId2Va, double contactLocationX, double contactLocationY,
 			   double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, long settingsVa) {

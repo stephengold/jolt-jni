@@ -71,7 +71,7 @@ public class CharacterVsCharacterCollisionSimple
      *
      * @return a new array of pre-existing counted references
      */
-    public CharacterVirtualRef[] getCharactersAsArray() {
+    public CharacterVirtualRef[] getCharacters() {
         int numCharacters = collisionList.size();
         CharacterVirtualRef[] result = new CharacterVirtualRef[numCharacters];
         for (int i = 0; i < numCharacters; ++i) {
