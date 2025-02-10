@@ -168,7 +168,7 @@ public class VehicleConstraintSettings extends ConstraintSettings {
     }
 
     /**
-     * Enumerate the wheel settings. The settings are unaffected. (native
+     * Enumerate all wheel settings. The settings are unaffected. (native
      * attribute: mWheels)
      *
      * @return a new array of pre-existing objects

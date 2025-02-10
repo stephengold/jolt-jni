@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -80,7 +80,7 @@ public class ConvexHullShape extends ConvexShape {
     }
 
     /**
-     * Enumerate the vertices in the specified face. The shape is unaffected.
+     * Enumerate all vertices in the specified face. The shape is unaffected.
      *
      * @param faceIndex the index of the face to query (&ge;0, &lt;numFaces)
      * @param storeIndices storage for the result (not null, modified)
@@ -93,7 +93,7 @@ public class ConvexHullShape extends ConvexShape {
     }
 
     /**
-     * Enumerate the vertices in the specified face. The shape is unaffected.
+     * Enumerate all vertices in the specified face. The shape is unaffected.
      *
      * @param faceIndex the index of the face to query (&ge;0, &lt;numFaces)
      * @param maxVertices the maximum number of vertices to return (&ge;0,
@@ -149,7 +149,7 @@ public class ConvexHullShape extends ConvexShape {
     }
 
     /**
-     * Enumerate the planes of the faces. The shape is unaffected.
+     * Enumerate all planes of the faces. The shape is unaffected.
      *
      * @return a new array of new objects
      */

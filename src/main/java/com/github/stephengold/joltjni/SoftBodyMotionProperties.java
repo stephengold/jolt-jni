@@ -132,7 +132,8 @@ public class SoftBodyMotionProperties extends MotionProperties {
     /**
      * Enumerate all vertices in the soft body.
      *
-     * @return a new array of new JVM objects
+     * @return a new array of new JVM objects with pre-existing native objects
+     * assigned
      */
     public SoftBodyVertex[] getVertices() {
         long propertiesVa = va();

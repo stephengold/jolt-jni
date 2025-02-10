@@ -173,7 +173,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Enumerate bodies of the specified type to the specified vector.
+     * Enumerate all bodies of the specified type to the specified vector.
      *
      * @param bodyType (not null)
      * @param storeResult storage for the result (not null)
@@ -336,7 +336,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Enumerate the constraints in the system. The physics system is
+     * Enumerate all constraints in the system. The physics system is
      * unaffected.
      *
      * @return a new object

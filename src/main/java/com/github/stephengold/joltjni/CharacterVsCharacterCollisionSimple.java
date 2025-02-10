@@ -67,7 +67,7 @@ public class CharacterVsCharacterCollisionSimple
     }
 
     /**
-     * Enumerate the characters in the collision list.
+     * Enumerate all characters in the collision list.
      *
      * @return a new array of pre-existing counted references
      */
