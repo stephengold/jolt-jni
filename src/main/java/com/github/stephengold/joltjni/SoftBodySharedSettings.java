@@ -166,6 +166,38 @@ public class SoftBodySharedSettings
     }
 
     /**
+     * Access the specified vertex.
+     *
+     * @param index the index of the vertex (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public Vertex getVertex(int index) {
+        long settingsVa = va();
+        long vertexVa = getVertex(settingsVa, index);
+        Vertex result = new Vertex(this, vertexVa);
+
+        return result;
+    }
+
+    /**
+     * Enumerate all vertices in the settings. (native attribute: mVertices)
+     *
+     * @return a new array of new JVM objects with pre-existing native objects
+     * assigned
+     */
+    public Vertex[] getVertices() {
+        long settingsVa = va();
+        int numVertices = countVertices(settingsVa);
+        Vertex[] result = new Vertex[numVertices];
+        for (int index = 0; index < numVertices; ++index) {
+            long vertexVa = getVertex(settingsVa, index);
+            result[index] = new Vertex(this, vertexVa);
+        }
+
+        return result;
+    }
+
+    /**
      * Optimize the settings without writing any results.
      */
     public void optimize() {
@@ -336,6 +368,8 @@ public class SoftBodySharedSettings
     native private static long createDefault();
 
     native private static int getRefCount(long settingsVa);
+
+    native private static long getVertex(long settingsVa, int index);
 
     native static float getVertexRadius(long settingsVa);
 

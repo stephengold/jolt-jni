@@ -232,6 +232,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    getVertex
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_getVertex
+  (JNIEnv *, jclass, jlong settingsVa, jint index) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    SoftBodySharedSettings::Vertex& result = pSettings->mVertices.at(index);
+    return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    getVertexRadius
  * Signature: (J)F
  */
