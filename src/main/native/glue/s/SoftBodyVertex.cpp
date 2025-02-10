@@ -156,3 +156,29 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_setInv
             = reinterpret_cast<SoftBodyVertex *> (vertexVa);
     pVertex->mInvMass = invMass;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    setPosition
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_setPosition
+  (JNIEnv *, jclass, jlong vertexVa, jfloat x, jfloat y, jfloat z) {
+    SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    const Vec3 location(x, y, z);
+    pVertex->mPosition = location;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    setVelocity
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_setVelocity
+  (JNIEnv *, jclass, jlong vertexVa, jfloat vx, jfloat vy, jfloat vz) {
+    SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    const Vec3 velocity(vx, vy, vz);
+    pVertex->mVelocity = velocity;
+}

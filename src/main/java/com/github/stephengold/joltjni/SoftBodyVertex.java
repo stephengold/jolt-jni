@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
+
 /**
  * Run-time information for a single particle in a soft body.
  *
@@ -118,6 +120,33 @@ public class SoftBodyVertex extends JoltPhysicsObject {
         long vertexVa = va();
         setInvMass(vertexVa, invMass);
     }
+
+    /**
+     * Alter the location of the vertex. (native attribute: mPosition)
+     *
+     * @param location the desired location (not null, unaffected)
+     */
+    public void setPosition(Vec3Arg location) {
+        long vertexVa = va();
+        float x = location.getX();
+        float y = location.getY();
+        float z = location.getZ();
+        setPosition(vertexVa, x, y, z);
+    }
+
+    /**
+     * Alter the velocity of the vertex. (native attribute: mVelocity)
+     *
+     * @param velocity the desired velocity (in meters per second, not null,
+     * unaffected)
+     */
+    public void setVelocity(Vec3Arg velocity) {
+        long vertexVa = va();
+        float vx = velocity.getX();
+        float vy = velocity.getY();
+        float vz = velocity.getZ();
+        setVelocity(vertexVa, vx, vy, vz);
+    }
     // *************************************************************************
     // native private methods
 
@@ -140,4 +169,10 @@ public class SoftBodyVertex extends JoltPhysicsObject {
     native private static void resetCollision(long vertexVa);
 
     native private static void setInvMass(long vertexVa, float invMass);
+
+    native private static void setPosition(
+            long vertexVa, float x, float y, float z);
+
+    native private static void setVelocity(
+            long vertexVa, float vx, float vy, float vz);
 }
