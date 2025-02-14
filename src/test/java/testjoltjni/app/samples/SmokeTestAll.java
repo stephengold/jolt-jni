@@ -316,6 +316,7 @@ final public class SmokeTestAll {
         smokeTest(new SoftBodyForceTest());
         smokeTest(new SoftBodyFrictionTest());
         smokeTest(new SoftBodyGravityFactorTest());
+        smokeTest(new SoftBodyKinematicTest());
         smokeTest(new SoftBodyLRAConstraintTest());
         smokeTest(new SoftBodyPressureTest());
         smokeTest(new SoftBodyUpdatePositionTest());
