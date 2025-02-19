@@ -133,7 +133,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	}
 }
 
-public void SaveState(StateRecorder inStream)
+protected void SaveState(StateRecorder inStream)
 {
 	inStream.write(mFrameNumber);
 
@@ -154,7 +154,7 @@ public void SaveState(StateRecorder inStream)
 	}
 }
 
-public void RestoreState(StateRecorder inStream)
+protected void RestoreState(StateRecorder inStream)
 {
 	mFrameNumber=inStream.readInt(mFrameNumber);
 

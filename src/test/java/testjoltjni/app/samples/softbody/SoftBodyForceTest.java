@@ -67,12 +67,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	DebugRenderer.sInstance().drawArrow(offset, plus(offset ,star( 10.0f , force.normalized())), Color.sGreen, 0.1f);
 }
 
-public void SaveState(StateRecorder inStream)
+protected void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-public void RestoreState(StateRecorder inStream)
+protected void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 }

@@ -160,12 +160,12 @@ void SkeletonMapperTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 }
 */
 
-public void SaveState(StateRecorder inStream)
+protected void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-public void RestoreState(StateRecorder inStream)
+protected void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 }
