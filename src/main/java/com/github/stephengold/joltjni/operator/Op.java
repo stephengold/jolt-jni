@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -164,6 +164,22 @@ final public class Op {
      */
     public static boolean isEqual(Mat44Arg left, Mat44Arg right) {
         boolean result = left.isEqual(right);
+        return result;
+    }
+
+    /**
+     * Return the negative of the specified vector. (native operator: unary
+     * {@code -})
+     *
+     * @param right the input vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 minus(RVec3Arg right) {
+        double xx = -right.xx();
+        double yy = -right.yy();
+        double zz = -right.zz();
+        RVec3 result = new RVec3(xx, yy, zz);
+
         return result;
     }
 
@@ -493,6 +509,19 @@ final public class Op {
      */
     public static Vec3 star(Mat44Arg left, Vec3Arg right) {
         Vec3 result = left.multiply3x4(right);
+        return result;
+    }
+
+    /**
+     * Return the product of the specified matrices. (native operator: binary
+     * {@code *})
+     *
+     * @param left the left factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
+     * @return a new matrix
+     */
+    public static Mat44 star(Mat44Arg left, Mat44Arg right) {
+        Mat44 result = left.multiply(right);
         return result;
     }
 
