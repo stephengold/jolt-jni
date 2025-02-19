@@ -34,6 +34,12 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Utils/SoftBodyCreator.cpp
  */
 public class SoftBodyCreator {
+public static SoftBodySharedSettingsRef CreateCloth(){return CreateCloth(30);}
+public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX){return CreateCloth(inGridSizeX,30);}
+public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ){
+    return CreateCloth(inGridSizeX,inGridSizeZ,0.75f);}
+public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ,float inGridSpacing){
+    return CreateCloth(inGridSizeX,inGridSizeZ,inGridSpacing,(Integer a,Integer b)->Float.valueOf(1f));}
 public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ,float inGridSpacing,BiFunction<Integer,Integer,Float>inVertexGetInvMass) {
     return CreateCloth(inGridSizeX,inGridSizeZ,inGridSpacing,inVertexGetInvMass,(Integer a,Integer b)->new Vec3());}
 public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ,float inGridSpacing,BiFunction<Integer,Integer,Float>inVertexGetInvMass,BiFunction<Integer,Integer,Vec3> inVertexPerturbation) {
@@ -88,6 +94,9 @@ public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX, int inGridS
 	return settings.toRef();
 }
 
+public static SoftBodySharedSettingsRef CreateClothWithFixatedCorners(){return CreateClothWithFixatedCorners(30);}
+public static SoftBodySharedSettingsRef CreateClothWithFixatedCorners(int inGridSizeX){return CreateClothWithFixatedCorners(inGridSizeX,30);}
+public static SoftBodySharedSettingsRef CreateClothWithFixatedCorners(int inGridSizeX,int inGridSizeZ){return CreateClothWithFixatedCorners(inGridSizeX,inGridSizeZ,0.75f);}
 public static SoftBodySharedSettingsRef CreateClothWithFixatedCorners(int inGridSizeX, int inGridSizeZ, float inGridSpacing)
 {
 	BiFunction<Integer,Integer,Float> inv_mass = (Integer inX, Integer inZ)-> {
