@@ -172,6 +172,16 @@ final public class Std {
     native public static float sin(float angle);
 
     /**
+     * Count the number of elements in the specified array.
+     *
+     * @param array the array to measure (not null, unaffected)
+     * @return the number of elements (&ge;0)
+     */
+    public static int size(Object[] array) {
+        return array.length;
+    }
+
+    /**
      * Return the square root of the specified single-precision value. There's
      * evidence this is slower than {@link java.lang.Math#sqrt(double)}.
      *
