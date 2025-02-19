@@ -184,19 +184,6 @@ final public class Op {
     }
 
     /**
-     * Subtract the 2nd argument from the first argument. (native operator:
-     * binary {@code -=})
-     *
-     * @param left the accumulating vector (not null, modified)
-     * @param right the vector to subtract (not null, unaffected)
-     */
-    public static void minusEquals(Vec3 left, Vec3Arg right) {
-        left.setX(left.getX() - right.getX());
-        left.setY(left.getY() - right.getY());
-        left.setZ(left.getZ() - right.getZ());
-    }
-
-    /**
      * Return the component-wise difference of the specified vectors. (native
      * operator: binary {@code -})
      *
@@ -264,6 +251,19 @@ final public class Op {
     }
 
     /**
+     * Subtract the 2nd argument from the first argument. (native operator:
+     * binary {@code -=})
+     *
+     * @param left the accumulating vector (not null, modified)
+     * @param right the vector to subtract (not null, unaffected)
+     */
+    public static void minusEquals(Vec3 left, Vec3Arg right) {
+        left.setX(left.getX() - right.getX());
+        left.setY(left.getY() - right.getY());
+        left.setZ(left.getZ() - right.getZ());
+    }
+
+    /**
      * Test whether the specified colors are unequal. (native operator: binary
      * {@code !=})
      *
@@ -276,6 +276,57 @@ final public class Op {
                 || left.getB() != right.getB()
                 || left.getG() != right.getG()
                 || left.getR() != right.getR();
+        return result;
+    }
+
+    /**
+     * Return the component-wise sum of the specified vectors. (native operator:
+     * binary {@code +})
+     *
+     * @param left the first vector (not null, unaffected)
+     * @param right the 2nd vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 plus(RVec3Arg left, RVec3Arg right) {
+        double xx = left.xx() + right.xx();
+        double yy = left.yy() + right.yy();
+        double zz = left.zz() + right.zz();
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Return the component-wise sum of the specified vectors. (native operator:
+     * binary {@code +})
+     *
+     * @param left the base vector (not null, unaffected)
+     * @param right the offset to add (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 plus(RVec3Arg left, Vec3Arg right) {
+        double xx = left.xx() + right.getX();
+        double yy = left.yy() + right.getY();
+        double zz = left.zz() + right.getZ();
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Return the component-wise sum of the specified vectors. (native operator:
+     * binary {@code +})
+     *
+     * @param left the first vector (not null, unaffected)
+     * @param right the 2nd vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 plus(Vec3Arg left, Vec3Arg right) {
+        float x = left.getX() + right.getX();
+        float y = left.getY() + right.getY();
+        float z = left.getZ() + right.getZ();
+        Vec3 result = new Vec3(x, y, z);
+
         return result;
     }
 
@@ -331,57 +382,6 @@ final public class Op {
         left.setX(left.getX() + right.getX());
         left.setY(left.getY() + right.getY());
         left.setZ(left.getZ() + right.getZ());
-    }
-
-    /**
-     * Return the component-wise sum of the specified vectors. (native operator:
-     * binary {@code +})
-     *
-     * @param left the first vector (not null, unaffected)
-     * @param right the 2nd vector (not null, unaffected)
-     * @return a new vector
-     */
-    public static RVec3 plus(RVec3Arg left, RVec3Arg right) {
-        double xx = left.xx() + right.xx();
-        double yy = left.yy() + right.yy();
-        double zz = left.zz() + right.zz();
-        RVec3 result = new RVec3(xx, yy, zz);
-
-        return result;
-    }
-
-    /**
-     * Return the component-wise sum of the specified vectors. (native operator:
-     * binary {@code +})
-     *
-     * @param left the base vector (not null, unaffected)
-     * @param right the offset to add (not null, unaffected)
-     * @return a new vector
-     */
-    public static RVec3 plus(RVec3Arg left, Vec3Arg right) {
-        double xx = left.xx() + right.getX();
-        double yy = left.yy() + right.getY();
-        double zz = left.zz() + right.getZ();
-        RVec3 result = new RVec3(xx, yy, zz);
-
-        return result;
-    }
-
-    /**
-     * Return the component-wise sum of the specified vectors. (native operator:
-     * binary {@code +})
-     *
-     * @param left the first vector (not null, unaffected)
-     * @param right the 2nd vector (not null, unaffected)
-     * @return a new vector
-     */
-    public static Vec3 plus(Vec3Arg left, Vec3Arg right) {
-        float x = left.getX() + right.getX();
-        float y = left.getY() + right.getY();
-        float z = left.getZ() + right.getZ();
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
     }
 
     /**
