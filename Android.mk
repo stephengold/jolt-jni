@@ -135,6 +135,7 @@ $(N)/glue/i/IgnoreMultipleBodiesFilter.cpp \
 $(N)/glue/i/IndexedTriangle.cpp \
 $(N)/glue/i/IndexedTriangleList.cpp \
 $(N)/glue/i/IndexedTriangleNoMaterial.cpp \
+$(N)/glue/i/InvBind.cpp \
 $(N)/glue/j/JobSystem.cpp \
 $(N)/glue/j/JobSystemSingleThreaded.cpp \
 $(N)/glue/j/JobSystemThreadPool.cpp \
@@ -216,6 +217,8 @@ $(N)/glue/s/Skeleton.cpp \
 $(N)/glue/s/SkeletonMapper.cpp \
 $(N)/glue/s/SkeletonPose.cpp \
 $(N)/glue/s/SkeletonPoseDrawSettings.cpp \
+$(N)/glue/s/Skinned.cpp \
+$(N)/glue/s/SkinWeight.cpp \
 $(N)/glue/s/SliderConstraint.cpp \
 $(N)/glue/s/SliderConstraintSettings.cpp \
 $(N)/glue/s/SoftBodyContactListener.cpp \
