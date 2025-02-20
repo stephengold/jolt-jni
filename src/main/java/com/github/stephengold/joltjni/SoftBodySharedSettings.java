@@ -80,7 +80,7 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Add the specified vertex.
+     * Add the specified vertex. (native attribute: mVertices)
      *
      * @param vertex the vertex to add (not null, unaffected)
      */

@@ -588,7 +588,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code MotionProperties}.
      *
-     * @param props properties to test (not null, modified)
+     * @param props the properties to test (not null, modified)
      */
     private static void testMotionSetters(MotionProperties props) {
         props.setAngularDamping(0.01f);
@@ -647,7 +647,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code Parameters}.
      *
-     * @param params properties to test (not null, modified)
+     * @param params the parameters to test (not null, modified)
      */
     private static void testParametersSetters(Parameters params) {
         params.setAsyncAcd(false);
@@ -709,7 +709,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code SoftBodyMotionProperties}.
      *
-     * @param properties properties to test (not null, modified)
+     * @param properties the properties to test (not null, modified)
      */
     private static void testSoftBodyMotionPropertiesSetters(
             SoftBodyMotionProperties properties) {
@@ -739,7 +739,7 @@ public class Test003 {
     /**
      * Test the setters of the specified {@code MassProperties}.
      *
-     * @param props properties to test (not null, modified)
+     * @param props the properties to test (not null, modified)
      */
     private static void testMpSetters(MassProperties props) {
         props.setMass(2f);
