@@ -383,6 +383,7 @@ public static void main(  String[] argv)throws IOException
 						final Body body = lock.getBody();
 						if (!body.isStatic())
 							detLog(id + ": p: " + body.getPosition() + " r: " + body.getRotation() + " v: " + body.getLinearVelocity() + " w: " + body.getAngularVelocity());
+						lock.releaseLock();
 					}
 				} // JPH_ENABLE_DETERMINISM_LOG
 				}
