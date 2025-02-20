@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -84,6 +84,28 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
+     * Append the specified inverse-bind matrix.
+     *
+     * @param invBind the matrix to add (not null)
+     */
+    public void addInvBindMatrix(InvBind invBind) {
+        long settingsVa = targetVa();
+        long bindVa = invBind.va();
+        SoftBodySharedSettings.addInvBindMatrix(settingsVa, bindVa);
+    }
+
+    /**
+     * Add the specified skinning constraint.
+     *
+     * @param skinned the constraint to add (not null)
+     */
+    public void addSkinnedConstraint(Skinned skinned) {
+        long settingsVa = targetVa();
+        long skinnedVa = skinned.va();
+        SoftBodySharedSettings.addSkinnedConstraint(settingsVa, skinnedVa);
+    }
+
+    /**
      * Add the specified vertex.
      *
      * @param vertex the vertex to add (not null, unaffected)
@@ -111,6 +133,14 @@ final public class SoftBodySharedSettingsRef
     public void calculateEdgeLengths() {
         long settingsVa = targetVa();
         SoftBodySharedSettings.calculateEdgeLengths(settingsVa);
+    }
+
+    /**
+     * Calculate the information needed for skinned constraint normals.
+     */
+    public void calculateSkinnedConstraintNormals() {
+        long settingsVa = targetVa();
+        SoftBodySharedSettings.calculateSkinnedConstraintNormals(settingsVa);
     }
 
     /**
@@ -187,6 +217,16 @@ final public class SoftBodySharedSettingsRef
         long settingsVa = targetVa();
         long materialVa = (material == null) ? 0L : material.va();
         SoftBodySharedSettings.setMaterialsSingle(settingsVa, materialVa);
+    }
+
+    /**
+     * Alter the size of every particle.
+     *
+     * @param radius the desired radius (&ge;0, default=0)
+     */
+    public void setVertexRadius(float radius) {
+        long settingsVa = targetVa();
+        SoftBodySharedSettings.setVertexRadius(settingsVa, radius);
     }
     // *************************************************************************
     // ConstSoftBodySharedSettings methods
