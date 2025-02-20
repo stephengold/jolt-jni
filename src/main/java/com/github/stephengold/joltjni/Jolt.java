@@ -87,11 +87,44 @@ final public class Jolt {
     // new methods exposed
 
     /**
+     * Return the inverse cosine of the specified single-precision ratio.
+     *
+     * @param ratio the input cosine ratio (&ge;-1, &le;1)
+     * @return the angle (in radians)
+     */
+    native public static float aCos(float ratio);
+
+    /**
+     * Return the inverse tangent of the specified single-precision ratio.
+     *
+     * @param ratio the input tangent ratio
+     * @return the angle (in radians)
+     */
+    native public static float aTan(float ratio);
+
+    /**
+     * Return the angle of the specified single-precision right triangle.
+     *
+     * @param opposite the signed length of the opposite side
+     * @param adjacent the signed length of the adjacent side
+     * @return the angle (in radians)
+     */
+    native public static float aTan2(float opposite, float adjacent);
+
+    /**
      * Return the jolt-jni build-type string.
      *
      * @return either "Debug" or "Release"
      */
     native public static String buildType();
+
+    /**
+     * Return the cosine of the specified single-precision angle.
+     *
+     * @param angle the input angle (in radians)
+     * @return the cosine ratio
+     */
+    native public static float cos(float angle);
 
     /**
      * Convert the specified angle from degrees to radians.
@@ -456,6 +489,14 @@ final public class Jolt {
     }
 
     /**
+     * Return the sine of the specified single-precision angle.
+     *
+     * @param angle the input angle (in radians)
+     * @return the sine ratio
+     */
+    native public static float sin(float angle);
+
+    /**
      * Return the square of the specified single-precision value.
      *
      * @param value the input value
@@ -484,6 +525,14 @@ final public class Jolt {
      * @return {@code true} if supported, otherwise {@code false}
      */
     native public static boolean supportsObjectStream();
+
+    /**
+     * Return the tangent ratio of the specified single-precision angle.
+     *
+     * @param angle the input angle (in radians)
+     * @return the tangent ratio
+     */
+    native public static float tan(float angle);
 
     /**
      * Unregister all physics types with the factory.

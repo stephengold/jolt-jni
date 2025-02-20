@@ -44,6 +44,39 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    aCos
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_aCos
+  (JNIEnv *, jclass, jfloat ratio) {
+    const float result = ACos(ratio);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    aTan
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_aTan
+  (JNIEnv *, jclass, jfloat ratio) {
+    const float result = ATan(ratio);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    aTan2
+ * Signature: (FF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_aTan2
+  (JNIEnv *, jclass, jfloat opposite, jfloat adjacent) {
+    const float result = ATan2(opposite, adjacent);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    buildType
  * Signature: ()Ljava/lang/String;
  */
@@ -55,6 +88,17 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_buildType
 #else
     result = pEnv->NewStringUTF("Debug");
 #endif
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    cos
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_cos
+  (JNIEnv *, jclass, jfloat angle) {
+    const float result = Cos(angle);
     return result;
 }
 
@@ -344,6 +388,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_setTraceAllocati
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    sin
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_sin
+  (JNIEnv *, jclass, jfloat angle) {
+    const float result = Sin(angle);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    supportsObjectStream
  * Signature: ()Z
  */
@@ -354,6 +409,17 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_supportsObje
 #else
     return JNI_FALSE;
 #endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    tan
+ * Signature: (F)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_tan
+  (JNIEnv *, jclass, jfloat angle) {
+    const float result = Tan(angle);
+    return result;
 }
 
 /*
