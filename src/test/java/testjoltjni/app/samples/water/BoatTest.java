@@ -215,13 +215,13 @@ void RestoreInputState(StateRecorder inStream)
 	mRight=inStream.readFloat(mRight);
 }
 
-public void SaveState(StateRecorder inStream)
+protected void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 	inStream.write(mBodiesInWater);
 }
 
-public void RestoreState(StateRecorder inStream)
+protected void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 	inStream.readBodyIdVector(mBodiesInWater);
