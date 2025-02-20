@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -104,6 +104,15 @@ public interface Vec3Arg {
      * @return the component value
      */
     float getZ();
+
+    /**
+     * Test whether the vector contains infinities or NaNs. The vector is
+     * unaffected.
+     *
+     * @return {@code false} if one or more infinities or NaNs, otherwise
+     * {@code true}
+     */
+    boolean isFinite();
 
     /**
      * Test whether the vector contains NaNs. The vector is unaffected.

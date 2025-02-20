@@ -575,6 +575,20 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Test whether the vector contains infinities or NaNs. The vector is
+     * unaffected.
+     *
+     * @return {@code false} if one or more infinities or NaNs, otherwise
+     * {@code true}
+     */
+    @Override
+    public boolean isFinite() {
+        boolean result
+                = Float.isFinite(x) && Float.isFinite(y) && Float.isFinite(z);
+        return result;
+    }
+
+    /**
      * Test whether the vector contains NaNs. The vector is unaffected.
      *
      * @return {@code true} if one or more NaNs, otherwise {@code false}
