@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -100,6 +100,14 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * @return {@code true} if equal, {@code false} if unequal
      */
     boolean isEqual(Mat44Arg m2);
+
+    /**
+     * Test whether the current matrix is an identity matrix. The matrix is
+     * unaffected.
+     *
+     * @return {@code true} if equal, {@code false} if unequal
+     */
+    boolean isIdentity();
 
     /**
      * Multiply the current matrix by the specified matrix. The current matrix

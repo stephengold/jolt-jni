@@ -454,6 +454,20 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Test whether the current matrix is an identity matrix. The matrix is
+     * unaffected.
+     *
+     * @return {@code true} if exactly equal, otherwise {@code false}
+     */
+    @Override
+    public boolean isIdentity() {
+        long matrixVa = va();
+        boolean result = isIdentity(matrixVa);
+
+        return result;
+    }
+
+    /**
      * Multiply the current matrix by the argument. The current matrix is
      * unaffected.
      *
@@ -634,6 +648,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     native private static long inversed3x3(long currentVa);
 
     native private static long inversedRotationTranslation(long currentVa);
+
+    native private static boolean isIdentity(long matrixVa);
 
     native private static long multiply(long m1Va, long m2Va);
 

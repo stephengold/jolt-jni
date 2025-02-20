@@ -295,6 +295,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_inversedRotati
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    isIdentity
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Mat44_isIdentity
+  (JNIEnv *, jclass, jlong matrixVa) {
+    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    const bool result = (*pMatrix == Mat44::sIdentity());
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    multiply
  * Signature: (JJ)J
  */
