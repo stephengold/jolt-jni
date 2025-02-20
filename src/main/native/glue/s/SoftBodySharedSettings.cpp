@@ -68,6 +68,34 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    addInvBindMatrix
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_addInvBindMatrix
+  (JNIEnv *, jclass, jlong settingsVa, jlong invBindVa) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    const SoftBodySharedSettings::InvBind * const pInvBind
+            = reinterpret_cast<SoftBodySharedSettings::InvBind *> (invBindVa);
+    pSettings->mInvBindMatrices.push_back(*pInvBind);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    addSkinnedConstraint
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_addSkinnedConstraint
+  (JNIEnv *, jclass, jlong settingsVa, jlong skinnedVa) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    const SoftBodySharedSettings::Skinned * const pSkinned
+            = reinterpret_cast<SoftBodySharedSettings::Skinned *> (skinnedVa);
+    pSettings->mSkinnedConstraints.push_back(*pSkinned);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    addVertex
  * Signature: (JJ)V
  */
@@ -104,6 +132,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
     SoftBodySharedSettings * const pSettings
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     pSettings->CalculateEdgeLengths();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    calculateSkinnedConstraintNormals
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_calculateSkinnedConstraintNormals
+  (JNIEnv *, jclass, jlong settingsVa) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    pSettings->CalculateSkinnedConstraintNormals();
 }
 
 /*
@@ -219,6 +259,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    getEdgeConstraint
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_getEdgeConstraint
+  (JNIEnv *, jclass, jlong settingsVa, jint index) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    SoftBodySharedSettings::Edge * const pResult
+            = &pSettings->mEdgeConstraints[index];
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    getRefCount
  * Signature: (J)I
  */
@@ -309,6 +363,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
     RefConst<PhysicsMaterial> ref = pMaterial;
     pSettings->mMaterials.clear();
     pSettings->mMaterials.push_back(ref);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    setVertexRadius
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_setVertexRadius
+  (JNIEnv *, jclass, jlong settingsVa, jfloat radius) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    pSettings->mVertexRadius = radius;
 }
 
 /*

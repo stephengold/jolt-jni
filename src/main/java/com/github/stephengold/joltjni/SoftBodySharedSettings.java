@@ -80,6 +80,30 @@ public class SoftBodySharedSettings
     }
 
     /**
+     * Append the specified inverse-bind matrix. (native property:
+     * mInvBindMatrices)
+     *
+     * @param invBind the matrix to add (not null)
+     */
+    public void addInvBindMatrix(InvBind invBind) {
+        long settingsVa = va();
+        long invBindVa = invBind.va();
+        addInvBindMatrix(settingsVa, invBindVa);
+    }
+
+    /**
+     * Append the specified skinning constraint. (native property:
+     * mSkinnedConstraints)
+     *
+     * @param skinned the constraint to add (not null)
+     */
+    public void addSkinnedConstraint(Skinned skinned) {
+        long settingsVa = va();
+        long skinnedVa = skinned.va();
+        addSkinnedConstraint(settingsVa, skinnedVa);
+    }
+
+    /**
      * Add the specified vertex. (native attribute: mVertices)
      *
      * @param vertex the vertex to add (not null, unaffected)
@@ -107,6 +131,14 @@ public class SoftBodySharedSettings
     public void calculateEdgeLengths() {
         long settingsVa = va();
         calculateEdgeLengths(settingsVa);
+    }
+
+    /**
+     * Calculate the information needed for skinned constraint normals.
+     */
+    public void calculateSkinnedConstraintNormals() {
+        long settingsVa = va();
+        calculateSkinnedConstraintNormals(settingsVa);
     }
 
     /**
@@ -163,6 +195,25 @@ public class SoftBodySharedSettings
         }
         int ordinal = bendType.ordinal();
         createConstraints(settingsVa, attributeVas, ordinal, angleTolerance);
+    }
+
+    /**
+     * Enumerate all edge constraints in the settings. (native attribute:
+     * mEdgeConstraints)
+     *
+     * @return a new array of new JVM objects with the pre-existing native
+     * objects assigned
+     */
+    public Edge[] getEdgeConstraints() {
+        long settingsVa = va();
+        int numEdges = countEdgeConstraints(settingsVa);
+        Edge[] result = new Edge[numEdges];
+        for (int index = 0; index < numEdges; ++index) {
+            long edgeVa = getEdgeConstraint(settingsVa, index);
+            result[index] = new Edge(this, edgeVa);
+        }
+
+        return result;
     }
 
     /**
@@ -230,6 +281,16 @@ public class SoftBodySharedSettings
         long settingsVa = va();
         long materialVa = (material == null) ? 0L : material.va();
         setMaterialsSingle(settingsVa, materialVa);
+    }
+
+    /**
+     * Alter the size of every particle.
+     *
+     * @param radius the desired radius (&ge;0, default=0)
+     */
+    public void setVertexRadius(float radius) {
+        long settingsVa = va();
+        setVertexRadius(settingsVa, radius);
     }
     // *************************************************************************
     // ConstSoftBodySharedSettings methods
@@ -346,11 +407,17 @@ public class SoftBodySharedSettings
 
     native static void addFace(long settingsVa, long faceVa);
 
+    native static void addInvBindMatrix(long settingsVa, long invBindVa);
+
+    native static void addSkinnedConstraint(long settingsVa, long skinnedVa);
+
     native static void addVertex(long settingsVa, long vertexVa);
 
     native static void addVolumeConstraint(long settingsVa, long volumeVa);
 
     native static void calculateEdgeLengths(long settingsVa);
+
+    native static void calculateSkinnedConstraintNormals(long settingsVa);
 
     native static void calculateVolumeConstraintVolumes(long settingsVa);
 
@@ -367,6 +434,8 @@ public class SoftBodySharedSettings
 
     native private static long createDefault();
 
+    native private static long getEdgeConstraint(long settingsVa, int index);
+
     native private static int getRefCount(long settingsVa);
 
     native private static long getVertex(long settingsVa, int index);
@@ -381,6 +450,8 @@ public class SoftBodySharedSettings
             int gridSize, float gridSpacing);
 
     native static void setMaterialsSingle(long settingsVa, long materialVa);
+
+    native static void setVertexRadius(long settingsVa, float radius);
 
     native private static long toRef(long settingsVa);
 }
