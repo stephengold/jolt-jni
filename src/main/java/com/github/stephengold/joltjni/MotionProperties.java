@@ -45,6 +45,15 @@ public class MotionProperties extends JoltPhysicsObject {
     }
 
     /**
+     * Instantiate properties with no containing object and no native object
+     * assigned.
+     *
+     * @param dummy unused argument to distinguish from the zero-arg constructor
+     */
+    MotionProperties(boolean dummy) {
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none

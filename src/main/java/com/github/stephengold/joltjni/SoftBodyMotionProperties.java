@@ -21,6 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.Mat44Arg;
+import com.github.stephengold.joltjni.readonly.RMat44Arg;
+
 /**
  * The motion properties of a soft body.
  *
@@ -29,6 +32,15 @@ package com.github.stephengold.joltjni;
 public class SoftBodyMotionProperties extends MotionProperties {
     // *************************************************************************
     // constructors
+
+    /**
+     * Instantiate with the default properties.
+     */
+    public SoftBodyMotionProperties() {
+        super(false);
+        long propertiesVa = createDefault();
+        setVirtualAddress(propertiesVa, () -> free(propertiesVa));
+    }
 
     /**
      * Instantiate with the specified container and native object.
@@ -57,6 +69,18 @@ public class SoftBodyMotionProperties extends MotionProperties {
         long bodyVa = softBody.va();
         long systemVa = system.va();
         customUpdate(propertiesVa, deltaTime, bodyVa, systemVa);
+    }
+
+    /**
+     * Test whether skinning constraints are enabled.
+     *
+     * @return {@code true} if enabled, {@code false} if disabled
+     */
+    public boolean getEnableSkinConstraints() {
+        long propertiesVa = va();
+        boolean result = getEnableSkinConstraints(propertiesVa);
+
+        return result;
     }
 
     /**
@@ -116,6 +140,19 @@ public class SoftBodyMotionProperties extends MotionProperties {
     }
 
     /**
+     * Return the maximum distance multiplier for skinned vertices. The
+     * properties are unaffected.
+     *
+     * @return the multiplier
+     */
+    public float getSkinnedMaxDistanceMultiplier() {
+        long propertiesVa = va();
+        float result = getSkinnedMaxDistanceMultiplier(propertiesVa);
+
+        return result;
+    }
+
+    /**
      * Access the specified vertex.
      *
      * @param index the index of the vertex (&ge;0)
@@ -148,6 +185,17 @@ public class SoftBodyMotionProperties extends MotionProperties {
     }
 
     /**
+     * Enable or disable any skinning constraints.
+     *
+     * @param enable {@code true} to enable any skinning constraints,
+     * {@code false} to disable them (default=true)
+     */
+    public void setEnableSkinConstraints(boolean enable) {
+        long propertiesVa = va();
+        setEnableSkinConstraints(propertiesVa, enable);
+    }
+
+    /**
      * Alter the number of solver iterations.
      *
      * @param numIterations the desired number of iterations (default=?)
@@ -156,6 +204,42 @@ public class SoftBodyMotionProperties extends MotionProperties {
         long propertiesVa = va();
         setNumIterations(propertiesVa, numIterations);
     }
+
+    /**
+     * Alter the maximum distance multiplier for skinned vertices.
+     *
+     * @param multiplier the desired multiplier (default=1)
+     */
+    public void setSkinnedMaxDistanceMultiplier(float multiplier) {
+        long propertiesVa = va();
+        setSkinnedMaxDistanceMultiplier(propertiesVa, multiplier);
+    }
+
+    /**
+     * Skin vertices to the specified joints.
+     *
+     * @param comTransform the body's center-of-mass transform (not null,
+     * unaffected)
+     * @param jointMatrices the joint matrices (relative to the center-of-mass
+     * transform, not null, length&ge;numJoints, unaffected)
+     * @param numJoints the number of joints (&ge;0)
+     * @param hardSkinAll {@code true} to reposition all vertices to their
+     * skinned locations
+     * @param allocator for temporary allocations (not null)
+     */
+    public void skinVertices(
+            RMat44Arg comTransform, Mat44Arg[] jointMatrices, int numJoints,
+            boolean hardSkinAll, TempAllocator allocator) {
+        long propertiesVa = va();
+        long comTransformVa = comTransform.targetVa();
+        long[] jointMatrixVas = new long[numJoints];
+        for (int i = 0; i < numJoints; ++i) {
+            jointMatrixVas[i] = jointMatrices[i].targetVa();
+        }
+        long allocatorVa = allocator.va();
+        skinVertices(propertiesVa, comTransformVa, jointMatrixVas,
+                hardSkinAll, allocatorVa);
+    }
     // *************************************************************************
     // native private methods
 
@@ -163,8 +247,14 @@ public class SoftBodyMotionProperties extends MotionProperties {
 
     native private static int countVertices(long propertiesVa);
 
+    native private static long createDefault();
+
     native private static void customUpdate(
             long propertiesVa, float deltaTime, long bodyVa, long systemVa);
+
+    native private static void free(long propertiesVa);
+
+    native private static boolean getEnableSkinConstraints(long propertiesVa);
 
     native private static long getFace(long propertiesVa, int index);
 
@@ -172,8 +262,21 @@ public class SoftBodyMotionProperties extends MotionProperties {
 
     native private static long getSettings(long propertiesVa);
 
+    native private static float getSkinnedMaxDistanceMultiplier(
+            long propertiesVa);
+
     native private static long getVertex(long propertiesVa, int index);
+
+    native private static void setEnableSkinConstraints(
+            long propertiesVa, boolean enable);
 
     native private static void setNumIterations(
             long propertiesVa, int numInterations);
+
+    native private static void setSkinnedMaxDistanceMultiplier(
+            long propertiesVa, float multiplier);
+
+    native private static void skinVertices(
+            long propertiesVa, long comTransformVa, long[] jointMatrixVas,
+            boolean hardSkinAll, long allocatorVa);
 }

@@ -43,6 +43,7 @@ import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Shape;
 import com.github.stephengold.joltjni.ShapeSettings;
 import com.github.stephengold.joltjni.SkinWeight;
+import com.github.stephengold.joltjni.SoftBodyMotionProperties;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorImpl;
@@ -91,6 +92,7 @@ public class Test003 {
         doMotionProperties();
         doParameters();
         doSkinWeight();
+        doSoftBodyMotionProperties();
         doTempAllocatorImpl();
         doTempAllocatorImplWithMallocFallback();
         doTempAllocatorMalloc();
@@ -323,6 +325,19 @@ public class Test003 {
         testSkinWeightDefaults(weight);
 
         TestUtils.testClose(weight);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code SoftBodyMotionProperties} class.
+     */
+    private static void doSoftBodyMotionProperties() {
+        SoftBodyMotionProperties properties = new SoftBodyMotionProperties();
+
+        testSoftBodyMotionPropertiesDefaults(properties);
+        testSoftBodyMotionPropertiesSetters(properties);
+
+        TestUtils.testClose(properties);
         System.gc();
     }
 
@@ -672,6 +687,40 @@ public class Test003 {
 
         Assert.assertEquals(0, weight.getInvBindIndex());
         Assert.assertEquals(0., weight.getWeight(), 0.);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code SoftBodyMotionProperties}.
+     *
+     * @param properties the properties to test (not null, unaffected)
+     */
+    private static void testSoftBodyMotionPropertiesDefaults(
+            SoftBodyMotionProperties properties) {
+        Assert.assertTrue(properties.hasAssignedNativeObject());
+        Assert.assertTrue(properties.ownsNativeObject());
+
+        Assert.assertTrue(properties.getEnableSkinConstraints());
+        Assert.assertEquals(0, properties.getNumIterations());
+        Assert.assertEquals(
+                1f, properties.getSkinnedMaxDistanceMultiplier(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code SoftBodyMotionProperties}.
+     *
+     * @param properties properties to test (not null, modified)
+     */
+    private static void testSoftBodyMotionPropertiesSetters(
+            SoftBodyMotionProperties properties) {
+        properties.setEnableSkinConstraints(false);
+        properties.setNumIterations(2);
+        properties.setSkinnedMaxDistanceMultiplier(9f);
+
+        Assert.assertFalse(properties.getEnableSkinConstraints());
+        Assert.assertEquals(2, properties.getNumIterations());
+        Assert.assertEquals(
+                9f, properties.getSkinnedMaxDistanceMultiplier(), 0f);
     }
 
     /**
