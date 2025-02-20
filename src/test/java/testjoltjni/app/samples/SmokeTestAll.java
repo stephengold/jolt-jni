@@ -319,6 +319,13 @@ final public class SmokeTestAll {
         smokeTest(new SoftBodyKinematicTest());
         smokeTest(new SoftBodyLRAConstraintTest());
         smokeTest(new SoftBodyPressureTest());
+        smokeTest(new SoftBodyRestitutionTest());
+        smokeTest(new SoftBodySensorTest());
+        smokeTest(new SoftBodyShapesTest());
+        smokeTest(new SoftBodySkinnedConstraintTest());
+        smokeTest(new SoftBodyStressTest());
         smokeTest(new SoftBodyUpdatePositionTest());
+        smokeTest(new SoftBodyVertexRadiusTest());
+        smokeTest(new SoftBodyVsFastMovingTest());
     }
 }
