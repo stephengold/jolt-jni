@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -89,6 +89,13 @@ public interface QuatArg {
      * @return {@code true} if normalized, otherwise {@code false}
      */
     boolean isNormalized(float tolerance);
+
+    /**
+     * Test whether the quaternion is zero. The quaternion is unaffected.
+     *
+     * @return {@code true} if zero, otherwise {@code false}
+     */
+    boolean isZero();
 
     /**
      * Return the length. The quaternion is unaffected.

@@ -355,6 +355,17 @@ final public class Quat implements QuatArg {
     }
 
     /**
+     * Test whether the quaternion is zero. The quaternion is unaffected.
+     *
+     * @return {@code true} if exactly zero, otherwise {@code false}
+     */
+    @Override
+    public boolean isZero() {
+        boolean result = (w == 0f) && (x == 0f) && (y == 0f) && (z == 0f);
+        return result;
+    }
+
+    /**
      * Return the length. The quaternion is unaffected.
      *
      * @return the length
