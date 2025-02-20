@@ -83,7 +83,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createFromColu
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createFromRMatrix
   (JNIEnv *, jclass, jlong rMatrixVa) {
     RMat44 * const pRMatrix = reinterpret_cast<RMat44 *> (rMatrixVa);
-    Mat44 * const pResult = new Mat44(*pRMatrix);
+    Mat44 * const pResult = new Mat44(pRMatrix->ToMat44());
     TRACE_NEW("Mat44", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
