@@ -42,6 +42,7 @@ import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Shape;
 import com.github.stephengold.joltjni.ShapeSettings;
+import com.github.stephengold.joltjni.SkinWeight;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorImpl;
@@ -89,6 +90,7 @@ public class Test003 {
         doMassProperties();
         doMotionProperties();
         doParameters();
+        doSkinWeight();
         doTempAllocatorImpl();
         doTempAllocatorImplWithMallocFallback();
         doTempAllocatorMalloc();
@@ -310,6 +312,17 @@ public class Test003 {
         testParametersSetters(parameters);
 
         TestUtils.testClose(parameters);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code SkinWeight} class.
+     */
+    private static void doSkinWeight() {
+        SkinWeight weight = new SkinWeight();
+        testSkinWeightDefaults(weight);
+
+        TestUtils.testClose(weight);
         System.gc();
     }
 
@@ -646,6 +659,19 @@ public class Test003 {
                 12., params.getMinimumVolumePercentErrorAllowed(), 0.);
         Assert.assertEquals(345_678, params.getResolution());
         Assert.assertFalse(params.getShrinkWrap());
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code SkinWeight}.
+     *
+     * @param weight the weight to test (not null, unaffected)
+     */
+    private static void testSkinWeightDefaults(SkinWeight weight) {
+        Assert.assertTrue(weight.hasAssignedNativeObject());
+        Assert.assertTrue(weight.ownsNativeObject());
+
+        Assert.assertEquals(0, weight.getInvBindIndex());
+        Assert.assertEquals(0., weight.getWeight(), 0.);
     }
 
     /**
