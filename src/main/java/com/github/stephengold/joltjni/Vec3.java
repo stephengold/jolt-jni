@@ -143,6 +143,29 @@ final public class Vec3 implements Vec3Arg {
     // new methods exposed
 
     /**
+     * Add the specified offsets.
+     *
+     * @param xOffset the amount to add to the X component
+     * @param yOffset the amount to add to the Y component
+     * @param zOffset the amount to add to the Z component
+     */
+    public void addInPlace(float xOffset, float yOffset, float zOffset) {
+        this.x += xOffset;
+        this.y += yOffset;
+        this.z += zOffset;
+    }
+
+    /**
+     * Change the current vector to a unit vector with the same direction.
+     */
+    public void normalizeInPlace() {
+        float invLength = 1f / length();
+        this.x *= invLength;
+        this.y *= invLength;
+        this.z *= invLength;
+    }
+
+    /**
      * Return the bitwise AND of the specified vectors.
      *
      * @param v1 the first vector (not null, unaffected)
@@ -197,6 +220,19 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Separately scale each component.
+     *
+     * @param xScale the scale factor to apply to the X component
+     * @param yScale the scale factor to apply to the Y component
+     * @param zScale the scale factor to apply to the Z component
+     */
+    public void scaleInPlace(float xScale, float yScale, float zScale) {
+        this.x *= xScale;
+        this.y *= yScale;
+        this.z *= zScale;
+    }
+
+    /**
      * Set all 3 components to specified values.
      *
      * @param x the desired X component
@@ -219,6 +255,17 @@ final public class Vec3 implements Vec3Arg {
         this.x = array[0];
         this.y = array[1];
         this.z = array[2];
+    }
+
+    /**
+     * Set all 3 components from the argument.
+     *
+     * @param source the vector to copy (not null, unaffected)
+     */
+    public void set(Vec3Arg source) {
+        this.x = source.getX();
+        this.y = source.getY();
+        this.z = source.getZ();
     }
 
     /**
@@ -401,6 +448,21 @@ final public class Vec3 implements Vec3Arg {
 
         Vec3 result = new Vec3(x, y, z);
         return result;
+    }
+
+    /**
+     * Replace any -0 elements with +0, in preparation for hashing.
+     */
+    public void standardizeInPlace() {
+        if (Float.compare(x, -0f) == 0) {
+            this.x = 0f;
+        }
+        if (Float.compare(y, -0f) == 0) {
+            this.y = 0f;
+        }
+        if (Float.compare(z, -0f) == 0) {
+            this.z = 0f;
+        }
     }
 
     /**
