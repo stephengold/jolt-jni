@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -71,6 +71,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createFromColu
     const Vec4 column4(pElements[12], pElements[13], pElements[14], pElements[15]);
     pEnv->ReleaseFloatArrayElements(elementsArray, pElements, JNI_ABORT);
     Mat44 * const pResult = new Mat44(column1, column2, column3, column4);
+    TRACE_NEW("Mat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    createFromRMatrix
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createFromRMatrix
+  (JNIEnv *, jclass, jlong rMatrixVa) {
+    RMat44 * const pRMatrix = reinterpret_cast<RMat44 *> (rMatrixVa);
+    Mat44 * const pResult = new Mat44(*pRMatrix);
     TRACE_NEW("Mat44", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
@@ -263,6 +276,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_inversed3x3
     Mat44 * const pResult = new Mat44();
     TRACE_NEW("Mat44", pResult)
     *pResult = pCurrent->Inversed3x3();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    inversedRotationTranslation
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_inversedRotationTranslation
+  (JNIEnv *, jclass, jlong currentVa) {
+    const Mat44 * const pCurrent = reinterpret_cast<Mat44 *> (currentVa);
+    Mat44 * const pResult = new Mat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = pCurrent->InversedRotationTranslation();
     return reinterpret_cast<jlong> (pResult);
 }
 

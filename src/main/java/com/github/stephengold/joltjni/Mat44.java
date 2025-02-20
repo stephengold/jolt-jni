@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
+import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec4Arg;
 
@@ -86,6 +87,17 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     public Mat44(Mat44Arg original) {
         long originalVa = original.targetVa();
         long matrixVa = createCopy(originalVa);
+        setVirtualAddress(matrixVa, () -> free(matrixVa));
+    }
+
+    /**
+     * Instantiate from a location-transform matrix.
+     *
+     * @param rMatrix the matrix to copy (not null, unaffected)
+     */
+    public Mat44(RMat44Arg rMatrix) {
+        long rMatrixVa = rMatrix.targetVa();
+        long matrixVa = createFromRMatrix(rMatrixVa);
         setVirtualAddress(matrixVa, () -> free(matrixVa));
     }
 
@@ -412,6 +424,20 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Return the inverse, assuming the current matrix consists entirely of
+     * rotation and translation.
+     *
+     * @return a new matrix
+     */
+    public Mat44 inversedRotationTranslation() {
+        long currentVa = va();
+        long resultVa = inversedRotationTranslation(currentVa);
+        Mat44 result = new Mat44(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Test whether the current matrix is equal to the argument. The current
      * matrix is unaffected.
      *
@@ -574,6 +600,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static long createFromColumnMajor(float[] elements);
 
+    native private static long createFromRMatrix(long rMatrixVa);
+
     native private static long createIdentity();
 
     native private static long createRotationX(float angle);
@@ -604,6 +632,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     native private static long inversed(long currentVa);
 
     native private static long inversed3x3(long currentVa);
+
+    native private static long inversedRotationTranslation(long currentVa);
 
     native private static long multiply(long m1Va, long m2Va);
 
