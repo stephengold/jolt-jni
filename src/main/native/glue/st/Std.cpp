@@ -83,6 +83,17 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_fmod
 
 /*
  * Class:     com_github_stephengold_joltjni_std_Std
+ * Method:    hypot
+ * Signature: (FF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_hypot
+  (JNIEnv *, jclass, jfloat opposite, jfloat adjacent) {
+    const float result = std::hypot(opposite, adjacent);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_Std
  * Method:    pow
  * Signature: (FF)F
  */

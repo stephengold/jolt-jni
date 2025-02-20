@@ -119,6 +119,15 @@ final public class Std {
     native public static float fmod(float numerator, float denominator);
 
     /**
+     * Return the hypotenuse of the specified right triangle.
+     *
+     * @param opposite the signed length of the opposite side
+     * @param adjacent the signed length of the adjacent side
+     * @return the length of the hypotenuse (&ge;0)
+     */
+    native public static float hypot(float opposite, float adjacent);
+
+    /**
      * Return the specified power of the specified single-precision base.
      * There's evidence this is faster than
      * {@link java.lang.Math#pow(double, double)}.
