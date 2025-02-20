@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@ package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import testjoltjni.app.samples.*;
-import static com.github.stephengold.joltjni.std.Std.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt Physics change motion-type test.
  * <p>

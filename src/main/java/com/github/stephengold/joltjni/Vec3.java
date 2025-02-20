@@ -26,7 +26,6 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.UVec4Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.RandomNumberEngine;
-import com.github.stephengold.joltjni.std.Std;
 import com.github.stephengold.joltjni.std.UniformFloatDistribution;
 import java.nio.FloatBuffer;
 import java.util.Objects;
@@ -427,10 +426,10 @@ final public class Vec3 implements Vec3Arg {
      * @return a new unit vector
      */
     public static Vec3 sUnitSpherical(float theta, float phi) {
-        float sinTheta = Std.sin(theta);
-        float vx = sinTheta * Std.cos(phi);
-        float vy = sinTheta * Std.sin(phi);
-        float vz = Std.cos(theta);
+        float sinTheta = Jolt.sin(theta);
+        float vx = sinTheta * Jolt.cos(phi);
+        float vy = sinTheta * Jolt.sin(phi);
+        float vz = Jolt.cos(theta);
         Vec3 result = new Vec3(vx, vy, vz);
 
         return result;

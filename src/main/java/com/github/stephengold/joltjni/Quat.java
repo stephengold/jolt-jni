@@ -25,7 +25,6 @@ import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.RandomNumberEngine;
-import com.github.stephengold.joltjni.std.Std;
 import com.github.stephengold.joltjni.std.UniformFloatDistribution;
 import java.nio.FloatBuffer;
 
@@ -170,12 +169,12 @@ final public class Quat implements QuatArg {
         float halfY = 0.5f * angles.getY();
         float halfZ = 0.5f * angles.getZ();
 
-        float cx = Std.cos(halfX);
-        float cy = Std.cos(halfY);
-        float cz = Std.cos(halfZ);
-        float sx = Std.sin(halfX);
-        float sy = Std.sin(halfY);
-        float sz = Std.sin(halfZ);
+        float cx = Jolt.cos(halfX);
+        float cy = Jolt.cos(halfY);
+        float cz = Jolt.cos(halfZ);
+        float sx = Jolt.sin(halfX);
+        float sy = Jolt.sin(halfY);
+        float sz = Jolt.sin(halfZ);
 
         Quat result = new Quat(
                 cz * sx * cy - sz * cx * sy,
@@ -240,10 +239,10 @@ final public class Quat implements QuatArg {
         float px = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
         float py = 2f * Jolt.JPH_PI * distro.nextFloat(engine);
 
-        float x = r1 * Std.sin(px);
-        float y = r1 * Std.cos(px);
-        float z = r2 * Std.sin(py);
-        float w = r2 * Std.cos(py);
+        float x = r1 * Jolt.sin(px);
+        float y = r1 * Jolt.cos(px);
+        float z = r2 * Jolt.sin(py);
+        float w = r2 * Jolt.cos(py);
         Quat result = new Quat(x, y, z, w);
 
         return result;
@@ -259,8 +258,8 @@ final public class Quat implements QuatArg {
     public static Quat sRotation(Vec3 axis, float angle) {
         assert axis.isNormalized();
 
-        float qw = Std.cos(0.5f * angle);
-        float s = Std.sin(0.5f * angle);
+        float qw = Jolt.cos(0.5f * angle);
+        float s = Jolt.sin(0.5f * angle);
         float qx = axis.getX() * s;
         float qy = axis.getY() * s;
         float qz = axis.getZ() * s;

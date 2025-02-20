@@ -70,36 +70,6 @@ final public class Std {
     // new methods exposed
 
     /**
-     * Return the inverse cosine of the specified single-precision ratio.
-     * There's evidence this is faster than {@link java.lang.Math#acos(double)}
-     * on Linux and Windows.
-     *
-     * @param ratio the input cosine ratio (&ge;-1, &le;1)
-     * @return the angle (in radians)
-     */
-    native public static float acos(float ratio);
-
-    /**
-     * Return the inverse tangent of the specified single-precision ratio.
-     * There's evidence this is faster than {@link java.lang.Math#atan(double)}
-     * on Linux and Windows.
-     *
-     * @param ratio the input tangent ratio
-     * @return the angle (in radians)
-     */
-    native public static float atan(float ratio);
-
-    /**
-     * Return the cosine of the specified single-precision angle. There's
-     * evidence this is faster than {@link java.lang.Math#cos(double)} on Linux
-     * and Windows.
-     *
-     * @param angle the input angle (in radians)
-     * @return the cosine ratio
-     */
-    native public static float cos(float angle);
-
-    /**
      * Return the exponential of the specified single-precision value. There's
      * evidence this is faster than {@link java.lang.Math#exp(double)}.
      *
@@ -172,15 +142,6 @@ final public class Std {
     }
 
     /**
-     * Return the sine of the specified single-precision angle. There's evidence
-     * this is faster than {@link java.lang.Math#sin(double)}.
-     *
-     * @param angle the input angle (in radians)
-     * @return the sine ratio
-     */
-    native public static float sin(float angle);
-
-    /**
      * Count the number of elements in the specified array.
      *
      * @param array the array to measure (not null, unaffected)
@@ -212,14 +173,6 @@ final public class Std {
         int result = lhs.compareTo(rhs);
         return result;
     }
-
-    /**
-     * Return the tangent ratio of the specified single-precision angle.
-     *
-     * @param angle the input angle (in radians)
-     * @return the tangent ratio
-     */
-    native public static float tan(float angle);
     // *************************************************************************
     // native private methods
 

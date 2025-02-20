@@ -28,39 +28,6 @@ SOFTWARE.
 
 /*
  * Class:     com_github_stephengold_joltjni_std_Std
- * Method:    acos
- * Signature: (F)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_acos
-  (JNIEnv *, jclass, jfloat ratio) {
-    const float result = std::acos(ratio);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_std_Std
- * Method:    atan
- * Signature: (F)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_atan
-  (JNIEnv *, jclass, jfloat ratio) {
-    const float result = std::atan(ratio);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_std_Std
- * Method:    cos
- * Signature: (F)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_cos
-  (JNIEnv *, jclass, jfloat angle) {
-    const float result = std::cos(angle);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_std_Std
  * Method:    exp
  * Signature: (F)F
  */
@@ -105,34 +72,12 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_pow
 
 /*
  * Class:     com_github_stephengold_joltjni_std_Std
- * Method:    sin
- * Signature: (F)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_sin
-  (JNIEnv *, jclass, jfloat angle) {
-    const float result = std::sin(angle);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_std_Std
  * Method:    sqrt
  * Signature: (F)F
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_sqrt
   (JNIEnv *, jclass, jfloat value) {
     const float result = std::sqrt(value);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_std_Std
- * Method:    tan
- * Signature: (F)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_std_Std_tan
-  (JNIEnv *, jclass, jfloat value) {
-    const float result = std::tan(value);
     return result;
 }
 
