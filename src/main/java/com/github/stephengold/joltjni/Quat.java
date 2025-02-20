@@ -91,6 +91,18 @@ final public class Quat implements QuatArg {
     }
 
     /**
+     * Instantiate a copy of the argument.
+     *
+     * @param original the quaternion to copy (not null, unaffected)
+     */
+    public Quat(QuatArg original) {
+        this.x = original.getX();
+        this.y = original.getY();
+        this.z = original.getZ();
+        this.w = original.getW();
+    }
+
+    /**
      * Instantiate a quaternion based on a {@code Vec3Arg}.
      *
      * @param v the desired XYZ components
@@ -131,6 +143,18 @@ final public class Quat implements QuatArg {
         this.y = array[1];
         this.z = array[2];
         this.w = array[3];
+    }
+
+    /**
+     * Copy all 4 components from the argument.
+     *
+     * @param source the quaternion to copy (not null, unaffected)
+     */
+    public void set(QuatArg source) {
+        this.w = source.getW();
+        this.x = source.getX();
+        this.y = source.getY();
+        this.z = source.getZ();
     }
 
     /**
