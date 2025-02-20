@@ -329,6 +329,21 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Return the inverse of the current matrix, assuming the current matrix
+     * consists entirely of rotation and translation. The current matrix is
+     * unaffected.
+     *
+     * @return a new matrix
+     */
+    public RMat44 inversedRotationTranslation() {
+        long currentVa = va();
+        long resultVa = inversedRotationTranslation(currentVa);
+        RMat44 result = new RMat44(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Test whether the current matrix is equal to the argument. The current
      * matrix is unaffected.
      *
@@ -432,6 +447,17 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
         return result;
     }
+
+    /**
+     * Copy the current matrix to a new, single-precision matrix. The current
+     * matrix is unaffected.
+     *
+     * @return the new matrix
+     */
+    public Mat44 toMat44() {
+        Mat44 result = new Mat44(this);
+        return result;
+    }
     // *************************************************************************
     // Object methods
 
@@ -504,6 +530,8 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     native private static double getTranslationZ(long matrixVa);
 
     native private static long inversed(long currentVa);
+
+    native private static long inversedRotationTranslation(long currentVa);
 
     native private static long multiply(long m1Va, long m2Va);
 

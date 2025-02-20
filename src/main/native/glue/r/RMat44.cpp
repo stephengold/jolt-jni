@@ -258,6 +258,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_inversed
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    inversedRotationTranslation
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_inversedRotationTranslation
+  (JNIEnv *, jclass, jlong currentVa) {
+    const RMat44 * const pCurrent = reinterpret_cast<RMat44 *> (currentVa);
+    RMat44 * const pResult = new RMat44();
+    TRACE_NEW("RMat44", pResult)
+    *pResult = pCurrent->InversedRotationTranslation();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    multiply
  * Signature: (JJ)J
  */
