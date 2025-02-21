@@ -1,7 +1,8 @@
 # jolt-jni
 
 [The Jolt-jni Project][project] provides
-[JVM] bindings for [Jolt Physics][jolt],
+[JVM] bindings for [Jolt Physics][jolt]
+and [Khaled Mamou's V-HACD Library][vhacd],
 to facilitate physics simulation in JVM languages such as [Java] and [Kotlin].
 
 Source code (in Java and C++) is provided under
@@ -18,6 +19,7 @@ Source code (in Java and C++) is provided under
 + [How to build jolt-jni from source](#build)
 + [Freeing native objects](#free)
 + [External links](#links)
++ [Acknowledgments](#acks)
 
 
 <a name="translate"></a>
@@ -80,10 +82,10 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
     }
     dependencies {
         // JVM library:
-        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.5")
+        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.6")
 
         // native libraries:
-        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.5:DebugSp")
+        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.6:DebugSp")
         // Native libraries for other platforms could be added.
     }
 
@@ -116,7 +118,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
         mavenCentral()
     }
     dependencies {
-        implementation("com.github.stephengold:jolt-jni:0.9.5:SpDebug@aar")
+        implementation("com.github.stephengold:jolt-jni:0.9.6:SpDebug@aar")
     }
 
 + The "SpDebug" classifier may be replaced by "SpRelease".
@@ -149,7 +151,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
   + using [Git]:
     + `git clone https://github.com/stephengold/jolt-jni.git`
     + `cd jolt-jni`
-    + `git checkout -b latest 0.9.5`
+    + `git checkout -b latest 0.9.6`
   + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link at the bottom of the page
@@ -288,16 +290,74 @@ by invoking `target.setEmbedded()`.
 [Jump to the table of contents](#toc)
 
 
+<a name="acks"></a>
+
+## Acknowledgments
+
+The jolt-jni Project is derived from open-source software:
+
+  + the [Jolt Physics][jolt] project
+  + [Khaled Mamou's V-HACD Library][vhacd] for approximate convex decomposition
+
+This project also made use of the following software tools:
+
+  + the [Android Studio][studio], [IntelliJ IDEA][idea], and [NetBeans]
+    integrated development environments
+  + the [Checkstyle] tool
+  + the [Firefox] web browser
+  + the [GNU Compiler Collection][gcc] and [Project Debugger][gdb]
+  + the [Git] revision-control system and GitK commit viewer
+  + the [GitKraken] client
+  + the [Gradle] build tool
+  + the [Java] compiler, standard doclet, and runtime environment
+  + the [Linux Mint][mint] operating system
+  + the [LLVM Compiler Infrastructure][llvm]
+  + the [Markdown] document-conversion tool
+  + the [Meld] visual merge tool
+  + Microsoft Windows and Visual Studio
+
+I am grateful to Riccardo Balbo (aka "riccardo") for bringing
+V-HACD to my attention.
+
+I am grateful to [GitHub], [Sonatype], [AppVeyor],
+[Travis], and [MacStadium]
+for providing free hosting for this project
+and many other open-source projects.
+
+I'm also grateful to my dear Holly, for keeping me sane.
+
+If I've misattributed anything or left anyone out, please let me know, so I can
+correct the situation: sgold@sonic.net
+
+[Jump to the table of contents](#toc)
+
+
 [adoptium]: https://adoptium.net/releases.html "Adoptium Project"
+[appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
+[checkstyle]: https://checkstyle.org "Checkstyle"
+[firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
 [fish]: https://fishshell.com/ "Fish command-line shell"
+[gcc]: https://gcc.gnu.org "GNU Compiler Collection"
+[gdb]: https://www.gnu.org/software/gdb/ "GNU Project Debugger"
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
+[gitkraken]: https://www.gitkraken.com "GitKraken client"
 [gradle]: https://gradle.org "Gradle Project"
+[idea]: https://www.jetbrains.com/idea/ "IntelliJ IDEA"
 [java]: https://en.wikipedia.org/wiki/Java_(programming_language) "Java programming language"
 [jolt]: https://jrouwe.github.io/JoltPhysics "Jolt Physics project"
 [jvm]: https://en.wikipedia.org/wiki/Java_virtual_machine "Java Virtual Machine"
 [kotlin]: https://en.wikipedia.org/wiki/Kotlin_(programming_language) "Kotlin programming language"
 [latest]: https://github.com/stephengold/jolt-jni/releases/latest "latest jolt-jni release"
 [license]: https://github.com/stephengold/jolt-jni/blob/master/LICENSE "jolt-jni license"
+[llvm]: https://www.llvm.org "LLVM Compiler"
+[macstadium]: https://www.macstadium.com/ "MacStadium"
+[markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
+[meld]: https://meldmerge.org "Meld merge tool"
+[mint]: https://linuxmint.com "Linux Mint Project"
+[netbeans]: https://netbeans.org "NetBeans Project"
 [project]: https://github.com/stephengold/jolt-jni "Jolt-jni Project"
-[studio]: https://developer.android.com/studio "Android Studio"
+[sonatype]: https://www.sonatype.com "Sonatype"
+[studio]: https://developer.android.com/studio "Android Studio IDE"
+[travis]: https://travis-ci.com "Travis CI"
+[vhacd]: https://github.com/kmammou/v-hacd "V-HACD Library"

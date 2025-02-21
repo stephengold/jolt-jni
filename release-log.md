@@ -1,6 +1,6 @@
 # release log for the jolt-jni project
 
-## Version 0.9.6 released on TBD
+## Version 0.9.6 released on 20 February 2025
 
 + API changes:
   + Renamed `CharacterVsCharacterCollisionSimple.getCharactersAsArray()`.
