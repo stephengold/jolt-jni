@@ -596,7 +596,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
-     * Multiply the 3x4 matrix by the specified column vector, with the 4th
+     * Multiply the 3x4 matrix by the specified column vector, with the last
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
