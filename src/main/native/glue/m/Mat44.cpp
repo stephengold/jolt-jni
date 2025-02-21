@@ -307,6 +307,17 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Mat44_isIdentity
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    loadIdentity
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_loadIdentity
+  (JNIEnv *, jclass, jlong matrixVa) {
+    Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    *pMatrix = Mat44::sIdentity();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    multiply
  * Signature: (JJ)J
  */
@@ -406,6 +417,42 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_postTranslated
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    setAxisX
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_setAxisX
+  (JNIEnv *, jclass, jlong matrixVa, jfloat x , jfloat y, jfloat z) {
+    Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    const Vec3 vec(x, y, z);
+    pMatrix->SetAxisX(vec);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    setAxisY
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_setAxisY
+  (JNIEnv *, jclass, jlong matrixVa, jfloat x , jfloat y, jfloat z) {
+    Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    const Vec3 vec(x, y, z);
+    pMatrix->SetAxisY(vec);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    setAxisZ
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_setAxisZ
+  (JNIEnv *, jclass, jlong matrixVa, jfloat x , jfloat y, jfloat z) {
+    Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    const Vec3 vec(x, y, z);
+    pMatrix->SetAxisZ(vec);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    setElement
  * Signature: (JIIF)V
  */
@@ -413,6 +460,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_setElement
   (JNIEnv *, jclass, jlong matrixVa, jint row, jint column, jfloat value) {
     Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
     pMatrix->GetColumn4(column)[row] = value;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    setTranslation
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_setTranslation
+  (JNIEnv *, jclass, jlong matrixVa, jfloat x , jfloat y, jfloat z) {
+    Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    const Vec3 vec(x, y, z);
+    pMatrix->SetTranslation(vec);
 }
 
 /*

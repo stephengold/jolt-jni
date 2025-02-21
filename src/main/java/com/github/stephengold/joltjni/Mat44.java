@@ -119,6 +119,14 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     // new methods exposed
 
     /**
+     * Set the current matrix to identity.
+     */
+    public void loadIdentity() {
+        long matrixVa = va();
+        loadIdentity(matrixVa);
+    }
+
+    /**
      * Return the product of the specified matrices.
      *
      * @param mArray an array of input matrices (not null, unaffected)
@@ -145,6 +153,45 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Set the first column to the specified vector.
+     *
+     * @param vec the vector to use (not null, unaffected)
+     */
+    public void setAxisX(Vec3Arg vec) {
+        long matrixVa = va();
+        float x = vec.getX();
+        float y = vec.getY();
+        float z = vec.getZ();
+        setAxisX(matrixVa, x, y, z);
+    }
+
+    /**
+     * Set the 2nd column to the specified vector.
+     *
+     * @param vec the vector to use (not null, unaffected)
+     */
+    public void setAxisY(Vec3Arg vec) {
+        long matrixVa = va();
+        float x = vec.getX();
+        float y = vec.getY();
+        float z = vec.getZ();
+        setAxisY(matrixVa, x, y, z);
+    }
+
+    /**
+     * Set the 3rd column to the specified vector.
+     *
+     * @param vec the vector to use (not null, unaffected)
+     */
+    public void setAxisZ(Vec3Arg vec) {
+        long matrixVa = va();
+        float x = vec.getX();
+        float y = vec.getY();
+        float z = vec.getZ();
+        setAxisZ(matrixVa, x, y, z);
+    }
+
+    /**
      * Alter the specified element.
      *
      * @param row the zero-origin index of the row (&ge;0, &lt;4)
@@ -157,6 +204,19 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
         long matrixVa = va();
         setElement(matrixVa, row, column, value);
+    }
+
+    /**
+     * Set the last/rightmost column to the specified vector.
+     *
+     * @param vec the vector to use (not null, unaffected)
+     */
+    public void setTranslation(Vec3Arg vec) {
+        long matrixVa = va();
+        float x = vec.getX();
+        float y = vec.getY();
+        float z = vec.getZ();
+        setTranslation(matrixVa, x, y, z);
     }
 
     /**
@@ -651,6 +711,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static boolean isIdentity(long matrixVa);
 
+    native private static void loadIdentity(long matrixVa);
+
     native private static long multiply(long m1Va, long m2Va);
 
     native private static long multiply3x3(long currentVa, long argVa);
@@ -665,8 +727,20 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     native private static long postTranslated(
             long matrixVa, float x, float y, float z);
 
+    native private static void setAxisX(
+            long matrixVa, float x, float y, float z);
+
+    native private static void setAxisY(
+            long matrixVa, float x, float y, float z);
+
+    native private static void setAxisZ(
+            long matrixVa, float x, float y, float z);
+
     native private static void setElement(
             long matrixVa, int row, int column, float value);
+
+    native private static void setTranslation(
+            long matrixVa, float x, float y, float z);
 
     native private static long sRotation(float x, float y, float z, float w);
 
