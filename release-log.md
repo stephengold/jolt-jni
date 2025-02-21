@@ -1,5 +1,42 @@
 # release log for the jolt-jni project
 
+## Version 0.9.6 released on TBD
+
++ API changes:
+  + Renamed `CharacterVsCharacterCollisionSimple.getCharactersAsArray()`.
+  + Delete 5 trig functions from `Std` in favor of their `Jolt` replacements.
+
++ Bugfixes:
+  + `ClassCastException` in "BoatTest.java" with flavor=Dp
+  + native assertion failures at DMat44.h:115
+  + out-of-range error in `CharacterVsCharacterCollisionSimple`
+
++ Switched to LLVM when compiling (but not cross-compiling) on Linux.
++ Added V-HACD v4.1.0 source code to the project.
+
++ Added classes, enums, and interfaces to the libraries:
+  + `CharacterId`
+  + `ConstSoftBodyContactSettings`
+  + `ConvexHull`
+  + `CustomSoftBodyContactListener`
+  + `Decomposer`
+  + `FillMode`
+  + `InvBind`
+  + `Parameters`
+  + `ProgressListener`
+  + `Skinned`
+  + `SkinWeight`
+  + `SoftBodyContactListener`
+  + `SoftBodyContactSettings`
+  + `SoftBodyManifold`
+  + `SoftBodyMotionProperties`
+  + `SoftBodyShape`
+  + `SoftBodyValidateResult`
+  + `SoftBodyVertex`
+
++ Added many public methods to the libraries.
++ Updated the Jolt source code and assets to c1bdc5a (=sg250217).
+
 ## Version 0.9.5 released on 20 January 2025
 
 + Bugfix:  heap corruption in `ConvexHullShapeSettings.createSettings()`
