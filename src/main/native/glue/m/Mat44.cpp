@@ -453,6 +453,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_setAxisZ
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    setDiagonal3
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_setDiagonal3
+  (JNIEnv *, jclass, jlong matrixVa, jfloat x, jfloat y, jfloat z) {
+    Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    const Vec3 vec(x, y, z);
+    pMatrix->SetDiagonal3(vec);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    setElement
  * Signature: (JIIF)V
  */
@@ -517,6 +529,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_sRotationTrans
     Mat44 * const pResult = new Mat44();
     TRACE_NEW("Mat44", pResult)
     *pResult = Mat44::sRotationTranslation(rotation, offset);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    sScale
+ * Signature: (FFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_sScale
+  (JNIEnv *, jclass, jfloat x, jfloat y, jfloat z) {
+    const Vec3 factors(x, y, z);
+    Mat44 * const pResult = new Mat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = Mat44::sScale(factors);
     return reinterpret_cast<jlong> (pResult);
 }
 

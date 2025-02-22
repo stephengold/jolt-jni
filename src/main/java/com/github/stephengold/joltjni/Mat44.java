@@ -192,6 +192,19 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Set the diagonal to the specified vector.
+     *
+     * @param vec the vector to use (not null, unaffected)
+     */
+    public void setDiagonal3(Vec3Arg vec) {
+        long matrixVa = va();
+        float x = vec.getX();
+        float y = vec.getY();
+        float z = vec.getZ();
+        setDiagonal3(matrixVa, x, y, z);
+    }
+
+    /**
      * Alter the specified element.
      *
      * @param row the zero-origin index of the row (&ge;0, &lt;4)
@@ -327,6 +340,37 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Create a pure scaling matrix.
+     *
+     * @param factors the amount to scale each axis (not null, unaffected)
+     * @return a new instance
+     *
+     */
+    public static Mat44 sScale(Vec3Arg factors) {
+        float x = factors.getX();
+        float y = factors.getY();
+        float z = factors.getZ();
+        long matrixVa = sScale(x, y, z);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
+     * Create a uniform scaling matrix.
+     *
+     * @param factor the amount to scale each axis
+     * @return a new instance
+     *
+     */
+    public static Mat44 sScale(float factor) {
+        long matrixVa = sScale(factor, factor, factor);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Create a pure translation matrix.
      *
      * @param offset the amount to translate (not null, unaffected)
@@ -399,6 +443,21 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         long matrixVa = va();
         float x = getElement(matrixVa, 0, 2);
         float y = getElement(matrixVa, 1, 2);
+        float z = getElement(matrixVa, 2, 2);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the diagonal elements to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    public Vec3 getDiagonal3() {
+        long matrixVa = va();
+        float x = getElement(matrixVa, 0, 0);
+        float y = getElement(matrixVa, 1, 1);
         float z = getElement(matrixVa, 2, 2);
         Vec3 result = new Vec3(x, y, z);
 
@@ -736,6 +795,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     native private static void setAxisZ(
             long matrixVa, float x, float y, float z);
 
+    native private static void setDiagonal3(
+            long matrixVa, float x, float y, float z);
+
     native private static void setElement(
             long matrixVa, int row, int column, float value);
 
@@ -748,6 +810,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
             float ax, float ay, float az, float angle);
 
     native private static long sRotationTranslation(float[] floatArray);
+
+    native private static long sScale(float x, float y, float z);
 
     native private static long sTranslation(float x, float y, float z);
 }
