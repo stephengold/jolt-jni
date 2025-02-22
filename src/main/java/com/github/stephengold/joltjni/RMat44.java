@@ -70,7 +70,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
-     * Instantiate from 4 column vectors.
+     * Instantiate a matrix with the specified columns.
      *
      * @param c1 the desired first/leftmost column (not null, unaffected)
      * @param c2 the desired 2nd column (not null, unaffected)

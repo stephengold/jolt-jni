@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -100,7 +100,7 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * Multiply the current matrix by the argument. The matrix is unaffected.
      *
      * @param m2 the right factor (not null, unaffected)
-     * @return a new vector
+     * @return a new matrix
      */
     RMat44 multiply(RMat44Arg m2);
 

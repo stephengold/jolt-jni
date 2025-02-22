@@ -107,7 +107,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * @param c1 the desired first/leftmost column (not null, unaffected)
      * @param c2 the desired 2nd column (not null, unaffected)
      * @param c3 the desired 3rd column (not null, unaffected)
-     * @param c4 the desired last/rightmost column (not null, unaffected)
+     * @param c4 the desired 4th/rightmost column (not null, unaffected)
      */
     public Mat44(Vec4Arg c1, Vec4Arg c2, Vec4Arg c3, Vec4Arg c4) {
         this(c1.getX(), c1.getY(), c1.getZ(), c1.getW(),
@@ -220,9 +220,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
-     * Set the last/rightmost column to the specified vector.
+     * Alter the translation component.
      *
-     * @param vec the vector to use (not null, unaffected)
+     * @param vec the desired translation (not null, unaffected)
      */
     public void setTranslation(Vec3Arg vec) {
         long matrixVa = va();
@@ -655,7 +655,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
-     * Multiply the 3x4 matrix by the specified column vector, with the last
+     * Multiply the 3x4 matrix by the specified column vector, with the 4th
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *

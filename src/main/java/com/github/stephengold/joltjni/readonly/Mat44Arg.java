@@ -105,13 +105,12 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * Test whether the current matrix is an identity matrix. The matrix is
      * unaffected.
      *
-     * @return {@code true} if equal, {@code false} if unequal
+     * @return {@code true} if exactly equal, otherwise {@code false}
      */
     boolean isIdentity();
 
     /**
-     * Multiply the current matrix by the specified matrix. The current matrix
-     * is unaffected.
+     * Multiply the current matrix by the argument. The matrix is unaffected.
      *
      * @param m2 the right factor (not null, unaffected)
      * @return a new matrix
@@ -128,7 +127,7 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     Mat44 multiply3x3(Mat44Arg arg);
 
     /**
-     * Multiply the 3x3 matrix by the specified vector. The matrix is
+     * Multiply the 3x3 matrix by the specified column vector. The matrix is
      * unaffected.
      *
      * @param vec3Arg the right factor (not null, unaffected)
@@ -137,8 +136,8 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     Vec3 multiply3x3(Vec3Arg vec3Arg);
 
     /**
-     * Multiply the transpose of the 3x3 matrix by the specified vector. The
-     * matrix is unaffected.
+     * Multiply the transpose of the 3x3 matrix by the specified column vector.
+     * The matrix is unaffected.
      *
      * @param vec3Arg the right factor (not null, unaffected)
      * @return a new vector
