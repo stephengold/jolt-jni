@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -71,6 +71,24 @@ abstract public class CompoundShape extends Shape {
         long shapeVa = va();
         long subShapeVa = getSubShape(shapeVa, subShapeIndex);
         SubShape result = new SubShape(subShapeVa);
+
+        return result;
+    }
+
+    /**
+     * Access all the subshapes as an array.
+     *
+     * @return a new array of new JVM objects with pre-existing native objects
+     * assigned
+     */
+    public SubShape[] getSubShapes() {
+        long shapeVa = va();
+        int numSubShapes = getNumSubShapes();
+        SubShape[] result = new SubShape[numSubShapes];
+        for (int i = 0; i < numSubShapes; ++i) {
+            long subShapeVa = getSubShape(shapeVa, i);
+            result[i] = new SubShape(subShapeVa);
+        }
 
         return result;
     }
