@@ -454,6 +454,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      *
      * @return a new vector
      */
+    @Override
     public Vec3 getDiagonal3() {
         long matrixVa = va();
         float x = getElement(matrixVa, 0, 0);
@@ -548,6 +549,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      *
      * @return a new matrix
      */
+    @Override
     public Mat44 inversedRotationTranslation() {
         long currentVa = va();
         long resultVa = inversedRotationTranslation(currentVa);

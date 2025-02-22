@@ -56,6 +56,13 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     Vec3 getAxisZ();
 
     /**
+     * Copy the diagonal elements to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 getDiagonal3();
+
+    /**
      * Return the specified element. The matrix is unaffected.
      *
      * @param row the zero-origin index of the row (&ge;0, &lt;4)
@@ -91,6 +98,14 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * @return a new matrix
      */
     Mat44 inversed3x3();
+
+    /**
+     * Return the inverse, assuming the current matrix consists entirely of
+     * rotation and translation.
+     *
+     * @return a new matrix
+     */
+    Mat44 inversedRotationTranslation();
 
     /**
      * Test whether the current matrix is equal to the argument. The current
