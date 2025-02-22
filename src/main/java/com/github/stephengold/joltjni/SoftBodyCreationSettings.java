@@ -80,6 +80,19 @@ public class SoftBodyCreationSettings
     SoftBodyCreationSettings(JoltPhysicsObject container, long bodySettingsVa) {
         super(container, bodySettingsVa);
     }
+
+    /**
+     * Instantiate settings with the specified native object assigned.
+     *
+     * @param bodySettingsVa the virtual address of the native object to assign
+     * (not zero)
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
+     */
+    SoftBodyCreationSettings(long bodySettingsVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(bodySettingsVa) : null;
+        setVirtualAddress(bodySettingsVa, freeingAction);
+    }
     // *************************************************************************
     // new methods exposed
 

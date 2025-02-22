@@ -782,6 +782,21 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Convert the body to a {@code SoftBodyCreationSettings} object. The body
+     * is unaffected.
+     *
+     * @return a new object
+     */
+    public SoftBodyCreationSettings getSoftBodyCreationSettings() {
+        long bodyVa = va();
+        long settingsVa = getSoftBodyCreationSettings(bodyVa);
+        SoftBodyCreationSettings result
+                = new SoftBodyCreationSettings(settingsVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the body's user data: can be used for anything. The body is
      * unaffected.
      *
@@ -1029,6 +1044,8 @@ public class Body extends NonCopyable implements ConstBody {
     native private static float getRotationW(long bodyVa);
 
     native private static long getShape(long bodyVa);
+
+    native private static long getSoftBodyCreationSettings(long bodyVa);
 
     native private static long getUserData(long bodyVa);
 

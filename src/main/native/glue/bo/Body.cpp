@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Body/Body.h"
 #include "Jolt/Physics/Body/BodyCreationSettings.h"
+#include "Jolt/Physics/SoftBody/SoftBodyCreationSettings.h"
 
 #include "auto/com_github_stephengold_joltjni_Body.h"
 #include "glue/glue.h"
@@ -617,6 +618,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getShape
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     const Shape * const pResult = pBody->GetShape();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getSoftBodyCreationSettings
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getSoftBodyCreationSettings
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    SoftBodyCreationSettings * const pResult = new SoftBodyCreationSettings();
+    TRACE_NEW("SoftBodyCreationSettings", pResult)
+    *pResult = pBody->GetSoftBodyCreationSettings();
     return reinterpret_cast<jlong> (pResult);
 }
 
