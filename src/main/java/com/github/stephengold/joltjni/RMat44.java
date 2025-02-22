@@ -156,7 +156,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
         float rx = rotation.getX();
         float ry = rotation.getY();
         float rz = rotation.getZ();
-        long matrixVa = sRotation(rx, ry, rz, rw);
+        long matrixVa = createRotation(rx, ry, rz, rw);
         RMat44 result = new RMat44(matrixVa, true);
 
         return result;
@@ -504,6 +504,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static long createIdentity();
 
+    native private static long createRotation(
+            float rx, float ry, float rz, float rw);
+
     native private static long createRotationTranslation(float qx, float qy,
             float qz, float qw, double tx, double ty, double tz);
 
@@ -550,7 +553,4 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static void setTranslation(
             long matrixVa, double xx, double yy, double zz);
-
-    native private static long sRotation(
-            float rx, float ry, float rz, float rw);
 }
