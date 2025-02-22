@@ -279,6 +279,28 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Create a translation-and-rotation matrix.
+     *
+     * @param rotation the amount to rotate (not null, unaffected)
+     * @param offset the amount to translate (not null, unaffected)
+     * @return a new object
+     */
+    public static Mat44 sRotationTranslation(QuatArg rotation, Vec3Arg offset) {
+        float[] floatArray = new float[7];
+        floatArray[0] = rotation.getX();
+        floatArray[1] = rotation.getY();
+        floatArray[2] = rotation.getZ();
+        floatArray[3] = rotation.getW();
+        floatArray[4] = offset.getX();
+        floatArray[5] = offset.getY();
+        floatArray[6] = offset.getZ();
+        long matrixVa = createRotationTranslation(floatArray);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Create a matrix for the specified X-axis rotation.
      *
      * @param angle the rotation angle (in radians)
@@ -318,22 +340,14 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
-     * Create a translation-and-rotation matrix.
+     * Create a uniform scaling matrix.
      *
-     * @param rotation the amount to rotate (not null, unaffected)
-     * @param offset the amount to translate (not null, unaffected)
-     * @return a new object
+     * @param factor the amount to scale each axis
+     * @return a new instance
+     *
      */
-    public static Mat44 sRotationTranslation(QuatArg rotation, Vec3Arg offset) {
-        float[] floatArray = new float[7];
-        floatArray[0] = rotation.getX();
-        floatArray[1] = rotation.getY();
-        floatArray[2] = rotation.getZ();
-        floatArray[3] = rotation.getW();
-        floatArray[4] = offset.getX();
-        floatArray[5] = offset.getY();
-        floatArray[6] = offset.getZ();
-        long matrixVa = createRotationTranslation(floatArray);
+    public static Mat44 sScale(float factor) {
+        long matrixVa = createScale(factor, factor, factor);
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
@@ -351,20 +365,6 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         float y = factors.getY();
         float z = factors.getZ();
         long matrixVa = createScale(x, y, z);
-        Mat44 result = new Mat44(matrixVa, true);
-
-        return result;
-    }
-
-    /**
-     * Create a uniform scaling matrix.
-     *
-     * @param factor the amount to scale each axis
-     * @return a new instance
-     *
-     */
-    public static Mat44 sScale(float factor) {
-        long matrixVa = createScale(factor, factor, factor);
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
