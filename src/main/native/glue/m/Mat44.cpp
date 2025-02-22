@@ -106,8 +106,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createIdentity
  * Signature: (FFFF)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createRotation
-  (JNIEnv *, jclass, jfloat x, jfloat y, jfloat z, jfloat w) {
-    const Quat rotation(x, y, z, w);
+  (JNIEnv *, jclass, jfloat rx, jfloat ry, jfloat rz, jfloat rw) {
+    const Quat rotation(rx, ry, rz, rw);
     Mat44 * const pResult = new Mat44();
     TRACE_NEW("Mat44", pResult)
     *pResult = Mat44::sRotation(rotation);
@@ -188,8 +188,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createRotation
  * Signature: (FFF)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createScale
-  (JNIEnv *, jclass, jfloat x, jfloat y, jfloat z) {
-    const Vec3 factors(x, y, z);
+  (JNIEnv *, jclass, jfloat sx, jfloat sy, jfloat sz) {
+    const Vec3 factors(sx, sy, sz);
     Mat44 * const pResult = new Mat44();
     TRACE_NEW("Mat44", pResult)
     *pResult = Mat44::sScale(factors);
@@ -277,16 +277,16 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Mat44_getElement
  * Signature: (J[F)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_getQuaternion
-  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray storeArray) {
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray storeFloats) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
     const Quat quat = pMatrix->GetQuaternion();
     jboolean isCopy;
-    jfloat * const pStore = pEnv->GetFloatArrayElements(storeArray, &isCopy);
+    jfloat * const pStore = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
     pStore[0] = quat.GetX();
     pStore[1] = quat.GetY();
     pStore[2] = quat.GetZ();
     pStore[3] = quat.GetW();
-    pEnv->ReleaseFloatArrayElements(storeArray, pStore, 0);
+    pEnv->ReleaseFloatArrayElements(storeFloats, pStore, 0);
 }
 
 /*
@@ -396,12 +396,12 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_loadIdentity
  * Signature: (JJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply
-  (JNIEnv *, jclass, jlong m1Va, jlong m2Va) {
-    const Mat44 * const pM1 = reinterpret_cast<Mat44 *> (m1Va);
-    const Mat44 * const pM2 = reinterpret_cast<Mat44 *> (m2Va);
+  (JNIEnv *, jclass, jlong leftVa, jlong rightVa) {
+    const Mat44 * const pLeft = reinterpret_cast<Mat44 *> (leftVa);
+    const Mat44 * const pRight = reinterpret_cast<Mat44 *> (rightVa);
     Mat44 * const pResult = new Mat44();
     TRACE_NEW("Mat44", pResult)
-    *pResult = (*pM1) * (*pM2);
+    *pResult = (*pLeft) * (*pRight);
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -411,12 +411,12 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply
  * Signature: (JJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3__JJ
-  (JNIEnv *, jclass, jlong currentVa, jlong argVa) {
-    const Mat44 * const pCurrent = reinterpret_cast<Mat44 *> (currentVa);
-    const Mat44 * const pArg = reinterpret_cast<Mat44 *> (argVa);
+  (JNIEnv *, jclass, jlong leftVa, jlong rightVa) {
+    const Mat44 * const pLeft = reinterpret_cast<Mat44 *> (leftVa);
+    const Mat44 * const pRight = reinterpret_cast<Mat44 *> (rightVa);
     Mat44 * const pResult = new Mat44();
     TRACE_NEW("Mat44", pResult)
-    *pResult = pCurrent->Multiply3x3(*pArg);
+    *pResult = pLeft->Multiply3x3(*pRight);
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -426,16 +426,16 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3__J
  * Signature: (J[F)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3__J_3F
-  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray array) {
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray tmpFloats) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
     jboolean isCopy;
-    jfloat * const pArray = pEnv->GetFloatArrayElements(array, &isCopy);
+    jfloat * const pArray = pEnv->GetFloatArrayElements(tmpFloats, &isCopy);
     const Vec3 v(pArray[0], pArray[1], pArray[2]);
     const Vec3 result = pMatrix->Multiply3x3(v);
     pArray[0] = result.GetX();
     pArray[1] = result.GetY();
     pArray[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(array, pArray, 0);
+    pEnv->ReleaseFloatArrayElements(tmpFloats, pArray, 0);
 }
 
 /*
@@ -444,16 +444,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3__J_
  * Signature: (J[F)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3Transposed
-  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray array) {
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray tmpFloats) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
     jboolean isCopy;
-    jfloat * const pArray = pEnv->GetFloatArrayElements(array, &isCopy);
+    jfloat * const pArray = pEnv->GetFloatArrayElements(tmpFloats, &isCopy);
     const Vec3 v(pArray[0], pArray[1], pArray[2]);
     const Vec3 result = pMatrix->Multiply3x3Transposed(v);
     pArray[0] = result.GetX();
     pArray[1] = result.GetY();
     pArray[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(array, pArray, 0);
+    pEnv->ReleaseFloatArrayElements(tmpFloats, pArray, 0);
 }
 
 /*
@@ -462,16 +462,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x3Tran
  * Signature: (J[F)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_multiply3x4
-  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray array) {
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray tmpFloats) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
     jboolean isCopy;
-    jfloat * const pArray = pEnv->GetFloatArrayElements(array, &isCopy);
+    jfloat * const pArray = pEnv->GetFloatArrayElements(tmpFloats, &isCopy);
     const Vec3 v(pArray[0], pArray[1], pArray[2]);
     const Vec3 result = (*pMatrix) * v;
     pArray[0] = result.GetX();
     pArray[1] = result.GetY();
     pArray[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(array, pArray, 0);
+    pEnv->ReleaseFloatArrayElements(tmpFloats, pArray, 0);
 }
 
 /*

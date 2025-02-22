@@ -48,10 +48,10 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Instantiate a matrix with the specified elements.
      *
-     * @param elements in column-major order (not null)
+     * @param elementArray in column-major order (not null)
      */
-    public Mat44(float... elements) {
-        long matrixVa = createFromColumnMajor(elements);
+    public Mat44(float... elementArray) {
+        long matrixVa = createFromColumnMajor(elementArray);
         setVirtualAddress(matrixVa, () -> free(matrixVa));
     }
 
@@ -222,13 +222,13 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Alter the translation component.
      *
-     * @param vec the desired translation (not null, unaffected)
+     * @param offset the desired translation (not null, unaffected)
      */
-    public void setTranslation(Vec3Arg vec) {
+    public void setTranslation(Vec3Arg offset) {
         long matrixVa = va();
-        float x = vec.getX();
-        float y = vec.getY();
-        float z = vec.getZ();
+        float x = offset.getX();
+        float y = offset.getY();
+        float z = offset.getZ();
         setTranslation(matrixVa, x, y, z);
     }
 
@@ -361,10 +361,10 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      *
      */
     public static Mat44 sScale(Vec3Arg factors) {
-        float x = factors.getX();
-        float y = factors.getY();
-        float z = factors.getZ();
-        long matrixVa = createScale(x, y, z);
+        float sx = factors.getX();
+        float sy = factors.getY();
+        float sz = factors.getZ();
+        long matrixVa = createScale(sx, sy, sz);
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
@@ -491,10 +491,10 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public Quat getQuaternion() {
         long matrixVa = va();
-        float[] storeArray = new float[4];
-        getQuaternion(matrixVa, storeArray);
+        float[] storeFloats = new float[4];
+        getQuaternion(matrixVa, storeFloats);
         Quat result = new Quat(
-                storeArray[0], storeArray[1], storeArray[2], storeArray[3]);
+                storeFloats[0], storeFloats[1], storeFloats[2], storeFloats[3]);
 
         return result;
     }
@@ -592,15 +592,15 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Multiply the current matrix by the argument. The current matrix is
      * unaffected.
      *
-     * @param m2 the right factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
      * @return a new matrix
      */
     @Override
-    public Mat44 multiply(Mat44Arg m2) {
-        long m1Va = va();
-        long m2Va = m2.targetVa();
-        long productVa = multiply(m1Va, m2Va);
-        Mat44 result = new Mat44(productVa, true);
+    public Mat44 multiply(Mat44Arg right) {
+        long leftVa = va();
+        long rightVa = right.targetVa();
+        long resultVa = multiply(leftVa, rightVa);
+        Mat44 result = new Mat44(resultVa, true);
 
         return result;
     }
@@ -609,15 +609,15 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Multiply the current 3x3 matrix by the specified 3x3 matrix. The current
      * matrix is unaffected.
      *
-     * @param arg the factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
      * @return a new matrix
      */
     @Override
-    public Mat44 multiply3x3(Mat44Arg arg) {
-        long currentVa = va();
-        long argVa = arg.targetVa();
-        long productVa = multiply3x3(currentVa, argVa);
-        Mat44 result = new Mat44(productVa, true);
+    public Mat44 multiply3x3(Mat44Arg right) {
+        long leftVa = va();
+        long rightVa = right.targetVa();
+        long resultVa = multiply3x3(leftVa, rightVa);
+        Mat44 result = new Mat44(resultVa, true);
 
         return result;
     }
@@ -678,15 +678,15 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *
-     * @param offset the left factor (not null, unaffected)
+     * @param vec3 the left factor (not null, unaffected)
      * @return a new matrix
      */
     @Override
-    public Mat44 postTranslated(Vec3Arg offset) {
+    public Mat44 postTranslated(Vec3Arg vec3) {
         long matrixVa = va();
-        float x = offset.getX();
-        float y = offset.getY();
-        float z = offset.getZ();
+        float x = vec3.getX();
+        float y = vec3.getY();
+        float z = vec3.getZ();
         long resultVa = postTranslated(matrixVa, x, y, z);
         Mat44 result = new Mat44(resultVa, true);
 
@@ -729,18 +729,18 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     // *************************************************************************
     // native private methods
 
-    native private static void assign(long targetVa, long originalVa);
+    native private static void assign(long targetVa, long sourceVa);
 
     native private static long createCopy(long originalVa);
 
-    native private static long createFromColumnMajor(float[] elements);
+    native private static long createFromColumnMajor(float[] elementsArray);
 
     native private static long createFromRMatrix(long rMatrixVa);
 
     native private static long createIdentity();
 
     native private static long createRotation(
-            float x, float y, float z, float w);
+            float rx, float ry, float rz, float rw);
 
     native private static long createRotationAxisAngle(
             float ax, float ay, float az, float angle);
@@ -753,7 +753,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static long createRotationZ(float angle);
 
-    native private static long createScale(float x, float y, float z);
+    native private static long createScale(float sx, float sy, float sz);
 
     native private static long createTranslation(float x, float y, float z);
 
@@ -768,7 +768,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     native private static float getElement(long matrixVa, int row, int column);
 
     native private static void getQuaternion(
-            long matrixVa, float[] storeArray);
+            long matrixVa, float[] storeFloats);
 
     native private static float getTranslationX(long matrixVa);
 
@@ -786,16 +786,16 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static void loadIdentity(long matrixVa);
 
-    native private static long multiply(long m1Va, long m2Va);
+    native private static long multiply(long leftVa, long rightVa);
 
-    native private static long multiply3x3(long currentVa, long argVa);
+    native private static long multiply3x3(long leftVa, long rightVa);
 
-    native private static void multiply3x3(long matrixVa, float[] array);
+    native private static void multiply3x3(long matrixVa, float[] tmpFloats);
 
     native private static void multiply3x3Transposed(
-            long matrixVa, float[] array);
+            long matrixVa, float[] tmpFloats);
 
-    native private static void multiply3x4(long matrixVa, float[] array);
+    native private static void multiply3x4(long matrixVa, float[] tmpFloats);
 
     native private static long postTranslated(
             long matrixVa, float x, float y, float z);
