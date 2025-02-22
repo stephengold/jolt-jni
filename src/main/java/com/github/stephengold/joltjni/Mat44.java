@@ -255,7 +255,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         float rx = rotation.getX();
         float ry = rotation.getY();
         float rz = rotation.getZ();
-        long matrixVa = sRotation(rx, ry, rz, rw);
+        long matrixVa = createRotation(rx, ry, rz, rw);
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
@@ -272,7 +272,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         float ax = axis.getX();
         float ay = axis.getY();
         float az = axis.getZ();
-        long matrixVa = sRotationAxisAngle(ax, ay, az, angle);
+        long matrixVa = createRotationAxisAngle(ax, ay, az, angle);
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
@@ -333,7 +333,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         floatArray[4] = offset.getX();
         floatArray[5] = offset.getY();
         floatArray[6] = offset.getZ();
-        long matrixVa = sRotationTranslation(floatArray);
+        long matrixVa = createRotationTranslation(floatArray);
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
@@ -350,7 +350,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         float x = factors.getX();
         float y = factors.getY();
         float z = factors.getZ();
-        long matrixVa = sScale(x, y, z);
+        long matrixVa = createScale(x, y, z);
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
@@ -364,7 +364,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      *
      */
     public static Mat44 sScale(float factor) {
-        long matrixVa = sScale(factor, factor, factor);
+        long matrixVa = createScale(factor, factor, factor);
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
@@ -381,7 +381,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         float x = offset.getX();
         float y = offset.getY();
         float z = offset.getZ();
-        long matrixVa = sTranslation(x, y, z);
+        long matrixVa = createTranslation(x, y, z);
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
@@ -737,11 +737,23 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static long createIdentity();
 
+    native private static long createRotation(
+            float x, float y, float z, float w);
+
+    native private static long createRotationAxisAngle(
+            float ax, float ay, float az, float angle);
+
+    native private static long createRotationTranslation(float[] floatArray);
+
     native private static long createRotationX(float angle);
 
     native private static long createRotationY(float angle);
 
     native private static long createRotationZ(float angle);
+
+    native private static long createScale(float x, float y, float z);
+
+    native private static long createTranslation(float x, float y, float z);
 
     native private static long createUninitialized();
 
@@ -803,15 +815,4 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static void setTranslation(
             long matrixVa, float x, float y, float z);
-
-    native private static long sRotation(float x, float y, float z, float w);
-
-    native private static long sRotationAxisAngle(
-            float ax, float ay, float az, float angle);
-
-    native private static long sRotationTranslation(float[] floatArray);
-
-    native private static long sScale(float x, float y, float z);
-
-    native private static long sTranslation(float x, float y, float z);
 }
