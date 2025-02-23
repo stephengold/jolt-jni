@@ -100,10 +100,10 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * Multiply the current matrix by the argument. The current matrix is
      * unaffected.
      *
-     * @param m2 the right factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
      * @return a new matrix
      */
-    RMat44 multiply(RMat44Arg m2);
+    RMat44 multiply(RMat44Arg right);
 
     /**
      * Multiply the 3x3 matrix by the specified column vector. The matrix is
