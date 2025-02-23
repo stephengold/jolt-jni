@@ -138,8 +138,8 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param vec3Arg the right factor (not null, unaffected)
+     * @param vec3 the right factor (not null, unaffected)
      * @return a new vector
      */
-    RVec3 multiply3x4(Vec3Arg vec3Arg);
+    RVec3 multiply3x4(Vec3Arg vec3);
 }
