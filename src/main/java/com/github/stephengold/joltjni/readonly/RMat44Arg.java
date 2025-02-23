@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
@@ -57,6 +58,13 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
     Vec3 getAxisZ();
 
     /**
+     * Copy the diagonal elements to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    Vec3 getDiagonal3();
+
+    /**
      * Return the specified element in double precision. The matrix is
      * unaffected.
      *
@@ -88,6 +96,22 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
     RMat44 inversed();
 
     /**
+     * Return the inverse of the 3x3 portion. The current matrix is unaffected.
+     *
+     * @return a new matrix
+     */
+    RMat44 inversed3x3();
+
+    /**
+     * Return the inverse of the current matrix, assuming the current matrix
+     * consists entirely of rotation and translation. The current matrix is
+     * unaffected.
+     *
+     * @return a new matrix
+     */
+    RMat44 inversedRotationTranslation();
+
+    /**
      * Test whether the current matrix is equal to the argument. The current
      * matrix is unaffected.
      *
@@ -97,6 +121,14 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
     boolean isEqual(RMat44Arg m2);
 
     /**
+     * Test whether the current matrix is an identity matrix. The matrix is
+     * unaffected.
+     *
+     * @return {@code true} if exactly equal, otherwise {@code false}
+     */
+    boolean isIdentity();
+
+    /**
      * Multiply the current matrix by the argument. The current matrix is
      * unaffected.
      *
@@ -104,6 +136,15 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * @return a new matrix
      */
     RMat44 multiply(RMat44Arg right);
+
+    /**
+     * Multiply the current 3x3 matrix by the specified 3x3 matrix. The current
+     * matrix is unaffected.
+     *
+     * @param right the right factor (not null, unaffected)
+     * @return a new matrix
+     */
+    RMat44 multiply3x3(RMat44Arg right);
 
     /**
      * Multiply the 3x3 matrix by the specified column vector. The matrix is
@@ -142,4 +183,21 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * @return a new vector
      */
     RVec3 multiply3x4(Vec3Arg vec3);
+
+    /**
+     * Post multiply by the specified translation vector. The current matrix is
+     * unaffected.
+     *
+     * @param rvec3 the left factor (not null, unaffected)
+     * @return a new matrix
+     */
+    RMat44 postTranslated(RVec3Arg rvec3);
+
+    /**
+     * Copy the current matrix to a new, single-precision matrix. The current
+     * matrix is unaffected.
+     *
+     * @return the new matrix
+     */
+    Mat44 toMat44();
 }

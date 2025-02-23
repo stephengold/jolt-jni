@@ -264,6 +264,22 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Copy the diagonal elements to a {@code Vec3}. The matrix is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getDiagonal3() {
+        long matrixVa = va();
+        float x = (float) getElement(matrixVa, 0, 0);
+        float y = (float) getElement(matrixVa, 1, 1);
+        float z = (float) getElement(matrixVa, 2, 2);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
      * Return the specified element in double precision. The matrix is
      * unaffected.
      *
@@ -329,12 +345,27 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Return the inverse of the 3x3 portion. The current matrix is unaffected.
+     *
+     * @return a new matrix
+     */
+    @Override
+    public RMat44 inversed3x3() {
+        long currentVa = va();
+        long resultVa = inversed3x3(currentVa);
+        RMat44 result = new RMat44(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the inverse of the current matrix, assuming the current matrix
      * consists entirely of rotation and translation. The current matrix is
      * unaffected.
      *
      * @return a new matrix
      */
+    @Override
     public RMat44 inversedRotationTranslation() {
         long currentVa = va();
         long resultVa = inversedRotationTranslation(currentVa);
@@ -360,6 +391,20 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Test whether the current matrix is an identity matrix. The matrix is
+     * unaffected.
+     *
+     * @return {@code true} if exactly equal, otherwise {@code false}
+     */
+    @Override
+    public boolean isIdentity() {
+        long matrixVa = va();
+        boolean result = isIdentity(matrixVa);
+
+        return result;
+    }
+
+    /**
      * Multiply the current matrix by the argument. The current matrix is
      * unaffected.
      *
@@ -371,6 +416,23 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
         long leftVa = va();
         long rightVa = right.targetVa();
         long productVa = multiply(leftVa, rightVa);
+        RMat44 result = new RMat44(productVa, true);
+
+        return result;
+    }
+
+    /**
+     * Multiply the current 3x3 matrix by the specified 3x3 matrix. The current
+     * matrix is unaffected.
+     *
+     * @param right the right factor (not null, unaffected)
+     * @return a new matrix
+     */
+    @Override
+    public RMat44 multiply3x3(RMat44Arg right) {
+        long leftVa = va();
+        long rightVa = right.targetVa();
+        long productVa = multiply3x3(leftVa, rightVa);
         RMat44 result = new RMat44(productVa, true);
 
         return result;
@@ -450,11 +512,31 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Post multiply by the specified translation vector. The current matrix is
+     * unaffected.
+     *
+     * @param rvec3 the left factor (not null, unaffected)
+     * @return a new matrix
+     */
+    @Override
+    public RMat44 postTranslated(RVec3Arg rvec3) {
+        long matrixVa = va();
+        double xx = rvec3.xx();
+        double yy = rvec3.yy();
+        double zz = rvec3.zz();
+        long resultVa = postTranslated(matrixVa, xx, yy, zz);
+        RMat44 result = new RMat44(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Copy the current matrix to a new, single-precision matrix. The current
      * matrix is unaffected.
      *
      * @return the new matrix
      */
+    @Override
     public Mat44 toMat44() {
         Mat44 result = new Mat44(this);
         return result;
@@ -535,11 +617,17 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static long inversed(long currentVa);
 
+    native private static long inversed3x3(long currentVa);
+
     native private static long inversedRotationTranslation(long currentVa);
+
+    native private static boolean isIdentity(long matrixVa);
 
     native private static long multiply(long leftVa, long rightVa);
 
     native private static void multiply3x3(long matrixVa, float[] tmpFloats);
+
+    native private static long multiply3x3(long leftVa, long rightVa);
 
     native private static void multiply3x3Transposed(
             long matrixVa, float[] tmpFloats);
@@ -548,6 +636,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
             long matrixVa, float x, float y, float z, double[] storeDoubles);
 
     native private static void multiply3x4r(long matrixVa, double[] tmpDoubles);
+
+    native private static long postTranslated(
+            long matrixVa, double xx, double yy, double zz);
 
     native private static void setElement(
             long matrixVa, int row, int column, double value);
