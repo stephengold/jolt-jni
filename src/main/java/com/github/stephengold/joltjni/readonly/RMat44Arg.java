@@ -96,13 +96,6 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
     RMat44 inversed();
 
     /**
-     * Return the inverse of the 3x3 portion. The current matrix is unaffected.
-     *
-     * @return a new matrix
-     */
-    RMat44 inversed3x3();
-
-    /**
      * Return the inverse of the current matrix, assuming the current matrix
      * consists entirely of rotation and translation. The current matrix is
      * unaffected.

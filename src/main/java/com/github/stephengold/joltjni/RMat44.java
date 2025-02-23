@@ -345,20 +345,6 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
-     * Return the inverse of the 3x3 portion. The current matrix is unaffected.
-     *
-     * @return a new matrix
-     */
-    @Override
-    public RMat44 inversed3x3() {
-        long currentVa = va();
-        long resultVa = inversed3x3(currentVa);
-        RMat44 result = new RMat44(resultVa, true);
-
-        return result;
-    }
-
-    /**
      * Return the inverse of the current matrix, assuming the current matrix
      * consists entirely of rotation and translation. The current matrix is
      * unaffected.
@@ -616,8 +602,6 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     native private static double getTranslationZ(long matrixVa);
 
     native private static long inversed(long currentVa);
-
-    native private static long inversed3x3(long currentVa);
 
     native private static long inversedRotationTranslation(long currentVa);
 
