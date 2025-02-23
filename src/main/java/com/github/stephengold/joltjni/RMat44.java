@@ -363,14 +363,14 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Multiply the current matrix by the argument. The current matrix is
      * unaffected.
      *
-     * @param m2 the right factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
      * @return a new matrix
      */
     @Override
-    public RMat44 multiply(RMat44Arg m2) {
-        long m1Va = va();
-        long m2Va = m2.targetVa();
-        long productVa = multiply(m1Va, m2Va);
+    public RMat44 multiply(RMat44Arg right) {
+        long leftVa = va();
+        long rightVa = right.targetVa();
+        long productVa = multiply(leftVa, rightVa);
         RMat44 result = new RMat44(productVa, true);
 
         return result;
@@ -433,15 +433,15 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param vec3Arg the right factor (not null, unaffected)
+     * @param vec3 the right factor (not null, unaffected)
      * @return a new vector
      */
     @Override
-    public RVec3 multiply3x4(Vec3Arg vec3Arg) {
+    public RVec3 multiply3x4(Vec3Arg vec3) {
         long matrixVa = va();
-        float x = vec3Arg.getX();
-        float y = vec3Arg.getY();
-        float z = vec3Arg.getZ();
+        float x = vec3.getX();
+        float y = vec3.getY();
+        float z = vec3.getZ();
         double[] storeDoubles = new double[3];
         multiply3x4(matrixVa, x, y, z, storeDoubles);
         RVec3 result = new RVec3(storeDoubles);
@@ -509,7 +509,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
             float rx, float ry, float rz, float rw);
 
     native private static long createRotationTranslation(float qx, float qy,
-            float qz, float qw, double tx, double ty, double tz);
+            float qz, float qw, double xx, double yy, double zz);
 
     native private static long createTranslation(
             double xx, double yy, double zz);
@@ -537,7 +537,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static long inversedRotationTranslation(long currentVa);
 
-    native private static long multiply(long m1Va, long m2Va);
+    native private static long multiply(long leftVa, long rightVa);
 
     native private static void multiply3x3(long matrixVa, float[] tmpFloats);
 

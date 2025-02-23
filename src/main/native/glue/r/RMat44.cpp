@@ -290,12 +290,12 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_inversedRotat
  * Signature: (JJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply
-  (JNIEnv *, jclass, jlong m1Va, jlong m2Va) {
-    const RMat44 * const pM1 = reinterpret_cast<RMat44 *> (m1Va);
-    const RMat44 * const pM2 = reinterpret_cast<RMat44 *> (m2Va);
+  (JNIEnv *, jclass, jlong leftVa, jlong rightVa) {
+    const RMat44 * const pLeft = reinterpret_cast<RMat44 *> (leftVa);
+    const RMat44 * const pRight = reinterpret_cast<RMat44 *> (rightVa);
     RMat44 * const pResult = new RMat44();
     TRACE_NEW("RMat44", pResult)
-    *pResult = (*pM1) * (*pM2);
+    *pResult = (*pLeft) * (*pRight);
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -343,16 +343,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x3Tra
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x4
   (JNIEnv *pEnv, jclass, jlong matrixVa, jfloat x, jfloat y, jfloat z,
-  jdoubleArray array) {
+  jdoubleArray storeDoubles) {
     const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
     jboolean isCopy;
-    jdouble * const pArray = pEnv->GetDoubleArrayElements(array, &isCopy);
+    jdouble * const pArray = pEnv->GetDoubleArrayElements(storeDoubles, &isCopy);
     const Vec3 v(x, y, z);
     const RVec3 result = (*pMatrix) * v;
     pArray[0] = result.GetX();
     pArray[1] = result.GetY();
     pArray[2] = result.GetZ();
-    pEnv->ReleaseDoubleArrayElements(array, pArray, 0);
+    pEnv->ReleaseDoubleArrayElements(storeDoubles, pArray, 0);
 }
 
 /*
