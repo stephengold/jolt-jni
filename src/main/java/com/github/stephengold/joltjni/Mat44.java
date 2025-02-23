@@ -544,8 +544,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
-     * Return the inverse, assuming the current matrix consists entirely of
-     * rotation and translation.
+     * Return the inverse of the current matrix, assuming the current matrix
+     * consists entirely of rotation and translation. The current matrix is
+     * unaffected.
      *
      * @return a new matrix
      */

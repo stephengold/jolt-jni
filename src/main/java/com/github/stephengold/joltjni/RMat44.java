@@ -360,7 +360,8 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
-     * Multiply the current matrix by the argument. The matrix is unaffected.
+     * Multiply the current matrix by the argument. The current matrix is
+     * unaffected.
      *
      * @param m2 the right factor (not null, unaffected)
      * @return a new matrix

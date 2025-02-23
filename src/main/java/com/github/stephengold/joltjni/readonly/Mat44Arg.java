@@ -100,8 +100,9 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     Mat44 inversed3x3();
 
     /**
-     * Return the inverse, assuming the current matrix consists entirely of
-     * rotation and translation.
+     * Return the inverse of the current matrix, assuming the current matrix
+     * consists entirely of rotation and translation. The current matrix is
+     * unaffected.
      *
      * @return a new matrix
      */
@@ -125,7 +126,8 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     boolean isIdentity();
 
     /**
-     * Multiply the current matrix by the argument. The matrix is unaffected.
+     * Multiply the current matrix by the argument. The current matrix is
+     * unaffected.
      *
      * @param right the right factor (not null, unaffected)
      * @return a new matrix
