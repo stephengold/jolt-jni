@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -138,6 +139,49 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Create a unit vector along the 1st (X) principal axis.
+     *
+     * @return a new vector
+     */
+    public static RVec3 sAxisX() {
+        RVec3 result = new RVec3(1., 0., 0.);
+        return result;
+    }
+
+    /**
+     * Create a unit vector along the 2nd (Y) principal axis.
+     *
+     * @return a new vector
+     */
+    public static RVec3 sAxisY() {
+        RVec3 result = new RVec3(0., 1., 0.);
+        return result;
+    }
+
+    /**
+     * Create a unit vector along the 3rd (Z) principal axis.
+     *
+     * @return a new vector
+     */
+    public static RVec3 sAxisZ() {
+        RVec3 result = new RVec3(0., 0., 1.);
+        return result;
+    }
+
+    /**
+     * Separately scale each component.
+     *
+     * @param xScale the scale factor to apply to the X component
+     * @param yScale the scale factor to apply to the Y component
+     * @param zScale the scale factor to apply to the Z component
+     */
+    public void scaleInPlace(double xScale, double yScale, double zScale) {
+        this.xx *= xScale;
+        this.yy *= yScale;
+        this.zz *= zScale;
+    }
+
+    /**
      * Set all 3 components to specified values.
      *
      * @param x the desired X component
@@ -160,6 +204,17 @@ final public class RVec3 implements RVec3Arg {
         this.xx = array[0];
         this.yy = array[1];
         this.zz = array[2];
+    }
+
+    /**
+     * Set all 3 components from the argument.
+     *
+     * @param source the vector to copy (not null, unaffected)
+     */
+    public void set(RVec3Arg source) {
+        this.xx = source.xx();
+        this.yy = source.yy();
+        this.zz = source.zz();
     }
 
     /**
@@ -203,6 +258,21 @@ final public class RVec3 implements RVec3Arg {
      */
     public static RVec3 sReplicate(double value) {
         RVec3 result = new RVec3(value, value, value);
+        return result;
+    }
+
+    /**
+     * Return the component-wise sum of the specified vectors.
+     *
+     * @param vArray an array of input vectors (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 sum(RVec3Arg... vArray) {
+        RVec3 result = new RVec3();
+        for (RVec3Arg arg : vArray) {
+            Op.plusEquals(result, arg);
+        }
+
         return result;
     }
 
