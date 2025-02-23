@@ -408,23 +408,6 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
-     * Multiply the current 3x3 matrix by the specified 3x3 matrix. The current
-     * matrix is unaffected.
-     *
-     * @param right the right factor (not null, unaffected)
-     * @return a new matrix
-     */
-    @Override
-    public RMat44 multiply3x3(RMat44Arg right) {
-        long leftVa = va();
-        long rightVa = right.targetVa();
-        long productVa = multiply3x3(leftVa, rightVa);
-        RMat44 result = new RMat44(productVa, true);
-
-        return result;
-    }
-
-    /**
      * Multiply the 3x3 matrix by the specified column vector. The matrix is
      * unaffected.
      *
@@ -610,8 +593,6 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     native private static long multiply(long leftVa, long rightVa);
 
     native private static void multiply3x3(long matrixVa, float[] tmpFloats);
-
-    native private static long multiply3x3(long leftVa, long rightVa);
 
     native private static void multiply3x3Transposed(
             long matrixVa, float[] tmpFloats);

@@ -316,7 +316,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply
  * Method:    multiply3x3
  * Signature: (J[F)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x3__J_3F
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x3
   (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray tmpFloats) {
     const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
     jboolean isCopy;
@@ -328,21 +328,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x3__J
     pTmpFloats[1] = result.GetY();
     pTmpFloats[2] = result.GetZ();
     pEnv->ReleaseFloatArrayElements(tmpFloats, pTmpFloats, 0);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RMat44
- * Method:    multiply3x3
- * Signature: (JJ)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x3__JJ
-  (JNIEnv *, jclass, jlong leftVa, jlong rightVa) {
-    const RMat44 * const pLeft = reinterpret_cast<RMat44 *> (leftVa);
-    const RMat44 * const pRight = reinterpret_cast<RMat44 *> (rightVa);
-    RMat44 * const pResult = new RMat44();
-    TRACE_NEW("RMat44", pResult)
-    *pResult = pLeft->Multiply3x3(*pRight);
-    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
