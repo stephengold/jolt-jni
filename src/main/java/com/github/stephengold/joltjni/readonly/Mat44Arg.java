@@ -127,19 +127,19 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
     /**
      * Multiply the current matrix by the argument. The matrix is unaffected.
      *
-     * @param m2 the right factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
      * @return a new matrix
      */
-    Mat44 multiply(Mat44Arg m2);
+    Mat44 multiply(Mat44Arg right);
 
     /**
      * Multiply the current 3x3 matrix by the specified 3x3 matrix. The current
      * matrix is unaffected.
      *
-     * @param arg the factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
      * @return a new matrix
      */
-    Mat44 multiply3x3(Mat44Arg arg);
+    Mat44 multiply3x3(Mat44Arg right);
 
     /**
      * Multiply the 3x3 matrix by the specified column vector. The matrix is
@@ -173,8 +173,8 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *
-     * @param vecArg the left factor (not null, unaffected)
+     * @param vec3 the left factor (not null, unaffected)
      * @return a new matrix
      */
-    Mat44 postTranslated(Vec3Arg vecArg);
+    Mat44 postTranslated(Vec3Arg vec3);
 }
