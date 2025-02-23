@@ -14,7 +14,7 @@
         <property name="fileNamePattern" value="testjoltjni[/\\]app"/>
     </module>
 
-    <!-- Checks for headers                       -->
+    <!-- Checks for headers:                      -->
     <!-- See https://checkstyle.org/checks/header -->
     <module name="Header">
         <property name="headerFile" value="${config_loc}/java-header"/>
@@ -22,11 +22,11 @@
         <property name="fileExtensions" value="java"/>
     </module>
 
-    <!-- Checks that a package-info.java file exists for each package  -->
+    <!-- Check that a package-info.java file exists for each package  -->
     <!-- See https://checkstyle.org/checks/javadoc/javadocpackage.html -->
     <module name="JavadocPackage"/>
 
-    <!-- Checks for size violations              -->
+    <!-- Checks for size violations:             -->
     <!-- See https://checkstyle.org/checks/sizes -->
     <module name="FileLength">
         <property name="max" value="1200"/>
@@ -36,7 +36,7 @@
         <property name="max" value="80"/>
     </module>
 
-    <!-- Checks for whitespace                        -->
+    <!-- Checks for whitespace:                       -->
     <!-- See https://checkstyle.org/checks/whitespace -->
     <module name="FileTabCharacter">
         <property name="eachLine" value="true"/>
@@ -50,6 +50,8 @@
 
     <module name="TreeWalker">
 
+        <!-- Checks for annotations:  -->
+        <!-- See https://checkstyle.org/checks/annotation -->
         <module name="AnnotationLocation">
             <property name="id" value="AnnotationLocationMostCases"/>
             <property name="tokens"
@@ -62,7 +64,7 @@
             <property name="allowSamelineMultipleAnnotations" value="true"/>
         </module>
 
-        <!-- Checks for blocks. You know, those {}'s  -->
+        <!-- Checks for blocks:                       -->
         <!-- See https://checkstyle.org/checks/blocks -->
         <module name="EmptyBlock">
             <property name="option" value="TEXT"/>
@@ -108,7 +110,7 @@
                     LITERAL_DO"/>
         </module>
 
-        <!-- Checks for common coding problems        -->
+        <!-- Checks for common coding problems:       -->
         <!-- See https://checkstyle.org/checks/coding -->
         <module name="ConstructorsDeclarationGrouping"/>
         <module name="EmptyStatement"/>
@@ -132,7 +134,7 @@
         <module name="OneStatementPerLine"/>
         <module name="VariableDeclarationUsageDistance"/>
 
-        <!-- Checks for class design                  -->
+        <!-- Checks for class design:                 -->
         <!-- See https://checkstyle.org/checks/design -->
         <module name="DesignForExtension"/>
         <module name="FinalClass"/>
@@ -140,7 +142,7 @@
         <module name="InterfaceIsType"/>
         <module name="OneTopLevelClass"/>
 
-        <!-- Checks for imports                        -->
+        <!-- Checks for imports:                       -->
         <!-- See https://checkstyle.org/checks/imports -->
         <module name="AvoidStarImport"/>
         <module name="CustomImportOrder">
@@ -201,6 +203,8 @@
             <property name="period" value=""/>
         </module>
 
+        <!-- Miscellaneous checks:                 -->
+        <!-- See https://checkstyle.org/checks/misc -->
         <module name="ArrayTypeStyle"/>
         <module name="AvoidEscapedUnicodeCharacters">
             <property name="allowEscapesForControlCharacters" value="true"/>
@@ -222,11 +226,11 @@
         <module name="OuterTypeFilename"/>
         <module name="UpperEll"/>
 
-        <!-- Modifier checks                            -->
+        <!-- Modifier checks:                           -->
         <!-- See https://checkstyle.org/checks/modifier -->
         <module name="RedundantModifier"/>
 
-        <!-- Checks for naming conventions            -->
+        <!-- Checks for naming conventions:           -->
         <!-- See https://checkstyle.org/checks/naming -->
         <module name="AbbreviationAsWordInName">
             <property name="ignoreFinal" value="false"/>
@@ -310,7 +314,7 @@
                      value="Type name ''{0}'' must match pattern ''{1}''."/>
         </module>
 
-        <!-- Checks for size violations              -->
+        <!-- Checks for size violations:             -->
         <!-- See https://checkstyle.org/checks/sizes -->
         <module name="MethodLength">
             <property name="max" value="130"/>
@@ -319,7 +323,7 @@
             <property name="max" value="18"/>
         </module>
 
-        <!-- Checks for whitespace                        -->
+        <!-- Checks for whitespace:                       -->
         <!-- See https://checkstyle.org/checks/whitespace -->
         <module name="EmptyForInitializerPad"/>
         <module name="EmptyForIteratorPad"/>
