@@ -486,7 +486,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Return the component-wise sum of the specified vectors.
      *
-     * @param vArray an array of input vector (not null, unaffected)
+     * @param vArray an array of input vectors (not null, unaffected)
      * @return a new vector
      */
     public static Vec3 sum(Vec3Arg... vArray) {
@@ -691,7 +691,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Test whether the the squared length is within the specified tolerance of
+     * Test whether the squared length is within the specified tolerance of
      * zero. The vector is unaffected.
      *
      * @param tolerance the desired tolerance (&ge;0. default=1e-12)

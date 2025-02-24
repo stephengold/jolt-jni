@@ -130,7 +130,7 @@ public interface Vec3Arg {
     boolean isNearZero();
 
     /**
-     * Test whether the the squared length is within the specified tolerance of
+     * Test whether the squared length is within the specified tolerance of
      * zero. The vector is unaffected.
      *
      * @param tolerance the desired tolerance (&ge;0. default=1e-12)

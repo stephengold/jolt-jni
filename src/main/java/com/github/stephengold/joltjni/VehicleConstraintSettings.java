@@ -186,7 +186,7 @@ public class VehicleConstraintSettings extends ConstraintSettings {
     }
 
     /**
-     * Alter how the the vehicle accelerates and decelerates. (native attribute:
+     * Alter how the vehicle accelerates and decelerates. (native attribute:
      * mController)
      *
      * @param controllerSettings the desired settings (not null)
