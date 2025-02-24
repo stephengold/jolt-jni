@@ -57,7 +57,7 @@ public class Test008 {
     /**
      * Test the {@code Mat44} class.
      */
-    private void testMat44() {
+    private static void testMat44() {
         // Create an uninitialized matrix:
         Mat44 uninit = new Mat44();
 
@@ -118,7 +118,7 @@ public class Test008 {
     /**
      * Test the {@code RMat44} class.
      */
-    private void testRMat44() {
+    private static void testRMat44() {
         // Create an uninitialized matrix:
         RMat44 uninit = new RMat44();
 
