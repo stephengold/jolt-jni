@@ -298,8 +298,7 @@ final public class RVec3 implements RVec3Arg {
     // RVec3Arg methods
 
     /**
-     * Return the cross product with the specified vector. The current vector is
-     * unaffected.
+     * Return the cross product with the argument. Both vectors are unaffected.
      *
      * @param rightFactor the vector to cross with the current one (not null,
      * unaffected)
@@ -374,8 +373,8 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
-     * Test whether the squared length is within 1e-12 (single-precision) or
-     * 1e-24 (double-precision) of zero. The vector is unaffected.
+     * Test whether the squared length is within 10^-12 (single-precision) or
+     * 10^-24 (double-precision) of zero. The vector is unaffected.
      *
      * @return {@code true} if nearly zero, otherwise {@code false}
      */
@@ -390,7 +389,7 @@ final public class RVec3 implements RVec3Arg {
      * Test whether the squared length is within the specified tolerance of
      * zero. The vector is unaffected.
      *
-     * @param tolerance the desired tolerance (&ge;0)
+     * @param tolerance the desired tolerance (&ge;0, default=1e-12 or 1e-24)
      * @return {@code true} if nearly zero, otherwise {@code false}
      */
     @Override

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,8 +34,7 @@ public interface RVec3Arg {
     // new methods exposed
 
     /**
-     * Return the cross product with the specified vector. The current vector is
-     * unaffected.
+     * Return the cross product with the argument. Both vectors are unaffected.
      *
      * @param rightFactor the vector to cross with the current one (not null,
      * unaffected)
@@ -44,7 +43,7 @@ public interface RVec3Arg {
     RVec3 cross(RVec3Arg rightFactor);
 
     /**
-     * Return the first (X) component at positional precision. The vector is
+     * Return the first (X) component in positional precision. The vector is
      * unaffected.
      *
      * @return the component value
@@ -52,7 +51,7 @@ public interface RVec3Arg {
     Object getX();
 
     /**
-     * Return the 2nd (Y) component at positional precision. The vector is
+     * Return the 2nd (Y) component in positional precision. The vector is
      * unaffected.
      *
      * @return the component value
@@ -60,7 +59,7 @@ public interface RVec3Arg {
     Object getY();
 
     /**
-     * Return the 3rd (Z) component at positional precision. The vector is
+     * Return the 3rd (Z) component in positional precision. The vector is
      * unaffected.
      *
      * @return the component value
@@ -68,8 +67,8 @@ public interface RVec3Arg {
     Object getZ();
 
     /**
-     * Test whether the squared length is within 1e-12 (single-precision) or
-     * 1e-24 (double-precision) of zero. The vector is unaffected.
+     * Test whether the squared length is within 10^-12 (single-precision) or
+     * 10^-24 (double-precision) of zero. The vector is unaffected.
      *
      * @return {@code true} if nearly zero, otherwise {@code false}
      */
@@ -79,7 +78,7 @@ public interface RVec3Arg {
      * Test whether the squared length is within the specified tolerance of
      * zero. The vector is unaffected.
      *
-     * @param tolerance the desired tolerance (&ge;0)
+     * @param tolerance the desired tolerance (&ge;0, default=1e-12 or 1e-24)
      * @return {@code true} if nearly zero, otherwise {@code false}
      */
     boolean isNearZero(double tolerance);

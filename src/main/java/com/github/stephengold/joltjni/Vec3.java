@@ -528,8 +528,7 @@ final public class Vec3 implements Vec3Arg {
     // Vec3Arg methods
 
     /**
-     * Return the cross product with the specified vector. The current vector is
-     * unaffected.
+     * Return the cross product with the argument. Both vectors are unaffected.
      *
      * @param rightFactor the vector to cross with the current one (not null,
      * unaffected)
@@ -550,8 +549,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Return the dot product with the specified vector. Both vectors are
-     * unaffected.
+     * Return the dot product with the argument. Both vectors are unaffected.
      *
      * @param factor the vector to dot with the current one (not null,
      * unaffected)
@@ -679,7 +677,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Test whether the squared length is within 1e-12 of zero. The vector is
+     * Test whether the squared length is within 10^-12 of zero. The vector is
      * unaffected.
      *
      * @return {@code true} if nearly zero, otherwise {@code false}
@@ -694,7 +692,7 @@ final public class Vec3 implements Vec3Arg {
      * Test whether the squared length is within the specified tolerance of
      * zero. The vector is unaffected.
      *
-     * @param tolerance the desired tolerance (&ge;0. default=1e-12)
+     * @param tolerance the desired tolerance (&ge;0, default=1e-12)
      * @return {@code true} if nearly zero, otherwise {@code false}
      */
     @Override
@@ -723,7 +721,7 @@ final public class Vec3 implements Vec3Arg {
      * Test whether the vector is normalized to within the specified tolerance.
      * The vector is unaffected.
      *
-     * @param tolerance the desired tolerance (default=1e-6)
+     * @param tolerance the desired tolerance (&ge;0, default=1e-6)
      * @return {@code true} if normalized, otherwise {@code false}
      */
     @Override
@@ -761,8 +759,8 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Generate a normalized vector with the same direction. The current vector
-     * is unaffected.
+     * Generate a unit vector with the same direction. The current vector is
+     * unaffected.
      *
      * @return a new vector
      */
@@ -774,8 +772,8 @@ final public class Vec3 implements Vec3Arg {
 
     /**
      * Return a copy of the argument if the length of the current vector is
-     * zero. Otherwise, generate a normalized vector with the same direction as
-     * the current vector. The current vector is unaffected.
+     * zero. Otherwise, generate a unit vector with the same direction as the
+     * current vector. The current vector is unaffected.
      *
      * @param zeroValue the value to return if the length is zero (not null,
      * unaffected)
