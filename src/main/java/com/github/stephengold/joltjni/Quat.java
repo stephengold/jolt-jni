@@ -365,6 +365,22 @@ final public class Quat implements QuatArg {
     }
 
     /**
+     * Test whether the quaternion represents an identity rotation. The
+     * quaternion is unaffected.
+     *
+     * @return {@code true} if the real component is a non-zero number and the
+     * imaginary components are all zero, otherwise {@code false}
+     */
+    @Override
+    public boolean isRotationIdentity() {
+        if (w != 0f && !Float.isNaN(w) && x == 0f && y == 0f && z == 0f) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Test whether the quaternion is zero. The quaternion is unaffected.
      *
      * @return {@code true} if exactly zero, otherwise {@code false}

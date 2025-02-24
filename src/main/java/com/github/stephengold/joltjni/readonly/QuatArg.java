@@ -91,6 +91,15 @@ public interface QuatArg {
     boolean isNormalized(float tolerance);
 
     /**
+     * Test whether the quaternion represents an identity rotation. The
+     * quaternion is unaffected.
+     *
+     * @return {@code true} if the real component is a non-zero number and the
+     * imaginary components are all zero, otherwise {@code false}
+     */
+    boolean isRotationIdentity();
+
+    /**
      * Test whether the quaternion is zero. The quaternion is unaffected.
      *
      * @return {@code true} if zero, otherwise {@code false}
