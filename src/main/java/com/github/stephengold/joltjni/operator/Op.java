@@ -643,6 +643,42 @@ final public class Op {
     }
 
     /**
+     * Rotate the specified vector by the conjugate of the specified unit
+     * quaternion. (native operator: binary {@code *})
+     *
+     * @param left the input vector (not null, unaffected)
+     * @param right the conjugate of the rotation to apply (not null,
+     * normalized, unaffected)
+     * @return a new vector
+     */
+    public static Vec3 star(Vec3Arg left, QuatArg right) {
+        assert right.isNormalized();
+
+        float lx = left.getX();
+        float ly = left.getY();
+        float lz = left.getZ();
+
+        float rw = right.getW();
+        float rx = right.getX();
+        float ry = right.getY();
+        float rz = right.getZ();
+
+        // a = pure(left) x right
+        float aw = -lx * rx - ly * ry - lz * rz;
+        float ax = lx * rw + ly * rz - lz * ry;
+        float ay = ly * rw - lx * rz + lz * rx;
+        float az = lz * rw + lx * ry - ly * rx;
+
+        // result = vec3(conjugate(right) x a)
+        float x = rw * ax - rx * aw - ry * az + rz * ay;
+        float y = rw * ay + rx * az - ry * aw - rz * ax;
+        float z = rw * az - rx * ay + ry * ax - rz * aw;
+
+        Vec3 result = new Vec3(x, y, z);
+        return result;
+    }
+
+    /**
      * Return the component-wise product of the specified vectors. (native
      * operator: binary {@code *})
      *
