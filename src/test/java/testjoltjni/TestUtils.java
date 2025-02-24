@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -238,6 +238,33 @@ final public class TestUtils {
         Assert.assertEquals("y component", y, actual.getY());
         Assert.assertEquals("z component", z, actual.getZ());
         Assert.assertEquals("w component", w, actual.getW());
+    }
+
+    /**
+     * Verify the equality of 2 quaternions to within some tolerance.
+     *
+     * @param expected the expected value (not null, unaffected)
+     * @param actual the vector to test (not null, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertEquals(
+            QuatArg expected, QuatArg actual, float tolerance) {
+        assertEquals(expected.getX(), expected.getY(), expected.getZ(),
+                expected.getW(), actual, tolerance);
+    }
+
+    /**
+     * Verify the equality of 2 single-precision vectors to within some
+     * tolerance.
+     *
+     * @param expected the expected value (not null, unaffected)
+     * @param actual the vector to test (not null, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertEquals(
+            Vec3Arg expected, Vec3Arg actual, float tolerance) {
+        assertEquals(expected.getX(), expected.getY(), expected.getZ(),
+                actual, tolerance);
     }
 
     /**
