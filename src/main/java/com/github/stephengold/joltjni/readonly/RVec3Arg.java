@@ -43,6 +43,26 @@ public interface RVec3Arg {
     RVec3 cross(RVec3Arg rightFactor);
 
     /**
+     * Return the dot product with the argument. Both vectors are unaffected.
+     *
+     * @param factor the vector to dot with the current one (not null,
+     * unaffected)
+     * @return the dot product
+     */
+    double dot(RVec3Arg factor);
+
+    /**
+     * Return the specified component in double precision. The vector is
+     * unaffected.
+     *
+     * @param index 0, 1, or 2
+     * @return the X component if index=0, the Y component if index=1, or the Z
+     * component if index=2
+     * @throws IllegalArgumentException if index is not 0, 1, or 2
+     */
+    double get(int index);
+
+    /**
      * Return the first (X) component in positional precision. The vector is
      * unaffected.
      *
@@ -67,6 +87,22 @@ public interface RVec3Arg {
     Object getZ();
 
     /**
+     * Test whether the vector contains infinities or NaNs. The vector is
+     * unaffected.
+     *
+     * @return {@code false} if one or more infinities or NaNs, otherwise
+     * {@code true}
+     */
+    boolean isFinite();
+
+    /**
+     * Test whether the vector contains NaNs. The vector is unaffected.
+     *
+     * @return {@code true} if one or more NaNs, otherwise {@code false}
+     */
+    boolean isNan();
+
+    /**
      * Test whether the squared length is within 10^-12 (single-precision) or
      * 10^-24 (double-precision) of zero. The vector is unaffected.
      *
@@ -84,6 +120,24 @@ public interface RVec3Arg {
     boolean isNearZero(double tolerance);
 
     /**
+     * Test whether the vector is normalized to within a tolerance of 10^-6
+     * (single precision) or 10^-12 (double precision). The vector is
+     * unaffected.
+     *
+     * @return {@code true} if normalized, otherwise {@code false}
+     */
+    boolean isNormalized();
+
+    /**
+     * Test whether the vector is normalized to within the specified tolerance.
+     * The vector is unaffected.
+     *
+     * @param tolerance the desired tolerance (&ge;0, default=1e-6 or 1e-12)
+     * @return {@code true} if normalized, otherwise {@code false}
+     */
+    boolean isNormalized(double tolerance);
+
+    /**
      * Return the length. The vector is unaffected.
      *
      * @return the length
@@ -96,6 +150,21 @@ public interface RVec3Arg {
      * @return the squared length
      */
     double lengthSq();
+
+    /**
+     * Generate a unit vector with the same direction. The current vector is
+     * unaffected.
+     *
+     * @return a new vector
+     */
+    RVec3 normalized();
+
+    /**
+     * Generate the component-wise reciprocal. The current vector is unaffected.
+     *
+     * @return a new vector
+     */
+    RVec3 reciprocal();
 
     /**
      * Copy the components to an array. The vector is unaffected.

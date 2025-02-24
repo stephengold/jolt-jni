@@ -135,19 +135,6 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
-     * Test whether all 3 components are finite.
-     *
-     * @return {@code true} if all are finite, otherwise {@code false}
-     */
-    public boolean isFinite() {
-        if (Double.isFinite(xx) && Double.isFinite(yy) && Double.isFinite(zz)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Create a unit vector along the 1st (X) principal axis.
      *
      * @return a new vector
@@ -319,6 +306,43 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Return the dot product with the argument. Both vectors are unaffected.
+     *
+     * @param factor the vector to dot with the current one (not null,
+     * unaffected)
+     * @return the dot product
+     */
+    @Override
+    public double dot(RVec3Arg factor) {
+        double result = xx * factor.xx() + yy * factor.yy() + zz * factor.zz();
+        return result;
+    }
+
+    /**
+     * Return the specified component in double precision. The vector is
+     * unaffected.
+     *
+     * @param index 0, 1, or 2
+     * @return the X component if index=0, the Y component if index=1, or the Z
+     * component if index=2
+     * @throws IllegalArgumentException if index is not 0, 1, or 2
+     */
+    @Override
+    public double get(int index) {
+        switch (index) {
+            case 0:
+                return xx;
+            case 1:
+                return yy;
+            case 2:
+                return zz;
+            default:
+                throw new IllegalArgumentException(
+                        "index must be either 0, 1 or 2");
+        }
+    }
+
+    /**
      * Return the first (X) component at positional precision. The vector is
      * unaffected.
      *
@@ -373,6 +397,32 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Test whether the vector contains infinities or NaNs. The vector is
+     * unaffected.
+     *
+     * @return {@code false} if one or more infinities or NaNs, otherwise
+     * {@code true}
+     */
+    @Override
+    public boolean isFinite() {
+        boolean result = Double.isFinite(xx)
+                && Double.isFinite(yy) && Double.isFinite(zz);
+        return result;
+    }
+
+    /**
+     * Test whether the vector contains NaNs. The vector is unaffected.
+     *
+     * @return {@code true} if one or more NaNs, otherwise {@code false}
+     */
+    @Override
+    public boolean isNan() {
+        boolean result
+                = Double.isNaN(xx) || Double.isNaN(yy) || Double.isNaN(zz);
+        return result;
+    }
+
+    /**
      * Test whether the squared length is within 10^-12 (single-precision) or
      * 10^-24 (double-precision) of zero. The vector is unaffected.
      *
@@ -403,6 +453,37 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Test whether the vector is normalized to within a tolerance of 10^-6
+     * (single precision) or 10^-12 (double precision). The vector is
+     * unaffected.
+     *
+     * @return {@code true} if normalized, otherwise {@code false}
+     */
+    @Override
+    public boolean isNormalized() {
+        double tolerance = Jolt.isDoublePrecision() ? 1e-12 : 1e-6;
+        boolean result = isNormalized(tolerance);
+        return result;
+    }
+
+    /**
+     * Test whether the vector is normalized to within the specified tolerance.
+     * The vector is unaffected.
+     *
+     * @param tolerance the desired tolerance (&ge;0, default=1e-6 or 1e-12)
+     * @return {@code true} if normalized, otherwise {@code false}
+     */
+    @Override
+    public boolean isNormalized(double tolerance) {
+        double lengthSq = lengthSq();
+        if (Math.abs(lengthSq - 1.) <= tolerance) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Return the length. The vector is unaffected.
      *
      * @return the length
@@ -423,6 +504,29 @@ final public class RVec3 implements RVec3Arg {
     @Override
     public double lengthSq() {
         double result = xx * xx + yy * yy + zz * zz;
+        return result;
+    }
+
+    /**
+     * Generate a unit vector with the same direction. The current vector is
+     * unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public RVec3 normalized() {
+        RVec3 result = Op.star(1. / length(), this);
+        return result;
+    }
+
+    /**
+     * Generate the component-wise reciprocal. The current vector is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public RVec3 reciprocal() {
+        RVec3 result = new RVec3(1. / xx, 1. / yy, 1. / zz);
         return result;
     }
 
