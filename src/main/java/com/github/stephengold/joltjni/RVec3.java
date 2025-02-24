@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.operator.Op;
+import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -123,6 +124,15 @@ final public class RVec3 implements RVec3Arg {
         this.zz += addZ;
 
         return this;
+    }
+
+    /**
+     * Set all components to 1.
+     */
+    public void loadOne() {
+        this.xx = 1.;
+        this.yy = 1.;
+        this.zz = 1.;
     }
 
     /**
@@ -280,6 +290,16 @@ final public class RVec3 implements RVec3Arg {
     public static RVec3 sZero() {
         RVec3 result = new RVec3();
         return result;
+    }
+
+    /**
+     * Transform the current vector by the specified matrix.
+     *
+     * @param matrix the transformation to apply (not null, unaffected)
+     */
+    public void transformInPlace(RMat44Arg matrix) {
+        RVec3Arg temp = matrix.multiply3x4(this); // TODO garbage
+        set(temp);
     }
     // *************************************************************************
     // RVec3Arg methods
