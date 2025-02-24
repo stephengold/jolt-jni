@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
+import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.ByteBuffer;
@@ -174,7 +175,7 @@ final public class Jolt {
      * @param oldHash the old hash code
      * @return the new hash code
      */
-    public static long hashBytes(Quat quaternion, long oldHash) {
+    public static long hashBytes(QuatArg quaternion, long oldHash) {
         float qw = quaternion.getW();
         float qx = quaternion.getX();
         float qy = quaternion.getY();
@@ -191,7 +192,7 @@ final public class Jolt {
      * @param oldHash the old hash code
      * @return the new hash code
      */
-    public static long hashBytes(RVec3 vector, long oldHash) {
+    public static long hashBytes(RVec3Arg vector, long oldHash) {
         double xx = vector.xx();
         double yy = vector.yy();
         double zz = vector.zz();

@@ -174,7 +174,7 @@ final public class Quat implements QuatArg {
      * null, unaffected)
      * @return a new quaternion
      */
-    public static Quat sEulerAngles(Vec3 angles) {
+    public static Quat sEulerAngles(Vec3Arg angles) {
         float halfX = 0.5f * angles.getX();
         float halfY = 0.5f * angles.getY();
         float halfZ = 0.5f * angles.getZ();
@@ -265,7 +265,7 @@ final public class Quat implements QuatArg {
      * @param angle the desired rotation angle (in radians)
      * @return a new quaternion
      */
-    public static Quat sRotation(Vec3 axis, float angle) {
+    public static Quat sRotation(Vec3Arg axis, float angle) {
         assert axis.isNormalized();
 
         float qw = Jolt.cos(0.5f * angle);

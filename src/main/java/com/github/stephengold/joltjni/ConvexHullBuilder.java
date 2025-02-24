@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EResult;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class ConvexHullBuilder extends NonCopyable {
         int numPoints = points.size();
         int numFloats = 3 * numPoints;
         FloatBuffer pointBuffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (Vec3 point : points) {
+        for (Vec3Arg point : points) {
             point.put(pointBuffer);
         }
         long builderVa = create(pointBuffer);
