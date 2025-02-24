@@ -22,6 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.operator.Op;
+import com.github.stephengold.joltjni.readonly.Mat44Arg;
+import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.UVec4Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -181,6 +183,35 @@ final public class Vec3 implements Vec3Arg {
         this.x *= invLength;
         this.y *= invLength;
         this.z *= invLength;
+    }
+
+    /**
+     * Rotate the current vector by the specified quaternion.
+     *
+     * @param rotation the rotation to apply (not null, normalized, unaffected)
+     */
+    public void rotateInPlace(QuatArg rotation) {
+        assert rotation.isNormalized();
+
+        float lw = rotation.getW();
+        float lx = rotation.getX();
+        float ly = rotation.getY();
+        float lz = rotation.getZ();
+
+        float rx = x;
+        float ry = y;
+        float rz = z;
+
+        // a = lhs x pure(rhs)
+        float aw = -lx * rx - ly * ry - lz * rz;
+        float ax = lw * rx + ly * rz - lz * ry;
+        float ay = lw * ry - lx * rz + lz * rx;
+        float az = lw * rz + lx * ry - ly * rx;
+
+        // result = vec3(a x conjugate(lhs))
+        this.x = -aw * lx + ax * lw - ay * lz + az * ly;
+        this.y = -aw * ly + ax * lz + ay * lw - az * lx;
+        this.z = -aw * lz - ax * ly + ay * lx + az * lw;
     }
 
     /**
@@ -523,6 +554,16 @@ final public class Vec3 implements Vec3Arg {
     public static Vec3 sZero() {
         Vec3 result = new Vec3();
         return result;
+    }
+
+    /**
+     * Transform the current vector by the specified matrix.
+     *
+     * @param matrix the transformation to apply (not null, unaffected)
+     */
+    public void transformInPlace(Mat44Arg matrix) {
+        Vec3Arg temp = matrix.multiply3x4(this); // TODO garbage
+        set(temp);
     }
     // *************************************************************************
     // Vec3Arg methods
