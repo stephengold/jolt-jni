@@ -573,13 +573,13 @@ final public class Op {
         float ry = right.getY();
         float rz = right.getZ();
 
-        // a = lhs x pure(rhs)
+        // a = left x pure(right)
         float aw = -lx * rx - ly * ry - lz * rz;
         float ax = lw * rx + ly * rz - lz * ry;
         float ay = lw * ry - lx * rz + lz * rx;
         float az = lw * rz + lx * ry - ly * rx;
 
-        // result = vec3(a x conjugate(lhs))
+        // result = vec3(a x conjugate(left))
         float x = -aw * lx + ax * lw - ay * lz + az * ly;
         float y = -aw * ly + ax * lz + ay * lw - az * lx;
         float z = -aw * lz - ax * ly + ay * lx + az * lw;

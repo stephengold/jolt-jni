@@ -102,7 +102,7 @@ public interface QuatArg {
     /**
      * Test whether the quaternion is zero. The quaternion is unaffected.
      *
-     * @return {@code true} if zero, otherwise {@code false}
+     * @return {@code true} if exactly zero, otherwise {@code false}
      */
     boolean isZero();
 

@@ -167,8 +167,9 @@ final public class Quat implements QuatArg {
     }
 
     /**
-     * Create a rotation quaternion from Euler angles. Rotation order is X then
-     * Y then Z.
+     * Create a rotation quaternion from the specified Tait-Bryan angles,
+     * applying the rotations in x-y-z extrinsic order or z-y'-x" intrinsic
+     * order.
      *
      * @param angles the desired rotation around each axis (in radians, not
      * null, unaffected)
