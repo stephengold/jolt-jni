@@ -110,20 +110,16 @@ final public class RVec3 implements RVec3Arg {
     // new methods exposed
 
     /**
-     * Adds specified amounts to the vector's components and returns the
-     * (modified) current instance.
+     * Add the specified offsets.
      *
-     * @param addX the amount to add to the X component
-     * @param addY the amount to add to the Y component
-     * @param addZ the amount to add to the Z component
-     * @return the (modified) current instance, for chaining
+     * @param xOffset the amount to add to the X component
+     * @param yOffset the amount to add to the Y component
+     * @param zOffset the amount to add to the Z component
      */
-    public RVec3 addLocal(double addX, double addY, double addZ) {
-        this.xx += addX;
-        this.yy += addY;
-        this.zz += addZ;
-
-        return this;
+    public void addInPlace(double xOffset, double yOffset, double zOffset) {
+        this.xx += xOffset;
+        this.yy += yOffset;
+        this.zz += zOffset;
     }
 
     /**
