@@ -156,6 +156,24 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Set all components to 1.
+     */
+    public void loadOne() {
+        this.x = 1f;
+        this.y = 1f;
+        this.z = 1f;
+    }
+
+    /**
+     * Set all components to 0.
+     */
+    public void loadZero() {
+        this.x = 0f;
+        this.y = 0f;
+        this.z = 0f;
+    }
+
+    /**
      * Change the current vector to a unit vector with the same direction.
      */
     public void normalizeInPlace() {

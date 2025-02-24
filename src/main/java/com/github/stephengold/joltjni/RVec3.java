@@ -126,6 +126,15 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Set all components to 0.
+     */
+    public void loadZero() {
+        this.xx = 0.;
+        this.yy = 0.;
+        this.zz = 0.;
+    }
+
+    /**
      * Test whether all 3 components are finite.
      *
      * @return {@code true} if all are finite, otherwise {@code false}

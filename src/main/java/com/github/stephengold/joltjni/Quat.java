@@ -117,6 +117,16 @@ final public class Quat implements QuatArg {
     // new methods exposed
 
     /**
+     * Set the current quaternion to identity.
+     */
+    public void loadIdentity() {
+        this.x = 0f;
+        this.y = 0f;
+        this.z = 0f;
+        this.w = 1f;
+    }
+
+    /**
      * Set all 4 components to specified values.
      *
      * @param x the desired X component
