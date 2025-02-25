@@ -267,7 +267,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_free
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Mat44_getElement
   (JNIEnv *, jclass, jlong matrixVa, jint row, jint column) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    const float result = pMatrix->GetColumn4(column)[row];
+    const float result = (*pMatrix)(row, column);
     return result;
 }
 
