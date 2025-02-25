@@ -300,7 +300,7 @@ public class PhysicsSystem extends NonCopyable {
 
     /**
      * Return a bounding box that contains all the bodies in the system. The
-     * physics system is unaffected.
+     * system is unaffected.
      *
      * @return a new box
      */
@@ -368,8 +368,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Enumerate all constraints in the system. The physics system is
-     * unaffected.
+     * Enumerate all constraints in the system. The system is unaffected.
      *
      * @return a new object
      */
@@ -418,7 +417,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Copy the gravity vector. The physics system is unaffected.
+     * Copy the gravity vector. The system is unaffected.
      *
      * @return a new acceleration vector (meters per second squared in
      * physics-system coordinates)
@@ -434,8 +433,8 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Return the maximum number of bodies the system supports. The physics
-     * system is unaffected.
+     * Return the maximum number of bodies the system supports. The system is
+     * unaffected.
      *
      * @return the count (&ge;0)
      */
@@ -467,7 +466,7 @@ public class PhysicsSystem extends NonCopyable {
 
     /**
      * Count how many active bodies of the specified type there are in the body
-     * manager. The physics system is unaffected.
+     * manager. The system is unaffected.
      *
      * @param bodyType which type of body to count (not null)
      * @return the count (&ge;0, &le;maxBodies)
@@ -481,8 +480,8 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Count how many bodies there are in the body manager. The physics system
-     * is unaffected.
+     * Count how many bodies there are in the body manager. The system is
+     * unaffected.
      *
      * @return the count (&ge;0, &le;maxBodies)
      */
@@ -514,7 +513,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Copy the system's settings. The physics system is unaffected.
+     * Copy the system's settings. The system is unaffected.
      *
      * @return a new JVM object with a new native object assigned
      *
@@ -538,7 +537,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Initialize the physics system with the specified limits.
+     * Initialize the system with the specified limits.
      *
      * @param maxBodies the desired maximum number of rigid bodies that can be
      * added

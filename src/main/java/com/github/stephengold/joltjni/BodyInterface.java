@@ -582,7 +582,7 @@ public class BodyInterface extends NonCopyable {
     /**
      * Test whether the specified body is added to the system.
      *
-     * @param bodyId the ID of the body to test (not null, unaffected)
+     * @param bodyId the ID of the body to search for (not null, unaffected)
      * @return {@code true} if added, otherwise {@code false}
      */
     public boolean isAdded(ConstBodyId bodyId) {
