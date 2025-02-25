@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
+import java.nio.FloatBuffer;
 
 /**
  * Read-only access to an {@code RMat44}. (native type: const RMat44)
@@ -176,6 +177,24 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * @return a new matrix
      */
     RMat44 postTranslated(RVec3Arg rvec3);
+
+    /**
+     * Write the 3x3 matrix in single precision to the specified buffer in
+     * column-major order and advance the buffer's position by 9. The matrix is
+     * unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    void put3x3ColumnMajor(FloatBuffer storeBuffer);
+
+    /**
+     * Write all 16 components in single precision to the specified buffer in
+     * column-major order and advance the buffer's position by 16. The matrix is
+     * unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    void putColumnMajor(FloatBuffer storeBuffer);
 
     /**
      * Copy the current matrix to a new, single-precision matrix. The current

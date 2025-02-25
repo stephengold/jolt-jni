@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec4Arg;
+import java.nio.FloatBuffer;
 
 /**
  * A 4x4 matrix used to represent transformations of 3-D coordinates.
@@ -603,6 +604,36 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Write the 3x3 matrix in single precision to the specified buffer in
+     * column-major order and advance the buffer's position by 9. The matrix is
+     * unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    @Override
+    public void put3x3ColumnMajor(FloatBuffer storeBuffer) {
+        int position = storeBuffer.position();
+        long matrixVa = va();
+        put3x3ColumnMajor(matrixVa, position, storeBuffer);
+        storeBuffer.position(position + 9);
+    }
+
+    /**
+     * Write all 16 components in single precision to the specified buffer in
+     * column-major order and advance the buffer's position by 16. The matrix is
+     * unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    @Override
+    public void putColumnMajor(FloatBuffer storeBuffer) {
+        int position = storeBuffer.position();
+        long matrixVa = va();
+        putColumnMajor(matrixVa, position, storeBuffer);
+        storeBuffer.position(position + 16);
+    }
+
+    /**
      * Copy the current matrix to a new, single-precision matrix. The current
      * matrix is unaffected.
      *
@@ -713,6 +744,12 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static long postTranslated(
             long matrixVa, double xx, double yy, double zz);
+
+    native private static void put3x3ColumnMajor(
+            long matrixVa, int position, FloatBuffer storeBuffer);
+
+    native private static void putColumnMajor(
+            long matrixVa, int position, FloatBuffer storeBuffer);
 
     native private static void setAxisX(
             long matrixVa, float x, float y, float z);
