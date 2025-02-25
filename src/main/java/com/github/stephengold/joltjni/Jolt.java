@@ -29,6 +29,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.nio.ShortBuffer;
 
 /**
  * Utility methods providing JNI access to Jolt Physics and the C++ {@code std}
@@ -363,6 +364,25 @@ final public class Jolt {
 
         assert result.capacity() == numInts : result.capacity();
         assert result.limit() == numInts : result.limit();
+        assert result.position() == 0 : result.position();
+        return result;
+    }
+
+    /**
+     * Create a direct {@code ShortBuffer} with native byte order and the
+     * specified capacity.
+     *
+     * @param numShorts the desired capacity (in ints)
+     * @return a new direct buffer, zeroed and rewound but not flipped
+     */
+    public static ShortBuffer newDirectShortBuffer(int numShorts) {
+        ByteBuffer byteBuffer
+                = ByteBuffer.allocateDirect(numShorts * Short.BYTES);
+        byteBuffer.order(ByteOrder.nativeOrder());
+        ShortBuffer result = byteBuffer.asShortBuffer();
+
+        assert result.capacity() == numShorts : result.capacity();
+        assert result.limit() == numShorts : result.limit();
         assert result.position() == 0 : result.position();
         return result;
     }
