@@ -90,6 +90,19 @@ final public class Quat implements QuatArg {
     }
 
     /**
+     * Instantiate a quaternion from the specified array.
+     *
+     * @param array the desired component values (in XYZW order, not null,
+     * length&ge;4, unaffected)
+     */
+    public Quat(float[] array) {
+        this.x = array[0];
+        this.y = array[1];
+        this.z = array[2];
+        this.w = array[3];
+    }
+
+    /**
      * Instantiate a copy of the argument.
      *
      * @param original the quaternion to copy (not null, unaffected)
