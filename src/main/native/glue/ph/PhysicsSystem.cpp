@@ -62,6 +62,49 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_addStep
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    containsBody
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_containsBody
+  (JNIEnv *, jclass, jlong systemVa, jlong idVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
+    const BodyID bodyID = *pId;
+    BodyIDVector vector;
+    pSystem->GetBodies(vector);
+    for (size_t i = 0; i < vector.size(); ++i) {
+        const BodyID id = vector[i];
+        if (id == bodyID) {
+            return JNI_TRUE;
+        }
+    }
+    return JNI_FALSE;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    containsConstraint
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_containsConstraint
+  (JNIEnv *, jclass, jlong systemVa, jlong constraintVa) {
+    const PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const Constraints constraints = pSystem->GetConstraints();
+    for (size_t i = 0; i < constraints.size(); ++i) {
+        const RefConst<Constraint> ref = constraints[i];
+        const Constraint * const ptr = ref.GetPtr();
+        const jlong va = reinterpret_cast<jlong> (ptr);
+        if (va == constraintVa) {
+            return JNI_TRUE;
+        }
+    }
+    return JNI_FALSE;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    createPhysicsSystem
  * Signature: ()J
  */
