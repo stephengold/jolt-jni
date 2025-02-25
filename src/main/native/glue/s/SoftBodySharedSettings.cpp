@@ -165,7 +165,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_countEdgeConstraints
   (JNIEnv *, jclass, jlong settingsVa) {
-    SoftBodySharedSettings * const pSettings
+    const SoftBodySharedSettings * const pSettings
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     const Array<SoftBodySharedSettings::Edge>::size_type result
             = pSettings->mEdgeConstraints.size();
@@ -179,7 +179,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_countFaces
   (JNIEnv *, jclass, jlong settingsVa) {
-    SoftBodySharedSettings * const pSettings
+    const SoftBodySharedSettings * const pSettings
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     const Array<SoftBodySharedSettings::Face>::size_type result
             = pSettings->mFaces.size();
@@ -214,7 +214,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_countVertices
   (JNIEnv *, jclass, jlong settingsVa) {
-    SoftBodySharedSettings * const pSettings
+    const SoftBodySharedSettings * const pSettings
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     const Array<SoftBodySharedSettings::Vertex>::size_type result
             = pSettings->mVertices.size();
@@ -228,7 +228,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_countVolumeConstraints
   (JNIEnv *, jclass, jlong settingsVa) {
-    SoftBodySharedSettings * const pSettings
+    const SoftBodySharedSettings * const pSettings
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     const Array<SoftBodySharedSettings::Volume>::size_type result
             = pSettings->mVolumeConstraints.size();
