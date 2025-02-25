@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec4Arg;
+import java.nio.FloatBuffer;
 
 /**
  * A 4x4 matrix composed of 16 single-precision elements, used to represent
@@ -692,6 +693,20 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
         return result;
     }
+
+    /**
+     * Write all 16 components to the specified buffer in column-major order and
+     * advance the buffer's position by 16. The matrix is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    @Override
+    public void putColumnMajor(FloatBuffer storeBuffer) {
+        int position = storeBuffer.position();
+        long matrixVa = va();
+        putColumnMajor(matrixVa, position, storeBuffer);
+        storeBuffer.position(position + 16);
+    }
     // *************************************************************************
     // Object methods
 
@@ -799,6 +814,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static long postTranslated(
             long matrixVa, float x, float y, float z);
+
+    native private static void putColumnMajor(
+            long matrixVa, int position, FloatBuffer storeBuffer);
 
     native private static void setAxisX(
             long matrixVa, float x, float y, float z);

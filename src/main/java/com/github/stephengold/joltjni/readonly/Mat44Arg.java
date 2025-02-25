@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.Vec3;
+import java.nio.FloatBuffer;
 
 /**
  * Read-only access to a {@code Mat44}. (native type: const Mat44)
@@ -179,4 +180,12 @@ public interface Mat44Arg extends ConstJoltPhysicsObject {
      * @return a new matrix
      */
     Mat44 postTranslated(Vec3Arg vec3);
+
+    /**
+     * Write all 16 components to the specified buffer in column-major order and
+     * advance the buffer's position by 16. The matrix is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    void putColumnMajor(FloatBuffer storeBuffer);
 }
