@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -125,7 +125,7 @@ public class StateRecorder extends NonCopyable {
         long recorderVa = va();
         double[] tmpDoubles = inOut.toArray();
         readRVec3(recorderVa, tmpDoubles);
-        inOut.set(tmpDoubles[0], tmpDoubles[1], tmpDoubles[2]);
+        inOut.set(tmpDoubles);
     }
 
     /**
@@ -150,7 +150,7 @@ public class StateRecorder extends NonCopyable {
         long recorderVa = va();
         float[] storeFloats = inOut.toArray();
         readVec3(recorderVa, storeFloats);
-        inOut.set(storeFloats[0], storeFloats[1], storeFloats[2]);
+        inOut.set(storeFloats);
     }
 
     /**
