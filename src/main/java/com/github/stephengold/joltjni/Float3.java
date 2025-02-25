@@ -99,8 +99,7 @@ final public class Float3 {
             case 2:
                 return z;
             default:
-                throw new IllegalArgumentException(
-                        "index must be 0, 1 or 2");
+                throw new IllegalArgumentException("index must be 0, 1 or 2");
         }
     }
 

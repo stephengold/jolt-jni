@@ -621,8 +621,7 @@ final public class Vec3 implements Vec3Arg {
             case 2:
                 return z;
             default:
-                throw new IllegalArgumentException(
-                        "index must be 0, 1 or 2");
+                throw new IllegalArgumentException("index must be 0, 1 or 2");
         }
     }
 

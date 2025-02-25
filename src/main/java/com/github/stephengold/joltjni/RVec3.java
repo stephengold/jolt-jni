@@ -353,8 +353,7 @@ final public class RVec3 implements RVec3Arg {
             case 2:
                 return zz;
             default:
-                throw new IllegalArgumentException(
-                        "index must be 0, 1 or 2");
+                throw new IllegalArgumentException("index must be 0, 1 or 2");
         }
     }
 

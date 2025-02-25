@@ -157,8 +157,8 @@ final public class Quat implements QuatArg {
     /**
      * Set all 4 components from the specified array.
      *
-     * @param array the desired component values (not null, length&ge;4,
-     * unaffected)
+     * @param array the desired component values (in XYZW order, not null,
+     * length&ge;4, unaffected)
      */
     public void set(float[] array) {
         this.x = array[0];
@@ -442,8 +442,8 @@ final public class Quat implements QuatArg {
     }
 
     /**
-     * Write all 4 components to the specified buffer and advance the buffer's
-     * position by 4. The quaternion is unaffected.
+     * Write all 4 components to the specified buffer in XYZW order and advance
+     * the buffer's position by 4. The quaternion is unaffected.
      *
      * @param storeBuffer the destination buffer (not null)
      */
