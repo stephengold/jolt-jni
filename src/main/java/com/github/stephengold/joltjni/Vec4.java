@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -160,6 +160,18 @@ final public class Vec4 implements Vec4Arg {
         this.y = array[1];
         this.z = array[2];
         this.w = array[3];
+    }
+
+    /**
+     * Set all 4 components from the argument.
+     *
+     * @param source the vector to copy (not null, unaffected)
+     */
+    public void set(Vec4Arg source) {
+        this.x = source.getX();
+        this.y = source.getY();
+        this.z = source.getZ();
+        this.w = source.getW();
     }
 
     /**
