@@ -258,6 +258,19 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
+     * Count the pinned vertices. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countPinnedVertices() {
+        long settingsVa = targetVa();
+        int result = SoftBodySharedSettings.countPinnedVertices(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Count the vertices. The settings are unaffected.
      *
      * @return the count (&ge;0)

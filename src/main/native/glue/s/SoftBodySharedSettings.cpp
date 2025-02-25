@@ -188,6 +188,27 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    countPinnedVertices
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_countPinnedVertices
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    const size_t numVertices = pSettings->mVertices.size();
+    jint result = 0;
+    for (size_t index = 0; index < numVertices; ++index) {
+        const SoftBodySharedSettings::Vertex& vertex
+                = pSettings->mVertices.at(index);
+        if (vertex.mInvMass == 0) {
+            ++result;
+        }
+    }
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    countVertices
  * Signature: (J)I
  */

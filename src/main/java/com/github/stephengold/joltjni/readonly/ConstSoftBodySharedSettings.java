@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,6 +44,13 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
      * @return the count (&ge;0)
      */
     int countFaces();
+
+    /**
+     * Count the pinned vertices. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    int countPinnedVertices();
 
     /**
      * Count the vertices. The settings are unaffected.

@@ -322,6 +322,19 @@ public class SoftBodySharedSettings
     }
 
     /**
+     * Count the pinned vertices. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countPinnedVertices() {
+        long settingsVa = va();
+        int result = countPinnedVertices(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Count the vertices. The settings are unaffected.
      *
      * @return the count (&ge;0)
@@ -424,6 +437,8 @@ public class SoftBodySharedSettings
     native static int countEdgeConstraints(long settingsVa);
 
     native static int countFaces(long settingsVa);
+
+    native static int countPinnedVertices(long settingsVa);
 
     native static int countVertices(long settingsVa);
 
