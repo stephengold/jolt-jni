@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -100,7 +100,7 @@ final public class Float3 {
                 return z;
             default:
                 throw new IllegalArgumentException(
-                        "index must be either 0, 1 or 2");
+                        "index must be 0, 1 or 2");
         }
     }
 

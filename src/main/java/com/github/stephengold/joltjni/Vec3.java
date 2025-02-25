@@ -622,7 +622,7 @@ final public class Vec3 implements Vec3Arg {
                 return z;
             default:
                 throw new IllegalArgumentException(
-                        "index must be either 0, 1 or 2");
+                        "index must be 0, 1 or 2");
         }
     }
 

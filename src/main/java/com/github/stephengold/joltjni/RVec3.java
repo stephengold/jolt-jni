@@ -354,7 +354,7 @@ final public class RVec3 implements RVec3Arg {
                 return zz;
             default:
                 throw new IllegalArgumentException(
-                        "index must be either 0, 1 or 2");
+                        "index must be 0, 1 or 2");
         }
     }
 
