@@ -551,8 +551,7 @@ public class Character extends CharacterBase implements ConstCharacter {
         long characterVa = va();
         double[] storeDoubles = new double[3];
         getCenterOfMassPosition(characterVa, storeDoubles, lockBodies);
-        RVec3 result
-                = new RVec3(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -608,7 +607,7 @@ public class Character extends CharacterBase implements ConstCharacter {
         long characterVa = va();
         float[] storeFloats = new float[3];
         getLinearVelocity(characterVa, storeFloats, lockBodies);
-        Vec3 result = new Vec3(storeFloats[0], storeFloats[1], storeFloats[2]);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -637,8 +636,7 @@ public class Character extends CharacterBase implements ConstCharacter {
         long characterVa = va();
         double[] storeDoubles = new double[3];
         getPosition(characterVa, storeDoubles, lockBodies);
-        RVec3 result
-                = new RVec3(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -676,9 +674,8 @@ public class Character extends CharacterBase implements ConstCharacter {
         float[] storeFloats = new float[4];
         getPositionAndRotation(
                 characterVa, storeDoubles, storeFloats, lockBodies);
-        storeLocation.set(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
-        storeOrientation.set(
-                storeFloats[0], storeFloats[1], storeFloats[2], storeFloats[3]);
+        storeLocation.set(storeDoubles);
+        storeOrientation.set(storeFloats);
     }
 
     /**
@@ -705,8 +702,7 @@ public class Character extends CharacterBase implements ConstCharacter {
         long characterVa = va();
         float[] storeFloats = new float[4];
         getRotation(characterVa, storeFloats, lockBodies);
-        Quat result = new Quat(
-                storeFloats[0], storeFloats[1], storeFloats[2], storeFloats[3]);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }

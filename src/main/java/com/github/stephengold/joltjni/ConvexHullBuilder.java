@@ -93,7 +93,7 @@ public class ConvexHullBuilder extends NonCopyable {
         long builderVa = va();
         float[] storeFloats = new float[4];
         getCenterOfMassAndVolume(builderVa, storeFloats);
-        storeCom.set(storeFloats[0], storeFloats[1], storeFloats[2]);
+        storeCom.set(storeFloats);
         storeVolume[0] = storeFloats[3];
     }
 

@@ -270,8 +270,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         double[] storeDoubles = new double[3];
         com.github.stephengold.joltjni.Character.getCenterOfMassPosition(
                 characterVa, storeDoubles, lockBodies);
-        RVec3 result
-                = new RVec3(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -473,7 +472,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         float[] storeFloats = new float[3];
         com.github.stephengold.joltjni.Character.getLinearVelocity(
                 characterVa, storeFloats, lockBodies);
-        Vec3 result = new Vec3(storeFloats[0], storeFloats[1], storeFloats[2]);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -503,8 +502,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         double[] storeDoubles = new double[3];
         com.github.stephengold.joltjni.Character.getPosition(
                 characterVa, storeDoubles, lockBodies);
-        RVec3 result
-                = new RVec3(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -542,9 +540,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         float[] storeFloats = new float[4];
         com.github.stephengold.joltjni.Character.getPositionAndRotation(
                 characterVa, storeDoubles, storeFloats, lockBodies);
-        storeLocation.set(storeDoubles[0], storeDoubles[1], storeDoubles[2]);
-        storeOrientation.set(
-                storeFloats[0], storeFloats[1], storeFloats[2], storeFloats[3]);
+        storeLocation.set(storeDoubles);
+        storeOrientation.set(storeFloats);
     }
 
     /**
@@ -572,8 +569,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
         float[] storeFloats = new float[4];
         com.github.stephengold.joltjni.Character.getRotation(
                 characterVa, storeFloats, lockBodies);
-        Quat result = new Quat(
-                storeFloats[0], storeFloats[1], storeFloats[2], storeFloats[3]);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }

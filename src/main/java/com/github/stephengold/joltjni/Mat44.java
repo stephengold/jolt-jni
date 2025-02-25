@@ -493,8 +493,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         long matrixVa = va();
         float[] storeFloats = new float[4];
         getQuaternion(matrixVa, storeFloats);
-        Quat result = new Quat(
-                storeFloats[0], storeFloats[1], storeFloats[2], storeFloats[3]);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }

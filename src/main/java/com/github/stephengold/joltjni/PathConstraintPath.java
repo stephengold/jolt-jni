@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -103,7 +103,7 @@ public class PathConstraintPath
         long pathVa = va();
         float[] storeFloats = new float[12];
         getPointOnPath(pathVa, amount, storeFloats);
-        storeLocation.set(storeFloats[0], storeFloats[1], storeFloats[2]);
+        storeLocation.set(storeFloats);
         storeTangent.set(storeFloats[3], storeFloats[4], storeFloats[5]);
         storeNormal.set(storeFloats[6], storeFloats[7], storeFloats[8]);
         storeBinormal.set(storeFloats[9], storeFloats[10], storeFloats[11]);
