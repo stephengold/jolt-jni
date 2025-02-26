@@ -139,6 +139,20 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SubShape_getRotatio
 
 /*
  * Class:     com_github_stephengold_joltjni_SubShape
+ * Method:    getShape
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShape_getShape
+  (JNIEnv *, jclass, jlong subShapeVa) {
+    const CompoundShape::SubShape * const pSubShape
+            = reinterpret_cast<CompoundShape::SubShape *> (subShapeVa);
+    const RefConst<Shape> ref = pSubShape->mShape;
+    const Shape *pResult = ref.GetPtr();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SubShape
  * Method:    isValidScale
  * Signature: (JFFF)Z
  */

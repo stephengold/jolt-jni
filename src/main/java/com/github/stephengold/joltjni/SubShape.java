@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -94,6 +95,18 @@ public class SubShape extends JoltPhysicsObject {
         float z = getRotationZ(subShapeVa);
         Quat result = new Quat(x, y, z, w);
 
+        return result;
+    }
+
+    /**
+     * Access the child shape. The subshape is unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public ConstShape getShape() {
+        long subShapeVa = va();
+        long childShapeVa = getShape(subShapeVa);
+        ConstShape result = Shape.newShape(childShapeVa);
         return result;
     }
 
@@ -200,6 +213,8 @@ public class SubShape extends JoltPhysicsObject {
     native private static float getRotationY(long subShapeVa);
 
     native private static float getRotationZ(long subShapeVa);
+
+    native private static long getShape(long subShapeVa);
 
     native private static boolean isValidScale(
             long subShapeVa, float sx, float sy, float sz);
