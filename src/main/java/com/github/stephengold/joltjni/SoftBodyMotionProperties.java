@@ -195,12 +195,12 @@ public class SoftBodyMotionProperties extends MotionProperties {
      */
     public void putPinLocations(RVec3Arg comLocation, FloatBuffer storeFloats) {
         long propertiesVa = va();
-        double xx = comLocation.xx();
-        double yy = comLocation.yy();
-        double zz = comLocation.zz();
+        float x = comLocation.x();
+        float y = comLocation.y();
+        float z = comLocation.z();
         int bufferPosition = storeFloats.position();
         bufferPosition = putPinLocations(
-                propertiesVa, xx, yy, zz, bufferPosition, storeFloats);
+                propertiesVa, x, y, z, bufferPosition, storeFloats);
         storeFloats.position(bufferPosition);
     }
 
@@ -214,12 +214,12 @@ public class SoftBodyMotionProperties extends MotionProperties {
     public void putVertexLocations(
             RVec3Arg comLocation, FloatBuffer storeFloats) {
         long propertiesVa = va();
-        double xx = comLocation.xx();
-        double yy = comLocation.yy();
-        double zz = comLocation.zz();
+        float x = comLocation.x();
+        float y = comLocation.y();
+        float z = comLocation.z();
         int bufferPosition = storeFloats.position();
         bufferPosition = putVertexLocations(
-                propertiesVa, xx, yy, zz, bufferPosition, storeFloats);
+                propertiesVa, x, y, z, bufferPosition, storeFloats);
         storeFloats.position(bufferPosition);
     }
 
@@ -306,11 +306,11 @@ public class SoftBodyMotionProperties extends MotionProperties {
 
     native private static long getVertex(long propertiesVa, int index);
 
-    native private static int putPinLocations(long propertiesVa, double xx,
-            double yy, double zz, int bufferPosition, FloatBuffer storeFloats);
+    native private static int putPinLocations(long propertiesVa, float x,
+            float y, float z, int bufferPosition, FloatBuffer storeFloats);
 
-    native private static int putVertexLocations(long propertiesVa, double xx,
-            double yy, double zz, int bufferPosition, FloatBuffer storeFloats);
+    native private static int putVertexLocations(long propertiesVa, float x,
+            float y, float z, int bufferPosition, FloatBuffer storeFloats);
 
     native private static void setEnableSkinConstraints(
             long propertiesVa, boolean enable);

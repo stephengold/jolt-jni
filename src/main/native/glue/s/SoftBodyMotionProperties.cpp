@@ -180,10 +180,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionProper
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyMotionProperties
  * Method:    putPinLocations
- * Signature: (JDDDILjava/nio/FloatBuffer;)I
+ * Signature: (JFFFILjava/nio/FloatBuffer;)I
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionProperties_putPinLocations
-  (JNIEnv *pEnv, jclass, jlong propertiesVa, jdouble xx, jdouble yy, jdouble zz,
+  (JNIEnv *pEnv, jclass, jlong propertiesVa, jfloat x, jfloat y, jfloat z,
   jint bufferPosition, jobject storeFloats) {
     jfloat * const pStoreFloats
             = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
@@ -192,13 +192,13 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionPropert
     JPH_ASSERT(!pEnv->ExceptionCheck());
     const SoftBodyMotionProperties * const pProperties
             = reinterpret_cast<SoftBodyMotionProperties *> (propertiesVa);
-    const RVec3 comLocation(xx, yy, zz);
+    const Vec3 comLocation(x, y, z);
     const Array<SoftBodyVertex>& vertices = pProperties->GetVertices();
     const Array<SoftBodyVertex>::size_type numVertices = vertices.size();
     for (int i = 0; i < numVertices && bufferPosition + 2 < capacityFloats; ++i) {
         const SoftBodyVertex &vertex = vertices[i];
         if (vertex.mInvMass == 0) {
-            const RVec3& vertexLocation = vertex.mPosition + comLocation;
+            const Vec3& vertexLocation = vertex.mPosition + comLocation;
             pStoreFloats[bufferPosition++] = vertexLocation.GetX();
             pStoreFloats[bufferPosition++] = vertexLocation.GetY();
             pStoreFloats[bufferPosition++] = vertexLocation.GetZ();
@@ -210,10 +210,10 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionPropert
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyMotionProperties
  * Method:    putVertexLocations
- * Signature: (JDDDILjava/nio/FloatBuffer;)I
+ * Signature: (JFFFILjava/nio/FloatBuffer;)I
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionProperties_putVertexLocations
-  (JNIEnv *pEnv, jclass, jlong propertiesVa, jdouble xx, jdouble yy, jdouble zz,
+  (JNIEnv *pEnv, jclass, jlong propertiesVa, jfloat x, jfloat y, jfloat z,
   jint bufferPosition, jobject storeFloats) {
     jfloat * const pStoreFloats
             = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
@@ -222,12 +222,12 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionPropert
     JPH_ASSERT(!pEnv->ExceptionCheck());
     const SoftBodyMotionProperties * const pProperties
             = reinterpret_cast<SoftBodyMotionProperties *> (propertiesVa);
-    const RVec3 comLocation(xx, yy, zz);
+    const Vec3 comLocation(x, y, z);
     const Array<SoftBodyVertex>& vertices = pProperties->GetVertices();
     const Array<SoftBodyVertex>::size_type numVertices = vertices.size();
     for (int i = 0; i < numVertices && bufferPosition + 2 < capacityFloats; ++i) {
         const SoftBodyVertex &vertex = vertices[i];
-        const RVec3& vertexLocation = vertex.mPosition + comLocation;
+        const Vec3& vertexLocation = vertex.mPosition + comLocation;
         pStoreFloats[bufferPosition++] = vertexLocation.GetX();
         pStoreFloats[bufferPosition++] = vertexLocation.GetY();
         pStoreFloats[bufferPosition++] = vertexLocation.GetZ();
