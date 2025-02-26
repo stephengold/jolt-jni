@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import java.nio.IntBuffer;
+
 /**
  * Read-only access to a {@code SoftBodySharedSettings} object. (native type:
  * const SoftBodySharedSettings)
@@ -72,4 +74,12 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
      * @return the radius (in meters)
      */
     float getVertexRadius();
+
+    /**
+     * Write the vertex indices of all faces to the specified buffer and advance
+     * the buffer's position. The settings are unaffected.
+     *
+     * @param storeIndices the destination buffer (not null, modified)
+     */
+    void putFaceIndices(IntBuffer storeIndices);
 }

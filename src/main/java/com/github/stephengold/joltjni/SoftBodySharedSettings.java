@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EBendType;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
 import com.github.stephengold.joltjni.template.RefTarget;
+import java.nio.IntBuffer;
 
 /**
  * Properties of a soft body that may be shared among multiple bodies.
@@ -373,6 +374,21 @@ public class SoftBodySharedSettings
 
         return result;
     }
+
+    /**
+     * Write the vertex indices of all faces to the specified buffer and advance
+     * the buffer's position. The settings are unaffected.
+     *
+     * @param storeIndices the destination buffer (not null, modified)
+     */
+    @Override
+    public void putFaceIndices(IntBuffer storeIndices) {
+        long settingsVa = va();
+        int bufferPosition = storeIndices.position();
+        bufferPosition = putFaceIndices(
+                settingsVa, bufferPosition, storeIndices);
+        storeIndices.position(bufferPosition);
+    }
     // *************************************************************************
     // RefTarget methods
 
@@ -458,6 +474,9 @@ public class SoftBodySharedSettings
     native static float getVertexRadius(long settingsVa);
 
     native static void optimize(long settingsVa);
+
+    native static int putFaceIndices(
+            long settingsVa, int bufferPosition, IntBuffer storeIndices);
 
     native private static void setEmbedded(long settingsVa);
 
