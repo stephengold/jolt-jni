@@ -23,6 +23,8 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
+import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * The motion properties of a soft body.
@@ -185,6 +187,43 @@ public class SoftBodyMotionProperties extends MotionProperties {
     }
 
     /**
+     * Write the locations of all pinned vertices to the specified buffer and
+     * advance the buffer's position. The properties are unaffected.
+     *
+     * @param comLocation the location of the body's center of mass (not null)
+     * @param storeFloats the destination buffer (not null, modified)
+     */
+    public void putPinLocations(RVec3Arg comLocation, FloatBuffer storeFloats) {
+        long propertiesVa = va();
+        double xx = comLocation.xx();
+        double yy = comLocation.yy();
+        double zz = comLocation.zz();
+        int bufferPosition = storeFloats.position();
+        bufferPosition = putPinLocations(
+                propertiesVa, xx, yy, zz, bufferPosition, storeFloats);
+        storeFloats.position(bufferPosition);
+    }
+
+    /**
+     * Write the locations of all vertices to the specified buffer and advance
+     * the buffer's position. The properties are unaffected.
+     *
+     * @param comLocation the location of the body's center of mass (not null)
+     * @param storeFloats the destination buffer (not null, modified)
+     */
+    public void putVertexLocations(
+            RVec3Arg comLocation, FloatBuffer storeFloats) {
+        long propertiesVa = va();
+        double xx = comLocation.xx();
+        double yy = comLocation.yy();
+        double zz = comLocation.zz();
+        int bufferPosition = storeFloats.position();
+        bufferPosition = putVertexLocations(
+                propertiesVa, xx, yy, zz, bufferPosition, storeFloats);
+        storeFloats.position(bufferPosition);
+    }
+
+    /**
      * Enable or disable any skinning constraints.
      *
      * @param enable {@code true} to enable any skinning constraints,
@@ -198,7 +237,7 @@ public class SoftBodyMotionProperties extends MotionProperties {
     /**
      * Alter the number of solver iterations.
      *
-     * @param numIterations the desired number of iterations (default=?)
+     * @param numIterations the desired number of iterations (default=0)
      */
     public void setNumIterations(int numIterations) {
         long propertiesVa = va();
@@ -266,6 +305,12 @@ public class SoftBodyMotionProperties extends MotionProperties {
             long propertiesVa);
 
     native private static long getVertex(long propertiesVa, int index);
+
+    native private static int putPinLocations(long propertiesVa, double xx,
+            double yy, double zz, int bufferPosition, FloatBuffer storeFloats);
+
+    native private static int putVertexLocations(long propertiesVa, double xx,
+            double yy, double zz, int bufferPosition, FloatBuffer storeFloats);
 
     native private static void setEnableSkinConstraints(
             long propertiesVa, boolean enable);
