@@ -68,7 +68,7 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Decompress the center-of-mass position. The subshape is unaffected.
+     * Copy the center-of-mass location. The subshape is unaffected.
      *
      * @return a new vector
      */
@@ -83,7 +83,7 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Decompress the rotation. The subshape is unaffected.
+     * Copy the rotation. The subshape is unaffected.
      *
      * @return a new rotation quaternion
      */
@@ -128,7 +128,7 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Compress the center-of-mass location.
+     * Alter the center-of-mass location.
      *
      * @param location the desired location (not null, unaffected)
      */
@@ -141,7 +141,7 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Compress the rotation.
+     * Alter the rotation.
      *
      * @param rotation the desired rotation (not null, unaffected)
      */
@@ -155,7 +155,7 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Update the transform of this subshape.
+     * Alter the coordinate transform.
      *
      * @param offset the desired translation (not null, unaffected)
      * @param rotation the desired rotation (not null, unaffected)
