@@ -312,6 +312,21 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
+     * Write the vertex indices of all edges to the specified buffer and advance
+     * the buffer's position. The settings are unaffected.
+     *
+     * @param storeIndices the destination buffer (not null, modified)
+     */
+    @Override
+    public void putEdgeIndices(IntBuffer storeIndices) {
+        long settingsVa = targetVa();
+        int bufferPosition = storeIndices.position();
+        bufferPosition = SoftBodySharedSettings.putEdgeIndices(
+                settingsVa, bufferPosition, storeIndices);
+        storeIndices.position(bufferPosition);
+    }
+
+    /**
      * Write the vertex indices of all faces to the specified buffer and advance
      * the buffer's position. The settings are unaffected.
      *

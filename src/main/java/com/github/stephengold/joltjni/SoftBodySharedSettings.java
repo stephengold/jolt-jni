@@ -376,6 +376,21 @@ public class SoftBodySharedSettings
     }
 
     /**
+     * Write the vertex indices of all edges to the specified buffer and advance
+     * the buffer's position. The settings are unaffected.
+     *
+     * @param storeIndices the destination buffer (not null, modified)
+     */
+    @Override
+    public void putEdgeIndices(IntBuffer storeIndices) {
+        long settingsVa = va();
+        int bufferPosition = storeIndices.position();
+        bufferPosition = putEdgeIndices(
+                settingsVa, bufferPosition, storeIndices);
+        storeIndices.position(bufferPosition);
+    }
+
+    /**
      * Write the vertex indices of all faces to the specified buffer and advance
      * the buffer's position. The settings are unaffected.
      *
@@ -474,6 +489,9 @@ public class SoftBodySharedSettings
     native static float getVertexRadius(long settingsVa);
 
     native static void optimize(long settingsVa);
+
+    native static int putEdgeIndices(
+            long settingsVa, int bufferPosition, IntBuffer storeIndices);
 
     native static int putFaceIndices(
             long settingsVa, int bufferPosition, IntBuffer storeIndices);

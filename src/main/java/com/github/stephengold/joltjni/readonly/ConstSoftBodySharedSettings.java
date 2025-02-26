@@ -76,6 +76,14 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
     float getVertexRadius();
 
     /**
+     * Write the vertex indices of all edges to the specified buffer and advance
+     * the buffer's position. The settings are unaffected.
+     *
+     * @param storeIndices the destination buffer (not null, modified)
+     */
+    void putEdgeIndices(IntBuffer storeIndices);
+
+    /**
      * Write the vertex indices of all faces to the specified buffer and advance
      * the buffer's position. The settings are unaffected.
      *
