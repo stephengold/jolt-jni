@@ -86,6 +86,17 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Instantiate from a {@code Float3}.
+     *
+     * @param float3 the desired component values (not null, unaffected)
+     */
+    public RVec3(Float3 float3) {
+        this.xx = float3.x;
+        this.yy = float3.y;
+        this.zz = float3.z;
+    }
+
+    /**
      * Instantiate a copy of the argument.
      *
      * @param vec the vector to copy (not null, unaffected)
@@ -217,6 +228,17 @@ final public class RVec3 implements RVec3Arg {
         this.xx = source.xx();
         this.yy = source.yy();
         this.zz = source.zz();
+    }
+
+    /**
+     * Set all 3 components from the specified single-precision vector.
+     *
+     * @param source the vector to copy (not null, unaffected)
+     */
+    public void set(Vec3Arg source) {
+        this.xx = source.getX();
+        this.yy = source.getY();
+        this.zz = source.getZ();
     }
 
     /**

@@ -307,6 +307,17 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Set all 3 components from the specified location vector.
+     *
+     * @param source the vector to copy (not null, unaffected)
+     */
+    public void set(RVec3Arg source) {
+        this.x = source.x();
+        this.y = source.y();
+        this.z = source.z();
+    }
+
+    /**
      * Set all 3 components from the argument.
      *
      * @param source the vector to copy (not null, unaffected)
