@@ -72,7 +72,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Instantiate a vector with specified components.
+     * Instantiate a vector with the specified components.
      *
      * @param x the desired X component
      * @param y the desired Y component
@@ -85,7 +85,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Instantiate a vector with specified components.
+     * Instantiate a vector with the specified components.
      *
      * @param x the desired X component
      * @param y the desired Y component
@@ -98,7 +98,7 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Instantiate a vector from the specified array.
+     * Instantiate from the specified array.
      *
      * @param array the desired component values (not null, length&ge;3,
      * unaffected)
@@ -123,7 +123,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Instantiate from a location vector.
      *
-     * @param vec the vector to copy (not null, unaffected)
+     * @param vec the vector to convert (not null, unaffected)
      */
     public Vec3(RVec3Arg vec) {
         this.x = vec.x();
