@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.operator.Op;
+import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -149,6 +150,45 @@ final public class RVec3 implements RVec3Arg {
         this.xx = 0.;
         this.yy = 0.;
         this.zz = 0.;
+    }
+
+    /**
+     * Change the current vector to a unit vector with the same direction.
+     */
+    public void normalizeInPlace() {
+        double invLength = 1. / length();
+        this.xx *= invLength;
+        this.yy *= invLength;
+        this.zz *= invLength;
+    }
+
+    /**
+     * Rotate the current vector by the specified quaternion.
+     *
+     * @param rotation the rotation to apply (not null, normalized, unaffected)
+     */
+    public void rotateInPlace(QuatArg rotation) {
+        assert rotation.isNormalized();
+
+        float lw = rotation.getW();
+        float lx = rotation.getX();
+        float ly = rotation.getY();
+        float lz = rotation.getZ();
+
+        double rx = xx;
+        double ry = yy;
+        double rz = zz;
+
+        // a = lhs x pure(rhs)
+        double aw = -lx * rx - ly * ry - lz * rz;
+        double ax = lw * rx + ly * rz - lz * ry;
+        double ay = lw * ry - lx * rz + lz * rx;
+        double az = lw * rz + lx * ry - ly * rx;
+
+        // result = vec3(a x conjugate(lhs))
+        this.xx = -aw * lx + ax * lw - ay * lz + az * ly;
+        this.yy = -aw * ly + ax * lz + ay * lw - az * lx;
+        this.zz = -aw * lz - ax * ly + ay * lx + az * lw;
     }
 
     /**
