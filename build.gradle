@@ -244,15 +244,19 @@ model {
 
                     // Generate resource path for native library, one of:
                     //   linux/x86-64/com/github/stephengold/libjoltjni.so
+                    //   linux/x86-64/fma/com/github/stephengold/libjoltjni.so
                     //   linux/armhf/com/github/stephengold/libjoltjni.so
                     //   linux/aarch64/com/github/stephengold/libjoltjni.so
                     //   osx/x86-64/com/github/stephengold/libjoltjni.dylib
                     //   osx/aarch64/com/github/stephengold/libjoltjni.dylib
                     //   windows/x86-64/com/github/stephengold/joltjni.dll
 
+                    String subdirectory = targetPlatform.architecture.name
+                    if (use_fma) {
+                        subdirectory += '/fma'
+                    }
                     String replaceWith = targetPlatform.operatingSystem.name \
-                        + '/' + targetPlatform.architecture.name \
-                        + '/com/github/stephengold/$1'
+                        + '/' + subdirectory + '/com/github/stephengold/$1'
                     project.tasks.register('nativesJar' + q, Jar) {
                         archiveBaseName = project.ext.baseName
                         archiveClassifier = buildType.name + flavor.name
