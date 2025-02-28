@@ -52,6 +52,10 @@ model {
             architecture 'x86_64'
             operatingSystem 'linux'
         }
+        Linux64_fma { // Linux64 with Haswell ISA extensions, including AVX2 and FMA
+            architecture 'x86_64'
+            operatingSystem 'linux'
+        }
         Linux_ARM32hf {
             architecture 'armhf'
             operatingSystem 'linux'
@@ -107,6 +111,7 @@ model {
         // To build native libraries for Android, use "android.gradle" instead.
         joltjni(NativeLibrarySpec) {
             targetPlatform 'Linux64'
+            targetPlatform 'Linux64_fma'
             targetPlatform 'Linux_ARM32hf'
             targetPlatform 'Linux_ARM64'
             targetPlatform 'MacOSX64'
@@ -152,9 +157,8 @@ model {
                 cppCompiler.define 'JPH_OBJECT_STREAM'
 
                 // ISA extensions:
-                Boolean use_fma = false
-                if (targetPlatform.architecture.name == 'x86-64' && project.hasProperty('use_fma')) {
-                    use_fma = true
+                Boolean use_fma = pName.endsWith('_fma')
+                if (use_fma) {
                     cppCompiler.define 'JPH_USE_AVX2' // implies SSE4.1, SSE4.2, AVX, F16C, BMI/TZCNT, and LZCNT
                     cppCompiler.define 'JPH_USE_FMADD'
                 }
@@ -236,11 +240,7 @@ model {
                 }
 
                 if (buildable) {
-                    if (use_fma) {
-                        println 'Build ' + q + '+FMA using ' + toolChain
-                    } else {
-                        println 'Build ' + q + ' using ' + toolChain
-                    }
+                    println 'Build ' + q + ' using ' + toolChain
 
                     // Generate resource path for native library, one of:
                     //   linux/x86-64/com/github/stephengold/libjoltjni.so
@@ -285,6 +285,8 @@ model {
 dependencies {
     testImplementation(libs.jsnaploader)
     testImplementation(libs.junit4)
+    testImplementation(libs.log4j.impl)
+    testImplementation(libs.oshi)
 }
 
 java {

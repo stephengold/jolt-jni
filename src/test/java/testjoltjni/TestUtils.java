@@ -39,8 +39,16 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import electrostatic4j.snaploader.platform.util.NativeVariant;
 import java.io.File;
+import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
+import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.junit.Assert;
+import oshi.SystemInfo;
+import oshi.hardware.CentralProcessor;
+import oshi.hardware.HardwareAbstractionLayer;
 
 /**
  * Utility methods for automated testing of jolt-jni libraries.
@@ -378,6 +386,8 @@ final public class TestUtils {
                 } else {
                     subdirectory = "linux_ARM32hf";
                 }
+            } else if (hasFma()) {
+                subdirectory = "linux64_fma";
             } else {
                 subdirectory = "linux64";
             }
@@ -408,10 +418,26 @@ final public class TestUtils {
 
         file = new File(file, name);
         String absoluteFilename = file.getAbsolutePath();
+
         boolean success = false;
         if (file.exists() && file.canRead()) {
             System.load(absoluteFilename);
             success = true;
+        }
+
+        if (!success && subdirectory.endsWith("_fma")) {
+            // retry loading without that "_fma" infix
+
+            subdirectory = subdirectory.replace("_fma", "");
+            file = new File(directory, subdirectory);
+            file = new File(file, bt);
+            file = new File(file, f);
+            file = new File(file, name);
+            absoluteFilename = file.getAbsolutePath();
+            if (file.exists() && file.canRead()) {
+                System.load(absoluteFilename);
+                success = true;
+            }
         }
 
         return success;
@@ -552,6 +578,57 @@ final public class TestUtils {
             result = first + rest;
         }
 
+        return result;
+    }
+
+    /**
+     * Test whether all of the named CPU features are present.
+     *
+     * @param requiredFeatures the names of the features to test for
+     * @return {@code true} if all are present, otherwise {@code false}
+     */
+    private static boolean hasCpuFeatures(String... requiredFeatures) {
+        // Obtain the list of CPU feature strings from OSHI:
+        SystemInfo si = new SystemInfo();
+        HardwareAbstractionLayer hal = si.getHardware();
+        CentralProcessor cpu = hal.getProcessor();
+        List<String> oshiList = cpu.getFeatureFlags();
+
+        Pattern pattern = Pattern.compile("[a-z][a-z0-9_]*");
+
+        // Convert the list to a collection of feature names:
+        Collection<String> presentFeatures = new TreeSet<>();
+        for (String oshiString : oshiList) {
+            String lcString = oshiString.toLowerCase(Locale.ROOT);
+            Matcher matcher = pattern.matcher(lcString);
+            while (matcher.find()) {
+                String featureName = matcher.group();
+                presentFeatures.add(featureName);
+            }
+        }
+
+        // Test for each required CPU feature:
+        for (String featureName : requiredFeatures) {
+            String lcName = featureName.toLowerCase(Locale.ROOT);
+            boolean isPresent = presentFeatures.contains(lcName);
+            if (!isPresent) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Test for the presence of seven x86_64 ISA extensions that Jolt Physics
+     * can exploit, including AVX2 and FMA.
+     *
+     * @return {@code true} if those ISA extensions are present, otherwise
+     * {@code false}
+     */
+    private static boolean hasFma() {
+        boolean result = hasCpuFeatures(
+                "avx", "avx2", "bmi1", "f16c", "fma", "sse4_1", "sse4_2");
         return result;
     }
 }
