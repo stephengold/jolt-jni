@@ -188,6 +188,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManager_getBodie
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyManager
+ * Method:    getBody
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManager_getBody
+  (JNIEnv *, jclass, jlong managerVa, jlong idVa) {
+    BodyManager * const pManager = reinterpret_cast<BodyManager *> (managerVa);
+    const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
+    Body * const pResult = &pManager->GetBody(*pId);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyManager
  * Method:    getMaxBodies
  * Signature: (J)I
  */

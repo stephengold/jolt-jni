@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -182,6 +182,21 @@ public class BodyManager extends NonCopyable {
     }
 
     /**
+     * Access a body using its ID.
+     *
+     * @param id the ID of the body to access (not null, unaffected)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public Body getBody(ConstBodyId id) {
+        long managerVa = va();
+        long idVa = id.targetVa();
+        long resultVa = getBody(managerVa, idVa);
+        Body result = new Body(this, resultVa);
+
+        return result;
+    }
+
+    /**
      * Access the (application-provided) interface for mapping object layers to
      * broadphase layers.
      *
@@ -241,6 +256,8 @@ public class BodyManager extends NonCopyable {
     native private static void free(long managerVa);
 
     native private static long getBodies(long managerVa);
+
+    native private static long getBody(long managerVa, long idVa);
 
     native private static int getMaxBodies(long managerVa);
 
