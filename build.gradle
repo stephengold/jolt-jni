@@ -244,7 +244,7 @@ model {
 
                     // Generate resource path for native library, one of:
                     //   linux/x86-64/com/github/stephengold/libjoltjni.so
-                    //   linux/x86-64/fma/com/github/stephengold/libjoltjni.so
+                    //   linux/x86-64-fma/com/github/stephengold/libjoltjni.so
                     //   linux/armhf/com/github/stephengold/libjoltjni.so
                     //   linux/aarch64/com/github/stephengold/libjoltjni.so
                     //   osx/x86-64/com/github/stephengold/libjoltjni.dylib
@@ -253,7 +253,7 @@ model {
 
                     String subdirectory = targetPlatform.architecture.name
                     if (use_fma) {
-                        subdirectory += '/fma'
+                        subdirectory += '-fma'
                     }
                     String replaceWith = targetPlatform.operatingSystem.name \
                         + '/' + subdirectory + '/com/github/stephengold/$1'
