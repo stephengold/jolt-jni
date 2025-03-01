@@ -76,6 +76,10 @@ model {
             architecture 'x86_64'
             operatingSystem 'windows'
         }
+        Windows64_avx2 { // Windows64 with Haswell ISA extensions, including AVX2
+            architecture 'x86_64'
+            operatingSystem 'windows'
+        }
     }
 
     toolChains { // prioritize the available native toolchains
@@ -117,6 +121,7 @@ model {
             targetPlatform 'MacOSX64'
             targetPlatform 'MacOSX_ARM64'
             targetPlatform 'Windows64'
+            targetPlatform 'Windows64_avx2'
 
             sources.cpp.source {
                 srcDir 'src/main/native/Jolt'
@@ -157,9 +162,12 @@ model {
                 cppCompiler.define 'JPH_OBJECT_STREAM'
 
                 // ISA extensions:
+                Boolean use_avx2 = pName.endsWith('_avx2')
                 Boolean use_fma = pName.endsWith('_fma')
-                if (use_fma) {
+                if (use_avx2 || use_fma) {
                     cppCompiler.define 'JPH_USE_AVX2' // implies SSE4.1, SSE4.2, AVX, F16C, BMI/TZCNT, and LZCNT
+                }
+                if (use_fma) {
                     cppCompiler.define 'JPH_USE_FMADD'
                 }
 
@@ -250,10 +258,13 @@ model {
                     //   osx/x86-64/com/github/stephengold/libjoltjni.dylib
                     //   osx/aarch64/com/github/stephengold/libjoltjni.dylib
                     //   windows/x86-64/com/github/stephengold/joltjni.dll
+                    //   windows/x86-64-avx2/com/github/stephengold/joltjni.dll
 
                     String subdirectory = targetPlatform.architecture.name
                     if (use_fma) {
                         subdirectory += '-fma'
+                    } else if (use_avx2) {
+                        subdirectory += '-avx2'
                     }
                     String replaceWith = targetPlatform.operatingSystem.name \
                         + '/' + subdirectory + '/com/github/stephengold/$1'

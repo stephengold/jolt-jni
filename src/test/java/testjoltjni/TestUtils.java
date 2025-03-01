@@ -389,7 +389,7 @@ final public class TestUtils {
                 } else {
                     subdirectory = "linux_ARM32hf";
                 }
-            } else if (hasFma()) {
+            } else if (hasLinuxFma()) {
                 subdirectory = "linux64_fma";
             } else {
                 subdirectory = "linux64";
@@ -405,7 +405,11 @@ final public class TestUtils {
 
         } else if (NativeVariant.Os.isWindows()) {
             name = "joltjni.dll";
-            subdirectory = "windows64";
+            if (hasWindowsAvx2()) {
+                subdirectory = "windows64_avx2";
+            } else {
+                subdirectory = "windows64";
+            }
 
         } else {
             String osName = NativeVariant.OS_NAME.getProperty();
@@ -623,15 +627,31 @@ final public class TestUtils {
     }
 
     /**
-     * Test for the presence of seven x86_64 ISA extensions that Jolt Physics
-     * can exploit, including AVX2 and FMA.
+     * Test on Linux for the presence of seven x86_64 ISA extensions that Jolt
+     * Physics can exploit, including AVX2 and FMA.
      *
      * @return {@code true} if those ISA extensions are present, otherwise
      * {@code false}
      */
-    private static boolean hasFma() {
+    private static boolean hasLinuxFma() {
         boolean result = hasCpuFeatures(
                 "avx", "avx2", "bmi1", "f16c", "fma", "sse4_1", "sse4_2");
+        return result;
+    }
+
+    /**
+     * Test on Windows for the presence of four x86_64 ISA extensions that Jolt
+     * Physics can exploit, including AVX2.
+     *
+     * @return {@code true} if those ISA extensions are present, otherwise
+     * {@code false}
+     */
+    private static boolean hasWindowsAvx2() {
+        boolean result = hasCpuFeatures(
+                "pf_avx_instructions_available",
+                "pf_avx2_instructions_available",
+                "pf_sse4_1_instructions_available",
+                "pf_sse4_2_instructions_available");
         return result;
     }
 }
