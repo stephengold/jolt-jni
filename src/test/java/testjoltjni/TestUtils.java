@@ -432,9 +432,11 @@ final public class TestUtils {
             success = true;
         }
 
-        if (!success && subdirectory.endsWith("_fma")) {
-            // retry loading without that "_fma" infix
+        if (!success && (subdirectory.endsWith("_avx2")
+                || subdirectory.endsWith("_fma"))) {
+            // retry loading without that _avx2/_fma infix
 
+            subdirectory = subdirectory.replace("_avx2", "");
             subdirectory = subdirectory.replace("_fma", "");
             file = new File(directory, subdirectory);
             file = new File(file, bt);
