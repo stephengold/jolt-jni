@@ -365,13 +365,16 @@ final public class TestUtils {
     /**
      * Load a specific jolt-jni native library from the filesystem.
      *
-     * @param directory (not null, readable, unaffected)
+     * @param directory (not null, readable directory, unaffected)
      * @param buildType "Debug" or "Release"
      * @param flavor "Sp" or "Dp"
      * @return true after successful load, otherwise false
      */
     public static boolean loadNativeLibrary(
             File directory, String buildType, String flavor) {
+        assert directory.exists() : directory;
+        assert directory.isDirectory() : directory;
+        assert directory.canRead() : directory;
         assert buildType.equals("Debug") || buildType.equals("Release") :
                 buildType;
         assert flavor.equals("Sp") || flavor.equals("Dp") : flavor;
