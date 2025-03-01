@@ -27,7 +27,8 @@ ext {
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
 
-// Generate all JNI header files and unpack Jolt before compiling any C++ code:
+// Generate all JNI header files and unpack Jolt and V-HACD
+// before compiling any C++ code:
 tasks.withType(CppCompile).configureEach {
     dependsOn('classes', 'compileTestJava', \
             'unpackJoltSource', 'unpackTestFramework', 'unpackVhacdSource')
@@ -443,7 +444,7 @@ publishing {
             from components.java
             groupId = groupID
             pom {
-                description = 'a JNI interface to Jolt Physics'
+                description = 'a JNI interface to Jolt Physics and V-HACD'
                 developers {
                     developer {
                         email = 'sgold@sonic.net'

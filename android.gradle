@@ -119,7 +119,7 @@ publishing {
             afterEvaluate { from components.complete }
             groupId = groupID
             pom {
-                description = 'a JNI interface to Jolt Physics'
+                description = 'a JNI interface to Jolt Physics and V-HACD'
                 developers {
                     developer {
                         email = 'sgold@sonic.net'
