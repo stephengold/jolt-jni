@@ -339,12 +339,13 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_profileStart
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    newFactory
- * Signature: ()V
+ * Signature: ()Z
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
   (JNIEnv *, jclass) {
     Factory::sInstance = new Factory();
     TRACE_NEW("Factory", Factory::sInstance)
+    return Factory::sInstance != nullptr;
 }
 
 /*
