@@ -343,6 +343,13 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_profileStart
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
   (JNIEnv *, jclass) {
+#if !defined(JPH_NO_DEBUG) && !defined(JPH_DISABLE_CUSTOM_ALLOCATOR)
+    if (!Allocate) {
+        std::cerr << "Can't create a Factory because no default allocator is registered!"
+                << std::endl;
+        return JNI_FALSE;
+    }
+#endif
     Factory::sInstance = new Factory();
     TRACE_NEW("Factory", Factory::sInstance)
     return Factory::sInstance != nullptr;

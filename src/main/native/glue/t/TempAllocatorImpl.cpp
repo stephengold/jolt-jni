@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,7 @@ SOFTWARE.
 
 #include "auto/com_github_stephengold_joltjni_TempAllocatorImpl.h"
 #include "glue/glue.h"
+#include <iostream>
 
 using namespace JPH;
 
@@ -38,6 +39,13 @@ using namespace JPH;
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TempAllocatorImpl_create
   (JNIEnv *, jclass, jint numBytes) {
+#if !defined(JPH_NO_DEBUG) && !defined(JPH_DISABLE_CUSTOM_ALLOCATOR)
+    if (!Allocate) {
+        std::cerr << "Can't create a TempAllocatorImpl because no default allocator is registered!"
+                << std::endl;
+        return 0;
+    }
+#endif
     TempAllocatorImpl * const pResult = new TempAllocatorImpl(numBytes);
     TRACE_NEW("TempAllocatorImpl", pResult)
     return reinterpret_cast<jlong> (pResult);
