@@ -104,7 +104,7 @@ public class Test008 {
         final QuatArg qx = Quat.sRotation(Vec3.sAxisX(), xAngle);
         final QuatArg qy = Quat.sRotation(Vec3.sAxisY(), yAngle);
         final QuatArg qz = Quat.sRotation(Vec3.sAxisZ(), zAngle);
-        final QuatArg qea = Quat.sEulerAngles(new Vec3(xAngle, yAngle, zAngle));
+        final QuatArg qea = Quat.sEulerAngles(xAngle, yAngle, zAngle);
         /*
          * Part 1: verify that the extrinsic rotation order is x-y-z
          *
@@ -252,7 +252,7 @@ public class Test008 {
         testX90(x90);
         testX90(new Quat(x90));
         testX90(new Quat(new Vec3(rootHalf, 0f, 0f), rootHalf));
-        testX90(Quat.sEulerAngles(new Vec3(halfPi, 0f, 0f)));
+        testX90(Quat.sEulerAngles(halfPi, 0f, 0f));
         testX90(Quat.sRotation(xVec, halfPi));
         testX90(new Quat(1f, 0f, 0f, 1f).normalized());
 
