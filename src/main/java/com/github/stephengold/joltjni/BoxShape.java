@@ -34,6 +34,15 @@ public class BoxShape extends ConvexShape {
     // constructors
 
     /**
+     * Instantiate a cubic shape with the specified half extents.
+     *
+     * @param halfExtent the desired half extents (&ge;0.05)
+     */
+    public BoxShape(float halfExtent) {
+        this(halfExtent, halfExtent, halfExtent);
+    }
+
+    /**
      * Instantiate a shape with the specified half extents.
      *
      * @param xHalfExtent the desired half extents on the local X axis
