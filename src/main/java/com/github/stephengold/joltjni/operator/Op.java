@@ -526,6 +526,19 @@ final public class Op {
     }
 
     /**
+     * Return the product of the specified matrices. (native operator: binary
+     * {@code *})
+     *
+     * @param left the left factor (not null, unaffected)
+     * @param right the right factor (not null, unaffected)
+     * @return a new matrix
+     */
+    public static RMat44 star(RMat44Arg left, Mat44Arg right) {
+        RMat44 result = left.multiply(right);
+        return result;
+    }
+
+    /**
      * Return the product of the specified quaternions. (native operator: binary
      * {@code *})
      *
