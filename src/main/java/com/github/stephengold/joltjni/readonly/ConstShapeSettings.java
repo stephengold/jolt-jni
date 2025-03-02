@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.ShapeResult;
 
 /**
- * Read-only access to a {@code ShapeSettings}. (native type: const
+ * Read-only access to a {@code ShapeSettings} object. (native type: const
  * ShapeSettings)
  *
  * @author Stephen Gold sgold@sonic.net

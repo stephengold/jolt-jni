@@ -166,7 +166,8 @@ model {
                 Boolean use_avx2 = pName.endsWith('_avx2')
                 Boolean use_fma = pName.endsWith('_fma')
                 if (use_avx2 || use_fma) {
-                    cppCompiler.define 'JPH_USE_AVX2' // implies SSE4.1, SSE4.2, AVX, F16C, BMI/TZCNT, and LZCNT
+                    cppCompiler.define 'JPH_USE_AVX2'
+                    // also implies use of AVX, BMI/TZCNT, F16C, LZCNT, SSE4.1, and SSE4.2 
                 }
                 if (use_fma) {
                     cppCompiler.define 'JPH_USE_FMADD'
@@ -177,6 +178,7 @@ model {
                 if (isDebug) {
                     cppCompiler.define 'JPH_DEBUG_RENDERER'
                     //cppCompiler.define 'JPH_DET_LOG' // to implement the determinism log
+                    //cppCompiler.define 'JPH_DISABLE_CUSTOM_ALLOCATOR'
                     cppCompiler.define 'JPH_ENABLE_ASSERTS'
                     //cppCompiler.define 'JPH_TRACK_NARROWPHASE_STATS' // to collect statistics
                 } else {
