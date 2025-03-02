@@ -495,6 +495,23 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Multiply the current matrix by the specified single-precision matrix. The
+     * current matrix is unaffected.
+     *
+     * @param right the right factor (not null, unaffected)
+     * @return a new matrix
+     */
+    @Override
+    public RMat44 multiply(Mat44Arg right) {
+        long leftVa = va();
+        long rightVa = right.targetVa();
+        long resultVa = multiplyBySp(leftVa, rightVa);
+        RMat44 result = new RMat44(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Multiply the current matrix by the argument. The current matrix is
      * unaffected.
      *
@@ -741,6 +758,8 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
             long matrixVa, float x, float y, float z, double[] storeDoubles);
 
     native private static void multiply3x4r(long matrixVa, double[] tmpDoubles);
+
+    native private static long multiplyBySp(long leftVa, long rightVa);
 
     native private static long postTranslated(
             long matrixVa, double xx, double yy, double zz);

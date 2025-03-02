@@ -426,6 +426,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x4r
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    multiplyBySp
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_multiplyBySp
+  (JNIEnv *, jclass, jlong leftVa, jlong rightVa) {
+    const RMat44 * const pLeft = reinterpret_cast<RMat44 *> (leftVa);
+    const Mat44 * const pRight = reinterpret_cast<Mat44 *> (rightVa);
+    RMat44 * const pResult = new RMat44();
+    TRACE_NEW("RMat44", pResult)
+    *pResult = (*pLeft) * (*pRight);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    postTranslated
  * Signature: (JDDD)J
  */

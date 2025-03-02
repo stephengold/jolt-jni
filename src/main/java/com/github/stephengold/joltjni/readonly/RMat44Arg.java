@@ -123,6 +123,15 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
     boolean isIdentity();
 
     /**
+     * Multiply the current matrix by the specified single-precision matrix. The
+     * current matrix is unaffected.
+     *
+     * @param right the right factor (not null, unaffected)
+     * @return a new matrix
+     */
+    RMat44 multiply(Mat44Arg right);
+
+    /**
      * Multiply the current matrix by the argument. The current matrix is
      * unaffected.
      *
