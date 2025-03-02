@@ -202,7 +202,7 @@ public Body CreateHeightFieldTerrain()
 			heights[y * n + x] = max_height * perlinNoise3((float)(x) * 8.0f / n, 0, (float)(y) * 8.0f / n, 256, 256, 256);
 
 	// Create height field
-	ShapeSettings height_field =new HeightFieldShapeSettings(heights,new Vec3(-0.5f * cell_size * n, 0.0f, -0.5f * cell_size * n),new Vec3(cell_size, 1.0f, cell_size), n);
+	ShapeSettings height_field = new HeightFieldShapeSettings(heights,new Vec3(-0.5f * cell_size * n, 0.0f, -0.5f * cell_size * n),new Vec3(cell_size, 1.0f, cell_size), n);
 
 	// Floor
 	Body floor = mBodyInterface.createBody(new BodyCreationSettings(height_field, RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING));

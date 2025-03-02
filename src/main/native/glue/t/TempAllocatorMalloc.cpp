@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Core/TempAllocator.h"
+
 #include "auto/com_github_stephengold_joltjni_TempAllocatorMalloc.h"
 #include "glue/glue.h"
 

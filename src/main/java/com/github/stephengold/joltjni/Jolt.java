@@ -431,7 +431,7 @@ final public class Jolt {
     /**
      * Create a factory for deserialization of saved data.
      *
-     * @return {@code true} if successful, otherwise {@code false} 
+     * @return {@code true} if successful, otherwise {@code false}
      * @see #destroyFactory()
      */
     native public static boolean newFactory();
