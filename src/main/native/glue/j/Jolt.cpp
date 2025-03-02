@@ -132,7 +132,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_detLog
     pEnv->ReleaseStringUTFChars(message, pMessage);
 #elif defined(_DEBUG)
     if (gWarnDetLogIneffective) {
-        Trace("Jolt.detLog() has no effect unless JPH_ENABLE_DETERMINISM_LOG is defined.");
+        std::cout << "Jolt.detLog() has no effect unless JPH_ENABLE_DETERMINISM_LOG is defined."
+                << std::endl;
         gWarnDetLogIneffective = false;
     }
 #endif
@@ -239,7 +240,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installDefaultAs
 #ifdef JPH_ENABLE_ASSERTS
     AssertFailed = DefaultAssertFailed;
 #elif defined(_DEBUG)
-    Trace("Jolt.installDefaultAssertCallback() has no effect unless JPH_ENABLE_ASSERTS is defined.");
+    std::cout << "Jolt.installDefaultAssertCallback() has no effect unless JPH_ENABLE_ASSERTS is defined."
+            << std::endl;
 #endif
 }
 
@@ -390,7 +392,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_setTraceAllocati
 #ifdef _DEBUG
     gTraceAllocations = setting;
 #else
-    Trace("Jolt.setTraceAllocations() has no effect in a Release native library.");
+    std::cout << "Jolt.setTraceAllocations() has no effect" << " in a Release native library." << std::endl;
 #endif
 }
 
