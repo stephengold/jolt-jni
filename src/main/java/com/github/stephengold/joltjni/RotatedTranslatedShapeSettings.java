@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -102,8 +103,8 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      * @param rotation (not null, not zero, unaffected)
      * @param baseShapeSettings settings for the base shape (not null)
      */
-    public RotatedTranslatedShapeSettings(
-            Vec3Arg offset, QuatArg rotation, ShapeSettings baseShapeSettings) {
+    public RotatedTranslatedShapeSettings(Vec3Arg offset, QuatArg rotation,
+            ConstShapeSettings baseShapeSettings) {
         float offsetX = offset.getX();
         float offsetY = offset.getY();
         float offsetZ = offset.getZ();
@@ -111,7 +112,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         float rotX = rotation.getX();
         float rotY = rotation.getY();
         float rotZ = rotation.getZ();
-        long baseShapeSettingsVa = baseShapeSettings.va();
+        long baseShapeSettingsVa = baseShapeSettings.targetVa();
         long rtssVa = createSettingsFromShapeSettings(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeSettingsVa);
         setVirtualAddress(rtssVa); // no owner due to ref counting

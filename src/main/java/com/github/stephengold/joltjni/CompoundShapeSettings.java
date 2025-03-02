@@ -106,7 +106,7 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
      * @param subSettings the desired subshape settings (not null)
      */
     public void addShape(
-            Vec3Arg offset, QuatArg rotation, ShapeSettings subSettings) {
+            Vec3Arg offset, QuatArg rotation, ConstShapeSettings subSettings) {
         long settingsVa = va();
         float offsetX = offset.getX();
         float offsetY = offset.getY();
@@ -115,23 +115,9 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
         float rotX = rotation.getX();
         float rotY = rotation.getY();
         float rotZ = rotation.getZ();
-        long subSettingsVa = subSettings.va();
+        long subSettingsVa = subSettings.targetVa();
         addShapeSettings(settingsVa, offsetX, offsetY, offsetZ,
                 rotX, rotY, rotZ, rotW, subSettingsVa);
-    }
-
-    /**
-     * Add the specified subshape at the specified position.
-     *
-     * @param offset the desired offset for the subshape (not null, unaffected)
-     * @param rotation the desired rotation for the subshape (not null, not
-     * zero, unaffected)
-     * @param subSettingsRef a reference to the subshape settings (not null)
-     */
-    public void addShape(
-            Vec3Arg offset, QuatArg rotation, ShapeSettingsRef subSettingsRef) {
-        ShapeSettings subSettings = subSettingsRef.getPtr();
-        addShape(offset, rotation, subSettings);
     }
     // *************************************************************************
     // native private methods

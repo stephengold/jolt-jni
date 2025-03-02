@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -86,27 +87,8 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
      * @param scaleFactors the desired scale factors (not null)
      */
     public ScaledShapeSettings(
-            ShapeSettings baseSettings, Vec3Arg scaleFactors) {
-        long baseSettingsVa = baseSettings.va();
-        float scaleX = scaleFactors.getX();
-        float scaleY = scaleFactors.getY();
-        float scaleZ = scaleFactors.getZ();
-        long settingsVa = createScaledShapeSettingsFromSettings(
-                baseSettingsVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(settingsVa); // no owner due to ref counting
-        setSubType(EShapeSubType.Scaled);
-    }
-
-    /**
-     * Instantiate a settings based on the specified settings and scale factors.
-     *
-     * @param baseSettingsRef a reference to the unscaled base shape settings
-     * (not null)
-     * @param scaleFactors the desired scale factors (not null)
-     */
-    public ScaledShapeSettings(
-            ShapeSettingsRef baseSettingsRef, Vec3Arg scaleFactors) {
-        long baseSettingsVa = baseSettingsRef.targetVa();
+            ConstShapeSettings baseSettings, Vec3Arg scaleFactors) {
+        long baseSettingsVa = baseSettings.targetVa();
         float scaleX = scaleFactors.getX();
         float scaleY = scaleFactors.getY();
         float scaleZ = scaleFactors.getZ();
