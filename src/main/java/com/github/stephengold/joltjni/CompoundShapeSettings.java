@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.vhacd.ConvexHull;
@@ -61,17 +62,34 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
      * @param hulls the hulls to add (not null, unaffected)
      */
     public void addHulls(Collection<ConvexHull> hulls) {
-        Vec3Arg offset = Vec3.sZero();
-        QuatArg rotation = Quat.sIdentity();
-
         for (ConvexHull hull : hulls) {
             FloatBuffer points = hull.getPointsAsBuffer();
             int numFloats = points.capacity();
             int numPoints = numFloats / 3;
             ConvexHullShapeSettings childSettings
                     = new ConvexHullShapeSettings(numPoints, points);
-            addShape(offset, rotation, childSettings);
+            addShape(0f, 0f, 0f, childSettings);
         }
+    }
+
+    /**
+     * Add the specified subshape at the specified offset.
+     *
+     * @param xOffset the desired X offset for the subshape
+     * @param yOffset the desired Y offset for the subshape
+     * @param zOffset the desired Z offset for the subshape
+     * @param subSettings the desired subshape settings (not null)
+     */
+    public void addShape(float xOffset, float yOffset, float zOffset,
+            ConstShapeSettings subSettings) {
+        long settingsVa = va();
+        float rotW = 1f;
+        float rotX = 0f;
+        float rotY = 0f;
+        float rotZ = 0f;
+        long subSettingsVa = subSettings.targetVa();
+        addShapeSettings(settingsVa, xOffset, yOffset, zOffset,
+                rotX, rotY, rotZ, rotW, subSettingsVa);
     }
 
     /**
