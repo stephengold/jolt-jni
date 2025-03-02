@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -118,7 +118,7 @@ public class Test007 {
      * Test the {@code BoxShape} class.
      */
     private static void doBoxShape() {
-        BoxShapeSettings settings = new BoxShapeSettings(new Vec3(1f, 1f, 1f));
+        BoxShapeSettings settings = new BoxShapeSettings(1f, 1f, 1f);
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
         Assert.assertTrue(result.isValid());

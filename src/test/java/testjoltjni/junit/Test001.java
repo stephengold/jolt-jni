@@ -254,7 +254,7 @@ public class Test001 {
         BodyInterface bodyInterface = physicsSystem.getBodyInterface();
 
         BoxShapeSettings floorShapeSettings
-                = new BoxShapeSettings(new Vec3(100f, 1f, 100f));
+                = new BoxShapeSettings(100f, 1f, 100f);
         ShapeResult floorShapeResult = floorShapeSettings.create();
         Assert.assertFalse(floorShapeResult.hasError());
         Assert.assertTrue(floorShapeResult.isValid());

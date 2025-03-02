@@ -103,7 +103,7 @@ public class Test006 {
      * Test the {@code BoxShapeSettings} class.
      */
     private static void doBoxShapeSettings() {
-        BoxShapeSettings settings = new BoxShapeSettings(new Vec3(1f, 1f, 1f));
+        BoxShapeSettings settings = new BoxShapeSettings(1f, 1f, 1f);
 
         testBoxSsDefaults(settings);
         testBoxSsSetters(settings);

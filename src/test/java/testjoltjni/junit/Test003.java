@@ -41,7 +41,6 @@ import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Shape;
-import com.github.stephengold.joltjni.ShapeSettings;
 import com.github.stephengold.joltjni.SkinWeight;
 import com.github.stephengold.joltjni.SoftBodyMotionProperties;
 import com.github.stephengold.joltjni.SphereShape;
@@ -56,6 +55,7 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
+import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.vhacd.FillMode;
 import com.github.stephengold.joltjni.vhacd.Parameters;
@@ -173,7 +173,7 @@ public class Test003 {
             TestUtils.testClose(bcs);
         }
         {
-            ShapeSettings ss = new BoxShapeSettings(new Vec3(1f, 1f, 1f));
+            ConstShapeSettings ss = new BoxShapeSettings(1f, 1f, 1f);
             int objectLayer = 0;
             BodyCreationSettings bcs = new BodyCreationSettings(ss,
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
