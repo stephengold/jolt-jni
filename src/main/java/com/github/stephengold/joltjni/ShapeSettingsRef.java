@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
@@ -29,7 +30,7 @@ import com.github.stephengold.joltjni.template.Ref;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class ShapeSettingsRef extends Ref {
+final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
     // *************************************************************************
     // constructors
 
@@ -54,13 +55,14 @@ final public class ShapeSettingsRef extends Ref {
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
-    // public methods
+    // ConstShapeSettings methods
 
     /**
      * Generate a {@code ShapeResult} from the referenced {@code ShapeSettings}.
      *
      * @return a new JVM object with a new native object assigned
      */
+    @Override
     public ShapeResult create() {
         long settingsVa = targetVa();
         long resultVa = ShapeSettings.create(settingsVa);

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
@@ -31,7 +32,7 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 abstract public class ShapeSettings
         extends SerializableObject
-        implements RefTarget {
+        implements ConstShapeSettings, RefTarget {
     // *************************************************************************
     // constructors
 
@@ -61,19 +62,6 @@ abstract public class ShapeSettings
     public void clearCachedResult() {
         long settingsVa = va();
         clearCachedResult(settingsVa);
-    }
-
-    /**
-     * Generate a {@code ShapeResult} from these settings.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    public ShapeResult create() {
-        long settingsVa = va();
-        long resultVa = create(settingsVa);
-        ShapeResult result = new ShapeResult(resultVa, true);
-
-        return result;
     }
 
     /**
@@ -160,6 +148,22 @@ abstract public class ShapeSettings
         long settingsVa = va();
         long ordinal = shapeSubType.ordinal();
         setUserData(settingsVa, ordinal);
+    }
+    // *************************************************************************
+    // ConstShapeSettings methods
+
+    /**
+     * Generate a {@code ShapeResult} from these settings.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public ShapeResult create() {
+        long settingsVa = va();
+        long resultVa = create(settingsVa);
+        ShapeResult result = new ShapeResult(resultVa, true);
+
+        return result;
     }
     // *************************************************************************
     // RefTarget methods
