@@ -184,14 +184,15 @@ final public class Quat implements QuatArg {
      * applying the rotations in x-y-z extrinsic order or z-y'-x" intrinsic
      * order.
      *
-     * @param angles the desired rotation around each axis (in radians, not
-     * null, unaffected)
+     * @param x the desired rotation around the X axis (in radians)
+     * @param y the desired rotation around the Y axis (in radians)
+     * @param z the desired rotation around the Z axis (in radians)
      * @return a new quaternion
      */
-    public static Quat sEulerAngles(Vec3Arg angles) {
-        float halfX = 0.5f * angles.getX();
-        float halfY = 0.5f * angles.getY();
-        float halfZ = 0.5f * angles.getZ();
+    public static Quat sEulerAngles(float x, float y, float z) {
+        float halfX = 0.5f * x;
+        float halfY = 0.5f * y;
+        float halfZ = 0.5f * z;
 
         float cx = Jolt.cos(halfX);
         float cy = Jolt.cos(halfY);
@@ -205,6 +206,24 @@ final public class Quat implements QuatArg {
                 cz * cx * sy + sz * sx * cy,
                 sz * cx * cy - cz * sx * sy,
                 cz * cx * cy + sz * sx * sy);
+
+        return result;
+    }
+
+    /**
+     * Create a rotation quaternion from the specified Tait-Bryan angles,
+     * applying the rotations in x-y-z extrinsic order or z-y'-x" intrinsic
+     * order.
+     *
+     * @param angles the desired rotation around each axis (in radians, not
+     * null, unaffected)
+     * @return a new quaternion
+     */
+    public static Quat sEulerAngles(Vec3Arg angles) {
+        float x = angles.getX();
+        float y = angles.getY();
+        float z = angles.getZ();
+        Quat result = sEulerAngles(x, y, z);
 
         return result;
     }
