@@ -222,6 +222,17 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Uniformly scale all 3 components.
+     *
+     * @param scale the scale factor to apply
+     */
+    public void scaleInPlace(double scale) {
+        this.xx *= scale;
+        this.yy *= scale;
+        this.zz *= scale;
+    }
+
+    /**
      * Separately scale each component.
      *
      * @param xScale the scale factor to apply to the X component
