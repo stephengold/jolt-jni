@@ -83,10 +83,10 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_aTan2
 JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_buildType
   (JNIEnv *pEnv, jclass) {
     jstring result;
-#ifdef JPH_NO_DEBUG
-    result = pEnv->NewStringUTF("Release");
-#else
+#ifdef JPH_DEBUG
     result = pEnv->NewStringUTF("Debug");
+#else
+    result = pEnv->NewStringUTF("Release");
 #endif
     return result;
 }
@@ -130,7 +130,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_detLog
     const char * const pMessage = pEnv->GetStringUTFChars(message, &isCopy);
     JPH_DET_LOG(pMessage);
     pEnv->ReleaseStringUTFChars(message, pMessage);
-#elif defined(_DEBUG)
+#elif defined(JPH_DEBUG)
     if (gWarnDetLogIneffective) {
         std::cout << "Jolt.detLog() has no effect unless JPH_ENABLE_DETERMINISM_LOG is defined."
                 << std::endl;
@@ -239,7 +239,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installDefaultAs
   (JNIEnv *, jclass) {
 #ifdef JPH_ENABLE_ASSERTS
     AssertFailed = DefaultAssertFailed;
-#elif defined(_DEBUG)
+#elif defined(JPH_DEBUG)
     std::cout << "Jolt.installDefaultAssertCallback() has no effect unless JPH_ENABLE_ASSERTS is defined."
             << std::endl;
 #endif
@@ -345,7 +345,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_profileStart
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
   (JNIEnv *, jclass) {
-#if !defined(JPH_NO_DEBUG) && !defined(JPH_DISABLE_CUSTOM_ALLOCATOR)
+#if defined(JPH_DEBUG) && !defined(JPH_DISABLE_CUSTOM_ALLOCATOR)
     if (!Allocate) {
         std::cerr << "Can't create a Factory because no default allocator is registered!"
                 << std::endl;
@@ -377,7 +377,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_registerTypes
     RegisterTypes();
 }
 
-#ifdef _DEBUG
+#ifdef JPH_DEBUG
 // global flag to enable tracing of new/delete operations in glue code:
 bool gTraceAllocations = false;
 #endif
@@ -389,7 +389,7 @@ bool gTraceAllocations = false;
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_setTraceAllocations
   (JNIEnv *, jclass, jboolean setting) {
-#ifdef _DEBUG
+#ifdef JPH_DEBUG
     gTraceAllocations = setting;
 #else
     std::cout << "Jolt.setTraceAllocations() has no effect" << " in a Release native library." << std::endl;

@@ -25,7 +25,7 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
-#ifdef _DEBUG
+#ifdef JPH_DEBUG
 
 extern bool gTraceAllocations;
 

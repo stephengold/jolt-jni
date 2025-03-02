@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseStat_sRepo
   (JNIEnv *, jclass) {
 #ifdef JPH_TRACK_NARROWPHASE_STATS
     NarrowPhaseStat::sReportStats();
-#elif defined(_DEBUG)
+#elif defined(JPH_DEBUG)
     Trace("NarrowPhaseStat.sReportStats() has no effect unless JPH_TRACK_NARROWPHASE_STATS is defined.");
 #endif
 }

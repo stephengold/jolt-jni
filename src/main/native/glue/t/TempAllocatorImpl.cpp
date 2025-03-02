@@ -39,7 +39,7 @@ using namespace JPH;
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TempAllocatorImpl_create
   (JNIEnv *, jclass, jint numBytes) {
-#if !defined(JPH_NO_DEBUG) && !defined(JPH_DISABLE_CUSTOM_ALLOCATOR)
+#if defined(JPH_DEBUG) && !defined(JPH_DISABLE_CUSTOM_ALLOCATOR)
     if (!Allocate) {
         std::cerr << "Can't create a TempAllocatorImpl because no default allocator is registered!"
                 << std::endl;

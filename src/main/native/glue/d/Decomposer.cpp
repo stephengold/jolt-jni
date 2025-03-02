@@ -83,7 +83,7 @@ public:
     }
 
     void Log(const char* const msg) override {
-#ifndef JPH_NO_DEBUG
+#ifdef JPH_DEBUG
         if (mEnableDebugOutput) {
             std::cout << msg << std::endl;
         }

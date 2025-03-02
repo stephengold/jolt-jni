@@ -130,7 +130,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_drawBod
     DebugRenderer * const pRenderer
             = reinterpret_cast<DebugRenderer *> (rendererVa);
     pSystem->DrawBodies(*pSettings, pRenderer);
-#elif defined(_DEBUG)
+#elif defined(JPH_DEBUG)
     Trace("PhysicsSystem.drawBodies() has no effect unless JPH_DEBUG_RENDERER is defined.");
 #endif
 }
