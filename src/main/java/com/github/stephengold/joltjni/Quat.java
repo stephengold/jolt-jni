@@ -369,6 +369,20 @@ final public class Quat implements QuatArg {
     }
 
     /**
+     * Test whether the quaternion contains infinities or NaNs. The quaternion
+     * is unaffected.
+     *
+     * @return {@code false} if one or more infinities or NaNs, otherwise
+     * {@code true}
+     */
+    @Override
+    public boolean isFinite() {
+        boolean result = Float.isFinite(w) && Float.isFinite(x)
+                && Float.isFinite(y) && Float.isFinite(z);
+        return result;
+    }
+
+    /**
      * Test whether the quaternion is normalized to within a tolerance of 10^-5.
      * The quaternion is unaffected.
      *
