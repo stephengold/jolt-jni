@@ -629,6 +629,12 @@ final public class TestUtils {
             }
         }
 
+        System.out.println("CPU features:");
+        for (String featureName : presentFeatures) {
+            System.out.println("    " + featureName);
+        }
+        System.out.println();
+
         // Test for each required CPU feature:
         for (String featureName : requiredFeatures) {
             String linuxName = featureName.toLowerCase(Locale.ROOT);
