@@ -121,9 +121,16 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * @return a new matrix
      */
     public static RMat44 product(RMat44Arg... mArray) {
-        RMat44 result = RMat44.sIdentity();
-        for (RMat44Arg arg : mArray) {
-            result.multiply(arg);
+        int length = mArray.length;
+
+        RMat44 result;
+        if (length == 0) {
+            result = RMat44.sIdentity();
+        } else {
+            result = new RMat44(mArray[0]);
+            for (int i = 1; i < length; ++i) {
+                result = result.multiply(mArray[i]); // TODO garbage
+            }
         }
 
         return result;

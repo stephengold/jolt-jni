@@ -134,9 +134,16 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * @return a new matrix
      */
     public static Mat44 product(Mat44Arg... mArray) {
-        Mat44 result = Mat44.sIdentity();
-        for (Mat44Arg arg : mArray) {
-            result.multiply(arg);
+        int length = mArray.length;
+
+        Mat44 result;
+        if (length == 0) {
+            result = Mat44.sIdentity();
+        } else {
+            result = new Mat44(mArray[0]);
+            for (int i = 1; i < length; ++i) {
+                result = result.multiply(mArray[i]); // TODO garbage
+            }
         }
 
         return result;
