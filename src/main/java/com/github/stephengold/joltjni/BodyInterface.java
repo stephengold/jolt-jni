@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstShape;
@@ -84,6 +85,20 @@ public class BodyInterface extends NonCopyable {
         long bplFilterVa = bplFilter.va();
         long olFilterVa = olFilter.va();
         activateBodiesInAaBox(bodyInterfaceVa, boxVa, bplFilterVa, olFilterVa);
+    }
+
+    /**
+     * Add the specified body to the physics system.
+     *
+     * @param body the body to add (not null)
+     * @param activation whether to activate the body (not null)
+     */
+    public void addBody(ConstBody body, EActivation activation) {
+        long bodyInterfaceVa = va();
+        long bodyVa = body.targetVa();
+        long bodyIdVa = Body.getId(bodyVa);
+        int activationOrdinal = activation.ordinal();
+        addBody(bodyInterfaceVa, bodyIdVa, activationOrdinal);
     }
 
     /**

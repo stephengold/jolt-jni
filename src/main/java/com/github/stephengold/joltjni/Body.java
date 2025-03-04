@@ -960,7 +960,7 @@ public class Body extends NonCopyable implements ConstBody {
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static void addAngularImpulse(
             long bodyVa, float x, float y, float z);
@@ -1028,7 +1028,7 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static float getFriction(long bodyVa);
 
-    native private static long getId(long bodyVa);
+    native static long getId(long bodyVa);
 
     native private static float getLinearVelocityX(long bodyVa);
 
