@@ -162,12 +162,12 @@ model {
                 // always-on preprocessor defines:
                 cppCompiler.define 'JPH_OBJECT_STREAM'
 
-                // ISA extensions:
+                // platforms with ISA extensions:
                 Boolean use_avx2 = pName.endsWith('_avx2')
                 Boolean use_fma = pName.endsWith('_fma')
                 if (use_avx2 || use_fma) {
                     cppCompiler.define 'JPH_USE_AVX2'
-                    // also implies use of AVX, BMI/TZCNT, F16C, LZCNT, SSE4.1, and SSE4.2 
+                    // implies use of AVX, BMI/TZCNT, F16C, LZCNT, SSE4.1, and SSE4.2 
                 }
                 if (use_fma) {
                     cppCompiler.define 'JPH_USE_FMADD'
@@ -181,7 +181,8 @@ model {
                     //cppCompiler.define 'JPH_DISABLE_CUSTOM_ALLOCATOR'
                     cppCompiler.define 'JPH_ENABLE_ASSERTS'
                     //cppCompiler.define 'JPH_TRACK_NARROWPHASE_STATS' // to collect statistics
-                } else {
+
+                } else { // buildTypes.Release
                     cppCompiler.define 'JPH_NO_DEBUG'
                 }
 

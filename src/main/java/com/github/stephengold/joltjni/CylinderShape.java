@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A {@code Shape} to represent a right circular cylinder.
+ * A {@code Shape} to represent a Y-axis right circular cylinder.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -44,8 +44,8 @@ public class CylinderShape extends ConvexShape {
     /**
      * Instantiate a shape with the specified dimensions.
      *
-     * @param halfHeight half the desired height
-     * @param radius the desired radius
+     * @param halfHeight half the desired height (local Y axis)
+     * @param radius the desired radius (local X and Z axes)
      */
     public CylinderShape(float halfHeight, float radius) {
         this(halfHeight, radius, Jolt.cDefaultConvexRadius);
@@ -54,8 +54,8 @@ public class CylinderShape extends ConvexShape {
     /**
      * Instantiate a shape with the specified dimensions and convex radius.
      *
-     * @param halfHeight half the desired height
-     * @param radius the desired radius
+     * @param halfHeight half the desired height (local Y axis)
+     * @param radius the desired radius (local X and Z axes)
      * @param convexRadius the desired convex radius (default=0.05)
      */
     public CylinderShape(float halfHeight, float radius, float convexRadius) {
