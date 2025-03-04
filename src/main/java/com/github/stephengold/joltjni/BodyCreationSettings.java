@@ -389,6 +389,22 @@ public class BodyCreationSettings
      * Alter the (initial) location of the body's origin (which might not
      * coincide with its center of mass). (native attribute: mPosition)
      *
+     * @param xx the desired X coordinate (in physics-system coordinates,
+     * default=0)
+     * @param yy the desired Y coordinate (in physics-system coordinates,
+     * default=0)
+     * @param zz the desired Z coordinate (in physics-system coordinates,
+     * default=0)
+     */
+    public void setPosition(double xx, double yy, double zz) {
+        long bodySettingsVa = va();
+        setPosition(bodySettingsVa, xx, yy, zz);
+    }
+
+    /**
+     * Alter the (initial) location of the body's origin (which might not
+     * coincide with its center of mass). (native attribute: mPosition)
+     *
      * @param location the desired location (in physics-system coordinates, not
      * null, unaffected, default=(0,0,0))
      */
