@@ -124,6 +124,21 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Apply the specified impulse to the body's center of mass.
      *
+     * @param jx the X component of the impulse (kilogram.meters per second in
+     * system coordinates)
+     * @param jy the Y component of the impulse (kilogram.meters per second in
+     * system coordinates)
+     * @param jz the Z component of the impulse (kilogram.meters per second in
+     * system coordinates)
+     */
+    public void addImpulse(float jx, float jy, float jz) {
+        long bodyVa = va();
+        addImpulse(bodyVa, jx, jy, jz);
+    }
+
+    /**
+     * Apply the specified impulse to the body's center of mass.
+     *
      * @param impulse the impulse vector (kilogram.meters per second in system
      * coordinates, not null, unaffected)
      */
