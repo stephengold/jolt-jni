@@ -147,15 +147,18 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     public static Mat44 product(Mat44Arg... mArray) {
         int length = mArray.length;
 
-        Mat44 result;
+        long resultVa;
         if (length == 0) {
-            result = Mat44.sIdentity();
+            resultVa = createIdentity();
         } else {
-            result = new Mat44(mArray[0]);
+            long factorVa = mArray[0].targetVa();
+            resultVa = createCopy(factorVa);
             for (int i = 1; i < length; ++i) {
-                result = result.multiply(mArray[i]); // TODO garbage
+                factorVa = mArray[i].targetVa();
+                rightMultiplyInPlace(resultVa, factorVa);
             }
         }
+        Mat44 result = new Mat44(resultVa, true);
 
         return result;
     }
