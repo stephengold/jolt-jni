@@ -120,6 +120,17 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     // new methods exposed
 
     /**
+     * Left-multiply the current matrix by the argument.
+     *
+     * @param leftFactor the left factor (not null, unaffected)
+     */
+    public void leftMultiplyInPlace(Mat44Arg leftFactor) {
+        long currentVa = va();
+        long leftVa = leftFactor.targetVa();
+        leftMultiplyInPlace(currentVa, leftVa);
+    }
+
+    /**
      * Set the current matrix to identity.
      */
     public void loadIdentity() {
@@ -147,6 +158,17 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
         }
 
         return result;
+    }
+
+    /**
+     * Right-multiply the current matrix by the argument.
+     *
+     * @param rightFactor the right factor (not null, unaffected)
+     */
+    public void rightMultiplyInPlace(Mat44Arg rightFactor) {
+        long currentVa = va();
+        long rightVa = rightFactor.targetVa();
+        rightMultiplyInPlace(currentVa, rightVa);
     }
 
     /**
@@ -806,6 +828,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static boolean isIdentity(long matrixVa);
 
+    native private static void leftMultiplyInPlace(long currentVa, long leftVa);
+
     native private static void loadIdentity(long matrixVa);
 
     native private static long multiply(long leftVa, long rightVa);
@@ -824,6 +848,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static void putColumnMajor(
             long matrixVa, int position, FloatBuffer storeBuffer);
+
+    native private static void rightMultiplyInPlace(
+            long currentVa, long rightVa);
 
     native private static void setAxisX(
             long matrixVa, float x, float y, float z);

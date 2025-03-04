@@ -325,6 +325,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_RMat44_isIdentity
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    leftMultiplyInPlace
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_leftMultiplyInPlace
+  (JNIEnv *, jclass, jlong currentVa, jlong leftVa) {
+    RMat44 * const pCurrent = reinterpret_cast<RMat44 *> (currentVa);
+    const RMat44 * const pLeft = reinterpret_cast<RMat44 *> (leftVa);
+    *pCurrent = (*pLeft) * (*pCurrent);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    loadIdentity
  * Signature: (J)V
  */
@@ -500,6 +512,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_putColumnMajor
             pBuffer[baseIndex + r] = (*pMatrix)(r, c);
         }
     }
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    rightMultiplyInPlace
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_rightMultiplyInPlace
+  (JNIEnv *, jclass, jlong currentVa, jlong rightVa) {
+    RMat44 * const pCurrent = reinterpret_cast<RMat44 *> (currentVa);
+    const RMat44 * const pRight = reinterpret_cast<RMat44 *> (rightVa);
+    *pCurrent = (*pCurrent) * (*pRight);
 }
 
 /*

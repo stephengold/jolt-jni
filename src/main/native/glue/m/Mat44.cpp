@@ -381,6 +381,18 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Mat44_isIdentity
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    leftMultiplyInPlace
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_leftMultiplyInPlace
+  (JNIEnv *, jclass, jlong currentVa, jlong leftVa) {
+    Mat44 * const pCurrent = reinterpret_cast<Mat44 *> (currentVa);
+    const Mat44 * const pLeft = reinterpret_cast<Mat44 *> (leftVa);
+    *pCurrent = (*pLeft) * (*pCurrent);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    loadIdentity
  * Signature: (J)V
  */
@@ -511,6 +523,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_putColumnMajor
             pBuffer[baseIndex + r] = (*pMatrix)(r, c);
         }
     }
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Mat44
+ * Method:    rightMultiplyInPlace
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_rightMultiplyInPlace
+  (JNIEnv *, jclass, jlong currentVa, jlong rightVa) {
+    Mat44 * const pCurrent = reinterpret_cast<Mat44 *> (currentVa);
+    const Mat44 * const pRight = reinterpret_cast<Mat44 *> (rightVa);
+    *pCurrent = (*pCurrent) * (*pRight);
 }
 
 /*
