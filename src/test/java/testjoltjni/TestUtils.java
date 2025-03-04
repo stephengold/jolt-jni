@@ -403,6 +403,7 @@ final public class TestUtils {
             } else {
                 subdirectory = "macOSX64";
             }
+            hasCpuFeatures("dummy");
 
         } else if (NativeVariant.Os.isWindows()) {
             name = "joltjni.dll";
