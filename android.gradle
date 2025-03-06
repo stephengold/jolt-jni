@@ -24,8 +24,10 @@ android {
         debug {
             externalNativeBuild {
                 ndkBuild {
+                    cppFlags "-DJOLT_JNI_VERSION_STRING=\"${jjVersion}\""
                     cppFlags '-DJPH_DEBUG_RENDERER'
                     cppFlags '-DJPH_ENABLE_ASSERTS'
+                    cppFlags '-DJPH_OBJECT_STREAM'
                 }
             }
             jniDebuggable = true
@@ -33,7 +35,9 @@ android {
         release {
             externalNativeBuild {
                 ndkBuild {
+                    cppFlags "-DJOLT_JNI_VERSION_STRING=\"${jjVersion}\""
                     cppFlags '-DJPH_NO_DEBUG'
+                    cppFlags '-DJPH_OBJECT_STREAM'
                 }
             }
             minifyEnabled = true
@@ -44,10 +48,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     compileSdk = 35
-
-    // always-on preprocessor defines:
-    cppFlags '-DJOLT_JNI_VERSION_STRING="' + jjVersion + '"'
-    cppFlags '-DJPH_OBJECT_STREAM'
 
     defaultConfig {
         aarMetadata {
