@@ -24,7 +24,7 @@ android {
         debug {
             externalNativeBuild {
                 ndkBuild {
-                    cppFlags "-DJOLT_JNI_VERSION_STRING=\"${jjVersion}\""
+                    cppFlags '-DJOLT_JNI_VERSION_STRING=' + jjVersion
                     cppFlags '-DJPH_DEBUG_RENDERER'
                     cppFlags '-DJPH_ENABLE_ASSERTS'
                     cppFlags '-DJPH_OBJECT_STREAM'
@@ -35,7 +35,7 @@ android {
         release {
             externalNativeBuild {
                 ndkBuild {
-                    cppFlags "-DJOLT_JNI_VERSION_STRING=\"${jjVersion}\""
+                    cppFlags '-DJOLT_JNI_VERSION_STRING=' + jjVersion
                     cppFlags '-DJPH_NO_DEBUG'
                     cppFlags '-DJPH_OBJECT_STREAM'
                 }
