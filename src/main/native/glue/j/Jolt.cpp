@@ -442,6 +442,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_unregisterTypes
     UnregisterTypes();
 }
 
+#define STRING(arg) STRINGIFY(arg)
+#define STRINGIFY(arg) #arg
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    versionString
@@ -449,7 +451,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_unregisterTypes
  */
 JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_versionString
   (JNIEnv *pEnv, jclass) {
-    const jstring result = pEnv->NewStringUTF(JOLT_JNI_VERSION_STRING);
+    const jstring result = pEnv->NewStringUTF(STRING(JOLT_JNI_VERSION_STRING));
     return result;
 }
 
