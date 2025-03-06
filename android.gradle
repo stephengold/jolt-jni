@@ -46,6 +46,7 @@ android {
     compileSdk = 35
 
     // always-on preprocessor defines:
+    cppFlags '-DJOLT_JNI_VERSION_STRING="' + jjVersion + '"'
     cppFlags '-DJPH_OBJECT_STREAM'
 
     defaultConfig {
