@@ -1,4 +1,18 @@
-# release log for the jolt-jni project
+# release log for the Jolt-jni Project
+
+## Version 0.9.7 released on TBD
+
++ API changes:
+  + Renamed the `RVec3.addLocal()` method to `addInPlace()`.
+  + Added a return value to the `Jolt.newFactory()` method.
+
++ Bugfixes:
+  + Debug builds suppress diagnostic output
+  + `product()` methods always return an identity matrix
+
++ Added 2 desktop platforms: "Linux64_fma" and "Windows64_avx2"
++ Added the `ConstShapeSettings` interface.
++ Added many public constructors and methods to the libraries.
 
 ## Version 0.9.6 released on 20 February 2025
 
