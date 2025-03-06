@@ -74,6 +74,8 @@ final public class SmokeTestAll {
     public static void main(String... arguments) {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
+        System.out.println(Jolt.getConfigurationString());
+        System.out.println();
 
         String fileName = "SmokeTestAll.jor";
         int mode = StreamOutWrapper.out()
