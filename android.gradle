@@ -44,6 +44,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     compileSdk = 35
+
+    // always-on preprocessor defines:
+    cppFlags '-DJPH_OBJECT_STREAM'
+
     defaultConfig {
         aarMetadata {
             minCompileSdk = 33
