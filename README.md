@@ -59,8 +59,8 @@ Desktop jolt-jni comes pre-built as a platform-independent JVM library
 plus a set of native libraries, all downloadable from Maven Central.
 
 Current jolt-jni releases provide
-the JVM library under 6 distinct names (artifact IDs).
-They also provide 24 native libraries,
+the JVM library under 8 distinct names (artifact IDs).
+They also provide 32 native libraries,
 each specific to a particular platform, build type, and build flavor.
 
 Your runtime classpath should include
@@ -82,15 +82,15 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
     }
     dependencies {
         // JVM library:
-        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.6")
+        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.7")
 
         // native libraries:
-        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.6:DebugSp")
+        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.7:DebugSp")
         // Native libraries for other platforms could be added.
     }
 
-+ The "Linux64" platform name may be replaced by "Linux_ARM32hf", "Linux_ARM64",
-  "MacOSX64", "MacOSX_ARM64", or "Windows64".
++ The "Linux64" platform name may be replaced by "Linux64_fma", "Linux_ARM32hf",
+  "Linux_ARM64", "MacOSX64", "MacOSX_ARM64", "Windows64", or "Windows64_avx2".
 + The "DebugSp" classifier
   may be replaced by "DebugDp", "ReleaseSp", or "ReleaseDp".
 + For some older versions of Gradle,
@@ -118,7 +118,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
         mavenCentral()
     }
     dependencies {
-        implementation("com.github.stephengold:jolt-jni:0.9.6:SpDebug@aar")
+        implementation("com.github.stephengold:jolt-jni:0.9.7:SpDebug@aar")
     }
 
 + The "SpDebug" classifier may be replaced by "SpRelease".
@@ -151,7 +151,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
   + using [Git]:
     + `git clone https://github.com/stephengold/jolt-jni.git`
     + `cd jolt-jni`
-    + `git checkout -b latest 0.9.6`
+    + `git checkout -b latest 0.9.7`
   + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link at the bottom of the page
