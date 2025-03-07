@@ -17,6 +17,7 @@ Source code (in Java and C++) is provided under
 + [How to add jolt-jni to an existing desktop project](#add)
 + [How to add jolt-jni to an existing Android project](#addAndroid)
 + [How to build jolt-jni from source](#build)
++ [Initializing jolt-jni](#init)
 + [Freeing native objects](#free)
 + [External links](#links)
 + [Acknowledgments](#acks)
@@ -199,6 +200,62 @@ You can restore the project to a pristine state:
 + using Windows Command Prompt:
   + `.\gradlew -b android.gradle clean`
   + `.\gradlew cleanAll`
+
+[Jump to the table of contents](#toc)
+
+
+<a name="init"></a>
+
+## Initializing jolt-jni
+
+Before simulating physics, much initialization and configuration is required:
+
+1. Extract and load a native library build for the current platform.
+2. Register 2 memory allocators (default and temporary).
+3. Install trace and assert callbacks.
+4. Create a factory and register physics types.
+5. Create a job system.
+6. Define 2 kinds of collision layers (object and broadphase)
+   and collision filters for each.
+7. Define the mapping from object layers to broadphase layers.
+8. Create, configure, and populate a physics system.
+
+Steps 2 through 8 are also required in Jolt Physics apps, of course.
+However, they look different in Java than they do in C++.
+A tutorial is planned.
+Until it is published, initialization procedures are best learned by example:
+
++ [the "HelloWorld" test app](https://github.com/stephengold/jolt-jni/blob/ec805689643794d4940b6501f4389f12d2b9b128/src/test/java/testjoltjni/app/helloworld/HelloWorld.java#L146-L249)
++ [the "TestUtils" class](https://github.com/stephengold/jolt-jni/blob/ec805689643794d4940b6501f4389f12d2b9b128/src/test/java/testjoltjni/TestUtils.java#L303-L328)
+
+However, the first step (extract and load a native library) is different
+for a standalone app that doesn't have the files already extracted
+(as the jolt-jni tests do).
+
+For extracting and loading native libraries, suggest using
+[the jSnapLoader library](https://github.com/stephengold/jSnapLoader).
+
+Here's a code fragment to get you started:
+
+       LibraryInfo info = new LibraryInfo(new DirectoryPath("linux/x86-64/com/github/stephengold"),
+				"joltjni", DirectoryPath.USER_DIR);
+        NativeBinaryLoader loader = new NativeBinaryLoader(info);
+        NativeDynamicLibrary[] libraries = {
+            new NativeDynamicLibrary("linux/aarch64/com/github/stephengold", PlatformPredicate.LINUX_ARM_64),
+            new NativeDynamicLibrary("linux/armhf/com/github/stephengold", PlatformPredicate.LINUX_ARM_32),
+            new NativeDynamicLibrary("linux/x86-64/com/github/stephengold", PlatformPredicate.LINUX_X86_64),
+            new NativeDynamicLibrary("osx/aarch64/com/github/stephengold", PlatformPredicate.MACOS_ARM_64),
+            new NativeDynamicLibrary("osx/x86-64/com/github/stephengold", PlatformPredicate.MACOS_X86_64),
+            new NativeDynamicLibrary("windows/x86-64/com/github/stephengold", PlatformPredicate.WIN_X86_64)
+        };
+        loader.registerNativeLibraries(libraries).initPlatformLibrary();
+        loader.setLoggingEnabled(true);
+        loader.setRetryWithCleanExtraction(true);
+        try {
+            loader.loadLibrary(LoadingCriterion.INCREMENTAL_LOADING);
+        } catch (Exception e) {
+            throw new IllegalStateException("Failed to load the joltjni library!");
+        }
 
 [Jump to the table of contents](#toc)
 
