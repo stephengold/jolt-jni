@@ -232,8 +232,8 @@ However, the first step (extract and load a native library) is different
 for a standalone app that doesn't have the files already extracted
 (as the jolt-jni tests do).
 
-For extracting and loading native libraries, suggest using
-[the jSnapLoader library](https://github.com/stephengold/jSnapLoader).
+To extract and load native libraries, I suggest using
+[the jSnapLoader library](https://github.com/Electrostat-Lab/jSnapLoader).
 
 Here's a code fragment to get you started:
 
