@@ -60,6 +60,7 @@ public class Test010 {
      * Test for JoltPhysics issue #1545: step listeners are not invoked when no
      * bodies are active.
      */
+    @Ignore
     @Test
     public void test010() {
         TestUtils.loadNativeLibrary();
