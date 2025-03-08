@@ -16,7 +16,7 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=Windows64 build
+      - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Windows64 build
         run: |
-          ./gradlew -Ptarget=Windows64 build --console=plain
+          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Windows64 build --console=plain
         shell: bash
