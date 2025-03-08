@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -66,8 +67,6 @@ public class Test010 {
             }
         });
 
-        float cDeltaTime = 0.01f;
-        int cCollisionSteps = 1;
         int numThreads = 1;
         TempAllocator allocator = new TempAllocatorMalloc();
         JobSystemThreadPool jobSystem = new JobSystemThreadPool(
@@ -76,8 +75,10 @@ public class Test010 {
         invoked = false;
 
         // Update the physics system:
-        physicsSystem.update(cDeltaTime, cCollisionSteps, allocator, jobSystem);
+        float deltaTime = 0.01f;
+        int numSteps = 1;
+        physicsSystem.update(deltaTime, numSteps, allocator, jobSystem);
 
-        assert invoked : "The step listener wasn't invoked!";
+        Assert.assertTrue(invoked);
     }
 }
