@@ -21,12 +21,22 @@ SOFTWARE.
  */
 package testjoltjni.junit;
 
+import com.github.stephengold.joltjni.BodyCreationSettings;
+import com.github.stephengold.joltjni.BodyInterface;
+import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.CustomPhysicsStepListener;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.PhysicsSystem;
+import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
+import com.github.stephengold.joltjni.enumerate.EActivation;
+import com.github.stephengold.joltjni.enumerate.EMotionType;
+import com.github.stephengold.joltjni.readonly.ConstBody;
+import com.github.stephengold.joltjni.readonly.ConstShape;
+import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
 
@@ -63,9 +73,15 @@ public class Test010 {
                 invoked = true;
             }
         });
+        BodyInterface bi = physicsSystem.getBodyInterface();
 
-        float cDeltaTime = 0.01f;
-        int cCollisionSteps = 1;
+        ConstShape box = new BoxShape(1f, 1f, 1f);
+        int objLayer = 0;
+        BodyCreationSettings bcs = new BodyCreationSettings(
+                box, new RVec3(), new Quat(), EMotionType.Static, objLayer);
+        ConstBody body = bi.createBody(bcs);
+        bi.addBody(body.getId(), EActivation.DontActivate);
+
         int numThreads = 1;
         TempAllocator allocator = new TempAllocatorMalloc();
         JobSystemThreadPool jobSystem = new JobSystemThreadPool(
@@ -74,8 +90,10 @@ public class Test010 {
         invoked = false;
 
         // Update the physics system:
-        physicsSystem.update(cDeltaTime, cCollisionSteps, allocator, jobSystem);
+        float deltaTime = 0.01f;
+        int numSteps = 1;
+        physicsSystem.update(deltaTime, numSteps, allocator, jobSystem);
 
-        assert invoked : "The step listener wasn't invoked!";
+        Assert.assertTrue(invoked);
     }
 }
