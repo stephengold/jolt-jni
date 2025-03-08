@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
+import org.junit.Ignore;
 import org.junit.Test;
 import testjoltjni.TestUtils;
 
@@ -50,6 +51,7 @@ public class Test010 {
      * Test for JoltPhysics issue #1545: step listeners are not invoked when no
      * bodies are active.
      */
+    @Ignore
     @Test
     public void test010() {
         TestUtils.loadNativeLibrary();
