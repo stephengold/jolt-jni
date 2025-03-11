@@ -339,21 +339,19 @@ final public class TestUtils {
      * </ol>
      */
     public static void loadNativeLibrary() {
-        File directory = new File("build/libs/joltjni/shared");
-
-        boolean success = loadNativeLibrary(directory, "Debug", "Sp");
+        boolean success = loadNativeLibrary("Debug", "Sp");
         if (success) {
             Assert.assertFalse(Jolt.isDoublePrecision());
         } else {
-            success = loadNativeLibrary(directory, "Debug", "Dp");
+            success = loadNativeLibrary("Debug", "Dp");
             if (success) {
                 Assert.assertTrue(Jolt.isDoublePrecision());
             } else {
-                success = loadNativeLibrary(directory, "Release", "Sp");
+                success = loadNativeLibrary("Release", "Sp");
                 if (success) {
                     Assert.assertFalse(Jolt.isDoublePrecision());
                 } else {
-                    success = loadNativeLibrary(directory, "Release", "Dp");
+                    success = loadNativeLibrary("Release", "Dp");
                     if (success) {
                         Assert.assertTrue(Jolt.isDoublePrecision());
                     }
@@ -364,21 +362,27 @@ final public class TestUtils {
     }
 
     /**
-     * Load a specific jolt-jni native library from the filesystem.
+     * Load a specific jolt-jni native library from the filesystem, using the
+     * OSHI and jSnapLoader libraries to identify the current platform.
+     * <p>
+     * This method assumes native libraries are stored in specific locations
+     * under a "./build/libs/joltjni/shared" directory. While this is true in
+     * the jolt-jni build environment, it is unlikely to be true for a
+     * standalone application.
      *
-     * @param directory (not null, readable directory, unaffected)
      * @param buildType "Debug" or "Release"
      * @param flavor "Sp" or "Dp"
      * @return true after successful load, otherwise false
      */
-    public static boolean loadNativeLibrary(
-            File directory, String buildType, String flavor) {
-        assert directory.exists() : directory;
-        assert directory.isDirectory() : directory;
-        assert directory.canRead() : directory;
+    public static boolean loadNativeLibrary(String buildType, String flavor) {
         assert buildType.equals("Debug") || buildType.equals("Release") :
                 buildType;
         assert flavor.equals("Sp") || flavor.equals("Dp") : flavor;
+
+        File directory = new File("build/libs/joltjni/shared");
+        assert directory.exists() : directory;
+        assert directory.isDirectory() : directory;
+        assert directory.canRead() : directory;
 
         String name;
         String subdirectory;
@@ -465,21 +469,19 @@ final public class TestUtils {
      * </ol>
      */
     public static void loadNativeLibraryRelease() {
-        File directory = new File("build/libs/joltjni/shared");
-
-        boolean success = loadNativeLibrary(directory, "Release", "Sp");
+        boolean success = loadNativeLibrary("Release", "Sp");
         if (success) {
             Assert.assertFalse(Jolt.isDoublePrecision());
         } else {
-            success = loadNativeLibrary(directory, "Release", "Dp");
+            success = loadNativeLibrary("Release", "Dp");
             if (success) {
                 Assert.assertTrue(Jolt.isDoublePrecision());
             } else {
-                success = loadNativeLibrary(directory, "Debug", "Sp");
+                success = loadNativeLibrary("Debug", "Sp");
                 if (success) {
                     Assert.assertFalse(Jolt.isDoublePrecision());
                 } else {
-                    success = loadNativeLibrary(directory, "Debug", "Dp");
+                    success = loadNativeLibrary("Debug", "Dp");
                     if (success) {
                         Assert.assertTrue(Jolt.isDoublePrecision());
                     }
