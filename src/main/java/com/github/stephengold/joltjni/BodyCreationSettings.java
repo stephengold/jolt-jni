@@ -63,10 +63,9 @@ public class BodyCreationSettings
             EMotionType motionType, int objLayer) {
         long shapeVa = shape.targetVa();
         int motionTypeOrdinal = motionType.ordinal();
-        long bodySettingsVa = createFromShape(
-                shapeVa, loc.xx(), loc.yy(), loc.zz(),
-                orient.getX(), orient.getY(), orient.getZ(), orient.getW(),
-                motionTypeOrdinal, objLayer);
+        long bodySettingsVa = createFromShape(shapeVa, loc.xx(), loc.yy(),
+                loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
+                orient.getW(), motionTypeOrdinal, objLayer);
         setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
 
@@ -135,10 +134,9 @@ public class BodyCreationSettings
             QuatArg orient, EMotionType motionType, int objLayer) {
         long shapeSettingsVa = shapeSettings.targetVa();
         int motionTypeOrdinal = motionType.ordinal();
-        long bodySettingsVa = createFromShapeSettings(
-                shapeSettingsVa, loc.xx(), loc.yy(), loc.zz(),
-                orient.getX(), orient.getY(), orient.getZ(), orient.getW(),
-                motionTypeOrdinal, objLayer);
+        long bodySettingsVa = createFromShapeSettings(shapeSettingsVa, loc.xx(),
+                loc.yy(), loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
+                orient.getW(), motionTypeOrdinal, objLayer);
         setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
     // *************************************************************************
@@ -860,9 +858,8 @@ public class BodyCreationSettings
     native private static long createDefault();
 
     native private static long createFromShape(
-            long shapeVa, double locX, double locY, double locZ,
-            float qx, float qy, float qz, float qw,
-            int motionTypeOrdinal, int objLayer);
+            long shapeVa, double locX, double locY, double locZ, float qx,
+            float qy, float qz, float qw, int motionTypeOrdinal, int objLayer);
 
     native private static long createFromShapeSettings(
             long shapeSettingsVa, double locX, double locY, double locZ,
