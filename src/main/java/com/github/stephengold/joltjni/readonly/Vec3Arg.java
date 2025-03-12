@@ -36,6 +36,13 @@ public interface Vec3Arg {
     // new methods exposed
 
     /**
+     * Return the absolute value of each component. The vector is unaffected.
+     *
+     * @return a new vector with no negative components
+     */
+    Vec3 abs();
+
+    /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
      * @param rightFactor the vector to cross with the current one (not null,
@@ -242,6 +249,13 @@ public interface Vec3Arg {
      * @return a new array with length=3
      */
     float[] toArray();
+
+    /**
+     * Copy the components to a direct buffer. The vector is unaffected.
+     *
+     * @return a new direct buffer with capacity=3
+     */
+    FloatBuffer toBuffer();
 
     /**
      * Copy the components to a new location vector. The current vector is

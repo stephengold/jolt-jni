@@ -591,6 +591,17 @@ final public class Vec3 implements Vec3Arg {
     // Vec3Arg methods
 
     /**
+     * Return the absolute value of each component. The vector is unaffected.
+     *
+     * @return a new vector with no negative components
+     */
+    @Override
+    public Vec3 abs() {
+        Vec3 result = new Vec3(Math.abs(x), Math.abs(y), Math.abs(z));
+        return result;
+    }
+
+    /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
      * @param rightFactor the vector to cross with the current one (not null,
@@ -951,6 +962,21 @@ final public class Vec3 implements Vec3Arg {
         result[0] = x;
         result[1] = y;
         result[2] = z;
+
+        return result;
+    }
+
+    /**
+     * Copy the components to a direct buffer. The vector is unaffected.
+     *
+     * @return a new direct buffer with capacity=3
+     */
+    @Override
+    public FloatBuffer toBuffer() {
+        FloatBuffer result = Jolt.newDirectFloatBuffer(3);
+        result.put(0, x);
+        result.put(1, y);
+        result.put(2, z);
 
         return result;
     }
