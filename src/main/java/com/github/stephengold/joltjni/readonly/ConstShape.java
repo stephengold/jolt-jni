@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,8 +52,7 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     void copyDebugTriangles(FloatBuffer storeBuffer);
 
     /**
-     * Return the number of triangles in the shape's debug mesh. The shape is
-     * unaffected.
+     * Count the triangles in the shape's debug mesh. The shape is unaffected.
      *
      * @return the count (&gt;0)
      */
@@ -208,7 +207,7 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     boolean mustBeStatic();
 
     /**
-     * Save the state of this shape in binary form. The shape is unaffected.
+     * Save the shape to the specified binary stream. The shape is unaffected.
      *
      * @param stream the stream to write to (not null)
      */

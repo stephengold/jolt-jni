@@ -329,7 +329,7 @@ abstract public class Shape extends NonCopyable
     /**
      * Access the material of the specified sub-shape. The shape is unaffected.
      *
-     * @param id identifies the particular sub-shape (not null, unaffected)
+     * @param id which sub-shape (not null, unaffected)
      * @return a new JVM object with the pre-existing native object assigned
      */
     @Override

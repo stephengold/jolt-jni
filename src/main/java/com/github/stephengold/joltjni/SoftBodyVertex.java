@@ -92,7 +92,8 @@ public class SoftBodyVertex extends JoltPhysicsObject {
     }
 
     /**
-     * Test whether the vertex collided during the previous update.
+     * Test whether the vertex collided during the previous update. The vertex
+     * is unaffected. (native attribute: mHasContact)
      *
      * @return {@code true} if it collided, otherwise {@code false}
      */
@@ -112,7 +113,7 @@ public class SoftBodyVertex extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the inverse mass.
+     * Alter the inverse mass. (native attribute: mInvMass)
      *
      * @param invMass the desired inverse mass (in 1/kilograms)
      */

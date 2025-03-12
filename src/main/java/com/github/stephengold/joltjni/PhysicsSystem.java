@@ -150,7 +150,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Render the state of the system, for debugging purposes.
+     * Render the bodies in the system, for debugging purposes.
      *
      * @param settings the settings to use (not null)
      * @param renderer the renderer to use (not null)

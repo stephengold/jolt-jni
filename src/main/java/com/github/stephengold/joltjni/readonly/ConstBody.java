@@ -132,8 +132,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * Copy the body's ID for use with {@code BodyInterface}. The body is
      * unaffected.
      *
-     * @return a new immutable JVM object with the pre-existing native object
-     * assigned
+     * @return a new object
      */
     ConstBodyId getId();
 

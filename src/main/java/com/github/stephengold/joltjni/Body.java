@@ -499,7 +499,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Return the net force acting on the body. The body is unaffected.
+     * Copy the net force acting on the body. The body is unaffected.
      *
      * @return a new force vector (Newtons in system coordinates)
      */
@@ -515,7 +515,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Return the net torque acting on the body. The body is unaffected.
+     * Copy the net torque acting on the body. The body is unaffected.
      *
      * @return a new torque vector (Newton.meters in system coordinates)
      */
@@ -727,8 +727,8 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Return the location of the body's origin (which might not coincide with
-     * its center of mass). The body is unaffected.
+     * Copy the location of the body's origin (which might not coincide with its
+     * center of mass). The body is unaffected.
      *
      * @return a new location vector (in system coordinates, all components
      * finite)
