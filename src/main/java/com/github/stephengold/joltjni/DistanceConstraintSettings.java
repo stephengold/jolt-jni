@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -168,13 +168,16 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
+     * @return the argument, for chaining
      */
-    public void setPoint1(RVec3Arg location) {
+    public RVec3Arg setPoint1(RVec3Arg location) {
         long settingsVa = va();
         double x = location.xx();
         double y = location.yy();
         double z = location.zz();
         setPoint1(settingsVa, x, y, z);
+
+        return location;
     }
 
     /**
@@ -182,13 +185,16 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
+     * @return the argument, for chaining
      */
-    public void setPoint2(RVec3Arg location) {
+    public RVec3Arg setPoint2(RVec3Arg location) {
         long settingsVa = va();
         double x = location.xx();
         double y = location.yy();
         double z = location.zz();
         setPoint2(settingsVa, x, y, z);
+
+        return location;
     }
 
     /**
