@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.operator;
 
 import com.github.stephengold.joltjni.Color;
+import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
@@ -276,6 +277,23 @@ final public class Op {
                 || left.getB() != right.getB()
                 || left.getG() != right.getG()
                 || left.getR() != right.getR();
+        return result;
+    }
+
+    /**
+     * Return the component-wise sum of the specified vectors. (native operator:
+     * binary {@code +})
+     *
+     * @param left the first vector (not null, unaffected)
+     * @param right the 2nd vector (not null, unaffected)
+     * @return a new vector
+     */
+    public static RVec3 plus(RVec3Arg left, Float3 right) {
+        double xx = left.xx() + right.x;
+        double yy = left.yy() + right.y;
+        double zz = left.zz() + right.z;
+        RVec3 result = new RVec3(xx, yy, zz);
+
         return result;
     }
 
