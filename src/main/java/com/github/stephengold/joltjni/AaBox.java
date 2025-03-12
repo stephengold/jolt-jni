@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -63,6 +64,23 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     AaBox(long boxVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(boxVa) : null;
         setVirtualAddress(boxVa, freeingAction);
+    }
+
+    /**
+     * Instantiate a box with the specified minimum and maximum coordinates.
+     *
+     * @param minimum the desired minimum coordinates (not null, unaffected)
+     * @param maximum the desired maximum coordinates (not null, unaffected)
+     */
+    public AaBox(RVec3Arg minimum, RVec3Arg maximum) {
+        float minX = minimum.x();
+        float minY = minimum.y();
+        float minZ = minimum.z();
+        float maxX = maximum.x();
+        float maxY = maximum.y();
+        float maxZ = maximum.z();
+        long boxVa = createAaBox(minX, minY, minZ, maxX, maxY, maxZ);
+        setVirtualAddress(boxVa, () -> free(boxVa));
     }
 
     /**
