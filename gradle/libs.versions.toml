@@ -6,7 +6,7 @@ checkstyle = "10.21.4"
 
 [libraries]
 
-jsnaploader = "io.github.electrostat-lab:snaploader:1.1.0-alpha"
+jsnaploader = "io.github.electrostat-lab:snaploader:1.1.0-beta"
 junit4 = "junit:junit:4.13.2"
 log4j-impl = "org.apache.logging.log4j:log4j-slf4j2-impl:2.24.3"
 oshi = "com.github.oshi:oshi-core:6.7.1"
