@@ -71,6 +71,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox__F
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    createBiggest
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createBiggest
+  (JNIEnv *, jclass) {
+    AABox * const pResult = new AABox();
+    TRACE_NEW("AABox", pResult)
+    *pResult = AABox::sBiggest();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    encapsulate
  * Signature: (JFFF)V
  */
@@ -307,19 +320,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_isValid
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     const bool result = pBox->IsValid();
     return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_AaBox
- * Method:    sBiggest
- * Signature: (Z)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_sBiggest
-  (JNIEnv *, jclass, jboolean) {
-    AABox * const pResult = new AABox();
-    TRACE_NEW("AABox", pResult)
-    *pResult = AABox::sBiggest();
-    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
