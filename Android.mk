@@ -240,6 +240,7 @@ $(N)/glue/s/SubShapeId.cpp \
 $(N)/glue/s/SubShapeIdCreator.cpp \
 $(N)/glue/s/SubShapeIdPair.cpp \
 $(N)/glue/s/SupportBuffer.cpp \
+$(N)/glue/s/SupportingFace.cpp \
 $(N)/glue/s/SwingTwistConstraint.cpp \
 $(N)/glue/s/SwingTwistConstraintSettings.cpp \
 $(N)/glue/st/StateRecorder.cpp \
