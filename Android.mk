@@ -265,6 +265,7 @@ $(N)/glue/t/TempAllocatorMalloc.cpp \
 $(N)/glue/t/TrackedVehicleController.cpp \
 $(N)/glue/t/TrackedVehicleControllerSettings.cpp \
 $(N)/glue/t/TransformedShapeCollector.cpp \
+$(N)/glue/t/TransformedShape.cpp \
 $(N)/glue/t/Triangle.cpp \
 $(N)/glue/t/TriangleShape.cpp \
 $(N)/glue/t/TriangleShapeSettings.cpp \
