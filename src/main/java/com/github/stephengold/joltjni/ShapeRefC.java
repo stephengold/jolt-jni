@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -369,6 +369,42 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
         long boxVa
                 = Shape.getWorldSpaceBoundsReal(shapeVa, rMat44Va, sx, sy, sz);
         AaBox result = new AaBox(boxVa, true);
+
+        return result;
+    }
+
+    /**
+     * Test whether the specified scale vector is valid for wrapping the current
+     * shape in a {@code ScaledShape}. The current shape is unaffected.
+     *
+     * @param scale the proposed scale vector (not null, unaffected)
+     * @return {@code true} if valid, otherwise {@code false}
+     */
+    @Override
+    public boolean isValidScale(Vec3Arg scale) {
+        long shapeVa = targetVa();
+        float sx = scale.getX();
+        float sy = scale.getY();
+        float sz = scale.getZ();
+        boolean result = Shape.isValidScale(shapeVa, sx, sy, sz);
+
+        return result;
+    }
+
+    /**
+     * Transform the specified scale vector such that it will be valid for
+     * wrapping the current shape in a {@code ScaledShape}. The current shape is
+     * unaffected.
+     *
+     * @param scale the proposed scale vector (not null, unaffected)
+     * @return a new scale vector
+     */
+    @Override
+    public Vec3 makeScaleValid(Vec3Arg scale) {
+        long shapeVa = targetVa();
+        FloatBuffer floatBuffer = scale.toBuffer();
+        Shape.makeScaleValid(shapeVa, floatBuffer);
+        Vec3 result = new Vec3(floatBuffer);
 
         return result;
     }

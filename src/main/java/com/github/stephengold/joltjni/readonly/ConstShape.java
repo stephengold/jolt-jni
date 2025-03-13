@@ -199,6 +199,25 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     AaBox getWorldSpaceBounds(RMat44Arg comTransform, Vec3Arg scale);
 
     /**
+     * Test whether the specified scale vector is valid for wrapping the current
+     * shape in a {@code ScaledShape}. The current shape is unaffected.
+     *
+     * @param scale the proposed scale vector (not null, unaffected)
+     * @return {@code true} if valid, otherwise {@code false}
+     */
+    boolean isValidScale(Vec3Arg scale);
+
+    /**
+     * Transform the specified scale vector such that it will be valid for
+     * wrapping the current shape in a {@code ScaledShape}. The current shape is
+     * unaffected.
+     *
+     * @param scale the proposed scale vector (not null, unaffected)
+     * @return a new scale vector
+     */
+    Vec3 makeScaleValid(Vec3Arg scale);
+
+    /**
      * Test whether the shape can be used in a dynamic/kinematic body. The shape
      * is unaffected.
      *

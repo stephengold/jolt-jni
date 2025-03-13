@@ -457,6 +457,42 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
+     * Test whether the specified scale vector is valid for wrapping the current
+     * shape in a {@code ScaledShape}. The current shape is unaffected.
+     *
+     * @param scale the proposed scale vector (not null, unaffected)
+     * @return {@code true} if valid, otherwise {@code false}
+     */
+    @Override
+    public boolean isValidScale(Vec3Arg scale) {
+        long shapeVa = va();
+        float sx = scale.getX();
+        float sy = scale.getY();
+        float sz = scale.getZ();
+        boolean result = isValidScale(shapeVa, sx, sy, sz);
+
+        return result;
+    }
+
+    /**
+     * Transform the specified scale vector such that it will be valid for
+     * wrapping the current shape in a {@code ScaledShape}. The current shape is
+     * unaffected.
+     *
+     * @param scale the proposed scale vector (not null, unaffected)
+     * @return a new scale vector
+     */
+    @Override
+    public Vec3 makeScaleValid(Vec3Arg scale) {
+        long shapeVa = va();
+        FloatBuffer floatBuffer = scale.toBuffer();
+        makeScaleValid(shapeVa, floatBuffer);
+        Vec3 result = new Vec3(floatBuffer);
+
+        return result;
+    }
+
+    /**
      * Test whether the shape can be used in a dynamic/kinematic body. The shape
      * is unaffected.
      *
@@ -584,6 +620,11 @@ abstract public class Shape extends NonCopyable
 
     native static long getWorldSpaceBoundsReal(
             long shapeVa, long rMat44Va, float sx, float sy, float sz);
+
+    native static boolean isValidScale(
+            long shapeVa, float sx, float sy, float sz);
+
+    native static void makeScaleValid(long shapeVa, FloatBuffer floatBuffer);
 
     native static boolean mustBeStatic(long shapeVa);
 
