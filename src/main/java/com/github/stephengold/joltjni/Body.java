@@ -26,9 +26,11 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * An object with mass, position, and shape that can be added to a
@@ -684,6 +686,21 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Copy the inverse coordinate transform of the body's center of mass. The
+     * body is unaffected.
+     *
+     * @return a new transform matrix (relative to local coordinates)
+     */
+    @Override
+    public RMat44 getInverseCenterOfMassTransform() {
+        long bodyVa = va();
+        long matrixVa = getInverseCenterOfMassTransform(bodyVa);
+        RMat44 result = new RMat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Copy the body's linear velocity. The body is unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
@@ -802,11 +819,27 @@ public class Body extends NonCopyable implements ConstBody {
      *
      * @return a new object
      */
+    @Override
     public SoftBodyCreationSettings getSoftBodyCreationSettings() {
         long bodyVa = va();
         long settingsVa = getSoftBodyCreationSettings(bodyVa);
         SoftBodyCreationSettings result
                 = new SoftBodyCreationSettings(settingsVa, true);
+
+        return result;
+    }
+
+    /**
+     * Convert the body to a {@code TransformedShape} object. The body is
+     * unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public TransformedShape getTransformedShape() {
+        long bodyVa = va();
+        long shapeVa = getTransformedShape(bodyVa);
+        TransformedShape result = new TransformedShape(shapeVa, true);
 
         return result;
     }
@@ -838,6 +871,29 @@ public class Body extends NonCopyable implements ConstBody {
         JoltPhysicsObject container = getContainingObject();
         ConstAaBox result = new AaBox(container, boxVa);
 
+        return result;
+    }
+
+    /**
+     * Copy the surface normal of a particular sub shape at the specified
+     * location.
+     *
+     * @param subShapeId the ID of the subshape to use (not null, unaffected)
+     * @param location the location to use (not null, unaffected)
+     * @return a new normal vector
+     */
+    @Override
+    public Vec3 getWorldSpaceSurfaceNormal(
+            ConstSubShapeId subShapeId, RVec3Arg location) {
+        long bodyVa = va();
+        long idVa = subShapeId.targetVa();
+        double xx = location.xx();
+        double yy = location.yy();
+        double zz = location.zz();
+        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(3);
+        getWorldSpaceSurfaceNormal(bodyVa, idVa, xx, yy, zz, storeFloats);
+
+        Vec3 result = new Vec3(storeFloats);
         return result;
     }
 
@@ -1030,6 +1086,8 @@ public class Body extends NonCopyable implements ConstBody {
 
     native static long getId(long bodyVa);
 
+    native private static long getInverseCenterOfMassTransform(long bodyVa);
+
     native private static float getLinearVelocityX(long bodyVa);
 
     native private static float getLinearVelocityY(long bodyVa);
@@ -1062,9 +1120,15 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static long getSoftBodyCreationSettings(long bodyVa);
 
+    native private static long getTransformedShape(long bodyVa);
+
     native private static long getUserData(long bodyVa);
 
     native private static long getWorldSpaceBounds(long bodyVa);
+
+    native private static void getWorldSpaceSurfaceNormal(
+            long bodyVa, long idVa, double xx, double yy, double zz,
+            FloatBuffer storeFloats);
 
     native private static long getWorldTransform(long bodyVa);
 

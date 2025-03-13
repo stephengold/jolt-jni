@@ -423,6 +423,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getId
     return reinterpret_cast<jlong> (pResult);
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getInverseCenterOfMassTransform
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getInverseCenterOfMassTransform
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const Mat44& transform = pBody->GetInverseCenterOfMassTransform();
+    const Mat44 * const pResult = new Mat44(transform);
+    TRACE_NEW("Mat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
 inline static const Vec3 getLinearVelocity(jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     const Vec3 result = pBody->GetLinearVelocity();
@@ -637,6 +651,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getSoftBodyCrea
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getTransformedShape
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getTransformedShape
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const TransformedShape& shape = pBody->GetTransformedShape();
+    TransformedShape * const pResult = new TransformedShape(shape);
+    TRACE_NEW("TransformedShape", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    getUserData
  * Signature: (J)J
  */
@@ -657,6 +685,29 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getWorldSpaceBo
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     const AABox& result = pBody->GetWorldSpaceBounds();
     return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getWorldSpaceSurfaceNormal
+ * Signature: (JJDDDLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_getWorldSpaceSurfaceNormal
+  (JNIEnv *pEnv, jclass, jlong bodyVa, jlong idVa, jdouble xx, jdouble yy,
+  jdouble zz, jobject storeFloats) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
+    const RVec3 location(xx, yy, zz);
+    jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pBody->GetWorldSpaceSurfaceNormal(*pId, location);
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

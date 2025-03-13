@@ -25,6 +25,8 @@ import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.SoftBodyCreationSettings;
+import com.github.stephengold.joltjni.TransformedShape;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
@@ -137,6 +139,14 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     ConstBodyId getId();
 
     /**
+     * Copy the inverse coordinate transform of the body's center of mass. The
+     * body is unaffected.
+     *
+     * @return a new transform matrix (relative to local coordinates)
+     */
+    RMat44 getInverseCenterOfMassTransform();
+
+    /**
      * Copy the body's linear velocity. The body is unaffected.
      *
      * @return a new velocity vector (meters per second in system coordinates)
@@ -189,6 +199,22 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     ConstShape getShape();
 
     /**
+     * Convert the body to a {@code SoftBodyCreationSettings} object. The body
+     * is unaffected.
+     *
+     * @return a new object
+     */
+    SoftBodyCreationSettings getSoftBodyCreationSettings();
+
+    /**
+     * Convert the body to a {@code TransformedShape} object. The body is
+     * unaffected.
+     *
+     * @return a new object
+     */
+    TransformedShape getTransformedShape();
+
+    /**
      * Return the body's user data: can be used for anything. The body is
      * unaffected.
      *
@@ -203,6 +229,17 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * assigned
      */
     ConstAaBox getWorldSpaceBounds();
+
+    /**
+     * Copy the surface normal of a particular sub shape at the specified
+     * location.
+     *
+     * @param subShapeId the ID of the subshape to use (not null, unaffected)
+     * @param location the location to use (not null, unaffected)
+     * @return a new normal vector
+     */
+    Vec3 getWorldSpaceSurfaceNormal(
+            ConstSubShapeId subShapeId, RVec3Arg location);
 
     /**
      * Copy the world transform. The body is unaffected.
