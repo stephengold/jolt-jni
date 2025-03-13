@@ -38,7 +38,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * Instantiate an invalid box.
      */
     public AaBox() {
-        long boxVa = createAaBox();
+        long boxVa = createDefault();
         setVirtualAddress(boxVa, () -> free(boxVa));
     }
 
@@ -338,13 +338,13 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static boolean contains(
             long boxVa, float x, float y, float z);
 
-    native private static long createAaBox();
-
     native private static long createAaBox(float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ);
 
     native private static long createCubic(
             float centerX, float centerY, float centerZ, float halfExtent);
+
+    native private static long createDefault();
 
     native private static void encapsulate(
             long boxVa, float locX, float locY, float locZ);

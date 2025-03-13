@@ -46,27 +46,15 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_contains
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    createAaBox
- * Signature: ()J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox__
-  (JNIEnv *, jclass) {
-    AABox * const pBox = new AABox();
-    TRACE_NEW("AABox", pBox)
-    return reinterpret_cast<jlong> (pBox);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_AaBox
- * Method:    createAaBox
  * Signature: (FFFFFF)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox__FFFFFF
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createAaBox
   (JNIEnv *, jclass, jfloat minX, jfloat minY, jfloat minZ, jfloat maxX, jfloat maxY, jfloat maxZ) {
     const Vec3 min(minX, minY, minZ);
     const Vec3 max(maxX, maxY, maxZ);
-    AABox * const pBox = new AABox(min, max);
-    TRACE_NEW("AABox", pBox)
-    return reinterpret_cast<jlong> (pBox);
+    AABox * const pResult = new AABox(min, max);
+    TRACE_NEW("AABox", pResult)
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
@@ -92,6 +80,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createCubic
   jfloat halfExtent) {
     const Vec3 center(centerX, centerY, centerZ);
     AABox * const pResult = new AABox(center, halfExtent);
+    TRACE_NEW("AABox", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createDefault
+  (JNIEnv *, jclass) {
+    AABox * const pResult = new AABox();
     TRACE_NEW("AABox", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
