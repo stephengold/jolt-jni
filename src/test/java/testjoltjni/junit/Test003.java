@@ -155,6 +155,24 @@ public class Test003 {
 
             TestUtils.testClose(box);
         }
+        {
+            Vec3Arg center = new Vec3(4f, 3f, 2f);
+            float radius = 5f;
+            AaBox box = new AaBox(center, radius);
+
+            Assert.assertTrue(box.hasAssignedNativeObject());
+            Assert.assertTrue(box.ownsNativeObject());
+            Assert.assertNotEquals(0L, box.va());
+
+            TestUtils.assertEquals(center, box.getCenter(), 0f);
+            TestUtils.assertEquals(9f, 8f, 7f, box.getMax(), 0f);
+            TestUtils.assertEquals(radius, radius, radius, box.getExtent(), 0f);
+            TestUtils.assertEquals(-1f, -2f, -3f, box.getMin(), 0f);
+            TestUtils.assertEquals(10f, 10f, 10f, box.getSize(), 0f);
+            Assert.assertTrue(box.isValid());
+
+            TestUtils.testClose(box);
+        }
 
         System.gc();
     }
