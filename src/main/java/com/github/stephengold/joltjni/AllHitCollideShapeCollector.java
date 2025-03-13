@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package com.github.stephengold.joltjni;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Collect all results from a narrow-phase shape collision. (native type: {@code
@@ -58,16 +61,17 @@ public class AllHitCollideShapeCollector extends CollideShapeCollector {
     /**
      * Access all the hits as an array. (native attribute: mHits)
      *
-     * @return a new array of new JVM objects with pre-existing native objects
+     * @return a new list of new JVM objects with pre-existing native objects
      * assigned
      */
-    public CollideShapeResult[] getHits() {
+    public List<CollideShapeResult> getHits() {
         long collectorVa = va();
         int numHits = countHits(collectorVa);
-        CollideShapeResult[] result = new CollideShapeResult[numHits];
+        List<CollideShapeResult> result = new ArrayList<>(numHits);
         for (int i = 0; i < numHits; ++i) {
             long hitVa = getHit(collectorVa, i);
-            result[i] = new CollideShapeResult(this, hitVa);
+            CollideShapeResult hit = new CollideShapeResult(this, hitVa);
+            result.add(hit);
         }
 
         return result;
