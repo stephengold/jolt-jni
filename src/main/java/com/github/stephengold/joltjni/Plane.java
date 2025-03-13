@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * A math object used to represent a plane in 3-dimensional space.
@@ -65,6 +66,19 @@ final public class Plane implements ConstPlane {
         this.ny = ny;
         this.nz = nz;
         this.c = c;
+    }
+
+    /**
+     * Instantiate from a buffer.
+     *
+     * @param buffer the desired component values (not null, unaffected,
+     * capacity&ge;4)
+     */
+    public Plane(FloatBuffer buffer) {
+        this.nx = buffer.get(0);
+        this.ny = buffer.get(1);
+        this.nz = buffer.get(2);
+        this.c = buffer.get(3);
     }
 
     /**
