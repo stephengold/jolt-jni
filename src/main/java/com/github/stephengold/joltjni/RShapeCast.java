@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -83,6 +83,19 @@ public class RShapeCast extends JoltPhysicsObject {
         long castVa = createRShapeCast(
                 shapeVa, sx, sy, sz, comStartVa, dx, dy, dz, boundsVa);
         setVirtualAddress(castVa, () -> free(castVa));
+    }
+
+    /**
+     * Instantiate a shape cast with the specified native object assigned.
+     *
+     * @param castVa the virtual address of the native object to assign (not
+     * zero)
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
+     */
+    RShapeCast(long castVa, boolean owner) {
+        Runnable freeingAction = owner ? () -> free(castVa) : null;
+        setVirtualAddress(castVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
