@@ -53,6 +53,25 @@ final public class ScaleHelpers {
     // new methods exposed
 
     /**
+     * Test whether the specified scale turns 3-D objects inside-out.
+     *
+     * @param scale the scale vector to test (not null, unaffected)
+     * @return {@code true} if it turns objects inside-out, otherwise
+     * {@code false}
+     */
+    public static boolean isInsideOut(Vec3Arg scale) {
+        int numNegativeFactors = (scale.getX() < 0f) ? 1 : 0;
+        numNegativeFactors += (scale.getY() < 0f) ? 1 : 0;
+        numNegativeFactors += (scale.getZ() < 0f) ? 1 : 0;
+
+        if ((numNegativeFactors & 0x1) == 0x0) {
+            return false; // an even number of negative factors
+        } else {
+            return true; // an odd number of negative factors
+        }
+    }
+
+    /**
      * Test whether the specified scale is identity.
      *
      * @param scale the scale vector to test (not null, unaffected)
