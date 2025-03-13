@@ -164,6 +164,41 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Render all constraints in the system, for debugging purposes.
+     *
+     * @param renderer the renderer to use (not null)
+     */
+    public void drawConstraints(DebugRenderer renderer) {
+        long systemVa = va();
+        long rendererVa = renderer.va();
+        drawConstraints(systemVa, rendererVa);
+    }
+
+    /**
+     * Render the limits of all constraints in the system, for debugging
+     * purposes.
+     *
+     * @param renderer the renderer to use (not null)
+     */
+    public void drawConstraintLimits(DebugRenderer renderer) {
+        long systemVa = va();
+        long rendererVa = renderer.va();
+        drawConstraintLimits(systemVa, rendererVa);
+    }
+
+    /**
+     * Render the reference frames of all constraints in the system, for
+     * debugging purposes.
+     *
+     * @param renderer the renderer to use (not null)
+     */
+    public void drawConstraintReferenceFrame(DebugRenderer renderer) {
+        long systemVa = va();
+        long rendererVa = renderer.va();
+        drawConstraintReferenceFrame(systemVa, rendererVa);
+    }
+
+    /**
      * Test whether the system contains the specified body. The system is
      * unaffected.
      *
@@ -781,6 +816,14 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static void drawBodies(
             long systemVa, long settingsVa, long rendererVa);
+
+    native private static void drawConstraints(long systemVa, long rendererVa);
+
+    native private static void drawConstraintLimits(
+            long systemVa, long rendererVa);
+
+    native private static void drawConstraintReferenceFrame(
+            long systemVa, long rendererVa);
 
     native private static void free(long systemVa);
 

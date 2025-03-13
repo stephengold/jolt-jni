@@ -137,6 +137,60 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_drawBod
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    drawConstraints
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_drawConstraints
+  (JNIEnv *, jclass, jlong systemVa, jlong rendererVa) {
+#ifdef JPH_DEBUG_RENDERER
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    DebugRenderer * const pRenderer
+            = reinterpret_cast<DebugRenderer *> (rendererVa);
+    pSystem->DrawConstraints(pRenderer);
+#elif defined(JPH_DEBUG)
+    Trace("PhysicsSystem.drawConstraints() has no effect unless JPH_DEBUG_RENDERER is defined.");
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    drawConstraintLimits
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_drawConstraintLimits
+  (JNIEnv *, jclass, jlong systemVa, jlong rendererVa) {
+#ifdef JPH_DEBUG_RENDERER
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    DebugRenderer * const pRenderer
+            = reinterpret_cast<DebugRenderer *> (rendererVa);
+    pSystem->DrawConstraintLimits(pRenderer);
+#elif defined(JPH_DEBUG)
+    Trace("PhysicsSystem.drawConstraintLimits() has no effect unless JPH_DEBUG_RENDERER is defined.");
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    drawConstraintReferenceFrame
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_drawConstraintReferenceFrame
+  (JNIEnv *, jclass, jlong systemVa, jlong rendererVa) {
+#ifdef JPH_DEBUG_RENDERER
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    DebugRenderer * const pRenderer
+            = reinterpret_cast<DebugRenderer *> (rendererVa);
+    pSystem->DrawConstraintReferenceFrame(pRenderer);
+#elif defined(JPH_DEBUG)
+    Trace("PhysicsSystem.drawConstraintReferenceFrame() has no effect unless JPH_DEBUG_RENDERER is defined.");
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    free
  * Signature: (J)V
  */
