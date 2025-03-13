@@ -84,6 +84,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createBiggest
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    createCubic
+ * Signature: (FFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createCubic
+  (JNIEnv *, jclass, jfloat centerX, jfloat centerY, jfloat centerZ,
+  jfloat halfExtent) {
+    const Vec3 center(centerX, centerY, centerZ);
+    AABox * const pResult = new AABox(center, halfExtent);
+    TRACE_NEW("AABox", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    encapsulate
  * Signature: (JFFF)V
  */

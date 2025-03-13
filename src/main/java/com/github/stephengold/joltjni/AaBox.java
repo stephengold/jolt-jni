@@ -84,6 +84,21 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
+     * Instantiate a cubic box with the specified center coordinates and half
+     * extent.
+     *
+     * @param center the desired center coordinates (not null, unaffected)
+     * @param halfExtent the desired half extent
+     */
+    public AaBox(Vec3Arg center, float halfExtent) {
+        float minX = center.getX();
+        float minY = center.getY();
+        float minZ = center.getZ();
+        long boxVa = createCubic(minX, minY, minZ, halfExtent);
+        setVirtualAddress(boxVa, () -> free(boxVa));
+    }
+
+    /**
      * Instantiate a box with the specified minimum and maximum coordinates.
      *
      * @param minimum the desired minimum coordinates (not null, unaffected)
@@ -327,6 +342,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     native private static long createAaBox(float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ);
+
+    native private static long createCubic(
+            float centerX, float centerY, float centerZ, float halfExtent);
 
     native private static void encapsulate(
             long boxVa, float locX, float locY, float locZ);
