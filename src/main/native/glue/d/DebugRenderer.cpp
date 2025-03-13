@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -296,6 +296,24 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWir
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     const Color color(colorInt);
     DebugRenderer::sInstance->DrawWireBox(*pTransform, *pBox, color);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawWirePolygon
+ * Signature: (JJIF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWirePolygon
+  (JNIEnv *, jclass, jlong transformVa, jlong faceVa, jint colorInt,
+  jfloat arrowSize) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    const StaticArray<Vec3,32> * const pFace
+            = reinterpret_cast<StaticArray<Vec3,32> *> (faceVa);
+    const Color color(colorInt);
+    DebugRenderer::sInstance->DrawWirePolygon(
+            *pTransform, *pFace, color, arrowSize);
 #endif
 }
 

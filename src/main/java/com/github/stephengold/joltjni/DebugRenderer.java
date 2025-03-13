@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -488,6 +488,34 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
+     * Draw the outline of the specified polygon.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param face the vertex coordinates (not null, unaffected)
+     * @param color the desired color (not null, unaffected)
+     */
+    public void drawWirePolygon(
+            RMat44Arg transform, VertexArray face, ConstColor color) {
+        drawWirePolygon(transform, face, color, 0f);
+    }
+
+    /**
+     * Draw the outline of the specified polygon.
+     *
+     * @param transform the desired coordinate transform (not null, unaffected)
+     * @param face the vertex coordinates (not null, unaffected)
+     * @param color the desired color (not null, unaffected)
+     * @param arrowSize the desired size for arrows (default=0)
+     */
+    public void drawWirePolygon(RMat44Arg transform, VertexArray face,
+            ConstColor color, float arrowSize) {
+        long transformVa = transform.targetVa();
+        long faceVa = face.va();
+        int colorInt = color.getUInt32();
+        drawWirePolygon(transformVa, faceVa, colorInt, arrowSize);
+    }
+
+    /**
      * Draw a wire frame of the specified sphere.
      *
      * @param location the location of the sphere's center (not null,
@@ -640,6 +668,9 @@ abstract public class DebugRenderer extends NonCopyable {
 
     native private static void drawWireBoxTransformed(
             long transformVa, long boxVa, int colorInt);
+
+    native private static void drawWirePolygon(
+            long transformVa, long faceVa, int colorInt, float arrowSize);
 
     native private static void drawWireSphere(double locX, double locY,
             double locZ, float radius, int colorInt, int level);
