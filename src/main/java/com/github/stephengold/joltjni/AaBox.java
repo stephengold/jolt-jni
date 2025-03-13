@@ -341,6 +341,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static long createAaBox(float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ);
 
+    native private static long createBiggest();
+
     native private static long createCubic(
             float centerX, float centerY, float centerZ, float halfExtent);
 
@@ -387,8 +389,6 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static float getVolume(long boxVa);
 
     native private static boolean isValid(long boxVa);
-
-    native private static long createBiggest();
 
     native private static void setEmpty(long boxVa);
 
