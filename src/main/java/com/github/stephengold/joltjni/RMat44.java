@@ -653,6 +653,25 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Post multiply by the specified translation vector. The current matrix is
+     * unaffected.
+     *
+     * @param vec3 the left factor (not null, unaffected)
+     * @return a new matrix
+     */
+    @Override
+    public RMat44 postTranslated(Vec3Arg vec3) {
+        long matrixVa = va();
+        float x = vec3.getX();
+        float y = vec3.getY();
+        float z = vec3.getZ();
+        long resultVa = postTranslatedSp(matrixVa, x, y, z);
+        RMat44 result = new RMat44(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Write the 3x3 matrix in single precision to the specified buffer in
      * column-major order and advance the buffer's position by 9. The matrix is
      * unaffected.
@@ -797,6 +816,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static long postTranslated(
             long matrixVa, double xx, double yy, double zz);
+
+    native private static long postTranslatedSp(
+            long matrixVa, float x, float y, float z);
 
     native private static void put3x3ColumnMajor(
             long matrixVa, int position, FloatBuffer storeBuffer);

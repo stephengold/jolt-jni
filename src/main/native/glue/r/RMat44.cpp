@@ -468,6 +468,21 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_postTranslate
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
+ * Method:    postTranslatedSp
+ * Signature: (JFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_postTranslatedSp
+  (JNIEnv *, jclass, jlong matrixVa, jfloat x, jfloat y, jfloat z) {
+    const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
+    const Vec3 offset(x, y, z);
+    RMat44 * const pResult = new RMat44();
+    TRACE_NEW("RMat44", pResult)
+    *pResult = pMatrix->PostTranslated(offset);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    put3x3ColumnMajor
  * Signature: (JILjava/nio/FloatBuffer;)V
  */

@@ -188,6 +188,15 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
     RMat44 postTranslated(RVec3Arg rvec3);
 
     /**
+     * Post multiply by the specified translation vector. The current matrix is
+     * unaffected.
+     *
+     * @param vec3 the left factor (not null, unaffected)
+     * @return a new matrix
+     */
+    RMat44 postTranslated(Vec3Arg vec3);
+
+    /**
      * Write the 3x3 matrix in single precision to the specified buffer in
      * column-major order and advance the buffer's position by 9. The matrix is
      * unaffected.
