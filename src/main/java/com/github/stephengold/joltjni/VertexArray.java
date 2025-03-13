@@ -22,8 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A static array of 3-D vectors, backed by a fixed-length buffer.
- * (native type: {@code StaticArray<Vec3,numVectors>})
+ * A static array of 3-D vectors, backed by a fixed-length buffer. (native type:
+ * {@code StaticArray<Vec3,numVectors>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
