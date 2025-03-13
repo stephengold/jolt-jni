@@ -110,14 +110,14 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	// Raycast before update
 	AllHitRayCastBodyCollector hits_before=new AllHitRayCastBodyCollector();
 	mBroadPhase.castRay(ray, hits_before);
-	int num_before = (int)hits_before.getHits().length;
-	BroadPhaseCastResult []results_before = hits_before.getHits();
+	int num_before = (int)hits_before.getHits().size();
+	List<BroadPhaseCastResult> results_before = hits_before.getHits();
 	Trace("Before update: %d results found", num_before);
 
 	// Draw results
 	DrawLineSP(mDebugRenderer, ray.getOrigin(), plus(ray.getOrigin() , ray.getDirection()), Color.sRed);
 	for (int i = 0; i < num_before; ++i)
-		DrawMarkerSP(mDebugRenderer, ray.getPointOnRay(results_before[i].getFraction()), Color.sGreen, 10.0f);
+		DrawMarkerSP(mDebugRenderer, ray.getPointOnRay(results_before.get(i).getFraction()), Color.sGreen, 10.0f);
 
 	// Update the broadphase
 	mBroadPhase.optimize();
@@ -125,8 +125,8 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	// Raycast after update
 	AllHitRayCastBodyCollector hits_after=new AllHitRayCastBodyCollector();
 	mBroadPhase.castRay(ray, hits_after);
-	int num_after = (int)hits_after.getHits().length;
-	BroadPhaseCastResult []results_after = hits_after.getHits();
+	int num_after = (int)hits_after.getHits().size();
+	List<BroadPhaseCastResult> results_after = hits_after.getHits();
 	Trace("After update: %d results found", num_after);
 
 	// Before update we may have some false hits, check that there are less hits after update than before

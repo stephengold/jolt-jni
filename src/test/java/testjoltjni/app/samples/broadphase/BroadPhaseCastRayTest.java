@@ -66,12 +66,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	// Raycast before update
 	AllHitRayCastBodyCollector collector=new AllHitRayCastBodyCollector();
 	mBroadPhase.castRay(ray, collector);
-	int num_hits = (int)collector.getHits().length;
-	BroadPhaseCastResult []results = collector.getHits();
+	int num_hits = (int)collector.getHits().size();
+	List<BroadPhaseCastResult> results = collector.getHits();
 
 	// Draw results
 	for (int i = 0; i < num_hits; ++i)
-		DrawMarkerSP(mDebugRenderer, ray.getPointOnRay(results[i].getFraction()), Color.sGreen, 10.0f);
+		DrawMarkerSP(mDebugRenderer, ray.getPointOnRay(results.get(i).getFraction()), Color.sGreen, 10.0f);
 	DrawLineSP(mDebugRenderer, ray.getOrigin(), plus(ray.getOrigin() , ray.getDirection()), Color.sRed);
 }
 }

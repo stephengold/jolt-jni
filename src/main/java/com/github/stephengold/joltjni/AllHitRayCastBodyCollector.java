@@ -21,6 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Collect all results from a broad-phase ray-cast query. (native type: {@code
  * AllHitCollisionCollector<RayCastBodyCollector>})
@@ -56,18 +59,19 @@ public class AllHitRayCastBodyCollector extends RayCastBodyCollector {
     }
 
     /**
-     * Access all the hits as an array. (native attribute: mHits)
+     * Access all the hits as a list. (native attribute: mHits)
      *
-     * @return a new array of new JVM objects with pre-existing native objects
+     * @return a new list of new JVM objects with pre-existing native objects
      * assigned
      */
-    public BroadPhaseCastResult[] getHits() {
+    public List<BroadPhaseCastResult> getHits() {
         long collectorVa = va();
         int numHits = countHits(collectorVa);
-        BroadPhaseCastResult[] result = new BroadPhaseCastResult[numHits];
+        List<BroadPhaseCastResult> result = new ArrayList<>(numHits);
         for (int i = 0; i < numHits; ++i) {
             long hitVa = getHit(collectorVa, i);
-            result[i] = new BroadPhaseCastResult(this, hitVa);
+            BroadPhaseCastResult hit = new BroadPhaseCastResult(this, hitVa);
+            result.add(hit);
         }
 
         return result;
