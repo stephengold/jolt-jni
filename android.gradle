@@ -105,7 +105,7 @@ android {
 
 dependencies {
     testImplementation(libs.jsnaploader)
-    testImplementation(libs.junit4)
+    testImplementation(libs.junit4)      // framework for automated testing
 }
 
 // Register publishing tasks:

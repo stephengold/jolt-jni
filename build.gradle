@@ -168,7 +168,7 @@ model {
                 Boolean use_fma = pName.endsWith('_fma')
                 if (use_avx2 || use_fma) {
                     cppCompiler.define 'JPH_USE_AVX2'
-                    // implies use of AVX, BMI/TZCNT, F16C, LZCNT, SSE4.1, and SSE4.2 
+                    // implies use of AVX, BMI/TZCNT, F16C, LZCNT, SSE4.1, and SSE4.2
                 }
                 if (use_fma) {
                     cppCompiler.define 'JPH_USE_FMADD'
@@ -303,10 +303,10 @@ model {
 }
 
 dependencies {
-    testImplementation(libs.jsnaploader)
-    testImplementation(libs.junit4)
+    testImplementation(libs.jsnaploader) // to identify the OS and CPU
+    testImplementation(libs.junit4)      // framework for automated testing
     testImplementation(libs.log4j.impl)
-    testImplementation(libs.oshi)
+    testImplementation(libs.oshi)        // used by jSnapLoader
 }
 
 java {
