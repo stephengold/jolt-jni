@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -356,6 +356,40 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getWorldSpaceB
     TRACE_NEW("AABox", pResult)
     *pResult = pShape->GetWorldSpaceBounds(*pMatrix, scale);
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    isValidScale
+ * Signature: (JFFF)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Shape_isValidScale
+  (JNIEnv *, jclass, jlong shapeVa, jfloat sx, jfloat sy, jfloat sz) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    const Vec3 scale(sx, sy, sz);
+    const bool result = pShape->IsValidScale(scale);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    makeScaleValid
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_makeScaleValid
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jobject storeFloats) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    jfloat * const pFactors
+            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 vec(pFactors[0], pFactors[1], pFactors[2]);
+    const Vec3 result = pShape->MakeScaleValid(vec);
+    pFactors[0] = result.GetX();
+    pFactors[1] = result.GetY();
+    pFactors[2] = result.GetZ();
 }
 
 /*
