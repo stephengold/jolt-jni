@@ -54,6 +54,7 @@ $(N)/glue/c/CastRayCollector.cpp \
 $(N)/glue/c/CastShapeCollector.cpp \
 $(N)/glue/c/ClosestHitCastRayCollector.cpp \
 $(N)/glue/c/ClosestHitCastShapeCollector.cpp \
+$(N)/glue/c/ClosestHitCollideShapeCollector.cpp \
 $(N)/glue/c/ClosestPoint.cpp \
 $(N)/glue/c/CylinderShape.cpp \
 $(N)/glue/c/CylinderShapeSettings.cpp \
