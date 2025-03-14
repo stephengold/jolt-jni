@@ -22,6 +22,7 @@ LOCAL_SRC_FILES := \
 $(N)/glue/a/AaBox.cpp \
 $(N)/glue/a/AddConvexRadiusSupport.cpp \
 $(N)/glue/a/AdditionalConstraint.cpp \
+$(N)/glue/a/AllHitCastRayCollector.cpp \
 $(N)/glue/a/AllHitCastShapeCollector.cpp \
 $(N)/glue/a/AllHitCollideShapeCollector.cpp \
 $(N)/glue/a/AllHitRayCastBodyCollector.cpp \
