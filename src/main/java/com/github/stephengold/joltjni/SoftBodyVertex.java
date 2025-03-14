@@ -21,7 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Run-time information for a single particle in a soft body.
@@ -31,6 +33,14 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 public class SoftBodyVertex extends JoltPhysicsObject {
     // *************************************************************************
     // constructors
+
+    /**
+     * Instantiate a default vertex.
+     */
+    public SoftBodyVertex() {
+        long vertexVa = createDefault();
+        setVirtualAddress(vertexVa, () -> free(vertexVa));
+    }
 
     /**
      * Instantiate with the specified container and native object.
@@ -44,6 +54,34 @@ public class SoftBodyVertex extends JoltPhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Return the index of the colliding shape. The vertex is unaffected.
+     * (native attribute: mCollidingShapeIndex)
+     *
+     * @return the index
+     */
+    public int getCollidingShapeIndex() {
+        long vertexVa = va();
+        int result = getCollidingShapeIndex(vertexVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the collision plane. The vertex is unaffected. (native attribute:
+     * mCollisionPlane)
+     *
+     * @return a new object
+     */
+    public Plane getCollisionPlane() {
+        long vertexVa = va();
+        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(4);
+        getCollisionPlane(vertexVa, storeFloats);
+        Plane result = new Plane(storeFloats);
+
+        return result;
+    }
 
     /**
      * Return the inverse mass. The vertex is unaffected. (native attribute:
@@ -113,6 +151,31 @@ public class SoftBodyVertex extends JoltPhysicsObject {
     }
 
     /**
+     * Alter the index of the colliding shape. (native attribute:
+     * mCollidingShapeIndex)
+     *
+     * @param index the desired index
+     */
+    public void setCollidingShapeIndex(int index) {
+        long vertexVa = va();
+        setCollidingShapeIndex(vertexVa, index);
+    }
+
+    /**
+     * Alter the collision plane. (native attribute: mCollisionPlane)
+     *
+     * @param plane the desired collision plane (not null, unaffected)
+     */
+    public void setCollisionPlane(ConstPlane plane) {
+        long vertexVa = va();
+        float nx = plane.getNormalX();
+        float ny = plane.getNormalY();
+        float nz = plane.getNormalZ();
+        float c = plane.getConstant();
+        setCollisionPlane(vertexVa, nx, ny, nz, c);
+    }
+
+    /**
      * Alter the inverse mass. (native attribute: mInvMass)
      *
      * @param invMass the desired inverse mass (in 1/kilograms)
@@ -120,6 +183,16 @@ public class SoftBodyVertex extends JoltPhysicsObject {
     public void setInvMass(float invMass) {
         long vertexVa = va();
         setInvMass(vertexVa, invMass);
+    }
+
+    /**
+     * Alter the amount of penetration. (native attribute: mLargestPenetration)
+     *
+     * @param penetration the desired amount
+     */
+    public void setLargestPenetration(float penetration) {
+        long vertexVa = va();
+        setLargestPenetration(vertexVa, penetration);
     }
 
     /**
@@ -151,6 +224,15 @@ public class SoftBodyVertex extends JoltPhysicsObject {
     // *************************************************************************
     // native private methods
 
+    native private static long createDefault();
+
+    native private static void free(long vertexVa);
+
+    native private static int getCollidingShapeIndex(long vertexVa);
+
+    native private static void getCollisionPlane(
+            long vertexVa, FloatBuffer storeFloats);
+
     native private static float getInvMass(long vertexVa);
 
     native private static float getPositionX(long vertexVa);
@@ -169,7 +251,15 @@ public class SoftBodyVertex extends JoltPhysicsObject {
 
     native private static void resetCollision(long vertexVa);
 
+    native private static void setCollidingShapeIndex(long vertexVa, int index);
+
+    native private static void setCollisionPlane(
+            long vertexVa, float nx, float ny, float nz, float c);
+
     native private static void setInvMass(long vertexVa, float invMass);
+
+    native private static void setLargestPenetration(
+            long vertexVa, float penetration);
 
     native private static void setPosition(
             long vertexVa, float x, float y, float z);

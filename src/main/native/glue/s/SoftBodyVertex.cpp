@@ -26,8 +26,70 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/SoftBody/SoftBodyVertex.h"
 #include "auto/com_github_stephengold_joltjni_SoftBodyVertex.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_createDefault
+  (JNIEnv *pEnv, jclass) {
+    SoftBodyVertex * const pResult = new SoftBodyVertex();
+    TRACE_NEW("SoftBodyVertex", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_free
+  (JNIEnv *pEnv, jclass, jlong vertexVa) {
+    SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    TRACE_DELETE("SoftBodyVertex", pVertex)
+    delete pVertex;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    getCollidingShapeIndex
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_getCollidingShapeIndex
+  (JNIEnv *, jclass, jlong vertexVa) {
+    const SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    const int result = pVertex->mCollidingShapeIndex;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    getCollisionPlane
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_getCollisionPlane
+  (JNIEnv *pEnv, jclass, jlong vertexVa, jobject storeFloats) {
+    const SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 4);
+    const Plane& result = pVertex->mCollisionPlane;
+    const Vec3& normal = result.GetNormal();
+    pFloats[0] = normal.GetX();
+    pFloats[1] = normal.GetY();
+    pFloats[2] = normal.GetZ();
+    pFloats[3] = result.GetConstant();
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex
@@ -147,6 +209,31 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_resetC
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    setCollidingShapeIndex
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_setCollidingShapeIndex
+  (JNIEnv *, jclass, jlong vertexVa, jint index) {
+    SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    pVertex->mCollidingShapeIndex = index;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    setCollisionPlane
+ * Signature: (JFFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_setCollisionPlane
+  (JNIEnv *, jclass, jlong vertexVa, jfloat nx, jfloat ny, jfloat nz, jfloat c) {
+    SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    const Vec3 normal(nx, ny, nz);
+    pVertex->mCollisionPlane = Plane(normal, c);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
  * Method:    setInvMass
  * Signature: (JF)V
  */
@@ -155,6 +242,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_setInv
     SoftBodyVertex * const pVertex
             = reinterpret_cast<SoftBodyVertex *> (vertexVa);
     pVertex->mInvMass = invMass;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    setLargestPenetration
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_setLargestPenetration
+  (JNIEnv *, jclass, jlong vertexVa, jfloat penetration) {
+    SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    pVertex->mLargestPenetration = penetration;
 }
 
 /*
