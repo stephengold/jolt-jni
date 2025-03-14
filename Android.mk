@@ -27,6 +27,7 @@ $(N)/glue/a/AllHitCastShapeCollector.cpp \
 $(N)/glue/a/AllHitCollidePointCollector.cpp \
 $(N)/glue/a/AllHitCollideShapeCollector.cpp \
 $(N)/glue/a/AllHitRayCastBodyCollector.cpp \
+$(N)/glue/a/AnyHitCastRayCollector.cpp \
 $(N)/glue/b/BroadPhaseBruteForce.cpp \
 $(N)/glue/b/BroadPhaseCastResult.cpp \
 $(N)/glue/b/BroadPhase.cpp \
