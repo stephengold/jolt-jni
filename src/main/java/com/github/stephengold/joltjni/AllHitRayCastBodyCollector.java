@@ -76,6 +76,14 @@ public class AllHitRayCastBodyCollector extends RayCastBodyCollector {
 
         return result;
     }
+
+    /**
+     * Sort the hits.
+     */
+    public void sort() {
+        long collectorVa = va();
+        sort(collectorVa);
+    }
     // *************************************************************************
     // native private methods
 
@@ -84,4 +92,6 @@ public class AllHitRayCastBodyCollector extends RayCastBodyCollector {
     native private static long createDefault();
 
     native private static long getHit(long collectorVa, int hitIndex);
+
+    native private static void sort(long collectorVa);
 }

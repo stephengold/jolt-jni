@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -69,4 +69,16 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AllHitCollideShapeCo
             = reinterpret_cast<AllHitCollisionCollector<CollideShapeCollector> *> (collectorVa);
     const CollideShapeResult * const pResult = &pCollector->mHits.at(index);
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AllHitCollideShapeCollector
+ * Method:    sort
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AllHitCollideShapeCollector_sort
+  (JNIEnv *, jclass, jlong collectorVa) {
+    AllHitCollisionCollector<CollideShapeCollector> * const pCollector
+            = reinterpret_cast<AllHitCollisionCollector<CollideShapeCollector> *> (collectorVa);
+    pCollector->Sort();
 }
