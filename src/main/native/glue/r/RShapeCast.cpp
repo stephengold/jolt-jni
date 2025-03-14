@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,26 @@ SOFTWARE.
 #include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_RShapeCast
+ * Method:    createFromWorldTransform
+ * Signature: (JFFFJFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RShapeCast_createFromWorldTransform
+  (JNIEnv *, jclass, jlong shapeVa, jfloat sx, jfloat sy, jfloat sz,
+  jlong transformVa, jfloat dx, jfloat dy, jfloat dz) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    const Vec3 scale(sx, sy, sz);
+    const RMat44 * const pWorldTransform
+            = reinterpret_cast<RMat44 *> (transformVa);
+    const Vec3 direction(dx, dy, dz);
+    const RShapeCast& result = RShapeCast::sFromWorldTransform(
+            pShape, scale, *pWorldTransform, direction);
+    RShapeCast * const pResult = new RShapeCast(result);
+    TRACE_NEW("RShapeCast", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_RShapeCast
@@ -81,6 +101,41 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RShapeCast_free
 
 /*
  * Class:     com_github_stephengold_joltjni_RShapeCast
+ * Method:    getCenterOfMassStart
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RShapeCast_getCenterOfMassStart
+  (JNIEnv *, jclass, jlong castVa) {
+    const RShapeCast * const pShapeCast
+            = reinterpret_cast<RShapeCast *> (castVa);
+    RMat44 * const pResult = new RMat44(pShapeCast->mCenterOfMassStart);
+    TRACE_NEW("RMat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RShapeCast
+ * Method:    getDirection
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RShapeCast_getDirection
+  (JNIEnv *pEnv, jclass, jlong castVa, jobject storeFloats) {
+    const RShapeCast * const pShapeCast
+            = reinterpret_cast<RShapeCast *> (castVa);
+    jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& direction = pShapeCast->mDirection;
+    pFloats[0] = direction.GetX();
+    pFloats[1] = direction.GetY();
+    pFloats[2] = direction.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RShapeCast
  * Method:    getPointOnRayX
  * Signature: (JF)D
  */
@@ -116,4 +171,17 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_RShapeCast_getPoin
             = reinterpret_cast<RShapeCast *> (castVa);
     const double result = pShapeCast->GetPointOnRay(fraction).GetZ();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RShapeCast
+ * Method:    getShape
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RShapeCast_getShape
+  (JNIEnv *, jclass, jlong castVa) {
+    const RShapeCast * const pShapeCast
+            = reinterpret_cast<RShapeCast *> (castVa);
+    const Shape * const pResult = pShapeCast->mShape;
+    return reinterpret_cast<jlong> (pResult);
 }
