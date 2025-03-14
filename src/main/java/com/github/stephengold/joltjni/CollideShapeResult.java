@@ -142,6 +142,32 @@ public class CollideShapeResult
     }
 
     /**
+     * Access the colliding face on shape 1. (native attribute: mShape1Face)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public CsrFace getShape1Face() {
+        long shapeResultVa = va();
+        long faceVa = getShape1Face(shapeResultVa);
+        CsrFace result = new CsrFace(this, faceVa);
+
+        return result;
+    }
+
+    /**
+     * Access the colliding face on shape 2. (native attribute: mShape2Face)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public CsrFace getShape2Face() {
+        long shapeResultVa = va();
+        long faceVa = getShape2Face(shapeResultVa);
+        CsrFace result = new CsrFace(this, faceVa);
+
+        return result;
+    }
+
+    /**
      * Identify the face on shape 1 where the collision occurred. The result is
      * unaffected. (native attribute: mSubShapeID1)
      *
@@ -194,6 +220,10 @@ public class CollideShapeResult
     native private static float getPenetrationAxisZ(long shapeResultVa);
 
     native private static float getPenetrationDepth(long shapeResultVa);
+
+    native private static long getShape1Face(long shapeResultVa);
+
+    native private static long getShape2Face(long shapeResultVa);
 
     native private static long getSubShapeId1(long shapeResultVa);
 

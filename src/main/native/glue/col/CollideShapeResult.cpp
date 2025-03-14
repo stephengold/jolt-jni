@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -173,6 +173,32 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
     const float result = pShapeResult->mPenetrationDepth;
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CollideShapeResult
+ * Method:    getShape1Face
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getShape1Face
+  (JNIEnv *, jclass, jlong shapeResultVa) {
+    CollideShapeResult * const pShapeResult
+            = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
+    CollideShapeResult::Face &result = pShapeResult->mShape1Face;
+    return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CollideShapeResult
+ * Method:    getShape2Face
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getShape2Face
+  (JNIEnv *, jclass, jlong shapeResultVa) {
+    CollideShapeResult * const pShapeResult
+            = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
+    CollideShapeResult::Face &result = pShapeResult->mShape2Face;
+    return reinterpret_cast<jlong> (&result);
 }
 
 /*
