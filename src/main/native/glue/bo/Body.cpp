@@ -431,9 +431,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getId
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getInverseCenterOfMassTransform
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    const Mat44& transform = pBody->GetInverseCenterOfMassTransform();
-    const Mat44 * const pResult = new Mat44(transform);
-    TRACE_NEW("Mat44", pResult)
+    const RMat44& transform = pBody->GetInverseCenterOfMassTransform();
+    const RMat44 * const pResult = new RMat44(transform);
+    TRACE_NEW("RMat44", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
