@@ -47,6 +47,17 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param matrixVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    RMat44(JoltPhysicsObject container, long matrixVa) {
+        super(container, matrixVa);
+    }
+
+    /**
      * Instantiate a matrix with the specified native object assigned.
      *
      * @param matrixVa the virtual address of the native object to assign (not
