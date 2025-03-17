@@ -37,49 +37,33 @@ final public class Color implements ConstColor {
      */
     final public static ConstColor sBlack = new Color(0, 0, 0);
     /**
-     * dark red
-     */
-    final public static ConstColor sDarkRed = new Color(128, 0, 0);
-    /**
-     * red
-     */
-    final public static ConstColor sRed = new Color(255, 0, 0);
-    /**
-     * dark green
-     */
-    final public static ConstColor sDarkGreen = new Color(0, 128, 0);
-    /**
-     * green
-     */
-    final public static ConstColor sGreen = new Color(0, 255, 0);
-    /**
-     * dark blue
-     */
-    final public static ConstColor sDarkBlue = new Color(0, 0, 128);
-    /**
      * blue
      */
     final public static ConstColor sBlue = new Color(0, 0, 255);
-    /**
-     * yellow
-     */
-    final public static ConstColor sYellow = new Color(255, 255, 0);
-    /**
-     * purple
-     */
-    final public static ConstColor sPurple = new Color(255, 0, 255);
     /**
      * cyan
      */
     final public static ConstColor sCyan = new Color(0, 255, 255);
     /**
-     * orange
+     * dark blue
      */
-    final public static ConstColor sOrange = new Color(255, 128, 0);
+    final public static ConstColor sDarkBlue = new Color(0, 0, 128);
+    /**
+     * dark green
+     */
+    final public static ConstColor sDarkGreen = new Color(0, 128, 0);
     /**
      * dark orange
      */
     final public static ConstColor sDarkOrange = new Color(128, 64, 0);
+    /**
+     * dark red
+     */
+    final public static ConstColor sDarkRed = new Color(128, 0, 0);
+    /**
+     * green
+     */
+    final public static ConstColor sGreen = new Color(0, 255, 0);
     /**
      * grey
      */
@@ -89,9 +73,25 @@ final public class Color implements ConstColor {
      */
     final public static ConstColor sLightGrey = new Color(192, 192, 192);
     /**
+     * orange
+     */
+    final public static ConstColor sOrange = new Color(255, 128, 0);
+    /**
+     * purple
+     */
+    final public static ConstColor sPurple = new Color(255, 0, 255);
+    /**
+     * red
+     */
+    final public static ConstColor sRed = new Color(255, 0, 0);
+    /**
      * white
      */
     final public static ConstColor sWhite = new Color(255, 255, 255);
+    /**
+     * yellow
+     */
+    final public static ConstColor sYellow = new Color(255, 255, 0);
     // *************************************************************************
     // fields
 
@@ -121,6 +121,30 @@ final public class Color implements ConstColor {
     }
 
     /**
+     * Instantiate a copy of an existing color.
+     *
+     * @param existing the color to copy (not null, unaffected)
+     */
+    public Color(ConstColor existing) {
+        this.a = existing.getA();
+        this.b = existing.getB();
+        this.g = existing.getG();
+        this.r = existing.getR();
+    }
+
+    /**
+     * Instantiate a color from its integer value.
+     *
+     * @param u32 the 32-bit value
+     */
+    public Color(int u32) {
+        this.a = (byte) (u32 >> 24);
+        this.b = (byte) (u32 >> 16);
+        this.g = (byte) (u32 >> 8);
+        this.r = (byte) u32;
+    }
+
+    /**
      * Instantiate an opaque color from 3 components.
      *
      * @param r the desired first (red) component
@@ -144,30 +168,6 @@ final public class Color implements ConstColor {
         this.b = (byte) b;
         this.g = (byte) g;
         this.r = (byte) r;
-    }
-
-    /**
-     * Instantiate a copy of an existing color.
-     *
-     * @param existing the color to copy (not null, unaffected)
-     */
-    public Color(ConstColor existing) {
-        this.a = existing.getA();
-        this.b = existing.getB();
-        this.g = existing.getG();
-        this.r = existing.getR();
-    }
-
-    /**
-     * Instantiate a color from its integer value.
-     *
-     * @param u32 the 32-bit value
-     */
-    public Color(int u32) {
-        this.a = (byte) (u32 >> 24);
-        this.b = (byte) (u32 >> 16);
-        this.g = (byte) (u32 >> 8);
-        this.r = (byte) u32;
     }
     // *************************************************************************
     // new methods exposed
