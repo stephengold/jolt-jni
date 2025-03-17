@@ -86,7 +86,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
      * attribute: mCharacterB)
      *
      * @return a new JVM object with the pre-existing native object assigned, or
-     * null if no colliding character
+     * {@code null} if no colliding character
      */
     @Override
     public CharacterVirtual getCharacterB() {
@@ -230,7 +230,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
      * Copy the subshape ID of the colliding body. The contact is unaffected.
      * (native attribute: mSubShapeIDB)
      *
-     * @return a new object, or null if no colliding body
+     * @return a new object, or {@code null} if no colliding body
      */
     @Override
     public SubShapeId getSubShapeIdB() {

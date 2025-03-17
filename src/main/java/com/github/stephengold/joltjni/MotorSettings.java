@@ -89,7 +89,7 @@ final public class MotorSettings extends JoltPhysicsObject {
     /**
      * Access the underlying {@code ConstraintSettings}, if any.
      *
-     * @return the pre-existing instance, or null if none
+     * @return the pre-existing instance, or {@code null} if none
      */
     public ConstraintSettings getConstraintSettings() {
         JoltPhysicsObject container = getContainingObject();

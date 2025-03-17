@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -120,7 +120,8 @@ public class CharacterVirtualSettings
      * Replace the shape of the inner rigid body. (native attribute:
      * mInnerBodyShape)
      *
-     * @param shape the desired shape, or null for no inner body (default=null)
+     * @param shape the desired shape, or {@code null} for no inner body
+     * (default=null)
      */
     public void setInnerBodyShape(ConstShape shape) {
         long settingsVa = va();
@@ -309,7 +310,7 @@ public class CharacterVirtualSettings
      * Return the shape of the inner rigid body. The settings are unaffected.
      * (native attribute: mInnerBodyShape)
      *
-     * @return the shape, or null for no inner body
+     * @return the shape, or {@code null} for no inner body
      */
     @Override
     public ConstShape getInnerBodyShape() {

@@ -362,8 +362,8 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Access the system's interface for coarse collision queries.
      *
-     * @return the pre-existing JVM object, or null if the system hasn't been
-     * initialized yet
+     * @return the pre-existing JVM object, or {@code null} if the system hasn't
+     * been initialized yet
      */
     public BroadPhaseQuery getBroadPhaseQuery() {
         long systemVa = va();

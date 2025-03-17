@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ public interface ConstPhysicsMaterial extends ConstJoltPhysicsObject {
     /**
      * Return the debug name. The material is unaffected.
      *
-     * @return a string of text or null
+     * @return a string of text or {@code null}
      */
     String getDebugName();
 }
