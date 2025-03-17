@@ -103,6 +103,19 @@ final public class Quat implements QuatArg {
     }
 
     /**
+     * Instantiate from a buffer.
+     *
+     * @param buffer the desired component values (not null, unaffected,
+     * capacity&ge;4)
+     */
+    public Quat(FloatBuffer buffer) {
+        this.x = buffer.get(0);
+        this.y = buffer.get(1);
+        this.z = buffer.get(2);
+        this.w = buffer.get(3);
+    }
+
+    /**
      * Instantiate a copy of the argument.
      *
      * @param original the quaternion to copy (not null, unaffected)

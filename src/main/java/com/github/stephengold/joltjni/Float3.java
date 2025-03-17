@@ -79,6 +79,18 @@ final public class Float3 {
         this.y = rhs.y;
         this.z = rhs.z;
     }
+
+    /**
+     * Instantiate from a buffer.
+     *
+     * @param buffer the desired component values (not null, unaffected,
+     * capacity&ge;3)
+     */
+    public Float3(FloatBuffer buffer) {
+        this.x = buffer.get(0);
+        this.y = buffer.get(1);
+        this.z = buffer.get(2);
+    }
     // *************************************************************************
     // new methods exposed
 

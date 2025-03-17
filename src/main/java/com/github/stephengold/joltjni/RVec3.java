@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
 
 /**
  * A vector composed of 3 double-precision components, used to represent
@@ -84,6 +85,18 @@ final public class RVec3 implements RVec3Arg {
         this.xx = array[0];
         this.yy = array[1];
         this.zz = array[2];
+    }
+
+    /**
+     * Instantiate from a buffer.
+     *
+     * @param buffer the desired component values (not null, unaffected,
+     * capacity&ge;3)
+     */
+    public RVec3(DoubleBuffer buffer) {
+        this.xx = buffer.get(0);
+        this.yy = buffer.get(1);
+        this.zz = buffer.get(2);
     }
 
     /**
