@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
@@ -345,6 +346,25 @@ final public class Jolt {
 
         assert result.capacity() == numFloats : result.capacity();
         assert result.limit() == numFloats : result.limit();
+        assert result.position() == 0 : result.position();
+        return result;
+    }
+
+    /**
+     * Create a direct {@code DoubleBuffer} with native byte order and the
+     * specified capacity.
+     *
+     * @param numDoubles the desired capacity (in doubles)
+     * @return a new direct buffer, zeroed and rewound but not flipped
+     */
+    public static DoubleBuffer newDirectDoubleBuffer(int numDoubles) {
+        ByteBuffer byteBuffer
+                = ByteBuffer.allocateDirect(numDoubles * Double.BYTES);
+        byteBuffer.order(ByteOrder.nativeOrder());
+        DoubleBuffer result = byteBuffer.asDoubleBuffer();
+
+        assert result.capacity() == numDoubles : result.capacity();
+        assert result.limit() == numDoubles : result.limit();
         assert result.position() == 0 : result.position();
         return result;
     }
