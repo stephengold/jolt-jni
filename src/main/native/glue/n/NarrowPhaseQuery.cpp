@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -108,6 +108,31 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_cast
             = reinterpret_cast<ShapeFilter *> (shapeFilterVa);
     pQuery->CastShape(*pShapeCast, *pSettings, baseOffset, *pCollector,
             *pBplFilter, *pOlFilter, *pBodyFilter, *pShapeFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_NarrowPhaseQuery
+ * Method:    collectTransformedShapes
+ * Signature: (JJJJJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_collectTransformedShapes
+  (JNIEnv *, jclass, jlong queryVa, jlong boxVa, jlong collectorVa,
+  jlong bplFilterVa, jlong olFilterVa, jlong bodyFilterVa, jlong shapeFilterVa) {
+    const NarrowPhaseQuery * const pQuery
+            = reinterpret_cast<NarrowPhaseQuery *> (queryVa);
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    TransformedShapeCollector * pCollector
+            = reinterpret_cast<TransformedShapeCollector *> (collectorVa);
+    const BroadPhaseLayerFilter * const pBplFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (bplFilterVa);
+    const ObjectLayerFilter * const pOlFilter
+            = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
+    const BodyFilter * const pBodyFilter
+            = reinterpret_cast<BodyFilter *> (bodyFilterVa);
+    const ShapeFilter * const pShapeFilter
+            = reinterpret_cast<ShapeFilter *> (shapeFilterVa);
+    pQuery->CollectTransformedShapes(*pBox, *pCollector, *pBplFilter,
+            *pOlFilter, *pBodyFilter, *pShapeFilter);
 }
 
 /*

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -333,6 +334,92 @@ public class NarrowPhaseQuery extends NonCopyable {
     }
 
     /**
+     * Collect leaf shapes that lie within the specified bounds.
+     *
+     * @param box the bounds (in system coordinates, not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     */
+    public void collectTransformedShapes(
+            ConstAaBox box, TransformedShapeCollector collector) {
+        collectTransformedShapes(box, collector, new BroadPhaseLayerFilter());
+    }
+
+    /**
+     * Collect leaf shapes that lie within the specified bounds.
+     *
+     * @param box the bounds (in system coordinates, not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     */
+    public void collectTransformedShapes(
+            ConstAaBox box, TransformedShapeCollector collector,
+            BroadPhaseLayerFilter bplFilter) {
+        collectTransformedShapes(
+                box, collector, bplFilter, new ObjectLayerFilter());
+    }
+
+    /**
+     * Collect leaf shapes that lie within the specified bounds.
+     *
+     * @param box the bounds (in system coordinates, not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     */
+    public void collectTransformedShapes(
+            ConstAaBox box, TransformedShapeCollector collector,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
+        collectTransformedShapes(box, collector, bplFilter, olFilter,
+                new BodyFilter());
+    }
+
+    /**
+     * Collect leaf shapes that lie within the specified bounds.
+     *
+     * @param box the bounds (in system coordinates, not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param bodyFilter the body filter to apply (not null, unaffected)
+     */
+    public void collectTransformedShapes(
+            ConstAaBox box, TransformedShapeCollector collector,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
+            BodyFilter bodyFilter) {
+        collectTransformedShapes(box, collector, bplFilter, olFilter,
+                bodyFilter, new ShapeFilter());
+    }
+
+    /**
+     * Collect leaf shapes that lie within the specified bounds.
+     *
+     * @param box the bounds (in system coordinates, not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     * @param bodyFilter the body filter to apply (not null, unaffected)
+     * @param shapeFilter the shape filter to apply (not null, unaffected)
+     */
+    public void collectTransformedShapes(
+            ConstAaBox box, TransformedShapeCollector collector,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
+            BodyFilter bodyFilter, ShapeFilter shapeFilter) {
+        long queryVa = va();
+        long boxVa = box.targetVa();
+        long collectorVa = collector.va();
+        long bplFilterVa = bplFilter.va();
+        long olFilterVa = olFilter.va();
+        long bodyFilterVa = bodyFilter.va();
+        long shapeFilterVa = shapeFilter.va();
+        collectTransformedShapes(queryVa, boxVa, collectorVa, bplFilterVa,
+                olFilterVa, bodyFilterVa, shapeFilterVa);
+    }
+
+    /**
      * Collect collisions with the specified point.
      *
      * @param point the location of the point to test (not null, unaffected)
@@ -567,6 +654,10 @@ public class NarrowPhaseQuery extends NonCopyable {
             long settingsVa, double baseX, double baseY, double baseZ,
             long collectorVa, long bplFilterVa, long olFilterVa,
             long bodyFilterVa, long shapeFilterVa);
+
+    native private static void collectTransformedShapes(
+            long queryVa, long boxVa, long collectorVa, long bplFilterVa,
+            long olFilterVa, long bodyFilterVa, long shapeFilterVa);
 
     native private static void collidePoint(long queryVa, double xx, double yy,
             double zz, long collectorVa, long bplFilterVa,
