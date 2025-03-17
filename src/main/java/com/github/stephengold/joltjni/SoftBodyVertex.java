@@ -97,6 +97,18 @@ public class SoftBodyVertex extends JoltPhysicsObject {
     }
 
     /**
+     * Return the amount of penetration. (native attribute: mLargestPenetration)
+     *
+     * @return the depth (in meters)
+     */
+    public float getLargestPenetration() {
+        long vertexVa = va();
+        float result = getLargestPenetration(vertexVa);
+
+        return result;
+    }
+
+    /**
      * Copy the location. The vertex is unaffected. (native attribute:
      * mPosition)
      *
@@ -234,6 +246,8 @@ public class SoftBodyVertex extends JoltPhysicsObject {
             long vertexVa, FloatBuffer storeFloats);
 
     native private static float getInvMass(long vertexVa);
+
+    native private static float getLargestPenetration(long vertexVa);
 
     native private static float getPositionX(long vertexVa);
 

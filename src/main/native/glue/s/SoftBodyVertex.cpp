@@ -106,6 +106,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_getI
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex
+ * Method:    getLargestPenetration
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_getLargestPenetration
+  (JNIEnv *, jclass, jlong vertexVa) {
+    const SoftBodyVertex * const pVertex
+            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
+    const float result = pVertex->mLargestPenetration;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyVertex
  * Method:    getPositionX
  * Signature: (J)F
  */
