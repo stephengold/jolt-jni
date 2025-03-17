@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,6 +37,20 @@ IMPLEMENT_REF(PhysicsMaterial,
   Java_com_github_stephengold_joltjni_PhysicsMaterialRef_createEmpty,
   Java_com_github_stephengold_joltjni_PhysicsMaterialRef_free,
   Java_com_github_stephengold_joltjni_PhysicsMaterialRef_getPtr)
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsMaterial
+ * Method:    getDebugColor
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterial_getDebugColor
+  (JNIEnv *, jclass, jlong materialVa) {
+    const PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    const Color color = pMaterial->GetDebugColor();
+    const uint32 result = color.GetUInt32();
+    return result;
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterial

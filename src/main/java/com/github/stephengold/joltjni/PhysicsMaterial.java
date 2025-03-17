@@ -80,6 +80,20 @@ public class PhysicsMaterial extends SerializableObject
     // ConstPhysicsMaterial methods
 
     /**
+     * Copy the debug color. The material is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public Color getDebugColor() {
+        long materialVa = va();
+        int intColor = getDebugColor(materialVa);
+        Color result = new Color(intColor);
+
+        return result;
+    }
+
+    /**
      * Return the debug name. The material is unaffected.
      *
      * @return a string of text or {@code null}
@@ -132,6 +146,8 @@ public class PhysicsMaterial extends SerializableObject
     }
     // *************************************************************************
     // native private methods
+
+    native private static int getDebugColor(long materialVa);
 
     native private static String getDebugName(long materialVa);
 

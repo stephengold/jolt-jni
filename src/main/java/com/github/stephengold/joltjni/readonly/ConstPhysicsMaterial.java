@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.Color;
+
 /**
  * Read-only access to a {@code PhysicsMaterial}. (native type: const
  * PhysicsMaterial)
@@ -30,6 +32,13 @@ package com.github.stephengold.joltjni.readonly;
 public interface ConstPhysicsMaterial extends ConstJoltPhysicsObject {
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Copy the debug color. The material is unaffected.
+     *
+     * @return a new object
+     */
+    Color getDebugColor();
 
     /**
      * Return the debug name. The material is unaffected.
