@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,52 @@ public class TempAllocatorImpl extends TempAllocator {
         setVirtualAddress(allocatorVa, true);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the total capacity of the allocator.
+     *
+     * @return the capacity in bytes
+     */
+    public int getSize() {
+        long allocatorVa = va();
+        int result = getSize(allocatorVa);
+
+        return result;
+    }
+
+    /**
+     * Return the amount of memory currently allocated.
+     *
+     * @return the number of bytes used (&ge;0)
+     */
+    public int getUsage() {
+        long allocatorVa = va();
+        int result = getUsage(allocatorVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether any memory is currently allocated.
+     *
+     * @return {@code true} if no memory is allocated, or {@code false} if
+     * memory is allocated
+     */
+    public boolean isEmpty() {
+        long allocatorVa = va();
+        boolean result = isEmpty(allocatorVa);
+
+        return result;
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long create(int numBytes);
+
+    native private static int getSize(long allocatorVa);
+
+    native private static int getUsage(long allocatorVa);
+
+    native private static boolean isEmpty(long allocatorVa);
 }

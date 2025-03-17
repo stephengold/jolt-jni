@@ -50,3 +50,42 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TempAllocatorImpl_cr
     TRACE_NEW("TempAllocatorImpl", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_TempAllocatorImpl
+ * Method:    getSize
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_TempAllocatorImpl_getSize
+  (JNIEnv *, jclass, jlong allocatorVa) {
+    const TempAllocatorImpl * const pAllocator
+            = reinterpret_cast<TempAllocatorImpl *> (allocatorVa);
+    const size_t result = pAllocator->GetSize();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TempAllocatorImpl
+ * Method:    getUsage
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_TempAllocatorImpl_getUsage
+  (JNIEnv *, jclass, jlong allocatorVa) {
+    const TempAllocatorImpl * const pAllocator
+            = reinterpret_cast<TempAllocatorImpl *> (allocatorVa);
+    const size_t result = pAllocator->GetUsage();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TempAllocatorImpl
+ * Method:    isEmpty
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_TempAllocatorImpl_isEmpty
+  (JNIEnv *, jclass, jlong allocatorVa) {
+    const TempAllocatorImpl * const pAllocator
+            = reinterpret_cast<TempAllocatorImpl *> (allocatorVa);
+    const bool result = pAllocator->IsEmpty();
+    return result;
+}
