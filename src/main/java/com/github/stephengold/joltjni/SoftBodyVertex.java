@@ -188,7 +188,7 @@ public class SoftBodyVertex extends JoltPhysicsObject {
     /**
      * Alter the amount of penetration. (native attribute: mLargestPenetration)
      *
-     * @param penetration the desired amount
+     * @param penetration the desired amount (in meters)
      */
     public void setLargestPenetration(float penetration) {
         long vertexVa = va();

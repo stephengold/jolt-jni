@@ -295,7 +295,6 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      *
      * @param factor the amount to scale each axis
      * @return a new instance
-     *
      */
     public static RMat44 sScale(float factor) {
         long matrixVa = createScale(factor, factor, factor);
@@ -309,7 +308,6 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      *
      * @param factors the amount to scale each axis (not null, unaffected)
      * @return a new instance
-     *
      */
     public static RMat44 sScale(Vec3Arg factors) {
         float x = factors.getX();
@@ -326,7 +324,6 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      *
      * @param offset the amount to translate (not null, unaffected)
      * @return a new instance
-     *
      */
     public static RMat44 sTranslation(RVec3Arg offset) {
         double xx = offset.xx();

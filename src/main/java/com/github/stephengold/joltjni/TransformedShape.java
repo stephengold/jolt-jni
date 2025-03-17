@@ -193,7 +193,7 @@ public class TransformedShape
     }
 
     /**
-     * Get the vertices of the face that provides support in the specfied
+     * Get the vertices of the face that provides support in the specified
      * direction.
      *
      * @param subShapeId which subshape to use (not null, unaffected)

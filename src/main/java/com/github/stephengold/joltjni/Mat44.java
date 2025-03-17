@@ -377,7 +377,6 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      *
      * @param factor the amount to scale each axis
      * @return a new instance
-     *
      */
     public static Mat44 sScale(float factor) {
         long matrixVa = createScale(factor, factor, factor);
@@ -391,7 +390,6 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      *
      * @param factors the amount to scale each axis (not null, unaffected)
      * @return a new instance
-     *
      */
     public static Mat44 sScale(Vec3Arg factors) {
         float sx = factors.getX();
@@ -408,7 +406,6 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      *
      * @param offset the amount to translate (not null, unaffected)
      * @return a new instance
-     *
      */
     public static Mat44 sTranslation(Vec3Arg offset) {
         float x = offset.getX();

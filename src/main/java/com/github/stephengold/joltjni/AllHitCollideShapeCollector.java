@@ -45,7 +45,7 @@ public class AllHitCollideShapeCollector extends CollideShapeCollector {
     // new methods exposed
 
     /**
-     * Access the hit with the specified index.
+     * Access the hit with the specified index. (native attribute: mHits)
      *
      * @param index (&ge;0, &lt;numHits)
      * @return a new JVM object with the pre-existing native object assigned

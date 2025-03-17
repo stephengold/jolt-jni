@@ -139,6 +139,8 @@ public class PhysicsSystem extends NonCopyable {
 
     /**
      * Add the specified step listener to the system.
+     * <p>
+     * Step listeners are limited in what actions they can perform.
      *
      * @param listener the listener to add (not null, alias created)
      */
