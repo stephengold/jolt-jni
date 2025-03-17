@@ -165,6 +165,99 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_coll
 
 /*
  * Class:     com_github_stephengold_joltjni_TransformedShape
+ * Method:    getCenterOfMassTransform
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getCenterOfMassTransform
+  (JNIEnv *, jclass, jlong transformedShapeVa) {
+    const TransformedShape * const pTransformedShape
+            = reinterpret_cast<TransformedShape *> (transformedShapeVa);
+    const RMat44& transform = pTransformedShape->GetCenterOfMassTransform();
+    const RMat44 * const pResult = new RMat44(transform);
+    TRACE_NEW("RMat44", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TransformedShape
+ * Method:    getShape
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getShape
+  (JNIEnv *, jclass, jlong transformedShapeVa) {
+    const TransformedShape * const pTransformedShape
+            = reinterpret_cast<TransformedShape *> (transformedShapeVa);
+    RefConst<Shape> shape = pTransformedShape->mShape;
+    const Shape * const pResult = shape.GetPtr();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TransformedShape
+ * Method:    getShapePositionCom
+ * Signature: (JLjava/nio/DoubleBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getShapePositionCom
+  (JNIEnv *pEnv, jclass, jlong transformedShapeVa, jobject storeDoubles) {
+    const TransformedShape * const pTransformedShape
+            = reinterpret_cast<TransformedShape *> (transformedShapeVa);
+    jdouble * const pDoubles
+            = (jdouble *) pEnv->GetDirectBufferAddress(storeDoubles);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeDoubles);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& position = pTransformedShape->mShapePositionCOM;
+    pDoubles[0] = position.GetX();
+    pDoubles[1] = position.GetY();
+    pDoubles[2] = position.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TransformedShape
+ * Method:    getShapeRotation
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getShapeRotation
+  (JNIEnv *pEnv, jclass, jlong transformedShapeVa, jobject storeFloats) {
+    const TransformedShape * const pTransformedShape
+            = reinterpret_cast<TransformedShape *> (transformedShapeVa);
+    jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 4);
+    const Quat& rotation = pTransformedShape->mShapeRotation;
+    pFloats[0] = rotation.GetX();
+    pFloats[1] = rotation.GetY();
+    pFloats[2] = rotation.GetZ();
+    pFloats[3] = rotation.GetW();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TransformedShape
+ * Method:    getShapeScale
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getShapeScale
+  (JNIEnv *pEnv, jclass, jlong transformedShapeVa, jobject storeFloats) {
+    const TransformedShape * const pTransformedShape
+            = reinterpret_cast<TransformedShape *> (transformedShapeVa);
+    jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& scale = pTransformedShape->GetShapeScale();
+    pFloats[0] = scale.GetX();
+    pFloats[1] = scale.GetY();
+    pFloats[2] = scale.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TransformedShape
  * Method:    getSupportingFace
  * Signature: (JJFFFDDDJ)V
  */

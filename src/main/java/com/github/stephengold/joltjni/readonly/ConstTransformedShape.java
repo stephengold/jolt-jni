@@ -26,9 +26,12 @@ import com.github.stephengold.joltjni.CastShapeCollector;
 import com.github.stephengold.joltjni.CollidePointCollector;
 import com.github.stephengold.joltjni.CollideShapeCollector;
 import com.github.stephengold.joltjni.CollideShapeSettings;
+import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.GetTrianglesContext;
+import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RRayCast;
 import com.github.stephengold.joltjni.RShapeCast;
+import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.RayCastResult;
 import com.github.stephengold.joltjni.RayCastSettings;
 import com.github.stephengold.joltjni.ShapeCastSettings;
@@ -115,12 +118,64 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
      * @param base the base location for reporting hits (not null, unaffected,
      * (0,0,0)&rarr;world coordinates)
      * @param collector the hit collector to use (not null)
+     */
+    void collideShape(ConstShape testShape, Vec3Arg shapeScale,
+            RMat44Arg comTransform, CollideShapeSettings settings,
+            RVec3Arg base, CollideShapeCollector collector);
+
+    /**
+     * Collect collisions with the specified shape.
+     *
+     * @param testShape the shape to test (not null, unaffected)
+     * @param shapeScale the scaling vector for the test shape (not null,
+     * unaffected)
+     * @param comTransform the coordinate transform to apply to the test shape's
+     * center of mass (not null, unaffected)
+     * @param settings the collision settings to use (not null, unaffected)
+     * @param base the base location for reporting hits (not null, unaffected,
+     * (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not null)
      * @param shapeFilter the shape filter to apply (not null, unaffected)
      */
     void collideShape(ConstShape testShape, Vec3Arg shapeScale,
             RMat44Arg comTransform, CollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             ShapeFilter shapeFilter);
+
+    /**
+     * Access the underlying coordinate transform.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    RMat44Arg getCenterOfMassTransform();
+
+    /**
+     * Access the underlying collision shape.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstShape getShape();
+
+    /**
+     * Copy the location of the center of mass.
+     *
+     * @return a new object
+     */
+    RVec3 getShapePositionCom();
+
+    /**
+     * Copy the rotation of the shape.
+     *
+     * @return a new object
+     */
+    Quat getShapeRotation();
+
+    /**
+     * Copy the scale factors of the shape.
+     *
+     * @return a new object
+     */
+    Float3 getShapeScale();
 
     /**
      * Get the vertices of the face that provides support in the specified

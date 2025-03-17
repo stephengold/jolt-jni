@@ -28,6 +28,7 @@ import com.github.stephengold.joltjni.readonly.ConstTransformedShape;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
 /**
@@ -169,6 +170,27 @@ public class TransformedShape
      * @param base the base location for reporting hits (not null, unaffected,
      * (0,0,0)&rarr;world coordinates)
      * @param collector the hit collector to use (not null)
+     */
+    @Override
+    public void collideShape(ConstShape testShape, Vec3Arg shapeScale,
+            RMat44Arg comTransform, CollideShapeSettings settings,
+            RVec3Arg base, CollideShapeCollector collector) {
+        collideShape(testShape, shapeScale, comTransform, settings, base,
+                collector, new ShapeFilter());
+    }
+
+    /**
+     * Collect collisions with the specified shape.
+     *
+     * @param testShape the shape to test (not null, unaffected)
+     * @param shapeScale the scaling vector for the test shape (not null,
+     * unaffected)
+     * @param comTransform the coordinate transform to apply to the test shape's
+     * center of mass (not null, unaffected)
+     * @param settings the collision settings to use (not null, unaffected)
+     * @param base the base location for reporting hits (not null, unaffected,
+     * (0,0,0)&rarr;world coordinates)
+     * @param collector the hit collector to use (not null)
      * @param shapeFilter the shape filter to apply (not null, unaffected)
      */
     @Override
@@ -190,6 +212,80 @@ public class TransformedShape
         long filterVa = shapeFilter.va();
         collideShape(transformedShapeVa, testShapeVa, sx, sy, sz, transformVa,
                 settingsVa, xx, yy, zz, collectorVa, filterVa);
+    }
+
+    /**
+     * Access the underlying coordinate transform.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public RMat44Arg getCenterOfMassTransform() {
+        long transformedShapeVa = va();
+        long resultVa = getCenterOfMassTransform(transformedShapeVa);
+        RMat44Arg result = new RMat44(this, resultVa);
+
+        return result;
+    }
+
+    /**
+     * Access the underlying collision shape. (native member: mShape)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public ConstShape getShape() {
+        long transformedShapeVa = va();
+        long resultVa = getShape(transformedShapeVa);
+        ConstShape result = Shape.newShape(resultVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the location of the center of mass. (native member:
+     * mShapePositionCOM)
+     *
+     * @return a new object
+     */
+    @Override
+    public RVec3 getShapePositionCom() {
+        long transformedShapeVa = va();
+        DoubleBuffer storeDoubles = Jolt.newDirectDoubleBuffer(3);
+        getShapePositionCom(transformedShapeVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
+
+        return result;
+    }
+
+    /**
+     * Copy the rotation of the shape. (native member: mShapeRotation)
+     *
+     * @return a new object
+     */
+    @Override
+    public Quat getShapeRotation() {
+        long transformedShapeVa = va();
+        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(4);
+        getShapeRotation(transformedShapeVa, storeFloats);
+        Quat result = new Quat(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Copy the scale factors of the shape.
+     *
+     * @return a new object
+     */
+    @Override
+    public Float3 getShapeScale() {
+        long transformedShapeVa = va();
+        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(3);
+        getShapeScale(transformedShapeVa, storeFloats);
+        Float3 result = new Float3(storeFloats);
+
+        return result;
     }
 
     /**
@@ -286,6 +382,20 @@ public class TransformedShape
             long testShapeVa, float sx, float sy, float sz, long transformVa,
             long settingsVa, double xx, double yy, double zz, long collectorVa,
             long filterVa);
+
+    native private static long getCenterOfMassTransform(
+            long transformedShapeVa);
+
+    native private static long getShape(long transformedShapeVa);
+
+    native private static void getShapePositionCom(
+            long transformedShapeVa, DoubleBuffer storeDoubles);
+
+    native private static void getShapeRotation(
+            long transformedShapeVa, FloatBuffer storeFloats);
+
+    native private static void getShapeScale(
+            long transformedShapeVa, FloatBuffer storeFloats);
 
     native private static void getSupportingFace(
             long shapeVa, long idVa, float dx, float dy, float dz, double xx,
