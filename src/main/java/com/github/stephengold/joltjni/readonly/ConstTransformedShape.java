@@ -143,6 +143,22 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
             ShapeFilter shapeFilter);
 
     /**
+     * Copy the vertex coordinates of the shape's debug mesh to the specified
+     * buffer. The shape is unaffected.
+     *
+     * @param storeBuffer the buffer to fill with vertex coordinates (not null,
+     * modified)
+     */
+    void copyDebugTriangles(FloatBuffer storeBuffer);
+
+    /**
+     * Count the triangles in the shape's debug mesh. The shape is unaffected.
+     *
+     * @return the count (&gt;0)
+     */
+    int countDebugTriangles();
+
+    /**
      * Access the underlying coordinate transform. The shape is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned

@@ -216,6 +216,34 @@ public class TransformedShape
     }
 
     /**
+     * Copy the vertex coordinates of the shape's debug mesh to the specified
+     * buffer. The shape is unaffected.
+     *
+     * @param storeBuffer the buffer to fill with vertex coordinates (not null,
+     * modified)
+     */
+    @Override
+    public void copyDebugTriangles(FloatBuffer storeBuffer) {
+        long transformedShapeVa = va();
+        int numTriangles = storeBuffer.capacity() / 9;
+        copyDebugTriangles(transformedShapeVa, numTriangles, storeBuffer);
+    }
+
+    /**
+     * Count the triangles in the shape's debug mesh. The shape is unaffected.
+     *
+     * @return the count (&gt;0)
+     */
+    @Override
+    public int countDebugTriangles() {
+        long transformedShapeVa = va();
+        int result = countDebugTriangles(transformedShapeVa);
+
+        assert result > 0 : "result = " + result;
+        return result;
+    }
+
+    /**
      * Access the underlying coordinate transform. The shape is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -383,6 +411,11 @@ public class TransformedShape
             long testShapeVa, float sx, float sy, float sz, long transformVa,
             long settingsVa, double xx, double yy, double zz, long collectorVa,
             long filterVa);
+
+    native private static void copyDebugTriangles(
+            long transformedShapeVa, int numTriangles, FloatBuffer storeBuffer);
+
+    native private static int countDebugTriangles(long transformedShapeVa);
 
     native private static void free(long shapeVa);
 

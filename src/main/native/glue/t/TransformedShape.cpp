@@ -24,7 +24,9 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
+#include "Jolt/Physics/Collision/CollisionCollectorImpl.h"
 #include "Jolt/Physics/Collision/TransformedShape.h"
+
 #include "auto/com_github_stephengold_joltjni_TransformedShape.h"
 #include "glue/glue.h"
 
@@ -148,6 +150,71 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_coll
             = reinterpret_cast<ShapeFilter *> (filterVa);
     pTransformedShape->CollideShape(pTestShape, shapeScale, *pComTransform,
             *pSettings, base, *pCollector, *pFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TransformedShape
+ * Method:    copyDebugTriangles
+ * Signature: (JILjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_copyDebugTriangles
+  (JNIEnv *pEnv, jclass, jlong transformedShapeVa, jint numTriangles,
+  jobject storeBuffer) {
+    const TransformedShape * const pShape
+            = reinterpret_cast<TransformedShape *> (transformedShapeVa);
+    Float3 *pFloat3 = (Float3 *) pEnv->GetDirectBufferAddress(storeBuffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    AllHitCollisionCollector<TransformedShapeCollector> collector;
+    pShape->CollectTransformedShapes(AABox::sBiggest(), collector);
+    for (const TransformedShape& transformedShape : collector.mHits) {
+        const Shape * const pSh = transformedShape.mShape;
+        Shape::GetTrianglesContext context;
+        pSh->GetTrianglesStart(context, AABox::sBiggest(),
+            Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f));
+        while (numTriangles > 0) {
+            const int maxRequest = std::max((int)numTriangles,
+                    Shape::cGetTrianglesMinTrianglesRequested);
+            const int numTrianglesCopied
+                    = pSh->GetTrianglesNext(context, maxRequest, pFloat3);
+            JPH_ASSERT(numTrianglesCopied <= numTriangles);
+            if (numTrianglesCopied == 0) {
+                break;
+            }
+            pFloat3 += 3 * numTrianglesCopied;
+            numTriangles -= numTrianglesCopied;
+        }
+    }
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TransformedShape
+ * Method:    countDebugTriangles
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_TransformedShape_countDebugTriangles
+  (JNIEnv *, jclass, jlong transformedShapeVa) {
+    const TransformedShape * const pShape
+            = reinterpret_cast<TransformedShape *> (transformedShapeVa);
+    uint result = 0;
+    AllHitCollisionCollector<TransformedShapeCollector> collector;
+    pShape->CollectTransformedShapes(AABox::sBiggest(), collector);
+    for (const TransformedShape &transformedShape : collector.mHits) {
+        const Shape * const pSh = transformedShape.mShape;
+        Shape::GetTrianglesContext context;
+        pSh->GetTrianglesStart(context, AABox::sBiggest(),
+            Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f));
+        for (;;) {
+            constexpr uint cMaxTriangles = 100;
+            Float3 vertices[3 * cMaxTriangles];
+            const int numTrianglesCopied
+                    = pSh->GetTrianglesNext(context, cMaxTriangles, vertices);
+            if (numTrianglesCopied == 0) {
+                break;
+            }
+            result += numTrianglesCopied;
+        }
+    }
+    return result;
 }
 
 /*
