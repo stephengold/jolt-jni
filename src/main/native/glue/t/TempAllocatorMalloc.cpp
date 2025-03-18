@@ -46,7 +46,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TempAllocatorMalloc_
         return 0;
     }
 #endif
-    NonCopyable * const pResult = new TempAllocatorMalloc();
+    TempAllocatorMalloc * const pResult = new TempAllocatorMalloc();
     TRACE_NEW("TempAllocatorMalloc", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
@@ -58,8 +58,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TempAllocatorMalloc_
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TempAllocatorMalloc_free
   (JNIEnv *, jclass, jlong allocatorVa) {
-    const NonCopyable * const pAllocator
-            = reinterpret_cast<NonCopyable *> (allocatorVa);
+    const TempAllocatorMalloc * const pAllocator
+            = reinterpret_cast<TempAllocatorMalloc *> (allocatorVa);
     TRACE_DELETE("TempAllocatorMalloc", pAllocator)
 #ifndef WIN32
     // Attempting to delete a TempAllocatorMalloc on Windows causes deadlock!
