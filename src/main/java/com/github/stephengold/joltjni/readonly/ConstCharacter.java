@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.BodyId;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.TransformedShape;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
@@ -153,6 +154,24 @@ public interface ConstCharacter extends ConstCharacterBase {
      * @return a new rotation quaternion (in system coordinates)
      */
     Quat getRotation(boolean lockBodies);
+
+    /**
+     * Return a TransformedShape that represents the volume occupied by the
+     * character, using the locking body interface. The character is unaffected.
+     *
+     * @return a new object
+     */
+    TransformedShape getTransformedShape();
+
+    /**
+     * Return a TransformedShape that represents the volume occupied by the
+     * character. The character is unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @return a new object
+     */
+    TransformedShape getTransformedShape(boolean lockBodies);
 
     /**
      * Calculate the character's local-to-system coordinate transform using the

@@ -251,6 +251,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Character_getRotation
 
 /*
  * Class:     com_github_stephengold_joltjni_Character
+ * Method:    getTransformedShape
+ * Signature: (JZ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Character_getTransformedShape
+  (JNIEnv *, jclass, jlong characterVa, jboolean lockBodies) {
+    const Character * const pCharacter
+            = reinterpret_cast<Character *> (characterVa);
+    const TransformedShape& shape = pCharacter->GetTransformedShape(lockBodies);
+    TransformedShape * const pResult = new TransformedShape(shape);
+    TRACE_NEW("TransformedShape", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Character
  * Method:    getWorldTransform
  * Signature: (JZ)J
  */

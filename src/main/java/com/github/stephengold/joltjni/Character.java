@@ -708,6 +708,35 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Return a TransformedShape that represents the volume occupied by the
+     * character, using the locking body interface. The character is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public TransformedShape getTransformedShape() {
+        TransformedShape result = getTransformedShape(true);
+        return result;
+    }
+
+    /**
+     * Return a TransformedShape that represents the volume occupied by the
+     * character. The character is unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @return a new object
+     */
+    @Override
+    public TransformedShape getTransformedShape(boolean lockBodies) {
+        long characterVa = va();
+        long resultVa = getTransformedShape(characterVa, lockBodies);
+        TransformedShape result = new TransformedShape(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Calculate the character's local-to-system coordinate transform using the
      * locking body interface. The character is unaffected.
      *
@@ -771,6 +800,9 @@ public class Character extends CharacterBase implements ConstCharacter {
 
     native static void getRotation(
             long characterVa, float[] toreFloats, boolean lockBodies);
+
+    native static long getTransformedShape(
+            long characterVa, boolean lockBodies);
 
     native static long getWorldTransform(long characterVa, boolean lockBodies);
 

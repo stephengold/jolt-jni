@@ -590,6 +590,35 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
+     * Return a TransformedShape that represents the volume occupied by the
+     * character, using the locking body interface. The character is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public TransformedShape getTransformedShape() {
+        TransformedShape result = getTransformedShape(true);
+        return result;
+    }
+
+    /**
+     * Return a TransformedShape that represents the volume occupied by the
+     * character. The character is unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     * @return a new object
+     */
+    @Override
+    public TransformedShape getTransformedShape(boolean lockBodies) {
+        long characterVa = targetVa();
+        long resultVa = Character.getTransformedShape(characterVa, lockBodies);
+        TransformedShape result = new TransformedShape(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Copy the character's "up" direction. The character is unaffected.
      *
      * @return a new direction vector
