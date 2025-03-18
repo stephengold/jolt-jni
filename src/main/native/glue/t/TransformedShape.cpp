@@ -32,19 +32,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_TransformedShape
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_free
-  (JNIEnv *, jclass, jlong shapeVa) {
-    TransformedShape * const pShape
-            = reinterpret_cast<TransformedShape *> (shapeVa);
-    TRACE_DELETE("TransformedShape", pShape)
-    delete pShape;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_TransformedShape
  * Method:    castRay
  * Signature: (JJJ)Z
  */
@@ -161,6 +148,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_coll
             = reinterpret_cast<ShapeFilter *> (filterVa);
     pTransformedShape->CollideShape(pTestShape, shapeScale, *pComTransform,
             *pSettings, base, *pCollector, *pFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TransformedShape
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_free
+  (JNIEnv *, jclass, jlong shapeVa) {
+    TransformedShape * const pShape
+            = reinterpret_cast<TransformedShape *> (shapeVa);
+    TRACE_DELETE("TransformedShape", pShape)
+    delete pShape;
 }
 
 /*

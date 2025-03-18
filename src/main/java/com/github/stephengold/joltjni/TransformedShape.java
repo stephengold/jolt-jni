@@ -363,8 +363,6 @@ public class TransformedShape
     // *************************************************************************
     // native private methods
 
-    native private static void free(long shapeVa);
-
     native private static boolean castRay(
             long shapeVa, long raycastVa, long resultVa);
 
@@ -385,6 +383,8 @@ public class TransformedShape
             long testShapeVa, float sx, float sy, float sz, long transformVa,
             long settingsVa, double xx, double yy, double zz, long collectorVa,
             long filterVa);
+
+    native private static void free(long shapeVa);
 
     native private static long getCenterOfMassTransform(
             long transformedShapeVa);
