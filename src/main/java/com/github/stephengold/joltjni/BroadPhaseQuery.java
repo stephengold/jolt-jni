@@ -196,8 +196,8 @@ public class BroadPhaseQuery extends NonCopyable {
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
-    public void collideSphere(Vec3Arg center, float radius,
-            CollideShapeBodyCollector collector,
+    public void collideSphere(
+            Vec3Arg center, float radius, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
         long queryVa = va();
         float centerX = center.getX();

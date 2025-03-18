@@ -32,7 +32,8 @@ import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
 /**
- * A shape and a coordinate transform, typically extracted from a {@code Body}.
+ * A collision shape and a coordinate transform, typically extracted from a
+ * {@code Body} or {@code Character}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -58,7 +59,7 @@ public class TransformedShape
     // ConstTransformedShape methods
 
     /**
-     * Cast a ray and find the closest hit.
+     * Cast a ray and find the closest hit. The shape is unaffected.
      *
      * @param raycast the test ray (not null, unaffected)
      * @param storeResult storage for the result (not null, modified)
@@ -75,7 +76,7 @@ public class TransformedShape
     }
 
     /**
-     * Cast a narrow-phase ray and collect any hits.
+     * Cast a narrow-phase ray and collect any hits. The shape is unaffected.
      *
      * @param raycast the test ray (not null, unaffected)
      * @param settings the raycast configuration options to use (not null,
@@ -96,7 +97,7 @@ public class TransformedShape
     }
 
     /**
-     * Cast a narrow-phase shape and collect any hits.
+     * Cast a narrow-phase shape and collect any hits. The shape is unaffected.
      *
      * @param shapeCast the desired shape cast (not null, unaffected)
      * @param settings the collision settings to use (not null, unaffected)
@@ -123,7 +124,7 @@ public class TransformedShape
 
     /**
      * Collect transformed shapes for all leaf shapes of the current shape that
-     * collide with the specified bounding box.
+     * collide with the specified bounding box. The shape is unaffected.
      *
      * @param box the region of interest (in system coordinates)
      * @param collector the hit collector to use (not null)
@@ -140,7 +141,7 @@ public class TransformedShape
     }
 
     /**
-     * Collect collisions with the specified point.
+     * Collect collisions with the specified point. The shape is unaffected.
      *
      * @param point the location of the point to test (not null, unaffected)
      * @param collector the hit collector to use (not null)
@@ -159,7 +160,7 @@ public class TransformedShape
     }
 
     /**
-     * Collect collisions with the specified shape.
+     * Collect collisions with the specified shape. The shape is unaffected.
      *
      * @param testShape the shape to test (not null, unaffected)
      * @param shapeScale the scaling vector for the test shape (not null,
@@ -180,7 +181,7 @@ public class TransformedShape
     }
 
     /**
-     * Collect collisions with the specified shape.
+     * Collect collisions with the specified shape. The shape is unaffected.
      *
      * @param testShape the shape to test (not null, unaffected)
      * @param shapeScale the scaling vector for the test shape (not null,
@@ -215,7 +216,7 @@ public class TransformedShape
     }
 
     /**
-     * Access the underlying coordinate transform.
+     * Access the underlying coordinate transform. The shape is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -229,7 +230,8 @@ public class TransformedShape
     }
 
     /**
-     * Access the underlying collision shape. (native member: mShape)
+     * Access the underlying collision shape. The shape is unaffected. (native
+     * member: mShape)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -243,8 +245,8 @@ public class TransformedShape
     }
 
     /**
-     * Copy the location of the center of mass. (native member:
-     * mShapePositionCOM)
+     * Copy the location of the center of mass. The shape is unaffected. (native
+     * member: mShapePositionCOM)
      *
      * @return a new object
      */
@@ -259,7 +261,8 @@ public class TransformedShape
     }
 
     /**
-     * Copy the rotation of the shape. (native member: mShapeRotation)
+     * Copy the rotation of the shape. The shape is unaffected. (native member:
+     * mShapeRotation)
      *
      * @return a new object
      */
@@ -274,7 +277,7 @@ public class TransformedShape
     }
 
     /**
-     * Copy the scale factors of the shape.
+     * Copy the scale factors of the shape. The shape is unaffected.
      *
      * @return a new object
      */
@@ -290,7 +293,7 @@ public class TransformedShape
 
     /**
      * Get the vertices of the face that provides support in the specified
-     * direction.
+     * direction. The shape is unaffected.
      *
      * @param subShapeId which subshape to use (not null, unaffected)
      * @param direction the test direction (in world coordinates, not null,
@@ -315,7 +318,7 @@ public class TransformedShape
     }
 
     /**
-     * Collect triangles for debug visualization.
+     * Collect triangles for debug visualization. The shape is unaffected.
      *
      * @param storeContext storage for communication with
      * {@code getTrianglesStart()}
@@ -337,7 +340,7 @@ public class TransformedShape
 
     /**
      * Prepare to collect triangles in the specified box for debug
-     * visualization.
+     * visualization. The shape is unaffected.
      *
      * @param storeContext storage for communication with
      * {@code getTrianglesNext()}

@@ -51,7 +51,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Cast a ray and find the closest hit.
+     * Cast a ray and find the closest hit. The shape is unaffected.
      *
      * @param raycast the test ray (not null, unaffected)
      * @param storeResult storage for the result (not null, modified)
@@ -60,7 +60,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
     boolean castRay(RRayCast raycast, RayCastResult storeResult);
 
     /**
-     * Cast a narrow-phase ray and collect any hits.
+     * Cast a narrow-phase ray and collect any hits. The shape is unaffected.
      *
      * @param raycast the test ray (not null, unaffected)
      * @param settings the raycast configuration options to use (not null,
@@ -72,7 +72,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
             CastRayCollector collector, ShapeFilter shapeFilter);
 
     /**
-     * Cast a narrow-phase shape and collect any hits.
+     * Cast a narrow-phase shape and collect any hits. The shape is unaffected.
      *
      * @param shapeCast the desired shape cast (not null, unaffected)
      * @param settings the collision settings to use (not null, unaffected)
@@ -87,7 +87,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
 
     /**
      * Collect transformed shapes for all leaf shapes of the current shape that
-     * collide with the specified bounding box.
+     * collide with the specified bounding box. The shape is unaffected.
      *
      * @param box the region of interest (in system coordinates)
      * @param collector the hit collector to use (not null)
@@ -97,7 +97,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
             TransformedShapeCollector collector, ShapeFilter shapeFilter);
 
     /**
-     * Collect collisions with the specified point.
+     * Collect collisions with the specified point. The shape is unaffected.
      *
      * @param point the location of the point to test (not null, unaffected)
      * @param collector the hit collector to use (not null)
@@ -107,7 +107,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
             ShapeFilter shapeFilter);
 
     /**
-     * Collect collisions with the specified shape.
+     * Collect collisions with the specified shape. The shape is unaffected.
      *
      * @param testShape the shape to test (not null, unaffected)
      * @param shapeScale the scaling vector for the test shape (not null,
@@ -124,7 +124,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
             RVec3Arg base, CollideShapeCollector collector);
 
     /**
-     * Collect collisions with the specified shape.
+     * Collect collisions with the specified shape. The shape is unaffected.
      *
      * @param testShape the shape to test (not null, unaffected)
      * @param shapeScale the scaling vector for the test shape (not null,
@@ -143,35 +143,36 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
             ShapeFilter shapeFilter);
 
     /**
-     * Access the underlying coordinate transform.
+     * Access the underlying coordinate transform. The shape is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
     RMat44Arg getCenterOfMassTransform();
 
     /**
-     * Access the underlying collision shape.
+     * Access the underlying collision shape. The current instance is
+     * unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
     ConstShape getShape();
 
     /**
-     * Copy the location of the center of mass.
+     * Copy the location of the center of mass. The shape is unaffected.
      *
      * @return a new object
      */
     RVec3 getShapePositionCom();
 
     /**
-     * Copy the rotation of the shape.
+     * Copy the rotation of the shape. The shape is unaffected.
      *
      * @return a new object
      */
     Quat getShapeRotation();
 
     /**
-     * Copy the scale factors of the shape.
+     * Copy the scale factors of the shape. The shape is unaffected.
      *
      * @return a new object
      */
@@ -179,7 +180,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
 
     /**
      * Get the vertices of the face that provides support in the specified
-     * direction.
+     * direction. The shape is unaffected.
      *
      * @param subShapeId which subshape to use (not null, unaffected)
      * @param direction the test direction (in world coordinates, not null,
@@ -192,7 +193,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
             RVec3Arg base, SupportingFace storeFace);
 
     /**
-     * Collect triangles for debug visualization.
+     * Collect triangles for debug visualization. The shape is unaffected.
      *
      * @param storeContext storage for communication with
      * {@code getTrianglesStart()}
@@ -206,7 +207,7 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
 
     /**
      * Prepare to collect triangles in the specified box for debug
-     * visualization.
+     * visualization. The shape is unaffected.
      *
      * @param storeContext storage for communication with
      * {@code getTrianglesNext()}

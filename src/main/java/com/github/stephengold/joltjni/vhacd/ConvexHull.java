@@ -70,7 +70,7 @@ public class ConvexHull extends JoltPhysicsObject {
     /**
      * Copy the point locations to a new direct buffer.
      *
-     * @return the new buffer (capacity a positive multiple of 3)
+     * @return the new direct buffer (capacity a positive multiple of 3)
      */
     public FloatBuffer getPointsAsBuffer() {
         long hullVa = va();
