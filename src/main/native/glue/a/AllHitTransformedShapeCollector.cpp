@@ -68,6 +68,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AllHitTransformedSha
   (JNIEnv *, jclass, jlong collectorVa, jint index) {
     const AllHitCollisionCollector<TransformedShapeCollector> * const pCollector
             = reinterpret_cast<AllHitCollisionCollector<TransformedShapeCollector> *> (collectorVa);
-    const TransformedShape * const pResult = &pCollector->mHits.at(index);
+    const TransformedShape& result = pCollector->mHits.at(index);
+    TransformedShape * const pResult = new TransformedShape(result);
+    TRACE_NEW("TransformedShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
