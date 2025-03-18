@@ -25,6 +25,7 @@ $(N)/glue/a/AdditionalConstraint.cpp \
 $(N)/glue/a/AllHitCastRayCollector.cpp \
 $(N)/glue/a/AllHitCastShapeCollector.cpp \
 $(N)/glue/a/AllHitCollidePointCollector.cpp \
+$(N)/glue/a/AllHitCollideShapeBodyCollector.cpp \
 $(N)/glue/a/AllHitCollideShapeCollector.cpp \
 $(N)/glue/a/AllHitRayCastBodyCollector.cpp \
 $(N)/glue/a/AnyHitCastRayCollector.cpp \
