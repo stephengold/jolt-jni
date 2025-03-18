@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -153,6 +153,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_setH
             = reinterpret_cast<HeightFieldShape *> (shapeVa);
     const float * const pHeightArray
             = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
     TempAllocator * const pAllocator
             = reinterpret_cast<TempAllocator *> (allocatorVa);
     pShape->SetHeights(startX, startY, sizeX, sizeY, pHeightArray, stride,

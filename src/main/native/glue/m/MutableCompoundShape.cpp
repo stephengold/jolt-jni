@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -85,8 +85,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_
             = reinterpret_cast<MutableCompoundShape *> (shapeVa);
     const Vec3 * const pOffsets
             = (Vec3 *) pEnv->GetDirectBufferAddress(offsets);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
     const Quat * const pRotations
             = (Quat *) pEnv->GetDirectBufferAddress(rotations);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
     pCompound->ModifyShapes(startIndex, numSubShapes, pOffsets, pRotations,
             offsetStride, rotationStride);
 }

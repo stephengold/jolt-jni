@@ -64,6 +64,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
   (JNIEnv *pEnv, jclass, jint numPoints, jobject buffer, jfloat maxConvexRadius, jlong materialVa) {
     const jfloat * const pFloats
             = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
     Vec3 * const pPoints = new Vec3[numPoints];
     TRACE_NEW("Vec3[]", pPoints)
     for (jint i = 0; i < numPoints; ++i) {
@@ -170,6 +171,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettin
     pSettings->mPoints.reserve(numPoints);
     const jfloat * const pFloats
             = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
     for (jint i = 0; i < numPoints; ++i) {
         const float x = pFloats[3 * i];
         const float y = pFloats[3 * i + 1];

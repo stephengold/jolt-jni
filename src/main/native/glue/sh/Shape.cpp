@@ -49,6 +49,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_copyDebugTriang
   (JNIEnv *pEnv, jclass, jlong shapeVa, jint numTriangles, jobject storeBuffer) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
     Float3 * pFloat3 = (Float3 *) pEnv->GetDirectBufferAddress(storeBuffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
     AllHitCollisionCollector<TransformedShapeCollector> collector;
     pShape->CollectTransformedShapes(AABox::sBiggest(),
             Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f),

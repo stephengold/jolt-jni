@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -65,6 +65,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
   (JNIEnv *pEnv, jclass, jint numVertices, jobject buffer, jlong indicesVa) {
     const jfloat * const pFloats
             = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
     VertexList vertices;
     for (jint i = 0; i < numVertices; ++i) {
         const float x = pFloats[3 * i];
@@ -90,6 +91,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
   (JNIEnv *pEnv, jclass, jint numTriangles, jobject buffer, jlong materialsVa) {
     const jfloat * const pFloats
             = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
     TriangleList triangles;
     for (jint i = 0; i < numTriangles; ++i) {
         const float v1x = pFloats[3 * i];
