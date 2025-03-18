@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -63,7 +63,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyVector_erase
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyVector_getBody
   (JNIEnv *, jclass, jlong vectorVa, jint elementIndex) {
     BodyVector * const pVector = reinterpret_cast<BodyVector *> (vectorVa);
-    Body * pResult = pVector->at(elementIndex);
+    Body * const pResult = pVector->at(elementIndex);
     return reinterpret_cast<jlong> (pResult);
 }
 

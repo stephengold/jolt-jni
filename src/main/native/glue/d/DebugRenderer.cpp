@@ -264,7 +264,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawTri
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWireBoxAligned
   (JNIEnv *, jclass, jlong boxVa, jint colorInt) {
 #ifdef JPH_DEBUG_RENDERER
-    const AABox * pBox = reinterpret_cast<AABox *> (boxVa);
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     const Color color(colorInt);
     DebugRenderer::sInstance->DrawWireBox(*pBox, color);
 #endif
@@ -278,7 +278,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWir
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawWireBoxOriented
   (JNIEnv *, jclass, jlong boxVa, jint colorInt) {
 #ifdef JPH_DEBUG_RENDERER
-    const OrientedBox * pBox = reinterpret_cast<OrientedBox *> (boxVa);
+    const OrientedBox * const pBox = reinterpret_cast<OrientedBox *> (boxVa);
     const Color color(colorInt);
     DebugRenderer::sInstance->DrawWireBox(*pBox, color);
 #endif

@@ -56,7 +56,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyManifold_get
     const SoftBodyVertex * const pVertex
             = reinterpret_cast<SoftBodyVertex *> (vertexVa);
     const BodyID &id = pManifold->GetContactBodyID(*pVertex);
-    BodyID * pResult = new BodyID(id);
+    BodyID * const pResult = new BodyID(id);
     TRACE_NEW("BodyID", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
@@ -174,7 +174,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyManifold_get
     const SoftBodyManifold * const pManifold
             = reinterpret_cast<SoftBodyManifold *> (manifoldVa);
     const BodyID id = pManifold->GetSensorContactBodyID(index);
-    BodyID * pResult = new BodyID(id);
+    BodyID * const pResult = new BodyID(id);
     TRACE_NEW("BodyID", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

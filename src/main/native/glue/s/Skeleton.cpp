@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,7 +47,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Skeleton_addJointWith
   (JNIEnv *pEnv, jclass, jlong skeletonVa, jstring name, jint parentIndex) {
     Skeleton * const pSkeleton = reinterpret_cast<Skeleton *> (skeletonVa);
     jboolean isCopy;
-    const char * pName = pEnv->GetStringUTFChars(name, &isCopy);
+    const char * const pName = pEnv->GetStringUTFChars(name, &isCopy);
     const uint result = pSkeleton->AddJoint(pName, parentIndex);
     pEnv->ReleaseStringUTFChars(name, pName);
     return result;
@@ -62,7 +62,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Skeleton_addRootJoint
   (JNIEnv *pEnv, jclass, jlong skeletonVa, jstring name) {
     Skeleton * const pSkeleton = reinterpret_cast<Skeleton *> (skeletonVa);
     jboolean isCopy;
-    const char * pName = pEnv->GetStringUTFChars(name, &isCopy);
+    const char * const pName = pEnv->GetStringUTFChars(name, &isCopy);
     const uint result = pSkeleton->AddJoint(pName);
     pEnv->ReleaseStringUTFChars(name, pName);
     return result;

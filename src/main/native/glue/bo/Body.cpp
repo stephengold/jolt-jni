@@ -418,7 +418,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getId
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     const BodyID &id = pBody->GetID();
-    BodyID * pResult = new BodyID(id);
+    BodyID * const pResult = new BodyID(id);
     TRACE_NEW("BodyID", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

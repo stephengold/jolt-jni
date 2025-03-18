@@ -80,7 +80,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skinned_getWeight
   (JNIEnv *, jclass, jlong skinnedVa, jint index) {
     SoftBodySharedSettings::Skinned * const pSkinned
             = reinterpret_cast<SoftBodySharedSettings::Skinned *> (skinnedVa);
-    SoftBodySharedSettings::SkinWeight * pResult = &pSkinned->mWeights[index];
+    SoftBodySharedSettings::SkinWeight * const pResult
+            = &pSkinned->mWeights[index];
     return reinterpret_cast<jlong> (pResult);
 }
 

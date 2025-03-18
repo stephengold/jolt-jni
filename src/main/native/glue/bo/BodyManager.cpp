@@ -63,7 +63,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyManager_addBo
   (JNIEnv *, jclass, jlong managerVa, jlong bodyVa) {
     BodyManager * const pManager = reinterpret_cast<BodyManager *> (managerVa);
     Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    bool result = pManager->AddBody(pBody);
+    const bool result = pManager->AddBody(pBody);
     return result;
 }
 
@@ -77,7 +77,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManager_allocate
     BodyManager * const pManager = reinterpret_cast<BodyManager *> (managerVa);
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (settingsVa);
-    Body * pResult = pManager->AllocateBody(*pSettings);
+    Body * const pResult = pManager->AllocateBody(*pSettings);
     return reinterpret_cast<jlong> (pResult);
 }
 

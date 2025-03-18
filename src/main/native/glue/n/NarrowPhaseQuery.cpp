@@ -121,7 +121,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_NarrowPhaseQuery_coll
     const NarrowPhaseQuery * const pQuery
             = reinterpret_cast<NarrowPhaseQuery *> (queryVa);
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    TransformedShapeCollector * pCollector
+    TransformedShapeCollector * const pCollector
             = reinterpret_cast<TransformedShapeCollector *> (collectorVa);
     const BroadPhaseLayerFilter * const pBplFilter
             = reinterpret_cast<BroadPhaseLayerFilter *> (bplFilterVa);

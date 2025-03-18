@@ -81,7 +81,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_cast
     const ShapeCastSettings * const pSettings
             = reinterpret_cast<ShapeCastSettings *> (settingsVa);
     const RVec3 base(xx, yy, zz);
-    CastShapeCollector * pCollector
+    CastShapeCollector * const pCollector
             = reinterpret_cast<CastShapeCollector *> (collectorVa);
     const ShapeFilter * const pFilter
             = reinterpret_cast<ShapeFilter *> (filterVa);
@@ -99,7 +99,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_coll
     const TransformedShape * const pShape
             = reinterpret_cast<TransformedShape *> (shapeVa);
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    TransformedShapeCollector * pCollector
+    TransformedShapeCollector * const pCollector
             = reinterpret_cast<TransformedShapeCollector *> (collectorVa);
     const ShapeFilter * const pFilter
             = reinterpret_cast<ShapeFilter *> (filterVa);

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -91,7 +91,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialList_
     PhysicsMaterialList * const pList
             = reinterpret_cast<PhysicsMaterialList *> (listVa);
     RefConst<PhysicsMaterial>& element = pList->at(elementIndex);
-    RefConst<PhysicsMaterial>* pResult = new RefConst<PhysicsMaterial>(element);
+    RefConst<PhysicsMaterial>* const pResult
+            = new RefConst<PhysicsMaterial>(element);
     TRACE_NEW("RefConst<PhysicsMaterial>", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

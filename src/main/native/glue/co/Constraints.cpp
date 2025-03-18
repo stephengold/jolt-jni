@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -76,7 +76,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Constraints_get
   (JNIEnv *, jclass, jlong arrayVa, jint elementIndex) {
     Constraints * const pArray = reinterpret_cast<Constraints *> (arrayVa);
     Ref<Constraint>& element = pArray->at(elementIndex);
-    Ref<Constraint>* pResult = new Ref<Constraint>(element);
+    Ref<Constraint>* const pResult = new Ref<Constraint>(element);
     TRACE_NEW("Ref<Constraint>", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
