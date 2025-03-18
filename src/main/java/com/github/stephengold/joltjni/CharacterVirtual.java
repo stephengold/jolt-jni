@@ -674,6 +674,21 @@ public class CharacterVirtual
     }
 
     /**
+     * Return a TransformedShape that represents the volume occupied by the
+     * character. The character is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public TransformedShape getTransformedShape() {
+        long characterVa = va();
+        long resultVa = getTransformedShape(characterVa);
+        TransformedShape result = new TransformedShape(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the character's user data: can be used for anything. The character
      * is unaffected.
      *
@@ -810,6 +825,8 @@ public class CharacterVirtual
     native static float getShapeOffsetY(long characterVa);
 
     native static float getShapeOffsetZ(long characterVa);
+
+    native static long getTransformedShape(long characterVa);
 
     native static long getUserData(long characterVa);
 

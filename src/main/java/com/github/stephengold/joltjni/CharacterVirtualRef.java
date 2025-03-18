@@ -692,6 +692,21 @@ final public class CharacterVirtualRef
     }
 
     /**
+     * Return a TransformedShape that represents the volume occupied by the
+     * character. The character is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public TransformedShape getTransformedShape() {
+        long characterVa = targetVa();
+        long resultVa = CharacterVirtual.getTransformedShape(characterVa);
+        TransformedShape result = new TransformedShape(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Copy the character's "up" direction. The character is unaffected.
      *
      * @return a new direction vector

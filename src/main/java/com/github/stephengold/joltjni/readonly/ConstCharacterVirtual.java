@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.ContactList;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.TransformedShape;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
@@ -186,6 +187,14 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * @return a new offset vector (in local coordinates)
      */
     Vec3 getShapeOffset();
+
+    /**
+     * Return a TransformedShape that represents the volume occupied by the
+     * character. The character is unaffected.
+     *
+     * @return a new object
+     */
+    TransformedShape getTransformedShape();
 
     /**
      * Return the character's user data: can be used for anything. The character
