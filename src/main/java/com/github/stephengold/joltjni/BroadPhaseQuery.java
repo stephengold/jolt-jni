@@ -164,6 +164,34 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param center the center of the test sphere (not null, unaffected)
      * @param radius the radius of the test sphere
      * @param collector the hit collector to use (not null)
+     */
+    public void collideSphere(
+            Vec3Arg center, float radius, CollideShapeBodyCollector collector) {
+        collideSphere(center, radius, collector, new BroadPhaseLayerFilter());
+    }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified test sphere.
+     *
+     * @param center the center of the test sphere (not null, unaffected)
+     * @param radius the radius of the test sphere
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     */
+    public void collideSphere(
+            Vec3Arg center, float radius, CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter) {
+        collideSphere(
+                center, radius, collector, bplFilter, new ObjectLayerFilter());
+    }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified test sphere.
+     *
+     * @param center the center of the test sphere (not null, unaffected)
+     * @param radius the radius of the test sphere
+     * @param collector the hit collector to use (not null)
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
