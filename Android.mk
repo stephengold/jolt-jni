@@ -28,6 +28,7 @@ $(N)/glue/a/AllHitCollidePointCollector.cpp \
 $(N)/glue/a/AllHitCollideShapeBodyCollector.cpp \
 $(N)/glue/a/AllHitCollideShapeCollector.cpp \
 $(N)/glue/a/AllHitRayCastBodyCollector.cpp \
+$(N)/glue/a/AllHitTransformedShapeCollector.cpp \
 $(N)/glue/a/AnyHitCastRayCollector.cpp \
 $(N)/glue/a/AnyHitCastShapeCollector.cpp \
 $(N)/glue/a/AnyHitCollideShapeCollector.cpp \
