@@ -717,10 +717,10 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      */
     @Override
     public com.github.stephengold.joltjni.Character getPtr() {
-        long settingsVa = targetVa();
+        long characterVa = targetVa();
         com.github.stephengold.joltjni.Character result
                 = new com.github.stephengold.joltjni.Character(
-                        settingsVa, system);
+                        characterVa, system);
 
         return result;
     }
