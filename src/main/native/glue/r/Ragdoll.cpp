@@ -36,7 +36,8 @@ IMPLEMENT_REF(Ragdoll,
   Java_com_github_stephengold_joltjni_RagdollRef_copy,
   Java_com_github_stephengold_joltjni_RagdollRef_createEmpty,
   Java_com_github_stephengold_joltjni_RagdollRef_free,
-  Java_com_github_stephengold_joltjni_RagdollRef_getPtr)
+  Java_com_github_stephengold_joltjni_RagdollRef_getPtr,
+  Java_com_github_stephengold_joltjni_RagdollRef_toRefC)
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollRef

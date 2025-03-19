@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,8 @@ IMPLEMENT_REF(ConstraintSettings,
   Java_com_github_stephengold_joltjni_ConstraintSettingsRef_copy,
   Java_com_github_stephengold_joltjni_ConstraintSettingsRef_createEmpty,
   Java_com_github_stephengold_joltjni_ConstraintSettingsRef_free,
-  Java_com_github_stephengold_joltjni_ConstraintSettingsRef_getPtr)
+  Java_com_github_stephengold_joltjni_ConstraintSettingsRef_getPtr,
+  Java_com_github_stephengold_joltjni_ConstraintSettingsRef_toRefC)
 
 // The constraint subtype occupies the 2 least-significant bytes of mUserData.
 uint64 cstMask = 0xffff;

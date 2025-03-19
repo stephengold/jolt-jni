@@ -36,7 +36,8 @@ IMPLEMENT_REF(SoftBodySharedSettings,
   Java_com_github_stephengold_joltjni_SoftBodySharedSettingsRef_copy,
   Java_com_github_stephengold_joltjni_SoftBodySharedSettingsRef_createEmpty,
   Java_com_github_stephengold_joltjni_SoftBodySharedSettingsRef_free,
-  Java_com_github_stephengold_joltjni_SoftBodySharedSettingsRef_getPtr)
+  Java_com_github_stephengold_joltjni_SoftBodySharedSettingsRef_getPtr,
+  Java_com_github_stephengold_joltjni_SoftBodySharedSettingsRef_toRefC)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
