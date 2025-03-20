@@ -371,8 +371,8 @@ public class NarrowPhaseQuery extends NonCopyable {
     public void collectTransformedShapes(
             ConstAaBox box, TransformedShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
-        collectTransformedShapes(box, collector, bplFilter, olFilter,
-                new BodyFilter());
+        collectTransformedShapes(
+                box, collector, bplFilter, olFilter, new BodyFilter());
     }
 
     /**
