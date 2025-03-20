@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -102,11 +102,15 @@ abstract public class JoltPhysicsObject
     // new methods exposed
 
     /**
-     * Start a daemon thread to process the phantom reachable objects and invoke
-     * freeing actions.
+     * Start a daemon thread to process the phantom-reachable objects and invoke
+     * freeing actions, unless one has already been started.
      */
     public static void startCleaner() {
-        cleaner = Cleaner.create();
+        if (cleaner == null) {
+            cleaner = Cleaner.create();
+        } else {
+            System.out.println("A cleaner has already been started.");
+        }
     }
 
     /**
