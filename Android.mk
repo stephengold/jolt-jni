@@ -181,6 +181,7 @@ $(N)/glue/o/OffsetCenterOfMassShape.cpp \
 $(N)/glue/o/OffsetCenterOfMassShapeSettings.cpp \
 $(N)/glue/ph/PhysicsMaterial.cpp \
 $(N)/glue/ph/PhysicsMaterialList.cpp \
+$(N)/glue/ph/PhysicsMaterialRefC.cpp \
 $(N)/glue/ph/PhysicsMaterialSimple.cpp \
 $(N)/glue/ph/PhysicsScene.cpp \
 $(N)/glue/ph/PhysicsSceneResult.cpp \
