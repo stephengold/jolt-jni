@@ -116,3 +116,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterial_toRe
     TRACE_NEW("Ref<PhysicsMaterial>", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsMaterial
+ * Method:    toRefC
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterial_toRefC
+  (JNIEnv *, jclass, jlong materialVa) {
+    const PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    RefConst<PhysicsMaterial> * const pResult
+            = new RefConst<PhysicsMaterial>(pMaterial);
+    TRACE_NEW("RefConst<PhysicsMaterial>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}

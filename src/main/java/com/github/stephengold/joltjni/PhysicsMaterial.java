@@ -105,6 +105,20 @@ public class PhysicsMaterial extends SerializableObject
 
         return result;
     }
+
+    /**
+     * Create a counted reference to the native {@code PhysicsMaterial}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public PhysicsMaterialRefC toRefC() {
+        long materialVa = va();
+        long refVa = toRefC(materialVa);
+        PhysicsMaterialRefC result = new PhysicsMaterialRefC(refVa, true);
+
+        return result;
+    }
     // *************************************************************************
     // RefTarget methods
 
@@ -158,4 +172,6 @@ public class PhysicsMaterial extends SerializableObject
     native private static void setEmbedded(long materialVa);
 
     native private static long toRef(long materialVa);
+
+    native private static long toRefC(long materialVa);
 }

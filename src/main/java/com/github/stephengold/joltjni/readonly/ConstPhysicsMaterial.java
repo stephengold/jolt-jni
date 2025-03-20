@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.Color;
+import com.github.stephengold.joltjni.PhysicsMaterialRefC;
 
 /**
  * Read-only access to a {@code PhysicsMaterial}. (native type: const
@@ -46,4 +47,11 @@ public interface ConstPhysicsMaterial extends ConstJoltPhysicsObject {
      * @return a string of text or {@code null}
      */
     String getDebugName();
+
+    /**
+     * Create a counted reference to the native {@code PhysicsMaterial}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    PhysicsMaterialRefC toRefC();
 }
