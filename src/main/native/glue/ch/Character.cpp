@@ -410,3 +410,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Character_toRef
     TRACE_NEW("Ref<Character>", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_Character
+ * Method:    toRefC
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Character_toRefC
+  (JNIEnv *, jclass, jlong characterVa) {
+    const Character * const pCharacter
+            = reinterpret_cast<Character *> (characterVa);
+    RefConst<Character> * const pResult
+            = new RefConst<Character>(pCharacter);
+    TRACE_NEW("RefConst<Character>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}

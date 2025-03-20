@@ -764,6 +764,20 @@ public class Character extends CharacterBase implements ConstCharacter {
 
         return result;
     }
+
+    /**
+     * Create a counted reference to the native {@code Character}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public CharacterRefC toRefC() {
+        long characterVa = va();
+        long refVa = toRefC(characterVa);
+        CharacterRefC result = new CharacterRefC(refVa, system);
+
+        return result;
+    }
     // *************************************************************************
     // native methods
 
@@ -836,4 +850,6 @@ public class Character extends CharacterBase implements ConstCharacter {
             float maxPenetrationDepth, boolean lockBodies);
 
     native private static long toRef(long characterVa);
+
+    native private static long toRefC(long characterVa);
 }

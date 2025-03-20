@@ -780,6 +780,21 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_toR
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
+ * Method:    toRefC
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_toRefC
+  (JNIEnv *, jclass, jlong characterVa) {
+    const CharacterVirtual * const pCharacter
+            = reinterpret_cast<CharacterVirtual *> (characterVa);
+    RefConst<CharacterVirtual> * const pResult
+            = new RefConst<CharacterVirtual>(pCharacter);
+    TRACE_NEW("RefConst<CharacterVirtual>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    updateGroundVelocity
  * Signature: (J)V
  */

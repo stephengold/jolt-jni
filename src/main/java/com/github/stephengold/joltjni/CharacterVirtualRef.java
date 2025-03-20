@@ -830,6 +830,20 @@ final public class CharacterVirtualRef
         long recorderVa = recorder.va();
         CharacterBase.saveState(characterVa, recorderVa);
     }
+
+    /**
+     * Create a counted reference to the native {@code CharacterVirtual}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public CharacterVirtualRefC toRefC() {
+        long refVa = va();
+        long copyVa = toRefC(refVa);
+        CharacterVirtualRefC result = new CharacterVirtualRefC(copyVa, system);
+
+        return result;
+    }
     // *************************************************************************
     // Ref methods
 
@@ -885,4 +899,6 @@ final public class CharacterVirtualRef
     native private static void freeWithSystem(long refVa, PhysicsSystem unused);
 
     native private static long getPtr(long refVa);
+
+    native private static long toRefC(long refVa);
 }

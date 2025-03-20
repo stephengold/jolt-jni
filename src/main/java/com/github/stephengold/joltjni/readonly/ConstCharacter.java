@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.BodyId;
+import com.github.stephengold.joltjni.CharacterRefC;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
@@ -190,4 +191,11 @@ public interface ConstCharacter extends ConstCharacterBase {
      * @return a new transform matrix
      */
     RMat44 getWorldTransform(boolean lockBodies);
+
+    /**
+     * Create a counted reference to the native {@code Character}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    CharacterRefC toRefC();
 }

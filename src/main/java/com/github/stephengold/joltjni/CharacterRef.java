@@ -752,6 +752,20 @@ final public class CharacterRef extends Ref implements ConstCharacter {
 
         return result;
     }
+
+    /**
+     * Create a counted reference to the native {@code Character}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public CharacterRefC toRefC() {
+        long refVa = va();
+        long copyVa = toRefC(refVa);
+        CharacterRefC result = new CharacterRefC(copyVa, system);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -764,4 +778,6 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     native private static void freeWithSystem(long refVa, PhysicsSystem unused);
 
     native private static long getPtr(long refVa);
+
+    native private static long toRefC(long refVa);
 }

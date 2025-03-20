@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.BodyId;
 import com.github.stephengold.joltjni.CharacterId;
+import com.github.stephengold.joltjni.CharacterVirtualRefC;
 import com.github.stephengold.joltjni.ContactList;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
@@ -231,4 +232,11 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * @return {@code true} if contact or collision, otherwise {@code false}
      */
     boolean hasCollidedWith(ConstCharacterVirtual other);
+
+    /**
+     * Create a counted reference to the native {@code CharacterVirtual}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    CharacterVirtualRefC toRefC();
 }

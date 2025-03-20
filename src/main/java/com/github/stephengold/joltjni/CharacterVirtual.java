@@ -751,6 +751,20 @@ public class CharacterVirtual
 
         return result;
     }
+
+    /**
+     * Create a counted reference to the native {@code CharacterVirtual}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public CharacterVirtualRefC toRefC() {
+        long characterVa = va();
+        long refVa = toRefC(characterVa);
+        CharacterVirtualRefC result = new CharacterVirtualRefC(refVa, system);
+
+        return result;
+    }
     // *************************************************************************
     // native methods
 
@@ -878,6 +892,8 @@ public class CharacterVirtual
     native private static void setUserData(long characterVa, long userData);
 
     native private static long toRef(long characterVa);
+
+    native private static long toRefC(long characterVa);
 
     native static void updateGroundVelocity(long characterVa);
 }
