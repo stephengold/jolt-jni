@@ -94,17 +94,17 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
     JPH_ASSERT(!pEnv->ExceptionCheck());
     TriangleList triangles;
     for (jint i = 0; i < numTriangles; ++i) {
-        const float v1x = pFloats[3 * i];
-        const float v1y = pFloats[3 * i + 1];
-        const float v1z = pFloats[3 * i + 2];
+        const float v1x = pFloats[9 * i];
+        const float v1y = pFloats[9 * i + 1];
+        const float v1z = pFloats[9 * i + 2];
         const Float3 v1(v1x, v1y, v1z);
-        const float v2x = pFloats[3 * i + 3];
-        const float v2y = pFloats[3 * i + 4];
-        const float v2z = pFloats[3 * i + 5];
+        const float v2x = pFloats[9 * i + 3];
+        const float v2y = pFloats[9 * i + 4];
+        const float v2z = pFloats[9 * i + 5];
         const Float3 v2(v2x, v2y, v2z);
-        const float v3x = pFloats[3 * i + 6];
-        const float v3y = pFloats[3 * i + 7];
-        const float v3z = pFloats[3 * i + 8];
+        const float v3x = pFloats[9 * i + 6];
+        const float v3y = pFloats[9 * i + 7];
+        const float v3z = pFloats[9 * i + 8];
         const Float3 v3(v3x, v3y, v3z);
         const Triangle triangle(v1, v2, v3);
         triangles.push_back(triangle);
