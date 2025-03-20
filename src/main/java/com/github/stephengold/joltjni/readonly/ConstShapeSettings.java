@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.ShapeResult;
+import com.github.stephengold.joltjni.ShapeSettingsRefC;
 
 /**
  * Read-only access to a {@code ShapeSettings} object. (native type: const
@@ -39,4 +40,11 @@ public interface ConstShapeSettings extends ConstJoltPhysicsObject {
      * @return a new JVM object with a new native object assigned
      */
     ShapeResult create();
+
+    /**
+     * Create a counted reference to the native {@code ShapeSettings}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    ShapeSettingsRefC toRefC();
 }

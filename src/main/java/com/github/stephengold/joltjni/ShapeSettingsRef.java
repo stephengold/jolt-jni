@@ -70,6 +70,20 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
 
         return result;
     }
+
+    /**
+     * Create a counted reference to the native {@code ShapeSettings}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public ShapeSettingsRefC toRefC() {
+        long refVa = va();
+        long copyVa = toRefC(refVa);
+        ShapeSettingsRefC result = new ShapeSettingsRefC(copyVa, true);
+
+        return result;
+    }
     // *************************************************************************
     // Ref methods
 
@@ -123,4 +137,6 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
     native private static void free(long refVa);
 
     native private static long getPtr(long refVa);
+
+    native private static long toRefC(long refVa);
 }

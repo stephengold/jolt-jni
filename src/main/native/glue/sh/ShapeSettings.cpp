@@ -131,3 +131,17 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_toRef
     TRACE_NEW("Ref<ShapeSettings>", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeSettings
+ * Method:    toRefC
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_toRefC
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const ShapeSettings * const pSettings
+            = reinterpret_cast<ShapeSettings *> (settingsVa);
+    RefConst<ShapeSettings> * const pResult = new RefConst<ShapeSettings>(pSettings);
+    TRACE_NEW("RefConst<ShapeSettings>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}

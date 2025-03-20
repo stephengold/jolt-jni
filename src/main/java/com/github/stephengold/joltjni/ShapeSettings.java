@@ -165,6 +165,20 @@ abstract public class ShapeSettings
 
         return result;
     }
+
+    /**
+     * Create a counted reference to the native {@code ShapeSettings}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public ShapeSettingsRefC toRefC() {
+        long settingsVa = va();
+        long refVa = toRefC(settingsVa);
+        ShapeSettingsRefC result = new ShapeSettingsRefC(refVa, true);
+
+        return result;
+    }
     // *************************************************************************
     // RefTarget methods
 
@@ -220,4 +234,6 @@ abstract public class ShapeSettings
     native private static void setUserData(long settingsVa, long value);
 
     native private static long toRef(long settingsVa);
+
+    native private static long toRefC(long settingsVa);
 }
