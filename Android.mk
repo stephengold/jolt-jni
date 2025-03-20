@@ -220,6 +220,7 @@ $(N)/glue/sh/ShapeList.cpp \
 $(N)/glue/sh/ShapeRefC.cpp \
 $(N)/glue/sh/ShapeResult.cpp \
 $(N)/glue/sh/ShapeSettings.cpp \
+$(N)/glue/sh/ShapeSettingsRefC.cpp \
 $(N)/glue/sh/SharedMutexBase.cpp \
 $(N)/glue/s/ScaledShape.cpp \
 $(N)/glue/s/ScaledShapeSettings.cpp \
