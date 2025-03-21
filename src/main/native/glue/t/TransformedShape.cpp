@@ -164,6 +164,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_copy
             = reinterpret_cast<TransformedShape *> (transformedShapeVa);
     Float3 *pFloat3 = (Float3 *) pEnv->GetDirectBufferAddress(storeBuffer);
     JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong numFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(numFloats >= 9 * numTriangles);
     AllHitCollisionCollector<TransformedShapeCollector> collector;
     pShape->CollectTransformedShapes(AABox::sBiggest(), collector);
     for (const TransformedShape& transformedShape : collector.mHits) {
