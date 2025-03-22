@@ -62,28 +62,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_addStep
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
- * Method:    containsBody
- * Signature: (JJ)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_containsBody
-  (JNIEnv *, jclass, jlong systemVa, jlong idVa) {
-    const PhysicsSystem * const pSystem
-            = reinterpret_cast<PhysicsSystem *> (systemVa);
-    const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
-    const BodyID bodyID = *pId;
-    BodyIDVector vector;
-    pSystem->GetBodies(vector);
-    for (size_t i = 0; i < vector.size(); ++i) {
-        const BodyID id = vector[i];
-        if (id == bodyID) {
-            return JNI_TRUE;
-        }
-    }
-    return JNI_FALSE;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    containsConstraint
  * Signature: (JJ)Z
  */

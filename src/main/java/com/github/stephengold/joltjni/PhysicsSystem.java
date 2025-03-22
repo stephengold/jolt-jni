@@ -23,7 +23,6 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EStateRecorderState;
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstConstraint;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
@@ -198,21 +197,6 @@ public class PhysicsSystem extends NonCopyable {
         long systemVa = va();
         long rendererVa = renderer.va();
         drawConstraintReferenceFrame(systemVa, rendererVa);
-    }
-
-    /**
-     * Test whether the system contains the specified body. The system is
-     * unaffected.
-     *
-     * @param bodyId the ID of the body to search for (not null, unaffected)
-     * @return {@code true} if found, otherwise {@code false}
-     */
-    public boolean containsBody(ConstBodyId bodyId) {
-        long systemVa = va();
-        long idVa = bodyId.targetVa();
-        boolean result = containsBody(systemVa, idVa);
-
-        return result;
     }
 
     /**
@@ -823,8 +807,6 @@ public class PhysicsSystem extends NonCopyable {
     native private static void addConstraint(long systemVa, long constraintVa);
 
     native private static void addStepListener(long systemVa, long listenerVa);
-
-    native private static boolean containsBody(long systemVa, long bodyVa);
 
     native private static boolean containsConstraint(
             long systemVa, long constraintVa);
