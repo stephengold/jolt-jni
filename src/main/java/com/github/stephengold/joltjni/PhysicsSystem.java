@@ -596,6 +596,30 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Remove all bodies from the system.
+     *
+     * @return the number of bodies removed (&ge;0)
+     */
+    public int removeAllBodies() {
+        long systemVa = va();
+        int result = removeAllBodies(systemVa);
+
+        return result;
+    }
+
+    /**
+     * Remove all constraints from the system.
+     *
+     * @return the number of constraints removed (&ge;0)
+     */
+    public int removeAllConstraints() {
+        long systemVa = va();
+        int result = removeAllConstraints(systemVa);
+
+        return result;
+    }
+
+    /**
      * Remove the specified constraint from the system.
      *
      * @param constraint the constraint to remove (not null)
@@ -875,6 +899,10 @@ public class PhysicsSystem extends NonCopyable {
             long mapVa, long ovbFilterVa, long ovoFilterVa);
 
     native private static void optimizeBroadPhase(long systemVa);
+
+    native private static int removeAllBodies(long systemVa);
+
+    native private static int removeAllConstraints(long systemVa);
 
     native private static void removeConstraint(
             long systemVa, long constraintVa);

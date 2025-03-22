@@ -504,6 +504,48 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_optimiz
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    removeAllBodies
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_removeAllBodies
+  (JNIEnv *, jclass, jlong systemVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    BodyIDVector vector;
+    pSystem->GetBodies(vector);
+    BodyInterface& bi = pSystem->GetBodyInterface();
+    const int numBodies = vector.size();
+    jint result = 0;
+    for (int i = 0; i < numBodies; ++i) {
+        const BodyID id = vector[i];
+        if (bi.IsAdded(id)) {
+            bi.RemoveBody(id);
+            ++result;
+        }
+    }
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    removeAllConstraints
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_removeAllConstraints
+  (JNIEnv *, jclass, jlong systemVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const Array<Ref<Constraint>>& refArray = pSystem->GetConstraints();
+    const int numConstraints = refArray.size();
+    for (int i = 0; i < numConstraints; ++i) {
+        Constraint * pConstraint = refArray[i].GetPtr();
+        pSystem->RemoveConstraint(pConstraint);
+    }
+    return numConstraints;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    removeConstraint
  * Signature: (JJ)V
  */
