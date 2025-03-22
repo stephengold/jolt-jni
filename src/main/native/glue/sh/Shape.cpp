@@ -54,16 +54,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_copyDebugTriang
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
     JPH_ASSERT(!pEnv->ExceptionCheck());
     JPH_ASSERT(capacityFloats >= 9 * numTriangles);
+    const AABox bounds(AABox::sBiggest());
     AllHitCollisionCollector<TransformedShapeCollector> collector;
-    pShape->CollectTransformedShapes(AABox::sBiggest(),
-            Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f),
+    pShape->CollectTransformedShapes(
+            bounds, Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f),
             SubShapeIDCreator(), collector, ShapeFilter());
     for (const TransformedShape& transformedShape : collector.mHits) {
         const Shape * const pSh = transformedShape.mShape;
         Shape::GetTrianglesContext context;
-        pSh->GetTrianglesStart(context, AABox::sBiggest(),
-            transformedShape.mShapePositionCOM, transformedShape.mShapeRotation,
-            Vec3(transformedShape.mShapeScale));
+        const Vec3 location(transformedShape.mShapePositionCOM);
+        const Vec3 scale(transformedShape.mShapeScale);
+        pSh->GetTrianglesStart(
+            context, bounds, location, transformedShape.mShapeRotation, scale);
         while (numTriangles > 0) {
             const int maxRequest = std::max((int)numTriangles,
                     Shape::cGetTrianglesMinTrianglesRequested);
@@ -88,16 +90,18 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
   (JNIEnv *, jclass, jlong shapeVa) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
     uint result = 0;
+    const AABox bounds(AABox::sBiggest());
     AllHitCollisionCollector<TransformedShapeCollector> collector;
-    pShape->CollectTransformedShapes(AABox::sBiggest(),
-            Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f),
+    pShape->CollectTransformedShapes(
+            bounds, Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f),
             SubShapeIDCreator(), collector, ShapeFilter());
     for (const TransformedShape &transformedShape : collector.mHits) {
         const Shape * const pSh = transformedShape.mShape;
         Shape::GetTrianglesContext context;
-        pSh->GetTrianglesStart(context, AABox::sBiggest(),
-            transformedShape.mShapePositionCOM, transformedShape.mShapeRotation,
-            Vec3(transformedShape.mShapeScale));
+        const Vec3 location(transformedShape.mShapePositionCOM);
+        const Vec3 scale(transformedShape.mShapeScale);
+        pSh->GetTrianglesStart(
+            context, bounds, location, transformedShape.mShapeRotation, scale);
         for (;;) {
             constexpr uint cMaxTriangles = 1000;
             Float3 vertices[3 * cMaxTriangles];

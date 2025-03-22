@@ -167,14 +167,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_copy
     const jlong numFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
     JPH_ASSERT(!pEnv->ExceptionCheck());
     JPH_ASSERT(numFloats >= 9 * numTriangles);
+    const AABox box(AABox::sBiggest());
     AllHitCollisionCollector<TransformedShapeCollector> collector;
-    pShape->CollectTransformedShapes(AABox::sBiggest(), collector);
+    pShape->CollectTransformedShapes(box, collector);
     for (const TransformedShape& transformedShape : collector.mHits) {
         const Shape * const pSh = transformedShape.mShape;
         Shape::GetTrianglesContext context;
-        pSh->GetTrianglesStart(context, AABox::sBiggest(),
-            transformedShape.mShapePositionCOM, transformedShape.mShapeRotation,
-            Vec3(transformedShape.mShapeScale));
+        const Vec3 location(transformedShape.mShapePositionCOM);
+        const Vec3 scale(transformedShape.mShapeScale);
+        pSh->GetTrianglesStart(
+            context, box, location, transformedShape.mShapeRotation, scale);
         while (numTriangles > 0) {
             const int maxRequest = std::max((int)numTriangles,
                     Shape::cGetTrianglesMinTrianglesRequested);
@@ -200,16 +202,18 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_TransformedShape_coun
     const TransformedShape * const pShape
             = reinterpret_cast<TransformedShape *> (transformedShapeVa);
     uint result = 0;
+    const AABox bounds(AABox::sBiggest());
     AllHitCollisionCollector<TransformedShapeCollector> collector;
-    pShape->CollectTransformedShapes(AABox::sBiggest(), collector);
+    pShape->CollectTransformedShapes(bounds, collector);
     for (const TransformedShape &transformedShape : collector.mHits) {
         const Shape * const pSh = transformedShape.mShape;
         Shape::GetTrianglesContext context;
-        pSh->GetTrianglesStart(context, AABox::sBiggest(),
-            transformedShape.mShapePositionCOM, transformedShape.mShapeRotation,
-            Vec3(transformedShape.mShapeScale));
+        const Vec3 location(transformedShape.mShapePositionCOM);
+        const Vec3 scale(transformedShape.mShapeScale);
+        pSh->GetTrianglesStart(
+            context, bounds, location, transformedShape.mShapeRotation, scale);
         for (;;) {
-            constexpr uint cMaxTriangles = 100;
+            constexpr uint cMaxTriangles = 1000;
             Float3 vertices[3 * cMaxTriangles];
             const int numTrianglesCopied
                     = pSh->GetTrianglesNext(context, cMaxTriangles, vertices);
