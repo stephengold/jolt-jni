@@ -730,6 +730,21 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Alter the system's gravity vector.
      *
+     * @param x the X component of the desired acceleration vector (in system
+     * coordinates)
+     * @param y the Y component of the desired acceleration vector (in system
+     * coordinates)
+     * @param z the Z component of the desired acceleration vector (in system
+     * coordinates)
+     */
+    public void setGravity(float x, float y, float z) {
+        long systemVa = va();
+        setGravity(systemVa, x, y, z);
+    }
+
+    /**
+     * Alter the system's gravity vector.
+     *
      * @param gravity the desired acceleration vector (in system coordinates,
      * not null, unaffected)
      */
