@@ -78,7 +78,6 @@ public class Test001 {
      */
     final private static class TestBodyActivationListener
             extends CustomBodyActivationListener {
-
         /**
          * Callback invoked (by native code) each time a body is activated.
          *
@@ -107,7 +106,6 @@ public class Test001 {
      */
     final private static class TestContactListener
             extends CustomContactListener {
-
         /**
          * Callback invoked (by native code) each time a new contact point is
          * detected.

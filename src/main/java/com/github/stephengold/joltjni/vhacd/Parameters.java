@@ -411,7 +411,6 @@ public class Parameters extends JoltPhysicsObject {
                 getMaxNumVerticesPerCh(), getMaxRecursionDepth(),
                 getMinEdgeLength(), getMinimumVolumePercentErrorAllowed(),
                 getResolution(), getShrinkWrap(), isDebugOutputEnabled());
-
         return hash;
     }
 
