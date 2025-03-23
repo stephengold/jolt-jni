@@ -27,7 +27,7 @@ import com.github.stephengold.joltjni.JoltPhysicsObject;
  * Generate uniformly distributed {@code int} values. (native type:
  * {@code std::uniform_int_distribution<int>})
  * <p>
- * The algorithm isn't specific to Jolt Physics; it's included in jolt-jni for
+ * The algorithm isn't specific to Jolt Physics. It's included in Jolt JNI for
  * expediency, since BroadPhaseInsertionTest.cpp uses it.
  *
  * @author Stephen Gold sgold@sonic.net

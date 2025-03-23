@@ -27,8 +27,8 @@ import com.github.stephengold.joltjni.JoltPhysicsObject;
  * Generate a pseudo-random sequence of integers using a 32-bit Mersenne
  * Twister. (native type: std::mt19937)
  * <p>
- * The algorithm isn't specific to Jolt Physics; it's included in jolt-jni for
- * expediency, since RagdollScene.h uses it.
+ * The algorithm isn't specific to Jolt Physics. It's included in Jolt JNI for
+ * expediency, since MutableCompoundShapeTest.h uses it.
  *
  * @author Stephen Gold sgold@sonic.net
  */

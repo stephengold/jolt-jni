@@ -253,7 +253,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Create an identity matrix.
      *
-     * @return a new instance
+     * @return a new matrix
      */
     public static RMat44 sIdentity() {
         long matrixVa = createIdentity();
@@ -305,7 +305,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Create a uniform scaling matrix.
      *
      * @param factor the amount to scale each axis
-     * @return a new instance
+     * @return a new matrix
      */
     public static RMat44 sScale(float factor) {
         long matrixVa = createScale(factor, factor, factor);
@@ -318,7 +318,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Create a pure scaling matrix.
      *
      * @param factors the amount to scale each axis (not null, unaffected)
-     * @return a new instance
+     * @return a new matrix
      */
     public static RMat44 sScale(Vec3Arg factors) {
         float x = factors.getX();
@@ -334,7 +334,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Create a pure translation matrix.
      *
      * @param offset the amount to translate (not null, unaffected)
-     * @return a new instance
+     * @return a new matrix
      */
     public static RMat44 sTranslation(RVec3Arg offset) {
         double xx = offset.xx();
@@ -349,7 +349,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Create an all-zero matrix.
      *
-     * @return a new instance
+     * @return a new matrix
      */
     public static RMat44 sZero() {
         long matrixVa = createZero();

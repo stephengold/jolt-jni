@@ -27,7 +27,7 @@ import com.github.stephengold.joltjni.JoltPhysicsObject;
  * Generate a pseudo-random sequence of integers for casual use. (native type:
  * std::default_random_engine)
  * <p>
- * The algorithm isn't specific to Jolt Physics; it's included in jolt-jni for
+ * The algorithm isn't specific to Jolt Physics. It's included in Jolt JNI for
  * expediency, since BroadPhaseTest.cpp uses it.
  *
  * @author Stephen Gold sgold@sonic.net

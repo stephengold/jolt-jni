@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -50,7 +50,7 @@ import org.junit.Test;
 import testjoltjni.TestUtils;
 
 /**
- * Automated JUnit4 tests for jolt-jni.
+ * An automated JUnit4 test based on ConvexVsMeshScene.
  * <p>
  * Derived from PerformanceTest/ConvexVsMeshScene.h by Jorrit Rouwe.
  *
@@ -73,8 +73,6 @@ public class Test002 {
 
     /**
      * Drop 1,764 convex shapes onto a static mesh shape.
-     * <p>
-     * Derived from PerformanceTest/ConvexVsMeshScene.h by Jorrit Rouwe.
      */
     @Test
     public void test002() {

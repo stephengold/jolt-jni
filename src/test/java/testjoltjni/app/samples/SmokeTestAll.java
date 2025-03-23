@@ -96,7 +96,7 @@ final public class SmokeTestAll {
      * configuration.
      *
      * @param maxBodies the desired number of bodies (&ge;1)
-     * @return a new instance
+     * @return a new system
      */
     static private PhysicsSystem newPhysicsSystem(int maxBodies) {
         BPLayerInterfaceImpl mapObj2Bp = new BPLayerInterfaceImpl();

@@ -188,7 +188,7 @@ public class MotionProperties extends JoltPhysicsObject {
      * Return the rotation that takes the inverse-inertia diagonal to local
      * coordinates. The properties are unaffected.
      *
-     * @return a new instance
+     * @return a new object
      */
     public Quat getInertiaRotation() {
         long propertiesVa = va();

@@ -51,7 +51,7 @@ import oshi.hardware.CentralProcessor;
 import oshi.hardware.HardwareAbstractionLayer;
 
 /**
- * Utility methods for automated testing of jolt-jni libraries.
+ * Utility methods for automated testing of Jolt JNI.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -362,12 +362,13 @@ final public class TestUtils {
     }
 
     /**
-     * Load a specific jolt-jni native library from the filesystem, using the
-     * OSHI and jSnapLoader libraries to identify the current platform.
+     * Load a specific Jolt-JNI desktop native library from the filesystem,
+     * using the OSHI and jSnapLoader libraries to identify the current
+     * platform.
      * <p>
      * This method assumes native libraries are stored in specific locations
      * under a "./build/libs/joltjni/shared" directory. While this is true in
-     * the jolt-jni build environment, it is unlikely to be true for a
+     * the Jolt-JNI build environment, it is unlikely to be true for a
      * standalone application.
      *
      * @param buildType "Debug" or "Release"
@@ -510,7 +511,7 @@ final public class TestUtils {
      * configuration.
      *
      * @param maxBodies the desired number of bodies (&ge;1)
-     * @return a new instance
+     * @return a new system
      */
     static public PhysicsSystem newPhysicsSystem(int maxBodies) {
         // broadphase layers:

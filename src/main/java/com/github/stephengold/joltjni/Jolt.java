@@ -115,7 +115,8 @@ final public class Jolt {
     native public static float aTan2(float opposite, float adjacent);
 
     /**
-     * Return the jolt-jni build-type string.
+     * Return the Jolt-JNI build-type string that's hard-coded in the native
+     * library.
      *
      * @return either "Debug" or "Release"
      */
@@ -584,7 +585,8 @@ final public class Jolt {
     native public static void unregisterTypes();
 
     /**
-     * Return the jolt-jni version string.
+     * Return the Jolt-JNI version string that's hard-coded in the native
+     * library.
      *
      * @return the version string (not null, not empty)
      */

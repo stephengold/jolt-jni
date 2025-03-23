@@ -268,7 +268,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Create an identity matrix.
      *
-     * @return a new instance
+     * @return a new matrix
      */
     public static Mat44 sIdentity() {
         long matrixVa = createIdentity();
@@ -281,7 +281,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Create a rotation matrix from the specified quaternion.
      *
      * @param rotation the rotation quaternion to use (not null, unaffected)
-     * @return a new object
+     * @return a new matrix
      */
     public static Mat44 sRotation(QuatArg rotation) {
         float rw = rotation.getW();
@@ -299,7 +299,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      *
      * @param axis the rotation axis (not null, unaffected)
      * @param angle the desired rotation angle (in radians)
-     * @return a new instance
+     * @return a new matrix
      */
     public static Mat44 sRotation(Vec3Arg axis, float angle) {
         float ax = axis.getX();
@@ -316,7 +316,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      *
      * @param rotation the amount to rotate (not null, unaffected)
      * @param offset the amount to translate (not null, unaffected)
-     * @return a new object
+     * @return a new matrix
      */
     public static Mat44 sRotationTranslation(QuatArg rotation, Vec3Arg offset) {
         float[] floatArray = new float[7];
@@ -337,7 +337,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Create a matrix for the specified X-axis rotation.
      *
      * @param angle the rotation angle (in radians)
-     * @return a new instance
+     * @return a new matrix
      */
     public static Mat44 sRotationX(float angle) {
         long matrixVa = createRotationX(angle);
@@ -350,7 +350,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Create a matrix for the specified Y-axis rotation.
      *
      * @param angle the rotation angle (in radians)
-     * @return a new instance
+     * @return a new matrix
      */
     public static Mat44 sRotationY(float angle) {
         long matrixVa = createRotationY(angle);
@@ -363,7 +363,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Create a matrix for the specified Z-axis rotation.
      *
      * @param angle the rotation angle (in radians)
-     * @return a new instance
+     * @return a new matrix
      */
     public static Mat44 sRotationZ(float angle) {
         long matrixVa = createRotationZ(angle);
@@ -376,7 +376,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Create a uniform scaling matrix.
      *
      * @param factor the amount to scale each axis
-     * @return a new instance
+     * @return a new matrix
      */
     public static Mat44 sScale(float factor) {
         long matrixVa = createScale(factor, factor, factor);
@@ -389,7 +389,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Create a pure scaling matrix.
      *
      * @param factors the amount to scale each axis (not null, unaffected)
-     * @return a new instance
+     * @return a new matrix
      */
     public static Mat44 sScale(Float3 factors) {
         float sx = factors.x;
@@ -405,7 +405,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Create a pure scaling matrix.
      *
      * @param factors the amount to scale each axis (not null, unaffected)
-     * @return a new instance
+     * @return a new matrix
      */
     public static Mat44 sScale(Vec3Arg factors) {
         float sx = factors.getX();
@@ -421,7 +421,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Create a pure translation matrix.
      *
      * @param offset the amount to translate (not null, unaffected)
-     * @return a new instance
+     * @return a new matrix
      */
     public static Mat44 sTranslation(Vec3Arg offset) {
         float x = offset.getX();
@@ -436,7 +436,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Create an all-zero matrix.
      *
-     * @return a new instance
+     * @return a new matrix
      */
     public static Mat44 sZero() {
         long matrixVa = createZero();

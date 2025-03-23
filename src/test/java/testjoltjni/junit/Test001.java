@@ -63,7 +63,7 @@ import org.junit.Test;
 import testjoltjni.TestUtils;
 
 /**
- * Automated JUnit4 tests for jolt-jni.
+ * An automated JUnit4 test based on HelloWorld.
  * <p>
  * Derived from HelloWorld.cpp by Jorrit Rouwe.
  *
@@ -207,8 +207,6 @@ public class Test001 {
 
     /**
      * Drop a dynamic spherical ball onto a static box.
-     * <p>
-     * Derived from HelloWorld.cpp by Jorrit Rouwe.
      */
     @Test
     public void test001() {

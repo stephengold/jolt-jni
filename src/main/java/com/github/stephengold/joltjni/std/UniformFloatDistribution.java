@@ -1,5 +1,5 @@
 /*
-Copyright (c) 20242-2025 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,8 +27,8 @@ import com.github.stephengold.joltjni.JoltPhysicsObject;
  * Generate uniformly distributed {@code float} values. (native type:
  * {@code std::uniform_real_distribution<float>})
  * <p>
- * The algorithm isn't specific to Jolt Physics; it's included in jolt-jni for
- * expediency, since RagdollScene.h uses it.
+ * The algorithm isn't specific to Jolt Physics. It's included in Jolt JNI for
+ * expediency, since BroadPhaseInsertionTest.cpp uses it.
  *
  * @author Stephen Gold sgold@sonic.net
  */
