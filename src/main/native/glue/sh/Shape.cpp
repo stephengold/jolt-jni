@@ -440,17 +440,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_setEmbedded
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
- * Method:    setUserData
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_setUserData
-  (JNIEnv *, jclass, jlong shapeVa, jlong value) {
-    Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    pShape->SetUserData(value);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Shape
  * Method:    sRestoreFromBinaryState
  * Signature: (J)J
  */

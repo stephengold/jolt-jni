@@ -138,16 +138,6 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Alter the shape's user data.
-     *
-     * @param value the desired value (default=0)
-     */
-    public void setUserData(long value) {
-        long shapeVa = va();
-        setUserData(shapeVa, value);
-    }
-
-    /**
      * Recreate a shape from the specified stream.
      *
      * @param stream the stream to read (not null)
@@ -399,20 +389,6 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Return the shape's user data: can be used for anything. The shape is
-     * unaffected.
-     *
-     * @return the value
-     */
-    @Override
-    public long getUserData() {
-        long shapeVa = va();
-        long result = getUserData(shapeVa);
-
-        return result;
-    }
-
-    /**
      * Return the bounding box including convex radius. The shape is unaffected.
      *
      * @param comTransform the center-of-mass transform to apply to the shape
@@ -631,8 +607,6 @@ abstract public class Shape extends NonCopyable
     native static void saveBinaryState(long sceneVa, long streamVa);
 
     native private static void setEmbedded(long shapeVa);
-
-    native static void setUserData(long shapeVa, long value);
 
     native private static long sRestoreFromBinaryState(long streamVa);
 

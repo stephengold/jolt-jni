@@ -169,14 +169,6 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     EShapeType getType();
 
     /**
-     * Return the shape's user data: can be used for anything. The shape is
-     * unaffected.
-     *
-     * @return the value
-     */
-    long getUserData();
-
-    /**
      * Return the bounding box including convex radius. The shape is unaffected.
      *
      * @param comTransform the center-of-mass transform to apply to the shape
