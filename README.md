@@ -65,7 +65,7 @@ They also provide 32 native libraries,
 each specific to a particular platform, build type, and build flavor.
 
 Your runtime classpath should include
-a JVM library plus 1-to-6 native libraries:
+a JVM library plus 1-to-8 native libraries:
 a native library for each platform on which the code will run.
 
 Build types:  use "Debug" native libraries for development and troubleshooting,
