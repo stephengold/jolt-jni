@@ -532,19 +532,6 @@ public class BodyCreationSettings
     }
 
     /**
-     * Replace the shape.
-     *
-     * @param shapeRef a reference to the desired shape (not null)
-     * @return the modified settings, for chaining
-     */
-    public BodyCreationSettings setShape(ShapeRefC shapeRef) {
-        ConstShape shape = shapeRef.getPtr();
-        setShape(shape);
-
-        return this;
-    }
-
-    /**
      * Replace the shape settings.
      *
      * @param shapeSettings the desired shape settings (not null)
