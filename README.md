@@ -1,6 +1,6 @@
-# jolt-jni
+# Jolt JNI
 
-[The Jolt-jni Project][project] provides
+[The Jolt-JNI Project][project] provides
 [JVM] bindings for [Jolt Physics][jolt]
 and [Khaled Mamou's V-HACD Library][vhacd],
 to facilitate physics simulation in JVM languages such as [Java] and [Kotlin].
@@ -14,10 +14,10 @@ Source code (in Java and C++) is provided under
 ## Contents of this document
 
 + [Translating Jolt Physics applications into Java](#translate)
-+ [How to add jolt-jni to an existing desktop project](#add)
-+ [How to add jolt-jni to an existing Android project](#addAndroid)
-+ [How to build jolt-jni from source](#build)
-+ [Initializing jolt-jni](#init)
++ [How to add Jolt JNI to an existing desktop project](#add)
++ [How to add Jolt JNI to an existing Android project](#addAndroid)
++ [How to build Jolt JNI from source](#build)
++ [Initializing Jolt JNI](#init)
 + [Freeing native objects](#free)
 + [External links](#links)
 + [Acknowledgments](#acks)
@@ -28,22 +28,22 @@ Source code (in Java and C++) is provided under
 ## Translating Jolt Physics applications into Java
 
 There’s close correspondence between the class/method names
-of Jolt Physics and jolt-jni.
+of Jolt Physics and Jolt JNI.
 For example:
 
-+ The `Body` class in jolt-jni will (eventually) provide
++ The `Body` class in Jolt JNI will (eventually) provide
   all the functionality of the `Body` class in Jolt Physics.
 + The `ConstBody` interface will include all the `const` methods
   of the Jolt Physics `Body` class, such as its `GetPosition()` method,
-  which in jolt-jni is called `getPosition()`.
+  which in Jolt JNI is called `getPosition()`.
 
 Things become slightly more interesting when C++ templates
 and public member data are involved. For instance:
 
 + An array of body IDs is `Array<BodyID>` in Jolt Physics;
-  in jolt-jni it’s called a `BodyIdVector`.
+  in Jolt JNI it’s called a `BodyIdVector`.
 + The `mConvexRadius` member of the Jolt Physics `BoxShapeSettings` class
-  is accessed using `getConvexRadius()` and `setConvexRadius()` in jolt-jni.
+  is accessed using `getConvexRadius()` and `setConvexRadius()` in Jolt JNI.
 
 For a couple well-known Jolt Physics examples,
 [line-for-line translations into Java](https://github.com/stephengold/jolt-jni/tree/master/src/test/java/testjoltjni/app)
@@ -54,12 +54,12 @@ are provided.
 
 <a name="add"></a>
 
-## How to add jolt-jni to an existing desktop project
+## How to add Jolt JNI to an existing desktop project
 
-Desktop jolt-jni comes pre-built as a platform-independent JVM library
+Desktop Jolt JNI comes pre-built as a platform-independent JVM library
 plus a set of native libraries, all downloadable from Maven Central.
 
-Current jolt-jni releases provide
+Current Jolt-JNI releases provide
 the JVM library under 8 distinct names (artifact IDs).
 They also provide 32 native libraries,
 each specific to a particular platform, build type, and build flavor.
@@ -102,9 +102,9 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
 
 <a name="addAndroid"></a>
 
-## How to add jolt-jni to an existing Android project
+## How to add Jolt JNI to an existing Android project
 
-Android jolt-jni comes pre-built as a pair of multi-platform libraries,
+Android Jolt JNI comes pre-built as a pair of multi-platform libraries,
 one for each build type.
 (The only build flavor provided is "Sp".)
 Both libraries are downloadable from Maven Central
@@ -131,7 +131,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
 
 <a name="build"></a>
 
-## How to build jolt-jni from source
+## How to build Jolt JNI from source
 
 ### Initial build
 
@@ -148,7 +148,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
   + using [Fish]: `set -g JAVA_HOME "` *path to installation* `"`
   + using Windows Command Prompt: `set JAVA_HOME="` *path to installation* `"`
   + using PowerShell: `$env:JAVA_HOME = '` *path to installation* `'`
-3. Download and extract the jolt-jni source code from GitHub:
+3. Download and extract the Jolt-JNI source code from GitHub:
   + using [Git]:
     + `git clone https://github.com/stephengold/jolt-jni.git`
     + `cd jolt-jni`
@@ -206,7 +206,7 @@ You can restore the project to a pristine state:
 
 <a name="init"></a>
 
-## Initializing jolt-jni
+## Initializing Jolt JNI
 
 Before simulating physics, much initialization and configuration is required:
 
@@ -230,7 +230,7 @@ Until it is published, initialization procedures can be learned by example:
 
 However, the first step (extract and load a native library) is different
 for a standalone app that doesn't have the files already extracted
-(as the jolt-jni tests do).
+(as the Jolt-JNI tests do).
 
 In an Android app, one can simply invoke `System.loadLibrary("joltjni")`.
 
@@ -256,7 +256,7 @@ Here's a code fragment to get you started:
     try {
         loader.loadLibrary(LoadingCriterion.CLEAN_EXTRACTION);
     } catch (Exception e) {
-        throw new IllegalStateException("Failed to load the joltjni library!");
+        throw new IllegalStateException("Failed to load a Jolt-JNI native library!");
     }
 
 [Jump to the table of contents](#toc)
@@ -271,20 +271,20 @@ it's important to free objects that are no longer in use,
 lest the app run out of memory.
 
 Here it's important to distinguish between JVM objects and native objects.
-A handful jolt-jni classes are implemented entirely in Java, notably:
+A handful Jolt-JNI classes are implemented entirely in Java, notably:
 `Color`, `Float3`, `Plane`, `Quat`, `RVec3`, `UVec4`, `Vec3`, and `Vec4`.
 Apart from these special classes,
-every JVM object in jolt-jni is an instance of `JoltPhysicsObject`,
+every JVM object in Jolt JNI is an instance of `JoltPhysicsObject`,
 which implies it has a corresponding native object assigned to it.
 
-For instance, when a jolt-jni app instantiates a matrix using `new Mat44()`,
+For instance, when a Jolt-JNI app instantiates a matrix using `new Mat44()`,
 both a JVM object and a native object are created.
 The app can't access the native object directly;
 it can only invoke methods exposed by the JVM object.
 
 While JVM objects get reclaimed automatically
 (in batches, by a garbage collector) after they become unreachable,
-jolt-jni provides several mechanisms for reclaiming native objects.
+Jolt JNI provides several mechanisms for reclaiming native objects.
 
 In the simple case of a matrix instantiated using `matrix = new Mat44()`,
 the native object can be freed:
@@ -297,7 +297,7 @@ the native object can be freed:
 
 In native code, convention dictates that when a class allocates memory,
 it assumes responsibility for freeing it.
-For this reason, jolt-jni applications cannot free objects created
+For this reason, Jolt-JNI applications cannot directly free objects created
 implicitly by Jolt Physics.
 
 For instance, when an app invokes `getBodyLockInterface()` on a `PhysicsSystem`,
@@ -313,7 +313,7 @@ Another case where a `JoltPhysicsObject` doesn't own its assigned native object
 is when the object implements reference counting.
 In this case, responsibility for freeing the native object (called the "target")
 is shared among other objects (called "references") that refer to it.
-Jolt-jni classes that implement reference counting
+Jolt-JNI classes that implement reference counting
 are exactly those that implement the `RefTarget` interface.
 They include `BaseCharacter`, `Constraint`, `ConstraintSettings`,
 `GroupFilter`, `PhysicsMaterial`, `PhysicsScene`, `Ragdoll`, `Shape`,
@@ -323,7 +323,7 @@ because the JVM object doesn't own its assigned native object.
 
 The simplest way to create a reference is to invoke `target.toRef()`.
 References are themselves instances of `JoltPhysicsObject`, of course.
-(And please note that jolt-jni reference counting is completely orthogonal
+(And please note that Jolt-JNI reference counting is completely orthogonal
 to Java references, strong, weak, or otherwise.)
 
 The only way to free the assigned native object of a `RefTarget`
@@ -353,7 +353,7 @@ by invoking `target.setEmbedded()`.
 
 ## Acknowledgments
 
-The jolt-jni Project is derived from open-source software:
+The Jolt-JNI Project is derived from open-source software:
 
   + the [Jolt Physics][jolt] project
   + [Khaled Mamou's V-HACD Library][vhacd] for approximate convex decomposition
@@ -407,15 +407,15 @@ correct the situation: sgold@sonic.net
 [jolt]: https://jrouwe.github.io/JoltPhysics "Jolt Physics project"
 [jvm]: https://en.wikipedia.org/wiki/Java_virtual_machine "Java Virtual Machine"
 [kotlin]: https://en.wikipedia.org/wiki/Kotlin_(programming_language) "Kotlin programming language"
-[latest]: https://github.com/stephengold/jolt-jni/releases/latest "latest jolt-jni release"
-[license]: https://github.com/stephengold/jolt-jni/blob/master/LICENSE "jolt-jni license"
+[latest]: https://github.com/stephengold/jolt-jni/releases/latest "latest Jolt-JNI release"
+[license]: https://github.com/stephengold/jolt-jni/blob/master/LICENSE "Jolt-JNI license"
 [llvm]: https://www.llvm.org "LLVM Compiler"
 [macstadium]: https://www.macstadium.com/ "MacStadium"
 [markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
 [meld]: https://meldmerge.org "Meld merge tool"
 [mint]: https://linuxmint.com "Linux Mint Project"
 [netbeans]: https://netbeans.org "NetBeans Project"
-[project]: https://github.com/stephengold/jolt-jni "Jolt-jni Project"
+[project]: https://github.com/stephengold/jolt-jni "Jolt-JNI Project"
 [sonatype]: https://www.sonatype.com "Sonatype"
 [studio]: https://developer.android.com/studio "Android Studio IDE"
 [travis]: https://travis-ci.com "Travis CI"
