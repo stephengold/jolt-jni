@@ -306,7 +306,7 @@ dependencies {
     testImplementation(libs.jsnaploader) // to identify the OS and CPU
     testImplementation(libs.junit4)      // framework for automated testing
     testImplementation(libs.log4j.impl)
-    testImplementation(libs.oshi)        // used by jSnapLoader
+    testImplementation(libs.oshi.core)   // used by jSnapLoader
 }
 
 java {
