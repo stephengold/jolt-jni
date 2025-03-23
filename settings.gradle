@@ -1,4 +1,4 @@
-// global build settings for the jolt-jni project
+// global build settings for the Jolt-JNI Project
 
 pluginManagement {
     repositories {

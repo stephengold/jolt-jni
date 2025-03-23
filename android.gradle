@@ -1,4 +1,4 @@
-// Gradle script to build/publish jolt-jni Android artifacts
+// Gradle script to build/publish Jolt-JNI Android artifacts
 
 import com.github.stephengold.build.BuildSrc
 
