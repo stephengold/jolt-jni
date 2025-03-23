@@ -158,4 +158,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_setH
             = reinterpret_cast<TempAllocator *> (allocatorVa);
     pShape->SetHeights(startX, startY, sizeX, sizeY, pHeightArray, stride,
             *pAllocator, cosThresholdAngle);
+    uint64 revisionCount = pShape->GetUserData();
+    ++revisionCount;
+    pShape->SetUserData(revisionCount);
 }

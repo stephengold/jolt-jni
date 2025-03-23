@@ -46,6 +46,9 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_
             = reinterpret_cast<ShapeRefC *> (shapeRefVa);
     const Shape * const pSubShape = pSubShapeRef->GetPtr();
     const uint result = pCompound->AddShape(offset, rotation, pSubShape);
+    uint64 revisionCount = pCompound->GetUserData();
+    ++revisionCount;
+    pCompound->SetUserData(revisionCount);
     return result;
 }
 
@@ -59,6 +62,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_
     MutableCompoundShape * const pCompound
             = reinterpret_cast<MutableCompoundShape *> (shapeVa);
     pCompound->AdjustCenterOfMass();
+    uint64 revisionCount = pCompound->GetUserData();
+    ++revisionCount;
+    pCompound->SetUserData(revisionCount);
 }
 
 /*
@@ -91,6 +97,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_
     JPH_ASSERT(!pEnv->ExceptionCheck());
     pCompound->ModifyShapes(startIndex, numSubShapes, pOffsets, pRotations,
             offsetStride, rotationStride);
+    uint64 revisionCount = pCompound->GetUserData();
+    ++revisionCount;
+    pCompound->SetUserData(revisionCount);
 }
 
 /*
@@ -103,4 +112,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_
     MutableCompoundShape * const pCompound
             = reinterpret_cast<MutableCompoundShape *> (shapeVa);
     pCompound->RemoveShape(index);
+    uint64 revisionCount = pCompound->GetUserData();
+    ++revisionCount;
+    pCompound->SetUserData(revisionCount);
 }

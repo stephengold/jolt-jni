@@ -140,6 +140,14 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     ConstPhysicsMaterial getMaterial(ConstSubShapeId id);
 
     /**
+     * Return the shape's revision count, which is automatically incremented
+     * each time the shape is altered. The shape is unaffected.
+     *
+     * @return the count
+     */
+    long getRevisionCount();
+
+    /**
      * Copy the statistics. The shape is unaffected.
      *
      * @return a new object

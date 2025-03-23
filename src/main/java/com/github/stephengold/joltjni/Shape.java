@@ -333,6 +333,20 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
+     * Return the shape's revision count, which is automatically incremented
+     * each time the shape is altered. The shape is unaffected.
+     *
+     * @return the count
+     */
+    @Override
+    public long getRevisionCount() {
+        long shapeVa = va();
+        long result = getUserData(shapeVa);
+
+        return result;
+    }
+
+    /**
      * Copy the statistics. The shape is unaffected.
      *
      * @return a new object

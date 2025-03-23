@@ -259,6 +259,20 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     }
 
     /**
+     * Return the shape's revision count, which is automatically incremented
+     * each time the shape is altered. The shape is unaffected.
+     *
+     * @return the count
+     */
+    @Override
+    public long getRevisionCount() {
+        long shapeVa = targetVa();
+        long result = Shape.getUserData(shapeVa);
+
+        return result;
+    }
+
+    /**
      * Copy the statistics. The shape is unaffected.
      *
      * @return a new object
