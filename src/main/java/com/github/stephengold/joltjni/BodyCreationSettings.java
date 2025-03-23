@@ -161,10 +161,13 @@ public class BodyCreationSettings
      *
      * @param setting {@code true} to allow or {@code false} to inhibit
      * (default=false)
+     * @return the modified settings, for chaining
      */
-    public void setAllowDynamicOrKinematic(boolean setting) {
+    public BodyCreationSettings setAllowDynamicOrKinematic(boolean setting) {
         long bodySettingsVa = va();
         setAllowDynamicOrKinematic(bodySettingsVa, setting);
+
+        return this;
     }
 
     /**
@@ -172,10 +175,13 @@ public class BodyCreationSettings
      *
      * @param bitmask the desired bitmask (see {@code EAllowedDofs} for
      * semantics)
+     * @return the modified settings, for chaining
      */
-    public void setAllowedDofs(int bitmask) {
+    public BodyCreationSettings setAllowedDofs(int bitmask) {
         long bodySettingsVa = va();
         setAllowedDofs(bodySettingsVa, bitmask);
+
+        return this;
     }
 
     /**
@@ -184,10 +190,13 @@ public class BodyCreationSettings
      *
      * @param allow {@code true} to allow, {@code false} to inhibit
      * (default=true)
+     * @return the modified settings, for chaining
      */
-    public void setAllowSleeping(boolean allow) {
+    public BodyCreationSettings setAllowSleeping(boolean allow) {
         long bodySettingsVa = va();
         setAllowSleeping(bodySettingsVa, allow);
+
+        return this;
     }
 
     /**
@@ -195,10 +204,13 @@ public class BodyCreationSettings
      *
      * @param damping the desired value (in units of per second, &ge;0, &le;1,
      * default=0.05)
+     * @return the modified settings, for chaining
      */
-    public void setAngularDamping(float damping) {
+    public BodyCreationSettings setAngularDamping(float damping) {
         long bodySettingsVa = va();
         setAngularDamping(bodySettingsVa, damping);
+
+        return this;
     }
 
     /**
@@ -207,11 +219,14 @@ public class BodyCreationSettings
      *
      * @param omega the desired angular velocity (radians per second in
      * physics-system coordinates, not null, unaffected, default=(0,0,0))
+     * @return the modified settings, for chaining
      */
-    public void setAngularVelocity(Vec3Arg omega) {
+    public BodyCreationSettings setAngularVelocity(Vec3Arg omega) {
         long bodySettingsVa = va();
         setAngularVelocity(bodySettingsVa,
                 omega.getX(), omega.getY(), omega.getZ());
+
+        return this;
     }
 
     /**
@@ -220,10 +235,13 @@ public class BodyCreationSettings
      *
      * @param setting {@code true} to enable the force, or {@code false} to
      * disable it
+     * @return the modified settings, for chaining
      */
-    public void setApplyGyroscopicForce(boolean setting) {
+    public BodyCreationSettings setApplyGyroscopicForce(boolean setting) {
         long bodySettingsVa = va();
         setApplyGyroscopicForce(bodySettingsVa, setting);
+
+        return this;
     }
 
     /**
@@ -231,11 +249,14 @@ public class BodyCreationSettings
      * attribute: mCollisionGroup)
      *
      * @param group the desired group (not null, unaffected)
+     * @return the modified settings, for chaining
      */
-    public void setCollisionGroup(CollisionGroup group) {
+    public BodyCreationSettings setCollisionGroup(CollisionGroup group) {
         long bodySettingsVa = va();
         long groupVa = group.va();
         setCollisionGroup(bodySettingsVa, groupVa);
+
+        return this;
     }
 
     /**
@@ -243,10 +264,14 @@ public class BodyCreationSettings
      *
      * @param enhance {@code true} for extra effort, {@code false} for ordinary
      * effort (default=false)
+     * @return the modified settings, for chaining
      */
-    public void setEnhancedInternalEdgeRemoval(boolean enhance) {
+    public BodyCreationSettings setEnhancedInternalEdgeRemoval(
+            boolean enhance) {
         long bodySettingsVa = va();
         setEnhancedInternalEdgeRemoval(bodySettingsVa, enhance);
+
+        return this;
     }
 
     /**
@@ -254,20 +279,26 @@ public class BodyCreationSettings
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
      * default=0.2)
+     * @return the modified settings, for chaining
      */
-    public void setFriction(float friction) {
+    public BodyCreationSettings setFriction(float friction) {
         long bodySettingsVa = va();
         setFriction(bodySettingsVa, friction);
+
+        return this;
     }
 
     /**
      * Alter the gravity multiplier. (native attribute: mGravityFactor)
      *
      * @param factor the desired multiplier (default=1)
+     * @return the modified settings, for chaining
      */
-    public void setGravityFactor(float factor) {
+    public BodyCreationSettings setGravityFactor(float factor) {
         long bodySettingsVa = va();
         setGravityFactor(bodySettingsVa, factor);
+
+        return this;
     }
 
     /**
@@ -275,10 +306,13 @@ public class BodyCreationSettings
      *
      * @param setting {@code true} for a sensor, otherwise {@code false}
      * (default=false)
+     * @return the modified settings, for chaining
      */
-    public void setIsSensor(boolean setting) {
+    public BodyCreationSettings setIsSensor(boolean setting) {
         long bodySettingsVa = va();
         setIsSensor(bodySettingsVa, setting);
+
+        return this;
     }
 
     /**
@@ -286,10 +320,13 @@ public class BodyCreationSettings
      *
      * @param damping the desired value (in units of per second, &ge;0, &le;1,
      * default=0.05)
+     * @return the modified settings, for chaining
      */
-    public void setLinearDamping(float damping) {
+    public BodyCreationSettings setLinearDamping(float damping) {
         long bodySettingsVa = va();
         setLinearDamping(bodySettingsVa, damping);
+
+        return this;
     }
 
     /**
@@ -297,11 +334,14 @@ public class BodyCreationSettings
      *
      * @param velocity the desired velocity (in physics-system coordinates, not
      * null, unaffected, default=(0,0,0))
+     * @return the modified settings, for chaining
      */
-    public void setLinearVelocity(Vec3Arg velocity) {
+    public BodyCreationSettings setLinearVelocity(Vec3Arg velocity) {
         long bodySettingsVa = va();
         setLinearVelocity(bodySettingsVa,
                 velocity.getX(), velocity.getY(), velocity.getZ());
+
+        return this;
     }
 
     /**
@@ -309,11 +349,15 @@ public class BodyCreationSettings
      * mMassPropertiesOverride)
      *
      * @param properties the desired properties (not null, unaffected)
+     * @return the modified settings, for chaining
      */
-    public void setMassPropertiesOverride(MassProperties properties) {
+    public BodyCreationSettings setMassPropertiesOverride(
+            MassProperties properties) {
         long bodySettingsVa = va();
         long propertiesVa = properties.va();
         setMassPropertiesOverride(bodySettingsVa, propertiesVa);
+
+        return this;
     }
 
     /**
@@ -321,10 +365,13 @@ public class BodyCreationSettings
      *
      * @param maxSpeed the desired maximum speed (in radians per second, &ge;0,
      * default=15*pi)
+     * @return the modified settings, for chaining
      */
-    public void setMaxAngularVelocity(float maxSpeed) {
+    public BodyCreationSettings setMaxAngularVelocity(float maxSpeed) {
         long bodySettingsVa = va();
         setMaxAngularVelocity(bodySettingsVa, maxSpeed);
+
+        return this;
     }
 
     /**
@@ -332,32 +379,41 @@ public class BodyCreationSettings
      *
      * @param maxSpeed the desired maximum speed (in meters per second, &ge;0,
      * default=500)
+     * @return the modified settings, for chaining
      */
-    public void setMaxLinearVelocity(float maxSpeed) {
+    public BodyCreationSettings setMaxLinearVelocity(float maxSpeed) {
         long bodySettingsVa = va();
         setMaxLinearVelocity(bodySettingsVa, maxSpeed);
+
+        return this;
     }
 
     /**
      * Alter the motion quality. (native attribute: mMotionQuality)
      *
      * @param motionQuality the desired quality (not null, default=Discrete)
+     * @return the modified settings, for chaining
      */
-    public void setMotionQuality(EMotionQuality motionQuality) {
+    public BodyCreationSettings setMotionQuality(EMotionQuality motionQuality) {
         long bodySettingsVa = va();
         int motionQualityOrdinal = motionQuality.ordinal();
         setMotionQuality(bodySettingsVa, motionQualityOrdinal);
+
+        return this;
     }
 
     /**
      * Alter the motion type. (native attribute: mMotionType)
      *
      * @param motionType the desired type (not null, default=Dynamic)
+     * @return the modified settings, for chaining
      */
-    public void setMotionType(EMotionType motionType) {
+    public BodyCreationSettings setMotionType(EMotionType motionType) {
         long bodySettingsVa = va();
         int motionTypeOrdinal = motionType.ordinal();
         setMotionType(bodySettingsVa, motionTypeOrdinal);
+
+        return this;
     }
 
     /**
@@ -365,10 +421,13 @@ public class BodyCreationSettings
      *
      * @param objLayer the ID of the desired object layer (&ge;0,
      * &lt;numObjectLayers, default=0)
+     * @return the modified settings, for chaining
      */
-    public void setObjectLayer(int objLayer) {
+    public BodyCreationSettings setObjectLayer(int objLayer) {
         long bodySettingsVa = va();
         setObjectLayer(bodySettingsVa, objLayer);
+
+        return this;
     }
 
     /**
@@ -376,11 +435,15 @@ public class BodyCreationSettings
      * mOverrideMassProperties)
      *
      * @param setting an enum value (not null, default=CalculateMassAndInertia)
+     * @return the modified settings, for chaining
      */
-    public void setOverrideMassProperties(EOverrideMassProperties setting) {
+    public BodyCreationSettings setOverrideMassProperties(
+            EOverrideMassProperties setting) {
         long bodySettingsVa = va();
         int ordinal = setting.ordinal();
         setOverrideMassProperties(bodySettingsVa, ordinal);
+
+        return this;
     }
 
     /**
@@ -393,10 +456,13 @@ public class BodyCreationSettings
      * default=0)
      * @param zz the desired Z coordinate (in physics-system coordinates,
      * default=0)
+     * @return the modified settings, for chaining
      */
-    public void setPosition(double xx, double yy, double zz) {
+    public BodyCreationSettings setPosition(double xx, double yy, double zz) {
         long bodySettingsVa = va();
         setPosition(bodySettingsVa, xx, yy, zz);
+
+        return this;
     }
 
     /**
@@ -405,13 +471,16 @@ public class BodyCreationSettings
      *
      * @param location the desired location (in physics-system coordinates, not
      * null, unaffected, default=(0,0,0))
+     * @return the modified settings, for chaining
      */
-    public void setPosition(RVec3Arg location) {
+    public BodyCreationSettings setPosition(RVec3Arg location) {
         long bodySettingsVa = va();
         double xx = location.xx();
         double yy = location.yy();
         double zz = location.zz();
         setPosition(bodySettingsVa, xx, yy, zz);
+
+        return this;
     }
 
     /**
@@ -420,10 +489,13 @@ public class BodyCreationSettings
      *
      * @param restitution the desired ratio (typically &ge;0 and &le;1,
      * default=0)
+     * @return the modified settings, for chaining
      */
-    public void setRestitution(float restitution) {
+    public BodyCreationSettings setRestitution(float restitution) {
         long bodySettingsVa = va();
         setRestitution(bodySettingsVa, restitution);
+
+        return this;
     }
 
     /**
@@ -432,46 +504,59 @@ public class BodyCreationSettings
      *
      * @param quat the desired rotation (relative to the physics-system axes,
      * not null, unaffected, default=(0,0,0,1))
+     * @return the modified settings, for chaining
      */
-    public void setRotation(QuatArg quat) {
+    public BodyCreationSettings setRotation(QuatArg quat) {
         long bodySettingsVa = va();
         float qw = quat.getW();
         float qx = quat.getX();
         float qy = quat.getY();
         float qz = quat.getZ();
         setRotation(bodySettingsVa, qx, qy, qz, qw);
+
+        return this;
     }
 
     /**
      * Replace the shape.
      *
      * @param shape the desired shape (not null, unaffected)
+     * @return the modified settings, for chaining
      */
-    public void setShape(ConstShape shape) {
+    public BodyCreationSettings setShape(ConstShape shape) {
         long bodySettingsVa = va();
         long shapeVa = shape.targetVa();
         setShape(bodySettingsVa, shapeVa);
+
+        return this;
     }
 
     /**
      * Replace the shape.
      *
      * @param shapeRef a reference to the desired shape (not null)
+     * @return the modified settings, for chaining
      */
-    public void setShape(ShapeRefC shapeRef) {
+    public BodyCreationSettings setShape(ShapeRefC shapeRef) {
         ConstShape shape = shapeRef.getPtr();
         setShape(shape);
+
+        return this;
     }
 
     /**
      * Replace the shape settings.
      *
      * @param shapeSettings the desired shape settings (not null)
+     * @return the modified settings, for chaining
      */
-    public void setShapeSettings(ConstShapeSettings shapeSettings) {
+    public BodyCreationSettings setShapeSettings(
+            ConstShapeSettings shapeSettings) {
         long bodySettingsVa = va();
         long shapeSettingsVa = shapeSettings.targetVa();
         setShapeSettings(bodySettingsVa, shapeSettingsVa);
+
+        return this;
     }
     // *************************************************************************
     // ConstBodyCreationSettings methods
