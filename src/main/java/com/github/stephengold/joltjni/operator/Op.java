@@ -339,6 +339,23 @@ final public class Op {
      * @param right the 2nd vector (not null, unaffected)
      * @return a new vector
      */
+    public static RVec3 plus(Vec3Arg left, RVec3Arg right) {
+        double xx = left.getX() + right.xx();
+        double yy = left.getY() + right.yy();
+        double zz = left.getZ() + right.zz();
+        RVec3 result = new RVec3(xx, yy, zz);
+
+        return result;
+    }
+
+    /**
+     * Return the component-wise sum of the specified vectors. (native operator:
+     * binary {@code +})
+     *
+     * @param left the first vector (not null, unaffected)
+     * @param right the 2nd vector (not null, unaffected)
+     * @return a new vector
+     */
     public static Vec3 plus(Vec3Arg left, Vec3Arg right) {
         float x = left.getX() + right.getX();
         float y = left.getY() + right.getY();
