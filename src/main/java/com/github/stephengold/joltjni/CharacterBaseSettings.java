@@ -90,16 +90,6 @@ public class CharacterBaseSettings
     }
 
     /**
-     * Replace the shape. (native attribute: mShape)
-     *
-     * @param shapeRef a reference to the desired shape (not null)
-     */
-    public void setShape(ShapeRefC shapeRef) {
-        ConstShape shape = shapeRef.getPtr();
-        setShape(shape);
-    }
-
-    /**
      * Alter the supporting volume. (native attribute: mSupportingVolume)
      *
      * @param plane (not null, default={(0,1,0),-1e10})
