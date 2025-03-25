@@ -42,7 +42,7 @@ and public member data are involved. For instance:
 
 + An array of body IDs is `Array<BodyID>` in Jolt Physics;
   in Jolt JNI it’s called a `BodyIdVector`.
-+ The `mConvexRadius` member of the Jolt Physics `BoxShapeSettings` class
++ The `mConvexRadius` member of the `BoxShapeSettings` class
   is accessed using `getConvexRadius()` and `setConvexRadius()` in Jolt JNI.
 
 For a couple well-known Jolt Physics examples,
@@ -71,7 +71,7 @@ a native library for each platform on which the code will run.
 Build types:  use "Debug" native libraries for development and troubleshooting,
 then switch to "Release" libraries for performance testing and production.
 
-Build flavors:  use "Dp" to simulate large worlds (>1000 meters in diameter)
+Build flavors:  use "Dp" to simulate large worlds (>1 kilometer in diameter)
 otherwise use "Sp".
 
 ### Gradle-built projects
@@ -107,7 +107,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
 Android Jolt JNI comes pre-built as a pair of multi-platform libraries,
 one for each build type.
 (The only build flavor provided is "Sp".)
-Both libraries are downloadable from Maven Central
+Both libraries can be downloaded from Maven Central
 under the "jolt-jni-Android" artifact ID.
 
 Build types:  use "Debug" native libraries for development and troubleshooting,
@@ -273,9 +273,9 @@ lest the app run out of memory.
 Here it's important to distinguish between JVM objects and native objects.
 A handful Jolt-JNI classes are implemented entirely in Java, notably:
 `Color`, `Float3`, `Plane`, `Quat`, `RVec3`, `UVec4`, `Vec3`, and `Vec4`.
-Apart from these special classes,
+Apart from those special classes,
 every JVM object in Jolt JNI is an instance of `JoltPhysicsObject`,
-which implies it has a corresponding native object assigned to it.
+which implies it has a native object assigned to it.
 
 For instance, when a Jolt-JNI app instantiates a matrix using `new Mat44()`,
 both a JVM object and a native object are created.
