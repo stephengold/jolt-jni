@@ -36,15 +36,13 @@ using namespace JPH;
  * Signature: (JFFFFFFFJ)I
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_addShape
-  (JNIEnv *, jclass, jlong shapeVa, jfloat offsetX, jfloat offsetY, jfloat offsetZ,
-  jfloat rotX, jfloat rotY, jfloat rotZ, jfloat rotW, jlong shapeRefVa) {
+  (JNIEnv *, jclass, jlong compoundVa, jfloat offsetX, jfloat offsetY, jfloat offsetZ,
+  jfloat rotX, jfloat rotY, jfloat rotZ, jfloat rotW, jlong subShapeVa) {
     MutableCompoundShape * const pCompound
-            = reinterpret_cast<MutableCompoundShape *> (shapeVa);
+            = reinterpret_cast<MutableCompoundShape *> (compoundVa);
     const Vec3 offset(offsetX, offsetY, offsetZ);
     const Quat rotation(rotX, rotY, rotZ, rotW);
-    const ShapeRefC * const pSubShapeRef
-            = reinterpret_cast<ShapeRefC *> (shapeRefVa);
-    const Shape * const pSubShape = pSubShapeRef->GetPtr();
+    const Shape * const pSubShape = reinterpret_cast<Shape *> (subShapeVa);
     const uint result = pCompound->AddShape(offset, rotation, pSubShape);
     uint64 revisionCount = pCompound->GetUserData();
     ++revisionCount;

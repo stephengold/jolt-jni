@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.ByteBuffer;
@@ -61,11 +62,11 @@ public class MutableCompoundShape extends CompoundShape {
      *
      * @param offset the desired offset (not null, unaffected)
      * @param rotation the desired rotation (not null, not zero, unaffected)
-     * @param shapeRef a reference to the desired subshape (not null)
+     * @param subshape the desired subshape (not null)
      * @return the index of the added subshape
      */
-    public int addShape(Vec3Arg offset, QuatArg rotation, ShapeRefC shapeRef) {
-        long shapeVa = va();
+    public int addShape(Vec3Arg offset, QuatArg rotation, ConstShape subshape) {
+        long compoundVa = va();
         float offsetX = offset.getX();
         float offsetY = offset.getY();
         float offsetZ = offset.getZ();
@@ -73,9 +74,9 @@ public class MutableCompoundShape extends CompoundShape {
         float rotX = rotation.getX();
         float rotY = rotation.getY();
         float rotZ = rotation.getZ();
-        long shapeRefVa = shapeRef.va();
-        int result = addShape(shapeVa, offsetX, offsetY, offsetZ,
-                rotX, rotY, rotZ, rotW, shapeRefVa);
+        long subShapeVa = subshape.targetVa();
+        int result = addShape(compoundVa, offsetX, offsetY, offsetZ,
+                rotX, rotY, rotZ, rotW, subShapeVa);
 
         return result;
     }
@@ -123,8 +124,8 @@ public class MutableCompoundShape extends CompoundShape {
     // native private methods
 
     native private static int addShape(
-            long shapeVa, float offsetX, float offsetY, float offsetZ,
-            float rotX, float rotY, float rotZ, float rotW, long shapeRefVa);
+            long compoundVa, float offsetX, float offsetY, float offsetZ,
+            float rotX, float rotY, float rotZ, float rotW, long subShapeVa);
 
     native private static void adjustCenterOfMass(long shapeVa);
 
