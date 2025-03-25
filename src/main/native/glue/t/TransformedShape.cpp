@@ -388,3 +388,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getT
     const RVec3 base(xx, yy, zz);
     pShape->GetTrianglesStart(*pContext, *pBox, base);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_TransformedShape
+ * Method:    getWorldSpaceBounds
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getWorldSpaceBounds
+  (JNIEnv *, jclass, jlong shapeVa) {
+    const TransformedShape * const pShape
+            = reinterpret_cast<TransformedShape *> (shapeVa);
+    const AABox& box = pShape->GetWorldSpaceBounds();
+    AABox * const pResult = new AABox(box);
+    TRACE_NEW("AABox", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}

@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.CastRayCollector;
 import com.github.stephengold.joltjni.CastShapeCollector;
 import com.github.stephengold.joltjni.CollidePointCollector;
@@ -234,4 +235,11 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
      */
     void getTrianglesStart(GetTrianglesContext storeContext,
             ConstAaBox box, RVec3Arg base);
+
+    /**
+     * Return the bounding box including convex radius. The shape is unaffected.
+     *
+     * @return a new, mutable box (in system coordinates)
+     */
+    AaBox getWorldSpaceBounds();
 }

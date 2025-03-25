@@ -388,6 +388,20 @@ public class TransformedShape
         double zz = base.zz();
         getTrianglesStart(shapeVa, contextVa, boxVa, xx, yy, zz);
     }
+
+    /**
+     * Return the bounding box including convex radius. The shape is unaffected.
+     *
+     * @return a new, mutable box (in system coordinates)
+     */
+    @Override
+    public AaBox getWorldSpaceBounds() {
+        long shapeVa = va();
+        long resultVa = getWorldSpaceBounds(shapeVa);
+        AaBox result = new AaBox(resultVa, true);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -442,4 +456,6 @@ public class TransformedShape
 
     native private static void getTrianglesStart(long shapeVa, long contextVa,
             long boxVa, double xx, double yy, double zz);
+
+    native private static long getWorldSpaceBounds(long shapeVa);
 }
