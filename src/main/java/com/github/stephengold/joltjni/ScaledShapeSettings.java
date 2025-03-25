@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -51,8 +52,8 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
      * @param baseShape the unscaled base shape (not null)
      * @param scaleFactors the desired scale factors (not null)
      */
-    public ScaledShapeSettings(Shape baseShape, Vec3Arg scaleFactors) {
-        long baseShapeVa = baseShape.va();
+    public ScaledShapeSettings(ConstShape baseShape, Vec3Arg scaleFactors) {
+        long baseShapeVa = baseShape.targetVa();
         float scaleX = scaleFactors.getX();
         float scaleY = scaleFactors.getY();
         float scaleZ = scaleFactors.getZ();
