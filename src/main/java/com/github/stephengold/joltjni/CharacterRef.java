@@ -697,7 +697,8 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Save the character's state to the specified recorder.
+     * Save the character's state to the specified recorder. The character is
+     * unaffected.
      *
      * @param recorder the recorder to save to (not null)
      */

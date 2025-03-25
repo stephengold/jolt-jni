@@ -301,7 +301,8 @@ abstract public class CharacterBase
     }
 
     /**
-     * Save the character's state to the specified recorder.
+     * Save the character's state to the specified recorder. The character is
+     * unaffected.
      *
      * @param recorder the recorder to save to (not null)
      */
