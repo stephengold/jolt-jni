@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -62,29 +62,6 @@ public class RotatedTranslatedShape extends DecoratedShape {
         float rotX = rotation.getX();
         float rotY = rotation.getY();
         float rotZ = rotation.getZ();
-        long baseShapeVa = baseShape.targetVa();
-        long scaledShapeVa = createRotatedTranslatedShape(offsetX, offsetY,
-                offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
-        setVirtualAddress(scaledShapeVa); // no owner due to ref counting
-    }
-
-    /**
-     * Instantiate a with on the specified offset, rotation, and base shape.
-     *
-     * @param offset (not null, unaffected)
-     * @param rotation (not null, not zero, unaffected)
-     * @param baseShapeRef a reference to the base shape (not null)
-     */
-    public RotatedTranslatedShape(
-            Vec3Arg offset, QuatArg rotation, ShapeRefC baseShapeRef) {
-        float offsetX = offset.getX();
-        float offsetY = offset.getY();
-        float offsetZ = offset.getZ();
-        float rotW = rotation.getW();
-        float rotX = rotation.getX();
-        float rotY = rotation.getY();
-        float rotZ = rotation.getZ();
-        ConstShape baseShape = baseShapeRef.getPtr();
         long baseShapeVa = baseShape.targetVa();
         long scaledShapeVa = createRotatedTranslatedShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);

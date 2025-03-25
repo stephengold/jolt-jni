@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,25 +43,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSha
     const Shape * const pBase = reinterpret_cast<Shape *> (baseShapeVa);
     RotatedTranslatedShapeSettings * const pResult
             = new RotatedTranslatedShapeSettings(offset, rotation, pBase);
-    TRACE_NEW("RotatedTranslatedShapeSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RotatedTranslatedShapeSettings
- * Method:    createSettingsFromShapeRef
- * Signature: (FFFFFFFJ)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShapeSettings_createSettingsFromShapeRef
-  (JNIEnv *, jclass, jfloat offsetX, jfloat offsetY, jfloat offsetZ,
-  jfloat rotX, jfloat rotY, jfloat rotZ, jfloat rotW, jlong baseShapeRefVa) {
-    const Vec3 offset(offsetX, offsetY, offsetZ);
-    const Quat rotation(rotX, rotY, rotZ, rotW);
-    const ShapeRefC * const pBaseRef
-            = reinterpret_cast<ShapeRefC *> (baseShapeRefVa);
-    RotatedTranslatedShapeSettings * const pResult
-            = new RotatedTranslatedShapeSettings(
-                    offset, rotation, pBaseRef->GetPtr());
     TRACE_NEW("RotatedTranslatedShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

@@ -64,24 +64,6 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
     }
 
     /**
-     * Instantiate a settings based on the specified shape reference and scale
-     * factors.
-     *
-     * @param baseShapeRef a reference to the unscaled base shape (not null)
-     * @param scaleFactors the desired scale factors (not null)
-     */
-    public ScaledShapeSettings(ShapeRefC baseShapeRef, Vec3Arg scaleFactors) {
-        long baseShapeRefVa = baseShapeRef.va();
-        float scaleX = scaleFactors.getX();
-        float scaleY = scaleFactors.getY();
-        float scaleZ = scaleFactors.getZ();
-        long settingsVa = createScaledShapeSettingsFromRef(
-                baseShapeRefVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(settingsVa); // no owner due to ref counting
-        setSubType(EShapeSubType.Scaled);
-    }
-
-    /**
      * Instantiate a settings based on the specified settings and scale factors.
      *
      * @param baseSettings the unscaled base shape settings (not null)
@@ -117,9 +99,6 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
     }
     // *************************************************************************
     // native private methods
-
-    native private static long createScaledShapeSettingsFromRef(
-            long baseShapeRefVa, float scaleX, float scaleY, float scaleZ);
 
     native private static long createScaledShapeSettingsFromSettings(
             long baseSettingsVa, float scaleX, float scaleY, float scaleZ);
