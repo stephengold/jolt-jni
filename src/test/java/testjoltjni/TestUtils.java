@@ -39,6 +39,7 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import electrostatic4j.snaploader.platform.util.NativeVariant;
 import java.io.File;
+import java.io.PrintStream;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -304,15 +305,7 @@ final public class TestUtils {
      * Initialize the loaded native library.
      */
     public static void initializeNativeLibrary() {
-        String buildType = Jolt.buildType();
-        if (!buildType.equals("Release")) {
-            System.out.print(buildType + "-");
-        }
-        if (Jolt.isDoublePrecision()) {
-            System.out.print("Dp-");
-        }
-        System.out.println(
-                "jolt-jni version " + Jolt.versionString() + " initializing");
+        printLibraryInfo(System.out);
 
         //Jolt.setTraceAllocations(true); // to debug native memory allocation
         if (automateFreeing) {
@@ -322,6 +315,7 @@ final public class TestUtils {
         Jolt.registerDefaultAllocator();
         Jolt.installDefaultAssertCallback();
         Jolt.installDefaultTraceCallback();
+
         boolean success = Jolt.newFactory();
         assert success;
         Jolt.registerTypes();
@@ -490,20 +484,7 @@ final public class TestUtils {
             }
         }
         Assert.assertTrue(success);
-
-        // Print native-library details on the console:
-        System.out.print("jolt-jni version ");
-        System.out.print(Jolt.versionString());
-        String buildType = Jolt.buildType();
-        System.out.print('-');
-        System.out.print(buildType);
-        if (Jolt.isDoublePrecision()) {
-            System.out.print("Dp");
-        } else {
-            System.out.print("Sp");
-        }
-        System.out.println(" initializing");
-        System.out.println();
+        printLibraryInfo(System.out);
     }
 
     /**
@@ -551,6 +532,31 @@ final public class TestUtils {
         }
 
         return result;
+    }
+
+    /**
+     * Print basic library information to the specified stream during
+     * initialization.
+     *
+     * @param printStream
+     */
+    public static void printLibraryInfo(PrintStream printStream) {
+        printStream.print("Jolt JNI version ");
+        printStream.print(Jolt.versionString());
+        printStream.print('-');
+
+        String buildType = Jolt.buildType();
+        printStream.print(buildType);
+
+        if (Jolt.isDoublePrecision()) {
+            printStream.print("Dp");
+        } else {
+            printStream.print("Sp");
+        }
+
+        printStream.println(" initializing...");
+        printStream.println();
+        printStream.flush();
     }
 
     /**
