@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -49,16 +50,16 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
      * Instantiate a settings object with the specified offset and base shape.
      *
      * @param offset (not null, unaffected)
-     * @param baseShapeRef a reference to the base shape (not null)
+     * @param baseShape the desired base shape (not null)
      */
     public OffsetCenterOfMassShapeSettings(
-            Vec3Arg offset, ShapeRefC baseShapeRef) {
+            Vec3Arg offset, ConstShape baseShape) {
         float offsetX = offset.getX();
         float offsetY = offset.getY();
         float offsetZ = offset.getZ();
-        long baseShapeRefVa = baseShapeRef.va();
-        long ocomssVa = createSettingsFromShapeRef(
-                offsetX, offsetY, offsetZ, baseShapeRefVa);
+        long baseShapeVa = baseShape.targetVa();
+        long ocomssVa = createSettingsFromShape(
+                offsetX, offsetY, offsetZ, baseShapeVa);
         setVirtualAddress(ocomssVa); // no owner due to ref counting
         setSubType(EShapeSubType.OffsetCenterOfMass);
     }
@@ -119,8 +120,8 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
     native private static long createSettingsFromSettings(float offsetX,
             float offsetY, float offsetZ, long baseShapeSettingsVa);
 
-    native private static long createSettingsFromShapeRef(
-            float offsetX, float offsetY, float offsetZ, long baseShapeRefVa);
+    native private static long createSettingsFromShape(
+            float offsetX, float offsetY, float offsetZ, long baseShapeVa);
 
     native private static float getOffsetX(long ocomssVa);
 

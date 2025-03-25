@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -48,16 +48,15 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassSh
 
 /*
  * Class:     com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings
- * Method:    createSettingsFromShapeRef
+ * Method:    createSettingsFromShape
  * Signature: (FFFJ)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_createSettingsFromShapeRef
-  (JNIEnv *, jclass, jfloat offsetX, jfloat offsetY, jfloat offsetZ, jlong baseShapeRefVa) {
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_createSettingsFromShape
+  (JNIEnv *, jclass, jfloat offsetX, jfloat offsetY, jfloat offsetZ, jlong baseShapeVa) {
     const Vec3 offset(offsetX, offsetY, offsetZ);
-    const ShapeRefC * const pBaseRef
-            = reinterpret_cast<ShapeRefC *> (baseShapeRefVa);
+    const Shape * const pBase = reinterpret_cast<Shape *> (baseShapeVa);
     OffsetCenterOfMassShapeSettings * const pResult
-            = new OffsetCenterOfMassShapeSettings(offset, pBaseRef->GetPtr());
+            = new OffsetCenterOfMassShapeSettings(offset, pBase);
     TRACE_NEW("OffsetCenterOfMassShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
