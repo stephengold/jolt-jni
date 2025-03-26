@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Settings used to construct a {@code ConvexHullShape}.
@@ -55,37 +55,37 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Instantiate settings for the specified list of points.
+     * Instantiate settings for the specified collection of points.
      *
      * @param points a list of point locations (not null, unaffected)
      */
-    public ConvexHullShapeSettings(List<Vec3Arg> points) {
+    public ConvexHullShapeSettings(Collection<Vec3Arg> points) {
         this(points, Jolt.cDefaultConvexRadius);
     }
 
     /**
      * Instantiate settings for the specified parameters.
      *
-     * @param points a list of point locations (not null, unaffected)
+     * @param points a collection of point locations (not null, unaffected)
      * @param maxConvexRadius the desired maximum convex radius (&ge;0,
      * default=0.05)
      */
     public ConvexHullShapeSettings(
-            List<Vec3Arg> points, float maxConvexRadius) {
+            Collection<Vec3Arg> points, float maxConvexRadius) {
         this(points, maxConvexRadius, null);
     }
 
     /**
      * Instantiate settings for the specified parameters.
      *
-     * @param points a list of point locations (not null, unaffected)
+     * @param points a collection of point locations (not null, unaffected)
      * @param maxConvexRadius the desired maximum convex radius (&ge;0,
      * default=0.05)
      * @param material the desired surface properties (not null, unaffected) or
      * {@code null} for default properties (default=null)
      */
-    public ConvexHullShapeSettings(List<Vec3Arg> points, float maxConvexRadius,
-            ConstPhysicsMaterial material) {
+    public ConvexHullShapeSettings(Collection<Vec3Arg> points,
+            float maxConvexRadius, ConstPhysicsMaterial material) {
         int numPoints = points.size();
         int numFloats = numAxes * numPoints;
         FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
