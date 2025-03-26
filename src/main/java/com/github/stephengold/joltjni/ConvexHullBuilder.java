@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EResult;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Construct a 3-D convex hull for specified points.
@@ -40,7 +40,7 @@ public class ConvexHullBuilder extends NonCopyable {
      *
      * @param points a list of locations (not null, unaffected)
      */
-    public ConvexHullBuilder(List<Vec3> points) {
+    public ConvexHullBuilder(Collection<Vec3Arg> points) {
         int numPoints = points.size();
         int numFloats = 3 * numPoints;
         FloatBuffer pointBuffer = Jolt.newDirectFloatBuffer(numFloats);

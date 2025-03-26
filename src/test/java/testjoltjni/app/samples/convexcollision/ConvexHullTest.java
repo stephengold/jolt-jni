@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.convexcollision;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.readonly.*;
 import com.github.stephengold.joltjni.std.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
@@ -39,7 +40,7 @@ import static testjoltjni.app.samples.DebugRendererSP.*;
 public class ConvexHullTest extends Test{
 DefaultRandomEngine mRandom=new DefaultRandomEngine( 12345 );
 int mIteration=0;
-List<List<Vec3>>mPoints;
+List<List<Vec3Arg>>mPoints;
 
 public void Initialize()
 {
@@ -439,7 +440,7 @@ public void Initialize()
 	// Add a cube formed out of a regular grid of vertices, this shows how the algorithm deals
 	// with many coplanar points
 	{
-		List<Vec3> p=new ArrayList<>(1000);
+		List<Vec3Arg> p=new ArrayList<>(1000);
 		for (int x = 0; x < 10; ++x)
 			for (int y = 0; y < 10; ++y)
 				for (int z = 0; z < 10; ++z)
@@ -449,7 +450,7 @@ public void Initialize()
 
 	// Add disc of many points
 	{
-		List<Vec3> p=new ArrayList<>();
+		List<Vec3Arg> p=new ArrayList<>();
 		Mat44 rot = Mat44.sRotationZ(0.25f * JPH_PI);
 		for (float r = 0.0f; r < 2.0f; r += 0.1f)
 			for (float phi = 0.0f; phi <= 2.0f * JPH_PI; phi += 2.0f * JPH_PI / 20.0f)
@@ -459,7 +460,7 @@ public void Initialize()
 
 	// Add wedge shaped disc that is just above the hull tolerance on its widest side and zero on the other side
 	{
-		List<Vec3> p=new ArrayList<>();
+		List<Vec3Arg> p=new ArrayList<>();
 		for (float phi = 0.0f; phi <= 2.0f * JPH_PI; phi += 2.0f * JPH_PI / 40.0f)
 		{
 			Vec3 pos=new Vec3(2.0f * cos(phi), 0, 2.0f * sin(phi));
@@ -471,7 +472,7 @@ public void Initialize()
 
 	// Add a sphere of many points
 	{
-		List<Vec3> p=new ArrayList<>();
+		List<Vec3Arg> p=new ArrayList<>();
 		for (float theta = 0.0f; theta <= JPH_PI; theta += JPH_PI / 20.0f)
 			for (float phi = 0.0f; phi <= 2.0f * JPH_PI; phi += 2.0f * JPH_PI / 20.0f)
 				p.add(Vec3.sUnitSpherical(theta, phi));
@@ -494,7 +495,7 @@ public void Initialize()
 			// Read the points
 			if (len > 0)
 			{
-				List<Vec3> p=new ArrayList<>(len);
+				List<Vec3Arg> p=new ArrayList<>(len);
 				for (int i = 0; i < len; ++i)
 				{
 					Float3 v=new Float3();
@@ -513,7 +514,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 
 	float tolerance = 1.0e-3f;
 
-	List<Vec3> points;
+	List<Vec3Arg> points;
 	if (mIteration < mPoints.size())
 	{
 		// Take one of the predefined shapes
@@ -614,7 +615,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	}
 
 	// Draw input points around center of mass
-	for (Vec3 v : points)
+	for (Vec3Arg v : points)
 		DrawMarkerSP(mDebugRenderer, star(display_scale , minus(v , com)), Color.sWhite, 0.01f);
 
 	// Draw the hull around center of mass
