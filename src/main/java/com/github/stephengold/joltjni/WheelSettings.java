@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,10 +68,13 @@ abstract public class WheelSettings
      *
      * @param enable {@code true} to apply at the configured suspension-force
      * point, {@code false} to apply at the wheel's point of contact
+     * @return the modified settings, for chaining
      */
-    public void setEnableSuspensionForcePoint(boolean enable) {
+    public WheelSettings setEnableSuspensionForcePoint(boolean enable) {
         long settingsVa = va();
         setEnableSuspensionForcePoint(settingsVa, enable);
+
+        return this;
     }
 
     /**
@@ -79,23 +82,29 @@ abstract public class WheelSettings
      *
      * @param position the location of the attachment point (in the body's local
      * coordinates, not null, unaffected, default=(0,0,0))
+     * @return the modified settings, for chaining
      */
-    public void setPosition(Vec3Arg position) {
+    public WheelSettings setPosition(Vec3Arg position) {
         long settingsVa = va();
         float x = position.getX();
         float y = position.getY();
         float z = position.getZ();
         setPosition(settingsVa, x, y, z);
+
+        return this;
     }
 
     /**
      * Alter the radius of the wheel. (native attribute: mRadius)
      *
      * @param radius the desired radius (in meters, default=0.3)
+     * @return the modified settings, for chaining
      */
-    public void setRadius(float radius) {
+    public WheelSettings setRadius(float radius) {
         long settingsVa = va();
         setRadius(settingsVa, radius);
+
+        return this;
     }
 
     /**
@@ -104,13 +113,16 @@ abstract public class WheelSettings
      *
      * @param direction the desired direction (not null, unaffected,
      * default=(0,1,0))
+     * @return the modified settings, for chaining
      */
-    public void setSteeringAxis(Vec3Arg direction) {
+    public WheelSettings setSteeringAxis(Vec3Arg direction) {
         long settingsVa = va();
         float dx = direction.getX();
         float dy = direction.getY();
         float dz = direction.getZ();
         setSteeringAxis(settingsVa, dx, dy, dz);
+
+        return this;
     }
 
     /**
@@ -119,13 +131,16 @@ abstract public class WheelSettings
      *
      * @param direction the desired direction (not null, unaffected,
      * default=(0,-1,0))
+     * @return the modified settings, for chaining
      */
-    public void setSuspensionDirection(Vec3Arg direction) {
+    public WheelSettings setSuspensionDirection(Vec3Arg direction) {
         long settingsVa = va();
         float dx = direction.getX();
         float dy = direction.getY();
         float dz = direction.getZ();
         setSuspensionDirection(settingsVa, dx, dy, dz);
+
+        return this;
     }
 
     /**
@@ -134,13 +149,16 @@ abstract public class WheelSettings
      *
      * @param location the desired location (in the body coordinates, not null,
      * unaffected, default=(0,0,0))
+     * @return the modified settings, for chaining
      */
-    public void setSuspensionForcePoint(Vec3Arg location) {
+    public WheelSettings setSuspensionForcePoint(Vec3Arg location) {
         long settingsVa = va();
         float x = location.getX();
         float y = location.getY();
         float z = location.getZ();
         setSuspensionForcePoint(settingsVa, x, y, z);
+
+        return this;
     }
 
     /**
@@ -148,10 +166,13 @@ abstract public class WheelSettings
      * attribute: mSuspensionMaxLength)
      *
      * @param length the desired limit (in meters, default=0.5)
+     * @return the modified settings, for chaining
      */
-    public void setSuspensionMaxLength(float length) {
+    public WheelSettings setSuspensionMaxLength(float length) {
         long settingsVa = va();
         setSuspensionMaxLength(settingsVa, length);
+
+        return this;
     }
 
     /**
@@ -159,10 +180,13 @@ abstract public class WheelSettings
      * attribute: mSuspensionMinLength)
      *
      * @param length the desired limit (in meters, default=0.3)
+     * @return the modified settings, for chaining
      */
-    public void setSuspensionMinLength(float length) {
+    public WheelSettings setSuspensionMinLength(float length) {
         long settingsVa = va();
         setSuspensionMinLength(settingsVa, length);
+
+        return this;
     }
 
     /**
@@ -170,10 +194,13 @@ abstract public class WheelSettings
      * mSuspensionPreloadLength)
      *
      * @param length the desired offset (in meters, default=0)
+     * @return the modified settings, for chaining
      */
-    public void setSuspensionPreloadLength(float length) {
+    public WheelSettings setSuspensionPreloadLength(float length) {
         long settingsVa = va();
         setSuspensionPreloadLength(settingsVa, length);
+
+        return this;
     }
 
     /**
@@ -182,13 +209,16 @@ abstract public class WheelSettings
      *
      * @param direction the desired direction (not null, unaffected,
      * default=(0,0,1))
+     * @return the modified settings, for chaining
      */
-    public void setWheelForward(Vec3Arg direction) {
+    public WheelSettings setWheelForward(Vec3Arg direction) {
         long settingsVa = va();
         float dx = direction.getX();
         float dy = direction.getY();
         float dz = direction.getZ();
         setWheelForward(settingsVa, dx, dy, dz);
+
+        return this;
     }
 
     /**
@@ -197,23 +227,29 @@ abstract public class WheelSettings
      *
      * @param direction the desired direction (not null, unaffected,
      * default=(0,1,0))
+     * @return the modified settings, for chaining
      */
-    public void setWheelUp(Vec3Arg direction) {
+    public WheelSettings setWheelUp(Vec3Arg direction) {
         long settingsVa = va();
         float dx = direction.getX();
         float dy = direction.getY();
         float dz = direction.getZ();
         setWheelUp(settingsVa, dx, dy, dz);
+
+        return this;
     }
 
     /**
      * Alter the width of the wheel. (native attribute: mWidth)
      *
      * @param width the desired width (in meters, default=0.1)
+     * @return the modified settings, for chaining
      */
-    public void setWidth(float width) {
+    public WheelSettings setWidth(float width) {
         long settingsVa = va();
         setWidth(settingsVa, width);
+
+        return this;
     }
     // *************************************************************************
     // ConstWheelSettings methods
