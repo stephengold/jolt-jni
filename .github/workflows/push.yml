@@ -296,9 +296,9 @@ jobs:
       - run: sudo apt install g++-13-loongarch64-linux-gnu
       - run: loongarch64-linux-gnu-g++-13 --version
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=Linux_LoongArch64 assemble
+      - name: gradlew -Pflavor=Sp -Ptarget=Linux_LoongArch64 assemble
         run: |
-          ./gradlew -Ptarget=Linux_LoongArch64 assemble \
+          ./gradlew -Pflavor=Sp -Ptarget=Linux_LoongArch64 assemble \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
