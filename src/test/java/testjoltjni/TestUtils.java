@@ -383,12 +383,15 @@ final public class TestUtils {
         String subdirectory;
         if (NativeVariant.Os.isLinux()) {
             name = "libjoltjni.so";
+            String archName = NativeVariant.OS_ARCH.getProperty();
             if (NativeVariant.Cpu.isARM()) {
                 if (NativeVariant.Cpu.is64()) {
                     subdirectory = "linux_ARM64";
                 } else {
                     subdirectory = "linux_ARM32hf";
                 }
+            } else if (archName.contains("loong")) {
+                subdirectory = "linux_LoongArch64";
             } else if (hasFmaFeatures()) {
                 subdirectory = "linux64_fma";
             } else {

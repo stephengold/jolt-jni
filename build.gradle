@@ -65,6 +65,10 @@ model {
             architecture 'aarch64'
             operatingSystem 'linux'
         }
+        Linux_LoongArch64 {
+            architecture 'loongarch64'
+            operatingSystem 'linux'
+        }
         MacOSX64 {
             architecture 'x86_64'
             operatingSystem 'osx'
@@ -110,6 +114,12 @@ model {
                 linker.executable = 'arm-linux-gnueabihf-g++-9'
             }
         }
+        gcc13Loong(Gcc) { // used when cross-compiling on Linux
+            target('Linux_LoongArch64') {
+                cppCompiler.executable = 'loongarch64-linux-gnu-g++-13'
+                linker.executable = 'loongarch64-linux-gnu-g++-13'
+            }
+        }
     }
 
     components {
@@ -119,6 +129,7 @@ model {
             targetPlatform 'Linux64_fma'
             targetPlatform 'Linux_ARM32hf'
             targetPlatform 'Linux_ARM64'
+            targetPlatform 'Linux_LoongArch64'
             targetPlatform 'MacOSX64'
             targetPlatform 'MacOSX_ARM64'
             targetPlatform 'Windows64'
@@ -260,6 +271,7 @@ model {
                     //   linux/x86-64-fma/com/github/stephengold/libjoltjni.so
                     //   linux/armhf/com/github/stephengold/libjoltjni.so
                     //   linux/aarch64/com/github/stephengold/libjoltjni.so
+                    //   linux/loongarch64/com/github/stephengold/libjoltjni.so
                     //   osx/x86-64/com/github/stephengold/libjoltjni.dylib
                     //   osx/aarch64/com/github/stephengold/libjoltjni.dylib
                     //   windows/x86-64/com/github/stephengold/joltjni.dll
