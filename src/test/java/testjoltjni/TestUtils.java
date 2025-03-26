@@ -541,7 +541,7 @@ final public class TestUtils {
      * Print basic library information to the specified stream during
      * initialization.
      *
-     * @param printStream
+     * @param printStream the stream to print to (not null)
      */
     public static void printLibraryInfo(PrintStream printStream) {
         printStream.print("Jolt JNI version ");

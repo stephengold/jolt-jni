@@ -266,7 +266,7 @@ model {
                 if (buildable) {
                     println 'Build ' + q + ' using ' + toolChain
 
-                    // Generate resource path for native library, one of:
+                    // Generate resource path for the native library, one of:
                     //   linux/x86-64/com/github/stephengold/libjoltjni.so
                     //   linux/x86-64-fma/com/github/stephengold/libjoltjni.so
                     //   linux/armhf/com/github/stephengold/libjoltjni.so
