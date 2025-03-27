@@ -73,19 +73,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSet
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
- * Method:    getMaxPitchRollAngle
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getMaxPitchRollAngle
-  (JNIEnv *, jclass, jlong settingsVa) {
-    VehicleConstraintSettings * const pSettings
-            = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
-    const float result = pSettings->mMaxPitchRollAngle;
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
  * Method:    getForwardX
  * Signature: (J)F
  */
@@ -120,6 +107,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSe
     const VehicleConstraintSettings * const pSettings
             = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
     const float result = pSettings->mForward.GetZ();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
+ * Method:    getMaxPitchRollAngle
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getMaxPitchRollAngle
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const VehicleConstraintSettings * const pSettings
+            = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
+    const float result = pSettings->mMaxPitchRollAngle;
     return result;
 }
 
