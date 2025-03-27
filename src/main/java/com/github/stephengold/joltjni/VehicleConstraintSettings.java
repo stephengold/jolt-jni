@@ -107,7 +107,13 @@ public class VehicleConstraintSettings extends ConstraintSettings {
      * @return a new JVM object with the pre-existing native object assigned
      */
     public VehicleControllerSettings getController() {
-        VehicleControllerSettings result = controllerRef.getPtr();
+        VehicleControllerSettings result;
+        if (controllerRef == null) {
+            result = null;
+        } else {
+            result = controllerRef.getPtr();
+        }
+
         return result;
     }
 
