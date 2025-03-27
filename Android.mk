@@ -298,6 +298,7 @@ $(N)/glue/v/VehicleControllerSettings.cpp \
 $(N)/glue/v/VehicleDifferentialSettings.cpp \
 $(N)/glue/v/VehicleEngine.cpp \
 $(N)/glue/v/VehicleEngineSettings.cpp \
+$(N)/glue/v/VehicleStepListener.cpp \
 $(N)/glue/v/VehicleTrackSettings.cpp \
 $(N)/glue/v/VehicleTransmission.cpp \
 $(N)/glue/v/VehicleTransmissionSettings.cpp \

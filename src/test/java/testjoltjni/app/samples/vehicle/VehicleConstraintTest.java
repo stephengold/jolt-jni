@@ -65,7 +65,7 @@ float mPreviousForward=1f;
 
 public void Cleanup()
 {
-	mPhysicsSystem.removeStepListener(mVehicleConstraint.getPtr());
+	mPhysicsSystem.removeStepListener(mVehicleConstraint.getPtr().getStepListener());
 }
 
 public void Initialize()
@@ -200,7 +200,7 @@ public void Initialize()
 
 
 	mPhysicsSystem.addConstraint(mVehicleConstraint.getPtr());
-	mPhysicsSystem.addStepListener(mVehicleConstraint.getPtr());
+	mPhysicsSystem.addStepListener(mVehicleConstraint.getPtr().getStepListener());
 
 	UpdateCameraPivot();
 }

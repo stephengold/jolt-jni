@@ -133,7 +133,7 @@ if (implementsDebugRendering()){
 	((TrackedVehicleController )(mVehicleConstraint.getController())).setRpmMeter(new Vec3(0, 2, 0), 0.5f);
 } // JPH_DEBUG_RENDERER
 	mPhysicsSystem.addConstraint(mVehicleConstraint);
-	mPhysicsSystem.addStepListener(mVehicleConstraint);
+	mPhysicsSystem.addStepListener(mVehicleConstraint.getStepListener());
 
 	// Create turret
 	RVec3 turret_position = plus(body_position , new Vec3(0, half_vehicle_height + half_turret_height, 0));

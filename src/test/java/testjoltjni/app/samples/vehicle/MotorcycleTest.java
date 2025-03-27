@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -144,7 +144,7 @@ public void Initialize()
 	mVehicleConstraint = new VehicleConstraint(mMotorcycleBody, vehicle);
 	mVehicleConstraint.setVehicleCollisionTester(new VehicleCollisionTesterCastCylinder(Layers.MOVING, 1.0f)); // Use half wheel width as convex radius so we get a rounded cylinder
 	mPhysicsSystem.addConstraint(mVehicleConstraint);
-	mPhysicsSystem.addStepListener(mVehicleConstraint);
+	mPhysicsSystem.addStepListener(mVehicleConstraint.getStepListener());
 
 	UpdateCameraPivot();
 }

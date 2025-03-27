@@ -28,9 +28,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleConstraint
-        extends Constraint
-        implements PhysicsStepListener {
+public class VehicleConstraint extends Constraint {
     // *************************************************************************
     // fields
 
@@ -96,6 +94,21 @@ public class VehicleConstraint
         long controllerVa = getController(constraintVa);
         VehicleController result
                 = VehicleController.newController(this, controllerVa);
+
+        return result;
+    }
+
+    /**
+     * Access the vehicle's {@code PhysicsStepListener}. Since Java doesn't
+     * allow multiple inheritance, the listener is managed like a contained
+     * object.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public VehicleStepListener getStepListener() {
+        long constraintVa = va();
+        long listenerVa = getStepListener(constraintVa);
+        VehicleStepListener result = new VehicleStepListener(this, listenerVa);
 
         return result;
     }
@@ -248,21 +261,6 @@ public class VehicleConstraint
         return result;
     }
     // *************************************************************************
-    // PhysicsStepListener methods
-
-    /**
-     * Callback invoked (by native code) each time the system is stepped.
-     *
-     * @param contextVa the virtual address of a
-     * {@code PhysicsStepListenerContext} {@code PhysicsStepListenerContext}
-     * (not zero)
-     */
-    @Override
-    public void onStep(long contextVa) {
-        long constraintVa = va();
-        onStep(constraintVa, contextVa);
-    }
-    // *************************************************************************
     // native methods
 
     native private static int countWheels(long constraintVa);
@@ -270,6 +268,8 @@ public class VehicleConstraint
     native private static long createConstraint(long bodyVa, long settingsVa);
 
     native private static long getController(long constraintVa);
+
+    native private static long getStepListener(long constraintVa);
 
     native private static long getVehicleBody(long constraintVa);
 
@@ -283,8 +283,6 @@ public class VehicleConstraint
     native static float getWorldUpY(long constraintVa);
 
     native static float getWorldUpZ(long constraintVa);
-
-    native private static void onStep(long constraintVa, long contextVa);
 
     native static void overrideGravity(
             long constraintVa, float ax, float ay, float az);
