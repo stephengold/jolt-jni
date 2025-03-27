@@ -68,6 +68,7 @@ abstract public class WheelSettings
      *
      * @param enable {@code true} to apply at the configured suspension-force
      * point, {@code false} to apply at the wheel's point of contact
+     * (default=false)
      * @return the modified settings, for chaining
      */
     public WheelSettings setEnableSuspensionForcePoint(boolean enable) {

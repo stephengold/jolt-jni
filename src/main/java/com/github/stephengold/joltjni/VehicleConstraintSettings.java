@@ -137,7 +137,7 @@ public class VehicleConstraintSettings extends ConstraintSettings {
      * Return the vehicle's maximum pitch/roll angle. The settings are
      * unaffected. (native attribute: mMaxPitchRollAngle)
      *
-     * @return the angle (in radians)
+     * @return the limit angle (in radians)
      */
     public float getMaxPitchRollAngle() {
         long settingsVa = va();
@@ -208,7 +208,7 @@ public class VehicleConstraintSettings extends ConstraintSettings {
      * Alter how the vehicle accelerates and decelerates. (native attribute:
      * mController)
      *
-     * @param controllerSettings the desired settings (not null)
+     * @param controllerSettings the desired settings (not null, default=null)
      */
     public void setController(VehicleControllerSettings controllerSettings) {
         this.controllerRef = controllerSettings.toRef();
@@ -239,7 +239,7 @@ public class VehicleConstraintSettings extends ConstraintSettings {
      * Alter the vehicle's maximum pitch/roll angle. (native attribute:
      * mMaxPitchRollAngle)
      *
-     * @param angle the desired limit (in radians, default=Pi)
+     * @param angle the desired limit angle (in radians, default=Pi)
      */
     public void setMaxPitchRollAngle(float angle) {
         long settingsVa = va();
@@ -249,7 +249,7 @@ public class VehicleConstraintSettings extends ConstraintSettings {
     /**
      * Alter the number of anti-roll bars. (native attribute: mAntiRollBars)
      *
-     * @param count the desired number (&ge;0)
+     * @param count the desired number (&ge;0, default=0)
      */
     public void setNumAntiRollBars(int count) {
         long settingsVa = va();

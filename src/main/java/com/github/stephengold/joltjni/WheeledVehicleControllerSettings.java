@@ -110,7 +110,7 @@ public class WheeledVehicleControllerSettings
     /**
      * Alter the number of differentials. (native attribute: mDifferentials)
      *
-     * @param count the desired number (&ge;0)
+     * @param count the desired number (&ge;0, default=0)
      */
     public void setNumDifferentials(int count) {
         long settingsVa = va();
