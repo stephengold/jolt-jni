@@ -35,6 +35,14 @@ final public class SpringSettings extends JoltPhysicsObject {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public SpringSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa, () -> free(settingsVa));
+    }
+
+    /**
      * Instantiate settings with the specified native object assigned but not
      * owned.
      *
@@ -234,6 +242,10 @@ final public class SpringSettings extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createDefault();
+
+    native private static void free(long settingsVa);
 
     native private static float getDamping(long settingsVa);
 

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,34 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Constraints/SpringSettings.h"
 #include "auto/com_github_stephengold_joltjni_SpringSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_SpringSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SpringSettings_createDefault
+  (JNIEnv *, jclass) {
+    SpringSettings * const pResult = new SpringSettings();
+    TRACE_NEW("SpringSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SpringSettings
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SpringSettings_free
+  (JNIEnv *, jclass, jlong settingsVa) {
+    SpringSettings * const pSettings
+            = reinterpret_cast<SpringSettings *> (settingsVa);
+    TRACE_DELETE("SpringSettings", pSettings)
+    delete pSettings;
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_SpringSettings
