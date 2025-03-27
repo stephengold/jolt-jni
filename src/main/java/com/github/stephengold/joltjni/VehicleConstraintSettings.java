@@ -147,6 +147,19 @@ public class VehicleConstraintSettings extends ConstraintSettings {
     }
 
     /**
+     * Count the anti-roll bars. The settings are unaffected. (native attribute:
+     * mAntiRollBars)
+     *
+     * @return the count (&ge;0)
+     */
+    public int getNumAntiRollBars() {
+        long settingsVa = va();
+        int result = getNumAntiRollBars(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Count the wheels. The settings are unaffected. (native attribute:
      * mWheels)
      *
@@ -273,6 +286,8 @@ public class VehicleConstraintSettings extends ConstraintSettings {
     native private static float getForwardZ(long settingsVa);
 
     native private static float getMaxPitchRollAngle(long settingsVa);
+
+    native private static int getNumAntiRollBars(long settingsVa);
 
     native private static float getUpX(long settingsVa);
 

@@ -125,6 +125,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSe
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
+ * Method:    getNumAntiRollBars
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getNumAntiRollBars
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const VehicleConstraintSettings * const pSettings
+            = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
+    const size_t result = pSettings->mAntiRollBars.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
  * Method:    getUpX
  * Signature: (J)F
  */
