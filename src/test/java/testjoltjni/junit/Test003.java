@@ -440,6 +440,19 @@ public class Test003 {
     }
 
     /**
+     * Test the {@code WheelSettingsWv} class.
+     */
+    private static void doWheelSettingsWv() {
+        WheelSettingsWv wswv = new WheelSettingsWv();
+
+        testWheelSettingsWvDefaults(wswv);
+        testWheelSettingsWvSetters(wswv);
+
+        TestUtils.testClose(wswv);
+        System.gc();
+    }
+
+    /**
      * Test the {@code WheeledVehicleControllerSettings} class.
      */
     private static void doWvControllerSettings() {
@@ -450,19 +463,6 @@ public class Test003 {
         testWvControllerSettingsSetters(wvcs);
 
         TestUtils.testClose(wvcs);
-        System.gc();
-    }
-
-    /**
-     * Test the {@code WheelSettingsWv} class.
-     */
-    private static void doWheelSettingsWv() {
-        WheelSettingsWv wswv = new WheelSettingsWv();
-
-        testWheelSettingsWvDefaults(wswv);
-        testWheelSettingsWvSetters(wswv);
-
-        TestUtils.testClose(wswv);
         System.gc();
     }
 
@@ -702,6 +702,32 @@ public class Test003 {
     }
 
     /**
+     * Test the getters and defaults of the specified {@code MassProperties}.
+     *
+     * @param props the properties to test (not null, unaffected)
+     */
+    private static void testMpDefaults(ConstMassProperties props) {
+        Assert.assertTrue(props.hasAssignedNativeObject());
+        Assert.assertTrue(props.ownsNativeObject());
+
+        Assert.assertEquals(0f, props.getMass(), 0f);
+        Assert.assertTrue(props.getInertia().isEqual(Mat44.sZero()));
+    }
+
+    /**
+     * Test the setters of the specified {@code MassProperties}.
+     *
+     * @param props the properties to test (not null, modified)
+     */
+    private static void testMpSetters(MassProperties props) {
+        props.setMass(2f);
+        Assert.assertEquals(2f, props.getMass(), 0f);
+
+        props.setInertia(Mat44.sIdentity());
+        Assert.assertTrue(props.getInertia().isEqual(Mat44.sIdentity()));
+    }
+
+    /**
      * Test the getters and defaults of the specified {@code Parameters}.
      *
      * @param params the parameters to test (not null, unaffected)
@@ -804,32 +830,6 @@ public class Test003 {
     }
 
     /**
-     * Test the getters and defaults of the specified {@code MassProperties}.
-     *
-     * @param props the properties to test (not null, unaffected)
-     */
-    private static void testMpDefaults(ConstMassProperties props) {
-        Assert.assertTrue(props.hasAssignedNativeObject());
-        Assert.assertTrue(props.ownsNativeObject());
-
-        Assert.assertEquals(0f, props.getMass(), 0f);
-        Assert.assertTrue(props.getInertia().isEqual(Mat44.sZero()));
-    }
-
-    /**
-     * Test the setters of the specified {@code MassProperties}.
-     *
-     * @param props the properties to test (not null, modified)
-     */
-    private static void testMpSetters(MassProperties props) {
-        props.setMass(2f);
-        Assert.assertEquals(2f, props.getMass(), 0f);
-
-        props.setInertia(Mat44.sIdentity());
-        Assert.assertTrue(props.getInertia().isEqual(Mat44.sIdentity()));
-    }
-
-    /**
      * Test the getters and defaults of the specified {@code SpringSettings}.
      *
      * @param ss the settings to test (not null, unaffected)
@@ -862,34 +862,6 @@ public class Test003 {
         Assert.assertEquals(ESpringMode.StiffnessAndDamping, ss.getMode());
         Assert.assertEquals(3f, ss.getStiffness(), 0f);
         Assert.assertTrue(ss.hasStiffness());
-    }
-
-    /**
-     * Test the getters and defaults of the specified
-     * {@code WheeledVehicleControllerSettings}.
-     *
-     * @param wvcs the settings to test (not null, unaffected)
-     */
-    private static void testWvControllerSettingsDefaults(
-            WheeledVehicleControllerSettings wvcs) {
-        Assert.assertNotNull(wvcs.getEngine());
-        Assert.assertEquals(0, wvcs.getNumDifferentials());
-        Assert.assertNotNull(wvcs.getTransmission());
-    }
-
-    /**
-     * Test the setters of the specified
-     * {@code WheeledVehicleControllerSettings}.
-     *
-     * @param wvcs the settings to test (not null, modified)
-     */
-    private static void testWvControllerSettingsSetters(
-            WheeledVehicleControllerSettings wvcs) {
-        wvcs.setNumDifferentials(2);
-
-        Assert.assertEquals(2, wvcs.getNumDifferentials());
-        Assert.assertNotNull(wvcs.getDifferential(0));
-        Assert.assertNotNull(wvcs.getDifferential(1));
     }
 
     /**
@@ -1008,4 +980,33 @@ public class Test003 {
         TestUtils.assertEquals(0f, 0f, -1f, wswv.getWheelForward(), 0f);
         Assert.assertEquals(0.14f, wswv.getWidth(), 0f);
     }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code WheeledVehicleControllerSettings}.
+     *
+     * @param wvcs the settings to test (not null, unaffected)
+     */
+    private static void testWvControllerSettingsDefaults(
+            WheeledVehicleControllerSettings wvcs) {
+        Assert.assertNotNull(wvcs.getEngine());
+        Assert.assertEquals(0, wvcs.getNumDifferentials());
+        Assert.assertNotNull(wvcs.getTransmission());
+    }
+
+    /**
+     * Test the setters of the specified
+     * {@code WheeledVehicleControllerSettings}.
+     *
+     * @param wvcs the settings to test (not null, modified)
+     */
+    private static void testWvControllerSettingsSetters(
+            WheeledVehicleControllerSettings wvcs) {
+        wvcs.setNumDifferentials(2);
+
+        Assert.assertEquals(2, wvcs.getNumDifferentials());
+        Assert.assertNotNull(wvcs.getDifferential(0));
+        Assert.assertNotNull(wvcs.getDifferential(1));
+    }
+
 }
