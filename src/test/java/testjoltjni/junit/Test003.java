@@ -44,15 +44,20 @@ import com.github.stephengold.joltjni.Shape;
 import com.github.stephengold.joltjni.SkinWeight;
 import com.github.stephengold.joltjni.SoftBodyMotionProperties;
 import com.github.stephengold.joltjni.SphereShape;
+import com.github.stephengold.joltjni.SpringSettings;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorImpl;
 import com.github.stephengold.joltjni.TempAllocatorImplWithMallocFallback;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.VehicleConstraintSettings;
+import com.github.stephengold.joltjni.WheelSettingsWv;
+import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
 import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
+import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
@@ -93,9 +98,13 @@ public class Test003 {
         doParameters();
         doSkinWeight();
         doSoftBodyMotionProperties();
+        doSpringSettings();
         doTempAllocatorImpl();
         doTempAllocatorImplWithMallocFallback();
         doTempAllocatorMalloc();
+        doVehicleConstraintSettings();
+        doWvControllerSettings();
+        doWheelSettingsWv();
 
         TestUtils.cleanup();
     }
@@ -360,6 +369,19 @@ public class Test003 {
     }
 
     /**
+     * Test the {@code SpringSettings} class.
+     */
+    private static void doSpringSettings() {
+        SpringSettings ss = new SpringSettings();
+
+        testSpringSettingsDefaults(ss);
+        testSpringSettingsSetters(ss);
+
+        TestUtils.testClose(ss);
+        System.gc();
+    }
+
+    /**
      * Test the {@code TempAllocatorImpl} class.
      */
     private static void doTempAllocatorImpl() {
@@ -401,6 +423,46 @@ public class Test003 {
         Assert.assertNotEquals(0L, tempAllocator.va());
 
         TestUtils.testClose(tempAllocator);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code VehicleConstraintSettings} class.
+     */
+    private static void doVehicleConstraintSettings() {
+        VehicleConstraintSettings vcs = new VehicleConstraintSettings();
+
+        testVehicleConstraintSettingsDefaults(vcs);
+        testVehicleConstraintSettingsSetters(vcs);
+
+        TestUtils.testClose(vcs);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code WheeledVehicleControllerSettings} class.
+     */
+    private static void doWvControllerSettings() {
+        WheeledVehicleControllerSettings wvcs
+                = new WheeledVehicleControllerSettings();
+
+        testWvControllerSettingsDefaults(wvcs);
+        testWvControllerSettingsSetters(wvcs);
+
+        TestUtils.testClose(wvcs);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code WheelSettingsWv} class.
+     */
+    private static void doWheelSettingsWv() {
+        WheelSettingsWv wswv = new WheelSettingsWv();
+
+        testWheelSettingsWvDefaults(wswv);
+        testWheelSettingsWvSetters(wswv);
+
+        TestUtils.testClose(wswv);
         System.gc();
     }
 
@@ -765,5 +827,185 @@ public class Test003 {
 
         props.setInertia(Mat44.sIdentity());
         Assert.assertTrue(props.getInertia().isEqual(Mat44.sIdentity()));
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code SpringSettings}.
+     *
+     * @param ss the settings to test (not null, unaffected)
+     */
+    private static void testSpringSettingsDefaults(SpringSettings ss) {
+        Assert.assertNull(ss.getConstraint());
+        Assert.assertNull(ss.getConstraintSettings());
+        Assert.assertEquals(0f, ss.getDamping(), 0f);
+        Assert.assertEquals(0f, ss.getFrequency(), 0f);
+        Assert.assertEquals(ESpringMode.FrequencyAndDamping, ss.getMode());
+        Assert.assertEquals(0f, ss.getStiffness(), 0f);
+        Assert.assertFalse(ss.hasStiffness());
+    }
+
+    /**
+     * Test the setters of the specified {@code SpringSettings}.
+     *
+     * @param ss the settings to test (not null, modified)
+     */
+    private static void testSpringSettingsSetters(SpringSettings ss) {
+        ss.setFrequency(2f);
+        Assert.assertEquals(2f, ss.getFrequency(), 0f);
+
+        ss.setDamping(1f);
+        ss.setMode(ESpringMode.StiffnessAndDamping);
+        ss.setStiffness(3f);
+
+        Assert.assertEquals(1f, ss.getDamping(), 0f);
+        Assert.assertEquals(3f, ss.getFrequency(), 0f);
+        Assert.assertEquals(ESpringMode.StiffnessAndDamping, ss.getMode());
+        Assert.assertEquals(3f, ss.getStiffness(), 0f);
+        Assert.assertTrue(ss.hasStiffness());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code WheeledVehicleControllerSettings}.
+     *
+     * @param wvcs the settings to test (not null, unaffected)
+     */
+    private static void testWvControllerSettingsDefaults(
+            WheeledVehicleControllerSettings wvcs) {
+        Assert.assertNotNull(wvcs.getEngine());
+        Assert.assertEquals(0, wvcs.getNumDifferentials());
+        Assert.assertNotNull(wvcs.getTransmission());
+    }
+
+    /**
+     * Test the setters of the specified
+     * {@code WheeledVehicleControllerSettings}.
+     *
+     * @param wvcs the settings to test (not null, modified)
+     */
+    private static void testWvControllerSettingsSetters(
+            WheeledVehicleControllerSettings wvcs) {
+        wvcs.setNumDifferentials(2);
+
+        Assert.assertEquals(2, wvcs.getNumDifferentials());
+        Assert.assertNotNull(wvcs.getDifferential(0));
+        Assert.assertNotNull(wvcs.getDifferential(1));
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code VehicleConstraintSettings}.
+     *
+     * @param vcs the settings to test (not null, unaffected)
+     */
+    private static void testVehicleConstraintSettingsDefaults(
+            VehicleConstraintSettings vcs) {
+        Assert.assertEquals(0, vcs.getConstraintPriority());
+        Assert.assertNull(vcs.getController());
+        Assert.assertEquals(0, vcs.getControllerType());
+        Assert.assertEquals(1f, vcs.getDrawConstraintSize(), 0f);
+        Assert.assertTrue(vcs.getEnabled());
+        TestUtils.assertEquals(0f, 0f, 1f, vcs.getForward(), 0f);
+        Assert.assertEquals(Jolt.JPH_PI, vcs.getMaxPitchRollAngle(), 0f);
+        Assert.assertEquals(0, vcs.getNumAntiRollBars());
+        Assert.assertEquals(0, vcs.getNumPositionStepsOverride());
+        Assert.assertEquals(0, vcs.getNumVelocityStepsOverride());
+        Assert.assertEquals(0, vcs.getNumWheels());
+        TestUtils.assertEquals(0f, 1f, 0f, vcs.getUp(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code VehicleConstraintSettings}.
+     *
+     * @param vcs the settings to test (not null, modified)
+     */
+    private static void testVehicleConstraintSettingsSetters(
+            VehicleConstraintSettings vcs) {
+        vcs.addWheels(new WheelSettingsWv());
+        vcs.setConstraintPriority(9);
+        vcs.setController(new WheeledVehicleControllerSettings());
+        vcs.setDrawConstraintSize(8f);
+        vcs.setEnabled(false);
+        vcs.setForward(new Vec3(0.6f, 0.8f, 0f));
+        vcs.setMaxPitchRollAngle(1.2f);
+        vcs.setNumAntiRollBars(1);
+        vcs.setNumPositionStepsOverride(4);
+        vcs.setNumVelocityStepsOverride(5);
+        vcs.setUp(new Vec3(0f, 0f, -1f));
+
+        Assert.assertEquals(9, vcs.getConstraintPriority());
+        Assert.assertNotNull(vcs.getController());
+        Assert.assertEquals(4, vcs.getControllerType());
+        Assert.assertEquals(8f, vcs.getDrawConstraintSize(), 0f);
+        Assert.assertFalse(vcs.getEnabled());
+        TestUtils.assertEquals(0.6f, 0.8f, 0f, vcs.getForward(), 0f);
+        Assert.assertEquals(1.2f, vcs.getMaxPitchRollAngle(), 0f);
+        Assert.assertEquals(1, vcs.getNumAntiRollBars());
+        Assert.assertEquals(4, vcs.getNumPositionStepsOverride());
+        Assert.assertEquals(5, vcs.getNumVelocityStepsOverride());
+        Assert.assertEquals(1, vcs.getNumWheels());
+        TestUtils.assertEquals(0f, 0f, -1f, vcs.getUp(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code WheelSettingsWv}.
+     *
+     * @param wswv the settings to test (not null, unaffected)
+     */
+    private static void testWheelSettingsWvDefaults(WheelSettingsWv wswv) {
+        Assert.assertFalse(wswv.getEnableSuspensionForcePoint());
+        Assert.assertEquals(1_500f, wswv.getMaxBrakeTorque(), 0f);
+        Assert.assertEquals(4_000f, wswv.getMaxHandBrakeTorque(), 0f);
+        Assert.assertEquals(
+                Jolt.degreesToRadians(70f), wswv.getMaxSteerAngle(), 1e-7f);
+        TestUtils.assertEquals(0f, 0f, 0f, wswv.getPosition(), 0f);
+        Assert.assertEquals(0.3f, wswv.getRadius(), 0f);
+        TestUtils.assertEquals(0f, 1f, 0f, wswv.getSteeringAxis(), 0f);
+        TestUtils.assertEquals(0f, -1f, 0f, wswv.getSuspensionDirection(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, wswv.getSuspensionForcePoint(), 0f);
+        Assert.assertEquals(0.5f, wswv.getSuspensionMaxLength(), 0f);
+        Assert.assertEquals(0.3f, wswv.getSuspensionMinLength(), 0f);
+        Assert.assertEquals(0f, wswv.getSuspensionPreloadLength(), 0f);
+        Assert.assertNotNull(wswv.getSuspensionSpring());
+        TestUtils.assertEquals(0f, 0f, 1f, wswv.getWheelForward(), 0f);
+        Assert.assertEquals(0.1f, wswv.getWidth(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code WheelSettingsWv}.
+     *
+     * @param wswv the settings to test (not null, modified)
+     */
+    private static void testWheelSettingsWvSetters(WheelSettingsWv wswv) {
+        wswv.setEnableSuspensionForcePoint(true);
+        wswv.setMaxBrakeTorque(333f);
+        wswv.setMaxHandBrakeTorque(456f);
+        wswv.setMaxSteerAngle(0.1f);
+        wswv.setPosition(new Vec3(1f, 2f, 3f));
+        wswv.setRadius(0.4f);
+        wswv.setSteeringAxis(new Vec3(0f, 0f, 1f));
+        wswv.setSuspensionDirection(new Vec3(0f, -0.8f, 0.6f));
+        wswv.setSuspensionForcePoint(new Vec3(4f, 2f, 1f));
+        wswv.setSuspensionMaxLength(1f);
+        wswv.setSuspensionMinLength(0.2f);
+        wswv.setSuspensionPreloadLength(0.5f);
+        wswv.setWheelForward(new Vec3(0f, 0f, -1f));
+        wswv.setWidth(0.14f);
+
+        Assert.assertTrue(wswv.getEnableSuspensionForcePoint());
+        Assert.assertEquals(333f, wswv.getMaxBrakeTorque(), 0f);
+        Assert.assertEquals(456f, wswv.getMaxHandBrakeTorque(), 0f);
+        Assert.assertEquals(0.1f, wswv.getMaxSteerAngle(), 0f);
+        TestUtils.assertEquals(1f, 2f, 3f, wswv.getPosition(), 0f);
+        Assert.assertEquals(0.4f, wswv.getRadius(), 0f);
+        TestUtils.assertEquals(0f, 0f, 1f, wswv.getSteeringAxis(), 0f);
+        TestUtils.assertEquals(
+                0f, -0.8f, 0.6f, wswv.getSuspensionDirection(), 0f);
+        TestUtils.assertEquals(4f, 2f, 1f, wswv.getSuspensionForcePoint(), 0f);
+        Assert.assertEquals(1f, wswv.getSuspensionMaxLength(), 0f);
+        Assert.assertEquals(0.2f, wswv.getSuspensionMinLength(), 0f);
+        Assert.assertEquals(0.5f, wswv.getSuspensionPreloadLength(), 0f);
+        TestUtils.assertEquals(0f, 0f, -1f, wswv.getWheelForward(), 0f);
+        Assert.assertEquals(0.14f, wswv.getWidth(), 0f);
     }
 }
