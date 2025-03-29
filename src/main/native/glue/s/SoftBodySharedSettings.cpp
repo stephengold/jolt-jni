@@ -346,6 +346,32 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    putEdgeIndices
+ * Signature: (JILjava/nio/IntBuffer;)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_putEdgeIndices
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jint bufferPosition,
+  jobject storeIndices) {
+    jint * const pStoreInts
+            = (jint *) pEnv->GetDirectBufferAddress(storeIndices);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityInts = pEnv->GetDirectBufferCapacity(storeIndices);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    const Array<SoftBodySharedSettings::Edge>& edges
+            = pSettings->mEdgeConstraints;
+    const size_t numEdges = edges.size();
+    for (int i = 0; i < numEdges && bufferPosition + 1 < capacityInts; ++i) {
+        const SoftBodySharedSettings::Edge &edge = edges[i];
+        pStoreInts[bufferPosition++] = edge.mVertex[0];
+        pStoreInts[bufferPosition++] = edge.mVertex[1];
+    }
+    return bufferPosition;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    putFaceIndices
  * Signature: (JILjava/nio/IntBuffer;)I
  */
