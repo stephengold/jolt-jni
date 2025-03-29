@@ -297,7 +297,8 @@ public class SoftBodySharedSettings
     // ConstSoftBodySharedSettings methods
 
     /**
-     * Count the edge constraints. The settings are unaffected.
+     * Count the edge constraints. The settings are unaffected. (native
+     * attribute: mEdgeConstraints)
      *
      * @return the count (&ge;0)
      */
@@ -310,7 +311,7 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Count the faces. The settings are unaffected.
+     * Count the faces. The settings are unaffected. (native attribute: mFaces)
      *
      * @return the count (&ge;0)
      */
@@ -336,7 +337,8 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Count the vertices. The settings are unaffected.
+     * Count the vertices. The settings are unaffected. (native attribute:
+     * mVertices)
      *
      * @return the count (&ge;0)
      */
@@ -349,7 +351,8 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Count the volume constraints. The settings are unaffected.
+     * Count the volume constraints. The settings are unaffected. (native
+     * attribute: mVolumeConstraints)
      *
      * @return the count (&ge;0)
      */

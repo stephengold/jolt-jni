@@ -100,9 +100,9 @@ public class Vertex extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the inverse mass.
+     * Alter the inverse mass. (native attribute: mInvMass)
      *
-     * @param invMass the desired inverse mass (in 1/kilograms)
+     * @param invMass the desired inverse mass (in 1/kilograms, default=1)
      */
     public void setInvMass(float invMass) {
         long vertexVa = va();
@@ -110,9 +110,10 @@ public class Vertex extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the initial location of the vertex.
+     * Alter the initial location of the vertex. (native attribute: mPosition)
      *
-     * @param location the desired location (not null, unaffected)
+     * @param location the desired location (not null, unaffected
+     * default=(0,0,0))
      */
     public void setPosition(Float3 location) {
         long vertexVa = va();
@@ -123,9 +124,10 @@ public class Vertex extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the initial location of the vertex.
+     * Alter the initial location of the vertex. (native attribute: mPosition)
      *
-     * @param location the desired location (not null, unaffected)
+     * @param location the desired location (not null, unaffected
+     * default=(0,0,0))
      */
     public void setPosition(Vec3Arg location) {
         long vertexVa = va();
@@ -136,10 +138,10 @@ public class Vertex extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the initial velocity of the vertex.
+     * Alter the initial velocity of the vertex. (native attribute: mVelocity)
      *
      * @param velocity the desired velocity (in meters per second, not null,
-     * unaffected)
+     * unaffected default=(0,0,0))
      */
     public void setVelocity(Float3 velocity) {
         long vertexVa = va();
@@ -150,10 +152,10 @@ public class Vertex extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the initial velocity of the vertex.
+     * Alter the initial velocity of the vertex. (native attribute: mVelocity)
      *
      * @param velocity the desired velocity (in meters per second, not null,
-     * unaffected)
+     * unaffected, default=(0,0,0))
      */
     public void setVelocity(Vec3Arg velocity) {
         long vertexVa = va();
