@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -440,6 +440,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSetti
             = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
     const Quat orientation(qx, qy, qz, qw);
     pSettings->mRotation = orientation;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    setSettings
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_setSettings
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong sharedSettingsVa) {
+    SoftBodyCreationSettings * const pCreate
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    const SoftBodySharedSettings * const pShared
+            = reinterpret_cast<SoftBodySharedSettings *> (sharedSettingsVa);
+    pCreate->mSettings = pShared;
 }
 
 /*

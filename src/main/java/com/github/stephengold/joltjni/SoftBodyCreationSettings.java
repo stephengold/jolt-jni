@@ -249,6 +249,17 @@ public class SoftBodyCreationSettings
     }
 
     /**
+     * Replace the shared settings. (native attribute: mSettings)
+     *
+     * @param sharedSettings the desired settings (not null, alias created)
+     */
+    public void setSettings(ConstSoftBodySharedSettings sharedSettings) {
+        long bodySettingsVa = va();
+        long sharedSettingsVa = sharedSettings.targetVa();
+        setSettings(bodySettingsVa, sharedSettingsVa);
+    }
+
+    /**
      * Alter whether to update the position of the body during simulation.
      * (native member: mUpdatePosition)
      *
@@ -508,6 +519,9 @@ public class SoftBodyCreationSettings
 
     native private static void setRotation(
             long bodySettingsVa, float qx, float qy, float qz, float qw);
+
+    native private static void setSettings(
+            long bodySettingsVa, long sharedSettingsVa);
 
     native private static void setUpdatePosition(
             long bodySettingsVa, boolean enable);
