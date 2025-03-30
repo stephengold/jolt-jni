@@ -1,5 +1,62 @@
 # release log for the Jolt-JNI Project
 
+## Version 0.9.8 released on TBD
+
++ API changes:
+  + Removed the `containsBody()` method from the `PhysicsSystem` class.
+  + Deleted the public "user data" accessors from the `Shape` class.
+  + Redeclared the `ConvexHullBuilder` constructor.
+  + Changed `VehicleConstraint` to manage the step listener
+    like a contained object.
+  + Added chaining to 41 public methods.
+  + Changed the return types of the `getHits()` methods in the
+   `AllHitCollideShapeCollector` and `AllHitRayCastBodyCollector` classes.
+  + Corrected the return type of `SoftBodyCreationSettings.getSettings()`.
+
++ Bugfixes:
+  + `Shape` throws an `UnsatisfiedLinkError`
+  + `getHit()` doesn't return a new object
+  + silently starting extra cleaner threads
+  + logic error in MeshShapeSettings.cpp
+  + logic errors in `countDebugTriangles()` and `copyDebugTriangles()`
+  + bugfix: unimplemented `putEdgeIndices()` method
+
++ Added classes:
+  + `AllHitCastRayCollector`
+  + `AllHitCastShapeCollector`
+  + `AllHitCollidePointCollector`
+  + `AllHitCollideShapeBodyCollector`
+  + `AllHitTransformedShapeCollector`
+  + `AnyHitCastRayCollector`
+  + `AnyHitCastShapeCollector`
+  + `AnyHitCollideShapeCollector`
+  + `CharacterRefC`
+  + `CharacterVirtualRefC`
+  + `ClosestHitCollideShapeCollector`
+  + `CsrFace`
+  + `Float2`
+  + `GetTrianglesContext`
+  + `PhysicsMaterialRefC`
+  + `ScaleHelpers`
+  + `ShapeSettingsRefC`
+  + `SupportingFace`
+  + `TransformedShape`
+  + `TransformedShapeCollector`
+  + `VertexArray`
+
++ Added interfaces:
+  + `ConstFace`
+  + `ConstMotionProperties`
+  + `ConstSoftBodyMotionProperties`
+  + `ConstSoftBodyVertex`
+
++ Implemented revision counting for collision shapes.
++ Added many public constructors and methods to the libraries.
++ Defined another desktop platform:  Linux_LoongArch64
++ Updated the Jolt source code and assets to 0373ec0 (=v5.3.0).
++ Updated the jSnapLoader library to v1.1.1-stable .
++ Updated the OSHI library to v6.8.0 .
+
 ## Version 0.9.7 released on 6 March 2025
 
 + API changes:
