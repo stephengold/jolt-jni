@@ -21,13 +21,15 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstFace;
+
 /**
  * A triangular element on the surface of a soft body. (native type:
  * {@code SoftBodySharedSettings::Face})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Face extends JoltPhysicsObject {
+public class Face extends JoltPhysicsObject implements ConstFace {
     // *************************************************************************
     // constructors
 
@@ -53,45 +55,6 @@ public class Face extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the material index. The face is unaffected. (native attribute:
-     * mMaterialIndex)
-     *
-     * @return the index of the material in the body's shared settings (&ge;0)
-     */
-    public int getMaterialIndex() {
-        long faceVa = va();
-        int result = getMaterialIndex(faceVa);
-
-        return result;
-    }
-
-    /**
-     * Return the mesh vertex at the specified corner. The face is unaffected.
-     * (native attribute: mVertex)
-     *
-     * @param indexInFace which corner of the face (0 or 1 or 2)
-     * @return the mesh index of the vertex (&ge;0)
-     */
-    public int getVertex(int indexInFace) {
-        long faceVa = va();
-        int result = getVertex(faceVa, indexInFace);
-
-        return result;
-    }
-
-    /**
-     * Test whether the face is degenerate. The face is unaffected.
-     *
-     * @return {@code true} if degenerate, otherwise {@code false}
-     */
-    public boolean isDegenerate() {
-        long faceVa = va();
-        boolean result = isDegenerate(faceVa);
-
-        return result;
-    }
-
-    /**
      * Assign the specified material to the face. (native attribute:
      * mMaterialIndex)
      *
@@ -111,6 +74,50 @@ public class Face extends JoltPhysicsObject {
     public void setVertex(int indexInFace, int indexInMesh) {
         long faceVa = va();
         setVertex(faceVa, indexInFace, indexInMesh);
+    }
+    // *************************************************************************
+    // ConstFace methods
+
+    /**
+     * Return the material index. The face is unaffected. (native attribute:
+     * mMaterialIndex)
+     *
+     * @return the index of the material in the body's shared settings (&ge;0)
+     */
+    @Override
+    public int getMaterialIndex() {
+        long faceVa = va();
+        int result = getMaterialIndex(faceVa);
+
+        return result;
+    }
+
+    /**
+     * Return the mesh vertex at the specified corner. The face is unaffected.
+     * (native attribute: mVertex)
+     *
+     * @param indexInFace which corner of the face (0 or 1 or 2)
+     * @return the mesh index of the vertex (&ge;0)
+     */
+    @Override
+    public int getVertex(int indexInFace) {
+        long faceVa = va();
+        int result = getVertex(faceVa, indexInFace);
+
+        return result;
+    }
+
+    /**
+     * Test whether the face is degenerate. The face is unaffected.
+     *
+     * @return {@code true} if degenerate, otherwise {@code false}
+     */
+    @Override
+    public boolean isDegenerate() {
+        long faceVa = va();
+        boolean result = isDegenerate(faceVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods

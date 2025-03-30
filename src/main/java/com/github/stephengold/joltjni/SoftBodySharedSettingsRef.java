@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EBendType;
+import com.github.stephengold.joltjni.readonly.ConstFace;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
 import com.github.stephengold.joltjni.template.Ref;
@@ -78,9 +79,9 @@ final public class SoftBodySharedSettingsRef
      *
      * @param face the face to add (not null, unaffected)
      */
-    public void addFace(Face face) {
+    public void addFace(ConstFace face) {
         long settingsVa = targetVa();
-        long faceVa = face.va();
+        long faceVa = face.targetVa();
         SoftBodySharedSettings.addFace(settingsVa, faceVa);
     }
 
