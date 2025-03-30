@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstFace;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyMotionProperties;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -32,7 +33,9 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class SoftBodyMotionProperties extends MotionProperties {
+public class SoftBodyMotionProperties
+        extends MotionProperties
+        implements ConstSoftBodyMotionProperties {
     // *************************************************************************
     // constructors
 
@@ -72,156 +75,6 @@ public class SoftBodyMotionProperties extends MotionProperties {
         long bodyVa = softBody.va();
         long systemVa = system.va();
         customUpdate(propertiesVa, deltaTime, bodyVa, systemVa);
-    }
-
-    /**
-     * Test whether skinning constraints are enabled.
-     *
-     * @return {@code true} if enabled, {@code false} if disabled
-     */
-    public boolean getEnableSkinConstraints() {
-        long propertiesVa = va();
-        boolean result = getEnableSkinConstraints(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Access the specified face.
-     *
-     * @param index the index of the face (&ge;0)
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public ConstFace getFace(int index) {
-        long propertiesVa = va();
-        long faceVa = getFace(propertiesVa, index);
-        ConstFace result = new Face(this, faceVa);
-
-        return result;
-    }
-
-    /**
-     * Enumerate all faces in the soft body.
-     *
-     * @return a new array of new JVM objects
-     */
-    public ConstFace[] getFaces() {
-        long propertiesVa = va();
-        int numFaces = countFaces(propertiesVa);
-        ConstFace[] result = new Face[numFaces];
-        for (int i = 0; i < numFaces; ++i) {
-            long faceVa = getFace(propertiesVa, i);
-            result[i] = new Face(this, faceVa);
-        }
-
-        return result;
-    }
-
-    /**
-     * Return the number of solver iterations. The properties are unaffected.
-     *
-     * @return the number of iterations (&ge;0)
-     */
-    public int getNumIterations() {
-        long propertiesVa = va();
-        int result = getNumIterations(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Access the shared settings.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public SoftBodySharedSettings getSettings() {
-        long propertiesVa = va();
-        long settingsVa = getSettings(propertiesVa);
-        SoftBodySharedSettings result = new SoftBodySharedSettings(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum distance multiplier for skinned vertices. The
-     * properties are unaffected.
-     *
-     * @return the multiplier
-     */
-    public float getSkinnedMaxDistanceMultiplier() {
-        long propertiesVa = va();
-        float result = getSkinnedMaxDistanceMultiplier(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Access the specified vertex.
-     *
-     * @param index the index of the vertex (&ge;0)
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public SoftBodyVertex getVertex(int index) {
-        long propertiesVa = va();
-        long vertexVa = getVertex(propertiesVa, index);
-        SoftBodyVertex result = new SoftBodyVertex(this, vertexVa);
-
-        return result;
-    }
-
-    /**
-     * Enumerate all vertices in the soft body.
-     *
-     * @return a new array of new JVM objects with pre-existing native objects
-     * assigned
-     */
-    public SoftBodyVertex[] getVertices() {
-        long propertiesVa = va();
-        int numVertices = countVertices(propertiesVa);
-        SoftBodyVertex[] result = new SoftBodyVertex[numVertices];
-        for (int i = 0; i < numVertices; ++i) {
-            long vertexVa = getVertex(propertiesVa, i);
-            result[i] = new SoftBodyVertex(this, vertexVa);
-        }
-
-        return result;
-    }
-
-    /**
-     * Write the locations of all pinned vertices to the specified buffer and
-     * advance the buffer's position. The properties are unaffected.
-     *
-     * @param comLocation the location of the body's center of mass (not null)
-     * @param storeFloats the destination buffer (not null, modified)
-     */
-    public void putPinLocations(RVec3Arg comLocation, FloatBuffer storeFloats) {
-        long propertiesVa = va();
-        float x = comLocation.x();
-        float y = comLocation.y();
-        float z = comLocation.z();
-        int bufferPosition = storeFloats.position();
-        bufferPosition = putPinLocations(
-                propertiesVa, x, y, z, bufferPosition, storeFloats);
-        storeFloats.position(bufferPosition);
-    }
-
-    /**
-     * Write the locations of all vertices to the specified buffer and advance
-     * the buffer's position. The properties are unaffected.
-     *
-     * @param comLocation the location of the body's center of mass (not null)
-     * @param storeFloats the destination buffer (not null, modified)
-     */
-    public void putVertexLocations(
-            RVec3Arg comLocation, FloatBuffer storeFloats) {
-        long propertiesVa = va();
-        float x = comLocation.x();
-        float y = comLocation.y();
-        float z = comLocation.z();
-        int bufferPosition = storeFloats.position();
-        bufferPosition = putVertexLocations(
-                propertiesVa, x, y, z, bufferPosition, storeFloats);
-        storeFloats.position(bufferPosition);
     }
 
     /**
@@ -279,6 +132,170 @@ public class SoftBodyMotionProperties extends MotionProperties {
         long allocatorVa = allocator.va();
         skinVertices(propertiesVa, comTransformVa, jointMatrixVas,
                 hardSkinAll, allocatorVa);
+    }
+    // *************************************************************************
+    // ConstSoftBodyMotionProperties methods
+
+    /**
+     * Test whether skinning constraints are enabled. The properties are
+     * unaffected.
+     *
+     * @return {@code true} if enabled, {@code false} if disabled
+     */
+    @Override
+    public boolean getEnableSkinConstraints() {
+        long propertiesVa = va();
+        boolean result = getEnableSkinConstraints(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Access the specified face.
+     *
+     * @param index the index of the face (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public ConstFace getFace(int index) {
+        long propertiesVa = va();
+        long faceVa = getFace(propertiesVa, index);
+        Face result = new Face(this, faceVa);
+
+        return result;
+    }
+
+    /**
+     * Enumerate all faces in the soft body.
+     *
+     * @return a new array of new JVM objects with pre-existing native objects
+     * assigned
+     */
+    @Override
+    public ConstFace[] getFaces() {
+        long propertiesVa = va();
+        int numFaces = countFaces(propertiesVa);
+        ConstFace[] result = new Face[numFaces];
+        for (int i = 0; i < numFaces; ++i) {
+            long faceVa = getFace(propertiesVa, i);
+            result[i] = new Face(this, faceVa);
+        }
+
+        return result;
+    }
+
+    /**
+     * Return the number of solver iterations. The properties are unaffected.
+     *
+     * @return the number of iterations (&ge;0)
+     */
+    @Override
+    public int getNumIterations() {
+        long propertiesVa = va();
+        int result = getNumIterations(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Access the shared settings.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public SoftBodySharedSettings getSettings() {
+        long propertiesVa = va();
+        long settingsVa = getSettings(propertiesVa);
+        SoftBodySharedSettings result = new SoftBodySharedSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum distance multiplier for skinned vertices. The
+     * properties are unaffected.
+     *
+     * @return the multiplier
+     */
+    @Override
+    public float getSkinnedMaxDistanceMultiplier() {
+        long propertiesVa = va();
+        float result = getSkinnedMaxDistanceMultiplier(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Access the specified vertex.
+     *
+     * @param index the index of the vertex (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public SoftBodyVertex getVertex(int index) {
+        long propertiesVa = va();
+        long vertexVa = getVertex(propertiesVa, index);
+        SoftBodyVertex result = new SoftBodyVertex(this, vertexVa);
+
+        return result;
+    }
+
+    /**
+     * Enumerate all vertices in the soft body.
+     *
+     * @return a new array of new JVM objects with pre-existing native objects
+     * assigned
+     */
+    @Override
+    public SoftBodyVertex[] getVertices() {
+        long propertiesVa = va();
+        int numVertices = countVertices(propertiesVa);
+        SoftBodyVertex[] result = new SoftBodyVertex[numVertices];
+        for (int i = 0; i < numVertices; ++i) {
+            long vertexVa = getVertex(propertiesVa, i);
+            result[i] = new SoftBodyVertex(this, vertexVa);
+        }
+
+        return result;
+    }
+
+    /**
+     * Write the locations of all pinned vertices to the specified buffer and
+     * advance the buffer's position. The properties are unaffected.
+     *
+     * @param comLocation the location of the body's center of mass (not null)
+     * @param storeFloats the destination buffer (not null, modified)
+     */
+    @Override
+    public void putPinLocations(RVec3Arg comLocation, FloatBuffer storeFloats) {
+        long propertiesVa = va();
+        float x = comLocation.x();
+        float y = comLocation.y();
+        float z = comLocation.z();
+        int bufferPosition = storeFloats.position();
+        bufferPosition = putPinLocations(
+                propertiesVa, x, y, z, bufferPosition, storeFloats);
+        storeFloats.position(bufferPosition);
+    }
+
+    /**
+     * Write the locations of all vertices to the specified buffer and advance
+     * the buffer's position. The properties are unaffected.
+     *
+     * @param comLocation the location of the body's center of mass (not null)
+     * @param storeFloats the destination buffer (not null, modified)
+     */
+    @Override
+    public void putVertexLocations(
+            RVec3Arg comLocation, FloatBuffer storeFloats) {
+        long propertiesVa = va();
+        float x = comLocation.x();
+        float y = comLocation.y();
+        float z = comLocation.z();
+        int bufferPosition = storeFloats.position();
+        bufferPosition = putVertexLocations(
+                propertiesVa, x, y, z, bufferPosition, storeFloats);
+        storeFloats.position(bufferPosition);
     }
     // *************************************************************************
     // native private methods
