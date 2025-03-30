@@ -32,8 +32,7 @@ public interface ConstFace extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the material index. The face is unaffected. (native attribute:
-     * mMaterialIndex)
+     * Return the material index. The face is unaffected.
      *
      * @return the index of the material in the body's shared settings (&ge;0)
      */
@@ -41,7 +40,6 @@ public interface ConstFace extends ConstJoltPhysicsObject {
 
     /**
      * Return the mesh vertex at the specified corner. The face is unaffected.
-     * (native attribute: mVertex)
      *
      * @param indexInFace which corner of the face (0 or 1 or 2)
      * @return the mesh index of the vertex (&ge;0)

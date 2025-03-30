@@ -36,46 +36,41 @@ public interface ConstSoftBodyVertex extends ConstJoltPhysicsObject {
 
     /**
      * Return the index of the colliding shape. The vertex is unaffected.
-     * (native attribute: mCollidingShapeIndex)
      *
      * @return the index
      */
     int getCollidingShapeIndex();
 
     /**
-     * Copy the collision plane. The vertex is unaffected. (native attribute:
-     * mCollisionPlane)
+     * Copy the collision plane. The vertex is unaffected.
      *
      * @return a new object
      */
     Plane getCollisionPlane();
 
     /**
-     * Return the inverse mass. The vertex is unaffected. (native attribute:
-     * mInvMass)
+     * Return the inverse mass. The vertex is unaffected.
      *
      * @return the inverse of the mass (in 1/kilograms)
      */
     float getInvMass();
 
     /**
-     * Return the amount of penetration. (native attribute: mLargestPenetration)
+     * Return the amount of penetration. The vertex is unaffected.
      *
      * @return the depth (in meters)
      */
     float getLargestPenetration();
 
     /**
-     * Copy the location. The vertex is unaffected. (native attribute:
-     * mPosition)
+     * Copy the location. The vertex is unaffected.
      *
      * @return a new location vector (relative to the body's center of mass)
      */
     Vec3 getPosition();
 
     /**
-     * Copy the velocity. The vertex is unaffected. (native attribute:
-     * mVelocity)
+     * Copy the velocity. The vertex is unaffected.
      *
      * @return a new velocity vector (relative to the body's center of mass, in
      * meters per second)
@@ -84,7 +79,7 @@ public interface ConstSoftBodyVertex extends ConstJoltPhysicsObject {
 
     /**
      * Test whether the vertex collided during the previous update. The vertex
-     * is unaffected. (native attribute: mHasContact)
+     * is unaffected.
      *
      * @return {@code true} if it collided, otherwise {@code false}
      */

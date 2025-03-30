@@ -79,7 +79,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
 
     /**
      * Test whether the gyroscopic force will be applied. The settings are
-     * unaffected. (native attribute: mApplyGyroscopicForce)
+     * unaffected.
      *
      * @return {@code true} if enabled, otherwise {@code false}
      */

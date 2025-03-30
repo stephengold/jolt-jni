@@ -28,7 +28,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 
 /**
- * Read-only access to {@code MotionProperties}. (native type: const
+ * Read-only access to {@code MotionProperties} object. (native type: const
  * MotionProperties)
  *
  * @author Stephen Gold sgold@sonic.net
