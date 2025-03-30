@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
+import com.github.stephengold.joltjni.readonly.ConstMotionProperties;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -32,7 +33,9 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MotionProperties extends JoltPhysicsObject {
+public class MotionProperties
+        extends JoltPhysicsObject
+        implements ConstMotionProperties {
     // *************************************************************************
     // constructors
 
@@ -65,288 +68,6 @@ public class MotionProperties extends JoltPhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Copy the net force acting on the body. The properties are unaffected.
-     *
-     * @return a new force vector (Newtons in system coordinates)
-     */
-    public Vec3 getAccumulatedForce() {
-        long propertiesVa = va();
-        float x = getAccumulatedForceX(propertiesVa);
-        float y = getAccumulatedForceY(propertiesVa);
-        float z = getAccumulatedForceZ(propertiesVa);
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
-    }
-
-    /**
-     * Copy the net torque acting on the body. The properties are unaffected.
-     *
-     * @return a new torque vector (Newton.meters in system coordinates)
-     */
-    public Vec3 getAccumulatedTorque() {
-        long propertiesVa = va();
-        float x = getAccumulatedTorqueX(propertiesVa);
-        float y = getAccumulatedTorqueY(propertiesVa);
-        float z = getAccumulatedTorqueZ(propertiesVa);
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
-    }
-
-    /**
-     * Return the allowed degrees of freedom. The properties are unaffected.
-     *
-     * @return logical OR of values defined in {@code EAllowedDofs}
-     */
-    public int getAllowedDofs() {
-        long propertiesVa = va();
-        int result = getAllowedDofs(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether the body is allowed to fall asleep. The properties are
-     * unaffected.
-     *
-     * @return {@code true} if allowed, otherwise {@code false}
-     */
-    public boolean getAllowSleeping() {
-        long propertiesVa = va();
-        boolean result = getAllowSleeping(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Return the angular damping coefficient. The properties are unaffected.
-     *
-     * @return the coefficient value (in units of per second, &ge;0, &le;1)
-     */
-    public float getAngularDamping() {
-        long propertiesVa = va();
-        float result = getAngularDamping(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Returns a vector in which the disabled angular components are set to zero
-     * and enabled ones are set to -1. The properties are unaffected.
-     *
-     * @return a new vector
-     */
-    public UVec4 getAngularDofsMask() {
-        long propertiesVa = va();
-        int dofs = getAllowedDofs(propertiesVa);
-        UVec4 result = new UVec4();
-
-        if ((dofs & EAllowedDofs.RotationX) != 0) {
-            result.setX(-1);
-        }
-        if ((dofs & EAllowedDofs.RotationY) != 0) {
-            result.setY(-1);
-        }
-        if ((dofs & EAllowedDofs.RotationZ) != 0) {
-            result.setZ(-1);
-        }
-
-        return result;
-    }
-
-    /**
-     * Copy the angular velocity. The properties are unaffected.
-     *
-     * @return a new velocity vector (radians per second in system coordinates)
-     */
-    public Vec3 getAngularVelocity() {
-        long propertiesVa = va();
-        float wx = getAngularVelocityX(propertiesVa);
-        float wy = getAngularVelocityY(propertiesVa);
-        float wz = getAngularVelocityZ(propertiesVa);
-        Vec3 result = new Vec3(wx, wy, wz);
-
-        return result;
-    }
-
-    /**
-     * Return the gravity factor. The properties are unaffected.
-     *
-     * @return the factor
-     */
-    public float getGravityFactor() {
-        long propertiesVa = va();
-        float result = getGravityFactor(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Return the rotation that takes the inverse-inertia diagonal to local
-     * coordinates. The properties are unaffected.
-     *
-     * @return a new object
-     */
-    public Quat getInertiaRotation() {
-        long propertiesVa = va();
-        float qw = getInertiaRotationW(propertiesVa);
-        float qx = getInertiaRotationX(propertiesVa);
-        float qy = getInertiaRotationY(propertiesVa);
-        float qz = getInertiaRotationZ(propertiesVa);
-        Quat result = new Quat(qx, qy, qz, qw);
-
-        return result;
-    }
-
-    /**
-     * Copies the diagonal components of the inverse inertia matrix, assuming a
-     * dynamic body. The properties are unaffected.
-     *
-     * @return a new vector (all components &ge;0)
-     */
-    public Vec3 getInverseInertiaDiagonal() {
-        long propertiesVa = va();
-        float dx = getInverseInertiaXX(propertiesVa);
-        float dy = getInverseInertiaYY(propertiesVa);
-        float dz = getInverseInertiaZZ(propertiesVa);
-        Vec3 result = new Vec3(dx, dy, dz);
-
-        return result;
-    }
-
-    /**
-     * Return the body's inverse mass. The properties are unaffected.
-     *
-     * @return the value (&ge;0)
-     */
-    public float getInverseMass() {
-        long propertiesVa = va();
-        float result = getInverseMass(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Return the body's inverse mass. The properties are unaffected.
-     *
-     * @return the value (&ge;0)
-     */
-    public float getInverseMassUnchecked() {
-        long propertiesVa = va();
-        float result = getInverseMassUnchecked(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Return the linear damping coefficient. The properties are unaffected.
-     *
-     * @return the coefficient value (in units of per second, &ge;0, &le;1)
-     */
-    public float getLinearDamping() {
-        long propertiesVa = va();
-        float result = getLinearDamping(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Copy the linear velocity. The properties are unaffected.
-     *
-     * @return a new velocity vector (meters per second in system coordinates)
-     */
-    public Vec3 getLinearVelocity() {
-        long propertiesVa = va();
-        float vx = getLinearVelocityX(propertiesVa);
-        float vy = getLinearVelocityY(propertiesVa);
-        float vz = getLinearVelocityZ(propertiesVa);
-        Vec3 result = new Vec3(vx, vy, vz);
-
-        return result;
-    }
-
-    /**
-     * Copy the inverse-inertia matrix. The properties are unaffected.
-     *
-     * @return a new object
-     */
-    public Mat44 getLocalSpaceInverseInertia() {
-        long propertiesVa = va();
-        long matrixVa = getLocalSpaceInverseInertia(propertiesVa);
-        Mat44 result = new Mat44(matrixVa, true);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum angular speed that the body can achieve. The
-     * properties are unaffected.
-     *
-     * @return the speed limit (in radians per second)
-     */
-    public float getMaxAngularVelocity() {
-        long propertiesVa = va();
-        float result = getMaxAngularVelocity(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum linear speed that the body can achieve. The properties
-     * are unaffected.
-     *
-     * @return the speed limit (in meters per second)
-     */
-    public float getMaxLinearVelocity() {
-        long propertiesVa = va();
-        float result = getMaxLinearVelocity(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Return the motion quality. The properties are unaffected.
-     *
-     * @return an enum value (not null)
-     */
-    public EMotionQuality getMotionQuality() {
-        long propertiesVa = va();
-        int ordinal = getMotionQuality(propertiesVa);
-        EMotionQuality result = EMotionQuality.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the number of position iterations used in the solver. The
-     * properties are unaffected.
-     *
-     * @return the count (&gt;0) or 0 to use number specified in the
-     * {@code PhysicsSettings}
-     */
-    public int getNumPositionStepsOverride() {
-        long propertiesVa = va();
-        int result = getNumPositionStepsOverride(propertiesVa);
-
-        return result;
-    }
-
-    /**
-     * Return the number of velocity iterations used in the solver. The
-     * properties are unaffected.
-     *
-     * @return the count (&gt;0) or 0 to use number specified in the
-     * {@code PhysicsSettings}
-     */
-    public int getNumVelocityStepsOverride() {
-        long propertiesVa = va();
-        int result = getNumVelocityStepsOverride(propertiesVa);
-
-        return result;
-    }
 
     /**
      * Reposition the body, assuming it's kinematic.
@@ -532,6 +253,310 @@ public class MotionProperties extends JoltPhysicsObject {
     public void setNumVelocityStepsOverride(int numIterations) {
         long propertiesVa = va();
         setNumVelocityStepsOverride(propertiesVa, numIterations);
+    }
+    // *************************************************************************
+    // ConstMotionProperties methods
+
+    /**
+     * Copy the net force acting on the body. The properties are unaffected.
+     *
+     * @return a new force vector (Newtons in system coordinates)
+     */
+    @Override
+    public Vec3 getAccumulatedForce() {
+        long propertiesVa = va();
+        float x = getAccumulatedForceX(propertiesVa);
+        float y = getAccumulatedForceY(propertiesVa);
+        float z = getAccumulatedForceZ(propertiesVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the net torque acting on the body. The properties are unaffected.
+     *
+     * @return a new torque vector (Newton.meters in system coordinates)
+     */
+    @Override
+    public Vec3 getAccumulatedTorque() {
+        long propertiesVa = va();
+        float x = getAccumulatedTorqueX(propertiesVa);
+        float y = getAccumulatedTorqueY(propertiesVa);
+        float z = getAccumulatedTorqueZ(propertiesVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Return the allowed degrees of freedom. The properties are unaffected.
+     *
+     * @return logical OR of values defined in {@code EAllowedDofs}
+     */
+    @Override
+    public int getAllowedDofs() {
+        long propertiesVa = va();
+        int result = getAllowedDofs(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the body is allowed to fall asleep. The properties are
+     * unaffected.
+     *
+     * @return {@code true} if allowed, otherwise {@code false}
+     */
+    @Override
+    public boolean getAllowSleeping() {
+        long propertiesVa = va();
+        boolean result = getAllowSleeping(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Return the angular damping coefficient. The properties are unaffected.
+     *
+     * @return the coefficient value (in units of per second, &ge;0, &le;1)
+     */
+    @Override
+    public float getAngularDamping() {
+        long propertiesVa = va();
+        float result = getAngularDamping(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Generate a vector in which the disabled angular components are set to
+     * zero and enabled ones are set to -1. The properties are unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public UVec4 getAngularDofsMask() {
+        long propertiesVa = va();
+        int dofs = getAllowedDofs(propertiesVa);
+        UVec4 result = new UVec4();
+
+        if ((dofs & EAllowedDofs.RotationX) != 0) {
+            result.setX(-1);
+        }
+        if ((dofs & EAllowedDofs.RotationY) != 0) {
+            result.setY(-1);
+        }
+        if ((dofs & EAllowedDofs.RotationZ) != 0) {
+            result.setZ(-1);
+        }
+
+        return result;
+    }
+
+    /**
+     * Copy the angular velocity. The properties are unaffected.
+     *
+     * @return a new velocity vector (radians per second in system coordinates)
+     */
+    @Override
+    public Vec3 getAngularVelocity() {
+        long propertiesVa = va();
+        float wx = getAngularVelocityX(propertiesVa);
+        float wy = getAngularVelocityY(propertiesVa);
+        float wz = getAngularVelocityZ(propertiesVa);
+        Vec3 result = new Vec3(wx, wy, wz);
+
+        return result;
+    }
+
+    /**
+     * Return the gravity factor. The properties are unaffected.
+     *
+     * @return the factor
+     */
+    @Override
+    public float getGravityFactor() {
+        long propertiesVa = va();
+        float result = getGravityFactor(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the rotation that takes the inverse-inertia diagonal to local
+     * coordinates. The properties are unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public Quat getInertiaRotation() {
+        long propertiesVa = va();
+        float qw = getInertiaRotationW(propertiesVa);
+        float qx = getInertiaRotationX(propertiesVa);
+        float qy = getInertiaRotationY(propertiesVa);
+        float qz = getInertiaRotationZ(propertiesVa);
+        Quat result = new Quat(qx, qy, qz, qw);
+
+        return result;
+    }
+
+    /**
+     * Copy the diagonal components of the inverse inertia matrix, assuming a
+     * dynamic body. The properties are unaffected.
+     *
+     * @return a new vector (all components &ge;0)
+     */
+    @Override
+    public Vec3 getInverseInertiaDiagonal() {
+        long propertiesVa = va();
+        float dx = getInverseInertiaXX(propertiesVa);
+        float dy = getInverseInertiaYY(propertiesVa);
+        float dz = getInverseInertiaZZ(propertiesVa);
+        Vec3 result = new Vec3(dx, dy, dz);
+
+        return result;
+    }
+
+    /**
+     * Return the body's inverse mass. The properties are unaffected.
+     *
+     * @return the value (&ge;0)
+     */
+    @Override
+    public float getInverseMass() {
+        long propertiesVa = va();
+        float result = getInverseMass(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Return the body's inverse mass. The properties are unaffected.
+     *
+     * @return the value (&ge;0)
+     */
+    @Override
+    public float getInverseMassUnchecked() {
+        long propertiesVa = va();
+        float result = getInverseMassUnchecked(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Return the linear damping coefficient. The properties are unaffected.
+     *
+     * @return the coefficient value (in units of per second, &ge;0, &le;1)
+     */
+    @Override
+    public float getLinearDamping() {
+        long propertiesVa = va();
+        float result = getLinearDamping(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the linear velocity. The properties are unaffected.
+     *
+     * @return a new velocity vector (meters per second in system coordinates)
+     */
+    @Override
+    public Vec3 getLinearVelocity() {
+        long propertiesVa = va();
+        float vx = getLinearVelocityX(propertiesVa);
+        float vy = getLinearVelocityY(propertiesVa);
+        float vz = getLinearVelocityZ(propertiesVa);
+        Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Copy the inverse-inertia matrix. The properties are unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public Mat44 getLocalSpaceInverseInertia() {
+        long propertiesVa = va();
+        long matrixVa = getLocalSpaceInverseInertia(propertiesVa);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum angular speed that the body can achieve. The
+     * properties are unaffected.
+     *
+     * @return the speed limit (in radians per second)
+     */
+    @Override
+    public float getMaxAngularVelocity() {
+        long propertiesVa = va();
+        float result = getMaxAngularVelocity(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum linear speed that the body can achieve. The properties
+     * are unaffected.
+     *
+     * @return the speed limit (in meters per second)
+     */
+    @Override
+    public float getMaxLinearVelocity() {
+        long propertiesVa = va();
+        float result = getMaxLinearVelocity(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Return the motion quality. The properties are unaffected.
+     *
+     * @return an enum value (not null)
+     */
+    @Override
+    public EMotionQuality getMotionQuality() {
+        long propertiesVa = va();
+        int ordinal = getMotionQuality(propertiesVa);
+        EMotionQuality result = EMotionQuality.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the number of position iterations used in the solver. The
+     * properties are unaffected.
+     *
+     * @return the count (&gt;0) or 0 to use number specified in the
+     * {@code PhysicsSettings}
+     */
+    @Override
+    public int getNumPositionStepsOverride() {
+        long propertiesVa = va();
+        int result = getNumPositionStepsOverride(propertiesVa);
+
+        return result;
+    }
+
+    /**
+     * Return the number of velocity iterations used in the solver. The
+     * properties are unaffected.
+     *
+     * @return the count (&gt;0) or 0 to use number specified in the
+     * {@code PhysicsSettings}
+     */
+    @Override
+    public int getNumVelocityStepsOverride() {
+        long propertiesVa = va();
+        int result = getNumVelocityStepsOverride(propertiesVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods

@@ -237,30 +237,6 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Access the body's motion properties.
-     *
-     * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null} if none
-     */
-    public MotionProperties getMotionProperties() {
-        MotionProperties result;
-        long bodyVa = va();
-        if (isStatic(bodyVa)) {
-            result = null;
-        } else {
-            long propertiesVa = getMotionProperties(bodyVa);
-            JoltPhysicsObject container = getContainingObject();
-            if (isSoftBody(bodyVa)) {
-                result = new SoftBodyMotionProperties(container, propertiesVa);
-            } else {
-                result = new MotionProperties(container, propertiesVa);
-            }
-        }
-
-        return result;
-    }
-
-    /**
      * Reposition the body, assuming it's kinematic.
      *
      * @param location the desired location (in system coordinates, not null,
@@ -712,6 +688,31 @@ public class Body extends NonCopyable implements ConstBody {
         float vy = getLinearVelocityY(bodyVa);
         float vz = getLinearVelocityZ(bodyVa);
         Vec3 result = new Vec3(vx, vy, vz);
+
+        return result;
+    }
+
+    /**
+     * Access the body's motion properties.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    @Override
+    public MotionProperties getMotionProperties() {
+        MotionProperties result;
+        long bodyVa = va();
+        if (isStatic(bodyVa)) {
+            result = null;
+        } else {
+            long propertiesVa = getMotionProperties(bodyVa);
+            JoltPhysicsObject container = getContainingObject();
+            if (isSoftBody(bodyVa)) {
+                result = new SoftBodyMotionProperties(container, propertiesVa);
+            } else {
+                result = new MotionProperties(container, propertiesVa);
+            }
+        }
 
         return result;
     }

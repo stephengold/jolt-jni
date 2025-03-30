@@ -154,6 +154,14 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     Vec3 getLinearVelocity();
 
     /**
+     * Access the body's motion properties.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    ConstMotionProperties getMotionProperties();
+
+    /**
      * Return the body's motion type. The body is unaffected.
      *
      * @return an enum value (not null)
