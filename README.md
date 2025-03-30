@@ -83,10 +83,10 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
     }
     dependencies {
         // JVM library:
-        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.7")
+        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.8")
 
         // native libraries:
-        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.7:DebugSp")
+        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.8:DebugSp")
         // Native libraries for other platforms could be added.
     }
 
@@ -119,7 +119,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
         mavenCentral()
     }
     dependencies {
-        implementation("com.github.stephengold:jolt-jni:0.9.7:SpDebug@aar")
+        implementation("com.github.stephengold:jolt-jni:0.9.8:SpDebug@aar")
     }
 
 + The "SpDebug" classifier may be replaced by "SpRelease".
@@ -152,7 +152,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
   + using [Git]:
     + `git clone https://github.com/stephengold/jolt-jni.git`
     + `cd jolt-jni`
-    + `git checkout -b latest 0.9.7`
+    + `git checkout -b latest 0.9.8`
   + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link at the bottom of the page

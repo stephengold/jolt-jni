@@ -1,6 +1,6 @@
 # release log for the Jolt-JNI Project
 
-## Version 0.9.8 released on TBD
+## Version 0.9.8 released on 30 March 2025
 
 + API changes:
   + Removed the `containsBody()` method from the `PhysicsSystem` class.
