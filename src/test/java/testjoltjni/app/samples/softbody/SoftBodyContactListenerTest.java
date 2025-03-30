@@ -22,7 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.softbody;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
-import com.github.stephengold.joltjni.readonly.ConstBody;
+import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
@@ -162,7 +162,7 @@ void OnSoftBodyContactAdded(ConstBody  inSoftBody,  SoftBodyManifold inManifold)
 {
 	// Draw contacts
 	RMat44 com = inSoftBody.getCenterOfMassTransform();
-	for (SoftBodyVertex vertex : inManifold.getVertices())
+	for (ConstSoftBodyVertex vertex : inManifold.getVertices())
 		if (inManifold.hasContact(vertex))
 		{
 			RVec3 position = star(com , inManifold.getLocalContactPoint(vertex));

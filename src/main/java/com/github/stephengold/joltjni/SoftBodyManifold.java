@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyVertex;
+
 /**
  * The vertices of a soft body that are colliding with other bodies.
  *
@@ -51,9 +53,9 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
      * @param vertex the vertex to query (not null, unaffected)
      * @return a new object
      */
-    public BodyId getContactBodyId(SoftBodyVertex vertex) {
+    public BodyId getContactBodyId(ConstSoftBodyVertex vertex) {
         long manifoldVa = va();
-        long vertexVa = vertex.va();
+        long vertexVa = vertex.targetVa();
         long idVa = getContactBodyId(manifoldVa, vertexVa);
         BodyId result = new BodyId(idVa, true);
 
@@ -66,9 +68,9 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
      * @param vertex the vertex to query (not null, unaffected)
      * @return a new vector
      */
-    public Vec3 getContactNormal(SoftBodyVertex vertex) {
+    public Vec3 getContactNormal(ConstSoftBodyVertex vertex) {
         long manifoldVa = va();
-        long vertexVa = vertex.va();
+        long vertexVa = vertex.targetVa();
         float nx = getLocalContactNormalX(manifoldVa, vertexVa);
         float ny = getLocalContactNormalY(manifoldVa, vertexVa);
         float nz = getLocalContactNormalZ(manifoldVa, vertexVa);
@@ -83,9 +85,9 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
      * @param vertex the vertex to query (not null, unaffected)
      * @return a new location vector (in local coordinates)
      */
-    public Vec3 getLocalContactPoint(SoftBodyVertex vertex) {
+    public Vec3 getLocalContactPoint(ConstSoftBodyVertex vertex) {
         long manifoldVa = va();
-        long vertexVa = vertex.va();
+        long vertexVa = vertex.targetVa();
         float x = getLocalContactPointX(manifoldVa, vertexVa);
         float y = getLocalContactPointY(manifoldVa, vertexVa);
         float z = getLocalContactPointZ(manifoldVa, vertexVa);
@@ -126,10 +128,10 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
      * @return a new array of new JVM objects with pre-existing native objects
      * assigned
      */
-    public SoftBodyVertex[] getVertices() {
+    public ConstSoftBodyVertex[] getVertices() {
         long manifoldVa = va();
         int numVertices = countVertices(manifoldVa);
-        SoftBodyVertex[] result = new SoftBodyVertex[numVertices];
+        ConstSoftBodyVertex[] result = new SoftBodyVertex[numVertices];
 
         JoltPhysicsObject container = ownsNativeObject() ? this : null;
         for (int i = 0; i < numVertices; ++i) {
@@ -146,9 +148,9 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
      * @param vertex the vertex to query (not null, unaffected)
      * @return {@code true} if it collided, otherwise {@code false}
      */
-    public boolean hasContact(SoftBodyVertex vertex) {
+    public boolean hasContact(ConstSoftBodyVertex vertex) {
         long manifoldVa = va();
-        long vertexVa = vertex.va();
+        long vertexVa = vertex.targetVa();
         boolean result = hasContact(manifoldVa, vertexVa);
 
         return result;

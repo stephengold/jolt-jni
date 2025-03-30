@@ -22,15 +22,19 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstPlane;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyVertex;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
 /**
- * Run-time information for a single particle in a soft body.
+ * Run-time information for a single particle in a soft body. (native type:
+ * {@code SoftBodyMotionProperties::Vertex})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class SoftBodyVertex extends JoltPhysicsObject {
+public class SoftBodyVertex
+        extends JoltPhysicsObject
+        implements ConstSoftBodyVertex {
     // *************************************************************************
     // constructors
 
@@ -54,105 +58,6 @@ public class SoftBodyVertex extends JoltPhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Return the index of the colliding shape. The vertex is unaffected.
-     * (native attribute: mCollidingShapeIndex)
-     *
-     * @return the index
-     */
-    public int getCollidingShapeIndex() {
-        long vertexVa = va();
-        int result = getCollidingShapeIndex(vertexVa);
-
-        return result;
-    }
-
-    /**
-     * Copy the collision plane. The vertex is unaffected. (native attribute:
-     * mCollisionPlane)
-     *
-     * @return a new object
-     */
-    public Plane getCollisionPlane() {
-        long vertexVa = va();
-        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(4);
-        getCollisionPlane(vertexVa, storeFloats);
-        Plane result = new Plane(storeFloats);
-
-        return result;
-    }
-
-    /**
-     * Return the inverse mass. The vertex is unaffected. (native attribute:
-     * mInvMass)
-     *
-     * @return the inverse of the mass (in 1/kilograms)
-     */
-    public float getInvMass() {
-        long vertexVa = va();
-        float result = getInvMass(vertexVa);
-
-        return result;
-    }
-
-    /**
-     * Return the amount of penetration. (native attribute: mLargestPenetration)
-     *
-     * @return the depth (in meters)
-     */
-    public float getLargestPenetration() {
-        long vertexVa = va();
-        float result = getLargestPenetration(vertexVa);
-
-        return result;
-    }
-
-    /**
-     * Copy the location. The vertex is unaffected. (native attribute:
-     * mPosition)
-     *
-     * @return a new location vector (relative to the body's center of mass)
-     */
-    public Vec3 getPosition() {
-        long vertexVa = va();
-        float x = getPositionX(vertexVa);
-        float y = getPositionY(vertexVa);
-        float z = getPositionZ(vertexVa);
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
-    }
-
-    /**
-     * Copy the velocity. The vertex is unaffected. (native attribute:
-     * mVelocity)
-     *
-     * @return a new velocity vector (relative to the body's center of mass, in
-     * meters per second)
-     */
-    public Vec3 getVelocity() {
-        long vertexVa = va();
-        float x = getVelocityX(vertexVa);
-        float y = getVelocityY(vertexVa);
-        float z = getVelocityZ(vertexVa);
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
-    }
-
-    /**
-     * Test whether the vertex collided during the previous update. The vertex
-     * is unaffected. (native attribute: mHasContact)
-     *
-     * @return {@code true} if it collided, otherwise {@code false}
-     */
-    public boolean hasContact() {
-        long vertexVa = va();
-        boolean result = hasContact(vertexVa);
-
-        return result;
-    }
 
     /**
      * Reset the collision data.
@@ -232,6 +137,114 @@ public class SoftBodyVertex extends JoltPhysicsObject {
         float vy = velocity.getY();
         float vz = velocity.getZ();
         setVelocity(vertexVa, vx, vy, vz);
+    }
+    // *************************************************************************
+    // ConstSoftBodyVertex methods
+
+    /**
+     * Return the index of the colliding shape. The vertex is unaffected.
+     * (native attribute: mCollidingShapeIndex)
+     *
+     * @return the index
+     */
+    @Override
+    public int getCollidingShapeIndex() {
+        long vertexVa = va();
+        int result = getCollidingShapeIndex(vertexVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the collision plane. The vertex is unaffected. (native attribute:
+     * mCollisionPlane)
+     *
+     * @return a new object
+     */
+    @Override
+    public Plane getCollisionPlane() {
+        long vertexVa = va();
+        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(4);
+        getCollisionPlane(vertexVa, storeFloats);
+        Plane result = new Plane(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Return the inverse mass. The vertex is unaffected. (native attribute:
+     * mInvMass)
+     *
+     * @return the inverse of the mass (in 1/kilograms)
+     */
+    @Override
+    public float getInvMass() {
+        long vertexVa = va();
+        float result = getInvMass(vertexVa);
+
+        return result;
+    }
+
+    /**
+     * Return the amount of penetration. (native attribute: mLargestPenetration)
+     *
+     * @return the depth (in meters)
+     */
+    @Override
+    public float getLargestPenetration() {
+        long vertexVa = va();
+        float result = getLargestPenetration(vertexVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the location. The vertex is unaffected. (native attribute:
+     * mPosition)
+     *
+     * @return a new location vector (relative to the body's center of mass)
+     */
+    @Override
+    public Vec3 getPosition() {
+        long vertexVa = va();
+        float x = getPositionX(vertexVa);
+        float y = getPositionY(vertexVa);
+        float z = getPositionZ(vertexVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the velocity. The vertex is unaffected. (native attribute:
+     * mVelocity)
+     *
+     * @return a new velocity vector (relative to the body's center of mass, in
+     * meters per second)
+     */
+    @Override
+    public Vec3 getVelocity() {
+        long vertexVa = va();
+        float x = getVelocityX(vertexVa);
+        float y = getVelocityY(vertexVa);
+        float z = getVelocityZ(vertexVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Test whether the vertex collided during the previous update. The vertex
+     * is unaffected. (native attribute: mHasContact)
+     *
+     * @return {@code true} if it collided, otherwise {@code false}
+     */
+    @Override
+    public boolean hasContact() {
+        long vertexVa = va();
+        boolean result = hasContact(vertexVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods

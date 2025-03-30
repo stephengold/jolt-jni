@@ -71,7 +71,7 @@ void OnSoftBodyContactAdded(ConstBody inSoftBody, SoftBodyManifold inManifold)
 {
 	// Draw the vertices that are in contact
 	RMat44 com = inSoftBody.getCenterOfMassTransform();
-	for (SoftBodyVertex v : inManifold.getVertices())
+	for (ConstSoftBodyVertex v : inManifold.getVertices())
 		if (inManifold.hasContact(v))
 			DebugRenderer.sInstance().drawMarker(star(com , v.getPosition()), Color.sGreen, 0.1f);
 

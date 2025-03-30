@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package testjoltjni.app.samples.softbody;
 import com.github.stephengold.joltjni.*;
+import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 /**
@@ -59,7 +60,7 @@ if (Jolt.implementsDebugRendering()){
 }else{
 	// Draw the vertices
 	RMat44 com = mBody.getCenterOfMassTransform();
-	for ( SoftBodyVertex v : mp.getVertices())
+	for ( ConstSoftBodyVertex v : mp.getVertices())
 		mDebugRenderer.drawMarker(star(com , v.getPosition()), Color.sRed, 0.1f);
 } // JPH_DEBUG_RENDERER
 }
