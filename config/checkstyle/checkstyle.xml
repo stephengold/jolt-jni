@@ -179,9 +179,7 @@
         <module name="JavadocTagContinuationIndentation">
             <property name="offset" value="0"/>
         </module>
-        <module name="JavadocVariable">
-            <property name="scope" value="private"/>
-        </module>
+        <module name="JavadocVariable"/>
         <module name="MissingJavadocMethod">
             <property name="scope" value="private"/>
             <property name="minLineCount" value="1"/>
