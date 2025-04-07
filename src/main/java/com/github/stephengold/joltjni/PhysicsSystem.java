@@ -704,7 +704,7 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Replace the combining function for friction.
      *
-     * @param function the desired function (not null)
+     * @param function the desired function (not null, default=geometricMean)
      */
     public void setCombineFriction(CombineFunction function) {
         long systemVa = va();
@@ -715,7 +715,7 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Replace the combining function for restitutions.
      *
-     * @param function the desired function (not null)
+     * @param function the desired function (not null, default=max)
      */
     public void setCombineRestitution(CombineFunction function) {
         long systemVa = va();
