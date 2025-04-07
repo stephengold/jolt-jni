@@ -515,7 +515,7 @@ public class Test003 {
         bcs.setMaxLinearVelocity(0.102f);
         bcs.setMotionQuality(EMotionQuality.LinearCast);
         bcs.setMotionType(EMotionType.Kinematic);
-        bcs.setObjectLayer(11);
+        bcs.setObjectLayer(65_535);
         bcs.setOverrideMassProperties(
                 EOverrideMassProperties.MassAndInertiaProvided);
         bcs.setPosition(new RVec3(0.12, 0.13, 0.14));
@@ -535,7 +535,7 @@ public class Test003 {
         Assert.assertEquals(0.102f, bcs.getMaxLinearVelocity(), 0f);
         Assert.assertEquals(EMotionQuality.LinearCast, bcs.getMotionQuality());
         Assert.assertEquals(EMotionType.Kinematic, bcs.getMotionType());
-        Assert.assertEquals(11, bcs.getObjectLayer());
+        Assert.assertEquals(65_535, bcs.getObjectLayer());
         Assert.assertEquals(EOverrideMassProperties.MassAndInertiaProvided,
                 bcs.getOverrideMassProperties());
         TestUtils.assertEquals(0.12f, 0.13f, 0.14f, bcs.getPosition(), 0f);
