@@ -239,8 +239,7 @@ To extract and load native libraries in a desktop app, I suggest using
 Here's a code fragment to get you started:
 
     LibraryInfo info = new LibraryInfo(
-        new DirectoryPath("linux/x86-64/com/github/stephengold"),
-        "joltjni", DirectoryPath.USER_DIR);
+        null, "joltjni", DirectoryPath.USER_DIR);
     NativeBinaryLoader loader = new NativeBinaryLoader(info);
     NativeDynamicLibrary[] libraries = {
         new NativeDynamicLibrary("linux/aarch64/com/github/stephengold", PlatformPredicate.LINUX_ARM_64),
