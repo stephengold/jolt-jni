@@ -103,10 +103,13 @@ public class SoftBodyCreationSettings
      *
      * @param allow {@code true} to allow, {@code false} to inhibit
      * (default=true)
+     * @return the modified settings, for chaining
      */
-    public void setAllowSleeping(boolean allow) {
+    public SoftBodyCreationSettings setAllowSleeping(boolean allow) {
         long bodySettingsVa = va();
         setAllowSleeping(bodySettingsVa, allow);
+
+        return this;
     }
 
     /**
@@ -114,11 +117,15 @@ public class SoftBodyCreationSettings
      * mCollisionGroup)
      *
      * @param group the desired group (not null, unaffected)
+     * @return the modified settings, for chaining
      */
-    public void setCollisionGroup(ConstCollisionGroup group) {
+    public SoftBodyCreationSettings setCollisionGroup(
+            ConstCollisionGroup group) {
         long bodySettingsVa = va();
         long groupVa = group.targetVa();
         setCollisionGroup(bodySettingsVa, groupVa);
+
+        return this;
     }
 
     /**
@@ -126,20 +133,26 @@ public class SoftBodyCreationSettings
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
      * default=0.2)
+     * @return the modified settings, for chaining
      */
-    public void setFriction(float friction) {
+    public SoftBodyCreationSettings setFriction(float friction) {
         long bodySettingsVa = va();
         setFriction(bodySettingsVa, friction);
+
+        return this;
     }
 
     /**
      * Alter the gravity multiplier. (native member: mGravityFactor)
      *
      * @param factor the desired multiplier (default=1)
+     * @return the modified settings, for chaining
      */
-    public void setGravityFactor(float factor) {
+    public SoftBodyCreationSettings setGravityFactor(float factor) {
         long bodySettingsVa = va();
         setGravityFactor(bodySettingsVa, factor);
+
+        return this;
     }
 
     /**
@@ -147,10 +160,13 @@ public class SoftBodyCreationSettings
      *
      * @param damping the desired value (in units of 1 per second, &ge;0, &le;1,
      * default=0.1)
+     * @return the modified settings, for chaining
      */
-    public void setLinearDamping(float damping) {
+    public SoftBodyCreationSettings setLinearDamping(float damping) {
         long bodySettingsVa = va();
         setLinearDamping(bodySettingsVa, damping);
+
+        return this;
     }
 
     /**
@@ -159,10 +175,13 @@ public class SoftBodyCreationSettings
      *
      * @param enable {@code true} to bake and set rotation, or {@code false} to
      * skip that step (default=true)
+     * @return the modified settings, for chaining
      */
-    public void setMakeRotationIdentity(boolean enable) {
+    public SoftBodyCreationSettings setMakeRotationIdentity(boolean enable) {
         long bodySettingsVa = va();
         setMakeRotationIdentity(bodySettingsVa, enable);
+
+        return this;
     }
 
     /**
@@ -170,20 +189,26 @@ public class SoftBodyCreationSettings
      *
      * @param maxSpeed the desired maximum speed (in meters per second, &ge;0,
      * default=500)
+     * @return the modified settings, for chaining
      */
-    public void setMaxLinearVelocity(float maxSpeed) {
+    public SoftBodyCreationSettings setMaxLinearVelocity(float maxSpeed) {
         long bodySettingsVa = va();
         setMaxLinearVelocity(bodySettingsVa, maxSpeed);
+
+        return this;
     }
 
     /**
      * Alter the number of solver iterations. (native member: mNumIterations)
      *
      * @param numIterations the desired number of iterations
+     * @return the modified settings, for chaining
      */
-    public void setNumIterations(int numIterations) {
+    public SoftBodyCreationSettings setNumIterations(int numIterations) {
         long bodySettingsVa = va();
         setNumIterations(bodySettingsVa, numIterations);
+
+        return this;
     }
 
     /**
@@ -191,12 +216,15 @@ public class SoftBodyCreationSettings
      *
      * @param objLayer the index of the desired object layer (&ge;0,
      * &lt;numObjectLayers, &lt;65536, default=0)
+     * @return the modified settings, for chaining
      */
-    public void setObjectLayer(int objLayer) {
+    public SoftBodyCreationSettings setObjectLayer(int objLayer) {
         assert objLayer >= 0 && objLayer < 65_536 : "objLayer = " + objLayer;
 
         long bodySettingsVa = va();
         setObjectLayer(bodySettingsVa, objLayer);
+
+        return this;
     }
 
     /**
@@ -205,23 +233,29 @@ public class SoftBodyCreationSettings
      *
      * @param location the desired location (in physics-system coordinates, not
      * null, unaffected, default=(0,0,0))
+     * @return the modified settings, for chaining
      */
-    public void setPosition(RVec3Arg location) {
+    public SoftBodyCreationSettings setPosition(RVec3Arg location) {
         long bodySettingsVa = va();
         double xx = location.xx();
         double yy = location.yy();
         double zz = location.zz();
         setPosition(bodySettingsVa, xx, yy, zz);
+
+        return this;
     }
 
     /**
      * Alter the pressure. (native member: mPressure)
      *
      * @param pressure the desired pressure (default=0)
+     * @return the modified settings, for chaining
      */
-    public void setPressure(float pressure) {
+    public SoftBodyCreationSettings setPressure(float pressure) {
         long bodySettingsVa = va();
         setPressure(bodySettingsVa, pressure);
+
+        return this;
     }
 
     /**
@@ -229,10 +263,13 @@ public class SoftBodyCreationSettings
      *
      * @param restitution the desired ratio (typically &ge;0 and &le;1,
      * default=0)
+     * @return the modified settings, for chaining
      */
-    public void setRestitution(float restitution) {
+    public SoftBodyCreationSettings setRestitution(float restitution) {
         long bodySettingsVa = va();
         setRestitution(bodySettingsVa, restitution);
+
+        return this;
     }
 
     /**
@@ -240,25 +277,32 @@ public class SoftBodyCreationSettings
      *
      * @param orientation the desired location (relative to system axes, not
      * null, unaffected, default=(0,0,0,1))
+     * @return the modified settings, for chaining
      */
-    public void setRotation(QuatArg orientation) {
+    public SoftBodyCreationSettings setRotation(QuatArg orientation) {
         long bodySettingsVa = va();
         float qw = orientation.getW();
         float qx = orientation.getX();
         float qy = orientation.getY();
         float qz = orientation.getZ();
         setRotation(bodySettingsVa, qx, qy, qz, qw);
+
+        return this;
     }
 
     /**
      * Replace the shared settings. (native member: mSettings)
      *
      * @param sharedSettings the desired settings (not null, alias created)
+     * @return the modified settings, for chaining
      */
-    public void setSettings(ConstSoftBodySharedSettings sharedSettings) {
+    public SoftBodyCreationSettings setSettings(
+            ConstSoftBodySharedSettings sharedSettings) {
         long bodySettingsVa = va();
         long sharedSettingsVa = sharedSettings.targetVa();
         setSettings(bodySettingsVa, sharedSettingsVa);
+
+        return this;
     }
 
     /**
@@ -267,10 +311,13 @@ public class SoftBodyCreationSettings
      *
      * @param enable {@code true} to update the position, or {@code false} to
      * skip updating (default=true)
+     * @return the modified settings, for chaining
      */
-    public void setUpdatePosition(boolean enable) {
+    public SoftBodyCreationSettings setUpdatePosition(boolean enable) {
         long bodySettingsVa = va();
         setUpdatePosition(bodySettingsVa, enable);
+
+        return this;
     }
     // *************************************************************************
     // ConstSoftBodyCreationSettings methods
