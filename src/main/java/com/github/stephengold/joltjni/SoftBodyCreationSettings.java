@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
@@ -114,9 +115,9 @@ public class SoftBodyCreationSettings
      *
      * @param group the desired group (not null, unaffected)
      */
-    public void setCollisionGroup(CollisionGroup group) {
+    public void setCollisionGroup(ConstCollisionGroup group) {
         long bodySettingsVa = va();
-        long groupVa = group.va();
+        long groupVa = group.targetVa();
         setCollisionGroup(bodySettingsVa, groupVa);
     }
 
