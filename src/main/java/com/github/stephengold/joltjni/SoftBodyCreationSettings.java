@@ -462,13 +462,18 @@ public class SoftBodyCreationSettings
     /**
      * Access the shared settings. (native member: mSettings)
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
      */
     public SoftBodySharedSettings getSettings() {
         long bodySettingsVa = va();
         long sharedSettingsVa = getSettings(bodySettingsVa);
-        SoftBodySharedSettings result
-                = new SoftBodySharedSettings(sharedSettingsVa);
+        SoftBodySharedSettings result;
+        if (sharedSettingsVa == 0L) {
+            result = null;
+        } else {
+            result = new SoftBodySharedSettings(sharedSettingsVa);
+        }
 
         return result;
     }
