@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,6 +43,13 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
     boolean getAllowSleeping();
 
     /**
+     * Access the collision group.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstCollisionGroup getCollisionGroup();
+
+    /**
      * Return the friction ratio. The settings are unaffected.
      *
      * @return the ratio (typically &ge;0 and &le;1)
@@ -62,6 +69,15 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
      * @return the constant (in units of per second, &ge;0, &le;1)
      */
     float getLinearDamping();
+
+    /**
+     * Test whether to bake rotation into the vertices and set the body rotation
+     * to identity. The settings are unaffected.
+     *
+     * @return {@code true} if rotation will be baked in, otherwise
+     * {@code false}
+     */
+    boolean getMakeRotationIdentity();
 
     /**
      * Return the maximum linear speed. The settings are unaffected.

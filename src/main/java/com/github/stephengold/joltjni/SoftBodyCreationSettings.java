@@ -290,6 +290,20 @@ public class SoftBodyCreationSettings
     }
 
     /**
+     * Access the collision group. (native member: mCollisionFriction)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public CollisionGroup getCollisionGroup() {
+        long bodySettingsVa = va();
+        long resultVa = getCollisionGroup(bodySettingsVa);
+        CollisionGroup result = new CollisionGroup(this, resultVa);
+
+        return result;
+    }
+
+    /**
      * Return the friction ratio. The settings are unaffected. (native member:
      * mFriction)
      *
@@ -327,6 +341,22 @@ public class SoftBodyCreationSettings
     public float getLinearDamping() {
         long bodySettingsVa = va();
         float result = getLinearDamping(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether to bake rotation into the vertices and set the body rotation
+     * to identity. The settings are unaffected. (native member:
+     * mMakeRotationIdentity)
+     *
+     * @return {@code true} if rotation will be baked in, otherwise
+     * {@code false}
+     */
+    @Override
+    public boolean getMakeRotationIdentity() {
+        long bodySettingsVa = va();
+        boolean result = getMakeRotationIdentity(bodySettingsVa);
 
         return result;
     }
@@ -455,11 +485,15 @@ public class SoftBodyCreationSettings
 
     native private static boolean getAllowSleeping(long bodySettingsVa);
 
+    native private static long getCollisionGroup(long bodySettingsVa);
+
     native private static float getFriction(long bodySettingsVa);
 
     native private static float getGravityFactor(long bodySettingsVa);
 
     native private static float getLinearDamping(long bodySettingsVa);
+
+    native private static boolean getMakeRotationIdentity(long bodySettingsVa);
 
     native private static float getMaxLinearVelocity(long bodySettingsVa);
 

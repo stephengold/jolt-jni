@@ -88,6 +88,19 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationS
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    getCollisionGroup
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getCollisionGroup
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    CollisionGroup * const pResult = &pSettings->mCollisionGroup;
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
  * Method:    getFriction
  * Signature: (J)F
  */
@@ -122,6 +135,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSet
     const SoftBodyCreationSettings * const pSettings
             = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
     const float result = pSettings->mLinearDamping;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    getMakeRotationIdentity
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getMakeRotationIdentity
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    const bool result = pSettings->mMakeRotationIdentity;
     return result;
 }
 
