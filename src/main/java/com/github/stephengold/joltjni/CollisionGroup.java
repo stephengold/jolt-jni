@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
+
 /**
  * Restrict which bodies can collide.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CollisionGroup extends JoltPhysicsObject {
+public class CollisionGroup
+        extends JoltPhysicsObject
+        implements ConstCollisionGroup {
     // *************************************************************************
     // constants
 
@@ -91,49 +95,6 @@ public class CollisionGroup extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Access the group filter.
-     *
-     * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null} if none
-     */
-    public GroupFilter getGroupFilter() {
-        long groupVa = va();
-        long filterVa = getGroupFilter(groupVa);
-        GroupFilter result;
-        if (filterVa == 0L) {
-            result = null;
-        } else {
-            result = new GroupFilter(filterVa);
-        }
-
-        return result;
-    }
-
-    /**
-     * Return the main group ID. The group is unaffected.
-     *
-     * @return the ID value or {@code cInvalidGroup}
-     */
-    public int getGroupId() {
-        long groupVa = va();
-        int result = getGroupId(groupVa);
-
-        return result;
-    }
-
-    /**
-     * Return the sub-group ID. The group is unaffected.
-     *
-     * @return the ID value or {@code cInvalidSubGroup}
-     */
-    public int getSubGroupId() {
-        long groupVa = va();
-        int result = getSubGroupId(groupVa);
-
-        return result;
-    }
-
-    /**
      * Replace the group filter.
      *
      * @param filter the desired filter (not null, alias created)
@@ -162,6 +123,54 @@ public class CollisionGroup extends JoltPhysicsObject {
     public void setSubGroupId(int id) {
         long groupVa = va();
         setSubGroupId(groupVa, id);
+    }
+    // *************************************************************************
+    // ConstCollisionGroup methods
+
+    /**
+     * Access the group filter.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    @Override
+    public GroupFilter getGroupFilter() {
+        long groupVa = va();
+        long filterVa = getGroupFilter(groupVa);
+        GroupFilter result;
+        if (filterVa == 0L) {
+            result = null;
+        } else {
+            result = new GroupFilter(filterVa);
+        }
+
+        return result;
+    }
+
+    /**
+     * Return the main group ID. The group is unaffected.
+     *
+     * @return the ID value or {@code cInvalidGroup}
+     */
+    @Override
+    public int getGroupId() {
+        long groupVa = va();
+        int result = getGroupId(groupVa);
+
+        return result;
+    }
+
+    /**
+     * Return the sub-group ID. The group is unaffected.
+     *
+     * @return the ID value or {@code cInvalidSubGroup}
+     */
+    @Override
+    public int getSubGroupId() {
+        long groupVa = va();
+        int result = getSubGroupId(groupVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods
