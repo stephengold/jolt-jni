@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
@@ -237,9 +238,9 @@ public class BodyCreationSettings
      * @param group the desired group (not null, unaffected)
      * @return the modified settings, for chaining
      */
-    public BodyCreationSettings setCollisionGroup(CollisionGroup group) {
+    public BodyCreationSettings setCollisionGroup(ConstCollisionGroup group) {
         long bodySettingsVa = va();
-        long groupVa = group.va();
+        long groupVa = group.targetVa();
         setCollisionGroup(bodySettingsVa, groupVa);
 
         return this;
