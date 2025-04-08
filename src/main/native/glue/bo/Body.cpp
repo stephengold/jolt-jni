@@ -387,6 +387,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMass
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getCollisionGroup
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getCollisionGroup
+  (JNIEnv *, jclass, jlong bodyVa) {
+    Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    CollisionGroup * const pResult = &pBody->GetCollisionGroup();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    getEnhancedInternalEdgeRemoval
  * Signature: (J)Z
  */

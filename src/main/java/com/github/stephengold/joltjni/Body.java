@@ -228,15 +228,6 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Access the body's collision group.
-     *
-     * @return the pre-existing group, or {@code null} if none
-     */
-    public CollisionGroup getCollisionGroup() {
-        return group;
-    }
-
-    /**
      * Reposition the body, assuming it's kinematic.
      *
      * @param location the desired location (in system coordinates, not null,
@@ -616,6 +607,20 @@ public class Body extends NonCopyable implements ConstBody {
         long bodyVa = va();
         long matrixVa = getCenterOfMassTransform(bodyVa);
         RMat44 result = new RMat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
+     * Access the body's collision group.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public CollisionGroup getCollisionGroup() {
+        long bodyVa = va();
+        long groupVa = getCollisionGroup(bodyVa);
+        JoltPhysicsObject container = getContainingObject();
+        CollisionGroup result = new CollisionGroup(container, groupVa);
 
         return result;
     }
@@ -1080,6 +1085,8 @@ public class Body extends NonCopyable implements ConstBody {
     native private static double getCenterOfMassPositionZ(long bodyVa);
 
     native private static long getCenterOfMassTransform(long bodyVa);
+
+    native private static long getCollisionGroup(long bodyVa);
 
     native private static boolean getEnhancedInternalEdgeRemoval(long bodyVa);
 
