@@ -42,7 +42,9 @@ import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Shape;
 import com.github.stephengold.joltjni.SkinWeight;
+import com.github.stephengold.joltjni.SoftBodyCreationSettings;
 import com.github.stephengold.joltjni.SoftBodyMotionProperties;
+import com.github.stephengold.joltjni.SoftBodySharedSettings;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.SpringSettings;
 import com.github.stephengold.joltjni.TempAllocator;
@@ -59,8 +61,10 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.vhacd.FillMode;
 import com.github.stephengold.joltjni.vhacd.Parameters;
@@ -97,6 +101,7 @@ public class Test003 {
         doMotionProperties();
         doParameters();
         doSkinWeight();
+        doSoftBodyCreationSettings();
         doSoftBodyMotionProperties();
         doSpringSettings();
         doTempAllocatorImpl();
@@ -356,6 +361,22 @@ public class Test003 {
     }
 
     /**
+     * Test the {@code SoftBodyCreationSettings} class.
+     */
+    private static void doSoftBodyCreationSettings() {
+        {
+            SoftBodyCreationSettings sbcs = new SoftBodyCreationSettings();
+
+            testSbcsDefaults(sbcs);
+            testSbcsSetters(sbcs);
+
+            TestUtils.testClose(sbcs);
+        }
+
+        System.gc();
+    }
+
+    /**
      * Test the {@code SoftBodyMotionProperties} class.
      */
     private static void doSoftBodyMotionProperties() {
@@ -479,6 +500,7 @@ public class Test003 {
         Assert.assertTrue(bcs.getAllowSleeping());
         Assert.assertEquals(0.05f, bcs.getAngularDamping(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, bcs.getAngularVelocity(), 0f);
+        Assert.assertNotNull(bcs.getCollisionGroup());
         Assert.assertEquals(0.2f, bcs.getFriction(), 0f);
         Assert.assertEquals(1f, bcs.getGravityFactor(), 0f);
         Assert.assertFalse(bcs.getIsSensor());
@@ -506,6 +528,7 @@ public class Test003 {
         bcs.setAllowSleeping(false);
         bcs.setAngularDamping(0.01f);
         bcs.setAngularVelocity(new Vec3(0.02f, 0.03f, 0.04f));
+        bcs.setCollisionGroup(new CollisionGroup());
         bcs.setFriction(0.05f);
         bcs.setGravityFactor(0.06f);
         bcs.setIsSensor(true);
@@ -567,7 +590,7 @@ public class Test003 {
      *
      * @param group the group to test (not null, unaffected)
      */
-    private static void testCollisionGroupDefaults(CollisionGroup group) {
+    private static void testCollisionGroupDefaults(ConstCollisionGroup group) {
         Assert.assertNull(group.getGroupFilter());
         Assert.assertEquals(CollisionGroup.cInvalidGroup, group.getGroupId());
         Assert.assertEquals(
@@ -780,6 +803,71 @@ public class Test003 {
                 12., params.getMinimumVolumePercentErrorAllowed(), 0.);
         Assert.assertEquals(345_678, params.getResolution());
         Assert.assertFalse(params.getShrinkWrap());
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code SoftBodyCreationSettings}.
+     *
+     * @param sbcs the settings to test (not null, unaffected)
+     */
+    private static void testSbcsDefaults(ConstSoftBodyCreationSettings sbcs) {
+        Assert.assertTrue(sbcs.hasAssignedNativeObject());
+        Assert.assertTrue(sbcs.ownsNativeObject());
+
+        Assert.assertTrue(sbcs.getAllowSleeping());
+        Assert.assertNotNull(sbcs.getCollisionGroup());
+        Assert.assertEquals(0.2f, sbcs.getFriction(), 0f);
+        Assert.assertEquals(1f, sbcs.getGravityFactor(), 0f);
+        Assert.assertEquals(0.1f, sbcs.getLinearDamping(), 0f);
+        Assert.assertTrue(sbcs.getMakeRotationIdentity());
+        Assert.assertEquals(500f, sbcs.getMaxLinearVelocity(), 0f);
+        Assert.assertEquals(0, sbcs.getObjectLayer());
+        TestUtils.assertEquals(0f, 0f, 0f, sbcs.getPosition(), 0f);
+        Assert.assertEquals(0f, sbcs.getPressure(), 0f);
+        Assert.assertEquals(0f, sbcs.getRestitution(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, 1f, sbcs.getRotation(), 0f);
+        Assert.assertNull(sbcs.getSettings());
+        Assert.assertTrue(sbcs.getUpdatePosition());
+    }
+
+    /**
+     * Test the setters of the specified {@code SoftBodyCreationSettings}.
+     *
+     * @param sbcs the settings to test (not null, modified)
+     */
+    private static void testSbcsSetters(SoftBodyCreationSettings sbcs) {
+        sbcs.setAllowSleeping(false);
+        sbcs.setCollisionGroup(new CollisionGroup());
+        sbcs.setFriction(0.02f);
+        sbcs.setGravityFactor(0.06f);
+        sbcs.setLinearDamping(0.07f);
+        sbcs.setMakeRotationIdentity(false);
+        sbcs.setMaxLinearVelocity(0.102f);
+        sbcs.setObjectLayer(65_535);
+        sbcs.setPosition(new RVec3(3., 4., 5.));
+        sbcs.setPressure(0.09f);
+        sbcs.setRestitution(0.15f);
+        sbcs.setRotation(new Quat(0.5f, 0.5f, -0.5f, -0.5f));
+        sbcs.setUpdatePosition(false);
+
+        SoftBodySharedSettings newSs = new SoftBodySharedSettings();
+        sbcs.setSettings(newSs);
+
+        Assert.assertFalse(sbcs.getAllowSleeping());
+        Assert.assertEquals(0.02f, sbcs.getFriction(), 0f);
+        Assert.assertEquals(0.06f, sbcs.getGravityFactor(), 0f);
+        Assert.assertEquals(0.07f, sbcs.getLinearDamping(), 0f);
+        Assert.assertFalse(sbcs.getMakeRotationIdentity());
+        Assert.assertEquals(0.102f, sbcs.getMaxLinearVelocity(), 0f);
+        Assert.assertEquals(65_535, sbcs.getObjectLayer());
+        TestUtils.assertEquals(3f, 4f, 5f, sbcs.getPosition(), 0f);
+        Assert.assertEquals(0.09f, sbcs.getPressure(), 0f);
+        Assert.assertEquals(0.15f, sbcs.getRestitution(), 0f);
+        TestUtils.assertEquals(
+                0.5f, 0.5f, -0.5f, -0.5f, sbcs.getRotation(), 0f);
+        Assert.assertEquals(newSs, sbcs.getSettings());
+        Assert.assertFalse(sbcs.getUpdatePosition());
     }
 
     /**
