@@ -464,10 +464,10 @@ public class SoftBodyCreationSettings
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public ConstSoftBodySharedSettings getSettings() {
+    public SoftBodySharedSettings getSettings() {
         long bodySettingsVa = va();
         long sharedSettingsVa = getSettings(bodySettingsVa);
-        ConstSoftBodySharedSettings result
+        SoftBodySharedSettings result
                 = new SoftBodySharedSettings(sharedSettingsVa);
 
         return result;
