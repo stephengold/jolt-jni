@@ -51,8 +51,7 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
     float getMaxSlopeAngle();
 
     /**
-     * Acquire read-only access to the {@code Shape}. The settings are
-     * unaffected.
+     * Access the {@code Shape}. The settings are unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null}
@@ -60,9 +59,9 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
     ConstShape getShape();
 
     /**
-     * Return the supporting volume. The settings are unaffected.
+     * Copy the supporting volume. The settings are unaffected.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new object
      */
     Plane getSupportingVolume();
 

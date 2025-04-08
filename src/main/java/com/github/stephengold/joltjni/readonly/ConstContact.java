@@ -40,7 +40,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
     /**
      * Return the ID of the colliding body. The contact is unaffected.
      *
-     * @return a new ID, or null if no colliding body
+     * @return a new object, or {@code null} if no colliding body
      */
     BodyId getBodyB();
 
@@ -56,7 +56,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
      * Return the colliding character. The contact is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
-     * null if no colliding character
+     * {@code null} if no colliding character
      */
     CharacterVirtual getCharacterB();
 
@@ -124,7 +124,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
     /**
      * Return the subshape ID of the colliding body. The contact is unaffected.
      *
-     * @return a new ID, or null if no colliding body
+     * @return a new object, or {@code null} if no colliding body
      */
     SubShapeId getSubShapeIdB();
 

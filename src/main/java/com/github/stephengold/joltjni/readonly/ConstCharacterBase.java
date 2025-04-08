@@ -50,7 +50,7 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * Return the body ID of the supporting surface. The character is
      * unaffected.
      *
-     * @return a new ID
+     * @return a new object
      */
     BodyId getGroundBodyId();
 
@@ -91,7 +91,7 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * Identify the face on the supporting surface where contact is occurring.
      * The character is unaffected.
      *
-     * @return a new ID
+     * @return a new object
      */
     SubShapeId getGroundSubShapeId();
 

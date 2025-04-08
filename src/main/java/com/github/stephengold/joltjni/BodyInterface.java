@@ -319,8 +319,7 @@ public class BodyInterface extends NonCopyable {
      * Return the angular velocity of the specified body.
      *
      * @param bodyId the ID of the body (not null)
-     * @return a new velocity vector (radians per second in physics-system
-     * coordinates)
+     * @return a new velocity vector (radians per second in system coordinates)
      */
     public Vec3 getAngularVelocity(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
@@ -352,7 +351,7 @@ public class BodyInterface extends NonCopyable {
      * Locate the center of mass of the specified body.
      *
      * @param bodyId the ID of the body to locate (not null)
-     * @return a new location vector (in physics-system coordinates)
+     * @return a new location vector (in system coordinates)
      */
     public RVec3 getCenterOfMassPosition(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
@@ -369,7 +368,7 @@ public class BodyInterface extends NonCopyable {
      * Return the center-of-mass transform of the specified body.
      *
      * @param bodyId the ID of the body to locate (not null)
-     * @return a new transform matrix (relative to physics-system coordinates)
+     * @return a new transform matrix (relative to system coordinates)
      */
     public RMat44 getCenterOfMassTransform(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
@@ -411,8 +410,7 @@ public class BodyInterface extends NonCopyable {
      * Return the linear velocity of the specified body.
      *
      * @param bodyId the ID of the body (not null)
-     * @return a new velocity vector (meters per second in physics-system
-     * coordinates)
+     * @return a new velocity vector (meters per second in system coordinates)
      */
     public Vec3 getLinearVelocity(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
@@ -473,7 +471,7 @@ public class BodyInterface extends NonCopyable {
      * Locate the specified body.
      *
      * @param bodyId the ID of the body to locate (not null, unaffected)
-     * @return a new location vector (in physics-system coordinates)
+     * @return a new location vector (in system coordinates)
      */
     public RVec3 getPosition(ConstBodyId bodyId) {
         long bodyInterfaceVa = va();
@@ -611,10 +609,10 @@ public class BodyInterface extends NonCopyable {
      * Reposition the specified body, assuming it's kinematic.
      *
      * @param bodyId the ID of the body to reposition (not null, unaffected)
-     * @param location the desired location (in physics-system coordinates, not
-     * null, unaffected)
-     * @param orientation the desired orientation (relative to the
-     * physics-system axes, not null, unaffected)
+     * @param location the desired location (in system coordinates, not null,
+     * unaffected)
+     * @param orientation the desired orientation (relative to the system axes,
+     * not null, unaffected)
      * @param deltaTime time until the desired position is reached (in seconds,
      * &gt;0)
      */

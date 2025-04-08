@@ -191,8 +191,8 @@ public class BodyCreationSettings
      * Alter the (initial) angular velocity. (native attribute:
      * mAngularVelocity)
      *
-     * @param omega the desired angular velocity (radians per second in
-     * physics-system coordinates, not null, unaffected, default=(0,0,0))
+     * @param omega the desired angular velocity (radians per second in system
+     * coordinates, not null, unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setAngularVelocity(Vec3Arg omega) {
@@ -306,8 +306,8 @@ public class BodyCreationSettings
     /**
      * Alter the (initial) linear velocity. (native attribute: mLinearVelocity)
      *
-     * @param velocity the desired velocity (in physics-system coordinates, not
-     * null, unaffected, default=(0,0,0))
+     * @param velocity the desired velocity (in system coordinates, not null,
+     * unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setLinearVelocity(Vec3Arg velocity) {
@@ -426,12 +426,9 @@ public class BodyCreationSettings
      * Alter the (initial) location of the body's origin (which might not
      * coincide with its center of mass). (native attribute: mPosition)
      *
-     * @param xx the desired X coordinate (in physics-system coordinates,
-     * default=0)
-     * @param yy the desired Y coordinate (in physics-system coordinates,
-     * default=0)
-     * @param zz the desired Z coordinate (in physics-system coordinates,
-     * default=0)
+     * @param xx the desired X coordinate (in system coordinates, default=0)
+     * @param yy the desired Y coordinate (in system coordinates, default=0)
+     * @param zz the desired Z coordinate (in system coordinates, default=0)
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setPosition(double xx, double yy, double zz) {
@@ -445,8 +442,8 @@ public class BodyCreationSettings
      * Alter the (initial) location of the body's origin (which might not
      * coincide with its center of mass). (native attribute: mPosition)
      *
-     * @param location the desired location (in physics-system coordinates, not
-     * null, unaffected, default=(0,0,0))
+     * @param location the desired location (in system coordinates, not null,
+     * unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setPosition(RVec3Arg location) {
@@ -478,8 +475,8 @@ public class BodyCreationSettings
      * Alter the (initial) orientation of the body's axes. (native attribute:
      * mRotation)
      *
-     * @param quat the desired rotation (relative to the physics-system axes,
-     * not null, unaffected, default=(0,0,0,1))
+     * @param quat the desired rotation (relative to the system axes, not null,
+     * unaffected, default=(0,0,0,1))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setRotation(QuatArg quat) {
@@ -584,8 +581,7 @@ public class BodyCreationSettings
      * Copy the (initial) angular velocity. The settings are unaffected. (native
      * attribute: mAngularVelocity)
      *
-     * @return a new velocity vector (radians per second in physics-system
-     * coordinates)
+     * @return a new velocity vector (radians per second in system coordinates)
      */
     @Override
     public Vec3 getAngularVelocity() {
@@ -613,7 +609,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Access the collision group.
+     * Access the collision group to which the body will belong. (native
+     * attribute: mCollisionGroup)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -700,8 +697,7 @@ public class BodyCreationSettings
      * Copy the (initial) linear velocity. The settings are unaffected. (native
      * attribute: mLinearVelocity)
      *
-     * @return a new velocity vector (meters per second in physics-system
-     * coordinates)
+     * @return a new velocity vector (meters per second in system coordinates)
      */
     @Override
     public Vec3 getLinearVelocity() {
@@ -834,8 +830,8 @@ public class BodyCreationSettings
      * Copy the (initial) location. The settings are unaffected. (native
      * attribute: mPosition)
      *
-     * @return a new location vector (in physics-system coordinates, all
-     * components finite)
+     * @return a new location vector (in system coordinates, all components
+     * finite)
      */
     @Override
     public RVec3 getPosition() {
@@ -872,7 +868,7 @@ public class BodyCreationSettings
      * Copy the (initial) orientation of the body's axes. The settings are
      * unaffected. (native attribute: mRotation)
      *
-     * @return a new rotation quaternion (relative to the physics-system axes)
+     * @return a new rotation quaternion (relative to the system axes)
      */
     @Override
     public Quat getRotation() {

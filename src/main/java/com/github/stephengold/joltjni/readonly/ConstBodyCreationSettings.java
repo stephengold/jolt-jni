@@ -72,8 +72,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Copy the (initial) angular velocity. The settings are unaffected.
      *
-     * @return a new velocity vector (radians per second in physics-system
-     * coordinates)
+     * @return a new velocity vector (radians per second in system coordinates)
      */
     Vec3 getAngularVelocity();
 
@@ -131,8 +130,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Copy the (initial) linear velocity. The settings are unaffected.
      *
-     * @return a new velocity vector (meters per second in physics-system
-     * coordinates)
+     * @return a new velocity vector (meters per second in system coordinates)
      */
     Vec3 getLinearVelocity();
 
@@ -196,8 +194,8 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Copy the (initial) location. The settings are unaffected.
      *
-     * @return a new location vector (in physics-system coordinates, all
-     * components finite)
+     * @return a new location vector (in system coordinates, all components
+     * finite)
      */
     RVec3 getPosition();
 
@@ -212,7 +210,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * Copy the (initial) orientation of the body's axes. The settings are
      * unaffected.
      *
-     * @return a new rotation quaternion (relative to the physics-system axes)
+     * @return a new rotation quaternion (relative to the system axes)
      */
     Quat getRotation();
 

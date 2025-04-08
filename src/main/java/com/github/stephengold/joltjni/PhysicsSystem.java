@@ -440,8 +440,8 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Copy the gravity vector. The system is unaffected.
      *
-     * @return a new acceleration vector (meters per second squared in
-     * physics-system coordinates)
+     * @return a new acceleration vector (meters per second squared in system
+     * coordinates)
      */
     public Vec3 getGravity() {
         long systemVa = va();

@@ -231,8 +231,8 @@ public class SoftBodyCreationSettings
      * Alter the (initial) location of the body's origin. (native member:
      * mPosition)
      *
-     * @param location the desired location (in physics-system coordinates, not
-     * null, unaffected, default=(0,0,0))
+     * @param location the desired location (in system coordinates, not null,
+     * unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public SoftBodyCreationSettings setPosition(RVec3Arg location) {
@@ -440,8 +440,8 @@ public class SoftBodyCreationSettings
      * Copy the (initial) location. The settings are unaffected. (native member:
      * mPosition)
      *
-     * @return a new location vector (in physics-system coordinates, all
-     * components finite)
+     * @return a new location vector (in system coordinates, all components
+     * finite)
      */
     @Override
     public RVec3 getPosition() {
@@ -492,7 +492,7 @@ public class SoftBodyCreationSettings
      * Copy the (initial) orientation of the body's axes. The settings are
      * unaffected. (native member: mRotation)
      *
-     * @return a new rotation quaternion (relative to the physics-system axes)
+     * @return a new rotation quaternion (relative to the system axes)
      */
     @Override
     public Quat getRotation() {

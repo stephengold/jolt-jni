@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -78,7 +78,7 @@ public interface ConstCharacterVirtualSettings
     /**
      * Return the shape of the inner rigid body. The settings are unaffected.
      *
-     * @return the shape, or null for no inner body
+     * @return the shape, or {@code null} for no inner body
      */
     ConstShape getInnerBodyShape();
 
