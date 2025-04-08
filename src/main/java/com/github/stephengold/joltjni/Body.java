@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBody;
+import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
 import com.github.stephengold.joltjni.readonly.QuatArg;
@@ -39,13 +40,6 @@ import java.nio.FloatBuffer;
  * @author Stephen Gold sgold@sonic.net
  */
 public class Body extends NonCopyable implements ConstBody {
-    // *************************************************************************
-    // fields
-
-    /**
-     * protect the collision group from garbage collection
-     */
-    private CollisionGroup group;
     // *************************************************************************
     // constructors
 
@@ -300,12 +294,11 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Assign the body to the specified collision group.
      *
-     * @param group the group to assign (not null, alias created)
+     * @param group the group to assign (not null, unaffected)
      */
-    public void setCollisionGroup(CollisionGroup group) {
-        this.group = group;
+    public void setCollisionGroup(ConstCollisionGroup group) {
         long bodyVa = va();
-        long groupVa = group.va();
+        long groupVa = group.targetVa();
         setCollisionGroup(bodyVa, groupVa);
     }
 
