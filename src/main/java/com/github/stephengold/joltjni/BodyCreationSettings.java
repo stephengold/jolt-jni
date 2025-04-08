@@ -393,7 +393,7 @@ public class BodyCreationSettings
     /**
      * Alter the object layer. (native attribute: mObjectLayer)
      *
-     * @param objLayer the ID of the desired object layer (&ge;0,
+     * @param objLayer the index of the desired object layer (&ge;0,
      * &lt;numObjectLayers, &lt;65536, default=0)
      * @return the modified settings, for chaining
      */

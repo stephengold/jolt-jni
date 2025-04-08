@@ -78,7 +78,7 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
     int getObjectLayer();
 
     /**
-     * Return the (initial) location. The settings are unaffected.
+     * Copy the (initial) location. The settings are unaffected.
      *
      * @return a new location vector (in physics-system coordinates, all
      * components finite)

@@ -99,7 +99,7 @@ public class SoftBodyCreationSettings
 
     /**
      * Alter whether the created body will be allowed to fall asleep. (native
-     * attribute: mAllowSleeping)
+     * member: mAllowSleeping)
      *
      * @param allow {@code true} to allow, {@code false} to inhibit
      * (default=true)
@@ -110,8 +110,8 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the collision group to which the body will belong. (native
-     * attribute: mCollisionGroup)
+     * Alter the collision group to which the body will belong. (native member:
+     * mCollisionGroup)
      *
      * @param group the desired group (not null, unaffected)
      */
@@ -122,7 +122,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the friction ratio. (native attribute: mFriction)
+     * Alter the friction ratio. (native member: mFriction)
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
      * default=0.2)
@@ -133,7 +133,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the gravity multiplier. (native attribute: mGravityFactor)
+     * Alter the gravity multiplier. (native member: mGravityFactor)
      *
      * @param factor the desired multiplier (default=1)
      */
@@ -143,7 +143,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the linear damping constant. (native attribute: mLinearDamping)
+     * Alter the linear damping constant. (native member: mLinearDamping)
      *
      * @param damping the desired value (in units of 1 per second, &ge;0, &le;1,
      * default=0.1)
@@ -166,7 +166,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the maximum speed of vertices. (native attribute: mMaxSpeed)
+     * Alter the maximum speed of vertices. (native member: mMaxSpeed)
      *
      * @param maxSpeed the desired maximum speed (in meters per second, &ge;0,
      * default=500)
@@ -177,7 +177,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the number of solver iterations. (native attribute: mNumIterations)
+     * Alter the number of solver iterations. (native member: mNumIterations)
      *
      * @param numIterations the desired number of iterations
      */
@@ -187,7 +187,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the object layer. (native attribute: mObjectLayer)
+     * Alter the object layer. (native member: mObjectLayer)
      *
      * @param objLayer the index of the desired object layer (&ge;0,
      * &lt;numObjectLayers, &lt;65536, default=0)
@@ -200,7 +200,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the (initial) location of the body's origin. (native attribute:
+     * Alter the (initial) location of the body's origin. (native member:
      * mPosition)
      *
      * @param location the desired location (in physics-system coordinates, not
@@ -215,7 +215,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the pressure. (native attribute: mPressure)
+     * Alter the pressure. (native member: mPressure)
      *
      * @param pressure the desired pressure (default=0)
      */
@@ -225,8 +225,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the restitution ratio for collisions. (native attribute:
-     * mRestitution)
+     * Alter the restitution ratio for collisions. (native member: mRestitution)
      *
      * @param restitution the desired ratio (typically &ge;0 and &le;1,
      * default=0)
@@ -237,7 +236,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the (initial) orientation. (native attribute: mRotation)
+     * Alter the (initial) orientation. (native member: mRotation)
      *
      * @param orientation the desired location (relative to system axes, not
      * null, unaffected, default=(0,0,0,1))
@@ -252,7 +251,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Replace the shared settings. (native attribute: mSettings)
+     * Replace the shared settings. (native member: mSettings)
      *
      * @param sharedSettings the desired settings (not null, alias created)
      */
@@ -278,7 +277,7 @@ public class SoftBodyCreationSettings
 
     /**
      * Test whether the created body will be allowed to fall asleep. The
-     * settings are unaffected. (native attribute: mAllowSleeping)
+     * settings are unaffected. (native member: mAllowSleeping)
      *
      * @return {@code true} if allowed, otherwise {@code false}
      */
@@ -291,8 +290,8 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Return the friction ratio. The settings are unaffected. (native
-     * attribute: mFriction)
+     * Return the friction ratio. The settings are unaffected. (native member:
+     * mFriction)
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -305,8 +304,8 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Return the gravity factor. The settings are unaffected. (native
-     * attribute: mGravityFactor)
+     * Return the gravity factor. The settings are unaffected. (native member:
+     * mGravityFactor)
      *
      * @return the factor
      */
@@ -320,7 +319,7 @@ public class SoftBodyCreationSettings
 
     /**
      * Return the linear damping constant. The settings are unaffected. (native
-     * attribute: mLinearDamping)
+     * member: mLinearDamping)
      *
      * @return the constant (in units of per second, &ge;0, &le;1)
      */
@@ -334,7 +333,7 @@ public class SoftBodyCreationSettings
 
     /**
      * Return the maximum linear speed. The settings are unaffected. (native
-     * attribute: mMaxSpeed)
+     * member: mMaxSpeed)
      *
      * @return the maximum speed (in meters per second)
      */
@@ -348,7 +347,7 @@ public class SoftBodyCreationSettings
 
     /**
      * Return the index of the object layer. The settings are unaffected.
-     * (native attribute: mObjectLayer)
+     * (native member: mObjectLayer)
      *
      * @return the layer index (&ge;0, &lt;numObjectLayers)
      */
@@ -361,8 +360,8 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Return the (initial) location. The settings are unaffected. (native
-     * attribute: mPosition)
+     * Copy the (initial) location. The settings are unaffected. (native member:
+     * mPosition)
      *
      * @return a new location vector (in physics-system coordinates, all
      * components finite)
@@ -385,7 +384,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Return the pressure. The settings are unaffected. (native attribute:
+     * Return the pressure. The settings are unaffected. (native member:
      * mPressure)
      *
      * @return the pressure
@@ -400,7 +399,7 @@ public class SoftBodyCreationSettings
 
     /**
      * Return the restitution ratio. The settings are unaffected. (native
-     * attribute: mRestitution)
+     * member: mRestitution)
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -414,7 +413,7 @@ public class SoftBodyCreationSettings
 
     /**
      * Copy the (initial) orientation of the body's axes. The settings are
-     * unaffected. (native attribute: mRotation)
+     * unaffected. (native member: mRotation)
      *
      * @return a new rotation quaternion (relative to the physics-system axes)
      */
@@ -431,7 +430,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Access the shared settings. (native attribute: mSettings)
+     * Access the shared settings. (native member: mSettings)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
