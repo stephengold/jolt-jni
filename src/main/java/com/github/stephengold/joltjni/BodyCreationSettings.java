@@ -130,19 +130,6 @@ public class BodyCreationSettings
     // new methods exposed
 
     /**
-     * Access the collision group.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public CollisionGroup getCollisionGroup() {
-        long bodySettingsVa = va();
-        long groupVa = getCollisionGroup(bodySettingsVa);
-        CollisionGroup result = new CollisionGroup(this, groupVa);
-
-        return result;
-    }
-
-    /**
      * Alter whether a static body can be converted to kinematic or dynamic.
      * (native attribute: mAllowDynamicOrKinematic)
      *
@@ -621,6 +608,20 @@ public class BodyCreationSettings
     public boolean getApplyGyroscopicForce() {
         long bodySettingsVa = va();
         boolean result = getApplyGyroscopicForce(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Access the collision group.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public CollisionGroup getCollisionGroup() {
+        long bodySettingsVa = va();
+        long groupVa = getCollisionGroup(bodySettingsVa);
+        CollisionGroup result = new CollisionGroup(this, groupVa);
 
         return result;
     }

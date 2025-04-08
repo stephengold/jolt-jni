@@ -86,6 +86,13 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     boolean getApplyGyroscopicForce();
 
     /**
+     * Access the collision group.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstCollisionGroup getCollisionGroup();
+
+    /**
      * Test whether extra effort should be made to remove ghost contacts. The
      * settings are unaffected.
      *
