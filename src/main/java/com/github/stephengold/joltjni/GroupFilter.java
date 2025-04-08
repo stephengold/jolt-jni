@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
+import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 
@@ -30,7 +31,9 @@ import com.github.stephengold.joltjni.template.RefTarget;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class GroupFilter extends SerializableObject implements RefTarget {
+public class GroupFilter
+        extends SerializableObject
+        implements ConstGroupFilter, RefTarget {
     // *************************************************************************
     // constructors
 
@@ -50,6 +53,8 @@ public class GroupFilter extends SerializableObject implements RefTarget {
     GroupFilter(long filterVa) {
         super(filterVa);
     }
+    // *************************************************************************
+    // ConstGroupFilter methods
 
     /**
      * Test whether the specified groups can collide. The filter is unaffected.
@@ -58,6 +63,7 @@ public class GroupFilter extends SerializableObject implements RefTarget {
      * @param group2 the 2nd group (not null, unaffected)
      * @return {@code true} if they can collide, otherwise {@code false}
      */
+    @Override
     public boolean canCollide(
             ConstCollisionGroup group1, ConstCollisionGroup group2) {
         long filterVa = va();
