@@ -41,6 +41,23 @@ IMPLEMENT_REF(GroupFilter,
 
 /*
  * Class:     com_github_stephengold_joltjni_GroupFilter
+ * Method:    canCollide
+ * Signature: (JJJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_GroupFilter_canCollide
+  (JNIEnv *, jclass, jlong filterVa, jlong group1Va, jlong group2Va) {
+    const GroupFilter * const pFilter
+            = reinterpret_cast<GroupFilter *> (filterVa);
+    const CollisionGroup * const pGroup1
+            = reinterpret_cast<CollisionGroup *> (group1Va);
+    const CollisionGroup * const pGroup2
+            = reinterpret_cast<CollisionGroup *> (group2Va);
+    const bool result = pFilter->CanCollide(*pGroup1, *pGroup2);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_GroupFilter
  * Method:    getRefCount
  * Signature: (J)I
  */

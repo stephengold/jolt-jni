@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 
@@ -48,6 +49,23 @@ public class GroupFilter extends SerializableObject implements RefTarget {
      */
     GroupFilter(long filterVa) {
         super(filterVa);
+    }
+
+    /**
+     * Test whether the specified groups can collide. The filter is unaffected.
+     *
+     * @param group1 the first group (not null, unaffected)
+     * @param group2 the 2nd group (not null, unaffected)
+     * @return {@code true} if they can collide, otherwise {@code false}
+     */
+    public boolean canCollide(
+            ConstCollisionGroup group1, ConstCollisionGroup group2) {
+        long filterVa = va();
+        long group1Va = group1.targetVa();
+        long group2Va = group2.targetVa();
+        boolean result = canCollide(filterVa, group1Va, group2Va);
+
+        return result;
     }
     // *************************************************************************
     // RefTarget methods
@@ -90,6 +108,9 @@ public class GroupFilter extends SerializableObject implements RefTarget {
     }
     // *************************************************************************
     // native methods
+
+    native private static boolean canCollide(
+            long filterVa, long group1Va, long group2Va);
 
     native private static int getRefCount(long filterVa);
 
