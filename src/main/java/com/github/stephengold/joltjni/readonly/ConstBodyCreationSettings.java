@@ -148,7 +148,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
-    MassProperties getMassPropertiesOverride();
+    ConstMassProperties getMassPropertiesOverride();
 
     /**
      * Return the maximum angular speed. The settings are unaffected.
