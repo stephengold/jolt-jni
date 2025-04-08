@@ -188,10 +188,12 @@ public class SoftBodyCreationSettings
     /**
      * Alter the object layer. (native attribute: mObjectLayer)
      *
-     * @param objLayer the ID of the desired object layer (&ge;0,
-     * &lt;numObjectLayers, default=0)
+     * @param objLayer the index of the desired object layer (&ge;0,
+     * &lt;numObjectLayers, &lt;65536, default=0)
      */
     public void setObjectLayer(int objLayer) {
+        assert objLayer >= 0 && objLayer < 65_536 : "objLayer = " + objLayer;
+
         long bodySettingsVa = va();
         setObjectLayer(bodySettingsVa, objLayer);
     }

@@ -768,9 +768,12 @@ public class BodyInterface extends NonCopyable {
      * Alter the object layer of the specified body.
      *
      * @param bodyId the ID of the body to modify (not null, unaffected)
-     * @param layer the index of the desired object layer
+     * @param layer the index of the desired object layer (&ge;0,
+     * &lt;numObjectLayers, &lt;65536, default=0)
      */
     public void setObjectLayer(ConstBodyId bodyId, int layer) {
+        assert layer >= 0 && layer < 65_536 : "layer = " + layer;
+
         long bodyInterfaceVa = va();
         long bodyIdVa = bodyId.targetVa();
         setObjectLayer(bodyInterfaceVa, bodyIdVa, layer);
