@@ -122,4 +122,12 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
      * @return a new rotation quaternion (relative to the physics-system axes)
      */
     Quat getRotation();
+
+    /**
+     * Access the shared settings.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    ConstSoftBodySharedSettings getSettings();
 }

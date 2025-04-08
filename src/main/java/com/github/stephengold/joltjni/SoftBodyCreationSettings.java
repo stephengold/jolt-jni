@@ -465,6 +465,7 @@ public class SoftBodyCreationSettings
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null} if none
      */
+    @Override
     public SoftBodySharedSettings getSettings() {
         long bodySettingsVa = va();
         long sharedSettingsVa = getSettings(bodySettingsVa);
