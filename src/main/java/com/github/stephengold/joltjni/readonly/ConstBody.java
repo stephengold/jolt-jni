@@ -116,6 +116,13 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     RMat44 getCenterOfMassTransform();
 
     /**
+     * Access the body's collision group.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstCollisionGroup getCollisionGroup();
+
+    /**
      * Test whether extra effort should be made to remove ghost contacts. The
      * body is unaffected.
      *

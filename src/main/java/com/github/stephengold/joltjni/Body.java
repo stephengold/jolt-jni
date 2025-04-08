@@ -616,6 +616,7 @@ public class Body extends NonCopyable implements ConstBody {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public CollisionGroup getCollisionGroup() {
         long bodyVa = va();
         long groupVa = getCollisionGroup(bodyVa);
