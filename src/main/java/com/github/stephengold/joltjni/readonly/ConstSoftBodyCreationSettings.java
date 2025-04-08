@@ -130,4 +130,13 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
      * {@code null} if none
      */
     ConstSoftBodySharedSettings getSettings();
+
+    /**
+     * Test whether to update the position of the body during simulation. The
+     * settings are unaffected.
+     *
+     * @return {@code true} if the position will be updated, otherwise
+     * {@code false}
+     */
+    boolean getUpdatePosition();
 }

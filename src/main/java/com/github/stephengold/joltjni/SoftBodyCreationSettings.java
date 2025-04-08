@@ -478,6 +478,21 @@ public class SoftBodyCreationSettings
 
         return result;
     }
+
+    /**
+     * Test whether to update the position of the body during simulation. The
+     * settings are unaffected. (native member: mUpdatePosition)
+     *
+     * @return {@code true} if the position will be updated, otherwise
+     * {@code false}
+     */
+    @Override
+    public boolean getUpdatePosition() {
+        long bodySettingsVa = va();
+        boolean result = getUpdatePosition(bodySettingsVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -524,6 +539,8 @@ public class SoftBodyCreationSettings
     native private static float getRotationZ(long bodySettingsVa);
 
     native private static long getSettings(long bodySettingsVa);
+
+    native private static boolean getUpdatePosition(long bodySettingsVa);
 
     native private static void setAllowSleeping(
             long bodySettingsVa, boolean allow);

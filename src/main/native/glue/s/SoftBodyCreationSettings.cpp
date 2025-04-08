@@ -310,6 +310,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSett
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    getUpdatePosition
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getUpdatePosition
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    const bool result = pSettings->mUpdatePosition;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
  * Method:    setAllowSleeping
  * Signature: (JZ)V
  */
