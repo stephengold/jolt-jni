@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EMotionType;
+import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstContact;
 
 /**
@@ -89,10 +90,10 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
      * {@code null} if no colliding character
      */
     @Override
-    public CharacterVirtual getCharacterB() {
+    public ConstCharacterVirtual getCharacterB() {
         long contactVa = va();
         long characterVa = getCharacterB(contactVa);
-        CharacterVirtual result;
+        ConstCharacterVirtual result;
         if (characterVa == 0L) {
             result = null;
         } else {

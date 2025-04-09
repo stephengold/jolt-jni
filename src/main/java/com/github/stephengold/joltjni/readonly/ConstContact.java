@@ -22,7 +22,6 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.BodyId;
-import com.github.stephengold.joltjni.CharacterVirtual;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
@@ -58,7 +57,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null} if no colliding character
      */
-    CharacterVirtual getCharacterB();
+    ConstCharacterVirtual getCharacterB();
 
     /**
      * Copy the contact normal. The contact is unaffected.
