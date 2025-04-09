@@ -121,7 +121,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
     RVec3 getPosition();
 
     /**
-     * Return the subshape ID of the colliding body. The contact is unaffected.
+     * Copy the subshape ID of the colliding body. The contact is unaffected.
      *
      * @return a new object, or {@code null} if no colliding body
      */

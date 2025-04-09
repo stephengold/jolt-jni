@@ -52,16 +52,16 @@ public interface ConstContactManifold extends ConstJoltPhysicsObject {
     float getPenetrationDepth();
 
     /**
-     * Return the ID of the first subshape that formed the manifold. The
-     * manifold is unaffected.
+     * Copy the ID of the first subshape that formed the manifold. The manifold
+     * is unaffected.
      *
      * @return a new object
      */
     SubShapeId getSubShapeId1();
 
     /**
-     * Return the ID of the 2nd subshape that formed the manifold. The manifold
-     * is unaffected.
+     * Copy the ID of the 2nd subshape that formed the manifold. The manifold is
+     * unaffected.
      *
      * @return a new object
      */

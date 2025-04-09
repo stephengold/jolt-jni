@@ -63,8 +63,7 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
     /**
      * Copy the list of active contacts. The character is unaffected.
      *
-     * @return a new array of new JVM objects with pre-existing native objects
-     * assigned
+     * @return a new array of new objects
      */
     ConstContact[] getActiveContacts();
 
@@ -117,9 +116,9 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
     CharacterId getId();
 
     /**
-     * Return the ID of the inner body. The character is unaffected.
+     * Copy the ID of the inner body. The character is unaffected.
      *
-     * @return the ID, or {@code null} if none
+     * @return a new object, or {@code null} if none
      */
     BodyId getInnerBodyId();
 
