@@ -513,10 +513,10 @@ public class SoftBodyCreationSettings
      * {@code null} if none
      */
     @Override
-    public SoftBodySharedSettings getSettings() {
+    public ConstSoftBodySharedSettings getSettings() {
         long bodySettingsVa = va();
         long sharedSettingsVa = getSettings(bodySettingsVa);
-        SoftBodySharedSettings result;
+        ConstSoftBodySharedSettings result;
         if (sharedSettingsVa == 0L) {
             result = null;
         } else {
