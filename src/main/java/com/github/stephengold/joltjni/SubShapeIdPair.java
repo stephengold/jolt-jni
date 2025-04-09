@@ -21,8 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
-import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
 import com.github.stephengold.joltjni.readonly.ConstSubShapeIdPair;
 
 /**
@@ -55,10 +53,10 @@ final public class SubShapeIdPair
      * @return a new object
      */
     @Override
-    public ConstBodyId getBody1Id() {
+    public BodyId getBody1Id() {
         long pairVa = va();
         long bodyIdVa = getBody1Id(pairVa);
-        ConstBodyId result = new BodyId(bodyIdVa, true);
+        BodyId result = new BodyId(bodyIdVa, true);
 
         return result;
     }
@@ -69,10 +67,10 @@ final public class SubShapeIdPair
      * @return a new object
      */
     @Override
-    public ConstBodyId getBody2Id() {
+    public BodyId getBody2Id() {
         long pairVa = va();
         long bodyIdVa = getBody2Id(pairVa);
-        ConstBodyId result = new BodyId(bodyIdVa, true);
+        BodyId result = new BodyId(bodyIdVa, true);
 
         return result;
     }
@@ -96,10 +94,10 @@ final public class SubShapeIdPair
      * @return a new object
      */
     @Override
-    public ConstSubShapeId getSubShapeId1() {
+    public SubShapeId getSubShapeId1() {
         long pairVa = va();
         long bodyIdVa = getSubShapeId1(pairVa);
-        ConstSubShapeId result = new SubShapeId(bodyIdVa, true);
+        SubShapeId result = new SubShapeId(bodyIdVa, true);
 
         return result;
     }
@@ -110,10 +108,10 @@ final public class SubShapeIdPair
      * @return a new object
      */
     @Override
-    public ConstSubShapeId getSubShapeId2() {
+    public SubShapeId getSubShapeId2() {
         long pairVa = va();
         long bodyIdVa = getSubShapeId2(pairVa);
-        ConstSubShapeId result = new SubShapeId(bodyIdVa, true);
+        SubShapeId result = new SubShapeId(bodyIdVa, true);
 
         return result;
     }
