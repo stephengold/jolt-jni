@@ -518,20 +518,6 @@ public class CharacterVirtual
     }
 
     /**
-     * Copy the ID of the inner body. The character is unaffected.
-     *
-     * @return a new object, or {@code null} if none
-     */
-    @Override
-    public BodyId getInnerBodyId() {
-        long characterVa = va();
-        long idVa = getInnerBodyId(characterVa);
-        BodyId result = new BodyId(idVa, true);
-
-        return result;
-    }
-
-    /**
      * Copy the character's ID. The character is unaffected.
      *
      * @return a new object
@@ -541,6 +527,20 @@ public class CharacterVirtual
         long characterVa = va();
         long idVa = getId(characterVa);
         CharacterId result = new CharacterId(idVa, true);
+
+        return result;
+    }
+
+    /**
+     * Copy the ID of the inner body. The character is unaffected.
+     *
+     * @return a new object, or {@code null} if none
+     */
+    @Override
+    public BodyId getInnerBodyId() {
+        long characterVa = va();
+        long idVa = getInnerBodyId(characterVa);
+        BodyId result = new BodyId(idVa, true);
 
         return result;
     }
