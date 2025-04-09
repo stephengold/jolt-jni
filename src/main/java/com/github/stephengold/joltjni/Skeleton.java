@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstJoint;
 import com.github.stephengold.joltjni.readonly.ConstSkeleton;
 import com.github.stephengold.joltjni.template.RefTarget;
 
@@ -114,10 +113,10 @@ public class Skeleton
      * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
-    public ConstJoint getJoint(int jointIndex) {
+    public Joint getJoint(int jointIndex) {
         long skeletonVa = va();
         long resultVa = getJoint(skeletonVa, jointIndex);
-        ConstJoint result = new Joint(this, resultVa);
+        Joint result = new Joint(this, resultVa);
 
         return result;
     }
@@ -156,10 +155,10 @@ public class Skeleton
      * objects assigned
      */
     @Override
-    public ConstJoint[] getJoints() {
+    public Joint[] getJoints() {
         long skeletonVa = va();
         int numJoints = getJointCount(skeletonVa);
-        ConstJoint[] result = new ConstJoint[numJoints];
+        Joint[] result = new Joint[numJoints];
         for (int i = 0; i < numJoints; ++i) {
             long jointVa = getJoint(skeletonVa, i);
             result[i] = new Joint(this, jointVa);
