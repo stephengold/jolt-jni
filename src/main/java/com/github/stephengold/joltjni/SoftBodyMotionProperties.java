@@ -21,8 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstFace;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyMotionProperties;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -157,7 +157,7 @@ public class SoftBodyMotionProperties
      * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
-    public ConstFace getFace(int index) {
+    public Face getFace(int index) {
         long propertiesVa = va();
         long faceVa = getFace(propertiesVa, index);
         Face result = new Face(this, faceVa);
@@ -172,10 +172,10 @@ public class SoftBodyMotionProperties
      * assigned
      */
     @Override
-    public ConstFace[] getFaces() {
+    public Face[] getFaces() {
         long propertiesVa = va();
         int numFaces = countFaces(propertiesVa);
-        ConstFace[] result = new Face[numFaces];
+        Face[] result = new Face[numFaces];
         for (int i = 0; i < numFaces; ++i) {
             long faceVa = getFace(propertiesVa, i);
             result[i] = new Face(this, faceVa);
@@ -203,10 +203,11 @@ public class SoftBodyMotionProperties
      * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
-    public SoftBodySharedSettings getSettings() {
+    public ConstSoftBodySharedSettings getSettings() {
         long propertiesVa = va();
         long settingsVa = getSettings(propertiesVa);
-        SoftBodySharedSettings result = new SoftBodySharedSettings(settingsVa);
+        ConstSoftBodySharedSettings result
+                = new SoftBodySharedSettings(settingsVa);
 
         return result;
     }
