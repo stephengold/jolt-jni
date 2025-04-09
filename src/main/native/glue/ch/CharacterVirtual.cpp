@@ -522,6 +522,21 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
+ * Method:    getTransformedShape
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getTransformedShape
+  (JNIEnv *, jclass, jlong characterVa) {
+    const CharacterVirtual * const pCharacter
+            = reinterpret_cast<CharacterVirtual *> (characterVa);
+    const TransformedShape & shape = pCharacter->GetTransformedShape();
+    TransformedShape * const pResult = new TransformedShape(shape);
+    TRACE_NEW("TransformedShape", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    getUserData
  * Signature: (J)J
  */
