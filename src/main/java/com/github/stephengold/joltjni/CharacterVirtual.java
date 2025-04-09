@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtualSettings;
+import com.github.stephengold.joltjni.readonly.ConstContact;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -424,15 +425,19 @@ public class CharacterVirtual
     }
 
     /**
-     * Access the list of contacts. The character is unaffected.
+     * Copy the list of active contacts. The character is unaffected.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new array of new objects
      */
     @Override
-    public ContactList getActiveContacts() {
+    public ConstContact[] getActiveContacts() {
         long characterVa = va();
-        long listVa = getActiveContacts(characterVa);
-        ContactList result = new ContactList(listVa);
+        int numContacts = countActiveContacts(characterVa);
+        ConstContact[] result = new ConstContact[numContacts];
+        for (int i = 0; i < numContacts; ++i) {
+            long contactVa = getActiveContact(characterVa, i);
+            result[i] = new Contact(contactVa, true);
+        }
 
         return result;
     }
@@ -775,6 +780,8 @@ public class CharacterVirtual
     native static boolean canWalkStairs(
             long characterVa, float vx, float vy, float vz);
 
+    native static int countActiveContacts(long characterVa);
+
     native private static long createCharacterVirtual(
             long settingsVa, double locX, double locY, double locZ, float qx,
             float qy, float qz, float qw, long userData, long systemVa);
@@ -784,7 +791,7 @@ public class CharacterVirtual
             long bpFilterVa, long olFilterVa, long bodyFilterVa,
             long shapeFilterVa, long allocatorVa);
 
-    native static long getActiveContacts(long characterVa);
+    native static long getActiveContact(long characterVa, int index);
 
     native static double getCenterOfMassPositionX(long characterVa);
 

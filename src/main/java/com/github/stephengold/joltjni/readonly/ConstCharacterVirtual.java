@@ -24,7 +24,6 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.BodyId;
 import com.github.stephengold.joltjni.CharacterId;
 import com.github.stephengold.joltjni.CharacterVirtualRefC;
-import com.github.stephengold.joltjni.ContactList;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
@@ -62,11 +61,12 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
     boolean canWalkStairs(Vec3Arg desiredVelocity);
 
     /**
-     * Access the list of contacts. The character is unaffected.
+     * Copy the list of active contacts. The character is unaffected.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new array of new JVM objects with pre-existing native objects
+     * assigned
      */
-    ContactList getActiveContacts();
+    ConstContact[] getActiveContacts();
 
     /**
      * Calculate the location of the character's center of mass. The character

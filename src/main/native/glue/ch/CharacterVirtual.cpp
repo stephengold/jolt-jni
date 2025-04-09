@@ -85,6 +85,21 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
+ * Method:    countActiveContacts
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_countActiveContacts
+  (JNIEnv *, jclass, jlong characterVa) {
+    const CharacterVirtual * const pCharacter
+            = reinterpret_cast<CharacterVirtual *> (characterVa);
+    const CharacterVirtual::ContactList &contacts
+            = pCharacter->GetActiveContacts();
+    const int result = contacts.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    createCharacterVirtual
  * Signature: (JDDDFFFFJJ)J
  */
@@ -133,15 +148,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_exte
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getActiveContacts
- * Signature: (J)J
+ * Method:    getActiveContact
+ * Signature: (JI)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getActiveContacts
-  (JNIEnv *, jclass, jlong characterVa) {
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getActiveContact
+  (JNIEnv *, jclass, jlong characterVa, jint index) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const CharacterVirtual::ContactList * const pResult
-            = &pCharacter->GetActiveContacts();
+    const CharacterVirtual::ContactList &contacts
+            = pCharacter->GetActiveContacts();
+    const CharacterVirtual::Contact * const pResult
+            = new CharacterVirtual::Contact(contacts[index]);
+    TRACE_NEW("CharacterVirtual::Contact", pResult);
     return reinterpret_cast<jlong> (pResult);
 }
 

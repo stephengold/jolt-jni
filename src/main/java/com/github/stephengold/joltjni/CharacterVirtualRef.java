@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EGroundState;
 import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
+import com.github.stephengold.joltjni.readonly.ConstContact;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
@@ -281,15 +282,19 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Access the list of contacts. The character is unaffected.
+     * Copy the list of active contacts. The character is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
-    public ContactList getActiveContacts() {
+    public ConstContact[] getActiveContacts() {
         long characterVa = targetVa();
-        long listVa = CharacterVirtual.getActiveContacts(characterVa);
-        ContactList result = new ContactList(listVa);
+        int numContacts = CharacterVirtual.countActiveContacts(characterVa);
+        ConstContact[] result = new ConstContact[numContacts];
+        for (int i = 0; i < numContacts; ++i) {
+            long contactVa = CharacterVirtual.getActiveContact(characterVa, i);
+            result[i] = new Contact(contactVa, true);
+        }
 
         return result;
     }
