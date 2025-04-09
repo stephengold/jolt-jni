@@ -608,7 +608,7 @@ public class Test003 {
         group.setGroupId(101);
         group.setSubGroupId(102);
 
-        Assert.assertEquals(filter.va(), group.getGroupFilter().va());
+        Assert.assertEquals(filter.va(), group.getGroupFilter().targetVa());
         Assert.assertEquals(101, group.getGroupId());
         Assert.assertEquals(102, group.getSubGroupId());
     }

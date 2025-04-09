@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
+import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 
 /**
  * Restrict which bodies can collide.
@@ -134,7 +135,7 @@ public class CollisionGroup
      * {@code null} if none
      */
     @Override
-    public GroupFilter getGroupFilter() {
+    public ConstGroupFilter getGroupFilter() {
         long groupVa = va();
         long filterVa = getGroupFilter(groupVa);
         GroupFilter result;
