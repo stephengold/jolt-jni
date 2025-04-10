@@ -352,7 +352,7 @@ by invoking `target.setEmbedded()`.
 
 ## Acknowledgments
 
-The Jolt-JNI Project is derived from open-source software:
+Jolt JNI is derived from open-source software:
 
   + the [Jolt Physics][jolt] project
   + [Khaled Mamou's V-HACD Library][vhacd] for approximate convex decomposition
@@ -390,7 +390,7 @@ correct the situation: sgold@sonic.net
 [Jump to the table of contents](#toc)
 
 
-[adoptium]: https://adoptium.net/releases.html "Adoptium Project"
+[adoptium]: https://adoptium.net/releases.html "Adoptium"
 [appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
 [checkstyle]: https://checkstyle.org "Checkstyle"
 [firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
@@ -400,20 +400,20 @@ correct the situation: sgold@sonic.net
 [git]: https://git-scm.com "Git"
 [github]: https://github.com "GitHub"
 [gitkraken]: https://www.gitkraken.com "GitKraken client"
-[gradle]: https://gradle.org "Gradle Project"
+[gradle]: https://gradle.org "Gradle"
 [idea]: https://www.jetbrains.com/idea/ "IntelliJ IDEA"
 [java]: https://en.wikipedia.org/wiki/Java_(programming_language) "Java programming language"
-[jolt]: https://jrouwe.github.io/JoltPhysics "Jolt Physics project"
+[jolt]: https://jrouwe.github.io/JoltPhysics "Jolt Physics"
 [jvm]: https://en.wikipedia.org/wiki/Java_virtual_machine "Java Virtual Machine"
 [kotlin]: https://en.wikipedia.org/wiki/Kotlin_(programming_language) "Kotlin programming language"
 [latest]: https://github.com/stephengold/jolt-jni/releases/latest "latest Jolt-JNI release"
 [license]: https://github.com/stephengold/jolt-jni/blob/master/LICENSE "Jolt-JNI license"
 [llvm]: https://www.llvm.org "LLVM Compiler"
 [macstadium]: https://www.macstadium.com/ "MacStadium"
-[markdown]: https://daringfireball.net/projects/markdown "Markdown Project"
+[markdown]: https://daringfireball.net/projects/markdown "Markdown"
 [meld]: https://meldmerge.org "Meld merge tool"
-[mint]: https://linuxmint.com "Linux Mint Project"
-[netbeans]: https://netbeans.org "NetBeans Project"
+[mint]: https://linuxmint.com "Linux Mint"
+[netbeans]: https://netbeans.org "NetBeans"
 [project]: https://github.com/stephengold/jolt-jni "Jolt-JNI Project"
 [sonatype]: https://www.sonatype.com "Sonatype"
 [studio]: https://developer.android.com/studio "Android Studio IDE"
