@@ -68,7 +68,8 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the center-of-mass location. The subshape is unaffected.
+     * Copy the center-of-mass location. The subshape is unaffected. (native
+     * function: GetPositionCOM)
      *
      * @return a new vector
      */
@@ -128,7 +129,8 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the center-of-mass location.
+     * Alter the center-of-mass location. (native
+     * function: SetPositionCOM)
      *
      * @param location the desired location (not null, unaffected)
      */
