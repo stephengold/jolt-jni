@@ -63,7 +63,8 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the contact normal direction for the specified vertex.
+     * Copy the contact normal direction for the specified vertex. The manifold
+     * is unaffected.
      *
      * @param vertex the vertex to query (not null, unaffected)
      * @return a new vector
@@ -80,7 +81,8 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the location of the contact point for the specified vertex.
+     * Copy the location of the contact point for the specified vertex. The
+     * manifold is unaffected.
      *
      * @param vertex the vertex to query (not null, unaffected)
      * @return a new location vector (in local coordinates)
@@ -97,7 +99,8 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
     }
 
     /**
-     * Count how many sensors are in contact with the soft body.
+     * Count how many sensors are in contact with the soft body. The manifold is
+     * unaffected.
      *
      * @return the count (&ge;0)
      */
@@ -109,7 +112,8 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
     }
 
     /**
-     * Return the ID of the specified sensor contact.
+     * Return the ID of the specified sensor contact. The manifold is
+     * unaffected. (native method: GetSensorContactBodyID)
      *
      * @param index among the sensor contacts (&ge;0)
      * @return a new object
@@ -123,7 +127,7 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
     }
 
     /**
-     * Enumerate all vertices of the soft body.
+     * Enumerate all vertices of the soft body. The manifold is unaffected.
      *
      * @return a new array of new JVM objects with pre-existing native objects
      * assigned
@@ -144,6 +148,7 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
 
     /**
      * Test whether the specified vertex collided with something in this update.
+     * The manifold is unaffected.
      *
      * @param vertex the vertex to query (not null, unaffected)
      * @return {@code true} if it collided, otherwise {@code false}

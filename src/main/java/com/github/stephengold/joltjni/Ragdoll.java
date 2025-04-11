@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -115,7 +115,8 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
 
     /**
-     * Enumerate all bodies in the ragdoll.
+     * Enumerate all bodies in the ragdoll, which is unaffected. (native method:
+     * GetBodyIDs)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -170,7 +171,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
 
     /**
      * Copy the transform of the ragdoll's root, using the locking body
-     * interface.
+     * interface. The ragdoll is unaffected.
      *
      * @param storeLocation storage for the root location (not null, modified)
      * @param storeOrientation storage for the root orientation (not null,
@@ -181,7 +182,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
 
     /**
-     * Copy the transform of the ragdoll's root.
+     * Copy the transform of the ragdoll's root. The ragdoll is unaffected.
      *
      * @param storeLocation storage for the root location (not null, modified)
      * @param storeOrientation storage for the root orientation (not null,

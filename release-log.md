@@ -1,4 +1,4 @@
-# release log for the Jolt-JNI Project
+# release log for the Jolt-JNI project
 
 ## Version 0.9.8 released on 30 March 2025
 

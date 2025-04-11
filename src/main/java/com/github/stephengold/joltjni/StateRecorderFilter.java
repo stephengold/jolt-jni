@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -80,8 +80,8 @@ abstract public class StateRecorderFilter extends JoltPhysicsObject {
      * Test whether contacts between the specified bodies should be saved. Meant
      * to be overridden.
      *
-     * @param bodyId1 the first body (not null, unaffected)
-     * @param bodyId2 the second body (not null, unaffected)
+     * @param bodyId1 the ID of first body
+     * @param bodyId2 the ID of 2nd body
      * @return {@code true} to save, otherwise {@code false}
      */
     public boolean shouldSaveContact(ConstBodyId bodyId1, ConstBodyId bodyId2) {

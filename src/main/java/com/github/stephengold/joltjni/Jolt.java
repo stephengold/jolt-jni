@@ -33,8 +33,7 @@ import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 
 /**
- * Utility methods providing JNI access to Jolt Physics and the C++ {@code std}
- * namespace.
+ * Utility methods providing JNI access to Jolt Physics.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -43,7 +42,7 @@ final public class Jolt {
     // constants
 
     /**
-     * padding around bodies (in meters)
+     * default rounding of corners in convex shapes (in meters)
      */
     final public static float cDefaultConvexRadius = 0.05f;
     /**

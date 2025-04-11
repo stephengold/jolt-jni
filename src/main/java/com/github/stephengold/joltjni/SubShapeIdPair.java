@@ -76,7 +76,7 @@ final public class SubShapeIdPair
     }
 
     /**
-     * Return the hashcode for the pair.
+     * Return the hashcode for the pair. The pair is unaffected.
      *
      * @return the value
      */
@@ -89,7 +89,8 @@ final public class SubShapeIdPair
     }
 
     /**
-     * Copy the ID of the first subshape.
+     * Copy the ID of the first subshape. The pair is unaffected. (native
+     * method: GetSubShapeID1)
      *
      * @return a new object
      */
@@ -103,7 +104,8 @@ final public class SubShapeIdPair
     }
 
     /**
-     * Copy the ID of the 2nd subshape.
+     * Copy the ID of the 2nd subshape. The pair is unaffected. (native method:
+     * GetSubShapeID2)
      *
      * @return a new object
      */
