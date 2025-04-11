@@ -28,7 +28,6 @@ import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstColor;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
@@ -124,19 +123,6 @@ final public class Op {
         left.set(rx, ry, rz);
 
         return right;
-    }
-
-    /**
-     * Test whether the specified IDs are equal. (native operator: binary
-     * {@code ==})
-     *
-     * @param left the first ID to test (not null, unaffected)
-     * @param right the 2nd ID to test (not null, unaffected)
-     * @return {@code true} if equal, {@code false} if unequal
-     */
-    public static boolean isEqual(ConstBodyId left, ConstBodyId right) {
-        boolean result = left.isEqual(right);
-        return result;
     }
 
     /**

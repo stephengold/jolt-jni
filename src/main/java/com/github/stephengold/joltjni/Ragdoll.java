@@ -118,14 +118,15 @@ public class Ragdoll extends NonCopyable implements RefTarget {
      * Enumerate all bodies in the ragdoll, which is unaffected. (native method:
      * GetBodyIDs)
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new array of body IDs
      */
-    public BodyIdVector getBodyIds() {
+    public int[] getBodyIds() {
         long ragdollVa = va();
-        long vectorVa = getBodyIds(ragdollVa);
-        BodyIdVector result = new BodyIdVector(this, vectorVa);
+        int numBodies = getBodyCount(ragdollVa);
+        int[] storeIds = new int[numBodies];
+        getBodyIds(ragdollVa, storeIds);
 
-        return result;
+        return storeIds;
     }
 
     /**
@@ -280,7 +281,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
 
     native static int getBodyCount(long ragdollVa);
 
-    native static long getBodyIds(long ragdollVa);
+    native static void getBodyIds(long ragdollVa, int[] storeIds);
 
     native static int getConstraintCount(long ragdollVa);
 

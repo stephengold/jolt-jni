@@ -109,15 +109,15 @@ abstract public class CharacterBase
     }
 
     /**
-     * Copy the body ID of the supporting surface. The character is unaffected.
+     * Return the body ID of the supporting surface. The character is
+     * unaffected. (native method: GetGroundBodyID)
      *
-     * @return a new object
+     * @return the {@code BodyID} value
      */
     @Override
-    public BodyId getGroundBodyId() {
+    public int getGroundBodyId() {
         long characterVa = va();
-        long idVa = getGroundBodyId(characterVa);
-        BodyId result = new BodyId(idVa, true);
+        int result = getGroundBodyId(characterVa);
 
         return result;
     }
@@ -342,7 +342,7 @@ abstract public class CharacterBase
 
     native static float getCosMaxSlopeAngle(long characterVa);
 
-    native static long getGroundBodyId(long characterVa);
+    native static int getGroundBodyId(long characterVa);
 
     native static long getGroundMaterial(long characterVa);
 

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,15 +33,14 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_CollidePointResult
  * Method:    getBodyId
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollidePointResult_getBodyId
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CollidePointResult_getBodyId
   (JNIEnv *, jclass, jlong pointResultVa) {
     const CollidePointResult * const pPointResult
             = reinterpret_cast<CollidePointResult *> (pointResultVa);
-    BodyID * const pResult = new BodyID(pPointResult->mBodyID);
-    TRACE_NEW("BodyID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const BodyID result = pPointResult->mBodyID;
+    return result.GetIndexAndSequenceNumber();
 }
 
 /*

@@ -102,6 +102,26 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getBodyCount
 
 /*
  * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    getBodyIds
+ * Signature: (J[I)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getBodyIds
+  (JNIEnv *pEnv, jclass, jlong ragdollVa, jintArray storeIds) {
+    const Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    const jsize arrayLength = pEnv->GetArrayLength(storeIds);
+    jboolean isCopy;
+    jint * const pIds = pEnv->GetIntArrayElements(storeIds, &isCopy);
+    const Array<BodyID> idArray = pRagdoll->GetBodyIDs();
+    const size_t numBodies = idArray.size();
+    for (int i = 0; i < numBodies && i < arrayLength; ++i) {
+        const BodyID& id = idArray[i];
+        pIds[i] = id.GetIndexAndSequenceNumber();
+    }
+    pEnv->ReleaseIntArrayElements(storeIds, pIds, 0);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
  * Method:    getConstraintCount
  * Signature: (J)I
  */
@@ -110,18 +130,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getConstraint
     const Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
     const size_t result = pRagdoll->GetConstraintCount();
     return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Ragdoll
- * Method:    getBodyIds
- * Signature: (J)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getBodyIds
-  (JNIEnv *, jclass, jlong ragdollVa) {
-    const Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
-    const Array<BodyID> * const pResult = &pRagdoll->GetBodyIDs();
-    return reinterpret_cast<jlong> (pResult);
 }
 
 /*

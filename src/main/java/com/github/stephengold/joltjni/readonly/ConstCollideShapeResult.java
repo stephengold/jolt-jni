@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.BodyId;
 import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
 
@@ -38,9 +37,9 @@ public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
     /**
      * Identify the body to which shape 2 belongs. The object is unaffected.
      *
-     * @return a new object
+     * @return the {@code BodyID} value
      */
-    BodyId getBodyId2();
+    int getBodyId2();
 
     /**
      * Copy the contact location on the surface of shape 1. The object is

@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -49,6 +48,12 @@ final public class Jolt {
      * single-precision value of Pi
      */
     final public static float JPH_PI = (float) Math.PI;
+    /**
+     * invalid body ID
+     * <p>
+     * value should match Jolt/Physics/Body/BodyID.h
+     */
+    final public static int cInvalidBodyId = 0xffffffff;
     /**
      * standard 2nd argument to the {@code JobSystemThreadPool} constructor
      * <p>
@@ -213,20 +218,6 @@ final public class Jolt {
     public static long hashCombine(long oldHash, CharacterId id) {
         long idVa = id.va();
         long result = hashCombineCharacterId(oldHash, idVa);
-
-        return result;
-    }
-
-    /**
-     * Combine the specified body ID with the specified hash code.
-     *
-     * @param id the ID to combine (not null, unaffected)
-     * @param oldHash the old hash code
-     * @return the new hash code
-     */
-    public static long hashCombine(long oldHash, ConstBodyId id) {
-        long idVa = id.targetVa();
-        long result = hashCombineBodyId(oldHash, idVa);
 
         return result;
     }
@@ -598,8 +589,6 @@ final public class Jolt {
 
     native private static long hashBytes(
             float qx, float qy, float qz, float qw, long oldHash);
-
-    native private static long hashCombineBodyId(long oldHash, long idVa);
 
     native private static long hashCombineCharacterId(long oldHash, long idVa);
 

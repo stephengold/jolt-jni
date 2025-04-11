@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtualSettings;
 import com.github.stephengold.joltjni.readonly.ConstContact;
@@ -532,15 +531,15 @@ public class CharacterVirtual
     }
 
     /**
-     * Copy the ID of the inner body. The character is unaffected.
+     * Return the ID of the inner body. The character is unaffected. (native
+     * method: GetInnerBodyID)
      *
-     * @return a new object, or {@code null} if none
+     * @return the {@code BodyID} value
      */
     @Override
-    public BodyId getInnerBodyId() {
+    public int getInnerBodyId() {
         long characterVa = va();
-        long idVa = getInnerBodyId(characterVa);
-        BodyId result = new BodyId(idVa, true);
+        int result = getInnerBodyId(characterVa);
 
         return result;
     }
@@ -727,14 +726,13 @@ public class CharacterVirtual
      * specified body during the previous time step. The character is
      * unaffected.
      *
-     * @param bodyId the ID of the body to test against (not null, unaffected)
+     * @param bodyId the ID of the body to test against
      * @return {@code true} if contact or collision, otherwise {@code false}
      */
     @Override
-    public boolean hasCollidedWith(ConstBodyId bodyId) {
+    public boolean hasCollidedWith(int bodyId) {
         long characterVa = va();
-        long idVa = bodyId.targetVa();
-        boolean result = hasCollidedWithBody(characterVa, idVa);
+        boolean result = hasCollidedWithBody(characterVa, bodyId);
 
         return result;
     }
@@ -809,7 +807,7 @@ public class CharacterVirtual
 
     native static long getId(long characterVa);
 
-    native static long getInnerBodyId(long characterVa);
+    native static int getInnerBodyId(long characterVa);
 
     native static float getLinearVelocityX(long characterVa);
 
@@ -853,7 +851,7 @@ public class CharacterVirtual
 
     native static long getWorldTransform(long characterVa);
 
-    native static boolean hasCollidedWithBody(long characterVa, long idVa);
+    native static boolean hasCollidedWithBody(long characterVa, int bodyId);
 
     native static boolean hasCollidedWithCharacter(
             long characterVa, long otherVa);

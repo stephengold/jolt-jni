@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package com.github.stephengold.joltjni;
-
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 
 /**
  * A {@code BodyFilter} that ignores specific bodies.
@@ -64,12 +62,11 @@ public class IgnoreMultipleBodiesFilter extends BodyFilter {
     /**
      * Start ignoring the specified body.
      *
-     * @param bodyId the ID of the body to ignore (not null, unaffected)
+     * @param bodyId the ID of the body to ignore
      */
-    public void ignoreBody(ConstBodyId bodyId) {
+    public void ignoreBody(int bodyId) {
         long filterVa = va();
-        long bodyIdVa = bodyId.targetVa();
-        ignoreBody(filterVa, bodyIdVa);
+        ignoreBody(filterVa, bodyId);
     }
     // *************************************************************************
     // native private methods
@@ -78,7 +75,7 @@ public class IgnoreMultipleBodiesFilter extends BodyFilter {
 
     native private static long createDefault();
 
-    native private static void ignoreBody(long filterVa, long bodyIdVa);
+    native private static void ignoreBody(long filterVa, int bodyId);
 
     native private static void reserve(long filterVa, int capacity);
 }

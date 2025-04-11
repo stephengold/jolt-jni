@@ -46,16 +46,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_free
 /*
  * Class:     com_github_stephengold_joltjni_Contact
  * Method:    getBodyB
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Contact_getBodyB
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Contact_getBodyB
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterVirtual::Contact * const pContact
             = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const BodyID id = pContact->mBodyB;
-    BodyID * const pResult = new BodyID(id);
-    TRACE_NEW("BodyID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const BodyID result = pContact->mBodyB;
+    return result.GetIndexAndSequenceNumber();
 }
 
 /*

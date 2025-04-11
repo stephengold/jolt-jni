@@ -78,7 +78,7 @@ void OnSoftBodyContactAdded(ConstBody inSoftBody, SoftBodyManifold inManifold)
 	// Draw the sensors that are in contact with the soft body
 	for (int i = 0; i < inManifold.getNumSensorContacts(); ++i)
 	{
-		BodyId sensor_id = inManifold.getSensorContactBodyId(i);
+		int sensor_id = inManifold.getSensorContactBodyId(i);
 		BodyLockRead lock=new BodyLockRead(mPhysicsSystem.getBodyLockInterfaceNoLock(), sensor_id); // Can't lock in a callback
 		if (lock.succeededAndIsInBroadPhase())
 		{

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,18 +44,18 @@ abstract public class CustomBodyActivationListener
     /**
      * Callback invoked (by native code) each time a body is activated.
      *
-     * @param idVa the virtual address of the body's ID (not zero)
+     * @param bodyId the body's ID
      * @param bodyUserData the body's user data
      */
-    abstract public void onBodyActivated(long idVa, long bodyUserData);
+    abstract public void onBodyActivated(int bodyId, long bodyUserData);
 
     /**
      * Callback invoked (by native code) each time a body is deactivated.
      *
-     * @param idVa the virtual address of the body's ID (not zero)
+     * @param bodyId the body's ID
      * @param bodyUserData the body's user data
      */
-    abstract public void onBodyDeactivated(long idVa, long bodyUserData);
+    abstract public void onBodyDeactivated(int bodyId, long bodyUserData);
     // *************************************************************************
     // native private methods
 

@@ -33,16 +33,14 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_CollideShapeResult
  * Method:    getBodyId2
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getBodyId2
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getBodyId2
   (JNIEnv *, jclass, jlong shapeResultVa) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    const BodyID id = pShapeResult->mBodyID2;
-    BodyID * const pResult = new BodyID(id);
-    TRACE_NEW("BodyID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const BodyID result = pShapeResult->mBodyID2;
+    return result.GetIndexAndSequenceNumber();
 }
 
 /*

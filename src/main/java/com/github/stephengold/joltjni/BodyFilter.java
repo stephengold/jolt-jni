@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package com.github.stephengold.joltjni;
-
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 
 /**
  * Determine which bodies are candidates for a collision test.
@@ -57,10 +55,9 @@ public class BodyFilter extends NonCopyable {
      * @param bodyId the body to test (not null, unaffected)
      * @return {@code true} if may collide, {@code false} if filtered out
      */
-    public boolean shouldCollide(ConstBodyId bodyId) {
+    public boolean shouldCollide(int bodyId) {
         long filterVa = va();
-        long idVa = bodyId.targetVa();
-        boolean result = shouldCollide(filterVa, idVa);
+        boolean result = shouldCollide(filterVa, bodyId);
 
         return result;
     }
@@ -86,5 +83,5 @@ public class BodyFilter extends NonCopyable {
 
     native private static void free(long filterVa);
 
-    native private static boolean shouldCollide(long filterVa, long idVa);
+    native private static boolean shouldCollide(long filterVa, int bodyId);
 }

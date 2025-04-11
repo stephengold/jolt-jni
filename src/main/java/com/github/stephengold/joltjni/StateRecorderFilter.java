@@ -22,7 +22,6 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBody;
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstConstraint;
 
 /**
@@ -84,7 +83,7 @@ abstract public class StateRecorderFilter extends JoltPhysicsObject {
      * @param bodyId2 the ID of 2nd body
      * @return {@code true} to save, otherwise {@code false}
      */
-    public boolean shouldSaveContact(ConstBodyId bodyId1, ConstBodyId bodyId2) {
+    public boolean shouldSaveContact(int bodyId1, int bodyId2) {
         return true;
     }
     // *************************************************************************

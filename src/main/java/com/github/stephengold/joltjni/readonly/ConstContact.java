@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.BodyId;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
@@ -39,9 +38,9 @@ public interface ConstContact extends ConstJoltPhysicsObject {
     /**
      * Return the ID of the colliding body. The contact is unaffected.
      *
-     * @return a new object, or {@code null} if no colliding body
+     * @return the {@code BodyID} value
      */
-    BodyId getBodyB();
+    int getBodyB();
 
     /**
      * Test whether the velocity of the contact point can push the character.

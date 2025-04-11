@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,7 +47,7 @@ public void Initialize()
 	for (int i = 0; i < cNumBodies; ++i)
 	{
 		settings.setPosition (new RVec3(i * (1.0f - cPenetrationSlop), 2.0f, 0));
-		BodyId body_id = mBodyInterface.createBody(settings).getId();
+		int body_id = mBodyInterface.createBody(settings).getId();
 		mBodyInterface.addBody(body_id, EActivation.DontActivate);
 		if (i == 0)
 			mBodyInterface.setLinearVelocity(body_id,new Vec3(500, 0, 0));
@@ -56,7 +56,7 @@ public void Initialize()
 	for (int i = 0; i < cNumBodies; ++i)
 	{
 		settings.setPosition (new RVec3(i * (1.0f - cPenetrationSlop), 2.0f, 2.0f));
-		BodyId body_id = mBodyInterface.createBody(settings).getId();
+		int body_id = mBodyInterface.createBody(settings).getId();
 		mBodyInterface.addBody(body_id, EActivation.DontActivate);
 		if (i == cNumBodies - 1)
 			mBodyInterface.setLinearVelocity(body_id,new Vec3(-500, 0, 0));

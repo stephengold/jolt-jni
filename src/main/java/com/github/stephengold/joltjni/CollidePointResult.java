@@ -61,12 +61,11 @@ public class CollidePointResult extends JoltPhysicsObject {
      * Identify the body that was hit. The result object is unaffected. (native
      * attribute: mBodyID)
      *
-     * @return a new JVM object with a new native object assigned
+     * @return the {@code BodyID} value
      */
-    public BodyId getBodyId() {
+    public int getBodyId() {
         long pointResultVa = va();
-        long idVa = getBodyId(pointResultVa);
-        BodyId result = new BodyId(idVa, true);
+        int result = getBodyId(pointResultVa);
 
         return result;
     }
@@ -87,7 +86,7 @@ public class CollidePointResult extends JoltPhysicsObject {
     // *************************************************************************
     // native private methods
 
-    native private static long getBodyId(long pointResultVa);
+    native private static int getBodyId(long pointResultVa);
 
     native private static long getSubShapeId2(long pointResultVa);
 }

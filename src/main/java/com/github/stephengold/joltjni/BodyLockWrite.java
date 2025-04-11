@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
-
 /**
  * Lock a body for read-write access.
  *
@@ -40,16 +38,15 @@ public class BodyLockWrite extends NonCopyable {
     // constructors
 
     /**
-     * Acquire a lock using the specified interface and ID.
+     * Acquire a lock using the specified interface and body ID.
      *
      * @param bli the interface to use (not null, unaffected)
-     * @param id the ID of the body (not null, unaffected)
+     * @param bodyId the ID of the body to lock
      */
-    public BodyLockWrite(BodyLockInterface bli, ConstBodyId id) {
+    public BodyLockWrite(BodyLockInterface bli, int bodyId) {
         this.bli = bli;
         long interfaceVa = bli.va();
-        long idVa = id.targetVa();
-        long lockVa = createBodyLockWrite(interfaceVa, idVa);
+        long lockVa = createBodyLockWrite(interfaceVa, bodyId);
         setVirtualAddress(lockVa, true);
     }
     // *************************************************************************
@@ -119,7 +116,7 @@ public class BodyLockWrite extends NonCopyable {
     // native private methods
 
     native private static long createBodyLockWrite(
-            long interfaceVa, long idVa);
+            long interfaceVa, int bodyId);
 
     native private static void free(long lockVa);
 

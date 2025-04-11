@@ -22,7 +22,6 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 
 /**
@@ -56,23 +55,9 @@ public class BodyManager extends NonCopyable {
      *
      * @param idArray the IDs of the bodies to activate (not null, unaffected)
      */
-    public void activateBodies(ConstBodyId... idArray) {
-        activateBodies(idArray, idArray.length);
-    }
-
-    /**
-     * Activate the specified bodies.
-     *
-     * @param idArray the IDs of the bodies to activate (not null, unaffected)
-     * @param number the number of IDs in the array (&ge;0)
-     */
-    public void activateBodies(ConstBodyId[] idArray, int number) {
+    public void activateBodies(int... idArray) {
         long managerVa = va();
-        long[] idVas = new long[number];
-        for (int i = 0; i < number; ++i) {
-            idVas[i] = idArray[i].targetVa();
-        }
-        activateBodies(managerVa, idVas);
+        activateBodies(managerVa, idArray);
     }
 
     /**
@@ -109,23 +94,9 @@ public class BodyManager extends NonCopyable {
      *
      * @param idArray the IDs of the bodies to deactivate (not null, unaffected)
      */
-    public void deactivateBodies(ConstBodyId... idArray) {
-        deactivateBodies(idArray, idArray.length);
-    }
-
-    /**
-     * Deactivate the specified bodies.
-     *
-     * @param idArray the IDs of the bodies to deactivate (not null, unaffected)
-     * @param number the number of IDs in the array (&ge;0)
-     */
-    public void deactivateBodies(ConstBodyId[] idArray, int number) {
+    public void deactivateBodies(int... idArray) {
         long managerVa = va();
-        long[] idVas = new long[number];
-        for (int i = 0; i < number; ++i) {
-            idVas[i] = idArray[i].targetVa();
-        }
-        deactivateBodies(managerVa, idVas);
+        deactivateBodies(managerVa, idArray);
     }
 
     /**
@@ -133,23 +104,9 @@ public class BodyManager extends NonCopyable {
      *
      * @param idArray the IDs of the bodies to destroy (not null, unaffected)
      */
-    public void destroyBodies(ConstBodyId... idArray) {
-        destroyBodies(idArray, idArray.length);
-    }
-
-    /**
-     * Remove the specified bodies from the manager.
-     *
-     * @param idArray the IDs of the bodies to destroy (not null, unaffected)
-     * @param number the number of IDs in the array (&ge;0)
-     */
-    public void destroyBodies(ConstBodyId[] idArray, int number) {
+    public void destroyBodies(int... idArray) {
         long managerVa = va();
-        long[] idVas = new long[number];
-        for (int i = 0; i < number; ++i) {
-            idVas[i] = idArray[i].targetVa();
-        }
-        destroyBodies(managerVa, idVas);
+        destroyBodies(managerVa, idArray);
     }
 
     /**
@@ -184,13 +141,12 @@ public class BodyManager extends NonCopyable {
     /**
      * Access a body using its ID.
      *
-     * @param id the ID of the body to access (not null, unaffected)
+     * @param bodyId the ID of the body to access
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public Body getBody(ConstBodyId id) {
+    public Body getBody(int bodyId) {
         long managerVa = va();
-        long idVa = id.targetVa();
-        long resultVa = getBody(managerVa, idVa);
+        long resultVa = getBody(managerVa, bodyId);
         Body result = new Body(this, resultVa);
 
         return result;
@@ -238,7 +194,7 @@ public class BodyManager extends NonCopyable {
     // *************************************************************************
     // native private methods
 
-    native private static void activateBodies(long managerVa, long[] idVas);
+    native private static void activateBodies(long managerVa, int[] idArray);
 
     native private static boolean addBody(long managerVa, long bodyVa);
 
@@ -246,9 +202,9 @@ public class BodyManager extends NonCopyable {
 
     native private static long createBodyManager();
 
-    native private static void deactivateBodies(long managerVa, long[] idVas);
+    native private static void deactivateBodies(long managerVa, int[] idArray);
 
-    native private static void destroyBodies(long managerVa, long[] idVas);
+    native private static void destroyBodies(long managerVa, int[] idArray);
 
     native private static void draw(long managerVa, long drawSettingsVa,
             long physicsSettingsVa, long rendererVa);
@@ -257,7 +213,7 @@ public class BodyManager extends NonCopyable {
 
     native private static long getBodies(long managerVa);
 
-    native private static long getBody(long managerVa, long idVa);
+    native private static long getBody(long managerVa, int bodyId);
 
     native private static int getMaxBodies(long managerVa);
 

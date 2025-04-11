@@ -39,8 +39,8 @@ public class WaterShapeTest extends Test{
         public MyCollector(PhysicsSystem inSystem,RVec3Arg inSurfacePosition,Vec3Arg inSurfaceNormal,float inDeltaTime) {
             mSystem=inSystem;mSurfacePosition=new RVec3(inSurfacePosition);mSurfaceNormal=new Vec3(inSurfaceNormal);mDeltaTime=inDeltaTime;
         }
-        public void addHit(long inBodyIdVa){
-            BodyLockWrite lock=new BodyLockWrite(mSystem.getBodyLockInterface(), new BodyId(inBodyIdVa));
+        public void addHit(int bodyId){
+            BodyLockWrite lock=new BodyLockWrite(mSystem.getBodyLockInterface(), bodyId);
             Body body=lock.getBody();
             if(body.isActive())body.applyBuoyancyImpulse(mSurfacePosition,mSurfaceNormal,1.1f,0.3f,0.05f,Vec3.sZero(),mSystem.getGravity(),mDeltaTime);
             lock.releaseLock();
@@ -52,7 +52,7 @@ public void Initialize()
 	CreateFloor();
 
 	// Create scaled box
-	BodyId body_id = mBodyInterface.createBody(new BodyCreationSettings(new ScaledShape(new BoxShape(new Vec3(1.0f, 2.0f, 2.5f)),new Vec3(0.5f, 0.6f, -0.7f)),new RVec3(-10, 20, 0), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING)).getId();
+	int body_id = mBodyInterface.createBody(new BodyCreationSettings(new ScaledShape(new BoxShape(new Vec3(1.0f, 2.0f, 2.5f)),new Vec3(0.5f, 0.6f, -0.7f)),new RVec3(-10, 20, 0), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING)).getId();
 	mBodyInterface.addBody(body_id, EActivation.Activate);
 
 	// Create box

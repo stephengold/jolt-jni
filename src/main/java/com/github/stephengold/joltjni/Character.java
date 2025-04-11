@@ -512,16 +512,15 @@ public class Character extends CharacterBase implements ConstCharacter {
     // ConstCharacter methods
 
     /**
-     * Copy the ID of the body associated with this character. The character is
-     * unaffected.
+     * Return the ID of the body associated with the character. The character is
+     * unaffected. (native method: GetBodyID)
      *
-     * @return a new object
+     * @return the {@code BodyID} value
      */
     @Override
-    public BodyId getBodyId() {
+    public int getBodyId() {
         long characterVa = va();
-        long idVa = getBodyId(characterVa);
-        BodyId result = new BodyId(idVa, true);
+        int result = getBodyId(characterVa);
 
         return result;
     }
@@ -796,7 +795,7 @@ public class Character extends CharacterBase implements ConstCharacter {
             long settingsVa, double locX, double locY, double locZ, float qx,
             float qy, float qz, float qw, long userData, long systemVa);
 
-    native static long getBodyId(long characterVa);
+    native static int getBodyId(long characterVa);
 
     native static void getCenterOfMassPosition(
             long characterVa, double[] storeDoubles, boolean lockBodies);

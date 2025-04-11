@@ -481,19 +481,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashBytes__FFFF
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    hashCombineBodyId
- * Signature: (JJ)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombineBodyId
-  (JNIEnv *, jclass, jlong oldHash, jlong idVa) {
-    uint64 result = oldHash;
-    const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
-    HashCombine(result, *pId);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    hashCombineCharacterId
  * Signature: (JJ)J
  */

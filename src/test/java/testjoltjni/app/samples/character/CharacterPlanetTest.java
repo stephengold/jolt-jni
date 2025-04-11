@@ -77,11 +77,11 @@ public void Initialize()
 	settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
 	mCharacter = new CharacterVirtual(settings, new RVec3(0, cPlanetRadius, 0), Quat.sIdentity(), 0, mPhysicsSystem).toRef();
 	mCharacter.getPtr().setListener(new CustomCharacterContactListener() {
-		    public void onContactAdded(long characterVa, long bodyId2Va, long subShapeId2Va, double contactLocationX, double contactLocationY,
+		    public void onContactAdded(long characterVa, int bodyId2, long subShapeId2Va, double contactLocationX, double contactLocationY,
 			   double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, long settingsVa) {
 			RVec3Arg inContactPosition=new RVec3(contactLocationX, contactLocationY, contactLocationZ);
 			Vec3Arg inContactNormal=new Vec3(contactNormalX, contactNormalY, contactNormalZ);
-			CharacterPlanetTest.this.OnContactAdded(new CharacterVirtual(characterVa, mPhysicsSystem), new BodyId(bodyId2Va), new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
+			CharacterPlanetTest.this.OnContactAdded(new CharacterVirtual(characterVa, mPhysicsSystem), bodyId2, new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
 		    }});
 }
 /*TODO
@@ -223,7 +223,7 @@ void OnStep( PhysicsStepListenerContext inContext)
 	// Loop over all active bodies
 	BodyIdVector body_ids=new BodyIdVector();
 	inContext.getPhysicsSystem().getActiveBodies(EBodyType.RigidBody, body_ids);
-	for ( ConstBodyId id : body_ids.toList())
+	for ( int id : body_ids.toList())
 	{
 		BodyLockWrite lock = new BodyLockWrite(body_interface, id);
 		if (lock.succeeded())
@@ -237,7 +237,7 @@ void OnStep( PhysicsStepListenerContext inContext)
 	}
 }
 
-void OnContactAdded( ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2,  ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+void OnContactAdded( ConstCharacterVirtual inCharacter, int inBodyID2,  ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
 {
 	// We don't want the spheres to push the player character
 	ioSettings.setCanPushCharacter( false);

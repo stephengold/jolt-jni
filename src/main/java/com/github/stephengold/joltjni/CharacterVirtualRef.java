@@ -22,7 +22,6 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EGroundState;
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstContact;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
@@ -375,15 +374,15 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Copy the body ID of the supporting surface. The character is unaffected.
+     * Return the body ID of the supporting surface. The character is
+     * unaffected.
      *
-     * @return a new object
+     * @return the {@code BodyID} value
      */
     @Override
-    public BodyId getGroundBodyId() {
+    public int getGroundBodyId() {
         long characterVa = targetVa();
-        long idVa = CharacterBase.getGroundBodyId(characterVa);
-        BodyId result = new BodyId(idVa, true);
+        int result = CharacterBase.getGroundBodyId(characterVa);
 
         return result;
     }
@@ -534,15 +533,14 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Copy the ID of the inner body. The character is unaffected.
+     * Return the ID of the inner body. The character is unaffected.
      *
-     * @return a new object, or {@code null} if none
+     * @return the {@code BodyID} value
      */
     @Override
-    public BodyId getInnerBodyId() {
+    public int getInnerBodyId() {
         long characterVa = targetVa();
-        long idVa = CharacterVirtual.getInnerBodyId(characterVa);
-        BodyId result = new BodyId(idVa, true);
+        int result = CharacterVirtual.getInnerBodyId(characterVa);
 
         return result;
     }
@@ -761,15 +759,14 @@ final public class CharacterVirtualRef
      * specified body during the previous time step. The character is
      * unaffected.
      *
-     * @param bodyId the ID of the body to test against (not null, unaffected)
+     * @param bodyId the ID of the body to test against
      * @return {@code true} if contact or collision, otherwise {@code false}
      */
     @Override
-    public boolean hasCollidedWith(ConstBodyId bodyId) {
+    public boolean hasCollidedWith(int bodyId) {
         long characterVa = targetVa();
-        long idVa = bodyId.targetVa();
         boolean result
-                = CharacterVirtual.hasCollidedWithBody(characterVa, idVa);
+                = CharacterVirtual.hasCollidedWithBody(characterVa, bodyId);
 
         return result;
     }

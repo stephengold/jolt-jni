@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.BodyId;
 import com.github.stephengold.joltjni.CharacterRefC;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
@@ -39,12 +38,12 @@ public interface ConstCharacter extends ConstCharacterBase {
     // new methods exposed
 
     /**
-     * Copy the ID of the body associated with this character. The character is
-     * unaffected.
+     * Return the ID of the body associated with this character. The character
+     * is unaffected.
      *
-     * @return a new object
+     * @return the ID value
      */
-    BodyId getBodyId();
+    int getBodyId();
 
     /**
      * Copy the location of the rigid body's center of mass using the locking

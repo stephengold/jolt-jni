@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package com.github.stephengold.joltjni;
-
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 
 /**
  * A fixed-length array of body IDs. (native type: {@code BodyID[]})
@@ -45,15 +43,14 @@ public class BodyIdArray extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Copy the ID at the specified index.
+     * Return the ID at the specified index.
      *
      * @param elementIndex the index from which to copy the ID (&ge;0)
-     * @return a new object
+     * @return the {@code BodyID} value
      */
-    public BodyId get(int elementIndex) {
+    public int get(int elementIndex) {
         long arrayVa = va();
-        long idVa = getId(arrayVa, elementIndex);
-        BodyId result = new BodyId(idVa, true);
+        int result = getId(arrayVa, elementIndex);
 
         return result;
     }
@@ -62,12 +59,11 @@ public class BodyIdArray extends JoltPhysicsObject {
      * Store the specified ID at the specified index.
      *
      * @param elementIndex the index at which to store the ID (&ge;0)
-     * @param id the ID to store (not null, unaffected)
+     * @param bodyId the ID to store
      */
-    public void set(int elementIndex, ConstBodyId id) {
+    public void set(int elementIndex, int bodyId) {
         long arrayVa = va();
-        long idVa = id.targetVa();
-        setId(arrayVa, elementIndex, idVa);
+        setId(arrayVa, elementIndex, bodyId);
     }
     // *************************************************************************
     // native private methods
@@ -76,8 +72,8 @@ public class BodyIdArray extends JoltPhysicsObject {
 
     native private static void free(long arrayVa);
 
-    native private static long getId(long arrayVa, int elementIndex);
+    native private static int getId(long arrayVa, int elementIndex);
 
     native private static void setId(
-            long arrayVa, int elementIndex, long idVa);
+            long arrayVa, int elementIndex, int bodyId);
 }

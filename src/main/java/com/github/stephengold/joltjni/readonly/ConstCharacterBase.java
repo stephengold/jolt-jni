@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.BodyId;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.StateRecorder;
 import com.github.stephengold.joltjni.SubShapeId;
@@ -50,9 +49,9 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * Return the body ID of the supporting surface. The character is
      * unaffected.
      *
-     * @return a new object
+     * @return an ID value
      */
-    BodyId getGroundBodyId();
+    int getGroundBodyId();
 
     /**
      * Access the material of the supporting surface. The character is

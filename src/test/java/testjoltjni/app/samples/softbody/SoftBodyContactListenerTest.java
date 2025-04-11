@@ -33,7 +33,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/SoftBody/SoftBodyContactListenerTest.cpp
  */
 public class SoftBodyContactListenerTest extends Test{
-BodyId mOtherBodyID=new BodyId(),mSoftBodyID=new BodyId();
+int mOtherBodyID=cInvalidBodyId,mSoftBodyID=cInvalidBodyId;
 float mTime;
 int mCycle;
 

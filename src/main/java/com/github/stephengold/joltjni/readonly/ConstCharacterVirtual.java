@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.BodyId;
 import com.github.stephengold.joltjni.CharacterId;
 import com.github.stephengold.joltjni.CharacterVirtualRefC;
 import com.github.stephengold.joltjni.Quat;
@@ -116,11 +115,11 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
     CharacterId getId();
 
     /**
-     * Copy the ID of the inner body. The character is unaffected.
+     * Return the ID of the inner body. The character is unaffected.
      *
-     * @return a new object, or {@code null} if none
+     * @return the ID value
      */
-    BodyId getInnerBodyId();
+    int getInnerBodyId();
 
     /**
      * Copy the linear velocity of the character. The character is unaffected.
@@ -217,10 +216,10 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * specified body during the previous time step. The character is
      * unaffected.
      *
-     * @param bodyId the ID of the body to test against (not null, unaffected)
+     * @param bodyId the ID of the body to test against
      * @return {@code true} if contact or collision, otherwise {@code false}
      */
-    boolean hasCollidedWith(ConstBodyId bodyId);
+    boolean hasCollidedWith(int bodyId);
 
     /**
      * Test whether the character is in contact with or has collided with the

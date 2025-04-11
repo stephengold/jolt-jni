@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,25 +57,23 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_free
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdArray
  * Method:    getId
- * Signature: (JI)J
+ * Signature: (JI)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_getId
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_getId
   (JNIEnv *, jclass, jlong arrayVa, jint elementIndex) {
     const BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
-    BodyID * const pResult = new BodyID();
-    TRACE_NEW("BodyID", pResult)
-    *pResult = pArray[elementIndex];
-    return reinterpret_cast<jlong> (pResult);
+    const BodyID result = pArray[elementIndex];
+    return result.GetIndexAndSequenceNumber();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdArray
  * Method:    setId
- * Signature: (JIJ)V
+ * Signature: (JII)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_setId
-  (JNIEnv *, jclass, jlong arrayVa, jint elementIndex, jlong idVa) {
+  (JNIEnv *, jclass, jlong arrayVa, jint elementIndex, jint bodyId) {
     BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
-    const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
-    pArray[elementIndex] = *pId;
+    const BodyID id(bodyId);
+    pArray[elementIndex] = id;
 }

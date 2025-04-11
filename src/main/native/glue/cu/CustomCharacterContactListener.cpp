@@ -57,7 +57,7 @@ public:
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
         mAddedMethodId = pEnv->GetMethodID(
-                clss, "onContactAdded", "(JJJDDDFFFJ)V");
+                clss, "onContactAdded", "(JIJDDDFFFJ)V");
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
         mAdjustMethodId = pEnv->GetMethodID(
@@ -85,19 +85,19 @@ public:
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
         mPersistedMethodId = pEnv->GetMethodID(
-                clss, "onContactPersisted", "(JJJDDDFFFJ)V");
+                clss, "onContactPersisted", "(JIJDDDFFFJ)V");
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
         mRemovedMethodId = pEnv->GetMethodID(
-                clss, "onContactRemoved", "(JJJ)V");
+                clss, "onContactRemoved", "(JIJ)V");
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
         mSolveMethodId = pEnv->GetMethodID(
-                clss, "onContactSolve", "(JJJDDDFFFFFFJFFF[F)V");
+                clss, "onContactSolve", "(JIJDDDFFFFFFJFFF[F)V");
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
         mValidateMethodId = pEnv->GetMethodID(
-                clss, "onContactValidate", "(JJJ)Z");
+                clss, "onContactValidate", "(JIJ)Z");
         JPH_ASSERT(!pEnv->ExceptionCheck());
     }
 
@@ -297,7 +297,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
-        const jlong bodyId2Va = reinterpret_cast<jlong> (&inBodyID2);
+        const jint bodyId2 = inBodyID2.GetIndexAndSequenceNumber();
         const jlong subShapeId2Va = reinterpret_cast<jlong> (&inSubShapeID2);
         const jdouble contactLocationX = inContactPosition.GetX();
         const jdouble contactLocationY = inContactPosition.GetY();
@@ -308,7 +308,7 @@ public:
         const jlong settingsVa = reinterpret_cast<jlong> (&ioSettings);
 
         pAttachEnv->CallVoidMethod(mJavaObject, mAddedMethodId, characterVa,
-                bodyId2Va, subShapeId2Va, contactLocationX, contactLocationY,
+                bodyId2, subShapeId2Va, contactLocationX, contactLocationY,
                 contactLocationZ, contactNormalX, contactNormalY,
                 contactNormalZ, settingsVa);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
@@ -325,7 +325,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
-        const jlong bodyId2Va = reinterpret_cast<jlong> (&inBodyID2);
+        const jint bodyId2 = inBodyID2.GetIndexAndSequenceNumber();
         const jlong subShapeId2Va = reinterpret_cast<jlong> (&inSubShapeID2);
         const jdouble contactLocationX = inContactPosition.GetX();
         const jdouble contactLocationY = inContactPosition.GetY();
@@ -336,7 +336,7 @@ public:
         const jlong settingsVa = reinterpret_cast<jlong> (&ioSettings);
 
         pAttachEnv->CallVoidMethod(mJavaObject, mPersistedMethodId, characterVa,
-                bodyId2Va, subShapeId2Va, contactLocationX, contactLocationY,
+                bodyId2, subShapeId2Va, contactLocationX, contactLocationY,
                 contactLocationZ, contactNormalX, contactNormalY,
                 contactNormalZ, settingsVa);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
@@ -351,11 +351,11 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
-        const jlong bodyId2Va = reinterpret_cast<jlong> (&inBodyID2);
+        const jint bodyId2 = inBodyID2.GetIndexAndSequenceNumber();
         const jlong subShapeId2Va = reinterpret_cast<jlong> (&inSubShapeID2);
 
         pAttachEnv->CallVoidMethod(mJavaObject, mRemovedMethodId, characterVa,
-                bodyId2Va, subShapeId2Va);
+                bodyId2, subShapeId2Va);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
 
         mpVM->DetachCurrentThread();
@@ -371,7 +371,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
-        const jlong bodyId2Va = reinterpret_cast<jlong> (&inBodyID2);
+        const jint bodyId2 = inBodyID2.GetIndexAndSequenceNumber();
         const jlong subShapeId2Va = reinterpret_cast<jlong> (&inSubShapeID2);
         const jdouble contactLocationX = inContactPosition.GetX();
         const jdouble contactLocationY = inContactPosition.GetY();
@@ -397,7 +397,7 @@ public:
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
 
         pAttachEnv->CallVoidMethod(mJavaObject, mSolveMethodId, characterVa,
-                bodyId2Va, subShapeId2Va, contactLocationX, contactLocationY,
+                bodyId2, subShapeId2Va, contactLocationX, contactLocationY,
                 contactLocationZ, contactNormalX, contactNormalY,
                 contactNormalZ, contactVelocityX, contactVelocityY,
                 contactVelocityZ, materialVa, characterVelocityX,
@@ -421,10 +421,10 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
-        const jlong bodyID2Va = reinterpret_cast<jlong> (&inBodyID2);
+        const jint bodyId2 = inBodyID2.GetIndexAndSequenceNumber();
         const jlong subShapeId2Va = reinterpret_cast<jlong> (&inSubShapeID2);
         const bool result = pAttachEnv->CallBooleanMethod(mJavaObject,
-                mValidateMethodId, characterVa, bodyID2Va, subShapeId2Va);
+                mValidateMethodId, characterVa, bodyId2, subShapeId2Va);
 
         mpVM->DetachCurrentThread();
         return result;

@@ -646,16 +646,15 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Copy the body's ID for use with {@code BodyInterface}. The body is
+     * Return the body's ID for use with {@code BodyInterface}. The body is
      * unaffected. (native method: GetID)
      *
-     * @return a new object
+     * @return the {@code BodyID} value
      */
     @Override
-    public BodyId getId() {
+    public int getId() {
         long bodyVa = va();
-        long bodyIdVa = getId(bodyVa);
-        BodyId result = new BodyId(bodyIdVa, true);
+        int result = getId(bodyVa);
 
         return result;
     }
@@ -1086,7 +1085,7 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static float getFriction(long bodyVa);
 
-    native static long getId(long bodyVa);
+    native static int getId(long bodyVa);
 
     native private static long getInverseCenterOfMassTransform(long bodyVa);
 

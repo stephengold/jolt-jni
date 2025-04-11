@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.BodyId;
 import com.github.stephengold.joltjni.SubShapeId;
 
 /**
@@ -35,18 +34,18 @@ public interface ConstSubShapeIdPair extends ConstJoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Copy the ID of the first body. The pair is unaffected.
+     * Return the ID of the first body. The pair is unaffected.
      *
-     * @return a new object
+     * @return the {@code BodyID} value
      */
-    BodyId getBody1Id();
+    int getBody1Id();
 
     /**
-     * Copy the ID of the 2nd body. The pair is unaffected.
+     * Return the ID of the 2nd body. The pair is unaffected.
      *
-     * @return a new object
+     * @return the {@code BodyID} value
      */
-    BodyId getBody2Id();
+    int getBody2Id();
 
     /**
      * Return the hashcode for the pair. The pair is unaffected.

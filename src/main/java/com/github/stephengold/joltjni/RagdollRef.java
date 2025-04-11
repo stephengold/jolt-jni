@@ -133,14 +133,15 @@ final public class RagdollRef extends Ref {
      * Enumerate all bodies in the ragdoll, which is unaffected. (native method:
      * GetBodyIDs)
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new array of body IDs
      */
-    public BodyIdVector getBodyIds() {
+    public int[] getBodyIds() {
         long ragdollVa = targetVa();
-        long vectorVa = Ragdoll.getBodyIds(ragdollVa);
-        BodyIdVector result = new BodyIdVector(this, vectorVa);
+        int numBodies = Ragdoll.getBodyCount(ragdollVa);
+        int[] storeIds = new int[numBodies];
+        Ragdoll.getBodyIds(ragdollVa, storeIds);
 
-        return result;
+        return storeIds;
     }
 
     /**

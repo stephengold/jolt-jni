@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package com.github.stephengold.joltjni;
-
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 
 /**
  * An interface to a {@code PhysicsSystem} that is aware of body locking.
@@ -58,18 +56,18 @@ abstract public class BodyLockInterface extends NonCopyable {
     /**
      * Lock the specified body for reading.
      *
-     * @param bodyId the body to read (not null, unaffected)
+     * @param bodyId the ID of the body to read
      * @return a new mutex
      */
-    abstract public SharedMutex lockRead(ConstBodyId bodyId);
+    abstract public SharedMutex lockRead(int bodyId);
 
     /**
      * Lock the specified body for writing.
      *
-     * @param bodyId the body to write (not null, unaffected)
+     * @param bodyId the ID of the body to write
      * @return a new mutex
      */
-    abstract public SharedMutex lockWrite(ConstBodyId bodyId);
+    abstract public SharedMutex lockWrite(int bodyId);
 
     /**
      * Unlock the specified mutex, which was created to read a body.

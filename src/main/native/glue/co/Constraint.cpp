@@ -24,6 +24,7 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
+#include "Jolt/Physics/Body/BodyID.h"
 #include "Jolt/Physics/Constraints/Constraint.h"
 
 #include "auto/com_github_stephengold_joltjni_Constraint.h"
@@ -164,16 +165,16 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Constraint_getType
 /*
  * Class:     com_github_stephengold_joltjni_Constraint
  * Method:    notifyShapeChanged
- * Signature: (JJFFF)V
+ * Signature: (JIFFF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraint_notifyShapeChanged
-  (JNIEnv *, jclass, jlong constraintVa, jlong idVa,
+  (JNIEnv *, jclass, jlong constraintVa, jint bodyId,
   jfloat dx, jfloat dy, jfloat dz) {
     Constraint * const pConstraint
             = reinterpret_cast<Constraint *> (constraintVa);
-    const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
+    const BodyID id(bodyId);
     const Vec3 delta(dx, dy, dz);
-    pConstraint->NotifyShapeChanged(*pId, delta);
+    pConstraint->NotifyShapeChanged(id, delta);
 }
 
 /*

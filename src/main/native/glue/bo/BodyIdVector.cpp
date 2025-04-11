@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,9 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
+#include "Jolt/Core/QuickSort.h"
 #include "Jolt/Physics/Body/BodyManager.h"
+
 #include "auto/com_github_stephengold_joltjni_BodyIdVector.h"
 #include "glue/glue.h"
 
@@ -82,15 +84,13 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_free
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector
  * Method:    getId
- * Signature: (JI)J
+ * Signature: (JI)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_getId
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_getId
   (JNIEnv *, jclass, jlong vectorVa, jint elementIndex) {
     BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
-    BodyID * const pResult = new BodyID();
-    TRACE_NEW("BodyID", pResult)
-    *pResult = pVector->at(elementIndex);
-    return reinterpret_cast<jlong> (pResult);
+    const BodyID result = pVector->at(elementIndex);
+    return result.GetIndexAndSequenceNumber();
 }
 
 /*
@@ -107,13 +107,13 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_resize
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector
  * Method:    setId
- * Signature: (JIJ)V
+ * Signature: (JII)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_setId
-  (JNIEnv *, jclass, jlong vectorVa, jint elementIndex, jlong idVa) {
+  (JNIEnv *, jclass, jlong vectorVa, jint elementIndex, jint bodyId) {
     BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
-    const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
-    pVector->at(elementIndex) = *pId;
+    const BodyID id(bodyId);
+    pVector->at(elementIndex) = id;
 }
 
 /*
@@ -127,4 +127,15 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_size
             = reinterpret_cast<BodyIDVector *> (vectorVa);
     const BodyIDVector::size_type result = pVector->size();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyIdVector
+ * Method:    sort
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_sort
+  (JNIEnv *, jclass, jlong vectorVa) {
+    BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
+    QuickSort(pVector->begin(), pVector->end());
 }

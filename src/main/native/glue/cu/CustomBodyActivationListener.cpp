@@ -25,6 +25,8 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Body/BodyActivationListener.h"
+#include "Jolt/Physics/Body/BodyID.h"
+
 #include "auto/com_github_stephengold_joltjni_CustomBodyActivationListener.h"
 #include "glue/glue.h"
 
@@ -47,10 +49,10 @@ public:
                 "com/github/stephengold/joltjni/CustomBodyActivationListener");
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
-        mActivatedMethodId = pEnv->GetMethodID(clss, "onBodyActivated", "(JJ)V");
+        mActivatedMethodId = pEnv->GetMethodID(clss, "onBodyActivated", "(IJ)V");
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
-        mDeactivatedMethodId = pEnv->GetMethodID(clss, "onBodyDeactivated", "(JJ)V");
+        mDeactivatedMethodId = pEnv->GetMethodID(clss, "onBodyDeactivated", "(IJ)V");
         JPH_ASSERT(!pEnv->ExceptionCheck());
     }
 
@@ -59,9 +61,9 @@ public:
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
 
-        const jlong idVa = reinterpret_cast<jlong> (&inBodyID);
+        const jint id = inBodyID.GetIndexAndSequenceNumber();
         const jlong userData = inBodyUserData;
-        pAttachEnv->CallVoidMethod(mJavaObject, mActivatedMethodId, idVa, userData);
+        pAttachEnv->CallVoidMethod(mJavaObject, mActivatedMethodId, id, userData);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
         mpVM->DetachCurrentThread();
     }
@@ -71,9 +73,9 @@ public:
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
 
-        const jlong idVa = reinterpret_cast<jlong> (&inBodyID);
+        const jint id = inBodyID.GetIndexAndSequenceNumber();
         const jlong userData = inBodyUserData;
-        pAttachEnv->CallVoidMethod(mJavaObject, mDeactivatedMethodId, idVa, userData);
+        pAttachEnv->CallVoidMethod(mJavaObject, mDeactivatedMethodId, id, userData);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
         mpVM->DetachCurrentThread();
     }

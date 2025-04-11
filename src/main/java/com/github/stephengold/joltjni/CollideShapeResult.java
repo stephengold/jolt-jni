@@ -64,13 +64,12 @@ public class CollideShapeResult
      * Identify the body to which shape 2 belongs. The result object is
      * unaffected. (native attribute: mBodyID2)
      *
-     * @return a new JVM object with a new native object assigned
+     * @return the BodyID value
      */
     @Override
-    public BodyId getBodyId2() {
+    public int getBodyId2() {
         long shapeResultVa = va();
-        long idVa = getBodyId2(shapeResultVa);
-        BodyId result = new BodyId(idVa, true);
+        int result = getBodyId2(shapeResultVa);
 
         return result;
     }
@@ -199,7 +198,7 @@ public class CollideShapeResult
     // *************************************************************************
     // native private methods
 
-    native private static long getBodyId2(long shapeResultVa);
+    native private static int getBodyId2(long shapeResultVa);
 
     native private static float getContactPointOn1X(long shapeResultVa);
 

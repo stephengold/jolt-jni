@@ -47,18 +47,16 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyManifold_coun
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyManifold
  * Method:    getContactBodyId
- * Signature: (JJ)J
+ * Signature: (JJ)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyManifold_getContactBodyId
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyManifold_getContactBodyId
   (JNIEnv *, jclass, jlong manifoldVa, jlong vertexVa) {
     const SoftBodyManifold * const pManifold
             = reinterpret_cast<SoftBodyManifold *> (manifoldVa);
     const SoftBodyVertex * const pVertex
             = reinterpret_cast<SoftBodyVertex *> (vertexVa);
-    const BodyID &id = pManifold->GetContactBodyID(*pVertex);
-    BodyID * const pResult = new BodyID(id);
-    TRACE_NEW("BodyID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const BodyID result = pManifold->GetContactBodyID(*pVertex);
+    return result.GetIndexAndSequenceNumber();
 }
 
 /*
@@ -167,16 +165,14 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyManifold_getN
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyManifold
  * Method:    getSensorContactBodyId
- * Signature: (JI)J
+ * Signature: (JI)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyManifold_getSensorContactBodyId
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyManifold_getSensorContactBodyId
   (JNIEnv *, jclass, jlong manifoldVa, jint index) {
     const SoftBodyManifold * const pManifold
             = reinterpret_cast<SoftBodyManifold *> (manifoldVa);
-    const BodyID id = pManifold->GetSensorContactBodyID(index);
-    BodyID * const pResult = new BodyID(id);
-    TRACE_NEW("BodyID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const BodyID result = pManifold->GetSensorContactBodyID(index);
+    return result.GetIndexAndSequenceNumber();
 }
 
 /*

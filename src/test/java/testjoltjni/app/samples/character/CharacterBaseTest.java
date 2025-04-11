@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,20 +54,20 @@ ShapeRefC mInnerCrouchingShape = new ShapeRefC();
 ShapeRefC mInnerStandingShape = new ShapeRefC();
 BodyIdVector mRampBlocks = new BodyIdVector();
 float mRampBlocksTimeLeft;
-BodyId mConveyorBeltBody = new BodyId();
-BodyId mSensorBody = new BodyId();
+int mConveyorBeltBody = cInvalidBodyId;
+int mSensorBody = cInvalidBodyId;
 CharacterVsCharacterCollisionSimple mCharacterVsCharacterCollision = new CharacterVsCharacterCollisionSimple();
 private enum EType{Capsule, Cylinder, Box};
 private EType sShapeType = EType.Capsule;
 private float mTime;
 private RVec3 mCameraPivot = RVec3.sZero();
-private BodyId mRotatingBody = new BodyId();
-private BodyId mRotatingWallBody = new BodyId();
-private BodyId mRotatingAndTranslatingBody = new BodyId();
-private BodyId mSmoothVerticallyMovingBody = new BodyId();
-private BodyId mReversingVerticallyMovingBody = new BodyId();
+private int mRotatingBody = cInvalidBodyId;
+private int mRotatingWallBody = cInvalidBodyId;
+private int mRotatingAndTranslatingBody = cInvalidBodyId;
+private int mSmoothVerticallyMovingBody = cInvalidBodyId;
+private int mReversingVerticallyMovingBody = cInvalidBodyId;
 private float mReversingVerticallyMovingVelocity = 1.0f;
-private BodyId mHorizontallyMovingBody = new BodyId();
+private int mHorizontallyMovingBody = cInvalidBodyId;
 private CharacterRef mAnimatedCharacter=new CharacterRef();
 private CharacterVirtualRef mAnimatedCharacterVirtual=new CharacterVirtualRef();
 private CharacterVirtualRef mAnimatedCharacterVirtualWithInnerBody=new CharacterVirtualRef();
@@ -287,11 +287,11 @@ public void Initialize()
 
 		{
 			// A seesaw to test character gravity
-			BodyId b1 = mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(1.0f, 0.2f, 0.05f)), new RVec3(20.0f, 0.2f, 0.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
+			int b1 = mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(1.0f, 0.2f, 0.05f)), new RVec3(20.0f, 0.2f, 0.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
 			BodyCreationSettings bcs=new BodyCreationSettings(new BoxShape(new Vec3(1.0f, 0.05f, 5.0f)), new RVec3(20.0f, 0.45f, 0.0f), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 			bcs.setOverrideMassProperties ( EOverrideMassProperties.CalculateInertia);
 			bcs.getMassPropertiesOverride().setMass ( 10.0f);
-			BodyId b2 = mBodyInterface.createAndAddBody(bcs, EActivation.Activate);
+			int b2 = mBodyInterface.createAndAddBody(bcs, EActivation.Activate);
 
 			// Connect the parts with a hinge
 			HingeConstraintSettings hinge=new HingeConstraintSettings();
@@ -656,17 +656,17 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	mCameraPivot = GetCharacterPosition();
 
 	// Animate bodies
-	if (!mRotatingBody.isInvalid())
+	if (mRotatingBody!=cInvalidBodyId)
 		mBodyInterface.moveKinematic(mRotatingBody, cRotatingPosition, Quat.sRotation(Vec3.sAxisY(), JPH_PI * sin(mTime)), inParams.mDeltaTime);
-	if (!mRotatingWallBody.isInvalid())
+	if (mRotatingWallBody!=cInvalidBodyId)
 		mBodyInterface.moveKinematic(mRotatingWallBody, cRotatingWallPosition, Quat.sRotation(Vec3.sAxisY(), JPH_PI * sin(mTime)), inParams.mDeltaTime);
-	if (!mRotatingAndTranslatingBody.isInvalid())
+	if (mRotatingAndTranslatingBody!=cInvalidBodyId)
 		mBodyInterface.moveKinematic(mRotatingAndTranslatingBody, plus(cRotatingAndTranslatingPosition , star(5.0f , new Vec3(sin(JPH_PI * mTime), 0, cos(JPH_PI * mTime)))), Quat.sRotation(Vec3.sAxisY(), JPH_PI * sin(mTime)), inParams.mDeltaTime);
-	if (!mHorizontallyMovingBody.isInvalid())
+	if (mHorizontallyMovingBody!=cInvalidBodyId)
 		mBodyInterface.moveKinematic(mHorizontallyMovingBody, plus(cHorizontallyMovingPosition , new Vec3(3.0f * sin(mTime), 0, 0)), cHorizontallyMovingOrientation, inParams.mDeltaTime);
-	if (!mSmoothVerticallyMovingBody.isInvalid())
+	if (mSmoothVerticallyMovingBody!=cInvalidBodyId)
 		mBodyInterface.moveKinematic(mSmoothVerticallyMovingBody, plus(cSmoothVerticallyMovingPosition , new Vec3(0, 1.75f * sin(mTime), 0)), cSmoothVerticallyMovingOrientation, inParams.mDeltaTime);
-	if (!mReversingVerticallyMovingBody.isInvalid())
+	if (mReversingVerticallyMovingBody!=cInvalidBodyId)
 	{
 		RVec3 pos = mBodyInterface.getPosition(mReversingVerticallyMovingBody);
 		if (pos.yy() < cReversingVerticallyMovingPosition.yy())

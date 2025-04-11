@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,12 +57,12 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyFilter_free
 /*
  * Class:     com_github_stephengold_joltjni_BodyFilter
  * Method:    shouldCollide
- * Signature: (JJ)Z
+ * Signature: (JI)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyFilter_shouldCollide
-  (JNIEnv *, jclass, jlong filterVa, jlong idVa) {
+  (JNIEnv *, jclass, jlong filterVa, jint bodyId) {
     const BodyFilter * const pFilter = reinterpret_cast<BodyFilter *> (filterVa);
-    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (idVa);
-    const bool result = pFilter->ShouldCollide(*pBodyId);
+    const BodyID id(bodyId);
+    const bool result = pFilter->ShouldCollide(id);
     return result;
 }

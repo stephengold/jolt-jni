@@ -119,16 +119,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Character_createChar
 /*
  * Class:     com_github_stephengold_joltjni_Character
  * Method:    getBodyId
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Character_getBodyId
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Character_getBodyId
   (JNIEnv *, jclass, jlong characterVa) {
     const Character * const pCharacter
             = reinterpret_cast<Character *> (characterVa);
-    const BodyID id = pCharacter->GetBodyID();
-    BodyID * const pResult = new BodyID(id);
-    TRACE_NEW("BodyID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const BodyID result = pCharacter->GetBodyID();
+    return result.GetIndexAndSequenceNumber();
 }
 
 /*

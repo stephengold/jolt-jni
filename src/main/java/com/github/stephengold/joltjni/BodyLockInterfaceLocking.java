@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,8 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package com.github.stephengold.joltjni;
-
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 
 /**
  * A {@code BodyLockInterface} that actually locks bodies.
@@ -48,14 +46,13 @@ public class BodyLockInterfaceLocking extends BodyLockInterface {
     /**
      * Lock the specified body for reading.
      *
-     * @param bodyId the body to read (not null, unaffected)
+     * @param bodyId the ID of the body to read
      * @return a new mutex
      */
     @Override
-    public SharedMutex lockRead(ConstBodyId bodyId) {
+    public SharedMutex lockRead(int bodyId) {
         long interfaceVa = va();
-        long bodyIdVa = bodyId.targetVa();
-        long mutexVa = lockRead(interfaceVa, bodyIdVa);
+        long mutexVa = lockRead(interfaceVa, bodyId);
         SharedMutex result = new SharedMutex(mutexVa, true);
 
         return result;
@@ -64,14 +61,13 @@ public class BodyLockInterfaceLocking extends BodyLockInterface {
     /**
      * Lock the specified body for writing.
      *
-     * @param bodyId the body to write (not null, unaffected)
+     * @param bodyId the ID of the body to write
      * @return a new mutex
      */
     @Override
-    public SharedMutex lockWrite(ConstBodyId bodyId) {
+    public SharedMutex lockWrite(int bodyId) {
         long interfaceVa = va();
-        long bodyIdVa = bodyId.targetVa();
-        long mutexVa = lockWrite(interfaceVa, bodyIdVa);
+        long mutexVa = lockWrite(interfaceVa, bodyId);
         SharedMutex result = new SharedMutex(mutexVa, true);
 
         return result;
@@ -103,9 +99,9 @@ public class BodyLockInterfaceLocking extends BodyLockInterface {
     // *************************************************************************
     // native private methods
 
-    native private static long lockRead(long interfaceVa, long bodyIdVa);
+    native private static long lockRead(long interfaceVa, int bodyId);
 
-    native private static long lockWrite(long interfaceVa, long bodyIdVa);
+    native private static long lockWrite(long interfaceVa, int bodyId);
 
     native private static void unlockRead(long interfaceVa, long mutexVa);
 

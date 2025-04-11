@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,28 +32,28 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_BodyLockInterfaceLocking
  * Method:    lockRead
- * Signature: (JJ)J
+ * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyLockInterfaceLocking_lockRead
-  (JNIEnv *, jclass, jlong interfaceVa, jlong bodyIdVa) {
+  (JNIEnv *, jclass, jlong interfaceVa, jint bodyId) {
     const BodyLockInterfaceLocking * const pInterface
             = reinterpret_cast<BodyLockInterfaceLocking *> (interfaceVa);
-    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
-    SharedMutex * const pMutex = pInterface->LockRead(*pBodyId);
+    const BodyID id(bodyId);
+    SharedMutex * const pMutex = pInterface->LockRead(id);
     return reinterpret_cast<jlong> (pMutex);
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyLockInterfaceLocking
  * Method:    lockWrite
- * Signature: (JJ)J
+ * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyLockInterfaceLocking_lockWrite
-  (JNIEnv *, jclass, jlong interfaceVa, jlong bodyIdVa) {
+  (JNIEnv *, jclass, jlong interfaceVa, jint bodyId) {
     const BodyLockInterfaceLocking * const pInterface
             = reinterpret_cast<BodyLockInterfaceLocking *> (interfaceVa);
-    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
-    SharedMutex * const pMutex = pInterface->LockWrite(*pBodyId);
+    const BodyID id(bodyId);
+    SharedMutex * const pMutex = pInterface->LockWrite(id);
     return reinterpret_cast<jlong> (pMutex);
 }
 

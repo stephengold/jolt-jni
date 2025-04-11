@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@ package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.std.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 import testjoltjni.app.samples.*;
 /**
  * A line-for-line Java translation of the Jolt Physics change object-layer test.
@@ -31,7 +32,7 @@ import testjoltjni.app.samples.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/ChangeObjectLayerTest.cpp
  */
 public class ChangeObjectLayerTest extends Test{
-BodyId mMoving;
+int mMoving=cInvalidBodyId;
 BodyIdVector mDebris=new BodyIdVector();
 boolean mIsDebris = true;
 float mTime;
@@ -71,7 +72,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 
 		DefaultRandomEngine random=new DefaultRandomEngine();
 		UniformFloatDistribution position_variation=new UniformFloatDistribution(-7.5f, 7.5f);
-		for (BodyId id : mDebris.toList())
+		for (int id : mDebris.toList())
 		{
 			// Reposition debris
 			RVec3 position=new RVec3(position_variation.nextFloat(random), 2.0f, position_variation.nextFloat(random));
@@ -98,7 +99,7 @@ protected void RestoreState(StateRecorder inStream)
 	mIsDebris=inStream.readBoolean(mIsDebris);
 
 	// Restore layer
-	for (BodyId id : mDebris.toList())
+	for (int id : mDebris.toList())
 		mBodyInterface.setObjectLayer(id, mIsDebris? Layers.DEBRIS : Layers.MOVING);
 }
 }

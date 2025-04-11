@@ -48,29 +48,29 @@ final public class SubShapeIdPair
     // ConstSubShapeIdPair methods
 
     /**
-     * Copy the ID of the first body.
+     * Return the ID of the first body. The pair is unaffected. (native method:
+     * GetBody1ID)
      *
-     * @return a new object
+     * @return the {@code BodyID} value
      */
     @Override
-    public BodyId getBody1Id() {
+    public int getBody1Id() {
         long pairVa = va();
-        long bodyIdVa = getBody1Id(pairVa);
-        BodyId result = new BodyId(bodyIdVa, true);
+        int result = getBody1Id(pairVa);
 
         return result;
     }
 
     /**
-     * Copy the ID of the 2nd body.
+     * Return the ID of the 2nd body. The pair is unaffected. (native method:
+     * GetBody2ID)
      *
-     * @return a new object
+     * @return the {@code BodyID} value
      */
     @Override
-    public BodyId getBody2Id() {
+    public int getBody2Id() {
         long pairVa = va();
-        long bodyIdVa = getBody2Id(pairVa);
-        BodyId result = new BodyId(bodyIdVa, true);
+        int result = getBody2Id(pairVa);
 
         return result;
     }
@@ -120,9 +120,9 @@ final public class SubShapeIdPair
     // *************************************************************************
     // native private methods
 
-    native private static long getBody1Id(long pairVa);
+    native private static int getBody1Id(long pairVa);
 
-    native private static long getBody2Id(long pairVa);
+    native private static int getBody2Id(long pairVa);
 
     native private static long getHash(long pairVa);
 

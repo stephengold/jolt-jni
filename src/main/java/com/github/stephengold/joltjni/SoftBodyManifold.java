@@ -48,16 +48,16 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Copy the ID of the body with which the specified vertex collided.
+     * Return the ID of the body with which the specified vertex collided. The
+     * manifold is unaffected. (native method: GetContactBodyID)
      *
      * @param vertex the vertex to query (not null, unaffected)
-     * @return a new object
+     * @return the {@code BodyID} value
      */
-    public BodyId getContactBodyId(ConstSoftBodyVertex vertex) {
+    public int getContactBodyId(ConstSoftBodyVertex vertex) {
         long manifoldVa = va();
         long vertexVa = vertex.targetVa();
-        long idVa = getContactBodyId(manifoldVa, vertexVa);
-        BodyId result = new BodyId(idVa, true);
+        int result = getContactBodyId(manifoldVa, vertexVa);
 
         return result;
     }
@@ -116,12 +116,11 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
      * unaffected. (native method: GetSensorContactBodyID)
      *
      * @param index among the sensor contacts (&ge;0)
-     * @return a new object
+     * @return the {@code BodyID} value
      */
-    public BodyId getSensorContactBodyId(int index) {
+    public int getSensorContactBodyId(int index) {
         long manifoldVa = va();
-        long idVa = getSensorContactBodyId(manifoldVa, index);
-        BodyId result = new BodyId(idVa, true);
+        int result = getSensorContactBodyId(manifoldVa, index);
 
         return result;
     }
@@ -165,7 +164,7 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
 
     native private static int countVertices(long manifoldVa);
 
-    native private static long getContactBodyId(long manifoldVa, long vertexVa);
+    native private static int getContactBodyId(long manifoldVa, long vertexVa);
 
     native private static float getLocalContactNormalX(
             long manifoldVa, long vertexVa);
@@ -187,7 +186,7 @@ final public class SoftBodyManifold extends JoltPhysicsObject {
 
     native private static int getNumSensorContacts(long manifoldVa);
 
-    native private static long getSensorContactBodyId(
+    native private static int getSensorContactBodyId(
             long manifoldVa, int index);
 
     native private static long getVertex(long manifoldVa, int index);

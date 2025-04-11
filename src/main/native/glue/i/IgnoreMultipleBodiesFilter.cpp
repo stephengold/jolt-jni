@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -58,14 +58,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IgnoreMultipleBodies
 /*
  * Class:     com_github_stephengold_joltjni_IgnoreMultipleBodiesFilter
  * Method:    ignoreBody
- * Signature: (JJ)V
+ * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IgnoreMultipleBodiesFilter_ignoreBody
-  (JNIEnv *, jclass, jlong filterVa, jlong bodyIdVa) {
+  (JNIEnv *, jclass, jlong filterVa, jint bodyId) {
     IgnoreMultipleBodiesFilter * const pFilter
             = reinterpret_cast<IgnoreMultipleBodiesFilter *> (filterVa);
-    const BodyID * const pBodyId = reinterpret_cast<BodyID *> (bodyIdVa);
-    pFilter->IgnoreBody(*pBodyId);
+    const BodyID id(bodyId);
+    pFilter->IgnoreBody(id);
 }
 
 /*

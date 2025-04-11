@@ -21,9 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Collect all results from a broadphase shape collision. (native type: {@code
  * AllHitCollisionCollector<CollideShapeBodyCollector>})
@@ -56,32 +53,31 @@ public class AllHitCollideShapeBodyCollector extends CollideShapeBodyCollector {
     }
 
     /**
-     * Access the hit with the specified index. (native attribute: mHits)
+     * Return the body ID of the hit with the specified index. (native
+     * attribute: mHits)
      *
      * @param index (&ge;0, &lt;numHits)
-     * @return a new object
+     * @return the {@code BodyID} value
      */
-    public BodyId get(int index) {
+    public int get(int index) {
         long collectorVa = va();
-        long hitVa = getHit(collectorVa, index);
-        BodyId result = new BodyId(hitVa, true);
+        int result = getHit(collectorVa, index);
 
         return result;
     }
 
     /**
-     * Access all the hits as an array. (native attribute: mHits)
+     * Copy all the hits to an array. (native attribute: mHits)
      *
-     * @return a new list of objects
+     * @return a new array of body IDs
      */
-    public List<BodyId> getHits() {
+    public int[] getHits() {
         long collectorVa = va();
         int numHits = countHits(collectorVa);
-        List<BodyId> result = new ArrayList<>(numHits);
+        int[] result = new int[numHits];
         for (int i = 0; i < numHits; ++i) {
-            long hitVa = getHit(collectorVa, i);
-            BodyId hit = new BodyId(hitVa, true);
-            result.add(hit);
+            int bodyId = getHit(collectorVa, i);
+            result[i] = bodyId;
         }
 
         return result;
@@ -93,5 +89,5 @@ public class AllHitCollideShapeBodyCollector extends CollideShapeBodyCollector {
 
     native private static long createDefault();
 
-    native private static long getHit(long collectorVa, int hitIndex);
+    native private static int getHit(long collectorVa, int hitIndex);
 }

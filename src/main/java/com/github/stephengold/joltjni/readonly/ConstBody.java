@@ -138,12 +138,12 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     float getFriction();
 
     /**
-     * Copy the body's ID for use with {@code BodyInterface}. The body is
+     * Return the body's ID for use with {@code BodyInterface}. The body is
      * unaffected.
      *
-     * @return a new object
+     * @return the ID value
      */
-    ConstBodyId getId();
+    int getId();
 
     /**
      * Copy the inverse coordinate transform of the body's center of mass. The

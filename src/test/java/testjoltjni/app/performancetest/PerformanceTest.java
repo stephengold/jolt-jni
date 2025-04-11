@@ -262,7 +262,7 @@ public static void main(  String[] argv)throws IOException
 					final BodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
 					BodyIdVector body_ids=new BodyIdVector();
 					physics_system.getBodies(body_ids);
-					for (BodyId id : body_ids.toList())
+					for (int id : body_ids.toList())
 					{
 						BodyLockWrite lock=new BodyLockWrite(bli, id);
 						if (lock.succeeded())
@@ -377,7 +377,7 @@ public static void main(  String[] argv)throws IOException
 					final BodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
 					BodyIdVector body_ids=new BodyIdVector();
 					physics_system.getBodies(body_ids);
-					for (BodyId id : body_ids.toList())
+					for (int id : body_ids.toList())
 					{
 						BodyLockRead lock=new BodyLockRead(bli, id);
 						final Body body = lock.getBody();
@@ -393,7 +393,7 @@ public static void main(  String[] argv)throws IOException
 				BodyInterface bi = physics_system.getBodyInterfaceNoLock();
 				BodyIdVector body_ids=new BodyIdVector();
 				physics_system.getBodies(body_ids);
-				for (BodyId id : body_ids.toList())
+				for (int id : body_ids.toList())
 				{
 					RVec3 pos = bi.getPosition(id);
 					hash = hashBytes(pos, hash);

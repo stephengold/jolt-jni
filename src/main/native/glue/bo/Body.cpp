@@ -424,15 +424,13 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Body_getFriction
 /*
  * Class:     com_github_stephengold_joltjni_Body
  * Method:    getId
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getId
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Body_getId
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    const BodyID &id = pBody->GetID();
-    BodyID * const pResult = new BodyID(id);
-    TRACE_NEW("BodyID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const BodyID result = pBody->GetID();
+    return result.GetIndexAndSequenceNumber();
 }
 
 /*

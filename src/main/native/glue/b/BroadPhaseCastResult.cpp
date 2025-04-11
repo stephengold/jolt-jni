@@ -46,15 +46,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseCastResult_
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhaseCastResult
  * Method:    getBodyId
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BroadPhaseCastResult_getBodyId
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BroadPhaseCastResult_getBodyId
   (JNIEnv *, jclass, jlong castResultVa) {
     const BroadPhaseCastResult * const pCastResult
             = reinterpret_cast<BroadPhaseCastResult *> (castResultVa);
-    BodyID * const pResult = new BodyID(pCastResult->mBodyID);
-    TRACE_NEW("BodyID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const BodyID result = pCastResult->mBodyID;
+    return result.GetIndexAndSequenceNumber();
 }
 
 /*

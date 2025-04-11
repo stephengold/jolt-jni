@@ -54,7 +54,7 @@ float cBarrelAngularDrag=0.1f;
 float cForwardAcceleration=15;
 float cSteerAcceleration=1.5f;
 Body mBoatBody;
-BodyId mWaterSensor=new BodyId();
+int mWaterSensor=cInvalidBodyId;
 RMat44 mCameraPivot=RMat44.sIdentity();
 Mutex mBodiesInWaterMutex=new Mutex();
 BodyIdVector mBodiesInWater=new BodyIdVector();
@@ -149,7 +149,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	// Apply buoyancy to all bodies in the water
 	{
 		mBodiesInWaterMutex.lock();
-		for (ConstBodyId id : mBodiesInWater.toList())
+		for (int id : mBodiesInWater.toList())
 		{
 			BodyLockWrite body_lock=new BodyLockWrite(mPhysicsSystem.getBodyLockInterface(), id);
 			Body body = body_lock.getBody();
@@ -254,9 +254,9 @@ void OnContactAdded( ConstBody inBody1,  ConstBody inBody2,  ConstContactManifol
 	// When a body enters the water add it to the list of bodies in the water
 	mBodiesInWaterMutex.lock();
 	if (inBody1.getId() == mWaterSensor)
-		mBodiesInWater.pushBack(inBody2.getId().copy());
+		mBodiesInWater.pushBack(inBody2.getId());
 	else if (inBody2.getId() == mWaterSensor)
-		mBodiesInWater.pushBack(inBody1.getId().copy());
+		mBodiesInWater.pushBack(inBody1.getId());
 	mBodiesInWater.sort(); // Sort to make deterministic (OnContactAdded is called from multiple threads and the order is not guaranteed)
         mBodiesInWaterMutex.unlock();
 }

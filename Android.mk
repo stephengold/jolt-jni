@@ -44,7 +44,6 @@ $(N)/glue/bo/Body.cpp \
 $(N)/glue/bo/BodyCreationSettings.cpp \
 $(N)/glue/bo/BodyFilter.cpp \
 $(N)/glue/bo/BodyIdArray.cpp \
-$(N)/glue/bo/BodyId.cpp \
 $(N)/glue/bo/BodyIdVector.cpp \
 $(N)/glue/bo/BodyInterface.cpp \
 $(N)/glue/bo/BodyLockInterfaceLocking.cpp \

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class ConveyorBeltTest extends Test{
 BodyIdVector mLinearBelts=new BodyIdVector();
-BodyId mAngularBelt=new BodyId();
+int mAngularBelt=cInvalidBodyId;
 
 public void Initialize()
 {
@@ -107,8 +107,8 @@ void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold i
 	}
 
 	// Angular belt
-	boolean body1_angular = isEqual(inBody1.getId() , mAngularBelt);
-	boolean body2_angular = isEqual(inBody2.getId() , mAngularBelt);
+	boolean body1_angular = (inBody1.getId() == mAngularBelt);
+	boolean body2_angular = (inBody2.getId() == mAngularBelt);
 	if (body1_angular || body2_angular)
 	{
 		// Determine the world space angular surface velocity of both bodies

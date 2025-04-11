@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -136,7 +136,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	{
 		boolean found = false;
 		for (BroadPhaseCastResult rb : results_before)
-			if (isEqual(ra.getBodyId() , rb.getBodyId()))
+			if (ra.getBodyId() == rb.getBodyId())
 			{
 				found = true;
 				break;
@@ -150,7 +150,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	{
 		boolean found = false;
 		for (BroadPhaseCastResult r : results_after)
-			if (isEqual(r.getBodyId() , b.getId()))
+			if (r.getBodyId() == b.getId())
 			{
 				found = true;
 				break;

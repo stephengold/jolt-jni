@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 import static com.github.stephengold.joltjni.std.Std.*;
@@ -50,7 +51,7 @@ public void Initialize()
 		// Create body
 		BodyCreationSettings bcs=new BodyCreationSettings(box_shape,new RVec3(x, 10, z), Quat.sIdentity(), EMotionType.Dynamic, Layers.MOVING);
 		bcs.setAllowedDofs ( (int)allowed_dofs);
-		BodyId id = mBodyInterface.createAndAddBody(bcs, EActivation.Activate);
+		int id = mBodyInterface.createAndAddBody(bcs, EActivation.Activate);
 		mBodies.pushBack(id);
 
 		// Create a constraint
@@ -59,14 +60,14 @@ public void Initialize()
 		dcs.setPoint2 ( plus(bcs.getPosition() , box_size));
 		dcs.setMinDistance ( 0.0f);
 		dcs.setMaxDistance ( sqrt(3.0f) * 5.0f + 1.0f);
-		mPhysicsSystem.addConstraint(mBodyInterface.createConstraint(dcs,new BodyId(), id));
+		mPhysicsSystem.addConstraint(mBodyInterface.createConstraint(dcs,cInvalidBodyId, id));
 	}
 }
 
 public void PostPhysicsUpdate(float inDeltaTime)
 {
 	// Draw degrees of freedom
-	for (BodyId id : mBodies.toList())
+	for (int id : mBodies.toList())
 	{
 		BodyLockRead body_lock=new BodyLockRead(mPhysicsSystem.getBodyLockInterface(), id);
 		if (body_lock.succeeded())

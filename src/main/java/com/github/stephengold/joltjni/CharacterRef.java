@@ -229,17 +229,16 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     // ConstCharacter methods
 
     /**
-     * Copy the ID of the body associated with this character. The character is
-     * unaffected.
+     * Return the ID of the body associated with the character. The character is
+     * unaffected. (native method: GetBodyID)
      *
-     * @return a new object
+     * @return the {@code BodyID} value
      */
     @Override
-    public BodyId getBodyId() {
+    public int getBodyId() {
         long characterVa = targetVa();
-        long idVa = com.github.stephengold.joltjni.Character.getBodyId(
+        int result = com.github.stephengold.joltjni.Character.getBodyId(
                 characterVa);
-        BodyId result = new BodyId(idVa, true);
 
         return result;
     }
@@ -290,15 +289,15 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
-     * Copy the body ID of the supporting surface. The character is unaffected.
+     * Return the body ID of the supporting surface. The character is
+     * unaffected.
      *
-     * @return a new object
+     * @return the {@code BodyID} value
      */
     @Override
-    public BodyId getGroundBodyId() {
+    public int getGroundBodyId() {
         long characterVa = targetVa();
-        long idVa = CharacterBase.getGroundBodyId(characterVa);
-        BodyId result = new BodyId(idVa, true);
+        int result = CharacterBase.getGroundBodyId(characterVa);
 
         return result;
     }

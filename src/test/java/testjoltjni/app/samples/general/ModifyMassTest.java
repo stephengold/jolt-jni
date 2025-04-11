@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@ package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 import testjoltjni.app.samples.*;
 /**
  * A line-for-line Java translation of the Jolt Physics modify-mass test.
@@ -32,7 +33,7 @@ import testjoltjni.app.samples.*;
  */
 public class ModifyMassTest extends Test{
 float mTime;
-BodyId[] mBodies=new BodyId[2];
+int[] mBodies=new int[]{cInvalidBodyId,cInvalidBodyId};
 
 static final float cMaxHeight = 4.0f;
 
@@ -75,7 +76,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 public void PostPhysicsUpdate(float inDeltaTime)
 {
 	// Draw the mass scale
-	for (BodyId id : mBodies)
+	for (int id : mBodies)
 	{
 		BodyLockRead body_lock=new BodyLockRead(mPhysicsSystem.getBodyLockInterface(), id);
 		if (body_lock.succeeded())

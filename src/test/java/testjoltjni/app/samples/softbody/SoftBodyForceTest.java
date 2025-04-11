@@ -33,7 +33,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/SoftBody/SoftBodyForceTest.cpp
  */
 public class SoftBodyForceTest extends Test{
-BodyId mBodyID=new BodyId();
+int mBodyID=cInvalidBodyId;
 float mTime;
 
 public void Initialize()

@@ -274,16 +274,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_get
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    getInnerBodyId
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getInnerBodyId
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getInnerBodyId
   (JNIEnv *, jclass, jlong characterVa) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const BodyID id = pCharacter->GetInnerBodyID();
-    BodyID * const pResult = new BodyID(id);
-    TRACE_NEW("BodyID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const BodyID result = pCharacter->GetInnerBodyID();
+    return result.GetIndexAndSequenceNumber();
 }
 
 /*
@@ -566,14 +564,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_get
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    hasCollidedWithBody
- * Signature: (JJ)Z
+ * Signature: (JI)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_hasCollidedWithBody
-  (JNIEnv *, jclass, jlong characterVa, jlong idVa) {
+  (JNIEnv *, jclass, jlong characterVa, jint bodyId) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const BodyID * const pBody = reinterpret_cast<BodyID *> (idVa);
-    const bool result = pCharacter->HasCollidedWith(*pBody);
+    const BodyID id(bodyId);
+    const bool result = pCharacter->HasCollidedWith(id);
     return result;
 }
 

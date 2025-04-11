@@ -51,19 +51,15 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     // ConstContact methods
 
     /**
-     * Copy the ID of the colliding body. The contact is unaffected. (native
+     * Return the ID of the colliding body. The contact is unaffected. (native
      * attribute: mBodyB)
      *
-     * @return a new object, or {@code null} if no colliding body
+     * @return the {@code BodyID} value
      */
     @Override
-    public BodyId getBodyB() {
+    public int getBodyB() {
         long contactVa = va();
-        long idVa = getBodyB(contactVa);
-        BodyId result = null;
-        if (idVa != 0L) {
-            result = new BodyId(idVa, true);
-        }
+        int result = getBodyB(contactVa);
 
         return result;
     }
@@ -294,7 +290,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     native private static void free(long contactVa);
 
-    native private static long getBodyB(long contactVa);
+    native private static int getBodyB(long contactVa);
 
     native private static boolean getCanPushCharacter(long contactVa);
 

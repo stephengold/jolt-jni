@@ -159,20 +159,20 @@ public
     public void onCharacterContactRemoved(long characterVa, long otherCharacterIdVa, long subShapeId2Va) {
 	CharacterVirtualScene.this.OnCharacterContactRemoved(new CharacterVirtual(characterVa, mPhysicsSystem), new CharacterId(otherCharacterIdVa), new SubShapeId(subShapeId2Va));
     }
-    public void onContactAdded(long characterVa, long bodyId2Va, long subShapeId2Va, double contactLocationX, double contactLocationY,
+    public void onContactAdded(long characterVa, int bodyId2, long subShapeId2Va, double contactLocationX, double contactLocationY,
             double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, long settingsVa) {
 	RVec3Arg inContactPosition=new RVec3(contactLocationX, contactLocationY, contactLocationZ);
 	Vec3Arg inContactNormal=new Vec3(contactNormalX, contactNormalY, contactNormalZ);
-	CharacterVirtualScene.this.OnContactAdded(new CharacterVirtual(characterVa, mPhysicsSystem), new BodyId(bodyId2Va), new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
+	CharacterVirtualScene.this.OnContactAdded(new CharacterVirtual(characterVa, mPhysicsSystem), bodyId2, new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
     }
-    public void onContactPersisted(long characterVa, long bodyId2Va, long subShapeId2Va, double contactLocationX, double contactLocationY,
+    public void onContactPersisted(long characterVa, int bodyId2, long subShapeId2Va, double contactLocationX, double contactLocationY,
             double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, long settingsVa) {
 	RVec3Arg inContactPosition=new RVec3(contactLocationX, contactLocationY, contactLocationZ);
 	Vec3Arg inContactNormal=new Vec3(contactNormalX, contactNormalY, contactNormalZ);
-	CharacterVirtualScene.this.OnContactPersisted(new CharacterVirtual(characterVa, mPhysicsSystem), new BodyId(bodyId2Va), new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
+	CharacterVirtualScene.this.OnContactPersisted(new CharacterVirtual(characterVa, mPhysicsSystem), bodyId2, new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
     }
-    public void onContactRemoved(long characterVa, long bodyId2Va, long subShapeId2Va) {
-	CharacterVirtualScene.this.OnContactRemoved(new CharacterVirtual(characterVa, mPhysicsSystem), new BodyId(bodyId2Va), new SubShapeId(subShapeId2Va));
+    public void onContactRemoved(long characterVa, int bodyId2, long subShapeId2Va) {
+	CharacterVirtualScene.this.OnContactRemoved(new CharacterVirtual(characterVa, mPhysicsSystem), bodyId2, new SubShapeId(subShapeId2Va));
     }
                                 });
 				mCharacters.add(character.toRef());
@@ -250,7 +250,7 @@ public
 	}
 
 	// See: CharacterContactListener
-	void			OnContactAdded(ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2, ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+	void			OnContactAdded(ConstCharacterVirtual inCharacter, int inBodyID2, ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
 	{
 		mHash=hashCombine(mHash, 1);
 		mHash=hashCombine(mHash, inCharacter.getId());
@@ -259,7 +259,7 @@ public
 		mHash=hashCombine(mHash, inContactPosition);
 		mHash=hashCombine(mHash, inContactNormal);
 	}
-	void			OnContactPersisted(ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2, ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
+	void			OnContactPersisted(ConstCharacterVirtual inCharacter, int inBodyID2, ConstSubShapeId inSubShapeID2, RVec3Arg inContactPosition, Vec3Arg inContactNormal, CharacterContactSettings ioSettings)
 	{
 		mHash=hashCombine(mHash, 2);
 		mHash=hashCombine(mHash, inCharacter.getId());
@@ -268,7 +268,7 @@ public
 		mHash=hashCombine(mHash, inContactPosition);
 		mHash=hashCombine(mHash, inContactNormal);
 	}
-	void			OnContactRemoved(ConstCharacterVirtual inCharacter, ConstBodyId inBodyID2, ConstSubShapeId inSubShapeID2)
+	void			OnContactRemoved(ConstCharacterVirtual inCharacter, int inBodyID2, ConstSubShapeId inSubShapeID2)
 	{
 		mHash=hashCombine(mHash, 3);
 		mHash=hashCombine(mHash, inCharacter.getId());

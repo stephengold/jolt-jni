@@ -46,7 +46,7 @@ public:
                 "com/github/stephengold/joltjni/CustomCollideShapeBodyCollector");
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
-        mAddMethodId = pEnv->GetMethodID(clss, "addHit", "(J)V");
+        mAddMethodId = pEnv->GetMethodID(clss, "addHit", "(I)V");
         JPH_ASSERT(!pEnv->ExceptionCheck());
     }
 
@@ -55,8 +55,8 @@ public:
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
 
-        const jlong resultVa = reinterpret_cast<jlong> (&inResult);
-        pAttachEnv->CallVoidMethod(mJavaObject, mAddMethodId, resultVa);
+        const jint resultId = inResult.GetIndexAndSequenceNumber();
+        pAttachEnv->CallVoidMethod(mJavaObject, mAddMethodId, resultId);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
         mpVM->DetachCurrentThread();
     }

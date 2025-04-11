@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,14 +33,14 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_BodyLockRead
  * Method:    createBodyLockRead
- * Signature: (JJ)J
+ * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyLockRead_createBodyLockRead
-  (JNIEnv *, jclass, jlong lockVa, jlong idVa) {
+  (JNIEnv *, jclass, jlong lockVa, jint bodyId) {
     const BodyLockInterface * const pInterface
             = reinterpret_cast<BodyLockInterface *> (lockVa);
-    const BodyID * const pId = reinterpret_cast<BodyID *> (idVa);
-    BodyLockRead * const pResult = new BodyLockRead(*pInterface, *pId);
+    const BodyID id(bodyId);
+    BodyLockRead * const pResult = new BodyLockRead(*pInterface, id);
     TRACE_NEW("BodyLockRead", pResult)
     return reinterpret_cast<jlong> (pResult);
 }

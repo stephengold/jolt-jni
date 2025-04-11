@@ -189,8 +189,7 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the
      * {@code ConstCharacterVirtual} being solved (not zero)
-     * @param bodyId2Va the virtual address of the {@code ConstBody} being
-     * solved (not zero)
+     * @param bodyId2 the ID of the body being solved
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      * @param contactLocationX the X component of the contact location (in
@@ -208,7 +207,7 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * @param settingsVa the virtual address of the
      * {@code CharacterContactSettings} for storing the desired behavior
      */
-    void onContactAdded(long characterVa, long bodyId2Va, long subShapeId2Va,
+    void onContactAdded(long characterVa, int bodyId2, long subShapeId2Va,
             double contactLocationX, double contactLocationY,
             double contactLocationZ, float contactNormalX, float contactNormalY,
             float contactNormalZ, long settingsVa);
@@ -219,8 +218,7 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the
      * {@code ConstCharacterVirtual} being solved (not zero)
-     * @param bodyId2Va the virtual address of the {@code ConstBody} being
-     * solved (not zero)
+     * @param bodyId2 the ID of the body being solved
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      * @param contactLocationX the X component of the contact location (in
@@ -238,7 +236,7 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * @param settingsVa the virtual address of the
      * {@code CharacterContactSettings} for storing the desired behavior
      */
-    void onContactPersisted(long characterVa, long bodyId2Va,
+    void onContactPersisted(long characterVa, int bodyId2,
             long subShapeId2Va, double contactLocationX,
             double contactLocationY, double contactLocationZ,
             float contactNormalX, float contactNormalY, float contactNormalZ,
@@ -250,12 +248,11 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the
      * {@code ConstCharacterVirtual} being solved (not zero)
-     * @param bodyId2Va the virtual address of the {@code ConstBody} being
-     * solved (not zero)
+     * @param bodyId2 the ID of the body being solved
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      */
-    void onContactRemoved(long characterVa, long bodyId2Va, long subShapeId2Va);
+    void onContactRemoved(long characterVa, int bodyId2, long subShapeId2Va);
 
     /**
      * Callback invoked (by native code) whenever a character-versus-body
@@ -263,8 +260,7 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the
      * {@code ConstCharacterVirtual} being solved (not zero)
-     * @param bodyId2Va the virtual address of the {@code ConstBody} being
-     * solved (not zero)
+     * @param bodyId2 the ID of the body being solved
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      * @param contactLocationX the X component of the contact location (in
@@ -296,7 +292,7 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * @param newCharacterVelocity storage for the new velocity vector (in
      * system coordinates, length&ge;3)
      */
-    void onContactSolve(long characterVa, long bodyId2Va, long subShapeId2Va,
+    void onContactSolve(long characterVa, int bodyId2, long subShapeId2Va,
             double contactLocationX, double contactLocationY,
             double contactLocationZ, float contactNormalX, float contactNormalY,
             float contactNormalZ, float contactVelocityX,
@@ -310,12 +306,11 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the
      * {@code ConstCharacterVirtual} being solved (not zero)
-     * @param bodyId2Va the virtual address of the {@code ConstBody} being
-     * solved (not zero)
+     * @param bodyId2 the ID of the body being solved
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     boolean onContactValidate(
-            long characterVa, long bodyId2Va, long subShapeId2Va);
+            long characterVa, int bodyId2, long subShapeId2Va);
 }

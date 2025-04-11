@@ -34,6 +34,7 @@ import com.github.stephengold.joltjni.CustomBodyActivationListener;
 import com.github.stephengold.joltjni.CustomContactListener;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
+import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.MapObj2Bp;
 import com.github.stephengold.joltjni.ObjVsBpFilter;
 import com.github.stephengold.joltjni.ObjVsObjFilter;
@@ -55,7 +56,6 @@ import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.enumerate.ValidateResult;
 import com.github.stephengold.joltjni.readonly.ConstBody;
-import com.github.stephengold.joltjni.readonly.ConstBodyId;
 import com.github.stephengold.joltjni.readonly.ConstContactManifold;
 import com.github.stephengold.joltjni.readonly.ConstSubShapeIdPair;
 import org.junit.Assert;
@@ -81,22 +81,22 @@ public class Test001 {
         /**
          * Callback invoked (by native code) each time a body is activated.
          *
-         * @param idVa the virtual address of the body's ID (not zero)
+         * @param bodyId the body's ID
          * @param bodyUserData the body's user data
          */
         @Override
-        public void onBodyActivated(long idVa, long bodyUserData) {
+        public void onBodyActivated(int bodyId, long bodyUserData) {
             System.out.println("A body got activated");
         }
 
         /**
          * Callback invoked (by native code) each time a body is deactivated.
          *
-         * @param idVa the virtual address of the body's ID (not zero)
+         * @param bodyId the body's ID
          * @param bodyUserData the body's user data
          */
         @Override
-        public void onBodyDeactivated(long idVa, long bodyUserData) {
+        public void onBodyDeactivated(int bodyId, long bodyUserData) {
             System.out.println("A body went to sleep");
         }
     }
@@ -162,10 +162,10 @@ public class Test001 {
         @Override
         public void onContactRemoved(long pairVa) {
             ConstSubShapeIdPair pair = new SubShapeIdPair(pairVa);
-            ConstBodyId bodyId1 = pair.getBody1Id();
-            ConstBodyId bodyId2 = pair.getBody2Id();
+            int bodyId1 = pair.getBody1Id();
+            int bodyId2 = pair.getBody2Id();
             Assert.assertNotEquals(bodyId1, bodyId2);
-            TestUtils.testClose(pair, bodyId1, bodyId2);
+            TestUtils.testClose(pair);
 
             System.out.println("A contact was removed");
         }
@@ -263,8 +263,8 @@ public class Test001 {
                         orientation, EMotionType.Static, objLayerNonMoving);
         Body floor = bodyInterface.createBody(floorBodySettings);
         Assert.assertFalse(floor.ownsNativeObject());
-        ConstBodyId floorId = floor.getId();
-        Assert.assertFalse(floorId.isInvalid());
+        int floorId = floor.getId();
+        Assert.assertNotEquals(Jolt.cInvalidBodyId, floorId);
         bodyInterface.addBody(floorId, EActivation.DontActivate);
 
         Shape ballShape = new SphereShape(0.5f);
@@ -276,9 +276,9 @@ public class Test001 {
         BodyCreationSettings ballSettings = new BodyCreationSettings(
                 ballShape, ballLocation, orientation,
                 EMotionType.Dynamic, objLayerMoving);
-        ConstBodyId ballId = bodyInterface.createAndAddBody(
+        int ballId = bodyInterface.createAndAddBody(
                 ballSettings, EActivation.Activate);
-        Assert.assertFalse(ballId.isInvalid());
+        Assert.assertNotEquals(Jolt.cInvalidBodyId, ballId);
         Vec3 ballVelocity = new Vec3(0f, -5f, 0f);
         bodyInterface.setLinearVelocity(ballId, ballVelocity);
 
@@ -316,13 +316,11 @@ public class Test001 {
         Assert.assertEquals(2, ballShape.getRefCount());
         bodyInterface.destroyBody(ballId);
         Assert.assertEquals(1, ballShape.getRefCount());
-        TestUtils.testClose(ballId);
-        Assert.assertEquals(1, ballShape.getRefCount());
         TestUtils.testClose(ballSettings, ballShape);
 
         bodyInterface.removeBody(floorId);
         bodyInterface.destroyBody(floorId);
-        TestUtils.testClose(floorId, floor, floorBodySettings, floorShapeRef,
+        TestUtils.testClose(floor, floorBodySettings, floorShapeRef,
                 floorShapeResult, floorShapeSettings);
 
         TestUtils.testClose(bodyInterface, physicsSystem, objVsObjFilter,
