@@ -235,8 +235,12 @@ public class SoftBodyMotionProperties
     @Override
     public SoftBodyVertex getVertex(int index) {
         long propertiesVa = va();
+        JoltPhysicsObject container = getContainingObject();
+        if (container == null) {
+            container = this;
+        }
         long vertexVa = getVertex(propertiesVa, index);
-        SoftBodyVertex result = new SoftBodyVertex(this, vertexVa);
+        SoftBodyVertex result = new SoftBodyVertex(container, vertexVa);
 
         return result;
     }
