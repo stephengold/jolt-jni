@@ -85,11 +85,11 @@ public:
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
         mPersistedMethodId = pEnv->GetMethodID(
-                clss, "onCharacterContactPersisted", "(JJJDDDFFFJ)V");
+                clss, "onContactPersisted", "(JJJDDDFFFJ)V");
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
         mRemovedMethodId = pEnv->GetMethodID(
-                clss, "onCharacterContactRemoved", "(JJJ)V");
+                clss, "onContactRemoved", "(JJJ)V");
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
         mSolveMethodId = pEnv->GetMethodID(
