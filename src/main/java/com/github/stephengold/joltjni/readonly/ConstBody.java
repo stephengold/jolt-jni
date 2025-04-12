@@ -192,6 +192,16 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     RVec3 getPosition();
 
     /**
+     * Copy the position of the body. The body is unaffected.
+     *
+     * @param storeLocation storage for the location (in system coordinates, not
+     * null, modified)
+     * @param storeOrientation storage for the orientation (in system
+     * coordinates, not null, modified)
+     */
+    void getPositionAndRotation(RVec3 storeLocation, Quat storeOrientation);
+
+    /**
      * Return the body's restitution ratio. The body is unaffected.
      *
      * @return the value (typically &ge;0 and &le;1)

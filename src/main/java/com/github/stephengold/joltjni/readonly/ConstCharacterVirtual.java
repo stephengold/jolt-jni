@@ -173,6 +173,16 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
     RVec3 getPosition();
 
     /**
+     * Copy the position of the character. The character is unaffected.
+     *
+     * @param storeLocation storage for the location (in system coordinates, not
+     * null, modified)
+     * @param storeOrientation storage for the orientation (in system
+     * coordinates, not null, modified)
+     */
+    void getPositionAndRotation(RVec3 storeLocation, Quat storeOrientation);
+
+    /**
      * Copy the orientation of the character. The character is unaffected.
      *
      * @return a new rotation quaternion (in system coordinates)

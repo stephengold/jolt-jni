@@ -767,6 +767,31 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Copy the position of the body. The body is unaffected.
+     *
+     * @param storeLocation storage for the location (in system coordinates, not
+     * null, modified)
+     * @param storeOrientation storage for the orientation (in system
+     * coordinates, not null, modified)
+     */
+    @Override
+    public void getPositionAndRotation(
+            RVec3 storeLocation, Quat storeOrientation) {
+        long bodyVa = va();
+
+        double xx = getPositionX(bodyVa);
+        double yy = getPositionY(bodyVa);
+        double zz = getPositionZ(bodyVa);
+        storeLocation.set(xx, yy, zz);
+
+        float qx = getRotationX(bodyVa);
+        float qy = getRotationY(bodyVa);
+        float qz = getRotationZ(bodyVa);
+        float qw = getRotationW(bodyVa);
+        storeOrientation.set(qx, qy, qz, qw);
+    }
+
+    /**
      * Return the body's restitution ratio. The body is unaffected.
      *
      * @return the value (typically &ge;0 and &le;1)

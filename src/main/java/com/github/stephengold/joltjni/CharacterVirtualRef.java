@@ -645,6 +645,31 @@ final public class CharacterVirtualRef
     }
 
     /**
+     * Copy the position of the character. The character is unaffected.
+     *
+     * @param storeLocation storage for the location (in system coordinates, not
+     * null, modified)
+     * @param storeOrientation storage for the orientation (in system
+     * coordinates, not null, modified)
+     */
+    @Override
+    public void getPositionAndRotation(
+            RVec3 storeLocation, Quat storeOrientation) {
+        long characterVa = targetVa();
+
+        double xx = CharacterVirtual.getPositionX(characterVa);
+        double yy = CharacterVirtual.getPositionY(characterVa);
+        double zz = CharacterVirtual.getPositionZ(characterVa);
+        storeLocation.set(xx, yy, zz);
+
+        float qx = CharacterVirtual.getRotationX(characterVa);
+        float qy = CharacterVirtual.getRotationY(characterVa);
+        float qz = CharacterVirtual.getRotationZ(characterVa);
+        float qw = CharacterVirtual.getRotationW(characterVa);
+        storeOrientation.set(qx, qy, qz, qw);
+    }
+
+    /**
      * Copy the orientation of the character. The character is unaffected.
      *
      * @return a new rotation quaternion (in system coordinates)
