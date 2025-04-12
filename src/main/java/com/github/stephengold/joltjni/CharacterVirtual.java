@@ -517,7 +517,8 @@ public class CharacterVirtual
     }
 
     /**
-     * Return the character's ID. The character is unaffected.
+     * Return the character's ID. The character is unaffected. (native method:
+     * GetID)
      *
      * @return a {@code CharacterId} value
      */

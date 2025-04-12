@@ -141,7 +141,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * Return the body's ID for use with {@code BodyInterface}. The body is
      * unaffected.
      *
-     * @return the ID value
+     * @return the {@code BodyID} value
      */
     int getId();
 

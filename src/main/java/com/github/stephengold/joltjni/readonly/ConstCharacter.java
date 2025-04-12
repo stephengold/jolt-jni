@@ -41,7 +41,7 @@ public interface ConstCharacter extends ConstCharacterBase {
      * Return the ID of the body associated with this character. The character
      * is unaffected.
      *
-     * @return the ID value
+     * @return the {@code BodyID} value
      */
     int getBodyId();
 
@@ -118,20 +118,20 @@ public interface ConstCharacter extends ConstCharacterBase {
      * Copy the position of the associated body using the locking body
      * interface. The character is unaffected.
      *
-     * @param storeLocation the desired location (in system coordinates, not
-     * null, unaffected)
-     * @param storeOrientation the desired orientation (in system coordinates,
-     * not null, unaffected)
+     * @param storeLocation storage for the location (in system coordinates, not
+     * null, modified)
+     * @param storeOrientation storage for the orientation (in system
+     * coordinates, not null, modified)
      */
     void getPositionAndRotation(RVec3 storeLocation, Quat storeOrientation);
 
     /**
      * Copy the position of the associated body. The character is unaffected.
      *
-     * @param storeLocation the desired location (in system coordinates, not
-     * null, unaffected)
-     * @param storeOrientation the desired orientation (in system coordinates,
-     * not null, unaffected)
+     * @param storeLocation storage for the location (in system coordinates, not
+     * null, modified)
+     * @param storeOrientation storage for the orientation (in system
+     * coordinates, not null, modified)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */

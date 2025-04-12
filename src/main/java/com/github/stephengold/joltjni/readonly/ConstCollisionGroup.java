@@ -41,14 +41,14 @@ public interface ConstCollisionGroup extends ConstJoltPhysicsObject {
     /**
      * Return the main group ID. The group is unaffected.
      *
-     * @return the ID value or {@code cInvalidGroup}
+     * @return the {@code GroupID} value
      */
     int getGroupId();
 
     /**
      * Return the sub-group ID. The group is unaffected.
      *
-     * @return the ID value or {@code cInvalidSubGroup}
+     * @return the {@code SubGroupID} value
      */
     int getSubGroupId();
 }

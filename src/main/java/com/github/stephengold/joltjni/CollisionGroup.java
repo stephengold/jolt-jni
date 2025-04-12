@@ -107,7 +107,7 @@ public class CollisionGroup
     }
 
     /**
-     * Alter the main group ID.
+     * Alter the main group ID. (native method: SetGroupID)
      *
      * @param id the desired ID (default=cInvalidGroup)
      */
@@ -117,7 +117,7 @@ public class CollisionGroup
     }
 
     /**
-     * Alter the sub-group ID.
+     * Alter the sub-group ID. (native method: SetSubGroupID)
      *
      * @param id the desired ID (default=cInvalidSubGroup)
      */
@@ -149,9 +149,10 @@ public class CollisionGroup
     }
 
     /**
-     * Return the main group ID. The group is unaffected.
+     * Return the main group ID. The group is unaffected. (native method:
+     * GetGroupID)
      *
-     * @return the ID value or {@code cInvalidGroup}
+     * @return the {@code GroupID} value
      */
     @Override
     public int getGroupId() {
@@ -162,9 +163,10 @@ public class CollisionGroup
     }
 
     /**
-     * Return the sub-group ID. The group is unaffected.
+     * Return the sub-group ID. The group is unaffected. (native method:
+     * GetSubGroupID)
      *
-     * @return the ID value or {@code cInvalidSubGroup}
+     * @return the {@code SubGroupID} value
      */
     @Override
     public int getSubGroupId() {

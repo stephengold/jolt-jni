@@ -116,7 +116,7 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
     /**
      * Return the ID of the inner body. The character is unaffected.
      *
-     * @return the ID value
+     * @return the {@code BodyID} value
      */
     int getInnerBodyId();
 
