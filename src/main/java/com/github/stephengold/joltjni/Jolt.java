@@ -49,6 +49,12 @@ final public class Jolt {
      */
     final public static float JPH_PI = (float) Math.PI;
     /**
+     * empty sub-shape ID
+     * <p>
+     * value should match Jolt/Physics/Collision/Shape/SubShapeID.h
+     */
+    final public static int cEmptySubShapeId = 0xffffffff;
+    /**
      * invalid body ID
      * <p>
      * value should match Jolt/Physics/Body/BodyID.h
