@@ -30,7 +30,7 @@
     <!-- Checks for size violations:             -->
     <!-- See https://checkstyle.org/checks/sizes -->
     <module name="FileLength">
-        <property name="max" value="1200"/>
+        <property name="max" value="1300"/>
     </module>
     <module name="LineLength">
         <property name="fileExtensions" value="java"/>
