@@ -202,7 +202,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
-        const jlong otherCharacterId = inOtherCharacterID.GetValue();
+        const jint otherCharacterId = inOtherCharacterID.GetValue();
         const jlong subShapeId2Va = reinterpret_cast<jlong> (&inSubShapeID2);
 
         pAttachEnv->CallVoidMethod(mJavaObject, mCcRemovedMethodId, characterVa,
