@@ -86,7 +86,7 @@ static class BPLayerInterfaceImpl extends MapObj2Bp
             super(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS);
 		add(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
 		add(Layers.MOVING, BroadPhaseLayers.MOVING);
-	}                                                                     
+	}
 
 };
 

@@ -1096,5 +1096,4 @@ public class Test003 {
         Assert.assertNotNull(wvcs.getDifferential(0));
         Assert.assertNotNull(wvcs.getDifferential(1));
     }
-
 }
