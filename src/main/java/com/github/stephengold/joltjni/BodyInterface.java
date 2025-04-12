@@ -58,16 +58,6 @@ public class BodyInterface extends NonCopyable {
     // new methods exposed
 
     /**
-     * Activate the specified body.
-     *
-     * @param bodyId the ID of the body to activate
-     */
-    public void activateBody(int bodyId) {
-        long bodyInterfaceVa = va();
-        activateBody(bodyInterfaceVa, bodyId);
-    }
-
-    /**
      * Active all bodies within the specified bounds that satisfy the specified
      * filters.
      *
@@ -83,6 +73,16 @@ public class BodyInterface extends NonCopyable {
         long bplFilterVa = bplFilter.va();
         long olFilterVa = olFilter.va();
         activateBodiesInAaBox(bodyInterfaceVa, boxVa, bplFilterVa, olFilterVa);
+    }
+
+    /**
+     * Activate the specified body.
+     *
+     * @param bodyId the ID of the body to activate
+     */
+    public void activateBody(int bodyId) {
+        long bodyInterfaceVa = va();
+        activateBody(bodyInterfaceVa, bodyId);
     }
 
     /**
@@ -818,10 +818,10 @@ public class BodyInterface extends NonCopyable {
     // *************************************************************************
     // native private methods
 
-    native private static void activateBody(long bodyInterfaceVa, int bodyId);
-
     native private static void activateBodiesInAaBox(long bodyInterfaceVa,
             long boxVa, long bplFilterVa, long olFilterVa);
+
+    native private static void activateBody(long bodyInterfaceVa, int bodyId);
 
     native private static void addBody(
             long bodyInterfaceVa, int bodyId, int activationOrdinal);
@@ -935,10 +935,6 @@ public class BodyInterface extends NonCopyable {
 
     native private static void removeBody(long bodyInterfaceVa, int bodyId);
 
-    native private static void setLinearAndAngularVelocity(
-            long bodyInterfaceVa, int bodyId, float vx, float vy, float vz,
-            float wx, float wy, float wz);
-
     native private static void setAngularVelocity(
             long bodyInterfaceVa, int bodyId, float wx, float wy, float wz);
 
@@ -947,6 +943,10 @@ public class BodyInterface extends NonCopyable {
 
     native private static void setGravityFactor(
             long bodyInterfaceVa, int bodyId, float factor);
+
+    native private static void setLinearAndAngularVelocity(
+            long bodyInterfaceVa, int bodyId, float vx, float vy, float vz,
+            float wx, float wy, float wz);
 
     native private static void setLinearVelocity(
             long bodyInterfaceVa, int bodyId, float vx, float vy, float vz);

@@ -34,19 +34,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    activateBody
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_activateBody
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID id(bodyId);
-    pInterface->ActivateBody(id);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    activateBodiesInAaBox
  * Signature: (JJJJ)V
  */
@@ -61,6 +48,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_activat
     const ObjectLayerFilter * const pOlFilter
             = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
     pInterface->ActivateBodiesInAABox(*pBox, *pBplFilter, *pOlFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    activateBody
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_activateBody
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    pInterface->ActivateBody(id);
 }
 
 /*
@@ -662,23 +662,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_removeB
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    setLinearAndAngularVelocity
- * Signature: (JIFFFFFF)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setLinearAndAngularVelocity
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId, jfloat vx,
-  jfloat vy, jfloat vz, jfloat wx, jfloat wy, jfloat wz) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID id(bodyId);
-    const Vec3 linearVelocity(vx, vy, vz);
-    const Vec3 angularVelocity(wx, wy, wz);
-    pInterface->SetLinearAndAngularVelocity(
-            id, linearVelocity, angularVelocity);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    setAngularVelocity
  * Signature: (JIFFF)V
  */
@@ -716,6 +699,23 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setGrav
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
     pInterface->SetGravityFactor(id, factor);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setLinearAndAngularVelocity
+ * Signature: (JIFFFFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setLinearAndAngularVelocity
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId, jfloat vx,
+  jfloat vy, jfloat vz, jfloat wx, jfloat wy, jfloat wz) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    const Vec3 linearVelocity(vx, vy, vz);
+    const Vec3 angularVelocity(wx, wy, wz);
+    pInterface->SetLinearAndAngularVelocity(
+            id, linearVelocity, angularVelocity);
 }
 
 /*
