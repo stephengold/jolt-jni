@@ -247,7 +247,6 @@ $(N)/glue/s/SphereShape.cpp \
 $(N)/glue/s/SphereShapeSettings.cpp \
 $(N)/glue/s/SpringSettings.cpp \
 $(N)/glue/s/SubShape.cpp \
-$(N)/glue/s/SubShapeId.cpp \
 $(N)/glue/s/SubShapeIdCreator.cpp \
 $(N)/glue/s/SubShapeIdPair.cpp \
 $(N)/glue/s/SupportBuffer.cpp \
