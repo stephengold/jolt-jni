@@ -259,16 +259,14 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_ge
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    getId
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getId
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getId
   (JNIEnv *, jclass, jlong characterVa) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const CharacterID id = pCharacter->GetID();
-    CharacterID * const pResult = new CharacterID(id);
-    TRACE_NEW("CharacterID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const CharacterID result = pCharacter->GetID();
+    return result.GetValue();
 }
 
 /*

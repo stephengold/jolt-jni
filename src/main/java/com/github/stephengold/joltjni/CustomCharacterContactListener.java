@@ -128,14 +128,13 @@ public class CustomCharacterContactListener
      *
      * @param characterVa the virtual address of the
      * {@code ConstCharacterVirtual} being solved (not zero)
-     * @param otherCharacterIdVa the virtual address of the other character's ID
-     * (not zero)
+     * @param otherCharacterId the other character's ID
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      */
     @Override
     public void onCharacterContactRemoved(
-            long characterVa, long otherCharacterIdVa, long subShapeId2Va) {
+            long characterVa, int otherCharacterId, long subShapeId2Va) {
     }
 
     /**

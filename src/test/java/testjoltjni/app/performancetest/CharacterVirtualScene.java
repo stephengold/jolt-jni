@@ -155,8 +155,8 @@ public
 	Vec3Arg inContactNormal=new Vec3(contactNormalX, contactNormalY, contactNormalZ);
 	CharacterVirtualScene.this.OnCharacterContactPersisted(new CharacterVirtual(characterVa, mPhysicsSystem), new CharacterVirtual(otherCharacterVa, mPhysicsSystem), new SubShapeId(subShapeId2Va), inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
     }
-    public void onCharacterContactRemoved(long characterVa, long otherCharacterIdVa, long subShapeId2Va) {
-	CharacterVirtualScene.this.OnCharacterContactRemoved(new CharacterVirtual(characterVa, mPhysicsSystem), new CharacterId(otherCharacterIdVa), new SubShapeId(subShapeId2Va));
+    public void onCharacterContactRemoved(long characterVa, int otherCharacterId, long subShapeId2Va) {
+	CharacterVirtualScene.this.OnCharacterContactRemoved(new CharacterVirtual(characterVa, mPhysicsSystem), otherCharacterId, new SubShapeId(subShapeId2Va));
     }
     public void onContactAdded(long characterVa, int bodyId2, long subShapeId2Va, double contactLocationX, double contactLocationY,
             double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, long settingsVa) {
@@ -292,7 +292,7 @@ public
 		mHash=hashCombine(mHash, inContactPosition);
 		mHash=hashCombine(mHash, inContactNormal);
 	}
-	void			OnCharacterContactRemoved(ConstCharacterVirtual inCharacter, CharacterId inOtherCharacterID, ConstSubShapeId inSubShapeID2)
+	void			OnCharacterContactRemoved(ConstCharacterVirtual inCharacter, int inOtherCharacterID, ConstSubShapeId inSubShapeID2)
 	{
 		mHash=hashCombine(mHash, 6);
 		mHash=hashCombine(mHash, inCharacter.getId());

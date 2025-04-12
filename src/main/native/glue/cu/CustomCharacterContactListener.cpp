@@ -73,7 +73,7 @@ public:
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
         mCcRemovedMethodId = pEnv->GetMethodID(
-                clss, "onCharacterContactRemoved", "(JJJ)V");
+                clss, "onCharacterContactRemoved", "(JIJ)V");
         JPH_ASSERT(!pEnv->ExceptionCheck());
 
         mCcSolveMethodId = pEnv->GetMethodID(
@@ -202,12 +202,11 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         const jlong characterVa = reinterpret_cast<jlong> (inCharacter);
-        const jlong otherCharacterIdVa
-                = reinterpret_cast<jlong> (&inOtherCharacterID);
+        const jlong otherCharacterId = inOtherCharacterID.GetValue();
         const jlong subShapeId2Va = reinterpret_cast<jlong> (&inSubShapeID2);
 
         pAttachEnv->CallVoidMethod(mJavaObject, mCcRemovedMethodId, characterVa,
-                otherCharacterIdVa, subShapeId2Va);
+                otherCharacterId, subShapeId2Va);
         JPH_ASSERT(!pAttachEnv->ExceptionCheck());
 
         mpVM->DetachCurrentThread();

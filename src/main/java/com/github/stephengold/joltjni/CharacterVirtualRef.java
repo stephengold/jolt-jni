@@ -519,15 +519,14 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Copy the character's ID. The character is unaffected.
+     * Return the character's ID. The character is unaffected.
      *
-     * @return a new object
+     * @return a {@code CharacterId} value
      */
     @Override
-    public CharacterId getId() {
+    public int getId() {
         long characterVa = targetVa();
-        long idVa = CharacterVirtual.getId(characterVa);
-        CharacterId result = new CharacterId(idVa, true);
+        int result = CharacterVirtual.getId(characterVa);
 
         return result;
     }

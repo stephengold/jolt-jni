@@ -112,13 +112,12 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      *
      * @param characterVa the virtual address of the
      * {@code ConstCharacterVirtual} being solved (not zero)
-     * @param otherCharacterIdVa the virtual address of the other character's ID
-     * (not zero)
+     * @param otherCharacterId the virtual address of the other character's ID
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      */
     void onCharacterContactRemoved(
-            long characterVa, long otherCharacterIdVa, long subShapeId2Va);
+            long characterVa, int otherCharacterId, long subShapeId2Va);
 
     /**
      * Callback invoked (by native code) whenever a character-versus-character

@@ -69,7 +69,6 @@ $(N)/glue/ch/CharacterBase.cpp \
 $(N)/glue/ch/CharacterBaseSettings.cpp \
 $(N)/glue/ch/CharacterContactSettings.cpp \
 $(N)/glue/ch/Character.cpp \
-$(N)/glue/ch/CharacterId.cpp \
 $(N)/glue/ch/CharacterRefC.cpp \
 $(N)/glue/ch/CharacterSettings.cpp \
 $(N)/glue/ch/CharacterVirtual.cpp \

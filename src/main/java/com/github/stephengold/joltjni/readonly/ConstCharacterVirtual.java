@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.CharacterId;
 import com.github.stephengold.joltjni.CharacterVirtualRefC;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
@@ -108,11 +107,11 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
     float getHitReductionCosMaxAngle();
 
     /**
-     * Copy the character's ID. The character is unaffected.
+     * Return the character's ID. The character is unaffected.
      *
-     * @return a new object
+     * @return a {@code CharacterId} value
      */
-    CharacterId getId();
+    int getId();
 
     /**
      * Return the ID of the inner body. The character is unaffected.

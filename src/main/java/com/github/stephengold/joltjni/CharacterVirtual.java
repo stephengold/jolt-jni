@@ -517,15 +517,14 @@ public class CharacterVirtual
     }
 
     /**
-     * Copy the character's ID. The character is unaffected.
+     * Return the character's ID. The character is unaffected.
      *
-     * @return a new object
+     * @return a {@code CharacterId} value
      */
     @Override
-    public CharacterId getId() {
+    public int getId() {
         long characterVa = va();
-        long idVa = getId(characterVa);
-        CharacterId result = new CharacterId(idVa, true);
+        int result = getId(characterVa);
 
         return result;
     }
@@ -805,7 +804,7 @@ public class CharacterVirtual
 
     native static float getHitReductionCosMaxAngle(long characterVa);
 
-    native static long getId(long characterVa);
+    native static int getId(long characterVa);
 
     native static int getInnerBodyId(long characterVa);
 

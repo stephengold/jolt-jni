@@ -209,20 +209,6 @@ final public class Jolt {
     }
 
     /**
-     * Combine the specified character ID with the specified hash code.
-     *
-     * @param id the ID to combine (not null, unaffected)
-     * @param oldHash the old hash code
-     * @return the new hash code
-     */
-    public static long hashCombine(long oldHash, CharacterId id) {
-        long idVa = id.va();
-        long result = hashCombineCharacterId(oldHash, idVa);
-
-        return result;
-    }
-
-    /**
      * Combine the specified 32-bit integer with the specified hash code.
      *
      * @param oldHash the old hash code
@@ -604,8 +590,6 @@ final public class Jolt {
 
     native private static long hashBytes(
             float qx, float qy, float qz, float qw, long oldHash);
-
-    native private static long hashCombineCharacterId(long oldHash, long idVa);
 
     native private static long hashCombineRVec3(
             long oldHash, double xx, double yy, double zz);
