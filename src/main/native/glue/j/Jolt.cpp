@@ -409,6 +409,16 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_sin
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    sSetNextCharacterId
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_sSetNextCharacterId
+  (JNIEnv *, jclass, jint nextValue) {
+    CharacterID::sSetNextCharacterID(nextValue);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    supportsObjectStream
  * Signature: ()Z
  */

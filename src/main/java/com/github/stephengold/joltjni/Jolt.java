@@ -552,6 +552,21 @@ final public class Jolt {
     }
 
     /**
+     * Set the next available character ID to 1.
+     *
+     */
+    public static void sSetNextCharacterId() {
+        sSetNextCharacterId(1);
+    }
+
+    /**
+     * Set the next available character ID to the specified value.
+     *
+     * @param nextValue the desired next ID
+     */
+    native public static void sSetNextCharacterId(int nextValue);
+
+    /**
      * Test whether the native library supports the ObjectStream format. (native
      * macro: JPH_OBJECT_STREAM)
      *

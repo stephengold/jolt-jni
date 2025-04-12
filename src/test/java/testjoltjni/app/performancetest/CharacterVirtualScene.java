@@ -130,7 +130,7 @@ public
 				bi.createAndAddBody(bcs, EActivation.DontActivate);
 
 		// Construct characters
-		CharacterId.sSetNextCharacterId();
+		Jolt.sSetNextCharacterId();
 		ShapeRefC standing_shape =new RotatedTranslatedShapeSettings(new Vec3(0, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, 0), Quat.sIdentity(), new CapsuleShape(0.5f * cCharacterHeightStanding, cCharacterRadiusStanding)).create().get();
 		ShapeRefC inner_standing_shape =new RotatedTranslatedShapeSettings(new Vec3(0, 0.5f * cCharacterHeightStanding + cCharacterRadiusStanding, 0), Quat.sIdentity(), new CapsuleShape(0.5f * cInnerShapeFraction * cCharacterHeightStanding, cInnerShapeFraction * cCharacterRadiusStanding)).create().get();
 		for (int y = 0; y < cNumCharactersY; ++y)
