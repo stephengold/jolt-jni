@@ -27,7 +27,6 @@ import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.Stats;
 import com.github.stephengold.joltjni.StreamOut;
-import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
@@ -107,14 +106,14 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     /**
      * Access the leaf shape for the specified sub-shape ID.
      *
-     * @param id an ID that indicates the path to the desired leaf shape (not
-     * null, unaffected)
-     * @param storeRemainder storage for the remainder of the ID after removing
-     * the path to the leaf shape (not null, modified)
+     * @param subShapeId an ID that indicates the path to the desired leaf shape
+     * (not null, unaffected)
+     * @param storeRemainderId storage for the remainder of the ID after
+     * removing the path to the leaf shape (not null, modified)
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null} if the ID is invalid
      */
-    ConstShape getLeafShape(ConstSubShapeId id, SubShapeId storeRemainder);
+    ConstShape getLeafShape(int subShapeId, int[] storeRemainderId);
 
     /**
      * Return a bounding box that includes the convex radius. The shape is
@@ -134,10 +133,10 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     /**
      * Access the material of the specified sub-shape. The shape is unaffected.
      *
-     * @param id which sub-shape (not null, unaffected)
+     * @param subShapeId which sub-shape
      * @return a new JVM object with the pre-existing native object assigned
      */
-    ConstPhysicsMaterial getMaterial(ConstSubShapeId id);
+    ConstPhysicsMaterial getMaterial(int subShapeId);
 
     /**
      * Return the shape's revision count, which is automatically incremented

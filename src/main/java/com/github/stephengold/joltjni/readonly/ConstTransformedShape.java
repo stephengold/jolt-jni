@@ -199,14 +199,14 @@ public interface ConstTransformedShape extends ConstJoltPhysicsObject {
      * Get the vertices of the face that provides support in the specified
      * direction. The shape is unaffected.
      *
-     * @param subShapeId which subshape to use (not null, unaffected)
+     * @param subShapeId which sub-shape to use
      * @param direction the test direction (in world coordinates, not null,
      * unaffected)
      * @param base the base location for reporting face vertices (not null,
      * unaffected, (0,0,0)&rarr;world coordinates)
      * @param storeFace storage for face vertices (not null)
      */
-    void getSupportingFace(ConstSubShapeId subShapeId, Vec3Arg direction,
+    void getSupportingFace(int subShapeId, Vec3Arg direction,
             RVec3Arg base, SupportingFace storeFace);
 
     /**

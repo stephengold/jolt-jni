@@ -27,7 +27,6 @@ import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstShape;
-import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -877,20 +876,18 @@ public class Body extends NonCopyable implements ConstBody {
      * Copy the surface normal of a particular sub shape at the specified
      * location.
      *
-     * @param subShapeId the ID of the subshape to use (not null, unaffected)
+     * @param subShapeId the ID of the sub-shape to use
      * @param location the location to use (not null, unaffected)
      * @return a new direction vector
      */
     @Override
-    public Vec3 getWorldSpaceSurfaceNormal(
-            ConstSubShapeId subShapeId, RVec3Arg location) {
+    public Vec3 getWorldSpaceSurfaceNormal(int subShapeId, RVec3Arg location) {
         long bodyVa = va();
-        long idVa = subShapeId.targetVa();
         double xx = location.xx();
         double yy = location.yy();
         double zz = location.zz();
         FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(3);
-        getWorldSpaceSurfaceNormal(bodyVa, idVa, xx, yy, zz, storeFloats);
+        getWorldSpaceSurfaceNormal(bodyVa, subShapeId, xx, yy, zz, storeFloats);
 
         Vec3 result = new Vec3(storeFloats);
         return result;
@@ -1128,7 +1125,7 @@ public class Body extends NonCopyable implements ConstBody {
     native private static long getWorldSpaceBounds(long bodyVa);
 
     native private static void getWorldSpaceSurfaceNormal(
-            long bodyVa, long idVa, double xx, double yy, double zz,
+            long bodyVa, int subShapeId, double xx, double yy, double zz,
             FloatBuffer storeFloats);
 
     native private static long getWorldTransform(long bodyVa);

@@ -21,8 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.SubShapeId;
-
 /**
  * Read-only access to a {@code SubShapeIdPair}. (native type: const
  * SubShapeIDPair)
@@ -55,16 +53,16 @@ public interface ConstSubShapeIdPair extends ConstJoltPhysicsObject {
     long getHash();
 
     /**
-     * Copy the ID of the first subshape. The pair is unaffected.
+     * Return the ID of the first sub-shape. The pair is unaffected.
      *
-     * @return a new object
+     * @return a {@code SubShapeID} value
      */
-    SubShapeId getSubShapeId1();
+    int getSubShapeId1();
 
     /**
-     * Copy the ID of the 2nd subshape. The pair is unaffected.
+     * Return the ID of the 2nd sub-shape. The pair is unaffected.
      *
-     * @return a new object
+     * @return a {@code SubShapeID} value
      */
-    SubShapeId getSubShapeId2();
+    int getSubShapeId2();
 }

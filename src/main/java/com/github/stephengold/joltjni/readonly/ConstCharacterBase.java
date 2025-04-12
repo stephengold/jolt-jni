@@ -23,7 +23,6 @@ package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.StateRecorder;
-import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EGroundState;
 
@@ -90,9 +89,9 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * Identify the face on the supporting surface where contact is occurring.
      * The character is unaffected.
      *
-     * @return a new object
+     * @return a {@code SubShapeID} value
      */
-    SubShapeId getGroundSubShapeId();
+    int getGroundSubShapeId();
 
     /**
      * Return the user data of the supporting surface. The character is

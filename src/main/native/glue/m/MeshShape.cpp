@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/Shape/MeshShape.h"
+#include "Jolt/Physics/Collision/Shape/SubShapeID.h"
 #include "auto/com_github_stephengold_joltjni_MeshShape.h"
 
 using namespace JPH;
@@ -32,12 +33,13 @@ using namespace JPH;
 /*
  * Class:     com_github_stephengold_joltjni_MeshShape
  * Method:    getTriangleUserData
- * Signature: (JJ)I
+ * Signature: (JI)I
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_MeshShape_getTriangleUserData
-  (JNIEnv *, jclass, jlong shapeVa, jlong idVa) {
+  (JNIEnv *, jclass, jlong shapeVa, jint subShapeId) {
     const MeshShape * const pShape = reinterpret_cast<MeshShape *> (shapeVa);
-    const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
-    const uint32 result = pShape->GetTriangleUserData(*pId);
+    SubShapeID id;
+    id.SetValue(subShapeId);
+    const uint32 result = pShape->GetTriangleUserData(id);
     return result;
 }

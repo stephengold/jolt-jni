@@ -79,31 +79,29 @@ final public class ContactManifold
     }
 
     /**
-     * Copy the ID of the first subshape that formed the manifold. The manifold
-     * is unaffected. (native attribute: mSubShapeID1)
+     * Return the ID of the first sub-shape that formed the manifold. The
+     * manifold is unaffected. (native attribute: mSubShapeID1)
      *
-     * @return a new object
+     * @return a {@code SubShapeID} value
      */
     @Override
-    public SubShapeId getSubShapeId1() {
+    public int getSubShapeId1() {
         long manifoldVa = va();
-        long idVa = getSubShapeId1(manifoldVa);
-        SubShapeId result = new SubShapeId(idVa, true);
+        int result = getSubShapeId1(manifoldVa);
 
         return result;
     }
 
     /**
-     * Copy the ID of the 2nd subshape that formed the manifold. The manifold is
-     * unaffected. (native attribute: mSubShapeID2)
+     * Return the ID of the 2nd sub-shape that formed the manifold. The manifold
+     * is unaffected. (native attribute: mSubShapeID2)
      *
-     * @return a new object
+     * @return a {@code SubShapeID} value
      */
     @Override
-    public SubShapeId getSubShapeId2() {
+    public int getSubShapeId2() {
         long manifoldVa = va();
-        long idVa = getSubShapeId2(manifoldVa);
-        SubShapeId result = new SubShapeId(idVa, true);
+        int result = getSubShapeId2(manifoldVa);
 
         return result;
     }
@@ -135,9 +133,9 @@ final public class ContactManifold
 
     native private static float getPenetrationDepth(long manifoldVa);
 
-    native private static long getSubShapeId1(long manifoldVa);
+    native private static int getSubShapeId1(long manifoldVa);
 
-    native private static long getSubShapeId2(long manifoldVa);
+    native private static int getSubShapeId2(long manifoldVa);
 
     native private static float getWorldSpaceNormalX(long manifoldVa);
 

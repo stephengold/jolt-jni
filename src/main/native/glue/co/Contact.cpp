@@ -267,15 +267,14 @@ JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Contact_getPositio
 /*
  * Class:     com_github_stephengold_joltjni_Contact
  * Method:    getSubShapeIdB
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Contact_getSubShapeIdB
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Contact_getSubShapeIdB
   (JNIEnv *, jclass, jlong contactVa) {
     const CharacterVirtual::Contact * const pContact
             = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    SubShapeID * const pResult = new SubShapeID(pContact->mSubShapeIDB);
-    TRACE_NEW("SubShapeID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const SubShapeID result = pContact->mSubShapeIDB;
+    return result.GetValue();
 }
 
 /*

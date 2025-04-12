@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -227,10 +227,10 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Test the 'GetHeight' function and draw a marker on the surface
 	Vec3 test_pos =plus(new Vec3(inParams.mCameraState.mPos) , star(10.0f , inParams.mCameraState.mForward)), surface_pos=new Vec3();
-	SubShapeId sub_shape_id=new SubShapeId();
+	int[] sub_shape_id={cEmptySubShapeId};
 	if (mHeightField.projectOntoSurface(test_pos, surface_pos, sub_shape_id))
 	{
-		Vec3 surface_normal = mHeightField.getSurfaceNormal(sub_shape_id, surface_pos);
+		Vec3 surface_normal = mHeightField.getSurfaceNormal(sub_shape_id[0], surface_pos);
 		DrawMarkerSP(mDebugRenderer, surface_pos, Color.sWhite, 1.0f);
 		DrawArrowSP(mDebugRenderer, surface_pos, plus(surface_pos , surface_normal), Color.sRed, 0.1f);
 	}

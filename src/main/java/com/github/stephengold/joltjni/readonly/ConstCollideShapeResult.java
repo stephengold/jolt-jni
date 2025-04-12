@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
@@ -77,15 +76,15 @@ public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
      * Identify the face on shape 1 where the collision occurred. The object is
      * unaffected.
      *
-     * @return a new object
+     * @return a {@code SubShapeID} value
      */
-    SubShapeId getSubShapeId1();
+    int getSubShapeId1();
 
     /**
      * Identify the face on shape 2 where the collision occurred. The object is
      * unaffected.
      *
-     * @return a new object
+     * @return a {@code SubShapeID} value
      */
-    SubShapeId getSubShapeId2();
+    int getSubShapeId2();
 }

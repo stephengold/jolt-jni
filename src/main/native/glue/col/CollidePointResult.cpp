@@ -46,13 +46,12 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CollidePointResult_ge
 /*
  * Class:     com_github_stephengold_joltjni_CollidePointResult
  * Method:    getSubShapeId2
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollidePointResult_getSubShapeId2
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CollidePointResult_getSubShapeId2
   (JNIEnv *, jclass, jlong pointResultVa) {
     const CollidePointResult * const pPointResult
             = reinterpret_cast<CollidePointResult *> (pointResultVa);
-    SubShapeID * const pResult = new SubShapeID(pPointResult->mSubShapeID2);
-    TRACE_NEW("SubShapeID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const SubShapeID result = pPointResult->mSubShapeID2;
+    return result.GetValue();
 }

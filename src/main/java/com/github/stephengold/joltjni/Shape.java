@@ -26,7 +26,6 @@ import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.readonly.ConstColor;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
-import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -268,20 +267,17 @@ abstract public class Shape extends NonCopyable
     /**
      * Access the leaf shape for the specified sub-shape ID.
      *
-     * @param id an ID that indicates the path to the desired leaf shape (not
-     * null, unaffected)
-     * @param storeRemainder storage for the remainder of the ID after removing
-     * the path to the leaf shape (not null, modified)
+     * @param subShapeId a sub-shape ID that specifies the path to the desired
+     * leaf shape
+     * @param storeRemainderId storage for the remainder of the sub-shape ID
+     * after removing the path to the leaf shape (not null, modified)
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null} if the ID is invalid
      */
     @Override
-    public ConstShape getLeafShape(
-            ConstSubShapeId id, SubShapeId storeRemainder) {
+    public ConstShape getLeafShape(int subShapeId, int[] storeRemainderId) {
         long currentVa = va();
-        long idVa = id.targetVa();
-        long remainderVa = storeRemainder.va();
-        long leafVa = getLeafShape(currentVa, idVa, remainderVa);
+        long leafVa = getLeafShape(currentVa, subShapeId, storeRemainderId);
         ConstShape result = Shape.newShape(leafVa);
 
         return result;
@@ -319,14 +315,13 @@ abstract public class Shape extends NonCopyable
     /**
      * Access the material of the specified sub-shape. The shape is unaffected.
      *
-     * @param id which sub-shape (not null, unaffected)
+     * @param subShapeId which sub-shape
      * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
-    public ConstPhysicsMaterial getMaterial(ConstSubShapeId id) {
+    public ConstPhysicsMaterial getMaterial(int subShapeId) {
         long shapeVa = va();
-        long idVa = id.targetVa();
-        long materialVa = getMaterial(shapeVa, idVa);
+        long materialVa = getMaterial(shapeVa, subShapeId);
         ConstPhysicsMaterial result = new PhysicsMaterial(this, materialVa);
 
         return result;
@@ -585,13 +580,13 @@ abstract public class Shape extends NonCopyable
     native static float getInnerRadius(long shapeVa);
 
     native static long getLeafShape(
-            long currentVa, long idVa, long remainderVa);
+            long currentVa, int subShapeId, int[] storeRemainderId);
 
     native static long getLocalBounds(long shapeVa);
 
     native static long getMassProperties(long shapeVa);
 
-    native static long getMaterial(long shapeVa, long idVa);
+    native static long getMaterial(long shapeVa, int subShapeId);
 
     native private static int getRefCount(long shapeVa);
 

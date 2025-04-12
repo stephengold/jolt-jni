@@ -376,13 +376,12 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Identify the face on the supporting surface where contact is occurring.
      * The character is unaffected.
      *
-     * @return a new object
+     * @return a {@code SubShapeId} value
      */
     @Override
-    public SubShapeId getGroundSubShapeId() {
+    public int getGroundSubShapeId() {
         long characterVa = targetVa();
-        long idVa = CharacterBase.getGroundSubShapeId(characterVa);
-        SubShapeId result = new SubShapeId(idVa, true);
+        int result = CharacterBase.getGroundSubShapeId(characterVa);
 
         return result;
     }

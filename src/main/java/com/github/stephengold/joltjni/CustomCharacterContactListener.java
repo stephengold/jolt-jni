@@ -64,8 +64,7 @@ public class CustomCharacterContactListener
      * being solved (not zero)
      * @param otherCharacterVa the virtual address of the other
      * {@code CharacterVirtual} (not zero)
-     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is in contact (not zero)
+     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
      * @param contactLocationX the X component of the contact location (in
      * system coordinates)
      * @param contactLocationY the Y component of the contact location (in
@@ -83,7 +82,7 @@ public class CustomCharacterContactListener
      */
     @Override
     public void onCharacterContactAdded(long characterVa, long otherCharacterVa,
-            long subShapeId2Va, double contactLocationX,
+            int subShapeId2, double contactLocationX,
             double contactLocationY, double contactLocationZ,
             float contactNormalX, float contactNormalY, float contactNormalZ,
             long settingsVa) {
@@ -97,8 +96,7 @@ public class CustomCharacterContactListener
      * being solved (not zero)
      * @param otherCharacterVa the virtual address of the other
      * {@code CharacterVirtual} (not zero)
-     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is in contact (not zero)
+     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
      * @param contactLocationX the X component of the contact location (in
      * system coordinates)
      * @param contactLocationY the Y component of the contact location (in
@@ -116,7 +114,7 @@ public class CustomCharacterContactListener
      */
     @Override
     public void onCharacterContactPersisted(long characterVa,
-            long otherCharacterVa, long subShapeId2Va, double contactLocationX,
+            long otherCharacterVa, int subShapeId2, double contactLocationX,
             double contactLocationY, double contactLocationZ,
             float contactNormalX, float contactNormalY, float contactNormalZ,
             long settingsVa) {
@@ -129,12 +127,11 @@ public class CustomCharacterContactListener
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
      * @param otherCharacterId the other character's ID
-     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is in contact (not zero)
+     * @param subShapeId2 the {@code SubShapeId} of the shape that is in contact
      */
     @Override
     public void onCharacterContactRemoved(
-            long characterVa, int otherCharacterId, long subShapeId2Va) {
+            long characterVa, int otherCharacterId, int subShapeId2) {
     }
 
     /**
@@ -145,8 +142,7 @@ public class CustomCharacterContactListener
      * being solved (not zero)
      * @param otherCharacterVa the virtual address of the other
      * {@code CharacterVirtual} (not zero)
-     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is in contact (not zero)
+     * @param subShapeId2 the {@code SubShapeId} of the shape that is in contact
      * @param contactLocationX the X component of the contact location (in
      * system coordinates)
      * @param contactLocationY the Y component of the contact location (in
@@ -178,7 +174,7 @@ public class CustomCharacterContactListener
      */
     @Override
     public void onCharacterContactSolve(long characterVa, long otherCharacterVa,
-            long subShapeId2Va, double contactLocationX,
+            int subShapeId2, double contactLocationX,
             double contactLocationY, double contactLocationZ,
             float contactNormalX, float contactNormalY, float contactNormalZ,
             float contactVelocityX, float contactVelocityY,
@@ -195,13 +191,12 @@ public class CustomCharacterContactListener
      * being solved (not zero)
      * @param otherCharacterVa the virtual address of the other
      * {@code CharacterVirtual} (not zero)
-     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is in contact (not zero)
+     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
      * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     @Override
     public boolean onCharacterContactValidate(
-            long characterVa, long otherCharacterVa, long subShapeId2Va) {
+            long characterVa, long otherCharacterVa, int subShapeId2) {
         return true;
     }
 
@@ -212,8 +207,7 @@ public class CustomCharacterContactListener
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
      * @param bodyId2 the ID of the body being solved
-     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is in contact (not zero)
+     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
      * @param contactLocationX the X component of the contact location (in
      * system coordinates)
      * @param contactLocationY the Y component of the contact location (in
@@ -231,7 +225,7 @@ public class CustomCharacterContactListener
      */
     @Override
     public void onContactAdded(long characterVa, int bodyId2,
-            long subShapeId2Va, double contactLocationX,
+            int subShapeId2, double contactLocationX,
             double contactLocationY, double contactLocationZ,
             float contactNormalX, float contactNormalY, float contactNormalZ,
             long settingsVa) {
@@ -244,8 +238,7 @@ public class CustomCharacterContactListener
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
      * @param bodyId2 the ID of the body being solved
-     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is in contact (not zero)
+     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
      * @param contactLocationX the X component of the contact location (in
      * system coordinates)
      * @param contactLocationY the Y component of the contact location (in
@@ -263,7 +256,7 @@ public class CustomCharacterContactListener
      */
     @Override
     public void onContactPersisted(long characterVa, int bodyId2,
-            long subShapeId2Va, double contactLocationX,
+            int subShapeId2, double contactLocationX,
             double contactLocationY, double contactLocationZ,
             float contactNormalX, float contactNormalY, float contactNormalZ,
             long settingsVa) {
@@ -276,12 +269,11 @@ public class CustomCharacterContactListener
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
      * @param bodyId2 the ID of the body being solved
-     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is in contact (not zero)
+     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
      */
     @Override
     public void onContactRemoved(
-            long characterVa, int bodyId2, long subShapeId2Va) {
+            long characterVa, int bodyId2, int subShapeId2) {
     }
 
     /**
@@ -291,8 +283,7 @@ public class CustomCharacterContactListener
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
      * @param bodyId2 the ID of the body being solved
-     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is in contact (not zero)
+     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
      * @param contactLocationX the X component of the contact location (in
      * system coordinates)
      * @param contactLocationY the Y component of the contact location (in
@@ -324,7 +315,7 @@ public class CustomCharacterContactListener
      */
     @Override
     public void onContactSolve(long characterVa, int bodyId2,
-            long subShapeId2Va, double contactLocationX,
+            int subShapeId2, double contactLocationX,
             double contactLocationY, double contactLocationZ,
             float contactNormalX, float contactNormalY, float contactNormalZ,
             float contactVelocityX, float contactVelocityY,
@@ -340,13 +331,13 @@ public class CustomCharacterContactListener
      * @param characterVa the virtual address of the {@code CharacterVirtual}
      * being solved (not zero)
      * @param bodyId2 the ID of the body being solved
-     * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
-     * of the shape that is in contact (not zero)
+     * @param subShapeId2 the {@code SubShapeID} of the shape that is in contact
+     * (not zero)
      * @return {@code true} if the contact is valid, otherwise {@code false}
      */
     @Override
     public boolean onContactValidate(
-            long characterVa, int bodyId2, long subShapeId2Va) {
+            long characterVa, int bodyId2, int subShapeId2) {
         return true;
     }
     // *************************************************************************

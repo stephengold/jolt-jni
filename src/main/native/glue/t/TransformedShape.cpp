@@ -335,19 +335,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getS
 /*
  * Class:     com_github_stephengold_joltjni_TransformedShape
  * Method:    getSupportingFace
- * Signature: (JJFFFDDDJ)V
+ * Signature: (JIFFFDDDJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getSupportingFace
-  (JNIEnv *, jclass, jlong shapeVa, jlong idVa, jfloat dx, jfloat dy, jfloat dz,
-  jdouble xx, jdouble yy, jdouble zz, jlong faceVa) {
+  (JNIEnv *, jclass, jlong shapeVa, jint subShapeId, jfloat dx, jfloat dy,
+  jfloat dz, jdouble xx, jdouble yy, jdouble zz, jlong faceVa) {
     const TransformedShape * const pShape
             = reinterpret_cast<TransformedShape *> (shapeVa);
-    const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
+    SubShapeID id;
+    id.SetValue(subShapeId);
     const Vec3 direction(dx, dy, dz);
     const RVec3 base(xx, yy, zz);
     Shape::SupportingFace * const pFace
             = reinterpret_cast<Shape::SupportingFace *> (faceVa);
-    pShape->GetSupportingFace(*pId, direction, base, *pFace);
+    pShape->GetSupportingFace(id, direction, base, *pFace);
 }
 
 /*

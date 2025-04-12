@@ -72,29 +72,25 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdPair_getHa
 /*
  * Class:     com_github_stephengold_joltjni_SubShapeIdPair
  * Method:    getSubShapeId1
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdPair_getSubShapeId1
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SubShapeIdPair_getSubShapeId1
   (JNIEnv *, jclass, jlong pairVa) {
     const SubShapeIDPair * const pPair
             = reinterpret_cast<SubShapeIDPair *> (pairVa);
-    SubShapeID * const pResult = new SubShapeID();
-    TRACE_NEW("SubShapeID", pResult)
-    *pResult = pPair->GetSubShapeID1();
-    return reinterpret_cast<jlong> (pResult);
+    const SubShapeID result = pPair->GetSubShapeID1();
+    return result.GetValue();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SubShapeIdPair
  * Method:    getSubShapeId2
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdPair_getSubShapeId2
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SubShapeIdPair_getSubShapeId2
   (JNIEnv *, jclass, jlong pairVa) {
     const SubShapeIDPair * const pPair
             = reinterpret_cast<SubShapeIDPair *> (pairVa);
-    SubShapeID * const pResult = new SubShapeID();
-    TRACE_NEW("SubShapeID", pResult)
-    *pResult = pPair->GetSubShapeID2();
-    return reinterpret_cast<jlong> (pResult);
+    const SubShapeID result = pPair->GetSubShapeID2();
+    return result.GetValue();
 }

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -98,12 +98,12 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	if (lock.succeededAndIsInBroadPhase())
 	{
 		// Get the leaf shape (mesh shape in this case)
-		SubShapeId remainder=new SubShapeId();
+		int[] remainder={cEmptySubShapeId};
 		ConstShape shape = lock.getBody().getShape().getLeafShape(hit.getSubShapeId2(), remainder);
 		if (shape.getType() == EShapeType.Mesh)
 		{
 			// Get user data from the triangle that was hit
-			int user_data = ((MeshShape)shape).getTriangleUserData(remainder);
+			int user_data = ((MeshShape)shape).getTriangleUserData(remainder[0]);
 
 			// Draw it on screen
 			RVec3 hit_pos = ray.getPointOnRay(hit.getFraction());

@@ -89,31 +89,29 @@ final public class SubShapeIdPair
     }
 
     /**
-     * Copy the ID of the first subshape. The pair is unaffected. (native
+     * Return the ID of the first sub-shape. The pair is unaffected. (native
      * method: GetSubShapeID1)
      *
-     * @return a new object
+     * @return a {@code SubShapeID} value
      */
     @Override
-    public SubShapeId getSubShapeId1() {
+    public int getSubShapeId1() {
         long pairVa = va();
-        long bodyIdVa = getSubShapeId1(pairVa);
-        SubShapeId result = new SubShapeId(bodyIdVa, true);
+        int result = getSubShapeId1(pairVa);
 
         return result;
     }
 
     /**
-     * Copy the ID of the 2nd subshape. The pair is unaffected. (native method:
-     * GetSubShapeID2)
+     * Return the ID of the 2nd sub-shape. The pair is unaffected. (native
+     * method: GetSubShapeID2)
      *
-     * @return a new object
+     * @return a {@code SubShapeID} value
      */
     @Override
-    public SubShapeId getSubShapeId2() {
+    public int getSubShapeId2() {
         long pairVa = va();
-        long bodyIdVa = getSubShapeId2(pairVa);
-        SubShapeId result = new SubShapeId(bodyIdVa, true);
+        int result = getSubShapeId2(pairVa);
 
         return result;
     }
@@ -126,7 +124,7 @@ final public class SubShapeIdPair
 
     native private static long getHash(long pairVa);
 
-    native private static long getSubShapeId1(long pairVa);
+    native private static int getSubShapeId1(long pairVa);
 
-    native private static long getSubShapeId2(long pairVa);
+    native private static int getSubShapeId2(long pairVa);
 }

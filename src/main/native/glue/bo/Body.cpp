@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Body/Body.h"
 #include "Jolt/Physics/Body/BodyCreationSettings.h"
+#include "Jolt/Physics/Collision/Shape/SubShapeID.h"
 #include "Jolt/Physics/SoftBody/SoftBodyCreationSettings.h"
 
 #include "auto/com_github_stephengold_joltjni_Body.h"
@@ -700,13 +701,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getWorldSpaceBo
 /*
  * Class:     com_github_stephengold_joltjni_Body
  * Method:    getWorldSpaceSurfaceNormal
- * Signature: (JJDDDLjava/nio/FloatBuffer;)V
+ * Signature: (JIDDDLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_getWorldSpaceSurfaceNormal
-  (JNIEnv *pEnv, jclass, jlong bodyVa, jlong idVa, jdouble xx, jdouble yy,
+  (JNIEnv *pEnv, jclass, jlong bodyVa, jint subShapeId, jdouble xx, jdouble yy,
   jdouble zz, jobject storeFloats) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
-    const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
+    SubShapeID id;
+    id.SetValue(subShapeId);
     const RVec3 location(xx, yy, zz);
     jfloat * const pFloats
             = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
@@ -714,7 +716,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_getWorldSpaceSur
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
     JPH_ASSERT(!pEnv->ExceptionCheck());
     JPH_ASSERT(capacityFloats >= 3);
-    const Vec3 result = pBody->GetWorldSpaceSurfaceNormal(*pId, location);
+    const Vec3 result = pBody->GetWorldSpaceSurfaceNormal(id, location);
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();

@@ -22,7 +22,6 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.RVec3;
-import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
@@ -52,20 +51,20 @@ public interface ConstContactManifold extends ConstJoltPhysicsObject {
     float getPenetrationDepth();
 
     /**
-     * Copy the ID of the first subshape that formed the manifold. The manifold
-     * is unaffected.
+     * Return the ID of the first sub-shape that formed the manifold. The
+     * manifold is unaffected.
      *
-     * @return a new object
+     * @return a {@code SubShapeID} value
      */
-    SubShapeId getSubShapeId1();
+    int getSubShapeId1();
 
     /**
-     * Copy the ID of the 2nd subshape that formed the manifold. The manifold is
-     * unaffected.
+     * Return the ID of the 2nd sub-shape that formed the manifold. The manifold
+     * is unaffected.
      *
-     * @return a new object
+     * @return a {@code SubShapeID} value
      */
-    SubShapeId getSubShapeId2();
+    int getSubShapeId2();
 
     /**
      * Copy the normal: the direction to move body 2 out of collision. The

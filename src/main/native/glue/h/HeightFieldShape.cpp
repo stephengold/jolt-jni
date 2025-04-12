@@ -25,6 +25,8 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/Shape/HeightFieldShape.h"
+#include "Jolt/Physics/Collision/Shape/SubShapeID.h"
+
 #include "auto/com_github_stephengold_joltjni_HeightFieldShape.h"
 
 using namespace JPH;
@@ -84,16 +86,17 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_ge
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShape
  * Method:    getSurfaceNormal
- * Signature: (JJFFF[F)V
+ * Signature: (JIFFF[F)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_getSurfaceNormal
-  (JNIEnv *pEnv, jclass, jlong shapeVa, jlong idVa, jfloat x, jfloat y, jfloat z,
-  jfloatArray storeFloats) {
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jint subShapeId,
+  jfloat x, jfloat y, jfloat z, jfloatArray storeFloats) {
     const HeightFieldShape * const pShape
             = reinterpret_cast<HeightFieldShape *> (shapeVa);
-    const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
+    SubShapeID id;
+    id.SetValue(subShapeId);
     const Vec3 localLocation(x, y, z);
-    const Vec3 result = pShape->GetSurfaceNormal(*pId, localLocation);
+    const Vec3 result = pShape->GetSurfaceNormal(id, localLocation);
     jboolean isCopy;
     jfloat * const pStoreFloats
             = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
@@ -119,18 +122,22 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShape
  * Method:    projectOntoSurface
- * Signature: (JFFF[FJ)Z
+ * Signature: (JFFF[F[I)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_projectOntoSurface
   (JNIEnv *pEnv, jclass, jlong shapeVa, jfloat x, jfloat y, jfloat z,
-  jfloatArray storeFloats, jlong idVa) {
+  jfloatArray storeFloats, jintArray storeSubShapeId) {
     const HeightFieldShape * const pShape
             = reinterpret_cast<HeightFieldShape *> (shapeVa);
     const Vec3 localLocation(x, y, z);
-    SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
     Vec3 outLocation;
-    const bool result = pShape->ProjectOntoSurface(localLocation, outLocation, *pId);
+    SubShapeID subShapeId;
+    const bool result = pShape->ProjectOntoSurface(
+            localLocation, outLocation, subShapeId);
     jboolean isCopy;
+    jint * const pStoreId = pEnv->GetIntArrayElements(storeSubShapeId, &isCopy);
+    pStoreId[0] = subShapeId.GetValue();
+    pEnv->ReleaseIntArrayElements(storeSubShapeId, pStoreId, 0);
     jfloat * const pStoreFloats
             = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
     pStoreFloats[0] = outLocation.GetX();

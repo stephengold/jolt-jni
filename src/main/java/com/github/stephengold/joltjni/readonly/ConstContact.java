@@ -22,7 +22,6 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.RVec3;
-import com.github.stephengold.joltjni.SubShapeId;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 
@@ -122,9 +121,9 @@ public interface ConstContact extends ConstJoltPhysicsObject {
     /**
      * Return the sub-shape ID of the colliding body. The contact is unaffected.
      *
-     * @return a new object, or {@code null} if no colliding body
+     * @return a {@code SubShapeID} value
      */
-    SubShapeId getSubShapeIdB();
+    int getSubShapeIdB();
 
     /**
      * Copy the surface normal of the contact. The contact is unaffected.

@@ -74,12 +74,11 @@ public class CollidePointResult extends JoltPhysicsObject {
      * Identify the sub-shape on the shape that was hit. The result object is
      * unaffected. (native attribute: mSubShapeID2)
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a {@code SubShapeID} value
      */
-    public SubShapeId getSubShapeId2() {
+    public int getSubShapeId2() {
         long pointResultVa = va();
-        long idVa = getSubShapeId2(pointResultVa);
-        SubShapeId result = new SubShapeId(idVa, true);
+        int result = getSubShapeId2(pointResultVa);
 
         return result;
     }
@@ -88,5 +87,5 @@ public class CollidePointResult extends JoltPhysicsObject {
 
     native private static int getBodyId(long pointResultVa);
 
-    native private static long getSubShapeId2(long pointResultVa);
+    native private static int getSubShapeId2(long pointResultVa);
 }

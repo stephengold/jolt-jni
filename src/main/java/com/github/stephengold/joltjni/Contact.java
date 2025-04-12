@@ -224,19 +224,15 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     }
 
     /**
-     * Copy the subshape ID of the colliding body. The contact is unaffected.
+     * Return the sub-shape ID of the colliding body. The contact is unaffected.
      * (native attribute: mSubShapeIDB)
      *
-     * @return a new object, or {@code null} if no colliding body
+     * @return a {@code SubShapeID} value
      */
     @Override
-    public SubShapeId getSubShapeIdB() {
+    public int getSubShapeIdB() {
         long contactVa = va();
-        long idVa = getSubShapeIdB(contactVa);
-        SubShapeId result = null;
-        if (idVa != 0L) {
-            result = new SubShapeId(idVa, true);
-        }
+        int result = getSubShapeIdB(contactVa);
 
         return result;
     }
@@ -324,7 +320,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     native private static double getPositionZ(long contactVa);
 
-    native private static long getSubShapeIdB(long contactVa);
+    native private static int getSubShapeIdB(long contactVa);
 
     native private static float getSurfaceNormalX(long contactVa);
 

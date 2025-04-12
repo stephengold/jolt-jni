@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -85,29 +85,27 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ContactManifold_get
 /*
  * Class:     com_github_stephengold_joltjni_ContactManifold
  * Method:    getSubShapeId1
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getSubShapeId1
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getSubShapeId1
   (JNIEnv *, jclass, jlong manifoldVa) {
     const ContactManifold * const pManifold
             = reinterpret_cast<ContactManifold *> (manifoldVa);
-    const SubShapeID * const pResult = new SubShapeID(pManifold->mSubShapeID1);
-    TRACE_NEW("SubShapeID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const SubShapeID result = pManifold->mSubShapeID1;
+    return result.GetValue();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_ContactManifold
  * Method:    getSubShapeId2
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getSubShapeId2
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getSubShapeId2
   (JNIEnv *, jclass, jlong manifoldVa) {
     const ContactManifold * const pManifold
             = reinterpret_cast<ContactManifold *> (manifoldVa);
-    const SubShapeID * const pResult = new SubShapeID(pManifold->mSubShapeID2);
-    TRACE_NEW("SubShapeID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const SubShapeID result = pManifold->mSubShapeID2;
+    return result.GetValue();
 }
 
 /*

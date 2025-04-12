@@ -163,16 +163,14 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGrou
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBase
  * Method:    getGroundSubShapeId
- * Signature: (J)J
+ * Signature: (J)I
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundSubShapeId
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundSubShapeId
   (JNIEnv *, jclass, jlong characterVa) {
     const CharacterBase * const pCharacter
             = reinterpret_cast<CharacterBase *> (characterVa);
-    const SubShapeID id = pCharacter->GetGroundSubShapeID();
-    SubShapeID * const pResult = new SubShapeID(id);
-    TRACE_NEW("SubShapeID", pResult)
-    return reinterpret_cast<jlong> (pResult);
+    const SubShapeID result = pCharacter->GetGroundSubShapeID();
+    return result.GetValue();
 }
 
 /*

@@ -170,13 +170,12 @@ public class CollideShapeResult
      * Identify the face on shape 1 where the collision occurred. The result is
      * unaffected. (native attribute: mSubShapeID1)
      *
-     * @return a new object
+     * @return a {@code SubShapeId} value
      */
     @Override
-    public SubShapeId getSubShapeId1() {
+    public int getSubShapeId1() {
         long shapeResultVa = va();
-        long idVa = getSubShapeId1(shapeResultVa);
-        SubShapeId result = new SubShapeId(idVa, true);
+        int result = getSubShapeId1(shapeResultVa);
 
         return result;
     }
@@ -185,13 +184,12 @@ public class CollideShapeResult
      * Identify the sub-shape on shape 2 where the collision occurred. The
      * object is unaffected. (native attribute: mSubShapeID2)
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a {@code SubShapeId} value
      */
     @Override
-    public SubShapeId getSubShapeId2() {
+    public int getSubShapeId2() {
         long shapeResultVa = va();
-        long idVa = getSubShapeId2(shapeResultVa);
-        SubShapeId result = new SubShapeId(idVa, true);
+        int result = getSubShapeId2(shapeResultVa);
 
         return result;
     }
@@ -224,7 +222,7 @@ public class CollideShapeResult
 
     native private static long getShape2Face(long shapeResultVa);
 
-    native private static long getSubShapeId1(long shapeResultVa);
+    native private static int getSubShapeId1(long shapeResultVa);
 
-    native private static long getSubShapeId2(long shapeResultVa);
+    native private static int getSubShapeId2(long shapeResultVa);
 }

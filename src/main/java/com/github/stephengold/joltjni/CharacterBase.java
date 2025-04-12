@@ -196,13 +196,12 @@ abstract public class CharacterBase
      * Identify the face on the supporting surface where contact is occurring.
      * The character is unaffected.
      *
-     * @return a new object
+     * @return a {@code SubShapeId} value
      */
     @Override
-    public SubShapeId getGroundSubShapeId() {
+    public int getGroundSubShapeId() {
         long characterVa = va();
-        long idVa = getGroundSubShapeId(characterVa);
-        SubShapeId result = new SubShapeId(idVa, true);
+        int result = getGroundSubShapeId(characterVa);
 
         return result;
     }
@@ -360,7 +359,7 @@ abstract public class CharacterBase
 
     native static int getGroundState(long characterVa);
 
-    native static long getGroundSubShapeId(long characterVa);
+    native static int getGroundSubShapeId(long characterVa);
 
     native static long getGroundUserData(long characterVa);
 

@@ -23,7 +23,6 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstShape;
-import com.github.stephengold.joltjni.readonly.ConstSubShapeId;
 import com.github.stephengold.joltjni.readonly.ConstTransformedShape;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -331,10 +330,9 @@ public class TransformedShape
      * @param storeFace storage for face vertices (not null)
      */
     @Override
-    public void getSupportingFace(ConstSubShapeId subShapeId, Vec3Arg direction,
+    public void getSupportingFace(int subShapeId, Vec3Arg direction,
             RVec3Arg base, SupportingFace storeFace) {
         long shapeVa = va();
-        long idVa = subShapeId.targetVa();
         float dx = direction.getX();
         float dy = direction.getY();
         float dz = direction.getZ();
@@ -342,7 +340,7 @@ public class TransformedShape
         double yy = base.yy();
         double zz = base.zz();
         long faceVa = storeFace.va();
-        getSupportingFace(shapeVa, idVa, dx, dy, dz, xx, yy, zz, faceVa);
+        getSupportingFace(shapeVa, subShapeId, dx, dy, dz, xx, yy, zz, faceVa);
     }
 
     /**
@@ -448,8 +446,8 @@ public class TransformedShape
             long transformedShapeVa, FloatBuffer storeFloats);
 
     native private static void getSupportingFace(
-            long shapeVa, long idVa, float dx, float dy, float dz, double xx,
-            double yy, double zz, long faceVa);
+            long shapeVa, int subShapeId, float dx, float dy, float dz,
+            double xx, double yy, double zz, long faceVa);
 
     native private static int getTrianglesNext(long shapeVa, long contextVa,
             int maxTriangles, FloatBuffer storeVertices);

@@ -211,14 +211,21 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getInnerRadiu
 /*
  * Class:     com_github_stephengold_joltjni_Shape
  * Method:    getLeafShape
- * Signature: (JJJ)J
+ * Signature: (JI[I)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getLeafShape
-  (JNIEnv *, jclass, jlong currentVa, jlong idVa, jlong remainderVa) {
+  (JNIEnv *pEnv, jclass, jlong currentVa, jint subShapeId,
+  jintArray storeRemainderId) {
     const Shape * const pCurrent = reinterpret_cast<Shape *> (currentVa);
-    const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
-    SubShapeID * const pRemainder = reinterpret_cast<SubShapeID *> (remainderVa);
-    const Shape * const pResult = pCurrent->GetLeafShape(*pId, *pRemainder);
+    SubShapeID id;
+    id.SetValue(subShapeId);
+    SubShapeID remainder;
+    const Shape * const pResult = pCurrent->GetLeafShape(id, remainder);
+    jboolean isCopy;
+    jint * const pStoreRemainder
+            = pEnv->GetIntArrayElements(storeRemainderId, &isCopy);
+    pStoreRemainder[0] = remainder.GetValue();
+    pEnv->ReleaseIntArrayElements(storeRemainderId, pStoreRemainder, 0);
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -253,13 +260,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getMassPropert
 /*
  * Class:     com_github_stephengold_joltjni_Shape
  * Method:    getMaterial
- * Signature: (JJ)J
+ * Signature: (JI)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_getMaterial
-  (JNIEnv *, jclass, jlong shapeVa, jlong idVa) {
+  (JNIEnv *, jclass, jlong shapeVa, jint subShapeId) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    const SubShapeID * const pId = reinterpret_cast<SubShapeID *> (idVa);
-    const PhysicsMaterial * const pResult = pShape->GetMaterial(*pId);
+    SubShapeID id;
+    id.SetValue(subShapeId);
+    const PhysicsMaterial * const pResult = pShape->GetMaterial(id);
     return reinterpret_cast<jlong> (pResult);
 }
 
