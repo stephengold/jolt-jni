@@ -514,9 +514,9 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_removeA
     BodyIDVector vector;
     pSystem->GetBodies(vector);
     BodyInterface& bi = pSystem->GetBodyInterface();
-    const int numBodies = vector.size();
+    const size_t numBodies = vector.size();
     jint result = 0;
-    for (int i = 0; i < numBodies; ++i) {
+    for (size_t i = 0; i < numBodies; ++i) {
         const BodyID id = vector[i];
         if (bi.IsAdded(id)) {
             bi.RemoveBody(id);
@@ -536,8 +536,8 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_removeA
     PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     const Array<Ref<Constraint>>& refArray = pSystem->GetConstraints();
-    const int numConstraints = refArray.size();
-    for (int i = 0; i < numConstraints; ++i) {
+    const size_t numConstraints = refArray.size();
+    for (size_t i = 0; i < numConstraints; ++i) {
         Constraint * pConstraint = refArray[i].GetPtr();
         pSystem->RemoveConstraint(pConstraint);
     }

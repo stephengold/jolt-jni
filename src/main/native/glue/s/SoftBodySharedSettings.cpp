@@ -362,7 +362,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
     const Array<SoftBodySharedSettings::Edge>& edges
             = pSettings->mEdgeConstraints;
     const size_t numEdges = edges.size();
-    for (int i = 0; i < numEdges && bufferPosition + 1 < capacityInts; ++i) {
+    for (size_t i = 0; i < numEdges && bufferPosition + 1 < capacityInts; ++i) {
         const SoftBodySharedSettings::Edge &edge = edges[i];
         pStoreInts[bufferPosition++] = edge.mVertex[0];
         pStoreInts[bufferPosition++] = edge.mVertex[1];
@@ -387,7 +387,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     const Array<SoftBodySharedSettings::Face>& faces = pSettings->mFaces;
     const size_t numFaces = faces.size();
-    for (int i = 0; i < numFaces && bufferPosition + 2 < capacityInts; ++i) {
+    for (size_t i = 0; i < numFaces && bufferPosition + 2 < capacityInts; ++i) {
         const SoftBodySharedSettings::Face &face = faces[i];
         pStoreInts[bufferPosition++] = face.mVertex[0];
         pStoreInts[bufferPosition++] = face.mVertex[1];

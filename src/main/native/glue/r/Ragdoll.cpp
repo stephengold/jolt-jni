@@ -113,7 +113,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getBodyIds
     jint * const pIds = pEnv->GetIntArrayElements(storeIds, &isCopy);
     const Array<BodyID> idArray = pRagdoll->GetBodyIDs();
     const size_t numBodies = idArray.size();
-    for (int i = 0; i < numBodies && i < arrayLength; ++i) {
+    for (size_t i = 0; i < numBodies && i < arrayLength; ++i) {
         const BodyID& id = idArray[i];
         pIds[i] = id.GetIndexAndSequenceNumber();
     }

@@ -94,7 +94,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_coun
             = reinterpret_cast<CharacterVirtual *> (characterVa);
     const CharacterVirtual::ContactList &contacts
             = pCharacter->GetActiveContacts();
-    const int result = contacts.size();
+    const size_t result = contacts.size();
     return result;
 }
 
