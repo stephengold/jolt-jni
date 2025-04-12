@@ -113,7 +113,7 @@ public class SoftBodyVertex
     }
 
     /**
-     * Alter the location of the vertex. (native attribute: mPosition)
+     * Relocate the vertex. (native attribute: mPosition)
      *
      * @param location the desired location (not null, unaffected)
      */

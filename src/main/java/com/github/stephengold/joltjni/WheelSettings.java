@@ -79,7 +79,7 @@ abstract public class WheelSettings
     }
 
     /**
-     * Alter the location of the attachment point. (native attribute: mPosition)
+     * Relocate the attachment point. (native attribute: mPosition)
      *
      * @param position the location of the attachment point (in the body's local
      * coordinates, not null, unaffected, default=(0,0,0))

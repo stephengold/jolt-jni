@@ -36,9 +36,9 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * Callback invoked (by native code) to adjust the velocity of the specified
      * body as seen by the specified character.
      *
-     * @param characterVa the virtual address of the
-     * {@code ConstCharacterVirtual} (not zero)
-     * @param body2Va the virtual address of the {@code ConstBody} (not zero)
+     * @param characterVa the virtual address of the {@code CharacterVirtual}
+     * (not zero)
+     * @param body2Va the virtual address of the {@code Body} (not zero)
      * @param velocities the components of the linear and angular velocities
      * (length&ge;6, may be modified)
      */
@@ -48,10 +48,10 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
     /**
      * Callback invoked (by native code) whenever 2 characters collide.
      *
-     * @param characterVa the virtual address of the
-     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param characterVa the virtual address of the {@code CharacterVirtual}
+     * being solved (not zero)
      * @param otherCharacterVa the virtual address of the other
-     * {@code ConstCharacterVirtual} (not zero)
+     * {@code CharacterVirtual} (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      * @param contactLocationX the X component of the contact location (in
@@ -79,10 +79,10 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * Callback invoked (by native code) whenever a contact between 2 characters
      * becomes persistent.
      *
-     * @param characterVa the virtual address of the
-     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param characterVa the virtual address of the {@code CharacterVirtual}
+     * being solved (not zero)
      * @param otherCharacterVa the virtual address of the other
-     * {@code ConstCharacterVirtual} (not zero)
+     * {@code CharacterVirtual} (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      * @param contactLocationX the X component of the contact location (in
@@ -110,9 +110,9 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * Callback invoked (by native code) whenever a contact between 2 characters
      * is destroyed.
      *
-     * @param characterVa the virtual address of the
-     * {@code ConstCharacterVirtual} being solved (not zero)
-     * @param otherCharacterId the virtual address of the other character's ID
+     * @param characterVa the virtual address of the {@code CharacterVirtual}
+     * being solved (not zero)
+     * @param otherCharacterId the other character's ID
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      */
@@ -123,10 +123,10 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * Callback invoked (by native code) whenever a character-versus-character
      * contact is being solved.
      *
-     * @param characterVa the virtual address of the
-     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param characterVa the virtual address of the {@code CharacterVirtual}
+     * being solved (not zero)
      * @param otherCharacterVa the virtual address of the other
-     * {@code ConstCharacterVirtual} (not zero)
+     * {@code CharacterVirtual} (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      * @param contactLocationX the X component of the contact location (in
@@ -147,8 +147,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * point (meters per second in system coordinates)
      * @param contactVelocityZ the Z component of the velocity of the contact
      * point (meters per second in system coordinates)
-     * @param materialVa the virtual address of the {@code ConstPhysicsMaterial}
-     * at the contact point (not zero)
+     * @param materialVa the virtual address of the {@code PhysicsMaterial} at
+     * the contact point (not zero)
      * @param characterVelocityX the X component of the character's prior
      * velocity (in system coordinates)
      * @param characterVelocityY the Y component of the character's prior
@@ -171,10 +171,10 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * Callback invoked (by native code) to test whether the specified
      * characters can collide.
      *
-     * @param characterVa the virtual address of the
-     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param characterVa the virtual address of the {@code CharacterVirtual}
+     * being solved (not zero)
      * @param otherCharacterVa the virtual address of the other
-     * {@code ConstCharacterVirtual} (not zero)
+     * {@code CharacterVirtual} (not zero)
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
      * @return {@code true} if the contact is valid, otherwise {@code false}
@@ -186,8 +186,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * Callback invoked (by native code) whenever a character collides with a
      * body.
      *
-     * @param characterVa the virtual address of the
-     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param characterVa the virtual address of the {@code CharacterVirtual}
+     * being solved (not zero)
      * @param bodyId2 the ID of the body being solved
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
@@ -215,8 +215,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * Callback invoked (by native code) whenever a contact between a character
      * and a body becomes persistent.
      *
-     * @param characterVa the virtual address of the
-     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param characterVa the virtual address of the {@code CharacterVirtual}
+     * being solved (not zero)
      * @param bodyId2 the ID of the body being solved
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
@@ -245,8 +245,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * Callback invoked (by native code) whenever a contact between a character
      * and a body is destroyed.
      *
-     * @param characterVa the virtual address of the
-     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param characterVa the virtual address of the {@code CharacterVirtual}
+     * being solved (not zero)
      * @param bodyId2 the ID of the body being solved
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
@@ -257,8 +257,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * Callback invoked (by native code) whenever a character-versus-body
      * contact is being solved.
      *
-     * @param characterVa the virtual address of the
-     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param characterVa the virtual address of the {@code CharacterVirtual}
+     * being solved (not zero)
      * @param bodyId2 the ID of the body being solved
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)
@@ -280,8 +280,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * point (meters per second in system coordinates)
      * @param contactVelocityZ the Z component of the velocity of the contact
      * point (meters per second in system coordinates)
-     * @param materialVa the virtual address of the {@code ConstPhysicsMaterial}
-     * at the contact point (not zero)
+     * @param materialVa the virtual address of the {@code PhysicsMaterial} at
+     * the contact point (not zero)
      * @param characterVelocityX the X component of the character's prior
      * velocity (meters per second in system coordinates)
      * @param characterVelocityY the Y component of the character's prior
@@ -303,8 +303,8 @@ public interface CharacterContactListener extends ConstJoltPhysicsObject {
      * Callback invoked (by native code) to test whether the specified character
      * can collide with the specified body.
      *
-     * @param characterVa the virtual address of the
-     * {@code ConstCharacterVirtual} being solved (not zero)
+     * @param characterVa the virtual address of the {@code CharacterVirtual}
+     * being solved (not zero)
      * @param bodyId2 the ID of the body being solved
      * @param subShapeId2Va the virtual address of the {@code ConstSubShapeId}
      * of the shape that is in contact (not zero)

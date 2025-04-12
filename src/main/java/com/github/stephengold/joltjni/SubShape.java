@@ -36,7 +36,7 @@ public class SubShape extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate a subshape with the specified native object assigned but not
+     * Instantiate a sub-shape with the specified native object assigned but not
      * owned.
      *
      * @param subshapeVa the virtual address of the native object to assign (not
@@ -50,7 +50,7 @@ public class SubShape extends JoltPhysicsObject {
 
     /**
      * Calculate the local transform for this shape, given the scale of the
-     * child. The subshape is unaffected.
+     * child. The sub-shape is unaffected.
      *
      * @param scale the scale of the child in the local space of this shape (not
      * null, unaffected)
@@ -68,7 +68,7 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the center-of-mass location. The subshape is unaffected. (native
+     * Copy the center-of-mass location. The sub-shape is unaffected. (native
      * function: GetPositionCOM)
      *
      * @return a new vector
@@ -84,7 +84,7 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Copy the rotation. The subshape is unaffected.
+     * Copy the rotation. The sub-shape is unaffected.
      *
      * @return a new rotation quaternion
      */
@@ -100,7 +100,7 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Access the child shape. The subshape is unaffected.
+     * Access the child shape. The sub-shape is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -112,8 +112,8 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Test whether the specified scale is valid for this subshape. The subshape
-     * is unaffected.
+     * Test whether the specified scale is valid for the sub-shape. The
+     * sub-shape is unaffected.
      *
      * @param scale the scale factors to validate (not null, unaffected)
      * @return {@code true} if valid, otherwise {@code false}
@@ -129,8 +129,7 @@ public class SubShape extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the center-of-mass location. (native
-     * function: SetPositionCOM)
+     * Alter the center-of-mass location. (native function: SetPositionCOM)
      *
      * @param location the desired location (not null, unaffected)
      */

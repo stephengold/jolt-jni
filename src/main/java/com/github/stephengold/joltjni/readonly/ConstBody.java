@@ -246,12 +246,12 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     ConstAaBox getWorldSpaceBounds();
 
     /**
-     * Copy the surface normal of a particular sub shape at the specified
-     * location.
+     * Copy the surface normal of the specified sub-shape at the specified
+     * location. The body is unaffected.
      *
      * @param subShapeId the ID of the subshape to use (not null, unaffected)
      * @param location the location to use (not null, unaffected)
-     * @return a new normal vector
+     * @return a new direction vector
      */
     Vec3 getWorldSpaceSurfaceNormal(
             ConstSubShapeId subShapeId, RVec3Arg location);

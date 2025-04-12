@@ -318,7 +318,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Re-locate and activate the character using the locking body interface.
+     * Relocate and activate the character using the locking body interface.
      *
      * @param location the desired location (in system coordinates, not null,
      * unaffected)
@@ -328,7 +328,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Re-locate the character, optionally activating it, using the locking body
+     * Relocate the character, optionally activating it, using the locking body
      * interface.
      *
      * @param location the desired location (in system coordinates, not null,
@@ -341,7 +341,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Re-locate the character, optionally activating it.
+     * Relocate the character, optionally activating it.
      *
      * @param location the desired location (in system coordinates, not null,
      * unaffected)
@@ -361,7 +361,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Re-position and activate the character using the locking body interface.
+     * Reposition and activate the character using the locking body interface.
      *
      * @param location the desired location (in system coordinates, not null,
      * unaffected)
@@ -373,7 +373,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Re-position the character, optionally activating it.
+     * Reposition the character, optionally activating it.
      *
      * @param location the desired location (in system coordinates, not null,
      * unaffected)
@@ -388,7 +388,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Re-position the character, optionally activating it.
+     * Reposition the character, optionally activating it.
      *
      * @param location the desired location (in system coordinates, not null,
      * unaffected)

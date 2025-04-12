@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ public class StaticCompoundShapeSettings extends CompoundShapeSettings {
     // constructors
 
     /**
-     * Instantiate an empty settings object with no subshapes.
+     * Instantiate an empty settings object with no sub-shapes.
      */
     public StaticCompoundShapeSettings() {
         long settingsVa = createStaticCompoundShapeSettings();

@@ -73,12 +73,12 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Add the specified subshape at the specified offset.
+     * Add the specified sub-shape at the specified offset.
      *
-     * @param xOffset the desired X offset for the subshape
-     * @param yOffset the desired Y offset for the subshape
-     * @param zOffset the desired Z offset for the subshape
-     * @param subSettings the desired subshape settings (not null)
+     * @param xOffset the desired X offset for the sub-shape
+     * @param yOffset the desired Y offset for the sub-shape
+     * @param zOffset the desired Z offset for the sub-shape
+     * @param subSettings the desired sub-shape settings (not null)
      */
     public void addShape(float xOffset, float yOffset, float zOffset,
             ConstShapeSettings subSettings) {
@@ -93,12 +93,12 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Add the specified subshape at the specified position.
+     * Add the specified sub-shape at the specified position.
      *
-     * @param offset the desired offset for the subshape (not null, unaffected)
-     * @param rotation the desired rotation for the subshape ((not null, not
+     * @param offset the desired offset for the sub-shape (not null, unaffected)
+     * @param rotation the desired rotation for the sub-shape ((not null, not
      * zero, unaffected)
-     * @param subShape the subshape to add (not null)
+     * @param subShape the sub-shape to add (not null)
      */
     public void addShape(
             Vec3Arg offset, QuatArg rotation, ConstShape subShape) {
@@ -116,12 +116,12 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Add the specified subshape at the specified position.
+     * Add the specified sub-shape at the specified position.
      *
-     * @param offset the desired offset for the subshape (not null, unaffected)
-     * @param rotation the desired rotation for the subshape ((not null, not
+     * @param offset the desired offset for the sub-shape (not null, unaffected)
+     * @param rotation the desired rotation for the sub-shape (not null, not
      * zero, unaffected)
-     * @param subSettings the desired subshape settings (not null)
+     * @param subSettings the desired sub-shape settings (not null)
      */
     public void addShape(
             Vec3Arg offset, QuatArg rotation, ConstShapeSettings subSettings) {

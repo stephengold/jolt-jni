@@ -323,7 +323,7 @@ public class TransformedShape
      * Get the vertices of the face that provides support in the specified
      * direction. The shape is unaffected.
      *
-     * @param subShapeId which subshape to use (not null, unaffected)
+     * @param subShapeId which sub-shape to use (not null, unaffected)
      * @param direction the test direction (in world coordinates, not null,
      * unaffected)
      * @param base the base location for reporting face vertices (not null,

@@ -182,8 +182,8 @@ public class CollideShapeResult
     }
 
     /**
-     * Identify the subshape on shape 2 where the collision occurred. The object
-     * is unaffected. (native attribute: mSubShapeID2)
+     * Identify the sub-shape on shape 2 where the collision occurred. The
+     * object is unaffected. (native attribute: mSubShapeID2)
      *
      * @return a new JVM object with a new native object assigned
      */

@@ -736,7 +736,7 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Alter the location of the specified body.
+     * Relocate the specified body.
      *
      * @param bodyId the ID of the body to relocate
      * @param location the desired location (not null, unaffected)
@@ -753,7 +753,7 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Alter the location and orientation of the specified body.
+     * Reposition the specified body.
      *
      * @param bodyId the ID of the body to modify
      * @param location the desired location (not null, unaffected)

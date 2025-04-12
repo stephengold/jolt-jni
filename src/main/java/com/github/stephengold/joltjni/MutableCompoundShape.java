@@ -27,7 +27,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.ByteBuffer;
 
 /**
- * A {@code CompoundShape} whose subshapes can be modified after the shape is
+ * A {@code CompoundShape} whose sub-shapes can be modified after the shape is
  * constructed.
  *
  * @author Stephen Gold sgold@sonic.net
@@ -37,7 +37,7 @@ public class MutableCompoundShape extends CompoundShape {
     // constructors
 
     /**
-     * Instantiate an empty compound shape with no subshapes.
+     * Instantiate an empty compound shape with no sub-shapes.
      */
     public MutableCompoundShape() {
         long shapeVa = createMutableCompoundShape();
@@ -58,12 +58,12 @@ public class MutableCompoundShape extends CompoundShape {
     // new methods exposed
 
     /**
-     * Add a subshape in the specified position.
+     * Add a sub-shape in the specified position.
      *
      * @param offset the desired offset (not null, unaffected)
      * @param rotation the desired rotation (not null, not zero, unaffected)
-     * @param subshape the desired subshape (not null)
-     * @return the index of the added subshape
+     * @param subshape the desired sub-shape (not null)
+     * @return the index of the added sub-shape
      */
     public int addShape(Vec3Arg offset, QuatArg rotation, ConstShape subshape) {
         long compoundVa = va();
@@ -82,7 +82,7 @@ public class MutableCompoundShape extends CompoundShape {
     }
 
     /**
-     * Recalculate the center of mass and shift the subshapes accordingly.
+     * Recalculate the center of mass and shift the sub-shapes accordingly.
      */
     public void adjustCenterOfMass() {
         long shapeVa = va();
@@ -90,10 +90,10 @@ public class MutableCompoundShape extends CompoundShape {
     }
 
     /**
-     * Re-position multiple subshapes.
+     * Reposition multiple sub-shapes.
      *
      * @param startIndex index of the first shape to reposition (&ge;0)
-     * @param numSubshapes the number of subshapes to reposition (&ge;0)
+     * @param numSubshapes the number of sub-shapes to reposition (&ge;0)
      * @param offsets the desired offsets (not null, unaffected,
      * length&ge;numSubShapes)
      * @param rotations the desired rotations (not null, unaffected,
@@ -112,9 +112,9 @@ public class MutableCompoundShape extends CompoundShape {
     }
 
     /**
-     * Remove the specified subshape.
+     * Remove the specified sub-shape.
      *
-     * @param index the index of the subshape to remove (&ge;0)
+     * @param index the index (not the ID) of the sub-shape to remove (&ge;0)
      */
     public void removeShape(int index) {
         long shapeVa = va();

@@ -266,7 +266,7 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
-     * Access the leaf shape for the specified subshape ID.
+     * Access the leaf shape for the specified sub-shape ID.
      *
      * @param id an ID that indicates the path to the desired leaf shape (not
      * null, unaffected)

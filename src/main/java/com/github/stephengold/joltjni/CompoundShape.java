@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A {@code Shape} composed from a union of simpler subshapes.
+ * A {@code Shape} composed from a union of simpler sub-shapes.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -50,7 +50,7 @@ abstract public class CompoundShape extends Shape {
     // new methods exposed
 
     /**
-     * Count the subshapes.
+     * Count the sub-shapes.
      *
      * @return the count (&ge;0)
      */
@@ -62,9 +62,9 @@ abstract public class CompoundShape extends Shape {
     }
 
     /**
-     * Access the specified subshape.
+     * Access the specified sub-shape.
      *
-     * @param subShapeIndex the index of the subshape (&ge;0)
+     * @param subShapeIndex the index of the sub-shape (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public SubShape getSubShape(int subShapeIndex) {
@@ -76,7 +76,7 @@ abstract public class CompoundShape extends Shape {
     }
 
     /**
-     * Access all the subshapes as an array.
+     * Access all the sub-shapes as an array.
      *
      * @return a new array of new JVM objects with pre-existing native objects
      * assigned
@@ -94,10 +94,10 @@ abstract public class CompoundShape extends Shape {
     }
 
     /**
-     * Restore the subshape references after invoking
+     * Restore the sub-shape references after invoking
      * {@code sRestoreFromBinaryState()}.
      *
-     * @param subshapes the desired subshape references (not null)
+     * @param subshapes the desired sub-shape references (not null)
      */
     public void restoreSubShapeState(ShapeList subshapes) {
         long shapeVa = va();

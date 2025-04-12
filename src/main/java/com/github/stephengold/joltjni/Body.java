@@ -375,7 +375,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Re-position the body and reset its sleep timer.
+     * Reposition the body and reset its sleep timer.
      *
      * @param location the desired location (in system coordinates, not null,
      * unaffected)
@@ -388,7 +388,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Re-position the body.
+     * Reposition the body.
      *
      * @param location the desired location (in system coordinates, not null,
      * unaffected)
@@ -879,7 +879,7 @@ public class Body extends NonCopyable implements ConstBody {
      *
      * @param subShapeId the ID of the subshape to use (not null, unaffected)
      * @param location the location to use (not null, unaffected)
-     * @return a new normal vector
+     * @return a new direction vector
      */
     @Override
     public Vec3 getWorldSpaceSurfaceNormal(
