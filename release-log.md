@@ -1,6 +1,6 @@
 # release log for the Jolt-JNI project
 
-## Version 0.9.9 released on TBD
+## Version 0.9.9 released on 13 April 2025
 
 + API changes:
   + Began representing body IDs, character IDs, and sub-shape IDs

@@ -83,10 +83,10 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
     }
     dependencies {
         // JVM library:
-        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.8")
+        implementation("com.github.stephengold:jolt-jni-Linux64:0.9.9")
 
         // native libraries:
-        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.8:DebugSp")
+        runtimeOnly("com.github.stephengold:jolt-jni-Linux64:0.9.9:DebugSp")
         // Native libraries for other platforms could be added.
     }
 
@@ -119,7 +119,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
         mavenCentral()
     }
     dependencies {
-        implementation("com.github.stephengold:jolt-jni:0.9.8:SpDebug@aar")
+        implementation("com.github.stephengold:jolt-jni:0.9.9:SpDebug@aar")
     }
 
 + The "SpDebug" classifier may be replaced by "SpRelease".
@@ -152,7 +152,7 @@ Add to the project’s "build.gradle" or "build.gradle.kts" file:
   + using [Git]:
     + `git clone https://github.com/stephengold/jolt-jni.git`
     + `cd jolt-jni`
-    + `git checkout -b latest 0.9.8`
+    + `git checkout -b latest 0.9.9`
   + using a web browser:
     + browse to [the latest release][latest]
     + follow the "Source code (zip)" link at the bottom of the page
@@ -236,7 +236,7 @@ In an Android app, one can simply invoke `System.loadLibrary("joltjni")`.
 
 To extract and load native libraries in a desktop app, I suggest using
 [the jSnapLoader library](https://github.com/Electrostat-Lab/jSnapLoader).
-Here's a code fragment to get you started:
+Here's a Java code fragment to get you started:
 
     LibraryInfo info = new LibraryInfo(
         null, "joltjni", DirectoryPath.USER_DIR);
@@ -414,7 +414,7 @@ correct the situation: sgold@sonic.net
 [meld]: https://meldmerge.org "Meld merge tool"
 [mint]: https://linuxmint.com "Linux Mint"
 [netbeans]: https://netbeans.org "NetBeans"
-[project]: https://github.com/stephengold/jolt-jni "Jolt-JNI Project"
+[project]: https://github.com/stephengold/jolt-jni "Jolt-JNI project"
 [sonatype]: https://www.sonatype.com "Sonatype"
 [studio]: https://developer.android.com/studio "Android Studio IDE"
 [travis]: https://travis-ci.com "Travis CI"
