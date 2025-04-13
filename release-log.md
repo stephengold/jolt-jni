@@ -1,5 +1,44 @@
 # release log for the Jolt-JNI project
 
+## Version 0.9.9 released on TBD
+
++ API changes:
+  + Began representing body IDs, character IDs, and sub-shape IDs
+    using `int` primitives instead of objects.
+  + Removed the `BodyId`, `CharacterId`, and `SubShapeId` classes.
+  + Removed the `ConstBodyId` interface.
+  + Moved the `sSetNextCharacterId()` method from `CharacterId` to `Jolt`.
+  + Added chaining to 15 public setters in the `SoftBodyCreationSettings` class.
+  + Altered the return types and/or semantics of 14 other methods:
+    + `Body.getCollisionGroup()`
+    + `Body.setCollisionGroup()`
+    + `CollisionGroup.getGroupFilter()`
+    + `ConstBodyCreationSettings.getMassPropertiesOverride()`
+    + `ConstCharacterVirtual.getActiveContacts()`
+    + `ConstContact.getCharacterB()`
+    + `Skeleton.getJoint()`
+    + `Skeleton.getJoints()`
+    + `SkeletonRef.getJoint()`
+    + `SkeletonRef.getJoints()`
+    + `SoftBodyCreationSettings.getSettings()`
+    + `SoftBodyMotionProperties.getFace()`
+    + `SoftBodyMotionProperties.getFaces()`
+    + `SoftBodyMotionProperties.getSettings()`
+  + Generalized 2 methods:
+    + `SoftBodyCreationSettings.setCollisionGroup()`
+    + `BodyCreationSettings.setCollisionGroup()`
+
++ Bugfixes:
+  + unimplemented `CharacterVirtual.getTransformedShape()`
+  + 2 logic errors in `CustomCharacterContactListener`
+  + assertion failure in `JoltPhysicsObject` while creating a `SoftBodyVertex`
+
++ Added 2 interfaces:
+  + `ConstCollisionGroup`
+  + `ConstGroupFilter`
+
++ Added many public methods to the libraries.
+
 ## Version 0.9.8 released on 30 March 2025
 
 + API changes:
