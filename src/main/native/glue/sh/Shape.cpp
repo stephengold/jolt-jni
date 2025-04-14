@@ -55,9 +55,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_copyDebugTriang
     JPH_ASSERT(!pEnv->ExceptionCheck());
     JPH_ASSERT(capacityFloats >= 9 * numTriangles);
     const AABox bounds(AABox::sBiggest());
+    const Vec3 center = pShape->GetCenterOfMass();
     AllHitCollisionCollector<TransformedShapeCollector> collector;
     pShape->CollectTransformedShapes(
-            bounds, Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f),
+            bounds, center, Quat::sIdentity(), Vec3::sReplicate(1.0f),
             SubShapeIDCreator(), collector, ShapeFilter());
     for (const TransformedShape& transformedShape : collector.mHits) {
         const Shape * const pSh = transformedShape.mShape;
@@ -91,9 +92,10 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
     uint result = 0;
     const AABox bounds(AABox::sBiggest());
+    const Vec3 center = pShape->GetCenterOfMass();
     AllHitCollisionCollector<TransformedShapeCollector> collector;
     pShape->CollectTransformedShapes(
-            bounds, Vec3::sZero(), Quat::sIdentity(), Vec3::sReplicate(1.0f),
+            bounds, center, Quat::sIdentity(), Vec3::sReplicate(1.0f),
             SubShapeIDCreator(), collector, ShapeFilter());
     for (const TransformedShape &transformedShape : collector.mHits) {
         const Shape * const pSh = transformedShape.mShape;
