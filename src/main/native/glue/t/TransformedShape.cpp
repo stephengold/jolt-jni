@@ -205,7 +205,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_TransformedShape_coun
     const AABox bounds(AABox::sBiggest());
     AllHitCollisionCollector<TransformedShapeCollector> collector;
     pShape->CollectTransformedShapes(bounds, collector);
-    for (const TransformedShape &transformedShape : collector.mHits) {
+    for (const TransformedShape& transformedShape : collector.mHits) {
         const Shape * const pSh = transformedShape.mShape;
         Shape::GetTrianglesContext context;
         const Vec3 location(transformedShape.mShapePositionCOM);

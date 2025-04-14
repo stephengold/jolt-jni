@@ -102,8 +102,8 @@ public:
     }
 
     void OnAdjustBodyVelocity(const CharacterVirtual *inCharacter,
-            const Body &inBody2, Vec3 &ioLinearVelocity,
-            Vec3 &ioAngularVelocity) override {
+            const Body& inBody2, Vec3& ioLinearVelocity,
+            Vec3& ioAngularVelocity) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -138,8 +138,8 @@ public:
 
     void OnCharacterContactAdded(const CharacterVirtual *inCharacter,
             const CharacterVirtual *inOtherCharacter,
-            const SubShapeID &inSubShapeID2, RVec3Arg inContactPosition,
-            Vec3Arg inContactNormal, CharacterContactSettings &ioSettings) override {
+            const SubShapeID& inSubShapeID2, RVec3Arg inContactPosition,
+            Vec3Arg inContactNormal, CharacterContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -167,8 +167,8 @@ public:
 
     void OnCharacterContactPersisted(const CharacterVirtual *inCharacter,
             const CharacterVirtual *inOtherCharacter,
-            const SubShapeID &inSubShapeID2, RVec3Arg inContactPosition,
-            Vec3Arg inContactNormal, CharacterContactSettings &ioSettings) override {
+            const SubShapeID& inSubShapeID2, RVec3Arg inContactPosition,
+            Vec3Arg inContactNormal, CharacterContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -195,8 +195,8 @@ public:
     }
 
     void OnCharacterContactRemoved(const CharacterVirtual *inCharacter,
-            const CharacterID &inOtherCharacterID,
-            const SubShapeID &inSubShapeID2) override {
+            const CharacterID& inOtherCharacterID,
+            const SubShapeID& inSubShapeID2) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -214,10 +214,10 @@ public:
 
     void OnCharacterContactSolve(const CharacterVirtual *inCharacter,
             const CharacterVirtual *inOtherCharacter,
-            const SubShapeID &inSubShapeID2, RVec3Arg inContactPosition,
+            const SubShapeID& inSubShapeID2, RVec3Arg inContactPosition,
             Vec3Arg inContactNormal, Vec3Arg inContactVelocity,
             const PhysicsMaterial *inContactMaterial,
-            Vec3Arg inCharacterVelocity, Vec3 &ioNewCharacterVelocity) override {
+            Vec3Arg inCharacterVelocity, Vec3& ioNewCharacterVelocity) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -270,7 +270,7 @@ public:
 
     bool OnCharacterContactValidate(const CharacterVirtual *inCharacter,
             const CharacterVirtual *inOtherCharacter,
-            const SubShapeID &inSubShapeID2) override {
+            const SubShapeID& inSubShapeID2) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -288,9 +288,9 @@ public:
     }
 
     void OnContactAdded(const CharacterVirtual *inCharacter,
-            const BodyID &inBodyID2, const SubShapeID &inSubShapeID2,
+            const BodyID& inBodyID2, const SubShapeID& inSubShapeID2,
             RVec3Arg inContactPosition, Vec3Arg inContactNormal,
-            CharacterContactSettings &ioSettings) override {
+            CharacterContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -316,9 +316,9 @@ public:
     }
 
     void OnContactPersisted(const CharacterVirtual *inCharacter,
-            const BodyID &inBodyID2, const SubShapeID &inSubShapeID2,
+            const BodyID& inBodyID2, const SubShapeID& inSubShapeID2,
             RVec3Arg inContactPosition, Vec3Arg inContactNormal,
-            CharacterContactSettings &ioSettings) override {
+            CharacterContactSettings& ioSettings) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -344,7 +344,7 @@ public:
     }
 
     void OnContactRemoved(const CharacterVirtual *inCharacter,
-            const BodyID &inBodyID2, const SubShapeID &inSubShapeID2) override {
+            const BodyID& inBodyID2, const SubShapeID& inSubShapeID2) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -361,10 +361,10 @@ public:
     }
 
     void OnContactSolve(const CharacterVirtual *inCharacter,
-            const BodyID &inBodyID2, const SubShapeID &inSubShapeID2,
+            const BodyID& inBodyID2, const SubShapeID& inSubShapeID2,
             RVec3Arg inContactPosition, Vec3Arg inContactNormal,
             Vec3Arg inContactVelocity, const PhysicsMaterial *inContactMaterial,
-            Vec3Arg inCharacterVelocity, Vec3 &ioNewCharacterVelocity) override {
+            Vec3Arg inCharacterVelocity, Vec3& ioNewCharacterVelocity) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -414,7 +414,7 @@ public:
     }
 
     bool OnContactValidate(const CharacterVirtual *inCharacter,
-            const BodyID &inBodyID2, const SubShapeID &inSubShapeID2) override {
+            const BodyID& inBodyID2, const SubShapeID& inSubShapeID2) override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);

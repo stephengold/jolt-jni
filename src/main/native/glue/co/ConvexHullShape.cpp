@@ -110,7 +110,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getNu
   (JNIEnv *, jclass, jlong shapeVa) {
     const ConvexHullShape * const pShape
             = reinterpret_cast<ConvexHullShape *> (shapeVa);
-    const Array<Plane> &planes = pShape->GetPlanes();
+    const Array<Plane>& planes = pShape->GetPlanes();
     const Array<Plane>::size_type result = planes.size();
     return result;
 }
@@ -150,7 +150,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getPl
   (JNIEnv *pEnv, jclass, jlong shapeVa, jfloatArray storeFloats) {
     const ConvexHullShape * const pShape
             = reinterpret_cast<ConvexHullShape *> (shapeVa);
-    const Array<Plane> &planes = pShape->GetPlanes();
+    const Array<Plane>& planes = pShape->GetPlanes();
     jboolean isCopy;
     jfloat * const pFloats = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
     for (size_t i = 0; i < planes.size(); ++i) {

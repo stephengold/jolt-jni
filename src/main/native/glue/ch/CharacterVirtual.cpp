@@ -92,7 +92,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_coun
   (JNIEnv *, jclass, jlong characterVa) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const CharacterVirtual::ContactList &contacts
+    const CharacterVirtual::ContactList& contacts
             = pCharacter->GetActiveContacts();
     const size_t result = contacts.size();
     return result;
@@ -155,7 +155,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_get
   (JNIEnv *, jclass, jlong characterVa, jint index) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const CharacterVirtual::ContactList &contacts
+    const CharacterVirtual::ContactList& contacts
             = pCharacter->GetActiveContacts();
     const CharacterVirtual::Contact * const pResult
             = new CharacterVirtual::Contact(contacts[index]);
@@ -525,7 +525,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_get
   (JNIEnv *, jclass, jlong characterVa) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const TransformedShape & shape = pCharacter->GetTransformedShape();
+    const TransformedShape& shape = pCharacter->GetTransformedShape();
     TransformedShape * const pResult = new TransformedShape(shape);
     TRACE_NEW("TransformedShape", pResult)
     return reinterpret_cast<jlong> (pResult);

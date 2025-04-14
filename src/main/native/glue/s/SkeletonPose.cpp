@@ -155,7 +155,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_getJoint
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_getJointMatrices
   (JNIEnv *, jclass, jlong poseVa) {
     SkeletonPose * const pPose = reinterpret_cast<SkeletonPose *> (poseVa);
-    SkeletonPose::Mat44Vector &vec = pPose->GetJointMatrices();
+    SkeletonPose::Mat44Vector& vec = pPose->GetJointMatrices();
     Mat44 * const pResult = vec.data();
     return reinterpret_cast<jlong> (pResult);
 }

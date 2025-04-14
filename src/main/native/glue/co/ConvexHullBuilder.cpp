@@ -39,7 +39,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_cou
   (JNIEnv *, jclass, jlong builderVa) {
     const ConvexHullBuilder * const pBuilder
             = reinterpret_cast<ConvexHullBuilder *> (builderVa);
-    const Array<ConvexHullBuilder::Face *> &array = pBuilder->GetFaces();
+    const Array<ConvexHullBuilder::Face *>& array = pBuilder->GetFaces();
     const Array<ConvexHullBuilder::Face *>::size_type result = array.size();
     return result;
 }
@@ -152,7 +152,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_get
   (JNIEnv *pEnv, jclass, jlong builderVa, jlongArray storeVas) {
     const ConvexHullBuilder * const pBuilder
             = reinterpret_cast<ConvexHullBuilder *> (builderVa);
-    const Array<ConvexHullBuilder::Face *> &faces = pBuilder->GetFaces();
+    const Array<ConvexHullBuilder::Face *>& faces = pBuilder->GetFaces();
     jboolean isCopy;
     jlong * const pFaceVas = pEnv->GetLongArrayElements(storeVas, &isCopy);
     for (size_t i = 0; i < faces.size(); ++i) {

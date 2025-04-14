@@ -182,7 +182,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_g
   (JNIEnv *, jclass, jlong shapeResultVa) {
     CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    CollideShapeResult::Face &result = pShapeResult->mShape1Face;
+    CollideShapeResult::Face& result = pShapeResult->mShape1Face;
     return reinterpret_cast<jlong> (&result);
 }
 
@@ -195,7 +195,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_g
   (JNIEnv *, jclass, jlong shapeResultVa) {
     CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    CollideShapeResult::Face &result = pShapeResult->mShape2Face;
+    CollideShapeResult::Face& result = pShapeResult->mShape2Face;
     return reinterpret_cast<jlong> (&result);
 }
 

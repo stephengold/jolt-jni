@@ -97,7 +97,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Shape_countDebugTrian
     pShape->CollectTransformedShapes(
             bounds, center, Quat::sIdentity(), Vec3::sReplicate(1.0f),
             SubShapeIDCreator(), collector, ShapeFilter());
-    for (const TransformedShape &transformedShape : collector.mHits) {
+    for (const TransformedShape& transformedShape : collector.mHits) {
         const Shape * const pSh = transformedShape.mShape;
         Shape::GetTrianglesContext context;
         const Vec3 location(transformedShape.mShapePositionCOM);
