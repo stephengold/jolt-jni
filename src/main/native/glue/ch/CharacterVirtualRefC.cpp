@@ -31,6 +31,21 @@ SOFTWARE.
 using namespace JPH;
 
 /*
+ * Class:     com_github_stephengold_joltjni_CharacterRefC
+ * Method:    copy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterRefC_copy
+  (JNIEnv *, jclass, jlong refVa) {
+    RefConst<CharacterVirtual> * const pRef
+            = reinterpret_cast<RefConst<CharacterVirtual> *> (refVa);
+    RefConst<CharacterVirtual> * const pResult
+            = new RefConst<CharacterVirtual>(*pRef);
+    TRACE_NEW("RefConst<CharacterVirtual>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
  * Class:     com_github_stephengold_joltjni_CharacterVirtualRefC
  * Method:    freeWithSystem
  * Signature: (JLcom/github/stephengold/joltjni/PhysicsSystem;)V
