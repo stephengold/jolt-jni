@@ -25,8 +25,9 @@ import com.github.stephengold.joltjni.BroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.BroadPhaseLayerInterfaceTable;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JoltPhysicsObject;
-import com.github.stephengold.joltjni.ObjVsBpFilter;
 import com.github.stephengold.joltjni.ObjVsObjFilter;
+import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilter;
+import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilterTable;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.UVec4;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
@@ -510,11 +511,11 @@ final public class TestUtils {
                                 objLayerNonMoving, bpLayerNonMoving)
                         .mapObjectToBroadPhaseLayer(
                                 objLayerMoving, bpLayerMoving);
-        ObjVsBpFilter objVsBpFilter
-                = new ObjVsBpFilter(numObjLayers, numBpLayers)
-                        .disablePair(objLayerNonMoving, bpLayerNonMoving);
         ObjVsObjFilter objVsObjFilter = new ObjVsObjFilter(numObjLayers)
                 .disablePair(objLayerNonMoving, objLayerNonMoving);
+        ObjectVsBroadPhaseLayerFilter objVsBpFilter
+                = new ObjectVsBroadPhaseLayerFilterTable(
+                        mapObj2Bp, numBpLayers, objVsObjFilter, numObjLayers);
 
         int numBodyMutexes = 0; // 0 means "use the default value"
         int maxBodyPairs = 65_536;
