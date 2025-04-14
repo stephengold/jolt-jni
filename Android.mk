@@ -37,6 +37,7 @@ $(N)/glue/b/BroadPhaseCastResult.cpp \
 $(N)/glue/b/BroadPhase.cpp \
 $(N)/glue/b/BroadPhaseLayerFilter.cpp \
 $(N)/glue/b/BroadPhaseLayerInterface.cpp \
+$(N)/glue/b/BroadPhaseLayerInterfaceTable.cpp \
 $(N)/glue/b/BroadPhaseQuadTree.cpp \
 $(N)/glue/b/BroadPhaseQuery.cpp \
 $(N)/glue/bo/BodyActivationListener.cpp \
@@ -152,7 +153,6 @@ $(N)/glue/j/JobSystemThreadPool.cpp \
 $(N)/glue/j/Joint.cpp \
 $(N)/glue/j/JointState.cpp \
 $(N)/glue/j/Jolt.cpp \
-$(N)/glue/m/MapObj2Bp.cpp \
 $(N)/glue/m/MassProperties.cpp \
 $(N)/glue/m/Mat44Array.cpp \
 $(N)/glue/m/Mat44.cpp \

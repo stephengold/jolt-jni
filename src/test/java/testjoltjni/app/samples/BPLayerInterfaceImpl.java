@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,19 +30,19 @@ import com.github.stephengold.joltjni.*;
  */
 
 /// BroadPhaseLayerInterface implementation
-public class BPLayerInterfaceImpl extends MapObj2Bp
+public class BPLayerInterfaceImpl extends BroadPhaseLayerInterfaceTable
 {
 	public BPLayerInterfaceImpl()
 	{
 		super(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS);
 		// Create a mapping table from object to broad phase layer
-		add(Layers.UNUSED1, BroadPhaseLayers.UNUSED);
-		add(Layers.UNUSED2, BroadPhaseLayers.UNUSED);
-		add(Layers.UNUSED3, BroadPhaseLayers.UNUSED);
-		add(Layers.UNUSED4, BroadPhaseLayers.UNUSED);
-		add(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
-		add(Layers.MOVING, BroadPhaseLayers.MOVING);
-		add(Layers.DEBRIS, BroadPhaseLayers.DEBRIS);
-		add(Layers.SENSOR, BroadPhaseLayers.SENSOR);
+		mapObjectToBroadPhaseLayer(Layers.UNUSED1, BroadPhaseLayers.UNUSED);
+		mapObjectToBroadPhaseLayer(Layers.UNUSED2, BroadPhaseLayers.UNUSED);
+		mapObjectToBroadPhaseLayer(Layers.UNUSED3, BroadPhaseLayers.UNUSED);
+		mapObjectToBroadPhaseLayer(Layers.UNUSED4, BroadPhaseLayers.UNUSED);
+		mapObjectToBroadPhaseLayer(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
+		mapObjectToBroadPhaseLayer(Layers.MOVING, BroadPhaseLayers.MOVING);
+		mapObjectToBroadPhaseLayer(Layers.DEBRIS, BroadPhaseLayers.DEBRIS);
+		mapObjectToBroadPhaseLayer(Layers.SENSOR, BroadPhaseLayers.SENSOR);
 	}
 };

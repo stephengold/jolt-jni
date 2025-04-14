@@ -24,8 +24,8 @@ package testjoltjni.junit;
 import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.BodyIdVector;
 import com.github.stephengold.joltjni.BodyInterface;
+import com.github.stephengold.joltjni.BroadPhaseLayerInterfaceTable;
 import com.github.stephengold.joltjni.CombineFunction;
-import com.github.stephengold.joltjni.MapObj2Bp;
 import com.github.stephengold.joltjni.ObjVsBpFilter;
 import com.github.stephengold.joltjni.ObjVsObjFilter;
 import com.github.stephengold.joltjni.PhysicsSettings;
@@ -57,11 +57,12 @@ public class Test004 {
 
         int numBpLayers = 2;
         int numObjLayers = 3;
-        MapObj2Bp mapObj2Bp = new MapObj2Bp(numObjLayers, numBpLayers);
+        BroadPhaseLayerInterfaceTable mapObj2Bp
+                = new BroadPhaseLayerInterfaceTable(numObjLayers, numBpLayers);
         Assert.assertEquals(numBpLayers, mapObj2Bp.getNumBroadPhaseLayers());
-        Assert.assertEquals(255, mapObj2Bp.getBroadPhaseLayer(0));
-        Assert.assertEquals(255, mapObj2Bp.getBroadPhaseLayer(1));
-        Assert.assertEquals(255, mapObj2Bp.getBroadPhaseLayer(2));
+        Assert.assertEquals(0, mapObj2Bp.getBroadPhaseLayer(0));
+        Assert.assertEquals(0, mapObj2Bp.getBroadPhaseLayer(1));
+        Assert.assertEquals(0, mapObj2Bp.getBroadPhaseLayer(2));
 
         ObjVsBpFilter objVsBpFilter
                 = new ObjVsBpFilter(numObjLayers, numBpLayers);

@@ -78,14 +78,14 @@ class BroadPhaseLayers
 
 // BroadPhaseLayerInterface implementation
 // This defines a mapping between object and broadphase layers.
-static class BPLayerInterfaceImpl extends MapObj2Bp
+static class BPLayerInterfaceImpl extends BroadPhaseLayerInterfaceTable
 {
 									BPLayerInterfaceImpl()
 	{
 		// Create a mapping table from object to broad phase layer
             super(Layers.NUM_LAYERS, BroadPhaseLayers.NUM_LAYERS);
-		add(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
-		add(Layers.MOVING, BroadPhaseLayers.MOVING);
+		mapObjectToBroadPhaseLayer(Layers.NON_MOVING, BroadPhaseLayers.NON_MOVING);
+		mapObjectToBroadPhaseLayer(Layers.MOVING, BroadPhaseLayers.MOVING);
 	}
 
 };

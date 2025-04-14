@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,24 +22,24 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * An implementation of {@code BroadPhaseLayerInterface} that can be configured
- * at runtime.
+ * Map object layers to broad-phase layers using a lookup table.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class MapObj2Bp extends BroadPhaseLayerInterface {
+public class BroadPhaseLayerInterfaceTable extends BroadPhaseLayerInterface {
     // *************************************************************************
     // constructors
 
     /**
-     * Instantiate an empty map with the specified capacity.
+     * Instantiate an default map with the specified capacity. It maps every
+     * object layer to broad-phase layer zero.
      *
      * @param numObjLayers the desired capacity (number of object layers)
      * (&ge;1)
      * @param numBpLayers the number of broad-phase layers (&ge;1)
      */
-    public MapObj2Bp(int numObjLayers, int numBpLayers) {
-        long mapVa = createMapObj2Bp(numObjLayers, numBpLayers);
+    public BroadPhaseLayerInterfaceTable(int numObjLayers, int numBpLayers) {
+        long mapVa = createDefault(numObjLayers, numBpLayers);
         setVirtualAddress(mapVa, () -> free(mapVa));
     }
     // *************************************************************************
@@ -54,17 +54,21 @@ public class MapObj2Bp extends BroadPhaseLayerInterface {
      * @param bpLayer the index of the broad-phase layer (&lt; numBpLayers)
      * @return the modified map, for chaining
      */
-    public MapObj2Bp add(int objLayer, int bpLayer) {
-        add(va(), objLayer, bpLayer);
+    public BroadPhaseLayerInterfaceTable mapObjectToBroadPhaseLayer(
+            int objLayer, int bpLayer) {
+        long mapVa = va();
+        mapObjectToBroadPhaseLayer(mapVa, objLayer, bpLayer);
+
         return this;
     }
     // *************************************************************************
     // native private methods
 
-    native private static void add(long mapVa, int objLayer, int bpLayer);
-
-    native private static long createMapObj2Bp(
+    native private static long createDefault(
             int numObjLayers, int numBpLayers);
 
     native private static void free(long mapVa);
+
+    native private static void mapObjectToBroadPhaseLayer(
+            long mapVa, int objLayer, int bpLayer);
 }
