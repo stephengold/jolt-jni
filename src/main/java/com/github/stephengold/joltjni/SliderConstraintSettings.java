@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,15 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public SliderConstraintSettings() {
+        long settingsVa = createSliderConstraintSettings();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EConstraintSubType.Slider);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -43,15 +52,6 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      */
     SliderConstraintSettings(long settingsVa) {
         super(settingsVa);
-        setSubType(EConstraintSubType.Slider);
-    }
-
-    /**
-     * Instantiate default settings.
-     */
-    public SliderConstraintSettings() {
-        long settingsVa = createSliderConstraintSettings();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Slider);
     }
     // *************************************************************************

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,15 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public ConeConstraintSettings() {
+        long settingsVa = createConeConstraintSettings();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EConstraintSubType.Cone);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -43,15 +52,6 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      */
     ConeConstraintSettings(long settingsVa) {
         super(settingsVa);
-        setSubType(EConstraintSubType.Cone);
-    }
-
-    /**
-     * Instantiate default settings.
-     */
-    public ConeConstraintSettings() {
-        long settingsVa = createConeConstraintSettings();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Cone);
     }
     // *************************************************************************

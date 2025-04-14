@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,6 +35,15 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public GearConstraintSettings() {
+        long settingsVa = createGearConstraintSettings();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EConstraintSubType.Gear);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -42,15 +51,6 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      */
     GearConstraintSettings(long settingsVa) {
         super(settingsVa);
-        setSubType(EConstraintSubType.Gear);
-    }
-
-    /**
-     * Instantiate default settings.
-     */
-    public GearConstraintSettings() {
-        long settingsVa = createGearConstraintSettings();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Gear);
     }
     // *************************************************************************

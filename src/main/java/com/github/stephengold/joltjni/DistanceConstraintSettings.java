@@ -35,6 +35,15 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public DistanceConstraintSettings() {
+        long settingsVa = createDistanceConstraintSettings();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EConstraintSubType.Distance);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -42,15 +51,6 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
      */
     DistanceConstraintSettings(long settingsVa) {
         super(settingsVa);
-        setSubType(EConstraintSubType.Distance);
-    }
-
-    /**
-     * Instantiate default settings.
-     */
-    public DistanceConstraintSettings() {
-        long settingsVa = createDistanceConstraintSettings();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Distance);
     }
     // *************************************************************************
