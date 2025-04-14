@@ -164,19 +164,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_copy
             = reinterpret_cast<TransformedShape *> (transformedShapeVa);
     Float3 *pFloat3 = (Float3 *) pEnv->GetDirectBufferAddress(storeBuffer);
     JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong numFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
     JPH_ASSERT(!pEnv->ExceptionCheck());
-    JPH_ASSERT(numFloats >= 9 * numTriangles);
-    const AABox box(AABox::sBiggest());
+    JPH_ASSERT(capacityFloats >= 9 * numTriangles);
+    const AABox bounds(AABox::sBiggest());
     AllHitCollisionCollector<TransformedShapeCollector> collector;
-    pShape->CollectTransformedShapes(box, collector);
+    pShape->CollectTransformedShapes(bounds, collector);
     for (const TransformedShape& transformedShape : collector.mHits) {
         const Shape * const pSh = transformedShape.mShape;
         Shape::GetTrianglesContext context;
         const Vec3 location(transformedShape.mShapePositionCOM);
         const Vec3 scale(transformedShape.mShapeScale);
         pSh->GetTrianglesStart(
-            context, box, location, transformedShape.mShapeRotation, scale);
+            context, bounds, location, transformedShape.mShapeRotation, scale);
         while (numTriangles > 0) {
             const int maxRequest = std::max((int)numTriangles,
                     Shape::cGetTrianglesMinTrianglesRequested);
