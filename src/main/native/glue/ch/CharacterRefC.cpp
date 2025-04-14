@@ -32,6 +32,20 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterRefC
+ * Method:    copy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterRefC_copy
+  (JNIEnv *, jclass, jlong refVa) {
+    RefConst<Character> * const pRef
+            = reinterpret_cast<RefConst<Character> *> (refVa);
+    RefConst<Character> * const pResult = new RefConst<Character>(*pRef);
+    TRACE_NEW("RefConst<Character>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterRefC
  * Method:    freeWithSystem
  * Signature: (JLcom/github/stephengold/joltjni/PhysicsSystem;)V
  */
