@@ -28,6 +28,7 @@ import com.github.stephengold.joltjni.BroadPhaseLayerInterfaceTable;
 import com.github.stephengold.joltjni.CombineFunction;
 import com.github.stephengold.joltjni.ObjVsBpFilter;
 import com.github.stephengold.joltjni.ObjVsObjFilter;
+import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
 import com.github.stephengold.joltjni.PhysicsSettings;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Vec3;
@@ -57,6 +58,19 @@ public class Test004 {
 
         int numBpLayers = 2;
         int numObjLayers = 3;
+
+        // Test ObjectLayerPairFilterTable, but don't use it:
+        ObjectLayerPairFilterTable tab
+                = new ObjectLayerPairFilterTable(numObjLayers);
+        for (int oLayer = 0; oLayer < numObjLayers; ++oLayer) {
+            Assert.assertFalse(tab.shouldCollide(oLayer, 0));
+            Assert.assertFalse(tab.shouldCollide(oLayer, 1));
+            Assert.assertFalse(tab.shouldCollide(oLayer, 2));
+        }
+        tab.enableCollision(1, 2);
+        Assert.assertTrue(tab.shouldCollide(1, 2));
+        Assert.assertTrue(tab.shouldCollide(2, 1));
+
         BroadPhaseLayerInterfaceTable mapObj2Bp
                 = new BroadPhaseLayerInterfaceTable(numObjLayers, numBpLayers);
         Assert.assertEquals(numBpLayers, mapObj2Bp.getNumBroadPhaseLayers());
