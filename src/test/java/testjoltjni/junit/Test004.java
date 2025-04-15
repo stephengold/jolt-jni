@@ -56,8 +56,8 @@ public class Test004 {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
 
-        int numBpLayers = 2;
-        int numObjLayers = 3;
+        final int numBpLayers = 2;
+        final int numObjLayers = 3;
 
         // Test ObjectLayerPairFilterTable, but don't use it:
         ObjectLayerPairFilterTable tab
