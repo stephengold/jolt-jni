@@ -170,6 +170,7 @@ $(N)/glue/n/NarrowPhaseQuery.cpp \
 $(N)/glue/n/NarrowPhaseStat.cpp \
 $(N)/glue/o/ObjectLayerFilter.cpp \
 $(N)/glue/o/ObjectLayerPairFilter.cpp \
+$(N)/glue/o/ObjectLayerPairFilterTable.cpp \
 $(N)/glue/o/ObjectStreamIn.cpp \
 $(N)/glue/o/ObjectStreamOut.cpp \
 $(N)/glue/o/ObjectVsBroadPhaseLayerFilter.cpp \
