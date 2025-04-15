@@ -66,10 +66,17 @@ public class Test004 {
 
         ObjVsBpFilter objVsBpFilter
                 = new ObjVsBpFilter(numObjLayers, numBpLayers);
-        Assert.assertTrue(objVsBpFilter.shouldCollide(2, 1));
+        for (int oLayer = 0; oLayer < 3; ++oLayer) {
+            Assert.assertTrue(objVsBpFilter.shouldCollide(oLayer, 0));
+            Assert.assertTrue(objVsBpFilter.shouldCollide(oLayer, 1));
+        }
 
         ObjVsObjFilter objVsObjFilter = new ObjVsObjFilter(numObjLayers);
-        Assert.assertTrue(objVsObjFilter.shouldCollide(2, 2));
+        for (int oLayer = 0; oLayer < 3; ++oLayer) {
+            Assert.assertTrue(objVsObjFilter.shouldCollide(oLayer, 0));
+            Assert.assertTrue(objVsObjFilter.shouldCollide(oLayer, 1));
+            Assert.assertTrue(objVsObjFilter.shouldCollide(oLayer, 2));
+        }
 
         int maxBodies = 1_800;
         int numBodyMutexes = 0; // 0 means "use the default value"
