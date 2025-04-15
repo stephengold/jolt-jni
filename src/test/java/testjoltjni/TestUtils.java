@@ -25,7 +25,8 @@ import com.github.stephengold.joltjni.BroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.BroadPhaseLayerInterfaceTable;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JoltPhysicsObject;
-import com.github.stephengold.joltjni.ObjVsObjFilter;
+import com.github.stephengold.joltjni.ObjectLayerPairFilter;
+import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
 import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilterTable;
 import com.github.stephengold.joltjni.PhysicsSystem;
@@ -511,8 +512,10 @@ final public class TestUtils {
                                 objLayerNonMoving, bpLayerNonMoving)
                         .mapObjectToBroadPhaseLayer(
                                 objLayerMoving, bpLayerMoving);
-        ObjVsObjFilter objVsObjFilter = new ObjVsObjFilter(numObjLayers)
-                .disablePair(objLayerNonMoving, objLayerNonMoving);
+        ObjectLayerPairFilter objVsObjFilter
+                = new ObjectLayerPairFilterTable(numObjLayers)
+                        .enableCollision(objLayerMoving, objLayerMoving)
+                        .enableCollision(objLayerMoving, objLayerNonMoving);
         ObjectVsBroadPhaseLayerFilter objVsBpFilter
                 = new ObjectVsBroadPhaseLayerFilterTable(
                         mapObj2Bp, numBpLayers, objVsObjFilter, numObjLayers);

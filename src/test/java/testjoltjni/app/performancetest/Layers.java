@@ -38,11 +38,12 @@ class Layers
 };
 
 /// Class that determines if two object layers can collide
-class ObjectLayerPairFilterImpl extends ObjVsObjFilter
+class ObjectLayerPairFilterImpl extends ObjectLayerPairFilterTable
 {
 	ObjectLayerPairFilterImpl() {
 		super(Layers.NUM_LAYERS);
-		disablePair(Layers.NON_MOVING, Layers.NON_MOVING);
+		enableCollision(Layers.MOVING, Layers.MOVING);
+		enableCollision(Layers.MOVING, Layers.NON_MOVING);
 	}
 };
 

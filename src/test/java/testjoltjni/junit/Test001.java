@@ -38,7 +38,8 @@ import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.ObjVsBpFilter;
-import com.github.stephengold.joltjni.ObjVsObjFilter;
+import com.github.stephengold.joltjni.ObjectLayerPairFilter;
+import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
@@ -233,8 +234,10 @@ public class Test001 {
                 = new ObjVsBpFilter(numObjLayers, numBpLayers)
                         .disablePair(objLayerNonMoving, bpLayerNonMoving);
 
-        ObjVsObjFilter objVsObjFilter = new ObjVsObjFilter(numObjLayers)
-                .disablePair(objLayerNonMoving, objLayerNonMoving);
+        ObjectLayerPairFilter objVsObjFilter
+                = new ObjectLayerPairFilterTable(numObjLayers)
+                        .enableCollision(objLayerMoving, objLayerMoving)
+                        .enableCollision(objLayerMoving, objLayerNonMoving);
 
         final int maxBodies = 4;
         final int numBodyMutexes = 0; // 0 means "use the default value"
