@@ -80,13 +80,13 @@ public class Test004 {
 
         ObjVsBpFilter objVsBpFilter
                 = new ObjVsBpFilter(numObjLayers, numBpLayers);
-        for (int oLayer = 0; oLayer < 3; ++oLayer) {
+        for (int oLayer = 0; oLayer < numObjLayers; ++oLayer) {
             Assert.assertTrue(objVsBpFilter.shouldCollide(oLayer, 0));
             Assert.assertTrue(objVsBpFilter.shouldCollide(oLayer, 1));
         }
 
         ObjVsObjFilter objVsObjFilter = new ObjVsObjFilter(numObjLayers);
-        for (int oLayer = 0; oLayer < 3; ++oLayer) {
+        for (int oLayer = 0; oLayer < numObjLayers; ++oLayer) {
             Assert.assertTrue(objVsObjFilter.shouldCollide(oLayer, 0));
             Assert.assertTrue(objVsObjFilter.shouldCollide(oLayer, 1));
             Assert.assertTrue(objVsObjFilter.shouldCollide(oLayer, 2));
