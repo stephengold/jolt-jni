@@ -622,7 +622,8 @@ public class BodyInterface extends NonCopyable {
      * @param bodyId the ID of the body to remove
      */
     public void removeBody(int bodyId) {
-        removeBody(va(), bodyId);
+        long bodyInterfaceVa = va();
+        removeBody(bodyInterfaceVa, bodyId);
     }
 
     /**
@@ -689,7 +690,8 @@ public class BodyInterface extends NonCopyable {
      * @param velocity the desired velocity (not null, unaffected)
      */
     public void setLinearVelocity(int bodyId, Vec3Arg velocity) {
-        setLinearVelocity(va(), bodyId,
+        long bodyInterfaceVa = va();
+        setLinearVelocity(bodyInterfaceVa, bodyId,
                 velocity.getX(), velocity.getY(), velocity.getZ());
     }
 

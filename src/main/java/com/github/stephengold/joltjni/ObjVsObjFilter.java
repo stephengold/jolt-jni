@@ -64,7 +64,9 @@ public class ObjVsObjFilter extends ObjectLayerPairFilter {
      * @return the modified filter, for chaining
      */
     public ObjVsObjFilter disablePair(int layer1, int layer2) {
-        disablePair(va(), layer1, layer2);
+        long filterVa = va();
+        disablePair(filterVa, layer1, layer2);
+
         return this;
     }
     // *************************************************************************

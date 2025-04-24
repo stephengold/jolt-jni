@@ -78,7 +78,9 @@ public class ObjVsBpFilter extends ObjectVsBroadPhaseLayerFilter {
      * @return the modified filter, for chaining
      */
     public ObjVsBpFilter disablePair(int objLayer, int bpLayer) {
-        disablePair(va(), objLayer, bpLayer);
+        long filterVa = va();
+        disablePair(filterVa, objLayer, bpLayer);
+
         return this;
     }
     // *************************************************************************
