@@ -608,9 +608,10 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Remove all bodies from the system.
+     * Remove all bodies from the system, but don't destroy them.
      *
      * @return the number of bodies removed (&ge;0)
+     * @see com.github.stephengold.joltjni.BodyInterface#removeBody(int)
      */
     public int removeAllBodies() {
         long systemVa = va();

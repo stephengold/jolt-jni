@@ -292,7 +292,8 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Destroy the specified body.
+     * Destroy the specified body. Don't use this on a body that has been added
+     * but not removed yet!
      *
      * @param bodyId the ID of the body to destroy
      */
@@ -617,7 +618,7 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Remove the specified body from the physics system.
+     * Remove the specified body from the physics system, but don't destroy it.
      *
      * @param bodyId the ID of the body to remove
      */

@@ -501,7 +501,7 @@ final public class TestUtils {
      * @return a new system
      */
     static public PhysicsSystem newPhysicsSystem(int maxBodies) {
-        // broadphase layers:
+        // broadphase layer IDs:
         int bpLayerNonMoving = 0;
         int bpLayerMoving = 1;
         int numBpLayers = 2;
