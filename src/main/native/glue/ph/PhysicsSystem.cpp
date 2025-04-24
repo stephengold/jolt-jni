@@ -95,6 +95,29 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_create
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    destroyAllBodies
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_destroyAllBodies
+  (JNIEnv *, jclass, jlong systemVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    BodyIDVector vector;
+    pSystem->GetBodies(vector);
+    BodyInterface& bi = pSystem->GetBodyInterface();
+    const size_t result = vector.size();
+    for (size_t i = 0; i < result; ++i) {
+        const BodyID id = vector[i];
+        if (bi.IsAdded(id)) {
+            bi.RemoveBody(id);
+        }
+        bi.DestroyBody(id);
+    }
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    drawBodies
  * Signature: (JJJ)V
  */

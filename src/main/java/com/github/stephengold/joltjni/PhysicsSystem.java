@@ -151,6 +151,18 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Remove and destroy all bodies in the system.
+     *
+     * @return the number of bodies destroyed (&ge;0)
+     */
+    public int destroyAllBodies() {
+        long systemVa = va();
+        int result = destroyAllBodies(systemVa);
+
+        return result;
+    }
+
+    /**
      * Render the bodies in the system, for debugging purposes.
      *
      * @param settings the settings to use (not null)
@@ -836,6 +848,8 @@ public class PhysicsSystem extends NonCopyable {
             long systemVa, long constraintVa);
 
     native private static long createPhysicsSystem();
+
+    native private static int destroyAllBodies(long systemVa);
 
     native private static void drawBodies(
             long systemVa, long settingsVa, long rendererVa);
