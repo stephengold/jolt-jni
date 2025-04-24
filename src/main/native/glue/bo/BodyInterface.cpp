@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Body/BodyInterface.h"
+#include "Jolt/Physics/Collision/BroadPhase/BroadPhase.h"
 #include "Jolt/Physics/Collision/Shape/Shape.h"
 
 #include "auto/com_github_stephengold_joltjni_BodyInterface.h"
@@ -61,6 +62,83 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_activat
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
     pInterface->ActivateBody(id);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    activateConstraint
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_activateConstraint
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong constraintVa) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const TwoBodyConstraint * const pConstraint
+            = reinterpret_cast<TwoBodyConstraint *> (constraintVa);
+    pInterface->ActivateConstraint(pConstraint);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    addAngularImpulse
+ * Signature: (JIFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addAngularImpulse
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId,
+  jfloat lx, jfloat ly, jfloat lz) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    const Vec3 angularImpulse(lx, ly, lz);
+    pInterface->AddAngularImpulse(id, angularImpulse);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    addBodiesAbort
+ * Signature: (JJIJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addBodiesAbort
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
+  jlong addState) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
+    BroadPhase::AddState const handle
+            = reinterpret_cast<BroadPhase::AddState> (addState);
+    pInterface->AddBodiesAbort(pArray, numBodies, handle);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    addBodiesFinalize
+ * Signature: (JJIJI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addBodiesFinalize
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
+  jlong addState, int activationOrdinal) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
+    BroadPhase::AddState const handle
+            = reinterpret_cast<BroadPhase::AddState> (addState);
+    const EActivation eActivation = (EActivation) activationOrdinal;
+    pInterface->AddBodiesFinalize(pArray, numBodies, handle, eActivation);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    addBodiesPrepare
+ * Signature: (JJI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addBodiesPrepare
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
+    BroadPhase::AddState const handle
+            = pInterface->AddBodiesPrepare(pArray, numBodies);
+    return reinterpret_cast<jlong> (handle);
 }
 
 /*

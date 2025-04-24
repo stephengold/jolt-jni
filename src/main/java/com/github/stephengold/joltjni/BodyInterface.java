@@ -30,6 +30,7 @@ import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstTwoBodyConstraint;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -86,7 +87,85 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Activate all non-static bodies attached to the specified constraint.
+     *
+     * @param constraint the constraint to activate (not null)
+     */
+    public void activateConstraint(ConstTwoBodyConstraint constraint) {
+        long bodyInterfaceVa = va();
+        long constraintVa = constraint.targetVa();
+        activateConstraint(bodyInterfaceVa, constraintVa);
+    }
+
+    /**
+     * Apply the specified angular impulse to the specified body.
+     *
+     * @param bodyId the ID of the body
+     * @param angularImpulse the impulse vector (not null, unaffected)
+     */
+    public void addAngularImpulse(int bodyId, Vec3Arg angularImpulse) {
+        long bodyInterfaceVa = va();
+        float lx = angularImpulse.getX();
+        float ly = angularImpulse.getY();
+        float lz = angularImpulse.getZ();
+        addAngularImpulse(bodyInterfaceVa, bodyId, lx, ly, lz);
+    }
+
+    /**
+     * Abort adding bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
+     * @param numBodies the number of bodies to be added (&ge;0)
+     * @param addState the handle returned by {@code addBodiesPrepare()}
+     */
+    public void addBodiesAbort(
+            BodyIdArray bodyIds, int numBodies, long addState) {
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        addBodiesAbort(bodyInterfaceVa, arrayVa, numBodies, addState);
+    }
+
+    /**
+     * Finish adding bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
+     * @param numBodies the number of bodies to be added (&ge;0)
+     * @param addState the handle returned by {@code addBodiesPrepare()}
+     * @param activation whether to activate the bodies (not null)
+     */
+    public void addBodiesFinalize(BodyIdArray bodyIds, int numBodies,
+            long addState, EActivation activation) {
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        int activationOrdinal = activation.ordinal();
+        addBodiesFinalize(bodyInterfaceVa, arrayVa, numBodies, addState,
+                activationOrdinal);
+    }
+
+    /**
+     * Prepare to add a batch of bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, possibly
+     * shuffled)
+     * @param numBodies the number of bodies to be added (&ge;0)
+     * @return a handle to be passed to {@code addBodiesFinalize()} or
+     * {@code addBodiesAbort()}
+     */
+    public long addBodiesPrepare(BodyIdArray bodyIds, int numBodies) {
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        long result = addBodiesPrepare(bodyInterfaceVa, arrayVa, numBodies);
+
+        return result;
+    }
+
+    /**
      * Add the specified body to the physics system.
+     * <p>
+     * To add many bodies at once, use {@code addBodiesPrepare()} followed by
+     * {@code addBodiesFinalize()}.
      *
      * @param body the body to add (not null)
      * @param activation whether to activate the body (not null)
@@ -825,6 +904,21 @@ public class BodyInterface extends NonCopyable {
             long boxVa, long bplFilterVa, long olFilterVa);
 
     native private static void activateBody(long bodyInterfaceVa, int bodyId);
+
+    native private static void activateConstraint(
+            long bodyInterfaceVa, long constraintVa);
+
+    native private static void addAngularImpulse(
+            long bodyInterfaceVa, int bodyId, float lx, float ly, float lz);
+
+    native private static void addBodiesAbort(
+            long bodyInterfaceVa, long arrayVa, int numBodies, long addState);
+
+    native private static void addBodiesFinalize(long bodyInterfaceVa,
+            long arrayVa, int numBodies, long addState, int activationOrdinal);
+
+    native private static long addBodiesPrepare(
+            long bodyInterfaceVa, long arrayVa, int numBodies);
 
     native private static void addBody(
             long bodyInterfaceVa, int bodyId, int activationOrdinal);
