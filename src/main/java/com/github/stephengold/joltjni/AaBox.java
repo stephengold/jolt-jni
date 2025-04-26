@@ -91,10 +91,10 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * @param halfExtent the desired half extent
      */
     public AaBox(Vec3Arg center, float halfExtent) {
-        float minX = center.getX();
-        float minY = center.getY();
-        float minZ = center.getZ();
-        long boxVa = createCubic(minX, minY, minZ, halfExtent);
+        float cx = center.getX();
+        float cy = center.getY();
+        float cz = center.getZ();
+        long boxVa = createCubic(cx, cy, cz, halfExtent);
         setVirtualAddress(boxVa, () -> free(boxVa));
     }
 
