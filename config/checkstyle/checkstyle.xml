@@ -15,6 +15,12 @@
         <property name="fileNamePattern" value="testjoltjni[/\\]app"/>
     </module>
 
+    <!-- Excludes all 'module-info.java' files from style checking:                     -->
+    <!-- See https://checkstyle.org/filefilters/beforeexecutionexclusionfilefilter.html -->
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value="module\-info\.java$"/>
+    </module>
+
     <!-- Check for headers:                       -->
     <!-- See https://checkstyle.org/checks/header -->
     <module name="Header">
