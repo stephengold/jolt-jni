@@ -29,7 +29,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
  * Interface for precise collision detection against the bodies in a
- * {@code PhysicsSpace}.
+ * {@code PhysicsSystem}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

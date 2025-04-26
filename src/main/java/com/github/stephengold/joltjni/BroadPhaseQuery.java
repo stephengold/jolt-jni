@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
  * Interface for crude collision detection against the bounding boxes in a
- * {@code PhysicsSpace}.
+ * {@code PhysicsSystem}.
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@ public interface ConstOrientedBox extends ConstJoltPhysicsObject {
     Vec3 getHalfExtents();
 
     /**
-     * Copy the transform that positions and rotates the local space axes to
+     * Copy the transform that translates and rotates the local-space axes to
      * world space. The box is unaffected.
      *
      * @return a new matrix
