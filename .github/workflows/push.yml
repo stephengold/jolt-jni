@@ -285,7 +285,7 @@ jobs:
   Java21-x-Linux_LoongArch64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
-    timeout-minutes: 14
+    timeout-minutes: 20
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -296,9 +296,9 @@ jobs:
       - run: sudo apt install g++-13-loongarch64-linux-gnu
       - run: loongarch64-linux-gnu-g++-13 --version
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Pflavor=Sp -Ptarget=Linux_LoongArch64 assemble
+      - name: gradlew -Ptarget=Linux_LoongArch64 assemble
         run: |
-          ./gradlew -Pflavor=Sp -Ptarget=Linux_LoongArch64 assemble \
+          ./gradlew -Ptarget=Linux_LoongArch64 assemble \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
