@@ -76,7 +76,7 @@ android {
     }
     flavorDimensions 'precision'
     namespace = groupID + '.joltjni'
-    ndkVersion = '27.2.12479018' // r27c
+    ndkVersion = '28.1.13356709' // r28b
     productFlavors {
         if (!project.hasProperty('flavor') || flavor == 'Dp') {
             Dp { // flavor with double-precision locations
