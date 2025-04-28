@@ -14,8 +14,8 @@ plugins {
 // or by -P options on the Gradle command line.
 
 ext {
-    groupID = 'com.github.stephengold'
     baseName = "${artifact}-${jjVersion}" // for artifacts
+    groupID = 'com.github.stephengold'
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
 
@@ -122,8 +122,8 @@ tasks.register('release') {
 publishing {
     publications {
         maven(MavenPublication) {
-            artifactId = artifact
             afterEvaluate { from components.complete }
+            artifactId = artifact
             groupId = groupID
             pom {
                 description = 'a JNI interface to Jolt Physics and V-HACD'
