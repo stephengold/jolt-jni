@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -86,6 +86,26 @@ public class MeshShapeSettings extends ShapeSettings {
         long indicesVa = itList.va();
         long settingsVa
                 = createMeshShapeSettings(numVertices, vBuffer, indicesVa);
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Mesh);
+    }
+
+    /**
+     * Instantiate settings for the specified vertices without indices.
+     *
+     * @param positionBuffer the vertex positions (not null, capacity a multiple
+     * of 9, unaffected)
+     */
+    public MeshShapeSettings(FloatBuffer positionBuffer) {
+        int numFloats = positionBuffer.capacity();
+        assert numFloats % 9 == 0 : "numFloats = " + numFloats;
+        int numVertices = numFloats / 3;
+        int numTriangles = numVertices / 3;
+
+        PhysicsMaterialList materials = new PhysicsMaterialList();
+        long materialsVa = materials.va();
+        long settingsVa = createSettingsFromTriangles(
+                numTriangles, positionBuffer, materialsVa);
         setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Mesh);
     }
