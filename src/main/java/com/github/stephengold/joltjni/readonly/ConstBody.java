@@ -108,6 +108,15 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     RVec3 getCenterOfMassPosition();
 
     /**
+     * Copy the location of the body's center of mass (which might not coincide
+     * with its origin). The body is unaffected.
+     *
+     * @param storeLocation storage for the location (in system coordinates, not
+     * null, modified)
+     */
+    void getCenterOfMassPosition(RVec3 storeLocation);
+
+    /**
      * Copy the coordinate transform of the body's center of mass. The body is
      * unaffected.
      *

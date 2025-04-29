@@ -589,6 +589,29 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Copy the location of the body's center of mass (which might not coincide
+     * with its origin). The body is unaffected.
+     *
+     * @param storeLocation storage for the location (in system coordinates, not
+     * null, modified)
+     */
+    @Override
+    public void getCenterOfMassPosition(RVec3 storeLocation) {
+        long bodyVa = va();
+
+        double xx = getCenterOfMassPositionX(bodyVa);
+        assert Double.isFinite(xx) : "xx = " + xx;
+
+        double yy = getCenterOfMassPositionY(bodyVa);
+        assert Double.isFinite(yy) : "yy = " + yy;
+
+        double zz = getCenterOfMassPositionZ(bodyVa);
+        assert Double.isFinite(zz) : "zz = " + zz;
+
+        storeLocation.set(xx, yy, zz);
+    }
+
+    /**
      * Copy the coordinate transform of the body's center of mass. The body is
      * unaffected.
      *
