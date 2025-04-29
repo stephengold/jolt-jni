@@ -1,9 +1,9 @@
 # release log for the Jolt-JNI project
 
-## Version 0.9.10 released on TBD
+## Version 0.9.10 released on 28 April 2025
 
 + API change:
- + remove the `MapObj2Bp` class (use `BroadPhaseLayerInterfaceTable` instead)
+  + remove the `MapObj2Bp` class (use `BroadPhaseLayerInterfaceTable` instead)
 
 + Bugfixes:
   + `Shape.copyDebugTriangles()` doesn't account for the center-of-mass
