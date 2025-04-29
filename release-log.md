@@ -1,5 +1,25 @@
 # release log for the Jolt-JNI project
 
+## Version 0.9.10 released on TBD
+
++ API change:
+ + remove the `MapObj2Bp` class (use `BroadPhaseLayerInterfaceTable` instead)
+
++ Bugfixes:
+  + `Shape.copyDebugTriangles()` doesn't account for the center-of-mass
+  + infinite recursion colliding triangle with triangle (JoltPhysics issue 1620)
+
++ Added 4 classes:
+  + `BroadPhaseLayerInterfaceTable`
+  + `ObjectLayerPairFilterTable`
+  + `ObjectVsBroadPhaseLayerFilterTable`
+  + `OrientedBox`
+
++ Added some public methods to the libraries.
++ Declared an open module that exports all packages.
++ Updated the Jolt source code and assets to 2dcab94 (=sg250427).
++ Updated the OSHI library to v6.8.1 .
+
 ## Version 0.9.9 released on 13 April 2025
 
 + API changes:
