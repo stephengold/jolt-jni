@@ -476,10 +476,12 @@ public class BodyCreationSettings
      * mRotation)
      *
      * @param quat the desired rotation (relative to the system axes, not null,
-     * unaffected, default=(0,0,0,1))
+     * normalized, unaffected, default=(0,0,0,1))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setRotation(QuatArg quat) {
+        assert quat.isNormalized() : "length =" + quat.length();
+
         long bodySettingsVa = va();
         float qw = quat.getW();
         float qx = quat.getX();
