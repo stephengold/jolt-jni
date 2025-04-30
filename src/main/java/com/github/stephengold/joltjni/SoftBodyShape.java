@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A {@code Shape} to used with soft bodies.
+ * A {@code Shape} used only with soft bodies.
  *
  * @author Stephen Gold sgold@sonic.net
  */

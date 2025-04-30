@@ -767,7 +767,7 @@ public class PhysicsSystem extends NonCopyable {
      * Alter the system's gravity vector.
      *
      * @param gravity the desired acceleration vector (in system coordinates,
-     * not null, unaffected)
+     * not null, unaffected, default=(0,-9.81,0))
      */
     public void setGravity(Vec3Arg gravity) {
         long systemVa = va();

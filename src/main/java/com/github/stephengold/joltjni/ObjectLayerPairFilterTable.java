@@ -31,7 +31,7 @@ public class ObjectLayerPairFilterTable extends ObjectLayerPairFilter {
     // constructors
 
     /**
-     * Instantiate a filter with the specified capacity. All interactions are
+     * Instantiate a filter with the specified capacity and all collisions
      * disabled.
      *
      * @param numObjectLayers the number of object layers (&ge;1)
