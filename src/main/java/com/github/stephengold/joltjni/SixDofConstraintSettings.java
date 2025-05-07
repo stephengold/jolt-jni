@@ -181,9 +181,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
-     * Access the spring settings for the specified degree of freedom. The
-     * constraint settings are unaffected. (native attribute:
-     * mLimitsSpringSettings)
+     * Access the spring settings for the specified degree of freedom. (native
+     * attribute: mLimitsSpringSettings)
      *
      * @param translationDof which DOF (not null, not a rotation DOF)
      * @return a new JVM object with the pre-existing native object assigned
