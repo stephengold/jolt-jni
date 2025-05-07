@@ -146,7 +146,7 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
 
     /**
      * Alter the target angular velocity of body 2 in the constraint space of
-     * body 2.
+     * body 2. (native method: SetTargetAngularVelocityCS)
      *
      * @param omega the desired angular velocity (in radians per second, not
      * null, unaffected)
@@ -160,7 +160,8 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the target orientation in constraint space.
+     * Alter the target orientation in constraint space. (native method:
+     * SetTargetOrientationCS)
      *
      * @param orientation the desired orientation (not null, unaffected)
      */
