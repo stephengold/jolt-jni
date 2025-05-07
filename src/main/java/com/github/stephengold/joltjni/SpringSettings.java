@@ -191,10 +191,13 @@ final public class SpringSettings extends JoltPhysicsObject {
      * {@code T = -k * theta - c * w} for an angular spring.
      *
      * @param damping the desired damping (default=0)
+     * @return the modified settings, for chaining
      */
-    public void setDamping(float damping) {
+    public SpringSettings setDamping(float damping) {
         long settingsVa = va();
         setDamping(settingsVa, damping);
+
+        return this;
     }
 
     /**
@@ -206,21 +209,27 @@ final public class SpringSettings extends JoltPhysicsObject {
      * limits.
      *
      * @param frequency the desired frequency (default=0)
+     * @return the modified settings, for chaining
      */
-    public void setFrequency(float frequency) {
+    public SpringSettings setFrequency(float frequency) {
         long settingsVa = va();
         setFrequency(settingsVa, frequency);
+
+        return this;
     }
 
     /**
      * Alter how the spring is specified. (native attribute: mMode)
      *
      * @param mode the desired mode (not null, default=FrequencyAndDamping)
+     * @return the modified settings, for chaining
      */
-    public void setMode(ESpringMode mode) {
+    public SpringSettings setMode(ESpringMode mode) {
         long settingsVa = va();
         int ordinal = mode.ordinal();
         setMode(settingsVa, ordinal);
+
+        return this;
     }
 
     /**
@@ -235,10 +244,13 @@ final public class SpringSettings extends JoltPhysicsObject {
      * If negative, the constraint will have hard limits.
      *
      * @param stiffness (default=0)
+     * @return the modified settings, for chaining
      */
-    public void setStiffness(float stiffness) {
+    public SpringSettings setStiffness(float stiffness) {
         long settingsVa = va();
         setStiffness(settingsVa, stiffness);
+
+        return this;
     }
     // *************************************************************************
     // native private methods
