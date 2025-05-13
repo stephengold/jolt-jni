@@ -54,6 +54,7 @@ import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -135,8 +136,7 @@ public class Test006 {
         testConvexHullSsDefaults(settings);
         testConvexHullSsSetters(settings);
 
-        List<Vec3Arg> list = new ArrayList<>(1);
-        list.add(new Vec3());
+        Collection<Vec3Arg> list = List.of(new Vec3());
         ConvexHullShapeSettings settings2 = new ConvexHullShapeSettings(list);
 
         testConvexHullSsDefaults(settings2);
