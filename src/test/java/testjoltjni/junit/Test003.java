@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.CharacterSettings;
 import com.github.stephengold.joltjni.CharacterVirtual;
 import com.github.stephengold.joltjni.CharacterVirtualSettings;
 import com.github.stephengold.joltjni.CollisionGroup;
@@ -92,6 +93,7 @@ public class Test003 {
 
         doAaBox();
         doBodyCreationSettings();
+        doCharacter();
         doCharacterVirtual();
         doCollisionGroup();
         doContactSettings();
@@ -230,6 +232,22 @@ public class Test003 {
             TestUtils.testClose(bcs, shape);
         }
 
+        System.gc();
+    }
+
+    /**
+     * Test the {@code Character} class.
+     */
+    private static void doCharacter() {
+        CharacterSettings settings = new CharacterSettings();
+        PhysicsSystem system = new PhysicsSystem();
+        com.github.stephengold.joltjni.Character character
+                = new com.github.stephengold.joltjni.Character(
+                        settings, new RVec3(), new Quat(), 0L, system);
+
+        testCharacterDefaults(character);
+
+        TestUtils.testClose(character, system, settings);
         System.gc();
     }
 
@@ -564,6 +582,21 @@ public class Test003 {
         TestUtils.assertEquals(0.12f, 0.13f, 0.14f, bcs.getPosition(), 0f);
         Assert.assertEquals(0.15f, bcs.getRestitution(), 0f);
         TestUtils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code Character}.
+     *
+     * @param character the character to test (not null, unaffected)
+     */
+    private static void testCharacterDefaults(
+            com.github.stephengold.joltjni.Character character) {
+        TestUtils.assertEquals(
+                0f, 0f, 0f, character.getCenterOfMassPosition(), 0f);
+        Assert.assertEquals(0, character.getLayer());
+        TestUtils.assertEquals(0f, 0f, 0f, character.getLinearVelocity(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, character.getPosition(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, 1f, character.getRotation(), 0f);
     }
 
     /**
