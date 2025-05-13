@@ -81,7 +81,7 @@ public class CharacterBaseSettings
     /**
      * Replace the shape. (native attribute: mShape)
      *
-     * @param shape the desired shape (not null, unaffected)
+     * @param shape the desired shape (not null, unaffected, default=null)
      */
     public void setShape(ConstShape shape) {
         long settingsVa = va();

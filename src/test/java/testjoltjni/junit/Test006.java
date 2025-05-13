@@ -130,12 +130,14 @@ public class Test006 {
      * Test the {@code ConvexHullShapeSettings} class.
      */
     private static void doConvexHullShapeSettings() {
+        // create from an array:
         Vec3Arg[] points = {new Vec3()};
         ConvexHullShapeSettings settings = new ConvexHullShapeSettings(points);
 
         testConvexHullSsDefaults(settings);
         testConvexHullSsSetters(settings);
 
+        // create from a collection:
         Collection<Vec3Arg> list = List.of(new Vec3());
         ConvexHullShapeSettings settings2 = new ConvexHullShapeSettings(list);
 

@@ -196,7 +196,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * Needs to be invoked after every physics update.
      *
      * @param maxSeparation the max distance between the floor and the character
-     * for standing
+     * for standing (in meters)
      */
     public void postSimulation(float maxSeparation) {
         postSimulation(maxSeparation, true);
@@ -206,7 +206,7 @@ public class Character extends CharacterBase implements ConstCharacter {
      * Needs to be invoked after every physics update.
      *
      * @param maxSeparation the max distance between the floor and the character
-     * for standing
+     * for standing (in meters)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
@@ -237,7 +237,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     /**
      * Alter the character's object layer, using the locking body interface.
      *
-     * @param layer the index of the desired layer
+     * @param layer the index of the desired layer (default=0)
      */
     public void setLayer(int layer) {
         setLayer(layer, true);
@@ -246,7 +246,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     /**
      * Alter the character's object layer.
      *
-     * @param layer the index of the desired layer
+     * @param layer the index of the desired layer (default=0)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
