@@ -70,7 +70,7 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * protect the step listeners (if any) from garbage collection
      */
-    final private List<PhysicsStepListener> stepListeners = new ArrayList<>();
+    final private List<PhysicsStepListener> stepListeners = new ArrayList<>(4);
     /**
      * map virtual address to system
      */
