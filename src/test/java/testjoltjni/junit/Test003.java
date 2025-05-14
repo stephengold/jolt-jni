@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.CapsuleShape;
 import com.github.stephengold.joltjni.CharacterSettings;
 import com.github.stephengold.joltjni.CharacterVirtual;
 import com.github.stephengold.joltjni.CharacterVirtualSettings;
@@ -64,6 +65,7 @@ import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
+import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -239,15 +241,22 @@ public class Test003 {
      * Test the {@code Character} class.
      */
     private static void doCharacter() {
+        float radius = 1f; // meters
+        float height = 2f; // meters
+        ConstShape shape = new CapsuleShape(height / 2f, radius);
+
         CharacterSettings settings = new CharacterSettings();
-        PhysicsSystem system = new PhysicsSystem();
+        settings.setShape(shape);
+
+        int maxBodies = 1;
+        PhysicsSystem system = TestUtils.newPhysicsSystem(maxBodies);
         com.github.stephengold.joltjni.Character character
                 = new com.github.stephengold.joltjni.Character(
                         settings, new RVec3(), new Quat(), 0L, system);
 
         testCharacterDefaults(character);
 
-        TestUtils.testClose(character, system, settings);
+        TestUtils.testClose(character, system, settings, shape);
         System.gc();
     }
 
