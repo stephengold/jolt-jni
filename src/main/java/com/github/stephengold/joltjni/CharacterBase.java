@@ -70,7 +70,7 @@ abstract public class CharacterBase
     }
 
     /**
-     * Alter the maximum slope that character can walk on.
+     * Alter the maximum slope that the character can walk on.
      *
      * @param angle the desired slope angle (in radians, default=5*Pi/18)
      */
@@ -95,7 +95,7 @@ abstract public class CharacterBase
     // ConstCharacterBase methods
 
     /**
-     * Return the maximum slope the character can walk on. The character is
+     * Return the maximum slope that the character can walk on. The character is
      * unaffected.
      *
      * @return the cosine of the slope angle

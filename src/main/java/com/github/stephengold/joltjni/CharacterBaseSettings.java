@@ -68,7 +68,7 @@ public class CharacterBaseSettings
     }
 
     /**
-     * Alter the maximum slope on which the character can walk. (native
+     * Alter the maximum slope that the character can walk on. (native
      * attribute: mMaxSlopeAngle)
      *
      * @param angle (in radians, default=5*Pi/18)
@@ -136,8 +136,8 @@ public class CharacterBaseSettings
     }
 
     /**
-     * Return the maximum slope on which the character can walk. The settings
-     * are unaffected. (native attribute: mMaxSlopeAngle)
+     * Return the maximum slope that the character can walk on. The settings are
+     * unaffected. (native attribute: mMaxSlopeAngle)
      *
      * @return the angle (in radians)
      */
