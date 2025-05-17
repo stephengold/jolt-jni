@@ -96,6 +96,20 @@ public class VertexAttributes
     // new methods exposed
 
     /**
+     * Alter the compliance for bend edges. (native attribute: mBendCompliance)
+     *
+     * @param compliance the desired compliance value (MAX_VALUE to disable any
+     * bend edges attached to the vertex, default=MAX_VALUE)
+     * @return the argument, for chaining
+     */
+    public float setBendCompliance(float compliance) {
+        long attributesVa = va();
+        setBendCompliance(attributesVa, compliance);
+
+        return compliance;
+    }
+
+    /**
      * Alter the compliance for regular edges. (native attribute: mCompliance)
      *
      * @param compliance the desired compliance value (MAX_VALUE to disable any
@@ -107,6 +121,22 @@ public class VertexAttributes
         setCompliance(attributesVa, compliance);
 
         return compliance;
+    }
+
+    /**
+     * Alter the multiplier for the maximum distance of the long-range
+     * attachment (LRA) constraint. (native attribute:
+     * mLRAMaxDistanceMultiplier)
+     *
+     * @param multiplier the desired multiplier for the maximum distance of the
+     * LRA constraint (relative to the rest-pose distance, default=1)
+     * @return the argument, for chaining
+     */
+    public float setLraMaxDistanceMultiplier(float multiplier) {
+        long attributesVa = va();
+        setLraMaxDistanceMultiplier(attributesVa, multiplier);
+
+        return multiplier;
     }
 
     /**
@@ -230,8 +260,14 @@ public class VertexAttributes
 
     native private static float getShearCompliance(long attributesVa);
 
+    native private static void setBendCompliance(
+            long attributesVa, float compliance);
+
     native private static void setCompliance(
             long attributesVa, float compliance);
+
+    native private static void setLraMaxDistanceMultiplier(
+            long attributesVa, float multiplier);
 
     native private static void setLraType(long attributesVa, int ordinal);
 

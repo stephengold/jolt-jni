@@ -140,6 +140,18 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_VertexAttributes
+ * Method:    setBendCompliance
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_setBendCompliance
+  (JNIEnv *, jclass, jlong attributesVa, jfloat compliance) {
+    SoftBodySharedSettings::VertexAttributes * const pAttributes
+            = reinterpret_cast<SoftBodySharedSettings::VertexAttributes *> (attributesVa);
+    pAttributes->mBendCompliance = compliance;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VertexAttributes
  * Method:    setCompliance
  * Signature: (JF)V
  */
@@ -148,6 +160,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_setC
     SoftBodySharedSettings::VertexAttributes * const pAttributes
             = reinterpret_cast<SoftBodySharedSettings::VertexAttributes *> (attributesVa);
     pAttributes->mCompliance = compliance;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VertexAttributes
+ * Method:    setLraMaxDistanceMultiplier
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_setLraMaxDistanceMultiplier
+  (JNIEnv *, jclass, jlong attributesVa, jfloat multiplier) {
+    SoftBodySharedSettings::VertexAttributes * const pAttributes
+            = reinterpret_cast<SoftBodySharedSettings::VertexAttributes *> (attributesVa);
+    pAttributes->mLRAMaxDistanceMultiplier = multiplier;
 }
 
 /*
