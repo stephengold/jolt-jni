@@ -25,7 +25,8 @@ import com.github.stephengold.joltjni.enumerate.ELraType;
 import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
 
 /**
- * Per-vertex attributes used to configure the constraints in a soft body.
+ * Per-vertex attributes used to configure the constraints in a soft body. The
+ * compliance of each constraint is determined by averaging attached vertices.
  * (native type: {@code SoftBodySharedSettings::VertexAttributes})
  *
  * @author Stephen Gold sgold@sonic.net
@@ -47,11 +48,9 @@ public class VertexAttributes
     /**
      * Instantiate attributes as specified.
      *
-     * @param compliance the desired compliance of normal/regular edges
-     * (default=0)
-     * @param shearCompliance the desired compliance of the shear edges
-     * (default=0)
-     * @param bendCompliance the desired compliance of bend edges
+     * @param compliance the desired compliance for regular edges (default=0)
+     * @param shearCompliance the desired compliance for shear edges (default=0)
+     * @param bendCompliance the desired compliance for bend edges
      * (default=MAX_VALUE)
      */
     public VertexAttributes(float compliance, float shearCompliance,
@@ -62,11 +61,9 @@ public class VertexAttributes
     /**
      * Instantiate attributes as specified.
      *
-     * @param compliance the desired compliance of normal/regular edges
-     * (default=0)
-     * @param shearCompliance the desired compliance of the shear edges
-     * (default=0)
-     * @param bendCompliance the desired compliance of bend edges
+     * @param compliance the desired compliance for regular edges (default=0)
+     * @param shearCompliance the desired compliance for shear edges (default=0)
+     * @param bendCompliance the desired compliance for bend edges
      * (default=MAX_VALUE)
      * @param lraType the desired long-range attachment (LRA) constraint (not
      * null, default=None)
@@ -79,11 +76,9 @@ public class VertexAttributes
     /**
      * Instantiate attributes as specified.
      *
-     * @param compliance the desired compliance of normal/regular edges
-     * (default=0)
-     * @param shearCompliance the desired compliance of the shear edges
-     * (default=0)
-     * @param bendCompliance the desired compliance of bend edges
+     * @param compliance the desired compliance for regular edges (default=0)
+     * @param shearCompliance the desired compliance for shear edges (default=0)
+     * @param bendCompliance the desired compliance for bend edges
      * (default=MAX_VALUE)
      * @param lraType the desired long-range attachment (LRA) constraint (not
      * null, default=None)
@@ -101,10 +96,10 @@ public class VertexAttributes
     // new methods exposed
 
     /**
-     * Alter the compliance of normal/regular edges. (native attribute:
-     * mCompliance)
+     * Alter the compliance for regular edges. (native attribute: mCompliance)
      *
-     * @param compliance the desired compliance value
+     * @param compliance the desired compliance value (MAX_VALUE to disable any
+     * regular edges attached to the vertex, default=0)
      * @return the argument, for chaining
      */
     public float setCompliance(float compliance) {
@@ -118,7 +113,7 @@ public class VertexAttributes
      * Alter the type of the long-range attachment (LRA) constraint. (native
      * attribute: mLRAType)
      *
-     * @param type the desired type (not null)
+     * @param type the desired type (not null, default=None)
      */
     public void setLraType(ELraType type) {
         long attributesVa = va();
@@ -127,10 +122,11 @@ public class VertexAttributes
     }
 
     /**
-     * Alter the compliance of the shear edges. (native attribute:
+     * Alter the compliance for shear edges. (native attribute:
      * mShearCompliance)
      *
-     * @param compliance the desired compliance value
+     * @param compliance the desired compliance value (MAX_VALUE to disable any
+     * shear edges attached to the vertex, default=0)
      * @return the argument, for chaining
      */
     public float setShearCompliance(float compliance) {
@@ -157,7 +153,7 @@ public class VertexAttributes
     }
 
     /**
-     * Return the compliance of normal/regular edges. The attributes are
+     * Return the compliance of the regular edges. The attributes are
      * unaffected. (native attribute: mCompliance)
      *
      * @return the compliance value

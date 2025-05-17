@@ -201,7 +201,7 @@ public class SoftBodyCreationSettings
     /**
      * Alter the number of solver iterations. (native member: mNumIterations)
      *
-     * @param numIterations the desired number of iterations
+     * @param numIterations the desired number of iterations (default=5)
      * @return the modified settings, for chaining
      */
     public SoftBodyCreationSettings setNumIterations(int numIterations) {
