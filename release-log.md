@@ -209,7 +209,7 @@
  + Deleted a redundant `addShape()` method from
    the `CompoundShapeSettings` class.
  + Redesigned the `CharacterVsCharacterCollisionSimple` class.
- + Depublicized the `Wheel.newWheel()` method.
+ + De-publicized the `Wheel.newWheel()` method.
 
 + Bug fixes:
  + crash due to use-after-free when a `PhysicsSystem` gets cleaned
