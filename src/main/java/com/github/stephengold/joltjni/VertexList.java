@@ -125,7 +125,8 @@ final public class VertexList {
 
         int numFloats = numVertices * numAxes;
         if (numFloats > buffer.capacity()) {
-            FloatBuffer oldBuffer = buffer.rewind();
+            // Android SDK requires the following cast:
+            FloatBuffer oldBuffer = (FloatBuffer) buffer.rewind();
             this.buffer = Jolt.newDirectFloatBuffer(numFloats);
             while (oldBuffer.hasRemaining()) {
                 float x = oldBuffer.get();
