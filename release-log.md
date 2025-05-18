@@ -1,5 +1,20 @@
 # release log for the Jolt-JNI project
 
+## Version 1.0.0 released on TBD
+
++ Add 5 public methods:
+  + `SoftBodyCreationSettings.setUserData()`
+  + `SoftBodyCreationSettings.getNumIterations()`
+  + `SoftBodyCreationSettings.getUserData()`
+  + `VertexAtrributes.setBendCompliance()`
+  + `VertexAtrributes.setLraMaxDistanceMultiplier()`
+
++ Add chaining to 4 setters:
+  + `SpringSettings.setDamping()`
+  + `SpringSettings.setFrequency()`
+  + `SpringSettings.setMode()`
+  + `SpringSettings.setStiffness()`
+
 ## Version 0.9.10 released on 28 April 2025
 
 + API change:
