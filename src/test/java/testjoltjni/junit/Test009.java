@@ -103,7 +103,7 @@ public class Test009 {
         };
         Decomposer decomposer = new Decomposer().addProgressListener(listener);
 
-        // Decompose the triangle mesh into a 3 hulls:
+        // Decompose the triangle mesh into 3 hulls:
         Parameters parameters = new Parameters();
         Collection<ConvexHull> hulls
                 = decomposer.decompose(locationArray, indexArray, parameters);

@@ -51,7 +51,7 @@ public class Part extends BodyCreationSettings {
      * unaffected. (native attribute: mToParent)
      *
      * @param subType the expected type of constraint (not null)
-     * @return a new JVM with the pre-exising native object assigned
+     * @return a new JVM with the pre-existing native object assigned
      */
     public ConstraintSettings getToParent(EConstraintSubType subType) {
         long partVa = va();

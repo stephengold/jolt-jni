@@ -31,7 +31,7 @@ public class BroadPhaseLayerInterfaceTable extends BroadPhaseLayerInterface {
     // constructors
 
     /**
-     * Instantiate an default map with the specified capacity. It maps every
+     * Instantiate a default map with the specified capacity. It maps every
      * object layer to broad-phase layer zero.
      *
      * @param numObjLayers the desired capacity (number of object layers)

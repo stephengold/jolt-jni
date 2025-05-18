@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -135,7 +135,7 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
      * horizontal for adjusting the step-forward test. (native attribute:
      * mWalkStairsCosAngleForwardContact)
      *
-     * @param cosine the cosine of the maximum angle (default=cos(75 degrees)}
+     * @param cosine the cosine of the maximum angle (default=cos(75 degrees))
      */
     public void setWalkStairsCosAngleForwardContact(float cosine) {
         long settingsVa = va();

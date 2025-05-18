@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -102,7 +102,7 @@ public class ChbFace extends NonCopyable {
      * unaffected.
      *
      * @param point the location to test (not null, unaffected)
-     * @return true if facing the test point, otherwise false
+     * @return {@code true} if facing the test point, otherwise {@code false}
      */
     public boolean isFacing(Vec3Arg point) {
         long faceVa = va();

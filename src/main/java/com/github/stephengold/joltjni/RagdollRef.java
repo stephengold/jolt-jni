@@ -34,7 +34,7 @@ final public class RagdollRef extends Ref {
     // fields
 
     /**
-     * where to add the bodies and constraints (may be null)
+     * where to add the bodies and constraints (may be {@code null})
      */
     final private PhysicsSystem system;
     // *************************************************************************
@@ -74,7 +74,7 @@ final public class RagdollRef extends Ref {
      * Add bodies and constraints to the physics system and optionally activate
      * the bodies.
      *
-     * @param activation whether to activate bodies (not null)
+     * @param activation whether to activate bodies (not {@code null})
      */
     public void addToPhysicsSystem(EActivation activation) {
         long ragdollVa = targetVa();
@@ -109,7 +109,7 @@ final public class RagdollRef extends Ref {
     /**
      * Drive the ragdoll to the specified pose using motors.
      *
-     * @param pose the desired pose (not null, unaffected)
+     * @param pose the desired pose (not {@code null}, unaffected)
      */
     public void driveToPoseUsingMotors(SkeletonPose pose) {
         long ragdollVa = targetVa();

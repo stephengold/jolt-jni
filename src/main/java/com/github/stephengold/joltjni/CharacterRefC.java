@@ -40,7 +40,7 @@ final public class CharacterRefC
     // fields
 
     /**
-     * where to add the body (may be null)
+     * where to add the body (may be {@code null})
      */
     final private PhysicsSystem system;
     // *************************************************************************

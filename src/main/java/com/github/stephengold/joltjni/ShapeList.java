@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -106,7 +106,7 @@ final public class ShapeList extends Array<ShapeRefC> {
     }
 
     /**
-     * Put the a reference to the specified shape at the specified index.
+     * Put a reference to the specified shape at the specified index.
      *
      * @param elementIndex the index at which to put the reference (&ge;0)
      * @param shapeRef the reference to put (not null)

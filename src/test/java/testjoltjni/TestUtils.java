@@ -624,7 +624,7 @@ final public class TestUtils {
     }
 
     /**
-     * Test whether all of the named CPU features are present.
+     * Test whether all the named CPU features are present.
      *
      * @param requiredFeatures the names of the features to test for
      * @return {@code true} if all are present, otherwise {@code false}

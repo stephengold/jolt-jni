@@ -67,7 +67,7 @@ public class Parameters extends JoltPhysicsObject {
      * Return the algorithm that fills voxels to create a solid object. The
      * parameters are unaffected. (native field: m_fillMode)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public FillMode getFillMode() {
         long parametersVa = va();
@@ -223,7 +223,7 @@ public class Parameters extends JoltPhysicsObject {
      * Specify the algorithm that fills voxels to create a solid object. (native
      * field: m_fillMode)
      *
-     * @param mode an enum value (not null, default=FloodFill)
+     * @param mode an enum value (not {@code null}, default=FloodFill)
      * @return the modified properties, for chaining
      */
     public Parameters setFillMode(FillMode mode) {
@@ -368,8 +368,9 @@ public class Parameters extends JoltPhysicsObject {
     /**
      * Test for exact equivalence with another Object.
      *
-     * @param otherObject (may be null, unaffected)
-     * @return true if the objects are equivalent, otherwise false
+     * @param otherObject (may be {@code null}, unaffected)
+     * @return {@code true} if the objects are equivalent, otherwise
+     * {@code false}
      */
     @Override
     public boolean equals(Object otherObject) {
@@ -417,7 +418,7 @@ public class Parameters extends JoltPhysicsObject {
     /**
      * Represent this instance as a String.
      *
-     * @return a descriptive string of text (not null, not empty)
+     * @return a descriptive string of text (not {@code null}, not empty)
      */
     @Override
     public String toString() {
