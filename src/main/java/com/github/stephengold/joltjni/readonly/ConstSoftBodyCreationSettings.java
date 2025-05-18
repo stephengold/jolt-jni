@@ -87,6 +87,13 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
     float getMaxLinearVelocity();
 
     /**
+     * Return the number of solver iterations. The settings are unaffected.
+     *
+     * @return the number of iterations
+     */
+    int getNumIterations();
+
+    /**
      * Return the index of the object layer. The settings are unaffected.
      *
      * @return the layer index (&ge;0, &lt;numObjectLayers)
@@ -139,4 +146,12 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
      * {@code false}
      */
     boolean getUpdatePosition();
+
+    /**
+     * Return the user data. The settings are unaffected. (native member:
+     * mUserData)
+     *
+     * @return the value
+     */
+    long getUserData();
 }

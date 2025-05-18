@@ -319,6 +319,19 @@ public class SoftBodyCreationSettings
 
         return this;
     }
+
+    /**
+     * Alter the user data. (native member: mUserData)
+     *
+     * @param value the desired value (default=0)
+     * @return the modified settings, for chaining
+     */
+    public SoftBodyCreationSettings setUserData(long value) {
+        long bodySettingsVa = va();
+        setUserData(bodySettingsVa, value);
+
+        return this;
+    }
     // *************************************************************************
     // ConstSoftBodyCreationSettings methods
 
@@ -418,6 +431,20 @@ public class SoftBodyCreationSettings
     public float getMaxLinearVelocity() {
         long bodySettingsVa = va();
         float result = getMaxLinearVelocity(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the number of solver iterations. The settings are unaffected.
+     * (native member: mNumIterations)
+     *
+     * @return the number of iterations
+     */
+    @Override
+    public int getNumIterations() {
+        long bodySettingsVa = va();
+        int result = getNumIterations(bodySettingsVa);
 
         return result;
     }
@@ -540,6 +567,20 @@ public class SoftBodyCreationSettings
 
         return result;
     }
+
+    /**
+     * Return the user data. The settings are unaffected. (native member:
+     * mUserData)
+     *
+     * @return the value
+     */
+    @Override
+    public long getUserData() {
+        long bodySettingsVa = va();
+        long result = getUserData(bodySettingsVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -565,6 +606,8 @@ public class SoftBodyCreationSettings
 
     native private static float getMaxLinearVelocity(long bodySettingsVa);
 
+    native private static int getNumIterations(long bodySettingsVa);
+
     native private static int getObjectLayer(long bodySettingsVa);
 
     native private static double getPositionX(long bodySettingsVa);
@@ -588,6 +631,8 @@ public class SoftBodyCreationSettings
     native private static long getSettings(long bodySettingsVa);
 
     native private static boolean getUpdatePosition(long bodySettingsVa);
+
+    native private static long getUserData(long bodySettingsVa);
 
     native private static void setAllowSleeping(
             long bodySettingsVa, boolean allow);
@@ -631,4 +676,6 @@ public class SoftBodyCreationSettings
 
     native private static void setUpdatePosition(
             long bodySettingsVa, boolean enable);
+
+    native private static void setUserData(long bodySettingsVa, long value);
 }

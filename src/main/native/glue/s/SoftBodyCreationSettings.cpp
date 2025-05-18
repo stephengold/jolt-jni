@@ -166,6 +166,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSet
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    getNumIterations
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getNumIterations
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    const uint32 result = pSettings->mNumIterations;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
  * Method:    getObjectLayer
  * Signature: (J)I
  */
@@ -318,6 +331,19 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationS
     const SoftBodyCreationSettings * const pSettings
             = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
     const bool result = pSettings->mUpdatePosition;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    getUserData
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getUserData
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    const uint64 result = pSettings->mUserData;
     return result;
 }
 
@@ -505,4 +531,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSetti
     SoftBodyCreationSettings * const pSettings
             = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
     pSettings->mUpdatePosition = enable;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    setUserData
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_setUserData
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong value) {
+    SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    pSettings->mUserData = value;
 }
