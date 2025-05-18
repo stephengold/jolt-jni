@@ -39,7 +39,7 @@ public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX){return Crea
 public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ){
     return CreateCloth(inGridSizeX,inGridSizeZ,0.75f);}
 public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ,float inGridSpacing){
-    return CreateCloth(inGridSizeX,inGridSizeZ,inGridSpacing,(Integer a,Integer b)->Float.valueOf(1f));}
+    return CreateCloth(inGridSizeX,inGridSizeZ,inGridSpacing,(Integer a,Integer b)->1f);}
 public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ,float inGridSpacing,BiFunction<Integer,Integer,Float>inVertexGetInvMass) {
     return CreateCloth(inGridSizeX,inGridSizeZ,inGridSpacing,inVertexGetInvMass,(Integer a,Integer b)->new Vec3());}
 public static SoftBodySharedSettingsRef CreateCloth(int inGridSizeX,int inGridSizeZ,float inGridSpacing,BiFunction<Integer,Integer,Float>inVertexGetInvMass,BiFunction<Integer,Integer,Vec3> inVertexPerturbation) {
