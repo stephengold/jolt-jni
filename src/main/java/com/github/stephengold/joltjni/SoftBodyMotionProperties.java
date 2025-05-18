@@ -339,7 +339,7 @@ public class SoftBodyMotionProperties
             long propertiesVa, boolean enable);
 
     native private static void setNumIterations(
-            long propertiesVa, int numInterations);
+            long propertiesVa, int numIterations);
 
     native private static void setSkinnedMaxDistanceMultiplier(
             long propertiesVa, float multiplier);

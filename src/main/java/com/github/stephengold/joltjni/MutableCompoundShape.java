@@ -133,7 +133,7 @@ public class MutableCompoundShape extends CompoundShape {
 
     native private static void modifyShapes(
             long shapeVa, int startIndex, int numSubshapes, ByteBuffer offsets,
-            ByteBuffer rotations, int offsetStride, int rotationStide);
+            ByteBuffer rotations, int offsetStride, int rotationStride);
 
     native private static void removeShape(long shapeVa, int index);
 }
