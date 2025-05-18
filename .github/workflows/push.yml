@@ -285,7 +285,7 @@ jobs:
   Java21-x-Linux_LoongArch64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 23
     steps:
       - uses: actions/setup-java@v4
         with:
