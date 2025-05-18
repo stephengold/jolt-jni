@@ -125,7 +125,7 @@ final public class VertexList {
 
         int numFloats = numVertices * numAxes;
         if (numFloats > buffer.capacity()) {
-            FloatBuffer oldBuffer = (FloatBuffer) buffer.rewind();
+            FloatBuffer oldBuffer = buffer.rewind();
             this.buffer = Jolt.newDirectFloatBuffer(numFloats);
             while (oldBuffer.hasRemaining()) {
                 float x = oldBuffer.get();
