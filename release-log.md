@@ -1,6 +1,6 @@
 # release log for the Jolt-JNI project
 
-## Version 1.0.0 released on TBD
+## Version 1.0.0 released on 18 May 2025
 
 + Add 5 public methods:
   + `SoftBodyCreationSettings.setUserData()`
