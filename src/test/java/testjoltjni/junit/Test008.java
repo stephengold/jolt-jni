@@ -161,7 +161,7 @@ public class Test008 {
      */
     private static void testMat44() {
         // Create an uninitialized matrix:
-        Mat44 uninit = new Mat44();
+        Mat44 uninitialized = new Mat44();
 
         // Test an identity matrix:
         Mat44 identity = Mat44.sIdentity();
@@ -213,7 +213,8 @@ public class Test008 {
                 0f, 0f, 0f, 0f,
                 zero, 0f);
 
-        TestUtils.testClose(zero, rotTrans, rot, cMajor, identity, uninit);
+        TestUtils.testClose(
+                zero, rotTrans, rot, cMajor, identity, uninitialized);
         System.gc();
     }
 
@@ -356,7 +357,7 @@ public class Test008 {
      */
     private static void testRMat44() {
         // Create an uninitialized matrix:
-        RMat44 uninit = new RMat44();
+        RMat44 uninitialized = new RMat44();
 
         // Test an identity matrix:
         RMat44 identity = RMat44.sIdentity();
@@ -404,7 +405,8 @@ public class Test008 {
                 0f, 0f, 0f, 1f,
                 zero, 0f);
 
-        TestUtils.testClose(zero, trans, rotTrans, rot, identity, uninit);
+        TestUtils.testClose(
+                zero, trans, rotTrans, rot, identity, uninitialized);
         System.gc();
     }
 
