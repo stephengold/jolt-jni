@@ -153,20 +153,20 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * Multiply the transpose of the 3x3 matrix by the specified column vector.
      * The matrix is unaffected.
      *
-     * @param vec3Arg the right factor (not null, unaffected)
+     * @param rightVector the right factor (not null, unaffected)
      * @return a new vector
      */
-    Vec3 multiply3x3Transposed(Vec3Arg vec3Arg);
+    Vec3 multiply3x3Transposed(Vec3Arg rightVector);
 
     /**
      * Multiply the 3x4 matrix by the specified column vector, with the 4th
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param rvec3Arg the right factor (not null, unaffected)
+     * @param rightVector the right factor (not null, unaffected)
      * @return a new vector
      */
-    RVec3 multiply3x4(RVec3Arg rvec3Arg);
+    RVec3 multiply3x4(RVec3Arg rightVector);
 
     /**
      * Multiply the 3x4 matrix by the specified column vector, with the 4th
@@ -182,10 +182,10 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *
-     * @param rvec3 the left factor (not null, unaffected)
+     * @param leftVector the left factor (not null, unaffected)
      * @return a new matrix
      */
-    RMat44 postTranslated(RVec3Arg rvec3);
+    RMat44 postTranslated(RVec3Arg leftVector);
 
     /**
      * Post multiply by the specified translation vector. The current matrix is

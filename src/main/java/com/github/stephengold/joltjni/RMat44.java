@@ -589,13 +589,13 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Multiply the transpose of the 3x3 matrix by the specified column vector.
      * The matrix is unaffected.
      *
-     * @param vec3Arg the right factor (not null, unaffected)
+     * @param rightVector the right factor (not null, unaffected)
      * @return a new vector
      */
     @Override
-    public Vec3 multiply3x3Transposed(Vec3Arg vec3Arg) {
+    public Vec3 multiply3x3Transposed(Vec3Arg rightVector) {
         long matrixVa = va();
-        float[] tmpFloats = vec3Arg.toArray();
+        float[] tmpFloats = rightVector.toArray();
         multiply3x3Transposed(matrixVa, tmpFloats);
         Vec3 result = new Vec3(tmpFloats);
 
@@ -607,13 +607,13 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param rvec3Arg the right factor (not null, unaffected)
+     * @param rightVector the right factor (not null, unaffected)
      * @return a new vector
      */
     @Override
-    public RVec3 multiply3x4(RVec3Arg rvec3Arg) {
+    public RVec3 multiply3x4(RVec3Arg rightVector) {
         long matrixVa = va();
-        double[] tmpDoubles = rvec3Arg.toArray();
+        double[] tmpDoubles = rightVector.toArray();
         multiply3x4r(matrixVa, tmpDoubles);
         RVec3 result = new RVec3(tmpDoubles);
 
@@ -645,15 +645,15 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *
-     * @param rvec3 the left factor (not null, unaffected)
+     * @param leftVector the left factor (not null, unaffected)
      * @return a new matrix
      */
     @Override
-    public RMat44 postTranslated(RVec3Arg rvec3) {
+    public RMat44 postTranslated(RVec3Arg leftVector) {
         long matrixVa = va();
-        double xx = rvec3.xx();
-        double yy = rvec3.yy();
-        double zz = rvec3.zz();
+        double xx = leftVector.xx();
+        double yy = leftVector.yy();
+        double zz = leftVector.zz();
         long resultVa = postTranslated(matrixVa, xx, yy, zz);
         RMat44 result = new RMat44(resultVa, true);
 

@@ -235,14 +235,14 @@ final public class Jolt {
     /**
      * Combine the specified location vector with the specified hash code.
      *
-     * @param rvec the vector to combine (not null, unaffected)
+     * @param vector the vector to combine (not null, unaffected)
      * @param oldHash the old hash code
      * @return the new hash code
      */
-    public static long hashCombine(long oldHash, RVec3Arg rvec) {
-        double xx = rvec.xx();
-        double yy = rvec.yy();
-        double zz = rvec.zz();
+    public static long hashCombine(long oldHash, RVec3Arg vector) {
+        double xx = vector.xx();
+        double yy = vector.yy();
+        double zz = vector.zz();
         long result = hashCombineRVec3(oldHash, xx, yy, zz);
 
         return result;
