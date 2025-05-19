@@ -377,7 +377,7 @@ This project also made use of the following software tools:
 I am grateful to Riccardo Balbo (aka "riccardo") for bringing
 V-HACD to my attention.
 
-I am grateful to [GitHub], [Sonatype], [AppVeyor],
+I am grateful to [GitHub], [Sonatype],
 [Travis], and [MacStadium]
 for providing free hosting for this project
 and many other open-source projects.
@@ -391,7 +391,6 @@ correct the situation: sgold@sonic.net
 
 
 [adoptium]: https://adoptium.net/releases.html "Adoptium"
-[appveyor]: https://www.appveyor.com "AppVeyor Continuous Integration"
 [checkstyle]: https://checkstyle.org "Checkstyle"
 [firefox]: https://www.mozilla.org/en-US/firefox "Firefox"
 [fish]: https://fishshell.com/ "Fish command-line shell"
