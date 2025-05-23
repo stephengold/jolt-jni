@@ -84,7 +84,7 @@ final public class PrintTable {
      * @param url the URL to test (not null)
      * @return {@code true} if the URL returns {@code HTTP_OK}, otherwise
      * {@code false}
-     * @throws IOException
+     * @throws IOException from HttpURLConnection
      */
     public static boolean doesPageExist(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
