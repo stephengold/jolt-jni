@@ -24,12 +24,18 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Utility methods providing JNI access to Jolt Physics.
@@ -297,6 +303,50 @@ final public class Jolt {
      * @return {@code true} if double-precision, otherwise {@code false}
      */
     native public static boolean isDoublePrecision();
+
+    /**
+     * List all classes in the specified Jolt-JNI package.
+     *
+     * @param packageName the name of the package (must start with
+     * "com.github.stephengold.joltjni")
+     * @return a new collection
+     */
+    public static Set<Class> listClasses(String packageName) {
+        ClassLoader loader = Jolt.class.getClassLoader();
+        String resourcePath = packageName.replaceAll("[.]", "/");
+        InputStream stream = loader.getResourceAsStream(resourcePath);
+        if (stream == null) {
+            System.err.println("resourcePath = " + resourcePath);
+            System.exit(1);
+        }
+        InputStreamReader isr = new InputStreamReader(stream);
+        BufferedReader reader = new BufferedReader(isr);
+
+        Set<Class> result = new HashSet<>();
+        while (true) {
+            try {
+                String line = reader.readLine();
+                if (line == null) {
+                    break;
+
+                } else if (line.endsWith(".class")) {
+                    int dotPos = line.lastIndexOf('.');
+                    String className = line.substring(0, dotPos);
+                    try {
+                        Class cl = Class.forName(packageName + "." + className);
+                        result.add(cl);
+                    } catch (ClassNotFoundException exception) {
+                        System.err.println("className = " + className);
+                        System.exit(0);
+                    }
+                }
+            } catch (IOException exception) {
+                throw new RuntimeException(exception);
+            }
+        }
+
+        return result;
+    }
 
     /**
      * Create a direct {@code ByteBuffer} with the specified capacity.
