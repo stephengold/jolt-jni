@@ -25,6 +25,8 @@ import com.github.stephengold.joltjni.Jolt;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -77,6 +79,36 @@ final public class PrintTable {
     // private methods
 
     /**
+     * Test whether a page exists at the specified URL.
+     *
+     * @param url the URL to test (not null)
+     * @return {@code true} if the URL returns {@code HTTP_OK}, otherwise
+     * {@code false}
+     * @throws IOException
+     */
+    public static boolean doesPageExist(URL url) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        // Request the header only, no data:
+        connection.setRequestMethod("HEAD");
+
+        // Pretend to be a browser:
+        connection.setRequestProperty("User-Agent",
+                "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2)"
+                + " Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)");
+        int responseCode = connection.getResponseCode();
+
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            return true;
+
+        } else {
+            System.out.println(
+                    "Got " + responseCode + " from " + url.toString());
+            return false;
+        }
+    }
+
+    /**
      * Convert a C++ identifier to a lowercase filename.
      *
      * @param cppId the identifier to convert (not null)
@@ -119,23 +151,7 @@ final public class PrintTable {
             String name = clas.getSimpleName();
             if (name.endsWith("Ref") || name.endsWith("RefC")) {
                 refNames.add(name);
-            } else if (!name.isBlank()
-                    && !name.startsWith("AllHit")
-                    && !name.startsWith("AnyHit")
-                    && !name.startsWith("BodyId")
-                    && !name.startsWith("Cast")
-                    && !name.startsWith("Chb")
-                    && !name.startsWith("Closest")
-                    && !name.startsWith("Csr")
-                    && !name.startsWith("Csr")
-                    && !name.startsWith("Edge")
-                    && !name.startsWith("Face")
-                    && !name.startsWith("ObjVs")
-                    && !name.startsWith("Skin")
-                    && !name.startsWith("Stats")
-                    && !name.startsWith("Support")
-                    && !name.startsWith("Vertex")
-                    && !name.startsWith("Volume")) {
+            } else if (!name.isBlank()) {
                 basicNames.add(name);
             }
         }
@@ -159,10 +175,32 @@ final public class PrintTable {
                     .replaceAll("Tv$", "TV")
                     .replaceAll("Wv$", "WV");
 
-            // Convert the C++ identifier to a lowercase filename:
+            // Access the Doxygen site for Jolt Physics:
             String lcFilename = escape(cppId);
+            String classUrlString = String.format(
+                    "https://jrouwe.github.io/JoltPhysics/class_%s.html",
+                    lcFilename);
+            URL classUrl = new URL(classUrlString);
+            boolean classExists = doesPageExist(classUrl);
+            if (classExists) {
+                stream.printf("%n|{url-jolt}%s.html[JPH::%s]%n",
+                        lcFilename, cppId);
 
-            stream.printf("%n|{url-jolt}%s.html[JPH::%s]%n", lcFilename, cppId);
+            } else {
+                String structUrlString = String.format(
+                        "https://jrouwe.github.io/JoltPhysics/struct_%s.html",
+                        lcFilename);
+                URL structUrl = new URL(structUrlString);
+                boolean structExists = doesPageExist(structUrl);
+                if (structExists) {
+                    stream.printf("%n|{url-jolt-struct}%s.html[JPH::%s]%n",
+                            lcFilename, cppId);
+
+                } else { // not a native class or struct
+                    continue;
+                }
+            }
+
             stream.printf("|{url-api}/%s.html[%s]%n", javaName, javaName);
 
             String ro1 = "Const" + javaName;
