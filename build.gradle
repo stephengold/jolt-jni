@@ -381,6 +381,9 @@ tasks.register('runLargeMesh', JavaExec) {
     enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
+tasks.register('runPrintTable', JavaExec) {
+    mainClass = 'testjoltjni.PrintTable'
+}
 tasks.register('runPyramid', JavaExec) {
     args '-s=Pyramid'
     enableAssertions = false
@@ -614,8 +617,8 @@ tasks.register('cleanLogs', Delete) { // JVM crash logs
     delete fileTree(dir: '.', include: 'hs_err_pid*.log')
 }
 tasks.register('cleanRecordings', Delete) {
-    // DebugRenderer recordings, recorded state, and frame timing output:
-    delete fileTree(dir: '.', includes: ['*.jor', 'per_frame_*.csv', 'state_*.bin'])
+    // DebugRenderer recordings, type table, recorded state, and frame timing output:
+    delete fileTree(dir: '.', includes: ['*.jor', 'lexicon.adoc', 'per_frame_*.csv', 'state_*.bin'])
 }
 tasks.register('cleanTestFramework', Delete) { // unpacked Jolt Physics TestFramework source code
     delete 'src/main/native/TestFramework'
