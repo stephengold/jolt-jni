@@ -109,7 +109,7 @@ final public class PrintTable {
     }
 
     /**
-     * Convert a C++ identifier to a lowercase filename.
+     * Convert a C++ identifier to a URL fragment following Doxygen conventions.
      *
      * @param cppId the identifier to convert (not null)
      * @return the filename
@@ -132,7 +132,7 @@ final public class PrintTable {
     }
 
     /**
-     * Print the table to the specified stream.
+     * Print a table of correspondences to the specified stream.
      *
      * @param stream the output stream to use (not null)
      */
@@ -142,7 +142,7 @@ final public class PrintTable {
             stream.println();
         }
 
-        // Enumerate basic names and ref names:
+        // Enumerate Jolt JNI's basic names and ref names:
         Set<Class> coreClasses
                 = Jolt.listClasses("com.github.stephengold.joltjni");
         List<String> basicNames = new ArrayList<>();
@@ -157,7 +157,7 @@ final public class PrintTable {
         }
         Collections.sort(basicNames);
 
-        // Enumerate names of read-only interfaces:
+        // Enumerate Jolt JNI's read-only interfaces:
         Set<Class> roClasses
                 = Jolt.listClasses("com.github.stephengold.joltjni.readonly");
         Set<String> roNames = new TreeSet<>();
@@ -167,7 +167,7 @@ final public class PrintTable {
         }
 
         for (String javaName : basicNames) {
-            // Convert the Java class name to a C++ identifier:
+            // Convert the Java class name to a hypothetical C++ identifier:
             String cppId = javaName
                     .replaceAll("\\bAa", "AA")
                     .replaceAll("Dof", "DOF")
@@ -175,7 +175,7 @@ final public class PrintTable {
                     .replaceAll("Tv$", "TV")
                     .replaceAll("Wv$", "WV");
 
-            // Access the Doxygen site for Jolt Physics:
+            // Access the Doxygen site for Jolt Physics via HTTPS:
             String lcFilename = escape(cppId);
             String classUrlString = String.format(
                     "https://jrouwe.github.io/JoltPhysics/class_%s.html",

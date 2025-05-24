@@ -1,4 +1,4 @@
-// Gradle script to build/publish Jolt-JNI desktop artifacts
+// Gradle script to build, publish, and run Jolt-JNI desktop artifacts
 
 import com.github.stephengold.build.BuildSrc
 

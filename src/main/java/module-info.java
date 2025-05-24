@@ -21,7 +21,7 @@ SOFTWARE.
  */
 
 /**
- * Declare the module to be open, and export all packages.
+ * Declare the module to be open and export all packages.
  */
 open module com.github.stephengold.joltjni {
     exports com.github.stephengold.joltjni;

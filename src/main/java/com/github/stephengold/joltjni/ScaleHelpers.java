@@ -34,7 +34,7 @@ final public class ScaleHelpers {
     // constants
 
     /**
-     * The smalled valid scale factor.
+     * The smallest valid scale factor.
      */
     final public static float cMinScale = 1e-6f;
     /**
