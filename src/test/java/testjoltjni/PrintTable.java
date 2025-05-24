@@ -86,7 +86,7 @@ final public class PrintTable {
      * {@code false}
      * @throws IOException from HttpURLConnection
      */
-    public static boolean doesPageExist(URL url) throws IOException {
+    private static boolean doesPageExist(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         // Request the header only, no data:
