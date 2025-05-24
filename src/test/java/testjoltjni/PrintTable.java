@@ -169,11 +169,11 @@ final public class PrintTable {
         for (String javaName : basicNames) {
             // Convert the Java class name to a hypothetical C++ identifier:
             String cppId = javaName
-                    .replaceAll("\\bAa", "AA")
+                    .replaceAll("Aa", "AA")
                     .replaceAll("Dof", "DOF")
                     .replaceAll("Id", "ID")
-                    .replaceAll("Tv$", "TV")
-                    .replaceAll("Wv$", "WV");
+                    .replaceAll("Tv", "TV")
+                    .replaceAll("Wv", "WV");
 
             // Access the Doxygen site for Jolt Physics via HTTPS:
             String lcFilename = escape(cppId);
