@@ -166,32 +166,36 @@ final public class PrintTable {
         }
 
         // Enumerate Jolt JNI's basic names and ref names:
-        Set<Class> coreClasses
-                = Jolt.listClasses("com.github.stephengold.joltjni");
-        List<String> basicNames = new ArrayList<>();
+        List<String> basicJavaClasses = new ArrayList<>();
         Set<String> refNames = new TreeSet<>();
-        for (Class clas : coreClasses) {
-            String name = clas.getSimpleName();
-            if (name.endsWith("Ref") || name.endsWith("RefC")) {
-                refNames.add(name);
-            } else if (!name.isBlank()) {
-                basicNames.add(name);
+        {
+            String corePackage = "com.github.stephengold.joltjni";
+            Set<Class> coreClasses = Jolt.listClasses(corePackage);
+            for (Class coreClass : coreClasses) {
+                String simpleName = coreClass.getSimpleName();
+                if (simpleName.endsWith("Ref") || simpleName.endsWith("RefC")) {
+                    refNames.add(simpleName);
+                } else if (!simpleName.isBlank()) {
+                    basicJavaClasses.add(simpleName);
+                }
             }
         }
-        Collections.sort(basicNames);
+        Collections.sort(basicJavaClasses);
 
         // Enumerate Jolt JNI's read-only interfaces:
-        Set<Class> roClasses
-                = Jolt.listClasses("com.github.stephengold.joltjni.readonly");
-        Set<String> roNames = new TreeSet<>();
-        for (Class clas : roClasses) {
-            String name = clas.getSimpleName();
-            roNames.add(name);
+        Set<String> readOnlyNames = new TreeSet<>();
+        {
+            String readOnlyPackage = "com.github.stephengold.joltjni.readonly";
+            Set<Class> readOnlyClasses = Jolt.listClasses(readOnlyPackage);
+            for (Class readOnlyClass : readOnlyClasses) {
+                String simpleName = readOnlyClass.getSimpleName();
+                readOnlyNames.add(simpleName);
+            }
         }
 
-        for (String javaName : basicNames) {
+        for (String basicJavaClass : basicJavaClasses) {
             // Convert the Java class name to a hypothetical C++ identifier:
-            String cppId = javaName
+            String cppId = basicJavaClass
                     .replaceAll("Aa", "AA")
                     .replaceAll("Dof", "DOF")
                     .replaceAll("Id", "ID")
@@ -199,49 +203,36 @@ final public class PrintTable {
                     .replaceAll("Wv", "WV");
 
             // Access the Doxygen site for Jolt Physics via HTTPS:
-            String lcFilename = escape(cppId);
-            String classUrlString = String.format(
-                    "https://jrouwe.github.io/JoltPhysics/class_%s.html",
-                    lcFilename);
-            URL classUrl = new URL(classUrlString);
-            boolean classExists = doesPageExist(classUrl);
-            if (classExists) {
+            if (doesIdExist("class", cppId)) {
                 stream.printf("%n|{url-jolt}%s.html[JPH::%s]%n",
-                        lcFilename, cppId);
+                        escape(cppId), cppId);
 
-            } else {
-                String structUrlString = String.format(
-                        "https://jrouwe.github.io/JoltPhysics/struct_%s.html",
-                        lcFilename);
-                URL structUrl = new URL(structUrlString);
-                boolean structExists = doesPageExist(structUrl);
-                if (structExists) {
-                    stream.printf("%n|{url-jolt-struct}%s.html[JPH::%s]%n",
-                            lcFilename, cppId);
+            } else if (doesIdExist("struct", cppId)) {
+                stream.printf("%n|{url-jolt-struct}%s.html[JPH::%s]%n",
+                        escape(cppId), cppId);
 
-                } else { // not a native class or struct
-                    continue;
-                }
+            } else { // not a top-level class, struct, or namespace in Jolt
+                continue; // skip to the next Java class
             }
 
-            stream.printf("|{url-api}/%s.html[%s]%n", javaName, javaName);
+            stream.printf("|{url-api}/%s.html[%s]%n", basicJavaClass, basicJavaClass);
 
-            String ro1 = "Const" + javaName;
-            if (roNames.contains(ro1)) {
+            String ro1 = "Const" + basicJavaClass;
+            if (readOnlyNames.contains(ro1)) {
                 stream.printf(" {url-api}/readonly/%s.html[%s]%n", ro1, ro1);
             }
 
-            String ro2 = javaName + "Arg";
-            if (roNames.contains(ro2)) {
+            String ro2 = basicJavaClass + "Arg";
+            if (readOnlyNames.contains(ro2)) {
                 stream.printf(" {url-api}/readonly/%s.html[%s]%n", ro2, ro2);
             }
 
-            String ref = javaName + "Ref";
+            String ref = basicJavaClass + "Ref";
             if (refNames.contains(ref)) {
                 stream.printf(" {url-api}/%s.html[%s]%n", ref, ref);
             }
 
-            String refc = javaName + "RefC";
+            String refc = basicJavaClass + "RefC";
             if (refNames.contains(refc)) {
                 stream.printf(" {url-api}/%s.html[%s]%n", refc, refc);
             }
