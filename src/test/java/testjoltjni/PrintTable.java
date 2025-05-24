@@ -79,6 +79,29 @@ final public class PrintTable {
     // private methods
 
     /**
+     * Test whether a specific webpage exists in the Doxygen site for Jolt
+     * Physics.
+     *
+     * @param section the section of the site to search in ("class",
+     * "namespace", or "struct")
+     * @param cppId the top-level C++ identifier to search for (not null)
+     * @return {@code true} if the URL returns {@code HTTP_OK}, otherwise
+     * {@code false}
+     * @throws IOException from HttpURLConnection
+     */
+    private static boolean doesIdExist(String section, String cppId)
+            throws IOException {
+        String urlFragment = escape(cppId);
+        String doxygenUrlString = String.format(
+                "https://jrouwe.github.io/JoltPhysics/%s_%s.html",
+                section, urlFragment);
+        URL doxygenUrl = new URL(doxygenUrlString);
+        boolean result = doesPageExist(doxygenUrl);
+
+        return result;
+    }
+
+    /**
      * Test whether a page exists at the specified URL.
      *
      * @param url the URL to test (not null)
