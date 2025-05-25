@@ -193,6 +193,7 @@ final public class PrintTable {
             // Convert the Java class name to a hypothetical C++ identifier:
             String cppId = basicJavaClass
                     .replaceAll("Aa", "AA")
+                    .replaceAll("Bcs", "BCS")
                     .replaceAll("Dof", "DOF")
                     .replaceAll("Id", "ID")
                     .replaceAll("Tv", "TV")
