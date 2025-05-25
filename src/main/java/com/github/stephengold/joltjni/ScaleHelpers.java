@@ -53,10 +53,10 @@ final public class ScaleHelpers {
     // new methods exposed
 
     /**
-     * Test whether the specified scale turns 3-D objects inside-out.
+     * Test whether the specified scale turns 3-D normals inside-out.
      *
      * @param scale the scale vector to test (not null, unaffected)
-     * @return {@code true} if it turns objects inside-out, otherwise
+     * @return {@code true} if it turns normals inside-out, otherwise
      * {@code false}
      */
     public static boolean isInsideOut(Vec3Arg scale) {
@@ -72,7 +72,7 @@ final public class ScaleHelpers {
     }
 
     /**
-     * Test whether the specified scale is identity.
+     * Test whether the specified scale is close to identity.
      *
      * @param scale the scale vector to test (not null, unaffected)
      * @return {@code true} if identity, otherwise {@code false}

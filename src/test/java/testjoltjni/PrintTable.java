@@ -165,7 +165,7 @@ final public class PrintTable {
             stream.println();
         }
 
-        // Enumerate Jolt JNI's basic names and ref names:
+        // Enumerate Jolt JNI's basic classes and Ref/RefC classes:
         List<String> basicJavaClasses = new ArrayList<>();
         Set<String> refNames = new TreeSet<>();
         {
