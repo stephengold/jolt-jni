@@ -172,6 +172,20 @@ abstract public class ConstraintSettings
         long settingsVa = va();
         setNumVelocityStepsOverride(settingsVa, setting);
     }
+
+    /**
+     * Read a settings object from the specified binary stream.
+     *
+     * @param stream where to read objects (not null)
+     * @return a new object
+     */
+    public static ConstraintResult sRestoreFromBinaryState(StreamIn stream) {
+        long streamVa = stream.va();
+        long resultVa = sRestoreFromBinaryState(streamVa);
+        ConstraintResult result = new ConstraintResult(resultVa, true);
+
+        return result;
+    }
     // *************************************************************************
     // new protected methods
 
@@ -353,6 +367,8 @@ abstract public class ConstraintSettings
 
     native private static void setNumVelocityStepsOverride(
             long settingsVa, int setting);
+
+    native private static long sRestoreFromBinaryState(long streamVa);
 
     native private static long toRef(long settingsVa);
 }

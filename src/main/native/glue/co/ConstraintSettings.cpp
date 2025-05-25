@@ -250,6 +250,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_se
 
 /*
  * Class:     com_github_stephengold_joltjni_ConstraintSettings
+ * Method:    sRestoreFromBinaryState
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConstraintSettings_sRestoreFromBinaryState
+  (JNIEnv *, jclass, jlong streamVa) {
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    ConstraintSettings::ConstraintResult * const pResult
+            = new ConstraintSettings::ConstraintResult();
+    TRACE_NEW("ConstraintSettings::ConstraintResult", pResult);
+    *pResult = ConstraintSettings::sRestoreFromBinaryState(*pStream);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConstraintSettings
  * Method:    toRef
  * Signature: (J)J
  */
