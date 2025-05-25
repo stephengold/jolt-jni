@@ -19,18 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-
 /**
- * Declare the module to be open and export all packages.
+ * A Java API for the {@code StreamUtils::} namespace.
  */
-open module com.github.stephengold.joltjni {
-    exports com.github.stephengold.joltjni;
-    exports com.github.stephengold.joltjni.enumerate;
-    exports com.github.stephengold.joltjni.lambda;
-    exports com.github.stephengold.joltjni.operator;
-    exports com.github.stephengold.joltjni.readonly;
-    exports com.github.stephengold.joltjni.std;
-    exports com.github.stephengold.joltjni.streamutils;
-    exports com.github.stephengold.joltjni.template;
-    exports com.github.stephengold.joltjni.vhacd;
-}
+package com.github.stephengold.joltjni.streamutils;

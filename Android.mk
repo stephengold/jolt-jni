@@ -139,10 +139,14 @@ $(N)/glue/g/GearConstraintSettings.cpp \
 $(N)/glue/g/GetTrianglesContext.cpp \
 $(N)/glue/g/GroupFilter.cpp \
 $(N)/glue/g/GroupFilterTable.cpp \
+$(N)/glue/g/GroupFilterToIdMap.cpp \
 $(N)/glue/h/HeightFieldShape.cpp \
 $(N)/glue/h/HeightFieldShapeSettings.cpp \
 $(N)/glue/h/HingeConstraint.cpp \
 $(N)/glue/h/HingeConstraintSettings.cpp \
+$(N)/glue/i/IdToGroupFilterMap.cpp \
+$(N)/glue/i/IdToMaterialMap.cpp \
+$(N)/glue/i/IdToShapeMap.cpp \
 $(N)/glue/i/IgnoreMultipleBodiesFilter.cpp \
 $(N)/glue/i/IndexedTriangle.cpp \
 $(N)/glue/i/IndexedTriangleList.cpp \
@@ -157,6 +161,7 @@ $(N)/glue/j/Jolt.cpp \
 $(N)/glue/m/MassProperties.cpp \
 $(N)/glue/m/Mat44Array.cpp \
 $(N)/glue/m/Mat44.cpp \
+$(N)/glue/m/MaterialToIdMap.cpp \
 $(N)/glue/m/MeshShape.cpp \
 $(N)/glue/m/MeshShapeSettings.cpp \
 $(N)/glue/m/MotionProperties.cpp \
@@ -223,6 +228,7 @@ $(N)/glue/sh/ShapeRefC.cpp \
 $(N)/glue/sh/ShapeResult.cpp \
 $(N)/glue/sh/ShapeSettings.cpp \
 $(N)/glue/sh/ShapeSettingsRefC.cpp \
+$(N)/glue/sh/ShapeToIdMap.cpp \
 $(N)/glue/sh/SharedMutexBase.cpp \
 $(N)/glue/s/ScaledShape.cpp \
 $(N)/glue/s/ScaledShapeSettings.cpp \

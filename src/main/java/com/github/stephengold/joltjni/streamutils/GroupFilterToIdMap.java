@@ -19,18 +19,31 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+package com.github.stephengold.joltjni.streamutils;
+
+import com.github.stephengold.joltjni.JoltPhysicsObject;
 
 /**
- * Declare the module to be open and export all packages.
+ * Assign group filters to IDs. (native type:
+ * {@code StreamUtils::ObjectToIDMap<GroupFilter>})
+ *
+ * @author Stephen Gold sgold@sonic.net
  */
-open module com.github.stephengold.joltjni {
-    exports com.github.stephengold.joltjni;
-    exports com.github.stephengold.joltjni.enumerate;
-    exports com.github.stephengold.joltjni.lambda;
-    exports com.github.stephengold.joltjni.operator;
-    exports com.github.stephengold.joltjni.readonly;
-    exports com.github.stephengold.joltjni.std;
-    exports com.github.stephengold.joltjni.streamutils;
-    exports com.github.stephengold.joltjni.template;
-    exports com.github.stephengold.joltjni.vhacd;
+final public class GroupFilterToIdMap extends JoltPhysicsObject {
+    // *************************************************************************
+    // constructors
+
+    /**
+     * Instantiate an empty map.
+     */
+    public GroupFilterToIdMap() {
+        long mapVa = createDefault();
+        setVirtualAddress(mapVa, () -> free(mapVa));
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static long createDefault();
+
+    native private static void free(long mapVa);
 }
