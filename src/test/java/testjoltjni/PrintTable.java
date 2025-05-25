@@ -121,8 +121,8 @@ final public class PrintTable {
             return true;
 
         } else {
-            System.out.println(
-                    "Got " + responseCode + " from " + url.toString());
+            //System.out.println(
+            //        "Got " + responseCode + " from " + url.toString());
             return false;
         }
     }
@@ -213,6 +213,7 @@ final public class PrintTable {
                         escape(cppId), cppId);
 
             } else { // not a top-level class, struct, or namespace in Jolt
+                System.out.println(" no native ID found for " + basicJavaClass);
                 continue; // skip to the next Java class
             }
 
