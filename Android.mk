@@ -32,6 +32,7 @@ $(N)/glue/a/AllHitTransformedShapeCollector.cpp \
 $(N)/glue/a/AnyHitCastRayCollector.cpp \
 $(N)/glue/a/AnyHitCastShapeCollector.cpp \
 $(N)/glue/a/AnyHitCollideShapeCollector.cpp \
+$(N)/glue/b/BcsResult.cpp \
 $(N)/glue/b/BroadPhaseBruteForce.cpp \
 $(N)/glue/b/BroadPhaseCastResult.cpp \
 $(N)/glue/b/BroadPhase.cpp \
