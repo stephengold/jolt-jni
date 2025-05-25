@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -289,6 +289,19 @@ abstract public class ConstraintSettings
 
         return result;
     }
+
+    /**
+     * Save the settings to the specified binary stream. The settings are
+     * unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(settingsVa, streamVa);
+    }
     // *************************************************************************
     // RefTarget methods
 
@@ -346,6 +359,8 @@ abstract public class ConstraintSettings
     native private static int getNumVelocityStepsOverride(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
+
+    native private static void saveBinaryState(long settingsVa, long streamVa);
 
     native private static void setConstraintPriority(
             long settingsVa, int level);
