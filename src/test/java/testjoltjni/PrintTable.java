@@ -215,7 +215,8 @@ final public class PrintTable {
                 continue; // skip to the next Java class
             }
 
-            stream.printf("|{url-api}/%s.html[%s]%n", basicJavaClass, basicJavaClass);
+            stream.printf("|{url-api}/%s.html[%s]%n",
+                    basicJavaClass, basicJavaClass);
 
             String ro1 = "Const" + basicJavaClass;
             if (readOnlyNames.contains(ro1)) {
