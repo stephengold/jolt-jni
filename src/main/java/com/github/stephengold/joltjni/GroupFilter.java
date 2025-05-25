@@ -73,6 +73,19 @@ public class GroupFilter
 
         return result;
     }
+
+    /**
+     * Save the settings to the specified binary stream. The filter is
+     * unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long filterVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(filterVa, streamVa);
+    }
     // *************************************************************************
     // RefTarget methods
 
@@ -119,6 +132,8 @@ public class GroupFilter
             long filterVa, long group1Va, long group2Va);
 
     native private static int getRefCount(long filterVa);
+
+    native private static void saveBinaryState(long filterVa, long streamVa);
 
     native private static void setEmbedded(long filterVa);
 

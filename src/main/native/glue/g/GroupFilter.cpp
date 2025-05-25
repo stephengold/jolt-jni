@@ -71,6 +71,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_GroupFilter_getRefCou
 
 /*
  * Class:     com_github_stephengold_joltjni_GroupFilter
+ * Method:    saveBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_GroupFilter_saveBinaryState
+  (JNIEnv *, jclass, jlong filterVa, jlong streamVa) {
+    const GroupFilter * const pFilter
+            = reinterpret_cast<GroupFilter *> (filterVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    pFilter->SaveBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_GroupFilter
  * Method:    setEmbedded
  * Signature: (J)V
  */
