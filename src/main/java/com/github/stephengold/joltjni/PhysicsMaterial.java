@@ -76,6 +76,22 @@ public class PhysicsMaterial extends SerializableObject
 
         return result;
     }
+
+    /**
+     * Read a material from the specified binary stream.
+     *
+     * @param stream where to read objects (not null)
+     * @return a new object
+     */
+    public static PhysicsMaterialResult sRestoreFromBinaryState(
+            StreamIn stream) {
+        long streamVa = stream.va();
+        long resultVa = sRestoreFromBinaryState(streamVa);
+        PhysicsMaterialResult result
+                = new PhysicsMaterialResult(resultVa, true);
+
+        return result;
+    }
     // *************************************************************************
     // ConstPhysicsMaterial methods
 
@@ -185,6 +201,8 @@ public class PhysicsMaterial extends SerializableObject
     native private static long sDefault(boolean dummy);
 
     native private static void setEmbedded(long materialVa);
+
+    native private static long sRestoreFromBinaryState(long streamVa);
 
     native private static long toRef(long materialVa);
 

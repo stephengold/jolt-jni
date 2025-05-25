@@ -118,6 +118,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterial_setEm
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterial
+ * Method:    sRestoreFromBinaryState
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterial_sRestoreFromBinaryState
+  (JNIEnv *, jclass, jlong streamVa) {
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    PhysicsMaterial::PhysicsMaterialResult * const pResult
+            = new PhysicsMaterial::PhysicsMaterialResult();
+    TRACE_NEW("PhysicsMaterial::PhysicsMaterialResult", pResult);
+    *pResult = PhysicsMaterial::sRestoreFromBinaryState(*pStream);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsMaterial
  * Method:    toRef
  * Signature: (J)J
  */
