@@ -63,6 +63,17 @@ abstract public class WheelSettings
     }
 
     /**
+     * Load settings from the specified binary stream.
+     *
+     * @param stream the stream to read from (not null)
+     */
+    public void restoreBinaryState(StreamIn stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        restoreBinaryState(settingsVa, streamVa);
+    }
+
+    /**
      * Alter where to apply tire forces. (native attribute:
      * mEnableSuspensionForcePoint)
      *
@@ -442,6 +453,19 @@ abstract public class WheelSettings
 
         return result;
     }
+
+    /**
+     * Save the settings to the specified binary stream. The settings are
+     * unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(settingsVa, streamVa);
+    }
     // *************************************************************************
     // RefTarget methods
 
@@ -520,6 +544,11 @@ abstract public class WheelSettings
     native private static float getWheelUpZ(long settingsVa);
 
     native private static float getWidth(long settingsVa);
+
+    native private static void restoreBinaryState(
+            long settingsVa, long streamVa);
+
+    native private static void saveBinaryState(long settingsVa, long streamVa);
 
     native private static void setEnableSuspensionForcePoint(
             long settingsVa, boolean enable);
