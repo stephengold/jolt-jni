@@ -53,8 +53,9 @@ public class BcsResult extends JoltPhysicsObject {
      */
     public BodyCreationSettings get() {
         long resultVa = va();
-        long setingsVa = get(resultVa);
-        BodyCreationSettings result = new BodyCreationSettings(setingsVa, true);
+        long settingsVa = get(resultVa);
+        BodyCreationSettings result
+                = new BodyCreationSettings(settingsVa, true);
 
         return result;
     }
