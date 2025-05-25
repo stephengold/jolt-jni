@@ -202,6 +202,7 @@ $(N)/glue/p/PathConstraint.cpp \
 $(N)/glue/p/PathConstraintPath.cpp \
 $(N)/glue/p/PathConstraintPathHermite.cpp \
 $(N)/glue/p/PathConstraintSettings.cpp \
+$(N)/glue/p/PathResult.cpp \
 $(N)/glue/p/PlaneShape.cpp \
 $(N)/glue/p/PlaneShapeSettings.cpp \
 $(N)/glue/p/PointConstraintSettings.cpp \
