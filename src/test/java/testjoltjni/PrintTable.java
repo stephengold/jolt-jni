@@ -115,12 +115,7 @@ final public class PrintTable {
         // Request the header only, no data:
         connection.setRequestMethod("HEAD");
 
-        // Pretend to be a browser:
-        connection.setRequestProperty("User-Agent",
-                "Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.1.2)"
-                + " Gecko/20090729 Firefox/3.5.2 (.NET CLR 3.5.30729)");
         int responseCode = connection.getResponseCode();
-
         if (responseCode == HttpURLConnection.HTTP_OK) {
             return true;
 
