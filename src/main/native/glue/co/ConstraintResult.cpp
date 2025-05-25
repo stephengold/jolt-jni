@@ -52,8 +52,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConstraintResult_get
   (JNIEnv *, jclass, jlong resultVa) {
     const Result<Ref<ConstraintSettings>> * const pResult
             = reinterpret_cast<Result<Ref<ConstraintSettings>> *> (resultVa);
-    ConstraintSettings * const pSettings = pResult->Get();
-    return reinterpret_cast<jlong> (pSettings);
+    Ref<ConstraintSettings> * const pRef = new Ref<ConstraintSettings>();
+    TRACE_NEW("Ref<ConstraintSettings>", pRef)
+    *pRef = pResult->Get();
+    return reinterpret_cast<jlong> (pRef);
 }
 
 /*

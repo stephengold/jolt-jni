@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Either an error or a {@code ConstraintSettings}. (native type:
+ * Either an error or a {@code ConstraintSettingsRef}. (native type:
  * {@code Result<Ref<ConstraintSettings>>})
  *
  * @author Stephen Gold sgold@sonic.net
@@ -47,15 +47,14 @@ public class ConstraintResult extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the settings object.
+     * Return a reference to the settings object.
      *
      * @return a new JVM object with a new native object assigned
      */
-    public ConstraintSettings get() {
+    public ConstraintSettingsRef get() {
         long resultVa = va();
-        long settingsVa = get(resultVa);
-        ConstraintSettings result
-                = ConstraintSettings.newConstraintSettings(settingsVa);
+        long refVa = get(resultVa);
+        ConstraintSettingsRef result = new ConstraintSettingsRef(refVa, true);
 
         return result;
     }
