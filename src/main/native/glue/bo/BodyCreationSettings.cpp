@@ -32,6 +32,20 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_createCopy
+  (JNIEnv *, jclass, jlong originalVa) {
+    const BodyCreationSettings * const pOriginal
+            = reinterpret_cast<BodyCreationSettings *> (originalVa);
+    BodyCreationSettings * const pResult = new BodyCreationSettings(*pOriginal);
+    TRACE_NEW("BodyCreationSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    createDefault
  * Signature: ()J
  */
@@ -551,6 +565,26 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    saveWithChildren
+ * Signature: (JJJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_saveWithChildren
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong streamVa, jlong shapeMapVa,
+  jlong materialMapVa, jlong filterMapVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    BodyCreationSettings::ShapeToIDMap * const pShapeMap
+            = reinterpret_cast<BodyCreationSettings::ShapeToIDMap *> (shapeMapVa);
+    BodyCreationSettings::MaterialToIDMap * const pMaterialMap
+            = reinterpret_cast<BodyCreationSettings::MaterialToIDMap *> (materialMapVa);
+    BodyCreationSettings::GroupFilterToIDMap * const pFilterMap
+            = reinterpret_cast<BodyCreationSettings::GroupFilterToIDMap *> (filterMapVa);
+    pSettings->SaveWithChildren(*pStream, pShapeMap, pMaterialMap, pFilterMap);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    setAllowDynamicOrKinematic
  * Signature: (JZ)V
  */
@@ -857,4 +891,27 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
     const ShapeSettings * const pShapeSettings
             = reinterpret_cast<ShapeSettings *> (shapeSettingsVa);
     pBodySettings->SetShapeSettings(pShapeSettings);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    sRestoreWithChildren
+ * Signature: (JJJJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_sRestoreWithChildren
+  (JNIEnv *, jclass, jlong streamVa, jlong shapeMapVa, jlong materialMapVa,
+  jlong filterMapVa) {
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    BodyCreationSettings::IDToShapeMap * const pShapeMap
+            = reinterpret_cast<BodyCreationSettings::IDToShapeMap *> (shapeMapVa);
+    BodyCreationSettings::IDToMaterialMap * const pMaterialMap
+            = reinterpret_cast<BodyCreationSettings::IDToMaterialMap *> (materialMapVa);
+    BodyCreationSettings::IDToGroupFilterMap * const pFilterMap
+            = reinterpret_cast<BodyCreationSettings::IDToGroupFilterMap *> (filterMapVa);
+    BodyCreationSettings::BCSResult * const pResult
+            = new BodyCreationSettings::BCSResult();
+    TRACE_NEW("BodyCreationSettings::BCSResult", pResult);
+    *pResult = BodyCreationSettings::sRestoreWithChildren(
+            *pStream, *pShapeMap, *pMaterialMap, *pFilterMap);
+    return reinterpret_cast<jlong> (pResult);
 }

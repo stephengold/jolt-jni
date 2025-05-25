@@ -31,6 +31,12 @@ import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.streamutils.GroupFilterToIdMap;
+import com.github.stephengold.joltjni.streamutils.IdToGroupFilterMap;
+import com.github.stephengold.joltjni.streamutils.IdToMaterialMap;
+import com.github.stephengold.joltjni.streamutils.IdToShapeMap;
+import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
+import com.github.stephengold.joltjni.streamutils.ShapeToIdMap;
 
 /**
  * Settings used to create a rigid body.
@@ -49,6 +55,17 @@ public class BodyCreationSettings
     public BodyCreationSettings() {
         long bodySettingsVa = createDefault();
         setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
+    }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public BodyCreationSettings(ConstBodyCreationSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
     }
 
     /**
@@ -520,6 +537,29 @@ public class BodyCreationSettings
 
         return this;
     }
+
+    /**
+     * Read a settings object from a binary stream.
+     *
+     * @param stream where to read objects (not null)
+     * @param shapeMap track multiple uses of shapes (not null)
+     * @param materialMap track multiple uses of physics materials (not null)
+     * @param filterMap track multiple uses of group filters (not null)
+     * @return a new object
+     */
+    public static BcsResult sRestoreWithChildren(
+            StreamIn stream, IdToShapeMap shapeMap,
+            IdToMaterialMap materialMap, IdToGroupFilterMap filterMap) {
+        long streamVa = stream.va();
+        long shapeMapVa = shapeMap.va();
+        long materialMapVa = materialMap.va();
+        long filterMapVa = filterMap.va();
+        long resultVa = sRestoreWithChildren(
+                streamVa, shapeMapVa, materialMapVa, filterMapVa);
+        BcsResult result = new BcsResult(resultVa, true);
+
+        return result;
+    }
     // *************************************************************************
     // ConstBodyCreationSettings methods
 
@@ -912,8 +952,29 @@ public class BodyCreationSettings
         boolean result = hasMassProperties(bodySettingsVa);
         return result;
     }
+
+    /**
+     * Write the state of this object to the specified stream.
+     *
+     * @param stream where to write objects (not null)
+     * @param shapeMap track multiple uses of shapes (may be null)
+     * @param materialMap track multiple uses of physics materials (may be null)
+     * @param filterMap track multiple uses of group filters (may be null)
+     */
+    public void saveWithChildren(StreamOut stream, ShapeToIdMap shapeMap,
+            MaterialToIdMap materialMap, GroupFilterToIdMap filterMap) {
+        long bodySettingsVa = va();
+        long streamVa = stream.va();
+        long shapeMapVa = (shapeMap == null) ? 0L : shapeMap.va();
+        long materialMapVa = (materialMap == null) ? 0L : materialMap.va();
+        long filterMapVa = (filterMap == null) ? 0L : filterMap.va();
+        saveWithChildren(bodySettingsVa, streamVa, shapeMapVa, materialMapVa,
+                filterMapVa);
+    }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 
@@ -1000,6 +1061,10 @@ public class BodyCreationSettings
 
     native private static boolean hasMassProperties(long bodySettingsVa);
 
+    native private static void saveWithChildren(
+            long bodySettingsVa, long streamVa, long shapeMapVa,
+            long materialMapVa, long filterMapVa);
+
     native private static void setAllowDynamicOrKinematic(
             long bodySettingsVa, boolean setting);
 
@@ -1071,4 +1136,7 @@ public class BodyCreationSettings
 
     native private static void setShapeSettings(
             long bodySettingsVa, long shapeSettingsVa);
+
+    native private static long sRestoreWithChildren(long streamVa,
+            long shapeMapVa, long materialMapVa, long filterMapVa);
 }
