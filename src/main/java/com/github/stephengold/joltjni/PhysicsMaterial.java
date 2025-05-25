@@ -107,6 +107,19 @@ public class PhysicsMaterial extends SerializableObject
     }
 
     /**
+     * Save the material to the specified binary stream. The material is
+     * unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long materialVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(materialVa, streamVa);
+    }
+
+    /**
      * Create a counted reference to the native {@code PhysicsMaterial}.
      *
      * @return a new JVM object with a new native object assigned
@@ -166,6 +179,8 @@ public class PhysicsMaterial extends SerializableObject
     native private static String getDebugName(long materialVa);
 
     native private static int getRefCount(long materialVa);
+
+    native private static void saveBinaryState(long materialVa, long streamVa);
 
     native private static long sDefault(boolean dummy);
 

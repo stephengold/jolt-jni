@@ -82,6 +82,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterial_getRe
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterial
+ * Method:    saveBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterial_saveBinaryState
+  (JNIEnv *, jclass, jlong materialVa, jlong streamVa) {
+    const PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    pMaterial->SaveBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsMaterial
  * Method:    sDefault
  * Signature: (Z)J
  */

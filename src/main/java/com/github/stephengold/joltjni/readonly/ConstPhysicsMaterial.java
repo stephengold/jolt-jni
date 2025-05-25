@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.Color;
 import com.github.stephengold.joltjni.PhysicsMaterialRefC;
+import com.github.stephengold.joltjni.StreamOut;
 
 /**
  * Read-only access to a {@code PhysicsMaterial}. (native type: const
@@ -47,6 +48,14 @@ public interface ConstPhysicsMaterial extends ConstJoltPhysicsObject {
      * @return a string of text or {@code null}
      */
     String getDebugName();
+
+    /**
+     * Save the material to the specified binary stream. The material is
+     * unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    void saveBinaryState(StreamOut stream);
 
     /**
      * Create a counted reference to the native {@code PhysicsMaterial}.
