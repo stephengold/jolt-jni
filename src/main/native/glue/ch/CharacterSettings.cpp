@@ -53,6 +53,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_cr
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_createCopy
+  (JNIEnv *, jclass, jlong originalVa) {
+    const CharacterSettings * const pOriginal
+            = reinterpret_cast<CharacterSettings *> (originalVa);
+    CharacterSettings * const pResult = new CharacterSettings(*pOriginal);
+    TRACE_NEW("CharacterSettings", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterSettings
  * Method:    getFriction
  * Signature: (J)F
  */

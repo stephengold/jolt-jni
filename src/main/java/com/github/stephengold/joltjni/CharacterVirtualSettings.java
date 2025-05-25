@@ -47,6 +47,17 @@ public class CharacterVirtualSettings
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public CharacterVirtualSettings(ConstCharacterVirtualSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+    }
+
+    /**
      * Instantiate settings with the specified native object assigned but not
      * owned.
      *
@@ -494,6 +505,8 @@ public class CharacterVirtualSettings
     // native private methods
 
     native private static long createCharacterVirtualSettings();
+
+    native private static long createCopy(long originalVa);
 
     native private static int getBackFaceMode(long settingsVa);
 
