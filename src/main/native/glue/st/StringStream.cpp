@@ -47,12 +47,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_StringStream_cre
  * Signature: (Ljava/lang/String;)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_StringStream_createFromString
-  (JNIEnv *pEnv, jclass, jstring string) {
+  (JNIEnv *pEnv, jclass, jstring javaString) {
     jboolean isCopy;
-    const char * const cString = pEnv->GetStringUTFChars(string, &isCopy);
-    stringstream * const pResult = new stringstream(cString);
+    // javaString may contain '\0', so don't use GetStringUTFChars() !
+    const jchar * const pTmpUcs2 = pEnv->GetStringChars(javaString, &isCopy);
+    const jsize len = pEnv->GetStringLength(javaString);
+    char * const pBuffer = new char[len];
+    for (int i = 0; i < len; ++i) {
+        pBuffer[i] = pTmpUcs2[i];
+    }
+    pEnv->ReleaseStringChars(javaString, pTmpUcs2);
+    const string cppString(pBuffer, len);
+    delete[] pBuffer;
+    stringstream * const pResult = new stringstream(cppString);
     TRACE_NEW("stringstream", pResult)
-    pEnv->ReleaseStringUTFChars(string, cString);
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -78,7 +86,13 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_std_StringStream_s
     const stringstream * const pStream
             = reinterpret_cast<stringstream *> (streamVa);
     const string cppString = pStream->str();
-    const char * const cString = cppString.c_str();
-    const jstring result = pEnv->NewStringUTF(cString);
+    const jsize len = cppString.size();
+    // cppString may contain '\0', so don't use cppString.c_str() !
+    jchar * const pTmpUcs2 = new jchar[len];
+    for (int i = 0; i < len; ++i) {
+        pTmpUcs2[i] = cppString[i];
+    }
+    jstring result = pEnv->NewString(pTmpUcs2, len);
+    delete[] pTmpUcs2;
     return result;
 }
