@@ -217,28 +217,29 @@ final public class PrintTable {
                 continue; // skip to the next Java class
             }
 
-            stream.printf("|{url-api}/%s.html[%s]%n",
+            stream.printf("|{url-api}/%s.html[%s]",
                     basicJavaClass, basicJavaClass);
 
             String ro1 = "Const" + basicJavaClass;
             if (readOnlyNames.contains(ro1)) {
-                stream.printf(" {url-api}/readonly/%s.html[%s]%n", ro1, ro1);
+                stream.printf(" +%n {url-api}/readonly/%s.html[%s]", ro1, ro1);
             }
 
             String ro2 = basicJavaClass + "Arg";
             if (readOnlyNames.contains(ro2)) {
-                stream.printf(" {url-api}/readonly/%s.html[%s]%n", ro2, ro2);
+                stream.printf(" +%n {url-api}/readonly/%s.html[%s]", ro2, ro2);
             }
 
             String ref = basicJavaClass + "Ref";
             if (refClasses.contains(ref)) {
-                stream.printf(" {url-api}/%s.html[%s]%n", ref, ref);
+                stream.printf(" +%n {url-api}/%s.html[%s]", ref, ref);
             }
 
             String refc = basicJavaClass + "RefC";
             if (refClasses.contains(refc)) {
-                stream.printf(" {url-api}/%s.html[%s]%n", refc, refc);
+                stream.printf(" +%n {url-api}/%s.html[%s]", refc, refc);
             }
+            stream.println();
         }
 
         stream.println();
