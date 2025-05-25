@@ -66,9 +66,9 @@ final public class PrintTable {
      */
     public static void main(String[] arguments) {
         try {
-            FileOutputStream file = new FileOutputStream("lexicon.adoc");
+            OutputStream fileStream = new FileOutputStream("lexicon.adoc");
             boolean autoFlush = true;
-            PrintStream stream = new PrintStream(file, autoFlush);
+            PrintStream stream = new PrintStream(fileStream, autoFlush);
             printTableTo(stream);
 
         } catch (IOException exception) {
@@ -167,20 +167,19 @@ final public class PrintTable {
 
         // Enumerate Jolt JNI's basic classes and Ref/RefC classes:
         List<String> basicJavaClasses = new ArrayList<>();
-        Set<String> refNames = new TreeSet<>();
+        Set<String> refClasses = new TreeSet<>();
         {
             String corePackage = "com.github.stephengold.joltjni";
             Set<Class> coreClasses = Jolt.listClasses(corePackage);
             for (Class coreClass : coreClasses) {
                 String simpleName = coreClass.getSimpleName();
                 if (simpleName.endsWith("Ref") || simpleName.endsWith("RefC")) {
-                    refNames.add(simpleName);
+                    refClasses.add(simpleName);
                 } else if (!simpleName.isBlank()) {
                     basicJavaClasses.add(simpleName);
                 }
             }
         }
-        Collections.sort(basicJavaClasses);
 
         // Enumerate Jolt JNI's read-only interfaces:
         Set<String> readOnlyNames = new TreeSet<>();
@@ -193,6 +192,7 @@ final public class PrintTable {
             }
         }
 
+        Collections.sort(basicJavaClasses);
         for (String basicJavaClass : basicJavaClasses) {
             // Convert the Java class name to a hypothetical C++ identifier:
             String cppId = basicJavaClass
@@ -229,12 +229,12 @@ final public class PrintTable {
             }
 
             String ref = basicJavaClass + "Ref";
-            if (refNames.contains(ref)) {
+            if (refClasses.contains(ref)) {
                 stream.printf(" {url-api}/%s.html[%s]%n", ref, ref);
             }
 
             String refc = basicJavaClass + "RefC";
-            if (refNames.contains(refc)) {
+            if (refClasses.contains(refc)) {
                 stream.printf(" {url-api}/%s.html[%s]%n", refc, refc);
             }
         }
