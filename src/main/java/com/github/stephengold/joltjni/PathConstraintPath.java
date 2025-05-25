@@ -122,6 +122,17 @@ public class PathConstraintPath
     }
 
     /**
+     * Save the path to the specified binary stream. The path is unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    public void saveBinaryState(StreamOut stream) {
+        long pathVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(pathVa, streamVa);
+    }
+
+    /**
      * Alter whether the path is looping.
      *
      * @param setting {@code true} for looping, or {@code false} for no looping
@@ -130,6 +141,20 @@ public class PathConstraintPath
     public void setIsLooping(boolean setting) {
         long pathVa = va();
         setIsLooping(pathVa, setting);
+    }
+
+    /**
+     * Read a path from the specified binary stream.
+     *
+     * @param stream where to read objects (not null)
+     * @return a new object
+     */
+    public static PathResult sRestoreFromBinaryState(StreamIn stream) {
+        long streamVa = stream.va();
+        long resultVa = sRestoreFromBinaryState(streamVa);
+        PathResult result = new PathResult(resultVa, true);
+
+        return result;
     }
     // *************************************************************************
     // RefTarget methods
@@ -185,9 +210,13 @@ public class PathConstraintPath
 
     native private static boolean isLooping(long pathVa);
 
+    native private static void saveBinaryState(long pathVa, long streamVa);
+
     native private static void setEmbedded(long pathVa);
 
     native private static void setIsLooping(long pathVa, boolean setting);
+
+    native private static long sRestoreFromBinaryState(long streamVa);
 
     native private static long toRef(long materialVa);
 }
