@@ -208,6 +208,10 @@ final public class PrintTable {
                 stream.printf("%n|{url-jolt-struct}%s.html[JPH::%s]%n",
                         escape(cppId), cppId);
 
+            } else if (doesIdExist("namespace", cppId)) {
+                stream.printf("%n|{url-jolt-namespace}%s.html[%s::]%n",
+                        escape(cppId), cppId);
+
             } else { // not a top-level class, struct, or namespace in Jolt
                 continue; // skip to the next Java class
             }
