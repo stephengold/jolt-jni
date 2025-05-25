@@ -86,6 +86,7 @@ $(N)/glue/co/CompoundShapeSettings.cpp \
 $(N)/glue/co/ConeConstraint.cpp \
 $(N)/glue/co/ConeConstraintSettings.cpp \
 $(N)/glue/co/Constraint.cpp \
+$(N)/glue/co/ConstraintResult.cpp \
 $(N)/glue/co/Constraints.cpp \
 $(N)/glue/co/ConstraintSettings.cpp \
 $(N)/glue/co/Contact.cpp \
