@@ -24,6 +24,7 @@ package testjoltjni;
 import com.github.stephengold.joltjni.Jolt;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
