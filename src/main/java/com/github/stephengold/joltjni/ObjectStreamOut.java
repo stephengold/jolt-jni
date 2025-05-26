@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 import com.github.stephengold.joltjni.std.StringStream;
 
 /**
@@ -56,6 +57,25 @@ final public class ObjectStreamOut {
         int ordinal = streamType.ordinal();
         long settingsVa = settings.targetVa();
         boolean result = sWriteBcs(streamVa, ordinal, settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Write the specified constraint settings to the specified stream.
+     *
+     * @param stream the stream to write to (not null)
+     * @param streamType the type of stream (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(StringStream stream,
+            EStreamType streamType, ConstConstraintSettings settings) {
+        long streamVa = stream.va();
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result
+                = sWriteConstraintSettings(streamVa, ordinal, settingsVa);
 
         return result;
     }
@@ -99,6 +119,9 @@ final public class ObjectStreamOut {
     // native private methods
 
     native private static boolean sWriteBcs(
+            long streamVa, int ordinal, long settingsVa);
+
+    native private static boolean sWriteConstraintSettings(
             long streamVa, int ordinal, long settingsVa);
 
     native private static boolean sWritePhysicsScene(

@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/ObjectStream/ObjectStreamOut.h"
+#include "Jolt/Physics/Constraints/Constraint.h"
 #include "Jolt/Physics/PhysicsScene.h"
 #include "Jolt/Physics/Ragdoll/Ragdoll.h"
 #include "auto/com_github_stephengold_joltjni_ObjectStreamOut.h"
@@ -48,6 +49,25 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
             = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteConstraintSettings
+ * Signature: (JIJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteConstraintSettings
+  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    const ObjectStream::EStreamType streamType
+            = (ObjectStream::EStreamType) ordinal;
+    const ConstraintSettings * const pSettings
+            = reinterpret_cast<ConstraintSettings *> (settingsVa);
+    const bool result
+            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
+    return result;
+}
+
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
