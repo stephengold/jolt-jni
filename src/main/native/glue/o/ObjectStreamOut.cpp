@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +30,24 @@ SOFTWARE.
 #include "auto/com_github_stephengold_joltjni_ObjectStreamOut.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteBcs
+ * Signature: (JIJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteBcs
+  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    const ObjectStream::EStreamType streamType
+            = (ObjectStream::EStreamType) ordinal;
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (settingsVa);
+    const bool result
+            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
+    return result;
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EStreamType;
+import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.std.StringStream;
 
 /**
@@ -40,6 +41,24 @@ final public class ObjectStreamOut {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Write the specified body-creation settings to the specified stream.
+     *
+     * @param stream the stream to write to (not null)
+     * @param streamType the type of stream (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(StringStream stream,
+            EStreamType streamType, ConstBodyCreationSettings settings) {
+        long streamVa = stream.va();
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result = sWriteBcs(streamVa, ordinal, settingsVa);
+
+        return result;
+    }
 
     /**
      * Write the specified scene to the specified stream.
@@ -78,6 +97,9 @@ final public class ObjectStreamOut {
     }
     // *************************************************************************
     // native private methods
+
+    native private static boolean sWriteBcs(
+            long streamVa, int ordinal, long settingsVa);
 
     native private static boolean sWritePhysicsScene(
             long streamVa, int ordinal, long sceneVa);
