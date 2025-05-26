@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -49,10 +50,11 @@ public class VehicleConstraint extends Constraint {
      * @param body the body to which the constraint will apply (not null)
      * @param settings the desired settings (not null, unaffected)
      */
-    public VehicleConstraint(Body body, VehicleConstraintSettings settings) {
+    public VehicleConstraint(
+            Body body, ConstVehicleConstraintSettings settings) {
         this.body = body;
         long bodyVa = body.va();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         long constraintVa = createConstraint(bodyVa, settingsVa);
         setVirtualAddress(constraintVa); // not the owner due to ref counting
     }
