@@ -539,7 +539,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Read a settings object from a binary stream.
+     * Read a settings object from the specified binary stream.
      *
      * @param stream where to read objects (not null)
      * @param shapeMap track multiple uses of shapes (not null)

@@ -194,10 +194,10 @@ abstract public class Constraint extends NonCopyable
     }
 
     /**
-     * Convert the constraint to a {@code ConstraintSettings} object. The
-     * constraint is unaffected.
+     * Generate settings to reconstruct the constraint. The constraint is
+     * unaffected.
      *
-     * @return a new reference to a new settings object
+     * @return a counted reference to a new settings object
      */
     @Override
     public ConstraintSettingsRef getConstraintSettings() {

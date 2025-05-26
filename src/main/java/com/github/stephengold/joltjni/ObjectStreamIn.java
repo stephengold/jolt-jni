@@ -42,11 +42,11 @@ final public class ObjectStreamIn {
     // new methods exposed
 
     /**
-     * Read an object from the specified file.
+     * Read a ref-counted target from the specified file.
      *
      * @param fileName the path to the file (not null)
-     * @param storeRef where to store the de-serialized object (not null,
-     * modified)
+     * @param storeRef where to store the reference to the de-serialized object
+     * (not null, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(String fileName, Ref storeRef) {
@@ -110,8 +110,8 @@ final public class ObjectStreamIn {
      * Read a scene from the specified stream.
      *
      * @param stream the stream to read from (not null)
-     * @param sceneRef where to store the de-serialized scene (not null,
-     * modified)
+     * @param sceneRef where to store the reference to the de-serialized scene
+     * (not null, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -124,11 +124,11 @@ final public class ObjectStreamIn {
     }
 
     /**
-     * Read ragdoll settings from the specified stream.
+     * Read a ragdoll-settings object from the specified stream.
      *
      * @param stream the stream to read from (not null)
-     * @param settingsRef where to store the de-serialized settings (not null,
-     * modified)
+     * @param settingsRef where to store the reference to the de-serialized
+     * settings (not null, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(

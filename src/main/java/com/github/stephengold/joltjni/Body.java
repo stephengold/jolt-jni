@@ -521,7 +521,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Convert the body to a {@code BodyCreationSettings} object. The body is
+     * Generate settings to reconstruct the (rigid) body. The body is
      * unaffected.
      *
      * @return a new object
@@ -860,8 +860,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Convert the body to a {@code SoftBodyCreationSettings} object. The body
-     * is unaffected.
+     * Generate settings to reconstruct the (soft) body. The body is unaffected.
      *
      * @return a new object
      */
