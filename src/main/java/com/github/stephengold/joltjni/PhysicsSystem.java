@@ -28,8 +28,7 @@ import com.github.stephengold.joltjni.readonly.ConstConstraint;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -70,7 +69,8 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * protect the step listeners (if any) from garbage collection
      */
-    final private List<PhysicsStepListener> stepListeners = new ArrayList<>(4);
+    final private Map<Long, PhysicsStepListener> stepListeners
+            = new HashMap<>(16);
     /**
      * map virtual address to system
      */
@@ -144,9 +144,9 @@ public class PhysicsSystem extends NonCopyable {
      * @param listener the listener to add (not null, alias created)
      */
     public void addStepListener(PhysicsStepListener listener) {
-        stepListeners.add(listener);
         long systemVa = va();
         long listenerVa = listener.targetVa();
+        stepListeners.put(listenerVa, listener);
         addStepListener(systemVa, listenerVa);
     }
 
@@ -649,9 +649,9 @@ public class PhysicsSystem extends NonCopyable {
      * @param listener the listener to remove (not null)
      */
     public void removeStepListener(PhysicsStepListener listener) {
-        stepListeners.remove(listener);
         long systemVa = va();
         long listenerVa = listener.targetVa();
+        stepListeners.remove(listenerVa, listener);
         removeStepListener(systemVa, listenerVa);
     }
 
