@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,13 +25,49 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/ObjectStream/ObjectStreamIn.h"
+#include "Jolt/Physics/Constraints/Constraint.h"
 #include "Jolt/Physics/PhysicsScene.h"
 #include "Jolt/Physics/Ragdoll/Ragdoll.h"
 #include "Jolt/Skeleton/SkeletalAnimation.h"
 
 #include "auto/com_github_stephengold_joltjni_ObjectStreamIn.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadBcsFromStream
+ * Signature: (J[J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadBcsFromStream
+  (JNIEnv *pEnv, jclass, jlong streamVa, jlongArray storeVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    BodyCreationSettings * pSettings = new BodyCreationSettings();
+    TRACE_NEW("BodyCreationSettings", pSettings)
+    const bool result = ObjectStreamIn::sReadObject(*pStream, pSettings);
+    jboolean isCopy;
+    jlong * const pStoreVa = pEnv->GetLongArrayElements(storeVa, &isCopy);
+    pStoreVa[0] = reinterpret_cast<jlong> (pSettings);
+    pEnv->ReleaseLongArrayElements(storeVa, pStoreVa, 0);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadConstraintSettingsFromStream
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadConstraintSettingsFromStream
+  (JNIEnv *, jclass, jlong streamVa, jlong settingsRefVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    Ref<ConstraintSettings> * const pSettingsRef
+            = reinterpret_cast<Ref<ConstraintSettings> *> (settingsRefVa);
+    const bool result = ObjectStreamIn::sReadObject(*pStream, *pSettingsRef);
+    return result;
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn

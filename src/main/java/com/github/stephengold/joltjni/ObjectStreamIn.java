@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -69,6 +69,44 @@ final public class ObjectStreamIn {
     }
 
     /**
+     * Read a body-settings object from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param storeBcs where to store the de-serialized settings (not null,
+     * length&gt;0, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, BodyCreationSettings[] storeBcs) {
+        long streamVa = stream.va();
+        long[] storeVa = {0L};
+        boolean result = sReadBcsFromStream(streamVa, storeVa);
+        long bodySettingsVa = storeVa[0];
+        storeBcs[0] = new BodyCreationSettings(bodySettingsVa, true);
+
+        return result;
+    }
+
+    /**
+    /**
+     * Read a constraint-settings object from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param settingsRef where to store the reference to the de-serialized
+     * settings (not null, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, ConstraintSettingsRef settingsRef) {
+        long streamVa = stream.va();
+        long settingsRefVa = settingsRef.va();
+        boolean result
+                = sReadConstraintSettingsFromStream(streamVa, settingsRefVa);
+
+        return result;
+    }
+
+    /**
      * Read a scene from the specified stream.
      *
      * @param stream the stream to read from (not null)
@@ -103,6 +141,12 @@ final public class ObjectStreamIn {
     }
     // *************************************************************************
     // native private methods
+
+    native private static boolean sReadBcsFromStream(
+            long streamVa, long[] storeVa);
+
+    native private static boolean sReadConstraintSettingsFromStream(
+            long streamVa, long settingsRefVa);
 
     native private static boolean sReadPhysicsScene(
             String fileName, long refVa);
