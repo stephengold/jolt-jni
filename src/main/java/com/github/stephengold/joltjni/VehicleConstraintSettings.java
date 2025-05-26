@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
+import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
@@ -33,7 +34,9 @@ import java.util.List;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleConstraintSettings extends ConstraintSettings {
+public class VehicleConstraintSettings
+        extends ConstraintSettings
+        implements ConstVehicleConstraintSettings {
     // *************************************************************************
     // fields
 
@@ -118,93 +121,6 @@ public class VehicleConstraintSettings extends ConstraintSettings {
     }
 
     /**
-     * Copy the "forward" vector. The settings are unaffected. (native
-     * attribute: mForward)
-     *
-     * @return a new direction vector
-     */
-    public Vec3 getForward() {
-        long settingsVa = va();
-        float dx = getForwardX(settingsVa);
-        float dy = getForwardY(settingsVa);
-        float dz = getForwardZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
-
-        return result;
-    }
-
-    /**
-     * Return the vehicle's maximum pitch/roll angle. The settings are
-     * unaffected. (native attribute: mMaxPitchRollAngle)
-     *
-     * @return the limit angle (in radians)
-     */
-    public float getMaxPitchRollAngle() {
-        long settingsVa = va();
-        float result = getMaxPitchRollAngle(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Count the anti-roll bars. The settings are unaffected. (native attribute:
-     * mAntiRollBars)
-     *
-     * @return the count (&ge;0)
-     */
-    public int getNumAntiRollBars() {
-        long settingsVa = va();
-        int result = getNumAntiRollBars(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Count the wheels. The settings are unaffected. (native attribute:
-     * mWheels)
-     *
-     * @return the count (&ge;0)
-     */
-    public int getNumWheels() {
-        int result = wheelRefs.size();
-        return result;
-    }
-
-    /**
-     * Copy the "up" vector. The settings are unaffected. (native attribute:
-     * mUp)
-     *
-     * @return a new direction vector
-     */
-    public Vec3 getUp() {
-        long settingsVa = va();
-        float dx = getUpX(settingsVa);
-        float dy = getUpY(settingsVa);
-        float dz = getUpZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
-
-        return result;
-    }
-
-    /**
-     * Enumerate all wheel settings. The settings are unaffected. (native
-     * attribute: mWheels)
-     *
-     * @return a new array of pre-existing objects
-     */
-    public WheelSettings[] getWheels() {
-        int numWheels = wheelRefs.size();
-        WheelSettings[] result = new WheelSettings[numWheels];
-        for (int i = 0; i < numWheels; ++i) {
-            Ref r = wheelRefs.get(i);
-            RefTarget t = r.getPtr();
-            result[i] = (WheelSettings) t;
-        }
-
-        return result;
-    }
-
-    /**
      * Alter how the vehicle accelerates and decelerates. (native attribute:
      * mController)
      *
@@ -268,6 +184,101 @@ public class VehicleConstraintSettings extends ConstraintSettings {
         float dy = up.getY();
         float dz = up.getZ();
         setUp(settingsVa, dx, dy, dz);
+    }
+    // *************************************************************************
+    // ConstVehicleConstraintsSettgs methods
+
+    /**
+     * Copy the "forward" vector. The settings are unaffected. (native
+     * attribute: mForward)
+     *
+     * @return a new direction vector
+     */
+    @Override
+    public Vec3 getForward() {
+        long settingsVa = va();
+        float dx = getForwardX(settingsVa);
+        float dy = getForwardY(settingsVa);
+        float dz = getForwardZ(settingsVa);
+        Vec3 result = new Vec3(dx, dy, dz);
+
+        return result;
+    }
+
+    /**
+     * Return the vehicle's maximum pitch/roll angle. The settings are
+     * unaffected. (native attribute: mMaxPitchRollAngle)
+     *
+     * @return the limit angle (in radians)
+     */
+    @Override
+    public float getMaxPitchRollAngle() {
+        long settingsVa = va();
+        float result = getMaxPitchRollAngle(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the anti-roll bars. The settings are unaffected. (native attribute:
+     * mAntiRollBars)
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getNumAntiRollBars() {
+        long settingsVa = va();
+        int result = getNumAntiRollBars(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the wheels. The settings are unaffected. (native attribute:
+     * mWheels)
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getNumWheels() {
+        int result = wheelRefs.size();
+        return result;
+    }
+
+    /**
+     * Copy the "up" vector. The settings are unaffected. (native attribute:
+     * mUp)
+     *
+     * @return a new direction vector
+     */
+    @Override
+    public Vec3 getUp() {
+        long settingsVa = va();
+        float dx = getUpX(settingsVa);
+        float dy = getUpY(settingsVa);
+        float dz = getUpZ(settingsVa);
+        Vec3 result = new Vec3(dx, dy, dz);
+
+        return result;
+    }
+
+    /**
+     * Enumerate all wheel settings. The settings are unaffected. (native
+     * attribute: mWheels)
+     *
+     * @return a new array of pre-existing objects
+     */
+    @Override
+    public WheelSettings[] getWheels() {
+        int numWheels = wheelRefs.size();
+        WheelSettings[] result = new WheelSettings[numWheels];
+        for (int i = 0; i < numWheels; ++i) {
+            Ref r = wheelRefs.get(i);
+            RefTarget t = r.getPtr();
+            result[i] = (WheelSettings) t;
+        }
+
+        return result;
     }
     // *************************************************************************
     // native private methods
