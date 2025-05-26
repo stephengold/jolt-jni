@@ -31,9 +31,6 @@ import java.nio.FloatBuffer;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface QuatArg {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Return the conjugate. The current object is unaffected.
      *

@@ -30,9 +30,6 @@ import com.github.stephengold.joltjni.Vec3;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Identify the body to which shape 2 belongs. The object is unaffected.
      *

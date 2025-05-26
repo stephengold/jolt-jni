@@ -34,9 +34,6 @@ import com.github.stephengold.joltjni.enumerate.EMotionQuality;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstMotionProperties extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Copy the net force acting on the body. The properties are unaffected.
      *

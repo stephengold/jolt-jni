@@ -31,9 +31,6 @@ import com.github.stephengold.joltjni.Vec3;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstSoftBodyVertex extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Return the index of the colliding shape. The vertex is unaffected.
      *

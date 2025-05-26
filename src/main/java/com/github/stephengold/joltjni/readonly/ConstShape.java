@@ -38,9 +38,6 @@ import java.nio.FloatBuffer;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstShape extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Copy the vertex coordinates of the shape's debug mesh to the specified
      * buffer. The shape is unaffected.

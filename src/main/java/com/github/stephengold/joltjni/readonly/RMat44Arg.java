@@ -34,9 +34,6 @@ import java.nio.FloatBuffer;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface RMat44Arg extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Copy the first column to a {@code Vec3}. The matrix is unaffected.
      *

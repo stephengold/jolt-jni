@@ -32,9 +32,6 @@ import java.nio.FloatBuffer;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface Vec3Arg {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Return the absolute value of each component. The vector is unaffected.
      *

@@ -30,9 +30,6 @@ import com.github.stephengold.joltjni.StreamOut;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstConstraintSettings extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Return the constraint's priority when solving. The settings are
      * unaffected.

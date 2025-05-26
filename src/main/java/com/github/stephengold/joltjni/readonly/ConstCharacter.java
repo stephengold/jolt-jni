@@ -34,9 +34,6 @@ import com.github.stephengold.joltjni.Vec3;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstCharacter extends ConstCharacterBase {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Return the ID of the body associated with this character. The character
      * is unaffected.

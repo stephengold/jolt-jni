@@ -37,9 +37,6 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstBody extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Test whether the body could be made kinematic or dynamic. The body is
      * unaffected.

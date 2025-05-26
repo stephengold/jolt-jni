@@ -31,9 +31,6 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstContact extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Return the ID of the colliding body. The contact is unaffected.
      *

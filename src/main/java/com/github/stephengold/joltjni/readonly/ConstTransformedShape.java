@@ -48,9 +48,6 @@ import java.nio.FloatBuffer;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstTransformedShape extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Cast a ray and find the closest hit. The shape is unaffected.
      *

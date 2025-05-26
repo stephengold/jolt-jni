@@ -30,9 +30,6 @@ import java.nio.IntBuffer;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Count the edge constraints. The settings are unaffected.
      *

@@ -33,9 +33,6 @@ import com.github.stephengold.joltjni.enumerate.EGroundState;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstCharacterBase extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Return the maximum slope the character can walk on. The character is
      * unaffected.

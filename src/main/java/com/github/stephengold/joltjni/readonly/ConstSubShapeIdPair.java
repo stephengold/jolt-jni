@@ -28,9 +28,6 @@ package com.github.stephengold.joltjni.readonly;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstSubShapeIdPair extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Return the ID of the first body. The pair is unaffected.
      *

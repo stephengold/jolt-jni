@@ -30,9 +30,6 @@ import com.github.stephengold.joltjni.Vec3;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface RVec3Arg {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *

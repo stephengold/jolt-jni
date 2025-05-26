@@ -30,9 +30,6 @@ import java.nio.FloatBuffer;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstSoftBodyMotionProperties extends ConstMotionProperties {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Test whether skinning constraints are enabled. The properties are
      * unaffected.

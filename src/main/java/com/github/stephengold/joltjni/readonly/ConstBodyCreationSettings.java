@@ -36,9 +36,6 @@ import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Test whether a static body can be converted to kinematic or dynamic. The
      * settings are unaffected.

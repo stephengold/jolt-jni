@@ -35,9 +35,6 @@ import com.github.stephengold.joltjni.Vec3;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstCharacterVirtual extends ConstCharacterBase {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Convert the specified velocity to one that won't climb steep slopes. The
      * character is unaffected.

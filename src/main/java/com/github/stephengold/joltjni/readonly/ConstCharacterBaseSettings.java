@@ -31,9 +31,6 @@ import com.github.stephengold.joltjni.Vec3;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Test whether to make an extra effort to remove contacts with internal
      * edges. The settings are unaffected.

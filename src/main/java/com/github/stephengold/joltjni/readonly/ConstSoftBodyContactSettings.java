@@ -28,9 +28,6 @@ package com.github.stephengold.joltjni.readonly;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstSoftBodyContactSettings extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Return the scale factor for the inverse inertia of body 2. The settings
      * are unaffected.

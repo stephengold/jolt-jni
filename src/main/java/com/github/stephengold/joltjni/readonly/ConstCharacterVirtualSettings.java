@@ -32,9 +32,6 @@ import com.github.stephengold.joltjni.enumerate.EBackFaceMode;
  */
 public interface ConstCharacterVirtualSettings
         extends ConstCharacterBaseSettings {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Determine whether the character will move through back-facing triangles.
      * The settings are unaffected.

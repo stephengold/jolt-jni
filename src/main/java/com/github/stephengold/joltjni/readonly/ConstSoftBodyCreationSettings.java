@@ -31,9 +31,6 @@ import com.github.stephengold.joltjni.RVec3;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Test whether the created body will be allowed to fall asleep. The
      * settings are unaffected.

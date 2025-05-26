@@ -32,9 +32,6 @@ import com.github.stephengold.joltjni.StreamOut;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstPhysicsMaterial extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Copy the debug color. The material is unaffected.
      *

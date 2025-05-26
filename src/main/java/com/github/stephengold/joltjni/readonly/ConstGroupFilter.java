@@ -29,9 +29,6 @@ import com.github.stephengold.joltjni.StreamOut;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstGroupFilter extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Test whether the specified groups can collide. The filter is unaffected.
      *

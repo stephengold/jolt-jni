@@ -31,9 +31,6 @@ import com.github.stephengold.joltjni.ShapeSettingsRefC;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface ConstShapeSettings extends ConstJoltPhysicsObject {
-    // *************************************************************************
-    // new methods exposed
-
     /**
      * Generate a {@code ShapeResult} from these settings.
      *
