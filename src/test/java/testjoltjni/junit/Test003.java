@@ -42,7 +42,6 @@ import com.github.stephengold.joltjni.MotionProperties;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
-import com.github.stephengold.joltjni.Shape;
 import com.github.stephengold.joltjni.SkinWeight;
 import com.github.stephengold.joltjni.SoftBodyCreationSettings;
 import com.github.stephengold.joltjni.SoftBodyMotionProperties;
@@ -222,7 +221,7 @@ public class Test003 {
             TestUtils.testClose(bcs, ss);
         }
         {
-            Shape shape = new SphereShape(1f);
+            ConstShape shape = new SphereShape(1f);
             int objectLayer = 0;
             BodyCreationSettings bcs = new BodyCreationSettings(shape,
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
@@ -394,6 +393,7 @@ public class Test003 {
         {
             SoftBodyCreationSettings sbcs = new SoftBodyCreationSettings();
 
+            Assert.assertNull(sbcs.getSettings());
             testSbcsDefaults(sbcs);
             testSbcsSetters(sbcs);
 
@@ -869,7 +869,6 @@ public class Test003 {
         Assert.assertEquals(0f, sbcs.getPressure(), 0f);
         Assert.assertEquals(0f, sbcs.getRestitution(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, 1f, sbcs.getRotation(), 0f);
-        Assert.assertNull(sbcs.getSettings());
         Assert.assertTrue(sbcs.getUpdatePosition());
     }
 
