@@ -266,6 +266,19 @@ final public class TestUtils {
     }
 
     /**
+     * Verify the equality of 2 location vectors to within some tolerance.
+     *
+     * @param expected the expected value (not null, unaffected)
+     * @param actual the vector to test (not null, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertEquals(
+            RVec3Arg expected, RVec3Arg actual, float tolerance) {
+        assertEquals(
+                expected.x(), expected.y(), expected.z(), actual, tolerance);
+    }
+
+    /**
      * Verify the equality of 2 single-precision vectors to within some
      * tolerance.
      *
