@@ -43,6 +43,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import electrostatic4j.snaploader.platform.util.NativeVariant;
 import java.io.File;
 import java.io.PrintStream;
+import java.nio.FloatBuffer;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -237,6 +238,27 @@ final public class TestUtils {
     }
 
     /**
+     * Verify the public properties of a float buffer.
+     *
+     * @param expected the first box (not {@code null}, unaffected)
+     * @param actual the 2nd box (not {@code null}, unaffected)
+     */
+    public static void assertEquals(FloatBuffer expected, FloatBuffer actual) {
+        int numFloats = expected.capacity();
+        Assert.assertEquals(numFloats, actual.capacity());
+        for (int i = 0; i < numFloats; ++i) {
+            Assert.assertEquals(expected.get(i), actual.get(i), 0f);
+        }
+
+        Assert.assertEquals(expected.hasArray(), actual.hasArray());
+        Assert.assertEquals(expected.isDirect(), actual.isDirect());
+        Assert.assertEquals(expected.limit(), actual.limit());
+        Assert.assertEquals(expected.mark(), actual.mark());
+        Assert.assertEquals(expected.order(), actual.order());
+        Assert.assertEquals(expected.position(), actual.position());
+    }
+
+    /**
      * Verify the components of an integer vector.
      *
      * @param x the expected X component
@@ -291,6 +313,25 @@ final public class TestUtils {
         assertEquals(expected.getX(), expected.getY(), expected.getZ(),
                 actual, tolerance);
     }
+
+    /**
+     * Verify the properties of a physics object, other than its virtual
+     * address.
+     *
+     * @param expected the first object (not {@code null}, unaffected)
+     * @param actual the 2nd object (not {@code null}, unaffected)
+     */
+    public static void assertJpo(
+            ConstJoltPhysicsObject expected, ConstJoltPhysicsObject actual) {
+        Assert.assertNotNull(expected);
+        Assert.assertNotNull(actual);
+
+        Assert.assertEquals(expected.hasAssignedNativeObject(),
+                actual.hasAssignedNativeObject());
+        Assert.assertEquals(
+                expected.ownsNativeObject(), actual.ownsNativeObject());
+    }
+
 
     /**
      * Clean up after a test.
