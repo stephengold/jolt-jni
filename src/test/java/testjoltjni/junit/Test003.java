@@ -67,6 +67,9 @@ import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
+import com.github.stephengold.joltjni.readonly.QuatArg;
+import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.vhacd.FillMode;
 import com.github.stephengold.joltjni.vhacd.Parameters;
@@ -206,6 +209,16 @@ public class Test003 {
             testBcsSetters(bcs);
 
             TestUtils.testClose(bcs);
+        }
+        {
+            ConstBodyCreationSettings original = new BodyCreationSettings();
+            BodyCreationSettings copy = new BodyCreationSettings(original);
+
+            Assert.assertNull(copy.getShape());
+            testBcsDefaults(copy);
+            testBcsSetters(copy);
+
+            TestUtils.testClose(copy, original);
         }
         {
             ConstShapeSettings ss = new BoxShapeSettings(1f, 1f, 1f);
@@ -398,6 +411,32 @@ public class Test003 {
             testSbcsSetters(sbcs);
 
             TestUtils.testClose(sbcs);
+        }
+        { // copy constructor:
+            ConstSoftBodyCreationSettings original
+                    = new SoftBodyCreationSettings();
+            SoftBodyCreationSettings copy
+                    = new SoftBodyCreationSettings(original);
+
+            Assert.assertNull(copy.getSettings());
+            testSbcsDefaults(copy);
+            testSbcsSetters(copy);
+
+            TestUtils.testClose(copy, original);
+        }
+        { // constructed from a SoftBodySharedSettings:
+            ConstSoftBodySharedSettings sbss = new SoftBodySharedSettings();
+            RVec3Arg location = new RVec3();
+            QuatArg orientation = new Quat();
+            int objectLayer = 0;
+            SoftBodyCreationSettings sbcs = new SoftBodyCreationSettings(
+                    sbss, location, orientation, objectLayer);
+
+            Assert.assertEquals(sbss.targetVa(), sbcs.getSettings().targetVa());
+            testSbcsDefaults(sbcs);
+            testSbcsSetters(sbcs);
+
+            TestUtils.testClose(sbcs, sbss);
         }
 
         System.gc();
