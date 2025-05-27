@@ -31,6 +31,7 @@ import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilterTable;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.UVec4;
+import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
@@ -92,6 +93,33 @@ final public class TestUtils {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Verify the properties of an axis-aligned bounding box, other than its
+     * virtual address.
+     *
+     * @param expected the first box (not {@code null}, unaffected)
+     * @param actual the 2nd box (not {@code null}, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertAaBox(
+            ConstAaBox expected, ConstAaBox actual, float tolerance) {
+        assertJpo(expected, actual);
+
+        boolean isValid = expected.isValid();
+        Assert.assertEquals(isValid, actual.isValid());
+        if (!isValid) {
+            return;
+        }
+
+        assertEquals(expected.getCenter(), actual.getCenter(), tolerance);
+        assertEquals(expected.getExtent(), actual.getExtent(), tolerance);
+        assertEquals(expected.getMax(), actual.getMax(), tolerance);
+        assertEquals(expected.getMin(), actual.getMin(), tolerance);
+        assertEquals(expected.getSize(), actual.getSize(), tolerance);
+        Assert.assertEquals(
+                expected.getVolume(), actual.getVolume(), tolerance);
+    }
 
     /**
      * Verify the elements of a single-precision matrix to within some
