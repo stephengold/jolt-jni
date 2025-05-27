@@ -93,41 +93,6 @@ final public class TestUtils {
     // new methods exposed
 
     /**
-     * Verify the components of a quaternion to within some tolerance.
-     *
-     * @param x the expected X component
-     * @param y the expected Y component
-     * @param z the expected Z component
-     * @param w the expected W component
-     * @param actual the Quaternion to test (not null, unaffected)
-     * @param tolerance the allowable difference for each component (&ge;0)
-     */
-    public static void assertEquals(float x, float y, float z, float w,
-            QuatArg actual, float tolerance) {
-        Assert.assertEquals("x component", x, actual.getX(), tolerance);
-        Assert.assertEquals("y component", y, actual.getY(), tolerance);
-        Assert.assertEquals("z component", z, actual.getZ(), tolerance);
-        Assert.assertEquals("w component", w, actual.getW(), tolerance);
-    }
-
-    /**
-     * Verify the components of a location-precision vector to within some
-     * tolerance.
-     *
-     * @param x the expected X component
-     * @param y the expected Y component
-     * @param z the expected Z component
-     * @param actual the vector to test (not null, unaffected)
-     * @param tolerance the allowable difference for each component (&ge;0)
-     */
-    public static void assertEquals(
-            float x, float y, float z, RVec3Arg actual, float tolerance) {
-        Assert.assertEquals("x component", x, actual.x(), tolerance);
-        Assert.assertEquals("y component", y, actual.y(), tolerance);
-        Assert.assertEquals("z component", z, actual.z(), tolerance);
-    }
-
-    /**
      * Verify the elements of a single-precision matrix to within some
      * tolerance.
      *
@@ -217,6 +182,41 @@ final public class TestUtils {
         Assert.assertEquals("e31", e31, actual.getElement(3, 1), tolerance);
         Assert.assertEquals("e32", e32, actual.getElement(3, 2), tolerance);
         Assert.assertEquals("e33", e33, actual.getElement(3, 3), tolerance);
+    }
+
+    /**
+     * Verify the components of a quaternion to within some tolerance.
+     *
+     * @param x the expected X component
+     * @param y the expected Y component
+     * @param z the expected Z component
+     * @param w the expected W component
+     * @param actual the Quaternion to test (not null, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertEquals(float x, float y, float z, float w,
+            QuatArg actual, float tolerance) {
+        Assert.assertEquals("x component", x, actual.getX(), tolerance);
+        Assert.assertEquals("y component", y, actual.getY(), tolerance);
+        Assert.assertEquals("z component", z, actual.getZ(), tolerance);
+        Assert.assertEquals("w component", w, actual.getW(), tolerance);
+    }
+
+    /**
+     * Verify the components of a location-precision vector to within some
+     * tolerance.
+     *
+     * @param x the expected X component
+     * @param y the expected Y component
+     * @param z the expected Z component
+     * @param actual the vector to test (not null, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertEquals(
+            float x, float y, float z, RVec3Arg actual, float tolerance) {
+        Assert.assertEquals("x component", x, actual.x(), tolerance);
+        Assert.assertEquals("y component", y, actual.y(), tolerance);
+        Assert.assertEquals("z component", z, actual.z(), tolerance);
     }
 
     /**
