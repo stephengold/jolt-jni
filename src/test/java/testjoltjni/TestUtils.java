@@ -69,7 +69,7 @@ final public class TestUtils {
      * false to explicitly free native objects via {@code testClose()}, true to
      * rely on the automatic {@code java.lang.ref.Cleaner} instead
      */
-    final static public boolean automateFreeing = true;
+    final public static boolean automateFreeing = true;
     /**
      * customary number of object layers
      */
@@ -376,7 +376,7 @@ final public class TestUtils {
      *
      * @param physicsSystem the system to clean up (not null)
      */
-    static public void cleanupPhysicsSystem(PhysicsSystem physicsSystem) {
+    public static void cleanupPhysicsSystem(PhysicsSystem physicsSystem) {
         ConstBroadPhaseLayerInterface mapObj2Bp
                 = physicsSystem.getBroadPhaseLayerInterface();
         ConstObjectLayerPairFilter ovoFilter = physicsSystem.getOvoFilter();
@@ -582,7 +582,7 @@ final public class TestUtils {
      * @param maxBodies the desired number of bodies (&ge;1)
      * @return a new system
      */
-    static public PhysicsSystem newPhysicsSystem(int maxBodies) {
+    public static PhysicsSystem newPhysicsSystem(int maxBodies) {
         // broadphase layer IDs:
         int bpLayerNonMoving = 0;
         int bpLayerMoving = 1;
