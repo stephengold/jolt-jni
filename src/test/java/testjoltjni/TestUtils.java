@@ -34,6 +34,7 @@ import com.github.stephengold.joltjni.UVec4;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
+import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
@@ -310,6 +311,22 @@ final public class TestUtils {
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(
+            Mat44Arg expected, Mat44Arg actual, float tolerance) {
+        assertEquals(expected.getAxisX(), actual.getAxisX(), tolerance);
+        assertEquals(expected.getAxisY(), actual.getAxisY(), tolerance);
+        assertEquals(expected.getAxisZ(), actual.getAxisZ(), tolerance);
+        assertEquals(
+                expected.getTranslation(), actual.getTranslation(), tolerance);
+    }
+
+    /**
+     * Verify the equality of 2 quaternions to within some tolerance.
+     *
+     * @param expected the expected value (not null, unaffected)
+     * @param actual the vector to test (not null, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertEquals(
             QuatArg expected, QuatArg actual, float tolerance) {
         assertEquals(expected.getX(), expected.getY(), expected.getZ(),
                 expected.getW(), actual, tolerance);
@@ -358,6 +375,21 @@ final public class TestUtils {
                 actual.hasAssignedNativeObject());
         Assert.assertEquals(
                 expected.ownsNativeObject(), actual.ownsNativeObject());
+    }
+
+    /**
+     * Verify the properties of a mass-properties object, other than its virtual
+     * address.
+     *
+     * @param expected the first shape (not {@code null}, unaffected)
+     * @param actual the 2nd shape (not {@code null}, unaffected)
+     */
+    public static void assertMassProperties(ConstMassProperties expected,
+            ConstMassProperties actual) {
+        assertJpo(expected, actual);
+
+        Assert.assertEquals(expected.getMass(), actual.getMass(), 0f);
+        assertEquals(expected.getInertia(), actual.getInertia(), 0f);
     }
 
 
