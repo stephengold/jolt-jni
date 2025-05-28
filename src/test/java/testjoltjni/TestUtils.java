@@ -35,7 +35,9 @@ import com.github.stephengold.joltjni.StreamOutWrapper;
 import com.github.stephengold.joltjni.UVec4;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
+import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
@@ -125,6 +127,75 @@ final public class TestUtils {
         assertEquals(expected.getSize(), actual.getSize(), tolerance);
         Assert.assertEquals(
                 expected.getVolume(), actual.getVolume(), tolerance);
+    }
+
+    /**
+     * Verify the properties of a body-creation settings object, other than its
+     * virtual address.
+     *
+     * @param expected the first settings object (not {@code null}, unaffected)
+     * @param actual the 2nd settings object (not {@code null}, unaffected)
+     */
+    public static void assertBcs(ConstBodyCreationSettings expected,
+            ConstBodyCreationSettings actual) {
+        assertJpo(expected, actual);
+
+        Assert.assertEquals(expected.getAllowDynamicOrKinematic(),
+                actual.getAllowDynamicOrKinematic());
+        Assert.assertEquals(expected.getAllowedDofs(), actual.getAllowedDofs());
+        Assert.assertEquals(
+                expected.getAllowSleeping(), actual.getAllowSleeping());
+        Assert.assertEquals(
+                expected.getAngularDamping(), actual.getAngularDamping(), 0f);
+        assertEquals(
+                expected.getAngularVelocity(), actual.getAngularVelocity(), 0f);
+        Assert.assertEquals(expected.getApplyGyroscopicForce(),
+                actual.getApplyGyroscopicForce());
+        assertCollisionGroup(
+                expected.getCollisionGroup(), actual.getCollisionGroup());
+        Assert.assertEquals(expected.getEnhancedInternalEdgeRemoval(),
+                actual.getEnhancedInternalEdgeRemoval());
+        Assert.assertEquals(expected.getFriction(), actual.getFriction(), 0f);
+        Assert.assertEquals(
+                expected.getGravityFactor(), actual.getGravityFactor(), 0f);
+        Assert.assertEquals(expected.getIsSensor(), actual.getIsSensor());
+        Assert.assertEquals(
+                expected.getLinearDamping(), actual.getLinearDamping(), 0f);
+        assertEquals(
+                expected.getLinearVelocity(), actual.getLinearVelocity(), 0f);
+        assertMassProperties(
+                expected.getMassProperties(), actual.getMassProperties());
+        Assert.assertEquals(expected.getMaxAngularVelocity(),
+                actual.getMaxAngularVelocity(), 0f);
+        Assert.assertEquals(expected.getMaxLinearVelocity(),
+                actual.getMaxLinearVelocity(), 0f);
+        Assert.assertEquals(
+                expected.getMotionQuality(), actual.getMotionQuality());
+        Assert.assertEquals(expected.getMotionType(), actual.getMotionType());
+        Assert.assertEquals(expected.getObjectLayer(), actual.getObjectLayer());
+        Assert.assertEquals(expected.getOverrideMassProperties(),
+                actual.getOverrideMassProperties());
+        assertEquals(expected.getPosition(), actual.getPosition(), 0f);
+        Assert.assertEquals(
+                expected.getRestitution(), actual.getRestitution(), 0f);
+        assertEquals(expected.getRotation(), actual.getRotation(), 0f);
+        assertShape(expected.getShape(), actual.getShape());
+        Assert.assertEquals(
+                expected.hasMassProperties(), actual.hasMassProperties());
+    }
+
+    /**
+     * Verify properties of a collision group, other than its virtual address.
+     *
+     * @param expected the first group (not {@code null}, unaffected)
+     * @param actual the 2nd group (not {@code null}, unaffected)
+     */
+    public static void assertCollisionGroup(
+            ConstCollisionGroup expected, ConstCollisionGroup actual) {
+        assertJpo(expected, actual);
+
+        Assert.assertEquals(expected.getGroupId(), actual.getGroupId());
+        Assert.assertEquals(expected.getSubGroupId(), actual.getSubGroupId());
     }
 
     /**
