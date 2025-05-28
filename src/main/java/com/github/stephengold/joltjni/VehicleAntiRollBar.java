@@ -21,12 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVehicleAntiRollBar;
+
 /**
  * A spring that connects two wheels and reduces a vehicle's rolling motion.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleAntiRollBar extends JoltPhysicsObject {
+public class VehicleAntiRollBar
+        extends JoltPhysicsObject
+        implements ConstVehicleAntiRollBar {
     // *************************************************************************
     // constructors
 
@@ -42,44 +46,6 @@ public class VehicleAntiRollBar extends JoltPhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Return the index of the left wheel. The bar is unaffected. (native
-     * attribute: mLeftWheel)
-     *
-     * @return the index of the wheel
-     */
-    public int getLeftWheel() {
-        long barVa = va();
-        int result = getLeftWheel(barVa);
-
-        return result;
-    }
-
-    /**
-     * Return the index of the right wheel. The bar is unaffected. (native
-     * attribute: mRightWheel)
-     *
-     * @return the index of the wheel
-     */
-    public int getRightWheel() {
-        long barVa = va();
-        int result = getRightWheel(barVa);
-        return result;
-    }
-
-    /**
-     * Return the stiffness of the bar. The bar is unaffected. (native
-     * attribute: mStiffness)
-     *
-     * @return the spring constant (in Newtons per meter)
-     */
-    public float getStiffness() {
-        long barVa = va();
-        float result = getStiffness(barVa);
-
-        return result;
-    }
 
     /**
      * Load settings from the specified binary stream.
@@ -122,12 +88,56 @@ public class VehicleAntiRollBar extends JoltPhysicsObject {
         long barVa = va();
         setStiffness(barVa, stiffness);
     }
+    // *************************************************************************
+    // ConstVehicleAntiRollBar methods
+
+    /**
+     * Return the index of the left wheel. The bar is unaffected. (native
+     * attribute: mLeftWheel)
+     *
+     * @return the index of the wheel
+     */
+    @Override
+    public int getLeftWheel() {
+        long barVa = va();
+        int result = getLeftWheel(barVa);
+
+        return result;
+    }
+
+    /**
+     * Return the index of the right wheel. The bar is unaffected. (native
+     * attribute: mRightWheel)
+     *
+     * @return the index of the wheel
+     */
+    @Override
+    public int getRightWheel() {
+        long barVa = va();
+        int result = getRightWheel(barVa);
+        return result;
+    }
+
+    /**
+     * Return the stiffness of the bar. The bar is unaffected. (native
+     * attribute: mStiffness)
+     *
+     * @return the spring constant (in Newtons per meter)
+     */
+    @Override
+    public float getStiffness() {
+        long barVa = va();
+        float result = getStiffness(barVa);
+
+        return result;
+    }
 
     /**
      * Save the bar to the specified binary stream. The bar is unaffected.
      *
      * @param stream the stream to write to (not null)
      */
+    @Override
     public void saveBinaryState(StreamOut stream) {
         long barVa = va();
         long streamVa = stream.va();
