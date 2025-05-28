@@ -61,16 +61,14 @@ public interface ConstVehicleConstraintSettings
     int getNumWheels();
 
     /**
-     * Copy the "up" vector. The settings are unaffected. (native attribute:
-     * mUp)
+     * Copy the "up" vector. The settings are unaffected.
      *
      * @return a new direction vector
      */
     Vec3 getUp();
 
     /**
-     * Enumerate all wheel settings. The settings are unaffected. (native
-     * attribute: mWheels)
+     * Enumerate all wheel settings. The settings are unaffected.
      *
      * @return a new array of pre-existing objects
      */

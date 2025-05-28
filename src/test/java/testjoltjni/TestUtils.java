@@ -106,8 +106,8 @@ final public class TestUtils {
      * Verify the properties of an axis-aligned bounding box, other than its
      * virtual address.
      *
-     * @param expected the first box (not {@code null}, unaffected)
-     * @param actual the 2nd box (not {@code null}, unaffected)
+     * @param expected the expected bounds (not {@code null}, unaffected)
+     * @param actual the actual bounds (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertAaBox(
@@ -133,8 +133,8 @@ final public class TestUtils {
      * Verify the properties of a body-creation settings object, other than its
      * virtual address.
      *
-     * @param expected the first settings object (not {@code null}, unaffected)
-     * @param actual the 2nd settings object (not {@code null}, unaffected)
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
      */
     public static void assertBcs(ConstBodyCreationSettings expected,
             ConstBodyCreationSettings actual) {
@@ -187,8 +187,8 @@ final public class TestUtils {
     /**
      * Verify properties of a collision group, other than its virtual address.
      *
-     * @param expected the first group (not {@code null}, unaffected)
-     * @param actual the 2nd group (not {@code null}, unaffected)
+     * @param expected the expected group (not {@code null}, unaffected)
+     * @param actual the actual group (not {@code null}, unaffected)
      */
     public static void assertCollisionGroup(
             ConstCollisionGroup expected, ConstCollisionGroup actual) {
@@ -343,10 +343,10 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the public properties of a float buffer.
+     * Verify the public properties of a FloatBuffer.
      *
-     * @param expected the first box (not {@code null}, unaffected)
-     * @param actual the 2nd box (not {@code null}, unaffected)
+     * @param expected the expected buffer (not {@code null}, unaffected)
+     * @param actual the actual buffer (not {@code null}, unaffected)
      */
     public static void assertEquals(FloatBuffer expected, FloatBuffer actual) {
         int numFloats = expected.capacity();
@@ -439,8 +439,8 @@ final public class TestUtils {
      * Verify the properties of a physics object, other than its virtual
      * address.
      *
-     * @param expected the first object (not {@code null}, unaffected)
-     * @param actual the 2nd object (not {@code null}, unaffected)
+     * @param expected the expected object (not {@code null}, unaffected)
+     * @param actual the actual object (not {@code null}, unaffected)
      */
     public static void assertJpo(
             ConstJoltPhysicsObject expected, ConstJoltPhysicsObject actual) {
@@ -457,8 +457,8 @@ final public class TestUtils {
      * Verify the properties of a mass-properties object, other than its virtual
      * address.
      *
-     * @param expected the first shape (not {@code null}, unaffected)
-     * @param actual the 2nd shape (not {@code null}, unaffected)
+     * @param expected the expected properties (not {@code null}, unaffected)
+     * @param actual the actual properties (not {@code null}, unaffected)
      */
     public static void assertMassProperties(ConstMassProperties expected,
             ConstMassProperties actual) {
@@ -471,8 +471,8 @@ final public class TestUtils {
     /**
      * Verify the properties of a shape, other than its virtual address.
      *
-     * @param expected the first shape (not {@code null}, unaffected)
-     * @param actual the 2nd shape (not {@code null}, unaffected)
+     * @param expected the expected shape (not {@code null}, unaffected)
+     * @param actual the actual shape (not {@code null}, unaffected)
      */
     public static void assertShape(ConstShape expected, ConstShape actual) {
         assertJpo(expected, actual);

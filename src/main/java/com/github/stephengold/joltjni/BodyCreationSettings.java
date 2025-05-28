@@ -165,7 +165,7 @@ public class BodyCreationSettings
      * Alter the body's degrees of freedom. (native attribute: mAllowedDOFs)
      *
      * @param bitmask the desired bitmask (see {@code EAllowedDofs} for
-     * semantics)
+     * semantics, default=All)
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setAllowedDofs(int bitmask) {
@@ -225,7 +225,7 @@ public class BodyCreationSettings
      * mApplyGyroscopicForce)
      *
      * @param setting {@code true} to enable the force, or {@code false} to
-     * disable it
+     * disable it (default=false)
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setApplyGyroscopicForce(boolean setting) {
@@ -512,7 +512,7 @@ public class BodyCreationSettings
     /**
      * Replace the shape.
      *
-     * @param shape the desired shape (not null, unaffected)
+     * @param shape the desired shape (not {@code null}, unaffected)
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setShape(ConstShape shape) {

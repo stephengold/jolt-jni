@@ -186,7 +186,7 @@ public class VehicleConstraintSettings
         setUp(settingsVa, dx, dy, dz);
     }
     // *************************************************************************
-    // ConstVehicleConstraintsSettgs methods
+    // ConstVehicleConstraintsSettings methods
 
     /**
      * Copy the "forward" vector. The settings are unaffected. (native
