@@ -35,7 +35,6 @@ import com.github.stephengold.joltjni.StreamOutWrapper;
 import com.github.stephengold.joltjni.UVec4;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
-import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
