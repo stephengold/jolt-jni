@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
+import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
@@ -343,9 +344,9 @@ public class BodyCreationSettings
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setMassPropertiesOverride(
-            MassProperties properties) {
+            ConstMassProperties properties) {
         long bodySettingsVa = va();
-        long propertiesVa = properties.va();
+        long propertiesVa = properties.targetVa();
         setMassPropertiesOverride(bodySettingsVa, propertiesVa);
 
         return this;
