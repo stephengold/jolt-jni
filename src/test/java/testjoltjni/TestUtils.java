@@ -30,18 +30,24 @@ import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
 import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilterTable;
 import com.github.stephengold.joltjni.PhysicsSystem;
+import com.github.stephengold.joltjni.RMat44;
+import com.github.stephengold.joltjni.StreamOutWrapper;
 import com.github.stephengold.joltjni.UVec4;
+import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
+import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.std.StringStream;
 import electrostatic4j.snaploader.platform.util.NativeVariant;
 import java.io.File;
 import java.io.PrintStream;
@@ -392,6 +398,53 @@ final public class TestUtils {
         assertEquals(expected.getInertia(), actual.getInertia(), 0f);
     }
 
+    /**
+     * Verify the properties of a shape, other than its virtual address.
+     *
+     * @param expected the first shape (not {@code null}, unaffected)
+     * @param actual the 2nd shape (not {@code null}, unaffected)
+     */
+    public static void assertShape(ConstShape expected, ConstShape actual) {
+        assertJpo(expected, actual);
+
+        // compare the debug shapes:
+        int numTriangles = expected.countDebugTriangles();
+        Assert.assertEquals(numTriangles, actual.countDebugTriangles());
+        int numFloats = 3 * numTriangles;
+        FloatBuffer buffer1 = Jolt.newDirectFloatBuffer(numFloats);
+        FloatBuffer buffer2 = Jolt.newDirectFloatBuffer(numFloats);
+        expected.copyDebugTriangles(buffer1);
+        actual.copyDebugTriangles(buffer2);
+        Assert.assertEquals(buffer1, buffer2);
+
+        assertEquals(expected.getCenterOfMass(), actual.getCenterOfMass(), 0f);
+        Assert.assertEquals(
+                expected.getInnerRadius(), actual.getInnerRadius(), 0f);
+        assertAaBox(expected.getLocalBounds(), actual.getLocalBounds(), 0f);
+        assertMassProperties(
+                expected.getMassProperties(), actual.getMassProperties());
+        Assert.assertEquals(
+                expected.getRevisionCount(), actual.getRevisionCount(), 0f);
+        //assertEquals(expected.getStats(), actual.getStats());
+        Assert.assertEquals(expected.getSubShapeIdBitsRecursive(),
+                actual.getSubShapeIdBitsRecursive());
+        Assert.assertEquals(expected.getSubType(), actual.getSubType());
+        Assert.assertEquals(expected.getType(), actual.getType());
+
+        RMat44Arg rmi = new RMat44();
+        Vec3Arg scaleI = new Vec3(1f, 1f, 1f);
+        assertAaBox(expected.getWorldSpaceBounds(rmi, scaleI),
+                actual.getWorldSpaceBounds(rmi, scaleI), 0f);
+
+        Assert.assertEquals(expected.mustBeStatic(), actual.mustBeStatic());
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        expected.saveBinaryState(new StreamOutWrapper(stream1));
+        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        Assert.assertEquals(stream1.str(), stream2.str());
+    }
 
     /**
      * Clean up after a test.
