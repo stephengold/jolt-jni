@@ -49,20 +49,6 @@ abstract public class WheelSettings
     // new methods exposed
 
     /**
-     * Access the settings for the suspension spring. (native attribute:
-     * mSuspensionSpring)
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public SpringSettings getSuspensionSpring() {
-        long wheelSettingsVa = va();
-        long springSettingsVa = getSuspensionSpring(wheelSettingsVa);
-        SpringSettings result = new SpringSettings(this, springSettingsVa);
-
-        return result;
-    }
-
-    /**
      * Load settings from the specified binary stream.
      *
      * @param stream the stream to read from (not null)
@@ -402,6 +388,21 @@ abstract public class WheelSettings
     public float getSuspensionPreloadLength() {
         long settingsVa = va();
         float result = getSuspensionPreloadLength(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Access the settings for the suspension spring. (native attribute:
+     * mSuspensionSpring)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public SpringSettings getSuspensionSpring() {
+        long wheelSettingsVa = va();
+        long springSettingsVa = getSuspensionSpring(wheelSettingsVa);
+        SpringSettings result = new SpringSettings(this, springSettingsVa);
 
         return result;
     }

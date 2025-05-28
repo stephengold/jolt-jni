@@ -99,6 +99,14 @@ public interface ConstWheelSettings extends ConstJoltPhysicsObject {
     float getSuspensionPreloadLength();
 
     /**
+     * Access the settings for the suspension spring. The settings are
+     * unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstSpringSettings getSuspensionSpring();
+
+    /**
      * Copy the forward direction when steering is neutral. The settings are
      * unaffected.
      *
