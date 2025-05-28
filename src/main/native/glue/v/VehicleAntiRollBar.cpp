@@ -70,6 +70,32 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleAntiRollBar_
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleAntiRollBar
+ * Method:    restoreBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleAntiRollBar_restoreBinaryState
+  (JNIEnv *, jclass, jlong barVa, jlong streamVa) {
+    VehicleAntiRollBar * const pBar
+            = reinterpret_cast<VehicleAntiRollBar *> (barVa);
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    pBar->RestoreBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleAntiRollBar
+ * Method:    saveBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleAntiRollBar_saveBinaryState
+  (JNIEnv *, jclass, jlong barVa, jlong streamVa) {
+    const VehicleAntiRollBar * const pBar
+            = reinterpret_cast<VehicleAntiRollBar *> (barVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    pBar->SaveBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleAntiRollBar
  * Method:    setLeftWheel
  * Signature: (JI)V
  */

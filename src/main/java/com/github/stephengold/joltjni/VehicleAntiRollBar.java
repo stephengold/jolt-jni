@@ -82,6 +82,17 @@ public class VehicleAntiRollBar extends JoltPhysicsObject {
     }
 
     /**
+     * Load settings from the specified binary stream.
+     *
+     * @param stream the stream to read from (not null)
+     */
+    public void restoreBinaryState(StreamIn stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        restoreBinaryState(settingsVa, streamVa);
+    }
+
+    /**
      * Alter the index of the left wheel. (native attribute: mLeftWheel)
      *
      * @param wheelIndex the index of the desired wheel (default=0)
@@ -111,6 +122,17 @@ public class VehicleAntiRollBar extends JoltPhysicsObject {
         long barVa = va();
         setStiffness(barVa, stiffness);
     }
+
+    /**
+     * Save the bar to the specified binary stream. The bar is unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    public void saveBinaryState(StreamOut stream) {
+        long barVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(barVa, streamVa);
+    }
     // *************************************************************************
     // native private methods
 
@@ -119,6 +141,10 @@ public class VehicleAntiRollBar extends JoltPhysicsObject {
     native private static int getRightWheel(long barVa);
 
     native private static float getStiffness(long barVa);
+
+    native private static void restoreBinaryState(long barVa, long streamVa);
+
+    native private static void saveBinaryState(long barVa, long streamVa);
 
     native private static void setLeftWheel(long barVa, int wheelIndex);
 
