@@ -304,7 +304,7 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the equality of 2 quaternions to within some tolerance.
+     * Verify the equality of 2 matrices to within some tolerance.
      *
      * @param expected the expected value (not null, unaffected)
      * @param actual the vector to test (not null, unaffected)

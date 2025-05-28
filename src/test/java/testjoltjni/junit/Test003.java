@@ -126,7 +126,7 @@ public class Test003 {
      * Test the {@code AaBox} class.
      */
     private static void doAaBox() {
-        {
+        { // no-arg constructor:
             AaBox box = new AaBox();
 
             Assert.assertTrue(box.hasAssignedNativeObject());
@@ -157,7 +157,7 @@ public class Test003 {
 
             TestUtils.testClose(box);
         }
-        {
+        { // min-max constructor:
             Vec3Arg max = new Vec3(4f, 5f, 6f);
             Vec3Arg min = new Vec3(1f, 2f, 3f);
             AaBox box = new AaBox(min, max);
@@ -175,7 +175,7 @@ public class Test003 {
 
             TestUtils.testClose(box);
         }
-        {
+        { // center-and-extent constructor:
             Vec3Arg center = new Vec3(4f, 3f, 2f);
             float radius = 5f;
             AaBox box = new AaBox(center, radius);
@@ -201,7 +201,7 @@ public class Test003 {
      * Test the {@code BodyCreationSettings} class.
      */
     private static void doBodyCreationSettings() {
-        {
+        { // no-arg constructor:
             BodyCreationSettings bcs = new BodyCreationSettings();
 
             Assert.assertNull(bcs.getShape());
@@ -210,7 +210,7 @@ public class Test003 {
 
             TestUtils.testClose(bcs);
         }
-        {
+        { // copy constructor:
             ConstBodyCreationSettings original = new BodyCreationSettings();
             BodyCreationSettings copy = new BodyCreationSettings(original);
 
@@ -220,7 +220,7 @@ public class Test003 {
 
             TestUtils.testClose(copy, original);
         }
-        {
+        { // constructed from a ShapeSettings:
             ConstShapeSettings ss = new BoxShapeSettings(1f, 1f, 1f);
             int objectLayer = 0;
             BodyCreationSettings bcs = new BodyCreationSettings(ss,
@@ -233,7 +233,7 @@ public class Test003 {
 
             TestUtils.testClose(bcs, ss);
         }
-        {
+        { // constructed from a Shape:
             ConstShape shape = new SphereShape(1f);
             int objectLayer = 0;
             BodyCreationSettings bcs = new BodyCreationSettings(shape,
@@ -403,7 +403,7 @@ public class Test003 {
      * Test the {@code SoftBodyCreationSettings} class.
      */
     private static void doSoftBodyCreationSettings() {
-        {
+        { // no-arg constructor:
             SoftBodyCreationSettings sbcs = new SoftBodyCreationSettings();
 
             Assert.assertNull(sbcs.getSettings());
