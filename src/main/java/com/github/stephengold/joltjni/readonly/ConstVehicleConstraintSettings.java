@@ -32,6 +32,23 @@ import com.github.stephengold.joltjni.Vec3;
 public interface ConstVehicleConstraintSettings
         extends ConstConstraintSettings {
     /**
+     * Access the settings for the specified anti-roll bar. The settings are
+     * unaffected.
+     *
+     * @param barIndex the index of the anti-roll bar to access (&ge;0,
+     * &lt;numBars)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstVehicleAntiRollBar getAntiRollBar(int barIndex);
+
+    /**
+     * Access the controller settings. The constraint settings are unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstVehicleControllerSettings getController();
+
+    /**
      * Copy the "forward" vector. The settings are unaffected.
      *
      * @return a new direction vector
@@ -66,6 +83,14 @@ public interface ConstVehicleConstraintSettings
      * @return a new direction vector
      */
     Vec3 getUp();
+
+    /**
+     * Access the settings of the specified wheel.
+     *
+     * @param wheelIndex which wheel (&ge;0, &lt;numWheels)
+     * @return the pre-existing object
+     */
+    ConstWheelSettings getWheel(int wheelIndex);
 
     /**
      * Enumerate all wheel settings. The settings are unaffected.

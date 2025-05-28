@@ -90,37 +90,6 @@ public class VehicleConstraintSettings
     }
 
     /**
-     * Access the settings for the specified anti-roll bar. (native field:
-     * mAntiRollBars)
-     *
-     * @param index the index of the anti-roll bar to access (&ge;0)
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public VehicleAntiRollBar getAntiRollBar(int index) {
-        long settingsVa = va();
-        long barVa = getAntiRollBar(settingsVa, index);
-        VehicleAntiRollBar result = new VehicleAntiRollBar(this, barVa);
-
-        return result;
-    }
-
-    /**
-     * Access the controller settings.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public VehicleControllerSettings getController() {
-        VehicleControllerSettings result;
-        if (controllerRef == null) {
-            result = null;
-        } else {
-            result = controllerRef.getPtr();
-        }
-
-        return result;
-    }
-
-    /**
      * Alter how the vehicle accelerates and decelerates. (native attribute:
      * mController)
      *
@@ -187,6 +156,40 @@ public class VehicleConstraintSettings
     }
     // *************************************************************************
     // ConstVehicleConstraintsSettings methods
+
+    /**
+     * Access the settings for the specified anti-roll bar. (native field:
+     * mAntiRollBars)
+     *
+     * @param barIndex the index of the anti-roll bar to access (&ge;0,
+     * &lt;numBars)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public VehicleAntiRollBar getAntiRollBar(int barIndex) {
+        long settingsVa = va();
+        long barVa = getAntiRollBar(settingsVa, barIndex);
+        VehicleAntiRollBar result = new VehicleAntiRollBar(this, barVa);
+
+        return result;
+    }
+
+    /**
+     * Access the controller settings.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public VehicleControllerSettings getController() {
+        VehicleControllerSettings result;
+        if (controllerRef == null) {
+            result = null;
+        } else {
+            result = controllerRef.getPtr();
+        }
+
+        return result;
+    }
 
     /**
      * Copy the "forward" vector. The settings are unaffected. (native
@@ -258,6 +261,20 @@ public class VehicleConstraintSettings
         float dy = getUpY(settingsVa);
         float dz = getUpZ(settingsVa);
         Vec3 result = new Vec3(dx, dy, dz);
+
+        return result;
+    }
+
+    /**
+     * Access the settings of the specified wheel. (native attribute: mWheels)
+     *
+     * @param wheelIndex which wheel (&ge;0, &lt;numWheels)
+     * @return the pre-existing object
+     */
+    @Override
+    public WheelSettings getWheel(int wheelIndex) {
+        Ref r = wheelRefs.get(wheelIndex);
+        WheelSettings result = (WheelSettings) r.getPtr();
 
         return result;
     }
