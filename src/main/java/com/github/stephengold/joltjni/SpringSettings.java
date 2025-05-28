@@ -57,6 +57,17 @@ final public class SpringSettings extends JoltPhysicsObject {
     // new methods exposed
 
     /**
+     * Load settings from the specified binary stream.
+     *
+     * @param stream the stream to read from (not null)
+     */
+    public void restoreBinaryState(StreamIn stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        restoreBinaryState(settingsVa, streamVa);
+    }
+
+    /**
      * Access the underlying {@code Constraint}, if any.
      *
      * @return the pre-existing instance, or {@code null} if none
@@ -182,6 +193,18 @@ final public class SpringSettings extends JoltPhysicsObject {
     }
 
     /**
+     * Save the settings to the specified binary stream. The settings are
+     * unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    public void saveBinaryState(StreamOut stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(settingsVa, streamVa);
+    }
+
+    /**
      * Alter the spring's damping. (native attribute: mDamping)
      * <p>
      * When the mode is FrequencyAndDamping, this is the damping ratio (0 = no
@@ -268,6 +291,11 @@ final public class SpringSettings extends JoltPhysicsObject {
     native private static float getStiffness(long settingsVa);
 
     native private static boolean hasStiffness(long settingsVa);
+
+    native private static void restoreBinaryState(
+            long settingsVa, long streamVa);
+
+    native private static void saveBinaryState(long settingsVa, long streamVa);
 
     native private static void setDamping(long settingsVa, float damping);
 
