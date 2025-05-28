@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVehicleControllerSettings;
 import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
@@ -30,7 +31,7 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 public class VehicleControllerSettings
         extends SerializableObject
-        implements RefTarget {
+        implements ConstVehicleControllerSettings, RefTarget {
     // *************************************************************************
     // constructors
 
@@ -72,6 +73,8 @@ public class VehicleControllerSettings
         long streamVa = stream.va();
         restoreBinaryState(settingsVa, streamVa);
     }
+    // *************************************************************************
+    // ConstVehicleControllerSettings methods
 
     /**
      * Save the settings to the specified binary stream. The settings are
@@ -79,6 +82,7 @@ public class VehicleControllerSettings
      *
      * @param stream the stream to write to (not null)
      */
+    @Override
     public void saveBinaryState(StreamOut stream) {
         long settingsVa = va();
         long streamVa = stream.va();
