@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.ESpringMode;
+import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 
@@ -30,7 +31,9 @@ import com.github.stephengold.joltjni.template.RefTarget;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class SpringSettings extends JoltPhysicsObject {
+final public class SpringSettings
+        extends JoltPhysicsObject
+        implements ConstSpringSettings {
     // *************************************************************************
     // constructors
 
@@ -65,143 +68,6 @@ final public class SpringSettings extends JoltPhysicsObject {
         long settingsVa = va();
         long streamVa = stream.va();
         restoreBinaryState(settingsVa, streamVa);
-    }
-
-    /**
-     * Access the underlying {@code Constraint}, if any.
-     *
-     * @return the pre-existing instance, or {@code null} if none
-     */
-    public Constraint getConstraint() {
-        JoltPhysicsObject container = getContainingObject();
-        RefTarget result;
-        if (!(container instanceof Ref)) {
-            result = null;
-        } else {
-            result = ((Ref) container).getPtr();
-            if (!(result instanceof Constraint)) {
-                result = null;
-            }
-        }
-
-        return (Constraint) result;
-    }
-
-    /**
-     * Access the underlying {@code ConstraintSettings}, if any.
-     *
-     * @return the pre-existing instance, or {@code null} if none
-     */
-    public ConstraintSettings getConstraintSettings() {
-        JoltPhysicsObject container = getContainingObject();
-        RefTarget result;
-        if (!(container instanceof Ref)) {
-            result = null;
-        } else {
-            result = ((Ref) container).getPtr();
-            if (!(result instanceof ConstraintSettings)) {
-                result = null;
-            }
-        }
-
-        return (ConstraintSettings) result;
-    }
-
-    /**
-     * Return the spring's damping. The settings are unaffected. (native
-     * attribute: mDamping)
-     * <p>
-     * When the mode is FrequencyAndDamping, this is the damping ratio (0 = no
-     * damping, 1 = critical damping). When the mode is StiffnessAndDamping,
-     * this is the damping coefficient {@code c} in the spring equation:
-     * {@code F = -k * x - c * v} for a linear spring or
-     * {@code T = -k * theta - c * w} for an angular spring.
-     *
-     * @return the damping value
-     */
-    public float getDamping() {
-        long settingsVa = va();
-        float result = getDamping(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the spring's frequency. The settings are unaffected. (native
-     * attribute: mFrequency)
-     * <p>
-     * Effective only when the mode is FrequencyAndDamping. If positive, the
-     * constraint will have soft limits, and mFrequency specifies the
-     * oscillation frequency in Hz. If negative, the constraint will have hard
-     * limits.
-     *
-     * @return the frequency value
-     */
-    public float getFrequency() {
-        long settingsVa = va();
-        float result = getFrequency(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return how the spring is specified. The settings are unaffected. (native
-     * attribute: mMode)
-     *
-     * @return an enum value (not null)
-     */
-    public ESpringMode getMode() {
-        long settingsVa = va();
-        int ordinal = getMode(settingsVa);
-        ESpringMode result = ESpringMode.values()[ordinal];
-
-        return result;
-    }
-
-    /**
-     * Return the spring's stiffness. The settings are unaffected. (native
-     * attribute: mStiffness)
-     * <p>
-     * Effective only when the mode is StiffnessAndDamping. If positive, the
-     * constraint will have soft limits, and mStiffness specifies the stiffness
-     * {@code k} in the spring equation: {@code F = -k * x - c * v} for a linear
-     * spring or {@code T = -k *
-     * theta - c * w} for an angular spring.
-     * <p>
-     * If negative, the constraint will have hard limits.
-     *
-     * @return the stiffness value
-     */
-    public float getStiffness() {
-        long settingsVa = va();
-        float result = getStiffness(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Test for valid frequency/stiffness. The settings are unaffected.
-     *
-     * @return {@code true} if valid (the constraint will have soft limits),
-     * otherwise {@code false} (hard limits)
-     */
-    public boolean hasStiffness() {
-        long settingsVa = va();
-        boolean result = hasStiffness(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Save the settings to the specified binary stream. The settings are
-     * unaffected.
-     *
-     * @param stream the stream to write to (not null)
-     */
-    public void saveBinaryState(StreamOut stream) {
-        long settingsVa = va();
-        long streamVa = stream.va();
-        saveBinaryState(settingsVa, streamVa);
     }
 
     /**
@@ -274,6 +140,153 @@ final public class SpringSettings extends JoltPhysicsObject {
         setStiffness(settingsVa, stiffness);
 
         return this;
+    }
+    // *************************************************************************
+    // ConstSpringSettings methods
+
+    /**
+     * Access the underlying {@code Constraint}, if any.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    @Override
+    public Constraint getConstraint() {
+        JoltPhysicsObject container = getContainingObject();
+        RefTarget result;
+        if (!(container instanceof Ref)) {
+            result = null;
+        } else {
+            result = ((Ref) container).getPtr();
+            if (!(result instanceof Constraint)) {
+                result = null;
+            }
+        }
+
+        return (Constraint) result;
+    }
+
+    /**
+     * Access the underlying {@code ConstraintSettings}, if any.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    @Override
+    public ConstraintSettings getConstraintSettings() {
+        JoltPhysicsObject container = getContainingObject();
+        RefTarget result;
+        if (!(container instanceof Ref)) {
+            result = null;
+        } else {
+            result = ((Ref) container).getPtr();
+            if (!(result instanceof ConstraintSettings)) {
+                result = null;
+            }
+        }
+
+        return (ConstraintSettings) result;
+    }
+
+    /**
+     * Return the spring's damping. The settings are unaffected. (native
+     * attribute: mDamping)
+     * <p>
+     * When the mode is FrequencyAndDamping, this is the damping ratio (0 = no
+     * damping, 1 = critical damping). When the mode is StiffnessAndDamping,
+     * this is the damping coefficient {@code c} in the spring equation:
+     * {@code F = -k * x - c * v} for a linear spring or
+     * {@code T = -k * theta - c * w} for an angular spring.
+     *
+     * @return the damping value
+     */
+    @Override
+    public float getDamping() {
+        long settingsVa = va();
+        float result = getDamping(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the spring's frequency. The settings are unaffected. (native
+     * attribute: mFrequency)
+     * <p>
+     * Effective only when the mode is FrequencyAndDamping. If positive, the
+     * constraint will have soft limits, and mFrequency specifies the
+     * oscillation frequency in Hz. If negative, the constraint will have hard
+     * limits.
+     *
+     * @return the frequency value
+     */
+    @Override
+    public float getFrequency() {
+        long settingsVa = va();
+        float result = getFrequency(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return how the spring is specified. The settings are unaffected. (native
+     * attribute: mMode)
+     *
+     * @return an enum value (not null)
+     */
+    @Override
+    public ESpringMode getMode() {
+        long settingsVa = va();
+        int ordinal = getMode(settingsVa);
+        ESpringMode result = ESpringMode.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Return the spring's stiffness. The settings are unaffected. (native
+     * attribute: mStiffness)
+     * <p>
+     * Effective only when the mode is StiffnessAndDamping. If positive, the
+     * constraint will have soft limits, and mStiffness specifies the stiffness
+     * {@code k} in the spring equation: {@code F = -k * x - c * v} for a linear
+     * spring or {@code T = -k *
+     * theta - c * w} for an angular spring.
+     * <p>
+     * If negative, the constraint will have hard limits.
+     *
+     * @return the stiffness value
+     */
+    @Override
+    public float getStiffness() {
+        long settingsVa = va();
+        float result = getStiffness(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Test for valid frequency/stiffness. The settings are unaffected.
+     *
+     * @return {@code true} if valid (the constraint will have soft limits),
+     * otherwise {@code false} (hard limits)
+     */
+    @Override
+    public boolean hasStiffness() {
+        long settingsVa = va();
+        boolean result = hasStiffness(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Save the settings to the specified binary stream. The settings are
+     * unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(settingsVa, streamVa);
     }
     // *************************************************************************
     // native private methods
