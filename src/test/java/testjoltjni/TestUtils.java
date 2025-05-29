@@ -45,6 +45,7 @@ import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilte
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.ConstVehicleAntiRollBar;
+import com.github.stephengold.joltjni.readonly.ConstVehicleControllerSettings;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
@@ -588,6 +589,26 @@ final public class TestUtils {
         Assert.assertEquals(expected.getMode(), actual.getMode());
         Assert.assertEquals(expected.getStiffness(), actual.getStiffness(), 0f);
         Assert.assertEquals(expected.hasStiffness(), actual.hasStiffness());
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        expected.saveBinaryState(new StreamOutWrapper(stream1));
+        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        Assert.assertEquals(stream1.str(), stream2.str());
+    }
+
+    /**
+     * Verify the properties of a vehicle-controller settings object, other than
+     * its virtual address.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    public static void assertVehicleControllerSettings(
+            ConstVehicleControllerSettings expected,
+            ConstVehicleControllerSettings actual) {
+        assertJpo(expected, actual);
 
         // compare serialization results:
         StringStream stream1 = new StringStream();
