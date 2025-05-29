@@ -232,6 +232,21 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
+ * Method:    getCharacterVirtualSettings
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getCharacterVirtualSettings
+  (JNIEnv *, jclass, jlong characterVa) {
+    const CharacterVirtual * const pCharacter
+            = reinterpret_cast<CharacterVirtual *> (characterVa);
+    CharacterVirtualSettings * const pResult = new CharacterVirtualSettings();
+    TRACE_NEW("CharacterVirtualSettings", pResult)
+    *pResult = pCharacter->GetCharacterVirtualSettings();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterVirtual
  * Method:    getEnhancedInternalEdgeRemoval
  * Signature: (J)Z
  */

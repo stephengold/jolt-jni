@@ -488,6 +488,22 @@ public class CharacterVirtual
     }
 
     /**
+     * Generate settings to reconstruct the character. The character is
+     * unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public CharacterVirtualSettings getCharacterVirtualSettings() {
+        long characterVa = va();
+        long settingsVa = getCharacterVirtualSettings(characterVa);
+        CharacterVirtualSettings result
+                = new CharacterVirtualSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Test whether enhanced internal edge removal is enabled. The character is
      * unaffected.
      *
@@ -825,6 +841,8 @@ public class CharacterVirtual
     native static long getCenterOfMassTransform(long characterVa);
 
     native static float getCharacterPadding(long characterVa);
+
+    native static long getCharacterVirtualSettings(long characterVa);
 
     native static boolean getEnhancedInternalEdgeRemoval(long characterVa);
 

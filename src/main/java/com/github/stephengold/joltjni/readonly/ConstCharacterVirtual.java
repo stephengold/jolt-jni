@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.CharacterVirtualRefC;
+import com.github.stephengold.joltjni.CharacterVirtualSettings;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
@@ -85,6 +86,14 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * @return the thickness (in meters)
      */
     float getCharacterPadding();
+
+    /**
+     * Generate settings to reconstruct the character. The character is
+     * unaffected.
+     *
+     * @return a new object
+     */
+    CharacterVirtualSettings getCharacterVirtualSettings();
 
     /**
      * Test whether enhanced internal edge removal is enabled. The character is

@@ -189,6 +189,23 @@ final public class CharacterVirtualRefC
     }
 
     /**
+     * Generate settings to reconstruct the character. The character is
+     * unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public CharacterVirtualSettings getCharacterVirtualSettings() {
+        long characterVa = targetVa();
+        long settingsVa
+                = CharacterVirtual.getCharacterVirtualSettings(characterVa);
+        CharacterVirtualSettings result
+                = new CharacterVirtualSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the maximum slope the character can walk on. The character is
      * unaffected.
      *
