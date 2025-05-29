@@ -284,16 +284,6 @@ public class SoftBodySharedSettings
         long materialVa = (material == null) ? 0L : material.va();
         setMaterialsSingle(settingsVa, materialVa);
     }
-
-    /**
-     * Alter the size of every particle.
-     *
-     * @param radius the desired radius (&ge;0, default=0)
-     */
-    public void setVertexRadius(float radius) {
-        long settingsVa = va();
-        setVertexRadius(settingsVa, radius);
-    }
     // *************************************************************************
     // ConstSoftBodySharedSettings methods
 
@@ -361,20 +351,6 @@ public class SoftBodySharedSettings
     public int countVolumeConstraints() {
         long settingsVa = va();
         int result = countVolumeConstraints(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the radius of each particle. The settings are unaffected. (native
-     * attribute: mVertexRadius)
-     *
-     * @return the radius (in meters)
-     */
-    @Override
-    public float getVertexRadius() {
-        long settingsVa = va();
-        float result = getVertexRadius(settingsVa);
 
         return result;
     }
@@ -490,8 +466,6 @@ public class SoftBodySharedSettings
 
     native private static long getVertex(long settingsVa, int index);
 
-    native static float getVertexRadius(long settingsVa);
-
     native static void optimize(long settingsVa);
 
     native static int putEdgeIndices(
@@ -506,8 +480,6 @@ public class SoftBodySharedSettings
             int gridSize, float gridSpacing);
 
     native static void setMaterialsSingle(long settingsVa, long materialVa);
-
-    native static void setVertexRadius(long settingsVa, float radius);
 
     native private static long toRef(long settingsVa);
 }

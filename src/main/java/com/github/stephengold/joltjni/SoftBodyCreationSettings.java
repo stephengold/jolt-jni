@@ -343,6 +343,16 @@ public class SoftBodyCreationSettings
 
         return this;
     }
+
+    /**
+     * Alter the size of every particle.
+     *
+     * @param radius the desired radius (&ge;0, default=0)
+     */
+    public void setVertexRadius(float radius) {
+        long settingsVa = va();
+        setVertexRadius(settingsVa, radius);
+    }
     // *************************************************************************
     // ConstSoftBodyCreationSettings methods
 
@@ -592,6 +602,20 @@ public class SoftBodyCreationSettings
 
         return result;
     }
+
+    /**
+     * Return the radius of each particle. The settings are unaffected. (native
+     * attribute: mVertexRadius)
+     *
+     * @return the radius (in meters)
+     */
+    @Override
+    public float getVertexRadius() {
+        long settingsVa = va();
+        float result = getVertexRadius(settingsVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -647,6 +671,8 @@ public class SoftBodyCreationSettings
 
     native private static long getUserData(long bodySettingsVa);
 
+    native static float getVertexRadius(long settingsVa);
+
     native private static void setAllowSleeping(
             long bodySettingsVa, boolean allow);
 
@@ -691,4 +717,6 @@ public class SoftBodyCreationSettings
             long bodySettingsVa, boolean enable);
 
     native private static void setUserData(long bodySettingsVa, long value);
+
+    native static void setVertexRadius(long settingsVa, float radius);
 }

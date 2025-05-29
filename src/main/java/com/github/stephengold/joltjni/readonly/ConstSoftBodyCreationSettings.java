@@ -151,4 +151,11 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
      * @return the value
      */
     long getUserData();
+
+    /**
+     * Return the radius of each particle. The settings are unaffected.
+     *
+     * @return the radius (in meters)
+     */
+    float getVertexRadius();
 }

@@ -44,9 +44,9 @@ public void Initialize()
 
 	// Create cloth with specified vertex radius
 	mSharedSettings = SoftBodyCreator.CreateCloth(30, 30, 0.5f);
-	mSharedSettings.setVertexRadius ( sVertexRadius);
 	SoftBodyCreationSettings cloth=new SoftBodyCreationSettings(mSharedSettings,new RVec3(0, 5, 0), Quat.sRotation(Vec3.sAxisY(), 0.25f * JPH_PI), Layers.MOVING);
-	mBodyInterface.createAndAddSoftBody(cloth, EActivation.Activate);
+	cloth.setVertexRadius ( sVertexRadius);
+        mBodyInterface.createAndAddSoftBody(cloth, EActivation.Activate);
 }
 /*TODO
 

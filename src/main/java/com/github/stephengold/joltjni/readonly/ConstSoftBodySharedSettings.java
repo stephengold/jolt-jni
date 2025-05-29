@@ -66,13 +66,6 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
     int countVolumeConstraints();
 
     /**
-     * Return the radius of each particle. The settings are unaffected.
-     *
-     * @return the radius (in meters)
-     */
-    float getVertexRadius();
-
-    /**
      * Write the vertex indices of all edges to the specified buffer and advance
      * the buffer's position. The settings are unaffected.
      *

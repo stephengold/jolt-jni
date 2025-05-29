@@ -364,6 +364,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSett
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    getVertexRadius
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getVertexRadius
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    const float result = pSettings->mVertexRadius;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
  * Method:    setAllowSleeping
  * Signature: (JZ)V
  */
@@ -558,4 +571,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSetti
     SoftBodyCreationSettings * const pSettings
             = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
     pSettings->mUserData = value;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    setVertexRadius
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_setVertexRadius
+  (JNIEnv *, jclass, jlong bodySettingsVa, jfloat radius) {
+    SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    pSettings->mVertexRadius = radius;
 }

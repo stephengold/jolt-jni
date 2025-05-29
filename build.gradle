@@ -18,7 +18,7 @@ plugins {
 // or by -P options on the Gradle command line.
 
 ext {
-    downloadedJoltZip = 'downloads/JoltPhysics-sg250427.zip'
+    downloadedJoltZip = 'downloads/JoltPhysics-sgpr5.zip'
     downloadedVhacdZip = 'downloads/v-hacd-4.1.0.zip'
 
     groupID = 'com.github.stephengold'
@@ -534,7 +534,7 @@ tasks.withType(Sign).configureEach {
 // Register tasks to download ZIP archives:
 
 tasks.register('downloadJoltZip', Download) {
-    src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/sg250427.zip'
+    src 'https://github.com/stephengold/JoltPhysics/archive/refs/tags/sgpr5.zip'
     dest file(downloadedJoltZip)
     overwrite false
 }
@@ -549,7 +549,7 @@ tasks.register('downloadVhacdZip', Download) {
 tasks.register('unpackJoltAssets', Copy) {
     dependsOn 'downloadJoltZip'
     from (zipTree(downloadedJoltZip)) {
-        include 'JoltPhysics-sg250427/Assets/**'
+        include 'JoltPhysics-sgpr5/Assets/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
         }
@@ -560,7 +560,7 @@ tasks.register('unpackJoltAssets', Copy) {
 tasks.register('unpackJoltSource', Copy) {
     dependsOn 'downloadJoltZip'
     from (zipTree(downloadedJoltZip)) {
-        include 'JoltPhysics-sg250427/Jolt/**'
+        include 'JoltPhysics-sgpr5/Jolt/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
         }
@@ -571,7 +571,7 @@ tasks.register('unpackJoltSource', Copy) {
 tasks.register('unpackTestFramework', Copy) {
     dependsOn 'downloadJoltZip'
     from (zipTree(downloadedJoltZip)) {
-        include 'JoltPhysics-sg250427/TestFramework/**'
+        include 'JoltPhysics-sgpr5/TestFramework/**'
         eachFile { fcd ->
             fcd.relativePath = new RelativePath(true, fcd.relativePath.segments.drop(2))
         }

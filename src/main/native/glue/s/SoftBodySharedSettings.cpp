@@ -321,19 +321,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
- * Method:    getVertexRadius
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_getVertexRadius
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SoftBodySharedSettings * const pSettings
-            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
-    const float result = pSettings->mVertexRadius;
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    optimize
  * Signature: (J)V
  */
@@ -437,18 +424,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
     RefConst<PhysicsMaterial> ref = pMaterial;
     pSettings->mMaterials.clear();
     pSettings->mMaterials.push_back(ref);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
- * Method:    setVertexRadius
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_setVertexRadius
-  (JNIEnv *, jclass, jlong settingsVa, jfloat radius) {
-    SoftBodySharedSettings * const pSettings
-            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
-    pSettings->mVertexRadius = radius;
 }
 
 /*
