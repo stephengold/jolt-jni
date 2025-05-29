@@ -935,8 +935,8 @@ public class BodyCreationSettings
     @Override
     public ConstShape getShape() {
         long bodySettingsVa = va();
-        long shapeSettingsVa = getShape(bodySettingsVa);
-        ConstShape result = Shape.newShape(shapeSettingsVa);
+        long shapeVa = getShape(bodySettingsVa);
+        ConstShape result = Shape.newShape(shapeVa);
 
         return result;
     }
