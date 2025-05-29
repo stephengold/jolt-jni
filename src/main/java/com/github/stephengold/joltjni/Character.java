@@ -556,6 +556,34 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
+     * Generate settings to reconstruct the character, using the locking body
+     * interface. The character is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public CharacterSettings getCharacterSettings() {
+        CharacterSettings result = getCharacterSettings(true);
+        return result;
+    }
+
+    /**
+     * Generate settings to reconstruct the character. The character is
+     * unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * @return a new object
+     */
+    @Override
+    public CharacterSettings getCharacterSettings(boolean lockBodies) {
+        long characterVa = va();
+        long settingsVa = getCharacterSettings(characterVa, lockBodies);
+        CharacterSettings result = new CharacterSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the character's object layer, using the locking body interface.
      * The character is unaffected.
      *
@@ -799,6 +827,9 @@ public class Character extends CharacterBase implements ConstCharacter {
 
     native static void getCenterOfMassPosition(
             long characterVa, double[] storeDoubles, boolean lockBodies);
+
+    native static long getCharacterSettings(
+            long characterVa, boolean lockBodies);
 
     native static int getLayer(long characterVa);
 

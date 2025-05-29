@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.CharacterRefC;
+import com.github.stephengold.joltjni.CharacterSettings;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
@@ -59,6 +60,23 @@ public interface ConstCharacter extends ConstCharacterBase {
      * @return a new location vector (in system coordinates)
      */
     RVec3 getCenterOfMassPosition(boolean lockBodies);
+
+    /**
+     * Generate settings to reconstruct the character, using the locking body
+     * interface. The character is unaffected.
+     *
+     * @return a new object
+     */
+    CharacterSettings getCharacterSettings();
+
+    /**
+     * Generate settings to reconstruct the character. The character is
+     * unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * @return a new object
+     */
+    CharacterSettings getCharacterSettings(boolean lockBodies);
 
     /**
      * Return the character's object layer, using the locking body interface.

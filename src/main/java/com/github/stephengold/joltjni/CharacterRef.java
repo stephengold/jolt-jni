@@ -275,6 +275,35 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
+     * Generate settings to reconstruct the character, using the locking body
+     * interface. The character is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public CharacterSettings getCharacterSettings() {
+        CharacterSettings result = getCharacterSettings(true);
+        return result;
+    }
+
+    /**
+     * Generate settings to reconstruct the character. The character is
+     * unaffected.
+     *
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * @return a new object
+     */
+    @Override
+    public CharacterSettings getCharacterSettings(boolean lockBodies) {
+        long characterVa = targetVa();
+        long settingsVa
+                = Character.getCharacterSettings(characterVa, lockBodies);
+        CharacterSettings result = new CharacterSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the maximum slope the character can walk on. The character is
      * unaffected.
      *
