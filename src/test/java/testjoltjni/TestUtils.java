@@ -43,6 +43,7 @@ import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
@@ -505,6 +506,31 @@ final public class TestUtils {
                 actual.getWorldSpaceBounds(rmi, scaleI), 0f);
 
         Assert.assertEquals(expected.mustBeStatic(), actual.mustBeStatic());
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        expected.saveBinaryState(new StreamOutWrapper(stream1));
+        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        Assert.assertEquals(stream1.str(), stream2.str());
+    }
+
+    /**
+     * Verify the properties of a spring-settings object, other than its virtual
+     * address.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    public static void assertSpringSettings(
+            ConstSpringSettings expected, ConstSpringSettings actual) {
+        assertJpo(expected, actual);
+
+        Assert.assertEquals(expected.getDamping(), actual.getDamping(), 0f);
+        Assert.assertEquals(expected.getFrequency(), actual.getFrequency(), 0f);
+        Assert.assertEquals(expected.getMode(), actual.getMode());
+        Assert.assertEquals(expected.getStiffness(), actual.getStiffness(), 0f);
+        Assert.assertEquals(expected.hasStiffness(), actual.hasStiffness());
 
         // compare serialization results:
         StringStream stream1 = new StringStream();
