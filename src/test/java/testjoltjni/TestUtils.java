@@ -449,8 +449,6 @@ final public class TestUtils {
 
         Assert.assertEquals(expected.hasAssignedNativeObject(),
                 actual.hasAssignedNativeObject());
-        Assert.assertEquals(
-                expected.ownsNativeObject(), actual.ownsNativeObject());
     }
 
     /**

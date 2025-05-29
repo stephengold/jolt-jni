@@ -601,7 +601,11 @@ public class Test003 {
         bcs.setAngularDamping(0.01f);
         bcs.setAngularVelocity(new Vec3(0.02f, 0.03f, 0.04f));
         bcs.setApplyGyroscopicForce(true);
-        bcs.setCollisionGroup(new CollisionGroup());
+
+        GroupFilterTable filter = new GroupFilterTable();
+        CollisionGroup group = new CollisionGroup(filter, 2, 3);
+        bcs.setCollisionGroup(group);
+
         bcs.setEnhancedInternalEdgeRemoval(true);
         bcs.setFriction(0.05f);
         bcs.setGravityFactor(0.06f);
@@ -626,6 +630,7 @@ public class Test003 {
         TestUtils.assertEquals(
                 0.02f, 0.03f, 0.04f, bcs.getAngularVelocity(), 0f);
         Assert.assertTrue(bcs.getApplyGyroscopicForce());
+        TestUtils.assertCollisionGroup(group, bcs.getCollisionGroup());
         Assert.assertTrue(bcs.getEnhancedInternalEdgeRemoval());
         Assert.assertEquals(0.05f, bcs.getFriction(), 0f);
         Assert.assertEquals(0.06f, bcs.getGravityFactor(), 0f);
