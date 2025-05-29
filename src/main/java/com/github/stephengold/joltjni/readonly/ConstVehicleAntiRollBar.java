@@ -31,24 +31,21 @@ import com.github.stephengold.joltjni.StreamOut;
  */
 public interface ConstVehicleAntiRollBar extends ConstJoltPhysicsObject {
     /**
-     * Identify the left wheel of the bar. The settings are unaffected. (native
-     * attribute: mLeftWheel)
+     * Identify the left wheel of the bar. The settings are unaffected.
      *
      * @return the wheel index
      */
     int getLeftWheel();
 
     /**
-     * Identify the right wheel of the bar. The settings are unaffected. (native
-     * attribute: mRightWheel)
+     * Identify the right wheel of the bar. The settings are unaffected.
      *
      * @return the wheel index
      */
     int getRightWheel();
 
     /**
-     * Return the stiffness of the bar. The settings are unaffected. (native
-     * attribute: mStiffness)
+     * Return the stiffness of the bar. The settings are unaffected.
      *
      * @return the spring constant (in Newtons per meter) (0&rarr;disabled).
      */

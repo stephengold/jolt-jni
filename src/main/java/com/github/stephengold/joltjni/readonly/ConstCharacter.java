@@ -171,7 +171,7 @@ public interface ConstCharacter extends ConstCharacterBase {
     Quat getRotation(boolean lockBodies);
 
     /**
-     * Return a TransformedShape that represents the volume occupied by the
+     * Generate a TransformedShape that represents the volume occupied by the
      * character, using the locking body interface. The character is unaffected.
      *
      * @return a new object
@@ -179,7 +179,7 @@ public interface ConstCharacter extends ConstCharacterBase {
     TransformedShape getTransformedShape();
 
     /**
-     * Return a TransformedShape that represents the volume occupied by the
+     * Generate a TransformedShape that represents the volume occupied by the
      * character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,

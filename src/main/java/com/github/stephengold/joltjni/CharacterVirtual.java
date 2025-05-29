@@ -703,7 +703,7 @@ public class CharacterVirtual
     }
 
     /**
-     * Return a TransformedShape that represents the volume occupied by the
+     * Generate a TransformedShape that represents the volume occupied by the
      * character. The character is unaffected.
      *
      * @return a new object

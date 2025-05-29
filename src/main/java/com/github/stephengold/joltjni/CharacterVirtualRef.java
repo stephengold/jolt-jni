@@ -283,7 +283,7 @@ final public class CharacterVirtualRef
     /**
      * Copy the list of active contacts. The character is unaffected.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new array of new objects
      */
     @Override
     public ConstContact[] getActiveContacts() {
@@ -720,7 +720,7 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Return a TransformedShape that represents the volume occupied by the
+     * Generate a TransformedShape that represents the volume occupied by the
      * character. The character is unaffected.
      *
      * @return a new object
@@ -860,7 +860,7 @@ final public class CharacterVirtualRef
     }
 
     /**
-     * Create a counted reference to the native {@code CharacterVirtual}.
+     * Create another counted reference to the native {@code CharacterVirtual}.
      *
      * @return a new JVM object with a new native object assigned
      */

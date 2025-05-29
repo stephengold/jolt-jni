@@ -145,8 +145,8 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
     boolean getUpdatePosition();
 
     /**
-     * Return the user data. The settings are unaffected. (native member:
-     * mUserData)
+     * Return the user data. The settings are unaffected.
+     *
      *
      * @return the value
      */

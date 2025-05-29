@@ -672,10 +672,10 @@ public class Character extends CharacterBase implements ConstCharacter {
      * Copy the position of the associated body using the locking body
      * interface. The character is unaffected.
      *
-     * @param storeLocation the desired location (in system coordinates, not
-     * null, unaffected)
-     * @param storeOrientation the desired orientation (in system coordinates,
-     * not null, unaffected)
+     * @param storeLocation storage for the location (in system coordinates, not
+     * null, modified)
+     * @param storeOrientation storage for the orientation (in system
+     * coordinates, not null, modified)
      */
     @Override
     public void getPositionAndRotation(
@@ -686,10 +686,10 @@ public class Character extends CharacterBase implements ConstCharacter {
     /**
      * Copy the position of the associated body. The character is unaffected.
      *
-     * @param storeLocation the desired location (in system coordinates, not
-     * null, unaffected)
-     * @param storeOrientation the desired orientation (in system coordinates,
-     * not null, unaffected)
+     * @param storeLocation storage for the location (in system coordinates, not
+     * null, modified)
+     * @param storeOrientation storage for the orientation (in system
+     * coordinates, not null, modified)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
@@ -735,7 +735,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Return a TransformedShape that represents the volume occupied by the
+     * Generate a TransformedShape that represents the volume occupied by the
      * character, using the locking body interface. The character is unaffected.
      *
      * @return a new object
@@ -747,7 +747,7 @@ public class Character extends CharacterBase implements ConstCharacter {
     }
 
     /**
-     * Return a TransformedShape that represents the volume occupied by the
+     * Generate a TransformedShape that represents the volume occupied by the
      * character. The character is unaffected.
      *
      * @param lockBodies {@code true} &rarr; use the locking body interface,

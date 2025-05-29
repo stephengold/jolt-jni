@@ -194,7 +194,7 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
     Vec3 getShapeOffset();
 
     /**
-     * Return a TransformedShape that represents the volume occupied by the
+     * Generate a TransformedShape that represents the volume occupied by the
      * character. The character is unaffected.
      *
      * @return a new object
