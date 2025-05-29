@@ -563,10 +563,14 @@ public class Test003 {
         Assert.assertTrue(bcs.hasAssignedNativeObject());
         Assert.assertTrue(bcs.ownsNativeObject());
 
+        Assert.assertFalse(bcs.getAllowDynamicOrKinematic());
+        Assert.assertEquals(EAllowedDofs.All, bcs.getAllowedDofs());
         Assert.assertTrue(bcs.getAllowSleeping());
         Assert.assertEquals(0.05f, bcs.getAngularDamping(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, bcs.getAngularVelocity(), 0f);
+        Assert.assertFalse(bcs.getApplyGyroscopicForce());
         Assert.assertNotNull(bcs.getCollisionGroup());
+        Assert.assertFalse(bcs.getEnhancedInternalEdgeRemoval());
         Assert.assertEquals(0.2f, bcs.getFriction(), 0f);
         Assert.assertEquals(1f, bcs.getGravityFactor(), 0f);
         Assert.assertFalse(bcs.getIsSensor());
@@ -591,10 +595,14 @@ public class Test003 {
      * @param bcs the settings to test (not null, modified)
      */
     private static void testBcsSetters(BodyCreationSettings bcs) {
+        bcs.setAllowDynamicOrKinematic(true);
+        bcs.setAllowedDofs(EAllowedDofs.Plane2D);
         bcs.setAllowSleeping(false);
         bcs.setAngularDamping(0.01f);
         bcs.setAngularVelocity(new Vec3(0.02f, 0.03f, 0.04f));
+        bcs.setApplyGyroscopicForce(true);
         bcs.setCollisionGroup(new CollisionGroup());
+        bcs.setEnhancedInternalEdgeRemoval(true);
         bcs.setFriction(0.05f);
         bcs.setGravityFactor(0.06f);
         bcs.setIsSensor(true);
@@ -611,10 +619,14 @@ public class Test003 {
         bcs.setRestitution(0.15f);
         bcs.setRotation(new Quat(0.6f, 0f, 0f, 0.8f));
 
+        Assert.assertTrue(bcs.getAllowDynamicOrKinematic());
+        Assert.assertEquals(EAllowedDofs.Plane2D, bcs.getAllowedDofs());
         Assert.assertFalse(bcs.getAllowSleeping());
         Assert.assertEquals(0.01f, bcs.getAngularDamping(), 0f);
         TestUtils.assertEquals(
                 0.02f, 0.03f, 0.04f, bcs.getAngularVelocity(), 0f);
+        Assert.assertTrue(bcs.getApplyGyroscopicForce());
+        Assert.assertTrue(bcs.getEnhancedInternalEdgeRemoval());
         Assert.assertEquals(0.05f, bcs.getFriction(), 0f);
         Assert.assertEquals(0.06f, bcs.getGravityFactor(), 0f);
         Assert.assertTrue(bcs.getIsSensor());
