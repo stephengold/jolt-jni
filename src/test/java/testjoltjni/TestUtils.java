@@ -43,6 +43,7 @@ import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
+import com.github.stephengold.joltjni.readonly.ConstVehicleAntiRollBar;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
@@ -128,6 +129,29 @@ final public class TestUtils {
         assertEquals(expected.getSize(), actual.getSize(), tolerance);
         Assert.assertEquals(
                 expected.getVolume(), actual.getVolume(), tolerance);
+    }
+
+    /**
+     * Verify the properties of an anti-roll bar, other than its virtual
+     * address.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    public static void assertAntiRollBar(
+            ConstVehicleAntiRollBar expected, ConstVehicleAntiRollBar actual) {
+        assertJpo(expected, actual);
+
+        Assert.assertEquals(expected.getLeftWheel(), actual.getLeftWheel());
+        Assert.assertEquals(expected.getRightWheel(), actual.getRightWheel());
+        Assert.assertEquals(expected.getStiffness(), actual.getStiffness(), 0f);
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        expected.saveBinaryState(new StreamOutWrapper(stream1));
+        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        Assert.assertEquals(stream1.str(), stream2.str());
     }
 
     /**
