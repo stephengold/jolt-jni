@@ -205,6 +205,7 @@ public class Test003 {
             BodyCreationSettings bcs = new BodyCreationSettings();
 
             Assert.assertNull(bcs.getShape());
+            Assert.assertNull(bcs.getShapeSettings());
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
@@ -215,6 +216,7 @@ public class Test003 {
             BodyCreationSettings copy = new BodyCreationSettings(original);
 
             Assert.assertNull(copy.getShape());
+            Assert.assertNull(copy.getShapeSettings());
             testBcsDefaults(copy);
             testBcsSetters(copy);
 
@@ -227,6 +229,7 @@ public class Test003 {
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
 
             Assert.assertNotNull(bcs.getShape());
+            Assert.assertEquals(ss, bcs.getShapeSettings());
             Assert.assertTrue(bcs.getShape() instanceof BoxShape);
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
@@ -240,6 +243,7 @@ public class Test003 {
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
 
             Assert.assertEquals(shape, bcs.getShape());
+            Assert.assertNull(bcs.getShapeSettings());
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
@@ -586,6 +590,7 @@ public class Test003 {
         TestUtils.assertEquals(0f, 0f, 0f, bcs.getPosition(), 0f);
         Assert.assertEquals(0f, bcs.getRestitution(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, 1f, bcs.getRotation(), 0f);
+        // caller should test getShape() and getShapeSettings()
         Assert.assertTrue(bcs.hasMassProperties());
     }
 

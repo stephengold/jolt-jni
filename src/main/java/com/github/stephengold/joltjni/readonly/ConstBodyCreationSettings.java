@@ -221,6 +221,15 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     ConstShape getShape();
 
     /**
+     * Acquire read-only access to the {@code ShapeSettings}. The body-creation
+     * settings are unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null}
+     */
+    ConstShapeSettings getShapeSettings();
+
+    /**
      * Test whether the body's mass properties will be calculated. The settings
      * are unaffected.
      *

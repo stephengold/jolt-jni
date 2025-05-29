@@ -148,6 +148,21 @@ public class BodyCreationSettings
     // new methods exposed
 
     /**
+     * Prepare for simulation by cooking the {@code ShapeSettings} attribute
+     * into a shape. After invoking this method, {@code ObjectStream}
+     * serialization is inhibited.
+     *
+     * @return a new object
+     */
+    public ShapeResult convertShapeSettings() {
+        long bodySettingsVa = va();
+        long resultVa = convertShapeSettings(bodySettingsVa);
+        ShapeResult result = new ShapeResult(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Alter whether a static body can be converted to kinematic or dynamic.
      * (native attribute: mAllowDynamicOrKinematic)
      *
@@ -942,6 +957,23 @@ public class BodyCreationSettings
     }
 
     /**
+     * Acquire read-only access to the {@code ShapeSettings}. The body-creation
+     * settings are unaffected.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if the body-creation settings are cooked
+     */
+    @Override
+    public ConstShapeSettings getShapeSettings() {
+        long bodySettingsVa = va();
+        long shapeSettingsVa = getShapeSettings(bodySettingsVa);
+        ConstShapeSettings result
+                = ShapeSettings.newShapeSettings(shapeSettingsVa);
+
+        return result;
+    }
+
+    /**
      * Test whether the body's mass properties will be calculated. The settings
      * are unaffected.
      *
@@ -974,6 +1006,8 @@ public class BodyCreationSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static long convertShapeSettings(long bodySettingsVa);
 
     native private static long createCopy(long originalVa);
 
@@ -1059,6 +1093,8 @@ public class BodyCreationSettings
     native private static float getRotationZ(long bodySettingsVa);
 
     native private static long getShape(long bodySettingsVa);
+
+    native private static long getShapeSettings(long bodySettingsVa);
 
     native private static boolean hasMassProperties(long bodySettingsVa);
 

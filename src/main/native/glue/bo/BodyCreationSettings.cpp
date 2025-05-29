@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,21 @@ SOFTWARE.
 #include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    convertShapeSettings
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_convertShapeSettings
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    ShapeSettings::ShapeResult *pResult = new ShapeSettings::ShapeResult();
+    TRACE_NEW("ShapeResult", pResult)
+    *pResult = pSettings->ConvertShapeSettings();
+    return reinterpret_cast<jlong> (pResult);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
@@ -548,6 +563,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     const Shape * const pShape = pSettings->GetShape();
     return reinterpret_cast<jlong> (pShape);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getShapeSettings
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getShapeSettings
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const ShapeSettings * const pResult = pSettings->GetShapeSettings();
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
