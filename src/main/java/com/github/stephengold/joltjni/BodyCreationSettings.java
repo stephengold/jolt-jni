@@ -771,13 +771,23 @@ public class BodyCreationSettings
     /**
      * Calculate the mass and inertia. The settings are unaffected.
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with a new native object assigned, or
+     * {@code null} if a shape is required but not available
      */
     @Override
     public MassProperties getMassProperties() {
         long bodySettingsVa = va();
-        long propertiesVa = getMassProperties(bodySettingsVa);
-        MassProperties result = new MassProperties(propertiesVa, true);
+        int omp = getOverrideMassProperties(bodySettingsVa);
+
+        MassProperties result;
+        if (omp == EOverrideMassProperties.MassAndInertiaProvided.ordinal()
+                || getShape(bodySettingsVa) != 0L) {
+            long propertiesVa = getMassProperties(bodySettingsVa);
+            result = new MassProperties(propertiesVa, true);
+
+        } else { // Avoid SIGSEGV when shape is required but not available:
+            result = null;
+        }
 
         return result;
     }

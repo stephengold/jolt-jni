@@ -204,6 +204,7 @@ public class Test003 {
         { // no-arg constructor:
             BodyCreationSettings bcs = new BodyCreationSettings();
 
+            Assert.assertNull(bcs.getMassProperties());
             Assert.assertNull(bcs.getShape());
             Assert.assertNull(bcs.getShapeSettings());
             testBcsDefaults(bcs);
@@ -215,6 +216,7 @@ public class Test003 {
             ConstBodyCreationSettings original = new BodyCreationSettings();
             BodyCreationSettings copy = new BodyCreationSettings(original);
 
+            Assert.assertNull(copy.getMassProperties());
             Assert.assertNull(copy.getShape());
             Assert.assertNull(copy.getShapeSettings());
             testBcsDefaults(copy);
@@ -228,6 +230,7 @@ public class Test003 {
             BodyCreationSettings bcs = new BodyCreationSettings(ss,
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
 
+            Assert.assertNotNull(bcs.getMassProperties());
             Assert.assertNotNull(bcs.getShape());
             Assert.assertEquals(ss, bcs.getShapeSettings());
             Assert.assertTrue(bcs.getShape() instanceof BoxShape);
@@ -242,6 +245,7 @@ public class Test003 {
             BodyCreationSettings bcs = new BodyCreationSettings(shape,
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
 
+            Assert.assertNotNull(bcs.getMassProperties());
             Assert.assertEquals(shape, bcs.getShape());
             Assert.assertNull(bcs.getShapeSettings());
             testBcsDefaults(bcs);
@@ -580,6 +584,7 @@ public class Test003 {
         Assert.assertFalse(bcs.getIsSensor());
         Assert.assertEquals(0.05f, bcs.getLinearDamping(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, bcs.getLinearVelocity(), 0f);
+        // caller should test getMassProperties()
         Assert.assertEquals(15 * Math.PI, bcs.getMaxAngularVelocity(), 1e-6f);
         Assert.assertEquals(500f, bcs.getMaxLinearVelocity(), 0f);
         Assert.assertEquals(EMotionQuality.Discrete, bcs.getMotionQuality());
