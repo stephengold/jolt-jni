@@ -241,10 +241,11 @@ public interface ConstCharacterVirtual extends ConstCharacterBase {
      * specified character during the previous time step. The current character
      * is unaffected.
      *
-     * @param other the character to test against (not null, unaffected)
+     * @param otherCharacter the character to test against (not null,
+     * unaffected)
      * @return {@code true} if contact or collision, otherwise {@code false}
      */
-    boolean hasCollidedWith(ConstCharacterVirtual other);
+    boolean hasCollidedWith(ConstCharacterVirtual otherCharacter);
 
     /**
      * Create a counted reference to the native {@code CharacterVirtual}.
