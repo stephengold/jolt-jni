@@ -32,7 +32,6 @@ import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilterTable;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.StreamOutWrapper;
-import com.github.stephengold.joltjni.UVec4;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
@@ -48,6 +47,7 @@ import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import com.github.stephengold.joltjni.readonly.UVec4Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.StringStream;
 import electrostatic4j.snaploader.platform.util.NativeVariant;
@@ -373,7 +373,8 @@ final public class TestUtils {
      * @param w the expected W component
      * @param actual the vector to test (not null, unaffected)
      */
-    public static void assertEquals(int x, int y, int z, int w, UVec4 actual) {
+    public static void assertEquals(
+            int x, int y, int z, int w, UVec4Arg actual) {
         Assert.assertEquals("x component", x, actual.getX());
         Assert.assertEquals("y component", y, actual.getY());
         Assert.assertEquals("z component", z, actual.getZ());
