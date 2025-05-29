@@ -37,6 +37,7 @@ import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
+import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
@@ -221,6 +222,37 @@ final public class TestUtils {
 
         Assert.assertEquals(expected.getGroupId(), actual.getGroupId());
         Assert.assertEquals(expected.getSubGroupId(), actual.getSubGroupId());
+    }
+
+    /**
+     * Verify properties of a constraint-settings object, other than its virtual
+     * address.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    public static void assertConstraintSettings(
+            ConstConstraintSettings expected, ConstConstraintSettings actual) {
+        assertJpo(expected, actual);
+
+        Assert.assertEquals(expected.getConstraintPriority(),
+                actual.getConstraintPriority());
+        Assert.assertEquals(expected.getControllerType(),
+                actual.getControllerType());
+        Assert.assertEquals(expected.getDrawConstraintSize(),
+                actual.getDrawConstraintSize(), 0f);
+        Assert.assertEquals(expected.getEnabled(), actual.getEnabled());
+        Assert.assertEquals(expected.getNumPositionStepsOverride(),
+                actual.getNumPositionStepsOverride());
+        Assert.assertEquals(expected.getNumVelocityStepsOverride(),
+                actual.getNumVelocityStepsOverride());
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        expected.saveBinaryState(new StreamOutWrapper(stream1));
+        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        Assert.assertEquals(stream1.str(), stream2.str());
     }
 
     /**
