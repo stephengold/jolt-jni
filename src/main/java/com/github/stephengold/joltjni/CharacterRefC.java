@@ -146,6 +146,7 @@ final public class CharacterRefC
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * @return a new object
      */
+    @Override
     public CharacterSettings getCharacterSettings(boolean lockBodies) {
         long characterVa = targetVa();
         long settingsVa
