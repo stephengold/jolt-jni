@@ -585,6 +585,7 @@ public class Test003 {
         Assert.assertEquals(0.05f, bcs.getLinearDamping(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, bcs.getLinearVelocity(), 0f);
         // caller should test getMassProperties()
+        testMpDefaults(bcs.getMassPropertiesOverride());
         Assert.assertEquals(15 * Math.PI, bcs.getMaxAngularVelocity(), 1e-6f);
         Assert.assertEquals(500f, bcs.getMaxLinearVelocity(), 0f);
         Assert.assertEquals(EMotionQuality.Discrete, bcs.getMotionQuality());
@@ -839,8 +840,6 @@ public class Test003 {
      */
     private static void testMpDefaults(ConstMassProperties props) {
         Assert.assertTrue(props.hasAssignedNativeObject());
-        Assert.assertTrue(props.ownsNativeObject());
-
         Assert.assertEquals(0f, props.getMass(), 0f);
         Assert.assertTrue(props.getInertia().isEqual(Mat44.sZero()));
     }
