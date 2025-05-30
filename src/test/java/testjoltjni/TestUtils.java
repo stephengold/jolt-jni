@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.BroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.BroadPhaseLayerInterfaceTable;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JoltPhysicsObject;
+import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.ObjectLayerPairFilter;
 import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
 import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilter;
@@ -193,8 +194,14 @@ final public class TestUtils {
                 expected.getLinearDamping(), actual.getLinearDamping(), 0f);
         assertEquals(
                 expected.getLinearVelocity(), actual.getLinearVelocity(), 0f);
-        assertMassProperties(
-                expected.getMassProperties(), actual.getMassProperties());
+
+        MassProperties expectedMassProperties = expected.getMassProperties();
+        if (expectedMassProperties == null) {
+            Assert.assertNull(actual.getMassProperties());
+        } else {
+            assertMassProperties(
+                    expectedMassProperties, actual.getMassProperties());
+        }
         Assert.assertEquals(expected.getMaxAngularVelocity(),
                 actual.getMaxAngularVelocity(), 0f);
         Assert.assertEquals(expected.getMaxLinearVelocity(),
@@ -209,7 +216,15 @@ final public class TestUtils {
         Assert.assertEquals(
                 expected.getRestitution(), actual.getRestitution(), 0f);
         assertEquals(expected.getRotation(), actual.getRotation(), 0f);
-        assertShape(expected.getShape(), actual.getShape());
+
+        ConstShape expectedShape = expected.getShape();
+        if (expectedShape == null) {
+            assertShapeSettings(
+                    expected.getShapeSettings(), actual.getShapeSettings());
+        } else {
+            assertShape(expectedShape, actual.getShape());
+        }
+
         Assert.assertEquals(
                 expected.hasMassProperties(), actual.hasMassProperties());
     }
