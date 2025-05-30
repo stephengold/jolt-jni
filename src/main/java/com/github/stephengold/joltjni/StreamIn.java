@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,6 +39,20 @@ abstract public class StreamIn extends NonCopyable {
     StreamIn() {
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Read an {@code int}.
+     *
+     * @return the value that was read
+     */
+    public int readInt() {
+        long streamVa = va();
+        int result = readInt(streamVa);
+
+        return result;
+    }
+    // *************************************************************************
     // protected methods
 
     /**
@@ -57,4 +71,6 @@ abstract public class StreamIn extends NonCopyable {
     // native private methods
 
     native private static void free(long streamVa);
+
+    native private static int readInt(long streamVa);
 }

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,4 +40,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StreamIn_free
     StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
     TRACE_DELETE("StreamIn", pStream)
     delete pStream;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StreamIn
+ * Method:    readInt
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_StreamIn_readInt
+  (JNIEnv *, jclass, jlong streamVa) {
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    jint result = 0;
+    pStream->Read(result);
+    return result;
 }
