@@ -134,7 +134,8 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Calculate the mass and inertia. The settings are unaffected.
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with a new native object assigned, or
+     * {@code null} if a shape is required but not available
      */
     MassProperties getMassProperties();
 
@@ -216,7 +217,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null}
+     * {@code null} if the settings aren't cooked
      */
     ConstShape getShape();
 

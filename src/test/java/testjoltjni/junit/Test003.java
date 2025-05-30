@@ -634,6 +634,7 @@ public class Test003 {
         bcs.setRestitution(0.15f);
         bcs.setRotation(new Quat(0.6f, 0f, 0f, 0.8f));
 
+        // Verify the new parameter values:
         Assert.assertTrue(bcs.getAllowDynamicOrKinematic());
         Assert.assertEquals(EAllowedDofs.Plane2D, bcs.getAllowedDofs());
         Assert.assertFalse(bcs.getAllowSleeping());

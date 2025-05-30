@@ -955,7 +955,7 @@ public class BodyCreationSettings
      * unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null} if the body-creation settings are uncooked
+     * {@code null} if the settings aren't cooked
      */
     @Override
     public ConstShape getShape() {
@@ -971,7 +971,7 @@ public class BodyCreationSettings
      * settings are unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null} if the body-creation settings are cooked
+     * {@code null}
      */
     @Override
     public ConstShapeSettings getShapeSettings() {
