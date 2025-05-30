@@ -21,13 +21,15 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.template.Result;
+
 /**
  * Either an error or a {@code BodyCreationSettings}. (native type:
  * {@code Result<BodyCreationSettings>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BcsResult extends JoltPhysicsObject {
+public class BcsResult extends Result<BodyCreationSettings> {
     // *************************************************************************
     // constructors
 
@@ -44,13 +46,14 @@ public class BcsResult extends JoltPhysicsObject {
         setVirtualAddress(resultVa, freeingAction);
     }
     // *************************************************************************
-    // new methods exposed
+    // Result<BodyCreationSettings> methods
 
     /**
      * Return the settings object.
      *
      * @return a new JVM object with a new native object assigned
      */
+    @Override
     public BodyCreationSettings get() {
         long resultVa = va();
         long settingsVa = get(resultVa);
@@ -59,52 +62,19 @@ public class BcsResult extends JoltPhysicsObject {
 
         return result;
     }
-
-    /**
-     * Return the error string.
-     *
-     * @return the string
-     */
-    public String getError() {
-        long resultVa = va();
-        String result = getError(resultVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether there was an error.
-     *
-     * @return {@code true} if error, otherwise {@code false}
-     */
-    public boolean hasError() {
-        long resultVa = va();
-        boolean result = hasError(resultVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether the settings object is valid.
-     *
-     * @return {@code true} if valid, otherwise {@code false}
-     */
-    public boolean isValid() {
-        long resultVa = va();
-        boolean result = isValid(resultVa);
-
-        return result;
-    }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static void free(long resultVa);
 
     native private static long get(long resultVa);
 
-    native private static String getError(long resultVa);
+    @Override
+    final native protected String getError(long resultVa);
 
-    native private static boolean hasError(long resultVa);
+    @Override
+    final native protected boolean hasError(long resultVa);
 
-    native private static boolean isValid(long resultVa);
+    @Override
+    final native protected boolean isValid(long resultVa);
 }

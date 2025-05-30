@@ -32,19 +32,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_PathResult
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PathResult_free
-  (JNIEnv *, jclass, jlong resultVa) {
-    Result<Ref<PathConstraintPath>> * const pResult
-            = reinterpret_cast<Result<Ref<PathConstraintPath>> *> (resultVa);
-    TRACE_DELETE("Result<Ref<PathConstraintPath>>", pResult)
-    delete pResult;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PathResult
  * Method:    get
  * Signature: (J)J
  */
@@ -58,43 +45,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PathResult_get
     return reinterpret_cast<jlong> (pRef);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_PathResult
- * Method:    getError
- * Signature: (J)Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_PathResult_getError
-  (JNIEnv *pEnv, jclass, jlong resultVa) {
-    const Result<Ref<PathConstraintPath>> * const pResult
-            = reinterpret_cast<Result<Ref<PathConstraintPath>> *> (resultVa);
-    const String& message = pResult->GetError();
-    const char* const str = message.c_str();
-    const jstring result = pEnv->NewStringUTF(str);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PathResult
- * Method:    hasError
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PathResult_hasError
-  (JNIEnv *, jclass, jlong resultVa) {
-    const Result<Ref<PathConstraintPath>> * const pResult
-            = reinterpret_cast<Result<Ref<PathConstraintPath>> *> (resultVa);
-    const bool result = pResult->HasError();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PathResult
- * Method:    isValid
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PathResult_isValid
-  (JNIEnv *, jclass, jlong resultVa) {
-    const Result<Ref<PathConstraintPath>> * const pResult
-            = reinterpret_cast<Result<Ref<PathConstraintPath>> *> (resultVa);
-    const bool result = pResult->IsValid();
-    return result;
-}
+IMPLEMENT_RESULT(Ref<PathConstraintPath>,
+        Java_com_github_stephengold_joltjni_PathResult_free,
+        Java_com_github_stephengold_joltjni_PathResult_getError,
+        Java_com_github_stephengold_joltjni_PathResult_hasError,
+        Java_com_github_stephengold_joltjni_PathResult_isValid)

@@ -21,13 +21,15 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.template.Result;
+
 /**
  * Either an error or a {@code PathConstraintPathRef}. (native type:
  * {@code Result<Ref<PathConstraintPath>>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class PathResult extends JoltPhysicsObject {
+final public class PathResult extends Result<PathConstraintPathRef> {
     // *************************************************************************
     // constructors
 
@@ -44,7 +46,7 @@ final public class PathResult extends JoltPhysicsObject {
         setVirtualAddress(resultVa, freeingAction);
     }
     // *************************************************************************
-    // new methods exposed
+    // Result<PathConstraintPathRef> methods
 
     /**
      * Return the {@code PathConstraintPathRef}.
@@ -58,52 +60,19 @@ final public class PathResult extends JoltPhysicsObject {
 
         return result;
     }
-
-    /**
-     * Return the error string.
-     *
-     * @return the string
-     */
-    public String getError() {
-        long resultVa = va();
-        String result = getError(resultVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether there was an error.
-     *
-     * @return {@code true} if error, otherwise {@code false}
-     */
-    public boolean hasError() {
-        long resultVa = va();
-        boolean result = hasError(resultVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether the {@code PhysicsMaterial} is valid.
-     *
-     * @return {@code true} if valid, otherwise {@code false}
-     */
-    public boolean isValid() {
-        long resultVa = va();
-        boolean result = isValid(resultVa);
-
-        return result;
-    }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static void free(long resultVa);
 
     native private static long get(long resultVa);
 
-    native private static String getError(long resultVa);
+    @Override
+    native protected String getError(long resultVa);
 
-    native private static boolean hasError(long resultVa);
+    @Override
+    native protected boolean hasError(long resultVa);
 
-    native private static boolean isValid(long resultVa);
+    @Override
+    native protected boolean isValid(long resultVa);
 }

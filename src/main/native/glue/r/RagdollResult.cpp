@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,19 +32,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollResult
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollResult_free
-  (JNIEnv *, jclass, jlong resultVa) {
-    RagdollSettings::RagdollResult * const pResult
-            = reinterpret_cast<RagdollSettings::RagdollResult *> (resultVa);
-    TRACE_DELETE("RagdollResult", pResult)
-    delete pResult;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RagdollResult
  * Method:    get
  * Signature: (J)J
  */
@@ -58,43 +45,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollResult_get
     return reinterpret_cast<jlong> (pRef);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_RagdollResult
- * Method:    getError
- * Signature: (J)Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_RagdollResult_getError
-  (JNIEnv *pEnv, jclass, jlong resultVa) {
-    const RagdollSettings::RagdollResult * const pResult
-            = reinterpret_cast<RagdollSettings::RagdollResult *> (resultVa);
-    const String& message = pResult->GetError();
-    const char* const str = message.c_str();
-    const jstring result = pEnv->NewStringUTF(str);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RagdollResult
- * Method:    hasError
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_RagdollResult_hasError
-  (JNIEnv *, jclass, jlong resultVa) {
-    const RagdollSettings::RagdollResult * const pResult
-            = reinterpret_cast<RagdollSettings::RagdollResult *> (resultVa);
-    const bool result = pResult->HasError();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RagdollResult
- * Method:    isValid
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_RagdollResult_isValid
-  (JNIEnv *, jclass, jlong resultVa) {
-    const RagdollSettings::RagdollResult * const pResult
-            = reinterpret_cast<RagdollSettings::RagdollResult *> (resultVa);
-    const bool result = pResult->IsValid();
-    return result;
-}
+IMPLEMENT_RESULT(Ref<RagdollSettings>,
+        Java_com_github_stephengold_joltjni_RagdollResult_free,
+        Java_com_github_stephengold_joltjni_RagdollResult_getError,
+        Java_com_github_stephengold_joltjni_RagdollResult_hasError,
+        Java_com_github_stephengold_joltjni_RagdollResult_isValid)

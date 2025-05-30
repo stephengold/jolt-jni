@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,15 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.template.Result;
+
 /**
  * Either an error or a {@code PhysicsSceneRef}. (native type:
  * {@code Result<Ref<PhysicsScene>>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class PhysicsSceneResult extends JoltPhysicsObject {
+final public class PhysicsSceneResult extends Result<PhysicsSceneRef> {
     // *************************************************************************
     // constructors
 
@@ -44,13 +46,14 @@ final public class PhysicsSceneResult extends JoltPhysicsObject {
         setVirtualAddress(resultVa, freeingAction);
     }
     // *************************************************************************
-    // new methods exposed
+    // Result<PhysicsSceneRef> methods
 
     /**
      * Return the {@code PhysicsSceneRef}.
      *
      * @return a new JVM object with a new native object assigned
      */
+    @Override
     public PhysicsSceneRef get() {
         long resultVa = va();
         long sceneRefVa = get(resultVa);
@@ -58,52 +61,19 @@ final public class PhysicsSceneResult extends JoltPhysicsObject {
 
         return result;
     }
-
-    /**
-     * Return the error string.
-     *
-     * @return the string
-     */
-    public String getError() {
-        long resultVa = va();
-        String result = getError(resultVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether there was an error.
-     *
-     * @return {@code true} if error, otherwise {@code false}
-     */
-    public boolean hasError() {
-        long resultVa = va();
-        boolean result = hasError(resultVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether the {@code PhysicsSceneRef} is valid.
-     *
-     * @return {@code true} if valid, otherwise {@code false}
-     */
-    public boolean isValid() {
-        long resultVa = va();
-        boolean result = isValid(resultVa);
-
-        return result;
-    }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static void free(long resultVa);
 
     native private static long get(long resultVa);
 
-    native private static String getError(long resultVa);
+    @Override
+    native protected String getError(long resultVa);
 
-    native private static boolean hasError(long resultVa);
+    @Override
+    native protected boolean hasError(long resultVa);
 
-    native private static boolean isValid(long resultVa);
+    @Override
+    native protected boolean isValid(long resultVa);
 }

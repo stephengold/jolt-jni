@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,19 +32,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSceneResult
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSceneResult_free
-  (JNIEnv *, jclass, jlong resultVa) {
-    PhysicsScene::PhysicsSceneResult * const pResult
-            = reinterpret_cast<PhysicsScene::PhysicsSceneResult *> (resultVa);
-    TRACE_DELETE("PhysicsScene::PhysicsSceneResult", pResult)
-    delete pResult;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSceneResult
  * Method:    get
  * Signature: (J)J
  */
@@ -58,43 +45,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSceneResult_g
     return reinterpret_cast<jlong> (pRef);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSceneResult
- * Method:    getError
- * Signature: (J)Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_PhysicsSceneResult_getError
-  (JNIEnv *pEnv, jclass, jlong resultVa) {
-    const PhysicsScene::PhysicsSceneResult * const pResult
-            = reinterpret_cast<PhysicsScene::PhysicsSceneResult *> (resultVa);
-    const String& message = pResult->GetError();
-    const char* const str = message.c_str();
-    const jstring result = pEnv->NewStringUTF(str);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSceneResult
- * Method:    hasError
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSceneResult_hasError
-  (JNIEnv *, jclass, jlong resultVa) {
-    const PhysicsScene::PhysicsSceneResult * const pResult
-            = reinterpret_cast<PhysicsScene::PhysicsSceneResult *> (resultVa);
-    const bool result = pResult->HasError();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSceneResult
- * Method:    isValid
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSceneResult_isValid
-  (JNIEnv *, jclass, jlong resultVa) {
-    const PhysicsScene::PhysicsSceneResult * const pResult
-            = reinterpret_cast<PhysicsScene::PhysicsSceneResult *> (resultVa);
-    const bool result = pResult->IsValid();
-    return result;
-}
+IMPLEMENT_RESULT(Ref<PhysicsScene>,
+        Java_com_github_stephengold_joltjni_PhysicsSceneResult_free,
+        Java_com_github_stephengold_joltjni_PhysicsSceneResult_getError,
+        Java_com_github_stephengold_joltjni_PhysicsSceneResult_hasError,
+        Java_com_github_stephengold_joltjni_PhysicsSceneResult_isValid)

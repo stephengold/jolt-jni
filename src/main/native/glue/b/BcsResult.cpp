@@ -32,19 +32,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BcsResult
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BcsResult_free
-  (JNIEnv *, jclass, jlong resultVa) {
-    Result<BodyCreationSettings> * const pResult
-            = reinterpret_cast<Result<BodyCreationSettings> *> (resultVa);
-    TRACE_DELETE("Result<BodyCreationSettings>", pResult)
-    delete pResult;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BcsResult
  * Method:    get
  * Signature: (J)J
  */
@@ -58,43 +45,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BcsResult_get
     return reinterpret_cast<jlong> (pSettings);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BcsResult
- * Method:    getError
- * Signature: (J)Ljava/lang/String;
- */
-JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_BcsResult_getError
-  (JNIEnv *pEnv, jclass, jlong resultVa) {
-    const Result<BodyCreationSettings> * const pResult
-            = reinterpret_cast<Result<BodyCreationSettings> *> (resultVa);
-    const String& message = pResult->GetError();
-    const char* const str = message.c_str();
-    const jstring result = pEnv->NewStringUTF(str);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BcsResult
- * Method:    hasError
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BcsResult_hasError
-  (JNIEnv *, jclass, jlong resultVa) {
-    const Result<BodyCreationSettings> * const pResult
-            = reinterpret_cast<Result<BodyCreationSettings> *> (resultVa);
-    const bool result = pResult->HasError();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BcsResult
- * Method:    isValid
- * Signature: (J)Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BcsResult_isValid
-  (JNIEnv *, jclass, jlong resultVa) {
-    const Result<BodyCreationSettings> * const pResult
-            = reinterpret_cast<Result<BodyCreationSettings> *> (resultVa);
-    const bool result = pResult->IsValid();
-    return result;
-}
+IMPLEMENT_RESULT(BodyCreationSettings,
+        Java_com_github_stephengold_joltjni_BcsResult_free,
+        Java_com_github_stephengold_joltjni_BcsResult_getError,
+        Java_com_github_stephengold_joltjni_BcsResult_hasError,
+        Java_com_github_stephengold_joltjni_BcsResult_isValid)
