@@ -43,9 +43,12 @@ import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.ConstVehicleAntiRollBar;
+import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstVehicleControllerSettings;
+import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
@@ -574,6 +577,18 @@ final public class TestUtils {
     }
 
     /**
+     * Verify the properties of a shape-settings object, other than its virtual
+     * address.
+     *
+     * @param expected the expected shape (not {@code null}, unaffected)
+     * @param actual the actual shape (not {@code null}, unaffected)
+     */
+    public static void assertShapeSettings(
+            ConstShapeSettings expected, ConstShapeSettings actual) {
+        assertJpo(expected, actual);
+    }
+
+    /**
      * Verify the properties of a spring-settings object, other than its virtual
      * address.
      *
@@ -599,6 +614,40 @@ final public class TestUtils {
     }
 
     /**
+     * Verify the properties of a vehicle-constraint settings object, other than
+     * its virtual address.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    public static void assertVehicleConstraintSettings(
+            ConstVehicleConstraintSettings expected,
+            ConstVehicleConstraintSettings actual) {
+        assertConstraintSettings(expected, actual);
+
+        int numBars = expected.getNumAntiRollBars();
+        Assert.assertEquals(numBars, actual.getNumAntiRollBars());
+        int numWheels = expected.getNumWheels();
+        Assert.assertEquals(numWheels, actual.getNumWheels());
+
+        for (int i = 0; i < numBars; ++i) {
+            assertAntiRollBar(
+                    expected.getAntiRollBar(i), actual.getAntiRollBar(i));
+        }
+        Assert.assertEquals(
+                expected.getControllerType(), actual.getControllerType());
+        assertEquals(expected.getForward(), actual.getForward(), 0f);
+        Assert.assertEquals(expected.getMaxPitchRollAngle(),
+                actual.getMaxPitchRollAngle(), 0f);
+        assertEquals(expected.getUp(), actual.getUp(), 0f);
+        assertVehicleControllerSettings(
+                expected.getController(), actual.getController());
+        for (int i = 0; i < numWheels; ++i) {
+            assertWheelSettings(expected.getWheel(i), actual.getWheel(i));
+        }
+    }
+
+    /**
      * Verify the properties of a vehicle-controller settings object, other than
      * its virtual address.
      *
@@ -609,6 +658,46 @@ final public class TestUtils {
             ConstVehicleControllerSettings expected,
             ConstVehicleControllerSettings actual) {
         assertJpo(expected, actual);
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        expected.saveBinaryState(new StreamOutWrapper(stream1));
+        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        Assert.assertEquals(stream1.str(), stream2.str());
+    }
+
+    /**
+     * Verify the properties of a wheel-settings object, other than its virtual
+     * address.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    public static void assertWheelSettings(
+            ConstWheelSettings expected, ConstWheelSettings actual) {
+        assertJpo(expected, actual);
+
+        Assert.assertEquals(expected.getEnableSuspensionForcePoint(),
+                actual.getEnableSuspensionForcePoint());
+        assertEquals(expected.getPosition(), actual.getPosition(), 0f);
+        Assert.assertEquals(expected.getRadius(), actual.getRadius(), 0f);
+        assertEquals(expected.getSteeringAxis(), actual.getSteeringAxis(), 0f);
+        assertEquals(expected.getSuspensionDirection(),
+                actual.getSuspensionDirection(), 0f);
+        assertEquals(expected.getSuspensionForcePoint(),
+                actual.getSuspensionForcePoint(), 0f);
+        Assert.assertEquals(expected.getSuspensionMaxLength(),
+                actual.getSuspensionMaxLength(), 0f);
+        Assert.assertEquals(expected.getSuspensionMinLength(),
+                actual.getSuspensionMinLength(), 0f);
+        Assert.assertEquals(expected.getSuspensionPreloadLength(),
+                actual.getSuspensionPreloadLength(), 0f);
+        assertSpringSettings(expected.getSuspensionSpring(),
+                actual.getSuspensionSpring());
+        assertEquals(expected.getWheelForward(), actual.getWheelForward(), 0f);
+        assertEquals(expected.getWheelUp(), actual.getWheelUp(), 0f);
+        Assert.assertEquals(expected.getWidth(), actual.getWidth(), 0f);
 
         // compare serialization results:
         StringStream stream1 = new StringStream();
