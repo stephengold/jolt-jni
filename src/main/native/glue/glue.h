@@ -72,6 +72,30 @@ extern bool gTraceAllocations;
     return reinterpret_cast<jlong> (pResult); \
   }
 
+#define IMPLEMENT_RESULT(className, freeName, getErrorName, hasErrorName, isValidName) \
+  JNIEXPORT void JNICALL freeName(JNIEnv *, jclass, jlong resultVa) { \
+    Result<className> * const pResult = reinterpret_cast<Result<className> *> (resultVa); \
+    TRACE_DELETE("Result<" #className ">", pResult) \
+    delete pResult; \
+  } \
+  JNIEXPORT jstring JNICALL getErrorName(JNIEnv *pEnv, jobject, jlong resultVa) { \
+    Result<className> * const pResult = reinterpret_cast<Result<className> *> (resultVa); \
+    const String& message = pResult->GetError(); \
+    const char* const str = message.c_str(); \
+    const jstring result = pEnv->NewStringUTF(str); \
+    return result; \
+  } \
+  JNIEXPORT jboolean JNICALL hasErrorName(JNIEnv *, jobject, jlong resultVa) { \
+    Result<className> * const pResult = reinterpret_cast<Result<className> *> (resultVa); \
+    const bool result = pResult->HasError(); \
+    return result; \
+  } \
+  JNIEXPORT jboolean JNICALL isValidName(JNIEnv *, jobject, jlong resultVa) { \
+    Result<className> * const pResult = reinterpret_cast<Result<className> *> (resultVa); \
+    const bool result = pResult->IsValid(); \
+    return result; \
+  }
+
 #ifdef ANDROID
 // doesn't match the Invocation API spec
 #define ATTACH_CURRENT_THREAD(mpVM, ppAttachEnv) \
