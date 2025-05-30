@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -94,5 +94,29 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_std_StringStream_s
     }
     jstring result = pEnv->NewString(pTmpUcs2, len);
     delete[] pTmpUcs2;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_StringStream
+ * Method:    tellg
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_StringStream_tellg
+  (JNIEnv *, jclass, jlong streamVa) {
+    stringstream * const pStream = reinterpret_cast<stringstream *> (streamVa);
+    stringstream::pos_type result = pStream->tellg();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_StringStream
+ * Method:    tellp
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_std_StringStream_tellp
+  (JNIEnv *, jclass, jlong streamVa) {
+    stringstream * const pStream = reinterpret_cast<stringstream *> (streamVa);
+    stringstream::pos_type result = pStream->tellp();
     return result;
 }

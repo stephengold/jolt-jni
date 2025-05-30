@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -63,6 +63,32 @@ public class StringStream extends JoltPhysicsObject {
 
         return result;
     }
+
+    /**
+     * Return the input position.
+     *
+     * @return buffer position relative to the first character, or -1 to
+     * indicate a failure
+     */
+    public int tellg() {
+        long streamVa = va();
+        int result = tellg(streamVa);
+
+        return result;
+    }
+
+    /**
+     * Return the output position.
+     *
+     * @return buffer position relative to the first character, or -1 to
+     * indicate a failure
+     */
+    public int tellp() {
+        long streamVa = va();
+        int result = tellp(streamVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -73,4 +99,8 @@ public class StringStream extends JoltPhysicsObject {
     native private static void free(long streamVa);
 
     native private static String str(long streamVa);
+
+    native private static int tellg(long streamVa);
+
+    native private static int tellp(long streamVa);
 }
