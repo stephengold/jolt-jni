@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,6 +39,18 @@ abstract public class StreamOut extends NonCopyable {
     StreamOut() {
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Write an {@code int}.
+     *
+     * @param iValue the value to write
+     */
+    public void writeInt(int iValue) {
+        long streamVa = va();
+        writeInt(streamVa, iValue);
+    }
+    // *************************************************************************
     // protected methods
 
     /**
@@ -57,4 +69,6 @@ abstract public class StreamOut extends NonCopyable {
     // native private methods
 
     native private static void free(long streamVa);
+
+    native private static void writeInt(long streamVa, int iValue);
 }
