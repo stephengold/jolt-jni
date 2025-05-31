@@ -77,8 +77,12 @@ public class GroupFilterTable extends GroupFilter {
      *
      * @param subGroup1 the ID of the first subgroup
      * @param subGroup2 the ID of the 2nd subgroup
+     * @throws IllegalArgumentException if {@code subGroup1 == subGroup2}
      */
     public void disableCollision(int subGroup1, int subGroup2) {
+        if (subGroup1 == subGroup2) {
+            throw new IllegalArgumentException("subgroups must be distinct");
+        }
         long filterVa = va();
         disableCollision(filterVa, subGroup1, subGroup2);
     }
@@ -88,8 +92,12 @@ public class GroupFilterTable extends GroupFilter {
      *
      * @param subGroup1 the ID of the first subgroup
      * @param subGroup2 the ID of the 2nd subgroup
+     * @throws IllegalArgumentException if {@code subGroup1 == subGroup2}
      */
     public void enableCollision(int subGroup1, int subGroup2) {
+        if (subGroup1 == subGroup2) {
+            throw new IllegalArgumentException("subgroups must be distinct");
+        }
         long filterVa = va();
         enableCollision(filterVa, subGroup1, subGroup2);
     }
