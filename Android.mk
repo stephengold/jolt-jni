@@ -235,6 +235,7 @@ $(N)/glue/sh/ShapeSettings.cpp \
 $(N)/glue/sh/ShapeSettingsRefC.cpp \
 $(N)/glue/sh/ShapeToIdMap.cpp \
 $(N)/glue/sh/SharedMutexBase.cpp \
+$(N)/glue/sh/SharedSettingsToIdMap.cpp \
 $(N)/glue/s/SbcsResult.cpp \
 $(N)/glue/s/ScaledShape.cpp \
 $(N)/glue/s/ScaledShapeSettings.cpp \
