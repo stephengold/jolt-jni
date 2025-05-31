@@ -26,8 +26,34 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Vehicle/VehicleAntiRollBar.h"
 #include "auto/com_github_stephengold_joltjni_VehicleAntiRollBar.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleAntiRollBar
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleAntiRollBar_createDefault
+  (JNIEnv *, jclass) {
+    VehicleAntiRollBar * const pResult = new VehicleAntiRollBar();
+    TRACE_NEW("VehicleAntiRollBar", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleAntiRollBar
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleAntiRollBar_free
+  (JNIEnv *, jclass, jlong barVa) {
+    VehicleAntiRollBar * const pBar
+            = reinterpret_cast<VehicleAntiRollBar *> (barVa);
+    TRACE_DELETE("VehicleAntiRollBar", pBar)
+    delete pBar;
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleAntiRollBar

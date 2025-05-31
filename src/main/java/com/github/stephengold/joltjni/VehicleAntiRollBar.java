@@ -35,6 +35,14 @@ public class VehicleAntiRollBar
     // constructors
 
     /**
+     * Instantiate a default bar.
+     */
+    public VehicleAntiRollBar() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa, () -> free(settingsVa));
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -145,6 +153,10 @@ public class VehicleAntiRollBar
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createDefault();
+
+    native private static void free(long barVa);
 
     native private static int getLeftWheel(long barVa);
 
