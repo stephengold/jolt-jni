@@ -46,6 +46,17 @@ final public class SpringSettings
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public SpringSettings(ConstSpringSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+    }
+
+    /**
      * Instantiate settings with the specified native object assigned but not
      * owned.
      *
@@ -290,6 +301,8 @@ final public class SpringSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

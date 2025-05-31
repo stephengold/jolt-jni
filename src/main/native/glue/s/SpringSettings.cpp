@@ -32,6 +32,20 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_SpringSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SpringSettings_createCopy
+  (JNIEnv *, jclass, jlong originalVa) {
+    const SpringSettings * const pOriginal
+            = reinterpret_cast<SpringSettings *> (originalVa);
+    SpringSettings * const pCopy = new SpringSettings(*pOriginal);
+    TRACE_NEW("SpringSettings", pCopy)
+    return reinterpret_cast<jlong> (pCopy);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SpringSettings
  * Method:    createDefault
  * Signature: ()J
  */

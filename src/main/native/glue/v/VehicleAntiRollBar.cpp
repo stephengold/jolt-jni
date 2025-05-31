@@ -32,6 +32,20 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleAntiRollBar
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleAntiRollBar_createCopy
+  (JNIEnv *, jclass, jlong originalVa) {
+    const VehicleAntiRollBar * const pOriginal
+            = reinterpret_cast<VehicleAntiRollBar *> (originalVa);
+    VehicleAntiRollBar * const pCopy = new VehicleAntiRollBar(*pOriginal);
+    TRACE_NEW("VehicleAntiRollBar", pCopy)
+    return reinterpret_cast<jlong> (pCopy);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleAntiRollBar
  * Method:    createDefault
  * Signature: ()J
  */

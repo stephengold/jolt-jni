@@ -41,6 +41,20 @@ IMPLEMENT_REF(GroupFilterTable,
 
 /*
  * Class:     com_github_stephengold_joltjni_GroupFilterTable
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GroupFilterTable_createCopy
+  (JNIEnv *, jclass, jlong originalVa) {
+    const GroupFilterTable * const pOriginal
+            = reinterpret_cast<GroupFilterTable *> (originalVa);
+    GroupFilterTable * const pResult = new GroupFilterTable(*pOriginal);
+    TRACE_NEW("GroupFilterTable", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_GroupFilterTable
  * Method:    createFilter
  * Signature: (I)J
  */

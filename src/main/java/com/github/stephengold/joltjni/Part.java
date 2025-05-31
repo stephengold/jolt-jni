@@ -43,6 +43,17 @@ public class Part extends BodyCreationSettings {
     Part(JoltPhysicsObject container, long partVa) {
         super(container, partVa);
     }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public Part(Part original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, true);
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -76,6 +87,8 @@ public class Part extends BodyCreationSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long getToParent(long partVa, int ordinal);
 
