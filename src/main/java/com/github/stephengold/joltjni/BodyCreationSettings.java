@@ -148,9 +148,9 @@ public class BodyCreationSettings
     // new methods exposed
 
     /**
-     * Prepare for simulation by cooking the {@code ShapeSettings} attribute
-     * into a shape. After invoking this method, {@code ObjectStream}
-     * serialization is inhibited.
+     * Prepare for simulation by cooking the {@code ShapeSettings} member into a
+     * shape. After invoking this method, {@code ObjectStream} serialization is
+     * inhibited.
      *
      * @return a new object
      */
@@ -164,7 +164,7 @@ public class BodyCreationSettings
 
     /**
      * Alter whether a static body can be converted to kinematic or dynamic.
-     * (native attribute: mAllowDynamicOrKinematic)
+     * (native member: mAllowDynamicOrKinematic)
      *
      * @param setting {@code true} to allow or {@code false} to inhibit
      * (default=false)
@@ -178,7 +178,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the body's degrees of freedom. (native attribute: mAllowedDOFs)
+     * Alter the body's degrees of freedom. (native member: mAllowedDOFs)
      *
      * @param bitmask the desired bitmask (see {@code EAllowedDofs} for
      * semantics, default=All)
@@ -193,7 +193,7 @@ public class BodyCreationSettings
 
     /**
      * Alter whether the created body will be allowed to fall asleep. (native
-     * attribute: mAllowSleeping)
+     * member: mAllowSleeping)
      *
      * @param allow {@code true} to allow, {@code false} to inhibit
      * (default=true)
@@ -207,7 +207,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the angular damping constant. (native attribute: mAngularDamping)
+     * Alter the angular damping constant. (native member: mAngularDamping)
      *
      * @param damping the desired value (in units of per second, &ge;0, &le;1,
      * default=0.05)
@@ -221,8 +221,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the (initial) angular velocity. (native attribute:
-     * mAngularVelocity)
+     * Alter the (initial) angular velocity. (native member: mAngularVelocity)
      *
      * @param omega the desired angular velocity (radians per second in system
      * coordinates, not null, unaffected, default=(0,0,0))
@@ -237,7 +236,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter whether gyroscopic force will be applied. (native attribute:
+     * Alter whether gyroscopic force will be applied. (native member:
      * mApplyGyroscopicForce)
      *
      * @param setting {@code true} to enable the force, or {@code false} to
@@ -252,8 +251,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the collision group to which the body will belong. (native
-     * attribute: mCollisionGroup)
+     * Alter the collision group to which the body will belong. (native member:
+     * mCollisionGroup)
      *
      * @param group the desired group (not null, unaffected)
      * @return the modified settings, for chaining
@@ -268,6 +267,7 @@ public class BodyCreationSettings
 
     /**
      * Alter whether extra effort should be made to remove ghost contacts.
+     * (native member: mEnhancedInternalEdgeRemoval)
      *
      * @param enhance {@code true} for extra effort, {@code false} for ordinary
      * effort (default=false)
@@ -282,7 +282,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the friction ratio. (native attribute: mFriction)
+     * Alter the friction ratio. (native member: mFriction)
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
      * default=0.2)
@@ -296,7 +296,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the gravity multiplier. (native attribute: mGravityFactor)
+     * Alter the gravity multiplier. (native member: mGravityFactor)
      *
      * @param factor the desired multiplier (default=1)
      * @return the modified settings, for chaining
@@ -309,7 +309,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter whether the body will be a sensor. (native attribute: mIsSensor)
+     * Alter whether the body will be a sensor. (native member: mIsSensor)
      *
      * @param setting {@code true} for a sensor, otherwise {@code false}
      * (default=false)
@@ -323,7 +323,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the linear damping constant. (native attribute: mLinearDamping)
+     * Alter the linear damping constant. (native member: mLinearDamping)
      *
      * @param damping the desired value (in units of per second, &ge;0, &le;1,
      * default=0.05)
@@ -337,7 +337,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the (initial) linear velocity. (native attribute: mLinearVelocity)
+     * Alter the (initial) linear velocity. (native member: mLinearVelocity)
      *
      * @param velocity the desired velocity (in system coordinates, not null,
      * unaffected, default=(0,0,0))
@@ -352,7 +352,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the mass-properties override. (native attribute:
+     * Alter the mass-properties override. (native member:
      * mMassPropertiesOverride)
      *
      * @param properties the desired properties (not null, unaffected)
@@ -368,7 +368,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the maximum angular speed. (native attribute: mMaxAngularVelocity)
+     * Alter the maximum angular speed. (native member: mMaxAngularVelocity)
      *
      * @param maxSpeed the desired maximum speed (in radians per second, &ge;0,
      * default=15*pi)
@@ -382,7 +382,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the maximum linear speed. (native attribute: mMaxLinearVelocity)
+     * Alter the maximum linear speed. (native member: mMaxLinearVelocity)
      *
      * @param maxSpeed the desired maximum speed (in meters per second, &ge;0,
      * default=500)
@@ -396,7 +396,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the motion quality. (native attribute: mMotionQuality)
+     * Alter the motion quality. (native member: mMotionQuality)
      *
      * @param motionQuality the desired quality (not null, default=Discrete)
      * @return the modified settings, for chaining
@@ -410,7 +410,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the motion type. (native attribute: mMotionType)
+     * Alter the motion type. (native member: mMotionType)
      *
      * @param motionType the desired type (not null, default=Dynamic)
      * @return the modified settings, for chaining
@@ -424,7 +424,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the object layer. (native attribute: mObjectLayer)
+     * Alter the object layer. (native member: mObjectLayer)
      *
      * @param objLayer the index of the desired object layer (&ge;0,
      * &lt;numObjectLayers, &lt;65536, default=0)
@@ -440,7 +440,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter how the mass-properties override will be used. (native attribute:
+     * Alter how the mass-properties override will be used. (native member:
      * mOverrideMassProperties)
      *
      * @param setting an enum value (not null, default=CalculateMassAndInertia)
@@ -457,7 +457,7 @@ public class BodyCreationSettings
 
     /**
      * Alter the (initial) location of the body's origin (which might not
-     * coincide with its center of mass). (native attribute: mPosition)
+     * coincide with its center of mass). (native member: mPosition)
      *
      * @param xx the desired X coordinate (in system coordinates, default=0)
      * @param yy the desired Y coordinate (in system coordinates, default=0)
@@ -473,7 +473,7 @@ public class BodyCreationSettings
 
     /**
      * Alter the (initial) location of the body's origin (which might not
-     * coincide with its center of mass). (native attribute: mPosition)
+     * coincide with its center of mass). (native member: mPosition)
      *
      * @param location the desired location (in system coordinates, not null,
      * unaffected, default=(0,0,0))
@@ -490,8 +490,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the restitution ratio for collisions. (native attribute:
-     * mRestitution)
+     * Alter the restitution ratio for collisions. (native member: mRestitution)
      *
      * @param restitution the desired ratio (typically &ge;0 and &le;1,
      * default=0)
@@ -505,7 +504,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Alter the (initial) orientation of the body's axes. (native attribute:
+     * Alter the (initial) orientation of the body's axes. (native member:
      * mRotation)
      *
      * @param quat the desired rotation (relative to the system axes, not null,
@@ -581,7 +580,7 @@ public class BodyCreationSettings
 
     /**
      * Test whether a static body can be converted to kinematic or dynamic. The
-     * settings are unaffected. (native attribute: mAllowDynamicOrKinematic)
+     * settings are unaffected. (native member: mAllowDynamicOrKinematic)
      *
      * @return {@code true} if convertible, otherwise {@code false}
      */
@@ -595,7 +594,7 @@ public class BodyCreationSettings
 
     /**
      * Return the body's degrees of freedom. The settings are unaffected.
-     * (native attribute: mAllowedDOFs)
+     * (native member: mAllowedDOFs)
      *
      * @return a bitmask (see {@code EAllowedDofs} for semantics)
      */
@@ -609,7 +608,7 @@ public class BodyCreationSettings
 
     /**
      * Test whether the created body will be allowed to fall asleep. The
-     * settings are unaffected. (native attribute: mAllowSleeping)
+     * settings are unaffected. (native member: mAllowSleeping)
      *
      * @return {@code true} if allowed, otherwise {@code false}
      */
@@ -623,7 +622,7 @@ public class BodyCreationSettings
 
     /**
      * Return the angular damping constant. The settings are unaffected. (native
-     * attribute: mAngularDamping)
+     * member: mAngularDamping)
      *
      * @return the constant (in units of per second, &ge;0, &le;1)
      */
@@ -637,7 +636,7 @@ public class BodyCreationSettings
 
     /**
      * Copy the (initial) angular velocity. The settings are unaffected. (native
-     * attribute: mAngularVelocity)
+     * member: mAngularVelocity)
      *
      * @return a new velocity vector (radians per second in system coordinates)
      */
@@ -654,7 +653,7 @@ public class BodyCreationSettings
 
     /**
      * Test whether the gyroscopic force will be applied. The settings are
-     * unaffected. (native attribute: mApplyGyroscopicForce)
+     * unaffected. (native member: mApplyGyroscopicForce)
      *
      * @return {@code true} if enabled, otherwise {@code false}
      */
@@ -667,8 +666,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Access the collision group to which the body will belong. (native
-     * attribute: mCollisionGroup)
+     * Access the collision group to which the body will belong. (native member:
+     * mCollisionGroup)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -683,7 +682,7 @@ public class BodyCreationSettings
 
     /**
      * Test whether extra effort should be made to remove ghost contacts. The
-     * settings are unaffected.
+     * settings are unaffected. (native member: mEnhancedInternalEdgeRemoval)
      *
      * @return {@code true} for extra effort, otherwise {@code false}
      */
@@ -696,8 +695,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Return the friction ratio. The settings are unaffected. (native
-     * attribute: mFriction)
+     * Return the friction ratio. The settings are unaffected. (native member:
+     * mFriction)
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -710,8 +709,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Return the gravity factor. The settings are unaffected. (native
-     * attribute: mGravityFactor)
+     * Return the gravity factor. The settings are unaffected. (native member:
+     * mGravityFactor)
      *
      * @return the factor
      */
@@ -725,7 +724,7 @@ public class BodyCreationSettings
 
     /**
      * Test whether the body will be a sensor. The settings are unaffected.
-     * (native attribute: mIsSensor)
+     * (native member: mIsSensor)
      *
      * @return {@code true} for a sensor, otherwise {@code false}
      */
@@ -739,7 +738,7 @@ public class BodyCreationSettings
 
     /**
      * Return the linear damping constant. The settings are unaffected. (native
-     * attribute: mLinearDamping)
+     * member: mLinearDamping)
      *
      * @return the constant (in units of per second, &ge;0, &le;1)
      */
@@ -753,7 +752,7 @@ public class BodyCreationSettings
 
     /**
      * Copy the (initial) linear velocity. The settings are unaffected. (native
-     * attribute: mLinearVelocity)
+     * member: mLinearVelocity)
      *
      * @return a new velocity vector (meters per second in system coordinates)
      */
@@ -793,7 +792,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Access the mass-properties override. (native attribute:
+     * Access the mass-properties override. (native member:
      * mMassPropertiesOverride)
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -809,7 +808,7 @@ public class BodyCreationSettings
 
     /**
      * Return the maximum angular speed. The settings are unaffected. (native
-     * attribute: mMaxAngularVelocity)
+     * member: mMaxAngularVelocity)
      *
      * @return the maximum speed (in radians per second)
      */
@@ -823,7 +822,7 @@ public class BodyCreationSettings
 
     /**
      * Return the maximum linear speed. The settings are unaffected. (native
-     * attribute: mMaxLinearVelocity)
+     * member: mMaxLinearVelocity)
      *
      * @return the maximum speed (in meters per second)
      */
@@ -836,8 +835,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Return the motion quality. The settings are unaffected. (native
-     * attribute: mMotionQuality)
+     * Return the motion quality. The settings are unaffected. (native member:
+     * mMotionQuality)
      *
      * @return an enum value (not null)
      */
@@ -851,7 +850,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Return the motion type. The settings are unaffected. (native attribute:
+     * Return the motion type. The settings are unaffected. (native member:
      * mMotionType)
      *
      * @return an enum value (not null)
@@ -867,7 +866,7 @@ public class BodyCreationSettings
 
     /**
      * Return the index of the object layer. The settings are unaffected.
-     * (native attribute: mObjectLayer)
+     * (native member: mObjectLayer)
      *
      * @return the layer index (&ge;0, &lt;numObjectLayers)
      */
@@ -881,7 +880,7 @@ public class BodyCreationSettings
 
     /**
      * Return how the mass-properties override will be used. The settings are
-     * unaffected. (native attribute: mOverrideMassProperties)
+     * unaffected. (native member: mOverrideMassProperties)
      *
      * @return an enum value (not null)
      */
@@ -895,8 +894,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Copy the (initial) location. The settings are unaffected. (native
-     * attribute: mPosition)
+     * Copy the (initial) location. The settings are unaffected. (native member:
+     * mPosition)
      *
      * @return a new location vector (in system coordinates, all components
      * finite)
@@ -920,7 +919,7 @@ public class BodyCreationSettings
 
     /**
      * Return the restitution ratio. The settings are unaffected. (native
-     * attribute: mRestitution)
+     * member: mRestitution)
      *
      * @return the ratio (typically &ge;0 and &le;1)
      */
@@ -934,7 +933,7 @@ public class BodyCreationSettings
 
     /**
      * Copy the (initial) orientation of the body's axes. The settings are
-     * unaffected. (native attribute: mRotation)
+     * unaffected. (native member: mRotation)
      *
      * @return a new rotation quaternion (relative to the system axes)
      */
@@ -997,7 +996,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Write the state of this object to the specified stream.
+     * Write the state of this object to the specified stream. The settings are
+     * unaffected.
      *
      * @param stream where to write objects (not null)
      * @param shapeMap track multiple uses of shapes (may be null)

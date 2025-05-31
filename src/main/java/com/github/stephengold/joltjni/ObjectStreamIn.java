@@ -28,6 +28,7 @@ import com.github.stephengold.joltjni.template.Ref;
  * Utility class for reading Jolt Physics objects from files.
  *
  * @author Stephen Gold sgold@sonic.net
+ * @see com.github.stephengold.joltjni.ObjectStreamOut
  */
 final public class ObjectStreamIn {
     // *************************************************************************
@@ -87,7 +88,6 @@ final public class ObjectStreamIn {
         return result;
     }
 
-    /**
     /**
      * Read a constraint-settings object from the specified stream.
      *

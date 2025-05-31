@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
     }
 
     /**
-     * Instantiate a material.
+     * Instantiate a material with the specified properties.
      *
      * @param name the desired name
      * @param color the desired color (not null, unaffected)

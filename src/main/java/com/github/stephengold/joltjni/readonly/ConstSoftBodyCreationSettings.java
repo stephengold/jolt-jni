@@ -147,7 +147,6 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
     /**
      * Return the user data. The settings are unaffected.
      *
-     *
      * @return the value
      */
     long getUserData();
