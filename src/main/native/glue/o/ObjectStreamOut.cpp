@@ -28,6 +28,7 @@ SOFTWARE.
 #include "Jolt/Physics/Constraints/Constraint.h"
 #include "Jolt/Physics/PhysicsScene.h"
 #include "Jolt/Physics/Ragdoll/Ragdoll.h"
+#include "Jolt/Physics/Vehicle/VehicleController.h"
 #include "auto/com_github_stephengold_joltjni_ObjectStreamOut.h"
 
 using namespace JPH;
@@ -68,6 +69,23 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
     return result;
 }
 
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteGroupFilter
+ * Signature: (JIJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteGroupFilter
+  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong filterVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    const ObjectStream::EStreamType streamType
+            = (ObjectStream::EStreamType) ordinal;
+    const GroupFilter * const pFilter
+            = reinterpret_cast<GroupFilter *> (filterVa);
+    const bool result
+            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pFilter);
+    return result;
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
@@ -100,6 +118,42 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
             = (ObjectStream::EStreamType) ordinal;
     const RagdollSettings * const pSettings
             = reinterpret_cast<RagdollSettings *> (settingsVa);
+    const bool result
+            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteSbcs
+ * Signature: (JIJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteSbcs
+  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    const ObjectStream::EStreamType streamType
+            = (ObjectStream::EStreamType) ordinal;
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (settingsVa);
+    const bool result
+            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteVehicleControllerSettings
+ * Signature: (JIJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteVehicleControllerSettings
+  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    const ObjectStream::EStreamType streamType
+            = (ObjectStream::EStreamType) ordinal;
+    const VehicleControllerSettings * const pSettings
+            = reinterpret_cast<VehicleControllerSettings *> (settingsVa);
     const bool result
             = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
     return result;

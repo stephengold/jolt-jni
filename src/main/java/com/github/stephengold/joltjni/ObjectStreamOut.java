@@ -24,6 +24,9 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
+import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstVehicleControllerSettings;
 import com.github.stephengold.joltjni.std.StringStream;
 
 /**
@@ -85,6 +88,61 @@ final public class ObjectStreamOut {
     }
 
     /**
+     * Write the specified group filter to the specified stream.
+     *
+     * @param stream the stream to write to (not null)
+     * @param streamType the type of stream (not null)
+     * @param filter the filter to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(StringStream stream,
+            EStreamType streamType, ConstGroupFilter filter) {
+        long streamVa = stream.va();
+        int ordinal = streamType.ordinal();
+        long filterVa = filter.targetVa();
+        boolean result = sWriteGroupFilter(streamVa, ordinal, filterVa);
+
+        return result;
+    }
+
+    /**
+     * Write the specified soft-body creation settings to the specified stream.
+     *
+     * @param stream the stream to write to (not null)
+     * @param streamType the type of stream (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(StringStream stream,
+            EStreamType streamType, ConstSoftBodyCreationSettings settings) {
+        long streamVa = stream.va();
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result = sWriteSbcs(streamVa, ordinal, settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Write the specified controller settings to the specified stream.
+     *
+     * @param stream the stream to write to (not null)
+     * @param streamType the type of stream (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(StringStream stream,
+            EStreamType streamType, ConstVehicleControllerSettings settings) {
+        long streamVa = stream.va();
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result = sWriteVehicleControllerSettings(
+                streamVa, ordinal, settingsVa);
+
+        return result;
+    }
+
+    /**
      * Write the specified scene to the specified stream.
      *
      * @param stream the stream to write to (not null)
@@ -128,9 +186,18 @@ final public class ObjectStreamOut {
     native private static boolean sWriteConstraintSettings(
             long streamVa, int ordinal, long settingsVa);
 
+    native private static boolean sWriteGroupFilter(
+            long streamVa, int ordinal, long filterVa);
+
     native private static boolean sWritePhysicsScene(
             long streamVa, int ordinal, long sceneVa);
 
     native private static boolean sWriteRagdollSettings(
+            long streamVa, int ordinal, long settingsVa);
+
+    native private static boolean sWriteSbcs(
+            long streamVa, int ordinal, long settingsVa);
+
+    native private static boolean sWriteVehicleControllerSettings(
             long streamVa, int ordinal, long settingsVa);
 }
