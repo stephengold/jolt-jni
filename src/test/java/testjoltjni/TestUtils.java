@@ -23,6 +23,7 @@ package testjoltjni;
 
 import com.github.stephengold.joltjni.BroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.BroadPhaseLayerInterfaceTable;
+import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JoltPhysicsObject;
 import com.github.stephengold.joltjni.MassProperties;
@@ -39,6 +40,7 @@ import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
+import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
@@ -238,6 +240,13 @@ final public class TestUtils {
     public static void assertCollisionGroup(
             ConstCollisionGroup expected, ConstCollisionGroup actual) {
         assertJpo(expected, actual);
+
+        ConstGroupFilter expectedFilter = expected.getGroupFilter();
+        if (expectedFilter == null) {
+            Assert.assertNull(actual.getGroupFilter());
+        } else {
+            assertGroupFilter(expectedFilter, actual.getGroupFilter());
+        }
 
         Assert.assertEquals(expected.getGroupId(), actual.getGroupId());
         Assert.assertEquals(expected.getSubGroupId(), actual.getSubGroupId());
@@ -510,6 +519,28 @@ final public class TestUtils {
             Vec3Arg expected, Vec3Arg actual, float tolerance) {
         assertEquals(expected.getX(), expected.getY(), expected.getZ(),
                 actual, tolerance);
+    }
+
+    /**
+     * Verify properties of a group filter, other than its virtual address.
+     *
+     * @param expected the expected group (not {@code null}, unaffected)
+     * @param actual the actual group (not {@code null}, unaffected)
+     */
+    public static void assertGroupFilter(
+            ConstGroupFilter expected, ConstGroupFilter actual) {
+        assertJpo(expected, actual);
+
+        ConstCollisionGroup g0 = new CollisionGroup();
+        Assert.assertEquals(
+                expected.canCollide(g0, g0), actual.canCollide(g0, g0));
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        expected.saveBinaryState(new StreamOutWrapper(stream1));
+        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        Assert.assertEquals(stream1.str(), stream2.str());
     }
 
     /**
