@@ -62,6 +62,18 @@ public class VehicleConstraintSettings
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the material to copy (not {@code null}, unaffected)
+     */
+    public VehicleConstraintSettings(ConstVehicleConstraintSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EConstraintSubType.Vehicle);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -302,6 +314,8 @@ public class VehicleConstraintSettings
 
     native private static void addWheel(
             long constraintSettingsVa, long wheelSettingsVa);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

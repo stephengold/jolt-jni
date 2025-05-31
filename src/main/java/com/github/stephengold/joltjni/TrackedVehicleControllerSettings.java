@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,6 +37,18 @@ public class TrackedVehicleControllerSettings
     public TrackedVehicleControllerSettings() {
         long settingsVa = createDefault();
         setVirtualAddress(settingsVa); // not owner due to ref counting
+    }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public TrackedVehicleControllerSettings(
+            TrackedVehicleControllerSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed
@@ -81,6 +93,8 @@ public class TrackedVehicleControllerSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long vehicleSettingsVa);
 
     native private static long createDefault();
 

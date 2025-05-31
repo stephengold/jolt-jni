@@ -41,6 +41,17 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
     }
 
     /**
+     * Instantiate a copy of the specified material.
+     *
+     * @param original the material to copy (not {@code null}, unaffected)
+     */
+    public PhysicsMaterialSimple(PhysicsMaterialSimple original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+    }
+
+    /**
      * Instantiate a material with the specified properties.
      *
      * @param name the desired name
@@ -55,6 +66,8 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
     // native private methods
 
     native private static long create(String name, int colorInt);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 }

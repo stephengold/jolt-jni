@@ -40,6 +40,18 @@ public class WheeledVehicleControllerSettings
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public WheeledVehicleControllerSettings(
+            WheeledVehicleControllerSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+    }
+
+    /**
      * Instantiate settings with no native object assigned.
      *
      * @param dummy unused argument to distinguish from the zero-arg constructor
@@ -132,6 +144,8 @@ public class WheeledVehicleControllerSettings
     // native private methods
 
     native private static int countDifferentials(long vehicleSettingsVa);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 
