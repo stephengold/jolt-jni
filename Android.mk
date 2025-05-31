@@ -149,6 +149,7 @@ $(N)/glue/h/HingeConstraintSettings.cpp \
 $(N)/glue/i/IdToGroupFilterMap.cpp \
 $(N)/glue/i/IdToMaterialMap.cpp \
 $(N)/glue/i/IdToShapeMap.cpp \
+$(N)/glue/i/IdToSharedSettingsMap.cpp \
 $(N)/glue/i/IgnoreMultipleBodiesFilter.cpp \
 $(N)/glue/i/IndexedTriangle.cpp \
 $(N)/glue/i/IndexedTriangleList.cpp \
