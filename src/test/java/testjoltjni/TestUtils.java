@@ -39,6 +39,7 @@ import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
+import com.github.stephengold.joltjni.readonly.ConstColor;
 import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
@@ -63,6 +64,7 @@ import electrostatic4j.snaploader.platform.util.NativeVariant;
 import java.io.File;
 import java.io.PrintStream;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -284,6 +286,18 @@ final public class TestUtils {
     }
 
     /**
+     * Verify the equivalence of the specified colors.
+     *
+     * @param expected the expected value (not {@code null}, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
+     */
+    public static void assertEquals(
+            ConstColor expected, ConstColor actual) {
+        assertEquals(expected.getR(), expected.getG(), expected.getB(),
+                expected.getA(), actual);
+    }
+
+    /**
      * Verify the elements of a single-precision matrix to within some
      * tolerance.
      *
@@ -376,6 +390,23 @@ final public class TestUtils {
     }
 
     /**
+     * Verify the components of a color.
+     *
+     * @param r the expected R component
+     * @param g the expected G component
+     * @param b the expected B component
+     * @param a the expected A component
+     * @param actual the color to test (not {@code null}, unaffected)
+     */
+    public static void assertEquals(
+            byte r, byte g, byte b, byte a, ConstColor actual) {
+        Assert.assertEquals("r component", r, actual.getR());
+        Assert.assertEquals("h component", g, actual.getG());
+        Assert.assertEquals("b component", b, actual.getB());
+        Assert.assertEquals("a component", a, actual.getA());
+    }
+
+    /**
      * Verify the components of a quaternion to within some tolerance.
      *
      * @param x the expected X component
@@ -438,6 +469,27 @@ final public class TestUtils {
         Assert.assertEquals(numFloats, actual.capacity());
         for (int i = 0; i < numFloats; ++i) {
             Assert.assertEquals(expected.get(i), actual.get(i), 0f);
+        }
+
+        Assert.assertEquals(expected.hasArray(), actual.hasArray());
+        Assert.assertEquals(expected.isDirect(), actual.isDirect());
+        Assert.assertEquals(expected.limit(), actual.limit());
+        Assert.assertEquals(expected.mark(), actual.mark());
+        Assert.assertEquals(expected.order(), actual.order());
+        Assert.assertEquals(expected.position(), actual.position());
+    }
+
+    /**
+     * Verify the equivalence of the specified int buffers.
+     *
+     * @param expected the expected buffer (not {@code null}, unaffected)
+     * @param actual the actual buffer (not {@code null}, unaffected)
+     */
+    public static void assertEquals(IntBuffer expected, IntBuffer actual) {
+        int numInts = expected.capacity();
+        Assert.assertEquals(numInts, actual.capacity());
+        for (int i = 0; i < numInts; ++i) {
+            Assert.assertEquals(expected.get(i), actual.get(i));
         }
 
         Assert.assertEquals(expected.hasArray(), actual.hasArray());
