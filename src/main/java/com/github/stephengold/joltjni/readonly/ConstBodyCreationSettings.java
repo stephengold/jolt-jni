@@ -24,10 +24,14 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
+import com.github.stephengold.joltjni.streamutils.GroupFilterToIdMap;
+import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
+import com.github.stephengold.joltjni.streamutils.ShapeToIdMap;
 
 /**
  * Read-only access to a {@code BodyCreationSettings} object. (native type:
@@ -237,4 +241,16 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * @return {@code true} if calculated, otherwise {@code false}
      */
     boolean hasMassProperties();
+
+    /**
+     * Write the state of this object to the specified stream. The settings are
+     * unaffected.
+     *
+     * @param stream where to write objects (not null)
+     * @param shapeMap track multiple uses of shapes (may be null)
+     * @param materialMap track multiple uses of physics materials (may be null)
+     * @param filterMap track multiple uses of group filters (may be null)
+     */
+    void saveWithChildren(StreamOut stream, ShapeToIdMap shapeMap,
+            MaterialToIdMap materialMap, GroupFilterToIdMap filterMap);
 }
