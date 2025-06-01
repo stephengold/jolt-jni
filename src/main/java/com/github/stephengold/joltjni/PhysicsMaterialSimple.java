@@ -41,6 +41,17 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
     }
 
     /**
+     * Instantiate a scene with the specified native object assigned but not
+     * owned.
+     *
+     * @param materialVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    PhysicsMaterialSimple(long materialVa) {
+        super(materialVa);
+    }
+
+    /**
      * Instantiate a copy of the specified material.
      *
      * @param original the material to copy (not {@code null}, unaffected)

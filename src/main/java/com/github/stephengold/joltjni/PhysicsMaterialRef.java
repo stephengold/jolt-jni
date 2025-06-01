@@ -54,6 +54,21 @@ final public class PhysicsMaterialRef extends Ref {
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Temporarily access the referenced material, assuming it is a
+     * {@code PhysicsMaterialSimple}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public PhysicsMaterialSimple getPtrAsSimple() {
+        long materialVa = targetVa();
+        PhysicsMaterialSimple result = new PhysicsMaterialSimple(materialVa);
+
+        return result;
+    }
+    // *************************************************************************
     // Ref methods
 
     /**
