@@ -42,7 +42,37 @@ extern bool gTraceAllocations;
 #define TRACE_NEW(className, pointer)
 #define TRACE_DELETE(className, pointer)
 #endif
-
+/*
+ * Generate the body of a static createCopy() method
+ * to implement a copy constructor:
+ */
+#define BODYOF_CREATE_COPY(className) \
+  (JNIEnv *, jclass, jlong originalVa) { \
+    const className * const pOriginal  = reinterpret_cast<className *> (originalVa); \
+    className * const pResult = new className(*pOriginal); \
+    TRACE_NEW(#className, pResult) \
+    return reinterpret_cast<jlong> (pResult); \
+}
+/*
+ * Generate the body of a static createDefault() method
+ * to implement a no-arg constructor:
+ */
+#define BODYOF_CREATE_DEFAULT(className) \
+  (JNIEnv *, jclass) { \
+    className * const pResult = new className(); \
+    TRACE_NEW(#className, pResult) \
+    return reinterpret_cast<jlong> (pResult); \
+}
+/*
+ * Generate the body of a static free() method
+ * to implement a no-arg constructor:
+ */
+#define BODYOF_FREE(className) \
+  (JNIEnv *, jclass, jlong va) { \
+    className * const pObject = reinterpret_cast<className *> (va); \
+    TRACE_DELETE(#className, pObject) \
+    delete pObject; \
+}
 /*
  * Implement 5 methods associated with the
  * com.github.stephengold.templace.Ref class:
