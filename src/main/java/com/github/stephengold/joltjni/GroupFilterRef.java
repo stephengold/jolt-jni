@@ -54,6 +54,21 @@ final public class GroupFilterRef extends Ref {
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Temporarily access the referenced filter, assuming it is a
+     * {@code GroupFilterTable}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public GroupFilterTable getPtrAsTable() {
+        long materialVa = targetVa();
+        GroupFilterTable result = new GroupFilterTable(materialVa);
+
+        return result;
+    }
+    // *************************************************************************
     // Ref methods
 
     /**
