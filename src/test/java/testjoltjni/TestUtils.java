@@ -115,8 +115,9 @@ final public class TestUtils {
     // new methods exposed
 
     /**
-     * Verify the properties of an axis-aligned bounding box, other than its
-     * virtual address.
+     * Verify the equivalence of the specified axis-aligned bounding boxes to
+     * within some tolerance, ignoring their types, virtual addresses, and
+     * ownership.
      *
      * @param expected the expected bounds (not {@code null}, unaffected)
      * @param actual the actual bounds (not {@code null}, unaffected)
@@ -142,8 +143,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the properties of an anti-roll bar, other than its virtual
-     * address.
+     * Verify the equivalence of the specified anti-roll bars, ignoring their
+     * types, virtual addresses, and ownership.
      *
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
@@ -165,8 +166,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the properties of a body-creation settings object, other than its
-     * virtual address.
+     * Verify the equivalence of the specified body-creation settings, ignoring
+     * their types, virtual addresses, and ownership.
      *
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
@@ -234,7 +235,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify properties of a collision group, other than its virtual address.
+     * Verify the equivalence of the specified collision groups, ignoring their
+     * types, virtual addresses, and ownership.
      *
      * @param expected the expected group (not {@code null}, unaffected)
      * @param actual the actual group (not {@code null}, unaffected)
@@ -255,8 +257,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify properties of a constraint-settings object, other than its virtual
-     * address.
+     * Verify the equivalence of the specified constraint settings, ignoring
+     * their types, virtual addresses, and ownership.
      *
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
@@ -317,7 +319,7 @@ final public class TestUtils {
      * @param e31 the expected element in row 3 of column 1
      * @param e32 the expected element in row 3 of column 2
      * @param e33 the expected element in row 3 of column 3
-     * @param actual the matrix to test (not null, unaffected)
+     * @param actual the matrix to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each element (&ge;0)
      */
     public static void assertEquals(float e00, float e01, float e02, float e03,
@@ -363,7 +365,7 @@ final public class TestUtils {
      * @param e31 the expected element in row 3 of column 1
      * @param e32 the expected element in row 3 of column 2
      * @param e33 the expected element in row 3 of column 3
-     * @param actual the matrix to test (not null, unaffected)
+     * @param actual the matrix to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each element (&ge;0)
      */
     public static void assertEquals(float e00, float e01, float e02, float e03,
@@ -413,7 +415,7 @@ final public class TestUtils {
      * @param y the expected Y component
      * @param z the expected Z component
      * @param w the expected W component
-     * @param actual the Quaternion to test (not null, unaffected)
+     * @param actual the Quaternion to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(float x, float y, float z, float w,
@@ -431,7 +433,7 @@ final public class TestUtils {
      * @param x the expected X component
      * @param y the expected Y component
      * @param z the expected Z component
-     * @param actual the vector to test (not null, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(
@@ -448,7 +450,7 @@ final public class TestUtils {
      * @param x the expected X component
      * @param y the expected Y component
      * @param z the expected Z component
-     * @param actual the vector to test (not null, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(
@@ -459,7 +461,7 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the public properties of a FloatBuffer.
+     * Verify the equivalence of the specified float buffers.
      *
      * @param expected the expected buffer (not {@code null}, unaffected)
      * @param actual the actual buffer (not {@code null}, unaffected)
@@ -507,7 +509,7 @@ final public class TestUtils {
      * @param y the expected Y component
      * @param z the expected Z component
      * @param w the expected W component
-     * @param actual the vector to test (not null, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
      */
     public static void assertEquals(
             int x, int y, int z, int w, UVec4Arg actual) {
@@ -518,10 +520,11 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the equality of 2 matrices to within some tolerance.
+     * Verify the equivalence of the specified matrices to within some
+     * tolerance, ignoring their virtual addresses and ownership.
      *
-     * @param expected the expected value (not null, unaffected)
-     * @param actual the vector to test (not null, unaffected)
+     * @param expected the expected value (not {@code null}, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(
@@ -536,10 +539,11 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the equality of 2 quaternions to within some tolerance.
+     * Verify the equivalence of the specified quaternions to within some
+     * tolerance.
      *
-     * @param expected the expected value (not null, unaffected)
-     * @param actual the vector to test (not null, unaffected)
+     * @param expected the expected value (not {@code null}, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(
@@ -549,10 +553,11 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the equality of 2 location vectors to within some tolerance.
+     * Verify the equivalence of the specified location vectors to within some
+     * tolerance.
      *
-     * @param expected the expected value (not null, unaffected)
-     * @param actual the vector to test (not null, unaffected)
+     * @param expected the expected value (not {@code null}, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(
@@ -562,11 +567,11 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the equality of 2 single-precision vectors to within some
-     * tolerance.
+     * Verify the equivalence of the specified single-precision vectors to
+     * within some tolerance.
      *
-     * @param expected the expected value (not null, unaffected)
-     * @param actual the vector to test (not null, unaffected)
+     * @param expected the expected value (not {@code null}, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(
@@ -576,10 +581,11 @@ final public class TestUtils {
     }
 
     /**
-     * Verify properties of a group filter, other than its virtual address.
+     * Verify the equivalence of the specified group filters, ignoring their
+     * types, virtual addresses, and ownership.
      *
-     * @param expected the expected group (not {@code null}, unaffected)
-     * @param actual the actual group (not {@code null}, unaffected)
+     * @param expected the expected filter (not {@code null}, unaffected)
+     * @param actual the actual filter (not {@code null}, unaffected)
      */
     public static void assertGroupFilter(
             ConstGroupFilter expected, ConstGroupFilter actual) {
@@ -598,8 +604,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the properties of a physics object, other than its virtual
-     * address.
+     * Verify the equivalence of the specified physics objects, ignoring their
+     * types, virtual addresses, and ownership.
      *
      * @param expected the expected object (not {@code null}, unaffected)
      * @param actual the actual object (not {@code null}, unaffected)
@@ -614,8 +620,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the properties of a mass-properties object, other than its virtual
-     * address.
+     * Verify the equivalence of the specified mass properties, ignoring their
+     * types, virtual addresses, and ownership.
      *
      * @param expected the expected properties (not {@code null}, unaffected)
      * @param actual the actual properties (not {@code null}, unaffected)
@@ -629,7 +635,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the properties of a shape, other than its virtual address.
+     * Verify the equivalence of the specified shapes, ignoring their virtual
+     * addresses and ownership.
      *
      * @param expected the expected shape (not {@code null}, unaffected)
      * @param actual the actual shape (not {@code null}, unaffected)
@@ -677,8 +684,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the properties of a shape-settings object, other than its virtual
-     * address.
+     * Verify the equivalence of the specified shape settings, ignoring their
+     * types, virtual addresses, and ownership.
      *
      * @param expected the expected shape (not {@code null}, unaffected)
      * @param actual the actual shape (not {@code null}, unaffected)
@@ -689,8 +696,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the properties of a spring-settings object, other than its virtual
-     * address.
+     * Verify the equivalence of the specified spring settings, ignoring their
+     * types, virtual addresses, and ownership.
      *
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
@@ -714,8 +721,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the properties of a vehicle-constraint settings object, other than
-     * its virtual address.
+     * Verify the equivalence of the specified vehicle-constraint settings,
+     * ignoring their types, virtual addresses, and ownership.
      *
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
@@ -748,8 +755,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the properties of a vehicle-controller settings object, other than
-     * its virtual address.
+     * Verify the equivalence of the specified vehicle-controller settings,
+     * ignoring their types, virtual addresses, and ownership.
      *
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
@@ -768,8 +775,8 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the properties of a wheel-settings object, other than its virtual
-     * address.
+     * Verify the equivalence of the specified wheel settings, ignoring their
+     * types, virtual addresses, and ownership.
      *
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
@@ -820,7 +827,7 @@ final public class TestUtils {
     /**
      * Clean up the specified {@code PhysicsSystem}.
      *
-     * @param physicsSystem the system to clean up (not null)
+     * @param physicsSystem the system to clean up (not {@code null})
      */
     public static void cleanupPhysicsSystem(PhysicsSystem physicsSystem) {
         ConstBroadPhaseLayerInterface mapObj2Bp
@@ -1077,7 +1084,7 @@ final public class TestUtils {
      * Print basic library information to the specified stream during
      * initialization.
      *
-     * @param printStream the stream to print to (not null)
+     * @param printStream the stream to print to (not {@code null})
      */
     public static void printLibraryInfo(PrintStream printStream) {
         printStream.print("Jolt JNI version ");
@@ -1103,7 +1110,7 @@ final public class TestUtils {
      * However, if freeing is automated, {@code close()} is neither invoked nor
      * tested.
      *
-     * @param objects the objects to test (not null)
+     * @param objects the objects to test (not {@code null})
      */
     public static void testClose(ConstJoltPhysicsObject... objects) {
         if (!automateFreeing) {
@@ -1124,8 +1131,8 @@ final public class TestUtils {
     /**
      * Convert the first character of the specified text to lower case.
      *
-     * @param input the input text to convert (not null)
-     * @return the converted text (not null)
+     * @param input the input text to convert (not {@code null})
+     * @return the converted text (not {@code null})
      */
     private static String firstToLower(String input) {
         String result = input;

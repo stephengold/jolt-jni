@@ -106,7 +106,7 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
     RVec3 getPosition();
 
     /**
-     * Return the pressure. The settings are unaffected.
+     * Return the internal pressure. The settings are unaffected.
      *
      * @return the pressure
      */

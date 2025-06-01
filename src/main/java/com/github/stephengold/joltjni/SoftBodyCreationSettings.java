@@ -257,7 +257,7 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Alter the pressure. (native member: mPressure)
+     * Alter the internal pressure. (native member: mPressure)
      *
      * @param pressure the desired pressure (default=0)
      * @return the modified settings, for chaining
@@ -509,8 +509,8 @@ public class SoftBodyCreationSettings
     }
 
     /**
-     * Return the pressure. The settings are unaffected. (native member:
-     * mPressure)
+     * Return the internal pressure. The settings are unaffected. (native
+     * member: mPressure)
      *
      * @return the pressure
      */

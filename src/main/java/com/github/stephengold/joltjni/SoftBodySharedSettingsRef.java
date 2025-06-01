@@ -86,7 +86,8 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
-     * Append the specified inverse-bind matrix.
+     * Append the specified inverse-bind matrix. (native property:
+     * mInvBindMatrices)
      *
      * @param invBind the matrix to add (not null)
      */
@@ -97,7 +98,8 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
-     * Add the specified skinning constraint.
+     * Append the specified skinning constraint. (native property:
+     * mSkinnedConstraints)
      *
      * @param skinned the constraint to add (not null)
      */
@@ -108,7 +110,7 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
-     * Add the specified vertex.
+     * Add the specified vertex. (native attribute: mVertices)
      *
      * @param vertex the vertex to add (not null, unaffected)
      */
@@ -224,7 +226,8 @@ final public class SoftBodySharedSettingsRef
     // ConstSoftBodySharedSettings methods
 
     /**
-     * Count the edge constraints. The settings are unaffected.
+     * Count the edge constraints. The settings are unaffected. (native
+     * attribute: mEdgeConstraints)
      *
      * @return the count (&ge;0)
      */
@@ -263,7 +266,8 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
-     * Count the vertices. The settings are unaffected.
+     * Count the vertices. The settings are unaffected. (native attribute:
+     * mVertices)
      *
      * @return the count (&ge;0)
      */
@@ -276,7 +280,8 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
-     * Count the volume constraints. The settings are unaffected.
+     * Count the volume constraints. The settings are unaffected. (native
+     * attribute: mVolumeConstraints)
      *
      * @return the count (&ge;0)
      */

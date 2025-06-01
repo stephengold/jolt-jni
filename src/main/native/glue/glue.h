@@ -43,6 +43,10 @@ extern bool gTraceAllocations;
 #define TRACE_DELETE(className, pointer)
 #endif
 
+/*
+ * Implement 5 methods associated with the
+ * com.github.stephengold.templace.Ref class:
+ */
 #define IMPLEMENT_REF(className, copyName, createName, freeName, getPtrName, toRefCName) \
   JNIEXPORT jlong JNICALL copyName(JNIEnv *, jclass, jlong refVa) { \
     Ref<className> * const pRef = reinterpret_cast<Ref<className> *> (refVa); \
@@ -71,7 +75,10 @@ extern bool gTraceAllocations;
     TRACE_NEW("RefConst<" #className ">", pResult) \
     return reinterpret_cast<jlong> (pResult); \
   }
-
+/*
+ * Implement 4 methods associated with the
+ * com.github.stephengold.templace.Result class:
+ */
 #define IMPLEMENT_RESULT(className, freeName, getErrorName, hasErrorName, isValidName) \
   JNIEXPORT void JNICALL freeName(JNIEnv *, jclass, jlong resultVa) { \
     Result<className> * const pResult = reinterpret_cast<Result<className> *> (resultVa); \
