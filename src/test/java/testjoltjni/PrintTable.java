@@ -103,6 +103,26 @@ final public class PrintTable {
     }
 
     /**
+     * Test whether a specific webpage exists in the Javadoc site for Jolt JNI.
+     *
+     * @param className the top-level class name to search for (not null)
+     * @return {@code true} if the URL returns {@code HTTP_OK}, otherwise
+     * {@code false}
+     * @throws IOException from HttpURLConnection
+     */
+    private static boolean doesJavadocExist(String className)
+            throws IOException {
+        String javadocString = String.format(
+                "https://stephengold.github.io/jolt-jni-docs/javadoc/latest/"
+                + "com.github.stephengold.joltjni/"
+                + "com/github/stephengold/joltjni/%s.html", className);
+        URL javadocUrl = new URL(javadocString);
+        boolean result = doesPageExist(javadocUrl);
+
+        return result;
+    }
+
+    /**
      * Test whether a page exists at the specified URL.
      *
      * @param url the URL to test (not null)
@@ -199,6 +219,12 @@ final public class PrintTable {
                     .replaceAll("Tv", "TV")
                     .replaceAll("Wv", "WV");
 
+            // Access the Javadoc site for Jolt JNI via HTTPS:
+            if (!doesJavadocExist(basicJavaClass)) {
+                System.out.println(" no Javadoc found for " + basicJavaClass);
+                continue;
+            }
+
             // Access the Doxygen site for Jolt Physics via HTTPS:
             if (doesIdExist("class", cppId)) {
                 stream.printf("%n|{url-jolt}%s.html[JPH::%s]%n",
@@ -221,22 +247,24 @@ final public class PrintTable {
                     basicJavaClass, basicJavaClass);
 
             String ro1 = "Const" + basicJavaClass;
-            if (readOnlyNames.contains(ro1)) {
+            if (readOnlyNames.contains(ro1)
+                    && doesJavadocExist("readonly/" + ro1)) {
                 stream.printf(" +%n {url-api}/readonly/%s.html[%s]", ro1, ro1);
             }
 
             String ro2 = basicJavaClass + "Arg";
-            if (readOnlyNames.contains(ro2)) {
+            if (readOnlyNames.contains(ro2)
+                    && doesJavadocExist("readonly/" + ro2)) {
                 stream.printf(" +%n {url-api}/readonly/%s.html[%s]", ro2, ro2);
             }
 
             String ref = basicJavaClass + "Ref";
-            if (refClasses.contains(ref)) {
+            if (refClasses.contains(ref) && doesJavadocExist(ref)) {
                 stream.printf(" +%n {url-api}/%s.html[%s]", ref, ref);
             }
 
             String refc = basicJavaClass + "RefC";
-            if (refClasses.contains(refc)) {
+            if (refClasses.contains(refc) && doesJavadocExist(refc)) {
                 stream.printf(" +%n {url-api}/%s.html[%s]", refc, refc);
             }
             stream.println();
