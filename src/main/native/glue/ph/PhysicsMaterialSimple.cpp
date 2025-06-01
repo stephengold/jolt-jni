@@ -53,13 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialSimpl
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialSimple_createCopy
-  (JNIEnv *, jclass, jlong originalVa) {
-    const PhysicsMaterialSimple * const pOriginal
-            = reinterpret_cast<PhysicsMaterialSimple *> (originalVa);
-    PhysicsMaterialSimple * const pCopy = new PhysicsMaterialSimple(); // TODO *pOriginal);
-    TRACE_NEW("PhysicsMaterialSimple", pCopy)
-    return reinterpret_cast<jlong> (pCopy);
-}
+  BODYOF_CREATE_COPY(PhysicsMaterialSimple)
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterialSimple
