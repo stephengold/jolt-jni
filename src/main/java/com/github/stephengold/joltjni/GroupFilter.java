@@ -54,6 +54,22 @@ public class GroupFilter
         super(filterVa);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Read a filter from the specified binary stream.
+     *
+     * @param stream where to read objects (not null)
+     * @return a new object
+     */
+    public static GroupFilterResult sRestoreFromBinaryState(StreamIn stream) {
+        long streamVa = stream.va();
+        long resultVa = sRestoreFromBinaryState(streamVa);
+        GroupFilterResult result = new GroupFilterResult(resultVa, true);
+
+        return result;
+    }
+    // *************************************************************************
     // ConstGroupFilter methods
 
     /**
@@ -136,6 +152,8 @@ public class GroupFilter
     native private static void saveBinaryState(long filterVa, long streamVa);
 
     native private static void setEmbedded(long filterVa);
+
+    native private static long sRestoreFromBinaryState(long filterVa);
 
     native static long toRef(long filterVa);
 }

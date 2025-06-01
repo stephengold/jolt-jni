@@ -95,6 +95,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_GroupFilter_setEmbedd
 
 /*
  * Class:     com_github_stephengold_joltjni_GroupFilter
+ * Method:    sRestoreFromBinaryState
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GroupFilter_sRestoreFromBinaryState
+  (JNIEnv *, jclass, jlong streamVa) {
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    Result<Ref<GroupFilter>> * const pResult = new Result<Ref<GroupFilter>>();
+    TRACE_NEW("Result<Ref<GroupFilter>>", pResult);
+    *pResult = GroupFilter::sRestoreFromBinaryState(*pStream);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_GroupFilter
  * Method:    toRef
  * Signature: (J)J
  */
