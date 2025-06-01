@@ -474,6 +474,8 @@ final public class TestUtils {
      */
     public static void assertEquals(
             Mat44Arg expected, Mat44Arg actual, float tolerance) {
+        assertJpo(expected, actual);
+
         assertEquals(expected.getAxisX(), actual.getAxisX(), tolerance);
         assertEquals(expected.getAxisY(), actual.getAxisY(), tolerance);
         assertEquals(expected.getAxisZ(), actual.getAxisZ(), tolerance);
