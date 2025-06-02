@@ -48,12 +48,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_assign
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_createCopy
-  (JNIEnv *, jclass, jlong originalVa) {
-    const RMat44 * const pOriginal = reinterpret_cast<RMat44 *> (originalVa);
-    RMat44 * const pResult = new RMat44(*pOriginal);
-    TRACE_NEW("RMat44", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_COPY(RMat44)
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44

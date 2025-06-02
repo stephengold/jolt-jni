@@ -36,13 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleAntiRollBar_createCopy
-  (JNIEnv *, jclass, jlong originalVa) {
-    const VehicleAntiRollBar * const pOriginal
-            = reinterpret_cast<VehicleAntiRollBar *> (originalVa);
-    VehicleAntiRollBar * const pCopy = new VehicleAntiRollBar(*pOriginal);
-    TRACE_NEW("VehicleAntiRollBar", pCopy)
-    return reinterpret_cast<jlong> (pCopy);
-}
+  BODYOF_CREATE_COPY(VehicleAntiRollBar)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleAntiRollBar

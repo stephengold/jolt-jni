@@ -51,14 +51,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControl
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_createCopy
-  (JNIEnv *, jclass, jlong originalVa) {
-    const WheeledVehicleControllerSettings * const pOriginal
-            = reinterpret_cast<WheeledVehicleControllerSettings *> (originalVa);
-    WheeledVehicleControllerSettings * const pCopy
-            = new WheeledVehicleControllerSettings(*pOriginal);
-    TRACE_NEW("WheeledVehicleControllerSettings", pCopy)
-    return reinterpret_cast<jlong> (pCopy);
-}
+  BODYOF_CREATE_COPY(WheeledVehicleControllerSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_WheeledVehicleControllerSettings

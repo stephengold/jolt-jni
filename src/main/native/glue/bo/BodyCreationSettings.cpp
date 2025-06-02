@@ -51,13 +51,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_createCopy
-  (JNIEnv *, jclass, jlong originalVa) {
-    const BodyCreationSettings * const pOriginal
-            = reinterpret_cast<BodyCreationSettings *> (originalVa);
-    BodyCreationSettings * const pResult = new BodyCreationSettings(*pOriginal);
-    TRACE_NEW("BodyCreationSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_COPY(BodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings

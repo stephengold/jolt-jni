@@ -36,14 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_createCopy
-  (JNIEnv *, jclass, jlong originalVa) {
-    const SoftBodyCreationSettings * const pOriginal
-            = reinterpret_cast<SoftBodyCreationSettings *> (originalVa);
-    SoftBodyCreationSettings * const pCopy
-            = new SoftBodyCreationSettings(*pOriginal);
-    TRACE_NEW("SoftBodyCreationSettings", pCopy)
-    return reinterpret_cast<jlong> (pCopy);
-}
+  BODYOF_CREATE_COPY(SoftBodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings

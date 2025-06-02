@@ -51,13 +51,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSett
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_createCopy
-  (JNIEnv *, jclass, jlong originalVa) {
-    const VehicleConstraintSettings * const pOriginal
-            = reinterpret_cast<VehicleConstraintSettings *> (originalVa);
-    VehicleConstraintSettings * const pResult = new VehicleConstraintSettings(*pOriginal);
-    TRACE_NEW("VehicleConstraintSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_COPY(VehicleConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings

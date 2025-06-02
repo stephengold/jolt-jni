@@ -38,14 +38,7 @@ extern uint64 cstMask;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Part_createCopy
-  (JNIEnv *pEnv, jclass, jlong originalVa) {
-    const RagdollSettings::Part * const pOriginal
-            = reinterpret_cast<RagdollSettings::Part *> (originalVa);
-    RagdollSettings::Part * const pCopy
-            = new RagdollSettings::Part(*pOriginal);
-    TRACE_NEW("RagdollSettings::Part", pCopy)
-    return reinterpret_cast<jlong> (pCopy);
-}
+  BODYOF_CREATE_COPY(RagdollSettings::Part)
 
 /*
  * Class:     com_github_stephengold_joltjni_Part

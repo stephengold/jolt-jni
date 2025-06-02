@@ -70,13 +70,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_calculat
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_createCopy
-  (JNIEnv *, jclass, jlong originalVa) {
-    const SkeletonPose * const pOriginal
-            = reinterpret_cast<SkeletonPose *> (originalVa);
-    SkeletonPose * const pResult = new SkeletonPose(*pOriginal);
-    TRACE_NEW("SkeletonPose", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_COPY(SkeletonPose)
 
 /*
  * Class:     com_github_stephengold_joltjni_SkeletonPose

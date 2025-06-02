@@ -57,14 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSett
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_createCopy
-  (JNIEnv *, jclass, jlong originalVa) {
-    const CharacterVirtualSettings * const pOriginal
-            = reinterpret_cast<CharacterVirtualSettings *> (originalVa);
-    CharacterVirtualSettings * const pResult
-            = new CharacterVirtualSettings(*pOriginal);
-    TRACE_NEW("CharacterVirtualSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_COPY(CharacterVirtualSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
