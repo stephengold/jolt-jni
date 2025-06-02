@@ -26,6 +26,12 @@ import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import com.github.stephengold.joltjni.streamutils.GroupFilterToIdMap;
+import com.github.stephengold.joltjni.streamutils.IdToGroupFilterMap;
+import com.github.stephengold.joltjni.streamutils.IdToMaterialMap;
+import com.github.stephengold.joltjni.streamutils.IdToSharedSettingsMap;
+import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
+import com.github.stephengold.joltjni.streamutils.SharedSettingsToIdMap;
 
 /**
  * Settings used to create a soft body.
@@ -107,6 +113,18 @@ public class SoftBodyCreationSettings
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Read the state of this object from the specified stream, excluding the
+     * shape and group filter.
+     *
+     * @param stream where to read objects from (not null)
+     */
+    public void restoreBinaryState(StreamIn stream) {
+        long bodySettingsVa = va();
+        long streamVa = stream.va();
+        restoreBinaryState(bodySettingsVa, streamVa);
+    }
 
     /**
      * Alter whether the created body will be allowed to fall asleep. (native
@@ -352,6 +370,29 @@ public class SoftBodyCreationSettings
     public void setVertexRadius(float radius) {
         long settingsVa = va();
         setVertexRadius(settingsVa, radius);
+    }
+
+    /**
+     * Read a settings object from the specified binary stream.
+     *
+     * @param stream where to read objects (not null)
+     * @param settingsMap track multiple uses of shared settings (not null)
+     * @param materialMap track multiple uses of physics materials (not null)
+     * @param filterMap track multiple uses of group filters (not null)
+     * @return a new object
+     */
+    public static SbcsResult sRestoreWithChildren(
+            StreamIn stream, IdToSharedSettingsMap settingsMap,
+            IdToMaterialMap materialMap, IdToGroupFilterMap filterMap) {
+        long streamVa = stream.va();
+        long settingsMapVa = settingsMap.va();
+        long materialMapVa = materialMap.va();
+        long filterMapVa = filterMap.va();
+        long resultVa = sRestoreWithChildren(
+                streamVa, settingsMapVa, materialMapVa, filterMapVa);
+        SbcsResult result = new SbcsResult(resultVa, true);
+
+        return result;
     }
     // *************************************************************************
     // ConstSoftBodyCreationSettings methods
@@ -616,6 +657,42 @@ public class SoftBodyCreationSettings
 
         return result;
     }
+
+    /**
+     * Write the state of this object to the specified stream, excluding the
+     * shared settings, materials, and group filter. The settings are
+     * unaffected.
+     *
+     * @param stream where to write objects (not null)
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long bodySettingsVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(bodySettingsVa, streamVa);
+    }
+
+    /**
+     * Write the state of this object to the specified stream. The settings are
+     * unaffected.
+     *
+     * @param stream where to write objects (not null)
+     * @param sbssMap track multiple uses of shared settings (may be null)
+     * @param materialMap track multiple uses of physics materials (may be null)
+     * @param filterMap track multiple uses of group filters (may be null)
+     */
+    @Override
+    public void saveWithChildren(
+            StreamOut stream, SharedSettingsToIdMap sbssMap,
+            MaterialToIdMap materialMap, GroupFilterToIdMap filterMap) {
+        long bodySettingsVa = va();
+        long streamVa = stream.va();
+        long sbssMapVa = (sbssMap == null) ? 0L : sbssMap.va();
+        long materialMapVa = (materialMap == null) ? 0L : materialMap.va();
+        long filterMapVa = (filterMap == null) ? 0L : filterMap.va();
+        saveWithChildren(bodySettingsVa, streamVa, sbssMapVa, materialMapVa,
+                filterMapVa);
+    }
     // *************************************************************************
     // native private methods
 
@@ -673,6 +750,16 @@ public class SoftBodyCreationSettings
 
     native static float getVertexRadius(long settingsVa);
 
+    native private static void restoreBinaryState(
+            long bodySettingsVa, long streamVa);
+
+    native private static void saveBinaryState(
+            long bodySettingsVa, long streamVa);
+
+    native private static void saveWithChildren(
+            long bodySettingsVa, long streamVa, long settingsMapVa,
+            long materialMapVa, long filterMapVa);
+
     native private static void setAllowSleeping(
             long bodySettingsVa, boolean allow);
 
@@ -719,4 +806,7 @@ public class SoftBodyCreationSettings
     native private static void setUserData(long bodySettingsVa, long value);
 
     native static void setVertexRadius(long settingsVa, float radius);
+
+    native private static long sRestoreWithChildren(long streamVa,
+            long settingsMapVa, long materialMapVa, long filterMapVa);
 }

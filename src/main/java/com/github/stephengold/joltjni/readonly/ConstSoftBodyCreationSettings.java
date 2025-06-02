@@ -23,6 +23,10 @@ package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.StreamOut;
+import com.github.stephengold.joltjni.streamutils.GroupFilterToIdMap;
+import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
+import com.github.stephengold.joltjni.streamutils.SharedSettingsToIdMap;
 
 /**
  * Read-only access to a {@code SoftBodyCreationSettings} object. (native type:
@@ -157,4 +161,26 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
      * @return the radius (in meters)
      */
     float getVertexRadius();
+
+    /**
+     * Write the state of this object to the specified stream, excluding the
+     * shared settings, materials, and group filter. The settings are
+     * unaffected.
+     *
+     * @param stream where to write objects (not null)
+     */
+    void saveBinaryState(StreamOut stream);
+
+    /**
+     * Write the state of this object to the specified stream. The settings are
+     * unaffected.
+     *
+     * @param stream where to write objects (not null)
+     * @param sbssMap track multiple uses of shared settings (may be null)
+     * @param materialMap track multiple uses of physics materials (may be null)
+     * @param filterMap track multiple uses of group filters (may be null)
+     */
+    void saveWithChildren(
+            StreamOut stream, SharedSettingsToIdMap sbssMap,
+            MaterialToIdMap materialMap, GroupFilterToIdMap filterMap);
 }

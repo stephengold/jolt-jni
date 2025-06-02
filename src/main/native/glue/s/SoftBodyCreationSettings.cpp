@@ -361,6 +361,52 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSet
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    restoreBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_restoreBinaryState
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong streamVa) {
+    SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    pSettings->RestoreBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    saveBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_saveBinaryState
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong streamVa) {
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    pSettings->SaveBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    saveWithChildren
+ * Signature: (JJJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_saveWithChildren
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong streamVa, jlong settingsMapVa,
+  jlong materialMapVa, jlong filterMapVa) {
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    SoftBodyCreationSettings::SharedSettingsToIDMap * const pSettingsMap
+            = reinterpret_cast<SoftBodyCreationSettings::SharedSettingsToIDMap *> (settingsMapVa);
+    SoftBodyCreationSettings::MaterialToIDMap * const pMaterialMap
+            = reinterpret_cast<SoftBodyCreationSettings::MaterialToIDMap *> (materialMapVa);
+    SoftBodyCreationSettings::GroupFilterToIDMap * const pFilterMap
+            = reinterpret_cast<SoftBodyCreationSettings::GroupFilterToIDMap *> (filterMapVa);
+    pSettings->SaveWithChildren(*pStream, pSettingsMap, pMaterialMap, pFilterMap);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
  * Method:    setAllowSleeping
  * Signature: (JZ)V
  */
@@ -567,4 +613,27 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSetti
     SoftBodyCreationSettings * const pSettings
             = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
     pSettings->mVertexRadius = radius;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    sRestoreWithChildren
+ * Signature: (JJJJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_sRestoreWithChildren
+  (JNIEnv *, jclass, jlong streamVa, jlong sbssMapVa, jlong materialMapVa,
+  jlong filterMapVa) {
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    SoftBodyCreationSettings::IDToSharedSettingsMap * const pSbssMap
+            = reinterpret_cast<SoftBodyCreationSettings::IDToSharedSettingsMap *> (sbssMapVa);
+    SoftBodyCreationSettings::IDToMaterialMap * const pMaterialMap
+            = reinterpret_cast<SoftBodyCreationSettings::IDToMaterialMap *> (materialMapVa);
+    SoftBodyCreationSettings::IDToGroupFilterMap * const pFilterMap
+            = reinterpret_cast<SoftBodyCreationSettings::IDToGroupFilterMap *> (filterMapVa);
+    SoftBodyCreationSettings::SBCSResult * const pResult
+            = new SoftBodyCreationSettings::SBCSResult();
+    TRACE_NEW("SoftBodyCreationSettings::SBCSResult", pResult);
+    *pResult = SoftBodyCreationSettings::sRestoreWithChildren(
+            *pStream, *pSbssMap, *pMaterialMap, *pFilterMap);
+    return reinterpret_cast<jlong> (pResult);
 }
