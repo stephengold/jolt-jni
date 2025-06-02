@@ -40,6 +40,17 @@ public class WheeledVehicleControllerSettings
     }
 
     /**
+     * Instantiate a settings object with the specified native object assigned
+     * but not owned.
+     *
+     * @param controllerSettingsVa the virtual address of the native object to
+     * assign (not zero)
+     */
+    WheeledVehicleControllerSettings(long controllerSettingsVa) {
+        super(controllerSettingsVa);
+    }
+
+    /**
      * Instantiate a copy of the specified settings.
      *
      * @param original the settings to copy (not {@code null}, unaffected)

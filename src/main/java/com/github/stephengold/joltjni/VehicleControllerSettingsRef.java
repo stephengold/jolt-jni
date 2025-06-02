@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,6 +52,36 @@ final public class VehicleControllerSettingsRef extends Ref {
     VehicleControllerSettingsRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Temporarily access the referenced settings object, assuming it is a
+     * {@code TrackedVehicleControllerSettings}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public TrackedVehicleControllerSettings getPtrAsTracked() {
+        long settingsVa = targetVa();
+        TrackedVehicleControllerSettings result
+                = new TrackedVehicleControllerSettings(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Temporarily access the referenced settings object, assuming it is a
+     * {@code WheeledVehicleControllerSettings}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public WheeledVehicleControllerSettings getPtrAsWheeled() {
+        long settingsVa = targetVa();
+        WheeledVehicleControllerSettings result
+                = new WheeledVehicleControllerSettings(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // Ref methods
