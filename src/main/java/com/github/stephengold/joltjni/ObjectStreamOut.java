@@ -25,7 +25,9 @@ import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVehicleControllerSettings;
 import com.github.stephengold.joltjni.std.StringStream;
 
@@ -106,6 +108,24 @@ final public class ObjectStreamOut {
     }
 
     /**
+     * Write the specified material to the specified stream.
+     *
+     * @param stream the stream to write to (not null)
+     * @param streamType the type of stream (not null)
+     * @param material the material to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(StringStream stream,
+            EStreamType streamType, ConstPhysicsMaterial material) {
+        long streamVa = stream.va();
+        int ordinal = streamType.ordinal();
+        long materialVa = material.targetVa();
+        boolean result = sWritePhysicsMaterial(streamVa, ordinal, materialVa);
+
+        return result;
+    }
+
+    /**
      * Write the specified soft-body creation settings to the specified stream.
      *
      * @param stream the stream to write to (not null)
@@ -119,6 +139,24 @@ final public class ObjectStreamOut {
         int ordinal = streamType.ordinal();
         long settingsVa = settings.targetVa();
         boolean result = sWriteSbcs(streamVa, ordinal, settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Write the specified soft-body shared settings to the specified stream.
+     *
+     * @param stream the stream to write to (not null)
+     * @param streamType the type of stream (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(StringStream stream,
+            EStreamType streamType, ConstSoftBodySharedSettings settings) {
+        long streamVa = stream.va();
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result = sWriteSbss(streamVa, ordinal, settingsVa);
 
         return result;
     }
@@ -177,6 +215,44 @@ final public class ObjectStreamOut {
 
         return result;
     }
+
+    /**
+     * Write the specified tracked-vehicle wheel settings to the specified
+     * stream.
+     *
+     * @param stream the stream to write to (not null)
+     * @param streamType the type of stream (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(StringStream stream,
+            EStreamType streamType, WheelSettingsTv settings) {
+        long streamVa = stream.va();
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result = sWriteWheelSettingsTv(streamVa, ordinal, settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Write the specified wheeled-vehicle wheel settings to the specified
+     * stream.
+     *
+     * @param stream the stream to write to (not null)
+     * @param streamType the type of stream (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(StringStream stream,
+            EStreamType streamType, WheelSettingsWv settings) {
+        long streamVa = stream.va();
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result = sWriteWheelSettingsWv(streamVa, ordinal, settingsVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -189,6 +265,9 @@ final public class ObjectStreamOut {
     native private static boolean sWriteGroupFilter(
             long streamVa, int ordinal, long filterVa);
 
+    native private static boolean sWritePhysicsMaterial(
+            long streamVa, int ordinal, long materialVa);
+
     native private static boolean sWritePhysicsScene(
             long streamVa, int ordinal, long sceneVa);
 
@@ -198,6 +277,15 @@ final public class ObjectStreamOut {
     native private static boolean sWriteSbcs(
             long streamVa, int ordinal, long settingsVa);
 
+    native private static boolean sWriteSbss(
+            long streamVa, int ordinal, long settingsVa);
+
     native private static boolean sWriteVehicleControllerSettings(
+            long streamVa, int ordinal, long settingsVa);
+
+    native private static boolean sWriteWheelSettingsTv(
+            long streamVa, int ordinal, long settingsVa);
+
+    native private static boolean sWriteWheelSettingsWv(
             long streamVa, int ordinal, long settingsVa);
 }

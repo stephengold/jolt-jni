@@ -28,7 +28,8 @@ SOFTWARE.
 #include "Jolt/Physics/Constraints/Constraint.h"
 #include "Jolt/Physics/PhysicsScene.h"
 #include "Jolt/Physics/Ragdoll/Ragdoll.h"
-#include "Jolt/Physics/Vehicle/VehicleController.h"
+#include "Jolt/Physics/Vehicle/TrackedVehicleController.h"
+#include "Jolt/Physics/Vehicle/WheeledVehicleController.h"
 #include "auto/com_github_stephengold_joltjni_ObjectStreamOut.h"
 
 using namespace JPH;
@@ -89,6 +90,24 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWritePhysicsMaterial
+ * Signature: (JIJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWritePhysicsMaterial
+  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong materialVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    const ObjectStream::EStreamType streamType
+            = (ObjectStream::EStreamType) ordinal;
+    const PhysicsMaterial * const pMaterial
+            = reinterpret_cast<PhysicsMaterial *> (materialVa);
+    const bool result
+            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pMaterial);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
  * Method:    sWritePhysicsScene
  * Signature: (JIJ)Z
  */
@@ -143,6 +162,24 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteSbss
+ * Signature: (JIJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteSbss
+  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    const ObjectStream::EStreamType streamType
+            = (ObjectStream::EStreamType) ordinal;
+    const SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    const bool result
+            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
  * Method:    sWriteVehicleControllerSettings
  * Signature: (JIJ)Z
  */
@@ -154,6 +191,42 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
             = (ObjectStream::EStreamType) ordinal;
     const VehicleControllerSettings * const pSettings
             = reinterpret_cast<VehicleControllerSettings *> (settingsVa);
+    const bool result
+            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteWheelSettingsTv
+ * Signature: (JIJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteWheelSettingsTv
+  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    const ObjectStream::EStreamType streamType
+            = (ObjectStream::EStreamType) ordinal;
+    const WheelSettingsTV * const pSettings
+            = reinterpret_cast<WheelSettingsTV *> (settingsVa);
+    const bool result
+            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteWheelSettingsWv
+ * Signature: (JIJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteWheelSettingsWv
+  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    const ObjectStream::EStreamType streamType
+            = (ObjectStream::EStreamType) ordinal;
+    const WheelSettingsWV * const pSettings
+            = reinterpret_cast<WheelSettingsWV *> (settingsVa);
     const bool result
             = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
     return result;
