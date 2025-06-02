@@ -50,11 +50,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SpringSettings_creat
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SpringSettings_createDefault
-  (JNIEnv *, jclass) {
-    SpringSettings * const pResult = new SpringSettings();
-    TRACE_NEW("SpringSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(SpringSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SpringSettings

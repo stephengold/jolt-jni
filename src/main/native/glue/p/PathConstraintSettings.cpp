@@ -36,11 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_createDefault
-  (JNIEnv *, jclass) {
-    PathConstraintSettings * const pResult = new PathConstraintSettings();
-    TRACE_NEW("PathConstraintSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(PathConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_PathConstraintSettings

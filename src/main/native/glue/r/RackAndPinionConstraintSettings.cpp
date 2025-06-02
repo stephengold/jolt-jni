@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,12 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_createDefault
-  (JNIEnv *, jclass) {
-    RackAndPinionConstraintSettings * const pResult
-            = new RackAndPinionConstraintSettings();
-    TRACE_NEW("RackAndPinionConstraintSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(RackAndPinionConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings

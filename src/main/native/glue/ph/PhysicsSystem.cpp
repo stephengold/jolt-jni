@@ -87,11 +87,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_con
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_createPhysicsSystem
-  (JNIEnv *, jclass) {
-    PhysicsSystem * const pResult = new PhysicsSystem();
-    TRACE_NEW("PhysicsSystem", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(PhysicsSystem)
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem

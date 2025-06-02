@@ -50,12 +50,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_InvBind_create
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_InvBind_createDefault
-  (JNIEnv *, jclass) {
-    SoftBodySharedSettings::InvBind * const pResult
-            = new SoftBodySharedSettings::InvBind();
-    TRACE_NEW("SoftBodySharedSettings::InvBind", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(SoftBodySharedSettings::InvBind)
 
 /*
  * Class:     com_github_stephengold_joltjni_InvBind

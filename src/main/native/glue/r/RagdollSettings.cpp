@@ -83,11 +83,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_calcu
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_createDefault
-  (JNIEnv *, jclass) {
-    RagdollSettings * const pSettings = new RagdollSettings();
-    TRACE_NEW("RagdollSettings", pSettings)
-    return reinterpret_cast<jlong> (pSettings);
-}
+  BODYOF_CREATE_DEFAULT(RagdollSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollSettings

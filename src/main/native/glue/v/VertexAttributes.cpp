@@ -53,12 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_cre
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_createDefault
-  (JNIEnv *, jclass) {
-    SoftBodySharedSettings::VertexAttributes * const pResult
-            = new SoftBodySharedSettings::VertexAttributes();
-    TRACE_NEW("SoftBodySharedSettings::VertexAttributes", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(SoftBodySharedSettings::VertexAttributes)
 
 /*
  * Class:     com_github_stephengold_joltjni_VertexAttributes

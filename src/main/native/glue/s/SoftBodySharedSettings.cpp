@@ -273,11 +273,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_createDefault
-  (JNIEnv *, jclass) {
-    SoftBodySharedSettings * const pResult = new SoftBodySharedSettings();
-    TRACE_NEW("SoftBodySharedSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+    BODYOF_CREATE_DEFAULT(SoftBodySharedSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings

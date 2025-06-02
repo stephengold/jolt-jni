@@ -35,11 +35,7 @@ using namespace std;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_createMt19937
-  (JNIEnv *, jclass) {
-    mt19937 * const pResult = new mt19937();
-    TRACE_NEW("mt19937", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(mt19937)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_Mt19937

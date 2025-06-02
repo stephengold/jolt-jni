@@ -45,11 +45,7 @@ IMPLEMENT_REF(WheelSettingsTV,
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsTv_createDefault
-  (JNIEnv *, jclass) {
-    const WheelSettingsTV * const pSettings = new WheelSettingsTV();
-    TRACE_NEW("WheelSettingsTV", pSettings)
-    return reinterpret_cast<jlong> (pSettings);
-}
+  BODYOF_CREATE_DEFAULT(WheelSettingsTV)
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettingsTv

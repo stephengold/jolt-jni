@@ -51,11 +51,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSett
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_createDefault
-  (JNIEnv *, jclass) {
-    SoftBodyCreationSettings * const pResult = new SoftBodyCreationSettings();
-    TRACE_NEW("SoftBodyCreationSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(SoftBodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings

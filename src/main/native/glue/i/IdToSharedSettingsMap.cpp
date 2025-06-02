@@ -37,12 +37,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_IdToSharedSettingsMap_createDefault
-  (JNIEnv *, jclass) {
-    StreamUtils::IDToObjectMap<SoftBodySharedSettings> * const pResult
-            = new StreamUtils::IDToObjectMap<SoftBodySharedSettings>();
-    TRACE_NEW("StreamUtils::IDToObjectMap<SoftBodySharedSettings>", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(StreamUtils::IDToObjectMap<SoftBodySharedSettings>)
 
 /*
  * Class:     com_github_stephengold_joltjni_streamutils_IdToSharedSettingsMap

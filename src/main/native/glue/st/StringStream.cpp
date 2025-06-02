@@ -35,11 +35,7 @@ using namespace std;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_StringStream_createDefault
-  (JNIEnv *, jclass) {
-    stringstream * const pResult = new stringstream();
-    TRACE_NEW("stringstream", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+    BODYOF_CREATE_DEFAULT(stringstream)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_StringStream

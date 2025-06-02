@@ -164,11 +164,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_createTransla
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_createUninitialized
-  (JNIEnv *, jclass) {
-    RMat44 * const pResult = new RMat44();
-    TRACE_NEW("RMat44", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(RMat44)
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44

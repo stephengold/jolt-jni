@@ -51,12 +51,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skinned_createBackst
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skinned_createDefault
-  (JNIEnv *, jclass) {
-    SoftBodySharedSettings::Skinned * const pResult
-            = new SoftBodySharedSettings::Skinned();
-    TRACE_NEW("SoftBodySharedSettings::Skinned", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+    BODYOF_CREATE_DEFAULT(SoftBodySharedSettings::Skinned)
 
 /*
  * Class:     com_github_stephengold_joltjni_Skinned

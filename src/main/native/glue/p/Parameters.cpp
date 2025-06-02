@@ -36,11 +36,7 @@ using namespace VHACD;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_vhacd_Parameters_createDefault
-  (JNIEnv *, jclass) {
-    IVHACD::Parameters * const pParameters = new IVHACD::Parameters();
-    TRACE_NEW("IVHACD::Parameters", pParameters)
-    return reinterpret_cast<jlong> (pParameters);
-}
+  BODYOF_CREATE_DEFAULT(IVHACD::Parameters)
 
 /*
  * Class:     com_github_stephengold_joltjni_vhacd_Parameters

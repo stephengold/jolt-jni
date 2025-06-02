@@ -36,12 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Vertex_createDefault
-  (JNIEnv *, jclass) {
-    SoftBodySharedSettings::Vertex * const pResult
-            = new SoftBodySharedSettings::Vertex();
-    TRACE_NEW("SoftBodySharedSettings::Vertex", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(SoftBodySharedSettings::Vertex)
 
 /*
  * Class:     com_github_stephengold_joltjni_Vertex

@@ -65,11 +65,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSet
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_createDefault
-  (JNIEnv *, jclass) {
-    VehicleConstraintSettings * const pResult = new VehicleConstraintSettings();
-    TRACE_NEW("VehicleConstraintSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(VehicleConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings

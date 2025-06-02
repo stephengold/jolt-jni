@@ -50,11 +50,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleAntiRollBar_c
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleAntiRollBar_createDefault
-  (JNIEnv *, jclass) {
-    VehicleAntiRollBar * const pResult = new VehicleAntiRollBar();
-    TRACE_NEW("VehicleAntiRollBar", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(VehicleAntiRollBar)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleAntiRollBar

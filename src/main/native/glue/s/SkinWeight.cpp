@@ -49,12 +49,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkinWeight_create
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkinWeight_createDefault
-  (JNIEnv *, jclass) {
-    SoftBodySharedSettings::SkinWeight * const pResult
-            = new SoftBodySharedSettings::SkinWeight();
-    TRACE_NEW("SoftBodySharedSettings::SkinWeight", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+    BODYOF_CREATE_DEFAULT(SoftBodySharedSettings::SkinWeight)
 
 /*
  * Class:     com_github_stephengold_joltjni_SkinWeight

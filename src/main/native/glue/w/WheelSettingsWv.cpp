@@ -45,11 +45,7 @@ IMPLEMENT_REF(WheelSettingsWV,
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsWv_createDefault
-  (JNIEnv *, jclass) {
-    const WheelSettingsWV * const pSettings = new WheelSettingsWV();
-    TRACE_NEW("WheelSettingsWV", pSettings)
-    return reinterpret_cast<jlong> (pSettings);
-}
+  BODYOF_CREATE_DEFAULT(WheelSettingsWV)
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettingsWv

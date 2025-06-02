@@ -36,11 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SupportingFace_createDefault
-  (JNIEnv *, jclass) {
-    Shape::SupportingFace * const pResult = new Shape::SupportingFace();
-    TRACE_NEW("Shape::SupportingFace", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+    BODYOF_CREATE_DEFAULT(Shape::SupportingFace)
 
 /*
  * Class:     com_github_stephengold_joltjni_SupportingFace

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -52,8 +52,4 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PathConstraintPathHer
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PathConstraintPathHermite_createDefault
-  (JNIEnv *, jclass) {
-    PathConstraintPathHermite * const pResult = new PathConstraintPathHermite();
-    TRACE_NEW("PathConstraintPathHermite", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(PathConstraintPathHermite)

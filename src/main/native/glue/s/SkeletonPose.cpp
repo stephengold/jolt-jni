@@ -84,11 +84,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_createC
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_createSkeletonPoseDefault
-  (JNIEnv *, jclass) {
-    SkeletonPose * const pResult = new SkeletonPose();
-    TRACE_NEW("SkeletonPose", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(SkeletonPose)
 
 /*
  * Class:     com_github_stephengold_joltjni_SkeletonPose

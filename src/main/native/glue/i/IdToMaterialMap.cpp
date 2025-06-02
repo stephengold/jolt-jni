@@ -37,12 +37,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_IdToMaterialMap_createDefault
-  (JNIEnv *, jclass) {
-    StreamUtils::IDToObjectMap<PhysicsMaterial> * const pResult
-            = new StreamUtils::IDToObjectMap<PhysicsMaterial>();
-    TRACE_NEW("StreamUtils::IDToObjectMap<PhysicsMaterial>", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(StreamUtils::IDToObjectMap<PhysicsMaterial>)
 
 /*
  * Class:     com_github_stephengold_joltjni_streamutils_IdToMaterialMap

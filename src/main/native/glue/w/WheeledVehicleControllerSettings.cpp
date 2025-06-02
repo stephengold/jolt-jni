@@ -66,12 +66,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContro
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_createDefault
-  (JNIEnv *, jclass) {
-    WheeledVehicleControllerSettings * const pSettings
-            = new WheeledVehicleControllerSettings();
-    TRACE_NEW("WheeledVehicleControllerSettings", pSettings)
-    return reinterpret_cast<jlong> (pSettings);
-}
+  BODYOF_CREATE_DEFAULT(WheeledVehicleControllerSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_WheeledVehicleControllerSettings

@@ -49,11 +49,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialList_c
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialList_createEmptyList
-  (JNIEnv *, jclass) {
-    PhysicsMaterialList * const pList = new PhysicsMaterialList();
-    TRACE_NEW("PhysicsMaterialList", pList)
-    return reinterpret_cast<jlong> (pList);
-}
+  BODYOF_CREATE_DEFAULT(PhysicsMaterialList)
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterialList

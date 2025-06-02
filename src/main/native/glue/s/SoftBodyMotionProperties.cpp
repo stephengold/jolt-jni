@@ -65,12 +65,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionPropert
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionProperties_createDefault
-  (JNIEnv *, jclass) {
-    SoftBodyMotionProperties * const pResult
-            = new SoftBodyMotionProperties();
-    TRACE_NEW("SoftBodyMotionProperties", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+    BODYOF_CREATE_DEFAULT(SoftBodyMotionProperties)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyMotionProperties

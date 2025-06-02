@@ -45,11 +45,7 @@ IMPLEMENT_REF(SkeletonMapper,
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonMapper_createDefault
-  (JNIEnv *, jclass) {
-    SkeletonMapper * const pMapper = new SkeletonMapper();
-    TRACE_NEW("SkeletonMapper", pMapper)
-    return reinterpret_cast<jlong> (pMapper);
-}
+  BODYOF_CREATE_DEFAULT(SkeletonMapper)
 
 /*
  * Class:     com_github_stephengold_joltjni_SkeletonMapper

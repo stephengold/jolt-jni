@@ -51,12 +51,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TrackedVehicleContro
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TrackedVehicleControllerSettings_createDefault
-  (JNIEnv *, jclass) {
-    TrackedVehicleControllerSettings * const pSettings
-            = new TrackedVehicleControllerSettings();
-    TRACE_NEW("TrackedVehicleControllerSettings", pSettings)
-    return reinterpret_cast<jlong> (pSettings);
-}
+  BODYOF_CREATE_DEFAULT(TrackedVehicleControllerSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_TrackedVehicleControllerSettings

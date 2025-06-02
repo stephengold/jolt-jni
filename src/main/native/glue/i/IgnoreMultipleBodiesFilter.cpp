@@ -48,12 +48,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IgnoreMultipleBodiesF
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IgnoreMultipleBodiesFilter_createDefault
-  (JNIEnv *, jclass) {
-    IgnoreMultipleBodiesFilter * const pResult
-            = new IgnoreMultipleBodiesFilter();
-    TRACE_NEW("IgnoreMultipleBodiesFilter", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(IgnoreMultipleBodiesFilter)
 
 /*
  * Class:     com_github_stephengold_joltjni_IgnoreMultipleBodiesFilter

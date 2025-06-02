@@ -61,8 +61,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialSimpl
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialSimple_createDefault
-  (JNIEnv *, jclass) {
-    PhysicsMaterialSimple * const pResult = new PhysicsMaterialSimple();
-    TRACE_NEW("PhysicsMaterialSimple", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(PhysicsMaterialSimple)

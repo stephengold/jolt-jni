@@ -36,11 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_createDefault
-  (JNIEnv *pEnv, jclass) {
-    SoftBodyVertex * const pResult = new SoftBodyVertex();
-    TRACE_NEW("SoftBodyVertex", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+    BODYOF_CREATE_DEFAULT(SoftBodyVertex)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex

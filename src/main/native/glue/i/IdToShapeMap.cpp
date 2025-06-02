@@ -36,12 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_IdToShapeMap_createDefault
-  (JNIEnv *, jclass) {
-    StreamUtils::IDToObjectMap<Shape> * const pResult
-            = new StreamUtils::IDToObjectMap<Shape>();
-    TRACE_NEW("StreamUtils::IDToObjectMap<Shape>", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(StreamUtils::IDToObjectMap<Shape>)
 
 /*
  * Class:     com_github_stephengold_joltjni_streamutils_IdToShapeMap

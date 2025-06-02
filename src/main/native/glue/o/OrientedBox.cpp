@@ -50,11 +50,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OrientedBox_createBo
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OrientedBox_createDefault
-  (JNIEnv *, jclass) {
-    OrientedBox * const pResult = new OrientedBox();
-    TRACE_NEW("OrientedBox", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(OrientedBox)
 
 /*
  * Class:     com_github_stephengold_joltjni_OrientedBox
