@@ -469,6 +469,8 @@ public class SoftBodySharedSettings
     native static void createConstraints(long settingsVa,
             long[] attributeVas, int ordinal, float angleTolerance);
 
+    native private static long createCopy(long originalVa);
+
     native private static long createDefault();
 
     native private static long getEdgeConstraint(long settingsVa, int index);
