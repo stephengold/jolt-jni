@@ -75,9 +75,4 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_vhacd_ConvexHull_coun
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_vhacd_ConvexHull_free
-  (JNIEnv *, jclass, jlong hullVa) {
-    IVHACD::ConvexHull * const pHull
-            = reinterpret_cast<IVHACD::ConvexHull *> (hullVa);
-    TRACE_DELETE("IVHACD::ConvexHull", pHull)
-    delete pHull;
-}
+  BODYOF_FREE(IVHACD::ConvexHull)

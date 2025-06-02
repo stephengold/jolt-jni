@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ObjectLayerFilter_cr
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjectLayerFilter_free
-  (JNIEnv *, jclass, jlong filterVa) {
-    ObjectLayerFilter * const pFilter
-            = reinterpret_cast<ObjectLayerFilter *> (filterVa);
-    TRACE_DELETE("ObjectLayerFilter", pFilter)
-    delete pFilter;
-}
+  BODYOF_FREE(ObjectLayerFilter)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectLayerFilter

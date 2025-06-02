@@ -114,12 +114,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_det
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_free
-  (JNIEnv *, jclass, jlong builderVa) {
-    ConvexHullBuilder * const pBuilder
-            = reinterpret_cast<ConvexHullBuilder *> (builderVa);
-    TRACE_DELETE("ConvexHullBuilder", pBuilder)
-    delete pBuilder;
-}
+  BODYOF_FREE(ConvexHullBuilder)
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullBuilder

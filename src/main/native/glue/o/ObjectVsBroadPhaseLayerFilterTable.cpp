@@ -55,9 +55,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ObjectVsBroadPhaseLa
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjectVsBroadPhaseLayerFilterTable_free
-  (JNIEnv *, jclass, jlong filterVa) {
-    ObjectVsBroadPhaseLayerFilterTable * const pFilter
-            = reinterpret_cast<ObjectVsBroadPhaseLayerFilterTable *> (filterVa);
-    TRACE_DELETE("ObjectVsBroadPhaseLayerFilterTable", pFilter)
-    delete pFilter;
-}
+  BODYOF_FREE(ObjectVsBroadPhaseLayerFilterTable)

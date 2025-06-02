@@ -58,12 +58,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_InvBind_createDefaul
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_InvBind_free
-  (JNIEnv *, jclass, jlong invBindVa) {
-    SoftBodySharedSettings::InvBind * const pInvBind
-            = reinterpret_cast<SoftBodySharedSettings::InvBind *> (invBindVa);
-    TRACE_DELETE("SoftBodySharedSettings::InvBind", pInvBind)
-    delete pInvBind;
-}
+  BODYOF_FREE(SoftBodySharedSettings::InvBind)
 
 /*
  * Class:     com_github_stephengold_joltjni_InvBind

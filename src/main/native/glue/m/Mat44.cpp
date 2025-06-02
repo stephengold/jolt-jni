@@ -253,11 +253,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Mat44_equals
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_free
-  (JNIEnv *, jclass, jlong matrixVa) {
-    Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    TRACE_DELETE("Mat44", pMatrix)
-    delete pMatrix;
-}
+  BODYOF_FREE(Mat44)
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44

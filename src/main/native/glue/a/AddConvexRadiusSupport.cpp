@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -53,12 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AddConvexRadiusSuppo
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AddConvexRadiusSupport_free
-  (JNIEnv *, jclass, jlong supportVa) {
-    AddConvexRadius<ConvexShape::Support> * const pAdd
-            = reinterpret_cast<AddConvexRadius<ConvexShape::Support> *> (supportVa);
-    TRACE_DELETE("AddConvexRadius<ConvexShape::Support>", pAdd)
-    delete pAdd;
-}
+  BODYOF_FREE(AddConvexRadius<ConvexShape::Support>)
 
 /*
  * Class:     com_github_stephengold_joltjni_AddConvexRadiusSupport

@@ -243,9 +243,4 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_vhacd_Decomposer_deco
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_vhacd_Decomposer_free
-  (JNIEnv *, jclass, jlong decomposerVa) {
-    Decomposer * const pDecomposer
-            = reinterpret_cast<Decomposer *> (decomposerVa);
-    TRACE_DELETE("Decomposer", pDecomposer)
-    delete pDecomposer;
-}
+  BODYOF_FREE(Decomposer)

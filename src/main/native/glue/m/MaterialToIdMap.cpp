@@ -45,9 +45,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_Material
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_streamutils_MaterialToIdMap_free
-  (JNIEnv *, jclass, jlong mapVa) {
-    StreamUtils::ObjectToIDMap<PhysicsMaterial> * const pMap
-            = reinterpret_cast<StreamUtils::ObjectToIDMap<PhysicsMaterial> *> (mapVa);
-    TRACE_DELETE("StreamUtils::ObjectToIDMap<PhysicsMaterial>", pMap)
-    delete pMap;
-}
+  BODYOF_FREE(StreamUtils::ObjectToIDMap<PhysicsMaterial>)

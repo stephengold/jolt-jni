@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -143,9 +143,4 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_disable
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjVsBpFilter_free
-  (JNIEnv *, jclass, jlong filterVa) {
-    ObjVsBpFilter * const pFilter
-            = reinterpret_cast<ObjVsBpFilter *> (filterVa);
-    TRACE_DELETE("ObjVsBpFilter", pFilter)
-    delete pFilter;
-}
+  BODYOF_FREE(ObjVsBpFilter)

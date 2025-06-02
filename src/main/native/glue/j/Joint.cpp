@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Joint_createDefault
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Joint_free
-  (JNIEnv *, jclass, jlong jointVa) {
-    Skeleton::Joint * const pJoint
-            = reinterpret_cast<Skeleton::Joint *> (jointVa);
-    TRACE_DELETE("Joint", pJoint)
-    delete pJoint;
-}
+  BODYOF_FREE(Skeleton::Joint)
 
 /*
  * Class:     com_github_stephengold_joltjni_Joint

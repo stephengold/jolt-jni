@@ -91,9 +91,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CustomPhysicsStepLis
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CustomPhysicsStepListener_free
-  (JNIEnv *, jobject, jlong listenerVa) {
-    CustomPhysicsStepListener * const pListener
-            = reinterpret_cast<CustomPhysicsStepListener *> (listenerVa);
-    TRACE_DELETE("CustomPhysicsStepListener", pListener)
-    delete pListener;
-}
+  BODYOF_FREE(CustomPhysicsStepListener)

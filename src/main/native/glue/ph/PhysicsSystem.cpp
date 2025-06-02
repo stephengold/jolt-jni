@@ -192,12 +192,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_drawCon
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_free
-  (JNIEnv *, jclass, jlong systemVa) {
-    PhysicsSystem * const pSystem
-            = reinterpret_cast<PhysicsSystem *> (systemVa);
-    TRACE_DELETE("PhysicsSystem", pSystem)
-    delete pSystem;
-}
+  BODYOF_FREE(PhysicsSystem)
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem

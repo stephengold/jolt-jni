@@ -459,9 +459,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CustomCharacterConta
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CustomCharacterContactListener_free
-  (JNIEnv *, jobject, jlong listenerVa) {
-    CustomCharacterContactListener * const pListener
-            = reinterpret_cast<CustomCharacterContactListener *> (listenerVa);
-    TRACE_DELETE("CustomCharacterContactListener", pListener)
-    delete pListener;
-}
+  BODYOF_FREE(CustomCharacterContactListener)

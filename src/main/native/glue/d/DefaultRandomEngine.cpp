@@ -55,12 +55,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEng
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_free
-  (JNIEnv *, jclass, jlong generatorVa) {
-    default_random_engine * const pGenerator
-            = reinterpret_cast<default_random_engine *> (generatorVa);
-    TRACE_DELETE("default_random_engine", pGenerator)
-    delete pGenerator;
-}
+  BODYOF_FREE(default_random_engine)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_DefaultRandomEngine

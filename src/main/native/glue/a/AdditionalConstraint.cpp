@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -51,9 +51,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AdditionalConstraint
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AdditionalConstraint_free
-  (JNIEnv *, jclass, jlong constraintVa) {
-    RagdollSettings::AdditionalConstraint * const pConstraint =
-            reinterpret_cast<RagdollSettings::AdditionalConstraint *> (constraintVa);
-    TRACE_DELETE("AdditionalConstraint", pConstraint)
-    delete pConstraint;
-}
+  BODYOF_FREE(RagdollSettings::AdditionalConstraint)

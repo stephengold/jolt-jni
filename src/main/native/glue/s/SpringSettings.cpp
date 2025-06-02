@@ -58,12 +58,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SpringSettings_creat
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SpringSettings_free
-  (JNIEnv *, jclass, jlong settingsVa) {
-    SpringSettings * const pSettings
-            = reinterpret_cast<SpringSettings *> (settingsVa);
-    TRACE_DELETE("SpringSettings", pSettings)
-    delete pSettings;
-}
+  BODYOF_FREE(SpringSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SpringSettings

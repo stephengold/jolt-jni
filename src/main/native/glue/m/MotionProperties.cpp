@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotionProperties_cre
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_free
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    MotionProperties * const pProperties
-            = reinterpret_cast<MotionProperties *> (propertiesVa);
-    TRACE_DELETE("MotionProperties", pProperties)
-    delete pProperties;
-}
+  BODYOF_FREE(MotionProperties)
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties

@@ -44,9 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_IdToShap
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_streamutils_IdToShapeMap_free
-  (JNIEnv *, jclass, jlong mapVa) {
-    StreamUtils::IDToObjectMap<Shape> * const pMap
-            = reinterpret_cast<StreamUtils::IDToObjectMap<Shape> *> (mapVa);
-    TRACE_DELETE("StreamUtils::IDToObjectMap<Shape>", pMap)
-    delete pMap;
-}
+  BODYOF_FREE(StreamUtils::IDToObjectMap<Shape>)

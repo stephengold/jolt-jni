@@ -36,9 +36,4 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyContactListener_free
-  (JNIEnv *, jclass, jlong listenerVa) {
-    SoftBodyContactListener * const pListener
-            = reinterpret_cast<SoftBodyContactListener *> (listenerVa);
-    TRACE_DELETE("SoftBodyContactListener", pListener)
-    delete pListener;
-}
+    BODYOF_FREE(SoftBodyContactListener)

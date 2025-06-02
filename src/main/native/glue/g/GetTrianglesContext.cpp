@@ -44,9 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GetTrianglesContext_
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_GetTrianglesContext_free
-  (JNIEnv *, jclass, jlong contextVa) {
-    Shape::GetTrianglesContext * const pContext
-            = reinterpret_cast<Shape::GetTrianglesContext *> (contextVa);
-    TRACE_DELETE("Shape::GetTrianglesContext", pContext)
-    delete pContext;
-}
+  BODYOF_FREE(Shape::GetTrianglesContext)

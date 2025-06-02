@@ -112,11 +112,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_draw
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_free
-  (JNIEnv *, jclass, jlong poseVa) {
-    SkeletonPose * const pPose = reinterpret_cast<SkeletonPose *> (poseVa);
-    TRACE_DELETE("SkeletonPose", pPose)
-    delete pPose;
-}
+  BODYOF_FREE(SkeletonPose)
 
 /*
  * Class:     com_github_stephengold_joltjni_SkeletonPose

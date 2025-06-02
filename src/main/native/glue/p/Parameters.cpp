@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_vhacd_Parameters_cre
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_vhacd_Parameters_free
-  (JNIEnv *, jclass, jlong parametersVa) {
-    IVHACD::Parameters * const pParameters
-            = reinterpret_cast<IVHACD::Parameters *> (parametersVa);
-    TRACE_DELETE("IVHACD::Parameters", pParameters)
-    delete pParameters;
-}
+  BODYOF_FREE(IVHACD::Parameters)
 
 /*
  * Class:     com_github_stephengold_joltjni_vhacd_Parameters

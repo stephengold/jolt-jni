@@ -87,12 +87,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionPropert
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionProperties_free
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    SoftBodyMotionProperties * const pProperties
-            = reinterpret_cast<SoftBodyMotionProperties *> (propertiesVa);
-    TRACE_DELETE("SoftBodyMotionProperties", pProperties);
-    delete pProperties;
-}
+  BODYOF_FREE(SoftBodyMotionProperties)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyMotionProperties

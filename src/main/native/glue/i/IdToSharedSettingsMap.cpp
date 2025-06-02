@@ -45,9 +45,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_IdToShar
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_streamutils_IdToSharedSettingsMap_free
-   (JNIEnv *, jclass, jlong mapVa) {
-    StreamUtils::IDToObjectMap<SoftBodySharedSettings> * const pMap
-            = reinterpret_cast<StreamUtils::IDToObjectMap<SoftBodySharedSettings> *> (mapVa);
-    TRACE_DELETE("StreamUtils::IDToObjectMap<SoftBodySharedSettings>", pMap)
-    delete pMap;
-}
+  BODYOF_FREE(StreamUtils::IDToObjectMap<SoftBodySharedSettings>)

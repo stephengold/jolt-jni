@@ -36,12 +36,7 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_free
-  (JNIEnv *, jclass, jlong contactVa) {
-    CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    TRACE_DELETE("Contact", pContact)
-    delete pContact;
-}
+  BODYOF_FREE(CharacterVirtual::Contact)
 
 /*
  * Class:     com_github_stephengold_joltjni_Contact

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,9 +36,4 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollidePointCollector_free
-  (JNIEnv *, jclass, jlong collectorVa) {
-    CollidePointCollector * const pCollector
-            = reinterpret_cast<CollidePointCollector *> (collectorVa);
-    TRACE_DELETE("CollidePointCollector", pCollector)
-    delete pCollector;
-}
+  BODYOF_FREE(CollidePointCollector)

@@ -49,11 +49,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Constraints_capacity
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraints_free
-  (JNIEnv *, jclass, jlong arrayVa) {
-    Constraints * const pArray = reinterpret_cast<Constraints *> (arrayVa);
-    TRACE_DELETE("Constraints", pArray)
-    delete pArray;
-}
+  BODYOF_FREE(Constraints)
 
 /*
  * Class:     com_github_stephengold_joltjni_Constraints

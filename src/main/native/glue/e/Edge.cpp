@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Edge_createDefault
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Edge_free
-  (JNIEnv *, jclass, jlong edgeVa) {
-    SoftBodySharedSettings::Edge * const pEdge
-            = reinterpret_cast<SoftBodySharedSettings::Edge *> (edgeVa);
-    TRACE_DELETE("SoftBodySharedSettings::Edge", pEdge)
-    delete pEdge;
-}
+  BODYOF_FREE(SoftBodySharedSettings::Edge)
 
 /*
  * Class:     com_github_stephengold_joltjni_Edge

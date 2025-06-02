@@ -55,11 +55,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_createSe
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_free
-  (JNIEnv *, jclass, jlong generatorVa) {
-    mt19937 * const pGenerator = reinterpret_cast<mt19937 *> (generatorVa);
-    TRACE_DELETE("mt19937", pGenerator)
-    delete pGenerator;
-}
+  BODYOF_FREE(mt19937)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_Mt19937

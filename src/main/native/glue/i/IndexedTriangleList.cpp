@@ -70,12 +70,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_e
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_free
-  (JNIEnv *, jclass, jlong listVa) {
-    IndexedTriangleList * const pList
-            = reinterpret_cast<IndexedTriangleList *> (listVa);
-    TRACE_DELETE("IndexedTriangleList", pList)
-    delete pList;
-}
+  BODYOF_FREE(IndexedTriangleList)
 
 /*
  * Class:     com_github_stephengold_joltjni_IndexedTriangleList

@@ -36,12 +36,7 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseCastResult_free
-  (JNIEnv *, jclass, jlong castResultVa) {
-    BroadPhaseCastResult * const pCastResult
-            = reinterpret_cast<BroadPhaseCastResult *> (castResultVa);
-    TRACE_DELETE("BroadPhaseCastResult", pCastResult)
-    delete pCastResult;
-}
+  BODYOF_FREE(BroadPhaseCastResult)
 
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhaseCastResult

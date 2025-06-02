@@ -59,12 +59,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skinned_createDefaul
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Skinned_free
-  (JNIEnv *, jclass, jlong skinnedVa) {
-    SoftBodySharedSettings::Skinned * const pSkinned
-            = reinterpret_cast<SoftBodySharedSettings::Skinned *> (skinnedVa);
-    TRACE_DELETE("SoftBodySharedSettings::Skinned", pSkinned)
-    delete pSkinned;
-}
+    BODYOF_FREE(SoftBodySharedSettings::Skinned)
 
 /*
  * Class:     com_github_stephengold_joltjni_Skinned

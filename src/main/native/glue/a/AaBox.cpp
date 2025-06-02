@@ -122,11 +122,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_expandBy
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_free
-  (JNIEnv *, jclass, jlong boxVa) {
-    AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    TRACE_DELETE("AABox", pBox)
-    delete pBox;
-}
+  BODYOF_FREE(AABox)
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox

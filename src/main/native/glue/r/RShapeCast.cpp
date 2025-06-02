@@ -93,11 +93,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RShapeCast_createRSh
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RShapeCast_free
-  (JNIEnv *, jclass, jlong castVa) {
-    RShapeCast * const pShapeCast = reinterpret_cast<RShapeCast *> (castVa);
-    TRACE_DELETE("RShapeCast", pShapeCast)
-    delete pShapeCast;
-}
+  BODYOF_FREE(RShapeCast)
 
 /*
  * Class:     com_github_stephengold_joltjni_RShapeCast

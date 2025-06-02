@@ -44,9 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_GroupFil
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_streamutils_GroupFilterToIdMap_free
-  (JNIEnv *, jclass, jlong mapVa) {
-    StreamUtils::ObjectToIDMap<GroupFilter> * const pMap
-            = reinterpret_cast<StreamUtils::ObjectToIDMap<GroupFilter> *> (mapVa);
-    TRACE_DELETE("StreamUtils::ObjectToIDMap<GroupFilter>", pMap)
-    delete pMap;
-}
+  BODYOF_FREE(StreamUtils::ObjectToIDMap<GroupFilter>)

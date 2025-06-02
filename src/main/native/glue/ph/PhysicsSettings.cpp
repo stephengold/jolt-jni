@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_crea
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_free
-  (JNIEnv *, jclass, jlong settingsVa) {
-    PhysicsSettings * const pSettings
-            = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    TRACE_DELETE("PhysicsSettings", pSettings)
-    delete pSettings;
-}
+  BODYOF_FREE(PhysicsSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings

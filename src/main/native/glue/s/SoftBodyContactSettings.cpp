@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyContactSetti
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyContactSettings_free
-  (JNIEnv *, jclass, jlong settingsVa) {
-    SoftBodyContactSettings * const pSettings
-            = reinterpret_cast<SoftBodyContactSettings *> (settingsVa);
-    TRACE_DELETE("ContactSettings", pSettings)
-    delete pSettings;
-}
+  BODYOF_FREE(SoftBodyContactSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyContactSettings

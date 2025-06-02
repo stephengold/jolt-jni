@@ -49,12 +49,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInter
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerInterfaceTable_free
-  (JNIEnv *, jclass, jlong mapVa) {
-    BroadPhaseLayerInterfaceTable * const pMap
-            = reinterpret_cast<BroadPhaseLayerInterfaceTable *> (mapVa);
-    TRACE_DELETE("BroadPhaseLayerInterfaceTable", pMap)
-    delete pMap;
-}
+  BODYOF_FREE(BroadPhaseLayerInterfaceTable)
 
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhaseLayerInterfaceTable

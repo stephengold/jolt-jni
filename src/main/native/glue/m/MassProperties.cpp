@@ -67,12 +67,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_MassProperties_de
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MassProperties_free
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    MassProperties * const pProperties
-            = reinterpret_cast<MassProperties *> (propertiesVa);
-    TRACE_DELETE("MassProperties", pProperties)
-    delete pProperties;
-}
+  BODYOF_FREE(MassProperties)
 
 /*
  * Class:     com_github_stephengold_joltjni_MassProperties

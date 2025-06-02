@@ -77,12 +77,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSett
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_free
-  (JNIEnv *, jclass, jlong bodySettingsVa) {
-    SoftBodyCreationSettings * const pSettings
-            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
-    TRACE_DELETE("SoftBodyCreationSettings", pSettings)
-    delete pSettings;
-}
+  BODYOF_FREE(SoftBodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings

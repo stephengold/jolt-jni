@@ -71,11 +71,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_erase
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_free
-  (JNIEnv *, jclass, jlong vectorVa) {
-    BodyIDVector * const pVector = reinterpret_cast<BodyIDVector *> (vectorVa);
-    TRACE_DELETE("BodyIDVector", pVector)
-    delete pVector;
-}
+  BODYOF_FREE(BodyIDVector)
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector

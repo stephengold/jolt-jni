@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_creat
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_free
-  (JNIEnv *pEnv, jclass, jlong vertexVa) {
-    SoftBodyVertex * const pVertex
-            = reinterpret_cast<SoftBodyVertex *> (vertexVa);
-    TRACE_DELETE("SoftBodyVertex", pVertex)
-    delete pVertex;
-}
+    BODYOF_FREE(SoftBodyVertex)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyVertex

@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RayCastSettings_crea
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RayCastSettings_free
-  (JNIEnv *, jclass, jlong settingsVa) {
-    RayCastSettings * const pSettings
-            = reinterpret_cast<RayCastSettings *> (settingsVa);
-    TRACE_DELETE("RayCastSettings", pSettings);
-    delete pSettings;
-}
+  BODYOF_FREE(RayCastSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_RayCastSettings

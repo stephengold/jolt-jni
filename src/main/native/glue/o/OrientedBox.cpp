@@ -58,11 +58,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OrientedBox_createDe
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_OrientedBox_free
-  (JNIEnv *, jclass, jlong boxVa) {
-    OrientedBox * const pBox = reinterpret_cast<OrientedBox *> (boxVa);
-    TRACE_DELETE("OrientedBox", pBox)
-    delete pBox;
-}
+  BODYOF_FREE(OrientedBox)
 
 /*
  * Class:     com_github_stephengold_joltjni_OrientedBox

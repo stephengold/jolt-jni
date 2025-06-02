@@ -73,9 +73,4 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjectLayerPairFilter
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ObjectLayerPairFilterTable_free
-  (JNIEnv *, jclass, jlong filterVa) {
-    ObjectLayerPairFilterTable * const pFilter
-            = reinterpret_cast<ObjectLayerPairFilterTable *> (filterVa);
-    TRACE_DELETE("ObjectLayerPairFilterTable", pFilter)
-    delete pFilter;
-}
+  BODYOF_FREE(ObjectLayerPairFilterTable)

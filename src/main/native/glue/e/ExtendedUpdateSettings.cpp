@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSettin
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSettings_free
-  (JNIEnv *, jclass, jlong settingsVa) {
-    CharacterVirtual::ExtendedUpdateSettings * const pSettings
-            = reinterpret_cast<CharacterVirtual::ExtendedUpdateSettings *> (settingsVa);
-    TRACE_DELETE("ExtendedUpdateSettings", pSettings)
-    delete pSettings;
-}
+  BODYOF_FREE(CharacterVirtual::ExtendedUpdateSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ExtendedUpdateSettings

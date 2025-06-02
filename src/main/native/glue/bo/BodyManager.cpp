@@ -164,11 +164,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyManager_draw
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyManager_free
-  (JNIEnv *, jclass, jlong managerVa) {
-    BodyManager * const pManager = reinterpret_cast<BodyManager *> (managerVa);
-    TRACE_DELETE("BodyManager", pManager)
-    delete pManager;
-}
+  BODYOF_FREE(BodyManager)
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyManager

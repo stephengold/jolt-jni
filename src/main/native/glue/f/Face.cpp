@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Face_createDefault
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Face_free
-  (JNIEnv *, jclass, jlong faceVa) {
-    SoftBodySharedSettings::Face * const pFace
-            = reinterpret_cast<SoftBodySharedSettings::Face *> (faceVa);
-    TRACE_DELETE("SoftBodySharedSettings::Face", pFace)
-    delete pFace;
-}
+  BODYOF_FREE(SoftBodySharedSettings::Face)
 
 /*
  * Class:     com_github_stephengold_joltjni_Face

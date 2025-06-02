@@ -44,11 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mutex_createDefault
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mutex_free
-  (JNIEnv *, jclass, jlong mutexVa) {
-    Mutex * const pMutex = reinterpret_cast<Mutex *> (mutexVa);
-    TRACE_DELETE("Mutex", pMutex)
-    delete pMutex;
-}
+  BODYOF_FREE(Mutex)
 
 /*
  * Class:     com_github_stephengold_joltjni_Mutex

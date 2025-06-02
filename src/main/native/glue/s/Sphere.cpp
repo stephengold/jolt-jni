@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -61,11 +61,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Sphere_encapsulatePoi
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Sphere_free
-  (JNIEnv *, jclass, jlong sphereVa) {
-    Sphere * const pSphere = reinterpret_cast<Sphere *> (sphereVa);
-    TRACE_DELETE("Sphere", pSphere)
-    delete pSphere;
-}
+  BODYOF_FREE(Sphere)
 
 /*
  * Class:     com_github_stephengold_joltjni_Sphere

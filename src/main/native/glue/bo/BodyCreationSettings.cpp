@@ -110,12 +110,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_free
-  (JNIEnv *, jclass, jlong bodySettingsVa) {
-    BodyCreationSettings * const pSettings
-            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
-    TRACE_DELETE("BodyCreationSettings", pSettings)
-    delete pSettings;
-}
+  BODYOF_FREE(BodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings

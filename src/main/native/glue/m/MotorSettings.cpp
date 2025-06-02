@@ -62,12 +62,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotorSettings_create
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotorSettings_free
-  (JNIEnv *, jclass, jlong settingsVa) {
-    MotorSettings * const pSettings
-            = reinterpret_cast<MotorSettings *> (settingsVa);
-    TRACE_DELETE("MotorSettings", pSettings)
-    delete pSettings;
-}
+  BODYOF_FREE(MotorSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_MotorSettings

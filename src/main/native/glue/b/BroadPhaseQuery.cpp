@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -117,9 +117,4 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseQuery_colli
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseQuery_free
-  (JNIEnv *, jclass, jlong queryVa) {
-    BroadPhaseQuery * const pQuery
-            = reinterpret_cast<BroadPhaseQuery *> (queryVa);
-    TRACE_DELETE("BroadPhaseQuery", pQuery)
-    delete pQuery;
-}
+  BODYOF_FREE(BroadPhaseQuery)

@@ -57,12 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkinWeight_createDef
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SkinWeight_free
-  (JNIEnv *, jclass, jlong weightVa) {
-    SoftBodySharedSettings::SkinWeight * const pWeight
-            = reinterpret_cast<SoftBodySharedSettings::SkinWeight *> (weightVa);
-    TRACE_DELETE("SoftBodySharedSettings::SkinWeight", pWeight);
-    delete pWeight;
-}
+  BODYOF_FREE(SoftBodySharedSettings::SkinWeight)
 
 /*
  * Class:     com_github_stephengold_joltjni_SkinWeight

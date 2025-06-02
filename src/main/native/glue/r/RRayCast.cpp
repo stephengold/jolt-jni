@@ -51,11 +51,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RRayCast_createRRayC
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RRayCast_free
-  (JNIEnv *, jclass, jlong raycastVa) {
-    RRayCast * const pRayCast = reinterpret_cast<RRayCast *> (raycastVa);
-    TRACE_DELETE("RRayCast", pRayCast)
-    delete pRayCast;
-}
+  BODYOF_FREE(RRayCast)
 
 /*
  * Class:     com_github_stephengold_joltjni_RRayCast

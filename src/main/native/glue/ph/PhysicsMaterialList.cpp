@@ -70,12 +70,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialList_e
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialList_free
-  (JNIEnv *, jclass, jlong listVa) {
-    PhysicsMaterialList * const pList
-            = reinterpret_cast<PhysicsMaterialList *> (listVa);
-    TRACE_DELETE("PhysicsMaterialList", pList)
-    delete pList;
-}
+  BODYOF_FREE(PhysicsMaterialList)
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterialList

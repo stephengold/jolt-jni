@@ -61,12 +61,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_creat
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionGroup_free
-  (JNIEnv *, jclass, jlong groupVa) {
-    CollisionGroup * const pGroup
-            = reinterpret_cast<CollisionGroup *> (groupVa);
-    TRACE_DELETE("CollisionGroup", pGroup)
-    delete pGroup;
-}
+  BODYOF_FREE(CollisionGroup)
 
 /*
  * Class:     com_github_stephengold_joltjni_CollisionGroup
