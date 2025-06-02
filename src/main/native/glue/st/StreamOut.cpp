@@ -36,11 +36,7 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StreamOut_free
-  (JNIEnv *, jclass, jlong streamVa) {
-    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
-    TRACE_DELETE("StreamOut", pStream)
-    delete pStream;
-}
+    BODYOF_FREE(StreamOut)
 
 /*
  * Class:     com_github_stephengold_joltjni_StreamOut

@@ -57,11 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_createEmpt
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_free
-  (JNIEnv *, jclass, jlong refVa) {
-    ShapeRefC * const pRef = reinterpret_cast<ShapeRefC *> (refVa);
-    TRACE_DELETE("ShapeRefC", pRef)
-    delete pRef;
-}
+    BODYOF_FREE(ShapeRefC)
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeRefC

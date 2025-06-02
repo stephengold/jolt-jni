@@ -68,11 +68,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeList_erase
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeList_free
-  (JNIEnv *, jclass, jlong listVa) {
-    ShapeList * const pList = reinterpret_cast<ShapeList *> (listVa);
-    TRACE_DELETE("ShapeList", pList)
-    delete pList;
-}
+    BODYOF_FREE(ShapeList)
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeList

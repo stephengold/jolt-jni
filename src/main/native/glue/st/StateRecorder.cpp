@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,12 +38,7 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_free
-  (JNIEnv *, jclass, jlong recorderVa) {
-    StateRecorder * const pRecorder
-            = reinterpret_cast<StateRecorder *> (recorderVa);
-    TRACE_DELETE("StateRecorder", pRecorder)
-    delete pRecorder;
-}
+    BODYOF_FREE(StateRecorder)
 
 /*
  * Class:     com_github_stephengold_joltjni_StateRecorder

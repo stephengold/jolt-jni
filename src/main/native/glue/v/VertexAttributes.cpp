@@ -61,12 +61,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_cre
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VertexAttributes_free
-  (JNIEnv *, jclass, jlong attributesVa) {
-    SoftBodySharedSettings::VertexAttributes * const pAttributes
-            = reinterpret_cast<SoftBodySharedSettings::VertexAttributes *> (attributesVa);
-    TRACE_DELETE("SoftBodySharedSettings::VertexAttributes", pAttributes)
-    delete pAttributes;
-}
+  BODYOF_FREE(SoftBodySharedSettings::VertexAttributes)
 
 /*
  * Class:     com_github_stephengold_joltjni_VertexAttributes

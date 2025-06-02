@@ -61,11 +61,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createTrian
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Triangle_free
-  (JNIEnv *, jclass, jlong triangleVa) {
-    Triangle * const pTriangle = reinterpret_cast<Triangle *> (triangleVa);
-    TRACE_DELETE("Triangle", pTriangle)
-    delete pTriangle;
-}
+    BODYOF_FREE(Triangle)
 
 /*
  * Class:     com_github_stephengold_joltjni_Triangle

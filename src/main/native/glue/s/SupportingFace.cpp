@@ -44,9 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SupportingFace_creat
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SupportingFace_free
-  (JNIEnv *, jclass, jlong faceVa) {
-    Shape::SupportingFace * const pFace
-            = reinterpret_cast<Shape::SupportingFace *> (faceVa);
-    TRACE_DELETE("Shape::SupportingFace", pFace)
-    delete pFace;
-}
+    BODYOF_FREE(Shape::SupportingFace)

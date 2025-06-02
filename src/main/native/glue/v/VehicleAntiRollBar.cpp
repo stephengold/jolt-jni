@@ -58,12 +58,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleAntiRollBar_c
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleAntiRollBar_free
-  (JNIEnv *, jclass, jlong barVa) {
-    VehicleAntiRollBar * const pBar
-            = reinterpret_cast<VehicleAntiRollBar *> (barVa);
-    TRACE_DELETE("VehicleAntiRollBar", pBar)
-    delete pBar;
-}
+  BODYOF_FREE(VehicleAntiRollBar)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleAntiRollBar

@@ -44,8 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeFilter_createDe
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeFilter_free
-  (JNIEnv *, jclass, jlong filterVa) {
-    ShapeFilter * const pFilter = reinterpret_cast<ShapeFilter *> (filterVa);
-    TRACE_DELETE("ShapeFilter", pFilter)
-    delete pFilter;
-}
+    BODYOF_FREE(ShapeFilter)

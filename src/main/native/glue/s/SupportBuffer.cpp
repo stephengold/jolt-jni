@@ -44,9 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SupportBuffer_create
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SupportBuffer_free
-  (JNIEnv *, jclass, jlong bufferVa) {
-    ConvexShape::SupportBuffer * const pBuffer
-            = reinterpret_cast<ConvexShape::SupportBuffer *> (bufferVa);
-    TRACE_DELETE("ConvexShape::SupportBuffer", pBuffer)
-    delete pBuffer;
-}
+    BODYOF_FREE(ConvexShape::SupportBuffer)

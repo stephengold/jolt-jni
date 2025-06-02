@@ -44,9 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdCreator_cr
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SubShapeIdCreator_free
-  (JNIEnv *, jclass, jlong creatorVa) {
-    SubShapeIDCreator * const pCreator
-            = reinterpret_cast<SubShapeIDCreator *> (creatorVa);
-    TRACE_DELETE("SubShapeIDCreator", pCreator)
-    delete pCreator;
-}
+    BODYOF_FREE(SubShapeIDCreator)

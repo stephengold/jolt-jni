@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Vertex_createDefault
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Vertex_free
-  (JNIEnv *, jclass, jlong vertexVa) {
-    SoftBodySharedSettings::Vertex * const pVertex
-            = reinterpret_cast<SoftBodySharedSettings::Vertex *> (vertexVa);
-    TRACE_DELETE("SoftBodySharedSettings::Vertex", pVertex)
-    delete pVertex;
-}
+  BODYOF_FREE(SoftBodySharedSettings::Vertex)
 
 /*
  * Class:     com_github_stephengold_joltjni_Vertex

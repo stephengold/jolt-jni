@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Volume_createDefault
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Volume_free
-  (JNIEnv *, jclass, jlong volumeVa) {
-    SoftBodySharedSettings::Volume * const pVolume
-            = reinterpret_cast<SoftBodySharedSettings::Volume *> (volumeVa);
-    TRACE_DELETE("SoftBodySharedSettings::Volume", pVolume)
-    delete pVolume;
-}
+  BODYOF_FREE(SoftBodySharedSettings::Volume)
 
 /*
  * Class:     com_github_stephengold_joltjni_Volume

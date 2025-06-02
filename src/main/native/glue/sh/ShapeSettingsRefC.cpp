@@ -36,12 +36,7 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShapeSettingsRefC_free
-  (JNIEnv *, jclass, jlong refVa) {
-    RefConst<ShapeSettings> * const pRef
-            = reinterpret_cast<RefConst<ShapeSettings> *> (refVa);
-    TRACE_DELETE("RefConst<ShapeSettings>", pRef)
-    delete pRef;
-}
+    BODYOF_FREE(RefConst<ShapeSettings>)
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeSettingsRefC

@@ -36,9 +36,4 @@ using namespace JPH;
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShapeCollector_free
-  (JNIEnv *, jclass, jlong collectorVa) {
-    TransformedShapeCollector * const pCollector
-            = reinterpret_cast<TransformedShapeCollector *> (collectorVa);
-    TRACE_DELETE("TransformedShapeCollector", pCollector)
-    delete pCollector;
-}
+    BODYOF_FREE(TransformedShapeCollector)

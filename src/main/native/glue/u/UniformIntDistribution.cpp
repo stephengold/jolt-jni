@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -48,12 +48,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_UniformIntDistri
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_UniformIntDistribution_free
-  (JNIEnv *, jclass, jlong distributionVa) {
-    uniform_int_distribution<int> * const pDistribution
-            = reinterpret_cast<uniform_int_distribution<int> *> (distributionVa);
-    TRACE_DELETE("uniform_int_distribution<int>", pDistribution)
-    delete pDistribution;
-}
+    BODYOF_FREE(uniform_int_distribution<int>)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_UniformIntDistribution

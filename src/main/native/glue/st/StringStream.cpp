@@ -66,11 +66,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_StringStream_cre
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_StringStream_free
-  (JNIEnv *, jclass, jlong streamVa) {
-    stringstream * const pStream = reinterpret_cast<stringstream *> (streamVa);
-    TRACE_DELETE("stringstream", pStream)
-    delete pStream;
-}
+    BODYOF_FREE(stringstream)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_StringStream
