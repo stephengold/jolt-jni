@@ -242,7 +242,7 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
-     * Count the faces. The settings are unaffected.
+     * Count the faces. The settings are unaffected. (native attribute: mFaces)
      *
      * @return the count (&ge;0)
      */

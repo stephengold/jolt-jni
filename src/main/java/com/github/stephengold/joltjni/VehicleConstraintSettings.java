@@ -64,7 +64,7 @@ public class VehicleConstraintSettings
     /**
      * Instantiate a copy of the specified settings.
      *
-     * @param original the material to copy (not {@code null}, unaffected)
+     * @param original the settings to copy (not {@code null}, unaffected)
      */
     public VehicleConstraintSettings(ConstVehicleConstraintSettings original) {
         long originalVa = original.targetVa();

@@ -25,6 +25,10 @@ SOFTWARE.
 /*
  * Author: Stephen Gold
  */
+
+/*
+ * Pre-processor macros for tracing heap allocations by glue code:
+ */
 #ifdef JPH_DEBUG
 
 extern bool gTraceAllocations;
@@ -43,7 +47,7 @@ extern bool gTraceAllocations;
 #define TRACE_DELETE(className, pointer)
 #endif
 /*
- * Generate the body of a static createCopy() method
+ * Pre-processor macro to generate the body of a static createCopy() method
  * to implement a copy constructor:
  */
 #define BODYOF_CREATE_COPY(className) \
@@ -54,7 +58,7 @@ extern bool gTraceAllocations;
     return reinterpret_cast<jlong> (pResult); \
 }
 /*
- * Generate the body of a static createDefault() method
+ * Pre-processor macro to generate the body of a static createDefault() method
  * to implement a no-arg constructor:
  */
 #define BODYOF_CREATE_DEFAULT(className) \
@@ -64,7 +68,7 @@ extern bool gTraceAllocations;
     return reinterpret_cast<jlong> (pResult); \
 }
 /*
- * Generate the body of a static free() method
+ * Pre-processor macro to generate the body of a static free() method
  * to implement a no-arg constructor:
  */
 #define BODYOF_FREE(className) \
@@ -74,7 +78,7 @@ extern bool gTraceAllocations;
     delete pObject; \
 }
 /*
- * Implement 5 methods associated with the
+ * Pre-processor macro to implement 5 methods associated with the
  * com.github.stephengold.templace.Ref class:
  */
 #define IMPLEMENT_REF(className, copyName, createName, freeName, getPtrName, toRefCName) \
@@ -106,7 +110,7 @@ extern bool gTraceAllocations;
     return reinterpret_cast<jlong> (pResult); \
   }
 /*
- * Implement 4 methods associated with the
+ * Pre-processor macro to implement 4 methods associated with the
  * com.github.stephengold.templace.Result class:
  */
 #define IMPLEMENT_RESULT(className, freeName, getErrorName, hasErrorName, isValidName) \

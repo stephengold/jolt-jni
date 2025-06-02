@@ -41,7 +41,7 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
     }
 
     /**
-     * Instantiate a scene with the specified native object assigned but not
+     * Instantiate a material with the specified native object assigned but not
      * owned.
      *
      * @param materialVa the virtual address of the native object to assign (not

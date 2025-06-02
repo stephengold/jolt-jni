@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -139,7 +139,7 @@ public class WheelSettingsWv extends WheelSettings {
     }
 
     /**
-     * Mark the native {@code WheelSettingsWv} as embedded.
+     * Mark the native {@code WheelSettingsWV} as embedded.
      */
     @Override
     public void setEmbedded() {
@@ -148,7 +148,7 @@ public class WheelSettingsWv extends WheelSettings {
     }
 
     /**
-     * Create a counted reference to the native {@code WheelSettingsWv}.
+     * Create a counted reference to the native {@code WheelSettingsWV}.
      *
      * @return a new JVM object with a new native object assigned
      */
