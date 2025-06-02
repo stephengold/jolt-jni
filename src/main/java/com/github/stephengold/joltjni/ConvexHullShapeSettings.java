@@ -44,17 +44,6 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    ConvexHullShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.ConvexHull);
-    }
-
-    /**
      * Instantiate settings for the specified collection of points.
      *
      * @param points a list of point locations (not null, unaffected)
@@ -96,6 +85,62 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         long settingsVa = createSettings(
                 numPoints, buffer, maxConvexRadius, materialVa);
         setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.ConvexHull);
+    }
+
+    /**
+     * Instantiate settings for the points in the specified buffer.
+     *
+     * @param numPoints the number of points (&ge;0)
+     * @param points a direct buffer containing point locations (not null,
+     * unaffected)
+     */
+    public ConvexHullShapeSettings(int numPoints, FloatBuffer points) {
+        this(numPoints, points, Jolt.cDefaultConvexRadius);
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param numPoints the number of points (&ge;0)
+     * @param points a direct buffer containing point locations (not null,
+     * unaffected)
+     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
+     * default=0.05)
+     */
+    public ConvexHullShapeSettings(
+            int numPoints, FloatBuffer points, float maxConvexRadius) {
+        this(numPoints, points, maxConvexRadius, null);
+    }
+
+    /**
+     * Instantiate settings for the specified parameters.
+     *
+     * @param numPoints the number of points (&ge;0)
+     * @param points a direct buffer containing point locations (not null,
+     * unaffected)
+     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
+     * default=0.05)
+     * @param material the desired surface properties (not null, unaffected) or
+     * {@code null} for default properties (default=null)
+     */
+    public ConvexHullShapeSettings(int numPoints, FloatBuffer points,
+            float maxConvexRadius, ConstPhysicsMaterial material) {
+        long materialVa = (material == null) ? 0L : material.targetVa();
+        long settingsVa = createSettings(
+                numPoints, points, maxConvexRadius, materialVa);
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.ConvexHull);
+    }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    ConvexHullShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.ConvexHull);
     }
 
@@ -153,51 +198,6 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
                 numPoints, buffer, maxConvexRadius, materialVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.ConvexHull);
-    }
-
-    /**
-     * Instantiate settings for the points in the specified buffer.
-     *
-     * @param numPoints the number of points (&ge;0)
-     * @param points a direct buffer containing point locations (not null,
-     * unaffected)
-     */
-    public ConvexHullShapeSettings(int numPoints, FloatBuffer points) {
-        this(numPoints, points, Jolt.cDefaultConvexRadius);
-    }
-
-    /**
-     * Instantiate settings for the specified parameters.
-     *
-     * @param numPoints the number of points (&ge;0)
-     * @param points a direct buffer containing point locations (not null,
-     * unaffected)
-     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
-     * default=0.05)
-     */
-    public ConvexHullShapeSettings(
-            int numPoints, FloatBuffer points, float maxConvexRadius) {
-        this(numPoints, points, maxConvexRadius, null);
-    }
-
-    /**
-     * Instantiate settings for the specified parameters.
-     *
-     * @param numPoints the number of points (&ge;0)
-     * @param points a direct buffer containing point locations (not null,
-     * unaffected)
-     * @param maxConvexRadius the desired maximum convex radius (&ge;0,
-     * default=0.05)
-     * @param material the desired surface properties (not null, unaffected) or
-     * {@code null} for default properties (default=null)
-     */
-    public ConvexHullShapeSettings(int numPoints, FloatBuffer points,
-            float maxConvexRadius, ConstPhysicsMaterial material) {
-        long materialVa = (material == null) ? 0L : material.targetVa();
-        long settingsVa = createSettings(
-                numPoints, points, maxConvexRadius, materialVa);
         setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.ConvexHull);
     }

@@ -433,18 +433,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
- * Method:    setEmbedded
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_setEmbedded
-  (JNIEnv *, jclass, jlong settingsVa) {
-    SoftBodySharedSettings * const pSettings
-            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
-    pSettings->SetEmbedded();
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    sCreateCubeNative
  * Signature: (IF)J
  */
@@ -456,6 +444,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettin
             = new Ref<SoftBodySharedSettings>(ref);
     TRACE_NEW("Ref<SoftBodySharedSettings>", pResult)
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    setEmbedded
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_setEmbedded
+  (JNIEnv *, jclass, jlong settingsVa) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    pSettings->SetEmbedded();
 }
 
 /*

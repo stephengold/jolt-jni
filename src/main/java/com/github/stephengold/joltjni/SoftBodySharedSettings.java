@@ -566,10 +566,10 @@ public class SoftBodySharedSettings
     native static void saveWithMaterials(long settingsVa, long streamVa,
             long settingsMapVa, long materialsMapVa);
 
-    native private static void setEmbedded(long settingsVa);
-
     native private static long sCreateCubeNative(
             int gridSize, float gridSpacing);
+
+    native private static void setEmbedded(long settingsVa);
 
     native static void setMaterialsSingle(long settingsVa, long materialVa);
 

@@ -40,6 +40,14 @@ public class WheeledVehicleControllerSettings
     }
 
     /**
+     * Instantiate settings with no native object assigned.
+     *
+     * @param dummy unused argument to distinguish from the zero-arg constructor
+     */
+    WheeledVehicleControllerSettings(boolean dummy) {
+    }
+
+    /**
      * Instantiate a settings object with the specified native object assigned
      * but not owned.
      *
@@ -60,14 +68,6 @@ public class WheeledVehicleControllerSettings
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa); // not owner due to ref counting
-    }
-
-    /**
-     * Instantiate settings with no native object assigned.
-     *
-     * @param dummy unused argument to distinguish from the zero-arg constructor
-     */
-    WheeledVehicleControllerSettings(boolean dummy) {
     }
     // *************************************************************************
     // new methods exposed
