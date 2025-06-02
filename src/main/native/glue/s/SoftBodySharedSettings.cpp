@@ -389,6 +389,50 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    restoreBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_restoreBinaryState
+  (JNIEnv *, jclass, jlong settingsVa, jlong streamVa) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    pSettings->RestoreBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    saveBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_saveBinaryState
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong streamVa) {
+    const SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (bodySettingsVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    pSettings->SaveBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    saveWithMaterials
+ * Signature: (JJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_saveWithMaterials
+  (JNIEnv *, jclass, jlong settingsVa, jlong streamVa,
+            jlong settingsMapVa, jlong materialsMapVa) {
+    const SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    StreamUtils::ObjectToIDMap<SoftBodySharedSettings> * const pSettingsMap
+            = reinterpret_cast<StreamUtils::ObjectToIDMap<SoftBodySharedSettings> *> (settingsMapVa);
+    StreamUtils::ObjectToIDMap<PhysicsMaterial> * const pMaterialsMap
+            = reinterpret_cast<StreamUtils::ObjectToIDMap<PhysicsMaterial> *> (materialsMapVa);
+    pSettings->SaveWithMaterials(*pStream, *pSettingsMap, *pMaterialsMap);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    setEmbedded
  * Signature: (J)V
  */
@@ -442,5 +486,25 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettin
     Ref<SoftBodySharedSettings> * const pResult
             = new Ref<SoftBodySharedSettings>(pSettings);
     TRACE_NEW("Ref<SoftBodySharedSettings>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    sRestoreWithMaterials
+ * Signature: (JJJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_sRestoreWithMaterials
+  (JNIEnv *, jclass, jlong streamVa, jlong settingsMapVa, jlong materialMapVa) {
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    SoftBodySharedSettings::IDToSharedSettingsMap * const pSettingsMap
+            = reinterpret_cast<SoftBodySharedSettings::IDToSharedSettingsMap *> (settingsMapVa);
+    SoftBodySharedSettings::IDToMaterialMap * const pMaterialMap
+            = reinterpret_cast<SoftBodySharedSettings::IDToMaterialMap *> (materialMapVa);
+    SoftBodySharedSettings::SettingsResult * const pResult
+            = new SoftBodySharedSettings::SettingsResult();
+    TRACE_NEW("SoftBodySharedSettings::SettingsResult", pResult);
+    *pResult = SoftBodySharedSettings::sRestoreWithMaterials(
+            *pStream, *pSettingsMap, *pMaterialMap);
     return reinterpret_cast<jlong> (pResult);
 }

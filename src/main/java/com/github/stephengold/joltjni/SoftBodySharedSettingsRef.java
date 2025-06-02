@@ -25,6 +25,8 @@ import com.github.stephengold.joltjni.enumerate.EBendType;
 import com.github.stephengold.joltjni.readonly.ConstFace;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
+import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
+import com.github.stephengold.joltjni.streamutils.SharedSettingsToIdMap;
 import com.github.stephengold.joltjni.template.Ref;
 import java.nio.IntBuffer;
 
@@ -321,6 +323,40 @@ final public class SoftBodySharedSettingsRef
         bufferPosition = SoftBodySharedSettings.putFaceIndices(
                 settingsVa, bufferPosition, storeIndices);
         storeIndices.position(bufferPosition);
+    }
+
+    /**
+     * Write the state of this object to the specified stream, excluding the
+     * materials. The settings are unaffected.
+     *
+     * @param stream where to write objects (not {@code null})
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long settingsVa = targetVa();
+        long streamVa = stream.va();
+        SoftBodySharedSettings.saveBinaryState(settingsVa, streamVa);
+    }
+
+    /**
+     * Write the state of this object to the specified stream. The settings are
+     * unaffected.
+     *
+     * @param stream where to write objects (not null)
+     * @param settingsMap track multiple uses of shared settings (not
+     * {@code null})
+     * @param materialMap track multiple uses of physics materials (not
+     * {@code null})
+     */
+    @Override
+    public void saveWithMaterials(StreamOut stream,
+            SharedSettingsToIdMap settingsMap, MaterialToIdMap materialMap) {
+        long settingsVa = targetVa();
+        long streamVa = stream.va();
+        long settingsMapVa = settingsMap.va();
+        long materialMapVa = materialMap.va();
+        SoftBodySharedSettings.saveWithMaterials(
+                settingsVa, streamVa, settingsMapVa, materialMapVa);
     }
     // *************************************************************************
     // Ref methods

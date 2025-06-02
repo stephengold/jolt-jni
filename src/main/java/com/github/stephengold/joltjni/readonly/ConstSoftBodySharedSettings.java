@@ -21,6 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.StreamOut;
+import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
+import com.github.stephengold.joltjni.streamutils.SharedSettingsToIdMap;
 import java.nio.IntBuffer;
 
 /**
@@ -80,4 +83,25 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
      * @param storeIndices the destination buffer (not null, modified)
      */
     void putFaceIndices(IntBuffer storeIndices);
+
+    /**
+     * Write the state of this object to the specified stream, excluding the
+     * materials. The settings are unaffected.
+     *
+     * @param stream where to write objects (not {@code null})
+     */
+    void saveBinaryState(StreamOut stream);
+
+    /**
+     * Write the state of this object to the specified stream. The settings are
+     * unaffected.
+     *
+     * @param stream where to write objects (not {@code null})
+     * @param settingsMap track multiple uses of shared settings (not
+     * {@code null})
+     * @param materialMap track multiple uses of physics materials (not
+     * {@code null})
+     */
+    void saveWithMaterials(StreamOut stream, SharedSettingsToIdMap settingsMap,
+            MaterialToIdMap materialMap);
 }

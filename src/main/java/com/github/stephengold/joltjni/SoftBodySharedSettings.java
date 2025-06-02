@@ -25,6 +25,10 @@ import com.github.stephengold.joltjni.enumerate.EBendType;
 import com.github.stephengold.joltjni.readonly.ConstFace;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
+import com.github.stephengold.joltjni.streamutils.IdToMaterialMap;
+import com.github.stephengold.joltjni.streamutils.IdToSharedSettingsMap;
+import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
+import com.github.stephengold.joltjni.streamutils.SharedSettingsToIdMap;
 import com.github.stephengold.joltjni.template.RefTarget;
 import java.nio.IntBuffer;
 
@@ -270,6 +274,18 @@ public class SoftBodySharedSettings
     }
 
     /**
+     * Read the state of this object from the specified stream, excluding the
+     * shape and group filter.
+     *
+     * @param stream where to read objects from (not null)
+     */
+    public void restoreBinaryState(StreamIn stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        restoreBinaryState(settingsVa, streamVa);
+    }
+
+    /**
      * Create a cube with edge constraints, volume constraints, and faces.
      *
      * @param gridSize the desired number of points on each axis (&ge;1)
@@ -294,6 +310,28 @@ public class SoftBodySharedSettings
         long settingsVa = va();
         long materialVa = (material == null) ? 0L : material.va();
         setMaterialsSingle(settingsVa, materialVa);
+    }
+
+    /**
+     * Read a settings object from the specified binary stream.
+     *
+     * @param stream where to read objects (not null)
+     * @param settingsMap track multiple uses of shared settings (not
+     * {@code null})
+     * @param materialMap track multiple uses of physics materials (not
+     * {@code null})
+     * @return a new object
+     */
+    public static SettingsResult sRestoreWithMaterials(StreamIn stream,
+            IdToSharedSettingsMap settingsMap, IdToMaterialMap materialMap) {
+        long streamVa = stream.va();
+        long settingsMapVa = settingsMap.va();
+        long materialMapVa = materialMap.va();
+        long resultVa
+                = sRestoreWithMaterials(streamVa, settingsMapVa, materialMapVa);
+        SettingsResult result = new SettingsResult(resultVa, true);
+
+        return result;
     }
     // *************************************************************************
     // ConstSoftBodySharedSettings methods
@@ -395,6 +433,40 @@ public class SoftBodySharedSettings
                 settingsVa, bufferPosition, storeIndices);
         storeIndices.position(bufferPosition);
     }
+
+    /**
+     * Write the state of this object to the specified stream, excluding the
+     * materials. The settings are unaffected.
+     *
+     * @param stream where to write objects (not {@code null})
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(settingsVa, streamVa);
+    }
+
+    /**
+     * Write the state of this object to the specified stream. The settings are
+     * unaffected.
+     *
+     * @param stream where to write objects (not null)
+     * @param settingsMap track multiple uses of shared settings (not
+     * {@code null})
+     * @param materialMap track multiple uses of physics materials (not
+     * {@code null})
+     */
+    @Override
+    public void saveWithMaterials(StreamOut stream,
+            SharedSettingsToIdMap settingsMap, MaterialToIdMap materialMap) {
+        long settingsVa = va();
+        long streamVa = stream.va();
+        long settingsMapVa = settingsMap.va();
+        long materialMapVa = materialMap.va();
+        saveWithMaterials(
+                settingsVa, streamVa, settingsMapVa, materialMapVa);
+    }
     // *************************************************************************
     // RefTarget methods
 
@@ -487,6 +559,13 @@ public class SoftBodySharedSettings
     native static int putFaceIndices(
             long settingsVa, int bufferPosition, IntBuffer storeIndices);
 
+    native static void restoreBinaryState(long settingsVa, long streamVa);
+
+    native static void saveBinaryState(long settingsVa, long streamVa);
+
+    native static void saveWithMaterials(long settingsVa, long streamVa,
+            long settingsMapVa, long materialsMapVa);
+
     native private static void setEmbedded(long settingsVa);
 
     native private static long sCreateCubeNative(
@@ -495,4 +574,7 @@ public class SoftBodySharedSettings
     native static void setMaterialsSingle(long settingsVa, long materialVa);
 
     native private static long toRef(long settingsVa);
+
+    native private static long sRestoreWithMaterials(
+            long streamVa, long settingsMapVa, long materialMapVa);
 }
