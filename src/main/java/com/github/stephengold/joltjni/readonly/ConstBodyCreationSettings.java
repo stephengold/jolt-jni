@@ -243,6 +243,14 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     boolean hasMassProperties();
 
     /**
+     * Write the state of this object to the specified stream, excluding the
+     * shape, materials, and group filter. The settings are unaffected.
+     *
+     * @param stream where to write objects (not null)
+     */
+    void saveBinaryState(StreamOut stream);
+
+    /**
      * Write the state of this object to the specified stream. The settings are
      * unaffected.
      *

@@ -578,6 +578,32 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    restoreBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_restoreBinaryState
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong streamVa) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamVa);
+    pSettings->RestoreBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    saveBinaryState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_saveBinaryState
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong streamVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamVa);
+    pSettings->SaveBinaryState(*pStream);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    saveWithChildren
  * Signature: (JJJJJ)V
  */

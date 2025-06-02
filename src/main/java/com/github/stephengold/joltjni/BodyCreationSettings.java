@@ -163,6 +163,18 @@ public class BodyCreationSettings
     }
 
     /**
+     * Read the state of this object from the specified stream, excluding the
+     * shape and group filter.
+     *
+     * @param stream where to read objects from (not null)
+     */
+    public void restoreBinaryState(StreamIn stream) {
+        long bodySettingsVa = va();
+        long streamVa = stream.va();
+        restoreBinaryState(bodySettingsVa, streamVa);
+    }
+
+    /**
      * Alter whether a static body can be converted to kinematic or dynamic.
      * (native member: mAllowDynamicOrKinematic)
      *
@@ -996,6 +1008,19 @@ public class BodyCreationSettings
     }
 
     /**
+     * Write the state of this object to the specified stream, excluding the
+     * shape, materials, and group filter. The settings are unaffected.
+     *
+     * @param stream where to write objects (not null)
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long bodySettingsVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(bodySettingsVa, streamVa);
+    }
+
+    /**
      * Write the state of this object to the specified stream. The settings are
      * unaffected.
      *
@@ -1123,6 +1148,12 @@ public class BodyCreationSettings
     native private static long getShapeSettings(long bodySettingsVa);
 
     native private static boolean hasMassProperties(long bodySettingsVa);
+
+    native private static void restoreBinaryState(
+            long bodySettingsVa, long streamVa);
+
+    native private static void saveBinaryState(
+            long bodySettingsVa, long streamVa);
 
     native private static void saveWithChildren(
             long bodySettingsVa, long streamVa, long shapeMapVa,
