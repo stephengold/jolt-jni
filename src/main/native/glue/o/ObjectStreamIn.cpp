@@ -29,6 +29,7 @@ SOFTWARE.
 #include "Jolt/Physics/Constraints/Constraint.h"
 #include "Jolt/Physics/PhysicsScene.h"
 #include "Jolt/Physics/Ragdoll/Ragdoll.h"
+#include "Jolt/Physics/Vehicle/VehicleController.h"
 #include "Jolt/Skeleton/SkeletalAnimation.h"
 
 #include "auto/com_github_stephengold_joltjni_ObjectStreamIn.h"
@@ -66,6 +67,21 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
             = reinterpret_cast<std::stringstream *> (streamVa);
     Ref<ConstraintSettings> * const pSettingsRef
             = reinterpret_cast<Ref<ConstraintSettings> *> (settingsRefVa);
+    const bool result = ObjectStreamIn::sReadObject(*pStream, *pSettingsRef);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadControllerSettingsFromStream
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadControllerSettingsFromStream
+  (JNIEnv *, jclass, jlong streamVa, jlong settingsRefVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    Ref<VehicleControllerSettings> * const pSettingsRef
+            = reinterpret_cast<Ref<VehicleControllerSettings> *> (settingsRefVa);
     const bool result = ObjectStreamIn::sReadObject(*pStream, *pSettingsRef);
     return result;
 }

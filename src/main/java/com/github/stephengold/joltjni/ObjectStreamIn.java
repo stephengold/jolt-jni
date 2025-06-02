@@ -209,6 +209,23 @@ final public class ObjectStreamIn {
 
         return result;
     }
+
+    /**
+     * Read a vehicle-controller settings object from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param settingsRef where to store the reference to the de-serialized
+     * settings (not null, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, VehicleControllerSettingsRef settingsRef) {
+        long streamVa = stream.va();
+        long refVa = settingsRef.va();
+        boolean result = sReadControllerSettingsFromStream(streamVa, refVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -217,6 +234,9 @@ final public class ObjectStreamIn {
 
     native private static boolean sReadConstraintSettingsFromStream(
             long streamVa, long settingsRefVa);
+
+    native private static boolean sReadControllerSettingsFromStream(
+            long streamVa, long refVa);
 
     native private static boolean sReadGroupFilterTableFromStream(
             long streamVa, long refVa);
