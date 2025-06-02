@@ -38,12 +38,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ClosestHitCollideShapeCollector_createDefault
-  (JNIEnv *, jclass) {
-    ClosestHitCollisionCollector<CollideShapeCollector> * const pCollector
-            = new ClosestHitCollisionCollector<CollideShapeCollector>();
-    TRACE_NEW("ClosestHitCollisionCollector<CollideShapeCollector>", pCollector)
-    return reinterpret_cast<jlong> (pCollector);
-}
+  BODYOF_CREATE_DEFAULT(ClosestHitCollisionCollector<CollideShapeCollector>)
 
 /*
  * Class:     com_github_stephengold_joltjni_ClosestHitCollideShapeCollector

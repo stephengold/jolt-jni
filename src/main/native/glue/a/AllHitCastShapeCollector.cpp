@@ -51,12 +51,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_AllHitCastShapeCollec
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AllHitCastShapeCollector_createDefault
-  (JNIEnv *, jclass) {
-    AllHitCollisionCollector<CastShapeCollector> * const pCollector
-            = new AllHitCollisionCollector<CastShapeCollector>();
-    TRACE_NEW("AllHitCollisionCollector<CastShapeCollector>", pCollector)
-    return reinterpret_cast<jlong> (pCollector);
-}
+  BODYOF_CREATE_DEFAULT(AllHitCollisionCollector<CastShapeCollector>)
 
 /*
  * Class:     com_github_stephengold_joltjni_AllHitCastShapeCollector

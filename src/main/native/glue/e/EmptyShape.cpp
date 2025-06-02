@@ -36,8 +36,4 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShape_createDefault
-  (JNIEnv *, jclass) {
-    EmptyShape * const pResult = new EmptyShape();
-    TRACE_NEW("EmptyShape", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(EmptyShape)

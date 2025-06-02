@@ -65,11 +65,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_createDefault
-  (JNIEnv *, jclass) {
-    BodyCreationSettings * const pResult = new BodyCreationSettings();
-    TRACE_NEW("BodyCreationSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(BodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings

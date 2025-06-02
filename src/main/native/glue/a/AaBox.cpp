@@ -90,11 +90,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createCubic
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createDefault
-  (JNIEnv *, jclass) {
-    AABox * const pResult = new AABox();
-    TRACE_NEW("AABox", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(AABox)
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox

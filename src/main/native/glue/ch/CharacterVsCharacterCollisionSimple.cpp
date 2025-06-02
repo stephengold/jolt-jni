@@ -50,12 +50,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVsCharacterC
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVsCharacterCollisionSimple_createDefault
-  (JNIEnv *, jclass) {
-    CharacterVsCharacterCollisionSimple * const pInterface
-            = new CharacterVsCharacterCollisionSimple();
-    TRACE_NEW("CharacterVsCharacterCollisionSimple", pInterface)
-    return reinterpret_cast<jlong> (pInterface);
-}
+  BODYOF_CREATE_DEFAULT(CharacterVsCharacterCollisionSimple)
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVsCharacterCollisionSimple

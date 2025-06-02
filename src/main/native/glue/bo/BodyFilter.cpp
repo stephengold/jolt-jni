@@ -36,11 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyFilter_createDefaultFilter
-  (JNIEnv *, jclass) {
-    BodyFilter * const pResult = new BodyFilter();
-    TRACE_NEW("BodyFilter", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(BodyFilter)
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyFilter

@@ -51,11 +51,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_capacity
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_createBodyIdVector
-  (JNIEnv *, jclass) {
-    BodyIDVector * const pVector = new BodyIDVector();
-    TRACE_NEW("BodyIDVector", pVector)
-    return reinterpret_cast<jlong> (pVector);
-}
+  BODYOF_CREATE_DEFAULT(BodyIDVector)
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector

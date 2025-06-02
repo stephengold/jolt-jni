@@ -38,12 +38,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AnyHitCollideShapeCollector_createDefault
-  (JNIEnv *, jclass) {
-    AnyHitCollisionCollector<CollideShapeCollector> * const pCollector
-            = new AnyHitCollisionCollector<CollideShapeCollector>();
-    TRACE_NEW("AnyHitCollisionCollector<CollideShapeCollector>", pCollector)
-    return reinterpret_cast<jlong> (pCollector);
-}
+  BODYOF_CREATE_DEFAULT(AnyHitCollisionCollector<CollideShapeCollector>)
 
 /*
  * Class:     com_github_stephengold_joltjni_AnyHitCollideShapeCollector

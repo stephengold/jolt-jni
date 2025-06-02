@@ -52,12 +52,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_AllHitTransformedShap
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AllHitTransformedShapeCollector_createDefault
-  (JNIEnv *, jclass) {
-    AllHitCollisionCollector<TransformedShapeCollector> * const pCollector
-            = new AllHitCollisionCollector<TransformedShapeCollector>();
-    TRACE_NEW("AllHitCollisionCollector<TransformedShapeCollector>", pCollector)
-    return reinterpret_cast<jlong> (pCollector);
-}
+  BODYOF_CREATE_DEFAULT(AllHitCollisionCollector<TransformedShapeCollector>)
 
 /*
  * Class:     com_github_stephengold_joltjni_AllHitTransformedShapeCollector

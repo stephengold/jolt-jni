@@ -39,12 +39,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AnyHitCastRayCollector_createDefault
-  (JNIEnv *, jclass) {
-    AnyHitCollisionCollector<CastRayCollector> * const pCollector
-            = new AnyHitCollisionCollector<CastRayCollector>();
-    TRACE_NEW("AnyHitCollisionCollector<CastRayCollector>", pCollector)
-    return reinterpret_cast<jlong> (pCollector);
-}
+  BODYOF_CREATE_DEFAULT(AnyHitCollisionCollector<CastRayCollector>)
 
 /*
  * Class:     com_github_stephengold_joltjni_AnyHitCastRayCollector

@@ -36,12 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GetTrianglesContext_createDefault
-  (JNIEnv *, jclass) {
-    Shape::GetTrianglesContext * const pResult
-            = new Shape::GetTrianglesContext();
-    TRACE_NEW("Shape::GetTrianglesContext", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(Shape::GetTrianglesContext)
 
 /*
  * Class:     com_github_stephengold_joltjni_GetTrianglesContext

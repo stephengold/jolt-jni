@@ -87,11 +87,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManager_allocate
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManager_createBodyManager
-  (JNIEnv *, jclass) {
-    BodyManager * const pManager = new BodyManager();
-    TRACE_NEW("BodyManager", pManager)
-    return reinterpret_cast<jlong> (pManager);
-}
+  BODYOF_CREATE_DEFAULT(BodyManager)
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyManager

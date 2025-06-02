@@ -36,12 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_streamutils_GroupFilterToIdMap_createDefault
-  (JNIEnv *, jclass) {
-    StreamUtils::ObjectToIDMap<GroupFilter> * const pResult
-            = new StreamUtils::ObjectToIDMap<GroupFilter>();
-    TRACE_NEW("StreamUtils::ObjectToIDMap<GroupFilter>", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(StreamUtils::ObjectToIDMap<GroupFilter>)
 
 /*
  * Class:     com_github_stephengold_joltjni_streamutils_GroupFilterToIdMap

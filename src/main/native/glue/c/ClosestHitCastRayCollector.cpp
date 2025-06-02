@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,12 +39,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ClosestHitCastRayCollector_createDefault
-  (JNIEnv *, jclass) {
-    ClosestHitCollisionCollector<CastRayCollector> * const pCollector
-            = new ClosestHitCollisionCollector<CastRayCollector>();
-    TRACE_NEW("ClosestHitCollisionCollector<CastRayCollector>", pCollector)
-    return reinterpret_cast<jlong> (pCollector);
-}
+  BODYOF_CREATE_DEFAULT(ClosestHitCollisionCollector<CastRayCollector>)
 
 /*
  * Class:     com_github_stephengold_joltjni_ClosestHitCastRayCollector

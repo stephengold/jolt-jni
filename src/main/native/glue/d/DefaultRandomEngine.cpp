@@ -35,11 +35,7 @@ using namespace std;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_DefaultRandomEngine_createDefault
-  (JNIEnv *, jclass) {
-    default_random_engine * const pResult = new default_random_engine();
-    TRACE_NEW("default_random_engine", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(default_random_engine)
 
 /*
  * Class:     com_github_stephengold_joltjni_std_DefaultRandomEngine

@@ -51,12 +51,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_AllHitCollideShapeCol
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AllHitCollideShapeCollector_createDefault
-  (JNIEnv *, jclass) {
-    AllHitCollisionCollector<CollideShapeCollector> * const pCollector
-            = new AllHitCollisionCollector<CollideShapeCollector>();
-    TRACE_NEW("AllHitCollisionCollector<CollideShapeCollector>", pCollector)
-    return reinterpret_cast<jlong> (pCollector);
-}
+  BODYOF_CREATE_DEFAULT(AllHitCollisionCollector<CollideShapeCollector>)
 
 /*
  * Class:     com_github_stephengold_joltjni_AllHitCollideShapeCollector
