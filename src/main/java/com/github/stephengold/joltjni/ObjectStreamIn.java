@@ -107,6 +107,40 @@ final public class ObjectStreamIn {
     }
 
     /**
+     * Read a group-filter table from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param filterRef where to store the reference to the de-serialized filter
+     * (not null, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, GroupFilterTableRef filterRef) {
+        long streamVa = stream.va();
+        long refVa = filterRef.va();
+        boolean result = sReadGroupFilterTableFromStream(streamVa, refVa);
+
+        return result;
+    }
+
+    /**
+     * Read a material from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param materialRef where to store the reference to the de-serialized
+     * material (not null, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, PhysicsMaterialRef materialRef) {
+        long streamVa = stream.va();
+        long refVa = materialRef.va();
+        boolean result = sReadPhysicsMaterialFromStream(streamVa, refVa);
+
+        return result;
+    }
+
+    /**
      * Read a scene from the specified stream.
      *
      * @param stream the stream to read from (not null)
@@ -139,6 +173,42 @@ final public class ObjectStreamIn {
 
         return result;
     }
+
+    /**
+     * Read a soft-body settings object from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param storeSbcs where to store the de-serialized settings (not null,
+     * length&gt;0, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, SoftBodyCreationSettings[] storeSbcs) {
+        long streamVa = stream.va();
+        long[] storeVa = {0L};
+        boolean result = sReadSbcsFromStream(streamVa, storeVa);
+        long bodySettingsVa = storeVa[0];
+        storeSbcs[0] = new SoftBodyCreationSettings(bodySettingsVa, true);
+
+        return result;
+    }
+
+    /**
+     * Read a soft-body shared-settings object from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param settingsRef where to store the reference to the de-serialized
+     * settings (not null, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, SoftBodySharedSettingsRef settingsRef) {
+        long streamVa = stream.va();
+        long refVa = settingsRef.va();
+        boolean result = sReadSbssFromStream(streamVa, refVa);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -147,6 +217,12 @@ final public class ObjectStreamIn {
 
     native private static boolean sReadConstraintSettingsFromStream(
             long streamVa, long settingsRefVa);
+
+    native private static boolean sReadGroupFilterTableFromStream(
+            long streamVa, long refVa);
+
+    native private static boolean sReadPhysicsMaterialFromStream(
+            long streamVa, long refVa);
 
     native private static boolean sReadPhysicsScene(
             String fileName, long refVa);
@@ -158,6 +234,12 @@ final public class ObjectStreamIn {
             String fileName, long refVa);
 
     native private static boolean sReadRagdollSettingsFromStream(
+            long streamVa, long refVa);
+
+    native private static boolean sReadSbcsFromStream(
+            long streamVa, long[] storeVa);
+
+    native private static boolean sReadSbssFromStream(
             long streamVa, long refVa);
 
     native private static boolean sReadSkeletalAnimation(
