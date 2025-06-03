@@ -42,6 +42,15 @@ public class PlaneShapeSettings extends ShapeSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public PlaneShapeSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Plane);
+    }
+
+    /**
      * Instantiate settings for the specified plane.
      *
      * @param plane the desired surface plane (not null, unaffected)
@@ -183,6 +192,8 @@ public class PlaneShapeSettings extends ShapeSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createDefault();
 
     native private static long createPlaneShapeSettings(float nx, float ny,
             float nz, float planeConstant, long materialVa, float halfExtent);

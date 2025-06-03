@@ -58,6 +58,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_add
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_createDefault
+  BODYOF_CREATE_DEFAULT(MeshShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
  * Method:    createMeshShapeSettings
  * Signature: (ILjava/nio/FloatBuffer;J)J
  */

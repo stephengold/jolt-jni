@@ -57,6 +57,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_cre
 
 /*
  * Class:     com_github_stephengold_joltjni_BoxShapeSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_createDefault
+  BODYOF_CREATE_DEFAULT(BoxShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShapeSettings
  * Method:    getConvexRadius
  * Signature: (J)F
  */

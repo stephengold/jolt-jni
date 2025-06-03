@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,15 @@ import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 public class CylinderShapeSettings extends ConvexShapeSettings {
     // *************************************************************************
     // constructors
+
+    /**
+     * Instantiate default settings.
+     */
+    public CylinderShapeSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Cylinder);
+    }
 
     /**
      * Instantiate with the specified native object assigned but not owned.
@@ -154,6 +163,8 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createDefault();
 
     native private static long createShapeSettings(float halfHeight,
             float radius, float convexRadius, long materialVa);

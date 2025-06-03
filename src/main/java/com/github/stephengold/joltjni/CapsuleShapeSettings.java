@@ -33,6 +33,15 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public CapsuleShapeSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Capsule);
+    }
+
+    /**
      * Instantiate a copy of the specified settings.
      *
      * @param original the settings to copy (not {@code null}, unaffected)
@@ -133,6 +142,8 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     // native private methods
 
     native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native private static long createShapeSettings(
             float halfHeight, float radius, long materialVa);

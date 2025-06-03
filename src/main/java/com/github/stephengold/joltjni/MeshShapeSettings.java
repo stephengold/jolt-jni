@@ -35,6 +35,15 @@ public class MeshShapeSettings extends ShapeSettings {
     // constructors
 
     /**
+     * Instantiate the default settings.
+     */
+    public MeshShapeSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Mesh);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -358,6 +367,8 @@ public class MeshShapeSettings extends ShapeSettings {
 
     native private static void addTriangleVertex(
             long settingsVa, float x, float y, float z);
+
+    native private static long createDefault();
 
     native private static long createMeshShapeSettings(
             int numVertices, FloatBuffer vertices, long indicesVa);

@@ -33,6 +33,16 @@ import java.nio.FloatBuffer;
 public class HeightFieldShapeSettings extends ShapeSettings {
     // *************************************************************************
     // constructors
+
+    /**
+     * Instantiate the default settings.
+     */
+    public HeightFieldShapeSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.HeightField);
+    }
+
     /**
      * Instantiate a copy of the specified settings.
      *
@@ -380,6 +390,8 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     // native private methods
 
     native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native private static long createSettingsFromArray(
             float[] samples, float offsetX, float offsetY, float offsetZ,

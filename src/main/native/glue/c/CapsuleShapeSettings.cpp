@@ -55,6 +55,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings
 
 /*
  * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_createDefault
+  BODYOF_CREATE_DEFAULT(CapsuleShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
  * Method:    getHalfHeightOfCylinder
  * Signature: (J)F
  */

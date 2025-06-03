@@ -35,6 +35,15 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public BoxShapeSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Box);
+    }
+
+    /**
      * Instantiate a copy of the specified settings.
      *
      * @param original the settings to copy (not {@code null}, unaffected)
@@ -185,6 +194,8 @@ public class BoxShapeSettings extends ConvexShapeSettings {
             float hx, float hy, float hz, float convexRadius, long materialVa);
 
     native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native private static float getConvexRadius(long settingsVa);
 
