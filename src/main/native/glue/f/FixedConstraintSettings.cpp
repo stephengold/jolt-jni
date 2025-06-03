@@ -44,11 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSetti
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_createFixedConstraintSettings
-  (JNIEnv *, jclass) {
-    FixedConstraintSettings * const pResult = new FixedConstraintSettings();
-    TRACE_NEW("FixedConstraintSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(FixedConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_FixedConstraintSettings

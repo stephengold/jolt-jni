@@ -57,7 +57,7 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
      * @param original the material to copy (not {@code null}, unaffected)
      */
     public PhysicsMaterialSimple(PhysicsMaterialSimple original) {
-        long originalVa = original.targetVa();
+        long originalVa = original.va();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa); // not owner due to ref counting
     }

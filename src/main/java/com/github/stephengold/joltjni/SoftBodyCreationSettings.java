@@ -652,8 +652,8 @@ public class SoftBodyCreationSettings
      */
     @Override
     public float getVertexRadius() {
-        long settingsVa = va();
-        float result = getVertexRadius(settingsVa);
+        long bodySettingsVa = va();
+        float result = getVertexRadius(bodySettingsVa);
 
         return result;
     }
@@ -748,7 +748,7 @@ public class SoftBodyCreationSettings
 
     native private static long getUserData(long bodySettingsVa);
 
-    native static float getVertexRadius(long settingsVa);
+    native static float getVertexRadius(long bodySettingsVa);
 
     native private static void restoreBinaryState(
             long bodySettingsVa, long streamVa);

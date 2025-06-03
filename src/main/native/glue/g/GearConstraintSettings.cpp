@@ -44,11 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettin
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_createGearConstraintSettings
-  (JNIEnv *, jclass) {
-    GearConstraintSettings * const pResult = new GearConstraintSettings();
-    TRACE_NEW("GearConstraintSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(GearConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_GearConstraintSettings

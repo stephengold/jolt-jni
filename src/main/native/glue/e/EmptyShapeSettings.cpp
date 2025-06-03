@@ -44,8 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShapeSettings_c
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShapeSettings_createEmptyShapeSettings
-  (JNIEnv *, jclass) {
-    EmptyShapeSettings * const pResult = new EmptyShapeSettings();
-    TRACE_NEW("EmptyShapeSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(EmptyShapeSettings)

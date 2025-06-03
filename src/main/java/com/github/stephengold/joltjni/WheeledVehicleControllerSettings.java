@@ -65,7 +65,7 @@ public class WheeledVehicleControllerSettings
      */
     public WheeledVehicleControllerSettings(
             WheeledVehicleControllerSettings original) {
-        long originalVa = original.targetVa();
+        long originalVa = original.va();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa); // not owner due to ref counting
     }

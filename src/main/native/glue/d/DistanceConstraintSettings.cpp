@@ -44,12 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DistanceConstraintSe
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DistanceConstraintSettings_createDistanceConstraintSettings
-  (JNIEnv *, jclass) {
-    DistanceConstraintSettings * const pResult
-            = new DistanceConstraintSettings();
-    TRACE_NEW("DistanceConstraintSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(DistanceConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_DistanceConstraintSettings

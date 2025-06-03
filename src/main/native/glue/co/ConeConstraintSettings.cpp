@@ -36,11 +36,7 @@ using namespace JPH;
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_createConeConstraintSettings
-  (JNIEnv *, jclass) {
-    ConeConstraintSettings * const pResult = new ConeConstraintSettings();
-    TRACE_NEW("ConeConstraintSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(ConeConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
