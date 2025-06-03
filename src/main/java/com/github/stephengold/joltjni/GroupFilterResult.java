@@ -46,22 +46,6 @@ final public class GroupFilterResult extends Result<GroupFilterRef> {
         setVirtualAddress(resultVa, freeingAction);
     }
     // *************************************************************************
-    // new methods exposed
-
-    /**
-     * Return the result of a successful operation, assuming it's a
-     * {@code GroupFilterTableRef}.
-     *
-     * @return a new JVM object with a new native object assigned
-     */
-    public GroupFilterTableRef getAsTableRef() {
-        long resultVa = va();
-        long sceneRefVa = get(resultVa);
-        GroupFilterTableRef result = new GroupFilterTableRef(sceneRefVa, true);
-
-        return result;
-    }
-    // *************************************************************************
     // Result<GroupFilterRef> methods
 
     /**
