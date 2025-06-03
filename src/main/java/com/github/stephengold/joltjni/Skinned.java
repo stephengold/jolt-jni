@@ -55,17 +55,6 @@ public class Skinned extends JoltPhysicsObject {
     }
 
     /**
-     * Instantiate a constraint with the specified container and native object.
-     *
-     * @param container the containing object, or {@code null} if none
-     * @param skinnedVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    Skinned(JoltPhysicsObject container, long skinnedVa) {
-        super(container, skinnedVa);
-    }
-
-    /**
      * Instantiate a copy of the specified constraint.
      *
      * @param original the constraint to copy (not {@code null}, unaffected)
