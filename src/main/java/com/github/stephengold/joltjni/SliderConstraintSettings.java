@@ -54,6 +54,18 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
         super(settingsVa);
         setSubType(EConstraintSubType.Slider);
     }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public SliderConstraintSettings(SliderConstraintSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EConstraintSubType.Slider);
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -423,6 +435,8 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createSliderConstraintSettings();
 

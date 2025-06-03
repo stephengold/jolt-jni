@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BoxShapeSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_createCopy
+  BODYOF_CREATE_COPY(PlaneShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_BoxShapeSettings
  * Method:    createDefault
  * Signature: ()J
  */

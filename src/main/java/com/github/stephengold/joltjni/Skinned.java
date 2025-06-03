@@ -64,6 +64,17 @@ public class Skinned extends JoltPhysicsObject {
     Skinned(JoltPhysicsObject container, long skinnedVa) {
         super(container, skinnedVa);
     }
+
+    /**
+     * Instantiate a copy of the specified constraint.
+     *
+     * @param original the constraint to copy (not {@code null}, unaffected)
+     */
+    public Skinned(Skinned original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -113,6 +124,8 @@ public class Skinned extends JoltPhysicsObject {
 
     native private static long createBackstopped(int vertexIndex,
             float maxDistance, float backstopDistance, float backstopRadius);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

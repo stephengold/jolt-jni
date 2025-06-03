@@ -45,6 +45,17 @@ final public class OrientedBox
     }
 
     /**
+     * Instantiate a copy of the specified box.
+     *
+     * @param original the box to copy (not {@code null}, unaffected)
+     */
+    public OrientedBox(ConstOrientedBox original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
+
+    /**
      * Instantiate a box with the specified transform and half extents.
      *
      * @param orientation the desired rotation and translation (not null,
@@ -99,6 +110,8 @@ final public class OrientedBox
 
     native private static long createBox(
             long transformVa, float hx, float hy, float hz);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

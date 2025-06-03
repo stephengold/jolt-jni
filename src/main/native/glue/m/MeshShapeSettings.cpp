@@ -58,6 +58,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_add
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_createCopy
+  BODYOF_CREATE_COPY(MeshShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_MeshShapeSettings
  * Method:    createDefault
  * Signature: ()J
  */

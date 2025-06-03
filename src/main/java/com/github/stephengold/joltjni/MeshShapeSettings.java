@@ -120,6 +120,18 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public MeshShapeSettings(MeshShapeSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Mesh);
+    }
+
+    /**
      * Instantiate settings for the specified lists of vertices and triangles.
      *
      * @param vertices the list of vertices (not null, unaffected)
@@ -367,6 +379,8 @@ public class MeshShapeSettings extends ShapeSettings {
 
     native private static void addTriangleVertex(
             long settingsVa, float x, float y, float z);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

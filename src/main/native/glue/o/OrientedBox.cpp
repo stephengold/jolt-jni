@@ -46,6 +46,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OrientedBox_createBo
 
 /*
  * Class:     com_github_stephengold_joltjni_OrientedBox
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OrientedBox_createCopy
+  BODYOF_CREATE_COPY(OrientedBox)
+
+/*
+ * Class:     com_github_stephengold_joltjni_OrientedBox
  * Method:    createDefault
  * Signature: ()J
  */

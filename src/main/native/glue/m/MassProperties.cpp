@@ -31,6 +31,14 @@ SOFTWARE.
 using namespace JPH;
 
 /*
+ * Class:     com_github_stephengold_joltjni_createCopy
+ * Method:    createMassProperties
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MassProperties_createCopy
+  BODYOF_CREATE_COPY(MassProperties)
+
+/*
  * Class:     com_github_stephengold_joltjni_MassProperties
  * Method:    createMassProperties
  * Signature: ()J

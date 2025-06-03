@@ -41,6 +41,14 @@ IMPLEMENT_REF(WheelSettingsTV,
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettingsTv
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsTv_createCopy
+  BODYOF_CREATE_COPY(WheelSettingsTV)
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsTv
  * Method:    createDefault
  * Signature: ()J
  */

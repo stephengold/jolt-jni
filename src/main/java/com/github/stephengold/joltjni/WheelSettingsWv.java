@@ -47,6 +47,17 @@ public class WheelSettingsWv extends WheelSettings {
     WheelSettingsWv(long settingsVa) {
         setVirtualAddress(settingsVa); // not owner due to ref counting
     }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public WheelSettingsWv(WheelSettingsWv original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -162,6 +173,8 @@ public class WheelSettingsWv extends WheelSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

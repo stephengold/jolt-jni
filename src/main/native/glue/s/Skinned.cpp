@@ -47,6 +47,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skinned_createBackst
 
 /*
  * Class:     com_github_stephengold_joltjni_Skinned
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skinned_createCopy
+    BODYOF_CREATE_COPY(SoftBodySharedSettings::Skinned)
+
+/*
+ * Class:     com_github_stephengold_joltjni_Skinned
  * Method:    createDefault
  * Signature: ()J
  */

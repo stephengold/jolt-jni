@@ -61,6 +61,17 @@ public class SkinWeight extends JoltPhysicsObject {
     SkinWeight(JoltPhysicsObject container, long weightVa) {
         super(container, weightVa);
     }
+
+    /**
+     * Instantiate a copy of the specified weight.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public SkinWeight(SkinWeight original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -91,6 +102,8 @@ public class SkinWeight extends JoltPhysicsObject {
     // native private methods
 
     native private static long create(int invBindIndex, float weight);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

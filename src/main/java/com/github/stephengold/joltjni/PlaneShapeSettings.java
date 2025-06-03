@@ -51,6 +51,18 @@ public class PlaneShapeSettings extends ShapeSettings {
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public PlaneShapeSettings(PlaneShapeSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Plane);
+    }
+
+    /**
      * Instantiate settings for the specified plane.
      *
      * @param plane the desired surface plane (not null, unaffected)
@@ -193,6 +205,8 @@ public class PlaneShapeSettings extends ShapeSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyContactSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyContactSettings_createCopy
+    BODYOF_CREATE_COPY(SoftBodyContactSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyContactSettings
  * Method:    createDefault
  * Signature: ()J
  */

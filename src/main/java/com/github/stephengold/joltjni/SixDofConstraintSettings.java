@@ -57,6 +57,18 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
         super(settingsVa);
         setSubType(EConstraintSubType.SixDof);
     }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public SixDofConstraintSettings(SixDofConstraintSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EConstraintSubType.SixDof);
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -586,6 +598,8 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createSixDofConstraintSettings();
 

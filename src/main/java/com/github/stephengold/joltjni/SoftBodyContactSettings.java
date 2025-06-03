@@ -44,6 +44,17 @@ public class SoftBodyContactSettings
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the constraint to copy (not {@code null}, unaffected)
+     */
+    public SoftBodyContactSettings(ConstSoftBodyContactSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
+
+    /**
      * Instantiate settings with the specified native object assigned but not
      * owned.
      *
@@ -163,6 +174,8 @@ public class SoftBodyContactSettings
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

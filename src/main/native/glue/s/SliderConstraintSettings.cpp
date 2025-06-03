@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_createCopy
+    BODYOF_CREATE_COPY(SliderConstraintSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
  * Method:    createSliderConstraintSettings
  * Signature: ()J
  */

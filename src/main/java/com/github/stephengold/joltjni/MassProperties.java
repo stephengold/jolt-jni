@@ -46,6 +46,17 @@ final public class MassProperties
     }
 
     /**
+     * Instantiate a copy of the specified properties.
+     *
+     * @param original the properties to copy (not {@code null}, unaffected)
+     */
+    public MassProperties(ConstMassProperties original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -228,6 +239,8 @@ final public class MassProperties
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createMassProperties();
 
