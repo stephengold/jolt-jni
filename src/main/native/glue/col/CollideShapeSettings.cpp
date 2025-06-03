@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_CollideShapeSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollideShapeSettings_createCopy
+  BODYOF_CREATE_COPY(CollideShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_CollideShapeSettings
  * Method:    createDefault
  * Signature: ()J
  */

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,25 @@ SOFTWARE.
 #include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyManagerDrawSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManagerDrawSettings_createCopy
+  (JNIEnv *, jclass, jlong originalVa) {
+#ifdef JPH_DEBUG_RENDERER
+    BodyManager::DrawSettings * const pOriginal
+            = reinterpret_cast<BodyManager::DrawSettings *> (originalVa);
+    BodyManager::DrawSettings * const pCopy
+            = new BodyManager::DrawSettings(*pOriginal);
+    TRACE_NEW("BodyManager::DrawSettings", pCopy)
+    return reinterpret_cast<jlong> (pCopy);
+#else
+    return 0;
+#endif
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyManagerDrawSettings

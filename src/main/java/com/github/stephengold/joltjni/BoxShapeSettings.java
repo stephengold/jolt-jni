@@ -35,6 +35,18 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public BoxShapeSettings(BoxShapeSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Box);
+    }
+
+    /**
      * Instantiate a shape with the specified half extents.
      *
      * @param xHalfExtent the desired half extents on the local X axis
@@ -171,6 +183,8 @@ public class BoxShapeSettings extends ConvexShapeSettings {
 
     native private static long createBoxShapeSettings(
             float hx, float hy, float hz, float convexRadius, long materialVa);
+
+    native private static long createCopy(long originalVa);
 
     native private static float getConvexRadius(long settingsVa);
 

@@ -55,6 +55,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_createB
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_createCopy
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyIdVector
  * Method:    erase
  * Signature: (JII)V
  */

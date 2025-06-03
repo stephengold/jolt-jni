@@ -38,8 +38,21 @@ public class BodyManagerDrawSettings extends JoltPhysicsObject {
         long settingsVa = createDrawSettings();
         setVirtualAddress(settingsVa, () -> free(settingsVa));
     }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public BodyManagerDrawSettings(BodyManagerDrawSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDrawSettings();
 

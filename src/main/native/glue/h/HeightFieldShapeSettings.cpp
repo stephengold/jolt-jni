@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_createCopy
+  BODYOF_CREATE_COPY(HeightFieldShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
  * Method:    createSettingsFromArray
  * Signature: ([FFFFFFFI[BJ)J
  */

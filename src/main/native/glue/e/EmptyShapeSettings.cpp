@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,14 @@ SOFTWARE.
 #include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_EmptyShapeSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShapeSettings_createCopy
+  BODYOF_CREATE_COPY(EmptyShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_EmptyShapeSettings

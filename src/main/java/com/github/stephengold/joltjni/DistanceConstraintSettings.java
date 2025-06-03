@@ -44,6 +44,18 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public DistanceConstraintSettings(DistanceConstraintSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EConstraintSubType.Distance);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -210,6 +222,8 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDistanceConstraintSettings();
 

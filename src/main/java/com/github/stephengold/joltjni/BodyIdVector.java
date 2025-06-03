@@ -43,6 +43,17 @@ public class BodyIdVector extends JoltPhysicsObject {
     }
 
     /**
+     * Instantiate a copy of the specified vector.
+     *
+     * @param original the vector to copy (not {@code null}, unaffected)
+     */
+    public BodyIdVector(BodyIdVector original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -207,6 +218,8 @@ public class BodyIdVector extends JoltPhysicsObject {
     native private static int capacity(long vectorVa);
 
     native private static long createBodyIdVector();
+
+    native private static long createCopy(long originalVa);
 
     native private static void erase(
             long vectorVa, int startIndex, int stopIndex);
