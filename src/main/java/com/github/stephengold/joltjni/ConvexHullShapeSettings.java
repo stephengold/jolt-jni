@@ -46,7 +46,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified collection of points.
      *
-     * @param points a list of point locations (not null, unaffected)
+     * @param points a collection of point locations (not null, unaffected)
      */
     public ConvexHullShapeSettings(Collection<Vec3Arg> points) {
         this(points, Jolt.cDefaultConvexRadius);

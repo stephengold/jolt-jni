@@ -180,7 +180,8 @@ public class PlaneShapeSettings extends ShapeSettings {
     /**
      * Alter the surface equation. (native attribute: mPlane)
      *
-     * @param plane the desired surface (not null, unaffected)
+     * @param plane the desired surface (not null, unaffected,
+     * default=((0,0,0),0))
      */
     public void setPlane(ConstPlane plane) {
         long settingsVa = va();
