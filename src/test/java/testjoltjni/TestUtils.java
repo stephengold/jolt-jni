@@ -747,8 +747,14 @@ final public class TestUtils {
         Assert.assertEquals(expected.getMaxPitchRollAngle(),
                 actual.getMaxPitchRollAngle(), 0f);
         assertEquals(expected.getUp(), actual.getUp(), 0f);
-        assertVehicleControllerSettings(
-                expected.getController(), actual.getController());
+
+        ConstVehicleControllerSettings controller = expected.getController();
+        if (controller == null) {
+            Assert.assertNull(actual.getController());
+        } else {
+            assertVehicleControllerSettings(controller, actual.getController());
+        }
+
         for (int i = 0; i < numWheels; ++i) {
             assertWheelSettings(expected.getWheel(i), actual.getWheel(i));
         }
