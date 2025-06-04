@@ -216,6 +216,7 @@ final public class PrintTable {
                     .replaceAll("Bcs", "BCS")
                     .replaceAll("Dof", "DOF")
                     .replaceAll("Id", "ID")
+                    .replaceAll("Rtti", "RTTI")
                     .replaceAll("Sbcs", "SBCS")
                     .replaceAll("Tv", "TV")
                     .replaceAll("Wv", "WV");
