@@ -21,28 +21,18 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.StreamOut;
+import com.github.stephengold.joltjni.Rtti;
 
 /**
- * Read-only access to a {@code GroupFilter}.
+ * Read-only access to a {@code SerializableObject}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstGroupFilter extends ConstSerializableObject {
+public interface ConstSerializableObject extends ConstJoltPhysicsObject {
     /**
-     * Test whether the specified groups can collide. The filter is unaffected.
+     * Access the type information of the current object.
      *
-     * @param group1 the first group (not null, unaffected)
-     * @param group2 the 2nd group (not null, unaffected)
-     * @return {@code true} if they can collide, otherwise {@code false}
+     * @return a new object
      */
-    boolean canCollide(ConstCollisionGroup group1, ConstCollisionGroup group2);
-
-    /**
-     * Save the settings to the specified binary stream. The filter is
-     * unaffected.
-     *
-     * @param stream the stream to write to (not null)
-     */
-    void saveBinaryState(StreamOut stream);
+    Rtti getRtti();
 }

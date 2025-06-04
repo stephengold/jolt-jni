@@ -31,7 +31,7 @@ import com.github.stephengold.joltjni.StreamOut;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstPhysicsMaterial extends ConstJoltPhysicsObject {
+public interface ConstPhysicsMaterial extends ConstSerializableObject {
     /**
      * Copy the debug color. The material is unaffected.
      *

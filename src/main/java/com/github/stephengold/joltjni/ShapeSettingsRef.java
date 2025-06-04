@@ -72,6 +72,21 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
     }
 
     /**
+     * Access the type information of the current object. (native method:
+     * getRTTI)
+     *
+     * @return a new object
+     */
+    @Override
+    public Rtti getRtti() {
+        long jpoVa = va();
+        long resultVa = SerializableObject.getRtti(jpoVa);
+
+        Rtti result = new Rtti(resultVa);
+        return result;
+    }
+
+    /**
      * Create a counted reference to the native {@code ShapeSettings}.
      *
      * @return a new JVM object with a new native object assigned

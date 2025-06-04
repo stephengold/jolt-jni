@@ -21,12 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstSerializableObject;
+
 /**
  * A physics object that can be serialized (saved) and de-serialized (restored).
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class SerializableObject extends JoltPhysicsObject {
+abstract public class SerializableObject
+        extends JoltPhysicsObject
+        implements ConstSerializableObject {
     // *************************************************************************
     // constructors
 
@@ -57,7 +61,7 @@ abstract public class SerializableObject extends JoltPhysicsObject {
         super(virtualAddress);
     }
     // *************************************************************************
-    // new methods exposed
+    // ConstSerializableObject
 
     /**
      * Access the type information of the current object. (native method:
@@ -65,6 +69,7 @@ abstract public class SerializableObject extends JoltPhysicsObject {
      *
      * @return a new object
      */
+    @Override
     public Rtti getRtti() {
         long jpoVa = va();
         long resultVa = getRtti(jpoVa);

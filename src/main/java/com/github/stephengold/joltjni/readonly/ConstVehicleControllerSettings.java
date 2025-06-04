@@ -29,7 +29,8 @@ import com.github.stephengold.joltjni.StreamOut;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstVehicleControllerSettings extends ConstJoltPhysicsObject {
+public interface ConstVehicleControllerSettings
+        extends ConstSerializableObject {
     /**
      * Save the settings to the specified binary stream. The settings are
      * unaffected.
