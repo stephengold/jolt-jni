@@ -64,6 +64,38 @@ public class VehicleControllerSettings
     }
 
     /**
+     * Instantiate a {@code VehicleControllerSettings} given its virtual
+     * address.
+     *
+     * @param settingsVa the virtual address of the native object, or zero
+     * @return a new JVM object, or {@code null} if the argument was zero
+     */
+    static VehicleControllerSettings newSettings(long settingsVa) {
+        if (settingsVa == 0L) {
+            return null;
+        }
+
+        long rttiVa = SerializableObject.getRtti(settingsVa);
+        String typeName = Rtti.getName(rttiVa);
+        VehicleControllerSettings result;
+        switch (typeName) {
+            case "TrackedVehicleControllerSettings":
+                result = new TrackedVehicleControllerSettings(settingsVa);
+                break;
+
+            case "WheeledVehicleControllerSettings":
+                result = new WheeledVehicleControllerSettings(settingsVa);
+                break;
+
+            default:
+                throw new RuntimeException("typeName = " + typeName);
+        }
+
+        assert result instanceof SerializableObject;
+        return result;
+    }
+
+    /**
      * Load the settings from the specified binary stream.
      *
      * @param stream the stream to read from (not null)

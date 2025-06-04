@@ -49,6 +49,37 @@ abstract public class WheelSettings
     // new methods exposed
 
     /**
+     * Instantiate a {@code WheelSettings} given its virtual address.
+     *
+     * @param settingsVa the virtual address of the native object, or zero
+     * @return a new JVM object, or {@code null} if the argument was zero
+     */
+    static WheelSettings newSettings(long settingsVa) {
+        if (settingsVa == 0L) {
+            return null;
+        }
+
+        long rttiVa = SerializableObject.getRtti(settingsVa);
+        String typeName = Rtti.getName(rttiVa);
+        WheelSettings result;
+        switch (typeName) {
+            case "WheelSettingsTV":
+                result = new WheelSettingsTv(settingsVa);
+                break;
+
+            case "WheelSettingsWV":
+                result = new WheelSettingsWv(settingsVa);
+                break;
+
+            default:
+                throw new RuntimeException("typeName = " + typeName);
+        }
+
+        assert result instanceof SerializableObject;
+        return result;
+    }
+
+    /**
      * Load settings from the specified binary stream.
      *
      * @param stream the stream to read from (not null)
