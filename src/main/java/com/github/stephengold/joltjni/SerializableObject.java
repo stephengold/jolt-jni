@@ -56,4 +56,24 @@ abstract public class SerializableObject extends JoltPhysicsObject {
     SerializableObject(long virtualAddress) {
         super(virtualAddress);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Access the type information of the current object. (native method:
+     * getRTTI)
+     *
+     * @return a new object
+     */
+    public Rtti getRtti() {
+        long jpoVa = va();
+        long resultVa = getRtti(jpoVa);
+
+        Rtti result = new Rtti(resultVa);
+        return result;
+    }
+    // *************************************************************************
+    // native methods
+
+    native static long getRtti(long objectVa);
 }

@@ -240,6 +240,7 @@ $(N)/glue/sh/SharedSettingsToIdMap.cpp \
 $(N)/glue/s/SbcsResult.cpp \
 $(N)/glue/s/ScaledShape.cpp \
 $(N)/glue/s/ScaledShapeSettings.cpp \
+$(N)/glue/s/SerializableObject.cpp \
 $(N)/glue/s/SettingsResult.cpp \
 $(N)/glue/s/SixDofConstraint.cpp \
 $(N)/glue/s/SixDofConstraintSettings.cpp \
