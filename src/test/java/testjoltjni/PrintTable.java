@@ -241,7 +241,7 @@ final public class PrintTable {
                         escape(cppId), cppId);
 
             } else { // not a top-level class, struct, or namespace in Jolt
-                System.out.println(" no native ID found for " + basicJavaClass);
+                System.out.println(" no Doxygen found for " + basicJavaClass);
                 continue; // skip to the next Java class
             }
 
