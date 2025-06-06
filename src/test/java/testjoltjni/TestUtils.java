@@ -200,13 +200,14 @@ final public class TestUtils {
         assertEquals(
                 expected.getLinearVelocity(), actual.getLinearVelocity(), 0f);
 
-        MassProperties expectedMassProperties = expected.getMassProperties();
-        if (expectedMassProperties == null) {
+        MassProperties massProperties = expected.getMassProperties();
+        if (massProperties == null) {
             Assert.assertNull(actual.getMassProperties());
         } else {
             assertMassProperties(
-                    expectedMassProperties, actual.getMassProperties());
+                    massProperties, actual.getMassProperties());
         }
+
         Assert.assertEquals(expected.getMaxAngularVelocity(),
                 actual.getMaxAngularVelocity(), 0f);
         Assert.assertEquals(expected.getMaxLinearVelocity(),
@@ -222,12 +223,12 @@ final public class TestUtils {
                 expected.getRestitution(), actual.getRestitution(), 0f);
         assertEquals(expected.getRotation(), actual.getRotation(), 0f);
 
-        ConstShape expectedShape = expected.getShape();
-        if (expectedShape == null) {
+        ConstShape shape = expected.getShape();
+        if (shape == null) {
             assertShapeSettings(
                     expected.getShapeSettings(), actual.getShapeSettings());
         } else {
-            assertShape(expectedShape, actual.getShape());
+            assertShape(shape, actual.getShape());
         }
 
         Assert.assertEquals(
@@ -245,11 +246,11 @@ final public class TestUtils {
             ConstCollisionGroup expected, ConstCollisionGroup actual) {
         assertJpo(expected, actual);
 
-        ConstGroupFilter expectedFilter = expected.getGroupFilter();
-        if (expectedFilter == null) {
+        ConstGroupFilter filter = expected.getGroupFilter();
+        if (filter == null) {
             Assert.assertNull(actual.getGroupFilter());
         } else {
-            assertGroupFilter(expectedFilter, actual.getGroupFilter());
+            assertGroupFilter(filter, actual.getGroupFilter());
         }
 
         Assert.assertEquals(expected.getGroupId(), actual.getGroupId());
