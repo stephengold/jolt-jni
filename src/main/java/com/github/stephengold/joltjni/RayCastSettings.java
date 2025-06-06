@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EBackFaceMode;
 
 /**
- * Raycast configuration options.
+ * Configurable options for a ray-cast query.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -68,7 +68,7 @@ public class RayCastSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Return the policy for back-facing triangles in non-convex shapes. The
+     * Return the policy for back-facing triangles in triangle-based shapes. The
      * settings are unaffected. (native attribute: mBackFaceModeTriangles)
      *
      * @return the enum value (not null)
@@ -107,8 +107,8 @@ public class RayCastSettings extends JoltPhysicsObject {
     }
 
     /**
-     * Alter the policy for back-facing triangles in non-convex shapes. (native
-     * attribute: mBackFaceModeTriangles)
+     * Alter the policy for back-facing triangles in triangle-based shapes.
+     * (native attribute: mBackFaceModeTriangles)
      *
      * @param setting the enum value (not null, default=IgnoreBackFaces)
      */

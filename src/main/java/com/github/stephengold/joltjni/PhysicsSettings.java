@@ -32,7 +32,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate the default settings.
+     * Instantiate default settings.
      */
     public PhysicsSettings() {
         long settingsVa = createPhysicsSettings();

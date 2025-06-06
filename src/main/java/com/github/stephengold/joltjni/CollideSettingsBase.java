@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -174,9 +174,9 @@ public class CollideSettingsBase extends JoltPhysicsObject {
         long settingsVa = va();
         setPenetrationTolerance(settingsVa, tolerance);
     }
-
     // *************************************************************************
     // new protected methods
+
     /**
      * Assign a native object, assuming there's none already assigned.
      *

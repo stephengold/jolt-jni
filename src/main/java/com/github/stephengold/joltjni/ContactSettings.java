@@ -47,6 +47,8 @@ public class ContactSettings
     /**
      * Instantiate settings with the specified native object assigned but not
      * owned.
+     * <p>
+     * For use in custom contact listeners.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)

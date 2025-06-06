@@ -54,7 +54,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
     // new methods exposed
 
     /**
-     * Return the treatment of back-facing triangles in convex shapes. The
+     * Return the policy for back-facing triangles in convex shapes. The
      * settings are unaffected. (native attribute: mBackFaceModeConvex)
      *
      * @return the enum value (not null)
@@ -68,7 +68,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
     }
 
     /**
-     * Return the treatment of back-facing triangles in triangle-based shapes.
+     * Return the policy for back-facing triangles in triangle-based shapes.
      * The settings are unaffected. (native attribute: mBackFaceModeTriangles)
      *
      * @return the enum value (not null)
@@ -121,7 +121,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
     }
 
     /**
-     * Alter the treatment of back-facing triangles in triangle-based shapes.
+     * Alter the policy for back-facing triangles in triangle-based shapes.
      * (native attribute: mBackFaceModeTriangles)
      *
      * @param mode the desired mode (not null, default=IgnoreBackFaces)
