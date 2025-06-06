@@ -26,8 +26,33 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Vehicle/VehicleDifferential.h"
 #include "auto/com_github_stephengold_joltjni_VehicleDifferentialSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSettings_createCopy
+  BODYOF_CREATE_COPY(VehicleDifferentialSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSettings_createDefault
+  BODYOF_CREATE_DEFAULT(VehicleDifferentialSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleDifferentialSettings_free
+  BODYOF_FREE(VehicleDifferentialSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleDifferentialSettings

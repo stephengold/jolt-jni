@@ -31,6 +31,14 @@ public class VehicleTrackSettings extends JoltPhysicsObject {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public VehicleTrackSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa, () -> free(settingsVa));
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -39,6 +47,17 @@ public class VehicleTrackSettings extends JoltPhysicsObject {
      */
     VehicleTrackSettings(JoltPhysicsObject container, long settingsVa) {
         super(container, settingsVa);
+    }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public VehicleTrackSettings(VehicleTrackSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
     }
     // *************************************************************************
     // new methods exposed
@@ -133,6 +152,12 @@ public class VehicleTrackSettings extends JoltPhysicsObject {
     // native private methods
 
     native private static void addWheel(long settingsVa, int wheelIndex);
+
+    native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
+
+    native private static void free(long settingsVa);
 
     native private static float getAngularDamping(long settingsVa);
 

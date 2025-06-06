@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,33 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Vehicle/VehicleEngine.h"
 #include "auto/com_github_stephengold_joltjni_VehicleEngineSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleEngineSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleEngineSettings_createCopy
+  BODYOF_CREATE_COPY(VehicleEngineSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleEngineSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleEngineSettings_createDefault
+  BODYOF_CREATE_DEFAULT(VehicleEngineSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleEngineSettings
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleEngineSettings_free
+  BODYOF_FREE(VehicleEngineSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleEngineSettings

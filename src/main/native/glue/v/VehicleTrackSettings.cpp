@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,33 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Vehicle/VehicleTrack.h"
 #include "auto/com_github_stephengold_joltjni_VehicleTrackSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTrackSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings_createCopy
+  BODYOF_CREATE_COPY(VehicleTrackSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTrackSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings_createDefault
+  BODYOF_CREATE_DEFAULT(VehicleTrackSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTrackSettings
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTrackSettings_free
+  BODYOF_FREE(VehicleTrackSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleTrackSettings

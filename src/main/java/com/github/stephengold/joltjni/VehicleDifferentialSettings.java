@@ -32,6 +32,14 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public VehicleDifferentialSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa, () -> free(settingsVa));
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -40,6 +48,17 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
      */
     VehicleDifferentialSettings(JoltPhysicsObject container, long settingsVa) {
         super(container, settingsVa);
+    }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public VehicleDifferentialSettings(VehicleDifferentialSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
     }
     // *************************************************************************
     // new methods exposed
@@ -173,6 +192,12 @@ public class VehicleDifferentialSettings extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
+
+    native private static void free(long settingsVa);
 
     native private static float getDifferentialRatio(long settingsVa);
 

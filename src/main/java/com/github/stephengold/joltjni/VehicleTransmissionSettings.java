@@ -34,6 +34,14 @@ public class VehicleTransmissionSettings extends JoltPhysicsObject {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public VehicleTransmissionSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa, () -> free(settingsVa));
+    }
+
+    /**
      * Instantiate a settings with the specified native object assigned but not
      * owned.
      *
@@ -43,6 +51,17 @@ public class VehicleTransmissionSettings extends JoltPhysicsObject {
      */
     VehicleTransmissionSettings(JoltPhysicsObject vehicle, long settingsVa) {
         super(vehicle, settingsVa);
+    }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public VehicleTransmissionSettings(VehicleTransmissionSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
     }
     // *************************************************************************
     // new methods exposed
@@ -268,6 +287,12 @@ public class VehicleTransmissionSettings extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
+
+    native private static void free(long settingsVa);
 
     native private static float getClutchReleaseTime(long settingsVa);
 

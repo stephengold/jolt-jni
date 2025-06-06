@@ -26,8 +26,33 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Vehicle/VehicleTransmission.h"
 #include "auto/com_github_stephengold_joltjni_VehicleTransmissionSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTransmissionSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleTransmissionSettings_createCopy
+  BODYOF_CREATE_COPY(VehicleTransmissionSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTransmissionSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleTransmissionSettings_createDefault
+  BODYOF_CREATE_DEFAULT(VehicleTransmissionSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleTransmissionSettings
+ * Method:    free
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleTransmissionSettings_free
+  BODYOF_FREE(VehicleTransmissionSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleTransmissionSettings
