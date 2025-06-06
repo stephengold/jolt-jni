@@ -31,10 +31,12 @@ import com.github.stephengold.joltjni.ObjectLayerPairFilter;
 import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
 import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilterTable;
+import com.github.stephengold.joltjni.PhysicsMaterial;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.StreamOutWrapper;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.VehicleTrackSettings;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
@@ -636,6 +638,21 @@ final public class TestUtils {
     }
 
     /**
+     * Verify the equivalence of the specified physics materials, ignoring their
+     * types, virtual addresses, and ownership.
+     *
+     * @param expected the expected material (not {@code null}, unaffected)
+     * @param actual the actual material (not {@code null}, unaffected)
+     */
+    public static void assertPhysicsMaterial(
+            PhysicsMaterial expected, PhysicsMaterial actual) {
+        assertJpo(expected, actual);
+
+        assertEquals(expected.getDebugColor(), actual.getDebugColor());
+        Assert.assertEquals(expected.getDebugName(), actual.getDebugName());
+    }
+
+    /**
      * Verify the equivalence of the specified shapes, ignoring their virtual
      * addresses and ownership.
      *
@@ -779,6 +796,27 @@ final public class TestUtils {
         expected.saveBinaryState(new StreamOutWrapper(stream1));
         actual.saveBinaryState(new StreamOutWrapper(stream2));
         Assert.assertEquals(stream1.str(), stream2.str());
+    }
+
+    /**
+     * Verify the equivalence of the specified track settings, ignoring their
+     * types, virtual addresses, and ownership.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    public static void assertVehicleTrackSettings(
+            VehicleTrackSettings expected, VehicleTrackSettings actual) {
+        assertJpo(expected, actual);
+
+        Assert.assertEquals(
+                expected.getAngularDamping(), expected.getAngularDamping(), 0f);
+        Assert.assertEquals(expected.getDifferentialRatio(),
+                expected.getDifferentialRatio(), 0f);
+        Assert.assertEquals(
+                expected.getDrivenWheel(), expected.getDrivenWheel());
+        Assert.assertEquals(expected.getInertia(), expected.getInertia(), 0f);
+        Assert.assertEquals(expected.getNumWheels(), expected.getNumWheels());
     }
 
     /**
