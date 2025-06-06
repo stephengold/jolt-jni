@@ -44,11 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PointConstraintSetti
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_createPointConstraintSettings
-  (JNIEnv *, jclass) {
-    PointConstraintSettings * const pResult = new PointConstraintSettings();
-    TRACE_NEW("PointConstraintSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT(PointConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_PointConstraintSettings
