@@ -98,11 +98,11 @@ public class RayCastSettings extends JoltPhysicsObject {
      * Alter the policy for back-facing triangles in convex shapes. (native
      * attribute: mBackFaceModeConvex)
      *
-     * @param setting the enum value (not null, default=IgnoreBackFaces)
+     * @param mode the desired mode (not null, default=IgnoreBackFaces)
      */
-    public void setBackFaceModeConvex(EBackFaceMode setting) {
+    public void setBackFaceModeConvex(EBackFaceMode mode) {
         long settingsVa = va();
-        int ordinal = setting.ordinal();
+        int ordinal = mode.ordinal();
         setBackFaceModeConvex(settingsVa, ordinal);
     }
 
@@ -110,11 +110,11 @@ public class RayCastSettings extends JoltPhysicsObject {
      * Alter the policy for back-facing triangles in triangle-based shapes.
      * (native attribute: mBackFaceModeTriangles)
      *
-     * @param setting the enum value (not null, default=IgnoreBackFaces)
+     * @param mode the desired mode (not null, default=IgnoreBackFaces)
      */
-    public void setBackFaceModeTriangles(EBackFaceMode setting) {
+    public void setBackFaceModeTriangles(EBackFaceMode mode) {
         long settingsVa = va();
-        int ordinal = setting.ordinal();
+        int ordinal = mode.ordinal();
         setBackFaceModeTriangles(settingsVa, ordinal);
     }
 
