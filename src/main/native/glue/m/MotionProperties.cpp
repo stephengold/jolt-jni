@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotionProperties_createCopy
+  BODYOF_CREATE_COPY(MotionProperties)
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
  * Method:    createMotionProperties
  * Signature: ()J
  */

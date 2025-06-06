@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Triangle
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createCopy
+    BODYOF_CREATE_COPY(Triangle)
+
+/*
+ * Class:     com_github_stephengold_joltjni_Triangle
  * Method:    createDefaultTriangle
  * Signature: ()J
  */

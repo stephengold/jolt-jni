@@ -51,8 +51,22 @@ public class StaticCompoundShapeSettings extends CompoundShapeSettings {
         super(settingsVa);
         setSubType(EShapeSubType.StaticCompound);
     }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public StaticCompoundShapeSettings(StaticCompoundShapeSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EShapeSubType.StaticCompound);
+    }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createStaticCompoundShapeSettings();
 }

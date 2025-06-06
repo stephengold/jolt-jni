@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,6 +38,17 @@ public class ShapeCastSettings extends CollideSettingsBase {
     public ShapeCastSettings() {
         long settingsVa = createDefault();
         setVirtualAddress(settingsVa, true);
+    }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public ShapeCastSettings(ShapeCastSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, true);
     }
     // *************************************************************************
     // new methods exposed
@@ -146,6 +157,8 @@ public class ShapeCastSettings extends CollideSettingsBase {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

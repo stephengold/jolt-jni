@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_createCopy
+  BODYOF_CREATE_COPY(CylinderShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
  * Method:    createDefault
  * Signature: ()J
  */

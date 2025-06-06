@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -75,6 +75,18 @@ final public class UVec4 implements UVec4Arg {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    /**
+     * Instantiate a copy of the argument.
+     *
+     * @param vec the vector to copy (not null, unaffected)
+     */
+    public UVec4(UVec4Arg vec) {
+        this.w = vec.getW();
+        this.x = vec.getX();
+        this.y = vec.getY();
+        this.z = vec.getZ();
     }
     // *************************************************************************
     // new methods exposed

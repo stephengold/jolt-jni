@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_MotorcycleControllerSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotorcycleControllerSettings_createCopy
+  BODYOF_CREATE_COPY(MotorcycleControllerSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotorcycleControllerSettings
  * Method:    createDefault
  * Signature: ()J
  */

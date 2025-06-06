@@ -66,6 +66,17 @@ final public class MotorSettings extends JoltPhysicsObject {
     MotorSettings(JoltPhysicsObject container, long settingsVa) {
         super(container, settingsVa);
     }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public MotorSettings(MotorSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // no owner due to ref counting
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -279,6 +290,8 @@ final public class MotorSettings extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createLimited(float frequency, float damping,
             float forceLimit, float torqueLimit);

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -48,6 +48,17 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
      */
     RagdollSettings(long settingsVa) {
         super(settingsVa);
+    }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public RagdollSettings(RagdollSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
     }
     // *************************************************************************
     // RagdollInterface methods
@@ -253,6 +264,8 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     native static void calculateBodyIndexToConstraintIndex(long settingsVa);
 
     native static void calculateConstraintIndexToBodyIdxPair(long settingsVa);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_createCopy
+  BODYOF_CREATE_COPY(PhysicsSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
  * Method:    createPhysicsSettings
  * Signature: ()J
  */

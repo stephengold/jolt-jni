@@ -55,6 +55,18 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
         super(settingsVa);
         setSubType(EConstraintSubType.SwingTwist);
     }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public SwingTwistConstraintSettings(SwingTwistConstraintSettings original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EConstraintSubType.SwingTwist);
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -483,6 +495,8 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

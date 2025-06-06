@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_createCopy
+  BODYOF_CREATE_COPY(SwingTwistConstraintSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
  * Method:    createDefault
  * Signature: ()J
  */

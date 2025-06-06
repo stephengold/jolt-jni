@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_PathConstraintSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_createCopy
+  BODYOF_CREATE_COPY(PathConstraintSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_PathConstraintSettings
  * Method:    createDefault
  * Signature: ()J
  */

@@ -79,6 +79,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_calcu
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_createCopy
+  BODYOF_CREATE_COPY(RagdollSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_RagdollSettings
  * Method:    createDefault
  * Signature: ()J
  */

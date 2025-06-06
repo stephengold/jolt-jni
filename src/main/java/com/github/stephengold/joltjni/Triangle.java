@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -78,6 +78,17 @@ final public class Triangle extends JoltPhysicsObject {
         long triangleVa = createTriangle(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z,
                 v3.x, v3.y, v3.z, materialIndex, userData);
         setVirtualAddress(triangleVa, () -> free(triangleVa));
+    }
+
+    /**
+     * Instantiate a copy of the specified triangle.
+     *
+     * @param original the triangle to copy (not {@code null}, unaffected)
+     */
+    public Triangle(Triangle original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
     }
 
     /**
@@ -193,6 +204,8 @@ final public class Triangle extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefaultTriangle();
 

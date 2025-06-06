@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_MotorSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotorSettings_createCopy
+  BODYOF_CREATE_COPY(MotorSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotorSettings
  * Method:    createLimited
  * Signature: (FFFF)J
  */

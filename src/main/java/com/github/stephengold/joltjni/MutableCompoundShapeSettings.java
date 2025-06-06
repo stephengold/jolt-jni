@@ -51,8 +51,23 @@ public class MutableCompoundShapeSettings extends CompoundShapeSettings {
         super(settingsVa);
         setSubType(EShapeSubType.MutableCompound);
     }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public MutableCompoundShapeSettings(
+            MutableCompoundShapeSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EShapeSubType.MutableCompound);
+    }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createMutableCompoundShapeSettings();
 }

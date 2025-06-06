@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_RayCastSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RayCastSettings_createCopy
+  BODYOF_CREATE_COPY(RayCastSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_RayCastSettings
  * Method:    createDefaultSettings
  * Signature: ()J
  */
