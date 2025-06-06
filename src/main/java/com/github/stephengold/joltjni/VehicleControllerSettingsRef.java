@@ -54,36 +54,6 @@ final public class VehicleControllerSettingsRef extends Ref {
         setVirtualAddress(refVa, freeingAction);
     }
     // *************************************************************************
-    // new methods exposed
-
-    /**
-     * Temporarily access the referenced settings object, assuming it is a
-     * {@code TrackedVehicleControllerSettings}.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public TrackedVehicleControllerSettings getPtrAsTracked() {
-        long settingsVa = targetVa();
-        TrackedVehicleControllerSettings result
-                = new TrackedVehicleControllerSettings(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Temporarily access the referenced settings object, assuming it is a
-     * {@code WheeledVehicleControllerSettings}.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public WheeledVehicleControllerSettings getPtrAsWheeled() {
-        long settingsVa = targetVa();
-        WheeledVehicleControllerSettings result
-                = new WheeledVehicleControllerSettings(settingsVa);
-
-        return result;
-    }
-    // *************************************************************************
     // Ref methods
 
     /**
@@ -95,7 +65,7 @@ final public class VehicleControllerSettingsRef extends Ref {
     public VehicleControllerSettings getPtr() {
         long settingsVa = targetVa();
         VehicleControllerSettings result
-                = new VehicleControllerSettings(settingsVa);
+                = VehicleControllerSettings.newSettings(settingsVa);
 
         return result;
     }
