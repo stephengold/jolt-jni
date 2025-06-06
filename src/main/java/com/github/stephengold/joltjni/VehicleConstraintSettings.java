@@ -24,10 +24,6 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import com.github.stephengold.joltjni.template.Ref;
-import com.github.stephengold.joltjni.template.RefTarget;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Settings used to construct a {@code VehicleConstraint}.
@@ -37,18 +33,6 @@ import java.util.List;
 public class VehicleConstraintSettings
         extends ConstraintSettings
         implements ConstVehicleConstraintSettings {
-    // *************************************************************************
-    // fields
-
-    /**
-     * references to all wheel settings that have been added, in their order of
-     * addition
-     */
-    final private List<Ref> wheelRefs = new ArrayList<>(4);
-    /**
-     * reference to the controller settings
-     */
-    private VehicleControllerSettingsRef controllerRef;
     // *************************************************************************
     // constructors
 
@@ -94,8 +78,6 @@ public class VehicleConstraintSettings
     public void addWheels(WheelSettings... wheelSettingsArray) {
         long constraintSettingsVa = va();
         for (WheelSettings wheelSettings : wheelSettingsArray) {
-            Ref ref = wheelSettings.toRef();
-            wheelRefs.add(ref);
             long wheelSettingsVa = wheelSettings.va();
             addWheel(constraintSettingsVa, wheelSettingsVa);
         }
@@ -108,7 +90,6 @@ public class VehicleConstraintSettings
      * @param controllerSettings the desired settings (not null, default=null)
      */
     public void setController(VehicleControllerSettings controllerSettings) {
-        this.controllerRef = controllerSettings.toRef();
         long constraintSettingsVa = va();
         long controllerSettingsVa = controllerSettings.va();
         setController(constraintSettingsVa, controllerSettingsVa);
@@ -189,16 +170,15 @@ public class VehicleConstraintSettings
     /**
      * Access the controller settings.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
      */
     @Override
     public VehicleControllerSettings getController() {
-        VehicleControllerSettings result;
-        if (controllerRef == null) {
-            result = null;
-        } else {
-            result = controllerRef.getPtr();
-        }
+        long constraintSettingsVa = va();
+        long controllerSettingsVa = getController(constraintSettingsVa);
+        VehicleControllerSettings result
+                = VehicleControllerSettings.newSettings(controllerSettingsVa);
 
         return result;
     }
@@ -256,7 +236,9 @@ public class VehicleConstraintSettings
      */
     @Override
     public int getNumWheels() {
-        int result = wheelRefs.size();
+        long settingsVa = va();
+        int result = getNumWheels(settingsVa);
+
         return result;
     }
 
@@ -281,12 +263,14 @@ public class VehicleConstraintSettings
      * Access the settings of the specified wheel. (native attribute: mWheels)
      *
      * @param wheelIndex which wheel (&ge;0, &lt;numWheels)
-     * @return the pre-existing object
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
      */
     @Override
     public WheelSettings getWheel(int wheelIndex) {
-        Ref r = wheelRefs.get(wheelIndex);
-        WheelSettings result = (WheelSettings) r.getPtr();
+        long constraintSettingsVa = va();
+        long wheelSettingsVa = getWheel(constraintSettingsVa, wheelIndex);
+        WheelSettings result = WheelSettings.newSettings(wheelSettingsVa);
 
         return result;
     }
@@ -299,12 +283,13 @@ public class VehicleConstraintSettings
      */
     @Override
     public WheelSettings[] getWheels() {
-        int numWheels = wheelRefs.size();
+        long constraintSettingsVa = va();
+        int numWheels = getNumWheels(constraintSettingsVa);
         WheelSettings[] result = new WheelSettings[numWheels];
-        for (int i = 0; i < numWheels; ++i) {
-            Ref r = wheelRefs.get(i);
-            RefTarget t = r.getPtr();
-            result[i] = (WheelSettings) t;
+        for (int wheelIndex = 0; wheelIndex < numWheels; ++wheelIndex) {
+            long wheelSettingsVa = getWheel(constraintSettingsVa, wheelIndex);
+            WheelSettings ws = WheelSettings.newSettings(wheelSettingsVa);
+            result[wheelIndex] = ws;
         }
 
         return result;
@@ -321,6 +306,8 @@ public class VehicleConstraintSettings
 
     native private static long getAntiRollBar(long settingsVa, int index);
 
+    native private static long getController(long constraintSettingsVa);
+
     native private static float getForwardX(long settingsVa);
 
     native private static float getForwardY(long settingsVa);
@@ -331,11 +318,16 @@ public class VehicleConstraintSettings
 
     native private static int getNumAntiRollBars(long settingsVa);
 
+    native private static int getNumWheels(long settingsVa);
+
     native private static float getUpX(long settingsVa);
 
     native private static float getUpY(long settingsVa);
 
     native private static float getUpZ(long settingsVa);
+
+    native private static long getWheel(
+            long constraintSettingsVa, int wheelIndex);
 
     native private static void setController(
             long constraintSettingsVa, long controllerSettingsVa);

@@ -77,6 +77,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSet
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
+ * Method:    getController
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getController
+  (JNIEnv *, jclass, jlong settingsVa) {
+    VehicleConstraintSettings * const pSettings
+            = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
+    Ref<VehicleControllerSettings> ref = pSettings->mController;
+    VehicleControllerSettings * const pResult = ref.GetPtr();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
  * Method:    getForwardX
  * Signature: (J)F
  */
@@ -142,6 +156,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSett
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
+ * Method:    getNumWheels
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getNumWheels
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const VehicleConstraintSettings * const pSettings
+            = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
+    const size_t result = pSettings->mWheels.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
  * Method:    getUpX
  * Signature: (J)F
  */
@@ -177,6 +204,20 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSe
             = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
     const float result = pSettings->mUp.GetZ();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
+ * Method:    getWheel
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getWheel
+  (JNIEnv *, jclass, jlong settingsVa, jint wheelIndex) {
+    VehicleConstraintSettings * const pSettings
+            = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
+    Ref<WheelSettings> ref = pSettings->mWheels[wheelIndex];
+    WheelSettings * const pResult = ref.GetPtr();
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*
