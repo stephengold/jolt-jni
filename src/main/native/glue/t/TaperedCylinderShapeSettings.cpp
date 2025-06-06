@@ -40,6 +40,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCylinderShape
 
 /*
  * Class:     com_github_stephengold_joltjni_TaperedCylinderShapeSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCylinderShapeSettings_createDefault
+  BODYOF_CREATE_DEFAULT(TaperedCylinderShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_TaperedCylinderShapeSettings
  * Method:    createShapeSettings
  * Signature: (FFFFJ)J
  */

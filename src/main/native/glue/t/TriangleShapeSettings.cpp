@@ -40,6 +40,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings_createDefault
+  BODYOF_CREATE_DEFAULT(TriangleShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
  * Method:    createTriangleShapeSettings
  * Signature: (FFFFFFFFFFJ)J
  */

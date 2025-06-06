@@ -34,6 +34,15 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public TriangleShapeSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Triangle);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -136,6 +145,8 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     // native private methods
 
     native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native private static long createTriangleShapeSettings(float v1x, float v1y,
             float v1z, float v2x, float v2y, float v2z, float v3x, float v3y,

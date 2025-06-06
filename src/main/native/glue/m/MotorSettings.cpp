@@ -40,6 +40,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotorSettings_create
 
 /*
  * Class:     com_github_stephengold_joltjni_MotorSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotorSettings_createDefault
+  BODYOF_CREATE_DEFAULT(MotorSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_MotorSettings
  * Method:    createLimited
  * Signature: (FFFF)J
  */

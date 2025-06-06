@@ -33,6 +33,15 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public TaperedCapsuleShapeSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.TaperedCapsule);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -160,6 +169,8 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
     // native private methods
 
     native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native private static long createShapeSettings(float halfHeight,
             float topRadius, float bottomRadius, long materialVa);

@@ -40,6 +40,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCapsuleShapeS
 
 /*
  * Class:     com_github_stephengold_joltjni_TaperedCapsuleShapeSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCapsuleShapeSettings_createDefault
+  BODYOF_CREATE_DEFAULT(TaperedCapsuleShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_TaperedCapsuleShapeSettings
  * Method:    createShapeSettings
  * Signature: (FFFJ)J
  */

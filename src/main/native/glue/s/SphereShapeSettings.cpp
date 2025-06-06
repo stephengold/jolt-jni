@@ -40,6 +40,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_
 
 /*
  * Class:     com_github_stephengold_joltjni_SphereShapeSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_createDefault
+  BODYOF_CREATE_DEFAULT(SphereShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_SphereShapeSettings
  * Method:    createSphereShapeSettings
  * Signature: (FJ)J
  */

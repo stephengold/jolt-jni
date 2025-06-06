@@ -33,6 +33,15 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     // constructors
 
     /**
+     * Instantiate default settings.
+     */
+    public TaperedCylinderShapeSettings() {
+        long settingsVa = createDefault();
+        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.TaperedCylinder);
+    }
+
+    /**
      * Instantiate with the specified native object assigned but not owned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
@@ -195,6 +204,8 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     // native private methods
 
     native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native private static long createShapeSettings(
             float halfHeight, float topRadius, float bottomRadius,
