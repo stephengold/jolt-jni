@@ -235,6 +235,21 @@ final public class TestUtils {
 
         Assert.assertEquals(
                 expected.hasMassProperties(), actual.hasMassProperties());
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        expected.saveBinaryState(new StreamOutWrapper(stream1));
+        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        Assert.assertEquals(stream1.str(), stream2.str());
+
+        stream1 = new StringStream();
+        stream2 = new StringStream();
+        expected.saveWithChildren(
+                new StreamOutWrapper(stream1), null, null, null);
+        actual.saveWithChildren(
+                new StreamOutWrapper(stream2), null, null, null);
+        Assert.assertEquals(stream1.str(), stream2.str());
     }
 
     /**
