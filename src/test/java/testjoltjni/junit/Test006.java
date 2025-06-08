@@ -48,6 +48,7 @@ import com.github.stephengold.joltjni.TaperedCapsuleShapeSettings;
 import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
 import com.github.stephengold.joltjni.Triangle;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -153,7 +154,12 @@ public class Test006 {
         testCylinderSsDefaults(settings);
         testCylinderSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        CylinderShapeSettings settings2 = new CylinderShapeSettings(0f, 0f, 0f);
+
+        testCylinderSsDefaults(settings2);
+        testCylinderSsSetters(settings2);
+
+        TestUtils.testClose(settings2, settings);
         System.gc();
     }
 
@@ -261,7 +267,13 @@ public class Test006 {
         testPlaneSsDefaults(settings);
         testPlaneSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        ConstPlane plane = new Plane(0f, 0f, 0f, 0f);
+        PlaneShapeSettings settings2 = new PlaneShapeSettings(plane);
+
+        testPlaneSsDefaults(settings2);
+        testPlaneSsSetters(settings2);
+
+        TestUtils.testClose(settings2, settings);
         System.gc();
     }
 
