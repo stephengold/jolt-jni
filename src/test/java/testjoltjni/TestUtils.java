@@ -34,6 +34,7 @@ import com.github.stephengold.joltjni.PhysicsMaterial;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.StreamOutWrapper;
+import com.github.stephengold.joltjni.TrackedVehicleControllerSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleTrackSettings;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
@@ -49,6 +50,8 @@ import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.ConstVehicleAntiRollBar;
 import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
@@ -61,6 +64,8 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.UVec4Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.std.StringStream;
+import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
+import com.github.stephengold.joltjni.streamutils.SharedSettingsToIdMap;
 import electrostatic4j.snaploader.platform.util.NativeVariant;
 import java.io.File;
 import java.io.PrintStream;
@@ -721,6 +726,119 @@ final public class TestUtils {
     }
 
     /**
+     * Verify the equivalence of the specified soft-body creation settings,
+     * ignoring their types, virtual addresses, and ownership.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    public static void assertSbcs(ConstSoftBodyCreationSettings expected,
+            ConstSoftBodyCreationSettings actual) {
+        assertJpo(expected, actual);
+
+        Assert.assertEquals(
+                expected.getAllowSleeping(), actual.getAllowSleeping());
+        assertCollisionGroup(
+                expected.getCollisionGroup(), actual.getCollisionGroup());
+        Assert.assertEquals(expected.getFriction(), actual.getFriction(), 0f);
+        Assert.assertEquals(
+                expected.getGravityFactor(), actual.getGravityFactor(), 0f);
+
+        Assert.assertEquals(expected.getLinearDamping(),
+                actual.getLinearDamping(), 0f);
+        Assert.assertEquals(expected.getMakeRotationIdentity(),
+                actual.getMakeRotationIdentity());
+        Assert.assertEquals(expected.getMaxLinearVelocity(),
+                actual.getMaxLinearVelocity(), 0f);
+        Assert.assertEquals(
+                expected.getNumIterations(), actual.getNumIterations());
+        Assert.assertEquals(expected.getObjectLayer(), actual.getObjectLayer());
+        assertEquals(expected.getPosition(), actual.getPosition(), 0f);
+        Assert.assertEquals(
+                expected.getPressure(), actual.getPressure(), 0f);
+        Assert.assertEquals(
+                expected.getRestitution(), actual.getRestitution(), 0f);
+        assertEquals(expected.getRotation(), actual.getRotation(), 0f);
+
+        ConstSoftBodySharedSettings sbss = expected.getSettings();
+        if (sbss == null) {
+            Assert.assertNull(actual.getSettings());
+        } else {
+            assertSbss(sbss, actual.getSettings());
+        }
+
+        Assert.assertEquals(
+                expected.getUpdatePosition(), actual.getUpdatePosition());
+        Assert.assertEquals(expected.getUserData(), actual.getUserData());
+        Assert.assertEquals(
+                expected.getVertexRadius(), actual.getVertexRadius(), 0f);
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        expected.saveBinaryState(new StreamOutWrapper(stream1));
+        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        Assert.assertEquals(stream1.str(), stream2.str());
+
+        stream1 = new StringStream();
+        stream2 = new StringStream();
+        expected.saveWithChildren(
+                new StreamOutWrapper(stream1), null, null, null);
+        actual.saveWithChildren(
+                new StreamOutWrapper(stream2), null, null, null);
+        Assert.assertEquals(stream1.str(), stream2.str());
+    }
+
+    /**
+     * Verify the equivalence of the specified soft-body shared settings,
+     * ignoring their types, virtual addresses, and ownership.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    public static void assertSbss(ConstSoftBodySharedSettings expected,
+            ConstSoftBodySharedSettings actual) {
+        assertJpo(expected, actual);
+
+        int numEdges = expected.countEdgeConstraints();
+        Assert.assertEquals(numEdges, actual.countEdgeConstraints());
+        int numFaces = expected.countFaces();
+        Assert.assertEquals(numFaces, actual.countFaces());
+        Assert.assertEquals(
+                expected.countPinnedVertices(), actual.countPinnedVertices());
+        Assert.assertEquals(expected.countVertices(), actual.countVertices());
+        Assert.assertEquals(expected.countVolumeConstraints(),
+                actual.countVolumeConstraints());
+
+        IntBuffer buffer1 = Jolt.newDirectIntBuffer(2 * numEdges);
+        IntBuffer buffer2 = Jolt.newDirectIntBuffer(2 * numEdges);
+        expected.putEdgeIndices(buffer1);
+        actual.putEdgeIndices(buffer2);
+        assertEquals(buffer1, buffer2);
+
+        IntBuffer buffer3 = Jolt.newDirectIntBuffer(3 * numFaces);
+        IntBuffer buffer4 = Jolt.newDirectIntBuffer(3 * numFaces);
+        expected.putFaceIndices(buffer3);
+        actual.putFaceIndices(buffer4);
+        assertEquals(buffer3, buffer4);
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        expected.saveBinaryState(new StreamOutWrapper(stream1));
+        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        Assert.assertEquals(stream1.str(), stream2.str());
+
+        stream1 = new StringStream();
+        stream2 = new StringStream();
+        expected.saveWithMaterials(new StreamOutWrapper(stream1),
+                new SharedSettingsToIdMap(), new MaterialToIdMap());
+        actual.saveWithMaterials(new StreamOutWrapper(stream2),
+                new SharedSettingsToIdMap(), new MaterialToIdMap());
+        Assert.assertEquals(stream1.str(), stream2.str());
+    }
+
+    /**
      * Verify the equivalence of the specified spring settings, ignoring their
      * types, virtual addresses, and ownership.
      *
@@ -743,6 +861,26 @@ final public class TestUtils {
         expected.saveBinaryState(new StreamOutWrapper(stream1));
         actual.saveBinaryState(new StreamOutWrapper(stream2));
         Assert.assertEquals(stream1.str(), stream2.str());
+    }
+
+    /**
+     * Verify the equivalence of the specified tracked-vehicle controller
+     * settings, ignoring their types, virtual addresses, and ownership.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    public static void assertTrackedVehicleControllerSettings(
+            TrackedVehicleControllerSettings expected,
+            TrackedVehicleControllerSettings actual) {
+        assertVehicleControllerSettings(expected, actual);
+
+        int numTracks = expected.getNumTracks();
+        Assert.assertEquals(numTracks, actual.getNumTracks());
+        for (int trackIndex = 0; trackIndex < numTracks; ++trackIndex) {
+            assertVehicleTrackSettings(
+                    expected.getTrack(trackIndex), actual.getTrack(trackIndex));
+        }
     }
 
     /**
