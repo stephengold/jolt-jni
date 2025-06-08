@@ -40,7 +40,9 @@ import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
 import com.github.stephengold.joltjni.streamutils.ShapeToIdMap;
 
 /**
- * Settings used to create a rigid body.
+ * Settings used to create a rigid body. Such settings are described as "cooked"
+ * if an actual shape has been assigned, or "uncooked" if there's no actual
+ * shape yet.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -51,7 +53,7 @@ public class BodyCreationSettings
     // constructors
 
     /**
-     * Instantiate default settings.
+     * Instantiate default settings (uncooked).
      */
     public BodyCreationSettings() {
         long bodySettingsVa = createDefault();
@@ -70,7 +72,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Instantiate settings for the specified shape.
+     * Instantiate cooked settings for the specified shape.
      *
      * @param shape the desired shape (not null)
      * @param loc the desired location (not null, unaffected)
@@ -127,7 +129,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Instantiate settings for the specified shape settings.
+     * Instantiate uncooked settings for the specified shape settings.
      *
      * @param shapeSettings the desired shape settings (not null)
      * @param loc the desired location (not null, unaffected)
@@ -148,11 +150,11 @@ public class BodyCreationSettings
     // new methods exposed
 
     /**
-     * Prepare for simulation by cooking the {@code ShapeSettings} member into a
-     * shape. After invoking this method, {@code ObjectStream} serialization is
-     * inhibited.
+     * Prepare for simulation by attempting to cook the {@code ShapeSettings}
+     * member into a shape. After invoking this method, {@code ObjectStream}
+     * serialization is inhibited.
      *
-     * @return a new object
+     * @return a new object (Remember to test it for errors!)
      */
     public ShapeResult convertShapeSettings() {
         long bodySettingsVa = va();
@@ -537,7 +539,7 @@ public class BodyCreationSettings
     }
 
     /**
-     * Replace the shape.
+     * Replace the shape and null out the shape settings.
      *
      * @param shape the desired shape (not {@code null}, unaffected)
      * @return the modified settings, for chaining
@@ -551,7 +553,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Replace the shape settings.
+     * Replace the shape settings and null out the shape. After invoking this
+     * method, the body-creation settings will be in an "uncooked" state.
      *
      * @param shapeSettings the desired shape settings (not null)
      * @return the modified settings, for chaining
@@ -780,7 +783,8 @@ public class BodyCreationSettings
     }
 
     /**
-     * Calculate the mass and inertia. The settings are unaffected.
+     * Calculate the body's mass and inertia. As a side effect, this method may
+     * "cook" the settings.
      *
      * @return a new JVM object with a new native object assigned, or
      * {@code null} if a shape is required but not available
@@ -793,6 +797,7 @@ public class BodyCreationSettings
         MassProperties result;
         if (omp == EOverrideMassProperties.MassAndInertiaProvided.ordinal()
                 || getShape(bodySettingsVa) != 0L) {
+            // getShape() may "cook" the body settings
             long propertiesVa = getMassProperties(bodySettingsVa);
             result = new MassProperties(propertiesVa, true);
 
@@ -962,11 +967,11 @@ public class BodyCreationSettings
     }
 
     /**
-     * Acquire read-only access to the {@code Shape}. The settings are
-     * unaffected.
+     * Acquire read-only access to the shape. As a side effect, if the
+     * body-creation settings aren't already cooked, this method cooks them.
      *
-     * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null} if the settings aren't cooked
+     * @return a new JVM object, or {@code null} if the shape settings are
+     * {@code null} and the body-creation settings aren't cooked
      */
     @Override
     public ConstShape getShape() {
@@ -995,10 +1000,9 @@ public class BodyCreationSettings
     }
 
     /**
-     * Test whether the body's mass properties will be calculated. The settings
-     * are unaffected.
+     * Test whether mass properties are required. The settings are unaffected.
      *
-     * @return {@code true} if calculated, otherwise {@code false}
+     * @return {@code true} if required, otherwise {@code false}
      */
     @Override
     public boolean hasMassProperties() {

@@ -86,7 +86,7 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     boolean getApplyGyroscopicForce();
 
     /**
-     * Access the collision group.
+     * Access the collision group to which the body will belong.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -136,7 +136,8 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     Vec3 getLinearVelocity();
 
     /**
-     * Calculate the mass and inertia. The settings are unaffected.
+     * Calculate the body's mass and inertia. As a side effect, this method may
+     * "cook" the settings.
      *
      * @return a new JVM object with a new native object assigned, or
      * {@code null} if a shape is required but not available
@@ -217,11 +218,11 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     Quat getRotation();
 
     /**
-     * Acquire read-only access to the {@code Shape}. The settings are
-     * unaffected.
+     * Acquire read-only access to the shape. As a side effect, if the
+     * body-creation settings aren't already cooked, this method cooks them.
      *
-     * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null} if the settings aren't cooked
+     * @return a new JVM object, or {@code null} if the shape settings are
+     * {@code null} and the body-creation settings aren't cooked
      */
     ConstShape getShape();
 
@@ -235,10 +236,9 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     ConstShapeSettings getShapeSettings();
 
     /**
-     * Test whether the body's mass properties will be calculated. The settings
-     * are unaffected.
+     * Test whether mass properties are required. The settings are unaffected.
      *
-     * @return {@code true} if calculated, otherwise {@code false}
+     * @return {@code true} if required, otherwise {@code false}
      */
     boolean hasMassProperties();
 
