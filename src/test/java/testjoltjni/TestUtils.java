@@ -1089,6 +1089,17 @@ final public class TestUtils {
     }
 
     /**
+     * Execute a test written in native code.
+     *
+     * @param args command-line arguments
+     */
+    public static void main(String... args) {
+        loadNativeLibrary();
+        System.out.println(Jolt.getConfigurationString());
+        Jolt.test000(args);
+    }
+
+    /**
      * Allocate and initialize a {@code PhysicsSystem} in the customary
      * configuration.
      *

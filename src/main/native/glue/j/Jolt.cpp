@@ -444,6 +444,26 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_tan
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    test000
+ * Signature: ([Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_test000
+  (JNIEnv *, jclass, jobjectArray) {
+#ifdef JPH_DEBUG
+    RegisterDefaultAllocator();
+    Trace = DefaultTrace;
+    AssertFailed = DefaultAssertFailed;
+    Factory::sInstance = new Factory;
+    RegisterTypes();
+
+    UnregisterTypes();
+    delete Factory::sInstance;
+    Factory::sInstance = nullptr;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    unregisterTypes
  * Signature: ()V
  */

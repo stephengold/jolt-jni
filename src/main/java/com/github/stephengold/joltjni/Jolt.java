@@ -625,6 +625,13 @@ final public class Jolt {
     native public static float tan(float angle);
 
     /**
+     * Execute a test written in native code. Intended for testing only.
+     *
+     * @param args command-line arguments
+     */
+    native public static void test000(String... args);
+
+    /**
      * Unregister all physics types with the factory.
      *
      * @see #registerTypes()
