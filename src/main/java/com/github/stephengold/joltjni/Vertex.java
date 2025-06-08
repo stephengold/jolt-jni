@@ -112,6 +112,18 @@ public class Vertex extends JoltPhysicsObject {
     /**
      * Alter the initial location of the vertex. (native attribute: mPosition)
      *
+     * @param x the desired X coordinate
+     * @param y the desired Y coordinate
+     * @param z the desired Z coordinate
+     */
+    public void setPosition(float x, float y, float z) {
+        long vertexVa = va();
+        setPosition(vertexVa, x, y, z);
+    }
+
+    /**
+     * Alter the initial location of the vertex. (native attribute: mPosition)
+     *
      * @param location the desired location (not null, unaffected
      * default=(0,0,0))
      */
@@ -135,6 +147,18 @@ public class Vertex extends JoltPhysicsObject {
         float y = location.getY();
         float z = location.getZ();
         setPosition(vertexVa, x, y, z);
+    }
+
+    /**
+     * Alter the initial location of the vertex. (native attribute: mPosition)
+     *
+     * @param x the desired X component
+     * @param y the desired Y component
+     * @param z the desired Z component
+     */
+    public void setVelocity(float x, float y, float z) {
+        long vertexVa = va();
+        setVelocity(vertexVa, x, y, z);
     }
 
     /**
