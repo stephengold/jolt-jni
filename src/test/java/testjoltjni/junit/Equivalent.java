@@ -64,7 +64,7 @@ import testjoltjni.TestUtils;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class Equivalent {
+final class Equivalent {
     // *************************************************************************
     // constructors
 
@@ -86,8 +86,7 @@ final public class Equivalent {
      * @param actual the actual bounds (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
-    public static void aaBox(
-            ConstAaBox expected, ConstAaBox actual, float tolerance) {
+    static void aaBox(ConstAaBox expected, ConstAaBox actual, float tolerance) {
         joltPhysicsObject(expected, actual);
 
         boolean isValid = expected.isValid();
@@ -112,7 +111,7 @@ final public class Equivalent {
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
      */
-    public static void antiRollBar(
+    static void antiRollBar(
             ConstVehicleAntiRollBar expected, ConstVehicleAntiRollBar actual) {
         joltPhysicsObject(expected, actual);
 
@@ -135,7 +134,7 @@ final public class Equivalent {
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
      */
-    public static void bodyCreationSettings(ConstBodyCreationSettings expected,
+    static void bodyCreationSettings(ConstBodyCreationSettings expected,
             ConstBodyCreationSettings actual) {
         joltPhysicsObject(expected, actual);
 
@@ -213,7 +212,7 @@ final public class Equivalent {
      * @param expected the expected group (not {@code null}, unaffected)
      * @param actual the actual group (not {@code null}, unaffected)
      */
-    public static void collisionGroup(
+    static void collisionGroup(
             ConstCollisionGroup expected, ConstCollisionGroup actual) {
         joltPhysicsObject(expected, actual);
 
@@ -235,7 +234,7 @@ final public class Equivalent {
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
      */
-    public static void constraintSettings(
+    static void constraintSettings(
             ConstConstraintSettings expected, ConstConstraintSettings actual) {
         joltPhysicsObject(expected, actual);
 
@@ -265,7 +264,7 @@ final public class Equivalent {
      * @param expected the expected value (not {@code null}, unaffected)
      * @param actual the vector to test (not {@code null}, unaffected)
      */
-    public static void color(ConstColor expected, ConstColor actual) {
+    static void color(ConstColor expected, ConstColor actual) {
         TestUtils.assertEquals(expected.getR(), expected.getG(),
                 expected.getB(), expected.getA(), actual);
     }
@@ -276,7 +275,7 @@ final public class Equivalent {
      * @param expected the expected buffer (not {@code null}, unaffected)
      * @param actual the actual buffer (not {@code null}, unaffected)
      */
-    public static void floatBuffer(FloatBuffer expected, FloatBuffer actual) {
+    static void floatBuffer(FloatBuffer expected, FloatBuffer actual) {
         int numFloats = expected.capacity();
         Assert.assertEquals(numFloats, actual.capacity());
         for (int i = 0; i < numFloats; ++i) {
@@ -298,7 +297,7 @@ final public class Equivalent {
      * @param expected the expected filter (not {@code null}, unaffected)
      * @param actual the actual filter (not {@code null}, unaffected)
      */
-    public static void groupFilter(
+    static void groupFilter(
             ConstGroupFilter expected, ConstGroupFilter actual) {
         joltPhysicsObject(expected, actual);
 
@@ -320,7 +319,7 @@ final public class Equivalent {
      * @param expected the expected buffer (not {@code null}, unaffected)
      * @param actual the actual buffer (not {@code null}, unaffected)
      */
-    public static void intBuffer(IntBuffer expected, IntBuffer actual) {
+    static void intBuffer(IntBuffer expected, IntBuffer actual) {
         int numInts = expected.capacity();
         Assert.assertEquals(numInts, actual.capacity());
         for (int i = 0; i < numInts; ++i) {
@@ -342,7 +341,7 @@ final public class Equivalent {
      * @param expected the expected object (not {@code null}, unaffected)
      * @param actual the actual object (not {@code null}, unaffected)
      */
-    public static void joltPhysicsObject(
+    static void joltPhysicsObject(
             ConstJoltPhysicsObject expected, ConstJoltPhysicsObject actual) {
         Assert.assertNotNull(expected);
         Assert.assertNotNull(actual);
@@ -358,7 +357,7 @@ final public class Equivalent {
      * @param expected the expected properties (not {@code null}, unaffected)
      * @param actual the actual properties (not {@code null}, unaffected)
      */
-    public static void massProperties(ConstMassProperties expected,
+    static void massProperties(ConstMassProperties expected,
             ConstMassProperties actual) {
         joltPhysicsObject(expected, actual);
 
@@ -374,8 +373,7 @@ final public class Equivalent {
      * @param actual the vector to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
-    public static void mat44(
-            Mat44Arg expected, Mat44Arg actual, float tolerance) {
+    static void mat44(Mat44Arg expected, Mat44Arg actual, float tolerance) {
         joltPhysicsObject(expected, actual);
 
         vec3(expected.getAxisX(), actual.getAxisX(), tolerance);
@@ -392,7 +390,7 @@ final public class Equivalent {
      * @param expected the expected material (not {@code null}, unaffected)
      * @param actual the actual material (not {@code null}, unaffected)
      */
-    public static void physicsMaterial(
+    static void physicsMaterial(
             PhysicsMaterial expected, PhysicsMaterial actual) {
         joltPhysicsObject(expected, actual);
 
@@ -408,7 +406,7 @@ final public class Equivalent {
      * @param actual the vector to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
-    public static void quat(QuatArg expected, QuatArg actual, float tolerance) {
+    static void quat(QuatArg expected, QuatArg actual, float tolerance) {
         TestUtils.assertEquals(expected.getX(), expected.getY(),
                 expected.getZ(), expected.getW(), actual, tolerance);
     }
@@ -421,8 +419,7 @@ final public class Equivalent {
      * @param actual the vector to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
-    public static void rVec3(
-            RVec3Arg expected, RVec3Arg actual, float tolerance) {
+    static void rVec3(RVec3Arg expected, RVec3Arg actual, float tolerance) {
         TestUtils.assertEquals(
                 expected.x(), expected.y(), expected.z(), actual, tolerance);
     }
@@ -434,7 +431,7 @@ final public class Equivalent {
      * @param expected the expected shape (not {@code null}, unaffected)
      * @param actual the actual shape (not {@code null}, unaffected)
      */
-    public static void shape(ConstShape expected, ConstShape actual) {
+    static void shape(ConstShape expected, ConstShape actual) {
         joltPhysicsObject(expected, actual);
 
         // compare the debug shapes:
@@ -483,7 +480,7 @@ final public class Equivalent {
      * @param expected the expected shape (not {@code null}, unaffected)
      * @param actual the actual shape (not {@code null}, unaffected)
      */
-    public static void shapeSettings(
+    static void shapeSettings(
             ConstShapeSettings expected, ConstShapeSettings actual) {
         joltPhysicsObject(expected, actual);
     }
@@ -495,7 +492,7 @@ final public class Equivalent {
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
      */
-    public static void softBodyCreationSettings(
+    static void softBodyCreationSettings(
             ConstSoftBodyCreationSettings expected,
             ConstSoftBodyCreationSettings actual) {
         joltPhysicsObject(expected, actual);
@@ -560,8 +557,7 @@ final public class Equivalent {
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
      */
-    public static void softBodySharedSettings(
-            ConstSoftBodySharedSettings expected,
+    static void softBodySharedSettings(ConstSoftBodySharedSettings expected,
             ConstSoftBodySharedSettings actual) {
         joltPhysicsObject(expected, actual);
 
@@ -610,7 +606,7 @@ final public class Equivalent {
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
      */
-    public static void springSettings(
+    static void springSettings(
             ConstSpringSettings expected, ConstSpringSettings actual) {
         joltPhysicsObject(expected, actual);
 
@@ -635,7 +631,7 @@ final public class Equivalent {
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
      */
-    public static void trackedVehicleControllerSettings(
+    static void trackedVehicleControllerSettings(
             TrackedVehicleControllerSettings expected,
             TrackedVehicleControllerSettings actual) {
         vehicleControllerSettings(expected, actual);
@@ -656,8 +652,7 @@ final public class Equivalent {
      * @param actual the vector to test (not {@code null}, unaffected)
      * @param tolerance the allowable difference for each component (&ge;0)
      */
-    public static void vec3(
-            Vec3Arg expected, Vec3Arg actual, float tolerance) {
+    static void vec3(Vec3Arg expected, Vec3Arg actual, float tolerance) {
         TestUtils.assertEquals(expected.getX(), expected.getY(),
                 expected.getZ(), actual, tolerance);
     }
@@ -669,7 +664,7 @@ final public class Equivalent {
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
      */
-    public static void vehicleConstraintSettings(
+    static void vehicleConstraintSettings(
             ConstVehicleConstraintSettings expected,
             ConstVehicleConstraintSettings actual) {
         constraintSettings(expected, actual);
@@ -709,7 +704,7 @@ final public class Equivalent {
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
      */
-    public static void vehicleControllerSettings(
+    static void vehicleControllerSettings(
             ConstVehicleControllerSettings expected,
             ConstVehicleControllerSettings actual) {
         joltPhysicsObject(expected, actual);
@@ -729,7 +724,7 @@ final public class Equivalent {
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
      */
-    public static void vehicleTrackSettings(
+    static void vehicleTrackSettings(
             VehicleTrackSettings expected, VehicleTrackSettings actual) {
         joltPhysicsObject(expected, actual);
 
@@ -750,7 +745,7 @@ final public class Equivalent {
      * @param expected the expected settings (not {@code null}, unaffected)
      * @param actual the actual settings (not {@code null}, unaffected)
      */
-    public static void wheelSettings(
+    static void wheelSettings(
             ConstWheelSettings expected, ConstWheelSettings actual) {
         joltPhysicsObject(expected, actual);
 
