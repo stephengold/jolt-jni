@@ -541,12 +541,12 @@ public class BodyCreationSettings
     /**
      * Replace the shape and null out the shape settings.
      *
-     * @param shape the desired shape (not {@code null}, unaffected)
+     * @param shape the desired shape (unaffected) or {@code null}
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setShape(ConstShape shape) {
         long bodySettingsVa = va();
-        long shapeVa = shape.targetVa();
+        long shapeVa = (shape == null) ? 0L : shape.targetVa();
         setShape(bodySettingsVa, shapeVa);
 
         return this;
