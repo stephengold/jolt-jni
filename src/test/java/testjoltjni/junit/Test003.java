@@ -184,7 +184,7 @@ public class Test003 {
             Assert.assertTrue(box.ownsNativeObject());
             Assert.assertNotEquals(0L, box.va());
 
-            TestUtils.assertEquals(center, box.getCenter(), 0f);
+            Equivalent.vec3(center, box.getCenter(), 0f);
             TestUtils.assertEquals(9f, 8f, 7f, box.getMax(), 0f);
             TestUtils.assertEquals(radius, radius, radius, box.getExtent(), 0f);
             TestUtils.assertEquals(-1f, -2f, -3f, box.getMin(), 0f);
@@ -642,7 +642,7 @@ public class Test003 {
         TestUtils.assertEquals(
                 0.02f, 0.03f, 0.04f, bcs.getAngularVelocity(), 0f);
         Assert.assertTrue(bcs.getApplyGyroscopicForce());
-        TestUtils.assertCollisionGroup(group, bcs.getCollisionGroup());
+        Equivalent.collisionGroup(group, bcs.getCollisionGroup());
         Assert.assertTrue(bcs.getEnhancedInternalEdgeRemoval());
         Assert.assertEquals(0.05f, bcs.getFriction(), 0f);
         Assert.assertEquals(0.06f, bcs.getGravityFactor(), 0f);

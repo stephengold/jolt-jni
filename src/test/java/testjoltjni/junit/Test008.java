@@ -118,7 +118,7 @@ public class Test008 {
          * to rotate the "in" vector.
          */
         final Vec3 out1 = Op.star(qea, in);
-        TestUtils.assertEquals(extrinsic, out1, 1e-5f);
+        Equivalent.vec3(extrinsic, out1, 1e-5f);
         /*
          * Part 2: verify that the intrinsic rotation order is z-y'-x"
          *
@@ -132,7 +132,7 @@ public class Test008 {
          * to rotate the "in" vector and compare.
          */
         final Vec3 out2 = Op.star(in, qea);
-        TestUtils.assertEquals(intrinsic, out2, 1e-5f);
+        Equivalent.vec3(intrinsic, out2, 1e-5f);
     }
 
     /**
@@ -313,25 +313,25 @@ public class Test008 {
         TestUtils.assertEquals(0f, 0f, 0f, -1f, minusOne, 0f);
 
         // Op.star(QuatArg, QuatArg) fundamental identities:
-        TestUtils.assertEquals(minusOne, Op.star(i, i), 0f);
-        TestUtils.assertEquals(k, Op.star(i, j), 0f);
-        TestUtils.assertEquals(minusJ, Op.star(i, k), 0f);
-        TestUtils.assertEquals(i, Op.star(i, one), 0f);
+        Equivalent.quat(minusOne, Op.star(i, i), 0f);
+        Equivalent.quat(k, Op.star(i, j), 0f);
+        Equivalent.quat(minusJ, Op.star(i, k), 0f);
+        Equivalent.quat(i, Op.star(i, one), 0f);
 
-        TestUtils.assertEquals(minusK, Op.star(j, i), 0f);
-        TestUtils.assertEquals(minusOne, Op.star(j, j), 0f);
-        TestUtils.assertEquals(i, Op.star(j, k), 0f);
-        TestUtils.assertEquals(j, Op.star(j, one), 0f);
+        Equivalent.quat(minusK, Op.star(j, i), 0f);
+        Equivalent.quat(minusOne, Op.star(j, j), 0f);
+        Equivalent.quat(i, Op.star(j, k), 0f);
+        Equivalent.quat(j, Op.star(j, one), 0f);
 
-        TestUtils.assertEquals(j, Op.star(k, i), 0f);
-        TestUtils.assertEquals(minusI, Op.star(k, j), 0f);
-        TestUtils.assertEquals(minusOne, Op.star(k, k), 0f);
-        TestUtils.assertEquals(k, Op.star(k, one), 0f);
+        Equivalent.quat(j, Op.star(k, i), 0f);
+        Equivalent.quat(minusI, Op.star(k, j), 0f);
+        Equivalent.quat(minusOne, Op.star(k, k), 0f);
+        Equivalent.quat(k, Op.star(k, one), 0f);
 
-        TestUtils.assertEquals(i, Op.star(one, i), 0f);
-        TestUtils.assertEquals(j, Op.star(one, j), 0f);
-        TestUtils.assertEquals(k, Op.star(one, k), 0f);
-        TestUtils.assertEquals(one, Op.star(one, one), 0f);
+        Equivalent.quat(i, Op.star(one, i), 0f);
+        Equivalent.quat(j, Op.star(one, j), 0f);
+        Equivalent.quat(k, Op.star(one, k), 0f);
+        Equivalent.quat(one, Op.star(one, one), 0f);
 
         // Op.star(QuatArg, QuatArg) on arbitrary values:
         final QuatArg q1 = new Quat(1f, 2f, 3f, 4f);
@@ -345,11 +345,11 @@ public class Test008 {
         final Vec3Arg vb = new Vec3(0.56f, 1.3f, -0.82);
         final QuatArg qb = new Quat(vb, 0f);
         final QuatArg actual2 = new Quat(Op.star(qa, vb), 0f);
-        TestUtils.assertEquals(Op.star(Op.star(qa, qb), qaHat), actual2, 1e-6f);
+        Equivalent.quat(Op.star(Op.star(qa, qb), qaHat), actual2, 1e-6f);
 
         // Op.star(Vec3Arg, QuatArg) decomposition:
         final QuatArg actual3 = new Quat(Op.star(vb, qa), 0f);
-        TestUtils.assertEquals(Op.star(Op.star(qaHat, qb), qa), actual3, 1e-6f);
+        Equivalent.quat(Op.star(Op.star(qaHat, qb), qa), actual3, 1e-6f);
     }
 
     /**
