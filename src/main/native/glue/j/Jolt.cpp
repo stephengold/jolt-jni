@@ -392,7 +392,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_setTraceAllocati
 #ifdef JPH_DEBUG
     gTraceAllocations = setting;
 #else
-    std::cout << "Jolt.setTraceAllocations() has no effect in a Release native library." << std::endl;
+    std::cout << "Jolt.setTraceAllocations() has no effect in a Release native library."
+            << std::endl;
 #endif
 }
 
