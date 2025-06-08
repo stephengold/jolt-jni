@@ -26,7 +26,6 @@ import com.github.stephengold.joltjni.BroadPhaseLayerInterfaceTable;
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JoltPhysicsObject;
-import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.ObjectLayerPairFilter;
 import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
 import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilter;
@@ -202,14 +201,7 @@ final public class TestUtils {
         assertEquals(
                 expected.getLinearVelocity(), actual.getLinearVelocity(), 0f);
 
-        MassProperties massProperties = expected.getMassProperties();
-        if (massProperties == null) {
-            Assert.assertNull(actual.getMassProperties());
-        } else {
-            assertMassProperties(
-                    massProperties, actual.getMassProperties());
-        }
-
+        // Invoking getMassProperties() would cook the settings.
         Assert.assertEquals(expected.getMaxAngularVelocity(),
                 actual.getMaxAngularVelocity(), 0f);
         Assert.assertEquals(expected.getMaxLinearVelocity(),
@@ -224,13 +216,13 @@ final public class TestUtils {
         Assert.assertEquals(
                 expected.getRestitution(), actual.getRestitution(), 0f);
         assertEquals(expected.getRotation(), actual.getRotation(), 0f);
+        // Invoking getShape() would cook the settings.
 
-        ConstShape shape = expected.getShape();
-        if (shape == null) {
-            assertShapeSettings(
-                    expected.getShapeSettings(), actual.getShapeSettings());
+        ConstShapeSettings shapeSettings = expected.getShapeSettings();
+        if (shapeSettings == null) {
+            Assert.assertNull(actual.getShapeSettings());
         } else {
-            assertShape(shape, actual.getShape());
+            assertShapeSettings(shapeSettings, actual.getShapeSettings());
         }
 
         Assert.assertEquals(
