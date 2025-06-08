@@ -28,7 +28,6 @@ import com.github.stephengold.joltjni.ConvexShapeSettings;
 import com.github.stephengold.joltjni.CylinderShapeSettings;
 import com.github.stephengold.joltjni.EmptyShapeSettings;
 import com.github.stephengold.joltjni.HeightFieldShapeSettings;
-import com.github.stephengold.joltjni.IndexedTriangleList;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.MeshShapeSettings;
 import com.github.stephengold.joltjni.MutableCompoundShapeSettings;
@@ -49,8 +48,6 @@ import com.github.stephengold.joltjni.TaperedCapsuleShapeSettings;
 import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
 import com.github.stephengold.joltjni.Triangle;
 import com.github.stephengold.joltjni.Vec3;
-import com.github.stephengold.joltjni.VertexList;
-import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -104,7 +101,7 @@ public class Test006 {
      * Test the {@code BoxShapeSettings} class.
      */
     private static void doBoxShapeSettings() {
-        BoxShapeSettings settings = new BoxShapeSettings(1f, 1f, 1f);
+        BoxShapeSettings settings = new BoxShapeSettings();
 
         testBoxSsDefaults(settings);
         testBoxSsSetters(settings);
@@ -117,7 +114,7 @@ public class Test006 {
      * Test the {@code CapsuleShapeSettings} class.
      */
     private static void doCapsuleShapeSettings() {
-        CapsuleShapeSettings settings = new CapsuleShapeSettings(1f, 1f);
+        CapsuleShapeSettings settings = new CapsuleShapeSettings();
 
         testCapsuleSsDefaults(settings);
         testCapsuleSsSetters(settings);
@@ -131,14 +128,13 @@ public class Test006 {
      */
     private static void doConvexHullShapeSettings() {
         // create from an array:
-        Vec3Arg[] points = {new Vec3()};
-        ConvexHullShapeSettings settings = new ConvexHullShapeSettings(points);
+        ConvexHullShapeSettings settings = new ConvexHullShapeSettings();
 
         testConvexHullSsDefaults(settings);
         testConvexHullSsSetters(settings);
 
         // create from a collection:
-        Collection<Vec3Arg> list = List.of(new Vec3());
+        Collection<Vec3Arg> list = List.of();
         ConvexHullShapeSettings settings2 = new ConvexHullShapeSettings(list);
 
         testConvexHullSsDefaults(settings2);
@@ -152,7 +148,7 @@ public class Test006 {
      * Test the {@code CylinderShapeSettings} class.
      */
     private static void doCylinderShapeSettings() {
-        CylinderShapeSettings settings = new CylinderShapeSettings(1f, 1f);
+        CylinderShapeSettings settings = new CylinderShapeSettings();
 
         testCylinderSsDefaults(settings);
         testCylinderSsSetters(settings);
@@ -178,7 +174,12 @@ public class Test006 {
      * Test the {@code HeightFieldShapeSettings} class.
      */
     private static void doHeightFieldShapeSettings() {
-        int sampleCount = 4;
+        HeightFieldShapeSettings settings0 = new HeightFieldShapeSettings();
+
+        testHeightFieldSsDefaults(settings0);
+        testHeightFieldSsSetters(settings0);
+
+        int sampleCount = 0;
         int numFloats = sampleCount * sampleCount;
         FloatBuffer samples = Jolt.newDirectFloatBuffer(numFloats);
         HeightFieldShapeSettings settings = new HeightFieldShapeSettings(
@@ -202,9 +203,7 @@ public class Test006 {
      * Test the {@code MeshShapeSettings} class.
      */
     private static void doMeshShapeSettings() {
-        VertexList vertices = new VertexList();
-        IndexedTriangleList indices = new IndexedTriangleList();
-        MeshShapeSettings settings = new MeshShapeSettings(vertices, indices);
+        MeshShapeSettings settings = new MeshShapeSettings();
 
         testMeshSsDefaults(settings);
         testMeshSsSetters(settings);
@@ -221,7 +220,7 @@ public class Test006 {
         testMeshSsDefaults(settings3);
         testMeshSsSetters(settings3);
 
-        TestUtils.testClose(settings3, settings2, settings, indices);
+        TestUtils.testClose(settings3, settings2, settings);
         System.gc();
     }
 
@@ -257,8 +256,7 @@ public class Test006 {
      * Test the {@code PlaneShapeSettings} class.
      */
     private static void doPlaneShapeSettings() {
-        ConstPlane plane = new Plane(0f, 1f, 0f, 0f);
-        PlaneShapeSettings settings = new PlaneShapeSettings(plane);
+        PlaneShapeSettings settings = new PlaneShapeSettings();
 
         testPlaneSsDefaults(settings);
         testPlaneSsSetters(settings);
@@ -359,9 +357,9 @@ public class Test006 {
     private static void testBoxSsDefaults(BoxShapeSettings settings) {
         testConvexSsDefaults(settings);
 
-        Assert.assertEquals(0.05f, settings.getConvexRadius(), 0f);
+        Assert.assertEquals(0f, settings.getConvexRadius(), 0f);
         TestUtils.assertEquals(
-                1f, 1f, 1f, settings.getHalfExtent(), 0f);
+                0f, 0f, 0f, settings.getHalfExtent(), 0f);
     }
 
     /**
@@ -393,8 +391,8 @@ public class Test006 {
     private static void testCapsuleSsDefaults(CapsuleShapeSettings settings) {
         testConvexSsDefaults(settings);
 
-        Assert.assertEquals(1f, settings.getHalfHeightOfCylinder(), 0f);
-        Assert.assertEquals(1f, settings.getRadius(), 0f);
+        Assert.assertEquals(0f, settings.getHalfHeightOfCylinder(), 0f);
+        Assert.assertEquals(0f, settings.getRadius(), 0f);
     }
 
     /**
@@ -426,9 +424,9 @@ public class Test006 {
             ConvexHullShapeSettings settings) {
         testConvexSsDefaults(settings);
 
-        Assert.assertEquals(1, settings.countPoints());
+        Assert.assertEquals(0, settings.countPoints());
         Assert.assertEquals(0.001f, settings.getHullTolerance(), 0f);
-        Assert.assertEquals(0.05f, settings.getMaxConvexRadius(), 0f);
+        Assert.assertEquals(0f, settings.getMaxConvexRadius(), 0f);
         Assert.assertEquals(0.05f, settings.getMaxErrorConvexRadius(), 0f);
     }
 
@@ -475,9 +473,9 @@ public class Test006 {
     private static void testCylinderSsDefaults(CylinderShapeSettings settings) {
         testConvexSsDefaults(settings);
 
-        Assert.assertEquals(0.05f, settings.getConvexRadius(), 0f);
-        Assert.assertEquals(1f, settings.getHalfHeight(), 0f);
-        Assert.assertEquals(1f, settings.getRadius(), 0f);
+        Assert.assertEquals(0f, settings.getConvexRadius(), 0f);
+        Assert.assertEquals(0f, settings.getHalfHeight(), 0f);
+        Assert.assertEquals(0f, settings.getRadius(), 0f);
     }
 
     /**
@@ -518,7 +516,7 @@ public class Test006 {
         Assert.assertEquals(-1e15f, settings.getMaxHeightValue(), 0f);
         Assert.assertEquals(1e15f, settings.getMinHeightValue(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, settings.getOffset(), 0f);
-        Assert.assertEquals(4, settings.getSampleCount());
+        Assert.assertEquals(0, settings.getSampleCount());
         TestUtils.assertEquals(1f, 1f, 1f, settings.getScale(), 0f);
     }
 
@@ -661,7 +659,7 @@ public class Test006 {
                 settings.getHalfExtent(), 0f);
         Assert.assertNull(settings.getMaterial());
         TestUtils.assertEquals(
-                0f, 1f, 0f, settings.getPlane().getNormal(), 0f);
+                0f, 0f, 0f, settings.getPlane().getNormal(), 0f);
         Assert.assertEquals(0f, settings.getPlane().getConstant(), 0f);
     }
 
