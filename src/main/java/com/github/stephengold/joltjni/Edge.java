@@ -21,13 +21,15 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstEdge;
+
 /**
  * Join 2 soft-body vertices with a spring. (native type:
  * {@code SoftBodySharedSettings::Edge})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Edge extends JoltPhysicsObject {
+public class Edge extends JoltPhysicsObject implements ConstEdge {
     // *************************************************************************
     // constructors
 
@@ -51,45 +53,6 @@ public class Edge extends JoltPhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Return the inverse of the spring's stiffness. The edge is unaffected.
-     * (native attribute: mCompliance)
-     *
-     * @return the compliance value
-     */
-    public float getCompliance() {
-        long edgeVa = va();
-        float result = getCompliance(edgeVa);
-
-        return result;
-    }
-
-    /**
-     * Return the rest length of the spring. The edge is unaffected. (native
-     * attribute: mRestLength)
-     *
-     * @return the length (in meters)
-     */
-    public float getRestLength() {
-        long edgeVa = va();
-        float result = getRestLength(edgeVa);
-
-        return result;
-    }
-
-    /**
-     * Return the mesh vertex at the specified end. (native attribute: mVertex)
-     *
-     * @param indexInEdge which end of the edge (0 or 1)
-     * @return the mesh index of the vertex (&ge;0)
-     */
-    public int getVertex(int indexInEdge) {
-        long edgeVa = va();
-        int result = getVertex(edgeVa, indexInEdge);
-
-        return result;
-    }
 
     /**
      * Alter the stiffness of the spring. (native attribute: mCompliance)
@@ -120,6 +83,50 @@ public class Edge extends JoltPhysicsObject {
     public void setVertex(int indexInEdge, int indexInMesh) {
         long edgeVa = va();
         setVertex(edgeVa, indexInEdge, indexInMesh);
+    }
+    // *************************************************************************
+    // ConstEdge methods
+
+    /**
+     * Return the inverse of the spring's stiffness. The edge is unaffected.
+     * (native attribute: mCompliance)
+     *
+     * @return the compliance value
+     */
+    @Override
+    public float getCompliance() {
+        long edgeVa = va();
+        float result = getCompliance(edgeVa);
+
+        return result;
+    }
+
+    /**
+     * Return the rest length of the spring. The edge is unaffected. (native
+     * attribute: mRestLength)
+     *
+     * @return the length (in meters)
+     */
+    @Override
+    public float getRestLength() {
+        long edgeVa = va();
+        float result = getRestLength(edgeVa);
+
+        return result;
+    }
+
+    /**
+     * Return the mesh vertex at the specified end. (native attribute: mVertex)
+     *
+     * @param indexInEdge which end of the edge (0 or 1)
+     * @return the mesh index of the vertex (&ge;0)
+     */
+    @Override
+    public int getVertex(int indexInEdge) {
+        long edgeVa = va();
+        int result = getVertex(edgeVa, indexInEdge);
+
+        return result;
     }
     // *************************************************************************
     // native private methods
