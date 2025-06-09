@@ -911,8 +911,8 @@ public class BodyCreationSettings
 
     /**
      * Return the override for the number position iterations in the solver.
-     * Applicable only to a dynamic colliding body. (native member:
-     * mNumPositionStepsOverride)
+     * Applicable only to a dynamic colliding body. The settings are unaffected.
+     * (native member: mNumPositionStepsOverride)
      *
      * @return the number (0 &rarr; use default in {@code PhysicsSettings})
      */
@@ -925,9 +925,9 @@ public class BodyCreationSettings
     }
 
     /**
-     * Return the override for the number position iterations in the solver.
-     * Applicable only to a dynamic colliding body. (native member:
-     * mNumVelocityStepsOverride)
+     * Return the override for the number velocity iterations in the solver.
+     * Applicable only to a dynamic colliding body. The settings are unaffected.
+     * (native member: mNumVelocityStepsOverride)
      *
      * @return the number (0 &rarr; use default in {@code PhysicsSettings})
      */

@@ -195,15 +195,15 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
 
     /**
      * Return the override for the number position iterations in the solver.
-     * Applicable only to a dynamic colliding body.
+     * Applicable only to a dynamic colliding body. The settings are unaffected.
      *
      * @return the number (0 &rarr; use default in {@code PhysicsSettings})
      */
     int getNumPositionStepsOverride();
 
     /**
-     * Return the override for the number position iterations in the solver.
-     * Applicable only to a dynamic colliding body.
+     * Return the override for the number velocity iterations in the solver.
+     * Applicable only to a dynamic colliding body. The settings are unaffected.
      *
      * @return the number (0 &rarr; use default in {@code PhysicsSettings})
      */
