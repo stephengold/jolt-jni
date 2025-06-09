@@ -145,8 +145,7 @@ final class Equivalent {
                 expected.getAllowSleeping(), actual.getAllowSleeping());
         Assert.assertEquals(
                 expected.getAngularDamping(), actual.getAngularDamping(), 0f);
-        vec3(
-                expected.getAngularVelocity(), actual.getAngularVelocity(), 0f);
+        vec3(expected.getAngularVelocity(), actual.getAngularVelocity(), 0f);
         Assert.assertEquals(expected.getApplyGyroscopicForce(),
                 actual.getApplyGyroscopicForce());
         Assert.assertEquals(expected.getCollideKinematicVsNonDynamic(),
@@ -163,8 +162,7 @@ final class Equivalent {
         Assert.assertEquals(expected.getIsSensor(), actual.getIsSensor());
         Assert.assertEquals(
                 expected.getLinearDamping(), actual.getLinearDamping(), 0f);
-        vec3(
-                expected.getLinearVelocity(), actual.getLinearVelocity(), 0f);
+        vec3(expected.getLinearVelocity(), actual.getLinearVelocity(), 0f);
 
         // Invoking getMassProperties() would cook the settings.
         Assert.assertEquals(expected.getMaxAngularVelocity(),
@@ -390,8 +388,7 @@ final class Equivalent {
         vec3(expected.getAxisX(), actual.getAxisX(), tolerance);
         vec3(expected.getAxisY(), actual.getAxisY(), tolerance);
         vec3(expected.getAxisZ(), actual.getAxisZ(), tolerance);
-        vec3(
-                expected.getTranslation(), actual.getTranslation(), tolerance);
+        vec3(expected.getTranslation(), actual.getTranslation(), tolerance);
     }
 
     /**
