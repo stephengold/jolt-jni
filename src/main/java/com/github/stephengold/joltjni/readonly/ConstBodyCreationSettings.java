@@ -86,6 +86,13 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     boolean getApplyGyroscopicForce();
 
     /**
+     * Test whether a kinematic body will collide with kinematic/static bodies.
+     *
+     * @return {@code true} if it will collide, otherwise {@code false}
+     */
+    boolean getCollideKinematicVsNonDynamic();
+
+    /**
      * Access the collision group to which the body will belong.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -113,6 +120,13 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * @return the factor
      */
     float getGravityFactor();
+
+    /**
+     * Return the multiplier for inertia calculations.
+     *
+     * @return the factor
+     */
+    float getInertiaMultiplier();
 
     /**
      * Test whether the body will be a sensor. The settings are unaffected.
@@ -180,6 +194,22 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
     EMotionType getMotionType();
 
     /**
+     * Return the override for the number position iterations in the solver.
+     * Applicable only to a dynamic colliding body.
+     *
+     * @return the number (0 &rarr; use default in {@code PhysicsSettings})
+     */
+    int getNumPositionStepsOverride();
+
+    /**
+     * Return the override for the number position iterations in the solver.
+     * Applicable only to a dynamic colliding body.
+     *
+     * @return the number (0 &rarr; use default in {@code PhysicsSettings})
+     */
+    int getNumVelocityStepsOverride();
+
+    /**
      * Return the index of the object layer. The settings are unaffected.
      *
      * @return the layer index (&ge;0, &lt;numObjectLayers)
@@ -234,6 +264,22 @@ public interface ConstBodyCreationSettings extends ConstJoltPhysicsObject {
      * {@code null}
      */
     ConstShapeSettings getShapeSettings();
+
+    /**
+     * Test whether manifold reduction will be enabled. The settings are
+     * unaffected. (member data: mUseManifoldReduction)
+     *
+     * @return {@code true} if enabled, otherwise {@code false}
+     */
+    boolean getUseManifoldReduction();
+
+    /**
+     * Return the body's user data: can be used for anything. The settings are
+     * unaffected. (member data: mUserData)
+     *
+     * @return the value
+     */
+    long getUserData();
 
     /**
      * Test whether mass properties are required. The settings are unaffected.

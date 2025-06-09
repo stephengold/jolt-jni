@@ -212,6 +212,19 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getCollideKinematicVsNonDynamic
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getCollideKinematicVsNonDynamic
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const bool result = pSettings->mCollideKinematicVsNonDynamic;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    getCollisionGroup
  * Signature: (J)J
  */
@@ -259,6 +272,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyCreationSetting
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     const float result = pSettings->mGravityFactor;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getInertiaMultiplier
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getInertiaMultiplier
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const float result = pSettings->mInertiaMultiplier;
     return result;
 }
 
@@ -404,6 +430,32 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
     const BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     const EMotionType result = pSettings->mMotionType;
+    return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getNumPositionStepsOverride
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getNumPositionStepsOverride
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const uint result = pSettings->mNumPositionStepsOverride;
+    return (jint) result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getNumVelocityStepsOverride
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getNumVelocityStepsOverride
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const uint result = pSettings->mNumVelocityStepsOverride;
     return (jint) result;
 }
 
@@ -561,6 +613,32 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     const ShapeSettings * const pResult = pSettings->GetShapeSettings();
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getUseManifoldReduction
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getUseManifoldReduction
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const bool result = pSettings->mUseManifoldReduction;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    getUserData
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_getUserData
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    const uint64 result = pSettings->mUserData;
+    return result;
 }
 
 /*

@@ -681,6 +681,20 @@ public class BodyCreationSettings
     }
 
     /**
+     * Test whether a kinematic body will collide with kinematic/static bodies.
+     * (native member: mCollideKinematicVsNonDynamic)
+     *
+     * @return {@code true} if it will collide, otherwise {@code false}
+     */
+    @Override
+    public boolean getCollideKinematicVsNonDynamic() {
+        long bodySettingsVa = va();
+        boolean result = getCollideKinematicVsNonDynamic(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
      * Access the collision group to which the body will belong. (native member:
      * mCollisionGroup)
      *
@@ -733,6 +747,20 @@ public class BodyCreationSettings
     public float getGravityFactor() {
         long bodySettingsVa = va();
         float result = getGravityFactor(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the multiplier for inertia calculations. (native member:
+     * mInertiaMultiplier)
+     *
+     * @return the factor
+     */
+    @Override
+    public float getInertiaMultiplier() {
+        long bodySettingsVa = va();
+        float result = getInertiaMultiplier(bodySettingsVa);
 
         return result;
     }
@@ -882,6 +910,36 @@ public class BodyCreationSettings
     }
 
     /**
+     * Return the override for the number position iterations in the solver.
+     * Applicable only to a dynamic colliding body. (native member:
+     * mNumPositionStepsOverride)
+     *
+     * @return the number (0 &rarr; use default in {@code PhysicsSettings})
+     */
+    @Override
+    public int getNumPositionStepsOverride() {
+        long bodySettingsVa = va();
+        int result = getNumPositionStepsOverride(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the override for the number position iterations in the solver.
+     * Applicable only to a dynamic colliding body. (native member:
+     * mNumVelocityStepsOverride)
+     *
+     * @return the number (0 &rarr; use default in {@code PhysicsSettings})
+     */
+    @Override
+    public int getNumVelocityStepsOverride() {
+        long bodySettingsVa = va();
+        int result = getNumVelocityStepsOverride(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the index of the object layer. The settings are unaffected.
      * (native member: mObjectLayer)
      *
@@ -1000,6 +1058,34 @@ public class BodyCreationSettings
     }
 
     /**
+     * Test whether manifold reduction will be enabled. The settings are
+     * unaffected. (member data: mUseManifoldReduction)
+     *
+     * @return {@code true} if enabled, otherwise {@code false}
+     */
+    @Override
+    public boolean getUseManifoldReduction() {
+        long bodySettingsVa = va();
+        boolean result = getUseManifoldReduction(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the body's user data: can be used for anything. The settings are
+     * unaffected. (member data: mUserData)
+     *
+     * @return the value
+     */
+    @Override
+    public long getUserData() {
+        long bodySettingsVa = va();
+        long result = getUserData(bodySettingsVa);
+
+        return result;
+    }
+
+    /**
      * Test whether mass properties are required. The settings are unaffected.
      *
      * @return {@code true} if required, otherwise {@code false}
@@ -1096,6 +1182,9 @@ public class BodyCreationSettings
 
     native private static boolean getApplyGyroscopicForce(long bodySettingsVa);
 
+    native private static boolean getCollideKinematicVsNonDynamic(
+            long bodySettingsVa);
+
     native private static long getCollisionGroup(long bodySettingsVa);
 
     native private static boolean getEnhancedInternalEdgeRemoval(
@@ -1104,6 +1193,8 @@ public class BodyCreationSettings
     native private static float getFriction(long bodySettingsVa);
 
     native private static float getGravityFactor(long bodySettingsVa);
+
+    native private static float getInertiaMultiplier(long bodySettingsVa);
 
     native private static boolean getIsSensor(long bodySettingsVa);
 
@@ -1126,6 +1217,10 @@ public class BodyCreationSettings
     native private static int getMotionQuality(long bodySettingsVa);
 
     native private static int getMotionType(long bodySettingsVa);
+
+    native private static int getNumPositionStepsOverride(long bodySettingsVa);
+
+    native private static int getNumVelocityStepsOverride(long bodySettingsVa);
 
     native private static int getObjectLayer(long bodySettingsVa);
 
@@ -1150,6 +1245,10 @@ public class BodyCreationSettings
     native private static long getShape(long bodySettingsVa);
 
     native private static long getShapeSettings(long bodySettingsVa);
+
+    native private static boolean getUseManifoldReduction(long bodySettingsVa);
+
+    native private static long getUserData(long bodySettingsVa);
 
     native private static boolean hasMassProperties(long bodySettingsVa);
 

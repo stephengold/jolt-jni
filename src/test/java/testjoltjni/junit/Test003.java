@@ -577,10 +577,12 @@ public class Test003 {
         Assert.assertEquals(0.05f, bcs.getAngularDamping(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, bcs.getAngularVelocity(), 0f);
         Assert.assertFalse(bcs.getApplyGyroscopicForce());
+        Assert.assertFalse(bcs.getCollideKinematicVsNonDynamic());
         Assert.assertNotNull(bcs.getCollisionGroup());
         Assert.assertFalse(bcs.getEnhancedInternalEdgeRemoval());
         Assert.assertEquals(0.2f, bcs.getFriction(), 0f);
         Assert.assertEquals(1f, bcs.getGravityFactor(), 0f);
+        Assert.assertEquals(1f, bcs.getInertiaMultiplier(), 0f);
         Assert.assertFalse(bcs.getIsSensor());
         Assert.assertEquals(0.05f, bcs.getLinearDamping(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, bcs.getLinearVelocity(), 0f);
@@ -589,6 +591,8 @@ public class Test003 {
         Assert.assertEquals(15 * Math.PI, bcs.getMaxAngularVelocity(), 1e-6f);
         Assert.assertEquals(500f, bcs.getMaxLinearVelocity(), 0f);
         Assert.assertEquals(EMotionQuality.Discrete, bcs.getMotionQuality());
+        Assert.assertEquals(0, bcs.getNumPositionStepsOverride());
+        Assert.assertEquals(0, bcs.getNumVelocityStepsOverride());
         Assert.assertEquals(EMotionType.Dynamic, bcs.getMotionType());
         Assert.assertEquals(0, bcs.getObjectLayer());
         Assert.assertEquals(EOverrideMassProperties.CalculateMassAndInertia,
@@ -597,6 +601,8 @@ public class Test003 {
         Assert.assertEquals(0f, bcs.getRestitution(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, 1f, bcs.getRotation(), 0f);
         // caller should test getShape() and getShapeSettings()
+        Assert.assertTrue(bcs.getUseManifoldReduction());
+        Assert.assertEquals(0L, bcs.getUserData());
         Assert.assertTrue(bcs.hasMassProperties());
     }
 

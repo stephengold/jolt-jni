@@ -149,6 +149,8 @@ final class Equivalent {
                 expected.getAngularVelocity(), actual.getAngularVelocity(), 0f);
         Assert.assertEquals(expected.getApplyGyroscopicForce(),
                 actual.getApplyGyroscopicForce());
+        Assert.assertEquals(expected.getCollideKinematicVsNonDynamic(),
+                actual.getCollideKinematicVsNonDynamic());
         collisionGroup(
                 expected.getCollisionGroup(), actual.getCollisionGroup());
         Assert.assertEquals(expected.getEnhancedInternalEdgeRemoval(),
@@ -156,6 +158,8 @@ final class Equivalent {
         Assert.assertEquals(expected.getFriction(), actual.getFriction(), 0f);
         Assert.assertEquals(
                 expected.getGravityFactor(), actual.getGravityFactor(), 0f);
+        Assert.assertEquals(expected.getInertiaMultiplier(),
+                actual.getInertiaMultiplier(), 0f);
         Assert.assertEquals(expected.getIsSensor(), actual.getIsSensor());
         Assert.assertEquals(
                 expected.getLinearDamping(), actual.getLinearDamping(), 0f);
@@ -170,6 +174,10 @@ final class Equivalent {
         Assert.assertEquals(
                 expected.getMotionQuality(), actual.getMotionQuality());
         Assert.assertEquals(expected.getMotionType(), actual.getMotionType());
+        Assert.assertEquals(expected.getNumPositionStepsOverride(),
+                actual.getNumPositionStepsOverride());
+        Assert.assertEquals(expected.getNumVelocityStepsOverride(),
+                actual.getNumVelocityStepsOverride());
         Assert.assertEquals(expected.getObjectLayer(), actual.getObjectLayer());
         Assert.assertEquals(expected.getOverrideMassProperties(),
                 actual.getOverrideMassProperties());
@@ -186,6 +194,9 @@ final class Equivalent {
             shapeSettings(shapeSettings, actual.getShapeSettings());
         }
 
+        Assert.assertEquals(expected.getUseManifoldReduction(),
+                actual.getUseManifoldReduction());
+        Assert.assertEquals(expected.getUserData(), actual.getUserData());
         Assert.assertEquals(
                 expected.hasMassProperties(), actual.hasMassProperties());
 
