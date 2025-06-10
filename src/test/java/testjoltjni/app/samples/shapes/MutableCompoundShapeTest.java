@@ -31,7 +31,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  * A line-for-line Java translation of the Jolt Physics mutable compound shape test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
- * https://github.com/stephengold/JoltPhysics/blob/master/Samples/Tests/Shapes/MutableCompoundShapeTest.cpp
+ * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Shapes/MutableCompoundShapeTest.cpp
  */
 public class MutableCompoundShapeTest extends Test{
 BodyIdVector mBodyIDs=new BodyIdVector();

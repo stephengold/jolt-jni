@@ -35,7 +35,7 @@ import static testjoltjni.app.samples.DebugRendererSP.*;
  * A line-for-line Java translation of the Jolt Physics convex-hull test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
- * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/ConvexHullTest.cpp
+ * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/ConvexCollision/ConvexHullTest.cpp
  */
 public class ConvexHullTest extends Test{
 DefaultRandomEngine mRandom=new DefaultRandomEngine( 12345 );

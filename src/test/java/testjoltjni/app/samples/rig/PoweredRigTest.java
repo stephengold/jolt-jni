@@ -28,7 +28,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  * A line-for-line Java translation of the Jolt Physics powered-rig test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
- * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Shapes/PoweredRigTest.cpp
+ * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Rig/PoweredRigTest.cpp
  */
 public class PoweredRigTest extends Test{
 float mTime;

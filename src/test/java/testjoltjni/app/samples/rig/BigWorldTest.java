@@ -32,7 +32,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  * A line-for-line Java translation of the Jolt Physics big-world test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
- * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Shapes/BigWorldTest.cpp
+ * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Rig/BigWorldTest.cpp
  */
 public class BigWorldTest extends Test{
 class Pile{String GetLabel(){return String.format("%.0f km", 1.0e-3 * mOrigin.length());}

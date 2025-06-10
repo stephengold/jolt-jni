@@ -27,7 +27,7 @@ import testjoltjni.app.samples.*;
  * A line-for-line Java translation of the Jolt Physics create-rig test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
- * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Shapes/CreateRigTest.cpp
+ * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Rig/CreateRigTest.cpp
  */
 public class CreateRigTest extends Test{
 RagdollRef mRagdoll;

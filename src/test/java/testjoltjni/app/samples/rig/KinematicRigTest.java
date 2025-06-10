@@ -28,7 +28,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  * A line-for-line Java translation of the Jolt Physics kinematic-rig test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
- * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Shapes/RigPileTest.cpp
+ * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Rig/RigPileTest.cpp
  */
 public class KinematicRigTest extends Test{
 float mTime;

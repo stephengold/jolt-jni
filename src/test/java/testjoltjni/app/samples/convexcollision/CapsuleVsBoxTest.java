@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@ import static testjoltjni.app.samples.DebugRendererSP.*;
  * A line-for-line Java translation of the Jolt Physics capsule-vs-box test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
- * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/CapsuleVsBoxTest.cpp
+ * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/ConvexCollision/CapsuleVsBoxTest.cpp
  */
 public class CapsuleVsBoxTest extends Test{
 

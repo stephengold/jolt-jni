@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ import testjoltjni.app.samples.*;
  * A line-for-line Java translation of the Jolt Physics load-save binary rig test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
- * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Shapes/LoadSaveBinaryRigTest.cpp
+ * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Rig/LoadSaveBinaryRigTest.cpp
  */
 public class LoadSaveBinaryRigTest extends Test{
 RagdollRef mRagdoll=new RagdollRef();

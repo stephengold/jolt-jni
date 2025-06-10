@@ -29,7 +29,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  * A line-for-line Java translation of the Jolt Physics skeleton-mapper test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
- * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Shapes/SkeletonMapperTest.cpp
+ * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Rig/SkeletonMapperTest.cpp
  */
 public class SkeletonMapperTest extends Test{
 boolean sLockTranslations;
