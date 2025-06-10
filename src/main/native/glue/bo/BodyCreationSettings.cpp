@@ -775,6 +775,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setCollideKinematicVsNonDynamic
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setCollideKinematicVsNonDynamic
+  (JNIEnv *, jclass, jlong bodySettingsVa, jboolean setting) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    pSettings->mCollideKinematicVsNonDynamic = setting;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    setCollisionGroup
  * Signature: (JJ)V
  */
@@ -821,6 +833,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
     BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     pSettings->mGravityFactor = factor;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setInertiaMultiplier
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setInertiaMultiplier
+  (JNIEnv *, jclass, jlong bodySettingsVa, jfloat factor) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    pSettings->mInertiaMultiplier = factor;
 }
 
 /*
@@ -925,6 +949,30 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setNumPositionStepsOverride
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setNumPositionStepsOverride
+  (JNIEnv *, jclass, jlong bodySettingsVa, jint numSteps) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    pSettings->mNumPositionStepsOverride = numSteps;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setNumVelocityStepsOverride
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setNumVelocityStepsOverride
+  (JNIEnv *, jclass, jlong bodySettingsVa, jint numSteps) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    pSettings->mNumVelocityStepsOverride = numSteps;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
  * Method:    setObjectLayer
  * Signature: (JI)V
  */
@@ -1008,6 +1056,30 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_
     const ShapeSettings * const pShapeSettings
             = reinterpret_cast<ShapeSettings *> (shapeSettingsVa);
     pBodySettings->SetShapeSettings(pShapeSettings);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setUseManifoldReduction
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setUseManifoldReduction
+  (JNIEnv *, jclass, jlong bodySettingsVa, jboolean setting) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    pSettings->mUseManifoldReduction = setting;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyCreationSettings
+ * Method:    setUserData
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings_setUserData
+  (JNIEnv *, jclass, jlong bodySettingsVa, jlong value) {
+    BodyCreationSettings * const pSettings
+            = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
+    pSettings->mUserData = value;
 }
 
 /*

@@ -265,6 +265,22 @@ public class BodyCreationSettings
     }
 
     /**
+     * Alter whether a kinematic body will collide with kinematic/static bodies.
+     * (native member: mCollideKinematicVsNonDynamic)
+     *
+     * @param setting {@code true} to collide, or {@code false} to disable
+     * collisions (default=false)
+     * @return the modified settings, for chaining
+     */
+    public BodyCreationSettings setCollideKinematicVsNonDynamic(
+            boolean setting) {
+        long bodySettingsVa = va();
+        setCollideKinematicVsNonDynamic(bodySettingsVa, setting);
+
+        return this;
+    }
+
+    /**
      * Alter the collision group to which the body will belong. (native member:
      * mCollisionGroup)
      *
@@ -318,6 +334,19 @@ public class BodyCreationSettings
     public BodyCreationSettings setGravityFactor(float factor) {
         long bodySettingsVa = va();
         setGravityFactor(bodySettingsVa, factor);
+
+        return this;
+    }
+
+    /**
+     * Alter the inertia multiplier. (native member: mInertiaMultiplier)
+     *
+     * @param factor the desired multiplier (default=1)
+     * @return the modified settings, for chaining
+     */
+    public BodyCreationSettings setInertiaMultiplier(float factor) {
+        long bodySettingsVa = va();
+        setInertiaMultiplier(bodySettingsVa, factor);
 
         return this;
     }
@@ -433,6 +462,36 @@ public class BodyCreationSettings
         long bodySettingsVa = va();
         int motionTypeOrdinal = motionType.ordinal();
         setMotionType(bodySettingsVa, motionTypeOrdinal);
+
+        return this;
+    }
+
+    /**
+     * Override the number position iterations in the solver. Applicable only to
+     * a dynamic colliding body. (native member: mNumPositionStepsOverride)
+     *
+     * @param numSteps the desired number, or 0 to use the default in
+     * {@code PhysicsSettings})
+     * @return the modified settings, for chaining
+     */
+    public BodyCreationSettings getNumPositionStepsOverride(int numSteps) {
+        long bodySettingsVa = va();
+        setNumPositionStepsOverride(bodySettingsVa, numSteps);
+
+        return this;
+    }
+
+    /**
+     * Override the number velocity iterations in the solver. Applicable only to
+     * a dynamic colliding body. (native member: mNumVelocityStepsOverride)
+     *
+     * @param numSteps the desired number, or 0 to use the default in
+     * {@code PhysicsSettings})
+     * @return the modified settings, for chaining
+     */
+    public BodyCreationSettings getNumVelocityStepsOverride(int numSteps) {
+        long bodySettingsVa = va();
+        setNumVelocityStepsOverride(bodySettingsVa, numSteps);
 
         return this;
     }
@@ -564,6 +623,33 @@ public class BodyCreationSettings
         long bodySettingsVa = va();
         long shapeSettingsVa = shapeSettings.targetVa();
         setShapeSettings(bodySettingsVa, shapeSettingsVa);
+
+        return this;
+    }
+
+    /**
+     * Alter whether manifold reduction will be enabled. (member data:
+     * mUseManifoldReduction)
+     *
+     * @param setting {@code true} to enable, or {@code false} to disable
+     * @return the modified settings, for chaining
+     */
+    public BodyCreationSettings setUseManifoldReduction(boolean setting) {
+        long bodySettingsVa = va();
+        setUseManifoldReduction(bodySettingsVa, setting);
+
+        return this;
+    }
+
+    /**
+     * Alter the body's user data.
+     *
+     * @param value the desired value (default=0)
+     * @return the modified settings, for chaining
+     */
+    public BodyCreationSettings setUserData(long value) {
+        long bodySettingsVa = va();
+        setUserData(bodySettingsVa, value);
 
         return this;
     }
@@ -1279,6 +1365,9 @@ public class BodyCreationSettings
     native private static void setApplyGyroscopicForce(
             long bodySettingsVa, boolean setting);
 
+    native private static void setCollideKinematicVsNonDynamic(
+            long bodySettingsVa, boolean setting);
+
     native private static void setCollisionGroup(
             long bodySettingsVa, long groupVa);
 
@@ -1288,6 +1377,9 @@ public class BodyCreationSettings
     native private static void setFriction(long bodySettingsVa, float friction);
 
     native private static void setGravityFactor(
+            long bodySettingsVa, float factor);
+
+    native private static void setInertiaMultiplier(
             long bodySettingsVa, float factor);
 
     native private static void setIsSensor(
@@ -1314,6 +1406,12 @@ public class BodyCreationSettings
     native private static void setMotionType(
             long bodySettingsVa, int motionTypeOrdinal);
 
+    native private static void setNumPositionStepsOverride(
+            long bodySettingsVa, int numSteps);
+
+    native private static void setNumVelocityStepsOverride(
+            long bodySettingsVa, int numSteps);
+
     native private static void setObjectLayer(
             long bodySettingsVa, int objLayer);
 
@@ -1333,6 +1431,11 @@ public class BodyCreationSettings
 
     native private static void setShapeSettings(
             long bodySettingsVa, long shapeSettingsVa);
+
+    native private static void setUseManifoldReduction(
+            long bodySettingsVa, boolean setting);
+
+    native private static void setUserData(long bodySettingsVa, long value);
 
     native private static long sRestoreWithChildren(long streamVa,
             long shapeMapVa, long materialMapVa, long filterMapVa);
