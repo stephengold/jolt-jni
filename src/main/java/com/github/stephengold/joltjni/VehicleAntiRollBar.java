@@ -81,20 +81,26 @@ public class VehicleAntiRollBar
      * Alter the index of the left wheel. (native attribute: mLeftWheel)
      *
      * @param wheelIndex the index of the desired wheel (default=0)
+     * @return the modified settings, for chaining
      */
-    public void setLeftWheel(int wheelIndex) {
+    public VehicleAntiRollBar setLeftWheel(int wheelIndex) {
         long barVa = va();
         setLeftWheel(barVa, wheelIndex);
+
+        return this;
     }
 
     /**
      * Alter the index of the right wheel. (native attribute: mRightWheel)
      *
      * @param wheelIndex the index of the desired wheel (default=1)
+     * @return the modified settings, for chaining
      */
-    public void setRightWheel(int wheelIndex) {
+    public VehicleAntiRollBar setRightWheel(int wheelIndex) {
         long barVa = va();
         setRightWheel(barVa, wheelIndex);
+
+        return this;
     }
 
     /**
@@ -102,10 +108,13 @@ public class VehicleAntiRollBar
      *
      * @param stiffness the desired spring constant (in Newtons per meter,
      * default=1000)
+     * @return the modified settings, for chaining
      */
-    public void setStiffness(float stiffness) {
+    public VehicleAntiRollBar setStiffness(float stiffness) {
         long barVa = va();
         setStiffness(barVa, stiffness);
+
+        return this;
     }
     // *************************************************************************
     // ConstVehicleAntiRollBar methods
