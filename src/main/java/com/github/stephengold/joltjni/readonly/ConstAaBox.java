@@ -46,6 +46,15 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     Vec3 getCenter();
 
     /**
+     * Locate the closest point on or in the box for the specified location. The
+     * box is unaffected.
+     *
+     * @param location the starting location (not null, unaffected)
+     * @return a new vector
+     */
+    Vec3 getClosestPoint(Vec3Arg location);
+
+    /**
      * Copy the (half) extent of the box. The box is unaffected.
      *
      * @return a new vector

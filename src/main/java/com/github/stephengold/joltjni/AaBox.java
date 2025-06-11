@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * An axis-aligned box. (native type: AABox)
@@ -242,6 +243,23 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
+     * Locate the closest point on or in the box for the specified location. The
+     * box is unaffected.
+     *
+     * @param location the starting location (not null, unaffected)
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getClosestPoint(Vec3Arg location) {
+        long boxVa = va();
+        FloatBuffer buffer = location.toBuffer();
+        getClosestPoint(boxVa, buffer);
+        Vec3 result = new Vec3(buffer);
+
+        return result;
+    }
+
+    /**
      * Copy the (half) extent of the box. The box is unaffected.
      *
      * @return a new vector
@@ -361,6 +379,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static float getCenterY(long boxVa);
 
     native private static float getCenterZ(long boxVa);
+
+    native private static void getClosestPoint(long boxVa, FloatBuffer buffer);
 
     native private static float getExtentX(long boxVa);
 
