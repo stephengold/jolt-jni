@@ -277,9 +277,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     /**
      * Copy the maximum contained coordinate on each axis. The box is
-     * unaffected. (native attribute: mMax)
+     * unaffected. (native member: mMax)
      *
-     * @return a new vector
+     * @return a new location vector
      */
     @Override
     public Vec3 getMax() {
@@ -294,9 +294,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     /**
      * Copy the minimum contained coordinate on each axis. The box is
-     * unaffected. (native attribute: mMin)
+     * unaffected. (native member: mMin)
      *
-     * @return a new vector
+     * @return a new location vector
      */
     @Override
     public Vec3 getMin() {
