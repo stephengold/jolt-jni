@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstSphere;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -28,7 +29,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Sphere extends JoltPhysicsObject {
+public class Sphere extends JoltPhysicsObject implements ConstSphere {
     // *************************************************************************
     // constructors
 
@@ -72,12 +73,15 @@ public class Sphere extends JoltPhysicsObject {
         float z = point.getZ();
         encapsulatePoint(sphereVa, x, y, z);
     }
+    // *************************************************************************
+    // ConstSphere methods
 
     /**
      * Copy the location of the sphere's center.
      *
      * @return a new location vector
      */
+    @Override
     public Vec3 getCenter() {
         long sphereVa = va();
         float x = getCenterX(sphereVa);
@@ -93,6 +97,7 @@ public class Sphere extends JoltPhysicsObject {
      *
      * @return the radius
      */
+    @Override
     public float getRadius() {
         long sphereVa = va();
         float radius = getRadius(sphereVa);
@@ -106,6 +111,7 @@ public class Sphere extends JoltPhysicsObject {
      * @param direction the direction to use (not null, unaffected)
      * @return a new offset vector
      */
+    @Override
     public Vec3 getSupport(Vec3Arg direction) {
         long sphereVa = va();
         float dx = direction.getX();
