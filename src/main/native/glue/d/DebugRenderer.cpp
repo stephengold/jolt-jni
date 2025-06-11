@@ -84,7 +84,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawBox
  * Method:    drawBox
  * Signature: (JJIII)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawBox
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawBox__JJIII
   (JNIEnv *, jclass, jlong transformVa, jlong boxVa, jint colorInt,
   jint csOrdinal, jint drawModeOrdinal) {
 #ifdef JPH_DEBUG_RENDERER
