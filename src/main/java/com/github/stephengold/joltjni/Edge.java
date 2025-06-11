@@ -58,20 +58,26 @@ public class Edge extends JoltPhysicsObject implements ConstEdge {
      * Alter the stiffness of the spring. (native attribute: mCompliance)
      *
      * @param compliance the inverse of the desired stiffness (default=0)
+     * @return the modified settings, for chaining
      */
-    public void setCompliance(float compliance) {
+    public Edge setCompliance(float compliance) {
         long edgeVa = va();
         setCompliance(edgeVa, compliance);
+
+        return this;
     }
 
     /**
      * Alter the rest length of the spring. (native attribute: mRestLength)
      *
      * @param length the desired length (in meters, default=1)
+     * @return the modified settings, for chaining
      */
-    public void setRestLength(float length) {
+    public Edge setRestLength(float length) {
         long edgeVa = va();
         setRestLength(edgeVa, length);
+
+        return this;
     }
 
     /**
@@ -79,10 +85,13 @@ public class Edge extends JoltPhysicsObject implements ConstEdge {
      *
      * @param indexInEdge which end of the edge (0 or 1)
      * @param indexInMesh the index of the vertex to assign (&ge;0)
+     * @return the modified settings, for chaining
      */
-    public void setVertex(int indexInEdge, int indexInMesh) {
+    public Edge setVertex(int indexInEdge, int indexInMesh) {
         long edgeVa = va();
         setVertex(edgeVa, indexInEdge, indexInMesh);
+
+        return this;
     }
     // *************************************************************************
     // ConstEdge methods
