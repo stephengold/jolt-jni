@@ -103,10 +103,13 @@ public class Vertex extends JoltPhysicsObject {
      * Alter the inverse mass. (native attribute: mInvMass)
      *
      * @param invMass the desired inverse mass (in 1/kilograms, default=1)
+     * @return the modified settings, for chaining
      */
-    public void setInvMass(float invMass) {
+    public Vertex setInvMass(float invMass) {
         long vertexVa = va();
         setInvMass(vertexVa, invMass);
+
+        return this;
     }
 
     /**
@@ -115,10 +118,13 @@ public class Vertex extends JoltPhysicsObject {
      * @param x the desired X coordinate
      * @param y the desired Y coordinate
      * @param z the desired Z coordinate
+     * @return the modified settings, for chaining
      */
-    public void setPosition(float x, float y, float z) {
+    public Vertex setPosition(float x, float y, float z) {
         long vertexVa = va();
         setPosition(vertexVa, x, y, z);
+
+        return this;
     }
 
     /**
@@ -126,13 +132,16 @@ public class Vertex extends JoltPhysicsObject {
      *
      * @param location the desired location (not null, unaffected
      * default=(0,0,0))
+     * @return the modified settings, for chaining
      */
-    public void setPosition(Float3 location) {
+    public Vertex setPosition(Float3 location) {
         long vertexVa = va();
         float x = location.x;
         float y = location.y;
         float z = location.z;
         setPosition(vertexVa, x, y, z);
+
+        return this;
     }
 
     /**
@@ -140,13 +149,16 @@ public class Vertex extends JoltPhysicsObject {
      *
      * @param location the desired location (not null, unaffected
      * default=(0,0,0))
+     * @return the modified settings, for chaining
      */
-    public void setPosition(Vec3Arg location) {
+    public Vertex setPosition(Vec3Arg location) {
         long vertexVa = va();
         float x = location.getX();
         float y = location.getY();
         float z = location.getZ();
         setPosition(vertexVa, x, y, z);
+
+        return this;
     }
 
     /**
@@ -155,10 +167,13 @@ public class Vertex extends JoltPhysicsObject {
      * @param x the desired X component
      * @param y the desired Y component
      * @param z the desired Z component
+     * @return the modified settings, for chaining
      */
-    public void setVelocity(float x, float y, float z) {
+    public Vertex setVelocity(float x, float y, float z) {
         long vertexVa = va();
         setVelocity(vertexVa, x, y, z);
+
+        return this;
     }
 
     /**
@@ -166,13 +181,16 @@ public class Vertex extends JoltPhysicsObject {
      *
      * @param velocity the desired velocity (in meters per second, not null,
      * unaffected default=(0,0,0))
+     * @return the modified settings, for chaining
      */
-    public void setVelocity(Float3 velocity) {
+    public Vertex setVelocity(Float3 velocity) {
         long vertexVa = va();
         float vx = velocity.x;
         float vy = velocity.y;
         float vz = velocity.z;
         setVelocity(vertexVa, vx, vy, vz);
+
+        return this;
     }
 
     /**
@@ -180,13 +198,16 @@ public class Vertex extends JoltPhysicsObject {
      *
      * @param velocity the desired velocity (in meters per second, not null,
      * unaffected, default=(0,0,0))
+     * @return the modified settings, for chaining
      */
-    public void setVelocity(Vec3Arg velocity) {
+    public Vertex setVelocity(Vec3Arg velocity) {
         long vertexVa = va();
         float x = velocity.getX();
         float y = velocity.getY();
         float z = velocity.getZ();
         setVelocity(vertexVa, x, y, z);
+
+        return this;
     }
     // *************************************************************************
     // native private methods
