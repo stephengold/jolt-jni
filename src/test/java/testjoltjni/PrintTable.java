@@ -214,6 +214,7 @@ final public class PrintTable {
             String cppId = basicJavaClass
                     .replaceAll("Aa", "AA")
                     .replaceAll("Bcs", "BCS")
+                    .replaceAll("Epa", "EPA")
                     .replaceAll("Dof", "DOF")
                     .replaceAll("Id", "ID")
                     .replaceAll("Rtti", "RTTI")

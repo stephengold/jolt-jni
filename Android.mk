@@ -132,6 +132,7 @@ $(N)/glue/d/DistanceConstraintSettings.cpp \
 $(N)/glue/e/Edge.cpp \
 $(N)/glue/e/EmptyShape.cpp \
 $(N)/glue/e/EmptyShapeSettings.cpp \
+$(N)/glue/e/EpaPenetrationDepth.cpp \
 $(N)/glue/e/ExtendedUpdateSettings.cpp \
 $(N)/glue/f/Face.cpp \
 $(N)/glue/f/FixedConstraintSettings.cpp \
