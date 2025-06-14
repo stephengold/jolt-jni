@@ -1,4 +1,4 @@
-// Gradle script to build/publish Jolt-JNI Android artifacts
+// Gradle script to build and publish Jolt-JNI Android artifacts
 
 import com.github.stephengold.build.BuildSrc
 
@@ -47,7 +47,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     compileSdk = 35
-
     defaultConfig {
         aarMetadata {
             minCompileSdk = 33
@@ -177,10 +176,10 @@ publishMavenPublicationToMavenLocal.doLast {
 
 // Register tasks to sign artifacts for publication:
 
-//   Signing relies on the existence of 2 properties
-//   (signingKeyEncoded and signingPassword)
-//   which should be set in the ~/.gradle/gradle.properties file
-//   or by -P options on the command line.
+// Signing relies on the existence of 2 properties
+// (signingKeyEncoded and signingPassword)
+// which should be set in the ~/.gradle/gradle.properties file
+// or by -P options on the command line.
 
 signing {
     String signingKey = BuildSrc.decodeBase64(findProperty('signingKeyEncoded'))
