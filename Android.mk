@@ -210,6 +210,7 @@ $(N)/glue/p/PathResult.cpp \
 $(N)/glue/p/PlaneShape.cpp \
 $(N)/glue/p/PlaneShapeSettings.cpp \
 $(N)/glue/p/PointConstraintSettings.cpp \
+$(N)/glue/p/PointConvexSupport.cpp \
 $(N)/glue/p/PulleyConstraintSettings.cpp \
 $(N)/glue/r/RackAndPinionConstraint.cpp \
 $(N)/glue/r/RackAndPinionConstraintSettings.cpp \
