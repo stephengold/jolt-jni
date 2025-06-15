@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A {@code Shape} to represent a right circular cylinder capped by 2
+ * A {@code Shape} to represent a Y-axis right circular cylinder capped by 2
  * hemispheres.
  *
  * @author Stephen Gold sgold@sonic.net

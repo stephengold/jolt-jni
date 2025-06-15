@@ -210,7 +210,10 @@ final public class PrintTable {
 
         Collections.sort(basicJavaClasses);
         for (String basicJavaClass : basicJavaClasses) {
-            // Convert the Java class name to a hypothetical C++ identifier:
+            /*
+             * Convert the Java class name to a hypothetical C++ identifier
+             * by capitalizing some known initialisms.
+             */
             String cppId = basicJavaClass
                     .replaceAll("Aa", "AA")
                     .replaceAll("Bcs", "BCS")

@@ -45,20 +45,23 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Perform the GJK and EPA steps.
+     * Perform the GJK and EPA steps on a transformed box and a transformed
+     * sphere.
      *
-     * @param aExcluding object A without convex radius (not null, unaffected)
-     * @param aIncluding object A with convex radius (not null, unaffected)
-     * @param convexRadiusA the convex radius of object A
-     * @param bExcluding object B without convex radius (not null, unaffected)
-     * @param bIncluding object B with convex radius (not null, unaffected)
-     * @param convexRadiusB the convex radius of object B
+     * @param aExcluding the box without convex radius (not null, unaffected)
+     * @param aIncluding the box with convex radius (not null, unaffected)
+     * @param convexRadiusA the convex radius of the box
+     * @param bExcluding the sphere without convex radius (not null, unaffected)
+     * @param bIncluding the sphere with convex radius (not null, unaffected)
+     * @param convexRadiusB the convex radius of the sphere
      * @param collisionToleranceSq the square of the collision tolerance
      * @param penetrationTolerance the penetration tolerance
      * @param iov the direction vector (not null, modified)
-     * @param storePointA storage for the point on object A (not null, modified)
-     * @param storePointB storage for the point on object B (not null, modified)
-     * @return the result
+     * @param storePointA storage for the point on the box (not null, modified)
+     * @param storePointB storage for the point on the sphere (not null,
+     * modified)
+     * @return {@code true} if the box and sphere intersect, otherwise
+     * {@code false}
      */
     public boolean getPenetrationDepth(TransformedAaBox aExcluding,
             TransformedAaBox aIncluding, float convexRadiusA,
