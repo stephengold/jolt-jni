@@ -44,6 +44,17 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
+     * Instantiate a copy of the specified box.
+     *
+     * @param original the box to copy (not {@code null}, unaffected)
+     */
+    public AaBox(ConstAaBox original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -365,6 +376,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
             float centerX, float centerY, float centerZ, float halfExtent);
 
     native private static long createDefault();
+
+    native private static long createCopy(long originalVa);
 
     native private static void encapsulate(
             long boxVa, float locX, float locY, float locZ);

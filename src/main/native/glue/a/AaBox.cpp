@@ -94,6 +94,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createDefault
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createCopy
+  BODYOF_CREATE_COPY(AABox)
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    encapsulate
  * Signature: (JFFF)V
  */
