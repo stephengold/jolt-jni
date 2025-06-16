@@ -192,6 +192,7 @@ final public class SmokeTestAll {
         smokeTest(new ConvexHullShrinkTest());
         smokeTest(new ConvexHullTest());
         smokeTest(new EPATest());
+        smokeTest(new InteractivePairsTest());
 
         smokeTestGeneral();
         smokeTestRig();
