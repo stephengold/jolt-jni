@@ -128,6 +128,49 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
     }
 
     /**
+     * Perform the GJK and EPA steps on a sphere and a transformed box.
+     *
+     * @param aExcluding the sphere without convex radius (not null, unaffected)
+     * @param aIncluding the sphere with convex radius (not null, unaffected)
+     * @param convexRadiusA the convex radius of the sphere
+     * @param bExcluding the box without convex radius (not null, unaffected)
+     * @param bIncluding the box with convex radius (not null, unaffected)
+     * @param convexRadiusB the convex radius of the box
+     * @param collisionToleranceSq the square of the collision tolerance
+     * @param penetrationTolerance the penetration tolerance
+     * @param iov the direction vector (not null, modified)
+     * @param storePointA storage for the point on the sphere (not null,
+     * modified)
+     * @param storePointB storage for the point on the box (not null, modified)
+     * @return {@code true} if the box and sphere intersect, otherwise
+     * {@code false}
+     */
+    public boolean getPenetrationDepth(Sphere aExcluding, Sphere aIncluding,
+            float convexRadiusA, TransformedAaBox bExcluding,
+            AddConvexRadiusTab bIncluding, float convexRadiusB,
+            float collisionToleranceSq, float penetrationTolerance, Vec3 iov,
+            Vec3 storePointA, Vec3 storePointB) {
+        final long epaVa = va();
+        final long aExcludingVa = aExcluding.targetVa();
+        final long aIncludingVa = aIncluding.targetVa();
+        final long bExcludingVa = bExcluding.targetVa();
+        final long bIncludingVa = bIncluding.targetVa();
+        FloatBuffer fBuf = Jolt.newDirectFloatBuffer(11);
+        fBuf.put(collisionToleranceSq);
+        fBuf.put(penetrationTolerance);
+        iov.put(fBuf);
+        final boolean result = getPenetrationDepthSphereTab(
+                epaVa, aExcludingVa, aIncludingVa, convexRadiusA,
+                bExcludingVa, bIncludingVa, convexRadiusB, fBuf);
+
+        iov.set(fBuf.get(2), fBuf.get(3), fBuf.get(4));
+        storePointA.set(fBuf.get(5), fBuf.get(6), fBuf.get(7));
+        storePointB.set(fBuf.get(8), fBuf.get(9), fBuf.get(10));
+
+        return result;
+    }
+
+    /**
      * Perform the GJK and EPA steps on a transformed box and a transformed
      * sphere.
      *
@@ -189,6 +232,11 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
             FloatBuffer floatBuffer);
 
     native private static boolean getPenetrationDepthSpheres(long epaVa,
+            long aExcludingVa, long aIncludingVa, float convexRadiusA,
+            long bExcludingVa, long bIncludingVa, float convexRadiusB,
+            FloatBuffer floatBuffer);
+
+    native private static boolean getPenetrationDepthSphereTab(long epaVa,
             long aExcludingVa, long aIncludingVa, float convexRadiusA,
             long bExcludingVa, long bIncludingVa, float convexRadiusB,
             FloatBuffer floatBuffer);
