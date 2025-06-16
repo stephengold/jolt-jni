@@ -29,6 +29,7 @@ import testjoltjni.app.samples.constraints.*;
 import testjoltjni.app.samples.convexcollision.*;
 import testjoltjni.app.samples.general.*;
 import testjoltjni.app.samples.rig.*;
+import testjoltjni.app.samples.scaledshapes.*;
 import testjoltjni.app.samples.shapes.*;
 import testjoltjni.app.samples.softbody.*;
 import testjoltjni.app.samples.vehicle.*;
@@ -196,6 +197,7 @@ final public class SmokeTestAll {
 
         smokeTestGeneral();
         smokeTestRig();
+        smokeTestScaledShapes();
         smokeTestShapes();
         smokeTestSoftBody();
 
@@ -284,6 +286,16 @@ final public class SmokeTestAll {
         smokeTest(new PoweredRigTest());
         smokeTest(new RigPileTest());
         smokeTest(new SkeletonMapperTest());
+    }
+
+    /**
+     * Smoke test the "scaledshapes" package.
+     */
+    private static void smokeTestScaledShapes() {
+        smokeTest(new DynamicScaledShape());
+        smokeTest(new ScaledBoxShapeTest());
+        smokeTest(new ScaledCapsuleShapeTest());
+        smokeTest(new ScaledConvexHullShapeTest());
     }
 
     /**
