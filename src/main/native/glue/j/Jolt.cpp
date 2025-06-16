@@ -455,9 +455,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_test000
     Trace = DefaultTrace;
     AssertFailed = DefaultAssertFailed;
     Factory::sInstance = new Factory;
+    TRACE_NEW("Factory", Factory::sInstance)
     RegisterTypes();
 
     UnregisterTypes();
+    TRACE_DELETE("Factory", Factory::sInstance)
     delete Factory::sInstance;
     Factory::sInstance = nullptr;
 #endif

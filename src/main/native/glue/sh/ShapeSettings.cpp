@@ -62,7 +62,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettings_create
     const uint64 savedUserData = pSettings->mUserData;
     pSettings->mUserData = 0;
     ShapeSettings::ShapeResult *pResult = new ShapeSettings::ShapeResult();
-    TRACE_NEW("ShapeResult", pResult)
+    TRACE_NEW("ShapeSettings::ShapeResult", pResult)
     *pResult = pSettings->Create();
     pSettings->mUserData = savedUserData;
     return reinterpret_cast<jlong> (pResult);

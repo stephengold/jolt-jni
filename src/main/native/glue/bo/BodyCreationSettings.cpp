@@ -40,7 +40,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyCreationSettings
     BodyCreationSettings * const pSettings
             = reinterpret_cast<BodyCreationSettings *> (bodySettingsVa);
     ShapeSettings::ShapeResult *pResult = new ShapeSettings::ShapeResult();
-    TRACE_NEW("ShapeResult", pResult)
+    TRACE_NEW("ShapeSettings::ShapeResult", pResult)
     *pResult = pSettings->ConvertShapeSettings();
     return reinterpret_cast<jlong> (pResult);
 }
