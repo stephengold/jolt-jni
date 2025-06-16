@@ -50,49 +50,55 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDepth_f
   BODYOF_FREE(EPAPenetrationDepth)
 
 /*
+ * Pre-processor macro to generate the body of a static
+ * getPenetrationDepth() method:
+ */
+#define BODYOF_GET_PENETRATION_DEPTH(T1, T2, T3, T4) \
+  (JNIEnv *pEnv, jclass, jlong epaVa, jlong aExcludingVa, jlong aIncludingVa, \
+  jfloat convexRadiusA, jlong bExcludingVa, jlong bIncludingVa, \
+  jfloat convexRadiusB, jobject fBuf) { \
+    EPAPenetrationDepth * const pEpa \
+            = reinterpret_cast<EPAPenetrationDepth *> (epaVa); \
+    const T1 * const pAExcluding = reinterpret_cast<T1 *> (aExcludingVa); \
+    const T2 * const pAIncluding = reinterpret_cast<T2 *> (aIncludingVa); \
+    const T3 * const pBExcluding = reinterpret_cast<T3 *> (bExcludingVa); \
+    const T4 * const pBIncluding = reinterpret_cast<T4 *> (bIncludingVa); \
+    jfloat * const pFloats = (jfloat *) pEnv->GetDirectBufferAddress(fBuf); \
+    JPH_ASSERT(!pEnv->ExceptionCheck()); \
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(fBuf); \
+    JPH_ASSERT(!pEnv->ExceptionCheck()); \
+    JPH_ASSERT(capacityFloats >= 11); \
+    const float collisionToleranceSq = pFloats[0]; \
+    const float penetrationTolerance = pFloats[1]; \
+    Vec3 iov(pFloats[2], pFloats[3], pFloats[4]); \
+    Vec3 storePointA, storePointB; \
+    bool result = pEpa->GetPenetrationDepth( \
+            *pAExcluding, *pAIncluding, convexRadiusA, *pBExcluding, \
+            *pBIncluding, convexRadiusB, collisionToleranceSq, \
+            penetrationTolerance, iov, storePointA, storePointB); \
+    pFloats[2] = iov.GetX(); \
+    pFloats[3] = iov.GetY(); \
+    pFloats[4] = iov.GetZ(); \
+    pFloats[5] = storePointA.GetX(); \
+    pFloats[6] = storePointA.GetY(); \
+    pFloats[7] = storePointA.GetZ(); \
+    pFloats[8] = storePointB.GetX(); \
+    pFloats[9] = storePointB.GetY(); \
+    pFloats[10] = storePointB.GetZ(); \
+    return result; \
+} \
+
+/*
  * Class:     com_github_stephengold_joltjni_EpaPenetrationDepth
  * Method:    getPenetrationDepth
  * Signature: (JJJFJJFLjava/nio/FloatBuffer;)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDepth_getPenetrationDepth
-  (JNIEnv *pEnv, jclass, jlong epaVa, jlong aExcludingVa, jlong aIncludingVa,
-  jfloat convexRadiusA, jlong bExcludingVa, jlong bIncludingVa,
-  jfloat convexRadiusB, jobject fBuf) {
-    EPAPenetrationDepth * const pEpa
-            = reinterpret_cast<EPAPenetrationDepth *> (epaVa);
-    const TransformedConvexObject<AABox> * const pAExcluding
-            = reinterpret_cast<TransformedConvexObject<AABox> *> (aExcludingVa);
-    const TransformedConvexObject<AABox> * const pAIncluding
-            = reinterpret_cast<TransformedConvexObject<AABox> *> (aIncludingVa);
-    const TransformedConvexObject<Sphere> * const pBExcluding
-            = reinterpret_cast<TransformedConvexObject<Sphere> *> (bExcludingVa);
-    const TransformedConvexObject<Sphere> * const pBIncluding
-            = reinterpret_cast<TransformedConvexObject<Sphere> *> (bIncludingVa);
-    jfloat * const pFloats = (jfloat *) pEnv->GetDirectBufferAddress(fBuf);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(fBuf);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    JPH_ASSERT(capacityFloats >= 11);
-    const float collisionToleranceSq = pFloats[0];
-    const float penetrationTolerance = pFloats[1];
-    Vec3 iov(pFloats[2], pFloats[3], pFloats[4]);
-    Vec3 storePointA;
-    Vec3 storePointB;
-    bool result = pEpa->GetPenetrationDepth(
-            *pAExcluding, *pAIncluding, convexRadiusA, *pBExcluding,
-            *pBIncluding, convexRadiusB, collisionToleranceSq,
-            penetrationTolerance, iov, storePointA, storePointB);
-    pFloats[2] = iov.GetX();
-    pFloats[3] = iov.GetY();
-    pFloats[4] = iov.GetZ();
-    pFloats[5] = storePointA.GetX();
-    pFloats[6] = storePointA.GetY();
-    pFloats[7] = storePointA.GetZ();
-    pFloats[8] = storePointB.GetX();
-    pFloats[9] = storePointB.GetY();
-    pFloats[10] = storePointB.GetZ();
-    return result;
-}
+  BODYOF_GET_PENETRATION_DEPTH(
+          TransformedConvexObject<AABox>,
+          TransformedConvexObject<AABox>,
+          TransformedConvexObject<Sphere>,
+          TransformedConvexObject<Sphere>)
 
 /*
  * Class:     com_github_stephengold_joltjni_EpaPenetrationDepth
@@ -100,44 +106,11 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDep
  * Signature: (JJJFJJFLjava/nio/FloatBuffer;)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDepth_getPenetrationDepthPoints
-  (JNIEnv *pEnv, jclass, jlong epaVa, jlong aExcludingVa, jlong aIncludingVa,
-  jfloat convexRadiusA, jlong bExcludingVa, jlong bIncludingVa,
-  jfloat convexRadiusB, jobject fBuf) {
-    EPAPenetrationDepth * const pEpa
-            = reinterpret_cast<EPAPenetrationDepth *> (epaVa);
-    const PointConvexSupport * const pAExcluding
-            = reinterpret_cast<PointConvexSupport *> (aExcludingVa);
-    const Sphere * const pAIncluding
-            = reinterpret_cast<Sphere *> (aIncludingVa);
-    const PointConvexSupport * const pBExcluding
-            = reinterpret_cast<PointConvexSupport *> (bExcludingVa);
-    const Sphere * const pBIncluding
-            = reinterpret_cast<Sphere *> (bIncludingVa);
-    jfloat * const pFloats = (jfloat *) pEnv->GetDirectBufferAddress(fBuf);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(fBuf);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    JPH_ASSERT(capacityFloats >= 11);
-    const float collisionToleranceSq = pFloats[0];
-    const float penetrationTolerance = pFloats[1];
-    Vec3 iov(pFloats[2], pFloats[3], pFloats[4]);
-    Vec3 storePointA;
-    Vec3 storePointB;
-    bool result = pEpa->GetPenetrationDepth(
-            *pAExcluding, *pAIncluding, convexRadiusA, *pBExcluding,
-            *pBIncluding, convexRadiusB, collisionToleranceSq,
-            penetrationTolerance, iov, storePointA, storePointB);
-    pFloats[2] = iov.GetX();
-    pFloats[3] = iov.GetY();
-    pFloats[4] = iov.GetZ();
-    pFloats[5] = storePointA.GetX();
-    pFloats[6] = storePointA.GetY();
-    pFloats[7] = storePointA.GetZ();
-    pFloats[8] = storePointB.GetX();
-    pFloats[9] = storePointB.GetY();
-    pFloats[10] = storePointB.GetZ();
-    return result;
-}
+  BODYOF_GET_PENETRATION_DEPTH(
+          PointConvexSupport,
+          Sphere,
+          PointConvexSupport,
+          Sphere)
 
 /*
  * Class:     com_github_stephengold_joltjni_EpaPenetrationDepth
@@ -145,44 +118,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDep
  * Signature: (JJJFJJFLjava/nio/FloatBuffer;)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDepth_getPenetrationDepthSpheres
-  (JNIEnv *pEnv, jclass, jlong epaVa, jlong aExcludingVa, jlong aIncludingVa,
-  jfloat convexRadiusA, jlong bExcludingVa, jlong bIncludingVa,
-  jfloat convexRadiusB, jobject fBuf) {
-    EPAPenetrationDepth * const pEpa
-            = reinterpret_cast<EPAPenetrationDepth *> (epaVa);
-    const Sphere * const pAExcluding
-            = reinterpret_cast<Sphere *> (aExcludingVa);
-    const Sphere * const pAIncluding
-            = reinterpret_cast<Sphere *> (aIncludingVa);
-    const Sphere * const pBExcluding
-            = reinterpret_cast<Sphere *> (bExcludingVa);
-    const Sphere * const pBIncluding
-            = reinterpret_cast<Sphere *> (bIncludingVa);
-    jfloat * const pFloats = (jfloat *) pEnv->GetDirectBufferAddress(fBuf);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(fBuf);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    JPH_ASSERT(capacityFloats >= 11);
-    const float collisionToleranceSq = pFloats[0];
-    const float penetrationTolerance = pFloats[1];
-    Vec3 iov(pFloats[2], pFloats[3], pFloats[4]);
-    Vec3 storePointA;
-    Vec3 storePointB;
-    bool result = pEpa->GetPenetrationDepth(
-            *pAExcluding, *pAIncluding, convexRadiusA, *pBExcluding,
-            *pBIncluding, convexRadiusB, collisionToleranceSq,
-            penetrationTolerance, iov, storePointA, storePointB);
-    pFloats[2] = iov.GetX();
-    pFloats[3] = iov.GetY();
-    pFloats[4] = iov.GetZ();
-    pFloats[5] = storePointA.GetX();
-    pFloats[6] = storePointA.GetY();
-    pFloats[7] = storePointA.GetZ();
-    pFloats[8] = storePointB.GetX();
-    pFloats[9] = storePointB.GetY();
-    pFloats[10] = storePointB.GetZ();
-    return result;
-}
+  BODYOF_GET_PENETRATION_DEPTH(Sphere, Sphere, Sphere, Sphere)
 
 /*
  * Class:     com_github_stephengold_joltjni_EpaPenetrationDepth
@@ -190,44 +126,11 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDep
  * Signature: (JJJFJJFLjava/nio/FloatBuffer;)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDepth_getPenetrationDepthSphereTab
-  (JNIEnv *pEnv, jclass, jlong epaVa, jlong aExcludingVa, jlong aIncludingVa,
-  jfloat convexRadiusA, jlong bExcludingVa, jlong bIncludingVa,
-  jfloat convexRadiusB, jobject fBuf) {
-    EPAPenetrationDepth * const pEpa
-            = reinterpret_cast<EPAPenetrationDepth *> (epaVa);
-    const Sphere * const pAExcluding
-            = reinterpret_cast<Sphere *> (aExcludingVa);
-    const Sphere * const pAIncluding
-            = reinterpret_cast<Sphere *> (aIncludingVa);
-    const TransformedConvexObject<AABox> * const pBExcluding
-            = reinterpret_cast<TransformedConvexObject<AABox> *> (bExcludingVa);
-    const AddConvexRadius<TransformedConvexObject<AABox>> * const pBIncluding
-            = reinterpret_cast<AddConvexRadius<TransformedConvexObject<AABox>> *> (bIncludingVa);
-    jfloat * const pFloats = (jfloat *) pEnv->GetDirectBufferAddress(fBuf);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(fBuf);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    JPH_ASSERT(capacityFloats >= 11);
-    const float collisionToleranceSq = pFloats[0];
-    const float penetrationTolerance = pFloats[1];
-    Vec3 iov(pFloats[2], pFloats[3], pFloats[4]);
-    Vec3 storePointA;
-    Vec3 storePointB;
-    bool result = pEpa->GetPenetrationDepth(
-            *pAExcluding, *pAIncluding, convexRadiusA, *pBExcluding,
-            *pBIncluding, convexRadiusB, collisionToleranceSq,
-            penetrationTolerance, iov, storePointA, storePointB);
-    pFloats[2] = iov.GetX();
-    pFloats[3] = iov.GetY();
-    pFloats[4] = iov.GetZ();
-    pFloats[5] = storePointA.GetX();
-    pFloats[6] = storePointA.GetY();
-    pFloats[7] = storePointA.GetZ();
-    pFloats[8] = storePointB.GetX();
-    pFloats[9] = storePointB.GetY();
-    pFloats[10] = storePointB.GetZ();
-    return result;
-}
+  BODYOF_GET_PENETRATION_DEPTH(
+          Sphere,
+          Sphere,
+          TransformedConvexObject<AABox>,
+          AddConvexRadius<TransformedConvexObject<AABox>>)
 
 /*
  * Class:     com_github_stephengold_joltjni_EpaPenetrationDepth
@@ -235,41 +138,8 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDep
  * Signature: (JJJFJJFLjava/nio/FloatBuffer;)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDepth_getPenetrationDepthTabs
-  (JNIEnv *pEnv, jclass, jlong epaVa, jlong aExcludingVa, jlong aIncludingVa,
-  jfloat convexRadiusA, jlong bExcludingVa, jlong bIncludingVa,
-  jfloat convexRadiusB, jobject fBuf) {
-    EPAPenetrationDepth * const pEpa
-            = reinterpret_cast<EPAPenetrationDepth *> (epaVa);
-    const TransformedConvexObject<AABox> * const pAExcluding
-            = reinterpret_cast<TransformedConvexObject<AABox> *> (aExcludingVa);
-    const AddConvexRadius<TransformedConvexObject<AABox>> * const pAIncluding
-            = reinterpret_cast<AddConvexRadius<TransformedConvexObject<AABox>> *> (aIncludingVa);
-    const TransformedConvexObject<AABox> * const pBExcluding
-            = reinterpret_cast<TransformedConvexObject<AABox> *> (bExcludingVa);
-    const AddConvexRadius<TransformedConvexObject<AABox>> * const pBIncluding
-            = reinterpret_cast<AddConvexRadius<TransformedConvexObject<AABox>> *> (bIncludingVa);
-    jfloat * const pFloats = (jfloat *) pEnv->GetDirectBufferAddress(fBuf);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(fBuf);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    JPH_ASSERT(capacityFloats >= 11);
-    const float collisionToleranceSq = pFloats[0];
-    const float penetrationTolerance = pFloats[1];
-    Vec3 iov(pFloats[2], pFloats[3], pFloats[4]);
-    Vec3 storePointA;
-    Vec3 storePointB;
-    bool result = pEpa->GetPenetrationDepth(
-            *pAExcluding, *pAIncluding, convexRadiusA, *pBExcluding,
-            *pBIncluding, convexRadiusB, collisionToleranceSq,
-            penetrationTolerance, iov, storePointA, storePointB);
-    pFloats[2] = iov.GetX();
-    pFloats[3] = iov.GetY();
-    pFloats[4] = iov.GetZ();
-    pFloats[5] = storePointA.GetX();
-    pFloats[6] = storePointA.GetY();
-    pFloats[7] = storePointA.GetZ();
-    pFloats[8] = storePointB.GetX();
-    pFloats[9] = storePointB.GetY();
-    pFloats[10] = storePointB.GetZ();
-    return result;
-}
+  BODYOF_GET_PENETRATION_DEPTH(
+          TransformedConvexObject<AABox>,
+          AddConvexRadius<TransformedConvexObject<AABox>>,
+          TransformedConvexObject<AABox>,
+          AddConvexRadius<TransformedConvexObject<AABox>>)
