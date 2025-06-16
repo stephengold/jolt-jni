@@ -296,6 +296,12 @@ final public class SmokeTestAll {
         smokeTest(new ScaledBoxShapeTest());
         smokeTest(new ScaledCapsuleShapeTest());
         smokeTest(new ScaledConvexHullShapeTest());
+        smokeTest(new ScaledCylinderShapeTest());
+        smokeTest(new ScaledHeightFieldShapeTest());
+        smokeTest(new ScaledMeshShapeTest());
+        smokeTest(new ScaledMutableCompoundShapeTest());
+        smokeTest(new ScaledOffsetCenterOfMassShapeTest());
+        smokeTest(new ScaledPlaneShapeTest());
     }
 
     /**
