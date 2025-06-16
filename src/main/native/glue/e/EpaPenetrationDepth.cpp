@@ -228,3 +228,48 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDep
     pFloats[10] = storePointB.GetZ();
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_EpaPenetrationDepth
+ * Method:    getPenetrationDepthTabs
+ * Signature: (JJJFJJFLjava/nio/FloatBuffer;)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDepth_getPenetrationDepthTabs
+  (JNIEnv *pEnv, jclass, jlong epaVa, jlong aExcludingVa, jlong aIncludingVa,
+  jfloat convexRadiusA, jlong bExcludingVa, jlong bIncludingVa,
+  jfloat convexRadiusB, jobject fBuf) {
+    EPAPenetrationDepth * const pEpa
+            = reinterpret_cast<EPAPenetrationDepth *> (epaVa);
+    const TransformedConvexObject<AABox> * const pAExcluding
+            = reinterpret_cast<TransformedConvexObject<AABox> *> (aExcludingVa);
+    const AddConvexRadius<TransformedConvexObject<AABox>> * const pAIncluding
+            = reinterpret_cast<AddConvexRadius<TransformedConvexObject<AABox>> *> (aIncludingVa);
+    const TransformedConvexObject<AABox> * const pBExcluding
+            = reinterpret_cast<TransformedConvexObject<AABox> *> (bExcludingVa);
+    const AddConvexRadius<TransformedConvexObject<AABox>> * const pBIncluding
+            = reinterpret_cast<AddConvexRadius<TransformedConvexObject<AABox>> *> (bIncludingVa);
+    jfloat * const pFloats = (jfloat *) pEnv->GetDirectBufferAddress(fBuf);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(fBuf);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 11);
+    const float collisionToleranceSq = pFloats[0];
+    const float penetrationTolerance = pFloats[1];
+    Vec3 iov(pFloats[2], pFloats[3], pFloats[4]);
+    Vec3 storePointA;
+    Vec3 storePointB;
+    bool result = pEpa->GetPenetrationDepth(
+            *pAExcluding, *pAIncluding, convexRadiusA, *pBExcluding,
+            *pBIncluding, convexRadiusB, collisionToleranceSq,
+            penetrationTolerance, iov, storePointA, storePointB);
+    pFloats[2] = iov.GetX();
+    pFloats[3] = iov.GetY();
+    pFloats[4] = iov.GetZ();
+    pFloats[5] = storePointA.GetX();
+    pFloats[6] = storePointA.GetY();
+    pFloats[7] = storePointA.GetZ();
+    pFloats[8] = storePointB.GetX();
+    pFloats[9] = storePointB.GetY();
+    pFloats[10] = storePointB.GetZ();
+    return result;
+}
