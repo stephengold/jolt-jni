@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.BcsResult;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.Color;
 import com.github.stephengold.joltjni.ConstraintSettingsRef;
+import com.github.stephengold.joltjni.Edge;
 import com.github.stephengold.joltjni.GroupFilterRef;
 import com.github.stephengold.joltjni.GroupFilterResult;
 import com.github.stephengold.joltjni.GroupFilterTable;
@@ -53,9 +54,11 @@ import com.github.stephengold.joltjni.VehicleAntiRollBar;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
 import com.github.stephengold.joltjni.VehicleControllerSettingsRef;
 import com.github.stephengold.joltjni.VehicleDifferentialSettings;
+import com.github.stephengold.joltjni.Vertex;
 import com.github.stephengold.joltjni.WheelSettingsTv;
 import com.github.stephengold.joltjni.WheelSettingsWv;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
+import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
@@ -1004,6 +1007,15 @@ public class Test012 {
      */
     private static void testSoftBodySharedSettings() {
         SoftBodySharedSettings sbss = new SoftBodySharedSettings();
+        Vertex v0 = new Vertex().setPosition(1f, 2f, 3f);
+        sbss.addVertex(v0);
+        Vertex v1 = new Vertex().setPosition(4f, 5f, 6f);
+        sbss.addVertex(v1);
+        Edge edge = new Edge()
+                .setCompliance(7f)
+                .setVertex(0, 1)
+                .setVertex(1, 0);
+        sbss.addEdgeConstraint(edge);
 
         { // serialize and then deserialize binary state:
             String serialData = serializeCooked(sbss);
@@ -1051,7 +1063,10 @@ public class Test012 {
      * Test replication of {@code SpringSettings} objects.
      */
     private static void testSpringSettings() {
-        SpringSettings settings = new SpringSettings();
+        SpringSettings settings = new SpringSettings()
+                .setDamping(2f)
+                .setMode(ESpringMode.StiffnessAndDamping)
+                .setStiffness(345f);
 
         { // copy constructor:
             SpringSettings settingsCopy = new SpringSettings(settings);
@@ -1090,7 +1105,10 @@ public class Test012 {
      * Test replication of {@code VehicleAntiRollBar} objects.
      */
     private static void testVehicleAntiRollBar() {
-        VehicleAntiRollBar bar = new VehicleAntiRollBar();
+        VehicleAntiRollBar bar = new VehicleAntiRollBar()
+                .setLeftWheel(1)
+                .setRightWheel(2)
+                .setStiffness(345f);
 
         { // copy constructor:
             VehicleAntiRollBar barCopy = new VehicleAntiRollBar(bar);
