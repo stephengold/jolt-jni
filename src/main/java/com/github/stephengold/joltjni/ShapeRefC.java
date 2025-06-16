@@ -426,9 +426,9 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      */
     @Override
     public void saveBinaryState(StreamOut stream) {
-        long sceneVa = targetVa();
+        long shapeVa = targetVa();
         long streamVa = stream.va();
-        Shape.saveBinaryState(sceneVa, streamVa);
+        Shape.saveBinaryState(shapeVa, streamVa);
     }
 
     /**

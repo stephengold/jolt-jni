@@ -498,9 +498,9 @@ abstract public class Shape extends NonCopyable
      */
     @Override
     public void saveBinaryState(StreamOut stream) {
-        long sceneVa = va();
+        long shapeVa = va();
         long streamVa = stream.va();
-        saveBinaryState(sceneVa, streamVa);
+        saveBinaryState(shapeVa, streamVa);
     }
 
     /**
@@ -632,7 +632,7 @@ abstract public class Shape extends NonCopyable
 
     native static boolean mustBeStatic(long shapeVa);
 
-    native static void saveBinaryState(long sceneVa, long streamVa);
+    native static void saveBinaryState(long shapeVa, long streamVa);
 
     native static long scaleShape(long shapeVa, float sx, float sy, float sz);
 
