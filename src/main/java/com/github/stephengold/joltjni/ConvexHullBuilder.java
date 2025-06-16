@@ -38,13 +38,14 @@ public class ConvexHullBuilder extends NonCopyable {
     /**
      * Instantiate a builder for the specified points.
      *
-     * @param points a list of locations (not null, unaffected)
+     * @param points a collection of point locations (not null, unaffected)
      */
-    public ConvexHullBuilder(Collection<Vec3Arg> points) {
+    public ConvexHullBuilder(Collection<?> points) {
         int numPoints = points.size();
         int numFloats = 3 * numPoints;
         FloatBuffer pointBuffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (Vec3Arg point : points) {
+        for (Object element : points) {
+            Vec3Arg point = (Vec3Arg) element;
             point.put(pointBuffer);
         }
         long builderVa = create(pointBuffer);
