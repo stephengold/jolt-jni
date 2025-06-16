@@ -48,7 +48,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      *
      * @param points a collection of point locations (not null, unaffected)
      */
-    public ConvexHullShapeSettings(Collection<Vec3Arg> points) {
+    public ConvexHullShapeSettings(Collection<?> points) {
         this(points, Jolt.cDefaultConvexRadius);
     }
 
@@ -60,7 +60,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * default=0.05)
      */
     public ConvexHullShapeSettings(
-            Collection<Vec3Arg> points, float maxConvexRadius) {
+            Collection<?> points, float maxConvexRadius) {
         this(points, maxConvexRadius, null);
     }
 
@@ -73,7 +73,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * @param material the desired surface properties (not null, unaffected) or
      * {@code null} for default properties (default=null)
      */
-    public ConvexHullShapeSettings(Collection<Vec3Arg> points,
+    public ConvexHullShapeSettings(Collection<?> points,
             float maxConvexRadius, ConstPhysicsMaterial material) {
         int numPoints = points.size();
         long settingsVa;
@@ -82,7 +82,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         } else {
             int numFloats = numAxes * numPoints;
             FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
-            for (Vec3Arg point : points) {
+            for (Object element : points) {
+                Vec3Arg point = (Vec3Arg) element;
                 point.put(buffer);
             }
             long materialVa = (material == null) ? 0L : material.targetVa();
