@@ -432,6 +432,25 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     }
 
     /**
+     * Scale the current shape, which is unaffected.
+     *
+     * @param scaleFactors the desired scaling on each axis (not null,
+     * unaffected)
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public ShapeResult scaleShape(Vec3Arg scaleFactors) {
+        long shapeVa = targetVa();
+        float sx = scaleFactors.getX();
+        float sy = scaleFactors.getY();
+        float sz = scaleFactors.getZ();
+        long resultVa = Shape.scaleShape(shapeVa, sx, sy, sz);
+        ShapeResult result = new ShapeResult(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the address of the native {@code Shape}. No objects are affected.
      *
      * @return a virtual address (not zero)

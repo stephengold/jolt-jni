@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.DebugRenderer;
 import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.ShapeRefC;
+import com.github.stephengold.joltjni.ShapeResult;
 import com.github.stephengold.joltjni.Stats;
 import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.Vec3;
@@ -227,6 +228,15 @@ public interface ConstShape extends ConstJoltPhysicsObject {
      * @param stream the stream to write to (not null)
      */
     void saveBinaryState(StreamOut stream);
+
+    /**
+     * Scale the current shape, which is unaffected.
+     *
+     * @param scaleFactors the desired scaling on each axis (not null,
+     * unaffected)
+     * @return a new JVM object with a new native object assigned
+     */
+    ShapeResult scaleShape(Vec3Arg scaleFactors);
 
     /**
      * Create a counted reference to the native {@code Shape}.

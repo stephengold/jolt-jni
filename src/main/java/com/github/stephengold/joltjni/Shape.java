@@ -504,6 +504,25 @@ abstract public class Shape extends NonCopyable
     }
 
     /**
+     * Scale the current shape, which is unaffected.
+     *
+     * @param scaleFactors the desired scaling on each axis (not null,
+     * unaffected)
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public ShapeResult scaleShape(Vec3Arg scaleFactors) {
+        long shapeVa = va();
+        float sx = scaleFactors.getX();
+        float sy = scaleFactors.getY();
+        float sz = scaleFactors.getZ();
+        long resultVa = scaleShape(shapeVa, sx, sy, sz);
+        ShapeResult result = new ShapeResult(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Create a counted reference to the native {@code Shape}.
      *
      * @return a new JVM object with a new native object assigned
@@ -614,6 +633,8 @@ abstract public class Shape extends NonCopyable
     native static boolean mustBeStatic(long shapeVa);
 
     native static void saveBinaryState(long sceneVa, long streamVa);
+
+    native static long scaleShape(long shapeVa, float sx, float sy, float sz);
 
     native private static void setEmbedded(long shapeVa);
 

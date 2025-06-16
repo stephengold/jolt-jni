@@ -439,6 +439,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_saveBinaryState
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
+ * Method:    scaleShape
+ * Signature: (JFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Shape_scaleShape
+  (JNIEnv *, jclass, jlong shapeVa, jfloat sx, jfloat sy, jfloat sz) {
+    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
+    const Vec3 scale(sx, sy, sz);
+    ShapeSettings::ShapeResult *pResult = new ShapeSettings::ShapeResult();
+    TRACE_NEW("ShapeSettings::ShapeResult", pResult)
+    *pResult = pShape->ScaleShape(scale);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Shape
  * Method:    setEmbedded
  * Signature: (J)V
  */
