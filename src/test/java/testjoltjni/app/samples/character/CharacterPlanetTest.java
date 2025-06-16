@@ -234,6 +234,7 @@ void OnStep( PhysicsStepListenerContext inContext)
 			float mass = 1.0f / body.getMotionProperties().getInverseMass();
 			body.addForce(star(-gravity * mass , new Vec3(position).normalized()));
 		}
+		lock.releaseLock();
 	}
 }
 

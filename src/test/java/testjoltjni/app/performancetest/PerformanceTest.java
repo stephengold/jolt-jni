@@ -271,6 +271,7 @@ public static void main(  String[] argv)throws IOException
 							if (!body.isStatic())
 								body.setAllowSleeping(false);
 						}
+						lock.releaseLock();
 					}
 				}
 
