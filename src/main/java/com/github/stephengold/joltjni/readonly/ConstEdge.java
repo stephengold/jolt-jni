@@ -43,7 +43,7 @@ public interface ConstEdge extends ConstJoltPhysicsObject {
     float getRestLength();
 
     /**
-     * Return the mesh vertex at the specified end. (native attribute: mVertex)
+     * Return the mesh vertex at the specified end.
      *
      * @param indexInEdge which end of the edge (0 or 1)
      * @return the mesh index of the vertex (&ge;0)
