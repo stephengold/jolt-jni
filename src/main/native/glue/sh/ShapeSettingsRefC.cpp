@@ -32,6 +32,21 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeSettingsRefC
+ * Method:    copy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeSettingsRefC_copy
+  (JNIEnv *, jclass, jlong refVa) {
+    RefConst<ShapeSettings> * const pRef
+            = reinterpret_cast<RefConst<ShapeSettings> *> (refVa);
+    RefConst<ShapeSettings> * const pResult
+            = new RefConst<ShapeSettings>(*pRef);
+    TRACE_NEW("RefConst<ShapeSettings>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ShapeSettingsRefC
  * Method:    free
  * Signature: (J)V
  */
