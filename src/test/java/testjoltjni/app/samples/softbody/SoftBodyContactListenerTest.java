@@ -159,7 +159,7 @@ SoftBodyValidateResult OnSoftBodyContactValidate( ConstBody inSoftBody, ConstBod
 	}
 }
 
-void OnSoftBodyContactAdded(ConstBody  inSoftBody,  SoftBodyManifold inManifold)
+void OnSoftBodyContactAdded(ConstBody  inSoftBody,  ConstSoftBodyManifold inManifold)
 {
 	// Draw contacts
 	RMat44 com = inSoftBody.getCenterOfMassTransform();

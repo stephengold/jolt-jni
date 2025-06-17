@@ -67,7 +67,7 @@ public void Initialize()
 	mBodyInterface.createAndAddBody(bcs, EActivation.Activate);
 }
 
-void OnSoftBodyContactAdded(ConstBody inSoftBody, SoftBodyManifold inManifold)
+void OnSoftBodyContactAdded(ConstBody inSoftBody, ConstSoftBodyManifold inManifold)
 {
 	// Draw the vertices that are in contact
 	RMat44 com = inSoftBody.getCenterOfMassTransform();
