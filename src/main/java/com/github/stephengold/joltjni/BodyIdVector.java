@@ -52,17 +52,6 @@ public class BodyIdVector extends JoltPhysicsObject {
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
     }
-
-    /**
-     * Instantiate with the specified container and native object.
-     *
-     * @param container the containing object, or {@code null} if none
-     * @param vectorVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    BodyIdVector(JoltPhysicsObject container, long vectorVa) {
-        super(container, vectorVa);
-    }
     // *************************************************************************
     // new methods exposed
 
