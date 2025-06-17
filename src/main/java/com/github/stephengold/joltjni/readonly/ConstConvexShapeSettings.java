@@ -27,7 +27,7 @@ package com.github.stephengold.joltjni.readonly;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstConvexShapeSettings extends ConstJoltPhysicsObject {
+public interface ConstConvexShapeSettings extends ConstShapeSettings {
     /**
      * Return the density. The settings are unaffected.
      *
