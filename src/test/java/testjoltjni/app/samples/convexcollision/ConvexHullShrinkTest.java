@@ -31,7 +31,7 @@ import static com.github.stephengold.joltjni.std.Std.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
 
 /**
- * A line-for-line Java translation of the Jolt Physics convex-hull shrink test.
+ * A line-for-line Java translation of the Jolt-Physics convex-hull shrink test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/ConvexCollision/ConvexHullShrinkTest.cpp

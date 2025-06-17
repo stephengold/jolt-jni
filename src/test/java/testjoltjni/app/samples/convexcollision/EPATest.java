@@ -30,7 +30,7 @@ import static testjoltjni.app.samples.DebugRendererSP.*;
 
 
 /**
- * A line-for-line Java translation of the Jolt Physics EPA test.
+ * A line-for-line Java translation of the Jolt-Physics EPA test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/ConvexCollision/EPATest.cpp

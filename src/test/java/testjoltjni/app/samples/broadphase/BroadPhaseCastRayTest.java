@@ -27,7 +27,7 @@ import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
 /**
- * A line-for-line Java translation of the Jolt Physics broad-phase ray cast
+ * A line-for-line Java translation of the Jolt-Physics broad-phase ray-cast
  * test: a simple test that casts a ray through the broadphase.
  * <p>
  * Compare with the original by Jorrit Rouwe at

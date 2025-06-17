@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 /**
- * A line-for-line Java translation of the Jolt Physics change motion-quality test.
+ * A line-for-line Java translation of the Jolt-Physics change motion-quality test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/ChangeMotionQualityTest.cpp

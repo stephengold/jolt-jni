@@ -29,7 +29,8 @@ import static com.github.stephengold.joltjni.operator.Op.*;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * A line-for-line Java translation of the Jolt Physics scaled convex-hull shape test.
+ * A line-for-line Java translation of the Jolt-Physics scaled convex-hull shape
+ * test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/ScaledShapes/ScaledConvexHullShapeTest.cpp

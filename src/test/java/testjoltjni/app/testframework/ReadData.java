@@ -24,7 +24,7 @@ package testjoltjni.app.testframework;
 import java.io.*;
 
 /**
- * A Java translation of the Jolt Physics {@code ReadData} utility.
+ * A Java translation of the Jolt-Physics {@code ReadData} utility.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/TestFramework/Utils/ReadData.cpp

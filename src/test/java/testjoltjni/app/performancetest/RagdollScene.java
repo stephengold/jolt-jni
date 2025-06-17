@@ -28,7 +28,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.std.Std.*;
 
 /**
- * A line-for-line Java translation of the Jolt Physics "ragdoll scene"
+ * A line-for-line Java translation of the Jolt-Physics "ragdoll scene"
  * performance test.
  * <p>
  * Compare with the original by Jorrit Rouwe at

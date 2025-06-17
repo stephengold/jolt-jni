@@ -28,7 +28,8 @@ import static com.github.stephengold.joltjni.operator.Op.*;
 import java.util.*;
 
 /**
- * A line-for-line Java translation of the Jolt Physics CharacterVirtual performance test.
+ * A line-for-line Java translation of the Jolt-Physics CharacterVirtual
+ * performance test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/CharacterVirtualScene.h

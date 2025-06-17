@@ -28,7 +28,7 @@ import testjoltjni.app.samples.*;
 import java.util.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 /**
- * A line-for-line Java translation of the Jolt Physics water-shape test.
+ * A line-for-line Java translation of the Jolt-Physics water-shape test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Water/WaterShapeTest.cpp

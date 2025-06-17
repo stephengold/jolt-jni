@@ -24,7 +24,8 @@ import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 /**
- * A line-for-line Java translation of the Jolt Physics performance test-scene interface.
+ * A line-for-line Java translation of the Jolt-Physics performance test-scene
+ * interface.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/PerformanceTestScene.h

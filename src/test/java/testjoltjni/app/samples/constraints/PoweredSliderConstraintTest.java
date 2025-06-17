@@ -25,7 +25,8 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 /**
- * A line-for-line Java translation of the Jolt Physics powered slider-constraint test.
+ * A line-for-line Java translation of the Jolt-Physics powered
+ * slider-constraint test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Constraints/PoweredSliderConstraintTest.cpp

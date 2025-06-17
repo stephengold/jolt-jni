@@ -27,7 +27,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 import testjoltjni.app.samples.*;
 /**
- * A line-for-line Java translation of the Jolt Physics soft-body sensor test.
+ * A line-for-line Java translation of the Jolt-Physics soft-body sensor test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/SoftBody/SoftBodySensorTest.cpp

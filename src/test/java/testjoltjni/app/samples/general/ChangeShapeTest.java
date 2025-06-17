@@ -26,7 +26,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
 /**
- * A line-for-line Java translation of the Jolt Physics change shape test.
+ * A line-for-line Java translation of the Jolt-Physics change shape test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/ChangeShapeTest.cpp

@@ -28,7 +28,7 @@ import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.std.Std.*;
 /**
- * A line-for-line Java translation of the Jolt Physics friction per-triangle test.
+ * A line-for-line Java translation of the Jolt-Physics friction per-triangle test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/FrictionPerTriangleTest.cpp

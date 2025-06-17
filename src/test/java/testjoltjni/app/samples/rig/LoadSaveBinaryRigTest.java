@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.readonly.*;
 import com.github.stephengold.joltjni.std.*;
 import testjoltjni.app.samples.*;
 /**
- * A line-for-line Java translation of the Jolt Physics load-save binary rig test.
+ * A line-for-line Java translation of the Jolt-Physics load-save binary rig test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Rig/LoadSaveBinaryRigTest.cpp

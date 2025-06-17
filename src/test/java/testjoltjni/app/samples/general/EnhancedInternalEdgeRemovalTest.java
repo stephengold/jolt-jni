@@ -29,7 +29,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 import static com.github.stephengold.joltjni.std.Std.*;
 /**
- * A line-for-line Java translation of the Jolt Physics enhanced internal-edge removal test.
+ * A line-for-line Java translation of the Jolt-Physics enhanced internal-edge removal test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/EnhancedInternalEdgeRemovalTest.cpp

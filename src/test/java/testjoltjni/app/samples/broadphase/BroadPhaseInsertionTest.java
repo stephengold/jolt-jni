@@ -30,7 +30,8 @@ import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
 /**
- * A line-for-line Java translation of the Jolt Physics broadphase insertion test.
+ * A line-for-line Java translation of the Jolt-physics broadphase insertion
+ * test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/BroadPhase/BroadPhaseInsertionTest.cpp

@@ -30,7 +30,7 @@ import static com.github.stephengold.joltjni.std.Std.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
 import static testjoltjni.app.testframework.ReadData.*;
 /**
- * A line-for-line Java translation of the Jolt Physics heightfield-shape test.
+ * A line-for-line Java translation of the Jolt-Physics heightfield-shape test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Shapes/HeightFieldShapeTest.cpp

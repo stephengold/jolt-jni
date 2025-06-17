@@ -26,7 +26,8 @@ import com.github.stephengold.joltjni.std.*;
 import java.util.function.BiFunction;
 import testjoltjni.app.samples.*;
 /**
- * A line-for-line Java translation of the Jolt Physics soft-body bend-constraint test.
+ * A line-for-line Java translation of the Jolt-Physics soft-body
+ * bend-constraint test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/SoftBody/SoftBodyBendConstraintTest.cpp

@@ -29,7 +29,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.std.Std.*;
 
 /**
- * A line-for-line Java translation of the Jolt Physics performance-test driver.
+ * A line-for-line Java translation of the Jolt-Physics performance-test driver.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/PerformanceTest.h

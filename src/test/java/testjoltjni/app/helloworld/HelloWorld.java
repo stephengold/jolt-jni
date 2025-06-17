@@ -27,7 +27,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.std.Std.*;
 
 /**
- * A line-for-line Java translation of the Jolt Physics "hello world" sample
+ * A line-for-line Java translation of the Jolt-Physics "hello world" sample
  * application.
  * <p>
  * Compare with the original by Jorrit Rouwe at

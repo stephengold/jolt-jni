@@ -27,7 +27,7 @@ import testjoltjni.app.testframework.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 /**
- * A line-for-line Java translation of the Jolt Physics vehicle 6-DOF test.
+ * A line-for-line Java translation of the Jolt-Physics vehicle 6-DOF test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/Vehicle/VehicleSixDOFTest.cpp

@@ -26,7 +26,7 @@ import com.github.stephengold.joltjni.std.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import testjoltjni.app.samples.*;
 /**
- * A line-for-line Java translation of the Jolt Physics change object-layer test.
+ * A line-for-line Java translation of the Jolt-Physics change object-layer test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/ChangeObjectLayerTest.cpp

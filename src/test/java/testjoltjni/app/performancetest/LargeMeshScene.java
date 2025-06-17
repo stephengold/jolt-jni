@@ -26,7 +26,8 @@ import static com.github.stephengold.joltjni.Jolt.*;
 import static testjoltjni.app.performancetest.PerformanceTest.Trace;
 
 /**
- * A line-for-line Java translation of the Jolt Physics "large mesh scene" performance test.
+ * A line-for-line Java translation of the Jolt-Physics "large mesh scene"
+ * performance test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/PerformanceTest/LargeMeshScene.h

@@ -24,7 +24,7 @@ import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.std.StringStream;
 import testjoltjni.app.samples.*;
 /**
- * A line-for-line Java translation of the Jolt Physics load/save binary test.
+ * A line-for-line Java translation of the Jolt-Physics load/save binary test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/LoadSaveBinaryTest.cpp

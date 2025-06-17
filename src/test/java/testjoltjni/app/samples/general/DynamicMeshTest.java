@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.operator.Op;
 import testjoltjni.app.samples.*;
 /**
- * A line-for-line Java translation of the Jolt Physics dynamic-mesh test.
+ * A line-for-line Java translation of the Jolt-Physics dynamic-mesh test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/General/DynamicMeshTest.cpp
