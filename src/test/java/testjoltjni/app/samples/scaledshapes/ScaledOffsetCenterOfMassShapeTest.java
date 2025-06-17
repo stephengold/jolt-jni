@@ -26,7 +26,8 @@ import com.github.stephengold.joltjni.readonly.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 /**
- * A line-for-line Java translation of the Jolt-Physics scaled offset center-of-mass shape test.
+ * A line-for-line Java translation of the Jolt-Physics scaled offset
+ * center-of-mass shape test.
  * <p>
  * Compare with the original by Jorrit Rouwe at
  * https://github.com/jrouwe/JoltPhysics/blob/master/Samples/Tests/ScaledShapes/ScaledOffsetCenterOfMassShapeTest.cpp
