@@ -53,6 +53,13 @@ public void Initialize()
 	StartCycle();
 }
 
+void UpdateLabel()
+{
+	// Draw current state
+	String  cycle_names[] = { "Accept contact", "Sphere 10x mass", "Cloth 10x mass", "Sphere infinite mass", "Cloth infinite mass", "Sensor contact", "Reject contact", "Kinematic Sphere", "Kinematic Sphere, cloth infinite mass", "Kinematic sphere, sensor contact", "Kinematic Sphere, reject contact" };
+	mDebugRenderer.drawText3D(mBodyInterface.getPosition(mOtherBodyID), cycle_names[mCycle], Color.sWhite, 1.0f);
+}
+
 public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	mTime += inParams.mDeltaTime;
@@ -72,9 +79,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		StartCycle();
 	}
 
-	// Draw current state
-	String  cycle_names[] = { "Accept contact", "Sphere 10x mass", "Cloth 10x mass", "Sphere infinite mass", "Cloth infinite mass", "Sensor contact", "Reject contact", "Kinematic Sphere", "Kinematic Sphere, cloth infinite mass", "Kinematic sphere, sensor contact", "Kinematic Sphere, reject contact" };
-	mDebugRenderer.drawText3D(mBodyInterface.getPosition(mOtherBodyID), cycle_names[mCycle], Color.sWhite, 1.0f);
+	UpdateLabel();
 }
 
 void StartCycle()
@@ -98,6 +103,8 @@ void StartCycle()
 	if (kinematic)
 		bcs.setLinearVelocity (new Vec3(0, -2.5f, 0));
 	mOtherBodyID = mBodyInterface.createAndAddBody(bcs, EActivation.Activate);
+
+	UpdateLabel();
 }
 
 SoftBodyValidateResult OnSoftBodyContactValidate( ConstBody inSoftBody, ConstBody  inOtherBody, SoftBodyContactSettings ioSettings)
