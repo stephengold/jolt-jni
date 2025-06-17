@@ -68,24 +68,6 @@ final public class ObjectStreamOut {
     }
 
     /**
-     * Write the specified soft-body creation settings to the specified stream.
-     *
-     * @param stream the stream to write to (not null)
-     * @param streamType the type of stream (not null)
-     * @param settings the settings to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(StringStream stream,
-            EStreamType streamType, ConstSoftBodyCreationSettings settings) {
-        long streamVa = stream.va();
-        int ordinal = streamType.ordinal();
-        long settingsVa = settings.targetVa();
-        boolean result = sWriteSbcs(streamVa, ordinal, settingsVa);
-
-        return result;
-    }
-
-    /**
      * Write the specified serializable object to the specified stream.
      *
      * @param stream the stream to write to (not null)
@@ -100,6 +82,24 @@ final public class ObjectStreamOut {
         long settingsVa = settings.targetVa();
         boolean result
                 = sWriteSerializableObject(streamVa, ordinal, settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Write the specified soft-body creation settings to the specified stream.
+     *
+     * @param stream the stream to write to (not null)
+     * @param streamType the type of stream (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(StringStream stream,
+            EStreamType streamType, ConstSoftBodyCreationSettings settings) {
+        long streamVa = stream.va();
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result = sWriteSbcs(streamVa, ordinal, settingsVa);
 
         return result;
     }
