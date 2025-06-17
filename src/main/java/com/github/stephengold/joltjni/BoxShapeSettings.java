@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -30,7 +31,9 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BoxShapeSettings extends ConvexShapeSettings {
+public class BoxShapeSettings
+        extends ConvexShapeSettings
+        implements ConstBoxShapeSettings {
     // *************************************************************************
     // constructors
 
@@ -48,8 +51,8 @@ public class BoxShapeSettings extends ConvexShapeSettings {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public BoxShapeSettings(BoxShapeSettings original) {
-        long originalVa = original.va();
+    public BoxShapeSettings(ConstBoxShapeSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa); // not owner due to ref counting
         setSubType(EShapeSubType.Box);
@@ -136,35 +139,6 @@ public class BoxShapeSettings extends ConvexShapeSettings {
     // new methods exposed
 
     /**
-     * Return the convex radius. The settings are unaffected. (native attribute:
-     * mConvexRadius)
-     *
-     * @return the convex radius (&ge;0)
-     */
-    public float getConvexRadius() {
-        long settingsVa = va();
-        float result = getConvexRadius(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Copy the extent of the box. The settings are unaffected. (native
-     * attribute: mHalfExtent)
-     *
-     * @return a new vector: one-half of extent on each local axis
-     */
-    public Vec3 getHalfExtent() {
-        long settingsVa = va();
-        float hx = getHalfExtentX(settingsVa);
-        float hy = getHalfExtentY(settingsVa);
-        float hz = getHalfExtentZ(settingsVa);
-        Vec3 result = new Vec3(hx, hy, hz);
-
-        return result;
-    }
-
-    /**
      * Alter the convex radius. (native attribute: mConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0, default=0.05)
@@ -186,6 +160,39 @@ public class BoxShapeSettings extends ConvexShapeSettings {
         float hy = halfExtents.getY();
         float hz = halfExtents.getZ();
         setHalfExtent(settingsVa, hx, hy, hz);
+    }
+    // *************************************************************************
+    // ConstBoxShapeSettings methods
+
+    /**
+     * Return the convex radius. The settings are unaffected. (native attribute:
+     * mConvexRadius)
+     *
+     * @return the convex radius (&ge;0)
+     */
+    @Override
+    public float getConvexRadius() {
+        long settingsVa = va();
+        float result = getConvexRadius(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the extent of the box. The settings are unaffected. (native
+     * attribute: mHalfExtent)
+     *
+     * @return a new vector: one-half of extent on each local axis
+     */
+    @Override
+    public Vec3 getHalfExtent() {
+        long settingsVa = va();
+        float hx = getHalfExtentX(settingsVa);
+        float hy = getHalfExtentY(settingsVa);
+        float hz = getHalfExtentZ(settingsVa);
+        Vec3 result = new Vec3(hx, hy, hz);
+
+        return result;
     }
     // *************************************************************************
     // native private methods

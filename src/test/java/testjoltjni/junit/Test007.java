@@ -66,6 +66,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VertexList;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
+import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -118,7 +119,7 @@ public class Test007 {
      * Test the {@code BoxShape} class.
      */
     private static void doBoxShape() {
-        BoxShapeSettings settings = new BoxShapeSettings(1f, 1f, 1f);
+        ConstBoxShapeSettings settings = new BoxShapeSettings(1f, 1f, 1f);
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
         Assert.assertTrue(result.isValid());

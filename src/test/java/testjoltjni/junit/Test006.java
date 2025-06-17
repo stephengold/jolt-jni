@@ -24,7 +24,6 @@ package testjoltjni.junit;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.CapsuleShapeSettings;
 import com.github.stephengold.joltjni.ConvexHullShapeSettings;
-import com.github.stephengold.joltjni.ConvexShapeSettings;
 import com.github.stephengold.joltjni.CylinderShapeSettings;
 import com.github.stephengold.joltjni.EmptyShapeSettings;
 import com.github.stephengold.joltjni.HeightFieldShapeSettings;
@@ -39,7 +38,6 @@ import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RotatedTranslatedShapeSettings;
 import com.github.stephengold.joltjni.ScaledShapeSettings;
 import com.github.stephengold.joltjni.ShapeRefC;
-import com.github.stephengold.joltjni.ShapeSettings;
 import com.github.stephengold.joltjni.ShapeSettingsRef;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.SphereShapeSettings;
@@ -48,7 +46,10 @@ import com.github.stephengold.joltjni.TaperedCapsuleShapeSettings;
 import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
 import com.github.stephengold.joltjni.Triangle;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstConvexShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstPlane;
+import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -366,7 +367,7 @@ public class Test006 {
      *
      * @param settings the settings to test (not null, unaffected)
      */
-    private static void testBoxSsDefaults(BoxShapeSettings settings) {
+    private static void testBoxSsDefaults(ConstBoxShapeSettings settings) {
         testConvexSsDefaults(settings);
 
         Assert.assertEquals(0f, settings.getConvexRadius(), 0f);
@@ -470,7 +471,8 @@ public class Test006 {
      *
      * @param settings the settings to test (not null, unaffected)
      */
-    private static void testConvexSsDefaults(ConvexShapeSettings settings) {
+    private static void testConvexSsDefaults(
+            ConstConvexShapeSettings settings) {
         testSsDefaults(settings);
         Assert.assertEquals(1_000f, settings.getDensity(), 0f);
         Assert.assertNull(settings.getMaterial());
@@ -772,10 +774,9 @@ public class Test006 {
      *
      * @param settings the settings to test (not null, unaffected)
      */
-    private static void testSsDefaults(ShapeSettings settings) {
+    private static void testSsDefaults(ConstShapeSettings settings) {
         Assert.assertTrue(settings.hasAssignedNativeObject());
         Assert.assertFalse(settings.ownsNativeObject());
-        Assert.assertEquals(0, settings.getRefCount());
     }
 
     /**
