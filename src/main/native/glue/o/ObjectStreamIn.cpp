@@ -214,6 +214,21 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadShapeSettingsFromStream
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadShapeSettingsFromStream
+  (JNIEnv *, jclass, jlong streamVa, jlong refVa) {
+    std::stringstream * const pStream
+            = reinterpret_cast<std::stringstream *> (streamVa);
+    Ref<ShapeSettings> * const pStoreRef
+            = reinterpret_cast<Ref<ShapeSettings> *> (refVa);
+    const bool result = ObjectStreamIn::sReadObject(*pStream, *pStoreRef);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
  * Method:    sReadSkeletalAnimation
  * Signature: (Ljava/lang/String;J)Z
  */

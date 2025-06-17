@@ -175,6 +175,23 @@ final public class ObjectStreamIn {
     }
 
     /**
+     * Read a shape-settings object from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param settingsRef where to store the reference to the de-serialized
+     * shape settings (not null, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, ShapeSettingsRef settingsRef) {
+        long streamVa = stream.va();
+        long refVa = settingsRef.va();
+        boolean result = sReadShapeSettingsFromStream(streamVa, refVa);
+
+        return result;
+    }
+
+    /**
      * Read a soft-body settings object from the specified stream.
      *
      * @param stream the stream to read from (not null)
@@ -260,6 +277,9 @@ final public class ObjectStreamIn {
             long streamVa, long[] storeVa);
 
     native private static boolean sReadSbssFromStream(
+            long streamVa, long refVa);
+
+    native private static boolean sReadShapeSettingsFromStream(
             long streamVa, long refVa);
 
     native private static boolean sReadSkeletalAnimation(
