@@ -50,6 +50,23 @@ final public class ObjectStreamOut {
     // new methods exposed
 
     /**
+     * Write the specified body-creation settings to the specified file.
+     *
+     * @param fileName the path to the file (not null)
+     * @param streamType the type of file (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(String fileName,
+            EStreamType streamType, ConstBodyCreationSettings settings) {
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result = sWriteBcsToFile(fileName, ordinal, settingsVa);
+
+        return result;
+    }
+
+    /**
      * Write the specified serializable object to the specified file.
      *
      * @param fileName the path to the file (not null)
@@ -63,23 +80,6 @@ final public class ObjectStreamOut {
         long settingsVa = settings.targetVa();
         boolean result
                 = sWriteSerializableObjectToFile(fileName, ordinal, settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Write the specified body-creation settings to the specified file.
-     *
-     * @param fileName the path to the file (not null)
-     * @param streamType the type of file (not null)
-     * @param settings the settings to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(String fileName,
-            EStreamType streamType, ConstBodyCreationSettings settings) {
-        int ordinal = streamType.ordinal();
-        long settingsVa = settings.targetVa();
-        boolean result = sWriteBcsToFile(fileName, ordinal, settingsVa);
 
         return result;
     }
