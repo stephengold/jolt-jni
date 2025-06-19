@@ -38,23 +38,53 @@ SOFTWARE.
 using namespace JPH;
 
 /*
+ * Pre-processor macro to generate the body of a static
+ * sRead{T}() method for a RefTarget type T:
+ */
+#define BODYOF_SREAD_FROM_FILE_REF(T) \
+  (JNIEnv *pEnv, jclass, jstring fileName, jlong refVa) { \
+    jboolean isCopy; \
+    const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy); \
+    Ref<T> * const pStoreRef = reinterpret_cast<Ref<T> *> (refVa); \
+    const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef); \
+    pEnv->ReleaseStringUTFChars(fileName, pFileName); \
+    return result; \
+}
+/*
+ * Pre-processor macro to generate the body of a static
+ * sRead{T}FromStream() method for a non-RefTarget type T:
+ */
+#define BODYOF_SREAD_FROM_STREAM_NONREF(T) \
+  (JNIEnv *pEnv, jclass, jlong streamVa, jlongArray storeVa) { \
+    std::stringstream * const pStream = reinterpret_cast<std::stringstream *> (streamVa); \
+    T * pSettings = new T(); \
+    TRACE_NEW(#T, pSettings) \
+    const bool result = ObjectStreamIn::sReadObject(*pStream, pSettings); \
+    jboolean isCopy; \
+    jlong * const pStoreVa = pEnv->GetLongArrayElements(storeVa, &isCopy); \
+    pStoreVa[0] = reinterpret_cast<jlong> (pSettings); \
+    pEnv->ReleaseLongArrayElements(storeVa, pStoreVa, 0); \
+    return result; \
+}
+/*
+ * Pre-processor macro to generate the body of a static
+ * sRead{T}FromStream() method for a RefTarget type T:
+ */
+#define BODYOF_SREAD_FROM_STREAM_REF(T) \
+  (JNIEnv *pEnv, jclass, jlong streamVa, jlong settingsRefVa) { \
+    std::stringstream * const pStream = reinterpret_cast<std::stringstream *> (streamVa); \
+    Ref<T> * const pSettingsRef = reinterpret_cast<Ref<T> *> (settingsRefVa); \
+    const bool result = ObjectStreamIn::sReadObject(*pStream, *pSettingsRef); \
+    return result; \
+}
+
+/*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
  * Method:    sReadBcsFromStream
  * Signature: (J[J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadBcsFromStream
-  (JNIEnv *pEnv, jclass, jlong streamVa, jlongArray storeVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    BodyCreationSettings * pSettings = new BodyCreationSettings();
-    TRACE_NEW("BodyCreationSettings", pSettings)
-    const bool result = ObjectStreamIn::sReadObject(*pStream, pSettings);
-    jboolean isCopy;
-    jlong * const pStoreVa = pEnv->GetLongArrayElements(storeVa, &isCopy);
-    pStoreVa[0] = reinterpret_cast<jlong> (pSettings);
-    pEnv->ReleaseLongArrayElements(storeVa, pStoreVa, 0);
-    return result;
-}
+  BODYOF_SREAD_FROM_STREAM_NONREF(BodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -62,14 +92,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadConstraintSettingsFromStream
-  (JNIEnv *, jclass, jlong streamVa, jlong settingsRefVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    Ref<ConstraintSettings> * const pSettingsRef
-            = reinterpret_cast<Ref<ConstraintSettings> *> (settingsRefVa);
-    const bool result = ObjectStreamIn::sReadObject(*pStream, *pSettingsRef);
-    return result;
-}
+  BODYOF_SREAD_FROM_STREAM_REF(ConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -77,14 +100,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadControllerSettingsFromStream
-  (JNIEnv *, jclass, jlong streamVa, jlong settingsRefVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    Ref<VehicleControllerSettings> * const pSettingsRef
-            = reinterpret_cast<Ref<VehicleControllerSettings> *> (settingsRefVa);
-    const bool result = ObjectStreamIn::sReadObject(*pStream, *pSettingsRef);
-    return result;
-}
+  BODYOF_SREAD_FROM_STREAM_REF(VehicleControllerSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -92,14 +108,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadGroupFilterTableFromStream
-  (JNIEnv *, jclass, jlong streamVa, jlong refVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    Ref<GroupFilterTable> * const pStoreRef
-            = reinterpret_cast<Ref<GroupFilterTable> *> (refVa);
-    const bool result = ObjectStreamIn::sReadObject(*pStream, *pStoreRef);
-    return result;
-}
+  BODYOF_SREAD_FROM_STREAM_REF(GroupFilterTable)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -107,14 +116,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadPhysicsMaterialFromStream
-  (JNIEnv *, jclass, jlong streamVa, jlong refVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    Ref<PhysicsMaterial> * const pStoreRef
-            = reinterpret_cast<Ref<PhysicsMaterial> *> (refVa);
-    const bool result = ObjectStreamIn::sReadObject(*pStream, *pStoreRef);
-    return result;
-}
+  BODYOF_SREAD_FROM_STREAM_REF(PhysicsMaterial)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -122,15 +124,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (Ljava/lang/String;J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadPhysicsScene
-  (JNIEnv *pEnv, jclass, jstring fileName, jlong refVa) {
-    jboolean isCopy;
-    const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy);
-    Ref<PhysicsScene> * const pStoreRef
-            = reinterpret_cast<Ref<PhysicsScene> *> (refVa);
-    const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
-    pEnv->ReleaseStringUTFChars(fileName, pFileName);
-    return result;
-}
+  BODYOF_SREAD_FROM_FILE_REF(PhysicsScene)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -138,14 +132,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadPhysicsSceneFromStream
-  (JNIEnv *, jclass, jlong streamVa, jlong refVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    Ref<PhysicsScene> * const pStoreRef
-            = reinterpret_cast<Ref<PhysicsScene> *> (refVa);
-    const bool result = ObjectStreamIn::sReadObject(*pStream, *pStoreRef);
-    return result;
-}
+  BODYOF_SREAD_FROM_STREAM_REF(PhysicsScene)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -153,15 +140,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (Ljava/lang/String;J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadRagdollSettings
-  (JNIEnv *pEnv, jclass, jstring fileName, jlong refVa) {
-    jboolean isCopy;
-    const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy);
-    Ref<RagdollSettings> * const pStoreRef
-            = reinterpret_cast<Ref<RagdollSettings> *> (refVa);
-    const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
-    pEnv->ReleaseStringUTFChars(fileName, pFileName);
-    return result;
-}
+  BODYOF_SREAD_FROM_FILE_REF(RagdollSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -169,14 +148,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadRagdollSettingsFromStream
-  (JNIEnv *, jclass, jlong streamVa, jlong refVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    Ref<RagdollSettings> * const pStoreRef
-            = reinterpret_cast<Ref<RagdollSettings> *> (refVa);
-    const bool result = ObjectStreamIn::sReadObject(*pStream, *pStoreRef);
-    return result;
-}
+  BODYOF_SREAD_FROM_STREAM_REF(RagdollSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -184,18 +156,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (J[J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadSbcsFromStream
-  (JNIEnv *pEnv, jclass, jlong streamVa, jlongArray storeVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    SoftBodyCreationSettings * pSettings = new SoftBodyCreationSettings();
-    TRACE_NEW("SoftBodyCreationSettings", pSettings)
-    const bool result = ObjectStreamIn::sReadObject(*pStream, pSettings);
-    jboolean isCopy;
-    jlong * const pStoreVa = pEnv->GetLongArrayElements(storeVa, &isCopy);
-    pStoreVa[0] = reinterpret_cast<jlong> (pSettings);
-    pEnv->ReleaseLongArrayElements(storeVa, pStoreVa, 0);
-    return result;
-}
+  BODYOF_SREAD_FROM_STREAM_NONREF(SoftBodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -203,14 +164,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadSbssFromStream
-  (JNIEnv *, jclass, jlong streamVa, jlong refVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    Ref<SoftBodySharedSettings> * const pStoreRef
-            = reinterpret_cast<Ref<SoftBodySharedSettings> *> (refVa);
-    const bool result = ObjectStreamIn::sReadObject(*pStream, *pStoreRef);
-    return result;
-}
+  BODYOF_SREAD_FROM_STREAM_REF(SoftBodySharedSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -218,14 +172,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadShapeSettingsFromStream
-  (JNIEnv *, jclass, jlong streamVa, jlong refVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    Ref<ShapeSettings> * const pStoreRef
-            = reinterpret_cast<Ref<ShapeSettings> *> (refVa);
-    const bool result = ObjectStreamIn::sReadObject(*pStream, *pStoreRef);
-    return result;
-}
+  BODYOF_SREAD_FROM_STREAM_REF(ShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -233,15 +180,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (Ljava/lang/String;J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadSkeletalAnimation
-  (JNIEnv *pEnv, jclass, jstring fileName, jlong refVa) {
-    jboolean isCopy;
-    const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy);
-    Ref<SkeletalAnimation> * const pStoreRef
-            = reinterpret_cast<Ref<SkeletalAnimation> *> (refVa);
-    const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
-    pEnv->ReleaseStringUTFChars(fileName, pFileName);
-    return result;
-}
+  BODYOF_SREAD_FROM_FILE_REF(SkeletalAnimation)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -249,11 +188,4 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  * Signature: (Ljava/lang/String;J)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadSkeleton
-  (JNIEnv *pEnv, jclass, jstring fileName, jlong refVa) {
-    jboolean isCopy;
-    const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy);
-    Ref<Skeleton> * const pStoreRef = reinterpret_cast<Ref<Skeleton> *> (refVa);
-    const bool result = ObjectStreamIn::sReadObject(pFileName, *pStoreRef);
-    pEnv->ReleaseStringUTFChars(fileName, pFileName);
-    return result;
-}
+  BODYOF_SREAD_FROM_FILE_REF(Skeleton)
