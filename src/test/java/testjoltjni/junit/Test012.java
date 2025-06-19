@@ -23,32 +23,51 @@ package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.BcsResult;
 import com.github.stephengold.joltjni.BodyCreationSettings;
+import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.CapsuleShapeSettings;
 import com.github.stephengold.joltjni.Color;
 import com.github.stephengold.joltjni.ConstraintSettingsRef;
+import com.github.stephengold.joltjni.ConvexHullShapeSettings;
+import com.github.stephengold.joltjni.CylinderShapeSettings;
 import com.github.stephengold.joltjni.Edge;
+import com.github.stephengold.joltjni.EmptyShapeSettings;
 import com.github.stephengold.joltjni.GroupFilterRef;
 import com.github.stephengold.joltjni.GroupFilterResult;
 import com.github.stephengold.joltjni.GroupFilterTable;
 import com.github.stephengold.joltjni.GroupFilterTableRef;
+import com.github.stephengold.joltjni.HeightFieldShapeSettings;
+import com.github.stephengold.joltjni.MeshShapeSettings;
+import com.github.stephengold.joltjni.MutableCompoundShapeSettings;
 import com.github.stephengold.joltjni.ObjectStreamIn;
 import com.github.stephengold.joltjni.ObjectStreamOut;
+import com.github.stephengold.joltjni.OffsetCenterOfMassShapeSettings;
 import com.github.stephengold.joltjni.PhysicsMaterial;
 import com.github.stephengold.joltjni.PhysicsMaterialRef;
 import com.github.stephengold.joltjni.PhysicsMaterialResult;
 import com.github.stephengold.joltjni.PhysicsMaterialSimple;
+import com.github.stephengold.joltjni.PlaneShapeSettings;
+import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.RotatedTranslatedShapeSettings;
 import com.github.stephengold.joltjni.SbcsResult;
+import com.github.stephengold.joltjni.ScaledShapeSettings;
 import com.github.stephengold.joltjni.SettingsResult;
 import com.github.stephengold.joltjni.ShapeResult;
+import com.github.stephengold.joltjni.ShapeSettings;
+import com.github.stephengold.joltjni.ShapeSettingsRef;
 import com.github.stephengold.joltjni.SoftBodyCreationSettings;
 import com.github.stephengold.joltjni.SoftBodySharedSettings;
 import com.github.stephengold.joltjni.SoftBodySharedSettingsRef;
 import com.github.stephengold.joltjni.SphereShapeSettings;
 import com.github.stephengold.joltjni.SpringSettings;
+import com.github.stephengold.joltjni.StaticCompoundShapeSettings;
 import com.github.stephengold.joltjni.StreamIn;
 import com.github.stephengold.joltjni.StreamInWrapper;
 import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.StreamOutWrapper;
+import com.github.stephengold.joltjni.TaperedCapsuleShapeSettings;
+import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
 import com.github.stephengold.joltjni.TrackedVehicleControllerSettings;
+import com.github.stephengold.joltjni.TriangleShapeSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleAntiRollBar;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
@@ -103,6 +122,7 @@ public class Test012 {
         testBodyCreationSettings();
         testGroupFilterTable();
         testPhysicsMaterial();
+        testShapeSettings();
         testSoftBodyCreationSettings();
         testSoftBodySharedSettings();
         testSpringSettings();
@@ -335,6 +355,23 @@ public class Test012 {
     private static PhysicsMaterialRef drPhysicsMaterial(String serialData) {
         StringStream ss = new StringStream(serialData);
         PhysicsMaterialRef result = new PhysicsMaterialRef();
+        boolean success = ObjectStreamIn.sReadObject(ss, result);
+        assert success;
+
+        TestUtils.testClose(ss);
+        return result;
+    }
+
+    /**
+     * De-serialize a shape-settings object from the specified data using
+     * {@code ObjectStreamIn}.
+     *
+     * @param serialData the data to de-serialize (not null, unaffected)
+     * @return a new settings object
+     */
+    private static ShapeSettingsRef drShapeSettings(String serialData) {
+        StringStream ss = new StringStream(serialData);
+        ShapeSettingsRef result = new ShapeSettingsRef();
         boolean success = ObjectStreamIn.sReadObject(ss, result);
         assert success;
 
@@ -865,6 +902,102 @@ public class Test012 {
         }
 
         TestUtils.testClose(material);
+    }
+
+    /**
+     * Test replication of {@code ShapeSettings} objects.
+     */
+    private static void testShapeSettings() {
+        BoxShapeSettings box = new BoxShapeSettings(1f, 2f, 3f);
+        testShapeSettings(box);
+
+        CapsuleShapeSettings capsule = new CapsuleShapeSettings(1f, 2f);
+        testShapeSettings(capsule);
+
+        ConvexHullShapeSettings convexHull = new ConvexHullShapeSettings(
+                new Vec3(1f, 2f, 3f), new Vec3(4f, 5f, 6f), new Vec3());
+        testShapeSettings(convexHull);
+
+        CylinderShapeSettings cylinder = new CylinderShapeSettings(1f, 2f);
+        testShapeSettings(cylinder);
+
+        EmptyShapeSettings empty = new EmptyShapeSettings();
+        testShapeSettings(empty);
+
+        HeightFieldShapeSettings heightField = new HeightFieldShapeSettings();
+        testShapeSettings(heightField);
+
+        MeshShapeSettings mesh = new MeshShapeSettings();
+        testShapeSettings(mesh);
+
+        OffsetCenterOfMassShapeSettings ocom
+                = new OffsetCenterOfMassShapeSettings(
+                        new Vec3(1f, 2f, 3f), box);
+        testShapeSettings(ocom);
+
+        MutableCompoundShapeSettings mutableCompound
+                = new MutableCompoundShapeSettings();
+        testShapeSettings(mutableCompound);
+
+        PlaneShapeSettings plane = new PlaneShapeSettings();
+        testShapeSettings(plane);
+
+        RotatedTranslatedShapeSettings rotated
+                = new RotatedTranslatedShapeSettings(new Vec3(1f, 2f, 3f),
+                        new Quat(0.6f, -0.8f, 0f, 0f), box);
+        testShapeSettings(rotated);
+
+        ScaledShapeSettings scaled
+                = new ScaledShapeSettings(box, new Vec3(1f, 2f, 3f));
+        testShapeSettings(scaled);
+
+        SphereShapeSettings sphere = new SphereShapeSettings(9f);
+        testShapeSettings(sphere);
+
+        StaticCompoundShapeSettings staticCompound
+                = new StaticCompoundShapeSettings();
+        testShapeSettings(staticCompound);
+
+        TaperedCapsuleShapeSettings taperedCapsule
+                = new TaperedCapsuleShapeSettings(3f, 2f, 1f);
+        testShapeSettings(taperedCapsule);
+
+        TaperedCylinderShapeSettings taperedCylinder
+                = new TaperedCylinderShapeSettings(3f, 2f, 1f);
+        testShapeSettings(taperedCylinder);
+
+        TriangleShapeSettings triangle = new TriangleShapeSettings();
+        testShapeSettings(triangle);
+
+        TestUtils.testClose(triangle, taperedCylinder, taperedCapsule,
+                staticCompound, sphere, scaled, rotated, plane, ocom,
+                mutableCompound, mesh, heightField, empty, cylinder, convexHull,
+                capsule, box);
+    }
+
+    /**
+     * Test replication of the specified {@code ShapeSettings} object.
+     *
+     * @param ss the object to test
+     */
+    private static void testShapeSettings(ConstShapeSettings ss) {
+        { // cloneShapeSettings() method:
+            ConstShapeSettings ssCopy = ShapeSettings.cloneShapeSettings(ss);
+
+            Assert.assertNotEquals(ss.targetVa(), ssCopy.targetVa());
+            Equivalent.shapeSettings(ss, ssCopy);
+            TestUtils.testClose(ssCopy);
+        }
+
+        { // serialize and then deserialize using object streams:
+            String serialData = serializeRaw(ss);
+            ShapeSettingsRef refCopy = drShapeSettings(serialData);
+            ConstShapeSettings ssCopy = refCopy.getPtr();
+
+            Assert.assertNotEquals(ss.targetVa(), ssCopy.targetVa());
+            Equivalent.shapeSettings(ss, ssCopy);
+            TestUtils.testClose(ssCopy);
+        }
     }
 
     /**
