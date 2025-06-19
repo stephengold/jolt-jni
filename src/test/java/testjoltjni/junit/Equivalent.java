@@ -37,6 +37,7 @@ import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
+import com.github.stephengold.joltjni.readonly.ConstSerializableObject;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
@@ -245,7 +246,7 @@ final class Equivalent {
      */
     static void constraintSettings(
             ConstConstraintSettings expected, ConstConstraintSettings actual) {
-        joltPhysicsObject(expected, actual);
+        serializableObject(expected, actual);
 
         Assert.assertEquals(expected.getConstraintPriority(),
                 actual.getConstraintPriority());
@@ -308,7 +309,7 @@ final class Equivalent {
      */
     static void groupFilter(
             ConstGroupFilter expected, ConstGroupFilter actual) {
-        joltPhysicsObject(expected, actual);
+        serializableObject(expected, actual);
 
         ConstCollisionGroup g0 = new CollisionGroup();
         Assert.assertEquals(
@@ -400,7 +401,7 @@ final class Equivalent {
      */
     static void physicsMaterial(
             PhysicsMaterial expected, PhysicsMaterial actual) {
-        joltPhysicsObject(expected, actual);
+        serializableObject(expected, actual);
 
         color(expected.getDebugColor(), actual.getDebugColor());
         Assert.assertEquals(expected.getDebugName(), actual.getDebugName());
@@ -430,6 +431,22 @@ final class Equivalent {
     static void rVec3(RVec3Arg expected, RVec3Arg actual, float tolerance) {
         TestUtils.assertEquals(
                 expected.x(), expected.y(), expected.z(), actual, tolerance);
+    }
+
+    /**
+     * Verify the equivalence of the specified serializable objects, ignoring
+     * their virtual addresses and ownership.
+     *
+     * @param expected the expected serializable object (not {@code null},
+     * unaffected)
+     * @param actual the actual serializable object (not {@code null},
+     * unaffected)
+     */
+    static void serializableObject(ConstSerializableObject expected,
+            ConstSerializableObject actual) {
+        joltPhysicsObject(expected, actual);
+        Assert.assertEquals(expected.getRtti().getName(),
+                actual.getRtti().getName());
     }
 
     /**
@@ -490,7 +507,7 @@ final class Equivalent {
      */
     static void shapeSettings(
             ConstShapeSettings expected, ConstShapeSettings actual) {
-        joltPhysicsObject(expected, actual);
+        serializableObject(expected, actual);
     }
 
     /**
@@ -715,7 +732,7 @@ final class Equivalent {
     static void vehicleControllerSettings(
             ConstVehicleControllerSettings expected,
             ConstVehicleControllerSettings actual) {
-        joltPhysicsObject(expected, actual);
+        serializableObject(expected, actual);
 
         // compare serialization results:
         StringStream stream1 = new StringStream();
@@ -755,7 +772,7 @@ final class Equivalent {
      */
     static void wheelSettings(
             ConstWheelSettings expected, ConstWheelSettings actual) {
-        joltPhysicsObject(expected, actual);
+        serializableObject(expected, actual);
 
         Assert.assertEquals(expected.getEnableSuspensionForcePoint(),
                 actual.getEnableSuspensionForcePoint());
