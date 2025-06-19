@@ -32,6 +32,14 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ScaledShapeSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_createCopy
+  BODYOF_CREATE_COPY(ScaledShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ScaledShapeSettings
  * Method:    createScaledShapeSettingsFromSettings
  * Signature: (JFFF)J
  */

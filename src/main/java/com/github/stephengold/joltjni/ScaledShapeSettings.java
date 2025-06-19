@@ -80,6 +80,18 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         setVirtualAddress(settingsVa); // no owner due to ref counting
         setSubType(EShapeSubType.Scaled);
     }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public ScaledShapeSettings(ScaledShapeSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Scaled);
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -99,6 +111,8 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createScaledShapeSettingsFromSettings(
             long baseSettingsVa, float scaleX, float scaleY, float scaleZ);
