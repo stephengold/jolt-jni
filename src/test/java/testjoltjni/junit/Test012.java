@@ -559,12 +559,14 @@ public class Test012 {
     }
 
     /**
-     * Serialize the specified wheel settings using {@code saveBinaryState()}.
+     * Serialize the specified controller settings using
+     * {@code saveBinaryState()}.
      *
      * @param settings the settings to serialize (not null, unaffected)
      * @return serialized data
      */
-    private static String serializeCooked(ConstWheelSettings settings) {
+    private static String serializeCooked(
+            ConstVehicleControllerSettings settings) {
         StringStream ss = new StringStream();
         StreamOut streamOut = new StreamOutWrapper(ss);
 
@@ -576,14 +578,12 @@ public class Test012 {
     }
 
     /**
-     * Serialize the specified controller settings using
-     * {@code saveBinaryState()}.
+     * Serialize the specified wheel settings using {@code saveBinaryState()}.
      *
      * @param settings the settings to serialize (not null, unaffected)
      * @return serialized data
      */
-    private static String serializeCooked(
-            ConstVehicleControllerSettings settings) {
+    private static String serializeCooked(ConstWheelSettings settings) {
         StringStream ss = new StringStream();
         StreamOut streamOut = new StreamOutWrapper(ss);
 
