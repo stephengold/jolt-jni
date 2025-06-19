@@ -63,6 +63,7 @@ import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
+import com.github.stephengold.joltjni.readonly.ConstSerializableObject;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
@@ -280,14 +281,12 @@ public class Test012 {
     private static BodyCreationSettings drBodyCreationSettings(
             String serialData) {
         StringStream ss = new StringStream(serialData);
-        StreamIn streamIn = new StreamInWrapper(ss);
-
         BodyCreationSettings[] storeBcs = new BodyCreationSettings[1];
         boolean success = ObjectStreamIn.sReadObject(ss, storeBcs);
         assert success;
         BodyCreationSettings result = storeBcs[0];
 
-        TestUtils.testClose(streamIn, ss);
+        TestUtils.testClose(ss);
         return result;
     }
 
@@ -301,13 +300,11 @@ public class Test012 {
     private static ConstraintSettingsRef drConstraintSettings(
             String serialData) {
         StringStream ss = new StringStream(serialData);
-        StreamIn streamIn = new StreamInWrapper(ss);
-
         ConstraintSettingsRef result = new ConstraintSettingsRef();
         boolean success = ObjectStreamIn.sReadObject(ss, result);
         assert success;
 
-        TestUtils.testClose(streamIn, ss);
+        TestUtils.testClose(ss);
         return result;
     }
 
@@ -320,13 +317,11 @@ public class Test012 {
      */
     private static GroupFilterTableRef drGroupFilterTable(String serialData) {
         StringStream ss = new StringStream(serialData);
-        StreamIn streamIn = new StreamInWrapper(ss);
-
         GroupFilterTableRef result = new GroupFilterTableRef();
         boolean success = ObjectStreamIn.sReadObject(ss, result);
         assert success;
 
-        TestUtils.testClose(streamIn, ss);
+        TestUtils.testClose(ss);
         return result;
     }
 
@@ -339,13 +334,11 @@ public class Test012 {
      */
     private static PhysicsMaterialRef drPhysicsMaterial(String serialData) {
         StringStream ss = new StringStream(serialData);
-        StreamIn streamIn = new StreamInWrapper(ss);
-
         PhysicsMaterialRef result = new PhysicsMaterialRef();
         boolean success = ObjectStreamIn.sReadObject(ss, result);
         assert success;
 
-        TestUtils.testClose(streamIn, ss);
+        TestUtils.testClose(ss);
         return result;
     }
 
@@ -359,14 +352,12 @@ public class Test012 {
     private static SoftBodyCreationSettings drSoftBodyCreationSettings(
             String serialData) {
         StringStream ss = new StringStream(serialData);
-        StreamIn streamIn = new StreamInWrapper(ss);
-
         SoftBodyCreationSettings[] storeSbcs = new SoftBodyCreationSettings[1];
         boolean success = ObjectStreamIn.sReadObject(ss, storeSbcs);
         assert success;
         SoftBodyCreationSettings result = storeSbcs[0];
 
-        TestUtils.testClose(streamIn, ss);
+        TestUtils.testClose(ss);
         return result;
     }
 
@@ -380,13 +371,11 @@ public class Test012 {
     private static SoftBodySharedSettingsRef drSoftBodySharedSettings(
             String serialData) {
         StringStream ss = new StringStream(serialData);
-        StreamIn streamIn = new StreamInWrapper(ss);
-
         SoftBodySharedSettingsRef result = new SoftBodySharedSettingsRef();
         boolean success = ObjectStreamIn.sReadObject(ss, result);
         assert success;
 
-        TestUtils.testClose(streamIn, ss);
+        TestUtils.testClose(ss);
         return result;
     }
 
@@ -400,14 +389,12 @@ public class Test012 {
     private static VehicleControllerSettingsRef
             drWheeledVehicleControllerSettings(String serialData) {
         StringStream ss = new StringStream(serialData);
-        StreamIn streamIn = new StreamInWrapper(ss);
-
         VehicleControllerSettingsRef result
                 = new VehicleControllerSettingsRef();
         boolean success = ObjectStreamIn.sReadObject(ss, result);
         assert success;
 
-        TestUtils.testClose(streamIn, ss);
+        TestUtils.testClose(ss);
         return result;
     }
 
@@ -617,74 +604,28 @@ public class Test012 {
      */
     private static String serializeRaw(ConstBodyCreationSettings settings) {
         StringStream ss = new StringStream();
-        StreamOut streamOut = new StreamOutWrapper(ss);
-
         boolean success = ObjectStreamOut.sWriteObject(
                 ss, EStreamType.Binary, settings);
         assert success;
         String result = ss.str();
-
-        TestUtils.testClose(streamOut, ss);
+        TestUtils.testClose(ss);
         return result;
     }
 
     /**
-     * Serialize the specified constraint settings using
+     * Serialize the specified serializable object using
      * {@code ObjectStreamOut}.
      *
-     * @param settings the settings to serialize (not null, uncooked,
-     * unaffected)
+     * @param object the object to serialize (not null, uncooked, unaffected)
      * @return serialized data
      */
-    private static String serializeRaw(
-            ConstVehicleConstraintSettings settings) {
+    private static String serializeRaw(ConstSerializableObject object) {
         StringStream ss = new StringStream();
-        StreamOut streamOut = new StreamOutWrapper(ss);
-
         boolean success = ObjectStreamOut.sWriteObject(
-                ss, EStreamType.Binary, settings);
+                ss, EStreamType.Binary, object);
         assert success;
         String result = ss.str();
-
-        TestUtils.testClose(streamOut, ss);
-        return result;
-    }
-
-    /**
-     * Serialize the specified group filter using {@code ObjectStreamOut}.
-     *
-     * @param filter the filter to serialize (not null, uncooked, unaffected)
-     * @return serialized data
-     */
-    private static String serializeRaw(ConstGroupFilter filter) {
-        StringStream ss = new StringStream();
-        StreamOut streamOut = new StreamOutWrapper(ss);
-
-        boolean success = ObjectStreamOut.sWriteObject(
-                ss, EStreamType.Binary, filter);
-        assert success;
-        String result = ss.str();
-
-        TestUtils.testClose(streamOut, ss);
-        return result;
-    }
-
-    /**
-     * Serialize the specified material using {@code ObjectStreamOut}.
-     *
-     * @param material the filter to serialize (not null, uncooked, unaffected)
-     * @return serialized data
-     */
-    private static String serializeRaw(ConstPhysicsMaterial material) {
-        StringStream ss = new StringStream();
-        StreamOut streamOut = new StreamOutWrapper(ss);
-
-        boolean success = ObjectStreamOut.sWriteObject(
-                ss, EStreamType.Binary, material);
-        assert success;
-        String result = ss.str();
-
-        TestUtils.testClose(streamOut, ss);
+        TestUtils.testClose(ss);
         return result;
     }
 
@@ -698,14 +639,11 @@ public class Test012 {
      */
     private static String serializeRaw(ConstSoftBodyCreationSettings settings) {
         StringStream ss = new StringStream();
-        StreamOut streamOut = new StreamOutWrapper(ss);
-
         boolean success = ObjectStreamOut.sWriteObject(
                 ss, EStreamType.Binary, settings);
         assert success;
         String result = ss.str();
-
-        TestUtils.testClose(streamOut, ss);
+        TestUtils.testClose(ss);
         return result;
     }
 
@@ -719,36 +657,11 @@ public class Test012 {
      */
     private static String serializeRaw(ConstSoftBodySharedSettings settings) {
         StringStream ss = new StringStream();
-        StreamOut streamOut = new StreamOutWrapper(ss);
-
         boolean success = ObjectStreamOut.sWriteObject(
                 ss, EStreamType.Binary, settings);
         assert success;
         String result = ss.str();
-
-        TestUtils.testClose(streamOut, ss);
-        return result;
-    }
-
-    /**
-     * Serialize the specified controller settings using
-     * {@code ObjectStreamOut}.
-     *
-     * @param settings the settings to serialize (not null, uncooked,
-     * unaffected)
-     * @return serialized data
-     */
-    private static String serializeRaw(
-            ConstVehicleControllerSettings settings) {
-        StringStream ss = new StringStream();
-        StreamOut streamOut = new StreamOutWrapper(ss);
-
-        boolean success = ObjectStreamOut.sWriteObject(
-                ss, EStreamType.Binary, settings);
-        assert success;
-        String result = ss.str();
-
-        TestUtils.testClose(streamOut, ss);
+        TestUtils.testClose(ss);
         return result;
     }
 
