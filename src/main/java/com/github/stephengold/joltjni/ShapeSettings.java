@@ -65,6 +65,89 @@ abstract public class ShapeSettings
     }
 
     /**
+     * Instantiate a clone of the specified settings.
+     *
+     * @param original the settings to clone (not null, unaffected)
+     * @return a new JVM object with a new native object assigned
+     */
+    public static ShapeSettings cloneShapeSettings(
+            ConstShapeSettings original) {
+        long originalVa = original.targetVa();
+        long ordinal = getUserData(originalVa);
+        EShapeSubType subType = EShapeSubType.values()[(int) ordinal];
+        ShapeSettings result;
+        switch (subType) {
+            case Box:
+                result = new BoxShapeSettings((BoxShapeSettings) original);
+                break;
+            case Capsule:
+                result = new CapsuleShapeSettings(
+                        (CapsuleShapeSettings) original);
+                break;
+            case ConvexHull:
+                result = new ConvexHullShapeSettings(
+                        (ConvexHullShapeSettings) original);
+                break;
+            case Cylinder:
+                result = new CylinderShapeSettings(
+                        (CylinderShapeSettings) original);
+                break;
+            case Empty:
+                result = new EmptyShapeSettings((EmptyShapeSettings) original);
+                break;
+            case HeightField:
+                result = new HeightFieldShapeSettings(
+                        (HeightFieldShapeSettings) original);
+                break;
+            case Mesh:
+                result = new MeshShapeSettings((MeshShapeSettings) original);
+                break;
+            case MutableCompound:
+                result = new MutableCompoundShapeSettings(
+                        (MutableCompoundShapeSettings) original);
+                break;
+            case OffsetCenterOfMass:
+                result = new OffsetCenterOfMassShapeSettings(
+                        (OffsetCenterOfMassShapeSettings) original);
+                break;
+            case Plane:
+                result = new PlaneShapeSettings((PlaneShapeSettings) original);
+                break;
+            case RotatedTranslated:
+                result = new RotatedTranslatedShapeSettings(
+                        (RotatedTranslatedShapeSettings) original);
+                break;
+            case Scaled:
+                result = new ScaledShapeSettings(
+                        (ScaledShapeSettings) original);
+                break;
+            case Sphere:
+                result = new SphereShapeSettings(
+                        (SphereShapeSettings) original);
+                break;
+            case StaticCompound:
+                result = new StaticCompoundShapeSettings(
+                        (StaticCompoundShapeSettings) original);
+                break;
+            case TaperedCapsule:
+                result = new TaperedCapsuleShapeSettings(
+                        (TaperedCapsuleShapeSettings) original);
+                break;
+            case TaperedCylinder:
+                result = new TaperedCylinderShapeSettings(
+                        (TaperedCylinderShapeSettings) original);
+                break;
+            case Triangle:
+                result = new TriangleShapeSettings(
+                        (TriangleShapeSettings) original);
+                break;
+            default:
+                throw new IllegalArgumentException("subType = " + subType);
+        }
+        return result;
+    }
+
+    /**
      * Instantiate a {@code ShapeSettings} given its virtual address.
      *
      * @param settingsVa the virtual address of the native object, or zero
