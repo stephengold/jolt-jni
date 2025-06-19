@@ -86,7 +86,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDepth_f
     pFloats[9] = storePointB.GetY(); \
     pFloats[10] = storePointB.GetZ(); \
     return result; \
-} \
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_EpaPenetrationDepth

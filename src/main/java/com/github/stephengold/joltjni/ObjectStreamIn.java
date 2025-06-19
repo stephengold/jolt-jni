@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.std.StringStream;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
- * Utility class for reading Jolt Physics objects from files.
+ * Utility class for reading Jolt Physics objects from files or streams.
  *
  * @author Stephen Gold sgold@sonic.net
  * @see com.github.stephengold.joltjni.ObjectStreamOut
