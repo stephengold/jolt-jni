@@ -48,6 +48,19 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public RotatedTranslatedShapeSettings(
+            RotatedTranslatedShapeSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EShapeSubType.RotatedTranslated);
+    }
+
+    /**
      * Instantiate a settings object with the specified offset, rotation, and
      * base shape.
      *
@@ -161,6 +174,8 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createSettingsFromShape(
             float offsetX, float offsetY, float offsetZ, float rotX, float rotY,
