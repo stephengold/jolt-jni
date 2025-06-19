@@ -32,6 +32,19 @@ SOFTWARE.
 using namespace JPH;
 
 /*
+ * Pre-processor macro to generate the body of a static sWrite{T}ToFile method:
+ */
+#define BODYOF_SWRITE_TO_FILE(T) \
+  (JNIEnv *pEnv, jclass, jstring fileName, jint ordinal, jlong tVa) { \
+    jboolean isCopy; \
+    const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy); \
+    const ObjectStream::EStreamType streamType = (ObjectStream::EStreamType) ordinal; \
+    const T * const pt = reinterpret_cast<T *> (tVa); \
+    const bool result = ObjectStreamOut::sWriteObject(pFileName, streamType, *pt); \
+    pEnv->ReleaseStringUTFChars(fileName, pFileName); \
+    return result; \
+}
+/*
  * Pre-processor macro to generate the body of a static sWrite{T} method:
  */
 #define BODYOF_SWRITE_TO_STREAM(T) \
@@ -53,11 +66,27 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteBcsToFile
+ * Signature: (Ljava/lang/String;IJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteBcsToFile
+  BODYOF_SWRITE_TO_FILE(BodyCreationSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
  * Method:    sWritePhysicsScene
  * Signature: (JIJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWritePhysicsScene
   BODYOF_SWRITE_TO_STREAM(PhysicsScene)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWritePhysicsSceneToFile
+ * Signature: (Ljava/lang/String;IJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWritePhysicsSceneToFile
+  BODYOF_SWRITE_TO_FILE(PhysicsScene)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
@@ -69,11 +98,27 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteRagdollSettingsToFile
+ * Signature: (Ljava/lang/String;IJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteRagdollSettingsToFile
+  BODYOF_SWRITE_TO_FILE(RagdollSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
  * Method:    sWriteSbcs
  * Signature: (JIJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteSbcs
   BODYOF_SWRITE_TO_STREAM(SoftBodyCreationSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteSbcsToFile
+ * Signature: (Ljava/lang/String;IJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteSbcsToFile
+  BODYOF_SWRITE_TO_FILE(SoftBodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
@@ -85,8 +130,24 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteSbssToFile
+ * Signature: (Ljava/lang/String;IJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteSbssToFile
+  BODYOF_SWRITE_TO_FILE(SoftBodySharedSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
  * Method:    sWriteSerializableObject
  * Signature: (JIJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteSerializableObject
   BODYOF_SWRITE_TO_STREAM(SerializableObject)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteSerializableObjectToFile
+ * Signature: (Ljava/lang/String;IJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteSerializableObjectToFile
+  BODYOF_SWRITE_TO_FILE(SerializableObject)

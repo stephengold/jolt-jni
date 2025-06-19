@@ -29,10 +29,10 @@ import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.std.StringStream;
 
 /**
- * Utility class for writing uncooked Jolt-Physics objects to streams. Data
- * serialized this way is more like to be compatible with future versions of the
- * library than the {@code saveBinaryState()}/{@code restoreBinaryState()}
- * methods.
+ * Utility class for writing uncooked Jolt-Physics objects to files or streams.
+ * Data serialized this way is more like to be compatible with future versions
+ * of the library than the
+ * {@code saveBinaryState()}/{@code restoreBinaryState()} methods.
  *
  * @author Stephen Gold sgold@sonic.net
  * @see com.github.stephengold.joltjni.ObjectStreamIn
@@ -48,6 +48,110 @@ final public class ObjectStreamOut {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Write the specified serializable object to the specified file.
+     *
+     * @param fileName the path to the file (not null)
+     * @param streamType the type of file (not null)
+     * @param settings the object to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(String fileName,
+            EStreamType streamType, ConstSerializableObject settings) {
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result
+                = sWriteSerializableObjectToFile(fileName, ordinal, settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Write the specified body-creation settings to the specified file.
+     *
+     * @param fileName the path to the file (not null)
+     * @param streamType the type of file (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(String fileName,
+            EStreamType streamType, ConstBodyCreationSettings settings) {
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result = sWriteBcsToFile(fileName, ordinal, settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Write the specified soft-body creation settings to the specified file.
+     *
+     * @param fileName the path to the file (not null)
+     * @param streamType the type of file (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(String fileName,
+            EStreamType streamType, ConstSoftBodyCreationSettings settings) {
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result = sWriteSbcsToFile(fileName, ordinal, settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Write the specified soft-body shared settings to the specified file.
+     *
+     * @param fileName the path to the file (not null)
+     * @param streamType the type of file (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(String fileName,
+            EStreamType streamType, ConstSoftBodySharedSettings settings) {
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.targetVa();
+        boolean result = sWriteSbssToFile(fileName, ordinal, settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Write the specified scene to the specified file.
+     *
+     * @param fileName the path to the file (not null)
+     * @param streamType the type of file (not null)
+     * @param scene the scene to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(String fileName,
+            EStreamType streamType, PhysicsScene scene) {
+        int ordinal = streamType.ordinal();
+        long sceneVa = scene.va();
+        boolean result = sWritePhysicsSceneToFile(fileName, ordinal, sceneVa);
+
+        return result;
+    }
+
+    /**
+     * Write the specified ragdoll settings to the specified file.
+     *
+     * @param fileName the path to the file (not null)
+     * @param streamType the type of file (not null)
+     * @param settings the settings to write (not null, unaffected)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sWriteObject(String fileName,
+            EStreamType streamType, RagdollSettings settings) {
+        int ordinal = streamType.ordinal();
+        long settingsVa = settings.va();
+        boolean result
+                = sWriteRagdollSettingsToFile(fileName, ordinal, settingsVa);
+
+        return result;
+    }
 
     /**
      * Write the specified body-creation settings to the specified stream.
@@ -163,18 +267,36 @@ final public class ObjectStreamOut {
     native private static boolean sWriteBcs(
             long streamVa, int ordinal, long settingsVa);
 
+    native private static boolean sWriteBcsToFile(
+            String fileName, int ordinal, long settingsVa);
+
     native private static boolean sWritePhysicsScene(
             long streamVa, int ordinal, long sceneVa);
+
+    native private static boolean sWritePhysicsSceneToFile(
+            String fileName, int ordinal, long sceneVa);
 
     native private static boolean sWriteRagdollSettings(
             long streamVa, int ordinal, long settingsVa);
 
+    native private static boolean sWriteRagdollSettingsToFile(
+            String fileName, int ordinal, long settingsVa);
+
     native private static boolean sWriteSbcs(
             long streamVa, int ordinal, long settingsVa);
+
+    native private static boolean sWriteSbcsToFile(
+            String fileName, int ordinal, long settingsVa);
 
     native private static boolean sWriteSbss(
             long streamVa, int ordinal, long settingsVa);
 
+    native private static boolean sWriteSbssToFile(
+            String fileName, int ordinal, long settingsVa);
+
     native private static boolean sWriteSerializableObject(
             long streamVa, int ordinal, long serializableObjectVa);
+
+    native private static boolean sWriteSerializableObjectToFile(
+            String fileName, int ordinal, long serializableObjectVa);
 }
