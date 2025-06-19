@@ -95,6 +95,18 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public ConvexHullShapeSettings(ConvexHullShapeSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EShapeSubType.ConvexHull);
+    }
+
+    /**
      * Instantiate settings for the points in the specified buffer.
      *
      * @param numPoints the number of points (&ge;0)
@@ -314,6 +326,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     // native private methods
 
     native private static int countPoints(long settingsVa);
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

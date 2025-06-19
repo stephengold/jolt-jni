@@ -45,6 +45,14 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_createCopy
+  BODYOF_CREATE_COPY(ConvexHullShapeSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
  * Method:    createDefault
  * Signature: ()J
  */
