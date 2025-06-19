@@ -32,22 +32,24 @@ SOFTWARE.
 using namespace JPH;
 
 /*
+ * Pre-processor macro to generate the body of a static sWrite{T} method:
+ */
+#define BODYOF_SWRITE_TO_STREAM(T) \
+  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong tVa) { \
+    std::stringstream * const pStream = reinterpret_cast<std::stringstream *> (streamVa); \
+    const ObjectStream::EStreamType streamType = (ObjectStream::EStreamType) ordinal; \
+    const T * const pt = reinterpret_cast<T *> (tVa); \
+    const bool result = ObjectStreamOut::sWriteObject(*pStream, streamType, *pt); \
+    return result; \
+}
+
+/*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
  * Method:    sWriteBcs
  * Signature: (JIJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteBcs
-  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    const ObjectStream::EStreamType streamType
-            = (ObjectStream::EStreamType) ordinal;
-    const BodyCreationSettings * const pSettings
-            = reinterpret_cast<BodyCreationSettings *> (settingsVa);
-    const bool result
-            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
-    return result;
-}
+  BODYOF_SWRITE_TO_STREAM(BodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
@@ -55,17 +57,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
  * Signature: (JIJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWritePhysicsScene
-  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong sceneVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    const ObjectStream::EStreamType streamType
-            = (ObjectStream::EStreamType) ordinal;
-    const PhysicsScene * const pScene
-            = reinterpret_cast<PhysicsScene *> (sceneVa);
-    const bool result
-            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pScene);
-    return result;
-}
+  BODYOF_SWRITE_TO_STREAM(PhysicsScene)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
@@ -73,17 +65,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
  * Signature: (JIJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteRagdollSettings
-  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    const ObjectStream::EStreamType streamType
-            = (ObjectStream::EStreamType) ordinal;
-    const RagdollSettings * const pSettings
-            = reinterpret_cast<RagdollSettings *> (settingsVa);
-    const bool result
-            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
-    return result;
-}
+  BODYOF_SWRITE_TO_STREAM(RagdollSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
@@ -91,17 +73,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
  * Signature: (JIJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteSbcs
-  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    const ObjectStream::EStreamType streamType
-            = (ObjectStream::EStreamType) ordinal;
-    const SoftBodyCreationSettings * const pSettings
-            = reinterpret_cast<SoftBodyCreationSettings *> (settingsVa);
-    const bool result
-            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
-    return result;
-}
+  BODYOF_SWRITE_TO_STREAM(SoftBodyCreationSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
@@ -109,17 +81,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
  * Signature: (JIJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteSbss
-  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong settingsVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    const ObjectStream::EStreamType streamType
-            = (ObjectStream::EStreamType) ordinal;
-    const SoftBodySharedSettings * const pSettings
-            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
-    const bool result
-            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSettings);
-    return result;
-}
+  BODYOF_SWRITE_TO_STREAM(SoftBodySharedSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut
@@ -127,14 +89,4 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
  * Signature: (JIJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteSerializableObject
-  (JNIEnv *, jclass, jlong streamVa, jint ordinal, jlong serializableObjectVa) {
-    std::stringstream * const pStream
-            = reinterpret_cast<std::stringstream *> (streamVa);
-    const ObjectStream::EStreamType streamType
-            = (ObjectStream::EStreamType) ordinal;
-    const SerializableObject * const pSerializableObject
-            = reinterpret_cast<SerializableObject *> (serializableObjectVa);
-    const bool result
-            = ObjectStreamOut::sWriteObject(*pStream, streamType, *pSerializableObject);
-    return result;
-}
+  BODYOF_SWRITE_TO_STREAM(SerializableObject)
