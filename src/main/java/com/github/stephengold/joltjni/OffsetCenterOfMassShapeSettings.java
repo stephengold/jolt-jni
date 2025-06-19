@@ -47,6 +47,19 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
     }
 
     /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public OffsetCenterOfMassShapeSettings(
+            OffsetCenterOfMassShapeSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EShapeSubType.OffsetCenterOfMass);
+    }
+
+    /**
      * Instantiate a settings object with the specified offset and base shape.
      *
      * @param offset (not null, unaffected)
@@ -116,6 +129,8 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createSettingsFromSettings(float offsetX,
             float offsetY, float offsetZ, long baseShapeSettingsVa);
