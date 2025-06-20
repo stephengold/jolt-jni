@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstSerializableObject;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
@@ -50,214 +51,84 @@ final public class ObjectStreamOut {
     // new methods exposed
 
     /**
-     * Write the specified body-creation settings to the specified file.
+     * Write the specified object to the specified file.
      *
      * @param fileName the path to the file (not null)
      * @param streamType the type of file (not null)
-     * @param settings the settings to write (not null, unaffected)
+     * @param writeObject the object to write (not null, unaffected)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sWriteObject(String fileName,
-            EStreamType streamType, ConstBodyCreationSettings settings) {
+            EStreamType streamType, ConstJoltPhysicsObject writeObject) {
         int ordinal = streamType.ordinal();
-        long settingsVa = settings.targetVa();
-        boolean result = sWriteBcsToFile(fileName, ordinal, settingsVa);
+        long objVa = writeObject.targetVa();
+
+        boolean result;
+        if (writeObject instanceof ConstSerializableObject) {
+            result = sWriteSerializableObjectToFile(fileName, ordinal, objVa);
+
+        } else if (writeObject instanceof ConstBodyCreationSettings) {
+            result = sWriteBcsToFile(fileName, ordinal, objVa);
+
+        } else if (writeObject instanceof ConstSoftBodyCreationSettings) {
+            result = sWriteSbcsToFile(fileName, ordinal, objVa);
+
+        } else if (writeObject instanceof ConstSoftBodySharedSettings) {
+            result = sWriteSbssToFile(fileName, ordinal, objVa);
+
+        } else if (writeObject instanceof PhysicsScene) {
+            result = sWritePhysicsSceneToFile(fileName, ordinal, objVa);
+
+        } else if (writeObject instanceof RagdollSettings) {
+            result = sWriteRagdollSettingsToFile(fileName, ordinal, objVa);
+
+        } else { // TODO: implement for other types
+            Class clas = writeObject.getClass();
+            String className = clas.getSimpleName();
+            throw new IllegalArgumentException(className);
+        }
 
         return result;
     }
 
     /**
-     * Write the specified serializable object to the specified file.
-     *
-     * @param fileName the path to the file (not null)
-     * @param streamType the type of file (not null)
-     * @param settings the object to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(String fileName,
-            EStreamType streamType, ConstSerializableObject settings) {
-        int ordinal = streamType.ordinal();
-        long settingsVa = settings.targetVa();
-        boolean result
-                = sWriteSerializableObjectToFile(fileName, ordinal, settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Write the specified soft-body creation settings to the specified file.
-     *
-     * @param fileName the path to the file (not null)
-     * @param streamType the type of file (not null)
-     * @param settings the settings to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(String fileName,
-            EStreamType streamType, ConstSoftBodyCreationSettings settings) {
-        int ordinal = streamType.ordinal();
-        long settingsVa = settings.targetVa();
-        boolean result = sWriteSbcsToFile(fileName, ordinal, settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Write the specified soft-body shared settings to the specified file.
-     *
-     * @param fileName the path to the file (not null)
-     * @param streamType the type of file (not null)
-     * @param settings the settings to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(String fileName,
-            EStreamType streamType, ConstSoftBodySharedSettings settings) {
-        int ordinal = streamType.ordinal();
-        long settingsVa = settings.targetVa();
-        boolean result = sWriteSbssToFile(fileName, ordinal, settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Write the specified scene to the specified file.
-     *
-     * @param fileName the path to the file (not null)
-     * @param streamType the type of file (not null)
-     * @param scene the scene to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(String fileName,
-            EStreamType streamType, PhysicsScene scene) {
-        int ordinal = streamType.ordinal();
-        long sceneVa = scene.va();
-        boolean result = sWritePhysicsSceneToFile(fileName, ordinal, sceneVa);
-
-        return result;
-    }
-
-    /**
-     * Write the specified ragdoll settings to the specified file.
-     *
-     * @param fileName the path to the file (not null)
-     * @param streamType the type of file (not null)
-     * @param settings the settings to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(String fileName,
-            EStreamType streamType, RagdollSettings settings) {
-        int ordinal = streamType.ordinal();
-        long settingsVa = settings.va();
-        boolean result
-                = sWriteRagdollSettingsToFile(fileName, ordinal, settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Write the specified body-creation settings to the specified stream.
+     * Write the specified object to the specified stream.
      *
      * @param stream the stream to write to (not null)
      * @param streamType the type of stream (not null)
-     * @param settings the settings to write (not null, unaffected)
+     * @param writeObject the object to write (not null, unaffected)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sWriteObject(StringStream stream,
-            EStreamType streamType, ConstBodyCreationSettings settings) {
+            EStreamType streamType, ConstJoltPhysicsObject writeObject) {
         long streamVa = stream.va();
         int ordinal = streamType.ordinal();
-        long settingsVa = settings.targetVa();
-        boolean result = sWriteBcs(streamVa, ordinal, settingsVa);
+        long objVa = writeObject.targetVa();
 
-        return result;
-    }
+        boolean result;
+        if (writeObject instanceof ConstSerializableObject) {
+            result = sWriteSerializableObject(streamVa, ordinal, objVa);
 
-    /**
-     * Write the specified serializable object to the specified stream.
-     *
-     * @param stream the stream to write to (not null)
-     * @param streamType the type of stream (not null)
-     * @param settings the object to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(StringStream stream,
-            EStreamType streamType, ConstSerializableObject settings) {
-        long streamVa = stream.va();
-        int ordinal = streamType.ordinal();
-        long settingsVa = settings.targetVa();
-        boolean result
-                = sWriteSerializableObject(streamVa, ordinal, settingsVa);
+        } else if (writeObject instanceof ConstBodyCreationSettings) {
+            result = sWriteBcs(streamVa, ordinal, objVa);
 
-        return result;
-    }
+        } else if (writeObject instanceof ConstSoftBodyCreationSettings) {
+            result = sWriteSbcs(streamVa, ordinal, objVa);
 
-    /**
-     * Write the specified soft-body creation settings to the specified stream.
-     *
-     * @param stream the stream to write to (not null)
-     * @param streamType the type of stream (not null)
-     * @param settings the settings to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(StringStream stream,
-            EStreamType streamType, ConstSoftBodyCreationSettings settings) {
-        long streamVa = stream.va();
-        int ordinal = streamType.ordinal();
-        long settingsVa = settings.targetVa();
-        boolean result = sWriteSbcs(streamVa, ordinal, settingsVa);
+        } else if (writeObject instanceof ConstSoftBodySharedSettings) {
+            result = sWriteSbss(streamVa, ordinal, objVa);
 
-        return result;
-    }
+        } else if (writeObject instanceof PhysicsScene) {
+            result = sWritePhysicsScene(streamVa, ordinal, objVa);
 
-    /**
-     * Write the specified soft-body shared settings to the specified stream.
-     *
-     * @param stream the stream to write to (not null)
-     * @param streamType the type of stream (not null)
-     * @param settings the settings to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(StringStream stream,
-            EStreamType streamType, ConstSoftBodySharedSettings settings) {
-        long streamVa = stream.va();
-        int ordinal = streamType.ordinal();
-        long settingsVa = settings.targetVa();
-        boolean result = sWriteSbss(streamVa, ordinal, settingsVa);
+        } else if (writeObject instanceof RagdollSettings) {
+            result = sWriteRagdollSettings(streamVa, ordinal, objVa);
 
-        return result;
-    }
-
-    /**
-     * Write the specified scene to the specified stream.
-     *
-     * @param stream the stream to write to (not null)
-     * @param streamType the type of stream (not null)
-     * @param scene the scene to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(StringStream stream,
-            EStreamType streamType, PhysicsScene scene) {
-        long streamVa = stream.va();
-        int ordinal = streamType.ordinal();
-        long sceneVa = scene.va();
-        boolean result = sWritePhysicsScene(streamVa, ordinal, sceneVa);
-
-        return result;
-    }
-
-    /**
-     * Write the specified ragdoll settings to the specified stream.
-     *
-     * @param stream the stream to write to (not null)
-     * @param streamType the type of stream (not null)
-     * @param settings the settings to write (not null, unaffected)
-     * @return {@code true} if successful, otherwise {@code false}
-     */
-    public static boolean sWriteObject(StringStream stream,
-            EStreamType streamType, RagdollSettings settings) {
-        long streamVa = stream.va();
-        int ordinal = streamType.ordinal();
-        long settingsVa = settings.va();
-        boolean result = sWriteRagdollSettings(streamVa, ordinal, settingsVa);
+        } else { // TODO: implement for other types
+            Class clas = writeObject.getClass();
+            String className = clas.getSimpleName();
+            throw new IllegalArgumentException(className);
+        }
 
         return result;
     }
