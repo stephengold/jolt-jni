@@ -81,8 +81,8 @@ import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
+import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
-import com.github.stephengold.joltjni.readonly.ConstSerializableObject;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
@@ -632,70 +632,15 @@ public class Test012 {
     }
 
     /**
-     * Serialize the specified body-creation settings using
-     * {@code ObjectStreamOut}.
+     * Serialize the specified object using {@code ObjectStreamOut}.
      *
-     * @param settings the settings to serialize (not null, uncooked,
-     * unaffected)
+     * @param writeObj the object to serialize (not null, uncooked, unaffected)
      * @return serialized data
      */
-    private static String serializeRaw(ConstBodyCreationSettings settings) {
+    private static String serializeRaw(ConstJoltPhysicsObject writeObj) {
         StringStream ss = new StringStream();
         boolean success = ObjectStreamOut.sWriteObject(
-                ss, EStreamType.Binary, settings);
-        assert success;
-        String result = ss.str();
-        TestUtils.testClose(ss);
-        return result;
-    }
-
-    /**
-     * Serialize the specified serializable object using
-     * {@code ObjectStreamOut}.
-     *
-     * @param object the object to serialize (not null, uncooked, unaffected)
-     * @return serialized data
-     */
-    private static String serializeRaw(ConstSerializableObject object) {
-        StringStream ss = new StringStream();
-        boolean success = ObjectStreamOut.sWriteObject(
-                ss, EStreamType.Binary, object);
-        assert success;
-        String result = ss.str();
-        TestUtils.testClose(ss);
-        return result;
-    }
-
-    /**
-     * Serialize the specified soft-body creation settings using
-     * {@code ObjectStreamOut}.
-     *
-     * @param settings the settings to serialize (not null, uncooked,
-     * unaffected)
-     * @return serialized data
-     */
-    private static String serializeRaw(ConstSoftBodyCreationSettings settings) {
-        StringStream ss = new StringStream();
-        boolean success = ObjectStreamOut.sWriteObject(
-                ss, EStreamType.Binary, settings);
-        assert success;
-        String result = ss.str();
-        TestUtils.testClose(ss);
-        return result;
-    }
-
-    /**
-     * Serialize the specified soft-body shared settings using
-     * {@code ObjectStreamOut}.
-     *
-     * @param settings the settings to serialize (not null, uncooked,
-     * unaffected)
-     * @return serialized data
-     */
-    private static String serializeRaw(ConstSoftBodySharedSettings settings) {
-        StringStream ss = new StringStream();
-        boolean success = ObjectStreamOut.sWriteObject(
-                ss, EStreamType.Binary, settings);
+                ss, EStreamType.Binary, writeObj);
         assert success;
         String result = ss.str();
         TestUtils.testClose(ss);
