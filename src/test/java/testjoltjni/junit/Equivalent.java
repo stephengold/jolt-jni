@@ -23,12 +23,14 @@ package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.ObjectStreamOut;
 import com.github.stephengold.joltjni.PhysicsMaterial;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.StreamOutWrapper;
 import com.github.stephengold.joltjni.TrackedVehicleControllerSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleTrackSettings;
+import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
@@ -447,6 +449,13 @@ final class Equivalent {
         joltPhysicsObject(expected, actual);
         Assert.assertEquals(expected.getRtti().getName(),
                 actual.getRtti().getName());
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        ObjectStreamOut.sWriteObject(stream1, EStreamType.Text, expected);
+        ObjectStreamOut.sWriteObject(stream2, EStreamType.Text, actual);
+        Assert.assertEquals(stream1.str(), stream2.str());
     }
 
     /**
