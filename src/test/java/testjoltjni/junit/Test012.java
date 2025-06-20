@@ -581,14 +581,14 @@ public class Test012 {
      * Serialize the specified soft-body shared settings using
      * {@code saveBinaryState()}.
      *
-     * @param sbcs the settings to serialize (not null, unaffected)
+     * @param sbss the settings to serialize (not null, unaffected)
      * @return serialized data
      */
-    private static String serializeCooked(ConstSoftBodySharedSettings sbcs) {
+    private static String serializeCooked(ConstSoftBodySharedSettings sbss) {
         StringStream ss = new StringStream();
         StreamOut streamOut = new StreamOutWrapper(ss);
 
-        sbcs.saveBinaryState(streamOut);
+        sbss.saveBinaryState(streamOut);
         String result = ss.str();
 
         TestUtils.testClose(streamOut, ss);
