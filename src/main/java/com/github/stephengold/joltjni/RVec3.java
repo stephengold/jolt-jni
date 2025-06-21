@@ -284,6 +284,18 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
+     * Set all 3 components from the specified buffer.
+     *
+     * @param buffer the desired component values (not null, length&ge;3,
+     * unaffected)
+     */
+    public void set(DoubleBuffer buffer) {
+        this.xx = buffer.get(0);
+        this.yy = buffer.get(1);
+        this.zz = buffer.get(2);
+    }
+
+    /**
      * Set all 3 components from the argument.
      *
      * @param source the vector to copy (not null, unaffected)
