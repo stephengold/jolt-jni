@@ -338,6 +338,25 @@ inline static const RVec3 getCenterOfMassPosition(jlong bodyVa) {
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getCenterOfMassPositionToBuf
+ * Signature: (JLjava/nio/DoubleBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMassPositionToBuf
+  (JNIEnv *pEnv, jclass, jlong bodyVa, jobject storeResult) {
+    const RVec3 location = getCenterOfMassPosition(bodyVa);
+    jdouble * const pDoubles
+            = (jdouble *) pEnv->GetDirectBufferAddress(storeResult);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeResult);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityDoubles >= 3);
+    pDoubles[0] = location.GetX();
+    pDoubles[1] = location.GetY();
+    pDoubles[2] = location.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    getCenterOfMassPositionX
  * Signature: (J)D
  */

@@ -30,6 +30,7 @@ import com.github.stephengold.joltjni.TransformedShape;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
+import java.nio.DoubleBuffer;
 
 /**
  * Read-only access to a {@code Body}. (native type: const Body)
@@ -103,6 +104,15 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * finite)
      */
     RVec3 getCenterOfMassPosition();
+
+    /**
+     * Copy the location of the body's center of mass (which might not coincide
+     * with its origin). The body is unaffected.
+     *
+     * @param storeResult storage for the location in system coordinates (not
+     * null, modified)
+     */
+    void getCenterOfMassPosition(DoubleBuffer storeResult);
 
     /**
      * Copy the location of the body's center of mass (which might not coincide

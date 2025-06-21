@@ -30,6 +30,7 @@ import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
 /**
@@ -592,6 +593,19 @@ public class Body extends NonCopyable implements ConstBody {
      * Copy the location of the body's center of mass (which might not coincide
      * with its origin). The body is unaffected.
      *
+     * @param storeResult storage for the location in system coordinates (not
+     * null, modified)
+     */
+    @Override
+    public void getCenterOfMassPosition(DoubleBuffer storeResult) {
+        long bodyVa = va();
+        getCenterOfMassPositionToBuf(bodyVa, storeResult);
+    }
+
+    /**
+     * Copy the location of the body's center of mass (which might not coincide
+     * with its origin). The body is unaffected.
+     *
      * @param storeLocation storage for the location (in system coordinates, not
      * null, modified)
      */
@@ -1114,6 +1128,9 @@ public class Body extends NonCopyable implements ConstBody {
     native private static int getBodyType(long bodyVa);
 
     native private static int getBroadPhaseLayer(long bodyVa);
+
+    native private static void getCenterOfMassPositionToBuf(
+            long bodyVa, DoubleBuffer storeResult);
 
     native private static double getCenterOfMassPositionX(long bodyVa);
 
