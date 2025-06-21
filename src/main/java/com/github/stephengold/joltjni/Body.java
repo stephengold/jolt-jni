@@ -947,7 +947,7 @@ public class Body extends NonCopyable implements ConstBody {
         double xx = location.xx();
         double yy = location.yy();
         double zz = location.zz();
-        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(3);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getWorldSpaceSurfaceNormal(bodyVa, subShapeId, xx, yy, zz, storeFloats);
 
         Vec3 result = new Vec3(storeFloats);

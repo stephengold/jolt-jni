@@ -280,7 +280,7 @@ public class TransformedShape
     @Override
     public RVec3 getShapePositionCom() {
         long transformedShapeVa = va();
-        DoubleBuffer storeDoubles = Jolt.newDirectDoubleBuffer(3);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getShapePositionCom(transformedShapeVa, storeDoubles);
         RVec3 result = new RVec3(storeDoubles);
 
@@ -296,7 +296,7 @@ public class TransformedShape
     @Override
     public Quat getShapeRotation() {
         long transformedShapeVa = va();
-        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(4);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getShapeRotation(transformedShapeVa, storeFloats);
         Quat result = new Quat(storeFloats);
 
@@ -311,7 +311,7 @@ public class TransformedShape
     @Override
     public Float3 getShapeScale() {
         long transformedShapeVa = va();
-        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(3);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getShapeScale(transformedShapeVa, storeFloats);
         Float3 result = new Float3(storeFloats);
 

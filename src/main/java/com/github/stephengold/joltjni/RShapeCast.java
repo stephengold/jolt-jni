@@ -150,7 +150,7 @@ public class RShapeCast extends JoltPhysicsObject {
      */
     public Vec3 getDirection() {
         long castVa = va();
-        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(3);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getDirection(castVa, storeFloats);
         Vec3 result = new Vec3(storeFloats);
 

@@ -71,7 +71,8 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
         final long aIncludingVa = aIncluding.targetVa();
         final long bExcludingVa = bExcluding.targetVa();
         final long bIncludingVa = bIncluding.targetVa();
-        FloatBuffer fBuf = Jolt.newDirectFloatBuffer(11);
+        FloatBuffer fBuf = Temporaries.floatBuffer1.get();
+        fBuf.rewind();
         fBuf.put(collisionToleranceSq);
         fBuf.put(penetrationTolerance);
         iov.put(fBuf);
@@ -112,7 +113,8 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
         final long aIncludingVa = aIncluding.targetVa();
         final long bExcludingVa = bExcluding.targetVa();
         final long bIncludingVa = bIncluding.targetVa();
-        FloatBuffer fBuf = Jolt.newDirectFloatBuffer(11);
+        FloatBuffer fBuf = Temporaries.floatBuffer1.get();
+        fBuf.rewind();
         fBuf.put(collisionToleranceSq);
         fBuf.put(penetrationTolerance);
         iov.put(fBuf);
@@ -155,7 +157,8 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
         final long aIncludingVa = aIncluding.targetVa();
         final long bExcludingVa = bExcluding.targetVa();
         final long bIncludingVa = bIncluding.targetVa();
-        FloatBuffer fBuf = Jolt.newDirectFloatBuffer(11);
+        FloatBuffer fBuf = Temporaries.floatBuffer1.get();
+        fBuf.rewind();
         fBuf.put(collisionToleranceSq);
         fBuf.put(penetrationTolerance);
         iov.put(fBuf);
@@ -197,7 +200,8 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
         final long aIncludingVa = aIncluding.targetVa();
         final long bExcludingVa = bExcluding.targetVa();
         final long bIncludingVa = bIncluding.targetVa();
-        FloatBuffer fBuf = Jolt.newDirectFloatBuffer(11);
+        FloatBuffer fBuf = Temporaries.floatBuffer1.get();
+        fBuf.rewind();
         fBuf.put(collisionToleranceSq);
         fBuf.put(penetrationTolerance);
         iov.put(fBuf);
@@ -242,7 +246,8 @@ public class EpaPenetrationDepth extends JoltPhysicsObject {
         final long aIncludingVa = aIncluding.targetVa();
         final long bExcludingVa = bExcluding.targetVa();
         final long bIncludingVa = bIncluding.targetVa();
-        FloatBuffer fBuf = Jolt.newDirectFloatBuffer(11);
+        FloatBuffer fBuf = Temporaries.floatBuffer1.get();
+        fBuf.rewind();
         fBuf.put(collisionToleranceSq);
         fBuf.put(penetrationTolerance);
         iov.put(fBuf);

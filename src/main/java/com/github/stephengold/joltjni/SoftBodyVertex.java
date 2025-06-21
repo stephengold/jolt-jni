@@ -164,7 +164,7 @@ public class SoftBodyVertex
     @Override
     public Plane getCollisionPlane() {
         long vertexVa = va();
-        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(4);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getCollisionPlane(vertexVa, storeFloats);
         Plane result = new Plane(storeFloats);
 
