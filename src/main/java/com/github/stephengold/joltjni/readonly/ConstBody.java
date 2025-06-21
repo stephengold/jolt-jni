@@ -75,7 +75,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     Vec3 getAngularVelocity();
 
     /**
-     * Convert the body to a {@code BodyCreationSettings} object. The body is
+     * Generate settings to reconstruct the (rigid) body. The body is
      * unaffected.
      *
      * @return a new object

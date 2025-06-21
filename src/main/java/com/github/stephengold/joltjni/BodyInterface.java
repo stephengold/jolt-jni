@@ -594,7 +594,7 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Access the body's shape. TODO return ConstShape?
+     * Access the body's shape.
      *
      * @param bodyId the ID of the body
      * @return a new reference
@@ -608,7 +608,7 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Access the underlying {@code PhysicsSystem}.
+     * Access the containing {@code PhysicsSystem}.
      *
      * @return the pre-existing instance
      */
