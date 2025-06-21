@@ -38,8 +38,8 @@ import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
 /**
- * An interface to a {@code PhysicsSystem} that's used to create, add, modify,
- * query, remove, and delete bodies.
+ * An interface to a {@code PhysicsSystem}, used to create, add, modify, query,
+ * remove, and delete bodies.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -761,7 +761,7 @@ public class BodyInterface extends NonCopyable {
      * Alter the linear and angular velocities of the specified body.
      *
      * @param bodyId the ID of the body to modify
-     * @param linearVelocity the desired linear velocity of body's the center of
+     * @param linearVelocity the desired linear velocity of the body's center of
      * mass (not null, unaffected)
      * @param angularVelocity the desired angular velocity (not null,
      * unaffected)
