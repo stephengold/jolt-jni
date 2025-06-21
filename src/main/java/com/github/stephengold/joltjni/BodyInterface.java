@@ -655,6 +655,18 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Test whether the specified body is a sensor.
+     *
+     * @param bodyId the ID of the body to test
+     * @return {@code true} if a sensor, otherwise {@code false}
+     */
+    public boolean isSensor(int bodyId) {
+        long bodyInterfaceVa = va();
+        boolean result = isSensor(bodyInterfaceVa, bodyId);
+        return result;
+    }
+
+    /**
      * Reposition the specified body, assuming it's kinematic.
      *
      * @param bodyId the ID of the body to reposition
@@ -739,6 +751,18 @@ public class BodyInterface extends NonCopyable {
     public void setGravityFactor(int bodyId, float factor) {
         long bodyInterfaceVa = va();
         setGravityFactor(bodyInterfaceVa, bodyId, factor);
+    }
+
+    /**
+     * Alter whether the specified body is a sensor.
+     *
+     * @param bodyId the ID of the body to modify
+     * @param setting {@code true} for a sensor, or {@code false} for a
+     * non-sensor
+     */
+    public void setIsSensor(int bodyId, boolean setting) {
+        long bodyInterfaceVa = va();
+        setIsSensor(bodyInterfaceVa, bodyId, setting);
     }
 
     /**
@@ -1022,6 +1046,8 @@ public class BodyInterface extends NonCopyable {
 
     native private static boolean isAdded(long bodyInterfaceVa, int bodyId);
 
+    native private static boolean isSensor(long bodyInterfaceVa, int bodyId);
+
     native private static void moveKinematic(long bodyInterfaceVa,
             int bodyId, double xx, double yy, double zz,
             float qx, float qy, float qz, float qw, float deltaTime);
@@ -1040,6 +1066,9 @@ public class BodyInterface extends NonCopyable {
 
     native private static void setGravityFactor(
             long bodyInterfaceVa, int bodyId, float factor);
+
+    native private static void setIsSensor(
+            long bodyInterfaceVa, int bodyId, boolean setting);
 
     native private static void setLinearAndAngularVelocity(
             long bodyInterfaceVa, int bodyId, float vx, float vy, float vz,

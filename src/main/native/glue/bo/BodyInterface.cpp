@@ -694,6 +694,20 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyInterface_isA
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    isSensor
+ * Signature: (JI)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyInterface_isSensor
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    const bool result = pInterface->IsSensor(id);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    moveKinematic
  * Signature: (JIDDDFFFFF)V
  */
@@ -777,6 +791,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setGrav
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
     pInterface->SetGravityFactor(id, factor);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    setIsSensor
+ * Signature: (JIZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_setIsSensor
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId, jboolean setting) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    pInterface->SetIsSensor(id, setting);
 }
 
 /*
