@@ -34,6 +34,8 @@ import com.github.stephengold.joltjni.readonly.ConstTwoBodyConstraint;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * An interface to a {@code PhysicsSystem} that's used to create, add, modify,
@@ -389,10 +391,9 @@ public class BodyInterface extends NonCopyable {
      */
     public Vec3 getAngularVelocity(int bodyId) {
         long bodyInterfaceVa = va();
-        float x = getAngularVelocityX(bodyInterfaceVa, bodyId);
-        float y = getAngularVelocityY(bodyInterfaceVa, bodyId);
-        float z = getAngularVelocityZ(bodyInterfaceVa, bodyId);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAngularVelocity(bodyInterfaceVa, bodyId, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -419,10 +420,9 @@ public class BodyInterface extends NonCopyable {
      */
     public RVec3 getCenterOfMassPosition(int bodyId) {
         long bodyInterfaceVa = va();
-        double xx = getCenterOfMassPositionX(bodyInterfaceVa, bodyId);
-        double yy = getCenterOfMassPositionY(bodyInterfaceVa, bodyId);
-        double zz = getCenterOfMassPositionZ(bodyInterfaceVa, bodyId);
-        RVec3 result = new RVec3(xx, yy, zz);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getCenterOfMassPosition(bodyInterfaceVa, bodyId, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -474,10 +474,9 @@ public class BodyInterface extends NonCopyable {
      */
     public Vec3 getLinearVelocity(int bodyId) {
         long bodyInterfaceVa = va();
-        float x = getLinearVelocityX(bodyInterfaceVa, bodyId);
-        float y = getLinearVelocityY(bodyInterfaceVa, bodyId);
-        float z = getLinearVelocityZ(bodyInterfaceVa, bodyId);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity(bodyInterfaceVa, bodyId, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -531,10 +530,9 @@ public class BodyInterface extends NonCopyable {
      */
     public RVec3 getPosition(int bodyId) {
         long bodyInterfaceVa = va();
-        double xx = getPositionX(bodyInterfaceVa, bodyId);
-        double yy = getPositionY(bodyInterfaceVa, bodyId);
-        double zz = getPositionZ(bodyInterfaceVa, bodyId);
-        RVec3 result = new RVec3(xx, yy, zz);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(bodyInterfaceVa, bodyId, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -549,17 +547,13 @@ public class BodyInterface extends NonCopyable {
     public void getPositionAndRotation(
             int bodyId, RVec3 storeLocation, Quat storeOrientation) {
         long bodyInterfaceVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
 
-        double xx = getPositionX(bodyInterfaceVa, bodyId);
-        double yy = getPositionY(bodyInterfaceVa, bodyId);
-        double zz = getPositionZ(bodyInterfaceVa, bodyId);
-        storeLocation.set(xx, yy, zz);
-
-        float qw = getRotationW(bodyInterfaceVa, bodyId);
-        float qx = getRotationX(bodyInterfaceVa, bodyId);
-        float qy = getRotationY(bodyInterfaceVa, bodyId);
-        float qz = getRotationZ(bodyInterfaceVa, bodyId);
-        storeOrientation.set(qx, qy, qz, qw);
+        getPositionAndRotation(
+                bodyInterfaceVa, bodyId, storeDoubles, storeFloats);
+        storeLocation.set(storeDoubles);
+        storeOrientation.set(storeFloats);
     }
 
     /**
@@ -583,12 +577,10 @@ public class BodyInterface extends NonCopyable {
      */
     public Quat getRotation(int bodyId) {
         long bodyInterfaceVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
 
-        float qw = getRotationW(bodyInterfaceVa, bodyId);
-        float qx = getRotationX(bodyInterfaceVa, bodyId);
-        float qy = getRotationY(bodyInterfaceVa, bodyId);
-        float qz = getRotationZ(bodyInterfaceVa, bodyId);
-        Quat result = new Quat(qx, qy, qz, qw);
+        getRotation(bodyInterfaceVa, bodyId, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -977,25 +969,13 @@ public class BodyInterface extends NonCopyable {
 
     native private static void destroyBody(long bodyInterfaceVa, int bodyId);
 
-    native private static float getAngularVelocityX(
-            long bodyInterfaceVa, int bodyId);
-
-    native private static float getAngularVelocityY(
-            long bodyInterfaceVa, int bodyId);
-
-    native private static float getAngularVelocityZ(
-            long bodyInterfaceVa, int bodyId);
+    native private static void getAngularVelocity(
+            long bodyInterfaceVa, int bodyId, FloatBuffer storeFloats);
 
     native private static int getBodyType(long bodyInterfaceVa, int bodyId);
 
-    native private static double getCenterOfMassPositionX(
-            long bodyInterfaceVa, int bodyId);
-
-    native private static double getCenterOfMassPositionY(
-            long bodyInterfaceVa, int bodyId);
-
-    native private static double getCenterOfMassPositionZ(
-            long bodyInterfaceVa, int bodyId);
+    native private static void getCenterOfMassPosition(
+            long bodyInterfaceVa, int bodyId, DoubleBuffer storeDoubles);
 
     native private static long getCenterOfMassTransform(
             long bodyInterfaceVa, int bodyId);
@@ -1005,14 +985,8 @@ public class BodyInterface extends NonCopyable {
     native private static float getGravityFactor(
             long bodyInterfaceVa, int bodyId);
 
-    native private static float getLinearVelocityX(
-            long bodyInterfaceVa, int bodyId);
-
-    native private static float getLinearVelocityY(
-            long bodyInterfaceVa, int bodyId);
-
-    native private static float getLinearVelocityZ(
-            long bodyInterfaceVa, int bodyId);
+    native private static void getLinearVelocity(
+            long bodyInterfaceVa, int bodyId, FloatBuffer storeFloats);
 
     native private static int getMotionQuality(
             long bodyInterfaceVa, int bodyId);
@@ -1021,22 +995,17 @@ public class BodyInterface extends NonCopyable {
 
     native private static int getObjectLayer(long bodyInterfaceVa, int bodyId);
 
-    native private static double getPositionX(long bodyInterfaceVa, int bodyId);
+    native private static void getPosition(
+            long bodyInterfaceVa, int bodyId, DoubleBuffer storeDoubles);
 
-    native private static double getPositionY(long bodyInterfaceVa, int bodyId);
-
-    native private static double getPositionZ(long bodyInterfaceVa, int bodyId);
+    native private static void getPositionAndRotation(long bodyInterfaceVa,
+            int bodyId, DoubleBuffer storeDoubles, FloatBuffer storeFloats);
 
     native private static float getRestitution(
             long bodyInterfaceVa, int bodyId);
 
-    native private static float getRotationW(long bodyInterfaceVa, int bodyId);
-
-    native private static float getRotationX(long bodyInterfaceVa, int bodyId);
-
-    native private static float getRotationY(long bodyInterfaceVa, int bodyId);
-
-    native private static float getRotationZ(long bodyInterfaceVa, int bodyId);
+    native private static void getRotation(
+            long bodyInterfaceVa, int bodyId, FloatBuffer storeFloats);
 
     native private static long getShape(long bodyInterfaceVa, int bodyId);
 
