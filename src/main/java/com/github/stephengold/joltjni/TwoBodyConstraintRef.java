@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.enumerate.EConstraintType;
 import com.github.stephengold.joltjni.readonly.ConstTwoBodyConstraint;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
+import java.nio.DoubleBuffer;
 
 /**
  * A counted reference to a {@code TwoBodyConstraint}. (native type:
@@ -94,6 +95,18 @@ final public class TwoBodyConstraintRef
     }
 
     /**
+     * Copy the first body's pivot location. The constraint is unaffected.
+     *
+     * @param storeResult storage for the location in system coordinates (not
+     * null, modified)
+     */
+    @Override
+    public void getBody1PivotLocation(DoubleBuffer storeResult) {
+        long constraintVa = targetVa();
+        TwoBodyConstraint.getBody1PivotLocation(constraintVa, storeResult);
+    }
+
+    /**
      * Access the 2nd body in the constraint. The constraint is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -105,6 +118,18 @@ final public class TwoBodyConstraintRef
         Body result = new Body(bodyVa);
 
         return result;
+    }
+
+    /**
+     * Copy the 2nd body's pivot location. The constraint is unaffected.
+     *
+     * @param storeResult storage for the location in system coordinates (not
+     * null, modified)
+     */
+    @Override
+    public void getBody2PivotLocation(DoubleBuffer storeResult) {
+        long constraintVa = targetVa();
+        TwoBodyConstraint.getBody2PivotLocation(constraintVa, storeResult);
     }
 
     /**

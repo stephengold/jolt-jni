@@ -54,6 +54,31 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TwoBodyConstraint_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_TwoBodyConstraint
+ * Method:    getBody1PivotLocation
+ * Signature: (JLjava/nio/DoubleBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TwoBodyConstraint_getBody1PivotLocation
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeResult) {
+    const TwoBodyConstraint * const pConstraint
+            = reinterpret_cast<TwoBodyConstraint *> (constraintVa);
+    const Body * const pBody = pConstraint->GetBody1();
+    const RMat44 comToWorld = pBody->GetCenterOfMassTransform();
+    const Mat44 pivotToCom = pConstraint->GetConstraintToBody1Matrix();
+    const RMat44 pivotToWorld = comToWorld * pivotToCom;
+    const RVec3 location = pivotToWorld.GetTranslation();
+    jdouble * const pDoubles
+            = (jdouble *) pEnv->GetDirectBufferAddress(storeResult);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeResult);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityDoubles >= 3);
+    pDoubles[0] = location.GetX();
+    pDoubles[1] = location.GetY();
+    pDoubles[2] = location.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TwoBodyConstraint
  * Method:    getBody2
  * Signature: (J)J
  */
@@ -63,6 +88,31 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TwoBodyConstraint_ge
             = reinterpret_cast<TwoBodyConstraint *> (constraintVa);
     Body * const pResult = pConstraint->GetBody2();
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TwoBodyConstraint
+ * Method:    getBody2PivotLocation
+ * Signature: (JLjava/nio/DoubleBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TwoBodyConstraint_getBody2PivotLocation
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeResult) {
+    const TwoBodyConstraint * const pConstraint
+            = reinterpret_cast<TwoBodyConstraint *> (constraintVa);
+    const Body * const pBody = pConstraint->GetBody2();
+    const RMat44 comToWorld = pBody->GetCenterOfMassTransform();
+    const Mat44 pivotToCom = pConstraint->GetConstraintToBody2Matrix();
+    const RMat44 pivotToWorld = comToWorld * pivotToCom;
+    const RVec3 location = pivotToWorld.GetTranslation();
+    jdouble * const pDoubles
+            = (jdouble *) pEnv->GetDirectBufferAddress(storeResult);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeResult);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityDoubles >= 3);
+    pDoubles[0] = location.GetX();
+    pDoubles[1] = location.GetY();
+    pDoubles[2] = location.GetZ();
 }
 
 /*

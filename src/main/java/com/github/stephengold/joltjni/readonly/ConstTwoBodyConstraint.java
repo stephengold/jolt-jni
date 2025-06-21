@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.Body;
 import com.github.stephengold.joltjni.Mat44;
+import java.nio.DoubleBuffer;
 
 /**
  * Read-only access to a {@code TwoBodyConstraint}. (native type: const
@@ -39,11 +40,27 @@ public interface ConstTwoBodyConstraint extends ConstConstraint {
     Body getBody1();
 
     /**
+     * Copy the first body's pivot location. The constraint is unaffected.
+     *
+     * @param storeResult storage for the location in system coordinates (not
+     * null, modified)
+     */
+    void getBody1PivotLocation(DoubleBuffer storeResult);
+
+    /**
      * Access the 2nd body in the constraint. The constraint is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
     Body getBody2();
+
+    /**
+     * Copy the 2nd body's pivot location. The constraint is unaffected.
+     *
+     * @param storeResult storage for the location in system coordinates (not
+     * null, modified)
+     */
+    void getBody2PivotLocation(DoubleBuffer storeResult);
 
     /**
      * Calculate the coordinate transform from constraint space to body 1. The

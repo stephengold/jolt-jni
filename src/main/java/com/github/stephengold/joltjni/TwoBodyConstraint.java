@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstTwoBodyConstraint;
+import java.nio.DoubleBuffer;
 
 /**
  * A type of {@code Constraint} that joins 2 bodies.
@@ -78,6 +79,18 @@ abstract public class TwoBodyConstraint
     }
 
     /**
+     * Copy the first body's pivot location. The constraint is unaffected.
+     *
+     * @param storeResult storage for the location in system coordinates (not
+     * null, modified)
+     */
+    @Override
+    public void getBody1PivotLocation(DoubleBuffer storeResult) {
+        long constraintVa = va();
+        getBody1PivotLocation(constraintVa, storeResult);
+    }
+
+    /**
      * Access the 2nd body in the constraint. The constraint is unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -89,6 +102,18 @@ abstract public class TwoBodyConstraint
         Body result = new Body(bodyVa);
 
         return result;
+    }
+
+    /**
+     * Copy the 2nd body's pivot location. The constraint is unaffected.
+     *
+     * @param storeResult storage for the location in system coordinates (not
+     * null, modified)
+     */
+    @Override
+    public void getBody2PivotLocation(DoubleBuffer storeResult) {
+        long constraintVa = va();
+        getBody2PivotLocation(constraintVa, storeResult);
     }
 
     /**
@@ -125,7 +150,13 @@ abstract public class TwoBodyConstraint
 
     native static long getBody1(long constraintVa);
 
+    native static void getBody1PivotLocation(
+            long constraintVa, DoubleBuffer storeResult);
+
     native static long getBody2(long constraintVa);
+
+    native static void getBody2PivotLocation(
+            long constraintVa, DoubleBuffer storeResult);
 
     native static long getConstraintToBody1Matrix(long constraintVa);
 
