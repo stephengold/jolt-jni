@@ -343,7 +343,7 @@ public class Test006 {
      */
     private static void doTaperedCapsuleShapeSettings() {
         TaperedCapsuleShapeSettings settings
-                = new TaperedCapsuleShapeSettings(1f, 2f, 1f);
+                = new TaperedCapsuleShapeSettings();
 
         testTaperedCapsuleSsDefaults(settings);
         testTaperedCapsuleSsSetters(settings);
@@ -357,7 +357,7 @@ public class Test006 {
      */
     private static void doTaperedCylinderShapeSettings() {
         TaperedCylinderShapeSettings settings
-                = new TaperedCylinderShapeSettings(1f, 0.05f, 1f);
+                = new TaperedCylinderShapeSettings();
 
         testTaperedCylinderSsDefaults(settings);
         testTaperedCylinderSsSetters(settings);
@@ -817,9 +817,9 @@ public class Test006 {
             TaperedCapsuleShapeSettings settings) {
         testConvexSsDefaults(settings);
 
-        Assert.assertEquals(1f, settings.getBottomRadius(), 0f);
-        Assert.assertEquals(1f, settings.getHalfHeightOfTaperedCylinder(), 0f);
-        Assert.assertEquals(2f, settings.getTopRadius(), 0f);
+        Assert.assertEquals(0f, settings.getBottomRadius(), 0f);
+        Assert.assertEquals(0f, settings.getHalfHeightOfTaperedCylinder(), 0f);
+        Assert.assertEquals(0f, settings.getTopRadius(), 0f);
     }
 
     /**
@@ -855,10 +855,10 @@ public class Test006 {
             TaperedCylinderShapeSettings settings) {
         testConvexSsDefaults(settings);
 
-        Assert.assertEquals(1f, settings.getBottomRadius(), 0f);
-        Assert.assertEquals(0.05f, settings.getConvexRadius(), 0f);
-        Assert.assertEquals(1f, settings.getHalfHeight(), 0f);
-        Assert.assertEquals(0.05f, settings.getTopRadius(), 0f);
+        Assert.assertEquals(0f, settings.getBottomRadius(), 0f);
+        Assert.assertEquals(0f, settings.getConvexRadius(), 0f);
+        Assert.assertEquals(0f, settings.getHalfHeight(), 0f);
+        Assert.assertEquals(0f, settings.getTopRadius(), 0f);
     }
 
     /**
