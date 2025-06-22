@@ -181,7 +181,7 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     /**
      * Alter the convex radius. (native attribute: mConvexRadius)
      *
-     * @param radius the desired convex radius (&ge;0)
+     * @param radius the desired convex radius (&ge;0, default=0)
      */
     public void setConvexRadius(float radius) {
         long settingsVa = va();
@@ -191,9 +191,9 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     /**
      * Relocate the first vertex. (native attribute: mV1)
      *
-     * @param x the desired X coordinate
-     * @param y the desired Y coordinate
-     * @param z the desired Z coordinate
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
      */
     public void setV1(float x, float y, float z) {
         long settingsVa = va();
@@ -203,9 +203,9 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     /**
      * Relocate the 2nd vertex. (native attribute: mV2)
      *
-     * @param x the desired X coordinate
-     * @param y the desired Y coordinate
-     * @param z the desired Z coordinate
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
      */
     public void setV2(float x, float y, float z) {
         long settingsVa = va();
@@ -215,9 +215,9 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     /**
      * Relocate the 3rd vertex. (native attribute: mV3)
      *
-     * @param x the desired X coordinate
-     * @param y the desired Y coordinate
-     * @param z the desired Z coordinate
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
      */
     public void setV3(float x, float y, float z) {
         long settingsVa = va();

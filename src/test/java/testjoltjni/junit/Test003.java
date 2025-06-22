@@ -80,6 +80,8 @@ import testjoltjni.TestUtils;
 /**
  * Automated JUnit4 tests for creation, destruction, accessors, and defaults of
  * various Jolt-Physics objects.
+ * <p>
+ * For {@code ShapeSettings} subclasses, see Test006.
  *
  * @author Stephen Gold sgold@sonic.net
  */
