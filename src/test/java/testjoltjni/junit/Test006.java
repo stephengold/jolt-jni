@@ -882,7 +882,7 @@ public class Test006 {
         Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
         Assert.assertEquals(0.3f, settings.getTopRadius(), 0f);
     }
-    
+
     /**
      * Test the getters and defaults of the specified
      * {@code TriangleShapeSettings}.
