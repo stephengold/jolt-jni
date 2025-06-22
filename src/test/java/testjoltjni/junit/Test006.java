@@ -93,6 +93,7 @@ public class Test006 {
         doScaledShapeSettings();
         doTaperedCapsuleShapeSettings();
         doTaperedCylinderShapeSettings();
+        doTriangleShapeSettings();
 
         TestUtils.cleanup();
     }
@@ -357,6 +358,19 @@ public class Test006 {
 
         testTaperedCylinderSsDefaults(settings);
         testTaperedCylinderSsSetters(settings);
+
+        TestUtils.testClose(settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code TriangleShapeSettings} class.
+     */
+    private static void doTriangleShapeSettings() {
+        TriangleShapeSettings settings = new TriangleShapeSettings();
+
+        testTriangleSsDefaults(settings);
+        testTriangleSsSetters(settings);
 
         TestUtils.testClose(settings);
         System.gc();
@@ -866,5 +880,44 @@ public class Test006 {
         Assert.assertEquals(0.2f, settings.getHalfHeight(), 0f);
         Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
         Assert.assertEquals(0.3f, settings.getTopRadius(), 0f);
+    }
+    
+    /**
+     * Test the getters and defaults of the specified
+     * {@code TriangleShapeSettings}.
+     *
+     * @param settings the settings to test (not null, unaffected)
+     */
+    private static void testTriangleSsDefaults(TriangleShapeSettings settings) {
+        testConvexSsDefaults(settings);
+
+        Assert.assertEquals(0f, settings.getConvexRadius(), 0f);
+        Assert.assertNull(settings.getMaterial());
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getV1(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getV2(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getV3(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code TriangleShapeSettings}.
+     *
+     * @param settings the settings to test (not null, modified)
+     */
+    private static void testTriangleSsSetters(TriangleShapeSettings settings) {
+        settings.setConvexRadius(0.1f);
+        settings.setMaterial(PhysicsMaterial.sDefault());
+        settings.setV1(1f, 2f, 3f);
+        settings.setV2(4f, 5f, 6f);
+        settings.setV3(9f, 8f, 7f);
+
+        ShapeSettingsRef ref = settings.toRef();
+        Assert.assertEquals(1, settings.getRefCount());
+        Assert.assertEquals(settings, ref.getPtr());
+
+        Assert.assertEquals(0.1f, settings.getConvexRadius(), 0f);
+        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        TestUtils.assertEquals(1f, 2f, 3f, settings.getV1(), 0f);
+        TestUtils.assertEquals(4f, 5f, 6f, settings.getV2(), 0f);
+        TestUtils.assertEquals(9f, 8f, 7f, settings.getV3(), 0f);
     }
 }
