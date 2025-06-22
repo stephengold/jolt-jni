@@ -85,6 +85,69 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
+ * Method:    getV1
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings_getV1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
+    const TriangleShapeSettings * const pSettings
+            = reinterpret_cast<TriangleShapeSettings *> (settingsVa);
+    jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pSettings->mV1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
+ * Method:    getV2
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings_getV2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
+    const TriangleShapeSettings * const pSettings
+            = reinterpret_cast<TriangleShapeSettings *> (settingsVa);
+    jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pSettings->mV2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
+ * Method:    getV3
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings_getV3
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
+    const TriangleShapeSettings * const pSettings
+            = reinterpret_cast<TriangleShapeSettings *> (settingsVa);
+    jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pSettings->mV3;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
  * Method:    setConvexRadius
  * Signature: (JF)V
  */
@@ -93,4 +156,43 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings
     TriangleShapeSettings * const pSettings
             = reinterpret_cast<TriangleShapeSettings *> (settingsVa);
     pSettings->mConvexRadius = radius;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
+ * Method:    setV1
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings_setV1
+  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
+    TriangleShapeSettings * const pSettings
+            = reinterpret_cast<TriangleShapeSettings *> (settingsVa);
+    const Vec3 location(x, y, z);
+    pSettings->mV1 = location;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
+ * Method:    setV2
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings_setV2
+  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
+    TriangleShapeSettings * const pSettings
+            = reinterpret_cast<TriangleShapeSettings *> (settingsVa);
+    const Vec3 location(x, y, z);
+    pSettings->mV2 = location;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
+ * Method:    setV3
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings_setV3
+  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
+    TriangleShapeSettings * const pSettings
+            = reinterpret_cast<TriangleShapeSettings *> (settingsVa);
+    const Vec3 location(x, y, z);
+    pSettings->mV3 = location;
 }

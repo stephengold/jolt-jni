@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code TriangleShape}.
@@ -133,6 +134,51 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
+     * Copy the location of the first vertex. The settings are unaffected.
+     * (native attribute: mV1)
+     *
+     * @return a new location vector
+     */
+    public Vec3 getV1() {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getV1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Copy the location of the first vertex. The settings are unaffected.
+     * (native attribute: mV2)
+     *
+     * @return a new location vector
+     */
+    public Vec3 getV2() {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getV2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Copy the location of the 3rd vertex. The settings are unaffected. (native
+     * attribute: mV3)
+     *
+     * @return a new location vector
+     */
+    public Vec3 getV3() {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getV3(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
      * Alter the convex radius. (native attribute: mConvexRadius)
      *
      * @param radius the desired convex radius (&ge;0)
@@ -140,6 +186,42 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     public void setConvexRadius(float radius) {
         long settingsVa = va();
         setConvexRadius(settingsVa, radius);
+    }
+
+    /**
+     * Relocate the first vertex. (native attribute: mV1)
+     *
+     * @param x the desired X coordinate
+     * @param y the desired Y coordinate
+     * @param z the desired Z coordinate
+     */
+    public void setV1(float x, float y, float z) {
+        long settingsVa = va();
+        setV1(settingsVa, x, y, z);
+    }
+
+    /**
+     * Relocate the 2nd vertex. (native attribute: mV2)
+     *
+     * @param x the desired X coordinate
+     * @param y the desired Y coordinate
+     * @param z the desired Z coordinate
+     */
+    public void setV2(float x, float y, float z) {
+        long settingsVa = va();
+        setV2(settingsVa, x, y, z);
+    }
+
+    /**
+     * Relocate the 3rd vertex. (native attribute: mV3)
+     *
+     * @param x the desired X coordinate
+     * @param y the desired Y coordinate
+     * @param z the desired Z coordinate
+     */
+    public void setV3(float x, float y, float z) {
+        long settingsVa = va();
+        setV3(settingsVa, x, y, z);
     }
     // *************************************************************************
     // native private methods
@@ -154,5 +236,20 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
 
     native private static float getConvexRadius(long settingsVa);
 
+    native private static void getV1(long settingsVa, FloatBuffer storeFloats);
+
+    native private static void getV2(long settingsVa, FloatBuffer storeFloats);
+
+    native private static void getV3(long settingsVa, FloatBuffer storeFloats);
+
     native private static void setConvexRadius(long settingsVa, float radius);
+
+    native private static void setV1(
+            long settingsVa, float x, float y, float z);
+
+    native private static void setV2(
+            long settingsVa, float x, float y, float z);
+
+    native private static void setV3(
+            long settingsVa, float x, float y, float z);
 }
