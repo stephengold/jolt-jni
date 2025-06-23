@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -29,7 +30,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Vertex extends JoltPhysicsObject {
+public class Vertex extends JoltPhysicsObject implements ConstVertex {
     // *************************************************************************
     // constructors
 
@@ -53,51 +54,6 @@ public class Vertex extends JoltPhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Return the inverse mass. The vertex is unaffected. (native attribute:
-     * mInvMass)
-     *
-     * @return the inverse of the mass (in 1/kilograms)
-     */
-    public float getInvMass() {
-        long vertexVa = va();
-        float result = getInvMass(vertexVa);
-
-        return result;
-    }
-
-    /**
-     * Copy the initial location. The vertex is unaffected. (native attribute:
-     * mPosition)
-     *
-     * @return a new location vector
-     */
-    public Float3 getPosition() {
-        long vertexVa = va();
-        float x = getPositionX(vertexVa);
-        float y = getPositionY(vertexVa);
-        float z = getPositionZ(vertexVa);
-        Float3 result = new Float3(x, y, z);
-
-        return result;
-    }
-
-    /**
-     * Copy the initial velocity. The vertex is unaffected. (native attribute:
-     * mVelocity)
-     *
-     * @return a new velocity vector (in meters per second)
-     */
-    public Float3 getVelocity() {
-        long vertexVa = va();
-        float x = getVelocityX(vertexVa);
-        float y = getVelocityY(vertexVa);
-        float z = getVelocityZ(vertexVa);
-        Float3 result = new Float3(x, y, z);
-
-        return result;
-    }
 
     /**
      * Alter the inverse mass. (native attribute: mInvMass)
@@ -208,6 +164,56 @@ public class Vertex extends JoltPhysicsObject {
         setVelocity(vertexVa, x, y, z);
 
         return this;
+    }
+    // *************************************************************************
+    // ConstVertex methods
+
+    /**
+     * Return the inverse mass. The vertex is unaffected. (native attribute:
+     * mInvMass)
+     *
+     * @return the inverse of the mass (in 1/kilograms)
+     */
+    @Override
+    public float getInvMass() {
+        long vertexVa = va();
+        float result = getInvMass(vertexVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the initial location. The vertex is unaffected. (native attribute:
+     * mPosition)
+     *
+     * @return a new location vector
+     */
+    @Override
+    public Float3 getPosition() {
+        long vertexVa = va();
+        float x = getPositionX(vertexVa);
+        float y = getPositionY(vertexVa);
+        float z = getPositionZ(vertexVa);
+        Float3 result = new Float3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the initial velocity. The vertex is unaffected. (native attribute:
+     * mVelocity)
+     *
+     * @return a new velocity vector (in meters per second)
+     */
+    @Override
+    public Float3 getVelocity() {
+        long vertexVa = va();
+        float x = getVelocityX(vertexVa);
+        float y = getVelocityY(vertexVa);
+        float z = getVelocityZ(vertexVa);
+        Float3 result = new Float3(x, y, z);
+
+        return result;
     }
     // *************************************************************************
     // native private methods

@@ -88,6 +88,7 @@ import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstVehicleControllerSettings;
+import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.std.StringStream;
 import com.github.stephengold.joltjni.streamutils.IdToGroupFilterMap;
@@ -998,9 +999,9 @@ public class Test012 {
      */
     private static void testSoftBodySharedSettings() {
         SoftBodySharedSettings sbss = new SoftBodySharedSettings();
-        Vertex v0 = new Vertex().setPosition(1f, 2f, 3f);
+        ConstVertex v0 = new Vertex().setPosition(1f, 2f, 3f);
         sbss.addVertex(v0);
-        Vertex v1 = new Vertex().setPosition(4f, 5f, 6f);
+        ConstVertex v1 = new Vertex().setPosition(4f, 5f, 6f);
         sbss.addVertex(v1);
         Edge edge = new Edge()
                 .setCompliance(7f)

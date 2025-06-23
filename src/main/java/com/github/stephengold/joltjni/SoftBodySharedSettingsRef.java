@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EBendType;
 import com.github.stephengold.joltjni.readonly.ConstFace;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
+import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
 import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
 import com.github.stephengold.joltjni.streamutils.SharedSettingsToIdMap;
@@ -116,9 +117,9 @@ final public class SoftBodySharedSettingsRef
      *
      * @param vertex the vertex to add (not null, unaffected)
      */
-    public void addVertex(Vertex vertex) {
+    public void addVertex(ConstVertex vertex) {
         long settingsVa = targetVa();
-        long vertexVa = vertex.va();
+        long vertexVa = vertex.targetVa();
         SoftBodySharedSettings.addVertex(settingsVa, vertexVa);
     }
 
