@@ -518,6 +518,41 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getPosi
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getPositionAndRotation
+ * Signature: (JILjava/nio/DoubleBuffer;Ljava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getPositionAndRotation
+  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jint bodyId,
+  jobject storeDoubles, jobject storeFloats) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    jdouble * const pDoubles
+            = (jdouble *) pEnv->GetDirectBufferAddress(storeDoubles);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeDoubles);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityDoubles >= 3);
+    jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 4);
+    RVec3 location;
+    Quat orientation;
+    pInterface->GetPositionAndRotation(id, location, orientation);
+    pDoubles[0] = location.GetX();
+    pDoubles[1] = location.GetY();
+    pDoubles[2] = location.GetZ();
+    pFloats[0] = orientation.GetX();
+    pFloats[1] = orientation.GetY();
+    pFloats[2] = orientation.GetZ();
+    pFloats[3] = orientation.GetW();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    getRestitution
  * Signature: (JI)F
  */
