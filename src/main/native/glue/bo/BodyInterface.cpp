@@ -340,14 +340,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getBody
     return (jint) result;
 }
 
-inline static const RVec3 getCenterOfMassPosition(jlong bodyInterfaceVa, jint bodyId) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID id(bodyId);
-    const RVec3 result = pInterface->GetCenterOfMassPosition(id);
-    return result;
-}
-
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    getCenterOfMassPosition
@@ -414,14 +406,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getGr
     return result;
 }
 
-inline static const Vec3 getLinearVelocity(jlong bodyInterfaceVa, jint bodyId) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID id(bodyId);
-    const Vec3 result = pInterface->GetLinearVelocity(id);
-    return result;
-}
-
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    getLinearVelocity
@@ -484,14 +468,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getObje
     const BodyID id(bodyId);
     const ObjectLayer result = pInterface->GetObjectLayer(id);
     return (jint) result;
-}
-
-inline static const RVec3 getPosition(jlong bodyInterfaceVa, jint bodyId) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID id(bodyId);
-    const RVec3 result = pInterface->GetPosition(id);
-    return result;
 }
 
 /*
@@ -562,14 +538,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getRe
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
     const float result = pInterface->GetRestitution(id);
-    return result;
-}
-
-inline static const Quat getRotation(jlong bodyInterfaceVa, jint bodyId) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID id(bodyId);
-    const Quat result = pInterface->GetRotation(id);
     return result;
 }
 
