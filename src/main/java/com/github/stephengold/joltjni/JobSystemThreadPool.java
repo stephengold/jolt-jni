@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,10 +33,8 @@ public class JobSystemThreadPool extends JobSystemWithBarrier {
     /**
      * Instantiate a job system with the specified limits.
      *
-     * @param maxJobs the maximum number of jobs that can be allocated at one
-     * time (&gt;1)
-     * @param maxBarriers the maximum number of barriers that can be allocated
-     * at one time
+     * @param maxJobs the maximum number of jobs the system can allocate (&gt;1)
+     * @param maxBarriers the maximum number of barriers the system can allocate
      *
      * @see com.github.stephengold.joltjni.Jolt#cMaxPhysicsBarriers
      * @see com.github.stephengold.joltjni.Jolt#cMaxPhysicsJobs
@@ -48,10 +46,8 @@ public class JobSystemThreadPool extends JobSystemWithBarrier {
     /**
      * Instantiate a job system with the specified limits.
      *
-     * @param maxJobs the maximum number of jobs that can be allocated at one
-     * time
-     * @param maxBarriers the maximum number of barriers that can be allocated
-     * at one time
+     * @param maxJobs the maximum number of jobs the system can allocate (&gt;1)
+     * @param maxBarriers the maximum number of barriers the system can allocate
      * @param numThreads the number of worker threads to start (&ge;0) or -1 to
      * autodetect
      */

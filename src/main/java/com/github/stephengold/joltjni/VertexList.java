@@ -188,7 +188,7 @@ final public class VertexList {
     }
 
     /**
-     * Access a direct Buffer containing all vertices in the list, in order. No
+     * Access a direct buffer containing all vertices in the list, in order. No
      * further {@code resize()} or {@code set()} is allowed.
      *
      * @return the pre-existing Buffer, flipped but possibly not rewound

@@ -146,6 +146,8 @@ abstract public class ShapeSettings
         }
         return result;
     }
+    // *************************************************************************
+    // new protected methods
 
     /**
      * Instantiate a {@code ShapeSettings} given its virtual address.
@@ -218,8 +220,6 @@ abstract public class ShapeSettings
         }
         return result;
     }
-    // *************************************************************************
-    // new protected methods
 
     /**
      * Alter the user data, which holds the {@code EShapeSubType} ordinal.
