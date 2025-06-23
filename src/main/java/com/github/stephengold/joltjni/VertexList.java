@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
 /**
@@ -141,17 +142,39 @@ final public class VertexList {
      * Store the specified vertex location at the specified index.
      *
      * @param vertexIndex an index in the list (&ge;0, &lt;size)
-     * @param location the data to store (not null, unaffected)
+     * @param x the X-coordinate to store
+     * @param y the Y-coordinate to store
+     * @param z the Z-coordinate to store
      */
-    public void set(int vertexIndex, Float3 location) {
+    public void set(int vertexIndex, float x, float y, float z) {
         if (!allowModification) {
             throw new IllegalStateException(
                     "Modification is no longer allowed.");
         }
 
-        buffer.put(numAxes * vertexIndex, location.x);
-        buffer.put(numAxes * vertexIndex + 1, location.y);
-        buffer.put(numAxes * vertexIndex + 2, location.z);
+        buffer.put(numAxes * vertexIndex, x);
+        buffer.put(numAxes * vertexIndex + 1, y);
+        buffer.put(numAxes * vertexIndex + 2, z);
+    }
+
+    /**
+     * Store the specified vertex location at the specified index.
+     *
+     * @param vertexIndex an index in the list (&ge;0, &lt;size)
+     * @param location the data to store (not null, unaffected)
+     */
+    public void set(int vertexIndex, Float3 location) {
+        set(vertexIndex, location.x, location.y, location.z);
+    }
+
+    /**
+     * Store the specified vertex location at the specified index.
+     *
+     * @param vertexIndex an index in the list (&ge;0, &lt;size)
+     * @param location the data to store (not null, unaffected)
+     */
+    public void set(int vertexIndex, Vec3Arg location) {
+        set(vertexIndex, location.getX(), location.getY(), location.getZ());
     }
 
     /**
