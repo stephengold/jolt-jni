@@ -269,7 +269,37 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
-     * Count the vertices. The settings are unaffected. (native attribute:
+     * Count the bend-twist constraints. The settings are unaffected. (native
+     * member: mRodBendTwistConstraint)
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countRodBendTwistConstraints() {
+        long settingsVa = targetVa();
+        int result = SoftBodySharedSettings.countRodBendTwistConstraints(
+                settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the discrete Cosserat rods. The settings are unaffected. (native
+     * member: mRodStretchShearConstraint)
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countRodStretchShearConstraints() {
+        long settingsVa = targetVa();
+        int result = SoftBodySharedSettings.countRodStretchShearConstraints(
+                settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the vertices. The settings are unaffected. (native member:
      * mVertices)
      *
      * @return the count (&ge;0)
@@ -292,6 +322,28 @@ final public class SoftBodySharedSettingsRef
     public int countVolumeConstraints() {
         long settingsVa = targetVa();
         int result = SoftBodySharedSettings.countVolumeConstraints(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Enumerate all Cosserat rods in the settings. (native member:
+     * mRodStretchShearConstraints)
+     *
+     * @return a new array of new JVM objects with the pre-existing native
+     * objects assigned
+     */
+    @Override
+    public RodStretchShear[] getRodStretchShearConstraints() {
+        long settingsVa = targetVa();
+        int numRods = SoftBodySharedSettings.countRodBendTwistConstraints(
+                settingsVa);
+        RodStretchShear[] result = new RodStretchShear[numRods];
+        for (int index = 0; index < numRods; ++index) {
+            long rodVa = SoftBodySharedSettings.getRodStretchShearConstraint(
+                    settingsVa, index);
+            result[index] = new RodStretchShear(this, rodVa);
+        }
 
         return result;
     }
