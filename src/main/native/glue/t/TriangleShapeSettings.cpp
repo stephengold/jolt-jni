@@ -98,7 +98,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings
     const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
     JPH_ASSERT(!pEnv->ExceptionCheck());
     JPH_ASSERT(capacityFloats >= 3);
-    const Vec3 result = pSettings->mV1;
+    const Vec3& result = pSettings->mV1;
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
