@@ -21,13 +21,15 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVolume;
+
 /**
  * Join 4 soft-body vertices into a tetrahedron with a preferred volume. (native
  * type: {@code SoftBodySharedSettings::Volume})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Volume extends JoltPhysicsObject {
+public class Volume extends JoltPhysicsObject implements ConstVolume {
     // *************************************************************************
     // constructors
 
@@ -40,6 +42,40 @@ public class Volume extends JoltPhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Alter the stiffness of the volume. (native attribute: mCompliance)
+     *
+     * @param compliance the inverse of the desired stiffness (default=0)
+     */
+    public void setCompliance(float compliance) {
+        long volumeVa = va();
+        setCompliance(volumeVa, compliance);
+    }
+
+    /**
+     * Alter the rest size of the volume. (native attribute: mSixRestVolume)
+     *
+     * @param sixVolume 6 times the desired rest volume (in cubic meters)
+     */
+    public void setSixRestVolume(float sixVolume) {
+        long volumeVa = va();
+        setSixRestVolume(volumeVa, sixVolume);
+    }
+
+    /**
+     * Assign the specified mesh vertex to the volume. (native attribute:
+     * mVertex)
+     *
+     * @param indexInVolume which corner of the tetrahedron (0 or 1 or 2 or 3)
+     * @param indexInMesh the index of the vertex to assign (&ge;0)
+     */
+    public void setVertex(int indexInVolume, int indexInMesh) {
+        long volumeVa = va();
+        setVertex(volumeVa, indexInVolume, indexInMesh);
+    }
+    // *************************************************************************
+    // ConstVolume methods
 
     /**
      * Return the inverse of the volume's stiffness. The volume is unaffected.
@@ -79,38 +115,6 @@ public class Volume extends JoltPhysicsObject {
         int result = getVertex(volumeVa, indexInVolume);
 
         return result;
-    }
-
-    /**
-     * Alter the stiffness of the volume. (native attribute: mCompliance)
-     *
-     * @param compliance the inverse of the desired stiffness (default=0)
-     */
-    public void setCompliance(float compliance) {
-        long volumeVa = va();
-        setCompliance(volumeVa, compliance);
-    }
-
-    /**
-     * Alter the rest size of the volume. (native attribute: mSixRestVolume)
-     *
-     * @param sixVolume 6 times the desired rest volume (in cubic meters)
-     */
-    public void setSixRestVolume(float sixVolume) {
-        long volumeVa = va();
-        setSixRestVolume(volumeVa, sixVolume);
-    }
-
-    /**
-     * Assign the specified mesh vertex to the volume. (native attribute:
-     * mVertex)
-     *
-     * @param indexInVolume which corner of the tetrahedron (0 or 1 or 2 or 3)
-     * @param indexInMesh the index of the vertex to assign (&ge;0)
-     */
-    public void setVertex(int indexInVolume, int indexInMesh) {
-        long volumeVa = va();
-        setVertex(volumeVa, indexInVolume, indexInMesh);
     }
     // *************************************************************************
     // native private methods

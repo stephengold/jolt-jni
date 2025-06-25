@@ -29,6 +29,7 @@ import com.github.stephengold.joltjni.readonly.ConstRodStretchShear;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
+import com.github.stephengold.joltjni.readonly.ConstVolume;
 import com.github.stephengold.joltjni.streamutils.IdToMaterialMap;
 import com.github.stephengold.joltjni.streamutils.IdToSharedSettingsMap;
 import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
@@ -164,9 +165,9 @@ public class SoftBodySharedSettings
      *
      * @param volume the constraint to add (not null, unaffected)
      */
-    public void addVolumeConstraint(Volume volume) {
+    public void addVolumeConstraint(ConstVolume volume) {
         long settingsVa = va();
-        long volumeVa = volume.va();
+        long volumeVa = volume.targetVa();
         addVolumeConstraint(settingsVa, volumeVa);
     }
 
