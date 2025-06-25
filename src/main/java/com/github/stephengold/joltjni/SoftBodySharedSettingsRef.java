@@ -99,8 +99,8 @@ final public class SoftBodySharedSettingsRef
      */
     public void addInvBindMatrix(InvBind invBind) {
         long settingsVa = targetVa();
-        long bindVa = invBind.va();
-        SoftBodySharedSettings.addInvBindMatrix(settingsVa, bindVa);
+        long invBindVa = invBind.va();
+        SoftBodySharedSettings.addInvBindMatrix(settingsVa, invBindVa);
     }
 
     /**
