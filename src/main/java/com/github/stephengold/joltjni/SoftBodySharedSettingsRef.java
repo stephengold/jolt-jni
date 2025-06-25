@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EBendType;
+import com.github.stephengold.joltjni.readonly.ConstEdge;
 import com.github.stephengold.joltjni.readonly.ConstFace;
 import com.github.stephengold.joltjni.readonly.ConstRodBendTwist;
 import com.github.stephengold.joltjni.readonly.ConstRodStretchShear;
@@ -73,9 +74,9 @@ final public class SoftBodySharedSettingsRef
      *
      * @param edge the edge to add (not null, unaffected)
      */
-    public void addEdgeConstraint(Edge edge) {
+    public void addEdgeConstraint(ConstEdge edge) {
         long settingsVa = targetVa();
-        long edgeVa = edge.va();
+        long edgeVa = edge.targetVa();
         SoftBodySharedSettings.addEdgeConstraint(settingsVa, edgeVa);
     }
 
