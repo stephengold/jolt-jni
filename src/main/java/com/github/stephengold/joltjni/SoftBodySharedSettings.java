@@ -379,7 +379,35 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Count the vertices. The settings are unaffected. (native attribute:
+     * Count the bend-twist constraints. The settings are unaffected. (native
+     * member: mRodBendTwistConstraint)
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countRodBendTwistConstraints() {
+        long settingsVa = va();
+        int result = countRodBendTwistConstraints(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the discrete Cosserat rods. The settings are unaffected. (native
+     * member: mRodStretchShearConstraint)
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countRodStretchShearConstraints() {
+        long settingsVa = va();
+        int result = countRodStretchShearConstraints(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Count the vertices. The settings are unaffected. (native member:
      * mVertices)
      *
      * @return the count (&ge;0)
@@ -402,6 +430,26 @@ public class SoftBodySharedSettings
     public int countVolumeConstraints() {
         long settingsVa = va();
         int result = countVolumeConstraints(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Enumerate all Cosserat rods in the settings. (native member:
+     * mRodStretchShearConstraints)
+     *
+     * @return a new array of new JVM objects with the pre-existing native
+     * objects assigned
+     */
+    @Override
+    public RodStretchShear[] getRodStretchShearConstraints() {
+        long settingsVa = va();
+        int numRods = countRodBendTwistConstraints(settingsVa);
+        RodStretchShear[] result = new RodStretchShear[numRods];
+        for (int index = 0; index < numRods; ++index) {
+            long edgeVa = getRodStretchShearConstraint(settingsVa, index);
+            result[index] = new RodStretchShear(this, edgeVa);
+        }
 
         return result;
     }
@@ -536,6 +584,10 @@ public class SoftBodySharedSettings
 
     native static int countPinnedVertices(long settingsVa);
 
+    native static int countRodBendTwistConstraints(long settingsVa);
+
+    native static int countRodStretchShearConstraints(long settingsVa);
+
     native static int countVertices(long settingsVa);
 
     native static int countVolumeConstraints(long settingsVa);
@@ -550,6 +602,9 @@ public class SoftBodySharedSettings
     native private static long getEdgeConstraint(long settingsVa, int index);
 
     native private static int getRefCount(long settingsVa);
+
+    native static long getRodStretchShearConstraint(
+            long settingsVa, int index);
 
     native private static long getVertex(long settingsVa, int index);
 

@@ -55,6 +55,20 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
     int countPinnedVertices();
 
     /**
+     * Count the bend-twist constraints. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    int countRodBendTwistConstraints();
+
+    /**
+     * Count the discrete Cosserat rods. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    int countRodStretchShearConstraints();
+
+    /**
      * Count the vertices. The settings are unaffected.
      *
      * @return the count (&ge;0)
@@ -67,6 +81,15 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
      * @return the count (&ge;0)
      */
     int countVolumeConstraints();
+
+    /**
+     * Enumerate all Cosserat rods in the settings. (native member:
+     * mRodStretchShearConstraints)
+     *
+     * @return a new array of new JVM objects with the pre-existing native
+     * objects assigned
+     */
+    ConstRodStretchShear[] getRodStretchShearConstraints();
 
     /**
      * Write the vertex indices of all edges to the specified buffer and advance

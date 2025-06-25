@@ -210,6 +210,34 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    countRodBendTwistConstraints
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_countRodBendTwistConstraints
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    const Array<SoftBodySharedSettings::RodBendTwist>::size_type result
+            = pSettings->mRodBendTwistConstraints.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    countRodStretchShearConstraints
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_countRodStretchShearConstraints
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    const Array<SoftBodySharedSettings::RodStretchShear>::size_type result
+            = pSettings->mRodStretchShearConstraints.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    countVertices
  * Signature: (J)I
  */
@@ -308,6 +336,20 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     const uint32 result = pSettings->GetRefCount();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    getRodStretchShearConstraint
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_getRodStretchShearConstraint
+  (JNIEnv *, jclass, jlong settingsVa, jint index) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    SoftBodySharedSettings::RodStretchShear& result
+            = pSettings->mRodStretchShearConstraints.at(index);
+    return reinterpret_cast<jlong> (&result);
 }
 
 /*
