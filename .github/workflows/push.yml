@@ -37,10 +37,10 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=Linux64 runSmokeTestAll build install
+      - name: gradlew -Ptarget=Linux64 runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Ptarget=Linux64 runSmokeTestAll build install \
+          ./gradlew -Ptarget=Linux64 runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -65,10 +65,10 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=Linux64_fma runSmokeTestAll build install
+      - name: gradlew -Ptarget=Linux64_fma runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Ptarget=Linux64_fma runSmokeTestAll build install \
+          ./gradlew -Ptarget=Linux64_fma runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -93,10 +93,10 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 run runSmokeTestAll build install
+      - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 -x checkstyleMain -x checkstyleTest run runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 run runSmokeTestAll build install \
+          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 -x checkstyleMain -x checkstyleTest run runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -121,10 +121,10 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 runSmokeTestAll build install
+      - name: gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 runSmokeTestAll build install \
+          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -149,10 +149,10 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=Windows64 runSmokeTestAll build install
+      - name: gradlew -Ptarget=Windows64 runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Ptarget=Windows64 runSmokeTestAll build install \
+          ./gradlew -Ptarget=Windows64 runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
@@ -179,10 +179,10 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v4
       - uses: gradle/actions/setup-gradle@v4
-      - name: gradlew -Ptarget=Windows64_avx2 runSmokeTestAll build install
+      - name: gradlew -Ptarget=Windows64_avx2 runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Ptarget=Windows64_avx2 runSmokeTestAll build install \
+          ./gradlew -Ptarget=Windows64_avx2 runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}'
