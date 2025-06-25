@@ -83,6 +83,34 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    addRodBendTwistConstraint
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_addRodBendTwistConstraint
+  (JNIEnv *, jclass, jlong settingsVa, jlong constraintVa) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    const SoftBodySharedSettings::RodBendTwist * const pConstraints
+            = reinterpret_cast<SoftBodySharedSettings::RodBendTwist *> (constraintVa);
+    pSettings->mRodBendTwistConstraints.push_back(*pConstraints);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    addRodStretchShearConstraint
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_addRodStretchShearConstraint
+  (JNIEnv *, jclass, jlong settingsVa, jlong rodVa) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    const SoftBodySharedSettings::RodStretchShear * const pRod
+            = reinterpret_cast<SoftBodySharedSettings::RodStretchShear *> (rodVa);
+    pSettings->mRodStretchShearConstraints.push_back(*pRod);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    addSkinnedConstraint
  * Signature: (JJ)V
  */
@@ -133,6 +161,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
     SoftBodySharedSettings * const pSettings
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     pSettings->CalculateEdgeLengths();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    calculateRodProperties
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_calculateRodProperties
+  (JNIEnv *, jclass, jlong settingsVa) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    pSettings->CalculateRodProperties();
 }
 
 /*
@@ -336,6 +376,20 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
             = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
     const uint32 result = pSettings->GetRefCount();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    getRodBendTwistConstraint
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_getRodBendTwistConstraint
+  (JNIEnv *, jclass, jlong settingsVa, jint index) {
+    SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    SoftBodySharedSettings::RodBendTwist& result
+            = pSettings->mRodBendTwistConstraints.at(index);
+    return reinterpret_cast<jlong> (&result);
 }
 
 /*

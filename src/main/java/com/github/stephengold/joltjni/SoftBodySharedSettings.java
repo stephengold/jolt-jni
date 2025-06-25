@@ -24,6 +24,8 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EBendType;
 import com.github.stephengold.joltjni.readonly.ConstEdge;
 import com.github.stephengold.joltjni.readonly.ConstFace;
+import com.github.stephengold.joltjni.readonly.ConstRodBendTwist;
+import com.github.stephengold.joltjni.readonly.ConstRodStretchShear;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
@@ -111,7 +113,31 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Append the specified skinning constraint. (native property:
+     * Append the specified bend-twist constraint. (native member:
+     * mRodBendTwistConstraints)
+     *
+     * @param constraint the constraint to add (not null)
+     */
+    public void addRodBendTwistConstraint(ConstRodBendTwist constraint) {
+        long settingsVa = va();
+        long constraintVa = constraint.targetVa();
+        addRodBendTwistConstraint(settingsVa, constraintVa);
+    }
+
+    /**
+     * Append the specified discrete Cosserat rod. (native member:
+     * mRodStretchShearConstraints)
+     *
+     * @param rod the rod to add (not null)
+     */
+    public void addRodStretchShearConstraint(ConstRodStretchShear rod) {
+        long settingsVa = va();
+        long rodVa = rod.targetVa();
+        addRodStretchShearConstraint(settingsVa, rodVa);
+    }
+
+    /**
+     * Append the specified skinning constraint. (native member:
      * mSkinnedConstraints)
      *
      * @param skinned the constraint to add (not null)
@@ -150,6 +176,14 @@ public class SoftBodySharedSettings
     public void calculateEdgeLengths() {
         long settingsVa = va();
         calculateEdgeLengths(settingsVa);
+    }
+
+    /**
+     * Calculate the information needed to simulate Cosserat rods.
+     */
+    public void calculateRodProperties() {
+        long settingsVa = va();
+        calculateRodProperties(settingsVa);
     }
 
     /**
@@ -230,6 +264,25 @@ public class SoftBodySharedSettings
         for (int index = 0; index < numEdges; ++index) {
             long edgeVa = getEdgeConstraint(settingsVa, index);
             result[index] = new Edge(this, edgeVa);
+        }
+
+        return result;
+    }
+
+    /**
+     * Enumerate all bend-twist constraints in the settings. (native member:
+     * mRodBendTwistConstraints)
+     *
+     * @return a new array of new JVM objects with the pre-existing native
+     * objects assigned
+     */
+    public RodBendTwist[] getRodBendTwistConstraints() {
+        long settingsVa = va();
+        int numConstraints = countRodBendTwistConstraints(settingsVa);
+        RodBendTwist[] result = new RodBendTwist[numConstraints];
+        for (int index = 0; index < numConstraints; ++index) {
+            long edgeVa = getRodBendTwistConstraint(settingsVa, index);
+            result[index] = new RodBendTwist(this, edgeVa);
         }
 
         return result;
@@ -566,6 +619,12 @@ public class SoftBodySharedSettings
 
     native static void addInvBindMatrix(long settingsVa, long invBindVa);
 
+    native static void addRodBendTwistConstraint(
+            long settingsVa, long constraintVa);
+
+    native static void addRodStretchShearConstraint(
+            long settingsVa, long rodVa);
+
     native static void addSkinnedConstraint(long settingsVa, long skinnedVa);
 
     native static void addVertex(long settingsVa, long vertexVa);
@@ -573,6 +632,8 @@ public class SoftBodySharedSettings
     native static void addVolumeConstraint(long settingsVa, long volumeVa);
 
     native static void calculateEdgeLengths(long settingsVa);
+
+    native static void calculateRodProperties(long settingsVa);
 
     native static void calculateSkinnedConstraintNormals(long settingsVa);
 
@@ -602,6 +663,9 @@ public class SoftBodySharedSettings
     native private static long getEdgeConstraint(long settingsVa, int index);
 
     native private static int getRefCount(long settingsVa);
+
+    native private static long getRodBendTwistConstraint(
+            long settingsVa, int index);
 
     native static long getRodStretchShearConstraint(
             long settingsVa, int index);
