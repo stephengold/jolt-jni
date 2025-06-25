@@ -99,7 +99,7 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Append the specified inverse-bind matrix. (native property:
+     * Append the specified inverse-bind matrix. (native member:
      * mInvBindMatrices)
      *
      * @param invBind the matrix to add (not null)
@@ -123,7 +123,7 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Add the specified vertex. (native attribute: mVertices)
+     * Add the specified vertex. (native member: mVertices)
      *
      * @param vertex the vertex to add (not null, unaffected)
      */
@@ -217,7 +217,7 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Enumerate all edge constraints in the settings. (native attribute:
+     * Enumerate all edge constraints in the settings. (native member:
      * mEdgeConstraints)
      *
      * @return a new array of new JVM objects with the pre-existing native
@@ -250,7 +250,7 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Enumerate all vertices in the settings. (native attribute: mVertices)
+     * Enumerate all vertices in the settings. (native member: mVertices)
      *
      * @return a new array of new JVM objects with pre-existing native objects
      * assigned
@@ -304,7 +304,7 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Replace the materials. (native attribute: mMaterials)
+     * Replace the materials. (native member: mMaterials)
      *
      * @param material the desired material, or {@code null}
      */
@@ -339,8 +339,8 @@ public class SoftBodySharedSettings
     // ConstSoftBodySharedSettings methods
 
     /**
-     * Count the edge constraints. The settings are unaffected. (native
-     * attribute: mEdgeConstraints)
+     * Count the edge constraints. The settings are unaffected. (native member:
+     * mEdgeConstraints)
      *
      * @return the count (&ge;0)
      */
@@ -353,7 +353,7 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Count the faces. The settings are unaffected. (native attribute: mFaces)
+     * Count the faces. The settings are unaffected. (native member: mFaces)
      *
      * @return the count (&ge;0)
      */
@@ -394,7 +394,7 @@ public class SoftBodySharedSettings
 
     /**
      * Count the volume constraints. The settings are unaffected. (native
-     * attribute: mVolumeConstraints)
+     * member: mVolumeConstraints)
      *
      * @return the count (&ge;0)
      */
@@ -453,7 +453,7 @@ public class SoftBodySharedSettings
      * Write the state of this object to the specified stream. The settings are
      * unaffected.
      *
-     * @param stream where to write objects (not null)
+     * @param stream where to write objects (not {@code null})
      * @param settingsMap track multiple uses of shared settings (not
      * {@code null})
      * @param materialMap track multiple uses of physics materials (not

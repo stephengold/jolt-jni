@@ -129,8 +129,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_get
     float volume;
     pBuilder->GetCenterOfMassAndVolume(com, volume);
     jboolean isCopy;
-    jfloat * const pFloats
-            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    jfloat * const pFloats = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
     pFloats[0] = com.GetX();
     pFloats[1] = com.GetY();
     pFloats[2] = com.GetZ();
