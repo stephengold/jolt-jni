@@ -23,6 +23,8 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EBendType;
 import com.github.stephengold.joltjni.readonly.ConstFace;
+import com.github.stephengold.joltjni.readonly.ConstRodBendTwist;
+import com.github.stephengold.joltjni.readonly.ConstRodStretchShear;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.ConstVertexAttributes;
@@ -101,7 +103,32 @@ final public class SoftBodySharedSettingsRef
     }
 
     /**
-     * Append the specified skinning constraint. (native property:
+     * Append the specified bend-twist constraint. (native member:
+     * mRodBendTwistConstraints)
+     *
+     * @param constraint the constraint to add (not null)
+     */
+    public void addRodBendTwistConstraint(ConstRodBendTwist constraint) {
+        long settingsVa = targetVa();
+        long constraintVa = constraint.targetVa();
+        SoftBodySharedSettings.addRodBendTwistConstraint(
+                settingsVa, constraintVa);
+    }
+
+    /**
+     * Append the specified discrete Cosserat rod. (native member:
+     * mRodStretchShearConstraints)
+     *
+     * @param rod the rod to add (not null)
+     */
+    public void addRodStretchShearConstraint(ConstRodStretchShear rod) {
+        long settingsVa = targetVa();
+        long rodVa = rod.targetVa();
+        SoftBodySharedSettings.addRodStretchShearConstraint(settingsVa, rodVa);
+    }
+
+    /**
+     * Append the specified skinning constraint. (native member:
      * mSkinnedConstraints)
      *
      * @param skinned the constraint to add (not null)
@@ -140,6 +167,14 @@ final public class SoftBodySharedSettingsRef
     public void calculateEdgeLengths() {
         long settingsVa = targetVa();
         SoftBodySharedSettings.calculateEdgeLengths(settingsVa);
+    }
+
+    /**
+     * Calculate the information needed to simulate Cosserat rods.
+     */
+    public void calculateRodProperties() {
+        long settingsVa = targetVa();
+        SoftBodySharedSettings.calculateRodProperties(settingsVa);
     }
 
     /**
