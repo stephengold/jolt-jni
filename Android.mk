@@ -223,6 +223,7 @@ $(N)/glue/r/RayCast.cpp \
 $(N)/glue/r/RayCastResult.cpp \
 $(N)/glue/r/RayCastSettings.cpp \
 $(N)/glue/r/RMat44.cpp \
+$(N)/glue/r/RodStretchShear.cpp \
 $(N)/glue/r/RotatedTranslatedShape.cpp \
 $(N)/glue/r/RotatedTranslatedShapeSettings.cpp \
 $(N)/glue/r/RRayCast.cpp \
