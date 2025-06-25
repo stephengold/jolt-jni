@@ -75,7 +75,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyVertex_getCol
     JPH_ASSERT(!pEnv->ExceptionCheck());
     JPH_ASSERT(capacityFloats >= 4);
     const Plane& result = pVertex->mCollisionPlane;
-    const Vec3& normal = result.GetNormal();
+    const Vec3 normal = result.GetNormal();
     pFloats[0] = normal.GetX();
     pFloats[1] = normal.GetY();
     pFloats[2] = normal.GetZ();
