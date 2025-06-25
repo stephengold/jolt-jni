@@ -339,6 +339,7 @@ final public class SmokeTestAll {
     private static void smokeTestSoftBody() {
         smokeTest(new SoftBodyBendConstraintTest());
         smokeTest(new SoftBodyContactListenerTest());
+        smokeTest(new SoftBodyCosseratRodConstraintTest());
         smokeTest(new SoftBodyCustomUpdateTest());
         smokeTest(new SoftBodyForceTest());
         smokeTest(new SoftBodyFrictionTest());
