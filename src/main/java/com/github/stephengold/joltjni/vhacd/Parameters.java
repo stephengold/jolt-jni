@@ -46,6 +46,17 @@ public class Parameters extends JoltPhysicsObject {
         long parametersVa = createDefault();
         setVirtualAddress(parametersVa, () -> free(parametersVa));
     }
+
+    /**
+     * Instantiate a copy of the specified tuning parameters.
+     *
+     * @param original the parameters to copy (not {@code null}, unaffected)
+     */
+    public Parameters(Parameters original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
     // *************************************************************************
     // new methods exposed
 
@@ -437,6 +448,8 @@ public class Parameters extends JoltPhysicsObject {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 

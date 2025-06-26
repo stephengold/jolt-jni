@@ -32,6 +32,14 @@ using namespace VHACD;
 
 /*
  * Class:     com_github_stephengold_joltjni_vhacd_Parameters
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_vhacd_Parameters_createCopy
+  BODYOF_CREATE_COPY(IVHACD::Parameters)
+
+/*
+ * Class:     com_github_stephengold_joltjni_vhacd_Parameters
  * Method:    createDefault
  * Signature: ()J
  */
