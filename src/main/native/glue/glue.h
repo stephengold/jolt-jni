@@ -79,7 +79,7 @@ extern bool gTraceAllocations;
 }
 /*
  * Pre-processor macro to implement 5 methods associated with the
- * com.github.stephengold.templace.Ref class:
+ * com.github.stephengold.template.Ref class:
  */
 #define IMPLEMENT_REF(className, copyName, createName, freeName, getPtrName, toRefCName) \
   JNIEXPORT jlong JNICALL copyName BODYOF_CREATE_COPY(Ref<className>) \
