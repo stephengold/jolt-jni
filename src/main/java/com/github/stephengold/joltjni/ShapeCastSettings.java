@@ -37,7 +37,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
      */
     public ShapeCastSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddressAsOwner(settingsVa);
     }
 
     /**
@@ -48,7 +48,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
     public ShapeCastSettings(ShapeCastSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa, true);
+        setVirtualAddressAsOwner(copyVa);
     }
     // *************************************************************************
     // new methods exposed

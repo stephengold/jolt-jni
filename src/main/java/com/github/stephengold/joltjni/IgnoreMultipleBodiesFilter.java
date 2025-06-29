@@ -36,7 +36,7 @@ public class IgnoreMultipleBodiesFilter extends BodyFilter {
     public IgnoreMultipleBodiesFilter() {
         super(true);
         long filterVa = createDefault();
-        setVirtualAddress(filterVa, true);
+        setVirtualAddressAsOwner(filterVa);
     }
     // *************************************************************************
     // new methods exposed

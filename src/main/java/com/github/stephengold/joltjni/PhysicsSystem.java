@@ -95,7 +95,7 @@ public class PhysicsSystem extends NonCopyable {
      */
     public PhysicsSystem() {
         long systemVa = createPhysicsSystem();
-        setVirtualAddress(systemVa, true);
+        setVirtualAddressAsOwner(systemVa);
         va2ps.put(systemVa, this);
 
         long lockingVa = getBodyInterface(systemVa);
@@ -827,15 +827,14 @@ public class PhysicsSystem extends NonCopyable {
     // protected methods
 
     /**
-     * Assign a native object, assuming there's none already assigned.
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as the owner.
      *
      * @param systemVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    final void setVirtualAddress(long systemVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(systemVa) : null;
+    final void setVirtualAddressAsOwner(long systemVa) {
+        Runnable freeingAction = () -> free(systemVa);
         setVirtualAddress(systemVa, freeingAction);
     }
     // *************************************************************************

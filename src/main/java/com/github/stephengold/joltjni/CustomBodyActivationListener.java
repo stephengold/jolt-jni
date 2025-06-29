@@ -36,7 +36,7 @@ abstract public class CustomBodyActivationListener
      */
     public CustomBodyActivationListener() {
         long listenerVa = createCustomBodyActivationListener();
-        setVirtualAddress(listenerVa, true);
+        setVirtualAddressAsOwner(listenerVa);
     }
     // *************************************************************************
     // new methods exposed

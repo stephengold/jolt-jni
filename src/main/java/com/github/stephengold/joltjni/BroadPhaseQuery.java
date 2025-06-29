@@ -222,15 +222,14 @@ public class BroadPhaseQuery extends NonCopyable {
     // protected methods
 
     /**
-     * Assign a native object, assuming there's none already assigned.
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as the owner.
      *
      * @param queryVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    final void setVirtualAddress(long queryVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(queryVa) : null;
+    final void setVirtualAddressAsOwner(long queryVa) {
+        Runnable freeingAction = () -> free(queryVa);
         setVirtualAddress(queryVa, freeingAction);
     }
     // *************************************************************************

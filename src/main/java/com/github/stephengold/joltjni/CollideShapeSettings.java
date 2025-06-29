@@ -37,7 +37,7 @@ public class CollideShapeSettings extends CollideSettingsBase {
      */
     public CollideShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa, true);
+        setVirtualAddressAsOwner(settingsVa);
     }
 
     /**

@@ -39,7 +39,7 @@ public class AllHitCastShapeCollector extends CastShapeCollector {
      */
     public AllHitCastShapeCollector() {
         long collectorVa = createDefault();
-        setVirtualAddress(collectorVa, true);
+        setVirtualAddressAsOwner(collectorVa);
     }
     // *************************************************************************
     // new methods exposed

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ public class SpecifiedObjectLayerFilter extends ObjectLayerFilter {
     public SpecifiedObjectLayerFilter(int layerIndex) {
         super(true);
         long filterVa = createSpecifiedObjectLayerFilter(layerIndex);
-        setVirtualAddress(filterVa, true);
+        setVirtualAddressAsOwner(filterVa);
     }
     // *************************************************************************
     // native private methods

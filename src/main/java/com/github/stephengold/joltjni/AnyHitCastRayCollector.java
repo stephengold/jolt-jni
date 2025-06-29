@@ -36,7 +36,7 @@ public class AnyHitCastRayCollector extends CastRayCollector {
      */
     public AnyHitCastRayCollector() {
         long collectorVa = createDefault();
-        setVirtualAddress(collectorVa, true);
+        setVirtualAddressAsOwner(collectorVa);
     }
     // *************************************************************************
     // new methods exposed

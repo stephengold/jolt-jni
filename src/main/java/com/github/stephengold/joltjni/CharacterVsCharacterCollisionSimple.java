@@ -47,7 +47,7 @@ public class CharacterVsCharacterCollisionSimple
      */
     public CharacterVsCharacterCollisionSimple() {
         long interfaceVa = createDefault();
-        setVirtualAddress(interfaceVa, true);
+        setVirtualAddressAsOwner(interfaceVa);
     }
     // *************************************************************************
     // new methods exposed

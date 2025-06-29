@@ -1220,16 +1220,15 @@ public class BodyCreationSettings
     // protected methods
 
     /**
-     * Assign a native object, assuming there's none already assigned.
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as the owner.
      *
-     * @param allocatorVa the virtual address of the native object to assign
+     * @param bodySettingsVa the virtual address of the native object to assign
      * (not zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    final protected void setVirtualAddress(long allocatorVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(allocatorVa) : null;
-        setVirtualAddress(allocatorVa, freeingAction);
+    final void setVirtualAddressAsOwner(long bodySettingsVa) {
+        Runnable freeingAction = () -> free(bodySettingsVa);
+        setVirtualAddress(bodySettingsVa, freeingAction);
     }
     // *************************************************************************
     // native private methods

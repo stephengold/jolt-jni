@@ -36,7 +36,7 @@ public class AnyHitCastShapeCollector extends CastShapeCollector {
      */
     public AnyHitCastShapeCollector() {
         long collectorVa = createDefault();
-        setVirtualAddress(collectorVa, true);
+        setVirtualAddressAsOwner(collectorVa);
     }
     // *************************************************************************
     // new methods exposed

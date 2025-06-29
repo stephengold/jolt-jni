@@ -39,7 +39,7 @@ public class DebugRendererRecorder extends DebugRenderer {
         assert Jolt.implementsDebugRendering();
         long streamVa = stream.va();
         long recorderVa = createDebugRendererRecorder(streamVa);
-        setVirtualAddress(recorderVa, true);
+        setVirtualAddressAsOwner(recorderVa);
     }
     // *************************************************************************
     // new methods exposed

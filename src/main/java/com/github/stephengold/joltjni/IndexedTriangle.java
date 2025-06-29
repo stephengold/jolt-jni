@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -59,7 +59,7 @@ final public class IndexedTriangle extends IndexedTriangleNoMaterial {
     public IndexedTriangle(int vi0, int vi1, int vi2, int materialIndex) {
         super(false);
         long triangleVa = createIndexedTriangle(vi0, vi1, vi2, materialIndex);
-        setVirtualAddress(triangleVa, true);
+        setVirtualAddressAsOwner(triangleVa);
     }
 
     /**

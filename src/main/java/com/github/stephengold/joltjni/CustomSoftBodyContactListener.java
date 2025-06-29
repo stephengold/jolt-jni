@@ -36,7 +36,7 @@ abstract public class CustomSoftBodyContactListener
      */
     public CustomSoftBodyContactListener() {
         long listenerVa = createDefault();
-        setVirtualAddress(listenerVa, true);
+        setVirtualAddressAsOwner(listenerVa);
     }
     // *************************************************************************
     // new methods exposed

@@ -39,7 +39,7 @@ public class AllHitRayCastBodyCollector extends RayCastBodyCollector {
      */
     public AllHitRayCastBodyCollector() {
         long collectorVa = createDefault();
-        setVirtualAddress(collectorVa, true);
+        setVirtualAddressAsOwner(collectorVa);
     }
     // *************************************************************************
     // new methods exposed

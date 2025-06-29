@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -50,15 +50,14 @@ public class BodyActivationListener extends JoltPhysicsObject {
     // new protected methods
 
     /**
-     * Assign a native object, assuming there's none already assigned.
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as the owner.
      *
      * @param listenerVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    void setVirtualAddress(long listenerVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(listenerVa) : null;
+    final void setVirtualAddressAsOwner(long listenerVa) {
+        Runnable freeingAction = () -> free(listenerVa);
         setVirtualAddress(listenerVa, freeingAction);
     }
     // *************************************************************************

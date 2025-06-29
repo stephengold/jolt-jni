@@ -35,7 +35,7 @@ public class RayCastResult extends BroadPhaseCastResult {
      */
     public RayCastResult() {
         long castResultVa = createRayCastResult();
-        setVirtualAddress(castResultVa, true);
+        setVirtualAddressAsOwner(castResultVa);
     }
 
     /**

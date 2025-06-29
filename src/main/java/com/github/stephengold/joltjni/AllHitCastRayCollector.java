@@ -39,7 +39,7 @@ public class AllHitCastRayCollector extends CastRayCollector {
      */
     public AllHitCastRayCollector() {
         long collectorVa = createDefault();
-        setVirtualAddress(collectorVa, true);
+        setVirtualAddressAsOwner(collectorVa);
     }
     // *************************************************************************
     // new methods exposed

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -96,15 +96,14 @@ public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
     // new protected methods
 
     /**
-     * Assign a native object, assuming there's none already assigned.
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as the owner.
      *
      * @param triangleVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    void setVirtualAddress(long triangleVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(triangleVa) : null;
+    final void setVirtualAddressAsOwner(long triangleVa) {
+        Runnable freeingAction = () -> free(triangleVa);
         setVirtualAddress(triangleVa, freeingAction);
     }
     // *************************************************************************

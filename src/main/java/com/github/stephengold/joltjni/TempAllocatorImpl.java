@@ -37,7 +37,7 @@ public class TempAllocatorImpl extends TempAllocator {
      */
     public TempAllocatorImpl(int numBytes) {
         long allocatorVa = create(numBytes);
-        setVirtualAddress(allocatorVa, true);
+        setVirtualAddressAsOwner(allocatorVa);
     }
     // *************************************************************************
     // new methods exposed

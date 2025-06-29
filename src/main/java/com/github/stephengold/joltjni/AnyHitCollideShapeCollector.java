@@ -36,7 +36,7 @@ public class AnyHitCollideShapeCollector extends CollideShapeCollector {
      */
     public AnyHitCollideShapeCollector() {
         long collectorVa = createDefault();
-        setVirtualAddress(collectorVa, true);
+        setVirtualAddressAsOwner(collectorVa);
     }
     // *************************************************************************
     // new methods exposed

@@ -52,7 +52,7 @@ public class Part extends BodyCreationSettings {
     public Part(Part original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa, true);
+        setVirtualAddressAsOwner(copyVa);
     }
     // *************************************************************************
     // new methods exposed

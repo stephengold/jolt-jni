@@ -35,7 +35,7 @@ public class BodyFilter extends NonCopyable {
      */
     public BodyFilter() {
         long filterVa = createDefaultFilter();
-        setVirtualAddress(filterVa, true);
+        setVirtualAddressAsOwner(filterVa);
     }
 
     /**
@@ -65,16 +65,15 @@ public class BodyFilter extends NonCopyable {
     // new protected methods
 
     /**
-     * Assign a native object, assuming there's none already assigned.
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as the owner.
      *
-     * @param filterVa the virtual address of the native object to assign (not
-     * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     * @param collectorVa the virtual address of the native object to assign
+     * (not zero)
      */
-    final void setVirtualAddress(long filterVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(filterVa) : null;
-        setVirtualAddress(filterVa, freeingAction);
+    final void setVirtualAddressAsOwner(long collectorVa) {
+        Runnable freeingAction = () -> free(collectorVa);
+        setVirtualAddress(collectorVa, freeingAction);
     }
     // *************************************************************************
     // native private methods

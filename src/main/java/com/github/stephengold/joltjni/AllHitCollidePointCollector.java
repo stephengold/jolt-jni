@@ -39,7 +39,7 @@ public class AllHitCollidePointCollector extends CollidePointCollector {
      */
     public AllHitCollidePointCollector() {
         long collectorVa = createDefault();
-        setVirtualAddress(collectorVa, true);
+        setVirtualAddressAsOwner(collectorVa);
     }
     // *************************************************************************
     // new methods exposed

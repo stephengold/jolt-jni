@@ -40,7 +40,7 @@ public class AllHitTransformedShapeCollector extends TransformedShapeCollector {
      */
     public AllHitTransformedShapeCollector() {
         long collectorVa = createDefault();
-        setVirtualAddress(collectorVa, true);
+        setVirtualAddressAsOwner(collectorVa);
     }
     // *************************************************************************
     // new methods exposed

@@ -178,15 +178,14 @@ public class CollideSettingsBase extends JoltPhysicsObject {
     // new protected methods
 
     /**
-     * Assign a native object, assuming there's none already assigned.
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as the owner.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    void setVirtualAddress(long settingsVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(settingsVa) : null;
+    final void setVirtualAddressAsOwner(long settingsVa) {
+        Runnable freeingAction = () -> free(settingsVa);
         setVirtualAddress(settingsVa, freeingAction);
     }
     // *************************************************************************

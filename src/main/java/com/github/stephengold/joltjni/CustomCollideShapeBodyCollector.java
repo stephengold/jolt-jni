@@ -36,7 +36,7 @@ abstract public class CustomCollideShapeBodyCollector
      */
     public CustomCollideShapeBodyCollector() {
         long collectorVa = createCustomCollector();
-        setVirtualAddress(collectorVa, true);
+        setVirtualAddressAsOwner(collectorVa);
     }
     // *************************************************************************
     // new methods exposed

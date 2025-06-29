@@ -47,7 +47,7 @@ public class BodyLockWrite extends NonCopyable {
         this.bli = bli;
         long interfaceVa = bli.va();
         long lockVa = createBodyLockWrite(interfaceVa, bodyId);
-        setVirtualAddress(lockVa, true);
+        setVirtualAddressAsOwner(lockVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -101,15 +101,14 @@ public class BodyLockWrite extends NonCopyable {
     // protected methods
 
     /**
-     * Assign a native object, assuming there's none already assigned.
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as the owner.
      *
      * @param lockVa the virtual address of the native object to assign (not
      * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
      */
-    final void setVirtualAddress(long lockVa, boolean owner) {
-        Runnable freeingAction = owner ? () -> free(lockVa) : null;
+    final void setVirtualAddressAsOwner(long lockVa) {
+        Runnable freeingAction = () -> free(lockVa);
         setVirtualAddress(lockVa, freeingAction);
     }
     // *************************************************************************
