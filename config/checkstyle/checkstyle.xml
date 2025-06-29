@@ -52,7 +52,7 @@
     <!-- Regexp checks:                           -->
     <!-- See https://checkstyle.org/checks/regexp -->
     <module name="RegexpSingleline">
-        <property name="format" value="\s+$"/>
+        <property name="format" value="\s$"/>
         <property name="maximum" value="0"/>
         <property name="message" value="Line has trailing whitespace."/>
         <property name="minimum" value="0"/>
