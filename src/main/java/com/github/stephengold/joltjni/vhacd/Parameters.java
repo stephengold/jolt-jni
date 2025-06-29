@@ -56,6 +56,7 @@ public class Parameters extends JoltPhysicsObject {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
+        this.enableDebugOutput = original.isDebugOutputEnabled();
     }
     // *************************************************************************
     // new methods exposed
