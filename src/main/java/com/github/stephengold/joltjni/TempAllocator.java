@@ -33,7 +33,7 @@ abstract public class TempAllocator extends NonCopyable {
     // constructors
 
     /**
-     * Instantiate an allocator.
+     * Instantiate an allocator with no native object assigned.
      */
     TempAllocator() {
     }

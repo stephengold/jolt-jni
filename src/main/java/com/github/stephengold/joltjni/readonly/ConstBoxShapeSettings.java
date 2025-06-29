@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.Vec3;
 
 /**
  * Read-only access to a {@code BoxShapeSettings} object. (native type: const
- * BoxShapeSettings}
+ * BoxShapeSettings)
  *
  * @author Stephen Gold sgold@sonic.net
  */
