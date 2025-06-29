@@ -247,11 +247,11 @@
             <message key="name.invalidPattern" value="Method name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="MethodTypeParameterName">
-            <property name="format" value="(^[A-Z]$)"/>
+            <property name="format" value="^$"/>
             <message key="name.invalidPattern" value="Method type name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="PackageName">
-            <property name="format" value="^[a-z][.a-z]*[a-z]$"/>
+            <property name="format" value="^(com[.]github[.]stephengold[.]|test)joltjni([.][a-z]+)?$"/>
             <message key="name.invalidPattern" value="Package name ''{0}'' must match pattern ''{1}''."/>
         </module>
         <module name="ParameterName">
