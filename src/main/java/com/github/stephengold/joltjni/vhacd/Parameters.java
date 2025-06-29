@@ -418,12 +418,12 @@ public class Parameters extends JoltPhysicsObject {
      */
     @Override
     public int hashCode() {
-        int hash = Objects.hash(getAsyncAcd(), getFillMode(),
+        int result = Objects.hash(getAsyncAcd(), getFillMode(),
                 getFindBestPlane(), getMaxConvexHulls(),
                 getMaxNumVerticesPerCh(), getMaxRecursionDepth(),
                 getMinEdgeLength(), getMinimumVolumePercentErrorAllowed(),
                 getResolution(), getShrinkWrap(), isDebugOutputEnabled());
-        return hash;
+        return result;
     }
 
     /**

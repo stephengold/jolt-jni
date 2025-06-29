@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -100,9 +100,9 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
     @Override
     public float getRadius() {
         long sphereVa = va();
-        float radius = getRadius(sphereVa);
+        float result = getRadius(sphereVa);
 
-        return radius;
+        return result;
     }
 
     /**

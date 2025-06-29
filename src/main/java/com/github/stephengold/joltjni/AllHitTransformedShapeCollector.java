@@ -52,8 +52,8 @@ public class AllHitTransformedShapeCollector extends TransformedShapeCollector {
      */
     public int countHits() {
         long collectorVa = va();
-        int numHits = countHits(collectorVa);
-        return numHits;
+        int result = countHits(collectorVa);
+        return result;
     }
 
     /**

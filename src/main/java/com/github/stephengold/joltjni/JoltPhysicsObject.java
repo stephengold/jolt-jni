@@ -283,8 +283,8 @@ abstract public class JoltPhysicsObject
      */
     @Override
     public int hashCode() {
-        int hash = (int) (virtualAddress >> 4);
-        return hash;
+        int result = (int) (virtualAddress >> 4);
+        return result;
     }
 
     /**
