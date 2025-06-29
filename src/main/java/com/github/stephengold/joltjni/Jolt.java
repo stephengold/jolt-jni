@@ -311,7 +311,7 @@ final public class Jolt {
      * "com.github.stephengold.joltjni")
      * @return a new collection
      */
-    public static Set<Class> listClasses(String packageName) {
+    public static Set<Class<?>> listClasses(String packageName) {
         ClassLoader loader = Jolt.class.getClassLoader();
         String resourcePath = packageName.replaceAll("[.]", "/");
         InputStream stream = loader.getResourceAsStream(resourcePath);
@@ -322,7 +322,7 @@ final public class Jolt {
         InputStreamReader isr = new InputStreamReader(stream);
         BufferedReader reader = new BufferedReader(isr);
 
-        Set<Class> result = new HashSet<>();
+        Set<Class<?>> result = new HashSet<>();
         while (true) {
             try {
                 String line = reader.readLine();

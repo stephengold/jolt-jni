@@ -186,7 +186,7 @@ final public class PrintTable {
         Set<String> refClasses = new TreeSet<>();
         {
             String corePackage = "com.github.stephengold.joltjni";
-            Set<Class> coreClasses = Jolt.listClasses(corePackage);
+            Set<Class<?>> coreClasses = Jolt.listClasses(corePackage);
             for (Class coreClass : coreClasses) {
                 String simpleName = coreClass.getSimpleName();
                 if (simpleName.endsWith("Ref") || simpleName.endsWith("RefC")) {
@@ -201,7 +201,7 @@ final public class PrintTable {
         Set<String> readOnlyNames = new TreeSet<>();
         {
             String readOnlyPackage = "com.github.stephengold.joltjni.readonly";
-            Set<Class> readOnlyClasses = Jolt.listClasses(readOnlyPackage);
+            Set<Class<?>> readOnlyClasses = Jolt.listClasses(readOnlyPackage);
             for (Class readOnlyClass : readOnlyClasses) {
                 String simpleName = readOnlyClass.getSimpleName();
                 readOnlyNames.add(simpleName);

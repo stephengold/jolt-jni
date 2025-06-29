@@ -83,7 +83,7 @@ final public class ObjectStreamOut {
             result = sWriteRagdollSettingsToFile(fileName, ordinal, objVa);
 
         } else { // TODO: implement for other types
-            Class clas = writeObject.getClass();
+            Class<?> clas = writeObject.getClass();
             String className = clas.getSimpleName();
             throw new IllegalArgumentException(className);
         }
