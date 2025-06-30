@@ -551,7 +551,8 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @return a new JVM object with a new native object assigned
      *
-     * @see #setPhysicsSettings(com.github.stephengold.joltjni.PhysicsSettings)
+     * @see
+     * #setPhysicsSettings(com.github.stephengold.joltjni.ConstPhysicsSettings)
      */
     public PhysicsSettings getPhysicsSettings() {
         long systemVa = va();
