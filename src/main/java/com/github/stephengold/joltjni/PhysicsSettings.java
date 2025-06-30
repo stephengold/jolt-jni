@@ -21,13 +21,17 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstPhysicsSettings;
+
 /**
  * A component of a {@code PhysicsSystem}, used to configure simulation
  * parameters.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class PhysicsSettings extends JoltPhysicsObject {
+public class PhysicsSettings
+        extends JoltPhysicsObject
+        implements ConstPhysicsSettings {
     // *************************************************************************
     // constructors
 
@@ -57,124 +61,13 @@ public class PhysicsSettings extends JoltPhysicsObject {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public PhysicsSettings(PhysicsSettings original) {
-        long originalVa = original.va();
+    public PhysicsSettings(ConstPhysicsSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Test whether objects can fall asleep. The settings are unaffected.
-     * (native attribute: mAllowSleeping)
-     *
-     * @return {@code true} if sleeping is allowed, otherwise {@code false}
-     */
-    public boolean getAllowSleeping() {
-        long settingsVa = va();
-        boolean result = getAllowSleeping(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the Baumgarte stabilization factor, the fraction of position error
-     * that is corrected in each update. The settings are unaffected. (native
-     * attribute: mBaumgarte)
-     *
-     * @return the factor (&ge;0, &le;1)
-     */
-    public float getBaumgarte() {
-        long settingsVa = va();
-        float result = getBaumgarte(settingsVa);
-
-        assert result >= 0f && result <= 1f : result;
-        return result;
-    }
-
-    /**
-     * Test whether physics simulation is deterministic. The settings are
-     * unaffected. (native attribute: mDeterministicSimulation)
-     *
-     * @return {@code true} if it is deterministic, otherwise {@code false}
-     */
-    public boolean getDeterministicSimulation() {
-        long settingsVa = va();
-        boolean result = getDeterministicSimulation(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the number of solver position iterations per simulation step. The
-     * settings are unaffected. (native attribute: mNumPositionSteps)
-     *
-     * @return the number (&ge;0)
-     */
-    public int getNumPositionSteps() {
-        long settingsVa = va();
-        int result = getNumPositionSteps(settingsVa);
-
-        assert result >= 0 : result;
-        return result;
-    }
-
-    /**
-     * Return the number of velocity iterations per simulation step. The
-     * settings are unaffected. (native attribute: mNumVelocitySteps)
-     *
-     * @return the number (&ge;0)
-     */
-    public int getNumVelocitySteps() {
-        long settingsVa = va();
-        int result = getNumVelocitySteps(settingsVa);
-
-        assert result >= 0 : result;
-        return result;
-    }
-
-    /**
-     * Return the penetration slop. The settings are unaffected. (native
-     * attribute: mPenetrationSlop)
-     *
-     * @return the slop distance (in meters)
-     */
-    public float getPenetrationSlop() {
-        long settingsVa = va();
-        float result = getPenetrationSlop(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the point-motion threshold, below which objects can fall asleep.
-     * The settings are unaffected. (native attribute:
-     * mPointVelocitySleepThreshold)
-     *
-     * @return the speed threshold (in meters per second, &ge;0)
-     */
-    public float getPointVelocitySleepThreshold() {
-        long settingsVa = va();
-        float result = getPointVelocitySleepThreshold(settingsVa);
-
-        assert result >= 0f : result;
-        return result;
-    }
-
-    /**
-     * Alter the time interval before an object can fall asleep. The settings
-     * are unaffected. (native attribute: mTimeBeforeSleep)
-     *
-     * @return the interval (in seconds, &ge;0)
-     */
-    public float getTimeBeforeSleep() {
-        long settingsVa = va();
-        float result = getTimeBeforeSleep(settingsVa);
-
-        assert result >= 0f : result;
-        return result;
-    }
 
     /**
      * Alter whether objects can go to sleep. (native attribute: mAllowSleeping)
@@ -263,6 +156,127 @@ public class PhysicsSettings extends JoltPhysicsObject {
     public void setTimeBeforeSleep(float interval) {
         long settingsVa = va();
         setTimeBeforeSleep(settingsVa, interval);
+    }
+    // *************************************************************************
+    // ConstPhysicsSettings methods
+
+    /**
+     * Test whether objects can fall asleep. The settings are unaffected.
+     * (native attribute: mAllowSleeping)
+     *
+     * @return {@code true} if sleeping is allowed, otherwise {@code false}
+     */
+    @Override
+    public boolean getAllowSleeping() {
+        long settingsVa = va();
+        boolean result = getAllowSleeping(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the Baumgarte stabilization factor, the fraction of position error
+     * that is corrected in each update. The settings are unaffected. (native
+     * attribute: mBaumgarte)
+     *
+     * @return the factor (&ge;0, &le;1)
+     */
+    @Override
+    public float getBaumgarte() {
+        long settingsVa = va();
+        float result = getBaumgarte(settingsVa);
+
+        assert result >= 0f && result <= 1f : result;
+        return result;
+    }
+
+    /**
+     * Test whether physics simulation is deterministic. The settings are
+     * unaffected. (native attribute: mDeterministicSimulation)
+     *
+     * @return {@code true} if it is deterministic, otherwise {@code false}
+     */
+    @Override
+    public boolean getDeterministicSimulation() {
+        long settingsVa = va();
+        boolean result = getDeterministicSimulation(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the number of solver position iterations per simulation step. The
+     * settings are unaffected. (native attribute: mNumPositionSteps)
+     *
+     * @return the number (&ge;0)
+     */
+    @Override
+    public int getNumPositionSteps() {
+        long settingsVa = va();
+        int result = getNumPositionSteps(settingsVa);
+
+        assert result >= 0 : result;
+        return result;
+    }
+
+    /**
+     * Return the number of velocity iterations per simulation step. The
+     * settings are unaffected. (native attribute: mNumVelocitySteps)
+     *
+     * @return the number (&ge;0)
+     */
+    @Override
+    public int getNumVelocitySteps() {
+        long settingsVa = va();
+        int result = getNumVelocitySteps(settingsVa);
+
+        assert result >= 0 : result;
+        return result;
+    }
+
+    /**
+     * Return the penetration slop. The settings are unaffected. (native
+     * attribute: mPenetrationSlop)
+     *
+     * @return the slop distance (in meters)
+     */
+    @Override
+    public float getPenetrationSlop() {
+        long settingsVa = va();
+        float result = getPenetrationSlop(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the point-motion threshold, below which objects can fall asleep.
+     * The settings are unaffected. (native attribute:
+     * mPointVelocitySleepThreshold)
+     *
+     * @return the speed threshold (in meters per second, &ge;0)
+     */
+    @Override
+    public float getPointVelocitySleepThreshold() {
+        long settingsVa = va();
+        float result = getPointVelocitySleepThreshold(settingsVa);
+
+        assert result >= 0f : result;
+        return result;
+    }
+
+    /**
+     * Alter the time interval before an object can fall asleep. The settings
+     * are unaffected. (native attribute: mTimeBeforeSleep)
+     *
+     * @return the interval (in seconds, &ge;0)
+     */
+    @Override
+    public float getTimeBeforeSleep() {
+        long settingsVa = va();
+        float result = getTimeBeforeSleep(settingsVa);
+
+        assert result >= 0f : result;
+        return result;
     }
     // *************************************************************************
     // native private methods

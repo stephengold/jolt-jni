@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsSettings;
 
 /**
  * A container for bodies.
@@ -117,10 +118,10 @@ public class BodyManager extends NonCopyable {
      * @param renderer the renderer to use (not null)
      */
     public void draw(BodyManagerDrawSettings drawSettings,
-            PhysicsSettings physicsSettings, DebugRenderer renderer) {
+            ConstPhysicsSettings physicsSettings, DebugRenderer renderer) {
         long managerVa = va();
         long drawSettingsVa = drawSettings.va();
-        long physicsSettingsVa = physicsSettings.va();
+        long physicsSettingsVa = physicsSettings.targetVa();
         long rendererVa = renderer.va();
         draw(managerVa, drawSettingsVa, physicsSettingsVa, rendererVa);
     }

@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstConstraint;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.util.HashMap;
 import java.util.Map;
@@ -784,9 +785,9 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @see #getPhysicsSettings()
      */
-    public void setPhysicsSettings(PhysicsSettings settings) {
+    public void setPhysicsSettings(ConstPhysicsSettings settings) {
         long systemVa = va();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         setPhysicsSettings(systemVa, settingsVa);
     }
 
