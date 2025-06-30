@@ -1,5 +1,72 @@
 # release log for the Jolt-JNI project
 
+## Version 2.0.0 released on 30 June 2025
+
++ API changes:
+  + Moved the `getVertexRadius()` and `setVertexRadius()` methods from
+    `SoftBodySharedSettings` to `SoftBodyCreationSettings`
+  + Made the `DecoratedShape` and `DecoratedShapeSettings` classes abstract.
+  + Made various setters chainable.
+
++ Bugfixes:
+  + `StringStream` doesn't handle NULs
+  + race conditions in `BodyInterface`
+  + logic error in the `PhysicsMaterialSimple` copy constructor
+  + passing an empty collection to the `ConvexHullShapeSettings` constructor
+    crashes the JVM
+  + `UnsatisfiedLinkError` is thrown
+  + `SIGSEGV` in `getMassProperties()` when the shape is `null`
+  + `PhysicsSystem` never releases step listeners
+  + the `Parameters` copy constructor doesn't copy `enableDebugOutput`
+
++ Added classes:
+  + `AddConvexRadiusTab`
+  + `BcsResult`
+  + `ConstraintResult`
+  + `EpaPenetrationDepth`
+  + `GroupFilterResult`
+  + `GroupFilterToIdMap`
+  + `IdToGroupFilterMap`
+  + `IdToMaterialMap`
+  + `IdToShapeMap`
+  + `IdToSharedSettingsMap`
+  + `MaterialToIdMap`
+  + `PathResult`
+  + `PhysicsMaterialResult`
+  + `PointConvexSupport`
+  + `Result`
+  + `RodBendTwist`
+  + `RodStretchSphere`
+  + `Rtti`
+  + `SbcsResult`
+  + `SettingsResult`
+  + `ShapeToIdMap`
+  + `SharedSettingsToIdMap`
+  + `Temporaries`
+  + `TransformedConvexObject`
+  + `TransformedAaBox`
+  + `TransformedSphere`
+
++ Added interfaces:
+  + `ConstBoxShapeSettings`
+  + `ConstEdge`
+  + `ConstPhysicsSettings`
+  + `ConstRodBendTwist`
+  + `ConstRodStretchSphere`
+  + `ConstSerializableObject`
+  + `ConstSoftBodyManifold`
+  + `ConstSphere`
+  + `ConstSpringSettings`
+  + `ConstVehicleAntiRollBar`
+  + `ConstVehicleConstraintSettings`
+  + `ConstVehicleControllerSettings`
+  + `ConstVertex`
+  + `ConstVolume`
+
++ Added many public methods and constructors to the libraries.
++ Updated the Jolt source code and assets to 2405ff1 (sg250628).
++ Updated the OSHI library to v6.8.2 .
+
 ## Version 1.0.0 released on 18 May 2025
 
 + Add 5 public methods:
