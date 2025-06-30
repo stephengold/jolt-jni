@@ -94,7 +94,7 @@ public class PhysicsSystem extends NonCopyable {
      * Instantiate an uninitialized physics system.
      */
     public PhysicsSystem() {
-        long systemVa = createPhysicsSystem();
+        long systemVa = createDefault();
         setVirtualAddressAsOwner(systemVa);
         va2ps.put(systemVa, this);
 
@@ -847,7 +847,7 @@ public class PhysicsSystem extends NonCopyable {
     native private static boolean containsConstraint(
             long systemVa, long constraintVa);
 
-    native private static long createPhysicsSystem();
+    native private static long createDefault();
 
     native private static int destroyAllBodies(long systemVa);
 

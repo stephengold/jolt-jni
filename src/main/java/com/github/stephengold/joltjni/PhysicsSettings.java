@@ -35,7 +35,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
      * Instantiate default settings.
      */
     public PhysicsSettings() {
-        long settingsVa = createPhysicsSettings();
+        long settingsVa = createDefault();
         setVirtualAddress(settingsVa, () -> free(settingsVa));
     }
 
@@ -269,7 +269,7 @@ public class PhysicsSettings extends JoltPhysicsObject {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createPhysicsSettings();
+    native private static long createDefault();
 
     native private static void free(long settingsVa);
 

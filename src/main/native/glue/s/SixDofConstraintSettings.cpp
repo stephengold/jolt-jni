@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSett
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    createSixDofConstraintSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_createSixDofConstraintSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_createDefault
   BODYOF_CREATE_DEFAULT(SixDOFConstraintSettings)
 
 /*

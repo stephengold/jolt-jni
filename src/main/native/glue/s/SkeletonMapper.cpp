@@ -34,7 +34,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(SkeletonMapper,
   Java_com_github_stephengold_joltjni_SkeletonMapperRef_copy,
-  Java_com_github_stephengold_joltjni_SkeletonMapperRef_createEmpty,
+  Java_com_github_stephengold_joltjni_SkeletonMapperRef_createDefault,
   Java_com_github_stephengold_joltjni_SkeletonMapperRef_free,
   Java_com_github_stephengold_joltjni_SkeletonMapperRef_getPtr,
   Java_com_github_stephengold_joltjni_SkeletonMapperRef_toRefC)

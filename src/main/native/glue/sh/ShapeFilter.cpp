@@ -32,10 +32,10 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeFilter
- * Method:    createDefaultFilter
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeFilter_createDefaultFilter
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeFilter_createDefault
     BODYOF_CREATE_DEFAULT(ShapeFilter)
 
 /*

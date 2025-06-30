@@ -38,7 +38,7 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
      * Instantiate default settings.
      */
     public PointConstraintSettings() {
-        long settingsVa = createPointConstraintSettings();
+        long settingsVa = createDefault();
         setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Point);
     }
@@ -164,7 +164,7 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createPointConstraintSettings();
+    native private static long createDefault();
 
     native private static double getPoint1X(long settingsVa);
 

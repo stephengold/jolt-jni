@@ -35,7 +35,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(VehicleConstraint,
   Java_com_github_stephengold_joltjni_VehicleConstraintRef_copy,
-  Java_com_github_stephengold_joltjni_VehicleConstraintRef_createEmpty,
+  Java_com_github_stephengold_joltjni_VehicleConstraintRef_createDefault,
   Java_com_github_stephengold_joltjni_VehicleConstraintRef_free,
   Java_com_github_stephengold_joltjni_VehicleConstraintRef_getPtr,
   Java_com_github_stephengold_joltjni_VehicleConstraintRef_toRefC)

@@ -34,7 +34,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(Character,
   Java_com_github_stephengold_joltjni_CharacterRef_copy,
-  Java_com_github_stephengold_joltjni_CharacterRef_createEmpty,
+  Java_com_github_stephengold_joltjni_CharacterRef_createDefault,
   Java_com_github_stephengold_joltjni_CharacterRef_free,
   Java_com_github_stephengold_joltjni_CharacterRef_getPtr,
   Java_com_github_stephengold_joltjni_CharacterRef_toRefC)

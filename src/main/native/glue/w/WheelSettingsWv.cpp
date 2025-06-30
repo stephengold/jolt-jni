@@ -34,7 +34,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(WheelSettingsWV,
   Java_com_github_stephengold_joltjni_WheelSettingsWvRef_copy,
-  Java_com_github_stephengold_joltjni_WheelSettingsWvRef_createEmpty,
+  Java_com_github_stephengold_joltjni_WheelSettingsWvRef_createDefault,
   Java_com_github_stephengold_joltjni_WheelSettingsWvRef_free,
   Java_com_github_stephengold_joltjni_WheelSettingsWvRef_getPtr,
   Java_com_github_stephengold_joltjni_WheelSettingsWvRef_toRefC)

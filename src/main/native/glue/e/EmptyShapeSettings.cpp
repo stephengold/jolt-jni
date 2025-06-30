@@ -40,8 +40,8 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShapeSettings_c
 
 /*
  * Class:     com_github_stephengold_joltjni_EmptyShapeSettings
- * Method:    createEmptyShapeSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShapeSettings_createEmptyShapeSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShapeSettings_createDefault
   BODYOF_CREATE_DEFAULT(EmptyShapeSettings)

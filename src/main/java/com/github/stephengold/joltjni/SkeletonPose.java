@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ public class SkeletonPose extends JoltPhysicsObject {
      * Instantiate a default pose.
      */
     public SkeletonPose() {
-        long poseVa = createSkeletonPoseDefault();
+        long poseVa = createDefault();
         setVirtualAddress(poseVa, () -> free(poseVa));
     }
 
@@ -227,7 +227,7 @@ public class SkeletonPose extends JoltPhysicsObject {
 
     native private static long createCopy(long poseVa);
 
-    native private static long createSkeletonPoseDefault();
+    native private static long createDefault();
 
     native private static void draw(
             long poseVa, long settingsVa, long rendererVa, long transformVa);

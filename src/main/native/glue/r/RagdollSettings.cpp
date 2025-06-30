@@ -34,7 +34,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(RagdollSettings,
   Java_com_github_stephengold_joltjni_RagdollSettingsRef_copy,
-  Java_com_github_stephengold_joltjni_RagdollSettingsRef_createEmpty,
+  Java_com_github_stephengold_joltjni_RagdollSettingsRef_createDefault,
   Java_com_github_stephengold_joltjni_RagdollSettingsRef_free,
   Java_com_github_stephengold_joltjni_RagdollSettingsRef_getPtr,
   Java_com_github_stephengold_joltjni_RagdollSettingsRef_toRefC)

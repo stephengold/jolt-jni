@@ -38,7 +38,7 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      * Instantiate default settings.
      */
     public GearConstraintSettings() {
-        long settingsVa = createGearConstraintSettings();
+        long settingsVa = createDefault();
         setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Gear);
     }
@@ -189,7 +189,7 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createGearConstraintSettings();
+    native private static long createDefault();
 
     native private static float getHingeAxis1X(long settingsVa);
 

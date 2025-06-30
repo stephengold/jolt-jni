@@ -44,10 +44,10 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ShapeList_capacity
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeList
- * Method:    createEmpty
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeList_createEmpty
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeList_createDefault
     BODYOF_CREATE_DEFAULT(ShapeList)
 
 /*

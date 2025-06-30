@@ -38,7 +38,7 @@ final public class SkeletonRef extends Ref implements ConstSkeleton {
      * Instantiate an empty reference.
      */
     public SkeletonRef() {
-        long refVa = createEmpty();
+        long refVa = createDefault();
         setVirtualAddress(refVa, () -> free(refVa));
     }
 
@@ -190,7 +190,7 @@ final public class SkeletonRef extends Ref implements ConstSkeleton {
 
     native private static long copy(long refVa);
 
-    native private static long createEmpty();
+    native private static long createDefault();
 
     native private static void free(long refVa);
 

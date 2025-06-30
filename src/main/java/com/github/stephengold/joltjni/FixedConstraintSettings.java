@@ -39,7 +39,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      * Instantiate default settings.
      */
     public FixedConstraintSettings() {
-        long settingsVa = createFixedConstraintSettings();
+        long settingsVa = createDefault();
         setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Fixed);
     }
@@ -309,7 +309,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createFixedConstraintSettings();
+    native private static long createDefault();
 
     native private static boolean getAutoDetectPoint(long settingsVa);
 

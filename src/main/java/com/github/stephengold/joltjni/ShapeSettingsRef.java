@@ -38,7 +38,7 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
      * Instantiate an empty reference.
      */
     public ShapeSettingsRef() {
-        long refVa = createEmpty();
+        long refVa = createDefault();
         setVirtualAddress(refVa, () -> free(refVa));
     }
 
@@ -147,7 +147,7 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
 
     native private static long copy(long refVa);
 
-    native private static long createEmpty();
+    native private static long createDefault();
 
     native private static void free(long refVa);
 

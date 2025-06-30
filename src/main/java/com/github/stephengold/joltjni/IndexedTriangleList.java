@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ final public class IndexedTriangleList extends Array<IndexedTriangle> {
      * Instantiate an empty list.
      */
     public IndexedTriangleList() {
-        long listVa = createIndexedTriangleList();
+        long listVa = createDefault();
         setVirtualAddress(listVa, () -> free(listVa));
     }
     // *************************************************************************
@@ -125,7 +125,7 @@ final public class IndexedTriangleList extends Array<IndexedTriangle> {
 
     native private static int capacity(long listVa);
 
-    native private static long createIndexedTriangleList();
+    native private static long createDefault();
 
     native private static void erase(
             long listVa, int startIndex, int stopIndex);

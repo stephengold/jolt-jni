@@ -35,7 +35,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(Constraint,
   Java_com_github_stephengold_joltjni_ConstraintRef_copy,
-  Java_com_github_stephengold_joltjni_ConstraintRef_createEmpty,
+  Java_com_github_stephengold_joltjni_ConstraintRef_createDefault,
   Java_com_github_stephengold_joltjni_ConstraintRef_free,
   Java_com_github_stephengold_joltjni_ConstraintRef_getPtr,
   Java_com_github_stephengold_joltjni_ConstraintRef_toRefC)

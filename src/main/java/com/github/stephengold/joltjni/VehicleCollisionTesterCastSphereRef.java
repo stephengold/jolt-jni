@@ -37,7 +37,7 @@ final public class VehicleCollisionTesterCastSphereRef extends Ref {
      * Instantiate an empty reference.
      */
     public VehicleCollisionTesterCastSphereRef() {
-        long refVa = createEmpty();
+        long refVa = createDefault();
         setVirtualAddress(refVa, () -> free(refVa));
     }
 
@@ -105,7 +105,7 @@ final public class VehicleCollisionTesterCastSphereRef extends Ref {
 
     native private static long copy(long refVa);
 
-    native private static long createEmpty();
+    native private static long createDefault();
 
     native private static void free(long refVa);
 

@@ -39,7 +39,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      * Instantiate default settings.
      */
     public SliderConstraintSettings() {
-        long settingsVa = createSliderConstraintSettings();
+        long settingsVa = createDefault();
         setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Slider);
     }
@@ -438,7 +438,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createSliderConstraintSettings();
+    native private static long createDefault();
 
     native private static boolean getAutoDetectPoint(long settingsVa);
 

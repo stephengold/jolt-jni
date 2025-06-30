@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_crea
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
- * Method:    createPhysicsSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_createPhysicsSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_createDefault
   BODYOF_CREATE_DEFAULT(PhysicsSettings)
 
 /*

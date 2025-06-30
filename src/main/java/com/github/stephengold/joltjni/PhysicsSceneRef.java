@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ final public class PhysicsSceneRef extends Ref {
      * Instantiate an empty reference.
      */
     public PhysicsSceneRef() {
-        long refVa = createEmpty();
+        long refVa = createDefault();
         setVirtualAddress(refVa, () -> free(refVa));
     }
 
@@ -229,7 +229,7 @@ final public class PhysicsSceneRef extends Ref {
 
     native private static long copy(long refVa);
 
-    native private static long createEmpty();
+    native private static long createDefault();
 
     native private static void free(long refVa);
 

@@ -35,7 +35,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(Shape,
   Java_com_github_stephengold_joltjni_ShapeRef_copy,
-  Java_com_github_stephengold_joltjni_ShapeRef_createEmpty,
+  Java_com_github_stephengold_joltjni_ShapeRef_createDefault,
   Java_com_github_stephengold_joltjni_ShapeRef_free,
   Java_com_github_stephengold_joltjni_ShapeRef_getPtr,
   Java_com_github_stephengold_joltjni_ShapeRef_toRefC)

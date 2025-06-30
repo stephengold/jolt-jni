@@ -39,7 +39,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      * Instantiate default settings.
      */
     public ConeConstraintSettings() {
-        long settingsVa = createConeConstraintSettings();
+        long settingsVa = createDefault();
         setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Cone);
     }
@@ -253,9 +253,9 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     // *************************************************************************
     // native private methods
 
-    native private static long createConeConstraintSettings();
-
     native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native private static float getHalfConeAngle(long settingsVa);
 

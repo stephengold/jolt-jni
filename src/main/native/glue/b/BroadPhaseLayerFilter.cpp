@@ -32,10 +32,10 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhaseLayerFilter
- * Method:    createDefaultFilter
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerFilter_createDefaultFilter
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BroadPhaseLayerFilter_createDefault
   BODYOF_CREATE_DEFAULT(BroadPhaseLayerFilter)
 
 /*

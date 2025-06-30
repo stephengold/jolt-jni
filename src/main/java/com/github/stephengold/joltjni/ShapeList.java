@@ -37,7 +37,7 @@ final public class ShapeList extends Array<ShapeRefC> {
      * Instantiate an empty list.
      */
     public ShapeList() {
-        long listVa = createEmpty();
+        long listVa = createDefault();
         setVirtualAddress(listVa, () -> free(listVa));
     }
 
@@ -135,7 +135,7 @@ final public class ShapeList extends Array<ShapeRefC> {
 
     native private static int capacity(long listVa);
 
-    native private static long createEmpty();
+    native private static long createDefault();
 
     native private static void erase(
             long listVa, int startIndex, int stopIndex);

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
      * Instantiate an empty scene.
      */
     public PhysicsScene() {
-        long sceneVa = createDefaultScene();
+        long sceneVa = createDefault();
         setVirtualAddress(sceneVa); // not the owner due to ref counting
     }
 
@@ -243,7 +243,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
 
     native static boolean createBodies(long sceneVa, long systemVa);
 
-    native private static long createDefaultScene();
+    native private static long createDefault();
 
     native static boolean fixInvalidScales(long sceneVa);
 

@@ -34,7 +34,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(CharacterVirtual,
   Java_com_github_stephengold_joltjni_CharacterVirtualRef_copy,
-  Java_com_github_stephengold_joltjni_CharacterVirtualRef_createEmpty,
+  Java_com_github_stephengold_joltjni_CharacterVirtualRef_createDefault,
   Java_com_github_stephengold_joltjni_CharacterVirtualRef_free,
   Java_com_github_stephengold_joltjni_CharacterVirtualRef_getPtr,
   Java_com_github_stephengold_joltjni_CharacterVirtualRef_toRefC)

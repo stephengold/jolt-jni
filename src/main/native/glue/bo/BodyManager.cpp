@@ -83,10 +83,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManager_allocate
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyManager
- * Method:    createBodyManager
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManager_createBodyManager
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyManager_createDefault
   BODYOF_CREATE_DEFAULT(BodyManager)
 
 /*

@@ -32,19 +32,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    createConeConstraintSettings
- * Signature: ()J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_createConeConstraintSettings
-  BODYOF_CREATE_DEFAULT(ConeConstraintSettings)
-
-/*
- * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
  * Method:    createCopy
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_createCopy
   BODYOF_CREATE_COPY(ConeConstraintSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_createDefault
+  BODYOF_CREATE_DEFAULT(ConeConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ConeConstraintSettings

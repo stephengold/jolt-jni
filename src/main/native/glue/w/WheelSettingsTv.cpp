@@ -34,7 +34,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(WheelSettingsTV,
   Java_com_github_stephengold_joltjni_WheelSettingsTvRef_copy,
-  Java_com_github_stephengold_joltjni_WheelSettingsTvRef_createEmpty,
+  Java_com_github_stephengold_joltjni_WheelSettingsTvRef_createDefault,
   Java_com_github_stephengold_joltjni_WheelSettingsTvRef_free,
   Java_com_github_stephengold_joltjni_WheelSettingsTvRef_getPtr,
   Java_com_github_stephengold_joltjni_WheelSettingsTvRef_toRefC)

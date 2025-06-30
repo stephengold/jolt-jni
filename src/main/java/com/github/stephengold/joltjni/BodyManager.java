@@ -44,7 +44,7 @@ public class BodyManager extends NonCopyable {
      * Instantiate a default manager.
      */
     public BodyManager() {
-        long managerVa = createBodyManager();
+        long managerVa = createDefault();
         setVirtualAddress(managerVa, () -> free(managerVa));
     }
     // *************************************************************************
@@ -200,7 +200,7 @@ public class BodyManager extends NonCopyable {
 
     native private static long allocateBody(long managerVa, long settingsVa);
 
-    native private static long createBodyManager();
+    native private static long createDefault();
 
     native private static void deactivateBodies(long managerVa, int[] idArray);
 

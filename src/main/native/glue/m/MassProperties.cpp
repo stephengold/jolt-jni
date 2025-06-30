@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MassProperties_creat
 
 /*
  * Class:     com_github_stephengold_joltjni_MassProperties
- * Method:    createMassProperties
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MassProperties_createMassProperties
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MassProperties_createDefault
   BODYOF_CREATE_DEFAULT(MassProperties)
 
 /*

@@ -34,7 +34,7 @@ public class ShapeFilter extends NonCopyable {
      * Instantiate a default filter that selects all shapes.
      */
     public ShapeFilter() {
-        long filterVa = createDefaultFilter();
+        long filterVa = createDefault();
         setVirtualAddressAsOwner(filterVa);
     }
     // *************************************************************************
@@ -54,7 +54,7 @@ public class ShapeFilter extends NonCopyable {
     // *************************************************************************
     // native private methods
 
-    native private static long createDefaultFilter();
+    native private static long createDefault();
 
     native private static void free(long filterVa);
 }

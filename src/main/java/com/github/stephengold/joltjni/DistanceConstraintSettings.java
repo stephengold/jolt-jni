@@ -38,7 +38,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
      * Instantiate default settings.
      */
     public DistanceConstraintSettings() {
-        long settingsVa = createDistanceConstraintSettings();
+        long settingsVa = createDefault();
         setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.Distance);
     }
@@ -225,7 +225,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createDistanceConstraintSettings();
+    native private static long createDefault();
 
     native private static long getLimitsSpringSettings(
             long constraintSettingsVa);

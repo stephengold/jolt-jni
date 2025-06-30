@@ -41,7 +41,7 @@ final public class MassProperties
      * Instantiate default properties.
      */
     public MassProperties() {
-        long propertiesVa = createMassProperties();
+        long propertiesVa = createDefault();
         setVirtualAddress(propertiesVa, () -> free(propertiesVa));
     }
 
@@ -242,7 +242,7 @@ final public class MassProperties
 
     native private static long createCopy(long originalVa);
 
-    native private static long createMassProperties();
+    native private static long createDefault();
 
     native private static boolean decomposePrincipalMomentsOfInertia(
             long propertiesVa, long matrixVa, float[] diagonal);

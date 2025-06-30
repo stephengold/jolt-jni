@@ -31,10 +31,10 @@ using namespace std;
 
 /*
  * Class:     com_github_stephengold_joltjni_std_Mt19937
- * Method:    createMt19937
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_createMt19937
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_Mt19937_createDefault
   BODYOF_CREATE_DEFAULT(mt19937)
 
 /*

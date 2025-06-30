@@ -36,7 +36,7 @@ public class RayCastSettings extends JoltPhysicsObject {
      * Instantiate default settings.
      */
     public RayCastSettings() {
-        long settingsVa = createDefaultSettings();
+        long settingsVa = createDefault();
         setVirtualAddress(settingsVa, () -> free(settingsVa));
     }
 
@@ -134,7 +134,7 @@ public class RayCastSettings extends JoltPhysicsObject {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createDefaultSettings();
+    native private static long createDefault();
 
     native private static void free(long settingsVa);
 

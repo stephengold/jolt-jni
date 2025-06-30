@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DistanceConstraintSe
 
 /*
  * Class:     com_github_stephengold_joltjni_DistanceConstraintSettings
- * Method:    createDistanceConstraintSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DistanceConstraintSettings_createDistanceConstraintSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DistanceConstraintSettings_createDefault
   BODYOF_CREATE_DEFAULT(DistanceConstraintSettings)
 
 /*

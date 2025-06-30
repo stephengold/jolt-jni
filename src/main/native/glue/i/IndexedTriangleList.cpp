@@ -45,10 +45,10 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_c
 
 /*
  * Class:     com_github_stephengold_joltjni_IndexedTriangleList
- * Method:    createIndexedTriangleList
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_createIndexedTriangleList
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_createDefault
   BODYOF_CREATE_DEFAULT(IndexedTriangleList)
 
 /*

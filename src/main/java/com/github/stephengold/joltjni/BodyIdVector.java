@@ -38,7 +38,7 @@ public class BodyIdVector extends JoltPhysicsObject {
      * Instantiate an empty vector.
      */
     public BodyIdVector() {
-        long vectorVa = createBodyIdVector();
+        long vectorVa = createDefault();
         setVirtualAddress(vectorVa, () -> free(vectorVa));
     }
 
@@ -206,9 +206,9 @@ public class BodyIdVector extends JoltPhysicsObject {
 
     native private static int capacity(long vectorVa);
 
-    native private static long createBodyIdVector();
-
     native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native private static void erase(
             long vectorVa, int startIndex, int stopIndex);

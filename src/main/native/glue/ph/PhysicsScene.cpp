@@ -34,7 +34,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(PhysicsScene,
   Java_com_github_stephengold_joltjni_PhysicsSceneRef_copy,
-  Java_com_github_stephengold_joltjni_PhysicsSceneRef_createEmpty,
+  Java_com_github_stephengold_joltjni_PhysicsSceneRef_createDefault,
   Java_com_github_stephengold_joltjni_PhysicsSceneRef_free,
   Java_com_github_stephengold_joltjni_PhysicsSceneRef_getPtr,
   Java_com_github_stephengold_joltjni_PhysicsSceneRef_toRefC)
@@ -95,10 +95,10 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_crea
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsScene
- * Method:    createDefaultScene
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_createDefaultScene
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_createDefault
   BODYOF_CREATE_DEFAULT(PhysicsScene)
 
 /*

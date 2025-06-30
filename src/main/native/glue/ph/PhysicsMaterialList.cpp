@@ -45,10 +45,10 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialList_c
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterialList
- * Method:    createEmptyList
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialList_createEmptyList
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialList_createDefault
   BODYOF_CREATE_DEFAULT(PhysicsMaterialList)
 
 /*

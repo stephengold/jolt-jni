@@ -34,7 +34,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(TwoBodyConstraint,
   Java_com_github_stephengold_joltjni_TwoBodyConstraintRef_copy,
-  Java_com_github_stephengold_joltjni_TwoBodyConstraintRef_createEmpty,
+  Java_com_github_stephengold_joltjni_TwoBodyConstraintRef_createDefault,
   Java_com_github_stephengold_joltjni_TwoBodyConstraintRef_free,
   Java_com_github_stephengold_joltjni_TwoBodyConstraintRef_getPtr,
   Java_com_github_stephengold_joltjni_TwoBodyConstraintRef_toRefC)

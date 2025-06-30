@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSett
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    createSliderConstraintSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_createSliderConstraintSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_createDefault
     BODYOF_CREATE_DEFAULT(SliderConstraintSettings)
 
 /*

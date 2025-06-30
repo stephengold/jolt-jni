@@ -43,7 +43,7 @@ public class MotionProperties
      * Instantiate default properties.
      */
     public MotionProperties() {
-        long propertiesVa = createMotionProperties();
+        long propertiesVa = createDefault();
         setVirtualAddress(propertiesVa, () -> free(propertiesVa));
     }
 
@@ -574,7 +574,7 @@ public class MotionProperties
 
     native private static long createCopy(long originalVa);
 
-    native private static long createMotionProperties();
+    native private static long createDefault();
 
     native private static void free(long propertiesVa);
 

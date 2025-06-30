@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_GearConstraintSettings
- * Method:    createGearConstraintSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_createGearConstraintSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_createDefault
   BODYOF_CREATE_DEFAULT(GearConstraintSettings)
 
 /*

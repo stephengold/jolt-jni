@@ -34,7 +34,7 @@ public class BodyFilter extends NonCopyable {
      * Instantiate a default filter that selects all layers.
      */
     public BodyFilter() {
-        long filterVa = createDefaultFilter();
+        long filterVa = createDefault();
         setVirtualAddressAsOwner(filterVa);
     }
 
@@ -78,7 +78,7 @@ public class BodyFilter extends NonCopyable {
     // *************************************************************************
     // native private methods
 
-    native private static long createDefaultFilter();
+    native private static long createDefault();
 
     native private static void free(long filterVa);
 

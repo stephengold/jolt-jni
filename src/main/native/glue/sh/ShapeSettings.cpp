@@ -34,7 +34,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(ShapeSettings,
   Java_com_github_stephengold_joltjni_ShapeSettingsRef_copy,
-  Java_com_github_stephengold_joltjni_ShapeSettingsRef_createEmpty,
+  Java_com_github_stephengold_joltjni_ShapeSettingsRef_createDefault,
   Java_com_github_stephengold_joltjni_ShapeSettingsRef_free,
   Java_com_github_stephengold_joltjni_ShapeSettingsRef_getPtr,
   Java_com_github_stephengold_joltjni_ShapeSettingsRef_toRefC)

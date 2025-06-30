@@ -83,10 +83,10 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_con
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
- * Method:    createPhysicsSystem
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_createPhysicsSystem
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_createDefault
   BODYOF_CREATE_DEFAULT(PhysicsSystem)
 
 /*

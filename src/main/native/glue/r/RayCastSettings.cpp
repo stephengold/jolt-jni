@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RayCastSettings_crea
 
 /*
  * Class:     com_github_stephengold_joltjni_RayCastSettings
- * Method:    createDefaultSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RayCastSettings_createDefaultSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RayCastSettings_createDefault
   BODYOF_CREATE_DEFAULT(RayCastSettings)
 
 /*

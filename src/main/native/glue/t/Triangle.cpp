@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createCopy
 
 /*
  * Class:     com_github_stephengold_joltjni_Triangle
- * Method:    createDefaultTriangle
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createDefaultTriangle
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Triangle_createDefault
     BODYOF_CREATE_DEFAULT(Triangle)
 
 /*

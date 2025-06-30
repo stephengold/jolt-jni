@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotionProperties_cre
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    createMotionProperties
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotionProperties_createMotionProperties
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MotionProperties_createDefault
   BODYOF_CREATE_DEFAULT(MotionProperties)
 
 /*

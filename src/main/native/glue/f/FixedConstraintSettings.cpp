@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    createFixedConstraintSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_createFixedConstraintSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_createDefault
   BODYOF_CREATE_DEFAULT(FixedConstraintSettings)
 
 /*

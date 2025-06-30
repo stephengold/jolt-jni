@@ -37,7 +37,7 @@ final public class Triangle extends JoltPhysicsObject {
      * Instantiate a default triangle.
      */
     public Triangle() {
-        long triangleVa = createDefaultTriangle();
+        long triangleVa = createDefault();
         setVirtualAddress(triangleVa, () -> free(triangleVa));
     }
 
@@ -207,7 +207,7 @@ final public class Triangle extends JoltPhysicsObject {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createDefaultTriangle();
+    native private static long createDefault();
 
     native private static long createTriangle(float v1x, float v1y, float v1z,
             float v2x, float v2y, float v2z, float v3x, float v3y, float v3z,

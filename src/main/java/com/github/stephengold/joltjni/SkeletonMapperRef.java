@@ -36,7 +36,7 @@ final public class SkeletonMapperRef extends Ref {
      * Instantiate an empty reference.
      */
     public SkeletonMapperRef() {
-        long refVa = createEmpty();
+        long refVa = create();
         setVirtualAddress(refVa, () -> free(refVa));
     }
 
@@ -100,7 +100,7 @@ final public class SkeletonMapperRef extends Ref {
 
     native private static long copy(long refVa);
 
-    native private static long createEmpty();
+    native private static long create();
 
     native private static void free(long refVa);
 

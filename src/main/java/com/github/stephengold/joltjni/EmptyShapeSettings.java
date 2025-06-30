@@ -36,7 +36,7 @@ public class EmptyShapeSettings extends ShapeSettings {
      * Instantiate the default settings.
      */
     public EmptyShapeSettings() {
-        long settingsVa = createEmptyShapeSettings();
+        long settingsVa = createDefault();
         setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EShapeSubType.Empty);
     }
@@ -68,5 +68,5 @@ public class EmptyShapeSettings extends ShapeSettings {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createEmptyShapeSettings();
+    native private static long createDefault();
 }

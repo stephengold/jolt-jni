@@ -74,10 +74,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_createC
 
 /*
  * Class:     com_github_stephengold_joltjni_SkeletonPose
- * Method:    createSkeletonPoseDefault
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_createSkeletonPoseDefault
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonPose_createDefault
   BODYOF_CREATE_DEFAULT(SkeletonPose)
 
 /*

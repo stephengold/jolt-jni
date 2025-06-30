@@ -34,7 +34,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(PathConstraintPath,
   Java_com_github_stephengold_joltjni_PathConstraintPathRef_copy,
-  Java_com_github_stephengold_joltjni_PathConstraintPathRef_createEmpty,
+  Java_com_github_stephengold_joltjni_PathConstraintPathRef_createDefault,
   Java_com_github_stephengold_joltjni_PathConstraintPathRef_free,
   Java_com_github_stephengold_joltjni_PathConstraintPathRef_getPtr,
   Java_com_github_stephengold_joltjni_PathConstraintPathRef_toRefC)

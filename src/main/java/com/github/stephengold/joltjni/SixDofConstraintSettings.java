@@ -42,7 +42,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      * Instantiate default settings.
      */
     public SixDofConstraintSettings() {
-        long settingsVa = createSixDofConstraintSettings();
+        long settingsVa = createDefault();
         setVirtualAddress(settingsVa); // not owner due to ref counting
         setSubType(EConstraintSubType.SixDof);
     }
@@ -601,7 +601,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createCopy(long originalVa);
 
-    native private static long createSixDofConstraintSettings();
+    native private static long createDefault();
 
     native private static float getAxisX1X(long settingsVa);
 

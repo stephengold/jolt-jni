@@ -45,10 +45,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_copy
 
 /*
  * Class:     com_github_stephengold_joltjni_ShapeRefC
- * Method:    createEmpty
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_createEmpty
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ShapeRefC_createDefault
     BODYOF_CREATE_DEFAULT(ShapeRefC)
 
 /*

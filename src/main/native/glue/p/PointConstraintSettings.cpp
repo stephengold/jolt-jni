@@ -40,10 +40,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PointConstraintSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_PointConstraintSettings
- * Method:    createPointConstraintSettings
+ * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_createPointConstraintSettings
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_createDefault
   BODYOF_CREATE_DEFAULT(PointConstraintSettings)
 
 /*

@@ -47,19 +47,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_capacity
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector
- * Method:    createBodyIdVector
- * Signature: ()J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_createBodyIdVector
-  BODYOF_CREATE_DEFAULT(BodyIDVector)
-
-/*
- * Class:     com_github_stephengold_joltjni_BodyIdVector
  * Method:    createCopy
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_createCopy
   (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyIdVector
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdVector_createDefault
+  BODYOF_CREATE_DEFAULT(BodyIDVector)
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdVector

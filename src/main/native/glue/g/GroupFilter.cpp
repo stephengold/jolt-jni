@@ -34,7 +34,7 @@ using namespace JPH;
 
 IMPLEMENT_REF(GroupFilter,
   Java_com_github_stephengold_joltjni_GroupFilterRef_copy,
-  Java_com_github_stephengold_joltjni_GroupFilterRef_createEmpty,
+  Java_com_github_stephengold_joltjni_GroupFilterRef_createDefault,
   Java_com_github_stephengold_joltjni_GroupFilterRef_free,
   Java_com_github_stephengold_joltjni_GroupFilterRef_getPtr,
   Java_com_github_stephengold_joltjni_GroupFilterRef_toRefC)

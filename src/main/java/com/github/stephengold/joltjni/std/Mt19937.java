@@ -40,7 +40,7 @@ public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
      * Instantiate a generator.
      */
     public Mt19937() {
-        long generatorVa = createMt19937();
+        long generatorVa = createDefault();
         setVirtualAddress(generatorVa, () -> free(generatorVa));
     }
 
@@ -82,7 +82,7 @@ public class Mt19937 extends JoltPhysicsObject implements RandomNumberEngine {
     // *************************************************************************
     // native private methods
 
-    native private static long createMt19937();
+    native private static long createDefault();
 
     native private static long createSeeded(int seed);
 
