@@ -1,6 +1,6 @@
-# release log for the Jolt-JNI project
+# Release log for the Jolt-JNI project
 
-## Version 2.0.0 released on 30 June 2025
+## Version 2.0.1 released on 30 June 2025
 
 + API changes:
   + Moved the `getVertexRadius()` and `setVertexRadius()` methods from
