@@ -186,7 +186,7 @@
         </module>
         <module name="MissingJavadocType">
             <property name="excludeScope" value="nothing"/>
-            <property name="scope" value="protected"/>
+            <property name="scope" value="private"/>
             <property name="tokens" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, RECORD_DEF, ANNOTATION_DEF"/>
         </module>
         <module name="NonEmptyAtclauseDescription"/>
