@@ -187,11 +187,14 @@ final public class PrintTable {
         {
             String corePackage = "com.github.stephengold.joltjni";
             Set<Class<?>> coreClasses = Jolt.listClasses(corePackage);
-            for (Class coreClass : coreClasses) {
+            for (Class<?> coreClass : coreClasses) {
                 String simpleName = coreClass.getSimpleName();
+                if (simpleName.isBlank()) {
+                    continue; // skip to the next Java class
+                }
                 if (simpleName.endsWith("Ref") || simpleName.endsWith("RefC")) {
                     refClasses.add(simpleName);
-                } else if (!simpleName.isBlank()) {
+                } else {
                     basicJavaClasses.add(simpleName);
                 }
             }
