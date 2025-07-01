@@ -26,6 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.Modifier;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -192,6 +193,13 @@ final public class PrintTable {
                 if (simpleName.isBlank()) {
                     continue; // skip to the next Java class
                 }
+                int classModifiers = coreClass.getModifiers();
+                if (!Modifier.isPublic(classModifiers)) {
+                    System.out.printf(" skipping %s because it's not public%n",
+                            simpleName);
+                    continue; // skip to the next Java class
+                }
+
                 if (simpleName.endsWith("Ref") || simpleName.endsWith("RefC")) {
                     refClasses.add(simpleName);
                 } else {
