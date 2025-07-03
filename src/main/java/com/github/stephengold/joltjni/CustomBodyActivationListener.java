@@ -26,7 +26,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class CustomBodyActivationListener
+public class CustomBodyActivationListener
         extends BodyActivationListener {
     // *************************************************************************
     // constructors
@@ -42,20 +42,26 @@ abstract public class CustomBodyActivationListener
     // new methods exposed
 
     /**
-     * Callback invoked (by native code) each time a body is activated.
+     * Callback invoked (by native code) each time a body is activated. Meant to
+     * be overridden.
      *
      * @param bodyId the body's ID
      * @param bodyUserData the body's user data
      */
-    abstract public void onBodyActivated(int bodyId, long bodyUserData);
+    public void onBodyActivated(int bodyId, long bodyUserData) {
+        // do nothing
+    }
 
     /**
-     * Callback invoked (by native code) each time a body is deactivated.
+     * Callback invoked (by native code) each time a body is deactivated. Meant
+     * to be overridden.
      *
      * @param bodyId the body's ID
      * @param bodyUserData the body's user data
      */
-    abstract public void onBodyDeactivated(int bodyId, long bodyUserData);
+    public void onBodyDeactivated(int bodyId, long bodyUserData) {
+        // do nothing
+    }
     // *************************************************************************
     // native private methods
 

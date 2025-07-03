@@ -32,8 +32,6 @@ import com.github.stephengold.joltjni.CustomContactListener;
 import com.github.stephengold.joltjni.CustomPhysicsStepListener;
 import com.github.stephengold.joltjni.CustomRayCastBodyCollector;
 import com.github.stephengold.joltjni.CustomSoftBodyContactListener;
-import com.github.stephengold.joltjni.enumerate.SoftBodyValidateResult;
-import com.github.stephengold.joltjni.enumerate.ValidateResult;
 import org.junit.Test;
 import testjoltjni.TestUtils;
 
@@ -107,57 +105,10 @@ public class Test011 {
      * Test the custom listener classes.
      */
     private static void createCustomListeners() {
-        new CustomBodyActivationListener() {
-            @Override
-            public void onBodyActivated(int bodyId, long bodyUserData) {
-            }
-
-            @Override
-            public void onBodyDeactivated(int bodyId, long bodyUserData) {
-            }
-        };
-
+        new CustomBodyActivationListener();
         new CustomCharacterContactListener();
-
-        new CustomContactListener() {
-            @Override
-            public void onContactAdded(long body1Va, long body2Va,
-                    long manifoldVa, long settingsVa) {
-            }
-
-            @Override
-            public void onContactPersisted(long body1Va, long body2Va,
-                    long manifoldVa, long settingsVa) {
-            }
-
-            @Override
-            public void onContactRemoved(long pairVa) {
-            }
-
-            @Override
-            public int onContactValidate(long body1Va, long body2Va,
-                    double baseOffsetX, double baseOffsetY, double baseOffsetZ,
-                    long collisionResultVa) {
-                return ValidateResult.AcceptContact.ordinal();
-            }
-        };
-
-        new CustomPhysicsStepListener() {
-            @Override
-            public void onStep(long contextVa) {
-            }
-        };
-
-        new CustomSoftBodyContactListener() {
-            @Override
-            public void onSoftBodyContactAdded(long bodyVa, long manifoldVa) {
-            }
-
-            @Override
-            public int onSoftBodyContactValidate(
-                    long softBodyVa, long otherBodyVa, long settingsVa) {
-                return SoftBodyValidateResult.AcceptContact.ordinal();
-            }
-        };
+        new CustomContactListener();
+        new CustomPhysicsStepListener();
+        new CustomSoftBodyContactListener();
     }
 }

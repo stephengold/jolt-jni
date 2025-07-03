@@ -21,12 +21,14 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.ValidateResult;
+
 /**
  * A customizable {@code ContactListener}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class CustomContactListener extends ContactListener {
+public class CustomContactListener extends ContactListener {
     // *************************************************************************
     // constructors
 
@@ -42,7 +44,7 @@ abstract public class CustomContactListener extends ContactListener {
 
     /**
      * Callback invoked (by native code) each time a new contact point is
-     * detected.
+     * detected. Meant to be overridden.
      *
      * @param body1Va the virtual address of the first body in contact (not
      * zero)
@@ -50,12 +52,14 @@ abstract public class CustomContactListener extends ContactListener {
      * @param manifoldVa the virtual address of the contact manifold (not zero)
      * @param settingsVa the virtual address of the contact settings (not zero)
      */
-    abstract public void onContactAdded(
-            long body1Va, long body2Va, long manifoldVa, long settingsVa);
+    public void onContactAdded(
+            long body1Va, long body2Va, long manifoldVa, long settingsVa) {
+        // do nothing
+    }
 
     /**
      * Callback invoked (by native code) each time a contact is detected that
-     * was also detected during the previous update.
+     * was also detected during the previous update. Meant to be overridden.
      *
      * @param body1Va the virtual address of the first body in contact (not
      * zero)
@@ -63,22 +67,26 @@ abstract public class CustomContactListener extends ContactListener {
      * @param manifoldVa the virtual address of the contact manifold (not zero)
      * @param settingsVa the virtual address of the contact settings (not zero)
      */
-    abstract public void onContactPersisted(
-            long body1Va, long body2Va, long manifoldVa, long settingsVa);
+    public void onContactPersisted(
+            long body1Va, long body2Va, long manifoldVa, long settingsVa) {
+        // do nothing
+    }
 
     /**
      * Callback invoked (by native code) each time a contact that was detected
-     * during the previous update is no longer detected.
+     * during the previous update is no longer detected. Meant to be overridden.
      *
      * @param pairVa the virtual address of the {@code SubShapeIDPair} (not
      * zero)
      */
-    abstract public void onContactRemoved(long pairVa);
+    public void onContactRemoved(long pairVa) {
+        // do nothing
+    }
 
     /**
      * Callback invoked (by native code) after detecting collision between a
      * pair of bodies, but before invoking {@code onContactAdded()} and before
-     * adding the contact constraint.
+     * adding the contact constraint. Meant to be overridden.
      *
      * @param body1Va the virtual address of the first body in contact (not
      * zero)
@@ -91,9 +99,11 @@ abstract public class CustomContactListener extends ContactListener {
      * @return how to the contact should be processed (an ordinal of
      * {@code ValidateResult})
      */
-    abstract public int onContactValidate(
-            long body1Va, long body2Va, double baseOffsetX, double baseOffsetY,
-            double baseOffsetZ, long collisionResultVa);
+    public int onContactValidate(long body1Va, long body2Va, double baseOffsetX,
+            double baseOffsetY, double baseOffsetZ, long collisionResultVa) {
+        int result = ValidateResult.AcceptAllContactsForThisBodyPair.ordinal();
+        return result;
+    }
     // *************************************************************************
     // native private methods
 

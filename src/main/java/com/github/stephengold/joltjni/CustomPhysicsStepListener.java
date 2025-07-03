@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@ package com.github.stephengold.joltjni;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class CustomPhysicsStepListener
+public class CustomPhysicsStepListener
         extends JoltPhysicsObject
         implements PhysicsStepListener {
     // *************************************************************************
@@ -43,13 +43,16 @@ abstract public class CustomPhysicsStepListener
     // PhysicsStepListener methods
 
     /**
-     * Callback invoked (by native code) each time the system is stepped.
+     * Callback invoked (by native code) each time the system is stepped. Meant
+     * to be overridden.
      *
      * @param contextVa the virtual address of the
      * {@code PhysicsStepListenerContext} (not zero)
      */
     @Override
-    abstract public void onStep(long contextVa);
+    public void onStep(long contextVa) {
+        // do nothing
+    }
     // *************************************************************************
     // native private methods
 

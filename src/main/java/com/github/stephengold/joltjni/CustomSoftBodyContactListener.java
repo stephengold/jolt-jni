@@ -21,12 +21,14 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.SoftBodyValidateResult;
+
 /**
  * A customizable {@code SoftBodyContactListener}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class CustomSoftBodyContactListener
+public class CustomSoftBodyContactListener
         extends SoftBodyContactListener {
     // *************************************************************************
     // constructors
@@ -43,16 +45,18 @@ abstract public class CustomSoftBodyContactListener
 
     /**
      * Callback invoked (by native code) after all contact points for a soft
-     * body have been handled.
+     * body have been handled. Meant to be overridden.
      *
      * @param bodyVa the virtual address of the soft body in contact (not zero)
      * @param manifoldVa the virtual address of the contact manifold (not zero)
      */
-    abstract public void onSoftBodyContactAdded(long bodyVa, long manifoldVa);
+    public void onSoftBodyContactAdded(long bodyVa, long manifoldVa) {
+        // do nothing
+    }
 
     /**
      * Callback invoked (by native code) whenever a soft body's bounding box
-     * overlaps another body's bounding box.
+     * overlaps another body's bounding box. Meant to be overridden.
      *
      * @param softBodyVa the virtual address of the soft body (not zero)
      * @param otherBodyVa the virtual address of the other body (not zero)
@@ -61,8 +65,11 @@ abstract public class CustomSoftBodyContactListener
      * @return how to the contact should be processed (an ordinal of
      * {@code SoftBodyValidateResult})
      */
-    abstract public int onSoftBodyContactValidate(
-            long softBodyVa, long otherBodyVa, long settingsVa);
+    public int onSoftBodyContactValidate(
+            long softBodyVa, long otherBodyVa, long settingsVa) {
+        int result = SoftBodyValidateResult.AcceptContact.ordinal();
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
