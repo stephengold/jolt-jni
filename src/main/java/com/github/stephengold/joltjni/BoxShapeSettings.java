@@ -59,6 +59,15 @@ public class BoxShapeSettings
     }
 
     /**
+     * Instantiate a shape with the specified half extent.
+     *
+     * @param radius the desired half extent (&ge;0.05)
+     */
+    public BoxShapeSettings(float radius) {
+        this(radius, radius, radius);
+    }
+
+    /**
      * Instantiate a shape with the specified half extents.
      *
      * @param xHalfExtent the desired half extents on the local X axis
