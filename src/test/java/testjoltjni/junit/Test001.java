@@ -198,8 +198,7 @@ public class Test001 {
                     + result.getPenetrationDepth());
             TestUtils.testClose(result);
 
-            return ValidateResult.AcceptAllContactsForThisBodyPair
-                    .ordinal();
+            return ValidateResult.AcceptAllContactsForThisBodyPair.ordinal();
         }
     }
     // *************************************************************************
