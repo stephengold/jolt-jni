@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
+import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -75,7 +76,9 @@ public class Test010 {
         // Update the physics system:
         float deltaTime = 0.01f;
         int numSteps = 1;
-        physicsSystem.update(deltaTime, numSteps, allocator, jobSystem);
+        int errors = physicsSystem.update(
+                deltaTime, numSteps, allocator, jobSystem);
+        assert errors == EPhysicsUpdateError.None : errors;
 
         Assert.assertTrue(invoked);
     }

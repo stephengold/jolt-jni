@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples;
 
 import com.github.stephengold.joltjni.*;
+import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
 import testjoltjni.TestUtils;
 import testjoltjni.app.samples.broadphase.*;
 import testjoltjni.app.samples.character.*;
@@ -161,8 +162,9 @@ final public class SmokeTestAll {
             test.PrePhysicsUpdate(params);
 
             int collisionSteps = 1;
-            physicsSystem.update(params.mDeltaTime, collisionSteps,
+            int errors = physicsSystem.update(params.mDeltaTime, collisionSteps,
                     tempAllocator, jobSystem);
+            assert errors == EPhysicsUpdateError.None : errors;
 
             test.PostPhysicsUpdate(params.mDeltaTime);
         }
