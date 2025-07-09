@@ -59,14 +59,18 @@ final public class TwoBodyConstraintSettingsRef extends Ref {
     /**
      * Create a constraint using the settings. The settings are unaffected.
      *
-     * @param body1 the desired first body (not null)
-     * @param body2 the desired 2nd body (not null)
-     * @return a new constraint
+     * @param rigidBody1 the desired first body (not null, not soft)
+     * @param rigidBody2 the desired 2nd body (not null, not soft)
+     * @return the new constraint, ready to be added to a {@code PhysicsSystem}
      */
-    public TwoBodyConstraint create(Body body1, Body body2) {
+    public TwoBodyConstraint create(Body rigidBody1, Body rigidBody2) {
         long settingsVa = targetVa();
-        long body1Va = body1.va();
-        long body2Va = body2.va();
+        long body1Va = rigidBody1.va();
+        assert !Body.isSoftBody(body1Va) :
+                "body1 must be a rigid body.";
+        long body2Va = rigidBody2.va();
+        assert !Body.isSoftBody(body2Va) :
+                "body2 must be a rigid body.";
         long constraintVa = TwoBodyConstraintSettings.createConstraint(
                 settingsVa, body1Va, body2Va);
         TwoBodyConstraint result

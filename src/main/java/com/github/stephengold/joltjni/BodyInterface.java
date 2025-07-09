@@ -327,16 +327,23 @@ public class BodyInterface extends NonCopyable {
      * Create a two-body constraint using the specified settings.
      *
      * @param settings the settings to use (not null, unaffected)
-     * @param body1Id the ID of the first body
-     * @param body2Id the ID of the 2nd body
+     * @param rigidBody1Id the ID of the first rigid body
+     * @param rigidBody2Id the ID of the 2nd rigid body
      * @return the new constraint
      */
     public TwoBodyConstraint createConstraint(
-            TwoBodyConstraintSettings settings, int body1Id, int body2Id) {
+            TwoBodyConstraintSettings settings,
+            int rigidBody1Id, int rigidBody2Id) {
         long bodyInterfaceVa = va();
         long settingsVa = settings.va();
+        assert getBodyType(bodyInterfaceVa, rigidBody1Id)
+                == EBodyType.RigidBody.ordinal() :
+                "body1 must be a rigid body.";
+        assert getBodyType(bodyInterfaceVa, rigidBody2Id)
+                == EBodyType.RigidBody.ordinal() :
+                "body2 must be a rigid body.";
         long constraintVa = createConstraint(
-                bodyInterfaceVa, settingsVa, body1Id, body2Id);
+                bodyInterfaceVa, settingsVa, rigidBody1Id, rigidBody2Id);
         TwoBodyConstraint result
                 = (TwoBodyConstraint) Constraint.newConstraint(constraintVa);
 

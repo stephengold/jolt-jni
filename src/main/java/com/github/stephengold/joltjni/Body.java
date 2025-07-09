@@ -1206,7 +1206,7 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static boolean isSensor(long bodyVa);
 
-    native private static boolean isSoftBody(long bodyVa);
+    native static boolean isSoftBody(long bodyVa);
 
     native private static boolean isStatic(long bodyVa);
 
