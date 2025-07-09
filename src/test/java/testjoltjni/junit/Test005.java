@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -433,8 +433,8 @@ public class Test005 {
      */
     private static void testPointCsSetters(
             PointConstraintSettings settings) {
-        settings.setPoint1(new RVec3(0.22f, 0.23f, 0.24f));
-        settings.setPoint2(new RVec3(0.25f, 0.26f, 0.27f));
+        settings.setPoint1(0.22, 0.23, 0.24);
+        settings.setPoint2(0.25, 0.26, 0.27);
         settings.setSpace(EConstraintSpace.LocalToBodyCOM);
 
         TestUtils.assertEquals(0.22f, 0.23f, 0.24f, settings.getPoint1(), 0f);
