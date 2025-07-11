@@ -102,6 +102,20 @@ abstract public class JoltPhysicsObject
     // new methods exposed
 
     /**
+     * Test whether a daemon thread to invoke freeing actions has been started.
+     *
+     * @return {@code true} if a thread has been started, otherwise
+     * {@code false}
+     */
+    public static boolean isCleanerStarted() {
+        if (cleaner == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * Start a daemon thread to process the phantom-reachable objects and invoke
      * freeing actions, unless one has already been started.
      */
