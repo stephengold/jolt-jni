@@ -180,6 +180,7 @@ abstract public class JoltPhysicsObject
     @Override
     public void close() {
         if (freeingAction != null) {
+            assert cleaner == null : "A cleaner has been started.";
             assert hasAssignedNativeObject() : "no native object is assigned";
             freeingAction.run(); // TODO possible race condition
             this.freeingAction = null;
