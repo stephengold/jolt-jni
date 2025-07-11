@@ -364,7 +364,9 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_registerDefaultAllocator
   (JNIEnv *, jclass) {
+#ifndef JPH_DISABLE_CUSTOM_ALLOCATOR
     RegisterDefaultAllocator();
+#endif
 }
 
 /*
