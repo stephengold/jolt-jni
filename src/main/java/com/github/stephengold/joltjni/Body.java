@@ -266,8 +266,8 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Directly alter the body's angular velocity.
      *
-     * @param omega the desired angular velocity (not null, unaffected,
-     * default=(0,0,0))
+     * @param omega the desired angular velocity (radians per second in system
+     * coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setAngularVelocity(Vec3Arg omega) {
         long bodyVa = va();
@@ -338,8 +338,8 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Directly alter the body's linear velocity.
      *
-     * @param velocity the desired linear velocity (in meters per second, not
-     * null, unaffected, default=(0,0,0))
+     * @param velocity the desired velocity (meters per second in system
+     * coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setLinearVelocity(Vec3Arg velocity) {
         long bodyVa = va();

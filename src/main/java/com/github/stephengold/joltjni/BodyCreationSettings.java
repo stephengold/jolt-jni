@@ -382,8 +382,8 @@ public class BodyCreationSettings
     /**
      * Alter the (initial) linear velocity. (native member: mLinearVelocity)
      *
-     * @param velocity the desired velocity (in system coordinates, not null,
-     * unaffected, default=(0,0,0))
+     * @param velocity the desired velocity (meters per second in system
+     * coordinates, not null, unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setLinearVelocity(Vec3Arg velocity) {

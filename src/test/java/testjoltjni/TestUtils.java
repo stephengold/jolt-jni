@@ -302,9 +302,9 @@ final public class TestUtils {
     public static void initializeNativeLibrary() {
         printLibraryInfo(System.out);
 
-        //Jolt.setTraceAllocations(true); // to debug native memory allocation
+        //Jolt.setTraceAllocations(true); // to log Jolt-JNI heap allocations
         if (automateFreeing) {
-            JoltPhysicsObject.startCleaner();
+            JoltPhysicsObject.startCleaner(); // to reclaim native memory
         }
 
         Jolt.registerDefaultAllocator();

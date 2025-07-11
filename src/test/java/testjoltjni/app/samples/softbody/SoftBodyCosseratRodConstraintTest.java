@@ -185,7 +185,7 @@ public void Initialize()
 	}
 }
 
-public void PrePhysicsUpdate(PreUpdateParams inParams)
+public void PrePhysicsUpdate( PreUpdateParams inParams)
 {
 	// Draw the soft body rods
 	for (int id : mSoftBodies.toList())
@@ -194,7 +194,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 		if (lock.succeeded())
 		{
 			ConstBody body = lock.getBody();
-			ConstSoftBodyMotionProperties mp = ( SoftBodyMotionProperties )(body.getMotionProperties());
+			ConstSoftBodyMotionProperties  mp = ( SoftBodyMotionProperties )(body.getMotionProperties());
 			RMat44 com = body.getCenterOfMassTransform();
 
 			for (ConstRodStretchShear r : mp.getSettings().getRodStretchShearConstraints())

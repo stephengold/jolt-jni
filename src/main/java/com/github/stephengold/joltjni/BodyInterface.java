@@ -718,10 +718,11 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Alter the linear velocity of the specified body.
+     * Alter the angular velocity of the specified body.
      *
      * @param bodyId the ID of the body to modify
-     * @param omega the desired rates (not null, unaffected)
+     * @param omega the desired rates (radians per second in system coordiantes,
+     * not null, unaffected)
      */
     public void setAngularVelocity(int bodyId, Vec3Arg omega) {
         long bodyInterfaceVa = va();
@@ -790,7 +791,8 @@ public class BodyInterface extends NonCopyable {
      * Alter the linear velocity of the specified body.
      *
      * @param bodyId the ID of the body to modify
-     * @param velocity the desired velocity (not null, unaffected)
+     * @param velocity the desired velocity (meters per second in system
+     * coordinates, not null, unaffected)
      */
     public void setLinearVelocity(int bodyId, Vec3Arg velocity) {
         long bodyInterfaceVa = va();

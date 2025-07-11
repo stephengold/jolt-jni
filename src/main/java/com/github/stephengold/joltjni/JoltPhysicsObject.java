@@ -37,7 +37,7 @@ abstract public class JoltPhysicsObject
     // fields
 
     /**
-     * manage references to (native) Jolt Physics objects, or {@code null} if
+     * manage references to (native) Jolt-Physics objects, or {@code null} if
      * none
      */
     private static Cleaner cleaner;
