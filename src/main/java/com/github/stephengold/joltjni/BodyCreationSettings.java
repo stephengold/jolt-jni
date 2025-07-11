@@ -237,14 +237,33 @@ public class BodyCreationSettings
     /**
      * Alter the (initial) angular velocity. (native member: mAngularVelocity)
      *
+     * @param wx the X component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     * @param wy the Y component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     * @param wz the Z component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     * @return the modified settings, for chaining
+     */
+    public BodyCreationSettings setAngularVelocity(
+            float wx, float wy, float wz) {
+        long bodySettingsVa = va();
+        setAngularVelocity(bodySettingsVa, wx, wy, wz);
+        return this;
+    }
+
+    /**
+     * Alter the (initial) angular velocity. (native member: mAngularVelocity)
+     *
      * @param omega the desired angular velocity (radians per second in system
      * coordinates, not null, unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setAngularVelocity(Vec3Arg omega) {
-        long bodySettingsVa = va();
-        setAngularVelocity(bodySettingsVa,
-                omega.getX(), omega.getY(), omega.getZ());
+        float wx = omega.getX();
+        float wy = omega.getY();
+        float wz = omega.getZ();
+        setAngularVelocity(wx, wy, wz);
 
         return this;
     }
@@ -382,14 +401,33 @@ public class BodyCreationSettings
     /**
      * Alter the (initial) linear velocity. (native member: mLinearVelocity)
      *
+     * @param vx the X component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     * @param vy the Y component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     * @param vz the Z component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     * @return the modified settings, for chaining
+     */
+    public BodyCreationSettings setLinearVelocity(
+            float vx, float vy, float vz) {
+        long bodySettingsVa = va();
+        setLinearVelocity(bodySettingsVa, vx, vy, vz);
+        return this;
+    }
+
+    /**
+     * Alter the (initial) linear velocity. (native member: mLinearVelocity)
+     *
      * @param velocity the desired velocity (meters per second in system
      * coordinates, not null, unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setLinearVelocity(Vec3Arg velocity) {
-        long bodySettingsVa = va();
-        setLinearVelocity(bodySettingsVa,
-                velocity.getX(), velocity.getY(), velocity.getZ());
+        float vx = velocity.getX();
+        float vy = velocity.getY();
+        float vz = velocity.getZ();
+        setLinearVelocity(vx, vy, vz);
 
         return this;
     }
