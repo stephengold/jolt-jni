@@ -359,6 +359,25 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    registerCustomAllocator
+ * Signature: (JJJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_registerCustomAllocator
+  (JNIEnv *, jclass, jlong allocateVa, jlong reallocateVa, jlong freeVa,
+            jlong alignedAllocateVa, jlong alignedFreeVa) {
+#ifdef JPH_DISABLE_CUSTOM_ALLOCATOR
+    std::cerr << "Can't register a custom allocator!" << std::endl;
+#else
+    Allocate = reinterpret_cast<AllocateFunction> (allocateVa);
+    Reallocate = reinterpret_cast<ReallocateFunction> (reallocateVa);
+    Free = reinterpret_cast<FreeFunction> (freeVa);
+    AlignedAllocate = reinterpret_cast<AlignedAllocateFunction> (alignedAllocateVa);
+    AlignedFree = reinterpret_cast<AlignedFreeFunction> (alignedFreeVa);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    registerDefaultAllocator
  * Signature: ()V
  */

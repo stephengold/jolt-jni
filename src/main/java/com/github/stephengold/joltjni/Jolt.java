@@ -531,6 +531,23 @@ final public class Jolt {
     }
 
     /**
+     * Register the allocation hook to use the specified functions. This must be
+     * done before any other Jolt function is called.
+     *
+     * @param allocateVa the virtual address of the desired Allocate function
+     * @param reallocateVa the virtual address of the desired Reallocate
+     * function
+     * @param freeVa the virtual address of the desired Free function
+     * @param alignedAllocateVa the virtual address of the desired
+     * AlignedAllocate function
+     * @param alignedFreeVa the virtual address of the desired AlignedFree
+     * function
+     */
+    native public static void registerCustomAllocator(
+            long allocateVa, long reallocateVa, long freeVa,
+            long alignedAllocateVa, long alignedFreeVa);
+
+    /**
      * Register the allocation hook to use malloc/free. This must be done before
      * any other Jolt function is called.
      */
