@@ -482,7 +482,6 @@ final public class TestUtils {
             }
         }
         Assert.assertTrue(success);
-        printLibraryInfo(System.out);
     }
 
     /**
