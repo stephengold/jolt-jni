@@ -266,15 +266,29 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Directly alter the body's angular velocity.
      *
+     * @param wx the X component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     * @param wy the Y component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     * @param wz the Z component of the desired angular velocity (radians per
+     * second in system coordinates, default=0)
+     */
+    public void setAngularVelocity(float wx, float wy, float wz) {
+        long bodyVa = va();
+        setLinearVelocity(bodyVa, wx, wy, wz);
+    }
+
+    /**
+     * Directly alter the body's angular velocity.
+     *
      * @param omega the desired angular velocity (radians per second in system
      * coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setAngularVelocity(Vec3Arg omega) {
-        long bodyVa = va();
         float wx = omega.getX();
         float wy = omega.getY();
         float wz = omega.getZ();
-        setAngularVelocity(bodyVa, wx, wy, wz);
+        setAngularVelocity(wx, wy, wz);
     }
 
     /**
@@ -338,15 +352,29 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Directly alter the body's linear velocity.
      *
+     * @param vx the X component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     * @param vy the Y component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     * @param vz the Z component of the desired velocity (meters per second in
+     * system coordinates, default=0)
+     */
+    public void setLinearVelocity(float vx, float vy, float vz) {
+        long bodyVa = va();
+        setLinearVelocity(bodyVa, vx, vy, vz);
+    }
+
+    /**
+     * Directly alter the body's linear velocity.
+     *
      * @param velocity the desired velocity (meters per second in system
      * coordinates, not null, unaffected, default=(0,0,0))
      */
     public void setLinearVelocity(Vec3Arg velocity) {
-        long bodyVa = va();
         float vx = velocity.getX();
         float vy = velocity.getY();
         float vz = velocity.getZ();
-        setLinearVelocity(bodyVa, vx, vy, vz);
+        setLinearVelocity(vx, vy, vz);
     }
 
     /**
