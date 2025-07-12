@@ -78,6 +78,26 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
      * @param xOffset the desired X offset for the sub-shape
      * @param yOffset the desired Y offset for the sub-shape
      * @param zOffset the desired Z offset for the sub-shape
+     * @param subShape the sub-shape to add (not null)
+     */
+    public void addShape(
+            float xOffset, float yOffset, float zOffset, ConstShape subShape) {
+        long settingsVa = va();
+        float rotW = 1f;
+        float rotX = 0f;
+        float rotY = 0f;
+        float rotZ = 0f;
+        long subShapeVa = subShape.targetVa();
+        addShape(settingsVa, xOffset, yOffset, zOffset,
+                rotX, rotY, rotZ, rotW, subShapeVa);
+    }
+
+    /**
+     * Add the specified sub-shape at the specified offset.
+     *
+     * @param xOffset the desired X offset for the sub-shape
+     * @param yOffset the desired Y offset for the sub-shape
+     * @param zOffset the desired Z offset for the sub-shape
      * @param subSettings the desired sub-shape settings (not null)
      */
     public void addShape(float xOffset, float yOffset, float zOffset,
