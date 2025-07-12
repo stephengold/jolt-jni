@@ -48,6 +48,51 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
     }
 
     /**
+     * Instantiate a settings object with the specified rotation and base shape.
+     *
+     * @param rotation (not null, not zero, unaffected)
+     * @param baseShape the base shape (not null, unaffected)
+     */
+    public RotatedTranslatedShapeSettings(
+            QuatArg rotation, ConstShape baseShape) {
+        float offsetX = 0f;
+        float offsetY = 0f;
+        float offsetZ = 0f;
+        float rotW = rotation.getW();
+        float rotX = rotation.getX();
+        float rotY = rotation.getY();
+        float rotZ = rotation.getZ();
+        long baseShapeVa = baseShape.targetVa();
+        long rtssVa = createSettingsFromShape(offsetX, offsetY,
+                offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
+        setVirtualAddress(rtssVa); // no owner due to ref counting
+        setSubType(EShapeSubType.RotatedTranslated);
+    }
+
+    /**
+     * Instantiate a settings object with the specified rotation and base
+     * settings.
+     *
+     * @param rotation (not null, not zero, unaffected)
+     * @param baseShapeSettings settings for the base shape (not null)
+     */
+    public RotatedTranslatedShapeSettings(QuatArg rotation,
+            ConstShapeSettings baseShapeSettings) {
+        float offsetX = 0f;
+        float offsetY = 0f;
+        float offsetZ = 0f;
+        float rotW = rotation.getW();
+        float rotX = rotation.getX();
+        float rotY = rotation.getY();
+        float rotZ = rotation.getZ();
+        long baseShapeSettingsVa = baseShapeSettings.targetVa();
+        long rtssVa = createSettingsFromShapeSettings(offsetX, offsetY,
+                offsetZ, rotX, rotY, rotZ, rotW, baseShapeSettingsVa);
+        setVirtualAddress(rtssVa); // no owner due to ref counting
+        setSubType(EShapeSubType.RotatedTranslated);
+    }
+
+    /**
      * Instantiate a copy of the specified settings.
      *
      * @param original the settings to copy (not {@code null}, unaffected)
