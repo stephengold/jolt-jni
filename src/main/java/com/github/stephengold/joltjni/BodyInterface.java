@@ -791,13 +791,30 @@ public class BodyInterface extends NonCopyable {
      * Alter the linear velocity of the specified body.
      *
      * @param bodyId the ID of the body to modify
+     * @param vx the X component of the desired velocity (meters per second in
+     * system coordinates)
+     * @param vy the Y component of the desired velocity (meters per second in
+     * system coordinates)
+     * @param vz the Z component of the desired velocity (meters per second in
+     * system coordinates)
+     */
+    public void setLinearVelocity(int bodyId, float vx, float vy, float vz) {
+        long bodyInterfaceVa = va();
+        setLinearVelocity(bodyInterfaceVa, bodyId, vx, vy, vz);
+    }
+
+    /**
+     * Alter the linear velocity of the specified body.
+     *
+     * @param bodyId the ID of the body to modify
      * @param velocity the desired velocity (meters per second in system
      * coordinates, not null, unaffected)
      */
     public void setLinearVelocity(int bodyId, Vec3Arg velocity) {
-        long bodyInterfaceVa = va();
-        setLinearVelocity(bodyInterfaceVa, bodyId,
-                velocity.getX(), velocity.getY(), velocity.getZ());
+        float vx = velocity.getX();
+        float vy = velocity.getY();
+        float vz = velocity.getZ();
+        setLinearVelocity(bodyId, vx, vy, vz);
     }
 
     /**
