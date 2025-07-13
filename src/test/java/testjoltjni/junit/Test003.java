@@ -618,7 +618,7 @@ public class Test003 {
         bcs.setAllowedDofs(EAllowedDofs.Plane2D);
         bcs.setAllowSleeping(false);
         bcs.setAngularDamping(0.01f);
-        bcs.setAngularVelocity(new Vec3(0.02f, 0.03f, 0.04f));
+        bcs.setAngularVelocity(0.02f, 0.03f, 0.04f);
         bcs.setApplyGyroscopicForce(true);
         bcs.setCollideKinematicVsNonDynamic(true);
 
@@ -632,7 +632,7 @@ public class Test003 {
         bcs.setInertiaMultiplier(0.065f);
         bcs.setIsSensor(true);
         bcs.setLinearDamping(0.07f);
-        bcs.setLinearVelocity(new Vec3(0.08f, 0.09f, 0.1f));
+        bcs.setLinearVelocity(0.08f, 0.09f, 0.1f);
         bcs.setMaxAngularVelocity(0.101f);
         bcs.setMaxLinearVelocity(0.102f);
         bcs.setMotionQuality(EMotionQuality.LinearCast);
