@@ -249,9 +249,9 @@ public class Test001 {
         ContactListener contactListener = new TestContactListener();
         physicsSystem.setContactListener(contactListener);
 
-        BodyActivationListener bodyActivationListener
+        BodyActivationListener activationListener
                 = new TestBodyActivationListener();
-        physicsSystem.setBodyActivationListener(bodyActivationListener);
+        physicsSystem.setBodyActivationListener(activationListener);
 
         BodyInterface bodyInterface = physicsSystem.getBodyInterface();
 

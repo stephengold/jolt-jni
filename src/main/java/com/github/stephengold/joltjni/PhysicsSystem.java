@@ -83,11 +83,11 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * cached reference to the system's no-lock {@code NarrowPhaseQuery}
      */
-    final private NarrowPhaseQuery narrowPhaseQueryNoLock;
+    final private NarrowPhaseQuery narrowQueryNoLock;
     /**
      * protect the soft-body contact listener (if any) from garbage collection
      */
-    private SoftBodyContactListener softBodyContactListener;
+    private SoftBodyContactListener softContactListener;
     // *************************************************************************
     // constructors
 
@@ -109,7 +109,7 @@ public class PhysicsSystem extends NonCopyable {
         this.narrowPhaseQuery = new NarrowPhaseQuery(this, lockingVa);
 
         noLockVa = getNarrowPhaseQueryNoLock(systemVa);
-        this.narrowPhaseQueryNoLock = new NarrowPhaseQuery(this, noLockVa);
+        this.narrowQueryNoLock = new NarrowPhaseQuery(this, noLockVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -495,7 +495,7 @@ public class PhysicsSystem extends NonCopyable {
      * @return the pre-existing JVM object (not null)
      */
     public NarrowPhaseQuery getNarrowPhaseQueryNoLock() {
-        return narrowPhaseQueryNoLock;
+        return narrowQueryNoLock;
     }
 
     /**
@@ -568,7 +568,7 @@ public class PhysicsSystem extends NonCopyable {
      * @return the pre-existing instance, or {@code null} if none
      */
     public SoftBodyContactListener getSoftBodyContactListener() {
-        return softBodyContactListener;
+        return softContactListener;
     }
 
     /**
@@ -798,7 +798,7 @@ public class PhysicsSystem extends NonCopyable {
      * @param listener the desired listener
      */
     public void setSoftBodyContactListener(SoftBodyContactListener listener) {
-        this.softBodyContactListener = listener;
+        this.softContactListener = listener;
         long systemVa = va();
         long listenerVa = listener.va();
         setSoftBodyContactListener(systemVa, listenerVa);
