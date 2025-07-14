@@ -257,14 +257,14 @@ final public class Jolt {
     /**
      * Combine the specified vector with the specified hash code.
      *
-     * @param vec the vector to combine (not null, unaffected)
+     * @param vector the vector to combine (not null, unaffected)
      * @param oldHash the old hash code
      * @return the new hash code
      */
-    public static long hashCombine(long oldHash, Vec3Arg vec) {
-        float x = vec.getX();
-        float y = vec.getY();
-        float z = vec.getZ();
+    public static long hashCombine(long oldHash, Vec3Arg vector) {
+        float x = vector.getX();
+        float y = vector.getY();
+        float z = vector.getZ();
         long result = hashCombineVec3(oldHash, x, y, z);
 
         return result;
