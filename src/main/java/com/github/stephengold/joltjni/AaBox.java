@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -361,6 +362,40 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
         return result;
     }
+
+    /**
+     * Return a scaled copy of the box. The current box is unaffected.
+     *
+     * @param factors the scale factors to apply (not null, unaffected)
+     * @return a new object
+     */
+    @Override
+    public AaBox scaled(Vec3Arg factors) {
+        long boxVa = va();
+        float sx = factors.getX();
+        float sy = factors.getY();
+        float sz = factors.getZ();
+        long resultVa = scaled(boxVa, sx, sy, sz);
+        AaBox result = new AaBox(resultVa, true);
+
+        return result;
+    }
+
+    /**
+     * Return a transformed copy of the box. The current box is unaffected.
+     *
+     * @param matrix the transformation to apply (not null, unaffected)
+     * @return a new object
+     */
+    @Override
+    public AaBox transformed(Mat44Arg matrix) {
+        long boxVa = va();
+        long matrixVa = matrix.targetVa();
+        long resultVa = transformed(boxVa, matrixVa);
+        AaBox result = new AaBox(resultVa, true);
+
+        return result;
+    }
     // *************************************************************************
     // native private methods
 
@@ -423,11 +458,15 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     native private static boolean isValid(long boxVa);
 
+    native private static long scaled(long boxVa, float sx, float sy, float sz);
+
     native private static void setEmpty(long boxVa);
 
     native private static void setMax(long boxVa, float x, float y, float z);
 
     native private static void setMin(long boxVa, float x, float y, float z);
+
+    native private static long transformed(long boxVa, long matrixVa);
 
     native private static void translate(long boxVa, float x, float y, float z);
 }

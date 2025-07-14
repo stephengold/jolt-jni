@@ -359,6 +359,21 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_isValid
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    scaled
+ * Signature: (JFFF)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_scaled
+  (JNIEnv *, jclass, jlong boxVa, jfloat sx, jfloat sy, jfloat sz) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const Vec3 factors(sx, sy, sz);
+    AABox * const pResult = new AABox();
+    TRACE_NEW("AABox", pResult)
+    *pResult = pBox->Scaled(factors);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    setEmpty
  * Signature: (J)V
  */
@@ -390,6 +405,21 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_setMin
     AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     const Vec3 min(x, y, z);
     pBox->mMin = min;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    transformed
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_transformed
+  (JNIEnv *, jclass, jlong boxVa, jlong matrixVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
+    AABox * const pResult = new AABox();
+    TRACE_NEW("AABox", pResult)
+    *pResult = pBox->Transformed(*pMatrix);
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*

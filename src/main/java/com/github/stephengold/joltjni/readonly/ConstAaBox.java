@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
@@ -97,4 +98,20 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * @return {@code true} if valid, otherwise {@code false}
      */
     boolean isValid();
+
+    /**
+     * Return a scaled copy of the box. The current box is unaffected.
+     *
+     * @param factors the scale factors to apply (not null, unaffected)
+     * @return a new object
+     */
+    AaBox scaled(Vec3Arg factors);
+
+    /**
+     * Return a transformed copy of the box The current box is unaffected.
+     *
+     * @param matrix the transformation to apply (not null, unaffected)
+     * @return a new object
+     */
+    AaBox transformed(Mat44Arg matrix);
 }
