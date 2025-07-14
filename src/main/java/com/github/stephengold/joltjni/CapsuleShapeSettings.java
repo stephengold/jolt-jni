@@ -54,17 +54,6 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    CapsuleShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Capsule);
-    }
-
-    /**
      * Instantiate settings for the specified dimensions.
      *
      * @param halfHeight half the desired height of the cylindrical portion
@@ -86,6 +75,17 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createShapeSettings(halfHeight, radius, materialVa);
         setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Capsule);
+    }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    CapsuleShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.Capsule);
     }
     // *************************************************************************
