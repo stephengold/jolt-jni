@@ -365,25 +365,6 @@ final public class Jolt {
     }
 
     /**
-     * Create a direct {@code FloatBuffer} with native byte order and the
-     * specified capacity.
-     *
-     * @param numFloats the desired capacity (in floats)
-     * @return a new direct buffer, zeroed and rewound but not flipped
-     */
-    public static FloatBuffer newDirectFloatBuffer(int numFloats) {
-        ByteBuffer byteBuffer
-                = ByteBuffer.allocateDirect(numFloats * Float.BYTES);
-        byteBuffer.order(ByteOrder.nativeOrder());
-        FloatBuffer result = byteBuffer.asFloatBuffer();
-
-        assert result.capacity() == numFloats : result.capacity();
-        assert result.limit() == numFloats : result.limit();
-        assert result.position() == 0 : result.position();
-        return result;
-    }
-
-    /**
      * Create a direct {@code DoubleBuffer} with native byte order and the
      * specified capacity.
      *
@@ -398,6 +379,25 @@ final public class Jolt {
 
         assert result.capacity() == numDoubles : result.capacity();
         assert result.limit() == numDoubles : result.limit();
+        assert result.position() == 0 : result.position();
+        return result;
+    }
+
+    /**
+     * Create a direct {@code FloatBuffer} with native byte order and the
+     * specified capacity.
+     *
+     * @param numFloats the desired capacity (in floats)
+     * @return a new direct buffer, zeroed and rewound but not flipped
+     */
+    public static FloatBuffer newDirectFloatBuffer(int numFloats) {
+        ByteBuffer byteBuffer
+                = ByteBuffer.allocateDirect(numFloats * Float.BYTES);
+        byteBuffer.order(ByteOrder.nativeOrder());
+        FloatBuffer result = byteBuffer.asFloatBuffer();
+
+        assert result.capacity() == numFloats : result.capacity();
+        assert result.limit() == numFloats : result.limit();
         assert result.position() == 0 : result.position();
         return result;
     }
@@ -441,6 +441,14 @@ final public class Jolt {
     }
 
     /**
+     * Create a factory for deserialization of saved data.
+     *
+     * @return {@code true} if successful, otherwise {@code false}
+     * @see #destroyFactory()
+     */
+    native public static boolean newFactory();
+
+    /**
      * Generate 3-D Perlin noise.
      *
      * @param x the X coordinate
@@ -480,14 +488,6 @@ final public class Jolt {
      * @param name the section name (not null)
      */
     native public static void profileStart(String name);
-
-    /**
-     * Create a factory for deserialization of saved data.
-     *
-     * @return {@code true} if successful, otherwise {@code false}
-     * @see #destroyFactory()
-     */
-    native public static boolean newFactory();
 
     /**
      * Convert the specified angle from radians to degrees.
