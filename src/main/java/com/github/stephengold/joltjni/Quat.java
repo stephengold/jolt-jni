@@ -60,7 +60,7 @@ final public class Quat implements QuatArg {
     /**
      * lazily allocated distribution, used in randomization
      */
-    private static UniformFloatDistribution distro = null;
+    private static UniformFloatDistribution distro;
     // *************************************************************************
     // constructors
 

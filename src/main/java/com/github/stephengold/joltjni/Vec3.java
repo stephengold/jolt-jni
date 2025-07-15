@@ -58,7 +58,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * lazily allocated distribution, used in randomization
      */
-    private static UniformFloatDistribution distro = null;
+    private static UniformFloatDistribution distro;
     // *************************************************************************
     // constructors
 
