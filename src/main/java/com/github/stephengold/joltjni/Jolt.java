@@ -503,6 +503,35 @@ final public class Jolt {
     /**
      * Intersect the specified axis-aligned box with the specified ray.
      *
+     * @param rayOrigin the origin of the ray (not null, unaffected)
+     * @param invDirection the inverse direction of the ray (not null,
+     * unaffected)
+     * @param minimum the minimum coordinates of the box (not null, unaffected)
+     * @param maximum the maximum coordinates of the box (not null, unaffected)
+     * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
+     * misses the box
+     */
+    public static float rayAaBox(Vec3Arg rayOrigin,
+            RayInvDirection invDirection, Vec3Arg minimum, Vec3Arg maximum) {
+        float originX = rayOrigin.getX();
+        float originY = rayOrigin.getY();
+        float originZ = rayOrigin.getZ();
+        long invDirVa = invDirection.va();
+        float minX = minimum.getX();
+        float minY = minimum.getY();
+        float minZ = minimum.getZ();
+        float maxX = maximum.getX();
+        float maxY = maximum.getY();
+        float maxZ = maximum.getZ();
+        float result = rayAaBox(originX, originY, originZ, invDirVa,
+                minX, minY, minZ, maxX, maxY, maxZ);
+
+        return result;
+    }
+
+    /**
+     * Intersect the specified axis-aligned box with the specified ray.
+     *
      * @param startLocation the desired start location (not null, unaffected)
      * @param offset the desired end offset from the start (not null,
      * unaffected)
@@ -526,6 +555,140 @@ final public class Jolt {
         float maxZ = maximum.getZ();
         boolean result = rayAaBoxHits(startX, startY, startZ,
                 offsetX, offsetY, offsetZ, minX, minY, minZ, maxX, maxY, maxZ);
+
+        return result;
+    }
+
+    /**
+     * Intersect the specified capsule with the specified ray.
+     *
+     * @param rayOrigin the origin of the ray (not null, unaffected)
+     * @param rayDirection the direction of the ray (not null, unaffected)
+     * @param capsuleHalfHeight half the height of the capsule
+     * @param capsuleRadius the radius of the capsule
+     * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
+     * misses the capsule
+     */
+    public static float rayCapsule(Vec3Arg rayOrigin, Vec3Arg rayDirection,
+            float capsuleHalfHeight, float capsuleRadius) {
+        float originX = rayOrigin.getX();
+        float originY = rayOrigin.getY();
+        float originZ = rayOrigin.getZ();
+        float directionX = rayDirection.getX();
+        float directionY = rayDirection.getY();
+        float directionZ = rayDirection.getZ();
+        float result = rayCapsule(originX, originY, originZ, directionX,
+                directionY, directionZ, capsuleHalfHeight, capsuleRadius);
+
+        return result;
+    }
+
+    /**
+     * Intersect the specified infinite cylinder with the specified ray.
+     *
+     * @param rayOrigin the origin of the ray (not null, unaffected)
+     * @param rayDirection the direction of the ray (not null, unaffected)
+     * @param cylinderRadius the radius of the cylinder
+     * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
+     * misses the cylinder
+     */
+    public static float rayCylinder(
+            Vec3Arg rayOrigin, Vec3Arg rayDirection, float cylinderRadius) {
+        float originX = rayOrigin.getX();
+        float originY = rayOrigin.getY();
+        float originZ = rayOrigin.getZ();
+        float directionX = rayDirection.getX();
+        float directionY = rayDirection.getY();
+        float directionZ = rayDirection.getZ();
+        float result = rayInfiniteCylinder(originX, originY, originZ,
+                directionX, directionY, directionZ, cylinderRadius);
+
+        return result;
+    }
+
+    /**
+     * Intersect the specified finite cylinder with the specified ray.
+     *
+     * @param rayOrigin the origin of the ray (not null, unaffected)
+     * @param rayDirection the direction of the ray (not null, unaffected)
+     * @param cylinderHalfHeight half of the height of the cylinder
+     * @param cylinderRadius the radius of the cylinder
+     * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
+     * misses the cylinder
+     */
+    public static float rayCylinder(Vec3Arg rayOrigin, Vec3Arg rayDirection,
+            float cylinderHalfHeight, float cylinderRadius) {
+        float originX = rayOrigin.getX();
+        float originY = rayOrigin.getY();
+        float originZ = rayOrigin.getZ();
+        float directionX = rayDirection.getX();
+        float directionY = rayDirection.getY();
+        float directionZ = rayDirection.getZ();
+        float result = rayFiniteCylinder(originX, originY, originZ, directionX,
+                directionY, directionZ, cylinderHalfHeight, cylinderRadius);
+
+        return result;
+    }
+
+    /**
+     * Intersect the specified sphere with the specified ray.
+     *
+     * @param rayOrigin the origin of the ray (not null, unaffected)
+     * @param rayDirection the direction of the ray (not null, unaffected)
+     * @param sphereCenter the center of the sphere (not null, unaffected)
+     * @param sphereRadius the radius of the sphere
+     * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
+     * misses the sphere
+     */
+    public static float raySphere(Vec3Arg rayOrigin, Vec3Arg rayDirection,
+            Vec3Arg sphereCenter, float sphereRadius) {
+        float originX = rayOrigin.getX();
+        float originY = rayOrigin.getY();
+        float originZ = rayOrigin.getZ();
+        float directionX = rayDirection.getX();
+        float directionY = rayDirection.getY();
+        float directionZ = rayDirection.getZ();
+        float centerX = sphereCenter.getX();
+        float centerY = sphereCenter.getY();
+        float centerZ = sphereCenter.getZ();
+        float result = raySphere(
+                originX, originY, originZ, directionX, directionY, directionZ,
+                centerX, centerY, centerZ, sphereRadius);
+
+        return result;
+    }
+
+    /**
+     * Intersect the specified triangle with the specified ray.
+     *
+     * @param rayOrigin the origin of the ray (not null, unaffected)
+     * @param rayDirection the direction of the ray (not null, unaffected)
+     * @param v0 the first vertex of the triangle (not null, unaffected)
+     * @param v1 the 2nd vertex of the triangle (not null, unaffected)
+     * @param v2 the 3rd vertex of the triangle (not null, unaffected)
+     * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
+     * misses the triangle
+     */
+    public static float rayTriangle(Vec3Arg rayOrigin, Vec3Arg rayDirection,
+            Vec3Arg v0, Vec3Arg v1, Vec3Arg v2) {
+        float originX = rayOrigin.getX();
+        float originY = rayOrigin.getY();
+        float originZ = rayOrigin.getZ();
+        float directionX = rayDirection.getX();
+        float directionY = rayDirection.getY();
+        float directionZ = rayDirection.getZ();
+        float v0x = v0.getX();
+        float v0y = v0.getY();
+        float v0z = v0.getZ();
+        float v1x = v1.getX();
+        float v1y = v1.getY();
+        float v1z = v1.getZ();
+        float v2x = v2.getX();
+        float v2y = v2.getY();
+        float v2z = v2.getZ();
+        float result = rayTriangle(
+                originX, originY, originZ, directionX, directionY, directionZ,
+                v0x, v0y, v0z, v1x, v1y, v1z, v2x, v2y, v2z);
 
         return result;
     }
@@ -677,8 +840,33 @@ final public class Jolt {
     native private static long hashCombineVec3(
             long oldHash, float x, float y, float z);
 
+    native private static float rayAaBox(float originX, float originY,
+            float originZ, long invDirVa, float minX, float minY, float minZ,
+            float maxX, float maxY, float maxZ);
+
     native private static boolean rayAaBoxHits(float startX, float startY,
             float startZ, float offsetX, float offsetY, float offsetZ,
             float minX, float minY, float minZ, float maxX, float maxY,
             float maxZ);
+
+    native private static float rayCapsule(float originX, float originY,
+            float originZ, float directionX, float directionY, float directionZ,
+            float capsuleHalfHeight, float capsuleRadius);
+
+    native private static float rayFiniteCylinder(float originX, float originY,
+            float originZ, float directionX, float directionY, float directionZ,
+            float cylinderHalfheight, float cylinderRadius);
+
+    native private static float rayInfiniteCylinder(
+            float originX, float originY, float originZ, float directionX,
+            float directionY, float directionZ, float cylinderRadius);
+
+    native private static float raySphere(float originX, float originY,
+            float originZ, float directionX, float directionY, float directionZ,
+            float centerX, float centerY, float centerZ, float sphereRadius);
+
+    native private static float rayTriangle(
+            float originX, float originY, float originZ, float directionX,
+            float directionY, float directionZ, float v0x, float v0y, float v0z,
+            float v1x, float v1y, float v1z, float v2x, float v2y, float v2z);
 }

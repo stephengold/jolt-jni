@@ -30,6 +30,10 @@ SOFTWARE.
 #include "Jolt/Core/Profiler.h"
 #include "Jolt/Core/TempAllocator.h"
 #include "Jolt/Geometry/RayAABox.h"
+#include "Jolt/Geometry/RayCapsule.h"
+#include "Jolt/Geometry/RayCylinder.h"
+#include "Jolt/Geometry/RaySphere.h"
+#include "Jolt/Geometry/RayTriangle.h"
 #include "Jolt/Physics/Body/BodyID.h"
 #include "Jolt/Physics/Character/CharacterID.h"
 #include "Jolt/Physics/DeterminismLog.h"
@@ -561,6 +565,24 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombineVec3
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    rayAaBox
+ * Signature: (FFFJFFFFFF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_rayAaBox
+  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
+  jlong invDirVa, jfloat minX, jfloat minY, jfloat minZ, jfloat maxX,
+  jfloat maxY, jfloat maxZ) {
+    const Vec3 origin(originZ, originY, originZ);
+    const RayInvDirection * const pInvDir
+            = reinterpret_cast<RayInvDirection *> (invDirVa);
+    const Vec3 min(minZ, minY, minZ);
+    const Vec3 max(maxZ, maxY, maxZ);
+    const float result = RayAABox(origin, *pInvDir, min, max);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    rayAaBoxHits
  * Signature: (FFFFFFFFFFFF)Z
  */
@@ -573,5 +595,87 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_rayAaBoxHits
     const Vec3 min(minX, minY, minZ);
     const Vec3 max(maxX, maxY, maxZ);
     const bool result = RayAABoxHits(start, offset, min, max);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    rayCapsule
+ * Signature: (FFFFFFFF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_rayCapsule
+  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
+  jfloat directionX, jfloat directionY, jfloat directionZ,
+  jfloat capsuleHalfHeight, jfloat capsuleRadius) {
+    const Vec3 origin(originX, originY, originZ);
+    const Vec3 direction(directionX, directionY, directionZ);
+    const float result
+            = RayCapsule(origin, direction, capsuleHalfHeight, capsuleRadius);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    rayFiniteCylinder
+ * Signature: (FFFFFFFF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_rayFiniteCylinder
+  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
+  jfloat directionX, jfloat directionY, jfloat directionZ,
+  jfloat cylinderHalfHeight, jfloat cylinderRadius) {
+    const Vec3 origin(originX, originY, originZ);
+    const Vec3 direction(directionX, directionY, directionZ);
+    const float result = RayCylinder(
+            origin, direction, cylinderHalfHeight, cylinderRadius);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    rayInfiniteCylinder
+ * Signature: (FFFFFFF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_rayInfiniteCylinder
+  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
+  jfloat directionX, jfloat directionY, jfloat directionZ,
+  jfloat cylinderRadius) {
+    const Vec3 origin(originX, originY, originZ);
+    const Vec3 direction(directionX, directionY, directionZ);
+    const float result = RayCylinder(origin, direction, cylinderRadius);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    raySphere
+ * Signature: (FFFFFFFFFF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_raySphere
+  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
+  jfloat directionX, jfloat directionY, jfloat directionZ, jfloat centerX,
+  jfloat centerY, jfloat centerZ, jfloat sphereRadius) {
+    const Vec3 origin(originX, originY, originZ);
+    const Vec3 direction(directionX, directionY, directionZ);
+    const Vec3 center(centerX, centerY, centerZ);
+    const float result = RaySphere(origin, direction, center, sphereRadius);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    rayTriangle
+ * Signature: (FFFFFFFFFFFFFFF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_rayTriangle
+  (JNIEnv *, jclass, jfloat originX, jfloat originY, jfloat originZ,
+  jfloat directionX, jfloat directionY, jfloat directionZ,
+  jfloat v0x, jfloat v0y, jfloat v0z, jfloat v1x, jfloat v1y, jfloat v1z,
+  jfloat v2x, jfloat v2y, jfloat v2z) {
+    const Vec3 origin(originX, originY, originZ);
+    const Vec3 direction(directionX, directionY, directionZ);
+    const Vec3 v0(v0x, v0y, v0z);
+    const Vec3 v1(v1x, v1y, v1z);
+    const Vec3 v2(v2x, v2y, v2z);
+    const float result = RayTriangle(origin, direction, v0, v1, v2);
     return result;
 }
