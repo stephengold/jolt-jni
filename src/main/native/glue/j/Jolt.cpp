@@ -283,6 +283,25 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_isDoublePrec
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    newFactory
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
+  (JNIEnv *, jclass) {
+#if defined(JPH_DEBUG) && !defined(JPH_DISABLE_CUSTOM_ALLOCATOR)
+    if (!Allocate) {
+        std::cerr << "Can't create a Factory because no default allocator is registered!"
+                << std::endl;
+        return JNI_FALSE;
+    }
+#endif
+    Factory::sInstance = new Factory();
+    TRACE_NEW("Factory", Factory::sInstance)
+    return Factory::sInstance != nullptr;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    perlinNoise3
  * Signature: (FFFIII)F
  */
@@ -336,25 +355,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_profileStart
     const char * const pName = pEnv->GetStringUTFChars(name, &isCopy);
     JPH_PROFILE_START(pName);
     pEnv->ReleaseStringUTFChars(name, pName);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Jolt
- * Method:    newFactory
- * Signature: ()Z
- */
-JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
-  (JNIEnv *, jclass) {
-#if defined(JPH_DEBUG) && !defined(JPH_DISABLE_CUSTOM_ALLOCATOR)
-    if (!Allocate) {
-        std::cerr << "Can't create a Factory because no default allocator is registered!"
-                << std::endl;
-        return JNI_FALSE;
-    }
-#endif
-    Factory::sInstance = new Factory();
-    TRACE_NEW("Factory", Factory::sInstance)
-    return Factory::sInstance != nullptr;
 }
 
 /*
