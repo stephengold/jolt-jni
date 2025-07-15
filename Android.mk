@@ -304,6 +304,7 @@ $(N)/glue/t/TransformedAaBox.cpp \
 $(N)/glue/t/TransformedShapeCollector.cpp \
 $(N)/glue/t/TransformedShape.cpp \
 $(N)/glue/t/TransformedSphere.cpp \
+$(N)/glue/t/TriangleConvexSupport.cpp \
 $(N)/glue/t/Triangle.cpp \
 $(N)/glue/t/TriangleShape.cpp \
 $(N)/glue/t/TriangleShapeSettings.cpp \
