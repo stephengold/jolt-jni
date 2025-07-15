@@ -293,6 +293,10 @@
         <!-- Regexp checks:                           -->
         <!-- See https://checkstyle.org/checks/regexp -->
         <module name="RegexpSinglelineJava">
+            <property name="format" value="static (final|native|package|private|protected)|(native|package|private|protected|static) final"/>
+            <property name="message" value="Modifiers must appear in alphabetical order."/>
+        </module>
+        <module name="RegexpSinglelineJava">
             <property name="format" value="\{[ ]+\}"/>
             <property name="message" value="Empty blocks should have no spaces. Empty blocks may only be represented as '{}' when not part of a multi-block statement (4.1.3)"/>
         </module>
