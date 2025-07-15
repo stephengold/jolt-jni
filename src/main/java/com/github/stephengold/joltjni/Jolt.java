@@ -532,12 +532,13 @@ final public class Jolt {
     /**
      * Intersect the specified axis-aligned box with the specified ray.
      *
-     * @param startLocation the desired start location (not null, unaffected)
-     * @param offset the desired end offset from the start (not null,
+     * @param startLocation the desired start location of the ray (not null,
+     * unaffected)
+     * @param offset the desired end offset from the start location (not null,
      * unaffected)
      * @param minimum the minimum coordinates of the box (not null, unaffected)
      * @param maximum the maximum coordinates of the box (not null, unaffected)
-     * @return {@code true} if there is a hit
+     * @return {@code true} if there is a hit, otherwise {@code false}
      */
     public static boolean rayAaBoxHits(Vec3Arg startLocation, Vec3Arg offset,
             Vec3Arg minimum, Vec3Arg maximum) {
@@ -819,7 +820,7 @@ final public class Jolt {
     native public static void unregisterTypes();
 
     /**
-     * Return the Jolt-JNI version string that's hard-coded in the native
+     * Return the Jolt-JNI version string that's hard-coded into the native
      * library.
      *
      * @return the version string (not null, not empty)
@@ -844,10 +845,10 @@ final public class Jolt {
             float originZ, long invDirVa, float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ);
 
-    native private static boolean rayAaBoxHits(float startX, float startY,
-            float startZ, float offsetX, float offsetY, float offsetZ,
-            float minX, float minY, float minZ, float maxX, float maxY,
-            float maxZ);
+    native private static boolean rayAaBoxHits(
+            float startX, float startY, float startZ, float offsetX,
+            float offsetY, float offsetZ, float minX, float minY, float minZ,
+            float maxX, float maxY, float maxZ);
 
     native private static float rayCapsule(float originX, float originY,
             float originZ, float directionX, float directionY, float directionZ,
