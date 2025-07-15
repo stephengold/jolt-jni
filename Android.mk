@@ -222,6 +222,7 @@ $(N)/glue/r/RayCastBodyCollector.cpp \
 $(N)/glue/r/RayCast.cpp \
 $(N)/glue/r/RayCastResult.cpp \
 $(N)/glue/r/RayCastSettings.cpp \
+$(N)/glue/r/RayInvDirection.cpp \
 $(N)/glue/r/RMat44.cpp \
 $(N)/glue/r/RodBendTwist.cpp \
 $(N)/glue/r/RodStretchShear.cpp \
