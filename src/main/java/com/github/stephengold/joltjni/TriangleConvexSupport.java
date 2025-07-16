@@ -74,7 +74,7 @@ final public class TriangleConvexSupport extends JoltPhysicsObject {
      */
     public Vec3 getV1() {
         long triangleVa = va();
-        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(3);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getVertex(triangleVa, 0, storeFloats);
         Vec3 result = new Vec3(storeFloats);
 
@@ -88,7 +88,7 @@ final public class TriangleConvexSupport extends JoltPhysicsObject {
      */
     public Vec3 getV2() {
         long triangleVa = va();
-        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(3);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getVertex(triangleVa, 1, storeFloats);
         Vec3 result = new Vec3(storeFloats);
 
@@ -102,7 +102,7 @@ final public class TriangleConvexSupport extends JoltPhysicsObject {
      */
     public Vec3 getV3() {
         long triangleVa = va();
-        FloatBuffer storeFloats = Jolt.newDirectFloatBuffer(3);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getVertex(triangleVa, 2, storeFloats);
         Vec3 result = new Vec3(storeFloats);
 
