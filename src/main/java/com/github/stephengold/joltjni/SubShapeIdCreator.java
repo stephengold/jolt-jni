@@ -35,8 +35,8 @@ public class SubShapeIdCreator extends JoltPhysicsObject {
      * Instantiate a default creator.
      */
     public SubShapeIdCreator() {
-        long creatorId = createDefault();
-        setVirtualAddress(creatorId, () -> free(creatorId));
+        long creatorVa = createDefault();
+        setVirtualAddress(creatorVa, () -> free(creatorVa));
     }
 
     /**
@@ -97,7 +97,7 @@ public class SubShapeIdCreator extends JoltPhysicsObject {
 
     native static long createDefault();
 
-    native private static void free(long creatorId);
+    native private static void free(long creatorVa);
 
     native private static int getId(long creatorVa);
 
