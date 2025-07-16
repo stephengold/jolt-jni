@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/Shape/CompoundShape.h"
 #include "auto/com_github_stephengold_joltjni_CompoundShape.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -53,6 +54,23 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CompoundShape_getSub
             = reinterpret_cast<CompoundShape *> (shapeVa);
     const CompoundShape::SubShape * const pResult
             = &pShape->GetSubShape(subShapeIndex);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CompoundShape
+ * Method:    getSubShapeIdFromIndex
+ * Signature: (JIJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CompoundShape_getSubShapeIdFromIndex
+  (JNIEnv *, jclass, jlong shapeVa, jint subShapeIndex, jlong parentVa) {
+    const CompoundShape * const pShape
+            = reinterpret_cast<CompoundShape *> (shapeVa);
+    const SubShapeIDCreator * const pParent
+            = reinterpret_cast<SubShapeIDCreator *> (parentVa);
+    SubShapeIDCreator * const pResult = new SubShapeIDCreator();
+    TRACE_NEW("SubShapeIDCreator", pResult)
+    *pResult = pShape->GetSubShapeIDFromIndex(subShapeIndex, *pParent);
     return reinterpret_cast<jlong> (pResult);
 }
 

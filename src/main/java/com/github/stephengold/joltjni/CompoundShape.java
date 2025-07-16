@@ -76,6 +76,27 @@ abstract public class CompoundShape extends Shape {
     }
 
     /**
+     * Convert a sub-shape index to a sub-shape ID. (native method:
+     * GetSubShapeIDFromIndex)
+     *
+     * @param subShapeIndex the index of a subshape within the current compound
+     * shape (&ge;0)
+     * @param parent a path the the current compound shape (not null,
+     * unaffected)
+     * @return a new object
+     */
+    public SubShapeIdCreator getSubShapeIdFromIndex(
+            int subShapeIndex, SubShapeIdCreator parent) {
+        long shapeVa = va();
+        long parentVa = parent.va();
+        long creatorVa
+                = getSubShapeIdFromIndex(shapeVa, subShapeIndex, parentVa);
+        SubShapeIdCreator result = new SubShapeIdCreator(creatorVa, true);
+
+        return result;
+    }
+
+    /**
      * Access all the sub-shapes as an array.
      *
      * @return a new array of new JVM objects with pre-existing native objects
@@ -110,6 +131,9 @@ abstract public class CompoundShape extends Shape {
     native private static int getNumSubShapes(long shapeVa);
 
     native private static long getSubShape(long shapeVa, int subShapeIndex);
+
+    native private static long getSubShapeIdFromIndex(
+            long shapeVa, int subShapeIndex, long parentVa);
 
     native private static void restoreSubShapeState(long shapeVa, long listVa);
 }
