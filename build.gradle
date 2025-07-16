@@ -204,6 +204,8 @@ model {
 
                 String q = pName + buildType.name + flavor.name
                 if (toolChain in VisualCpp) {
+                    cppCompiler.define 'JPH_BUILD_SHARED_LIBRARY'
+                    cppCompiler.define 'JPH_SHARED_LIBRARY'
                     cppCompiler.define 'WIN32'
                     cppCompiler.args '/EHsc' // synchronous exceptions only
                     cppCompiler.args "/I$javaHome/include"
