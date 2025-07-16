@@ -35,8 +35,8 @@ public class Impulse extends JoltPhysicsObject {
      * Instantiate a default estimate.
      */
     public Impulse() {
-        long estimateVa = createDefault();
-        setVirtualAddress(estimateVa, () -> free(estimateVa));
+        long impulseVa = createDefault();
+        setVirtualAddress(impulseVa, () -> free(impulseVa));
     }
 
     /**
@@ -59,8 +59,8 @@ public class Impulse extends JoltPhysicsObject {
      * @return the impulse component (in kilogram-meters per second)
      */
     public float getContactImpulse() {
-        long estimateVa = va();
-        float result = getContactImpulse(estimateVa);
+        long impulseVa = va();
+        float result = getContactImpulse(impulseVa);
 
         return result;
     }
@@ -72,8 +72,8 @@ public class Impulse extends JoltPhysicsObject {
      * @return the impulse component (in kilogram-meters per second)
      */
     public float getFrictionImpulse1() {
-        long estimateVa = va();
-        float result = getFrictionImpulse1(estimateVa);
+        long impulseVa = va();
+        float result = getFrictionImpulse1(impulseVa);
 
         return result;
     }
@@ -85,8 +85,8 @@ public class Impulse extends JoltPhysicsObject {
      * @return the impulse component (in kilogram-meters per second)
      */
     public float getFrictionImpulse2() {
-        long estimateVa = va();
-        float result = getFrictionImpulse2(estimateVa);
+        long impulseVa = va();
+        float result = getFrictionImpulse2(impulseVa);
 
         return result;
     }
@@ -95,11 +95,11 @@ public class Impulse extends JoltPhysicsObject {
 
     native private static long createDefault();
 
-    native private static void free(long estimateVa);
+    native private static void free(long impulseVa);
 
-    native private static float getContactImpulse(long estimateVa);
+    native private static float getContactImpulse(long impulseVa);
 
-    native private static float getFrictionImpulse1(long estimateVa);
+    native private static float getFrictionImpulse1(long impulseVa);
 
-    native private static float getFrictionImpulse2(long estimateVa);
+    native private static float getFrictionImpulse2(long impulseVa);
 }
