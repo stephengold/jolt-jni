@@ -54,9 +54,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_streamutils_IdToShape
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Impulse_getContactImpulse
   (JNIEnv *, jclass, jlong estimateVa) {
-    CollisionEstimationResult::Impulse * const pImpulse
+    const CollisionEstimationResult::Impulse * const pImpulse
             = reinterpret_cast<CollisionEstimationResult::Impulse *> (estimateVa);
-    float result = pImpulse->mContactImpulse;
+    const float result = pImpulse->mContactImpulse;
     return result;
 }
 
@@ -67,9 +67,9 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Impulse_getContactI
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Impulse_getFrictionImpulse1
   (JNIEnv *, jclass, jlong estimateVa) {
-    CollisionEstimationResult::Impulse * const pImpulse
+    const CollisionEstimationResult::Impulse * const pImpulse
             = reinterpret_cast<CollisionEstimationResult::Impulse *> (estimateVa);
-    float result = pImpulse->mFrictionImpulse1;
+    const float result = pImpulse->mFrictionImpulse1;
     return result;
 }
 
@@ -80,8 +80,8 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Impulse_getFriction
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Impulse_getFrictionImpulse2
   (JNIEnv *, jclass, jlong estimateVa) {
-    CollisionEstimationResult::Impulse * const pImpulse
+    const CollisionEstimationResult::Impulse * const pImpulse
             = reinterpret_cast<CollisionEstimationResult::Impulse *> (estimateVa);
-    float result = pImpulse->mFrictionImpulse2;
+    const float result = pImpulse->mFrictionImpulse2;
     return result;
 }
