@@ -45,3 +45,44 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdCreator_cr
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SubShapeIdCreator_free
     BODYOF_FREE(SubShapeIDCreator)
+
+/*
+ * Class:     com_github_stephengold_joltjni_SubShapeIdCreator
+ * Method:    getId
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SubShapeIdCreator_getId
+  (JNIEnv *, jclass, jlong creatorVa) {
+    const SubShapeIDCreator * const pCreator
+            = reinterpret_cast<SubShapeIDCreator *> (creatorVa);
+    const SubShapeID id = pCreator->GetID();
+    return id.GetValue();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SubShapeIdCreator
+ * Method:    getNumBitsWritten
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SubShapeIdCreator_getNumBitsWritten
+  (JNIEnv *, jclass, jlong creatorVa) {
+    const SubShapeIDCreator * const pCreator
+            = reinterpret_cast<SubShapeIDCreator *> (creatorVa);
+    const uint result = pCreator->GetNumBitsWritten();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SubShapeIdCreator
+ * Method:    pushId
+ * Signature: (JII)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShapeIdCreator_pushId
+  (JNIEnv *, jclass, jlong creatorVa, jint value, jint bits) {
+    const SubShapeIDCreator * const pCreator
+            = reinterpret_cast<SubShapeIDCreator *> (creatorVa);
+    SubShapeIDCreator * const pResult = new SubShapeIDCreator();
+    TRACE_NEW("SubShapeIDCreator", pResult)
+    *pResult = pCreator->PushID(value, bits);
+    return reinterpret_cast<jlong> (pCreator);
+}
