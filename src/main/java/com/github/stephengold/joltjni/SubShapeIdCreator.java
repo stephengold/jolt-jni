@@ -22,7 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Generate sub shape IDs by traversing the shape hierarchy.
+ * Generate sub shape IDs by traversing the shape hierarchy. (native type:
+ * SubShapeIDCreator)
  *
  * @author Stephen Gold sgold@sonic.net
  */

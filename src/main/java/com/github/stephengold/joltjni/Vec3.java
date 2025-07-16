@@ -1015,7 +1015,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Copy the components to a direct buffer. The vector is unaffected.
      *
-     * @return a new direct buffer with capacity=3
+     * @return a new direct buffer with room for 3 floats
      */
     @Override
     public FloatBuffer toBuffer() {
