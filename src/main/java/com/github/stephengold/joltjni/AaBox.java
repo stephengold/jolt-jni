@@ -144,46 +144,6 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Encapsulate bounding box in bounding box.
-     *
-     * @param rhs the box to include (not null, unaffected)
-     */
-    public void encapsulate(AaBox rhs) {
-        long boxVa = va();
-        long rhsVal = rhs.va();
-
-        encapsulateBoundingBox(boxVa, rhsVal);
-    }
-
-    /**
-     * Encapsulate triangle in bounding box.
-     *
-     * @param rhs the triangle to include (not null, unaffected)
-     */
-    public void encapsulate(Triangle rhs) {
-        long boxVa = va();
-        long rhsVal = rhs.va();
-
-        encapsulateTriangle(boxVa, rhsVal);
-    }
-
-    /**
-     * Encapsulate triangle in bounding box.
-     *
-     * @param vertices the vertices to include (not null, unaffected)
-     * @param triangle the triangle to include (not null, unaffected)
-     */
-    public void encapsulate(VertexList vertices, IndexedTriangle triangle) {
-        long boxVa = va();
-        long inTriVal = triangle.va();
-
-        int numVertices = vertices.size();
-        FloatBuffer ptrBuffer = vertices.toDirectBuffer();
-
-        encapsulateTriangle(boxVa, numVertices, ptrBuffer, inTriVal);
-    }
-
-    /**
      * Make sure that each edge of the bounding box has a minimal length.
      *
      * @param minEdgeLength the given minimum length
@@ -302,6 +262,49 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         boolean result = contains(boxVal, otherBoxVal);
 
         return result;
+    }
+
+    /**
+     * Encapsulate bounding box in bounding box.
+     *
+     * @param rhs the box to include (not null, unaffected)
+     */
+    @Override
+    public void encapsulate(AaBox rhs) {
+        long boxVa = va();
+        long rhsVal = rhs.va();
+
+        encapsulateBoundingBox(boxVa, rhsVal);
+    }
+
+    /**
+     * Encapsulate triangle in bounding box.
+     *
+     * @param rhs the triangle to include (not null, unaffected)
+     */
+    @Override
+    public void encapsulate(Triangle rhs) {
+        long boxVa = va();
+        long rhsVal = rhs.va();
+
+        encapsulateTriangle(boxVa, rhsVal);
+    }
+
+    /**
+     * Encapsulate triangle in bounding box.
+     *
+     * @param vertices the vertices to include (not null, unaffected)
+     * @param triangle the triangle to include (not null, unaffected)
+     */
+    @Override
+    public void encapsulate(VertexList vertices, IndexedTriangle triangle) {
+        long boxVa = va();
+        long inTriVal = triangle.va();
+
+        int numVertices = vertices.size();
+        FloatBuffer ptrBuffer = vertices.toDirectBuffer();
+
+        encapsulateTriangle(boxVa, numVertices, ptrBuffer, inTriVal);
     }
 
     /**
