@@ -526,10 +526,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_estimateCollisio
   jlong resultVa, jfloat combinedFriction, jfloat combinedRestitution,
   jfloat minVelocity, jint numIterations) {
     const Body * const pBody1 = reinterpret_cast<Body *> (body1Va);
-    const Body * const pBody2 = reinterpret_cast<Body *> (manifoldVa);
+    const Body * const pBody2 = reinterpret_cast<Body *> (body2Va);
     const ContactManifold * const pManifold
             = reinterpret_cast<ContactManifold *> (manifoldVa);
-    const CollisionEstimationResult * const pResult
+    CollisionEstimationResult * const pResult
             = reinterpret_cast<CollisionEstimationResult *> (resultVa);
     EstimateCollisionResponse(*pBody1, *pBody2, *pManifold, *pResult,
             combinedFriction, combinedRestitution, minVelocity, numIterations);
