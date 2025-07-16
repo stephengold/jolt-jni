@@ -22,6 +22,7 @@ SOFTWARE.
 
 /*
  * Author: Stephen Gold
+ * Author: wil
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Geometry/AABox.h"
@@ -40,6 +41,20 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_contains
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     const Vec3 point(x, y, z);
     const bool result = pBox->Contains(point);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    contains
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_contains__JJ
+  (JNIEnv *, jclass, jlong boxVal, jlong inOther) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
+    AABox * const pOther = reinterpret_cast<AABox *> (inOther);
+
+    const bool result = pBox->Contains(*pOther);
     return result;
 }
 
@@ -111,6 +126,70 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulate
     const Vec3 location(locX, locY, locZ);
     pBox->Encapsulate(location);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    encapsulateBoundingBox
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateBoundingBox
+  (JNIEnv *, jclass, jlong boxVal, jlong inRHS) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
+    AABox * const pRHS = reinterpret_cast<AABox *> (inRHS);
+
+    pBox->Encapsulate(*pRHS);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    encapsulateTriangle
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateTriangle__JJ
+  (JNIEnv *, jclass, jlong  boxVal, jlong inRHS) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
+    Triangle * const pTri = reinterpret_cast<Triangle *> (inRHS);
+
+    pBox->Encapsulate(*pTri);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    encapsulateTriangle
+ * Signature: (JILjava/nio/FloatBuffer;J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateTriangle__JILjava_nio_FloatBuffer_2J
+  (JNIEnv * pEnv, jclass, jlong boxVal, jint numVertices, jobject buffer, jlong inTriangle) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
+    IndexedTriangle * const pIndices = reinterpret_cast<IndexedTriangle *> (inTriangle);
+
+    const jfloat * const pFloats = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(buffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 3*numVertices);
+
+    VertexList vertices;
+    for (jint i = 0; i < numVertices; ++i) {
+        const float x = pFloats[3 * i];
+        const float y = pFloats[3 * i + 1];
+        const float z = pFloats[3 * i + 2];
+        const Float3 float3(x, y, z);
+        vertices.push_back(float3);
+    }
+
+    pBox->Encapsulate(vertices, *pIndices);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    ensureMinimalEdgeLength
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_ensureMinimalEdgeLength
+  (JNIEnv *, jclass, jlong, jfloat);
+
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
@@ -342,6 +421,88 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getVolume
   (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     const float result = pBox->GetVolume();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getSurfaceArea
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSurfaceArea
+  (JNIEnv *, jclass, jlong boxVal) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
+    const float result = pBox->GetSurfaceArea();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getSupport
+ * Signature: (JFFF)[F
+ */
+JNIEXPORT jfloatArray JNICALL Java_com_github_stephengold_joltjni_AaBox_getSupport
+  (JNIEnv * pEnv, jclass clazz, jlong boxVal, jfloat dx, jfloat dy, jfloat dz) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
+    const Vec3 direction(dx, dy, dz);
+    Vec3 support = pBox->GetSupport(direction);
+
+    jfloatArray result;
+    result = pEnv->NewFloatArray(3);
+    if (result == NULL) {
+        return NULL; /* out of memory error thrown */
+    }
+    // fill a temp structure to use to populate the java int array
+    jfloat fill[3];
+    fill[0] = support.GetX();
+    fill[1] = support.GetY();
+    fill[2] = support.GetZ();
+
+    // move from the temp structure to the java structure
+    pEnv->SetFloatArrayRegion(result, 0, 3 /*size*/, fill);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    getSqDistanceTo
+ * Signature: (JFFF)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSqDistanceTo
+  (JNIEnv *, jclass, jlong boxVal, jfloat px, jfloat py, jfloat pz) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
+    const Vec3 point(px, py, pz);
+
+    const float result = pBox->GetSqDistanceTo(point);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    overlaps
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_overlaps__JJ
+  (JNIEnv *, jclass, jlong boxVal, jlong inOther) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
+    const AABox * const pOther = reinterpret_cast<AABox *> (inOther);
+
+    bool result = pBox->Overlaps(*pOther);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    overlaps
+ * Signature: (JFFFF)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_overlaps__JFFFF
+  (JNIEnv *, jclass, jlong boxVal, jfloat pc, jfloat pnx, jfloat pny, jfloat pnz) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
+    const Vec3 normal(pnx, pny, pnz);
+    Plane plane(normal, pc);
+
+    bool result = pBox->Overlaps(plane);
     return result;
 }
 
