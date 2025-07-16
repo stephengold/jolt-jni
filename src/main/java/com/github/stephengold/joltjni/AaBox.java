@@ -142,53 +142,53 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         float locZ = location.getZ();
         encapsulate(boxVa, locX, locY, locZ);
     }
-    
+
     /**
      * Encapsulate bounding box in bounding box.
-     * 
+     *
      * @param rhs the box to include (not null, unaffected)
      */
     public void encapsulate(AaBox rhs) {
         long boxVa = va();
-        long inRHSVal = rhs.va();
-        
-        encapsulateBoundingBox(boxVa, inRHSVal);
+        long rhsVal = rhs.va();
+
+        encapsulateBoundingBox(boxVa, rhsVal);
     }
-    
+
     /**
      * Encapsulate triangle in bounding box.
-     * 
+     *
      * @param rhs the triangle to include (not null, unaffected)
      */
-    public void	encapsulate(Triangle rhs) {
+    public void encapsulate(Triangle rhs) {
         long boxVa = va();
-        long inRHSVal = rhs.va();
-        
-        encapsulateTriangle(boxVa, inRHSVal);
+        long rhsVal = rhs.va();
+
+        encapsulateTriangle(boxVa, rhsVal);
     }
-    
+
     /**
      * Encapsulate triangle in bounding box.
-     * 
+     *
      * @param vertices the vertices to include (not null, unaffected)
      * @param triangle the triangle to include (not null, unaffected)
      */
     public void encapsulate(VertexList vertices, IndexedTriangle triangle) {
         long boxVa = va();
         long inTriVal = triangle.va();
-        
+
         int numVertices = vertices.size();
         FloatBuffer ptrBuffer = vertices.toDirectBuffer();
-        
+
         encapsulateTriangle(boxVa, numVertices, ptrBuffer, inTriVal);
     }
-    
+
     /**
      * Make sure that each edge of the bounding box has a minimal length.
-     * 
+     *
      * @param minEdgeLength the given minimum length
      */
-    public void	ensureMinimalEdgeLength(float minEdgeLength) {
+    public void ensureMinimalEdgeLength(float minEdgeLength) {
         long boxVa = va();
         ensureMinimalEdgeLength(boxVa, minEdgeLength);
     }
@@ -290,9 +290,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     /**
      * Check if the box contains the other box. The box is not affected.
-     * 
+     *
      * @param other The other box to check
-     * 
+     *
      * @return {@code true} if contained, otherwise {@code false}
      */
     @Override
@@ -300,10 +300,10 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         long boxVal = va();
         long otherBoxVal = other.va();
         boolean result = contains(boxVal, otherBoxVal);
-        
+
         return result;
     }
-    
+
     /**
      * Locate the center of the box. The box is unaffected.
      *
@@ -462,10 +462,10 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
         return result;
     }
-    
+
     /**
      * Get surface area of bounding box.
-     * 
+     *
      * @return the area
      */
     @Override
@@ -477,9 +477,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     /**
      * Check if this box overlaps with another box.
-     * 
+     *
      * @param other the other box to check
-     * 
+     *
      * @return {@code true} if they overlap, otherwise {@code false}
      */
     @Override
@@ -492,9 +492,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     /**
      * Check if this box overlaps with a plane.
-     * 
+     *
      * @param plane the {@code Plan} object to be checked
-     * 
+     *
      * @return {@code true} if they overlap, otherwise {@code false}
      */
     @Override
@@ -504,16 +504,16 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         float pnx = plane.getNormalX();
         float pny = plane.getNormalY();
         float pnz = plane.getNormalZ();
-        
+
         boolean result = overlaps(boxVa, pc, pnx, pny, pnz);
         return result;
     }
 
     /**
      * Calculate the support vector for this convex shape.
-     * 
+     *
      * @param direction the direction vector
-     * 
+     *
      * @return the support vector
      */
     @Override
@@ -522,19 +522,19 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         float dx = direction.getX();
         float dy = direction.getY();
         float dz = direction.getZ();
-        
+
         float[] result = getSupport(boxVa, dx, dy, dz);
         Vec3 vec3 = new Vec3(result[0], result[1], result[2]);
-        
+
         return vec3;
     }
 
     /**
      * Get the squared distance between {@code point} and this box (will be 0
      * if in Point is inside the box)
-     * 
+     *
      * @param point The point to check
-     * 
+     *
      * @return the distance from this box to the given point
      */
     @Override
@@ -543,17 +543,17 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         float px = point.getX();
         float py = point.getY();
         float pz = point.getZ();
-        
+
         float result = getSqDistanceTo(boxVa, px, py, pz);
         return result;
     }
-    
+
     // *************************************************************************
     // native private methods
 
     native private static boolean contains(
             long boxVa, float x, float y, float z);
-    
+
     native private static boolean contains(long boxVal, long inOther);
 
     native private static long createAaBox(float minX, float minY, float minZ,
@@ -570,14 +570,16 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     native private static void encapsulate(
             long boxVa, float locX, float locY, float locZ);
-    
-    native private static void encapsulateBoundingBox(long boxVal, long inRHS);
-    
-    native private static void	encapsulateTriangle(long boxVal, long inRHS);
-    
-    native private static void encapsulateTriangle(long boxVal, int numVertices, FloatBuffer inVertices, long inTriangle);
-    
-    native private static void ensureMinimalEdgeLength(long boxVal, float inMinEdgeLength);
+
+    native private static void encapsulateBoundingBox(long boxVal, long rhs);
+
+    native private static void encapsulateTriangle(long boxVal, long rhs);
+
+    native private static void encapsulateTriangle(long boxVal, int numVertices,
+            FloatBuffer inVertices, long inTriangle);
+
+    native private static void ensureMinimalEdgeLength(long boxVal,
+            float inMinEdgeLength);
 
     native private static void expandBy(
             long boxVa, float dx, float dy, float dz);
@@ -617,16 +619,19 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static float getSizeZ(long boxVa);
 
     native private static float getVolume(long boxVa);
-    
+
     native private static float getSurfaceArea(long boxVal);
 
-    native private static float[] getSupport(long boxVal, float dx, float dy, float dz);
-    
-    native private static float getSqDistanceTo(long boxVal, float px, float py, float pz);
-   
+    native private static float[] getSupport(
+            long boxVal, float dx, float dy, float dz);
+
+    native private static float getSqDistanceTo(
+            long boxVal, float px, float py, float pz);
+
     native private static boolean overlaps(long boxVal, long inOther);
 
-    native private static boolean overlaps(long boxVal, float pc, float pnx, float pny, float pnz);
+    native private static boolean overlaps(
+            long boxVal, float pc, float pnx, float pny, float pnz);
 
     native private static boolean isValid(long boxVa);
 
