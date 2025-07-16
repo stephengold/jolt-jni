@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBody;
+import com.github.stephengold.joltjni.readonly.ConstContactManifold;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -170,6 +172,77 @@ final public class Jolt {
      * @param message (not null)
      */
     native public static void detLog(String message);
+
+    /**
+     * Estimate the contact impulses and body velocity changes resulting from a
+     * collision.
+     *
+     * @param body1 the first colliding body (not null, unaffected)
+     * @param body2 the 2nd colliding body (not null, unaffected)
+     * @param manifold the collision manifold (not null, unaffected)
+     * @param storeResult storage for impulses and velocities (not null,
+     * modified)
+     * @param combinedFriction the combined friction of the 2 bodies
+     * @param combinedRestitution the combined restitution of the 2 bodies
+     */
+    public static void estimateCollisionResponse(
+            ConstBody body1, ConstBody body2, ConstContactManifold manifold,
+            CollisionEstimationResult storeResult, float combinedFriction,
+            float combinedRestitution) {
+        estimateCollisionResponse(body1, body2, manifold, storeResult,
+                combinedFriction, combinedRestitution, 1f);
+    }
+
+    /**
+     * Estimate the contact impulses and body velocity changes resulting from a
+     * collision.
+     *
+     * @param body1 the first colliding body (not null, unaffected)
+     * @param body2 the 2nd colliding body (not null, unaffected)
+     * @param manifold the collision manifold (not null, unaffected)
+     * @param storeResult storage for impulses and velocities (not null,
+     * modified)
+     * @param combinedFriction the combined friction of the 2 bodies
+     * @param combinedRestitution the combined restitution of the 2 bodies
+     * @param minVelocity the minimum speed for restitution to be applied (in
+     * meters per second, default=1)
+     */
+    public static void estimateCollisionResponse(
+            ConstBody body1, ConstBody body2, ConstContactManifold manifold,
+            CollisionEstimationResult storeResult, float combinedFriction,
+            float combinedRestitution, float minVelocity) {
+        estimateCollisionResponse(body1, body2, manifold, storeResult,
+                combinedFriction, combinedRestitution, minVelocity, 10);
+    }
+
+    /**
+     * Estimate the contact impulses and body velocity changes resulting from a
+     * collision.
+     *
+     * @param body1 the first colliding body (not null, unaffected)
+     * @param body2 the 2nd colliding body (not null, unaffected)
+     * @param manifold the collision manifold (not null, unaffected)
+     * @param storeResult storage for impulses and velocities (not null,
+     * modified)
+     * @param combinedFriction the combined friction of the 2 bodies
+     * @param combinedRestitution the combined restitution of the 2 bodies
+     * @param minVelocity the minimum speed for restitution to be applied (in
+     * meters per second, default=1)
+     * @param numIterations the number of iterations the impulse solver to use
+     * (default=10)
+     */
+    public static void estimateCollisionResponse(
+            ConstBody body1, ConstBody body2, ConstContactManifold manifold,
+            CollisionEstimationResult storeResult, float combinedFriction,
+            float combinedRestitution, float minVelocity, int numIterations) {
+        long body1Va = body1.targetVa();
+        long body2Va = body2.targetVa();
+        long manifoldVa = manifold.targetVa();
+        long resultVa = storeResult.va();
+        estimateCollisionResponse(body1Va, body2Va, manifoldVa, resultVa,
+                combinedFriction, combinedRestitution,
+                minVelocity, numIterations);
+    }
 
     /**
      * Return a string containing important configuration settings.
@@ -828,6 +901,11 @@ final public class Jolt {
     native public static String versionString();
     // *************************************************************************
     // native private methods
+
+    native private static void estimateCollisionResponse(
+            long body1Va, long body2Va, long manifoldVa, long resultVa,
+            float combinedFriction, float combinedRestitution,
+            float minVelocity, int numIterations);
 
     native private static long hashBytes(
             double xx, double yy, double zz, long oldHash);

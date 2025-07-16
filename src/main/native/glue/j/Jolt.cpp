@@ -515,6 +515,25 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_Jolt_versionString
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    estimateCollisionResponse
+ * Signature: (JJJJFFFI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_estimateCollisionResponse
+  (JNIEnv *, jclass, jlong body1Va, jlong body2Va, jlong manifoldVa,
+  jlong resultVa, jfloat combinedFriction, jfloat combinedRestitution,
+  jfloat minVelocity, jint numIterations) {
+    const Body * const pBody1 = reinterpret_cast<Body *> (body1Va);
+    const Body * const pBody2 = reinterpret_cast<Body *> (manifoldVa);
+    const ContactManifold * const pManifold
+            = reinterpret_cast<ContactManifold *> (manifoldVa);
+    const CollisionEstimationResult * const pResult
+            = reinterpret_cast<CollisionEstimationResult *> (resultVa);
+    EstimateCollisionResponse(*pBody1, *pBody2, *pManifold, *pResult,
+            combinedFriction, combinedRestitution, minVelocity, numIterations);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    hashBytes
  * Signature: (DDDJ)J
  */
