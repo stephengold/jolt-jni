@@ -153,6 +153,7 @@ $(N)/glue/i/IdToMaterialMap.cpp \
 $(N)/glue/i/IdToShapeMap.cpp \
 $(N)/glue/i/IdToSharedSettingsMap.cpp \
 $(N)/glue/i/IgnoreMultipleBodiesFilter.cpp \
+$(N)/glue/i/Impulse.cpp \
 $(N)/glue/i/IndexedTriangle.cpp \
 $(N)/glue/i/IndexedTriangleList.cpp \
 $(N)/glue/i/IndexedTriangleNoMaterial.cpp \
