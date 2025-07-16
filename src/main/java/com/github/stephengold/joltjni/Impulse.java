@@ -38,6 +38,17 @@ public class Impulse extends JoltPhysicsObject {
         long estimateVa = createDefault();
         setVirtualAddress(estimateVa, () -> free(estimateVa));
     }
+
+    /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param impulseVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    Impulse(JoltPhysicsObject container, long impulseVa) {
+        super(container, impulseVa);
+    }
     // *************************************************************************
     // new methods exposed
 

@@ -109,6 +109,7 @@ $(N)/glue/col/CollideShapeCollector.cpp \
 $(N)/glue/col/CollideShapeResult.cpp \
 $(N)/glue/col/CollideShapeSettings.cpp \
 $(N)/glue/col/CollisionDispatch.cpp \
+$(N)/glue/col/CollisionEstimationResult.cpp \
 $(N)/glue/col/CollisionGroup.cpp \
 $(N)/glue/cu/CustomBodyActivationListener.cpp \
 $(N)/glue/cu/CustomCastRayCollector.cpp \
