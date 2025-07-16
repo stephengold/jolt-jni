@@ -64,7 +64,8 @@ abstract public class CompoundShape extends Shape {
     /**
      * Access the specified sub-shape.
      *
-     * @param subShapeIndex the index of the sub-shape (&ge;0)
+     * @param subShapeIndex the index of a subshape within the current compound
+     * shape (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public SubShape getSubShape(int subShapeIndex) {

@@ -962,7 +962,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Copy the surface normal of a particular sub shape at the specified
+     * Copy the surface normal of a particular subshape at the specified
      * location.
      *
      * @param subShapeId the ID of the sub-shape to use

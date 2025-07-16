@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Generate sub shape IDs by traversing the shape hierarchy. (native type:
+ * Generate sub-shape IDs by traversing the shape hierarchy. (native type:
  * SubShapeIDCreator)
  *
  * @author Stephen Gold sgold@sonic.net
@@ -55,7 +55,7 @@ public class SubShapeIdCreator extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the resulting subshape ID.
+     * Return the resulting subshape ID. (native method: GetID)
      *
      * @return the ID value
      */
