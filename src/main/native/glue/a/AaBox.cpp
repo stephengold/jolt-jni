@@ -133,9 +133,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulate
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateBoundingBox
-  (JNIEnv *, jclass, jlong boxVal, jlong inRHS) {
+  (JNIEnv *, jclass, jlong boxVal, jlong rhs) {
     AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
-    AABox * const pRHS = reinterpret_cast<AABox *> (inRHS);
+    AABox * const pRHS = reinterpret_cast<AABox *> (rhs);
 
     pBox->Encapsulate(*pRHS);
 }
@@ -146,9 +146,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateBoun
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateTriangle__JJ
-  (JNIEnv *, jclass, jlong  boxVal, jlong inRHS) {
+  (JNIEnv *, jclass, jlong  boxVal, jlong rhs) {
     AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
-    Triangle * const pTri = reinterpret_cast<Triangle *> (inRHS);
+    Triangle * const pTri = reinterpret_cast<Triangle *> (rhs);
 
     pBox->Encapsulate(*pTri);
 }
