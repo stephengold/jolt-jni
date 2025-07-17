@@ -181,6 +181,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 				// Apply buoyancy to the body
 				body.applyBuoyancyImpulse(surface_position, surface_normal, buoyancy, linear_drag, angular_drag, Vec3.sZero(), mPhysicsSystem.getGravity(), inParams.mDeltaTime);
 			}
+			body_lock.releaseLock();
 		}
 		mBodiesInWaterMutex.unlock();
 	}
