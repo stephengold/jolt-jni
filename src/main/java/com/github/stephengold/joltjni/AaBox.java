@@ -585,7 +585,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
             FloatBuffer inVertices, long inTriangle);
 
     native private static void ensureMinimalEdgeLength(long boxVal,
-            float inMinEdgeLength);
+            float minEdgeLength);
 
     native private static void expandBy(
             long boxVa, float dx, float dy, float dz);
