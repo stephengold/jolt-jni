@@ -249,7 +249,7 @@ void UpdateCameraPivot()
 	mCameraPivot =new RMat44(new Vec4(right, 0), new Vec4(up, 0), new Vec4(fwd, 0), mBoatBody.getPosition());
 }
 
-void OnContactAdded( ConstBody inBody1,  ConstBody inBody2,  ConstContactManifold inManifold, ContactSettings ioSettings)
+public void OnContactAdded( ConstBody inBody1,  ConstBody inBody2,  ConstContactManifold inManifold, ContactSettings ioSettings)
 {
 	// When a body enters the water add it to the list of bodies in the water
 	mBodiesInWaterMutex.lock();
@@ -261,7 +261,7 @@ void OnContactAdded( ConstBody inBody1,  ConstBody inBody2,  ConstContactManifol
         mBodiesInWaterMutex.unlock();
 }
 
-void OnContactRemoved( ConstSubShapeIdPair inSubShapePair)
+public void OnContactRemoved( ConstSubShapeIdPair inSubShapePair)
 {
 	// When a body leaves the water remove it from the list of bodies in the water
 	mBodiesInWaterMutex.lock();

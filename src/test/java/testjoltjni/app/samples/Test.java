@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
@@ -42,6 +43,10 @@ public void Cleanup(){}
 protected void FatalError(String message){throw new RuntimeException(message);}
 float GetWorldScale() { return 1.0f; }
 public void Initialize(){}
+public void OnContactAdded(ConstBody inBody1,ConstBody inBody2,ConstContactManifold inManifold,ContactSettings ioSettings){}
+public void OnContactPersisted(ConstBody inBody1,ConstBody inBody2,ConstContactManifold inManifold,ContactSettings ioSettings){}
+public void OnContactRemoved(ConstSubShapeIdPair inSubShapePair){}
+public ValidateResult OnContactValidate(ConstBody inBody1,ConstBody inBody2,RVec3Arg inBaseOffset,CollideShapeResult inCollisionResult){return ValidateResult.AcceptAllContactsForThisBodyPair;}
 public void PostPhysicsUpdate(float deltaTime){}
 public void PrePhysicsUpdate(PreUpdateParams params){}
 public void RestoreState(StateRecorder inStream){}

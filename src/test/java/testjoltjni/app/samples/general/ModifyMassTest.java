@@ -96,7 +96,7 @@ float sGetInvMassScale(ConstBody inBody)
 	return mass_overrides[index];
 }
 
-void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
+public void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
 {
 	// We're only concerned with dynamic bodies (floor gets normal collision response)
 	if (!inBody1.isDynamic() || !inBody2.isDynamic())
@@ -113,7 +113,7 @@ void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold i
 	ioSettings.setInvInertiaScale2 ( scale2);
 }
 
-void OnContactPersisted(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
+public void OnContactPersisted(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
 {
 	OnContactAdded(inBody1, inBody2, inManifold, ioSettings);
 }

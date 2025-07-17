@@ -111,12 +111,12 @@ void sOverrideContactSettings(ConstBody inBody1, ConstBody inBody2, ContactManif
 	ioSettings.setCombinedRestitution ( Math.max(restitution1[0], restitution2[0]));
 }
 
-void OnContactAdded(ConstBody  inBody1, ConstBody  inBody2, ContactManifold inManifold, ContactSettings ioSettings)
+public void OnContactAdded(ConstBody  inBody1, ConstBody  inBody2, ContactManifold inManifold, ContactSettings ioSettings)
 {
 	sOverrideContactSettings(inBody1, inBody2, inManifold, ioSettings);
 }
 
-void OnContactPersisted(ConstBody  inBody1, ConstBody  inBody2, ContactManifold inManifold, ContactSettings ioSettings)
+public void OnContactPersisted(ConstBody  inBody1, ConstBody  inBody2, ContactManifold inManifold, ContactSettings ioSettings)
 {
 	sOverrideContactSettings(inBody1, inBody2, inManifold, ioSettings);
 }

@@ -90,7 +90,7 @@ public void Initialize()
 	}
 }
 
-void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
+public void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
 {
 	// Linear belts
 	boolean body1_linear_belt = mLinearBelts.find(inBody1.getId()) != -1;
@@ -125,7 +125,7 @@ void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold i
 	}
 }
 
-void OnContactPersisted(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
+public void OnContactPersisted(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
 {
 	// Same behavior as contact added
 	OnContactAdded(inBody1, inBody2, inManifold, ioSettings);

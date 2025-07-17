@@ -132,7 +132,7 @@ void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchSt
 	}
 }
 
-void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
+public void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
 {
 	// Draw a box around the character when it enters the sensor
 	if (inBody1.getId() == mSensorBody)
@@ -141,7 +141,7 @@ void OnContactAdded(ConstBody inBody1, ConstBody inBody2, ConstContactManifold i
 		mDebugRenderer.drawBox(inBody1.getWorldSpaceBounds(), Color.sGreen, ECastShadow.Off, EDrawMode.Wireframe);
 }
 
-void OnContactPersisted(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
+public void OnContactPersisted(ConstBody inBody1, ConstBody inBody2, ConstContactManifold inManifold, ContactSettings ioSettings)
 {
 	// Same behavior as contact added
 	OnContactAdded(inBody1, inBody2, inManifold, ioSettings);
