@@ -52,8 +52,8 @@ void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSys
 void SetTempAllocator(TempAllocator inTempAllocator){mTempAllocator=inTempAllocator;}
 protected void Trace(String format,Object...args){cout.printf(format,args);cout.println();cout.flush();}
 
-public Body CreateFloor(){return CreateFloor(200);}
-public Body CreateFloor(float inSize)
+final protected Body CreateFloor(){return CreateFloor(200);}
+final protected Body CreateFloor(float inSize)
 {
 	final float scale = GetWorldScale();
 
@@ -62,7 +62,7 @@ public Body CreateFloor(float inSize)
 	return floor;
 }
 
-public Body CreateLargeTriangleFloor()
+final protected Body CreateLargeTriangleFloor()
 {
 	Triangle[] triangles = {
 		new Triangle(new Float3(427.941376f, 0.000027f, -456.470642f),new Float3(427.941376f, 0.000024f, -399.411774f),new Float3(512.0f, 0.000031f, -511.999969f)),
@@ -139,7 +139,7 @@ public Body CreateLargeTriangleFloor()
 	return floor;
 }
 
-public Body CreateMeshTerrain()
+final protected Body CreateMeshTerrain()
 {
 	final float scale = GetWorldScale();
 
@@ -187,7 +187,7 @@ if(buildType().equals("DEBUG")){
 	return floor;
 }
 
-public Body CreateHeightFieldTerrain()
+final protected Body CreateHeightFieldTerrain()
 {
 	final float scale = GetWorldScale();
 
