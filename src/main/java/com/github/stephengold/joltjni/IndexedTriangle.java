@@ -21,12 +21,15 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstIndexedTriangle;
+
 /**
  * A triangle composed of three 32-bit mesh-vertex indices and a material index.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class IndexedTriangle extends IndexedTriangleNoMaterial {
+final public class IndexedTriangle extends IndexedTriangleNoMaterial
+        implements ConstIndexedTriangle {
     // *************************************************************************
     // constructors
 

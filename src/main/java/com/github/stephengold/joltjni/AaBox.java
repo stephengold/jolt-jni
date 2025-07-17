@@ -22,6 +22,10 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.ConstIndexedTriangle;
+import com.github.stephengold.joltjni.readonly.ConstPlane;
+import com.github.stephengold.joltjni.readonly.ConstTriangle;
+import com.github.stephengold.joltjni.readonly.ConstVertexList;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -144,6 +148,47 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
+     * Encapsulate bounding box in bounding box.
+     *
+     * @param rhs the box to include (not null, unaffected)
+     */
+    public void encapsulate(ConstAaBox rhs) {
+        long boxVa = va();
+        long rhsVal = rhs.targetVa();
+
+        encapsulateBoundingBox(boxVa, rhsVal);
+    }
+
+    /**
+     * Encapsulate triangle in bounding box.
+     *
+     * @param rhs the triangle to include (not null, unaffected)
+     */
+    public void encapsulate(ConstTriangle rhs) {
+        long boxVa = va();
+        long rhsVal = rhs.targetVa();
+
+        encapsulateTriangle(boxVa, rhsVal);
+    }
+
+    /**
+     * Encapsulate triangle in bounding box.
+     *
+     * @param vertices the vertices to include (not null, unaffected)
+     * @param triangle the triangle to include (not null, unaffected)
+     */
+    public void encapsulate(ConstVertexList vertices,
+            ConstIndexedTriangle triangle) {
+        long boxVa = va();
+        long inTriVal = triangle.targetVa();
+
+        int numVertices = vertices.size();
+        FloatBuffer ptrBuffer = vertices.toDirectBuffer();
+
+        encapsulateTriangle(boxVa, numVertices, ptrBuffer, inTriVal);
+    }
+
+    /**
      * Make sure that each edge of the bounding box has a minimal length.
      *
      * @param minEdgeLength the given minimum length
@@ -256,55 +301,12 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * @return {@code true} if contained, otherwise {@code false}
      */
     @Override
-    public boolean contains(AaBox other) {
+    public boolean contains(ConstAaBox other) {
         long boxVal = va();
-        long otherBoxVal = other.va();
+        long otherBoxVal = other.targetVa();
         boolean result = contains(boxVal, otherBoxVal);
 
         return result;
-    }
-
-    /**
-     * Encapsulate bounding box in bounding box.
-     *
-     * @param rhs the box to include (not null, unaffected)
-     */
-    @Override
-    public void encapsulate(AaBox rhs) {
-        long boxVa = va();
-        long rhsVal = rhs.va();
-
-        encapsulateBoundingBox(boxVa, rhsVal);
-    }
-
-    /**
-     * Encapsulate triangle in bounding box.
-     *
-     * @param rhs the triangle to include (not null, unaffected)
-     */
-    @Override
-    public void encapsulate(Triangle rhs) {
-        long boxVa = va();
-        long rhsVal = rhs.va();
-
-        encapsulateTriangle(boxVa, rhsVal);
-    }
-
-    /**
-     * Encapsulate triangle in bounding box.
-     *
-     * @param vertices the vertices to include (not null, unaffected)
-     * @param triangle the triangle to include (not null, unaffected)
-     */
-    @Override
-    public void encapsulate(VertexList vertices, IndexedTriangle triangle) {
-        long boxVa = va();
-        long inTriVal = triangle.va();
-
-        int numVertices = vertices.size();
-        FloatBuffer ptrBuffer = vertices.toDirectBuffer();
-
-        encapsulateTriangle(boxVa, numVertices, ptrBuffer, inTriVal);
     }
 
     /**
@@ -486,9 +488,10 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * @return {@code true} if they overlap, otherwise {@code false}
      */
     @Override
-    public boolean overlaps(AaBox other) {
+    public boolean overlaps(ConstAaBox other) {
         long boxVa = va();
-        long inOtherVal = other.va();
+        long inOtherVal = other.targetVa();
+        targetVa();
         boolean result = overlaps(boxVa, inOtherVal);
         return result;
     }
@@ -501,7 +504,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * @return {@code true} if they overlap, otherwise {@code false}
      */
     @Override
-    public boolean overlaps(Plane plane) {
+    public boolean overlaps(ConstPlane plane) {
         long boxVa = va();
         float pc = plane.getConstant();
         float pnx = plane.getNormalX();

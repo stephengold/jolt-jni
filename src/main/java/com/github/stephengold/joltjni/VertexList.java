@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVertexList;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
@@ -30,7 +31,7 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class VertexList {
+final public class VertexList implements ConstVertexList {
     // *************************************************************************
     // constants
 
@@ -177,11 +178,15 @@ final public class VertexList {
         set(vertexIndex, location.getX(), location.getY(), location.getZ());
     }
 
+    // *************************************************************************
+    // ConstVertexList methods
+
     /**
      * Count how many vertices are in the list. The list is unaffected.
      *
      * @return the number of vertices (&ge;0)
      */
+    @Override
     public int size() {
         int result = buffer.limit() / numAxes;
         return result;
@@ -193,6 +198,7 @@ final public class VertexList {
      *
      * @return the pre-existing Buffer, flipped but possibly not rewound
      */
+    @Override
     public FloatBuffer toDirectBuffer() {
         this.allowModification = false;
         return buffer;
