@@ -34,7 +34,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  */
 public class ScaledHeightFieldShapeTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

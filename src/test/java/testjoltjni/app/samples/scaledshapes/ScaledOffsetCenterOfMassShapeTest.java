@@ -34,7 +34,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  */
 public class ScaledOffsetCenterOfMassShapeTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	Body floor = CreateFloor();

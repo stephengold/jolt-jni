@@ -209,7 +209,7 @@ static PhysicsSceneRef sCreateScene()
 	return scene;
 }
 
-void Initialize()
+public void Initialize()
 {
 if(supportsObjectStream()){
 	PhysicsSceneRef scene = sCreateScene();

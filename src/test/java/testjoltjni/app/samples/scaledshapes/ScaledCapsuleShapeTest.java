@@ -32,7 +32,7 @@ import testjoltjni.app.samples.*;
  */
 public class ScaledCapsuleShapeTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

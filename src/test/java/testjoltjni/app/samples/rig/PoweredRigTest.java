@@ -55,7 +55,7 @@ public void Cleanup()
 	mRagdoll.removeFromPhysicsSystem();
 }
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();
@@ -115,12 +115,12 @@ void PoweredRigTest::CreateSettingsMenu(DebugUI *inUI, UIElement *inSubMenu)
 	});
 }*/
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 }

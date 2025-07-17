@@ -49,7 +49,7 @@ void ResetBodies(int inCycle)
 	mBodyInterface.setUserData(mBodies[1], (inCycle << 1) + 1);
 }
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();
@@ -118,14 +118,14 @@ void OnContactPersisted(ConstBody inBody1, ConstBody inBody2, ConstContactManifo
 	OnContactAdded(inBody1, inBody2, inManifold, ioSettings);
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	super.SaveState(inStream);
 
 	inStream.write(mTime);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	super.RestoreState(inStream);
 

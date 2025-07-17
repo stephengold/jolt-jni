@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  */
 public class PlaneShapeTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Create a plane as floor
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new PlaneShape(new Plane(new Vec3(0.1f, 1.0f, 0.0f).normalized(), 1.0f), null, 100),new RVec3(0, 0, 0), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);

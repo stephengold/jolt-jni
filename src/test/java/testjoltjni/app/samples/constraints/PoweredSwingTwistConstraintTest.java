@@ -51,7 +51,7 @@ Vec3 sTargetVelocityCS=new Vec3(degreesToRadians(90),0,0);
 
 Vec3[]sBodyRotation = { Vec3.sZero(), Vec3.sZero() };
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

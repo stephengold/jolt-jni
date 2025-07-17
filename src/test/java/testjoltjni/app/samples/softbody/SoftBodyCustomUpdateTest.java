@@ -34,7 +34,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
 public class SoftBodyCustomUpdateTest extends Test{
 Body mBody;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

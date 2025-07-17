@@ -34,7 +34,7 @@ import testjoltjni.app.samples.*;
  */
 public class SoftBodyVsFastMovingTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

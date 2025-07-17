@@ -54,7 +54,7 @@ Vec3 mDesiredVelocity = Vec3.sZero();
 boolean mAllowSliding = false;
 RVec3 GetCharacterPosition(){return mCharacter.getPosition();}
 
-void Initialize()
+public void Initialize()
 {
 	super.Initialize();
 
@@ -244,7 +244,7 @@ void CharacterVirtualTest::AddConfigurationSettings(DebugUI *inUI, UIElement *in
 }
 */
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	super.SaveState(inStream);
 
@@ -257,7 +257,7 @@ protected void SaveState(StateRecorder inStream)
 	inStream.write(mDesiredVelocity);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	super.RestoreState(inStream);
 

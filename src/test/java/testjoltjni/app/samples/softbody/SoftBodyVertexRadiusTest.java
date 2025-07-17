@@ -35,7 +35,7 @@ public class SoftBodyVertexRadiusTest extends Test{
 SoftBodySharedSettingsRef mSharedSettings=new SoftBodySharedSettingsRef();
 float sVertexRadius=0.01f;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

@@ -41,7 +41,7 @@ public void Cleanup()
 	mRagdoll.removeFromPhysicsSystem();
 }
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

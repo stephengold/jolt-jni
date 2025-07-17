@@ -32,7 +32,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  */
 public class FrictionTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	Body floor = mBodyInterface.createBody(new BodyCreationSettings(new BoxShape(new Vec3(100.0f, 1.0f, 100.0f), 0.0f), RVec3.sZero(), Quat.sRotation(Vec3.sAxisX(), 0.25f * JPH_PI), EMotionType.Static, Layers.NON_MOVING));

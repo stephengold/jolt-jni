@@ -41,7 +41,7 @@ String  sScenes[] =
 
 String  sSceneName = "SpheresVsBoxes";
 
-void Initialize()
+public void Initialize()
 {
 	if (strcmp(sSceneName, "SpheresVsBoxes") == 0)
 	{

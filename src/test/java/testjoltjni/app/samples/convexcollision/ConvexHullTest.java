@@ -42,7 +42,7 @@ DefaultRandomEngine mRandom=new DefaultRandomEngine( 12345 );
 int mIteration=0;
 List<List<Vec3Arg>>mPoints;
 
-void Initialize()
+public void Initialize()
 {
 	// First add a list of shapes that were problematic before
 	mPoints = new ArrayList<>();

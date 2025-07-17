@@ -34,7 +34,7 @@ public class ChangeMotionTypeTest extends Test{
 Body mBody;
 float mTime;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();
@@ -73,12 +73,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 		mBody.moveKinematic(new RVec3(sin(mTime), 10, 0), Quat.sRotation(Vec3.sAxisX(), cos(mTime)), inParams.mDeltaTime);
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 

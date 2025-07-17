@@ -45,7 +45,7 @@ Vec3 mDesiredVelocity=Vec3.sZero();
 Vec3 mDesiredVelocityWS=Vec3.sZero();
 boolean mJump;
 
-void Initialize()
+public void Initialize()
 {
 	// Create planet
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new SphereShape(cPlanetRadius), RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
@@ -179,7 +179,7 @@ RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 	return RMat44.sRotationTranslation(mCharacter.getRotation(), cam_pos);
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	mCharacter.saveState(inStream);
 
@@ -187,7 +187,7 @@ protected void SaveState(StateRecorder inStream)
 	inStream.write(mCharacter.getUp());
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mCharacter.restoreState(inStream);
 

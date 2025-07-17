@@ -34,7 +34,7 @@ public class ChangeMotionQualityTest extends Test{
 Body mBody;
 float mTime;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();
@@ -82,12 +82,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	UpdateMotionQuality();
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 

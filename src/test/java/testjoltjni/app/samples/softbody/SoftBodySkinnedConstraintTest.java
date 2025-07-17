@@ -79,7 +79,7 @@ void SkinVertices(boolean inHardSkinAll)
 		mp.skinVertices(com, pose, cNumJoints, inHardSkinAll, mTempAllocator);
 }
 
-void Initialize()
+public void Initialize()
 {
 	CreateFloor();
 
@@ -178,12 +178,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	SkinVertices(false);
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 }

@@ -34,7 +34,7 @@ import testjoltjni.app.samples.*;
 public class SoftBodyKinematicTest extends Test{
 int mSphereID=cInvalidBodyId;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

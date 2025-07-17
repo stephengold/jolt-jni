@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  */
 public class IslandTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

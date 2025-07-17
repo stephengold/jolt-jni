@@ -73,7 +73,7 @@ void CreateSlidingObjects(RVec3Arg inStart)
 	}
 }
 
-void Initialize()
+public void Initialize()
 {
 	// This test creates a grid of connected boxes and tests that objects don't hit the internal edges
 	{

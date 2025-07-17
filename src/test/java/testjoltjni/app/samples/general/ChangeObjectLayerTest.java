@@ -37,7 +37,7 @@ BodyIdVector mDebris=new BodyIdVector();
 boolean mIsDebris = true;
 float mTime;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();
@@ -87,13 +87,13 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	}
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 	inStream.write(mIsDebris);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 	mIsDebris=inStream.readBoolean(mIsDebris);

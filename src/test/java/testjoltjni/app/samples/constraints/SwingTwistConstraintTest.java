@@ -40,7 +40,7 @@ float sTwistMinAngle=degreesToRadians(-10);
 float sTwistMaxAngle=degreesToRadians(20);
 List<TwoBodyConstraintRef>mConstraints=new ArrayList<>();
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

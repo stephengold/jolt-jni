@@ -39,7 +39,7 @@ BodyIdVector mBodyIDs=new BodyIdVector();
 int mFrameNumber;
 ShapeRefC mSubCompound=new ShapeRefC();
 
-void Initialize()
+public void Initialize()
 {
 	// Floor (extra thick because we can randomly add sub shapes that then may stick out underneath the floor and cause objects to be pushed through)
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(100.0f, 10.0f, 100.0f), 0.0f), new RVec3(0.0f, -10.0f, 0.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);
@@ -134,7 +134,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	}
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mFrameNumber);
 
@@ -155,7 +155,7 @@ protected void SaveState(StateRecorder inStream)
 	}
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mFrameNumber=inStream.readInt(mFrameNumber);
 

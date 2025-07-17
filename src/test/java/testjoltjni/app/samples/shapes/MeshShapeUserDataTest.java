@@ -39,7 +39,7 @@ import static com.github.stephengold.joltjni.std.Std.*;
 public class MeshShapeUserDataTest extends Test{
 
 @SuppressWarnings("unchecked")
-void Initialize()
+public void Initialize()
 {
 	DefaultRandomEngine random=new DefaultRandomEngine();
 

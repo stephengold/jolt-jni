@@ -34,7 +34,7 @@ import testjoltjni.app.samples.*;
  */
 public class SoftBodySensorTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Install contact listener for soft bodies
 	mPhysicsSystem.setSoftBodyContactListener(new CustomSoftBodyContactListener(){

@@ -36,7 +36,7 @@ public class SoftBodyForceTest extends Test{
 int mBodyID=cInvalidBodyId;
 float mTime;
 
-void Initialize()
+public void Initialize()
 {
 	CreateFloor();
 
@@ -67,12 +67,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	DebugRenderer.sInstance().drawArrow(offset, plus(offset ,star( 10.0f , force.normalized())), Color.sGreen, 0.1f);
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 }

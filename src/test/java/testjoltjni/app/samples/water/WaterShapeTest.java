@@ -47,7 +47,7 @@ public class WaterShapeTest extends Test{
         }
     }
 
-void Initialize()
+public void Initialize()
 {
 	CreateFloor();
 

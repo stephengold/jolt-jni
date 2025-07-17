@@ -38,7 +38,7 @@ List<ShapeRefC> mShapes=new ArrayList<>();
 float mTime = 0.0f;
 int mShapeIdx = 0;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();
@@ -84,13 +84,13 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	}
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 	inStream.write(mShapeIdx);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 	mShapeIdx=inStream.readInt(mShapeIdx);

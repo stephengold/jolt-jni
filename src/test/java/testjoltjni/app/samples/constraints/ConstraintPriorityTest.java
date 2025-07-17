@@ -36,7 +36,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
 public class ConstraintPriorityTest extends Test{
 List<TwoBodyConstraintRef> mConstraints=new ArrayList<>();
 
-void Initialize()
+public void Initialize()
 {
 	float box_size = 1.0f;
 	ShapeRefC box = new BoxShape(new Vec3(0.5f * box_size, 0.2f, 0.2f)).toRefC();

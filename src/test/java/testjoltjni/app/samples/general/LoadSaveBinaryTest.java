@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  */
 public class LoadSaveBinaryTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Create scene
 	PhysicsSceneRef scene = LoadSaveSceneTest.sCreateScene();

@@ -41,11 +41,11 @@ protected TempAllocator mTempAllocator;
 public void Cleanup(){}
 protected void FatalError(String message){throw new RuntimeException(message);}
 float GetWorldScale() { return 1.0f; }
-void Initialize(){}
+public void Initialize(){}
 public void PostPhysicsUpdate(float deltaTime){}
 public void PrePhysicsUpdate(PreUpdateParams params){}
-protected void RestoreState(StateRecorder inStream){}
-protected void SaveState(StateRecorder inStream){}
+public void RestoreState(StateRecorder inStream){}
+public void SaveState(StateRecorder inStream){}
 void SetDebugRenderer(DebugRenderer renderer){mDebugRenderer = renderer;}
 void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
 void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSystem;mBodyInterface=inPhysicsSystem.getBodyInterface();}

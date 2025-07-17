@@ -39,7 +39,7 @@ float sMaxFrictionAcceleration;
 float sMaxMotorAcceleration=250;
 SliderConstraint mConstraint;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

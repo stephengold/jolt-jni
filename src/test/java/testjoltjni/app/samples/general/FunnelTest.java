@@ -37,7 +37,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class FunnelTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	ShapeRefC box = new BoxShape(new Vec3(50, 1, 50), 0.0f).toRefC();
 

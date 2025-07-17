@@ -32,7 +32,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class PulleyConstraintTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

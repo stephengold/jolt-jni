@@ -33,7 +33,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  */
 public class BoxShapeTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

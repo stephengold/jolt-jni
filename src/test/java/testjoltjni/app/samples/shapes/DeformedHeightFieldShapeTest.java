@@ -43,7 +43,7 @@ static final int cBlockSize=4,cSampleCount=128;
 static final int cBlockMask=cBlockSize-1;
 ShapeRefC mHeightField;
 
-void Initialize()
+public void Initialize()
 {
 	final float cCellSize = 1.0f;
 	final float cMaxHeight = 2.5f;

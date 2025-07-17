@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  */
 public class TriangleShapeTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Single triangle
 	TriangleShape triangle_shape = new TriangleShape(new Vec3(-10, -1, 0),new Vec3(0, 1, 10),new Vec3(10, -2, -10), 0.01f);

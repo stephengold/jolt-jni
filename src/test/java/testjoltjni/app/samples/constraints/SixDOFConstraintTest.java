@@ -49,7 +49,7 @@ static TwoBodyConstraintSettingsRef sSettings; static {
 		sSettings=settings.toRef();
 	};
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

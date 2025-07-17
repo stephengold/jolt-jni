@@ -33,7 +33,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class GearConstraintTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

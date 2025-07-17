@@ -37,7 +37,7 @@ public class SwingTwistConstraintFrictionTest extends Test{
 float mTime;
 SwingTwistConstraint mConstraint;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();
@@ -99,12 +99,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	}
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 }

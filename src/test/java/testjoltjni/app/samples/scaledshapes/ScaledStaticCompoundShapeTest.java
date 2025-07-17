@@ -35,7 +35,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  */
 public class ScaledStaticCompoundShapeTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

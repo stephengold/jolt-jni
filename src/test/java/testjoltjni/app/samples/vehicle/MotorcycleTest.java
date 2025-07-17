@@ -43,7 +43,7 @@ RMat44 mCameraPivot=RMat44.sIdentity();
 float mBrake,mForward,mRight;
 float mPreviousForward=1f;
 
-void Initialize()
+public void Initialize()
 {
 	super.Initialize();
 

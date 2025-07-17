@@ -41,7 +41,7 @@ static final float cBoxSize = 2.0f;
 float mTime = 0.0f;
 int mNumShapes = -1;
 
-void Initialize()
+public void Initialize()
 {
 	final int cChainLength = 15;
 	final float cMinAngle = degreesToRadians(-10.0f);
@@ -102,12 +102,12 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 	UpdateShapes();
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 

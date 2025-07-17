@@ -32,7 +32,7 @@ import testjoltjni.app.samples.*;
  */
 public class OffsetCenterOfMassShapeTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	Body floor = CreateFloor();

@@ -40,7 +40,7 @@ float sDamping=1;
 HingeConstraint mConstraint;
 float mInertiaBody2AsSeenFromConstraint;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

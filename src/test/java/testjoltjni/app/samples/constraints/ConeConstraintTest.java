@@ -33,7 +33,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class ConeConstraintTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

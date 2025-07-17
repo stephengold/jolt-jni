@@ -32,7 +32,7 @@ import testjoltjni.app.samples.*;
 public class KinematicTest extends Test{
 Body[] mKinematic=new Body[2];
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

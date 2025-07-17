@@ -141,7 +141,7 @@ public void Cleanup()
 		mAnimatedCharacter.removeFromPhysicsSystem();
 }
 
-void Initialize()
+public void Initialize()
 {
 	// Create capsule shapes for all stances
 	switch (sShapeType)
@@ -771,7 +771,7 @@ public RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 	return RMat44.sTranslation(minus(plus(mCameraPivot , new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , star(5.0f , fwd)));
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 	inStream.write(mRampBlocksTimeLeft);
@@ -784,7 +784,7 @@ protected void SaveState(StateRecorder inStream)
 		mAnimatedCharacterVirtualWithInnerBody.saveState(inStream);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 	mRampBlocksTimeLeft=inStream.readFloat(mRampBlocksTimeLeft);

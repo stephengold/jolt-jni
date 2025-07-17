@@ -32,7 +32,7 @@ import testjoltjni.app.samples.*;
  */
 public class BigVsSmallTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Create a big triangle
 	List<Triangle> triangles=new ArrayList<>(1);

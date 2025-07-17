@@ -45,7 +45,7 @@ public void Cleanup()
 	super.Cleanup();
 }
 
-void Initialize()
+public void Initialize()
 {
 	super.Initialize();
 
@@ -74,7 +74,7 @@ public void PostPhysicsUpdate(float inDeltaTime)
 	mCharacter.postSimulation(cCollisionTolerance);
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	super.SaveState(inStream);
 
@@ -84,7 +84,7 @@ protected void SaveState(StateRecorder inStream)
 	inStream.write(is_standing);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	super.RestoreState(inStream);
 

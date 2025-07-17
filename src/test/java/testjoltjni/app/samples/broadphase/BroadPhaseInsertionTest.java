@@ -41,7 +41,7 @@ DefaultRandomEngine mRandomGenerator=new DefaultRandomEngine();
 int mCurrentBody;
 int mDirection=1;
 
-void Initialize()
+public void Initialize()
 {
 	super.Initialize();
 

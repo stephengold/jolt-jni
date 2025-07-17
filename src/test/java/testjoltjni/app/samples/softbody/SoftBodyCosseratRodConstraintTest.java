@@ -38,7 +38,7 @@ import testjoltjni.app.samples.*;
 public class SoftBodyCosseratRodConstraintTest extends Test{
 BodyIdVector mSoftBodies=new BodyIdVector();
 
-void Initialize()
+public void Initialize()
 {
 	CreateFloor();
 

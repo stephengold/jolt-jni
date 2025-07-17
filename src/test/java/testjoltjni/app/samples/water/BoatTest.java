@@ -60,7 +60,7 @@ Mutex mBodiesInWaterMutex=new Mutex();
 BodyIdVector mBodiesInWater=new BodyIdVector();
 float mForward, mRight, mTime;
 
-void Initialize()
+public void Initialize()
 {
 	// Create boat
 	ConvexHullShapeSettings boat_hull=new ConvexHullShapeSettings();
@@ -214,13 +214,13 @@ void RestoreInputState(StateRecorder inStream)
 	mRight=inStream.readFloat(mRight);
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 	inStream.write(mBodiesInWater);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 	inStream.readBodyIdVector(mBodiesInWater);

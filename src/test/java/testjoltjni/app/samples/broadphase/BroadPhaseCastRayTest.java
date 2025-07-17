@@ -35,7 +35,7 @@ import static testjoltjni.app.samples.DebugRendererSP.*;
  */
 public class BroadPhaseCastRayTest extends BroadPhaseTest{
 
-void Initialize()
+public void Initialize()
 {
 	super.Initialize();
 

@@ -32,7 +32,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  */
 public class SphereShapeTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

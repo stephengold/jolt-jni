@@ -48,7 +48,7 @@ float mTime = 0.0f;
 Vec3 mDesiredVelocity = Vec3.sZero();
 boolean mJump = false;
 
-void Initialize()
+public void Initialize()
 {
 	// Dimensions of our space ship
 	final float cSpaceShipHeight = 2.0f;
@@ -192,7 +192,7 @@ RMat44 GetCameraPivot(float inCameraHeading, float inCameraPitch)
 	return RMat44.sTranslation(minus(plus(mCharacter.getPosition() ,new Vec3(0, cCharacterHeightStanding + cCharacterRadiusStanding, 0)) , star(5.0f , fwd)));
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	mCharacter.saveState(inStream);
 
@@ -200,7 +200,7 @@ protected void SaveState(StateRecorder inStream)
 	inStream.write(mSpaceShipPrevTransform);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mCharacter.restoreState(inStream);
 

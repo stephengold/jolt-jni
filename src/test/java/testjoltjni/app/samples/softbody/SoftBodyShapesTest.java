@@ -34,7 +34,7 @@ import testjoltjni.app.samples.*;
  */
 public class SoftBodyShapesTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	final Quat cCubeOrientation = Quat.sRotation(Vec3.sReplicate(sqrt(1.0f / 3.0f)), degreesToRadians(45.0f));
 

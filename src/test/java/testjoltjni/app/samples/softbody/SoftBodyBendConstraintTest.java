@@ -36,7 +36,7 @@ public class SoftBodyBendConstraintTest extends Test{
 float cVertexSpacing=0.5f;
 int cNumVerticesX=10,cNumVerticesZ=10;
 
-void Initialize()
+public void Initialize()
 {
 	CreateFloor();
 

@@ -36,7 +36,7 @@ public class DynamicScaledShape extends Test{
 float mTime;
 int mBodyID=cInvalidBodyId;
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateHeightFieldTerrain();
@@ -76,12 +76,12 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
         lock.releaseLock();
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mTime);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mTime=inStream.readFloat(mTime);
 }

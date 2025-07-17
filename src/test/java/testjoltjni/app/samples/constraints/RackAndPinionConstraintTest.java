@@ -34,7 +34,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class RackAndPinionConstraintTest extends Test{
 
-void Initialize()
+public void Initialize()
 {
 	// Floor
 	CreateFloor();

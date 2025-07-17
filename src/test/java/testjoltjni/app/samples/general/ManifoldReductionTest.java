@@ -36,7 +36,7 @@ public class ManifoldReductionTest extends Test{
 static final float cMaxHeight = 4.0f;
 
 
-void Initialize()
+public void Initialize()
 {
 	final float cPerturbance = 0.02f;
 

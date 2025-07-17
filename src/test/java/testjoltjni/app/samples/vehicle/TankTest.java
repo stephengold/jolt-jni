@@ -47,7 +47,7 @@ float mPreviousForward=1;
 float mLeftRatio=1;
 float mRightRatio=1;
 
-void Initialize()
+public void Initialize()
 {
 	super.Initialize();
 
@@ -324,12 +324,12 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 	}
 }
 
-protected void SaveState(StateRecorder inStream)
+public void SaveState(StateRecorder inStream)
 {
 	inStream.write(mReloadTime);
 }
 
-protected void RestoreState(StateRecorder inStream)
+public void RestoreState(StateRecorder inStream)
 {
 	mReloadTime=inStream.readFloat(mReloadTime);
 }
