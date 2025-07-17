@@ -73,7 +73,7 @@ public class PhysicsSystem extends NonCopyable {
     final private Map<Long, PhysicsStepListener> stepListeners
             = new HashMap<>(16);
     /**
-     * map virtual address to system
+     * map virtual {@code PhysicsSystem} addresses back to JVM objects
      */
     final private static Map<Long, PhysicsSystem> va2ps = new HashMap<>(32);
     /**
