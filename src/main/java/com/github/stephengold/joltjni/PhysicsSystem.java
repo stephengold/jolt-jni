@@ -75,7 +75,7 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * map virtual address to system
      */
-    final private static Map<Long, PhysicsSystem> va2ps = new WeakHashMap<>(32);
+    final private static Map<Long, PhysicsSystem> va2ps = new HashMap<>(32);
     /**
      * cached reference to the system's locking {@code NarrowPhaseQuery}
      */
