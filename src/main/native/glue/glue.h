@@ -31,6 +31,12 @@ SOFTWARE.
  */
 #ifdef JPH_DEBUG
 
+#define EXCEPTION_CHECK(pEnv) \
+    if ((pEnv)->ExceptionCheck()) { \
+            (pEnv)->ExceptionDescribe(); \
+            JPH_ASSERT(false); \
+    }
+
 extern bool gTraceAllocations;
 
 #define TRACE_NEW(className, pointer) \
@@ -43,6 +49,7 @@ extern bool gTraceAllocations;
     }
 
 #else
+#define EXCEPTION_CHECK(pEnv)
 #define TRACE_NEW(className, pointer)
 #define TRACE_DELETE(className, pointer)
 #endif
