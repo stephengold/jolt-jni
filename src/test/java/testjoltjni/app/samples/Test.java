@@ -40,7 +40,7 @@ protected JobSystem mJobSystem;
 protected PhysicsSystem mPhysicsSystem;
 protected TempAllocator mTempAllocator;
 public void Cleanup(){}
-protected void FatalError(String message){throw new RuntimeException(message);}
+final protected void FatalError(String message){throw new RuntimeException(message);}
 float GetWorldScale() { return 1.0f; }
 public void Initialize(){}
 public void OnContactAdded(ConstBody inBody1,ConstBody inBody2,ConstContactManifold inManifold,ContactSettings ioSettings){}
@@ -51,11 +51,11 @@ public void PostPhysicsUpdate(float deltaTime){}
 public void PrePhysicsUpdate(PreUpdateParams params){}
 public void RestoreState(StateRecorder inStream){}
 public void SaveState(StateRecorder inStream){}
-void SetDebugRenderer(DebugRenderer renderer){mDebugRenderer = renderer;}
-void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
-void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSystem;mBodyInterface=inPhysicsSystem.getBodyInterface();}
-void SetTempAllocator(TempAllocator inTempAllocator){mTempAllocator=inTempAllocator;}
-protected void Trace(String format,Object...args){cout.printf(format,args);cout.println();cout.flush();}
+final void SetDebugRenderer(DebugRenderer renderer){mDebugRenderer=renderer;}
+final void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
+final void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSystem;mBodyInterface=inPhysicsSystem.getBodyInterface();}
+final void SetTempAllocator(TempAllocator inTempAllocator){mTempAllocator=inTempAllocator;}
+final protected void Trace(String format,Object...args){cout.printf(format,args);cout.println();cout.flush();}
 
 final protected Body CreateFloor(){return CreateFloor(200);}
 final protected Body CreateFloor(float inSize)
