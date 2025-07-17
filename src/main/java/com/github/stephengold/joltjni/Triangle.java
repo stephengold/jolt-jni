@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstTriangle;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
@@ -29,7 +30,7 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class Triangle extends JoltPhysicsObject {
+final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     // *************************************************************************
     // constructors
 

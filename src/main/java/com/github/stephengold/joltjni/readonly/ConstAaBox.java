@@ -22,11 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.AaBox;
-import com.github.stephengold.joltjni.IndexedTriangle;
-import com.github.stephengold.joltjni.Plane;
-import com.github.stephengold.joltjni.Triangle;
 import com.github.stephengold.joltjni.Vec3;
-import com.github.stephengold.joltjni.VertexList;
 
 /**
  * Read-only access to an {@code AaBox}. (native type: const AABox)
@@ -50,29 +46,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      *
      * @return {@code true} if contained, otherwise {@code false}
      */
-    boolean contains(AaBox other);
-
-    /**
-     * Encapsulate bounding box in bounding box.
-     *
-     * @param rhs the box to include (not null, unaffected)
-     */
-    void encapsulate(AaBox rhs);
-
-    /**
-     * Encapsulate triangle in bounding box.
-     *
-     * @param rhs the triangle to include (not null, unaffected)
-     */
-    void encapsulate(Triangle rhs);
-
-    /**
-     * Encapsulate triangle in bounding box.
-     *
-     * @param vertices the vertices to include (not null, unaffected)
-     * @param triangle the triangle to include (not null, unaffected)
-     */
-    void encapsulate(VertexList vertices, IndexedTriangle triangle);
+    boolean contains(ConstAaBox other);
 
     /**
      * Locate the center of the box. The box is unaffected.
@@ -164,7 +138,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      *
      * @return {@code true} if they overlap, otherwise {@code false}
      */
-    boolean overlaps(AaBox other);
+    boolean overlaps(ConstAaBox other);
 
     /**
      * Check if this box overlaps with a plane.
@@ -173,7 +147,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      *
      * @return {@code true} if they overlap, otherwise {@code false}
      */
-    boolean overlaps(Plane plane);
+    boolean overlaps(ConstPlane plane);
 
     /**
      * Calculate the support vector for this convex shape.
