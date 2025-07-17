@@ -188,8 +188,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateTria
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_ensureMinimalEdgeLength
-  (JNIEnv *, jclass, jlong, jfloat);
-
+  (JNIEnv *, jclass, jlong boxVal, jfloat minEdgeLength) {
+    AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
+    pBox->EnsureMinimalEdgeLength(minEdgeLength);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
