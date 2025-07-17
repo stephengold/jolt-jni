@@ -43,23 +43,23 @@ public:
         pEnv->GetJavaVM(&mpVM);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomContactListener");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mAddedMethodId = pEnv->GetMethodID(clss, "onContactAdded", "(JJJJ)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mPersistedMethodId = pEnv->GetMethodID(clss, "onContactPersisted", "(JJJJ)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mRemovedMethodId = pEnv->GetMethodID(clss, "onContactRemoved", "(J)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mValidateMethodId = pEnv->GetMethodID(clss, "onContactValidate", "(JJDDDJ)I");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
     }
 
     void OnContactAdded(const Body& inBody1, const Body& inBody2,
@@ -73,7 +73,7 @@ public:
         const jlong manifoldVa = reinterpret_cast<jlong> (&inManifold);
         const jlong settingsVa = reinterpret_cast<jlong> (&ioSettings);
         pAttachEnv->CallVoidMethod(mJavaObject, mAddedMethodId, body1Va, body2Va, manifoldVa, settingsVa);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 
@@ -89,7 +89,7 @@ public:
         const jlong settingsVa = reinterpret_cast<jlong> (&ioSettings);
         pAttachEnv->CallVoidMethod(mJavaObject, mPersistedMethodId, body1Va,
                 body2Va, manifoldVa, settingsVa);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 
@@ -100,7 +100,7 @@ public:
 
         const jlong pairVa = reinterpret_cast<jlong> (&pair);
         pAttachEnv->CallVoidMethod(mJavaObject, mRemovedMethodId, pairVa);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 
@@ -118,7 +118,7 @@ public:
         const jlong shapeVa = reinterpret_cast<jlong> (&inCollisionResult);
         const jint jintResult = pAttachEnv->CallIntMethod(mJavaObject,
                 mValidateMethodId, body1Va, body2Va, offsetX, offsetY, offsetZ, shapeVa);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
         return (ValidateResult) jintResult;
     }
@@ -129,7 +129,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 };

@@ -40,14 +40,14 @@ public:
         pEnv->GetJavaVM(&mpVM);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomCollideShapeBodyCollector");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mAddMethodId = pEnv->GetMethodID(clss, "addHit", "(I)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
     }
 
     void AddHit(const BodyID &inResult) override {
@@ -57,7 +57,7 @@ public:
 
         const jint resultId = inResult.GetIndexAndSequenceNumber();
         pAttachEnv->CallVoidMethod(mJavaObject, mAddMethodId, resultId);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 
@@ -67,7 +67,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 };

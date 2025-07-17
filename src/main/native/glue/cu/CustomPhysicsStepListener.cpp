@@ -40,14 +40,14 @@ public:
         pEnv->GetJavaVM(&mpVM);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomPhysicsStepListener");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mStepMethodId = pEnv->GetMethodID(clss, "onStep", "(J)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
     }
 
     void OnStep(const PhysicsStepListenerContext& inContext) override {
@@ -57,7 +57,7 @@ public:
 
         const jlong contextVa = reinterpret_cast<jlong> (&inContext);
         pAttachEnv->CallVoidMethod(mJavaObject, mStepMethodId, contextVa);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 
@@ -67,7 +67,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 };

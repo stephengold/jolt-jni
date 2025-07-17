@@ -43,17 +43,17 @@ public:
         pEnv->GetJavaVM(&mpVM);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomBodyActivationListener");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mActivatedMethodId = pEnv->GetMethodID(clss, "onBodyActivated", "(IJ)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mDeactivatedMethodId = pEnv->GetMethodID(clss, "onBodyDeactivated", "(IJ)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
     }
 
     void OnBodyActivated(const BodyID& inBodyID, uint64 inBodyUserData) override {
@@ -64,7 +64,7 @@ public:
         const jint id = inBodyID.GetIndexAndSequenceNumber();
         const jlong userData = inBodyUserData;
         pAttachEnv->CallVoidMethod(mJavaObject, mActivatedMethodId, id, userData);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 
@@ -76,7 +76,7 @@ public:
         const jint id = inBodyID.GetIndexAndSequenceNumber();
         const jlong userData = inBodyUserData;
         pAttachEnv->CallVoidMethod(mJavaObject, mDeactivatedMethodId, id, userData);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 
@@ -86,7 +86,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 };

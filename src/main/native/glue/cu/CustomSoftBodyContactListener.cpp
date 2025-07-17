@@ -42,17 +42,17 @@ public:
         pEnv->GetJavaVM(&mpVM);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomSoftBodyContactListener");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mAddedMethodId = pEnv->GetMethodID(clss, "onSoftBodyContactAdded", "(JJ)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mValidateMethodId = pEnv->GetMethodID(clss, "onSoftBodyContactValidate", "(JJJ)I");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
     }
 
     void OnSoftBodyContactAdded(const Body& inSoftBody, const SoftBodyManifold& inManifold) override {
@@ -63,7 +63,7 @@ public:
         const jlong bodyVa = reinterpret_cast<jlong> (&inSoftBody);
         const jlong manifoldVa = reinterpret_cast<jlong> (&inManifold);
         pAttachEnv->CallVoidMethod(mJavaObject, mAddedMethodId, bodyVa, manifoldVa);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 
@@ -78,7 +78,7 @@ public:
         const jlong settingsVa = reinterpret_cast<jlong> (&ioSettings);
         const jint jintResult = pAttachEnv->CallIntMethod(mJavaObject,
                 mValidateMethodId, softBodyVa, otherBodyVa, settingsVa);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
         return (SoftBodyValidateResult) jintResult;
     }
@@ -89,7 +89,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 };

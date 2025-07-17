@@ -50,55 +50,55 @@ public:
         pEnv->GetJavaVM(&mpVM);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/CustomCharacterContactListener");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mAddedMethodId = pEnv->GetMethodID(
                 clss, "onContactAdded", "(JIIDDDFFFJ)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mAdjustMethodId = pEnv->GetMethodID(
                 clss, "onAdjustBodyVelocity", "(JJ[F)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mCcAddedMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactAdded", "(JJIDDDFFFJ)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mCcPersistedMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactPersisted", "(JJIDDDFFFJ)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mCcRemovedMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactRemoved", "(JII)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mCcSolveMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactSolve", "(JJIDDDFFFFFFJFFF[F)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mCcValidateMethodId = pEnv->GetMethodID(
                 clss, "onCharacterContactValidate", "(JJI)Z");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mPersistedMethodId = pEnv->GetMethodID(
                 clss, "onContactPersisted", "(JIIDDDFFFJ)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mRemovedMethodId = pEnv->GetMethodID(
                 clss, "onContactRemoved", "(JII)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mSolveMethodId = pEnv->GetMethodID(
                 clss, "onContactSolve", "(JIIDDDFFFFFFJFFF[F)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mValidateMethodId = pEnv->GetMethodID(
                 clss, "onContactValidate", "(JII)Z");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
     }
 
     void OnAdjustBodyVelocity(const CharacterVirtual *inCharacter,
@@ -121,17 +121,17 @@ public:
         pFloats[4] = ioAngularVelocity.GetY();
         pFloats[5] = ioAngularVelocity.GetZ();
         pAttachEnv->ReleaseFloatArrayElements(velocities, pFloats, 0);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         pAttachEnv->CallVoidMethod(
                 mJavaObject, mAdjustMethodId, characterVa, body2Va, velocities);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         pFloats = pAttachEnv->GetFloatArrayElements(velocities, &isCopy);
         ioLinearVelocity = Vec3(pFloats[0], pFloats[1], pFloats[2]);
         ioAngularVelocity = Vec3(pFloats[3], pFloats[4], pFloats[5]);
         pAttachEnv->ReleaseFloatArrayElements(velocities, pFloats, JNI_ABORT);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         mpVM->DetachCurrentThread();
     }
@@ -160,7 +160,7 @@ public:
                 otherCharacterVa, subShapeId2, contactLocationX,
                 contactLocationY, contactLocationZ, contactNormalX,
                 contactNormalY, contactNormalZ, settingsVa);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         mpVM->DetachCurrentThread();
     }
@@ -189,7 +189,7 @@ public:
                 characterVa, otherCharacterVa, subShapeId2, contactLocationX,
                 contactLocationY, contactLocationZ, contactNormalX,
                 contactNormalY, contactNormalZ, settingsVa);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         mpVM->DetachCurrentThread();
     }
@@ -207,7 +207,7 @@ public:
 
         pAttachEnv->CallVoidMethod(mJavaObject, mCcRemovedMethodId, characterVa,
                 otherCharacterId, subShapeId2);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         mpVM->DetachCurrentThread();
     }
@@ -247,7 +247,7 @@ public:
         pFloats[1] = ioNewCharacterVelocity.GetY();
         pFloats[2] = ioNewCharacterVelocity.GetZ();
         pAttachEnv->ReleaseFloatArrayElements(newCharacterVelocity, pFloats, 0);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         pAttachEnv->CallVoidMethod(mJavaObject, mCcSolveMethodId, characterVa,
                 otherCharacterVa, subShapeId2, contactLocationX,
@@ -256,14 +256,14 @@ public:
                 contactVelocityY, contactVelocityZ, materialVa,
                 characterVelocityX, characterVelocityY, characterVelocityZ,
                 newCharacterVelocity);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         pFloats = pAttachEnv->GetFloatArrayElements(
                 newCharacterVelocity, &isCopy);
         ioNewCharacterVelocity = Vec3(pFloats[0], pFloats[1], pFloats[2]);
         pAttachEnv->ReleaseFloatArrayElements(
                 newCharacterVelocity, pFloats, JNI_ABORT);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         mpVM->DetachCurrentThread();
     }
@@ -310,7 +310,7 @@ public:
                 bodyId2, subShapeId2, contactLocationX, contactLocationY,
                 contactLocationZ, contactNormalX, contactNormalY,
                 contactNormalZ, settingsVa);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         mpVM->DetachCurrentThread();
     }
@@ -338,7 +338,7 @@ public:
                 bodyId2, subShapeId2, contactLocationX, contactLocationY,
                 contactLocationZ, contactNormalX, contactNormalY,
                 contactNormalZ, settingsVa);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         mpVM->DetachCurrentThread();
     }
@@ -355,7 +355,7 @@ public:
 
         pAttachEnv->CallVoidMethod(mJavaObject, mRemovedMethodId, characterVa,
                 bodyId2, subShapeId2);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         mpVM->DetachCurrentThread();
     }
@@ -393,7 +393,7 @@ public:
         pFloats[1] = ioNewCharacterVelocity.GetY();
         pFloats[2] = ioNewCharacterVelocity.GetZ();
         pAttachEnv->ReleaseFloatArrayElements(newCharacterVelocity, pFloats, 0);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         pAttachEnv->CallVoidMethod(mJavaObject, mSolveMethodId, characterVa,
                 bodyId2, subShapeId2, contactLocationX, contactLocationY,
@@ -401,14 +401,14 @@ public:
                 contactNormalZ, contactVelocityX, contactVelocityY,
                 contactVelocityZ, materialVa, characterVelocityX,
                 characterVelocityY, characterVelocityZ, newCharacterVelocity);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         pFloats = pAttachEnv->GetFloatArrayElements(
                 newCharacterVelocity, &isCopy);
         ioNewCharacterVelocity = Vec3(pFloats[0], pFloats[1], pFloats[2]);
         pAttachEnv->ReleaseFloatArrayElements(
                 newCharacterVelocity, pFloats, JNI_ABORT);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         mpVM->DetachCurrentThread();
     }
@@ -435,7 +435,7 @@ public:
         JPH_ASSERT(retCode == JNI_OK);
 
         pAttachEnv->DeleteGlobalRef(mJavaObject);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
         mpVM->DetachCurrentThread();
     }
 };
