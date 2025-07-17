@@ -57,7 +57,7 @@ static String  sTerrainTypes[] = {
 	"No Collision 2^N + 1"
 };
 
-public void Initialize()
+void Initialize()
 {
 	if (sTerrainType == 0 || sTerrainType == 1)
 	{

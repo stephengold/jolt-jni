@@ -38,7 +38,7 @@ List<ShapeRefC> mShapes=new ArrayList<>();
 float mTime = 0.0f;
 int mShapeIdx = 0;
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();

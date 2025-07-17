@@ -34,7 +34,7 @@ public class ChangeMotionTypeTest extends Test{
 Body mBody;
 float mTime;
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();

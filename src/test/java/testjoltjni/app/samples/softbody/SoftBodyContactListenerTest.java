@@ -38,7 +38,7 @@ int mOtherBodyID=cInvalidBodyId,mSoftBodyID=cInvalidBodyId;
 float mTime;
 int mCycle;
 
-public void Initialize()
+void Initialize()
 {
 	// Install contact listener for soft bodies
 	mPhysicsSystem.setSoftBodyContactListener(new CustomSoftBodyContactListener(){

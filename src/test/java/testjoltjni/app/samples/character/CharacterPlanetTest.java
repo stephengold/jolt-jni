@@ -45,7 +45,7 @@ Vec3 mDesiredVelocity=Vec3.sZero();
 Vec3 mDesiredVelocityWS=Vec3.sZero();
 boolean mJump;
 
-public void Initialize()
+void Initialize()
 {
 	// Create planet
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new SphereShape(cPlanetRadius), RVec3.sZero(), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);

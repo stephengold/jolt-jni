@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ protected TempAllocator mTempAllocator;
 public void Cleanup(){}
 protected void FatalError(String message){throw new RuntimeException(message);}
 float GetWorldScale() { return 1.0f; }
-public void Initialize(){}
+void Initialize(){}
 public void PostPhysicsUpdate(float deltaTime){}
 public void PrePhysicsUpdate(PreUpdateParams params){}
 protected void RestoreState(StateRecorder inStream){}

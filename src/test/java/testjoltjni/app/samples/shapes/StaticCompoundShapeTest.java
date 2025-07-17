@@ -34,7 +34,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class StaticCompoundShapeTest extends Test{
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();

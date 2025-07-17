@@ -79,7 +79,7 @@ void SkinVertices(boolean inHardSkinAll)
 		mp.skinVertices(com, pose, cNumJoints, inHardSkinAll, mTempAllocator);
 }
 
-public void Initialize()
+void Initialize()
 {
 	CreateFloor();
 

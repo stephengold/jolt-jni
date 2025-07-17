@@ -60,7 +60,7 @@ Mutex mBodiesInWaterMutex=new Mutex();
 BodyIdVector mBodiesInWater=new BodyIdVector();
 float mForward, mRight, mTime;
 
-public void Initialize()
+void Initialize()
 {
 	// Create boat
 	ConvexHullShapeSettings boat_hull=new ConvexHullShapeSettings();

@@ -33,7 +33,7 @@ import static com.github.stephengold.joltjni.Jolt.*;
  */
 public class MeshShapeTest extends Test{
 
-public void Initialize()
+void Initialize()
 {
 	// Create regular grid of triangles
 	int max_material_index = 0;

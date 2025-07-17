@@ -37,7 +37,7 @@ BodyIdVector mDebris=new BodyIdVector();
 boolean mIsDebris = true;
 float mTime;
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();

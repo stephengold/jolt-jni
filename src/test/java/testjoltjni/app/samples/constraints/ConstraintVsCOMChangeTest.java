@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ static final float cBoxSize = 2.0f;
 float mTime = 0.0f;
 int mNumShapes = -1;
 
-public void Initialize()
+void Initialize()
 {
 	final int cChainLength = 15;
 	final float cMinAngle = degreesToRadians(-10.0f);

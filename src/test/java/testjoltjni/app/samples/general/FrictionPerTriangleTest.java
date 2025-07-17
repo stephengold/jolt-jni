@@ -43,7 +43,7 @@ static class MyMaterial extends PhysicsMaterialSimple{
     };
 }
 
-public void Initialize()
+void Initialize()
 {
 	final int num_sections = 5;
 	final float section_size = 50.0f;

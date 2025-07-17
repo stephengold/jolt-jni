@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
 public class ConstraintPriorityTest extends Test{
 List<TwoBodyConstraintRef> mConstraints=new ArrayList<>();
 
-public void Initialize()
+void Initialize()
 {
 	float box_size = 1.0f;
 	ShapeRefC box = new BoxShape(new Vec3(0.5f * box_size, 0.2f, 0.2f)).toRefC();

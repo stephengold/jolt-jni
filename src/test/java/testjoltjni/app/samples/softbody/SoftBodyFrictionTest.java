@@ -31,7 +31,7 @@ import testjoltjni.app.samples.*;
  */
 public class SoftBodyFrictionTest extends Test{
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	Body floor = CreateFloor();

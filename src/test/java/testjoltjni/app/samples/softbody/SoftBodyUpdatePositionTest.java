@@ -34,7 +34,7 @@ import static com.github.stephengold.joltjni.std.Std.*;
  */
 public class SoftBodyUpdatePositionTest extends Test{
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();

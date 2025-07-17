@@ -36,7 +36,7 @@ public class ConveyorBeltTest extends Test{
 BodyIdVector mLinearBelts=new BodyIdVector();
 int mAngularBelt=cInvalidBodyId;
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();

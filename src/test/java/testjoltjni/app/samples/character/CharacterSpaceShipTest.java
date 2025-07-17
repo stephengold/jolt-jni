@@ -48,7 +48,7 @@ float mTime = 0.0f;
 Vec3 mDesiredVelocity = Vec3.sZero();
 boolean mJump = false;
 
-public void Initialize()
+void Initialize()
 {
 	// Dimensions of our space ship
 	final float cSpaceShipHeight = 2.0f;

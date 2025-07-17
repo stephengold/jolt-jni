@@ -141,7 +141,7 @@ public void Cleanup()
 		mAnimatedCharacter.removeFromPhysicsSystem();
 }
 
-public void Initialize()
+void Initialize()
 {
 	// Create capsule shapes for all stances
 	switch (sShapeType)

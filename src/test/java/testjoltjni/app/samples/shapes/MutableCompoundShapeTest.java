@@ -39,7 +39,7 @@ BodyIdVector mBodyIDs=new BodyIdVector();
 int mFrameNumber;
 ShapeRefC mSubCompound=new ShapeRefC();
 
-public void Initialize()
+void Initialize()
 {
 	// Floor (extra thick because we can randomly add sub shapes that then may stick out underneath the floor and cause objects to be pushed through)
 	mBodyInterface.createAndAddBody(new BodyCreationSettings(new BoxShape(new Vec3(100.0f, 10.0f, 100.0f), 0.0f), new RVec3(0.0f, -10.0f, 0.0f), Quat.sIdentity(), EMotionType.Static, Layers.NON_MOVING), EActivation.DontActivate);

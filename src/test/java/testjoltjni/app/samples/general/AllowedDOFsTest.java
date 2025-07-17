@@ -35,7 +35,7 @@ import static com.github.stephengold.joltjni.std.Std.*;
 public class AllowedDOFsTest extends Test{
 BodyIdVector mBodies=new BodyIdVector();
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();

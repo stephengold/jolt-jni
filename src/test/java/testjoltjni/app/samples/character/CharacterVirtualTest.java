@@ -54,7 +54,7 @@ Vec3 mDesiredVelocity = Vec3.sZero();
 boolean mAllowSliding = false;
 RVec3 GetCharacterPosition(){return mCharacter.getPosition();}
 
-public void Initialize()
+void Initialize()
 {
 	super.Initialize();
 

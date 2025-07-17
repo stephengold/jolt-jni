@@ -36,7 +36,7 @@ public class SoftBodyForceTest extends Test{
 int mBodyID=cInvalidBodyId;
 float mTime;
 
-public void Initialize()
+void Initialize()
 {
 	CreateFloor();
 

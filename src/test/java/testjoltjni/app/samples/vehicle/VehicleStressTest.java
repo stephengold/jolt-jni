@@ -37,7 +37,7 @@ public class VehicleStressTest extends VehicleTest{
     List<VehicleConstraintRef> mVehicles = new ArrayList<>();
     float mHandBrake, mForward, mRight;
 
-public void Initialize()
+void Initialize()
 {
 	CreateMeshTerrain();
 

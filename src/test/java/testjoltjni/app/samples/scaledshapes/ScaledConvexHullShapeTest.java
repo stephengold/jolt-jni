@@ -36,7 +36,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class ScaledConvexHullShapeTest extends Test{
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();

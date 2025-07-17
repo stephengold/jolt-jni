@@ -55,7 +55,7 @@ public void Cleanup()
 		r.removeFromPhysicsSystem();
 }
 
-public void Initialize()
+void Initialize()
 {
 	if (strcmp(sSceneName, "PerlinMesh") == 0)
 	{

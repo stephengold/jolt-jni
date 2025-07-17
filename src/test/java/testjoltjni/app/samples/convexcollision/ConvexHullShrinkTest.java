@@ -40,7 +40,7 @@ public class ConvexHullShrinkTest extends Test{
 int mIteration=0;
 List<Vec3Arg[]>mPoints;
 
-public void Initialize()
+void Initialize()
 {
 	// First add a list of shapes that were problematic before
 	mPoints = new ArrayList<>();

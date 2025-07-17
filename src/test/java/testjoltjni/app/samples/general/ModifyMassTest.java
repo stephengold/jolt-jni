@@ -49,7 +49,7 @@ void ResetBodies(int inCycle)
 	mBodyInterface.setUserData(mBodies[1], (inCycle << 1) + 1);
 }
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();

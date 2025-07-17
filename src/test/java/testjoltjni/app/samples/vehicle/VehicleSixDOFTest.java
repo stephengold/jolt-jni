@@ -42,7 +42,7 @@ TwoBodyConstraintRef[] mWheels=new TwoBodyConstraintRef[EWheel.Num.ordinal()];
 RMat44 mCameraPivot=RMat44.sIdentity();
 float mSpeed,mSteeringAngle;
 
-public void Initialize()
+void Initialize()
 {
 	super.Initialize();
 

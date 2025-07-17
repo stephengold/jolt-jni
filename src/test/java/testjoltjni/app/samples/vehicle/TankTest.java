@@ -47,7 +47,7 @@ float mPreviousForward=1;
 float mLeftRatio=1;
 float mRightRatio=1;
 
-public void Initialize()
+void Initialize()
 {
 	super.Initialize();
 

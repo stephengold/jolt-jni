@@ -49,7 +49,7 @@ public void Cleanup()
 			r.removeFromPhysicsSystem();
 }
 
-public void Initialize()
+void Initialize()
 {
 	final int cPileSize = 5;
 

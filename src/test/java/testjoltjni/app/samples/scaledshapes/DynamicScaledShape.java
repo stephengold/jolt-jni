@@ -36,7 +36,7 @@ public class DynamicScaledShape extends Test{
 float mTime;
 int mBodyID=cInvalidBodyId;
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateHeightFieldTerrain();

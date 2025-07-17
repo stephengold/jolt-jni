@@ -32,7 +32,7 @@ import testjoltjni.app.samples.*;
  */
 public class ScaledCylinderShapeTest extends Test{
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();

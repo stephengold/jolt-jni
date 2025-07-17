@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,7 +57,7 @@ class Line {Line(RVec3 s, RVec3 e){mStart=e;mEnd=e;}
 }
 List<Line> mTrackData = new ArrayList<>();
 
-public void Initialize()
+void Initialize()
 {
 	if (strcmp(sSceneName, "Flat") == 0)
 	{

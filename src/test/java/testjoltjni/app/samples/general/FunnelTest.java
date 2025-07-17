@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ import static com.github.stephengold.joltjni.operator.Op.*;
  */
 public class FunnelTest extends Test{
 
-public void Initialize()
+void Initialize()
 {
 	ShapeRefC box = new BoxShape(new Vec3(50, 1, 50), 0.0f).toRefC();
 

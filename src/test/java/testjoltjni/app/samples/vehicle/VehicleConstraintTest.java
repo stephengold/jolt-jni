@@ -68,7 +68,7 @@ public void Cleanup()
 	mPhysicsSystem.removeStepListener(mVehicleConstraint.getPtr().getStepListener());
 }
 
-public void Initialize()
+void Initialize()
 {
 	super.Initialize();
 

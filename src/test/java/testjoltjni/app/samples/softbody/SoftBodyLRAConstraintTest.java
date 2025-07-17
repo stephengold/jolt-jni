@@ -35,7 +35,7 @@ public class SoftBodyLRAConstraintTest extends Test{
 float cVertexSpacing=.5f;
 int cNumVerticesX=10,cNumVerticesZ = 50;
 
-public void Initialize()
+void Initialize()
 {
 	CreateFloor();
 

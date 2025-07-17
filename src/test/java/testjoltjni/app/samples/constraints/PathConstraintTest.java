@@ -41,7 +41,7 @@ static float sMaxFrictionAcceleration;
 static float sFrequency=2;
 static float sDamping=1;
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();

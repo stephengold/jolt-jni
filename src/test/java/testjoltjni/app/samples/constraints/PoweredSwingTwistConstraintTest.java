@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ Vec3 sTargetVelocityCS=new Vec3(degreesToRadians(90),0,0);
 
 Vec3[]sBodyRotation = { Vec3.sZero(), Vec3.sZero() };
 
-public void Initialize()
+void Initialize()
 {
 	// Floor
 	CreateFloor();
