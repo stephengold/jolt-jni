@@ -31,7 +31,6 @@ import com.github.stephengold.joltjni.readonly.ConstPhysicsSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.WeakHashMap;
 
 /**
  * Perform simulation on a collection of physics objects. Bodies are added by
