@@ -420,6 +420,7 @@ public static void main(  String[] argv)throws IOException
 					Trace("Fail hash validation. Was: %s, expected: %s", hash_str, validate_hash);
 					System.exit( 1);
 				}
+				physics_system.forgetMe();
 			}
 		}
 	}

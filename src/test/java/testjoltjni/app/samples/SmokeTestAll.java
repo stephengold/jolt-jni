@@ -170,6 +170,7 @@ final public class SmokeTestAll {
         }
 
         test.Cleanup();
+        physicsSystem.forgetMe();
         System.gc();
     }
 

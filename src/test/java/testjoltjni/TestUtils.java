@@ -582,6 +582,10 @@ final public class TestUtils {
     public static void testClose(ConstJoltPhysicsObject... objects) {
         if (!automateFreeing) {
             for (ConstJoltPhysicsObject object : objects) {
+                if (object instanceof PhysicsSystem) {
+                    PhysicsSystem system = (PhysicsSystem) object;
+                    system.forgetMe();
+                }
                 boolean wasOwner = object.ownsNativeObject();
                 object.close();
 

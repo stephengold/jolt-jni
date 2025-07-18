@@ -231,10 +231,21 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @param systemVa the address to search for
      * @return the pre-existing object, or {@code null} if not found
+     * @see #forgetMe()
      */
     public static PhysicsSystem find(long systemVa) {
         PhysicsSystem result = va2ps.get(systemVa);
         return result;
+    }
+
+    /**
+     * Make the current system un-findable, so it can be garbage collected.
+     *
+     * @see #find(long)
+     */
+    public void forgetMe() {
+        long systemVa = va();
+        va2ps.remove(systemVa);
     }
 
     /**
