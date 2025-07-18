@@ -109,8 +109,8 @@ final public class SmokeTestAll {
                 = new ObjectLayerPairFilterImpl();
 
         int numBodyMutexes = 0; // 0 means "use the default value"
-        int maxBodyPairs = 1_400;
-        int maxContacts = 1_500;
+        int maxBodyPairs = 5_000;
+        int maxContacts = 8_000;
         PhysicsSystem result = new PhysicsSystem();
         result.init(maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
                 mapObj2Bp, objVsBpFilter, objVsObjFilter);
@@ -152,7 +152,7 @@ final public class SmokeTestAll {
                 Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, numThreads);
         test.SetJobSystem(jobSystem);
 
-        int maxBodies = 1_100;
+        int maxBodies = 1_300;
         PhysicsSystem physicsSystem = newPhysicsSystem(maxBodies);
         test.SetPhysicsSystem(physicsSystem);
 
@@ -280,6 +280,7 @@ final public class SmokeTestAll {
         smokeTest(new LoadSaveSceneTest());
         smokeTest(new ManifoldReductionTest());
         smokeTest(new ModifyMassTest());
+        smokeTest(new PyramidTest());
         smokeTest(new RestitutionTest());
     }
 
