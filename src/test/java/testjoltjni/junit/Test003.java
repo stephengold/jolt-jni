@@ -208,8 +208,7 @@ public class Test003 {
 
             point.set(2.1f, 0, 2);
             Assert.assertFalse(box.contains(point));
-            TestUtils.testClose(box);
-            TestUtils.testClose(smallBox);
+            TestUtils.testClose(box, smallBox);
         }
         { // encapsulate and getSqDistanceTo method:
             AaBox box = new AaBox(new Vec3(-1.25, -1, -0.23),
@@ -219,12 +218,11 @@ public class Test003 {
             smallBox.encapsulate(box);
             TestUtils.assertEquals(-1.5f, -1.5f, -1.5f, smallBox.getMin(), 0f);
             TestUtils.assertEquals(2f, 1.75f, 1.5f, smallBox.getMax(), 0f);
-            TestUtils.testClose(box);
-            TestUtils.testClose(smallBox);
 
             Vec3 point = new Vec3(3, 3, 3);
             Assert.assertEquals(Op.minus(smallBox.getClosestPoint(point),
                     point).lengthSq(), smallBox.getSqDistanceTo(point), 0f);
+            TestUtils.testClose(box, smallBox);
         }
 
         System.gc();
