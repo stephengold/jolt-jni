@@ -282,6 +282,7 @@ public:
         const bool result = pAttachEnv->CallBooleanMethod(
                 mJavaObject, mCcValidateMethodId, characterVa, otherCharacterVa,
                 subShapeId2);
+        EXCEPTION_CHECK(pAttachEnv)
 
         mpVM->DetachCurrentThread();
         return result;
@@ -424,6 +425,7 @@ public:
         const jint subShapeId2 = inSubShapeID2.GetValue();
         const bool result = pAttachEnv->CallBooleanMethod(mJavaObject,
                 mValidateMethodId, characterVa, bodyId2, subShapeId2);
+        EXCEPTION_CHECK(pAttachEnv)
 
         mpVM->DetachCurrentThread();
         return result;
