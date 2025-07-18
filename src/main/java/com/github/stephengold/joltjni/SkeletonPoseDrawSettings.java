@@ -35,6 +35,7 @@ public class SkeletonPoseDrawSettings extends JoltPhysicsObject {
      * Instantiate settings with the default values.
      */
     public SkeletonPoseDrawSettings() {
+        assert Jolt.implementsDebugRendering();
         long settingsVa = createDrawSettings();
         setVirtualAddress(settingsVa, () -> free(settingsVa));
     }
