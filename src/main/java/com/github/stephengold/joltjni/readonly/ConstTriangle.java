@@ -21,10 +21,35 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import java.nio.FloatBuffer;
+
 /**
  * Read-only access to an {@code Triangle}. (native type: const Triangle)
  *
  * @author wil
  */
-public interface ConstTriangle extends ConstJoltPhysicsObject {
+public interface ConstTriangle extends ConstJoltPhysicsObject {    
+    /**
+     * Return the triangle's material index. The triangle is unaffected. (native
+     * attribute: mMaterialIndex)
+     *
+     * @return the index
+     */
+    int getMaterialIndex();
+
+    /**
+     * Return the triangle's user data. The triangle is unaffected. (native
+     * attribute: mUserData)
+     *
+     * @return the value
+     */
+    int getUserData();
+
+    /**
+     * Write the vertex locations to the specified buffer and advance the
+     * buffer's position by 9. The triangle is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    public void putVertices(FloatBuffer storeBuffer);
 }
