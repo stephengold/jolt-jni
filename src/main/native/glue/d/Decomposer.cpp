@@ -41,21 +41,21 @@ public:
      */
     Decomposer(JNIEnv *pEnv, jobject javaObject) {
         pEnv->GetJavaVM(&mpVM);
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         const jclass clss = pEnv->FindClass(
                 "com/github/stephengold/joltjni/vhacd/Decomposer");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mAddMethodId = pEnv->GetMethodID(clss, "addHull", "(J)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
 
         mUpdateMethodId = pEnv->GetMethodID(
                 clss, "update", "(DDDLjava/lang/String;Ljava/lang/String;)V");
-        JPH_ASSERT(!pEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pEnv)
     }
 
     void Decompose(JNIEnv *pEnv,
@@ -75,7 +75,7 @@ public:
                 const jlong hullVa = reinterpret_cast<jlong> (pHull);
 
                 pEnv->CallVoidMethod(mJavaObject, mAddMethodId, hullVa);
-                JPH_ASSERT(!pEnv->ExceptionCheck());
+                EXCEPTION_CHECK(pEnv)
             }
         }
         pIvhacd->Clean();
@@ -105,14 +105,14 @@ public:
         jfloat arg3 = 100.0;
 
         jstring arg4 = pAttachEnv->NewStringUTF(stageName);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         jstring arg5 = pAttachEnv->NewStringUTF(operationName);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
 
         pAttachEnv->CallVoidMethod(mJavaObject, mUpdateMethodId,
                 arg1, arg2, arg3, arg4, arg5);
-        JPH_ASSERT(!pAttachEnv->ExceptionCheck());
+        EXCEPTION_CHECK(pAttachEnv)
     }
 
     virtual ~Decomposer() {}
