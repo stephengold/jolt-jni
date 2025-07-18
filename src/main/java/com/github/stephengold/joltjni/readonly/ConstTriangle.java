@@ -28,7 +28,7 @@ import java.nio.FloatBuffer;
  *
  * @author wil
  */
-public interface ConstTriangle extends ConstJoltPhysicsObject {    
+public interface ConstTriangle extends ConstJoltPhysicsObject {
     /**
      * Return the triangle's material index. The triangle is unaffected. (native
      * attribute: mMaterialIndex)
@@ -51,5 +51,5 @@ public interface ConstTriangle extends ConstJoltPhysicsObject {
      *
      * @param storeBuffer the destination buffer (not null)
      */
-    public void putVertices(FloatBuffer storeBuffer);
+    void putVertices(FloatBuffer storeBuffer);
 }
