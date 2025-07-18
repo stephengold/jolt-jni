@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.Float3;
 import java.nio.FloatBuffer;
 
 /**
@@ -28,7 +29,30 @@ import java.nio.FloatBuffer;
  *
  * @author wil
  */
-public interface ConstVertexList {
+public interface ConstVertexList {    
+    /**
+     * Count how many vertices can be held in the currently allocated storage.
+     * The list is unaffected.
+     *
+     * @return the number of vertices (&ge;0)
+     */
+    int capacity();
+
+    /**
+     * Test whether the list contains no vertices. The list is unaffected.
+     *
+     * @return {@code true} if empty, otherwise {@code false}
+     */
+    boolean empty();
+
+    /**
+     * Copy the vertex at the specified index. The list is unaffected.
+     *
+     * @param listIndex the index from which to get the vertex
+     * @return the vertex
+     */
+    Float3 get(int listIndex);
+
     /**
      * Count how many vertices are in the list. The list is unaffected.
      *

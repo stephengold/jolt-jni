@@ -28,4 +28,11 @@ package com.github.stephengold.joltjni.readonly;
  * @author wil
  */
 public interface ConstIndexedTriangle extends ConstJoltPhysicsObject {
+    /**
+     * Return the triangle's material index. The triangle is unaffected. (native
+     * attribute: mMaterialIndex)
+     *
+     * @return the index
+     */
+    int getMaterialIndex();
 }
