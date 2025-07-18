@@ -147,8 +147,9 @@ final public class SmokeTestAll {
         test.SetTempAllocator(tempAllocator);
 
         // Create new job/physics systems for each test:
+        int numThreads = -1; // autodetect
         JobSystem jobSystem = new JobSystemThreadPool(
-                Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, 1);
+                Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, numThreads);
         test.SetJobSystem(jobSystem);
 
         int maxBodies = 1_100;
