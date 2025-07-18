@@ -86,7 +86,7 @@ final public class SmokeTestAll {
         StreamOut streamOut = new StreamOutWrapper(fileName, mode);
         renderer = new DebugRendererRecorder(streamOut);
 
-        final int numBytes = 1 << 25; // 32 MiB
+        int numBytes = 1 << 24; // 16 MiB
         tempAllocator = new TempAllocatorImpl(numBytes);
 
         smokeTestAll();
@@ -109,8 +109,8 @@ final public class SmokeTestAll {
                 = new ObjectLayerPairFilterImpl();
 
         int numBodyMutexes = 0; // 0 means "use the default value"
-        int maxBodyPairs = 65_536;
-        int maxContacts = 20_480;
+        int maxBodyPairs = 1_400;
+        int maxContacts = 1_500;
         PhysicsSystem result = new PhysicsSystem();
         result.init(maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
                 mapObj2Bp, objVsBpFilter, objVsObjFilter);
@@ -151,7 +151,8 @@ final public class SmokeTestAll {
                 Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, 1);
         test.SetJobSystem(jobSystem);
 
-        PhysicsSystem physicsSystem = newPhysicsSystem(10_240);
+        int maxBodies = 1_100;
+        PhysicsSystem physicsSystem = newPhysicsSystem(maxBodies);
         test.SetPhysicsSystem(physicsSystem);
 
         test.Initialize();
