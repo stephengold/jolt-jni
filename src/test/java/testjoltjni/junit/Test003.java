@@ -61,6 +61,8 @@ import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 import com.github.stephengold.joltjni.enumerate.ESpringMode;
+import com.github.stephengold.joltjni.operator.Op;
+import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
@@ -194,6 +196,35 @@ public class Test003 {
             Assert.assertTrue(box.isValid());
 
             TestUtils.testClose(box);
+        }
+        { // contains method:
+            ConstAaBox box = new AaBox(new Vec3(0, 0, 0), 2);
+            ConstAaBox smallBox = new AaBox(new Vec3(0, 0, 0), 1.5f);
+
+            Vec3 point = new Vec3(0.5f, 0.5f, 0.25f);
+            Assert.assertTrue(box.contains(smallBox));
+            Assert.assertTrue(box.contains(point));
+            Assert.assertFalse(smallBox.contains(box));
+
+            point.set(2.1f, 0, 2);
+            Assert.assertFalse(box.contains(point));
+            TestUtils.testClose(box);
+            TestUtils.testClose(smallBox);
+        }
+        { // encapsulate and getSqDistanceTo method:
+            AaBox box = new AaBox(new Vec3(-1.25, -1, -0.23),
+                    new Vec3(2, 1.75, 1.25));
+            AaBox smallBox = new AaBox(new Vec3(0, 0, 0), 1.5f);
+
+            smallBox.encapsulate(box);
+            TestUtils.assertEquals(-1.5f, -1.5f, -1.5f, smallBox.getMin(), 0f);
+            TestUtils.assertEquals(2f, 1.75f, 1.5f, smallBox.getMax(), 0f);
+            TestUtils.testClose(box);
+            TestUtils.testClose(smallBox);
+
+            Vec3 point = new Vec3(3, 3, 3);
+            Assert.assertEquals(Op.minus(smallBox.getClosestPoint(point),
+                    point).lengthSq(), smallBox.getSqDistanceTo(point), 0f);
         }
 
         System.gc();
