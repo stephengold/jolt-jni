@@ -156,6 +156,9 @@ final public class SmokeTestAll {
         PhysicsSystem physicsSystem = newPhysicsSystem(maxBodies);
         test.SetPhysicsSystem(physicsSystem);
 
+        ContactListener listener = new SamplesContactListener(test);
+        physicsSystem.setContactListener(listener);
+
         test.Initialize();
 
         // Single-step the physics numSteps times:
