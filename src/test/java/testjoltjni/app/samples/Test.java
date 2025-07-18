@@ -36,12 +36,12 @@ import static com.github.stephengold.joltjni.std.Std.*;
 abstract public class Test {
 protected BodyInterface mBodyInterface;
 protected DebugRenderer mDebugRenderer;
-protected JobSystem mJobSystem;
+private JobSystem mJobSystem;
 protected PhysicsSystem mPhysicsSystem;
 protected TempAllocator mTempAllocator;
 public void Cleanup(){}
 final protected void FatalError(String message){throw new RuntimeException(message);}
-float GetWorldScale() { return 1.0f; }
+private float GetWorldScale(){return 1;}
 public void Initialize(){}
 public void OnContactAdded(ConstBody inBody1,ConstBody inBody2,ConstContactManifold inManifold,ContactSettings ioSettings){}
 public void OnContactPersisted(ConstBody inBody1,ConstBody inBody2,ConstContactManifold inManifold,ContactSettings ioSettings){}
