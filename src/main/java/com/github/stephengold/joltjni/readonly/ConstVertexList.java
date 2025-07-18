@@ -29,7 +29,7 @@ import java.nio.FloatBuffer;
  *
  * @author wil
  */
-public interface ConstVertexList {    
+public interface ConstVertexList {
     /**
      * Count how many vertices can be held in the currently allocated storage.
      * The list is unaffected.

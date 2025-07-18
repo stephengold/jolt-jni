@@ -165,7 +165,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
 
     // *************************************************************************
     // ConstTriangle methods.
-    
+
     /**
      * Return the triangle's material index. The triangle is unaffected. (native
      * attribute: mMaterialIndex)
