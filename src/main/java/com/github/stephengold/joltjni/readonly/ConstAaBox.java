@@ -31,15 +31,6 @@ import com.github.stephengold.joltjni.Vec3;
  */
 public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
-     * Test whether the box contains the specified point. The box is unaffected.
-     *
-     * @param point the point to test (not null, unaffected)
-     *
-     * @return {@code true} if contained, otherwise {@code false}
-     */
-    boolean contains(Vec3Arg point);
-
-    /**
      * Check if the box contains the other box. The box is not affected.
      *
      * @param other the other box to check
@@ -47,6 +38,15 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * @return {@code true} if contained, otherwise {@code false}
      */
     boolean contains(ConstAaBox other);
+
+    /**
+     * Test whether the box contains the specified point. The box is unaffected.
+     *
+     * @param point the point to test (not null, unaffected)
+     *
+     * @return {@code true} if contained, otherwise {@code false}
+     */
+    boolean contains(Vec3Arg point);
 
     /**
      * Locate the center of the box. The box is unaffected.
@@ -95,6 +95,32 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     Vec3 getSize();
 
     /**
+     * Get the squared distance between {@code point} and this box (will be 0
+     * if in Point is inside the box)
+     *
+     * @param point The point to check
+     *
+     * @return the distance from this box to the given point
+     */
+    float getSqDistanceTo(Vec3Arg point);
+
+    /**
+     * Calculate the support vector for this convex shape.
+     *
+     * @param direction the direction vector
+     *
+     * @return the support vector
+     */
+    Vec3 getSupport(Vec3Arg direction);
+
+    /**
+     * Get surface area of bounding box.
+     *
+     * @return the area
+     */
+    float getSurfaceArea();
+
+    /**
      * Return the volume of the box. The box is unaffected.
      *
      * @return the volume
@@ -107,6 +133,24 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * @return {@code true} if valid, otherwise {@code false}
      */
     boolean isValid();
+
+    /**
+     * Check if this box overlaps with another box.
+     *
+     * @param other the other box to check
+     *
+     * @return {@code true} if they overlap, otherwise {@code false}
+     */
+    boolean overlaps(ConstAaBox other);
+
+    /**
+     * Check if this box overlaps with a plane.
+     *
+     * @param plane the {@code Plane} object to be checked
+     *
+     * @return {@code true} if they overlap, otherwise {@code false}
+     */
+    boolean overlaps(ConstPlane plane);
 
     /**
      * Return a scaled copy of the box. The current box is unaffected.
@@ -123,48 +167,4 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
      * @return a new object
      */
     AaBox transformed(Mat44Arg matrix);
-
-    /**
-     * Get surface area of bounding box.
-     *
-     * @return the area
-     */
-    float getSurfaceArea();
-
-    /**
-     * Check if this box overlaps with another box.
-     *
-     * @param other the other box to check
-     *
-     * @return {@code true} if they overlap, otherwise {@code false}
-     */
-    boolean overlaps(ConstAaBox other);
-
-    /**
-     * Check if this box overlaps with a plane.
-     *
-     * @param plane the {@code Plan} object to be checked
-     *
-     * @return {@code true} if they overlap, otherwise {@code false}
-     */
-    boolean overlaps(ConstPlane plane);
-
-    /**
-     * Calculate the support vector for this convex shape.
-     *
-     * @param direction the direction vector
-     *
-     * @return the support vector
-     */
-    Vec3 getSupport(Vec3Arg direction);
-
-    /**
-     * Get the squared distance between {@code point} and this box (will be 0
-     * if in Point is inside the box)
-     *
-     * @param point The point to check
-     *
-     * @return the distance from this box to the given point
-     */
-    float getSqDistanceTo(Vec3Arg point);
 }
