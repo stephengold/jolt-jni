@@ -146,6 +146,17 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
     }
 
     /**
+     * Alter the ratio of pinion rotation to rack translation. (native
+     * attribute: mRatio)
+     *
+     * @param ratio the desired radio (in radians/meter)
+     */
+    public void setRatio(float ratio) {
+        long settingsVa = va();
+        setRatioDirectly(settingsVa, ratio);
+    }
+
+    /**
      * Update the ratio of pinion rotation to rack translation.
      *
      * @param rackTeeth the number of teeth in the rack
@@ -213,6 +224,8 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static void setRatio(
             long settingsVa, int rackTeeth, float rackLength, int pinionTeeth);
+
+    native private static void setRatioDirectly(long settingsVa, float ratio);
 
     native private static void setSliderAxis(
             long settingsVa, float dx, float dy, float dz);

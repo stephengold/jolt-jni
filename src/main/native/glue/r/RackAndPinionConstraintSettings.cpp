@@ -177,6 +177,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstrai
 
 /*
  * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
+ * Method:    setRatioDirectly
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_setRatioDirectly
+  (JNIEnv *, jclass, jlong, jfloat);
+
+/*
+ * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
  * Method:    setSliderAxis
  * Signature: (JFFF)V
  */
