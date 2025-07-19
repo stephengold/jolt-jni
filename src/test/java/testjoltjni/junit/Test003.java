@@ -100,6 +100,7 @@ public class Test003 {
         TestUtils.initializeNativeLibrary();
 
         doAaBox();
+        doAaBoxMethods();
         doBodyCreationSettings();
         doCharacter();
         doCharacterVirtual();
@@ -197,6 +198,14 @@ public class Test003 {
 
             TestUtils.testClose(box);
         }
+
+        System.gc();
+    }
+
+    /**
+     * Test the methods of the {@code AaBox} class.
+     */
+    private static void doAaBoxMethods() {
         { // contains method:
             ConstAaBox box = new AaBox(new Vec3(0, 0, 0), 2);
             ConstAaBox smallBox = new AaBox(new Vec3(0, 0, 0), 1.5f);
@@ -224,7 +233,49 @@ public class Test003 {
                     point).lengthSq(), smallBox.getSqDistanceTo(point), 0f);
             TestUtils.testClose(box, smallBox);
         }
+        { // getSqDistanceTo method:
+            ConstAaBox box = new AaBox(new Vec3(0, 0, 0), 2);
+            Vec3 point = new Vec3(4, 4, 4);
 
+            float distance = box.getSqDistanceTo(point);
+            Assert.assertEquals(12, distance, 0f);
+
+            point.set(2, -6, 8);
+            distance = box.getSqDistanceTo(point);
+            Assert.assertEquals(52, distance, 0f);
+            TestUtils.testClose(box);
+        }
+        { // getSurfaceArea method:
+            ConstAaBox box = new AaBox(new Vec3(-1, -3, -4.5f),
+                    new Vec3(2.65f, 5.5f, 6.0f));
+            Assert.assertEquals(317.2f, box.getSurfaceArea(), 0f);
+            TestUtils.testClose(box);
+        }
+        { // getSupport method:
+            ConstAaBox box = new AaBox(new Vec3(-1, -3, -4.5f),
+                    new Vec3(2.65f, 5.5f, 6.0f));
+            Vec3 support = box.getSupport(Vec3.sAxisZ());
+            Vec3 manual = Vec3.sSelect(box.getMax(), box.getMin(),
+                    Vec3.sLess(Vec3.sAxisZ(), Vec3.sZero()));
+
+            TestUtils.assertEquals(2.65f, 5.5f, 6.0f, support, 0f);
+            TestUtils.assertEquals(manual.getX(), manual.getY(), manual.getZ(),
+                    support, 0f);
+            TestUtils.testClose(box);
+        }
+        { // overlaps method:
+            ConstAaBox boxA = new AaBox(new Vec3(0, 0, 0), 4);
+            ConstAaBox boxB = new AaBox(new Vec3(-1, -3, -4.5f),
+                    new Vec3(2.65f, 5.5f, 6.0f));
+            ConstAaBox boxC = new AaBox(new Vec3(6, 0, 0), 1);
+            ConstAaBox boxD = new AaBox(new Vec3(5, 0, 0), 0.5f);
+
+            Assert.assertTrue(boxB.overlaps(boxA));
+            Assert.assertTrue(boxA.overlaps(boxB));
+            Assert.assertFalse(boxA.overlaps(boxC));
+            Assert.assertFalse(boxA.overlaps(boxD));
+            TestUtils.testClose(boxA, boxB, boxC, boxD);
+        }
         System.gc();
     }
 
