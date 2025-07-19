@@ -23,6 +23,7 @@ package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.MotorSettings;
 import com.github.stephengold.joltjni.ObjectStreamOut;
 import com.github.stephengold.joltjni.PhysicsMaterial;
 import com.github.stephengold.joltjni.RMat44;
