@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,6 +44,62 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint
 
 /*
  * Class:     com_github_stephengold_joltjni_SwingTwistConstraint
+ * Method:    getSwingMotorState
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint_getSwingMotorState
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const SwingTwistConstraint * const pConstraint
+            = reinterpret_cast<SwingTwistConstraint *> (constraintVa);
+    const EMotorState state = pConstraint->GetSwingMotorState();
+    return (jint) state;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SwingTwistConstraint
+ * Method:    getTargetAngularVelocityCs
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint_getTargetAngularVelocityCs
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject floatBuffer) {
+    const SwingTwistConstraint * const pConstraint
+            = reinterpret_cast<SwingTwistConstraint *> (constraintVa);
+    jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 3);
+    Vec3 velocity = pConstraint->GetTargetAngularVelocityCS();
+    pFloats[0] = velocity.GetX();
+    pFloats[1] = velocity.GetY();
+    pFloats[2] = velocity.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SwingTwistConstraint
+ * Method:    getTargetOrientationCs
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint_getTargetOrientationCs
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject floatBuffer) {
+    const SwingTwistConstraint * const pConstraint
+            = reinterpret_cast<SwingTwistConstraint *> (constraintVa);
+    jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    JPH_ASSERT(capacityFloats >= 4);
+    Quat orientation = pConstraint->GetTargetOrientationCS();
+    pFloats[0] = orientation.GetX();
+    pFloats[1] = orientation.GetY();
+    pFloats[2] = orientation.GetZ();
+    pFloats[3] = orientation.GetW();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SwingTwistConstraint
  * Method:    getTwistMotorSettings
  * Signature: (J)J
  */
@@ -53,6 +109,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint
             = reinterpret_cast<SwingTwistConstraint *> (constraintVa);
     MotorSettings * const pResult = &pConstraint->GetTwistMotorSettings();
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SwingTwistConstraint
+ * Method:    getTwistMotorState
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint_getTwistMotorState
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const SwingTwistConstraint * const pConstraint
+            = reinterpret_cast<SwingTwistConstraint *> (constraintVa);
+    const EMotorState state = pConstraint->GetTwistMotorState();
+    return (jint) state;
 }
 
 /*

@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EMotorState;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * A {@code TwoBodyConstraint} that only allows limited rotation.
@@ -56,6 +57,50 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
         long constraintVa = va();
         long settingsVa = getSwingMotorSettings(constraintVa);
         MotorSettings result = new MotorSettings(this, settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the state of the swing motor. The constraint is unaffected.
+     *
+     * @return the enum value (not {@code null})
+     */
+    public EMotorState getSwingMotorState() {
+        long constraintVa = va();
+        int ordinal = getSwingMotorState(constraintVa);
+        EMotorState result = EMotorState.values()[ordinal];
+
+        return result;
+    }
+
+    /**
+     * Copy the target angular velocity of body2. The constraint is unaffected.
+     * (native method: GetTargetAngularVelocityCS)
+     *
+     * @return a new vector
+     */
+    public Vec3 getTargetAngularVelocityCs() {
+        long constraintVa = va();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        getTargetAngularVelocityCs(constraintVa, floatBuffer);
+        Vec3 result = new Vec3(floatBuffer);
+
+        return result;
+    }
+
+    /**
+     * Copy the target orientation. The constraint is unaffected. (native
+     * method: GetTargetOrientationCS)
+     *
+     * @return a new quaternion
+     */
+    public Quat getTargetOrientationCs() {
+        long constraintVa = va();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        getTargetOrientationCs(constraintVa, floatBuffer);
+        Quat result = new Quat(floatBuffer);
+
         return result;
     }
 
@@ -68,6 +113,19 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
         long constraintVa = va();
         long settingsVa = getTwistMotorSettings(constraintVa);
         MotorSettings result = new MotorSettings(this, settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the state of the twist motor. The constraint is unaffected.
+     *
+     * @return the enum value (not {@code null})
+     */
+    public EMotorState getTwistMotorState() {
+        long constraintVa = va();
+        int ordinal = getTwistMotorState(constraintVa);
+        EMotorState result = EMotorState.values()[ordinal];
 
         return result;
     }
@@ -178,7 +236,17 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
 
     native private static long getSwingMotorSettings(long constraintVa);
 
+    native private static int getSwingMotorState(long constraintVa);
+
+    native private static void getTargetAngularVelocityCs(
+            long constraintVa, FloatBuffer floatBuffer);
+
+    native private static void getTargetOrientationCs(
+            long constraintVa, FloatBuffer floatBuffer);
+
     native private static long getTwistMotorSettings(long constraintVa);
+
+    native private static int getTwistMotorState(long constraintVa);
 
     native private static void setMaxFrictionTorque(
             long settingsVa, float torque);
