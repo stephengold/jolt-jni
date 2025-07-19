@@ -395,6 +395,30 @@ final class Equivalent {
     }
 
     /**
+     * Verify the equivalence of the specified motor settings, ignoring their
+     * types, virtual addresses, and ownership.
+     *
+     * @param expected the expected motor settings (not {@code null},
+     * unaffected)
+     * @param actual the actual motor settings (not {@code null}, unaffected)
+     */
+    static void motorSettings(MotorSettings expected, MotorSettings actual) {
+        joltPhysicsObject(expected, actual);
+
+        Assert.assertEquals(
+                expected.getMaxForceLimit(), actual.getMaxForceLimit(), 0f);
+        Assert.assertEquals(
+                expected.getMaxTorqueLimit(), actual.getMaxTorqueLimit(), 0f);
+        Assert.assertEquals(
+                expected.getMinForceLimit(), actual.getMinForceLimit(), 0f);
+        Assert.assertEquals(
+                expected.getMinTorqueLimit(), actual.getMinTorqueLimit(), 0f);
+        springSettings(
+                expected.getSpringSettings(), actual.getSpringSettings());
+        Assert.assertEquals(expected.isValid(), actual.isValid());
+    }
+
+    /**
      * Verify the equivalence of the specified physics materials, ignoring their
      * types, virtual addresses, and ownership.
      *
