@@ -282,6 +282,7 @@ final public class SmokeTestAll {
         smokeTest(new ModifyMassTest());
         smokeTest(new PyramidTest());
         smokeTest(new RestitutionTest());
+        smokeTest(new SensorTest());
     }
 
     /**
