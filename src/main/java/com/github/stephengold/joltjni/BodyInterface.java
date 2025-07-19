@@ -617,6 +617,20 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Generate a transformed shape for the specified body.
+     *
+     * @param bodyId the ID of the body
+     * @return a new object
+     */
+    public TransformedShape getTransformedShape(int bodyId) {
+        long bodyInterfaceVa = va();
+        long shapeVa = getTransformedShape(bodyInterfaceVa, bodyId);
+        TransformedShape result = new TransformedShape(shapeVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the user data of the specified body.
      *
      * @param bodyId the ID of the body
@@ -1034,6 +1048,9 @@ public class BodyInterface extends NonCopyable {
             long bodyInterfaceVa, int bodyId, FloatBuffer storeFloats);
 
     native private static long getShape(long bodyInterfaceVa, int bodyId);
+
+    native private static long getTransformedShape(
+            long bodyInterfaceVa, int bodyId);
 
     native private static long getUserData(long bodyInterfaceVa, int bodyId);
 

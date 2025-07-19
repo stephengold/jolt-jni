@@ -27,6 +27,7 @@ SOFTWARE.
 #include "Jolt/Physics/Body/BodyInterface.h"
 #include "Jolt/Physics/Collision/BroadPhase/BroadPhase.h"
 #include "Jolt/Physics/Collision/Shape/Shape.h"
+#include "Jolt/Physics/Collision/TransformedShape.h"
 
 #include "auto/com_github_stephengold_joltjni_BodyInterface.h"
 #include "glue/glue.h"
@@ -577,6 +578,21 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getSha
     ShapeRefC * const pResult = new ShapeRefC();
     TRACE_NEW("ShapeRefC", pResult)
     *pResult = pInterface->GetShape(id);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getTransformedShape
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getTransformedShape
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    TransformedShape * const pResult = new TransformedShape();
+    *pResult = pInterface->GetTransformedShape(id);
     return reinterpret_cast<jlong> (pResult);
 }
 
