@@ -110,7 +110,7 @@ final public class SmokeTestAll {
 
         int numBodyMutexes = 0; // 0 means "use the default value"
         int maxBodyPairs = 5_000;
-        int maxContacts = 8_000;
+        int maxContacts = 9_000;
         PhysicsSystem result = new PhysicsSystem();
         result.init(maxBodies, numBodyMutexes, maxBodyPairs, maxContacts,
                 mapObj2Bp, objVsBpFilter, objVsObjFilter);
