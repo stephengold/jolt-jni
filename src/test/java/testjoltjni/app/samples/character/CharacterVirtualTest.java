@@ -84,6 +84,10 @@ public void Initialize()
 			Vec3Arg inContactNormal=new Vec3(contactNormalX,contactNormalY,contactNormalZ);
 			CharacterVirtualTest.this.OnContactAdded(new CharacterVirtual(characterVa, mPhysicsSystem), bodyId2, subShapeId2, inContactPosition, inContactNormal, new CharacterContactSettings(settingsVa));
 		    }});
+
+	// Draw labels on ramp blocks
+	for (int i = 0; i < mRampBlocks.size(); ++i)
+		SetBodyLabel(mRampBlocks.get(i), String.format("PushesPlayer: %s\nPushable: %s", (i & 1) != 0? "True" : "False", (i & 2) != 0? "True" : "False"));
 }
 
 public void PrePhysicsUpdate( PreUpdateParams inParams)
@@ -136,10 +140,6 @@ if(implementsDebugRendering()){
 
 	// Draw state of character
 	DrawCharacterState(mCharacter, world_transform, velocity);
-
-	// Draw labels on ramp blocks
-	for (int i = 0; i < mRampBlocks.size(); ++i)
-		mDebugRenderer.drawText3D(mBodyInterface.getPosition(mRampBlocks.get(i)), String.format("PushesPlayer: %s\nPushable: %s", (i & 1) != 0? "True" : "False", (i & 2) != 0? "True" : "False"), Color.sWhite, 0.25f);
 }
 
 void HandleInput(Vec3Arg inMovementDirection, boolean inJump, boolean inSwitchStance, float inDeltaTime)
