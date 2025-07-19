@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVertexList;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
@@ -30,7 +31,7 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class VertexList {
+final public class VertexList implements ConstVertexList {
     // *************************************************************************
     // constants
 
@@ -62,45 +63,6 @@ final public class VertexList {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Count how many vertices can be held in the currently allocated storage.
-     * The list is unaffected.
-     *
-     * @return the number of vertices (&ge;0)
-     */
-    public int capacity() {
-        int result = buffer.capacity() / numAxes;
-        return result;
-    }
-
-    /**
-     * Test whether the list contains no vertices. The list is unaffected.
-     *
-     * @return {@code true} if empty, otherwise {@code false}
-     */
-    public boolean empty() {
-        if (buffer.limit() == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Copy the vertex at the specified index. The list is unaffected.
-     *
-     * @param listIndex the index from which to get the vertex
-     * @return the vertex
-     */
-    public Float3 get(int listIndex) {
-        float x = buffer.get(numAxes * listIndex);
-        float y = buffer.get(numAxes * listIndex + 1);
-        float z = buffer.get(numAxes * listIndex + 2);
-        Float3 result = new Float3(x, y, z);
-
-        return result;
-    }
 
     /**
      * Append the specified vertex to the end.
@@ -177,11 +139,57 @@ final public class VertexList {
         set(vertexIndex, location.getX(), location.getY(), location.getZ());
     }
 
+    // *************************************************************************
+    // ConstVertexList methods
+
+    /**
+     * Count how many vertices can be held in the currently allocated storage.
+     * The list is unaffected.
+     *
+     * @return the number of vertices (&ge;0)
+     */
+    @Override
+    public int capacity() {
+        int result = buffer.capacity() / numAxes;
+        return result;
+    }
+
+    /**
+     * Test whether the list contains no vertices. The list is unaffected.
+     *
+     * @return {@code true} if empty, otherwise {@code false}
+     */
+    @Override
+    public boolean empty() {
+        if (buffer.limit() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Copy the vertex at the specified index. The list is unaffected.
+     *
+     * @param listIndex the index from which to get the vertex
+     * @return the vertex
+     */
+    @Override
+    public Float3 get(int listIndex) {
+        float x = buffer.get(numAxes * listIndex);
+        float y = buffer.get(numAxes * listIndex + 1);
+        float z = buffer.get(numAxes * listIndex + 2);
+        Float3 result = new Float3(x, y, z);
+
+        return result;
+    }
+
     /**
      * Count how many vertices are in the list. The list is unaffected.
      *
      * @return the number of vertices (&ge;0)
      */
+    @Override
     public int size() {
         int result = buffer.limit() / numAxes;
         return result;
@@ -193,6 +201,7 @@ final public class VertexList {
      *
      * @return the pre-existing Buffer, flipped but possibly not rewound
      */
+    @Override
     public FloatBuffer toDirectBuffer() {
         this.allowModification = false;
         return buffer;

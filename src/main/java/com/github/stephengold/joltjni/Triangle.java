@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstTriangle;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
@@ -29,7 +30,7 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class Triangle extends JoltPhysicsObject {
+final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     // *************************************************************************
     // constructors
 
@@ -141,47 +142,6 @@ final public class Triangle extends JoltPhysicsObject {
     // *************************************************************************
     // new public methods
 
-    /**
-     * Return the triangle's material index. The triangle is unaffected. (native
-     * attribute: mMaterialIndex)
-     *
-     * @return the index
-     */
-    public int getMaterialIndex() {
-        long triangleVa = va();
-        int result = getMaterialIndex(triangleVa);
-
-        return result;
-    }
-
-    /**
-     * Return the triangle's user data. The triangle is unaffected. (native
-     * attribute: mUserData)
-     *
-     * @return the value
-     */
-    public int getUserData() {
-        long triangleVa = va();
-        int result = getUserData(triangleVa);
-
-        return result;
-    }
-
-    /**
-     * Write the vertex locations to the specified buffer and advance the
-     * buffer's position by 9. The triangle is unaffected.
-     *
-     * @param storeBuffer the destination buffer (not null)
-     */
-    public void putVertices(FloatBuffer storeBuffer) {
-        long triangleVa = va();
-        for (int vertexIndex = 0; vertexIndex < 3; ++vertexIndex) {
-            for (int axisIndex = 0; axisIndex < 3; ++axisIndex) {
-                float f = getCoordinate(triangleVa, vertexIndex, axisIndex);
-                storeBuffer.put(f);
-            }
-        }
-    }
 
     /**
      * Alter the triangle's material index. (native attribute: mMaterialIndex)
@@ -202,6 +162,55 @@ final public class Triangle extends JoltPhysicsObject {
         long triangleVa = va();
         setUserData(triangleVa, value);
     }
+
+    // *************************************************************************
+    // ConstTriangle methods.
+
+    /**
+     * Return the triangle's material index. The triangle is unaffected. (native
+     * attribute: mMaterialIndex)
+     *
+     * @return the index
+     */
+    @Override
+    public int getMaterialIndex() {
+        long triangleVa = va();
+        int result = getMaterialIndex(triangleVa);
+
+        return result;
+    }
+
+    /**
+     * Return the triangle's user data. The triangle is unaffected. (native
+     * attribute: mUserData)
+     *
+     * @return the value
+     */
+    @Override
+    public int getUserData() {
+        long triangleVa = va();
+        int result = getUserData(triangleVa);
+
+        return result;
+    }
+
+    /**
+     * Write the vertex locations to the specified buffer and advance the
+     * buffer's position by 9. The triangle is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    @Override
+    public void putVertices(FloatBuffer storeBuffer) {
+        long triangleVa = va();
+        for (int vertexIndex = 0; vertexIndex < 3; ++vertexIndex) {
+            for (int axisIndex = 0; axisIndex < 3; ++axisIndex) {
+                float f = getCoordinate(triangleVa, vertexIndex, axisIndex);
+                storeBuffer.put(f);
+            }
+        }
+    }
+
     // *************************************************************************
     // native private methods
 

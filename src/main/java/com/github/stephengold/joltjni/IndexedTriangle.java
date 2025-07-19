@@ -21,12 +21,15 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstIndexedTriangle;
+
 /**
  * A triangle composed of three 32-bit mesh-vertex indices and a material index.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class IndexedTriangle extends IndexedTriangleNoMaterial {
+final public class IndexedTriangle extends IndexedTriangleNoMaterial
+        implements ConstIndexedTriangle {
     // *************************************************************************
     // constructors
 
@@ -76,19 +79,6 @@ final public class IndexedTriangle extends IndexedTriangleNoMaterial {
     // new public methods
 
     /**
-     * Return the triangle's material index. The triangle is unaffected. (native
-     * attribute: mMaterialIndex)
-     *
-     * @return the index
-     */
-    public int getMaterialIndex() {
-        long triangleVa = va();
-        int result = getMaterialIndex(triangleVa);
-
-        return result;
-    }
-
-    /**
      * Alter the triangle's material index. (native attribute: mMaterialIndex)
      *
      * @param materialIndex the desired material index
@@ -97,6 +87,24 @@ final public class IndexedTriangle extends IndexedTriangleNoMaterial {
         long triangleVa = va();
         setMaterialIndex(triangleVa, materialIndex);
     }
+
+    // *************************************************************************
+    // ConstIndexedTriangle methods.
+
+    /**
+     * Return the triangle's material index. The triangle is unaffected. (native
+     * attribute: mMaterialIndex)
+     *
+     * @return the index
+     */
+    @Override
+    public int getMaterialIndex() {
+        long triangleVa = va();
+        int result = getMaterialIndex(triangleVa);
+
+        return result;
+    }
+
     // *************************************************************************
     // native private methods
 
