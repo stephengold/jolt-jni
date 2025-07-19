@@ -135,7 +135,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     // new methods exposed
 
     /**
-     * Encapsulate bounding box in bounding box.
+     * Expands the box to include the other specified box.
      *
      * @param rhs the box to include (not null, unaffected)
      */
@@ -147,7 +147,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Encapsulate triangle in bounding box.
+     * Expands the box to include the specified triangle.
      *
      * @param rhs the triangle to include (not null, unaffected)
      */
@@ -172,7 +172,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Encapsulate triangle in bounding box.
+     * Expands the box to include the specified vertices.
      *
      * @param vertices the vertices to include (not null, unaffected)
      * @param triangle the triangle to include (not null, unaffected)
@@ -190,7 +190,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Make sure that each edge of the bounding box has a minimal length.
+     * Method responsible for ensuring that each edge of the bounding box has a
+     * minimum length.
      *
      * @param minEdgeLength the given minimum length
      */
