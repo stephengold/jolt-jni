@@ -155,6 +155,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getPose
 
 /*
  * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    getPoseToObject
+ * Signature: (JJZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_getPoseToObject
+  (JNIEnv *, jclass, jlong ragdollVa, jlong poseVa, jboolean lockBodies) {
+    Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    SkeletonPose * pPose = reinterpret_cast<SkeletonPose *> (poseVa);
+    pRagdoll->GetPose(*pPose, lockBodies);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
  * Method:    getRefCount
  * Signature: (J)I
  */

@@ -171,6 +171,28 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
 
     /**
+     * Copy the ragdoll's pose using the locking body interface.
+     *
+     * @param storePose storage for the pose (not null, modified)
+     */
+    public void getPose(SkeletonPose storePose) {
+        getPose(storePose, true);
+    }
+
+    /**
+     * Copy the ragdoll's pose.
+     *
+     * @param storePose storage for the pose (not null, modified)
+     * @param lockBodies true&rarr;use the locking body interface,
+     * false&rarr;use the non-locking body interface
+     */
+    public void getPose(SkeletonPose storePose, boolean lockBodies) {
+        long ragdollVa = targetVa();
+        long poseVa = storePose.va();
+        getPoseToObject(ragdollVa, poseVa, lockBodies);
+    }
+
+    /**
      * Copy the transform of the ragdoll's root, using the locking body
      * interface. The ragdoll is unaffected.
      *
@@ -287,6 +309,9 @@ public class Ragdoll extends NonCopyable implements RefTarget {
 
     native static void getPose(long ragdollVa, double[] storeDoubles,
             long storeMatsVa, boolean lockBodies);
+
+    native static void getPoseToObject(
+            long ragdollVa, long poseVa, boolean lockBodies);
 
     native private static int getRefCount(long ragdollVa);
 

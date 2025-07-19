@@ -186,6 +186,28 @@ final public class RagdollRef extends Ref {
     }
 
     /**
+     * Copy the ragdoll's pose using the locking body interface.
+     *
+     * @param storePose storage for the pose (not null, modified)
+     */
+    public void getPose(SkeletonPose storePose) {
+        getPose(storePose, true);
+    }
+
+    /**
+     * Copy the ragdoll's pose.
+     *
+     * @param storePose storage for the pose (not null, modified)
+     * @param lockBodies true&rarr;use the locking body interface,
+     * false&rarr;use the non-locking body interface
+     */
+    public void getPose(SkeletonPose storePose, boolean lockBodies) {
+        long ragdollVa = targetVa();
+        long poseVa = storePose.va();
+        Ragdoll.getPoseToObject(ragdollVa, poseVa, lockBodies);
+    }
+
+    /**
      * Copy the transform of the ragdoll's root, using the locking body
      * interface. The ragdoll is unaffected.
      *
