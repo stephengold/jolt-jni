@@ -51,6 +51,7 @@ public void PostPhysicsUpdate(float deltaTime){}
 public void PrePhysicsUpdate(PreUpdateParams params){}
 public void RestoreState(StateRecorder inStream){}
 public void SaveState(StateRecorder inStream){}
+final protected	void SetBodyLabel(int inBodyID,String inLabel){}
 final void SetDebugRenderer(DebugRenderer renderer){mDebugRenderer=renderer;}
 final void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
 final void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSystem;mBodyInterface=inPhysicsSystem.getBodyInterface();}
