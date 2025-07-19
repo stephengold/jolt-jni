@@ -289,7 +289,7 @@ final public class SmokeTestAll {
      * Smoke test the "rig" package.
      */
     private static void smokeTestRig() {
-        //smokeTest(new BigWorldTest());
+        smokeTest(new BigWorldTest());
         smokeTest(new CreateRigTest());
         smokeTest(new KinematicRigTest());
         smokeTest(new LoadRigTest());
