@@ -589,7 +589,7 @@ public class PhysicsSystem extends NonCopyable {
      * @param numBodyMutexes the desired number of mutexes to allocate, or 0 for
      * the default number
      * @param maxBodyPairs the desired maximum number of body pairs that can be
-     * queued at a time
+     * queued at a time (&ge;3)
      * @param maxContactConstraints the desired capacity of the
      * contact-constraint buffer
      * @param map (not null, alias created)
