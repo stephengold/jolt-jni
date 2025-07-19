@@ -35,7 +35,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     // fields
 
     /**
-     * where to add the bodies and constraints (not null)
+     * where to add the bodies and constraints (not {@code null})
      */
     final private PhysicsSystem system;
     // *************************************************************************
@@ -46,7 +46,8 @@ public class Ragdoll extends NonCopyable implements RefTarget {
      *
      * @param ragdollVa the virtual address of the native object to assign (not
      * zero)
-     * @param physicsSystem where to add the bodies and constraints (not null)
+     * @param physicsSystem where to add the bodies and constraints (not
+     * {@code null})
      */
     Ragdoll(long ragdollVa, PhysicsSystem physicsSystem) {
         super(ragdollVa);
@@ -59,7 +60,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
      * Add bodies and constraints to the physics system and optionally activate
      * the bodies.
      *
-     * @param activation whether to activate bodies (not null)
+     * @param activation whether to activate bodies (not {@code null})
      */
     public void addToPhysicsSystem(EActivation activation) {
         long ragdollVa = va();
@@ -94,7 +95,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     /**
      * Drive the ragdoll to the specified pose using motors.
      *
-     * @param pose the desired pose (not null, unaffected)
+     * @param pose the desired pose (not {@code null}, unaffected)
      */
     public void driveToPoseUsingMotors(SkeletonPose pose) {
         long ragdollVa = va();
@@ -144,9 +145,10 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     /**
      * Copy the low-level pose using a locking body interface.
      *
-     * @param storeRootOffset storage for the root offset (not null, modified)
-     * @param storeJointMatrices storage for the joint matrices (not null,
+     * @param storeRootOffset storage for the root offset (not {@code null},
      * modified)
+     * @param storeJointMatrices storage for the joint matrices (not
+     * {@code null}, modified)
      */
     public void getPose(RVec3 storeRootOffset, Mat44Array storeJointMatrices) {
         getPose(storeRootOffset, storeJointMatrices, true);
@@ -155,9 +157,10 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     /**
      * Copy the low-level pose.
      *
-     * @param storeRootOffset storage for the root offset (not null, modified)
-     * @param storeJointMatrices storage for the joint matrices (not null,
+     * @param storeRootOffset storage for the root offset (not {@code null},
      * modified)
+     * @param storeJointMatrices storage for the joint matrices (not
+     * {@code null}, modified)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
@@ -173,7 +176,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     /**
      * Copy the ragdoll's pose using the locking body interface.
      *
-     * @param storePose storage for the pose (not null, modified)
+     * @param storePose storage for the pose (not {@code null}, modified)
      */
     public void getPose(SkeletonPose storePose) {
         getPose(storePose, true);
@@ -182,7 +185,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     /**
      * Copy the ragdoll's pose.
      *
-     * @param storePose storage for the pose (not null, modified)
+     * @param storePose storage for the pose (not {@code null}, modified)
      * @param lockBodies true&rarr;use the locking body interface,
      * false&rarr;use the non-locking body interface
      */
@@ -196,9 +199,10 @@ public class Ragdoll extends NonCopyable implements RefTarget {
      * Copy the transform of the ragdoll's root, using the locking body
      * interface. The ragdoll is unaffected.
      *
-     * @param storeLocation storage for the root location (not null, modified)
-     * @param storeOrientation storage for the root orientation (not null,
+     * @param storeLocation storage for the root location (not {@code null},
      * modified)
+     * @param storeOrientation storage for the root orientation (not
+     * {@code null}, modified)
      */
     public void getRootTransform(RVec3 storeLocation, Quat storeOrientation) {
         getRootTransform(storeLocation, storeOrientation, true);
@@ -207,9 +211,10 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     /**
      * Copy the transform of the ragdoll's root. The ragdoll is unaffected.
      *
-     * @param storeLocation storage for the root location (not null, modified)
-     * @param storeOrientation storage for the root orientation (not null,
+     * @param storeLocation storage for the root location (not {@code null},
      * modified)
+     * @param storeOrientation storage for the root orientation (not
+     * {@code null}, modified)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
@@ -234,7 +239,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     /**
      * Alter the ragdoll's pose using the locking body interface.
      *
-     * @param pose the desired pose (not null, unaffected)
+     * @param pose the desired pose (not {@code null}, unaffected)
      */
     public void setPose(SkeletonPose pose) {
         setPose(pose, true);
@@ -243,7 +248,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     /**
      * Alter the ragdoll's pose.
      *
-     * @param pose the desired pose (not null, unaffected)
+     * @param pose the desired pose (not {@code null}, unaffected)
      * @param lockBodies true&rarr;use the locking body interface,
      * false&rarr;use the non-locking body interface
      */

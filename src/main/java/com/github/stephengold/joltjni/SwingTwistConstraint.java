@@ -105,7 +105,7 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
     /**
      * Alter the state of the swing motor.
      *
-     * @param motorState an enum value (not null)
+     * @param motorState an enum value (not {@code null})
      */
     public void setSwingMotorState(EMotorState motorState) {
         long settingsVa = va();
@@ -136,7 +136,7 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
     /**
      * Alter the state of the twist motor.
      *
-     * @param motorState an enum value (not null)
+     * @param motorState an enum value (not {@code null})
      */
     public void setTwistMotorState(EMotorState motorState) {
         long settingsVa = va();
@@ -149,7 +149,7 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
      * body 2. (native method: SetTargetAngularVelocityCS)
      *
      * @param omega the desired angular velocity (in radians per second, not
-     * null, unaffected)
+     * {@code null}, unaffected)
      */
     public void setTargetAngularVelocityCs(Vec3Arg omega) {
         long settingsVa = va();
@@ -163,7 +163,7 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
      * Alter the target orientation in constraint space. (native method:
      * SetTargetOrientationCS)
      *
-     * @param orientation the desired orientation (not null, unaffected)
+     * @param orientation the desired orientation (not {@code null}, unaffected)
      */
     public void setTargetOrientationCs(QuatArg orientation) {
         long settingsVa = va();

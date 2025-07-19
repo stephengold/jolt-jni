@@ -118,7 +118,7 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      * Return which space the other properties are specified in. The settings
      * are unaffected. (native attribute: mSpace)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EConstraintSpace getSpace() {
         long settingsVa = va();
@@ -131,8 +131,8 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the hinge axis of the pinion. (native attribute: mHingeAxis)
      *
-     * @param direction the desired axis direction (not null, unaffected,
-     * default=(1,0,0))
+     * @param direction the desired axis direction (not {@code null},
+     * unaffected, default=(1,0,0))
      * @return the argument, for chaining
      */
     public Vec3Arg setHingeAxis(Vec3Arg direction) {
@@ -160,8 +160,8 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the translation axis of the rack. (native attribute: mSliderAxis)
      *
-     * @param direction the desired axis direction (not null, unaffected,
-     * default=(1,0,0))
+     * @param direction the desired axis direction (not {@code null},
+     * unaffected, default=(1,0,0))
      * @return the argument, for chaining
      */
     public Vec3Arg setSliderAxis(Vec3Arg direction) {
@@ -178,7 +178,7 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      * Alter which space the other properties are specified in. (native
      * attribute: mSpace)
      *
-     * @param space enum value (not null, default=WorldSpace)
+     * @param space enum value (not {@code null}, default=WorldSpace)
      */
     public void setSpace(EConstraintSpace space) {
         long settingsVa = va();
