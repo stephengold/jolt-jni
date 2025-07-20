@@ -719,7 +719,7 @@ public class Test012 {
             ConstBodyCreationSettings bcsCopy
                     = drBodyCreationSettings(serialData);
 
-            Assert.assertNotEquals(bcs.targetVa(), bcsCopy.targetVa());
+            Assert.assertNotEquals(bcs.va(), bcsCopy.targetVa());
             Equivalent.bodyCreationSettings(bcs, bcsCopy);
             TestUtils.testClose(bcsCopy);
         }
@@ -727,7 +727,7 @@ public class Test012 {
         { // test the copy constructor on uncooked settings:
             ConstBodyCreationSettings bcsCopy = new BodyCreationSettings(bcs);
 
-            Assert.assertNotEquals(bcs.targetVa(), bcsCopy.targetVa());
+            Assert.assertNotEquals(bcs.va(), bcsCopy.targetVa());
             Equivalent.bodyCreationSettings(bcs, bcsCopy);
             TestUtils.testClose(bcsCopy);
         }
@@ -743,7 +743,7 @@ public class Test012 {
             ConstBodyCreationSettings bcsCopy
                     = dcBodyCreationSettings(serialData);
 
-            Assert.assertNotEquals(bcs.targetVa(), bcsCopy.targetVa());
+            Assert.assertNotEquals(bcs.va(), bcsCopy.targetVa());
             Equivalent.bodyCreationSettings(bcs, bcsCopy);
             TestUtils.testClose(bcsCopy);
         }
@@ -753,7 +753,7 @@ public class Test012 {
             ConstBodyCreationSettings bcsCopy
                     = dwcBodyCreationSettings(serialData);
 
-            Assert.assertNotEquals(bcs.targetVa(), bcsCopy.targetVa());
+            Assert.assertNotEquals(bcs.va(), bcsCopy.targetVa());
             Equivalent.bodyCreationSettings(bcs, bcsCopy);
             TestUtils.testClose(bcsCopy);
         }
@@ -761,7 +761,7 @@ public class Test012 {
         { // test the copy constructor on cooked settings:
             ConstBodyCreationSettings bcsCopy = new BodyCreationSettings(bcs);
 
-            Assert.assertNotEquals(bcs.targetVa(), bcsCopy.targetVa());
+            Assert.assertNotEquals(bcs.va(), bcsCopy.targetVa());
             Equivalent.bodyCreationSettings(bcs, bcsCopy);
             TestUtils.testClose(bcsCopy);
         }
@@ -781,7 +781,7 @@ public class Test012 {
             GroupFilterRef refCopy = dcGroupFilter(serialData);
             GroupFilterTable filterCopy = refCopy.getPtrAsTable();
 
-            Assert.assertNotEquals(filter.targetVa(), filterCopy.targetVa());
+            Assert.assertNotEquals(filter.va(), filterCopy.va());
             Equivalent.groupFilter(filter, filterCopy);
             TestUtils.testClose(filterCopy);
         }
@@ -791,7 +791,7 @@ public class Test012 {
             GroupFilterTableRef refCopy = drGroupFilterTable(serialData);
             GroupFilterTable filterCopy = refCopy.getPtr();
 
-            Assert.assertNotEquals(filter.targetVa(), filterCopy.targetVa());
+            Assert.assertNotEquals(filter.va(), filterCopy.va());
             Equivalent.groupFilter(filter, filterCopy);
             TestUtils.testClose(filterCopy);
         }
@@ -799,7 +799,7 @@ public class Test012 {
         { // copy constructor:
             GroupFilterTable filterCopy = new GroupFilterTable(filter);
 
-            Assert.assertNotEquals(filter.targetVa(), filterCopy.targetVa());
+            Assert.assertNotEquals(filter.va(), filterCopy.va());
             Equivalent.groupFilter(filter, filterCopy);
             TestUtils.testClose(filterCopy);
         }
@@ -819,8 +819,7 @@ public class Test012 {
             PhysicsMaterialRef refCopy = dcPhysicsMaterial(serialData);
             PhysicsMaterialSimple materialCopy = refCopy.getPtrAsSimple();
 
-            Assert.assertNotEquals(
-                    material.targetVa(), materialCopy.targetVa());
+            Assert.assertNotEquals(material.va(), materialCopy.va());
             Equivalent.physicsMaterial(material, materialCopy);
             TestUtils.testClose(materialCopy);
         }
@@ -831,8 +830,7 @@ public class Test012 {
             PhysicsMaterialSimple materialCopy
                     = (PhysicsMaterialSimple) refCopy.getPtrAsSimple();
 
-            Assert.assertNotEquals(
-                    material.targetVa(), materialCopy.targetVa());
+            Assert.assertNotEquals(material.va(), materialCopy.va());
             Equivalent.physicsMaterial(material, materialCopy);
             TestUtils.testClose(materialCopy);
         }
@@ -841,8 +839,7 @@ public class Test012 {
             PhysicsMaterialSimple materialCopy
                     = new PhysicsMaterialSimple(material);
 
-            Assert.assertNotEquals(
-                    material.targetVa(), materialCopy.targetVa());
+            Assert.assertNotEquals(material.va(), materialCopy.va());
             Equivalent.physicsMaterial(material, materialCopy);
             TestUtils.testClose(materialCopy);
         }
@@ -957,7 +954,7 @@ public class Test012 {
             ConstSoftBodyCreationSettings sbcsCopy
                     = dcSoftBodyCreationSettings(serialData);
 
-            Assert.assertNotEquals(sbcs.targetVa(), sbcsCopy.targetVa());
+            Assert.assertNotEquals(sbcs.va(), sbcsCopy.targetVa());
             Equivalent.softBodyCreationSettings(sbcs, sbcsCopy);
             TestUtils.testClose(sbcsCopy);
         }
@@ -967,7 +964,7 @@ public class Test012 {
             ConstSoftBodyCreationSettings sbcsCopy
                     = dwcSoftBodyCreationSettings(serialData);
 
-            Assert.assertNotEquals(sbcs.targetVa(), sbcsCopy.targetVa());
+            Assert.assertNotEquals(sbcs.va(), sbcsCopy.targetVa());
             Equivalent.softBodyCreationSettings(sbcs, sbcsCopy);
             TestUtils.testClose(sbcsCopy);
         }
@@ -977,7 +974,7 @@ public class Test012 {
             ConstSoftBodyCreationSettings sbcsCopy
                     = drSoftBodyCreationSettings(serialData);
 
-            Assert.assertNotEquals(sbcs.targetVa(), sbcsCopy.targetVa());
+            Assert.assertNotEquals(sbcs.va(), sbcsCopy.targetVa());
             Equivalent.softBodyCreationSettings(sbcs, sbcsCopy);
             TestUtils.testClose(sbcsCopy);
         }
@@ -986,7 +983,7 @@ public class Test012 {
             ConstSoftBodyCreationSettings sbcsCopy
                     = new SoftBodyCreationSettings(sbcs);
 
-            Assert.assertNotEquals(sbcs.targetVa(), sbcsCopy.targetVa());
+            Assert.assertNotEquals(sbcs.va(), sbcsCopy.targetVa());
             Equivalent.softBodyCreationSettings(sbcs, sbcsCopy);
             TestUtils.testClose(sbcsCopy);
         }
@@ -1014,7 +1011,7 @@ public class Test012 {
             ConstSoftBodySharedSettings sbssCopy
                     = dcSoftBodySharedSettings(serialData);
 
-            Assert.assertNotEquals(sbss.targetVa(), sbssCopy.targetVa());
+            Assert.assertNotEquals(sbss.va(), sbssCopy.targetVa());
             Equivalent.softBodySharedSettings(sbss, sbssCopy);
             TestUtils.testClose(sbssCopy);
         }
@@ -1024,7 +1021,7 @@ public class Test012 {
             SoftBodySharedSettingsRef sbssCopy
                     = dwmSoftBodySharedSettings(serialData);
 
-            Assert.assertNotEquals(sbss.targetVa(), sbssCopy.targetVa());
+            Assert.assertNotEquals(sbss.va(), sbssCopy.targetVa());
             Equivalent.softBodySharedSettings(sbss, sbssCopy);
             TestUtils.testClose(sbssCopy);
         }
@@ -1034,7 +1031,7 @@ public class Test012 {
             SoftBodySharedSettingsRef sbssCopy
                     = drSoftBodySharedSettings(serialData);
 
-            Assert.assertNotEquals(sbss.targetVa(), sbssCopy.targetVa());
+            Assert.assertNotEquals(sbss.va(), sbssCopy.targetVa());
             Equivalent.softBodySharedSettings(sbss, sbssCopy);
             TestUtils.testClose(sbssCopy);
         }
@@ -1043,7 +1040,7 @@ public class Test012 {
             ConstSoftBodySharedSettings sbssCopy
                     = new SoftBodySharedSettings(sbss);
 
-            Assert.assertNotEquals(sbss.targetVa(), sbssCopy.targetVa());
+            Assert.assertNotEquals(sbss.va(), sbssCopy.targetVa());
             Equivalent.softBodySharedSettings(sbss, sbssCopy);
             TestUtils.testClose(sbssCopy);
         }
@@ -1063,8 +1060,7 @@ public class Test012 {
         { // copy constructor:
             SpringSettings settingsCopy = new SpringSettings(settings);
 
-            Assert.assertNotEquals(
-                    settings.targetVa(), settingsCopy.targetVa());
+            Assert.assertNotEquals(settings.va(), settingsCopy.va());
             Equivalent.springSettings(settings, settingsCopy);
             TestUtils.testClose(settingsCopy);
         }
@@ -1083,8 +1079,7 @@ public class Test012 {
             TrackedVehicleControllerSettings settingsCopy
                     = new TrackedVehicleControllerSettings(settings);
 
-            Assert.assertNotEquals(
-                    settings.targetVa(), settingsCopy.targetVa());
+            Assert.assertNotEquals(settings.va(), settingsCopy.va());
             Equivalent.trackedVehicleControllerSettings(
                     settings, settingsCopy);
             TestUtils.testClose(settingsCopy);
@@ -1105,7 +1100,7 @@ public class Test012 {
         { // copy constructor:
             VehicleAntiRollBar barCopy = new VehicleAntiRollBar(bar);
 
-            Assert.assertNotEquals(bar.targetVa(), barCopy.targetVa());
+            Assert.assertNotEquals(bar.va(), barCopy.va());
             Equivalent.antiRollBar(bar, barCopy);
             TestUtils.testClose(barCopy);
         }
@@ -1151,7 +1146,7 @@ public class Test012 {
             ConstVehicleConstraintSettings vcsCopy
                     = (ConstVehicleConstraintSettings) copyRef.getPtr();
 
-            Assert.assertNotEquals(vcs.targetVa(), vcsCopy.targetVa());
+            Assert.assertNotEquals(vcs.va(), vcsCopy.targetVa());
             Equivalent.vehicleConstraintSettings(vcs, vcsCopy);
             TestUtils.testClose(vcsCopy, copyRef);
         }
@@ -1160,7 +1155,7 @@ public class Test012 {
             ConstVehicleConstraintSettings vcsCopy
                     = new VehicleConstraintSettings(vcs);
 
-            Assert.assertNotEquals(vcs.targetVa(), vcsCopy.targetVa());
+            Assert.assertNotEquals(vcs.va(), vcsCopy.targetVa());
             Equivalent.vehicleConstraintSettings(vcs, vcsCopy);
             TestUtils.testClose(vcsCopy);
         }
@@ -1181,8 +1176,7 @@ public class Test012 {
             WheeledVehicleControllerSettings settingsCopy
                     = dcWheeledVehicleControllerSettings(serialData);
 
-            Assert.assertNotEquals(
-                    settings.targetVa(), settingsCopy.targetVa());
+            Assert.assertNotEquals(settings.va(), settingsCopy.va());
             Equivalent.vehicleControllerSettings(settings, settingsCopy);
             TestUtils.testClose(settingsCopy);
         }
@@ -1194,8 +1188,7 @@ public class Test012 {
             WheeledVehicleControllerSettings settingsCopy
                     = (WheeledVehicleControllerSettings) copyRef.getPtr();
 
-            Assert.assertNotEquals(
-                    settings.targetVa(), settingsCopy.targetVa());
+            Assert.assertNotEquals(settings.va(), settingsCopy.va());
             Equivalent.vehicleControllerSettings(settings, settingsCopy);
             TestUtils.testClose(settingsCopy);
         }
@@ -1204,8 +1197,7 @@ public class Test012 {
             WheeledVehicleControllerSettings settingsCopy
                     = new WheeledVehicleControllerSettings(settings);
 
-            Assert.assertNotEquals(
-                    settings.targetVa(), settingsCopy.targetVa());
+            Assert.assertNotEquals(settings.va(), settingsCopy.va());
             Equivalent.vehicleControllerSettings(settings, settingsCopy);
             TestUtils.testClose(settingsCopy);
         }
@@ -1223,7 +1215,7 @@ public class Test012 {
             String serialData = serializeCooked(wheel);
             WheelSettingsTv wheelCopy = dcWheelSettingsTv(serialData);
 
-            Assert.assertNotEquals(wheel.targetVa(), wheelCopy.targetVa());
+            Assert.assertNotEquals(wheel.va(), wheelCopy.va());
             Equivalent.wheelSettings(wheel, wheelCopy);
             TestUtils.testClose(wheelCopy);
         }
@@ -1231,7 +1223,7 @@ public class Test012 {
         { // copy constructor:
             WheelSettingsTv wheelCopy = new WheelSettingsTv(wheel);
 
-            Assert.assertNotEquals(wheel.targetVa(), wheelCopy.targetVa());
+            Assert.assertNotEquals(wheel.va(), wheelCopy.va());
             Equivalent.wheelSettings(wheel, wheelCopy);
             TestUtils.testClose(wheelCopy);
         }
@@ -1252,7 +1244,7 @@ public class Test012 {
             String serialData = serializeCooked(wheel);
             WheelSettingsWv wheelCopy = dcWheelSettingsWv(serialData);
 
-            Assert.assertNotEquals(wheel.targetVa(), wheelCopy.targetVa());
+            Assert.assertNotEquals(wheel.va(), wheelCopy.va());
             Equivalent.wheelSettings(wheel, wheelCopy);
             TestUtils.testClose(wheelCopy);
         }
@@ -1260,7 +1252,7 @@ public class Test012 {
         { // copy constructor:
             WheelSettingsWv wheelCopy = new WheelSettingsWv(wheel);
 
-            Assert.assertNotEquals(wheel.targetVa(), wheelCopy.targetVa());
+            Assert.assertNotEquals(wheel.va(), wheelCopy.va());
             Equivalent.wheelSettings(wheel, wheelCopy);
             TestUtils.testClose(wheelCopy);
         }
