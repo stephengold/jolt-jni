@@ -46,7 +46,9 @@ import com.github.stephengold.joltjni.PhysicsMaterialRef;
 import com.github.stephengold.joltjni.PhysicsMaterialResult;
 import com.github.stephengold.joltjni.PhysicsMaterialSimple;
 import com.github.stephengold.joltjni.PlaneShapeSettings;
+import com.github.stephengold.joltjni.PointConstraintSettings;
 import com.github.stephengold.joltjni.Quat;
+import com.github.stephengold.joltjni.RackAndPinionConstraintSettings;
 import com.github.stephengold.joltjni.RotatedTranslatedShapeSettings;
 import com.github.stephengold.joltjni.SbcsResult;
 import com.github.stephengold.joltjni.ScaledShapeSettings;
@@ -64,6 +66,7 @@ import com.github.stephengold.joltjni.StreamIn;
 import com.github.stephengold.joltjni.StreamInWrapper;
 import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.StreamOutWrapper;
+import com.github.stephengold.joltjni.SwingTwistConstraintSettings;
 import com.github.stephengold.joltjni.TaperedCapsuleShapeSettings;
 import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
 import com.github.stephengold.joltjni.TrackedVehicleControllerSettings;
@@ -77,6 +80,7 @@ import com.github.stephengold.joltjni.Vertex;
 import com.github.stephengold.joltjni.WheelSettingsTv;
 import com.github.stephengold.joltjni.WheelSettingsWv;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
+import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
@@ -123,10 +127,13 @@ public class Test012 {
         testBodyCreationSettings();
         testGroupFilterTable();
         testPhysicsMaterial();
+        testPointConstraintSettings();
+        testRackAndPinionConstraintSettings();
         testShapeSettings();
         testSoftBodyCreationSettings();
         testSoftBodySharedSettings();
         testSpringSettings();
+        testSwingTwistConstraintSettings();
         testTrackedVehicleControllerSettings();
         testVehicleAntiRollBar();
         testVehicleConstraintSettings();
@@ -848,6 +855,71 @@ public class Test012 {
     }
 
     /**
+     * Test replication of {@code PointConstraintSettings} objects.
+     */
+    private static void testPointConstraintSettings() {
+        PointConstraintSettings pcs = new PointConstraintSettings();
+        pcs.setNumPositionStepsOverride(9);
+        pcs.setPoint1(1., 2., 3.);
+        pcs.setPoint2(4., 5., 6.);
+        pcs.setSpace(EConstraintSpace.LocalToBodyCOM);
+
+        { // serialize and then deserialize using object streams:
+            String serialData = serializeRaw(pcs);
+            ConstraintSettingsRef copyRef = drConstraintSettings(serialData);
+            PointConstraintSettings pcsCopy
+                    = (PointConstraintSettings) copyRef.getPtr();
+
+            Assert.assertNotEquals(pcs.va(), pcsCopy.va());
+            Equivalent.pointConstraintSettings(pcs, pcsCopy);
+            TestUtils.testClose(pcsCopy, copyRef);
+        }
+
+        { // copy constructor:
+            PointConstraintSettings pcsCopy
+                    = new PointConstraintSettings(pcs);
+
+            Assert.assertNotEquals(pcs.va(), pcsCopy.va());
+            Equivalent.pointConstraintSettings(pcs, pcsCopy);
+            TestUtils.testClose(pcsCopy);
+        }
+
+        TestUtils.testClose(pcs);
+    }
+
+    /**
+     * Test replication of {@code RackAndPinionConstraintSettings} objects.
+     */
+    private static void testRackAndPinionConstraintSettings() {
+        RackAndPinionConstraintSettings rapcs
+                = new RackAndPinionConstraintSettings();
+        rapcs.setSliderAxis(new Vec3(0.6f, 0.8f, 0f));
+        rapcs.setSpace(EConstraintSpace.LocalToBodyCOM);
+
+        { // serialize and then deserialize using object streams:
+            String serialData = serializeRaw(rapcs);
+            ConstraintSettingsRef copyRef = drConstraintSettings(serialData);
+            RackAndPinionConstraintSettings rapcsCopy
+                    = (RackAndPinionConstraintSettings) copyRef.getPtr();
+
+            Assert.assertNotEquals(rapcs.va(), rapcsCopy.va());
+            Equivalent.rackAndPinionConstraintSettings(rapcs, rapcsCopy);
+            TestUtils.testClose(rapcsCopy, copyRef);
+        }
+
+        { // copy constructor:
+            RackAndPinionConstraintSettings rapcsCopy
+                    = new RackAndPinionConstraintSettings(rapcs);
+
+            Assert.assertNotEquals(rapcs.va(), rapcsCopy.va());
+            Equivalent.rackAndPinionConstraintSettings(rapcs, rapcsCopy);
+            TestUtils.testClose(rapcsCopy);
+        }
+
+        TestUtils.testClose(rapcs);
+    }
+
+    /**
      * Test replication of {@code ShapeSettings} objects.
      */
     private static void testShapeSettings() {
@@ -1066,6 +1138,38 @@ public class Test012 {
         }
 
         TestUtils.testClose(settings);
+    }
+
+    /**
+     * Test replication of {@code SwingTwistConstraintSettings} objects.
+     */
+    private static void testSwingTwistConstraintSettings() {
+        SwingTwistConstraintSettings stcs
+                = new SwingTwistConstraintSettings();
+        stcs.setTwistAxis1(new Vec3(0.6f, -0.8f, 0f));
+        stcs.setSpace(EConstraintSpace.LocalToBodyCOM);
+
+        { // serialize and then deserialize using object streams:
+            String serialData = serializeRaw(stcs);
+            ConstraintSettingsRef copyRef = drConstraintSettings(serialData);
+            SwingTwistConstraintSettings stcsCopy
+                    = (SwingTwistConstraintSettings) copyRef.getPtr();
+
+            Assert.assertNotEquals(stcs.va(), stcsCopy.va());
+            Equivalent.swingTwistConstraintSettings(stcs, stcsCopy);
+            TestUtils.testClose(stcsCopy, copyRef);
+        }
+
+        { // copy constructor:
+            SwingTwistConstraintSettings stcsCopy
+                    = new SwingTwistConstraintSettings(stcs);
+
+            Assert.assertNotEquals(stcs.va(), stcsCopy.va());
+            Equivalent.swingTwistConstraintSettings(stcs, stcsCopy);
+            TestUtils.testClose(stcsCopy);
+        }
+
+        TestUtils.testClose(stcs);
     }
 
     /**
