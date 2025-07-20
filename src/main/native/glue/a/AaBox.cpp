@@ -425,8 +425,8 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getVolume
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSurfaceArea
-  (JNIEnv *, jclass, jlong boxVal) {
-    const AABox * const pBox = reinterpret_cast<AABox *> (boxVal);
+  (JNIEnv *, jclass, jlong boxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     const float result = pBox->GetSurfaceArea();
     return result;
 }
