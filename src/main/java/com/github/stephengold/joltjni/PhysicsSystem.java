@@ -718,11 +718,11 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Replace the system's {@code BodyActivationListener}.
      *
-     * @param listener the desired listener
+     * @param listener the desired listener, or {@code null} for none
      */
     public void setBodyActivationListener(BodyActivationListener listener) {
         long systemVa = va();
-        long listenerVa = listener.va();
+        long listenerVa = (listener == null) ? 0L : listener.va();
         setBodyActivationListener(systemVa, listenerVa);
     }
 
