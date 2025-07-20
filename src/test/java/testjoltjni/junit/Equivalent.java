@@ -241,6 +241,17 @@ final class Equivalent {
     }
 
     /**
+     * Verify the equivalence of the specified colors.
+     *
+     * @param expected the expected value (not {@code null}, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
+     */
+    static void color(ConstColor expected, ConstColor actual) {
+        TestUtils.assertEquals(expected.getR(), expected.getG(),
+                expected.getB(), expected.getA(), actual);
+    }
+
+    /**
      * Verify the equivalence of the specified constraint settings, ignoring
      * their types, virtual addresses, and ownership.
      *
@@ -269,17 +280,6 @@ final class Equivalent {
         expected.saveBinaryState(new StreamOutWrapper(stream1));
         actual.saveBinaryState(new StreamOutWrapper(stream2));
         Assert.assertEquals(stream1.str(), stream2.str());
-    }
-
-    /**
-     * Verify the equivalence of the specified colors.
-     *
-     * @param expected the expected value (not {@code null}, unaffected)
-     * @param actual the vector to test (not {@code null}, unaffected)
-     */
-    static void color(ConstColor expected, ConstColor actual) {
-        TestUtils.assertEquals(expected.getR(), expected.getG(),
-                expected.getB(), expected.getA(), actual);
     }
 
     /**
