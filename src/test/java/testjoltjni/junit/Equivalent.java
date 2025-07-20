@@ -26,8 +26,11 @@ import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.MotorSettings;
 import com.github.stephengold.joltjni.ObjectStreamOut;
 import com.github.stephengold.joltjni.PhysicsMaterial;
+import com.github.stephengold.joltjni.PointConstraintSettings;
 import com.github.stephengold.joltjni.RMat44;
+import com.github.stephengold.joltjni.RackAndPinionConstraintSettings;
 import com.github.stephengold.joltjni.StreamOutWrapper;
+import com.github.stephengold.joltjni.SwingTwistConstraintSettings;
 import com.github.stephengold.joltjni.TrackedVehicleControllerSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleTrackSettings;
@@ -435,6 +438,23 @@ final class Equivalent {
     }
 
     /**
+     * Verify the equivalence of the specified point-constraint settings,
+     * ignoring their types, virtual addresses, and ownership.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    static void pointConstraintSettings(
+            PointConstraintSettings expected,
+            PointConstraintSettings actual) {
+        constraintSettings(expected, actual);
+
+        rVec3(expected.getPoint1(), actual.getPoint1(), 0f);
+        rVec3(expected.getPoint2(), actual.getPoint2(), 0f);
+        Assert.assertEquals(expected.getSpace(), actual.getSpace());
+    }
+
+    /**
      * Verify the equivalence of the specified quaternions to within the
      * specified tolerance.
      *
@@ -445,6 +465,24 @@ final class Equivalent {
     static void quat(QuatArg expected, QuatArg actual, float tolerance) {
         TestUtils.assertEquals(expected.getX(), expected.getY(),
                 expected.getZ(), expected.getW(), actual, tolerance);
+    }
+
+    /**
+     * Verify the equivalence of the specified rack-and-pinion constraint
+     * settings, ignoring their types, virtual addresses, and ownership.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    static void rackAndPinionConstraintSettings(
+            RackAndPinionConstraintSettings expected,
+            RackAndPinionConstraintSettings actual) {
+        constraintSettings(expected, actual);
+
+        vec3(expected.getHingeAxis(), actual.getHingeAxis(), 0f);
+        Assert.assertEquals(expected.getRatio(), actual.getRatio(), 0f);
+        vec3(expected.getSliderAxis(), actual.getSliderAxis(), 0f);
+        Assert.assertEquals(expected.getSpace(), actual.getSpace());
     }
 
     /**
@@ -681,6 +719,42 @@ final class Equivalent {
         expected.saveBinaryState(new StreamOutWrapper(stream1));
         actual.saveBinaryState(new StreamOutWrapper(stream2));
         Assert.assertEquals(stream1.str(), stream2.str());
+    }
+
+    /**
+     * Verify the equivalence of the specified swing-twist constraint settings,
+     * ignoring their types, virtual addresses, and ownership.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    static void swingTwistConstraintSettings(
+            SwingTwistConstraintSettings expected,
+            SwingTwistConstraintSettings actual) {
+        constraintSettings(expected, actual);
+
+        Assert.assertEquals(expected.getMaxFrictionTorque(),
+                actual.getMaxFrictionTorque(), 0f);
+        Assert.assertEquals(expected.getNormalHalfConeAngle(),
+                actual.getNormalHalfConeAngle(), 0f);
+        vec3(expected.getPlaneAxis1(), actual.getPlaneAxis1(), 0f);
+        vec3(expected.getPlaneAxis2(), actual.getPlaneAxis2(), 0f);
+        Assert.assertEquals(expected.getPlaneHalfConeAngle(),
+                actual.getPlaneHalfConeAngle(), 0f);
+        rVec3(expected.getPosition1(), actual.getPosition1(), 0f);
+        rVec3(expected.getPosition2(), actual.getPosition2(), 0f);
+        Assert.assertEquals(expected.getSpace(), actual.getSpace());
+        motorSettings(expected.getSwingMotorSettings(),
+                actual.getSwingMotorSettings());
+        Assert.assertEquals(expected.getSwingType(), actual.getSwingType());
+        vec3(expected.getTwistAxis1(), actual.getTwistAxis1(), 0f);
+        vec3(expected.getTwistAxis2(), actual.getTwistAxis2(), 0f);
+        Assert.assertEquals(expected.getTwistMaxAngle(),
+                actual.getTwistMaxAngle(), 0f);
+        Assert.assertEquals(expected.getTwistMinAngle(),
+                actual.getTwistMinAngle(), 0f);
+        motorSettings(expected.getTwistMotorSettings(),
+                actual.getTwistMotorSettings());
     }
 
     /**
