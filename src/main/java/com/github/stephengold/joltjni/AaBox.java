@@ -629,7 +629,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     native private static float getVolume(long boxVa);
 
-    native private static float getSurfaceArea(long boxVal);
+    native private static float getSurfaceArea(long boxVa);
 
     native private static float[] getSupport(
             long boxVa, float dx, float dy, float dz);
