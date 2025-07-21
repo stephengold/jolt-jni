@@ -50,9 +50,9 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_contains
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AaBox_containsAaBox
-  (JNIEnv *, jclass, jlong boxVa, jlong otherVa) {
-    AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    const AABox * const pOther = reinterpret_cast<AABox *> (otherVa);
+  (JNIEnv *, jclass, jlong boxVa, jlong otherBoxVa) {
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const AABox * const pOther = reinterpret_cast<AABox *> (otherBoxVa);
     const bool result = pBox->Contains(*pOther);
     return result;
 }
@@ -128,13 +128,13 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulate
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
- * Method:    encapsulateBoundingBox
+ * Method:    encapsulateBox
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateBoundingBox
-  (JNIEnv *, jclass, jlong boxVa, jlong rhsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateBox
+  (JNIEnv *, jclass, jlong boxVa, jlong includeBoxVa) {
     AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    const AABox * const pRhs = reinterpret_cast<AABox *> (rhsVa);
+    const AABox * const pRhs = reinterpret_cast<AABox *> (includeBoxVa);
     pBox->Encapsulate(*pRhs);
 }
 
@@ -144,9 +144,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateBoun
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateTriangle
-  (JNIEnv *, jclass, jlong  boxVa, jlong rhsVa) {
+  (JNIEnv *, jclass, jlong  boxVa, jlong triangleVa) {
     AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    const Triangle * const pTriangle = reinterpret_cast<Triangle *> (rhsVa);
+    const Triangle * const pTriangle = reinterpret_cast<Triangle *> (triangleVa);
     pBox->Encapsulate(*pTriangle);
 }
 
@@ -156,12 +156,15 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulateTria
  * Signature: (JILjava/nio/FloatBuffer;J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulatedTriangleFromVertices
-  (JNIEnv * pEnv, jclass, jlong boxVa, jint numVertices, jobject buffer, jlong triangleVa) {
+  (JNIEnv *pEnv, jclass, jlong boxVa, jint numVertices, jobject floatBuffer,
+  jlong triangleVa) {
     AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    const IndexedTriangle * const pIndices = reinterpret_cast<IndexedTriangle *> (triangleVa);
-    const jfloat * const pFloats = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
+    const IndexedTriangle * const pIndices
+            = reinterpret_cast<IndexedTriangle *> (triangleVa);
+    const jfloat * const pFloats
+            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
     JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(buffer);
+    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
     JPH_ASSERT(!pEnv->ExceptionCheck());
     JPH_ASSERT(capacityFloats >= 3*numVertices);
     VertexList vertices;

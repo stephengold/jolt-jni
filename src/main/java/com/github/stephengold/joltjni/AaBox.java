@@ -137,25 +137,25 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Enlarge the current box to include the argument box.
      *
-     * @param rhs the box to include (not null, unaffected)
+     * @param includeBox the box to include (not null, unaffected)
      */
-    public void encapsulate(ConstAaBox rhs) {
+    public void encapsulate(ConstAaBox includeBox) {
         long boxVa = va();
-        long rhsVa = rhs.targetVa();
+        long includeBoxVa = includeBox.targetVa();
 
-        encapsulateBoundingBox(boxVa, rhsVa);
+        encapsulateBox(boxVa, includeBoxVa);
     }
 
     /**
      * Enlarge the box to include the specified triangle.
      *
-     * @param rhs the triangle to include (not null, unaffected)
+     * @param triangle the triangle to include (not null, unaffected)
      */
-    public void encapsulate(ConstTriangle rhs) {
+    public void encapsulate(ConstTriangle triangle) {
         long boxVa = va();
-        long rhsVa = rhs.targetVa();
+        long triangleVa = triangle.targetVa();
 
-        encapsulateTriangle(boxVa, rhsVa);
+        encapsulateTriangle(boxVa, triangleVa);
     }
 
     /**
@@ -286,9 +286,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      */
     @Override
     public boolean contains(ConstAaBox other) {
-        long boxVal = va();
-        long otherBoxVal = other.targetVa();
-        boolean result = containsAaBox(boxVal, otherBoxVal);
+        long boxVa = va();
+        long otherBoxVa = other.targetVa();
+        boolean result = containsAaBox(boxVa, otherBoxVa);
 
         return result;
     }
@@ -497,9 +497,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     @Override
     public boolean overlaps(ConstAaBox other) {
         long boxVa = va();
-        long otherVal = other.targetVa();
+        long otherVa = other.targetVa();
 
-        boolean result = overlapsAaBox(boxVa, otherVal);
+        boolean result = overlapsAaBox(boxVa, otherVa);
         return result;
     }
 
@@ -562,7 +562,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static boolean contains(
             long boxVa, float x, float y, float z);
 
-    native private static boolean containsAaBox(long boxVal, long otherVa);
+    native private static boolean containsAaBox(long boxVa, long otherBoxVa);
 
     native private static long createAaBox(float minX, float minY, float minZ,
             float maxX, float maxY, float maxZ);
@@ -579,9 +579,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static void encapsulate(
             long boxVa, float locX, float locY, float locZ);
 
-    native private static void encapsulateBoundingBox(long boxVa, long rhsVa);
+    native private static void encapsulateBox(long boxVa, long includeBoxVa);
 
-    native private static void encapsulateTriangle(long boxVa, long rhsVa);
+    native private static void encapsulateTriangle(long boxVa, long triangleVa);
 
     native private static void encapsulatedTriangleFromVertices(long boxVa,
             int numVertices, FloatBuffer vertices, long triangleVa);
