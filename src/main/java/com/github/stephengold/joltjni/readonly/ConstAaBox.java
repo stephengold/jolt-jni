@@ -31,9 +31,10 @@ import com.github.stephengold.joltjni.Vec3;
  */
 public interface ConstAaBox extends ConstJoltPhysicsObject {
     /**
-     * Check if the box contains the other box. The box is not affected.
+     * Test whether the current box contains the argument box. The current box
+     * is unaffected.
      *
-     * @param other the other box to check
+     * @param other the other box to check against (not null, unaffected)
      *
      * @return {@code true} if contained, otherwise {@code false}
      */
@@ -95,12 +96,11 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     Vec3 getSize();
 
     /**
-     * Get the squared distance between {@code point} and this box (will be 0
-     * if in Point is inside the box)
+     * Get the squared distance between the box and the specified point.
      *
-     * @param point The point to check
+     * @param point the point to measure from (not null, unaffected)
      *
-     * @return the distance from this box to the given point
+     * @return the distance, or zero if {@code point} lies inside the box
      */
     float getSqDistanceTo(Vec3Arg point);
 
@@ -161,7 +161,7 @@ public interface ConstAaBox extends ConstJoltPhysicsObject {
     AaBox scaled(Vec3Arg factors);
 
     /**
-     * Return a transformed copy of the box The current box is unaffected.
+     * Return a transformed copy of the box. The current box is unaffected.
      *
      * @param matrix the transformation to apply (not null, unaffected)
      * @return a new object
