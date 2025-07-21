@@ -135,7 +135,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     // new methods exposed
 
     /**
-     * Expands the box to include the other specified box.
+     * Enlarge the current box to include the argument box.
      *
      * @param rhs the box to include (not null, unaffected)
      */
@@ -147,7 +147,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Expands the box to include the specified triangle.
+     * Enlarge the box to include the specified triangle.
      *
      * @param rhs the triangle to include (not null, unaffected)
      */
@@ -172,9 +172,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Expands the box to include the specified vertices.
+     * Enlarge the box to include the specified triangle.
      *
-     * @param vertices the vertices to include (not null, unaffected)
+     * @param vertices array of vertex locations (not null, unaffected)
      * @param triangle the triangle to include (not null, unaffected)
      */
     public void encapsulate(ConstVertexList vertices,
@@ -190,10 +190,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Method responsible for ensuring that each edge of the bounding box has a
-     * minimum length.
+     * Enlarge the box so that each edge has at least the specified length.
      *
-     * @param minEdgeLength the given minimum length
+     * @param minEdgeLength the desired minimum edge length
      */
     public void ensureMinimalEdgeLength(float minEdgeLength) {
         long boxVa = va();
@@ -278,9 +277,10 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     // ConstAaBox methods
 
     /**
-     * Check if the box contains the other box. The box is not affected.
+     * Test whether the current box contains the argument box. The current box
+     * is unaffected.
      *
-     * @param other The other box to check
+     * @param other the other box to check against (not null, unaffected)
      *
      * @return {@code true} if contained, otherwise {@code false}
      */
@@ -411,12 +411,11 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Get the squared distance between {@code point} and this box (will be 0
-     * if in Point is inside the box)
+     * Get the squared distance between the box and the specified point.
      *
-     * @param point The point to check
+     * @param point the point to measure from (not null, unaffected)
      *
-     * @return the distance from this box to the given point
+     * @return the distance, or zero if {@code point} lies inside the box
      */
     @Override
     public float getSqDistanceTo(Vec3Arg point) {

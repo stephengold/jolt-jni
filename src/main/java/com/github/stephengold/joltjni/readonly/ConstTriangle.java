@@ -30,16 +30,14 @@ import java.nio.FloatBuffer;
  */
 public interface ConstTriangle extends ConstJoltPhysicsObject {
     /**
-     * Return the triangle's material index. The triangle is unaffected. (native
-     * attribute: mMaterialIndex)
+     * Return the triangle's material index. The triangle is unaffected.
      *
      * @return the index
      */
     int getMaterialIndex();
 
     /**
-     * Return the triangle's user data. The triangle is unaffected. (native
-     * attribute: mUserData)
+     * Return the triangle's user data. The triangle is unaffected.
      *
      * @return the value
      */
