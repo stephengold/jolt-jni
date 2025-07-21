@@ -412,13 +412,14 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSizeZ
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
- * Method:    getVolume
- * Signature: (J)F
+ * Method:    getSqDistanceTo
+ * Signature: (JFFF)F
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getVolume
-  (JNIEnv *, jclass, jlong boxVa) {
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSqDistanceTo
+  (JNIEnv *, jclass, jlong boxVa, jfloat px, jfloat py, jfloat pz) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    const float result = pBox->GetVolume();
+    const Vec3 point(px, py, pz);
+    const float result = pBox->GetSqDistanceTo(point);
     return result;
 }
 
@@ -461,14 +462,13 @@ JNIEXPORT jfloatArray JNICALL Java_com_github_stephengold_joltjni_AaBox_getSuppo
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
- * Method:    getSqDistanceTo
- * Signature: (JFFF)F
+ * Method:    getVolume
+ * Signature: (J)F
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSqDistanceTo
-  (JNIEnv *, jclass, jlong boxVa, jfloat px, jfloat py, jfloat pz) {
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getVolume
+  (JNIEnv *, jclass, jlong boxVa) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    const Vec3 point(px, py, pz);
-    const float result = pBox->GetSqDistanceTo(point);
+    const float result = pBox->GetVolume();
     return result;
 }
 
