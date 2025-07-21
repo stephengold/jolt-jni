@@ -22,17 +22,17 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to an {@code IndexedTriangle}. (native type: const
- * IndexedTriangle)
+ * Read-only access to an {@code IndexedTriangleNoMaterial}. (native type: const
+ * IndexedTriangleNoMaterial)
  *
- * @author wil
+ * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstIndexedTriangle extends ConstIndexedTriangleNoMaterial {
+public interface ConstIndexedTriangleNoMaterial extends ConstJoltPhysicsObject {
     /**
-     * Return the triangle's material index. The triangle is unaffected. (native
-     * attribute: mMaterialIndex)
+     * Return the mesh-vertex index of the specified corner.
      *
-     * @return the index
+     * @param cornerIndex which corner to access (0, 1, or 2)
+     * @return the mesh-vertex index
      */
-    int getMaterialIndex();
+    int getIdx(int cornerIndex);
 }

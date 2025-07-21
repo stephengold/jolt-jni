@@ -21,12 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstIndexedTriangleNoMaterial;
+
 /**
  * A triangle composed of three 32-bit mesh-vertex indices.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
+public class IndexedTriangleNoMaterial
+        extends JoltPhysicsObject
+        implements ConstIndexedTriangleNoMaterial {
     // *************************************************************************
     // constructors
 
@@ -71,18 +75,6 @@ public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the mesh-vertex index of the specified corner.
-     *
-     * @param cornerIndex which corner to access (0, 1, or 2)
-     * @return the mesh-vertex index
-     */
-    public int getIdx(int cornerIndex) {
-        long triangleVa = va();
-        int result = getIdx(triangleVa, cornerIndex);
-        return result;
-    }
-
-    /**
      * Alter the mesh-vertex index of the specified corner.
      *
      * @param cornerIndex which corner to modify (0, 1, or 2)
@@ -91,6 +83,21 @@ public class IndexedTriangleNoMaterial extends JoltPhysicsObject {
     public void setIdx(int cornerIndex, int meshVertexIndex) {
         long triangleVa = va();
         setIdx(triangleVa, cornerIndex, meshVertexIndex);
+    }
+    // *************************************************************************
+    // ConstIndexedTriangleNoMaterial methods
+
+    /**
+     * Return the mesh-vertex index of the specified corner.
+     *
+     * @param cornerIndex which corner to access (0, 1, or 2)
+     * @return the mesh-vertex index
+     */
+    @Override
+    public int getIdx(int cornerIndex) {
+        long triangleVa = va();
+        int result = getIdx(triangleVa, cornerIndex);
+        return result;
     }
     // *************************************************************************
     // new protected methods
