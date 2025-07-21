@@ -28,7 +28,8 @@ import com.github.stephengold.joltjni.readonly.ConstIndexedTriangle;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class IndexedTriangle extends IndexedTriangleNoMaterial
+final public class IndexedTriangle
+        extends IndexedTriangleNoMaterial
         implements ConstIndexedTriangle {
     // *************************************************************************
     // constructors
@@ -87,7 +88,6 @@ final public class IndexedTriangle extends IndexedTriangleNoMaterial
         long triangleVa = va();
         setMaterialIndex(triangleVa, materialIndex);
     }
-
     // *************************************************************************
     // ConstIndexedTriangle methods.
 
@@ -104,7 +104,6 @@ final public class IndexedTriangle extends IndexedTriangleNoMaterial
 
         return result;
     }
-
     // *************************************************************************
     // native private methods
 

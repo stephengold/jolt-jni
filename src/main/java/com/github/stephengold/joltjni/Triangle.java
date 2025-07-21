@@ -142,7 +142,6 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     // *************************************************************************
     // new public methods
 
-
     /**
      * Alter the triangle's material index. (native attribute: mMaterialIndex)
      *
@@ -162,7 +161,6 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
         long triangleVa = va();
         setUserData(triangleVa, value);
     }
-
     // *************************************************************************
     // ConstTriangle methods.
 
@@ -210,7 +208,6 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
             }
         }
     }
-
     // *************************************************************************
     // native private methods
 
