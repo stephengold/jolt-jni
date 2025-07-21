@@ -283,6 +283,7 @@ final public class SmokeTestAll {
         smokeTest(new PyramidTest());
         smokeTest(new RestitutionTest());
         smokeTest(new SensorTest());
+        smokeTest(new ShapeFilterTest());
         smokeTest(new SimpleTest());
         smokeTest(new StackTest());
         smokeTest(new TwoDFunnelTest());
