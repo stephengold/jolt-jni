@@ -278,14 +278,13 @@ public class Test003 {
         }
         { // ensureMinimalEdgeLength method:
             AaBox boxA = new AaBox(new Vec3(-2, -2, -2), new Vec3(0f, 0f, 0f));
-            AaBox boxB = new AaBox(new Vec3(-1.5f, -2.60, -4),
-                    new Vec3(0.5f, 0.4f, 0f));
-
             boxA.ensureMinimalEdgeLength(2.5f);
-            boxB.ensureMinimalEdgeLength(3.0f);
-
             TestUtils.assertEquals(-2f, -2f, -2f, boxA.getMin(), 0f);
             TestUtils.assertEquals(0.5f, 0.5f, 0.5f, boxA.getMax(), 0f);
+
+            AaBox boxB = new AaBox(new Vec3(-1.5f, -2.60, -4),
+                    new Vec3(0.5f, 0.4f, 0f));
+            boxB.ensureMinimalEdgeLength(3.0f);
             TestUtils.assertEquals(-1.5f, -2.60f, -4f, boxB.getMin(), 0f);
             TestUtils.assertEquals(1.5f, 0.4f, 0f, boxB.getMax(), 0f);
 
