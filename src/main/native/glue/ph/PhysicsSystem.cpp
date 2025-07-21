@@ -703,6 +703,34 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setPhys
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    setSimCollideBodyVsBody
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setSimCollideBodyVsBody
+  (JNIEnv *, jclass, jlong systemVa, jlong colliderVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    PhysicsSystem::SimCollideBodyVsBody * const pCollider
+            = reinterpret_cast<PhysicsSystem::SimCollideBodyVsBody *> (colliderVa);
+    pSystem->SetSimCollideBodyVsBody(*pCollider);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
+ * Method:    setSimShapeFilter
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setSimShapeFilter
+  (JNIEnv *, jclass, jlong systemVa, jlong filterVa) {
+    PhysicsSystem * const pSystem
+            = reinterpret_cast<PhysicsSystem *> (systemVa);
+    const SimShapeFilter * const pFilter
+            = reinterpret_cast<SimShapeFilter *> (filterVa);
+    pSystem->SetSimShapeFilter(pFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    setSoftBodyContactListener
  * Signature: (JJ)V
  */

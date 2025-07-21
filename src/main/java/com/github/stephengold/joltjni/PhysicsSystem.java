@@ -84,6 +84,10 @@ public class PhysicsSystem extends NonCopyable {
      */
     final private NarrowPhaseQuery narrowQueryNoLock;
     /**
+     * protect the {@code SimShapeFilter} (if any) from garbage collection
+     */
+    private SimShapeFilter simShapeFilter;
+    /**
      * protect the soft-body contact listener (if any) from garbage collection
      */
     private SoftBodyContactListener softContactListener;
@@ -803,6 +807,30 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Replace the system's body-vs-body collide function.
+     *
+     * @param bodyVsBody the desired function
+     */
+    public void setSimCollideBodyVsBody(SimCollideBodyVsBody bodyVsBody) {
+        long systemVa = va();
+        long colliderVa = bodyVsBody.va();
+        setSimCollideBodyVsBody(systemVa, colliderVa);
+    }
+
+    /**
+     * Replace or remove the shape filter that will be used during simulation.
+     *
+     * @param shapeFilter the desired filter, or {@code null} to remove a filter
+     * previously set
+     */
+    public void setSimShapeFilter(SimShapeFilter shapeFilter) {
+        this.simShapeFilter = shapeFilter;
+        long systemVa = va();
+        long filterVa = (shapeFilter == null) ? 0L : shapeFilter.va();
+        setSimShapeFilter(systemVa, filterVa);
+    }
+
+    /**
      * Replace the system's soft-body contact listener.
      *
      * @param listener the desired listener
@@ -958,6 +986,11 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static void setPhysicsSettings(
             long systemVa, long settingsVa);
+
+    native private static void setSimCollideBodyVsBody(
+            long systemVa, long functionVa);
+
+    native private static void setSimShapeFilter(long systemVa, long filterVa);
 
     native private static void setSoftBodyContactListener(
             long systemVa, long listenerVa);
