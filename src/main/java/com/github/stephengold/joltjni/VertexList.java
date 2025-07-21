@@ -138,7 +138,6 @@ final public class VertexList implements ConstVertexList {
     public void set(int vertexIndex, Vec3Arg location) {
         set(vertexIndex, location.getX(), location.getY(), location.getZ());
     }
-
     // *************************************************************************
     // ConstVertexList methods
 

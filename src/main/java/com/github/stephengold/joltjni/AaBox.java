@@ -185,8 +185,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
         int numVertices = vertices.size();
         FloatBuffer directBuffer = vertices.toDirectBuffer();
 
-        encapsulatedTriangleFromVertices(boxVa, numVertices, directBuffer,
-                triangleVa);
+        encapsulatedTriangleFromVertices(
+                boxVa, numVertices, directBuffer, triangleVa);
     }
 
     /**
@@ -555,7 +555,6 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
         return result;
     }
-
     // *************************************************************************
     // native private methods
 
@@ -583,11 +582,11 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     native private static void encapsulateTriangle(long boxVa, long triangleVa);
 
-    native private static void encapsulatedTriangleFromVertices(long boxVa,
-            int numVertices, FloatBuffer vertices, long triangleVa);
+    native private static void encapsulatedTriangleFromVertices(
+            long boxVa, int numVertices, FloatBuffer vertices, long triangleVa);
 
-    native private static void ensureMinimalEdgeLength(long boxVa,
-            float minEdgeLength);
+    native private static void ensureMinimalEdgeLength(
+            long boxVa, float minEdgeLength);
 
     native private static void expandBy(
             long boxVa, float dx, float dy, float dz);

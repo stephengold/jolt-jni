@@ -440,7 +440,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getSurfaceAre
  * Signature: (JFFF)[F
  */
 JNIEXPORT jfloatArray JNICALL Java_com_github_stephengold_joltjni_AaBox_getSupport
-  (JNIEnv * pEnv, jclass clazz, jlong boxVa, jfloat dx, jfloat dy, jfloat dz) {
+  (JNIEnv *pEnv, jclass clazz, jlong boxVa, jfloat dx, jfloat dy, jfloat dz) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     const Vec3 direction(dx, dy, dz);
     const Vec3 support = pBox->GetSupport(direction);
