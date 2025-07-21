@@ -284,6 +284,9 @@ final public class SmokeTestAll {
         smokeTest(new RestitutionTest());
         smokeTest(new SensorTest());
         smokeTest(new SimpleTest());
+        smokeTest(new StackTest());
+        smokeTest(new TwoDFunnelTest());
+        smokeTest(new WallTest());
     }
 
     /**
