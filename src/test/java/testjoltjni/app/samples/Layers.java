@@ -20,7 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 package testjoltjni.app.samples;
-
 /**
  * A line-for-line Java translation of the Jolt-Physics object-layer definitions
  * used in Jolt-JNI "Samples" tests.

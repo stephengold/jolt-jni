@@ -182,7 +182,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     /**
      * Attempt to de-serialize a saved scene from a stream.
      *
-     * @param stream (not null)
+     * @param stream the stream to read (not null)
      * @return a new object
      */
     public static PhysicsSceneResult sRestoreFromBinaryState(StreamIn stream) {
