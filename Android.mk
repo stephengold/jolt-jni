@@ -192,6 +192,7 @@ $(N)/glue/o/ObjVsBpFilter.cpp \
 $(N)/glue/o/ObjVsObjFilter.cpp \
 $(N)/glue/o/OffsetCenterOfMassShape.cpp \
 $(N)/glue/o/OffsetCenterOfMassShapeSettings.cpp \
+$(N)/glue/o/OfStream.cpp \
 $(N)/glue/o/OrientedBox.cpp \
 $(N)/glue/ph/PhysicsMaterial.cpp \
 $(N)/glue/ph/PhysicsMaterialList.cpp \
