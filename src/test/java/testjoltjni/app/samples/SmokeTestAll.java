@@ -23,6 +23,7 @@ package testjoltjni.app.samples;
 
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
+import com.github.stephengold.joltjni.std.OfStream;
 import testjoltjni.TestUtils;
 import testjoltjni.app.samples.broadphase.*;
 import testjoltjni.app.samples.character.*;
@@ -83,7 +84,8 @@ final public class SmokeTestAll {
         String fileName = "SmokeTestAll.jor";
         int mode = StreamOutWrapper.out()
                 | StreamOutWrapper.binary() | StreamOutWrapper.trunc();
-        StreamOut streamOut = new StreamOutWrapper(fileName, mode);
+        OfStream ofStream = new OfStream(fileName, mode);
+        StreamOut streamOut = new StreamOutWrapper(ofStream);
         renderer = new DebugRendererRecorder(streamOut);
 
         int numBytes = 1 << 24; // 16 MiB
