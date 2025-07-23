@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.std.OfStream;
 import java.io.*;
 import java.util.*;
 import testjoltjni.TestUtils;
@@ -281,12 +282,12 @@ public static void main(  String[] argv)throws IOException
 				// A tag used to identify the test
 				String tag = motion_quality_str.toLowerCase() + "_th" + (num_threads + 1);
 
-				// Open renderer output
 				if (enable_debug_renderer) {
-					String fileName = "performance_test_" + tag + ".jor";
-					int mode = StreamOutWrapper.out() | StreamOutWrapper.binary() | StreamOutWrapper.trunc();
-					StreamOutWrapper renderer_stream=new StreamOutWrapper(fileName, mode);
-					renderer=new DebugRendererRecorder(renderer_stream);
+				// Open renderer output
+				OfStream renderer_file=new OfStream();
+					renderer_file.open(("performance_test_" + tag + ".jor"), StreamOutWrapper.out() | StreamOutWrapper.binary() | StreamOutWrapper.trunc());
+				StreamOutWrapper renderer_stream=new StreamOutWrapper(renderer_file);
+				renderer=new DebugRendererRecorder(renderer_stream);
 				}// JPH_DEBUG_RENDERER
 
 				// Open per frame timing output
