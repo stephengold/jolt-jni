@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -95,6 +95,20 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_StreamOutWrapper_trun
   (JNIEnv *, jclass) {
     const std::ios_base::openmode result = std::ofstream::trunc;
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StreamOutWrapper
+ * Method:    createFromOfStream
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_StreamOutWrapper_createFromOfStream
+  (JNIEnv *, jclass, jlong streamVa) {
+    std::ofstream * const pStream
+            = reinterpret_cast<std::ofstream *> (streamVa);
+    StreamOutWrapper * const pResult = new StreamOutWrapper(*pStream);
+    TRACE_NEW("StreamOutWrapper", pResult)
+    return reinterpret_cast<jlong> (pResult);
 }
 
 /*

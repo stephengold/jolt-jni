@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.std.OfStream;
 import com.github.stephengold.joltjni.std.StringStream;
 
 /**
@@ -31,6 +32,17 @@ import com.github.stephengold.joltjni.std.StringStream;
 public class StreamOutWrapper extends StreamOut {
     // *************************************************************************
     // constructors
+
+    /**
+     * Instantiate using an already-open file stream.
+     *
+     * @param data the underlying stream (not null)
+     */
+    public StreamOutWrapper(OfStream data) {
+        long dataVa = data.va();
+        long streamVa = createFromOfStream(dataVa);
+        setVirtualAddressAsOwner(streamVa);
+    }
 
     /**
      * Open a file for output.
@@ -101,6 +113,8 @@ public class StreamOutWrapper extends StreamOut {
     native public static int trunc();
     // *************************************************************************
     // native private methods
+
+    native private static long createFromOfStream(long dataVa);
 
     native private static long createFromStringStream(long dataVa);
 
