@@ -49,7 +49,9 @@ public class StreamOutWrapper extends StreamOut {
      *
      * @param fileName the name of the file to open (not null)
      * @param streamMode the desired mode bits or-ed together
+     * @deprecated use the OfStream constructor instead
      */
+    @Deprecated
     public StreamOutWrapper(String fileName, int streamMode) {
         long streamVa = createStreamOutWrapper(fileName, streamMode);
         setVirtualAddressAsOwner(streamVa);
