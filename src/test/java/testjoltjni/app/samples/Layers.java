@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,5 +39,5 @@ public class Layers
 	public static final int MOVING = 5;
 	public static final int DEBRIS = 6; // Example: Debris collides only with NON_MOVING
 	public static final int SENSOR = 7; // Sensors only collide with MOVING objects
-	static final int NUM_LAYERS = 8;
+	public static final int NUM_LAYERS = 8;
 };
