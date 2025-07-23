@@ -34,6 +34,7 @@ import testjoltjni.app.samples.rig.*;
 import testjoltjni.app.samples.scaledshapes.*;
 import testjoltjni.app.samples.shapes.*;
 import testjoltjni.app.samples.softbody.*;
+import testjoltjni.app.samples.tools.*;
 import testjoltjni.app.samples.vehicle.*;
 import testjoltjni.app.samples.water.*;
 
@@ -211,6 +212,9 @@ final public class SmokeTestAll {
         smokeTestScaledShapes();
         smokeTestShapes();
         smokeTestSoftBody();
+
+        // tools package:
+        smokeTest(new LoadSnapshotTest());
 
         // vehicle package:
         smokeTest(new MotorcycleTest());
