@@ -60,11 +60,34 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_OfStream_create
 
 /*
  * Class:     com_github_stephengold_joltjni_std_OfStream
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_OfStream_createDefault
+  BODYOF_CREATE_DEFAULT(ofstream)
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_OfStream
  * Method:    free
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_OfStream_free
     BODYOF_FREE(ofstream)
+
+/*
+ * Class:     com_github_stephengold_joltjni_std_OfStream
+ * Method:    open
+ * Signature: (JLjava/lang/String;I)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_std_OfStream_open
+  (JNIEnv *pEnv, jclass, jlong streamVa, jstring fileName, jint fileMode) {
+    ofstream * const pStream = reinterpret_cast<ofstream *> (streamVa);
+    jboolean isCopy;
+    const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy);
+    const ios_base::openmode mode = (ios_base::openmode) fileMode;
+    pStream->open(pFileName, mode);
+    pEnv->ReleaseStringUTFChars(fileName, pFileName);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_std_OfStream

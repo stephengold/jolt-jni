@@ -33,6 +33,14 @@ public class OfStream extends JoltPhysicsObject {
     // constructors
 
     /**
+     * Instantiate a default file stream.
+     */
+    public OfStream() {
+        long streamVa = createDefault();
+        setVirtualAddress(streamVa, () -> free(streamVa));
+    }
+
+    /**
      * Open a file for output.
      *
      * @param fileName the name of the file to open (not null)
@@ -55,6 +63,18 @@ public class OfStream extends JoltPhysicsObject {
     }
 
     /**
+     * Open a file for output.
+     *
+     * @param fileName the name of the file to open (not null)
+     * @param streamMode the desired mode bits or-ed together (see
+     * {@code StreamOutWrapper})
+     */
+    public void open(String fileName, int streamMode) {
+        long streamVa = va();
+        open(streamVa, fileName, streamMode);
+    }
+
+    /**
      * Return the output position.
      *
      * @return buffer position relative to the first character, or -1 to
@@ -73,7 +93,12 @@ public class OfStream extends JoltPhysicsObject {
 
     native private static long create(String fileName, int streamMode);
 
+    native private static long createDefault();
+
     native private static void free(long streamVa);
+
+    native private static void open(
+            long streamVa, String fileName, int streamMode);
 
     native private static int tellp(long streamVa);
 }
