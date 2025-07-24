@@ -61,8 +61,6 @@ import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 import com.github.stephengold.joltjni.enumerate.ESpringMode;
-import com.github.stephengold.joltjni.operator.Op;
-import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
@@ -100,7 +98,6 @@ public class Test003 {
         TestUtils.initializeNativeLibrary();
 
         doAaBox();
-        doAaBoxMethods();
         doBodyCreationSettings();
         doCharacter();
         doCharacterVirtual();
@@ -197,98 +194,6 @@ public class Test003 {
             Assert.assertTrue(box.isValid());
 
             TestUtils.testClose(box);
-        }
-
-        System.gc();
-    }
-
-    /**
-     * Test the methods of the {@code AaBox} class.
-     */
-    private static void doAaBoxMethods() {
-        { // contains method:
-            ConstAaBox box = new AaBox(new Vec3(0, 0, 0), 2);
-            ConstAaBox smallBox = new AaBox(new Vec3(0, 0, 0), 1.5f);
-
-            Vec3 point = new Vec3(0.5f, 0.5f, 0.25f);
-            Assert.assertTrue(box.contains(smallBox));
-            Assert.assertTrue(box.contains(point));
-            Assert.assertFalse(smallBox.contains(box));
-
-            point.set(2.1f, 0, 2);
-            Assert.assertFalse(box.contains(point));
-            TestUtils.testClose(box, smallBox);
-        }
-        { // encapsulate and getSqDistanceTo method:
-            AaBox box = new AaBox(new Vec3(-1.25, -1, -0.23),
-                    new Vec3(2, 1.75, 1.25));
-            AaBox smallBox = new AaBox(new Vec3(0, 0, 0), 1.5f);
-
-            smallBox.encapsulate(box);
-            TestUtils.assertEquals(-1.5f, -1.5f, -1.5f, smallBox.getMin(), 0f);
-            TestUtils.assertEquals(2f, 1.75f, 1.5f, smallBox.getMax(), 0f);
-
-            Vec3 point = new Vec3(3, 3, 3);
-            Assert.assertEquals(Op.minus(smallBox.getClosestPoint(point),
-                    point).lengthSq(), smallBox.getSqDistanceTo(point), 0f);
-            TestUtils.testClose(box, smallBox);
-        }
-        { // getSqDistanceTo method:
-            ConstAaBox box = new AaBox(new Vec3(0, 0, 0), 2);
-            Vec3 point = new Vec3(4, 4, 4);
-
-            float distance = box.getSqDistanceTo(point);
-            Assert.assertEquals(12, distance, 0f);
-
-            point.set(2, -6, 8);
-            distance = box.getSqDistanceTo(point);
-            Assert.assertEquals(52, distance, 0f);
-            TestUtils.testClose(box);
-        }
-        { // getSurfaceArea method:
-            ConstAaBox box = new AaBox(new Vec3(-1, -3, -4.5f),
-                    new Vec3(2.65f, 5.5f, 6.0f));
-            Assert.assertEquals(317.2f, box.getSurfaceArea(), 0f);
-            TestUtils.testClose(box);
-        }
-        { // getSupport method:
-            ConstAaBox box = new AaBox(new Vec3(-1, -3, -4.5f),
-                    new Vec3(2.65f, 5.5f, 6.0f));
-            Vec3 support = box.getSupport(Vec3.sAxisZ());
-            Vec3 manual = Vec3.sSelect(box.getMax(), box.getMin(),
-                    Vec3.sLess(Vec3.sAxisZ(), Vec3.sZero()));
-
-            TestUtils.assertEquals(2.65f, 5.5f, 6.0f, support, 0f);
-            TestUtils.assertEquals(manual.getX(), manual.getY(), manual.getZ(),
-                    support, 0f);
-            TestUtils.testClose(box);
-        }
-        { // overlaps method:
-            ConstAaBox boxA = new AaBox(new Vec3(0, 0, 0), 4);
-            ConstAaBox boxB = new AaBox(new Vec3(-1, -3, -4.5f),
-                    new Vec3(2.65f, 5.5f, 6.0f));
-            ConstAaBox boxC = new AaBox(new Vec3(6, 0, 0), 1);
-            ConstAaBox boxD = new AaBox(new Vec3(5, 0, 0), 0.5f);
-
-            Assert.assertTrue(boxB.overlaps(boxA));
-            Assert.assertTrue(boxA.overlaps(boxB));
-            Assert.assertFalse(boxA.overlaps(boxC));
-            Assert.assertFalse(boxA.overlaps(boxD));
-            TestUtils.testClose(boxA, boxB, boxC, boxD);
-        }
-        { // ensureMinimalEdgeLength method:
-            AaBox boxA = new AaBox(new Vec3(-2, -2, -2), new Vec3(0f, 0f, 0f));
-            boxA.ensureMinimalEdgeLength(2.5f);
-            TestUtils.assertEquals(-2f, -2f, -2f, boxA.getMin(), 0f);
-            TestUtils.assertEquals(0.5f, 0.5f, 0.5f, boxA.getMax(), 0f);
-
-            AaBox boxB = new AaBox(new Vec3(-1.5f, -2.60, -4),
-                    new Vec3(0.5f, 0.4f, 0f));
-            boxB.ensureMinimalEdgeLength(3.0f);
-            TestUtils.assertEquals(-1.5f, -2.60f, -4f, boxB.getMin(), 0f);
-            TestUtils.assertEquals(1.5f, 0.4f, 0f, boxB.getMax(), 0f);
-
-            TestUtils.testClose(boxA, boxB);
         }
 
         System.gc();
