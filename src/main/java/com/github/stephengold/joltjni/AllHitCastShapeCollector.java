@@ -45,6 +45,17 @@ public class AllHitCastShapeCollector extends CastShapeCollector {
     // new methods exposed
 
     /**
+     * Count the hits.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countHits() {
+        long collectorVa = va();
+        int result = countHits(collectorVa);
+        return result;
+    }
+
+    /**
      * Access the hit with the specified index.
      *
      * @param index (&ge;0, &lt;numHits)
