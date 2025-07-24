@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -100,7 +101,8 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param box the test box (not null, unaffected)
      * @param collector the hit collector to use (not null)
      */
-    public void collideAaBox(AaBox box, CollideShapeBodyCollector collector) {
+    public void collideAaBox(
+            ConstAaBox box, CollideShapeBodyCollector collector) {
         collideAaBox(box, collector, new BroadPhaseLayerFilter());
     }
 
@@ -112,7 +114,8 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
-    public void collideAaBox(AaBox box, CollideShapeBodyCollector collector,
+    public void collideAaBox(
+            ConstAaBox box, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter) {
         collideAaBox(box, collector, bplFilter, new ObjectLayerFilter());
     }
@@ -126,10 +129,11 @@ public class BroadPhaseQuery extends NonCopyable {
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
-    public void collideAaBox(AaBox box, CollideShapeBodyCollector collector,
+    public void collideAaBox(
+            ConstAaBox box, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
         long queryVa = va();
-        long boxVa = box.va();
+        long boxVa = box.targetVa();
         long collectorVa = collector.va();
         long bplFilterVa = bplFilter.va();
         long olFilterVa = olFilter.va();
