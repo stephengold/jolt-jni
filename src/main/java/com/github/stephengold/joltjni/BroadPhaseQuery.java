@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.ConstOrientedBox;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -52,6 +53,51 @@ public class BroadPhaseQuery extends NonCopyable {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Cast a box along a line segment and collect the resulting hits.
+     *
+     * @param boxCast the test box and route (not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     */
+    public void castAaBox(
+            AaBoxCast boxCast, CastShapeBodyCollector collector) {
+        castAaBox(boxCast, collector, new BroadPhaseLayerFilter());
+    }
+
+    /**
+     * Cast a box along a line segment and collect the resulting hits.
+     *
+     * @param boxCast the test box and route (not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     */
+    public void castAaBox(
+            AaBoxCast boxCast, CastShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter) {
+        castAaBox(boxCast, collector, bplFilter, new ObjectLayerFilter());
+    }
+
+    /**
+     * Cast a box along a line segment and collect the resulting hits.
+     *
+     * @param boxCast the test box and route (not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     */
+    public void castAaBox(
+            AaBoxCast boxCast, CastShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
+        long queryVa = va();
+        long boxCastVa = boxCast.va();
+        long collectorVa = collector.va();
+        long bplFilterVa = bplFilter.va();
+        long olFilterVa = olFilter.va();
+        castAaBox(queryVa, boxCastVa, collectorVa, bplFilterVa, olFilterVa);
+    }
 
     /**
      * Cast a ray and collect the resulting hits.
@@ -138,6 +184,76 @@ public class BroadPhaseQuery extends NonCopyable {
         long bplFilterVa = bplFilter.va();
         long olFilterVa = olFilter.va();
         collideAaBox(queryVa, boxVa, collectorVa, bplFilterVa, olFilterVa);
+    }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified oriented box.
+     *
+     * @param box the box to test (not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     */
+    public void collideOrientedBox(
+            ConstOrientedBox box, CollideShapeBodyCollector collector) {
+        collideOrientedBox(box, collector, new BroadPhaseLayerFilter());
+    }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified oriented box.
+     *
+     * @param box the box to test (not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     */
+    public void collideOrientedBox(
+            ConstOrientedBox box, CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter) {
+        collideOrientedBox(box, collector, bplFilter, new ObjectLayerFilter());
+    }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified oriented box.
+     *
+     * @param box the box to test (not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     * @param olFilter the object-layer filter to apply (not null, unaffected)
+     */
+    public void collideOrientedBox(
+            ConstOrientedBox box, CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
+        long queryVa = va();
+        long boxVa = box.targetVa();
+        long collectorVa = collector.va();
+        long bplFilterVa = bplFilter.va();
+        long olFilterVa = olFilter.va();
+        collideOrientedBox(
+                queryVa, boxVa, collectorVa, bplFilterVa, olFilterVa);
+    }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified point.
+     *
+     * @param point the location to test (not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     */
+    public void collidePoint(
+            Vec3Arg point, CollideShapeBodyCollector collector) {
+        collidePoint(point, collector, new BroadPhaseLayerFilter());
+    }
+
+    /**
+     * Collect bodies whose bounding boxes intersect the specified point.
+     *
+     * @param point the location to test (not null, unaffected)
+     * @param collector the hit collector to use (not null)
+     * @param bplFilter the broadphase-layer filter to apply (not null,
+     * unaffected)
+     */
+    public void collidePoint(Vec3Arg point, CollideShapeBodyCollector collector,
+            BroadPhaseLayerFilter bplFilter) {
+        collidePoint(point, collector, bplFilter, new ObjectLayerFilter());
     }
 
     /**
@@ -239,10 +355,16 @@ public class BroadPhaseQuery extends NonCopyable {
     // *************************************************************************
     // native private methods
 
+    native private static void castAaBox(long queryVa, long boxCastVa,
+            long collectorVa, long bplFilterVa, long olFilterVa);
+
     native private static void castRay(long queryVa, long raycastVa,
             long collectorVa, long bplFilterVa, long olFilterVa);
 
     native private static void collideAaBox(long queryVa, long boxVa,
+            long collectorVa, long bplFilterVa, long olFilterVa);
+
+    native private static void collideOrientedBox(long queryVa, long boxVa,
             long collectorVa, long bplFilterVa, long olFilterVa);
 
     native private static void collidePoint(long queryVa, float pointX,

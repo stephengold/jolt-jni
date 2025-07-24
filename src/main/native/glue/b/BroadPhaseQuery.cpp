@@ -32,6 +32,27 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BroadPhaseQuery
+ * Method:    castAaBox
+ * Signature: (JJJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseQuery_castAaBox
+  (JNIEnv *, jclass, jlong queryVa, jlong boxCastVa, jlong collectorVa,
+    jlong bplFilterVa, jlong olFilterVa) {
+    const BroadPhaseQuery * const pQuery
+            = reinterpret_cast<BroadPhaseQuery *> (queryVa);
+    const AABoxCast * const pBoxCast
+            = reinterpret_cast<AABoxCast *> (boxCastVa);
+    CastShapeBodyCollector * const pCollector
+            = reinterpret_cast<CastShapeBodyCollector *> (collectorVa);
+    const BroadPhaseLayerFilter * const pBplFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (bplFilterVa);
+    const ObjectLayerFilter * const pOlFilter
+            = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
+    pQuery->CastAABox(*pBoxCast, *pCollector, *pBplFilter, *pOlFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BroadPhaseQuery
  * Method:    castRay
  * Signature: (JJJJJ)V
  */
@@ -69,6 +90,26 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseQuery_colli
     const ObjectLayerFilter * const pOlFilter
             = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
     pQuery->CollideAABox(*pBox, *pCollector, *pBplFilter, *pOlFilter);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BroadPhaseQuery
+ * Method:    collideOrientedBox
+ * Signature: (JJJJJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BroadPhaseQuery_collideOrientedBox
+  (JNIEnv *, jclass, jlong queryVa, jlong boxVa, jlong collectorVa,
+  jlong bplFilterVa, jlong olFilterVa) {
+    const BroadPhaseQuery * const pQuery
+            = reinterpret_cast<BroadPhaseQuery *> (queryVa);
+    const OrientedBox * const pBox = reinterpret_cast<OrientedBox *> (boxVa);
+    CollideShapeBodyCollector * const pCollector
+            = reinterpret_cast<CollideShapeBodyCollector *> (collectorVa);
+    const BroadPhaseLayerFilter * const pBplFilter
+            = reinterpret_cast<BroadPhaseLayerFilter *> (bplFilterVa);
+    const ObjectLayerFilter * const pOlFilter
+            = reinterpret_cast<ObjectLayerFilter *> (olFilterVa);
+    pQuery->CollideOrientedBox(*pBox, *pCollector, *pBplFilter, *pOlFilter);
 }
 
 /*
