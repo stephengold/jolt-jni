@@ -571,9 +571,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     native private static long createCubic(
             float centerX, float centerY, float centerZ, float halfExtent);
 
-    native private static long createDefault();
-
     native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native private static void encapsulate(
             long boxVa, float locX, float locY, float locZ);

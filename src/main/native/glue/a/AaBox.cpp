@@ -100,19 +100,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createCubic
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
- * Method:    createDefault
- * Signature: ()J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createDefault
-  BODYOF_CREATE_DEFAULT(AABox)
-
-/*
- * Class:     com_github_stephengold_joltjni_AaBox
  * Method:    createCopy
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createCopy
   BODYOF_CREATE_COPY(AABox)
+
+/*
+ * Class:     com_github_stephengold_joltjni_AaBox
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AaBox_createDefault
+  BODYOF_CREATE_DEFAULT(AABox)
 
 /*
  * Class:     com_github_stephengold_joltjni_AaBox
