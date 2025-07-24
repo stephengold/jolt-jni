@@ -55,6 +55,7 @@ public void Initialize()
 */
 	// Can't browse for a file, use the default name
 	String file_name = "snapshot.bin";
+        if(Jolt.isDoublePrecision())file_name="snapshot-dp.bin";
 //#endif
 
 	int flags = StreamInWrapper.in() | StreamInWrapper.binary();
