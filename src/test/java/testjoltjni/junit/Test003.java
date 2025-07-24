@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.AaBox;
+import com.github.stephengold.joltjni.AaBoxCast;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
@@ -98,6 +99,7 @@ public class Test003 {
         TestUtils.initializeNativeLibrary();
 
         doAaBox();
+        doAaBoxCast();
         doBodyCreationSettings();
         doCharacter();
         doCharacterVirtual();
@@ -195,6 +197,31 @@ public class Test003 {
 
             TestUtils.testClose(box);
         }
+
+        System.gc();
+    }
+
+    /**
+     * Test the {@code AaBoxCast} class.
+     */
+    private static void doAaBoxCast() {
+        AaBoxCast cast = new AaBoxCast();
+
+        Assert.assertTrue(cast.hasAssignedNativeObject());
+        Assert.assertTrue(cast.ownsNativeObject());
+        Assert.assertNotEquals(0L, cast.va());
+
+        Assert.assertFalse(cast.getBox().isValid());
+        TestUtils.assertEquals(0f, 0f, 0f, cast.getDirection(), 0f);
+
+        cast.setBox(new AaBox(new Vec3(1f, 2f, 3f), new Vec3(4f, 5f, 6f)));
+        cast.setDirection(new Vec3(7f, 8f, 9f));
+
+        TestUtils.assertEquals(1f, 2f, 3f, cast.getBox().getMin(), 0f);
+        TestUtils.assertEquals(4f, 5f, 6f, cast.getBox().getMax(), 0f);
+        TestUtils.assertEquals(7f, 8f, 9f, cast.getDirection(), 0f);
+
+        TestUtils.testClose(cast);
 
         System.gc();
     }
