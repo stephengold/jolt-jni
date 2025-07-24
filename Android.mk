@@ -19,6 +19,7 @@ LOCAL_CPP_EXTENSION := .cpp
 LOCAL_MODULE := joltjni
 
 LOCAL_SRC_FILES := \
+$(N)/glue/a/AaBoxCast.cpp \
 $(N)/glue/a/AaBox.cpp \
 $(N)/glue/a/AddConvexRadiusSupport.cpp \
 $(N)/glue/a/AddConvexRadiusTab.cpp \
