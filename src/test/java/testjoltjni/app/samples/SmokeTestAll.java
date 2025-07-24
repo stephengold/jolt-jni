@@ -197,6 +197,7 @@ final public class SmokeTestAll {
         smokeTest(new CharacterTest());
         smokeTest(new CharacterVirtualTest());
 
+        // constraints package:
         smokeTestConstraints();
 
         // convex-collision package:
@@ -206,6 +207,7 @@ final public class SmokeTestAll {
         smokeTest(new ConvexHullTest());
         smokeTest(new EPATest());
         smokeTest(new InteractivePairsTest());
+        // TODO RandomRayTest (uses templates)
 
         smokeTestGeneral();
         smokeTestRig();
@@ -286,10 +288,13 @@ final public class SmokeTestAll {
         smokeTest(new LoadSaveSceneTest());
         smokeTest(new ManifoldReductionTest());
         smokeTest(new ModifyMassTest());
+        // TODO MultithreadedTest
         smokeTest(new PyramidTest());
         smokeTest(new RestitutionTest());
         smokeTest(new SensorTest());
         smokeTest(new ShapeFilterTest());
+        // TODO SimCollideBodyVsBodyTest (uses templates)
+        // TODO SimShapeFilterTest
         smokeTest(new SimpleTest());
         smokeTest(new StackTest());
         smokeTest(new TwoDFunnelTest());

@@ -439,6 +439,18 @@ if (NarrowPhaseStat.isCollecting()) {
 	// End profiling this program
 	profileEnd();
 }
+/*
 
+#ifdef JPH_PLATFORM_ANDROID
+
+// Main entry point for android
+void android_main(struct android_app *ioApp)
+{
+	// Run the regular main function
+	const char *args[] = { "Unused", "-s=ConvexVsMesh", "-t=max" };
+	main(size(args), (char **)args);
 }
 
+#endif // JPH_PLATFORM_ANDROID
+*/
+}
