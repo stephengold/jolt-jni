@@ -37,6 +37,13 @@ abstract public class CastShapeCollector extends JoltPhysicsObject {
     CastShapeCollector() {
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Reset the collector so it can be reused.
+     */
+    abstract public void reset();
+    // *************************************************************************
     // new protected methods
 
     /**

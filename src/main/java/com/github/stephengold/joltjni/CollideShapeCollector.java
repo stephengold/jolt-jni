@@ -37,6 +37,13 @@ abstract public class CollideShapeCollector extends JoltPhysicsObject {
     CollideShapeCollector() {
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Reset the collector so it can be reused.
+     */
+    abstract public void reset();
+    // *************************************************************************
     // new protected methods
 
     /**

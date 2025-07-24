@@ -88,6 +88,17 @@ public class AllHitTransformedShapeCollector extends TransformedShapeCollector {
         return result;
     }
     // *************************************************************************
+    // TransformedShapeCollector methods
+
+    /**
+     * Reset the collector so it can be reused.
+     */
+    @Override
+    public void reset() {
+        long collectorVa = va();
+        reset(collectorVa);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static int countHits(long collectorVa);
@@ -95,4 +106,6 @@ public class AllHitTransformedShapeCollector extends TransformedShapeCollector {
     native private static long createDefault();
 
     native private static long getHit(long collectorVa, int hitIndex);
+
+    native private static void reset(long collectorVa);
 }

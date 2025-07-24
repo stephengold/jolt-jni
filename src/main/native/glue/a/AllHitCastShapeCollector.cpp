@@ -68,6 +68,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AllHitCastShapeColle
 
 /*
  * Class:     com_github_stephengold_joltjni_AllHitCastShapeCollector
+ * Method:    reset
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AllHitCastShapeCollector_reset
+  (JNIEnv *, jclass, jlong collectorVa) {
+    AllHitCollisionCollector<CastShapeCollector> * const pCollector
+            = reinterpret_cast<AllHitCollisionCollector<CastShapeCollector> *> (collectorVa);
+    pCollector->Reset();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AllHitCastShapeCollector
  * Method:    sort
  * Signature: (J)V
  */

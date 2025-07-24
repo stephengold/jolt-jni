@@ -65,3 +65,15 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_AllHitCollideShapeBod
     const BodyID result = pCollector->mHits[index];
     return result.GetIndexAndSequenceNumber();
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_AllHitCollideShapeBodyCollector
+ * Method:    reset
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AllHitCollideShapeBodyCollector_reset
+  (JNIEnv *, jclass, jlong collectorVa) {
+    AllHitCollisionCollector<CollideShapeBodyCollector> * const pCollector
+            = reinterpret_cast<AllHitCollisionCollector<CollideShapeBodyCollector> *> (collectorVa);
+    pCollector->Reset();
+}

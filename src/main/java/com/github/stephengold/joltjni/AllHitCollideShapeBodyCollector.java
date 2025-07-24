@@ -83,6 +83,17 @@ public class AllHitCollideShapeBodyCollector extends CollideShapeBodyCollector {
         return result;
     }
     // *************************************************************************
+    // CollideShapeBodyCollector methods
+
+    /**
+     * Reset the collector so it can be reused.
+     */
+    @Override
+    public void reset() {
+        long collectorVa = va();
+        reset(collectorVa);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static int countHits(long collectorVa);
@@ -90,4 +101,6 @@ public class AllHitCollideShapeBodyCollector extends CollideShapeBodyCollector {
     native private static long createDefault();
 
     native private static int getHit(long collectorVa, int hitIndex);
+
+    native private static void reset(long collectorVa);
 }

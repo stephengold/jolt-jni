@@ -49,6 +49,15 @@ abstract public class CustomCollideShapeCollector
      */
     abstract public void addHit(long resultVa);
     // *************************************************************************
+    // CollideShapeCollector methods
+
+    /**
+     * Reset the collector so it can be reused. Meant to be overridden.
+     */
+    @Override
+    public void reset() {
+    }
+    // *************************************************************************
     // native private methods
 
     native private long createCustomCollector();

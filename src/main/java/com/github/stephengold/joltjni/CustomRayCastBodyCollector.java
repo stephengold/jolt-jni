@@ -49,6 +49,15 @@ abstract public class CustomRayCastBodyCollector extends RayCastBodyCollector {
      */
     abstract public void addHit(long resultVa);
     // *************************************************************************
+    // RayCastBodyCollector methods
+
+    /**
+     * Reset the collector so it can be reused. Meant to be overridden.
+     */
+    @Override
+    public void reset() {
+    }
+    // *************************************************************************
     // native private methods
 
     native private long createCustomCollector();

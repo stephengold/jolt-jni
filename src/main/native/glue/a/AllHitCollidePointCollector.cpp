@@ -69,6 +69,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AllHitCollidePointCo
 
 /*
  * Class:     com_github_stephengold_joltjni_AllHitCollidePointCollector
+ * Method:    reset
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AllHitCollidePointCollector_reset
+  (JNIEnv *, jclass, jlong collectorVa) {
+    AllHitCollisionCollector<CollidePointCollector> * const pCollector
+            = reinterpret_cast<AllHitCollisionCollector<CollidePointCollector> *> (collectorVa);
+    pCollector->Reset();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AllHitCollidePointCollector
  * Method:    sort
  * Signature: (J)V
  */

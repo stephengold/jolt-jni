@@ -69,6 +69,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AllHitCastRayCollect
 
 /*
  * Class:     com_github_stephengold_joltjni_AllHitCastRayCollector
+ * Method:    reset
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AllHitCastRayCollector_reset
+  (JNIEnv *, jclass, jlong collectorVa) {
+    AllHitCollisionCollector<CastRayCollector> * const pCollector
+            = reinterpret_cast<AllHitCollisionCollector<CastRayCollector> *> (collectorVa);
+    pCollector->Reset();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_AllHitCastRayCollector
  * Method:    sort
  * Signature: (J)V
  */

@@ -66,3 +66,15 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_AnyHitCastRayColl
     const bool result = pCollector->HadHit();
     return result;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_AnyHitCastRayCollector
+ * Method:    reset
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AnyHitCastRayCollector_reset
+  (JNIEnv *, jclass, jlong collectorVa) {
+    AnyHitCollisionCollector<CastRayCollector> * const pCollector
+            = reinterpret_cast<AnyHitCollisionCollector<CastRayCollector> *> (collectorVa);
+    pCollector->Reset();
+}

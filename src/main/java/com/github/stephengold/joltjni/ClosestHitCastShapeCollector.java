@@ -67,6 +67,17 @@ public class ClosestHitCastShapeCollector extends CastShapeCollector {
         return result;
     }
     // *************************************************************************
+    // CastShapeCollector methods
+
+    /**
+     * Reset the collector so it can be reused.
+     */
+    @Override
+    public void reset() {
+        long collectorVa = va();
+        reset(collectorVa);
+    }
+    // *************************************************************************
     // native private methods
 
     native private static long createDefault();
@@ -74,4 +85,6 @@ public class ClosestHitCastShapeCollector extends CastShapeCollector {
     native private static long getHit(long collectorVa);
 
     native private static boolean hadHit(long collectorVa);
+
+    native private static void reset(long collectorVa);
 }

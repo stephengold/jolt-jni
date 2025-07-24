@@ -37,6 +37,13 @@ abstract public class TransformedShapeCollector extends JoltPhysicsObject {
     TransformedShapeCollector() {
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Reset the collector so it can be reused.
+     */
+    abstract public void reset();
+    // *************************************************************************
     // new protected methods
 
     /**

@@ -37,6 +37,13 @@ abstract public class CollidePointCollector extends JoltPhysicsObject {
     CollidePointCollector() {
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Reset the collector so it can be reused.
+     */
+    abstract public void reset();
+    // *************************************************************************
     // new protected methods
 
     /**

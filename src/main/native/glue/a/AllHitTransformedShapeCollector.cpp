@@ -68,3 +68,15 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_AllHitTransformedSha
     TRACE_NEW("TransformedShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_AllHitTransformedShapeCollector
+ * Method:    reset
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AllHitTransformedShapeCollector_reset
+  (JNIEnv *, jclass, jlong collectorVa) {
+    AllHitCollisionCollector<TransformedShapeCollector> * const pCollector
+            = reinterpret_cast<AllHitCollisionCollector<TransformedShapeCollector> *> (collectorVa);
+    pCollector->Reset();
+}
