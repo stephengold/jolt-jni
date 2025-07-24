@@ -62,6 +62,7 @@ $(N)/glue/bo/BoxShapeSettings.cpp \
 $(N)/glue/c/CapsuleShape.cpp \
 $(N)/glue/c/CapsuleShapeSettings.cpp \
 $(N)/glue/c/CastRayCollector.cpp \
+$(N)/glue/c/CastShapeBodyCollector.cpp \
 $(N)/glue/c/CastShapeCollector.cpp \
 $(N)/glue/c/ClosestHitCastRayCollector.cpp \
 $(N)/glue/c/ClosestHitCastShapeCollector.cpp \
