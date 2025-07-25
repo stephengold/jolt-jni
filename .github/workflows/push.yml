@@ -341,12 +341,12 @@ jobs:
   Java21-x-Linux_LoongArch64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 27
     steps:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 27
+          java-version: 21
       - uses: actions/checkout@v4
       - run: sudo apt-get update
       - run: sudo apt install g++-13-loongarch64-linux-gnu
