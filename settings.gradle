@@ -13,6 +13,10 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral() // to find libraries released to the Maven Central repository
         google() // to find libraries released to Google's Maven Repository
+        maven {
+            name = "Central Portal Snapshots"
+            url = uri("https://central.sonatype.com/repository/maven-snapshots/")
+        }
     }
 }
 
