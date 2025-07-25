@@ -8,7 +8,7 @@ jobs:
   Java11-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
-    timeout-minutes: 13
+    timeout-minutes: 15
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -94,7 +94,7 @@ jobs:
   Java21-MacOSX64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macos-13
-    timeout-minutes: 34
+    timeout-minutes: 38
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -160,7 +160,7 @@ jobs:
   Java21-Windows64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2022
-    timeout-minutes: 26
+    timeout-minutes: 32
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -196,7 +196,7 @@ jobs:
   Java21-Windows64_avx2:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: windows-2022
-    timeout-minutes: 26
+    timeout-minutes: 31
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -346,7 +346,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 22
+          java-version: 27
       - uses: actions/checkout@v4
       - run: sudo apt-get update
       - run: sudo apt install g++-13-loongarch64-linux-gnu
@@ -363,7 +363,7 @@ jobs:
   Java24-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
-    timeout-minutes: 14
+    timeout-minutes: 16
     steps:
       - uses: actions/setup-java@v4
         with:
