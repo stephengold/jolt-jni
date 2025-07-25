@@ -1,5 +1,35 @@
 # Release log for the Jolt-JNI project
 
+## Version 2.1.0 released on 24 July 2025
+
++ Bugfixes:
+  + `PhysicsSystem.getPhysicsSystem()` returns `null` after garbage collection
+  + `PhysicsSystem.setBodyActivationListener()` doesn't accept a null argument
+
++ Added classes:
+  + `AaBoxCast`
+  + `CastShapeBodyCollector`
+  + `CollisionEstimationResult`
+  + `CustomCastShapeBodyCollector`
+  + `Impulse`
+  + `OfStream`
+  + `RayInvDirection`
+  + `SimCollideBodyVsBody`
+  + `SimShapeFilter`
+  + `TriangleConvexSupport`
+
++ Added interfaces:
+  + `ConstIndexedTriangle`
+  + `ConstIndexedTriangleNoMaterial`
+  + `ConstTriangle`
+  + `ConstVertexList`
+
++ Added many public methods and constructors to the libraries.
++ Made 4 customizable classes concrete.
++ Deprecated a `StreamOutWrapper` constructor.
++ Added runtime checks to prevent use of soft bodies in 2-body constraints.
++ Updated the Android NDK to r28c.
+
 ## Version 2.0.1 released on 30 June 2025
 
 + API changes:
