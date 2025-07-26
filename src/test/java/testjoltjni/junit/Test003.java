@@ -607,7 +607,11 @@ public class Test003 {
         TestUtils.assertEquals(0f, 0f, 0f, bcs.getAngularVelocity(), 0f);
         Assert.assertFalse(bcs.getApplyGyroscopicForce());
         Assert.assertFalse(bcs.getCollideKinematicVsNonDynamic());
-        Assert.assertNotNull(bcs.getCollisionGroup());
+        Assert.assertNull(bcs.getCollisionGroup().getGroupFilter());
+        Assert.assertEquals(CollisionGroup.cInvalidGroup,
+                bcs.getCollisionGroup().getGroupId());
+        Assert.assertEquals(CollisionGroup.cInvalidSubGroup,
+                bcs.getCollisionGroup().getSubGroupId());
         Assert.assertFalse(bcs.getEnhancedInternalEdgeRemoval());
         Assert.assertEquals(0.2f, bcs.getFriction(), 0f);
         Assert.assertEquals(1f, bcs.getGravityFactor(), 0f);
