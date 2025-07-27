@@ -260,6 +260,23 @@ public class SoftBodyCreationSettings
      * Alter the (initial) location of the body's origin. (native member:
      * mPosition)
      *
+     * @param xx the desired X coordinate (in system coordinates, default=0)
+     * @param yy the desired Y coordinate (in system coordinates, default=0)
+     * @param zz the desired Z coordinate (in system coordinates, default=0)
+     * @return the modified settings, for chaining
+     */
+    public SoftBodyCreationSettings setPosition(
+            double xx, double yy, double zz) {
+        long bodySettingsVa = va();
+        setPosition(bodySettingsVa, xx, yy, zz);
+
+        return this;
+    }
+
+    /**
+     * Alter the (initial) location of the body's origin. (native member:
+     * mPosition)
+     *
      * @param location the desired location (in system coordinates, not null,
      * unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
