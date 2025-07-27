@@ -485,6 +485,32 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
+ * Method:    putRodIndices
+ * Signature: (JILjava/nio/IntBuffer;)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_putRodIndices
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jint bufferPosition,
+  jobject storeIndices) {
+    jint * const pStoreInts
+            = (jint *) pEnv->GetDirectBufferAddress(storeIndices);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong capacityInts = pEnv->GetDirectBufferCapacity(storeIndices);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const SoftBodySharedSettings * const pSettings
+            = reinterpret_cast<SoftBodySharedSettings *> (settingsVa);
+    const Array<SoftBodySharedSettings::RodStretchShear>& rods
+            = pSettings->mRodStretchShearConstraints;
+    const size_t numRods = rods.size();
+    for (size_t i = 0; i < numRods && bufferPosition + 1 < capacityInts; ++i) {
+        const SoftBodySharedSettings::RodStretchShear& rod = rods[i];
+        pStoreInts[bufferPosition++] = rod.mVertex[0];
+        pStoreInts[bufferPosition++] = rod.mVertex[1];
+    }
+    return bufferPosition;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
  * Method:    restoreBinaryState
  * Signature: (JJ)V
  */

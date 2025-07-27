@@ -539,6 +539,21 @@ public class SoftBodySharedSettings
     }
 
     /**
+     * Write the vertex indices of all Cosserat rods to the specified buffer and
+     * advance the buffer's position. The settings are unaffected.
+     *
+     * @param storeIndices the destination buffer (not null, modified)
+     */
+    @Override
+    public void putRodIndices(IntBuffer storeIndices) {
+        long settingsVa = va();
+        int bufferPosition = storeIndices.position();
+        bufferPosition = putRodIndices(
+                settingsVa, bufferPosition, storeIndices);
+        storeIndices.position(bufferPosition);
+    }
+
+    /**
      * Write the state of this object to the specified stream, excluding the
      * materials. The settings are unaffected.
      *
@@ -679,6 +694,9 @@ public class SoftBodySharedSettings
             long settingsVa, int bufferPosition, IntBuffer storeIndices);
 
     native static int putFaceIndices(
+            long settingsVa, int bufferPosition, IntBuffer storeIndices);
+
+    native static int putRodIndices(
             long settingsVa, int bufferPosition, IntBuffer storeIndices);
 
     native static void restoreBinaryState(long settingsVa, long streamVa);

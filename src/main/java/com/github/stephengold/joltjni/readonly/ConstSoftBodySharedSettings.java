@@ -108,6 +108,14 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
     void putFaceIndices(IntBuffer storeIndices);
 
     /**
+     * Write the vertex indices of all Cosserat rods to the specified buffer and
+     * advance the buffer's position. The settings are unaffected.
+     *
+     * @param storeIndices the destination buffer (not null, modified)
+     */
+    void putRodIndices(IntBuffer storeIndices);
+
+    /**
      * Write the state of this object to the specified stream, excluding the
      * materials. The settings are unaffected.
      *
