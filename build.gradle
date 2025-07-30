@@ -207,13 +207,14 @@ model {
                     cppCompiler.define 'JPH_BUILD_SHARED_LIBRARY'
                     cppCompiler.define 'JPH_SHARED_LIBRARY'
                     cppCompiler.define 'WIN32'
-                    cppCompiler.args '/EHsc' // synchronous exceptions only
+                    //cppCompiler.args '/EHsc' // to enable synchronous C++ exceptions
                     cppCompiler.args '/GR-' // disable C++ runtime type info
                     cppCompiler.args "/I$javaHome/include"
                     cppCompiler.args "/I$javaHome/include/win32"
                     cppCompiler.args "/I$projectDir/src/main/native"
                     cppCompiler.args "/I$projectDir/src/main/native/TestFramework" // for External/Perlin.h
                     cppCompiler.args '/std:c++17'
+                    cppCompiler.args '/wd4577' // disable warnings about using noexcept
 
                     if (isDebug) {
                         cppCompiler.define 'JPH_FLOATING_POINT_EXCEPTIONS_ENABLED'
@@ -228,6 +229,7 @@ model {
                     //cppCompiler.args '-v' // to log compiler details
                     //linker.args '-v' // to log linker details
 
+                    cppCompiler.args '-fno-exceptions' // disable C++ exceptions
                     cppCompiler.args '-fno-rtti' // disable C++ runtime type info
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/main/native"
