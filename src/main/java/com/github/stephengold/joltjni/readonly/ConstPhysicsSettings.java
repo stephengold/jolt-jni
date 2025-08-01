@@ -89,4 +89,11 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
      * @return the interval (in seconds, &ge;0)
      */
     float getTimeBeforeSleep();
+
+    /**
+     * Return the speculative contact distance. The settings are unaffected.
+     *
+     * @return the distance (in meters, ≥0)
+     */
+    float getSpeculativeContactDistance();
 }
