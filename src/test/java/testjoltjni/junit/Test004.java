@@ -33,6 +33,7 @@ import com.github.stephengold.joltjni.PhysicsSettings;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EBodyType;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsSettings;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -140,10 +141,10 @@ public class Test004 {
      *
      * @param settings the settings to test (not null, unaffected)
      */
-    private static void testGettersAndDefaults(PhysicsSettings settings) {
+    private static void testGettersAndDefaults(ConstPhysicsSettings settings) {
         Assert.assertNotNull(settings);
         Assert.assertTrue(settings.hasAssignedNativeObject());
-        Assert.assertNotEquals(0L, settings.va());
+        Assert.assertNotEquals(0L, settings.targetVa());
 
         Assert.assertTrue(settings.getAllowSleeping());
         Assert.assertEquals(0.2f, settings.getBaumgarte(), 0f);
