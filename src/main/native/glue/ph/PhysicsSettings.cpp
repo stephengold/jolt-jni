@@ -147,6 +147,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_get
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    getSpeculativeContactDistance
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getSpeculativeContactDistance
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    const float result = pSettings->mSpeculativeContactDistance;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
  * Method:    getTimeBeforeSleep
  * Signature: (J)F
  */
@@ -244,31 +257,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setPo
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSettings
- * Method:    setTimeBeforeSleep
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setTimeBeforeSleep
-  (JNIEnv *, jclass, jlong settingsVa, jfloat interval) {
-    PhysicsSettings * const pSettings
-            = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    pSettings->mTimeBeforeSleep = interval;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSettings
- * Method:    getSpeculativeContactDistance
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_getSpeculativeContactDistance
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PhysicsSettings * const pSettings
-            = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    const float result = pSettings->mSpeculativeContactDistance;
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSettings
  * Method:    setSpeculativeContactDistance
  * Signature: (JF)V
  */
@@ -277,4 +265,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setSp
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
     pSettings->mSpeculativeContactDistance = distance;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_PhysicsSettings
+ * Method:    setTimeBeforeSleep
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setTimeBeforeSleep
+  (JNIEnv *, jclass, jlong settingsVa, jfloat interval) {
+    PhysicsSettings * const pSettings
+            = reinterpret_cast<PhysicsSettings *> (settingsVa);
+    pSettings->mTimeBeforeSleep = interval;
 }

@@ -158,20 +158,6 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the speculative contact distance. The settings are unaffected.
-     * (native attribute: mSpeculativeContactDistance)
-     *
-     * @return the distance (in meters, ≥0)
-     */
-    @Override
-    public float getSpeculativeContactDistance() {
-        long settingsVa = va();
-        float result = getSpeculativeContactDistance(settingsVa);
-        assert result >= 0f : result;
-        return result;
-    }
-
-    /**
      * Alter the time interval before an object can fall asleep. (native
      * attribute: mTimeBeforeSleep)
      *
@@ -290,6 +276,20 @@ public class PhysicsSettings
     }
 
     /**
+     * Return the speculative contact distance. The settings are unaffected.
+     * (native attribute: mSpeculativeContactDistance)
+     *
+     * @return the distance (in meters, ≥0)
+     */
+    @Override
+    public float getSpeculativeContactDistance() {
+        long settingsVa = va();
+        float result = getSpeculativeContactDistance(settingsVa);
+        assert result >= 0f : result;
+        return result;
+    }
+
+    /**
      * Alter the time interval before an object can fall asleep. The settings
      * are unaffected. (native attribute: mTimeBeforeSleep)
      *
@@ -328,6 +328,8 @@ public class PhysicsSettings
     native private static float getPointVelocitySleepThreshold(
             long settingsVa);
 
+    native private static float getSpeculativeContactDistance(long settingsVa);
+
     native private static float getTimeBeforeSleep(long settingsVa);
 
     native private static void setAllowSleeping(
@@ -351,11 +353,9 @@ public class PhysicsSettings
     native private static void setPointVelocitySleepThreshold(
             long settingsVa, float speed);
 
-    native private static void setTimeBeforeSleep(
-            long settingsVa, float interval);
-
-    native private static float getSpeculativeContactDistance(long settingsVa);
-
     native private static void setSpeculativeContactDistance(
             long settingsVa, float distance);
+
+    native private static void setTimeBeforeSleep(
+            long settingsVa, float interval);
 }
