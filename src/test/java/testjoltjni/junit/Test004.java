@@ -150,8 +150,11 @@ public class Test004 {
         Assert.assertTrue(settings.getDeterministicSimulation());
         Assert.assertEquals(2, settings.getNumPositionSteps());
         Assert.assertEquals(10, settings.getNumVelocitySteps());
+        Assert.assertEquals(0.02f, settings.getPenetrationSlop(), 0f);
         Assert.assertEquals(
                 0.03f, settings.getPointVelocitySleepThreshold(), 0f);
+        Assert.assertEquals(
+                0.02f, settings.getSpeculativeContactDistance(), 0f);
         Assert.assertEquals(0.5f, settings.getTimeBeforeSleep(), 0f);
     }
 
