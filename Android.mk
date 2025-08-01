@@ -284,6 +284,7 @@ $(N)/glue/s/SubShape.cpp \
 $(N)/glue/s/SubShapeIdCreator.cpp \
 $(N)/glue/s/SubShapeIdPair.cpp \
 $(N)/glue/s/SupportBuffer.cpp \
+$(N)/glue/s/Support.cpp \
 $(N)/glue/s/SupportingFace.cpp \
 $(N)/glue/s/SwingTwistConstraint.cpp \
 $(N)/glue/s/SwingTwistConstraintSettings.cpp \
