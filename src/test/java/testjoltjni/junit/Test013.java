@@ -174,7 +174,7 @@ public class Test013 {
             int maxBodies = 5;
             BodyIdArray bodyIdArray = new BodyIdArray(maxBodies);
 
-            /* 
+            /*
              * Temporary lists and arrays for storing handles to bodies and
              * native objects so they can be freed
              */
