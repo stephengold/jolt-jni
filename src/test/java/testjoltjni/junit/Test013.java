@@ -22,9 +22,19 @@ SOFTWARE.
 package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.AaBox;
+import com.github.stephengold.joltjni.BodyCreationSettings;
+import com.github.stephengold.joltjni.BodyIdArray;
+import com.github.stephengold.joltjni.BodyInterface;
+import com.github.stephengold.joltjni.BoxShape;
+import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.ConstBody;
+import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -47,6 +57,7 @@ public class Test013 {
         TestUtils.initializeNativeLibrary();
 
         doAaBox();
+        doBodyIdArray();
 
         TestUtils.cleanup();
     }
@@ -140,6 +151,65 @@ public class Test013 {
             TestUtils.assertEquals(1.5f, 0.4f, 0f, boxB.getMax(), 0f);
 
             TestUtils.testClose(boxA, boxB);
+        }
+
+        System.gc();
+    }
+
+    /**
+     * Test basic functionality of the {@code BodyIdArray} class.
+     */
+    private static void doBodyIdArray() {
+        { // creation and destruction of a BodyIdArray:
+            int maxBodies = 3;
+            BodyIdArray bodyIdArray = new BodyIdArray(maxBodies);
+            Assert.assertTrue(bodyIdArray.hasAssignedNativeObject());
+            Assert.assertTrue(bodyIdArray.ownsNativeObject());
+
+            Assert.assertNotEquals(0L, bodyIdArray.va());
+
+            TestUtils.testClose(bodyIdArray);
+        }
+        { // set and get body-identifiers:
+            int maxBodies = 5;
+            BodyIdArray bodyIdArray = new BodyIdArray(maxBodies);
+
+            final ConstBody[] bodyList = new ConstBody[maxBodies];
+            final List<ConstJoltPhysicsObject> physicsObjects =
+                    new ArrayList<>();
+
+            PhysicsSystem system = TestUtils.newPhysicsSystem(maxBodies);
+            BodyInterface bodyInterface = system.getBodyInterface();
+
+            for (int i = 0; i < maxBodies; i += 1) {
+                BoxShape boxShape = new BoxShape(new Vec3(2, 2, 2));
+                BodyCreationSettings bodyCreationSettings =
+                        new BodyCreationSettings()
+                        .setShape(boxShape)
+                        .setMotionType(EMotionType.Static);
+
+                ConstBody body = bodyInterface.createBody(bodyCreationSettings);
+                int bodyId = body.getId();
+
+                bodyList[i] = body;
+                bodyIdArray.set(i, bodyId);
+
+                physicsObjects.add(boxShape);
+                physicsObjects.add(bodyCreationSettings);
+            }
+
+            for (int i = 0; i < maxBodies; i += 1) {
+                ConstBody body = bodyList[i];
+                int bodyId = body.getId();
+                int bodyIdRecovered = bodyIdArray.get(i);
+
+                Assert.assertEquals(bodyId, bodyIdRecovered);
+            }
+
+            TestUtils.testClose(bodyList);
+            TestUtils.testClose(physicsObjects
+                    .toArray(ConstJoltPhysicsObject[]::new));
+            TestUtils.testClose(bodyIdArray, bodyInterface);
         }
 
         System.gc();
