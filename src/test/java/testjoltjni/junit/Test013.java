@@ -170,7 +170,7 @@ public class Test013 {
 
             TestUtils.testClose(bodyIdArray);
         }
-        { // set and get body-identifiers:
+        { // set and get body-identifiers (BodyIdArray[]):
             int maxBodies = 5;
             BodyIdArray bodyIdArray = new BodyIdArray(maxBodies);
 
