@@ -347,11 +347,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getCent
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
-    jdouble * const pDoubles
-            = (jdouble *) pEnv->GetDirectBufferAddress(storeDoubles);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeDoubles);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
     JPH_ASSERT(capacityDoubles >= 3);
     const RVec3 result = pInterface->GetCenterOfMassPosition(id);
     pDoubles[0] = result.GetX();
@@ -473,11 +469,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getPosi
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
-    jdouble * const pDoubles
-            = (jdouble *) pEnv->GetDirectBufferAddress(storeDoubles);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeDoubles);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
     JPH_ASSERT(capacityDoubles >= 3);
     const RVec3 result = pInterface->GetPosition(id);
     pDoubles[0] = result.GetX();
@@ -496,11 +488,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getPosi
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
-    jdouble * const pDoubles
-            = (jdouble *) pEnv->GetDirectBufferAddress(storeDoubles);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeDoubles);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
     JPH_ASSERT(capacityDoubles >= 3);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 4);

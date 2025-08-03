@@ -54,6 +54,14 @@ extern bool gTraceAllocations;
 #define TRACE_DELETE(className, pointer)
 #endif
 /*
+ * Pre-processor macro to generate code to access a direct DoubleBuffer:
+ */
+#define DIRECT_DOUBLE_BUFFER(pEnv, doubleBuffer, pDoubles, capacityDoubles) \
+  jdouble * const pDoubles = (jdouble *) (pEnv)->GetDirectBufferAddress(doubleBuffer); \
+  JPH_ASSERT(!(pEnv)->ExceptionCheck()); \
+  const jlong capacityDoubles = (pEnv)->GetDirectBufferCapacity(doubleBuffer); \
+  JPH_ASSERT(!(pEnv)->ExceptionCheck())
+/*
  * Pre-processor macro to generate code to access a direct FloatBuffer:
  */
 #define DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats) \
