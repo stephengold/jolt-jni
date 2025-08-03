@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/Shape/ConvexShape.h"
 #include "auto/com_github_stephengold_joltjni_Support.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -53,11 +54,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Support_getSupport
     const ConvexShape::Support * const pSupport
             = reinterpret_cast<ConvexShape::Support *> (supportVa);
     const Vec3 direction(dx, dy, dz);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pSupport->GetSupport(direction);
     pFloats[0] = result.GetX();

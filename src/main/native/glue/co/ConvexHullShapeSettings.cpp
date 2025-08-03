@@ -66,11 +66,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_createSettings
   (JNIEnv *pEnv, jclass, jint numPoints, jobject buffer, jfloat maxConvexRadius, jlong materialVa) {
-    const jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const DIRECT_FLOAT_BUFFER(pEnv, buffer, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3 * numPoints);
     Vec3 * const pPoints = new Vec3[numPoints];
     TRACE_NEW("Vec3[]", pPoints)
@@ -176,11 +172,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettin
             = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
     pSettings->mPoints.clear();
     pSettings->mPoints.reserve(numPoints);
-    const jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const DIRECT_FLOAT_BUFFER(pEnv, buffer, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3 * numPoints);
     for (jint i = 0; i < numPoints; ++i) {
         const float x = pFloats[3 * i];

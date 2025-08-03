@@ -729,11 +729,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_getWorldSpaceSur
     SubShapeID id;
     id.SetValue(subShapeId);
     const RVec3 location(xx, yy, zz);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pBody->GetWorldSpaceSurfaceNormal(id, location);
     pFloats[0] = result.GetX();

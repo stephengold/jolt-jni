@@ -72,11 +72,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleConvexSupport
   (JNIEnv *pEnv, jclass, jlong triangleVa, jint vertexIndex, jobject storeFloats) {
     TriangleConvexSupport * const pTriangle
             = reinterpret_cast<TriangleConvexSupport *> (triangleVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     Vec3 result;
     if (vertexIndex == 0) {

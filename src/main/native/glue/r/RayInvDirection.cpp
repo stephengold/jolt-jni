@@ -68,10 +68,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RayInvDirection_getIn
   (JNIEnv *pEnv, jclass, jlong dirVa, jobject buffer) {
     const RayInvDirection * const pDir
             = reinterpret_cast<RayInvDirection *> (dirVa);
-    jfloat * const pFloats = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, buffer, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pDir->mInvDirection;
     pFloats[0] = result.GetX();

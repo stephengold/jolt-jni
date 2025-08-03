@@ -315,11 +315,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getAngu
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pInterface->GetAngularVelocity(id);
     pFloats[0] = result.GetX();
@@ -417,11 +413,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getLine
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pInterface->GetLinearVelocity(id);
     pFloats[0] = result.GetX();
@@ -510,11 +502,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getPosi
     const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeDoubles);
     JPH_ASSERT(!pEnv->ExceptionCheck());
     JPH_ASSERT(capacityDoubles >= 3);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 4);
     RVec3 location;
     Quat orientation;
@@ -552,11 +540,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getRota
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 4);
     const Quat result = pInterface->GetRotation(id);
     pFloats[0] = result.GetX();

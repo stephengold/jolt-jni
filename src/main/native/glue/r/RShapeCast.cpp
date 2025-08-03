@@ -118,11 +118,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RShapeCast_getDirecti
   (JNIEnv *pEnv, jclass, jlong castVa, jobject storeFloats) {
     const RShapeCast * const pShapeCast
             = reinterpret_cast<RShapeCast *> (castVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3& direction = pShapeCast->mDirection;
     pFloats[0] = direction.GetX();

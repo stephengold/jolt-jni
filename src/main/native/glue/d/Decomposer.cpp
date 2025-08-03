@@ -201,12 +201,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_vhacd_Decomposer_deco
             = reinterpret_cast<Decomposer *> (decomposerVa);
     pDecomposer->SetEnableDebugOutput(debugOutput);
 
-    const jfloat * const pPoints
-            = (jfloat *) pEnv->GetDirectBufferAddress(locations);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-
-    const jlong numFloats = pEnv->GetDirectBufferCapacity(locations);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const DIRECT_FLOAT_BUFFER(pEnv, locations, pPoints, numFloats);
     const int32_t numPoints = numFloats / 3;
 
     const jint * const pIndices

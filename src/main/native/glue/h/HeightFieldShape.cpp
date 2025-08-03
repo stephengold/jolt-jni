@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/Shape/HeightFieldShape.h"
 #include "Jolt/Physics/Collision/Shape/SubShapeID.h"
+#include "glue/glue.h"
 
 #include "auto/com_github_stephengold_joltjni_HeightFieldShape.h"
 
@@ -158,9 +159,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_setH
   jfloat cosThresholdAngle) {
     HeightFieldShape * const pShape
             = reinterpret_cast<HeightFieldShape *> (shapeVa);
-    const float * const pHeightArray
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pHeightArray, capacityFloats);
+    JPH_ASSERT(capacityFloats >= sizeX * sizeY);
     TempAllocator * const pAllocator
             = reinterpret_cast<TempAllocator *> (allocatorVa);
     pShape->SetHeights(startX, startY, sizeX, sizeY, pHeightArray, stride,

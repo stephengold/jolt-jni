@@ -161,11 +161,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_encapsulatedTri
     AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
     const IndexedTriangle * const pIndices
             = reinterpret_cast<IndexedTriangle *> (triangleVa);
-    const jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3*numVertices);
     VertexList vertices;
     for (jint i = 0; i < numVertices; ++i) {
@@ -253,11 +249,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_AaBox_getCenterZ
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBox_getClosestPoint
   (JNIEnv *pEnv, jclass, jlong boxVa, jobject floatBuffer) {
     const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 location(pFloats[0], pFloats[1], pFloats[2]);
     const Vec3 result = pBox->GetClosestPoint(location);

@@ -500,11 +500,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_postTranslated
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_putColumnMajor
   (JNIEnv *pEnv, jclass, jlong matrixVa, jint position, jobject storeBuffer) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    jfloat * const pBuffer
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeBuffer, pBuffer, capacityFloats);
     for (size_t c = 0; c < 4; ++c) {
         const size_t baseIndex = position + 4 * c;
         for (size_t r = 0; r < 4; ++r) {

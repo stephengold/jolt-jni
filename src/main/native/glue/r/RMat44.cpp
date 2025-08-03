@@ -476,11 +476,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_postTranslate
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_put3x3ColumnMajor
   (JNIEnv *pEnv, jclass, jlong matrixVa, jint position, jobject storeBuffer) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    jfloat * const pBuffer
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeBuffer, pBuffer, capacityFloats);
     for (size_t c = 0; c < 3; ++c) {
         const size_t baseIndex = position + 3 * c;
         for (size_t r = 0; r < 3; ++r) {
@@ -500,11 +496,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_put3x3ColumnMa
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_putColumnMajor
   (JNIEnv *pEnv, jclass, jlong matrixVa, jint position, jobject storeBuffer) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    jfloat * const pBuffer
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeBuffer, pBuffer, capacityFloats);
     for (size_t c = 0; c < 4; ++c) {
         const size_t baseIndex = position + 4 * c;
         for (size_t r = 0; r < 4; ++r) {

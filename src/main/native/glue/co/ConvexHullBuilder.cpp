@@ -51,11 +51,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_cou
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullBuilder_create
   (JNIEnv *pEnv, jclass, jobject pointBuffer) {
-    const jfloat * const pPoints
-            = (jfloat *) pEnv->GetDirectBufferAddress(pointBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong numFloats = pEnv->GetDirectBufferCapacity(pointBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const DIRECT_FLOAT_BUFFER(pEnv, pointBuffer, pPoints, numFloats);
     const uint64 numPoints = numFloats / 3;
     Array<Vec3> * const pArray = new Array<Vec3>(); // TODO memory leak
     TRACE_NEW("Array<Vec3>", pArray)

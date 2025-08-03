@@ -399,11 +399,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Shape_isValidScal
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_makeScaleValid
   (JNIEnv *pEnv, jclass, jlong shapeVa, jobject storeFloats) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    jfloat * const pFactors
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFactors, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 vec(pFactors[0], pFactors[1], pFactors[2]);
     const Vec3 result = pShape->MakeScaleValid(vec);

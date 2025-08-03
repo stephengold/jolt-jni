@@ -92,11 +92,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings
   (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const TriangleShapeSettings * const pSettings
             = reinterpret_cast<TriangleShapeSettings *> (settingsVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3& result = pSettings->mV1;
     pFloats[0] = result.GetX();
@@ -113,11 +109,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings
   (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const TriangleShapeSettings * const pSettings
             = reinterpret_cast<TriangleShapeSettings *> (settingsVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pSettings->mV2;
     pFloats[0] = result.GetX();
@@ -134,11 +126,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings
   (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const TriangleShapeSettings * const pSettings
             = reinterpret_cast<TriangleShapeSettings *> (settingsVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pSettings->mV3;
     pFloats[0] = result.GetX();

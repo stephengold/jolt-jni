@@ -64,11 +64,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedAaBox_getS
   (JNIEnv *pEnv, jclass, jlong objectVa, jobject floatBuffer) {
     const TransformedConvexObject<AABox> * const pObject
             = reinterpret_cast<TransformedConvexObject<AABox> *> (objectVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 direction(pFloats[0], pFloats[1], pFloats[2]);
     Vec3 result = pObject->GetSupport(direction);
