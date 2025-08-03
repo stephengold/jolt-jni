@@ -188,20 +188,27 @@ public class Test013 {
             for (int i = 0; i < maxBodies; i += 1) {
                 BoxShape boxShape = new BoxShape(new Vec3(2, 2, 2));
                 BodyCreationSettings bodyCreationSettings =
-                        new BodyCreationSettings()
-                        .setShape(boxShape)
-                        .setMotionType(EMotionType.Static);
+                        new BodyCreationSettings();
+
+                bodyCreationSettings.setShape(boxShape)
+                                    .setMotionType(EMotionType.Static);
 
                 ConstBody body = bodyInterface.createBody(bodyCreationSettings);
                 int bodyId = body.getId();
 
+                // store the bodies to verify the integrity of the identifiers
                 bodyList[i] = body;
+                // save the body identifier in the 'bodyIdArray' object
                 bodyIdArray.set(i, bodyId);
 
                 physicsObjects.add(boxShape);
                 physicsObjects.add(bodyCreationSettings);
             }
 
+            /*
+             * Verify data integrity, the identifiers returned from the native
+             * layer must be the same.
+             */
             for (int i = 0; i < maxBodies; i += 1) {
                 ConstBody body = bodyList[i];
                 int bodyId = body.getId();
