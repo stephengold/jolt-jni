@@ -59,7 +59,7 @@ extern bool gTraceAllocations;
  */
 #define BODYOF_CREATE_COPY(className) \
   (JNIEnv *, jclass, jlong originalVa) { \
-    const className * const pOriginal  = reinterpret_cast<className *> (originalVa); \
+    const className * const pOriginal = reinterpret_cast<className *> (originalVa); \
     className * const pResult = new className(*pOriginal); \
     TRACE_NEW(#className, pResult) \
     return reinterpret_cast<jlong> (pResult); \
@@ -76,7 +76,7 @@ extern bool gTraceAllocations;
 }
 /*
  * Pre-processor macro to generate the body of a static free() method
- * to implement a no-arg constructor:
+ * to implement a destructor:
  */
 #define BODYOF_FREE(className) \
   (JNIEnv *, jclass, jlong va) { \
