@@ -65,10 +65,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationRe
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_getAngularVelocity1
-  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject floatBuffer) {
+  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject storeFloats) {
     const CollisionEstimationResult * const pEstimate
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
-    DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 &result = pEstimate->mAngularVelocity1;
     pFloats[0] = result.GetX();
@@ -82,10 +82,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationRe
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_getAngularVelocity2
-  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject floatBuffer) {
+  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject storeFloats) {
     const CollisionEstimationResult * const pEstimate
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
-    DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 &result = pEstimate->mAngularVelocity2;
     pFloats[0] = result.GetX();
@@ -113,10 +113,10 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationR
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_getLinearVelocity1
-  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject floatBuffer) {
+  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject storeFloats) {
     const CollisionEstimationResult * const pEstimate
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
-    DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 &result = pEstimate->mLinearVelocity1;
     pFloats[0] = result.GetX();
@@ -130,10 +130,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationRe
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_getLinearVelocity2
-  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject floatBuffer) {
+  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject storeFloats) {
     const CollisionEstimationResult * const pEstimate
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
-    DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 &result = pEstimate->mLinearVelocity2;
     pFloats[0] = result.GetX();

@@ -64,9 +64,9 @@ public class RayInvDirection extends JoltPhysicsObject {
      */
     public Vec3 getInvDirection() {
         long dirVa = va();
-        FloatBuffer buffer = Temporaries.floatBuffer1.get();
-        getInvDirection(dirVa, buffer);
-        Vec3 result = new Vec3(buffer);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getInvDirection(dirVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -105,7 +105,8 @@ public class RayInvDirection extends JoltPhysicsObject {
 
     native private static void free(long dirVa);
 
-    native private static void getInvDirection(long dirVa, FloatBuffer buffer);
+    native private static void getInvDirection(
+            long dirVa, FloatBuffer storeFloats);
 
     native private static void set(long dirVa, float dx, float dy, float dz);
 

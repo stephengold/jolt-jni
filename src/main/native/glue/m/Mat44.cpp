@@ -498,9 +498,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_postTranslated
  * Signature: (JILjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_putColumnMajor
-  (JNIEnv *pEnv, jclass, jlong matrixVa, jint position, jobject storeBuffer) {
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jint position, jobject storeFloats) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    DIRECT_FLOAT_BUFFER(pEnv, storeBuffer, pBuffer, capacityFloats);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pBuffer, capacityFloats);
     for (size_t c = 0; c < 4; ++c) {
         const size_t baseIndex = position + 4 * c;
         for (size_t r = 0; r < 4; ++r) {
