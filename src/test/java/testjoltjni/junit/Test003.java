@@ -55,6 +55,7 @@ import com.github.stephengold.joltjni.TempAllocatorImplWithMallocFallback;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
+import com.github.stephengold.joltjni.Vertex;
 import com.github.stephengold.joltjni.WheelSettingsWv;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
 import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
@@ -69,6 +70,7 @@ import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
+import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -118,6 +120,7 @@ public class Test003 {
         doTempAllocatorImplWithMallocFallback();
         doTempAllocatorMalloc();
         doVehicleConstraintSettings();
+        doVertex();
         doWvControllerSettings();
         doWheelSettingsWv();
 
@@ -560,6 +563,19 @@ public class Test003 {
         testVehicleConstraintSettingsSetters(vcs);
 
         TestUtils.testClose(vcs);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code Vertex} class.
+     */
+    private static void doVertex() {
+        Vertex vertex = new Vertex();
+
+        testVertexDefaults(vertex);
+        testVertexSetters(vertex);
+
+        TestUtils.testClose(vertex);
         System.gc();
     }
 
@@ -1163,6 +1179,32 @@ public class Test003 {
         Assert.assertEquals(5, vcs.getNumVelocityStepsOverride());
         Assert.assertEquals(1, vcs.getNumWheels());
         TestUtils.assertEquals(0f, 0f, -1f, vcs.getUp(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code Vertex}.
+     *
+     * @param vertex the vertex to test (not null, unaffected)
+     */
+    private static void testVertexDefaults(ConstVertex vertex) {
+        Assert.assertEquals(1f, vertex.getInvMass(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, vertex.getPosition(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, vertex.getVelocity(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code Vertex}.
+     *
+     * @param vertex the vertex to test (not null, modified)
+     */
+    private static void testVertexSetters(Vertex vertex) {
+        vertex.setInvMass(3f);
+        vertex.setPosition(4f, 5f, 6f);
+        vertex.setVelocity(7f, 8f, 9f);
+
+        Assert.assertEquals(3f, vertex.getInvMass(), 0f);
+        TestUtils.assertEquals(4f, 5f, 6f, vertex.getPosition(), 0f);
+        TestUtils.assertEquals(7f, 8f, 9f, vertex.getVelocity(), 0f);
     }
 
     /**
