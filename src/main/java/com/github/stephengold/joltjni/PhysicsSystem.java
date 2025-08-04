@@ -331,31 +331,6 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Retrieve the states of all inactive bodies of a specific type.
-     *
-     * @param bodyType the type of bodies to retrieve (not null)
-     * @param outBodyIds an array to be filled with the body IDs (not null)
-     * @param outPositions an array for positions (x, y, z); requires 3 elements
-     * per body (not null)
-     * @param outRotations an array for rotations (x, y, z, w); requires 4
-     * elements per body (not null)
-     * @return the number of inactive bodies whose states were written to the
-     * arrays
-     */
-    public int getInactiveBodyStates(
-            EBodyType bodyType,
-            int[] outBodyIds,
-            double[] outPositions,
-            float[] outRotations) {
-        long systemVa = va();
-        int ordinal = bodyType.ordinal();
-        int result = getInactiveBodyStates(systemVa, ordinal,
-                outBodyIds, outPositions, outRotations);
-
-        return result;
-    }
-
-    /**
      * Access the system's {@code BodyInterface}.
      *
      * @return the pre-existing JVM object (not null)
@@ -556,6 +531,31 @@ public class PhysicsSystem extends NonCopyable {
         float y = getGravityY(systemVa);
         float z = getGravityZ(systemVa);
         Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Retrieve the states of all inactive bodies of a specific type.
+     *
+     * @param bodyType the type of bodies to retrieve (not null)
+     * @param outBodyIds an array to be filled with the body IDs (not null)
+     * @param outPositions an array for positions (x, y, z); requires 3 elements
+     * per body (not null)
+     * @param outRotations an array for rotations (x, y, z, w); requires 4
+     * elements per body (not null)
+     * @return the number of inactive bodies whose states were written to the
+     * arrays
+     */
+    public int getInactiveBodyStates(
+            EBodyType bodyType,
+            int[] outBodyIds,
+            double[] outPositions,
+            float[] outRotations) {
+        long systemVa = va();
+        int ordinal = bodyType.ordinal();
+        int result = getInactiveBodyStates(systemVa, ordinal,
+                outBodyIds, outPositions, outRotations);
 
         return result;
     }
