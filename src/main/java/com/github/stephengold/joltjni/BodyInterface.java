@@ -118,6 +118,18 @@ public class BodyInterface extends NonCopyable {
      *
      * @param bodyIds the IDs of the bodies to be added (not null, unmodified
      * since the handle was created)
+     * @param addState the handle returned by {@code addBodiesPrepare()}
+     */
+    public void addBodiesAbort(BodyIdArray bodyIds, long addState) {
+        int numBodies = bodyIds.length();
+        addBodiesAbort(bodyIds, numBodies, addState);
+    }
+
+    /**
+     * Abort adding bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
@@ -126,6 +138,20 @@ public class BodyInterface extends NonCopyable {
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.va();
         addBodiesAbort(bodyInterfaceVa, arrayVa, numBodies, addState);
+    }
+
+    /**
+     * Finish adding bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
+     * @param addState the handle returned by {@code addBodiesPrepare()}
+     * @param activation whether to activate the bodies (not null)
+     */
+    public void addBodiesFinalize(
+            BodyIdArray bodyIds, long addState, EActivation activation) {
+        int numBodies = bodyIds.length();
+        addBodiesFinalize(bodyIds, numBodies, addState, activation);
     }
 
     /**
@@ -144,6 +170,21 @@ public class BodyInterface extends NonCopyable {
         int activationOrdinal = activation.ordinal();
         addBodiesFinalize(bodyInterfaceVa, arrayVa, numBodies, addState,
                 activationOrdinal);
+    }
+
+    /**
+     * Prepare to add a batch of bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, possibly
+     * shuffled)
+     * @return a handle to be passed to {@code addBodiesFinalize()} or
+     * {@code addBodiesAbort()}
+     */
+    public long addBodiesPrepare(BodyIdArray bodyIds) {
+        int numBodies = bodyIds.length();
+        long result = addBodiesPrepare(bodyIds, numBodies);
+
+        return result;
     }
 
     /**
