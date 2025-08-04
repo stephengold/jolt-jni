@@ -104,6 +104,9 @@ public class BodyIdArray extends JoltPhysicsObject {
      * @return the {@code BodyID} value
      */
     public int get(int elementIndex) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         int result = getId(arrayVa, elementIndex);
 
@@ -126,6 +129,9 @@ public class BodyIdArray extends JoltPhysicsObject {
      * @param bodyId the ID to store
      */
     public void set(int elementIndex, int bodyId) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         setId(arrayVa, elementIndex, bodyId);
     }
