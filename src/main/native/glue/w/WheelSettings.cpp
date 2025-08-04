@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Vehicle/Wheel.h"
 #include "auto/com_github_stephengold_joltjni_WheelSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -44,41 +45,19 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_WheelSettings_get
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getPositionX
- * Signature: (J)F
+ * Method:    getPosition
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getPositionX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getPosition
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const WheelSettings * const pSettings
             = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mPosition.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getPositionY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getPositionY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mPosition.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getPositionZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getPositionZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mPosition.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mPosition;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -96,119 +75,53 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getRa
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getSteeringAxisX
- * Signature: (J)F
+ * Method:    getSteeringAxis
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSteeringAxisX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSteeringAxis
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const WheelSettings * const pSettings
             = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mSteeringAxis.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mSteeringAxis;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getSteeringAxisY
- * Signature: (J)F
+ * Method:    getSuspensionDirection
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSteeringAxisY
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSuspensionDirection
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const WheelSettings * const pSettings
             = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mSteeringAxis.GetY();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mSuspensionDirection;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getSteeringAxisZ
- * Signature: (J)F
+ * Method:    getSuspensionForcePoint
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSteeringAxisZ
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSuspensionForcePoint
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const WheelSettings * const pSettings
             = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mSteeringAxis.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getSuspensionDirectionX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSuspensionDirectionX
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mSuspensionDirection.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getSuspensionDirectionY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSuspensionDirectionY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mSuspensionDirection.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getSuspensionDirectionZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSuspensionDirectionZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mSuspensionDirection.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getSuspensionForcePointX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSuspensionForcePointX
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mSuspensionForcePoint.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getSuspensionForcePointY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSuspensionForcePointY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mSuspensionForcePoint.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getSuspensionForcePointZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSuspensionForcePointZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mSuspensionForcePoint.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mSuspensionForcePoint;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -265,80 +178,36 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getSus
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getWheelForwardX
- * Signature: (J)F
+ * Method:    getWheelForward
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getWheelForwardX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getWheelForward
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const WheelSettings * const pSettings
             = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mWheelForward.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mWheelForward;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getWheelForwardY
- * Signature: (J)F
+ * Method:    getWheelUp
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getWheelForwardY
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getWheelUp
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const WheelSettings * const pSettings
             = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mWheelForward.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getWheelForwardZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getWheelForwardZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mWheelForward.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getWheelUpX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getWheelUpX
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mWheelUp.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getWheelUpY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getWheelUpY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mWheelUp.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_WheelSettings
- * Method:    getWheelUpZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettings_getWheelUpZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const WheelSettings * const pSettings
-            = reinterpret_cast<WheelSettings *> (settingsVa);
-    const float result = pSettings->mWheelUp.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mWheelUp;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
