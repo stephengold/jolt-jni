@@ -94,6 +94,7 @@ import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstVehicleControllerSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
+import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
 import com.github.stephengold.joltjni.std.StringStream;
 import com.github.stephengold.joltjni.streamutils.IdToGroupFilterMap;
 import com.github.stephengold.joltjni.streamutils.IdToMaterialMap;
@@ -1317,17 +1318,17 @@ public class Test012 {
 
         { // serialize and then deserialize binary state:
             String serialData = serializeCooked(wheel);
-            WheelSettingsTv wheelCopy = dcWheelSettingsTv(serialData);
+            ConstWheelSettingsTv wheelCopy = dcWheelSettingsTv(serialData);
 
-            Assert.assertNotEquals(wheel.va(), wheelCopy.va());
+            Assert.assertNotEquals(wheel.va(), wheelCopy.targetVa());
             Equivalent.wheelSettings(wheel, wheelCopy);
             TestUtils.testClose(wheelCopy);
         }
 
         { // copy constructor:
-            WheelSettingsTv wheelCopy = new WheelSettingsTv(wheel);
+            ConstWheelSettingsTv wheelCopy = new WheelSettingsTv(wheel);
 
-            Assert.assertNotEquals(wheel.va(), wheelCopy.va());
+            Assert.assertNotEquals(wheel.va(), wheelCopy.targetVa());
             Equivalent.wheelSettings(wheel, wheelCopy);
             TestUtils.testClose(wheelCopy);
         }

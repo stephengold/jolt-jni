@@ -57,8 +57,8 @@ public class WheelSettingsTv
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public WheelSettingsTv(WheelSettingsTv original) {
-        long originalVa = original.va();
+    public WheelSettingsTv(ConstWheelSettingsTv original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa); // not owner due to ref counting
     }
