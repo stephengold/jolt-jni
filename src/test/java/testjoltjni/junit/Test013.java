@@ -191,6 +191,7 @@ public class Test013 {
             Assert.assertEquals(501, bodyIdArray.get(3));
             Assert.assertEquals(689, bodyIdArray.get(2));
             Assert.assertEquals(600, bodyIdArray.get(0));
+
             TestUtils.testClose(bodyIdArray);
         }
         { // IntBuffer constructor:
@@ -242,6 +243,7 @@ public class Test013 {
             Assert.assertEquals(501, bodyIdArray.get(0));
             Assert.assertEquals(689, bodyIdArray.get(2));
             Assert.assertEquals(600, bodyIdArray.get(5));
+
             TestUtils.testClose(bodyIdArray);
         }
 

@@ -331,7 +331,7 @@ public class Test003 {
             TestUtils.testClose(bodyIdArray);
         }
         { // constructor with List<Integer> argument
-            List<Integer> idList = new ArrayList<>();
+            List<Integer> idList = new ArrayList<>(1);
             idList.add(0);  // to avoid an empty list in the native layer.
 
             BodyIdArray bodyIdArray = new BodyIdArray(idList);
