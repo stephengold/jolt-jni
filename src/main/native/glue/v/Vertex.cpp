@@ -82,7 +82,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Vertex_getPosition
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Vertex_getVelocity
-   (JNIEnv *pEnv, jclass, jlong vertexVa, jobject storeFloats) {
+  (JNIEnv *pEnv, jclass, jlong vertexVa, jobject storeFloats) {
     const SoftBodySharedSettings::Vertex * const pVertex
             = reinterpret_cast<SoftBodySharedSettings::Vertex *> (vertexVa);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);

@@ -40,7 +40,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControl
     const WheeledVehicleController * const pController
             = reinterpret_cast<WheeledVehicleController *> (controllerVa);
     const Array<VehicleDifferentialSettings>& array
-             = pController->GetDifferentials();
+            = pController->GetDifferentials();
     const size_t result = array.size();
     return result;
 }
@@ -68,7 +68,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContro
     const WheeledVehicleController * const pController
             = reinterpret_cast<WheeledVehicleController *> (controllerVa);
     const Array<VehicleDifferentialSettings>& array
-             = pController->GetDifferentials();
+            = pController->GetDifferentials();
     const VehicleDifferentialSettings& result = array[index];
     return reinterpret_cast<jlong> (&result);
 }
