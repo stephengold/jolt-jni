@@ -996,9 +996,6 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static long getBodyActivationListener(long systemVa);
 
-    native private static int getInactiveBodyStates(long systemVa, int bodyType,
-                                                    int[] outBodyIds, double[] outPositions, float[] outRotations);
-
     native private static long getBodyInterface(long systemVa);
 
     native private static long getBodyInterfaceNoLock(long systemVa);
@@ -1025,6 +1022,9 @@ public class PhysicsSystem extends NonCopyable {
     native private static float getGravityY(long systemVa);
 
     native private static float getGravityZ(long systemVa);
+
+    native private static int getInactiveBodyStates(long systemVa, int bodyType,
+                                                    int[] outBodyIds, double[] outPositions, float[] outRotations);
 
     native private static long getNarrowPhaseQuery(long systemVa);
 
