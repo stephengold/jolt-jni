@@ -178,18 +178,41 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the constraint location for body 1. (native attribute: mPoint1)
      *
+     * @param xx the desired X component (default=0)
+     * @param yy the desired Y component (default=0)
+     * @param zz the desired Z component (default=0)
+     */
+    public void setPoint1(double xx, double yy, double zz) {
+        long settingsVa = va();
+        setPoint1(settingsVa, xx, yy, zz);
+    }
+
+    /**
+     * Alter the constraint location for body 1. (native attribute: mPoint1)
+     *
      * @param location the desired location (not null, unaffected,
      * default=(0,0,0))
      * @return the argument, for chaining
      */
     public RVec3Arg setPoint1(RVec3Arg location) {
-        long settingsVa = va();
-        double x = location.xx();
-        double y = location.yy();
-        double z = location.zz();
-        setPoint1(settingsVa, x, y, z);
+        double xx = location.xx();
+        double yy = location.yy();
+        double zz = location.zz();
+        setPoint1(xx, yy, zz);
 
         return location;
+    }
+
+    /**
+     * Alter the constraint location for body 2. (native attribute: mPoint2)
+     *
+     * @param xx the desired X component (default=0)
+     * @param yy the desired Y component (default=0)
+     * @param zz the desired Z component (default=0)
+     */
+    public void setPoint2(double xx, double yy, double zz) {
+        long settingsVa = va();
+        setPoint2(settingsVa, xx, yy, zz);
     }
 
     /**
@@ -200,11 +223,10 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
      * @return the argument, for chaining
      */
     public RVec3Arg setPoint2(RVec3Arg location) {
-        long settingsVa = va();
-        double x = location.xx();
-        double y = location.yy();
-        double z = location.zz();
-        setPoint2(settingsVa, x, y, z);
+        double xx = location.xx();
+        double yy = location.yy();
+        double zz = location.zz();
+        setPoint2(xx, yy, zz);
 
         return location;
     }
