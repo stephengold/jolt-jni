@@ -41,7 +41,7 @@ public class BodyIdArray extends JoltPhysicsObject {
     // constructors
 
     /**
-     * Instantiate an array with the specified length.
+     * Instantiate an uninitialized array with the specified length.
      *
      * @param length the desired number of IDs (&ge;0)
      */
