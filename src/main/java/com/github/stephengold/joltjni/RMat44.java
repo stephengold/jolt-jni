@@ -578,9 +578,10 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     @Override
     public Vec3 multiply3x3(Vec3Arg vec3Arg) {
         long matrixVa = va();
-        float[] tmpFloats = vec3Arg.toArray();
-        multiply3x3(matrixVa, tmpFloats);
-        Vec3 result = new Vec3(tmpFloats);
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        vec3Arg.copyTo(floatBuffer);
+        multiply3x3(matrixVa, floatBuffer);
+        Vec3 result = new Vec3(floatBuffer);
 
         return result;
     }
@@ -595,9 +596,10 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     @Override
     public Vec3 multiply3x3Transposed(Vec3Arg rightVector) {
         long matrixVa = va();
-        float[] tmpFloats = rightVector.toArray();
-        multiply3x3Transposed(matrixVa, tmpFloats);
-        Vec3 result = new Vec3(tmpFloats);
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        rightVector.copyTo(floatBuffer);
+        multiply3x3Transposed(matrixVa, floatBuffer);
+        Vec3 result = new Vec3(floatBuffer);
 
         return result;
     }
@@ -684,14 +686,14 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * column-major order and advance the buffer's position by 9. The matrix is
      * unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeFloats the destination buffer (not null)
      */
     @Override
-    public void put3x3ColumnMajor(FloatBuffer storeBuffer) {
-        int position = storeBuffer.position();
+    public void put3x3ColumnMajor(FloatBuffer storeFloats) {
+        int position = storeFloats.position();
         long matrixVa = va();
-        put3x3ColumnMajor(matrixVa, position, storeBuffer);
-        storeBuffer.position(position + 9);
+        put3x3ColumnMajor(matrixVa, position, storeFloats);
+        storeFloats.position(position + 9);
     }
 
     /**
@@ -699,14 +701,14 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * column-major order and advance the buffer's position by 16. The matrix is
      * unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeFloats the destination buffer (not null)
      */
     @Override
-    public void putColumnMajor(FloatBuffer storeBuffer) {
-        int position = storeBuffer.position();
+    public void putColumnMajor(FloatBuffer storeFloats) {
+        int position = storeFloats.position();
         long matrixVa = va();
-        putColumnMajor(matrixVa, position, storeBuffer);
-        storeBuffer.position(position + 16);
+        putColumnMajor(matrixVa, position, storeFloats);
+        storeFloats.position(position + 16);
     }
 
     /**
@@ -810,10 +812,11 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
 
     native private static long multiply(long leftVa, long rightVa);
 
-    native private static void multiply3x3(long matrixVa, float[] tmpFloats);
+    native private static void multiply3x3(
+            long matrixVa, FloatBuffer floatBuffer);
 
     native private static void multiply3x3Transposed(
-            long matrixVa, float[] tmpFloats);
+            long matrixVa, FloatBuffer floatBuffer);
 
     native private static void multiply3x4(
             long matrixVa, float x, float y, float z, double[] storeDoubles);
@@ -829,10 +832,10 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
             long matrixVa, float x, float y, float z);
 
     native private static void put3x3ColumnMajor(
-            long matrixVa, int position, FloatBuffer storeBuffer);
+            long matrixVa, int position, FloatBuffer storeFloats);
 
     native private static void putColumnMajor(
-            long matrixVa, int position, FloatBuffer storeBuffer);
+            long matrixVa, int position, FloatBuffer storeFloats);
 
     native private static void rightMultiplyInPlace(
             long currentVa, long rightVa);

@@ -626,6 +626,19 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Write all 3 components to the start of the specified buffer. The vector
+     * is unaffected.
+     *
+     * @param storeFloats the destination buffer (not null, capacity&ge;3)
+     */
+    @Override
+    public void copyTo(FloatBuffer storeFloats) {
+        storeFloats.put(0, x);
+        storeFloats.put(1, y);
+        storeFloats.put(2, z);
+    }
+
+    /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
      * @param rightFactor the vector to cross with the current one (not null,
@@ -1020,9 +1033,7 @@ final public class Vec3 implements Vec3Arg {
     @Override
     public FloatBuffer toBuffer() {
         FloatBuffer result = Jolt.newDirectFloatBuffer(3);
-        result.put(0, x);
-        result.put(1, y);
-        result.put(2, z);
+        copyTo(result);
 
         return result;
     }

@@ -344,11 +344,7 @@ inline static const RVec3 getCenterOfMassPosition(jlong bodyVa) {
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_getCenterOfMassPositionToBuf
   (JNIEnv *pEnv, jclass, jlong bodyVa, jobject storeResult) {
     const RVec3 location = getCenterOfMassPosition(bodyVa);
-    jdouble * const pDoubles
-            = (jdouble *) pEnv->GetDirectBufferAddress(storeResult);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeResult);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_DOUBLE_BUFFER(pEnv, storeResult, pDoubles, capacityDoubles);
     JPH_ASSERT(capacityDoubles >= 3);
     pDoubles[0] = location.GetX();
     pDoubles[1] = location.GetY();
@@ -729,11 +725,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_getWorldSpaceSur
     SubShapeID id;
     id.SetValue(subShapeId);
     const RVec3 location(xx, yy, zz);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pBody->GetWorldSpaceSurfaceNormal(id, location);
     pFloats[0] = result.GetX();

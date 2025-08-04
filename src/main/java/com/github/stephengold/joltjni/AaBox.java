@@ -337,9 +337,10 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     @Override
     public Vec3 getClosestPoint(Vec3Arg location) {
         long boxVa = va();
-        FloatBuffer buffer = location.toBuffer();
-        getClosestPoint(boxVa, buffer);
-        Vec3 result = new Vec3(buffer);
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        location.copyTo(floatBuffer);
+        getClosestPoint(boxVa, floatBuffer);
+        Vec3 result = new Vec3(floatBuffer);
 
         return result;
     }

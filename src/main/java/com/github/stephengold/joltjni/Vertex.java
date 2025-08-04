@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Attributes of a particle, for use during the creation of a soft body. (native
@@ -71,9 +72,9 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     /**
      * Alter the initial location of the vertex. (native attribute: mPosition)
      *
-     * @param x the desired X coordinate
-     * @param y the desired Y coordinate
-     * @param z the desired Z coordinate
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
      * @return the modified settings, for chaining
      */
     public Vertex setPosition(float x, float y, float z) {
@@ -118,11 +119,11 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     }
 
     /**
-     * Alter the initial location of the vertex. (native attribute: mPosition)
+     * Alter the initial velocity of the vertex. (native attribute: mVelocity)
      *
-     * @param x the desired X component
-     * @param y the desired Y component
-     * @param z the desired Z component
+     * @param x the desired X component (default=0)
+     * @param y the desired Y component (default=0)
+     * @param z the desired Z component (default=0)
      * @return the modified settings, for chaining
      */
     public Vertex setVelocity(float x, float y, float z) {
@@ -191,10 +192,9 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     @Override
     public Float3 getPosition() {
         long vertexVa = va();
-        float x = getPositionX(vertexVa);
-        float y = getPositionY(vertexVa);
-        float z = getPositionZ(vertexVa);
-        Float3 result = new Float3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPosition(vertexVa, storeFloats);
+        Float3 result = new Float3(storeFloats);
 
         return result;
     }
@@ -208,10 +208,9 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     @Override
     public Float3 getVelocity() {
         long vertexVa = va();
-        float x = getVelocityX(vertexVa);
-        float y = getVelocityY(vertexVa);
-        float z = getVelocityZ(vertexVa);
-        Float3 result = new Float3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getVelocity(vertexVa, storeFloats);
+        Float3 result = new Float3(storeFloats);
 
         return result;
     }
@@ -224,17 +223,11 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
 
     native private static float getInvMass(long vertexVa);
 
-    native private static float getPositionX(long vertexVa);
+    native private static void getPosition(
+            long vertexVa, FloatBuffer storeFloats);
 
-    native private static float getPositionY(long vertexVa);
-
-    native private static float getPositionZ(long vertexVa);
-
-    native private static float getVelocityX(long vertexVa);
-
-    native private static float getVelocityY(long vertexVa);
-
-    native private static float getVelocityZ(long vertexVa);
+    native private static void getVelocity(
+            long vertexVa, FloatBuffer storeFloats);
 
     native private static void setInvMass(long vertexVa, float invMass);
 

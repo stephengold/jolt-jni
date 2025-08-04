@@ -46,6 +46,18 @@ abstract public class BroadPhase extends BroadPhaseQuery {
      *
      * @param bodyIds the IDs of the bodies to be added (not null, unmodified
      * since the handle was created)
+     * @param addState the handle returned by {@code addBodiesPrepare()}
+     */
+    public void addBodiesAbort(BodyIdArray bodyIds, long addState) {
+        int numBodies = bodyIds.length();
+        addBodiesAbort(bodyIds, numBodies, addState);
+    }
+
+    /**
+     * Abort adding bodies to the phase.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
@@ -61,6 +73,18 @@ abstract public class BroadPhase extends BroadPhaseQuery {
      *
      * @param bodyIds the IDs of the bodies to be added (not null, unmodified
      * since the handle was created)
+     * @param addState the handle returned by {@code addBodiesPrepare()}
+     */
+    public void addBodiesFinalize(BodyIdArray bodyIds, long addState) {
+        int numBodies = bodyIds.length();
+        addBodiesFinalize(bodyIds, numBodies, addState);
+    }
+
+    /**
+     * Finish adding bodies to the phase.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
      * @param numBodies the number of bodies to be added (&ge;0)
      * @param addState the handle returned by {@code addBodiesPrepare()}
      */
@@ -69,6 +93,21 @@ abstract public class BroadPhase extends BroadPhaseQuery {
         long phaseVa = va();
         long arrayVa = bodyIds.va();
         addBodiesFinalize(phaseVa, arrayVa, numBodies, addState);
+    }
+
+    /**
+     * Prepare to add a batch of bodies to the phase.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, possibly
+     * shuffled)
+     * @return a handle to be passed to {@code addBodiesFinalize()} or
+     * {@code addBodiesAbort()}
+     */
+    public long addBodiesPrepare(BodyIdArray bodyIds) {
+        int numBodies = bodyIds.length();
+        long result = addBodiesPrepare(bodyIds, numBodies);
+
+        return result;
     }
 
     /**

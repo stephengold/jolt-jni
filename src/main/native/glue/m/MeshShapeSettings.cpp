@@ -79,11 +79,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_createMeshShapeSettings
   (JNIEnv *pEnv, jclass, jint numVertices, jobject buffer, jlong indicesVa) {
-    const jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const DIRECT_FLOAT_BUFFER(pEnv, buffer, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3*numVertices);
     VertexList vertices;
     for (jint i = 0; i < numVertices; ++i) {
@@ -93,7 +89,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
         const Float3 float3(x, y, z);
         vertices.push_back(float3);
     }
-    IndexedTriangleList * const pIndices
+    const IndexedTriangleList * const pIndices
             = reinterpret_cast<IndexedTriangleList *> (indicesVa);
     MeshShapeSettings * const pSettings
             = new MeshShapeSettings(vertices, *pIndices);
@@ -108,11 +104,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_createSettingsFromTriangles
   (JNIEnv *pEnv, jclass, jint numTriangles, jobject buffer, jlong materialsVa) {
-    const jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const DIRECT_FLOAT_BUFFER(pEnv, buffer, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 9*numTriangles);
     TriangleList triangles;
     for (jint i = 0; i < numTriangles; ++i) {

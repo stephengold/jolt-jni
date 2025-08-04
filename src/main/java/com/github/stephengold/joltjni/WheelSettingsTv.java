@@ -21,12 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
+
 /**
  * Settings used to construct a {@code WheelTv}. (native type: WheelSettingsTV)
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class WheelSettingsTv extends WheelSettings {
+public class WheelSettingsTv
+        extends WheelSettings
+        implements ConstWheelSettingsTv {
     // *************************************************************************
     // constructors
 
@@ -53,10 +57,64 @@ public class WheelSettingsTv extends WheelSettings {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public WheelSettingsTv(WheelSettingsTv original) {
-        long originalVa = original.va();
+    public WheelSettingsTv(ConstWheelSettingsTv original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa); // not owner due to ref counting
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Alter the wheel's friction in the sideways direction. (native attribute:
+     * mLateralFriction)
+     *
+     * @param friction the desired friction (default=2)
+     */
+    public void setLateralFriction(float friction) {
+        long settingsVa = va();
+        setLateralFriction(settingsVa, friction);
+    }
+
+    /**
+     * Alter the wheel's friction in the forward direction. (native attribute:
+     * mLongitudinalFriction)
+     *
+     * @param friction the desired friction (default=4)
+     */
+    public void setLongitudinalFriction(float friction) {
+        long settingsVa = va();
+        setLongitudinalFriction(settingsVa, friction);
+    }
+    // *************************************************************************
+    // ConstWheelSettingsTv methods
+
+    /**
+     * Return the tire's friction in the sideways direction. The settings are
+     * unaffected. (native attribute: mLateralFriction)
+     *
+     * @return the friction
+     */
+    @Override
+    public float getLateralFriction() {
+        long settingsVa = va();
+        float result = getLateralFriction(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the tire's friction in the forward direction. The settings are
+     * unaffected. (native attribute: mLongitudinalFriction)
+     *
+     * @return the friction
+     */
+    @Override
+    public float getLongitudinalFriction() {
+        long settingsVa = va();
+        float result = getLongitudinalFriction(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // WheelSettings methods
@@ -104,9 +162,19 @@ public class WheelSettingsTv extends WheelSettings {
 
     native private static long createDefault();
 
+    native private static float getLateralFriction(long settingsVa);
+
+    native private static float getLongitudinalFriction(long settingsVa);
+
     native private static int getRefCount(long settingsVa);
 
     native private static void setEmbedded(long settingsVa);
+
+    native private static void setLateralFriction(
+            long settingsVa, float friction);
+
+    native private static void setLongitudinalFriction(
+            long settingsVa, float friction);
 
     native private static long toRef(long settingsVa);
 }

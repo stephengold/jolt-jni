@@ -106,7 +106,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_IndexedTriangleList_s
   (JNIEnv *, jclass, jlong listVa, jint listIndex, jlong triangleVa) {
     IndexedTriangleList * const pList
             = reinterpret_cast<IndexedTriangleList *> (listVa);
-    IndexedTriangle * const pTriangle
+    const IndexedTriangle * const pTriangle
             = reinterpret_cast<IndexedTriangle *> (triangleVa);
     pList->at(listIndex) = *pTriangle;
 }

@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code Wheel}.
@@ -307,10 +308,9 @@ abstract public class WheelSettings
     @Override
     public Vec3 getPosition() {
         long settingsVa = va();
-        float x = getPositionX(settingsVa);
-        float y = getPositionY(settingsVa);
-        float z = getPositionZ(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPosition(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -338,10 +338,9 @@ abstract public class WheelSettings
     @Override
     public Vec3 getSteeringAxis() {
         long settingsVa = va();
-        float dx = getSteeringAxisX(settingsVa);
-        float dy = getSteeringAxisY(settingsVa);
-        float dz = getSteeringAxisZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSteeringAxis(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -355,10 +354,9 @@ abstract public class WheelSettings
     @Override
     public Vec3 getSuspensionDirection() {
         long settingsVa = va();
-        float dx = getSuspensionDirectionX(settingsVa);
-        float dy = getSuspensionDirectionY(settingsVa);
-        float dz = getSuspensionDirectionZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSuspensionDirection(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -373,10 +371,9 @@ abstract public class WheelSettings
     @Override
     public Vec3 getSuspensionForcePoint() {
         long settingsVa = va();
-        float x = getSuspensionForcePointX(settingsVa);
-        float y = getSuspensionForcePointY(settingsVa);
-        float z = getSuspensionForcePointZ(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSuspensionForcePoint(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -447,10 +444,9 @@ abstract public class WheelSettings
     @Override
     public Vec3 getWheelForward() {
         long settingsVa = va();
-        float dx = getWheelForwardX(settingsVa);
-        float dy = getWheelForwardY(settingsVa);
-        float dz = getWheelForwardZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getWheelForward(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -464,10 +460,9 @@ abstract public class WheelSettings
     @Override
     public Vec3 getWheelUp() {
         long settingsVa = va();
-        float dx = getWheelUpX(settingsVa);
-        float dy = getWheelUpY(settingsVa);
-        float dz = getWheelUpZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getWheelUp(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -529,31 +524,19 @@ abstract public class WheelSettings
     native private static boolean getEnableSuspensionForcePoint(
             long settingsVa);
 
-    native private static float getPositionX(long settingsVa);
-
-    native private static float getPositionY(long settingsVa);
-
-    native private static float getPositionZ(long settingsVa);
+    native private static void getPosition(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static float getRadius(long settingsVa);
 
-    native private static float getSteeringAxisX(long settingsVa);
+    native private static void getSteeringAxis(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getSteeringAxisY(long settingsVa);
+    native private static void getSuspensionDirection(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getSteeringAxisZ(long settingsVa);
-
-    native private static float getSuspensionDirectionX(long settingsVa);
-
-    native private static float getSuspensionDirectionY(long settingsVa);
-
-    native private static float getSuspensionDirectionZ(long settingsVa);
-
-    native private static float getSuspensionForcePointX(long settingsVa);
-
-    native private static float getSuspensionForcePointY(long settingsVa);
-
-    native private static float getSuspensionForcePointZ(long settingsVa);
+    native private static void getSuspensionForcePoint(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static float getSuspensionMaxLength(long settingsVa);
 
@@ -563,17 +546,11 @@ abstract public class WheelSettings
 
     native private static long getSuspensionSpring(long wheelSettingsVa);
 
-    native private static float getWheelForwardX(long settingsVa);
+    native private static void getWheelForward(long settingsVa,
+            FloatBuffer storeFloats);
 
-    native private static float getWheelForwardY(long settingsVa);
-
-    native private static float getWheelForwardZ(long settingsVa);
-
-    native private static float getWheelUpX(long settingsVa);
-
-    native private static float getWheelUpY(long settingsVa);
-
-    native private static float getWheelUpZ(long settingsVa);
+    native private static void getWheelUp(long settingsVa,
+            FloatBuffer storeFloats);
 
     native private static float getWidth(long settingsVa);
 

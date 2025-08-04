@@ -470,7 +470,8 @@ abstract public class Shape extends NonCopyable
     @Override
     public Vec3 makeScaleValid(Vec3Arg scale) {
         long shapeVa = va();
-        FloatBuffer floatBuffer = scale.toBuffer();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        scale.copyTo(floatBuffer);
         makeScaleValid(shapeVa, floatBuffer);
         Vec3 result = new Vec3(floatBuffer);
 

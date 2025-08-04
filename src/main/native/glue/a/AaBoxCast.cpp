@@ -75,11 +75,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_AaBoxCast_getDirectio
   (JNIEnv *pEnv, jclass, jlong boxCastVa, jobject storeFloats) {
     const AABoxCast * const pBoxCast
             = reinterpret_cast<AABoxCast *> (boxCastVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     pFloats[0] = pBoxCast->mDirection.GetX();
     pFloats[1] = pBoxCast->mDirection.GetY();

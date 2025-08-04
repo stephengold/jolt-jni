@@ -63,10 +63,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_EpaPenetrationDepth_f
     const T2 * const pAIncluding = reinterpret_cast<T2 *> (aIncludingVa); \
     const T3 * const pBExcluding = reinterpret_cast<T3 *> (bExcludingVa); \
     const T4 * const pBIncluding = reinterpret_cast<T4 *> (bIncludingVa); \
-    jfloat * const pFloats = (jfloat *) pEnv->GetDirectBufferAddress(fBuf); \
-    JPH_ASSERT(!pEnv->ExceptionCheck()); \
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(fBuf); \
-    JPH_ASSERT(!pEnv->ExceptionCheck()); \
+    DIRECT_FLOAT_BUFFER(pEnv, fBuf, pFloats, capacityFloats); \
     JPH_ASSERT(capacityFloats >= 11); \
     const float collisionToleranceSq = pFloats[0]; \
     const float penetrationTolerance = pFloats[1]; \

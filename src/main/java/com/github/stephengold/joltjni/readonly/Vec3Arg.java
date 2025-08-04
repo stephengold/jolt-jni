@@ -40,6 +40,14 @@ public interface Vec3Arg {
     Vec3 abs();
 
     /**
+     * Write all 3 components to the start of the specified buffer. The vector
+     * is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null, capacity&ge;3)
+     */
+    void copyTo(FloatBuffer storeBuffer);
+
+    /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
      * @param rightFactor the vector to cross with the current one (not null,

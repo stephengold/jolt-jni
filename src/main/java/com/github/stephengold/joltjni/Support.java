@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
+
 /**
  * Interface to the Gilbert–Johnson–Keerthi (GJK) distance algorithm. (native
  * type: {@code ConvexShape::Support})
@@ -41,4 +44,57 @@ public class Support extends JoltPhysicsObject {
     Support(JoltPhysicsObject container, long supportVa) {
         super(container, supportVa);
     }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Return the convex radius.
+     *
+     * @return the added distance (in meters)
+     */
+    public float getConvexRadius() {
+        long supportVa = va();
+        float result = getConvexRadius(supportVa);
+
+        return result;
+    }
+
+    /**
+     * Calculate a support vector for the specified direction.
+     *
+     * @param dx the X component of the input direction
+     * @param dy the Y component of the input direction
+     * @param dz the Z component of the input direction
+     * @return a new location vector relative to the shape's center of mass
+     */
+    public Vec3 getSupport(float dx, float dy, float dz) {
+        long supportVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSupport(supportVa, dx, dy, dz, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Calculate a support vector for the specified direction.
+     *
+     * @param direction the input direction (not null, unaffected)
+     * @return a new location vector relative to the shape's center of mass
+     */
+    public Vec3 getSupport(Vec3Arg direction) {
+        float dx = direction.getX();
+        float dy = direction.getY();
+        float dz = direction.getZ();
+        Vec3 result = getSupport(dx, dy, dz);
+
+        return result;
+    }
+    // *************************************************************************
+    // native private methods
+
+    native private static float getConvexRadius(long supportVa);
+
+    native private static void getSupport(long supportVa,
+            float dx, float dy, float dz, FloatBuffer storeFloats);
 }

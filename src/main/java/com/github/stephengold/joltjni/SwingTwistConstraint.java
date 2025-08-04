@@ -82,9 +82,9 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
      */
     public Vec3 getTargetAngularVelocityCs() {
         long constraintVa = va();
-        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
-        getTargetAngularVelocityCs(constraintVa, floatBuffer);
-        Vec3 result = new Vec3(floatBuffer);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTargetAngularVelocityCs(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -97,9 +97,9 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
      */
     public Quat getTargetOrientationCs() {
         long constraintVa = va();
-        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
-        getTargetOrientationCs(constraintVa, floatBuffer);
-        Quat result = new Quat(floatBuffer);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTargetOrientationCs(constraintVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -239,10 +239,10 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
     native private static int getSwingMotorState(long constraintVa);
 
     native private static void getTargetAngularVelocityCs(
-            long constraintVa, FloatBuffer floatBuffer);
+            long constraintVa, FloatBuffer storeFloats);
 
     native private static void getTargetOrientationCs(
-            long constraintVa, FloatBuffer floatBuffer);
+            long constraintVa, FloatBuffer storeFloats);
 
     native private static long getTwistMotorSettings(long constraintVa);
 

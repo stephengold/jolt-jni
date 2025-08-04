@@ -61,80 +61,36 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Vertex_getInvMass
 
 /*
  * Class:     com_github_stephengold_joltjni_Vertex
- * Method:    getPositionX
- * Signature: (J)F
+ * Method:    getPosition
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Vertex_getPositionX
-  (JNIEnv *, jclass, jlong vertexVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Vertex_getPosition
+  (JNIEnv *pEnv, jclass, jlong vertexVa, jobject storeFloats) {
     const SoftBodySharedSettings::Vertex * const pVertex
             = reinterpret_cast<SoftBodySharedSettings::Vertex *> (vertexVa);
-    const float result = pVertex->mPosition.x;
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Float3& result = pVertex->mPosition;
+    pFloats[0] = result.x;
+    pFloats[1] = result.y;
+    pFloats[2] = result.z;
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_Vertex
- * Method:    getPositionY
- * Signature: (J)F
+ * Method:    getVelocity
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Vertex_getPositionY
-  (JNIEnv *, jclass, jlong vertexVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Vertex_getVelocity
+  (JNIEnv *pEnv, jclass, jlong vertexVa, jobject storeFloats) {
     const SoftBodySharedSettings::Vertex * const pVertex
             = reinterpret_cast<SoftBodySharedSettings::Vertex *> (vertexVa);
-    const float result = pVertex->mPosition.y;
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Vertex
- * Method:    getPositionZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Vertex_getPositionZ
-  (JNIEnv *, jclass, jlong vertexVa) {
-    const SoftBodySharedSettings::Vertex * const pVertex
-            = reinterpret_cast<SoftBodySharedSettings::Vertex *> (vertexVa);
-    const float result = pVertex->mPosition.z;
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Vertex
- * Method:    getVelocityX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Vertex_getVelocityX
-  (JNIEnv *, jclass, jlong vertexVa) {
-    const SoftBodySharedSettings::Vertex * const pVertex
-            = reinterpret_cast<SoftBodySharedSettings::Vertex *> (vertexVa);
-    const float result = pVertex->mVelocity.x;
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Vertex
- * Method:    getVelocityY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Vertex_getVelocityY
-  (JNIEnv *, jclass, jlong vertexVa) {
-    const SoftBodySharedSettings::Vertex * const pVertex
-            = reinterpret_cast<SoftBodySharedSettings::Vertex *> (vertexVa);
-    const float result = pVertex->mVelocity.y;
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Vertex
- * Method:    getVelocityZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Vertex_getVelocityZ
-  (JNIEnv *, jclass, jlong vertexVa) {
-    const SoftBodySharedSettings::Vertex * const pVertex
-            = reinterpret_cast<SoftBodySharedSettings::Vertex *> (vertexVa);
-    const float result = pVertex->mVelocity.z;
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Float3& result = pVertex->mVelocity;
+    pFloats[0] = result.x;
+    pFloats[1] = result.y;
+    pFloats[2] = result.z;
 }
 
 /*

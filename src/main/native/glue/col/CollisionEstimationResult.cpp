@@ -65,16 +65,12 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationRe
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_getAngularVelocity1
-  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject floatBuffer) {
+  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject storeFloats) {
     const CollisionEstimationResult * const pEstimate
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
-    const Vec3 &result = pEstimate->mAngularVelocity1;
+    const Vec3& result = pEstimate->mAngularVelocity1;
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
@@ -86,16 +82,12 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationRe
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_getAngularVelocity2
-  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject floatBuffer) {
+  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject storeFloats) {
     const CollisionEstimationResult * const pEstimate
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
-    const Vec3 &result = pEstimate->mAngularVelocity2;
+    const Vec3& result = pEstimate->mAngularVelocity2;
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
@@ -121,16 +113,12 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationR
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_getLinearVelocity1
-  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject floatBuffer) {
+  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject storeFloats) {
     const CollisionEstimationResult * const pEstimate
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
-    const Vec3 &result = pEstimate->mLinearVelocity1;
+    const Vec3& result = pEstimate->mLinearVelocity1;
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
@@ -142,16 +130,12 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationRe
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationResult_getLinearVelocity2
-  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject floatBuffer) {
+  (JNIEnv *pEnv, jclass, jlong estimateVa, jobject storeFloats) {
     const CollisionEstimationResult * const pEstimate
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
-    const Vec3 &result = pEstimate->mLinearVelocity2;
+    const Vec3& result = pEstimate->mLinearVelocity2;
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();

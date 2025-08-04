@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Constraints/SwingTwistConstraint.h"
 #include "auto/com_github_stephengold_joltjni_SwingTwistConstraint.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -61,14 +62,10 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint_
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint_getTargetAngularVelocityCs
-  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject floatBuffer) {
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SwingTwistConstraint * const pConstraint
             = reinterpret_cast<SwingTwistConstraint *> (constraintVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     Vec3 velocity = pConstraint->GetTargetAngularVelocityCS();
     pFloats[0] = velocity.GetX();
@@ -82,14 +79,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint_
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint_getTargetOrientationCs
-  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject floatBuffer) {
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SwingTwistConstraint * const pConstraint
             = reinterpret_cast<SwingTwistConstraint *> (constraintVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 4);
     Quat orientation = pConstraint->GetTargetOrientationCS();
     pFloats[0] = orientation.GetX();

@@ -39,11 +39,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_vhacd_ConvexHull_copy
   (JNIEnv *pEnv, jclass, jlong hullVa, jobject resultBuffer) {
     const IVHACD::ConvexHull * const pHull
             = reinterpret_cast<IVHACD::ConvexHull *> (hullVa);
-    jfloat * const pPoints
-            = (jfloat *) pEnv->GetDirectBufferAddress(resultBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(resultBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, resultBuffer, pPoints, capacityFloats);
     const size_t numPoints = pHull->m_points.size();
     for (size_t i = 0; i < numPoints; ++i) {
         const size_t baseIndex = 3 * i;

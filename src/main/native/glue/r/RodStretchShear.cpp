@@ -69,11 +69,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RodStretchShear_getBi
   (JNIEnv *pEnv, jclass, jlong rodVa, jobject storeFloats) {
     const SoftBodySharedSettings::RodStretchShear * const pRod
             = reinterpret_cast<SoftBodySharedSettings::RodStretchShear *> (rodVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 4);
     const Quat& result = pRod->mBishop;
     pFloats[0] = result.GetX();

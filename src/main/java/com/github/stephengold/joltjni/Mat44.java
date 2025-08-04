@@ -678,9 +678,10 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public Vec3 multiply3x3(Vec3Arg vec3Arg) {
         long matrixVa = va();
-        float[] tmpFloats = vec3Arg.toArray();
-        multiply3x3(matrixVa, tmpFloats);
-        Vec3 result = new Vec3(tmpFloats);
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        vec3Arg.copyTo(floatBuffer);
+        multiply3x3(matrixVa, floatBuffer);
+        Vec3 result = new Vec3(floatBuffer);
 
         return result;
     }
@@ -695,9 +696,10 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public Vec3 multiply3x3Transposed(Vec3Arg vec3Arg) {
         long matrixVa = va();
-        float[] tmpFloats = vec3Arg.toArray();
-        multiply3x3Transposed(matrixVa, tmpFloats);
-        Vec3 result = new Vec3(tmpFloats);
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        vec3Arg.copyTo(floatBuffer);
+        multiply3x3Transposed(matrixVa, floatBuffer);
+        Vec3 result = new Vec3(floatBuffer);
 
         return result;
     }
@@ -713,9 +715,10 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public Vec3 multiply3x4(Vec3Arg vec3Arg) {
         long matrixVa = va();
-        float[] tmpFloats = vec3Arg.toArray();
-        multiply3x4(matrixVa, tmpFloats);
-        Vec3 result = new Vec3(tmpFloats);
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        vec3Arg.copyTo(floatBuffer);
+        multiply3x4(matrixVa, floatBuffer);
+        Vec3 result = new Vec3(floatBuffer);
 
         return result;
     }
@@ -743,14 +746,14 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Write all 16 components to the specified buffer in column-major order and
      * advance the buffer's position by 16. The matrix is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeFloats the destination buffer (not null)
      */
     @Override
-    public void putColumnMajor(FloatBuffer storeBuffer) {
-        int position = storeBuffer.position();
+    public void putColumnMajor(FloatBuffer storeFloats) {
+        int position = storeFloats.position();
         long matrixVa = va();
-        putColumnMajor(matrixVa, position, storeBuffer);
-        storeBuffer.position(position + 16);
+        putColumnMajor(matrixVa, position, storeFloats);
+        storeFloats.position(position + 16);
     }
     // *************************************************************************
     // Object methods
@@ -852,18 +855,20 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
 
     native private static long multiply3x3(long leftVa, long rightVa);
 
-    native private static void multiply3x3(long matrixVa, float[] tmpFloats);
+    native private static void multiply3x3(
+            long matrixVa, FloatBuffer floatBuffer);
 
     native private static void multiply3x3Transposed(
-            long matrixVa, float[] tmpFloats);
+            long matrixVa, FloatBuffer floatBuffer);
 
-    native private static void multiply3x4(long matrixVa, float[] tmpFloats);
+    native private static void multiply3x4(
+            long matrixVa, FloatBuffer floatBuffer);
 
     native private static long postTranslated(
             long matrixVa, float x, float y, float z);
 
     native private static void putColumnMajor(
-            long matrixVa, int position, FloatBuffer storeBuffer);
+            long matrixVa, int position, FloatBuffer storeFloats);
 
     native private static void rightMultiplyInPlace(
             long currentVa, long rightVa);

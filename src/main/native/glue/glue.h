@@ -54,12 +54,28 @@ extern bool gTraceAllocations;
 #define TRACE_DELETE(className, pointer)
 #endif
 /*
+ * Pre-processor macro to generate code to access a direct DoubleBuffer:
+ */
+#define DIRECT_DOUBLE_BUFFER(pEnv, doubleBuffer, pDoubles, capacityDoubles) \
+  jdouble * const pDoubles = (jdouble *) (pEnv)->GetDirectBufferAddress(doubleBuffer); \
+  JPH_ASSERT(!(pEnv)->ExceptionCheck()); \
+  const jlong capacityDoubles = (pEnv)->GetDirectBufferCapacity(doubleBuffer); \
+  JPH_ASSERT(!(pEnv)->ExceptionCheck())
+/*
+ * Pre-processor macro to generate code to access a direct FloatBuffer:
+ */
+#define DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats) \
+  jfloat * const pFloats = (jfloat *) (pEnv)->GetDirectBufferAddress(floatBuffer); \
+  JPH_ASSERT(!(pEnv)->ExceptionCheck()); \
+  const jlong capacityFloats = (pEnv)->GetDirectBufferCapacity(floatBuffer); \
+  JPH_ASSERT(!(pEnv)->ExceptionCheck())
+/*
  * Pre-processor macro to generate the body of a static createCopy() method
  * to implement a copy constructor:
  */
 #define BODYOF_CREATE_COPY(className) \
   (JNIEnv *, jclass, jlong originalVa) { \
-    const className * const pOriginal  = reinterpret_cast<className *> (originalVa); \
+    const className * const pOriginal = reinterpret_cast<className *> (originalVa); \
     className * const pResult = new className(*pOriginal); \
     TRACE_NEW(#className, pResult) \
     return reinterpret_cast<jlong> (pResult); \
@@ -76,7 +92,7 @@ extern bool gTraceAllocations;
 }
 /*
  * Pre-processor macro to generate the body of a static free() method
- * to implement a no-arg constructor:
+ * to implement a destructor:
  */
 #define BODYOF_FREE(className) \
   (JNIEnv *, jclass, jlong va) { \

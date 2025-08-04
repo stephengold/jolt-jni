@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
+import java.nio.FloatBuffer;
 
 /**
  * A counted reference to a {@code VehicleConstraint}. (native type:
@@ -90,10 +91,9 @@ final public class VehicleConstraintRef extends Ref {
      */
     public Vec3 getWorldUp() {
         long constraintVa = targetVa();
-        float dx = VehicleConstraint.getWorldUpX(constraintVa);
-        float dy = VehicleConstraint.getWorldUpY(constraintVa);
-        float dz = VehicleConstraint.getWorldUpZ(constraintVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        VehicleConstraint.getWorldUp(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }

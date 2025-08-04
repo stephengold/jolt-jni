@@ -66,11 +66,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TwoBodyConstraint_get
     const Mat44 pivotToCom = pConstraint->GetConstraintToBody1Matrix();
     const RMat44 pivotToWorld = comToWorld * pivotToCom;
     const RVec3 location = pivotToWorld.GetTranslation();
-    jdouble * const pDoubles
-            = (jdouble *) pEnv->GetDirectBufferAddress(storeResult);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeResult);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_DOUBLE_BUFFER(pEnv, storeResult, pDoubles, capacityDoubles);
     JPH_ASSERT(capacityDoubles >= 3);
     pDoubles[0] = location.GetX();
     pDoubles[1] = location.GetY();
@@ -104,11 +100,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TwoBodyConstraint_get
     const Mat44 pivotToCom = pConstraint->GetConstraintToBody2Matrix();
     const RMat44 pivotToWorld = comToWorld * pivotToCom;
     const RVec3 location = pivotToWorld.GetTranslation();
-    jdouble * const pDoubles
-            = (jdouble *) pEnv->GetDirectBufferAddress(storeResult);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeResult);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_DOUBLE_BUFFER(pEnv, storeResult, pDoubles, capacityDoubles);
     JPH_ASSERT(capacityDoubles >= 3);
     pDoubles[0] = location.GetX();
     pDoubles[1] = location.GetY();

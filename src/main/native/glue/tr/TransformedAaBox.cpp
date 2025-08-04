@@ -24,51 +24,47 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
+#include "Jolt/Geometry/AABox.h"
 #include "Jolt/Geometry/ConvexSupport.h"
-#include "Jolt/Geometry/Sphere.h"
 
-#include "auto/com_github_stephengold_joltjni_TransformedSphere.h"
+#include "auto/com_github_stephengold_joltjni_TransformedAaBox.h"
 #include "glue/glue.h"
 
 using namespace JPH;
 
 /*
- * Class:     com_github_stephengold_joltjni_TransformedSphere
+ * Class:     com_github_stephengold_joltjni_TransformedAaBox
  * Method:    create
  * Signature: (JJ)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TransformedSphere_create
-  (JNIEnv *, jclass, jlong transformVa, jlong sphereVa) {
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TransformedAaBox_create
+  (JNIEnv *, jclass, jlong transformVa, jlong boxVa) {
     const Mat44 * const pTransform = reinterpret_cast<Mat44 *> (transformVa);
-    const Sphere * const pSphere = reinterpret_cast<Sphere *> (sphereVa);
-    TransformedConvexObject<Sphere> * const pResult
-            = new TransformedConvexObject(*pTransform, *pSphere);
-    TRACE_NEW("TransformedConvexObject<Sphere>", pResult)
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    TransformedConvexObject<AABox> * const pResult
+            = new TransformedConvexObject(*pTransform, *pBox);
+    TRACE_NEW("TransformedConvexObject<AABox>", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_TransformedSphere
+ * Class:     com_github_stephengold_joltjni_TransformedAaBox
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedSphere_free
-    BODYOF_FREE(TransformedConvexObject<Sphere>)
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedAaBox_freeBox
+    BODYOF_FREE(TransformedConvexObject<AABox>)
 
 /*
- * Class:     com_github_stephengold_joltjni_TransformedSphere
+ * Class:     com_github_stephengold_joltjni_TransformedAaBox
  * Method:    getSupport
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedSphere_getSupport
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedAaBox_getSupport
   (JNIEnv *pEnv, jclass, jlong objectVa, jobject floatBuffer) {
-    const TransformedConvexObject<Sphere> * const pObject
-            = reinterpret_cast<TransformedConvexObject<Sphere> *> (objectVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const TransformedConvexObject<AABox> * const pObject
+            = reinterpret_cast<TransformedConvexObject<AABox> *> (objectVa);
+    DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3 direction(pFloats[0], pFloats[1], pFloats[2]);
     Vec3 result = pObject->GetSupport(direction);
@@ -78,14 +74,14 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedSphere_get
 }
 
 /*
- * Class:     com_github_stephengold_joltjni_TransformedSphere
+ * Class:     com_github_stephengold_joltjni_TransformedAaBox
  * Method:    getTransform
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TransformedSphere_getTransform
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TransformedAaBox_getTransform
   (JNIEnv *pEnv, jclass, jlong transformVa) {
-    const TransformedConvexObject<Sphere> * const pObject
-            = reinterpret_cast<TransformedConvexObject<Sphere> *> (transformVa);
+    const TransformedConvexObject<AABox> * const pObject
+            = reinterpret_cast<TransformedConvexObject<AABox> *> (transformVa);
     const Mat44 * const pResult = new Mat44(pObject->mTransform);
     TRACE_NEW("Mat44", pResult)
     return reinterpret_cast<jlong> (pResult);

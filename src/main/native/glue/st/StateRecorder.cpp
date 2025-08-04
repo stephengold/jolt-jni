@@ -162,21 +162,19 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_StateRecorder_read
 /*
  * Class:     com_github_stephengold_joltjni_StateRecorder
  * Method:    readVec3
- * Signature: (J[F)V
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readVec3
-  (JNIEnv *pEnv, jclass, jlong recorderVa, jfloatArray storeFloats) {
+  (JNIEnv *pEnv, jclass, jlong recorderVa, jobject floatBuffer) {
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
-    jboolean isCopy;
-    jfloat * const pStoreFloats
-            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pStoreFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     Vec3 result(pStoreFloats[0], pStoreFloats[1], pStoreFloats[2]);
     pRecorder->Read(result);
     pStoreFloats[0] = result.GetX();
     pStoreFloats[1] = result.GetY();
     pStoreFloats[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
 }
 
 /*

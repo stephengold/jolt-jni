@@ -23,6 +23,7 @@ package testjoltjni.app.samples.broadphase;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.std.DefaultRandomEngine;
 import java.util.List;
+import testjoltjni.TestUtils;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 import static testjoltjni.app.samples.DebugRendererSP.*;
@@ -51,6 +52,7 @@ public void Initialize()
 		bodies_to_add.set(b, body_vector.get(b).getId());
 	long add_state = mBroadPhase.addBodiesPrepare(bodies_to_add, num_bodies);
 	mBroadPhase.addBodiesFinalize(bodies_to_add, num_bodies, add_state);
+	TestUtils.testClose ( bodies_to_add);
 
 	// Optimize the broadphase
 	mBroadPhase.optimize();

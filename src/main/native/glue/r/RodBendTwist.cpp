@@ -79,14 +79,10 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RodBendTwist_getCom
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RodBendTwist_getOmega0
-  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject floatBuffer) {
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SoftBodySharedSettings::RodBendTwist * const pConstraint
             = reinterpret_cast<SoftBodySharedSettings::RodBendTwist *> (constraintVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(floatBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 4);
     const Quat& result = pConstraint->mOmega0;
     pFloats[0] = result.GetX();

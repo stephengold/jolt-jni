@@ -351,38 +351,35 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    multiply3x3
- * Signature: (J[F)V
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x3
-  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray tmpFloats) {
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jobject floatBuffer) {
     const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
-    jboolean isCopy;
-    jfloat * const pTmpFloats
-            = pEnv->GetFloatArrayElements(tmpFloats, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pTmpFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     const Vec3 vec3Arg(pTmpFloats[0], pTmpFloats[1], pTmpFloats[2]);
     const Vec3 result = pMatrix->Multiply3x3(vec3Arg);
     pTmpFloats[0] = result.GetX();
     pTmpFloats[1] = result.GetY();
     pTmpFloats[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(tmpFloats, pTmpFloats, 0);
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_RMat44
  * Method:    multiply3x3Transposed
- * Signature: (J[F)V
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_multiply3x3Transposed
-  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray tmpFloats) {
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jobject floatBuffer) {
     const RMat44 * const pMatrix = reinterpret_cast<RMat44 *> (matrixVa);
-    jboolean isCopy;
-    jfloat * const pTmpFloats = pEnv->GetFloatArrayElements(tmpFloats, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pTmpFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     const Vec3 vec3Arg(pTmpFloats[0], pTmpFloats[1], pTmpFloats[2]);
     const Vec3 result = pMatrix->Multiply3x3Transposed(vec3Arg);
     pTmpFloats[0] = result.GetX();
     pTmpFloats[1] = result.GetY();
     pTmpFloats[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(tmpFloats, pTmpFloats, 0);
 }
 
 /*
@@ -474,13 +471,9 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_postTranslate
  * Signature: (JILjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_put3x3ColumnMajor
-  (JNIEnv *pEnv, jclass, jlong matrixVa, jint position, jobject storeBuffer) {
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jint position, jobject storeFloats) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    jfloat * const pBuffer
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pBuffer, capacityFloats);
     for (size_t c = 0; c < 3; ++c) {
         const size_t baseIndex = position + 3 * c;
         for (size_t r = 0; r < 3; ++r) {
@@ -498,13 +491,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_put3x3ColumnMa
  * Signature: (JILjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RMat44_putColumnMajor
-  (JNIEnv *pEnv, jclass, jlong matrixVa, jint position, jobject storeBuffer) {
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jint position, jobject storeFloats) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    jfloat * const pBuffer
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeBuffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pBuffer, capacityFloats);
     for (size_t c = 0; c < 4; ++c) {
         const size_t baseIndex = position + 4 * c;
         for (size_t r = 0; r < 4; ++r) {

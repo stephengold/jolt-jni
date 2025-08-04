@@ -272,11 +272,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getS
   (JNIEnv *pEnv, jclass, jlong transformedShapeVa, jobject storeDoubles) {
     const TransformedShape * const pTransformedShape
             = reinterpret_cast<TransformedShape *> (transformedShapeVa);
-    jdouble * const pDoubles
-            = (jdouble *) pEnv->GetDirectBufferAddress(storeDoubles);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityDoubles = pEnv->GetDirectBufferCapacity(storeDoubles);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
     JPH_ASSERT(capacityDoubles >= 3);
     const RVec3& position = pTransformedShape->mShapePositionCOM;
     pDoubles[0] = position.GetX();
@@ -293,11 +289,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getS
   (JNIEnv *pEnv, jclass, jlong transformedShapeVa, jobject storeFloats) {
     const TransformedShape * const pTransformedShape
             = reinterpret_cast<TransformedShape *> (transformedShapeVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 4);
     const Quat& rotation = pTransformedShape->mShapeRotation;
     pFloats[0] = rotation.GetX();
@@ -315,11 +307,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getS
   (JNIEnv *pEnv, jclass, jlong transformedShapeVa, jobject storeFloats) {
     const TransformedShape * const pTransformedShape
             = reinterpret_cast<TransformedShape *> (transformedShapeVa);
-    jfloat * const pFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
     const Vec3& scale = pTransformedShape->GetShapeScale();
     pFloats[0] = scale.GetX();

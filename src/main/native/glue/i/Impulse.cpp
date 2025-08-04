@@ -46,7 +46,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Impulse_createDefaul
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_streamutils_IdToShapeMap_free
   BODYOF_FREE(CollisionEstimationResult::Impulse)
 
-
 /*
  * Class:     com_github_stephengold_joltjni_Impulse
  * Method:    getContactImpulse

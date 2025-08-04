@@ -62,7 +62,8 @@ public class TransformedAaBox extends TransformedConvexObject {
     @Override
     public Vec3 getSupport(Vec3Arg direction) {
         long objectVa = va();
-        FloatBuffer floatBuffer = direction.toBuffer();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        direction.copyTo(floatBuffer);
         getSupport(objectVa, floatBuffer);
         Vec3 result = new Vec3(floatBuffer);
 

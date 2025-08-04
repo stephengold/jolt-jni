@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Record the state of a physics system. Can also compare against an expected
@@ -148,9 +149,10 @@ public class StateRecorder extends NonCopyable {
      */
     public void readVec3(Vec3 inOut) {
         long recorderVa = va();
-        float[] storeFloats = inOut.toArray();
-        readVec3(recorderVa, storeFloats);
-        inOut.set(storeFloats);
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        inOut.copyTo(floatBuffer);
+        readVec3(recorderVa, floatBuffer);
+        inOut.set(floatBuffer);
     }
 
     /**
@@ -286,7 +288,8 @@ public class StateRecorder extends NonCopyable {
 
     native private static String readString(long recorderVa, String javaString);
 
-    native private static void readVec3(long recorderVa, float[] storeFloats);
+    native private static void readVec3(
+            long recorderVa, FloatBuffer floatBuffer);
 
     native private static void setValidating(long recorderVa, boolean setting);
 

@@ -84,6 +84,40 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getLocalForward
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getLocalForward
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pConstraint->GetLocalForward();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getLocalUp
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getLocalUp
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pConstraint->GetLocalUp();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
  * Method:    getStepListener
  * Signature: (J)J
  */
@@ -142,41 +176,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraint
- * Method:    getWorldUpX
- * Signature: (J)F
+ * Method:    getWorldUp
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getWorldUpX
-  (JNIEnv *, jclass, jlong constraintVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getWorldUp
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const VehicleConstraint * const pConstraint
             = reinterpret_cast<VehicleConstraint *> (constraintVa);
-    const float result = pConstraint->GetWorldUp().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_VehicleConstraint
- * Method:    getWorldUpY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getWorldUpY
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const VehicleConstraint * const pConstraint
-            = reinterpret_cast<VehicleConstraint *> (constraintVa);
-    const float result = pConstraint->GetWorldUp().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_VehicleConstraint
- * Method:    getWorldUpZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getWorldUpZ
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const VehicleConstraint * const pConstraint
-            = reinterpret_cast<VehicleConstraint *> (constraintVa);
-    const float result = pConstraint->GetWorldUp().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pConstraint->GetWorldUp();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

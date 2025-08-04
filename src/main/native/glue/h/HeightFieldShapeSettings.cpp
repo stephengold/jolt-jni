@@ -87,11 +87,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSett
   (JNIEnv *pEnv, jclass, jobject buffer, jfloat offsetX, jfloat offsetY,
   jfloat offsetZ, jfloat scaleX, jfloat scaleY, jfloat scaleZ, jint sampleCount,
   jbyteArray materialIndices, jlong listVa) {
-    const float * const pFloats
-            = (float *) pEnv->GetDirectBufferAddress(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(buffer);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const DIRECT_FLOAT_BUFFER(pEnv, buffer, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= sampleCount * sampleCount);
     const Vec3 offset(offsetX, offsetY, offsetZ);
     const Vec3 scale(scaleX, scaleY, scaleZ);

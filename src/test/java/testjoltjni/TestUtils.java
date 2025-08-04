@@ -23,6 +23,7 @@ package testjoltjni;
 
 import com.github.stephengold.joltjni.BroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.BroadPhaseLayerInterfaceTable;
+import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JoltPhysicsObject;
 import com.github.stephengold.joltjni.ObjectLayerPairFilter;
@@ -92,6 +93,23 @@ final public class TestUtils {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Verify the components of a color.
+     *
+     * @param r the expected R component
+     * @param g the expected G component
+     * @param b the expected B component
+     * @param a the expected A component
+     * @param actual the color to test (not {@code null}, unaffected)
+     */
+    public static void assertEquals(
+            byte r, byte g, byte b, byte a, ConstColor actual) {
+        Assert.assertEquals("r component", r, actual.getR());
+        Assert.assertEquals("h component", g, actual.getG());
+        Assert.assertEquals("b component", b, actual.getB());
+        Assert.assertEquals("a component", a, actual.getA());
+    }
 
     /**
      * Verify the elements of a single-precision matrix to within some
@@ -186,23 +204,6 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the components of a color.
-     *
-     * @param r the expected R component
-     * @param g the expected G component
-     * @param b the expected B component
-     * @param a the expected A component
-     * @param actual the color to test (not {@code null}, unaffected)
-     */
-    public static void assertEquals(
-            byte r, byte g, byte b, byte a, ConstColor actual) {
-        Assert.assertEquals("r component", r, actual.getR());
-        Assert.assertEquals("h component", g, actual.getG());
-        Assert.assertEquals("b component", b, actual.getB());
-        Assert.assertEquals("a component", a, actual.getA());
-    }
-
-    /**
      * Verify the components of a quaternion to within some tolerance.
      *
      * @param x the expected X component
@@ -218,6 +219,22 @@ final public class TestUtils {
         Assert.assertEquals("y component", y, actual.getY(), tolerance);
         Assert.assertEquals("z component", z, actual.getZ(), tolerance);
         Assert.assertEquals("w component", w, actual.getW(), tolerance);
+    }
+
+    /**
+     * Verify the components of a {@code Float3} to within some tolerance.
+     *
+     * @param x the expected X component
+     * @param y the expected Y component
+     * @param z the expected Z component
+     * @param actual the vector to test (not {@code null}, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertEquals(
+            float x, float y, float z, Float3 actual, float tolerance) {
+        Assert.assertEquals("x component", x, actual.x, tolerance);
+        Assert.assertEquals("y component", y, actual.y, tolerance);
+        Assert.assertEquals("z component", z, actual.z, tolerance);
     }
 
     /**

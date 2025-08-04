@@ -175,11 +175,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionProper
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionProperties_putPinLocations
   (JNIEnv *pEnv, jclass, jlong propertiesVa, jfloat x, jfloat y, jfloat z,
   jint bufferPosition, jobject storeFloats) {
-    jfloat * const pStoreFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pStoreFloats, capacityFloats);
     const SoftBodyMotionProperties * const pProperties
             = reinterpret_cast<SoftBodyMotionProperties *> (propertiesVa);
     const Vec3 comLocation(x, y, z);
@@ -205,11 +201,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionPropert
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyMotionProperties_putVertexLocations
   (JNIEnv *pEnv, jclass, jlong propertiesVa, jfloat x, jfloat y, jfloat z,
   jint bufferPosition, jobject storeFloats) {
-    jfloat * const pStoreFloats
-            = (jfloat *) pEnv->GetDirectBufferAddress(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
-    const jlong capacityFloats = pEnv->GetDirectBufferCapacity(storeFloats);
-    JPH_ASSERT(!pEnv->ExceptionCheck());
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pStoreFloats, capacityFloats);
     const SoftBodyMotionProperties * const pProperties
             = reinterpret_cast<SoftBodyMotionProperties *> (propertiesVa);
     const Vec3 comLocation(x, y, z);

@@ -91,41 +91,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSet
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
- * Method:    getForwardX
- * Signature: (J)F
+ * Method:    getForward
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getForwardX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getForward
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const VehicleConstraintSettings * const pSettings
             = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
-    const float result = pSettings->mForward.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
- * Method:    getForwardY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getForwardY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const VehicleConstraintSettings * const pSettings
-            = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
-    const float result = pSettings->mForward.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
- * Method:    getForwardZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getForwardZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const VehicleConstraintSettings * const pSettings
-            = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
-    const float result = pSettings->mForward.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mForward;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -169,41 +147,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSett
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
- * Method:    getUpX
- * Signature: (J)F
+ * Method:    getUp
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getUpX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getUp
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const VehicleConstraintSettings * const pSettings
             = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
-    const float result = pSettings->mUp.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
- * Method:    getUpY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getUpY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const VehicleConstraintSettings * const pSettings
-            = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
-    const float result = pSettings->mUp.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
- * Method:    getUpZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_getUpZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const VehicleConstraintSettings * const pSettings
-            = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
-    const float result = pSettings->mUp.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mUp;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

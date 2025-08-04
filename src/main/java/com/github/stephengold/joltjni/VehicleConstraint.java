@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * A special {@code Constraint} used in vehicle simulation.
@@ -96,6 +97,34 @@ public class VehicleConstraint extends Constraint {
         long controllerVa = getController(constraintVa);
         VehicleController result
                 = VehicleController.newController(this, controllerVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the local "forward" direction. The constraint is unaffected.
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getLocalForward() {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLocalForward(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Copy the local "up" direction. The constraint is unaffected.
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getLocalUp() {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLocalUp(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -181,10 +210,9 @@ public class VehicleConstraint extends Constraint {
      */
     public Vec3 getWorldUp() {
         long constraintVa = va();
-        float dx = getWorldUpX(constraintVa);
-        float dy = getWorldUpY(constraintVa);
-        float dz = getWorldUpZ(constraintVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getWorldUp(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -271,6 +299,12 @@ public class VehicleConstraint extends Constraint {
 
     native private static long getController(long constraintVa);
 
+    native private static void getLocalForward(
+            long constraintVa, FloatBuffer storeFloats);
+
+    native private static void getLocalUp(
+            long constraintVa, FloatBuffer storeFloats);
+
     native private static long getStepListener(long constraintVa);
 
     native private static long getVehicleBody(long constraintVa);
@@ -280,11 +314,7 @@ public class VehicleConstraint extends Constraint {
     native static long getWheelWorldTransform(long constraintVa, int wheelIndex,
             float rx, float ry, float rz, float ux, float uy, float uz);
 
-    native static float getWorldUpX(long constraintVa);
-
-    native static float getWorldUpY(long constraintVa);
-
-    native static float getWorldUpZ(long constraintVa);
+    native static void getWorldUp(long constraintVa, FloatBuffer storeFloats);
 
     native static void overrideGravity(
             long constraintVa, float ax, float ay, float az);

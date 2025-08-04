@@ -398,7 +398,8 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     @Override
     public Vec3 makeScaleValid(Vec3Arg scale) {
         long shapeVa = targetVa();
-        FloatBuffer floatBuffer = scale.toBuffer();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        scale.copyTo(floatBuffer);
         Shape.makeScaleValid(shapeVa, floatBuffer);
         Vec3 result = new Vec3(floatBuffer);
 

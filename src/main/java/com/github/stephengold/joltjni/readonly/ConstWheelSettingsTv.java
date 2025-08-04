@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,21 +19,28 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+package com.github.stephengold.joltjni.readonly;
 
-/*
- * Author: Stephen Gold
+/**
+ * Read-only access to {@code WheelSettingsTv}. (native type: const
+ * WheelSettingsTV)
+ *
+ * @author Stephen Gold sgold@sonic.net
  */
-#include "Jolt/Jolt.h"
-#include "Jolt/Physics/Collision/BroadPhase/BroadPhaseQuadTree.h"
-#include "auto/com_github_stephengold_joltjni_BroadPhaseQuadTree.h"
-#include "glue/glue.h"
+public interface ConstWheelSettingsTv extends ConstWheelSettings {
+    /**
+     * Return the tire's friction in the sideways direction. The settings are
+     * unaffected.
+     *
+     * @return the friction
+     */
+    float getLateralFriction();
 
-using namespace JPH;
-
-/*
- * Class:     com_github_stephengold_joltjni_BroadPhaseQuadTree
- * Method:    createDefault
- * Signature: ()J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BroadPhaseQuadTree_createDefault
-  BODYOF_CREATE_DEFAULT(BroadPhaseQuadTree)
+    /**
+     * Return the tire's friction in the forward direction. The settings are
+     * unaffected.
+     *
+     * @return the friction
+     */
+    float getLongitudinalFriction();
+}

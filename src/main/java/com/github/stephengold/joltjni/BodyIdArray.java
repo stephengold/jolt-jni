@@ -21,6 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import java.nio.IntBuffer;
+import java.util.List;
+
 /**
  * A fixed-length array of body IDs. (native type: {@code BodyID[]})
  *
@@ -28,15 +31,67 @@ package com.github.stephengold.joltjni;
  */
 public class BodyIdArray extends JoltPhysicsObject {
     // *************************************************************************
+    // fields
+
+    /**
+     * length (in IDs)
+     */
+    final private int length;
+    // *************************************************************************
     // constructors
 
     /**
-     * Instantiate an array with the specified length.
+     * Instantiate an uninitialized array with the specified length.
      *
      * @param length the desired number of IDs (&ge;0)
      */
     public BodyIdArray(int length) {
+        assert length >= 0 : length;
+
+        this.length = length;
         long arrayVa = create(length);
+        setVirtualAddress(arrayVa, () -> free(arrayVa));
+    }
+
+    /**
+     * Instantiate an array initialized from a Java array.
+     *
+     * @param idArray the ID values (not null, unaffected)
+     */
+    public BodyIdArray(int[] idArray) {
+        this.length = idArray.length;
+        IntBuffer intBuffer = Jolt.newDirectIntBuffer(length);
+        intBuffer.put(idArray);
+        long arrayVa = createFromBuffer(intBuffer);
+        setVirtualAddress(arrayVa, () -> free(arrayVa));
+    }
+
+    /**
+     * Instantiate an array initialized from a direct buffer.
+     *
+     * @param idBuffer the ID values (not null, direct, unaffected)
+     */
+    public BodyIdArray(IntBuffer idBuffer) {
+        assert idBuffer.isDirect();
+
+        this.length = idBuffer.capacity();
+        long arrayVa = createFromBuffer(idBuffer);
+        setVirtualAddress(arrayVa, () -> free(arrayVa));
+    }
+
+    /**
+     * Instantiate an array initialized from a Java list.
+     *
+     * @param idList the ID values (not null, unaffected)
+     */
+    public BodyIdArray(List<Integer> idList) {
+        this.length = idList.size();
+        IntBuffer intBuffer = Jolt.newDirectIntBuffer(length);
+        for (int bodyId : idList) {
+            intBuffer.put(bodyId);
+        }
+
+        long arrayVa = createFromBuffer(intBuffer);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
     // *************************************************************************
@@ -49,10 +104,22 @@ public class BodyIdArray extends JoltPhysicsObject {
      * @return the {@code BodyID} value
      */
     public int get(int elementIndex) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         int result = getId(arrayVa, elementIndex);
 
         return result;
+    }
+
+    /**
+     * Return the length of the array.
+     *
+     * @return the length (in IDs)
+     */
+    public int length() {
+        return length;
     }
 
     /**
@@ -62,6 +129,9 @@ public class BodyIdArray extends JoltPhysicsObject {
      * @param bodyId the ID to store
      */
     public void set(int elementIndex, int bodyId) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         setId(arrayVa, elementIndex, bodyId);
     }
@@ -69,6 +139,8 @@ public class BodyIdArray extends JoltPhysicsObject {
     // native private methods
 
     native private static long create(int length);
+
+    native private static long createFromBuffer(IntBuffer ids);
 
     native private static void free(long arrayVa);
 
