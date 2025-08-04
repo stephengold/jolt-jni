@@ -26,6 +26,8 @@ import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.ESwingType;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code SwingTwistConstraint}.
@@ -104,10 +106,9 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getPlaneAxis1() {
         long settingsVa = va();
-        float x = getPlaneAxis1X(settingsVa);
-        float y = getPlaneAxis1Y(settingsVa);
-        float z = getPlaneAxis1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPlaneAxis1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -120,10 +121,9 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getPlaneAxis2() {
         long settingsVa = va();
-        float x = getPlaneAxis2X(settingsVa);
-        float y = getPlaneAxis2Y(settingsVa);
-        float z = getPlaneAxis2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPlaneAxis2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -150,10 +150,9 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPosition1() {
         long settingsVa = va();
-        double xx = getPosition1X(settingsVa);
-        double yy = getPosition1Y(settingsVa);
-        double zz = getPosition1Z(settingsVa);
-        RVec3 result = new RVec3(xx, yy, zz);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition1(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -166,10 +165,9 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPosition2() {
         long settingsVa = va();
-        double xx = getPosition2X(settingsVa);
-        double yy = getPosition2Y(settingsVa);
-        double zz = getPosition2Z(settingsVa);
-        RVec3 result = new RVec3(xx, yy, zz);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition2(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -223,10 +221,9 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getTwistAxis1() {
         long settingsVa = va();
-        float x = getTwistAxis1X(settingsVa);
-        float y = getTwistAxis1Y(settingsVa);
-        float z = getTwistAxis1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTwistAxis1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -239,10 +236,9 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getTwistAxis2() {
         long settingsVa = va();
-        float x = getTwistAxis2X(settingsVa);
-        float y = getTwistAxis2Y(settingsVa);
-        float z = getTwistAxis2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTwistAxis2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -504,31 +500,19 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static float getNormalHalfConeAngle(long settingsVa);
 
-    native private static float getPlaneAxis1X(long settingsVa);
+    native private static void getPlaneAxis1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getPlaneAxis1Y(long settingsVa);
-
-    native private static float getPlaneAxis1Z(long settingsVa);
-
-    native private static float getPlaneAxis2X(long settingsVa);
-
-    native private static float getPlaneAxis2Y(long settingsVa);
-
-    native private static float getPlaneAxis2Z(long settingsVa);
+    native private static void getPlaneAxis2(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static float getPlaneHalfConeAngle(long settingsVa);
 
-    native private static double getPosition1X(long settingsVa);
+    native private static void getPosition1(
+            long settingsVa, DoubleBuffer storeDoubles);
 
-    native private static double getPosition1Y(long settingsVa);
-
-    native private static double getPosition1Z(long settingsVa);
-
-    native private static double getPosition2X(long settingsVa);
-
-    native private static double getPosition2Y(long settingsVa);
-
-    native private static double getPosition2Z(long settingsVa);
+    native private static void getPosition2(
+            long settingsVa, DoubleBuffer storeDoubles);
 
     native private static int getSpace(long settingsVa);
 
@@ -536,17 +520,11 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static int getSwingType(long settingsVa);
 
-    native private static float getTwistAxis1X(long settingsVa);
+    native private static void getTwistAxis1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getTwistAxis1Y(long settingsVa);
-
-    native private static float getTwistAxis1Z(long settingsVa);
-
-    native private static float getTwistAxis2X(long settingsVa);
-
-    native private static float getTwistAxis2Y(long settingsVa);
-
-    native private static float getTwistAxis2Z(long settingsVa);
+    native private static void getTwistAxis2(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static float getTwistMaxAngle(long settingsVa);
 
