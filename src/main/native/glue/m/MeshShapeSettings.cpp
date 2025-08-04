@@ -89,7 +89,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
         const Float3 float3(x, y, z);
         vertices.push_back(float3);
     }
-    IndexedTriangleList * const pIndices
+    const IndexedTriangleList * const pIndices
             = reinterpret_cast<IndexedTriangleList *> (indicesVa);
     MeshShapeSettings * const pSettings
             = new MeshShapeSettings(vertices, *pIndices);
