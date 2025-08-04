@@ -56,6 +56,7 @@ import com.github.stephengold.joltjni.TempAllocatorMalloc;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
 import com.github.stephengold.joltjni.Vertex;
+import com.github.stephengold.joltjni.WheelSettings;
 import com.github.stephengold.joltjni.WheelSettingsWv;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
 import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
@@ -71,6 +72,7 @@ import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
+import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -1208,27 +1210,70 @@ public class Test003 {
     }
 
     /**
+     * Test the getters and defaults of the specified {@code WheelSettings}.
+     *
+     * @param ws the settings to test (not null, unaffected)
+     */
+    private static void testWheelSettingsDefaults(ConstWheelSettings ws) {
+        Assert.assertFalse(ws.getEnableSuspensionForcePoint());
+        TestUtils.assertEquals(0f, 0f, 0f, ws.getPosition(), 0f);
+        Assert.assertEquals(0.3f, ws.getRadius(), 0f);
+        TestUtils.assertEquals(0f, 1f, 0f, ws.getSteeringAxis(), 0f);
+        TestUtils.assertEquals(0f, -1f, 0f, ws.getSuspensionDirection(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, ws.getSuspensionForcePoint(), 0f);
+        Assert.assertEquals(0.5f, ws.getSuspensionMaxLength(), 0f);
+        Assert.assertEquals(0.3f, ws.getSuspensionMinLength(), 0f);
+        Assert.assertEquals(0f, ws.getSuspensionPreloadLength(), 0f);
+        Assert.assertNotNull(ws.getSuspensionSpring());
+        TestUtils.assertEquals(0f, 0f, 1f, ws.getWheelForward(), 0f);
+        TestUtils.assertEquals(0f, 1f, 0f, ws.getWheelUp(), 0f);
+        Assert.assertEquals(0.1f, ws.getWidth(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code WheelSettings}.
+     *
+     * @param ws the settings to test (not null, modified)
+     */
+    private static void testWheelSettingsSetters(WheelSettings ws) {
+        ws.setEnableSuspensionForcePoint(true);
+        ws.setPosition(new Vec3(1f, 2f, 3f));
+        ws.setRadius(0.4f);
+        ws.setSteeringAxis(new Vec3(0f, 0f, 1f));
+        ws.setSuspensionDirection(new Vec3(0f, -0.8f, 0.6f));
+        ws.setSuspensionForcePoint(new Vec3(4f, 2f, 1f));
+        ws.setSuspensionMaxLength(1f);
+        ws.setSuspensionMinLength(0.2f);
+        ws.setSuspensionPreloadLength(0.5f);
+        ws.setWheelForward(new Vec3(0f, 0f, -1f));
+        ws.setWidth(0.14f);
+
+        Assert.assertTrue(ws.getEnableSuspensionForcePoint());
+        TestUtils.assertEquals(1f, 2f, 3f, ws.getPosition(), 0f);
+        Assert.assertEquals(0.4f, ws.getRadius(), 0f);
+        TestUtils.assertEquals(0f, 0f, 1f, ws.getSteeringAxis(), 0f);
+        TestUtils.assertEquals(
+                0f, -0.8f, 0.6f, ws.getSuspensionDirection(), 0f);
+        TestUtils.assertEquals(4f, 2f, 1f, ws.getSuspensionForcePoint(), 0f);
+        Assert.assertEquals(1f, ws.getSuspensionMaxLength(), 0f);
+        Assert.assertEquals(0.2f, ws.getSuspensionMinLength(), 0f);
+        Assert.assertEquals(0.5f, ws.getSuspensionPreloadLength(), 0f);
+        TestUtils.assertEquals(0f, 0f, -1f, ws.getWheelForward(), 0f);
+        Assert.assertEquals(0.14f, ws.getWidth(), 0f);
+    }
+
+    /**
      * Test the getters and defaults of the specified {@code WheelSettingsWv}.
      *
      * @param wswv the settings to test (not null, unaffected)
      */
     private static void testWheelSettingsWvDefaults(WheelSettingsWv wswv) {
-        Assert.assertFalse(wswv.getEnableSuspensionForcePoint());
+        testWheelSettingsDefaults(wswv);
+
         Assert.assertEquals(1_500f, wswv.getMaxBrakeTorque(), 0f);
         Assert.assertEquals(4_000f, wswv.getMaxHandBrakeTorque(), 0f);
         Assert.assertEquals(
                 Jolt.degreesToRadians(70f), wswv.getMaxSteerAngle(), 1e-7f);
-        TestUtils.assertEquals(0f, 0f, 0f, wswv.getPosition(), 0f);
-        Assert.assertEquals(0.3f, wswv.getRadius(), 0f);
-        TestUtils.assertEquals(0f, 1f, 0f, wswv.getSteeringAxis(), 0f);
-        TestUtils.assertEquals(0f, -1f, 0f, wswv.getSuspensionDirection(), 0f);
-        TestUtils.assertEquals(0f, 0f, 0f, wswv.getSuspensionForcePoint(), 0f);
-        Assert.assertEquals(0.5f, wswv.getSuspensionMaxLength(), 0f);
-        Assert.assertEquals(0.3f, wswv.getSuspensionMinLength(), 0f);
-        Assert.assertEquals(0f, wswv.getSuspensionPreloadLength(), 0f);
-        Assert.assertNotNull(wswv.getSuspensionSpring());
-        TestUtils.assertEquals(0f, 0f, 1f, wswv.getWheelForward(), 0f);
-        Assert.assertEquals(0.1f, wswv.getWidth(), 0f);
     }
 
     /**
@@ -1237,36 +1282,15 @@ public class Test003 {
      * @param wswv the settings to test (not null, modified)
      */
     private static void testWheelSettingsWvSetters(WheelSettingsWv wswv) {
-        wswv.setEnableSuspensionForcePoint(true);
+        testWheelSettingsSetters(wswv);
+
         wswv.setMaxBrakeTorque(333f);
         wswv.setMaxHandBrakeTorque(456f);
         wswv.setMaxSteerAngle(0.1f);
-        wswv.setPosition(new Vec3(1f, 2f, 3f));
-        wswv.setRadius(0.4f);
-        wswv.setSteeringAxis(new Vec3(0f, 0f, 1f));
-        wswv.setSuspensionDirection(new Vec3(0f, -0.8f, 0.6f));
-        wswv.setSuspensionForcePoint(new Vec3(4f, 2f, 1f));
-        wswv.setSuspensionMaxLength(1f);
-        wswv.setSuspensionMinLength(0.2f);
-        wswv.setSuspensionPreloadLength(0.5f);
-        wswv.setWheelForward(new Vec3(0f, 0f, -1f));
-        wswv.setWidth(0.14f);
 
-        Assert.assertTrue(wswv.getEnableSuspensionForcePoint());
         Assert.assertEquals(333f, wswv.getMaxBrakeTorque(), 0f);
         Assert.assertEquals(456f, wswv.getMaxHandBrakeTorque(), 0f);
         Assert.assertEquals(0.1f, wswv.getMaxSteerAngle(), 0f);
-        TestUtils.assertEquals(1f, 2f, 3f, wswv.getPosition(), 0f);
-        Assert.assertEquals(0.4f, wswv.getRadius(), 0f);
-        TestUtils.assertEquals(0f, 0f, 1f, wswv.getSteeringAxis(), 0f);
-        TestUtils.assertEquals(
-                0f, -0.8f, 0.6f, wswv.getSuspensionDirection(), 0f);
-        TestUtils.assertEquals(4f, 2f, 1f, wswv.getSuspensionForcePoint(), 0f);
-        Assert.assertEquals(1f, wswv.getSuspensionMaxLength(), 0f);
-        Assert.assertEquals(0.2f, wswv.getSuspensionMinLength(), 0f);
-        Assert.assertEquals(0.5f, wswv.getSuspensionPreloadLength(), 0f);
-        TestUtils.assertEquals(0f, 0f, -1f, wswv.getWheelForward(), 0f);
-        Assert.assertEquals(0.14f, wswv.getWidth(), 0f);
     }
 
     /**
