@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstVertexList;
 import java.nio.FloatBuffer;
 import java.util.List;
 
@@ -189,7 +190,8 @@ public class MeshShapeSettings extends ShapeSettings {
      * @param vertices list of vertex locations (not null, unaffected)
      * @param indices list of triangles that use those vertices (not null)
      */
-    public MeshShapeSettings(VertexList vertices, IndexedTriangleList indices) {
+    public MeshShapeSettings(
+            ConstVertexList vertices, IndexedTriangleList indices) {
         int numVertices = vertices.size();
         FloatBuffer buffer = vertices.toDirectBuffer();
         long indicesVa = indices.va();
