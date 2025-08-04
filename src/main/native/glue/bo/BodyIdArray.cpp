@@ -55,6 +55,11 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_createFr
     JPH_ASSERT(!pEnv->ExceptionCheck());
     BodyID * const pArray = new BodyID[numIds];
     TRACE_NEW("BodyID[]", pArray)
+    for (jlong i = 0; i < numIds; ++i) {
+        jint bodyId = pIds[i];
+        const BodyID id(bodyId);
+        pArray[i] = id;
+    }
     return reinterpret_cast<jlong> (pArray);
 }
 
