@@ -58,7 +58,7 @@ public class BodyIdArray extends JoltPhysicsObject {
      *
      * @param idArray the ID values (not null, unaffected)
      */
-    public BodyIdArray(int[] idArray) {
+    public BodyIdArray(int... idArray) {
         this.length = idArray.length;
         IntBuffer intBuffer = Jolt.newDirectIntBuffer(length);
         intBuffer.put(idArray);
