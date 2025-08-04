@@ -102,6 +102,34 @@ public class VehicleConstraint extends Constraint {
     }
 
     /**
+     * Copy the local "forward" direction. The constraint is unaffected.
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getLocalForward() {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLocalForward(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Copy the local "up" direction. The constraint is unaffected.
+     *
+     * @return a new direction vector
+     */
+    public Vec3 getLocalUp() {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLocalUp(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
      * Access the vehicle's {@code PhysicsStepListener}. Since Java doesn't
      * allow multiple inheritance, the listener is managed like a contained
      * object.
@@ -270,6 +298,12 @@ public class VehicleConstraint extends Constraint {
     native private static long createConstraint(long bodyVa, long settingsVa);
 
     native private static long getController(long constraintVa);
+
+    native private static void getLocalForward(
+            long constraintVa, FloatBuffer storeFloats);
+
+    native private static void getLocalUp(
+            long constraintVa, FloatBuffer storeFloats);
 
     native private static long getStepListener(long constraintVa);
 
