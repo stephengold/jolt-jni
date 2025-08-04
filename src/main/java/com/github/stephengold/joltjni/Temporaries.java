@@ -42,7 +42,7 @@ final class Temporaries {
      * a reusable, direct FloatBuffer
      */
     final static ThreadLocal<FloatBuffer> floatBuffer1
-            = ThreadLocal.withInitial(() -> Jolt.newDirectFloatBuffer(11));
+            = ThreadLocal.withInitial(() -> Jolt.newDirectFloatBuffer(12));
     // *************************************************************************
     // constructors
 
