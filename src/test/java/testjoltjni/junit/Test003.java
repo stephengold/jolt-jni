@@ -57,6 +57,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
 import com.github.stephengold.joltjni.Vertex;
 import com.github.stephengold.joltjni.WheelSettings;
+import com.github.stephengold.joltjni.WheelSettingsTv;
 import com.github.stephengold.joltjni.WheelSettingsWv;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
 import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
@@ -73,6 +74,7 @@ import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
+import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -124,6 +126,7 @@ public class Test003 {
         doVehicleConstraintSettings();
         doVertex();
         doWvControllerSettings();
+        doWheelSettingsTv();
         doWheelSettingsWv();
 
         TestUtils.cleanup();
@@ -578,6 +581,19 @@ public class Test003 {
         testVertexSetters(vertex);
 
         TestUtils.testClose(vertex);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code WheelSettingsTv} class.
+     */
+    private static void doWheelSettingsTv() {
+        WheelSettingsTv wstv = new WheelSettingsTv();
+
+        testWheelSettingsTvDefaults(wstv);
+        testWheelSettingsTvSetters(wstv);
+
+        TestUtils.testClose(wstv);
         System.gc();
     }
 
@@ -1260,6 +1276,33 @@ public class Test003 {
         Assert.assertEquals(0.5f, ws.getSuspensionPreloadLength(), 0f);
         TestUtils.assertEquals(0f, 0f, -1f, ws.getWheelForward(), 0f);
         Assert.assertEquals(0.14f, ws.getWidth(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code WheelSettingsTv}.
+     *
+     * @param wstv the settings to test (not null, unaffected)
+     */
+    private static void testWheelSettingsTvDefaults(ConstWheelSettingsTv wstv) {
+        testWheelSettingsDefaults(wstv);
+
+        Assert.assertEquals(2f, wstv.getLateralFriction(), 0f);
+        Assert.assertEquals(4f, wstv.getLongitudinalFriction(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code WheelSettingsTv}.
+     *
+     * @param wstv the settings to test (not null, modified)
+     */
+    private static void testWheelSettingsTvSetters(WheelSettingsTv wstv) {
+        testWheelSettingsSetters(wstv);
+
+        wstv.setLateralFriction(1f);
+        wstv.setLongitudinalFriction(5f);
+
+        Assert.assertEquals(1f, wstv.getLateralFriction(), 0f);
+        Assert.assertEquals(5f, wstv.getLongitudinalFriction(), 0f);
     }
 
     /**
