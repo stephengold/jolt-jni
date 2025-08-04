@@ -266,6 +266,39 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Retrieve the states of all active bodies of a specific type in a single,
+     * optimized JNI call.
+     *
+     * @param bodyType the type of bodies to retrieve (not null)
+     * @param outBodyIds an array to be filled with the body IDs (not null)
+     * @param outPositions an array for positions (x, y, z); requires 3 elements
+     * per body (not null)
+     * @param outRotations an array for rotations (x, y, z, w); requires 4
+     * elements per body (not null)
+     * @param outLinearVelocities an array for linear velocities (x, y, z);
+     * requires 3 elements per body (not null)
+     * @param outAngularVelocities an array for angular velocities (x, y, z);
+     * requires 3 elements per body (not null)
+     * @return the number of active bodies whose states were written to the
+     * arrays
+     */
+    public int getActiveBodyStates(
+            EBodyType bodyType,
+            int[] outBodyIds,
+            double[] outPositions,
+            float[] outRotations,
+            float[] outLinearVelocities,
+            float[] outAngularVelocities) {
+        long systemVa = va();
+        int ordinal = bodyType.ordinal();
+        int result = getActiveBodyStates(systemVa, ordinal,
+                outBodyIds, outPositions, outRotations,
+                outLinearVelocities, outAngularVelocities);
+
+        return result;
+    }
+
+    /**
      * Enumerate all bodies to the specified variable-length vector. The system
      * is unaffected.
      *
@@ -293,6 +326,31 @@ public class PhysicsSystem extends NonCopyable {
         } else {
             result = new BodyActivationListener(listenerVa);
         }
+
+        return result;
+    }
+
+    /**
+     * Retrieve the states of all inactive bodies of a specific type.
+     *
+     * @param bodyType the type of bodies to retrieve (not null)
+     * @param outBodyIds an array to be filled with the body IDs (not null)
+     * @param outPositions an array for positions (x, y, z); requires 3 elements
+     * per body (not null)
+     * @param outRotations an array for rotations (x, y, z, w); requires 4
+     * elements per body (not null)
+     * @return the number of inactive bodies whose states were written to the
+     * arrays
+     */
+    public int getInactiveBodyStates(
+            EBodyType bodyType,
+            int[] outBodyIds,
+            double[] outPositions,
+            float[] outRotations) {
+        long systemVa = va();
+        int ordinal = bodyType.ordinal();
+        int result = getInactiveBodyStates(systemVa, ordinal,
+                outBodyIds, outPositions, outRotations);
 
         return result;
     }
@@ -342,6 +400,28 @@ public class PhysicsSystem extends NonCopyable {
         long interfaceVa = getBodyLockInterfaceNoLock(systemVa);
         BodyLockInterfaceNoLock result
                 = new BodyLockInterfaceNoLock(this, interfaceVa);
+
+        return result;
+    }
+
+    /**
+     * Retrieve the states of all bodies in the system, regardless of their
+     * activation state.
+     *
+     * @param outBodyIds an array to be filled with the body IDs (not null)
+     * @param outPositions an array for positions (x, y, z); requires 3 elements
+     * per body (not null)
+     * @param outRotations an array for rotations (x, y, z, w); requires 4
+     * elements per body (not null)
+     * @return the number of bodies whose states were written to the arrays
+     */
+    public int getBodyStates(
+            int[] outBodyIds,
+            double[] outPositions,
+            float[] outRotations) {
+        long systemVa = va();
+        int result = getBodyStates(systemVa,
+                outBodyIds, outPositions, outRotations);
 
         return result;
     }
@@ -907,9 +987,17 @@ public class PhysicsSystem extends NonCopyable {
     native private static void getActiveBodies(
             long systemVa, int ordinal, long vectorVa);
 
+
+    native private static int getActiveBodyStates(long systemVa, int bodyType,
+                                                  int[] outBodyIds, double[] outPositions, float[] outRotations,
+                                                  float[] outLinearVelocities, float[] outAngularVelocities);
+
     native private static void getBodies(long systemVa, long vectorVa);
 
     native private static long getBodyActivationListener(long systemVa);
+
+    native private static int getInactiveBodyStates(long systemVa, int bodyType,
+                                                    int[] outBodyIds, double[] outPositions, float[] outRotations);
 
     native private static long getBodyInterface(long systemVa);
 
@@ -918,6 +1006,9 @@ public class PhysicsSystem extends NonCopyable {
     native private static long getBodyLockInterface(long systemVa);
 
     native private static long getBodyLockInterfaceNoLock(long systemVa);
+
+    native private static int getBodyStates(long systemVa,
+                                            int[] outBodyIds, double[] outPositions, float[] outRotations);
 
     native private static long getBounds(long systemVa);
 
