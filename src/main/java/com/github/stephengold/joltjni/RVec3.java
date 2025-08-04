@@ -399,6 +399,19 @@ final public class RVec3 implements RVec3Arg {
     // RVec3Arg methods
 
     /**
+     * Write all 3 components to the start of the specified buffer. The vector
+     * is unaffected.
+     *
+     * @param storeDoubles the destination buffer (not null, capacity&ge;3)
+     */
+    @Override
+    public void copyTo(DoubleBuffer storeDoubles) {
+        storeDoubles.put(0, xx);
+        storeDoubles.put(1, yy);
+        storeDoubles.put(2, zz);
+    }
+
+    /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
      * @param rightFactor the vector to cross with the current one (not null,

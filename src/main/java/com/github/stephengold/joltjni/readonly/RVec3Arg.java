@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
+import java.nio.DoubleBuffer;
 
 /**
  * Read-only access to an {@code RVec3}. (native type: const RVec3)
@@ -30,6 +31,14 @@ import com.github.stephengold.joltjni.Vec3;
  * @author Stephen Gold sgold@sonic.net
  */
 public interface RVec3Arg {
+    /**
+     * Write all 3 components to the start of the specified buffer. The vector
+     * is unaffected.
+     *
+     * @param storeDoubles the destination buffer (not null, capacity&ge;3)
+     */
+    void copyTo(DoubleBuffer storeDoubles);
+
     /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
