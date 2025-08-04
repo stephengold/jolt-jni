@@ -70,7 +70,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationRe
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
-    const Vec3 &result = pEstimate->mAngularVelocity1;
+    const Vec3& result = pEstimate->mAngularVelocity1;
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
@@ -87,7 +87,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationRe
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
-    const Vec3 &result = pEstimate->mAngularVelocity2;
+    const Vec3& result = pEstimate->mAngularVelocity2;
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
@@ -118,7 +118,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationRe
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
-    const Vec3 &result = pEstimate->mLinearVelocity1;
+    const Vec3& result = pEstimate->mLinearVelocity1;
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
@@ -135,7 +135,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollisionEstimationRe
             = reinterpret_cast<CollisionEstimationResult *> (estimateVa);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
-    const Vec3 &result = pEstimate->mLinearVelocity2;
+    const Vec3& result = pEstimate->mLinearVelocity2;
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
