@@ -331,7 +331,9 @@ public class Test003 {
             TestUtils.testClose(bodyIdArray);
         }
         { // constructor with List<Integer> argument
-            List<Integer> idList = new ArrayList<>(5);
+            List<Integer> idList = new ArrayList<>();
+            idList.add(0);  // to avoid an empty list in the native layer.
+
             BodyIdArray bodyIdArray = new BodyIdArray(idList);
             Assert.assertTrue(bodyIdArray.hasAssignedNativeObject());
             Assert.assertTrue(bodyIdArray.ownsNativeObject());
