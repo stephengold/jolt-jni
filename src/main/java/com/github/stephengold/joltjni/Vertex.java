@@ -71,9 +71,9 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     /**
      * Alter the initial location of the vertex. (native attribute: mPosition)
      *
-     * @param x the desired X coordinate
-     * @param y the desired Y coordinate
-     * @param z the desired Z coordinate
+     * @param x the desired X coordinate (default=0)
+     * @param y the desired Y coordinate (default=0)
+     * @param z the desired Z coordinate (default=0)
      * @return the modified settings, for chaining
      */
     public Vertex setPosition(float x, float y, float z) {
@@ -118,11 +118,11 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     }
 
     /**
-     * Alter the initial location of the vertex. (native attribute: mPosition)
+     * Alter the initial velocity of the vertex. (native attribute: mVelocity)
      *
-     * @param x the desired X component
-     * @param y the desired Y component
-     * @param z the desired Z component
+     * @param x the desired X component (default=0)
+     * @param y the desired Y component (default=0)
+     * @param z the desired Z component (default=0)
      * @return the modified settings, for chaining
      */
     public Vertex setVelocity(float x, float y, float z) {
