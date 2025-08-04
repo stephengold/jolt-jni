@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code VehicleConstraint}.
@@ -192,10 +193,9 @@ public class VehicleConstraintSettings
     @Override
     public Vec3 getForward() {
         long settingsVa = va();
-        float dx = getForwardX(settingsVa);
-        float dy = getForwardY(settingsVa);
-        float dz = getForwardZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getForward(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -251,10 +251,9 @@ public class VehicleConstraintSettings
     @Override
     public Vec3 getUp() {
         long settingsVa = va();
-        float dx = getUpX(settingsVa);
-        float dy = getUpY(settingsVa);
-        float dz = getUpZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getUp(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -308,11 +307,8 @@ public class VehicleConstraintSettings
 
     native private static long getController(long constraintSettingsVa);
 
-    native private static float getForwardX(long settingsVa);
-
-    native private static float getForwardY(long settingsVa);
-
-    native private static float getForwardZ(long settingsVa);
+    native private static void getForward(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static float getMaxPitchRollAngle(long settingsVa);
 
@@ -320,11 +316,7 @@ public class VehicleConstraintSettings
 
     native private static int getNumWheels(long settingsVa);
 
-    native private static float getUpX(long settingsVa);
-
-    native private static float getUpY(long settingsVa);
-
-    native private static float getUpZ(long settingsVa);
+    native private static void getUp(long settingsVa, FloatBuffer storeFloats);
 
     native private static long getWheel(
             long constraintSettingsVa, int wheelIndex);
