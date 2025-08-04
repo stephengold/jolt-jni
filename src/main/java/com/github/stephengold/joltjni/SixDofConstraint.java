@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EAxis;
 import com.github.stephengold.joltjni.enumerate.EMotorState;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * A {@code TwoBodyConstraint} that can constrain all 6 degrees of freedom.
@@ -148,11 +149,9 @@ public class SixDofConstraint extends TwoBodyConstraint {
      */
     public Quat getRotationInConstraintSpace() {
         long constraintVa = va();
-        float qw = getRotationInConstraintSpaceW(constraintVa);
-        float qx = getRotationInConstraintSpaceX(constraintVa);
-        float qy = getRotationInConstraintSpaceY(constraintVa);
-        float qz = getRotationInConstraintSpaceZ(constraintVa);
-        Quat result = new Quat(qx, qy, qz, qw);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotationInConstraintSpace(constraintVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -164,10 +163,9 @@ public class SixDofConstraint extends TwoBodyConstraint {
      */
     public Vec3 getRotationLimitsMax() {
         long constraintVa = va();
-        float x = getRotationLimitsMaxX(constraintVa);
-        float y = getRotationLimitsMaxY(constraintVa);
-        float z = getRotationLimitsMaxZ(constraintVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotationLimitsMax(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -179,10 +177,9 @@ public class SixDofConstraint extends TwoBodyConstraint {
      */
     public Vec3 getRotationLimitsMin() {
         long constraintVa = va();
-        float x = getRotationLimitsMinX(constraintVa);
-        float y = getRotationLimitsMinY(constraintVa);
-        float z = getRotationLimitsMinZ(constraintVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotationLimitsMin(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -196,10 +193,9 @@ public class SixDofConstraint extends TwoBodyConstraint {
      */
     public Vec3 getTargetAngularVelocityCs() {
         long constraintVa = va();
-        float wx = getTargetAngularVelocityCsX(constraintVa);
-        float wy = getTargetAngularVelocityCsY(constraintVa);
-        float wz = getTargetAngularVelocityCsZ(constraintVa);
-        Vec3 result = new Vec3(wx, wy, wz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTargetAngularVelocityCs(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -212,10 +208,9 @@ public class SixDofConstraint extends TwoBodyConstraint {
      */
     public Vec3 getTargetPositionCs() {
         long constraintVa = va();
-        float x = getTargetPositionCsX(constraintVa);
-        float y = getTargetPositionCsY(constraintVa);
-        float z = getTargetPositionCsZ(constraintVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTargetPositionCs(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -228,11 +223,9 @@ public class SixDofConstraint extends TwoBodyConstraint {
      */
     public Quat getTargetOrientationCs() {
         long constraintVa = va();
-        float qw = getTargetOrientationCsW(constraintVa);
-        float qx = getTargetOrientationCsX(constraintVa);
-        float qy = getTargetOrientationCsY(constraintVa);
-        float qz = getTargetOrientationCsZ(constraintVa);
-        Quat result = new Quat(qx, qy, qz, qw);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTargetOrientationCs(constraintVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -246,10 +239,9 @@ public class SixDofConstraint extends TwoBodyConstraint {
      */
     public Vec3 getTargetVelocityCs() {
         long constraintVa = va();
-        float vx = getTargetVelocityCsX(constraintVa);
-        float vy = getTargetVelocityCsY(constraintVa);
-        float vz = getTargetVelocityCsZ(constraintVa);
-        Vec3 result = new Vec3(vx, vy, vz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTargetVelocityCs(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -261,10 +253,9 @@ public class SixDofConstraint extends TwoBodyConstraint {
      */
     public Vec3 getTranslationLimitsMax() {
         long constraintVa = va();
-        float x = getTranslationLimitsMaxX(constraintVa);
-        float y = getTranslationLimitsMaxY(constraintVa);
-        float z = getTranslationLimitsMaxZ(constraintVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTranslationLimitsMax(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -276,10 +267,9 @@ public class SixDofConstraint extends TwoBodyConstraint {
      */
     public Vec3 getTranslationLimitsMin() {
         long constraintVa = va();
-        float x = getTranslationLimitsMinX(constraintVa);
-        float y = getTranslationLimitsMinY(constraintVa);
-        float z = getTranslationLimitsMinZ(constraintVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTranslationLimitsMin(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -478,67 +468,32 @@ public class SixDofConstraint extends TwoBodyConstraint {
 
     native private static int getMotorState(long constraintVa, int dofIndex);
 
-    native private static float getRotationInConstraintSpaceW(
-            long constraintVa);
+    native private static void getRotationInConstraintSpace(
+            long constraintVa, FloatBuffer storeFloats);
 
-    native private static float getRotationInConstraintSpaceX(
-            long constraintVa);
+    native private static void getRotationLimitsMax(
+            long constraintVa, FloatBuffer storeFloats);
 
-    native private static float getRotationInConstraintSpaceY(
-            long constraintVa);
+    native private static void getRotationLimitsMin(
+            long constraintVa, FloatBuffer storeFloats);
 
-    native private static float getRotationInConstraintSpaceZ(
-            long constraintVa);
+    native private static void getTargetAngularVelocityCs(
+            long constraintVa, FloatBuffer storeFloats);
 
-    native private static float getRotationLimitsMaxX(long constraintVa);
+    native private static void getTargetPositionCs(
+            long constraintVa, FloatBuffer storeFloats);
 
-    native private static float getRotationLimitsMaxY(long constraintVa);
+    native private static void getTargetOrientationCs(
+            long constraintVa, FloatBuffer storeFloats);
 
-    native private static float getRotationLimitsMaxZ(long constraintVa);
+    native private static void getTargetVelocityCs(
+            long constraintVa, FloatBuffer storeFloats);
 
-    native private static float getRotationLimitsMinX(long constraintVa);
+    native private static void getTranslationLimitsMax(
+            long constraintVa, FloatBuffer storeFloats);
 
-    native private static float getRotationLimitsMinY(long constraintVa);
-
-    native private static float getRotationLimitsMinZ(long constraintVa);
-
-    native private static float getTargetAngularVelocityCsX(long constraintVa);
-
-    native private static float getTargetAngularVelocityCsY(long constraintVa);
-
-    native private static float getTargetAngularVelocityCsZ(long constraintVa);
-
-    native private static float getTargetPositionCsX(long constraintVa);
-
-    native private static float getTargetPositionCsY(long constraintVa);
-
-    native private static float getTargetPositionCsZ(long constraintVa);
-
-    native private static float getTargetOrientationCsW(long constraintVa);
-
-    native private static float getTargetOrientationCsX(long constraintVa);
-
-    native private static float getTargetOrientationCsY(long constraintVa);
-
-    native private static float getTargetOrientationCsZ(long constraintVa);
-
-    native private static float getTargetVelocityCsX(long constraintVa);
-
-    native private static float getTargetVelocityCsY(long constraintVa);
-
-    native private static float getTargetVelocityCsZ(long constraintVa);
-
-    native private static float getTranslationLimitsMaxX(long constraintVa);
-
-    native private static float getTranslationLimitsMaxY(long constraintVa);
-
-    native private static float getTranslationLimitsMaxZ(long constraintVa);
-
-    native private static float getTranslationLimitsMinX(long constraintVa);
-
-    native private static float getTranslationLimitsMinY(long constraintVa);
-
-    native private static float getTranslationLimitsMinZ(long constraintVa);
+    native private static void getTranslationLimitsMin(
+            long constraintVa, FloatBuffer storeFloats);
 
     native private static boolean isFixedAxis(
             long constraintVa, int dofIndex);

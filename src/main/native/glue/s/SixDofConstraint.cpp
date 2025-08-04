@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Constraints/SixDOFConstraint.h"
 #include "auto/com_github_stephengold_joltjni_SixDofConstraint.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -122,408 +123,157 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getM
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getRotationInConstraintSpaceW
- * Signature: (J)F
+ * Method:    getRotationInConstraintSpace
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationInConstraintSpaceW
-  (JNIEnv *, jclass, jlong constraintVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationInConstraintSpace
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SixDOFConstraint * const pConstraint
             = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Quat quat = pConstraint->GetRotationInConstraintSpace();
-    const float result = quat.GetW();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Quat result = pConstraint->GetRotationInConstraintSpace();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+    pFloats[3] = result.GetW();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getRotationInConstraintSpaceX
- * Signature: (J)F
+ * Method:    getRotationLimitsMax
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationInConstraintSpaceX
-  (JNIEnv *, jclass, jlong constraintVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationLimitsMax
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SixDOFConstraint * const pConstraint
             = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Quat quat = pConstraint->GetRotationInConstraintSpace();
-    const float result = quat.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pConstraint->GetRotationLimitsMax();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getRotationInConstraintSpaceY
- * Signature: (J)F
+ * Method:    getRotationLimitsMin
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationInConstraintSpaceY
-  (JNIEnv *, jclass, jlong constraintVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationLimitsMin
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SixDOFConstraint * const pConstraint
             = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Quat quat = pConstraint->GetRotationInConstraintSpace();
-    const float result = quat.GetY();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pConstraint->GetRotationLimitsMin();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getRotationInConstraintSpaceZ
- * Signature: (J)F
+ * Method:    getTargetAngularVelocityCs
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationInConstraintSpaceZ
-  (JNIEnv *, jclass, jlong constraintVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetAngularVelocityCs
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SixDOFConstraint * const pConstraint
             = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Quat quat = pConstraint->GetRotationInConstraintSpace();
-    const float result = quat.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pConstraint->GetTargetAngularVelocityCS();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getRotationLimitsMaxX
- * Signature: (J)F
+ * Method:    getTargetPositionCs
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationLimitsMaxX
-  (JNIEnv *, jclass, jlong constraintVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetPositionCs
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SixDOFConstraint * const pConstraint
             = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetRotationLimitsMax();
-    const float result = vec3.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pConstraint->GetTargetPositionCS();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getRotationLimitsMaxY
- * Signature: (J)F
+ * Method:    getTargetOrientationCs
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationLimitsMaxY
-  (JNIEnv *, jclass, jlong constraintVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetOrientationCs
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SixDOFConstraint * const pConstraint
             = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetRotationLimitsMax();
-    const float result = vec3.GetY();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Quat result = pConstraint->GetTargetOrientationCS();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+    pFloats[3] = result.GetW();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getRotationLimitsMaxZ
- * Signature: (J)F
+ * Method:    getTargetVelocityCs
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationLimitsMaxZ
-  (JNIEnv *, jclass, jlong constraintVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetVelocityCs
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SixDOFConstraint * const pConstraint
             = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetRotationLimitsMax();
-    const float result = vec3.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pConstraint->GetTargetVelocityCS();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getRotationLimitsMinX
- * Signature: (J)F
+ * Method:    getTranslationLimitsMax
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationLimitsMinX
-  (JNIEnv *, jclass, jlong constraintVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTranslationLimitsMax
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SixDOFConstraint * const pConstraint
             = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetRotationLimitsMin();
-    const float result = vec3.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pConstraint->GetTranslationLimitsMax();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getRotationLimitsMinY
- * Signature: (J)F
+ * Method:    getTranslationLimitsMin
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationLimitsMinY
-  (JNIEnv *, jclass, jlong constraintVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTranslationLimitsMin
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
     const SixDOFConstraint * const pConstraint
             = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetRotationLimitsMin();
-    const float result = vec3.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getRotationLimitsMinZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getRotationLimitsMinZ
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetRotationLimitsMin();
-    const float result = vec3.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetAngularVelocityCsX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetAngularVelocityCsX
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTargetAngularVelocityCS();
-    const float result = vec3.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetAngularVelocityCsY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetAngularVelocityCsY
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTargetAngularVelocityCS();
-    const float result = vec3.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetAngularVelocityCsZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetAngularVelocityCsZ
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTargetAngularVelocityCS();
-    const float result = vec3.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetPositionCsX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetPositionCsX
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTargetPositionCS();
-    const float result = vec3.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetPositionCsY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetPositionCsY
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTargetPositionCS();
-    const float result = vec3.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetPositionCsZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetPositionCsZ
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTargetPositionCS();
-    const float result = vec3.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetOrientationCsW
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetOrientationCsW
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Quat quat = pConstraint->GetTargetOrientationCS();
-    const float result = quat.GetW();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetOrientationCsX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetOrientationCsX
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Quat quat = pConstraint->GetTargetOrientationCS();
-    const float result = quat.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetOrientationCsY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetOrientationCsY
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Quat quat = pConstraint->GetTargetOrientationCS();
-    const float result = quat.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetOrientationCsZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetOrientationCsZ
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Quat quat = pConstraint->GetTargetOrientationCS();
-    const float result = quat.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetVelocityCsX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetVelocityCsX
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTargetVelocityCS();
-    const float result = vec3.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetVelocityCsY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetVelocityCsY
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTargetVelocityCS();
-    const float result = vec3.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTargetVelocityCsZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTargetVelocityCsZ
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTargetVelocityCS();
-    const float result = vec3.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTranslationLimitsMaxX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTranslationLimitsMaxX
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTranslationLimitsMax();
-    const float result = vec3.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTranslationLimitsMaxY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTranslationLimitsMaxY
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTranslationLimitsMax();
-    const float result = vec3.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTranslationLimitsMaxZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTranslationLimitsMaxZ
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTranslationLimitsMax();
-    const float result = vec3.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTranslationLimitsMinX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTranslationLimitsMinX
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTranslationLimitsMin();
-    const float result = vec3.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTranslationLimitsMinY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTranslationLimitsMinY
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTranslationLimitsMin();
-    const float result = vec3.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraint
- * Method:    getTranslationLimitsMinZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraint_getTranslationLimitsMinZ
-  (JNIEnv *, jclass, jlong constraintVa) {
-    const SixDOFConstraint * const pConstraint
-            = reinterpret_cast<SixDOFConstraint *> (constraintVa);
-    const Vec3 vec3 = pConstraint->GetTranslationLimitsMin();
-    const float result = vec3.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pConstraint->GetTranslationLimitsMin();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

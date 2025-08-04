@@ -43,10 +43,10 @@ public class BodyIdArray extends JoltPhysicsObject {
     /**
      * Instantiate an uninitialized array with the specified length.
      *
-     * @param length the desired number of IDs (&ge;0)
+     * @param length the desired number of IDs (&gt;0)
      */
     public BodyIdArray(int length) {
-        assert length >= 0 : length;
+        assert length > 0 : "length=" + length;
 
         this.length = length;
         long arrayVa = create(length);
@@ -56,10 +56,12 @@ public class BodyIdArray extends JoltPhysicsObject {
     /**
      * Instantiate an array initialized from a Java array.
      *
-     * @param idArray the ID values (not null, unaffected)
+     * @param idArray the ID values (not null, not empty, unaffected)
      */
-    public BodyIdArray(int[] idArray) {
+    public BodyIdArray(int... idArray) {
         this.length = idArray.length;
+        assert length > 0 : "length=" + length;
+
         IntBuffer intBuffer = Jolt.newDirectIntBuffer(length);
         intBuffer.put(idArray);
         long arrayVa = createFromBuffer(intBuffer);
@@ -69,12 +71,14 @@ public class BodyIdArray extends JoltPhysicsObject {
     /**
      * Instantiate an array initialized from a direct buffer.
      *
-     * @param idBuffer the ID values (not null, direct, unaffected)
+     * @param idBuffer the ID values (not null, direct, positive capacity,
+     * unaffected)
      */
     public BodyIdArray(IntBuffer idBuffer) {
         assert idBuffer.isDirect();
-
         this.length = idBuffer.capacity();
+        assert length > 0 : "length=" + length;
+
         long arrayVa = createFromBuffer(idBuffer);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
@@ -82,10 +86,12 @@ public class BodyIdArray extends JoltPhysicsObject {
     /**
      * Instantiate an array initialized from a Java list.
      *
-     * @param idList the ID values (not null, unaffected)
+     * @param idList the ID values (not null, not empty, unaffected)
      */
     public BodyIdArray(List<Integer> idList) {
         this.length = idList.size();
+        assert length > 0 : "length=" + length;
+
         IntBuffer intBuffer = Jolt.newDirectIntBuffer(length);
         for (int bodyId : idList) {
             intBuffer.put(bodyId);

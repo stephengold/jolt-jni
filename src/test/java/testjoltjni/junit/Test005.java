@@ -259,8 +259,8 @@ public class Test005 {
             DistanceConstraintSettings settings) {
         settings.setMaxDistance(0.1f);
         settings.setMinDistance(0.01f);
-        settings.setPoint1(new RVec3(0.02f, 0.03f, 0.04f));
-        settings.setPoint2(new RVec3(0.05f, 0.06f, 0.07f));
+        settings.setPoint1(0.02f, 0.03f, 0.04f);
+        settings.setPoint2(0.05f, 0.06f, 0.07f);
         settings.setSpace(EConstraintSpace.LocalToBodyCOM);
 
         Assert.assertEquals(0.1f, settings.getMaxDistance(), 0f);

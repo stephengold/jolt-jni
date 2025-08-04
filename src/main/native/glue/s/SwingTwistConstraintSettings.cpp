@@ -74,80 +74,36 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstrain
 
 /*
  * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPlaneAxis1X
- * Signature: (J)F
+ * Method:    getPlaneAxis1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPlaneAxis1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPlaneAxis1
+   (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SwingTwistConstraintSettings * const pSettings
             = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPlaneAxis1.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mPlaneAxis1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPlaneAxis1Y
- * Signature: (J)F
+ * Method:    getPlaneAxis2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPlaneAxis1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPlaneAxis2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SwingTwistConstraintSettings * const pSettings
             = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPlaneAxis1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPlaneAxis1Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPlaneAxis1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPlaneAxis1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPlaneAxis2X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPlaneAxis2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPlaneAxis2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPlaneAxis2Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPlaneAxis2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPlaneAxis2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPlaneAxis2Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPlaneAxis2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPlaneAxis2.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mPlaneAxis2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -156,7 +112,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstrain
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPlaneHalfConeAngle
-  (JNIEnv *, jclass, jlong settingsVa) {
+  (JNIEnv *pEnv, jclass, jlong settingsVa) {
     const SwingTwistConstraintSettings * const pSettings
             = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
     const float result = pSettings->mPlaneHalfConeAngle;
@@ -165,80 +121,36 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstrain
 
 /*
  * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPosition1X
- * Signature: (J)D
+ * Method:    getPosition1
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPosition1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPosition1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const SwingTwistConstraintSettings * const pSettings
             = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition1.GetX();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPosition1;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPosition1Y
- * Signature: (J)D
+ * Method:    getPosition2
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPosition1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPosition2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const SwingTwistConstraintSettings * const pSettings
             = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPosition1Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPosition1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPosition2X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPosition2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPosition2Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPosition2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getPosition2Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getPosition2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition2.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPosition2;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
@@ -282,80 +194,36 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintS
 
 /*
  * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getTwistAxis1X
- * Signature: (J)F
+ * Method:    getTwistAxis1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getTwistAxis1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getTwistAxis1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SwingTwistConstraintSettings * const pSettings
             = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis1.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mTwistAxis1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getTwistAxis1Y
- * Signature: (J)F
+ * Method:    getTwistAxis2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getTwistAxis1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getTwistAxis2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SwingTwistConstraintSettings * const pSettings
             = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getTwistAxis1Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getTwistAxis1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getTwistAxis2X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getTwistAxis2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getTwistAxis2Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getTwistAxis2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
- * Method:    getTwistAxis2Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_getTwistAxis2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SwingTwistConstraintSettings * const pSettings
-            = reinterpret_cast<SwingTwistConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis2.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mTwistAxis2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
