@@ -381,22 +381,29 @@ public class PhysicsSystem extends NonCopyable {
 
     /**
      * Retrieve the states of all bodies in the system, regardless of their
-     * activation state.
+     * activation state. For inactive bodies, velocities will be zero.
      *
      * @param outBodyIds an array to be filled with the body IDs (not null)
      * @param outPositions an array for positions (x, y, z); requires 3 elements
      * per body (not null)
      * @param outRotations an array for rotations (x, y, z, w); requires 4
      * elements per body (not null)
+     * @param outLinearVelocities an array for linear velocities (x, y, z);
+     * requires 3 elements per body (not null)
+     * @param outAngularVelocities an array for angular velocities (x, y, z);
+     * requires 3 elements per body (not null)
      * @return the number of bodies whose states were written to the arrays
      */
     public int getBodyStates(
             int[] outBodyIds,
             double[] outPositions,
-            float[] outRotations) {
+            float[] outRotations,
+            float[] outLinearVelocities,
+            float[] outAngularVelocities) {
         long systemVa = va();
         int result = getBodyStates(systemVa,
-                outBodyIds, outPositions, outRotations);
+                outBodyIds, outPositions, outRotations,
+                outLinearVelocities, outAngularVelocities);
 
         return result;
     }
@@ -1005,7 +1012,8 @@ public class PhysicsSystem extends NonCopyable {
     native private static long getBodyLockInterfaceNoLock(long systemVa);
 
     native private static int getBodyStates(long systemVa,
-                                            int[] outBodyIds, double[] outPositions, float[] outRotations);
+                                            int[] outBodyIds, double[] outPositions, float[] outRotations,
+                                            float[] outLinearVelocities, float[] outAngularVelocities);
 
     native private static long getBounds(long systemVa);
 

@@ -373,11 +373,12 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBod
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
  * Method:    getBodyStates
- * Signature: (J[I[D[F)I
+ * Signature: (J[I[D[F[F[F)I
  */
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBodyStates
   (JNIEnv *pEnv, jclass, jlong systemVa, jintArray outBodyIds,
-  jdoubleArray outPositions, jfloatArray outRotations) {
+  jdoubleArray outPositions, jfloatArray outRotations,
+  jfloatArray outLinearVelocities, jfloatArray outAngularVelocities) {
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     BodyIDVector all_bodies;
@@ -391,15 +392,20 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBody
     const jsize idCapacity = pEnv->GetArrayLength(outBodyIds);
     const jsize posCapacity = pEnv->GetArrayLength(outPositions);
     const jsize rotCapacity = pEnv->GetArrayLength(outRotations);
+    const jsize linVelCapacity = pEnv->GetArrayLength(outLinearVelocities);
+    const jsize angVelCapacity = pEnv->GetArrayLength(outAngularVelocities);
 
     if (idCapacity < numBodies || posCapacity < numBodies * 3
-            || rotCapacity < numBodies * 4) {
+            || rotCapacity < numBodies * 4 || linVelCapacity < numBodies * 3
+            || angVelCapacity < numBodies * 3) {
         return 0; // Buffer capacity is insufficient.
     }
 
     jint *idElements = pEnv->GetIntArrayElements(outBodyIds, JNI_FALSE);
     jdouble *posElements = pEnv->GetDoubleArrayElements(outPositions, JNI_FALSE);
     jfloat *rotElements = pEnv->GetFloatArrayElements(outRotations, JNI_FALSE);
+    jfloat *linVelElements = pEnv->GetFloatArrayElements(outLinearVelocities, JNI_FALSE);
+    jfloat *angVelElements = pEnv->GetFloatArrayElements(outAngularVelocities, JNI_FALSE);
 
     const BodyLockInterface &bli = pSystem->GetBodyLockInterface();
     for (int i = 0; i < numBodies; ++i) {
@@ -420,6 +426,27 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBody
             rotElements[i * 4 + 1] = rotation.GetY();
             rotElements[i * 4 + 2] = rotation.GetZ();
             rotElements[i * 4 + 3] = rotation.GetW();
+
+            if (body.IsActive()) {
+                Vec3 linear_velocity = body.GetLinearVelocity();
+                linVelElements[i * 3 + 0] = linear_velocity.GetX();
+                linVelElements[i * 3 + 1] = linear_velocity.GetY();
+                linVelElements[i * 3 + 2] = linear_velocity.GetZ();
+
+                Vec3 angular_velocity = body.GetAngularVelocity();
+                angVelElements[i * 3 + 0] = angular_velocity.GetX();
+                angVelElements[i * 3 + 1] = angular_velocity.GetY();
+                angVelElements[i * 3 + 2] = angular_velocity.GetZ();
+            } else {
+                // Inactive bodies have zero velocity.
+                linVelElements[i * 3 + 0] = 0.0f;
+                linVelElements[i * 3 + 1] = 0.0f;
+                linVelElements[i * 3 + 2] = 0.0f;
+
+                angVelElements[i * 3 + 0] = 0.0f;
+                angVelElements[i * 3 + 1] = 0.0f;
+                angVelElements[i * 3 + 2] = 0.0f;
+            }
         } else {
             idElements[i] = BodyID::cInvalidBodyID;
         }
@@ -428,6 +455,8 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getBody
     pEnv->ReleaseIntArrayElements(outBodyIds, idElements, 0);
     pEnv->ReleaseDoubleArrayElements(outPositions, posElements, 0);
     pEnv->ReleaseFloatArrayElements(outRotations, rotElements, 0);
+    pEnv->ReleaseFloatArrayElements(outLinearVelocities, linVelElements, 0);
+    pEnv->ReleaseFloatArrayElements(outAngularVelocities, angVelElements, 0);
 
     return numBodies;
 }
