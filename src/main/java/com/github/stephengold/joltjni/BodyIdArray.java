@@ -28,6 +28,13 @@ package com.github.stephengold.joltjni;
  */
 public class BodyIdArray extends JoltPhysicsObject {
     // *************************************************************************
+    // fields
+
+    /**
+     * length (in IDs)
+     */
+    final private int length;
+    // *************************************************************************
     // constructors
 
     /**
@@ -36,6 +43,9 @@ public class BodyIdArray extends JoltPhysicsObject {
      * @param length the desired number of IDs (&ge;0)
      */
     public BodyIdArray(int length) {
+        assert length >= 0 : length;
+
+        this.length = length;
         long arrayVa = create(length);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
@@ -53,6 +63,15 @@ public class BodyIdArray extends JoltPhysicsObject {
         int result = getId(arrayVa, elementIndex);
 
         return result;
+    }
+
+    /**
+     * Return the length of the array.
+     *
+     * @return the length (in IDs)
+     */
+    public int length() {
+        return length;
     }
 
     /**
