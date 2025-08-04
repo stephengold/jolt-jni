@@ -24,6 +24,7 @@ package testjoltjni.junit;
 import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.AaBoxCast;
 import com.github.stephengold.joltjni.BodyCreationSettings;
+import com.github.stephengold.joltjni.BodyIdArray;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.CapsuleShape;
@@ -80,6 +81,9 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.vhacd.FillMode;
 import com.github.stephengold.joltjni.vhacd.Parameters;
+import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -107,6 +111,7 @@ public class Test003 {
         doAaBox();
         doAaBoxCast();
         doBodyCreationSettings();
+        doBodyIdArray();
         doCharacter();
         doCharacterVirtual();
         doCollisionGroup();
@@ -292,6 +297,48 @@ public class Test003 {
         }
 
         System.gc();
+    }
+
+    /**
+     * Test the {@code BodyIdArray} class.
+     */
+    private static void doBodyIdArray() {
+        { // constructor with int argument:
+            int maxBodies = 3;
+            BodyIdArray bodyIdArray = new BodyIdArray(maxBodies);
+            Assert.assertTrue(bodyIdArray.hasAssignedNativeObject());
+            Assert.assertTrue(bodyIdArray.ownsNativeObject());
+            Assert.assertNotEquals(0L, bodyIdArray.va());
+
+            TestUtils.testClose(bodyIdArray);
+        }
+        { // constructor with int[] argument
+            int[] idArray = new int[3];
+            BodyIdArray bodyIdArray = new BodyIdArray(idArray);
+            Assert.assertTrue(bodyIdArray.hasAssignedNativeObject());
+            Assert.assertTrue(bodyIdArray.ownsNativeObject());
+            Assert.assertNotEquals(0L, bodyIdArray.va());
+
+            TestUtils.testClose(bodyIdArray);
+        }
+        { // constructor with IntBuffer argument
+            IntBuffer idBuffer = Jolt.newDirectIntBuffer(4);
+            BodyIdArray bodyIdArray = new BodyIdArray(idBuffer);
+            Assert.assertTrue(bodyIdArray.hasAssignedNativeObject());
+            Assert.assertTrue(bodyIdArray.ownsNativeObject());
+            Assert.assertNotEquals(0L, bodyIdArray.va());
+
+            TestUtils.testClose(bodyIdArray);
+        }
+        { // constructor with List<Integer> argument
+            List<Integer> idList = new ArrayList<>(5);
+            BodyIdArray bodyIdArray = new BodyIdArray(idList);
+            Assert.assertTrue(bodyIdArray.hasAssignedNativeObject());
+            Assert.assertTrue(bodyIdArray.ownsNativeObject());
+            Assert.assertNotEquals(0L, bodyIdArray.va());
+
+            TestUtils.testClose(bodyIdArray);
+        }
     }
 
     /**

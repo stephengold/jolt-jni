@@ -22,18 +22,14 @@ SOFTWARE.
 package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.AaBox;
-import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BodyIdArray;
-import com.github.stephengold.joltjni.BodyInterface;
-import com.github.stephengold.joltjni.BoxShape;
-import com.github.stephengold.joltjni.PhysicsSystem;
+import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.Vec3;
-import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
-import com.github.stephengold.joltjni.readonly.ConstBody;
-import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -160,67 +156,93 @@ public class Test013 {
      * Test basic functionality of the {@code BodyIdArray} class.
      */
     private static void doBodyIdArray() {
-        { // creation and destruction of a BodyIdArray:
-            int maxBodies = 3;
-            BodyIdArray bodyIdArray = new BodyIdArray(maxBodies);
-            Assert.assertTrue(bodyIdArray.hasAssignedNativeObject());
-            Assert.assertTrue(bodyIdArray.ownsNativeObject());
+        { // int constructor:
+            BodyIdArray bodyIdArray = new BodyIdArray(3);
+            Assert.assertEquals(3, bodyIdArray.length());
 
-            Assert.assertNotEquals(0L, bodyIdArray.va());
+            bodyIdArray.set(0, 2);
+            bodyIdArray.set(1, 4);
+            bodyIdArray.set(2, 10);
+
+            Assert.assertEquals(2, bodyIdArray.get(0));
+            Assert.assertEquals(4, bodyIdArray.get(1));
+            Assert.assertEquals(10, bodyIdArray.get(2));
 
             TestUtils.testClose(bodyIdArray);
         }
-        { // set and get body-identifiers (BodyIdArray[]):
-            int maxBodies = 5;
-            BodyIdArray bodyIdArray = new BodyIdArray(maxBodies);
+        { // int[] constructor:
+            int[] idArray = {1, 5, 7, 19, 28, 49};
+            BodyIdArray bodyIdArray = new BodyIdArray(idArray);
+            int bodyIdArrayLength = bodyIdArray.length();
 
-            /*
-             * Temporary lists and arrays for storing handles to bodies and
-             * native objects so they can be freed
-             */
-            final ConstBody[] bodyList = new ConstBody[maxBodies];
-            final List<ConstJoltPhysicsObject> physicsObjects =
-                    new ArrayList<>();
+            Assert.assertEquals(idArray.length, bodyIdArrayLength);
 
-            PhysicsSystem system = TestUtils.newPhysicsSystem(maxBodies);
-            BodyInterface bodyInterface = system.getBodyInterface();
-
-            for (int i = 0; i < maxBodies; i += 1) {
-                BoxShape boxShape = new BoxShape(new Vec3(2, 2, 2));
-                BodyCreationSettings bodyCreationSettings =
-                        new BodyCreationSettings();
-
-                bodyCreationSettings.setShape(boxShape)
-                                    .setMotionType(EMotionType.Static);
-
-                ConstBody body = bodyInterface.createBody(bodyCreationSettings);
-                int bodyId = body.getId();
-
-                // store the bodies to verify the integrity of the identifiers
-                bodyList[i] = body;
-                // save the body identifier in the 'bodyIdArray' object
-                bodyIdArray.set(i, bodyId);
-
-                physicsObjects.add(boxShape);
-                physicsObjects.add(bodyCreationSettings);
-            }
-
-            /*
-             * Verify data integrity, the identifiers returned from the native
-             * layer must be the same.
-             */
-            for (int i = 0; i < maxBodies; i += 1) {
-                ConstBody body = bodyList[i];
-                int bodyId = body.getId();
+            for (int i = 0; i < bodyIdArrayLength; i += 1) {
+                int bodyId = idArray[i];
                 int bodyIdRecovered = bodyIdArray.get(i);
 
                 Assert.assertEquals(bodyId, bodyIdRecovered);
             }
 
-            TestUtils.testClose(bodyList);
-            TestUtils.testClose(physicsObjects
-                    .toArray(ConstJoltPhysicsObject[]::new));
-            TestUtils.testClose(bodyIdArray, bodyInterface);
+            bodyIdArray.set(3, 501);
+            bodyIdArray.set(2, 689);
+            bodyIdArray.set(0, 600);
+
+            Assert.assertEquals(501, bodyIdArray.get(3));
+            Assert.assertEquals(689, bodyIdArray.get(2));
+            Assert.assertEquals(600, bodyIdArray.get(0));
+            TestUtils.testClose(bodyIdArray);
+        }
+        { // IntBuffer constructor:
+            IntBuffer idBuffer = Jolt.newDirectIntBuffer(3);
+            idBuffer.put(2);
+            idBuffer.put(5);
+            idBuffer.put(6);
+
+            BodyIdArray bodyIdArrayA = new BodyIdArray(idBuffer);
+            Assert.assertEquals(3, bodyIdArrayA.length());
+            Assert.assertEquals(2, bodyIdArrayA.get(0));
+            Assert.assertEquals(5, bodyIdArrayA.get(1));
+            Assert.assertEquals(6, bodyIdArrayA.get(2));
+
+            BodyIdArray bodyIdArrayB = new BodyIdArray(
+                    Jolt.newDirectIntBuffer(2));
+            Assert.assertEquals(2, bodyIdArrayB.length());
+            Assert.assertEquals(0, bodyIdArrayB.get(0));
+            Assert.assertEquals(0, bodyIdArrayB.get(1));
+
+            bodyIdArrayB.set(0, 20);
+            bodyIdArrayB.set(1, 65);
+
+            Assert.assertEquals(20, bodyIdArrayB.get(0));
+            Assert.assertEquals(65, bodyIdArrayB.get(1));
+
+            TestUtils.testClose(bodyIdArrayA, bodyIdArrayB);
+        }
+        { // List<Integer> constructor:
+            List<Integer> idList = new ArrayList<>();
+            idList.addAll(Arrays.asList(3, 4, 6, 7, 3, 4, 6, 102));
+
+            BodyIdArray bodyIdArray = new BodyIdArray(idList);
+            int bodyIdArrayLength = bodyIdArray.length();
+
+            Assert.assertEquals(idList.size(), bodyIdArrayLength);
+
+            for (int i = 0; i < bodyIdArrayLength; i += 1) {
+                int bodyId = idList.get(i);
+                int bodyIdRecovered = bodyIdArray.get(i);
+
+                Assert.assertEquals(bodyId, bodyIdRecovered);
+            }
+
+            bodyIdArray.set(0, 501);
+            bodyIdArray.set(2, 689);
+            bodyIdArray.set(5, 600);
+
+            Assert.assertEquals(501, bodyIdArray.get(0));
+            Assert.assertEquals(689, bodyIdArray.get(2));
+            Assert.assertEquals(600, bodyIdArray.get(5));
+            TestUtils.testClose(bodyIdArray);
         }
 
         System.gc();
