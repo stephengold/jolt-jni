@@ -57,6 +57,32 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsTv_crea
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettingsTv
+ * Method:    getLateralFriction
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettingsTv_getLateralFriction
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const WheelSettingsTV * const pSettings
+            = reinterpret_cast<WheelSettingsTV *> (settingsVa);
+    const float result = pSettings->mLateralFriction;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsTv
+ * Method:    getLongitudinalFriction
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_WheelSettingsTv_getLongitudinalFriction
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const WheelSettingsTV * const pSettings
+            = reinterpret_cast<WheelSettingsTV *> (settingsVa);
+    const float result = pSettings->mLongitudinalFriction;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsTv
  * Method:    getRefCount
  * Signature: (J)I
  */
@@ -78,6 +104,30 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettingsTv_setEm
     WheelSettingsTV * const pSettings
             = reinterpret_cast<WheelSettingsTV *> (settingsVa);
     pSettings->SetEmbedded();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsTv
+ * Method:    setLateralFriction
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettingsTv_setLateralFriction
+  (JNIEnv *, jclass, jlong settingsVa, jfloat friction) {
+    WheelSettingsTV * const pSettings
+            = reinterpret_cast<WheelSettingsTV *> (settingsVa);
+    pSettings->mLateralFriction = friction;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_WheelSettingsTv
+ * Method:    setLongitudinalFriction
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_WheelSettingsTv_setLongitudinalFriction
+  (JNIEnv *, jclass, jlong settingsVa, jfloat friction) {
+    WheelSettingsTV * const pSettings
+            = reinterpret_cast<WheelSettingsTV *> (settingsVa);
+    pSettings->mLongitudinalFriction = friction;
 }
 
 /*
