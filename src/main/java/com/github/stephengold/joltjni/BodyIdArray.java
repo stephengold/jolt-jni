@@ -21,6 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import java.nio.IntBuffer;
+import java.util.List;
+
 /**
  * A fixed-length array of body IDs. (native type: {@code BodyID[]})
  *
@@ -47,6 +50,48 @@ public class BodyIdArray extends JoltPhysicsObject {
 
         this.length = length;
         long arrayVa = create(length);
+        setVirtualAddress(arrayVa, () -> free(arrayVa));
+    }
+
+    /**
+     * Instantiate an array initialized from a Java array.
+     *
+     * @param idArray the ID values (not null, unaffected)
+     */
+    public BodyIdArray(int[] idArray) {
+        this.length = idArray.length;
+        IntBuffer intBuffer = Jolt.newDirectIntBuffer(length);
+        intBuffer.put(idArray);
+        long arrayVa = createFromBuffer(intBuffer);
+        setVirtualAddress(arrayVa, () -> free(arrayVa));
+    }
+
+    /**
+     * Instantiate an array initialized from a direct buffer.
+     *
+     * @param idBuffer the ID values (not null, direct, unaffected)
+     */
+    public BodyIdArray(IntBuffer idBuffer) {
+        assert idBuffer.isDirect();
+
+        this.length = idBuffer.capacity();
+        long arrayVa = createFromBuffer(idBuffer);
+        setVirtualAddress(arrayVa, () -> free(arrayVa));
+    }
+
+    /**
+     * Instantiate an array initialized from a Java list.
+     *
+     * @param idList the ID values (not null, unaffected)
+     */
+    public BodyIdArray(List<Integer> idList) {
+        this.length = idList.size();
+        IntBuffer intBuffer = Jolt.newDirectIntBuffer(length);
+        for (int bodyId : idList) {
+            intBuffer.put(bodyId);
+        }
+
+        long arrayVa = createFromBuffer(intBuffer);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
     // *************************************************************************
@@ -88,6 +133,8 @@ public class BodyIdArray extends JoltPhysicsObject {
     // native private methods
 
     native private static long create(int length);
+
+    native private static long createFromBuffer(IntBuffer ids);
 
     native private static void free(long arrayVa);
 

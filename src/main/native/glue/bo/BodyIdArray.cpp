@@ -44,6 +44,22 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_create
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyIdArray
+ * Method:    createFromBuffer
+ * Signature: (Ljava/nio/IntBuffer;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyIdArray_createFromBuffer
+  (JNIEnv *pEnv, jclass, jobject intBuffer) {
+    const jint * const pIds = (jint *) pEnv->GetDirectBufferAddress(intBuffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    const jlong numIds = pEnv->GetDirectBufferCapacity(intBuffer);
+    JPH_ASSERT(!pEnv->ExceptionCheck());
+    BodyID * const pArray = new BodyID[numIds];
+    TRACE_NEW("BodyID[]", pArray)
+    return reinterpret_cast<jlong> (pArray);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyIdArray
  * Method:    free
  * Signature: (J)V
  */
