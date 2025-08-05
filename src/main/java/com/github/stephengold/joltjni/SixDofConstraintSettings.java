@@ -27,6 +27,8 @@ import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.ESwingType;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code SixDofConstraint}. (native type:
@@ -80,10 +82,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisX1() {
         long settingsVa = va();
-        float x = getAxisX1X(settingsVa);
-        float y = getAxisX1Y(settingsVa);
-        float z = getAxisX1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisX1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -96,10 +97,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisX2() {
         long settingsVa = va();
-        float x = getAxisX2X(settingsVa);
-        float y = getAxisX2Y(settingsVa);
-        float z = getAxisX2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisX2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -112,10 +112,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisY1() {
         long settingsVa = va();
-        float x = getAxisY1X(settingsVa);
-        float y = getAxisY1Y(settingsVa);
-        float z = getAxisY1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisY1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -128,10 +127,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisY2() {
         long settingsVa = va();
-        float x = getAxisY2X(settingsVa);
-        float y = getAxisY2Y(settingsVa);
-        float z = getAxisY2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisY2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -263,10 +261,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPosition1() {
         long settingsVa = va();
-        double x = getPosition1X(settingsVa);
-        double y = getPosition1Y(settingsVa);
-        double z = getPosition1Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition1(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -279,10 +276,9 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPosition2() {
         long settingsVa = va();
-        double x = getPosition2X(settingsVa);
-        double y = getPosition2Y(settingsVa);
-        double z = getPosition2Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition2(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -603,29 +599,17 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createDefault();
 
-    native private static float getAxisX1X(long settingsVa);
+    native private static void getAxisX1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getAxisX1Y(long settingsVa);
+    native private static void getAxisX2(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getAxisX1Z(long settingsVa);
+    native private static void getAxisY1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getAxisX2X(long settingsVa);
-
-    native private static float getAxisX2Y(long settingsVa);
-
-    native private static float getAxisX2Z(long settingsVa);
-
-    native private static float getAxisY1X(long settingsVa);
-
-    native private static float getAxisY1Y(long settingsVa);
-
-    native private static float getAxisY1Z(long settingsVa);
-
-    native private static float getAxisY2X(long settingsVa);
-
-    native private static float getAxisY2Y(long settingsVa);
-
-    native private static float getAxisY2Z(long settingsVa);
+    native private static void getAxisY2(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static float getLimitMax(long settingsVa, int dofIndex);
 
@@ -638,17 +622,11 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long getMotorSettings(long settingsVa, int dofIndex);
 
-    native private static double getPosition1X(long settingsVa);
+    native private static void getPosition1(
+            long settingsVa, DoubleBuffer storeDoubles);
 
-    native private static double getPosition1Y(long settingsVa);
-
-    native private static double getPosition1Z(long settingsVa);
-
-    native private static double getPosition2X(long settingsVa);
-
-    native private static double getPosition2Y(long settingsVa);
-
-    native private static double getPosition2Z(long settingsVa);
+    native private static void getPosition2(
+            long settingsVa, DoubleBuffer storeDoubles);
 
     native private static int getSpace(long settingsVa);
 

@@ -48,158 +48,70 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSett
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisX1X
- * Signature: (J)F
+ * Method:    getAxisX1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX1.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mAxisX1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisX1Y
- * Signature: (J)F
+ * Method:    getAxisX2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX1.GetY();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mAxisX2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisX1Z
- * Signature: (J)F
+ * Method:    getAxisY1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX1.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mAxisY1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisX2X
- * Signature: (J)F
+ * Method:    getAxisY2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX2X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisX2Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisX2Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisX2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX2.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisY1X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY1X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY1.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisY1Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisY1Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisY2X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisY2Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getAxisY2Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getAxisY2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY2.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mAxisY2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -270,80 +182,36 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSett
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getPosition1X
- * Signature: (J)D
+ * Method:    getPosition1
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getPosition1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getPosition1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition1.GetX();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPosition1;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getPosition1Y
- * Signature: (J)D
+ * Method:    getPosition2
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getPosition1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getPosition2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const SixDOFConstraintSettings * const pSettings
             = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getPosition1Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getPosition1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getPosition2X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getPosition2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getPosition2Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getPosition2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
- * Method:    getPosition2Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_getPosition2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SixDOFConstraintSettings * const pSettings
-            = reinterpret_cast<SixDOFConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPosition2.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPosition2;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
