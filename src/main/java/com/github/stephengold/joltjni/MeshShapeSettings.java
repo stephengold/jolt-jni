@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstTriangle;
 import com.github.stephengold.joltjni.readonly.ConstVertexList;
 import java.nio.FloatBuffer;
 import java.util.List;
@@ -174,7 +175,7 @@ public class MeshShapeSettings extends ShapeSettings {
         int numVertices = 3 * numTriangles;
         int numFloats = 3 * numVertices;
         FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (Triangle triangle : triangleList) {
+        for (ConstTriangle triangle : triangleList) {
             triangle.putVertices(buffer);
         }
         long materialsVa = materials.va();
