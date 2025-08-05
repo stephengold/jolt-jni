@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec4Arg;
+import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
 /**
@@ -101,17 +102,30 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * @param c4 the desired 4th/rightmost column (not null, unaffected)
      */
     public RMat44(Vec4Arg c1, Vec4Arg c2, Vec4Arg c3, RVec3Arg c4) {
-        float[] floatArray = {
-            c1.getX(), c2.getX(), c3.getX(),
-            c1.getY(), c2.getY(), c3.getY(),
-            c1.getZ(), c2.getZ(), c3.getZ(),
-            c1.getW(), c2.getW(), c3.getW()
-        };
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+
+        floatBuffer.put(0, c1.getX());
+        floatBuffer.put(1, c2.getX());
+        floatBuffer.put(2, c3.getX());
+
+        floatBuffer.put(3, c1.getY());
+        floatBuffer.put(4, c2.getY());
+        floatBuffer.put(5, c3.getY());
+
+        floatBuffer.put(6, c1.getZ());
+        floatBuffer.put(7, c2.getZ());
+        floatBuffer.put(8, c3.getZ());
+
+        floatBuffer.put(9, c1.getW());
+        floatBuffer.put(10, c2.getW());
+        floatBuffer.put(11, c3.getW());
+
         double m14 = c4.xx();
         double m24 = c4.yy();
         double m34 = c4.zz();
         // a44 is assumed to be 1.
-        long matrixVa = createFromRowMajor(floatArray, m14, m24, m34);
+
+        long matrixVa = createFromRowMajor(floatBuffer, m14, m24, m34);
         setVirtualAddress(matrixVa, () -> free(matrixVa));
     }
     // *************************************************************************
@@ -451,7 +465,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     @Override
     public Quat getQuaternion() {
         long matrixVa = va();
-        float[] storeFloats = new float[4];
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getQuaternion(matrixVa, storeFloats);
         Quat result = new Quat(storeFloats);
 
@@ -466,10 +480,9 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     @Override
     public RVec3 getTranslation() {
         long matrixVa = va();
-        double xx = getTranslationX(matrixVa);
-        double yy = getTranslationY(matrixVa);
-        double zz = getTranslationZ(matrixVa);
-        RVec3 result = new RVec3(xx, yy, zz);
+        DoubleBuffer storeDouble = Temporaries.doubleBuffer1.get();
+        getTranslation(matrixVa, storeDouble);
+        RVec3 result = new RVec3(storeDouble);
 
         return result;
     }
@@ -615,9 +628,10 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     @Override
     public RVec3 multiply3x4(RVec3Arg rightVector) {
         long matrixVa = va();
-        double[] tmpDoubles = rightVector.toArray();
-        multiply3x4r(matrixVa, tmpDoubles);
-        RVec3 result = new RVec3(tmpDoubles);
+        DoubleBuffer doubleBuffer = Temporaries.doubleBuffer1.get();
+        rightVector.copyTo(doubleBuffer);
+        multiply3x4r(matrixVa, doubleBuffer);
+        RVec3 result = new RVec3(doubleBuffer);
 
         return result;
     }
@@ -636,7 +650,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
         float x = vec3.getX();
         float y = vec3.getY();
         float z = vec3.getZ();
-        double[] storeDoubles = new double[3];
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         multiply3x4(matrixVa, x, y, z, storeDoubles);
         RVec3 result = new RVec3(storeDoubles);
 
@@ -764,7 +778,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     native private static long createCopy(long originalVa);
 
     native private static long createFromRowMajor(
-            float[] floatArray, double m14, double m24, double m34);
+            FloatBuffer floatBuffer, double m14, double m24, double m34);
 
     native private static long createFromSpMatrix(long spMatrixVa);
 
@@ -792,13 +806,10 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     native private static double getElement(long matrixVa, int row, int column);
 
     native private static void getQuaternion(
-            long matrixVa, float[] storeFloats);
+            long matrixVa, FloatBuffer storeFloats);
 
-    native private static double getTranslationX(long matrixVa);
-
-    native private static double getTranslationY(long matrixVa);
-
-    native private static double getTranslationZ(long matrixVa);
+    native private static void getTranslation(
+            long matrixVa, DoubleBuffer storeDoubles);
 
     native private static long inversed(long currentVa);
 
@@ -818,10 +829,11 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     native private static void multiply3x3Transposed(
             long matrixVa, FloatBuffer floatBuffer);
 
-    native private static void multiply3x4(
-            long matrixVa, float x, float y, float z, double[] storeDoubles);
+    native private static void multiply3x4(long matrixVa,
+            float x, float y, float z, DoubleBuffer storeDoubles);
 
-    native private static void multiply3x4r(long matrixVa, double[] tmpDoubles);
+    native private static void multiply3x4r(
+            long matrixVa, DoubleBuffer doubleBuffer);
 
     native private static long multiplyBySp(long leftVa, long rightVa);
 
