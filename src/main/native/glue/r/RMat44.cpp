@@ -63,7 +63,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RMat44_createFromRow
     const Vec4 c1(pArray[0], pArray[3], pArray[6], pArray[9]);
     const Vec4 c2(pArray[1], pArray[4], pArray[7], pArray[10]);
     const Vec4 c3(pArray[2], pArray[5], pArray[8], pArray[11]);
-    RVec3 c4(m14, m24, m34);
+    const RVec3 c4(m14, m24, m34);
     RMat44 * const pResult = new RMat44(c1, c2, c3, c4);
     TRACE_NEW("RMat44", pResult)
     return reinterpret_cast<jlong> (pResult);
