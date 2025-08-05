@@ -32,6 +32,14 @@ import java.nio.FloatBuffer;
  */
 public interface QuatArg {
     /**
+     * Write all 4 components to the start of the specified buffer. The current
+     * object is unaffected.
+     *
+     * @param storeFloats the destination buffer (not null, capacity&ge;4)
+     */
+    void copyTo(FloatBuffer storeFloats);
+
+    /**
      * Return the conjugate. The current object is unaffected.
      *
      * @return a new object

@@ -340,6 +340,20 @@ final public class Quat implements QuatArg {
     // QuatArg methods
 
     /**
+     * Write all 4 components to the start of the specified buffer. The current
+     * object is unaffected.
+     *
+     * @param storeFloats the destination buffer (not null, capacity&ge;4)
+     */
+    @Override
+    public void copyTo(FloatBuffer storeFloats) {
+        storeFloats.put(0, x);
+        storeFloats.put(1, y);
+        storeFloats.put(2, z);
+        storeFloats.put(3, w);
+    }
+
+    /**
      * Return the conjugate. The current object is unaffected.
      *
      * @return a new object
