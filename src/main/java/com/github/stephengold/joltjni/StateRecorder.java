@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
 /**
@@ -124,9 +125,10 @@ public class StateRecorder extends NonCopyable {
      */
     public void readRVec3(RVec3 inOut) {
         long recorderVa = va();
-        double[] tmpDoubles = inOut.toArray();
-        readRVec3(recorderVa, tmpDoubles);
-        inOut.set(tmpDoubles);
+        DoubleBuffer doubleBuffer = Temporaries.doubleBuffer1.get();
+        inOut.copyTo(doubleBuffer);
+        readRVec3(recorderVa, doubleBuffer);
+        inOut.set(doubleBuffer);
     }
 
     /**
@@ -284,7 +286,8 @@ public class StateRecorder extends NonCopyable {
 
     native private static void readRMat44(long recorderVa, long matrixVa);
 
-    native private static void readRVec3(long recorderVa, double[] tmpDoubles);
+    native private static void readRVec3(
+            long recorderVa, DoubleBuffer tmpDoubles);
 
     native private static String readString(long recorderVa, String javaString);
 

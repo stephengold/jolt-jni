@@ -123,21 +123,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readRMa
 /*
  * Class:     com_github_stephengold_joltjni_StateRecorder
  * Method:    readRVec3
- * Signature: (J[D)V
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StateRecorder_readRVec3
-  (JNIEnv *pEnv, jclass, jlong recorderVa, jdoubleArray tmpDoubles) {
+  (JNIEnv *pEnv, jclass, jlong recorderVa, jobject doubleBuffer) {
     StateRecorder * const pRecorder
             = reinterpret_cast<StateRecorder *> (recorderVa);
-    jboolean isCopy;
-    jdouble * const pTmpDoubles
-            = pEnv->GetDoubleArrayElements(tmpDoubles, &isCopy);
+    DIRECT_DOUBLE_BUFFER(pEnv, doubleBuffer, pTmpDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
     RVec3 rvec3(pTmpDoubles[0], pTmpDoubles[1], pTmpDoubles[2]);
     pRecorder->Read(rvec3);
     pTmpDoubles[0] = rvec3.GetX();
     pTmpDoubles[1] = rvec3.GetY();
     pTmpDoubles[2] = rvec3.GetZ();
-    pEnv->ReleaseDoubleArrayElements(tmpDoubles, pTmpDoubles, 0);
 }
 
 /*
