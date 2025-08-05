@@ -319,15 +319,12 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * @return a new matrix
      */
     public static Mat44 sRotationTranslation(QuatArg rotation, Vec3Arg offset) {
-        float[] floatArray = new float[7];
-        floatArray[0] = rotation.getX();
-        floatArray[1] = rotation.getY();
-        floatArray[2] = rotation.getZ();
-        floatArray[3] = rotation.getW();
-        floatArray[4] = offset.getX();
-        floatArray[5] = offset.getY();
-        floatArray[6] = offset.getZ();
-        long matrixVa = createRotationTranslation(floatArray);
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        rotation.copyTo(floatBuffer);
+        floatBuffer.put(4, offset.getX());
+        floatBuffer.put(5, offset.getY());
+        floatBuffer.put(6, offset.getZ());
+        long matrixVa = createRotationTranslation(floatBuffer);
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
@@ -537,7 +534,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public Quat getQuaternion() {
         long matrixVa = va();
-        float[] storeFloats = new float[4];
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getQuaternion(matrixVa, storeFloats);
         Quat result = new Quat(storeFloats);
 
@@ -552,10 +549,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     @Override
     public Vec3 getTranslation() {
         long matrixVa = va();
-        float x = getTranslationX(matrixVa);
-        float y = getTranslationY(matrixVa);
-        float z = getTranslationZ(matrixVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTranslation(matrixVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -808,7 +804,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     native private static long createRotationAxisAngle(
             float ax, float ay, float az, float angle);
 
-    native private static long createRotationTranslation(float[] floatArray);
+    native private static long createRotationTranslation(
+            FloatBuffer floatBuffer);
 
     native private static long createRotationX(float angle);
 
@@ -831,13 +828,10 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     native private static float getElement(long matrixVa, int row, int column);
 
     native private static void getQuaternion(
-            long matrixVa, float[] storeFloats);
+            long matrixVa, FloatBuffer storeFloats);
 
-    native private static float getTranslationX(long matrixVa);
-
-    native private static float getTranslationY(long matrixVa);
-
-    native private static float getTranslationZ(long matrixVa);
+    native private static void getTranslation(
+            long matrixVa, FloatBuffer storeFloats);
 
     native private static long inversed(long currentVa);
 

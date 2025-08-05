@@ -126,15 +126,14 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createRotation
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    createRotationTranslation
- * Signature: ([F)J
+ * Signature: (Ljava/nio/FloatBuffer;)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Mat44_createRotationTranslation
-  (JNIEnv *pEnv, jclass, jfloatArray floatArray) {
-    jboolean isCopy;
-    jfloat * const pFloats = pEnv->GetFloatArrayElements(floatArray, &isCopy);
+  (JNIEnv *pEnv, jclass, jobject floatBuffer) {
+    const DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 7);
     const Quat rotation(pFloats[0], pFloats[1], pFloats[2], pFloats[3]);
     const Vec3 offset(pFloats[4], pFloats[5], pFloats[6]);
-    pEnv->ReleaseFloatArrayElements(floatArray, pFloats, JNI_ABORT);
     Mat44 * const pResult = new Mat44();
     TRACE_NEW("Mat44", pResult)
     *pResult = Mat44::sRotationTranslation(rotation, offset);
@@ -265,55 +264,34 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Mat44_getElement
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
  * Method:    getQuaternion
- * Signature: (J[F)V
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_getQuaternion
-  (JNIEnv *pEnv, jclass, jlong matrixVa, jfloatArray storeFloats) {
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jobject storeFloats) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    const Quat quat = pMatrix->GetQuaternion();
-    jboolean isCopy;
-    jfloat * const pStore = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
-    pStore[0] = quat.GetX();
-    pStore[1] = quat.GetY();
-    pStore[2] = quat.GetZ();
-    pStore[3] = quat.GetW();
-    pEnv->ReleaseFloatArrayElements(storeFloats, pStore, 0);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pStore, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Quat result = pMatrix->GetQuaternion();
+    pStore[0] = result.GetX();
+    pStore[1] = result.GetY();
+    pStore[2] = result.GetZ();
+    pStore[3] = result.GetW();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_Mat44
- * Method:    getTranslationX
- * Signature: (J)F
+ * Method:    getTranslation
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Mat44_getTranslationX
-  (JNIEnv *, jclass, jlong matrixVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Mat44_getTranslation
+  (JNIEnv *pEnv, jclass, jlong matrixVa, jobject storeFloats) {
     const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    const float result = pMatrix->GetTranslation().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Mat44
- * Method:    getTranslationY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Mat44_getTranslationY
-  (JNIEnv *, jclass, jlong matrixVa) {
-    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    const float result = pMatrix->GetTranslation().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Mat44
- * Method:    getTranslationZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Mat44_getTranslationZ
-  (JNIEnv *, jclass, jlong matrixVa) {
-    const Mat44 * const pMatrix = reinterpret_cast<Mat44 *> (matrixVa);
-    const float result = pMatrix->GetTranslation().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pStore, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pMatrix->GetTranslation();
+    pStore[0] = result.GetX();
+    pStore[1] = result.GetY();
+    pStore[2] = result.GetZ();
 }
 
 /*
