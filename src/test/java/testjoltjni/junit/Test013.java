@@ -22,15 +22,9 @@ SOFTWARE.
 package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.AaBox;
-import com.github.stephengold.joltjni.BodyIdArray;
-import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.operator.Op;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
-import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -53,7 +47,6 @@ public class Test013 {
         TestUtils.initializeNativeLibrary();
 
         doAaBox();
-        doBodyIdArray();
 
         TestUtils.cleanup();
     }
@@ -147,104 +140,6 @@ public class Test013 {
             TestUtils.assertEquals(1.5f, 0.4f, 0f, boxB.getMax(), 0f);
 
             TestUtils.testClose(boxA, boxB);
-        }
-
-        System.gc();
-    }
-
-    /**
-     * Test basic functionality of the {@code BodyIdArray} class.
-     */
-    private static void doBodyIdArray() {
-        { // int constructor:
-            BodyIdArray bodyIdArray = new BodyIdArray(3);
-            Assert.assertEquals(3, bodyIdArray.length());
-
-            bodyIdArray.set(0, 2);
-            bodyIdArray.set(1, 4);
-            bodyIdArray.set(2, 10);
-
-            Assert.assertEquals(2, bodyIdArray.get(0));
-            Assert.assertEquals(4, bodyIdArray.get(1));
-            Assert.assertEquals(10, bodyIdArray.get(2));
-
-            TestUtils.testClose(bodyIdArray);
-        }
-        { // int[] constructor:
-            int[] idArray = {1, 5, 7, 19, 28, 49};
-            BodyIdArray bodyIdArray = new BodyIdArray(idArray);
-            int bodyIdArrayLength = bodyIdArray.length();
-
-            Assert.assertEquals(idArray.length, bodyIdArrayLength);
-
-            for (int i = 0; i < bodyIdArrayLength; i += 1) {
-                int bodyId = idArray[i];
-                int bodyIdRecovered = bodyIdArray.get(i);
-
-                Assert.assertEquals(bodyId, bodyIdRecovered);
-            }
-
-            bodyIdArray.set(3, 501);
-            bodyIdArray.set(2, 689);
-            bodyIdArray.set(0, 600);
-
-            Assert.assertEquals(501, bodyIdArray.get(3));
-            Assert.assertEquals(689, bodyIdArray.get(2));
-            Assert.assertEquals(600, bodyIdArray.get(0));
-
-            TestUtils.testClose(bodyIdArray);
-        }
-        { // IntBuffer constructor:
-            IntBuffer idBuffer = Jolt.newDirectIntBuffer(3);
-            idBuffer.put(2);
-            idBuffer.put(5);
-            idBuffer.put(6);
-
-            BodyIdArray bodyIdArrayA = new BodyIdArray(idBuffer);
-            Assert.assertEquals(3, bodyIdArrayA.length());
-            Assert.assertEquals(2, bodyIdArrayA.get(0));
-            Assert.assertEquals(5, bodyIdArrayA.get(1));
-            Assert.assertEquals(6, bodyIdArrayA.get(2));
-
-            BodyIdArray bodyIdArrayB = new BodyIdArray(
-                    Jolt.newDirectIntBuffer(2));
-            Assert.assertEquals(2, bodyIdArrayB.length());
-            Assert.assertEquals(0, bodyIdArrayB.get(0));
-            Assert.assertEquals(0, bodyIdArrayB.get(1));
-
-            bodyIdArrayB.set(0, 20);
-            bodyIdArrayB.set(1, 65);
-
-            Assert.assertEquals(20, bodyIdArrayB.get(0));
-            Assert.assertEquals(65, bodyIdArrayB.get(1));
-
-            TestUtils.testClose(bodyIdArrayA, bodyIdArrayB);
-        }
-        { // List<Integer> constructor:
-            List<Integer> idList = new ArrayList<>();
-            idList.addAll(Arrays.asList(3, 4, 6, 7, 3, 4, 6, 102));
-
-            BodyIdArray bodyIdArray = new BodyIdArray(idList);
-            int bodyIdArrayLength = bodyIdArray.length();
-
-            Assert.assertEquals(idList.size(), bodyIdArrayLength);
-
-            for (int i = 0; i < bodyIdArrayLength; i += 1) {
-                int bodyId = idList.get(i);
-                int bodyIdRecovered = bodyIdArray.get(i);
-
-                Assert.assertEquals(bodyId, bodyIdRecovered);
-            }
-
-            bodyIdArray.set(0, 501);
-            bodyIdArray.set(2, 689);
-            bodyIdArray.set(5, 600);
-
-            Assert.assertEquals(501, bodyIdArray.get(0));
-            Assert.assertEquals(689, bodyIdArray.get(2));
-            Assert.assertEquals(600, bodyIdArray.get(5));
-
-            TestUtils.testClose(bodyIdArray);
         }
 
         System.gc();

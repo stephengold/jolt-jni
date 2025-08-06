@@ -83,6 +83,7 @@ import com.github.stephengold.joltjni.vhacd.FillMode;
 import com.github.stephengold.joltjni.vhacd.Parameters;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -303,44 +304,105 @@ public class Test003 {
      * Test the {@code BodyIdArray} class.
      */
     private static void doBodyIdArray() {
-        { // constructor with int argument:
-            int maxBodies = 3;
-            BodyIdArray bodyIdArray = new BodyIdArray(maxBodies);
+        { // int constructor:
+            BodyIdArray bodyIdArray = new BodyIdArray(3);
+            Assert.assertEquals(3, bodyIdArray.length());
             Assert.assertTrue(bodyIdArray.hasAssignedNativeObject());
             Assert.assertTrue(bodyIdArray.ownsNativeObject());
             Assert.assertNotEquals(0L, bodyIdArray.va());
 
+            bodyIdArray.set(0, 2);
+            bodyIdArray.set(1, 4);
+            bodyIdArray.set(2, 10);
+
+            Assert.assertEquals(2, bodyIdArray.get(0));
+            Assert.assertEquals(4, bodyIdArray.get(1));
+            Assert.assertEquals(10, bodyIdArray.get(2));
+
             TestUtils.testClose(bodyIdArray);
         }
-        { // constructor with int[] argument
-            int[] idArray = new int[3];
+        { // int[] constructor:
+            int[] idArray = {1, 5, 7, 19, 28, 49};
             BodyIdArray bodyIdArray = new BodyIdArray(idArray);
+            int bodyIdArrayLength = bodyIdArray.length();
+
+            Assert.assertEquals(idArray.length, bodyIdArrayLength);
             Assert.assertTrue(bodyIdArray.hasAssignedNativeObject());
             Assert.assertTrue(bodyIdArray.ownsNativeObject());
             Assert.assertNotEquals(0L, bodyIdArray.va());
 
+            for (int i = 0; i < bodyIdArrayLength; i += 1) {
+                int bodyId = idArray[i];
+                int bodyIdRecovered = bodyIdArray.get(i);
+
+                Assert.assertEquals(bodyId, bodyIdRecovered);
+            }
+
+            bodyIdArray.set(3, 501);
+            bodyIdArray.set(2, 689);
+            bodyIdArray.set(0, 600);
+
+            Assert.assertEquals(501, bodyIdArray.get(3));
+            Assert.assertEquals(689, bodyIdArray.get(2));
+            Assert.assertEquals(600, bodyIdArray.get(0));
+
             TestUtils.testClose(bodyIdArray);
         }
-        { // constructor with IntBuffer argument
-            IntBuffer idBuffer = Jolt.newDirectIntBuffer(4);
+        { // IntBuffer constructor:
+            IntBuffer idBuffer = Jolt.newDirectIntBuffer(3);
+            idBuffer.put(2);
+            idBuffer.put(5);
+            idBuffer.put(6);
+
             BodyIdArray bodyIdArray = new BodyIdArray(idBuffer);
             Assert.assertTrue(bodyIdArray.hasAssignedNativeObject());
             Assert.assertTrue(bodyIdArray.ownsNativeObject());
             Assert.assertNotEquals(0L, bodyIdArray.va());
 
+            Assert.assertEquals(3, bodyIdArray.length());
+            Assert.assertEquals(2, bodyIdArray.get(0));
+            Assert.assertEquals(5, bodyIdArray.get(1));
+            Assert.assertEquals(6, bodyIdArray.get(2));
+
+            bodyIdArray.set(0, 20);
+            bodyIdArray.set(1, 65);
+
+            Assert.assertEquals(20, bodyIdArray.get(0));
+            Assert.assertEquals(65, bodyIdArray.get(1));
+
             TestUtils.testClose(bodyIdArray);
         }
-        { // constructor with List<Integer> argument
-            List<Integer> idList = new ArrayList<>(1);
-            idList.add(0);  // to avoid an empty list in the native layer.
+        { // List<Integer> constructor:
+            List<Integer> idList = new ArrayList<>();
+            idList.addAll(Arrays.asList(3, 4, 6, 7, 3, 4, 6, 102));
 
             BodyIdArray bodyIdArray = new BodyIdArray(idList);
+            int bodyIdArrayLength = bodyIdArray.length();
+
+            Assert.assertEquals(idList.size(), bodyIdArrayLength);
             Assert.assertTrue(bodyIdArray.hasAssignedNativeObject());
             Assert.assertTrue(bodyIdArray.ownsNativeObject());
             Assert.assertNotEquals(0L, bodyIdArray.va());
 
+            for (int i = 0; i < bodyIdArrayLength; i += 1) {
+                int bodyId = idList.get(i);
+                int bodyIdRecovered = bodyIdArray.get(i);
+
+                Assert.assertEquals(bodyId, bodyIdRecovered);
+            }
+
+            bodyIdArray.set(0, 501);
+            bodyIdArray.set(2, 689);
+            bodyIdArray.set(5, 600);
+
+            Assert.assertEquals(501, bodyIdArray.get(0));
+            Assert.assertEquals(689, bodyIdArray.get(2));
+            Assert.assertEquals(600, bodyIdArray.get(5));
+
             TestUtils.testClose(bodyIdArray);
         }
+
+        System.gc();
     }
 
     /**
