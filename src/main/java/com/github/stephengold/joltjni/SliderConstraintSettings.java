@@ -25,6 +25,8 @@ import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code SliderConstraint}.
@@ -159,10 +161,9 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getNormalAxis1() {
         long settingsVa = va();
-        float x = getNormalAxis1X(settingsVa);
-        float y = getNormalAxis1Y(settingsVa);
-        float z = getNormalAxis1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getNormalAxis1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -175,10 +176,9 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getNormalAxis2() {
         long settingsVa = va();
-        float x = getNormalAxis2X(settingsVa);
-        float y = getNormalAxis2Y(settingsVa);
-        float z = getNormalAxis2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getNormalAxis2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -191,10 +191,9 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPoint1() {
         long settingsVa = va();
-        double x = getPoint1X(settingsVa);
-        double y = getPoint1Y(settingsVa);
-        double z = getPoint1Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint1(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -207,10 +206,9 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPoint2() {
         long settingsVa = va();
-        double x = getPoint2X(settingsVa);
-        double y = getPoint2Y(settingsVa);
-        double z = getPoint2Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint2(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -223,10 +221,9 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getSliderAxis1() {
         long settingsVa = va();
-        float x = getSliderAxis1X(settingsVa);
-        float y = getSliderAxis1Y(settingsVa);
-        float z = getSliderAxis1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSliderAxis1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -239,10 +236,9 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getSliderAxis2() {
         long settingsVa = va();
-        float x = getSliderAxis2X(settingsVa);
-        float y = getSliderAxis2Y(settingsVa);
-        float z = getSliderAxis2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSliderAxis2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -453,41 +449,23 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long getMotorSettings(long constraintSettingsVa);
 
-    native private static float getNormalAxis1X(long settingsVa);
+    native private static void getNormalAxis1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getNormalAxis1Y(long settingsVa);
+    native private static void getNormalAxis2(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getNormalAxis1Z(long settingsVa);
+    native private static void getPoint1(
+            long settingsVa, DoubleBuffer storeDoubles);
 
-    native private static float getNormalAxis2X(long settingsVa);
+    native private static void getPoint2(
+            long settingsVa, DoubleBuffer storeDoubles);
 
-    native private static float getNormalAxis2Y(long settingsVa);
+    native private static void getSliderAxis1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getNormalAxis2Z(long settingsVa);
-
-    native private static double getPoint1X(long settingsVa);
-
-    native private static double getPoint1Y(long settingsVa);
-
-    native private static double getPoint1Z(long settingsVa);
-
-    native private static double getPoint2X(long settingsVa);
-
-    native private static double getPoint2Y(long settingsVa);
-
-    native private static double getPoint2Z(long settingsVa);
-
-    native private static float getSliderAxis1X(long settingsVa);
-
-    native private static float getSliderAxis1Y(long settingsVa);
-
-    native private static float getSliderAxis1Z(long settingsVa);
-
-    native private static float getSliderAxis2X(long settingsVa);
-
-    native private static float getSliderAxis2Y(long settingsVa);
-
-    native private static float getSliderAxis2Z(long settingsVa);
+    native private static void getSliderAxis2(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static int getSpace(long settingsVa);
 

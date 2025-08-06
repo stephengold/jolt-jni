@@ -126,236 +126,104 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSett
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getNormalAxis1X
- * Signature: (J)F
+ * Method:    getNormalAxis1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getNormalAxis1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getNormalAxis1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis1.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mNormalAxis1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getNormalAxis1Y
- * Signature: (J)F
+ * Method:    getNormalAxis2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getNormalAxis1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getNormalAxis2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis1.GetY();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mNormalAxis2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getNormalAxis1Z
- * Signature: (J)F
+ * Method:    getPoint1
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getNormalAxis1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getPoint1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis1.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPoint1;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getNormalAxis2X
- * Signature: (J)F
+ * Method:    getPoint2
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getNormalAxis2X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getPoint2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis2.GetX();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPoint2;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getNormalAxis2Y
- * Signature: (J)F
+ * Method:    getSliderAxis1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getNormalAxis2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getSliderAxis1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis2.GetY();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mSliderAxis1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getNormalAxis2Z
- * Signature: (J)F
+ * Method:    getSliderAxis2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getNormalAxis2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getSliderAxis2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const SliderConstraintSettings * const pSettings
             = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis2.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getPoint1X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getPoint1X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getPoint1Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getPoint1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getPoint1Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getPoint1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getPoint2X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getPoint2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getPoint2Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getPoint2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getPoint2Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getPoint2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getSliderAxis1X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getSliderAxis1X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mSliderAxis1.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getSliderAxis1Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getSliderAxis1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mSliderAxis1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getSliderAxis1Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getSliderAxis1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mSliderAxis1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getSliderAxis2X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getSliderAxis2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mSliderAxis2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getSliderAxis2Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getSliderAxis2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mSliderAxis2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SliderConstraintSettings
- * Method:    getSliderAxis2Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SliderConstraintSettings_getSliderAxis2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const SliderConstraintSettings * const pSettings
-            = reinterpret_cast<SliderConstraintSettings *> (settingsVa);
-    const float result = pSettings->mSliderAxis2.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mSliderAxis2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
