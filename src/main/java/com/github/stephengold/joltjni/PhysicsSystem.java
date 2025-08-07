@@ -599,8 +599,10 @@ public class PhysicsSystem extends NonCopyable {
      * @param map (not null, alias created)
      * @param ovbFilter (not null, alias created)
      * @param ovoFilter (not null, alias created)
+     * @return the current system (for chaining)
      */
-    public void init(int maxBodies, int numBodyMutexes, int maxBodyPairs,
+    public PhysicsSystem init(
+            int maxBodies, int numBodyMutexes, int maxBodyPairs,
             int maxContactConstraints, ConstBroadPhaseLayerInterface map,
             ConstObjectVsBroadPhaseLayerFilter ovbFilter,
             ConstObjectLayerPairFilter ovoFilter) {
@@ -614,6 +616,8 @@ public class PhysicsSystem extends NonCopyable {
         long ovoFilterVa = ovoFilter.targetVa();
         init(systemVa, maxBodies, numBodyMutexes, maxBodyPairs,
                 maxContactConstraints, mapVa, ovbFilterVa, ovoFilterVa);
+
+        return this;
     }
 
     /**
