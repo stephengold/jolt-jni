@@ -352,13 +352,16 @@ public class BodyInterface extends NonCopyable {
      * @return the new body
      */
     public Body createBody(ConstBodyCreationSettings settings) {
+        PhysicsSystem system = getSystem();
+        assert system.getMaxBodies() > 0 :
+                "The PhysicsSystem appears to be uninitialized.";
+
         long bodyInterfaceVa = va();
         long settingsVa = settings.targetVa();
         long bodyVa = createBody(bodyInterfaceVa, settingsVa);
         if (bodyVa == 0L) {
             throw new IllegalStateException("ran out of bodies");
         }
-        PhysicsSystem system = getSystem();
         Body result = new Body(system, bodyVa);
 
         return result;
