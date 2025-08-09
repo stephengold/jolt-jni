@@ -27,7 +27,12 @@ SOFTWARE.
  */
 
 /*
- * Pre-processor macros for tracing heap allocations by glue code:
+ * track whether RegisterTypes()/UnregisterTypes() have been invoked:
+ */
+extern bool gTypesAreRegistered;
+
+/*
+ * pre-processor macros for tracing heap allocations by glue code:
  */
 #ifdef JPH_DEBUG
 

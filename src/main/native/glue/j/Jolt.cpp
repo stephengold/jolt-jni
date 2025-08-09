@@ -395,6 +395,9 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_registerDefaultA
 #endif
 }
 
+// track whether RegisterTypes()/UnregisterTypes() have been invoked:
+bool gTypesAreRegistered = false;
+
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    registerTypes
@@ -402,7 +405,13 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_registerDefaultA
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_registerTypes
   (JNIEnv *, jclass) {
+    if (gTypesAreRegistered) {
+        std::cout << "Multiple invocations of Jolt.registerTypes()!"
+                << std::endl;
+        return;
+    } 
     RegisterTypes();
+    gTypesAreRegistered = true;
 }
 
 #ifdef JPH_DEBUG
@@ -500,6 +509,12 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_test000
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_unregisterTypes
   (JNIEnv *, jclass) {
+    if (!gTypesAreRegistered) {
+        std::cout << "Tried to unregister types before Jolt.registerTypes()!"
+                << std::endl;
+        return;
+    } 
+    gTypesAreRegistered = false;
     UnregisterTypes();
 }
 

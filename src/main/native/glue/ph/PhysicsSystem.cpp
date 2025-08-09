@@ -29,6 +29,7 @@ SOFTWARE.
 
 #include "auto/com_github_stephengold_joltjni_PhysicsSystem.h"
 #include "glue/glue.h"
+#include <iostream>
 
 using namespace JPH;
 
@@ -751,6 +752,11 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_setSoft
 JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_update
   (JNIEnv *, jclass, jlong physicsSystemVa, jfloat deltaTime,
   jint collisionSteps, jlong allocatorVa, jlong jobSystemVa) {
+    if (!gTypesAreRegistered) {
+        std::cout << "Tried to update physics before Jolt.registerTypes()!"
+                << std::endl;
+        return 1 << 7;
+    }
     PhysicsSystem * const pPhysicsSystem
             = reinterpret_cast<PhysicsSystem *> (physicsSystemVa);
     TempAllocatorImpl * const pAllocator
