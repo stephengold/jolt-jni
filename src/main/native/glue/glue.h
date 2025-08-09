@@ -59,7 +59,7 @@ extern bool gTraceAllocations;
 #define TRACE_DELETE(className, pointer)
 #endif
 /*
- * Pre-processor macro to generate code to access a direct DoubleBuffer:
+ * pre-processor macro to generate code to access a direct DoubleBuffer:
  */
 #define DIRECT_DOUBLE_BUFFER(pEnv, doubleBuffer, pDoubles, capacityDoubles) \
   jdouble * const pDoubles = (jdouble *) (pEnv)->GetDirectBufferAddress(doubleBuffer); \
@@ -67,7 +67,7 @@ extern bool gTraceAllocations;
   const jlong capacityDoubles = (pEnv)->GetDirectBufferCapacity(doubleBuffer); \
   JPH_ASSERT(!(pEnv)->ExceptionCheck())
 /*
- * Pre-processor macro to generate code to access a direct FloatBuffer:
+ * pre-processor macro to generate code to access a direct FloatBuffer:
  */
 #define DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats) \
   jfloat * const pFloats = (jfloat *) (pEnv)->GetDirectBufferAddress(floatBuffer); \
@@ -75,7 +75,7 @@ extern bool gTraceAllocations;
   const jlong capacityFloats = (pEnv)->GetDirectBufferCapacity(floatBuffer); \
   JPH_ASSERT(!(pEnv)->ExceptionCheck())
 /*
- * Pre-processor macro to generate the body of a static createCopy() method
+ * pre-processor macro to generate the body of a static createCopy() method
  * to implement a copy constructor:
  */
 #define BODYOF_CREATE_COPY(className) \
@@ -86,7 +86,7 @@ extern bool gTraceAllocations;
     return reinterpret_cast<jlong> (pResult); \
 }
 /*
- * Pre-processor macro to generate the body of a static createDefault() method
+ * pre-processor macro to generate the body of a static createDefault() method
  * to implement a no-arg constructor:
  */
 #define BODYOF_CREATE_DEFAULT(className) \
@@ -96,7 +96,7 @@ extern bool gTraceAllocations;
     return reinterpret_cast<jlong> (pResult); \
 }
 /*
- * Pre-processor macro to generate the body of a static free() method
+ * pre-processor macro to generate the body of a static free() method
  * to implement a destructor:
  */
 #define BODYOF_FREE(className) \
@@ -106,7 +106,7 @@ extern bool gTraceAllocations;
     delete pObject; \
 }
 /*
- * Pre-processor macro to implement 5 methods associated with the
+ * pre-processor macro to implement 5 methods associated with the
  * com.github.stephengold.template.Ref class:
  */
 #define IMPLEMENT_REF(className, copyName, createName, freeName, getPtrName, toRefCName) \
@@ -125,7 +125,7 @@ extern bool gTraceAllocations;
     return reinterpret_cast<jlong> (pResult); \
   }
 /*
- * Pre-processor macro to implement 4 methods associated with the
+ * pre-processor macro to implement 4 methods associated with the
  * com.github.stephengold.templace.Result class:
  */
 #define IMPLEMENT_RESULT(className, freeName, getErrorName, hasErrorName, isValidName) \
