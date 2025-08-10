@@ -7,21 +7,21 @@
   + `UnsatisfiedLinkError` finalizing bulk add on Windows (issue #16)
 
 + New features:
- + `BodyIdArray`:  add a `length` field and a getter for it and 3 constructors
- + `BodyInterface`:  add 3 alternative signatures for methods
- + `BroadPhase`:  add 3 alternative signatures for methods
- + add the `ConstWheelSettingsTv` interface
- + `DistanceConstraintSettings`:  add alternative signatures for 2 setters
- + `PhysicsSettings`:  add accessors for `speculativeContactDistance` (PR #12)
- + `PhysicsSystem`: add chaining to the `init()` method
- + `QuatArg`, `RVec3Arg` and `Vec3Arg`:  add `copyTo()` methods
- + `SoftBodyCreationSettings`:  add an alternate signature for `setPosition()`
- + `SoftBodySharedSettings`:  add `putRodIndices()` methods
- + `Support`:  add `getConvexRadius()` and `getSupport()`
- + `VehicleConstraint`:  add 2 public getters
+  + `BodyIdArray`:  add a `length` field and a getter for it and 3 constructors
+  + `BodyInterface`:  add 3 alternative signatures for methods
+  + `BroadPhase`:  add 3 alternative signatures for methods
+  + add the `ConstWheelSettingsTv` interface
+  + `DistanceConstraintSettings`:  add alternative signatures for 2 setters
+  + `PhysicsSettings`:  add accessors for `speculativeContactDistance` (PR #12)
+  + `PhysicsSystem`: add chaining to the `init()` method
+  + `QuatArg`, `RVec3Arg` and `Vec3Arg`:  add `copyTo()` methods
+  + `SoftBodyCreationSettings`:  add an alternate signature for `setPosition()`
+  + `SoftBodySharedSettings`:  add `putRodIndices()` methods
+  + `Support`:  add `getConvexRadius()` and `getSupport()`
+  + `VehicleConstraint`:  add 2 public getters
 
-+ Build changes
- + disable C++ runtime type information (RTTI) and C++ exceptions
++ Build changes:
+  + disable C++ runtime type information (RTTI) and C++ exceptions
 
 
 ## Version 2.1.0 released on 24 July 2025

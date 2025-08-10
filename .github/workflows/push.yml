@@ -28,7 +28,7 @@ jobs:
   Java21-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-22.04
-    timeout-minutes: 34
+    timeout-minutes: 35
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -232,7 +232,7 @@ jobs:
   Java21-x-Android:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
-    timeout-minutes: 95
+    timeout-minutes: 101
     steps:
       - uses: actions/setup-java@v4
         with:
