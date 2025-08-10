@@ -40,7 +40,7 @@ import testjoltjni.TestUtils;
 
 /**
  * Automated JUnit4 tests for Jolt-JNI object creation, destruction, accessors,
- * and defaults.
+ * and defaults of {@code PhysicsSettings} and {@code PhysicsSystem}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -49,8 +49,7 @@ public class Test004 {
     // new methods exposed
 
     /**
-     * Test creation, destruction, accessors, and defaults of PhysicsSettings
-     * and PhysicsSystem.
+     * Test creation, destruction, accessors, and defaults.
      */
     @Test
     public void test004() {

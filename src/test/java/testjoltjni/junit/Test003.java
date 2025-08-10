@@ -93,7 +93,13 @@ import testjoltjni.TestUtils;
  * Automated JUnit4 tests for creation, destruction, accessors, and defaults of
  * various Jolt-Physics objects.
  * <p>
+ * For {@code PhysicsSettings} and {@code PhysicsSystem}, see Test004.
+ * <p>
+ * For {@code TwoBodyConstraintsSettings} subclasses, see Test005.
+ * <p>
  * For {@code ShapeSettings} subclasses, see Test006.
+ * <p>
+ * For {@code Shape} subclasses, see Test007.
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -41,7 +41,7 @@ import testjoltjni.TestUtils;
 
 /**
  * Automated JUnit4 tests for creation, destruction, accessors, and defaults of
- * {@code ConstraintsSettings} subclasses.
+ * {@code TwoBodyConstraintsSettings} subclasses.
  *
  * @author Stephen Gold sgold@sonic.net
  */

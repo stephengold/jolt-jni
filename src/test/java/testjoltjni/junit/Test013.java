@@ -30,7 +30,8 @@ import org.junit.Test;
 import testjoltjni.TestUtils;
 
 /**
- * Test basic functionality of various Jolt-JNI classes.
+ * Automated JUnit4 tests for basic functionality of various Jolt-JNI classes
+ * (excluding accessors, serialization, de-serialization, and copying).
  *
  * @author Stephen Gold sgold@sonic.net
  */

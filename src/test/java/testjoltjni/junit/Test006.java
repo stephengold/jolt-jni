@@ -63,8 +63,6 @@ import testjoltjni.TestUtils;
 /**
  * Automated JUnit4 tests for creation, destruction, accessors, and defaults of
  * {@code ShapeSettings} subclasses.
- * <p>
- * For classes not related to {@code ShapeSettings}, see Test003.
  *
  * @author Stephen Gold sgold@sonic.net
  */
