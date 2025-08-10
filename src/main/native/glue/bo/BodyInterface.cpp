@@ -117,7 +117,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addBodi
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addBodiesFinalize
   (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jlong addState, int activationOrdinal) {
+  jlong addState, jint activationOrdinal) {
     BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
