@@ -275,7 +275,7 @@ public class Body extends NonCopyable implements ConstBody {
      */
     public void setAngularVelocity(float wx, float wy, float wz) {
         long bodyVa = va();
-        setLinearVelocity(bodyVa, wx, wy, wz);
+        setAngularVelocity(bodyVa, wx, wy, wz);
     }
 
     /**
