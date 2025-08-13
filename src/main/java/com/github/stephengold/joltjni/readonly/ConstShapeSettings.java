@@ -39,6 +39,14 @@ public interface ConstShapeSettings extends ConstSerializableObject {
     ShapeResult create();
 
     /**
+     * Count the active references to the native {@code ShapeSettings}. The
+     * settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    int getRefCount();
+
+    /**
      * Create a counted reference to the native {@code ShapeSettings}.
      *
      * @return a new JVM object with a new native object assigned

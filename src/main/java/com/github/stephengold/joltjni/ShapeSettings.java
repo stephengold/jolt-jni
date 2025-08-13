@@ -308,7 +308,7 @@ abstract public class ShapeSettings
 
     native static long create(long settingsVa);
 
-    native private static int getRefCount(long settingsVa);
+    native static int getRefCount(long settingsVa);
 
     native private static long getUserData(long settingsVa);
 

@@ -72,6 +72,20 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
     }
 
     /**
+     * Count the active references to the native {@code ShapeSettings}. The
+     * settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long settingsVa = targetVa();
+        int result = ShapeSettings.getRefCount(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Access the type information of the current object. (native method:
      * getRTTI)
      *
