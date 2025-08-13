@@ -638,7 +638,8 @@ public class BodyCreationSettings
     /**
      * Replace the shape and null out the shape settings.
      *
-     * @param shape the desired shape (unaffected) or {@code null}
+     * @param shape the desired shape (unaffected except that its reference
+     * count gets incremented) or {@code null}
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setShape(ConstShape shape) {
