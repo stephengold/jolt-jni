@@ -38,6 +38,7 @@ import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RotatedTranslatedShapeSettings;
 import com.github.stephengold.joltjni.ScaledShapeSettings;
 import com.github.stephengold.joltjni.ShapeRefC;
+import com.github.stephengold.joltjni.ShapeSettings;
 import com.github.stephengold.joltjni.ShapeSettingsRef;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.SphereShapeSettings;
@@ -173,7 +174,7 @@ public class Test006 {
         EmptyShapeSettings settings = new EmptyShapeSettings();
 
         testEmptySsDefaults(settings);
-        testEmptySsSetters(settings);
+        testSsSetters(settings);
 
         TestUtils.testClose(settings);
         System.gc();
@@ -400,13 +401,11 @@ public class Test006 {
      * @param settings the settings to test (not null, modified)
      */
     private static void testBoxSsSetters(BoxShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setConvexRadius(0.1f);
         settings.setHalfExtent(new Vec3(2f, 3f, 4f));
         settings.setMaterial(PhysicsMaterial.sDefault());
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         Assert.assertEquals(0.1f, settings.getConvexRadius(), 0f);
         TestUtils.assertEquals(
@@ -433,13 +432,11 @@ public class Test006 {
      * @param settings the settings to test (not null, modified)
      */
     private static void testCapsuleSsSetters(CapsuleShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setHalfHeightOfCylinder(0.2f);
         settings.setMaterial(PhysicsMaterial.sDefault());
         settings.setRadius(0.3f);
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         Assert.assertEquals(0.2f, settings.getHalfHeightOfCylinder(), 0f);
         Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
@@ -469,14 +466,12 @@ public class Test006 {
      */
     private static void testConvexHullSsSetters(
             ConvexHullShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setHullTolerance(0.1f);
         settings.setMaterial(PhysicsMaterial.sDefault());
         settings.setMaxConvexRadius(0.2f);
         settings.setMaxErrorConvexRadius(0.3f);
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         Assert.assertEquals(0.1f, settings.getHullTolerance(), 0f);
         Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
@@ -518,14 +513,12 @@ public class Test006 {
      * @param settings the settings to test (not null, modified)
      */
     private static void testCylinderSsSetters(CylinderShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setConvexRadius(0.1f);
         settings.setHalfHeight(0.2f);
         settings.setMaterial(PhysicsMaterial.sDefault());
         settings.setRadius(0.3f);
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         Assert.assertEquals(0.1f, settings.getConvexRadius(), 0f);
         Assert.assertEquals(0.2f, settings.getHalfHeight(), 0f);
@@ -561,6 +554,8 @@ public class Test006 {
      */
     private static void testHeightFieldSsSetters(
             HeightFieldShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setActiveEdgeCosThresholdAngle(0.5f);
         settings.setBitsPerSample(7);
         settings.setBlockSize(3);
@@ -568,10 +563,6 @@ public class Test006 {
         settings.setMinHeightValue(-1f);
         settings.setOffset(new Vec3(2f, 3f, 4f));
         settings.setScale(new Vec3(5f, 6f, 7f));
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         Assert.assertEquals(
                 0.5f, settings.getActiveEdgeCosThresholdAngle(), 0f);
@@ -591,17 +582,6 @@ public class Test006 {
      */
     private static void testEmptySsDefaults(EmptyShapeSettings settings) {
         testSsDefaults(settings);
-    }
-
-    /**
-     * Test the setters of the specified {@code EmptyShapeSettings}.
-     *
-     * @param settings the settings to test (not null, modified)
-     */
-    private static void testEmptySsSetters(EmptyShapeSettings settings) {
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
     }
 
     /**
@@ -626,13 +606,11 @@ public class Test006 {
      * @param settings the settings to test (not null, modified)
      */
     private static void testMeshSsSetters(MeshShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setActiveEdgeCosThresholdAngle(0.8f);
         settings.setMaxTrianglesPerLeaf(4);
         settings.setPerTriangleUserData(true);
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         Assert.assertEquals(
                 0.8f, settings.getActiveEdgeCosThresholdAngle(), 0f);
@@ -671,12 +649,8 @@ public class Test006 {
      */
     private static void testOffsetCenterOfMassSsSetters(
             OffsetCenterOfMassShapeSettings settings) {
+        testSsSetters(settings);
         settings.setOffset(new Vec3(2f, 3f, 4f));
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
-
         TestUtils.assertEquals(2f, 3f, 4f, settings.getOffset(), 0f);
     }
 
@@ -703,13 +677,11 @@ public class Test006 {
      * @param settings the settings to test (not null, modified)
      */
     private static void testPlaneSsSetters(PlaneShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setHalfExtent(99f);
         settings.setMaterial(PhysicsMaterial.sDefault());
         settings.setPlane(new Plane(0.6f, 0.8f, 0f, 2f));
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         Assert.assertEquals(99f, settings.getHalfExtent(), 0f);
         Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
@@ -739,12 +711,10 @@ public class Test006 {
      */
     private static void testRotatedTranslatedSsSetters(
             RotatedTranslatedShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setPosition(new Vec3(2f, 3f, 4f));
         settings.setRotation(new Quat(-0.5f, 0.5f, -0.5f, 0.5f));
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         TestUtils.assertEquals(2f, 3f, 4f, settings.getPosition(), 0f);
         TestUtils.assertEquals(
@@ -778,12 +748,10 @@ public class Test006 {
      * @param settings the settings to test (not null, modified)
      */
     private static void testSphereSsSetters(SphereShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setMaterial(PhysicsMaterial.sDefault());
         settings.setRadius(9f);
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
         Assert.assertEquals(9f, settings.getRadius(), 0f);
@@ -797,6 +765,18 @@ public class Test006 {
     private static void testSsDefaults(ConstShapeSettings settings) {
         Assert.assertTrue(settings.hasAssignedNativeObject());
         Assert.assertFalse(settings.ownsNativeObject());
+    }
+
+    /**
+     * Test the setters of the specified {@code SphereShapeSettings}.
+     *
+     * @param settings the settings to test (not null, modified)
+     */
+    private static void testSsSetters(ShapeSettings settings) {
+        ShapeSettingsRef ref = settings.toRef();
+
+        Assert.assertEquals(1, settings.getRefCount());
+        Assert.assertEquals(settings, ref.getPtr());
     }
 
     /**
@@ -832,14 +812,12 @@ public class Test006 {
      */
     private static void testTaperedCapsuleSsSetters(
             TaperedCapsuleShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setBottomRadius(0.08f);
         settings.setHalfHeightOfTaperedCylinder(0.2f);
         settings.setMaterial(PhysicsMaterial.sDefault());
         settings.setTopRadius(0.3f);
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         Assert.assertEquals(0.08f, settings.getBottomRadius(), 0f);
         Assert.assertEquals(
@@ -871,15 +849,13 @@ public class Test006 {
      */
     private static void testTaperedCylinderSsSetters(
             TaperedCylinderShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setBottomRadius(0.08f);
         settings.setConvexRadius(0.1f);
         settings.setHalfHeight(0.2f);
         settings.setMaterial(PhysicsMaterial.sDefault());
         settings.setTopRadius(0.3f);
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         Assert.assertEquals(0.08f, settings.getBottomRadius(), 0f);
         Assert.assertEquals(0.1f, settings.getConvexRadius(), 0f);
@@ -910,15 +886,13 @@ public class Test006 {
      * @param settings the settings to test (not null, modified)
      */
     private static void testTriangleSsSetters(TriangleShapeSettings settings) {
+        testSsSetters(settings);
+
         settings.setConvexRadius(0.1f);
         settings.setMaterial(PhysicsMaterial.sDefault());
         settings.setV1(1f, 2f, 3f);
         settings.setV2(4f, 5f, 6f);
         settings.setV3(9f, 8f, 7f);
-
-        ShapeSettingsRef ref = settings.toRef();
-        Assert.assertEquals(1, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
 
         Assert.assertEquals(0.1f, settings.getConvexRadius(), 0f);
         Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
