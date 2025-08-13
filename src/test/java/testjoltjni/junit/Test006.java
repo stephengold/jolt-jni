@@ -131,13 +131,13 @@ public class Test006 {
      * Test the {@code ConvexHullShapeSettings} class.
      */
     private static void doConvexHullShapeSettings() {
-        // create from an array:
+        // no-arg constructor:
         ConvexHullShapeSettings settings = new ConvexHullShapeSettings();
 
         testConvexHullSsDefaults(settings);
         testConvexHullSsSetters(settings);
 
-        // create from a collection:
+        // instantiate from a collection:
         Collection<Vec3Arg> list = List.of();
         ConvexHullShapeSettings settings2 = new ConvexHullShapeSettings(list);
 
@@ -188,6 +188,7 @@ public class Test006 {
         testHeightFieldSsDefaults(settings0);
         testHeightFieldSsSetters(settings0);
 
+        // instantiate from a buffer:
         int sampleCount = 0;
         int numFloats = sampleCount * sampleCount;
         FloatBuffer samples = Jolt.newDirectFloatBuffer(numFloats);
@@ -197,6 +198,7 @@ public class Test006 {
         testHeightFieldSsDefaults(settings);
         testHeightFieldSsSetters(settings);
 
+        // instantiate from an array:
         float[] array = new float[numFloats];
         HeightFieldShapeSettings settings2 = new HeightFieldShapeSettings(
                 array, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount);
@@ -217,12 +219,14 @@ public class Test006 {
         testMeshSsDefaults(settings);
         testMeshSsSetters(settings);
 
+        // instantiate from an array:
         Triangle[] array = new Triangle[0];
         MeshShapeSettings settings2 = new MeshShapeSettings(array);
 
         testMeshSsDefaults(settings2);
         testMeshSsSetters(settings2);
 
+        // instantiate from a collection:
         List<Triangle> list = new ArrayList<>(1);
         MeshShapeSettings settings3 = new MeshShapeSettings(list);
 
@@ -270,6 +274,7 @@ public class Test006 {
         testPlaneSsDefaults(settings);
         testPlaneSsSetters(settings);
 
+        // instantiate from a Plane:
         ConstPlane plane = new Plane(0f, 0f, 0f, 0f);
         PlaneShapeSettings settings2 = new PlaneShapeSettings(plane);
 
@@ -386,8 +391,7 @@ public class Test006 {
         testConvexSsDefaults(settings);
 
         Assert.assertEquals(0f, settings.getConvexRadius(), 0f);
-        TestUtils.assertEquals(
-                0f, 0f, 0f, settings.getHalfExtent(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, settings.getHalfExtent(), 0f);
     }
 
     /**
@@ -489,6 +493,7 @@ public class Test006 {
     private static void testConvexSsDefaults(
             ConstConvexShapeSettings settings) {
         testSsDefaults(settings);
+
         Assert.assertEquals(1_000f, settings.getDensity(), 0f);
         Assert.assertNull(settings.getMaterial());
     }

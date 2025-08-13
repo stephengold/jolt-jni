@@ -66,8 +66,9 @@ final public class TestUtils {
     // constants
 
     /**
-     * false to explicitly free native objects via {@code testClose()}, true to
-     * rely on the automatic {@code java.lang.ref.Cleaner} instead
+     * {@code false} to explicitly free native objects via {@code testClose()},
+     * or {@code true} to rely on the automatic {@code java.lang.ref.Cleaner}
+     * instead
      */
     final public static boolean automateFreeing = true;
     /**
@@ -75,11 +76,13 @@ final public class TestUtils {
      */
     final public static int numObjLayers = 2;
     /**
-     * customary object layer for moving objects
+     * object layer for moving objects (but the Jolt samples assign 5 instead,
+     * and Sport-Jolt assigns 0)
      */
     final public static int objLayerMoving = 1;
     /**
-     * customary object layer for non-moving objects
+     * object layer for non-moving objects (but the Jolt samples assign 4
+     * instead, and Sport-Jolt assigns 1)
      */
     final public static int objLayerNonMoving = 0;
     // *************************************************************************
