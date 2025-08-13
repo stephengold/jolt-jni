@@ -54,7 +54,7 @@ abstract public class DebugRenderer extends NonCopyable {
         // If a previous instance hasn't been freed,
         // a (native) assertion failure is possible.
 
-        if (instance != null) {
+        if (instance != null && !JoltPhysicsObject.isCleanerStarted()) {
             instance.close();
         }
         instance = this;
