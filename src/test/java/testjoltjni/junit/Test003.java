@@ -284,7 +284,7 @@ public class Test003 {
         }
         { // constructed from a ShapeSettings:
             ConstBoxShapeSettings ss = new BoxShapeSettings(1f, 1f, 1f);
-            ShapeSettingsRefC ssRefC = ss.toRefC();
+            final ShapeSettingsRefC ssRefC = ss.toRefC();
             int objectLayer = 0;
             BodyCreationSettings bcs = new BodyCreationSettings(ss,
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
@@ -300,7 +300,7 @@ public class Test003 {
         }
         { // constructed from a Shape:
             ConstShape shape = new SphereShape(1f);
-            ShapeRefC shapeRefC = shape.toRefC();
+            final ShapeRefC shapeRefC = shape.toRefC();
             int objectLayer = 0;
             BodyCreationSettings bcs = new BodyCreationSettings(shape,
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
@@ -429,10 +429,10 @@ public class Test003 {
         float radius = 1f; // meters
         float height = 2f; // meters
         ConstShape shape = new CapsuleShape(height / 2f, radius);
-        ShapeRefC shapeRefC = shape.toRefC();
+        final ShapeRefC shapeRefC = shape.toRefC();
 
         CharacterSettings settings = new CharacterSettings();
-        CharacterSettingsRef settingsRef = settings.toRef();
+        final CharacterSettingsRef settingsRef = settings.toRef();
         settings.setShape(shape);
 
         int maxBodies = 1;
@@ -440,7 +440,7 @@ public class Test003 {
         com.github.stephengold.joltjni.Character character
                 = new com.github.stephengold.joltjni.Character(
                         settings, new RVec3(), new Quat(), 0L, system);
-        CharacterRef characterRef = character.toRef();
+        final CharacterRef characterRef = character.toRef();
 
         testCharacterDefaults(character);
 
@@ -453,7 +453,7 @@ public class Test003 {
      */
     private static void doCharacterVirtual() {
         CharacterVirtualSettings settings = new CharacterVirtualSettings();
-        CharacterVirtualSettingsRef ref = settings.toRef();
+        final CharacterVirtualSettingsRef ref = settings.toRef();
         PhysicsSystem system = new PhysicsSystem();
         CharacterVirtual character = new CharacterVirtual(
                 settings, new RVec3(), new Quat(), 0L, system);
@@ -603,7 +603,7 @@ public class Test003 {
         }
         { // constructed from a SoftBodySharedSettings:
             SoftBodySharedSettings sbss = new SoftBodySharedSettings();
-            SoftBodySharedSettingsRef sbssRef = sbss.toRef();
+            final SoftBodySharedSettingsRef sbssRef = sbss.toRef();
             RVec3Arg location = new RVec3();
             QuatArg orientation = new Quat();
             int objectLayer = 0;
@@ -696,7 +696,7 @@ public class Test003 {
      */
     private static void doVehicleConstraintSettings() {
         VehicleConstraintSettings vcs = new VehicleConstraintSettings();
-        Ref ref = vcs.toRef();
+        final Ref ref = vcs.toRef();
 
         testVehicleConstraintSettingsDefaults(vcs);
         testVehicleConstraintSettingsSetters(vcs);
@@ -723,7 +723,7 @@ public class Test003 {
      */
     private static void doWheelSettingsTv() {
         WheelSettingsTv wstv = new WheelSettingsTv();
-        WheelSettingsTvRef ref = wstv.toRef();
+        final WheelSettingsTvRef ref = wstv.toRef();
 
         testWheelSettingsTvDefaults(wstv);
         testWheelSettingsTvSetters(wstv);
@@ -737,7 +737,7 @@ public class Test003 {
      */
     private static void doWheelSettingsWv() {
         WheelSettingsWv wswv = new WheelSettingsWv();
-        WheelSettingsWvRef ref = wswv.toRef();
+        final WheelSettingsWvRef ref = wswv.toRef();
 
         testWheelSettingsWvDefaults(wswv);
         testWheelSettingsWvSetters(wswv);
@@ -752,7 +752,7 @@ public class Test003 {
     private static void doWvControllerSettings() {
         WheeledVehicleControllerSettings wvcs
                 = new WheeledVehicleControllerSettings();
-        VehicleControllerSettingsRef ref = wvcs.toRef();
+        final VehicleControllerSettingsRef ref = wvcs.toRef();
 
         testWvControllerSettingsDefaults(wvcs);
         testWvControllerSettingsSetters(wvcs);
