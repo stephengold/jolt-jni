@@ -91,6 +91,25 @@ public class BodyCreationSettings
     }
 
     /**
+     * Instantiate uncooked settings for the specified shape settings.
+     *
+     * @param shapeSettings the desired shape settings (not null)
+     * @param loc the desired location (not null, unaffected)
+     * @param orient the desired orientation (not null, unaffected)
+     * @param motionType the desired motion type (not null)
+     * @param objLayer the ID of the desired object layer
+     */
+    public BodyCreationSettings(ConstShapeSettings shapeSettings, RVec3Arg loc,
+            QuatArg orient, EMotionType motionType, int objLayer) {
+        long shapeSettingsVa = shapeSettings.targetVa();
+        int motionTypeOrdinal = motionType.ordinal();
+        long bodySettingsVa = createFromShapeSettings(shapeSettingsVa, loc.xx(),
+                loc.yy(), loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
+                orient.getW(), motionTypeOrdinal, objLayer);
+        setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
+    }
+
+    /**
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
@@ -126,25 +145,6 @@ public class BodyCreationSettings
     public BodyCreationSettings(ShapeRef shapeRef, RVec3Arg loc,
             QuatArg orient, EMotionType motionType, int objLayer) {
         this(shapeRef.getPtr(), loc, orient, motionType, objLayer);
-    }
-
-    /**
-     * Instantiate uncooked settings for the specified shape settings.
-     *
-     * @param shapeSettings the desired shape settings (not null)
-     * @param loc the desired location (not null, unaffected)
-     * @param orient the desired orientation (not null, unaffected)
-     * @param motionType the desired motion type (not null)
-     * @param objLayer the ID of the desired object layer
-     */
-    public BodyCreationSettings(ConstShapeSettings shapeSettings, RVec3Arg loc,
-            QuatArg orient, EMotionType motionType, int objLayer) {
-        long shapeSettingsVa = shapeSettings.targetVa();
-        int motionTypeOrdinal = motionType.ordinal();
-        long bodySettingsVa = createFromShapeSettings(shapeSettingsVa, loc.xx(),
-                loc.yy(), loc.zz(), orient.getX(), orient.getY(), orient.getZ(),
-                orient.getW(), motionTypeOrdinal, objLayer);
-        setVirtualAddress(bodySettingsVa, () -> free(bodySettingsVa));
     }
     // *************************************************************************
     // new methods exposed
