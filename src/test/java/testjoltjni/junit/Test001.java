@@ -132,7 +132,6 @@ public class Test001 {
             ContactSettings settings = new ContactSettings(settingsVa);
             System.out.println("A contact was added, combinedFriction = "
                     + settings.getCombinedFriction() + " depth = " + depth);
-            TestUtils.testClose(body1, body2, manifold, settings);
         }
 
         /**
@@ -196,7 +195,6 @@ public class Test001 {
                     = new CollideShapeResult(collisionResultVa);
             System.out.println("Contact validate callback, depth = "
                     + result.getPenetrationDepth());
-            TestUtils.testClose(result);
 
             return ValidateResult.AcceptAllContactsForThisBodyPair.ordinal();
         }
@@ -322,15 +320,13 @@ public class Test001 {
         Assert.assertEquals(2, ballShape.getRefCount());
         bodyInterface.destroyBody(ballId);
         Assert.assertEquals(1, ballShape.getRefCount());
-        TestUtils.testClose(ballSettings, ballShape);
+        TestUtils.testClose(ballSettings);
 
         bodyInterface.removeBody(floorId);
         bodyInterface.destroyBody(floorId);
-        TestUtils.testClose(floor, floorBodySettings, floorShapeRef,
-                floorShapeResult, floorShapeSettings);
-
-        TestUtils.testClose(bodyInterface, physicsSystem, objVsObjFilter,
-                objVsBpFilter, mapObj2Bp);
+        TestUtils.testClose(
+                floorBodySettings, floorShapeRef, floorShapeResult,
+                physicsSystem, objVsObjFilter, objVsBpFilter, mapObj2Bp);
 
         TestUtils.cleanup();
     }
