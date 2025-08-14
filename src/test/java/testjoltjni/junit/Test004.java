@@ -205,9 +205,6 @@ public class Test004 {
             // Each invocation of getBodyInterface() returns the same VA:
             BodyInterface bodyInterface1 = physicsSystem.getBodyInterface();
             Assert.assertEquals(bodyInterface.va(), bodyInterface1.va());
-
-            TestUtils.testClose(bodyInterface1);
-            TestUtils.testClose(bodyInterface);
         }
 
         {
