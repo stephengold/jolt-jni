@@ -53,7 +53,7 @@ final public class SpringSettings
     public SpringSettings(ConstSpringSettings original) {
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
+        setVirtualAddress(copyVa, () -> free(copyVa));
     }
 
     /**
