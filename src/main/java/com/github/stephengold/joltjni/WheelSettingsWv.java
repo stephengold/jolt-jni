@@ -21,12 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstWheelSettingsWv;
+
 /**
  * Settings used to construct a {@code WheelWv}. (native type: WheelSettingsWV)
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class WheelSettingsWv extends WheelSettings {
+public class WheelSettingsWv
+        extends WheelSettings
+        implements ConstWheelSettingsWv {
     // *************************************************************************
     // constructors
 
@@ -53,52 +57,13 @@ public class WheelSettingsWv extends WheelSettings {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public WheelSettingsWv(WheelSettingsWv original) {
-        long originalVa = original.va();
+    public WheelSettingsWv(ConstWheelSettingsWv original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa); // not owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Return the maximum torque that the main brake can exert on the wheel. The
-     * settings are unaffected. (native attribute: mMaxBrakeTorque)
-     *
-     * @return the maximum torque (in Newton.meters)
-     */
-    public float getMaxBrakeTorque() {
-        long settingsVa = va();
-        float result = getMaxBrakeTorque(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum torque that the hand brake can exert on the wheel. The
-     * settings are unaffected. (native attribute: mMaxHandBrakeTorque)
-     *
-     * @return the maximum torque (in Newton.meters)
-     */
-    public float getMaxHandBrakeTorque() {
-        long settingsVa = va();
-        float result = getMaxHandBrakeTorque(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum steering angle. The settings are unaffected. (native
-     * attribute: mMaxSteerAngle)
-     *
-     * @return the maximum steering angle (in radians)
-     */
-    public float getMaxSteerAngle() {
-        long settingsVa = va();
-        float result = getMaxSteerAngle(settingsVa);
-
-        return result;
-    }
 
     /**
      * Alter the maximum torque that the main brake can exert on the wheel.
@@ -131,6 +96,50 @@ public class WheelSettingsWv extends WheelSettings {
     public void setMaxSteerAngle(float angle) {
         long settingsVa = va();
         setMaxSteerAngle(settingsVa, angle);
+    }
+    // *************************************************************************
+    // ConstWheelSettingsWv methods
+
+    /**
+     * Return the maximum torque that the main brake can exert on the wheel. The
+     * settings are unaffected. (native attribute: mMaxBrakeTorque)
+     *
+     * @return the maximum torque (in Newton.meters)
+     */
+    @Override
+    public float getMaxBrakeTorque() {
+        long settingsVa = va();
+        float result = getMaxBrakeTorque(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum torque that the hand brake can exert on the wheel. The
+     * settings are unaffected. (native attribute: mMaxHandBrakeTorque)
+     *
+     * @return the maximum torque (in Newton.meters)
+     */
+    @Override
+    public float getMaxHandBrakeTorque() {
+        long settingsVa = va();
+        float result = getMaxHandBrakeTorque(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum steering angle. The settings are unaffected. (native
+     * attribute: mMaxSteerAngle)
+     *
+     * @return the maximum steering angle (in radians)
+     */
+    @Override
+    public float getMaxSteerAngle() {
+        long settingsVa = va();
+        float result = getMaxSteerAngle(settingsVa);
+
+        return result;
     }
     // *************************************************************************
     // WheelSettings methods
