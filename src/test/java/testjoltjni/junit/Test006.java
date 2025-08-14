@@ -107,11 +107,12 @@ public class Test006 {
      */
     private static void doBoxShapeSettings() {
         BoxShapeSettings settings = new BoxShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testBoxSsDefaults(settings);
         testBoxSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -120,11 +121,12 @@ public class Test006 {
      */
     private static void doCapsuleShapeSettings() {
         CapsuleShapeSettings settings = new CapsuleShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testCapsuleSsDefaults(settings);
         testCapsuleSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -134,6 +136,7 @@ public class Test006 {
     private static void doConvexHullShapeSettings() {
         // no-arg constructor:
         ConvexHullShapeSettings settings = new ConvexHullShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testConvexHullSsDefaults(settings);
         testConvexHullSsSetters(settings);
@@ -141,11 +144,12 @@ public class Test006 {
         // instantiate from a collection:
         Collection<Vec3Arg> list = List.of();
         ConvexHullShapeSettings settings2 = new ConvexHullShapeSettings(list);
+        ShapeSettingsRef ref2 = settings2.toRef();
 
         testConvexHullSsDefaults(settings2);
         testConvexHullSsSetters(settings2);
 
-        TestUtils.testClose(settings2, settings);
+        TestUtils.testClose(ref2, ref);
         System.gc();
     }
 
@@ -154,16 +158,18 @@ public class Test006 {
      */
     private static void doCylinderShapeSettings() {
         CylinderShapeSettings settings = new CylinderShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testCylinderSsDefaults(settings);
         testCylinderSsSetters(settings);
 
         CylinderShapeSettings settings2 = new CylinderShapeSettings(0f, 0f, 0f);
+        ShapeSettingsRef ref2 = settings2.toRef();
 
         testCylinderSsDefaults(settings2);
         testCylinderSsSetters(settings2);
 
-        TestUtils.testClose(settings2, settings);
+        TestUtils.testClose(ref2, ref);
         System.gc();
     }
 
@@ -172,11 +178,12 @@ public class Test006 {
      */
     private static void doEmptyShapeSettings() {
         EmptyShapeSettings settings = new EmptyShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testEmptySsDefaults(settings);
         testSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -185,6 +192,7 @@ public class Test006 {
      */
     private static void doHeightFieldShapeSettings() {
         HeightFieldShapeSettings settings0 = new HeightFieldShapeSettings();
+        ShapeSettingsRef ref0 = settings0.toRef();
 
         testHeightFieldSsDefaults(settings0);
         testHeightFieldSsSetters(settings0);
@@ -195,6 +203,7 @@ public class Test006 {
         FloatBuffer samples = Jolt.newDirectFloatBuffer(numFloats);
         HeightFieldShapeSettings settings = new HeightFieldShapeSettings(
                 samples, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount);
+        ShapeSettingsRef ref1 = settings.toRef();
 
         testHeightFieldSsDefaults(settings);
         testHeightFieldSsSetters(settings);
@@ -203,11 +212,12 @@ public class Test006 {
         float[] array = new float[numFloats];
         HeightFieldShapeSettings settings2 = new HeightFieldShapeSettings(
                 array, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount);
+        ShapeSettingsRef ref2 = settings2.toRef();
 
         testHeightFieldSsDefaults(settings2);
         testHeightFieldSsSetters(settings2);
 
-        TestUtils.testClose(settings2, settings);
+        TestUtils.testClose(ref2, ref1, ref0);
         System.gc();
     }
 
@@ -216,6 +226,7 @@ public class Test006 {
      */
     private static void doMeshShapeSettings() {
         MeshShapeSettings settings = new MeshShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testMeshSsDefaults(settings);
         testMeshSsSetters(settings);
@@ -223,6 +234,7 @@ public class Test006 {
         // instantiate from an array:
         Triangle[] array = new Triangle[0];
         MeshShapeSettings settings2 = new MeshShapeSettings(array);
+        ShapeSettingsRef ref2 = settings2.toRef();
 
         testMeshSsDefaults(settings2);
         testMeshSsSetters(settings2);
@@ -230,11 +242,12 @@ public class Test006 {
         // instantiate from a collection:
         List<Triangle> list = new ArrayList<>(1);
         MeshShapeSettings settings3 = new MeshShapeSettings(list);
+        ShapeSettingsRef ref3 = settings3.toRef();
 
         testMeshSsDefaults(settings3);
         testMeshSsSetters(settings3);
 
-        TestUtils.testClose(settings3, settings2, settings);
+        TestUtils.testClose(ref3, ref2, ref);
         System.gc();
     }
 
@@ -244,10 +257,11 @@ public class Test006 {
     private static void doMutableCompoundShapeSettings() {
         MutableCompoundShapeSettings settings
                 = new MutableCompoundShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testMutableCompoundSsDefaults(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -258,11 +272,12 @@ public class Test006 {
         ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
         OffsetCenterOfMassShapeSettings settings
                 = new OffsetCenterOfMassShapeSettings(new Vec3(), baseShapeRef);
+        ShapeSettingsRef ref = settings.toRef();
 
         testOffsetCenterOfMassSsDefaults(settings);
         testOffsetCenterOfMassSsSetters(settings);
 
-        TestUtils.testClose(settings, baseShapeRef);
+        TestUtils.testClose(ref, baseShapeRef);
         System.gc();
     }
 
@@ -271,6 +286,7 @@ public class Test006 {
      */
     private static void doPlaneShapeSettings() {
         PlaneShapeSettings settings = new PlaneShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testPlaneSsDefaults(settings);
         testPlaneSsSetters(settings);
@@ -278,11 +294,12 @@ public class Test006 {
         // instantiate from a Plane:
         ConstPlane plane = new Plane(0f, 0f, 0f, 0f);
         PlaneShapeSettings settings2 = new PlaneShapeSettings(plane);
+        ShapeSettingsRef ref2 = settings2.toRef();
 
         testPlaneSsDefaults(settings2);
         testPlaneSsSetters(settings2);
 
-        TestUtils.testClose(settings2, settings);
+        TestUtils.testClose(ref2, ref);
         System.gc();
     }
 
@@ -294,11 +311,12 @@ public class Test006 {
         RotatedTranslatedShapeSettings settings
                 = new RotatedTranslatedShapeSettings(
                         new Vec3(), new Quat(), baseShapeRef);
+        ShapeSettingsRef ref = settings.toRef();
 
         testRotatedTranslatedSsDefaults(settings);
         testRotatedTranslatedSsSetters(settings);
 
-        TestUtils.testClose(settings, baseShapeRef);
+        TestUtils.testClose(ref, baseShapeRef);
         System.gc();
     }
 
@@ -309,10 +327,11 @@ public class Test006 {
         ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
         ScaledShapeSettings settings
                 = new ScaledShapeSettings(baseShapeRef, new Vec3(1f, 1f, 1f));
+        ShapeSettingsRef ref = settings.toRef();
 
         testScaledSsDefaults(settings);
 
-        TestUtils.testClose(settings, baseShapeRef);
+        TestUtils.testClose(ref, baseShapeRef);
         System.gc();
     }
 
@@ -321,11 +340,12 @@ public class Test006 {
      */
     private static void doSphereShapeSettings() {
         SphereShapeSettings settings = new SphereShapeSettings(1f);
+        ShapeSettingsRef ref = settings.toRef();
 
         testSphereSsDefaults(settings);
         testSphereSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -335,10 +355,11 @@ public class Test006 {
     private static void doStaticCompoundShapeSettings() {
         StaticCompoundShapeSettings settings
                 = new StaticCompoundShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testStaticCompoundSsDefaults(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -348,11 +369,12 @@ public class Test006 {
     private static void doTaperedCapsuleShapeSettings() {
         TaperedCapsuleShapeSettings settings
                 = new TaperedCapsuleShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testTaperedCapsuleSsDefaults(settings);
         testTaperedCapsuleSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -362,11 +384,12 @@ public class Test006 {
     private static void doTaperedCylinderShapeSettings() {
         TaperedCylinderShapeSettings settings
                 = new TaperedCylinderShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testTaperedCylinderSsDefaults(settings);
         testTaperedCylinderSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -375,11 +398,12 @@ public class Test006 {
      */
     private static void doTriangleShapeSettings() {
         TriangleShapeSettings settings = new TriangleShapeSettings();
+        ShapeSettingsRef ref = settings.toRef();
 
         testTriangleSsDefaults(settings);
         testTriangleSsSetters(settings);
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -765,6 +789,7 @@ public class Test006 {
     private static void testSsDefaults(ConstShapeSettings settings) {
         Assert.assertTrue(settings.hasAssignedNativeObject());
         Assert.assertFalse(settings.ownsNativeObject());
+        Assert.assertEquals(1, settings.getRefCount());
     }
 
     /**
@@ -775,7 +800,7 @@ public class Test006 {
     private static void testSsSetters(ShapeSettings settings) {
         ShapeSettingsRef ref = settings.toRef();
 
-        Assert.assertEquals(1, settings.getRefCount());
+        Assert.assertEquals(2, settings.getRefCount());
         Assert.assertEquals(settings, ref.getPtr());
     }
 
