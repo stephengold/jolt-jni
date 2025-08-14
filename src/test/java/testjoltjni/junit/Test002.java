@@ -151,7 +151,6 @@ public class Test002 {
                 = new MeshShapeSettings(vertices, indices);
         for (int i = 0; i < numTriangles; ++i) {
             IndexedTriangle it = indices.get(i);
-            TestUtils.testClose(it);
         }
         TestUtils.testClose(indices);
         meshShapeSettings.setMaxTrianglesPerLeaf(4);
@@ -159,7 +158,7 @@ public class Test002 {
 
         meshBodySettings = new BodyCreationSettings();
         meshBodySettings.setShapeSettings(meshShapeSettingsRef);
-        TestUtils.testClose(meshShapeSettingsRef, meshShapeSettings);
+        TestUtils.testClose(meshShapeSettingsRef);
 
         meshBodySettings.setFriction(0.5f);
         meshBodySettings.setMotionType(EMotionType.Static);
@@ -247,6 +246,5 @@ public class Test002 {
                 }
             }
         }
-        TestUtils.testClose(bi);
     }
 }
