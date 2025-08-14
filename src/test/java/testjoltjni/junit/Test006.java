@@ -157,12 +157,14 @@ public class Test006 {
      * Test the {@code CylinderShapeSettings} class.
      */
     private static void doCylinderShapeSettings() {
+        // no-arg constructor:
         CylinderShapeSettings settings = new CylinderShapeSettings();
         ShapeSettingsRef ref = settings.toRef();
 
         testCylinderSsDefaults(settings);
         testCylinderSsSetters(settings);
 
+        // instantiate from dimensions:
         CylinderShapeSettings settings2 = new CylinderShapeSettings(0f, 0f, 0f);
         ShapeSettingsRef ref2 = settings2.toRef();
 
@@ -191,6 +193,7 @@ public class Test006 {
      * Test the {@code HeightFieldShapeSettings} class.
      */
     private static void doHeightFieldShapeSettings() {
+        // no-arg constructor:
         HeightFieldShapeSettings settings0 = new HeightFieldShapeSettings();
         ShapeSettingsRef ref0 = settings0.toRef();
 
@@ -225,6 +228,7 @@ public class Test006 {
      * Test the {@code MeshShapeSettings} class.
      */
     private static void doMeshShapeSettings() {
+        // no-arg constructor:
         MeshShapeSettings settings = new MeshShapeSettings();
         ShapeSettingsRef ref = settings.toRef();
 
@@ -285,6 +289,7 @@ public class Test006 {
      * Test the {@code PlaneShapeSettings} class.
      */
     private static void doPlaneShapeSettings() {
+        // no-arg constructor:
         PlaneShapeSettings settings = new PlaneShapeSettings();
         ShapeSettingsRef ref = settings.toRef();
 
