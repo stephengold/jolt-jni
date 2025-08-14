@@ -28,9 +28,12 @@ import com.github.stephengold.joltjni.BodyIdArray;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.CapsuleShape;
+import com.github.stephengold.joltjni.CharacterRef;
 import com.github.stephengold.joltjni.CharacterSettings;
+import com.github.stephengold.joltjni.CharacterSettingsRef;
 import com.github.stephengold.joltjni.CharacterVirtual;
 import com.github.stephengold.joltjni.CharacterVirtualSettings;
+import com.github.stephengold.joltjni.CharacterVirtualSettingsRef;
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.GroupFilterTable;
@@ -44,10 +47,13 @@ import com.github.stephengold.joltjni.MotionProperties;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.ShapeRefC;
+import com.github.stephengold.joltjni.ShapeSettingsRefC;
 import com.github.stephengold.joltjni.SkinWeight;
 import com.github.stephengold.joltjni.SoftBodyCreationSettings;
 import com.github.stephengold.joltjni.SoftBodyMotionProperties;
 import com.github.stephengold.joltjni.SoftBodySharedSettings;
+import com.github.stephengold.joltjni.SoftBodySharedSettingsRef;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.SpringSettings;
 import com.github.stephengold.joltjni.TempAllocator;
@@ -56,10 +62,13 @@ import com.github.stephengold.joltjni.TempAllocatorImplWithMallocFallback;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
+import com.github.stephengold.joltjni.VehicleControllerSettingsRef;
 import com.github.stephengold.joltjni.Vertex;
 import com.github.stephengold.joltjni.WheelSettings;
 import com.github.stephengold.joltjni.WheelSettingsTv;
+import com.github.stephengold.joltjni.WheelSettingsTvRef;
 import com.github.stephengold.joltjni.WheelSettingsWv;
+import com.github.stephengold.joltjni.WheelSettingsWvRef;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
 import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
@@ -72,13 +81,13 @@ import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
-import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.vhacd.FillMode;
 import com.github.stephengold.joltjni.vhacd.Parameters;
 import java.nio.IntBuffer;
@@ -275,6 +284,7 @@ public class Test003 {
         }
         { // constructed from a ShapeSettings:
             ConstBoxShapeSettings ss = new BoxShapeSettings(1f, 1f, 1f);
+            ShapeSettingsRefC ssRefC = ss.toRefC();
             int objectLayer = 0;
             BodyCreationSettings bcs = new BodyCreationSettings(ss,
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
@@ -286,10 +296,11 @@ public class Test003 {
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            TestUtils.testClose(bcs, ss);
+            TestUtils.testClose(bcs, ssRefC);
         }
         { // constructed from a Shape:
             ConstShape shape = new SphereShape(1f);
+            ShapeRefC shapeRefC = shape.toRefC();
             int objectLayer = 0;
             BodyCreationSettings bcs = new BodyCreationSettings(shape,
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
@@ -300,7 +311,7 @@ public class Test003 {
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            TestUtils.testClose(bcs, shape);
+            TestUtils.testClose(bcs, shapeRefC);
         }
 
         System.gc();
@@ -418,8 +429,10 @@ public class Test003 {
         float radius = 1f; // meters
         float height = 2f; // meters
         ConstShape shape = new CapsuleShape(height / 2f, radius);
+        ShapeRefC shapeRefC = shape.toRefC();
 
         CharacterSettings settings = new CharacterSettings();
+        CharacterSettingsRef settingsRef = settings.toRef();
         settings.setShape(shape);
 
         int maxBodies = 1;
@@ -427,10 +440,11 @@ public class Test003 {
         com.github.stephengold.joltjni.Character character
                 = new com.github.stephengold.joltjni.Character(
                         settings, new RVec3(), new Quat(), 0L, system);
+        CharacterRef characterRef = character.toRef();
 
         testCharacterDefaults(character);
 
-        TestUtils.testClose(character, system, settings, shape);
+        TestUtils.testClose(characterRef, system, settingsRef, shapeRefC);
         System.gc();
     }
 
@@ -439,13 +453,14 @@ public class Test003 {
      */
     private static void doCharacterVirtual() {
         CharacterVirtualSettings settings = new CharacterVirtualSettings();
+        CharacterVirtualSettingsRef ref = settings.toRef();
         PhysicsSystem system = new PhysicsSystem();
         CharacterVirtual character = new CharacterVirtual(
                 settings, new RVec3(), new Quat(), 0L, system);
 
         testCharacterVirtualDefaults(character);
 
-        TestUtils.testClose(character, system, settings);
+        TestUtils.testClose(system, ref);
         System.gc();
     }
 
@@ -587,7 +602,8 @@ public class Test003 {
             TestUtils.testClose(copy, original);
         }
         { // constructed from a SoftBodySharedSettings:
-            ConstSoftBodySharedSettings sbss = new SoftBodySharedSettings();
+            SoftBodySharedSettings sbss = new SoftBodySharedSettings();
+            SoftBodySharedSettingsRef sbssRef = sbss.toRef();
             RVec3Arg location = new RVec3();
             QuatArg orientation = new Quat();
             int objectLayer = 0;
@@ -598,7 +614,7 @@ public class Test003 {
             testSbcsDefaults(sbcs);
             testSbcsSetters(sbcs);
 
-            TestUtils.testClose(sbcs, sbss);
+            TestUtils.testClose(sbcs, sbssRef);
         }
 
         System.gc();
@@ -680,11 +696,12 @@ public class Test003 {
      */
     private static void doVehicleConstraintSettings() {
         VehicleConstraintSettings vcs = new VehicleConstraintSettings();
+        Ref ref = vcs.toRef();
 
         testVehicleConstraintSettingsDefaults(vcs);
         testVehicleConstraintSettingsSetters(vcs);
 
-        TestUtils.testClose(vcs);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -706,11 +723,12 @@ public class Test003 {
      */
     private static void doWheelSettingsTv() {
         WheelSettingsTv wstv = new WheelSettingsTv();
+        WheelSettingsTvRef ref = wstv.toRef();
 
         testWheelSettingsTvDefaults(wstv);
         testWheelSettingsTvSetters(wstv);
 
-        TestUtils.testClose(wstv);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -719,11 +737,12 @@ public class Test003 {
      */
     private static void doWheelSettingsWv() {
         WheelSettingsWv wswv = new WheelSettingsWv();
+        WheelSettingsWvRef ref = wswv.toRef();
 
         testWheelSettingsWvDefaults(wswv);
         testWheelSettingsWvSetters(wswv);
 
-        TestUtils.testClose(wswv);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
@@ -733,11 +752,12 @@ public class Test003 {
     private static void doWvControllerSettings() {
         WheeledVehicleControllerSettings wvcs
                 = new WheeledVehicleControllerSettings();
+        VehicleControllerSettingsRef ref = wvcs.toRef();
 
         testWvControllerSettingsDefaults(wvcs);
         testWvControllerSettingsSetters(wvcs);
 
-        TestUtils.testClose(wvcs);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
