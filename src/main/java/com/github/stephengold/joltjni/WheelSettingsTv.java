@@ -162,19 +162,17 @@ public class WheelSettingsTv
 
     native private static long createDefault();
 
-    native private static float getLateralFriction(long settingsVa);
+    native static float getLateralFriction(long settingsVa);
 
-    native private static float getLongitudinalFriction(long settingsVa);
+    native static float getLongitudinalFriction(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
 
     native private static void setEmbedded(long settingsVa);
 
-    native private static void setLateralFriction(
-            long settingsVa, float friction);
+    native static void setLateralFriction(long settingsVa, float friction);
 
-    native private static void setLongitudinalFriction(
-            long settingsVa, float friction);
+    native static void setLongitudinalFriction(long settingsVa, float friction);
 
     native private static long toRef(long settingsVa);
 }
