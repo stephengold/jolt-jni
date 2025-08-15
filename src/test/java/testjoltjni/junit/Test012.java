@@ -56,6 +56,7 @@ import com.github.stephengold.joltjni.SettingsResult;
 import com.github.stephengold.joltjni.ShapeResult;
 import com.github.stephengold.joltjni.ShapeSettings;
 import com.github.stephengold.joltjni.ShapeSettingsRef;
+import com.github.stephengold.joltjni.ShapeSettingsRefC;
 import com.github.stephengold.joltjni.SoftBodyCreationSettings;
 import com.github.stephengold.joltjni.SoftBodySharedSettings;
 import com.github.stephengold.joltjni.SoftBodySharedSettingsRef;
@@ -71,6 +72,7 @@ import com.github.stephengold.joltjni.TaperedCapsuleShapeSettings;
 import com.github.stephengold.joltjni.TaperedCylinderShapeSettings;
 import com.github.stephengold.joltjni.TrackedVehicleControllerSettings;
 import com.github.stephengold.joltjni.TriangleShapeSettings;
+import com.github.stephengold.joltjni.TwoBodyConstraintSettingsRef;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleAntiRollBar;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
@@ -78,7 +80,9 @@ import com.github.stephengold.joltjni.VehicleControllerSettingsRef;
 import com.github.stephengold.joltjni.VehicleDifferentialSettings;
 import com.github.stephengold.joltjni.Vertex;
 import com.github.stephengold.joltjni.WheelSettingsTv;
+import com.github.stephengold.joltjni.WheelSettingsTvRef;
 import com.github.stephengold.joltjni.WheelSettingsWv;
+import com.github.stephengold.joltjni.WheelSettingsWvRef;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.ESpringMode;
@@ -94,7 +98,6 @@ import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstVehicleControllerSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
-import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
 import com.github.stephengold.joltjni.std.StringStream;
 import com.github.stephengold.joltjni.streamutils.IdToGroupFilterMap;
 import com.github.stephengold.joltjni.streamutils.IdToMaterialMap;
@@ -102,6 +105,7 @@ import com.github.stephengold.joltjni.streamutils.IdToShapeMap;
 import com.github.stephengold.joltjni.streamutils.IdToSharedSettingsMap;
 import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
 import com.github.stephengold.joltjni.streamutils.SharedSettingsToIdMap;
+import com.github.stephengold.joltjni.template.Ref;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -232,7 +236,7 @@ public class Test012 {
      * @param serialData the data to de-serialize (not null, unaffected)
      * @return a new settings object
      */
-    private static ConstSoftBodySharedSettings dcSoftBodySharedSettings(
+    private static SoftBodySharedSettings dcSoftBodySharedSettings(
             String serialData) {
         StringStream ss = new StringStream(serialData);
         StreamIn streamIn = new StreamInWrapper(ss);
@@ -719,6 +723,7 @@ public class Test012 {
     private static void testBodyCreationSettings() {
         float radius = 9f;
         ConstShapeSettings shapeSettings = new SphereShapeSettings(radius);
+        final ShapeSettingsRefC settingsRef = shapeSettings.toRefC();
         BodyCreationSettings bcs = new BodyCreationSettings()
                 .setShapeSettings(shapeSettings);
 
@@ -774,7 +779,7 @@ public class Test012 {
             TestUtils.testClose(bcsCopy);
         }
 
-        TestUtils.testClose(bcs, shapeSettings);
+        TestUtils.testClose(sr, bcs, settingsRef);
     }
 
     /**
@@ -782,6 +787,7 @@ public class Test012 {
      */
     private static void testGroupFilterTable() {
         GroupFilterTable filter = new GroupFilterTable(2);
+        final GroupFilterTableRef refOriginal = filter.toRef();
         filter.disableCollision(0, 1);
 
         { // serialize and then deserialize binary state:
@@ -791,7 +797,7 @@ public class Test012 {
 
             Assert.assertNotEquals(filter.va(), filterCopy.va());
             Equivalent.groupFilter(filter, filterCopy);
-            TestUtils.testClose(filterCopy);
+            TestUtils.testClose(refCopy);
         }
 
         { // serialize and then deserialize using object streams:
@@ -801,18 +807,19 @@ public class Test012 {
 
             Assert.assertNotEquals(filter.va(), filterCopy.va());
             Equivalent.groupFilter(filter, filterCopy);
-            TestUtils.testClose(filterCopy);
+            TestUtils.testClose(refCopy);
         }
 
         { // copy constructor:
             GroupFilterTable filterCopy = new GroupFilterTable(filter);
+            final GroupFilterTableRef refCopy = filterCopy.toRef();
 
             Assert.assertNotEquals(filter.va(), filterCopy.va());
             Equivalent.groupFilter(filter, filterCopy);
-            TestUtils.testClose(filterCopy);
+            TestUtils.testClose(refCopy);
         }
 
-        TestUtils.testClose(filter);
+        TestUtils.testClose(refOriginal);
     }
 
     /**
@@ -821,6 +828,7 @@ public class Test012 {
     private static void testPhysicsMaterial() {
         PhysicsMaterialSimple material
                 = new PhysicsMaterialSimple("name", Color.sOrange);
+        final PhysicsMaterialRef refOriginal = material.toRef();
 
         { // serialize and then deserialize binary state:
             String serialData = serializeCooked(material);
@@ -829,7 +837,7 @@ public class Test012 {
 
             Assert.assertNotEquals(material.va(), materialCopy.va());
             Equivalent.physicsMaterial(material, materialCopy);
-            TestUtils.testClose(materialCopy);
+            TestUtils.testClose(refCopy);
         }
 
         { // serialize and then deserialize using object streams:
@@ -840,19 +848,20 @@ public class Test012 {
 
             Assert.assertNotEquals(material.va(), materialCopy.va());
             Equivalent.physicsMaterial(material, materialCopy);
-            TestUtils.testClose(materialCopy);
+            TestUtils.testClose(refCopy);
         }
 
         { // copy constructor:
             PhysicsMaterialSimple materialCopy
                     = new PhysicsMaterialSimple(material);
+            PhysicsMaterialRef refCopy = materialCopy.toRef();
 
             Assert.assertNotEquals(material.va(), materialCopy.va());
             Equivalent.physicsMaterial(material, materialCopy);
-            TestUtils.testClose(materialCopy);
+            TestUtils.testClose(refCopy);
         }
 
-        TestUtils.testClose(material);
+        TestUtils.testClose(refOriginal);
     }
 
     /**
@@ -860,6 +869,7 @@ public class Test012 {
      */
     private static void testPointConstraintSettings() {
         PointConstraintSettings pcs = new PointConstraintSettings();
+        final TwoBodyConstraintSettingsRef refOriginal = pcs.toRef();
         pcs.setNumPositionStepsOverride(9);
         pcs.setPoint1(1., 2., 3.);
         pcs.setPoint2(4., 5., 6.);
@@ -873,19 +883,20 @@ public class Test012 {
 
             Assert.assertNotEquals(pcs.va(), pcsCopy.va());
             Equivalent.pointConstraintSettings(pcs, pcsCopy);
-            TestUtils.testClose(pcsCopy, copyRef);
+            TestUtils.testClose(copyRef);
         }
 
         { // copy constructor:
             PointConstraintSettings pcsCopy
                     = new PointConstraintSettings(pcs);
+            final TwoBodyConstraintSettingsRef copyRef = pcsCopy.toRef();
 
             Assert.assertNotEquals(pcs.va(), pcsCopy.va());
             Equivalent.pointConstraintSettings(pcs, pcsCopy);
-            TestUtils.testClose(pcsCopy);
+            TestUtils.testClose(copyRef);
         }
 
-        TestUtils.testClose(pcs);
+        TestUtils.testClose(refOriginal);
     }
 
     /**
@@ -894,6 +905,7 @@ public class Test012 {
     private static void testRackAndPinionConstraintSettings() {
         RackAndPinionConstraintSettings rapcs
                 = new RackAndPinionConstraintSettings();
+        final TwoBodyConstraintSettingsRef refOriginal = rapcs.toRef();
         rapcs.setSliderAxis(new Vec3(0.6f, 0.8f, 0f));
         rapcs.setSpace(EConstraintSpace.LocalToBodyCOM);
 
@@ -905,19 +917,20 @@ public class Test012 {
 
             Assert.assertNotEquals(rapcs.va(), rapcsCopy.va());
             Equivalent.rackAndPinionConstraintSettings(rapcs, rapcsCopy);
-            TestUtils.testClose(rapcsCopy, copyRef);
+            TestUtils.testClose(copyRef);
         }
 
         { // copy constructor:
             RackAndPinionConstraintSettings rapcsCopy
                     = new RackAndPinionConstraintSettings(rapcs);
+            final TwoBodyConstraintSettingsRef copyRef = rapcsCopy.toRef();
 
             Assert.assertNotEquals(rapcs.va(), rapcsCopy.va());
             Equivalent.rackAndPinionConstraintSettings(rapcs, rapcsCopy);
-            TestUtils.testClose(rapcsCopy);
+            TestUtils.testClose(copyRef);
         }
 
-        TestUtils.testClose(rapcs);
+        TestUtils.testClose(refOriginal);
     }
 
     /**
@@ -925,70 +938,88 @@ public class Test012 {
      */
     private static void testShapeSettings() {
         BoxShapeSettings box = new BoxShapeSettings(1f, 2f, 3f);
+        final ShapeSettingsRefC boxRefC = box.toRefC();
         testShapeSettings(box);
 
         CapsuleShapeSettings capsule = new CapsuleShapeSettings(1f, 2f);
+        final ShapeSettingsRefC capsuleRefC = capsule.toRefC();
         testShapeSettings(capsule);
 
         ConvexHullShapeSettings convexHull = new ConvexHullShapeSettings(
                 new Vec3(1f, 2f, 3f), new Vec3(4f, 5f, 6f), new Vec3());
+        final ShapeSettingsRefC convexHullRefC = convexHull.toRefC();
         testShapeSettings(convexHull);
 
         CylinderShapeSettings cylinder = new CylinderShapeSettings(1f, 2f);
+        final ShapeSettingsRefC cylinderRefC = cylinder.toRefC();
         testShapeSettings(cylinder);
 
         EmptyShapeSettings empty = new EmptyShapeSettings();
+        final ShapeSettingsRefC emptyRefC = empty.toRefC();
         testShapeSettings(empty);
 
         HeightFieldShapeSettings heightField = new HeightFieldShapeSettings();
+        final ShapeSettingsRefC heightFieldRefC = heightField.toRefC();
         testShapeSettings(heightField);
 
         MeshShapeSettings mesh = new MeshShapeSettings();
+        final ShapeSettingsRefC meshRefC = mesh.toRefC();
         testShapeSettings(mesh);
 
         OffsetCenterOfMassShapeSettings ocom
                 = new OffsetCenterOfMassShapeSettings(
                         new Vec3(1f, 2f, 3f), box);
+        final ShapeSettingsRefC ocomRefC = ocom.toRefC();
         testShapeSettings(ocom);
 
         MutableCompoundShapeSettings mutableCompound
                 = new MutableCompoundShapeSettings();
+        final ShapeSettingsRefC mutableCompoundRefC = mutableCompound.toRefC();
         testShapeSettings(mutableCompound);
 
         PlaneShapeSettings plane = new PlaneShapeSettings();
+        final ShapeSettingsRefC planeRefC = plane.toRefC();
         testShapeSettings(plane);
 
         RotatedTranslatedShapeSettings rotated
                 = new RotatedTranslatedShapeSettings(new Vec3(1f, 2f, 3f),
                         new Quat(0.6f, -0.8f, 0f, 0f), box);
+        final ShapeSettingsRefC rotatedRefC = rotated.toRefC();
         testShapeSettings(rotated);
 
         ScaledShapeSettings scaled
                 = new ScaledShapeSettings(box, new Vec3(1f, 2f, 3f));
+        final ShapeSettingsRefC scaledRefC = scaled.toRefC();
         testShapeSettings(scaled);
 
         SphereShapeSettings sphere = new SphereShapeSettings(9f);
+        final ShapeSettingsRefC sphereRefC = sphere.toRefC();
         testShapeSettings(sphere);
 
         StaticCompoundShapeSettings staticCompound
                 = new StaticCompoundShapeSettings();
+        final ShapeSettingsRefC staticCompoundRefC = staticCompound.toRefC();
         testShapeSettings(staticCompound);
 
         TaperedCapsuleShapeSettings taperedCapsule
                 = new TaperedCapsuleShapeSettings(3f, 2f, 1f);
+        final ShapeSettingsRefC taperedCapsuleRefC = taperedCapsule.toRefC();
         testShapeSettings(taperedCapsule);
 
         TaperedCylinderShapeSettings taperedCylinder
                 = new TaperedCylinderShapeSettings(3f, 2f, 1f);
+        final ShapeSettingsRefC taperedCylinderRefC = taperedCylinder.toRefC();
         testShapeSettings(taperedCylinder);
 
         TriangleShapeSettings triangle = new TriangleShapeSettings();
+        final ShapeSettingsRefC triangleRefC = triangle.toRefC();
         testShapeSettings(triangle);
 
-        TestUtils.testClose(triangle, taperedCylinder, taperedCapsule,
-                staticCompound, sphere, scaled, rotated, plane, ocom,
-                mutableCompound, mesh, heightField, empty, cylinder, convexHull,
-                capsule, box);
+        TestUtils.testClose(triangleRefC, taperedCylinderRefC,
+                taperedCapsuleRefC, staticCompoundRefC, sphereRefC, scaledRefC,
+                rotatedRefC, planeRefC, ocomRefC, mutableCompoundRefC, meshRefC,
+                heightFieldRefC, emptyRefC, cylinderRefC, convexHullRefC,
+                capsuleRefC, boxRefC);
     }
 
     /**
@@ -999,10 +1030,11 @@ public class Test012 {
     private static void testShapeSettings(ConstShapeSettings ss) {
         { // cloneShapeSettings() method:
             ConstShapeSettings ssCopy = ShapeSettings.cloneShapeSettings(ss);
+            final ShapeSettingsRefC refCopy = ssCopy.toRefC();
 
             Assert.assertNotEquals(ss.targetVa(), ssCopy.targetVa());
             Equivalent.shapeSettings(ss, ssCopy);
-            TestUtils.testClose(ssCopy);
+            TestUtils.testClose(refCopy);
         }
 
         { // serialize and then deserialize using object streams:
@@ -1012,7 +1044,7 @@ public class Test012 {
 
             Assert.assertNotEquals(ss.targetVa(), ssCopy.targetVa());
             Equivalent.shapeSettings(ss, ssCopy);
-            TestUtils.testClose(ssCopy);
+            TestUtils.testClose(refCopy);
         }
     }
 
@@ -1069,6 +1101,7 @@ public class Test012 {
      */
     private static void testSoftBodySharedSettings() {
         SoftBodySharedSettings sbss = new SoftBodySharedSettings();
+        final SoftBodySharedSettingsRef refOriginal = sbss.toRef();
         ConstVertex v0 = new Vertex().setPosition(1f, 2f, 3f);
         sbss.addVertex(v0);
         ConstVertex v1 = new Vertex().setPosition(4f, 5f, 6f);
@@ -1081,12 +1114,13 @@ public class Test012 {
 
         { // serialize and then deserialize binary state:
             String serialData = serializeCooked(sbss);
-            ConstSoftBodySharedSettings sbssCopy
+            SoftBodySharedSettings sbssCopy
                     = dcSoftBodySharedSettings(serialData);
+            final SoftBodySharedSettingsRef copyRef = sbssCopy.toRef();
 
             Assert.assertNotEquals(sbss.va(), sbssCopy.targetVa());
             Equivalent.softBodySharedSettings(sbss, sbssCopy);
-            TestUtils.testClose(sbssCopy);
+            TestUtils.testClose(copyRef);
         }
 
         { // serialize and then deserialize using with-materials methods:
@@ -1110,15 +1144,15 @@ public class Test012 {
         }
 
         { // copy constructor:
-            ConstSoftBodySharedSettings sbssCopy
-                    = new SoftBodySharedSettings(sbss);
+            SoftBodySharedSettings sbssCopy = new SoftBodySharedSettings(sbss);
+            final SoftBodySharedSettingsRef copyRef = sbssCopy.toRef();
 
             Assert.assertNotEquals(sbss.va(), sbssCopy.targetVa());
             Equivalent.softBodySharedSettings(sbss, sbssCopy);
-            TestUtils.testClose(sbssCopy);
+            TestUtils.testClose(copyRef);
         }
 
-        TestUtils.testClose(sbss);
+        TestUtils.testClose(refOriginal);
     }
 
     /**
@@ -1147,6 +1181,7 @@ public class Test012 {
     private static void testSwingTwistConstraintSettings() {
         SwingTwistConstraintSettings stcs
                 = new SwingTwistConstraintSettings();
+        final TwoBodyConstraintSettingsRef originalRef = stcs.toRef();
         stcs.setTwistAxis1(new Vec3(0.6f, -0.8f, 0f));
         stcs.setSpace(EConstraintSpace.LocalToBodyCOM);
 
@@ -1158,19 +1193,20 @@ public class Test012 {
 
             Assert.assertNotEquals(stcs.va(), stcsCopy.va());
             Equivalent.swingTwistConstraintSettings(stcs, stcsCopy);
-            TestUtils.testClose(stcsCopy, copyRef);
+            TestUtils.testClose(copyRef);
         }
 
         { // copy constructor:
             SwingTwistConstraintSettings stcsCopy
                     = new SwingTwistConstraintSettings(stcs);
+            final TwoBodyConstraintSettingsRef copyRef = stcsCopy.toRef();
 
             Assert.assertNotEquals(stcs.va(), stcsCopy.va());
             Equivalent.swingTwistConstraintSettings(stcs, stcsCopy);
-            TestUtils.testClose(stcsCopy);
+            TestUtils.testClose(copyRef);
         }
 
-        TestUtils.testClose(stcs);
+        TestUtils.testClose(originalRef);
     }
 
     /**
@@ -1179,18 +1215,20 @@ public class Test012 {
     private static void testTrackedVehicleControllerSettings() {
         TrackedVehicleControllerSettings settings
                 = new TrackedVehicleControllerSettings();
+        final VehicleControllerSettingsRef originalRef = settings.toRef();
 
         { // copy constructor:
             TrackedVehicleControllerSettings settingsCopy
                     = new TrackedVehicleControllerSettings(settings);
+            final VehicleControllerSettingsRef copyRef = settingsCopy.toRef();
 
             Assert.assertNotEquals(settings.va(), settingsCopy.va());
             Equivalent.trackedVehicleControllerSettings(
                     settings, settingsCopy);
-            TestUtils.testClose(settingsCopy);
+            TestUtils.testClose(copyRef);
         }
 
-        TestUtils.testClose(settings);
+        TestUtils.testClose(originalRef);
     }
 
     /**
@@ -1219,8 +1257,10 @@ public class Test012 {
     private static void testVehicleConstraintSettings() {
         // Configure 4 wheels, 2 in the front (for steering) and 2 in the rear:
         WheelSettingsWv[] wheels = new WheelSettingsWv[4];
+        WheelSettingsWvRef[] wheelRefs = new WheelSettingsWvRef[4];
         for (int i = 0; i < 4; ++i) {
             wheels[i] = new WheelSettingsWv();
+            wheelRefs[i] = wheels[i].toRef();
         }
         wheels[0].setPosition(new Vec3(-1f, 0f, +2f)); // left front
         wheels[1].setPosition(new Vec3(+1f, 0f, +2f));
@@ -1236,12 +1276,14 @@ public class Test012 {
          */
         WheeledVehicleControllerSettings wvcs
                 = new WheeledVehicleControllerSettings();
+        final VehicleControllerSettingsRef wvcsRef = wvcs.toRef();
         wvcs.setNumDifferentials(1);
         VehicleDifferentialSettings vds = wvcs.getDifferential(0);
         vds.setLeftWheel(2);
         vds.setRightWheel(3);
 
         VehicleConstraintSettings vcs = new VehicleConstraintSettings();
+        final Ref originalRef = vcs.toRef();
         vcs.addWheels(wheels);
         vcs.setController(wvcs);
 
@@ -1253,20 +1295,21 @@ public class Test012 {
 
             Assert.assertNotEquals(vcs.va(), vcsCopy.targetVa());
             Equivalent.vehicleConstraintSettings(vcs, vcsCopy);
-            TestUtils.testClose(vcsCopy, copyRef);
+            TestUtils.testClose(copyRef);
         }
 
         { // copy constructor:
-            ConstVehicleConstraintSettings vcsCopy
+            VehicleConstraintSettings vcsCopy
                     = new VehicleConstraintSettings(vcs);
+            final Ref copyRef = vcsCopy.toRef();
 
             Assert.assertNotEquals(vcs.va(), vcsCopy.targetVa());
             Equivalent.vehicleConstraintSettings(vcs, vcsCopy);
-            TestUtils.testClose(vcsCopy);
+            TestUtils.testClose(copyRef);
         }
 
-        TestUtils.testClose(wheels);
-        TestUtils.testClose(vcs, wvcs);
+        TestUtils.testClose(wheelRefs);
+        TestUtils.testClose(originalRef, wvcsRef);
     }
 
     /**
@@ -1275,15 +1318,17 @@ public class Test012 {
     private static void testWheeledVehicleControllerSettings() {
         WheeledVehicleControllerSettings settings
                 = new WheeledVehicleControllerSettings();
+        final VehicleControllerSettingsRef originalRef = settings.toRef();
 
         { // serialize and then deserialize binary state:
             String serialData = serializeCooked(settings);
             WheeledVehicleControllerSettings settingsCopy
                     = dcWheeledVehicleControllerSettings(serialData);
+            final VehicleControllerSettingsRef copyRef = settingsCopy.toRef();
 
             Assert.assertNotEquals(settings.va(), settingsCopy.va());
             Equivalent.vehicleControllerSettings(settings, settingsCopy);
-            TestUtils.testClose(settingsCopy);
+            TestUtils.testClose(copyRef);
         }
 
         { // serialize and then deserialize using object streams:
@@ -1295,17 +1340,20 @@ public class Test012 {
 
             Assert.assertNotEquals(settings.va(), settingsCopy.va());
             Equivalent.vehicleControllerSettings(settings, settingsCopy);
-            TestUtils.testClose(settingsCopy);
+            TestUtils.testClose(copyRef);
         }
 
         { // copy constructor:
             WheeledVehicleControllerSettings settingsCopy
                     = new WheeledVehicleControllerSettings(settings);
+            final VehicleControllerSettingsRef copyRef = settingsCopy.toRef();
 
             Assert.assertNotEquals(settings.va(), settingsCopy.va());
             Equivalent.vehicleControllerSettings(settings, settingsCopy);
-            TestUtils.testClose(settingsCopy);
+            TestUtils.testClose(copyRef);
         }
+
+        TestUtils.testClose(originalRef);
     }
 
     /**
@@ -1313,27 +1361,30 @@ public class Test012 {
      */
     private static void testWheelSettingsTv() {
         WheelSettingsTv wheel = new WheelSettingsTv();
+        final WheelSettingsTvRef originalRef = wheel.toRef();
         wheel.setEnableSuspensionForcePoint(true);
         wheel.setPosition(new Vec3(1f, 0f, -2f));
 
         { // serialize and then deserialize binary state:
             String serialData = serializeCooked(wheel);
-            ConstWheelSettingsTv wheelCopy = dcWheelSettingsTv(serialData);
+            WheelSettingsTv wheelCopy = dcWheelSettingsTv(serialData);
+            final WheelSettingsTvRef copyRef = wheelCopy.toRef();
 
             Assert.assertNotEquals(wheel.va(), wheelCopy.targetVa());
             Equivalent.wheelSettings(wheel, wheelCopy);
-            TestUtils.testClose(wheelCopy);
+            TestUtils.testClose(copyRef);
         }
 
         { // copy constructor:
-            ConstWheelSettingsTv wheelCopy = new WheelSettingsTv(wheel);
+            WheelSettingsTv wheelCopy = new WheelSettingsTv(wheel);
+            final WheelSettingsTvRef copyRef = wheelCopy.toRef();
 
             Assert.assertNotEquals(wheel.va(), wheelCopy.targetVa());
             Equivalent.wheelSettings(wheel, wheelCopy);
-            TestUtils.testClose(wheelCopy);
+            TestUtils.testClose(copyRef);
         }
 
-        TestUtils.testClose(wheel);
+        TestUtils.testClose(originalRef);
     }
 
     /**
@@ -1341,6 +1392,7 @@ public class Test012 {
      */
     private static void testWheelSettingsWv() {
         WheelSettingsWv wheel = new WheelSettingsWv();
+        final WheelSettingsWvRef originalRef = wheel.toRef();
         wheel.setEnableSuspensionForcePoint(true);
         wheel.setMaxSteerAngle(0.1f);
         wheel.setPosition(new Vec3(1f, 0f, -2f));
@@ -1348,20 +1400,22 @@ public class Test012 {
         { // serialize and then deserialize binary state:
             String serialData = serializeCooked(wheel);
             WheelSettingsWv wheelCopy = dcWheelSettingsWv(serialData);
+            final WheelSettingsWvRef copyRef = wheelCopy.toRef();
 
             Assert.assertNotEquals(wheel.va(), wheelCopy.va());
             Equivalent.wheelSettings(wheel, wheelCopy);
-            TestUtils.testClose(wheelCopy);
+            TestUtils.testClose(copyRef);
         }
 
         { // copy constructor:
             WheelSettingsWv wheelCopy = new WheelSettingsWv(wheel);
+            final WheelSettingsWvRef copyRef = wheelCopy.toRef();
 
             Assert.assertNotEquals(wheel.va(), wheelCopy.va());
             Equivalent.wheelSettings(wheel, wheelCopy);
-            TestUtils.testClose(wheelCopy);
+            TestUtils.testClose(copyRef);
         }
 
-        TestUtils.testClose(wheel);
+        TestUtils.testClose(originalRef);
     }
 }
