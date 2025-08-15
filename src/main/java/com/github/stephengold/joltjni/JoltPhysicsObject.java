@@ -189,13 +189,19 @@ abstract public class JoltPhysicsObject
     // AutoCloseable/ConstJoltPhysicsObject methods
 
     /**
-     * Free and unassign the native object if the JVM object owns it.
+     * Free and unassign the native object if the JVM object owns it. This can
+     * be invoked explicitly or by exiting a try-with-resources block.
      */
     @Override
     public void close() {
+        assert !isCleanerStarted() : "close() is prohibited because"
+                + " a cleaner thread has been started.";
+        assert hasAssignedNativeObject() : "close() is prohibited because "
+                + this + " has no native object assigned.";
+        assert freeingAction != null : "close() would have no effect because "
+                + this + " doesn't own its native object.";
+
         if (freeingAction != null) {
-            assert cleaner == null : "A cleaner has been started.";
-            assert hasAssignedNativeObject() : "no native object is assigned";
             freeingAction.run(); // TODO possible race condition
             this.freeingAction = null;
             this.virtualAddress = 0L;
