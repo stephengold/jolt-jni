@@ -167,7 +167,7 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
      * regardless of theconfigured value. This lets an object settle sooner.
      * The settings are unaffected.
      *
-     * @return the velocity (in meters, >0)
+     * @return the velocity (in meters, &gt;0)
      */
     float getMinVelocityForRestitution();
 

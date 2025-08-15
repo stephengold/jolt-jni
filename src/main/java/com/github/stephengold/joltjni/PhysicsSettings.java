@@ -259,7 +259,7 @@ public class PhysicsSettings
      * regardless of the configured value. This lets an object settle sooner.
      * (native attribute: mMinVelocityForRestitution)
      *
-     * @param velocity the velocity (in meters, >0, default=1)
+     * @param velocity the velocity (in meters, &gt;0, default=1)
      */
     public void setMinVelocityForRestitution(float velocity) {
         long settingsVa = va();
@@ -619,7 +619,7 @@ public class PhysicsSettings
      * regardless of the configured value. This lets an object settle sooner.
      * (native attribute: mMinVelocityForRestitution)
      *
-     * @return the velocity (in meters, >0)
+     * @return the velocity (in meters, &gt;0)
      */
     @Override
     public float getMinVelocityForRestitution() {
