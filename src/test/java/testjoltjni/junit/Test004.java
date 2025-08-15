@@ -146,38 +146,39 @@ public class Test004 {
         Assert.assertTrue(settings.hasAssignedNativeObject());
         Assert.assertNotEquals(0L, settings.targetVa());
 
-        Assert.assertEquals(16384, settings.getMaxInFlightBodyPairs());
-        Assert.assertEquals(8, settings.getStepListenersBatchSize());
-        Assert.assertEquals(1, settings.getStepListenerBatchesPerJob());
+
+        Assert.assertTrue(settings.getAllowSleeping());
         Assert.assertEquals(0.2f, settings.getBaumgarte(), 0f);
-        Assert.assertEquals(
-                0.02f, settings.getSpeculativeContactDistance(), 0f);
-        Assert.assertEquals(0.02f, settings.getPenetrationSlop(), 0f);
-        Assert.assertEquals(0.75f, settings.getLinearCastThreshold(), 0f);
-        Assert.assertEquals(0.25f, settings.getLinearCastMaxPenetration(), 0f);
-        Assert.assertEquals(1e-3f, settings.getManifoldTolerance(), 0f);
-        Assert.assertEquals(0.2f, settings.getMaxPenetrationDistance(), 0f);
-        Assert.assertEquals(0.001f * 0.001f,
-                settings.getBodyPairCacheMaxDeltaPositionSq(), 0f);
         Assert.assertEquals(Jolt.cos((float) (Math.toRadians(2) / 2f)),
                 settings.getBodyPairCacheCosMaxDeltaRotationDiv2(), 0.1f);
+        Assert.assertEquals(0.001f * 0.001f,
+                settings.getBodyPairCacheMaxDeltaPositionSq(), 0f);
+        Assert.assertTrue(settings.getCheckActiveEdges());
+        Assert.assertTrue(settings.getConstraintWarmStart());
         Assert.assertEquals(Jolt.cos((float) Math.toRadians(5f)),
                 settings.getContactNormalCosMaxDeltaRotation(), 0f);
         Assert.assertEquals(0.01f * 0.01f,
                 settings.getContactPointPreserveLambdaMaxDistSq(), 0f);
-        Assert.assertEquals(10, settings.getNumVelocitySteps());
-        Assert.assertEquals(2, settings.getNumPositionSteps());
+        Assert.assertTrue(settings.getDeterministicSimulation());
+        Assert.assertEquals(0.25f, settings.getLinearCastMaxPenetration(), 0f);
+        Assert.assertEquals(0.75f, settings.getLinearCastThreshold(), 0f);
+        Assert.assertEquals(1e-3f, settings.getManifoldTolerance(), 0f);
+        Assert.assertEquals(16384, settings.getMaxInFlightBodyPairs());
+        Assert.assertEquals(0.2f, settings.getMaxPenetrationDistance(), 0f);
         Assert.assertEquals(1f, settings.getMinVelocityForRestitution(), 0f);
-        Assert.assertEquals(0.5f, settings.getTimeBeforeSleep(), 0f);
+        Assert.assertEquals(2, settings.getNumPositionSteps());
+        Assert.assertEquals(10, settings.getNumVelocitySteps());
+        Assert.assertEquals(0.02f, settings.getPenetrationSlop(), 0f);
         Assert.assertEquals(
                 0.03f, settings.getPointVelocitySleepThreshold(), 0f);
-        Assert.assertTrue(settings.getDeterministicSimulation());
-        Assert.assertTrue(settings.getConstraintWarmStart());
+        Assert.assertEquals(
+                0.02f, settings.getSpeculativeContactDistance(), 0f);
+        Assert.assertEquals(1, settings.getStepListenerBatchesPerJob());
+        Assert.assertEquals(8, settings.getStepListenersBatchSize());
+        Assert.assertEquals(0.5f, settings.getTimeBeforeSleep(), 0f);
         Assert.assertTrue(settings.getUseBodyPairContactCache());
-        Assert.assertTrue(settings.getUseManifoldReduction());
         Assert.assertTrue(settings.getUseLargeIslandSplitter());
-        Assert.assertTrue(settings.getAllowSleeping());
-        Assert.assertTrue(settings.getCheckActiveEdges());
+        Assert.assertTrue(settings.getUseManifoldReduction());
     }
 
     /**
@@ -251,43 +252,25 @@ public class Test004 {
      * @param settings the settings to test (not null, modified)
      */
     private static void testSetters(PhysicsSettings settings) {
-        settings.setMaxInFlightBodyPairs(10);
-        Assert.assertEquals(10, settings.getMaxInFlightBodyPairs());
-
-        settings.setStepListenersBatchSize(12);
-        Assert.assertEquals(12, settings.getStepListenersBatchSize());
-
-        settings.setStepListenerBatchesPerJob(3);
-        Assert.assertEquals(3, settings.getStepListenerBatchesPerJob());
+        settings.setAllowSleeping(false);
+        Assert.assertFalse(settings.getAllowSleeping());
 
         settings.setBaumgarte(0.11f);
         Assert.assertEquals(0.11f, settings.getBaumgarte(), 0f);
 
-        settings.setSpeculativeContactDistance(1);
-        Assert.assertEquals(1, settings.getSpeculativeContactDistance(), 0);
-
-        settings.setPenetrationSlop(2);
-        Assert.assertEquals(2, settings.getPenetrationSlop(), 0);
-
-        settings.setLinearCastThreshold(1);
-        Assert.assertEquals(1, settings.getLinearCastThreshold(), 0);
-
-        settings.setLinearCastMaxPenetration(1);
-        Assert.assertEquals(1, settings.getLinearCastMaxPenetration(), 0);
-
-        settings.setManifoldTolerance(1);
-        Assert.assertEquals(1, settings.getManifoldTolerance(), 0);
-
-        settings.setMaxPenetrationDistance(1);
-        Assert.assertEquals(1, settings.getMaxPenetrationDistance(), 0);
+        settings.setBodyPairCacheCosMaxDeltaRotationDiv2(1);
+        Assert.assertEquals(
+                1, settings.getBodyPairCacheCosMaxDeltaRotationDiv2(), 0);
 
         settings.setBodyPairCacheMaxDeltaPositionSq(1);
         Assert.assertEquals(
                 1, settings.getBodyPairCacheMaxDeltaPositionSq(), 0);
 
-        settings.setBodyPairCacheCosMaxDeltaRotationDiv2(1);
-        Assert.assertEquals(
-                1, settings.getBodyPairCacheCosMaxDeltaRotationDiv2(), 0);
+        settings.setCheckActiveEdges(false);
+        Assert.assertFalse(settings.getCheckActiveEdges());
+
+        settings.setConstraintWarmStart(false);
+        Assert.assertFalse(settings.getConstraintWarmStart());
 
         settings.setContactNormalCosMaxDeltaRotation(1);
         Assert.assertEquals(
@@ -297,40 +280,58 @@ public class Test004 {
         Assert.assertEquals(
                 1, settings.getContactPointPreserveLambdaMaxDistSq(), 0);
 
-        settings.setNumVelocitySteps(12);
-        Assert.assertEquals(12, settings.getNumVelocitySteps());
+        settings.setDeterministicSimulation(false);
+        Assert.assertFalse(settings.getDeterministicSimulation());
 
-        settings.setNumPositionSteps(3);
-        Assert.assertEquals(3, settings.getNumPositionSteps());
+        settings.setLinearCastMaxPenetration(1);
+        Assert.assertEquals(1, settings.getLinearCastMaxPenetration(), 0);
+
+        settings.setLinearCastThreshold(1);
+        Assert.assertEquals(1, settings.getLinearCastThreshold(), 0);
+
+        settings.setManifoldTolerance(1);
+        Assert.assertEquals(1, settings.getManifoldTolerance(), 0);
+
+        settings.setMaxInFlightBodyPairs(10);
+        Assert.assertEquals(10, settings.getMaxInFlightBodyPairs());
+
+        settings.setMaxPenetrationDistance(1);
+        Assert.assertEquals(1, settings.getMaxPenetrationDistance(), 0);
 
         settings.setMinVelocityForRestitution(10);
         Assert.assertEquals(10, settings.getMinVelocityForRestitution(), 0);
 
-        settings.setTimeBeforeSleep(14f);
-        Assert.assertEquals(14f, settings.getTimeBeforeSleep(), 0f);
+        settings.setNumPositionSteps(3);
+        Assert.assertEquals(3, settings.getNumPositionSteps());
+
+        settings.setNumVelocitySteps(12);
+        Assert.assertEquals(12, settings.getNumVelocitySteps());
+
+        settings.setPenetrationSlop(2);
+        Assert.assertEquals(2, settings.getPenetrationSlop(), 0);
 
         settings.setPointVelocitySleepThreshold(13f);
         Assert.assertEquals(13f, settings.getPointVelocitySleepThreshold(), 0f);
 
-        settings.setDeterministicSimulation(false);
-        Assert.assertFalse(settings.getDeterministicSimulation());
+        settings.setSpeculativeContactDistance(1);
+        Assert.assertEquals(1, settings.getSpeculativeContactDistance(), 0);
 
-        settings.setConstraintWarmStart(false);
-        Assert.assertFalse(settings.getConstraintWarmStart());
+        settings.setStepListenerBatchesPerJob(3);
+        Assert.assertEquals(3, settings.getStepListenerBatchesPerJob());
+
+        settings.setStepListenersBatchSize(12);
+        Assert.assertEquals(12, settings.getStepListenersBatchSize());
+
+        settings.setTimeBeforeSleep(14f);
+        Assert.assertEquals(14f, settings.getTimeBeforeSleep(), 0f);
 
         settings.setUseBodyPairContactCache(false);
         Assert.assertFalse(settings.getUseBodyPairContactCache());
 
-        settings.setUseManifoldReduction(false);
-        Assert.assertFalse(settings.getUseManifoldReduction());
-
         settings.setUseLargeIslandSplitter(false);
         Assert.assertFalse(settings.getUseLargeIslandSplitter());
 
-        settings.setAllowSleeping(false);
-        Assert.assertFalse(settings.getAllowSleeping());
-
-        settings.setCheckActiveEdges(false);
-        Assert.assertFalse(settings.getCheckActiveEdges());
+        settings.setUseManifoldReduction(false);
+        Assert.assertFalse(settings.getUseManifoldReduction());
     }
 }
