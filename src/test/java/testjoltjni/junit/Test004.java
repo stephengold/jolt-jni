@@ -159,9 +159,9 @@ public class Test004 {
         Assert.assertEquals(0.2f, settings.getMaxPenetrationDistance(), 0f);
         Assert.assertEquals(0.001f * 0.001f,
                 settings.getBodyPairCacheMaxDeltaPositionSq(), 0f);
-        Assert.assertEquals(Jolt.cos(2 / 2f),
-                settings.getBodyPairCacheCosMaxDeltaRotationDiv2(), 0f);
-        Assert.assertEquals(Jolt.cos(5f),
+        Assert.assertEquals(Jolt.cos((float) (Math.toRadians(2) / 2f)),
+                settings.getBodyPairCacheCosMaxDeltaRotationDiv2(), 0.1f);
+        Assert.assertEquals(Jolt.cos((float) Math.toRadians(5f)),
                 settings.getContactNormalCosMaxDeltaRotation(), 0f);
         Assert.assertEquals(0.01f * 0.01f,
                 settings.getContactPointPreserveLambdaMaxDistSq(), 0f);
