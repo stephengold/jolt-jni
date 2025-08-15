@@ -519,45 +519,42 @@ abstract public class WheelSettings
     @Override
     abstract public Ref toRef();
     // *************************************************************************
-    // native private methods
+    // native methods
 
-    native private static boolean getEnableSuspensionForcePoint(
-            long settingsVa);
+    native static boolean getEnableSuspensionForcePoint(long settingsVa);
 
-    native private static void getPosition(
+    native static void getPosition(long settingsVa, FloatBuffer storeFloats);
+
+    native static float getRadius(long settingsVa);
+
+    native static void getSteeringAxis(
             long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getRadius(long settingsVa);
-
-    native private static void getSteeringAxis(
+    native static void getSuspensionDirection(
             long settingsVa, FloatBuffer storeFloats);
 
-    native private static void getSuspensionDirection(
+    native static void getSuspensionForcePoint(
             long settingsVa, FloatBuffer storeFloats);
 
-    native private static void getSuspensionForcePoint(
+    native static float getSuspensionMaxLength(long settingsVa);
+
+    native static float getSuspensionMinLength(long settingsVa);
+
+    native static float getSuspensionPreloadLength(long settingsVa);
+
+    native static long getSuspensionSpring(long wheelSettingsVa);
+
+    native static void getWheelForward(
             long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getSuspensionMaxLength(long settingsVa);
+    native static void getWheelUp(long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getSuspensionMinLength(long settingsVa);
-
-    native private static float getSuspensionPreloadLength(long settingsVa);
-
-    native private static long getSuspensionSpring(long wheelSettingsVa);
-
-    native private static void getWheelForward(long settingsVa,
-            FloatBuffer storeFloats);
-
-    native private static void getWheelUp(long settingsVa,
-            FloatBuffer storeFloats);
-
-    native private static float getWidth(long settingsVa);
+    native static float getWidth(long settingsVa);
 
     native private static void restoreBinaryState(
             long settingsVa, long streamVa);
 
-    native private static void saveBinaryState(long settingsVa, long streamVa);
+    native static void saveBinaryState(long settingsVa, long streamVa);
 
     native private static void setEnableSuspensionForcePoint(
             long settingsVa, boolean enable);

@@ -181,28 +181,27 @@ public class WheelSettingsWv
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static long createCopy(long originalVa);
 
     native private static long createDefault();
 
-    native private static float getMaxBrakeTorque(long settingsVa);
+    native static float getMaxBrakeTorque(long settingsVa);
 
-    native private static float getMaxHandBrakeTorque(long settingsVa);
+    native static float getMaxHandBrakeTorque(long settingsVa);
 
-    native private static float getMaxSteerAngle(long settingsVa);
+    native static float getMaxSteerAngle(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
 
     native private static void setEmbedded(long settingsVa);
 
-    native private static void setMaxBrakeTorque(long settingsVa, float torque);
+    native static void setMaxBrakeTorque(long settingsVa, float torque);
 
-    native private static void setMaxHandBrakeTorque(
-            long settingsVa, float torque);
+    native static void setMaxHandBrakeTorque(long settingsVa, float torque);
 
-    native private static void setMaxSteerAngle(long settingsVa, float angle);
+    native static void setMaxSteerAngle(long settingsVa, float angle);
 
     native private static long toRef(long settingsVa);
 }
