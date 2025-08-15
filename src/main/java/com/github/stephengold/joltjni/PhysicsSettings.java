@@ -47,9 +47,9 @@ public class PhysicsSettings
      * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     * @param owner {@code true} &rarr; make the JVM object the owner,
-     * {@code false} &rarr; it isn't the owner
+     *                   zero)
+     * @param owner      {@code true} &rarr; make the JVM object the owner,
+     *                   {@code false} &rarr; it isn't the owner
      */
     PhysicsSettings(long settingsVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(settingsVa) : null;
@@ -70,38 +70,14 @@ public class PhysicsSettings
     // new methods exposed
 
     /**
-     * Alter the size of the body pairs array, which corresponds to
-     * the maximum number of pairs which can be in flight at a time.
-     * (native attribute: mMaxInFlightBodyPairs)
+     * Alter whether objects can go to sleep. (native attribute: mAllowSleeping)
      *
-     * @param pairs the size (&ge;0, default=16384)
+     * @param allow {@code true} to allow sleeping, {@code false} to disallow it
+     *              (default=true)
      */
-    public void setMaxInFlightBodyPairs(int pairs) {
+    public void setAllowSleeping(boolean allow) {
         long settingsVa = va();
-        setMaxInFlightBodyPairs(settingsVa, pairs);
-    }
-
-    /**
-     * Alter the number of step listeners to notify in each batch.
-     * (native attribute: mStepListenersBatchSize)
-     *
-     * @param size the batch size (&ge;0, default=8)
-     */
-    public void setStepListenersBatchSize(int size) {
-        long settingsVa = va();
-        setStepListenersBatchSize(settingsVa, size);
-    }
-
-    /**
-     * Alter the number of step listener batches that can be allocated to one
-     * job before spawning another. Set to {@link Integer#MAX_VALUE} for no
-     * parallelism. (native attribute: mStepListenerBatchesPerJob)
-     *
-     * @param batches the number (&ge;0, default=1)
-     */
-    public void setStepListenerBatchesPerJob(int batches) {
-        long settingsVa = va();
-        setStepListenerBatchesPerJob(settingsVa, batches);
+        setAllowSleeping(settingsVa, allow);
     }
 
     /**
@@ -116,71 +92,15 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the speculative contact distance.
-     * (native attribute: mSpeculativeContactDistance)
+     * Alter the maximum relative delta orientation for body pairs to be able to
+     * reuse collision results from last frame.
+     * (native attribute: mBodyPairCacheCosMaxDeltaRotationDiv2)
      *
-     * @param distance the desired distance (in meters, ≥0, default=0.02)
+     * @param delta the delta (as cos(max / 2), &ge;0, default=cos(2 deg / 2))
      */
-    public void setSpeculativeContactDistance(float distance) {
+    public void setBodyPairCacheCosMaxDeltaRotationDiv2(float delta) {
         long settingsVa = va();
-        setSpeculativeContactDistance(settingsVa, distance);
-    }
-
-    /**
-     * Alter the penetration slop. (native attribute: mPenetrationSlop)
-     *
-     * @param slop the desired slop distance (in meters, default=0.02)
-     */
-    public void setPenetrationSlop(float slop) {
-        long settingsVa = va();
-        setPenetrationSlop(settingsVa, slop);
-    }
-
-    /**
-     * Alter the linear cast threshold, the fraction of a body's inner radius it
-     * must move per step to enable casting for the LinearCast motion quality.
-     * (native attribute: mLinearCastThreshold)
-     *
-     * @param threshold the threshold (in meters, &ge;0, default=0.75)
-     */
-    public void setLinearCastThreshold(float threshold) {
-        long settingsVa = va();
-        setLinearCastThreshold(settingsVa, threshold);
-    }
-
-    /**
-     * Alter the maximum penetration of a linear cast, which is the fraction of
-     * a body's inner radius that may penetrate another body.
-     * (native attribute: mLinearCastMaxPenetration)
-     *
-     * @param distance the distance (in meters, &ge;0, default=0.25)
-     */
-    public void setLinearCastMaxPenetration(float distance) {
-        long settingsVa = va();
-        setLinearCastMaxPenetration(settingsVa, distance);
-    }
-
-    /**
-     * Alter the maximum distance used to determine if two points are on the
-     * same plane for determining the contact manifold between two faces.
-     * (native attribute: mManifoldTolerance)
-     *
-     * @param tolerance the distance (in meters, &ge;0, default=1e-3)
-     */
-    public void setManifoldTolerance(float tolerance) {
-        long settingsVa = va();
-        setManifoldTolerance(settingsVa, tolerance);
-    }
-
-    /**
-     * Alter the maximum distance to correct in a single iteration when solving
-     * position constraints. (native attribute: mMaxPenetrationDistance)
-     *
-     * @param distance the distance (in meters, &ge;0, default=0.2)
-     */
-    public void setMaxPenetrationDistance(float distance) {
-        long settingsVa = va();
-        setMaxPenetrationDistance(settingsVa, distance);
+        setBodyPairCacheCosMaxDeltaRotationDiv2(settingsVa, delta);
     }
 
     /**
@@ -196,15 +116,25 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the maximum relative delta orientation for body pairs to be able to
-     * reuse collision results from last frame.
-     * (native attribute: mBodyPairCacheCosMaxDeltaRotationDiv2)
+     * Alter whether collision against non-active (shared) edges is allowed.
+     * Mainly for debugging the algorithm. (native attribute: mCheckActiveEdges)
      *
-     * @param delta the delta (as cos(max / 2), &ge;0, default=cos(2 deg / 2))
+     * @param check {@code true} to check, {@code false} to not check
      */
-    public void setBodyPairCacheCosMaxDeltaRotationDiv2(float delta) {
+    public void setCheckActiveEdges(boolean check) {
         long settingsVa = va();
-        setBodyPairCacheCosMaxDeltaRotationDiv2(settingsVa, delta);
+        setCheckActiveEdges(settingsVa, check);
+    }
+
+    /**
+     * Alter whether warm starting for constraints (initially applying previous
+     * frames impulses) should be used. (native attribute: mConstraintWarmStart)
+     *
+     * @param setting {@code true} to use, {@code false} to not use
+     */
+    public void setConstraintWarmStart(boolean setting) {
+        long settingsVa = va();
+        setConstraintWarmStart(settingsVa, setting);
     }
 
     /**
@@ -232,24 +162,74 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the number of velocity steps. (native attribute: mNumVelocitySteps)
+     * Alter whether physics simulation is deterministic. (native attribute:
+     * mDeterministicSimulation)
      *
-     * @param numSteps the desired number (&ge;0, default=10)
+     * @param setting {@code true} to be deterministic, {@code false} to relax
+     *                this policy (default=true)
      */
-    public void setNumVelocitySteps(int numSteps) {
+    public void setDeterministicSimulation(boolean setting) {
         long settingsVa = va();
-        setNumVelocitySteps(settingsVa, numSteps);
+        setDeterministicSimulation(settingsVa, setting);
     }
 
     /**
-     * Alter the number of solver position iterations per simulation step.
-     * (native attribute: mNumPositionSteps)
+     * Alter the maximum penetration of a linear cast, which is the fraction of
+     * a body's inner radius that may penetrate another body.
+     * (native attribute: mLinearCastMaxPenetration)
      *
-     * @param numSteps the desired number (&ge;0, default=2)
+     * @param distance the distance (in meters, &ge;0, default=0.25)
      */
-    public void setNumPositionSteps(int numSteps) {
+    public void setLinearCastMaxPenetration(float distance) {
         long settingsVa = va();
-        setNumPositionSteps(settingsVa, numSteps);
+        setLinearCastMaxPenetration(settingsVa, distance);
+    }
+
+    /**
+     * Alter the linear cast threshold, the fraction of a body's inner radius it
+     * must move per step to enable casting for the LinearCast motion quality.
+     * (native attribute: mLinearCastThreshold)
+     *
+     * @param threshold the threshold (in meters, &ge;0, default=0.75)
+     */
+    public void setLinearCastThreshold(float threshold) {
+        long settingsVa = va();
+        setLinearCastThreshold(settingsVa, threshold);
+    }
+
+    /**
+     * Alter the maximum distance used to determine if two points are on the
+     * same plane for determining the contact manifold between two faces.
+     * (native attribute: mManifoldTolerance)
+     *
+     * @param tolerance the distance (in meters, &ge;0, default=1e-3)
+     */
+    public void setManifoldTolerance(float tolerance) {
+        long settingsVa = va();
+        setManifoldTolerance(settingsVa, tolerance);
+    }
+
+    /**
+     * Alter the size of the body pairs array, which corresponds to
+     * the maximum number of pairs which can be in flight at a time.
+     * (native attribute: mMaxInFlightBodyPairs)
+     *
+     * @param pairs the size (&ge;0, default=16384)
+     */
+    public void setMaxInFlightBodyPairs(int pairs) {
+        long settingsVa = va();
+        setMaxInFlightBodyPairs(settingsVa, pairs);
+    }
+
+    /**
+     * Alter the maximum distance to correct in a single iteration when solving
+     * position constraints. (native attribute: mMaxPenetrationDistance)
+     *
+     * @param distance the distance (in meters, &ge;0, default=0.2)
+     */
+    public void setMaxPenetrationDistance(float distance) {
+        long settingsVa = va();
+        setMaxPenetrationDistance(settingsVa, distance);
     }
 
     /**
@@ -267,15 +247,34 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the time interval before an object can fall asleep. (native
-     * attribute: mTimeBeforeSleep)
+     * Alter the number of solver position iterations per simulation step.
+     * (native attribute: mNumPositionSteps)
      *
-     * @param interval the desired time interval (in seconds, &ge;0,
-     * default=0.5)
+     * @param numSteps the desired number (&ge;0, default=2)
      */
-    public void setTimeBeforeSleep(float interval) {
+    public void setNumPositionSteps(int numSteps) {
         long settingsVa = va();
-        setTimeBeforeSleep(settingsVa, interval);
+        setNumPositionSteps(settingsVa, numSteps);
+    }
+
+    /**
+     * Alter the number of velocity steps. (native attribute: mNumVelocitySteps)
+     *
+     * @param numSteps the desired number (&ge;0, default=10)
+     */
+    public void setNumVelocitySteps(int numSteps) {
+        long settingsVa = va();
+        setNumVelocitySteps(settingsVa, numSteps);
+    }
+
+    /**
+     * Alter the penetration slop. (native attribute: mPenetrationSlop)
+     *
+     * @param slop the desired slop distance (in meters, default=0.02)
+     */
+    public void setPenetrationSlop(float slop) {
+        long settingsVa = va();
+        setPenetrationSlop(settingsVa, slop);
     }
 
     /**
@@ -283,7 +282,7 @@ public class PhysicsSettings
      * (native attribute: mPointVelocitySleepThreshold)
      *
      * @param speed the desired speed threshold (in meters per second, &ge;0,
-     * default=0.03)
+     *              default=0.03)
      */
     public void setPointVelocitySleepThreshold(float speed) {
         long settingsVa = va();
@@ -291,26 +290,49 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter whether physics simulation is deterministic. (native attribute:
-     * mDeterministicSimulation)
+     * Alter the speculative contact distance.
+     * (native attribute: mSpeculativeContactDistance)
      *
-     * @param setting {@code true} to be deterministic, {@code false} to relax
-     * this policy (default=true)
+     * @param distance the desired distance (in meters, ≥0, default=0.02)
      */
-    public void setDeterministicSimulation(boolean setting) {
+    public void setSpeculativeContactDistance(float distance) {
         long settingsVa = va();
-        setDeterministicSimulation(settingsVa, setting);
+        setSpeculativeContactDistance(settingsVa, distance);
     }
 
     /**
-     * Alter whether warm starting for constraints (initially applying previous
-     * frames impulses) should be used. (native attribute: mConstraintWarmStart)
+     * Alter the number of step listener batches that can be allocated to one
+     * job before spawning another. Set to {@link Integer#MAX_VALUE} for no
+     * parallelism. (native attribute: mStepListenerBatchesPerJob)
      *
-     * @param setting {@code true} to use, {@code false} to not use
+     * @param batches the number (&ge;0, default=1)
      */
-    public void setConstraintWarmStart(boolean setting) {
+    public void setStepListenerBatchesPerJob(int batches) {
         long settingsVa = va();
-        setConstraintWarmStart(settingsVa, setting);
+        setStepListenerBatchesPerJob(settingsVa, batches);
+    }
+
+    /**
+     * Alter the number of step listeners to notify in each batch.
+     * (native attribute: mStepListenersBatchSize)
+     *
+     * @param size the batch size (&ge;0, default=8)
+     */
+    public void setStepListenersBatchSize(int size) {
+        long settingsVa = va();
+        setStepListenersBatchSize(settingsVa, size);
+    }
+
+    /**
+     * Alter the time interval before an object can fall asleep. (native
+     * attribute: mTimeBeforeSleep)
+     *
+     * @param interval the desired time interval (in seconds, &ge;0,
+     *                 default=0.5)
+     */
+    public void setTimeBeforeSleep(float interval) {
+        long settingsVa = va();
+        setTimeBeforeSleep(settingsVa, interval);
     }
 
     /**
@@ -326,17 +348,6 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter whether to reduce manifolds with similar contact normals into one
-     * contact manifold. (native attribute: mUseManifoldReduction)
-     *
-     * @param setting {@code true} to enable reduction, {@code false} to disable
-     */
-    public void setUseManifoldReduction(boolean setting) {
-        long settingsVa = va();
-        setUseManifoldReduction(settingsVa, setting);
-    }
-
-    /**
      * Alter whether large islands should be split into smaller parallel batches
      * of work. (native attribute: mUseLargeIslandSplitter)
      *
@@ -348,72 +359,30 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter whether objects can go to sleep. (native attribute: mAllowSleeping)
+     * Alter whether to reduce manifolds with similar contact normals into one
+     * contact manifold. (native attribute: mUseManifoldReduction)
      *
-     * @param allow {@code true} to allow sleeping, {@code false} to disallow it
-     * (default=true)
+     * @param setting {@code true} to enable reduction, {@code false} to disable
      */
-    public void setAllowSleeping(boolean allow) {
+    public void setUseManifoldReduction(boolean setting) {
         long settingsVa = va();
-        setAllowSleeping(settingsVa, allow);
-    }
-
-    /**
-     * Alter whether collision against non-active (shared) edges is allowed.
-     * Mainly for debugging the algorithm. (native attribute: mCheckActiveEdges)
-     *
-     * @param check {@code true} to check, {@code false} to not check
-     */
-    public void setCheckActiveEdges(boolean check) {
-        long settingsVa = va();
-        setCheckActiveEdges(settingsVa, check);
+        setUseManifoldReduction(settingsVa, setting);
     }
 
     // *************************************************************************
     // ConstPhysicsSettings methods
 
     /**
-     * Get the size of the body pairs array, which corresponds to
-     * the maximum number of pairs which can be in flight at a time.
-     * The settings are unaffected. (native attribute: mMaxInFlightBodyPairs)
+     * Test whether objects can fall asleep. The settings are unaffected.
+     * (native attribute: mAllowSleeping)
      *
-     * @return the size (&ge;0)
+     * @return {@code true} if sleeping is allowed, otherwise {@code false}
      */
     @Override
-    public int getMaxInFlightBodyPairs() {
+    public boolean getAllowSleeping() {
         long settingsVa = va();
-        int result = getMaxInFlightBodyPairs(settingsVa);
-        assert result >= 0 : result;
-        return result;
-    }
+        boolean result = getAllowSleeping(settingsVa);
 
-    /**
-     * Get the number of step listeners to notify in each batch. The settings
-     * are unaffected. (native attribute: mStepListenersBatchSize)
-     *
-     * @return the batch size (&ge;0)
-     */
-    @Override
-    public int getStepListenersBatchSize() {
-        long settingsVa = va();
-        int result = getStepListenersBatchSize(settingsVa);
-        assert result >= 0 : result;
-        return result;
-    }
-
-    /**
-     * Get the number of step listener batches that can be allocated to one job
-     * before spawning another. Set to {@link Integer#MAX_VALUE} for no
-     * parallelism. The settings are unaffected.
-     * (native attribute: mStepListenerBatchesPerJob)
-     *
-     * @return the number (&ge;0)
-     */
-    @Override
-    public int getStepListenerBatchesPerJob() {
-        long settingsVa = va();
-        int result = getStepListenerBatchesPerJob(settingsVa);
-        assert result >= 0 : result;
         return result;
     }
 
@@ -434,90 +403,16 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the speculative contact distance. The settings are unaffected.
-     * (native attribute: mSpeculativeContactDistance)
+     * Return the maximum relative delta orientation for body pairs to be able
+     * to reuse collision results from last frame. The settings are unaffected.
+     * (native attribute: mBodyPairCacheCosMaxDeltaRotationDiv2)
      *
-     * @return the distance (in meters, ≥0)
+     * @return the delta (as cos(max angle / 2), &ge;0)
      */
     @Override
-    public float getSpeculativeContactDistance() {
+    public float getBodyPairCacheCosMaxDeltaRotationDiv2() {
         long settingsVa = va();
-        float result = getSpeculativeContactDistance(settingsVa);
-        assert result >= 0f : result;
-        return result;
-    }
-
-    /**
-     * Return the penetration slop. The settings are unaffected. (native
-     * attribute: mPenetrationSlop)
-     *
-     * @return the slop distance (in meters)
-     */
-    @Override
-    public float getPenetrationSlop() {
-        long settingsVa = va();
-        float result = getPenetrationSlop(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Return the linear cast threshold, the fraction of a body's inner radius
-     * it must move per step to enable casting for the LinearCast motion
-     * quality. The settings are unaffected.
-     * (native attribute: mLinearCastThreshold)
-     *
-     * @return the threshold (in meters, &ge;0)
-     */
-    @Override
-    public float getLinearCastThreshold() {
-        long settingsVa = va();
-        float result = getLinearCastThreshold(settingsVa);
-        assert result >= 0 : result;
-        return result;
-    }
-
-    /**
-     * Return the maximum penetration of a linear cast, which is the fraction of
-     * a body's inner radius that may penetrate another body. The settings are
-     * unaffected. (native attribute: mLinearCastMaxPenetration)
-     *
-     * @return the distance (in meters, &ge;0)
-     */
-    @Override
-    public float getLinearCastMaxPenetration() {
-        long settingsVa = va();
-        float result = getLinearCastMaxPenetration(settingsVa);
-        assert result >= 0 : result;
-        return result;
-    }
-
-    /**
-     * Return the maximum distance used to determine if two points are on the
-     * same plane for determining the contact manifold between two faces. The
-     * settings are unaffected. (native attribute: mManifoldTolerance)
-     *
-     * @return the distance (in meters, &ge;0)
-     */
-    @Override
-    public float getManifoldTolerance() {
-        long settingsVa = va();
-        float result = getManifoldTolerance(settingsVa);
-        assert result >= 0 : result;
-        return result;
-    }
-
-    /**
-     * Return the maximum distance to correct in a single iteration when solving
-     * position constraints. The settings are unaffected.
-     * (native attribute: mMaxPenetrationDistance)
-     *
-     * @return the distance (in meters, &ge;0)
-     */
-    @Override
-    public float getMaxPenetrationDistance() {
-        long settingsVa = va();
-        float result = getMaxPenetrationDistance(settingsVa);
+        float result = getBodyPairCacheCosMaxDeltaRotationDiv2(settingsVa);
         assert result >= 0 : result;
         return result;
     }
@@ -538,17 +433,32 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the maximum relative delta orientation for body pairs to be able
-     * to reuse collision results from last frame. The settings are unaffected.
-     * (native attribute: mBodyPairCacheCosMaxDeltaRotationDiv2)
+     * Test whether collision against non-active (shared) edges is allowed.
+     * Mainly for debugging the algorithm. The settings are unaffected.
+     * (native attribute: mCheckActiveEdges)
      *
-     * @return the delta (as cos(max angle / 2), &ge;0)
+     * @return {@code true} if allowed, otherwise {@code false}
      */
     @Override
-    public float getBodyPairCacheCosMaxDeltaRotationDiv2() {
+    public boolean getCheckActiveEdges() {
         long settingsVa = va();
-        float result = getBodyPairCacheCosMaxDeltaRotationDiv2(settingsVa);
-        assert result >= 0 : result;
+        boolean result = getCheckActiveEdges(settingsVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether warm starting for constraints (initially applying previous
+     * frames impulses) should be used. The settings are unaffected.
+     * (native attribute: mConstraintWarmStart)
+     *
+     * @return {@code true} if it should, otherwise {@code false}
+     */
+    @Override
+    public boolean getConstraintWarmStart() {
+        long settingsVa = va();
+        boolean result = getConstraintWarmStart(settingsVa);
+
         return result;
     }
 
@@ -583,31 +493,91 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the number of velocity iterations per simulation step. The
-     * settings are unaffected. (native attribute: mNumVelocitySteps)
+     * Test whether physics simulation is deterministic. The settings are
+     * unaffected. (native attribute: mDeterministicSimulation)
      *
-     * @return the number (&ge;0)
+     * @return {@code true} if it is deterministic, otherwise {@code false}
      */
     @Override
-    public int getNumVelocitySteps() {
+    public boolean getDeterministicSimulation() {
         long settingsVa = va();
-        int result = getNumVelocitySteps(settingsVa);
+        boolean result = getDeterministicSimulation(settingsVa);
 
+        return result;
+    }
+
+    /**
+     * Return the maximum penetration of a linear cast, which is the fraction of
+     * a body's inner radius that may penetrate another body. The settings are
+     * unaffected. (native attribute: mLinearCastMaxPenetration)
+     *
+     * @return the distance (in meters, &ge;0)
+     */
+    @Override
+    public float getLinearCastMaxPenetration() {
+        long settingsVa = va();
+        float result = getLinearCastMaxPenetration(settingsVa);
         assert result >= 0 : result;
         return result;
     }
 
     /**
-     * Return the number of solver position iterations per simulation step. The
-     * settings are unaffected. (native attribute: mNumPositionSteps)
+     * Return the linear cast threshold, the fraction of a body's inner radius
+     * it must move per step to enable casting for the LinearCast motion
+     * quality. The settings are unaffected.
+     * (native attribute: mLinearCastThreshold)
      *
-     * @return the number (&ge;0)
+     * @return the threshold (in meters, &ge;0)
      */
     @Override
-    public int getNumPositionSteps() {
+    public float getLinearCastThreshold() {
         long settingsVa = va();
-        int result = getNumPositionSteps(settingsVa);
+        float result = getLinearCastThreshold(settingsVa);
+        assert result >= 0 : result;
+        return result;
+    }
 
+    /**
+     * Return the maximum distance used to determine if two points are on the
+     * same plane for determining the contact manifold between two faces. The
+     * settings are unaffected. (native attribute: mManifoldTolerance)
+     *
+     * @return the distance (in meters, &ge;0)
+     */
+    @Override
+    public float getManifoldTolerance() {
+        long settingsVa = va();
+        float result = getManifoldTolerance(settingsVa);
+        assert result >= 0 : result;
+        return result;
+    }
+
+    /**
+     * Get the size of the body pairs array, which corresponds to
+     * the maximum number of pairs which can be in flight at a time.
+     * The settings are unaffected. (native attribute: mMaxInFlightBodyPairs)
+     *
+     * @return the size (&ge;0)
+     */
+    @Override
+    public int getMaxInFlightBodyPairs() {
+        long settingsVa = va();
+        int result = getMaxInFlightBodyPairs(settingsVa);
+        assert result >= 0 : result;
+        return result;
+    }
+
+    /**
+     * Return the maximum distance to correct in a single iteration when solving
+     * position constraints. The settings are unaffected.
+     * (native attribute: mMaxPenetrationDistance)
+     *
+     * @return the distance (in meters, &ge;0)
+     */
+    @Override
+    public float getMaxPenetrationDistance() {
+        long settingsVa = va();
+        float result = getMaxPenetrationDistance(settingsVa);
         assert result >= 0 : result;
         return result;
     }
@@ -630,17 +600,46 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the time interval before an object can fall asleep. The settings
-     * are unaffected. (native attribute: mTimeBeforeSleep)
+     * Return the number of solver position iterations per simulation step. The
+     * settings are unaffected. (native attribute: mNumPositionSteps)
      *
-     * @return the interval (in seconds, &ge;0)
+     * @return the number (&ge;0)
      */
     @Override
-    public float getTimeBeforeSleep() {
+    public int getNumPositionSteps() {
         long settingsVa = va();
-        float result = getTimeBeforeSleep(settingsVa);
+        int result = getNumPositionSteps(settingsVa);
 
-        assert result >= 0f : result;
+        assert result >= 0 : result;
+        return result;
+    }
+
+    /**
+     * Return the number of velocity iterations per simulation step. The
+     * settings are unaffected. (native attribute: mNumVelocitySteps)
+     *
+     * @return the number (&ge;0)
+     */
+    @Override
+    public int getNumVelocitySteps() {
+        long settingsVa = va();
+        int result = getNumVelocitySteps(settingsVa);
+
+        assert result >= 0 : result;
+        return result;
+    }
+
+    /**
+     * Return the penetration slop. The settings are unaffected. (native
+     * attribute: mPenetrationSlop)
+     *
+     * @return the slop distance (in meters)
+     */
+    @Override
+    public float getPenetrationSlop() {
+        long settingsVa = va();
+        float result = getPenetrationSlop(settingsVa);
+
         return result;
     }
 
@@ -661,31 +660,61 @@ public class PhysicsSettings
     }
 
     /**
-     * Test whether physics simulation is deterministic. The settings are
-     * unaffected. (native attribute: mDeterministicSimulation)
+     * Return the speculative contact distance. The settings are unaffected.
+     * (native attribute: mSpeculativeContactDistance)
      *
-     * @return {@code true} if it is deterministic, otherwise {@code false}
+     * @return the distance (in meters, ≥0)
      */
     @Override
-    public boolean getDeterministicSimulation() {
+    public float getSpeculativeContactDistance() {
         long settingsVa = va();
-        boolean result = getDeterministicSimulation(settingsVa);
-
+        float result = getSpeculativeContactDistance(settingsVa);
+        assert result >= 0f : result;
         return result;
     }
 
     /**
-     * Test whether warm starting for constraints (initially applying previous
-     * frames impulses) should be used. The settings are unaffected.
-     * (native attribute: mConstraintWarmStart)
+     * Get the number of step listener batches that can be allocated to one job
+     * before spawning another. Set to {@link Integer#MAX_VALUE} for no
+     * parallelism. The settings are unaffected.
+     * (native attribute: mStepListenerBatchesPerJob)
      *
-     * @return {@code true} if it should, otherwise {@code false}
+     * @return the number (&ge;0)
      */
     @Override
-    public boolean getConstraintWarmStart() {
+    public int getStepListenerBatchesPerJob() {
         long settingsVa = va();
-        boolean result = getConstraintWarmStart(settingsVa);
+        int result = getStepListenerBatchesPerJob(settingsVa);
+        assert result >= 0 : result;
+        return result;
+    }
 
+    /**
+     * Get the number of step listeners to notify in each batch. The settings
+     * are unaffected. (native attribute: mStepListenersBatchSize)
+     *
+     * @return the batch size (&ge;0)
+     */
+    @Override
+    public int getStepListenersBatchSize() {
+        long settingsVa = va();
+        int result = getStepListenersBatchSize(settingsVa);
+        assert result >= 0 : result;
+        return result;
+    }
+
+    /**
+     * Alter the time interval before an object can fall asleep. The settings
+     * are unaffected. (native attribute: mTimeBeforeSleep)
+     *
+     * @return the interval (in seconds, &ge;0)
+     */
+    @Override
+    public float getTimeBeforeSleep() {
+        long settingsVa = va();
+        float result = getTimeBeforeSleep(settingsVa);
+
+        assert result >= 0f : result;
         return result;
     }
 
@@ -706,21 +735,6 @@ public class PhysicsSettings
     }
 
     /**
-     * Test whether to reduce manifolds with similar contact normals into one
-     * contact manifold. The settings are unaffected.
-     * (native attribute: mUseManifoldReduction)
-     *
-     * @return {@code true} if they will be reduced, otherwise {@code false}
-     */
-    @Override
-    public boolean getUseManifoldReduction() {
-        long settingsVa = va();
-        boolean result = getUseManifoldReduction(settingsVa);
-
-        return result;
-    }
-
-    /**
      * Test whether large islands should be split into smaller parallel batches
      * of work. The settings are unaffected.
      * (native attribute: mUseLargeIslandSplitter)
@@ -736,30 +750,16 @@ public class PhysicsSettings
     }
 
     /**
-     * Test whether objects can fall asleep. The settings are unaffected.
-     * (native attribute: mAllowSleeping)
+     * Test whether to reduce manifolds with similar contact normals into one
+     * contact manifold. The settings are unaffected.
+     * (native attribute: mUseManifoldReduction)
      *
-     * @return {@code true} if sleeping is allowed, otherwise {@code false}
+     * @return {@code true} if they will be reduced, otherwise {@code false}
      */
     @Override
-    public boolean getAllowSleeping() {
+    public boolean getUseManifoldReduction() {
         long settingsVa = va();
-        boolean result = getAllowSleeping(settingsVa);
-
-        return result;
-    }
-
-    /**
-     * Test whether collision against non-active (shared) edges is allowed.
-     * Mainly for debugging the algorithm. The settings are unaffected.
-     * (native attribute: mCheckActiveEdges)
-     *
-     * @return {@code true} if allowed, otherwise {@code false}
-     */
-    @Override
-    public boolean getCheckActiveEdges() {
-        long settingsVa = va();
-        boolean result = getCheckActiveEdges(settingsVa);
+        boolean result = getUseManifoldReduction(settingsVa);
 
         return result;
     }
@@ -772,37 +772,20 @@ public class PhysicsSettings
 
     native private static void free(long settingsVa);
 
-    native private static int getMaxInFlightBodyPairs(
-            long settingsVa);
-
-    native private static int getStepListenersBatchSize(
-            long settingsVa);
-
-    native private static int getStepListenerBatchesPerJob(
-            long settingsVa);
+    native private static boolean getAllowSleeping(long settingsVa);
 
     native private static float getBaumgarte(long settingsVa);
 
-    native private static float getSpeculativeContactDistance(long settingsVa);
-
-    native private static float getPenetrationSlop(long settingsVa);
-
-    native private static float getLinearCastThreshold(
-            long settingsVa);
-
-    native private static float getLinearCastMaxPenetration(
-            long settingsVa);
-
-    native private static float getManifoldTolerance(
-            long settingsVa);
-
-    native private static float getMaxPenetrationDistance(
+    native private static float getBodyPairCacheCosMaxDeltaRotationDiv2(
             long settingsVa);
 
     native private static float getBodyPairCacheMaxDeltaPositionSq(
             long settingsVa);
 
-    native private static float getBodyPairCacheCosMaxDeltaRotationDiv2(
+    native private static boolean getCheckActiveEdges(
+            long settingsVa);
+
+    native private static boolean getConstraintWarmStart(
             long settingsVa);
 
     native private static float getContactNormalCosMaxDeltaRotation(
@@ -811,73 +794,72 @@ public class PhysicsSettings
     native private static float getContactPointPreserveLambdaMaxDistSq(
             long settingsVa);
 
-    native private static int getNumVelocitySteps(long settingsVa);
+    native private static boolean getDeterministicSimulation(
+            long settingsVa);
 
-    native private static int getNumPositionSteps(long settingsVa);
+    native private static float getLinearCastMaxPenetration(
+            long settingsVa);
+
+    native private static float getLinearCastThreshold(
+            long settingsVa);
+
+    native private static float getManifoldTolerance(
+            long settingsVa);
+
+    native private static int getMaxInFlightBodyPairs(
+            long settingsVa);
+
+    native private static float getMaxPenetrationDistance(
+            long settingsVa);
 
     native private static float getMinVelocityForRestitution(
             long settingsVa);
 
-    native private static float getTimeBeforeSleep(long settingsVa);
+    native private static int getNumPositionSteps(long settingsVa);
+
+    native private static int getNumVelocitySteps(long settingsVa);
+
+    native private static float getPenetrationSlop(long settingsVa);
 
     native private static float getPointVelocitySleepThreshold(
             long settingsVa);
 
-    native private static boolean getDeterministicSimulation(
+    native private static float getSpeculativeContactDistance(long settingsVa);
+
+    native private static int getStepListenerBatchesPerJob(
             long settingsVa);
 
-    native private static boolean getConstraintWarmStart(
+    native private static int getStepListenersBatchSize(
             long settingsVa);
+
+    native private static float getTimeBeforeSleep(long settingsVa);
 
     native private static boolean getUseBodyPairContactCache(
-            long settingsVa);
-
-    native private static boolean getUseManifoldReduction(
             long settingsVa);
 
     native private static boolean getUseLargeIslandSplitter(
             long settingsVa);
 
-    native private static boolean getAllowSleeping(long settingsVa);
-
-    native private static boolean getCheckActiveEdges(
+    native private static boolean getUseManifoldReduction(
             long settingsVa);
 
-    native private static void setMaxInFlightBodyPairs(
-            long settingsVa, int pairs);
-
-    native private static void setStepListenersBatchSize(
-            long settingsVa, int size);
-
-    native private static void setStepListenerBatchesPerJob(
-            long settingsVa, int batches);
+    native private static void setAllowSleeping(
+            long settingsVa, boolean allow);
 
     native private static void setBaumgarte(
             long settingsVa, float fraction);
 
-    native private static void setSpeculativeContactDistance(
-            long settingsVa, float distance);
-
-    native private static void setPenetrationSlop(
-            long settingsVa, float slop);
-
-    native private static void setLinearCastThreshold(
-            long settingsVa, float threshold);
-
-    native private static void setLinearCastMaxPenetration(
-            long settingsVa, float penetration);
-
-    native private static void setManifoldTolerance(
-            long settingsVa, float tolerance);
-
-    native private static void setMaxPenetrationDistance(
-            long settingsVa, float distance);
+    native private static void setBodyPairCacheCosMaxDeltaRotationDiv2(
+            long settingsVa, float delta);
 
     native private static void setBodyPairCacheMaxDeltaPositionSq(
             long settingsVa, float delta);
 
-    native private static void setBodyPairCacheCosMaxDeltaRotationDiv2(
-            long settingsVa, float delta);
+    native private static void setCheckActiveEdges(
+            long settingsVa, boolean check);
+
+    native private static void setConstraintWarmStart(
+            long settingsVa, boolean setting);
 
     native private static void setContactNormalCosMaxDeltaRotation(
             long settingsVa, float delta);
@@ -885,39 +867,57 @@ public class PhysicsSettings
     native private static void setContactPointPreserveLambdaMaxDistSq(
             long settingsVa, float distance);
 
-    native private static void setNumVelocitySteps(
-            long settingsVa, int numSteps);
+    native private static void setDeterministicSimulation(
+            long settingsVa, boolean setting);
 
-    native private static void setNumPositionSteps(
-            long settingsVa, int numSteps);
+    native private static void setLinearCastMaxPenetration(
+            long settingsVa, float penetration);
+
+    native private static void setLinearCastThreshold(
+            long settingsVa, float threshold);
+
+    native private static void setManifoldTolerance(
+            long settingsVa, float tolerance);
+
+    native private static void setMaxInFlightBodyPairs(
+            long settingsVa, int pairs);
+
+    native private static void setMaxPenetrationDistance(
+            long settingsVa, float distance);
 
     native private static void setMinVelocityForRestitution(
             long settingsVa, float velocity);
 
-    native private static void setTimeBeforeSleep(
-            long settingsVa, float interval);
+    native private static void setNumPositionSteps(
+            long settingsVa, int numSteps);
+
+    native private static void setNumVelocitySteps(
+            long settingsVa, int numSteps);
+
+    native private static void setPenetrationSlop(
+            long settingsVa, float slop);
 
     native private static void setPointVelocitySleepThreshold(
             long settingsVa, float speed);
 
-    native private static void setDeterministicSimulation(
-            long settingsVa, boolean setting);
+    native private static void setSpeculativeContactDistance(
+            long settingsVa, float distance);
 
-    native private static void setConstraintWarmStart(
-            long settingsVa, boolean setting);
+    native private static void setStepListenerBatchesPerJob(
+            long settingsVa, int batches);
+
+    native private static void setStepListenersBatchSize(
+            long settingsVa, int size);
+
+    native private static void setTimeBeforeSleep(
+            long settingsVa, float interval);
 
     native private static void setUseBodyPairContactCache(
-            long settingsVa, boolean setting);
-
-    native private static void setUseManifoldReduction(
             long settingsVa, boolean setting);
 
     native private static void setUseLargeIslandSplitter(
             long settingsVa, boolean setting);
 
-    native private static void setAllowSleeping(
-            long settingsVa, boolean allow);
-
-    native private static void setCheckActiveEdges(
-            long settingsVa, boolean check);
+    native private static void setUseManifoldReduction(
+            long settingsVa, boolean setting);
 }
