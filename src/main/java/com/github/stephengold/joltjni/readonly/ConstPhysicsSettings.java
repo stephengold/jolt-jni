@@ -29,13 +29,6 @@ package com.github.stephengold.joltjni.readonly;
  */
 public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
     /**
-     * Test whether objects can fall asleep. The settings are unaffected.
-     *
-     * @return {@code true} if sleeping is allowed, otherwise {@code false}
-     */
-    boolean getAllowSleeping();
-
-    /**
      * Return the Baumgarte stabilization factor, the fraction of position error
      * that is corrected in each update. The settings are unaffected.
      *
@@ -44,20 +37,18 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
     float getBaumgarte();
 
     /**
-     * Test whether physics simulation is deterministic. The settings are
-     * unaffected.
+     * Return the speculative contact distance. The settings are unaffected.
      *
-     * @return {@code true} if it is deterministic, otherwise {@code false}
+     * @return the distance (in meters, ≥0)
      */
-    boolean getDeterministicSimulation();
+    float getSpeculativeContactDistance();
 
     /**
-     * Return the number of solver position iterations per simulation step. The
-     * settings are unaffected.
+     * Return the penetration slop. The settings are unaffected.
      *
-     * @return the number (&ge;0)
+     * @return the slop distance (in meters)
      */
-    int getNumPositionSteps();
+    float getPenetrationSlop();
 
     /**
      * Return the number of velocity iterations per simulation step. The
@@ -68,11 +59,20 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
     int getNumVelocitySteps();
 
     /**
-     * Return the penetration slop. The settings are unaffected.
+     * Return the number of solver position iterations per simulation step. The
+     * settings are unaffected.
      *
-     * @return the slop distance (in meters)
+     * @return the number (&ge;0)
      */
-    float getPenetrationSlop();
+    int getNumPositionSteps();
+
+    /**
+     * Alter the time interval before an object can fall asleep. The settings
+     * are unaffected.
+     *
+     * @return the interval (in seconds, &ge;0)
+     */
+    float getTimeBeforeSleep();
 
     /**
      * Return the point-motion threshold, below which objects can fall asleep.
@@ -83,17 +83,17 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
     float getPointVelocitySleepThreshold();
 
     /**
-     * Return the speculative contact distance. The settings are unaffected.
+     * Test whether physics simulation is deterministic. The settings are
+     * unaffected.
      *
-     * @return the distance (in meters, ≥0)
+     * @return {@code true} if it is deterministic, otherwise {@code false}
      */
-    float getSpeculativeContactDistance();
+    boolean getDeterministicSimulation();
 
     /**
-     * Alter the time interval before an object can fall asleep. The settings
-     * are unaffected.
+     * Test whether objects can fall asleep. The settings are unaffected.
      *
-     * @return the interval (in seconds, &ge;0)
+     * @return {@code true} if sleeping is allowed, otherwise {@code false}
      */
-    float getTimeBeforeSleep();
+    boolean getAllowSleeping();
 }

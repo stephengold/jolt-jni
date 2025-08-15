@@ -70,17 +70,6 @@ public class PhysicsSettings
     // new methods exposed
 
     /**
-     * Alter whether objects can go to sleep. (native attribute: mAllowSleeping)
-     *
-     * @param allow {@code true} to allow sleeping, {@code false} to disallow it
-     * (default=true)
-     */
-    public void setAllowSleeping(boolean allow) {
-        long settingsVa = va();
-        setAllowSleeping(settingsVa, allow);
-    }
-
-    /**
      * Alter the Baumgarte stabilization factor, the fraction of position error
      * to correct in each update. (native attribute: mBaumgarte)
      *
@@ -92,15 +81,34 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter whether physics simulation is deterministic. (native attribute:
-     * mDeterministicSimulation)
+     * Alter the speculative contact distance.
+     * (native attribute: mSpeculativeContactDistance)
      *
-     * @param setting {@code true} to be deterministic, {@code false} to relax
-     * this policy (default=true)
+     * @param distance the desired distance (in meters, ≥0, default=0.02)
      */
-    public void setDeterministicSimulation(boolean setting) {
+    public void setSpeculativeContactDistance(float distance) {
         long settingsVa = va();
-        setDeterministicSimulation(settingsVa, setting);
+        setSpeculativeContactDistance(settingsVa, distance);
+    }
+
+    /**
+     * Alter the penetration slop. (native attribute: mPenetrationSlop)
+     *
+     * @param slop the desired slop distance (in meters, default=0.02)
+     */
+    public void setPenetrationSlop(float slop) {
+        long settingsVa = va();
+        setPenetrationSlop(settingsVa, slop);
+    }
+
+    /**
+     * Alter the number of velocity steps. (native attribute: mNumVelocitySteps)
+     *
+     * @param numSteps the desired number (&ge;0, default=10)
+     */
+    public void setNumVelocitySteps(int numSteps) {
+        long settingsVa = va();
+        setNumVelocitySteps(settingsVa, numSteps);
     }
 
     /**
@@ -115,23 +123,15 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the number of velocity steps. (native attribute: mNumVelocitySteps)
+     * Alter the time interval before an object can fall asleep. (native
+     * attribute: mTimeBeforeSleep)
      *
-     * @param numSteps the desired number (&ge;0, default=10)
+     * @param interval the desired time interval (in seconds, &ge;0,
+     * default=0.5)
      */
-    public void setNumVelocitySteps(int numSteps) {
+    public void setTimeBeforeSleep(float interval) {
         long settingsVa = va();
-        setNumVelocitySteps(settingsVa, numSteps);
-    }
-
-    /**
-     * Alter the penetration slop. (native attribute: mPenetrationSlop)
-     *
-     * @param slop the desired slop distance (in meters, default=0.02)
-     */
-    public void setPenetrationSlop(float slop) {
-        long settingsVa = va();
-        setPenetrationSlop(settingsVa, slop);
+        setTimeBeforeSleep(settingsVa, interval);
     }
 
     /**
@@ -147,43 +147,30 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the speculative contact distance.
-     * (native attribute: mSpeculativeContactDistance)
+     * Alter whether physics simulation is deterministic. (native attribute:
+     * mDeterministicSimulation)
      *
-     * @param distance the desired distance (in meters, ≥0, default=0.02)
+     * @param setting {@code true} to be deterministic, {@code false} to relax
+     * this policy (default=true)
      */
-    public void setSpeculativeContactDistance(float distance) {
+    public void setDeterministicSimulation(boolean setting) {
         long settingsVa = va();
-        setSpeculativeContactDistance(settingsVa, distance);
+        setDeterministicSimulation(settingsVa, setting);
     }
 
     /**
-     * Alter the time interval before an object can fall asleep. (native
-     * attribute: mTimeBeforeSleep)
+     * Alter whether objects can go to sleep. (native attribute: mAllowSleeping)
      *
-     * @param interval the desired time interval (in seconds, &ge;0,
-     * default=0.5)
+     * @param allow {@code true} to allow sleeping, {@code false} to disallow it
+     * (default=true)
      */
-    public void setTimeBeforeSleep(float interval) {
+    public void setAllowSleeping(boolean allow) {
         long settingsVa = va();
-        setTimeBeforeSleep(settingsVa, interval);
+        setAllowSleeping(settingsVa, allow);
     }
+
     // *************************************************************************
     // ConstPhysicsSettings methods
-
-    /**
-     * Test whether objects can fall asleep. The settings are unaffected.
-     * (native attribute: mAllowSleeping)
-     *
-     * @return {@code true} if sleeping is allowed, otherwise {@code false}
-     */
-    @Override
-    public boolean getAllowSleeping() {
-        long settingsVa = va();
-        boolean result = getAllowSleeping(settingsVa);
-
-        return result;
-    }
 
     /**
      * Return the Baumgarte stabilization factor, the fraction of position error
@@ -202,31 +189,30 @@ public class PhysicsSettings
     }
 
     /**
-     * Test whether physics simulation is deterministic. The settings are
-     * unaffected. (native attribute: mDeterministicSimulation)
+     * Return the speculative contact distance. The settings are unaffected.
+     * (native attribute: mSpeculativeContactDistance)
      *
-     * @return {@code true} if it is deterministic, otherwise {@code false}
+     * @return the distance (in meters, ≥0)
      */
     @Override
-    public boolean getDeterministicSimulation() {
+    public float getSpeculativeContactDistance() {
         long settingsVa = va();
-        boolean result = getDeterministicSimulation(settingsVa);
-
+        float result = getSpeculativeContactDistance(settingsVa);
+        assert result >= 0f : result;
         return result;
     }
 
     /**
-     * Return the number of solver position iterations per simulation step. The
-     * settings are unaffected. (native attribute: mNumPositionSteps)
+     * Return the penetration slop. The settings are unaffected. (native
+     * attribute: mPenetrationSlop)
      *
-     * @return the number (&ge;0)
+     * @return the slop distance (in meters)
      */
     @Override
-    public int getNumPositionSteps() {
+    public float getPenetrationSlop() {
         long settingsVa = va();
-        int result = getNumPositionSteps(settingsVa);
+        float result = getPenetrationSlop(settingsVa);
 
-        assert result >= 0 : result;
         return result;
     }
 
@@ -246,16 +232,32 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the penetration slop. The settings are unaffected. (native
-     * attribute: mPenetrationSlop)
+     * Return the number of solver position iterations per simulation step. The
+     * settings are unaffected. (native attribute: mNumPositionSteps)
      *
-     * @return the slop distance (in meters)
+     * @return the number (&ge;0)
      */
     @Override
-    public float getPenetrationSlop() {
+    public int getNumPositionSteps() {
         long settingsVa = va();
-        float result = getPenetrationSlop(settingsVa);
+        int result = getNumPositionSteps(settingsVa);
 
+        assert result >= 0 : result;
+        return result;
+    }
+
+    /**
+     * Alter the time interval before an object can fall asleep. The settings
+     * are unaffected. (native attribute: mTimeBeforeSleep)
+     *
+     * @return the interval (in seconds, &ge;0)
+     */
+    @Override
+    public float getTimeBeforeSleep() {
+        long settingsVa = va();
+        float result = getTimeBeforeSleep(settingsVa);
+
+        assert result >= 0f : result;
         return result;
     }
 
@@ -276,31 +278,30 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the speculative contact distance. The settings are unaffected.
-     * (native attribute: mSpeculativeContactDistance)
+     * Test whether physics simulation is deterministic. The settings are
+     * unaffected. (native attribute: mDeterministicSimulation)
      *
-     * @return the distance (in meters, ≥0)
+     * @return {@code true} if it is deterministic, otherwise {@code false}
      */
     @Override
-    public float getSpeculativeContactDistance() {
+    public boolean getDeterministicSimulation() {
         long settingsVa = va();
-        float result = getSpeculativeContactDistance(settingsVa);
-        assert result >= 0f : result;
+        boolean result = getDeterministicSimulation(settingsVa);
+
         return result;
     }
 
     /**
-     * Alter the time interval before an object can fall asleep. The settings
-     * are unaffected. (native attribute: mTimeBeforeSleep)
+     * Test whether objects can fall asleep. The settings are unaffected.
+     * (native attribute: mAllowSleeping)
      *
-     * @return the interval (in seconds, &ge;0)
+     * @return {@code true} if sleeping is allowed, otherwise {@code false}
      */
     @Override
-    public float getTimeBeforeSleep() {
+    public boolean getAllowSleeping() {
         long settingsVa = va();
-        float result = getTimeBeforeSleep(settingsVa);
+        boolean result = getAllowSleeping(settingsVa);
 
-        assert result >= 0f : result;
         return result;
     }
     // *************************************************************************
@@ -312,50 +313,50 @@ public class PhysicsSettings
 
     native private static void free(long settingsVa);
 
-    native private static boolean getAllowSleeping(long settingsVa);
-
     native private static float getBaumgarte(long settingsVa);
 
-    native private static boolean getDeterministicSimulation(
-            long settingsVa);
+    native private static float getSpeculativeContactDistance(long settingsVa);
 
-    native private static int getNumPositionSteps(long settingsVa);
+    native private static float getPenetrationSlop(long settingsVa);
 
     native private static int getNumVelocitySteps(long settingsVa);
 
-    native private static float getPenetrationSlop(long settingsVa);
+    native private static int getNumPositionSteps(long settingsVa);
+
+    native private static float getTimeBeforeSleep(long settingsVa);
 
     native private static float getPointVelocitySleepThreshold(
             long settingsVa);
 
-    native private static float getSpeculativeContactDistance(long settingsVa);
+    native private static boolean getDeterministicSimulation(
+            long settingsVa);
 
-    native private static float getTimeBeforeSleep(long settingsVa);
-
-    native private static void setAllowSleeping(
-            long settingsVa, boolean allow);
+    native private static boolean getAllowSleeping(long settingsVa);
 
     native private static void setBaumgarte(
             long settingsVa, float fraction);
 
-    native private static void setDeterministicSimulation(
-            long settingsVa, boolean setting);
-
-    native private static void setNumPositionSteps(
-            long settingsVa, int numSteps);
-
-    native private static void setNumVelocitySteps(
-            long settingsVa, int numSteps);
+    native private static void setSpeculativeContactDistance(
+            long settingsVa, float distance);
 
     native private static void setPenetrationSlop(
             long settingsVa, float slop);
 
-    native private static void setPointVelocitySleepThreshold(
-            long settingsVa, float speed);
+    native private static void setNumVelocitySteps(
+            long settingsVa, int numSteps);
 
-    native private static void setSpeculativeContactDistance(
-            long settingsVa, float distance);
+    native private static void setNumPositionSteps(
+            long settingsVa, int numSteps);
 
     native private static void setTimeBeforeSleep(
             long settingsVa, float interval);
+
+    native private static void setPointVelocitySleepThreshold(
+            long settingsVa, float speed);
+
+    native private static void setDeterministicSimulation(
+            long settingsVa, boolean setting);
+
+    native private static void setAllowSleeping(
+            long settingsVa, boolean allow);
 }
