@@ -186,6 +186,57 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawMar
 
 /*
  * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawOpenCone
+ * Signature: (DDDLjava/nio/FloatBuffer;III)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawOpenCone
+  (JNIEnv *pEnv, jclass, jdouble topX, jdouble topY, jdouble topZ,
+  jobject floatBuffer, jint colorInt, jint csOrdinal, jint drawModeOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const RVec3 top(topX, topY, topZ);
+    const DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 8);
+    const Vec3 axis(pFloats[0], pFloats[1], pFloats[2]);
+    const Vec3 perpendicular(pFloats[3], pFloats[4], pFloats[5]);
+    const float halfAngle = pFloats[6];
+    const float length = pFloats[7];
+    const Color color(colorInt);
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    const DebugRenderer::EDrawMode drawMode
+            = (DebugRenderer::EDrawMode) drawModeOrdinal;
+    DebugRenderer::sInstance->DrawOpenCone(top, axis, perpendicular, halfAngle,
+            length, color, castShadow, drawMode);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawPie
+ * Signature: (DDDLjava/nio/FloatBuffer;II)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawPie
+  (JNIEnv *pEnv, jclass, jdouble centerX, jdouble centerY, jdouble centerZ,
+  jobject floatBuffer, jint colorInt, jint csOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const RVec3 center(centerX, centerY, centerZ);
+    const DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 9);
+    const float radius = pFloats[0];
+    const Vec3 normal(pFloats[1], pFloats[2], pFloats[3]);
+    const Vec3 axis(pFloats[4], pFloats[5], pFloats[6]);
+    const float minAngle = pFloats[7];
+    const float maxAngle = pFloats[8];
+    const Color color(colorInt);
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    DebugRenderer::sInstance->DrawPie(center, radius, normal, axis,
+            minAngle, maxAngle, color, castShadow);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
  * Method:    drawPlane
  * Signature: (DDDFFFIF)V
  */
@@ -222,6 +273,70 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawSph
 
 /*
  * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawSwingConeLimits
+ * Signature: (JFFFIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawSwingConeLimits
+  (JNIEnv *, jclass, jlong transformVa, jfloat swingYHalfAngle,
+  jfloat swingZHalfAngle, jfloat edgeLength, jint colorInt, jint csOrdinal,
+  jint drawModeOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    const Color color(colorInt);
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    const DebugRenderer::EDrawMode drawMode
+            = (DebugRenderer::EDrawMode) drawModeOrdinal;
+    DebugRenderer::sInstance->DrawSwingConeLimits(*pTransform, swingYHalfAngle,
+            swingZHalfAngle, edgeLength, color, castShadow, drawMode);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawSwingPyramidLimits
+ * Signature: (JFFFFFIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawSwingPyramidLimits
+  (JNIEnv *, jclass, jlong transformVa, jfloat minSwingYAngle,
+  jfloat maxSwingYAngle, jfloat minSwingZAngle, jfloat maxSwingZAngle,
+  jfloat edgeLength, jint colorInt, jint csOrdinal, jint drawModeOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    const Color color(colorInt);
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    const DebugRenderer::EDrawMode drawMode
+            = (DebugRenderer::EDrawMode) drawModeOrdinal;
+    DebugRenderer::sInstance->DrawSwingPyramidLimits(
+            *pTransform, minSwingYAngle, maxSwingYAngle, minSwingZAngle,
+            maxSwingZAngle, edgeLength, color, castShadow, drawMode);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawTaperedCylinder
+ * Signature: (JFFFFIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawTaperedCylinder
+  (JNIEnv *, jclass, jlong transformVa, jfloat top, jfloat bottom,
+  jfloat topRadius, jfloat bottomRadius, jint colorInt, jint csOrdinal,
+  jint drawModeOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    const Color color(colorInt);
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    const DebugRenderer::EDrawMode drawMode
+            = (DebugRenderer::EDrawMode) drawModeOrdinal;
+    DebugRenderer::sInstance->DrawTaperedCylinder(*pTransform, top, bottom,
+            topRadius, bottomRadius, color, castShadow, drawMode);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
  * Method:    drawText3d
  * Signature: (DDDLjava/lang/String;IF)V
  */
@@ -253,6 +368,26 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawTri
     const RVec3 v3(v3x, v3y, v3z);
     const Color color(colorInt);
     DebugRenderer::sInstance->DrawTriangle(v1, v2, v3, color);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawUnitSphere
+ * Signature: (JIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawUnitSphere
+  (JNIEnv *, jclass, jlong transformVa, jint colorInt, jint csOrdinal,
+  jint drawModeOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    const Color color(colorInt);
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    const DebugRenderer::EDrawMode drawMode
+            = (DebugRenderer::EDrawMode) drawModeOrdinal;
+    DebugRenderer::sInstance->DrawUnitSphere(
+            *pTransform, color, castShadow, drawMode);
 #endif
 }
 

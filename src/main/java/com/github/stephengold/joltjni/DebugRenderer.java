@@ -29,6 +29,7 @@ import com.github.stephengold.joltjni.readonly.ConstOrientedBox;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Visualization for debugging purposes.
@@ -301,6 +302,40 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
+     * Draw the specified open cone.
+     *
+     * @param top the desired location of the cone's vertex (not null,
+     * unaffected)
+     * @param axis the desired offset of the center of the base, relative to the
+     * vertex (not null, unaffected)
+     * @param perpendicular a vector perpendicular to {@code axis} (not null,
+     * unaffected)
+     * @param halfAngle the desired angle between the axis and the surface of
+     * the code (in radians)
+     * @param length the desired length of the cone (in meters)
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawOpenCone(RVec3Arg top, Vec3Arg axis, Vec3Arg perpendicular,
+            float halfAngle, float length, ConstColor color,
+            ECastShadow castShadow, EDrawMode drawMode) {
+        final double topX = top.xx();
+        final double topY = top.yy();
+        final double topZ = top.zz();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get().rewind();
+        axis.put(floatBuffer);
+        perpendicular.put(floatBuffer);
+        floatBuffer.put(halfAngle);
+        floatBuffer.put(length);
+        int colorInt = color.getUInt32();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawOpenCone(topX, topY, topZ,
+                floatBuffer, colorInt, csOrdinal, drawModeOrdinal);
+    }
+
+    /**
      * Draw a marker at the specified location.
      *
      * @param location the desired location (not null, unaffected)
@@ -313,6 +348,37 @@ abstract public class DebugRenderer extends NonCopyable {
         double locZ = location.zz();
         int colorInt = color.getUInt32();
         drawMarker(locX, locY, locZ, colorInt, size);
+    }
+
+    /**
+     * Draw the specified sector of a circle.
+     *
+     * @param center the desired location of the circle's center (not null,
+     * unaffected)
+     * @param radius the desired radius of the circle (in meters)
+     * @param normal a normal to the plane that contains the desired circle (not
+     * null, unaffected)
+     * @param axis the desired zero-angle direction (not null, unaffected)
+     * @param minAngle the desired angle where the sector begins (in radians)
+     * @param maxAngle the desired angle where the sector ends (in radians)
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     */
+    public void drawPie(RVec3Arg center, float radius, Vec3Arg normal,
+            Vec3Arg axis, float minAngle, float maxAngle, ConstColor color,
+            ECastShadow castShadow) {
+        final double centerX = center.xx();
+        final double centerY = center.yy();
+        final double centerZ = center.zz();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get().rewind();
+        floatBuffer.put(radius);
+        normal.put(floatBuffer);
+        axis.put(floatBuffer);
+        floatBuffer.put(minAngle);
+        floatBuffer.put(maxAngle);
+        int colorInt = color.getUInt32();
+        int csOrdinal = castShadow.ordinal();
+        drawPie(centerX, centerY, centerZ, floatBuffer, colorInt, csOrdinal);
     }
 
     /**
@@ -386,7 +452,87 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
-     * Draw the specified 3-D text.
+     * Draw the rotation-limits cone of a {@code SwingTwistConstraintPart}.
+     *
+     * @param transform the desired transform from constraint coordinates to
+     * system coordinates (not null, unaffected)
+     * @param swingYHalfAngle half the desired Y-axis swing-angle limit (in
+     * radians)
+     * @param swingZHalfAngle half the desired Z-axis swing-angle limit (in
+     * radians)
+     * @param edgeLength the desired length of the edges of the cone
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawSwingConeLimits(RMat44Arg transform, float swingYHalfAngle,
+            float swingZHalfAngle, float edgeLength, ConstColor color,
+            ECastShadow castShadow, EDrawMode drawMode) {
+        long transformVa = transform.targetVa();
+        int colorInt = color.getUInt32();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawSwingConeLimits(transformVa, swingYHalfAngle, swingZHalfAngle,
+                edgeLength, colorInt, csOrdinal, drawModeOrdinal);
+    }
+
+    /**
+     * Draw the rotation-limits pyramid of a {@code SwingTwistConstraintPart}.
+     *
+     * @param transform the desired transform from constraint coordinates to
+     * system coordinates (not null, unaffected)
+     * @param minSwingYAngle the desired Y-axis swing-angle lower limit (in
+     * radians)
+     * @param maxSwingYAngle the desired Y-axis swing-angle upper limit (in
+     * radians)
+     * @param minSwingZAngle the desired Z-axis swing-angle lower limit (in
+     * radians)
+     * @param maxSwingZAngle the desired Z-axis swing-angle upper limit (in
+     * radians)
+     * @param edgeLength the desired length of the edges of the pyramid
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawSwingPyramidLimits(
+            RMat44Arg transform, float minSwingYAngle, float maxSwingYAngle,
+            float minSwingZAngle, float maxSwingZAngle, float edgeLength,
+            ConstColor color, ECastShadow castShadow, EDrawMode drawMode) {
+        long transformVa = transform.targetVa();
+        int colorInt = color.getUInt32();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawSwingPyramidLimits(transformVa, minSwingYAngle, maxSwingYAngle,
+                minSwingZAngle, maxSwingZAngle, edgeLength,
+                colorInt, csOrdinal, drawModeOrdinal);
+    }
+
+    /**
+     * Draw the specified tapered cylinder.
+     *
+     * @param transform the desired transform from local coordinates to system
+     * coordinates (not null, unaffected)
+     * @param top the local Y coordinate of the center of the top
+     * @param bottom the local Y coordinate of the center of the bottom
+     * @param topRadius the radius of the top
+     * @param bottomRadius the radius of the bottom
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawTaperedCylinder(RMat44Arg transform, float top,
+            float bottom, float topRadius, float bottomRadius, ConstColor color,
+            ECastShadow castShadow, EDrawMode drawMode) {
+        long transformVa = transform.targetVa();
+        int colorInt = color.getUInt32();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawTaperedCylinder(transformVa, top, bottom, topRadius, bottomRadius,
+                colorInt, csOrdinal, drawModeOrdinal);
+    }
+
+    /**
+     * Draw the specified 3-D text. (native method: DrawText3D)
      *
      * @param location the location of the text (not null, unaffected)
      * @param text the text to display (not null)
@@ -446,6 +592,24 @@ abstract public class DebugRenderer extends NonCopyable {
         double v3z = v3.zz();
         int colorInt = color.getUInt32();
         drawTriangle(v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, colorInt);
+    }
+
+    /**
+     * Draw the specified unit sphere.
+     *
+     * @param transform the desired transform from local to system coordinates
+     * (not null, unaffected)
+     * @param color the desired color (not null, unaffected)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawUnitSphere(RMat44Arg transform, ConstColor color,
+            ECastShadow castShadow, EDrawMode drawMode) {
+        long transformVa = transform.targetVa();
+        int colorInt = color.getUInt32();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawUnitSphere(transformVa, colorInt, csOrdinal, drawModeOrdinal);
     }
 
     /**
@@ -648,11 +812,32 @@ abstract public class DebugRenderer extends NonCopyable {
     native private static void drawMarker(
             double locX, double locY, double locZ, int colorInt, float size);
 
+    native private static void drawOpenCone(
+            double topX, double topY, double topZ, FloatBuffer floatBuffer,
+            int colorInt, int csOrdinal, int drawModeOrdinal);
+
+    native private static void drawPie(
+            double centerX, double centerY, double centerZ,
+            FloatBuffer floatBuffer, int colorInt, int csOrdinal);
+
     native private static void drawPlane(double locX, double locY, double locZ,
             float normX, float normY, float normZ, int colorInt, float size);
 
     native private static void drawSphere(double locX, double locY, double locZ,
             float radius, int colorInt, int csOrdinal, int drawModeOrdinal);
+
+    native private static void drawSwingConeLimits(long transformVa,
+            float swingYHalfAngle, float swingZHalfAngle, float edgeLength,
+            int colorInt, int csOrdinal, int drawModeOrdinal);
+
+    native private static void drawSwingPyramidLimits(
+            long transformVa, float minSwingYAngle, float maxSwingYAngle,
+            float minSwingZAngle, float maxSwingZAngle, float edgeLength,
+            int colorInt, int csOrdinal, int drawModeOrdinal);
+
+    native private static void drawTaperedCylinder(long transformVa, float top,
+            float bottom, float topRadius, float bottomRadius,
+            int colorInt, int csOrdinal, int drawModeOrdinal);
 
     native private static void drawText3d(double locX, double locY, double locZ,
             String text, int colorInt, float height);
@@ -660,6 +845,9 @@ abstract public class DebugRenderer extends NonCopyable {
     native private static void drawTriangle(double v1x, double v1y,
             double v1z, double v2x, double v2y, double v2z, double v3x,
             double v3y, double v3z, int colorInt);
+
+    native private static void drawUnitSphere(
+            long transformVa, int colorInt, int csOrdinal, int drawModeOrdinal);
 
     native private static void drawWireBoxAligned(long boxVa, int colorInt);
 
