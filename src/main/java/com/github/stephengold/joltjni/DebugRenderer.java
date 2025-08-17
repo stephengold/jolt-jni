@@ -323,7 +323,8 @@ abstract public class DebugRenderer extends NonCopyable {
         final double topX = top.xx();
         final double topY = top.yy();
         final double topZ = top.zz();
-        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get().rewind();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        floatBuffer.rewind();
         axis.put(floatBuffer);
         perpendicular.put(floatBuffer);
         floatBuffer.put(halfAngle);
@@ -370,7 +371,8 @@ abstract public class DebugRenderer extends NonCopyable {
         final double centerX = center.xx();
         final double centerY = center.yy();
         final double centerZ = center.zz();
-        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get().rewind();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        floatBuffer.rewind();
         floatBuffer.put(radius);
         normal.put(floatBuffer);
         axis.put(floatBuffer);
