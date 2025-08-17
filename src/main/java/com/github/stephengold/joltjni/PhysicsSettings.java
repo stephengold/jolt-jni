@@ -87,6 +87,8 @@ public class PhysicsSettings
      * @param fraction the desired factor (&ge;0, &le;1, default=0.2)
      */
     public void setBaumgarte(float fraction) {
+        assert fraction >= 0f && fraction <= 1f : fraction;
+
         long settingsVa = va();
         setBaumgarte(settingsVa, fraction);
     }
@@ -101,6 +103,9 @@ public class PhysicsSettings
      */
     public void setBodyPairCacheCosMaxDeltaRotationDiv2(
             float cosineOfHalfAngle) {
+        assert cosineOfHalfAngle >= 0f && cosineOfHalfAngle <= 1f
+                : cosineOfHalfAngle;
+
         long settingsVa = va();
         setBodyPairCacheCosMaxDeltaRotationDiv2(settingsVa, cosineOfHalfAngle);
     }
@@ -113,6 +118,8 @@ public class PhysicsSettings
      * @param squaredDistance the delta (in meters^2, &ge;0, default=0.001^2)
      */
     public void setBodyPairCacheMaxDeltaPositionSq(float squaredDistance) {
+        assert squaredDistance >= 0f : squaredDistance;
+
         long settingsVa = va();
         setBodyPairCacheMaxDeltaPositionSq(settingsVa, squaredDistance);
     }
@@ -148,6 +155,8 @@ public class PhysicsSettings
      * default=cos(5 deg))
      */
     public void setContactNormalCosMaxDeltaRotation(float cosine) {
+        assert cosine >= -1f && cosine <= 1f : cosine;
+
         long settingsVa = va();
         setContactNormalCosMaxDeltaRotation(settingsVa, cosine);
     }
@@ -160,6 +169,8 @@ public class PhysicsSettings
      * @param squaredDistance the distance (in meters^2, &ge;0, default=0.01^2)
      */
     public void setContactPointPreserveLambdaMaxDistSq(float squaredDistance) {
+        assert squaredDistance >= 0f : squaredDistance;
+
         long settingsVa = va();
         setContactPointPreserveLambdaMaxDistSq(settingsVa, squaredDistance);
     }
@@ -184,6 +195,8 @@ public class PhysicsSettings
      * @param distance the distance (in meters, &ge;0, default=0.25)
      */
     public void setLinearCastMaxPenetration(float distance) {
+        assert distance >= 0f : distance;
+
         long settingsVa = va();
         setLinearCastMaxPenetration(settingsVa, distance);
     }
@@ -196,6 +209,8 @@ public class PhysicsSettings
      * @param threshold the threshold (in meters, &ge;0, default=0.75)
      */
     public void setLinearCastThreshold(float threshold) {
+        assert threshold >= 0f : threshold;
+
         long settingsVa = va();
         setLinearCastThreshold(settingsVa, threshold);
     }
@@ -208,6 +223,8 @@ public class PhysicsSettings
      * @param tolerance the distance (in meters, &ge;0, default=1e-3)
      */
     public void setManifoldTolerance(float tolerance) {
+        assert tolerance >= 0f : tolerance;
+
         long settingsVa = va();
         setManifoldTolerance(settingsVa, tolerance);
     }
@@ -220,6 +237,8 @@ public class PhysicsSettings
      * @param maxPairs the size (&ge;0, default=16384)
      */
     public void setMaxInFlightBodyPairs(int maxPairs) {
+        assert maxPairs >= 0 : maxPairs;
+
         long settingsVa = va();
         setMaxInFlightBodyPairs(settingsVa, maxPairs);
     }
@@ -231,6 +250,8 @@ public class PhysicsSettings
      * @param distance the distance (in meters, &ge;0, default=0.2)
      */
     public void setMaxPenetrationDistance(float distance) {
+        assert distance >= 0f : distance;
+
         long settingsVa = va();
         setMaxPenetrationDistance(settingsVa, distance);
     }
@@ -290,6 +311,8 @@ public class PhysicsSettings
      *              default=0.03)
      */
     public void setPointVelocitySleepThreshold(float speed) {
+        assert speed >= 0f : speed;
+
         long settingsVa = va();
         setPointVelocitySleepThreshold(settingsVa, speed);
     }
@@ -301,6 +324,8 @@ public class PhysicsSettings
      * @param distance the desired distance (in meters, ≥0, default=0.02)
      */
     public void setSpeculativeContactDistance(float distance) {
+        assert distance >= 0f : distance;
+
         long settingsVa = va();
         setSpeculativeContactDistance(settingsVa, distance);
     }
@@ -340,6 +365,8 @@ public class PhysicsSettings
      *                 default=0.5)
      */
     public void setTimeBeforeSleep(float interval) {
+        assert interval >= 0f : interval;
+
         long settingsVa = va();
         setTimeBeforeSleep(settingsVa, interval);
     }
