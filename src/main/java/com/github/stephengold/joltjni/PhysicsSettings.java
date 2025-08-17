@@ -96,11 +96,13 @@ public class PhysicsSettings
      * reuse collision results from last frame.
      * (native member: mBodyPairCacheCosMaxDeltaRotationDiv2)
      *
-     * @param delta the delta (as cos(max / 2), &ge;0, default=cos(2 deg / 2))
+     * @param cosineOfHalfAngle the delta (as cos(max / 2), &ge;0,
+     * default=cos(2 deg / 2))
      */
-    public void setBodyPairCacheCosMaxDeltaRotationDiv2(float delta) {
+    public void setBodyPairCacheCosMaxDeltaRotationDiv2(
+            float cosineOfHalfAngle) {
         long settingsVa = va();
-        setBodyPairCacheCosMaxDeltaRotationDiv2(settingsVa, delta);
+        setBodyPairCacheCosMaxDeltaRotationDiv2(settingsVa, cosineOfHalfAngle);
     }
 
     /**
@@ -108,11 +110,11 @@ public class PhysicsSettings
      * reuse collision results from last frame.
      * (native member: mBodyPairCacheMaxDeltaPositionSq)
      *
-     * @param delta the delta (in meters^2, &ge;0, default=0.001^2)
+     * @param squaredDistance the delta (in meters^2, &ge;0, default=0.001^2)
      */
-    public void setBodyPairCacheMaxDeltaPositionSq(float delta) {
+    public void setBodyPairCacheMaxDeltaPositionSq(float squaredDistance) {
         long settingsVa = va();
-        setBodyPairCacheMaxDeltaPositionSq(settingsVa, delta);
+        setBodyPairCacheMaxDeltaPositionSq(settingsVa, squaredDistance);
     }
 
     /**
@@ -130,11 +132,11 @@ public class PhysicsSettings
      * Alter whether warm starting for constraints (initially applying previous
      * frames impulses) should be used. (native member: mConstraintWarmStart)
      *
-     * @param setting {@code true} to use, {@code false} to not use
+     * @param enable {@code true} to use, {@code false} to not use
      */
-    public void setConstraintWarmStart(boolean setting) {
+    public void setConstraintWarmStart(boolean enable) {
         long settingsVa = va();
-        setConstraintWarmStart(settingsVa, setting);
+        setConstraintWarmStart(settingsVa, enable);
     }
 
     /**
@@ -142,11 +144,11 @@ public class PhysicsSettings
      * different sub shapes of the same body pair to be combined.
      * (native member: mContactNormalCosMaxDeltaRotation)
      *
-     * @param delta the angle (as cos(angle), &ge;0, default=cos(5 deg))
+     * @param cosine the angle (as cos(angle), &ge;0, default=cos(5 deg))
      */
-    public void setContactNormalCosMaxDeltaRotation(float delta) {
+    public void setContactNormalCosMaxDeltaRotation(float cosine) {
         long settingsVa = va();
-        setContactNormalCosMaxDeltaRotation(settingsVa, delta);
+        setContactNormalCosMaxDeltaRotation(settingsVa, cosine);
     }
 
     /**
@@ -154,11 +156,11 @@ public class PhysicsSettings
      * preserve contact forces for warm start.
      * (native member: mContactPointPreserveLambdaMaxDistSq)
      *
-     * @param distance the distance (in meters^2, &ge;0, default=0.01^2)
+     * @param squaredDistance the distance (in meters^2, &ge;0, default=0.01^2)
      */
-    public void setContactPointPreserveLambdaMaxDistSq(float distance) {
+    public void setContactPointPreserveLambdaMaxDistSq(float squaredDistance) {
         long settingsVa = va();
-        setContactPointPreserveLambdaMaxDistSq(settingsVa, distance);
+        setContactPointPreserveLambdaMaxDistSq(settingsVa, squaredDistance);
     }
 
     /**
@@ -214,11 +216,11 @@ public class PhysicsSettings
      * the maximum number of pairs which can be in flight at a time.
      * (native member: mMaxInFlightBodyPairs)
      *
-     * @param pairs the size (&ge;0, default=16384)
+     * @param maxPairs the size (&ge;0, default=16384)
      */
-    public void setMaxInFlightBodyPairs(int pairs) {
+    public void setMaxInFlightBodyPairs(int maxPairs) {
         long settingsVa = va();
-        setMaxInFlightBodyPairs(settingsVa, pairs);
+        setMaxInFlightBodyPairs(settingsVa, maxPairs);
     }
 
     /**
@@ -239,11 +241,11 @@ public class PhysicsSettings
      * regardless of the configured value. This lets an object settle sooner.
      * (native member: mMinVelocityForRestitution)
      *
-     * @param velocity the velocity (in meters, &gt;0, default=1)
+     * @param speed the velocity (in meters, &gt;0, default=1)
      */
-    public void setMinVelocityForRestitution(float velocity) {
+    public void setMinVelocityForRestitution(float speed) {
         long settingsVa = va();
-        setMinVelocityForRestitution(settingsVa, velocity);
+        setMinVelocityForRestitution(settingsVa, speed);
     }
 
     /**
@@ -305,22 +307,22 @@ public class PhysicsSettings
      * job before spawning another. Set to {@link Integer#MAX_VALUE} for no
      * parallelism. (native member: mStepListenerBatchesPerJob)
      *
-     * @param batches the number (&ge;0, default=1)
+     * @param numBatches the number (&ge;0, default=1)
      */
-    public void setStepListenerBatchesPerJob(int batches) {
+    public void setStepListenerBatchesPerJob(int numBatches) {
         long settingsVa = va();
-        setStepListenerBatchesPerJob(settingsVa, batches);
+        setStepListenerBatchesPerJob(settingsVa, numBatches);
     }
 
     /**
      * Alter the number of step listeners to notify in each batch.
      * (native member: mStepListenersBatchSize)
      *
-     * @param size the batch size (&ge;0, default=8)
+     * @param numListeners the batch size (&ge;0, default=8)
      */
-    public void setStepListenersBatchSize(int size) {
+    public void setStepListenersBatchSize(int numListeners) {
         long settingsVa = va();
-        setStepListenersBatchSize(settingsVa, size);
+        setStepListenersBatchSize(settingsVa, numListeners);
     }
 
     /**
@@ -340,11 +342,11 @@ public class PhysicsSettings
      * narrow phase collision detection when orientation between two bodies
      * didn't change. (native member: mUseBodyPairContactCache)
      *
-     * @param setting {@code true} to enable caching, {@code false} to disable
+     * @param enable {@code true} to enable caching, {@code false} to disable
      */
-    public void setUseBodyPairContactCache(boolean setting) {
+    public void setUseBodyPairContactCache(boolean enable) {
         long settingsVa = va();
-        setUseBodyPairContactCache(settingsVa, setting);
+        setUseBodyPairContactCache(settingsVa, enable);
     }
 
     /**
@@ -850,10 +852,10 @@ public class PhysicsSettings
             long settingsVa, float fraction);
 
     native private static void setBodyPairCacheCosMaxDeltaRotationDiv2(
-            long settingsVa, float delta);
+            long settingsVa, float cosineOfHalfAngle);
 
     native private static void setBodyPairCacheMaxDeltaPositionSq(
-            long settingsVa, float delta);
+            long settingsVa, float squaredDistance);
 
     native private static void setCheckActiveEdges(
             long settingsVa, boolean check);
@@ -862,10 +864,10 @@ public class PhysicsSettings
             long settingsVa, boolean setting);
 
     native private static void setContactNormalCosMaxDeltaRotation(
-            long settingsVa, float delta);
+            long settingsVa, float cosine);
 
     native private static void setContactPointPreserveLambdaMaxDistSq(
-            long settingsVa, float distance);
+            long settingsVa, float squaredDistance);
 
     native private static void setDeterministicSimulation(
             long settingsVa, boolean setting);
@@ -880,13 +882,13 @@ public class PhysicsSettings
             long settingsVa, float tolerance);
 
     native private static void setMaxInFlightBodyPairs(
-            long settingsVa, int pairs);
+            long settingsVa, int maxPairs);
 
     native private static void setMaxPenetrationDistance(
             long settingsVa, float distance);
 
     native private static void setMinVelocityForRestitution(
-            long settingsVa, float velocity);
+            long settingsVa, float speed);
 
     native private static void setNumPositionSteps(
             long settingsVa, int numSteps);
@@ -904,10 +906,10 @@ public class PhysicsSettings
             long settingsVa, float distance);
 
     native private static void setStepListenerBatchesPerJob(
-            long settingsVa, int batches);
+            long settingsVa, int numBatches);
 
     native private static void setStepListenersBatchSize(
-            long settingsVa, int size);
+            long settingsVa, int numListeners);
 
     native private static void setTimeBeforeSleep(
             long settingsVa, float interval);

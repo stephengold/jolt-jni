@@ -422,10 +422,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setBa
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setBodyPairCacheCosMaxDeltaRotationDiv2
-  (JNIEnv *, jclass, jlong settingsVa, jfloat delta) {
+  (JNIEnv *, jclass, jlong settingsVa, jfloat cosineOfHalfAngle) {
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    pSettings->mBodyPairCacheCosMaxDeltaRotationDiv2 = delta;
+    pSettings->mBodyPairCacheCosMaxDeltaRotationDiv2 = cosineOfHalfAngle;
 }
 
 /*
@@ -434,10 +434,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setBo
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setBodyPairCacheMaxDeltaPositionSq
-  (JNIEnv *, jclass, jlong settingsVa, jfloat delta) {
+  (JNIEnv *, jclass, jlong settingsVa, jfloat squaredDistance) {
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    pSettings->mBodyPairCacheMaxDeltaPositionSq = delta;
+    pSettings->mBodyPairCacheMaxDeltaPositionSq = squaredDistance;
 }
 
 /*
@@ -470,10 +470,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setCo
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setContactNormalCosMaxDeltaRotation
-  (JNIEnv *, jclass, jlong settingsVa, jfloat delta) {
+  (JNIEnv *, jclass, jlong settingsVa, jfloat cosine) {
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    pSettings->mContactNormalCosMaxDeltaRotation = delta;
+    pSettings->mContactNormalCosMaxDeltaRotation = cosine;
 }
 
 /*
@@ -482,10 +482,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setCo
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setContactPointPreserveLambdaMaxDistSq
-  (JNIEnv *, jclass, jlong settingsVa, jfloat distance) {
+  (JNIEnv *, jclass, jlong settingsVa, jfloat squaredDistance) {
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    pSettings->mContactPointPreserveLambdaMaxDistSq = distance;
+    pSettings->mContactPointPreserveLambdaMaxDistSq = squaredDistance;
 }
 
 /*
@@ -542,10 +542,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setMa
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setMaxInFlightBodyPairs
-  (JNIEnv *, jclass, jlong settingsVa, jint pairs) {
+  (JNIEnv *, jclass, jlong settingsVa, jint maxPairs) {
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    pSettings->mMaxInFlightBodyPairs = pairs;
+    pSettings->mMaxInFlightBodyPairs = maxPairs;
 }
 
 /*
@@ -566,10 +566,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setMa
  * Signature: (JF)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setMinVelocityForRestitution
-  (JNIEnv *, jclass, jlong settingsVa, jfloat velocity) {
+  (JNIEnv *, jclass, jlong settingsVa, jfloat speed) {
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    pSettings->mMinVelocityForRestitution = velocity;
+    pSettings->mMinVelocityForRestitution = speed;
 }
 
 /*
@@ -638,10 +638,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setSp
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setStepListenerBatchesPerJob
-  (JNIEnv *, jclass, jlong settingsVa, jint batches) {
+  (JNIEnv *, jclass, jlong settingsVa, jint numBatches) {
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    pSettings->mStepListenerBatchesPerJob = batches;
+    pSettings->mStepListenerBatchesPerJob = numBatches;
 }
 
 /*
@@ -650,10 +650,10 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setSt
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSettings_setStepListenersBatchSize
-  (JNIEnv *, jclass, jlong settingsVa, jint size) {
+  (JNIEnv *, jclass, jlong settingsVa, jint numListeners) {
     PhysicsSettings * const pSettings
             = reinterpret_cast<PhysicsSettings *> (settingsVa);
-    pSettings->mStepListenersBatchSize = size;
+    pSettings->mStepListenersBatchSize = numListeners;
 }
 
 /*
