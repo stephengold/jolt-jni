@@ -48,7 +48,7 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
      * Return the maximum relative delta orientation for body pairs to be able
      * to reuse collision results from last frame. The settings are unaffected.
      *
-     * @return the delta (as cos(max angle / 2), &ge;0)
+     * @return the delta (as cos(max angle / 2), &ge;0, &le;1)
      */
     float getBodyPairCacheCosMaxDeltaRotationDiv2();
 
@@ -81,7 +81,7 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
      * different sub shapes of the same body pair to be combined. The settings
      * are unaffected.
      *
-     * @return the angle (as cos(angle), &ge;0)
+     * @return the angle (as cos(angle), &ge;-1, &le;1)
      */
     float getContactNormalCosMaxDeltaRotation();
 
@@ -199,7 +199,7 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
      * before spawning another. Set to {@link Integer#MAX_VALUE} for no
      * parallelism. The settings are unaffected.
      *
-     * @return the number (&ge;0)
+     * @return the number (&gt;0)
      */
     int getStepListenerBatchesPerJob();
 
@@ -207,7 +207,7 @@ public interface ConstPhysicsSettings extends ConstJoltPhysicsObject {
      * Get the number of step listeners to notify in each batch. The settings
      * are unaffected.
      *
-     * @return the batch size (&ge;0)
+     * @return the batch size (&gt;0)
      */
     int getStepListenersBatchSize();
 

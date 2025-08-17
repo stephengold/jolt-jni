@@ -96,7 +96,7 @@ public class PhysicsSettings
      * reuse collision results from last frame.
      * (native member: mBodyPairCacheCosMaxDeltaRotationDiv2)
      *
-     * @param cosineOfHalfAngle the delta (as cos(max / 2), &ge;0,
+     * @param cosineOfHalfAngle the delta (as cos(max / 2), &ge;0, &le;1,
      * default=cos(2 deg / 2))
      */
     public void setBodyPairCacheCosMaxDeltaRotationDiv2(
@@ -144,7 +144,8 @@ public class PhysicsSettings
      * different sub shapes of the same body pair to be combined.
      * (native member: mContactNormalCosMaxDeltaRotation)
      *
-     * @param cosine the angle (as cos(angle), &ge;0, default=cos(5 deg))
+     * @param cosine the angle (as cos(angle), &ge;-1, &le;1,
+     * default=cos(5 deg))
      */
     public void setContactNormalCosMaxDeltaRotation(float cosine) {
         long settingsVa = va();
@@ -241,9 +242,11 @@ public class PhysicsSettings
      * regardless of the configured value. This lets an object settle sooner.
      * (native member: mMinVelocityForRestitution)
      *
-     * @param speed the velocity (in meters, &gt;0, default=1)
+     * @param speed the velocity (in meters, &ge;0, default=1)
      */
     public void setMinVelocityForRestitution(float speed) {
+        assert speed >= 0f : speed;
+
         long settingsVa = va();
         setMinVelocityForRestitution(settingsVa, speed);
     }
@@ -307,9 +310,11 @@ public class PhysicsSettings
      * job before spawning another. Set to {@link Integer#MAX_VALUE} for no
      * parallelism. (native member: mStepListenerBatchesPerJob)
      *
-     * @param numBatches the number (&ge;0, default=1)
+     * @param numBatches the number (&gt;0, default=1)
      */
     public void setStepListenerBatchesPerJob(int numBatches) {
+        assert numBatches > 0 : numBatches;
+
         long settingsVa = va();
         setStepListenerBatchesPerJob(settingsVa, numBatches);
     }
@@ -318,9 +323,11 @@ public class PhysicsSettings
      * Alter the number of step listeners to notify in each batch.
      * (native member: mStepListenersBatchSize)
      *
-     * @param numListeners the batch size (&ge;0, default=8)
+     * @param numListeners the batch size (&gt;0, default=8)
      */
     public void setStepListenersBatchSize(int numListeners) {
+        assert numListeners > 0 : numListeners;
+
         long settingsVa = va();
         setStepListenersBatchSize(settingsVa, numListeners);
     }
@@ -409,13 +416,13 @@ public class PhysicsSettings
      * to reuse collision results from last frame. The settings are unaffected.
      * (native member: mBodyPairCacheCosMaxDeltaRotationDiv2)
      *
-     * @return the delta (as cos(max angle / 2), &ge;0)
+     * @return the delta (as cos(max angle / 2), &ge;0, &le;1)
      */
     @Override
     public float getBodyPairCacheCosMaxDeltaRotationDiv2() {
         long settingsVa = va();
         float result = getBodyPairCacheCosMaxDeltaRotationDiv2(settingsVa);
-        assert result >= 0 : result;
+        assert result >= 0f && result <= 1f : result;
         return result;
     }
 
@@ -469,13 +476,13 @@ public class PhysicsSettings
      * different sub shapes of the same body pair to be combined. The settings
      * are unaffected. (native member: mContactNormalCosMaxDeltaRotation)
      *
-     * @return the angle (as cos(angle), &ge;0)
+     * @return the angle (as cos(angle), &ge;-1, &le;1)
      */
     @Override
     public float getContactNormalCosMaxDeltaRotation() {
         long settingsVa = va();
         float result = getContactNormalCosMaxDeltaRotation(settingsVa);
-        assert result >= 0 : result;
+        assert result >= -1f && result <= 1f : result;
         return result;
     }
 
@@ -681,13 +688,13 @@ public class PhysicsSettings
      * parallelism. The settings are unaffected.
      * (native member: mStepListenerBatchesPerJob)
      *
-     * @return the number (&ge;0)
+     * @return the number (&gt;0)
      */
     @Override
     public int getStepListenerBatchesPerJob() {
         long settingsVa = va();
         int result = getStepListenerBatchesPerJob(settingsVa);
-        assert result >= 0 : result;
+        assert result > 0 : result;
         return result;
     }
 
@@ -695,13 +702,13 @@ public class PhysicsSettings
      * Get the number of step listeners to notify in each batch. The settings
      * are unaffected. (native member: mStepListenersBatchSize)
      *
-     * @return the batch size (&ge;0)
+     * @return the batch size (&gt;0)
      */
     @Override
     public int getStepListenersBatchSize() {
         long settingsVa = va();
         int result = getStepListenersBatchSize(settingsVa);
-        assert result >= 0 : result;
+        assert result > 0 : result;
         return result;
     }
 
