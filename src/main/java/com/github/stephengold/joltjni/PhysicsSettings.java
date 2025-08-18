@@ -465,7 +465,7 @@ public class PhysicsSettings
     public float getBodyPairCacheMaxDeltaPositionSq() {
         long settingsVa = va();
         float result = getBodyPairCacheMaxDeltaPositionSq(settingsVa);
-        assert result >= 0 : result;
+        assert result >= 0f : result;
         return result;
     }
 
@@ -523,7 +523,7 @@ public class PhysicsSettings
     public float getContactPointPreserveLambdaMaxDistSq() {
         long settingsVa = va();
         float result = getContactPointPreserveLambdaMaxDistSq(settingsVa);
-        assert result >= 0 : result;
+        assert result >= 0f : result;
         return result;
     }
 
@@ -552,7 +552,7 @@ public class PhysicsSettings
     public float getLinearCastMaxPenetration() {
         long settingsVa = va();
         float result = getLinearCastMaxPenetration(settingsVa);
-        assert result >= 0 : result;
+        assert result >= 0f : result;
         return result;
     }
 
@@ -568,7 +568,7 @@ public class PhysicsSettings
     public float getLinearCastThreshold() {
         long settingsVa = va();
         float result = getLinearCastThreshold(settingsVa);
-        assert result >= 0 : result;
+        assert result >= 0f : result;
         return result;
     }
 
@@ -583,7 +583,7 @@ public class PhysicsSettings
     public float getManifoldTolerance() {
         long settingsVa = va();
         float result = getManifoldTolerance(settingsVa);
-        assert result >= 0 : result;
+        assert result >= 0f : result;
         return result;
     }
 
@@ -612,7 +612,7 @@ public class PhysicsSettings
     public float getMaxPenetrationDistance() {
         long settingsVa = va();
         float result = getMaxPenetrationDistance(settingsVa);
-        assert result >= 0 : result;
+        assert result >= 0f : result;
         return result;
     }
 
@@ -626,7 +626,7 @@ public class PhysicsSettings
     public float getMinVelocityForRestitution() {
         long settingsVa = va();
         float result = getMinVelocityForRestitution(settingsVa);
-        assert result >= 0 : result;
+        assert result >= 0f : result;
         return result;
     }
 
