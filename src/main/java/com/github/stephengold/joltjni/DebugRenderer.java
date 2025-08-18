@@ -51,10 +51,13 @@ abstract public class DebugRenderer extends NonCopyable {
      * Instantiate with no native object assigned.
      */
     DebugRenderer() {
-        // The native object is a singleton.
-        // If a previous instance hasn't been freed,
-        // a (native) assertion failure is possible.
-
+        assert Jolt.implementsDebugRendering() :
+                "The native library doesn't implement debug rendering.";
+        /*
+         * The native object is a singleton.
+         * If a previous instance hasn't been closed,
+         * a (native) assertion failure is possible.
+         */
         if (instance != null && !JoltPhysicsObject.isCleanerStarted()) {
             instance.close();
         }
