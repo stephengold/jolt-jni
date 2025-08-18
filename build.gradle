@@ -411,14 +411,20 @@ tasks.register('runSmokeTestAll', JavaExec) {
     mainClass = 'testjoltjni.app.samples.SmokeTestAll'
 }
 
+Boolean enableNativeAccess = JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
+
 tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
     dependsOn('assemble')
     enableAssertions = true
-    jvmArgs("--enable-native-access=ALL-UNNAMED") // suppress System::load() warning
+    if (enableNativeAccess) {
+        jvmArgs('--enable-native-access=ALL-UNNAMED') // suppress System::load() warning
+    }
 }
 tasks.withType(Test).configureEach {
-    jvmArgs('--enable-native-access=ALL-UNNAMED') // suppress System::load() warning
+    if (enableNativeAccess) {
+        jvmArgs('--enable-native-access=ALL-UNNAMED') // suppress System::load() warning
+    }
 }
 test.dependsOn('assemble')
 
