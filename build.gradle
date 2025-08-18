@@ -417,6 +417,9 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
     enableAssertions = true
     jvmArgs("--enable-native-access=ALL-UNNAMED") // suppress System::load() warning
 }
+tasks.withType(Test).configureEach {
+    jvmArgs('--enable-native-access=ALL-UNNAMED') // suppress System::load() warning
+}
 test.dependsOn('assemble')
 
 // Register style-checking tasks:
