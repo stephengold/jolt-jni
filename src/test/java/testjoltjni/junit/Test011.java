@@ -61,7 +61,7 @@ public class Test011 {
                     double x2, double y2, double z2, int colorInt) {
             }
 
-            public void drawText3D(double xx, double yy, double zz, String text,
+            public void drawText3d(double xx, double yy, double zz, String text,
                     int colorInt, float height) {
             }
 
