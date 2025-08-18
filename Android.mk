@@ -122,6 +122,7 @@ $(N)/glue/cu/CustomCollidePointCollector.cpp \
 $(N)/glue/cu/CustomCollideShapeBodyCollector.cpp \
 $(N)/glue/cu/CustomCollideShapeCollector.cpp \
 $(N)/glue/cu/CustomContactListener.cpp \
+$(N)/glue/cu/CustomDebugRendererSimple.cpp \
 $(N)/glue/cu/CustomPhysicsStepListener.cpp \
 $(N)/glue/cu/CustomRayCastBodyCollector.cpp \
 $(N)/glue/cu/CustomSoftBodyContactListener.cpp \

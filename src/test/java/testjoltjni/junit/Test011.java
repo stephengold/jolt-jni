@@ -29,6 +29,7 @@ import com.github.stephengold.joltjni.CustomCollidePointCollector;
 import com.github.stephengold.joltjni.CustomCollideShapeBodyCollector;
 import com.github.stephengold.joltjni.CustomCollideShapeCollector;
 import com.github.stephengold.joltjni.CustomContactListener;
+import com.github.stephengold.joltjni.CustomDebugRendererSimple;
 import com.github.stephengold.joltjni.CustomPhysicsStepListener;
 import com.github.stephengold.joltjni.CustomRayCastBodyCollector;
 import com.github.stephengold.joltjni.CustomSoftBodyContactListener;
@@ -54,6 +55,21 @@ public class Test011 {
 
         createCustomCollectors();
         createCustomListeners();
+
+        new CustomDebugRendererSimple() {
+            public void drawLine(double x1, double y1, double z1,
+                    double x2, double y2, double z2, int colorInt) {
+            }
+
+            public void drawText3D(double xx, double yy, double zz, String text,
+                    int colorInt, float height) {
+            }
+
+            public void drawTriangle(double x1, double y1, double z1,
+                    double x2, double y2, double z2, double x3, double y3,
+                    double z3, int colorInt, int ordinal) {
+            }
+        };
 
         TestUtils.cleanup();
     }
