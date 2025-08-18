@@ -33,6 +33,7 @@ import com.github.stephengold.joltjni.CustomDebugRendererSimple;
 import com.github.stephengold.joltjni.CustomPhysicsStepListener;
 import com.github.stephengold.joltjni.CustomRayCastBodyCollector;
 import com.github.stephengold.joltjni.CustomSoftBodyContactListener;
+import com.github.stephengold.joltjni.Jolt;
 import org.junit.Test;
 import testjoltjni.TestUtils;
 
@@ -56,20 +57,22 @@ public class Test011 {
         createCustomCollectors();
         createCustomListeners();
 
-        new CustomDebugRendererSimple() {
-            public void drawLine(double x1, double y1, double z1,
-                    double x2, double y2, double z2, int colorInt) {
-            }
+        if (Jolt.implementsDebugRendering()) {
+            new CustomDebugRendererSimple() {
+                public void drawLine(double x1, double y1, double z1,
+                        double x2, double y2, double z2, int colorInt) {
+                }
 
-            public void drawText3d(double xx, double yy, double zz, String text,
-                    int colorInt, float height) {
-            }
+                public void drawText3d(double xx, double yy, double zz,
+                        String text, int colorInt, float height) {
+                }
 
-            public void drawTriangle(double x1, double y1, double z1,
-                    double x2, double y2, double z2, double x3, double y3,
-                    double z3, int colorInt, int ordinal) {
-            }
-        };
+                public void drawTriangle(double x1, double y1, double z1,
+                        double x2, double y2, double z2, double x3, double y3,
+                        double z3, int colorInt, int ordinal) {
+                }
+            };
+        }
 
         TestUtils.cleanup();
     }
