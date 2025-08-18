@@ -47,9 +47,9 @@ public class PhysicsSettings
      * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
-     *                   zero)
-     * @param owner      {@code true} &rarr; make the JVM object the owner,
-     *                   {@code false} &rarr; it isn't the owner
+     * zero)
+     * @param owner {@code true} &rarr; make the JVM object the owner,
+     * {@code false} &rarr; it isn't the owner
      */
     PhysicsSettings(long settingsVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(settingsVa) : null;
@@ -73,7 +73,7 @@ public class PhysicsSettings
      * Alter whether objects can fall asleep. (native member: mAllowSleeping)
      *
      * @param allow {@code true} to allow sleeping, {@code false} to disallow it
-     *              (default=true)
+     * (default=true)
      */
     public void setAllowSleeping(boolean allow) {
         long settingsVa = va();
@@ -103,8 +103,8 @@ public class PhysicsSettings
      */
     public void setBodyPairCacheCosMaxDeltaRotationDiv2(
             float cosineOfHalfAngle) {
-        assert cosineOfHalfAngle >= 0f && cosineOfHalfAngle <= 1f
-                : cosineOfHalfAngle;
+        assert cosineOfHalfAngle >= 0f && cosineOfHalfAngle <= 1f :
+                cosineOfHalfAngle;
 
         long settingsVa = va();
         setBodyPairCacheCosMaxDeltaRotationDiv2(settingsVa, cosineOfHalfAngle);
@@ -152,8 +152,8 @@ public class PhysicsSettings
      * Alter the maximum angle between normals to allow combining manifolds.
      * (native member: mContactNormalCosMaxDeltaRotation)
      *
-     * @param cosine the cosine of the desired rotation threshold
-     * (&ge;-1, &le;1, default=cos(pi/36))
+     * @param cosine the cosine of the desired rotation threshold (&ge;-1,
+     * &le;1, default=cos(pi/36))
      */
     public void setContactNormalCosMaxDeltaRotation(float cosine) {
         assert cosine >= -1f && cosine <= 1f : cosine;
@@ -181,7 +181,7 @@ public class PhysicsSettings
      * mDeterministicSimulation)
      *
      * @param setting {@code true} to be deterministic, {@code false} to relax
-     *                this policy (default=true)
+     * this policy (default=true)
      */
     public void setDeterministicSimulation(boolean setting) {
         long settingsVa = va();
@@ -261,8 +261,8 @@ public class PhysicsSettings
      * Alter the minimum normal speed for elastic collision. (native member:
      * mMinVelocityForRestitution)
      *
-     * @param speed the desired threshold speed (in meters per second,
-     * &ge;0, default=1)
+     * @param speed the desired threshold speed (in meters per second, &ge;0,
+     * default=1)
      */
     public void setMinVelocityForRestitution(float speed) {
         assert speed >= 0f : speed;
@@ -307,7 +307,7 @@ public class PhysicsSettings
      * (native member: mPointVelocitySleepThreshold)
      *
      * @param speed the desired speed threshold (in meters per second, &ge;0,
-     *              default=0.03)
+     * default=0.03)
      */
     public void setPointVelocitySleepThreshold(float speed) {
         assert speed >= 0f : speed;
@@ -317,8 +317,8 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the speculative contact distance.
-     * (native member: mSpeculativeContactDistance)
+     * Alter the speculative contact distance. (native member:
+     * mSpeculativeContactDistance)
      *
      * @param distance the desired distance (in meters, ≥0, default=0.02)
      */
@@ -361,7 +361,7 @@ public class PhysicsSettings
      * mTimeBeforeSleep)
      *
      * @param interval the desired time interval (in seconds, &ge;0,
-     *                 default=0.5)
+     * default=0.5)
      */
     public void setTimeBeforeSleep(float interval) {
         assert interval >= 0f : interval;
@@ -405,7 +405,6 @@ public class PhysicsSettings
         long settingsVa = va();
         setUseManifoldReduction(settingsVa, setting);
     }
-
     // *************************************************************************
     // ConstPhysicsSettings methods
 
@@ -450,6 +449,7 @@ public class PhysicsSettings
     public float getBodyPairCacheCosMaxDeltaRotationDiv2() {
         long settingsVa = va();
         float result = getBodyPairCacheCosMaxDeltaRotationDiv2(settingsVa);
+
         assert result >= 0f && result <= 1f : result;
         return result;
     }
@@ -465,6 +465,7 @@ public class PhysicsSettings
     public float getBodyPairCacheMaxDeltaPositionSq() {
         long settingsVa = va();
         float result = getBodyPairCacheMaxDeltaPositionSq(settingsVa);
+
         assert result >= 0f : result;
         return result;
     }
@@ -508,6 +509,7 @@ public class PhysicsSettings
     public float getContactNormalCosMaxDeltaRotation() {
         long settingsVa = va();
         float result = getContactNormalCosMaxDeltaRotation(settingsVa);
+
         assert result >= -1f && result <= 1f : result;
         return result;
     }
@@ -523,6 +525,7 @@ public class PhysicsSettings
     public float getContactPointPreserveLambdaMaxDistSq() {
         long settingsVa = va();
         float result = getContactPointPreserveLambdaMaxDistSq(settingsVa);
+
         assert result >= 0f : result;
         return result;
     }
@@ -552,6 +555,7 @@ public class PhysicsSettings
     public float getLinearCastMaxPenetration() {
         long settingsVa = va();
         float result = getLinearCastMaxPenetration(settingsVa);
+
         assert result >= 0f : result;
         return result;
     }
@@ -568,6 +572,7 @@ public class PhysicsSettings
     public float getLinearCastThreshold() {
         long settingsVa = va();
         float result = getLinearCastThreshold(settingsVa);
+
         assert result >= 0f : result;
         return result;
     }
@@ -583,6 +588,7 @@ public class PhysicsSettings
     public float getManifoldTolerance() {
         long settingsVa = va();
         float result = getManifoldTolerance(settingsVa);
+
         assert result >= 0f : result;
         return result;
     }
@@ -597,6 +603,7 @@ public class PhysicsSettings
     public int getMaxInFlightBodyPairs() {
         long settingsVa = va();
         int result = getMaxInFlightBodyPairs(settingsVa);
+
         assert result >= 0 : result;
         return result;
     }
@@ -612,6 +619,7 @@ public class PhysicsSettings
     public float getMaxPenetrationDistance() {
         long settingsVa = va();
         float result = getMaxPenetrationDistance(settingsVa);
+
         assert result >= 0f : result;
         return result;
     }
@@ -626,6 +634,7 @@ public class PhysicsSettings
     public float getMinVelocityForRestitution() {
         long settingsVa = va();
         float result = getMinVelocityForRestitution(settingsVa);
+
         assert result >= 0f : result;
         return result;
     }
@@ -661,8 +670,8 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the penetration slop. The settings are unaffected. (native
-     * member: mPenetrationSlop)
+     * Return the penetration slop. The settings are unaffected. (native member:
+     * mPenetrationSlop)
      *
      * @return the slop distance (in meters)
      */
@@ -700,6 +709,7 @@ public class PhysicsSettings
     public float getSpeculativeContactDistance() {
         long settingsVa = va();
         float result = getSpeculativeContactDistance(settingsVa);
+
         assert result >= 0f : result;
         return result;
     }
@@ -716,6 +726,7 @@ public class PhysicsSettings
     public int getStepListenerBatchesPerJob() {
         long settingsVa = va();
         int result = getStepListenerBatchesPerJob(settingsVa);
+
         assert result > 0 : result;
         return result;
     }
@@ -730,6 +741,7 @@ public class PhysicsSettings
     public int getStepListenersBatchSize() {
         long settingsVa = va();
         int result = getStepListenersBatchSize(settingsVa);
+
         assert result > 0 : result;
         return result;
     }
@@ -809,11 +821,9 @@ public class PhysicsSettings
     native private static float getBodyPairCacheMaxDeltaPositionSq(
             long settingsVa);
 
-    native private static boolean getCheckActiveEdges(
-            long settingsVa);
+    native private static boolean getCheckActiveEdges(long settingsVa);
 
-    native private static boolean getConstraintWarmStart(
-            long settingsVa);
+    native private static boolean getConstraintWarmStart(long settingsVa);
 
     native private static float getContactNormalCosMaxDeltaRotation(
             long settingsVa);
@@ -821,26 +831,19 @@ public class PhysicsSettings
     native private static float getContactPointPreserveLambdaMaxDistSq(
             long settingsVa);
 
-    native private static boolean getDeterministicSimulation(
-            long settingsVa);
+    native private static boolean getDeterministicSimulation(long settingsVa);
 
-    native private static float getLinearCastMaxPenetration(
-            long settingsVa);
+    native private static float getLinearCastMaxPenetration(long settingsVa);
 
-    native private static float getLinearCastThreshold(
-            long settingsVa);
+    native private static float getLinearCastThreshold(long settingsVa);
 
-    native private static float getManifoldTolerance(
-            long settingsVa);
+    native private static float getManifoldTolerance(long settingsVa);
 
-    native private static int getMaxInFlightBodyPairs(
-            long settingsVa);
+    native private static int getMaxInFlightBodyPairs(long settingsVa);
 
-    native private static float getMaxPenetrationDistance(
-            long settingsVa);
+    native private static float getMaxPenetrationDistance(long settingsVa);
 
-    native private static float getMinVelocityForRestitution(
-            long settingsVa);
+    native private static float getMinVelocityForRestitution(long settingsVa);
 
     native private static int getNumPositionSteps(long settingsVa);
 
@@ -853,22 +856,17 @@ public class PhysicsSettings
 
     native private static float getSpeculativeContactDistance(long settingsVa);
 
-    native private static int getStepListenerBatchesPerJob(
-            long settingsVa);
+    native private static int getStepListenerBatchesPerJob(long settingsVa);
 
-    native private static int getStepListenersBatchSize(
-            long settingsVa);
+    native private static int getStepListenersBatchSize(long settingsVa);
 
     native private static float getTimeBeforeSleep(long settingsVa);
 
-    native private static boolean getUseBodyPairContactCache(
-            long settingsVa);
+    native private static boolean getUseBodyPairContactCache(long settingsVa);
 
-    native private static boolean getUseLargeIslandSplitter(
-            long settingsVa);
+    native private static boolean getUseLargeIslandSplitter(long settingsVa);
 
-    native private static boolean getUseManifoldReduction(
-            long settingsVa);
+    native private static boolean getUseManifoldReduction(long settingsVa);
 
     native private static void setAllowSleeping(
             long settingsVa, boolean allow);

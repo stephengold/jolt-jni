@@ -146,7 +146,6 @@ public class Test004 {
         Assert.assertTrue(settings.hasAssignedNativeObject());
         Assert.assertNotEquals(0L, settings.targetVa());
 
-
         Assert.assertTrue(settings.getAllowSleeping());
         Assert.assertEquals(0.2f, settings.getBaumgarte(), 0f);
         Assert.assertEquals(Jolt.cos(Jolt.JPH_PI / 180f),
