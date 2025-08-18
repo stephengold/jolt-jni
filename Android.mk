@@ -169,6 +169,7 @@ $(N)/glue/j/JobSystemThreadPool.cpp \
 $(N)/glue/j/Joint.cpp \
 $(N)/glue/j/JointState.cpp \
 $(N)/glue/j/Jolt.cpp \
+$(N)/glue/l/Lod.cpp \
 $(N)/glue/m/MassProperties.cpp \
 $(N)/glue/m/Mat44Array.cpp \
 $(N)/glue/m/Mat44.cpp \
