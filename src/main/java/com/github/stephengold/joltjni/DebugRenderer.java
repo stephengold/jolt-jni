@@ -544,7 +544,7 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
-     * Draw the specified 3-D text.
+     * Draw the specified 3-D text. (native method: DrawText3D)
      *
      * @param location the location of the text (not null, unaffected)
      * @param text the text to display (not null)
@@ -556,7 +556,7 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
-     * Draw the specified 3-D text.
+     * Draw the specified 3-D text. (native method: DrawText3D)
      *
      * @param location the location of the text (not null, unaffected)
      * @param text the text to display (not null)
@@ -574,7 +574,7 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
-     * Draw the specified 3-D triangle.
+     * Draw the specified 3-D triangle. (native method: DrawText3D)
      *
      * @param v1 the location of the first vertex (not null, unaffected)
      * @param v2 the location of the 2nd vertex (not null, unaffected)

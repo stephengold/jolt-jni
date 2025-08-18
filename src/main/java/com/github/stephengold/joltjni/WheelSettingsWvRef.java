@@ -149,7 +149,7 @@ final public class WheelSettingsWvRef
     }
 
     /**
-     * Access the type information of the target. (native method: getRTTI)
+     * Access the type information of the target. (native method: GetRTTI)
      *
      * @return a new object
      */

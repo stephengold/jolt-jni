@@ -70,7 +70,7 @@ public class PhysicsSettings
     // new methods exposed
 
     /**
-     * Alter whether objects can go to sleep. (native member: mAllowSleeping)
+     * Alter whether objects can fall asleep. (native member: mAllowSleeping)
      *
      * @param allow {@code true} to allow sleeping, {@code false} to disallow it
      *              (default=true)
@@ -94,12 +94,12 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the maximum relative delta orientation for body pairs to be able to
-     * reuse collision results from last frame.
-     * (native member: mBodyPairCacheCosMaxDeltaRotationDiv2)
+     * Return the maximum rotation to reuse collision results from the previous
+     * step. The settings are unaffected. (native member:
+     * mBodyPairCacheCosMaxDeltaRotationDiv2)
      *
-     * @param cosineOfHalfAngle the delta (as cos(max / 2), &ge;0, &le;1,
-     * default=cos(2 deg / 2))
+     * @param cosineOfHalfAngle the cosine of half the desired maximum rotation
+     * angle (&ge;0, &le;1, default=cos(pi/180))
      */
     public void setBodyPairCacheCosMaxDeltaRotationDiv2(
             float cosineOfHalfAngle) {
@@ -111,11 +111,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the maximum relative delta position for body pairs to be able to
-     * reuse collision results from last frame.
-     * (native member: mBodyPairCacheMaxDeltaPositionSq)
+     * Alter the maximum translation to reuse collision results from the
+     * previous step. (native member: mBodyPairCacheMaxDeltaPositionSq)
      *
-     * @param squaredDistance the delta (in meters^2, &ge;0, default=0.001^2)
+     * @param squaredDistance the desired squared distance (in square meters,
+     * &ge;0, default=1e-6)
      */
     public void setBodyPairCacheMaxDeltaPositionSq(float squaredDistance) {
         assert squaredDistance >= 0f : squaredDistance;
@@ -125,10 +125,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter whether collision against non-active (shared) edges is allowed.
-     * Mainly for debugging the algorithm. (native member: mCheckActiveEdges)
+     * Enable or disable collision checking with non-active (shared) edges.
+     * (native member: mCheckActiveEdges)
      *
-     * @param check {@code true} to check, {@code false} to not check
+     * @param check {@code true} to enable checking, or {@code false} to disable
+     * it (default=true)
      */
     public void setCheckActiveEdges(boolean check) {
         long settingsVa = va();
@@ -139,7 +140,8 @@ public class PhysicsSettings
      * Alter whether warm starting for constraints (initially applying previous
      * frames impulses) should be used. (native member: mConstraintWarmStart)
      *
-     * @param enable {@code true} to use, {@code false} to not use
+     * @param enable {@code true} to enable warm start, or {@code false} to
+     * disable it (default=true)
      */
     public void setConstraintWarmStart(boolean enable) {
         long settingsVa = va();
@@ -147,12 +149,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the maximum angle between normals that allows manifolds between
-     * different sub shapes of the same body pair to be combined.
+     * Alter the maximum angle between normals to allow combining manifolds.
      * (native member: mContactNormalCosMaxDeltaRotation)
      *
-     * @param cosine the angle (as cos(angle), &ge;-1, &le;1,
-     * default=cos(5 deg))
+     * @param cosine the cosine of the desired rotation threshold
+     * (&ge;-1, &le;1, default=cos(pi/36))
      */
     public void setContactNormalCosMaxDeltaRotation(float cosine) {
         assert cosine >= -1f && cosine <= 1f : cosine;
@@ -162,11 +163,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the maximum allowed distance between old and new contact points to
-     * preserve contact forces for warm start.
+     * Alter the maximum translation of a contact point for warm starting.
      * (native member: mContactPointPreserveLambdaMaxDistSq)
      *
-     * @param squaredDistance the distance (in meters^2, &ge;0, default=0.01^2)
+     * @param squaredDistance the square of the desired threshold distance (in
+     * meters squared, &ge;0, default=1e-4)
      */
     public void setContactPointPreserveLambdaMaxDistSq(float squaredDistance) {
         assert squaredDistance >= 0f : squaredDistance;
@@ -188,11 +189,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the maximum penetration of a linear cast, which is the fraction of
-     * a body's inner radius that may penetrate another body.
+     * Alter the amount of penetration tolerated by a {@code LinearCast} cast.
      * (native member: mLinearCastMaxPenetration)
      *
-     * @param distance the distance (in meters, &ge;0, default=0.25)
+     * @param distance the penetration distance to tolerate (as a fraction of
+     * the body's inner radius, &ge;0, default=0.25)
      */
     public void setLinearCastMaxPenetration(float distance) {
         assert distance >= 0f : distance;
@@ -202,11 +203,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the linear cast threshold, the fraction of a body's inner radius it
-     * must move per step to enable casting for the LinearCast motion quality.
-     * (native member: mLinearCastThreshold)
+     * Alter the amount of translation to activate casting for
+     * {@code LinearCast} motion quality. (native member: mLinearCastThreshold)
      *
-     * @param threshold the threshold (in meters, &ge;0, default=0.75)
+     * @param threshold the desired translation threshold (as a fraction of the
+     * body's inner radius, &ge;0, default=0.75)
      */
     public void setLinearCastThreshold(float threshold) {
         assert threshold >= 0f : threshold;
@@ -216,9 +217,9 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the maximum distance used to determine if two points are on the
-     * same plane for determining the contact manifold between two faces.
-     * (native member: mManifoldTolerance)
+     * Alter the tolerance for 2 points to be considered coplanar when
+     * determining the contact manifold between two faces. (native member:
+     * mManifoldTolerance)
      *
      * @param tolerance the distance (in meters, &ge;0, default=1e-3)
      */
@@ -230,11 +231,10 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the size of the body pairs array, which corresponds to
-     * the maximum number of pairs which can be in flight at a time.
-     * (native member: mMaxInFlightBodyPairs)
+     * Alter the capacity of the in-flight body pairs array. (native member:
+     * mMaxInFlightBodyPairs)
      *
-     * @param maxPairs the size (&ge;0, default=16384)
+     * @param maxPairs the number of pairs to allocate (&ge;0, default=16384)
      */
     public void setMaxInFlightBodyPairs(int maxPairs) {
         assert maxPairs >= 0 : maxPairs;
@@ -244,10 +244,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the maximum distance to correct in a single iteration when solving
-     * position constraints. (native member: mMaxPenetrationDistance)
+     * Alter the maximum correction when solving position constraints. (native
+     * member: mMaxPenetrationDistance)
      *
-     * @param distance the distance (in meters, &ge;0, default=0.2)
+     * @param distance the desired distance threshold (in meters per iteration,
+     * &ge;0, default=0.2)
      */
     public void setMaxPenetrationDistance(float distance) {
         assert distance >= 0f : distance;
@@ -257,13 +258,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the minimum velocity needed for a collision to be elastic. If the
-     * relative velocity between colliding objects in the direction of the
-     * contact normal is lower than this, the restitution will be zero
-     * regardless of the configured value. This lets an object settle sooner.
-     * (native member: mMinVelocityForRestitution)
+     * Alter the minimum normal speed for elastic collision. (native member:
+     * mMinVelocityForRestitution)
      *
-     * @param speed the velocity (in meters, &ge;0, default=1)
+     * @param speed the desired threshold speed (in meters per second,
+     * &ge;0, default=1)
      */
     public void setMinVelocityForRestitution(float speed) {
         assert speed >= 0f : speed;
@@ -331,11 +330,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the number of step listener batches that can be allocated to one
-     * job before spawning another. Set to {@link Integer#MAX_VALUE} for no
-     * parallelism. (native member: mStepListenerBatchesPerJob)
+     * Alter the number of step-listener batches that can be notified by a
+     * single job. (native member: mStepListenerBatchesPerJob)
      *
-     * @param numBatches the number (&gt;0, default=1)
+     * @param numBatches the desired number of batches, or INT_MAX to serialize
+     * step listeners (&ge;0, default=1)
      */
     public void setStepListenerBatchesPerJob(int numBatches) {
         assert numBatches > 0 : numBatches;
@@ -345,10 +344,10 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the number of step listeners to notify in each batch.
+     * Alter the maximum number of step listeners notified in a single batch.
      * (native member: mStepListenersBatchSize)
      *
-     * @param numListeners the batch size (&gt;0, default=8)
+     * @param numListeners the desired number of listeners (&ge;0, default=8)
      */
     public void setStepListenersBatchSize(int numListeners) {
         assert numListeners > 0 : numListeners;
@@ -358,8 +357,8 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the time interval before an object can fall asleep. (native
-     * member: mTimeBeforeSleep)
+     * Alter the time interval before a body can fall asleep. (native member:
+     * mTimeBeforeSleep)
      *
      * @param interval the desired time interval (in seconds, &ge;0,
      *                 default=0.5)
@@ -372,11 +371,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter whether to use the body pair cache, which removes the need for
-     * narrow phase collision detection when orientation between two bodies
-     * didn't change. (native member: mUseBodyPairContactCache)
+     * Enable or disable the body-pair cache. (native member:
+     * mUseBodyPairContactCache)
      *
-     * @param enable {@code true} to enable caching, {@code false} to disable
+     * @param enable {@code true} to enable the cache, or {@code false} to
+     * disable it (default=true)
      */
     public void setUseBodyPairContactCache(boolean enable) {
         long settingsVa = va();
@@ -384,10 +383,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter whether large islands should be split into smaller parallel batches
-     * of work. (native member: mUseLargeIslandSplitter)
+     * Enable or disable island splitting. (native member:
+     * mUseLargeIslandSplitter)
      *
-     * @param setting {@code true} to enable splitting, {@code false} to disable
+     * @param setting {@code true} to enable splitting, or {@code false} to
+     * disable it (default=true)
      */
     public void setUseLargeIslandSplitter(boolean setting) {
         long settingsVa = va();
@@ -395,10 +395,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter whether to reduce manifolds with similar contact normals into one
-     * contact manifold. (native member: mUseManifoldReduction)
+     * Enable or disable manifold reduction. (native member:
+     * mUseManifoldReduction)
      *
-     * @param setting {@code true} to enable reduction, {@code false} to disable
+     * @param setting {@code true} to enable reduction, or {@code false} to
+     * disable it (default=true)
      */
     public void setUseManifoldReduction(boolean setting) {
         long settingsVa = va();
@@ -424,10 +425,10 @@ public class PhysicsSettings
 
     /**
      * Return the Baumgarte stabilization factor, the fraction of position error
-     * that is corrected in each update. The settings are unaffected. (native
+     * that is corrected in each iteration. The settings are unaffected. (native
      * member: mBaumgarte)
      *
-     * @return the factor (&ge;0, &le;1)
+     * @return the fraction (&ge;0, &le;1)
      */
     @Override
     public float getBaumgarte() {
@@ -439,11 +440,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the maximum relative delta orientation for body pairs to be able
-     * to reuse collision results from last frame. The settings are unaffected.
-     * (native member: mBodyPairCacheCosMaxDeltaRotationDiv2)
+     * Return the maximum rotation for reusing collision results from the
+     * previous step. The settings are unaffected. (native member:
+     * mBodyPairCacheCosMaxDeltaRotationDiv2)
      *
-     * @return the delta (as cos(max angle / 2), &ge;0, &le;1)
+     * @return the cosine of half the maximum rotation angle (&ge;0, &le;1)
      */
     @Override
     public float getBodyPairCacheCosMaxDeltaRotationDiv2() {
@@ -454,11 +455,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the maximum relative delta position for body pairs to be able to
-     * reuse collision results from last frame. The settings are unaffected.
-     * (native member: mBodyPairCacheMaxDeltaPositionSq)
+     * Return the maximum translation for re-using collision results from the
+     * previous step. The settings are unaffected. (native member:
+     * mBodyPairCacheMaxDeltaPositionSq)
      *
-     * @return the delta (in meters^2, &ge;0)
+     * @return the square of the maximum displacement (in square meters, &ge;0)
      */
     @Override
     public float getBodyPairCacheMaxDeltaPositionSq() {
@@ -469,11 +470,10 @@ public class PhysicsSettings
     }
 
     /**
-     * Test whether collision against non-active (shared) edges is allowed.
-     * Mainly for debugging the algorithm. The settings are unaffected.
-     * (native member: mCheckActiveEdges)
+     * Test whether collisions with non-active (shared) edges are checked. The
+     * settings are unaffected. (native member: mCheckActiveEdges)
      *
-     * @return {@code true} if allowed, otherwise {@code false}
+     * @return {@code true} if checked, otherwise {@code false}
      */
     @Override
     public boolean getCheckActiveEdges() {
@@ -484,11 +484,10 @@ public class PhysicsSettings
     }
 
     /**
-     * Test whether warm starting for constraints (initially applying previous
-     * frames impulses) should be used. The settings are unaffected.
-     * (native member: mConstraintWarmStart)
+     * Test whether warm starting is enabled for constraints. The settings are
+     * unaffected. (native member: mConstraintWarmStart)
      *
-     * @return {@code true} if it should, otherwise {@code false}
+     * @return {@code true} if enabled, otherwise {@code false}
      */
     @Override
     public boolean getConstraintWarmStart() {
@@ -499,11 +498,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the maximum angle between normals that allows manifolds between
-     * different sub shapes of the same body pair to be combined. The settings
+     * Return the maximum angle between normals for which manifolds from
+     * different sub shapes of the same body pair will be combined. The settings
      * are unaffected. (native member: mContactNormalCosMaxDeltaRotation)
      *
-     * @return the angle (as cos(angle), &ge;-1, &le;1)
+     * @return the cosine of the threshold angle (&ge;-1, &le;1)
      */
     @Override
     public float getContactNormalCosMaxDeltaRotation() {
@@ -514,11 +513,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the maximum allowed distance between old and new contact points to
-     * preserve contact forces for warm start. The settings are unaffected.
-     * (native member: mContactPointPreserveLambdaMaxDistSq)
+     * Return the maximum translation of a contact point for warm starting. The
+     * settings are unaffected. (native member:
+     * mContactPointPreserveLambdaMaxDistSq)
      *
-     * @return the distance (in meters^2, &ge;0)
+     * @return the square of the threshold distance (in meters squared, &ge;0)
      */
     @Override
     public float getContactPointPreserveLambdaMaxDistSq() {
@@ -543,11 +542,11 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the maximum penetration of a linear cast, which is the fraction of
-     * a body's inner radius that may penetrate another body. The settings are
-     * unaffected. (native member: mLinearCastMaxPenetration)
+     * Return the amount of penetration tolerated by a {@code LinearCast} cast.
+     * The settings are unaffected. (native member: mLinearCastMaxPenetration)
      *
-     * @return the distance (in meters, &ge;0)
+     * @return the penetration distance (as a fraction of the body's inner
+     * radius, &ge;0)
      */
     @Override
     public float getLinearCastMaxPenetration() {
@@ -558,12 +557,12 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the linear cast threshold, the fraction of a body's inner radius
-     * it must move per step to enable casting for the LinearCast motion
-     * quality. The settings are unaffected.
-     * (native member: mLinearCastThreshold)
+     * Return the amount of translation that triggers casting for
+     * {@code LinearCast} motion quality. The settings are unaffected. (native
+     * member: mLinearCastThreshold)
      *
-     * @return the threshold (in meters, &ge;0)
+     * @return the translation distance per step (as a fraction of the body's
+     * inner radius, &ge;0)
      */
     @Override
     public float getLinearCastThreshold() {
@@ -574,9 +573,9 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the maximum distance used to determine if two points are on the
-     * same plane for determining the contact manifold between two faces. The
-     * settings are unaffected. (native member: mManifoldTolerance)
+     * Return the tolerance used to determine whether 2 points are coplanar when
+     * calculating the contact manifold between 2 faces. The settings are
+     * unaffected. (native member: mManifoldTolerance)
      *
      * @return the distance (in meters, &ge;0)
      */
@@ -589,11 +588,10 @@ public class PhysicsSettings
     }
 
     /**
-     * Get the size of the body pairs array, which corresponds to
-     * the maximum number of pairs which can be in flight at a time.
-     * The settings are unaffected. (native member: mMaxInFlightBodyPairs)
+     * Return the maximum number of in-flight body pairs. The settings are
+     * unaffected. (native member: mMaxInFlightBodyPairs)
      *
-     * @return the size (&ge;0)
+     * @return the limit (&ge;0)
      */
     @Override
     public int getMaxInFlightBodyPairs() {
@@ -605,10 +603,10 @@ public class PhysicsSettings
 
     /**
      * Return the maximum distance to correct in a single iteration when solving
-     * position constraints. The settings are unaffected.
-     * (native member: mMaxPenetrationDistance)
+     * position constraints. The settings are unaffected. (native member:
+     * mMaxPenetrationDistance)
      *
-     * @return the distance (in meters, &ge;0)
+     * @return the distance per iteration (in meters, &ge;0)
      */
     @Override
     public float getMaxPenetrationDistance() {
@@ -619,13 +617,10 @@ public class PhysicsSettings
     }
 
     /**
-     * Return the minimum velocity needed for a collision to be elastic. If the
-     * relative velocity between colliding objects in the direction of the
-     * contact normal is lower than this, the restitution will be zero
-     * regardless of the configured value. This lets an object settle sooner.
-     * (native member: mMinVelocityForRestitution)
+     * Return the minimum normal speed for elastic collision. The settings are
+     * unaffected. (native member: mMinVelocityForRestitution)
      *
-     * @return the velocity (in meters, &gt;0)
+     * @return the speed threshold (in meters per second, &ge;0)
      */
     @Override
     public float getMinVelocityForRestitution() {
@@ -710,12 +705,12 @@ public class PhysicsSettings
     }
 
     /**
-     * Get the number of step listener batches that can be allocated to one job
-     * before spawning another. Set to {@link Integer#MAX_VALUE} for no
-     * parallelism. The settings are unaffected.
-     * (native member: mStepListenerBatchesPerJob)
+     * Return the maximum number of step-listener batches notified by a single
+     * job. The settings are unaffected. (native member:
+     * mStepListenerBatchesPerJob)
      *
-     * @return the number (&gt;0)
+     * @return the number of batches per job (&gt;0), or {@code INT_MAX} to
+     * serialize step listeners
      */
     @Override
     public int getStepListenerBatchesPerJob() {
@@ -726,10 +721,10 @@ public class PhysicsSettings
     }
 
     /**
-     * Get the number of step listeners to notify in each batch. The settings
-     * are unaffected. (native member: mStepListenersBatchSize)
+     * Return the maximum number of step listeners notified in a single batch.
+     * The settings are unaffected. (native member: mStepListenersBatchSize)
      *
-     * @return the batch size (&gt;0)
+     * @return the number of listeners (&gt;0)
      */
     @Override
     public int getStepListenersBatchSize() {
@@ -740,8 +735,8 @@ public class PhysicsSettings
     }
 
     /**
-     * Alter the time interval before an object can fall asleep. The settings
-     * are unaffected. (native member: mTimeBeforeSleep)
+     * Return the time interval before a body can fall asleep. The settings are
+     * unaffected. (native member: mTimeBeforeSleep)
      *
      * @return the interval (in seconds, &ge;0)
      */
@@ -755,12 +750,10 @@ public class PhysicsSettings
     }
 
     /**
-     * Test whether to use the body pair cache, which removes the need for
-     * narrow phase collision detection when orientation between two bodies
-     * didn't change. The settings are unaffected.
+     * Test whether the body-pair cache is enabled. The settings are unaffected.
      * (native member: mUseBodyPairContactCache)
      *
-     * @return {@code true} if it will be used, otherwise {@code false}
+     * @return {@code true} if it is enabled, otherwise {@code false}
      */
     @Override
     public boolean getUseBodyPairContactCache() {
@@ -771,11 +764,10 @@ public class PhysicsSettings
     }
 
     /**
-     * Test whether large islands should be split into smaller parallel batches
-     * of work. The settings are unaffected.
+     * Test whether island splitting is enabled. The settings are unaffected.
      * (native member: mUseLargeIslandSplitter)
      *
-     * @return {@code true} if they should be split, otherwise {@code false}
+     * @return {@code true} if enabled, otherwise {@code false}
      */
     @Override
     public boolean getUseLargeIslandSplitter() {
@@ -786,11 +778,10 @@ public class PhysicsSettings
     }
 
     /**
-     * Test whether to reduce manifolds with similar contact normals into one
-     * contact manifold. The settings are unaffected.
+     * Test whether manifold reduction is enabled. The settings are unaffected.
      * (native member: mUseManifoldReduction)
      *
-     * @return {@code true} if they will be reduced, otherwise {@code false}
+     * @return {@code true} if enabled, otherwise {@code false}
      */
     @Override
     public boolean getUseManifoldReduction() {
