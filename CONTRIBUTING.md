@@ -41,6 +41,11 @@ In my experience, however, static analysis rarely yields much value.
 The most valuable contributions come from people actively using the library,
 because users have insight into what's important and what isn't.
 
+Before editing the source code, please read relevant documentation, including
+https://stephengold.github.io/jolt-jni-docs/jolt-jni-en/English/implementation.html[the implementation page],
+https://stephengold.github.io/jolt-jni-docs/jolt-jni-en/English/lexicon.html#_naming_conventions[the naming-convention section],
+and the "code style" section below.
+
 Before investing hours of effort in a pull request,
 please communicate with the project manager
 to determine whether the changes you envision are actually desired.
