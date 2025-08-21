@@ -344,23 +344,23 @@ abstract public class ConstraintSettings
     // *************************************************************************
     // native methods
 
-    native private static int getConstraintPriority(long settingsVa);
+    native static int getConstraintPriority(long settingsVa);
 
-    native private static int getConstraintSubType(long settingsVa);
+    native static int getConstraintSubType(long settingsVa);
 
-    native private static int getControllerType(long settingsVa);
+    native static int getControllerType(long settingsVa);
 
-    native private static float getDrawConstraintSize(long settingsVa);
+    native static float getDrawConstraintSize(long settingsVa);
 
-    native private static boolean getEnabled(long settingsVa);
+    native static boolean getEnabled(long settingsVa);
 
-    native private static int getNumPositionStepsOverride(long settingsVa);
+    native static int getNumPositionStepsOverride(long settingsVa);
 
-    native private static int getNumVelocityStepsOverride(long settingsVa);
+    native static int getNumVelocityStepsOverride(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
 
-    native private static void saveBinaryState(long settingsVa, long streamVa);
+    native static void saveBinaryState(long settingsVa, long streamVa);
 
     native private static void setConstraintPriority(
             long settingsVa, int level);

@@ -25,10 +25,19 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Vehicle/VehicleConstraint.h"
+
 #include "auto/com_github_stephengold_joltjni_VehicleConstraintSettings.h"
+#include "auto/com_github_stephengold_joltjni_VehicleConstraintSettingsRef.h"
 #include "glue/glue.h"
 
 using namespace JPH;
+
+IMPLEMENT_REF(VehicleConstraintSettings,
+  Java_com_github_stephengold_joltjni_VehicleConstraintSettingsRef_copy,
+  Java_com_github_stephengold_joltjni_VehicleConstraintSettingsRef_createDefault,
+  Java_com_github_stephengold_joltjni_VehicleConstraintSettingsRef_free,
+  Java_com_github_stephengold_joltjni_VehicleConstraintSettingsRef_getPtr,
+  Java_com_github_stephengold_joltjni_VehicleConstraintSettingsRef_toRefC)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings

@@ -294,44 +294,43 @@ public class VehicleConstraintSettings
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
-    native private static void addWheel(
+    native static void addWheel(
             long constraintSettingsVa, long wheelSettingsVa);
 
-    native private static long createCopy(long originalVa);
+    native static long createCopy(long originalVa);
 
-    native private static long createDefault();
+    native static long createDefault();
 
-    native private static long getAntiRollBar(long settingsVa, int index);
+    native static long getAntiRollBar(long settingsVa, int index);
 
-    native private static long getController(long constraintSettingsVa);
+    native static long getController(long constraintSettingsVa);
 
-    native private static void getForward(
-            long settingsVa, FloatBuffer storeFloats);
+    native static void getForward(long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getMaxPitchRollAngle(long settingsVa);
+    native static float getMaxPitchRollAngle(long settingsVa);
 
-    native private static int getNumAntiRollBars(long settingsVa);
+    native static int getNumAntiRollBars(long settingsVa);
 
-    native private static int getNumWheels(long settingsVa);
+    native static int getNumWheels(long settingsVa);
 
-    native private static void getUp(long settingsVa, FloatBuffer storeFloats);
+    native static void getUp(long settingsVa, FloatBuffer storeFloats);
 
-    native private static long getWheel(
+    native static long getWheel(
             long constraintSettingsVa, int wheelIndex);
 
-    native private static void setController(
+    native static void setController(
             long constraintSettingsVa, long controllerSettingsVa);
 
-    native private static void setForward(
+    native static void setForward(
             long settingsVa, float dx, float dy, float dz);
 
-    native private static void setMaxPitchRollAngle(
-            long settingsVa, float angle);
+    native static void setMaxPitchRollAngle(long settingsVa, float angle);
 
-    native private static void setNumAntiRollBars(long settingsVa, int count);
+    native static void setNumAntiRollBars(long settingsVa, int count);
 
-    native private static void setUp(
-            long settingsVa, float dx, float dy, float dz);
+    native static void setUp(long settingsVa, float dx, float dy, float dz);
+
+    native private static long toRef(long settingsVa);
 }
