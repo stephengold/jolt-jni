@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.readonly.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
@@ -72,7 +73,7 @@ public void PostPhysicsUpdate(float inDeltaTime)
 		BodyLockRead body_lock=new BodyLockRead(mPhysicsSystem.getBodyLockInterface(), id);
 		if (body_lock.succeeded())
 		{
-			 Body body = body_lock.getBody();
+			ConstBody body = body_lock.getBody();
 			String allowed_dofs_str = "";
 			int allowed_dofs = body.getMotionProperties().getAllowedDofs();
 			if ((allowed_dofs & EAllowedDofs.TranslationX) == EAllowedDofs.TranslationX)

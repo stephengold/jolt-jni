@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.shapes;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.readonly.*;
 import com.github.stephengold.joltjni.std.*;
 import java.nio.*;
 import testjoltjni.app.samples.*;
@@ -143,7 +144,7 @@ public void SaveState(StateRecorder inStream)
 		BodyLockRead lock=new BodyLockRead(mPhysicsSystem.getBodyLockInterface(), id);
 		if (lock.succeeded())
 		{
-			final Body body = lock.getBody();
+			final ConstBody body = lock.getBody();
 
 			// Write the shape as a binary string
 			StringStream data=new StringStream();

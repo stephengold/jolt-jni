@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.readonly.*;
 import com.github.stephengold.joltjni.std.OfStream;
 import java.io.*;
 import java.util.*;
@@ -382,7 +383,7 @@ public static void main(  String[] argv)throws IOException
 					for (int id : body_ids.toList())
 					{
 						BodyLockRead lock=new BodyLockRead(bli, id);
-						final Body body = lock.getBody();
+						final ConstBody body = lock.getBody();
 						if (!body.isStatic())
 							detLog(id + ": p: " + body.getPosition() + " r: " + body.getRotation() + " v: " + body.getLinearVelocity() + " w: " + body.getAngularVelocity());
 						lock.releaseLock();

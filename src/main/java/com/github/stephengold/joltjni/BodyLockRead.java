@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBody;
+
 /**
  * Lock a body for read-only access.
  *
@@ -57,7 +59,7 @@ public class BodyLockRead extends NonCopyable {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public Body getBody() {
+    public ConstBody getBody() {
         long lockVa = va();
         long bodyVa = getBody(lockVa);
         PhysicsSystem system = bli.getSystem();
