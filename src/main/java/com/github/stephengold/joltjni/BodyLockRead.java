@@ -114,8 +114,7 @@ public class BodyLockRead extends NonCopyable {
     // *************************************************************************
     // native private methods
 
-    native private static long createBodyLockRead(
-            long interfaceVa, int bodyId);
+    native private static long createBodyLockRead(long interfaceVa, int bodyId);
 
     native private static void free(long lockVa);
 

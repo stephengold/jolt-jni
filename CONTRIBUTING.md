@@ -96,6 +96,7 @@ In practice, this entails:
 + preserving the blank line and auto-generated comment before each function, and
 + avoiding blank lines in function bodies.
 
+
 ## Conclusions
 
 Thanks for your attention. Your cooperation will be appreciated!
