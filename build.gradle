@@ -21,8 +21,8 @@ ext {
     downloadedJoltZip = "downloads/JoltPhysics-${joltTag}.zip"
     downloadedVhacdZip = 'downloads/v-hacd-4.1.0.zip'
 
-    groupID = 'com.github.stephengold'
     baseName = "${artifact}-${jjVersion}" // for artifacts
+    groupID = 'com.github.stephengold'
     websiteUrl = 'https://github.com/stephengold/jolt-jni'
 }
 
@@ -425,6 +425,7 @@ tasks.withType(Test).configureEach {
     if (enableNativeAccess) {
         jvmArgs('--enable-native-access=ALL-UNNAMED') // suppress System::load() warning
     }
+    //testLogging.showStandardStreams = true
 }
 test.dependsOn('assemble')
 

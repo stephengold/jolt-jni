@@ -102,7 +102,7 @@ android {
 }
 
 dependencies {
-    testImplementation(libs.jsnaploader)
+    testImplementation(libs.jsnaploader) // to identify the OS and CPU
     testImplementation(libs.junit4)      // framework for automated testing
 }
 
