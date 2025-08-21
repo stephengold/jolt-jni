@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
 import java.nio.FloatBuffer;
 
@@ -56,6 +57,227 @@ final public class WheelSettingsTvRef
     WheelSettingsTvRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Alter where to apply tire forces. (native attribute:
+     * mEnableSuspensionForcePoint)
+     *
+     * @param enable {@code true} to apply at the configured suspension-force
+     * point, {@code false} to apply at the wheel's point of contact
+     * (default=false)
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setEnableSuspensionForcePoint(boolean enable) {
+        long settingsVa = targetVa();
+        WheelSettings.setEnableSuspensionForcePoint(settingsVa, enable);
+
+        return this;
+    }
+
+    /**
+     * Alter the wheel's friction in the sideways direction. (native attribute:
+     * mLateralFriction)
+     *
+     * @param friction the desired friction (default=2)
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setLateralFriction(float friction) {
+        long settingsVa = targetVa();
+        WheelSettingsTv.setLateralFriction(settingsVa, friction);
+
+        return this;
+    }
+
+    /**
+     * Alter the wheel's friction in the forward direction. (native attribute:
+     * mLongitudinalFriction)
+     *
+     * @param friction the desired friction (default=4)
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setLongitudinalFriction(float friction) {
+        long settingsVa = targetVa();
+        WheelSettingsTv.setLongitudinalFriction(settingsVa, friction);
+
+        return this;
+    }
+
+    /**
+     * Relocate the attachment point. (native attribute: mPosition)
+     *
+     * @param position the location of the attachment point (in the body's local
+     * coordinates, not null, unaffected, default=(0,0,0))
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setPosition(Vec3Arg position) {
+        long settingsVa = targetVa();
+        float x = position.getX();
+        float y = position.getY();
+        float z = position.getZ();
+        WheelSettings.setPosition(settingsVa, x, y, z);
+
+        return this;
+    }
+
+    /**
+     * Alter the radius of the wheel. (native attribute: mRadius)
+     *
+     * @param radius the desired radius (in meters, default=0.3)
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setRadius(float radius) {
+        long settingsVa = targetVa();
+        WheelSettings.setRadius(settingsVa, radius);
+
+        return this;
+    }
+
+    /**
+     * Alter the steering axis (upward direction). (native attribute:
+     * mSteeringAxis)
+     *
+     * @param direction the desired direction (not null, unaffected,
+     * default=(0,1,0))
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setSteeringAxis(Vec3Arg direction) {
+        long settingsVa = targetVa();
+        float dx = direction.getX();
+        float dy = direction.getY();
+        float dz = direction.getZ();
+        WheelSettings.setSteeringAxis(settingsVa, dx, dy, dz);
+
+        return this;
+    }
+
+    /**
+     * Alter the downward direction of the suspension. (native attribute:
+     * mSuspensionDirection)
+     *
+     * @param direction the desired direction (not null, unaffected,
+     * default=(0,-1,0))
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setSuspensionDirection(Vec3Arg direction) {
+        long settingsVa = targetVa();
+        float dx = direction.getX();
+        float dy = direction.getY();
+        float dz = direction.getZ();
+        WheelSettings.setSuspensionDirection(settingsVa, dx, dy, dz);
+
+        return this;
+    }
+
+    /**
+     * Alter the location where tire forces will be applied if the force-point
+     * option is enabled. (native attribute: mSuspensionForcePoint)
+     *
+     * @param location the desired location (in the body coordinates, not null,
+     * unaffected, default=(0,0,0))
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setSuspensionForcePoint(Vec3Arg location) {
+        long settingsVa = targetVa();
+        float x = location.getX();
+        float y = location.getY();
+        float z = location.getZ();
+        WheelSettings.setSuspensionForcePoint(settingsVa, x, y, z);
+
+        return this;
+    }
+
+    /**
+     * Alter the maximum displacement from the attachment point. (native
+     * attribute: mSuspensionMaxLength)
+     *
+     * @param length the desired limit (in meters, default=0.5)
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setSuspensionMaxLength(float length) {
+        long settingsVa = targetVa();
+        WheelSettings.setSuspensionMaxLength(settingsVa, length);
+
+        return this;
+    }
+
+    /**
+     * Alter the minimum displacement from the attachment point. (native
+     * attribute: mSuspensionMinLength)
+     *
+     * @param length the desired limit (in meters, default=0.3)
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setSuspensionMinLength(float length) {
+        long settingsVa = targetVa();
+        WheelSettings.setSuspensionMinLength(settingsVa, length);
+
+        return this;
+    }
+
+    /**
+     * Alter the suspension preload length. (native attribute:
+     * mSuspensionPreloadLength)
+     *
+     * @param length the desired offset (in meters, default=0)
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setSuspensionPreloadLength(float length) {
+        long settingsVa = targetVa();
+        WheelSettings.setSuspensionPreloadLength(settingsVa, length);
+
+        return this;
+    }
+
+    /**
+     * Alter the forward direction when steering is neutral. (native attribute:
+     * mWheelForward)
+     *
+     * @param direction the desired direction (not null, unaffected,
+     * default=(0,0,1))
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setWheelForward(Vec3Arg direction) {
+        long settingsVa = targetVa();
+        float dx = direction.getX();
+        float dy = direction.getY();
+        float dz = direction.getZ();
+        WheelSettings.setWheelForward(settingsVa, dx, dy, dz);
+
+        return this;
+    }
+
+    /**
+     * Alter the "up" direction when steering is neutral. (native attribute:
+     * mWheelUp)
+     *
+     * @param direction the desired direction (not null, unaffected,
+     * default=(0,1,0))
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setWheelUp(Vec3Arg direction) {
+        long settingsVa = targetVa();
+        float dx = direction.getX();
+        float dy = direction.getY();
+        float dz = direction.getZ();
+        WheelSettings.setWheelUp(settingsVa, dx, dy, dz);
+
+        return this;
+    }
+
+    /**
+     * Alter the width of the wheel. (native attribute: mWidth)
+     *
+     * @param width the desired width (in meters, default=0.1)
+     * @return the current reference, for chaining
+     */
+    public WheelSettingsTvRef setWidth(float width) {
+        long settingsVa = targetVa();
+        WheelSettings.setWidth(settingsVa, width);
+
+        return this;
     }
     // *************************************************************************
     // ConstWheelSettingsTv methods
