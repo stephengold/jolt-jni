@@ -53,6 +53,7 @@ $(N)/glue/bo/BodyInterface.cpp \
 $(N)/glue/bo/BodyLockInterfaceLocking.cpp \
 $(N)/glue/bo/BodyLockInterfaceNoLock.cpp \
 $(N)/glue/bo/BodyLockMultiRead.cpp \
+$(N)/glue/bo/BodyLockMultiWrite.cpp \
 $(N)/glue/bo/BodyLockRead.cpp \
 $(N)/glue/bo/BodyLockWrite.cpp \
 $(N)/glue/bo/BodyManager.cpp \
