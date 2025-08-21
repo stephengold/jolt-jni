@@ -70,8 +70,8 @@ final public class CharacterSettingsRef extends Ref {
     }
 
     /**
-     * Return the address of native {@code CharacterSettings}. No objects are
-     * affected.
+     * Return the address of the native {@code CharacterSettings}. No objects
+     * are affected.
      *
      * @return a virtual address (not zero)
      */

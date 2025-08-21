@@ -577,7 +577,7 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
-     * Draw the specified 3-D triangle. (native method: DrawText3D)
+     * Draw the specified 3-D triangle.
      *
      * @param v1 the location of the first vertex (not null, unaffected)
      * @param v2 the location of the 2nd vertex (not null, unaffected)

@@ -69,7 +69,7 @@ public class BodyLockRead extends NonCopyable {
     }
 
     /**
-     * Explicitly release the lock. Normally this is done in the destructor.
+     * Explicitly release the lock.
      */
     public void releaseLock() {
         long lockVa = va();
