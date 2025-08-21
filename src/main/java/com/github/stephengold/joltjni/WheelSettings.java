@@ -556,37 +556,35 @@ abstract public class WheelSettings
 
     native static void saveBinaryState(long settingsVa, long streamVa);
 
-    native private static void setEnableSuspensionForcePoint(
+    native static void setEnableSuspensionForcePoint(
             long settingsVa, boolean enable);
 
-    native private static void setPosition(
+    native static void setPosition(
             long settingsVa, float x, float y, float z);
 
-    native private static void setRadius(long settingsVa, float radius);
+    native static void setRadius(long settingsVa, float radius);
 
-    native private static void setSteeringAxis(
+    native static void setSteeringAxis(
             long settingsVa, float dx, float dy, float dz);
 
-    native private static void setSuspensionDirection(
+    native static void setSuspensionDirection(
             long settingsVa, float dx, float dy, float dz);
 
-    native private static void setSuspensionForcePoint(
+    native static void setSuspensionForcePoint(
             long settingsVa, float x, float y, float z);
 
-    native private static void setSuspensionMaxLength(
+    native static void setSuspensionMaxLength(long settingsVa, float length);
+
+    native static void setSuspensionMinLength(long settingsVa, float length);
+
+    native static void setSuspensionPreloadLength(
             long settingsVa, float length);
 
-    native private static void setSuspensionMinLength(
-            long settingsVa, float length);
-
-    native private static void setSuspensionPreloadLength(
-            long settingsVa, float length);
-
-    native private static void setWheelForward(
+    native static void setWheelForward(
             long settingsVa, float dx, float dy, float dz);
 
-    native private static void setWheelUp(
+    native static void setWheelUp(
             long settingsVa, float dx, float dy, float dz);
 
-    native private static void setWidth(long settingsVa, float width);
+    native static void setWidth(long settingsVa, float width);
 }
