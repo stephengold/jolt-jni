@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.template.Ref;
 
 /**
@@ -52,6 +53,19 @@ final public class CharacterSettingsRef extends Ref {
     CharacterSettingsRef(long refVa, boolean owner) {
         Runnable freeingAction = owner ? () -> free(refVa) : null;
         setVirtualAddress(refVa, freeingAction);
+    }
+    // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Replace the shape. (native attribute: mShape)
+     *
+     * @param shape the desired shape (not null, unaffected, default=null)
+     */
+    public void setShape(ConstShape shape) {
+        long settingsVa = targetVa();
+        long shapeVa = shape.targetVa();
+        CharacterBaseSettings.setShape(settingsVa, shapeVa);
     }
     // *************************************************************************
     // Ref methods

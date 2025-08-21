@@ -199,7 +199,7 @@ public class CharacterBaseSettings
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static boolean getEnhancedInternalEdgeRemoval(
             long settingsVa);
@@ -227,7 +227,7 @@ public class CharacterBaseSettings
 
     native private static void setMaxSlopeAngle(long settingsVa, float angle);
 
-    native private static void setShape(long settingsVa, long shapeVa);
+    native static void setShape(long settingsVa, long shapeVa);
 
     native private static void setSupportingVolume(
             long settingsVa, float nx, float ny, float nz, float c);
