@@ -76,6 +76,7 @@ import com.github.stephengold.joltjni.TwoBodyConstraintSettingsRef;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleAntiRollBar;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
+import com.github.stephengold.joltjni.VehicleConstraintSettingsRef;
 import com.github.stephengold.joltjni.VehicleControllerSettingsRef;
 import com.github.stephengold.joltjni.VehicleDifferentialSettings;
 import com.github.stephengold.joltjni.Vertex;
@@ -1283,7 +1284,7 @@ public class Test012 {
         vds.setRightWheel(3);
 
         VehicleConstraintSettings vcs = new VehicleConstraintSettings();
-        final Ref originalRef = vcs.toRef();
+        final VehicleConstraintSettingsRef originalRef = vcs.toRef();
         vcs.addWheels(wheels);
         vcs.setController(wvcs);
 

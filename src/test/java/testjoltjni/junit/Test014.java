@@ -24,6 +24,7 @@ package testjoltjni.junit;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
+import com.github.stephengold.joltjni.VehicleConstraintSettingsRef;
 import com.github.stephengold.joltjni.VehicleControllerSettingsRef;
 import com.github.stephengold.joltjni.WheelSettings;
 import com.github.stephengold.joltjni.WheelSettingsTv;
@@ -33,7 +34,6 @@ import com.github.stephengold.joltjni.WheelSettingsWvRef;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
-import com.github.stephengold.joltjni.template.Ref;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -71,7 +71,7 @@ public class Test014 {
      */
     private static void doVehicleConstraintSettings() {
         VehicleConstraintSettings vcs = new VehicleConstraintSettings();
-        final Ref ref = vcs.toRef();
+        final VehicleConstraintSettingsRef ref = vcs.toRef();
 
         testVehicleConstraintSettingsDefaults(vcs);
         testVehicleConstraintSettingsSetters(vcs);

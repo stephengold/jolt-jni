@@ -294,6 +294,24 @@ public class VehicleConstraintSettings
         return result;
     }
     // *************************************************************************
+    // ConstraintSettings methods
+
+    /**
+     * Create a counted reference to the native
+     * {@code VehicleConstraintSettings}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public VehicleConstraintSettingsRef toRef() {
+        long settingsVa = va();
+        long refVa = toRef(settingsVa);
+        VehicleConstraintSettingsRef result
+                = new VehicleConstraintSettingsRef(refVa, true);
+
+        return result;
+    }
+    // *************************************************************************
     // native methods
 
     native static void addWheel(

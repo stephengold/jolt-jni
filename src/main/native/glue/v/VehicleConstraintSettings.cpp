@@ -249,3 +249,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSett
     const Vec3 up(dx, dy, dz);
     pSettings->mUp = up;
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
+ * Method:    toRef
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_toRef
+  (JNIEnv *, jclass, jlong settingsVa) {
+    VehicleConstraintSettings * const pSettings
+            = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
+    Ref<VehicleConstraintSettings> * const pResult
+            = new Ref<VehicleConstraintSettings>(pSettings);
+    TRACE_NEW("Ref<VehicleConstraintSettings>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
