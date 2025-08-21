@@ -23,8 +23,8 @@ package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
-import static com.github.stephengold.joltjni.Jolt.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics modify-mass test.
  * <p>

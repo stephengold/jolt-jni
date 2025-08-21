@@ -23,8 +23,8 @@ package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.std.*;
-import static com.github.stephengold.joltjni.Jolt.*;
 import testjoltjni.app.samples.*;
+import static com.github.stephengold.joltjni.Jolt.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics change object-layer test.
  * <p>

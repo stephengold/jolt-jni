@@ -23,10 +23,10 @@ package testjoltjni.app.samples.softbody;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import java.util.function.BiFunction;
+import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
 import static com.github.stephengold.joltjni.std.Std.*;
-import testjoltjni.app.samples.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics soft-body
  * skinned-constraint test.

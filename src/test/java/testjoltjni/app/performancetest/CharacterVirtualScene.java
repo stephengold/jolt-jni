@@ -23,9 +23,9 @@ package testjoltjni.app.performancetest;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
+import java.util.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
-import java.util.*;
 
 /**
  * A line-for-line Java translation of the Jolt-Physics CharacterVirtual

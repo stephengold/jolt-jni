@@ -25,9 +25,9 @@ import com.github.stephengold.joltjni.enumerate.*;
 import com.github.stephengold.joltjni.readonly.*;
 import com.github.stephengold.joltjni.std.*;
 import java.util.*;
+import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
 import static com.github.stephengold.joltjni.operator.Op.*;
-import testjoltjni.app.samples.*;
 /**
  * A line-for-line Java translation of the Jolt-Physics Cosserat-rod constraint
  * test.
