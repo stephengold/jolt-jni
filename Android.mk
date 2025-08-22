@@ -146,6 +146,7 @@ $(N)/glue/f/Face.cpp \
 $(N)/glue/f/FixedConstraintSettings.cpp \
 $(N)/glue/g/GearConstraint.cpp \
 $(N)/glue/g/GearConstraintSettings.cpp \
+$(N)/glue/g/Geometry.cpp \
 $(N)/glue/g/GetTrianglesContext.cpp \
 $(N)/glue/g/GroupFilter.cpp \
 $(N)/glue/g/GroupFilterResult.cpp \
