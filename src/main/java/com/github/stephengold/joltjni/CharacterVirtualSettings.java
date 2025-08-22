@@ -502,85 +502,81 @@ public class CharacterVirtualSettings
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static long createCharacterVirtualSettings();
 
     native private static long createCopy(long originalVa);
 
-    native private static int getBackFaceMode(long settingsVa);
+    native static int getBackFaceMode(long settingsVa);
 
-    native private static float getCharacterPadding(long settingsVa);
+    native static float getCharacterPadding(long settingsVa);
 
-    native private static float getCollisionTolerance(long settingsVa);
+    native static float getCollisionTolerance(long settingsVa);
 
-    native private static float getHitReductionCosMaxAngle(long settingsVa);
+    native static float getHitReductionCosMaxAngle(long settingsVa);
 
-    native private static int getInnerBodyLayer(long settingsVa);
+    native static int getInnerBodyLayer(long settingsVa);
 
-    native private static long getInnerBodyShape(long settingsVa);
+    native static long getInnerBodyShape(long settingsVa);
 
-    native private static float getMass(long settingsVa);
+    native static float getMass(long settingsVa);
 
-    native private static int getMaxCollisionIterations(long settingsVa);
+    native static int getMaxCollisionIterations(long settingsVa);
 
-    native private static int getMaxConstraintIterations(long settingsVa);
+    native static int getMaxConstraintIterations(long settingsVa);
 
-    native private static int getMaxNumHits(long settingsVa);
+    native static int getMaxNumHits(long settingsVa);
 
-    native private static float getMaxStrength(long settingsVa);
+    native static float getMaxStrength(long settingsVa);
 
-    native private static float getMinTimeRemaining(long settingsVa);
+    native static float getMinTimeRemaining(long settingsVa);
 
-    native private static float getPenetrationRecoverySpeed(long settingsVa);
+    native static float getPenetrationRecoverySpeed(long settingsVa);
 
-    native private static float getPredictiveContactDistance(long settingsVa);
+    native static float getPredictiveContactDistance(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
 
-    native private static void getShapeOffset(
-            long settingsVa, FloatBuffer storeFloats);
+    native static void getShapeOffset(long settingsVa, FloatBuffer storeFloats);
 
-    native private static void setBackFaceMode(long settingsVa, int ordinal);
+    native static void setBackFaceMode(long settingsVa, int ordinal);
 
-    native private static void setCharacterPadding(
-            long settingsVa, float padding);
+    native static void setCharacterPadding(long settingsVa, float padding);
 
-    native private static void setCollisionTolerance(
-            long settingsVa, float tolerance);
+    native static void setCollisionTolerance(long settingsVa, float tolerance);
 
     native private static void setEmbedded(long settingsVa);
 
-    native private static void setHitReductionCosMaxAngle(
+    native static void setHitReductionCosMaxAngle(
             long settingsVa, float cosine);
 
-    native private static void setInnerBodyLayer(
-            long settingsVa, int objectLayer);
+    native static void setInnerBodyLayer(long settingsVa, int objectLayer);
 
-    native private static void setInnerBodyShape(long settingsVa, long shapeVa);
+    native static void setInnerBodyShape(long settingsVa, long shapeVa);
 
-    native private static void setMass(long settingsVa, float mass);
+    native static void setMass(long settingsVa, float mass);
 
-    native private static void setMaxCollisionIterations(
+    native static void setMaxCollisionIterations(
             long settingsVa, int numIterations);
 
-    native private static void setMaxConstraintIterations(
+    native static void setMaxConstraintIterations(
             long settingsVa, int numIterations);
 
-    native private static void setMaxNumHits(long settingsVa, int numHits);
+    native static void setMaxNumHits(long settingsVa, int numHits);
 
-    native private static void setMaxStrength(long settingsVa, float force);
+    native static void setMaxStrength(long settingsVa, float force);
 
-    native private static void setMinTimeRemaining(
+    native static void setMinTimeRemaining(
             long settingsVa, float interval);
 
-    native private static void setPenetrationRecoverySpeed(
+    native static void setPenetrationRecoverySpeed(
             long settingsVa, float fraction);
 
-    native private static void setPredictiveContactDistance(
+    native static void setPredictiveContactDistance(
             long settingsVa, float distance);
 
-    native private static void setShapeOffset(
+    native static void setShapeOffset(
             long settingsVa, float x, float y, float z);
 
     native private static long toRef(long settingsVa);

@@ -199,30 +199,26 @@ public class CharacterBaseSettings
     // *************************************************************************
     // native methods
 
-    native private static boolean getEnhancedInternalEdgeRemoval(
-            long settingsVa);
+    native static boolean getEnhancedInternalEdgeRemoval(long settingsVa);
 
-    native private static float getMaxSlopeAngle(long settingsVa);
+    native static float getMaxSlopeAngle(long settingsVa);
 
-    native private static long getShape(long settingsVa);
+    native static long getShape(long settingsVa);
 
     native static void getSupportingVolume(
             long settingsVa, FloatBuffer storeFloats);
 
     native static void getUp(long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getUpY(long settingsVa);
-
-    native private static void setEnhancedInternalEdgeRemoval(
+    native static void setEnhancedInternalEdgeRemoval(
             long settingsVa, boolean remove);
 
-    native private static void setMaxSlopeAngle(long settingsVa, float angle);
+    native static void setMaxSlopeAngle(long settingsVa, float angle);
 
     native static void setShape(long settingsVa, long shapeVa);
 
-    native private static void setSupportingVolume(
+    native static void setSupportingVolume(
             long settingsVa, float nx, float ny, float nz, float c);
 
-    native private static void setUp(
-            long settingsVa, float dx, float dy, float dz);
+    native static void setUp(long settingsVa, float dx, float dy, float dz);
 }
