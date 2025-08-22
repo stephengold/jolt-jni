@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.readonly.ConstCharacterBaseSettings;
 import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to create a {@code CharacterBase}.
@@ -173,11 +174,9 @@ public class CharacterBaseSettings
     @Override
     public Plane getSupportingVolume() {
         long settingsVa = va();
-        float c = getSupportingVolumeC(settingsVa);
-        float nx = getSupportingVolumeNx(settingsVa);
-        float ny = getSupportingVolumeNy(settingsVa);
-        float nz = getSupportingVolumeNz(settingsVa);
-        Plane result = new Plane(c, nx, ny, nz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSupportingVolume(settingsVa, storeFloats);
+        Plane result = new Plane(storeFloats);
 
         return result;
     }
@@ -191,10 +190,9 @@ public class CharacterBaseSettings
     @Override
     public Vec3 getUp() {
         long settingsVa = va();
-        float dx = getUpX(settingsVa);
-        float dy = getUpY(settingsVa);
-        float dz = getUpZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getUp(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -208,19 +206,12 @@ public class CharacterBaseSettings
 
     native private static long getShape(long settingsVa);
 
-    native private static float getSupportingVolumeC(long settingsVa);
+    native static void getSupportingVolume(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getSupportingVolumeNx(long settingsVa);
-
-    native private static float getSupportingVolumeNy(long settingsVa);
-
-    native private static float getSupportingVolumeNz(long settingsVa);
-
-    native private static float getUpX(long settingsVa);
+    native static void getUp(long settingsVa, FloatBuffer storeFloats);
 
     native private static float getUpY(long settingsVa);
-
-    native private static float getUpZ(long settingsVa);
 
     native private static void setEnhancedInternalEdgeRemoval(
             long settingsVa, boolean remove);

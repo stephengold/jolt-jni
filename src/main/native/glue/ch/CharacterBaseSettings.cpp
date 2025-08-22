@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Character/CharacterBase.h"
 #include "auto/com_github_stephengold_joltjni_CharacterBaseSettings.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -70,93 +71,38 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
- * Method:    getSupportingVolumeC
- * Signature: (J)F
+ * Method:    getSupportingVolume
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getSupportingVolumeC
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getSupportingVolume
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const CharacterBaseSettings * const pSettings
             = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
-    const float result = pSettings->mSupportingVolume.GetConstant();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Plane& result = pSettings->mSupportingVolume;
+    const Vec3 normal = result.GetNormal();
+    pFloats[0] = normal.GetX();
+    pFloats[1] = normal.GetY();
+    pFloats[2] = normal.GetZ();
+    pFloats[3] = result.GetConstant();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
- * Method:    getSupportingVolumeNx
- * Signature: (J)F
+ * Method:    getUp
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getSupportingVolumeNx
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getSupportingVolumeNx
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const CharacterBaseSettings * const pSettings
             = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
-    const float result = pSettings->mSupportingVolume.GetNormal().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
- * Method:    getSupportingVolumeNy
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getSupportingVolumeNy
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterBaseSettings * const pSettings
-            = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
-    const float result = pSettings->mSupportingVolume.GetNormal().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
- * Method:    getSupportingVolumeNz
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getSupportingVolumeNz
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterBaseSettings * const pSettings
-            = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
-    const float result = pSettings->mSupportingVolume.GetNormal().GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
- * Method:    getUpX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getUpX
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterBaseSettings * const pSettings
-            = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
-    const float result = pSettings->mUp.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
- * Method:    getUpY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getUpY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterBaseSettings * const pSettings
-            = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
-    const float result = pSettings->mUp.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
- * Method:    getUpZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getUpZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterBaseSettings * const pSettings
-            = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
-    const float result = pSettings->mUp.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mUp;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
