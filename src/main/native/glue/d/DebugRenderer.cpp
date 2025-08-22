@@ -155,6 +155,58 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawCyl
 
 /*
  * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawGeometryNoBounds
+ * Signature: (JIJIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawGeometryNoBounds
+  (JNIEnv *, jclass, jlong transformVa, jint colorInt, jlong geometryVa,
+  jint cullOrdinal, jint csOrdinal, jint drawModeOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    const Color color(colorInt);
+    DebugRenderer::Geometry * const pGeometry
+            = reinterpret_cast<DebugRenderer::Geometry *> (geometryVa);
+    DebugRenderer::GeometryRef geometryRef(pGeometry);
+    const DebugRenderer::ECullMode cullMode
+            = (DebugRenderer::ECullMode) cullOrdinal;
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    const DebugRenderer::EDrawMode drawMode
+            = (DebugRenderer::EDrawMode) drawModeOrdinal;
+    DebugRenderer::sInstance->DrawGeometry(
+            *pTransform, color, geometryRef, cullMode, castShadow, drawMode);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    drawGeometryWithBounds
+ * Signature: (JJFIJIII)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_drawGeometryWithBounds
+  (JNIEnv *, jclass, jlong transformVa, jlong boxVa, jfloat lodScaleSq,
+  jint colorInt, jlong geometryVa, jint cullOrdinal, jint csOrdinal,
+  jint drawModeOrdinal) {
+#ifdef JPH_DEBUG_RENDERER
+    const RMat44 * const pTransform = reinterpret_cast<RMat44 *> (transformVa);
+    const AABox * const pBox = reinterpret_cast<AABox *> (boxVa);
+    const Color color(colorInt);
+    DebugRenderer::Geometry * const pGeometry
+            = reinterpret_cast<DebugRenderer::Geometry *> (geometryVa);
+    DebugRenderer::GeometryRef geometryRef(pGeometry);
+    const DebugRenderer::ECullMode cullMode
+            = (DebugRenderer::ECullMode) cullOrdinal;
+    const DebugRenderer::ECastShadow castShadow
+            = (DebugRenderer::ECastShadow) csOrdinal;
+    const DebugRenderer::EDrawMode drawMode
+            = (DebugRenderer::EDrawMode) drawModeOrdinal;
+    DebugRenderer::sInstance->DrawGeometry(*pTransform, *pBox, lodScaleSq,
+            color, geometryRef, cullMode, castShadow, drawMode);
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
  * Method:    drawLine
  * Signature: (DDDDDDI)V
  */

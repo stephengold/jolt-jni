@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.ECastShadow;
+import com.github.stephengold.joltjni.enumerate.ECullMode;
 import com.github.stephengold.joltjni.enumerate.EDrawMode;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstColor;
@@ -284,6 +285,58 @@ abstract public class DebugRenderer extends NonCopyable {
         int drawModeOrdinal = drawMode.ordinal();
         drawCylinder(transformVa, halfHeight, radius, colorInt, csOrdinal,
                 drawModeOrdinal);
+    }
+
+    /**
+     * Draw the specified geometry.
+     *
+     * @param transform to transform the geometry to world space (not null,
+     * unaffected)
+     * @param modelColor the desired color (not null, unaffected)
+     * @param geometry the geometry to draw (not null, unaffected)
+     * @param cullMode the desired culling mode for polygons (not null)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawGeometry(RMat44Arg transform, ConstColor modelColor,
+            GeometryRef geometry, ECullMode cullMode, ECastShadow castShadow,
+            EDrawMode drawMode) {
+        long transformVa = transform.targetVa();
+        int colorInt = modelColor.getUInt32();
+        long geometryVa = geometry.targetVa();
+        int cullOrdinal = cullMode.ordinal();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawGeometryNoBounds(transformVa, colorInt, geometryVa, cullOrdinal,
+                csOrdinal, drawModeOrdinal);
+    }
+
+    /**
+     * Draw the specified geometry with the specified bounds and scaling.
+     *
+     * @param transform to transform the geometry to world space (not null,
+     * unaffected)
+     * @param worldSpaceBounds the bounds of the region to render (not null,
+     * unaffected)
+     * @param lodScaleSq the square of the level-of-detail scale
+     * @param modelColor the desired color (not null, unaffected)
+     * @param geometry the geometry to draw (not null, unaffected)
+     * @param cullMode the desired culling mode for polygons (not null)
+     * @param castShadow the desired shadow mode (not null, default=On)
+     * @param drawMode the desired draw mode (not null, default=Solid)
+     */
+    public void drawGeometry(RMat44Arg transform, ConstAaBox worldSpaceBounds,
+            float lodScaleSq, ConstColor modelColor, GeometryRef geometry,
+            ECullMode cullMode, ECastShadow castShadow, EDrawMode drawMode) {
+        long transformVa = transform.targetVa();
+        int colorInt = modelColor.getUInt32();
+        long boxVa = worldSpaceBounds.targetVa();
+        long geometryVa = geometry.targetVa();
+        int cullOrdinal = cullMode.ordinal();
+        int csOrdinal = castShadow.ordinal();
+        int drawModeOrdinal = drawMode.ordinal();
+        drawGeometryWithBounds(transformVa, boxVa, lodScaleSq, colorInt,
+                geometryVa, cullOrdinal, csOrdinal, drawModeOrdinal);
     }
 
     /**
@@ -810,6 +863,14 @@ abstract public class DebugRenderer extends NonCopyable {
 
     native private static void drawCylinder(long transformVa, float halfHeight,
             float radius, int colorInt, int csOrdinal, int drawModeOrdinal);
+
+    native private static void drawGeometryNoBounds(
+            long transformVa, int colorInt, long geometryVa, int cullOrdinal,
+            int csOrdinal, int drawModeOrdinal);
+
+    native private static void drawGeometryWithBounds(long transformVa,
+            long boxVa, float lodScaleSq, int colorInt, long geometryVa,
+            int cullOrdinal, int csOrdinal, int drawModeOrdinal);
 
     native private static void drawLine(double fromX, double fromY,
             double fromZ, double toX, double toY, double toZ, int colorInt);
