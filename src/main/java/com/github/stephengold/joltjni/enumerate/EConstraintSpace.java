@@ -32,9 +32,9 @@ public enum EConstraintSpace {
     // values - sequence must match "Jolt/Physics/Constraints/Constraint.h"
 
     /**
-     * relative to the center of mass of the bodies - TODO rename
+     * relative to the center of mass of the bodies
      */
-    LocalToBodyCOM,
+    LocalToBodyCom,
     /**
      * in system coordinates
      */

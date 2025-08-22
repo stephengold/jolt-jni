@@ -210,7 +210,7 @@ public class Test005 {
         settings.setHalfConeAngle(0.01f);
         settings.setPoint1(new RVec3(0.02f, 0.03f, 0.04f));
         settings.setPoint2(new RVec3(0.05f, 0.06f, 0.07f));
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
+        settings.setSpace(EConstraintSpace.LocalToBodyCom);
         settings.setTwistAxis1(new Vec3(0.12f, 0.13f, 0.14f));
         settings.setTwistAxis2(new Vec3(0.15f, 0.16f, 0.17f));
 
@@ -218,7 +218,7 @@ public class Test005 {
         TestUtils.assertEquals(0.02f, 0.03f, 0.04f, settings.getPoint1(), 0f);
         TestUtils.assertEquals(0.05f, 0.06f, 0.07f, settings.getPoint2(), 0f);
         Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
+                EConstraintSpace.LocalToBodyCom, settings.getSpace());
         TestUtils.assertEquals(
                 0.12f, 0.13f, 0.14f, settings.getTwistAxis1(), 0f);
         TestUtils.assertEquals(
@@ -270,14 +270,14 @@ public class Test005 {
         settings.setMinDistance(0.01f);
         settings.setPoint1(0.02f, 0.03f, 0.04f);
         settings.setPoint2(0.05f, 0.06f, 0.07f);
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
+        settings.setSpace(EConstraintSpace.LocalToBodyCom);
 
         Assert.assertEquals(0.1f, settings.getMaxDistance(), 0f);
         Assert.assertEquals(0.01f, settings.getMinDistance(), 0f);
         TestUtils.assertEquals(0.02f, 0.03f, 0.04f, settings.getPoint1(), 0f);
         TestUtils.assertEquals(0.05f, 0.06f, 0.07f, settings.getPoint2(), 0f);
         Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
+                EConstraintSpace.LocalToBodyCom, settings.getSpace());
     }
 
     /**
@@ -314,7 +314,7 @@ public class Test005 {
         settings.setAxisY2(new Vec3(0.15f, 0.16f, 0.17f));
         settings.setPoint1(new RVec3(0.22f, 0.23f, 0.24f));
         settings.setPoint2(new RVec3(0.25f, 0.26f, 0.27f));
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
+        settings.setSpace(EConstraintSpace.LocalToBodyCom);
 
         Assert.assertTrue(settings.getAutoDetectPoint());
         TestUtils.assertEquals(0.02f, 0.03f, 0.04f, settings.getAxisX1(), 0f);
@@ -324,7 +324,7 @@ public class Test005 {
         TestUtils.assertEquals(0.22f, 0.23f, 0.24f, settings.getPoint1(), 0f);
         TestUtils.assertEquals(0.25f, 0.26f, 0.27f, settings.getPoint2(), 0f);
         Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
+                EConstraintSpace.LocalToBodyCom, settings.getSpace());
     }
 
     /**
@@ -352,7 +352,7 @@ public class Test005 {
         settings.setHingeAxis1(new Vec3(0.24f, 0.25f, 0.26f));
         settings.setHingeAxis2(new Vec3(0.27f, 0.28f, 0.29f));
         settings.setRatio(0.5f);
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
+        settings.setSpace(EConstraintSpace.LocalToBodyCom);
 
         TestUtils.assertEquals(
                 0.24f, 0.25f, 0.26f, settings.getHingeAxis1(), 0f);
@@ -360,7 +360,7 @@ public class Test005 {
                 0.27f, 0.28f, 0.29f, settings.getHingeAxis2(), 0f);
         Assert.assertEquals(0.5f, settings.getRatio(), 0f);
         Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
+                EConstraintSpace.LocalToBodyCom, settings.getSpace());
     }
 
     /**
@@ -401,7 +401,7 @@ public class Test005 {
         settings.setNormalAxis2(new Vec3(0.07f, 0.08f, 0.09f));
         settings.setPoint1(new RVec3(0.14f, 0.15f, 0.16f));
         settings.setPoint2(new RVec3(0.17f, 0.18f, 0.19f));
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
+        settings.setSpace(EConstraintSpace.LocalToBodyCom);
 
         Assert.assertEquals(0.01f, settings.getLimitsMax(), 0f);
         Assert.assertEquals(-0.02f, settings.getLimitsMin(), 0f);
@@ -417,7 +417,7 @@ public class Test005 {
         TestUtils.assertEquals(0.14f, 0.15f, 0.16f, settings.getPoint1(), 0f);
         TestUtils.assertEquals(0.17f, 0.18f, 0.19f, settings.getPoint2(), 0f);
         Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
+                EConstraintSpace.LocalToBodyCom, settings.getSpace());
     }
 
     /**
@@ -444,12 +444,12 @@ public class Test005 {
             PointConstraintSettings settings) {
         settings.setPoint1(0.22, 0.23, 0.24);
         settings.setPoint2(0.25, 0.26, 0.27);
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
+        settings.setSpace(EConstraintSpace.LocalToBodyCom);
 
         TestUtils.assertEquals(0.22f, 0.23f, 0.24f, settings.getPoint1(), 0f);
         TestUtils.assertEquals(0.25f, 0.26f, 0.27f, settings.getPoint2(), 0f);
         Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
+                EConstraintSpace.LocalToBodyCom, settings.getSpace());
     }
 
     /**
@@ -500,7 +500,7 @@ public class Test005 {
         settings.setAxisY2(new Vec3(0.11f, 0.12f, 0.13f));
         settings.setPosition1(new RVec3(0.14f, 0.15f, 0.16f));
         settings.setPosition2(new RVec3(0.17f, 0.18f, 0.19f));
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
+        settings.setSpace(EConstraintSpace.LocalToBodyCom);
         settings.setSwingType(ESwingType.Pyramid);
 
         for (int i = 0; i < EAxis.Num.ordinal(); ++i) {
@@ -520,7 +520,7 @@ public class Test005 {
         TestUtils.assertEquals(
                 0.17f, 0.18f, 0.19f, settings.getPosition2(), 0f);
         Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
+                EConstraintSpace.LocalToBodyCom, settings.getSpace());
         Assert.assertEquals(ESwingType.Pyramid, settings.getSwingType());
 
         for (int i = 0; i < EAxis.Num.ordinal(); ++i) {
@@ -573,7 +573,7 @@ public class Test005 {
         settings.setPoint2(new RVec3(0.17f, 0.18f, 0.19f));
         settings.setSliderAxis1(new Vec3(0.24f, 0.25f, 0.26f));
         settings.setSliderAxis2(new Vec3(0.27f, 0.28f, 0.29f));
-        settings.setSpace(EConstraintSpace.LocalToBodyCOM);
+        settings.setSpace(EConstraintSpace.LocalToBodyCom);
 
         Assert.assertTrue(settings.getAutoDetectPoint());
         Assert.assertEquals(0.01f, settings.getLimitsMax(), 0f);
@@ -590,6 +590,6 @@ public class Test005 {
         TestUtils.assertEquals(
                 0.27f, 0.28f, 0.29f, settings.getSliderAxis2(), 0f);
         Assert.assertEquals(
-                EConstraintSpace.LocalToBodyCOM, settings.getSpace());
+                EConstraintSpace.LocalToBodyCom, settings.getSpace());
     }
 }

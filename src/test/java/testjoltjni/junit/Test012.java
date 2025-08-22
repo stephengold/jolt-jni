@@ -874,7 +874,7 @@ public class Test012 {
         pcs.setNumPositionStepsOverride(9);
         pcs.setPoint1(1., 2., 3.);
         pcs.setPoint2(4., 5., 6.);
-        pcs.setSpace(EConstraintSpace.LocalToBodyCOM);
+        pcs.setSpace(EConstraintSpace.LocalToBodyCom);
 
         { // serialize and then deserialize using object streams:
             String serialData = serializeRaw(pcs);
@@ -908,7 +908,7 @@ public class Test012 {
                 = new RackAndPinionConstraintSettings();
         final TwoBodyConstraintSettingsRef refOriginal = rapcs.toRef();
         rapcs.setSliderAxis(new Vec3(0.6f, 0.8f, 0f));
-        rapcs.setSpace(EConstraintSpace.LocalToBodyCOM);
+        rapcs.setSpace(EConstraintSpace.LocalToBodyCom);
 
         { // serialize and then deserialize using object streams:
             String serialData = serializeRaw(rapcs);
@@ -1184,7 +1184,7 @@ public class Test012 {
                 = new SwingTwistConstraintSettings();
         final TwoBodyConstraintSettingsRef originalRef = stcs.toRef();
         stcs.setTwistAxis1(new Vec3(0.6f, -0.8f, 0f));
-        stcs.setSpace(EConstraintSpace.LocalToBodyCOM);
+        stcs.setSpace(EConstraintSpace.LocalToBodyCom);
 
         { // serialize and then deserialize using object streams:
             String serialData = serializeRaw(stcs);

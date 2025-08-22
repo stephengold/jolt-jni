@@ -55,7 +55,7 @@ public void Initialize()
 		int left_arm = skeleton.getJointIndex("L_Wrist_sjnt_0");
 		int right_arm = skeleton.getJointIndex("R_Wrist_sjnt_0");
 		DistanceConstraintSettings constraint = new DistanceConstraintSettings();
-		constraint.setSpace ( EConstraintSpace.LocalToBodyCOM);
+		constraint.setSpace ( EConstraintSpace.LocalToBodyCom);
 		constraint.setMaxDistance ( 0.1f);
 		constraint.setMinDistance ( 0.1f);
 		settings.addAdditionalConstraint(new AdditionalConstraint(left_arm, right_arm , constraint));

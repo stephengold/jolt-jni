@@ -186,7 +186,7 @@ static PhysicsSceneRef sCreateScene()
 
 	// Connect the first two dynamic bodies with a distance constraint
 	DistanceConstraintSettings dist_constraint = new DistanceConstraintSettings();
-	dist_constraint.setSpace ( EConstraintSpace.LocalToBodyCOM);
+	dist_constraint.setSpace ( EConstraintSpace.LocalToBodyCom);
 	scene.addConstraint(dist_constraint, 3, 4);
 
 	// Add soft body cube
