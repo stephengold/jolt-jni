@@ -319,10 +319,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     @Override
     public Vec3 getCenter() {
         long boxVa = va();
-        float x = getCenterX(boxVa);
-        float y = getCenterY(boxVa);
-        float z = getCenterZ(boxVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getCenter(boxVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -353,10 +352,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     @Override
     public Vec3 getExtent() {
         long boxVa = va();
-        float x = getExtentX(boxVa);
-        float y = getExtentY(boxVa);
-        float z = getExtentZ(boxVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getExtent(boxVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -370,10 +368,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     @Override
     public Vec3 getMax() {
         long boxVa = va();
-        float x = getMaxX(boxVa);
-        float y = getMaxY(boxVa);
-        float z = getMaxZ(boxVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getMax(boxVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -387,10 +384,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     @Override
     public Vec3 getMin() {
         long boxVa = va();
-        float x = getMinX(boxVa);
-        float y = getMinY(boxVa);
-        float z = getMinZ(boxVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getMin(boxVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -403,10 +399,9 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     @Override
     public Vec3 getSize() {
         long boxVa = va();
-        float x = getSizeX(boxVa);
-        float y = getSizeY(boxVa);
-        float z = getSizeZ(boxVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSize(boxVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -439,13 +434,10 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     @Override
     public Vec3 getSupport(Vec3Arg direction) {
         long boxVa = va();
-        float dx = direction.getX();
-        float dy = direction.getY();
-        float dz = direction.getZ();
-
-        float[] result = getSupport(boxVa, dx, dy, dz);
-        assert result != null : "He has run out of memory.";
-        Vec3 vec3 = new Vec3(result[0], result[1], result[2]);
+        FloatBuffer tmpFloats = Temporaries.floatBuffer1.get();
+        direction.copyTo(tmpFloats);
+        getSupport(boxVa, tmpFloats);
+        Vec3 vec3 = new Vec3(tmpFloats);
 
         return vec3;
     }
@@ -594,45 +586,24 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
 
     native private static void free(long boxVa);
 
-    native private static float getCenterX(long boxVa);
-
-    native private static float getCenterY(long boxVa);
-
-    native private static float getCenterZ(long boxVa);
+    native private static void getCenter(long boxVa, FloatBuffer storeFloats);
 
     native private static void getClosestPoint(long boxVa, FloatBuffer buffer);
 
-    native private static float getExtentX(long boxVa);
+    native private static void getExtent(long boxVa, FloatBuffer storeFloats);
 
-    native private static float getExtentY(long boxVa);
+    native private static void getMax(long boxVa, FloatBuffer storeFloats);
 
-    native private static float getExtentZ(long boxVa);
+    native private static void getMin(long boxVa, FloatBuffer storeFloats);
 
-    native private static float getMaxX(long boxVa);
-
-    native private static float getMaxY(long boxVa);
-
-    native private static float getMaxZ(long boxVa);
-
-    native private static float getMinX(long boxVa);
-
-    native private static float getMinY(long boxVa);
-
-    native private static float getMinZ(long boxVa);
-
-    native private static float getSizeX(long boxVa);
-
-    native private static float getSizeY(long boxVa);
-
-    native private static float getSizeZ(long boxVa);
+    native private static void getSize(long boxVa, FloatBuffer storeFloats);
 
     native private static float getSqDistanceTo(
             long boxVa, float px, float py, float pz);
 
     native private static float getSurfaceArea(long boxVa);
 
-    native private static float[] getSupport(
-            long boxVa, float dx, float dy, float dz);
+    native private static void getSupport(long boxVa, FloatBuffer tmpFloats);
 
     native private static float getVolume(long boxVa);
 
