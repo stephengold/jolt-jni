@@ -21,13 +21,15 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstLod;
+
 /**
  * A level of detail (LOD) in a Geometry. (native type:
  * {@code DebugRenderer::LOD})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class Lod extends JoltPhysicsObject {
+public class Lod extends JoltPhysicsObject implements ConstLod {
     // *************************************************************************
     // constructors
 
@@ -44,8 +46,8 @@ public class Lod extends JoltPhysicsObject {
      *
      * @param original the LOD to duplicate (not null, unaffected)
      */
-    public Lod(Lod original) {
-        long originalVa = original.va();
+    public Lod(ConstLod original) {
+        long originalVa = original.targetVa();
         long lodVa = createCopy(originalVa);
         setVirtualAddress(lodVa, () -> free(lodVa));
     }
@@ -64,18 +66,6 @@ public class Lod extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the distance. The LOD is unaffected. (native member: mDistance)
-     *
-     * @return the distance (in meters)
-     */
-    public float getDistance() {
-        long lodVa = va();
-        float result = getDistance(lodVa);
-
-        return result;
-    }
-
-    /**
      * Alter the distance. (native member: mDistance)
      *
      * @param distance the desired distance (in meters)
@@ -83,6 +73,21 @@ public class Lod extends JoltPhysicsObject {
     public void setDistance(float distance) {
         long lodVa = va();
         setDistance(lodVa, distance);
+    }
+    // *************************************************************************
+    // ConstLod methods
+
+    /**
+     * Return the distance. The LOD is unaffected. (native member: mDistance)
+     *
+     * @return the distance (in meters)
+     */
+    @Override
+    public float getDistance() {
+        long lodVa = va();
+        float result = getDistance(lodVa);
+
+        return result;
     }
     // *************************************************************************
     // native private methods
