@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstPlane;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code PlaneShape}.
@@ -158,11 +159,9 @@ public class PlaneShapeSettings extends ShapeSettings {
      */
     public Plane getPlane() {
         long settingsVa = va();
-        float nx = getPlaneX(settingsVa);
-        float ny = getPlaneY(settingsVa);
-        float nz = getPlaneZ(settingsVa);
-        float c = getPlaneConstant(settingsVa);
-        Plane result = new Plane(nx, ny, nz, c);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPlane(settingsVa, storeFloats);
+        Plane result = new Plane(storeFloats);
 
         return result;
     }
@@ -217,13 +216,8 @@ public class PlaneShapeSettings extends ShapeSettings {
 
     native private static long getMaterial(long settingsVa);
 
-    native private static float getPlaneConstant(long settingsVa);
-
-    native private static float getPlaneX(long settingsVa);
-
-    native private static float getPlaneY(long settingsVa);
-
-    native private static float getPlaneZ(long settingsVa);
+    native private static void getPlane(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static void setHalfExtent(long settingsVa, float halfExtent);
 

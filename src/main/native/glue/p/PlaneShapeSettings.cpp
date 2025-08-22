@@ -92,54 +92,21 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_g
 
 /*
  * Class:     com_github_stephengold_joltjni_PlaneShapeSettings
- * Method:    getPlaneConstant
- * Signature: (J)F
+ * Method:    getPlane
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_getPlaneConstant
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_getPlane
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const PlaneShapeSettings * const pSettings
             = reinterpret_cast<PlaneShapeSettings *> (settingsVa);
-    const float result = pSettings->mPlane.GetConstant();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PlaneShapeSettings
- * Method:    getPlaneX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_getPlaneX
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PlaneShapeSettings * const pSettings
-            = reinterpret_cast<PlaneShapeSettings *> (settingsVa);
-    const float result = pSettings->mPlane.GetNormal().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PlaneShapeSettings
- * Method:    getPlaneY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_getPlaneY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PlaneShapeSettings * const pSettings
-            = reinterpret_cast<PlaneShapeSettings *> (settingsVa);
-    const float result = pSettings->mPlane.GetNormal().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PlaneShapeSettings
- * Method:    getPlaneZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_getPlaneZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PlaneShapeSettings * const pSettings
-            = reinterpret_cast<PlaneShapeSettings *> (settingsVa);
-    const float result = pSettings->mPlane.GetNormal().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Plane& result = pSettings->mPlane;
+    const Vec3 normal = result.GetNormal();
+    pFloats[0] = normal.GetX();
+    pFloats[1] = normal.GetY();
+    pFloats[2] = normal.GetZ();
+    pFloats[3] = result.GetConstant();
 }
 
 /*
