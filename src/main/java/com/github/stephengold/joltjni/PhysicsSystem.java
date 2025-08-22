@@ -141,6 +141,18 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Add the specified constraint to the system.
+     *
+     * @param constraintRef a counted reference to the constraint to add (not
+     * null)
+     */
+    public void addConstraint(VehicleConstraintRef constraintRef) {
+        long systemVa = va();
+        long constraintVa = constraintRef.targetVa();
+        addConstraint(systemVa, constraintVa);
+    }
+
+    /**
      * Add the specified step listener to the system.
      * <p>
      * Step listeners are limited in what actions they can perform.
