@@ -256,41 +256,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
- * Method:    getShapeOffsetX
- * Signature: (J)F
+ * Method:    getShapeOffset
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_getShapeOffsetX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_getShapeOffset
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const CharacterVirtualSettings * const pSettings
             = reinterpret_cast<CharacterVirtualSettings *> (settingsVa);
-    const float result = pSettings->mShapeOffset.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
- * Method:    getShapeOffsetY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_getShapeOffsetY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterVirtualSettings * const pSettings
-            = reinterpret_cast<CharacterVirtualSettings *> (settingsVa);
-    const float result = pSettings->mShapeOffset.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
- * Method:    getShapeOffsetZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_getShapeOffsetZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterVirtualSettings * const pSettings
-            = reinterpret_cast<CharacterVirtualSettings *> (settingsVa);
-    const float result = pSettings->mShapeOffset.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mShapeOffset;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

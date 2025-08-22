@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.readonly.ConstCharacterVirtualSettings;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.RefTarget;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to create a {@code CharacterVirtual}.
@@ -453,10 +454,9 @@ public class CharacterVirtualSettings
     @Override
     public Vec3 getShapeOffset() {
         long settingsVa = va();
-        float x = getShapeOffsetX(settingsVa);
-        float y = getShapeOffsetY(settingsVa);
-        float z = getShapeOffsetZ(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getShapeOffset(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -538,11 +538,8 @@ public class CharacterVirtualSettings
 
     native private static int getRefCount(long settingsVa);
 
-    native private static float getShapeOffsetX(long settingsVa);
-
-    native private static float getShapeOffsetY(long settingsVa);
-
-    native private static float getShapeOffsetZ(long settingsVa);
+    native private static void getShapeOffset(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static void setBackFaceMode(long settingsVa, int ordinal);
 
