@@ -123,7 +123,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
         double m14 = c4.xx();
         double m24 = c4.yy();
         double m34 = c4.zz();
-        // a44 is assumed to be 1.
+        // m44 is assumed to be 1.
 
         long matrixVa = createFromRowMajor(floatBuffer, m14, m24, m34);
         setVirtualAddress(matrixVa, () -> free(matrixVa));
