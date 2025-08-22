@@ -234,7 +234,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Alter the maximum coordinates. (native attribute: mMax)
+     * Alter the maximum coordinates. (native member: mMax)
      *
      * @param max the desired maximum coordinate for each axis (not null,
      * unaffected)
@@ -248,7 +248,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     }
 
     /**
-     * Alter the minimum coordinates. (native attribute: mMin)
+     * Alter the minimum coordinates. (native member: mMin)
      *
      * @param min the desired minimum coordinate for each axis (not null,
      * unaffected)
