@@ -392,8 +392,7 @@ final public class RVec3 implements RVec3Arg {
      * @param matrix the transformation to apply (not null, unaffected)
      */
     public void transformInPlace(RMat44Arg matrix) {
-        RVec3Arg temp = matrix.multiply3x4(this); // TODO garbage
-        set(temp);
+        matrix.multiply3x4InPlace(this);
     }
     // *************************************************************************
     // RVec3Arg methods

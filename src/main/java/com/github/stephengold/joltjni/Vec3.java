@@ -608,8 +608,7 @@ final public class Vec3 implements Vec3Arg {
      * @param matrix the transformation to apply (not null, unaffected)
      */
     public void transformInPlace(Mat44Arg matrix) {
-        Vec3Arg temp = matrix.multiply3x4(this); // TODO garbage
-        set(temp);
+        matrix.multiply3x4InPlace(this);
     }
     // *************************************************************************
     // Vec3Arg methods
