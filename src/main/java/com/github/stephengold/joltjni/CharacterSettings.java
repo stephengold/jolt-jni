@@ -207,31 +207,31 @@ public class CharacterSettings
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static long createCharacterSettings();
 
     native private static long createCopy(long originalVa);
 
-    native private static float getFriction(long settingsVa);
+    native static float getFriction(long settingsVa);
 
-    native private static float getGravityFactor(long settingsVa);
+    native static float getGravityFactor(long settingsVa);
 
-    native private static int getLayer(long settingsVa);
+    native static int getLayer(long settingsVa);
 
-    native private static float getMass(long settingsVa);
+    native static float getMass(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
 
     native private static void setEmbedded(long settingsVa);
 
-    native private static void setFriction(long settingsVa, float friction);
+    native static void setFriction(long settingsVa, float friction);
 
-    native private static void setGravityFactor(long settingsVa, float factor);
+    native static void setGravityFactor(long settingsVa, float factor);
 
-    native private static void setLayer(long settingsVa, int objLayer);
+    native static void setLayer(long settingsVa, int objLayer);
 
-    native private static void setMass(long settingsVa, float mass);
+    native static void setMass(long settingsVa, float mass);
 
     native private static long toRef(long settingsVa);
 }
