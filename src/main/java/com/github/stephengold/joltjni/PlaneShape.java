@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstPlane;
+import java.nio.FloatBuffer;
 
 /**
  * A {@code Shape} to represent a surface defined by a plane.
@@ -94,11 +95,9 @@ public class PlaneShape extends Shape {
      */
     public ConstPlane getPlane() {
         long shapeVa = va();
-        float nx = getPlaneX(shapeVa);
-        float ny = getPlaneY(shapeVa);
-        float nz = getPlaneZ(shapeVa);
-        float planeConstant = getPlaneConstant(shapeVa);
-        ConstPlane result = new Plane(nx, ny, nz, planeConstant);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPlane(shapeVa, storeFloats);
+        ConstPlane result = new Plane(storeFloats);
 
         return result;
     }
@@ -108,11 +107,5 @@ public class PlaneShape extends Shape {
     native private static long createShape(float nx, float ny, float nz,
             float planeConstant, long materialVa, float halfExtent);
 
-    native private static float getPlaneConstant(long shapeVa);
-
-    native private static float getPlaneX(long shapeVa);
-
-    native private static float getPlaneY(long shapeVa);
-
-    native private static float getPlaneZ(long shapeVa);
+    native private static void getPlane(long shapeVa, FloatBuffer storeFloats);
 }

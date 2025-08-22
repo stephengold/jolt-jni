@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -49,52 +49,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShape_createSha
 
 /*
  * Class:     com_github_stephengold_joltjni_PlaneShape
- * Method:    getPlaneConstant
- * Signature: (J)F
+ * Method:    getPlane
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneConstant
-  (JNIEnv *, jclass, jlong planeVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlane
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jobject storeFloats) {
     const PlaneShape * const pShape
-            = reinterpret_cast<PlaneShape *> (planeVa);
-    const float result = pShape->GetPlane().GetConstant();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PlaneShape
- * Method:    getPlaneX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneX
-  (JNIEnv *, jclass, jlong planeVa) {
-    const PlaneShape * const pShape
-            = reinterpret_cast<PlaneShape *> (planeVa);
-    const float result = pShape->GetPlane().GetNormal().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PlaneShape
- * Method:    getPlaneY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneY
-  (JNIEnv *, jclass, jlong planeVa) {
-    const PlaneShape * const pShape
-            = reinterpret_cast<PlaneShape *> (planeVa);
-    const float result = pShape->GetPlane().GetNormal().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PlaneShape
- * Method:    getPlaneZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PlaneShape_getPlaneZ
-  (JNIEnv *, jclass, jlong planeVa) {
-    const PlaneShape * const pShape
-            = reinterpret_cast<PlaneShape *> (planeVa);
-    const float result = pShape->GetPlane().GetNormal().GetZ();
-    return result;
+            = reinterpret_cast<PlaneShape *> (shapeVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Plane result = pShape->GetPlane();
+    const Vec3 normal = result.GetNormal();
+    pFloats[0] = normal.GetX();
+    pFloats[1] = normal.GetY();
+    pFloats[2] = normal.GetZ();
+    pFloats[3] = result.GetConstant();
 }
