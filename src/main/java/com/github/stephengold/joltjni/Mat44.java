@@ -720,6 +720,22 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
+     * Multiply the 3x4 matrix by the specified column vector, with the 4th
+     * component of the right factor implied to be one. Store the result in the
+     * argument vector. The matrix is unaffected.
+     *
+     * @param storeVec the right factor and storage for the result (not null)
+     */
+    @Override
+    public void multiply3x4InPlace(Vec3 storeVec) {
+        long matrixVa = va();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        storeVec.copyTo(floatBuffer);
+        multiply3x4(matrixVa, floatBuffer);
+        storeVec.set(floatBuffer);
+    }
+
+    /**
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *

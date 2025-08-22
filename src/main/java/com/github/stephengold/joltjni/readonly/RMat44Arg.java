@@ -176,6 +176,15 @@ public interface RMat44Arg extends ConstJoltPhysicsObject {
     RVec3 multiply3x4(Vec3Arg vec3);
 
     /**
+     * Multiply the 3x4 matrix by the specified column vector, with the 4th
+     * component of the right factor implied to be one. Store the result in the
+     * argument vector. The matrix is unaffected.
+     *
+     * @param storeVec the right factor and storage for the result (not null)
+     */
+    void multiply3x4InPlace(RVec3 storeVec);
+
+    /**
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *

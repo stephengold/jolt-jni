@@ -658,6 +658,23 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     }
 
     /**
+     * Multiply the 3x4 matrix by the specified column vector, with the 4th
+     * component of the right factor implied to be one. Store the result in the
+     * argument vector. The matrix is unaffected.
+     *
+     * @param doubleBuffer the right factor and storage for the result (not
+     * null)
+     */
+    @Override
+    public void multiply3x4InPlace(RVec3 doubleBuffer) {
+        long matrixVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        doubleBuffer.copyTo(storeDoubles);
+        multiply3x4r(matrixVa, storeDoubles);
+        doubleBuffer.set(storeDoubles);
+    }
+
+    /**
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *
