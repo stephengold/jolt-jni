@@ -58,6 +58,9 @@ public class VehicleConstraint extends Constraint {
      */
     public VehicleConstraint(
             Body body, ConstVehicleConstraintSettings settings) {
+        assert settings.getController() != null : "no controller";
+        assert settings.getNumWheels() > 0 : "no wheels";
+
         this.body = body;
         long bodyVa = body.va();
         long settingsVa = settings.targetVa();
