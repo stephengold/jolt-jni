@@ -23,7 +23,6 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import com.github.stephengold.joltjni.template.Ref;
 import java.nio.FloatBuffer;
 
 /**
@@ -40,13 +39,9 @@ public class VehicleConstraint extends Constraint {
      */
     final private Body body;
     /**
-     * collision tester
+     * cached reference to collision tester (to preserve subtype information)
      */
     private VehicleCollisionTester tester;
-    /**
-     * protect the collision tester (if any) from reclamation
-     */
-    private Ref testerRef;
     // *************************************************************************
     // constructors
 
@@ -301,7 +296,6 @@ public class VehicleConstraint extends Constraint {
      */
     public void setVehicleCollisionTester(VehicleCollisionTester tester) {
         this.tester = tester;
-        this.testerRef = tester.toRef();
         long constraintVa = va();
         long testerVa = tester.va();
         setVehicleCollisionTester(constraintVa, testerVa);
