@@ -119,6 +119,6 @@ public class Test009 {
                 EMotionType.Dynamic, Layers.MOVING);
 
         TestUtils.testClose(bcs, parameters, decomposer);
-        System.gc();
+        TestUtils.cleanup();
     }
 }
