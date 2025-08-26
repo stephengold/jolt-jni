@@ -175,6 +175,7 @@ public class VehicleConstraint extends Constraint {
      * @return the pre-existing instance or {@code null} if none
      */
     public VehicleCollisionTester getVehicleCollisionTester() {
+        assert verifyTester();
         return tester;
     }
 
@@ -317,6 +318,26 @@ public class VehicleConstraint extends Constraint {
         return result;
     }
     // *************************************************************************
+    // private methods
+
+    /**
+     * Verify that the cached tester matches the native reference.
+     *
+     * @return {@code true} if the cached object matches the native reference,
+     * otherwise {@code false}
+     */
+    private boolean verifyTester() {
+        long expectedVa = (tester == null) ? 0L : tester.targetVa();
+        long constraintVa = va();
+        long testerVa = getVehicleCollisionTester(constraintVa);
+
+        if (testerVa == expectedVa) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    // *************************************************************************
     // native methods
 
     native private static int countWheels(long constraintVa);
@@ -336,6 +357,8 @@ public class VehicleConstraint extends Constraint {
     native private static long getStepListener(long constraintVa);
 
     native private static long getVehicleBody(long constraintVa);
+
+    native private static long getVehicleCollisionTester(long constraintVa);
 
     native private static long getWheel(long constraintVa, int wheelIndex);
 

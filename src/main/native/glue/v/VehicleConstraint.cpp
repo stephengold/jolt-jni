@@ -157,6 +157,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getVehicleCollisionTester
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getVehicleCollisionTester
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const VehicleCollisionTester * pResult
+            = pConstraint->GetVehicleCollisionTester();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
  * Method:    getWheel
  * Signature: (JI)J
  */
