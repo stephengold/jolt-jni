@@ -81,6 +81,8 @@ public class Test010 {
         assert errors == EPhysicsUpdateError.None : errors;
 
         Assert.assertTrue(invoked);
+
+        TestUtils.cleanupPhysicsSystem(physicsSystem);
         TestUtils.cleanup();
     }
 }

@@ -431,7 +431,9 @@ public class Test003 {
 
         testCharacterDefaults(character);
 
-        TestUtils.testClose(characterRef, system, settingsRef, shapeRefC);
+        TestUtils.testClose(characterRef);
+        TestUtils.cleanupPhysicsSystem(system);
+        TestUtils.testClose(settingsRef, shapeRefC);
         System.gc();
     }
 
