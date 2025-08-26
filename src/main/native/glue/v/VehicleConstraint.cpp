@@ -118,6 +118,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_get
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getMaxPitchRollAngle
+ * Signature: (J)F
+ */
+JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getMaxPitchRollAngle
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const float result = pConstraint->GetMaxPitchRollAngle();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
  * Method:    getStepListener
  * Signature: (J)J
  */
@@ -214,6 +227,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_res
     VehicleConstraint * const pConstraint
             = reinterpret_cast<VehicleConstraint *> (constraintVa);
     pConstraint->ResetGravityOverride();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    setMaxPitchRollAngle
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_setMaxPitchRollAngle
+  (JNIEnv *, jclass, jlong constraintVa, jfloat angle) {
+    VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    pConstraint->SetMaxPitchRollAngle(angle);
 }
 
 /*

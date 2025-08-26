@@ -138,6 +138,19 @@ public class VehicleConstraint extends Constraint {
     }
 
     /**
+     * Return the vehicle's maximum pitch/roll angle. The constraint is
+     * unaffected.
+     *
+     * @return the limit angle (in radians)
+     */
+    public float getMaxPitchRollAngle() {
+        long constraintVa = va();
+        float result = getMaxPitchRollAngle(constraintVa);
+
+        return result;
+    }
+
+    /**
      * Access the vehicle's {@code PhysicsStepListener}. Since Java doesn't
      * allow multiple inheritance, the listener is managed like a contained
      * object.
@@ -248,6 +261,16 @@ public class VehicleConstraint extends Constraint {
     }
 
     /**
+     * Alter the vehicle's maximum pitch/roll angle.
+     *
+     * @param angle the desired limit angle (in radians)
+     */
+    public void setMaxPitchRollAngle(float angle) {
+        long constraintVa = va();
+        setMaxPitchRollAngle(constraintVa, angle);
+    }
+
+    /**
      * Alter the number of simulation steps between wheel-collision tests when
      * the vehicle is active.
      *
@@ -314,6 +337,8 @@ public class VehicleConstraint extends Constraint {
     native private static void getLocalUp(
             long constraintVa, FloatBuffer storeFloats);
 
+    native private static float getMaxPitchRollAngle(long constraintVa);
+
     native private static long getStepListener(long constraintVa);
 
     native private static long getVehicleBody(long constraintVa);
@@ -329,6 +354,8 @@ public class VehicleConstraint extends Constraint {
             long constraintVa, float ax, float ay, float az);
 
     native static void resetGravityOverride(long constraintVa);
+
+    native static void setMaxPitchRollAngle(long constraintVa, float angle);
 
     native private static void setNumStepsBetweenCollisionTestActive(
             long constraintVa, int numSteps);
