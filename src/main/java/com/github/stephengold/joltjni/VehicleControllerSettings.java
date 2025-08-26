@@ -79,6 +79,10 @@ public class VehicleControllerSettings
         String typeName = Rtti.getName(rttiVa);
         VehicleControllerSettings result;
         switch (typeName) {
+            case "MotorcycleControllerSettings":
+                result = new MotorcycleControllerSettings(settingsVa);
+                break;
+
             case "TrackedVehicleControllerSettings":
                 result = new TrackedVehicleControllerSettings(settingsVa);
                 break;

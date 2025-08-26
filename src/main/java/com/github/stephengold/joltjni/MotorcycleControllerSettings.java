@@ -41,6 +41,17 @@ public class MotorcycleControllerSettings
     }
 
     /**
+     * Instantiate a settings object with the specified native object assigned
+     * but not owned.
+     *
+     * @param controllerSettingsVa the virtual address of the native object to
+     * assign (not zero)
+     */
+    MotorcycleControllerSettings(long controllerSettingsVa) {
+        super(controllerSettingsVa);
+    }
+
+    /**
      * Instantiate a copy of the specified settings.
      *
      * @param original the settings to copy (not {@code null}, unaffected)
