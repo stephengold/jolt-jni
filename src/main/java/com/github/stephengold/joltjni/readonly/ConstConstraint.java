@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.ConstraintSettingsRef;
+import com.github.stephengold.joltjni.StateRecorder;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EConstraintType;
 
@@ -85,4 +86,19 @@ public interface ConstConstraint extends ConstJoltPhysicsObject {
      * @return an enum value (not null)
      */
     EConstraintType getType();
+
+    /**
+     * Test whether the constraint is active. The constraint is unaffected.
+     *
+     * @return {@code true} if active, otherwise {@code false}
+     */
+    boolean isActive();
+
+    /**
+     * Save the state of the constraint, for possible replay. The constraint is
+     * unaffected.
+     *
+     * @param recorder the recorder to write to (not null)
+     */
+    void saveState(StateRecorder recorder);
 }

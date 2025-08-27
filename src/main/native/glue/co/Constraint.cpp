@@ -164,6 +164,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Constraint_getType
 
 /*
  * Class:     com_github_stephengold_joltjni_Constraint
+ * Method:    isActive
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Constraint_isActive
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const Constraint * const pConstraint
+            = reinterpret_cast<Constraint *> (constraintVa);
+    const bool result = pConstraint->IsActive();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Constraint
  * Method:    notifyShapeChanged
  * Signature: (JIFFF)V
  */
@@ -175,6 +188,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraint_notifyShap
     const BodyID id(bodyId);
     const Vec3 delta(dx, dy, dz);
     pConstraint->NotifyShapeChanged(id, delta);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Constraint
+ * Method:    saveState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraint_saveState
+  (JNIEnv *, jclass, jlong constraintVa, jlong recorderVa) {
+    const Constraint * const pConstraint
+            = reinterpret_cast<Constraint *> (constraintVa);
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    pConstraint->SaveState(*pRecorder);
 }
 
 /*

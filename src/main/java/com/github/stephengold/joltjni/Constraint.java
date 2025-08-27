@@ -279,6 +279,32 @@ abstract public class Constraint extends NonCopyable
 
         return result;
     }
+
+    /**
+     * Test whether the constraint is active. The constraint is unaffected.
+     *
+     * @return {@code true} if active, otherwise {@code false}
+     */
+    @Override
+    public boolean isActive() {
+        long constraintVa = va();
+        boolean result = isActive(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Save the state of the constraint, for possible replay. The constraint is
+     * unaffected.
+     *
+     * @param recorder the recorder to write to (not null)
+     */
+    @Override
+    public void saveState(StateRecorder recorder) {
+        long constraintVa = va();
+        long recorderVa = recorder.va();
+        saveState(constraintVa, recorderVa);
+    }
     // *************************************************************************
     // RefTarget methods
 
@@ -339,8 +365,12 @@ abstract public class Constraint extends NonCopyable
 
     native static int getType(long constraintVa);
 
+    native static boolean isActive(long constraintVa);
+
     native static void notifyShapeChanged(
             long constraintVa, int bodyId, float dx, float dy, float dz);
+
+    native static void saveState(long constraintVa, long recorderVa);
 
     native private static void setConstraintPriority(
             long constraintVa, int level);

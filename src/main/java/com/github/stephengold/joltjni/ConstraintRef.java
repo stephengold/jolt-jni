@@ -159,6 +159,32 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
 
         return result;
     }
+
+    /**
+     * Test whether the constraint is active. The constraint is unaffected.
+     *
+     * @return {@code true} if active, otherwise {@code false}
+     */
+    @Override
+    public boolean isActive() {
+        long constraintVa = targetVa();
+        boolean result = Constraint.isActive(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Save the state of the constraint, for possible replay. The constraint is
+     * unaffected.
+     *
+     * @param recorder the recorder to write to (not null)
+     */
+    @Override
+    public void saveState(StateRecorder recorder) {
+        long constraintVa = targetVa();
+        long recorderVa = recorder.va();
+        Constraint.saveState(constraintVa, recorderVa);
+    }
     // *************************************************************************
     // Ref methods
 
