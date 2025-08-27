@@ -192,6 +192,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraint_notifyShap
 
 /*
  * Class:     com_github_stephengold_joltjni_Constraint
+ * Method:    restoreState
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Constraint_restoreState
+  (JNIEnv *, jclass, jlong constraintVa, jlong recorderVa) {
+    Constraint * const pConstraint
+            = reinterpret_cast<Constraint *> (constraintVa);
+    StateRecorder * const pRecorder
+            = reinterpret_cast<StateRecorder *> (recorderVa);
+    pConstraint->RestoreState(*pRecorder);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Constraint
  * Method:    saveState
  * Signature: (JJ)V
  */

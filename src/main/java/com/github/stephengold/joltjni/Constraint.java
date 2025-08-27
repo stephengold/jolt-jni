@@ -134,6 +134,17 @@ abstract public class Constraint extends NonCopyable
     }
 
     /**
+     * Restore the state of the constraint prior to replay.
+     *
+     * @param recorder to read state from (not null)
+     */
+    public void restoreState(StateRecorder recorder) {
+        long constraintVa = va();
+        long recorderVa = recorder.va();
+        restoreState(constraintVa, recorderVa);
+    }
+
+    /**
      * Alter the constraint's priority when solving.
      *
      * @param level the desired priority level
@@ -369,6 +380,8 @@ abstract public class Constraint extends NonCopyable
 
     native static void notifyShapeChanged(
             long constraintVa, int bodyId, float dx, float dy, float dz);
+
+    native static void restoreState(long constraintVa, long recorderVa);
 
     native static void saveState(long constraintVa, long recorderVa);
 
