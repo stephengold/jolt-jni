@@ -79,6 +79,19 @@ public class VehicleConstraint extends Constraint {
     // new methods exposed
 
     /**
+     * Count how many anti-roll bars the vehicle has. The constraint is
+     * unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    public int countAntiRollBars() {
+        long constraintVa = va();
+        int result = countAntiRollBars(constraintVa);
+
+        return result;
+    }
+
+    /**
      * Count how many wheels the vehicle has. The constraint is unaffected.
      *
      * @return the count (&ge;0)
@@ -86,6 +99,20 @@ public class VehicleConstraint extends Constraint {
     public int countWheels() {
         long constraintVa = va();
         int result = countWheels(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Access the specified anti-roll bar.
+     *
+     * @param barIndex the index of the bar to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public VehicleAntiRollBar getAntiRollBar(int barIndex) {
+        long constraintVa = va();
+        long barVa = getAntiRollBar(constraintVa, barIndex);
+        VehicleAntiRollBar result = new VehicleAntiRollBar(this, barVa);
 
         return result;
     }
@@ -100,6 +127,20 @@ public class VehicleConstraint extends Constraint {
         long controllerVa = getController(constraintVa);
         VehicleController result
                 = VehicleController.newController(this, controllerVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the gravity override. The constraint is unaffected.
+     *
+     * @return a new vector
+     */
+    public Vec3 getGravityOverride() {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getGravityOverride(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -141,6 +182,32 @@ public class VehicleConstraint extends Constraint {
     public float getMaxPitchRollAngle() {
         long constraintVa = va();
         float result = getMaxPitchRollAngle(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Return the number of simulation steps between wheel-collision tests when
+     * the vehicle is active. The constraint is unaffected.
+     *
+     * @return the number of steps
+     */
+    public int getNumStepsBetweenCollisionTestActive() {
+        long constraintVa = va();
+        int result = getNumStepsBetweenCollisionTestActive(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Return the number of simulation steps between collision tests when the
+     * body is inactive. The constraint is unaffected.
+     *
+     * @return the number of steps
+     */
+    public int getNumStepsBetweenCollisionTestInactive() {
+        long constraintVa = va();
+        int result = getNumStepsBetweenCollisionTestInactive(constraintVa);
 
         return result;
     }
@@ -195,6 +262,25 @@ public class VehicleConstraint extends Constraint {
     }
 
     /**
+     * Copy the basis vectors for the specified wheel.
+     *
+     * @param wheel which wheel to query (not null)
+     * @param storeForward storage for the forward vector (not null, modified)
+     * @param storeUp storage for the up vector (not null, modified)
+     * @param storeRight storage for the right vector (not null, modified)
+     */
+    public void getWheelLocalBasis(
+            Wheel wheel, Vec3 storeForward, Vec3 storeUp, Vec3 storeRight) {
+        long constraintVa = va();
+        long wheelVa = wheel.va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getWheelLocalBasis(constraintVa, wheelVa, storeFloats);
+        storeForward.set(storeFloats);
+        storeUp.set(storeFloats, 3);
+        storeRight.set(storeFloats, 6);
+    }
+
+    /**
      * Copy the world transform of the specified wheel. The constraint is
      * unaffected.
      *
@@ -235,17 +321,40 @@ public class VehicleConstraint extends Constraint {
     }
 
     /**
+     * Test whether gravity is overridden. The constraint is unaffected.
+     *
+     * @return {@code true} if overridden, otherwise {@code false}
+     */
+    public boolean isGravityOverridden() {
+        long constraintVa = va();
+        boolean result = isGravityOverridden(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Override the vehicle's gravity vector.
+     *
+     * @param ax the X component of the desired acceleration vector
+     * @param ay the Y component of the desired acceleration vector
+     * @param az the Z component of the desired acceleration vector
+     */
+    public void overrideGravity(float ax, float ay, float az) {
+        long constraintVa = va();
+        overrideGravity(constraintVa, ax, ay, az);
+    }
+
+    /**
      * Override the vehicle's gravity vector.
      *
      * @param acceleration the desired acceleration vector (not null,
      * unaffected)
      */
     public void overrideGravity(Vec3Arg acceleration) {
-        long constraintVa = va();
         float ax = acceleration.getX();
         float ay = acceleration.getY();
         float az = acceleration.getZ();
-        overrideGravity(constraintVa, ax, ay, az);
+        overrideGravity(ax, ay, az);
     }
 
     /**
@@ -340,11 +449,18 @@ public class VehicleConstraint extends Constraint {
     // *************************************************************************
     // native methods
 
+    native private static int countAntiRollBars(long constraintVa);
+
     native private static int countWheels(long constraintVa);
 
     native private static long createConstraint(long bodyVa, long settingsVa);
 
+    native private static long getAntiRollBar(long constraintVa, int barIndex);
+
     native private static long getController(long constraintVa);
+
+    native private static void getGravityOverride(
+            long constraintVa, FloatBuffer storeFloats);
 
     native private static void getLocalForward(
             long constraintVa, FloatBuffer storeFloats);
@@ -354,6 +470,12 @@ public class VehicleConstraint extends Constraint {
 
     native private static float getMaxPitchRollAngle(long constraintVa);
 
+    native private static int getNumStepsBetweenCollisionTestActive(
+            long constraintVa);
+
+    native private static int getNumStepsBetweenCollisionTestInactive(
+            long constraintVa);
+
     native private static long getStepListener(long constraintVa);
 
     native private static long getVehicleBody(long constraintVa);
@@ -362,10 +484,15 @@ public class VehicleConstraint extends Constraint {
 
     native private static long getWheel(long constraintVa, int wheelIndex);
 
+    native private static void getWheelLocalBasis(
+            long constraintVa, long wheelVa, FloatBuffer storeFloats);
+
     native static long getWheelWorldTransform(long constraintVa, int wheelIndex,
             float rx, float ry, float rz, float ux, float uy, float uz);
 
     native static void getWorldUp(long constraintVa, FloatBuffer storeFloats);
+
+    native static boolean isGravityOverridden(long constraintVa);
 
     native static void overrideGravity(
             long constraintVa, float ax, float ay, float az);

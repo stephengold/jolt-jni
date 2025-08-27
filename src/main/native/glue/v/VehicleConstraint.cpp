@@ -42,6 +42,20 @@ IMPLEMENT_REF(VehicleConstraint,
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    countAntiRollBars
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_countAntiRollBars
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const VehicleAntiRollBars &array = pConstraint->GetAntiRollBars();
+    const VehicleAntiRollBars::size_type result = array.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
  * Method:    countWheels
  * Signature: (J)I
  */
@@ -71,6 +85,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_cr
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getAntiRollBar
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getAntiRollBar
+  (JNIEnv *, jclass, jlong constraintVa, jint index) {
+    VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    VehicleAntiRollBars &array = pConstraint->GetAntiRollBars();
+    VehicleAntiRollBar &result = array[index];
+    return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
  * Method:    getController
  * Signature: (J)J
  */
@@ -80,6 +108,23 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_ge
             = reinterpret_cast<VehicleConstraint *> (constraintVa);
     VehicleController * const pResult = pConstraint->GetController();
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getGravityOverride
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getGravityOverride
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jobject storeFloats) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pConstraint->GetGravityOverride();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -126,6 +171,32 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_g
     const VehicleConstraint * const pConstraint
             = reinterpret_cast<VehicleConstraint *> (constraintVa);
     const float result = pConstraint->GetMaxPitchRollAngle();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getNumStepsBetweenCollisionTestActive
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getNumStepsBetweenCollisionTestActive
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const uint result = pConstraint->GetNumStepsBetweenCollisionTestActive();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getNumStepsBetweenCollisionTestInactive
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getNumStepsBetweenCollisionTestInactive
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const uint result = pConstraint->GetNumStepsBetweenCollisionTestInactive();
     return result;
 }
 
@@ -184,6 +255,31 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getWheelLocalBasis
+ * Signature: (JJLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getWheelLocalBasis
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jlong wheelVa, jobject storeFloats) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const Wheel * const pWheel = reinterpret_cast<Wheel *> (wheelVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 9);
+    Vec3 forward, up, right;
+    pConstraint->GetWheelLocalBasis(pWheel, forward, up, right);
+    pFloats[0] = forward.GetX();
+    pFloats[1] = forward.GetY();
+    pFloats[2] = forward.GetZ();
+    pFloats[3] = up.GetX();
+    pFloats[4] = up.GetY();
+    pFloats[5] = up.GetZ();
+    pFloats[6] = right.GetX();
+    pFloats[7] = right.GetY();
+    pFloats[8] = right.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
  * Method:    getWheelWorldTransform
  * Signature: (JIFFFFFF)J
  */
@@ -216,6 +312,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_get
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    isGravityOverridden
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_isGravityOverridden
+  (JNIEnv *, jclass, jlong constraintVa) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    const bool result = pConstraint->IsGravityOverridden();
+    return result;
 }
 
 /*
