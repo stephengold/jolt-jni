@@ -74,10 +74,10 @@ final public class ConstraintRef extends Ref implements ConstConstraint {
     }
 
     /**
-     * Convert the constraint to a {@code ConstraintSettings} object. The
-     * constraint is unaffected.
+     * Generate settings to reconstruct the constraint. The constraint is
+     * unaffected.
      *
-     * @return a new reference to a new settings object
+     * @return a new counted reference to a new settings object
      */
     @Override
     public ConstraintSettingsRef getConstraintSettings() {

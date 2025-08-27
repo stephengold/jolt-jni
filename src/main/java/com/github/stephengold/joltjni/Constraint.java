@@ -120,7 +120,7 @@ abstract public class Constraint extends NonCopyable
 
     /**
      * Notify the constraint that the shape of the specified body has changed
-     * and its center of mass has shifted by deltaCom.
+     * and its center of mass has shifted by {@code deltaCom}.
      *
      * @param bodyId the ID of the body that changed
      * @param deltaCom the offset of the shift (not null, unaffected)
@@ -197,7 +197,7 @@ abstract public class Constraint extends NonCopyable
      * Generate settings to reconstruct the constraint. The constraint is
      * unaffected.
      *
-     * @return a counted reference to a new settings object
+     * @return a new counted reference to a new settings object
      */
     @Override
     public ConstraintSettingsRef getConstraintSettings() {
