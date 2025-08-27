@@ -342,6 +342,18 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Set all 3 components from the specified position in the specified buffer.
+     *
+     * @param buffer the desired component values (not null, unaffected)
+     * @param startPos the starting position in the buffer (&ge;0)
+     */
+    public void set(FloatBuffer buffer, int startPos) {
+        this.x = buffer.get(startPos);
+        this.y = buffer.get(startPos + 1);
+        this.z = buffer.get(startPos + 2);
+    }
+
+    /**
      * Set all 3 components from the specified location vector.
      *
      * @param source the vector to copy (not null, unaffected)
