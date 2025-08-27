@@ -21,8 +21,22 @@ SOFTWARE.
  */
 package testjoltjni.junit;
 
+import com.github.stephengold.joltjni.Body;
+import com.github.stephengold.joltjni.BodyCreationSettings;
+import com.github.stephengold.joltjni.BodyInterface;
+import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.PhysicsSystem;
+import com.github.stephengold.joltjni.ShapeRef;
 import com.github.stephengold.joltjni.Vec3;
+import com.github.stephengold.joltjni.VehicleCollisionTesterCastCylinder;
+import com.github.stephengold.joltjni.VehicleCollisionTesterCastCylinderRef;
+import com.github.stephengold.joltjni.VehicleCollisionTesterCastSphere;
+import com.github.stephengold.joltjni.VehicleCollisionTesterCastSphereRef;
+import com.github.stephengold.joltjni.VehicleCollisionTesterRay;
+import com.github.stephengold.joltjni.VehicleCollisionTesterRayRef;
+import com.github.stephengold.joltjni.VehicleConstraint;
+import com.github.stephengold.joltjni.VehicleConstraintRef;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
 import com.github.stephengold.joltjni.VehicleConstraintSettingsRef;
 import com.github.stephengold.joltjni.VehicleControllerSettingsRef;
@@ -32,11 +46,15 @@ import com.github.stephengold.joltjni.WheelSettingsTvRef;
 import com.github.stephengold.joltjni.WheelSettingsWv;
 import com.github.stephengold.joltjni.WheelSettingsWvRef;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
+import com.github.stephengold.joltjni.enumerate.EActivation;
+import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
+import com.github.stephengold.joltjni.enumerate.EConstraintType;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettingsTv;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
+import testjoltjni.app.samples.Layers;
 
 /**
  * Automated JUnit4 tests for creation, destruction, accessors, and defaults of
@@ -56,6 +74,10 @@ public class Test014 {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
 
+        doVehicleCollisionTesterCastCylinder();
+        doVehicleCollisionTesterCastSphere();
+        doVehicleCollisionTesterRay();
+        doVehicleConstraint();
         doVehicleConstraintSettings();
         doWvControllerSettings();
         doWheelSettingsTv();
@@ -65,6 +87,129 @@ public class Test014 {
     }
     // *************************************************************************
     // Java private methods
+
+    /**
+     * Test the {@code VehicleCollisionTesterCastCylinder} class.
+     */
+    private static void doVehicleCollisionTesterCastCylinder() {
+        VehicleCollisionTesterCastCylinder vctcc
+                = new VehicleCollisionTesterCastCylinder(Layers.MOVING);
+        VehicleCollisionTesterCastCylinderRef ref = vctcc.toRef();
+
+        TestUtils.testClose(ref);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code VehicleCollisionTesterCastSphere} class.
+     */
+    private static void doVehicleCollisionTesterCastSphere() {
+        VehicleCollisionTesterCastSphere vctcs
+                = new VehicleCollisionTesterCastSphere(Layers.MOVING, 0.3f);
+        VehicleCollisionTesterCastSphereRef ref = vctcs.toRef();
+
+        TestUtils.testClose(ref);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code VehicleCollisionTesterRay} class.
+     */
+    private static void doVehicleCollisionTesterRay() {
+        VehicleCollisionTesterRay vctr
+                = new VehicleCollisionTesterRay(Layers.MOVING);
+        VehicleCollisionTesterRayRef ref = vctr.toRef();
+
+        TestUtils.testClose(ref);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code VehicleConstraint} class.
+     */
+    private static void doVehicleConstraint() {
+        VehicleConstraintSettings vcs = new VehicleConstraintSettings();
+        final VehicleConstraintSettingsRef vcsRef = vcs.toRef();
+
+        WheelSettingsWv wswv = new WheelSettingsWv();
+        final WheelSettingsWvRef wswvRef = wswv.toRef();
+        vcs.addWheels(wswv);
+
+        vcs.setNumAntiRollBars(2);
+
+        WheeledVehicleControllerSettings wvcs
+                = new WheeledVehicleControllerSettings();
+        final VehicleControllerSettingsRef wvcsRef = wvcs.toRef();
+        vcs.setController(wvcs);
+
+        BoxShape shape = new BoxShape(2f);
+        final ShapeRef shapeRef = shape.toRef();
+        BodyCreationSettings bcs = new BodyCreationSettings()
+                .setShape(shape);
+        PhysicsSystem physicsSystem = TestUtils.newPhysicsSystem(2);
+        BodyInterface bi = physicsSystem.getBodyInterface();
+        Body body = bi.createBody(bcs);
+        bi.addBody(body, EActivation.DontActivate);
+
+        VehicleConstraint vc = new VehicleConstraint(body, vcs);
+        final VehicleConstraintRef vcRef = vc.toRef();
+
+        // Test the getters:
+        Assert.assertEquals(2, vc.countAntiRollBars());
+        Assert.assertEquals(1, vc.countWheels());
+        Assert.assertNotNull(vc.getAntiRollBar(1));
+
+        Assert.assertNotNull(vc.getController());
+        Assert.assertEquals("WheeledVehicleController",
+                vc.getController().getClass().getSimpleName());
+
+        Assert.assertTrue(vc.getEnabled());
+
+        TestUtils.assertEquals(0f, 0f, 0f, vc.getGravityOverride(), 0f);
+        TestUtils.assertEquals(0f, 0f, 1f, vc.getLocalForward(), 0f);
+        TestUtils.assertEquals(0f, 1f, 0f, vc.getLocalUp(), 0f);
+        Assert.assertEquals(Jolt.JPH_PI, vc.getMaxPitchRollAngle(), 0f);
+
+        Assert.assertEquals(1, vc.getNumStepsBetweenCollisionTestActive());
+        Assert.assertEquals(1, vc.getNumStepsBetweenCollisionTestInactive());
+
+        Assert.assertNotNull(vc.getStepListener());
+        Assert.assertEquals(EConstraintSubType.Vehicle, vc.getSubType());
+        Assert.assertEquals(EConstraintType.Constraint, vc.getType());
+        Assert.assertEquals(body, vc.getVehicleBody());
+        Assert.assertNull(vc.getVehicleCollisionTester());
+
+        Assert.assertNotNull(vc.getWheel(0));
+        Assert.assertEquals(
+                "WheelWv", vc.getWheel(0).getClass().getSimpleName());
+        TestUtils.assertEquals(0f, 1f, 0f, vc.getWorldUp(), 0f);
+        Assert.assertFalse(vc.isActive());
+        Assert.assertFalse(vc.isGravityOverridden());
+
+        // Assign a collision tester:
+        VehicleCollisionTesterRay vctr
+                = new VehicleCollisionTesterRay(Layers.MOVING);
+        final VehicleCollisionTesterRayRef vctrRef = vctr.toRef();
+        vc.setVehicleCollisionTester(vctr);
+        Assert.assertNotNull(vc.getVehicleCollisionTester());
+        Assert.assertEquals("VehicleCollisionTesterRay",
+                vc.getVehicleCollisionTester().getClass().getSimpleName());
+        Assert.assertEquals(vctr, vc.getVehicleCollisionTester());
+
+        // Override gravity:
+        vc.overrideGravity(3f, 4f, 5f);
+        TestUtils.assertEquals(3f, 4f, 5f, vc.getGravityOverride(), 0f);
+        Assert.assertTrue(vc.isGravityOverridden());
+
+        // Alter the maximum pitch/roll angle:
+        vc.setMaxPitchRollAngle(0.12f);
+        Assert.assertEquals(0.12f, vc.getMaxPitchRollAngle(), 1e-8f);
+
+        TestUtils.testClose(vctrRef, vcRef);
+        TestUtils.cleanupPhysicsSystem(physicsSystem);
+        TestUtils.testClose(bcs, shapeRef, wvcsRef, wswvRef, vcsRef);
+        System.gc();
+    }
 
     /**
      * Test the {@code VehicleConstraintSettings} class.
