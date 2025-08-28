@@ -51,7 +51,7 @@ final public class SettingsResult extends Result<SoftBodySharedSettingsRef> {
     /**
      * Return the {@code ShapeRefC}.
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with a new native reference assigned
      */
     @Override
     public SoftBodySharedSettingsRef get() {

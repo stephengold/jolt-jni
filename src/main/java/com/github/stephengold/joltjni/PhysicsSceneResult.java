@@ -49,9 +49,9 @@ final public class PhysicsSceneResult extends Result<PhysicsSceneRef> {
     // Result<PhysicsSceneRef> methods
 
     /**
-     * Return the {@code PhysicsSceneRef}.
+     * Return a counted reference to the scene object.
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with a new native reference assigned
      */
     @Override
     public PhysicsSceneRef get() {

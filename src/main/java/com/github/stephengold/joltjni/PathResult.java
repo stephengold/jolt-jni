@@ -51,7 +51,7 @@ final public class PathResult extends Result<PathConstraintPathRef> {
     /**
      * Return the {@code PathConstraintPathRef}.
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with a new native reference assigned
      */
     public PathConstraintPathRef get() {
         long resultVa = va();

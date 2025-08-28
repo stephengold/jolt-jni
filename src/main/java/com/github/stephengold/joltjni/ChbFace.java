@@ -47,8 +47,8 @@ public class ChbFace extends NonCopyable {
     // new methods exposed
 
     /**
-     * Return the centroid of the face. The face is unaffected. (native
-     * attribute: mCentroid)
+     * Copy the centroid of the face. The face is unaffected. (native attribute:
+     * mCentroid)
      *
      * @return a new location vector
      */
@@ -83,7 +83,7 @@ public class ChbFace extends NonCopyable {
     }
 
     /**
-     * Return the normal of the face. The face is unaffected. (native attribute:
+     * Copy the normal of the face. The face is unaffected. (native attribute:
      * mNormal)
      *
      * @return a new vector whose length is 2 times the area of the face

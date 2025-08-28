@@ -49,9 +49,9 @@ public class ConstraintResult extends Result<ConstraintSettingsRef> {
     // Result<ConstraintSettingsRef> methods
 
     /**
-     * Return a reference to the settings object.
+     * Return a counted reference to the settings object.
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with a new native reference assigned
      */
     @Override
     public ConstraintSettingsRef get() {

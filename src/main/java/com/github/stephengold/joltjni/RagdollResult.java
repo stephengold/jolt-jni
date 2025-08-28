@@ -49,7 +49,7 @@ final public class RagdollResult extends Result<RagdollSettingsRef> {
     // Result<RagdollSettingsRef> methods
 
     /**
-     * Copy the {@code RagdollSettingsRef}.
+     * Return a counted reference to the settings object.
      *
      * @return a new JVM object with a new native object assigned
      */

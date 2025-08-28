@@ -49,9 +49,9 @@ final public class GroupFilterResult extends Result<GroupFilterRef> {
     // Result<GroupFilterRef> methods
 
     /**
-     * Return the {@code GroupFilterRef}.
+     * Return a counted reference to the filter object.
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with a new native reference assigned
      */
     @Override
     public GroupFilterRef get() {

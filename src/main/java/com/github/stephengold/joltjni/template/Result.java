@@ -48,7 +48,7 @@ abstract public class Result<T extends JoltPhysicsObject>
     /**
      * Return the result of a successful operation.
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with the pre-existing native object assigned
      */
     abstract public T get();
 

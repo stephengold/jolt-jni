@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to an {@code Sphere}. (native type: const Sphere)
+ * Read-only access to a {@code Sphere}. (native type: const Sphere)
  *
  * @author Stephen Gold sgold@sonic.net
  */

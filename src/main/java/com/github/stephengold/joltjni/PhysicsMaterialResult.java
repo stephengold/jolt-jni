@@ -51,7 +51,7 @@ final public class PhysicsMaterialResult extends Result<PhysicsMaterialRef> {
     /**
      * Return the {@code PhysicsMaterialRef}.
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with a new native reference assigned
      */
     @Override
     public PhysicsMaterialRef get() {

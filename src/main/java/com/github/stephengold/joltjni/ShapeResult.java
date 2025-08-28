@@ -49,9 +49,9 @@ final public class ShapeResult extends Result<ShapeRefC> {
     // Result<ShapeRefC> methods
 
     /**
-     * Return the {@code ShapeRefC}.
+     * Return a counted reference to the shape.
      *
-     * @return a new JVM object with a new native object assigned
+     * @return a new JVM object with a new native reference assigned
      */
     @Override
     public ShapeRefC get() {
