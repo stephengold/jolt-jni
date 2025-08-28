@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstSubShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -31,7 +32,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class SubShape extends JoltPhysicsObject {
+public class SubShape extends JoltPhysicsObject implements ConstSubShape {
     // *************************************************************************
     // constructors
 
@@ -47,86 +48,6 @@ public class SubShape extends JoltPhysicsObject {
     }
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Calculate the local transform for this shape, given the scale of the
-     * child. The sub-shape is unaffected.
-     *
-     * @param scale the scale of the child in the local space of this shape (not
-     * null, unaffected)
-     * @return a new transform matrix
-     */
-    public Mat44 getLocalTransformNoScale(Vec3Arg scale) {
-        long subshapeVa = va();
-        float sx = scale.getX();
-        float sy = scale.getY();
-        float sz = scale.getZ();
-        long resultVa = getLocalTransformNoScale(subshapeVa, sx, sy, sz);
-        Mat44 result = new Mat44(resultVa, true);
-
-        return result;
-    }
-
-    /**
-     * Copy the center-of-mass location. The sub-shape is unaffected. (native
-     * function: GetPositionCOM)
-     *
-     * @return a new vector
-     */
-    public Vec3 getPositionCom() {
-        long subshapeVa = va();
-        float x = getPositionComX(subshapeVa);
-        float y = getPositionComY(subshapeVa);
-        float z = getPositionComZ(subshapeVa);
-        Vec3 result = new Vec3(x, y, z);
-
-        return result;
-    }
-
-    /**
-     * Copy the rotation. The sub-shape is unaffected.
-     *
-     * @return a new rotation quaternion
-     */
-    public Quat getRotation() {
-        long subShapeVa = va();
-        float w = getRotationW(subShapeVa);
-        float x = getRotationX(subShapeVa);
-        float y = getRotationY(subShapeVa);
-        float z = getRotationZ(subShapeVa);
-        Quat result = new Quat(x, y, z, w);
-
-        return result;
-    }
-
-    /**
-     * Access the child shape. The sub-shape is unaffected.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public ConstShape getShape() {
-        long subShapeVa = va();
-        long childShapeVa = getShape(subShapeVa);
-        ConstShape result = Shape.newShape(childShapeVa);
-        return result;
-    }
-
-    /**
-     * Test whether the specified scale is valid for the sub-shape. The
-     * sub-shape is unaffected.
-     *
-     * @param scale the scale factors to validate (not null, unaffected)
-     * @return {@code true} if valid, otherwise {@code false}
-     */
-    public boolean isValidScale(Vec3Arg scale) {
-        long subshapeVa = va();
-        float sx = scale.getX();
-        float sy = scale.getY();
-        float sz = scale.getZ();
-        boolean result = isValidScale(subshapeVa, sx, sy, sz);
-
-        return result;
-    }
 
     /**
      * Alter the center-of-mass location. (native function: SetPositionCOM)
@@ -177,13 +98,103 @@ public class SubShape extends JoltPhysicsObject {
         float cz = centerOfMass.getZ();
         setTransform(subshapeVa, ox, oy, oz, qx, qy, qz, qw, cx, cy, cz);
     }
+    // *************************************************************************
+    // ConstSubShape methods
 
     /**
-     * Transform the specified scale to the local space of the child.
+     * Calculate the local transform for this shape, given the scale of the
+     * child. The sub-shape is unaffected.
+     *
+     * @param scale the scale of the child in the local space of this shape (not
+     * null, unaffected)
+     * @return a new transform matrix
+     */
+    @Override
+    public Mat44 getLocalTransformNoScale(Vec3Arg scale) {
+        long subshapeVa = va();
+        float sx = scale.getX();
+        float sy = scale.getY();
+        float sz = scale.getZ();
+        long resultVa = getLocalTransformNoScale(subshapeVa, sx, sy, sz);
+        Mat44 result = new Mat44(resultVa, true);
+
+        return result;
+    }
+
+    /**
+     * Copy the center-of-mass location. The sub-shape is unaffected. (native
+     * function: GetPositionCOM)
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getPositionCom() {
+        long subshapeVa = va();
+        float x = getPositionComX(subshapeVa);
+        float y = getPositionComY(subshapeVa);
+        float z = getPositionComZ(subshapeVa);
+        Vec3 result = new Vec3(x, y, z);
+
+        return result;
+    }
+
+    /**
+     * Copy the rotation. The sub-shape is unaffected.
+     *
+     * @return a new rotation quaternion
+     */
+    @Override
+    public Quat getRotation() {
+        long subShapeVa = va();
+        float w = getRotationW(subShapeVa);
+        float x = getRotationX(subShapeVa);
+        float y = getRotationY(subShapeVa);
+        float z = getRotationZ(subShapeVa);
+        Quat result = new Quat(x, y, z, w);
+
+        return result;
+    }
+
+    /**
+     * Access the child shape. The sub-shape is unaffected. (native field:
+     * mShape)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public ConstShape getShape() {
+        long subShapeVa = va();
+        long childShapeVa = getShape(subShapeVa);
+        ConstShape result = Shape.newShape(childShapeVa);
+        return result;
+    }
+
+    /**
+     * Test whether the specified scale is valid for the sub-shape. The
+     * sub-shape is unaffected.
+     *
+     * @param scale the scale factors to validate (not null, unaffected)
+     * @return {@code true} if valid, otherwise {@code false}
+     */
+    @Override
+    public boolean isValidScale(Vec3Arg scale) {
+        long subshapeVa = va();
+        float sx = scale.getX();
+        float sy = scale.getY();
+        float sz = scale.getZ();
+        boolean result = isValidScale(subshapeVa, sx, sy, sz);
+
+        return result;
+    }
+
+    /**
+     * Transform the specified scale to the local space of the child. The
+     * sub-shape is unaffected.
      *
      * @param scale the scale to transform (not null, unaffected)
      * @return a new vector
      */
+    @Override
     public Vec3 transformScale(Vec3Arg scale) {
         long subshapeVa = va();
         float sx = scale.getX();
