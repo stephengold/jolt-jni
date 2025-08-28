@@ -66,7 +66,7 @@ public class PathConstraint extends TwoBodyConstraint {
     public PathConstraintPath getPath() {
         long constraintVa = va();
         long pathVa = getPath(constraintVa);
-        PathConstraintPath result = new PathConstraintPath(pathVa);
+        PathConstraintPath result = PathConstraintPath.newPath(pathVa);
 
         return result;
     }

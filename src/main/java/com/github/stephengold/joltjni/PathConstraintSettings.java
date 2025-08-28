@@ -90,7 +90,7 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     public PathConstraintPath getPath() {
         long settingsVa = va();
         long pathVa = getPath(settingsVa);
-        PathConstraintPath result = new PathConstraintPath(pathVa);
+        PathConstraintPath result = PathConstraintPath.newPath(pathVa);
 
         return result;
     }

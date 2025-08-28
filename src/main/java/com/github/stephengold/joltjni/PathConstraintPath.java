@@ -55,6 +55,31 @@ public class PathConstraintPath
     // new methods exposed
 
     /**
+     * Instantiate a {@code PathConstraintPath} from its virtual address.
+     *
+     * @param pathVa the virtual address of the native object, or zero
+     * @return a new JVM object, or {@code null} if the argument was zero
+     */
+    static PathConstraintPath newPath(long pathVa) {
+        if (pathVa == 0L) {
+            return null;
+        }
+
+        long rttiVa = SerializableObject.getRtti(pathVa);
+        String typeName = Rtti.getName(rttiVa);
+        PathConstraintPath result;
+        switch (typeName) {
+            case "PathConstraintPathHermite":
+                result = new PathConstraintPathHermite(pathVa);
+                break;
+            default:
+                throw new IllegalArgumentException("typeName = " + typeName);
+        }
+
+        return result;
+    }
+
+    /**
      * Return the path amount of the location on the path that's closest to the
      * specified location. The path is unaffected.
      *

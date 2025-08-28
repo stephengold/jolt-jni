@@ -64,7 +64,7 @@ final public class PathConstraintPathRef extends Ref {
     @Override
     public PathConstraintPath getPtr() {
         long pathVa = targetVa();
-        PathConstraintPath result = new PathConstraintPath(pathVa);
+        PathConstraintPath result = PathConstraintPath.newPath(pathVa);
 
         return result;
     }
