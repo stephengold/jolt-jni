@@ -401,6 +401,22 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getGr
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getInverseInertia
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getInverseInertia
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    Mat44 * const pResult = new RMat44();
+    TRACE_NEW("Mat44", pResult)
+    *pResult = pInterface->GetInverseInertia(id);
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    getLinearVelocity
  * Signature: (JILjava/nio/FloatBuffer;)V
  */
@@ -579,6 +595,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getUse
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
     const uint64 result = pInterface->GetUserData(id);
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    getUseManifoldReduction
+ * Signature: (JI)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getUseManifoldReduction
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    const BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    const bool result = pInterface->GetUseManifoldReduction(id);
     return result;
 }
 

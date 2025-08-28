@@ -533,6 +533,20 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Copy the inverse of the inertia tensor in system coordinates.
+     *
+     * @param bodyId the ID of the body to query
+     * @return a new matrix
+     */
+    public Mat44 getInverseInertia(int bodyId) {
+        long bodyInterfaceVa = va();
+        long matrixVa = getInverseInertia(bodyInterfaceVa, bodyId);
+        Mat44 result = new Mat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
      * Return the motion quality.
      *
      * @param bodyId the ID of the body to query
@@ -670,6 +684,19 @@ public class BodyInterface extends NonCopyable {
         long bodyInterfaceVa = va();
         long shapeVa = getTransformedShape(bodyInterfaceVa, bodyId);
         TransformedShape result = new TransformedShape(shapeVa, true);
+
+        return result;
+    }
+
+    /**
+     * Test whether manifold reduction is enabled.
+     *
+     * @param bodyId the ID of the body
+     * @return {@code true} if enabled, otherwise {@code false}
+     */
+    public boolean getUseManifoldReduction(int bodyId) {
+        long bodyInterfaceVa = va();
+        boolean result = getUseManifoldReduction(bodyInterfaceVa, bodyId);
 
         return result;
     }
@@ -1069,6 +1096,9 @@ public class BodyInterface extends NonCopyable {
     native private static float getGravityFactor(
             long bodyInterfaceVa, int bodyId);
 
+    native private static long getInverseInertia(
+            long bodyInterfaceVa, int bodyId);
+
     native private static void getLinearVelocity(
             long bodyInterfaceVa, int bodyId, FloatBuffer storeFloats);
 
@@ -1097,6 +1127,9 @@ public class BodyInterface extends NonCopyable {
             long bodyInterfaceVa, int bodyId);
 
     native private static long getUserData(long bodyInterfaceVa, int bodyId);
+
+    native private static boolean getUseManifoldReduction(
+            long bodyInterfaceVa, int bodyId);
 
     native private static boolean isActive(long bodyInterfaceVa, int bodyId);
 
