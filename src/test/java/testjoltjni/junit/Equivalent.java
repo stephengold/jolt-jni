@@ -25,7 +25,6 @@ import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.MotorSettings;
 import com.github.stephengold.joltjni.ObjectStreamOut;
-import com.github.stephengold.joltjni.PhysicsMaterial;
 import com.github.stephengold.joltjni.PointConstraintSettings;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RackAndPinionConstraintSettings;
@@ -43,6 +42,7 @@ import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstSerializableObject;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
@@ -430,7 +430,7 @@ final class Equivalent {
      * @param actual the actual material (not {@code null}, unaffected)
      */
     static void physicsMaterial(
-            PhysicsMaterial expected, PhysicsMaterial actual) {
+            ConstPhysicsMaterial expected, ConstPhysicsMaterial actual) {
         serializableObject(expected, actual);
 
         color(expected.getDebugColor(), actual.getDebugColor());
