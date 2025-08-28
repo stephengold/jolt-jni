@@ -79,7 +79,7 @@ final public class GroupFilterRef extends Ref {
     @Override
     public GroupFilter getPtr() {
         long filterVa = targetVa();
-        GroupFilter result = new GroupFilter(filterVa);
+        GroupFilter result = GroupFilter.newFilter(filterVa);
 
         return result;
     }

@@ -42,19 +42,33 @@ public class GroupFilter
      */
     GroupFilter() {
     }
-
-    /**
-     * Instantiate a filter with the specified native object assigned but not
-     * owned.
-     *
-     * @param filterVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    GroupFilter(long filterVa) {
-        super(filterVa);
-    }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Instantiate a {@code GroupFilter} from its virtual address.
+     *
+     * @param filterVa the virtual address of the native object, or zero
+     * @return a new JVM object, or {@code null} if the argument was zero
+     */
+    static GroupFilter newFilter(long filterVa) {
+        if (filterVa == 0L) {
+            return null;
+        }
+
+        long rttiVa = SerializableObject.getRtti(filterVa);
+        String typeName = Rtti.getName(rttiVa);
+        GroupFilter result;
+        switch (typeName) {
+            case "GroupFilterTable":
+                result = new GroupFilterTable(filterVa);
+                break;
+            default:
+                throw new IllegalArgumentException("typeName = " + typeName);
+        }
+
+        return result;
+    }
 
     /**
      * Read a filter from the specified binary stream.

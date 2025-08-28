@@ -138,12 +138,7 @@ public class CollisionGroup
     public ConstGroupFilter getGroupFilter() {
         long groupVa = va();
         long filterVa = getGroupFilter(groupVa);
-        GroupFilter result;
-        if (filterVa == 0L) {
-            result = null;
-        } else {
-            result = new GroupFilter(filterVa);
-        }
+        GroupFilter result = GroupFilter.newFilter(filterVa);
 
         return result;
     }
