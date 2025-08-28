@@ -558,6 +558,7 @@ public class Body extends NonCopyable implements ConstBody {
     @Override
     public BodyCreationSettings getBodyCreationSettings() {
         long bodyVa = va();
+        assert isRigidBody(bodyVa) : "not a rigid body";
         long bodySettingsVa = getBodyCreationSettings(bodyVa);
         BodyCreationSettings result
                 = new BodyCreationSettings(bodySettingsVa, true);
@@ -909,6 +910,7 @@ public class Body extends NonCopyable implements ConstBody {
     @Override
     public SoftBodyCreationSettings getSoftBodyCreationSettings() {
         long bodyVa = va();
+        assert isSoftBody(bodyVa) : "not a soft body";
         long settingsVa = getSoftBodyCreationSettings(bodyVa);
         SoftBodyCreationSettings result
                 = new SoftBodyCreationSettings(settingsVa, true);
