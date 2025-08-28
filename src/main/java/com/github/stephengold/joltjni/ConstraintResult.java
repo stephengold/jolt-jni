@@ -29,7 +29,7 @@ import com.github.stephengold.joltjni.template.Result;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ConstraintResult extends Result<ConstraintSettingsRef> {
+final public class ConstraintResult extends Result<ConstraintSettingsRef> {
     // *************************************************************************
     // constructors
 
@@ -69,11 +69,11 @@ public class ConstraintResult extends Result<ConstraintSettingsRef> {
     native private static long get(long resultVa);
 
     @Override
-    final native protected String getError(long resultVa);
+    native protected String getError(long resultVa);
 
     @Override
-    final native protected boolean hasError(long resultVa);
+    native protected boolean hasError(long resultVa);
 
     @Override
-    final native protected boolean isValid(long resultVa);
+    native protected boolean isValid(long resultVa);
 }
