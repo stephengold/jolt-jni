@@ -53,6 +53,7 @@ final public class PathResult extends Result<PathConstraintPathRef> {
      *
      * @return a new JVM object with a new native reference assigned
      */
+    @Override
     public PathConstraintPathRef get() {
         long resultVa = va();
         long refVa = get(resultVa);
