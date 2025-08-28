@@ -33,6 +33,48 @@ final public class Color implements ConstColor {
     // constants
 
     /**
+     * series of colors for {@code sGetDistinctColor()}, pre-generated using
+     * http://phrogz.net/css/distinct-colors.html
+     */
+    final private static ConstColor[] sColors = {
+        new Color(255, 0, 0),
+        new Color(204, 143, 102),
+        new Color(226, 242, 0),
+        new Color(41, 166, 124),
+        new Color(0, 170, 255),
+        new Color(69, 38, 153),
+        new Color(153, 38, 130),
+        new Color(229, 57, 80),
+        new Color(204, 0, 0),
+        new Color(255, 170, 0),
+        new Color(85, 128, 0),
+        new Color(64, 255, 217),
+        new Color(0, 75, 140),
+        new Color(161, 115, 230),
+        new Color(242, 61, 157),
+        new Color(178, 101, 89),
+        new Color(140, 94, 0),
+        new Color(181, 217, 108),
+        new Color(64, 242, 255),
+        new Color(77, 117, 153),
+        new Color(157, 61, 242),
+        new Color(140, 0, 56),
+        new Color(127, 57, 32),
+        new Color(204, 173, 51),
+        new Color(64, 255, 64),
+        new Color(38, 145, 153),
+        new Color(0, 102, 255),
+        new Color(242, 0, 226),
+        new Color(153, 77, 107),
+        new Color(229, 92, 0),
+        new Color(140, 126, 70),
+        new Color(0, 179, 71),
+        new Color(0, 194, 242),
+        new Color(27, 0, 204),
+        new Color(230, 115, 222),
+        new Color(127, 0, 17)
+    };
+    /**
      * black
      */
     final public static ConstColor sBlack = new Color(0, 0, 0);
@@ -248,13 +290,15 @@ final public class Color implements ConstColor {
     }
 
     /**
-     * Create a color with the specified integer value.
+     * Create a distinctive color.
      *
-     * @param u32 the desired 32-bit value
+     * @param index the index
      * @return a new object
      */
-    public static Color sGetDistinctColor(int u32) {
-        Color result = new Color(u32);
+    public static Color sGetDistinctColor(int index) {
+        int j = index % sColors.length;
+        Color result = new Color(sColors[j]);
+
         return result;
     }
     // *************************************************************************
