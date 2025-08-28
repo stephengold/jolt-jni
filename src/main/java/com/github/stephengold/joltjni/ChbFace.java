@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstChbFace;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
 /**
@@ -29,7 +30,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ChbFace extends NonCopyable {
+public class ChbFace extends NonCopyable implements ConstChbFace {
     // *************************************************************************
     // constructors
 
@@ -44,7 +45,7 @@ public class ChbFace extends NonCopyable {
         super(container, faceVa);
     }
     // *************************************************************************
-    // new methods exposed
+    // ConstChbFace methods
 
     /**
      * Copy the centroid of the face. The face is unaffected. (native attribute:
@@ -52,6 +53,7 @@ public class ChbFace extends NonCopyable {
      *
      * @return a new location vector
      */
+    @Override
     public Vec3 getCentroid() {
         long faceVa = va();
         float[] storeFloats = new float[3];
@@ -68,6 +70,7 @@ public class ChbFace extends NonCopyable {
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null} if none
      */
+    @Override
     public ChbEdge getFirstEdge() {
         long faceVa = va();
         long edgeVa = getFirstEdge(faceVa);
@@ -88,6 +91,7 @@ public class ChbFace extends NonCopyable {
      *
      * @return a new vector whose length is 2 times the area of the face
      */
+    @Override
     public Vec3 getNormal() {
         long faceVa = va();
         float[] storeFloats = new float[3];
@@ -104,6 +108,7 @@ public class ChbFace extends NonCopyable {
      * @param point the location to test (not null, unaffected)
      * @return {@code true} if facing the test point, otherwise {@code false}
      */
+    @Override
     public boolean isFacing(Vec3Arg point) {
         long faceVa = va();
         float x = point.getX();
