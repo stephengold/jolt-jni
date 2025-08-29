@@ -56,8 +56,8 @@ final public class GroupFilterResult extends Result<GroupFilterRef> {
     @Override
     public GroupFilterRef get() {
         long resultVa = va();
-        long sceneRefVa = get(resultVa);
-        GroupFilterRef result = new GroupFilterRef(sceneRefVa, true);
+        long filterRefVa = get(resultVa);
+        GroupFilterRef result = new GroupFilterRef(filterRefVa, true);
 
         return result;
     }
