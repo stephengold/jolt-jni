@@ -124,22 +124,3 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_StreamOutWrapper_cre
     TRACE_NEW("StreamOutWrapper", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
-
-/*
- * Class:     com_github_stephengold_joltjni_StreamOutWrapper
- * Method:    createStreamOutWrapper
- * Signature: (Ljava/lang/String;I)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_StreamOutWrapper_createStreamOutWrapper
-  (JNIEnv *pEnv, jclass, jstring fileName, jint fileMode) {
-    std::ofstream * const pStream = new std::ofstream(); // TODO garbage
-    TRACE_NEW("ofstream", pStream)
-    jboolean isCopy;
-    const char * const pFileName = pEnv->GetStringUTFChars(fileName, &isCopy);
-    const std::ios_base::openmode mode = (std::ios_base::openmode) fileMode;
-    pStream->open(pFileName, mode);
-    pEnv->ReleaseStringUTFChars(fileName, pFileName);
-    StreamOutWrapper * const pResult = new StreamOutWrapper(*pStream);
-    TRACE_NEW("StreamOutWrapper", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
