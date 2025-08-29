@@ -79,41 +79,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Contact_getCharacter
 
 /*
  * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getContactNormalX
- * Signature: (J)F
+ * Method:    getContactNormal
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getContactNormalX
-  (JNIEnv *, jclass, jlong contactVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getContactNormal
+  (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeFloats) {
     const CharacterVirtual::Contact * const pContact
             = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const float result = pContact->mContactNormal.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getContactNormalY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getContactNormalY
-  (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const float result = pContact->mContactNormal.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getContactNormalZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getContactNormalZ
-  (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const float result = pContact->mContactNormal.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pContact->mContactNormal;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -170,41 +148,19 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Contact_getIsSens
 
 /*
  * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getLinearVelocityX
- * Signature: (J)F
+ * Method:    getLinearVelocity
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getLinearVelocityX
-  (JNIEnv *, jclass, jlong contactVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getLinearVelocity
+  (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeFloats) {
     const CharacterVirtual::Contact * const pContact
             = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const float result = pContact->mLinearVelocity.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getLinearVelocityY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getLinearVelocityY
-  (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const float result = pContact->mLinearVelocity.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getLinearVelocityZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getLinearVelocityZ
-  (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const float result = pContact->mLinearVelocity.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pContact->mLinearVelocity;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -222,41 +178,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Contact_getMotionType
 
 /*
  * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getPositionX
- * Signature: (J)D
+ * Method:    getPosition
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Contact_getPositionX
-  (JNIEnv *, jclass, jlong contactVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getPosition
+  (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeDoubles) {
     const CharacterVirtual::Contact * const pContact
             = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const Real result = pContact->mPosition.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getPositionY
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Contact_getPositionY
-  (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const Real result = pContact->mPosition.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getPositionZ
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_Contact_getPositionZ
-  (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const Real result = pContact->mPosition.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pContact->mPosition;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
@@ -274,41 +208,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Contact_getSubShapeId
 
 /*
  * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getSurfaceNormalX
- * Signature: (J)F
+ * Method:    getSurfaceNormal
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getSurfaceNormalX
-  (JNIEnv *, jclass, jlong contactVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Contact_getSurfaceNormal
+  (JNIEnv *pEnv, jclass, jlong contactVa, jobject storeFloats) {
     const CharacterVirtual::Contact * const pContact
             = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const float result = pContact->mSurfaceNormal.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getSurfaceNormalY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getSurfaceNormalY
-  (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const float result = pContact->mSurfaceNormal.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Contact
- * Method:    getSurfaceNormalZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Contact_getSurfaceNormalZ
-  (JNIEnv *, jclass, jlong contactVa) {
-    const CharacterVirtual::Contact * const pContact
-            = reinterpret_cast<CharacterVirtual::Contact *> (contactVa);
-    const float result = pContact->mSurfaceNormal.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pContact->mSurfaceNormal;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

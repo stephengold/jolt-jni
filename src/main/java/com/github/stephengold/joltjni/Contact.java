@@ -24,6 +24,8 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstContact;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Describe a contact between a {@code Character} and a body or another
@@ -108,10 +110,9 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     @Override
     public Vec3 getContactNormal() {
         long contactVa = va();
-        float nx = getContactNormalX(contactVa);
-        float ny = getContactNormalY(contactVa);
-        float nz = getContactNormalZ(contactVa);
-        Vec3 result = new Vec3(nx, ny, nz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getContactNormal(contactVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -183,10 +184,9 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     @Override
     public Vec3 getLinearVelocity() {
         long contactVa = va();
-        float vx = getLinearVelocityX(contactVa);
-        float vy = getLinearVelocityY(contactVa);
-        float vz = getLinearVelocityZ(contactVa);
-        Vec3 result = new Vec3(vx, vy, vz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity(contactVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -215,10 +215,9 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     @Override
     public RVec3 getPosition() {
         long contactVa = va();
-        double locX = getPositionX(contactVa);
-        double locY = getPositionY(contactVa);
-        double locZ = getPositionZ(contactVa);
-        RVec3 result = new RVec3(locX, locY, locZ);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(contactVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -246,10 +245,9 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     @Override
     public Vec3 getSurfaceNormal() {
         long contactVa = va();
-        float nx = getSurfaceNormalX(contactVa);
-        float ny = getSurfaceNormalY(contactVa);
-        float nz = getSurfaceNormalZ(contactVa);
-        Vec3 result = new Vec3(nx, ny, nz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSurfaceNormal(contactVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -292,11 +290,8 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     native private static long getCharacterB(long contactVa);
 
-    native private static float getContactNormalX(long contactVa);
-
-    native private static float getContactNormalY(long contactVa);
-
-    native private static float getContactNormalZ(long contactVa);
+    native private static void getContactNormal(
+            long contactVa, FloatBuffer storeFloats);
 
     native private static float getDistance(long contactVa);
 
@@ -306,27 +301,18 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
 
     native private static boolean getIsSensorB(long contactVa);
 
-    native private static float getLinearVelocityX(long contactVa);
-
-    native private static float getLinearVelocityY(long contactVa);
-
-    native private static float getLinearVelocityZ(long contactVa);
+    native private static void getLinearVelocity(
+            long contactVa, FloatBuffer storeFloats);
 
     native private static int getMotionTypeB(long contactVa);
 
-    native private static double getPositionX(long contactVa);
-
-    native private static double getPositionY(long contactVa);
-
-    native private static double getPositionZ(long contactVa);
+    native private static void getPosition(
+            long contactVa, DoubleBuffer storeDoubles);
 
     native private static int getSubShapeIdB(long contactVa);
 
-    native private static float getSurfaceNormalX(long contactVa);
-
-    native private static float getSurfaceNormalY(long contactVa);
-
-    native private static float getSurfaceNormalZ(long contactVa);
+    native private static void getSurfaceNormal(
+            long contactVa, FloatBuffer storeFloats);
 
     native private static long getUserData(long contactVa);
 
