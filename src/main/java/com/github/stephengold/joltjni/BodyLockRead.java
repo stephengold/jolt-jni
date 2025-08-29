@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBody;
+import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
 
 /**
  * Lock a body for read-only access.
@@ -33,9 +34,9 @@ public class BodyLockRead extends NonCopyable {
     // fields
 
     /**
-     * the interface to use
+     * which body-lock interface to use
      */
-    final private BodyLockInterface bli;
+    final private ConstBodyLockInterface bli;
     // *************************************************************************
     // constructors
 
@@ -45,9 +46,9 @@ public class BodyLockRead extends NonCopyable {
      * @param bli the interface to use (not null, unaffected)
      * @param bodyId the ID of the body to lock
      */
-    public BodyLockRead(BodyLockInterface bli, int bodyId) {
+    public BodyLockRead(ConstBodyLockInterface bli, int bodyId) {
         this.bli = bli;
-        long interfaceVa = bli.va();
+        long interfaceVa = bli.targetVa();
         long lockVa = createBodyLockRead(interfaceVa, bodyId);
         setVirtualAddressAsOwner(lockVa);
     }
