@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,51 +19,31 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.readonly.ConstAaBox;
-import com.github.stephengold.joltjni.readonly.ConstNarrowPhaseQuery;
-import com.github.stephengold.joltjni.readonly.ConstShape;
-import com.github.stephengold.joltjni.readonly.RMat44Arg;
-import com.github.stephengold.joltjni.readonly.RVec3Arg;
-import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import com.github.stephengold.joltjni.BodyFilter;
+import com.github.stephengold.joltjni.BroadPhaseLayerFilter;
+import com.github.stephengold.joltjni.CastRayCollector;
+import com.github.stephengold.joltjni.CastShapeCollector;
+import com.github.stephengold.joltjni.CollidePointCollector;
+import com.github.stephengold.joltjni.CollideShapeCollector;
+import com.github.stephengold.joltjni.CollideShapeSettings;
+import com.github.stephengold.joltjni.ObjectLayerFilter;
+import com.github.stephengold.joltjni.RRayCast;
+import com.github.stephengold.joltjni.RShapeCast;
+import com.github.stephengold.joltjni.RayCastResult;
+import com.github.stephengold.joltjni.RayCastSettings;
+import com.github.stephengold.joltjni.ShapeCastSettings;
+import com.github.stephengold.joltjni.ShapeFilter;
+import com.github.stephengold.joltjni.TransformedShapeCollector;
 
 /**
- * Interface for precise collision detection against the bodies in a
- * {@code PhysicsSystem}.
+ * Read-only access to a {@code NarrowPhaseQuery}. (native type:
+ * {@code const NarrowPhaseQuery})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class NarrowPhaseQuery
-        extends NonCopyable
-        implements ConstNarrowPhaseQuery {
-    // *************************************************************************
-    // constructors
-
-    /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param system the containing object, or {@code null} if none
-     * @param queryVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    NarrowPhaseQuery(PhysicsSystem system, long queryVa) {
-        super(system, queryVa);
-    }
-    // *************************************************************************
-    // new methods exposed
-
-    /**
-     * Access the underlying {@code PhysicsSystem}.
-     *
-     * @return the pre-existing instance
-     */
-    public PhysicsSystem getSystem() {
-        return (PhysicsSystem) getContainingObject();
-    }
-    // *************************************************************************
-    // ConstNarrowPhaseQuery methods
-
+public interface ConstNarrowPhaseQuery extends ConstJoltPhysicsObject {
     /**
      * Cast a ray and obtain the nearest hit, if any.
      *
@@ -72,12 +52,7 @@ public class NarrowPhaseQuery
      * may be modified)
      * @return {@code true} if a hit was found, otherwise {@code false}
      */
-    @Override
-    public boolean castRay(RRayCast raycast, RayCastResult hitResult) {
-        boolean result
-                = castRay(raycast, hitResult, new BroadPhaseLayerFilter());
-        return result;
-    }
+    boolean castRay(RRayCast raycast, RayCastResult hitResult);
 
     /**
      * Cast a ray and obtain the nearest hit, if any.
@@ -89,13 +64,8 @@ public class NarrowPhaseQuery
      * unaffected)
      * @return {@code true} if a hit was found, otherwise {@code false}
      */
-    @Override
-    public boolean castRay(RRayCast raycast, RayCastResult hitResult,
-            BroadPhaseLayerFilter bplFilter) {
-        boolean result = castRay(raycast, hitResult, bplFilter,
-                new ObjectLayerFilter());
-        return result;
-    }
+    boolean castRay(RRayCast raycast, RayCastResult hitResult,
+            BroadPhaseLayerFilter bplFilter);
 
     /**
      * Cast a ray and obtain the nearest hit, if any.
@@ -108,13 +78,8 @@ public class NarrowPhaseQuery
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      * @return {@code true} if a hit was found, otherwise {@code false}
      */
-    @Override
-    public boolean castRay(RRayCast raycast, RayCastResult hitResult,
-            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
-        boolean result = castRay(
-                raycast, hitResult, bplFilter, olFilter, new BodyFilter());
-        return result;
-    }
+    boolean castRay(RRayCast raycast, RayCastResult hitResult,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
 
     /**
      * Cast a ray and obtain the nearest hit, if any.
@@ -128,21 +93,9 @@ public class NarrowPhaseQuery
      * @param bodyFilter the body filter to apply (not null, unaffected)
      * @return {@code true} if a hit was found, otherwise {@code false}
      */
-    @Override
-    public boolean castRay(RRayCast raycast, RayCastResult hitResult,
+    boolean castRay(RRayCast raycast, RayCastResult hitResult,
             BroadPhaseLayerFilter bplFilter,
-            ObjectLayerFilter olFilter, BodyFilter bodyFilter) {
-        long queryVa = va();
-        long raycastVa = raycast.va();
-        long hitResultVa = hitResult.va();
-        long bplFilterVa = bplFilter.va();
-        long olFilterVa = olFilter.va();
-        long bodyFilterVa = bodyFilter.va();
-        boolean result = castRay(queryVa, raycastVa, hitResultVa, bplFilterVa,
-                olFilterVa, bodyFilterVa);
-
-        return result;
-    }
+            ObjectLayerFilter olFilter, BodyFilter bodyFilter);
 
     /**
      * Cast a ray and collect the resulting hits.
@@ -152,11 +105,8 @@ public class NarrowPhaseQuery
      * unaffected)
      * @param collector the hit collector to use (not null)
      */
-    @Override
-    public void castRay(RRayCast raycast, RayCastSettings settings,
-            CastRayCollector collector) {
-        castRay(raycast, settings, collector, new BroadPhaseLayerFilter());
-    }
+    void castRay(RRayCast raycast, RayCastSettings settings,
+            CastRayCollector collector);
 
     /**
      * Cast a ray and collect the resulting hits.
@@ -168,12 +118,8 @@ public class NarrowPhaseQuery
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
-    @Override
-    public void castRay(RRayCast raycast, RayCastSettings settings,
-            CastRayCollector collector, BroadPhaseLayerFilter bplFilter) {
-        castRay(raycast, settings, collector, bplFilter,
-                new ObjectLayerFilter());
-    }
+    void castRay(RRayCast raycast, RayCastSettings settings,
+            CastRayCollector collector, BroadPhaseLayerFilter bplFilter);
 
     /**
      * Cast a ray and collect the resulting hits.
@@ -186,13 +132,9 @@ public class NarrowPhaseQuery
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
-    @Override
-    public void castRay(RRayCast raycast, RayCastSettings settings,
+    void castRay(RRayCast raycast, RayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
-            ObjectLayerFilter olFilter) {
-        castRay(raycast, settings, collector, bplFilter, olFilter,
-                new BodyFilter());
-    }
+            ObjectLayerFilter olFilter);
 
     /**
      * Cast a ray and collect the resulting hits.
@@ -206,13 +148,9 @@ public class NarrowPhaseQuery
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      * @param bodyFilter the body filter to apply (not null, unaffected)
      */
-    @Override
-    public void castRay(RRayCast raycast, RayCastSettings settings,
+    void castRay(RRayCast raycast, RayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
-            ObjectLayerFilter olFilter, BodyFilter bodyFilter) {
-        castRay(raycast, settings, collector, bplFilter, olFilter, bodyFilter,
-                new ShapeFilter());
-    }
+            ObjectLayerFilter olFilter, BodyFilter bodyFilter);
 
     /**
      * Cast a ray and collect the resulting hits.
@@ -227,22 +165,10 @@ public class NarrowPhaseQuery
      * @param bodyFilter the body filter to apply (not null, unaffected)
      * @param shapeFilter the shape filter to apply (not null, unaffected)
      */
-    @Override
-    public void castRay(RRayCast raycast, RayCastSettings settings,
+    void castRay(RRayCast raycast, RayCastSettings settings,
             CastRayCollector collector, BroadPhaseLayerFilter bplFilter,
             ObjectLayerFilter olFilter, BodyFilter bodyFilter,
-            ShapeFilter shapeFilter) {
-        long queryVa = va();
-        long raycastVa = raycast.va();
-        long settingsVa = settings.va();
-        long collectorVa = collector.va();
-        long bplFilterVa = bplFilter.va();
-        long olFilterVa = olFilter.va();
-        long bodyFilterVa = bodyFilter.va();
-        long shapeFilterVa = shapeFilter.va();
-        castRay(queryVa, raycastVa, settingsVa, collectorVa, bplFilterVa,
-                olFilterVa, bodyFilterVa, shapeFilterVa);
-    }
+            ShapeFilter shapeFilter);
 
     /**
      * Cast a shape and collect the resulting hits.
@@ -254,12 +180,8 @@ public class NarrowPhaseQuery
      * (0,0,0)&rarr;world coordinates)
      * @param collector the hit collector to use (not null)
      */
-    @Override
-    public void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
-            RVec3Arg base, CastShapeCollector collector) {
-        castShape(shapeCast, settings, base, collector,
-                new BroadPhaseLayerFilter());
-    }
+    void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
+            RVec3Arg base, CastShapeCollector collector);
 
     /**
      * Cast a shape and collect the resulting hits.
@@ -273,13 +195,9 @@ public class NarrowPhaseQuery
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
-    @Override
-    public void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
+    void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
-            BroadPhaseLayerFilter bplFilter) {
-        castShape(shapeCast, settings, base, collector, bplFilter,
-                new ObjectLayerFilter());
-    }
+            BroadPhaseLayerFilter bplFilter);
 
     /**
      * Cast a shape and collect the resulting hits.
@@ -294,13 +212,9 @@ public class NarrowPhaseQuery
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
-    @Override
-    public void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
+    void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
-            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
-        castShape(shapeCast, settings, base, collector, bplFilter, olFilter,
-                new BodyFilter());
-    }
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
 
     /**
      * Cast a shape and collect the resulting hits.
@@ -316,14 +230,10 @@ public class NarrowPhaseQuery
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      * @param bodyFilter the body filter to apply (not null, unaffected)
      */
-    @Override
-    public void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
+    void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
-            BodyFilter bodyFilter) {
-        castShape(shapeCast, settings, base, collector, bplFilter, olFilter,
-                bodyFilter, new ShapeFilter());
-    }
+            BodyFilter bodyFilter);
 
     /**
      * Cast a shape and collect the resulting hits.
@@ -340,26 +250,10 @@ public class NarrowPhaseQuery
      * @param bodyFilter the body filter to apply (not null, unaffected)
      * @param shapeFilter the shape filter to apply (not null, unaffected)
      */
-    @Override
-    public void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
+    void castShape(RShapeCast shapeCast, ShapeCastSettings settings,
             RVec3Arg base, CastShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
-            BodyFilter bodyFilter, ShapeFilter shapeFilter) {
-        long queryVa = va();
-        long shapeCastVa = shapeCast.va();
-        long settingsVa = settings.va();
-        double baseX = base.xx();
-        double baseY = base.yy();
-        double baseZ = base.zz();
-        long collectorVa = collector.va();
-        long bplFilterVa = bplFilter.va();
-        long olFilterVa = olFilter.va();
-        long bodyFilterVa = bodyFilter.va();
-        long shapeFilterVa = shapeFilter.va();
-        castShape(queryVa, shapeCastVa, settingsVa, baseX, baseY, baseZ,
-                collectorVa, bplFilterVa, olFilterVa, bodyFilterVa,
-                shapeFilterVa);
-    }
+            BodyFilter bodyFilter, ShapeFilter shapeFilter);
 
     /**
      * Collect leaf shapes that lie within the specified bounds.
@@ -367,11 +261,8 @@ public class NarrowPhaseQuery
      * @param box the bounds (in system coordinates, not null, unaffected)
      * @param collector the hit collector to use (not null)
      */
-    @Override
-    public void collectTransformedShapes(
-            ConstAaBox box, TransformedShapeCollector collector) {
-        collectTransformedShapes(box, collector, new BroadPhaseLayerFilter());
-    }
+    void collectTransformedShapes(
+            ConstAaBox box, TransformedShapeCollector collector);
 
     /**
      * Collect leaf shapes that lie within the specified bounds.
@@ -381,13 +272,9 @@ public class NarrowPhaseQuery
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
-    @Override
-    public void collectTransformedShapes(
+    void collectTransformedShapes(
             ConstAaBox box, TransformedShapeCollector collector,
-            BroadPhaseLayerFilter bplFilter) {
-        collectTransformedShapes(
-                box, collector, bplFilter, new ObjectLayerFilter());
-    }
+            BroadPhaseLayerFilter bplFilter);
 
     /**
      * Collect leaf shapes that lie within the specified bounds.
@@ -398,13 +285,9 @@ public class NarrowPhaseQuery
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
-    @Override
-    public void collectTransformedShapes(
+    void collectTransformedShapes(
             ConstAaBox box, TransformedShapeCollector collector,
-            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
-        collectTransformedShapes(
-                box, collector, bplFilter, olFilter, new BodyFilter());
-    }
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
 
     /**
      * Collect leaf shapes that lie within the specified bounds.
@@ -416,14 +299,10 @@ public class NarrowPhaseQuery
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      * @param bodyFilter the body filter to apply (not null, unaffected)
      */
-    @Override
-    public void collectTransformedShapes(
+    void collectTransformedShapes(
             ConstAaBox box, TransformedShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
-            BodyFilter bodyFilter) {
-        collectTransformedShapes(box, collector, bplFilter, olFilter,
-                bodyFilter, new ShapeFilter());
-    }
+            BodyFilter bodyFilter);
 
     /**
      * Collect leaf shapes that lie within the specified bounds.
@@ -436,21 +315,10 @@ public class NarrowPhaseQuery
      * @param bodyFilter the body filter to apply (not null, unaffected)
      * @param shapeFilter the shape filter to apply (not null, unaffected)
      */
-    @Override
-    public void collectTransformedShapes(
+    void collectTransformedShapes(
             ConstAaBox box, TransformedShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
-            BodyFilter bodyFilter, ShapeFilter shapeFilter) {
-        long queryVa = va();
-        long boxVa = box.targetVa();
-        long collectorVa = collector.va();
-        long bplFilterVa = bplFilter.va();
-        long olFilterVa = olFilter.va();
-        long bodyFilterVa = bodyFilter.va();
-        long shapeFilterVa = shapeFilter.va();
-        collectTransformedShapes(queryVa, boxVa, collectorVa, bplFilterVa,
-                olFilterVa, bodyFilterVa, shapeFilterVa);
-    }
+            BodyFilter bodyFilter, ShapeFilter shapeFilter);
 
     /**
      * Collect collisions with the specified point.
@@ -458,10 +326,7 @@ public class NarrowPhaseQuery
      * @param point the location of the point to test (not null, unaffected)
      * @param collector the hit collector to use (not null)
      */
-    @Override
-    public void collidePoint(RVec3Arg point, CollidePointCollector collector) {
-        collidePoint(point, collector, new BroadPhaseLayerFilter());
-    }
+    void collidePoint(RVec3Arg point, CollidePointCollector collector);
 
     /**
      * Collect collisions with the specified point.
@@ -471,11 +336,8 @@ public class NarrowPhaseQuery
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
-    @Override
-    public void collidePoint(RVec3Arg point, CollidePointCollector collector,
-            BroadPhaseLayerFilter bplFilter) {
-        collidePoint(point, collector, bplFilter, new ObjectLayerFilter());
-    }
+    void collidePoint(RVec3Arg point, CollidePointCollector collector,
+            BroadPhaseLayerFilter bplFilter);
 
     /**
      * Collect collisions with the specified point.
@@ -486,11 +348,8 @@ public class NarrowPhaseQuery
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
-    @Override
-    public void collidePoint(RVec3Arg point, CollidePointCollector collector,
-            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
-        collidePoint(point, collector, bplFilter, olFilter, new BodyFilter());
-    }
+    void collidePoint(RVec3Arg point, CollidePointCollector collector,
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
 
     /**
      * Collect collisions with the specified point.
@@ -502,13 +361,9 @@ public class NarrowPhaseQuery
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      * @param bodyFilter the body filter to apply (not null, unaffected)
      */
-    @Override
-    public void collidePoint(RVec3Arg point, CollidePointCollector collector,
+    void collidePoint(RVec3Arg point, CollidePointCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
-            BodyFilter bodyFilter) {
-        collidePoint(point, collector, bplFilter, olFilter, bodyFilter,
-                new ShapeFilter());
-    }
+            BodyFilter bodyFilter);
 
     /**
      * Collect collisions with the specified point.
@@ -521,22 +376,9 @@ public class NarrowPhaseQuery
      * @param bodyFilter the body filter to apply (not null, unaffected)
      * @param shapeFilter the shape filter to apply (not null, unaffected)
      */
-    @Override
-    public void collidePoint(RVec3Arg point, CollidePointCollector collector,
+    void collidePoint(RVec3Arg point, CollidePointCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
-            BodyFilter bodyFilter, ShapeFilter shapeFilter) {
-        long queryVa = va();
-        double xx = point.xx();
-        double yy = point.yy();
-        double zz = point.zz();
-        long collectorVa = collector.va();
-        long bplFilterVa = bplFilter.va();
-        long olFilterVa = olFilter.va();
-        long bodyFilterVa = bodyFilter.va();
-        long shapeFilterVa = shapeFilter.va();
-        collidePoint(queryVa, xx, yy, zz, collectorVa, bplFilterVa,
-                olFilterVa, bodyFilterVa, shapeFilterVa);
-    }
+            BodyFilter bodyFilter, ShapeFilter shapeFilter);
 
     /**
      * Collect collisions with the specified shape.
@@ -550,13 +392,9 @@ public class NarrowPhaseQuery
      * (0,0,0)&rarr;world coordinates)
      * @param collector the hit collector to use (not null)
      */
-    @Override
-    public void collideShape(ConstShape shape, Vec3Arg shapeScale,
+    void collideShape(ConstShape shape, Vec3Arg shapeScale,
             RMat44Arg comTransform, CollideShapeSettings settings,
-            RVec3Arg base, CollideShapeCollector collector) {
-        collideShape(shape, shapeScale, comTransform, settings, base, collector,
-                new BroadPhaseLayerFilter());
-    }
+            RVec3Arg base, CollideShapeCollector collector);
 
     /**
      * Collect collisions with the specified shape.
@@ -572,14 +410,10 @@ public class NarrowPhaseQuery
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
-    @Override
-    public void collideShape(ConstShape shape, Vec3Arg shapeScale,
+    void collideShape(ConstShape shape, Vec3Arg shapeScale,
             RMat44Arg comTransform, CollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
-            BroadPhaseLayerFilter bplFilter) {
-        collideShape(shape, shapeScale, comTransform, settings, base, collector,
-                bplFilter, new ObjectLayerFilter());
-    }
+            BroadPhaseLayerFilter bplFilter);
 
     /**
      * Collect collisions with the specified shape.
@@ -596,14 +430,10 @@ public class NarrowPhaseQuery
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
-    @Override
-    public void collideShape(ConstShape shape, Vec3Arg shapeScale,
+    void collideShape(ConstShape shape, Vec3Arg shapeScale,
             RMat44Arg comTransform, CollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
-            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
-        collideShape(shape, shapeScale, comTransform, settings, base, collector,
-                bplFilter, olFilter, new BodyFilter());
-    }
+            BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter);
 
     /**
      * Collect collisions with the specified shape.
@@ -621,15 +451,11 @@ public class NarrowPhaseQuery
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      * @param bodyFilter the body filter to apply (not null, unaffected)
      */
-    @Override
-    public void collideShape(ConstShape shape, Vec3Arg shapeScale,
+    void collideShape(ConstShape shape, Vec3Arg shapeScale,
             RMat44Arg comTransform, CollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
-            BodyFilter bodyFilter) {
-        collideShape(shape, shapeScale, comTransform, settings, base, collector,
-                bplFilter, olFilter, bodyFilter, new ShapeFilter());
-    }
+            BodyFilter bodyFilter);
 
     /**
      * Collect collisions with the specified shape.
@@ -648,58 +474,9 @@ public class NarrowPhaseQuery
      * @param bodyFilter the body filter to apply (not null, unaffected)
      * @param shapeFilter the shape filter to apply (not null, unaffected)
      */
-    @Override
-    public void collideShape(ConstShape shape, Vec3Arg shapeScale,
+    void collideShape(ConstShape shape, Vec3Arg shapeScale,
             RMat44Arg comTransform, CollideShapeSettings settings,
             RVec3Arg base, CollideShapeCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter,
-            BodyFilter bodyFilter, ShapeFilter shapeFilter) {
-        long queryVa = va();
-        long shapeVa = shape.targetVa();
-        float sx = shapeScale.getX();
-        float sy = shapeScale.getY();
-        float sz = shapeScale.getZ();
-        long transformVa = comTransform.targetVa();
-        long settingsVa = settings.va();
-        double baseX = base.xx();
-        double baseY = base.yy();
-        double baseZ = base.zz();
-        long collectorVa = collector.va();
-        long bplFilterVa = bplFilter.va();
-        long olFilterVa = olFilter.va();
-        long bodyFilterVa = bodyFilter.va();
-        long shapeFilterVa = shapeFilter.va();
-        collideShape(queryVa, shapeVa, sx, sy, sz, transformVa, settingsVa,
-                baseX, baseY, baseZ, collectorVa, bplFilterVa,
-                olFilterVa, bodyFilterVa, shapeFilterVa);
-    }
-    // *************************************************************************
-    // native private methods
-
-    native private static boolean castRay(long queryVa, long raycastVa,
-            long castResultVa, long bplFilterVa, long olFilterVa,
-            long bodyFilterVa);
-
-    native private static void castRay(long queryVa, long raycastVa,
-            long settingsVa, long collectorVa, long bplFilterVa,
-            long olFilterVa, long bodyFilterVa, long shapeFilterVa);
-
-    native private static void castShape(long queryVa, long shapeCastVa,
-            long settingsVa, double baseX, double baseY, double baseZ,
-            long collectorVa, long bplFilterVa, long olFilterVa,
-            long bodyFilterVa, long shapeFilterVa);
-
-    native private static void collectTransformedShapes(
-            long queryVa, long boxVa, long collectorVa, long bplFilterVa,
-            long olFilterVa, long bodyFilterVa, long shapeFilterVa);
-
-    native private static void collidePoint(long queryVa, double xx, double yy,
-            double zz, long collectorVa, long bplFilterVa,
-            long olFilterVa, long bodyFilterVa, long shapeFilterVa);
-
-    native private static void collideShape(long queryVa, long shapeVa,
-            float sx, float sy, float sz, long transformVa, long settingsVa,
-            double baseX, double baseY, double baseZ, long collectorVa,
-            long bplFilterVa, long olFilterVa, long bodyFilterVa,
-            long shapeFilterVa);
+            BodyFilter bodyFilter, ShapeFilter shapeFilter);
 }
