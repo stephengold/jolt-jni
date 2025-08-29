@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,44 +19,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-package com.github.stephengold.joltjni;
+package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
+import com.github.stephengold.joltjni.PhysicsSystem;
+import com.github.stephengold.joltjni.SharedMutex;
 
 /**
- * An interface to a {@code PhysicsSystem} that is aware of body locking.
+ * Read-only access to a {@code BodyLockInterface}. (native type: const
+ * BodyLockInterface)
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class BodyLockInterface
-        extends NonCopyable
-        implements ConstBodyLockInterface {
-    // *************************************************************************
-    // constructors
-
-    /**
-     * Instantiate with the specified container and native object.
-     *
-     * @param system the containing object, or {@code null} if none
-     * @param interfaceVa the virtual address of the native object to assign
-     * (not zero)
-     */
-    BodyLockInterface(PhysicsSystem system, long interfaceVa) {
-        super(system, interfaceVa);
-    }
-    // *************************************************************************
-    // ConstBodyLockInterface methods
-
+public interface ConstBodyLockInterface extends ConstJoltPhysicsObject {
     /**
      * Access the underlying {@code PhysicsSystem}.
      *
      * @return the pre-existing instance
      */
-    @Override
-    public PhysicsSystem getSystem() {
-        PhysicsSystem result = (PhysicsSystem) getContainingObject();
-        return result;
-    }
+    PhysicsSystem getSystem();
 
     /**
      * Lock the specified body for reading.
@@ -64,8 +44,7 @@ abstract public class BodyLockInterface
      * @param bodyId the ID of the body to read
      * @return a new mutex
      */
-    @Override
-    abstract public SharedMutex lockRead(int bodyId);
+    SharedMutex lockRead(int bodyId);
 
     /**
      * Lock the specified body for writing.
@@ -73,22 +52,19 @@ abstract public class BodyLockInterface
      * @param bodyId the ID of the body to write
      * @return a new mutex
      */
-    @Override
-    abstract public SharedMutex lockWrite(int bodyId);
+    SharedMutex lockWrite(int bodyId);
 
     /**
      * Unlock the specified mutex, which was created to read a body.
      *
      * @param mutex the mutex to unlock (not null)
      */
-    @Override
-    abstract public void unlockRead(SharedMutex mutex);
+    void unlockRead(SharedMutex mutex);
 
     /**
      * Unlock the specified mutex, which was created to write a body.
      *
      * @param mutex the mutex to unlock (not null)
      */
-    @Override
-    abstract public void unlockWrite(SharedMutex mutex);
+    void unlockWrite(SharedMutex mutex);
 }
