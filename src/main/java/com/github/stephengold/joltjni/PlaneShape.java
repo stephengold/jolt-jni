@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -93,11 +93,11 @@ public class PlaneShape extends Shape {
      *
      * @return a new object
      */
-    public ConstPlane getPlane() {
+    public Plane getPlane() {
         long shapeVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getPlane(shapeVa, storeFloats);
-        ConstPlane result = new Plane(storeFloats);
+        Plane result = new Plane(storeFloats);
 
         return result;
     }
