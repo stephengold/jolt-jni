@@ -106,6 +106,18 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_RodBendTwist_getRod
 
 /*
  * Class:     com_github_stephengold_joltjni_RodBendTwist
+ * Method:    setCompliance
+ * Signature: (JF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RodBendTwist_setCompliance
+  (JNIEnv *, jclass, jlong constraintVa, jfloat compliance) {
+    SoftBodySharedSettings::RodBendTwist * const pConstraint
+            = reinterpret_cast<SoftBodySharedSettings::RodBendTwist *> (constraintVa);
+    pConstraint->mCompliance = compliance;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_RodBendTwist
  * Method:    setOmega0
  * Signature: (JFFFF)V
  */
@@ -115,18 +127,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RodBendTwist_setOmega
             = reinterpret_cast<SoftBodySharedSettings::RodBendTwist *> (constraintVa);
     const Quat rotation(qx, qy, qz, qw);
     pConstraint->mOmega0 = rotation;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RodBendTwist
- * Method:    setCompliance
- * Signature: (JF)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RodBendTwist_setCompliance
-  (JNIEnv *, jclass, jlong constraintVa, jfloat compliance) {
-    SoftBodySharedSettings::RodBendTwist * const pConstraint
-            = reinterpret_cast<SoftBodySharedSettings::RodBendTwist *> (constraintVa);
-    pConstraint->mCompliance = compliance;
 }
 
 /*

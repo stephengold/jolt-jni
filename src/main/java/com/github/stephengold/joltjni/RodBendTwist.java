@@ -188,11 +188,11 @@ public class RodBendTwist
 
     native private static int getRod(long constraintVa, int indexInConstraint);
 
-    native private static void setOmega0(
-            long constraintVa, float qx, float qy, float qz, float qw);
-
     native private static void setCompliance(
             long constraintVa, float compliance);
+
+    native private static void setOmega0(
+            long constraintVa, float qx, float qy, float qz, float qw);
 
     native private static void setRod(
             long constraintVa, int indexInConstraint, int indexInMesh);
