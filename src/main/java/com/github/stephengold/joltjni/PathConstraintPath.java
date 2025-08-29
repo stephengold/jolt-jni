@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstPathConstraintPath;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.RefTarget;
 
@@ -31,7 +32,7 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 public class PathConstraintPath
         extends SerializableObject
-        implements RefTarget {
+        implements ConstPathConstraintPath, RefTarget {
     // *************************************************************************
     // constructors
 
@@ -80,84 +81,6 @@ public class PathConstraintPath
     }
 
     /**
-     * Return the path amount of the location on the path that's closest to the
-     * specified location. The path is unaffected.
-     *
-     * @param location the input location (in system coordinates, not null,
-     * unaffected)
-     * @param fractionHint where to start searching
-     * @return the path amount (&ge;0)
-     */
-    public float getClosestPoint(Vec3Arg location, float fractionHint) {
-        long pathVa = va();
-        float x = location.getX();
-        float y = location.getY();
-        float z = location.getZ();
-        float result = getClosestPoint(pathVa, x, y, z, fractionHint);
-
-        return result;
-    }
-
-    /**
-     * Return the path amount of the end of the path. The path is unaffected.
-     *
-     * @return the path amount (&ge;0)
-     */
-    public float getPathMaxFraction() {
-        long pathVa = va();
-        float result = getPathMaxFraction(pathVa);
-
-        return result;
-    }
-
-    /**
-     * Calculate the location, normal, and binormal of the location on the path
-     * with the specified path amount. The path is unaffected.
-     *
-     * @param amount the path amount (&ge;0)
-     * @param storeLocation storage for the location (in system coordinates)
-     * @param storeTangent storage for the tangent direction (in system
-     * coordinates)
-     * @param storeNormal storage for the normal direction (in system
-     * coordinates)
-     * @param storeBinormal storage for the binormal direction (in system
-     * coordinates)
-     */
-    public void getPointOnPath(float amount, Vec3 storeLocation,
-            Vec3 storeTangent, Vec3 storeNormal, Vec3 storeBinormal) {
-        long pathVa = va();
-        float[] storeFloats = new float[12];
-        getPointOnPath(pathVa, amount, storeFloats);
-        storeLocation.set(storeFloats);
-        storeTangent.set(storeFloats[3], storeFloats[4], storeFloats[5]);
-        storeNormal.set(storeFloats[6], storeFloats[7], storeFloats[8]);
-        storeBinormal.set(storeFloats[9], storeFloats[10], storeFloats[11]);
-    }
-
-    /**
-     * Test whether the path is looping. The path is unaffected.
-     *
-     * @return {@code true} if looping, otherwise {@code false}
-     */
-    public boolean isLooping() {
-        long pathVa = va();
-        boolean result = isLooping(pathVa);
-
-        return result;
-    }
-
-    /**
-     * Save the path to the specified binary stream. The path is unaffected.
-     *
-     * @param stream the stream to write to (not null)
-     */
-    public void saveBinaryState(StreamOut stream) {
-        long pathVa = va();
-        long streamVa = stream.va();
-        saveBinaryState(pathVa, streamVa);
-    }
-
-    /**
      * Alter whether the path is looping.
      *
      * @param setting {@code true} for looping, or {@code false} for no looping
@@ -180,6 +103,91 @@ public class PathConstraintPath
         PathResult result = new PathResult(resultVa, true);
 
         return result;
+    }
+    // *************************************************************************
+    // ConstPathConstraintPath methods
+
+    /**
+     * Return the path amount of the location on the path that's closest to the
+     * specified location. The path is unaffected.
+     *
+     * @param location the input location (in system coordinates, not null,
+     * unaffected)
+     * @param fractionHint where to start searching
+     * @return the path amount (&ge;0)
+     */
+    @Override
+    public float getClosestPoint(Vec3Arg location, float fractionHint) {
+        long pathVa = va();
+        float x = location.getX();
+        float y = location.getY();
+        float z = location.getZ();
+        float result = getClosestPoint(pathVa, x, y, z, fractionHint);
+
+        return result;
+    }
+
+    /**
+     * Return the path amount of the end of the path. The path is unaffected.
+     *
+     * @return the path amount (&ge;0)
+     */
+    @Override
+    public float getPathMaxFraction() {
+        long pathVa = va();
+        float result = getPathMaxFraction(pathVa);
+
+        return result;
+    }
+
+    /**
+     * Calculate the location, normal, and binormal of the location on the path
+     * with the specified path amount. The path is unaffected.
+     *
+     * @param amount the path amount (&ge;0)
+     * @param storeLocation storage for the location (in system coordinates)
+     * @param storeTangent storage for the tangent direction (in system
+     * coordinates)
+     * @param storeNormal storage for the normal direction (in system
+     * coordinates)
+     * @param storeBinormal storage for the binormal direction (in system
+     * coordinates)
+     */
+    @Override
+    public void getPointOnPath(float amount, Vec3 storeLocation,
+            Vec3 storeTangent, Vec3 storeNormal, Vec3 storeBinormal) {
+        long pathVa = va();
+        float[] storeFloats = new float[12];
+        getPointOnPath(pathVa, amount, storeFloats);
+        storeLocation.set(storeFloats);
+        storeTangent.set(storeFloats[3], storeFloats[4], storeFloats[5]);
+        storeNormal.set(storeFloats[6], storeFloats[7], storeFloats[8]);
+        storeBinormal.set(storeFloats[9], storeFloats[10], storeFloats[11]);
+    }
+
+    /**
+     * Test whether the path is looping. The path is unaffected.
+     *
+     * @return {@code true} if looping, otherwise {@code false}
+     */
+    @Override
+    public boolean isLooping() {
+        long pathVa = va();
+        boolean result = isLooping(pathVa);
+
+        return result;
+    }
+
+    /**
+     * Save the path to the specified binary stream. The path is unaffected.
+     *
+     * @param stream the stream to write to (not null)
+     */
+    @Override
+    public void saveBinaryState(StreamOut stream) {
+        long pathVa = va();
+        long streamVa = stream.va();
+        saveBinaryState(pathVa, streamVa);
     }
     // *************************************************************************
     // RefTarget methods
