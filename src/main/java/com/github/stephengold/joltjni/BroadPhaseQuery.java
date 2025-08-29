@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
+import com.github.stephengold.joltjni.readonly.ConstBroadPhaseQuery;
 import com.github.stephengold.joltjni.readonly.ConstOrientedBox;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -31,7 +32,9 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BroadPhaseQuery extends NonCopyable {
+public class BroadPhaseQuery
+        extends NonCopyable
+        implements ConstBroadPhaseQuery {
     // *************************************************************************
     // constructors
 
@@ -55,11 +58,23 @@ public class BroadPhaseQuery extends NonCopyable {
     // new methods exposed
 
     /**
+     * Access the underlying {@code PhysicsSystem}.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    public PhysicsSystem getSystem() {
+        return (PhysicsSystem) getContainingObject();
+    }
+    // *************************************************************************
+    // ConstBroadPhaseQuery methods
+
+    /**
      * Cast a box along a line segment and collect the resulting hits.
      *
      * @param boxCast the test box and route (not null, unaffected)
      * @param collector the hit collector to use (not null)
      */
+    @Override
     public void castAaBox(
             AaBoxCast boxCast, CastShapeBodyCollector collector) {
         castAaBox(boxCast, collector, new BroadPhaseLayerFilter());
@@ -73,6 +88,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
+    @Override
     public void castAaBox(
             AaBoxCast boxCast, CastShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter) {
@@ -88,6 +104,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
+    @Override
     public void castAaBox(
             AaBoxCast boxCast, CastShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
@@ -105,6 +122,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param raycast the test ray (not null, unaffected)
      * @param collector the hit collector to use (not null)
      */
+    @Override
     public void castRay(RayCast raycast, RayCastBodyCollector collector) {
         castRay(raycast, collector, new BroadPhaseLayerFilter());
     }
@@ -117,6 +135,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
+    @Override
     public void castRay(RayCast raycast, RayCastBodyCollector collector,
             BroadPhaseLayerFilter bplFilter) {
         castRay(raycast, collector, bplFilter, new ObjectLayerFilter());
@@ -131,6 +150,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
+    @Override
     public void castRay(RayCast raycast, RayCastBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
         long queryVa = va();
@@ -147,6 +167,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param box the test box (not null, unaffected)
      * @param collector the hit collector to use (not null)
      */
+    @Override
     public void collideAaBox(
             ConstAaBox box, CollideShapeBodyCollector collector) {
         collideAaBox(box, collector, new BroadPhaseLayerFilter());
@@ -160,6 +181,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
+    @Override
     public void collideAaBox(
             ConstAaBox box, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter) {
@@ -175,6 +197,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
+    @Override
     public void collideAaBox(
             ConstAaBox box, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
@@ -192,6 +215,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param box the box to test (not null, unaffected)
      * @param collector the hit collector to use (not null)
      */
+    @Override
     public void collideOrientedBox(
             ConstOrientedBox box, CollideShapeBodyCollector collector) {
         collideOrientedBox(box, collector, new BroadPhaseLayerFilter());
@@ -205,6 +229,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
+    @Override
     public void collideOrientedBox(
             ConstOrientedBox box, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter) {
@@ -220,6 +245,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
+    @Override
     public void collideOrientedBox(
             ConstOrientedBox box, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
@@ -238,6 +264,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param point the location to test (not null, unaffected)
      * @param collector the hit collector to use (not null)
      */
+    @Override
     public void collidePoint(
             Vec3Arg point, CollideShapeBodyCollector collector) {
         collidePoint(point, collector, new BroadPhaseLayerFilter());
@@ -251,6 +278,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
+    @Override
     public void collidePoint(Vec3Arg point, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter) {
         collidePoint(point, collector, bplFilter, new ObjectLayerFilter());
@@ -265,6 +293,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
+    @Override
     public void collidePoint(Vec3Arg point, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
         long queryVa = va();
@@ -285,6 +314,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param radius the radius of the test sphere
      * @param collector the hit collector to use (not null)
      */
+    @Override
     public void collideSphere(
             Vec3Arg center, float radius, CollideShapeBodyCollector collector) {
         collideSphere(center, radius, collector, new BroadPhaseLayerFilter());
@@ -299,6 +329,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * @param bplFilter the broadphase-layer filter to apply (not null,
      * unaffected)
      */
+    @Override
     public void collideSphere(
             Vec3Arg center, float radius, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter) {
@@ -316,6 +347,7 @@ public class BroadPhaseQuery extends NonCopyable {
      * unaffected)
      * @param olFilter the object-layer filter to apply (not null, unaffected)
      */
+    @Override
     public void collideSphere(
             Vec3Arg center, float radius, CollideShapeBodyCollector collector,
             BroadPhaseLayerFilter bplFilter, ObjectLayerFilter olFilter) {
@@ -328,15 +360,6 @@ public class BroadPhaseQuery extends NonCopyable {
         long olFilterVa = olFilter.va();
         collideSphere(queryVa, centerX, centerY, centerZ, radius, collectorVa,
                 bplFilterVa, olFilterVa);
-    }
-
-    /**
-     * Access the underlying {@code PhysicsSystem}.
-     *
-     * @return the pre-existing instance, or {@code null} if none
-     */
-    public PhysicsSystem getSystem() {
-        return (PhysicsSystem) getContainingObject();
     }
     // *************************************************************************
     // protected methods
