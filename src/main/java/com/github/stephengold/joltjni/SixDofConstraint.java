@@ -112,8 +112,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Access the motor settings of the specified degree of freedom. The
-     * constraint is unaffected.
+     * Access the motor settings of the specified degree of freedom.
      *
      * @param dof which degree of freedom to query (not null)
      * @return a new JVM object with the pre-existing native object assigned
@@ -128,7 +127,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Return the motor state of the specified degree of freedom.
+     * Return the motor state of the specified degree of freedom. The
+     * constraint is unaffected.
      *
      * @param dof which DOF to alter (not null)
      * @return an enum value (not null)
@@ -157,7 +157,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Return the rotation upper limits. The constraint is unaffected.
+     * Copy the rotation upper limits. The constraint is unaffected.
      *
      * @return the upper limit for each axis (not null)
      */
@@ -171,7 +171,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Return the rotation lower limits. The constraint is unaffected.
+     * Copy the rotation lower limits. The constraint is unaffected.
      *
      * @return the lower limit for each axis (not null)
      */
@@ -247,7 +247,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Return the translation upper limits. The constraint is unaffected.
+     * Copy the translation upper limits. The constraint is unaffected.
      *
      * @return the upper limit for each axis (not null)
      */
@@ -261,7 +261,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Return the translation lower limits. The constraint is unaffected.
+     * Copy the translation lower limits. The constraint is unaffected.
      *
      * @return the lower limit for each axis (not null)
      */

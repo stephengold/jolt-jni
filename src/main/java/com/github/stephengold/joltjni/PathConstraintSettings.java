@@ -181,7 +181,7 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Replace the current path with the specified one. (native field: mPath)
      *
-     * @param path the desired path (not null)
+     * @param path the desired path (not null, unaffected)
      */
     public void setPath(PathConstraintPath path) {
         long settingsVa = va();

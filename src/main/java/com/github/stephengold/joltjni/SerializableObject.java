@@ -67,7 +67,7 @@ abstract public class SerializableObject
      * Access the type information of the current object. (native method:
      * getRTTI)
      *
-     * @return a new object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
     public Rtti getRtti() {

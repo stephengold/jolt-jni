@@ -359,7 +359,7 @@ final public class WheelSettingsTvRef
     /**
      * Access the type information of the target. (native method: GetRTTI)
      *
-     * @return a new object
+     * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
     public Rtti getRtti() {

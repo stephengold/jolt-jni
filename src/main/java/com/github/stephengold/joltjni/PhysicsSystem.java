@@ -359,7 +359,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Return a bounding box that contains all the bodies in the system. The
+     * Generate a bounding box that contains all the bodies in the system. The
      * system is unaffected.
      *
      * @return a new box
@@ -574,6 +574,9 @@ public class PhysicsSystem extends NonCopyable {
 
     /**
      * Copy the system's settings. The system is unaffected.
+     * <p>
+     * Different semantics from the native {@code GetPhysicsSettings()}, which
+     * returns a const reference, not a copy.
      *
      * @return a new JVM object with a new native object assigned
      *
