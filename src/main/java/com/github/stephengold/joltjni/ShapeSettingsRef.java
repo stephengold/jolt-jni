@@ -93,7 +93,7 @@ final public class ShapeSettingsRef extends Ref implements ConstShapeSettings {
      */
     @Override
     public Rtti getRtti() {
-        long jpoVa = va();
+        long jpoVa = targetVa();
         long resultVa = SerializableObject.getRtti(jpoVa);
 
         Rtti result = new Rtti(resultVa);
