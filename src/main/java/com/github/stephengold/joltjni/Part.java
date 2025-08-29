@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
+import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 
 /**
  * Settings used to generate a rigid body in a {@code Ragdoll}. (native type:
@@ -80,9 +81,9 @@ public class Part extends BodyCreationSettings {
      *
      * @param settings the desired settings (not null)
      */
-    public void setToParent(ConstraintSettings settings) {
+    public void setToParent(ConstConstraintSettings settings) {
         long partVa = va();
-        long settingsVa = settings.va();
+        long settingsVa = settings.targetVa();
         setToParent(partVa, settingsVa);
     }
     // *************************************************************************
