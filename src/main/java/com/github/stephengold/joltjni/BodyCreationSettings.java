@@ -38,6 +38,8 @@ import com.github.stephengold.joltjni.streamutils.IdToMaterialMap;
 import com.github.stephengold.joltjni.streamutils.IdToShapeMap;
 import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
 import com.github.stephengold.joltjni.streamutils.ShapeToIdMap;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to create a rigid body. Such settings are described as "cooked"
@@ -783,10 +785,9 @@ public class BodyCreationSettings
     @Override
     public Vec3 getAngularVelocity() {
         long bodySettingsVa = va();
-        float vx = getAngularVelocityX(bodySettingsVa);
-        float vy = getAngularVelocityY(bodySettingsVa);
-        float vz = getAngularVelocityZ(bodySettingsVa);
-        Vec3 result = new Vec3(vx, vy, vz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAngularVelocity(bodySettingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -927,10 +928,9 @@ public class BodyCreationSettings
     @Override
     public Vec3 getLinearVelocity() {
         long bodySettingsVa = va();
-        float vx = getLinearVelocityX(bodySettingsVa);
-        float vy = getLinearVelocityY(bodySettingsVa);
-        float vz = getLinearVelocityZ(bodySettingsVa);
-        Vec3 result = new Vec3(vx, vy, vz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity(bodySettingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -1103,17 +1103,13 @@ public class BodyCreationSettings
     @Override
     public RVec3 getPosition() {
         long bodySettingsVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(bodySettingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
-        double xx = getPositionX(bodySettingsVa);
-        assert Double.isFinite(xx) : "xx = " + xx;
-
-        double yy = getPositionY(bodySettingsVa);
-        assert Double.isFinite(yy) : "yy = " + yy;
-
-        double zz = getPositionZ(bodySettingsVa);
-        assert Double.isFinite(zz) : "zz = " + zz;
-
-        RVec3 result = new RVec3(xx, yy, zz);
+        assert Double.isFinite(result.xx()) : "xx = " + result.xx();
+        assert Double.isFinite(result.yy()) : "yy = " + result.yy();
+        assert Double.isFinite(result.zz()) : "zz = " + result.zz();
         return result;
     }
 
@@ -1140,11 +1136,9 @@ public class BodyCreationSettings
     @Override
     public Quat getRotation() {
         long bodySettingsVa = va();
-        float qw = getRotationW(bodySettingsVa);
-        float qx = getRotationX(bodySettingsVa);
-        float qy = getRotationY(bodySettingsVa);
-        float qz = getRotationZ(bodySettingsVa);
-        Quat result = new Quat(qx, qy, qz, qw);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotation(bodySettingsVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -1298,11 +1292,8 @@ public class BodyCreationSettings
 
     native private static float getAngularDamping(long bodySettingsVa);
 
-    native private static float getAngularVelocityX(long bodySettingsVa);
-
-    native private static float getAngularVelocityY(long bodySettingsVa);
-
-    native private static float getAngularVelocityZ(long bodySettingsVa);
+    native private static void getAngularVelocity(
+            long bodySettingsVa, FloatBuffer storeFloats);
 
     native private static boolean getApplyGyroscopicForce(long bodySettingsVa);
 
@@ -1324,11 +1315,8 @@ public class BodyCreationSettings
 
     native private static float getLinearDamping(long bodySettingsVa);
 
-    native private static float getLinearVelocityX(long bodySettingsVa);
-
-    native private static float getLinearVelocityY(long bodySettingsVa);
-
-    native private static float getLinearVelocityZ(long bodySettingsVa);
+    native private static void getLinearVelocity(
+            long bodySettingsVa, FloatBuffer storeFloats);
 
     native private static long getMassProperties(long bodySettingsVa);
 
@@ -1350,21 +1338,13 @@ public class BodyCreationSettings
 
     native private static int getOverrideMassProperties(long bodySettingsVa);
 
-    native private static double getPositionX(long bodySettingsVa);
-
-    native private static double getPositionY(long bodySettingsVa);
-
-    native private static double getPositionZ(long bodySettingsVa);
+    native private static void getPosition(
+            long bodySettingsVa, DoubleBuffer storeDoubles);
 
     native private static float getRestitution(long bodySettingsVa);
 
-    native private static float getRotationW(long bodySettingsVa);
-
-    native private static float getRotationX(long bodySettingsVa);
-
-    native private static float getRotationY(long bodySettingsVa);
-
-    native private static float getRotationZ(long bodySettingsVa);
+    native private static void getRotation(
+            long bodySettingsVa, FloatBuffer storeFloats);
 
     native private static long getShape(long bodySettingsVa);
 
