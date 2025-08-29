@@ -496,10 +496,9 @@ public class Body extends NonCopyable implements ConstBody {
     @Override
     public Vec3 getAccumulatedForce() {
         long bodyVa = va();
-        float x = getAccumulatedForceX(bodyVa);
-        float y = getAccumulatedForceY(bodyVa);
-        float z = getAccumulatedForceZ(bodyVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAccumulatedForce(bodyVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -512,10 +511,9 @@ public class Body extends NonCopyable implements ConstBody {
     @Override
     public Vec3 getAccumulatedTorque() {
         long bodyVa = va();
-        float x = getAccumulatedTorqueX(bodyVa);
-        float y = getAccumulatedTorqueY(bodyVa);
-        float z = getAccumulatedTorqueZ(bodyVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAccumulatedTorque(bodyVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -541,10 +539,9 @@ public class Body extends NonCopyable implements ConstBody {
     @Override
     public Vec3 getAngularVelocity() {
         long bodyVa = va();
-        float wx = getAngularVelocityX(bodyVa);
-        float wy = getAngularVelocityY(bodyVa);
-        float wz = getAngularVelocityZ(bodyVa);
-        Vec3 result = new Vec3(wx, wy, wz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAngularVelocity(bodyVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -603,18 +600,13 @@ public class Body extends NonCopyable implements ConstBody {
     @Override
     public RVec3 getCenterOfMassPosition() {
         long bodyVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getCenterOfMassPositionToBuf(bodyVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
-        double xx = getCenterOfMassPositionX(bodyVa);
-        assert Double.isFinite(xx) : "xx = " + xx;
-
-        double yy = getCenterOfMassPositionY(bodyVa);
-        assert Double.isFinite(yy) : "yy = " + yy;
-
-        double zz = getCenterOfMassPositionZ(bodyVa);
-        assert Double.isFinite(zz) : "zz = " + zz;
-
-        RVec3 result = new RVec3(xx, yy, zz);
-
+        assert Double.isFinite(result.xx()) : "xx = " + result.xx();
+        assert Double.isFinite(result.yy()) : "yy = " + result.yy();
+        assert Double.isFinite(result.zz()) : "zz = " + result.zz();
         return result;
     }
 
@@ -641,17 +633,16 @@ public class Body extends NonCopyable implements ConstBody {
     @Override
     public void getCenterOfMassPosition(RVec3 storeLocation) {
         long bodyVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getCenterOfMassPositionToBuf(bodyVa, storeDoubles);
+        storeLocation.set(storeDoubles);
 
-        double xx = getCenterOfMassPositionX(bodyVa);
-        assert Double.isFinite(xx) : "xx = " + xx;
-
-        double yy = getCenterOfMassPositionY(bodyVa);
-        assert Double.isFinite(yy) : "yy = " + yy;
-
-        double zz = getCenterOfMassPositionZ(bodyVa);
-        assert Double.isFinite(zz) : "zz = " + zz;
-
-        storeLocation.set(xx, yy, zz);
+        assert Double.isFinite(storeLocation.xx()) :
+                "xx = " + storeLocation.xx();
+        assert Double.isFinite(storeLocation.yy()) :
+                "yy = " + storeLocation.yy();
+        assert Double.isFinite(storeLocation.zz()) :
+                "zz = " + storeLocation.zz();
     }
 
     /**
@@ -747,10 +738,9 @@ public class Body extends NonCopyable implements ConstBody {
     @Override
     public Vec3 getLinearVelocity() {
         long bodyVa = va();
-        float vx = getLinearVelocityX(bodyVa);
-        float vy = getLinearVelocityY(bodyVa);
-        float vz = getLinearVelocityZ(bodyVa);
-        Vec3 result = new Vec3(vx, vy, vz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity(bodyVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -817,18 +807,13 @@ public class Body extends NonCopyable implements ConstBody {
     @Override
     public RVec3 getPosition() {
         long bodyVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(bodyVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
-        double xx = getPositionX(bodyVa);
-        assert Double.isFinite(xx) : "xx = " + xx;
-
-        double yy = getPositionY(bodyVa);
-        assert Double.isFinite(yy) : "yy = " + yy;
-
-        double zz = getPositionZ(bodyVa);
-        assert Double.isFinite(zz) : "zz = " + zz;
-
-        RVec3 result = new RVec3(xx, yy, zz);
-
+        assert Double.isFinite(result.xx()) : "xx = " + result.xx();
+        assert Double.isFinite(result.yy()) : "yy = " + result.yy();
+        assert Double.isFinite(result.zz()) : "zz = " + result.zz();
         return result;
     }
 
@@ -844,17 +829,14 @@ public class Body extends NonCopyable implements ConstBody {
     public void getPositionAndRotation(
             RVec3 storeLocation, Quat storeOrientation) {
         long bodyVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
 
-        double xx = getPositionX(bodyVa);
-        double yy = getPositionY(bodyVa);
-        double zz = getPositionZ(bodyVa);
-        storeLocation.set(xx, yy, zz);
+        getPosition(bodyVa, storeDoubles);
+        getRotation(bodyVa, storeFloats);
 
-        float qx = getRotationX(bodyVa);
-        float qy = getRotationY(bodyVa);
-        float qz = getRotationZ(bodyVa);
-        float qw = getRotationW(bodyVa);
-        storeOrientation.set(qx, qy, qz, qw);
+        storeLocation.set(storeDoubles);
+        storeOrientation.set(storeFloats);
     }
 
     /**
@@ -878,11 +860,9 @@ public class Body extends NonCopyable implements ConstBody {
     @Override
     public Quat getRotation() {
         long bodyVa = va();
-        float qx = getRotationX(bodyVa);
-        float qy = getRotationY(bodyVa);
-        float qz = getRotationZ(bodyVa);
-        float qw = getRotationW(bodyVa);
-        Quat result = new Quat(qx, qy, qz, qw);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotation(bodyVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -1133,25 +1113,16 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static long createFixedToWorld();
 
-    native private static float getAccumulatedForceX(long bodyVa);
+    native private static void getAccumulatedForce(
+            long bodyVa, FloatBuffer storeFloats);
 
-    native private static float getAccumulatedForceY(long bodyVa);
-
-    native private static float getAccumulatedForceZ(long bodyVa);
-
-    native private static float getAccumulatedTorqueX(long bodyVa);
-
-    native private static float getAccumulatedTorqueY(long bodyVa);
-
-    native private static float getAccumulatedTorqueZ(long bodyVa);
+    native private static void getAccumulatedTorque(
+            long bodyVa, FloatBuffer storeFloats);
 
     native private static boolean getAllowSleeping(long bodyVa);
 
-    native private static float getAngularVelocityX(long bodyVa);
-
-    native private static float getAngularVelocityY(long bodyVa);
-
-    native private static float getAngularVelocityZ(long bodyVa);
+    native private static void getAngularVelocity(
+            long bodyVa, FloatBuffer storeFloats);
 
     native private static long getBodyCreationSettings(long bodyVa);
 
@@ -1161,12 +1132,6 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static void getCenterOfMassPositionToBuf(
             long bodyVa, DoubleBuffer storeResult);
-
-    native private static double getCenterOfMassPositionX(long bodyVa);
-
-    native private static double getCenterOfMassPositionY(long bodyVa);
-
-    native private static double getCenterOfMassPositionZ(long bodyVa);
 
     native private static long getCenterOfMassTransform(long bodyVa);
 
@@ -1180,11 +1145,8 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static long getInverseCenterOfMassTransform(long bodyVa);
 
-    native private static float getLinearVelocityX(long bodyVa);
-
-    native private static float getLinearVelocityY(long bodyVa);
-
-    native private static float getLinearVelocityZ(long bodyVa);
+    native private static void getLinearVelocity(
+            long bodyVa, FloatBuffer storeFloats);
 
     native private static long getMotionProperties(long bodyVa);
 
@@ -1192,21 +1154,13 @@ public class Body extends NonCopyable implements ConstBody {
 
     native private static int getObjectLayer(long bodyVa);
 
-    native private static double getPositionX(long bodyVa);
-
-    native private static double getPositionY(long bodyVa);
-
-    native private static double getPositionZ(long bodyVa);
+    native private static void getPosition(
+            long bodyVa, DoubleBuffer storeDoubles);
 
     native private static float getRestitution(long bodyVa);
 
-    native private static float getRotationX(long bodyVa);
-
-    native private static float getRotationY(long bodyVa);
-
-    native private static float getRotationZ(long bodyVa);
-
-    native private static float getRotationW(long bodyVa);
+    native private static void getRotation(
+            long bodyVa, FloatBuffer storeFloats);
 
     native private static long getShape(long bodyVa);
 
