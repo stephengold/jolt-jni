@@ -50,6 +50,8 @@ final public class Jolt {
 
     /**
      * default rounding of corners in convex shapes (in meters)
+     * <p>
+     * value should match Jolt/Physics/PhysicsSettings.h
      */
     final public static float cDefaultConvexRadius = 0.05f;
     /**
@@ -93,7 +95,7 @@ final public class Jolt {
      */
     final public static int SWIZZLE_Z = 2;
     /**
-     * generic null pointer (to expedite translation of C++ code)
+     * generic null pointer (to expedite porting of C++ code)
      */
     final public static Object nullptr = null;
     // *************************************************************************

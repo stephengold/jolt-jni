@@ -100,7 +100,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
     }
 
     /**
-     * Return the contact normal. The contact is unaffected. (native attribute:
+     * Copy the contact normal. The contact is unaffected. (native attribute:
      * mContactNormal)
      *
      * @return a new direction vector, pointing toward the character
