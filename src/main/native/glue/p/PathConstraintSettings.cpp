@@ -88,93 +88,37 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PathConstraintSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_PathConstraintSettings
- * Method:    getPathPositionX
- * Signature: (J)F
+ * Method:    getPathPosition
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_getPathPositionX
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PathConstraintSettings * const pSettings
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_getPathPosition
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
+    const PathConstraintSettings * const pConstraintSettings
             = reinterpret_cast<PathConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPathPosition.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& position = pConstraintSettings->mPathPosition;
+    pFloats[0] = position.GetX();
+    pFloats[1] = position.GetY();
+    pFloats[2] = position.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_PathConstraintSettings
- * Method:    getPathPositionY
- * Signature: (J)F
+ * Method:    getPathRotation
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_getPathPositionY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PathConstraintSettings * const pSettings
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_getPathRotation
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
+    const PathConstraintSettings * const pConstraintSettings
             = reinterpret_cast<PathConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPathPosition.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PathConstraintSettings
- * Method:    getPathPositionZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_getPathPositionZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PathConstraintSettings * const pSettings
-            = reinterpret_cast<PathConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPathPosition.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PathConstraintSettings
- * Method:    getPathRotationW
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_getPathRotationW
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PathConstraintSettings * const pSettings
-            = reinterpret_cast<PathConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPathRotation.GetW();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PathConstraintSettings
- * Method:    getPathRotationX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_getPathRotationX
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PathConstraintSettings * const pSettings
-            = reinterpret_cast<PathConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPathRotation.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PathConstraintSettings
- * Method:    getPathRotationY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_getPathRotationY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PathConstraintSettings * const pSettings
-            = reinterpret_cast<PathConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPathRotation.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PathConstraintSettings
- * Method:    getPathRotationZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_getPathRotationZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PathConstraintSettings * const pSettings
-            = reinterpret_cast<PathConstraintSettings *> (settingsVa);
-    const float result = pSettings->mPathRotation.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Quat& rotation = pConstraintSettings->mPathRotation;
+    pFloats[0] = rotation.GetX();
+    pFloats[1] = rotation.GetY();
+    pFloats[2] = rotation.GetZ();
+    pFloats[3] = rotation.GetW();
 }
 
 /*

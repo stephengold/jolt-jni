@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EPathRotationConstraintType;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code PathConstraint}.
@@ -116,10 +117,9 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getPathPosition() {
         long settingsVa = va();
-        float x = getPathPositionX(settingsVa);
-        float y = getPathPositionY(settingsVa);
-        float z = getPathPositionZ(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPathPosition(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -132,11 +132,9 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Quat getPathRotation() {
         long settingsVa = va();
-        float qw = getPathRotationW(settingsVa);
-        float qx = getPathRotationX(settingsVa);
-        float qy = getPathRotationY(settingsVa);
-        float qz = getPathRotationZ(settingsVa);
-        Quat result = new Quat(qx, qy, qz, qw);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPathRotation(settingsVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -263,19 +261,11 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static float getPathFraction(long settingsVa);
 
-    native private static float getPathPositionX(long settingsVa);
+    native private static void getPathPosition(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getPathPositionY(long settingsVa);
-
-    native private static float getPathPositionZ(long settingsVa);
-
-    native private static float getPathRotationW(long settingsVa);
-
-    native private static float getPathRotationX(long settingsVa);
-
-    native private static float getPathRotationY(long settingsVa);
-
-    native private static float getPathRotationZ(long settingsVa);
+    native private static void getPathRotation(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static long getPositionMotorSettings(
             long constraintSettingsVa);
