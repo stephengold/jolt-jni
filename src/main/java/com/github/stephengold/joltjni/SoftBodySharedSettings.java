@@ -252,76 +252,6 @@ public class SoftBodySharedSettings
     }
 
     /**
-     * Enumerate all edge constraints in the settings. (native member:
-     * mEdgeConstraints)
-     *
-     * @return a new array of new JVM objects with the pre-existing native
-     * objects assigned
-     */
-    public Edge[] getEdgeConstraints() {
-        long settingsVa = va();
-        int numEdges = countEdgeConstraints(settingsVa);
-        Edge[] result = new Edge[numEdges];
-        for (int index = 0; index < numEdges; ++index) {
-            long edgeVa = getEdgeConstraint(settingsVa, index);
-            result[index] = new Edge(this, edgeVa);
-        }
-
-        return result;
-    }
-
-    /**
-     * Enumerate all bend-twist constraints in the settings. (native member:
-     * mRodBendTwistConstraints)
-     *
-     * @return a new array of new JVM objects with the pre-existing native
-     * objects assigned
-     */
-    public RodBendTwist[] getRodBendTwistConstraints() {
-        long settingsVa = va();
-        int numConstraints = countRodBendTwistConstraints(settingsVa);
-        RodBendTwist[] result = new RodBendTwist[numConstraints];
-        for (int index = 0; index < numConstraints; ++index) {
-            long edgeVa = getRodBendTwistConstraint(settingsVa, index);
-            result[index] = new RodBendTwist(this, edgeVa);
-        }
-
-        return result;
-    }
-
-    /**
-     * Access the specified vertex.
-     *
-     * @param index the index of the vertex (&ge;0)
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public Vertex getVertex(int index) {
-        long settingsVa = va();
-        long vertexVa = getVertex(settingsVa, index);
-        Vertex result = new Vertex(this, vertexVa);
-
-        return result;
-    }
-
-    /**
-     * Enumerate all vertices in the settings. (native member: mVertices)
-     *
-     * @return a new array of new JVM objects with pre-existing native objects
-     * assigned
-     */
-    public Vertex[] getVertices() {
-        long settingsVa = va();
-        int numVertices = countVertices(settingsVa);
-        Vertex[] result = new Vertex[numVertices];
-        for (int index = 0; index < numVertices; ++index) {
-            long vertexVa = getVertex(settingsVa, index);
-            result[index] = new Vertex(this, vertexVa);
-        }
-
-        return result;
-    }
-
-    /**
      * Optimize the settings without writing any results.
      */
     public void optimize() {
@@ -489,6 +419,46 @@ public class SoftBodySharedSettings
     }
 
     /**
+     * Enumerate all edge constraints in the settings. (native member:
+     * mEdgeConstraints)
+     *
+     * @return a new array of new JVM objects with the pre-existing native
+     * objects assigned
+     */
+    @Override
+    public Edge[] getEdgeConstraints() {
+        long settingsVa = va();
+        int numEdges = countEdgeConstraints(settingsVa);
+        Edge[] result = new Edge[numEdges];
+        for (int index = 0; index < numEdges; ++index) {
+            long edgeVa = getEdgeConstraint(settingsVa, index);
+            result[index] = new Edge(this, edgeVa);
+        }
+
+        return result;
+    }
+
+    /**
+     * Enumerate all bend-twist constraints in the settings. (native member:
+     * mRodBendTwistConstraints)
+     *
+     * @return a new array of new JVM objects with the pre-existing native
+     * objects assigned
+     */
+    @Override
+    public RodBendTwist[] getRodBendTwistConstraints() {
+        long settingsVa = va();
+        int numConstraints = countRodBendTwistConstraints(settingsVa);
+        RodBendTwist[] result = new RodBendTwist[numConstraints];
+        for (int index = 0; index < numConstraints; ++index) {
+            long edgeVa = getRodBendTwistConstraint(settingsVa, index);
+            result[index] = new RodBendTwist(this, edgeVa);
+        }
+
+        return result;
+    }
+
+    /**
      * Enumerate all Cosserat rods in the settings. (native member:
      * mRodStretchShearConstraints)
      *
@@ -503,6 +473,40 @@ public class SoftBodySharedSettings
         for (int index = 0; index < numRods; ++index) {
             long edgeVa = getRodStretchShearConstraint(settingsVa, index);
             result[index] = new RodStretchShear(this, edgeVa);
+        }
+
+        return result;
+    }
+
+    /**
+     * Access the specified vertex.
+     *
+     * @param index the index of the vertex (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public Vertex getVertex(int index) {
+        long settingsVa = va();
+        long vertexVa = getVertex(settingsVa, index);
+        Vertex result = new Vertex(this, vertexVa);
+
+        return result;
+    }
+
+    /**
+     * Enumerate all vertices in the settings. (native member: mVertices)
+     *
+     * @return a new array of new JVM objects with pre-existing native objects
+     * assigned
+     */
+    @Override
+    public Vertex[] getVertices() {
+        long settingsVa = va();
+        int numVertices = countVertices(settingsVa);
+        Vertex[] result = new Vertex[numVertices];
+        for (int index = 0; index < numVertices; ++index) {
+            long vertexVa = getVertex(settingsVa, index);
+            result[index] = new Vertex(this, vertexVa);
         }
 
         return result;
@@ -676,17 +680,17 @@ public class SoftBodySharedSettings
 
     native private static long createDefault();
 
-    native private static long getEdgeConstraint(long settingsVa, int index);
+    native static long getEdgeConstraint(long settingsVa, int index);
 
     native private static int getRefCount(long settingsVa);
 
-    native private static long getRodBendTwistConstraint(
+    native static long getRodBendTwistConstraint(
             long settingsVa, int index);
 
     native static long getRodStretchShearConstraint(
             long settingsVa, int index);
 
-    native private static long getVertex(long settingsVa, int index);
+    native static long getVertex(long settingsVa, int index);
 
     native static void optimize(long settingsVa);
 

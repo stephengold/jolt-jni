@@ -83,13 +83,46 @@ public interface ConstSoftBodySharedSettings extends ConstJoltPhysicsObject {
     int countVolumeConstraints();
 
     /**
-     * Enumerate all Cosserat rods in the settings. (native member:
-     * mRodStretchShearConstraints)
+     * Enumerate all edge constraints in the settings. The settings are
+     * unaffected.
+     *
+     * @return a new array of new JVM objects with the pre-existing native
+     * objects assigned
+     */
+    ConstEdge[] getEdgeConstraints();
+
+    /**
+     * Enumerate all bend-twist constraints in the settings. The settings are
+     * unaffected.
+     *
+     * @return a new array of new JVM objects with the pre-existing native
+     * objects assigned
+     */
+    ConstRodBendTwist[] getRodBendTwistConstraints();
+
+    /**
+     * Enumerate all Cosserat rods in the settings. The settings are unaffected.
      *
      * @return a new array of new JVM objects with the pre-existing native
      * objects assigned
      */
     ConstRodStretchShear[] getRodStretchShearConstraints();
+
+    /**
+     * Access the specified vertex. The settings are unaffected.
+     *
+     * @param index the index of the vertex (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstVertex getVertex(int index);
+
+    /**
+     * Enumerate all vertices in the settings. The settings are unaffected.
+     *
+     * @return a new array of new JVM objects with pre-existing native objects
+     * assigned
+     */
+    ConstVertex[] getVertices();
 
     /**
      * Write the vertex indices of all edges to the specified buffer and advance
