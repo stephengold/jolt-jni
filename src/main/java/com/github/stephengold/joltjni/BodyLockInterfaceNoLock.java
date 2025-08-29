@@ -21,12 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyLockInterfaceNoLock;
+
 /**
  * A {@code BodyLockInterface} that doesn't automatically lock bodies.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BodyLockInterfaceNoLock extends BodyLockInterface {
+public class BodyLockInterfaceNoLock
+        extends BodyLockInterface
+        implements ConstBodyLockInterfaceNoLock {
     // *************************************************************************
     // constructors
 
