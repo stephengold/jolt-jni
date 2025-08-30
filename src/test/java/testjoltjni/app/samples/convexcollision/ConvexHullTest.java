@@ -620,7 +620,7 @@ public void PrePhysicsUpdate( PreUpdateParams inParams)
 
 	// Draw the hull around center of mass
 	int color_idx = 0;
-	for (ChbFace f : builder.getFaces())
+	for (ConstChbFace f : builder.getFaces())
 	{
 		Color color = Color.sGetDistinctColor(color_idx++);
 

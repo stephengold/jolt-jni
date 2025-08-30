@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EResult;
+import com.github.stephengold.joltjni.readonly.ConstChbFace;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.Collection;
@@ -104,7 +105,7 @@ public class ConvexHullBuilder extends NonCopyable {
      * @return a new array of JVM objects with pre-existing native objects
      * assigned
      */
-    public ChbFace[] getFaces() {
+    public ConstChbFace[] getFaces() {
         long builderVa = va();
         int numFaces = countFaces(builderVa);
         long[] storeVas = new long[numFaces];
