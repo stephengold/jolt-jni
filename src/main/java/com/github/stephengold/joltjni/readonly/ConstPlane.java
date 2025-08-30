@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.Vec3;
+import java.nio.FloatBuffer;
 
 /**
  * Read-only access to an {@code Plane}. (native type: const Plane)
@@ -66,6 +67,14 @@ public interface ConstPlane {
      * @return the component value
      */
     float getNormalZ();
+
+    /**
+     * Write all 4 components to the specified buffer and advance the buffer's
+     * position by 4. The plane is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    void put(FloatBuffer storeBuffer);
 
     /**
      * Return the signed distance of the specified point.

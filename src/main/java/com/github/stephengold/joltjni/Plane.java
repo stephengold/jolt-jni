@@ -188,6 +188,20 @@ final public class Plane implements ConstPlane {
     }
 
     /**
+     * Write all 4 components to the specified buffer and advance the buffer's
+     * position by 4. The plane is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not null)
+     */
+    @Override
+    public void put(FloatBuffer storeBuffer) {
+        storeBuffer.put(nx);
+        storeBuffer.put(ny);
+        storeBuffer.put(nz);
+        storeBuffer.put(c);
+    }
+
+    /**
      * Return the signed distance of the specified point.
      *
      * @param point the point to measure (not null, unaffected)
