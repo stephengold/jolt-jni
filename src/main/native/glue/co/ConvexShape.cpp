@@ -26,6 +26,7 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Physics/Collision/Shape/ConvexShape.h"
 #include "auto/com_github_stephengold_joltjni_ConvexShape.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
@@ -40,6 +41,36 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexShape_getDens
             = reinterpret_cast<ConvexShape *> (shapeVa);
     const float result = pShape->GetDensity();
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexShape
+ * Method:    getSubmergedVolume
+ * Signature: (JJLjava/nio/FloatBuffer;DDD)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexShape_getSubmergedVolume
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jlong comTransformVa,
+  jobject floatBuffer, jdouble baseX, jdouble baseY, jdouble baseZ) {
+    const ConvexShape * const pShape
+            = reinterpret_cast<ConvexShape *> (shapeVa);
+    const Mat44 * const pComTransform
+            = reinterpret_cast<Mat44 *> (comTransformVa);
+    DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 7);
+    const Vec3 scale(pFloats[0], pFloats[1], pFloats[2]);
+    const Vec3 normal(pFloats[3], pFloats[4], pFloats[5]);
+    const Plane surface(normal, pFloats[6]);
+    float totalVolume, submergedVolume;
+    Vec3 centerOfBuoyancy;
+    const RVec3 baseOffset(baseX, baseY, baseZ);
+    pShape->GetSubmergedVolume(
+            *pComTransform, scale, surface, totalVolume, submergedVolume,
+            centerOfBuoyancy JPH_IF_DEBUG_RENDERER(, baseOffset));
+    pFloats[0] = totalVolume;
+    pFloats[1] = submergedVolume;
+    pFloats[2] = centerOfBuoyancy.GetX();
+    pFloats[3] = centerOfBuoyancy.GetY();
+    pFloats[4] = centerOfBuoyancy.GetZ();
 }
 
 /*

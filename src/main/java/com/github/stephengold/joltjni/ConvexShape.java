@@ -22,7 +22,11 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.ESupportMode;
+import com.github.stephengold.joltjni.readonly.ConstPlane;
+import com.github.stephengold.joltjni.readonly.Mat44Arg;
+import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * A type of {@code Shape} that inherently possesses the convex property.
@@ -65,6 +69,48 @@ abstract public class ConvexShape extends Shape {
     }
 
     /**
+     * Calculate the shape's volume, submerged volume, and center of buoyancy.
+     *
+     * @param comTransform the local-to-system transform (not null, unaffected)
+     * @param scale the scale vector (not null, unaffected)
+     * @param surface the boundary of the submerged region (not null,
+     * unaffected)
+     * @param storeTotalVolume storage for the total volume, or {@code null}
+     * @param storeSubmergedVolume storage for the submerged volume, or
+     * {@code null}
+     * @param storeCenterOfBuoyancy storage for the center of buoyancy, or
+     * {@code null}
+     * @param baseOffset the base offset to use (ignored if the native library
+     * doesn't implement debug rendering)
+     */
+    public void getSubmergedVolume(
+            Mat44Arg comTransform, Vec3Arg scale, ConstPlane surface,
+            float[] storeTotalVolume, float[] storeSubmergedVolume,
+            Vec3 storeCenterOfBuoyancy, RVec3Arg baseOffset) {
+        final long shapeVa = va();
+        final long comTransformVa = comTransform.targetVa();
+        FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
+        floatBuffer.reset();
+        scale.put(floatBuffer);
+        surface.put(floatBuffer);
+        boolean useBase = Jolt.implementsDebugRendering();
+        double baseX = useBase ? baseOffset.xx() : 0.;
+        double baseY = useBase ? baseOffset.yy() : 0.;
+        double baseZ = useBase ? baseOffset.zz() : 0.;
+        getSubmergedVolume(
+                shapeVa, comTransformVa, floatBuffer, baseX, baseY, baseZ);
+        if (storeTotalVolume != null && storeTotalVolume.length > 0) {
+            storeTotalVolume[0] = floatBuffer.get(0);
+        }
+        if (storeSubmergedVolume != null && storeSubmergedVolume.length > 0) {
+            storeSubmergedVolume[0] = floatBuffer.get(1);
+        }
+        if (storeCenterOfBuoyancy != null) {
+            storeCenterOfBuoyancy.set(floatBuffer, 2);
+        }
+    }
+
+    /**
      * Access the shape's support function.
      *
      * @param supportMode how to handle convex radius (not null)
@@ -101,6 +147,10 @@ abstract public class ConvexShape extends Shape {
     // native private methods
 
     native private static float getDensity(long shapeVa);
+
+    native private static void getSubmergedVolume(
+            long shapeVa, long comTransformVa, FloatBuffer floatBuffer,
+            double baseX, double baseY, double baseZ);
 
     native private static long getSupportFunction(long shapeVa, int ordinal,
             long bufferVa, float sx, float sy, float sz);
