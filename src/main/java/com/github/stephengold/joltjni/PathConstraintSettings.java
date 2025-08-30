@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.enumerate.EPathRotationConstraintType;
+import com.github.stephengold.joltjni.readonly.ConstPathConstraintPath;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -183,9 +184,9 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @param path the desired path (not null, unaffected)
      */
-    public void setPath(PathConstraintPath path) {
+    public void setPath(ConstPathConstraintPath path) {
         long settingsVa = va();
-        long pathVa = path.va();
+        long pathVa = path.targetVa();
         setPath(settingsVa, pathVa);
     }
 
