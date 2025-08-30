@@ -95,7 +95,7 @@ public void PrePhysicsUpdate(PreUpdateParams inParams)
 			FloatBuffer floatBuffer=mPosition.asFloatBuffer();
 			for (int i = 0; i < count; ++i)
 			{
-				final SubShape sub_shape = shape.getSubShape(i);
+				ConstSubShape sub_shape = shape.getSubShape(i);
 				Vec3.sZero().put(floatBuffer);
                                 floatBuffer.put(0f);
                                 star(Quat.sRotation( Vec3.sRandom(consistent_random), degreesToRadians(10.0f) * inParams.mDeltaTime) , sub_shape.getRotation().normalized()).put(floatBuffer);

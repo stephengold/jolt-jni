@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstSubShape;
+
 /**
  * A {@code Shape} composed from a union of simpler sub-shapes.
  *
@@ -68,7 +70,7 @@ abstract public class CompoundShape extends Shape {
      * shape (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public SubShape getSubShape(int subShapeIndex) {
+    public ConstSubShape getSubShape(int subShapeIndex) {
         long shapeVa = va();
         long subShapeVa = getSubShape(shapeVa, subShapeIndex);
         SubShape result = new SubShape(subShapeVa);
@@ -103,7 +105,7 @@ abstract public class CompoundShape extends Shape {
      * @return a new array of new JVM objects with pre-existing native objects
      * assigned
      */
-    public SubShape[] getSubShapes() {
+    public ConstSubShape[] getSubShapes() {
         long shapeVa = va();
         int numSubShapes = getNumSubShapes();
         SubShape[] result = new SubShape[numSubShapes];
