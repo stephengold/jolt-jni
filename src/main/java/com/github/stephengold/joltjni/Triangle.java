@@ -86,8 +86,8 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
      *
      * @param original the triangle to copy (not {@code null}, unaffected)
      */
-    public Triangle(Triangle original) {
-        long originalVa = original.va();
+    public Triangle(ConstTriangle original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
     }
