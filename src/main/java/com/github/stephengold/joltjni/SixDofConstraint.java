@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EAxis;
 import com.github.stephengold.joltjni.enumerate.EMotorState;
+import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -311,10 +312,10 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * @param springSettings the desired settings (not null, unaffected)
      */
     public void setLimitsSpringSettings(
-            EAxis dof, SpringSettings springSettings) {
+            EAxis dof, ConstSpringSettings springSettings) {
         long constraintVa = va();
         int dofIndex = dof.ordinal();
-        long settingsVa = springSettings.va();
+        long settingsVa = springSettings.targetVa();
         setLimitsSpringSettings(constraintVa, dofIndex, settingsVa);
     }
 
