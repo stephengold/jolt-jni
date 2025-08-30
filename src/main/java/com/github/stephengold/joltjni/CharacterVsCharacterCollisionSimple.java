@@ -39,7 +39,7 @@ public class CharacterVsCharacterCollisionSimple
     /**
      * Java copy of the collision list
      */
-    final private List<CharacterVirtual> collisionList = new ArrayList<>(16);
+    final private List<CharacterVirtualRef> collisionList = new ArrayList<>(16);
     // *************************************************************************
     // constructors
 
@@ -64,7 +64,7 @@ public class CharacterVsCharacterCollisionSimple
         long characterVa = character.targetVa();
         add(interfaceVa, characterVa);
 
-        collisionList.add(character);
+        collisionList.add(character.toRef());
     }
 
     /**
@@ -76,7 +76,7 @@ public class CharacterVsCharacterCollisionSimple
         int numCharacters = collisionList.size();
         CharacterVirtual[] result = new CharacterVirtual[numCharacters];
         for (int i = 0; i < numCharacters; ++i) {
-            result[i] = collisionList.get(i);
+            result[i] = collisionList.get(i).getPtr();
         }
 
         return result;
