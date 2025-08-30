@@ -558,7 +558,8 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @return the pre-existing instance, or {@code null} if none
      */
-    public ConstObjectVsBroadPhaseLayerFilter getOvbFilter() {
+    public ConstObjectVsBroadPhaseLayerFilter
+            getObjectVsBroadPhaseLayerFilter() {
         return ovbFilter;
     }
 
@@ -568,7 +569,7 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @return the pre-existing instance, or {@code null} if none
      */
-    public ConstObjectLayerPairFilter getOvoFilter() {
+    public ConstObjectLayerPairFilter getObjectLayerPairFilter() {
         return ovoFilter;
     }
 

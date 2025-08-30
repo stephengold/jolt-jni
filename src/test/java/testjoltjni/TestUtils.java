@@ -309,9 +309,10 @@ final public class TestUtils {
     public static void cleanupPhysicsSystem(PhysicsSystem physicsSystem) {
         ConstBroadPhaseLayerInterface mapObj2Bp
                 = physicsSystem.getBroadPhaseLayerInterface();
-        ConstObjectLayerPairFilter ovoFilter = physicsSystem.getOvoFilter();
+        ConstObjectLayerPairFilter ovoFilter
+                = physicsSystem.getObjectLayerPairFilter();
         ConstObjectVsBroadPhaseLayerFilter ovbFilter
-                = physicsSystem.getOvbFilter();
+                = physicsSystem.getObjectVsBroadPhaseLayerFilter();
 
         testClose(physicsSystem, ovbFilter, ovoFilter, mapObj2Bp);
     }
