@@ -90,6 +90,17 @@ public class Support extends JoltPhysicsObject {
 
         return result;
     }
+
+    /**
+     * Calculate support vectors for the specified directions.
+     *
+     * @param directions the input directions (not null, capacity a multiple of
+     * 3, unaffected)
+     * @param storePoints storage for location vectors relative to the shape's
+     * center of mass (not null, same capacity as {@code directions})
+     */
+    native public void getSupportBulk(
+            FloatBuffer directions, FloatBuffer storePoints);
     // *************************************************************************
     // native private methods
 
