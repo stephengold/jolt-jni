@@ -553,6 +553,16 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
+     * Access the (application-provided) interface for testing whether 2 objects
+     * can collide, based on their object layers.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    public ConstObjectLayerPairFilter getObjectLayerPairFilter() {
+        return ovoFilter;
+    }
+
+    /**
      * Access the (application-provided) interface for testing whether an object
      * can collide with a broad-phase layer.
      *
@@ -561,16 +571,6 @@ public class PhysicsSystem extends NonCopyable {
     public ConstObjectVsBroadPhaseLayerFilter
             getObjectVsBroadPhaseLayerFilter() {
         return ovbFilter;
-    }
-
-    /**
-     * Access the (application-provided) interface for testing whether 2 objects
-     * can collide, based on their object layers.
-     *
-     * @return the pre-existing instance, or {@code null} if none
-     */
-    public ConstObjectLayerPairFilter getObjectLayerPairFilter() {
-        return ovoFilter;
     }
 
     /**
