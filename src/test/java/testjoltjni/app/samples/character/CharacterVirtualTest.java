@@ -73,11 +73,11 @@ public void Initialize()
 	settings.setInnerBodyLayer ( Layers.MOVING);
 	mCharacter = new CharacterVirtual(settings, RVec3.sZero(), Quat.sIdentity(), 0, mPhysicsSystem).toRef();
 	mCharacter.getPtr().setCharacterVsCharacterCollision(mCharacterVsCharacterCollision);
-	mCharacterVsCharacterCollision.add(mCharacter);
+	mCharacterVsCharacterCollision.add(mCharacter.getPtr());
 
 	// Install contact listener for all characters
-	for (CharacterVirtualRef character : mCharacterVsCharacterCollision.getCharacters())
-		character.getPtr().setListener(new CustomCharacterContactListener() {
+	for (CharacterVirtual character : mCharacterVsCharacterCollision.getCharacters())
+		character.setListener(new CustomCharacterContactListener() {
 		    public void onContactAdded(long characterVa, int bodyId2, int subShapeId2, double contactLocationX, double contactLocationY,
 			   double contactLocationZ, float contactNormalX, float contactNormalY, float contactNormalZ, long settingsVa) {
 			RVec3Arg inContactPosition=new RVec3(contactLocationX,contactLocationY,contactLocationZ);

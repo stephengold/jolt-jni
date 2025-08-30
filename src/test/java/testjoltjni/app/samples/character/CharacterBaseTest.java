@@ -592,7 +592,7 @@ public void Initialize()
 			settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
 			mAnimatedCharacterVirtual = new CharacterVirtual(settings, cCharacterVirtualPosition, Quat.sIdentity(), 0, mPhysicsSystem).toRef();
 			mAnimatedCharacterVirtual.getPtr().setCharacterVsCharacterCollision(mCharacterVsCharacterCollision);
-			mCharacterVsCharacterCollision.add(mAnimatedCharacterVirtual);
+			mCharacterVsCharacterCollision.add(mAnimatedCharacterVirtual.getPtr());
 		}
 
 		// Create CharacterVirtual with inner rigid body
@@ -603,7 +603,7 @@ public void Initialize()
 			settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
 			mAnimatedCharacterVirtualWithInnerBody = new CharacterVirtual(settings, cCharacterVirtualWithInnerBodyPosition, Quat.sIdentity(), 0, mPhysicsSystem).toRef();
 			mAnimatedCharacterVirtualWithInnerBody.getPtr().setCharacterVsCharacterCollision(mCharacterVsCharacterCollision);
-			mCharacterVsCharacterCollision.add(mAnimatedCharacterVirtualWithInnerBody);
+			mCharacterVsCharacterCollision.add(mAnimatedCharacterVirtualWithInnerBody.getPtr());
 		}
 	}
         else if(supportsObjectStream())

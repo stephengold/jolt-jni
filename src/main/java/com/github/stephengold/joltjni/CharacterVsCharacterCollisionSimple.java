@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class CharacterVsCharacterCollisionSimple
     /**
      * Java copy of the collision list
      */
-    final private List<CharacterVirtualRef> collisionList = new ArrayList<>(16);
+    final private List<CharacterVirtual> collisionList = new ArrayList<>(16);
     // *************************************************************************
     // constructors
 
@@ -55,15 +56,15 @@ public class CharacterVsCharacterCollisionSimple
     /**
      * Add the specified character to the collision list.
      *
-     * @param characterRef a counted reference to the character to add (not
-     * null, alias created)
+     * @param character a counted reference to the character to add (not null,
+     * alias created)
      */
-    public void add(CharacterVirtualRef characterRef) {
+    public void add(CharacterVirtual character) {
         long interfaceVa = va();
-        long characterVa = characterRef.targetVa();
+        long characterVa = character.targetVa();
         add(interfaceVa, characterVa);
 
-        collisionList.add(characterRef);
+        collisionList.add(character);
     }
 
     /**
@@ -71,9 +72,9 @@ public class CharacterVsCharacterCollisionSimple
      *
      * @return a new array of pre-existing counted references
      */
-    public CharacterVirtualRef[] getCharacters() {
+    public CharacterVirtual[] getCharacters() {
         int numCharacters = collisionList.size();
-        CharacterVirtualRef[] result = new CharacterVirtualRef[numCharacters];
+        CharacterVirtual[] result = new CharacterVirtual[numCharacters];
         for (int i = 0; i < numCharacters; ++i) {
             result[i] = collisionList.get(i);
         }
@@ -87,7 +88,7 @@ public class CharacterVsCharacterCollisionSimple
      * @param characterRef a counted reference to the character to remove (not
      * null)
      */
-    public void remove(CharacterVirtualRef characterRef) {
+    public void remove(ConstCharacterVirtual characterRef) {
         long interfaceVa = va();
         long characterVa = characterRef.targetVa();
         remove(interfaceVa, characterVa);

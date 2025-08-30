@@ -136,7 +136,7 @@ public
 		for (int y = 0; y < cNumCharactersY; ++y)
 			for (int x = 0; x < cNumCharactersX; ++x)
 			{
-				CharacterVirtualSettings settings = new CharacterVirtualSettings();
+				CharacterVirtualSettingsRef settings = new CharacterVirtualSettings().toRef();
 				settings.setShape ( standing_shape);
 				settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
 				settings.setInnerBodyShape ( inner_standing_shape);
@@ -176,7 +176,7 @@ public
     }
                                 });
 				mCharacters.add(character.toRef());
-				mCharacterVsCharacterCollision.add(character.toRef());
+				mCharacterVsCharacterCollision.add(character);
 			}
 
 		// Start at time 0
@@ -245,7 +245,7 @@ public
 	public void			StopTest(PhysicsSystem inPhysicsSystem)
 	{
 		for (CharacterVirtualRef ch : mCharacters)
-			mCharacterVsCharacterCollision.remove(ch);
+			mCharacterVsCharacterCollision.remove(ch.getPtr());
 		mCharacters.clear();
 	}
 
