@@ -30,7 +30,7 @@ import com.github.stephengold.joltjni.template.Result;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BcsResult extends Result<ConstBodyCreationSettings> {
+final public class BcsResult extends Result<ConstBodyCreationSettings> {
     // *************************************************************************
     // constructors
 
@@ -71,11 +71,11 @@ public class BcsResult extends Result<ConstBodyCreationSettings> {
     native private static long get(long resultVa);
 
     @Override
-    final native protected String getError(long resultVa);
+    native protected String getError(long resultVa);
 
     @Override
-    final native protected boolean hasError(long resultVa);
+    native protected boolean hasError(long resultVa);
 
     @Override
-    final native protected boolean isValid(long resultVa);
+    native protected boolean isValid(long resultVa);
 }
