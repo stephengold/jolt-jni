@@ -97,6 +97,18 @@ final public class Plane implements ConstPlane {
     // new methods exposed
 
     /**
+     * Set all 4 components from the argument.
+     *
+     * @param source the plane to copy (not null, unaffected)
+     */
+    public void set(ConstPlane source) {
+        this.nx = source.getNormalX();
+        this.ny = source.getNormalY();
+        this.nz = source.getNormalZ();
+        this.nz = source.getConstant();
+    }
+
+    /**
      * Set all 4 components to specified values.
      *
      * @param nx the desired X component of the normal direction
@@ -109,6 +121,19 @@ final public class Plane implements ConstPlane {
         this.ny = ny;
         this.nz = nz;
         this.c = c;
+    }
+
+    /**
+     * Set all 4 components from the specified buffer.
+     *
+     * @param buffer the desired component values (not null, length&ge;4,
+     * unaffected)
+     */
+    public void set(FloatBuffer buffer) {
+        this.nx = buffer.get(0);
+        this.ny = buffer.get(1);
+        this.nz = buffer.get(2);
+        this.c = buffer.get(3);
     }
 
     /**
