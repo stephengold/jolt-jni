@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 
@@ -153,7 +154,7 @@ public class ConvexHullShape extends ConvexShape {
      *
      * @return a new array of new objects
      */
-    public Plane[] getPlanes() {
+    public ConstPlane[] getPlanes() {
         long shapeVa = va();
         int numPlanes = getNumPlanes(shapeVa);
 
