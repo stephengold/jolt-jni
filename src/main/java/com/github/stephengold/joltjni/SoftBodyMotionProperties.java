@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstFace;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyMotionProperties;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
@@ -157,10 +158,10 @@ public class SoftBodyMotionProperties
      * @return a new JVM object with the pre-existing native object assigned
      */
     @Override
-    public Face getFace(int index) {
+    public ConstFace getFace(int index) {
         long propertiesVa = va();
         long faceVa = getFace(propertiesVa, index);
-        Face result = new Face(this, faceVa);
+        ConstFace result = new Face(this, faceVa);
 
         return result;
     }
@@ -172,10 +173,10 @@ public class SoftBodyMotionProperties
      * assigned
      */
     @Override
-    public Face[] getFaces() {
+    public ConstFace[] getFaces() {
         long propertiesVa = va();
         int numFaces = countFaces(propertiesVa);
-        Face[] result = new Face[numFaces];
+        ConstFace[] result = new Face[numFaces];
         for (int i = 0; i < numFaces; ++i) {
             long faceVa = getFace(propertiesVa, i);
             result[i] = new Face(this, faceVa);
