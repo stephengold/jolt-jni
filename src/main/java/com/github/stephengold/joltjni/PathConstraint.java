@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EMotorState;
+import com.github.stephengold.joltjni.readonly.ConstPathConstraintPath;
 
 /**
  * A {@code TwoBodyConstraint} that constrains motion to a path.
@@ -63,7 +64,7 @@ public class PathConstraint extends TwoBodyConstraint {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public PathConstraintPath getPath() {
+    public ConstPathConstraintPath getPath() {
         long constraintVa = va();
         long pathVa = getPath(constraintVa);
         PathConstraintPath result = PathConstraintPath.newPath(pathVa);
