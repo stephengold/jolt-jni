@@ -54,6 +54,18 @@ final public class Plane implements ConstPlane {
     // constructors
 
     /**
+     * Instantiate a copy of the argument.
+     *
+     * @param original the plane to copy (not null, unaffected)
+     */
+    public Plane(ConstPlane original) {
+        this.nx = original.getNormalX();
+        this.ny = original.getNormalY();
+        this.nz = original.getNormalZ();
+        this.c = original.getConstant();
+    }
+
+    /**
      * Instantiate a plane with specified components.
      *
      * @param nx the X component of the desired normal direction
@@ -157,6 +169,20 @@ final public class Plane implements ConstPlane {
     }
     // *************************************************************************
     // ConstPlane methods
+
+    /**
+     * Write all 4 components to the start of the specified buffer. The plane is
+     * unaffected.
+     *
+     * @param storeFloats the destination buffer (not null, capacity&ge;4)
+     */
+    @Override
+    public void copyTo(FloatBuffer storeFloats) {
+        storeFloats.put(0, nx);
+        storeFloats.put(1, ny);
+        storeFloats.put(2, nz);
+        storeFloats.put(3, c);
+    }
 
     /**
      * Return the constant in single precision. The plane is unaffected.

@@ -31,6 +31,14 @@ import java.nio.FloatBuffer;
  */
 public interface ConstPlane {
     /**
+     * Write all 4 components to the start of the specified buffer. The plane is
+     * unaffected.
+     *
+     * @param storeFloats the destination buffer (not null, capacity&ge;4)
+     */
+    void copyTo(FloatBuffer storeFloats);
+
+    /**
      * Return the constant in single precision. The plane is unaffected.
      *
      * @return the constant value
