@@ -383,10 +383,13 @@ public class SoftBodyCreationSettings
      * Alter the size of every particle.
      *
      * @param radius the desired radius (&ge;0, default=0)
+     * @return the modified settings, for chaining
      */
-    public void setVertexRadius(float radius) {
+    public SoftBodyCreationSettings setVertexRadius(float radius) {
         long settingsVa = va();
         setVertexRadius(settingsVa, radius);
+
+        return this;
     }
 
     /**
