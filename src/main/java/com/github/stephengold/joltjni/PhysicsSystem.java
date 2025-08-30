@@ -23,8 +23,12 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EBodyType;
 import com.github.stephengold.joltjni.enumerate.EStateRecorderState;
+import com.github.stephengold.joltjni.readonly.ConstBodyLockInterfaceLocking;
+import com.github.stephengold.joltjni.readonly.ConstBodyLockInterfaceNoLock;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
+import com.github.stephengold.joltjni.readonly.ConstBroadPhaseQuery;
 import com.github.stephengold.joltjni.readonly.ConstConstraint;
+import com.github.stephengold.joltjni.readonly.ConstNarrowPhaseQuery;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsSettings;
@@ -78,11 +82,11 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * cached reference to the system's locking {@code NarrowPhaseQuery}
      */
-    final private NarrowPhaseQuery narrowPhaseQuery;
+    final private ConstNarrowPhaseQuery narrowPhaseQuery;
     /**
      * cached reference to the system's no-lock {@code NarrowPhaseQuery}
      */
-    final private NarrowPhaseQuery narrowQueryNoLock;
+    final private ConstNarrowPhaseQuery narrowQueryNoLock;
     /**
      * protect the {@code SimShapeFilter} (if any) from garbage collection
      */
@@ -335,7 +339,7 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public BodyLockInterfaceLocking getBodyLockInterface() {
+    public ConstBodyLockInterfaceLocking getBodyLockInterface() {
         long systemVa = va();
         long interfaceVa = getBodyLockInterface(systemVa);
         BodyLockInterfaceLocking result
@@ -349,7 +353,7 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public BodyLockInterfaceNoLock getBodyLockInterfaceNoLock() {
+    public ConstBodyLockInterfaceNoLock getBodyLockInterfaceNoLock() {
         long systemVa = va();
         long interfaceVa = getBodyLockInterfaceNoLock(systemVa);
         BodyLockInterfaceNoLock result
@@ -388,7 +392,7 @@ public class PhysicsSystem extends NonCopyable {
      * @return the pre-existing JVM object, or {@code null} if the system hasn't
      * been initialized yet
      */
-    public BroadPhaseQuery getBroadPhaseQuery() {
+    public ConstBroadPhaseQuery getBroadPhaseQuery() {
         long systemVa = va();
         long broadVa = getBroadPhaseQuery(systemVa);
         BroadPhaseQuery result;
@@ -510,7 +514,7 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @return the pre-existing JVM object (not null)
      */
-    public NarrowPhaseQuery getNarrowPhaseQuery() {
+    public ConstNarrowPhaseQuery getNarrowPhaseQuery() {
         return narrowPhaseQuery;
     }
 
@@ -520,7 +524,7 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @return the pre-existing JVM object (not null)
      */
-    public NarrowPhaseQuery getNarrowPhaseQueryNoLock() {
+    public ConstNarrowPhaseQuery getNarrowPhaseQueryNoLock() {
         return narrowQueryNoLock;
     }
 

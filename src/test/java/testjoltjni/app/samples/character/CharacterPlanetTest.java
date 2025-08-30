@@ -218,7 +218,7 @@ void OnStep( PhysicsStepListenerContext inContext)
 	// We don't need to lock the bodies since they're already locked in the OnStep callback.
 	// Note that this means we're responsible for avoiding race conditions with other step listeners while accessing bodies.
 	// We know that this is safe because in this demo there's only one step listener.
-	 BodyLockInterface body_interface = inContext.getPhysicsSystem().getBodyLockInterfaceNoLock();
+	ConstBodyLockInterface body_interface = inContext.getPhysicsSystem().getBodyLockInterfaceNoLock();
 
 	// Loop over all active bodies
 	BodyIdVector body_ids=new BodyIdVector();

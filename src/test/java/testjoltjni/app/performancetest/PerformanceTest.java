@@ -261,7 +261,7 @@ public static void main(  String[] argv)throws IOException
 				// Disable sleeping if requested
 				if (disable_sleep)
 				{
-					final BodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
+					ConstBodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
 					BodyIdVector body_ids=new BodyIdVector();
 					physics_system.getBodies(body_ids);
 					for (int id : body_ids.toList())
@@ -377,7 +377,7 @@ public static void main(  String[] argv)throws IOException
 					}
 
 				if (implementsDeterminismLog()) {
-					final BodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
+					ConstBodyLockInterface bli = physics_system.getBodyLockInterfaceNoLock();
 					BodyIdVector body_ids=new BodyIdVector();
 					physics_system.getBodies(body_ids);
 					for (int id : body_ids.toList())
