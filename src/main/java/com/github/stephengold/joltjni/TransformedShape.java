@@ -388,7 +388,7 @@ public class TransformedShape
     }
 
     /**
-     * Return the bounding box including convex radius. The shape is unaffected.
+     * Calculate a bounding box that includes scaling. The shape is unaffected.
      *
      * @return a new, mutable box (in system coordinates)
      */
