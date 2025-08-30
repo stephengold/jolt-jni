@@ -1,5 +1,73 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.0.0 released on 30 August 2025
+
++ API changes:
+  + Deleted the `ContactList` class.
+  + Deleted the deprecated constructor of `StreamOutWrapper`.
+  + Re-designed the API of `CharacterVsCharacterCollisionSimple`.
+  + Renamed 2 public getters in the `PhysicsSystem` class:
+    + `getOvbFilter()`
+    + `getOvoFilter()`
+  + Renamed the `EConstraintSpace.LocalToBodyCOM` enum value.
+  + Overrode the `toRef()` method in `VehicleConstraintSettings`.
+  + Changed the return type of `PhysicsMaterialResult.get()`.
+  + Finalized the `BcsResult`, `ConstraintResult`, and `SbcsResult` classes.
+  + Changed return types from concrete classes to interfaces:
+    + `BcsResult.get()`
+    + `BodyLockRead.getBody()`
+    + `CompoundShape.getSubShape()`
+    + `CompoundShape.getSubShapes()`
+    + `ConvexHullBuilder.getFaces()`
+    + `ConvexHullShape.getPlanes()`
+    + `PathConstraint.getPath()`
+    + `PathConstraintSettings.getPath()`
+    + `PhysicsSystem.getBodyLockInterface()`
+    + `PhysicsSystem.getBodyLockInterfaceNoLock()`
+    + `PhysicsSystem.getBroadPhaseQuery()`
+    + `PhysicsSystem.getNarrowPhaseQuery()`
+    + `PhysicsSystem.getNarrowPhaseQueryNoLock()`
+    + `SbcsResult.get()`
+    + `SixDofConstraint.getLimitsSpringSettings()`
+    + `SoftBodyMotionProperties.getFace()`
+    + `SoftBodyMotionProperties.getFaces()`
+
++ Bugfixes:
+  + `Body.setAngularVelocity()` sets the wrong velocity.
+  + `DebugRenderer` invokes `close()` even if a cleaner is running.
+  + Memory leak in the `SpringSettings` copy constructor.
+  + Missing case in `VehicleControllerSettings.newSettings()`.
+  + `Color.sGetDistinctColor()` doesn't produce distinctive colors.
+  + `ShapeSettingsRef.getRtti()` crashes the JVM.
+
++ Added classes:
+  + `BodyLockMultiBase`
+  + `BodyLockMultiRead`
+  + `BodyLockMultiWrite`
+  + `CustomDebugRendererSimple`
+  + `DebugRendererSimple`
+  + `Geometry`
+  + `GeometryRef`
+  + `Lod`
+  + `VehicleConstraintSettingsRef`
+
++ Added interfaces:
+  + `ConstBodyLockInterface`
+  + `ConstBodyLockInterfaceLocking`
+  + `ConstBodyLockInterfaceNoLock`
+  + `ConstBroadPhaseQuery`
+  + `ConstChbFace`
+  + `ConstLod`
+  + `ConstNarrowPhaseQuery`
+  + `ConstPathConstraintPath`
+  + `ConstSubShape`
+  + `ConstWheelSettingsWv`
+
++ Added many public methods and constructors to the libraries.
++ Added run-time checks.
++ Updated the Jolt-Physics sourcecode and assets to 4366713 (sg250829)
+
+
 ## Version 2.2.0 released on 10 August 2025
 
 + Bugfixes:
@@ -53,6 +121,7 @@
 + Deprecated a `StreamOutWrapper` constructor.
 + Added runtime checks to prevent use of soft bodies in 2-body constraints.
 + Updated the Android NDK to r28c.
+
 
 ## Version 2.0.1 released on 30 June 2025
 
@@ -121,6 +190,7 @@
 + Updated the Jolt source code and assets to 2405ff1 (sg250628).
 + Updated the OSHI library to v6.8.2 .
 
+
 ## Version 1.0.0 released on 18 May 2025
 
 + Add 5 public methods:
@@ -135,6 +205,7 @@
   + `SpringSettings.setFrequency()`
   + `SpringSettings.setMode()`
   + `SpringSettings.setStiffness()`
+
 
 ## Version 0.9.10 released on 28 April 2025
 
