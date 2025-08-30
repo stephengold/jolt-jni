@@ -89,7 +89,7 @@ public class PathConstraintSettings extends TwoBodyConstraintSettings {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public PathConstraintPath getPath() {
+    public ConstPathConstraintPath getPath() {
         long settingsVa = va();
         long pathVa = getPath(settingsVa);
         PathConstraintPath result = PathConstraintPath.newPath(pathVa);
