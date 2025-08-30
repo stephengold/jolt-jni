@@ -88,11 +88,11 @@ public class SixDofConstraint extends TwoBodyConstraint {
      * @param dof which degree of freedom to query (not null)
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public SpringSettings getLimitsSpringSettings(EAxis dof) {
+    public ConstSpringSettings getLimitsSpringSettings(EAxis dof) {
         long constraintVa = va();
         int dofOrdinal = dof.ordinal();
         long settingsVa = getLimitsSpringSettings(constraintVa, dofOrdinal);
-        SpringSettings result = new SpringSettings(this, settingsVa);
+        ConstSpringSettings result = new SpringSettings(this, settingsVa);
 
         return result;
     }
