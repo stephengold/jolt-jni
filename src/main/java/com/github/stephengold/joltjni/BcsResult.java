@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.template.Result;
 
 /**
@@ -29,7 +30,7 @@ import com.github.stephengold.joltjni.template.Result;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class BcsResult extends Result<BodyCreationSettings> {
+public class BcsResult extends Result<ConstBodyCreationSettings> {
     // *************************************************************************
     // constructors
 
@@ -46,7 +47,7 @@ public class BcsResult extends Result<BodyCreationSettings> {
         setVirtualAddress(resultVa, freeingAction);
     }
     // *************************************************************************
-    // Result<BodyCreationSettings> methods
+    // Result<ConstBodyCreationSettings> methods
 
     /**
      * Return the settings object.
@@ -54,10 +55,10 @@ public class BcsResult extends Result<BodyCreationSettings> {
      * @return a new JVM object with a new native object assigned
      */
     @Override
-    public BodyCreationSettings get() {
+    public ConstBodyCreationSettings get() {
         long resultVa = va();
         long settingsVa = get(resultVa);
-        BodyCreationSettings result
+        ConstBodyCreationSettings result
                 = new BodyCreationSettings(settingsVa, true);
 
         return result;

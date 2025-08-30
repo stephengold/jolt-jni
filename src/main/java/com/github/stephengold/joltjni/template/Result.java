@@ -22,14 +22,15 @@ SOFTWARE.
 package com.github.stephengold.joltjni.template;
 
 import com.github.stephengold.joltjni.JoltPhysicsObject;
+import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 
 /**
  * The result of an operation that might fail.
  *
  * @author Stephen Gold sgold@sonic.net
- * @param <T> the datatype produced when successful
+ * @param <T> the const datatype produced when successful
  */
-abstract public class Result<T extends JoltPhysicsObject>
+abstract public class Result<T extends ConstJoltPhysicsObject>
         extends JoltPhysicsObject {
     // *************************************************************************
     // constructors

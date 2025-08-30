@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.template.Result;
 
 /**
@@ -29,7 +30,7 @@ import com.github.stephengold.joltjni.template.Result;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class SbcsResult extends Result<SoftBodyCreationSettings> {
+public class SbcsResult extends Result<ConstSoftBodyCreationSettings> {
     // *************************************************************************
     // constructors
 
@@ -46,7 +47,7 @@ public class SbcsResult extends Result<SoftBodyCreationSettings> {
         setVirtualAddress(resultVa, freeingAction);
     }
     // *************************************************************************
-    // Result<SoftBodyCreationSettings> methods
+    // Result<ConstSoftBodyCreationSettings> methods
 
     /**
      * Return the settings object.
@@ -54,10 +55,10 @@ public class SbcsResult extends Result<SoftBodyCreationSettings> {
      * @return a new JVM object with a new native object assigned
      */
     @Override
-    public SoftBodyCreationSettings get() {
+    public ConstSoftBodyCreationSettings get() {
         long resultVa = va();
         long settingsVa = get(resultVa);
-        SoftBodyCreationSettings result
+        ConstSoftBodyCreationSettings result
                 = new SoftBodyCreationSettings(settingsVa, true);
 
         return result;

@@ -24,12 +24,12 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.template.Result;
 
 /**
- * Either an error or a {@code PhysicsMaterialRef}. (native type:
+ * Either an error or a {@code PhysicsMaterialRefC}. (native type:
  * {@code Result<Ref<PhysicsMaterial>>})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class PhysicsMaterialResult extends Result<PhysicsMaterialRef> {
+final public class PhysicsMaterialResult extends Result<PhysicsMaterialRefC> {
     // *************************************************************************
     // constructors
 
@@ -54,10 +54,10 @@ final public class PhysicsMaterialResult extends Result<PhysicsMaterialRef> {
      * @return a new JVM object with a new native reference assigned
      */
     @Override
-    public PhysicsMaterialRef get() {
+    public PhysicsMaterialRefC get() {
         long resultVa = va();
         long refVa = get(resultVa);
-        PhysicsMaterialRef result = new PhysicsMaterialRef(refVa, true);
+        PhysicsMaterialRefC result = new PhysicsMaterialRefC(refVa, true);
 
         return result;
     }

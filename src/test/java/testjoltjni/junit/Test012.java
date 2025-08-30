@@ -43,6 +43,7 @@ import com.github.stephengold.joltjni.ObjectStreamOut;
 import com.github.stephengold.joltjni.OffsetCenterOfMassShapeSettings;
 import com.github.stephengold.joltjni.PhysicsMaterial;
 import com.github.stephengold.joltjni.PhysicsMaterialRef;
+import com.github.stephengold.joltjni.PhysicsMaterialRefC;
 import com.github.stephengold.joltjni.PhysicsMaterialResult;
 import com.github.stephengold.joltjni.PhysicsMaterialSimple;
 import com.github.stephengold.joltjni.PlaneShapeSettings;
@@ -198,14 +199,14 @@ public class Test012 {
      * @param serialData the data to de-serialize (not null, unaffected)
      * @return a new counted reference
      */
-    private static PhysicsMaterialRef dcPhysicsMaterial(String serialData) {
+    private static PhysicsMaterialRefC dcPhysicsMaterial(String serialData) {
         StringStream ss = new StringStream(serialData);
         StreamIn streamIn = new StreamInWrapper(ss);
 
         PhysicsMaterialResult pmResult
                 = PhysicsMaterial.sRestoreFromBinaryState(streamIn);
         assert !pmResult.hasError() : pmResult.getError();
-        PhysicsMaterialRef result = pmResult.get();
+        PhysicsMaterialRefC result = pmResult.get();
 
         TestUtils.testClose(streamIn, ss);
         return result;
@@ -456,7 +457,7 @@ public class Test012 {
      * @param serialData the data to de-serialize (not null, unaffected)
      * @return a new settings object
      */
-    private static BodyCreationSettings dwcBodyCreationSettings(
+    private static ConstBodyCreationSettings dwcBodyCreationSettings(
             String serialData) {
         StringStream ss = new StringStream(serialData);
         StreamIn streamIn = new StreamInWrapper(ss);
@@ -467,7 +468,7 @@ public class Test012 {
         BcsResult bcsResult = BodyCreationSettings.sRestoreWithChildren(
                 streamIn, shapeMap, materialMap, filterMap);
         assert !bcsResult.hasError() : bcsResult.getError();
-        BodyCreationSettings result = bcsResult.get();
+        ConstBodyCreationSettings result = bcsResult.get();
 
         TestUtils.testClose(streamIn, ss);
         return result;
@@ -480,7 +481,7 @@ public class Test012 {
      * @param serialData the data to de-serialize (not null, unaffected)
      * @return a new settings object
      */
-    private static SoftBodyCreationSettings dwcSoftBodyCreationSettings(
+    private static ConstSoftBodyCreationSettings dwcSoftBodyCreationSettings(
             String serialData) {
         StringStream ss = new StringStream(serialData);
         StreamIn streamIn = new StreamInWrapper(ss);
@@ -491,7 +492,7 @@ public class Test012 {
         SbcsResult sbcsResult = SoftBodyCreationSettings.sRestoreWithChildren(
                 streamIn, sharedSettingsMap, materialMap, filterMap);
         assert !sbcsResult.hasError() : sbcsResult.getError();
-        SoftBodyCreationSettings result = sbcsResult.get();
+        ConstSoftBodyCreationSettings result = sbcsResult.get();
 
         TestUtils.testClose(streamIn, ss);
         return result;
@@ -833,10 +834,10 @@ public class Test012 {
 
         { // serialize and then deserialize binary state:
             String serialData = serializeCooked(material);
-            PhysicsMaterialRef refCopy = dcPhysicsMaterial(serialData);
-            PhysicsMaterialSimple materialCopy = refCopy.getPtrAsSimple();
+            PhysicsMaterialRefC refCopy = dcPhysicsMaterial(serialData);
+            ConstPhysicsMaterial materialCopy = refCopy.getPtr();
 
-            Assert.assertNotEquals(material.va(), materialCopy.va());
+            Assert.assertNotEquals(material.va(), materialCopy.targetVa());
             Equivalent.physicsMaterial(material, materialCopy);
             TestUtils.testClose(refCopy);
         }
