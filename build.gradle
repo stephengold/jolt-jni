@@ -634,7 +634,8 @@ tasks.register('cleanLogs', Delete) { // JVM crash logs
 }
 tasks.register('cleanRecordings', Delete) {
     // DebugRenderer recordings, type table, recorded state, and frame timing output:
-    delete fileTree(dir: '.', includes: ['*.jor', 'lexicon.adoc', 'per_frame_*.csv', 'state_*.bin'])
+    delete fileTree(dir: '.', includes: ['*.jor', 'lexicon.adoc', \
+            'jolt-jni-classes.txt', 'per_frame_*.csv', 'state_*.bin'])
 }
 tasks.register('cleanTestFramework', Delete) { // unpacked Jolt Physics TestFramework source code
     delete 'src/main/native/TestFramework'
