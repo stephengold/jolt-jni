@@ -449,13 +449,17 @@ public class Test003 {
     private static void doCharacterVirtual() {
         CharacterVirtualSettings settings = new CharacterVirtualSettings();
         final CharacterVirtualSettingsRef ref = settings.toRef();
-        PhysicsSystem system = new PhysicsSystem();
+
+        int maxBodies = 1;
+        PhysicsSystem system = TestUtils.newPhysicsSystem(maxBodies);
+
         CharacterVirtual character = new CharacterVirtual(
                 settings, new RVec3(), new Quat(), 0L, system);
 
         testCharacterVirtualDefaults(character);
 
-        TestUtils.testClose(system, ref);
+        TestUtils.cleanupPhysicsSystem(system);
+        TestUtils.testClose(ref);
         System.gc();
     }
 
