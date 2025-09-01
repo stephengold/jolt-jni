@@ -1,5 +1,9 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.0.1 released on 31 August 2025
+
+Bugfix:  many `CharacterRefC` and `CharacterVirtualRefC` methods crash the JVM
+
 ## Version 3.0.0 released on 30 August 2025
 
 + API changes:
