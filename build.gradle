@@ -386,6 +386,9 @@ tasks.register('runLargeMesh', JavaExec) {
     enableAssertions = false
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
+tasks.register('runListClasses', JavaExec) {
+    mainClass = 'testjoltjni.ListClasses'
+}
 tasks.register('runPrintTable', JavaExec) {
     mainClass = 'testjoltjni.PrintTable'
 }
