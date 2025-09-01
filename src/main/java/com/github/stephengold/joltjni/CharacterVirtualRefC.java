@@ -721,6 +721,20 @@ final public class CharacterVirtualRefC
     }
 
     /**
+     * Return the address of the native {@code CharacterVirtual}. No objects are
+     * affected.
+     *
+     * @return a virtual address (not zero)
+     */
+    @Override
+    public long targetVa() {
+        long refVa = va();
+        long result = getPtr(refVa);
+
+        return result;
+    }
+
+    /**
      * Create another counted reference to the native {@code CharacterVirtual}.
      *
      * @return a new JVM object with a new native object assigned
