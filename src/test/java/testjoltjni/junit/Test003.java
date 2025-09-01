@@ -69,10 +69,16 @@ import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstCharacter;
+import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
+import com.github.stephengold.joltjni.readonly.ConstContactSettings;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
+import com.github.stephengold.joltjni.readonly.ConstMotionProperties;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodyMotionProperties;
+import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -820,8 +826,8 @@ public class Test003 {
      *
      * @param character the character to test (not null, unaffected)
      */
-    private static void testCharacterDefaults(
-            com.github.stephengold.joltjni.Character character) {
+    private static void testCharacterDefaults(ConstCharacter character) {
+        character.getCenterOfMassPosition();
         TestUtils.assertEquals(
                 0f, 0f, 0f, character.getCenterOfMassPosition(), 0f);
         Assert.assertEquals(0, character.getLayer());
@@ -836,7 +842,7 @@ public class Test003 {
      * @param character the character to test (not null, unaffected)
      */
     private static void testCharacterVirtualDefaults(
-            CharacterVirtual character) {
+            ConstCharacterVirtual character) {
         Assert.assertFalse(character.getEnhancedInternalEdgeRemoval());
         Assert.assertEquals(1f, character.getHitReductionCosMaxAngle(), 0f);
         TestUtils.assertEquals(0f, 0f, 0f, character.getLinearVelocity(), 0f);
@@ -882,7 +888,8 @@ public class Test003 {
      *
      * @param settings the settings to test (not null, unaffected)
      */
-    private static void testContactSettingsDefaults(ContactSettings settings) {
+    private static void testContactSettingsDefaults(
+            ConstContactSettings settings) {
         Assert.assertEquals(0f, settings.getCombinedFriction(), 0f);
         Assert.assertEquals(0f, settings.getCombinedRestitution(), 0f);
         Assert.assertEquals(1f, settings.getInvInertiaScale1(), 0f);
@@ -930,7 +937,7 @@ public class Test003 {
      *
      * @param props the properties to test (not null, unaffected)
      */
-    private static void testMotionDefaults(MotionProperties props) {
+    private static void testMotionDefaults(ConstMotionProperties props) {
         Assert.assertTrue(props.hasAssignedNativeObject());
         Assert.assertTrue(props.ownsNativeObject());
 
@@ -1151,7 +1158,7 @@ public class Test003 {
      * @param properties the properties to test (not null, unaffected)
      */
     private static void testSoftBodyMotionPropertiesDefaults(
-            SoftBodyMotionProperties properties) {
+            ConstSoftBodyMotionProperties properties) {
         Assert.assertTrue(properties.hasAssignedNativeObject());
         Assert.assertTrue(properties.ownsNativeObject());
 
@@ -1183,7 +1190,7 @@ public class Test003 {
      *
      * @param ss the settings to test (not null, unaffected)
      */
-    private static void testSpringSettingsDefaults(SpringSettings ss) {
+    private static void testSpringSettingsDefaults(ConstSpringSettings ss) {
         Assert.assertNull(ss.getConstraint());
         Assert.assertNull(ss.getConstraintSettings());
         Assert.assertEquals(0f, ss.getDamping(), 0f);
