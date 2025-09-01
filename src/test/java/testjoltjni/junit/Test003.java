@@ -29,9 +29,12 @@ import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
 import com.github.stephengold.joltjni.CapsuleShape;
 import com.github.stephengold.joltjni.CharacterRef;
+import com.github.stephengold.joltjni.CharacterRefC;
 import com.github.stephengold.joltjni.CharacterSettings;
 import com.github.stephengold.joltjni.CharacterSettingsRef;
 import com.github.stephengold.joltjni.CharacterVirtual;
+import com.github.stephengold.joltjni.CharacterVirtualRef;
+import com.github.stephengold.joltjni.CharacterVirtualRefC;
 import com.github.stephengold.joltjni.CharacterVirtualSettings;
 import com.github.stephengold.joltjni.CharacterVirtualSettingsRef;
 import com.github.stephengold.joltjni.CollisionGroup;
@@ -430,14 +433,18 @@ public class Test003 {
 
         int maxBodies = 1;
         PhysicsSystem system = TestUtils.newPhysicsSystem(maxBodies);
+
         com.github.stephengold.joltjni.Character character
                 = new com.github.stephengold.joltjni.Character(
                         settings, new RVec3(), new Quat(), 0L, system);
         final CharacterRef characterRef = character.toRef();
+        final CharacterRefC characterRefC = character.toRefC();
 
         testCharacterDefaults(character);
+        testCharacterDefaults(characterRef);
+        testCharacterDefaults(characterRefC);
 
-        TestUtils.testClose(characterRef);
+        TestUtils.testClose(characterRefC, characterRef);
         TestUtils.cleanupPhysicsSystem(system);
         TestUtils.testClose(settingsRef, shapeRefC);
         System.gc();
@@ -455,9 +462,14 @@ public class Test003 {
 
         CharacterVirtual character = new CharacterVirtual(
                 settings, new RVec3(), new Quat(), 0L, system);
+        final CharacterVirtualRef characterRef = character.toRef();
+        final CharacterVirtualRefC characterRefC = character.toRefC();
 
         testCharacterVirtualDefaults(character);
+        testCharacterVirtualDefaults(characterRef);
+        testCharacterVirtualDefaults(characterRefC);
 
+        TestUtils.testClose(characterRefC, characterRef);
         TestUtils.cleanupPhysicsSystem(system);
         TestUtils.testClose(ref);
         System.gc();
