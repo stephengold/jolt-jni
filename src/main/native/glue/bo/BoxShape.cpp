@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -61,36 +61,16 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShape_getConvexR
 
 /*
  * Class:     com_github_stephengold_joltjni_BoxShape
- * Method:    getHalfExtentX
- * Signature: (J)F
+ * Method:    getHalfExtent
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShape_getHalfExtentX
-  (JNIEnv *, jclass, jlong shapeVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BoxShape_getHalfExtent
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jobject storeFloats) {
     const BoxShape * const pShape = reinterpret_cast<BoxShape *> (shapeVa);
-    const float result = pShape->GetHalfExtent().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BoxShape
- * Method:    getHalfExtentY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShape_getHalfExtentY
-  (JNIEnv *, jclass, jlong shapeVa) {
-    const BoxShape * const pShape = reinterpret_cast<BoxShape *> (shapeVa);
-    const float result = pShape->GetHalfExtent().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BoxShape
- * Method:    getHalfExtentZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShape_getHalfExtentZ
-  (JNIEnv *, jclass, jlong shapeVa) {
-    const BoxShape * const pShape = reinterpret_cast<BoxShape *> (shapeVa);
-    const float result = pShape->GetHalfExtent().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pShape->GetHalfExtent();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }

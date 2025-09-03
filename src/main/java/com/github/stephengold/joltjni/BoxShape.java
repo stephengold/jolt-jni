@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * A {@code Shape} to represent centered, axis-aligned rectangular solids.
@@ -140,10 +141,9 @@ public class BoxShape extends ConvexShape {
      */
     public Vec3 getHalfExtent() {
         long shapeVa = va();
-        float hx = getHalfExtentX(shapeVa);
-        float hy = getHalfExtentY(shapeVa);
-        float hz = getHalfExtentZ(shapeVa);
-        Vec3 result = new Vec3(hx, hy, hz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHalfExtent(shapeVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -156,9 +156,6 @@ public class BoxShape extends ConvexShape {
 
     native private static float getConvexRadius(long shapeVa);
 
-    native private static float getHalfExtentX(long shapeVa);
-
-    native private static float getHalfExtentY(long shapeVa);
-
-    native private static float getHalfExtentZ(long shapeVa);
+    native private static void getHalfExtent(
+            long shapeVa, FloatBuffer storeFloats);
 }
