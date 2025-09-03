@@ -66,6 +66,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTeste
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
+ * Method:    setObjectLayer
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTester_setObjectLayer
+  (JNIEnv *, jclass, jlong testerVa, jint objectLayer) {
+    VehicleCollisionTester * const pTester
+            = reinterpret_cast<VehicleCollisionTester *> (testerVa);
+    pTester->SetObjectLayer(objectLayer);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
  * Method:    toRef
  * Signature: (J)J
  */

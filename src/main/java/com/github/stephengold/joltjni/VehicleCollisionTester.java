@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -50,6 +50,19 @@ public class VehicleCollisionTester extends NonCopyable implements RefTarget {
         super(testerVa);
     }
     // *************************************************************************
+    // new methods exposed
+
+    /**
+     * Alter the object layer used for collision detection when no filters are
+     * overridden.
+     *
+     * @param objectLayer the index of the desired layer
+     */
+    public void setObjectLayer(int objectLayer) {
+        long testerVa = va();
+        setObjectLayer(testerVa, objectLayer);
+    }
+    // *************************************************************************
     // RefTarget methods
 
     /**
@@ -95,6 +108,8 @@ public class VehicleCollisionTester extends NonCopyable implements RefTarget {
     native private static int getRefCount(long testerVa);
 
     native private static void setEmbedded(long testerVa);
+
+    native private static void setObjectLayer(long testerVa, int layer);
 
     native static long toRef(long testerVa);
 }
