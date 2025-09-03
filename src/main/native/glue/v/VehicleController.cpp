@@ -42,3 +42,17 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleController_ge
     VehicleConstraint * const pResult = &pController->GetConstraint();
     return reinterpret_cast<jlong> (pResult);
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleController
+ * Method:    getSettings
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleController_getSettings
+  (JNIEnv *, jclass, jlong controllerVa) {
+    const VehicleController * const pController
+            = reinterpret_cast<VehicleController *> (controllerVa);
+    Ref<VehicleControllerSettings> ref = pController->GetSettings();
+    VehicleControllerSettings * const pResult = ref.GetPtr();
+    return reinterpret_cast<jlong> (pResult);
+}

@@ -21,12 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVehicleController;
+
 /**
  * Control the acceleration and deceleration of a vehicle.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleController extends NonCopyable {
+public class VehicleController
+        extends NonCopyable
+        implements ConstVehicleController {
     // *************************************************************************
     // constants
 
@@ -70,8 +74,6 @@ public class VehicleController extends NonCopyable {
     public VehicleConstraint getConstraint() {
         return (VehicleConstraint) getContainingObject();
     }
-    // *************************************************************************
-    // new methods exposed
 
     /**
      * Instantiate a {@code VehicleController} from its virtual address.
@@ -107,7 +109,26 @@ public class VehicleController extends NonCopyable {
         return result;
     }
     // *************************************************************************
+    // ConstVehicleController methods
+
+    /**
+     * Recreate the settings for this controller. The controller is unaffected.
+     *
+     * @return a new settings object
+     */
+    @Override
+    public VehicleControllerSettings getSettings() {
+        long controllerVa = va();
+        long settingsVa = getSettings(controllerVa);
+        VehicleControllerSettings result
+                = new VehicleControllerSettings(settingsVa);
+
+        return result;
+    }
+    // *************************************************************************
     // native methods
 
     native private static long getConstraint(long controllerVa);
+
+    native private static long getSettings(long controllerVa);
 }
