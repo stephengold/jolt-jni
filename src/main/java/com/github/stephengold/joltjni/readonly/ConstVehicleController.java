@@ -21,7 +21,6 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.StateRecorder;
 import com.github.stephengold.joltjni.VehicleControllerSettings;
 
 /**
