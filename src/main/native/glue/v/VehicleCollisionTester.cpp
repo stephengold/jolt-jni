@@ -41,6 +41,19 @@ IMPLEMENT_REF(VehicleCollisionTester,
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
+ * Method:    getObjectLayer
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTester_getObjectLayer
+  (JNIEnv *, jclass, jlong testerVa) {
+    const VehicleCollisionTester * const pTester
+            = reinterpret_cast<VehicleCollisionTester *> (testerVa);
+    const ObjectLayer result = pTester->GetObjectLayer();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleCollisionTester
  * Method:    getRefCount
  * Signature: (J)I
  */

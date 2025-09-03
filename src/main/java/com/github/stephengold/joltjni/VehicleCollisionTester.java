@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVehicleCollisionTester;
 import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 
@@ -29,7 +30,9 @@ import com.github.stephengold.joltjni.template.RefTarget;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleCollisionTester extends NonCopyable implements RefTarget {
+public class VehicleCollisionTester
+        extends NonCopyable
+        implements ConstVehicleCollisionTester, RefTarget {
     // *************************************************************************
     // constructors
 
@@ -61,6 +64,22 @@ public class VehicleCollisionTester extends NonCopyable implements RefTarget {
     public void setObjectLayer(int objectLayer) {
         long testerVa = va();
         setObjectLayer(testerVa, objectLayer);
+    }
+    // *************************************************************************
+    // ConstVehicleCollisionTester methods
+
+    /**
+     * Return the object layer used for collision detection when no filters are
+     * overridden.
+     *
+     * @return the index of the layer
+     */
+    @Override
+    public int getObjectLayer() {
+        long testerVa = va();
+        int result = getObjectLayer(testerVa);
+
+        return result;
     }
     // *************************************************************************
     // RefTarget methods
@@ -104,6 +123,8 @@ public class VehicleCollisionTester extends NonCopyable implements RefTarget {
     }
     // *************************************************************************
     // native methods
+
+    native private static int getObjectLayer(long testerVa);
 
     native private static int getRefCount(long testerVa);
 
