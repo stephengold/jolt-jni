@@ -291,11 +291,9 @@ public class Test001 {
         final int numBytes = 1 << 18; // 256 KiB
         TempAllocator tempAllocator = new TempAllocatorImpl(numBytes);
 
-        final int maxJobs = 4_096;
-        final int maxBarriers = 4;
         int numThreads = TestUtils.numThreads();
-        JobSystem jobSystem
-                = new JobSystemThreadPool(maxJobs, maxBarriers, numThreads);
+        JobSystem jobSystem = new JobSystemThreadPool(
+                Jolt.cMaxPhysicsJobs, Jolt.cMaxPhysicsBarriers, numThreads);
 
         int stepCounter = 0;
         while (bodyInterface.isActive(ballId) && stepCounter < 99) {
