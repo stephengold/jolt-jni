@@ -33,7 +33,8 @@ public class JobSystemThreadPool extends JobSystemWithBarrier {
     /**
      * Instantiate a job system with the specified limits.
      *
-     * @param maxJobs the maximum number of jobs the system can allocate (&gt;1)
+     * @param maxJobs the maximum number of jobs the system can allocate (a
+     * power of 2, &gt;1)
      * @param maxBarriers the maximum number of barriers the system can allocate
      *
      * @see com.github.stephengold.joltjni.Jolt#cMaxPhysicsBarriers
@@ -46,12 +47,15 @@ public class JobSystemThreadPool extends JobSystemWithBarrier {
     /**
      * Instantiate a job system with the specified limits.
      *
-     * @param maxJobs the maximum number of jobs the system can allocate (&gt;1)
+     * @param maxJobs the maximum number of jobs the system can allocate (a
+     * power of 2, &gt;1)
      * @param maxBarriers the maximum number of barriers the system can allocate
      * @param numThreads the number of worker threads to start (&ge;0) or -1 to
      * autodetect
      */
     public JobSystemThreadPool(int maxJobs, int maxBarriers, int numThreads) {
+        assert maxJobs > 1 && ((maxJobs & (maxJobs - 1)) == 0x0) :
+                "maxJobs = " + maxJobs;
         long systemVa = createJobSystem(maxJobs, maxBarriers, numThreads);
         setVirtualAddress(systemVa, () -> free(systemVa));
     }

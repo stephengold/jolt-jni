@@ -34,11 +34,14 @@ public class JobSystemSingleThreaded extends JobSystem {
     /**
      * Instantiate a job system with the specified limit.
      *
-     * @param maxJobs the maximum number of jobs the system can allocate (&gt;1)
+     * @param maxJobs the maximum number of jobs the system can allocate (a
+     * power of 2, &gt;1)
      *
      * @see com.github.stephengold.joltjni.Jolt#cMaxPhysicsJobs
      */
     public JobSystemSingleThreaded(int maxJobs) {
+        assert maxJobs > 1 && ((maxJobs & (maxJobs - 1)) == 0x0) :
+                "maxJobs = " + maxJobs;
         long systemVa = createJobSystem(maxJobs);
         setVirtualAddress(systemVa, () -> free(systemVa));
     }
