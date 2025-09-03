@@ -57,6 +57,7 @@ import com.github.stephengold.joltjni.SoftBodyCreationSettings;
 import com.github.stephengold.joltjni.SoftBodyMotionProperties;
 import com.github.stephengold.joltjni.SoftBodySharedSettings;
 import com.github.stephengold.joltjni.SoftBodySharedSettingsRef;
+import com.github.stephengold.joltjni.Sphere;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.SpringSettings;
 import com.github.stephengold.joltjni.TempAllocator;
@@ -81,6 +82,7 @@ import com.github.stephengold.joltjni.readonly.ConstMotionProperties;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyMotionProperties;
+import com.github.stephengold.joltjni.readonly.ConstSphere;
 import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.QuatArg;
@@ -140,6 +142,7 @@ public class Test003 {
         doSkinWeight();
         doSoftBodyCreationSettings();
         doSoftBodyMotionProperties();
+        doSphere();
         doSpringSettings();
         doTempAllocatorImpl();
         doTempAllocatorImplWithMallocFallback();
@@ -641,6 +644,17 @@ public class Test003 {
         testSoftBodyMotionPropertiesSetters(properties);
 
         TestUtils.testClose(properties);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code Sphere} class.
+     */
+    private static void doSphere() {
+        Sphere sphere = new Sphere();
+        testSphereDefaults(sphere);
+
+        TestUtils.testClose(sphere);
         System.gc();
     }
 
@@ -1199,6 +1213,16 @@ public class Test003 {
         Assert.assertEquals(2, properties.getNumIterations());
         Assert.assertEquals(
                 9f, properties.getSkinnedMaxDistanceMultiplier(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code Sphere}.
+     *
+     * @param ss the object to test (not null, unaffected)
+     */
+    private static void testSphereDefaults(ConstSphere ss) {
+        TestUtils.assertEquals(0f, 0f, 0f, ss.getCenter(), 0f);
+        Assert.assertEquals(0f, ss.getRadius(), 0f);
     }
 
     /**
