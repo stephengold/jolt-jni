@@ -65,38 +65,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Sphere_free
 
 /*
  * Class:     com_github_stephengold_joltjni_Sphere
- * Method:    getCenterX
- * Signature: (J)F
+ * Method:    getCenter
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Sphere_getCenterX
-  (JNIEnv *, jclass, jlong sphereVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Sphere_getCenter
+  (JNIEnv *pEnv, jclass, jlong sphereVa, jobject storeFloats) {
     const Sphere * const pSphere = reinterpret_cast<Sphere *> (sphereVa);
-    const float result = pSphere->GetCenter().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Sphere
- * Method:    getCenterY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Sphere_getCenterY
-  (JNIEnv *, jclass, jlong sphereVa) {
-    const Sphere * const pSphere = reinterpret_cast<Sphere *> (sphereVa);
-    const float result = pSphere->GetCenter().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Sphere
- * Method:    getCenterZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Sphere_getCenterZ
-  (JNIEnv *, jclass, jlong sphereVa) {
-    const Sphere * const pSphere = reinterpret_cast<Sphere *> (sphereVa);
-    const float result = pSphere->GetCenter().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pSphere->GetCenter();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -114,19 +94,17 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Sphere_getRadius
 /*
  * Class:     com_github_stephengold_joltjni_Sphere
  * Method:    getSupport
- * Signature: (JFFF[F)V
+ * Signature: (JFFFLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Sphere_getSupport
   (JNIEnv *pEnv, jclass, jlong sphereVa, jfloat dx, jfloat dy, jfloat dz,
-  jfloatArray storeFloats) {
+  jobject storeFloats) {
     const Sphere * const pSphere = reinterpret_cast<Sphere *> (sphereVa);
     const Vec3 direction(dx, dy, dz);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pSphere->GetSupport(direction);
-    jboolean isCopy;
-    jfloat * const pStoreFloats
-            = pEnv->GetFloatArrayElements(storeFloats, &isCopy);
-    pStoreFloats[0] = result.GetX();
-    pStoreFloats[1] = result.GetY();
-    pStoreFloats[2] = result.GetZ();
-    pEnv->ReleaseFloatArrayElements(storeFloats, pStoreFloats, 0);
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }

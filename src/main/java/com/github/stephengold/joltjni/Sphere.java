@@ -84,10 +84,9 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
     @Override
     public Vec3 getCenter() {
         long sphereVa = va();
-        float x = getCenterX(sphereVa);
-        float y = getCenterY(sphereVa);
-        float z = getCenterZ(sphereVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getCenter(sphereVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -117,7 +116,7 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
         float dx = direction.getX();
         float dy = direction.getY();
         float dz = direction.getZ();
-        float[] storeFloats = new float[3];
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getSupport(sphereVa, dx, dy, dz, storeFloats);
         Vec3 result = new Vec3(storeFloats);
 
@@ -134,14 +133,11 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
 
     native private static void free(long sphereVa);
 
-    native private static float getCenterX(long sphereVa);
-
-    native private static float getCenterY(long sphereVa);
-
-    native private static float getCenterZ(long sphereVa);
+    native private static void getCenter(
+            long sphereVa, FloatBuffer storeFloats);
 
     native private static float getRadius(long sphereVa);
 
-    native private static void getSupport(
-            long sphereVa, float dx, float dy, float dz, float[] storeFloats);
+    native private static void getSupport(long sphereVa,
+            float dx, float dy, float dz, FloatBuffer storeFloats);
 }
