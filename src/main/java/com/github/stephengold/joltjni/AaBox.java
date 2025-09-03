@@ -32,7 +32,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
 /**
- * An axis-aligned box. (native type: AABox)
+ * 3-D geometric description of an axis-aligned box. (native type: AABox)
  *
  * @author Stephen Gold sgold@sonic.net
  */

@@ -56,7 +56,8 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
     /**
      * Instantiate a sphere with the specified center and radius.
      *
-     * @param center the desired location for the center (not null, unaffected)
+     * @param center the desired location for the center (not {@code null},
+     * unaffected)
      * @param radius the desired radius
      */
     public Sphere(Float3 center, float radius) {
@@ -67,7 +68,8 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
     /**
      * Instantiate a sphere with the specified center and radius.
      *
-     * @param center the desired location for the center (not null, unaffected)
+     * @param center the desired location for the center (not {@code null},
+     * unaffected)
      * @param radius the desired radius
      */
     public Sphere(Vec3Arg center, float radius) {
@@ -84,7 +86,7 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
      * Construct the smallest sphere that encapsulates the sphere and the
      * specified point.
      *
-     * @param point the point to encapsulate (not null, unaffected)
+     * @param point the point to encapsulate (not {@code null}, unaffected)
      */
     public void encapsulatePoint(Vec3Arg point) {
         long sphereVa = va();
@@ -127,7 +129,7 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
     /**
      * Calculate the support vector for the specified direction.
      *
-     * @param direction the direction to use (not null, unaffected)
+     * @param direction the direction to use (not {@code null}, unaffected)
      * @return a new offset vector
      */
     @Override
