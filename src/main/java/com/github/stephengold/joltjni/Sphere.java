@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstSphere;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * 3-D geometric description of a sphere.
@@ -32,6 +33,25 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 public class Sphere extends JoltPhysicsObject implements ConstSphere {
     // *************************************************************************
     // constructors
+
+    /**
+     * Instantiate an default sphere.
+     */
+    public Sphere() {
+        long sphereVa = createDefault();
+        setVirtualAddress(sphereVa, () -> free(sphereVa));
+    }
+
+    /**
+     * Instantiate a copy of the specified sphere.
+     *
+     * @param original the sphere to copy (not {@code null}, unaffected)
+     */
+    public Sphere(ConstSphere original) {
+        long originalVa = original.targetVa();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa, () -> free(copyVa));
+    }
 
     /**
      * Instantiate a sphere with the specified center and radius.
@@ -127,6 +147,10 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
 
     native private static long create(
             float cx, float cy, float cz, float radius);
+
+    native private static long createCopy(long originalVa);
+
+    native private static long createDefault();
 
     native private static void encapsulatePoint(
             long sphereVa, float x, float y, float z);

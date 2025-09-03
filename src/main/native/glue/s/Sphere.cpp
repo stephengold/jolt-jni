@@ -45,6 +45,22 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Sphere_create
 
 /*
  * Class:     com_github_stephengold_joltjni_Sphere
+ * Method:    createCopy
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Sphere_createCopy
+  BODYOF_CREATE_COPY(Sphere)
+
+/*
+ * Class:     com_github_stephengold_joltjni_Sphere
+ * Method:    createDefault
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Sphere_createDefault
+  BODYOF_CREATE_DEFAULT(Sphere)
+
+/*
+ * Class:     com_github_stephengold_joltjni_Sphere
  * Method:    encapsulatePoint
  * Signature: (JFFF)V
  */
