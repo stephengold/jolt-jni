@@ -26,6 +26,8 @@ import com.github.stephengold.joltjni.readonly.ConstCharacter;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * A counted reference to a {@code ConstCharacter}. (native type:
@@ -214,10 +216,9 @@ final public class CharacterRefC
     @Override
     public Vec3 getGroundNormal() {
         long characterVa = targetVa();
-        float nx = CharacterBase.getGroundNormalX(characterVa);
-        float ny = CharacterBase.getGroundNormalY(characterVa);
-        float nz = CharacterBase.getGroundNormalZ(characterVa);
-        Vec3 result = new Vec3(nx, ny, nz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getGroundNormal(characterVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -231,10 +232,9 @@ final public class CharacterRefC
     @Override
     public RVec3 getGroundPosition() {
         long characterVa = targetVa();
-        double xx = CharacterBase.getGroundPositionX(characterVa);
-        double yy = CharacterBase.getGroundPositionY(characterVa);
-        double zz = CharacterBase.getGroundPositionZ(characterVa);
-        RVec3 result = new RVec3(xx, yy, zz);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        CharacterBase.getGroundPosition(characterVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -291,10 +291,9 @@ final public class CharacterRefC
     @Override
     public Vec3 getGroundVelocity() {
         long characterVa = targetVa();
-        float vx = CharacterBase.getGroundVelocityX(characterVa);
-        float vy = CharacterBase.getGroundVelocityY(characterVa);
-        float vz = CharacterBase.getGroundVelocityZ(characterVa);
-        Vec3 result = new Vec3(vx, vy, vz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getGroundVelocity(characterVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -506,10 +505,9 @@ final public class CharacterRefC
     @Override
     public Vec3 getUp() {
         long characterVa = targetVa();
-        float x = CharacterBase.getUpX(characterVa);
-        float y = CharacterBase.getUpY(characterVa);
-        float z = CharacterBase.getUpZ(characterVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterBase.getUp(characterVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }

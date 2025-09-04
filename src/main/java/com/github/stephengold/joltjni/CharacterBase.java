@@ -27,6 +27,8 @@ import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.RefTarget;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Base class to represent a player navigating a {@code PhysicsSystem}.
@@ -152,10 +154,9 @@ abstract public class CharacterBase
     @Override
     public Vec3 getGroundNormal() {
         long characterVa = va();
-        float nx = getGroundNormalX(characterVa);
-        float ny = getGroundNormalY(characterVa);
-        float nz = getGroundNormalZ(characterVa);
-        Vec3 result = new Vec3(nx, ny, nz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getGroundNormal(characterVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -169,10 +170,9 @@ abstract public class CharacterBase
     @Override
     public RVec3 getGroundPosition() {
         long characterVa = va();
-        double xx = getGroundPositionX(characterVa);
-        double yy = getGroundPositionY(characterVa);
-        double zz = getGroundPositionZ(characterVa);
-        RVec3 result = new RVec3(xx, yy, zz);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getGroundPosition(characterVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -229,10 +229,9 @@ abstract public class CharacterBase
     @Override
     public Vec3 getGroundVelocity() {
         long characterVa = va();
-        float vx = getGroundVelocityX(characterVa);
-        float vy = getGroundVelocityY(characterVa);
-        float vz = getGroundVelocityZ(characterVa);
-        Vec3 result = new Vec3(vx, vy, vz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getGroundVelocity(characterVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -260,10 +259,9 @@ abstract public class CharacterBase
     @Override
     public Vec3 getUp() {
         long characterVa = va();
-        float x = getUpX(characterVa);
-        float y = getUpY(characterVa);
-        float z = getUpZ(characterVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getUp(characterVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -345,17 +343,11 @@ abstract public class CharacterBase
 
     native static long getGroundMaterial(long characterVa);
 
-    native static float getGroundNormalX(long characterVa);
+    native static void getGroundNormal(
+            long characterVa, FloatBuffer storeFloats);
 
-    native static float getGroundNormalY(long characterVa);
-
-    native static float getGroundNormalZ(long characterVa);
-
-    native static double getGroundPositionX(long characterVa);
-
-    native static double getGroundPositionY(long characterVa);
-
-    native static double getGroundPositionZ(long characterVa);
+    native static void getGroundPosition(
+            long characterVa, DoubleBuffer storeDoubles);
 
     native static int getGroundState(long characterVa);
 
@@ -363,21 +355,14 @@ abstract public class CharacterBase
 
     native static long getGroundUserData(long characterVa);
 
-    native static float getGroundVelocityX(long characterVa);
-
-    native static float getGroundVelocityY(long characterVa);
-
-    native static float getGroundVelocityZ(long characterVa);
+    native static void getGroundVelocity(
+            long characterVa, FloatBuffer storeFloats);
 
     native private static int getRefCount(long characterVa);
 
     native static long getShape(long characterVa);
 
-    native static float getUpX(long characterVa);
-
-    native static float getUpY(long characterVa);
-
-    native static float getUpZ(long characterVa);
+    native static void getUp(long characterVa, FloatBuffer storeFloats);
 
     native static boolean isSlopeTooSteep(
             long characterVa, float nx, float ny, float nz);

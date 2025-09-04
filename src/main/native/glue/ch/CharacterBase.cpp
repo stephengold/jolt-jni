@@ -71,80 +71,36 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGro
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getGroundNormalX
- * Signature: (J)F
+ * Method:    getGroundNormal
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundNormalX
-  (JNIEnv *, jclass, jlong characterVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundNormal
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeFloats) {
     const CharacterBase * const pCharacter
             = reinterpret_cast<CharacterBase *> (characterVa);
-    const float result = pCharacter->GetGroundNormal().GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pCharacter->GetGroundNormal();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getGroundNormalY
- * Signature: (J)F
+ * Method:    getGroundPosition
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundNormalY
-  (JNIEnv *, jclass, jlong characterVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundPosition
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeDoubles) {
     const CharacterBase * const pCharacter
             = reinterpret_cast<CharacterBase *> (characterVa);
-    const float result = pCharacter->GetGroundNormal().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getGroundNormalZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundNormalZ
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterBase * const pCharacter
-            = reinterpret_cast<CharacterBase *> (characterVa);
-    const float result = pCharacter->GetGroundNormal().GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getGroundPositionX
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundPositionX
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterBase * const pCharacter
-            = reinterpret_cast<CharacterBase *> (characterVa);
-    const Real result = pCharacter->GetGroundPosition().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getGroundPositionY
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundPositionY
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterBase * const pCharacter
-            = reinterpret_cast<CharacterBase *> (characterVa);
-    const Real result = pCharacter->GetGroundPosition().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getGroundPositionZ
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundPositionZ
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterBase * const pCharacter
-            = reinterpret_cast<CharacterBase *> (characterVa);
-    const Real result = pCharacter->GetGroundPosition().GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3 result = pCharacter->GetGroundPosition();
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
@@ -188,41 +144,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGro
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getGroundVelocityX
- * Signature: (J)F
+ * Method:    getGroundVelocity
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundVelocityX
-  (JNIEnv *, jclass, jlong characterVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundVelocity
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeFloats) {
     const CharacterBase * const pCharacter
             = reinterpret_cast<CharacterBase *> (characterVa);
-    const float result = pCharacter->GetGroundVelocity().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getGroundVelocityY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundVelocityY
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterBase * const pCharacter
-            = reinterpret_cast<CharacterBase *> (characterVa);
-    const float result = pCharacter->GetGroundVelocity().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getGroundVelocityZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getGroundVelocityZ
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterBase * const pCharacter
-            = reinterpret_cast<CharacterBase *> (characterVa);
-    const float result = pCharacter->GetGroundVelocity().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pCharacter->GetGroundVelocity();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -253,41 +187,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getSha
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getUpX
- * Signature: (J)F
+ * Method:    getUp
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getUpX
-  (JNIEnv *, jclass, jlong characterVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getUp
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeFloats) {
     const CharacterBase * const pCharacter
             = reinterpret_cast<CharacterBase *> (characterVa);
-    const float result = pCharacter->GetUp().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getUpY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getUpY
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterBase * const pCharacter
-            = reinterpret_cast<CharacterBase *> (characterVa);
-    const float result = pCharacter->GetUp().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterBase
- * Method:    getUpZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getUpZ
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterBase * const pCharacter
-            = reinterpret_cast<CharacterBase *> (characterVa);
-    const float result = pCharacter->GetUp().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pCharacter->GetUp();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
