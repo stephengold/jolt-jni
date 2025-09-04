@@ -78,41 +78,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_BoxShapeSettings
- * Method:    getHalfExtentX
- * Signature: (J)F
+ * Method:    getHalfExtent
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_getHalfExtentX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_getHalfExtent
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const BoxShapeSettings * const pSettings
             = reinterpret_cast<BoxShapeSettings *> (settingsVa);
-    const float result = pSettings->mHalfExtent.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BoxShapeSettings
- * Method:    getHalfExtentY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_getHalfExtentY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const BoxShapeSettings * const pSettings
-            = reinterpret_cast<BoxShapeSettings *> (settingsVa);
-    const float result = pSettings->mHalfExtent.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BoxShapeSettings
- * Method:    getHalfExtentZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_getHalfExtentZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const BoxShapeSettings * const pSettings
-            = reinterpret_cast<BoxShapeSettings *> (settingsVa);
-    const float result = pSettings->mHalfExtent.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mHalfExtent;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

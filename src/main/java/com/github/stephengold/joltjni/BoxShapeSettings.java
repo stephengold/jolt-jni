@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code BoxShape}.
@@ -196,10 +197,9 @@ public class BoxShapeSettings
     @Override
     public Vec3 getHalfExtent() {
         long settingsVa = va();
-        float hx = getHalfExtentX(settingsVa);
-        float hy = getHalfExtentY(settingsVa);
-        float hz = getHalfExtentZ(settingsVa);
-        Vec3 result = new Vec3(hx, hy, hz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHalfExtent(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -215,11 +215,8 @@ public class BoxShapeSettings
 
     native private static float getConvexRadius(long settingsVa);
 
-    native private static float getHalfExtentX(long settingsVa);
-
-    native private static float getHalfExtentY(long settingsVa);
-
-    native private static float getHalfExtentZ(long settingsVa);
+    native private static void getHalfExtent(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static void setConvexRadius(long settingsVa, float radius);
 
