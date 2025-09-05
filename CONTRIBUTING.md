@@ -42,8 +42,8 @@ The most valuable contributions come from people actively using the library,
 because users have insight into what's important and what isn't.
 
 Before editing the source code, please read relevant documentation, including
-https://stephengold.github.io/jolt-jni-docs/jolt-jni-en/English/implementation.html[the implementation page],
-https://stephengold.github.io/jolt-jni-docs/jolt-jni-en/English/lexicon.html#_naming_conventions[the naming-convention section],
+[the implementation page](https://stephengold.github.io/jolt-jni-docs/jolt-jni-en/English/implementation.html),
+[the section on naming conventions](https://stephengold.github.io/jolt-jni-docs/jolt-jni-en/English/lexicon.html#_naming_conventions),
 and the "code style" section below.
 
 Before investing hours of effort in a pull request,
