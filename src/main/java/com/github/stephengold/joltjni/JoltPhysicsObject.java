@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 import java.lang.ref.Cleaner;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -32,7 +33,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class JoltPhysicsObject
+public abstract class JoltPhysicsObject
         implements AutoCloseable, ConstJoltPhysicsObject {
     // *************************************************************************
     // fields
@@ -53,16 +54,16 @@ abstract public class JoltPhysicsObject
      * An AtomicReference is used to ensure the freeing action is executed
      * exactly once, either by a manual call to close() or by the Cleaner.
      */
-    private final AtomicReference<Runnable> freeingActionRef
+    final private AtomicReference<Runnable> freeingActionRef
             = new AtomicReference<>();
     /**
-     * virtual address of the assigned native object, or 0 for none
+     * virtual address of the assigned native object, or 0 for none.
      * <p>
-     * Marked "volatile" to ensure that writes (especially setting it to zero)
-     * are immediately visible to all other threads, preventing use-after-free
-     * errors.
+     * An AtomicLong is used so both the Cleaner and manual close() calls can
+     * safely set the address to zero after the native resource is freed,
+     * preventing use-after-free errors.
      */
-    private volatile long virtualAddress;
+    final private AtomicLong virtualAddress = new AtomicLong(0L);
     // *************************************************************************
     // constructors
 
@@ -70,7 +71,6 @@ abstract public class JoltPhysicsObject
      * Instantiate with no containing object and no native object assigned.
      */
     protected JoltPhysicsObject() {
-        this.virtualAddress = 0L;
         this.containingObject = null;
     }
 
@@ -84,7 +84,7 @@ abstract public class JoltPhysicsObject
     protected JoltPhysicsObject(
             JoltPhysicsObject container, long virtualAddress) {
         assert virtualAddress != 0L;
-        this.virtualAddress = virtualAddress;
+        this.virtualAddress.set(virtualAddress);
 
         if (container instanceof RefTarget) {
             container = ((RefTarget) container).toRef();
@@ -102,7 +102,7 @@ abstract public class JoltPhysicsObject
      */
     JoltPhysicsObject(long virtualAddress) {
         assert virtualAddress != 0L;
-        this.virtualAddress = virtualAddress;
+        this.virtualAddress.set(virtualAddress);
         this.containingObject = null;
     }
     // *************************************************************************
@@ -137,7 +137,7 @@ abstract public class JoltPhysicsObject
      * @return the virtual address (not zero)
      */
     final public long va() {
-        long addr = virtualAddress; // Read the volatile field once.
+        long addr = virtualAddress.get(); // Read the atomic field once.
         assert addr != 0L : "Attempted to use an object that has already been"
                 + " freed: " + this;
         return addr;
@@ -165,7 +165,7 @@ abstract public class JoltPhysicsObject
         assert !hasAssignedNativeObject() : "native object already assigned";
         assert freeingActionRef.get() == null;
 
-        this.virtualAddress = virtualAddress;
+        this.virtualAddress.set(virtualAddress);
     }
 
     /**
@@ -188,10 +188,9 @@ abstract public class JoltPhysicsObject
             this.freeingActionRef.set(action);
 
             if (cleaner != null) {
-                // Register the object with the cleaner. The provided Runnable
-                // MUST NOT hold a strong reference back to 'this'.
-                // Our static CleanerRunnable correctly avoids this leak.
-                cleaner.register(this, new CleanerRunnable(this.freeingActionRef));
+                // Register the object with the cleaner.
+                cleaner.register(this, new CleanerRunnable(
+                        this.freeingActionRef, this.virtualAddress));
             }
         }
     }
@@ -204,18 +203,15 @@ abstract public class JoltPhysicsObject
      */
     @Override
     public void close() {
-        // Atomically retrieve the freeing action and replace it with null.
-        // This is the core of the thread-safe, "run-once" guarantee.
         Runnable action = freeingActionRef.getAndSet(null);
 
         if (action != null) {
             try {
-                // If we successfully "claimed" the action, execute it.
                 action.run();
             } finally {
-                // Crucially, update the volatile address *after* the native
-                // resource has been freed. This write is visible to all threads.
-                this.virtualAddress = 0L;
+                // Crucially, set the address to zero *after* the native
+                // resource has been freed.
+                this.virtualAddress.set(0L);
             }
         }
     }
@@ -230,8 +226,8 @@ abstract public class JoltPhysicsObject
      */
     @Override
     public int compareTo(JoltPhysicsObject other) {
-        long thisVa = this.virtualAddress;
-        long otherVa = other.virtualAddress;
+        long thisVa = this.virtualAddress.get();
+        long otherVa = other.virtualAddress.get();
         return Long.compare(thisVa, otherVa);
     }
 
@@ -242,7 +238,7 @@ abstract public class JoltPhysicsObject
      */
     @Override
     final public boolean hasAssignedNativeObject() {
-        return virtualAddress != 0L;
+        return virtualAddress.get() != 0L;
     }
 
     /**
@@ -287,7 +283,8 @@ abstract public class JoltPhysicsObject
         } else if (otherObject != null
                 && otherObject.getClass() == getClass()) {
             JoltPhysicsObject otherJpo = (JoltPhysicsObject) otherObject;
-            result = (this.virtualAddress == otherJpo.virtualAddress);
+            result = (this.virtualAddress.get()
+                    == otherJpo.virtualAddress.get());
         } else {
             result = false;
         }
@@ -305,7 +302,7 @@ abstract public class JoltPhysicsObject
      */
     @Override
     public int hashCode() {
-        long va = this.virtualAddress;
+        long va = this.virtualAddress.get();
         return (int) (va ^ (va >>> 32));
     }
 
@@ -318,7 +315,7 @@ abstract public class JoltPhysicsObject
     @Override
     public String toString() {
         String result = getClass().getSimpleName();
-        result += "#" + Long.toHexString(virtualAddress);
+        result += "#" + Long.toHexString(virtualAddress.get());
 
         return result;
     }
@@ -328,32 +325,48 @@ abstract public class JoltPhysicsObject
     /**
      * A static, non-capturing Runnable for the Cleaner.
      * <p>
-     * This holds the one piece of state it needs to coordinate with manual
-     * close(): the AtomicReference containing the freeing action. This avoids a
-     * memory leak that would occur if a non-static inner class were used.
+     * This holds the state it needs to coordinate with manual close(): the
+     * AtomicReference to the action and the AtomicLong of the address. This
+     * avoids a memory leak that would occur if a non-static inner class were
+     * used.
      */
     private static class CleanerRunnable implements Runnable {
         /**
          * The shared atomic reference that holds the native freeing action.
          */
-        private final AtomicReference<Runnable> actionRef;
+        final private AtomicReference<Runnable> actionRef;
+        /**
+         * The shared atomic reference to the virtual address.
+         */
+        final private AtomicLong addressRef;
 
         /**
          * Instantiate a cleaner action.
          *
          * @param actionRef the shared atomic reference (not null)
+         * @param addressRef the shared address reference (not null)
          */
-        CleanerRunnable(AtomicReference<Runnable> actionRef) {
+        CleanerRunnable(
+                AtomicReference<Runnable> actionRef, AtomicLong addressRef) {
             this.actionRef = actionRef;
+            this.addressRef = addressRef;
         }
 
+        /**
+         * If the native object hasn't been freed yet, invoke its freeing
+         * action and mark it as freed.
+         */
         @Override
         public void run() {
-            // Atomically get and set the reference to null.
             Runnable action = actionRef.getAndSet(null);
-            // If we successfully "claimed" the action, run it.
             if (action != null) {
-                action.run();
+                try {
+                    action.run();
+                } finally {
+                    // This is the crucial fix: set the address to zero
+                    // to prevent use-after-free.
+                    addressRef.set(0L);
+                }
             }
         }
     }

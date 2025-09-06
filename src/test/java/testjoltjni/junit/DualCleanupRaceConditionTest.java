@@ -28,12 +28,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import testjoltjni.TestUtils;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * A JUnit4 test to verify the thread-safe interaction between manual
@@ -71,7 +69,7 @@ public class DualCleanupRaceConditionTest {
     public static void setUpClass() {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
-        assertTrue("Cleaner service must be active for this test",
+        Assert.assertTrue("Cleaner service must be active for this test",
                 TestUtils.automateFreeing);
     }
 
@@ -91,7 +89,7 @@ public class DualCleanupRaceConditionTest {
         ConcurrentLinkedQueue<OwningTestObject> queue
                 = new ConcurrentLinkedQueue<>();
 
-        // An atomic counter to track every single execution of the cleanup action.
+        // An atomic counter to track every execution of the cleanup action.
         AtomicInteger cleanupActionCount = new AtomicInteger(0);
 
         // A temporary list to hold strong references during creation.
@@ -101,7 +99,7 @@ public class DualCleanupRaceConditionTest {
             queue.add(obj);
             strongReferences.add(obj);
         }
-        assertEquals("Queue should be full before starting",
+        Assert.assertEquals("Queue should be full before starting",
                 NUM_OBJECTS, queue.size());
 
         // This thread will manually call .close() on objects from the queue.
@@ -117,8 +115,8 @@ public class DualCleanupRaceConditionTest {
         // --- THE RACE BEGINS ---
         manualCloserThread.start();
 
-        // Release our strong references, making objects eligible for the GC/Cleaner
-        // as soon as they are polled from the queue by the other thread.
+        // Release our strong references, making objects eligible for the
+        // GC/Cleaner as soon as they are polled from the queue.
         strongReferences.clear();
         strongReferences = null;
         System.gc(); // Hint the GC to start looking for objects to clean.
@@ -127,7 +125,7 @@ public class DualCleanupRaceConditionTest {
         manualCloserThread.join();
         // --- THE RACE ENDS ---
 
-        // Give the background Cleaner a moment to process any remaining objects.
+        // Give the Cleaner time to process remaining objects.
         System.gc();
         Thread.sleep(1000);
 
@@ -135,12 +133,12 @@ public class DualCleanupRaceConditionTest {
                 cleanupActionCount.get());
 
         // --- VERIFICATION ---
-        assertTrue("The queue of objects to close should be empty",
+        Assert.assertTrue("The queue of objects to close should be empty",
                 queue.isEmpty());
 
-        // This is the crucial assertion. If the count is not exactly NUM_OBJECTS,
-        // it means the "run-once" guarantee was violated.
-        assertEquals(
+        // This is the crucial assertion. If the count is not exactly
+        // NUM_OBJECTS, it means the "run-once" guarantee was violated.
+        Assert.assertEquals(
                 "The cleanup action must be executed exactly once per object",
                 NUM_OBJECTS, cleanupActionCount.get());
     }
@@ -154,10 +152,10 @@ public class DualCleanupRaceConditionTest {
      */
     private static class OwningTestObject extends JoltPhysicsObject {
         /**
-
-         * A shared counter to generate unique virtual addresses for mock objects.
+         * A shared counter to generate unique virtual addresses for mock
+         * objects.
          */
-        private static final AtomicLong nextVirtualAddress = new AtomicLong(1L);
+        final private static AtomicLong nextVirtualAddress = new AtomicLong(1L);
 
         /**
          * Instantiate an object that owns a mock native resource.
@@ -165,14 +163,13 @@ public class DualCleanupRaceConditionTest {
          * @param actionCounter the atomic counter to increment upon cleanup
          */
         OwningTestObject(AtomicInteger actionCounter) {
-            super();
             long virtualAddress = nextVirtualAddress.getAndIncrement();
 
             // The runnable passed here is the "freeing action". It will be
             // executed either by .close() or by the Cleaner.
             Runnable cleanupAction = actionCounter::incrementAndGet;
 
-            // Register the object and its cleanup action, making it an "owner".
+            // Register the object and its cleanup action.
             setVirtualAddress(virtualAddress, cleanupAction);
         }
     }
