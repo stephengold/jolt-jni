@@ -33,7 +33,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public abstract class JoltPhysicsObject
+abstract public class JoltPhysicsObject
         implements AutoCloseable, ConstJoltPhysicsObject {
     // *************************************************************************
     // fields
