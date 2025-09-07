@@ -115,7 +115,33 @@ abstract public class JoltPhysicsObject
      * {@code false}
      */
     public static boolean isCleanerStarted() {
-        return cleaner != null;
+        if (cleaner == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Atomically retrieves and executes the freeing action, then zeroes the
+     * virtual address. This static helper ensures the logic is not duplicated
+     * between the manual close() and the Cleaner's action.
+     *
+     * @param actionRef the atomic reference to the freeing action (not null)
+     * @param addressRef the atomic reference to the virtual address (not null)
+     */
+    private static void executeCleanup(
+            AtomicReference<Runnable> actionRef, AtomicLong addressRef) {
+        Runnable action = actionRef.getAndSet(null);
+        if (action != null) {
+            try {
+                action.run();
+            } finally {
+                // This is the crucial fix: set the address to zero
+                // to prevent use-after-free.
+                addressRef.set(0L);
+            }
+        }
     }
 
     /**
@@ -203,17 +229,7 @@ abstract public class JoltPhysicsObject
      */
     @Override
     public void close() {
-        Runnable action = freeingActionRef.getAndSet(null);
-
-        if (action != null) {
-            try {
-                action.run();
-            } finally {
-                // Crucially, set the address to zero *after* the native
-                // resource has been freed.
-                this.virtualAddress.set(0L);
-            }
-        }
+        executeCleanup(this.freeingActionRef, this.virtualAddress);
     }
 
     /**
@@ -226,9 +242,10 @@ abstract public class JoltPhysicsObject
      */
     @Override
     public int compareTo(JoltPhysicsObject other) {
-        long thisVa = this.virtualAddress.get();
-        long otherVa = other.virtualAddress.get();
-        return Long.compare(thisVa, otherVa);
+        long otherVa = other.va();
+        int result = Long.compare(virtualAddress.get(), otherVa);
+
+        return result;
     }
 
     /**
@@ -238,7 +255,11 @@ abstract public class JoltPhysicsObject
      */
     @Override
     final public boolean hasAssignedNativeObject() {
-        return virtualAddress.get() != 0L;
+        if (virtualAddress.get() == 0L) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -249,7 +270,11 @@ abstract public class JoltPhysicsObject
      */
     @Override
     final public boolean ownsNativeObject() {
-        return freeingActionRef.get() != null;
+        if (freeingActionRef.get() == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -302,8 +327,8 @@ abstract public class JoltPhysicsObject
      */
     @Override
     public int hashCode() {
-        long va = this.virtualAddress.get();
-        return (int) (va ^ (va >>> 32));
+        int result = (int) (virtualAddress.get() >> 4);
+        return result;
     }
 
     /**
@@ -324,11 +349,6 @@ abstract public class JoltPhysicsObject
 
     /**
      * A static, non-capturing Runnable for the Cleaner.
-     * <p>
-     * This holds the state it needs to coordinate with manual close(): the
-     * AtomicReference to the action and the AtomicLong of the address. This
-     * avoids a memory leak that would occur if a non-static inner class were
-     * used.
      */
     private static class CleanerRunnable implements Runnable {
         /**
@@ -358,16 +378,8 @@ abstract public class JoltPhysicsObject
          */
         @Override
         public void run() {
-            Runnable action = actionRef.getAndSet(null);
-            if (action != null) {
-                try {
-                    action.run();
-                } finally {
-                    // This is the crucial fix: set the address to zero
-                    // to prevent use-after-free.
-                    addressRef.set(0L);
-                }
-            }
+            // Delegate to the shared, static cleanup method.
+            executeCleanup(actionRef, addressRef);
         }
     }
 }
