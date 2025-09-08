@@ -82,15 +82,6 @@ public class VehicleConstraint
     // new methods exposed
 
     /**
-     * Access the vehicle body.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public Body getVehicleBody() {
-        return body;
-    }
-
-    /**
      * Access the controller for this constraint.
      *
      * @return a new JVM object with the pre-existing native object assigned
@@ -117,6 +108,15 @@ public class VehicleConstraint
         VehicleStepListener result = new VehicleStepListener(this, listenerVa);
 
         return result;
+    }
+
+    /**
+     * Access the vehicle body.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public Body getVehicleBody() {
+        return body;
     }
 
     /**
