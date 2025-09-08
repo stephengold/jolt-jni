@@ -228,6 +228,40 @@ final public class ObjectStreamIn {
     }
 
     /**
+     * Read a two-body constraint settings object from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param settingsRef where to store the reference to the de-serialized
+     * settings (not null, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, TwoBodyConstraintSettingsRef settingsRef) {
+        long streamVa = stream.va();
+        long refVa = settingsRef.va();
+        boolean result = sReadConstraintSettingsFromStream(streamVa, refVa);
+
+        return result;
+    }
+
+    /**
+     * Read a vehicle-constraint settings object from the specified stream.
+     *
+     * @param stream the stream to read from (not null)
+     * @param settingsRef where to store the reference to the de-serialized
+     * settings (not null, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, VehicleConstraintSettingsRef settingsRef) {
+        long streamVa = stream.va();
+        long refVa = settingsRef.va();
+        boolean result = sReadConstraintSettingsFromStream(streamVa, refVa);
+
+        return result;
+    }
+
+    /**
      * Read a vehicle-controller settings object from the specified stream.
      *
      * @param stream the stream to read from (not null)
