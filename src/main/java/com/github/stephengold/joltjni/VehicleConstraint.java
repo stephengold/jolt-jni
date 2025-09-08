@@ -467,31 +467,29 @@ public class VehicleConstraint
     // *************************************************************************
     // native methods
 
-    native private static int countAntiRollBars(long constraintVa);
+    native static int countAntiRollBars(long constraintVa);
 
-    native private static int countWheels(long constraintVa);
+    native static int countWheels(long constraintVa);
 
     native private static long createConstraint(long bodyVa, long settingsVa);
 
-    native private static long getAntiRollBar(long constraintVa, int barIndex);
+    native static long getAntiRollBar(long constraintVa, int barIndex);
 
-    native private static long getController(long constraintVa);
+    native static long getController(long constraintVa);
 
-    native private static void getGravityOverride(
+    native static void getGravityOverride(
             long constraintVa, FloatBuffer storeFloats);
 
-    native private static void getLocalForward(
+    native static void getLocalForward(
             long constraintVa, FloatBuffer storeFloats);
 
-    native private static void getLocalUp(
-            long constraintVa, FloatBuffer storeFloats);
+    native static void getLocalUp(long constraintVa, FloatBuffer storeFloats);
 
-    native private static float getMaxPitchRollAngle(long constraintVa);
+    native static float getMaxPitchRollAngle(long constraintVa);
 
-    native private static int getNumStepsBetweenCollisionTestActive(
-            long constraintVa);
+    native static int getNumStepsBetweenCollisionTestActive(long constraintVa);
 
-    native private static int getNumStepsBetweenCollisionTestInactive(
+    native static int getNumStepsBetweenCollisionTestInactive(
             long constraintVa);
 
     native private static long getStepListener(long constraintVa);
@@ -502,7 +500,7 @@ public class VehicleConstraint
 
     native private static long getWheel(long constraintVa, int wheelIndex);
 
-    native private static void getWheelLocalBasis(
+    native static void getWheelLocalBasis(
             long constraintVa, long wheelVa, FloatBuffer storeFloats);
 
     native static long getWheelWorldTransform(long constraintVa, int wheelIndex,
