@@ -1238,7 +1238,7 @@ public class Test012 {
             TwoBodyConstraintSettingsRef copy2Ref
                     = drTwoBodyConstraintSettings(serialData);
             SwingTwistConstraintSettings stcsCopy2
-                    = (SwingTwistConstraintSettings) copyRef.getPtr();
+                    = (SwingTwistConstraintSettings) copy2Ref.getPtr();
 
             Assert.assertNotEquals(stcs.va(), stcsCopy2.va());
             Equivalent.swingTwistConstraintSettings(stcs, stcsCopy2);
