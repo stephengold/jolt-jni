@@ -450,6 +450,20 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Fill the given Vec3 with the angular velocity of the specified body.
+     *
+     * @param bodyId the ID of the body
+     * @param out    the Vec3 instance to fill
+     *               (radians per second in system coordinates)
+     */
+    public void getAngularVelocity(int bodyId, Vec3 out) {
+        long bodyInterfaceVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAngularVelocity(bodyInterfaceVa, bodyId, storeFloats);
+        out.set(storeFloats.get(0), storeFloats.get(1), storeFloats.get(2));
+    }
+
+    /**
      * Return the type of the specified body.
      *
      * @param bodyId the ID of the body to query
@@ -533,6 +547,20 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Fill the given Vec3 with the linear velocity of the specified body.
+     *
+     * @param bodyId the ID of the body
+     * @param out    the Vec3 instance to fill
+     *               (meters per second in system coordinates)
+     */
+    public void getLinearVelocity(int bodyId, Vec3 out) {
+        long bodyInterfaceVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity(bodyInterfaceVa, bodyId, storeFloats);
+        out.set(storeFloats.get(0), storeFloats.get(1), storeFloats.get(2));
+    }
+
+    /**
      * Copy the inverse of the inertia tensor in system coordinates.
      *
      * @param bodyId the ID of the body to query
@@ -603,6 +631,19 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Fill the given RVec3 with the position of the specified body.
+     *
+     * @param bodyId the ID of the body to locate
+     * @param out    the RVec3 instance to fill (in system coordinates)
+     */
+    public void getPosition(int bodyId, RVec3 out) {
+        long bodyInterfaceVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(bodyInterfaceVa, bodyId, storeDoubles);
+        out.set(storeDoubles);
+    }
+
+    /**
      * Copy the location and orientation of the specified body.
      *
      * @param bodyId the ID of the body to locate
@@ -648,6 +689,19 @@ public class BodyInterface extends NonCopyable {
         Quat result = new Quat(storeFloats);
 
         return result;
+    }
+
+    /**
+     * Fill the given Quat with the rotation of the specified body.
+     *
+     * @param bodyId the ID of the body
+     * @param out    the Quat instance to fill
+     */
+    public void getRotation(int bodyId, Quat out) {
+        long bodyInterfaceVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotation(bodyInterfaceVa, bodyId, storeFloats);
+        out.set(storeFloats);
     }
 
     /**
