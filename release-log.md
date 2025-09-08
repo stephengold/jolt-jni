@@ -1,5 +1,16 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.1.0 released on 8 September 2025
+
++ Allow use of both `close()` and a cleaner thread in a single app.
++ Added interfaces:
+  + `ConstVehicleCollisionTester`
+  + `ConstVehicleController`
+  + `ConstWheel`
++ Added public constructors and methods to the libraries.
++ Added run-time checks for the maximum number of jobs.
+
+
 ## Version 3.0.1 released on 31 August 2025
 
 Bugfix:  many `CharacterRefC` and `CharacterVirtualRefC` methods crash the JVM
