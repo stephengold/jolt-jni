@@ -309,10 +309,9 @@ final public class CharacterVirtualRef
     @Override
     public RVec3 getCenterOfMassPosition() {
         long characterVa = targetVa();
-        double locX = CharacterVirtual.getCenterOfMassPositionX(characterVa);
-        double locY = CharacterVirtual.getCenterOfMassPositionY(characterVa);
-        double locZ = CharacterVirtual.getCenterOfMassPositionZ(characterVa);
-        RVec3 result = new RVec3(locX, locY, locZ);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        CharacterVirtual.getCenterOfMassPosition(characterVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -569,10 +568,9 @@ final public class CharacterVirtualRef
     @Override
     public Vec3 getLinearVelocity() {
         long characterVa = targetVa();
-        float vx = CharacterVirtual.getLinearVelocityX(characterVa);
-        float vy = CharacterVirtual.getLinearVelocityY(characterVa);
-        float vz = CharacterVirtual.getLinearVelocityZ(characterVa);
-        Vec3 result = new Vec3(vx, vy, vz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterVirtual.getLinearVelocity(characterVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -654,10 +652,9 @@ final public class CharacterVirtualRef
     @Override
     public RVec3 getPosition() {
         long characterVa = targetVa();
-        double x = CharacterVirtual.getPositionX(characterVa);
-        double y = CharacterVirtual.getPositionY(characterVa);
-        double z = CharacterVirtual.getPositionZ(characterVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        CharacterVirtual.getPosition(characterVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -675,16 +672,13 @@ final public class CharacterVirtualRef
             RVec3 storeLocation, Quat storeOrientation) {
         long characterVa = targetVa();
 
-        double xx = CharacterVirtual.getPositionX(characterVa);
-        double yy = CharacterVirtual.getPositionY(characterVa);
-        double zz = CharacterVirtual.getPositionZ(characterVa);
-        storeLocation.set(xx, yy, zz);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        CharacterVirtual.getPosition(characterVa, storeDoubles);
+        storeLocation.set(storeDoubles);
 
-        float qx = CharacterVirtual.getRotationX(characterVa);
-        float qy = CharacterVirtual.getRotationY(characterVa);
-        float qz = CharacterVirtual.getRotationZ(characterVa);
-        float qw = CharacterVirtual.getRotationW(characterVa);
-        storeOrientation.set(qx, qy, qz, qw);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterVirtual.getRotation(characterVa, storeFloats);
+        storeOrientation.set(storeFloats);
     }
 
     /**
@@ -695,11 +689,9 @@ final public class CharacterVirtualRef
     @Override
     public Quat getRotation() {
         long characterVa = targetVa();
-        float w = CharacterVirtual.getRotationW(characterVa);
-        float x = CharacterVirtual.getRotationX(characterVa);
-        float y = CharacterVirtual.getRotationY(characterVa);
-        float z = CharacterVirtual.getRotationZ(characterVa);
-        Quat result = new Quat(x, y, z, w);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterVirtual.getRotation(characterVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -727,10 +719,9 @@ final public class CharacterVirtualRef
     @Override
     public Vec3 getShapeOffset() {
         long characterVa = targetVa();
-        float x = CharacterVirtual.getShapeOffsetX(characterVa);
-        float y = CharacterVirtual.getShapeOffsetY(characterVa);
-        float z = CharacterVirtual.getShapeOffsetZ(characterVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        CharacterVirtual.getShapeOffset(characterVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }

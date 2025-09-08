@@ -165,41 +165,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_get
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getCenterOfMassPositionX
- * Signature: (J)D
+ * Method:    getCenterOfMassPosition
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getCenterOfMassPositionX
-  (JNIEnv *, jclass, jlong characterVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getCenterOfMassPosition
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeDoubles) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const Real result = pCharacter->GetCenterOfMassPosition().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getCenterOfMassPositionY
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getCenterOfMassPositionY
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const Real result = pCharacter->GetCenterOfMassPosition().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getCenterOfMassPositionZ
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getCenterOfMassPositionZ
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const Real result = pCharacter->GetCenterOfMassPosition().GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3 result = pCharacter->GetCenterOfMassPosition();
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
@@ -299,41 +277,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getI
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getLinearVelocityX
- * Signature: (J)F
+ * Method:    getLinearVelocity
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getLinearVelocityX
-  (JNIEnv *, jclass, jlong characterVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getLinearVelocity
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeFloats) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const float result = pCharacter->GetLinearVelocity().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getLinearVelocityY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getLinearVelocityY
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const float result = pCharacter->GetLinearVelocity().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getLinearVelocityZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getLinearVelocityZ
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const float result = pCharacter->GetLinearVelocity().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pCharacter->GetLinearVelocity();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -403,132 +359,54 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getPositionX
- * Signature: (J)D
+ * Method:    getPosition
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getPositionX
-  (JNIEnv *, jclass, jlong characterVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getPosition
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeDoubles) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const Real result = pCharacter->GetPosition().GetX();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3 result = pCharacter->GetPosition();
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getPositionY
- * Signature: (J)D
+ * Method:    getRotation
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getPositionY
-  (JNIEnv *, jclass, jlong characterVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getRotation
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeFloats) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const Real result = pCharacter->GetPosition().GetY();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Quat result = pCharacter->GetRotation();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+    pFloats[3] = result.GetW();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getPositionZ
- * Signature: (J)D
+ * Method:    getShapeOffset
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getPositionZ
-  (JNIEnv *, jclass, jlong characterVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getShapeOffset
+  (JNIEnv *pEnv, jclass, jlong characterVa, jobject storeFloats) {
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const Real result = pCharacter->GetPosition().GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getRotationW
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getRotationW
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const float result = pCharacter->GetRotation().GetW();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getRotationX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getRotationX
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const float result = pCharacter->GetRotation().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getRotationY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getRotationY
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const float result = pCharacter->GetRotation().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getRotationZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getRotationZ
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const float result = pCharacter->GetRotation().GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getShapeOffsetX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getShapeOffsetX
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const float result = pCharacter->GetShapeOffset().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getShapeOffsetY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getShapeOffsetY
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const float result = pCharacter->GetShapeOffset().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtual
- * Method:    getShapeOffsetZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_getShapeOffsetZ
-  (JNIEnv *, jclass, jlong characterVa) {
-    const CharacterVirtual * const pCharacter
-            = reinterpret_cast<CharacterVirtual *> (characterVa);
-    const float result = pCharacter->GetShapeOffset().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pCharacter->GetShapeOffset();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

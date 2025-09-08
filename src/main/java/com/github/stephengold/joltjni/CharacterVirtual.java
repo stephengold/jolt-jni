@@ -28,6 +28,8 @@ import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * A character implemented without a rigid body.
@@ -450,10 +452,9 @@ public class CharacterVirtual
     @Override
     public RVec3 getCenterOfMassPosition() {
         long characterVa = va();
-        double locX = getCenterOfMassPositionX(characterVa);
-        double locY = getCenterOfMassPositionY(characterVa);
-        double locZ = getCenterOfMassPositionZ(characterVa);
-        RVec3 result = new RVec3(locX, locY, locZ);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getCenterOfMassPosition(characterVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -568,10 +569,9 @@ public class CharacterVirtual
     @Override
     public Vec3 getLinearVelocity() {
         long characterVa = va();
-        float vx = getLinearVelocityX(characterVa);
-        float vy = getLinearVelocityY(characterVa);
-        float vz = getLinearVelocityZ(characterVa);
-        Vec3 result = new Vec3(vx, vy, vz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity(characterVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -652,10 +652,9 @@ public class CharacterVirtual
     @Override
     public RVec3 getPosition() {
         long characterVa = va();
-        double x = getPositionX(characterVa);
-        double y = getPositionY(characterVa);
-        double z = getPositionZ(characterVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(characterVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -673,16 +672,13 @@ public class CharacterVirtual
             RVec3 storeLocation, Quat storeOrientation) {
         long characterVa = va();
 
-        double xx = getPositionX(characterVa);
-        double yy = getPositionY(characterVa);
-        double zz = getPositionZ(characterVa);
-        storeLocation.set(xx, yy, zz);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(characterVa, storeDoubles);
+        storeLocation.set(storeDoubles);
 
-        float qx = getRotationX(characterVa);
-        float qy = getRotationY(characterVa);
-        float qz = getRotationZ(characterVa);
-        float qw = getRotationW(characterVa);
-        storeOrientation.set(qx, qy, qz, qw);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotation(characterVa, storeFloats);
+        storeOrientation.set(storeFloats);
     }
 
     /**
@@ -693,11 +689,9 @@ public class CharacterVirtual
     @Override
     public Quat getRotation() {
         long characterVa = va();
-        float w = getRotationW(characterVa);
-        float x = getRotationX(characterVa);
-        float y = getRotationY(characterVa);
-        float z = getRotationZ(characterVa);
-        Quat result = new Quat(x, y, z, w);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotation(characterVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -710,10 +704,9 @@ public class CharacterVirtual
     @Override
     public Vec3 getShapeOffset() {
         long characterVa = va();
-        float x = getShapeOffsetX(characterVa);
-        float y = getShapeOffsetY(characterVa);
-        float z = getShapeOffsetZ(characterVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getShapeOffset(characterVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -832,11 +825,8 @@ public class CharacterVirtual
 
     native static long getActiveContact(long characterVa, int index);
 
-    native static double getCenterOfMassPositionX(long characterVa);
-
-    native static double getCenterOfMassPositionY(long characterVa);
-
-    native static double getCenterOfMassPositionZ(long characterVa);
+    native static void getCenterOfMassPosition(
+            long characterVa, DoubleBuffer storeDoubles);
 
     native static long getCenterOfMassTransform(long characterVa);
 
@@ -852,11 +842,8 @@ public class CharacterVirtual
 
     native static int getInnerBodyId(long characterVa);
 
-    native static float getLinearVelocityX(long characterVa);
-
-    native static float getLinearVelocityY(long characterVa);
-
-    native static float getLinearVelocityZ(long characterVa);
+    native static void getLinearVelocity(
+            long characterVa, FloatBuffer storeFloats);
 
     native static float getMass(long characterVa);
 
@@ -868,25 +855,13 @@ public class CharacterVirtual
 
     native static float getPenetrationRecoverySpeed(long characterVa);
 
-    native static double getPositionX(long characterVa);
+    native static void getPosition(
+            long characterVa, DoubleBuffer storeDoubles);
 
-    native static double getPositionY(long characterVa);
+    native static void getRotation(long characterVa, FloatBuffer storeFloats);
 
-    native static double getPositionZ(long characterVa);
-
-    native static float getRotationW(long characterVa);
-
-    native static float getRotationX(long characterVa);
-
-    native static float getRotationY(long characterVa);
-
-    native static float getRotationZ(long characterVa);
-
-    native static float getShapeOffsetX(long characterVa);
-
-    native static float getShapeOffsetY(long characterVa);
-
-    native static float getShapeOffsetZ(long characterVa);
+    native static void getShapeOffset(
+            long characterVa, FloatBuffer storeFloats);
 
     native static long getTransformedShape(long characterVa);
 
