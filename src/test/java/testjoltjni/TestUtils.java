@@ -66,11 +66,13 @@ final public class TestUtils {
     // constants
 
     /**
-     * {@code false} to explicitly free native objects via {@code testClose()},
-     * or {@code true} to rely on the automatic {@code java.lang.ref.Cleaner}
-     * instead
+     * {@code true} to enable the automatic {@code java.lang.ref.Cleaner}
      */
     final public static boolean automateFreeing = true;
+    /**
+     * {@code true} to explicitly free native objects via {@code testClose()}
+     */
+    final public static boolean explicitFreeing = false;
     /**
      * customary number of object layers
      */
@@ -601,7 +603,7 @@ final public class TestUtils {
      * @param objects the objects to test (not {@code null})
      */
     public static void testClose(ConstJoltPhysicsObject... objects) {
-        if (!automateFreeing) {
+        if (explicitFreeing) {
             for (ConstJoltPhysicsObject object : objects) {
                 if (object instanceof PhysicsSystem) {
                     PhysicsSystem system = (PhysicsSystem) object;

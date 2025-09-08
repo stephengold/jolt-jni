@@ -40,6 +40,8 @@ import testjoltjni.TestUtils;
  * <p>
  * This test creates a race condition to prove that native resources are freed
  * exactly once, even under concurrent access from both cleanup mechanisms.
+ * <p>
+ * For this test to be effective, the automatic Cleaner must be active.
  *
  * @author xI-Mx-Ix
  */
@@ -71,8 +73,6 @@ public class DualCleanupRaceConditionTest {
     public static void setUpClass() {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
-        Assert.assertTrue("Cleaner service must be active for this test",
-                TestUtils.automateFreeing);
     }
 
     /**
