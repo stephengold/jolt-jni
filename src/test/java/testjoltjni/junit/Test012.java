@@ -326,8 +326,8 @@ public class Test012 {
     }
 
     /**
-     * De-serialize a vehicle-constraint settings object from the specified data
-     * using {@code ObjectStreamIn}.
+     * De-serialize a constraint settings object from the specified data using
+     * {@code ObjectStreamIn}.
      *
      * @param serialData the data to de-serialize (not null, unaffected)
      * @return a new counted reference
