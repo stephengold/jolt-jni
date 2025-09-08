@@ -192,7 +192,7 @@ public class BoxShapeSettings
      * Copy the extent of the box. The settings are unaffected. (native
      * attribute: mHalfExtent)
      *
-     * @return a new vector: one-half of extent on each local axis
+     * @return a new vector: one-half of the extent on each local axis
      */
     @Override
     public Vec3 getHalfExtent() {

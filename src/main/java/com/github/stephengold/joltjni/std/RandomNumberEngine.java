@@ -42,7 +42,7 @@ public interface RandomNumberEngine extends ConstJoltPhysicsObject {
     /**
      * Seed the engine with the specified value.
      *
-     * @param value the value to set
+     * @param value the value to use
      */
     void seed(int value);
 }
