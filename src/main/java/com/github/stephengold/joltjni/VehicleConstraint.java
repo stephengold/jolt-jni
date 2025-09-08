@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstVehicleConstraint;
 import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -30,7 +31,9 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class VehicleConstraint extends Constraint {
+public class VehicleConstraint
+        extends Constraint
+        implements ConstVehicleConstraint {
     // *************************************************************************
     // fields
 
@@ -79,42 +82,12 @@ public class VehicleConstraint extends Constraint {
     // new methods exposed
 
     /**
-     * Count how many anti-roll bars the vehicle has. The constraint is
-     * unaffected.
+     * Access the vehicle body.
      *
-     * @return the count (&ge;0)
-     */
-    public int countAntiRollBars() {
-        long constraintVa = va();
-        int result = countAntiRollBars(constraintVa);
-
-        return result;
-    }
-
-    /**
-     * Count how many wheels the vehicle has. The constraint is unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    public int countWheels() {
-        long constraintVa = va();
-        int result = countWheels(constraintVa);
-
-        return result;
-    }
-
-    /**
-     * Access the specified anti-roll bar.
-     *
-     * @param barIndex the index of the bar to access (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public VehicleAntiRollBar getAntiRollBar(int barIndex) {
-        long constraintVa = va();
-        long barVa = getAntiRollBar(constraintVa, barIndex);
-        VehicleAntiRollBar result = new VehicleAntiRollBar(this, barVa);
-
-        return result;
+    public Body getVehicleBody() {
+        return body;
     }
 
     /**
@@ -132,87 +105,6 @@ public class VehicleConstraint extends Constraint {
     }
 
     /**
-     * Copy the gravity override. The constraint is unaffected.
-     *
-     * @return a new vector
-     */
-    public Vec3 getGravityOverride() {
-        long constraintVa = va();
-        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
-        getGravityOverride(constraintVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
-    }
-
-    /**
-     * Copy the local "forward" direction. The constraint is unaffected.
-     *
-     * @return a new direction vector
-     */
-    public Vec3 getLocalForward() {
-        long constraintVa = va();
-        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
-        getLocalForward(constraintVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
-    }
-
-    /**
-     * Copy the local "up" direction. The constraint is unaffected.
-     *
-     * @return a new direction vector
-     */
-    public Vec3 getLocalUp() {
-        long constraintVa = va();
-        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
-        getLocalUp(constraintVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
-    }
-
-    /**
-     * Return the vehicle's maximum pitch/roll angle. The constraint is
-     * unaffected.
-     *
-     * @return the limit angle (in radians)
-     */
-    public float getMaxPitchRollAngle() {
-        long constraintVa = va();
-        float result = getMaxPitchRollAngle(constraintVa);
-
-        return result;
-    }
-
-    /**
-     * Return the number of simulation steps between wheel-collision tests when
-     * the vehicle is active. The constraint is unaffected.
-     *
-     * @return the number of steps
-     */
-    public int getNumStepsBetweenCollisionTestActive() {
-        long constraintVa = va();
-        int result = getNumStepsBetweenCollisionTestActive(constraintVa);
-
-        return result;
-    }
-
-    /**
-     * Return the number of simulation steps between collision tests when the
-     * body is inactive. The constraint is unaffected.
-     *
-     * @return the number of steps
-     */
-    public int getNumStepsBetweenCollisionTestInactive() {
-        long constraintVa = va();
-        int result = getNumStepsBetweenCollisionTestInactive(constraintVa);
-
-        return result;
-    }
-
-    /**
      * Access the vehicle's {@code PhysicsStepListener}. Since Java doesn't
      * allow multiple inheritance, the listener is managed like a contained
      * object.
@@ -225,15 +117,6 @@ public class VehicleConstraint extends Constraint {
         VehicleStepListener result = new VehicleStepListener(this, listenerVa);
 
         return result;
-    }
-
-    /**
-     * Access the vehicle body.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public Body getVehicleBody() {
-        return body;
     }
 
     /**
@@ -257,77 +140,6 @@ public class VehicleConstraint extends Constraint {
         long wheelVa = getWheel(constraintVa, wheelIndex);
         int ordinal = Constraint.getControllerType(constraintVa);
         Wheel result = Wheel.newWheel(wheelVa, ordinal, this);
-
-        return result;
-    }
-
-    /**
-     * Copy the basis vectors for the specified wheel.
-     *
-     * @param wheel which wheel to query (not null)
-     * @param storeForward storage for the forward vector (not null, modified)
-     * @param storeUp storage for the up vector (not null, modified)
-     * @param storeRight storage for the right vector (not null, modified)
-     */
-    public void getWheelLocalBasis(
-            Wheel wheel, Vec3 storeForward, Vec3 storeUp, Vec3 storeRight) {
-        long constraintVa = va();
-        long wheelVa = wheel.va();
-        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
-        getWheelLocalBasis(constraintVa, wheelVa, storeFloats);
-        storeForward.set(storeFloats);
-        storeUp.set(storeFloats, 3);
-        storeRight.set(storeFloats, 6);
-    }
-
-    /**
-     * Copy the world transform of the specified wheel. The constraint is
-     * unaffected.
-     *
-     * @param wheelIndex the index of the wheel to query (&ge;0)
-     * @param right the wheel's axis of rotation (a unit vector in the wheel's
-     * model space)
-     * @param up the "up" direction (a unit vector in the wheel's model space)
-     * @return a new coordinate transform matrix
-     */
-    public RMat44 getWheelWorldTransform(
-            int wheelIndex, Vec3Arg right, Vec3Arg up) {
-        long constraintVa = va();
-        float rx = right.getX();
-        float ry = right.getY();
-        float rz = right.getZ();
-        float ux = up.getX();
-        float uy = up.getY();
-        float uz = up.getZ();
-        long matrixVa = getWheelWorldTransform(
-                constraintVa, wheelIndex, rx, ry, rz, ux, uy, uz);
-        RMat44 result = new RMat44(matrixVa, true);
-
-        return result;
-    }
-
-    /**
-     * Copy the "up" direction based on gravity. The constraint is unaffected.
-     *
-     * @return a new direction vector (in system coordinates)
-     */
-    public Vec3 getWorldUp() {
-        long constraintVa = va();
-        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
-        getWorldUp(constraintVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
-    }
-
-    /**
-     * Test whether gravity is overridden. The constraint is unaffected.
-     *
-     * @return {@code true} if overridden, otherwise {@code false}
-     */
-    public boolean isGravityOverridden() {
-        long constraintVa = va();
-        boolean result = isGravityOverridden(constraintVa);
 
         return result;
     }
@@ -409,6 +221,212 @@ public class VehicleConstraint extends Constraint {
         long constraintVa = va();
         long testerVa = tester.va();
         setVehicleCollisionTester(constraintVa, testerVa);
+    }
+    // *************************************************************************
+    // ConstVehicleConstraint methods
+
+    /**
+     * Count how many anti-roll bars the vehicle has. The constraint is
+     * unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countAntiRollBars() {
+        long constraintVa = va();
+        int result = countAntiRollBars(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Count how many wheels the vehicle has. The constraint is unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countWheels() {
+        long constraintVa = va();
+        int result = countWheels(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Access the specified anti-roll bar.
+     *
+     * @param barIndex the index of the bar to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public VehicleAntiRollBar getAntiRollBar(int barIndex) {
+        long constraintVa = va();
+        long barVa = getAntiRollBar(constraintVa, barIndex);
+        VehicleAntiRollBar result = new VehicleAntiRollBar(this, barVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the gravity override. The constraint is unaffected.
+     *
+     * @return a new vector
+     */
+    @Override
+    public Vec3 getGravityOverride() {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getGravityOverride(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Copy the local "forward" direction. The constraint is unaffected.
+     *
+     * @return a new direction vector
+     */
+    @Override
+    public Vec3 getLocalForward() {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLocalForward(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Copy the local "up" direction. The constraint is unaffected.
+     *
+     * @return a new direction vector
+     */
+    @Override
+    public Vec3 getLocalUp() {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLocalUp(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Return the vehicle's maximum pitch/roll angle. The constraint is
+     * unaffected.
+     *
+     * @return the limit angle (in radians)
+     */
+    @Override
+    public float getMaxPitchRollAngle() {
+        long constraintVa = va();
+        float result = getMaxPitchRollAngle(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Return the number of simulation steps between wheel-collision tests when
+     * the vehicle is active. The constraint is unaffected.
+     *
+     * @return the number of steps
+     */
+    @Override
+    public int getNumStepsBetweenCollisionTestActive() {
+        long constraintVa = va();
+        int result = getNumStepsBetweenCollisionTestActive(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Return the number of simulation steps between collision tests when the
+     * body is inactive. The constraint is unaffected.
+     *
+     * @return the number of steps
+     */
+    @Override
+    public int getNumStepsBetweenCollisionTestInactive() {
+        long constraintVa = va();
+        int result = getNumStepsBetweenCollisionTestInactive(constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the basis vectors for the specified wheel.
+     *
+     * @param wheel which wheel to query (not null)
+     * @param storeForward storage for the forward vector (not null, modified)
+     * @param storeUp storage for the up vector (not null, modified)
+     * @param storeRight storage for the right vector (not null, modified)
+     */
+    @Override
+    public void getWheelLocalBasis(
+            Wheel wheel, Vec3 storeForward, Vec3 storeUp, Vec3 storeRight) {
+        long constraintVa = va();
+        long wheelVa = wheel.va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getWheelLocalBasis(constraintVa, wheelVa, storeFloats);
+        storeForward.set(storeFloats);
+        storeUp.set(storeFloats, 3);
+        storeRight.set(storeFloats, 6);
+    }
+
+    /**
+     * Copy the world transform of the specified wheel. The constraint is
+     * unaffected.
+     *
+     * @param wheelIndex the index of the wheel to query (&ge;0)
+     * @param right the wheel's axis of rotation (a unit vector in the wheel's
+     * model space)
+     * @param up the "up" direction (a unit vector in the wheel's model space)
+     * @return a new coordinate transform matrix
+     */
+    @Override
+    public RMat44 getWheelWorldTransform(
+            int wheelIndex, Vec3Arg right, Vec3Arg up) {
+        long constraintVa = va();
+        float rx = right.getX();
+        float ry = right.getY();
+        float rz = right.getZ();
+        float ux = up.getX();
+        float uy = up.getY();
+        float uz = up.getZ();
+        long matrixVa = getWheelWorldTransform(
+                constraintVa, wheelIndex, rx, ry, rz, ux, uy, uz);
+        RMat44 result = new RMat44(matrixVa, true);
+
+        return result;
+    }
+
+    /**
+     * Copy the "up" direction based on gravity. The constraint is unaffected.
+     *
+     * @return a new direction vector (in system coordinates)
+     */
+    @Override
+    public Vec3 getWorldUp() {
+        long constraintVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getWorldUp(constraintVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Test whether gravity is overridden. The constraint is unaffected.
+     *
+     * @return {@code true} if overridden, otherwise {@code false}
+     */
+    @Override
+    public boolean isGravityOverridden() {
+        long constraintVa = va();
+        boolean result = isGravityOverridden(constraintVa);
+
+        return result;
     }
     // *************************************************************************
     // Constraint methods
