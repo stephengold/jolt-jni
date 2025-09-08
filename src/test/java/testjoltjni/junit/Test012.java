@@ -432,6 +432,25 @@ public class Test012 {
     }
 
     /**
+     * De-serialize a two-body constraint-settings object from the specified
+     * data using {@code ObjectStreamIn}.
+     *
+     * @param serialData the data to de-serialize (not null, unaffected)
+     * @return a new counted reference
+     */
+    private static TwoBodyConstraintSettingsRef drTwoBodyConstraintSettings(
+            String serialData) {
+        StringStream ss = new StringStream(serialData);
+        TwoBodyConstraintSettingsRef result
+                = new TwoBodyConstraintSettingsRef();
+        boolean success = ObjectStreamIn.sReadObject(ss, result);
+        assert success;
+
+        TestUtils.testClose(ss);
+        return result;
+    }
+
+    /**
      * De-serialize a wheeled-vehicle controller-settings object from the
      * specified data using {@code ObjectStreamIn}.
      *
@@ -443,6 +462,25 @@ public class Test012 {
         StringStream ss = new StringStream(serialData);
         VehicleControllerSettingsRef result
                 = new VehicleControllerSettingsRef();
+        boolean success = ObjectStreamIn.sReadObject(ss, result);
+        assert success;
+
+        TestUtils.testClose(ss);
+        return result;
+    }
+
+    /**
+     * De-serialize a vehicle-constraint settings object from the specified data
+     * using {@code ObjectStreamIn}.
+     *
+     * @param serialData the data to de-serialize (not null, unaffected)
+     * @return a new counted reference
+     */
+    private static VehicleConstraintSettingsRef drVehicleConstraintSettings(
+            String serialData) {
+        StringStream ss = new StringStream(serialData);
+        VehicleConstraintSettingsRef result
+                = new VehicleConstraintSettingsRef();
         boolean success = ObjectStreamIn.sReadObject(ss, result);
         assert success;
 
@@ -1196,6 +1234,15 @@ public class Test012 {
             Assert.assertNotEquals(stcs.va(), stcsCopy.va());
             Equivalent.swingTwistConstraintSettings(stcs, stcsCopy);
             TestUtils.testClose(copyRef);
+
+            TwoBodyConstraintSettingsRef copy2Ref
+                    = drTwoBodyConstraintSettings(serialData);
+            SwingTwistConstraintSettings stcsCopy2
+                    = (SwingTwistConstraintSettings) copyRef.getPtr();
+
+            Assert.assertNotEquals(stcs.va(), stcsCopy2.va());
+            Equivalent.swingTwistConstraintSettings(stcs, stcsCopy2);
+            TestUtils.testClose(copy2Ref);
         }
 
         { // copy constructor:
@@ -1298,6 +1345,15 @@ public class Test012 {
             Assert.assertNotEquals(vcs.va(), vcsCopy.targetVa());
             Equivalent.vehicleConstraintSettings(vcs, vcsCopy);
             TestUtils.testClose(copyRef);
+
+            VehicleConstraintSettingsRef copy2Ref
+                    = drVehicleConstraintSettings(serialData);
+            ConstVehicleConstraintSettings vcsCopy2
+                    = (ConstVehicleConstraintSettings) copy2Ref.getPtr();
+
+            Assert.assertNotEquals(vcs.va(), vcsCopy2.targetVa());
+            Equivalent.vehicleConstraintSettings(vcs, vcsCopy2);
+            TestUtils.testClose(copy2Ref);
         }
 
         { // copy constructor:
