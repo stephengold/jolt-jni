@@ -15,6 +15,7 @@
 
 Bugfix:  many `CharacterRefC` and `CharacterVirtualRefC` methods crash the JVM
 
+
 ## Version 3.0.0 released on 30 August 2025
 
 + API changes:
