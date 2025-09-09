@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.Vec3;
 import java.nio.FloatBuffer;
 
 /**
- * Read-only access to an {@code Plane}. (native type: const Plane)
+ * Read-only access to a {@code Plane}. (native type: const Plane)
  *
  * @author Stephen Gold sgold@sonic.net
  */

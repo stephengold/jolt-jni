@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to a {@code Lod}. (native type:
+ * Read-only access to an {@code Lod}. (native type:
  * {@code const DebugRenderer::LOD})
  *
  * @author Stephen Gold sgold@sonic.net

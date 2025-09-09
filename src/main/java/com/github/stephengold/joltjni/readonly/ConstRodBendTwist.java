@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.Quat;
 
 /**
- * Read-only access to an {@code RodBendTwist}. (native type:
+ * Read-only access to a {@code RodBendTwist}. (native type:
  * {@code const SoftBodySharedSettings::RodBendTwist})
  *
  * @author Stephen Gold sgold@sonic.net

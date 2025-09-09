@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to {@code WheelSettingsWv}. (native type: const
+ * Read-only access to a {@code WheelSettingsWv}. (native type: const
  * WheelSettingsWV)
  *
  * @author Stephen Gold sgold@sonic.net

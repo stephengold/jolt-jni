@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 /**
- * Read-only access to {@code VehicleCollisionTester}. (native type: const
+ * Read-only access to a {@code VehicleCollisionTester}. (native type: const
  * VehicleCollisionTester)
  *
  * @author Stephen Gold sgold@sonic.net

@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.ChbEdge;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to an {@code ChbFace}. (native type:
+ * Read-only access to a {@code ChbFace}. (native type:
  * {@code const ConvexHullBuilder::Face})
  *
  * @author Stephen Gold sgold@sonic.net

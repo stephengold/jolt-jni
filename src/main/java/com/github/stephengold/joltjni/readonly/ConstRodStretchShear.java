@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import com.github.stephengold.joltjni.Quat;
 
 /**
- * Read-only access to an {@code RodStretchShear}. (native type:
+ * Read-only access to a {@code RodStretchShear}. (native type:
  * {@code const SoftBodySharedSettings::RodStretchShear})
  *
  * @author Stephen Gold sgold@sonic.net

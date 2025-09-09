@@ -24,8 +24,8 @@ package com.github.stephengold.joltjni.readonly;
 import java.nio.FloatBuffer;
 
 /**
- * Read-only access to {@code SoftBodyMotionProperties}. (native type: const
- * SoftBodyMotionProperties)
+ * Read-only access to a {@code SoftBodyMotionProperties} object. (native type:
+ * const SoftBodyMotionProperties)
  *
  * @author Stephen Gold sgold@sonic.net
  */

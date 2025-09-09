@@ -25,7 +25,8 @@ import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to {@code WheelSettings}. (native type: const WheelSettings)
+ * Read-only access to a {@code WheelSettings} object. (native type: const
+ * WheelSettings)
  *
  * @author Stephen Gold sgold@sonic.net
  */

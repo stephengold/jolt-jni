@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni.readonly;
 import java.nio.FloatBuffer;
 
 /**
- * Read-only access to an {@code Triangle}. (native type: const Triangle)
+ * Read-only access to a {@code Triangle}. (native type: const Triangle)
  *
  * @author wil
  */

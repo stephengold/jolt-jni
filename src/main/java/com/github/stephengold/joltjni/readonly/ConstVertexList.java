@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.Float3;
 import java.nio.FloatBuffer;
 
 /**
- * Read-only access to an {@code VertexList}. (native type: const VertexList)
+ * Read-only access to a {@code VertexList}. (native type: const VertexList)
  *
  * @author wil
  */

@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.Plane;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
- * Read-only access to {@code SoftBodyVertex}. (native type: const
+ * Read-only access to a {@code SoftBodyVertex}. (native type: const
  * SoftBodyMotionProperties::Vertex)
  *
  * @author Stephen Gold sgold@sonic.net
