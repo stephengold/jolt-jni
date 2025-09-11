@@ -450,11 +450,10 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Fill the given Vec3 with the angular velocity of the specified body.
+     * Copy the angular velocity of the specified body.
      *
      * @param bodyId the ID of the body
-     * @param out    the Vec3 instance to fill
-     *               (radians per second in system coordinates)
+     * @param out storage for the angular velocity (not {@code null}, modified)
      */
     public void getAngularVelocity(int bodyId, Vec3 out) {
         long bodyInterfaceVa = va();
@@ -547,11 +546,10 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Fill the given Vec3 with the linear velocity of the specified body.
+     * Copy the linear velocity of the specified body.
      *
      * @param bodyId the ID of the body
-     * @param out    the Vec3 instance to fill
-     *               (meters per second in system coordinates)
+     * @param out storage for the velocity (not {@code null}, modified)
      */
     public void getLinearVelocity(int bodyId, Vec3 out) {
         long bodyInterfaceVa = va();
@@ -631,10 +629,10 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Fill the given RVec3 with the position of the specified body.
+     * Copy the location of the specified body.
      *
      * @param bodyId the ID of the body to locate
-     * @param out    the RVec3 instance to fill (in system coordinates)
+     * @param out storage for the location (not {@code null}, modified)
      */
     public void getPosition(int bodyId, RVec3 out) {
         long bodyInterfaceVa = va();
@@ -692,10 +690,10 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Fill the given Quat with the rotation of the specified body.
+     * Copy the orientation of the specified body.
      *
      * @param bodyId the ID of the body
-     * @param out    the Quat instance to fill
+     * @param out storage for the orientation (not {@code null}, modified)
      */
     public void getRotation(int bodyId, Quat out) {
         long bodyInterfaceVa = va();
