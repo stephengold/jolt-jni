@@ -460,7 +460,7 @@ public class BodyInterface extends NonCopyable {
         long bodyInterfaceVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getAngularVelocity(bodyInterfaceVa, bodyId, storeFloats);
-        storeVelocity.set(storeFloats.get(0), storeFloats.get(1), storeFloats.get(2));
+        storeVelocity.set(storeFloats);
     }
 
     /**
@@ -557,7 +557,7 @@ public class BodyInterface extends NonCopyable {
         long bodyInterfaceVa = va();
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getLinearVelocity(bodyInterfaceVa, bodyId, storeFloats);
-        storeVelocity.set(storeFloats.get(0), storeFloats.get(1), storeFloats.get(2));
+        storeVelocity.set(storeFloats);
     }
 
     /**
