@@ -608,7 +608,7 @@ abstract public class Shape extends NonCopyable
 
     native static long getMaterial(long shapeVa, int subShapeId);
 
-    native private static int getRefCount(long shapeVa);
+    native static int getRefCount(long shapeVa);
 
     native static long getStats(long shapeVa);
 

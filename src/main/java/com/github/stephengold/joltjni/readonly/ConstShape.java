@@ -137,6 +137,14 @@ public interface ConstShape extends ConstJoltPhysicsObject {
     ConstPhysicsMaterial getMaterial(int subShapeId);
 
     /**
+     * Count the active references to the native {@code Shape}. The shape is
+     * unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    int getRefCount();
+
+    /**
      * Return the shape's revision count, which is automatically incremented
      * each time the shape is altered. The shape is unaffected.
      *

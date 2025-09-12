@@ -255,6 +255,20 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     }
 
     /**
+     * Count the active references to the native {@code Shape}. The shape is
+     * unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long shapeVa = targetVa();
+        int result = Shape.getRefCount(shapeVa);
+
+        return result;
+    }
+
+    /**
      * Return the shape's revision count, which is automatically incremented
      * each time the shape is altered. The shape is unaffected.
      *
