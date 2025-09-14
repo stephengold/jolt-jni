@@ -45,119 +45,53 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_CollideShapeResult
- * Method:    getContactPointOn1X
- * Signature: (J)F
+ * Method:    getContactPointOn1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getContactPointOn1X
-  (JNIEnv *, jclass, jlong shapeResultVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getContactPointOn1X
+  (JNIEnv *pEnv, jclass, jlong shapeResultVa, jobject storeFloats) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    const float result = pShapeResult->mContactPointOn1.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pShapeResult->mContactPointOn1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_CollideShapeResult
- * Method:    getContactPointOn1Y
- * Signature: (J)F
+ * Method:    getContactPointOn2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getContactPointOn1Y
-  (JNIEnv *, jclass, jlong shapeResultVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getContactPointOn2
+  (JNIEnv *pEnv, jclass, jlong shapeResultVa, jobject storeFloats) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    const float result = pShapeResult->mContactPointOn1.GetY();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pShapeResult->mContactPointOn2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_CollideShapeResult
- * Method:    getContactPointOn1Z
- * Signature: (J)F
+ * Method:    getPenetrationAxis
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getContactPointOn1Z
-  (JNIEnv *, jclass, jlong shapeResultVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getPenetrationAxis
+  (JNIEnv *pEnv, jclass, jlong shapeResultVa, jobject storeFloats) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    const float result = pShapeResult->mContactPointOn1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CollideShapeResult
- * Method:    getContactPointOn2X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getContactPointOn2X
-  (JNIEnv *, jclass, jlong shapeResultVa) {
-    const CollideShapeResult * const pShapeResult
-            = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    const float result = pShapeResult->mContactPointOn2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CollideShapeResult
- * Method:    getContactPointOn2Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getContactPointOn2Y
-  (JNIEnv *, jclass, jlong shapeResultVa) {
-    const CollideShapeResult * const pShapeResult
-            = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    const float result = pShapeResult->mContactPointOn2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CollideShapeResult
- * Method:    getContactPointOn2Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getContactPointOn2Z
-  (JNIEnv *, jclass, jlong shapeResultVa) {
-    const CollideShapeResult * const pShapeResult
-            = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    const float result = pShapeResult->mContactPointOn2.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CollideShapeResult
- * Method:    getPenetrationAxisX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getPenetrationAxisX
-  (JNIEnv *, jclass, jlong shapeResultVa) {
-    const CollideShapeResult * const pShapeResult
-            = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    const float result = pShapeResult->mPenetrationAxis.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CollideShapeResult
- * Method:    getPenetrationAxisY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getPenetrationAxisY
-  (JNIEnv *, jclass, jlong shapeResultVa) {
-    const CollideShapeResult * const pShapeResult
-            = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    const float result = pShapeResult->mPenetrationAxis.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CollideShapeResult
- * Method:    getPenetrationAxisZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getPenetrationAxisZ
-  (JNIEnv *, jclass, jlong shapeResultVa) {
-    const CollideShapeResult * const pShapeResult
-            = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
-    const float result = pShapeResult->mPenetrationAxis.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pShapeResult->mPenetrationAxis;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

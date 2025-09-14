@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstCollideShapeResult;
+import java.nio.FloatBuffer;
 
 /**
  * Information about a narrow-phase collision by a shape.
@@ -83,10 +84,9 @@ public class CollideShapeResult
     @Override
     public Vec3 getContactPointOn1() {
         long shapeResultVa = va();
-        float x = getContactPointOn1X(shapeResultVa);
-        float y = getContactPointOn1Y(shapeResultVa);
-        float z = getContactPointOn1Z(shapeResultVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getContactPointOn1(shapeResultVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -100,10 +100,9 @@ public class CollideShapeResult
     @Override
     public Vec3 getContactPointOn2() {
         long shapeResultVa = va();
-        float x = getContactPointOn2X(shapeResultVa);
-        float y = getContactPointOn2Y(shapeResultVa);
-        float z = getContactPointOn2Z(shapeResultVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getContactPointOn2(shapeResultVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -118,10 +117,9 @@ public class CollideShapeResult
     @Override
     public Vec3 getPenetrationAxis() {
         long shapeResultVa = va();
-        float x = getPenetrationAxisX(shapeResultVa);
-        float y = getPenetrationAxisY(shapeResultVa);
-        float z = getPenetrationAxisZ(shapeResultVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPenetrationAxis(shapeResultVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -198,23 +196,14 @@ public class CollideShapeResult
 
     native private static int getBodyId2(long shapeResultVa);
 
-    native private static float getContactPointOn1X(long shapeResultVa);
+    native private static void getContactPointOn1(
+            long shapeResultVa, FloatBuffer storeFloats);
 
-    native private static float getContactPointOn1Y(long shapeResultVa);
+    native private static void getContactPointOn2(
+            long shapeResultVa, FloatBuffer storeFloats);
 
-    native private static float getContactPointOn1Z(long shapeResultVa);
-
-    native private static float getContactPointOn2X(long shapeResultVa);
-
-    native private static float getContactPointOn2Y(long shapeResultVa);
-
-    native private static float getContactPointOn2Z(long shapeResultVa);
-
-    native private static float getPenetrationAxisX(long shapeResultVa);
-
-    native private static float getPenetrationAxisY(long shapeResultVa);
-
-    native private static float getPenetrationAxisZ(long shapeResultVa);
+    native private static void getPenetrationAxis(
+            long shapeResultVa, FloatBuffer storeFloats);
 
     native private static float getPenetrationDepth(long shapeResultVa);
 
