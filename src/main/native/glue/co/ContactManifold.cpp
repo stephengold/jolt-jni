@@ -32,41 +32,19 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_ContactManifold
- * Method:    getBaseOffsetX
- * Signature: (J)D
+ * Method:    getBaseOffset
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getBaseOffsetX
-  (JNIEnv *, jclass, jlong manifoldVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getBaseOffset
+  (JNIEnv *pEnv, jclass, jlong manifoldVa, jobject storeDoubles) {
     const ContactManifold * const pManifold
             = reinterpret_cast<ContactManifold *> (manifoldVa);
-    const Real result = pManifold->mBaseOffset.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ContactManifold
- * Method:    getBaseOffsetY
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getBaseOffsetY
-  (JNIEnv *, jclass, jlong manifoldVa) {
-    const ContactManifold * const pManifold
-            = reinterpret_cast<ContactManifold *> (manifoldVa);
-    const Real result = pManifold->mBaseOffset.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ContactManifold
- * Method:    getBaseOffsetZ
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getBaseOffsetZ
-  (JNIEnv *, jclass, jlong manifoldVa) {
-    const ContactManifold * const pManifold
-            = reinterpret_cast<ContactManifold *> (manifoldVa);
-    const Real result = pManifold->mBaseOffset.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pManifold->mBaseOffset;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
@@ -110,39 +88,17 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getSu
 
 /*
  * Class:     com_github_stephengold_joltjni_ContactManifold
- * Method:    getWorldSpaceNormalX
- * Signature: (J)F
+ * Method:    getWorldSpaceNormal
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getWorldSpaceNormalX
-  (JNIEnv *, jclass, jlong manifoldVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getWorldSpaceNormal
+  (JNIEnv *pEnv, jclass, jlong manifoldVa, jobject storeFloats) {
     const ContactManifold * const pManifold
             = reinterpret_cast<ContactManifold *> (manifoldVa);
-    const float result = pManifold->mWorldSpaceNormal.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ContactManifold
- * Method:    getWorldSpaceNormalY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getWorldSpaceNormalY
-  (JNIEnv *, jclass, jlong manifoldVa) {
-    const ContactManifold * const pManifold
-            = reinterpret_cast<ContactManifold *> (manifoldVa);
-    const float result = pManifold->mWorldSpaceNormal.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ContactManifold
- * Method:    getWorldSpaceNormalZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ContactManifold_getWorldSpaceNormalZ
-  (JNIEnv *, jclass, jlong manifoldVa) {
-    const ContactManifold * const pManifold
-            = reinterpret_cast<ContactManifold *> (manifoldVa);
-    const float result = pManifold->mWorldSpaceNormal.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pManifold->mWorldSpaceNormal;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }

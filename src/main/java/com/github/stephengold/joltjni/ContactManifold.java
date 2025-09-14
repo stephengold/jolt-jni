@@ -22,6 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstContactManifold;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * The contact surface between two bodies.
@@ -56,10 +58,9 @@ final public class ContactManifold
     @Override
     public RVec3 getBaseOffset() {
         long manifoldVa = va();
-        double x = getBaseOffsetX(manifoldVa);
-        double y = getBaseOffsetY(manifoldVa);
-        double z = getBaseOffsetZ(manifoldVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getBaseOffset(manifoldVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -115,21 +116,17 @@ final public class ContactManifold
     @Override
     public Vec3 getWorldSpaceNormal() {
         long manifoldVa = va();
-        float x = getWorldSpaceNormalX(manifoldVa);
-        float y = getWorldSpaceNormalY(manifoldVa);
-        float z = getWorldSpaceNormalZ(manifoldVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getWorldSpaceNormal(manifoldVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
     // *************************************************************************
     // native private methods
 
-    native private static double getBaseOffsetX(long manifoldVa);
-
-    native private static double getBaseOffsetY(long manifoldVa);
-
-    native private static double getBaseOffsetZ(long manifoldVa);
+    native private static void getBaseOffset(
+            long manifoldVa, DoubleBuffer storeFloats);
 
     native private static float getPenetrationDepth(long manifoldVa);
 
@@ -137,9 +134,6 @@ final public class ContactManifold
 
     native private static int getSubShapeId2(long manifoldVa);
 
-    native private static float getWorldSpaceNormalX(long manifoldVa);
-
-    native private static float getWorldSpaceNormalY(long manifoldVa);
-
-    native private static float getWorldSpaceNormalZ(long manifoldVa);
+    native private static void getWorldSpaceNormal(
+            long manifoldVa, FloatBuffer storeFloats);
 }
