@@ -242,10 +242,9 @@ abstract public class Shape extends NonCopyable
     @Override
     public Vec3 getCenterOfMass() {
         long shapeVa = va();
-        float x = getCenterOfMassX(shapeVa);
-        float y = getCenterOfMassY(shapeVa);
-        float z = getCenterOfMassZ(shapeVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getCenterOfMass(shapeVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -591,11 +590,7 @@ abstract public class Shape extends NonCopyable
             long transformVa, float scaleX, float scaleY, float scaleZ,
             int colorInt, boolean drawSupportDirection);
 
-    native static float getCenterOfMassX(long shapeVa);
-
-    native static float getCenterOfMassY(long shapeVa);
-
-    native static float getCenterOfMassZ(long shapeVa);
+    native static void getCenterOfMass(long shapeVa, FloatBuffer storeFloats);
 
     native static float getInnerRadius(long shapeVa);
 

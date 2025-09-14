@@ -163,38 +163,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_drawGetSupportF
 
 /*
  * Class:     com_github_stephengold_joltjni_Shape
- * Method:    getCenterOfMassX
- * Signature: (J)F
+ * Method:    getCenterOfMass
+ * Signature: (JLjava/nio/FloatBuffer;)F
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMassX
-  (JNIEnv *, jclass, jlong shapeVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMass
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jobject storeFloats) {
     const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    const float result = pShape->GetCenterOfMass().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Shape
- * Method:    getCenterOfMassY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMassY
-  (JNIEnv *, jclass, jlong shapeVa) {
-    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    const float result = pShape->GetCenterOfMass().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Shape
- * Method:    getCenterOfMassZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Shape_getCenterOfMassZ
-  (JNIEnv *, jclass, jlong shapeVa) {
-    const Shape * const pShape = reinterpret_cast<Shape *> (shapeVa);
-    const float result = pShape->GetCenterOfMass().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pShape->GetCenterOfMass();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

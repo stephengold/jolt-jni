@@ -168,10 +168,9 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     @Override
     public Vec3 getCenterOfMass() {
         long shapeVa = targetVa();
-        float x = Shape.getCenterOfMassX(shapeVa);
-        float y = Shape.getCenterOfMassY(shapeVa);
-        float z = Shape.getCenterOfMassZ(shapeVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        Shape.getCenterOfMass(shapeVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
