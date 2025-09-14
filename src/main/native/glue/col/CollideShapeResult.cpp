@@ -48,7 +48,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_ge
  * Method:    getContactPointOn1
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getContactPointOn1X
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CollideShapeResult_getContactPointOn1
   (JNIEnv *pEnv, jclass, jlong shapeResultVa, jobject storeFloats) {
     const CollideShapeResult * const pShapeResult
             = reinterpret_cast<CollideShapeResult *> (shapeResultVa);
