@@ -61,80 +61,36 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getPoint1X
- * Signature: (J)D
+ * Method:    getPoint1
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getPoint1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getPoint1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const ConeConstraintSettings * const pSettings
             = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetX();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPoint1;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getPoint1Y
- * Signature: (J)D
+ * Method:    getPoint2
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getPoint1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getPoint2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const ConeConstraintSettings * const pSettings
             = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getPoint1Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getPoint1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ConeConstraintSettings * const pSettings
-            = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getPoint2X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getPoint2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ConeConstraintSettings * const pSettings
-            = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getPoint2Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getPoint2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ConeConstraintSettings * const pSettings
-            = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getPoint2Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getPoint2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ConeConstraintSettings * const pSettings
-            = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPoint2;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
@@ -152,80 +108,36 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getTwistAxis1X
- * Signature: (J)F
+ * Method:    getTwistAxis1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getTwistAxis1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getTwistAxis1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const ConeConstraintSettings * const pSettings
             = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis1.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mTwistAxis1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getTwistAxis1Y
- * Signature: (J)F
+ * Method:    getTwistAxis2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getTwistAxis1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getTwistAxis2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const ConeConstraintSettings * const pSettings
             = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getTwistAxis1Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getTwistAxis1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ConeConstraintSettings * const pSettings
-            = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getTwistAxis2X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getTwistAxis2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ConeConstraintSettings * const pSettings
-            = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getTwistAxis2Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getTwistAxis2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ConeConstraintSettings * const pSettings
-            = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
- * Method:    getTwistAxis2Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_getTwistAxis2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ConeConstraintSettings * const pSettings
-            = reinterpret_cast<ConeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mTwistAxis2.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mTwistAxis2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

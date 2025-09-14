@@ -25,6 +25,8 @@ import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code ConeConstraint}.
@@ -90,10 +92,9 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPoint1() {
         long settingsVa = va();
-        double x = getPoint1X(settingsVa);
-        double y = getPoint1Y(settingsVa);
-        double z = getPoint1Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint1(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -106,10 +107,9 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPoint2() {
         long settingsVa = va();
-        double x = getPoint2X(settingsVa);
-        double y = getPoint2Y(settingsVa);
-        double z = getPoint2Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint2(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -136,10 +136,9 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getTwistAxis1() {
         long settingsVa = va();
-        float x = getTwistAxis1X(settingsVa);
-        float y = getTwistAxis1Y(settingsVa);
-        float z = getTwistAxis1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTwistAxis1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -152,10 +151,9 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getTwistAxis2() {
         long settingsVa = va();
-        float x = getTwistAxis2X(settingsVa);
-        float y = getTwistAxis2Y(settingsVa);
-        float z = getTwistAxis2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTwistAxis2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -259,31 +257,19 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static float getHalfConeAngle(long settingsVa);
 
-    native private static double getPoint1X(long settingsVa);
+    native private static void getPoint1(
+            long settingsVa, DoubleBuffer storeDoubles);
 
-    native private static double getPoint1Y(long settingsVa);
-
-    native private static double getPoint1Z(long settingsVa);
-
-    native private static double getPoint2X(long settingsVa);
-
-    native private static double getPoint2Y(long settingsVa);
-
-    native private static double getPoint2Z(long settingsVa);
+    native private static void getPoint2(
+            long settingsVa, DoubleBuffer storeDoubles);
 
     native private static int getSpace(long settingsVa);
 
-    native private static float getTwistAxis1X(long settingsVa);
+    native private static void getTwistAxis1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getTwistAxis1Y(long settingsVa);
-
-    native private static float getTwistAxis1Z(long settingsVa);
-
-    native private static float getTwistAxis2X(long settingsVa);
-
-    native private static float getTwistAxis2Y(long settingsVa);
-
-    native private static float getTwistAxis2Z(long settingsVa);
+    native private static void getTwistAxis2(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static void setHalfConeAngle(long settingsVa, float angle);
 
