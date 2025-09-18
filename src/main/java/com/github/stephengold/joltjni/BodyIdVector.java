@@ -69,7 +69,7 @@ public class BodyIdVector extends JoltPhysicsObject {
     }
 
     /**
-     * Test whether the array contains one or more elements. The array is
+     * Test whether the vector contains one or more IDs. The vector is
      * unaffected.
      *
      * @return {@code true} if empty, otherwise {@code false}

@@ -768,7 +768,7 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Replace the combining function for restitutions.
      *
-     * @param function the desired function (not null, default=max)
+     * @param function the desired function (not {@code null}, default=max)
      */
     public void setCombineRestitution(CombineFunction function) {
         long systemVa = va();
@@ -807,7 +807,7 @@ public class PhysicsSystem extends NonCopyable {
      * Alter the system's gravity vector.
      *
      * @param gravity the desired acceleration vector (in system coordinates,
-     * not null, unaffected, default=(0,-9.81,0))
+     * not {@code null}, unaffected, default=(0,-9.81,0))
      */
     public void setGravity(Vec3Arg gravity) {
         long systemVa = va();
@@ -820,7 +820,7 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Copy the specified settings to the system.
      *
-     * @param settings the desired settings (not null, unaffected)
+     * @param settings the desired settings (not {@code null}, unaffected)
      *
      * @see #getPhysicsSettings()
      */
@@ -833,7 +833,7 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Replace the system's body-vs-body collide function.
      *
-     * @param bodyVsBody the desired function
+     * @param bodyVsBody the desired function (not {@code null})
      */
     public void setSimCollideBodyVsBody(SimCollideBodyVsBody bodyVsBody) {
         long systemVa = va();
@@ -871,8 +871,8 @@ public class PhysicsSystem extends NonCopyable {
      *
      * @param deltaTime the total time to advance (in seconds)
      * @param collisionSteps the number of simulation steps to perform
-     * @param tempAllocator the allocator to use (not null)
-     * @param jobSystem the job system to use (not null)
+     * @param tempAllocator the allocator to use (not {@code null})
+     * @param jobSystem the job system to use (not {@code null})
      * @return a bitmask of error conditions, or-ed together
      *
      * @see com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError

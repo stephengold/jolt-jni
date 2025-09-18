@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.ValidateResult;
 
 /**
- * A customizable {@code ContactListener}.
+ * A customizable {@code ContactListener} without any filtering.
  *
  * @author Stephen Gold sgold@sonic.net
  */
