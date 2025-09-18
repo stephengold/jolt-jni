@@ -779,12 +779,12 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Replace the system's contact listener.
      *
-     * @param listener the desired listener
+     * @param listener the desired listener, or {@code null} for none
      */
     public void setContactListener(ContactListener listener) {
         this.contactListener = listener;
         long systemVa = va();
-        long listenerVa = listener.va();
+        long listenerVa = (listener == null) ? 0L : listener.va();
         setContactListener(systemVa, listenerVa);
     }
 
@@ -857,12 +857,12 @@ public class PhysicsSystem extends NonCopyable {
     /**
      * Replace the system's soft-body contact listener.
      *
-     * @param listener the desired listener
+     * @param listener the desired listener, or {@code null} for none
      */
     public void setSoftBodyContactListener(SoftBodyContactListener listener) {
         this.softContactListener = listener;
         long systemVa = va();
-        long listenerVa = listener.va();
+        long listenerVa = (listener == null) ? 0L : listener.va();
         setSoftBodyContactListener(systemVa, listenerVa);
     }
 
