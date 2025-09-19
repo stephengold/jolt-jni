@@ -260,22 +260,23 @@ public class FilteredContactListener extends ContactListener {
     // *************************************************************************
     // native private methods
 
-    native private long createDefault();
+    native private static long createDefault();
 
-    native private int getBodyFilterMode(long listenerVa);
+    native private static int getBodyFilterMode(long listenerVa);
 
-    native private int getBroadPhaseLayerFilterMode(long listenerVa);
+    native private static int getBroadPhaseLayerFilterMode(long listenerVa);
 
-    native private void setBodyFilter(long listenerVa, long bodyFilterVa);
+    native private static void setBodyFilter(
+            long listenerVa, long bodyFilterVa);
 
-    native private void setBodyFilterMode(long listenerVa, int ordinal);
+    native private static void setBodyFilterMode(long listenerVa, int ordinal);
 
-    native private void setBroadPhaseLayerFilter(
+    native private static void setBroadPhaseLayerFilter(
             long listenerVa, long bplFilterVa);
 
-    native private void setBroadPhaseLayerFilterMode(
+    native private static void setBroadPhaseLayerFilterMode(
             long listenerVa, int ordinal);
 
-    native private void setObjectLayerPairFilter(
+    native private static void setObjectLayerPairFilter(
             long listenerVa, long olpFilterVa);
 }
