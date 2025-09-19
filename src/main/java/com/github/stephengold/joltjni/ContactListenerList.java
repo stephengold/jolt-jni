@@ -149,5 +149,5 @@ public class ContactListenerList extends ContactListener {
 
     native private static void free(long listVa);
 
-    native private static int pushBack(long listVa, long listenerVa);
+    native private static void pushBack(long listVa, long listenerVa);
 }
