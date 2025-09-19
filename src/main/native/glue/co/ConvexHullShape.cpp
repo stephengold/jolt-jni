@@ -162,45 +162,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getPl
     pEnv->ReleaseFloatArrayElements(storeFloats, pFloats, 0);
 }
 
-inline static const Vec3 getPoint(jlong shapeVa, jint pointIndex) {
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShape
+ * Method:    getPoint
+ * Signature: (JILjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getPoint
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jint pointIndex, jobject storeFloats) {
     const ConvexHullShape * const pShape
             = reinterpret_cast<ConvexHullShape *> (shapeVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pShape->GetPoint(pointIndex);
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConvexHullShape
- * Method:    getPointX
- * Signature: (JI)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getPointX
-  (JNIEnv *, jclass, jlong shapeVa, jint pointIndex) {
-    const Vec3 point = getPoint(shapeVa, pointIndex);
-    const float result = point.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConvexHullShape
- * Method:    getPointY
- * Signature: (JI)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getPointY
-  (JNIEnv *, jclass, jlong shapeVa, jint pointIndex) {
-    const Vec3 point = getPoint(shapeVa, pointIndex);
-    const float result = point.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ConvexHullShape
- * Method:    getPointZ
- * Signature: (JI)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShape_getPointZ
-  (JNIEnv *, jclass, jlong shapeVa, jint pointIndex) {
-    const Vec3 point = getPoint(shapeVa, pointIndex);
-    const float result = point.GetZ();
-    return result;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }

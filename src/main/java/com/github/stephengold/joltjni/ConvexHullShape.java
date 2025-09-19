@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * A {@code Shape} to represent a convex hull defined by a collection of
@@ -183,10 +184,9 @@ public class ConvexHullShape extends ConvexShape {
      */
     public Vec3 getPoint(int pointIndex) {
         long shapeVa = va();
-        float x = getPointX(shapeVa, pointIndex);
-        float y = getPointY(shapeVa, pointIndex);
-        float z = getPointZ(shapeVa, pointIndex);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPoint(shapeVa, pointIndex, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -211,9 +211,6 @@ public class ConvexHullShape extends ConvexShape {
 
     native private static void getPlanes(long shapeVa, float[] storeFloats);
 
-    native private static float getPointX(long shapeVa, int pointIndex);
-
-    native private static float getPointY(long shapeVa, int pointIndex);
-
-    native private static float getPointZ(long shapeVa, int pointIndex);
+    native private static void getPoint(
+            long shapeVa, int pointIndex, FloatBuffer storeFloats);
 }
