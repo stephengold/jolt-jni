@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import java.nio.DoubleBuffer;
 
 /**
  * Settings used to construct a {@code DistanceConstraint}.
@@ -117,10 +118,9 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPoint1() {
         long settingsVa = va();
-        double x = getPoint1X(settingsVa);
-        double y = getPoint1Y(settingsVa);
-        double z = getPoint1Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint1(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -133,10 +133,9 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPoint2() {
         long settingsVa = va();
-        double x = getPoint2X(settingsVa);
-        double y = getPoint2Y(settingsVa);
-        double z = getPoint2Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint2(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -256,17 +255,11 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static float getMinDistance(long settingsVa);
 
-    native private static double getPoint1X(long settingsVa);
+    native private static void getPoint1(
+            long settingsVa, DoubleBuffer storeDoubles);
 
-    native private static double getPoint1Y(long settingsVa);
-
-    native private static double getPoint1Z(long settingsVa);
-
-    native private static double getPoint2X(long settingsVa);
-
-    native private static double getPoint2Y(long settingsVa);
-
-    native private static double getPoint2Z(long settingsVa);
+    native private static void getPoint2(
+            long settingsVa, DoubleBuffer storeDoubles);
 
     native private static int getSpace(long settingsVa);
 
