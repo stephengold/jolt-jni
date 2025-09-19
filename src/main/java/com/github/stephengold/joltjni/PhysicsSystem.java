@@ -33,6 +33,7 @@ import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -488,10 +489,9 @@ public class PhysicsSystem extends NonCopyable {
      */
     public Vec3 getGravity() {
         long systemVa = va();
-        float x = getGravityX(systemVa);
-        float y = getGravityY(systemVa);
-        float z = getGravityZ(systemVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getGravity(systemVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -953,11 +953,8 @@ public class PhysicsSystem extends NonCopyable {
 
     native private static long getConstraints(long systemVa);
 
-    native private static float getGravityX(long systemVa);
-
-    native private static float getGravityY(long systemVa);
-
-    native private static float getGravityZ(long systemVa);
+    native private static void getGravity(
+            long systemVa, FloatBuffer storeFloats);
 
     native private static long getNarrowPhaseQuery(long systemVa);
 

@@ -362,44 +362,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getCon
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsSystem
- * Method:    getGravityX
- * Signature: (J)F
+ * Method:    getGravity
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getGravityX
-  (JNIEnv *, jclass, jlong systemVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getGravity
+  (JNIEnv *pEnv, jclass, jlong systemVa, jobject storeFloats) {
     const PhysicsSystem * const pSystem
             = reinterpret_cast<PhysicsSystem *> (systemVa);
-    const Vec3 gravity = pSystem->GetGravity();
-    const float result = gravity.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSystem
- * Method:    getGravityY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getGravityY
-  (JNIEnv *, jclass, jlong systemVa) {
-    const PhysicsSystem * const pSystem
-            = reinterpret_cast<PhysicsSystem *> (systemVa);
-    const Vec3 gravity = pSystem->GetGravity();
-    const float result = gravity.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PhysicsSystem
- * Method:    getGravityZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_PhysicsSystem_getGravityZ
-  (JNIEnv *, jclass, jlong systemVa) {
-    const PhysicsSystem * const pSystem
-            = reinterpret_cast<PhysicsSystem *> (systemVa);
-    const Vec3 gravity = pSystem->GetGravity();
-    const float result = gravity.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pSystem->GetGravity();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
