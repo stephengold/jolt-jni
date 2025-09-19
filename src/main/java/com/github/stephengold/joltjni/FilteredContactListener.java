@@ -114,19 +114,6 @@ public class FilteredContactListener extends ContactListener {
     }
 
     /**
-     * Return the object-layer filter mode.
-     *
-     * @return a enum value (not {@code null})
-     */
-    public EFilterMode getObjectLayerFilterMode() {
-        long listenerVa = va();
-        int ordinal = getObjectLayerFilterMode(listenerVa);
-        EFilterMode result = EFilterMode.values()[ordinal];
-
-        return result;
-    }
-
-    /**
      * Callback invoked (by native code) each time a new contact point is
      * detected. Meant to be overridden.
      *
@@ -278,8 +265,6 @@ public class FilteredContactListener extends ContactListener {
     native private int getBodyFilterMode(long listenerVa);
 
     native private int getBroadPhaseLayerFilterMode(long listenerVa);
-
-    native private int getObjectLayerFilterMode(long listenerVa);
 
     native private void setBodyFilter(long listenerVa, long bodyFilterVa);
 
