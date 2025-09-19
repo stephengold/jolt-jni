@@ -96,6 +96,7 @@ $(N)/glue/co/Constraints.cpp \
 $(N)/glue/co/ConstraintSettings.cpp \
 $(N)/glue/co/Contact.cpp \
 $(N)/glue/co/ContactListener.cpp \
+$(N)/glue/co/ContactListenerList.cpp \
 $(N)/glue/co/ContactManifold.cpp \
 $(N)/glue/co/ContactSettings.cpp \
 $(N)/glue/co/ConvexHullBuilder.cpp \
