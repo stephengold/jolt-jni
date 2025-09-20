@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Settings for extended update of a virtual character. (native type:
@@ -62,10 +63,9 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
      */
     public Vec3 getStickToFloorStepDown() {
         long settingsVa = va();
-        float x = getStickToFloorStepDownX(settingsVa);
-        float y = getStickToFloorStepDownY(settingsVa);
-        float z = getStickToFloorStepDownZ(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getStickToFloorStepDown(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -118,10 +118,9 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
      */
     public Vec3 getWalkStairsStepUp() {
         long settingsVa = va();
-        float x = getWalkStairsStepUpX(settingsVa);
-        float y = getWalkStairsStepUpY(settingsVa);
-        float z = getWalkStairsStepUpZ(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getWalkStairsStepUp(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -198,11 +197,8 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
 
     native private static void free(long settingsVa);
 
-    native private static float getStickToFloorStepDownX(long settingsVa);
-
-    native private static float getStickToFloorStepDownY(long settingsVa);
-
-    native private static float getStickToFloorStepDownZ(long settingsVa);
+    native private static void getStickToFloorStepDown(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static float getWalkStairsCosAngleForwardContact(
             long settingsVa);
@@ -211,11 +207,8 @@ public class ExtendedUpdateSettings extends JoltPhysicsObject {
 
     native private static float getWalkStairsStepForwardTest(long settingsVa);
 
-    native private static float getWalkStairsStepUpX(long settingsVa);
-
-    native private static float getWalkStairsStepUpY(long settingsVa);
-
-    native private static float getWalkStairsStepUpZ(long settingsVa);
+    native private static void getWalkStairsStepUp(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static void setStickToFloorStepDown(
             long settingsVa, float x, float y, float z);

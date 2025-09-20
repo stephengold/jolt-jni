@@ -56,41 +56,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSetting
 
 /*
  * Class:     com_github_stephengold_joltjni_ExtendedUpdateSettings
- * Method:    getStickToFloorStepDownX
- * Signature: (J)F
+ * Method:    getStickToFloorStepDown
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSettings_getStickToFloorStepDownX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSettings_getStickToFloorStepDown
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const CharacterVirtual::ExtendedUpdateSettings * const pSettings
             = reinterpret_cast<CharacterVirtual::ExtendedUpdateSettings *> (settingsVa);
-    const float result = pSettings->mStickToFloorStepDown.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ExtendedUpdateSettings
- * Method:    getStickToFloorStepDownY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSettings_getStickToFloorStepDownY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterVirtual::ExtendedUpdateSettings * const pSettings
-            = reinterpret_cast<CharacterVirtual::ExtendedUpdateSettings *> (settingsVa);
-    const float result = pSettings->mStickToFloorStepDown.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ExtendedUpdateSettings
- * Method:    getStickToFloorStepDownZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSettings_getStickToFloorStepDownZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterVirtual::ExtendedUpdateSettings * const pSettings
-            = reinterpret_cast<CharacterVirtual::ExtendedUpdateSettings *> (settingsVa);
-    const float result = pSettings->mStickToFloorStepDown.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mStickToFloorStepDown;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();    
 }
 
 /*
@@ -134,41 +112,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_ExtendedUpdateSettings
- * Method:    getWalkStairsStepUpX
- * Signature: (J)F
+ * Method:    getWalkStairsStepUp
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSettings_getWalkStairsStepUpX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSettings_getWalkStairsStepUp
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const CharacterVirtual::ExtendedUpdateSettings * const pSettings
             = reinterpret_cast<CharacterVirtual::ExtendedUpdateSettings *> (settingsVa);
-    const float result = pSettings->mWalkStairsStepUp.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ExtendedUpdateSettings
- * Method:    getWalkStairsStepUpY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSettings_getWalkStairsStepUpY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterVirtual::ExtendedUpdateSettings * const pSettings
-            = reinterpret_cast<CharacterVirtual::ExtendedUpdateSettings *> (settingsVa);
-    const float result = pSettings->mWalkStairsStepUp.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ExtendedUpdateSettings
- * Method:    getWalkStairsStepUpZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ExtendedUpdateSettings_getWalkStairsStepUpZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterVirtual::ExtendedUpdateSettings * const pSettings
-            = reinterpret_cast<CharacterVirtual::ExtendedUpdateSettings *> (settingsVa);
-    const float result = pSettings->mWalkStairsStepUp.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mWalkStairsStepUp;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();    
 }
 
 /*
