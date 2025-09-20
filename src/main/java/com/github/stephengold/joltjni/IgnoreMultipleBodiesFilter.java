@@ -31,7 +31,7 @@ public class IgnoreMultipleBodiesFilter extends BodyFilter {
     // constructors
 
     /**
-     * Instantiate a default filter that selects all layers.
+     * Instantiate a default filter that selects all bodies.
      */
     public IgnoreMultipleBodiesFilter() {
         super(true);

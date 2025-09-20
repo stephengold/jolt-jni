@@ -31,7 +31,7 @@ public class BodyFilter extends NonCopyable {
     // constructors
 
     /**
-     * Instantiate a default filter that selects all layers.
+     * Instantiate a default filter that selects all bodies.
      */
     public BodyFilter() {
         long filterVa = createDefault();

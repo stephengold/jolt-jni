@@ -777,7 +777,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Replace the system's contact listener.
+     * Replace or remove the system's contact listener.
      *
      * @param listener the desired listener, or {@code null} for none
      */
@@ -855,7 +855,7 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Replace the system's soft-body contact listener.
+     * Replace or remove the system's soft-body contact listener.
      *
      * @param listener the desired listener, or {@code null} for none
      */

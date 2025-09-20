@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Receive collision-contact events from soft bodies.
+ * Receive collision-contact events from soft bodies. TODO make abstract
  *
  * @author Stephen Gold sgold@sonic.net
  */
