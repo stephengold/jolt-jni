@@ -96,6 +96,7 @@ $(N)/glue/co/Constraints.cpp \
 $(N)/glue/co/ConstraintSettings.cpp \
 $(N)/glue/co/Contact.cpp \
 $(N)/glue/co/ContactListener.cpp \
+$(N)/glue/co/ContactListenerList.cpp \
 $(N)/glue/co/ContactManifold.cpp \
 $(N)/glue/co/ContactSettings.cpp \
 $(N)/glue/co/ConvexHullBuilder.cpp \
@@ -142,6 +143,7 @@ $(N)/glue/e/EmptyShapeSettings.cpp \
 $(N)/glue/e/EpaPenetrationDepth.cpp \
 $(N)/glue/e/ExtendedUpdateSettings.cpp \
 $(N)/glue/f/Face.cpp \
+$(N)/glue/f/FilteredContactListener.cpp \
 $(N)/glue/f/FixedConstraintSettings.cpp \
 $(N)/glue/g/GearConstraint.cpp \
 $(N)/glue/g/GearConstraintSettings.cpp \

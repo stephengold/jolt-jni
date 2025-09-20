@@ -24,9 +24,11 @@ package testjoltjni.junit;
 import com.github.stephengold.joltjni.AaBox;
 import com.github.stephengold.joltjni.AaBoxCast;
 import com.github.stephengold.joltjni.BodyCreationSettings;
+import com.github.stephengold.joltjni.BodyFilter;
 import com.github.stephengold.joltjni.BodyIdArray;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.BoxShapeSettings;
+import com.github.stephengold.joltjni.BroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.CapsuleShape;
 import com.github.stephengold.joltjni.CharacterRef;
 import com.github.stephengold.joltjni.CharacterRefC;
@@ -38,7 +40,9 @@ import com.github.stephengold.joltjni.CharacterVirtualRefC;
 import com.github.stephengold.joltjni.CharacterVirtualSettings;
 import com.github.stephengold.joltjni.CharacterVirtualSettingsRef;
 import com.github.stephengold.joltjni.CollisionGroup;
+import com.github.stephengold.joltjni.ContactListenerList;
 import com.github.stephengold.joltjni.ContactSettings;
+import com.github.stephengold.joltjni.FilteredContactListener;
 import com.github.stephengold.joltjni.GroupFilterTable;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemSingleThreaded;
@@ -47,6 +51,7 @@ import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.MassProperties;
 import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.MotionProperties;
+import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
@@ -67,6 +72,7 @@ import com.github.stephengold.joltjni.TempAllocatorMalloc;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.Vertex;
 import com.github.stephengold.joltjni.enumerate.EAllowedDofs;
+import com.github.stephengold.joltjni.enumerate.EFilterMode;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
@@ -133,7 +139,9 @@ public class Test003 {
         doCharacter();
         doCharacterVirtual();
         doCollisionGroup();
+        doContactListenerList();
         doContactSettings();
+        doFilteredContactListener();
         doJobSystemSingleThreaded();
         doJobSystemThreadPool();
         doMassProperties();
@@ -492,6 +500,18 @@ public class Test003 {
     }
 
     /**
+     * Test the {@code ContactListenerList} class.
+     */
+    private static void doContactListenerList() {
+        ContactListenerList list = new ContactListenerList();
+
+        testContactListenerListDefaults(list);
+
+        TestUtils.testClose(list);
+        System.gc();
+    }
+
+    /**
      * Test the {@code ContactSettings} class.
      */
     private static void doContactSettings() {
@@ -501,6 +521,19 @@ public class Test003 {
         testContactSettingsSetters(settings);
 
         TestUtils.testClose(settings);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code FilteredContactListener} class.
+     */
+    private static void doFilteredContactListener() {
+        FilteredContactListener listener = new FilteredContactListener();
+
+        testFilteredContactListenerDefaults(listener);
+        testFilteredContactListenerSetters(listener);
+
+        TestUtils.testClose(listener);
         System.gc();
     }
 
@@ -914,6 +947,21 @@ public class Test003 {
     }
 
     /**
+     * Test the getters and defaults of the specified
+     * {@code ContactListenerList}.
+     *
+     * @param list the list to test (not null, unaffected)
+     */
+    private static void testContactListenerListDefaults(
+            ContactListenerList list) {
+        Assert.assertTrue(list.hasAssignedNativeObject());
+        Assert.assertTrue(list.ownsNativeObject());
+
+        Assert.assertTrue(list.empty());
+        Assert.assertEquals(0, list.size());
+    }
+
+    /**
      * Test the getters and defaults of the specified {@code ContactSettings}.
      *
      * @param settings the settings to test (not null, unaffected)
@@ -960,6 +1008,68 @@ public class Test003 {
                 settings.getRelativeAngularSurfaceVelocity(), 0f);
         TestUtils.assertEquals(20f, 21f, 22f,
                 settings.getRelativeLinearSurfaceVelocity(), 0f);
+    }
+
+    /**
+     * Test the getters and defaults of the specified
+     * {@code FilteredContactListener}.
+     *
+     * @param listener the listener to test (not null, unaffected)
+     */
+    private static void testFilteredContactListenerDefaults(
+            FilteredContactListener listener) {
+        Assert.assertTrue(listener.hasAssignedNativeObject());
+        Assert.assertTrue(listener.ownsNativeObject());
+
+        Assert.assertNull(listener.getBodyFilter());
+        Assert.assertEquals(EFilterMode.Both, listener.getBodyFilterMode());
+        Assert.assertNull(listener.getBroadPhaseLayerFilter());
+        Assert.assertEquals(
+                EFilterMode.Both, listener.getBroadPhaseLayerFilterMode());
+        Assert.assertTrue(listener.getEnableAdded());
+        Assert.assertTrue(listener.getEnablePersisted());
+        Assert.assertTrue(listener.getEnableRemoved());
+        Assert.assertTrue(listener.getEnableValidate());
+        Assert.assertNull(listener.getObjectLayerPairFilter());
+    }
+
+    /**
+     * Test the setters of the specified {@code FilteredContactListener}.
+     *
+     * @param listener the listener to test (not null, modified)
+     */
+    private static void testFilteredContactListenerSetters(
+            FilteredContactListener listener) {
+        BodyFilter bodyFilter = new BodyFilter();
+        listener.setBodyFilter(bodyFilter);
+        listener.setBodyFilterMode(EFilterMode.Either);
+
+        BroadPhaseLayerFilter bplFilter = new BroadPhaseLayerFilter();
+        listener.setBroadPhaseLayerFilter(bplFilter);
+        listener.setBroadPhaseLayerFilterMode(EFilterMode.Both);
+
+        ObjectLayerPairFilterTable olpFilter
+                = new ObjectLayerPairFilterTable(2);
+        listener.setObjectLayerPairFilter(olpFilter);
+
+        Assert.assertEquals(bodyFilter, listener.getBodyFilter());
+        Assert.assertEquals(EFilterMode.Either, listener.getBodyFilterMode());
+        Assert.assertEquals(bplFilter, listener.getBroadPhaseLayerFilter());
+        Assert.assertEquals(
+                EFilterMode.Both, listener.getBroadPhaseLayerFilterMode());
+        Assert.assertEquals(olpFilter, listener.getObjectLayerPairFilter());
+
+        listener.setEnableAdded(false);
+        Assert.assertFalse(listener.getEnableAdded());
+
+        listener.setEnablePersisted(false);
+        Assert.assertFalse(listener.getEnablePersisted());
+
+        listener.setEnableRemoved(false);
+        Assert.assertFalse(listener.getEnableRemoved());
+
+        listener.setEnableValidate(false);
+        Assert.assertFalse(listener.getEnableValidate());
     }
 
     /**
