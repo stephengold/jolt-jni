@@ -17,7 +17,7 @@ plugins {
 // or by -P options on the Gradle command line.
 
 ext {
-    joltTag = 'sg250829'
+    joltTag = 'sg250918'
     downloadedJoltZip = "downloads/JoltPhysics-${joltTag}.zip"
     downloadedVhacdZip = 'downloads/v-hacd-4.1.0.zip'
 
