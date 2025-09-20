@@ -345,5 +345,5 @@ public class CustomCharacterContactListener
 
     native private long createDefault();
 
-    native private void free(long listenerVa);
+    native private static void free(long listenerVa);
 }
