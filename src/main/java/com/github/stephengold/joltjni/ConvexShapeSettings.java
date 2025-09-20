@@ -115,9 +115,9 @@ abstract public class ConvexShapeSettings
     // *************************************************************************
     // native private methods
 
-    native private float getDensity(long settingsVa);
+    native private static float getDensity(long settingsVa);
 
-    native private long getMaterial(long settingsVa);
+    native private static long getMaterial(long settingsVa);
 
     native private static void setDensity(long settingsVa, float density);
 

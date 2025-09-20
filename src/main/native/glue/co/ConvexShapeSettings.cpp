@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@ using namespace JPH;
  * Signature: (J)F
  */
 JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexShapeSettings_getDensity
-  (JNIEnv *, jobject, jlong settingsVa) {
+  (JNIEnv *, jclass, jlong settingsVa) {
     const ConvexShapeSettings * const pSettings
             = reinterpret_cast<ConvexShapeSettings *> (settingsVa);
     const float result = pSettings->mDensity;
@@ -48,7 +48,7 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexShapeSettings
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexShapeSettings_getMaterial
-  (JNIEnv *, jobject, jlong settingsVa) {
+  (JNIEnv *, jclass, jlong settingsVa) {
     const ConvexShapeSettings * const pSettings
             = reinterpret_cast<ConvexShapeSettings *> (settingsVa);
     const PhysicsMaterial * const pResult = pSettings->mMaterial.GetPtr();
