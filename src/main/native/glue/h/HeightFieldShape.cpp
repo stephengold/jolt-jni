@@ -47,41 +47,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_getB
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShape
- * Method:    getPositionX
- * Signature: (JII)F
+ * Method:    getPosition
+ * Signature: (JIILjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_getPositionX
-  (JNIEnv *, jclass, jlong shapeVa, jint x, jint y) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_getPosition
+  (JNIEnv *pEnv, jclass, jlong shapeVa, jint x, jint y, jobject storeFloats) {
     const HeightFieldShape * const pShape
             = reinterpret_cast<HeightFieldShape *> (shapeVa);
-    const float result = pShape->GetPosition(x, y).GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HeightFieldShape
- * Method:    getPositionY
- * Signature: (JII)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_getPositionY
-  (JNIEnv *, jclass, jlong shapeVa, jint x, jint y) {
-    const HeightFieldShape * const pShape
-            = reinterpret_cast<HeightFieldShape *> (shapeVa);
-    const float result = pShape->GetPosition(x, y).GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HeightFieldShape
- * Method:    getPositionZ
- * Signature: (JII)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShape_getPositionZ
-  (JNIEnv *, jclass, jlong shapeVa, jint x, jint y) {
-    const HeightFieldShape * const pShape
-            = reinterpret_cast<HeightFieldShape *> (shapeVa);
-    const float result = pShape->GetPosition(x, y).GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pShape->GetPosition(x, y);
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

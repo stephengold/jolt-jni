@@ -67,10 +67,9 @@ public class HeightFieldShape extends Shape {
      */
     public Vec3 getPosition(int x, int y) {
         long shapeVa = va();
-        float posX = getPositionX(shapeVa, x, y);
-        float posY = getPositionY(shapeVa, x, y);
-        float posZ = getPositionZ(shapeVa, x, y);
-        Vec3 result = new Vec3(posX, posY, posZ);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPosition(shapeVa, x, y, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -187,11 +186,8 @@ public class HeightFieldShape extends Shape {
 
     native private static int getBlockSize(long shapeVa);
 
-    native private static float getPositionX(long shapeVa, int x, int y);
-
-    native private static float getPositionY(long shapeVa, int x, int y);
-
-    native private static float getPositionZ(long shapeVa, int x, int y);
+    native private static void getPosition(
+            long shapeVa, int x, int y, FloatBuffer storeFloats);
 
     native private static void getSurfaceNormal(long shapeVa, int subShapeId,
             float x, float y, float z, float[] storeFloats);
