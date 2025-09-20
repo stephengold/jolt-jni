@@ -143,6 +143,7 @@ $(N)/glue/e/EmptyShapeSettings.cpp \
 $(N)/glue/e/EpaPenetrationDepth.cpp \
 $(N)/glue/e/ExtendedUpdateSettings.cpp \
 $(N)/glue/f/Face.cpp \
+$(N)/glue/f/FilteredContactListener.cpp \
 $(N)/glue/f/FixedConstraintSettings.cpp \
 $(N)/glue/g/GearConstraint.cpp \
 $(N)/glue/g/GearConstraintSettings.cpp \
