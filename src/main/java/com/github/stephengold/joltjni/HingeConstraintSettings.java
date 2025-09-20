@@ -25,6 +25,8 @@ import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code HingeConstraint}.
@@ -77,10 +79,9 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getHingeAxis1() {
         long settingsVa = va();
-        float x = getHingeAxis1X(settingsVa);
-        float y = getHingeAxis1Y(settingsVa);
-        float z = getHingeAxis1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHingeAxis1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -93,10 +94,9 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getHingeAxis2() {
         long settingsVa = va();
-        float x = getHingeAxis2X(settingsVa);
-        float y = getHingeAxis2Y(settingsVa);
-        float z = getHingeAxis2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHingeAxis2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -175,10 +175,9 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getNormalAxis1() {
         long settingsVa = va();
-        float x = getNormalAxis1X(settingsVa);
-        float y = getNormalAxis1Y(settingsVa);
-        float z = getNormalAxis1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getNormalAxis1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -191,10 +190,9 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getNormalAxis2() {
         long settingsVa = va();
-        float x = getNormalAxis2X(settingsVa);
-        float y = getNormalAxis2Y(settingsVa);
-        float z = getNormalAxis2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getNormalAxis2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -207,10 +205,9 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPoint1() {
         long settingsVa = va();
-        double x = getPoint1X(settingsVa);
-        double y = getPoint1Y(settingsVa);
-        double z = getPoint1Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint1(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -223,10 +220,9 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPoint2() {
         long settingsVa = va();
-        double x = getPoint2X(settingsVa);
-        double y = getPoint2Y(settingsVa);
-        double z = getPoint2Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint2(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -407,17 +403,11 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createHingeConstraintSettings();
 
-    native private static float getHingeAxis1X(long settingsVa);
+    native private static void getHingeAxis1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getHingeAxis1Y(long settingsVa);
-
-    native private static float getHingeAxis1Z(long settingsVa);
-
-    native private static float getHingeAxis2X(long settingsVa);
-
-    native private static float getHingeAxis2Y(long settingsVa);
-
-    native private static float getHingeAxis2Z(long settingsVa);
+    native private static void getHingeAxis2(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static float getLimitsMax(long settingsVa);
 
@@ -430,29 +420,17 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long getMotorSettings(long constraintSettingsVa);
 
-    native private static float getNormalAxis1X(long settingsVa);
+    native private static void getNormalAxis1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getNormalAxis1Y(long settingsVa);
+    native private static void getNormalAxis2(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getNormalAxis1Z(long settingsVa);
+    native private static void getPoint1(
+            long settingsVa, DoubleBuffer storeDoubles);
 
-    native private static float getNormalAxis2X(long settingsVa);
-
-    native private static float getNormalAxis2Y(long settingsVa);
-
-    native private static float getNormalAxis2Z(long settingsVa);
-
-    native private static double getPoint1X(long settingsVa);
-
-    native private static double getPoint1Y(long settingsVa);
-
-    native private static double getPoint1Z(long settingsVa);
-
-    native private static double getPoint2X(long settingsVa);
-
-    native private static double getPoint2Y(long settingsVa);
-
-    native private static double getPoint2Z(long settingsVa);
+    native private static void getPoint2(
+            long settingsVa, DoubleBuffer storeDoubles);
 
     native private static int getSpace(long settingsVa);
 

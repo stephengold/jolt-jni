@@ -52,80 +52,36 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getHingeAxis1X
- * Signature: (J)F
+ * Method:    getHingeAxis1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getHingeAxis1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getHingeAxis1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const HingeConstraintSettings * const pSettings
             = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis1.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mHingeAxis1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getHingeAxis1Y
- * Signature: (J)F
+ * Method:    getHingeAxis2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getHingeAxis1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getHingeAxis2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const HingeConstraintSettings * const pSettings
             = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getHingeAxis1Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getHingeAxis1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getHingeAxis2X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getHingeAxis2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getHingeAxis2Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getHingeAxis2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getHingeAxis2Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getHingeAxis2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis2.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mHingeAxis2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -195,158 +151,70 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getNormalAxis1X
- * Signature: (J)F
+ * Method:    getNormalAxis1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getNormalAxis1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getNormalAxis1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const HingeConstraintSettings * const pSettings
             = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis1.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mNormalAxis1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getNormalAxis1Y
- * Signature: (J)F
+ * Method:    getNormalAxis2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getNormalAxis1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getNormalAxis2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const HingeConstraintSettings * const pSettings
             = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis1.GetY();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mNormalAxis2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getNormalAxis1Z
- * Signature: (J)F
+ * Method:    getPoint1
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getNormalAxis1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getPoint1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const HingeConstraintSettings * const pSettings
             = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis1.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPoint1;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getNormalAxis2X
- * Signature: (J)F
+ * Method:    getPoint2
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getNormalAxis2X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getPoint2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const HingeConstraintSettings * const pSettings
             = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getNormalAxis2Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getNormalAxis2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getNormalAxis2Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getNormalAxis2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const float result = pSettings->mNormalAxis2.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getPoint1X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getPoint1X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getPoint1Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getPoint1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getPoint1Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getPoint1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getPoint2X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getPoint2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getPoint2Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getPoint2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
- * Method:    getPoint2Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_getPoint2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HingeConstraintSettings * const pSettings
-            = reinterpret_cast<HingeConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPoint2;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
