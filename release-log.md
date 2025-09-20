@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 3.2.0 released on TBD
+## Version 3.2.0 released on 20 September 2025
 
 + Added 3 classes for efficient/flexible contact listening:
   + `ContactListenerList`
