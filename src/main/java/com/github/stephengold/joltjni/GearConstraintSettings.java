@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code GearConstraint}.
@@ -76,10 +77,9 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getHingeAxis1() {
         long settingsVa = va();
-        float x = getHingeAxis1X(settingsVa);
-        float y = getHingeAxis1Y(settingsVa);
-        float z = getHingeAxis1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHingeAxis1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -92,10 +92,9 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getHingeAxis2() {
         long settingsVa = va();
-        float x = getHingeAxis2X(settingsVa);
-        float y = getHingeAxis2Y(settingsVa);
-        float z = getHingeAxis2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHingeAxis2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -191,17 +190,11 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createDefault();
 
-    native private static float getHingeAxis1X(long settingsVa);
+    native private static void getHingeAxis1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getHingeAxis1Y(long settingsVa);
-
-    native private static float getHingeAxis1Z(long settingsVa);
-
-    native private static float getHingeAxis2X(long settingsVa);
-
-    native private static float getHingeAxis2Y(long settingsVa);
-
-    native private static float getHingeAxis2Z(long settingsVa);
+    native private static void getHingeAxis2(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static float getRatio(long settingsVa);
 

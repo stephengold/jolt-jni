@@ -48,80 +48,36 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_GearConstraintSettings
- * Method:    getHingeAxis1X
- * Signature: (J)F
+ * Method:    getHingeAxis1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_getHingeAxis1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_getHingeAxis1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const GearConstraintSettings * const pSettings
             = reinterpret_cast<GearConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis1.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mHingeAxis1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_GearConstraintSettings
- * Method:    getHingeAxis1Y
- * Signature: (J)F
+ * Method:    getHingeAxis2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_getHingeAxis1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_getHingeAxis2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const GearConstraintSettings * const pSettings
             = reinterpret_cast<GearConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_GearConstraintSettings
- * Method:    getHingeAxis1Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_getHingeAxis1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const GearConstraintSettings * const pSettings
-            = reinterpret_cast<GearConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_GearConstraintSettings
- * Method:    getHingeAxis2X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_getHingeAxis2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const GearConstraintSettings * const pSettings
-            = reinterpret_cast<GearConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_GearConstraintSettings
- * Method:    getHingeAxis2Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_getHingeAxis2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const GearConstraintSettings * const pSettings
-            = reinterpret_cast<GearConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_GearConstraintSettings
- * Method:    getHingeAxis2Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_getHingeAxis2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const GearConstraintSettings * const pSettings
-            = reinterpret_cast<GearConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis2.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mHingeAxis2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
