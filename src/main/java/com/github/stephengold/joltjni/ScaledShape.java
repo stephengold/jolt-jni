@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Apply scaling to an existing {@code Shape}.
@@ -69,10 +70,9 @@ public class ScaledShape extends DecoratedShape {
      */
     public Vec3 getScale() {
         long scaledVa = va();
-        float scaleX = getScaleX(scaledVa);
-        float scaleY = getScaleY(scaledVa);
-        float scaleZ = getScaleZ(scaledVa);
-        Vec3 result = new Vec3(scaleX, scaleY, scaleZ);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getScale(scaledVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -82,9 +82,5 @@ public class ScaledShape extends DecoratedShape {
     native private static long createScaledShape(
             long baseShapeVa, float scaleX, float scaleY, float scaleZ);
 
-    native private static float getScaleX(long scaledVa);
-
-    native private static float getScaleY(long scaledVa);
-
-    native private static float getScaleZ(long scaledVa);
+    native private static void getScale(long scaledVa, FloatBuffer storeFloats);
 }

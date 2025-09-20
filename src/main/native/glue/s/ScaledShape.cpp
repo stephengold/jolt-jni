@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,45 +44,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShape_createSc
     return reinterpret_cast<jlong> (pResult);
 }
 
-inline static const Vec3 getScale(jlong scaledVa) {
+/*
+ * Class:     com_github_stephengold_joltjni_ScaledShape
+ * Method:    getScale
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ScaledShape_getScale
+  (JNIEnv *pEnv, jclass, jlong scaledVa, jobject storeFloats) {
     const ScaledShape * const pScaled
             = reinterpret_cast<ScaledShape *> (scaledVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pScaled->GetScale();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ScaledShape
- * Method:    getScaleX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShape_getScaleX
-  (JNIEnv *, jclass, jlong scaledVa) {
-    const Vec3 factors = getScale(scaledVa);
-    const float result = factors.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ScaledShape
- * Method:    getScaleY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShape_getScaleY
-  (JNIEnv *, jclass, jlong scaledVa) {
-    const Vec3 factors = getScale(scaledVa);
-    const float result = factors.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ScaledShape
- * Method:    getScaleZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShape_getScaleZ
-  (JNIEnv *, jclass, jlong scaledVa) {
-    const Vec3 factors = getScale(scaledVa);
-    const float result = factors.GetZ();
-    return result;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
