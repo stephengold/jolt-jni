@@ -105,6 +105,54 @@ public class FilteredContactListener extends ContactListener {
     }
 
     /**
+     * Test whether the {@code onContactAdded()} callback is enabled.
+     *
+     * @return {@code true} if enabled, otherwise {@code false}
+     */
+    public boolean getEnableAdded() {
+        long listenerVa = va();
+        boolean result = getEnableAdded(listenerVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the {@code onContactPersisted()} callback is enabled.
+     *
+     * @return {@code true} if enabled, otherwise {@code false}
+     */
+    public boolean getEnablePersisted() {
+        long listenerVa = va();
+        boolean result = getEnablePersisted(listenerVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the {@code onContactRemoved()} callback is enabled.
+     *
+     * @return {@code true} if enabled, otherwise {@code false}
+     */
+    public boolean getEnableRemoved() {
+        long listenerVa = va();
+        boolean result = getEnableRemoved(listenerVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether the {@code onContactValidate()} callback is enabled.
+     *
+     * @return {@code true} if enabled, otherwise {@code false}
+     */
+    public boolean getEnableValidate() {
+        long listenerVa = va();
+        boolean result = getEnableValidate(listenerVa);
+
+        return result;
+    }
+
+    /**
      * Access the object-layer pair filter.
      *
      * @return the pre-existing instance, or {@code null} if none
@@ -241,6 +289,50 @@ public class FilteredContactListener extends ContactListener {
     }
 
     /**
+     * Enable or disable the {@code onContactAdded()} callback.
+     *
+     * @param enable {@code true} to enable the callback, {@code false} to
+     * disable it
+     */
+    public void setEnableAdded(boolean enable) {
+        long listenerVa = va();
+        setEnableAdded(listenerVa, enable);
+    }
+
+    /**
+     * Enable or disable the {@code onContactPersisted()} callback.
+     *
+     * @param enable {@code true} to enable the callback, {@code false} to
+     * disable it
+     */
+    public void setEnablePersisted(boolean enable) {
+        long listenerVa = va();
+        setEnablePersisted(listenerVa, enable);
+    }
+
+    /**
+     * Enable or disable the {@code onContactRemoved()} callback.
+     *
+     * @param enable {@code true} to enable the callback, {@code false} to
+     * disable it
+     */
+    public void setEnableRemoved(boolean enable) {
+        long listenerVa = va();
+        setEnableRemoved(listenerVa, enable);
+    }
+
+    /**
+     * Enable or disable the {@code onContactValidate()} callback.
+     *
+     * @param enable {@code true} to enable the callback, {@code false} to
+     * disable it
+     */
+    public void setEnableValidate(boolean enable) {
+        long listenerVa = va();
+        setEnableValidate(listenerVa, enable);
+    }
+
+    /**
      * Replace the listener's layer-pair filter.
      *
      * @param olpFilter the desired filter, or {@code null} for none
@@ -266,6 +358,14 @@ public class FilteredContactListener extends ContactListener {
 
     native private static int getBroadPhaseLayerFilterMode(long listenerVa);
 
+    native private static boolean getEnableAdded(long listenerVa);
+
+    native private static boolean getEnablePersisted(long listenerVa);
+
+    native private static boolean getEnableRemoved(long listenerVa);
+
+    native private static boolean getEnableValidate(long listenerVa);
+
     native private static void setBodyFilter(
             long listenerVa, long bodyFilterVa);
 
@@ -276,6 +376,17 @@ public class FilteredContactListener extends ContactListener {
 
     native private static void setBroadPhaseLayerFilterMode(
             long listenerVa, int ordinal);
+
+    native private static void setEnableAdded(long listenerVa, boolean enable);
+
+    native private static void setEnablePersisted(
+            long listenerVa, boolean enable);
+
+    native private static void setEnableRemoved(
+            long listenerVa, boolean enable);
+
+    native private static void setEnableValidate(
+            long listenerVa, boolean enable);
 
     native private static void setObjectLayerPairFilter(
             long listenerVa, long olpFilterVa);
