@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstBodyLockInterface;
+
 /**
  * Lock multiple bodies for read-write access.
  *
@@ -33,7 +35,7 @@ public class BodyLockMultiWrite extends BodyLockMultiBase {
     /**
      * the interface to use
      */
-    final private BodyLockInterface bli;
+    final private ConstBodyLockInterface bli;
     // *************************************************************************
     // constructors
 
@@ -43,11 +45,11 @@ public class BodyLockMultiWrite extends BodyLockMultiBase {
      * @param bli the interface to use (not null, unaffected)
      * @param bodyIds the IDs of the bodies to lock (not empty)
      */
-    public BodyLockMultiWrite(BodyLockInterface bli, int... bodyIds) {
+    public BodyLockMultiWrite(ConstBodyLockInterface bli, int... bodyIds) {
         assert bodyIds.length > 0 : bodyIds.length;
 
         this.bli = bli;
-        long interfaceVa = bli.va();
+        long interfaceVa = bli.targetVa();
         long lockVa = create(interfaceVa, bodyIds);
         Runnable freeingAction = () -> free(lockVa);
         setVirtualAddress(lockVa, freeingAction);
