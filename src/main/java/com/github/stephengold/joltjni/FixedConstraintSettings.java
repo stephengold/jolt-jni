@@ -25,6 +25,8 @@ import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code FixedConstraint}.
@@ -92,10 +94,9 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisX1() {
         long settingsVa = va();
-        float x = getAxisX1X(settingsVa);
-        float y = getAxisX1Y(settingsVa);
-        float z = getAxisX1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisX1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -108,10 +109,9 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisX2() {
         long settingsVa = va();
-        float x = getAxisX2X(settingsVa);
-        float y = getAxisX2Y(settingsVa);
-        float z = getAxisX2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisX2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -124,10 +124,9 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisY1() {
         long settingsVa = va();
-        float x = getAxisY1X(settingsVa);
-        float y = getAxisY1Y(settingsVa);
-        float z = getAxisY1Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisY1(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -140,10 +139,9 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getAxisY2() {
         long settingsVa = va();
-        float x = getAxisY2X(settingsVa);
-        float y = getAxisY2Y(settingsVa);
-        float z = getAxisY2Z(settingsVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAxisY2(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -156,10 +154,9 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPoint1() {
         long settingsVa = va();
-        double x = getPoint1X(settingsVa);
-        double y = getPoint1Y(settingsVa);
-        double z = getPoint1Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint1(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -172,10 +169,9 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getPoint2() {
         long settingsVa = va();
-        double x = getPoint2X(settingsVa);
-        double y = getPoint2Y(settingsVa);
-        double z = getPoint2Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPoint2(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -313,41 +309,23 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static boolean getAutoDetectPoint(long settingsVa);
 
-    native private static float getAxisX1X(long settingsVa);
+    native private static void getAxisX1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getAxisX1Y(long settingsVa);
+    native private static void getAxisX2(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getAxisX1Z(long settingsVa);
+    native private static void getAxisY1(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getAxisX2X(long settingsVa);
+    native private static void getAxisY2(
+            long settingsVa, FloatBuffer storeFloats);
 
-    native private static float getAxisX2Y(long settingsVa);
+    native private static void getPoint1(
+            long settingsVa, DoubleBuffer storeDoubles);
 
-    native private static float getAxisX2Z(long settingsVa);
-
-    native private static float getAxisY1X(long settingsVa);
-
-    native private static float getAxisY1Y(long settingsVa);
-
-    native private static float getAxisY1Z(long settingsVa);
-
-    native private static float getAxisY2X(long settingsVa);
-
-    native private static float getAxisY2Y(long settingsVa);
-
-    native private static float getAxisY2Z(long settingsVa);
-
-    native private static double getPoint1X(long settingsVa);
-
-    native private static double getPoint1Y(long settingsVa);
-
-    native private static double getPoint1Z(long settingsVa);
-
-    native private static double getPoint2X(long settingsVa);
-
-    native private static double getPoint2Y(long settingsVa);
-
-    native private static double getPoint2Z(long settingsVa);
+    native private static void getPoint2(
+            long settingsVa, DoubleBuffer storeDoubles);
 
     native private static int getSpace(long settingsVa);
 

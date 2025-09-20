@@ -61,236 +61,104 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSe
 
 /*
  * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisX1X
- * Signature: (J)F
+ * Method:    getAxisX1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisX1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisX1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const FixedConstraintSettings * const pSettings
             = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX1.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mAxisX1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisX1Y
- * Signature: (J)F
+ * Method:    getAxisX2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisX1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisX2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const FixedConstraintSettings * const pSettings
             = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX1.GetY();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mAxisX2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisX1Z
- * Signature: (J)F
+ * Method:    getAxisY1
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisX1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisY1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const FixedConstraintSettings * const pSettings
             = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX1.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mAxisY1;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisX2X
- * Signature: (J)F
+ * Method:    getAxisY2
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisX2X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisY2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const FixedConstraintSettings * const pSettings
             = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX2.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mAxisY2;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisX2Y
- * Signature: (J)F
+ * Method:    getPoint1
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisX2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getPoint1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
+   const FixedConstraintSettings * const pSettings
             = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX2.GetY();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPoint1;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisX2Z
- * Signature: (J)F
+ * Method:    getPoint2
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisX2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getPoint2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
+   const FixedConstraintSettings * const pSettings
             = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisX2.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisY1X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisY1X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY1.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisY1Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisY1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisY1Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisY1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisY2X
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisY2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisY2Y
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisY2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getAxisY2Z
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getAxisY2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const float result = pSettings->mAxisY2.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getPoint1X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getPoint1X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getPoint1Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getPoint1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getPoint1Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getPoint1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getPoint2X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getPoint2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getPoint2Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getPoint2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
- * Method:    getPoint2Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_getPoint2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const FixedConstraintSettings * const pSettings
-            = reinterpret_cast<FixedConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPoint2;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
