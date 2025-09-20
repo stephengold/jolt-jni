@@ -177,41 +177,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSet
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
- * Method:    getOffsetX
- * Signature: (J)F
+ * Method:    getOffset
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getOffsetX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getOffset
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const HeightFieldShapeSettings * const pSettings
             = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
-    const float result = pSettings->mOffset.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
- * Method:    getOffsetY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getOffsetY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HeightFieldShapeSettings * const pSettings
-            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
-    const float result = pSettings->mOffset.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
- * Method:    getOffsetZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getOffsetZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HeightFieldShapeSettings * const pSettings
-            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
-    const float result = pSettings->mOffset.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mOffset;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -229,41 +207,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
- * Method:    getScaleX
- * Signature: (J)F
+ * Method:    getScale
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getScaleX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getScale
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const HeightFieldShapeSettings * const pSettings
             = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
-    const float result = pSettings->mScale.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
- * Method:    getScaleY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getScaleY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HeightFieldShapeSettings * const pSettings
-            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
-    const float result = pSettings->mScale.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
- * Method:    getScaleZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_getScaleZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const HeightFieldShapeSettings * const pSettings
-            = reinterpret_cast<HeightFieldShapeSettings *> (settingsVa);
-    const float result = pSettings->mScale.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mScale;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

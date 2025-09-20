@@ -265,10 +265,9 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      */
     public Vec3 getOffset() {
         long settingsVa = va();
-        float dx = getOffsetX(settingsVa);
-        float dy = getOffsetY(settingsVa);
-        float dz = getOffsetZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getOffset(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -294,10 +293,9 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      */
     public Vec3 getScale() {
         long settingsVa = va();
-        float sx = getScaleX(settingsVa);
-        float sy = getScaleY(settingsVa);
-        float sz = getScaleZ(settingsVa);
-        Vec3 result = new Vec3(sx, sy, sz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getScale(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -413,19 +411,13 @@ public class HeightFieldShapeSettings extends ShapeSettings {
 
     native private static float getMinHeightValue(long settingsVa);
 
-    native private static float getOffsetX(long settingsVa);
-
-    native private static float getOffsetY(long settingsVa);
-
-    native private static float getOffsetZ(long settingsVa);
+    native private static void getOffset(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static int getSampleCount(long settingsVa);
 
-    native private static float getScaleX(long settingsVa);
-
-    native private static float getScaleY(long settingsVa);
-
-    native private static float getScaleZ(long settingsVa);
+    native private static void getScale(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static void setActiveEdgeCosThresholdAngle(
             long settingsVa, float cosine);
