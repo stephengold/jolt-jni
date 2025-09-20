@@ -1,5 +1,23 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.2.0 released on TBD
+
++ Added 3 classes for efficient/flexible contact listening:
+  + `ContactListenerList`
+  + `EFilterMode`
+  + `FilteredContactListener`
++ Generalized 2 body-lock multi constructors to solve issue #25.
++ Added 4 methods to the `BodyInterface` class, for avoiding garbage:
+  + `getAngularVelocity(int, Vec3)`
+  + `getLinearVelocity(int, Vec3)`
+  + `getPosition(int, RVec3)`
+  + `getRotation(int, Quat)`
++ Added `getRefCount()` to the `ConstShape` interface.
++ Generalized 2 `PhysicsSystem` setters to accept `null` arguments.
++ Updated the Jolt-Physics sourcecode and assets to e594aad (=sg250918).
++ Updated the OSHI library to v6.9.0 .
+
+
 ## Version 3.1.0 released on 8 September 2025
 
 + Allow use of both `close()` and a cleaner thread in a single app.
@@ -81,7 +99,7 @@ Bugfix:  many `CharacterRefC` and `CharacterVirtualRefC` methods crash the JVM
 
 + Added many public methods and constructors to the libraries.
 + Added run-time checks.
-+ Updated the Jolt-Physics sourcecode and assets to 4366713 (sg250829)
++ Updated the Jolt-Physics sourcecode and assets to 4366713 (=sg250829).
 
 
 ## Version 2.2.0 released on 10 August 2025
@@ -203,7 +221,7 @@ Bugfix:  many `CharacterRefC` and `CharacterVirtualRefC` methods crash the JVM
   + `ConstVolume`
 
 + Added many public methods and constructors to the libraries.
-+ Updated the Jolt source code and assets to 2405ff1 (sg250628).
++ Updated the Jolt source code and assets to 2405ff1 (=sg250628).
 + Updated the OSHI library to v6.8.2 .
 
 
