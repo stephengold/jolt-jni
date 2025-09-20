@@ -260,7 +260,7 @@ public class FilteredContactListener extends ContactListener {
     // *************************************************************************
     // native private methods
 
-    native private static long createDefault();
+    native private long createDefault();
 
     native private static int getBodyFilterMode(long listenerVa);
 
