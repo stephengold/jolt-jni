@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.ESupportMode;
+import com.github.stephengold.joltjni.readonly.ConstConvexShape;
 import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -33,7 +34,7 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class ConvexShape extends Shape {
+abstract public class ConvexShape extends Shape implements ConstConvexShape {
     // *************************************************************************
     // constructors
 
@@ -57,10 +58,23 @@ abstract public class ConvexShape extends Shape {
     // new methods exposed
 
     /**
+     * Alter the density.
+     *
+     * @param density the desired density
+     */
+    public void setDensity(float density) {
+        long shapeVa = va();
+        setDensity(shapeVa, density);
+    }
+    // *************************************************************************
+    // ConstConvexShape methods
+
+    /**
      * Return the density.
      *
      * @return the density
      */
+    @Override
     public float getDensity() {
         long shapeVa = va();
         float result = getDensity(shapeVa);
@@ -83,6 +97,7 @@ abstract public class ConvexShape extends Shape {
      * @param baseOffset the base offset to use (ignored if the native library
      * doesn't implement debug rendering)
      */
+    @Override
     public void getSubmergedVolume(
             Mat44Arg comTransform, Vec3Arg scale, ConstPlane surface,
             float[] storeTotalVolume, float[] storeSubmergedVolume,
@@ -119,6 +134,7 @@ abstract public class ConvexShape extends Shape {
      * unaffected)
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public Support getSupportFunction(
             ESupportMode supportMode, SupportBuffer buffer, Vec3Arg scale) {
         long shapeVa = va();
@@ -132,16 +148,6 @@ abstract public class ConvexShape extends Shape {
         Support result = new Support(this, supportVa);
 
         return result;
-    }
-
-    /**
-     * Alter the density.
-     *
-     * @param density the desired density
-     */
-    public void setDensity(float density) {
-        long shapeVa = va();
-        setDensity(shapeVa, density);
     }
     // *************************************************************************
     // native private methods
