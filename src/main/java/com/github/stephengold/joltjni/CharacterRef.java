@@ -168,6 +168,39 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     /**
      * Alter the character's linear velocity using the locking body interface.
      *
+     * @param vx the X component of the desired velocity (in meters per second,
+     * default=0)
+     * @param vy the Y component of the desired velocity (in meters per second,
+     * default=0)
+     * @param vz the Z component of the desired velocity (in meters per second,
+     * default=0)
+     */
+    public void setLinearVelocity(float vx, float vy, float vz) {
+        setLinearVelocity(vx, vy, vz, true);
+    }
+
+    /**
+     * Alter the character's linear velocity.
+     *
+     * @param vx the X component of the desired velocity (in meters per second,
+     * default=0)
+     * @param vy the Y component of the desired velocity (in meters per second,
+     * default=0)
+     * @param vz the Z component of the desired velocity (in meters per second,
+     * default=0)
+     * @param lockBodies {@code true} &rarr; use the locking body interface,
+     * {@code false} &rarr; use the non-locking body interface (default=true)
+     */
+    public void setLinearVelocity(
+            float vx, float vy, float vz, boolean lockBodies) {
+        long characterVa = targetVa();
+        com.github.stephengold.joltjni.Character.setLinearVelocity(
+                characterVa, vx, vy, vz, lockBodies);
+    }
+
+    /**
+     * Alter the character's linear velocity using the locking body interface.
+     *
      * @param velocity the desired velocity (meters per second in system
      * coordinates, not null, unaffected)
      */
@@ -184,12 +217,10 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
     public void setLinearVelocity(Vec3Arg velocity, boolean lockBodies) {
-        long characterVa = targetVa();
         float vx = velocity.getX();
         float vy = velocity.getY();
         float vz = velocity.getZ();
-        com.github.stephengold.joltjni.Character.setLinearVelocity(
-                characterVa, vx, vy, vz, lockBodies);
+        setLinearVelocity(vx, vy, vz, lockBodies);
     }
 
     /**

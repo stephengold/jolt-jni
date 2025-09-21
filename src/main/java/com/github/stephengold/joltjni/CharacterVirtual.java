@@ -208,15 +208,29 @@ public class CharacterVirtual
     /**
      * Alter the character's linear velocity.
      *
+     * @param vx the X component of the desired velocity (in meters per second,
+     * default=0)
+     * @param vy the Y component of the desired velocity (in meters per second,
+     * default=0)
+     * @param vz the Z component of the desired velocity (in meters per second,
+     * default=0)
+     */
+    public void setLinearVelocity(float vx, float vy, float vz) {
+        long characterVa = va();
+        setLinearVelocity(characterVa, vx, vy, vz);
+    }
+
+    /**
+     * Alter the character's linear velocity.
+     *
      * @param velocity the desired velocity vector (meters per second in system
      * coordinates, default=(0,0,0))
      */
     public void setLinearVelocity(Vec3Arg velocity) {
-        long characterVa = va();
         float vx = velocity.getX();
         float vy = velocity.getY();
         float vz = velocity.getZ();
-        setLinearVelocity(characterVa, vx, vy, vz);
+        setLinearVelocity(vx, vy, vz);
     }
 
     /**
