@@ -171,20 +171,6 @@ public class CharacterSettings
     // RefTarget methods
 
     /**
-     * Count the active references to the native {@code CharacterSettings}. The
-     * settings are unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    @Override
-    public int getRefCount() {
-        long settingsVa = va();
-        int result = getRefCount(settingsVa);
-
-        return result;
-    }
-
-    /**
      * Mark the native {@code CharacterSettings} as embedded.
      */
     @Override
@@ -220,8 +206,6 @@ public class CharacterSettings
     native static int getLayer(long settingsVa);
 
     native static float getMass(long settingsVa);
-
-    native private static int getRefCount(long settingsVa);
 
     native private static void setEmbedded(long settingsVa);
 

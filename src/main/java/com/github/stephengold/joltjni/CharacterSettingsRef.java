@@ -258,6 +258,20 @@ final public class CharacterSettingsRef
     }
 
     /**
+     * Count the active references to the native {@code CharacterSettings}. The
+     * settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long settingsVa = targetVa();
+        int result = CharacterBaseSettings.getRefCount(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Access the {@code Shape}. (native attribute: mShape)
      *
      * @return a new JVM object with the pre-existing native object assigned, or

@@ -464,20 +464,6 @@ public class CharacterVirtualSettings
     // RefTarget methods
 
     /**
-     * Count the active references to the native
-     * {@code CharacterVirtualSettings}. The settings are unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    @Override
-    public int getRefCount() {
-        long settingsVa = va();
-        int result = getRefCount(settingsVa);
-
-        return result;
-    }
-
-    /**
      * Mark the native {@code CharacterVirtualSettings} as embedded.
      */
     @Override
@@ -535,8 +521,6 @@ public class CharacterVirtualSettings
     native static float getPenetrationRecoverySpeed(long settingsVa);
 
     native static float getPredictiveContactDistance(long settingsVa);
-
-    native private static int getRefCount(long settingsVa);
 
     native static void getShapeOffset(long settingsVa, FloatBuffer storeFloats);
 

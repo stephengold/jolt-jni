@@ -151,6 +151,20 @@ public class CharacterBaseSettings
     }
 
     /**
+     * Count the active references to the native {@code CharacterBaseSettings}.
+     * The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long settingsVa = va();
+        int result = getRefCount(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Access the {@code Shape}. (native attribute: mShape)
      *
      * @return a new JVM object with the pre-existing native object assigned, or
@@ -202,6 +216,8 @@ public class CharacterBaseSettings
     native static boolean getEnhancedInternalEdgeRemoval(long settingsVa);
 
     native static float getMaxSlopeAngle(long settingsVa);
+
+    native static int getRefCount(long settingsVa);
 
     native static long getShape(long settingsVa);
 

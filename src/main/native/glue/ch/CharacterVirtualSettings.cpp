@@ -243,19 +243,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSet
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
- * Method:    getRefCount
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_getRefCount
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterVirtualSettings * const pSettings
-            = reinterpret_cast<CharacterVirtualSettings *> (settingsVa);
-    const uint32 result = pSettings->GetRefCount();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
  * Method:    getShapeOffset
  * Signature: (JLjava/nio/FloatBuffer;)V
  */

@@ -48,6 +48,14 @@ public interface ConstCharacterBaseSettings extends ConstJoltPhysicsObject {
     float getMaxSlopeAngle();
 
     /**
+     * Count the active references to the native {@code CharacterBaseSettings}.
+     * The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    int getRefCount();
+
+    /**
      * Access the {@code Shape}. The settings are unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned, or

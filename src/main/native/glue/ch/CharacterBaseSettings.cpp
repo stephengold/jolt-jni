@@ -58,6 +58,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettin
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
+ * Method:    getRefCount
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getRefCount
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const CharacterBaseSettings * const pSettings
+            = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
+    const uint32 result = pSettings->GetRefCount();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterBaseSettings
  * Method:    getShape
  * Signature: (J)J
  */

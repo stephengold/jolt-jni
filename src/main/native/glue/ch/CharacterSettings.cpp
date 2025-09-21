@@ -113,19 +113,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_g
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterSettings
- * Method:    getRefCount
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_getRefCount
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const CharacterSettings * const pSettings
-            = reinterpret_cast<CharacterSettings *> (settingsVa);
-    const uint32 result = pSettings->GetRefCount();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_CharacterSettings
  * Method:    setEmbedded
  * Signature: (J)V
  */
