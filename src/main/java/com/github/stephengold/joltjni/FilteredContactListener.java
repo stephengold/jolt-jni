@@ -257,6 +257,9 @@ public class FilteredContactListener extends ContactListener {
 
     /**
      * Replace the listener's broadphase-layer filter.
+     * <p>
+     * Because {@code onContactRemoved()} callbacks lack layer information,
+     * broadphase-layer filters don't affect them.
      *
      * @param bplFilter the desired filter, or {@code null} for none
      * (default=none)
@@ -275,6 +278,9 @@ public class FilteredContactListener extends ContactListener {
 
     /**
      * Alter the broadphase-layer filter mode.
+     * <p>
+     * Because {@code onContactRemoved()} callbacks lack layer information,
+     * broadphase-layer filter modes don't affect them.
      *
      * @param mode the desired mode (not {@code null}, default=Both)
      * @return the modified listener, for chaining
@@ -334,6 +340,9 @@ public class FilteredContactListener extends ContactListener {
 
     /**
      * Replace the listener's layer-pair filter.
+     * <p>
+     * Because {@code onContactRemoved()} callbacks lack layer information,
+     * layer-pair filters don't affect them.
      *
      * @param olpFilter the desired filter, or {@code null} for none
      * (default=none)
