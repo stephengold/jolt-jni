@@ -126,7 +126,7 @@ abstract public class ConvexShape extends Shape implements ConstConvexShape {
     }
 
     /**
-     * Access the shape's support function.
+     * Generate a support function for the shape.
      *
      * @param supportMode how to handle convex radius (not null)
      * @param buffer buffer storage (not null)
@@ -145,7 +145,7 @@ abstract public class ConvexShape extends Shape implements ConstConvexShape {
         float sz = scale.getZ();
         long supportVa
                 = getSupportFunction(shapeVa, ordinal, bufferVa, sx, sy, sz);
-        Support result = new Support(this, supportVa);
+        Support result = new Support(buffer, supportVa);
 
         return result;
     }

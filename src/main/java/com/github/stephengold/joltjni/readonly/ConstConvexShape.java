@@ -60,7 +60,7 @@ public interface ConstConvexShape extends ConstShape {
             Vec3 storeCenterOfBuoyancy, RVec3Arg baseOffset);
 
     /**
-     * Access the shape's support function.
+     * Generate a support function for the shape.
      *
      * @param supportMode how to handle convex radius (not null)
      * @param buffer buffer storage (not null)
