@@ -121,10 +121,12 @@ public:
         mpVM->DetachCurrentThread();
     }
     void OnContactRemoved(const SubShapeIDPair& pair) override {
+        if (!mEnableRemoved) {
+            return;
+        }
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
-
         const jlong pairVa = reinterpret_cast<jlong> (&pair);
         pAttachEnv->CallVoidMethod(mJavaObject, mRemovedMethodId, pairVa);
         EXCEPTION_CHECK(pAttachEnv)
