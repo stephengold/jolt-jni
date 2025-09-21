@@ -106,7 +106,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings
  * Method:    getUp
  * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getSupportingVolumeNx
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBaseSettings_getUp
   (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const CharacterBaseSettings * const pSettings
             = reinterpret_cast<CharacterBaseSettings *> (settingsVa);
