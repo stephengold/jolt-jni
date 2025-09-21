@@ -187,11 +187,11 @@ public:
         if (mpBplFilter) {
             const BroadPhaseLayer bpl1 = inBody1.GetBroadPhaseLayer();
             const bool collide1 = mpBplFilter->ShouldCollide(bpl1);
-            if (mBodyFilterMode == EFilterMode::Both && !collide1) return true;
-            if (mBodyFilterMode == EFilterMode::Neither && collide1) return true;
+            if (mBplFilterMode == EFilterMode::Both && !collide1) return true;
+            if (mBplFilterMode == EFilterMode::Neither && collide1) return true;
             const BroadPhaseLayer bpl2 = inBody2.GetBroadPhaseLayer();
             const bool collide2 = mpBplFilter->ShouldCollide(bpl2);
-            switch (mBodyFilterMode) {
+            switch (mBplFilterMode) {
                 case EFilterMode::Both:
                     if (!collide2) return true;
                     break;
