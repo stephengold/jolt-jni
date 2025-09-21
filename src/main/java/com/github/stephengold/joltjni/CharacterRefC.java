@@ -258,7 +258,7 @@ final public class CharacterRefC
      * Identify the face on the supporting surface where contact is occurring.
      * The character is unaffected.
      *
-     * @return a {@code SubShapeId} value
+     * @return a {@code SubShapeID} value
      */
     @Override
     public int getGroundSubShapeId() {

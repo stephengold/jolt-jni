@@ -204,7 +204,7 @@ public class Wheel extends NonCopyable implements ConstWheel {
      * Return ID of the sub-shape that's supporting the vehicle. (native method:
      * GetContactSubShapeID)
      *
-     * @return the sub-shape ID
+     * @return a {@code SubShapeID} value
      */
     @Override
     public int getContactSubShapeId() {
