@@ -1,5 +1,18 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.3.0 released on TBD
+
++ Bugfixes:
+  + 3 copy-paste errors in FilteredContactListener.cpp (issue #26)
+  + `FilteredContactListener` contact removals ignore body-filter settings
+  + `FilteredContactListener` ignores its "enable removed" setting
+  + heap corruption after invoking `ConvexShape.getSupportFunction()`
+  + `UnsatisfiedLinkError` in `CharacterBaseSettings`
++ Added the `ConstConvexShape` interface.
++ Added the `getRefCount()` method to the `ConstCharacterBase` interface.
++ Added more `setLinearVelocity()` signatures for physics characters.
+
+
 ## Version 3.2.0 released on 20 September 2025
 
 + Added 3 classes for efficient/flexible contact listening:
