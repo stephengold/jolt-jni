@@ -124,6 +124,33 @@ public:
         if (!mEnableRemoved) {
             return;
         }
+        if (mBodyFilterMode == EFilterMode::Skip) {
+            return;
+        }
+        if (mpBodyFilter) {
+            const BodyID& id1 = pair.GetBody1ID();
+            const bool collide1 = mpBodyFilter->ShouldCollide(id1);
+            if (mBodyFilterMode == EFilterMode::Both && !collide1) return;
+            if (mBodyFilterMode == EFilterMode::Neither && collide1) return;
+            const BodyID& id2 = pair.GetBody2ID();
+            const bool collide2 = mpBodyFilter->ShouldCollide(id2);
+            switch (mBodyFilterMode) {
+                case EFilterMode::Both:
+                    if (!collide2) return;
+                    break;
+                case EFilterMode::Either:
+                    if (!(collide1 || collide2)) return;
+                    break;
+                case EFilterMode::Neither:
+                    if (collide2) return;
+                    break;
+                case EFilterMode::NotBoth:
+                    if (collide1 && collide2) return;
+                    break;
+                case EFilterMode::Skip:
+                    JPH_ASSERT(false);
+            }
+        }
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
