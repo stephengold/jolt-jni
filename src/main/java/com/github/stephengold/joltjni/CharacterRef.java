@@ -602,6 +602,20 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
+     * Count the active references to the native {@code Character}. The settings
+     * are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long characterVa = targetVa();
+        int result = CharacterBase.getRefCount(characterVa);
+
+        return result;
+    }
+
+    /**
      * Copy the orientation of the character using the locking body interface.
      * The character is unaffected.
      *

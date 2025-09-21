@@ -696,6 +696,20 @@ final public class CharacterVirtualRef
     }
 
     /**
+     * Count the active references to the native {@code CharacterVirtual}. The
+     * settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getRefCount() {
+        long characterVa = targetVa();
+        int result = CharacterBase.getRefCount(characterVa);
+
+        return result;
+    }
+
+    /**
      * Copy the orientation of the character. The character is unaffected.
      *
      * @return a new rotation quaternion (in system coordinates)

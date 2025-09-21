@@ -358,7 +358,7 @@ abstract public class CharacterBase
     native static void getGroundVelocity(
             long characterVa, FloatBuffer storeFloats);
 
-    native private static int getRefCount(long characterVa);
+    native static int getRefCount(long characterVa);
 
     native static long getShape(long characterVa);
 

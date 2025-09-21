@@ -107,6 +107,14 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
     Vec3 getGroundVelocity();
 
     /**
+     * Count the active references to the native character. The character is
+     * unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    int getRefCount();
+
+    /**
      * Access the character's shape. The character is unaffected.
      *
      * @return a new immutable JVM object with the pre-existing native object
