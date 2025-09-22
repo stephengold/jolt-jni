@@ -32,31 +32,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_Support
- * Method:    getSupportBulk
- * Signature: (Ljava/nio/FloatBuffer;Ljava/nio/FloatBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Support_getSupportBulk
-  (JNIEnv *pEnv, jobject supportVa, jobject directions, jobject storePoints) {
-    const ConvexShape::Support * const pSupport
-            = reinterpret_cast<ConvexShape::Support *> (supportVa);
-    const DIRECT_FLOAT_BUFFER(pEnv, directions, pFloatsIn, capacityFloatsIn);
-    JPH_ASSERT((capacityFloatsIn % 3) == 0);
-    DIRECT_FLOAT_BUFFER(pEnv, storePoints, pFloatsOut, capacityFloatsOut);
-    JPH_ASSERT(capacityFloatsOut == capacityFloatsIn);
-    for (int offset = 0; offset < capacityFloatsIn; offset += 3) {
-        const float dx = pFloatsIn[offset];
-        const float dy = pFloatsIn[offset + 1];
-        const float dz = pFloatsIn[offset + 2];
-        const Vec3 direction(dx, dy, dz);
-        const Vec3 point = pSupport->GetSupport(direction);
-        pFloatsOut[offset] = point.GetX();
-        pFloatsOut[offset + 1] = point.GetY();
-        pFloatsOut[offset + 2] = point.GetZ();
-    }
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_Support
  * Method:    getConvexRadius
  * Signature: (J)F
  */
@@ -85,4 +60,29 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Support_getSupport
     pFloats[0] = result.GetX();
     pFloats[1] = result.GetY();
     pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Support
+ * Method:    getSupportBulk
+ * Signature: (JLjava/nio/FloatBuffer;Ljava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Support_getSupportBulk
+  (JNIEnv *pEnv, jclass, jlong supportVa, jobject directions, jobject storePoints) {
+    const ConvexShape::Support * const pSupport
+            = reinterpret_cast<ConvexShape::Support *> (supportVa);
+    const DIRECT_FLOAT_BUFFER(pEnv, directions, pFloatsIn, capacityFloatsIn);
+    JPH_ASSERT((capacityFloatsIn % 3) == 0);
+    DIRECT_FLOAT_BUFFER(pEnv, storePoints, pFloatsOut, capacityFloatsOut);
+    JPH_ASSERT(capacityFloatsOut == capacityFloatsIn);
+    for (int offset = 0; offset < capacityFloatsIn; offset += 3) {
+        const float dx = pFloatsIn[offset];
+        const float dy = pFloatsIn[offset + 1];
+        const float dz = pFloatsIn[offset + 2];
+        const Vec3 direction(dx, dy, dz);
+        const Vec3 point = pSupport->GetSupport(direction);
+        pFloatsOut[offset] = point.GetX();
+        pFloatsOut[offset + 1] = point.GetY();
+        pFloatsOut[offset + 2] = point.GetZ();
+    }
 }

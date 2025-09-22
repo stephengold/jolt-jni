@@ -99,8 +99,14 @@ public class Support extends JoltPhysicsObject {
      * @param storePoints storage for location vectors relative to the shape's
      * center of mass (not null, same capacity as {@code directions})
      */
-    native public void getSupportBulk(
-            FloatBuffer directions, FloatBuffer storePoints);
+    public void getSupportBulk(
+            FloatBuffer directions, FloatBuffer storePoints) {
+        long supportVa = va();
+        int capacity = directions.capacity();
+        assert (capacity % 3) == 0 : "capacity = " + capacity;
+        assert storePoints.capacity() == capacity;
+        getSupportBulk(supportVa, directions, storePoints);
+    }
     // *************************************************************************
     // native private methods
 
@@ -108,4 +114,7 @@ public class Support extends JoltPhysicsObject {
 
     native private static void getSupport(long supportVa,
             float dx, float dy, float dz, FloatBuffer storeFloats);
+
+    native private static void getSupportBulk(
+            long supportVa, FloatBuffer directions, FloatBuffer storePoints);
 }
