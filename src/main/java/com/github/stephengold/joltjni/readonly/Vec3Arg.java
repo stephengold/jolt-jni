@@ -48,6 +48,15 @@ public interface Vec3Arg {
     void copyTo(FloatBuffer storeBuffer);
 
     /**
+     * Write all 3 components to the specified position in the specified buffer.
+     *
+     * @param storeFloats the destination buffer (not null,
+     * capacity&ge;startPos+3)
+     * @param startPos the starting position in the buffer (&ge;0)
+     */
+    void copyTo(FloatBuffer storeFloats, int startPos);
+
+    /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
      * @param rightFactor the vector to cross with the current one (not null,

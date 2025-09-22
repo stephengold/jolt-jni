@@ -650,6 +650,20 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Write all 3 components to the specified position in the specified buffer.
+     *
+     * @param storeFloats the destination buffer (not null,
+     * capacity&ge;startPos+3)
+     * @param startPos the starting position in the buffer (&ge;0)
+     */
+    @Override
+    public void copyTo(FloatBuffer storeFloats, int startPos) {
+        storeFloats.put(startPos, x);
+        storeFloats.put(startPos + 1, y);
+        storeFloats.put(startPos + 2, z);
+    }
+
+    /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
      * @param rightFactor the vector to cross with the current one (not null,
