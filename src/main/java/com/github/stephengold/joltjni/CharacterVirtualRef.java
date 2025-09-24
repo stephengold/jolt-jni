@@ -950,7 +950,7 @@ final public class CharacterVirtualRef
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static long copy(long refVa);
 
@@ -958,7 +958,7 @@ final public class CharacterVirtualRef
 
     native private static void free(long refVa);
 
-    native private static void freeWithSystem(long refVa, PhysicsSystem unused);
+    native static void freeWithSystem(long refVa, PhysicsSystem unused);
 
     native private static long getPtr(long refVa);
 

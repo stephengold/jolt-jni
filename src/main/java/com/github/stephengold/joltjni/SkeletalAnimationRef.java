@@ -123,13 +123,13 @@ final public class SkeletalAnimationRef extends Ref {
         return result;
     }
     // *************************************************************************
-    // native private methods
+    // native methods
 
     native private static long copy(long refVa);
 
     native private static long createDefault();
 
-    native private static void free(long refVa);
+    native static void free(long refVa);
 
     native private static long getPtr(long refVa);
 }
