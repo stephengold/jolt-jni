@@ -113,7 +113,7 @@ public class VehicleConstraint
     /**
      * Access the vehicle body.
      *
-     * @return a new JVM object with the pre-existing native object assigned
+     * @return the pre-existing instance
      */
     public Body getVehicleBody() {
         return body;

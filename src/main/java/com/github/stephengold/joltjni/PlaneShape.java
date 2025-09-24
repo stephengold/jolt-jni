@@ -91,8 +91,8 @@ public class PlaneShape extends Shape {
     /**
      * Copy the shape's surface. The shape is unaffected.
      * <p>
-     * Different semantics from the native {@code GetPlane()}, which
-     * returns a const reference, not a copy.
+     * Different semantics from the native {@code GetPlane()}, which returns a
+     * const reference, not a copy.
      *
      * @return a new object
      */

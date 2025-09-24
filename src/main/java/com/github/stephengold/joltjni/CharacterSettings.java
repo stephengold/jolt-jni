@@ -55,8 +55,7 @@ public class CharacterSettings
     }
 
     /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
+     * Temporarily access the specified settings.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)

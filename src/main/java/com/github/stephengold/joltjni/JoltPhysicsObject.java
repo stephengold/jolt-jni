@@ -134,7 +134,7 @@ abstract public class JoltPhysicsObject
 
     /**
      * Instantiate with no containing object and the specified native object
-     * assigned but not owned.
+     * assigned but not owned. This typically implies temporarily access.
      *
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
@@ -213,7 +213,7 @@ abstract public class JoltPhysicsObject
 
     /**
      * Assign a native object (assuming there's none already assigned) and
-     * freeing action.
+     * a freeing action.
      *
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)
@@ -231,14 +231,14 @@ abstract public class JoltPhysicsObject
             this.freeingActionRef.set(action);
 
             if (cleaner != null) {
-                // Register the object with the cleaner.
+                // Register the object with the cleaner:
                 cleaner.register(this, new CleanerRunnable(
                         this.freeingActionRef, this.virtualAddress));
             }
         }
     }
     // *************************************************************************
-    // AutoCloseable/ConstJoltPhysicsObject methods
+    // ConstJoltPhysicsObject methods
 
     /**
      * Free and unassign the native object if the JVM object owns it. This can
@@ -366,8 +366,7 @@ abstract public class JoltPhysicsObject
 
     /**
      * Atomically retrieve and execute the freeing action, then zero the virtual
-     * address. This static helper ensures the logic is not duplicated between
-     * the manual close() and the Cleaner's action.
+     * address.
      *
      * @param actionRef the atomic reference to the freeing action (not null)
      * @param addressRef the atomic reference to the virtual address (not null)

@@ -45,8 +45,7 @@ abstract public class ConvexShape extends Shape implements ConstConvexShape {
     }
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
+     * Temporarily access the specified shape.
      *
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)

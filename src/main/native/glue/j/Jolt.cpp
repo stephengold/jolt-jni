@@ -409,7 +409,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_registerTypes
         std::cout << "Multiple invocations of Jolt.registerTypes()!"
                 << std::endl;
         return;
-    } 
+    }
     RegisterTypes();
     gTypesAreRegistered = true;
 }
@@ -513,7 +513,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_unregisterTypes
         std::cout << "Tried to unregister types before Jolt.registerTypes()!"
                 << std::endl;
         return;
-    } 
+    }
     gTypesAreRegistered = false;
     UnregisterTypes();
 }

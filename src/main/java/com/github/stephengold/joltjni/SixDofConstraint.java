@@ -128,8 +128,8 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Return the motor state of the specified degree of freedom. The
-     * constraint is unaffected.
+     * Return the motor state of the specified degree of freedom. The constraint
+     * is unaffected.
      *
      * @param dof which DOF to alter (not null)
      * @return an enum value (not null)

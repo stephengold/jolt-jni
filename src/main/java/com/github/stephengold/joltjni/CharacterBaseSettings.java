@@ -28,7 +28,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
 /**
- * Settings used to create a {@code CharacterBase}.
+ * Settings used to create a {@code CharacterBase}. TODO make abstract
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -45,8 +45,7 @@ public class CharacterBaseSettings
     }
 
     /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
+     * Temporarily access the specified settings.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
