@@ -48,7 +48,7 @@ public class CollideShapeSettings extends CollideSettingsBase {
     public CollideShapeSettings(CollideShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
+        setVirtualAddressAsOwner(copyVa);
     }
     // *************************************************************************
     // new methods exposed
