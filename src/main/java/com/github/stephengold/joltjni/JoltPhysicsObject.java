@@ -117,13 +117,11 @@ abstract public class JoltPhysicsObject
      * Instantiate with the specified container and native object.
      *
      * @param container the containing object, or {@code null} if none
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param va the virtual address of the native object to assign (not zero)
      */
-    protected JoltPhysicsObject(
-            JoltPhysicsObject container, long virtualAddress) {
-        assert virtualAddress != 0L;
-        this.virtualAddress.set(virtualAddress);
+    protected JoltPhysicsObject(JoltPhysicsObject container, long va) {
+        assert va  != 0L;
+        virtualAddress.set(va);
 
         if (container instanceof RefTarget) {
             container = ((RefTarget) container).toRef();
@@ -136,12 +134,11 @@ abstract public class JoltPhysicsObject
      * Instantiate with no containing object and the specified native object
      * assigned but not owned. This typically implies temporarily access.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param va the virtual address of the native object to assign (not zero)
      */
-    JoltPhysicsObject(long virtualAddress) {
-        assert virtualAddress != 0L;
-        this.virtualAddress.set(virtualAddress);
+    JoltPhysicsObject(long va) {
+        assert va  != 0L;
+        virtualAddress.set(va);
         this.containingObject = null;
     }
     // *************************************************************************
@@ -200,29 +197,26 @@ abstract public class JoltPhysicsObject
     /**
      * Assign a native object, assuming there's none already assigned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param va the virtual address of the native object to assign (not zero)
      */
-    final protected void setVirtualAddress(long virtualAddress) {
-        assert virtualAddress != 0L : "invalid virtual address";
+    final protected void setVirtualAddress(long va) {
+        assert va  != 0L : "invalid virtual address";
         assert !hasAssignedNativeObject() : "native object already assigned";
         assert freeingActionRef.get() == null;
 
-        this.virtualAddress.set(virtualAddress);
+        virtualAddress.set(va);
     }
 
     /**
      * Assign a native object (assuming there's none already assigned) and a
      * freeing action.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param va the virtual address of the native object to assign (not zero)
      * @param action freeing action if the JVM object will own (be responsible
      * for freeing) the native object, or {@code null} if not responsible
      */
-    final protected void setVirtualAddress(
-            long virtualAddress, Runnable action) {
-        setVirtualAddress(virtualAddress);
+    final protected void setVirtualAddress(long va, Runnable action) {
+        setVirtualAddress(va);
 
         if (action != null) {
             assert containingObject == null : containingObject;
