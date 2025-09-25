@@ -62,9 +62,9 @@ public class RotatedTranslatedShape extends DecoratedShape {
         float rotY = rotation.getY();
         float rotZ = rotation.getZ();
         long baseShapeVa = baseShape.targetVa();
-        long scaledShapeVa = createRotatedTranslatedShape(offsetX, offsetY,
+        long rtsVa = createRotatedTranslatedShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
-        setVirtualAddressAsCoOwner(scaledShapeVa);
+        setVirtualAddressAsCoOwner(rtsVa);
     }
     // *************************************************************************
     // new methods exposed
