@@ -37,18 +37,17 @@ public class SphereShape extends ConvexShape {
      */
     public SphereShape(float radius) {
         long shapeVa = createSphereShape(radius);
-        setVirtualAddress(shapeVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(shapeVa);
     }
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
+     * Instantiate a shape with the specified native object assigned.
      *
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)
      */
     SphereShape(long shapeVa) {
-        super(shapeVa);
+        setVirtualAddressAsCoOwner(shapeVa);
     }
     // *************************************************************************
     // new methods exposed

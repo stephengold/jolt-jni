@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,14 +33,13 @@ public class TriangleShape extends ConvexShape {
     // constructors
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
+     * Instantiate a shape with the specified native object assigned.
      *
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)
      */
     TriangleShape(long shapeVa) {
-        super(shapeVa);
+        setVirtualAddressAsCoOwner(shapeVa);
     }
 
     /**
@@ -75,7 +74,7 @@ public class TriangleShape extends ConvexShape {
         float v3z = v3.getZ();
         long shapeVa = createTriangleShape(
                 v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z, convexRadius);
-        setVirtualAddress(shapeVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(shapeVa);
     }
     // *************************************************************************
     // new methods exposed

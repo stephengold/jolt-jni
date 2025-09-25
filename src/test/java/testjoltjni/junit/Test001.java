@@ -272,7 +272,7 @@ public class Test001 {
         bodyInterface.addBody(floorId, EActivation.DontActivate);
 
         Shape ballShape = new SphereShape(0.5f);
-        Assert.assertEquals(0, ballShape.getRefCount());
+        Assert.assertEquals(1, ballShape.getRefCount());
         Assert.assertEquals(EShapeSubType.Sphere, ballShape.getSubType());
         Assert.assertEquals(EShapeType.Convex, ballShape.getType());
 
@@ -315,9 +315,9 @@ public class Test001 {
         TestUtils.assertEquals(0f, 0f, 0f, ballVelocity, 1e-5f);
 
         bodyInterface.removeBody(ballId);
-        Assert.assertEquals(2, ballShape.getRefCount());
+        Assert.assertEquals(3, ballShape.getRefCount());
         bodyInterface.destroyBody(ballId);
-        Assert.assertEquals(1, ballShape.getRefCount());
+        Assert.assertEquals(2, ballShape.getRefCount());
         TestUtils.testClose(ballSettings);
 
         bodyInterface.removeBody(floorId);

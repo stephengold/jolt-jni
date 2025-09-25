@@ -72,18 +72,17 @@ public class PlaneShape extends Shape {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long shapeVa = createShape(
                 nx, ny, nz, planeConstant, materialVa, halfExtent);
-        setVirtualAddress(shapeVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(shapeVa);
     }
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
+     * Instantiate a shape with the specified native object assigned.
      *
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)
      */
     PlaneShape(long shapeVa) {
-        super(shapeVa);
+        setVirtualAddressAsCoOwner(shapeVa);
     }
     // *************************************************************************
     // new methods exposed

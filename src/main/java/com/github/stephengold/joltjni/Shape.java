@@ -55,7 +55,7 @@ abstract public class Shape extends NonCopyable
      * zero)
      */
     Shape(long shapeVa) {
-        super(shapeVa);
+        setVirtualAddressAsCoOwner(shapeVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -147,6 +147,21 @@ abstract public class Shape extends NonCopyable
         ShapeResult result = new ShapeResult(resultVa, true);
 
         return result;
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as a co-owner.
+     *
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    final protected void setVirtualAddressAsCoOwner(long shapeVa) {
+        long refVa = toRef(shapeVa);
+        Runnable freeingAction = () -> ShapeRef.free(refVa);
+        setVirtualAddress(shapeVa, freeingAction);
     }
     // *************************************************************************
     // ConstShape methods

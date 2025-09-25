@@ -226,8 +226,6 @@ abstract public class JoltPhysicsObject
 
         if (action != null) {
             assert containingObject == null : containingObject;
-            assert !(this instanceof RefTarget) : "RefTarget cannot be owner";
-
             this.freeingActionRef.set(action);
 
             if (cleaner != null) {

@@ -41,18 +41,17 @@ public class MutableCompoundShape extends CompoundShape {
      */
     public MutableCompoundShape() {
         long shapeVa = createMutableCompoundShape();
-        setVirtualAddress(shapeVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(shapeVa);
     }
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
+     * Instantiate a shape with the specified native object assigned.
      *
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)
      */
     MutableCompoundShape(long shapeVa) {
-        super(shapeVa);
+        setVirtualAddressAsCoOwner(shapeVa);
     }
     // *************************************************************************
     // new methods exposed

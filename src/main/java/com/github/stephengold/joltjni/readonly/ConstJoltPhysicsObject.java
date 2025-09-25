@@ -47,7 +47,7 @@ public interface ConstJoltPhysicsObject
      * Test whether the JVM object owns (is responsible for freeing) its
      * assigned native object. Both objects are unaffected.
      *
-     * @return {@code true} if owner, otherwise {@code false}
+     * @return {@code true} if owner or co-owner, otherwise {@code false}
      */
     boolean ownsNativeObject();
 

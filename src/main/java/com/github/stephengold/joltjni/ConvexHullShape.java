@@ -44,7 +44,7 @@ public class ConvexHullShape extends ConvexShape {
      * zero)
      */
     ConvexHullShape(long shapeVa) {
-        super(shapeVa);
+        setVirtualAddressAsCoOwner(shapeVa);
     }
     // *************************************************************************
     // new methods exposed

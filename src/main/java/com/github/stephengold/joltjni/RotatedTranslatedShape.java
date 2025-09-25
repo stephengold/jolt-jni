@@ -36,14 +36,13 @@ public class RotatedTranslatedShape extends DecoratedShape {
     // constructors
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
+     * Instantiate a shape with the specified native object assigned.
      *
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)
      */
     RotatedTranslatedShape(long shapeVa) {
-        super(shapeVa);
+        setVirtualAddressAsCoOwner(shapeVa);
     }
 
     /**
@@ -65,7 +64,7 @@ public class RotatedTranslatedShape extends DecoratedShape {
         long baseShapeVa = baseShape.targetVa();
         long scaledShapeVa = createRotatedTranslatedShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
-        setVirtualAddress(scaledShapeVa); // no owner due to ref counting
+        setVirtualAddressAsCoOwner(scaledShapeVa);
     }
     // *************************************************************************
     // new methods exposed

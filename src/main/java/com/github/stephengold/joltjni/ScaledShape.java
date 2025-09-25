@@ -47,18 +47,17 @@ public class ScaledShape extends DecoratedShape {
         float scaleZ = scaleFactors.getZ();
         long scaledShapeVa
                 = createScaledShape(baseShapeVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(scaledShapeVa); // no owner due to ref counting
+        setVirtualAddressAsCoOwner(scaledShapeVa);
     }
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
+     * Instantiate a shape with the specified native object assigned.
      *
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)
      */
     ScaledShape(long shapeVa) {
-        super(shapeVa);
+        setVirtualAddressAsCoOwner(shapeVa);
     }
     // *************************************************************************
     // new methods exposed

@@ -37,17 +37,6 @@ abstract public class CompoundShape extends Shape {
      */
     CompoundShape() {
     }
-
-    /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
-     *
-     * @param shapeVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    CompoundShape(long shapeVa) {
-        super(shapeVa);
-    }
     // *************************************************************************
     // new methods exposed
 

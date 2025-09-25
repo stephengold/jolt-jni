@@ -37,17 +37,6 @@ abstract public class DecoratedShape extends Shape {
      */
     DecoratedShape() {
     }
-
-    /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
-     *
-     * @param shapeVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    DecoratedShape(long shapeVa) {
-        super(shapeVa);
-    }
     // *************************************************************************
     // new methods exposed
 
