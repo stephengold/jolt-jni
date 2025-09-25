@@ -39,18 +39,21 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
      */
     public PhysicsScene() {
         long sceneVa = createDefault();
-        setVirtualAddress(sceneVa); // not the owner due to ref counting
+        long refVa = toRef(sceneVa);
+        Runnable freeingAction = () -> PhysicsSceneRef.free(refVa);
+        setVirtualAddress(sceneVa, freeingAction);
     }
 
     /**
-     * Instantiate a scene with the specified native object assigned but not
-     * owned.
+     * Instantiate a scene with the specified native object assigned.
      *
      * @param sceneVa the virtual address of the native object to assign (not
      * zero)
      */
     PhysicsScene(long sceneVa) {
-        super(sceneVa);
+        long refVa = toRef(sceneVa);
+        Runnable freeingAction = () -> PhysicsSceneRef.free(refVa);
+        setVirtualAddress(sceneVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed

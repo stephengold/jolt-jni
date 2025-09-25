@@ -41,17 +41,6 @@ public class PathConstraintPath
      */
     PathConstraintPath() {
     }
-
-    /**
-     * Instantiate a path with the specified native object assigned but not
-     * owned.
-     *
-     * @param pathVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    PathConstraintPath(long pathVa) {
-        super(pathVa);
-    }
     // *************************************************************************
     // new methods exposed
 
@@ -103,6 +92,21 @@ public class PathConstraintPath
         PathResult result = new PathResult(resultVa, true);
 
         return result;
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as a co-owner.
+     *
+     * @param pathVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    final protected void setVirtualAddressAsCoOwner(long pathVa) {
+        long refVa = toRef(pathVa);
+        Runnable freeingAction = () -> PathConstraintPathRef.free(refVa);
+        setVirtualAddress(pathVa, freeingAction);
     }
     // *************************************************************************
     // ConstPathConstraintPath methods

@@ -45,7 +45,7 @@ public class GroupFilterTable extends GroupFilter {
     public GroupFilterTable(GroupFilterTable original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(copyVa);
     }
 
     /**
@@ -56,18 +56,17 @@ public class GroupFilterTable extends GroupFilter {
      */
     public GroupFilterTable(int numSubGroups) {
         long filterVa = createFilter(numSubGroups);
-        setVirtualAddress(filterVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(filterVa);
     }
 
     /**
-     * Instantiate a filter with the specified native object assigned but not
-     * owned.
+     * Instantiate a filter with the specified native object assigned.
      *
      * @param filterVa the virtual address of the native object to assign (not
      * zero)
      */
     GroupFilterTable(long filterVa) {
-        setVirtualAddress(filterVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(filterVa);
     }
     // *************************************************************************
     // new methods exposed

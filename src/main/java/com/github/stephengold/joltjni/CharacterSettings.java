@@ -40,7 +40,9 @@ public class CharacterSettings
      */
     public CharacterSettings() {
         long settingsVa = createCharacterSettings();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
+        long refVa = toRef(settingsVa);
+        Runnable freeingAction = () -> CharacterSettingsRef.free(refVa);
+        setVirtualAddress(settingsVa, freeingAction);
     }
 
     /**
@@ -51,17 +53,21 @@ public class CharacterSettings
     public CharacterSettings(ConstCharacterSettings original) {
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
+        long refVa = toRef(copyVa);
+        Runnable freeingAction = () -> CharacterSettingsRef.free(refVa);
+        setVirtualAddress(copyVa, freeingAction);
     }
 
     /**
-     * Temporarily access the specified settings.
+     * Instantiate settings with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     CharacterSettings(long settingsVa) {
-        super(settingsVa);
+        long refVa = toRef(settingsVa);
+        Runnable freeingAction = () -> CharacterSettingsRef.free(refVa);
+        setVirtualAddress(settingsVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed

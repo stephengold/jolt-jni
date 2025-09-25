@@ -84,6 +84,21 @@ public class GroupFilter
         return result;
     }
     // *************************************************************************
+    // new protected methods
+
+    /**
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as a co-owner.
+     *
+     * @param filterVa the virtual address of the native object to assign
+     * (not zero)
+     */
+    final protected void setVirtualAddressAsCoOwner(long filterVa) {
+        long refVa = toRef(filterVa);
+        Runnable freeingAction = () -> GroupFilterRef.free(refVa);
+        setVirtualAddress(filterVa, freeingAction);
+    }
+    // *************************************************************************
     // ConstGroupFilter methods
 
     /**

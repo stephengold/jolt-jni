@@ -36,7 +36,7 @@ public class WheeledVehicleControllerSettings
      */
     public WheeledVehicleControllerSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setVirtualAddressAsCoOwner(settingsVa);
     }
 
     /**
@@ -48,14 +48,13 @@ public class WheeledVehicleControllerSettings
     }
 
     /**
-     * Instantiate a settings object with the specified native object assigned
-     * but not owned.
+     * Instantiate a settings object with the specified native object assigned.
      *
      * @param controllerSettingsVa the virtual address of the native object to
      * assign (not zero)
      */
     WheeledVehicleControllerSettings(long controllerSettingsVa) {
-        super(controllerSettingsVa);
+        setVirtualAddressAsCoOwner(controllerSettingsVa);
     }
 
     /**
@@ -67,7 +66,7 @@ public class WheeledVehicleControllerSettings
             WheeledVehicleControllerSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
+        setVirtualAddressAsCoOwner(copyVa);
     }
     // *************************************************************************
     // new methods exposed

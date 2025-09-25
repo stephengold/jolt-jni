@@ -42,14 +42,13 @@ public class VehicleControllerSettings
     }
 
     /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
+     * Instantiate settings with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     VehicleControllerSettings(long settingsVa) {
-        super(settingsVa);
+        setVirtualAddressAsCoOwner(settingsVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -108,6 +107,21 @@ public class VehicleControllerSettings
         long settingsVa = va();
         long streamVa = stream.va();
         restoreBinaryState(settingsVa, streamVa);
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as a co-owner.
+     *
+     * @param settingsVa the virtual address of the native object to assign
+     * (not zero)
+     */
+    final protected void setVirtualAddressAsCoOwner(long settingsVa) {
+        long refVa = toRef(settingsVa);
+        Runnable freeingAction = () -> VehicleControllerSettingsRef.free(refVa);
+        setVirtualAddress(settingsVa, freeingAction);
     }
     // *************************************************************************
     // ConstVehicleControllerSettings methods

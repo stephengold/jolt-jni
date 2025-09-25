@@ -37,17 +37,19 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
      */
     public RagdollSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
+        long refVa = toRef(settingsVa);
+        setVirtualAddress(settingsVa, () -> RagdollSettingsRef.free(refVa));
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     RagdollSettings(long settingsVa) {
-        super(settingsVa);
+        long refVa = toRef(settingsVa);
+        setVirtualAddress(settingsVa, () -> RagdollSettingsRef.free(refVa));
     }
 
     /**
@@ -58,7 +60,8 @@ public class RagdollSettings extends JoltPhysicsObject implements RefTarget {
     public RagdollSettings(RagdollSettings original) {
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
+        long refVa = toRef(copyVa);
+        setVirtualAddress(copyVa, () -> RagdollSettingsRef.free(refVa));
     }
     // *************************************************************************
     // RagdollInterface methods

@@ -37,18 +37,17 @@ public class PathConstraintPathHermite extends PathConstraintPath {
      */
     public PathConstraintPathHermite() {
         long pathVa = createDefault();
-        setVirtualAddress(pathVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(pathVa);
     }
 
     /**
-     * Instantiate a path with the specified native object assigned but not
-     * owned.
+     * Instantiate a path with the specified native object assigned.
      *
      * @param pathVa the virtual address of the native object to assign (not
      * zero)
      */
     PathConstraintPathHermite(long pathVa) {
-        super(pathVa);
+        setVirtualAddressAsCoOwner(pathVa);
     }
     // *************************************************************************
     // new methods exposed

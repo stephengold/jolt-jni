@@ -42,7 +42,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     // constructors
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param ragdollVa the virtual address of the native object to assign (not
      * zero)
@@ -50,8 +50,11 @@ public class Ragdoll extends NonCopyable implements RefTarget {
      * {@code null})
      */
     Ragdoll(long ragdollVa, PhysicsSystem physicsSystem) {
-        super(ragdollVa);
         this.system = physicsSystem;
+        long refVa = toRef(ragdollVa);
+        Runnable freeingAction
+                = () -> RagdollRef.freeWithSystem(refVa, physicsSystem);
+        setVirtualAddress(ragdollVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed

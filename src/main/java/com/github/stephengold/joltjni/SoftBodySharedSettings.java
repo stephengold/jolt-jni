@@ -53,7 +53,9 @@ public class SoftBodySharedSettings
      */
     public SoftBodySharedSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
+        long refVa = toRef(settingsVa);
+        Runnable freeingAction = () -> SoftBodySharedSettingsRef.free(refVa);
+        setVirtualAddress(settingsVa, freeingAction);
     }
 
     /**
@@ -64,17 +66,21 @@ public class SoftBodySharedSettings
     public SoftBodySharedSettings(ConstSoftBodySharedSettings original) {
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
+        long refVa = toRef(copyVa);
+        Runnable freeingAction = () -> SoftBodySharedSettingsRef.free(refVa);
+        setVirtualAddress(copyVa, freeingAction);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     SoftBodySharedSettings(long settingsVa) {
-        setVirtualAddress(settingsVa); // not owner due to ref counting
+        long refVa = toRef(settingsVa);
+        Runnable freeingAction = () -> SoftBodySharedSettingsRef.free(refVa);
+        setVirtualAddress(settingsVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed

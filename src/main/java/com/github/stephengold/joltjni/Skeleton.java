@@ -40,18 +40,21 @@ public class Skeleton
      */
     public Skeleton() {
         long skeletonVa = createDefault();
-        setVirtualAddress(skeletonVa); // not owner due to ref counting
+        long refVa = toRef(skeletonVa);
+        Runnable freeingAction = () -> SkeletonRef.free(refVa);
+        setVirtualAddress(skeletonVa, freeingAction);
     }
 
     /**
-     * Instantiate a skeleton with the specified native object assigned but not
-     * owned.
+     * Instantiate a skeleton with the specified native object assigned.
      *
      * @param skeletonVa the virtual address of the native object to assign (not
      * zero)
      */
     Skeleton(long skeletonVa) {
-        super(skeletonVa);
+        long refVa = toRef(skeletonVa);
+        Runnable freeingAction = () -> SkeletonRef.free(refVa);
+        setVirtualAddress(skeletonVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed

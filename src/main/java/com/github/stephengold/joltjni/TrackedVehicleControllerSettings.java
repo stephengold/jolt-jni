@@ -36,7 +36,7 @@ public class TrackedVehicleControllerSettings
      */
     public TrackedVehicleControllerSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
+        setVirtualAddressAsCoOwner(settingsVa);
     }
 
     /**
@@ -47,7 +47,7 @@ public class TrackedVehicleControllerSettings
      * assign (not zero)
      */
     TrackedVehicleControllerSettings(long controllerSettingsVa) {
-        super(controllerSettingsVa);
+        setVirtualAddressAsCoOwner(controllerSettingsVa);
     }
 
     /**
@@ -59,7 +59,7 @@ public class TrackedVehicleControllerSettings
             TrackedVehicleControllerSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
+        setVirtualAddressAsCoOwner(copyVa);
     }
     // *************************************************************************
     // new methods exposed

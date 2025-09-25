@@ -44,8 +44,10 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
      */
     public Geometry(ConstAaBox bounds) {
         long boundsVa = bounds.targetVa();
-        long filterVa = create(boundsVa);
-        setVirtualAddress(filterVa); // not the owner due to ref counting
+        long geometryVa = create(boundsVa);
+        long refVa = toRef(geometryVa);
+        Runnable freeingAction = () -> GeometryRef.free(refVa);
+        setVirtualAddress(geometryVa, freeingAction);
     }
 
     /**
@@ -56,7 +58,9 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
      * zero)
      */
     Geometry(long geometryVa) {
-        super(geometryVa);
+        long refVa = toRef(geometryVa);
+        Runnable freeingAction = () -> GeometryRef.free(refVa);
+        setVirtualAddress(geometryVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
