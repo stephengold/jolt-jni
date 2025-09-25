@@ -34,14 +34,13 @@ public class PathConstraint extends TwoBodyConstraint {
     // constructors
 
     /**
-     * Instantiate a constraint with the specified native object assigned but
-     * not owned.
+     * Instantiate a constraint with the specified native object assigned.
      *
      * @param constraintVa the virtual address of the native object to assign
      * (not zero)
      */
     PathConstraint(long constraintVa) {
-        super(constraintVa);
+        setVirtualAddressAsCoOwner(constraintVa);
     }
     // *************************************************************************
     // new methods exposed

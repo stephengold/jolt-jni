@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,14 +34,13 @@ public class RackAndPinionConstraint extends TwoBodyConstraint {
     // constructors
 
     /**
-     * Instantiate a constraint with the specified native object assigned but
-     * not owned.
+     * Instantiate a constraint with the specified native object assigned.
      *
      * @param constraintVa the virtual address of the native object to assign
      * (not zero)
      */
     RackAndPinionConstraint(long constraintVa) {
-        super(constraintVa);
+        setVirtualAddressAsCoOwner(constraintVa);
     }
     // *************************************************************************
     // new public methods

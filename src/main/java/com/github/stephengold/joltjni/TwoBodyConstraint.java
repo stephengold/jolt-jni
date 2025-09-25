@@ -36,14 +36,9 @@ abstract public class TwoBodyConstraint
     // constructors
 
     /**
-     * Instantiate a constraint with the specified native object assigned but
-     * not owned.
-     *
-     * @param constraintVa the virtual address of the native object to assign
-     * (not zero)
+     * Instantiate a constraint with no native object assigned.
      */
-    TwoBodyConstraint(long constraintVa) {
-        super(constraintVa);
+    TwoBodyConstraint() {
     }
     // *************************************************************************
     // Constraint methods

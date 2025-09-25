@@ -43,17 +43,6 @@ abstract public class Constraint extends NonCopyable
      */
     Constraint() {
     }
-
-    /**
-     * Instantiate a constraint with the specified native object assigned but
-     * not owned.
-     *
-     * @param constraintVa the virtual address of the native object to assign
-     * (not zero)
-     */
-    Constraint(long constraintVa) {
-        super(constraintVa);
-    }
     // *************************************************************************
     // new methods exposed
 
@@ -186,6 +175,21 @@ abstract public class Constraint extends NonCopyable
     public void setNumVelocityStepsOverride(int setting) {
         long constraintVa = va();
         setNumVelocityStepsOverride(constraintVa, setting);
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as a co-owner.
+     *
+     * @param constraintVa the virtual address of the native object to assign
+     * (not zero)
+     */
+    final protected void setVirtualAddressAsCoOwner(long constraintVa) {
+        long refVa = toRef(constraintVa);
+        Runnable freeingAction = () -> ConstraintRef.free(refVa);
+        setVirtualAddress(constraintVa, freeingAction);
     }
     // *************************************************************************
     // ConstConstraint methods

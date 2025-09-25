@@ -63,18 +63,17 @@ public class VehicleConstraint
         long bodyVa = body.va();
         long settingsVa = settings.targetVa();
         long constraintVa = createConstraint(bodyVa, settingsVa);
-        setVirtualAddress(constraintVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(constraintVa);
     }
 
     /**
-     * Instantiate a constraint with the specified native object assigned but
-     * not owned.
+     * Instantiate a constraint with the specified native object assigned.
      *
      * @param constraintVa the virtual address of the native object to assign
      * (not zero)
      */
     VehicleConstraint(long constraintVa) {
-        super(constraintVa);
+        setVirtualAddressAsCoOwner(constraintVa);
         long bodyVa = getVehicleBody(constraintVa);
         this.body = new Body(bodyVa);
     }
