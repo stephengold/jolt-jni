@@ -43,14 +43,13 @@ public class VehicleCollisionTester
     }
 
     /**
-     * Instantiate a tester with the specified native object assigned but not
-     * owned.
+     * Instantiate a tester with the specified native object assigned.
      *
      * @param testerVa the virtual address of the native object to assign (not
      * zero)
      */
     VehicleCollisionTester(long testerVa) {
-        super(testerVa);
+        setVirtualAddressAsCoOwner(testerVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -64,6 +63,21 @@ public class VehicleCollisionTester
     public void setObjectLayer(int objectLayer) {
         long testerVa = va();
         setObjectLayer(testerVa, objectLayer);
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as a co-owner.
+     *
+     * @param testerVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    final protected void setVirtualAddressAsCoOwner(long testerVa) {
+        long refVa = toRef(testerVa);
+        Runnable freeingAction = () -> VehicleCollisionTesterRef.free(refVa);
+        setVirtualAddress(testerVa, freeingAction);
     }
     // *************************************************************************
     // ConstVehicleCollisionTester methods

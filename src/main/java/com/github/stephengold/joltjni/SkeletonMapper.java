@@ -38,18 +38,21 @@ public class SkeletonMapper extends JoltPhysicsObject implements RefTarget {
      */
     public SkeletonMapper() {
         long mapperVa = createDefault();
-        setVirtualAddress(mapperVa); // not owner due to ref counting
+        long refVa = toRef(mapperVa);
+        Runnable freeingAction = () -> SkeletonMapperRef.free(refVa);
+        setVirtualAddress(mapperVa, freeingAction);
     }
 
     /**
-     * Instantiate a mapper with the specified native object assigned but not
-     * owned.
+     * Instantiate a mapper with the specified native object assigned.
      *
      * @param mapperVa the virtual address of the native object to assign (not
      * zero)
      */
     SkeletonMapper(long mapperVa) {
-        super(mapperVa);
+        long refVa = toRef(mapperVa);
+        Runnable freeingAction = () -> SkeletonMapperRef.free(refVa);
+        setVirtualAddress(mapperVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed

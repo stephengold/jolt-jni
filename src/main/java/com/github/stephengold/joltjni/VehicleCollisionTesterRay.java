@@ -69,18 +69,17 @@ public class VehicleCollisionTesterRay extends VehicleCollisionTester {
         float uy = up.getY();
         float uz = up.getZ();
         long testerVa = createTester(objectLayer, ux, uy, uz, maxSlopeAngle);
-        setVirtualAddress(testerVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(testerVa);
     }
 
     /**
-     * Instantiate a tester with the specified native object assigned but not
-     * owned.
+     * Instantiate a tester with the specified native object assigned.
      *
      * @param testerVa the virtual address of the native object to assign (not
      * zero)
      */
     VehicleCollisionTesterRay(long testerVa) {
-        setVirtualAddress(testerVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(testerVa);
     }
     // *************************************************************************
     // VehicleCollisionTester methods

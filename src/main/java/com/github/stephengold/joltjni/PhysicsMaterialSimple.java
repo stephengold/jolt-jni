@@ -37,18 +37,17 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
      */
     public PhysicsMaterialSimple() {
         long materialVa = createDefault();
-        setVirtualAddress(materialVa); // not owner due to ref counting
+        setVirtualAddressAsCoOwner(materialVa);
     }
 
     /**
-     * Instantiate a material with the specified native object assigned but not
-     * owned.
+     * Instantiate a material with the specified native object assigned.
      *
      * @param materialVa the virtual address of the native object to assign (not
      * zero)
      */
     PhysicsMaterialSimple(long materialVa) {
-        super(materialVa);
+        setVirtualAddressAsCoOwner(materialVa);
     }
 
     /**
@@ -59,7 +58,7 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
     public PhysicsMaterialSimple(PhysicsMaterialSimple original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
+        setVirtualAddressAsCoOwner(copyVa);
     }
 
     /**
@@ -71,7 +70,7 @@ public class PhysicsMaterialSimple extends PhysicsMaterial {
     public PhysicsMaterialSimple(String name, ConstColor color) {
         int colorInt = color.getUInt32();
         long materialVa = create(name, colorInt);
-        setVirtualAddress(materialVa); // not owner due to ref counting
+        setVirtualAddressAsCoOwner(materialVa);
     }
     // *************************************************************************
     // native private methods

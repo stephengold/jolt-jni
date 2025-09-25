@@ -73,18 +73,17 @@ public class VehicleCollisionTesterCastSphere extends VehicleCollisionTester {
         float upZ = up.getZ();
         long testerVa = createTester(
                 objectLayer, radius, upX, upY, upZ, maxSlopeAngle);
-        setVirtualAddress(testerVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(testerVa);
     }
 
     /**
-     * Instantiate a tester with the specified native object assigned but not
-     * owned.
+     * Instantiate a tester with the specified native object assigned.
      *
      * @param testerVa the virtual address of the native object to assign (not
      * zero)
      */
     VehicleCollisionTesterCastSphere(long testerVa) {
-        setVirtualAddress(testerVa); // not the owner due to ref counting
+        setVirtualAddressAsCoOwner(testerVa);
     }
     // *************************************************************************
     // VehicleCollisionTester methods

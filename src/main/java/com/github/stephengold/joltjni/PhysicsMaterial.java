@@ -52,14 +52,13 @@ public class PhysicsMaterial extends SerializableObject
     }
 
     /**
-     * Instantiate a material with the specified native object assigned but not
-     * owned.
+     * Instantiate a material with the specified native object assigned.
      *
      * @param materialVa the virtual address of the native object to assign (not
      * zero)
      */
     PhysicsMaterial(long materialVa) {
-        super(materialVa);
+        setVirtualAddressAsCoOwner(materialVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -91,6 +90,21 @@ public class PhysicsMaterial extends SerializableObject
                 = new PhysicsMaterialResult(resultVa, true);
 
         return result;
+    }
+    // *************************************************************************
+    // new protected methods
+
+    /**
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as a co-owner.
+     *
+     * @param materialVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    final protected void setVirtualAddressAsCoOwner(long materialVa) {
+        long refVa = toRef(materialVa);
+        Runnable freeingAction = () -> PhysicsMaterialRef.free(refVa);
+        setVirtualAddress(materialVa, freeingAction);
     }
     // *************************************************************************
     // ConstPhysicsMaterial methods

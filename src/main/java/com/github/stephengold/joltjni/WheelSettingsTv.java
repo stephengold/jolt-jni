@@ -39,7 +39,9 @@ public class WheelSettingsTv
      */
     public WheelSettingsTv() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
+        long refVa = toRef(settingsVa);
+        Runnable freeingAction = () -> WheelSettingsTvRef.free(refVa);
+        setVirtualAddress(settingsVa, freeingAction);
     }
 
     /**
@@ -50,17 +52,21 @@ public class WheelSettingsTv
     public WheelSettingsTv(ConstWheelSettingsTv original) {
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
+        long refVa = toRef(copyVa);
+        Runnable freeingAction = () -> WheelSettingsTvRef.free(refVa);
+        setVirtualAddress(copyVa, freeingAction);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     WheelSettingsTv(long settingsVa) {
-        setVirtualAddress(settingsVa); // not owner due to ref counting
+        long refVa = toRef(settingsVa);
+        Runnable freeingAction = () -> WheelSettingsTvRef.free(refVa);
+        setVirtualAddress(settingsVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
