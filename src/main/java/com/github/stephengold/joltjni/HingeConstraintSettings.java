@@ -42,8 +42,7 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public HingeConstraintSettings() {
         long settingsVa = createHingeConstraintSettings();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Hinge);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Hinge);
     }
 
     /**
@@ -54,19 +53,17 @@ public class HingeConstraintSettings extends TwoBodyConstraintSettings {
     public HingeConstraintSettings(HingeConstraintSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Hinge);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.Hinge);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     HingeConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.Hinge);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Hinge);
     }
     // *************************************************************************
     // new methods exposed

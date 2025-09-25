@@ -39,19 +39,19 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RackAndPinionConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.RackAndPinion);
+        setVirtualAddressAsCoOwner(
+                settingsVa, EConstraintSubType.RackAndPinion);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     RackAndPinionConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.RackAndPinion);
+        setVirtualAddressAsCoOwner(
+                settingsVa, EConstraintSubType.RackAndPinion);
     }
 
     /**
@@ -63,8 +63,7 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
             RackAndPinionConstraintSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.RackAndPinion);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.RackAndPinion);
     }
     // *************************************************************************
     // new public methods

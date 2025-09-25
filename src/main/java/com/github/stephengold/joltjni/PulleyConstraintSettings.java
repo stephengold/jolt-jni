@@ -39,19 +39,17 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      */
     public PulleyConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Pulley);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Pulley);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     PulleyConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.Pulley);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Pulley);
     }
 
     /**
@@ -62,8 +60,7 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
     public PulleyConstraintSettings(PulleyConstraintSettings original) {
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Pulley);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.Pulley);
     }
     // *************************************************************************
     // new methods exposed

@@ -43,19 +43,17 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      */
     public SwingTwistConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.SwingTwist);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.SwingTwist);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     SwingTwistConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.SwingTwist);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.SwingTwist);
     }
 
     /**
@@ -66,8 +64,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     public SwingTwistConstraintSettings(SwingTwistConstraintSettings original) {
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.SwingTwist);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.SwingTwist);
     }
     // *************************************************************************
     // new methods exposed

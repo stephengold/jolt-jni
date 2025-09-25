@@ -35,17 +35,6 @@ abstract public class TwoBodyConstraintSettings extends ConstraintSettings {
      */
     TwoBodyConstraintSettings() {
     }
-
-    /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    TwoBodyConstraintSettings(long settingsVa) {
-        super(settingsVa);
-    }
     // *************************************************************************
     // new methods exposed
 

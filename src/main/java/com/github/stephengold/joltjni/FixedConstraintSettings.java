@@ -42,8 +42,7 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
      */
     public FixedConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Fixed);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Fixed);
     }
 
     /**
@@ -54,19 +53,17 @@ public class FixedConstraintSettings extends TwoBodyConstraintSettings {
     public FixedConstraintSettings(FixedConstraintSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Fixed);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.Fixed);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     FixedConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.Fixed);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Fixed);
     }
     // *************************************************************************
     // new methods exposed

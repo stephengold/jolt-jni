@@ -42,19 +42,17 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
      */
     public SliderConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Slider);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Slider);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     SliderConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.Slider);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Slider);
     }
 
     /**
@@ -65,8 +63,7 @@ public class SliderConstraintSettings extends TwoBodyConstraintSettings {
     public SliderConstraintSettings(SliderConstraintSettings original) {
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Slider);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.Slider);
     }
     // *************************************************************************
     // new methods exposed

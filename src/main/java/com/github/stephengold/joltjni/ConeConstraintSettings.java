@@ -42,8 +42,7 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
      */
     public ConeConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Cone);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Cone);
     }
 
     /**
@@ -54,19 +53,17 @@ public class ConeConstraintSettings extends TwoBodyConstraintSettings {
     public ConeConstraintSettings(ConeConstraintSettings original) {
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Cone);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.Cone);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     ConeConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.Cone);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Cone);
     }
     // *************************************************************************
     // new methods exposed

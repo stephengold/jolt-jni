@@ -40,8 +40,7 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
      */
     public GearConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Gear);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Gear);
     }
 
     /**
@@ -52,19 +51,17 @@ public class GearConstraintSettings extends TwoBodyConstraintSettings {
     public GearConstraintSettings(GearConstraintSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Gear);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.Gear);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     GearConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.Gear);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Gear);
     }
     // *************************************************************************
     // new methods exposed

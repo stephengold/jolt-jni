@@ -42,17 +42,6 @@ abstract public class ConstraintSettings
      */
     ConstraintSettings() {
     }
-
-    /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    ConstraintSettings(long settingsVa) {
-        super(settingsVa);
-    }
     // *************************************************************************
     // new methods exposed
 
@@ -190,13 +179,19 @@ abstract public class ConstraintSettings
     // new protected methods
 
     /**
-     * Initialize the {@code EConstraintSubType} ordinal, which is stored in the
-     * user data.
+     * Assign a native object (assuming there's none already assigned),
+     * designate the JVM object as a co-owner, and assign a subtype.
      *
-     * @param constraintSubType the desired value (not null, default=0)
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     * @param constraintSubType the desired subtype (not null)
      */
-    void setSubType(EConstraintSubType constraintSubType) {
-        long settingsVa = va();
+    final protected void setVirtualAddressAsCoOwner(
+            long settingsVa, EConstraintSubType constraintSubType) {
+        long refVa = toRef(settingsVa);
+        Runnable freeingAction = () -> ConstraintSettingsRef.free(refVa);
+        setVirtualAddress(settingsVa, freeingAction);
+
         int ordinal = constraintSubType.ordinal();
         setConstraintSubType(settingsVa, ordinal);
     }

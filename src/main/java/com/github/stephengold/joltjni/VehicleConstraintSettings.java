@@ -42,8 +42,7 @@ public class VehicleConstraintSettings
      */
     public VehicleConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Vehicle);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Vehicle);
     }
 
     /**
@@ -54,19 +53,17 @@ public class VehicleConstraintSettings
     public VehicleConstraintSettings(ConstVehicleConstraintSettings original) {
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Vehicle);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.Vehicle);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     VehicleConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.Vehicle);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Vehicle);
     }
     // *************************************************************************
     // new methods exposed

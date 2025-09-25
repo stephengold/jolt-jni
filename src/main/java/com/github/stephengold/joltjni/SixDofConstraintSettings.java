@@ -45,19 +45,17 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
      */
     public SixDofConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.SixDof);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.SixDof);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     SixDofConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.SixDof);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.SixDof);
     }
 
     /**
@@ -68,8 +66,7 @@ public class SixDofConstraintSettings extends TwoBodyConstraintSettings {
     public SixDofConstraintSettings(SixDofConstraintSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.SixDof);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.SixDof);
     }
     // *************************************************************************
     // new methods exposed

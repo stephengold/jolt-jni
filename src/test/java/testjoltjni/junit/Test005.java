@@ -233,7 +233,7 @@ public class Test005 {
      */
     private static void testCsDefaults(ConstConstraintSettings settings) {
         Assert.assertTrue(settings.hasAssignedNativeObject());
-        Assert.assertFalse(settings.ownsNativeObject());
+        Assert.assertTrue(settings.ownsNativeObject());
 
         Assert.assertEquals(0, settings.getConstraintPriority());
         Assert.assertTrue(settings.getEnabled());

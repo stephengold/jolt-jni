@@ -40,8 +40,7 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
      */
     public DistanceConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Distance);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Distance);
     }
 
     /**
@@ -52,19 +51,17 @@ public class DistanceConstraintSettings extends TwoBodyConstraintSettings {
     public DistanceConstraintSettings(DistanceConstraintSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Distance);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.Distance);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     DistanceConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.Distance);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Distance);
     }
     // *************************************************************************
     // new methods exposed

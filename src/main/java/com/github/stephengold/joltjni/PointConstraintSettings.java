@@ -39,19 +39,17 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
      */
     public PointConstraintSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Point);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Point);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     PointConstraintSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EConstraintSubType.Point);
+        setVirtualAddressAsCoOwner(settingsVa, EConstraintSubType.Point);
     }
 
     /**
@@ -62,8 +60,7 @@ public class PointConstraintSettings extends TwoBodyConstraintSettings {
     public PointConstraintSettings(PointConstraintSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EConstraintSubType.Point);
+        setVirtualAddressAsCoOwner(copyVa, EConstraintSubType.Point);
     }
     // *************************************************************************
     // new methods exposed
