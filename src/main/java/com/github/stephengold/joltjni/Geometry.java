@@ -51,8 +51,7 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
-     * Instantiate a geometry with the specified native object assigned but not
-     * owned.
+     * Instantiate a geometry with the specified native object assigned.
      *
      * @param geometryVa the virtual address of the native object to assign (not
      * zero)

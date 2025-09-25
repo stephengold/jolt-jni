@@ -64,8 +64,8 @@ abstract public class SerializableObject
     // ConstSerializableObject
 
     /**
-     * Access the type information of the current object. (native method:
-     * getRTTI)
+     * Access the run-time type information of the current object. (native
+     * method: GetRTTI)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */

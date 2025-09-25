@@ -212,8 +212,8 @@ abstract public class JoltPhysicsObject
     }
 
     /**
-     * Assign a native object (assuming there's none already assigned) and
-     * a freeing action.
+     * Assign a native object (assuming there's none already assigned) and a
+     * freeing action.
      *
      * @param virtualAddress the virtual address of the native object to assign
      * (not zero)

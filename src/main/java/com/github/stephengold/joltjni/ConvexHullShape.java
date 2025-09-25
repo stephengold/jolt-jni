@@ -37,8 +37,7 @@ public class ConvexHullShape extends ConvexShape {
     // constructors
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
+     * Instantiate a shape with the specified native object assigned.
      *
      * @param shapeVa the virtual address of the native object to assign (not
      * zero)
