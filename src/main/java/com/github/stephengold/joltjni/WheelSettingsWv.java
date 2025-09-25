@@ -43,16 +43,6 @@ public class WheelSettingsWv
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    WheelSettingsWv(long settingsVa) {
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-    }
-
-    /**
      * Instantiate a copy of the specified settings.
      *
      * @param original the settings to copy (not {@code null}, unaffected)
@@ -61,6 +51,16 @@ public class WheelSettingsWv
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa); // not owner due to ref counting
+    }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    WheelSettingsWv(long settingsVa) {
+        setVirtualAddress(settingsVa); // not owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

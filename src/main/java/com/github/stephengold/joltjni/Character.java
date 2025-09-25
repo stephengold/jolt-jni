@@ -46,19 +46,6 @@ public class Character extends CharacterBase implements ConstCharacter {
     // constructors
 
     /**
-     * Instantiate a character with the specified native object assigned but not
-     * owned.
-     *
-     * @param characterVa the virtual address of the native object to assign
-     * (not zero)
-     * @param physicsSystem where to add the body (not null)
-     */
-    Character(long characterVa, PhysicsSystem physicsSystem) {
-        super(characterVa);
-        this.system = physicsSystem;
-    }
-
-    /**
      * Instantiate a character with the specified properties.
      *
      * @param settings the settings to use (not null, unaffected)
@@ -84,6 +71,19 @@ public class Character extends CharacterBase implements ConstCharacter {
         long characterVa = createCharacter(settingsVa, locX, locY, locZ,
                 qx, qy, qz, qw, userData, systemVa);
         setVirtualAddress(characterVa); // not owner due to ref counting
+    }
+
+    /**
+     * Instantiate a character with the specified native object assigned but not
+     * owned.
+     *
+     * @param characterVa the virtual address of the native object to assign
+     * (not zero)
+     * @param physicsSystem where to add the body (not null)
+     */
+    Character(long characterVa, PhysicsSystem physicsSystem) {
+        super(characterVa);
+        this.system = physicsSystem;
     }
     // *************************************************************************
     // new methods exposed

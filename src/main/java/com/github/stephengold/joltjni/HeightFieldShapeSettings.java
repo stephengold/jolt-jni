@@ -44,29 +44,6 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Instantiate a copy of the specified settings.
-     *
-     * @param original the settings to copy (not {@code null}, unaffected)
-     */
-    public HeightFieldShapeSettings(HeightFieldShapeSettings original) {
-        long originalVa = original.va();
-        long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.HeightField);
-    }
-
-    /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    HeightFieldShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.HeightField);
-    }
-
-    /**
      * Instantiate settings for the specified samples.
      *
      * @param samples array of height values (not null, length&ge;4, unaffected)
@@ -182,6 +159,29 @@ public class HeightFieldShapeSettings extends ShapeSettings {
                 samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,
                 sampleCount, materialIndices, listVa);
         setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.HeightField);
+    }
+
+    /**
+     * Instantiate a copy of the specified settings.
+     *
+     * @param original the settings to copy (not {@code null}, unaffected)
+     */
+    public HeightFieldShapeSettings(HeightFieldShapeSettings original) {
+        long originalVa = original.va();
+        long copyVa = createCopy(originalVa);
+        setVirtualAddress(copyVa); // not owner due to ref counting
+        setSubType(EShapeSubType.HeightField);
+    }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    HeightFieldShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.HeightField);
     }
     // *************************************************************************

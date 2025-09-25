@@ -54,17 +54,6 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    CylinderShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Cylinder);
-    }
-
-    /**
      * Instantiate settings for the specified dimensions.
      *
      * @param halfHeight half the desired height
@@ -100,6 +89,17 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
         long settingsVa = createShapeSettings(
                 halfHeight, radius, convexRadius, materialVa);
         setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Cylinder);
+    }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    CylinderShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.Cylinder);
     }
     // *************************************************************************

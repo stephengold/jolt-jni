@@ -42,17 +42,6 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    TaperedCylinderShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.TaperedCylinder);
-    }
-
-    /**
      * Instantiate settings for the specified dimensions.
      *
      * @param halfHeight half the desired height of the tapered cylinder
@@ -92,6 +81,17 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
         long settingsVa = createShapeSettings(
                 halfHeight, topRadius, bottomRadius, convexRadius, materialVa);
         setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.TaperedCylinder);
+    }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    TaperedCylinderShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.TaperedCylinder);
     }
 

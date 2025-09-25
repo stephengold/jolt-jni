@@ -43,17 +43,6 @@ public class SphereShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    SphereShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Sphere);
-    }
-
-    /**
      * Instantiate settings for the specified radius.
      *
      * @param radius the desired radius (&ge;0)
@@ -73,6 +62,17 @@ public class SphereShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSphereShapeSettings(radius, materialVa);
         setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Sphere);
+    }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    SphereShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.Sphere);
     }
 

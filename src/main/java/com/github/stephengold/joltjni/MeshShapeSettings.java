@@ -46,17 +46,6 @@ public class MeshShapeSettings extends ShapeSettings {
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    MeshShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Mesh);
-    }
-
-    /**
      * Instantiate settings for the specified vertices and triangles.
      *
      * @param vertices the array of vertices (not null, unaffected)
@@ -118,6 +107,17 @@ public class MeshShapeSettings extends ShapeSettings {
         long settingsVa = createSettingsFromTriangles(
                 numTriangles, positionBuffer, materialsVa);
         setVirtualAddress(settingsVa); // not owner due to ref counting
+        setSubType(EShapeSubType.Mesh);
+    }
+
+    /**
+     * Instantiate with the specified native object assigned but not owned.
+     *
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    MeshShapeSettings(long settingsVa) {
+        super(settingsVa);
         setSubType(EShapeSubType.Mesh);
     }
 

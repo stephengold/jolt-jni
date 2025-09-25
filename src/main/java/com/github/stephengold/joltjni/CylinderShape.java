@@ -31,17 +31,6 @@ public class CylinderShape extends ConvexShape {
     // constructors
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
-     *
-     * @param shapeVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    CylinderShape(long shapeVa) {
-        super(shapeVa);
-    }
-
-    /**
      * Instantiate a shape with the specified dimensions.
      *
      * @param halfHeight half the desired height (local Y axis)
@@ -61,6 +50,17 @@ public class CylinderShape extends ConvexShape {
     public CylinderShape(float halfHeight, float radius, float convexRadius) {
         long shapeVa = createCylinderShape(halfHeight, radius, convexRadius);
         setVirtualAddress(shapeVa); // not the owner due to ref counting
+    }
+
+    /**
+     * Instantiate a shape with the specified native object assigned but not
+     * owned.
+     *
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    CylinderShape(long shapeVa) {
+        super(shapeVa);
     }
     // *************************************************************************
     // new methods exposed

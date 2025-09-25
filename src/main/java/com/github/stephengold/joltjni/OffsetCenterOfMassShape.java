@@ -34,17 +34,6 @@ public class OffsetCenterOfMassShape extends DecoratedShape {
     // constructors
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
-     *
-     * @param ocomShapeVa the virtual address of the native object to assign
-     * (not zero)
-     */
-    OffsetCenterOfMassShape(long ocomShapeVa) {
-        super(ocomShapeVa);
-    }
-
-    /**
      * Instantiate a shape on the specified offset and base shape.
      *
      * @param baseShape the base shape (not null)
@@ -57,6 +46,17 @@ public class OffsetCenterOfMassShape extends DecoratedShape {
         long baseShapeVa = baseShape.targetVa();
         long ocomShapeVa = createShape(baseShapeVa, offsetX, offsetY, offsetZ);
         setVirtualAddress(ocomShapeVa); // no owner due to ref counting
+    }
+
+    /**
+     * Instantiate a shape with the specified native object assigned but not
+     * owned.
+     *
+     * @param ocomShapeVa the virtual address of the native object to assign
+     * (not zero)
+     */
+    OffsetCenterOfMassShape(long ocomShapeVa) {
+        super(ocomShapeVa);
     }
     // *************************************************************************
     // new methods exposed

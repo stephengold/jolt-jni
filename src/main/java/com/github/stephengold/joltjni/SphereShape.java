@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,16 @@ public class SphereShape extends ConvexShape {
     // constructors
 
     /**
+     * Instantiate a shape with the specified radius.
+     *
+     * @param radius the desired radius
+     */
+    public SphereShape(float radius) {
+        long shapeVa = createSphereShape(radius);
+        setVirtualAddress(shapeVa); // not the owner due to ref counting
+    }
+
+    /**
      * Instantiate a shape with the specified native object assigned but not
      * owned.
      *
@@ -39,16 +49,6 @@ public class SphereShape extends ConvexShape {
      */
     SphereShape(long shapeVa) {
         super(shapeVa);
-    }
-
-    /**
-     * Instantiate a shape with the specified radius.
-     *
-     * @param radius the desired radius
-     */
-    public SphereShape(float radius) {
-        long shapeVa = createSphereShape(radius);
-        setVirtualAddress(shapeVa); // not the owner due to ref counting
     }
     // *************************************************************************
     // new methods exposed

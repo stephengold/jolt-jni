@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,17 +32,6 @@ public class CapsuleShape extends ConvexShape {
     // constructors
 
     /**
-     * Instantiate a shape with the specified native object assigned but not
-     * owned.
-     *
-     * @param shapeVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    CapsuleShape(long shapeVa) {
-        super(shapeVa);
-    }
-
-    /**
      * Instantiate a shape with the specified dimensions.
      *
      * @param halfHeight half the desired height of the cylindrical portion
@@ -51,6 +40,17 @@ public class CapsuleShape extends ConvexShape {
     public CapsuleShape(float halfHeight, float radius) {
         long shapeVa = createCapsuleShape(halfHeight, radius);
         setVirtualAddress(shapeVa); // not the owner due to ref counting
+    }
+
+    /**
+     * Instantiate a shape with the specified native object assigned but not
+     * owned.
+     *
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    CapsuleShape(long shapeVa) {
+        super(shapeVa);
     }
     // *************************************************************************
     // new methods exposed
