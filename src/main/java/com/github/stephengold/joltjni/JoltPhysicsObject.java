@@ -44,13 +44,13 @@ abstract public class JoltPhysicsObject
     private static class CleanerRunnable implements Runnable {
 
         /**
-         * The shared atomic reference that holds the native freeing action.
-         */
-        final private AtomicReference<Runnable> actionRef;
-        /**
-         * The shared atomic reference to the virtual address.
+         * virtual address of the native object
          */
         final private AtomicLong addressRef;
+        /**
+         * reference to the native freeing action
+         */
+        final private AtomicReference<Runnable> actionRef;
 
         /**
          * Instantiate a cleaner action.
