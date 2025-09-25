@@ -37,8 +37,7 @@ public class EmptyShapeSettings extends ShapeSettings {
      */
     public EmptyShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Empty);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Empty);
     }
 
     /**
@@ -49,19 +48,17 @@ public class EmptyShapeSettings extends ShapeSettings {
     public EmptyShapeSettings(EmptyShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Empty);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.Empty);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     EmptyShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Empty);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Empty);
     }
     // *************************************************************************
     // native private methods

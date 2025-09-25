@@ -37,19 +37,17 @@ public class StaticCompoundShapeSettings extends CompoundShapeSettings {
      */
     public StaticCompoundShapeSettings() {
         long settingsVa = createStaticCompoundShapeSettings();
-        setVirtualAddress(settingsVa); // no owner due to ref counting
-        setSubType(EShapeSubType.StaticCompound);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.StaticCompound);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     StaticCompoundShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.StaticCompound);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.StaticCompound);
     }
 
     /**
@@ -60,8 +58,7 @@ public class StaticCompoundShapeSettings extends CompoundShapeSettings {
     public StaticCompoundShapeSettings(StaticCompoundShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.StaticCompound);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.StaticCompound);
     }
     // *************************************************************************
     // native private methods

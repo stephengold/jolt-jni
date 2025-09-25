@@ -37,8 +37,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
      */
     public CylinderShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Cylinder);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Cylinder);
     }
 
     /**
@@ -49,8 +48,7 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
     public CylinderShapeSettings(CylinderShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Cylinder);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.Cylinder);
     }
 
     /**
@@ -88,19 +86,17 @@ public class CylinderShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createShapeSettings(
                 halfHeight, radius, convexRadius, materialVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Cylinder);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Cylinder);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     CylinderShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Cylinder);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Cylinder);
     }
     // *************************************************************************
     // new methods exposed

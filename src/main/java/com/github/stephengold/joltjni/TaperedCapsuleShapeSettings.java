@@ -37,19 +37,17 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
      */
     public TaperedCapsuleShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.TaperedCapsule);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.TaperedCapsule);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     TaperedCapsuleShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.TaperedCapsule);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.TaperedCapsule);
     }
 
     /**
@@ -77,8 +75,7 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createShapeSettings(
                 halfHeight, topRadius, bottomRadius, materialVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.TaperedCapsule);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.TaperedCapsule);
     }
 
     /**
@@ -89,8 +86,7 @@ public class TaperedCapsuleShapeSettings extends ConvexShapeSettings {
     public TaperedCapsuleShapeSettings(TaperedCapsuleShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.TaperedCapsule);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.TaperedCapsule);
     }
     // *************************************************************************
     // new methods exposed

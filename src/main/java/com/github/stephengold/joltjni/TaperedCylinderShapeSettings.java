@@ -37,8 +37,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
      */
     public TaperedCylinderShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.TaperedCylinder);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.TaperedCylinder);
     }
 
     /**
@@ -80,19 +79,17 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createShapeSettings(
                 halfHeight, topRadius, bottomRadius, convexRadius, materialVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.TaperedCylinder);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.TaperedCylinder);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     TaperedCylinderShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.TaperedCylinder);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.TaperedCylinder);
     }
 
     /**
@@ -103,8 +100,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
     public TaperedCylinderShapeSettings(TaperedCylinderShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.TaperedCylinder);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.TaperedCylinder);
     }
     // *************************************************************************
     // new methods exposed

@@ -41,17 +41,6 @@ abstract public class ShapeSettings
      */
     ShapeSettings() {
     }
-
-    /**
-     * Instantiate settings with the specified native object assigned but not
-     * owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    ShapeSettings(long settingsVa) {
-        super(settingsVa);
-    }
     // *************************************************************************
     // new methods exposed
 
@@ -220,15 +209,23 @@ abstract public class ShapeSettings
         }
         return result;
     }
+    // *************************************************************************
+    // new protected methods
 
     /**
-     * Alter the user data, which holds the {@code EShapeSubType} ordinal.
-     * (native attribute: mUserData)
+     * Assign a native object (assuming there's none already assigned),
+     * designate the JVM object as a co-owner, and assign a subtype.
      *
-     * @param shapeSubType the desired value (not null)
+     * @param settingsVa the virtual address of the native object to assign (not
+     * zero)
+     * @param shapeSubType the desired subtype (not null)
      */
-    void setSubType(EShapeSubType shapeSubType) {
-        long settingsVa = va();
+    final protected void setVirtualAddressAsCoOwner(
+            long settingsVa, EShapeSubType shapeSubType) {
+        long refVa = toRef(settingsVa);
+        Runnable freeingAction = () -> ShapeSettingsRef.free(refVa);
+        setVirtualAddress(settingsVa, freeingAction);
+
         long ordinal = shapeSubType.ordinal();
         setUserData(settingsVa, ordinal);
     }

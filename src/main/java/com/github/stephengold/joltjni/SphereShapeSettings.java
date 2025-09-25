@@ -38,8 +38,7 @@ public class SphereShapeSettings extends ConvexShapeSettings {
      */
     public SphereShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Sphere);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Sphere);
     }
 
     /**
@@ -61,19 +60,17 @@ public class SphereShapeSettings extends ConvexShapeSettings {
     public SphereShapeSettings(float radius, ConstPhysicsMaterial material) {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSphereShapeSettings(radius, materialVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Sphere);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Sphere);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     SphereShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Sphere);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Sphere);
     }
 
     /**
@@ -84,8 +81,7 @@ public class SphereShapeSettings extends ConvexShapeSettings {
     public SphereShapeSettings(SphereShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Sphere);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.Sphere);
     }
     // *************************************************************************
     // new methods exposed

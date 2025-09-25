@@ -43,8 +43,7 @@ public class BoxShapeSettings
      */
     public BoxShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Box);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Box);
     }
 
     /**
@@ -55,8 +54,7 @@ public class BoxShapeSettings
     public BoxShapeSettings(ConstBoxShapeSettings original) {
         long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Box);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.Box);
     }
 
     /**
@@ -88,19 +86,17 @@ public class BoxShapeSettings
         long materialVa = 0L;
         long settingsVa = createBoxShapeSettings(xHalfExtent, yHalfExtent,
                 zHalfExtent, convexRadius, materialVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Box);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Box);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     BoxShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Box);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Box);
     }
 
     /**
@@ -142,8 +138,7 @@ public class BoxShapeSettings
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createBoxShapeSettings(
                 hx, hy, hz, convexRadius, materialVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Box);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Box);
     }
     // *************************************************************************
     // new methods exposed

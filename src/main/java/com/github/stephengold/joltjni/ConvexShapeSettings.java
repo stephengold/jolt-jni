@@ -40,16 +40,6 @@ abstract public class ConvexShapeSettings
      */
     ConvexShapeSettings() {
     }
-
-    /**
-     * Instantiate with the specified native object assigned but not owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    ConvexShapeSettings(long settingsVa) {
-        super(settingsVa);
-    }
     // *************************************************************************
     // new methods exposed
 

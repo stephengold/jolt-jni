@@ -36,14 +36,13 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
     // constructors
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param ocomssVa the virtual address of the native object to assign (not
      * zero)
      */
     OffsetCenterOfMassShapeSettings(long ocomssVa) {
-        super(ocomssVa);
-        setSubType(EShapeSubType.OffsetCenterOfMass);
+        setVirtualAddressAsCoOwner(ocomssVa, EShapeSubType.OffsetCenterOfMass);
     }
 
     /**
@@ -55,8 +54,7 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
             OffsetCenterOfMassShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.OffsetCenterOfMass);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.OffsetCenterOfMass);
     }
 
     /**
@@ -73,8 +71,7 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
         long baseShapeVa = baseShape.targetVa();
         long ocomssVa = createSettingsFromShape(
                 offsetX, offsetY, offsetZ, baseShapeVa);
-        setVirtualAddress(ocomssVa); // no owner due to ref counting
-        setSubType(EShapeSubType.OffsetCenterOfMass);
+        setVirtualAddressAsCoOwner(ocomssVa, EShapeSubType.OffsetCenterOfMass);
     }
 
     /**
@@ -92,8 +89,7 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
         long baseShapeSettingsVa = baseShapeSettings.targetVa();
         long ocomssVa = createSettingsFromSettings(
                 offsetX, offsetY, offsetZ, baseShapeSettingsVa);
-        setVirtualAddress(ocomssVa); // no owner due to ref counting
-        setSubType(EShapeSubType.OffsetCenterOfMass);
+        setVirtualAddressAsCoOwner(ocomssVa, EShapeSubType.OffsetCenterOfMass);
     }
     // *************************************************************************
     // new methods exposed

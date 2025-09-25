@@ -39,8 +39,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      */
     public HeightFieldShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.HeightField);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.HeightField);
     }
 
     /**
@@ -97,8 +96,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
         long settingsVa = createSettingsFromArray(
                 samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,
                 sampleCount, materialIndices, listVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.HeightField);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.HeightField);
     }
 
     /**
@@ -158,8 +156,7 @@ public class HeightFieldShapeSettings extends ShapeSettings {
         long settingsVa = createSettingsFromBuffer(
                 samples, offsetX, offsetY, offsetZ, scaleX, scaleY, scaleZ,
                 sampleCount, materialIndices, listVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.HeightField);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.HeightField);
     }
 
     /**
@@ -170,19 +167,17 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     public HeightFieldShapeSettings(HeightFieldShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.HeightField);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.HeightField);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     HeightFieldShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.HeightField);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.HeightField);
     }
     // *************************************************************************
     // new methods exposed

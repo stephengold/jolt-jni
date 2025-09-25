@@ -37,19 +37,17 @@ public class MutableCompoundShapeSettings extends CompoundShapeSettings {
      */
     public MutableCompoundShapeSettings() {
         long settingsVa = createMutableCompoundShapeSettings();
-        setVirtualAddress(settingsVa); // no owner due to ref counting
-        setSubType(EShapeSubType.MutableCompound);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.MutableCompound);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     MutableCompoundShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.MutableCompound);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.MutableCompound);
     }
 
     /**
@@ -61,8 +59,7 @@ public class MutableCompoundShapeSettings extends CompoundShapeSettings {
             MutableCompoundShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.MutableCompound);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.MutableCompound);
     }
     // *************************************************************************
     // native private methods

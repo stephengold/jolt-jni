@@ -48,8 +48,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         float scaleZ = scaleFactors.getZ();
         long settingsVa = createScaledShapeSettingsFromShape(
                 baseShapeVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(settingsVa); // no owner due to ref counting
-        setSubType(EShapeSubType.Scaled);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Scaled);
     }
 
     /**
@@ -66,19 +65,17 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
         float scaleZ = scaleFactors.getZ();
         long settingsVa = createScaledShapeSettingsFromSettings(
                 baseSettingsVa, scaleX, scaleY, scaleZ);
-        setVirtualAddress(settingsVa); // no owner due to ref counting
-        setSubType(EShapeSubType.Scaled);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Scaled);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     ScaledShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Scaled);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Scaled);
     }
 
     /**
@@ -89,8 +86,7 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
     public ScaledShapeSettings(ScaledShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Scaled);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.Scaled);
     }
     // *************************************************************************
     // new methods exposed

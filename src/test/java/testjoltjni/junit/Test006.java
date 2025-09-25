@@ -793,8 +793,8 @@ public class Test006 {
      */
     private static void testSsDefaults(ConstShapeSettings settings) {
         Assert.assertTrue(settings.hasAssignedNativeObject());
-        Assert.assertFalse(settings.ownsNativeObject());
-        Assert.assertEquals(1, settings.getRefCount());
+        Assert.assertTrue(settings.ownsNativeObject());
+        Assert.assertEquals(2, settings.getRefCount());
     }
 
     /**
@@ -805,7 +805,7 @@ public class Test006 {
     private static void testSsSetters(ShapeSettings settings) {
         ShapeSettingsRef ref = settings.toRef();
 
-        Assert.assertEquals(2, settings.getRefCount());
+        Assert.assertEquals(3, settings.getRefCount());
         Assert.assertEquals(settings, ref.getPtr());
     }
 

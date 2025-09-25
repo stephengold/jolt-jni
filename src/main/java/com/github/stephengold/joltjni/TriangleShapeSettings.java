@@ -39,19 +39,17 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
      */
     public TriangleShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Triangle);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Triangle);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     TriangleShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Triangle);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Triangle);
     }
 
     /**
@@ -62,8 +60,7 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
     public TriangleShapeSettings(TriangleShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Triangle);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.Triangle);
     }
 
     /**
@@ -114,8 +111,7 @@ public class TriangleShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createTriangleShapeSettings(v1x, v1y, v1z, v2x, v2y,
                 v2z, v3x, v3y, v3z, convexRadius, materialVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Triangle);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Triangle);
     }
     // *************************************************************************
     // new methods exposed

@@ -37,8 +37,7 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
      */
     public CapsuleShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Capsule);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Capsule);
     }
 
     /**
@@ -49,8 +48,7 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
     public CapsuleShapeSettings(CapsuleShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Capsule);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.Capsule);
     }
 
     /**
@@ -74,19 +72,17 @@ public class CapsuleShapeSettings extends ConvexShapeSettings {
             float halfHeight, float radius, PhysicsMaterial material) {
         long materialVa = (material == null) ? 0L : material.va();
         long settingsVa = createShapeSettings(halfHeight, radius, materialVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Capsule);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Capsule);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     CapsuleShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Capsule);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Capsule);
     }
     // *************************************************************************
     // new methods exposed

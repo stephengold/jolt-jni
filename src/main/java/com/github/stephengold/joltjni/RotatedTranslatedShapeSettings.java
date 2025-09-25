@@ -37,14 +37,13 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
     // constructors
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param rtssVa the virtual address of the native object to assign (not
      * zero)
      */
     RotatedTranslatedShapeSettings(long rtssVa) {
-        super(rtssVa);
-        setSubType(EShapeSubType.RotatedTranslated);
+        setVirtualAddressAsCoOwner(rtssVa, EShapeSubType.RotatedTranslated);
     }
 
     /**
@@ -65,8 +64,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         long baseShapeVa = baseShape.targetVa();
         long rtssVa = createSettingsFromShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
-        setVirtualAddress(rtssVa); // no owner due to ref counting
-        setSubType(EShapeSubType.RotatedTranslated);
+        setVirtualAddressAsCoOwner(rtssVa, EShapeSubType.RotatedTranslated);
     }
 
     /**
@@ -88,8 +86,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         long baseShapeSettingsVa = baseShapeSettings.targetVa();
         long rtssVa = createSettingsFromShapeSettings(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeSettingsVa);
-        setVirtualAddress(rtssVa); // no owner due to ref counting
-        setSubType(EShapeSubType.RotatedTranslated);
+        setVirtualAddressAsCoOwner(rtssVa, EShapeSubType.RotatedTranslated);
     }
 
     /**
@@ -101,8 +98,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
             RotatedTranslatedShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.RotatedTranslated);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.RotatedTranslated);
     }
 
     /**
@@ -125,8 +121,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         long baseShapeVa = baseShape.targetVa();
         long rtssVa = createSettingsFromShape(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeVa);
-        setVirtualAddress(rtssVa); // no owner due to ref counting
-        setSubType(EShapeSubType.RotatedTranslated);
+        setVirtualAddressAsCoOwner(rtssVa, EShapeSubType.RotatedTranslated);
     }
 
     /**
@@ -149,8 +144,7 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
         long baseShapeSettingsVa = baseShapeSettings.targetVa();
         long rtssVa = createSettingsFromShapeSettings(offsetX, offsetY,
                 offsetZ, rotX, rotY, rotZ, rotW, baseShapeSettingsVa);
-        setVirtualAddress(rtssVa); // no owner due to ref counting
-        setSubType(EShapeSubType.RotatedTranslated);
+        setVirtualAddressAsCoOwner(rtssVa, EShapeSubType.RotatedTranslated);
     }
     // *************************************************************************
     // new methods exposed

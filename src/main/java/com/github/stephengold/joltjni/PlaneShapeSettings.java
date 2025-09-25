@@ -47,8 +47,7 @@ public class PlaneShapeSettings extends ShapeSettings {
      */
     public PlaneShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Plane);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Plane);
     }
 
     /**
@@ -89,19 +88,17 @@ public class PlaneShapeSettings extends ShapeSettings {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createPlaneShapeSettings(
                 nx, ny, nz, planeConstant, materialVa, halfExtent);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Plane);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Plane);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     PlaneShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Plane);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Plane);
     }
 
     /**
@@ -112,8 +109,7 @@ public class PlaneShapeSettings extends ShapeSettings {
     public PlaneShapeSettings(PlaneShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Plane);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.Plane);
     }
     // *************************************************************************
     // new methods exposed

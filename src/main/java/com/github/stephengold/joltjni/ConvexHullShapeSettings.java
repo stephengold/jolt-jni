@@ -90,8 +90,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
             settingsVa = createSettings(
                     numPoints, buffer, maxConvexRadius, materialVa);
         }
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.ConvexHull);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.ConvexHull);
     }
 
     /**
@@ -102,8 +101,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     public ConvexHullShapeSettings(ConvexHullShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.ConvexHull);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.ConvexHull);
     }
 
     /**
@@ -147,19 +145,17 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
                 numPoints, points, maxConvexRadius, materialVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.ConvexHull);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.ConvexHull);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     ConvexHullShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.ConvexHull);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.ConvexHull);
     }
 
     /**
@@ -181,8 +177,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
             settingsVa = createSettings(
                     numPoints, buffer, Jolt.cDefaultConvexRadius, 0L);
         }
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.ConvexHull);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.ConvexHull);
     }
 
     /**
@@ -216,8 +211,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
                 numPoints, buffer, maxConvexRadius, materialVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.ConvexHull);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.ConvexHull);
     }
     // *************************************************************************
     // new methods exposed

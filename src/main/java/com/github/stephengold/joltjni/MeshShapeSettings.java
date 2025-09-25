@@ -41,8 +41,7 @@ public class MeshShapeSettings extends ShapeSettings {
      */
     public MeshShapeSettings() {
         long settingsVa = createDefault();
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Mesh);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
 
     /**
@@ -61,8 +60,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long indicesVa = indices.va();
         long settingsVa
                 = createMeshShapeSettings(numVertices, vBuffer, indicesVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Mesh);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
 
     /**
@@ -86,8 +84,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long indicesVa = itList.va();
         long settingsVa
                 = createMeshShapeSettings(numVertices, vBuffer, indicesVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Mesh);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
 
     /**
@@ -106,19 +103,17 @@ public class MeshShapeSettings extends ShapeSettings {
         long materialsVa = materials.va();
         long settingsVa = createSettingsFromTriangles(
                 numTriangles, positionBuffer, materialsVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Mesh);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
 
     /**
-     * Instantiate with the specified native object assigned but not owned.
+     * Instantiate with the specified native object assigned.
      *
      * @param settingsVa the virtual address of the native object to assign (not
      * zero)
      */
     MeshShapeSettings(long settingsVa) {
-        super(settingsVa);
-        setSubType(EShapeSubType.Mesh);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
 
     /**
@@ -129,8 +124,7 @@ public class MeshShapeSettings extends ShapeSettings {
     public MeshShapeSettings(MeshShapeSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Mesh);
+        setVirtualAddressAsCoOwner(copyVa, EShapeSubType.Mesh);
     }
 
     /**
@@ -150,8 +144,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long indicesVa = indices.va();
         long settingsVa
                 = createMeshShapeSettings(numVertices, vBuffer, indicesVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Mesh);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
 
     /**
@@ -181,8 +174,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long materialsVa = materials.va();
         long settingsVa = createSettingsFromTriangles(
                 numTriangles, buffer, materialsVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Mesh);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
 
     /**
@@ -198,8 +190,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long indicesVa = indices.va();
         long settingsVa
                 = createMeshShapeSettings(numVertices, buffer, indicesVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Mesh);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
 
     /**
@@ -229,8 +220,7 @@ public class MeshShapeSettings extends ShapeSettings {
         long materialsVa = materials.va();
         long settingsVa = createSettingsFromTriangles(
                 numTriangles, buffer, materialsVa);
-        setVirtualAddress(settingsVa); // not owner due to ref counting
-        setSubType(EShapeSubType.Mesh);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Mesh);
     }
     // *************************************************************************
     // new public methods
