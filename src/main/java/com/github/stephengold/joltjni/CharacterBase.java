@@ -46,17 +46,6 @@ abstract public class CharacterBase
      */
     CharacterBase() {
     }
-
-    /**
-     * Instantiate a character with the specified native object assigned but not
-     * owned.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    CharacterBase(long settingsVa) {
-        super(settingsVa);
-    }
     // *************************************************************************
     // new methods exposed
 

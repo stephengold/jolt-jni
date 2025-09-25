@@ -84,12 +84,13 @@ public class CharacterVirtual
         long systemVa = system.va();
         long characterVa = createCharacterVirtual(settingsVa, locX, locY, locZ,
                 qx, qy, qz, qw, userData, systemVa);
-        setVirtualAddress(characterVa); // not owner due to ref counting
+        long refVa = toRef(characterVa);
+        setVirtualAddress(characterVa,
+                () -> CharacterVirtualRef.freeWithSystem(refVa, system));
     }
 
     /**
-     * Instantiate a character with the specified native object assigned but not
-     * owned.
+     * Instantiate a character with the specified native object assigned.
      * <p>
      * For use in custom contact listeners.
      *
@@ -98,8 +99,10 @@ public class CharacterVirtual
      * @param physicsSystem where to add the body (not null)
      */
     public CharacterVirtual(long characterVa, PhysicsSystem physicsSystem) {
-        super(characterVa);
         this.system = physicsSystem;
+        long refVa = toRef(characterVa);
+        setVirtualAddress(characterVa,
+                () -> CharacterVirtualRef.freeWithSystem(refVa, physicsSystem));
     }
     // *************************************************************************
     // new methods exposed

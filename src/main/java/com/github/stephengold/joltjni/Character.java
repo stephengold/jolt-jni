@@ -70,20 +70,23 @@ public class Character extends CharacterBase implements ConstCharacter {
         long systemVa = system.va();
         long characterVa = createCharacter(settingsVa, locX, locY, locZ,
                 qx, qy, qz, qw, userData, systemVa);
-        setVirtualAddress(characterVa); // not owner due to ref counting
+        long refVa = toRef(characterVa);
+        setVirtualAddress(characterVa,
+                () -> CharacterRef.freeWithSystem(refVa, system));
     }
 
     /**
-     * Instantiate a character with the specified native object assigned but not
-     * owned.
+     * Instantiate a character with the specified native object assigned.
      *
      * @param characterVa the virtual address of the native object to assign
      * (not zero)
      * @param physicsSystem where to add the body (not null)
      */
     Character(long characterVa, PhysicsSystem physicsSystem) {
-        super(characterVa);
         this.system = physicsSystem;
+        long refVa = toRef(characterVa);
+        setVirtualAddress(characterVa,
+                () -> CharacterRef.freeWithSystem(refVa, physicsSystem));
     }
     // *************************************************************************
     // new methods exposed
