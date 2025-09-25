@@ -28,10 +28,12 @@ import com.github.stephengold.joltjni.JoltPhysicsObject;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public interface ConstJoltPhysicsObject extends Comparable<JoltPhysicsObject> {
+public interface ConstJoltPhysicsObject
+        extends AutoCloseable, Comparable<JoltPhysicsObject> {
     /**
      * Free and unassign the native object if the JVM object owns it.
      */
+    @Override
     void close();
 
     /**
