@@ -151,6 +151,22 @@ final public class Jolt {
     native public static float cos(float angle);
 
     /**
+     * Return the cumulative number of {@code delete} operations in glue code,
+     * in Debug native libraries, with allocation tracing enabled.
+     *
+     * @return the count (&ge;0)
+     */
+    native public static int countDeletes();
+
+    /**
+     * Return the cumulative number of {@code new} operations in glue code, in
+     * Debug native libraries, with allocation tracing enabled.
+     *
+     * @return the count (&ge;0)
+     */
+    native public static int countNews();
+
+    /**
      * Convert the specified angle from degrees to radians.
      *
      * @param degrees the angle to convert (in degrees)

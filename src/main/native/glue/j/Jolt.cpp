@@ -111,6 +111,38 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_Jolt_cos
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    countDeletes
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Jolt_countDeletes
+  (JNIEnv *, jclass) {
+#ifdef JPH_DEBUG
+    return gDeleteCount;
+#else
+    std::cout << "Jolt.countDeletes() returns 0 in a Release native library."
+            << std::endl;
+    return 0;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    countNews
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_Jolt_countNews
+  (JNIEnv *, jclass) {
+#ifdef JPH_DEBUG
+    return gNewCount;
+#else
+    std::cout << "Jolt.countNews() returns 0 in a Release native library."
+            << std::endl;
+    return 0;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    destroyFactory
  * Signature: ()V
  */
@@ -415,7 +447,13 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_registerTypes
 }
 
 #ifdef JPH_DEBUG
-// global flag to enable tracing of new/delete operations in glue code:
+// global count of delete operations in glue code:
+std::atomic<JPH::uint32> gDeleteCount{0};
+
+// global count of new operations in glue code:
+std::atomic<JPH::uint32> gNewCount{0};
+
+// global flag to enable counting/tracing of new/delete operations in glue code:
 bool gTraceAllocations = false;
 #endif
 
