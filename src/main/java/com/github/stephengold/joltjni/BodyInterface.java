@@ -435,6 +435,30 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Destroy the specified bodies. Don't use this on bodies that have been
+     * added but not removed yet!
+     *
+     * @param bodyIds the IDs of the bodies to destroy (not null)
+     */
+    public void destroyBodies(BodyIdArray bodyIds) {
+        int numBodies = bodyIds.length();
+        destroyBodies(bodyIds, numBodies);
+    }
+
+    /**
+     * Destroy the specified bodies. Don't use this on bodies that have been
+     * added but not removed yet!
+     *
+     * @param bodyIds the IDs of the bodies to destroy (not null)
+     * @param numBodies the number of bodies to destroy (&ge;0)
+     */
+    public void destroyBodies(BodyIdArray bodyIds, int numBodies) {
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        destroyBodies(bodyInterfaceVa, arrayVa, numBodies);
+    }
+
+    /**
      * Return the angular velocity of the specified body.
      *
      * @param bodyId the ID of the body
@@ -859,6 +883,30 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Remove the specified bodies from the physics system, but don't destroy
+     * them.
+     *
+     * @param bodyIds the IDs of the bodies to remove (not null)
+     */
+    public void removeBodies(BodyIdArray bodyIds) {
+        int numBodies = bodyIds.length();
+        removeBodies(bodyIds, numBodies);
+    }
+
+    /**
+     * Remove the specified bodies from the physics system, but don't destroy
+     * them.
+     *
+     * @param bodyIds the IDs of the bodies to remove (not null)
+     * @param numBodies the number of bodies to remove (&ge;0)
+     */
+    public void removeBodies(BodyIdArray bodyIds, int numBodies) {
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        removeBodies(bodyInterfaceVa, arrayVa, numBodies);
+    }
+
+    /**
      * Alter the angular velocity of the specified body.
      *
      * @param bodyId the ID of the body to modify
@@ -1136,6 +1184,9 @@ public class BodyInterface extends NonCopyable {
 
     native private static void destroyBody(long bodyInterfaceVa, int bodyId);
 
+    native private static void destroyBodies(
+            long bodyInterfaceVa, long arrayVa, int numBodies);
+
     native private static void getAngularVelocity(
             long bodyInterfaceVa, int bodyId, FloatBuffer storeFloats);
 
@@ -1202,6 +1253,9 @@ public class BodyInterface extends NonCopyable {
             boolean updateMassProperties, int activationOrdinal);
 
     native private static void removeBody(long bodyInterfaceVa, int bodyId);
+
+    native private static void removeBodies(
+            long bodyInterfaceVa, long arrayVa, int numBodies);
 
     native private static void setAngularVelocity(
             long bodyInterfaceVa, int bodyId, float wx, float wy, float wz);
