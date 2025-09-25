@@ -22,15 +22,15 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * Surface properties of (part of) a {@code Shape}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class PhysicsMaterial extends SerializableObject
-        implements ConstPhysicsMaterial, RefTarget {
+public class PhysicsMaterial
+        extends SerializableObject
+        implements ConstPhysicsMaterial {
     // *************************************************************************
     // constructors
 

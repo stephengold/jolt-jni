@@ -23,7 +23,6 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstPathConstraintPath;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * The path for a path constraint.
@@ -32,7 +31,7 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 public class PathConstraintPath
         extends SerializableObject
-        implements ConstPathConstraintPath, RefTarget {
+        implements ConstPathConstraintPath {
     // *************************************************************************
     // constructors
 

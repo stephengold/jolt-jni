@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstSerializableObject;
+import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * A physics object that can be serialized (saved) and de-serialized (restored).
@@ -30,7 +31,7 @@ import com.github.stephengold.joltjni.readonly.ConstSerializableObject;
  */
 abstract public class SerializableObject
         extends JoltPhysicsObject
-        implements ConstSerializableObject {
+        implements ConstSerializableObject, RefTarget {
     // *************************************************************************
     // constructors
 

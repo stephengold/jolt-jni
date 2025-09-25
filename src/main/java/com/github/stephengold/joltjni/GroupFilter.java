@@ -24,7 +24,6 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.template.Ref;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * Test whether 2 collision groups can collide.
@@ -33,7 +32,7 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 public class GroupFilter
         extends SerializableObject
-        implements ConstGroupFilter, RefTarget {
+        implements ConstGroupFilter {
     // *************************************************************************
     // constructors
 

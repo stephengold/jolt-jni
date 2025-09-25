@@ -24,7 +24,6 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
-import com.github.stephengold.joltjni.template.RefTarget;
 import java.nio.FloatBuffer;
 
 /**
@@ -34,7 +33,7 @@ import java.nio.FloatBuffer;
  */
 abstract public class WheelSettings
         extends SerializableObject
-        implements ConstWheelSettings, RefTarget {
+        implements ConstWheelSettings {
     // *************************************************************************
     // constructors
 

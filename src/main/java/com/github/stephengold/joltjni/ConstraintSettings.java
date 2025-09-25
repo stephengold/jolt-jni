@@ -24,7 +24,6 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 import com.github.stephengold.joltjni.template.Ref;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * Settings used to construct a {@code Constraint}.
@@ -33,7 +32,7 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 abstract public class ConstraintSettings
         extends SerializableObject
-        implements ConstConstraintSettings, RefTarget {
+        implements ConstConstraintSettings {
     // *************************************************************************
     // constructors
 

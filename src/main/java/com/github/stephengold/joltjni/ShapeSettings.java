@@ -23,7 +23,6 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * Settings used to construct a {@code Shape}.
@@ -32,7 +31,7 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 abstract public class ShapeSettings
         extends SerializableObject
-        implements ConstShapeSettings, RefTarget {
+        implements ConstShapeSettings {
     // *************************************************************************
     // constructors
 

@@ -22,7 +22,6 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstVehicleControllerSettings;
-import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
  * Settings used to construct a {@code VehicleController}.
@@ -31,7 +30,7 @@ import com.github.stephengold.joltjni.template.RefTarget;
  */
 public class VehicleControllerSettings
         extends SerializableObject
-        implements ConstVehicleControllerSettings, RefTarget {
+        implements ConstVehicleControllerSettings {
     // *************************************************************************
     // constructors
 
