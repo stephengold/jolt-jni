@@ -62,14 +62,14 @@ public class IndexedTriangleNoMaterial
     }
 
     /**
-     * Instantiate a triangle with the specified native object assigned but not
-     * owned.
+     * Instantiate a triangle with the specified container and native object.
      *
+     * @param container the containing object, or {@code null} if none
      * @param triangleVa the virtual address of the native object to assign (not
      * zero)
      */
-    IndexedTriangleNoMaterial(long triangleVa) {
-        super(triangleVa);
+    IndexedTriangleNoMaterial(JoltPhysicsObject container, long triangleVa) {
+        super(container, triangleVa);
     }
     // *************************************************************************
     // new methods exposed

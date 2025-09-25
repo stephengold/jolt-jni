@@ -67,14 +67,14 @@ final public class IndexedTriangle
     }
 
     /**
-     * Instantiate a triangle with the specified native object assigned but not
-     * owned.
+     * Instantiate a triangle with the specified container and native object.
      *
+     * @param container the containing object, or {@code null} if none
      * @param triangleVa the virtual address of the native object to assign (not
      * zero)
      */
-    IndexedTriangle(long triangleVa) {
-        super(triangleVa);
+    IndexedTriangle(JoltPhysicsObject container, long triangleVa) {
+        super(container, triangleVa);
     }
     // *************************************************************************
     // new public methods

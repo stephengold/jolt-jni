@@ -79,7 +79,7 @@ final public class IndexedTriangleList extends Array<IndexedTriangle> {
     public IndexedTriangle get(int elementIndex) {
         long listVa = va();
         long triangleVa = getTriangle(listVa, elementIndex);
-        IndexedTriangle result = new IndexedTriangle(triangleVa);
+        IndexedTriangle result = new IndexedTriangle(this, triangleVa);
 
         return result;
     }
