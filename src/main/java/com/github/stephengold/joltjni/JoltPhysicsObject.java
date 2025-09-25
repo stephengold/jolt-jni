@@ -224,8 +224,8 @@ abstract public class JoltPhysicsObject
 
             if (cleaner != null) {
                 // Register the object with the cleaner:
-                cleaner.register(this, new CleanerRunnable(
-                        this.freeingActionRef, this.virtualAddress));
+                cleaner.register(this,
+                        new CleanerRunnable(freeingActionRef, virtualAddress));
             }
         }
     }
@@ -238,7 +238,7 @@ abstract public class JoltPhysicsObject
      */
     @Override
     public void close() {
-        executeCleanup(this.freeingActionRef, this.virtualAddress);
+        executeCleanup(freeingActionRef, virtualAddress);
     }
 
     /**
@@ -367,13 +367,10 @@ abstract public class JoltPhysicsObject
             AtomicReference<Runnable> actionRef, AtomicLong addressRef) {
         Runnable action = actionRef.getAndSet(null);
         if (action != null) {
-            try {
-                action.run();
-            } finally {
-                // This is the crucial fix: set the address to zero
-                // to prevent use-after-free.
-                addressRef.set(0L);
-            }
+            action.run();
+
+            // Zero the virtual address to prevent use-after-free:
+            addressRef.set(0L);
         }
     }
 }
