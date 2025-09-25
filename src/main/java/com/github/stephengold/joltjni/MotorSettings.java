@@ -83,7 +83,7 @@ final public class MotorSettings extends JoltPhysicsObject {
     public MotorSettings(MotorSettings original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        setVirtualAddress(copyVa); // no owner due to ref counting
+        setVirtualAddress(copyVa, () -> free(copyVa));
     }
     // *************************************************************************
     // new methods exposed
