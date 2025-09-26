@@ -306,6 +306,54 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installDefaultTr
     Trace = DefaultTrace;
 }
 
+JavaVM *gpVM;
+jmethodID gFlushMethodId, gPrintMethodId;
+jobject gTraceStream;
+static void JavaTrace(const char *inFormat, ...) {
+    // Format the message:
+    va_list list;
+    va_start(list, inFormat);
+    char buffer[1024];
+    vsnprintf(buffer, sizeof(buffer), inFormat, list);
+    va_end(list);
+    // Attach to the JVM:
+    JNIEnv *pAttachEnv;
+    jint retCode = ATTACH_CURRENT_THREAD(gpVM, &pAttachEnv);
+    JPH_ASSERT(retCode == JNI_OK);
+    // Create a Java string:
+    jstring javaString = pAttachEnv->NewStringUTF(buffer);
+    JPH_ASSERT(javaString != NULL);
+    // Print to the configured PrintStream:
+    pAttachEnv->CallVoidMethod(gTraceStream, gPrintMethodId, javaString);
+    EXCEPTION_CHECK(pAttachEnv)
+    // Flush the PrintStream:
+    pAttachEnv->CallVoidMethod(gTraceStream, gFlushMethodId);
+    EXCEPTION_CHECK(pAttachEnv)
+    // Detach from the JVM:
+    gpVM->DetachCurrentThread();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    installJavaTraceCallback
+ * Signature: (Ljava/io/PrintStream;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installJavaTraceCallback
+  (JNIEnv *pEnv, jclass, jobject stream) {
+    pEnv->GetJavaVM(&gpVM);
+    gTraceStream = pEnv->NewGlobalRef(stream);
+    EXCEPTION_CHECK(pEnv)
+    const jclass clss = pEnv->FindClass("java/io/PrintStream");
+    EXCEPTION_CHECK(pEnv)
+    gFlushMethodId = pEnv->GetMethodID(clss, "flush", "()V");
+    EXCEPTION_CHECK(pEnv)
+    gPrintMethodId
+            = pEnv->GetMethodID(clss, "println", "(Ljava/lang/String;)V");
+    EXCEPTION_CHECK(pEnv)
+    //
+    Trace = JavaTrace;
+}
+
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    isDoublePrecision

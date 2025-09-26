@@ -30,6 +30,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
@@ -386,6 +387,13 @@ final public class Jolt {
      * Install the default trace callback.
      */
     native public static void installDefaultTraceCallback();
+
+    /**
+     * Install a trace callback that uses a {@code PrintStream}.
+     *
+     * @param stream where to send trace output (not null)
+     */
+    native public static void installJavaTraceCallback(PrintStream stream);
 
     /**
      * Test whether the native library uses double-precision location vectors.
