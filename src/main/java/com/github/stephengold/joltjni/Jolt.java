@@ -384,6 +384,11 @@ final public class Jolt {
     native public static void installDefaultAssertCallback();
 
     /**
+     * Install an alternative trace callback that uses {@code cerr}.
+     */
+    native public static void installCerrTraceCallback();
+
+    /**
      * Install the default trace callback, which uses {@code cout}.
      */
     native public static void installDefaultTraceCallback();

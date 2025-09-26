@@ -284,6 +284,27 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installDefaultAs
 #endif
 }
 
+static void CerrTrace(const char *inFormat, ...) {
+    // Format the message:
+    va_list list;
+    va_start(list, inFormat);
+    char buffer[1024];
+    vsnprintf(buffer, sizeof(buffer), inFormat, list);
+    va_end(list);
+    // Append it to the C++ standard error output stream:
+    std::cerr << buffer << std::endl;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    installCerrTraceCallback
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installCerrTraceCallback
+  (JNIEnv *, jclass) {
+    Trace = CerrTrace;
+}
+
 static void DefaultTrace(const char *inFormat, ...) {
     // Format the message:
     va_list list;
