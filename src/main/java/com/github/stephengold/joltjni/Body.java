@@ -66,7 +66,7 @@ public class Body extends NonCopyable implements ConstBody {
      * zero)
      */
     public Body(long bodyVa) {
-        super(bodyVa);
+        setVirtualAddress(bodyVa);
     }
     // *************************************************************************
     // new methods exposed

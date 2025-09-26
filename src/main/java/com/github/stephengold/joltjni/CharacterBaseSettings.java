@@ -43,16 +43,6 @@ public class CharacterBaseSettings
      */
     CharacterBaseSettings() {
     }
-
-    /**
-     * Temporarily access the specified settings.
-     *
-     * @param settingsVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    CharacterBaseSettings(long settingsVa) {
-        super(settingsVa);
-    }
     // *************************************************************************
     // new methods exposed
 

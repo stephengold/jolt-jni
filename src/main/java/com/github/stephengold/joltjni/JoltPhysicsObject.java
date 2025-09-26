@@ -129,18 +129,6 @@ abstract public class JoltPhysicsObject
         assert container == null || container.ownsNativeObject() : container;
         this.containingObject = container;
     }
-
-    /**
-     * Instantiate with no containing object and the specified native object
-     * assigned but not owned. This typically implies temporarily access.
-     *
-     * @param va the virtual address of the native object to assign (not zero)
-     */
-    JoltPhysicsObject(long va) {
-        assert va  != 0L;
-        virtualAddress.set(va);
-        this.containingObject = null;
-    }
     // *************************************************************************
     // new methods exposed
 

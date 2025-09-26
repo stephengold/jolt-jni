@@ -33,11 +33,11 @@ public class Rtti extends JoltPhysicsObject {
     /**
      * Instantiate with the specified native object assigned but not owned.
      *
-     * @param virtualAddress the virtual address of the native object to assign
-     * (not zero)
+     * @param rttiVa the virtual address of the native object to assign (not
+     * zero)
      */
-    Rtti(long virtualAddress) {
-        super(virtualAddress);
+    Rtti(long rttiVa) {
+        setVirtualAddress(rttiVa);
     }
     // *************************************************************************
     // new methods exposed
