@@ -335,7 +335,7 @@ abstract public class Shape extends NonCopyable
     public ConstPhysicsMaterial getMaterial(int subShapeId) {
         long shapeVa = va();
         long materialVa = getMaterial(shapeVa, subShapeId);
-        ConstPhysicsMaterial result = new PhysicsMaterial(this, materialVa);
+        ConstPhysicsMaterial result = new PhysicsMaterial(materialVa);
 
         return result;
     }

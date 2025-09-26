@@ -248,7 +248,7 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
     public ConstPhysicsMaterial getMaterial(int subShapeId) {
         long shapeVa = targetVa();
         long materialVa = Shape.getMaterial(shapeVa, subShapeId);
-        ConstPhysicsMaterial result = new PhysicsMaterial(this, materialVa);
+        ConstPhysicsMaterial result = new PhysicsMaterial(materialVa);
 
         return result;
     }
