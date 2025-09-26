@@ -48,13 +48,13 @@ extern std::atomic<JPH::uint32> gNewCount;
 extern std::atomic<JPH::uint32> gDeleteCount;
 
 #define TRACE_NEW(className, pointer) \
+    gNewCount++; \
     if (gTraceAllocations) { \
-        gNewCount++; \
         JPH::Trace("%llx +%s", reinterpret_cast<unsigned long long> (pointer), className); \
     }
 #define TRACE_DELETE(className, pointer) \
+    gDeleteCount++; \
     if (gTraceAllocations) { \
-        gDeleteCount++; \
         JPH::Trace("%llx -%s", reinterpret_cast<unsigned long long> (pointer), className); \
     }
 
