@@ -336,7 +336,7 @@ final public class TestUtils {
 
         Jolt.registerDefaultAllocator();
         Jolt.installDefaultAssertCallback();
-        Jolt.installDefaultTraceCallback();
+        Jolt.installJavaTraceCallback(System.err);
 
         boolean success = Jolt.newFactory();
         assert success;
