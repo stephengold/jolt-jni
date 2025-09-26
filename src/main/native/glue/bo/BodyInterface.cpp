@@ -294,19 +294,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_deactiv
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    destroyBody
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_destroyBody
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID id(bodyId);
-    pInterface->DestroyBody(id);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    destroyBodies
  * Signature: (JJI)V
  */
@@ -316,6 +303,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_destroy
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
     pInterface->DestroyBodies(pArray, numBodies);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    destroyBody
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_destroyBody
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    pInterface->DestroyBody(id);
 }
 
 /*
@@ -702,19 +702,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_notifyS
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    removeBody
- * Signature: (JI)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_removeBody
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID id(bodyId);
-    pInterface->RemoveBody(id);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    removeBodies
  * Signature: (JJI)V
  */
@@ -724,6 +711,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_removeB
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
     pInterface->RemoveBodies(pArray, numBodies);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    removeBody
+ * Signature: (JI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_removeBody
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jint bodyId) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID id(bodyId);
+    pInterface->RemoveBody(id);
 }
 
 /*
