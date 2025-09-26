@@ -74,6 +74,10 @@ final public class TestUtils {
      */
     final public static boolean explicitFreeing = false;
     /**
+     * {@code true} to log heap allocations in glue code
+     */
+    final public static boolean traceAllocations = false;
+    /**
      * customary number of object layers
      */
     final public static int numObjLayers = 2;
@@ -325,7 +329,7 @@ final public class TestUtils {
     public static void initializeNativeLibrary() {
         printLibraryInfo(System.out);
 
-        //Jolt.setTraceAllocations(true); // to log Jolt-JNI heap allocations
+        Jolt.setTraceAllocations(traceAllocations);
         if (automateFreeing) {
             JoltPhysicsObject.startCleaner(); // to reclaim native memory
         }
