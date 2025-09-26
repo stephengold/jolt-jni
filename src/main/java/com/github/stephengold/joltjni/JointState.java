@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * The local-space coordinate transform of an animation joint relative to its
@@ -54,11 +55,9 @@ public class JointState extends JoltPhysicsObject {
      */
     public Quat getRotation() {
         long stateVa = va();
-        float qw = getRotationW(stateVa);
-        float qx = getRotationX(stateVa);
-        float qy = getRotationY(stateVa);
-        float qz = getRotationZ(stateVa);
-        Quat result = new Quat(qx, qy, qz, qw);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotation(stateVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -71,10 +70,9 @@ public class JointState extends JoltPhysicsObject {
      */
     public Vec3 getTranslation() {
         long stateVa = va();
-        float x = getTranslationX(stateVa);
-        float y = getTranslationY(stateVa);
-        float z = getTranslationZ(stateVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getTranslation(stateVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -108,19 +106,11 @@ public class JointState extends JoltPhysicsObject {
     // *************************************************************************
     // native private methods
 
-    native private static float getRotationW(long stateVa);
+    native private static void getRotation(
+            long stateVa, FloatBuffer storeFloats);
 
-    native private static float getRotationX(long stateVa);
-
-    native private static float getRotationY(long stateVa);
-
-    native private static float getRotationZ(long stateVa);
-
-    native private static float getTranslationX(long stateVa);
-
-    native private static float getTranslationY(long stateVa);
-
-    native private static float getTranslationZ(long stateVa);
+    native private static void getTranslation(
+            long stateVa, FloatBuffer storeFloats);
 
     native private static void setRotation(
             long stateVa, float qx, float qy, float qz, float qw);

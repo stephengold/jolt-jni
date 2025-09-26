@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,98 +26,43 @@ SOFTWARE.
 #include "Jolt/Jolt.h"
 #include "Jolt/Skeleton/SkeletonPose.h"
 #include "auto/com_github_stephengold_joltjni_JointState.h"
+#include "glue/glue.h"
 
 using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_JointState
- * Method:    getRotationW
- * Signature: (J)F
+ * Method:    getRotation
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_JointState_getRotationW
-  (JNIEnv *, jclass, jlong stateVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JointState_getRotation
+  (JNIEnv *pEnv, jclass, jlong stateVa, jobject storeFloats) {
     const SkeletonPose::JointState * const pState
             = reinterpret_cast<SkeletonPose::JointState *> (stateVa);
-    const float result = pState->mRotation.GetW();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Quat& result = pState->mRotation;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+    pFloats[3] = result.GetW();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_JointState
- * Method:    getRotationX
- * Signature: (J)F
+ * Method:    getTranslation
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_JointState_getRotationX
-  (JNIEnv *, jclass, jlong stateVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_JointState_getTranslation
+  (JNIEnv *pEnv, jclass, jlong stateVa, jobject storeFloats) {
     const SkeletonPose::JointState * const pState
             = reinterpret_cast<SkeletonPose::JointState *> (stateVa);
-    const float result = pState->mRotation.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_JointState
- * Method:    getRotationY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_JointState_getRotationY
-  (JNIEnv *, jclass, jlong stateVa) {
-    const SkeletonPose::JointState * const pState
-            = reinterpret_cast<SkeletonPose::JointState *> (stateVa);
-    const float result = pState->mRotation.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_JointState
- * Method:    getRotationZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_JointState_getRotationZ
-  (JNIEnv *, jclass, jlong stateVa) {
-    const SkeletonPose::JointState * const pState
-            = reinterpret_cast<SkeletonPose::JointState *> (stateVa);
-    const float result = pState->mRotation.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_JointState
- * Method:    getTranslationX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_JointState_getTranslationX
-  (JNIEnv *, jclass, jlong stateVa) {
-    const SkeletonPose::JointState * const pState
-            = reinterpret_cast<SkeletonPose::JointState *> (stateVa);
-    const float result = pState->mTranslation.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_JointState
- * Method:    getTranslationY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_JointState_getTranslationY
-  (JNIEnv *, jclass, jlong stateVa) {
-    const SkeletonPose::JointState * const pState
-            = reinterpret_cast<SkeletonPose::JointState *> (stateVa);
-    const float result = pState->mTranslation.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_JointState
- * Method:    getTranslationZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_JointState_getTranslationZ
-  (JNIEnv *, jclass, jlong stateVa) {
-    const SkeletonPose::JointState * const pState
-            = reinterpret_cast<SkeletonPose::JointState *> (stateVa);
-    const float result = pState->mTranslation.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pState->mTranslation;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
