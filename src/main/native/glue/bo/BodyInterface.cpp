@@ -294,6 +294,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_deactiv
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    destroyBodies
+ * Signature: (JJI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_destroyBodies
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
+    pInterface->DestroyBodies(pArray, numBodies);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    destroyBody
  * Signature: (JI)V
  */
@@ -685,6 +698,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_notifyS
     const EActivation activationMode = (EActivation)activationOrdinal;
     pInterface->NotifyShapeChanged(
             id, previous, updateMassProperties, activationMode);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_BodyInterface
+ * Method:    removeBodies
+ * Signature: (JJI)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_removeBodies
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies) {
+    BodyInterface * const pInterface
+            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
+    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
+    pInterface->RemoveBodies(pArray, numBodies);
 }
 
 /*
