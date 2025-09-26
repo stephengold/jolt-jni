@@ -60,7 +60,6 @@ public class BodyRemovalTest {
         TestUtils.cleanupPhysicsSystem(physicsSystem);
         TestUtils.cleanup();
     }
-
     // *************************************************************************
     // private methods
 
@@ -72,14 +71,13 @@ public class BodyRemovalTest {
      * @param position the initial position of the body (not null, unaffected)
      * @return the ID of the newly created body
      */
-    private static int createAndAddBody(BodyInterface bodyInterface,
-                                        RVec3 position) {
+    private static int createAndAddBody(
+            BodyInterface bodyInterface, RVec3 position) {
         int objectLayer = TestUtils.objLayerMoving;
         SphereShape shape = new SphereShape(0.5f);
         BodyCreationSettings settings = new BodyCreationSettings(
                 shape, position, new Quat(),
-                EMotionType.Dynamic, objectLayer
-        );
+                EMotionType.Dynamic, objectLayer);
 
         int bodyId = bodyInterface.createAndAddBody(
                 settings, EActivation.Activate);
@@ -113,30 +111,24 @@ public class BodyRemovalTest {
 
         // 3. Verify they are all marked as 'not added'.
         for (int i = 0; i < numBodies; ++i) {
-            Assert.assertFalse(
-                    "Body should be removed",
-                    bodyInterface.isAdded(ids.get(i))
-            );
+            Assert.assertFalse("Body should be removed",
+                    bodyInterface.isAdded(ids.get(i)));
         }
 
         // 4. Re-add the bodies to prove they still exist and were not
         // destroyed.
         for (int i = 0; i < numBodies; ++i) {
             bodyInterface.addBody(ids.get(i), EActivation.Activate);
-            Assert.assertTrue(
-                    "Body should be re-added successfully",
-                    bodyInterface.isAdded(ids.get(i))
-            );
+            Assert.assertTrue("Body should be re-added successfully",
+                    bodyInterface.isAdded(ids.get(i)));
         }
 
         // --- Test DestroyBodies ---
         // 5. Must remove them again from the simulation before destroying.
         bodyInterface.removeBodies(ids);
         for (int i = 0; i < numBodies; ++i) {
-            Assert.assertFalse(
-                    "Body should be removed again before destroy",
-                    bodyInterface.isAdded(ids.get(i))
-            );
+            Assert.assertFalse("Body should be removed again before destroy",
+                    bodyInterface.isAdded(ids.get(i)));
         }
 
         // 6. Destroy all bodies permanently in a single batch call.
@@ -150,10 +142,8 @@ public class BodyRemovalTest {
 
             // Attempting to re-add an invalid ID should fail silently.
             bodyInterface.addBody(bodyId, EActivation.Activate);
-            Assert.assertFalse(
-                    "Body should not be added after being destroyed",
-                    bodyInterface.isAdded(bodyId)
-            );
+            Assert.assertFalse("Body should not be added after being destroyed",
+                    bodyInterface.isAdded(bodyId));
         }
 
         TestUtils.testClose(ids);
