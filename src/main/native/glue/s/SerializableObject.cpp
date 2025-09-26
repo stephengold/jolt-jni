@@ -37,7 +37,7 @@ using namespace JPH;
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SerializableObject_getRtti
   (JNIEnv *, jclass, jlong jpoVa) {
-    SerializableObject * const pPhysicsObject
+    const SerializableObject * const pPhysicsObject
             = reinterpret_cast<SerializableObject *> (jpoVa);
     const RTTI * const pResult = pPhysicsObject->GetRTTI();
     return reinterpret_cast<jlong> (pResult);
