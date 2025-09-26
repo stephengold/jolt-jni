@@ -30,7 +30,7 @@ import com.github.stephengold.joltjni.Rtti;
  */
 public interface ConstSerializableObject extends ConstJoltPhysicsObject {
     /**
-     * Access the type information of the current object.
+     * Access the run-time type information of the current object.
      *
      * @return a new object
      */

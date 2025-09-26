@@ -291,8 +291,7 @@ static void DefaultTrace(const char *inFormat, ...) {
     char buffer[1024];
     vsnprintf(buffer, sizeof(buffer), inFormat, list);
     va_end(list);
-
-    // Print the standard output:
+    // Append it to the C++ standard output stream:
     std::cout << buffer << std::endl;
 }
 

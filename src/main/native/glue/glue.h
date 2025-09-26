@@ -131,7 +131,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
   }
 /*
  * pre-processor macro to implement 4 methods associated with the
- * com.github.stephengold.templace.Result class:
+ * com.github.stephengold.template.Result class:
  */
 #define IMPLEMENT_RESULT(className, freeName, getErrorName, hasErrorName, isValidName) \
   JNIEXPORT void JNICALL freeName(JNIEnv *, jclass, jlong resultVa) { \

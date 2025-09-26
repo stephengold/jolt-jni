@@ -43,7 +43,8 @@ public class Rtti extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the name of the C++ identifier.
+     * Return the name of the C++ identifier. The type information is
+     * unaffected.
      *
      * @return the name (not null)
      */
