@@ -251,8 +251,6 @@ public class Test001 {
                 = new TestBodyActivationListener();
         physicsSystem.setBodyActivationListener(activationListener);
 
-        BodyInterface bodyInterface = physicsSystem.getBodyInterface();
-
         BoxShapeSettings floorShapeSettings
                 = new BoxShapeSettings(100f, 1f, 100f);
         ShapeResult floorShapeResult = floorShapeSettings.create();
@@ -260,11 +258,13 @@ public class Test001 {
         Assert.assertTrue(floorShapeResult.isValid());
 
         ShapeRefC floorShapeRef = floorShapeResult.get();
+        TestUtils.testClose(floorShapeResult, floorShapeSettings);
         RVec3 floorLocation = new RVec3(0.0, -1.0, 0.0);
         Quat orientation = new Quat();
         BodyCreationSettings floorBodySettings
                 = new BodyCreationSettings(floorShapeRef, floorLocation,
                         orientation, EMotionType.Static, objLayerNonMoving);
+        BodyInterface bodyInterface = physicsSystem.getBodyInterface();
         Body floor = bodyInterface.createBody(floorBodySettings);
         Assert.assertFalse(floor.ownsNativeObject());
         int floorId = floor.getId();
@@ -306,7 +306,8 @@ public class Test001 {
             ++stepCounter;
         }
         Assert.assertEquals(48, stepCounter);
-        TestUtils.testClose(jobSystem, tempAllocator);
+        TestUtils.testClose(
+                jobSystem, tempAllocator, contactListener, activationListener);
 
         ballLocation = bodyInterface.getCenterOfMassPosition(ballId);
         TestUtils.assertEquals(0f, 0.48f, 0f, ballLocation, 1e-5f);
@@ -318,12 +319,11 @@ public class Test001 {
         Assert.assertEquals(3, ballShape.getRefCount());
         bodyInterface.destroyBody(ballId);
         Assert.assertEquals(2, ballShape.getRefCount());
-        TestUtils.testClose(ballSettings);
+        TestUtils.testClose(ballSettings, ballShape);
 
         bodyInterface.removeBody(floorId);
         bodyInterface.destroyBody(floorId);
-        TestUtils.testClose(
-                floorBodySettings, floorShapeRef, floorShapeResult,
+        TestUtils.testClose(floorBodySettings, floorShapeRef, floorShapeResult,
                 physicsSystem, objVsObjFilter, objVsBpFilter, mapObj2Bp);
 
         TestUtils.cleanup();
