@@ -1170,8 +1170,12 @@ public class Test003 {
         props.setMass(2f);
         Assert.assertEquals(2f, props.getMass(), 0f);
 
-        props.setInertia(Mat44.sIdentity());
-        Assert.assertTrue(props.getInertia().isEqual(Mat44.sIdentity()));
+        Mat44 inertia = new Mat44();
+        inertia.setElement(0, 0, 2f);
+        props.setInertia(inertia);
+        Mat44 actual = props.getInertia();
+        Assert.assertTrue(actual.isEqual(inertia));
+        TestUtils.testClose(actual, inertia);
     }
 
     /**
@@ -1283,6 +1287,7 @@ public class Test003 {
         sbcs.setSettings(newSs);
 
         Assert.assertFalse(sbcs.getAllowSleeping());
+        Equivalent.collisionGroup(newGroup, sbcs.getCollisionGroup());
         Assert.assertTrue(sbcs.getFacesDoubleSided());
         Assert.assertEquals(0.02f, sbcs.getFriction(), 0f);
         Assert.assertEquals(0.06f, sbcs.getGravityFactor(), 0f);
