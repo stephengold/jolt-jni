@@ -598,6 +598,8 @@ final class Equivalent {
                 expected.getAllowSleeping(), actual.getAllowSleeping());
         collisionGroup(
                 expected.getCollisionGroup(), actual.getCollisionGroup());
+        Assert.assertEquals(
+                expected.getFacesDoubleSided(), actual.getFacesDoubleSided());
         Assert.assertEquals(expected.getFriction(), actual.getFriction(), 0f);
         Assert.assertEquals(
                 expected.getGravityFactor(), actual.getGravityFactor(), 0f);

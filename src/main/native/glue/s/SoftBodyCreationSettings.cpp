@@ -100,6 +100,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSett
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    getFacesDoubleSided
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getFacesDoubleSided
+  (JNIEnv *, jclass, jlong bodySettingsVa) {
+    const SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    bool result = pSettings->mFacesDoubleSided;
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
  * Method:    getFriction
  * Signature: (J)F
  */
@@ -429,6 +442,18 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSetti
     const CollisionGroup * const pGroup
             = reinterpret_cast<CollisionGroup *> (groupVa);
     pSettings->mCollisionGroup = *pGroup;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
+ * Method:    setFacesDoubleSided
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_setFacesDoubleSided
+  (JNIEnv *, jclass, jlong bodySettingsVa, jboolean enable) {
+    SoftBodyCreationSettings * const pSettings
+            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
+    pSettings->mFacesDoubleSided = enable;
 }
 
 /*

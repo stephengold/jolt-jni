@@ -158,6 +158,21 @@ public class SoftBodyCreationSettings
     }
 
     /**
+     * Alter whether faces will be double-sided. (native member:
+     * mFacesDoubleSided)
+     *
+     * @param enable {@code true} for double-sided, {@code false} for
+     * single-sided (default=false)
+     * @return the modified settings, for chaining
+     */
+    public SoftBodyCreationSettings setFacesDoubleSided(boolean enable) {
+        long bodySettingsVa = va();
+        setFacesDoubleSided(bodySettingsVa, enable);
+
+        return this;
+    }
+
+    /**
      * Alter the friction ratio. (native member: mFriction)
      *
      * @param friction the desired ratio (typically &ge;0 and &le;1,
@@ -441,6 +456,20 @@ public class SoftBodyCreationSettings
         long bodySettingsVa = va();
         long resultVa = getCollisionGroup(bodySettingsVa);
         CollisionGroup result = new CollisionGroup(this, resultVa);
+
+        return result;
+    }
+
+    /**
+     * Test whether faces will be double-sided. The settings are unaffected.
+     * (native member: mFacesDoubleSided)
+     *
+     * @return {@code true} if double-sided, otherwise {@code false}
+     */
+    @Override
+    public boolean getFacesDoubleSided() {
+        long bodySettingsVa = va();
+        boolean result = getFacesDoubleSided(bodySettingsVa);
 
         return result;
     }
@@ -730,6 +759,8 @@ public class SoftBodyCreationSettings
 
     native private static long getCollisionGroup(long bodySettingsVa);
 
+    native private static boolean getFacesDoubleSided(long bodySettingsVa);
+
     native private static float getFriction(long bodySettingsVa);
 
     native private static float getGravityFactor(long bodySettingsVa);
@@ -785,6 +816,9 @@ public class SoftBodyCreationSettings
 
     native private static void setCollisionGroup(
             long bodySettingsVa, long groupVa);
+
+    native private static void setFacesDoubleSided(
+            long bodySettingsVa, boolean enable);
 
     native private static void setFriction(long bodySettingsVa, float friction);
 

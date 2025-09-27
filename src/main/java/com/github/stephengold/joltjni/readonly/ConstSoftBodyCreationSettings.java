@@ -51,6 +51,14 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
     ConstCollisionGroup getCollisionGroup();
 
     /**
+     * Test whether faces will be double-sided. The settings are unaffected.
+     * (native member: mFacesDoubleSided)
+     *
+     * @return {@code true} if double-sided, otherwise {@code false}
+     */
+    boolean getFacesDoubleSided();
+
+    /**
      * Return the friction ratio. The settings are unaffected.
      *
      * @return the ratio (typically &ge;0 and &le;1)

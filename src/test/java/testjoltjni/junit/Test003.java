@@ -1226,6 +1226,7 @@ public class Test003 {
 
         Assert.assertTrue(sbcs.getAllowSleeping());
         Assert.assertNotNull(sbcs.getCollisionGroup());
+        Assert.assertFalse(sbcs.getFacesDoubleSided());
         Assert.assertEquals(0.2f, sbcs.getFriction(), 0f);
         Assert.assertEquals(1f, sbcs.getGravityFactor(), 0f);
         Assert.assertEquals(0.1f, sbcs.getLinearDamping(), 0f);
@@ -1247,6 +1248,7 @@ public class Test003 {
     private static void testSbcsSetters(SoftBodyCreationSettings sbcs) {
         sbcs.setAllowSleeping(false);
         sbcs.setCollisionGroup(new CollisionGroup());
+        sbcs.setFacesDoubleSided(true);
         sbcs.setFriction(0.02f);
         sbcs.setGravityFactor(0.06f);
         sbcs.setLinearDamping(0.07f);
@@ -1263,6 +1265,7 @@ public class Test003 {
         sbcs.setSettings(newSs);
 
         Assert.assertFalse(sbcs.getAllowSleeping());
+        Assert.assertTrue(sbcs.getFacesDoubleSided());
         Assert.assertEquals(0.02f, sbcs.getFriction(), 0f);
         Assert.assertEquals(0.06f, sbcs.getGravityFactor(), 0f);
         Assert.assertEquals(0.07f, sbcs.getLinearDamping(), 0f);
