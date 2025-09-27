@@ -300,6 +300,7 @@ public class Test003 {
             Assert.assertNotNull(bcs.getShape());
             Assert.assertEquals(ss, bcs.getShapeSettings());
             Assert.assertTrue(bcs.getShape() instanceof BoxShape);
+
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
@@ -314,6 +315,7 @@ public class Test003 {
 
             Assert.assertNotNull(bcs.getMassProperties());
             Assert.assertEquals(shape, bcs.getShape());
+
             Assert.assertNull(bcs.getShapeSettings());
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
@@ -1248,6 +1250,7 @@ public class Test003 {
     private static void testSbcsSetters(SoftBodyCreationSettings sbcs) {
         sbcs.setAllowSleeping(false);
         sbcs.setCollisionGroup(new CollisionGroup());
+
         sbcs.setFacesDoubleSided(true);
         sbcs.setFriction(0.02f);
         sbcs.setGravityFactor(0.06f);
@@ -1278,6 +1281,7 @@ public class Test003 {
         TestUtils.assertEquals(
                 0.5f, 0.5f, -0.5f, -0.5f, sbcs.getRotation(), 0f);
         Assert.assertEquals(newSs, sbcs.getSettings());
+
         Assert.assertFalse(sbcs.getUpdatePosition());
     }
 

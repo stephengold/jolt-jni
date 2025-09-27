@@ -520,7 +520,7 @@ final class Equivalent {
         Assert.assertEquals(expected.getRtti().getName(),
                 actual.getRtti().getName());
 
-        // compare serialization results:
+        // Compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
         ObjectStreamOut.sWriteObject(stream1, EStreamType.Text, expected);

@@ -600,9 +600,8 @@ final public class TestUtils {
     }
 
     /**
-     * Test the {@code close()} methods of the specified physics objects.
-     * However, if freeing is automated, {@code close()} is neither invoked nor
-     * tested.
+     * If explicit freeing is enabled, test the {@code close()} methods of the
+     * specified physics objects.
      *
      * @param objects the objects to test (not {@code null})
      */
@@ -615,7 +614,6 @@ final public class TestUtils {
                 }
                 boolean wasOwner = object.ownsNativeObject();
                 object.close();
-
                 if (wasOwner) {
                     Assert.assertFalse(object.hasAssignedNativeObject());
                 }

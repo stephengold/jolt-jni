@@ -44,7 +44,7 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
     boolean getAllowSleeping();
 
     /**
-     * Access the collision group.
+     * Access the collision group. The settings are unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -140,7 +140,7 @@ public interface ConstSoftBodyCreationSettings extends ConstJoltPhysicsObject {
     Quat getRotation();
 
     /**
-     * Access the shared settings.
+     * Access the shared settings. The settings are unaffected.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null} if none
