@@ -232,11 +232,14 @@ final class Equivalent {
             ConstCollisionGroup expected, ConstCollisionGroup actual) {
         joltPhysicsObject(expected, actual);
 
+        ConstGroupFilter actualFilter = actual.getGroupFilter();
         ConstGroupFilter filter = expected.getGroupFilter();
         if (filter == null) {
-            Assert.assertNull(actual.getGroupFilter());
+            Assert.assertNull(actualFilter);
         } else {
-            groupFilter(filter, actual.getGroupFilter());
+            groupFilter(filter, actualFilter);
+            TestUtils.testClose(filter);
+            TestUtils.testClose(actualFilter);
         }
 
         Assert.assertEquals(expected.getGroupId(), actual.getGroupId());
@@ -324,9 +327,13 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        expected.saveBinaryState(new StreamOutWrapper(stream1));
-        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
+        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        expected.saveBinaryState(sow1);
+        actual.saveBinaryState(sow2);
         Assert.assertEquals(stream1.str(), stream2.str());
+
+        TestUtils.testClose(sow2, sow1, stream2, stream1, g0);
     }
 
     /**
@@ -519,6 +526,7 @@ final class Equivalent {
         ObjectStreamOut.sWriteObject(stream1, EStreamType.Text, expected);
         ObjectStreamOut.sWriteObject(stream2, EStreamType.Text, actual);
         Assert.assertEquals(stream1.str(), stream2.str());
+        TestUtils.testClose(stream2, stream1);
     }
 
     /**
