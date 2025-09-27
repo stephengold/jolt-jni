@@ -36,7 +36,7 @@ import com.github.stephengold.joltjni.PhysicsSettings;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.ShapeRefC;
-import com.github.stephengold.joltjni.ShapeSettingsRef;
+import com.github.stephengold.joltjni.ShapeResult;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.TempAllocatorImpl;
 import com.github.stephengold.joltjni.Vec3;
@@ -45,6 +45,8 @@ import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
+import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -154,11 +156,10 @@ public class Test002 {
         }
         TestUtils.testClose(indices);
         meshShapeSettings.setMaxTrianglesPerLeaf(4);
-        ShapeSettingsRef meshShapeSettingsRef = meshShapeSettings.toRef();
 
         meshBodySettings = new BodyCreationSettings();
-        meshBodySettings.setShapeSettings(meshShapeSettingsRef);
-        TestUtils.testClose(meshShapeSettingsRef);
+        meshBodySettings.setShapeSettings(meshShapeSettings);
+        TestUtils.testClose(meshShapeSettings);
 
         meshBodySettings.setFriction(0.5f);
         meshBodySettings.setMotionType(EMotionType.Static);
@@ -173,12 +174,19 @@ public class Test002 {
         Vec3[] hullVertices = {new Vec3(0f, 1f, 0f), new Vec3(1f, 0f, 0f),
             new Vec3(-1f, 0f, 0f), new Vec3(0f, 0f, 1f), new Vec3(0f, 0f, -1f)};
 
+        ConstShape boxShape = new BoxShape(new Vec3(0.5f, 0.75f, 1f));
+        ConstShape sphereShape = new SphereShape(0.5f);
+        ConstShape capsuleShape = new CapsuleShape(0.75f, 0.5f);
+        ConstShapeSettings chss = new ConvexHullShapeSettings(hullVertices);
+        ShapeResult chssResult = chss.create();
         dynamicShapes = new ShapeRefC[]{
-            new BoxShape(new Vec3(0.5f, 0.75f, 1f)).toRefC(),
-            new SphereShape(0.5f).toRefC(),
-            new CapsuleShape(0.75f, 0.5f).toRefC(),
-            new ConvexHullShapeSettings(hullVertices).create().get()
+            boxShape.toRefC(),
+            sphereShape.toRefC(),
+            capsuleShape.toRefC(),
+            chssResult.get()
         };
+        TestUtils.testClose(
+                chssResult, chss, capsuleShape, sphereShape, boxShape);
     }
 
     /**
@@ -243,6 +251,7 @@ public class Test002 {
                     bodySettings.setShape(dynamicShapes[y]);
 
                     bi.createAndAddBody(bodySettings, EActivation.Activate);
+                    TestUtils.testClose(bodySettings);
                 }
             }
         }
