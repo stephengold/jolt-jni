@@ -33,12 +33,10 @@ import com.github.stephengold.joltjni.CapsuleShape;
 import com.github.stephengold.joltjni.CharacterRef;
 import com.github.stephengold.joltjni.CharacterRefC;
 import com.github.stephengold.joltjni.CharacterSettings;
-import com.github.stephengold.joltjni.CharacterSettingsRef;
 import com.github.stephengold.joltjni.CharacterVirtual;
 import com.github.stephengold.joltjni.CharacterVirtualRef;
 import com.github.stephengold.joltjni.CharacterVirtualRefC;
 import com.github.stephengold.joltjni.CharacterVirtualSettings;
-import com.github.stephengold.joltjni.CharacterVirtualSettingsRef;
 import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.ContactListenerList;
 import com.github.stephengold.joltjni.ContactSettings;
@@ -55,13 +53,10 @@ import com.github.stephengold.joltjni.ObjectLayerPairFilterTable;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RVec3;
-import com.github.stephengold.joltjni.ShapeRefC;
-import com.github.stephengold.joltjni.ShapeSettingsRefC;
 import com.github.stephengold.joltjni.SkinWeight;
 import com.github.stephengold.joltjni.SoftBodyCreationSettings;
 import com.github.stephengold.joltjni.SoftBodyMotionProperties;
 import com.github.stephengold.joltjni.SoftBodySharedSettings;
-import com.github.stephengold.joltjni.SoftBodySharedSettingsRef;
 import com.github.stephengold.joltjni.Sphere;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.SpringSettings;
@@ -77,17 +72,21 @@ import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EOverrideMassProperties;
 import com.github.stephengold.joltjni.enumerate.ESpringMode;
+import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstCharacter;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstContactSettings;
+import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstMotionProperties;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyMotionProperties;
+import com.github.stephengold.joltjni.readonly.ConstSoftBodySharedSettings;
 import com.github.stephengold.joltjni.readonly.ConstSphere;
 import com.github.stephengold.joltjni.readonly.ConstSpringSettings;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
@@ -250,14 +249,15 @@ public class Test003 {
         Assert.assertFalse(cast.getBox().isValid());
         TestUtils.assertEquals(0f, 0f, 0f, cast.getDirection(), 0f);
 
-        cast.setBox(new AaBox(new Vec3(1f, 2f, 3f), new Vec3(4f, 5f, 6f)));
+        ConstAaBox box = new AaBox(new Vec3(1f, 2f, 3f), new Vec3(4f, 5f, 6f));
+        cast.setBox(box);
         cast.setDirection(new Vec3(7f, 8f, 9f));
 
         TestUtils.assertEquals(1f, 2f, 3f, cast.getBox().getMin(), 0f);
         TestUtils.assertEquals(4f, 5f, 6f, cast.getBox().getMax(), 0f);
         TestUtils.assertEquals(7f, 8f, 9f, cast.getDirection(), 0f);
 
-        TestUtils.testClose(cast);
+        TestUtils.testClose(box, cast);
 
         System.gc();
     }
@@ -291,36 +291,41 @@ public class Test003 {
         }
         { // constructed from a ShapeSettings:
             ConstBoxShapeSettings ss = new BoxShapeSettings(1f, 1f, 1f);
-            final ShapeSettingsRefC ssRefC = ss.toRefC();
             int objectLayer = 0;
             BodyCreationSettings bcs = new BodyCreationSettings(ss,
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
 
-            Assert.assertNotNull(bcs.getMassProperties());
-            Assert.assertNotNull(bcs.getShape());
-            Assert.assertEquals(ss, bcs.getShapeSettings());
-            Assert.assertTrue(bcs.getShape() instanceof BoxShape);
+            MassProperties actualMp = bcs.getMassProperties();
+            Assert.assertNotNull(actualMp);
+
+            ConstShapeSettings actualSs = bcs.getShapeSettings();
+            Assert.assertEquals(ss, actualSs);
+
+            ConstShape actualShape = bcs.getShape();
+            Assert.assertTrue(actualShape instanceof BoxShape);
 
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            TestUtils.testClose(bcs, ssRefC);
+            TestUtils.testClose(actualSs, actualShape, actualMp, bcs, ss);
         }
         { // constructed from a Shape:
             ConstShape shape = new SphereShape(1f);
-            final ShapeRefC shapeRefC = shape.toRefC();
             int objectLayer = 0;
             BodyCreationSettings bcs = new BodyCreationSettings(shape,
                     new RVec3(), new Quat(), EMotionType.Dynamic, objectLayer);
 
-            Assert.assertNotNull(bcs.getMassProperties());
-            Assert.assertEquals(shape, bcs.getShape());
+            MassProperties actualMp = bcs.getMassProperties();
+            Assert.assertNotNull(actualMp);
+
+            ConstShape actualShape = bcs.getShape();
+            Assert.assertEquals(shape, actualShape);
 
             Assert.assertNull(bcs.getShapeSettings());
             testBcsDefaults(bcs);
             testBcsSetters(bcs);
 
-            TestUtils.testClose(bcs, shapeRefC);
+            TestUtils.testClose(actualShape, actualMp, bcs, shape);
         }
 
         System.gc();
@@ -438,10 +443,8 @@ public class Test003 {
         float radius = 1f; // meters
         float height = 2f; // meters
         ConstShape shape = new CapsuleShape(height / 2f, radius);
-        final ShapeRefC shapeRefC = shape.toRefC();
 
         CharacterSettings settings = new CharacterSettings();
-        final CharacterSettingsRef settingsRef = settings.toRef();
         settings.setShape(shape);
 
         int maxBodies = 1;
@@ -457,9 +460,9 @@ public class Test003 {
         testCharacterDefaults(characterRef);
         testCharacterDefaults(characterRefC);
 
-        TestUtils.testClose(characterRefC, characterRef);
+        TestUtils.testClose(characterRefC, characterRef, character);
         TestUtils.cleanupPhysicsSystem(system);
-        TestUtils.testClose(settingsRef, shapeRefC);
+        TestUtils.testClose(settings, shape);
         System.gc();
     }
 
@@ -468,7 +471,6 @@ public class Test003 {
      */
     private static void doCharacterVirtual() {
         CharacterVirtualSettings settings = new CharacterVirtualSettings();
-        final CharacterVirtualSettingsRef ref = settings.toRef();
 
         int maxBodies = 1;
         PhysicsSystem system = TestUtils.newPhysicsSystem(maxBodies);
@@ -482,9 +484,9 @@ public class Test003 {
         testCharacterVirtualDefaults(characterRef);
         testCharacterVirtualDefaults(characterRefC);
 
-        TestUtils.testClose(characterRefC, characterRef);
+        TestUtils.testClose(characterRefC, characterRef, character);
         TestUtils.cleanupPhysicsSystem(system);
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -652,18 +654,18 @@ public class Test003 {
         }
         { // constructed from a SoftBodySharedSettings:
             SoftBodySharedSettings sbss = new SoftBodySharedSettings();
-            final SoftBodySharedSettingsRef sbssRef = sbss.toRef();
             RVec3Arg location = new RVec3();
             QuatArg orientation = new Quat();
             int objectLayer = 0;
             SoftBodyCreationSettings sbcs = new SoftBodyCreationSettings(
                     sbss, location, orientation, objectLayer);
 
-            Assert.assertEquals(sbss.targetVa(), sbcs.getSettings().targetVa());
+            ConstSoftBodySharedSettings actualSbss = sbcs.getSettings();
+            Assert.assertEquals(sbss, actualSbss);
             testSbcsDefaults(sbcs);
             testSbcsSetters(sbcs);
 
-            TestUtils.testClose(sbcs, sbssRef);
+            TestUtils.testClose(actualSbss, sbcs, sbss);
         }
 
         System.gc();
@@ -884,6 +886,8 @@ public class Test003 {
         TestUtils.assertEquals(0.6f, 0f, 0f, 0.8f, bcs.getRotation(), 0f);
         Assert.assertFalse(bcs.getUseManifoldReduction());
         Assert.assertEquals(20L, bcs.getUserData());
+
+        TestUtils.testClose(group, filter);
     }
 
     /**
@@ -943,9 +947,12 @@ public class Test003 {
         group.setGroupId(101);
         group.setSubGroupId(102);
 
-        Assert.assertEquals(filter.va(), group.getGroupFilter().targetVa());
+        ConstGroupFilter actualFilter = group.getGroupFilter();
+        Assert.assertEquals(filter, actualFilter);
         Assert.assertEquals(101, group.getGroupId());
         Assert.assertEquals(102, group.getSubGroupId());
+
+        TestUtils.testClose(actualFilter, filter);
     }
 
     /**
@@ -1072,6 +1079,8 @@ public class Test003 {
 
         listener.setEnableValidate(false);
         Assert.assertFalse(listener.getEnableValidate());
+
+        TestUtils.testClose(olpFilter, bplFilter, bodyFilter);
     }
 
     /**
@@ -1145,7 +1154,11 @@ public class Test003 {
     private static void testMpDefaults(ConstMassProperties props) {
         Assert.assertTrue(props.hasAssignedNativeObject());
         Assert.assertEquals(0f, props.getMass(), 0f);
-        Assert.assertTrue(props.getInertia().isEqual(Mat44.sZero()));
+
+        Mat44 zero = Mat44.sZero();
+        Mat44 actual = props.getInertia();
+        Assert.assertTrue(actual.isEqual(zero));
+        TestUtils.testClose(actual, zero);
     }
 
     /**
@@ -1249,7 +1262,9 @@ public class Test003 {
      */
     private static void testSbcsSetters(SoftBodyCreationSettings sbcs) {
         sbcs.setAllowSleeping(false);
-        sbcs.setCollisionGroup(new CollisionGroup());
+
+        CollisionGroup newGroup = new CollisionGroup();
+        sbcs.setCollisionGroup(newGroup);
 
         sbcs.setFacesDoubleSided(true);
         sbcs.setFriction(0.02f);
@@ -1280,9 +1295,13 @@ public class Test003 {
         Assert.assertEquals(0.15f, sbcs.getRestitution(), 0f);
         TestUtils.assertEquals(
                 0.5f, 0.5f, -0.5f, -0.5f, sbcs.getRotation(), 0f);
-        Assert.assertEquals(newSs, sbcs.getSettings());
+
+        ConstSoftBodySharedSettings actualSs = sbcs.getSettings();
+        Assert.assertEquals(newSs, actualSs);
 
         Assert.assertFalse(sbcs.getUpdatePosition());
+
+        TestUtils.testClose(actualSs, newSs, newGroup);
     }
 
     /**
