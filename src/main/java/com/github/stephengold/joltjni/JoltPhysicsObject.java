@@ -123,9 +123,6 @@ abstract public class JoltPhysicsObject
         assert va  != 0L;
         virtualAddress.set(va);
 
-        if (container instanceof RefTarget) {
-            container = ((RefTarget) container).toRef();
-        }
         assert container == null || container.ownsNativeObject() : container;
         this.containingObject = container;
     }
