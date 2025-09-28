@@ -26,11 +26,11 @@ import com.github.stephengold.joltjni.DistanceConstraintSettings;
 import com.github.stephengold.joltjni.FixedConstraintSettings;
 import com.github.stephengold.joltjni.GearConstraintSettings;
 import com.github.stephengold.joltjni.HingeConstraintSettings;
+import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.PointConstraintSettings;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.SixDofConstraintSettings;
 import com.github.stephengold.joltjni.SliderConstraintSettings;
-import com.github.stephengold.joltjni.TwoBodyConstraintSettingsRef;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EAxis;
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
@@ -77,12 +77,11 @@ public class Test005 {
      */
     private static void doConeConstraintSettings() {
         ConeConstraintSettings settings = new ConeConstraintSettings();
-        TwoBodyConstraintSettingsRef ref = settings.toRef();
 
         testConeCsDefaults(settings);
         testConeCsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -91,12 +90,11 @@ public class Test005 {
      */
     private static void doDistanceConstraintSettings() {
         DistanceConstraintSettings settings = new DistanceConstraintSettings();
-        TwoBodyConstraintSettingsRef ref = settings.toRef();
 
         testDistanceCsDefaults(settings);
         testDistanceCsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -105,12 +103,11 @@ public class Test005 {
      */
     private static void doFixedConstraintSettings() {
         FixedConstraintSettings settings = new FixedConstraintSettings();
-        TwoBodyConstraintSettingsRef ref = settings.toRef();
 
         testFixedCsDefaults(settings);
         testFixedCsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -119,12 +116,11 @@ public class Test005 {
      */
     private static void doGearConstraintSettings() {
         GearConstraintSettings settings = new GearConstraintSettings();
-        TwoBodyConstraintSettingsRef ref = settings.toRef();
 
         testGearCsDefaults(settings);
         testGearCsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -133,12 +129,11 @@ public class Test005 {
      */
     private static void doHingeConstraintSettings() {
         HingeConstraintSettings settings = new HingeConstraintSettings();
-        TwoBodyConstraintSettingsRef ref = settings.toRef();
 
         testHingeCsDefaults(settings);
         testHingeCsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -147,12 +142,11 @@ public class Test005 {
      */
     private static void doPointConstraintSettings() {
         PointConstraintSettings settings = new PointConstraintSettings();
-        TwoBodyConstraintSettingsRef ref = settings.toRef();
 
         testPointCsDefaults(settings);
         testPointCsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -161,12 +155,11 @@ public class Test005 {
      */
     private static void doSixDofConstraintSettings() {
         SixDofConstraintSettings settings = new SixDofConstraintSettings();
-        TwoBodyConstraintSettingsRef ref = settings.toRef();
 
         testSixDofCsDefaults(settings);
         testSixDofCsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -175,12 +168,11 @@ public class Test005 {
      */
     private static void doSliderConstraintSettings() {
         SliderConstraintSettings settings = new SliderConstraintSettings();
-        TwoBodyConstraintSettingsRef ref = settings.toRef();
 
         testSliderCsDefaults(settings);
         testSliderCsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
