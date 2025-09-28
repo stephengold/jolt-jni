@@ -129,7 +129,7 @@ public class Test004 {
         testGettersAndDefaults(settings3);
 
         TestUtils.testClose(settings3, settings2, physicsSystem, objVsObjFilter,
-                objVsBpFilter, mapObj2Bp);
+                objVsBpFilter, mapObj2Bp, tab);
 
         TestUtils.cleanup();
     }
@@ -204,6 +204,7 @@ public class Test004 {
 
         AaBox bounds = physicsSystem.getBounds();
         Assert.assertFalse(bounds.isValid());
+        TestUtils.testClose(bounds, idVector2, idVector);
 
         Assert.assertNotNull(physicsSystem.getCombineFriction());
         Assert.assertNotNull(physicsSystem.getCombineRestitution());
