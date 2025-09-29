@@ -26,7 +26,6 @@ import com.github.stephengold.joltjni.DistanceConstraintSettings;
 import com.github.stephengold.joltjni.FixedConstraintSettings;
 import com.github.stephengold.joltjni.GearConstraintSettings;
 import com.github.stephengold.joltjni.HingeConstraintSettings;
-import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.PointConstraintSettings;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.SixDofConstraintSettings;
