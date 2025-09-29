@@ -118,7 +118,8 @@ public class Test009 {
                 compoundSettings, RVec3.sZero(), Quat.sIdentity(),
                 EMotionType.Dynamic, Layers.MOVING);
 
-        TestUtils.testClose(bcs, parameters, decomposer);
+        TestUtils.testClose(bcs, compoundSettings, parameters, decomposer);
+        TestUtils.testClose(hulls);
         TestUtils.cleanup();
     }
 }
