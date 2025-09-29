@@ -59,6 +59,7 @@ abstract public class CompoundShapeSettings extends ShapeSettings {
             ConvexHullShapeSettings childSettings
                     = new ConvexHullShapeSettings(numPoints, points);
             addShape(0f, 0f, 0f, childSettings);
+            childSettings.close();
         }
     }
 
