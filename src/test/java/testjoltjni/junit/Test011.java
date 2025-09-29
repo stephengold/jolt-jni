@@ -33,7 +33,9 @@ import com.github.stephengold.joltjni.CustomDebugRendererSimple;
 import com.github.stephengold.joltjni.CustomPhysicsStepListener;
 import com.github.stephengold.joltjni.CustomRayCastBodyCollector;
 import com.github.stephengold.joltjni.CustomSoftBodyContactListener;
+import com.github.stephengold.joltjni.DebugRenderer;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.JoltPhysicsObject;
 import org.junit.Test;
 import testjoltjni.TestUtils;
 
@@ -58,7 +60,7 @@ public class Test011 {
         createCustomListeners();
 
         if (Jolt.implementsDebugRendering()) {
-            new CustomDebugRendererSimple() {
+            DebugRenderer dr = new CustomDebugRendererSimple() {
                 @Override
                 public void drawLine(double x1, double y1, double z1,
                         double x2, double y2, double z2, int colorInt) {
@@ -75,6 +77,7 @@ public class Test011 {
                         double z3, int colorInt, int ordinal) {
                 }
             };
+            TestUtils.testClose(dr);
         }
 
         TestUtils.cleanup();
@@ -86,51 +89,56 @@ public class Test011 {
      * Test the custom collector classes.
      */
     private static void createCustomCollectors() {
-        new CustomCastRayCollector() {
+        JoltPhysicsObject castRay = new CustomCastRayCollector() {
             @Override
             public void addHit(long resultVa) {
             }
         };
 
-        new CustomCastShapeCollector() {
+        JoltPhysicsObject castShape = new CustomCastShapeCollector() {
             @Override
             public void addHit(long resultVa) {
             }
         };
 
-        new CustomCollidePointCollector() {
+        JoltPhysicsObject coPoint = new CustomCollidePointCollector() {
             @Override
             public void addHit(long resultVa) {
             }
         };
 
-        new CustomCollideShapeBodyCollector() {
+        JoltPhysicsObject coShapeBody = new CustomCollideShapeBodyCollector() {
             @Override
             public void addHit(int bodyId) {
             }
         };
 
-        new CustomCollideShapeCollector() {
+        JoltPhysicsObject coShape = new CustomCollideShapeCollector() {
             @Override
             public void addHit(long resultVa) {
             }
         };
 
-        new CustomRayCastBodyCollector() {
+        JoltPhysicsObject rcb = new CustomRayCastBodyCollector() {
             @Override
             public void addHit(long resultVa) {
             }
         };
+
+        TestUtils.testClose(
+                castRay, castShape, coPoint, coShapeBody, coShape, rcb);
     }
 
     /**
      * Test the custom listener classes.
      */
     private static void createCustomListeners() {
-        new CustomBodyActivationListener();
-        new CustomCharacterContactListener();
-        new CustomContactListener();
-        new CustomPhysicsStepListener();
-        new CustomSoftBodyContactListener();
+        JoltPhysicsObject ba = new CustomBodyActivationListener();
+        JoltPhysicsObject cc = new CustomCharacterContactListener();
+        JoltPhysicsObject contact = new CustomContactListener();
+        JoltPhysicsObject psl = new CustomPhysicsStepListener();
+        JoltPhysicsObject sbc = new CustomSoftBodyContactListener();
+
+        TestUtils.testClose(ba, cc, contact, psl, sbc);
     }
 }
