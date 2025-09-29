@@ -24,6 +24,7 @@ package testjoltjni.junit;
 import com.github.stephengold.joltjni.CustomPhysicsStepListener;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.PhysicsStepListener;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.TempAllocator;
 import com.github.stephengold.joltjni.TempAllocatorMalloc;
@@ -59,12 +60,13 @@ public class Test010 {
 
         // Configure a physics system with a simple step listener:
         PhysicsSystem physicsSystem = TestUtils.newPhysicsSystem(2);
-        physicsSystem.addStepListener(new CustomPhysicsStepListener() {
+        PhysicsStepListener listener = new CustomPhysicsStepListener() {
             @Override
             public void onStep(long contextVa) {
                 invoked = true;
             }
-        });
+        };
+        physicsSystem.addStepListener(listener);
 
         int numThreads = 1;
         TempAllocator allocator = new TempAllocatorMalloc();
@@ -82,6 +84,7 @@ public class Test010 {
 
         Assert.assertTrue(invoked);
 
+        TestUtils.testClose(jobSystem, allocator, listener);
         TestUtils.cleanupPhysicsSystem(physicsSystem);
         TestUtils.cleanup();
     }
