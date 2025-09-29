@@ -32,12 +32,12 @@ import com.github.stephengold.joltjni.MeshShapeSettings;
 import com.github.stephengold.joltjni.MutableCompoundShapeSettings;
 import com.github.stephengold.joltjni.OffsetCenterOfMassShapeSettings;
 import com.github.stephengold.joltjni.PhysicsMaterial;
+import com.github.stephengold.joltjni.PhysicsMaterialList;
 import com.github.stephengold.joltjni.Plane;
 import com.github.stephengold.joltjni.PlaneShapeSettings;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RotatedTranslatedShapeSettings;
 import com.github.stephengold.joltjni.ScaledShapeSettings;
-import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.ShapeSettings;
 import com.github.stephengold.joltjni.ShapeSettingsRef;
 import com.github.stephengold.joltjni.SphereShape;
@@ -50,6 +50,7 @@ import com.github.stephengold.joltjni.TriangleShapeSettings;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstConvexShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
@@ -107,12 +108,11 @@ public class Test006 {
      */
     private static void doBoxShapeSettings() {
         BoxShapeSettings settings = new BoxShapeSettings();
-        ShapeSettingsRef ref = settings.toRef();
 
         testBoxSsDefaults(settings);
         testBoxSsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -121,12 +121,11 @@ public class Test006 {
      */
     private static void doCapsuleShapeSettings() {
         CapsuleShapeSettings settings = new CapsuleShapeSettings();
-        final ShapeSettingsRef ref = settings.toRef();
 
         testCapsuleSsDefaults(settings);
         testCapsuleSsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -136,7 +135,6 @@ public class Test006 {
     private static void doConvexHullShapeSettings() {
         // no-arg constructor:
         ConvexHullShapeSettings settings = new ConvexHullShapeSettings();
-        final ShapeSettingsRef ref = settings.toRef();
 
         testConvexHullSsDefaults(settings);
         testConvexHullSsSetters(settings);
@@ -144,12 +142,11 @@ public class Test006 {
         // instantiate from a collection:
         Collection<Vec3Arg> list = List.of();
         ConvexHullShapeSettings settings2 = new ConvexHullShapeSettings(list);
-        final ShapeSettingsRef ref2 = settings2.toRef();
 
         testConvexHullSsDefaults(settings2);
         testConvexHullSsSetters(settings2);
 
-        TestUtils.testClose(ref2, ref);
+        TestUtils.testClose(settings2, settings);
         System.gc();
     }
 
@@ -159,19 +156,17 @@ public class Test006 {
     private static void doCylinderShapeSettings() {
         // no-arg constructor:
         CylinderShapeSettings settings = new CylinderShapeSettings();
-        final ShapeSettingsRef ref = settings.toRef();
 
         testCylinderSsDefaults(settings);
         testCylinderSsSetters(settings);
 
         // instantiate from dimensions:
         CylinderShapeSettings settings2 = new CylinderShapeSettings(0f, 0f, 0f);
-        final ShapeSettingsRef ref2 = settings2.toRef();
 
         testCylinderSsDefaults(settings2);
         testCylinderSsSetters(settings2);
 
-        TestUtils.testClose(ref2, ref);
+        TestUtils.testClose(settings2, settings);
         System.gc();
     }
 
@@ -180,12 +175,11 @@ public class Test006 {
      */
     private static void doEmptyShapeSettings() {
         EmptyShapeSettings settings = new EmptyShapeSettings();
-        final ShapeSettingsRef ref = settings.toRef();
 
         testEmptySsDefaults(settings);
         testSsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -195,7 +189,6 @@ public class Test006 {
     private static void doHeightFieldShapeSettings() {
         // no-arg constructor:
         HeightFieldShapeSettings settings0 = new HeightFieldShapeSettings();
-        final ShapeSettingsRef ref0 = settings0.toRef();
 
         testHeightFieldSsDefaults(settings0);
         testHeightFieldSsSetters(settings0);
@@ -204,9 +197,11 @@ public class Test006 {
         int sampleCount = 0;
         int numFloats = sampleCount * sampleCount;
         FloatBuffer samples = Jolt.newDirectFloatBuffer(numFloats);
+        byte[] indexArray = null;
+        PhysicsMaterialList mats = new PhysicsMaterialList();
         HeightFieldShapeSettings settings = new HeightFieldShapeSettings(
-                samples, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount);
-        final ShapeSettingsRef ref1 = settings.toRef();
+                samples, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount,
+                indexArray, mats);
 
         testHeightFieldSsDefaults(settings);
         testHeightFieldSsSetters(settings);
@@ -214,13 +209,13 @@ public class Test006 {
         // instantiate from an array:
         float[] array = new float[numFloats];
         HeightFieldShapeSettings settings2 = new HeightFieldShapeSettings(
-                array, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount);
-        final ShapeSettingsRef ref2 = settings2.toRef();
+                array, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount,
+                indexArray, mats);
 
         testHeightFieldSsDefaults(settings2);
         testHeightFieldSsSetters(settings2);
 
-        TestUtils.testClose(ref2, ref1, ref0);
+        TestUtils.testClose(settings2, settings, mats, settings0);
         System.gc();
     }
 
@@ -230,28 +225,26 @@ public class Test006 {
     private static void doMeshShapeSettings() {
         // no-arg constructor:
         MeshShapeSettings settings = new MeshShapeSettings();
-        final ShapeSettingsRef ref = settings.toRef();
 
         testMeshSsDefaults(settings);
         testMeshSsSetters(settings);
 
         // instantiate from an array:
         Triangle[] array = new Triangle[0];
-        MeshShapeSettings settings2 = new MeshShapeSettings(array);
-        final ShapeSettingsRef ref2 = settings2.toRef();
+        PhysicsMaterialList mats = new PhysicsMaterialList();
+        MeshShapeSettings settings2 = new MeshShapeSettings(array, mats);
 
         testMeshSsDefaults(settings2);
         testMeshSsSetters(settings2);
 
         // instantiate from a collection:
         List<Triangle> list = new ArrayList<>(1);
-        MeshShapeSettings settings3 = new MeshShapeSettings(list);
-        final ShapeSettingsRef ref3 = settings3.toRef();
+        MeshShapeSettings settings3 = new MeshShapeSettings(list, mats);
 
         testMeshSsDefaults(settings3);
         testMeshSsSetters(settings3);
 
-        TestUtils.testClose(ref3, ref2, ref);
+        TestUtils.testClose(settings3, settings2, mats, settings);
         System.gc();
     }
 
@@ -261,11 +254,8 @@ public class Test006 {
     private static void doMutableCompoundShapeSettings() {
         MutableCompoundShapeSettings settings
                 = new MutableCompoundShapeSettings();
-        final ShapeSettingsRef ref = settings.toRef();
-
         testMutableCompoundSsDefaults(settings);
-
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -273,15 +263,14 @@ public class Test006 {
      * Test the {@code OffsetCenterOfMassShapeSettings} class.
      */
     private static void doOffsetCenterOfMassShapeSettings() {
-        ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
+        SphereShape baseShape = new SphereShape(1f);
         OffsetCenterOfMassShapeSettings settings
-                = new OffsetCenterOfMassShapeSettings(new Vec3(), baseShapeRef);
-        final ShapeSettingsRef ref = settings.toRef();
+                = new OffsetCenterOfMassShapeSettings(new Vec3(), baseShape);
 
         testOffsetCenterOfMassSsDefaults(settings);
         testOffsetCenterOfMassSsSetters(settings);
 
-        TestUtils.testClose(ref, baseShapeRef);
+        TestUtils.testClose(settings, baseShape);
         System.gc();
     }
 
@@ -291,7 +280,6 @@ public class Test006 {
     private static void doPlaneShapeSettings() {
         // no-arg constructor:
         PlaneShapeSettings settings = new PlaneShapeSettings();
-        final ShapeSettingsRef ref = settings.toRef();
 
         testPlaneSsDefaults(settings);
         testPlaneSsSetters(settings);
@@ -299,12 +287,11 @@ public class Test006 {
         // instantiate from a Plane:
         ConstPlane plane = new Plane(0f, 0f, 0f, 0f);
         PlaneShapeSettings settings2 = new PlaneShapeSettings(plane);
-        final ShapeSettingsRef ref2 = settings2.toRef();
 
         testPlaneSsDefaults(settings2);
         testPlaneSsSetters(settings2);
 
-        TestUtils.testClose(ref2, ref);
+        TestUtils.testClose(settings2, settings);
         System.gc();
     }
 
@@ -312,16 +299,15 @@ public class Test006 {
      * Test the {@code RotatedTranslatedShapeSettings} class.
      */
     private static void doRotatedTranslatedShapeSettings() {
-        ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
+        SphereShape baseShape = new SphereShape(1f);
         RotatedTranslatedShapeSettings settings
                 = new RotatedTranslatedShapeSettings(
-                        new Vec3(), new Quat(), baseShapeRef);
-        final ShapeSettingsRef ref = settings.toRef();
+                        new Vec3(), new Quat(), baseShape);
 
         testRotatedTranslatedSsDefaults(settings);
         testRotatedTranslatedSsSetters(settings);
 
-        TestUtils.testClose(ref, baseShapeRef);
+        TestUtils.testClose(settings, baseShape);
         System.gc();
     }
 
@@ -329,14 +315,13 @@ public class Test006 {
      * Test the {@code ScaledShapeSettings} class.
      */
     private static void doScaledShapeSettings() {
-        ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
+        SphereShape baseShape = new SphereShape(1f);
         ScaledShapeSettings settings
-                = new ScaledShapeSettings(baseShapeRef, new Vec3(1f, 1f, 1f));
-        final ShapeSettingsRef ref = settings.toRef();
+                = new ScaledShapeSettings(baseShape, new Vec3(1f, 1f, 1f));
 
         testScaledSsDefaults(settings);
 
-        TestUtils.testClose(ref, baseShapeRef);
+        TestUtils.testClose(settings, baseShape);
         System.gc();
     }
 
@@ -345,12 +330,11 @@ public class Test006 {
      */
     private static void doSphereShapeSettings() {
         SphereShapeSettings settings = new SphereShapeSettings(1f);
-        final ShapeSettingsRef ref = settings.toRef();
 
         testSphereSsDefaults(settings);
         testSphereSsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -360,11 +344,9 @@ public class Test006 {
     private static void doStaticCompoundShapeSettings() {
         StaticCompoundShapeSettings settings
                 = new StaticCompoundShapeSettings();
-        final ShapeSettingsRef ref = settings.toRef();
-
         testStaticCompoundSsDefaults(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -374,12 +356,11 @@ public class Test006 {
     private static void doTaperedCapsuleShapeSettings() {
         TaperedCapsuleShapeSettings settings
                 = new TaperedCapsuleShapeSettings();
-        final ShapeSettingsRef ref = settings.toRef();
 
         testTaperedCapsuleSsDefaults(settings);
         testTaperedCapsuleSsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -389,12 +370,11 @@ public class Test006 {
     private static void doTaperedCylinderShapeSettings() {
         TaperedCylinderShapeSettings settings
                 = new TaperedCylinderShapeSettings();
-        final ShapeSettingsRef ref = settings.toRef();
 
         testTaperedCylinderSsDefaults(settings);
         testTaperedCylinderSsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -403,12 +383,11 @@ public class Test006 {
      */
     private static void doTriangleShapeSettings() {
         TriangleShapeSettings settings = new TriangleShapeSettings();
-        final ShapeSettingsRef ref = settings.toRef();
 
         testTriangleSsDefaults(settings);
         testTriangleSsSetters(settings);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(settings);
         System.gc();
     }
 
@@ -434,12 +413,16 @@ public class Test006 {
 
         settings.setConvexRadius(0.1f);
         settings.setHalfExtent(new Vec3(2f, 3f, 4f));
-        settings.setMaterial(PhysicsMaterial.sDefault());
+        ConstPhysicsMaterial material = PhysicsMaterial.sDefault();
+        settings.setMaterial(material);
 
         Assert.assertEquals(0.1f, settings.getConvexRadius(), 0f);
         TestUtils.assertEquals(
                 2f, 3f, 4f, settings.getHalfExtent(), 0f);
-        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        ConstPhysicsMaterial actualMaterial = settings.getMaterial();
+        Assert.assertEquals(material, actualMaterial);
+
+        TestUtils.testClose(actualMaterial, material);
     }
 
     /**
@@ -464,12 +447,16 @@ public class Test006 {
         testSsSetters(settings);
 
         settings.setHalfHeightOfCylinder(0.2f);
-        settings.setMaterial(PhysicsMaterial.sDefault());
+        ConstPhysicsMaterial material = PhysicsMaterial.sDefault();
+        settings.setMaterial(material);
         settings.setRadius(0.3f);
 
         Assert.assertEquals(0.2f, settings.getHalfHeightOfCylinder(), 0f);
-        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        ConstPhysicsMaterial actualMaterial = settings.getMaterial();
+        Assert.assertEquals(material, actualMaterial);
         Assert.assertEquals(0.3f, settings.getRadius(), 0f);
+
+        TestUtils.testClose(actualMaterial, material);
     }
 
     /**
@@ -498,14 +485,18 @@ public class Test006 {
         testSsSetters(settings);
 
         settings.setHullTolerance(0.1f);
-        settings.setMaterial(PhysicsMaterial.sDefault());
+        ConstPhysicsMaterial material = PhysicsMaterial.sDefault();
+        settings.setMaterial(material);
         settings.setMaxConvexRadius(0.2f);
         settings.setMaxErrorConvexRadius(0.3f);
 
         Assert.assertEquals(0.1f, settings.getHullTolerance(), 0f);
-        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        ConstPhysicsMaterial actualMaterial = settings.getMaterial();
+        Assert.assertEquals(material, actualMaterial);
         Assert.assertEquals(0.2f, settings.getMaxConvexRadius(), 0f);
         Assert.assertEquals(0.3f, settings.getMaxErrorConvexRadius(), 0f);
+
+        TestUtils.testClose(actualMaterial, material);
     }
 
     /**
@@ -546,13 +537,17 @@ public class Test006 {
 
         settings.setConvexRadius(0.1f);
         settings.setHalfHeight(0.2f);
-        settings.setMaterial(PhysicsMaterial.sDefault());
+        ConstPhysicsMaterial material = PhysicsMaterial.sDefault();
+        settings.setMaterial(material);
         settings.setRadius(0.3f);
 
         Assert.assertEquals(0.1f, settings.getConvexRadius(), 0f);
         Assert.assertEquals(0.2f, settings.getHalfHeight(), 0f);
-        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        ConstPhysicsMaterial actualMaterial = settings.getMaterial();
+        Assert.assertEquals(material, actualMaterial);
         Assert.assertEquals(0.3f, settings.getRadius(), 0f);
+
+        TestUtils.testClose(actualMaterial, material);
     }
 
     /**
@@ -709,14 +704,18 @@ public class Test006 {
         testSsSetters(settings);
 
         settings.setHalfExtent(99f);
-        settings.setMaterial(PhysicsMaterial.sDefault());
+        ConstPhysicsMaterial material = PhysicsMaterial.sDefault();
+        settings.setMaterial(material);
         settings.setPlane(new Plane(0.6f, 0.8f, 0f, 2f));
 
         Assert.assertEquals(99f, settings.getHalfExtent(), 0f);
-        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        ConstPhysicsMaterial actualMaterial = settings.getMaterial();
+        Assert.assertEquals(material, actualMaterial);
         TestUtils.assertEquals(
                 0.6f, 0.8f, 0f, settings.getPlane().getNormal(), 0f);
         Assert.assertEquals(2f, settings.getPlane().getConstant(), 0f);
+
+        TestUtils.testClose(actualMaterial, material);
     }
 
     /**
@@ -779,11 +778,15 @@ public class Test006 {
     private static void testSphereSsSetters(SphereShapeSettings settings) {
         testSsSetters(settings);
 
-        settings.setMaterial(PhysicsMaterial.sDefault());
+        ConstPhysicsMaterial material = PhysicsMaterial.sDefault();
+        settings.setMaterial(material);
         settings.setRadius(9f);
 
-        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        ConstPhysicsMaterial actualMaterial = settings.getMaterial();
+        Assert.assertEquals(material, actualMaterial);
         Assert.assertEquals(9f, settings.getRadius(), 0f);
+
+        TestUtils.testClose(actualMaterial, material);
     }
 
     /**
@@ -794,7 +797,7 @@ public class Test006 {
     private static void testSsDefaults(ConstShapeSettings settings) {
         Assert.assertTrue(settings.hasAssignedNativeObject());
         Assert.assertTrue(settings.ownsNativeObject());
-        Assert.assertEquals(2, settings.getRefCount());
+        Assert.assertEquals(1, settings.getRefCount());
     }
 
     /**
@@ -805,8 +808,11 @@ public class Test006 {
     private static void testSsSetters(ShapeSettings settings) {
         ShapeSettingsRef ref = settings.toRef();
 
-        Assert.assertEquals(3, settings.getRefCount());
-        Assert.assertEquals(settings, ref.getPtr());
+        Assert.assertEquals(2, settings.getRefCount());
+        ShapeSettings s2 = ref.getPtr();
+        Assert.assertEquals(settings, s2);
+
+        TestUtils.testClose(s2, ref);
     }
 
     /**
@@ -846,14 +852,18 @@ public class Test006 {
 
         settings.setBottomRadius(0.08f);
         settings.setHalfHeightOfTaperedCylinder(0.2f);
-        settings.setMaterial(PhysicsMaterial.sDefault());
+        ConstPhysicsMaterial material = PhysicsMaterial.sDefault();
+        settings.setMaterial(material);
         settings.setTopRadius(0.3f);
 
         Assert.assertEquals(0.08f, settings.getBottomRadius(), 0f);
         Assert.assertEquals(
                 0.2f, settings.getHalfHeightOfTaperedCylinder(), 0f);
-        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        ConstPhysicsMaterial actualMaterial = settings.getMaterial();
+        Assert.assertEquals(material, actualMaterial);
         Assert.assertEquals(0.3f, settings.getTopRadius(), 0f);
+
+        TestUtils.testClose(actualMaterial, material);
     }
 
     /**
@@ -884,14 +894,18 @@ public class Test006 {
         settings.setBottomRadius(0.08f);
         settings.setConvexRadius(0.1f);
         settings.setHalfHeight(0.2f);
-        settings.setMaterial(PhysicsMaterial.sDefault());
+        ConstPhysicsMaterial material = PhysicsMaterial.sDefault();
+        settings.setMaterial(material);
         settings.setTopRadius(0.3f);
 
         Assert.assertEquals(0.08f, settings.getBottomRadius(), 0f);
         Assert.assertEquals(0.1f, settings.getConvexRadius(), 0f);
         Assert.assertEquals(0.2f, settings.getHalfHeight(), 0f);
-        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        ConstPhysicsMaterial actualMaterial = settings.getMaterial();
+        Assert.assertEquals(material, actualMaterial);
         Assert.assertEquals(0.3f, settings.getTopRadius(), 0f);
+
+        TestUtils.testClose(actualMaterial, material);
     }
 
     /**
@@ -919,15 +933,19 @@ public class Test006 {
         testSsSetters(settings);
 
         settings.setConvexRadius(0.1f);
-        settings.setMaterial(PhysicsMaterial.sDefault());
+        ConstPhysicsMaterial material = PhysicsMaterial.sDefault();
+        settings.setMaterial(material);
         settings.setV1(1f, 2f, 3f);
         settings.setV2(4f, 5f, 6f);
         settings.setV3(9f, 8f, 7f);
 
         Assert.assertEquals(0.1f, settings.getConvexRadius(), 0f);
-        Assert.assertEquals(PhysicsMaterial.sDefault(), settings.getMaterial());
+        ConstPhysicsMaterial actualMaterial = settings.getMaterial();
+        Assert.assertEquals(material, actualMaterial);
         TestUtils.assertEquals(1f, 2f, 3f, settings.getV1(), 0f);
         TestUtils.assertEquals(4f, 5f, 6f, settings.getV2(), 0f);
         TestUtils.assertEquals(9f, 8f, 7f, settings.getV3(), 0f);
+
+        TestUtils.testClose(actualMaterial, material);
     }
 }
