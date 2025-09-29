@@ -43,6 +43,7 @@ import com.github.stephengold.joltjni.MutableCompoundShape;
 import com.github.stephengold.joltjni.MutableCompoundShapeSettings;
 import com.github.stephengold.joltjni.OffsetCenterOfMassShape;
 import com.github.stephengold.joltjni.OffsetCenterOfMassShapeSettings;
+import com.github.stephengold.joltjni.PhysicsMaterialList;
 import com.github.stephengold.joltjni.Plane;
 import com.github.stephengold.joltjni.PlaneShape;
 import com.github.stephengold.joltjni.PlaneShapeSettings;
@@ -51,11 +52,8 @@ import com.github.stephengold.joltjni.RotatedTranslatedShape;
 import com.github.stephengold.joltjni.RotatedTranslatedShapeSettings;
 import com.github.stephengold.joltjni.ScaledShape;
 import com.github.stephengold.joltjni.ScaledShapeSettings;
-import com.github.stephengold.joltjni.ShapeRef;
 import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.ShapeResult;
-import com.github.stephengold.joltjni.ShapeSettingsRef;
-import com.github.stephengold.joltjni.ShapeSettingsRefC;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.SphereShapeSettings;
 import com.github.stephengold.joltjni.StaticCompoundShape;
@@ -123,7 +121,6 @@ public class Test007 {
      */
     private static void doBoxShape() {
         ConstBoxShapeSettings settings = new BoxShapeSettings(1f, 1f, 1f);
-        final ShapeSettingsRefC settingsRefC = settings.toRefC();
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -134,11 +131,10 @@ public class Test007 {
         Assert.assertEquals(4, shape.getRefCount());
 
         BoxShape shape2 = new BoxShape(new Vec3(1f, 1f, 1f));
-        final ShapeRef ref2 = shape2.toRef();
         testBoxDefaults(shape2);
-        Assert.assertEquals(2, shape2.getRefCount());
+        Assert.assertEquals(1, shape2.getRefCount());
 
-        TestUtils.testClose(ref2, ref, result, settingsRefC);
+        TestUtils.testClose(shape2, shape, ref, result, settings);
         System.gc();
     }
 
@@ -147,7 +143,6 @@ public class Test007 {
      */
     private static void doCapsuleShape() {
         CapsuleShapeSettings settings = new CapsuleShapeSettings(1f, 1f);
-        final ShapeSettingsRef settingsRef = settings.toRef();
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -158,11 +153,10 @@ public class Test007 {
         Assert.assertEquals(4, shape.getRefCount());
 
         CapsuleShape shape2 = new CapsuleShape(1f, 1f);
-        final ShapeRef ref2 = shape2.toRef();
         testCapsuleDefaults(shape2);
-        Assert.assertEquals(2, shape2.getRefCount());
+        Assert.assertEquals(1, shape2.getRefCount());
 
-        TestUtils.testClose(ref2, ref, result, settingsRef);
+        TestUtils.testClose(shape2, shape, ref, result, settings);
         System.gc();
     }
 
@@ -174,7 +168,6 @@ public class Test007 {
         Vec3Arg[] points = {new Vec3(3f, 3f, 3f), new Vec3(-3f, 3f, -3f),
             new Vec3(3f, -3f, -3f), new Vec3(-3f, -3f, 3f)};
         ConvexHullShapeSettings settings = new ConvexHullShapeSettings(points);
-        final ShapeSettingsRef settingsRef = settings.toRef();
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
         Assert.assertTrue(result.isValid());
@@ -182,22 +175,23 @@ public class Test007 {
         ConvexHullShape shape = (ConvexHullShape) ref.getPtr();
 
         testConvexHullDefaults(shape);
+        TestUtils.testClose(shape, ref, result, settings);
 
         List<Vec3Arg> list = new ArrayList<>(4);
         list.add(new Vec3(3f, 3f, 3f));
         list.add(new Vec3(-3f, 3f, -3f));
         list.add(new Vec3(3f, -3f, -3f));
         list.add(new Vec3(-3f, -3f, 3f));
-        settings = new ConvexHullShapeSettings(list);
-        result = settings.create();
-        Assert.assertFalse(result.hasError());
-        Assert.assertTrue(result.isValid());
-        ShapeRefC ref2 = result.get();
-        ConvexHullShape shape2 = (ConvexHullShape) ref.getPtr();
+        ConvexHullShapeSettings settings2 = new ConvexHullShapeSettings(list);
+        ShapeResult result2 = settings2.create();
+        Assert.assertFalse(result2.hasError());
+        Assert.assertTrue(result2.isValid());
+        ShapeRefC ref2 = result2.get();
+        ConvexHullShape shape2 = (ConvexHullShape) ref2.getPtr();
 
         testConvexHullDefaults(shape2);
 
-        TestUtils.testClose(ref2, ref, result, settingsRef);
+        TestUtils.testClose(shape2, ref2, result2, settings2);
         System.gc();
     }
 
@@ -206,7 +200,6 @@ public class Test007 {
      */
     private static void doCylinderShape() {
         CylinderShapeSettings settings = new CylinderShapeSettings(1f, 1f);
-        final ShapeSettingsRef settingsRef = settings.toRef();
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -217,12 +210,11 @@ public class Test007 {
         Assert.assertEquals(4, shape.getRefCount());
 
         CylinderShape shape2 = new CylinderShape(1f, 1f);
-        final ShapeRefC ref2 = shape2.toRefC();
 
         testCylinderDefaults(shape2);
-        Assert.assertEquals(2, shape2.getRefCount());
+        Assert.assertEquals(1, shape2.getRefCount());
 
-        TestUtils.testClose(ref2, ref, result, settingsRef);
+        TestUtils.testClose(shape2, shape, ref, result, settings);
         System.gc();
     }
 
@@ -231,7 +223,6 @@ public class Test007 {
      */
     private static void doEmptyShape() {
         EmptyShapeSettings settings = new EmptyShapeSettings();
-        final ShapeSettingsRef settingsRef = settings.toRef();
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -247,7 +238,7 @@ public class Test007 {
         Assert.assertEquals(EShapeType.Empty, shape.getType());
         Assert.assertFalse(shape.mustBeStatic());
 
-        TestUtils.testClose(ref, result, settingsRef);
+        TestUtils.testClose(shape, ref, result, settings);
         System.gc();
     }
 
@@ -258,9 +249,10 @@ public class Test007 {
         int sampleCount = 4;
         int numFloats = sampleCount * sampleCount;
         FloatBuffer samples = Jolt.newDirectFloatBuffer(numFloats);
-        HeightFieldShapeSettings settings = new HeightFieldShapeSettings(
-                samples, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount);
-        final ShapeSettingsRef settingsRef = settings.toRef();
+        PhysicsMaterialList mats = new PhysicsMaterialList();
+        HeightFieldShapeSettings settings
+                = new HeightFieldShapeSettings(samples, new Vec3(),
+                        new Vec3(1f, 1f, 1f), sampleCount, null, mats);
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -269,22 +261,22 @@ public class Test007 {
         HeightFieldShape shape = (HeightFieldShape) ref.getPtr();
 
         testHeightFieldDefaults(shape);
+        TestUtils.testClose(shape, ref, result, settings);
 
         float[] array = new float[numFloats];
-        HeightFieldShapeSettings settings2 = new HeightFieldShapeSettings(
-                array, new Vec3(), new Vec3(1f, 1f, 1f), sampleCount);
-        final ShapeSettingsRef settings2Ref = settings2.toRef();
+        HeightFieldShapeSettings settings2
+                = new HeightFieldShapeSettings(array, new Vec3(),
+                        new Vec3(1f, 1f, 1f), sampleCount, null, mats);
 
-        result = settings2.create();
-        Assert.assertFalse(result.hasError());
-        Assert.assertTrue(result.isValid());
-        ref = result.get();
-        HeightFieldShape shape2 = (HeightFieldShape) ref.getPtr();
-        final ShapeRefC ref2 = shape.toRefC();
+        ShapeResult result2 = settings2.create();
+        Assert.assertFalse(result2.hasError());
+        Assert.assertTrue(result2.isValid());
+        ShapeRefC ref2 = result2.get();
+        HeightFieldShape shape2 = (HeightFieldShape) ref2.getPtr();
 
         testHeightFieldDefaults(shape2);
+        TestUtils.testClose(shape2, ref2, result2, settings2, mats);
 
-        TestUtils.testClose(ref2, settings2Ref, ref, result, settingsRef);
         System.gc();
     }
 
@@ -305,7 +297,6 @@ public class Test007 {
         indices.pushBack(triangle1);
         indices.pushBack(triangle2);
         MeshShapeSettings settings = new MeshShapeSettings(vertices, indices);
-        final ShapeSettingsRef settingsRef = settings.toRef();
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -324,8 +315,8 @@ public class Test007 {
         List<Triangle> list = new ArrayList<>(2);
         list.add(tri1);
         list.add(tri2);
-        MeshShapeSettings settings2 = new MeshShapeSettings(list);
-        final ShapeSettingsRef settings2Ref = settings2.toRef();
+        PhysicsMaterialList mats = new PhysicsMaterialList();
+        MeshShapeSettings settings2 = new MeshShapeSettings(list, mats);
 
         ShapeResult result2 = settings2.create();
         Assert.assertFalse(result2.hasError());
@@ -336,8 +327,7 @@ public class Test007 {
         testMeshDefaults(shape2);
 
         Triangle[] array = {tri1, tri2};
-        MeshShapeSettings settings3 = new MeshShapeSettings(array);
-        final ShapeSettingsRef settings3Ref = settings3.toRef();
+        MeshShapeSettings settings3 = new MeshShapeSettings(array, mats);
 
         ShapeResult result3 = settings3.create();
         Assert.assertFalse(result3.hasError());
@@ -347,10 +337,10 @@ public class Test007 {
 
         testMeshDefaults(shape3);
 
-        TestUtils.testClose(ref3, result3, settings3Ref);
-        TestUtils.testClose(tri2, tri1, ref2, result2, settings2Ref);
+        TestUtils.testClose(shape3, ref3, result3, settings3);
+        TestUtils.testClose(shape2, ref2, result2, settings2, mats, tri2, tri1);
         TestUtils.testClose(
-                ref, result, settingsRef, triangle2, triangle1, indices);
+                shape, ref, result, settings, triangle2, triangle1, indices);
         System.gc();
     }
 
@@ -360,7 +350,6 @@ public class Test007 {
     private static void doMutableCompoundShape() {
         MutableCompoundShapeSettings settings
                 = new MutableCompoundShapeSettings();
-        final ShapeSettingsRef settingsRef = settings.toRef();
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -377,7 +366,7 @@ public class Test007 {
         Assert.assertEquals(EShapeType.Compound, shape.getType());
         Assert.assertFalse(shape.mustBeStatic());
 
-        TestUtils.testClose(ref, result, settingsRef);
+        TestUtils.testClose(shape, ref, result, settings);
         System.gc();
     }
 
@@ -385,11 +374,9 @@ public class Test007 {
      * Test the {@code OffsetCenterOfMassShape} class.
      */
     private static void doOffsetCenterOfMassShape() {
-        ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
+        SphereShape baseShape = new SphereShape(1f);
         OffsetCenterOfMassShapeSettings settings
-                = new OffsetCenterOfMassShapeSettings(
-                        Vec3.sAxisX(), baseShapeRef);
-        final ShapeSettingsRef settingsRef = settings.toRef();
+                = new OffsetCenterOfMassShapeSettings(Vec3.sAxisX(), baseShape);
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -401,13 +388,12 @@ public class Test007 {
         Assert.assertEquals(4, shape.getRefCount());
 
         OffsetCenterOfMassShape shape2
-                = new OffsetCenterOfMassShape(baseShapeRef, Vec3.sAxisX());
-        final ShapeRefC ref2 = shape2.toRefC();
+                = new OffsetCenterOfMassShape(baseShape, Vec3.sAxisX());
 
         testOffsetCenterOfMassDefaults(shape2);
-        Assert.assertEquals(2, shape2.getRefCount());
+        Assert.assertEquals(1, shape2.getRefCount());
 
-        TestUtils.testClose(ref2, ref, result, settingsRef, baseShapeRef);
+        TestUtils.testClose(shape2, shape, ref, result, settings, baseShape);
         System.gc();
     }
 
@@ -417,7 +403,6 @@ public class Test007 {
     private static void doPlaneShape() {
         Plane plane = new Plane(0f, 1f, 0f, 0f);
         PlaneShapeSettings settings = new PlaneShapeSettings(plane);
-        final ShapeSettingsRef settingsRef = settings.toRef();
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -433,7 +418,7 @@ public class Test007 {
         Assert.assertEquals(EShapeType.Plane, shape.getType());
         Assert.assertTrue(shape.mustBeStatic());
 
-        TestUtils.testClose(ref, result, settingsRef);
+        TestUtils.testClose(shape, ref, result, settings);
         System.gc();
     }
 
@@ -441,11 +426,10 @@ public class Test007 {
      * Test the {@code RotatedTranslatedShape} class.
      */
     private static void doRotatedTranslatedShape() {
-        ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
+        SphereShape baseShape = new SphereShape(1f);
         RotatedTranslatedShapeSettings settings
                 = new RotatedTranslatedShapeSettings(
-                        Vec3.sAxisX(), new Quat(), baseShapeRef);
-        final ShapeSettingsRef settingsRef = settings.toRef();
+                        Vec3.sAxisX(), new Quat(), baseShape);
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -464,7 +448,7 @@ public class Test007 {
         TestUtils.assertEquals(0f, 0f, 0f, 1f, shape.getRotation(), 0f);
         Assert.assertFalse(shape.mustBeStatic());
 
-        TestUtils.testClose(ref, result, settingsRef, baseShapeRef);
+        TestUtils.testClose(shape, ref, result, settings, baseShape);
         System.gc();
     }
 
@@ -472,10 +456,9 @@ public class Test007 {
      * Test the {@code ScaledShape} class.
      */
     private static void doScaledShape() {
-        ShapeRefC baseShapeRef = new SphereShape(1f).toRefC();
+        SphereShape baseShape = new SphereShape(1f);
         ScaledShapeSettings settings
-                = new ScaledShapeSettings(baseShapeRef, new Vec3(1f, 1f, 1f));
-        final ShapeSettingsRef settingsRef = settings.toRef();
+                = new ScaledShapeSettings(baseShape, new Vec3(1f, 1f, 1f));
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -492,7 +475,7 @@ public class Test007 {
         Assert.assertEquals(EShapeType.Decorated, shape.getType());
         Assert.assertFalse(shape.mustBeStatic());
 
-        TestUtils.testClose(ref, result, settingsRef, baseShapeRef);
+        TestUtils.testClose(shape, ref, result, settings, baseShape);
         System.gc();
     }
 
@@ -501,7 +484,6 @@ public class Test007 {
      */
     private static void doSphereShape() {
         SphereShapeSettings settings = new SphereShapeSettings(1f);
-        final ShapeSettingsRef settingsRef = settings.toRef();
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -513,11 +495,10 @@ public class Test007 {
         Assert.assertEquals(4, shape.getRefCount());
 
         SphereShape shape2 = new SphereShape(1f);
-        ShapeRefC ref2 = shape2.toRefC();
         testSphereDefaults(shape2);
-        Assert.assertEquals(2, shape2.getRefCount());
+        Assert.assertEquals(1, shape2.getRefCount());
 
-        TestUtils.testClose(ref2, ref, result, settingsRef);
+        TestUtils.testClose(shape2, shape, ref, result, settings);
         System.gc();
     }
 
@@ -527,10 +508,8 @@ public class Test007 {
     private static void doStaticCompoundShape() {
         StaticCompoundShapeSettings settings
                 = new StaticCompoundShapeSettings();
-        final ShapeSettingsRef settingsRef = settings.toRef();
 
         SphereShapeSettings settings1 = new SphereShapeSettings(1f);
-        final ShapeSettingsRef settings1Ref = settings1.toRef();
         settings.addShape(Vec3.sAxisX(), Quat.sIdentity(), settings1);
         settings.addShape(new Vec3(-1f, 0f, 0f), Quat.sIdentity(), settings1);
 
@@ -549,7 +528,7 @@ public class Test007 {
         Assert.assertEquals(EShapeType.Compound, shape.getType());
         Assert.assertFalse(shape.mustBeStatic());
 
-        TestUtils.testClose(ref, result, settings1Ref, settingsRef);
+        TestUtils.testClose(shape, ref, result, settings1, settings);
         System.gc();
     }
 
@@ -559,7 +538,6 @@ public class Test007 {
     private static void doTaperedCapsuleShape() {
         TaperedCapsuleShapeSettings settings
                 = new TaperedCapsuleShapeSettings(1f, 2f, 1f);
-        final ShapeSettingsRef settingsRef = settings.toRef();
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -578,7 +556,7 @@ public class Test007 {
         Assert.assertEquals(EShapeType.Convex, shape.getType());
         Assert.assertFalse(shape.mustBeStatic());
 
-        TestUtils.testClose(ref, result, settingsRef);
+        TestUtils.testClose(shape, ref, result, settings);
         System.gc();
     }
 
@@ -588,7 +566,6 @@ public class Test007 {
     private static void doTaperedCylinderShape() {
         TaperedCylinderShapeSettings settings
                 = new TaperedCylinderShapeSettings(1f, 0.05f, 1f);
-        final ShapeSettingsRef settingsRef = settings.toRef();
 
         ShapeResult result = settings.create();
         Assert.assertFalse(result.hasError());
@@ -609,7 +586,7 @@ public class Test007 {
         Assert.assertEquals(EShapeType.Convex, shape.getType());
         Assert.assertFalse(shape.mustBeStatic());
 
-        TestUtils.testClose(ref, result, settingsRef);
+        TestUtils.testClose(shape, ref, result, settings);
         System.gc();
     }
 
