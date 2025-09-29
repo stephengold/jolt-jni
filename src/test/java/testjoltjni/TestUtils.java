@@ -603,6 +603,20 @@ final public class TestUtils {
      * If explicit freeing is enabled, test the {@code close()} methods of the
      * specified physics objects.
      *
+     * @param collection the objects to test (not {@code null})
+     */
+    public static void testClose(
+            Collection<? extends ConstJoltPhysicsObject> collection) {
+        int numObjects = collection.size();
+        ConstJoltPhysicsObject[] array = new ConstJoltPhysicsObject[numObjects];
+        collection.toArray(array);
+        testClose(array);
+    }
+
+    /**
+     * If explicit freeing is enabled, test the {@code close()} methods of the
+     * specified physics objects.
+     *
      * @param objects the objects to test (not {@code null})
      */
     public static void testClose(ConstJoltPhysicsObject... objects) {
