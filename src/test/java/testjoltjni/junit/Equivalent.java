@@ -129,9 +129,12 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        expected.saveBinaryState(new StreamOutWrapper(stream1));
-        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
+        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        expected.saveBinaryState(sow1);
+        actual.saveBinaryState(sow2);
         Assert.assertEquals(stream1.str(), stream2.str());
+        TestUtils.testClose(sow2, sow1, stream2, stream1);
     }
 
     /**
@@ -196,7 +199,9 @@ final class Equivalent {
         if (shapeSettings == null) {
             Assert.assertNull(actual.getShapeSettings());
         } else {
-            shapeSettings(shapeSettings, actual.getShapeSettings());
+            ConstShapeSettings actualSs = actual.getShapeSettings();
+            shapeSettings(shapeSettings, actualSs);
+            TestUtils.testClose(actualSs, shapeSettings);
         }
 
         Assert.assertEquals(expected.getUseManifoldReduction(),
@@ -208,17 +213,21 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        expected.saveBinaryState(new StreamOutWrapper(stream1));
-        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
+        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        expected.saveBinaryState(sow1);
+        actual.saveBinaryState(sow2);
         Assert.assertEquals(stream1.str(), stream2.str());
+        TestUtils.testClose(sow2, sow1, stream2, stream1);
 
-        stream1 = new StringStream();
-        stream2 = new StringStream();
-        expected.saveWithChildren(
-                new StreamOutWrapper(stream1), null, null, null);
-        actual.saveWithChildren(
-                new StreamOutWrapper(stream2), null, null, null);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        StringStream stream3 = new StringStream();
+        StringStream stream4 = new StringStream();
+        StreamOutWrapper sow3 = new StreamOutWrapper(stream3);
+        StreamOutWrapper sow4 = new StreamOutWrapper(stream4);
+        expected.saveWithChildren(sow3, null, null, null);
+        actual.saveWithChildren(sow4, null, null, null);
+        Assert.assertEquals(stream3.str(), stream4.str());
+        TestUtils.testClose(sow4, sow3, stream4, stream3);
     }
 
     /**
@@ -283,9 +292,12 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        expected.saveBinaryState(new StreamOutWrapper(stream1));
-        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
+        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        expected.saveBinaryState(sow1);
+        actual.saveBinaryState(sow2);
         Assert.assertEquals(stream1.str(), stream2.str());
+        TestUtils.testClose(sow2, sow1, stream2, stream1);
     }
 
     /**
@@ -573,9 +585,12 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        expected.saveBinaryState(new StreamOutWrapper(stream1));
-        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
+        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        expected.saveBinaryState(sow1);
+        actual.saveBinaryState(sow2);
         Assert.assertEquals(stream1.str(), stream2.str());
+        TestUtils.testClose(sow2, sow1, stream2, stream1);
     }
 
     /**
@@ -644,17 +659,21 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        expected.saveBinaryState(new StreamOutWrapper(stream1));
-        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
+        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        expected.saveBinaryState(sow1);
+        actual.saveBinaryState(sow2);
         Assert.assertEquals(stream1.str(), stream2.str());
+        TestUtils.testClose(sow2, sow1, stream2, stream1);
 
-        stream1 = new StringStream();
-        stream2 = new StringStream();
-        expected.saveWithChildren(
-                new StreamOutWrapper(stream1), null, null, null);
-        actual.saveWithChildren(
-                new StreamOutWrapper(stream2), null, null, null);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        StringStream stream3 = new StringStream();
+        StringStream stream4 = new StringStream();
+        StreamOutWrapper sow3 = new StreamOutWrapper(stream3);
+        StreamOutWrapper sow4 = new StreamOutWrapper(stream4);
+        expected.saveWithChildren(sow3, null, null, null);
+        actual.saveWithChildren(sow4, null, null, null);
+        Assert.assertEquals(stream3.str(), stream4.str());
+        TestUtils.testClose(sow4, sow3, stream4, stream3);
     }
 
     /**
@@ -693,17 +712,26 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        expected.saveBinaryState(new StreamOutWrapper(stream1));
-        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
+        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        expected.saveBinaryState(sow1);
+        actual.saveBinaryState(sow2);
         Assert.assertEquals(stream1.str(), stream2.str());
+        TestUtils.testClose(sow2, sow1, stream2, stream1);
 
-        stream1 = new StringStream();
-        stream2 = new StringStream();
-        expected.saveWithMaterials(new StreamOutWrapper(stream1),
-                new SharedSettingsToIdMap(), new MaterialToIdMap());
-        actual.saveWithMaterials(new StreamOutWrapper(stream2),
-                new SharedSettingsToIdMap(), new MaterialToIdMap());
-        Assert.assertEquals(stream1.str(), stream2.str());
+        StringStream stream3 = new StringStream();
+        StringStream stream4 = new StringStream();
+        StreamOutWrapper sow3 = new StreamOutWrapper(stream3);
+        StreamOutWrapper sow4 = new StreamOutWrapper(stream4);
+        SharedSettingsToIdMap ssMap3 = new SharedSettingsToIdMap();
+        SharedSettingsToIdMap ssMap4 = new SharedSettingsToIdMap();
+        MaterialToIdMap matMap3 = new MaterialToIdMap();
+        MaterialToIdMap matMap4 = new MaterialToIdMap();
+        expected.saveWithMaterials(sow3, ssMap3, matMap3);
+        actual.saveWithMaterials(sow4, ssMap4, matMap4);
+        Assert.assertEquals(stream3.str(), stream4.str());
+        TestUtils.testClose(
+                stream3, stream4, sow3, sow4, ssMap3, ssMap4, matMap3, matMap4);
     }
 
     /**
@@ -726,9 +754,12 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        expected.saveBinaryState(new StreamOutWrapper(stream1));
-        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
+        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        expected.saveBinaryState(sow1);
+        actual.saveBinaryState(sow2);
         Assert.assertEquals(stream1.str(), stream2.str());
+        TestUtils.testClose(sow2, sow1, stream2, stream1);
     }
 
     /**
@@ -832,11 +863,16 @@ final class Equivalent {
         if (controller == null) {
             Assert.assertNull(actual.getController());
         } else {
-            vehicleControllerSettings(controller, actual.getController());
+            ConstVehicleControllerSettings actualVcs = actual.getController();
+            vehicleControllerSettings(controller, actualVcs);
+            TestUtils.testClose(actualVcs, controller);
         }
 
         for (int i = 0; i < numWheels; ++i) {
-            wheelSettings(expected.getWheel(i), actual.getWheel(i));
+            ConstWheelSettings actualWheel = actual.getWheel(i);
+            ConstWheelSettings expectedWheel = expected.getWheel(i);
+            wheelSettings(expectedWheel, actualWheel);
+            TestUtils.testClose(expectedWheel, actualWheel);
         }
     }
 
@@ -855,9 +891,12 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        expected.saveBinaryState(new StreamOutWrapper(stream1));
-        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
+        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        expected.saveBinaryState(sow1);
+        actual.saveBinaryState(sow2);
         Assert.assertEquals(stream1.str(), stream2.str());
+        TestUtils.testClose(sow2, sow1, stream2, stream1);
     }
 
     /**
@@ -916,8 +955,11 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        expected.saveBinaryState(new StreamOutWrapper(stream1));
-        actual.saveBinaryState(new StreamOutWrapper(stream2));
+        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
+        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        expected.saveBinaryState(sow1);
+        actual.saveBinaryState(sow2);
         Assert.assertEquals(stream1.str(), stream2.str());
+        TestUtils.testClose(sow2, sow1, stream2, stream1);
     }
 }
