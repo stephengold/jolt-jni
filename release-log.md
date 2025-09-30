@@ -1,5 +1,33 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.4.0 released on TBD
+
+With this release, Jolt JNI began creating an internal counted reference
+for/to every refcounted object.
+Every `RefTarget` is now a co-owner of its assigned native object.
+This prevents such assigned objects being unintentionally freed
+and greatly simplifies memory management.
+
++ Bugfixes:
+  + logic errors rendering `Support.getSupportBulk()` unusable
+  + memory leaks in the copy constructors
+    of `CollideShapeSettings` and `MotorSettings`
+  + `IndexedTriangleList.get()` returns an object without ownership info
+  + `Shape.getMaterial()` returns a contained object
+
++ Added methods:
+  + `BodyInterface.destroyBodies()` and `.removeBodies()` (see PR #27)
+  + `Jolt.countDeletes()`
+  + `Jolt.countNews()`
+  + `Jolt.installCerrTraceCallback()`
+  + `Jolt.installJavaTraceCallback()`
+  + `SoftBodyCreationSettings.getFacesDoubleSided()`
+  + `SoftBodyCreationSettings.setFacesDoubleSided()`
+  + `Vec3Arg.copyTo(FloatBuffer, int)`
+
++ Updated the Jolt-Physics source and assets to v5.4.0 (=sg250927 / 036ea7b1)
+
+
 ## Version 3.3.0 released on 21 September 2025
 
 + Bugfixes:
