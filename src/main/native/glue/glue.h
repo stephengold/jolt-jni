@@ -73,17 +73,17 @@ extern std::atomic<JPH::uint32> gDeleteCount;
  */
 #define DIRECT_DOUBLE_BUFFER(pEnv, doubleBuffer, pDoubles, capacityDoubles) \
   jdouble * const pDoubles = (jdouble *) (pEnv)->GetDirectBufferAddress(doubleBuffer); \
-  JPH_ASSERT(!(pEnv)->ExceptionCheck()); \
+  JPH_ASSERT(pDoubles != NULL); \
   const jlong capacityDoubles = (pEnv)->GetDirectBufferCapacity(doubleBuffer); \
-  JPH_ASSERT(!(pEnv)->ExceptionCheck())
+  JPH_ASSERT(capacityDoubles >= 0)
 /*
  * pre-processor macro to generate code to access a direct FloatBuffer:
  */
 #define DIRECT_FLOAT_BUFFER(pEnv, floatBuffer, pFloats, capacityFloats) \
   jfloat * const pFloats = (jfloat *) (pEnv)->GetDirectBufferAddress(floatBuffer); \
-  JPH_ASSERT(!(pEnv)->ExceptionCheck()); \
+  JPH_ASSERT(pFloats != NULL); \
   const jlong capacityFloats = (pEnv)->GetDirectBufferCapacity(floatBuffer); \
-  JPH_ASSERT(!(pEnv)->ExceptionCheck())
+  JPH_ASSERT(capacityFloats >= 0)
 /*
  * pre-processor macros to generate the body of a static createCopy() method
  * to implement a copy constructor:
