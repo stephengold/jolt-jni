@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 3.4.0 released on TBD
+## Version 3.4.0 released on 30 September 2025
 
 With this release, Jolt JNI began creating an internal counted reference
 for/to every refcounted object.
