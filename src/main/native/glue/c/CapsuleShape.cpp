@@ -38,7 +38,7 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShape_createCapsuleShape
   (JNIEnv *, jclass, jfloat halfHeight, jfloat radius) {
     CapsuleShape * const pResult = new CapsuleShape(halfHeight, radius);
-    TRACE_NEW("CapsuleShape", pResult)
+    TRACE_NEW_TARGET("CapsuleShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

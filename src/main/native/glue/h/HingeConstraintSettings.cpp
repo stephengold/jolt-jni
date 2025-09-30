@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(HingeConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(HingeConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_HingeConstraintSettings
@@ -46,7 +46,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSetti
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HingeConstraintSettings_createHingeConstraintSettings
   (JNIEnv *, jclass) {
     HingeConstraintSettings * const pResult = new HingeConstraintSettings();
-    TRACE_NEW("HingeConstraintSettings", pResult)
+    TRACE_NEW_TARGET("HingeConstraintSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

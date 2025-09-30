@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(FixedConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(FixedConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_FixedConstraintSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSetti
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_FixedConstraintSettings_createDefault
-  BODYOF_CREATE_DEFAULT(FixedConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(FixedConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_FixedConstraintSettings

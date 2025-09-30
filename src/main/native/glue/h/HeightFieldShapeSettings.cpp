@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_createCopy
-  BODYOF_CREATE_COPY(HeightFieldShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(HeightFieldShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSett
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(HeightFieldShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(HeightFieldShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
@@ -70,7 +70,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSett
     HeightFieldShapeSettings * const pSettings
             = new HeightFieldShapeSettings(pSamples, offset, scale, sampleCount,
                     (unsigned char *) pIndices, *pList);
-    TRACE_NEW("HeightFieldShapeSettings", pSettings)
+    TRACE_NEW_TARGET("HeightFieldShapeSettings", pSettings)
     if (materialIndices) {
         pEnv->ReleaseByteArrayElements(materialIndices, pIndices, JNI_ABORT);
     }
@@ -103,7 +103,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSett
     HeightFieldShapeSettings * const pSettings
             = new HeightFieldShapeSettings(pFloats, offset, scale, sampleCount,
                     (unsigned char *) pIndices, *pList);
-    TRACE_NEW("HeightFieldShapeSettings", pSettings)
+    TRACE_NEW_TARGET("HeightFieldShapeSettings", pSettings)
     if (materialIndices) {
         pEnv->ReleaseByteArrayElements(materialIndices, pIndices, JNI_ABORT);
     }

@@ -42,7 +42,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassSh
     const Vec3 offset(offsetX, offsetY, offsetZ);
     OffsetCenterOfMassShape * const pResult
             = new OffsetCenterOfMassShape(pBase, offset);
-    TRACE_NEW("OffsetCenterOfMassShape", pResult)
+    TRACE_NEW_TARGET("OffsetCenterOfMassShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

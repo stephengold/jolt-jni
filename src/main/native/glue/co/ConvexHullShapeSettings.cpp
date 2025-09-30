@@ -49,7 +49,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettin
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_createCopy
-  BODYOF_CREATE_COPY(ConvexHullShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(ConvexHullShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
@@ -57,7 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(ConvexHullShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(ConvexHullShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
@@ -80,7 +80,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSetti
             = reinterpret_cast<PhysicsMaterial *> (materialVa);
     ConvexHullShapeSettings * const pResult = new ConvexHullShapeSettings(
             pPoints, numPoints, maxConvexRadius, pMaterial);
-    TRACE_NEW("ConvexHullShapeSettings", pResult)
+    TRACE_NEW_TARGET("ConvexHullShapeSettings", pResult)
     TRACE_DELETE("Vec3[]", pPoints)
     delete[] pPoints;
     return reinterpret_cast<jlong> (pResult);

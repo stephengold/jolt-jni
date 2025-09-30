@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShapeSettings_createCopy
-  BODYOF_CREATE_COPY(MutableCompoundShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(MutableCompoundShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_MutableCompoundShapeSettings
@@ -47,6 +47,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape
   (JNIEnv *, jclass) {
     MutableCompoundShapeSettings * const pSettings
             = new MutableCompoundShapeSettings();
-    TRACE_NEW("MutableCompoundShapeSettings", pSettings)
+    TRACE_NEW_TARGET("MutableCompoundShapeSettings", pSettings)
     return reinterpret_cast<jlong> (pSettings);
 }

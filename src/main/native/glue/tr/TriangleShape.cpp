@@ -43,7 +43,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TriangleShape_create
     const Vec3 v3(v3x, v3y, v3z);
     const TriangleShape * const pResult
             = new TriangleShape(v1, v2, v3, convexRadius);
-    TRACE_NEW("TriangleShape", pResult)
+    TRACE_NEW_TARGET("TriangleShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

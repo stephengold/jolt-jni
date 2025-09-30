@@ -43,7 +43,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShape_createBoxSh
             = reinterpret_cast<PhysicsMaterial *> (materialVa);
     BoxShape * const pResult
             = new BoxShape(halfExtents, convexRadius, pMaterial);
-    TRACE_NEW("BoxShape", pResult)
+    TRACE_NEW_TARGET("BoxShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_createCopy
-  BODYOF_CREATE_COPY(PlaneShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(PlaneShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_BoxShapeSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_c
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(PlaneShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(PlaneShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_PlaneShapeSettings
@@ -60,7 +60,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShapeSettings_c
             = reinterpret_cast<PhysicsMaterial *> (materialVa);
     PlaneShapeSettings * const pSettings
             = new PlaneShapeSettings(plane, pMaterial, halfExtent);
-    TRACE_NEW("PlaneShapeSettings", pSettings)
+    TRACE_NEW_TARGET("PlaneShapeSettings", pSettings)
     return reinterpret_cast<jlong> (pSettings);
 }
 

@@ -49,6 +49,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleCollisionTest
     const ObjectLayer objLayer = (ObjectLayer) layer;
     VehicleCollisionTesterCastCylinder * const pTester
             = new VehicleCollisionTesterCastCylinder(objLayer, convexRadiusFraction);
-    TRACE_NEW("VehicleCollisionTesterCastCylinder", pTester)
+    TRACE_NEW_TARGET("VehicleCollisionTesterCastCylinder", pTester)
     return reinterpret_cast<jlong> (pTester);
 }

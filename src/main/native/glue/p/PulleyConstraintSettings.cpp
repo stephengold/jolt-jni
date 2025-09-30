@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(PulleyConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(PulleyConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSett
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_createDefault
-  BODYOF_CREATE_DEFAULT(PulleyConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(PulleyConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings

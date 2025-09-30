@@ -43,7 +43,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PlaneShape_createSha
     const PhysicsMaterial * const pMaterial
             = reinterpret_cast<PhysicsMaterial *> (materialVa);
     PlaneShape * const pShape = new PlaneShape(plane, pMaterial, halfExtent);
-    TRACE_NEW("PlaneShape", pShape)
+    TRACE_NEW_TARGET("PlaneShape", pShape)
     return reinterpret_cast<jlong> (pShape);
 }
 

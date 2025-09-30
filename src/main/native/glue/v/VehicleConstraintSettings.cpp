@@ -60,7 +60,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSett
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(VehicleConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(VehicleConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings
@@ -68,7 +68,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSet
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraintSettings_createDefault
-  BODYOF_CREATE_DEFAULT(VehicleConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(VehicleConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraintSettings

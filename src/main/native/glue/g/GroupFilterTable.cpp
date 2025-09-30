@@ -45,7 +45,7 @@ IMPLEMENT_REF(GroupFilterTable,
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GroupFilterTable_createCopy
-  BODYOF_CREATE_COPY(GroupFilterTable)
+  BODYOF_CREATE_COPY_TARGET(GroupFilterTable)
 
 /*
  * Class:     com_github_stephengold_joltjni_GroupFilterTable
@@ -55,7 +55,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GroupFilterTable_cre
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GroupFilterTable_createFilter
   (JNIEnv *, jclass, jint numSubGroups) {
     GroupFilterTable * const pResult = new GroupFilterTable(numSubGroups);
-    TRACE_NEW("GroupFilterTable", pResult)
+    TRACE_NEW_TARGET("GroupFilterTable", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

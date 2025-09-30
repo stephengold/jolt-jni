@@ -79,7 +79,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_cr
             = reinterpret_cast<VehicleConstraintSettings *> (settingsVa);
     VehicleConstraint * const pResult
             = new VehicleConstraint(*pBody, *pSettings);
-    TRACE_NEW("VehicleConstraint", pResult)
+    TRACE_NEW_TARGET("VehicleConstraint", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

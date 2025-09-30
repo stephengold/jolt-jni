@@ -43,7 +43,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialSimpl
     PhysicsMaterialSimple * const pResult
             = new PhysicsMaterialSimple(name, color);
     pEnv->ReleaseStringUTFChars(nameString, name);
-    TRACE_NEW("PhysicsMaterialSimple", pResult)
+    TRACE_NEW_TARGET("PhysicsMaterialSimple", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -53,7 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialSimpl
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialSimple_createCopy
-  BODYOF_CREATE_COPY(PhysicsMaterialSimple)
+  BODYOF_CREATE_COPY_TARGET(PhysicsMaterialSimple)
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsMaterialSimple
@@ -61,4 +61,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialSimpl
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsMaterialSimple_createDefault
-  BODYOF_CREATE_DEFAULT(PhysicsMaterialSimple)
+  BODYOF_CREATE_DEFAULT_TARGET(PhysicsMaterialSimple)

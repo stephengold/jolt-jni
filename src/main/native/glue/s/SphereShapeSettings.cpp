@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_createCopy
-  BODYOF_CREATE_COPY(SphereShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(SphereShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SphereShapeSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(SphereShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(SphereShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SphereShapeSettings
@@ -57,7 +57,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShapeSettings_
             = reinterpret_cast<PhysicsMaterial *> (materialVa);
     SphereShapeSettings * const pResult
             = new SphereShapeSettings(radius, pMaterial);
-    TRACE_NEW("SphereShapeSettings", pResult)
+    TRACE_NEW_TARGET("SphereShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

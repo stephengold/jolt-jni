@@ -45,11 +45,7 @@ IMPLEMENT_REF(CharacterSettings,
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_createCharacterSettings
-  (JNIEnv *, jclass) {
-    CharacterSettings * const pResult = new CharacterSettings();
-    TRACE_NEW("CharacterSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT_TARGET(CharacterSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterSettings
@@ -57,7 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_cr
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterSettings_createCopy
-  BODYOF_CREATE_COPY(CharacterSettings)
+  BODYOF_CREATE_COPY_TARGET(CharacterSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterSettings

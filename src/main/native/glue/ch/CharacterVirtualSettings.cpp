@@ -45,11 +45,7 @@ IMPLEMENT_REF(CharacterVirtualSettings,
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_createCharacterVirtualSettings
-  (JNIEnv *, jclass) {
-    CharacterVirtualSettings * const pResult = new CharacterVirtualSettings();
-    TRACE_NEW("CharacterVirtualSettings", pResult)
-    return reinterpret_cast<jlong> (pResult);
-}
+  BODYOF_CREATE_DEFAULT_TARGET(CharacterVirtualSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings

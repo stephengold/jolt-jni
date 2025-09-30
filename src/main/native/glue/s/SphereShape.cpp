@@ -38,7 +38,7 @@ using namespace JPH;
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SphereShape_createSphereShape
   (JNIEnv *, jclass, jfloat radius) {
     SphereShape * const pResult = new SphereShape(radius);
-    TRACE_NEW("SphereShape", pResult)
+    TRACE_NEW_TARGET("SphereShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

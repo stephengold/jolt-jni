@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(PointConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(PointConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_PointConstraintSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PointConstraintSetti
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_createDefault
-  BODYOF_CREATE_DEFAULT(PointConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(PointConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_PointConstraintSettings

@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_createCopy
-  BODYOF_CREATE_COPY(OffsetCenterOfMassShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(OffsetCenterOfMassShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings
@@ -50,7 +50,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassSh
             = reinterpret_cast<ShapeSettings *> (baseShapeSettingsVa);
     OffsetCenterOfMassShapeSettings * const pResult
             = new OffsetCenterOfMassShapeSettings(offset, pSettings);
-    TRACE_NEW("OffsetCenterOfMassShapeSettings", pResult)
+    TRACE_NEW_TARGET("OffsetCenterOfMassShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -65,7 +65,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassSh
     const Shape * const pBase = reinterpret_cast<Shape *> (baseShapeVa);
     OffsetCenterOfMassShapeSettings * const pResult
             = new OffsetCenterOfMassShapeSettings(offset, pBase);
-    TRACE_NEW("OffsetCenterOfMassShapeSettings", pResult)
+    TRACE_NEW_TARGET("OffsetCenterOfMassShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

@@ -62,7 +62,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_add
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_createCopy
-  BODYOF_CREATE_COPY(MeshShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(MeshShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
@@ -70,7 +70,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(MeshShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(MeshShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_MeshShapeSettings
@@ -93,7 +93,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
             = reinterpret_cast<IndexedTriangleList *> (indicesVa);
     MeshShapeSettings * const pSettings
             = new MeshShapeSettings(vertices, *pIndices);
-    TRACE_NEW("MeshShapeSettings", pSettings)
+    TRACE_NEW_TARGET("MeshShapeSettings", pSettings)
     return reinterpret_cast<jlong> (pSettings);
 }
 
@@ -127,7 +127,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MeshShapeSettings_cr
             = reinterpret_cast<PhysicsMaterialList *> (materialsVa);
     MeshShapeSettings * const pResult
             = new MeshShapeSettings(triangles, *pMaterials);
-    TRACE_NEW("MeshShapeSettings", pResult)
+    TRACE_NEW_TARGET("MeshShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

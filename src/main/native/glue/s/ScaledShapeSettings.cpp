@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_createCopy
-  BODYOF_CREATE_COPY(ScaledShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(ScaledShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ScaledShapeSettings
@@ -50,7 +50,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_
     const Vec3 factors(x, y, z);
     ScaledShapeSettings * const pResult
             = new ScaledShapeSettings(pBaseSettings, factors);
-    TRACE_NEW("ScaledShapeSettings", pResult)
+    TRACE_NEW_TARGET("ScaledShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -65,7 +65,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_
     const Vec3 factors(x, y, z);
     ScaledShapeSettings * const pResult
             = new ScaledShapeSettings(pBaseShape, factors);
-    TRACE_NEW("ScaledShapeSettings", pResult)
+    TRACE_NEW_TARGET("ScaledShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

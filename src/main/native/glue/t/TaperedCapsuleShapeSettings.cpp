@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCapsuleShapeSettings_createCopy
-  BODYOF_CREATE_COPY(TaperedCapsuleShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(TaperedCapsuleShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_TaperedCapsuleShapeSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCapsuleShapeS
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCapsuleShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(TaperedCapsuleShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(TaperedCapsuleShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_TaperedCapsuleShapeSettings
@@ -59,7 +59,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCapsuleShapeS
     const TaperedCapsuleShapeSettings * const pSettings
             = new TaperedCapsuleShapeSettings(
                     halfHeight, topRadius, bottomRadius, pMaterial);
-    TRACE_NEW("TaperedCapsuleShapeSettings", pSettings)
+    TRACE_NEW_TARGET("TaperedCapsuleShapeSettings", pSettings)
     return reinterpret_cast<jlong> (pSettings);
 }
 

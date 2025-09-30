@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(PathConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(PathConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_PathConstraintSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettin
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PathConstraintSettings_createDefault
-  BODYOF_CREATE_DEFAULT(PathConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(PathConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_PathConstraintSettings

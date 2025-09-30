@@ -99,7 +99,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_crea
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PhysicsScene_createDefault
-  BODYOF_CREATE_DEFAULT(PhysicsScene)
+  BODYOF_CREATE_DEFAULT_TARGET(PhysicsScene)
 
 /*
  * Class:     com_github_stephengold_joltjni_PhysicsScene

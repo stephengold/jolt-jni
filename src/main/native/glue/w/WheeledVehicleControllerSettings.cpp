@@ -51,7 +51,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControl
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_createCopy
-  BODYOF_CREATE_COPY(WheeledVehicleControllerSettings)
+  BODYOF_CREATE_COPY_TARGET(WheeledVehicleControllerSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_WheeledVehicleControllerSettings
@@ -59,7 +59,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleContro
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheeledVehicleControllerSettings_createDefault
-  BODYOF_CREATE_DEFAULT(WheeledVehicleControllerSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(WheeledVehicleControllerSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_WheeledVehicleControllerSettings

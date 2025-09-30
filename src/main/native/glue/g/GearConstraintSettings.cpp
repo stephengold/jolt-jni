@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(GearConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(GearConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_GearConstraintSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettin
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_GearConstraintSettings_createDefault
-  BODYOF_CREATE_DEFAULT(GearConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(GearConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_GearConstraintSettings

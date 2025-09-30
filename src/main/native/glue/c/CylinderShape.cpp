@@ -39,7 +39,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShape_create
   (JNIEnv *, jclass, jfloat halfHeight, jfloat radius, jfloat convexRadius) {
     CylinderShape * const pResult
             = new CylinderShape(halfHeight, radius, convexRadius);
-    TRACE_NEW("CylinderShape", pResult)
+    TRACE_NEW_TARGET("CylinderShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

@@ -43,7 +43,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_cre
             = reinterpret_cast<PhysicsMaterial *> (materialVa);
     BoxShapeSettings * const pResult
             = new BoxShapeSettings(halfExtents, convexRadius, pMaterial);
-    TRACE_NEW("BoxShapeSettings", pResult)
+    TRACE_NEW_TARGET("BoxShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -53,7 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_cre
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_createCopy
-  BODYOF_CREATE_COPY(BoxShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(BoxShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_BoxShapeSettings
@@ -61,7 +61,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_cre
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BoxShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(BoxShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(BoxShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_BoxShapeSettings

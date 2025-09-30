@@ -52,6 +52,10 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     if (gTraceAllocations) { \
         JPH::Trace("%llx +%s", reinterpret_cast<unsigned long long> (pointer), className); \
     }
+#define TRACE_NEW_TARGET(className, pointer) \
+    if (gTraceAllocations) { \
+        JPH::Trace("%llx @ %s", reinterpret_cast<unsigned long long> (pointer), className); \
+    }
 #define TRACE_DELETE(className, pointer) \
     gDeleteCount++; \
     if (gTraceAllocations) { \
@@ -61,6 +65,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
 #else
 #define EXCEPTION_CHECK(pEnv)
 #define TRACE_NEW(className, pointer)
+#define TRACE_NEW_TARGET(className, pointer)
 #define TRACE_DELETE(className, pointer)
 #endif
 /*
@@ -80,7 +85,7 @@ extern std::atomic<JPH::uint32> gDeleteCount;
   const jlong capacityFloats = (pEnv)->GetDirectBufferCapacity(floatBuffer); \
   JPH_ASSERT(!(pEnv)->ExceptionCheck())
 /*
- * pre-processor macro to generate the body of a static createCopy() method
+ * pre-processor macros to generate the body of a static createCopy() method
  * to implement a copy constructor:
  */
 #define BODYOF_CREATE_COPY(className) \
@@ -90,14 +95,27 @@ extern std::atomic<JPH::uint32> gDeleteCount;
     TRACE_NEW(#className, pResult) \
     return reinterpret_cast<jlong> (pResult); \
 }
+#define BODYOF_CREATE_COPY_TARGET(className) \
+  (JNIEnv *, jclass, jlong originalVa) { \
+    const className * const pOriginal = reinterpret_cast<className *> (originalVa); \
+    className * const pResult = new className(*pOriginal); \
+    TRACE_NEW_TARGET(#className, pResult) \
+    return reinterpret_cast<jlong> (pResult); \
+}
 /*
- * pre-processor macro to generate the body of a static createDefault() method
+ * pre-processor macros to generate the body of a static createDefault() method
  * to implement a no-arg constructor:
  */
 #define BODYOF_CREATE_DEFAULT(className) \
   (JNIEnv *, jclass) { \
     className * const pResult = new className(); \
     TRACE_NEW(#className, pResult) \
+    return reinterpret_cast<jlong> (pResult); \
+}
+#define BODYOF_CREATE_DEFAULT_TARGET(className) \
+  (JNIEnv *, jclass) { \
+    className * const pResult = new className(); \
+    TRACE_NEW_TARGET(#className, pResult) \
     return reinterpret_cast<jlong> (pResult); \
 }
 /*

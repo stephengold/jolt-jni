@@ -43,7 +43,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSha
     const Shape * const pBase = reinterpret_cast<Shape *> (baseShapeVa);
     RotatedTranslatedShape * const pResult
             = new RotatedTranslatedShape(offset, rotation, pBase);
-    TRACE_NEW("RotatedTranslatedShape", pResult)
+    TRACE_NEW_TARGET("RotatedTranslatedShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

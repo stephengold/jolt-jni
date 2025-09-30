@@ -99,7 +99,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Skeleton_calculatePar
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Skeleton_createDefault
-  BODYOF_CREATE_DEFAULT(Skeleton)
+  BODYOF_CREATE_DEFAULT_TARGET(Skeleton)
 
 /*
  * Class:     com_github_stephengold_joltjni_Skeleton

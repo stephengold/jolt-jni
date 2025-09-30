@@ -161,7 +161,7 @@ final public class Jolt {
 
     /**
      * Return the cumulative number of {@code new} operations in glue code, in
-     * Debug native libraries.
+     * Debug native libraries, excluding ref targets.
      *
      * @return the count (&ge;0)
      */

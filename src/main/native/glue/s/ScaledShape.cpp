@@ -40,7 +40,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShape_createSc
     const Shape * const pBase = reinterpret_cast<Shape *> (baseShapeVa);
     const Vec3 factors(x, y, z);
     ScaledShape * const pResult = new ScaledShape(pBase, factors);
-    TRACE_NEW("ScaledShape", pResult)
+    TRACE_NEW_TARGET("ScaledShape", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

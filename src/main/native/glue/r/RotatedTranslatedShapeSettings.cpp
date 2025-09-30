@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShapeSettings_createCopy
-  BODYOF_CREATE_COPY(RotatedTranslatedShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(RotatedTranslatedShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_RotatedTranslatedShapeSettings
@@ -51,7 +51,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSha
     const Shape * const pBase = reinterpret_cast<Shape *> (baseShapeVa);
     RotatedTranslatedShapeSettings * const pResult
             = new RotatedTranslatedShapeSettings(offset, rotation, pBase);
-    TRACE_NEW("RotatedTranslatedShapeSettings", pResult)
+    TRACE_NEW_TARGET("RotatedTranslatedShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -71,7 +71,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSha
     RotatedTranslatedShapeSettings * const pResult
             = new RotatedTranslatedShapeSettings(
                     offset, rotation, pBaseShapeSettings);
-    TRACE_NEW("RotatedTranslatedShapeSettings", pResult)
+    TRACE_NEW_TARGET("RotatedTranslatedShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

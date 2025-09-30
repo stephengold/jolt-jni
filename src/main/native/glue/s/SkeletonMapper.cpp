@@ -45,7 +45,7 @@ IMPLEMENT_REF(SkeletonMapper,
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SkeletonMapper_createDefault
-  BODYOF_CREATE_DEFAULT(SkeletonMapper)
+  BODYOF_CREATE_DEFAULT_TARGET(SkeletonMapper)
 
 /*
  * Class:     com_github_stephengold_joltjni_SkeletonMapper

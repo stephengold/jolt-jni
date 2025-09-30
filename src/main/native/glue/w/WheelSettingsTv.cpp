@@ -45,7 +45,7 @@ IMPLEMENT_REF(WheelSettingsTV,
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsTv_createCopy
-  BODYOF_CREATE_COPY(WheelSettingsTV)
+  BODYOF_CREATE_COPY_TARGET(WheelSettingsTV)
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettingsTv
@@ -53,7 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsTv_crea
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_WheelSettingsTv_createDefault
-  BODYOF_CREATE_DEFAULT(WheelSettingsTV)
+  BODYOF_CREATE_DEFAULT_TARGET(WheelSettingsTV)
 
 /*
  * Class:     com_github_stephengold_joltjni_WheelSettingsTv

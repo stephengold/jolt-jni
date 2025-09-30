@@ -41,7 +41,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings
             = reinterpret_cast<PhysicsMaterial *> (materialVa);
     CapsuleShapeSettings * const pResult
             = new CapsuleShapeSettings(halfHeight, radius, pMaterial);
-    TRACE_NEW("CapsuleShapeSettings", pResult)
+    TRACE_NEW_TARGET("CapsuleShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -51,7 +51,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_createCopy
-  BODYOF_CREATE_COPY(CapsuleShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(CapsuleShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings
@@ -59,7 +59,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CapsuleShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(CapsuleShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(CapsuleShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_CapsuleShapeSettings

@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TrackedVehicleControllerSettings_createCopy
-  BODYOF_CREATE_COPY(TrackedVehicleControllerSettings)
+  BODYOF_CREATE_COPY_TARGET(TrackedVehicleControllerSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_TrackedVehicleControllerSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TrackedVehicleContro
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TrackedVehicleControllerSettings_createDefault
-  BODYOF_CREATE_DEFAULT(TrackedVehicleControllerSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(TrackedVehicleControllerSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_TrackedVehicleControllerSettings

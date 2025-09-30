@@ -52,4 +52,4 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PathConstraintPathHer
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PathConstraintPathHermite_createDefault
-  BODYOF_CREATE_DEFAULT(PathConstraintPathHermite)
+  BODYOF_CREATE_DEFAULT_TARGET(PathConstraintPathHermite)

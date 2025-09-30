@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DistanceConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(DistanceConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(DistanceConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_DistanceConstraintSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DistanceConstraintSe
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DistanceConstraintSettings_createDefault
-  BODYOF_CREATE_DEFAULT(DistanceConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(DistanceConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_DistanceConstraintSettings

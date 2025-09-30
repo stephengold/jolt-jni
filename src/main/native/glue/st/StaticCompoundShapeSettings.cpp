@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_StaticCompoundShapeSettings_createCopy
-  BODYOF_CREATE_COPY(StaticCompoundShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(StaticCompoundShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_StaticCompoundShapeSettings
@@ -47,6 +47,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_StaticCompoundShapeS
   (JNIEnv *, jclass) {
     StaticCompoundShapeSettings * const pSettings
             = new StaticCompoundShapeSettings();
-    TRACE_NEW("StaticCompoundShapeSettings", pSettings)
+    TRACE_NEW_TARGET("StaticCompoundShapeSettings", pSettings)
     return reinterpret_cast<jlong> (pSettings);
 }

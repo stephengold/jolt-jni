@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(SwingTwistConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(SwingTwistConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraint
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SwingTwistConstraintSettings_createDefault
-    BODYOF_CREATE_DEFAULT(SwingTwistConstraintSettings)
+    BODYOF_CREATE_DEFAULT_TARGET(SwingTwistConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SwingTwistConstraintSettings

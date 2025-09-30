@@ -114,7 +114,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_cre
             = reinterpret_cast<PhysicsSystem *> (systemVa);
     CharacterVirtual * const pResult = new CharacterVirtual(
             pSettings, location, orientation, userData, pSystem);
-    TRACE_NEW("CharacterVirtual", pResult)
+    TRACE_NEW_TARGET("CharacterVirtual", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 
@@ -218,7 +218,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtual_get
     const CharacterVirtual * const pCharacter
             = reinterpret_cast<CharacterVirtual *> (characterVa);
     CharacterVirtualSettings * const pResult = new CharacterVirtualSettings();
-    TRACE_NEW("CharacterVirtualSettings", pResult)
+    TRACE_NEW_TARGET("CharacterVirtualSettings", pResult)
     *pResult = pCharacter->GetCharacterVirtualSettings();
     return reinterpret_cast<jlong> (pResult);
 }

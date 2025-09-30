@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(RackAndPinionConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(RackAndPinionConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstra
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_createDefault
-  BODYOF_CREATE_DEFAULT(RackAndPinionConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(RackAndPinionConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings

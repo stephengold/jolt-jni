@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings_createCopy
-  BODYOF_CREATE_COPY(TriangleShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(TriangleShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSetting
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(TriangleShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(TriangleShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_TriangleShapeSettings
@@ -66,7 +66,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TriangleShapeSetting
     }
     const TriangleShapeSettings * const pSettings
             = new TriangleShapeSettings(v1, v2, v3, convexRadius, pMaterial);
-    TRACE_NEW("TriangleShapeSettings", pSettings)
+    TRACE_NEW_TARGET("TriangleShapeSettings", pSettings)
     return reinterpret_cast<jlong> (pSettings);
 }
 

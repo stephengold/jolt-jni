@@ -341,7 +341,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSetting
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_createCopy
-    BODYOF_CREATE_COPY(SoftBodySharedSettings)
+    BODYOF_CREATE_COPY_TARGET(SoftBodySharedSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings
@@ -349,7 +349,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettin
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SoftBodySharedSettings_createDefault
-    BODYOF_CREATE_DEFAULT(SoftBodySharedSettings)
+    BODYOF_CREATE_DEFAULT_TARGET(SoftBodySharedSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodySharedSettings

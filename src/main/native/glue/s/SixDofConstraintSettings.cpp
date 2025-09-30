@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(SixDOFConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(SixDOFConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSett
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SixDofConstraintSettings_createDefault
-  BODYOF_CREATE_DEFAULT(SixDOFConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(SixDOFConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_SixDofConstraintSettings

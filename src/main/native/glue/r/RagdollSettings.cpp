@@ -83,7 +83,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_calcu
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_createCopy
-  BODYOF_CREATE_COPY(RagdollSettings)
+  BODYOF_CREATE_COPY_TARGET(RagdollSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollSettings
@@ -91,7 +91,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_crea
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RagdollSettings_createDefault
-  BODYOF_CREATE_DEFAULT(RagdollSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(RagdollSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_RagdollSettings

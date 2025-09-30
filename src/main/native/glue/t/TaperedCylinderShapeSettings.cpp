@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCylinderShapeSettings_createCopy
-  BODYOF_CREATE_COPY(TaperedCylinderShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(TaperedCylinderShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_TaperedCylinderShapeSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCylinderShape
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCylinderShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(TaperedCylinderShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(TaperedCylinderShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_TaperedCylinderShapeSettings
@@ -59,7 +59,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_TaperedCylinderShape
     const TaperedCylinderShapeSettings * const pSettings
             = new TaperedCylinderShapeSettings(halfHeight, topRadius,
                     bottomRadius, convexRadius, pMaterial);
-    TRACE_NEW("TaperedCylinderShapeSettings", pSettings)
+    TRACE_NEW_TARGET("TaperedCylinderShapeSettings", pSettings)
     return reinterpret_cast<jlong> (pSettings);
 }
 

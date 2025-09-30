@@ -73,7 +73,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_MutableCompoundShape_createMutableCompoundShape
   (JNIEnv *, jclass) {
     MutableCompoundShape * const pCompound = new MutableCompoundShape();
-    TRACE_NEW("MutableCompoundShape", pCompound)
+    TRACE_NEW_TARGET("MutableCompoundShape", pCompound)
     return reinterpret_cast<jlong> (pCompound);
 }
 

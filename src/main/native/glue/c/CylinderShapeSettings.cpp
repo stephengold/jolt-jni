@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_createCopy
-  BODYOF_CREATE_COPY(CylinderShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(CylinderShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSetting
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(CylinderShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(CylinderShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_CylinderShapeSettings
@@ -58,7 +58,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CylinderShapeSetting
             = reinterpret_cast<PhysicsMaterial *> (materialVa);
     CylinderShapeSettings * const pResult
             = new CylinderShapeSettings(halfHeight, radius, convexRadius, pMaterial);
-    TRACE_NEW("CylinderShapeSettings", pResult)
+    TRACE_NEW_TARGET("CylinderShapeSettings", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
 

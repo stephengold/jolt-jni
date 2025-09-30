@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShapeSettings_createCopy
-  BODYOF_CREATE_COPY(EmptyShapeSettings)
+  BODYOF_CREATE_COPY_TARGET(EmptyShapeSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_EmptyShapeSettings
@@ -44,4 +44,4 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShapeSettings_c
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_EmptyShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT(EmptyShapeSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(EmptyShapeSettings)

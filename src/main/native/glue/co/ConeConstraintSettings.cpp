@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_createCopy
-  BODYOF_CREATE_COPY(ConeConstraintSettings)
+  BODYOF_CREATE_COPY_TARGET(ConeConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettin
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ConeConstraintSettings_createDefault
-  BODYOF_CREATE_DEFAULT(ConeConstraintSettings)
+  BODYOF_CREATE_DEFAULT_TARGET(ConeConstraintSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ConeConstraintSettings
