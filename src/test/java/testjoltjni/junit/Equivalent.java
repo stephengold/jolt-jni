@@ -67,7 +67,7 @@ import org.junit.Assert;
 import testjoltjni.TestUtils;
 
 /**
- * Utility methods to verify that specific objects are equivalent.
+ * Utility methods to verify that specific objects are functionally equivalent.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -849,8 +849,7 @@ final class Equivalent {
         Assert.assertEquals(numWheels, actual.getNumWheels());
 
         for (int i = 0; i < numBars; ++i) {
-            antiRollBar(
-                    expected.getAntiRollBar(i), actual.getAntiRollBar(i));
+            antiRollBar(expected.getAntiRollBar(i), actual.getAntiRollBar(i));
         }
         Assert.assertEquals(
                 expected.getControllerType(), actual.getControllerType());

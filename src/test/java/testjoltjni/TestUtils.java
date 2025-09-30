@@ -628,6 +628,7 @@ final public class TestUtils {
                 }
                 boolean wasOwner = object.ownsNativeObject();
                 object.close();
+
                 if (wasOwner) {
                     Assert.assertFalse(object.hasAssignedNativeObject());
                 }

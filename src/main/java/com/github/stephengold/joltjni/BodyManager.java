@@ -27,6 +27,9 @@ import com.github.stephengold.joltjni.readonly.ConstPhysicsSettings;
 
 /**
  * A container for bodies.
+ * <p>
+ * This class is an internal part of {@code PhysicsSystem}, exposed for test
+ * purposes only.
  *
  * @author Stephen Gold sgold@sonic.net
  */
@@ -35,7 +38,7 @@ public class BodyManager extends NonCopyable {
     // fields
 
     /**
-     * protect the BroadPhaseLayerInterface from garbage collection
+     * protect the {@code BroadPhaseLayerInterface} from garbage collection
      */
     private ConstBroadPhaseLayerInterface layerMap;
     // *************************************************************************
