@@ -27,24 +27,16 @@ import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.BoxShape;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.PhysicsSystem;
-import com.github.stephengold.joltjni.ShapeRef;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.VehicleCollisionTesterCastCylinder;
-import com.github.stephengold.joltjni.VehicleCollisionTesterCastCylinderRef;
 import com.github.stephengold.joltjni.VehicleCollisionTesterCastSphere;
-import com.github.stephengold.joltjni.VehicleCollisionTesterCastSphereRef;
 import com.github.stephengold.joltjni.VehicleCollisionTesterRay;
-import com.github.stephengold.joltjni.VehicleCollisionTesterRayRef;
 import com.github.stephengold.joltjni.VehicleConstraint;
-import com.github.stephengold.joltjni.VehicleConstraintRef;
 import com.github.stephengold.joltjni.VehicleConstraintSettings;
-import com.github.stephengold.joltjni.VehicleConstraintSettingsRef;
-import com.github.stephengold.joltjni.VehicleControllerSettingsRef;
+import com.github.stephengold.joltjni.VehicleControllerSettings;
 import com.github.stephengold.joltjni.WheelSettings;
 import com.github.stephengold.joltjni.WheelSettingsTv;
-import com.github.stephengold.joltjni.WheelSettingsTvRef;
 import com.github.stephengold.joltjni.WheelSettingsWv;
-import com.github.stephengold.joltjni.WheelSettingsWvRef;
 import com.github.stephengold.joltjni.WheeledVehicleControllerSettings;
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
@@ -94,9 +86,8 @@ public class Test014 {
     private static void doVehicleCollisionTesterCastCylinder() {
         VehicleCollisionTesterCastCylinder vctcc
                 = new VehicleCollisionTesterCastCylinder(Layers.MOVING);
-        VehicleCollisionTesterCastCylinderRef ref = vctcc.toRef();
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(vctcc);
         System.gc();
     }
 
@@ -106,9 +97,8 @@ public class Test014 {
     private static void doVehicleCollisionTesterCastSphere() {
         VehicleCollisionTesterCastSphere vctcs
                 = new VehicleCollisionTesterCastSphere(Layers.MOVING, 0.3f);
-        VehicleCollisionTesterCastSphereRef ref = vctcs.toRef();
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(vctcs);
         System.gc();
     }
 
@@ -118,9 +108,8 @@ public class Test014 {
     private static void doVehicleCollisionTesterRay() {
         VehicleCollisionTesterRay vctr
                 = new VehicleCollisionTesterRay(Layers.MOVING);
-        VehicleCollisionTesterRayRef ref = vctr.toRef();
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(vctr);
         System.gc();
     }
 
@@ -129,21 +118,17 @@ public class Test014 {
      */
     private static void doVehicleConstraint() {
         VehicleConstraintSettings vcs = new VehicleConstraintSettings();
-        final VehicleConstraintSettingsRef vcsRef = vcs.toRef();
 
         WheelSettingsWv wswv = new WheelSettingsWv();
-        final WheelSettingsWvRef wswvRef = wswv.toRef();
         vcs.addWheels(wswv);
 
         vcs.setNumAntiRollBars(2);
 
         WheeledVehicleControllerSettings wvcs
                 = new WheeledVehicleControllerSettings();
-        final VehicleControllerSettingsRef wvcsRef = wvcs.toRef();
         vcs.setController(wvcs);
 
         BoxShape shape = new BoxShape(2f);
-        final ShapeRef shapeRef = shape.toRef();
         BodyCreationSettings bcs = new BodyCreationSettings()
                 .setShape(shape);
         PhysicsSystem physicsSystem = TestUtils.newPhysicsSystem(2);
@@ -152,7 +137,6 @@ public class Test014 {
         bi.addBody(body, EActivation.DontActivate);
 
         VehicleConstraint vc = new VehicleConstraint(body, vcs);
-        final VehicleConstraintRef vcRef = vc.toRef();
 
         // Test the getters:
         Assert.assertEquals(2, vc.countAntiRollBars());
@@ -189,7 +173,6 @@ public class Test014 {
         // Assign a collision tester:
         VehicleCollisionTesterRay vctr
                 = new VehicleCollisionTesterRay(Layers.MOVING);
-        final VehicleCollisionTesterRayRef vctrRef = vctr.toRef();
         vc.setVehicleCollisionTester(vctr);
         Assert.assertNotNull(vc.getVehicleCollisionTester());
         Assert.assertEquals("VehicleCollisionTesterRay",
@@ -205,9 +188,9 @@ public class Test014 {
         vc.setMaxPitchRollAngle(0.12f);
         Assert.assertEquals(0.12f, vc.getMaxPitchRollAngle(), 1e-8f);
 
-        TestUtils.testClose(vctrRef, vcRef);
+        TestUtils.testClose(vctr, vc);
         TestUtils.cleanupPhysicsSystem(physicsSystem);
-        TestUtils.testClose(bcs, shapeRef, wvcsRef, wswvRef, vcsRef);
+        TestUtils.testClose(bcs, shape, wvcs, wswv, vcs);
         System.gc();
     }
 
@@ -216,12 +199,11 @@ public class Test014 {
      */
     private static void doVehicleConstraintSettings() {
         VehicleConstraintSettings vcs = new VehicleConstraintSettings();
-        final VehicleConstraintSettingsRef ref = vcs.toRef();
 
         testVehicleConstraintSettingsDefaults(vcs);
         testVehicleConstraintSettingsSetters(vcs);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(vcs);
         System.gc();
     }
 
@@ -230,12 +212,11 @@ public class Test014 {
      */
     private static void doWheelSettingsTv() {
         WheelSettingsTv wstv = new WheelSettingsTv();
-        final WheelSettingsTvRef ref = wstv.toRef();
 
         testWheelSettingsTvDefaults(wstv);
         testWheelSettingsTvSetters(wstv);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(wstv);
         System.gc();
     }
 
@@ -244,12 +225,11 @@ public class Test014 {
      */
     private static void doWheelSettingsWv() {
         WheelSettingsWv wswv = new WheelSettingsWv();
-        final WheelSettingsWvRef ref = wswv.toRef();
 
         testWheelSettingsWvDefaults(wswv);
         testWheelSettingsWvSetters(wswv);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(wswv);
         System.gc();
     }
 
@@ -259,12 +239,11 @@ public class Test014 {
     private static void doWvControllerSettings() {
         WheeledVehicleControllerSettings wvcs
                 = new WheeledVehicleControllerSettings();
-        final VehicleControllerSettingsRef ref = wvcs.toRef();
 
         testWvControllerSettingsDefaults(wvcs);
         testWvControllerSettingsSetters(wvcs);
 
-        TestUtils.testClose(ref);
+        TestUtils.testClose(wvcs);
         System.gc();
     }
 
@@ -297,9 +276,12 @@ public class Test014 {
      */
     private static void testVehicleConstraintSettingsSetters(
             VehicleConstraintSettings vcs) {
-        vcs.addWheels(new WheelSettingsWv());
+        WheelSettingsWv ws = new WheelSettingsWv();
+        vcs.addWheels(ws);
         vcs.setConstraintPriority(9);
-        vcs.setController(new WheeledVehicleControllerSettings());
+        WheeledVehicleControllerSettings controller
+                = new WheeledVehicleControllerSettings();
+        vcs.setController(controller);
         vcs.setDrawConstraintSize(8f);
         vcs.setEnabled(false);
         vcs.setForward(new Vec3(0.6f, 0.8f, 0f));
@@ -308,9 +290,14 @@ public class Test014 {
         vcs.setNumPositionStepsOverride(4);
         vcs.setNumVelocityStepsOverride(5);
         vcs.setUp(new Vec3(0f, 0f, -1f));
+        TestUtils.testClose(controller, ws);
 
         Assert.assertEquals(9, vcs.getConstraintPriority());
-        Assert.assertNotNull(vcs.getController());
+
+        VehicleControllerSettings settings2 = vcs.getController();
+        Assert.assertNotNull(settings2);
+        TestUtils.testClose(settings2);
+
         Assert.assertEquals(4, vcs.getControllerType());
         Assert.assertEquals(8f, vcs.getDrawConstraintSize(), 0f);
         Assert.assertFalse(vcs.getEnabled());
