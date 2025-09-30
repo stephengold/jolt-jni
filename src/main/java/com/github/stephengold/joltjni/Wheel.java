@@ -23,7 +23,6 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstWheel;
 import com.github.stephengold.joltjni.readonly.ConstWheelSettings;
-import com.github.stephengold.joltjni.template.Ref;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
@@ -33,13 +32,6 @@ import java.nio.FloatBuffer;
  * @author Stephen Gold sgold@sonic.net
  */
 public class Wheel extends NonCopyable implements ConstWheel {
-    // *************************************************************************
-    // fields
-
-    /**
-     * prevent premature garbage collection of the settings
-     */
-    final private Ref settings;
     // *************************************************************************
     // constructors
 
@@ -52,15 +44,6 @@ public class Wheel extends NonCopyable implements ConstWheel {
      */
     Wheel(VehicleConstraint container, long wheelVa) {
         super(container, wheelVa);
-
-        long settingsVa = getSettings(wheelVa);
-        if (this instanceof WheelTv) {
-            this.settings = new WheelSettingsTv(settingsVa).toRef();
-        } else if (this instanceof WheelWv) {
-            this.settings = new WheelSettingsWv(settingsVa).toRef();
-        } else {
-            throw new IllegalStateException(this.getClass().getSimpleName());
-        }
     }
     // *************************************************************************
     // new methods exposed
@@ -261,7 +244,10 @@ public class Wheel extends NonCopyable implements ConstWheel {
      */
     @Override
     public ConstWheelSettings getSettings() {
-        WheelSettings result = (WheelSettings) settings.getPtr();
+        long wheelVa = va();
+        long settingsVa = getSettings(wheelVa);
+        ConstWheelSettings result = WheelSettings.newSettings(settingsVa);
+
         return result;
     }
 
