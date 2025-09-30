@@ -53,7 +53,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSett
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterVirtualSettings_createCopy
-  BODYOF_CREATE_COPY(CharacterVirtualSettings)
+  BODYOF_CREATE_COPY_TARGET(CharacterVirtualSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterVirtualSettings
