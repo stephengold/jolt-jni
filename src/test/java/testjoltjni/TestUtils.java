@@ -72,7 +72,7 @@ final public class TestUtils {
     /**
      * {@code true} to explicitly free native objects via {@code testClose()}
      */
-    final public static boolean explicitFreeing = false;
+    final public static boolean explicitFreeing = true;
     /**
      * {@code true} to log heap allocations in glue code
      */
@@ -303,6 +303,10 @@ final public class TestUtils {
     public static void cleanup() {
         Jolt.unregisterTypes();
         Jolt.destroyFactory();
+
+        if (TestUtils.explicitFreeing) {
+            Assert.assertEquals(Jolt.countDeletes(), Jolt.countNews());
+        }
 
         System.gc();
     }
