@@ -56,12 +56,13 @@ public class VehicleConstraint
      */
     public VehicleConstraint(
             Body body, ConstVehicleConstraintSettings settings) {
-        assert settings.getController() != null : "no controller";
+        long settingsVa = settings.targetVa();
+        assert VehicleConstraintSettings.getController(settingsVa) != 0L :
+                "no controller";
         assert settings.getNumWheels() > 0 : "no wheels";
 
         this.body = body;
         long bodyVa = body.va();
-        long settingsVa = settings.targetVa();
         long constraintVa = createConstraint(bodyVa, settingsVa);
         setVirtualAddressAsCoOwner(constraintVa);
     }
