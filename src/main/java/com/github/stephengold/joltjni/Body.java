@@ -883,6 +883,19 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
+     * Update the specified counted reference to refer to the body's shape. The
+     * body is unaffected.
+     *
+     * @param storeRef storage for the reference (not null, modified)
+     */
+    @Override
+    public void getShape(ShapeRefC storeRef) {
+        long bodyVa = va();
+        long refVa = storeRef.va();
+        getShapeUpdate(bodyVa, refVa);
+    }
+
+    /**
      * Generate settings to reconstruct the (soft) body. The body is unaffected.
      *
      * @return a new object
@@ -1163,6 +1176,8 @@ public class Body extends NonCopyable implements ConstBody {
             long bodyVa, FloatBuffer storeFloats);
 
     native private static long getShape(long bodyVa);
+
+    native private static void getShapeUpdate(long bodyVa, long refVa);
 
     native private static long getSoftBodyCreationSettings(long bodyVa);
 

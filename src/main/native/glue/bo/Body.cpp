@@ -455,6 +455,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getShape
 
 /*
  * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getShapeUpdate
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Body_getShapeUpdate
+  (JNIEnv *, jclass, jlong bodyVa, jlong refVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    RefConst<Shape> * const pRef = reinterpret_cast<RefConst<Shape> *> (refVa);
+    (*pRef) = pBody->GetShape();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
  * Method:    getSoftBodyCreationSettings
  * Signature: (J)J
  */

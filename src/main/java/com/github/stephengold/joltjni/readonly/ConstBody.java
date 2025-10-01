@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.SoftBodyCreationSettings;
 import com.github.stephengold.joltjni.TransformedShape;
 import com.github.stephengold.joltjni.Vec3;
@@ -238,6 +239,14 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * assigned, or {@code null} if none
      */
     ConstShape getShape();
+
+    /**
+     * Update the specified counted reference to refer to the body's shape. The
+     * body is unaffected.
+     *
+     * @param storeRef storage for the reference (not null, modified)
+     */
+    void getShape(ShapeRefC storeRef);
 
     /**
      * Convert the body to a {@code SoftBodyCreationSettings} object. The body
