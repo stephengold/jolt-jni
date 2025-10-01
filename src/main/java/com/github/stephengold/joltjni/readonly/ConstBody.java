@@ -233,7 +233,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     Quat getRotation();
 
     /**
-     * Access the body's shape.
+     * Access the body's shape. The body is unaffected.
      *
      * @return a new immutable JVM object with the pre-existing native object
      * assigned, or {@code null} if none
@@ -249,8 +249,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     void getShape(ShapeRefC storeRef);
 
     /**
-     * Convert the body to a {@code SoftBodyCreationSettings} object. The body
-     * is unaffected.
+     * Generate settings to reconstruct the (soft) body. The body is unaffected.
      *
      * @return a new object
      */
@@ -281,7 +280,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     ConstAaBox getWorldSpaceBounds();
 
     /**
-     * Copy the surface normal of the specified sub-shape at the specified
+     * Copy the surface normal of a particular subshape at the specified
      * location. The body is unaffected.
      *
      * @param subShapeId the ID of the sub-shape to use

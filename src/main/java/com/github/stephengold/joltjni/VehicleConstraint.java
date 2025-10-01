@@ -27,7 +27,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
 /**
- * A special {@code Constraint} used in vehicle simulation.
+ * A special single-body {@code Constraint} used in vehicle simulation.
  *
  * @author Stephen Gold sgold@sonic.net
  */

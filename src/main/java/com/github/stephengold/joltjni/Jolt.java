@@ -186,7 +186,7 @@ final public class Jolt {
     native public static void destroyFactory();
 
     /**
-     * Append a message to the determinism log.
+     * Append a message to the determinism log. (native macro: JPH_DET_LOG)
      *
      * @param message (not null)
      */
@@ -570,24 +570,25 @@ final public class Jolt {
             float x, float y, float z, int xWrap, int yWrap, int zWrap);
 
     /**
-     * Dump profiler data.
+     * Dump profiler data. (native macro: JPH_PROFILE_DUMP)
      *
      * @param message (not null)
      */
     native public static void profileDump(String message);
 
     /**
-     * Terminate the profiler.
+     * Terminate the profiler. (native macro: JPH_PROFILE_END)
      */
     native public static void profileEnd();
 
     /**
-     * Increment the profiler's frame counter.
+     * Increment the profiler's frame counter. (native macro:
+     * JPH_PROFILE_NEXTFRAME)
      */
     native public static void profileNextFrame();
 
     /**
-     * Start an instrumented code section.
+     * Start an instrumented code section. (native macro: JPH_PROFILE_START)
      *
      * @param name the section name (not null)
      */
@@ -880,14 +881,14 @@ final public class Jolt {
 
     /**
      * Set the next available character ID to 1.
-     *
      */
     public static void sSetNextCharacterId() {
         sSetNextCharacterId(1);
     }
 
     /**
-     * Set the next available character ID to the specified value.
+     * Set the next available character ID to the specified value. (native
+     * method: {@code CharacterID::sSetNextCharacterID()})
      *
      * @param nextValue the desired next ID
      */

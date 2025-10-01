@@ -868,7 +868,7 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Access the body's shape.
+     * Access the body's shape. The body is unaffected.
      *
      * @return a new immutable JVM object with the pre-existing native object
      * assigned, or {@code null} if none
@@ -958,7 +958,7 @@ public class Body extends NonCopyable implements ConstBody {
 
     /**
      * Copy the surface normal of a particular subshape at the specified
-     * location.
+     * location. The body is unaffected.
      *
      * @param subShapeId the ID of the sub-shape to use
      * @param location the location to use (not null, unaffected)
