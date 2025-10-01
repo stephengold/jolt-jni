@@ -379,14 +379,14 @@ final public class Jolt {
     native public static boolean implementsDeterminismLog();
 
     /**
-     * Install the default assert callback.
-     */
-    native public static void installDefaultAssertCallback();
-
-    /**
      * Install an alternative trace callback that uses {@code cerr}.
      */
     native public static void installCerrTraceCallback();
+
+    /**
+     * Install the default assert callback.
+     */
+    native public static void installDefaultAssertCallback();
 
     /**
      * Install the default trace callback, which uses {@code cout}.
