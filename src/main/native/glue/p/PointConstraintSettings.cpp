@@ -48,80 +48,36 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PointConstraintSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_PointConstraintSettings
- * Method:    getPoint1X
- * Signature: (J)D
+ * Method:    getPoint1
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_getPoint1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_getPoint1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const PointConstraintSettings * const pSettings
             = reinterpret_cast<PointConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetX();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPoint1;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_PointConstraintSettings
- * Method:    getPoint1Y
- * Signature: (J)D
+ * Method:    getPoint2
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_getPoint1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_getPoint2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const PointConstraintSettings * const pSettings
             = reinterpret_cast<PointConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PointConstraintSettings
- * Method:    getPoint1Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_getPoint1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PointConstraintSettings * const pSettings
-            = reinterpret_cast<PointConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PointConstraintSettings
- * Method:    getPoint2X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_getPoint2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PointConstraintSettings * const pSettings
-            = reinterpret_cast<PointConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PointConstraintSettings
- * Method:    getPoint2Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_getPoint2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PointConstraintSettings * const pSettings
-            = reinterpret_cast<PointConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PointConstraintSettings
- * Method:    getPoint2Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PointConstraintSettings_getPoint2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PointConstraintSettings * const pSettings
-            = reinterpret_cast<PointConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mPoint2.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPoint2;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
