@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,8 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * A ray cast with an {@code RVec3} start location.
@@ -61,10 +63,9 @@ public class RRayCast extends JoltPhysicsObject {
      */
     public Vec3 getDirection() {
         long raycastVa = va();
-        float x = getDirectionX(raycastVa);
-        float y = getDirectionY(raycastVa);
-        float z = getDirectionZ(raycastVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getDirection(raycastVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -77,10 +78,9 @@ public class RRayCast extends JoltPhysicsObject {
      */
     public RVec3 getOrigin() {
         long raycastVa = va();
-        double x = getOriginX(raycastVa);
-        double y = getOriginY(raycastVa);
-        double z = getOriginZ(raycastVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getOrigin(raycastVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -94,10 +94,9 @@ public class RRayCast extends JoltPhysicsObject {
      */
     public RVec3 getPointOnRay(float fraction) {
         long raycastVa = va();
-        double xx = getPointOnRayX(raycastVa, fraction);
-        double yy = getPointOnRayY(raycastVa, fraction);
-        double zz = getPointOnRayZ(raycastVa, fraction);
-        RVec3 result = new RVec3(xx, yy, zz);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPointOnRay(raycastVa, fraction, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -109,21 +108,12 @@ public class RRayCast extends JoltPhysicsObject {
 
     native private static void free(long raycastVa);
 
-    native private static float getDirectionX(long raycastVa);
+    native private static void getDirection(
+            long raycastVa, FloatBuffer storeFloats);
 
-    native private static float getDirectionY(long raycastVa);
+    native private static void getOrigin(
+            long raycastVa, DoubleBuffer storeDoubles);
 
-    native private static float getDirectionZ(long raycastVa);
-
-    native private static double getOriginX(long raycastVa);
-
-    native private static double getOriginY(long raycastVa);
-
-    native private static double getOriginZ(long raycastVa);
-
-    native private static double getPointOnRayX(long raycastVa, float fraction);
-
-    native private static double getPointOnRayY(long raycastVa, float fraction);
-
-    native private static double getPointOnRayZ(long raycastVa, float fraction);
+    native private static void getPointOnRay(
+            long raycastVa, float fraction, DoubleBuffer storeDoubles);
 }
