@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,100 +47,37 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedSha
     return reinterpret_cast<jlong> (pResult);
 }
 
-inline static const Vec3 getPosition(jlong rtsVa) {
+/*
+ * Class:     com_github_stephengold_joltjni_RotatedTranslatedShape
+ * Method:    getPosition
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getPosition
+  (JNIEnv *pEnv, jclass, jlong rtsVa, jobject storeFloats) {
     const RotatedTranslatedShape * const pShape
             = reinterpret_cast<RotatedTranslatedShape *> (rtsVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pShape->GetPosition();
-    return result;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_RotatedTranslatedShape
- * Method:    getPositionX
- * Signature: (J)F
+ * Method:    getRotation
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getPositionX
-  (JNIEnv *, jclass, jlong rtsVa) {
-    const Vec3 position = getPosition(rtsVa);
-    const float result = position.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RotatedTranslatedShape
- * Method:    getPositionY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getPositionY
-  (JNIEnv *, jclass, jlong rtsVa) {
-    const Vec3 position = getPosition(rtsVa);
-    const float result = position.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RotatedTranslatedShape
- * Method:    getPositionZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getPositionZ
-  (JNIEnv *, jclass, jlong rtsVa) {
-    const Vec3 position = getPosition(rtsVa);
-    const float result = position.GetZ();
-    return result;
-}
-
-inline static const Quat getRotation(jlong rtsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getRotation
+  (JNIEnv *pEnv, jclass, jlong rtsVa, jobject storeFloats) {
     const RotatedTranslatedShape * const pShape
             = reinterpret_cast<RotatedTranslatedShape *> (rtsVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
     const Quat result = pShape->GetRotation();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RotatedTranslatedShape
- * Method:    getRotationW
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getRotationW
-  (JNIEnv *, jclass, jlong rtsVa) {
-    const Quat rotation = getRotation(rtsVa);
-    const float result = rotation.GetW();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RotatedTranslatedShape
- * Method:    getRotationX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getRotationX
-  (JNIEnv *, jclass, jlong rtsVa) {
-    const Quat rotation = getRotation(rtsVa);
-    const float result = rotation.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RotatedTranslatedShape
- * Method:    getRotationY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getRotationY
-  (JNIEnv *, jclass, jlong rtsVa) {
-    const Quat rotation = getRotation(rtsVa);
-    const float result = rotation.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RotatedTranslatedShape
- * Method:    getRotationZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RotatedTranslatedShape_getRotationZ
-  (JNIEnv *, jclass, jlong rtsVa) {
-    const Quat rotation = getRotation(rtsVa);
-    const float result = rotation.GetZ();
-    return result;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+    pFloats[3] = result.GetW();
 }
