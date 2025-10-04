@@ -48,41 +48,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstra
 
 /*
  * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
- * Method:    getHingeAxisX
- * Signature: (J)F
+ * Method:    getHingeAxis
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getHingeAxisX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getHingeAxis
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const RackAndPinionConstraintSettings * const pSettings
             = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
- * Method:    getHingeAxisY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getHingeAxisY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const RackAndPinionConstraintSettings * const pSettings
-            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
- * Method:    getHingeAxisZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getHingeAxisZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const RackAndPinionConstraintSettings * const pSettings
-            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
-    const float result = pSettings->mHingeAxis.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mHingeAxis;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -100,41 +78,19 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstr
 
 /*
  * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
- * Method:    getSliderAxisX
- * Signature: (J)F
+ * Method:    getSliderAxis
+ * Signature: (JLjava/nio/FloatBuffer;)F
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getSliderAxisX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getSliderAxis
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const RackAndPinionConstraintSettings * const pSettings
             = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
-    const float result = pSettings->mSliderAxis.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
- * Method:    getSliderAxisY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getSliderAxisY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const RackAndPinionConstraintSettings * const pSettings
-            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
-    const float result = pSettings->mSliderAxis.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RackAndPinionConstraintSettings
- * Method:    getSliderAxisZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RackAndPinionConstraintSettings_getSliderAxisZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const RackAndPinionConstraintSettings * const pSettings
-            = reinterpret_cast<RackAndPinionConstraintSettings *> (settingsVa);
-    const float result = pSettings->mSliderAxis.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mSliderAxis;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

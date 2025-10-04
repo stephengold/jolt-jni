@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code RackAndPinionConstraint}.
@@ -76,10 +77,9 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getHingeAxis() {
         long settingsVa = va();
-        float dx = getHingeAxisX(settingsVa);
-        float dy = getHingeAxisY(settingsVa);
-        float dz = getHingeAxisZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHingeAxis(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -105,10 +105,9 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
      */
     public Vec3 getSliderAxis() {
         long settingsVa = va();
-        float dx = getSliderAxisX(settingsVa);
-        float dy = getSliderAxisY(settingsVa);
-        float dz = getSliderAxisZ(settingsVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getSliderAxis(settingsVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -202,19 +201,13 @@ public class RackAndPinionConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createDefault();
 
-    native private static float getHingeAxisX(long settingsVa);
-
-    native private static float getHingeAxisY(long settingsVa);
-
-    native private static float getHingeAxisZ(long settingsVa);
+    native private static void getHingeAxis(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static float getRatio(long settingsVa);
 
-    native private static float getSliderAxisX(long settingsVa);
-
-    native private static float getSliderAxisY(long settingsVa);
-
-    native private static float getSliderAxisZ(long settingsVa);
+    native private static void getSliderAxis(
+            long settingsVa, FloatBuffer storeFloats);
 
     native private static int getSpace(long settingsVa);
 
