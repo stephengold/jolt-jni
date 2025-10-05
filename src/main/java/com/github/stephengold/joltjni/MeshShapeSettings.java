@@ -152,7 +152,7 @@ public class MeshShapeSettings extends ShapeSettings {
      *
      * @param triangleList the list of triangles (not null, unaffected)
      */
-    public MeshShapeSettings(List<Triangle> triangleList) {
+    public MeshShapeSettings(List<? extends ConstTriangle> triangleList) {
         this(triangleList, new PhysicsMaterialList());
     }
 
@@ -162,8 +162,8 @@ public class MeshShapeSettings extends ShapeSettings {
      * @param triangleList the list of triangles (not null, unaffected)
      * @param materials the desired surface properties (not null, unaffected)
      */
-    public MeshShapeSettings(
-            List<Triangle> triangleList, PhysicsMaterialList materials) {
+    public MeshShapeSettings(List<? extends ConstTriangle> triangleList,
+            PhysicsMaterialList materials) {
         int numTriangles = triangleList.size();
         int numVertices = 3 * numTriangles;
         int numFloats = 3 * numVertices;
@@ -198,7 +198,7 @@ public class MeshShapeSettings extends ShapeSettings {
      *
      * @param triangleArray the array of triangles (not null, unaffected)
      */
-    public MeshShapeSettings(Triangle... triangleArray) {
+    public MeshShapeSettings(ConstTriangle... triangleArray) {
         this(triangleArray, new PhysicsMaterialList());
     }
 
@@ -209,12 +209,12 @@ public class MeshShapeSettings extends ShapeSettings {
      * @param materials the desired surface properties (not null, unaffected)
      */
     public MeshShapeSettings(
-            Triangle[] triangleArray, PhysicsMaterialList materials) {
+            ConstTriangle[] triangleArray, PhysicsMaterialList materials) {
         int numTriangles = triangleArray.length;
         int numVertices = 3 * numTriangles;
         int numFloats = 3 * numVertices;
         FloatBuffer buffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (Triangle triangle : triangleArray) {
+        for (ConstTriangle triangle : triangleArray) {
             triangle.putVertices(buffer);
         }
         long materialsVa = materials.va();
