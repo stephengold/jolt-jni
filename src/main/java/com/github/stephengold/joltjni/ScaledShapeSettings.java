@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code ScaledShape}.
@@ -98,10 +99,9 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
      */
     public Vec3 getScale() {
         long scaledVa = va();
-        float scaleX = getScaleX(scaledVa);
-        float scaleY = getScaleY(scaledVa);
-        float scaleZ = getScaleZ(scaledVa);
-        Vec3 result = new Vec3(scaleX, scaleY, scaleZ);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getScale(scaledVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -116,9 +116,5 @@ public class ScaledShapeSettings extends DecoratedShapeSettings {
     native private static long createScaledShapeSettingsFromShape(
             long baseShapeVa, float scaleX, float scaleY, float scaleZ);
 
-    native private static float getScaleX(long scaledVa);
-
-    native private static float getScaleY(long scaledVa);
-
-    native private static float getScaleZ(long scaledVa);
+    native private static void getScale(long scaledVa, FloatBuffer storeFloats);
 }

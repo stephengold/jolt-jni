@@ -71,39 +71,17 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_
 
 /*
  * Class:     com_github_stephengold_joltjni_ScaledShapeSettings
- * Method:    getScaleX
- * Signature: (J)F
+ * Method:    getScale
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_getScaleX
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_getScale
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeFloats) {
     const ScaledShapeSettings * const pSettings
             = reinterpret_cast<ScaledShapeSettings *> (settingsVa);
-    const float result = pSettings->mScale.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ScaledShapeSettings
- * Method:    getScaleY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_getScaleY
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ScaledShapeSettings * const pSettings
-            = reinterpret_cast<ScaledShapeSettings *> (settingsVa);
-    const float result = pSettings->mScale.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_ScaledShapeSettings
- * Method:    getScaleZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ScaledShapeSettings_getScaleZ
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const ScaledShapeSettings * const pSettings
-            = reinterpret_cast<ScaledShapeSettings *> (settingsVa);
-    const float result = pSettings->mScale.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mScale;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
