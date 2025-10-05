@@ -463,6 +463,7 @@ final public class Jolt {
         result.order(ByteOrder.nativeOrder());
 
         assert result.capacity() == numBytes : result.capacity();
+        assert result.isDirect();
         assert result.limit() == numBytes : result.limit();
         assert result.position() == 0 : result.position();
         return result;
@@ -482,6 +483,7 @@ final public class Jolt {
         DoubleBuffer result = byteBuffer.asDoubleBuffer();
 
         assert result.capacity() == numDoubles : result.capacity();
+        assert result.isDirect();
         assert result.limit() == numDoubles : result.limit();
         assert result.position() == 0 : result.position();
         return result;
@@ -501,6 +503,7 @@ final public class Jolt {
         FloatBuffer result = byteBuffer.asFloatBuffer();
 
         assert result.capacity() == numFloats : result.capacity();
+        assert result.isDirect();
         assert result.limit() == numFloats : result.limit();
         assert result.position() == 0 : result.position();
         return result;
@@ -520,6 +523,7 @@ final public class Jolt {
         IntBuffer result = byteBuffer.asIntBuffer();
 
         assert result.capacity() == numInts : result.capacity();
+        assert result.isDirect();
         assert result.limit() == numInts : result.limit();
         assert result.position() == 0 : result.position();
         return result;
@@ -539,6 +543,7 @@ final public class Jolt {
         ShortBuffer result = byteBuffer.asShortBuffer();
 
         assert result.capacity() == numShorts : result.capacity();
+        assert result.isDirect();
         assert result.limit() == numShorts : result.limit();
         assert result.position() == 0 : result.position();
         return result;

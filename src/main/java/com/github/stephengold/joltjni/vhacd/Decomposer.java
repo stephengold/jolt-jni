@@ -132,6 +132,8 @@ public class Decomposer extends JoltPhysicsObject {
         Objects.requireNonNull(indices, "indices must not be null");
         assert locations.capacity() % numAxes == 0 : locations.capacity();
         assert indices.capacity() % vpt == 0 : indices.capacity();
+        assert locations.isDirect();
+        assert indices.isDirect();
 
         hulls.clear();
         long decomposerVa = va();

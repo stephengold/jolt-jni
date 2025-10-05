@@ -142,6 +142,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      */
     public ConvexHullShapeSettings(int numPoints, FloatBuffer points,
             float maxConvexRadius, ConstPhysicsMaterial material) {
+        assert points.isDirect();
         long materialVa = (material == null) ? 0L : material.targetVa();
         long settingsVa = createSettings(
                 numPoints, points, maxConvexRadius, materialVa);
