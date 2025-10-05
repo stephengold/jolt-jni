@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstSubShape;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * An element of a compound shape. (native type:
@@ -130,10 +131,9 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
     @Override
     public Vec3 getPositionCom() {
         long subshapeVa = va();
-        float x = getPositionComX(subshapeVa);
-        float y = getPositionComY(subshapeVa);
-        float z = getPositionComZ(subshapeVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPositionCom(subshapeVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -146,11 +146,9 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
     @Override
     public Quat getRotation() {
         long subShapeVa = va();
-        float w = getRotationW(subShapeVa);
-        float x = getRotationX(subShapeVa);
-        float y = getRotationY(subShapeVa);
-        float z = getRotationZ(subShapeVa);
-        Quat result = new Quat(x, y, z, w);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotation(subShapeVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -212,19 +210,11 @@ public class SubShape extends JoltPhysicsObject implements ConstSubShape {
     native private static long getLocalTransformNoScale(
             long subshapeVa, float sx, float sy, float sz);
 
-    native private static float getPositionComX(long subShapeVa);
+    native private static void getPositionCom(
+            long subShapeVa, FloatBuffer storeFloats);
 
-    native private static float getPositionComY(long subShapeVa);
-
-    native private static float getPositionComZ(long subShapeVa);
-
-    native private static float getRotationW(long subShapeVa);
-
-    native private static float getRotationX(long subShapeVa);
-
-    native private static float getRotationY(long subShapeVa);
-
-    native private static float getRotationZ(long subShapeVa);
+    native private static void getRotation(
+            long subShapeVa, FloatBuffer storeFloats);
 
     native private static long getShape(long subShapeVa);
 

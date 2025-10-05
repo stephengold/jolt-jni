@@ -48,93 +48,37 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_SubShape_getLocalTra
 
 /*
  * Class:     com_github_stephengold_joltjni_SubShape
- * Method:    getPositionComX
- * Signature: (J)F
+ * Method:    getPositionCom
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SubShape_getPositionComX
-  (JNIEnv *, jclass, jlong subShapeVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SubShape_getPositionCom
+  (JNIEnv *pEnv, jclass, jlong subShapeVa, jobject storeFloats) {
     const CompoundShape::SubShape * const pSubShape
             = reinterpret_cast<CompoundShape::SubShape *> (subShapeVa);
-    const float result = pSubShape->GetPositionCOM().GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pSubShape->GetPositionCOM();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_SubShape
- * Method:    getPositionComY
- * Signature: (J)F
+ * Method:    getRotation
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SubShape_getPositionComY
-  (JNIEnv *, jclass, jlong subShapeVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SubShape_getRotation
+  (JNIEnv *pEnv, jclass, jlong subShapeVa, jobject storeFloats) {
     const CompoundShape::SubShape * const pSubShape
             = reinterpret_cast<CompoundShape::SubShape *> (subShapeVa);
-    const float result = pSubShape->GetPositionCOM().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SubShape
- * Method:    getPositionComZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SubShape_getPositionComZ
-  (JNIEnv *, jclass, jlong subShapeVa) {
-    const CompoundShape::SubShape * const pSubShape
-            = reinterpret_cast<CompoundShape::SubShape *> (subShapeVa);
-    const float result = pSubShape->GetPositionCOM().GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SubShape
- * Method:    getRotationW
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SubShape_getRotationW
-  (JNIEnv *, jclass, jlong subShapeVa) {
-    const CompoundShape::SubShape * const pSubShape
-            = reinterpret_cast<CompoundShape::SubShape *> (subShapeVa);
-    const float result = pSubShape->GetRotation().GetW();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SubShape
- * Method:    getRotationX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SubShape_getRotationX
-  (JNIEnv *, jclass, jlong subShapeVa) {
-    const CompoundShape::SubShape * const pSubShape
-            = reinterpret_cast<CompoundShape::SubShape *> (subShapeVa);
-    const float result = pSubShape->GetRotation().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SubShape
- * Method:    getRotationY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SubShape_getRotationY
-  (JNIEnv *, jclass, jlong subShapeVa) {
-    const CompoundShape::SubShape * const pSubShape
-            = reinterpret_cast<CompoundShape::SubShape *> (subShapeVa);
-    const float result = pSubShape->GetRotation().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SubShape
- * Method:    getRotationZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SubShape_getRotationZ
-  (JNIEnv *, jclass, jlong subShapeVa) {
-    const CompoundShape::SubShape * const pSubShape
-            = reinterpret_cast<CompoundShape::SubShape *> (subShapeVa);
-    const float result = pSubShape->GetRotation().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Quat result = pSubShape->GetRotation();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+    pFloats[3] = result.GetW();
 }
 
 /*
