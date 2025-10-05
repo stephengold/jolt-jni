@@ -75,7 +75,7 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
 
     /**
      * Copy the target angular velocity of body2. The constraint is unaffected.
-     * (native method: GetTargetAngularVelocityCS)
+     * (native function: GetTargetAngularVelocityCS)
      *
      * @return a new vector
      */
@@ -90,7 +90,7 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
 
     /**
      * Copy the target orientation. The constraint is unaffected. (native
-     * method: GetTargetOrientationCS)
+     * function: GetTargetOrientationCS)
      *
      * @return a new quaternion
      */
@@ -203,7 +203,7 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
 
     /**
      * Alter the target angular velocity of body 2 in the constraint space of
-     * body 2. (native method: SetTargetAngularVelocityCS)
+     * body 2. (native function: SetTargetAngularVelocityCS)
      *
      * @param omega the desired angular velocity (in radians per second, not
      * {@code null}, unaffected)
@@ -217,7 +217,7 @@ public class SwingTwistConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the target orientation in constraint space. (native method:
+     * Alter the target orientation in constraint space. (native function:
      * SetTargetOrientationCS)
      *
      * @param orientation the desired orientation (not {@code null}, unaffected)

@@ -119,7 +119,7 @@ public interface ConstCharacterVirtualSettings
     float getMaxStrength();
 
     /**
-     * Return the early out threshold. The settings are unaffected.
+     * Return the early-out threshold. The settings are unaffected.
      *
      * @return the simulation time interval (in seconds)
      */

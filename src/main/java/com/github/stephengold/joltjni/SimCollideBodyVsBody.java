@@ -25,7 +25,7 @@ import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 
 /**
- * Collide 2 bodies during simulation. (native method:
+ * Collide 2 bodies during simulation. (native type:
  * {@code PhysicsSystem::SimCollideBodyVsBody})
  *
  * @author Stephen Gold sgold@sonic.net

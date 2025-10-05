@@ -101,7 +101,7 @@ abstract public class CharacterBase
 
     /**
      * Return the body ID of the supporting surface. The character is
-     * unaffected. (native method: GetGroundBodyID)
+     * unaffected. (native function: GetGroundBodyID)
      *
      * @return the {@code BodyID} value
      */

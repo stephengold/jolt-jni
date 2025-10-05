@@ -55,7 +55,7 @@ public class SubShapeIdCreator extends JoltPhysicsObject {
     // new methods exposed
 
     /**
-     * Return the resulting subshape ID. (native method: GetID)
+     * Return the resulting subshape ID. (native function: GetID)
      *
      * @return the ID value
      */

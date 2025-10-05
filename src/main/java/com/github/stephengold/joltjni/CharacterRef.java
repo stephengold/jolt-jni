@@ -263,7 +263,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
 
     /**
      * Return the ID of the body associated with the character. The character is
-     * unaffected. (native method: GetBodyID)
+     * unaffected. (native function: GetBodyID)
      *
      * @return the {@code BodyID} value
      */

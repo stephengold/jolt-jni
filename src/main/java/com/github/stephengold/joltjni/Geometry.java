@@ -108,7 +108,7 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
 
     /**
      * Access the appropriate level of detail for the specified conditions. The
-     * geometry is unaffected. (native method: GetLOD)
+     * geometry is unaffected. (native function: GetLOD)
      *
      * @param cameraPosition the location of the camera (not null, unaffected)
      * @param worldSpaceBounds bounds for this geometry (in system coordinates,

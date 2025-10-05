@@ -48,8 +48,8 @@ final public class SubShapeIdPair
     // ConstSubShapeIdPair methods
 
     /**
-     * Return the ID of the first body. The pair is unaffected. (native method:
-     * GetBody1ID)
+     * Return the ID of the first body. The pair is unaffected. (native
+     * function: GetBody1ID)
      *
      * @return the {@code BodyID} value
      */
@@ -62,7 +62,7 @@ final public class SubShapeIdPair
     }
 
     /**
-     * Return the ID of the 2nd body. The pair is unaffected. (native method:
+     * Return the ID of the 2nd body. The pair is unaffected. (native function:
      * GetBody2ID)
      *
      * @return the {@code BodyID} value
@@ -90,7 +90,7 @@ final public class SubShapeIdPair
 
     /**
      * Return the ID of the first sub-shape. The pair is unaffected. (native
-     * method: GetSubShapeID1)
+     * function: GetSubShapeID1)
      *
      * @return a {@code SubShapeID} value
      */
@@ -104,7 +104,7 @@ final public class SubShapeIdPair
 
     /**
      * Return the ID of the 2nd sub-shape. The pair is unaffected. (native
-     * method: GetSubShapeID2)
+     * function: GetSubShapeID2)
      *
      * @return a {@code SubShapeID} value
      */

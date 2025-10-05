@@ -130,8 +130,8 @@ final public class RagdollRef extends Ref {
     }
 
     /**
-     * Enumerate all bodies in the ragdoll, which is unaffected. (native method:
-     * GetBodyIDs)
+     * Enumerate all bodies in the ragdoll, which is unaffected. (native
+     * function: GetBodyIDs)
      *
      * @return a new array of body IDs
      */

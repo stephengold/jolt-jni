@@ -703,7 +703,7 @@ public class Body extends NonCopyable implements ConstBody {
 
     /**
      * Return the body's ID for use with {@code BodyInterface}. The body is
-     * unaffected. (native method: GetID)
+     * unaffected. (native function: GetID)
      *
      * @return the {@code BodyID} value
      */

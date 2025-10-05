@@ -377,7 +377,7 @@ final public class CharacterVirtualRefC
     }
 
     /**
-     * Return the character's ID. The character is unaffected. (native method:
+     * Return the character's ID. The character is unaffected. (native function:
      * GetID)
      *
      * @return a {@code CharacterId} value
@@ -392,7 +392,7 @@ final public class CharacterVirtualRefC
 
     /**
      * Return the ID of the inner body. The character is unaffected. (native
-     * method: GetInnerBodyID)
+     * function: GetInnerBodyID)
      *
      * @return the {@code BodyID} value
      */

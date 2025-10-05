@@ -119,8 +119,8 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
 
     /**
-     * Enumerate all bodies in the ragdoll, which is unaffected. (native method:
-     * GetBodyIDs)
+     * Enumerate all bodies in the ragdoll, which is unaffected. (native
+     * function: GetBodyIDs)
      *
      * @return a new array of body IDs
      */

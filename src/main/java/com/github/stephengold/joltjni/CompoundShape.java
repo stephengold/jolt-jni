@@ -68,7 +68,7 @@ abstract public class CompoundShape extends Shape {
     }
 
     /**
-     * Convert a sub-shape index to a sub-shape ID. (native method:
+     * Convert a sub-shape index to a sub-shape ID. (native function:
      * GetSubShapeIDFromIndex)
      *
      * @param subShapeIndex the index of a subshape within the current compound

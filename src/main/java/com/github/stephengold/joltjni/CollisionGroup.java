@@ -107,7 +107,7 @@ public class CollisionGroup
     }
 
     /**
-     * Alter the main group ID. (native method: SetGroupID)
+     * Alter the main group ID. (native function: SetGroupID)
      *
      * @param id the desired ID (default=cInvalidGroup)
      */
@@ -117,7 +117,7 @@ public class CollisionGroup
     }
 
     /**
-     * Alter the sub-group ID. (native method: SetSubGroupID)
+     * Alter the sub-group ID. (native function: SetSubGroupID)
      *
      * @param id the desired ID (default=cInvalidSubGroup)
      */
@@ -144,7 +144,7 @@ public class CollisionGroup
     }
 
     /**
-     * Return the main group ID. The group is unaffected. (native method:
+     * Return the main group ID. The group is unaffected. (native function:
      * GetGroupID)
      *
      * @return the {@code GroupID} value
@@ -158,7 +158,7 @@ public class CollisionGroup
     }
 
     /**
-     * Return the sub-group ID. The group is unaffected. (native method:
+     * Return the sub-group ID. The group is unaffected. (native function:
      * GetSubGroupID)
      *
      * @return the {@code SubGroupID} value

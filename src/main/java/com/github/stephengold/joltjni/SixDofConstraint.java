@@ -186,7 +186,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
 
     /**
      * Copy the target velocities of the angular motors. The constraint is
-     * unaffected. (native method: GetTargetAngularVelocityCS)
+     * unaffected. (native function: GetTargetAngularVelocityCS)
      *
      * @return a new angular velocity vector (radians per second in body 2
      * constraint space)
@@ -202,7 +202,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
 
     /**
      * Copy the target position of the linear motors. The constraint is
-     * unaffected. (native method: GetTargetPositionCS)
+     * unaffected. (native function: GetTargetPositionCS)
      *
      * @return a new offset vector (meters in body 1 constraint space)
      */
@@ -217,7 +217,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
 
     /**
      * Copy the target orientation of the angular motors. The constraint is
-     * unaffected. (native method: GetTargetOrientationCS)
+     * unaffected. (native function: GetTargetOrientationCS)
      *
      * @return the target orientation (in constraint space)
      */
@@ -232,7 +232,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
 
     /**
      * Copy the target velocities of the linear motors. The constraint is
-     * unaffected. (native method: GetTargetVelocityCS)
+     * unaffected. (native function: GetTargetVelocityCS)
      *
      * @return a new linear velocity vector (meters per second in body 1
      * constraint space)
@@ -361,7 +361,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the target velocities of the linear motors. (native method:
+     * Alter the target velocities of the linear motors. (native function:
      * SetTargetVelocityCS)
      *
      * @param velocity the desired linear velocity (meters per second in body 1
@@ -376,7 +376,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the target velocities of the angular motors. (native method:
+     * Alter the target velocities of the angular motors. (native function:
      * SetTargetAngularVelocityCS)
      *
      * @param omega the desired angular velocity (radians per second in body 2
@@ -391,7 +391,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the target position of the linear motors. (native method:
+     * Alter the target position of the linear motors. (native function:
      * SetTargetPositionCS)
      *
      * @param offsets the desired offsets (meters in body 1 constraint space)
@@ -406,7 +406,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
 
     /**
      * Alter the target orientation of the angular motors in body space. (native
-     * method: SetTargetOrientationBS)
+     * function: SetTargetOrientationBS)
      *
      * @param orientation the desired target orientation (not null, unaffected)
      */
@@ -420,7 +420,7 @@ public class SixDofConstraint extends TwoBodyConstraint {
     }
 
     /**
-     * Alter the target orientation of the angular motors. (native method:
+     * Alter the target orientation of the angular motors. (native function:
      * SetTargetOrientationCS)
      *
      * @param orientation the desired orientation (in body 1 constraint space)

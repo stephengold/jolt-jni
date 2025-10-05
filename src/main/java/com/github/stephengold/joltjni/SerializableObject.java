@@ -56,7 +56,7 @@ abstract public class SerializableObject
 
     /**
      * Access the run-time type information of the current object. (native
-     * method: GetRTTI)
+     * function: GetRTTI)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */

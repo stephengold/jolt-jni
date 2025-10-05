@@ -214,7 +214,7 @@ final public class CharacterVirtualSettingsRef
     }
 
     /**
-     * Alter the early out threshold. (native attribute: mMinTimeRemaining)
+     * Alter the early-out threshold. (native attribute: mMinTimeRemaining)
      *
      * @param interval the desired simulation time interval (in seconds,
      * default=0.0001)
@@ -498,7 +498,7 @@ final public class CharacterVirtualSettingsRef
     }
 
     /**
-     * Return the early out threshold. The settings are unaffected. (native
+     * Return the early-out threshold. The settings are unaffected. (native
      * attribute: mMinTimeRemaining)
      *
      * @return the simulation time interval (in seconds)

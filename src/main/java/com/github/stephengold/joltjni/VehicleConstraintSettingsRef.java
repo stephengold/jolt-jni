@@ -325,7 +325,7 @@ final public class VehicleConstraintSettingsRef
     }
 
     /**
-     * Access the type information of the current object. (native method:
+     * Access the type information of the current object. (native function:
      * getRTTI)
      *
      * @return a new JVM object with the pre-existing native object assigned

@@ -893,7 +893,7 @@ final public class Jolt {
 
     /**
      * Set the next available character ID to the specified value. (native
-     * method: {@code CharacterID::sSetNextCharacterID()})
+     * function: {@code CharacterID::sSetNextCharacterID})
      *
      * @param nextValue the desired next ID
      */

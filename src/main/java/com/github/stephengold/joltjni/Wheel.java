@@ -95,7 +95,7 @@ public class Wheel extends NonCopyable implements ConstWheel {
     }
 
     /**
-     * Return the ID of the body that's supporting the wheel. (native method:
+     * Return the ID of the body that's supporting the wheel. (native function:
      * GetContactBodyID)
      *
      * @return the body ID
@@ -184,8 +184,8 @@ public class Wheel extends NonCopyable implements ConstWheel {
     }
 
     /**
-     * Return ID of the sub-shape that's supporting the vehicle. (native method:
-     * GetContactSubShapeID)
+     * Return ID of the sub-shape that's supporting the vehicle. (native
+     * function: GetContactSubShapeID)
      *
      * @return a {@code SubShapeID} value
      */

@@ -590,7 +590,7 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
-     * Draw the specified 3-D text. (native method: DrawText3D)
+     * Draw the specified 3-D text. (native function: DrawText3D)
      *
      * @param location the location of the text (not null, unaffected)
      * @param text the text to display (not null)
@@ -600,7 +600,7 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
-     * Draw the specified 3-D text. (native method: DrawText3D)
+     * Draw the specified 3-D text. (native function: DrawText3D)
      *
      * @param location the location of the text (not null, unaffected)
      * @param text the text to display (not null)
@@ -612,7 +612,7 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
-     * Draw the specified 3-D text. (native method: DrawText3D)
+     * Draw the specified 3-D text. (native function: DrawText3D)
      *
      * @param location the location of the text (not null, unaffected)
      * @param text the text to display (not null)

@@ -52,7 +52,7 @@ final public class SoftBodyManifold
 
     /**
      * Return the ID of the body with which the specified vertex collided. The
-     * manifold is unaffected. (native method: GetContactBodyID)
+     * manifold is unaffected. (native function: GetContactBodyID)
      *
      * @param vertex the vertex to query (not null, unaffected)
      * @return the {@code BodyID} value
@@ -120,7 +120,7 @@ final public class SoftBodyManifold
 
     /**
      * Return the ID of the specified sensor contact. The manifold is
-     * unaffected. (native method: GetSensorContactBodyID)
+     * unaffected. (native function: GetSensorContactBodyID)
      *
      * @param index among the sensor contacts (&ge;0)
      * @return the {@code BodyID} value
