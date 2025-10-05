@@ -207,10 +207,9 @@ public class SoftBodyVertex
     @Override
     public Vec3 getPosition() {
         long vertexVa = va();
-        float x = getPositionX(vertexVa);
-        float y = getPositionY(vertexVa);
-        float z = getPositionZ(vertexVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPosition(vertexVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -225,10 +224,9 @@ public class SoftBodyVertex
     @Override
     public Vec3 getVelocity() {
         long vertexVa = va();
-        float x = getVelocityX(vertexVa);
-        float y = getVelocityY(vertexVa);
-        float z = getVelocityZ(vertexVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getVelocity(vertexVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -262,17 +260,11 @@ public class SoftBodyVertex
 
     native private static float getLargestPenetration(long vertexVa);
 
-    native private static float getPositionX(long vertexVa);
+    native private static void getPosition(
+            long vertexVa, FloatBuffer storeFloats);
 
-    native private static float getPositionY(long vertexVa);
-
-    native private static float getPositionZ(long vertexVa);
-
-    native private static float getVelocityX(long vertexVa);
-
-    native private static float getVelocityY(long vertexVa);
-
-    native private static float getVelocityZ(long vertexVa);
+    native private static void getVelocity(
+            long vertexVa, FloatBuffer storeFloats);
 
     native private static boolean hasContact(long vertexVa);
 
