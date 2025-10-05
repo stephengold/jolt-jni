@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -48,39 +48,17 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassSh
 
 /*
  * Class:     com_github_stephengold_joltjni_OffsetCenterOfMassShape
- * Method:    getOffsetX
- * Signature: (J)F
+ * Method:    getOffset
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShape_getOffsetX
-  (JNIEnv *, jclass, jlong ocomShapeVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShape_getOffset
+  (JNIEnv *pEnv, jclass, jlong ocomShapeVa, jobject storeFloats) {
     const OffsetCenterOfMassShape * const pShape
             = reinterpret_cast<OffsetCenterOfMassShape *> (ocomShapeVa);
-    const float result = pShape->GetOffset().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_OffsetCenterOfMassShape
- * Method:    getOffsetY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShape_getOffsetY
-  (JNIEnv *, jclass, jlong ocomShapeVa) {
-    const OffsetCenterOfMassShape * const pShape
-            = reinterpret_cast<OffsetCenterOfMassShape *> (ocomShapeVa);
-    const float result = pShape->GetOffset().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_OffsetCenterOfMassShape
- * Method:    getOffsetZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShape_getOffsetZ
-  (JNIEnv *, jclass, jlong ocomShapeVa) {
-    const OffsetCenterOfMassShape * const pShape
-            = reinterpret_cast<OffsetCenterOfMassShape *> (ocomShapeVa);
-    const float result = pShape->GetOffset().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pShape->GetOffset();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }

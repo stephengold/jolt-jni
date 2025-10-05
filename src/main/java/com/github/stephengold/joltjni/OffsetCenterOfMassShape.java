@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Translate the center of mass of a child shape.
@@ -68,10 +69,9 @@ public class OffsetCenterOfMassShape extends DecoratedShape {
      */
     public Vec3 getOffset() {
         long ocomShapeVa = va();
-        float offsetX = getOffsetX(ocomShapeVa);
-        float offsetY = getOffsetY(ocomShapeVa);
-        float offsetZ = getOffsetZ(ocomShapeVa);
-        Vec3 result = new Vec3(offsetX, offsetY, offsetZ);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getOffset(ocomShapeVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -81,9 +81,6 @@ public class OffsetCenterOfMassShape extends DecoratedShape {
     native private static long createShape(
             long baseShapeVa, float offsetX, float offsetY, float offsetZ);
 
-    native private static float getOffsetX(long ocomShapeVa);
-
-    native private static float getOffsetY(long ocomShapeVa);
-
-    native private static float getOffsetZ(long ocomShapeVa);
+    native private static void getOffset(
+            long ocomShapeVa, FloatBuffer storeFloats);
 }
