@@ -171,47 +171,21 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
     return result;
 }
 
-inline static const Vec3 getAngularVelocity(jlong propertiesVa) {
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getAngularVelocity
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAngularVelocity
+  (JNIEnv *pEnv, jclass, jlong propertiesVa, jobject storeFloats) {
     const MotionProperties * const pProperties
             = reinterpret_cast<MotionProperties *> (propertiesVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pProperties->GetAngularVelocity();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getAngularVelocityX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAngularVelocityX
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3 vec3 = getAngularVelocity(propertiesVa);
-    const float result = vec3.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getAngularVelocityY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAngularVelocityY
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3 vec3 = getAngularVelocity(propertiesVa);
-    const float result = vec3.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getAngularVelocityZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getAngularVelocityZ
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3 vec3 = getAngularVelocity(propertiesVa);
-    const float result = vec3.GetZ();
-    return result;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -229,93 +203,37 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getInertiaRotationW
- * Signature: (J)F
+ * Method:    getInertiaRotation
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInertiaRotationW
-  (JNIEnv *, jclass, jlong propertiesVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInertiaRotation
+  (JNIEnv *pEnv, jclass, jlong propertiesVa, jobject storeFloats) {
     const MotionProperties * const pProperties
             = reinterpret_cast<MotionProperties *> (propertiesVa);
-    const float result = pProperties->GetInertiaRotation().GetW();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Quat result = pProperties->GetInertiaRotation();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+    pFloats[3] = result.GetW();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getInertiaRotationX
- * Signature: (J)F
+ * Method:    getInverseInertiaDiagonal
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInertiaRotationX
-  (JNIEnv *, jclass, jlong propertiesVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInverseInertiaDiagonal
+  (JNIEnv *pEnv, jclass, jlong propertiesVa, jobject storeFloats) {
     const MotionProperties * const pProperties
             = reinterpret_cast<MotionProperties *> (propertiesVa);
-    const float result = pProperties->GetInertiaRotation().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getInertiaRotationY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInertiaRotationY
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    const MotionProperties * const pProperties
-            = reinterpret_cast<MotionProperties *> (propertiesVa);
-    const float result = pProperties->GetInertiaRotation().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getInertiaRotationZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInertiaRotationZ
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    const MotionProperties * const pProperties
-            = reinterpret_cast<MotionProperties *> (propertiesVa);
-    const float result = pProperties->GetInertiaRotation().GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getInverseInertiaXX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInverseInertiaXX
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    const MotionProperties * const pProperties
-            = reinterpret_cast<MotionProperties *> (propertiesVa);
-    const float result = pProperties->GetInverseInertiaDiagonal().GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getInverseInertiaYY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInverseInertiaYY
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    const MotionProperties * const pProperties
-            = reinterpret_cast<MotionProperties *> (propertiesVa);
-    const float result = pProperties->GetInverseInertiaDiagonal().GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getInverseInertiaZZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getInverseInertiaZZ
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    const MotionProperties * const pProperties
-            = reinterpret_cast<MotionProperties *> (propertiesVa);
-    const float result = pProperties->GetInverseInertiaDiagonal().GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pProperties->GetInverseInertiaDiagonal();
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
@@ -357,47 +275,21 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_ge
     return result;
 }
 
-inline static const Vec3 getLinearVelocity(jlong propertiesVa) {
+/*
+ * Class:     com_github_stephengold_joltjni_MotionProperties
+ * Method:    getLinearVelocity
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getLinearVelocity
+  (JNIEnv *pEnv, jclass, jlong propertiesVa, jobject storeFloats) {
     const MotionProperties * const pProperties
             = reinterpret_cast<MotionProperties *> (propertiesVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     const Vec3 result = pProperties->GetLinearVelocity();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getLinearVelocityX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getLinearVelocityX
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3 vec3 = getLinearVelocity(propertiesVa);
-    const float result = vec3.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getLinearVelocityY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getLinearVelocityY
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3 vec3 = getLinearVelocity(propertiesVa);
-    const float result = vec3.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_MotionProperties
- * Method:    getLinearVelocityZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_MotionProperties_getLinearVelocityZ
-  (JNIEnv *, jclass, jlong propertiesVa) {
-    const Vec3 vec3 = getLinearVelocity(propertiesVa);
-    const float result = vec3.GetZ();
-    return result;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

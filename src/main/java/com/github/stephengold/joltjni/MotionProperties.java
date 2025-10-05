@@ -27,6 +27,7 @@ import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstMotionProperties;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Additional state for a {@code Body} that moves.
@@ -373,10 +374,9 @@ public class MotionProperties
     @Override
     public Vec3 getAngularVelocity() {
         long propertiesVa = va();
-        float wx = getAngularVelocityX(propertiesVa);
-        float wy = getAngularVelocityY(propertiesVa);
-        float wz = getAngularVelocityZ(propertiesVa);
-        Vec3 result = new Vec3(wx, wy, wz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getAngularVelocity(propertiesVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -403,11 +403,9 @@ public class MotionProperties
     @Override
     public Quat getInertiaRotation() {
         long propertiesVa = va();
-        float qw = getInertiaRotationW(propertiesVa);
-        float qx = getInertiaRotationX(propertiesVa);
-        float qy = getInertiaRotationY(propertiesVa);
-        float qz = getInertiaRotationZ(propertiesVa);
-        Quat result = new Quat(qx, qy, qz, qw);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getInertiaRotation(propertiesVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -421,10 +419,9 @@ public class MotionProperties
     @Override
     public Vec3 getInverseInertiaDiagonal() {
         long propertiesVa = va();
-        float dx = getInverseInertiaXX(propertiesVa);
-        float dy = getInverseInertiaYY(propertiesVa);
-        float dz = getInverseInertiaZZ(propertiesVa);
-        Vec3 result = new Vec3(dx, dy, dz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getInverseInertiaDiagonal(propertiesVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -476,10 +473,9 @@ public class MotionProperties
     @Override
     public Vec3 getLinearVelocity() {
         long propertiesVa = va();
-        float vx = getLinearVelocityX(propertiesVa);
-        float vy = getLinearVelocityY(propertiesVa);
-        float vz = getLinearVelocityZ(propertiesVa);
-        Vec3 result = new Vec3(vx, vy, vz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getLinearVelocity(propertiesVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -596,27 +592,16 @@ public class MotionProperties
 
     native private static float getAngularDamping(long propertiesVa);
 
-    native private static float getAngularVelocityX(long propertiesVa);
-
-    native private static float getAngularVelocityY(long propertiesVa);
-
-    native private static float getAngularVelocityZ(long propertiesVa);
+    native private static void getAngularVelocity(
+            long propertiesVa, FloatBuffer storeFloats);
 
     native private static float getGravityFactor(long propertiesVa);
 
-    native private static float getInertiaRotationW(long propertiesVa);
+    native private static void getInertiaRotation(
+            long propertiesVa, FloatBuffer storeFloats);
 
-    native private static float getInertiaRotationX(long propertiesVa);
-
-    native private static float getInertiaRotationY(long propertiesVa);
-
-    native private static float getInertiaRotationZ(long propertiesVa);
-
-    native private static float getInverseInertiaXX(long propertiesVa);
-
-    native private static float getInverseInertiaYY(long propertiesVa);
-
-    native private static float getInverseInertiaZZ(long propertiesVa);
+    native private static void getInverseInertiaDiagonal(
+            long propertiesVa, FloatBuffer storeFloats);
 
     native private static float getInverseMass(long propertiesVa);
 
@@ -624,11 +609,8 @@ public class MotionProperties
 
     native private static float getLinearDamping(long propertiesVa);
 
-    native private static float getLinearVelocityX(long propertiesVa);
-
-    native private static float getLinearVelocityY(long propertiesVa);
-
-    native private static float getLinearVelocityZ(long propertiesVa);
+    native private static void getLinearVelocity(
+            long propertiesVa, FloatBuffer storeFloats);
 
     native private static long getLocalSpaceInverseInertia(long propertiesVa);
 
