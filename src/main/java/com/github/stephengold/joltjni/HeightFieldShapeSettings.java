@@ -111,7 +111,15 @@ public class HeightFieldShapeSettings extends ShapeSettings {
      */
     public HeightFieldShapeSettings(FloatBuffer samples, Vec3Arg offset,
             Vec3Arg scale, int sampleCount) {
-        this(samples, offset, scale, sampleCount, null);
+        float offsetX = offset.getX();
+        float offsetY = offset.getY();
+        float offsetZ = offset.getZ();
+        float scaleX = scale.getX();
+        float scaleY = scale.getY();
+        float scaleZ = scale.getZ();
+        long settingsVa = createFromBufferNoMats(samples, offsetX, offsetY,
+                offsetZ, scaleX, scaleY, scaleZ, sampleCount);
+        setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.HeightField);
     }
 
     /**
@@ -385,6 +393,10 @@ public class HeightFieldShapeSettings extends ShapeSettings {
     native private static long createCopy(long originalVa);
 
     native private static long createDefault();
+
+    native private static long createFromBufferNoMats(
+            FloatBuffer samples, float offsetX, float offsetY, float offsetZ,
+            float scaleX, float scaleY, float scaleZ, int sampleCount);
 
     native private static long createSettingsFromArray(
             float[] samples, float offsetX, float offsetY, float offsetZ,

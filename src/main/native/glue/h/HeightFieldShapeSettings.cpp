@@ -48,6 +48,24 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSett
 
 /*
  * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
+ * Method:    createFromBufferNoMats
+ * Signature: (Ljava/nio/FloatBuffer;FFFFFFI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_createFromBufferNoMats
+  (JNIEnv *pEnv, jclass, jobject buffer, jfloat offsetX, jfloat offsetY,
+  jfloat offsetZ, jfloat scaleX, jfloat scaleY, jfloat scaleZ, jint sampleCount) {
+    const DIRECT_FLOAT_BUFFER(pEnv, buffer, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= sampleCount * sampleCount);
+    const Vec3 offset(offsetX, offsetY, offsetZ);
+    const Vec3 scale(scaleX, scaleY, scaleZ);
+    HeightFieldShapeSettings * const pSettings
+            = new HeightFieldShapeSettings(pFloats, offset, scale, sampleCount);
+    TRACE_NEW_TARGET("HeightFieldShapeSettings", pSettings)
+    return reinterpret_cast<jlong> (pSettings);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HeightFieldShapeSettings
  * Method:    createSettingsFromArray
  * Signature: ([FFFFFFFI[BJ)J
  */
