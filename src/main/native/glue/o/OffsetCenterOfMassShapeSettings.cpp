@@ -71,41 +71,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassSh
 
 /*
  * Class:     com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings
- * Method:    getOffsetX
- * Signature: (J)F
+ * Method:    getOffset
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_getOffsetX
-  (JNIEnv *, jclass, jlong ocomssVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_getOffset
+  (JNIEnv *pEnv, jclass, jlong ocomssVa, jobject storeFloats) {
     const OffsetCenterOfMassShapeSettings * const pSettings
             = reinterpret_cast<OffsetCenterOfMassShapeSettings *> (ocomssVa);
-    const float result = pSettings->mOffset.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings
- * Method:    getOffsetY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_getOffsetY
-  (JNIEnv *, jclass, jlong ocomssVa) {
-    const OffsetCenterOfMassShapeSettings * const pSettings
-            = reinterpret_cast<OffsetCenterOfMassShapeSettings *> (ocomssVa);
-    const float result = pSettings->mOffset.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings
- * Method:    getOffsetZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OffsetCenterOfMassShapeSettings_getOffsetZ
-  (JNIEnv *, jclass, jlong ocomssVa) {
-    const OffsetCenterOfMassShapeSettings * const pSettings
-            = reinterpret_cast<OffsetCenterOfMassShapeSettings *> (ocomssVa);
-    const float result = pSettings->mOffset.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pSettings->mOffset;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*

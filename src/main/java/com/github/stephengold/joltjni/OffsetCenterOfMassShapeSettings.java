@@ -25,6 +25,7 @@ import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct an {@code OffsetCenterOfMassShape}.
@@ -102,10 +103,9 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
      */
     public Vec3 getOffset() {
         long ocomssVa = va();
-        float offsetX = getOffsetX(ocomssVa);
-        float offsetY = getOffsetY(ocomssVa);
-        float offsetZ = getOffsetZ(ocomssVa);
-        Vec3 result = new Vec3(offsetX, offsetY, offsetZ);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getOffset(ocomssVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -134,11 +134,8 @@ public class OffsetCenterOfMassShapeSettings extends DecoratedShapeSettings {
     native private static long createSettingsFromShape(
             float offsetX, float offsetY, float offsetZ, long baseShapeVa);
 
-    native private static float getOffsetX(long ocomssVa);
-
-    native private static float getOffsetY(long ocomssVa);
-
-    native private static float getOffsetZ(long ocomssVa);
+    native private static void getOffset(
+            long ocomssVa, FloatBuffer storeFloats);
 
     native private static void setOffset(
             long ocomssVa, float offsetX, float offsetY, float offsetZ);
