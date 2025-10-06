@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to construct a {@code RotatedTranslatedShape}.
@@ -157,10 +158,9 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      */
     public Vec3 getPosition() {
         long rtssVa = va();
-        float offsetX = getPositionX(rtssVa);
-        float offsetY = getPositionY(rtssVa);
-        float offsetZ = getPositionZ(rtssVa);
-        Vec3 result = new Vec3(offsetX, offsetY, offsetZ);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPosition(rtssVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -173,11 +173,9 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
      */
     public Quat getRotation() {
         long rtssVa = va();
-        float rotW = getRotationW(rtssVa);
-        float rotX = getRotationX(rtssVa);
-        float rotY = getRotationY(rtssVa);
-        float rotZ = getRotationZ(rtssVa);
-        Quat result = new Quat(rotX, rotY, rotZ, rotW);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotation(rtssVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -224,19 +222,11 @@ public class RotatedTranslatedShapeSettings extends DecoratedShapeSettings {
             float offsetX, float offsetY, float offsetZ, float rotX, float rotY,
             float rotZ, float rotW, long baseShapeSettingsVa);
 
-    native private static float getPositionX(long rtssVa);
+    native private static void getPosition(
+            long rtssVa, FloatBuffer storeFloats);
 
-    native private static float getPositionY(long rtssVa);
-
-    native private static float getPositionZ(long rtssVa);
-
-    native private static float getRotationW(long rtssVa);
-
-    native private static float getRotationX(long rtssVa);
-
-    native private static float getRotationY(long rtssVa);
-
-    native private static float getRotationZ(long rtssVa);
+    native private static void getRotation(
+            long rtssVa, FloatBuffer storeFloats);
 
     native private static void setPosition(
             long rtssVa, float offsetX, float offsetY, float offsetZ);
