@@ -68,6 +68,7 @@ import com.github.stephengold.joltjni.VertexList;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstTriangle;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -310,9 +311,9 @@ public class Test007 {
         Float3 v1 = new Float3(1f, 0f, -1f);
         Float3 v2 = new Float3(-1f, 0f, 1f);
         Float3 v3 = new Float3(-1f, 0f, -1f);
-        Triangle tri1 = new Triangle(v0, v2, v3);
-        Triangle tri2 = new Triangle(v3, v1, v0);
-        List<Triangle> list = new ArrayList<>(2);
+        ConstTriangle tri1 = new Triangle(v0, v2, v3);
+        ConstTriangle tri2 = new Triangle(v3, v1, v0);
+        List<ConstTriangle> list = new ArrayList<>(2);
         list.add(tri1);
         list.add(tri2);
         PhysicsMaterialList mats = new PhysicsMaterialList();
@@ -326,7 +327,7 @@ public class Test007 {
 
         testMeshDefaults(shape2);
 
-        Triangle[] array = {tri1, tri2};
+        ConstTriangle[] array = {tri1, tri2};
         MeshShapeSettings settings3 = new MeshShapeSettings(array, mats);
 
         ShapeResult result3 = settings3.create();

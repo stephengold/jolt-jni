@@ -53,6 +53,7 @@ import com.github.stephengold.joltjni.readonly.ConstConvexShapeSettings;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstPlane;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstTriangle;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -230,7 +231,7 @@ public class Test006 {
         testMeshSsSetters(settings);
 
         // instantiate from an array:
-        Triangle[] array = new Triangle[0];
+        ConstTriangle[] array = new Triangle[0];
         PhysicsMaterialList mats = new PhysicsMaterialList();
         MeshShapeSettings settings2 = new MeshShapeSettings(array, mats);
 
@@ -238,7 +239,7 @@ public class Test006 {
         testMeshSsSetters(settings2);
 
         // instantiate from a collection:
-        List<Triangle> list = new ArrayList<>(1);
+        List<ConstTriangle> list = new ArrayList<>(1);
         MeshShapeSettings settings3 = new MeshShapeSettings(list, mats);
 
         testMeshSsDefaults(settings3);
