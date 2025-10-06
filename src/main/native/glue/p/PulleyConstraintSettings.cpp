@@ -48,158 +48,70 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSett
 
 /*
  * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getBodyPoint1X
- * Signature: (J)D
+ * Method:    getBodyPoint1
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getBodyPoint1X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getBodyPoint1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const PulleyConstraintSettings * const pSettings
             = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mBodyPoint1.GetX();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mBodyPoint1;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getBodyPoint1Y
- * Signature: (J)D
+ * Method:    getBodyPoint2
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getBodyPoint1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getBodyPoint2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const PulleyConstraintSettings * const pSettings
             = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mBodyPoint1.GetY();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mBodyPoint2;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getBodyPoint1Z
- * Signature: (J)D
+ * Method:    getFixedPoint1
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getBodyPoint1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getFixedPoint1
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const PulleyConstraintSettings * const pSettings
             = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mBodyPoint1.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mFixedPoint1;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getBodyPoint2X
- * Signature: (J)D
+ * Method:    getFixedPoint2
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getBodyPoint2X
-  (JNIEnv *, jclass, jlong settingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getFixedPoint2
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jobject storeDoubles) {
     const PulleyConstraintSettings * const pSettings
             = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mBodyPoint2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getBodyPoint2Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getBodyPoint2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PulleyConstraintSettings * const pSettings
-            = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mBodyPoint2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getBodyPoint2Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getBodyPoint2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PulleyConstraintSettings * const pSettings
-            = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mBodyPoint2.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getFixedPoint1X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getFixedPoint1X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PulleyConstraintSettings * const pSettings
-            = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mFixedPoint1.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getFixedPoint1Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getFixedPoint1Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PulleyConstraintSettings * const pSettings
-            = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mFixedPoint1.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getFixedPoint1Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getFixedPoint1Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PulleyConstraintSettings * const pSettings
-            = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mFixedPoint1.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getFixedPoint2X
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getFixedPoint2X
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PulleyConstraintSettings * const pSettings
-            = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mFixedPoint2.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getFixedPoint2Y
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getFixedPoint2Y
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PulleyConstraintSettings * const pSettings
-            = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mFixedPoint2.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_PulleyConstraintSettings
- * Method:    getFixedPoint2Z
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_PulleyConstraintSettings_getFixedPoint2Z
-  (JNIEnv *, jclass, jlong settingsVa) {
-    const PulleyConstraintSettings * const pSettings
-            = reinterpret_cast<PulleyConstraintSettings *> (settingsVa);
-    const Real result = pSettings->mFixedPoint2.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mFixedPoint2;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*

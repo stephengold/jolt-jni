@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.enumerate.EConstraintSpace;
 import com.github.stephengold.joltjni.enumerate.EConstraintSubType;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
+import java.nio.DoubleBuffer;
 
 /**
  * Settings used to construct a {@code PulleyConstraint}.
@@ -73,10 +74,9 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getBodyPoint1() {
         long settingsVa = va();
-        double x = getBodyPoint1X(settingsVa);
-        double y = getBodyPoint1Y(settingsVa);
-        double z = getBodyPoint1Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getBodyPoint1(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -89,10 +89,9 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getBodyPoint2() {
         long settingsVa = va();
-        double x = getBodyPoint2X(settingsVa);
-        double y = getBodyPoint2Y(settingsVa);
-        double z = getBodyPoint2Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getBodyPoint2(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -105,10 +104,9 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getFixedPoint1() {
         long settingsVa = va();
-        double x = getFixedPoint1X(settingsVa);
-        double y = getFixedPoint1Y(settingsVa);
-        double z = getFixedPoint1Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getFixedPoint1(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -121,10 +119,9 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
      */
     public RVec3 getFixedPoint2() {
         long settingsVa = va();
-        double x = getFixedPoint2X(settingsVa);
-        double y = getFixedPoint2Y(settingsVa);
-        double z = getFixedPoint2Z(settingsVa);
-        RVec3 result = new RVec3(x, y, z);
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getFixedPoint2(settingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
 
         return result;
     }
@@ -298,29 +295,17 @@ public class PulleyConstraintSettings extends TwoBodyConstraintSettings {
 
     native private static long createDefault();
 
-    native private static double getBodyPoint1X(long settingsVa);
+    native private static void getBodyPoint1(
+            long settingsVa, DoubleBuffer storeDoubles);
 
-    native private static double getBodyPoint1Y(long settingsVa);
+    native private static void getBodyPoint2(
+            long settingsVa, DoubleBuffer storeDoubles);
 
-    native private static double getBodyPoint1Z(long settingsVa);
+    native private static void getFixedPoint1(
+            long settingsVa, DoubleBuffer storeDoubles);
 
-    native private static double getBodyPoint2X(long settingsVa);
-
-    native private static double getBodyPoint2Y(long settingsVa);
-
-    native private static double getBodyPoint2Z(long settingsVa);
-
-    native private static double getFixedPoint1X(long settingsVa);
-
-    native private static double getFixedPoint1Y(long settingsVa);
-
-    native private static double getFixedPoint1Z(long settingsVa);
-
-    native private static double getFixedPoint2X(long settingsVa);
-
-    native private static double getFixedPoint2Y(long settingsVa);
-
-    native private static double getFixedPoint2Z(long settingsVa);
+    native private static void getFixedPoint2(
+            long settingsVa, DoubleBuffer storeDoubles);
 
     native private static float getMaxLength(long settingsVa);
 
