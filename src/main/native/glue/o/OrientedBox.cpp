@@ -70,39 +70,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_OrientedBox_free
 
 /*
  * Class:     com_github_stephengold_joltjni_OrientedBox
- * Method:    getHalfExtentX
- * Signature: (J)F
+ * Method:    getHalfExtents
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OrientedBox_getHalfExtentX
-  (JNIEnv *, jclass, jlong boxVa) {
-    const OrientedBox * const pBox = reinterpret_cast<OrientedBox *> (boxVa);
-    const float result = pBox->mHalfExtents.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_OrientedBox
- * Method:    getHalfExtentY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OrientedBox_getHalfExtentY
-  (JNIEnv *, jclass, jlong boxVa) {
-    const OrientedBox * const pBox = reinterpret_cast<OrientedBox *> (boxVa);
-    const float result = pBox->mHalfExtents.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_OrientedBox
- * Method:    getHalfExtentZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_OrientedBox_getHalfExtentZ
-  (JNIEnv *, jclass, jlong boxVa) {
-    const OrientedBox * const pBox = reinterpret_cast<OrientedBox *> (boxVa);
-    const float result = pBox->mHalfExtents.GetZ();
-    return result;
-}
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_OrientedBox_getHalfExtents
+  (JNIEnv *pEnv, jclass, jlong boxVa, jobject storeFloats) {
+   const OrientedBox * const pBox = reinterpret_cast<OrientedBox *> (boxVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pBox->mHalfExtents;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+ }
 
 /*
  * Class:     com_github_stephengold_joltjni_OrientedBox

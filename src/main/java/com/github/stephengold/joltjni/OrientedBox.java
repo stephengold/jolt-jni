@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstOrientedBox;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * A 3-D box that has been rotated and translated.
@@ -83,10 +84,9 @@ final public class OrientedBox
     @Override
     public Vec3 getHalfExtents() {
         long boxVa = va();
-        float hx = getHalfExtentX(boxVa);
-        float hy = getHalfExtentY(boxVa);
-        float hz = getHalfExtentZ(boxVa);
-        Vec3 result = new Vec3(hx, hy, hz);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getHalfExtents(boxVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -117,11 +117,8 @@ final public class OrientedBox
 
     native private static void free(long boxVa);
 
-    native private static float getHalfExtentX(long boxVa);
-
-    native private static float getHalfExtentY(long boxVa);
-
-    native private static float getHalfExtentZ(long boxVa);
+    native private static void getHalfExtents(
+            long boxVa, FloatBuffer storeFloats);
 
     native private static long getOrientation(long boxVa);
 }
