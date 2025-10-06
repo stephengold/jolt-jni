@@ -55,111 +55,49 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RayCast_free
 
 /*
  * Class:     com_github_stephengold_joltjni_RayCast
- * Method:    getDirectionX
- * Signature: (J)F
+ * Method:    getDirection
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RayCast_getDirectionX
-  (JNIEnv *, jclass, jlong raycastVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RayCast_getDirection
+  (JNIEnv *pEnv, jclass, jlong raycastVa, jobject storeFloats) {
     const RayCast * const pRayCast = reinterpret_cast<RayCast *> (raycastVa);
-    const float result = pRayCast->mDirection.GetX();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pRayCast->mDirection;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_RayCast
- * Method:    getDirectionY
- * Signature: (J)F
+ * Method:    getOrigin
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RayCast_getDirectionY
-  (JNIEnv *, jclass, jlong raycastVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RayCast_getOrigin
+  (JNIEnv *pEnv, jclass, jlong raycastVa, jobject storeFloats) {
     const RayCast * const pRayCast = reinterpret_cast<RayCast *> (raycastVa);
-    const float result = pRayCast->mDirection.GetY();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3& result = pRayCast->mOrigin;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_RayCast
- * Method:    getDirectionZ
- * Signature: (J)F
+ * Method:    getPointOnRay
+ * Signature: (JFLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RayCast_getDirectionZ
-  (JNIEnv *, jclass, jlong raycastVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RayCast_getPointOnRay
+  (JNIEnv *pEnv, jclass, jlong raycastVa, jfloat fraction,
+  jobject storeFloats) {
     const RayCast * const pRayCast = reinterpret_cast<RayCast *> (raycastVa);
-    const float result = pRayCast->mDirection.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RayCast
- * Method:    getOriginX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RayCast_getOriginX
-  (JNIEnv *, jclass, jlong raycastVa) {
-    const RayCast * const pRayCast = reinterpret_cast<RayCast *> (raycastVa);
-    const float result = pRayCast->mOrigin.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RayCast
- * Method:    getOriginY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RayCast_getOriginY
-  (JNIEnv *, jclass, jlong raycastVa) {
-    const RayCast * const pRayCast = reinterpret_cast<RayCast *> (raycastVa);
-    const float result = pRayCast->mOrigin.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RayCast
- * Method:    getOriginZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RayCast_getOriginZ
-  (JNIEnv *, jclass, jlong raycastVa) {
-    const RayCast * const pRayCast = reinterpret_cast<RayCast *> (raycastVa);
-    const float result = pRayCast->mOrigin.GetZ();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RayCast
- * Method:    getPointOnRayX
- * Signature: (JF)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RayCast_getPointOnRayX
-  (JNIEnv *, jclass, jlong raycastVa, jfloat fraction) {
-    const RayCast * const pRayCast = reinterpret_cast<RayCast *> (raycastVa);
-    const Vec3 vec3 = pRayCast->GetPointOnRay(fraction);
-    const float result = vec3.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RayCast
- * Method:    getPointOnRayY
- * Signature: (JF)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RayCast_getPointOnRayY
-  (JNIEnv *, jclass, jlong raycastVa, jfloat fraction) {
-    const RayCast * const pRayCast = reinterpret_cast<RayCast *> (raycastVa);
-    const Vec3 vec3 = pRayCast->GetPointOnRay(fraction);
-    const float result = vec3.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_RayCast
- * Method:    getPointOnRayZ
- * Signature: (JF)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_RayCast_getPointOnRayZ
-  (JNIEnv *, jclass, jlong raycastVa, jfloat fraction) {
-    const RayCast * const pRayCast = reinterpret_cast<RayCast *> (raycastVa);
-    const Vec3 vec3 = pRayCast->GetPointOnRay(fraction);
-    const float result = vec3.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pRayCast->GetPointOnRay(fraction);
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
 }

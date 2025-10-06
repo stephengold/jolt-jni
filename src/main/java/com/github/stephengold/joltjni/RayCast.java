@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.FloatBuffer;
 
 /**
  * A ray cast with a single-precision start location.
@@ -60,10 +61,9 @@ public class RayCast extends JoltPhysicsObject {
      */
     public Vec3 getDirection() {
         long raycastVa = va();
-        float x = getDirectionX(raycastVa);
-        float y = getDirectionY(raycastVa);
-        float z = getDirectionZ(raycastVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getDirection(raycastVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -76,10 +76,9 @@ public class RayCast extends JoltPhysicsObject {
      */
     public Vec3 getOrigin() {
         long raycastVa = va();
-        float x = getOriginX(raycastVa);
-        float y = getOriginY(raycastVa);
-        float z = getOriginZ(raycastVa);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getOrigin(raycastVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -93,10 +92,9 @@ public class RayCast extends JoltPhysicsObject {
      */
     public Vec3 getPointOnRay(float fraction) {
         long raycastVa = va();
-        float x = getPointOnRayX(raycastVa, fraction);
-        float y = getPointOnRayY(raycastVa, fraction);
-        float z = getPointOnRayZ(raycastVa, fraction);
-        Vec3 result = new Vec3(x, y, z);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPointOnRay(raycastVa, fraction, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
 
         return result;
     }
@@ -108,21 +106,12 @@ public class RayCast extends JoltPhysicsObject {
 
     native private static void free(long raycastVa);
 
-    native private static float getDirectionX(long raycastVa);
+    native private static void getDirection(
+            long raycastVa, FloatBuffer storeFloats);
 
-    native private static float getDirectionY(long raycastVa);
+    native private static void getOrigin(
+            long raycastVa, FloatBuffer storeFloats);
 
-    native private static float getDirectionZ(long raycastVa);
-
-    native private static float getOriginX(long raycastVa);
-
-    native private static float getOriginY(long raycastVa);
-
-    native private static float getOriginZ(long raycastVa);
-
-    native private static float getPointOnRayX(long raycastVa, float fraction);
-
-    native private static float getPointOnRayY(long raycastVa, float fraction);
-
-    native private static float getPointOnRayZ(long raycastVa, float fraction);
+    native private static void getPointOnRay(
+            long raycastVa, float fraction, FloatBuffer storeFloats);
 }
