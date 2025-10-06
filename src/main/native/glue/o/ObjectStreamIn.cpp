@@ -88,6 +88,14 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadConstraintSettings
+ * Signature: (Ljava/lang/String;J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadConstraintSettings
+  BODYOF_SREAD_FROM_FILE_REF(ConstraintSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
  * Method:    sReadConstraintSettingsFromStream
  * Signature: (JJ)Z
  */
@@ -104,11 +112,27 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadGroupFilterTable
+ * Signature: (Ljava/lang/String;J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadGroupFilterTable
+  BODYOF_SREAD_FROM_FILE_REF(GroupFilterTable)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
  * Method:    sReadGroupFilterTableFromStream
  * Signature: (JJ)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadGroupFilterTableFromStream
   BODYOF_SREAD_FROM_STREAM_REF(GroupFilterTable)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadPhysicsMaterial
+ * Signature: (Ljava/lang/String;J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadPhysicsMaterial
+  BODYOF_SREAD_FROM_FILE_REF(PhysicsMaterial)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
@@ -189,3 +213,11 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadSkeleton
   BODYOF_SREAD_FROM_FILE_REF(Skeleton)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadVehicleControllerSettings
+ * Signature: (Ljava/lang/String;J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadVehicleControllerSettings
+  BODYOF_SREAD_FROM_FILE_REF(VehicleControllerSettings)

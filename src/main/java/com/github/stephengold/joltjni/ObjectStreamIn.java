@@ -53,7 +53,13 @@ final public class ObjectStreamIn {
     public static boolean sReadObject(String fileName, Ref storeRef) {
         long refVa = storeRef.va();
         boolean result;
-        if (storeRef instanceof PhysicsSceneRef) {
+        if (storeRef instanceof ConstraintSettingsRef) {
+            result = sReadConstraintSettings(fileName, refVa);
+        } else if (storeRef instanceof GroupFilterTableRef) {
+            result = sReadGroupFilterTable(fileName, refVa);
+        } else if (storeRef instanceof PhysicsMaterialRef) {
+            result = sReadPhysicsMaterial(fileName, refVa);
+        } else if (storeRef instanceof PhysicsSceneRef) {
             result = sReadPhysicsScene(fileName, refVa);
         } else if (storeRef instanceof RagdollSettingsRef) {
             result = sReadRagdollSettings(fileName, refVa);
@@ -61,6 +67,8 @@ final public class ObjectStreamIn {
             result = sReadSkeletalAnimation(fileName, refVa);
         } else if (storeRef instanceof SkeletonRef) {
             result = sReadSkeleton(fileName, refVa);
+        } else if (storeRef instanceof VehicleControllerSettingsRef) {
+            result = sReadVehicleControllerSettings(fileName, refVa);
         } else {
             throw new IllegalArgumentException(
                     storeRef.getClass().getSimpleName());
@@ -283,14 +291,23 @@ final public class ObjectStreamIn {
     native private static boolean sReadBcsFromStream(
             long streamVa, long[] storeVa);
 
+    native private static boolean sReadConstraintSettings(
+            String fileName, long refVa);
+
     native private static boolean sReadConstraintSettingsFromStream(
-            long streamVa, long settingsRefVa);
+            long streamVa, long refVa);
 
     native private static boolean sReadControllerSettingsFromStream(
             long streamVa, long refVa);
 
+    native private static boolean sReadGroupFilterTable(
+            String fileName, long refVa);
+
     native private static boolean sReadGroupFilterTableFromStream(
             long streamVa, long refVa);
+
+    native private static boolean sReadPhysicsMaterial(
+            String fileName, long refVa);
 
     native private static boolean sReadPhysicsMaterialFromStream(
             long streamVa, long refVa);
@@ -320,4 +337,7 @@ final public class ObjectStreamIn {
             String fileName, long refVa);
 
     native private static boolean sReadSkeleton(String fileName, long refVa);
+
+    native private static boolean sReadVehicleControllerSettings(
+            String fileName, long refVa);
 }
