@@ -309,7 +309,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_TransformedShape_getS
             = reinterpret_cast<TransformedShape *> (transformedShapeVa);
     DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
     JPH_ASSERT(capacityFloats >= 3);
-    const Vec3& scale = pTransformedShape->GetShapeScale();
+    const Vec3 scale = pTransformedShape->GetShapeScale();
     pFloats[0] = scale.GetX();
     pFloats[1] = scale.GetY();
     pFloats[2] = scale.GetZ();
