@@ -32,6 +32,8 @@ import com.github.stephengold.joltjni.streamutils.IdToMaterialMap;
 import com.github.stephengold.joltjni.streamutils.IdToSharedSettingsMap;
 import com.github.stephengold.joltjni.streamutils.MaterialToIdMap;
 import com.github.stephengold.joltjni.streamutils.SharedSettingsToIdMap;
+import java.nio.DoubleBuffer;
+import java.nio.FloatBuffer;
 
 /**
  * Settings used to create a soft body.
@@ -585,16 +587,11 @@ public class SoftBodyCreationSettings
     public RVec3 getPosition() {
         long bodySettingsVa = va();
 
-        double xx = getPositionX(bodySettingsVa);
-        assert Double.isFinite(xx) : "xx = " + xx;
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        getPosition(bodySettingsVa, storeDoubles);
+        RVec3 result = new RVec3(storeDoubles);
+        assert result.isFinite() : "result = " + result;
 
-        double yy = getPositionY(bodySettingsVa);
-        assert Double.isFinite(yy) : "yy = " + yy;
-
-        double zz = getPositionZ(bodySettingsVa);
-        assert Double.isFinite(zz) : "zz = " + zz;
-
-        RVec3 result = new RVec3(xx, yy, zz);
         return result;
     }
 
@@ -635,11 +632,9 @@ public class SoftBodyCreationSettings
     @Override
     public Quat getRotation() {
         long bodySettingsVa = va();
-        float qw = getRotationW(bodySettingsVa);
-        float qx = getRotationX(bodySettingsVa);
-        float qy = getRotationY(bodySettingsVa);
-        float qz = getRotationZ(bodySettingsVa);
-        Quat result = new Quat(qx, qy, qz, qw);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getRotation(bodySettingsVa, storeFloats);
+        Quat result = new Quat(storeFloats);
 
         return result;
     }
@@ -775,23 +770,15 @@ public class SoftBodyCreationSettings
 
     native private static int getObjectLayer(long bodySettingsVa);
 
-    native private static double getPositionX(long bodySettingsVa);
-
-    native private static double getPositionY(long bodySettingsVa);
-
-    native private static double getPositionZ(long bodySettingsVa);
+    native private static void getPosition(
+            long bodySettingsVa, DoubleBuffer storeDoubles);
 
     native private static float getPressure(long bodySettingsVa);
 
     native private static float getRestitution(long bodySettingsVa);
 
-    native private static float getRotationW(long bodySettingsVa);
-
-    native private static float getRotationX(long bodySettingsVa);
-
-    native private static float getRotationY(long bodySettingsVa);
-
-    native private static float getRotationZ(long bodySettingsVa);
+    native private static void getRotation(
+            long bodySettingsVa, FloatBuffer storeFloats);
 
     native private static long getSettings(long bodySettingsVa);
 

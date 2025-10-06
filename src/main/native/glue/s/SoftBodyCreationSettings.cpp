@@ -204,41 +204,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSetti
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
- * Method:    getPositionX
- * Signature: (J)D
+ * Method:    getPosition
+ * Signature: (JLjava/nio/DoubleBuffer;)V
  */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getPositionX
-  (JNIEnv *, jclass, jlong bodySettingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getPosition
+  (JNIEnv *pEnv, jclass, jlong bodySettingsVa, jobject storeDoubles) {
     const SoftBodyCreationSettings * const pSettings
             = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
-    const float result = pSettings->mPosition.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
- * Method:    getPositionY
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getPositionY
-  (JNIEnv *, jclass, jlong bodySettingsVa) {
-    const SoftBodyCreationSettings * const pSettings
-            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
-    const float result = pSettings->mPosition.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
- * Method:    getPositionZ
- * Signature: (J)D
- */
-JNIEXPORT jdouble JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getPositionZ
-  (JNIEnv *, jclass, jlong bodySettingsVa) {
-    const SoftBodyCreationSettings * const pSettings
-            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
-    const float result = pSettings->mPosition.GetZ();
-    return result;
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    const RVec3& result = pSettings->mPosition;
+    pDoubles[0] = result.GetX();
+    pDoubles[1] = result.GetY();
+    pDoubles[2] = result.GetZ();
 }
 
 /*
@@ -269,54 +247,20 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSet
 
 /*
  * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
- * Method:    getRotationW
- * Signature: (J)F
+ * Method:    getRotation
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getRotationW
-  (JNIEnv *, jclass, jlong bodySettingsVa) {
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getRotation
+  (JNIEnv *pEnv, jclass, jlong bodySettingsVa, jobject storeFloats) {
     const SoftBodyCreationSettings * const pSettings
             = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
-    const float result = pSettings->mRotation.GetW();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
- * Method:    getRotationX
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getRotationX
-  (JNIEnv *, jclass, jlong bodySettingsVa) {
-    const SoftBodyCreationSettings * const pSettings
-            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
-    const float result = pSettings->mRotation.GetX();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
- * Method:    getRotationY
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getRotationY
-  (JNIEnv *, jclass, jlong bodySettingsVa) {
-    const SoftBodyCreationSettings * const pSettings
-            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
-    const float result = pSettings->mRotation.GetY();
-    return result;
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_SoftBodyCreationSettings
- * Method:    getRotationZ
- * Signature: (J)F
- */
-JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_SoftBodyCreationSettings_getRotationZ
-  (JNIEnv *, jclass, jlong bodySettingsVa) {
-    const SoftBodyCreationSettings * const pSettings
-            = reinterpret_cast<SoftBodyCreationSettings *> (bodySettingsVa);
-    const float result = pSettings->mRotation.GetZ();
-    return result;
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Quat& result = pSettings->mRotation;
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+    pFloats[3] = result.GetW();
 }
 
 /*
