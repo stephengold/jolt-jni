@@ -195,7 +195,8 @@ final public class ShapeRefC extends JoltPhysicsObject implements ConstShape {
      * @param subShapeId a sub-shape ID that specifies the path to the desired
      * leaf shape
      * @param storeRemainderId storage for the remainder of the sub-shape ID
-     * after removing the path to the leaf shape (not null, modified)
+     * after removing the path to the leaf shape (not null, length&gt;0,
+     * modified)
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null} if the ID is invalid
      */
