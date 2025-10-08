@@ -52,14 +52,14 @@ public interface ConstSubShapeIdPair extends ConstJoltPhysicsObject {
     /**
      * Return the ID of the first sub-shape. The pair is unaffected.
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     int getSubShapeId1();
 
     /**
      * Return the ID of the 2nd sub-shape. The pair is unaffected.
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     int getSubShapeId2();
 }

@@ -168,7 +168,7 @@ public class CollideShapeResult
      * Identify the face on shape 1 where the collision occurred. The result is
      * unaffected. (native attribute: mSubShapeID1)
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     @Override
     public int getSubShapeId1() {
@@ -182,7 +182,7 @@ public class CollideShapeResult
      * Identify the sub-shape on shape 2 where the collision occurred. The
      * object is unaffected. (native attribute: mSubShapeID2)
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     @Override
     public int getSubShapeId2() {

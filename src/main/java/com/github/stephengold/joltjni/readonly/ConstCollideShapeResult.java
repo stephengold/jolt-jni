@@ -73,7 +73,7 @@ public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
      * Identify the face on shape 1 where the collision occurred. The object is
      * unaffected.
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     int getSubShapeId1();
 
@@ -81,7 +81,7 @@ public interface ConstCollideShapeResult extends ConstJoltPhysicsObject {
      * Identify the face on shape 2 where the collision occurred. The object is
      * unaffected.
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     int getSubShapeId2();
 }

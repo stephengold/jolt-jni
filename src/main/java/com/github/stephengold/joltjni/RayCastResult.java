@@ -58,7 +58,7 @@ public class RayCastResult extends BroadPhaseCastResult {
      * Return the ID of the sub-shape that was hit. The result object is
      * unaffected. (native attribute: mSubShapeID2)
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     public int getSubShapeId2() {
         long castResultVa = va();

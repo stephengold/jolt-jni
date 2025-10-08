@@ -92,7 +92,7 @@ final public class SubShapeIdPair
      * Return the ID of the first sub-shape. The pair is unaffected. (native
      * function: GetSubShapeID1)
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     @Override
     public int getSubShapeId1() {
@@ -106,7 +106,7 @@ final public class SubShapeIdPair
      * Return the ID of the 2nd sub-shape. The pair is unaffected. (native
      * function: GetSubShapeID2)
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     @Override
     public int getSubShapeId2() {

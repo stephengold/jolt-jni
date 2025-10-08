@@ -118,7 +118,7 @@ public interface ConstContact extends ConstJoltPhysicsObject {
     /**
      * Return the sub-shape ID of the colliding body. The contact is unaffected.
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     int getSubShapeIdB();
 

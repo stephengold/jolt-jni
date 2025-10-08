@@ -51,7 +51,7 @@ public interface ConstContactManifold extends ConstJoltPhysicsObject {
      * Return the ID of the first sub-shape that formed the manifold. The
      * manifold is unaffected.
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     int getSubShapeId1();
 
@@ -59,7 +59,7 @@ public interface ConstContactManifold extends ConstJoltPhysicsObject {
      * Return the ID of the 2nd sub-shape that formed the manifold. The manifold
      * is unaffected.
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     int getSubShapeId2();
 

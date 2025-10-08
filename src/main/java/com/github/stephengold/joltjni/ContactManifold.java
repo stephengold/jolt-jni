@@ -83,7 +83,7 @@ final public class ContactManifold
      * Return the ID of the first sub-shape that formed the manifold. The
      * manifold is unaffected. (native attribute: mSubShapeID1)
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     @Override
     public int getSubShapeId1() {
@@ -97,7 +97,7 @@ final public class ContactManifold
      * Return the ID of the 2nd sub-shape that formed the manifold. The manifold
      * is unaffected. (native attribute: mSubShapeID2)
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     @Override
     public int getSubShapeId2() {

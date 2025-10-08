@@ -226,7 +226,7 @@ public class Contact extends JoltPhysicsObject implements ConstContact {
      * Return the sub-shape ID of the colliding body. The contact is unaffected.
      * (native attribute: mSubShapeIDB)
      *
-     * @return a {@code SubShapeID} value
+     * @return a {@code SubShapeID} value (typically negative)
      */
     @Override
     public int getSubShapeIdB() {
