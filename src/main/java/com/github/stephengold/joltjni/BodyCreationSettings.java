@@ -167,6 +167,40 @@ public class BodyCreationSettings
     }
 
     /**
+     * Override the number position iterations in the solver. Applicable only to
+     * a dynamic colliding body. (native member: mNumPositionStepsOverride)
+     *
+     * @param numSteps the desired number, or 0 to use the default in
+     * {@code PhysicsSettings})
+     * @return the modified settings, for chaining
+     * @deprecated use {@link #setNumPositionStepsOverride(int)}
+     */
+    @Deprecated
+    public BodyCreationSettings getNumPositionStepsOverride(int numSteps) {
+        long bodySettingsVa = va();
+        setNumPositionStepsOverride(bodySettingsVa, numSteps);
+
+        return this;
+    }
+
+    /**
+     * Override the number velocity iterations in the solver. Applicable only to
+     * a dynamic colliding body. (native member: mNumVelocityStepsOverride)
+     *
+     * @param numSteps the desired number, or 0 to use the default in
+     * {@code PhysicsSettings})
+     * @return the modified settings, for chaining
+     * @deprecated use {@link #setNumVelocityStepsOverride(int)}
+     */
+    @Deprecated
+    public BodyCreationSettings getNumVelocityStepsOverride(int numSteps) {
+        long bodySettingsVa = va();
+        setNumVelocityStepsOverride(bodySettingsVa, numSteps);
+
+        return this;
+    }
+
+    /**
      * Read the state of this object from the specified stream, excluding the
      * shape and group filter.
      *
@@ -514,7 +548,7 @@ public class BodyCreationSettings
      * {@code PhysicsSettings})
      * @return the modified settings, for chaining
      */
-    public BodyCreationSettings getNumPositionStepsOverride(int numSteps) {
+    public BodyCreationSettings setNumPositionStepsOverride(int numSteps) {
         long bodySettingsVa = va();
         setNumPositionStepsOverride(bodySettingsVa, numSteps);
 
@@ -529,7 +563,7 @@ public class BodyCreationSettings
      * {@code PhysicsSettings})
      * @return the modified settings, for chaining
      */
-    public BodyCreationSettings getNumVelocityStepsOverride(int numSteps) {
+    public BodyCreationSettings setNumVelocityStepsOverride(int numSteps) {
         long bodySettingsVa = va();
         setNumVelocityStepsOverride(bodySettingsVa, numSteps);
 

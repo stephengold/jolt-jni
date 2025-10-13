@@ -844,8 +844,8 @@ public class Test003 {
         bcs.setMaxLinearVelocity(0.102f);
         bcs.setMotionQuality(EMotionQuality.LinearCast);
         bcs.setMotionType(EMotionType.Kinematic);
-        bcs.getNumPositionStepsOverride(103);
-        bcs.getNumVelocityStepsOverride(105);
+        bcs.setNumPositionStepsOverride(103);
+        bcs.setNumVelocityStepsOverride(105);
         bcs.setObjectLayer(65_535);
         bcs.setOverrideMassProperties(
                 EOverrideMassProperties.MassAndInertiaProvided);
