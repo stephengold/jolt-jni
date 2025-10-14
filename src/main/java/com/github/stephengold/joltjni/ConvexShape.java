@@ -104,7 +104,7 @@ abstract public class ConvexShape extends Shape implements ConstConvexShape {
         final long shapeVa = va();
         final long comTransformVa = comTransform.targetVa();
         FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
-        floatBuffer.reset();
+        floatBuffer.clear();
         scale.put(floatBuffer);
         surface.put(floatBuffer);
         boolean useBase = Jolt.implementsDebugRendering();
