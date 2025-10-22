@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2025 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,11 +56,11 @@ final public class HeightFieldShapeConstants {
     /**
      * {@code cNoCollisionValue} converted to 16 bits
      */
-    final public static int cNoCollisionValue16 = 0xffff;
+    final public static int cNoCollisionValue16 = 0xFFFF;
     /**
      * maximum height when converted to 16 bits
      */
-    final public static int cMaxHeightValue16 = 0xfffe;
+    final public static int cMaxHeightValue16 = 0xFFFE;
     // *************************************************************************
     // constructors
 

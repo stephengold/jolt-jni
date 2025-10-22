@@ -354,7 +354,7 @@ final public class Color implements ConstColor {
         int aa = ((int) a) << 24;
         int bb = ((int) b) << 16;
         int gg = ((int) g) << 8;
-        int result = aa & 0xff000000 | bb & 0xff0000 | gg & 0xff00 | r & 0xff;
+        int result = aa & 0xFF000000 | bb & 0xFF0000 | gg & 0xFF00 | r & 0xFF;
 
         return result;
     }

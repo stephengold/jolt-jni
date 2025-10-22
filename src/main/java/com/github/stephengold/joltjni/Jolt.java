@@ -64,13 +64,13 @@ final public class Jolt {
      * <p>
      * value should match Jolt/Physics/Collision/Shape/SubShapeID.h
      */
-    final public static int cEmptySubShapeId = 0xffffffff;
+    final public static int cEmptySubShapeId = 0xFFFF_FFFF;
     /**
      * invalid body ID
      * <p>
      * value should match Jolt/Physics/Body/BodyID.h
      */
-    final public static int cInvalidBodyId = 0xffffffff;
+    final public static int cInvalidBodyId = 0xFFFF_FFFF;
     /**
      * standard 2nd argument to the {@code JobSystemThreadPool} constructor
      * <p>
