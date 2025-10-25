@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.enumerate.EConstraintType;
 import com.github.stephengold.joltjni.readonly.ConstVehicleConstraint;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.Ref;
+import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
 /**
@@ -376,6 +377,33 @@ final public class VehicleConstraintRef
         RMat44 result = new RMat44(matrixVa, true);
 
         return result;
+    }
+
+    /**
+     * Copy the world transform of the specified wheel. The constraint is
+     * unaffected.
+     *
+     * @param wheelIndex the index of the wheel to query (&ge;0)
+     * @param right the wheel's axis of rotation (a unit vector in the wheel's
+     * model space)
+     * @param up the "up" direction (a unit vector in the wheel's model space)
+     * @param storePosition storage for the translation component (not null,
+     * modified)
+     * @param storeRotation storage for the rotation component (not null,
+     * modified)
+     */
+    @Override
+    public void getWheelPositionAndRotation(int wheelIndex, Vec3Arg right,
+            Vec3Arg up, RVec3 storePosition, Quat storeRotation) {
+        long constraintVa = targetVa();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        right.copyTo(storeFloats);
+        up.copyTo(storeFloats, 3);
+        VehicleConstraint.getWheelWorldTransformComponents(
+                constraintVa, wheelIndex, storeDoubles, storeFloats);
+        storePosition.set(storeDoubles);
+        storeRotation.set(storeFloats);
     }
 
     /**

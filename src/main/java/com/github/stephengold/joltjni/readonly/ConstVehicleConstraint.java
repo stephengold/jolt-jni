@@ -21,7 +21,9 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
+import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.Wheel;
 
@@ -123,6 +125,22 @@ public interface ConstVehicleConstraint extends ConstConstraint {
      */
     RMat44 getWheelWorldTransform(
             int wheelIndex, Vec3Arg right, Vec3Arg up);
+
+    /**
+     * Copy the world transform of the specified wheel. The constraint is
+     * unaffected.
+     *
+     * @param wheelIndex the index of the wheel to query (&ge;0)
+     * @param right the wheel's axis of rotation (a unit vector in the wheel's
+     * model space)
+     * @param up the "up" direction (a unit vector in the wheel's model space)
+     * @param storePosition storage for the translation component (not null,
+     * modified)
+     * @param storeRotation storage for the rotation component (not null,
+     * modified)
+     */
+    void getWheelPositionAndRotation(int wheelIndex, Vec3Arg right,
+            Vec3Arg up, RVec3 storePosition, Quat storeRotation);
 
     /**
      * Copy the "up" direction based on gravity. The constraint is unaffected.

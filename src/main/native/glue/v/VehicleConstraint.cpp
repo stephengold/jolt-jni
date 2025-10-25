@@ -299,6 +299,35 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_ge
 
 /*
  * Class:     com_github_stephengold_joltjni_VehicleConstraint
+ * Method:    getWheelWorldTransformComponents
+ * Signature: (JILjava/nio/DoubleBuffer;Ljava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_VehicleConstraint_getWheelWorldTransformComponents
+  (JNIEnv *pEnv, jclass, jlong constraintVa, jint wheelIndex,
+  jobject storeDoubles, jobject storeFloats) {
+    const VehicleConstraint * const pConstraint
+            = reinterpret_cast<VehicleConstraint *> (constraintVa);
+    DIRECT_DOUBLE_BUFFER(pEnv, storeDoubles, pDoubles, capacityDoubles);
+    JPH_ASSERT(capacityDoubles >= 3);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 6);
+    const Vec3 right(pFloats[0], pFloats[1], pFloats[2]);
+    const Vec3 up(pFloats[3], pFloats[4], pFloats[5]);
+    const RMat44 matrix
+            = pConstraint->GetWheelWorldTransform(wheelIndex, right, up);
+    const RVec3 position = matrix.GetTranslation();
+    pDoubles[0] = position.GetX();
+    pDoubles[1] = position.GetY();
+    pDoubles[2] = position.GetZ();
+    const Quat rotation = matrix.GetQuaternion();
+    pFloats[0] = rotation.GetX();
+    pFloats[1] = rotation.GetY();
+    pFloats[2] = rotation.GetZ();
+    pFloats[3] = rotation.GetW();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_VehicleConstraint
  * Method:    getWorldUp
  * Signature: (JLjava/nio/FloatBuffer;)V
  */

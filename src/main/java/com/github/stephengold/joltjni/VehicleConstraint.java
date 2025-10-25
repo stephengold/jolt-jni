@@ -24,6 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstVehicleConstraint;
 import com.github.stephengold.joltjni.readonly.ConstVehicleConstraintSettings;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
+import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
 /**
@@ -402,6 +403,33 @@ public class VehicleConstraint
     }
 
     /**
+     * Copy the world transform of the specified wheel. The constraint is
+     * unaffected.
+     *
+     * @param wheelIndex the index of the wheel to query (&ge;0)
+     * @param right the wheel's axis of rotation (a unit vector in the wheel's
+     * model space)
+     * @param up the "up" direction (a unit vector in the wheel's model space)
+     * @param storePosition storage for the translation component (not null,
+     * modified)
+     * @param storeRotation storage for the rotation component (not null,
+     * modified)
+     */
+    @Override
+    public void getWheelPositionAndRotation(int wheelIndex, Vec3Arg right,
+            Vec3Arg up, RVec3 storePosition, Quat storeRotation) {
+        long constraintVa = va();
+        DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        right.copyTo(storeFloats);
+        up.copyTo(storeFloats, 3);
+        getWheelWorldTransformComponents(
+                constraintVa, wheelIndex, storeDoubles, storeFloats);
+        storePosition.set(storeDoubles);
+        storeRotation.set(storeFloats);
+    }
+
+    /**
      * Copy the "up" direction based on gravity. The constraint is unaffected.
      *
      * @return a new direction vector (in system coordinates)
@@ -505,6 +533,9 @@ public class VehicleConstraint
 
     native static long getWheelWorldTransform(long constraintVa, int wheelIndex,
             float rx, float ry, float rz, float ux, float uy, float uz);
+
+    native static void getWheelWorldTransformComponents(long constraintVa,
+            int wheelIndex, DoubleBuffer storeDoubles, FloatBuffer storeFloats);
 
     native static void getWorldUp(long constraintVa, FloatBuffer storeFloats);
 
