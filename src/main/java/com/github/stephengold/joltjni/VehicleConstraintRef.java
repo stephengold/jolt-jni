@@ -332,6 +332,22 @@ final public class VehicleConstraintRef
     }
 
     /**
+     * Access the specified wheel.
+     *
+     * @param wheelIndex the index of the wheel to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public Wheel getWheel(int wheelIndex) {
+        long constraintVa = targetVa();
+        long wheelVa = VehicleConstraint.getWheel(constraintVa, wheelIndex);
+        int ordinal = Constraint.getControllerType(constraintVa);
+        Wheel result = Wheel.newWheel(wheelVa, ordinal, this);
+
+        return result;
+    }
+
+    /**
      * Copy the basis vectors for the specified wheel.
      *
      * @param wheel which wheel to query (not null)

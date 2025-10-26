@@ -131,22 +131,6 @@ public class VehicleConstraint
     }
 
     /**
-     * Access the specified wheel.
-     *
-     * @param wheelIndex the index of the wheel to access (&ge;0)
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public Wheel getWheel(int wheelIndex) {
-        long constraintVa = va();
-        long wheelVa = getWheel(constraintVa, wheelIndex);
-        int ordinal = Constraint.getControllerType(constraintVa);
-        VehicleConstraintRef ref = toRef();
-        Wheel result = Wheel.newWheel(wheelVa, ordinal, ref);
-
-        return result;
-    }
-
-    /**
      * Override the vehicle's gravity vector.
      *
      * @param ax the X component of the desired acceleration vector
@@ -357,6 +341,23 @@ public class VehicleConstraint
     }
 
     /**
+     * Access the specified wheel.
+     *
+     * @param wheelIndex the index of the wheel to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public Wheel getWheel(int wheelIndex) {
+        long constraintVa = va();
+        long wheelVa = getWheel(constraintVa, wheelIndex);
+        int ordinal = Constraint.getControllerType(constraintVa);
+        VehicleConstraintRef ref = toRef();
+        Wheel result = Wheel.newWheel(wheelVa, ordinal, ref);
+
+        return result;
+    }
+
+    /**
      * Copy the basis vectors for the specified wheel.
      *
      * @param wheel which wheel to query (not null)
@@ -527,7 +528,7 @@ public class VehicleConstraint
 
     native private static long getVehicleCollisionTester(long constraintVa);
 
-    native private static long getWheel(long constraintVa, int wheelIndex);
+    native static long getWheel(long constraintVa, int wheelIndex);
 
     native static void getWheelLocalBasis(
             long constraintVa, long wheelVa, FloatBuffer storeFloats);

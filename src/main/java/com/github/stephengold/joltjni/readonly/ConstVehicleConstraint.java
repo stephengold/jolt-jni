@@ -103,6 +103,14 @@ public interface ConstVehicleConstraint extends ConstConstraint {
     int getNumStepsBetweenCollisionTestInactive();
 
     /**
+     * Access the specified wheel. The constraint is unaffected.
+     *
+     * @param wheelIndex the index of the wheel to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstWheel getWheel(int wheelIndex);
+
+    /**
      * Copy the basis vectors for the specified wheel.
      *
      * @param wheel which wheel to query (not null)
