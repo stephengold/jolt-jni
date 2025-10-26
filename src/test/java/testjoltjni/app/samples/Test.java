@@ -41,6 +41,7 @@ protected PhysicsSystem mPhysicsSystem;
 protected TempAllocator mTempAllocator;
 public void Cleanup(){}
 final protected void FatalError(String message){throw new RuntimeException(message);}
+public PhysicsSystem GetPhysicsSystem(){return mPhysicsSystem;}
 private float GetWorldScale(){return 1;}
 public void Initialize(){}
 public void OnContactAdded(ConstBody inBody1,ConstBody inBody2,ConstContactManifold inManifold,ContactSettings ioSettings){}
