@@ -57,7 +57,6 @@ import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.enumerate.ValidateResult;
-import com.github.stephengold.joltjni.readonly.ConstBody;
 import com.github.stephengold.joltjni.readonly.ConstContactManifold;
 import com.github.stephengold.joltjni.readonly.ConstSubShapeIdPair;
 import org.junit.Assert;
