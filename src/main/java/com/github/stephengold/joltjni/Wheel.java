@@ -38,11 +38,12 @@ public class Wheel extends NonCopyable implements ConstWheel {
     /**
      * Instantiate with the specified container and native object.
      *
-     * @param container the containing object, or {@code null} if none
+     * @param container a counted reference to the containing object, or
+     * {@code null} if none
      * @param wheelVa the virtual address of the native object to assign (not
      * zero)
      */
-    Wheel(VehicleConstraint container, long wheelVa) {
+    Wheel(VehicleConstraintRef container, long wheelVa) {
         super(container, wheelVa);
     }
     // *************************************************************************
@@ -53,11 +54,12 @@ public class Wheel extends NonCopyable implements ConstWheel {
      *
      * @param wheelVa the virtual address of the native object, or zero
      * @param ordinal the type of {@code VehicleController}
-     * @param container the containing object, or {@code null} if none
+     * @param containerRef a counted reference to the containing object, or
+     * {@code null} if none
      * @return a new JVM object, or {@code null} if {@code wheelVa} was zero
      */
     static Wheel newWheel(
-            long wheelVa, int ordinal, VehicleConstraint container) {
+            long wheelVa, int ordinal, VehicleConstraintRef containerRef) {
         if (wheelVa == 0L) {
             return null;
         }
@@ -66,10 +68,10 @@ public class Wheel extends NonCopyable implements ConstWheel {
         switch (ordinal) {
             case VehicleController.motorcycleType:
             case VehicleController.wheeledVehicleType:
-                result = new WheelWv(container, wheelVa);
+                result = new WheelWv(containerRef, wheelVa);
                 break;
             case VehicleController.trackedVehicleType:
-                result = new WheelTv(container, wheelVa);
+                result = new WheelTv(containerRef, wheelVa);
                 break;
             default:
                 throw new IllegalArgumentException("ordinal = " + ordinal);

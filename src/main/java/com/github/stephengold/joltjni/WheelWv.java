@@ -33,11 +33,12 @@ public class WheelWv extends Wheel {
     /**
      * Instantiate with the specified container and native object.
      *
-     * @param container the containing object, or {@code null} if none
+     * @param containerRef a counted reference to the containing object, or
+     * {@code null} if none
      * @param wheelVa the virtual address of the native object to assign (not
      * zero)
      */
-    WheelWv(VehicleConstraint container, long wheelVa) {
-        super(container, wheelVa);
+    WheelWv(VehicleConstraintRef containerRef, long wheelVa) {
+        super(containerRef, wheelVa);
     }
 }

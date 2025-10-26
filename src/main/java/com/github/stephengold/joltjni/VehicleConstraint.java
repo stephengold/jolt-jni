@@ -140,7 +140,8 @@ public class VehicleConstraint
         long constraintVa = va();
         long wheelVa = getWheel(constraintVa, wheelIndex);
         int ordinal = Constraint.getControllerType(constraintVa);
-        Wheel result = Wheel.newWheel(wheelVa, ordinal, this);
+        VehicleConstraintRef ref = toRef();
+        Wheel result = Wheel.newWheel(wheelVa, ordinal, ref);
 
         return result;
     }
