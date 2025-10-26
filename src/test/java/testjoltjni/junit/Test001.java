@@ -124,9 +124,7 @@ public class Test001 {
         @Override
         public void onContactAdded(
                 long body1Va, long body2Va, long manifoldVa, long settingsVa) {
-            ConstBody body1 = new Body(body1Va);
-            ConstBody body2 = new Body(body2Va);
-            Assert.assertNotEquals(body1, body2);
+            Assert.assertNotEquals(body1Va, body2Va);
             ConstContactManifold manifold = new ContactManifold(manifoldVa);
             float depth = manifold.getPenetrationDepth();
             ContactSettings settings = new ContactSettings(settingsVa);
