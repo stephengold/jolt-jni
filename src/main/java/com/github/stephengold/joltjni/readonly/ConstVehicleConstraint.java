@@ -50,7 +50,7 @@ public interface ConstVehicleConstraint extends ConstConstraint {
     int countWheels();
 
     /**
-     * Access the specified anti-roll bar.
+     * Access the specified anti-roll bar. The constraint is unaffected.
      *
      * @param barIndex the index of the bar to access (&ge;0)
      * @return a new JVM object with the pre-existing native object assigned
@@ -111,7 +111,8 @@ public interface ConstVehicleConstraint extends ConstConstraint {
     ConstWheel getWheel(int wheelIndex);
 
     /**
-     * Copy the basis vectors for the specified wheel.
+     * Copy the basis vectors for the specified wheel. The constraint is
+     * unaffected.
      *
      * @param wheel which wheel to query (not null)
      * @param storeForward storage for the forward vector (not null, modified)

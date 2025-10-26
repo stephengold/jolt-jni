@@ -393,7 +393,7 @@ final public class TestUtils {
      *
      * @param buildType "Debug" or "Release"
      * @param flavor "Sp" or "Dp"
-     * @return true after successful load, otherwise false
+     * @return {@code true} after successful load, otherwise {@code false}
      */
     public static boolean loadNativeLibrary(String buildType, String flavor) {
         assert buildType.equals("Debug") || buildType.equals("Release") :

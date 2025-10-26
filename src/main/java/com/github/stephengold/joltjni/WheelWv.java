@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A single wheel of a {@code WheeledVehicle}. (native type: WheelWV)
+ * A single wheel of a trackless vehicle. (native type: WheelWV)
  *
  * @author Stephen Gold sgold@sonic.net
  */

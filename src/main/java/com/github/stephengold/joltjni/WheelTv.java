@@ -22,7 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * A single wheel of a {@code TrackedVehicle}. (native type: WheelTV)
+ * A single wheel of a vehicle with tracks. (native type: WheelTV)
  *
  * @author Stephen Gold sgold@sonic.net
  */

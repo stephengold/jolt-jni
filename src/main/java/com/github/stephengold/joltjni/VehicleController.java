@@ -43,11 +43,11 @@ public class VehicleController
      */
     final static int motorcycleType = 2;
     /**
-     * controller type for a tracked vehicle
+     * controller type for a vehicle with tracks
      */
     final static int trackedVehicleType = 3;
     /**
-     * controller type for a wheeled vehicle that isn't a motorcycle
+     * controller type for a trackless vehicle that isn't a motorcycle
      */
     final static int wheeledVehicleType = 4;
     // *************************************************************************
