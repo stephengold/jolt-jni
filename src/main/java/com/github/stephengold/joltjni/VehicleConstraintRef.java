@@ -376,33 +376,6 @@ final public class VehicleConstraintRef
      * @param right the wheel's axis of rotation (a unit vector in the wheel's
      * model space)
      * @param up the "up" direction (a unit vector in the wheel's model space)
-     * @return a new coordinate transform matrix
-     */
-    @Override
-    public RMat44 getWheelWorldTransform(
-            int wheelIndex, Vec3Arg right, Vec3Arg up) {
-        long constraintVa = targetVa();
-        float rx = right.getX();
-        float ry = right.getY();
-        float rz = right.getZ();
-        float ux = up.getX();
-        float uy = up.getY();
-        float uz = up.getZ();
-        long matrixVa = VehicleConstraint.getWheelWorldTransform(
-                constraintVa, wheelIndex, rx, ry, rz, ux, uy, uz);
-        RMat44 result = new RMat44(matrixVa, true);
-
-        return result;
-    }
-
-    /**
-     * Copy the world transform of the specified wheel. The constraint is
-     * unaffected.
-     *
-     * @param wheelIndex the index of the wheel to query (&ge;0)
-     * @param right the wheel's axis of rotation (a unit vector in the wheel's
-     * model space)
-     * @param up the "up" direction (a unit vector in the wheel's model space)
      * @param storePosition storage for the translation component (not null,
      * modified)
      * @param storeRotation storage for the rotation component (not null,
@@ -420,6 +393,33 @@ final public class VehicleConstraintRef
                 constraintVa, wheelIndex, storeDoubles, storeFloats);
         storePosition.set(storeDoubles);
         storeRotation.set(storeFloats);
+    }
+
+    /**
+     * Copy the world transform of the specified wheel. The constraint is
+     * unaffected.
+     *
+     * @param wheelIndex the index of the wheel to query (&ge;0)
+     * @param right the wheel's axis of rotation (a unit vector in the wheel's
+     * model space)
+     * @param up the "up" direction (a unit vector in the wheel's model space)
+     * @return a new coordinate transform matrix
+     */
+    @Override
+    public RMat44 getWheelWorldTransform(
+            int wheelIndex, Vec3Arg right, Vec3Arg up) {
+        long constraintVa = targetVa();
+        float rx = right.getX();
+        float ry = right.getY();
+        float rz = right.getZ();
+        float ux = up.getX();
+        float uy = up.getY();
+        float uz = up.getZ();
+        long matrixVa = VehicleConstraint.getWheelWorldTransform(
+                constraintVa, wheelIndex, rx, ry, rz, ux, uy, uz);
+        RMat44 result = new RMat44(matrixVa, true);
+
+        return result;
     }
 
     /**

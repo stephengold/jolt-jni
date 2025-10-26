@@ -130,10 +130,13 @@ public interface ConstVehicleConstraint extends ConstConstraint {
      * @param right the wheel's axis of rotation (a unit vector in the wheel's
      * model space)
      * @param up the "up" direction (a unit vector in the wheel's model space)
-     * @return a new coordinate transform matrix
+     * @param storePosition storage for the translation component (not null,
+     * modified)
+     * @param storeRotation storage for the rotation component (not null,
+     * modified)
      */
-    RMat44 getWheelWorldTransform(
-            int wheelIndex, Vec3Arg right, Vec3Arg up);
+    void getWheelPositionAndRotation(int wheelIndex, Vec3Arg right,
+            Vec3Arg up, RVec3 storePosition, Quat storeRotation);
 
     /**
      * Copy the world transform of the specified wheel. The constraint is
@@ -143,13 +146,10 @@ public interface ConstVehicleConstraint extends ConstConstraint {
      * @param right the wheel's axis of rotation (a unit vector in the wheel's
      * model space)
      * @param up the "up" direction (a unit vector in the wheel's model space)
-     * @param storePosition storage for the translation component (not null,
-     * modified)
-     * @param storeRotation storage for the rotation component (not null,
-     * modified)
+     * @return a new coordinate transform matrix
      */
-    void getWheelPositionAndRotation(int wheelIndex, Vec3Arg right,
-            Vec3Arg up, RVec3 storePosition, Quat storeRotation);
+    RMat44 getWheelWorldTransform(
+            int wheelIndex, Vec3Arg right, Vec3Arg up);
 
     /**
      * Copy the "up" direction based on gravity. The constraint is unaffected.
