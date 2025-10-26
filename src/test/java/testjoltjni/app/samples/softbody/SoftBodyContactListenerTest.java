@@ -42,8 +42,8 @@ public void Initialize()
 {
 	// Install contact listener for soft bodies
 	mPhysicsSystem.setSoftBodyContactListener(new CustomSoftBodyContactListener(){
-            public void onSoftBodyContactAdded(long bodyVa,long manifoldVa){OnSoftBodyContactAdded(new Body(bodyVa),new SoftBodyManifold(manifoldVa));}
-            public int onSoftBodyContactValidate(long softBodyVa,long otherBodyVa,long settingsVa){return OnSoftBodyContactValidate(new Body(softBodyVa),new Body(otherBodyVa),new SoftBodyContactSettings(settingsVa)).ordinal();}
+            public void onSoftBodyContactAdded(long bodyVa,long manifoldVa){OnSoftBodyContactAdded(new Body(mPhysicsSystem,bodyVa),new SoftBodyManifold(manifoldVa));}
+            public int onSoftBodyContactValidate(long softBodyVa,long otherBodyVa,long settingsVa){return OnSoftBodyContactValidate(new Body(mPhysicsSystem,softBodyVa),new Body(mPhysicsSystem,otherBodyVa),new SoftBodyContactSettings(settingsVa)).ordinal();}
         });
 
 	// Floor

@@ -39,7 +39,7 @@ public void Initialize()
 	// Install contact listener for soft bodies
 	mPhysicsSystem.setSoftBodyContactListener(new CustomSoftBodyContactListener(){
             public void onSoftBodyContactAdded(long bodyVa,long manifoldVa) {
-                SoftBodySensorTest.this.OnSoftBodyContactAdded(new Body(bodyVa), new SoftBodyManifold(manifoldVa));
+                SoftBodySensorTest.this.OnSoftBodyContactAdded(new Body(mPhysicsSystem,bodyVa), new SoftBodyManifold(manifoldVa));
             }
             public int onSoftBodyContactValidate(long softBodyVa,long otherBodyVa,long settingsVa){return SoftBodyValidateResult.AcceptContact.ordinal();}
         });

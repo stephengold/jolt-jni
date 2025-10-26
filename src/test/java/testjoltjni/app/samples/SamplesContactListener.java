@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.CollideShapeResult;
 import com.github.stephengold.joltjni.ContactManifold;
 import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.CustomContactListener;
+import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.SubShapeIdPair;
 import com.github.stephengold.joltjni.enumerate.ValidateResult;
@@ -72,10 +73,11 @@ public class SamplesContactListener extends CustomContactListener {
      * @param settingsVa the virtual address of the contact settings (not zero)
      */
     @Override
-    public void onContactAdded(long body1Va, long body2Va,
-            long manifoldVa, long settingsVa) {
-        ConstBody body1 = new Body(body1Va);
-        ConstBody body2 = new Body(body2Va);
+    public void onContactAdded(
+            long body1Va, long body2Va, long manifoldVa, long settingsVa) {
+        PhysicsSystem system = test.GetPhysicsSystem();
+        ConstBody body1 = new Body(system, body1Va);
+        ConstBody body2 = new Body(system, body2Va);
         ConstContactManifold manifold = new ContactManifold(manifoldVa);
         ContactSettings settings = new ContactSettings(settingsVa);
         test.OnContactAdded(body1, body2, manifold, settings);
@@ -92,10 +94,11 @@ public class SamplesContactListener extends CustomContactListener {
      * @param settingsVa the virtual address of the contact settings (not zero)
      */
     @Override
-    public void onContactPersisted(long body1Va, long body2Va,
-            long manifoldVa, long settingsVa) {
-        ConstBody body1 = new Body(body1Va);
-        ConstBody body2 = new Body(body2Va);
+    public void onContactPersisted(
+            long body1Va, long body2Va, long manifoldVa, long settingsVa) {
+        PhysicsSystem system = test.GetPhysicsSystem();
+        ConstBody body1 = new Body(system, body1Va);
+        ConstBody body2 = new Body(system, body2Va);
         ConstContactManifold manifold = new ContactManifold(manifoldVa);
         ContactSettings settings = new ContactSettings(settingsVa);
         test.OnContactPersisted(body1, body2, manifold, settings);
@@ -131,11 +134,12 @@ public class SamplesContactListener extends CustomContactListener {
      * {@code ValidateResult})
      */
     @Override
-    public int onContactValidate(long body1Va, long body2Va,
-            double baseOffsetX, double baseOffsetY, double baseOffsetZ,
-            long collisionResultVa) {
-        ConstBody body1 = new Body(body1Va);
-        ConstBody body2 = new Body(body2Va);
+    public int onContactValidate(
+            long body1Va, long body2Va, double baseOffsetX, double baseOffsetY,
+            double baseOffsetZ, long collisionResultVa) {
+        PhysicsSystem system = test.GetPhysicsSystem();
+        ConstBody body1 = new Body(system, body1Va);
+        ConstBody body2 = new Body(system, body2Va);
         RVec3Arg baseOffset
                 = new RVec3(baseOffsetX, baseOffsetY, baseOffsetZ);
         CollideShapeResult collisionResult

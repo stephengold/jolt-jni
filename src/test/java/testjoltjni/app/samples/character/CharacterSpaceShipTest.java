@@ -65,7 +65,7 @@ public void Initialize()
 	settings.setSupportingVolume (new Plane(Vec3.sAxisY(), -cCharacterRadiusStanding)); // Accept contacts that touch the lower sphere of the capsule
 	mCharacter = new CharacterVirtual(settings, plus(cShipInitialPosition ,new Vec3(0, cSpaceShipHeight, 0)), Quat.sIdentity(), 0, mPhysicsSystem).toRef();
 	mCharacter.getPtr().setListener(new CustomCharacterContactListener() {
-            public void onAdjustBodyVelocity(long characterVa, long body2Va, float[] velocities) {OnAdjustBodyVelocity(new CharacterVirtual(characterVa, mPhysicsSystem), new Body(body2Va), new Vec3(), new Vec3());}
+            public void onAdjustBodyVelocity(long characterVa, long body2Va, float[] velocities) {OnAdjustBodyVelocity(new CharacterVirtual(characterVa, mPhysicsSystem), new Body(mPhysicsSystem,body2Va), new Vec3(), new Vec3());}
         });
 
 	// Create the space ship
