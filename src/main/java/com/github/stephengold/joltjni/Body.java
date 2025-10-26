@@ -45,12 +45,15 @@ public class Body extends NonCopyable implements ConstBody {
 
     /**
      * Instantiate with the specified container and native object.
+     * <p>
+     * For use in custom contact listeners.
      *
-     * @param container the containing object, or {@code null} if none
+     * @param container the containing {@code PhysicsSystem} or
+     * {@code BodyManager}
      * @param bodyVa the virtual address of the native object to assign (not
      * zero)
      */
-    Body(JoltPhysicsObject container, long bodyVa) {
+    public Body(JoltPhysicsObject container, long bodyVa) {
         super(container, bodyVa);
         assert container instanceof PhysicsSystem
                 || container instanceof BodyManager;
