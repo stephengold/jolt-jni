@@ -187,6 +187,19 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getSha
 
 /*
  * Class:     com_github_stephengold_joltjni_CharacterBase
+ * Method:    getShapeUpdate
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CharacterBase_getShapeUpdate
+  (JNIEnv *, jclass, jlong characterVa, jlong refVa) {
+    const CharacterBase * const pCharacter
+            = reinterpret_cast<CharacterBase *> (characterVa);
+    RefConst<Shape> * const pRef = reinterpret_cast<RefConst<Shape> *> (refVa);
+    (*pRef) = pCharacter->GetShape();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_CharacterBase
  * Method:    getUp
  * Signature: (JLjava/nio/FloatBuffer;)V
  */

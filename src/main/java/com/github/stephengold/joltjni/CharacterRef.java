@@ -661,6 +661,19 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     }
 
     /**
+     * Update the specified counted reference to refer to the character's shape.
+     * The character is unaffected.
+     *
+     * @param storeRef storage for the reference (not {@code null}, modified)
+     */
+    @Override
+    public void getShape(ShapeRefC storeRef) {
+        long characterVa = targetVa();
+        long refVa = storeRef.va();
+        CharacterBase.getShapeUpdate(characterVa, refVa);
+    }
+
+    /**
      * Generate a TransformedShape that represents the volume occupied by the
      * character, using the locking body interface. The character is unaffected.
      *

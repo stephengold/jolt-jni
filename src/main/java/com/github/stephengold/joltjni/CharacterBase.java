@@ -242,6 +242,19 @@ abstract public class CharacterBase
     }
 
     /**
+     * Update the specified counted reference to refer to the character's shape.
+     * The character is unaffected.
+     *
+     * @param storeRef storage for the reference (not {@code null}, modified)
+     */
+    @Override
+    public void getShape(ShapeRefC storeRef) {
+        long characterVa = va();
+        long refVa = storeRef.va();
+        getShapeUpdate(characterVa, refVa);
+    }
+
+    /**
      * Copy the character's "up" direction. The character is unaffected.
      *
      * @return a new direction vector
@@ -351,6 +364,8 @@ abstract public class CharacterBase
     native static int getRefCount(long characterVa);
 
     native static long getShape(long characterVa);
+
+    native static void getShapeUpdate(long characterVa, long refVa);
 
     native static void getUp(long characterVa, FloatBuffer storeFloats);
 

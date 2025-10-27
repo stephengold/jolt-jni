@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni.readonly;
 
 import com.github.stephengold.joltjni.RVec3;
+import com.github.stephengold.joltjni.ShapeRefC;
 import com.github.stephengold.joltjni.StateRecorder;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EGroundState;
@@ -121,6 +122,14 @@ public interface ConstCharacterBase extends ConstJoltPhysicsObject {
      * assigned, or {@code null} if none
      */
     ConstShape getShape();
+
+    /**
+     * Update the specified counted reference to refer to the character's shape.
+     * The character is unaffected.
+     *
+     * @param storeRef storage for the reference (not {@code null}, modified)
+     */
+    void getShape(ShapeRefC storeRef);
 
     /**
      * Copy the character's "up" direction. The character is unaffected.

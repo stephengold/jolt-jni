@@ -742,6 +742,19 @@ final public class CharacterVirtualRef
     }
 
     /**
+     * Update the specified counted reference to refer to the character's shape.
+     * The character is unaffected.
+     *
+     * @param storeRef storage for the reference (not {@code null}, modified)
+     */
+    @Override
+    public void getShape(ShapeRefC storeRef) {
+        long characterVa = targetVa();
+        long refVa = storeRef.va();
+        CharacterBase.getShapeUpdate(characterVa, refVa);
+    }
+
+    /**
      * Copy the local offset applied to the shape. The character is unaffected.
      *
      * @return a new offset vector (in local coordinates)
