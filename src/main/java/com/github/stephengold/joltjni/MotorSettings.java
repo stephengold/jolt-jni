@@ -21,12 +21,16 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstMotorSettings;
+
 /**
  * Settings used to construct a constraint motor.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class MotorSettings extends JoltPhysicsObject {
+final public class MotorSettings
+        extends JoltPhysicsObject
+        implements ConstMotorSettings {
     // *************************************************************************
     // constructors
 
@@ -80,8 +84,8 @@ final public class MotorSettings extends JoltPhysicsObject {
      *
      * @param original the settings to copy (not {@code null}, unaffected)
      */
-    public MotorSettings(MotorSettings original) {
-        long originalVa = original.va();
+    public MotorSettings(ConstMotorSettings original) {
+        long originalVa = original.targetVa();
         long copyVa = createCopy(originalVa);
         setVirtualAddress(copyVa, () -> free(copyVa));
     }
@@ -93,6 +97,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      *
      * @return the pre-existing instance, or {@code null} if none
      */
+    @Override
     public Constraint getConstraint() {
         JoltPhysicsObject container = getContainingObject();
         Constraint result;
@@ -110,6 +115,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      *
      * @return the pre-existing instance, or {@code null} if none
      */
+    @Override
     public ConstraintSettings getConstraintSettings() {
         JoltPhysicsObject container = getContainingObject();
         ConstraintSettings result;
@@ -129,6 +135,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      *
      * @return the amount of force (in Newtons, typically positive)
      */
+    @Override
     public float getMaxForceLimit() {
         long settingsVa = va();
         float result = getMaxForceLimit(settingsVa);
@@ -143,6 +150,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      *
      * @return the amount of torque (in Newton.meters, typically positive)
      */
+    @Override
     public float getMaxTorqueLimit() {
         long settingsVa = va();
         float result = getMaxTorqueLimit(settingsVa);
@@ -157,6 +165,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      *
      * @return the amount of force (in Newtons, typically negative)
      */
+    @Override
     public float getMinForceLimit() {
         long settingsVa = va();
         float result = getMinForceLimit(settingsVa);
@@ -171,6 +180,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      *
      * @return the amount of torque (in Newton.meters, typically negative)
      */
+    @Override
     public float getMinTorqueLimit() {
         long settingsVa = va();
         float result = getMinTorqueLimit(settingsVa);
@@ -185,6 +195,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
+    @Override
     public SpringSettings getSpringSettings() {
         long motorSettingsVa = va();
         long springSettingsVa = getSpringSettings(motorSettingsVa);
@@ -200,6 +211,7 @@ final public class MotorSettings extends JoltPhysicsObject {
      *
      * @return {@code true} if valid, otherwise {@code false}
      */
+    @Override
     public boolean isValid() {
         long settingsVa = va();
         boolean result = isValid(settingsVa);
