@@ -93,6 +93,98 @@ final public class MotorSettings
     // new methods exposed
 
     /**
+     * Alter both force limits of a linear motor to be symmetrical.
+     *
+     * @param limit the desired limit (in Newtons)
+     */
+    public void setForceLimit(float limit) {
+        long settingsVa = va();
+        setForceLimit(settingsVa, limit);
+    }
+
+    /**
+     * Alter both force limits of a linear motor.
+     *
+     * @param min the desired lower limit (in Newtons, default=-MAX_FLOAT)
+     * @param max the desired upper limit (in Newtons, default=MAX_FLOAT)
+     */
+    public void setForceLimits(float min, float max) {
+        long settingsVa = va();
+        setForceLimits(settingsVa, min, max);
+    }
+
+    /**
+     * Alter the maximum force to apply in a linear constraint. Ignored in an
+     * angular motor. (native attribute: mMaxForceLimit)
+     *
+     * @param force the desired amount of force (in Newtons, typically positive,
+     * default=MAX_VALUE)
+     */
+    public void setMaxForceLimit(float force) {
+        long settingsVa = va();
+        setMaxForceLimit(settingsVa, force);
+    }
+
+    /**
+     * Alter the maximum torque to apply in an angular constraint. Ignored in a
+     * linear motor. (native attribute: mMaxTorqueLimit)
+     *
+     * @param torque the desired amount of torque (in Newton.meters, typically
+     * positive, default=MAX_VALUE)
+     */
+    public void setMaxTorqueLimit(float torque) {
+        long settingsVa = va();
+        setMaxTorqueLimit(settingsVa, torque);
+    }
+
+    /**
+     * Alter the minimum force to apply in a linear constraint. Ignored in an
+     * angular motor. (native attribute: mMinForceLimit)
+     *
+     * @param force the desired amount of force (in Newtons, typically negative,
+     * default=-MAX_VALUE)
+     */
+    public void setMinForceLimit(float force) {
+        long settingsVa = va();
+        setMinForceLimit(settingsVa, force);
+    }
+
+    /**
+     * Alter the minimum torque to apply in an angular constraint. Ignored in a
+     * linear motor. (native attribute: mMinTorqueLimit)
+     *
+     * @param torque the desired amount of torque (in Newton.meters, typically
+     * negative, default=-MAX_VALUE)
+     */
+    public void setMinTorqueLimit(float torque) {
+        long settingsVa = va();
+        setMinTorqueLimit(settingsVa, torque);
+    }
+
+    /**
+     * Alter both torque limits of an angular motor to be symmetrical.
+     *
+     * @param limit the desired upper limit (in Newton.meters)
+     */
+    public void setTorqueLimit(float limit) {
+        long settingsVa = va();
+        setTorqueLimit(settingsVa, limit);
+    }
+
+    /**
+     * Alter both torque limits of an angular motor.
+     *
+     * @param min the desired lower limit (in Newton.meters, default=-MAX_FLOAT)
+     * @param max the desired upper limit (in Newton.meters, default=MAX_FLOAT)
+     */
+    public void setTorqueLimits(float min, float max) {
+        long settingsVa = va();
+        setTorqueLimits(settingsVa, min, max);
+    }
+    // *************************************************************************
+    // ConstMotorSettings methods
+
+    /**
      * Access the underlying {@code Constraint}, if any.
      *
      * @return the pre-existing instance, or {@code null} if none
@@ -217,96 +309,6 @@ final public class MotorSettings
         boolean result = isValid(settingsVa);
 
         return result;
-    }
-
-    /**
-     * Alter both force limits of a linear motor to be symmetrical.
-     *
-     * @param limit the desired limit (in Newtons)
-     */
-    public void setForceLimit(float limit) {
-        long settingsVa = va();
-        setForceLimit(settingsVa, limit);
-    }
-
-    /**
-     * Alter both force limits of a linear motor.
-     *
-     * @param min the desired lower limit (in Newtons, default=-MAX_FLOAT)
-     * @param max the desired upper limit (in Newtons, default=MAX_FLOAT)
-     */
-    public void setForceLimits(float min, float max) {
-        long settingsVa = va();
-        setForceLimits(settingsVa, min, max);
-    }
-
-    /**
-     * Alter the maximum force to apply in a linear constraint. Ignored in an
-     * angular motor. (native attribute: mMaxForceLimit)
-     *
-     * @param force the desired amount of force (in Newtons, typically positive,
-     * default=MAX_VALUE)
-     */
-    public void setMaxForceLimit(float force) {
-        long settingsVa = va();
-        setMaxForceLimit(settingsVa, force);
-    }
-
-    /**
-     * Alter the maximum torque to apply in an angular constraint. Ignored in a
-     * linear motor. (native attribute: mMaxTorqueLimit)
-     *
-     * @param torque the desired amount of torque (in Newton.meters, typically
-     * positive, default=MAX_VALUE)
-     */
-    public void setMaxTorqueLimit(float torque) {
-        long settingsVa = va();
-        setMaxTorqueLimit(settingsVa, torque);
-    }
-
-    /**
-     * Alter the minimum force to apply in a linear constraint. Ignored in an
-     * angular motor. (native attribute: mMinForceLimit)
-     *
-     * @param force the desired amount of force (in Newtons, typically negative,
-     * default=-MAX_VALUE)
-     */
-    public void setMinForceLimit(float force) {
-        long settingsVa = va();
-        setMinForceLimit(settingsVa, force);
-    }
-
-    /**
-     * Alter the minimum torque to apply in an angular constraint. Ignored in a
-     * linear motor. (native attribute: mMinTorqueLimit)
-     *
-     * @param torque the desired amount of torque (in Newton.meters, typically
-     * negative, default=-MAX_VALUE)
-     */
-    public void setMinTorqueLimit(float torque) {
-        long settingsVa = va();
-        setMinTorqueLimit(settingsVa, torque);
-    }
-
-    /**
-     * Alter both torque limits of an angular motor to be symmetrical.
-     *
-     * @param limit the desired upper limit (in Newton.meters)
-     */
-    public void setTorqueLimit(float limit) {
-        long settingsVa = va();
-        setTorqueLimit(settingsVa, limit);
-    }
-
-    /**
-     * Alter both torque limits of an angular motor.
-     *
-     * @param min the desired lower limit (in Newton.meters, default=-MAX_FLOAT)
-     * @param max the desired upper limit (in Newton.meters, default=MAX_FLOAT)
-     */
-    public void setTorqueLimits(float min, float max) {
-        long settingsVa = va();
-        setTorqueLimits(settingsVa, min, max);
     }
     // *************************************************************************
     // native private methods
