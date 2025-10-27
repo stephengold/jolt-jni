@@ -52,7 +52,7 @@ abstract public class CharacterBase
     /**
      * Restore the character's state from the specified recorder.
      *
-     * @param recorder the recorder to restore from (not null)
+     * @param recorder the recorder to restore from (not {@code null})
      */
     public void restoreState(StateRecorder recorder) {
         long characterVa = va();
@@ -73,7 +73,8 @@ abstract public class CharacterBase
     /**
      * Alter the character's "up" direction.
      *
-     * @param up the desired direction (not null, unaffected, default=(0,1,0))
+     * @param up the desired direction (not {@code null}, unaffected,
+     * default=(0,1,0))
      */
     public void setUp(Vec3Arg up) {
         long characterVa = va();
@@ -170,7 +171,7 @@ abstract public class CharacterBase
      * Return the relationship between the character and its supporting surface.
      * The character is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EGroundState getGroundState() {
@@ -259,7 +260,7 @@ abstract public class CharacterBase
      * Test whether the specified normal direction is too steep. The character
      * is unaffected.
      *
-     * @param normal the surface normal to test (not null, unaffected)
+     * @param normal the surface normal to test (not {@code null}, unaffected)
      * @return {@code true} if too steep, otherwise {@code false}
      */
     @Override
@@ -290,7 +291,7 @@ abstract public class CharacterBase
      * Save the character's state to the specified recorder. The character is
      * unaffected.
      *
-     * @param recorder the recorder to save to (not null)
+     * @param recorder the recorder to save to (not {@code null})
      */
     @Override
     public void saveState(StateRecorder recorder) {

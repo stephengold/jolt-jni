@@ -244,7 +244,7 @@ public interface ConstBody extends ConstJoltPhysicsObject {
      * Update the specified counted reference to refer to the body's shape. The
      * body is unaffected.
      *
-     * @param storeRef storage for the reference (not null, modified)
+     * @param storeRef storage for the reference (not {@code null}, modified)
      */
     void getShape(ShapeRefC storeRef);
 

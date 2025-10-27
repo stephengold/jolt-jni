@@ -243,7 +243,7 @@ final public class CharacterRefC
      * Return the relationship between the character and its supporting surface.
      * The character is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EGroundState getGroundState() {
@@ -391,9 +391,9 @@ final public class CharacterRefC
      * interface. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      */
     @Override
     public void getPositionAndRotation(
@@ -405,9 +405,9 @@ final public class CharacterRefC
      * Copy the position of the associated body. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
@@ -561,7 +561,7 @@ final public class CharacterRefC
      * Test whether the specified normal direction is too steep. The character
      * is unaffected.
      *
-     * @param normal the surface normal to test (not null, unaffected)
+     * @param normal the surface normal to test (not {@code null}, unaffected)
      * @return {@code true} if too steep, otherwise {@code false}
      */
     @Override
@@ -592,7 +592,7 @@ final public class CharacterRefC
      * Save the character's state to the specified recorder. The character is
      * unaffected.
      *
-     * @param recorder the recorder to save to (not null)
+     * @param recorder the recorder to save to (not {@code null})
      */
     @Override
     public void saveState(StateRecorder recorder) {

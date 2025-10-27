@@ -88,8 +88,8 @@ final public class CharacterVirtualRefC
      * Convert the specified velocity to one that won't climb steep slopes. The
      * character is unaffected.
      *
-     * @param desiredVelocity velocity vector (in system coordinates, not null,
-     * unaffected)
+     * @param desiredVelocity velocity vector (in system coordinates, not
+     * {@code null}, unaffected)
      * @return a new velocity vector (in system coordinates)
      */
     @Override
@@ -110,8 +110,8 @@ final public class CharacterVirtualRefC
      * Test whether the character has moved onto a steep slope. The character is
      * unaffected.
      *
-     * @param desiredVelocity velocity vector (in system coordinates, not null,
-     * unaffected)
+     * @param desiredVelocity velocity vector (in system coordinates, not
+     * {@code null}, unaffected)
      * @return {@code true} if too step to walk, otherwise {@code false}
      */
     @Override
@@ -306,7 +306,7 @@ final public class CharacterVirtualRefC
      * Return the relationship between the character and its supporting surface.
      * The character is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EGroundState getGroundState() {
@@ -507,9 +507,9 @@ final public class CharacterVirtualRefC
      * Copy the position of the character. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      */
     @Override
     public void getPositionAndRotation(
@@ -665,7 +665,7 @@ final public class CharacterVirtualRefC
      * specified character during the previous time step. The current character
      * is unaffected.
      *
-     * @param otherCharacter the character to test against (not null,
+     * @param otherCharacter the character to test against (not {@code null},
      * unaffected)
      * @return {@code true} if contact or collision, otherwise {@code false}
      */
@@ -683,7 +683,7 @@ final public class CharacterVirtualRefC
      * Test whether the specified normal direction is too steep. The character
      * is unaffected.
      *
-     * @param normal the surface normal to test (not null, unaffected)
+     * @param normal the surface normal to test (not {@code null}, unaffected)
      * @return {@code true} if too steep, otherwise {@code false}
      */
     @Override
@@ -714,7 +714,7 @@ final public class CharacterVirtualRefC
      * Save the character's state to the specified recorder. The character is
      * unaffected.
      *
-     * @param recorder the recorder to save to (not null)
+     * @param recorder the recorder to save to (not {@code null})
      */
     @Override
     public void saveState(StateRecorder recorder) {

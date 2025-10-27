@@ -78,7 +78,7 @@ public class Body extends NonCopyable implements ConstBody {
      * Apply the specified angular impulse to the body.
      *
      * @param impulse the impulse vector (Newton.meter.seconds in system
-     * coordinates, not null, unaffected)
+     * coordinates, not {@code null}, unaffected)
      */
     public void addAngularImpulse(Vec3Arg impulse) {
         long bodyVa = va();
@@ -91,8 +91,8 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Apply the specified force to the body's center of mass.
      *
-     * @param force the force vector (Newtons in system coordinates, not null,
-     * unaffected)
+     * @param force the force vector (Newtons in system coordinates, not
+     * {@code null}, unaffected)
      */
     public void addForce(Vec3Arg force) {
         long bodyVa = va();
@@ -105,9 +105,9 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Apply the specified force at the specified location.
      *
-     * @param force the force vector (not null, unaffected)
+     * @param force the force vector (not {@code null}, unaffected)
      * @param location where to apply the force (Newtons in system coordinates
-     * not null, unaffected)
+     * not {@code null}, unaffected)
      */
     public void addForce(Vec3Arg force, RVec3Arg location) {
         long bodyVa = va();
@@ -139,7 +139,7 @@ public class Body extends NonCopyable implements ConstBody {
      * Apply the specified impulse to the body's center of mass.
      *
      * @param impulse the impulse vector (kilogram.meters per second in system
-     * coordinates, not null, unaffected)
+     * coordinates, not {@code null}, unaffected)
      */
     public void addImpulse(Vec3Arg impulse) {
         long bodyVa = va();
@@ -153,8 +153,8 @@ public class Body extends NonCopyable implements ConstBody {
      * Apply the specified impulse at the specified location.
      *
      * @param impulse the impulse vector (kilogram.meters per second in system
-     * coordinates, not null, unaffected)
-     * @param location where to apply the impulse (not null, unaffected)
+     * coordinates, not {@code null}, unaffected)
+     * @param location where to apply the impulse (not {@code null}, unaffected)
      */
     public void addImpulse(Vec3Arg impulse, RVec3Arg location) {
         long bodyVa = va();
@@ -171,7 +171,7 @@ public class Body extends NonCopyable implements ConstBody {
      * Apply the specified torque to the body.
      *
      * @param torque the torque vector (Newton.meters in system coordinates, not
-     * null, unaffected)
+     * {@code null}, unaffected)
      */
     public void addTorque(Vec3Arg torque) {
         long bodyVa = va();
@@ -185,17 +185,17 @@ public class Body extends NonCopyable implements ConstBody {
      * Apply an impulse that simulates buoyancy and drag.
      *
      * @param surfacePosition the location of the fluid's surface (in system
-     * coordinates, not null, unaffected)
+     * coordinates, not {@code null}, unaffected)
      * @param surfaceNormal the upward normal direction of the fluid's surface
-     * (in system coordinates, not null, unaffected)
+     * (in system coordinates, not {@code null}, unaffected)
      * @param buoyancy the mass of the displaced fluid divided by the body's
      * mass (1&rarr;neutral buoyancy)
      * @param linearDrag the drag factor for linear motion
      * @param angularDrag the drag factor for angular motion
      * @param fluidVelocity the velocity of the fluid (meters per second in
-     * system coordinates, not null, unaffected)
-     * @param gravity the gravity vector (in system coordinates, not null,
-     * unaffected)
+     * system coordinates, not {@code null}, unaffected)
+     * @param gravity the gravity vector (in system coordinates, not
+     * {@code null}, unaffected)
      * @param deltaTime the duration of the simulation step (in seconds)
      * @return {@code true} if an impulse was applied, {@code false} if not in
      * the fluid
@@ -227,10 +227,10 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Reposition the body, assuming it's kinematic.
      *
-     * @param location the desired location (in system coordinates, not null,
-     * unaffected)
+     * @param location the desired location (in system coordinates, not
+     * {@code null}, unaffected)
      * @param orientation the desired orientation (relative to the system axes,
-     * not null, unaffected)
+     * not {@code null}, unaffected)
      * @param deltaTime time until the desired position is reached (in seconds,
      * &gt;0)
      */
@@ -285,7 +285,7 @@ public class Body extends NonCopyable implements ConstBody {
      * Directly alter the body's angular velocity.
      *
      * @param omega the desired angular velocity (radians per second in system
-     * coordinates, not null, unaffected, default=(0,0,0))
+     * coordinates, not {@code null}, unaffected, default=(0,0,0))
      */
     public void setAngularVelocity(Vec3Arg omega) {
         float wx = omega.getX();
@@ -297,7 +297,7 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Alter the body's angular velocity within limits.
      *
-     * @param omega the desired angular velocity (not null, unaffected,
+     * @param omega the desired angular velocity (not {@code null}, unaffected,
      * default=(0,0,0))
      */
     public void setAngularVelocityClamped(Vec3Arg omega) {
@@ -311,7 +311,7 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Assign the body to the specified collision group.
      *
-     * @param group the group to assign (not null, unaffected)
+     * @param group the group to assign (not {@code null}, unaffected)
      */
     public void setCollisionGroup(ConstCollisionGroup group) {
         long bodyVa = va();
@@ -371,7 +371,7 @@ public class Body extends NonCopyable implements ConstBody {
      * Directly alter the body's linear velocity.
      *
      * @param velocity the desired velocity (meters per second in system
-     * coordinates, not null, unaffected, default=(0,0,0))
+     * coordinates, not {@code null}, unaffected, default=(0,0,0))
      */
     public void setLinearVelocity(Vec3Arg velocity) {
         float vx = velocity.getX();
@@ -384,7 +384,7 @@ public class Body extends NonCopyable implements ConstBody {
      * Alter the body's linear velocity within limits.
      *
      * @param velocity the desired linear velocity (in meters per second, not
-     * null, unaffected, default=(0,0,0))
+     * {@code null}, unaffected, default=(0,0,0))
      */
     public void setLinearVelocityClamped(Vec3Arg velocity) {
         long bodyVa = va();
@@ -397,7 +397,7 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Alter the body's motion type.
      *
-     * @param motionType the desired value (not null)
+     * @param motionType the desired value (not {@code null})
      */
     public void setMotionType(EMotionType motionType) {
         long bodyVa = va();
@@ -408,10 +408,10 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Reposition the body and reset its sleep timer.
      *
-     * @param location the desired location (in system coordinates, not null,
-     * unaffected)
+     * @param location the desired location (in system coordinates, not
+     * {@code null}, unaffected)
      * @param orientation the desired orientation (relative to the system axes,
-     * not null, unaffected)
+     * not {@code null}, unaffected)
      */
     public void setPositionAndRotationInternal(
             RVec3Arg location, QuatArg orientation) {
@@ -421,10 +421,10 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Reposition the body.
      *
-     * @param location the desired location (in system coordinates, not null,
-     * unaffected)
+     * @param location the desired location (in system coordinates, not
+     * {@code null}, unaffected)
      * @param orientation the desired orientation (relative to the system axes,
-     * not null, unaffected)
+     * not {@code null}, unaffected)
      * @param resetSleepTimer {@code true} to reset the body's sleep timer,
      * {@code false} to leave the timer unchanged
      */
@@ -569,7 +569,7 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Return the body type (rigid or soft). The body is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EBodyType getBodyType() {
@@ -618,7 +618,7 @@ public class Body extends NonCopyable implements ConstBody {
      * with its origin). The body is unaffected.
      *
      * @param storeResult storage for the location in system coordinates (not
-     * null, modified)
+     * {@code null}, modified)
      */
     @Override
     public void getCenterOfMassPosition(DoubleBuffer storeResult) {
@@ -631,7 +631,7 @@ public class Body extends NonCopyable implements ConstBody {
      * with its origin). The body is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      */
     @Override
     public void getCenterOfMassPosition(RVec3 storeLocation) {
@@ -776,7 +776,7 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Return the body's motion type. The body is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EMotionType getMotionType() {
@@ -824,9 +824,9 @@ public class Body extends NonCopyable implements ConstBody {
      * Copy the position of the body. The body is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      */
     @Override
     public void getPositionAndRotation(
@@ -889,7 +889,7 @@ public class Body extends NonCopyable implements ConstBody {
      * Update the specified counted reference to refer to the body's shape. The
      * body is unaffected.
      *
-     * @param storeRef storage for the reference (not null, modified)
+     * @param storeRef storage for the reference (not {@code null}, modified)
      */
     @Override
     public void getShape(ShapeRefC storeRef) {
@@ -964,7 +964,7 @@ public class Body extends NonCopyable implements ConstBody {
      * location. The body is unaffected.
      *
      * @param subShapeId the ID of the sub-shape to use
-     * @param location the location to use (not null, unaffected)
+     * @param location the location to use (not {@code null}, unaffected)
      * @return a new direction vector
      */
     @Override

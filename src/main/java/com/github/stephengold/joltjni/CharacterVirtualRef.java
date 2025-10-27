@@ -85,17 +85,17 @@ final public class CharacterVirtualRef
      *
      * @param deltaTime the time step to simulate
      * @param gravity the gravity acceleration vector (in meters per second
-     * squared, not null, unaffected)
-     * @param settings settings to use (not null, unaffected)
+     * squared, not {@code null}, unaffected)
+     * @param settings settings to use (not {@code null}, unaffected)
      * @param bpFilter to test whether the character collides with a broad-phase
-     * layer (not null, unaffected)
+     * layer (not {@code null}, unaffected)
      * @param olFilter to test whether the character collides with an object
-     * layer (not null, unaffected)
+     * layer (not {@code null}, unaffected)
      * @param bodyFilter to test whether the character collides with a body (not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @param shapeFilter to test whether the character collides with a shape
-     * (not null, unaffected)
-     * @param allocator for temporary allocations (not null)
+     * (not {@code null}, unaffected)
+     * @param allocator for temporary allocations (not {@code null})
      */
     public void extendedUpdate(float deltaTime, Vec3Arg gravity,
             ExtendedUpdateSettings settings, BroadPhaseLayerFilter bpFilter,
@@ -120,7 +120,7 @@ final public class CharacterVirtualRef
     /**
      * Restore the character's state from the specified recorder.
      *
-     * @param recorder the recorder to restore from (not null)
+     * @param recorder the recorder to restore from (not {@code null})
      */
     public void restoreState(StateRecorder recorder) {
         long characterVa = targetVa();
@@ -188,17 +188,18 @@ final public class CharacterVirtualRef
     /**
      * Alter the character's shape.
      *
-     * @param shape the desired shape (not null)
+     * @param shape the desired shape (not {@code null})
      * @param maxPenetrationDepth the maximum acceptable penetration after the
      * alteration, or {@code Float.MAX_VALUE} to skip the check
      * @param broadPhaseLayerFilter the broadphase filter used to test for
-     * collisions (not null)
+     * collisions (not {@code null})
      * @param objectLayerFilter the object-layer filter used to test for
-     * collisions (not null)
-     * @param bodyFilter the body filter used to test for collisions (not null)
+     * collisions (not {@code null})
+     * @param bodyFilter the body filter used to test for collisions (not
+     * {@code null})
      * @param shapeFilter the shape filter used to test for collisions (not
-     * null)
-     * @param allocator the desired allocator (not null)
+     * {@code null})
+     * @param allocator the desired allocator (not {@code null})
      * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean setShape(ConstShape shape, float maxPenetrationDepth,
@@ -223,7 +224,7 @@ final public class CharacterVirtualRef
      * Alter the shape of the inner body. Invoke this after a successful
      * invocation of {@code setShape()}.
      *
-     * @param shape the desired shape (not null, unaffected, default=?)
+     * @param shape the desired shape (not {@code null}, unaffected, default=?)
      */
     public void setInnerBodyShape(ConstShape shape) {
         long characterVa = targetVa();
@@ -234,7 +235,8 @@ final public class CharacterVirtualRef
     /**
      * Alter the character's "up" direction.
      *
-     * @param up the desired direction (not null, unaffected, default=(0,1,0))
+     * @param up the desired direction (not {@code null}, unaffected,
+     * default=(0,1,0))
      */
     public void setUp(Vec3Arg up) {
         long characterVa = targetVa();
@@ -258,8 +260,8 @@ final public class CharacterVirtualRef
      * Convert the specified velocity to one that won't climb steep slopes. The
      * character is unaffected.
      *
-     * @param desiredVelocity velocity vector (in system coordinates, not null,
-     * unaffected)
+     * @param desiredVelocity velocity vector (in system coordinates, not
+     * {@code null}, unaffected)
      * @return a new velocity vector (in system coordinates)
      */
     @Override
@@ -280,8 +282,8 @@ final public class CharacterVirtualRef
      * Test whether the character has moved onto a steep slope. The character is
      * unaffected.
      *
-     * @param desiredVelocity velocity vector (in system coordinates, not null,
-     * unaffected)
+     * @param desiredVelocity velocity vector (in system coordinates, not
+     * {@code null}, unaffected)
      * @return {@code true} if too step to walk, otherwise {@code false}
      */
     @Override
@@ -476,7 +478,7 @@ final public class CharacterVirtualRef
      * Return the relationship between the character and its supporting surface.
      * The character is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EGroundState getGroundState() {
@@ -677,9 +679,9 @@ final public class CharacterVirtualRef
      * Copy the position of the character. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      */
     @Override
     public void getPositionAndRotation(
@@ -835,7 +837,7 @@ final public class CharacterVirtualRef
      * specified character during the previous time step. The current character
      * is unaffected.
      *
-     * @param otherCharacter the character to test against (not null,
+     * @param otherCharacter the character to test against (not {@code null},
      * unaffected)
      * @return {@code true} if contact or collision, otherwise {@code false}
      */
@@ -853,7 +855,7 @@ final public class CharacterVirtualRef
      * Test whether the specified normal direction is too steep. The character
      * is unaffected.
      *
-     * @param normal the surface normal to test (not null, unaffected)
+     * @param normal the surface normal to test (not {@code null}, unaffected)
      * @return {@code true} if too steep, otherwise {@code false}
      */
     @Override
@@ -884,7 +886,7 @@ final public class CharacterVirtualRef
      * Save the character's state to the specified recorder. The character is
      * unaffected.
      *
-     * @param recorder the recorder to save to (not null)
+     * @param recorder the recorder to save to (not {@code null})
      */
     @Override
     public void saveState(StateRecorder recorder) {

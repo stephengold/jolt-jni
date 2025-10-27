@@ -88,7 +88,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Add the character to its {@code PhysicsSystem} using the locking body
      * interface.
      *
-     * @param activation whether to activate the character (not null,
+     * @param activation whether to activate the character (not {@code null},
      * default=Activate)
      */
     public void addToPhysicsSystem(EActivation activation) {
@@ -98,7 +98,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     /**
      * Add the character to its {@code PhysicsSystem}.
      *
-     * @param activation whether to activate the character (not null,
+     * @param activation whether to activate the character (not {@code null},
      * default=Activate)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
@@ -157,7 +157,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     /**
      * Restore the character's state from the specified recorder.
      *
-     * @param recorder the recorder to restore from (not null)
+     * @param recorder the recorder to restore from (not {@code null})
      */
     public void restoreState(StateRecorder recorder) {
         long characterVa = targetVa();
@@ -202,7 +202,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Alter the character's linear velocity using the locking body interface.
      *
      * @param velocity the desired velocity (meters per second in system
-     * coordinates, not null, unaffected)
+     * coordinates, not {@code null}, unaffected)
      */
     public void setLinearVelocity(Vec3Arg velocity) {
         setLinearVelocity(velocity, true);
@@ -212,7 +212,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Alter the character's linear velocity.
      *
      * @param velocity the desired velocity (meters per second in system
-     * coordinates, not null, unaffected)
+     * coordinates, not {@code null}, unaffected)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
@@ -227,7 +227,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Attempt to replace the character's shape using the locking body
      * interface.
      *
-     * @param shape the desired shape (not null, unaffected)
+     * @param shape the desired shape (not {@code null}, unaffected)
      * @param maxPenetrationDepth the maximum penetration to allow, or MAX_VALUE
      * to skip the penetration check
      * @return {@code true} if the replacement succeeded, otherwise
@@ -241,7 +241,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
     /**
      * Attempt to replace the character's shape.
      *
-     * @param shape the desired shape (not null, unaffected)
+     * @param shape the desired shape (not {@code null}, unaffected)
      * @param maxPenetrationDepth the maximum penetration to allow, or MAX_VALUE
      * to skip the penetration check
      * @param lockBodies {@code true} &rarr; use the locking body interface,
@@ -421,7 +421,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Return the relationship between the character and its supporting surface.
      * The character is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EGroundState getGroundState() {
@@ -569,9 +569,9 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * interface. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      */
     @Override
     public void getPositionAndRotation(
@@ -583,9 +583,9 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Copy the position of the associated body. The character is unaffected.
      *
      * @param storeLocation storage for the location (in system coordinates, not
-     * null, modified)
+     * {@code null}, modified)
      * @param storeOrientation storage for the orientation (in system
-     * coordinates, not null, modified)
+     * coordinates, not {@code null}, modified)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
@@ -739,7 +739,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Test whether the specified normal direction is too steep. The character
      * is unaffected.
      *
-     * @param normal the surface normal to test (not null, unaffected)
+     * @param normal the surface normal to test (not {@code null}, unaffected)
      * @return {@code true} if too steep, otherwise {@code false}
      */
     @Override
@@ -770,7 +770,7 @@ final public class CharacterRef extends Ref implements ConstCharacter {
      * Save the character's state to the specified recorder. The character is
      * unaffected.
      *
-     * @param recorder the recorder to save to (not null)
+     * @param recorder the recorder to save to (not {@code null})
      */
     @Override
     public void saveState(StateRecorder recorder) {
