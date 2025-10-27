@@ -48,11 +48,9 @@ abstract public class TwoBodyConstraintSettings extends ConstraintSettings {
     public TwoBodyConstraint create(Body rigidBody1, Body rigidBody2) {
         long settingsVa = va();
         long body1Va = rigidBody1.va();
-        assert !Body.isSoftBody(body1Va) :
-                "body1 must be a rigid body.";
+        assert !Body.isSoftBody(body1Va) : "body1 must be a rigid body.";
         long body2Va = rigidBody2.va();
-        assert !Body.isSoftBody(body2Va) :
-                "body2 must be a rigid body.";
+        assert !Body.isSoftBody(body2Va) : "body2 must be a rigid body.";
         long constraintVa = createConstraint(settingsVa, body1Va, body2Va);
         TwoBodyConstraint result
                 = (TwoBodyConstraint) Constraint.newConstraint(constraintVa);

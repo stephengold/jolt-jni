@@ -36,7 +36,7 @@ import com.github.stephengold.joltjni.readonly.ConstSubShapeIdPair;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 
 /**
- * A {@code ContactListener} for use with Jolt-JNI "Samples" tests.
+ * A {@code ContactListener} for use with Jolt-JNI "Samples" apps.
  *
  * @author Stephen Gold sgold@sonic.net
  */
