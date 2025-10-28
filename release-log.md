@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 3.5.0 released on TBD
+## Version 3.5.0 released on 28 October 2025
 
 + Bugfixes:
   + unsafe stack reference in `TransformedShape.getShapeScale()`
