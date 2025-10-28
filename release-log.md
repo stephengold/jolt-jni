@@ -1,5 +1,26 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.5.0 released on TBD
+
++ Bugfixes:
+  + unsafe stack reference in `TransformedShape.getShapeScale()`
+  + method name inconsistency in `BodyCreationSettings` (issue #29)
+  + invalid mark in `ConvexShape.getSubmergedVolume()` (issue #30)
+
++ Additions:
+  + alternate signature for `ConstBody.getShape()`
+  + `ConstCharacterBase.getShape()`
+  + `ConstMotorSettings` interface
+  + `ConstVehicleConstraint.getWheel()`
+  + `ConstVehicleConstraint.getWheelPositionAndRotation()`
+
++ Generalized 4 `MeshShapeSettings` constructors.
++ Handled more cases in `ObjectStreamIn.sReadObject()` .
++ Publicize the 2-argument constructor for `Body` .
++ Updated the Jolt-Physics source and assets to sg251012 (=1e38fc6).
++ Updated the Android NDK to r29.
+
+
 ## Version 3.4.0 released on 30 September 2025
 
 With this release, Jolt JNI began creating an internal counted reference
