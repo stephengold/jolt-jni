@@ -31,7 +31,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v5
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Linux64 runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -61,7 +61,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v5
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Linux64_fma runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -91,7 +91,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v5
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 -x checkstyleMain -x checkstyleTest run runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -121,7 +121,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v5
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -151,7 +151,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v5
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Windows64 runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -184,7 +184,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v5
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Windows64_avx2 runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -217,7 +217,7 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v5
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - name: gradlew classes unpackJoltSource unpackTestFramework unpackVhacdSource
         run: |
           ./gradlew classes unpackJoltSource unpackTestFramework unpackVhacdSource \
@@ -254,7 +254,7 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt install g++-9-arm-linux-gnueabihf
       - run: arm-linux-gnueabihf-g++-9 --version
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Linux_ARM32hf install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -287,7 +287,7 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt install g++-10-aarch64-linux-gnu
       - run: aarch64-linux-gnu-g++-10 --version
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Linux_ARM64 assemble
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -320,7 +320,7 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt install g++-13-loongarch64-linux-gnu
       - run: loongarch64-linux-gnu-g++-13 --version
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Linux_LoongArch64 assemble
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
@@ -336,7 +336,7 @@ jobs:
           distribution: 'zulu'
           java-version: 24
       - uses: actions/checkout@v5
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v5
       - uses: gradle/actions/wrapper-validation@v4
       - name: gradlew -Pbt=Release -Pflavor=Sp -Ptarget=Linux64 build install
         if: "!startsWith(github.ref, 'refs/tags/')"
