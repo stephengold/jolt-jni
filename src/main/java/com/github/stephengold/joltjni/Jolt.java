@@ -37,6 +37,7 @@ import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -423,7 +424,8 @@ final public class Jolt {
             System.err.println("resourcePath = " + resourcePath);
             System.exit(1);
         }
-        InputStreamReader isr = new InputStreamReader(stream);
+        InputStreamReader isr
+                = new InputStreamReader(stream, StandardCharsets.UTF_8);
         BufferedReader reader = new BufferedReader(isr);
 
         Set<Class<?>> result = new HashSet<>();
