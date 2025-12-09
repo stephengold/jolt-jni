@@ -146,7 +146,7 @@ abstract public class JoltPhysicsObject
      * Start a daemon thread to process the phantom-reachable objects and invoke
      * freeing actions, unless one has already been started.
      */
-    public static void startCleaner() {
+    public static synchronized void startCleaner() {
         if (cleaner == null) {
             cleaner = Cleaner.create();
         } else {
