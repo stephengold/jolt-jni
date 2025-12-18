@@ -9,7 +9,7 @@ checkstyle = "12.3.0"
 
 jsnaploader = "io.github.electrostat-lab:snaploader:1.1.1-stable"
 junit4 = "junit:junit:4.13.2"
-log4j-impl = "org.apache.logging.log4j:log4j-slf4j2-impl:2.25.2"
+log4j-impl = "org.apache.logging.log4j:log4j-slf4j2-impl:2.25.3"
 oshi-core = "com.github.oshi:oshi-core:6.9.1"
 
 [bundles]
