@@ -133,7 +133,7 @@ final class Equivalent {
         StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        stringStream(stream1, stream2);
         TestUtils.testClose(sow2, sow1, stream2, stream1);
     }
 
@@ -217,7 +217,7 @@ final class Equivalent {
         StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        stringStream(stream1, stream2);
         TestUtils.testClose(sow2, sow1, stream2, stream1);
 
         StringStream stream3 = new StringStream();
@@ -226,7 +226,7 @@ final class Equivalent {
         StreamOutWrapper sow4 = new StreamOutWrapper(stream4);
         expected.saveWithChildren(sow3, null, null, null);
         actual.saveWithChildren(sow4, null, null, null);
-        Assert.assertEquals(stream3.str(), stream4.str());
+        stringStream(stream3, stream4);
         TestUtils.testClose(sow4, sow3, stream4, stream3);
     }
 
@@ -296,7 +296,7 @@ final class Equivalent {
         StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        stringStream(stream1, stream2);
         TestUtils.testClose(sow2, sow1, stream2, stream1);
     }
 
@@ -343,7 +343,7 @@ final class Equivalent {
         StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        stringStream(stream1, stream2);
 
         TestUtils.testClose(sow2, sow1, stream2, stream1, g0);
     }
@@ -537,7 +537,7 @@ final class Equivalent {
         StringStream stream2 = new StringStream();
         ObjectStreamOut.sWriteObject(stream1, EStreamType.Text, expected);
         ObjectStreamOut.sWriteObject(stream2, EStreamType.Text, actual);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        stringStream(stream1, stream2);
         TestUtils.testClose(stream2, stream1);
     }
 
@@ -589,7 +589,7 @@ final class Equivalent {
         StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        stringStream(stream1, stream2);
         TestUtils.testClose(sow2, sow1, stream2, stream1);
     }
 
@@ -663,7 +663,7 @@ final class Equivalent {
         StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        stringStream(stream1, stream2);
         TestUtils.testClose(sow2, sow1, stream2, stream1);
 
         StringStream stream3 = new StringStream();
@@ -672,7 +672,7 @@ final class Equivalent {
         StreamOutWrapper sow4 = new StreamOutWrapper(stream4);
         expected.saveWithChildren(sow3, null, null, null);
         actual.saveWithChildren(sow4, null, null, null);
-        Assert.assertEquals(stream3.str(), stream4.str());
+        stringStream(stream3, stream4);
         TestUtils.testClose(sow4, sow3, stream4, stream3);
     }
 
@@ -716,7 +716,7 @@ final class Equivalent {
         StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        stringStream(stream1, stream2);
         TestUtils.testClose(sow2, sow1, stream2, stream1);
 
         StringStream stream3 = new StringStream();
@@ -729,7 +729,7 @@ final class Equivalent {
         MaterialToIdMap matMap4 = new MaterialToIdMap();
         expected.saveWithMaterials(sow3, ssMap3, matMap3);
         actual.saveWithMaterials(sow4, ssMap4, matMap4);
-        Assert.assertEquals(stream3.str(), stream4.str());
+        stringStream(stream3, stream4);
         TestUtils.testClose(
                 stream3, stream4, sow3, sow4, ssMap3, ssMap4, matMap3, matMap4);
     }
@@ -758,8 +758,21 @@ final class Equivalent {
         StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        stringStream(stream1, stream2);
         TestUtils.testClose(sow2, sow1, stream2, stream1);
+    }
+
+    /**
+     * Verify the equivalence of the specified string streams, ignoring their
+     * types, virtual addresses, and ownership.
+     *
+     * @param expected the expected stream (not {@code null}, unaffected)
+     * @param actual the actual stream (not {@code null}, unaffected)
+     */
+    static void stringStream(StringStream expected, StringStream actual) {
+        Assert.assertEquals(expected.str(), actual.str());
+        Assert.assertEquals(expected.tellg(), actual.tellg());
+        Assert.assertEquals(expected.tellp(), actual.tellp());
     }
 
     /**
@@ -894,7 +907,7 @@ final class Equivalent {
         StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        stringStream(stream1, stream2);
         TestUtils.testClose(sow2, sow1, stream2, stream1);
     }
 
@@ -958,7 +971,7 @@ final class Equivalent {
         StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
-        Assert.assertEquals(stream1.str(), stream2.str());
+        stringStream(stream1, stream2);
         TestUtils.testClose(sow2, sow1, stream2, stream1);
     }
 }
