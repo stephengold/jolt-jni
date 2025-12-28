@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 3.5.1 released on TBD
+## Version 3.5.1 released on 28 December 2025
 
 + Bugfixes:
   + race condition in `JoltPhysicsObject.startCleaner()`
