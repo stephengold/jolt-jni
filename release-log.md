@@ -1,5 +1,15 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.5.1 released on TBD
+
++ Bugfixes:
+  + race condition in `JoltPhysicsObject.startCleaner()`
+  + `Jolt.listClasses()` depends on the local charset
++ Altered the half-extent constraints for `BoxShape` and `BoxShapeSettings`.
++ Updated the Jolt-Physics source and assets to v5.5.0 (=23dadd0e).
++ Updated the OSHI library to v6.9.2 .
+
+
 ## Version 3.5.0 released on 28 October 2025
 
 + Bugfixes:
