@@ -106,7 +106,7 @@ public class BoxShapeSettings
      * all components &ge;0, unaffected)
      */
     public BoxShapeSettings(Vec3Arg halfExtents) {
-        this(halfExtents, 0.05f);
+        this(halfExtents, Jolt.cDefaultConvexRadius);
     }
 
     /**

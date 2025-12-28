@@ -49,7 +49,7 @@ public class TaperedCylinderShapeSettings extends ConvexShapeSettings {
      */
     public TaperedCylinderShapeSettings(
             float halfHeight, float topRadius, float bottomRadius) {
-        this(halfHeight, topRadius, bottomRadius, 0.05f);
+        this(halfHeight, topRadius, bottomRadius, Jolt.cDefaultConvexRadius);
     }
 
     /**
