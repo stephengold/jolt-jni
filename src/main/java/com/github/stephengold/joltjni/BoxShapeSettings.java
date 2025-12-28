@@ -69,23 +69,22 @@ public class BoxShapeSettings
     /**
      * Instantiate a shape with the specified half extents.
      *
-     * @param xHalfExtent the desired half extents on the local X axis
-     * (&ge;0.05)
-     * @param yHalfExtent the desired half extents on the local Y axis
-     * (&ge;0.05)
-     * @param zHalfExtent the desired half extents on the local Z axis
-     * (&ge;0.05)
+     * @param xHalfExtent the desired half extent on the local X axis
+     * (&gt;0)
+     * @param yHalfExtent the desired half extent on the local Y axis
+     * (&gt;0)
+     * @param zHalfExtent the desired half extent on the local Z axis
+     * (&gt;0)
      */
     public BoxShapeSettings(
             float xHalfExtent, float yHalfExtent, float zHalfExtent) {
-        float convexRadius = Jolt.cDefaultConvexRadius;
-        assert xHalfExtent >= convexRadius : xHalfExtent;
-        assert yHalfExtent >= convexRadius : yHalfExtent;
-        assert zHalfExtent >= convexRadius : zHalfExtent;
+        assert xHalfExtent > 0f : xHalfExtent;
+        assert yHalfExtent > 0f : yHalfExtent;
+        assert zHalfExtent > 0f : zHalfExtent;
 
         long materialVa = 0L;
         long settingsVa = createBoxShapeSettings(xHalfExtent, yHalfExtent,
-                zHalfExtent, convexRadius, materialVa);
+                zHalfExtent, Jolt.cDefaultConvexRadius, materialVa);
         setVirtualAddressAsCoOwner(settingsVa, EShapeSubType.Box);
     }
 
@@ -113,7 +112,7 @@ public class BoxShapeSettings
      * Instantiate settings for the specified half extents and convex radius.
      *
      * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &ge;0, unaffected)
+     * all components &gt;0, unaffected)
      * @param convexRadius the desired convex radius (&ge;0, default=0.05)
      */
     public BoxShapeSettings(Vec3Arg halfExtents, float convexRadius) {
@@ -125,7 +124,7 @@ public class BoxShapeSettings
      * material.
      *
      * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &ge;0, unaffected)
+     * all components &gt;0, unaffected)
      * @param convexRadius the desired convex radius (&ge;0, default=0.05)
      * @param material the desired surface properties (not null, unaffected) or
      * {@code null} for default properties (default=null)

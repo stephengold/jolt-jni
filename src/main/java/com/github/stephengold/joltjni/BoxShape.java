@@ -37,7 +37,7 @@ public class BoxShape extends ConvexShape {
     /**
      * Instantiate a cubic shape with the specified half extents.
      *
-     * @param halfExtent the desired half extents (&ge;0.05)
+     * @param halfExtent the desired half extents (&gt;0)
      */
     public BoxShape(float halfExtent) {
         this(halfExtent, halfExtent, halfExtent);
@@ -46,22 +46,18 @@ public class BoxShape extends ConvexShape {
     /**
      * Instantiate a shape with the specified half extents.
      *
-     * @param xHalfExtent the desired half extents on the local X axis
-     * (&ge;0.05)
-     * @param yHalfExtent the desired half extents on the local Y axis
-     * (&ge;0.05)
-     * @param zHalfExtent the desired half extents on the local Z axis
-     * (&ge;0.05)
+     * @param xHalfExtent the desired half extent on the local X axis (&gt;0)
+     * @param yHalfExtent the desired half extent on the local Y axis (&gt;0)
+     * @param zHalfExtent the desired half extent on the local Z axis (&gt;0)
      */
     public BoxShape(float xHalfExtent, float yHalfExtent, float zHalfExtent) {
-        float convexRadius = Jolt.cDefaultConvexRadius;
-        assert xHalfExtent >= convexRadius : xHalfExtent;
-        assert yHalfExtent >= convexRadius : yHalfExtent;
-        assert zHalfExtent >= convexRadius : zHalfExtent;
+        assert xHalfExtent > 0f : xHalfExtent;
+        assert yHalfExtent > 0f : yHalfExtent;
+        assert zHalfExtent > 0f : zHalfExtent;
 
         long materialVa = 0L;
         long shapeVa = createBoxShape(xHalfExtent, yHalfExtent, zHalfExtent,
-                convexRadius, materialVa);
+                Jolt.cDefaultConvexRadius, materialVa);
         setVirtualAddressAsCoOwner(shapeVa);
     }
 
@@ -79,7 +75,7 @@ public class BoxShape extends ConvexShape {
      * Instantiate a shape with the specified half extents.
      *
      * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &ge;0.05, unaffected)
+     * all components &gt;0, unaffected)
      */
     public BoxShape(Vec3Arg halfExtents) {
         this(halfExtents, Jolt.cDefaultConvexRadius);
@@ -100,7 +96,7 @@ public class BoxShape extends ConvexShape {
      * Instantiate a shape with the specified parameters.
      *
      * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &ge;convexRadius, unaffected)
+     * all components &gt;0, unaffected)
      * @param convexRadius the desired convex radius (default=0.05)
      * @param material the desired material (default=null)
      */
@@ -109,9 +105,9 @@ public class BoxShape extends ConvexShape {
         float xHalfExtent = halfExtents.getX();
         float yHalfExtent = halfExtents.getY();
         float zHalfExtent = halfExtents.getZ();
-        assert xHalfExtent >= convexRadius : xHalfExtent;
-        assert yHalfExtent >= convexRadius : yHalfExtent;
-        assert zHalfExtent >= convexRadius : zHalfExtent;
+        assert xHalfExtent > 0f : xHalfExtent;
+        assert yHalfExtent > 0f : yHalfExtent;
+        assert zHalfExtent > 0f : zHalfExtent;
 
         long materialVa = (material == null) ? 0L : material.targetVa();
         long shapeVa = createBoxShape(xHalfExtent, yHalfExtent, zHalfExtent,
