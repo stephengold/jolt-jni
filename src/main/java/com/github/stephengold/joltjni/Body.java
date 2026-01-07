@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -214,9 +214,9 @@ public class Body extends NonCopyable implements ConstBody {
         float vx = fluidVelocity.getX();
         float vy = fluidVelocity.getY();
         float vz = fluidVelocity.getZ();
-        float gravityX = fluidVelocity.getX();
-        float gravityY = fluidVelocity.getY();
-        float gravityZ = fluidVelocity.getZ();
+        float gravityX = gravity.getX();
+        float gravityY = gravity.getY();
+        float gravityZ = gravity.getZ();
         boolean result = applyBuoyancyImpulse(bodyVa, surfaceX, surfaceY,
                 surfaceZ, nx, ny, nz, buoyancy, linearDrag, angularDrag,
                 vx, vy, vz, gravityX, gravityY, gravityZ, deltaTime);
