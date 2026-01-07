@@ -1,5 +1,10 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.5.2 released on TBD
+
++ Bugfix:  logic error in `Body.applyBuoyancyImpulse()` (issue #31)
++ Updated the Checkstyle tool to v13, requiring JDK 21+ to build.
+
 ## Version 3.5.1 released on 28 December 2025
 
 + Bugfixes:
