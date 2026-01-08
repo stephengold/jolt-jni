@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 3.5.2 released on TBD
+## Version 3.5.2 released on 7 January 2026
 
 + Bugfix:  logic error in `Body.applyBuoyancyImpulse()` (issue #31)
 + Updated the Checkstyle tool to v13, requiring JDK 21+ to build.
@@ -9,7 +9,7 @@
 
 + Bugfixes:
   + race condition in `JoltPhysicsObject.startCleaner()`
-  + `Jolt.listClasses()` depends on the local charset
+  + `Jolt.listClasses()` depends on the local chararacter set
 + Altered the half-extent constraints for `BoxShape` and `BoxShapeSettings`.
 + Updated the Jolt-Physics source and assets to v5.5.0 (=23dadd0e).
 + Updated the OSHI library to v6.9.2 .
