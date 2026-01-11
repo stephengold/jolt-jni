@@ -151,6 +151,7 @@ final public class StreamInWrapper extends StreamIn {
      *
      * @return the value that was read
      */
+    @Override
     public int readInt() {
         long streamVa = va();
         int result = readInt(streamVa);
