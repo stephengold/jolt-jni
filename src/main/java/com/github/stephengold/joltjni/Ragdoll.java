@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EActivation;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
@@ -58,6 +59,31 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Add to the linear velocity of all bodies in the ragdoll.
+     *
+     * @param deltaV the desired change in velocity (meters per second in system
+     * coordinates, not {@code null}, unaffected)
+     */
+    public void addLinearVelocity(Vec3Arg deltaV) {
+        addLinearVelocity(deltaV, true);
+    }
+
+    /**
+     * Add to the linear velocity of all bodies in the ragdoll.
+     *
+     * @param deltaV the desired change in velocity (meters per second in system
+     * coordinates, not {@code null}, unaffected)
+     * @param lockBodies (default=true)
+     */
+    public void addLinearVelocity(Vec3Arg deltaV, boolean lockBodies) {
+        long ragdollVa = va();
+        float dx = deltaV.getX();
+        float dy = deltaV.getY();
+        float dz = deltaV.getZ();
+        addLinearVelocity(ragdollVa, dx, dy, dz, lockBodies);
+    }
 
     /**
      * Add bodies and constraints to the physics system and optionally activate
@@ -301,6 +327,9 @@ public class Ragdoll extends NonCopyable implements RefTarget {
     }
     // *************************************************************************
     // native methods
+
+    native static void addLinearVelocity(
+            long ragdollVa, float dx, float dy, float dz, boolean lockBodies);
 
     native static void addToPhysicsSystem(long ragdollVa, int ordinal);
 

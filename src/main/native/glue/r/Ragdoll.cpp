@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -47,6 +47,19 @@ IMPLEMENT_REF(Ragdoll,
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_RagdollRef_freeWithSystem
   (JNIEnv *pEnv, jclass clazz, jlong refVa, jobject) {
     Java_com_github_stephengold_joltjni_RagdollRef_free(pEnv, clazz, refVa);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Ragdoll
+ * Method:    addLinearVelocity
+ * Signature: (JFFFZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Ragdoll_addLinearVelocity
+  (JNIEnv *, jclass, jlong ragdollVa, jfloat dx, jfloat dy, jfloat dz,
+  jboolean lockBodies) {
+    Ragdoll * const pRagdoll = reinterpret_cast<Ragdoll *> (ragdollVa);
+    const Vec3 deltaV(dx, dy, dz);
+    pRagdoll->AddLinearVelocity(deltaV, lockBodies);
 }
 
 /*
