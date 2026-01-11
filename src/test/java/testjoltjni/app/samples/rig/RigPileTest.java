@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -72,7 +72,7 @@ public void Initialize()
 		// Load scene
 		PhysicsSceneRef scene=new PhysicsSceneRef();
 		if (!ObjectStreamIn.sReadObject((String)("Assets/") + sSceneName + ".bof", scene))
-			throw new RuntimeException("Failed to load scene");
+			FatalError("Failed to load scene");
 		for (BodyCreationSettings body : scene.getBodies())
 			body.setObjectLayer ( Layers.NON_MOVING);
 		scene.fixInvalidScales();
