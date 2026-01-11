@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -95,6 +95,33 @@ final public class Float3 {
     // new methods exposed
 
     /**
+     * Set all 3 components to specified values.
+     *
+     * @param x the desired X component
+     * @param y the desired Y component
+     * @param z the desired Z component
+     */
+    public void set(float x, float y, float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    /**
+     * Set all 3 components from the specified array.
+     *
+     * @param array the desired component values (not null, length&ge;3,
+     * unaffected)
+     */
+    public void set(float[] array) {
+        this.x = array[0];
+        this.y = array[1];
+        this.z = array[2];
+    }
+    // *************************************************************************
+    // ConstFloat3 methods
+
+    /**
      * Return the specified component. The vector is unaffected.
      *
      * @param index 0, 1, or 2
@@ -125,31 +152,6 @@ final public class Float3 {
         storeBuffer.put(x);
         storeBuffer.put(y);
         storeBuffer.put(z);
-    }
-
-    /**
-     * Set all 3 components to specified values.
-     *
-     * @param x the desired X component
-     * @param y the desired Y component
-     * @param z the desired Z component
-     */
-    public void set(float x, float y, float z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
-    /**
-     * Set all 3 components from the specified array.
-     *
-     * @param array the desired component values (not null, length&ge;3,
-     * unaffected)
-     */
-    public void set(float[] array) {
-        this.x = array[0];
-        this.y = array[1];
-        this.z = array[2];
     }
     // *************************************************************************
     // Object methods
