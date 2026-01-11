@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -86,8 +86,10 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Instantiate a box with the specified minimum and maximum coordinates.
      *
-     * @param minimum the desired minimum coordinates (not null, unaffected)
-     * @param maximum the desired maximum coordinates (not null, unaffected)
+     * @param minimum the desired minimum coordinates (not {@code null},
+     * unaffected)
+     * @param maximum the desired maximum coordinates (not {@code null},
+     * unaffected)
      */
     public AaBox(RVec3Arg minimum, RVec3Arg maximum) {
         float minX = minimum.x();
@@ -104,7 +106,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * Instantiate a cubic box with the specified center coordinates and half
      * extent.
      *
-     * @param center the desired center coordinates (not null, unaffected)
+     * @param center the desired center coordinates (not {@code null},
+     * unaffected)
      * @param halfExtent the desired half extent
      */
     public AaBox(Vec3Arg center, float halfExtent) {
@@ -118,8 +121,10 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Instantiate a box with the specified minimum and maximum coordinates.
      *
-     * @param minimum the desired minimum coordinates (not null, unaffected)
-     * @param maximum the desired maximum coordinates (not null, unaffected)
+     * @param minimum the desired minimum coordinates (not {@code null},
+     * unaffected)
+     * @param maximum the desired maximum coordinates (not {@code null},
+     * unaffected)
      */
     public AaBox(Vec3Arg minimum, Vec3Arg maximum) {
         float minX = minimum.getX();
@@ -137,7 +142,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Enlarge the current box to include the argument box.
      *
-     * @param includeBox the box to include (not null, unaffected)
+     * @param includeBox the box to include (not {@code null}, unaffected)
      */
     public void encapsulate(ConstAaBox includeBox) {
         long boxVa = va();
@@ -149,7 +154,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Enlarge the box to include the specified triangle.
      *
-     * @param triangle the triangle to include (not null, unaffected)
+     * @param triangle the triangle to include (not {@code null}, unaffected)
      */
     public void encapsulate(ConstTriangle triangle) {
         long boxVa = va();
@@ -161,7 +166,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Enlarge the box to include the specified location.
      *
-     * @param location the location to include (not null, unaffected)
+     * @param location the location to include (not {@code null}, unaffected)
      */
     public void encapsulate(Vec3Arg location) {
         long boxVa = va();
@@ -174,8 +179,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Enlarge the box to include the specified triangle.
      *
-     * @param vertices array of vertex locations (not null, unaffected)
-     * @param triangle the triangle to include (not null, unaffected)
+     * @param vertices array of vertex locations (not {@code null}, unaffected)
+     * @param triangle the triangle to include (not {@code null}, unaffected)
      */
     public void encapsulate(ConstVertexList vertices,
             ConstIndexedTriangle triangle) {
@@ -236,8 +241,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Alter the maximum coordinates. (native member: mMax)
      *
-     * @param max the desired maximum coordinate for each axis (not null,
-     * unaffected)
+     * @param max the desired maximum coordinate for each axis (not
+     * {@code null}, unaffected)
      */
     public void setMax(Vec3Arg max) {
         long boxVa = va();
@@ -250,8 +255,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Alter the minimum coordinates. (native member: mMin)
      *
-     * @param min the desired minimum coordinate for each axis (not null,
-     * unaffected)
+     * @param min the desired minimum coordinate for each axis (not
+     * {@code null}, unaffected)
      */
     public void setMin(Vec3Arg min) {
         long boxVa = va();
@@ -264,7 +269,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Move by the specified offset.
      *
-     * @param offset the amount to move (not null, unaffected)
+     * @param offset the amount to move (not {@code null}, unaffected)
      */
     public void translate(Vec3Arg offset) {
         long boxVa = va();
@@ -280,7 +285,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * Test whether the current box contains the argument box. The current box
      * is unaffected.
      *
-     * @param other the other box to check against (not null, unaffected)
+     * @param other the other box to check against (not {@code null},
+     * unaffected)
      *
      * @return {@code true} if contained, otherwise {@code false}
      */
@@ -296,7 +302,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Test whether the box contains the specified point. The box is unaffected.
      *
-     * @param point the point to test (not null, unaffected)
+     * @param point the point to test (not {@code null}, unaffected)
      *
      * @return {@code true} if contained, otherwise {@code false}
      */
@@ -330,7 +336,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
      * Locate the closest point on or in the box for the specified location. The
      * box is unaffected.
      *
-     * @param location the starting location (not null, unaffected)
+     * @param location the starting location (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
@@ -409,7 +415,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Get the squared distance between the box and the specified point.
      *
-     * @param point the point to measure from (not null, unaffected)
+     * @param point the point to measure from (not {@code null}, unaffected)
      *
      * @return the distance, or zero if {@code point} lies inside the box
      */
@@ -483,7 +489,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Check if this box overlaps with another box.
      *
-     * @param other the other box to check
+     * @param other the other box to check (not {@code null}, unaffected)
      *
      * @return {@code true} if they overlap, otherwise {@code false}
      */
@@ -499,7 +505,8 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Check if this box overlaps with a plane.
      *
-     * @param plane the {@code Plane} object to be checked
+     * @param plane the {@code Plane} object to be checked (not {@code null},
+     * unaffected)
      *
      * @return {@code true} if they overlap, otherwise {@code false}
      */
@@ -518,7 +525,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Return a scaled copy of the box. The current box is unaffected.
      *
-     * @param factors the scale factors to apply (not null, unaffected)
+     * @param factors the scale factors to apply (not {@code null}, unaffected)
      * @return a new object
      */
     @Override
@@ -536,7 +543,7 @@ final public class AaBox extends JoltPhysicsObject implements ConstAaBox {
     /**
      * Return a transformed copy of the box. The current box is unaffected.
      *
-     * @param matrix the transformation to apply (not null, unaffected)
+     * @param matrix the transformation to apply (not {@code null}, unaffected)
      * @return a new object
      */
     @Override

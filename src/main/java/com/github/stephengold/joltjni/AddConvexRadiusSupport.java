@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ public class AddConvexRadiusSupport extends JoltPhysicsObject {
     /**
      * Instantiate for the specified support function and convex radius.
      *
-     * @param support the support function to use (not null)
+     * @param support the support function to use (not {@code null})
      * @param convexRadius the desired convex radius
      */
     public AddConvexRadiusSupport(Support support, float convexRadius) {
@@ -50,7 +50,7 @@ public class AddConvexRadiusSupport extends JoltPhysicsObject {
     /**
      * Evaluate the augmented support function for the specified direction.
      *
-     * @param direction the direction to use (not null, unaffected)
+     * @param direction the direction to use (not {@code null}, unaffected)
      * @return a new offset vector
      */
     public Vec3 getSupport(Vec3Arg direction) {

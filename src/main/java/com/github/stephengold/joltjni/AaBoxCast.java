@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -87,7 +87,7 @@ final public class AaBoxCast extends JoltPhysicsObject {
     /**
      * Alter the box and its starting location. (native member: mBox)
      *
-     * @param box the desired extents and starting location (not null,
+     * @param box the desired extents and starting location (not {@code null},
      * unaffected)
      */
     public void setBox(ConstAaBox box) {

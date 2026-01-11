@@ -46,7 +46,7 @@ final public class StreamInWrapper extends StreamIn {
     /**
      * Open a {@code StringStream} for input.
      *
-     * @param data the underlying stream (not null)
+     * @param data the underlying stream (not {@code null})
      */
     public StreamInWrapper(StringStream data) {
         long dataVa = data.va();
@@ -100,7 +100,7 @@ final public class StreamInWrapper extends StreamIn {
     /**
      * Open a file for input.
      *
-     * @param fileName the name of the file to open (not null)
+     * @param fileName the name of the file to open (not {@code null})
      * @param streamMode the desired mode bits or-ed together
      * @return a new object, or {@code null} if the file wasn't opened
      * successfully
@@ -120,8 +120,8 @@ final public class StreamInWrapper extends StreamIn {
     /**
      * Read groups of 3 floats from the stream.
      *
-     * @param storeFloats storage for the values that will be read (not null,
-     * modified)
+     * @param storeFloats storage for the values that will be read (not
+     * {@code null}, modified)
      */
     public void readBytes(Float3[] storeFloats) {
         long streamVa = va();
@@ -136,8 +136,8 @@ final public class StreamInWrapper extends StreamIn {
     /**
      * Read 3 floats from the stream.
      *
-     * @param storeFloats storage for the values that were read (not null,
-     * modified)
+     * @param storeFloats storage for the values that will be read (not
+     * {@code null}, modified)
      */
     public void readFloat3(Float3 storeFloats) {
         long streamVa = va();
@@ -147,7 +147,7 @@ final public class StreamInWrapper extends StreamIn {
     }
 
     /**
-     * Read an integer from the stream.
+     * Read a 32-bit integer from the stream.
      *
      * @return the value that was read
      */

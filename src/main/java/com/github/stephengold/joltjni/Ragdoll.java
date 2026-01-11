@@ -101,7 +101,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
      * Drive the ragdoll to the specified pose by setting velocities.
      *
      * @param pose the desired pose
-     * @param time time to achieve the pose (in seconds)
+     * @param time the time interval for achieving the pose (in seconds)
      */
     public void driveToPoseUsingKinematics(SkeletonPose pose, float time) {
         driveToPoseUsingKinematics(pose, time, true);
@@ -111,7 +111,7 @@ public class Ragdoll extends NonCopyable implements RefTarget {
      * Drive the ragdoll to the specified pose by setting velocities.
      *
      * @param pose the desired pose
-     * @param time time to achieve the pose (in seconds)
+     * @param time the time interval for achieving the pose (in seconds)
      * @param lockBodies (default=true)
      */
     public void driveToPoseUsingKinematics(

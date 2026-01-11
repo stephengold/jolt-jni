@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -76,10 +76,10 @@ public class BodyCreationSettings
     /**
      * Instantiate cooked settings for the specified shape.
      *
-     * @param shape the desired shape (not null)
-     * @param loc the desired location (not null, unaffected)
-     * @param orient the desired orientation (not null, unaffected)
-     * @param motionType the desired motion type (not null)
+     * @param shape the desired shape (not {@code null})
+     * @param loc the desired location (not {@code null}, unaffected)
+     * @param orient the desired orientation (not {@code null}, unaffected)
+     * @param motionType the desired motion type (not {@code null})
      * @param objLayer the ID of the desired object layer (&ge;0)
      */
     public BodyCreationSettings(ConstShape shape, RVec3Arg loc, QuatArg orient,
@@ -95,10 +95,10 @@ public class BodyCreationSettings
     /**
      * Instantiate uncooked settings for the specified shape settings.
      *
-     * @param shapeSettings the desired shape settings (not null)
-     * @param loc the desired location (not null, unaffected)
-     * @param orient the desired orientation (not null, unaffected)
-     * @param motionType the desired motion type (not null)
+     * @param shapeSettings the desired shape settings (not {@code null})
+     * @param loc the desired location (not {@code null}, unaffected)
+     * @param orient the desired orientation (not {@code null}, unaffected)
+     * @param motionType the desired motion type (not {@code null})
      * @param objLayer the ID of the desired object layer
      */
     public BodyCreationSettings(ConstShapeSettings shapeSettings, RVec3Arg loc,
@@ -138,10 +138,10 @@ public class BodyCreationSettings
     /**
      * Instantiate settings for the specified shape reference.
      *
-     * @param shapeRef a reference to the desired shape (not null)
-     * @param loc the desired location (not null, unaffected)
-     * @param orient the desired orientation (not null, unaffected)
-     * @param motionType the desired motion type (not null)
+     * @param shapeRef a reference to the desired shape (not {@code null})
+     * @param loc the desired location (not {@code null}, unaffected)
+     * @param orient the desired orientation (not {@code null}, unaffected)
+     * @param motionType the desired motion type (not {@code null})
      * @param objLayer the ID of the desired object layer
      */
     public BodyCreationSettings(ShapeRef shapeRef, RVec3Arg loc,
@@ -204,7 +204,7 @@ public class BodyCreationSettings
      * Read the state of this object from the specified stream, excluding the
      * shape and group filter.
      *
-     * @param stream where to read objects from (not null)
+     * @param stream where to read objects from (not {@code null})
      */
     public void restoreBinaryState(StreamIn stream) {
         long bodySettingsVa = va();
@@ -292,7 +292,7 @@ public class BodyCreationSettings
      * Alter the (initial) angular velocity. (native member: mAngularVelocity)
      *
      * @param omega the desired angular velocity (radians per second in system
-     * coordinates, not null, unaffected, default=(0,0,0))
+     * coordinates, not {@code null}, unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setAngularVelocity(Vec3Arg omega) {
@@ -339,7 +339,7 @@ public class BodyCreationSettings
      * Alter the collision group to which the body will belong. (native member:
      * mCollisionGroup)
      *
-     * @param group the desired group (not null, unaffected)
+     * @param group the desired group (not {@code null}, unaffected)
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setCollisionGroup(ConstCollisionGroup group) {
@@ -456,7 +456,7 @@ public class BodyCreationSettings
      * Alter the (initial) linear velocity. (native member: mLinearVelocity)
      *
      * @param velocity the desired velocity (meters per second in system
-     * coordinates, not null, unaffected, default=(0,0,0))
+     * coordinates, not {@code null}, unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setLinearVelocity(Vec3Arg velocity) {
@@ -472,7 +472,7 @@ public class BodyCreationSettings
      * Alter the mass-properties override. (native member:
      * mMassPropertiesOverride)
      *
-     * @param properties the desired properties (not null, unaffected)
+     * @param properties the desired properties (not {@code null}, unaffected)
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setMassPropertiesOverride(
@@ -515,7 +515,8 @@ public class BodyCreationSettings
     /**
      * Alter the motion quality. (native member: mMotionQuality)
      *
-     * @param motionQuality the desired quality (not null, default=Discrete)
+     * @param motionQuality the desired quality (not {@code null},
+     * default=Discrete)
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setMotionQuality(EMotionQuality motionQuality) {
@@ -529,7 +530,7 @@ public class BodyCreationSettings
     /**
      * Alter the motion type. (native member: mMotionType)
      *
-     * @param motionType the desired type (not null, default=Dynamic)
+     * @param motionType the desired type (not {@code null}, default=Dynamic)
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setMotionType(EMotionType motionType) {
@@ -590,7 +591,8 @@ public class BodyCreationSettings
      * Alter how the mass-properties override will be used. (native member:
      * mOverrideMassProperties)
      *
-     * @param setting an enum value (not null, default=CalculateMassAndInertia)
+     * @param setting an enum value (not {@code null},
+     * default=CalculateMassAndInertia)
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setOverrideMassProperties(
@@ -622,8 +624,8 @@ public class BodyCreationSettings
      * Alter the (initial) location of the body's origin (which might not
      * coincide with its center of mass). (native member: mPosition)
      *
-     * @param location the desired location (in system coordinates, not null,
-     * unaffected, default=(0,0,0))
+     * @param location the desired location (in system coordinates, not
+     * {@code null}, unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setPosition(RVec3Arg location) {
@@ -654,8 +656,8 @@ public class BodyCreationSettings
      * Alter the (initial) orientation of the body's axes. (native member:
      * mRotation)
      *
-     * @param quat the desired rotation (relative to the system axes, not null,
-     * normalized, unaffected, default=(0,0,0,1))
+     * @param quat the desired rotation (relative to the system axes, not
+     * {@code null}, normalized, unaffected, default=(0,0,0,1))
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setRotation(QuatArg quat) {
@@ -690,7 +692,7 @@ public class BodyCreationSettings
      * Replace the shape settings and null out the shape. After invoking this
      * method, the body-creation settings will be in an "uncooked" state.
      *
-     * @param shapeSettings the desired shape settings (not null)
+     * @param shapeSettings the desired shape settings (not {@code null})
      * @return the modified settings, for chaining
      */
     public BodyCreationSettings setShapeSettings(
@@ -732,10 +734,11 @@ public class BodyCreationSettings
     /**
      * Read a settings object from the specified binary stream.
      *
-     * @param stream where to read objects (not null)
-     * @param shapeMap track multiple uses of shapes (not null)
-     * @param materialMap track multiple uses of physics materials (not null)
-     * @param filterMap track multiple uses of group filters (not null)
+     * @param stream where to read objects (not {@code null})
+     * @param shapeMap track multiple uses of shapes (not {@code null})
+     * @param materialMap track multiple uses of physics materials (not
+     * {@code null})
+     * @param filterMap track multiple uses of group filters (not {@code null})
      * @return a new object
      */
     public static BcsResult sRestoreWithChildren(
@@ -1042,7 +1045,7 @@ public class BodyCreationSettings
      * Return the motion quality. The settings are unaffected. (native member:
      * mMotionQuality)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EMotionQuality getMotionQuality() {
@@ -1057,7 +1060,7 @@ public class BodyCreationSettings
      * Return the motion type. The settings are unaffected. (native member:
      * mMotionType)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EMotionType getMotionType() {
@@ -1116,7 +1119,7 @@ public class BodyCreationSettings
      * Return how the mass-properties override will be used. The settings are
      * unaffected. (native member: mOverrideMassProperties)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EOverrideMassProperties getOverrideMassProperties() {
@@ -1254,7 +1257,7 @@ public class BodyCreationSettings
      * Write the state of this object to the specified stream, excluding the
      * shape, materials, and group filter. The settings are unaffected.
      *
-     * @param stream where to write objects (not null)
+     * @param stream where to write objects (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {
@@ -1267,7 +1270,7 @@ public class BodyCreationSettings
      * Write the state of this object to the specified stream. The settings are
      * unaffected.
      *
-     * @param stream where to write objects (not null)
+     * @param stream where to write objects (not {@code null})
      * @param shapeMap track multiple uses of shapes (may be null)
      * @param materialMap track multiple uses of physics materials (may be null)
      * @param filterMap track multiple uses of group filters (may be null)

@@ -112,7 +112,7 @@ final public class RagdollRef extends Ref {
      * Drive the ragdoll to the specified pose by setting velocities.
      *
      * @param pose the desired pose
-     * @param time time to achieve the pose (in seconds)
+     * @param time the time interval for achieving the pose (in seconds)
      */
     public void driveToPoseUsingKinematics(SkeletonPose pose, float time) {
         driveToPoseUsingKinematics(pose, time, true);
@@ -122,7 +122,7 @@ final public class RagdollRef extends Ref {
      * Drive the ragdoll to the specified pose by setting velocities.
      *
      * @param pose the desired pose
-     * @param time time to achieve the pose (in seconds)
+     * @param time the time interval for achieving the pose (in seconds)
      * @param lockBodies (default=true)
      */
     public void driveToPoseUsingKinematics(
@@ -185,9 +185,10 @@ final public class RagdollRef extends Ref {
     /**
      * Copy the low-level pose using a locking body interface.
      *
-     * @param storeRootOffset storage for the root offset (not null, modified)
-     * @param storeJointMatrices storage for the joint matrices (not null,
+     * @param storeRootOffset storage for the root offset (not {@code null},
      * modified)
+     * @param storeJointMatrices storage for the joint matrices (not
+     * {@code null}, modified)
      */
     public void getPose(RVec3 storeRootOffset, Mat44Array storeJointMatrices) {
         getPose(storeRootOffset, storeJointMatrices, true);
@@ -196,9 +197,10 @@ final public class RagdollRef extends Ref {
     /**
      * Copy the low-level pose.
      *
-     * @param storeRootOffset storage for the root offset (not null, modified)
-     * @param storeJointMatrices storage for the joint matrices (not null,
+     * @param storeRootOffset storage for the root offset (not {@code null},
      * modified)
+     * @param storeJointMatrices storage for the joint matrices (not
+     * {@code null}, modified)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
@@ -214,7 +216,7 @@ final public class RagdollRef extends Ref {
     /**
      * Copy the ragdoll's pose using the locking body interface.
      *
-     * @param storePose storage for the pose (not null, modified)
+     * @param storePose storage for the pose (not {@code null}, modified)
      */
     public void getPose(SkeletonPose storePose) {
         getPose(storePose, true);
@@ -223,7 +225,7 @@ final public class RagdollRef extends Ref {
     /**
      * Copy the ragdoll's pose.
      *
-     * @param storePose storage for the pose (not null, modified)
+     * @param storePose storage for the pose (not {@code null}, modified)
      * @param lockBodies true&rarr;use the locking body interface,
      * false&rarr;use the non-locking body interface
      */
@@ -237,9 +239,10 @@ final public class RagdollRef extends Ref {
      * Copy the transform of the ragdoll's root, using the locking body
      * interface. The ragdoll is unaffected.
      *
-     * @param storeLocation storage for the root location (not null, modified)
-     * @param storeOrientation storage for the root orientation (not null,
+     * @param storeLocation storage for the root location (not {@code null},
      * modified)
+     * @param storeOrientation storage for the root orientation (not
+     * {@code null}, modified)
      */
     public void getRootTransform(RVec3 storeLocation, Quat storeOrientation) {
         getRootTransform(storeLocation, storeOrientation, true);
@@ -248,9 +251,10 @@ final public class RagdollRef extends Ref {
     /**
      * Copy the transform of the ragdoll's root. The ragdoll is unaffected.
      *
-     * @param storeLocation storage for the root location (not null, modified)
-     * @param storeOrientation storage for the root orientation (not null,
+     * @param storeLocation storage for the root location (not {@code null},
      * modified)
+     * @param storeOrientation storage for the root orientation (not
+     * {@code null}, modified)
      * @param lockBodies {@code true} &rarr; use the locking body interface,
      * {@code false} &rarr; use the non-locking body interface (default=true)
      */
@@ -276,7 +280,7 @@ final public class RagdollRef extends Ref {
     /**
      * Alter the ragdoll's pose using the locking body interface.
      *
-     * @param pose the desired pose (not null, unaffected)
+     * @param pose the desired pose (not {@code null}, unaffected)
      */
     public void setPose(SkeletonPose pose) {
         setPose(pose, true);
@@ -285,7 +289,7 @@ final public class RagdollRef extends Ref {
     /**
      * Alter the ragdoll's pose.
      *
-     * @param pose the desired pose (not null, unaffected)
+     * @param pose the desired pose (not {@code null}, unaffected)
      * @param lockBodies true&rarr;use the locking body interface,
      * false&rarr;use the non-locking body interface
      */

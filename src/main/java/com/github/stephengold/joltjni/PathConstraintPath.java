@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -82,7 +82,7 @@ public class PathConstraintPath
     /**
      * Read a path from the specified binary stream.
      *
-     * @param stream where to read objects (not null)
+     * @param stream where to read objects (not {@code null})
      * @return a new object
      */
     public static PathResult sRestoreFromBinaryState(StreamIn stream) {
@@ -114,8 +114,8 @@ public class PathConstraintPath
      * Return the path amount of the location on the path that's closest to the
      * specified location. The path is unaffected.
      *
-     * @param location the input location (in system coordinates, not null,
-     * unaffected)
+     * @param location the input location (in system coordinates, not
+     * {@code null}, unaffected)
      * @param fractionHint where to start searching
      * @return the path amount (&ge;0)
      */
@@ -184,7 +184,7 @@ public class PathConstraintPath
     /**
      * Save the path to the specified binary stream. The path is unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {

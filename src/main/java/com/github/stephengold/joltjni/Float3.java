@@ -72,7 +72,7 @@ final public class Float3 {
     /**
      * Instantiate a copy of the specified vector.
      *
-     * @param rhs the vector to copy (not null, unaffected)
+     * @param rhs the vector to copy (not {@code null}, unaffected)
      */
     public Float3(Float3 rhs) {
         this.x = rhs.x;
@@ -83,7 +83,7 @@ final public class Float3 {
     /**
      * Instantiate from a buffer.
      *
-     * @param buffer the desired component values (not null, unaffected,
+     * @param buffer the desired component values (not {@code null}, unaffected,
      * capacity&ge;3)
      */
     public Float3(FloatBuffer buffer) {
@@ -110,7 +110,7 @@ final public class Float3 {
     /**
      * Set all 3 components from the specified array.
      *
-     * @param array the desired component values (not null, length&ge;3,
+     * @param array the desired component values (not {@code null}, length&ge;3,
      * unaffected)
      */
     public void set(float[] array) {
@@ -122,8 +122,8 @@ final public class Float3 {
     /**
      * Set all 3 components from the specified buffer.
      *
-     * @param buffer the desired component values (not null, length&ge;3,
-     * unaffected)
+     * @param buffer the desired component values (not {@code null},
+     * length&ge;3, unaffected)
      */
     public void set(FloatBuffer buffer) {
         this.x = buffer.get(0);
@@ -158,7 +158,7 @@ final public class Float3 {
      * Write all 3 components to the specified buffer and advance the buffer's
      * position by 3. The vector is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeBuffer the destination buffer (not {@code null})
      */
     public void put(FloatBuffer storeBuffer) {
         storeBuffer.put(x);
@@ -175,7 +175,7 @@ final public class Float3 {
      * Float3(0.0 0.0 0.0)
      * </pre>
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {
