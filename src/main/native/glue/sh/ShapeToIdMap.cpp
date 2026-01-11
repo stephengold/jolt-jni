@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
+#include "Jolt/Core/UnorderedMap.h"
 #include "Jolt/Physics/Collision/Shape/Shape.h"
 #include "auto/com_github_stephengold_joltjni_streamutils_ShapeToIdMap.h"
 #include "glue/glue.h"

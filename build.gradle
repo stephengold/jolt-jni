@@ -17,7 +17,8 @@ plugins {
 // or by -P options on the Gradle command line.
 
 ext {
-    joltTag = '5.5.0'
+    joltFork = 'stephengold'
+    joltTag = 'sg260110'
     downloadedJoltZip = "downloads/JoltPhysics-${joltTag}.zip"
     downloadedVhacdZip = 'downloads/v-hacd-4.1.0.zip'
 
@@ -554,8 +555,7 @@ tasks.withType(Sign).configureEach {
 // Register tasks to download ZIP archives:
 
 tasks.register('downloadJoltZip', Download) {
-    src "https://github.com/jrouwe/JoltPhysics/archive/refs/tags/v${joltTag}.zip"
-    //src "https://github.com/stephengold/JoltPhysics/archive/refs/tags/${joltTag}.zip"
+    src "https://github.com/${joltFork}/JoltPhysics/archive/refs/tags/${joltTag}.zip"
     dest file(downloadedJoltZip)
     overwrite false
 }
