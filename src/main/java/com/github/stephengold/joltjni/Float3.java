@@ -118,6 +118,18 @@ final public class Float3 {
         this.y = array[1];
         this.z = array[2];
     }
+
+    /**
+     * Set all 3 components from the specified buffer.
+     *
+     * @param buffer the desired component values (not null, length&ge;3,
+     * unaffected)
+     */
+    public void set(FloatBuffer buffer) {
+        this.x = buffer.get(0);
+        this.y = buffer.get(1);
+        this.z = buffer.get(2);
+    }
     // *************************************************************************
     // ConstFloat3 methods
 
