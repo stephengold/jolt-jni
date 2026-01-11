@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -149,20 +149,19 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_StreamInWrapper_i
 /*
  * Class:     com_github_stephengold_joltjni_StreamInWrapper
  * Method:    readFloat3
- * Signature: (J[F)V
+ * Signature: (JLjava/nio/FloatBuffer;)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StreamInWrapper_readFloat3
-  (JNIEnv *pEnv, jclass, jlong streamVa, jfloatArray data) {
+  (JNIEnv *pEnv, jclass, jlong streamVa, jobject buffer) {
     StreamInWrapper * const pWrapper
             = reinterpret_cast<StreamInWrapper *> (streamVa);
     Float3 result;
     pWrapper->ReadBytes((char *)&result, sizeof(result));
-    jboolean isCopy;
-    jfloat * const pData = pEnv->GetFloatArrayElements(data, &isCopy);
+    DIRECT_FLOAT_BUFFER(pEnv, buffer, pData, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
     pData[0] = result.x;
     pData[1] = result.y;
     pData[2] = result.z;
-    pEnv->ReleaseFloatArrayElements(data, pData, 0);
 }
 
 /*

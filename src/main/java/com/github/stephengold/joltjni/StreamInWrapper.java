@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.std.StringStream;
+import java.nio.FloatBuffer;
 
 /**
  * A wrapper around an {@code std::ifstream}.
@@ -124,9 +125,9 @@ final public class StreamInWrapper extends StreamIn {
      */
     public void readFloat3(Float3 storeFloats) {
         long streamVa = va();
-        float[] data = new float[3];
-        readFloat3(streamVa, data);
-        storeFloats.set(data);
+        FloatBuffer buffer = Temporaries.floatBuffer1.get();
+        readFloat3(streamVa, buffer);
+        storeFloats.set(buffer);
     }
 
     /**
@@ -165,7 +166,7 @@ final public class StreamInWrapper extends StreamIn {
 
     native private static boolean isEof(long streamVa);
 
-    native private static void readFloat3(long streamVa, float[] data);
+    native private static void readFloat3(long streamVa, FloatBuffer buffer);
 
     native private static int readInt(long streamVa);
 }
