@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -162,7 +162,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
         setUserData(triangleVa, value);
     }
     // *************************************************************************
-    // ConstTriangle methods.
+    // ConstTriangle methods
 
     /**
      * Return the triangle's material index. The triangle is unaffected. (native
