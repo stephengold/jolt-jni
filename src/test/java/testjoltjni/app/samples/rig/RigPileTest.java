@@ -44,7 +44,7 @@ final String sScenes[] =
 	"terrain2",
 };
 
-String sSceneName=buildType().equals("Debug")?"PerlinMesh":"Terrain1";
+String sSceneName=buildType().equals("Debug")?"PerlinMesh":"terrain1";
 int sPileSize=buildType().equals("Debug")?5:10;
 int sNumPilesPerAxis= buildType().equals("Debug")?2:4;
 List<RagdollRef>mRagdolls=new ArrayList<>();
