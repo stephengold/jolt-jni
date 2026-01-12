@@ -207,14 +207,14 @@ final public class StreamInWrapper extends StreamIn {
     /**
      * Read a vector from the stream.
      *
-     * @param storeFloats storage for the values that will be read (not
+     * @param storeVec storage for the value that will be read (not
      * {@code null}, modified)
      */
-    public void readVec3(Vec3 storeFloats) {
+    public void readVec3(Vec3 storeVec) {
         long streamVa = va();
         FloatBuffer buffer = Temporaries.floatBuffer1.get();
         readFloat3(streamVa, buffer);
-        storeFloats.set(buffer);
+        storeVec.set(buffer);
     }
 
     /**
