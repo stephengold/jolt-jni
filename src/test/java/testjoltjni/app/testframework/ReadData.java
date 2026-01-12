@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,8 @@ SOFTWARE.
 package testjoltjni.app.testframework;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import com.github.stephengold.joltjni.Jolt;
 
 /**
  * A Java translation of the Jolt-Physics {@code ReadData} utility.
@@ -35,33 +37,32 @@ public class ReadData {
      * Read the contents of the named binary file.
      *
      * @param inFileName the name of the file to read (not null)
-     * @return a new array containing file content
+     * @return a new, flipped, direct buffer containing file content
      */
-    public static float[] ReadData(String inFileName) {
-        int numFloats = 0;
+    public static ByteBuffer ReadData(String inFileName) {
+        int numBytes = 0;
         try (InputStream byteStream = new FileInputStream(inFileName); DataInputStream dataStream = new DataInputStream(byteStream)) {
             while (true) {
-                dataStream.readFloat();
-                ++numFloats;
+                dataStream.readByte();
+                ++numBytes;
             }
         } catch (IOException exception) {
             if (!(exception instanceof EOFException)) {
                 throw new RuntimeException(exception);
             }
         }
-        float[] data = new float[numFloats];
+        ByteBuffer data = Jolt.newDirectByteBuffer(numBytes);
 
-        int floatIndex = 0;
         try (InputStream byteStream = new FileInputStream(inFileName); DataInputStream dataStream = new DataInputStream(byteStream)) {
             while (true) {
-                data[floatIndex] = dataStream.readFloat();
-                ++floatIndex;
+                data.put(dataStream.readByte());
             }
         } catch (IOException exception) {
             if (!(exception instanceof EOFException)) {
                 throw new RuntimeException(exception);
             }
         }
+        data.flip();
 
         return data;
     }

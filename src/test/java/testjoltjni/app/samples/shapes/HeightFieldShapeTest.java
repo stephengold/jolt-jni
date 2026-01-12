@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.shapes;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import java.nio.ByteBuffer;
 import testjoltjni.app.samples.*;
 import testjoltjni.app.testframework.CameraState;
 import static com.github.stephengold.joltjni.Jolt.*;
@@ -113,11 +114,12 @@ public void Initialize()
 		final float cell_size = 0.5f;
 
 		// Get height samples
-		float[] data = ReadData("Assets/heightfield1.bin");
-		if (data.length !=  n * n)
+		ByteBuffer data = ReadData("Assets/heightfield1.bin");
+		if (data.limit() != Float.BYTES * n * n)
 			FatalError("Invalid file size");
 		mTerrainSize = n;
-		mTerrain=data;
+		mTerrain=new float[n * n];
+		data.asFloatBuffer(). get(mTerrain);
 
 		// Determine scale and offset
 		mTerrainOffset =new Vec3(-0.5f * cell_size * n, 0.0f, -0.5f * cell_size * n);
