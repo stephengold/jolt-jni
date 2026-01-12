@@ -222,6 +222,55 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     // new methods exposed
 
     /**
+     * Add the specified point to the hull.
+     *
+     * @param point the coordinates of the point to add (not {@code null},
+     * unaffected)
+     */
+    public void addPoint(Vec3Arg point) {
+        long settingsVa = va();
+        float x = point.getX();
+        float y = point.getY();
+        float z = point.getZ();
+        addPoint(settingsVa, x, y, z);
+    }
+
+    /**
+     * Copy one of the points to use when creating the hull. The settings are
+     * unaffected.
+     *
+     * @param index the index of the point to copy (&ge;0)
+     * @return a new location vector
+     */
+    public Vec3 copyPoint(int index) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getPoint(settingsVa, index, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Copy the points to use when creating the hull. The settings are
+     * unaffected. (native attribute: mPoints)
+     *
+     * @return a new array of new vectors
+     */
+    public Vec3[] copyPoints() {
+        long settingsVa = va();
+        int numPoints = countPoints(settingsVa);
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        Vec3[] result = new Vec3[numPoints];
+        for (int i = 0; i < numPoints; ++i) {
+            getPoint(settingsVa, i, storeFloats);
+            result[i] = new Vec3(storeFloats);
+        }
+
+        return result;
+    }
+
+    /**
      * Count the points to use when creating the hull. The settings are
      * unaffected.
      *
@@ -307,7 +356,22 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     }
 
     /**
-     * Replace any existing points with the specified ones.
+     * Replace the specified point with new coordinates.
+     *
+     * @param index which point to replace (&ge;0)
+     * @param point the desired coordinates (not {@code null}, unaffected)
+     */
+    public void setPoint(int index, Vec3Arg point) {
+        long settingsVa = va();
+        float x = point.getX();
+        float y = point.getY();
+        float z = point.getZ();
+        setPoint(settingsVa, index, x, y, z);
+    }
+
+    /**
+     * Replace any existing points with the specified ones. (native attribute:
+     * mPoints)
      *
      * @param points the array of desired point locations (not {@code null},
      * unaffected)
@@ -325,6 +389,9 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     // *************************************************************************
     // native private methods
 
+    native private static void addPoint(
+            long settingsVa, float x, float y, float z);
+
     native private static int countPoints(long settingsVa);
 
     native private static long createCopy(long originalVa);
@@ -340,6 +407,9 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
 
     native private static float getMaxErrorConvexRadius(long settingsVa);
 
+    native private static void getPoint(
+            long settingsVa, int index, FloatBuffer storeFloats);
+
     native private static void setHullTolerance(
             long settingsVa, float tolerance);
 
@@ -348,6 +418,9 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
 
     native private static void setMaxErrorConvexRadius(
             long settingsVa, float maxError);
+
+    native private static void setPoint(
+            long settingsVa, int index, float x, float y, float z);
 
     native private static void setPoints(
             long settingsVa, int numPoints, FloatBuffer buffer);

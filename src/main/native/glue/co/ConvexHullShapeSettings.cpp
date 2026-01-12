@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,6 +29,19 @@ SOFTWARE.
 #include "glue/glue.h"
 
 using namespace JPH;
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    addPoint
+ * Signature: (JFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_addPoint
+  (JNIEnv *, jclass, jlong settingsVa, jfloat x, jfloat y, jfloat z) {
+    ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    const Vec3 point(x, y, z);
+    pSettings->mPoints.push_back(point);
+}
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
@@ -127,6 +140,23 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSett
 
 /*
  * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    getPoint
+ * Signature: (JILjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_getPoint
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jint index, jobject storeFloats) {
+    const ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Vec3 result = pSettings->mPoints[index];
+    pFloats[0] = result.GetX();
+    pFloats[1] = result.GetY();
+    pFloats[2] = result.GetZ();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
  * Method:    setHullTolerance
  * Signature: (JF)V
  */
@@ -159,6 +189,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettin
     ConvexHullShapeSettings * const pSettings
             = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
     pSettings->mMaxErrorConvexRadius = maxError;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ConvexHullShapeSettings
+ * Method:    setPoint
+ * Signature: (JIFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ConvexHullShapeSettings_setPoint
+  (JNIEnv *, jclass, jlong settingsVa, jint index, jfloat x, jfloat y, jfloat z) {
+    ConvexHullShapeSettings * const pSettings
+            = reinterpret_cast<ConvexHullShapeSettings *> (settingsVa);
+    const Vec3 point(x, y, z);
+    pSettings->mPoints[index] = point;
 }
 
 /*
