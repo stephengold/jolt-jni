@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified collection of points.
      *
-     * @param points a collection of point locations (not null, unaffected)
+     * @param points a collection of point locations (not {@code null},
+     * unaffected)
      */
     public ConvexHullShapeSettings(Collection<?> points) {
         this(points, Jolt.cDefaultConvexRadius);
@@ -55,7 +56,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified parameters.
      *
-     * @param points a collection of point locations (not null, unaffected)
+     * @param points a collection of point locations (not {@code null},
+     * unaffected)
      * @param maxConvexRadius the desired maximum convex radius (&ge;0,
      * default=0.05)
      */
@@ -67,11 +69,12 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified parameters.
      *
-     * @param points a collection of point locations (not null, unaffected)
+     * @param points a collection of point locations (not {@code null},
+     * unaffected)
      * @param maxConvexRadius the desired maximum convex radius (&ge;0,
      * default=0.05)
-     * @param material the desired surface properties (not null, unaffected) or
-     * {@code null} for default properties (default=null)
+     * @param material the desired surface properties (not {@code null},
+     * unaffected) or {@code null} for default properties (default=null)
      */
     public ConvexHullShapeSettings(Collection<?> points,
             float maxConvexRadius, ConstPhysicsMaterial material) {
@@ -108,8 +111,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * Instantiate settings for the points in the specified buffer.
      *
      * @param numPoints the number of points (&ge;0)
-     * @param points a direct buffer containing point locations (not null,
-     * unaffected)
+     * @param points a direct buffer containing point locations (not
+     * {@code null}, unaffected)
      */
     public ConvexHullShapeSettings(int numPoints, FloatBuffer points) {
         this(numPoints, points, Jolt.cDefaultConvexRadius);
@@ -119,8 +122,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * Instantiate settings for the specified parameters.
      *
      * @param numPoints the number of points (&ge;0)
-     * @param points a direct buffer containing point locations (not null,
-     * unaffected)
+     * @param points a direct buffer containing point locations (not
+     * {@code null}, unaffected)
      * @param maxConvexRadius the desired maximum convex radius (&ge;0,
      * default=0.05)
      */
@@ -133,12 +136,12 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
      * Instantiate settings for the specified parameters.
      *
      * @param numPoints the number of points (&ge;0)
-     * @param points a direct buffer containing point locations (not null,
-     * unaffected)
+     * @param points a direct buffer containing point locations (not
+     * {@code null}, unaffected)
      * @param maxConvexRadius the desired maximum convex radius (&ge;0,
      * default=0.05)
-     * @param material the desired surface properties (not null, unaffected) or
-     * {@code null} for default properties (default=null)
+     * @param material the desired surface properties (not {@code null},
+     * unaffected) or {@code null} for default properties (default=null)
      */
     public ConvexHullShapeSettings(int numPoints, FloatBuffer points,
             float maxConvexRadius, ConstPhysicsMaterial material) {
@@ -162,7 +165,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified points.
      *
-     * @param points the array of desired point locations (not null, unaffected)
+     * @param points the array of desired point locations (not {@code null},
+     * unaffected)
      */
     public ConvexHullShapeSettings(Vec3Arg... points) {
         int numPoints = points.length;
@@ -184,7 +188,7 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified parameters.
      *
-     * @param points an array of point locations (not null, unaffected)
+     * @param points an array of point locations (not {@code null}, unaffected)
      * @param maxConvexRadius the desired maximum convex radius (&ge;0,
      * default=0.05)
      */
@@ -195,11 +199,11 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Instantiate settings for the specified parameters.
      *
-     * @param points an array of point locations (not null, unaffected)
+     * @param points an array of point locations (not {@code null}, unaffected)
      * @param maxConvexRadius the desired maximum convex radius (&ge;0,
      * default=0.05)
-     * @param material the desired surface properties (not null, unaffected) or
-     * {@code null} for default properties (default=null)
+     * @param material the desired surface properties (not {@code null},
+     * unaffected) or {@code null} for default properties (default=null)
      */
     public ConvexHullShapeSettings(Vec3Arg[] points, float maxConvexRadius,
             ConstPhysicsMaterial material) {
@@ -305,7 +309,8 @@ public class ConvexHullShapeSettings extends ConvexShapeSettings {
     /**
      * Replace any existing points with the specified ones.
      *
-     * @param points the array of desired point locations (not null, unaffected)
+     * @param points the array of desired point locations (not {@code null},
+     * unaffected)
      */
     public void setPoints(Vec3Arg... points) {
         int numPoints = points.length;

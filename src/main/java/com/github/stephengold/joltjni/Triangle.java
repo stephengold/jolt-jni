@@ -45,9 +45,12 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     /**
      * Instantiate a triangle from {@code Float3} locations.
      *
-     * @param v1 the desired location of the first vertex (not null, unaffected)
-     * @param v2 the desired location of the 2nd vertex (not null, unaffected)
-     * @param v3 the desired location of the 3rd vertex (not null, unaffected)
+     * @param v1 the desired location of the first vertex (not {@code null},
+     * unaffected)
+     * @param v2 the desired location of the 2nd vertex (not {@code null},
+     * unaffected)
+     * @param v3 the desired location of the 3rd vertex (not {@code null},
+     * unaffected)
      */
     public Triangle(Float3 v1, Float3 v2, Float3 v3) {
         this(v1, v2, v3, 0);
@@ -56,9 +59,12 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     /**
      * Instantiate the specified triangle
      *
-     * @param v1 the desired location of the first vertex (not null, unaffected)
-     * @param v2 the desired location of the 2nd vertex (not null, unaffected)
-     * @param v3 the desired location of the 3rd vertex (not null, unaffected)
+     * @param v1 the desired location of the first vertex (not {@code null},
+     * unaffected)
+     * @param v2 the desired location of the 2nd vertex (not {@code null},
+     * unaffected)
+     * @param v3 the desired location of the 3rd vertex (not {@code null},
+     * unaffected)
      * @param materialIndex the desired material index
      */
     public Triangle(Float3 v1, Float3 v2, Float3 v3, int materialIndex) {
@@ -68,9 +74,12 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     /**
      * Instantiate the specified triangle
      *
-     * @param v1 the desired location of the first vertex (not null, unaffected)
-     * @param v2 the desired location of the 2nd vertex (not null, unaffected)
-     * @param v3 the desired location of the 3rd vertex (not null, unaffected)
+     * @param v1 the desired location of the first vertex (not {@code null},
+     * unaffected)
+     * @param v2 the desired location of the 2nd vertex (not {@code null},
+     * unaffected)
+     * @param v3 the desired location of the 3rd vertex (not {@code null},
+     * unaffected)
      * @param materialIndex the desired material index
      * @param userData the desired user data
      */
@@ -95,9 +104,12 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     /**
      * Instantiate a triangle from {@code Float3} locations.
      *
-     * @param v1 the desired location of the first vertex (not null, unaffected)
-     * @param v2 the desired location of the 2nd vertex (not null, unaffected)
-     * @param v3 the desired location of the 3rd vertex (not null, unaffected)
+     * @param v1 the desired location of the first vertex (not {@code null},
+     * unaffected)
+     * @param v2 the desired location of the 2nd vertex (not {@code null},
+     * unaffected)
+     * @param v3 the desired location of the 3rd vertex (not {@code null},
+     * unaffected)
      */
     public Triangle(Vec3Arg v1, Vec3Arg v2, Vec3Arg v3) {
         this(v1, v2, v3, 0);
@@ -106,9 +118,12 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     /**
      * Instantiate the specified triangle
      *
-     * @param v1 the desired location of the first vertex (not null, unaffected)
-     * @param v2 the desired location of the 2nd vertex (not null, unaffected)
-     * @param v3 the desired location of the 3rd vertex (not null, unaffected)
+     * @param v1 the desired location of the first vertex (not {@code null},
+     * unaffected)
+     * @param v2 the desired location of the 2nd vertex (not {@code null},
+     * unaffected)
+     * @param v3 the desired location of the 3rd vertex (not {@code null},
+     * unaffected)
      * @param materialIndex the desired material index
      */
     public Triangle(Vec3Arg v1, Vec3Arg v2, Vec3Arg v3, int materialIndex) {
@@ -118,9 +133,12 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     /**
      * Instantiate the specified triangle
      *
-     * @param v1 the desired location of the first vertex (not null, unaffected)
-     * @param v2 the desired location of the 2nd vertex (not null, unaffected)
-     * @param v3 the desired location of the 3rd vertex (not null, unaffected)
+     * @param v1 the desired location of the first vertex (not {@code null},
+     * unaffected)
+     * @param v2 the desired location of the 2nd vertex (not {@code null},
+     * unaffected)
+     * @param v3 the desired location of the 3rd vertex (not {@code null},
+     * unaffected)
      * @param materialIndex the desired material index
      * @param userData the desired user data
      */
@@ -196,7 +214,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
      * Write the vertex locations to the specified buffer and advance the
      * buffer's position by 9. The triangle is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeBuffer the destination buffer (not {@code null})
      */
     @Override
     public void putVertices(FloatBuffer storeBuffer) {
