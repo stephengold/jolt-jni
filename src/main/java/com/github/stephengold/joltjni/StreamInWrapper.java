@@ -147,6 +147,21 @@ final public class StreamInWrapper extends StreamIn {
     }
 
     /**
+     * Read indexed triangles from the stream.
+     *
+     * @param storeResult storage for the values that will be read (not
+     * {@code null}, modified)
+     */
+    public void readIndexedTriangles(IndexedTriangleNoMaterial[] storeResult) {
+        long streamVa = va();
+        int numTriangles = storeResult.length;
+        for (int i = 0; i < numTriangles; ++i) {
+            long storeTriangleVa = storeResult[i].va();
+            readTriangle(streamVa, storeTriangleVa);
+        }
+    }
+
+    /**
      * Read a 32-bit integer from the stream.
      *
      * @return the value that was read
@@ -157,6 +172,49 @@ final public class StreamInWrapper extends StreamIn {
         int result = readInt(streamVa);
 
         return result;
+    }
+
+    /**
+     * Read matrices from the stream.
+     *
+     * @param storeResult storage for the values that will be read (not
+     * {@code null}, modified)
+     */
+    public void readMatrices(Mat44[] storeResult) {
+        long streamVa = va();
+        int numMats = storeResult.length;
+        for (int i = 0; i < numMats; ++i) {
+            long storeMatrixVa = storeResult[i].va();
+            readMat44(streamVa, storeMatrixVa);
+        }
+    }
+
+    /**
+     * Read soft-body skinning weights from the stream.
+     *
+     * @param storeResult storage for the values that will be read (not
+     * {@code null}, modified)
+     */
+    public void readSkinWeights(SkinWeight[] storeResult) {
+        long streamVa = va();
+        int numMats = storeResult.length;
+        for (int i = 0; i < numMats; ++i) {
+            long storeWeightVa = storeResult[i].va();
+            readMat44(streamVa, storeWeightVa);
+        }
+    }
+
+    /**
+     * Read 3 floats from the stream.
+     *
+     * @param storeFloats storage for the values that will be read (not
+     * {@code null}, modified)
+     */
+    public void readVec3(Vec3 storeFloats) {
+        long streamVa = va();
+        FloatBuffer buffer = Temporaries.floatBuffer1.get();
+        readFloat3(streamVa, buffer);
+        storeFloats.set(buffer);
     }
 
     /**
@@ -185,5 +243,16 @@ final public class StreamInWrapper extends StreamIn {
 
     native private static void readFloat3(long streamVa, FloatBuffer buffer);
 
+    native private static void readHairSkinWeight(
+            long streamVa, long storeWeightVa);
+
     native private static int readInt(long streamVa);
+
+    native private static void readMat44(long streamVa, long storeMatrixVa);
+
+    native private static void readSkinWeight(
+            long streamVa, long storeWeightVa);
+
+    native private static void readTriangle(
+            long streamVa, long storeTriangleVa);
 }

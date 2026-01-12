@@ -25,6 +25,10 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Core/StreamWrapper.h"
+#include "Jolt/Geometry/IndexedTriangle.h"
+#include "Jolt/Physics/Hair/HairSettings.h"
+#include "Jolt/Physics/SoftBody/SoftBodySharedSettings.h"
+
 #include "auto/com_github_stephengold_joltjni_StreamInWrapper.h"
 #include "glue/glue.h"
 #include <fstream>
@@ -166,6 +170,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StreamInWrapper_readF
 
 /*
  * Class:     com_github_stephengold_joltjni_StreamInWrapper
+ * Method:    readHairSkinWeight
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StreamInWrapper_readHairSkinWeight
+  (JNIEnv *, jclass, jlong streamVa, jlong storeWeightVa) {
+    StreamInWrapper * const pWrapper
+            = reinterpret_cast<StreamInWrapper *> (streamVa);
+    HairSettings::SkinWeight * const pResult
+            = reinterpret_cast<HairSettings::SkinWeight *> (storeWeightVa);
+    pWrapper->ReadBytes((char *)pResult, sizeof(*pResult));
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StreamInWrapper
  * Method:    readInt
  * Signature: (J)I
  */
@@ -176,4 +194,45 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_StreamInWrapper_readI
     jint result;
     pWrapper->ReadBytes((char *)&result, sizeof(result));
     return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StreamInWrapper
+ * Method:    readMat44
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StreamInWrapper_readMat44
+  (JNIEnv *, jclass, jlong streamVa, jlong storeMatrixVa) {
+    StreamInWrapper * const pWrapper
+            = reinterpret_cast<StreamInWrapper *> (streamVa);
+    Mat44 * const pResult = reinterpret_cast<Mat44 *> (storeMatrixVa);
+    pWrapper->ReadBytes((char *)pResult, sizeof(*pResult));
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StreamInWrapper
+ * Method:    readSkinWeight
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StreamInWrapper_readSkinWeight
+  (JNIEnv *, jclass, jlong streamVa, jlong storeWeightVa) {
+    StreamInWrapper * const pWrapper
+            = reinterpret_cast<StreamInWrapper *> (streamVa);
+    SoftBodySharedSettings::SkinWeight * const pResult
+            = reinterpret_cast<SoftBodySharedSettings::SkinWeight *> (storeWeightVa);
+    pWrapper->ReadBytes((char *)pResult, sizeof(*pResult));
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_StreamInWrapper
+ * Method:    readTriangle
+ * Signature: (JJ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_StreamInWrapper_readTriangle
+  (JNIEnv *, jclass, jlong streamVa, jlong storeTriangleVa) {
+    StreamInWrapper * const pWrapper
+            = reinterpret_cast<StreamInWrapper *> (streamVa);
+    IndexedTriangleNoMaterial * const pResult
+            = reinterpret_cast<IndexedTriangleNoMaterial *> (storeTriangleVa);
+    pWrapper->ReadBytes((char *)pResult, sizeof(*pResult));
 }
