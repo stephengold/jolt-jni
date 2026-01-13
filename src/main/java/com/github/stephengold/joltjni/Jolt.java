@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,7 @@ import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.nio.LongBuffer;
 import java.nio.ShortBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
@@ -527,6 +528,26 @@ final public class Jolt {
         assert result.capacity() == numInts : result.capacity();
         assert result.isDirect();
         assert result.limit() == numInts : result.limit();
+        assert result.position() == 0 : result.position();
+        return result;
+    }
+
+    /**
+     * Create a direct {@code LongBuffer} with native byte order and the
+     * specified capacity.
+     *
+     * @param numLongs the desired capacity (in longs)
+     * @return a new direct buffer, zeroed and rewound but not flipped
+     */
+    public static LongBuffer newDirectLongBuffer(int numLongs) {
+        ByteBuffer byteBuffer
+                = ByteBuffer.allocateDirect(numLongs * Long.BYTES);
+        byteBuffer.order(ByteOrder.nativeOrder());
+        LongBuffer result = byteBuffer.asLongBuffer();
+
+        assert result.capacity() == numLongs : result.capacity();
+        assert result.isDirect();
+        assert result.limit() == numLongs : result.limit();
         assert result.position() == 0 : result.position();
         return result;
     }
