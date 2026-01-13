@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -55,10 +55,10 @@ public void Initialize()
 		float z1 = section_size * (z - 0.5f * num_sections);
 		float z2 = z1 + section_size;
 
-		Float3 v1 =new Float3(-100.0f, 0, z1);
-		Float3 v2 =new Float3(100.0f, 0, z1);
-		Float3 v3 =new Float3(-100.0f, 0, z2);
-		Float3 v4 =new Float3(100.0f, 0, z2);
+		ConstFloat3 v1 =new Float3(-100.0f, 0, z1);
+		ConstFloat3 v2 =new Float3(100.0f, 0, z1);
+		ConstFloat3 v3 =new Float3(-100.0f, 0, z2);
+		ConstFloat3 v4 =new Float3(100.0f, 0, z2);
 
 		triangles.add(new Triangle(v1, v3, v4, z));
 		triangles.add(new Triangle(v1, v4, v2, z));

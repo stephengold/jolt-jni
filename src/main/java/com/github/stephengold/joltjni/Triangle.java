@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstTriangle;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -43,7 +44,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     }
 
     /**
-     * Instantiate a triangle from {@code Float3} locations.
+     * Instantiate a triangle from {@code ConstFloat3} locations.
      *
      * @param v1 the desired location of the first vertex (not {@code null},
      * unaffected)
@@ -52,7 +53,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
      * @param v3 the desired location of the 3rd vertex (not {@code null},
      * unaffected)
      */
-    public Triangle(Float3 v1, Float3 v2, Float3 v3) {
+    public Triangle(ConstFloat3 v1, ConstFloat3 v2, ConstFloat3 v3) {
         this(v1, v2, v3, 0);
     }
 
@@ -67,7 +68,8 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
      * unaffected)
      * @param materialIndex the desired material index
      */
-    public Triangle(Float3 v1, Float3 v2, Float3 v3, int materialIndex) {
+    public Triangle(
+            ConstFloat3 v1, ConstFloat3 v2, ConstFloat3 v3, int materialIndex) {
         this(v1, v2, v3, materialIndex, 0);
     }
 
@@ -83,10 +85,19 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
      * @param materialIndex the desired material index
      * @param userData the desired user data
      */
-    public Triangle(
-            Float3 v1, Float3 v2, Float3 v3, int materialIndex, int userData) {
-        long triangleVa = createTriangle(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z,
-                v3.x, v3.y, v3.z, materialIndex, userData);
+    public Triangle(ConstFloat3 v1, ConstFloat3 v2, ConstFloat3 v3,
+            int materialIndex, int userData) {
+        float v1x = v1.x();
+        float v1y = v1.y();
+        float v1z = v1.z();
+        float v2x = v2.x();
+        float v2y = v2.y();
+        float v2z = v2.z();
+        float v3x = v3.x();
+        float v3y = v3.y();
+        float v3z = v3.z();
+        long triangleVa = createTriangle(v1x, v1y, v1z, v2x, v2y, v2z,
+                v3x, v3y, v3z, materialIndex, userData);
         setVirtualAddress(triangleVa, () -> free(triangleVa));
     }
 

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -75,10 +75,10 @@ static MeshShapeSettings sCreateMesh()
 			float x2 = x1 + cell_size;
 			float z2 = z1 + cell_size;
 
-			Float3 v1 =new Float3(x1, heights[x][z], z1);
-			Float3 v2 =new Float3(x2, heights[x + 1][z], z1);
-			Float3 v3 =new Float3(x1, heights[x][z + 1], z2);
-			Float3 v4 =new Float3(x2, heights[x + 1][z + 1], z2);
+			ConstFloat3 v1 =new Float3(x1, heights[x][z], z1);
+			ConstFloat3 v2 =new Float3(x2, heights[x + 1][z], z1);
+			ConstFloat3 v3 =new Float3(x1, heights[x][z + 1], z2);
+			ConstFloat3 v4 =new Float3(x2, heights[x + 1][z + 1], z2);
 
 			int material_index = (int)(Vec3.sum(new Vec3(v1) ,new Vec3(v2) ,new Vec3(v3) ,new Vec3(v4)).length() / 4.0f / cell_size);
 			max_material_index = Math.max(max_material_index, material_index);

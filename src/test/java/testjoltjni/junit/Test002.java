@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -45,6 +45,7 @@ import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EMotionQuality;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
 import org.junit.Assert;
@@ -208,7 +209,7 @@ public class Test002 {
                 double sinX = Math.sin(x * 50. / n);
                 double cosZ = Math.cos(z * 50. / n);
                 float height = (float) (sinX * cosZ);
-                Float3 vertex = new Float3(
+                ConstFloat3 vertex = new Float3(
                         cellSize * x, maxHeight * height, cellSize * z);
                 result.set(z * (n + 1) + x, vertex);
             }

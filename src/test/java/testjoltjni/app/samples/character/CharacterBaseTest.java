@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -492,7 +492,7 @@ public void Initialize()
 
 		// Create a half cylinder with caps for testing contact point limit
 		{
-			List<Float3> vertices=new ArrayList<>();
+			List<ConstFloat3> vertices=new ArrayList<>();
 			IndexedTriangleList triangles=new IndexedTriangleList();
 
 			// The half cylinder
@@ -536,7 +536,7 @@ public void Initialize()
 
 		// Create a box made out of polygons (character should not get stuck behind back facing side)
 		{
-			Float3[] vertices = {
+			ConstFloat3[] vertices = {
 				new Float3(-1,  1, -1),
 				new Float3( 1,  1, -1),
 				new Float3( 1,  1,  1),

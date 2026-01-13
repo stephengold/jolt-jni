@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,13 @@ SOFTWARE.
 package com.github.stephengold.joltjni.operator;
 
 import com.github.stephengold.joltjni.Color;
-import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.Mat44;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.readonly.ConstColor;
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
@@ -274,10 +274,10 @@ final public class Op {
      * @param right the 2nd vector (not null, unaffected)
      * @return a new vector
      */
-    public static RVec3 plus(RVec3Arg left, Float3 right) {
-        double xx = left.xx() + right.x;
-        double yy = left.yy() + right.y;
-        double zz = left.zz() + right.z;
+    public static RVec3 plus(RVec3Arg left, ConstFloat3 right) {
+        double xx = left.xx() + right.x();
+        double yy = left.yy() + right.y();
+        double zz = left.zz() + right.z();
         RVec3 result = new RVec3(xx, yy, zz);
 
         return result;

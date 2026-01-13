@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import java.nio.FloatBuffer;
 
 /**
@@ -28,7 +29,7 @@ import java.nio.FloatBuffer;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-final public class Float3 {
+final public class Float3 implements ConstFloat3 {
     // *************************************************************************
     // fields
 
@@ -74,10 +75,10 @@ final public class Float3 {
      *
      * @param rhs the vector to copy (not {@code null}, unaffected)
      */
-    public Float3(Float3 rhs) {
-        this.x = rhs.x;
-        this.y = rhs.y;
-        this.z = rhs.z;
+    public Float3(ConstFloat3 rhs) {
+        this.x = rhs.x();
+        this.y = rhs.y();
+        this.z = rhs.z();
     }
 
     /**
@@ -141,6 +142,7 @@ final public class Float3 {
      * component if index=2
      * @throws IllegalArgumentException if index is not 0, 1, or 2
      */
+    @Override
     public float get(int index) {
         switch (index) {
             case 0:
@@ -160,10 +162,41 @@ final public class Float3 {
      *
      * @param storeBuffer the destination buffer (not {@code null})
      */
+    @Override
     public void put(FloatBuffer storeBuffer) {
         storeBuffer.put(x);
         storeBuffer.put(y);
         storeBuffer.put(z);
+    }
+
+    /**
+     * Return the first (X) component. The vector is unaffected.
+     *
+     * @return the component value
+     */
+    @Override
+    public float x() {
+        return x;
+    }
+
+    /**
+     * Return the 2nd (Y) component. The vector is unaffected.
+     *
+     * @return the component value
+     */
+    @Override
+    public float y() {
+        return y;
+    }
+
+    /**
+     * Return the 3rd (Z) component. The vector is unaffected.
+     *
+     * @return the component value
+     */
+    @Override
+    public float z() {
+        return z;
     }
     // *************************************************************************
     // Object methods

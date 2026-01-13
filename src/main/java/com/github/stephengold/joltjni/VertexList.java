@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstVertexList;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -69,7 +70,7 @@ final public class VertexList implements ConstVertexList {
      *
      * @param location the vertex to append (not null, unaffected)
      */
-    public void pushBack(Float3 location) {
+    public void pushBack(ConstFloat3 location) {
         int numElements = size();
         resize(numElements + 1);
         set(numElements, location);
@@ -125,8 +126,8 @@ final public class VertexList implements ConstVertexList {
      * @param vertexIndex an index in the list (&ge;0, &lt;size)
      * @param location the data to store (not null, unaffected)
      */
-    public void set(int vertexIndex, Float3 location) {
-        set(vertexIndex, location.x, location.y, location.z);
+    public void set(int vertexIndex, ConstFloat3 location) {
+        set(vertexIndex, location.x(), location.y(), location.z());
     }
 
     /**

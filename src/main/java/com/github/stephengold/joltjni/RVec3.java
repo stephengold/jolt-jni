@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.operator.Op;
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
@@ -100,14 +101,14 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
-     * Instantiate from a {@code Float3}.
+     * Instantiate from a {@code ConstFloat3}.
      *
      * @param float3 the desired component values (not null, unaffected)
      */
-    public RVec3(Float3 float3) {
-        this.xx = float3.x;
-        this.yy = float3.y;
-        this.zz = float3.z;
+    public RVec3(ConstFloat3 float3) {
+        this.xx = float3.x();
+        this.yy = float3.y();
+        this.zz = float3.z();
     }
 
     /**

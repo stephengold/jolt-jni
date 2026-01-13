@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.Mat44Arg;
 import com.github.stephengold.joltjni.readonly.QuatArg;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
@@ -388,10 +389,10 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * @param factors the amount to scale each axis (not null, unaffected)
      * @return a new matrix
      */
-    public static Mat44 sScale(Float3 factors) {
-        float sx = factors.x;
-        float sy = factors.y;
-        float sz = factors.z;
+    public static Mat44 sScale(ConstFloat3 factors) {
+        float sx = factors.x();
+        float sy = factors.y();
+        float sz = factors.z();
         long matrixVa = createScale(sx, sy, sz);
         Mat44 result = new Mat44(matrixVa, true);
 

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstSphere;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -60,8 +61,11 @@ public class Sphere extends JoltPhysicsObject implements ConstSphere {
      * unaffected)
      * @param radius the desired radius
      */
-    public Sphere(Float3 center, float radius) {
-        long sphereVa = create(center.x, center.y, center.z, radius);
+    public Sphere(ConstFloat3 center, float radius) {
+        float x = center.x();
+        float y = center.y();
+        float z = center.z();
+        long sphereVa = create(x, y, z, radius);
         setVirtualAddress(sphereVa, () -> free(sphereVa));
     }
 

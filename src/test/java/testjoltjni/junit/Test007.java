@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,6 +68,7 @@ import com.github.stephengold.joltjni.VertexList;
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
 import com.github.stephengold.joltjni.enumerate.EShapeType;
 import com.github.stephengold.joltjni.readonly.ConstBoxShapeSettings;
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstTriangle;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -307,10 +308,10 @@ public class Test007 {
 
         testMeshDefaults(shape);
 
-        Float3 v0 = new Float3(1f, 0f, 1f);
-        Float3 v1 = new Float3(1f, 0f, -1f);
-        Float3 v2 = new Float3(-1f, 0f, 1f);
-        Float3 v3 = new Float3(-1f, 0f, -1f);
+        ConstFloat3 v0 = new Float3(1f, 0f, 1f);
+        ConstFloat3 v1 = new Float3(1f, 0f, -1f);
+        ConstFloat3 v2 = new Float3(-1f, 0f, 1f);
+        ConstFloat3 v3 = new Float3(-1f, 0f, -1f);
         ConstTriangle tri1 = new Triangle(v0, v2, v3);
         ConstTriangle tri2 = new Triangle(v3, v1, v0);
         List<ConstTriangle> list = new ArrayList<>(2);

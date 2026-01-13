@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,6 @@ package testjoltjni;
 
 import com.github.stephengold.joltjni.BroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.BroadPhaseLayerInterfaceTable;
-import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.JoltPhysicsObject;
 import com.github.stephengold.joltjni.ObjectLayerPairFilter;
@@ -33,6 +32,7 @@ import com.github.stephengold.joltjni.ObjectVsBroadPhaseLayerFilterTable;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstColor;
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
@@ -231,7 +231,7 @@ final public class TestUtils {
     }
 
     /**
-     * Verify the components of a {@code Float3} to within some tolerance.
+     * Verify the components of a {@code ConstFloat3} to within some tolerance.
      *
      * @param x the expected X component
      * @param y the expected Y component
@@ -240,10 +240,10 @@ final public class TestUtils {
      * @param tolerance the allowable difference for each component (&ge;0)
      */
     public static void assertEquals(
-            float x, float y, float z, Float3 actual, float tolerance) {
-        Assert.assertEquals("x component", x, actual.x, tolerance);
-        Assert.assertEquals("y component", y, actual.y, tolerance);
-        Assert.assertEquals("z component", z, actual.z, tolerance);
+            float x, float y, float z, ConstFloat3 actual, float tolerance) {
+        Assert.assertEquals("x component", x, actual.x(), tolerance);
+        Assert.assertEquals("y component", y, actual.y(), tolerance);
+        Assert.assertEquals("z component", z, actual.z(), tolerance);
     }
 
     /**

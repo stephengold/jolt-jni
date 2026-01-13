@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstVertex;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
@@ -91,11 +92,11 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
      * default=(0,0,0))
      * @return the modified settings, for chaining
      */
-    public Vertex setPosition(Float3 location) {
+    public Vertex setPosition(ConstFloat3 location) {
         long vertexVa = va();
-        float x = location.x;
-        float y = location.y;
-        float z = location.z;
+        float x = location.x();
+        float y = location.y();
+        float z = location.z();
         setPosition(vertexVa, x, y, z);
 
         return this;
@@ -140,11 +141,11 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
      * unaffected default=(0,0,0))
      * @return the modified settings, for chaining
      */
-    public Vertex setVelocity(Float3 velocity) {
+    public Vertex setVelocity(ConstFloat3 velocity) {
         long vertexVa = va();
-        float vx = velocity.x;
-        float vy = velocity.y;
-        float vz = velocity.z;
+        float vx = velocity.x();
+        float vy = velocity.y();
+        float vz = velocity.z();
         setVelocity(vertexVa, vx, vy, vz);
 
         return this;

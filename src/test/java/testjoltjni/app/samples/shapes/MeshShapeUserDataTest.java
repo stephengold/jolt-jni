@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,10 +54,10 @@ public void Initialize()
 			float x2 = x1 + 10.0f;
 			float z2 = z1 + 10.0f;
 
-			Float3 v1 =new Float3(x1, 0, z1);
-			Float3 v2 =new Float3(x2, 0, z1);
-			Float3 v3 =new Float3(x1, 0, z2);
-			Float3 v4 =new Float3(x2, 0, z2);
+			ConstFloat3 v1 =new Float3(x1, 0, z1);
+			ConstFloat3 v2 =new Float3(x2, 0, z1);
+			ConstFloat3 v3 =new Float3(x1, 0, z2);
+			ConstFloat3 v4 =new Float3(x2, 0, z2);
 
 			triangles[random.nextInt() & 1].add(new Triangle(v1, v3, v4, 0, user_data++));
 			triangles[random.nextInt() & 1].add(new Triangle(v1, v4, v2, 0, user_data++));

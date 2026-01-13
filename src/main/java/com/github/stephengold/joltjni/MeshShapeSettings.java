@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EShapeSubType;
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstTriangle;
 import com.github.stephengold.joltjni.readonly.ConstVertexList;
 import java.nio.FloatBuffer;
@@ -50,11 +51,12 @@ public class MeshShapeSettings extends ShapeSettings {
      * @param vertices the array of vertices (not null, unaffected)
      * @param indices the list of triangles (not null, unaffected)
      */
-    public MeshShapeSettings(Float3[] vertices, IndexedTriangleList indices) {
+    public MeshShapeSettings(
+            ConstFloat3[] vertices, IndexedTriangleList indices) {
         int numVertices = vertices.length;
         int numFloats = 3 * numVertices;
         FloatBuffer vBuffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (Float3 vertex : vertices) {
+        for (ConstFloat3 vertex : vertices) {
             vertex.put(vBuffer);
         }
         long indicesVa = indices.va();
@@ -69,11 +71,12 @@ public class MeshShapeSettings extends ShapeSettings {
      * @param vertexArray the array of vertices (not null, unaffected)
      * @param itArray the array of triangles (not null, unaffected)
      */
-    public MeshShapeSettings(Float3[] vertexArray, IndexedTriangle... itArray) {
+    public MeshShapeSettings(
+            ConstFloat3[] vertexArray, IndexedTriangle... itArray) {
         int numVertices = vertexArray.length;
         int numFloats = 3 * numVertices;
         FloatBuffer vBuffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (Float3 vertex : vertexArray) {
+        for (ConstFloat3 vertex : vertexArray) {
             vertex.put(vBuffer);
         }
 
@@ -132,11 +135,11 @@ public class MeshShapeSettings extends ShapeSettings {
      * @param indices the list of triangles (not null, unaffected)
      */
     public MeshShapeSettings(
-            List<Float3> vertices, IndexedTriangleList indices) {
+            List<ConstFloat3> vertices, IndexedTriangleList indices) {
         int numVertices = vertices.size();
         int numFloats = 3 * numVertices;
         FloatBuffer vBuffer = Jolt.newDirectFloatBuffer(numFloats);
-        for (Float3 vertex : vertices) {
+        for (ConstFloat3 vertex : vertices) {
             vertex.put(vBuffer);
         }
         long indicesVa = indices.va();
@@ -256,9 +259,12 @@ public class MeshShapeSettings extends ShapeSettings {
      *
      * @param vertex the location of the vertex to add (not null, unaffected)
      */
-    public void addTriangleVertex(Float3 vertex) {
+    public void addTriangleVertex(ConstFloat3 vertex) {
         long settingsVa = va();
-        addTriangleVertex(settingsVa, vertex.x, vertex.y, vertex.z);
+        float x = vertex.x();
+        float y = vertex.y();
+        float z = vertex.z();
+        addTriangleVertex(settingsVa, x, y, z);
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@ SOFTWARE.
 package testjoltjni.app.samples.general;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.*;
+import com.github.stephengold.joltjni.readonly.*;
 import java.util.*;
 import testjoltjni.app.samples.*;
 import static com.github.stephengold.joltjni.Jolt.*;
@@ -50,10 +51,10 @@ public void Initialize()
 			float x2 = x1 + 0.1f;
 			float z2 = z1 + 0.1f;
 
-			Float3 v1 =new Float3(x1, cPerturbance * perlinNoise3(x1, 0, z1, 256, 256, 256), z1);
-			Float3 v2 =new Float3(x2, cPerturbance * perlinNoise3(x2, 0, z1, 256, 256, 256), z1);
-			Float3 v3 =new Float3(x1, cPerturbance * perlinNoise3(x1, 0, z2, 256, 256, 256), z2);
-			Float3 v4 =new Float3(x2, cPerturbance * perlinNoise3(x2, 0, z2, 256, 256, 256), z2);
+			ConstFloat3 v1 =new Float3(x1, cPerturbance * perlinNoise3(x1, 0, z1, 256, 256, 256), z1);
+			ConstFloat3 v2 =new Float3(x2, cPerturbance * perlinNoise3(x2, 0, z1, 256, 256, 256), z1);
+			ConstFloat3 v3 =new Float3(x1, cPerturbance * perlinNoise3(x1, 0, z2, 256, 256, 256), z2);
+			ConstFloat3 v4 =new Float3(x2, cPerturbance * perlinNoise3(x2, 0, z2, 256, 256, 256), z2);
 
 			triangles.add(new Triangle(v1, v3, v4, 0));
 			triangles.add(new Triangle(v1, v4, v2, 0));
