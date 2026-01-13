@@ -79,7 +79,7 @@ final public class RVec3 implements RVec3Arg {
     /**
      * Instantiate from the specified array.
      *
-     * @param array the desired component values (not null, length&ge;3,
+     * @param array the desired component values (not {@code null}, length&ge;3,
      * unaffected)
      */
     public RVec3(double[] array) {
@@ -89,9 +89,9 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
-     * Instantiate from a buffer.
+     * Instantiate from the specified buffer.
      *
-     * @param buffer the desired component values (not null, unaffected,
+     * @param buffer the desired component values (not {@code null}, unaffected,
      * capacity&ge;3)
      */
     public RVec3(DoubleBuffer buffer) {
@@ -101,9 +101,9 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
-     * Instantiate from a {@code ConstFloat3}.
+     * Instantiate from the specified {@code ConstFloat3}.
      *
-     * @param float3 the desired component values (not null, unaffected)
+     * @param float3 the desired component values (not {@code null}, unaffected)
      */
     public RVec3(ConstFloat3 float3) {
         this.xx = float3.x();
@@ -114,7 +114,7 @@ final public class RVec3 implements RVec3Arg {
     /**
      * Instantiate a copy of the argument.
      *
-     * @param vec the vector to copy (not null, unaffected)
+     * @param vec the vector to copy (not {@code null}, unaffected)
      */
     public RVec3(RVec3Arg vec) {
         this.xx = vec.xx();
@@ -123,9 +123,9 @@ final public class RVec3 implements RVec3Arg {
     }
 
     /**
-     * Instantiate from a single-precision vector.
+     * Instantiate from the specified single-precision vector.
      *
-     * @param vec the vector to convert (not null, unaffected)
+     * @param vec the vector to convert (not {@code null}, unaffected)
      */
     public RVec3(Vec3Arg vec) {
         this.xx = vec.getX();
@@ -179,7 +179,8 @@ final public class RVec3 implements RVec3Arg {
     /**
      * Rotate the current vector by the specified quaternion.
      *
-     * @param rotation the rotation to apply (not null, normalized, unaffected)
+     * @param rotation the rotation to apply (not {@code null}, normalized,
+     * unaffected)
      */
     public void rotateInPlace(QuatArg rotation) {
         assert rotation.isNormalized();
@@ -275,7 +276,7 @@ final public class RVec3 implements RVec3Arg {
     /**
      * Set all 3 components from the specified array.
      *
-     * @param array the desired component values (not null, length&ge;3,
+     * @param array the desired component values (not {@code null}, length&ge;3,
      * unaffected)
      */
     public void set(double[] array) {
@@ -287,8 +288,8 @@ final public class RVec3 implements RVec3Arg {
     /**
      * Set all 3 components from the specified buffer.
      *
-     * @param buffer the desired component values (not null, length&ge;3,
-     * unaffected)
+     * @param buffer the desired component values (not {@code null},
+     * length&ge;3, unaffected)
      */
     public void set(DoubleBuffer buffer) {
         this.xx = buffer.get(0);
@@ -299,7 +300,7 @@ final public class RVec3 implements RVec3Arg {
     /**
      * Set all 3 components from the argument.
      *
-     * @param source the vector to copy (not null, unaffected)
+     * @param source the vector to copy (not {@code null}, unaffected)
      */
     public void set(RVec3Arg source) {
         this.xx = source.xx();
@@ -310,7 +311,7 @@ final public class RVec3 implements RVec3Arg {
     /**
      * Set all 3 components from the specified single-precision vector.
      *
-     * @param source the vector to copy (not null, unaffected)
+     * @param source the vector to copy (not {@code null}, unaffected)
      */
     public void set(Vec3Arg source) {
         this.xx = source.getX();
@@ -365,7 +366,7 @@ final public class RVec3 implements RVec3Arg {
     /**
      * Return the component-wise sum of the specified vectors.
      *
-     * @param vArray an array of input vectors (not null, unaffected)
+     * @param vArray an array of input vectors (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RVec3 sum(RVec3Arg... vArray) {
@@ -390,7 +391,7 @@ final public class RVec3 implements RVec3Arg {
     /**
      * Transform the current vector by the specified matrix.
      *
-     * @param matrix the transformation to apply (not null, unaffected)
+     * @param matrix the transformation to apply (not {@code null}, unaffected)
      */
     public void transformInPlace(RMat44Arg matrix) {
         matrix.multiply3x4InPlace(this);
@@ -402,7 +403,8 @@ final public class RVec3 implements RVec3Arg {
      * Write all 3 components to the start of the specified buffer. The vector
      * is unaffected.
      *
-     * @param storeDoubles the destination buffer (not null, capacity&ge;3)
+     * @param storeDoubles the destination buffer (not {@code null},
+     * capacity&ge;3)
      */
     @Override
     public void copyTo(DoubleBuffer storeDoubles) {
@@ -414,8 +416,8 @@ final public class RVec3 implements RVec3Arg {
     /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
-     * @param rightFactor the vector to cross with the current one (not null,
-     * unaffected)
+     * @param rightFactor the vector to cross with the current one (not
+     * {@code null}, unaffected)
      * @return a new product vector
      */
     @Override
@@ -435,7 +437,7 @@ final public class RVec3 implements RVec3Arg {
     /**
      * Return the dot product with the argument. Both vectors are unaffected.
      *
-     * @param factor the vector to dot with the current one (not null,
+     * @param factor the vector to dot with the current one (not {@code null},
      * unaffected)
      * @return the dot product
      */
@@ -760,7 +762,7 @@ final public class RVec3 implements RVec3Arg {
      * RVec3(0.0 0.0 0.0)
      * </pre>
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {

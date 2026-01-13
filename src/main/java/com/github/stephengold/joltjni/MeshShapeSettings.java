@@ -48,8 +48,8 @@ public class MeshShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified vertices and triangles.
      *
-     * @param vertices the array of vertices (not null, unaffected)
-     * @param indices the list of triangles (not null, unaffected)
+     * @param vertices the array of vertices (not {@code null}, unaffected)
+     * @param indices the list of triangles (not {@code null}, unaffected)
      */
     public MeshShapeSettings(
             ConstFloat3[] vertices, IndexedTriangleList indices) {
@@ -68,8 +68,8 @@ public class MeshShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified vertices and triangles.
      *
-     * @param vertexArray the array of vertices (not null, unaffected)
-     * @param itArray the array of triangles (not null, unaffected)
+     * @param vertexArray the array of vertices (not {@code null}, unaffected)
+     * @param itArray the array of triangles (not {@code null}, unaffected)
      */
     public MeshShapeSettings(
             ConstFloat3[] vertexArray, IndexedTriangle... itArray) {
@@ -93,8 +93,8 @@ public class MeshShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified vertices without indices.
      *
-     * @param positionBuffer the vertex positions (not null, capacity a multiple
-     * of 9, unaffected)
+     * @param positionBuffer the vertex positions (not {@code null}, capacity a
+     * multiple of 9, unaffected)
      */
     public MeshShapeSettings(FloatBuffer positionBuffer) {
         int numFloats = positionBuffer.capacity();
@@ -131,8 +131,8 @@ public class MeshShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified lists of vertices and triangles.
      *
-     * @param vertices the list of vertices (not null, unaffected)
-     * @param indices the list of triangles (not null, unaffected)
+     * @param vertices the list of vertices (not {@code null}, unaffected)
+     * @param indices the list of triangles (not {@code null}, unaffected)
      */
     public MeshShapeSettings(
             List<ConstFloat3> vertices, IndexedTriangleList indices) {
@@ -151,7 +151,7 @@ public class MeshShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified list of triangles.
      *
-     * @param triangleList the list of triangles (not null, unaffected)
+     * @param triangleList the list of triangles (not {@code null}, unaffected)
      */
     public MeshShapeSettings(List<? extends ConstTriangle> triangleList) {
         int numTriangles = triangleList.size();
@@ -168,8 +168,9 @@ public class MeshShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified parameters.
      *
-     * @param triangleList the list of triangles (not null, unaffected)
-     * @param materials the desired surface properties (not null, unaffected)
+     * @param triangleList the list of triangles (not {@code null}, unaffected)
+     * @param materials the desired surface properties (not {@code null},
+     * unaffected)
      */
     public MeshShapeSettings(List<? extends ConstTriangle> triangleList,
             PhysicsMaterialList materials) {
@@ -189,8 +190,9 @@ public class MeshShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified vertices and indices.
      *
-     * @param vertices list of vertex locations (not null, unaffected)
-     * @param indices list of triangles that use those vertices (not null)
+     * @param vertices list of vertex locations (not {@code null}, unaffected)
+     * @param indices list of triangles that use those vertices (not
+     * {@code null})
      */
     public MeshShapeSettings(
             ConstVertexList vertices, IndexedTriangleList indices) {
@@ -205,7 +207,8 @@ public class MeshShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified array of triangles.
      *
-     * @param triangleArray the array of triangles (not null, unaffected)
+     * @param triangleArray the array of triangles (not {@code null},
+     * unaffected)
      */
     public MeshShapeSettings(ConstTriangle... triangleArray) {
         int numTriangles = triangleArray.length;
@@ -222,8 +225,10 @@ public class MeshShapeSettings extends ShapeSettings {
     /**
      * Instantiate settings for the specified parameters.
      *
-     * @param triangleArray the array of triangles (not null, unaffected)
-     * @param materials the desired surface properties (not null, unaffected)
+     * @param triangleArray the array of triangles (not {@code null},
+     * unaffected)
+     * @param materials the desired surface properties (not {@code null},
+     * unaffected)
      */
     public MeshShapeSettings(
             ConstTriangle[] triangleArray, PhysicsMaterialList materials) {
@@ -257,7 +262,8 @@ public class MeshShapeSettings extends ShapeSettings {
     /**
      * Append the specified vertex to the internal array.
      *
-     * @param vertex the location of the vertex to add (not null, unaffected)
+     * @param vertex the location of the vertex to add (not {@code null},
+     * unaffected)
      */
     public void addTriangleVertex(ConstFloat3 vertex) {
         long settingsVa = va();

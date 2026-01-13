@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -103,7 +103,7 @@ final public class Quat implements QuatArg {
     }
 
     /**
-     * Instantiate from a buffer.
+     * Instantiate from the specified buffer.
      *
      * @param buffer the desired component values (not null, unaffected,
      * capacity&ge;4)
@@ -318,7 +318,7 @@ final public class Quat implements QuatArg {
     }
 
     /**
-     * Create a rotation quaternion from a normalized rotation axis.
+     * Create a rotation quaternion from the specified normalized rotation axis.
      *
      * @param axis the desired rotation axis (not null, normalized)
      * @param angle the desired rotation angle (in radians)

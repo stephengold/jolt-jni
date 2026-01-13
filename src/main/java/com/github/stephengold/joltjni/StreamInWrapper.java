@@ -118,7 +118,7 @@ final public class StreamInWrapper extends StreamIn {
     }
 
     /**
-     * Read groups of 3 floats from the stream.
+     * Read groups of 3 floats from the stream. TODO rename
      *
      * @param storeFloats storage for the values that will be read (not
      * {@code null}, modified)

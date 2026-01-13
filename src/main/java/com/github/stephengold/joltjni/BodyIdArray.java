@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,7 +54,7 @@ public class BodyIdArray extends JoltPhysicsObject {
     }
 
     /**
-     * Instantiate an array initialized from a Java array.
+     * Instantiate an array initialized from the specified Java array.
      *
      * @param idArray the ID values (not null, not empty, unaffected)
      */
@@ -69,7 +69,7 @@ public class BodyIdArray extends JoltPhysicsObject {
     }
 
     /**
-     * Instantiate an array initialized from a direct buffer.
+     * Instantiate an array initialized from the specified direct buffer.
      *
      * @param idBuffer the ID values (not null, direct, positive capacity,
      * unaffected)
@@ -84,7 +84,7 @@ public class BodyIdArray extends JoltPhysicsObject {
     }
 
     /**
-     * Instantiate an array initialized from a Java list.
+     * Instantiate an array initialized from the specified Java list.
      *
      * @param idList the ID values (not null, not empty, unaffected)
      */

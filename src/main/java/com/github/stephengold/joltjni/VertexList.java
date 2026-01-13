@@ -68,7 +68,7 @@ final public class VertexList implements ConstVertexList {
     /**
      * Append the specified vertex to the end.
      *
-     * @param location the vertex to append (not null, unaffected)
+     * @param location the vertex to append (not {@code null}, unaffected)
      */
     public void pushBack(ConstFloat3 location) {
         int numElements = size();
@@ -124,7 +124,7 @@ final public class VertexList implements ConstVertexList {
      * Store the specified vertex location at the specified index.
      *
      * @param vertexIndex an index in the list (&ge;0, &lt;size)
-     * @param location the data to store (not null, unaffected)
+     * @param location the data to store (not {@code null}, unaffected)
      */
     public void set(int vertexIndex, ConstFloat3 location) {
         set(vertexIndex, location.x(), location.y(), location.z());
@@ -134,7 +134,7 @@ final public class VertexList implements ConstVertexList {
      * Store the specified vertex location at the specified index.
      *
      * @param vertexIndex an index in the list (&ge;0, &lt;size)
-     * @param location the data to store (not null, unaffected)
+     * @param location the data to store (not {@code null}, unaffected)
      */
     public void set(int vertexIndex, Vec3Arg location) {
         set(vertexIndex, location.getX(), location.getY(), location.getZ());

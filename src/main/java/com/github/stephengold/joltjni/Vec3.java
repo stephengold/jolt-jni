@@ -101,7 +101,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Instantiate from the specified array.
      *
-     * @param array the desired component values (not null, length&ge;3,
+     * @param array the desired component values (not {@code null}, length&ge;3,
      * unaffected)
      */
     public Vec3(float[] array) {
@@ -111,9 +111,9 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Instantiate from a {@code ConstFloat3}.
+     * Instantiate from the specified {@code ConstFloat3}.
      *
-     * @param float3 the desired component values (not null, unaffected)
+     * @param float3 the desired component values (not {@code null}, unaffected)
      */
     public Vec3(ConstFloat3 float3) {
         this.x = float3.x();
@@ -122,9 +122,9 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Instantiate from a buffer.
+     * Instantiate from the specified buffer.
      *
-     * @param buffer the desired component values (not null, unaffected,
+     * @param buffer the desired component values (not {@code null}, unaffected,
      * capacity&ge;3)
      */
     public Vec3(FloatBuffer buffer) {
@@ -134,9 +134,9 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
-     * Instantiate from a location vector.
+     * Instantiate from the specified location vector.
      *
-     * @param vec the vector to convert (not null, unaffected)
+     * @param vec the vector to convert (not {@code null}, unaffected)
      */
     public Vec3(RVec3Arg vec) {
         this.x = vec.x();
@@ -147,7 +147,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Instantiate a copy of the argument.
      *
-     * @param vec the vector to copy (not null, unaffected)
+     * @param vec the vector to copy (not {@code null}, unaffected)
      */
     public Vec3(Vec3Arg vec) {
         this.x = vec.getX();
@@ -201,7 +201,8 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Rotate the current vector by the specified quaternion.
      *
-     * @param rotation the rotation to apply (not null, normalized, unaffected)
+     * @param rotation the rotation to apply (not {@code null}, normalized,
+     * unaffected)
      */
     public void rotateInPlace(QuatArg rotation) {
         assert rotation.isNormalized();
@@ -230,8 +231,8 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Return the bitwise AND of the specified vectors.
      *
-     * @param v1 the first vector (not null, unaffected)
-     * @param v2 the 2nd vector (not null, unaffected)
+     * @param v1 the first vector (not {@code null}, unaffected)
+     * @param v2 the 2nd vector (not {@code null}, unaffected)
      * @return a new vector
      */
     public static Vec3 sAnd(Vec3Arg v1, Vec3Arg v2) {
@@ -321,7 +322,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Set all 3 components from the specified array.
      *
-     * @param array the desired component values (not null, length&ge;3,
+     * @param array the desired component values (not {@code null}, length&ge;3,
      * unaffected)
      */
     public void set(float[] array) {
@@ -333,8 +334,8 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Set all 3 components from the specified buffer.
      *
-     * @param buffer the desired component values (not null, length&ge;3,
-     * unaffected)
+     * @param buffer the desired component values (not {@code null},
+     * length&ge;3, unaffected)
      */
     public void set(FloatBuffer buffer) {
         this.x = buffer.get(0);
@@ -345,7 +346,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Set all 3 components from the specified position in the specified buffer.
      *
-     * @param buffer the desired component values (not null, unaffected)
+     * @param buffer the desired component values (not {@code null}, unaffected)
      * @param startPos the starting position in the buffer (&ge;0)
      */
     public void set(FloatBuffer buffer, int startPos) {
@@ -357,7 +358,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Set all 3 components from the specified location vector.
      *
-     * @param source the vector to copy (not null, unaffected)
+     * @param source the vector to copy (not {@code null}, unaffected)
      */
     public void set(RVec3Arg source) {
         this.x = source.x();
@@ -368,7 +369,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Set all 3 components from the argument.
      *
-     * @param source the vector to copy (not null, unaffected)
+     * @param source the vector to copy (not {@code null}, unaffected)
      */
     public void set(Vec3Arg source) {
         this.x = source.getX();
@@ -412,8 +413,8 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Component-wise comparison of 2 vectors.
      *
-     * @param v1 the first vector (not null, unaffected)
-     * @param v2 the 2nd vector (not null, unaffected)
+     * @param v1 the first vector (not {@code null}, unaffected)
+     * @param v2 the 2nd vector (not {@code null}, unaffected)
      * @return a new vector (each component 0 or -1)
      */
     public static UVec4 sGreater(Vec3Arg v1, Vec3Arg v2) {
@@ -428,8 +429,8 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Component-wise comparison of 2 vectors.
      *
-     * @param v1 the first vector (not null, unaffected)
-     * @param v2 the 2nd vector (not null, unaffected)
+     * @param v1 the first vector (not {@code null}, unaffected)
+     * @param v2 the 2nd vector (not {@code null}, unaffected)
      * @return a new vector (each component 0 or -1)
      */
     public static UVec4 sGreaterOrEqual(Vec3Arg v1, Vec3Arg v2) {
@@ -444,8 +445,8 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Component-wise comparison of 2 vectors.
      *
-     * @param v1 the first vector (not null, unaffected)
-     * @param v2 the 2nd vector (not null, unaffected)
+     * @param v1 the first vector (not {@code null}, unaffected)
+     * @param v2 the 2nd vector (not {@code null}, unaffected)
      * @return a new vector (each component 0 or -1)
      */
     public static UVec4 sLess(Vec3Arg v1, Vec3Arg v2) {
@@ -460,8 +461,8 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Component-wise comparison of 2 vectors.
      *
-     * @param v1 the first vector (not null, unaffected)
-     * @param v2 the 2nd vector (not null, unaffected)
+     * @param v1 the first vector (not {@code null}, unaffected)
+     * @param v2 the 2nd vector (not {@code null}, unaffected)
      * @return a new vector (each component 0 or -1)
      */
     public static UVec4 sLessOrEqual(Vec3Arg v1, Vec3Arg v2) {
@@ -512,7 +513,7 @@ final public class Vec3 implements Vec3Arg {
      * <p>
      * The results are not uniformly distributed over the unit sphere.
      *
-     * @param engine the generator to use (not null)
+     * @param engine the generator to use (not {@code null})
      * @return a new unit vector
      */
     public static Vec3 sRandom(RandomNumberEngine engine) {
@@ -542,11 +543,11 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Component-wise selection between 2 specified vectors.
      *
-     * @param notSet components to select where the control is zero (not null,
-     * unaffected)
-     * @param set components to select where the control is non-zero (not null,
-     * unaffected)
-     * @param control to control the selection (not null, unaffected)
+     * @param notSet components to select where the control is zero (not
+     * {@code null}, unaffected)
+     * @param set components to select where the control is non-zero (not
+     * {@code null}, unaffected)
+     * @param control to control the selection (not {@code null}, unaffected)
      * @return a new vector
      */
     public static Vec3 sSelect(Vec3Arg notSet, Vec3Arg set, UVec4Arg control) {
@@ -576,7 +577,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Return the component-wise sum of the specified vectors.
      *
-     * @param vArray an array of input vectors (not null, unaffected)
+     * @param vArray an array of input vectors (not {@code null}, unaffected)
      * @return a new vector
      */
     public static Vec3 sum(Vec3Arg... vArray) {
@@ -618,7 +619,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Transform the current vector by the specified matrix.
      *
-     * @param matrix the transformation to apply (not null, unaffected)
+     * @param matrix the transformation to apply (not {@code null}, unaffected)
      */
     public void transformInPlace(Mat44Arg matrix) {
         matrix.multiply3x4InPlace(this);
@@ -641,7 +642,8 @@ final public class Vec3 implements Vec3Arg {
      * Write all 3 components to the start of the specified buffer. The vector
      * is unaffected.
      *
-     * @param storeFloats the destination buffer (not null, capacity&ge;3)
+     * @param storeFloats the destination buffer (not {@code null},
+     * capacity&ge;3)
      */
     @Override
     public void copyTo(FloatBuffer storeFloats) {
@@ -653,7 +655,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Write all 3 components to the specified position in the specified buffer.
      *
-     * @param storeFloats the destination buffer (not null,
+     * @param storeFloats the destination buffer (not {@code null},
      * capacity&ge;startPos+3)
      * @param startPos the starting position in the buffer (&ge;0)
      */
@@ -667,8 +669,8 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Return the cross product with the argument. Both vectors are unaffected.
      *
-     * @param rightFactor the vector to cross with the current one (not null,
-     * unaffected)
+     * @param rightFactor the vector to cross with the current one (not
+     * {@code null}, unaffected)
      * @return a new product vector
      */
     @Override
@@ -688,7 +690,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Return the dot product with the argument. Both vectors are unaffected.
      *
-     * @param factor the vector to dot with the current one (not null,
+     * @param factor the vector to dot with the current one (not {@code null},
      * unaffected)
      * @return the dot product
      */
@@ -874,7 +876,7 @@ final public class Vec3 implements Vec3Arg {
      * Test whether the specified vector lies within the specified squared
      * distance of this one. Both vectors are unaffected.
      *
-     * @param v2 the vector to compare with (not null, unaffected)
+     * @param v2 the vector to compare with (not {@code null}, unaffected)
      * @param maxDistSq the maximum allowed squared distance (&ge;0)
      * @return {@code true} if within the squared distance, otherwise
      * {@code false}
@@ -933,8 +935,8 @@ final public class Vec3 implements Vec3Arg {
      * zero. Otherwise, generate a unit vector with the same direction as the
      * current vector. The current vector is unaffected.
      *
-     * @param zeroValue the value to return if the length is zero (not null,
-     * unaffected)
+     * @param zeroValue the value to return if the length is zero (not
+     * {@code null}, unaffected)
      * @return a new vector
      */
     @Override
@@ -960,7 +962,7 @@ final public class Vec3 implements Vec3Arg {
      * Write all 3 components to the specified buffer and advance the buffer's
      * position by 3. The vector is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeBuffer the destination buffer (not {@code null})
      */
     @Override
     public void put(FloatBuffer storeBuffer) {
@@ -1005,7 +1007,7 @@ final public class Vec3 implements Vec3Arg {
     /**
      * Copy to a {@code Float3} object. The vector is unaffected.
      *
-     * @param target the destination (not null, modified)
+     * @param target the destination (not {@code null}, modified)
      */
     @Override
     public void storeFloat3(Float3 target) {
@@ -1126,7 +1128,7 @@ final public class Vec3 implements Vec3Arg {
      * Vec3(0.0 0.0 0.0)
      * </pre>
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {

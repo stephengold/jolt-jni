@@ -58,7 +58,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     }
 
     /**
-     * Instantiate the specified triangle
+     * Instantiate the specified triangle.
      *
      * @param v1 the desired location of the first vertex (not {@code null},
      * unaffected)
@@ -74,7 +74,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     }
 
     /**
-     * Instantiate the specified triangle
+     * Instantiate the specified triangle.
      *
      * @param v1 the desired location of the first vertex (not {@code null},
      * unaffected)
@@ -113,7 +113,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     }
 
     /**
-     * Instantiate a triangle from {@code Float3} locations.
+     * Instantiate a triangle from {@code Vec3Arg} locations.
      *
      * @param v1 the desired location of the first vertex (not {@code null},
      * unaffected)
@@ -127,7 +127,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     }
 
     /**
-     * Instantiate the specified triangle
+     * Instantiate the specified triangle.
      *
      * @param v1 the desired location of the first vertex (not {@code null},
      * unaffected)
@@ -142,7 +142,7 @@ final public class Triangle extends JoltPhysicsObject implements ConstTriangle {
     }
 
     /**
-     * Instantiate the specified triangle
+     * Instantiate the specified triangle.
      *
      * @param v1 the desired location of the first vertex (not {@code null},
      * unaffected)

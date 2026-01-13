@@ -56,8 +56,8 @@ final public class Op {
      * Copy the right argument to the left one. (native operator: binary
      * {@code =})
      *
-     * @param left the matrix to modify (not null)
-     * @param right the value to assign (not null, unaffected)
+     * @param left the matrix to modify (not {@code null})
+     * @param right the value to assign (not {@code null}, unaffected)
      * @return the assigned value, for chaining
      */
     public static ConstColor assign(Color left, ConstColor right) {
@@ -69,8 +69,8 @@ final public class Op {
      * Copy the right argument to the left one. (native operator: binary
      * {@code =})
      *
-     * @param left the matrix to modify (not null)
-     * @param right the value to assign (not null, unaffected)
+     * @param left the matrix to modify (not {@code null})
+     * @param right the value to assign (not {@code null}, unaffected)
      * @return the assigned value, for chaining
      */
     public static Mat44Arg assign(Mat44 left, Mat44Arg right) {
@@ -82,8 +82,8 @@ final public class Op {
      * Copy the right argument to the left one. (native operator: binary
      * {@code =})
      *
-     * @param left the matrix to modify (not null)
-     * @param right the value to assign (not null, unaffected)
+     * @param left the matrix to modify (not {@code null})
+     * @param right the value to assign (not {@code null}, unaffected)
      * @return the assigned value, for chaining
      */
     public static RMat44Arg assign(RMat44 left, RMat44Arg right) {
@@ -95,8 +95,8 @@ final public class Op {
      * Copy the right argument to the left one. (native operator: binary
      * {@code =})
      *
-     * @param left the vector to modify (not null)
-     * @param right the value to assign (not null, unaffected)
+     * @param left the vector to modify (not {@code null})
+     * @param right the value to assign (not {@code null}, unaffected)
      * @return the assigned value, for chaining
      */
     public static RVec3Arg assign(RVec3 left, RVec3Arg right) {
@@ -112,8 +112,8 @@ final public class Op {
      * Copy the right argument to the left one. (native operator: binary
      * {@code =})
      *
-     * @param left the vector to modify (not null)
-     * @param right the value to assign (not null, unaffected)
+     * @param left the vector to modify (not {@code null})
+     * @param right the value to assign (not {@code null}, unaffected)
      * @return the assigned value, for chaining
      */
     public static Vec3Arg assign(Vec3 left, Vec3Arg right) {
@@ -129,8 +129,8 @@ final public class Op {
      * Test whether the specified colors are equal. (native operator: binary
      * {@code ==})
      *
-     * @param left the first color to test (not null, unaffected)
-     * @param right the 2nd color to test (not null, unaffected)
+     * @param left the first color to test (not {@code null}, unaffected)
+     * @param right the 2nd color to test (not {@code null}, unaffected)
      * @return {@code true} if equal, {@code false} if unequal
      */
     public static boolean isEqual(ConstColor left, ConstColor right) {
@@ -145,8 +145,8 @@ final public class Op {
      * Test whether the specified matrices are equal. (native operator: binary
      * {@code ==})
      *
-     * @param left the first matrix (not null, unaffected)
-     * @param right the 2nd matrix (not null, unaffected)
+     * @param left the first matrix (not {@code null}, unaffected)
+     * @param right the 2nd matrix (not {@code null}, unaffected)
      * @return {@code true} if equal, otherwise {@code false}
      */
     public static boolean isEqual(Mat44Arg left, Mat44Arg right) {
@@ -158,7 +158,7 @@ final public class Op {
      * Return the negative of the specified vector. (native operator: unary
      * {@code -})
      *
-     * @param right the input vector (not null, unaffected)
+     * @param right the input vector (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RVec3 minus(RVec3Arg right) {
@@ -174,8 +174,8 @@ final public class Op {
      * Return the component-wise difference of the specified vectors. (native
      * operator: binary {@code -})
      *
-     * @param left the base vector (not null, unaffected)
-     * @param right the offset to subtract (not null, unaffected)
+     * @param left the base vector (not {@code null}, unaffected)
+     * @param right the offset to subtract (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RVec3 minus(RVec3Arg left, RVec3Arg right) {
@@ -191,8 +191,8 @@ final public class Op {
      * Return the component-wise difference of the specified vectors. (native
      * operator: binary {@code -})
      *
-     * @param left the base vector (not null, unaffected)
-     * @param right the offset to subtract (not null, unaffected)
+     * @param left the base vector (not {@code null}, unaffected)
+     * @param right the offset to subtract (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RVec3 minus(RVec3Arg left, Vec3Arg right) {
@@ -208,7 +208,7 @@ final public class Op {
      * Return the negative of the specified vector. (native operator: unary
      * {@code -})
      *
-     * @param right the input vector (not null, unaffected)
+     * @param right the input vector (not {@code null}, unaffected)
      * @return a new vector
      */
     public static Vec3 minus(Vec3Arg right) {
@@ -224,8 +224,8 @@ final public class Op {
      * Return the component-wise difference of the specified vectors. (native
      * operator: binary {@code -})
      *
-     * @param left the first vector (not null, unaffected)
-     * @param right the vector to subtract (not null, unaffected)
+     * @param left the first vector (not {@code null}, unaffected)
+     * @param right the vector to subtract (not {@code null}, unaffected)
      * @return a new vector
      */
     public static Vec3 minus(Vec3Arg left, Vec3Arg right) {
@@ -241,8 +241,8 @@ final public class Op {
      * Subtract the 2nd argument from the first argument. (native operator:
      * binary {@code -=})
      *
-     * @param left the accumulating vector (not null, modified)
-     * @param right the vector to subtract (not null, unaffected)
+     * @param left the accumulating vector (not {@code null}, modified)
+     * @param right the vector to subtract (not {@code null}, unaffected)
      */
     public static void minusEquals(Vec3 left, Vec3Arg right) {
         left.setX(left.getX() - right.getX());
@@ -254,8 +254,8 @@ final public class Op {
      * Test whether the specified colors are unequal. (native operator: binary
      * {@code !=})
      *
-     * @param left the first color to test (not null, unaffected)
-     * @param right the 2nd color to test (not null, unaffected)
+     * @param left the first color to test (not {@code null}, unaffected)
+     * @param right the 2nd color to test (not {@code null}, unaffected)
      * @return {@code false} if equal, {@code true} if unequal
      */
     public static boolean notEqual(ConstColor left, ConstColor right) {
@@ -270,8 +270,8 @@ final public class Op {
      * Return the component-wise sum of the specified vectors. (native operator:
      * binary {@code +})
      *
-     * @param left the first vector (not null, unaffected)
-     * @param right the 2nd vector (not null, unaffected)
+     * @param left the first vector (not {@code null}, unaffected)
+     * @param right the 2nd vector (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RVec3 plus(RVec3Arg left, ConstFloat3 right) {
@@ -287,8 +287,8 @@ final public class Op {
      * Return the component-wise sum of the specified vectors. (native operator:
      * binary {@code +})
      *
-     * @param left the first vector (not null, unaffected)
-     * @param right the 2nd vector (not null, unaffected)
+     * @param left the first vector (not {@code null}, unaffected)
+     * @param right the 2nd vector (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RVec3 plus(RVec3Arg left, RVec3Arg right) {
@@ -304,8 +304,8 @@ final public class Op {
      * Return the component-wise sum of the specified vectors. (native operator:
      * binary {@code +})
      *
-     * @param left the base vector (not null, unaffected)
-     * @param right the offset to add (not null, unaffected)
+     * @param left the base vector (not {@code null}, unaffected)
+     * @param right the offset to add (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RVec3 plus(RVec3Arg left, Vec3Arg right) {
@@ -321,8 +321,8 @@ final public class Op {
      * Return the component-wise sum of the specified vectors. (native operator:
      * binary {@code +})
      *
-     * @param left the first vector (not null, unaffected)
-     * @param right the 2nd vector (not null, unaffected)
+     * @param left the first vector (not {@code null}, unaffected)
+     * @param right the 2nd vector (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RVec3 plus(Vec3Arg left, RVec3Arg right) {
@@ -338,8 +338,8 @@ final public class Op {
      * Return the component-wise sum of the specified vectors. (native operator:
      * binary {@code +})
      *
-     * @param left the first vector (not null, unaffected)
-     * @param right the 2nd vector (not null, unaffected)
+     * @param left the first vector (not {@code null}, unaffected)
+     * @param right the 2nd vector (not {@code null}, unaffected)
      * @return a new vector
      */
     public static Vec3 plus(Vec3Arg left, Vec3Arg right) {
@@ -355,8 +355,8 @@ final public class Op {
      * Add the right argument to the left argument. (native operator: binary
      * {@code +=})
      *
-     * @param left the accumulating vector (not null, modified)
-     * @param right the vector to add (not null, unaffected)
+     * @param left the accumulating vector (not {@code null}, modified)
+     * @param right the vector to add (not {@code null}, unaffected)
      */
     public static void plusEquals(RVec3 left, RVec3Arg right) {
         double xx = left.xx() + right.xx();
@@ -369,8 +369,8 @@ final public class Op {
      * Add the right argument to the left argument. (native operator: binary
      * {@code +=})
      *
-     * @param left the accumulating vector (not null, modified)
-     * @param right the vector to add (not null, unaffected)
+     * @param left the accumulating vector (not {@code null}, modified)
+     * @param right the vector to add (not {@code null}, unaffected)
      */
     public static void plusEquals(RVec3 left, Vec3Arg right) {
         double xx = left.xx() + right.getX();
@@ -383,8 +383,8 @@ final public class Op {
      * Add the 2nd argument to the first argument. (native operator: binary
      * {@code +=})
      *
-     * @param left the accumulating vector (not null, modified)
-     * @param right the vector to add (not null, unaffected)
+     * @param left the accumulating vector (not {@code null}, modified)
+     * @param right the vector to add (not {@code null}, unaffected)
      */
     public static void plusEquals(Vec3 left, RVec3Arg right) {
         left.setX(left.getX() + right.x());
@@ -396,8 +396,8 @@ final public class Op {
      * Add the 2nd argument to the first argument. (native operator: binary
      * {@code +=})
      *
-     * @param left the accumulating vector (not null, modified)
-     * @param right the vector to add (not null, unaffected)
+     * @param left the accumulating vector (not {@code null}, modified)
+     * @param right the vector to add (not {@code null}, unaffected)
      */
     public static void plusEquals(Vec3 left, Vec3Arg right) {
         left.setX(left.getX() + right.getX());
@@ -409,7 +409,7 @@ final public class Op {
      * Return a scaled version of the specified vector. (native operator: binary
      * {@code /})
      *
-     * @param left the input vector (not null, unaffected)
+     * @param left the input vector (not {@code null}, unaffected)
      * @param right the inverse scale to apply
      * @return a new vector
      */
@@ -426,7 +426,7 @@ final public class Op {
      * Return a scaled version of the specified vector. (native operator: binary
      * {@code /})
      *
-     * @param left the input vector (not null, unaffected)
+     * @param left the input vector (not {@code null}, unaffected)
      * @param right the inverse scale to apply
      * @return a new vector
      */
@@ -443,8 +443,8 @@ final public class Op {
      * Divide the left argument by the right argument. (native operator: binary
      * {@code /=})
      *
-     * @param left the accumulating vector (not null, modified)
-     * @param right the denominator (not null, unaffected)
+     * @param left the accumulating vector (not {@code null}, modified)
+     * @param right the denominator (not {@code null}, unaffected)
      */
     public static void slashEquals(RVec3 left, double right) {
         double xx = left.xx() / right;
@@ -457,8 +457,8 @@ final public class Op {
      * Divide the left argument by the right argument. (native operator: binary
      * {@code /=})
      *
-     * @param left the accumulating vector (not null, modified)
-     * @param right the denominator (not null, unaffected)
+     * @param left the accumulating vector (not {@code null}, modified)
+     * @param right the denominator (not {@code null}, unaffected)
      */
     public static void slashEquals(Vec3 left, float right) {
         float xx = left.getX() / right;
@@ -472,7 +472,7 @@ final public class Op {
      * {@code *})
      *
      * @param left the scale to apply
-     * @param right the input vector (not null, unaffected)
+     * @param right the input vector (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RVec3 star(double left, RVec3Arg right) {
@@ -489,7 +489,7 @@ final public class Op {
      * binary {@code *})
      *
      * @param left the scale to apply
-     * @param right the input quaternion (not null, unaffected)
+     * @param right the input quaternion (not {@code null}, unaffected)
      * @return a new quaternion
      */
     public static Quat star(float left, QuatArg right) {
@@ -507,7 +507,7 @@ final public class Op {
      * {@code *})
      *
      * @param left the scale to apply
-     * @param right the input vector (not null, unaffected)
+     * @param right the input vector (not {@code null}, unaffected)
      * @return a new vector
      */
     public static Vec3 star(float left, Vec3Arg right) {
@@ -524,8 +524,8 @@ final public class Op {
      * with the 4th component of the right factor implied to be one. (native
      * operator: binary {@code *})
      *
-     * @param left the left factor (not null, unaffected)
-     * @param right the right factor (not null, unaffected)
+     * @param left the left factor (not {@code null}, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     public static Vec3 star(Mat44Arg left, Vec3Arg right) {
@@ -537,8 +537,8 @@ final public class Op {
      * Return the product of the specified matrices. (native operator: binary
      * {@code *})
      *
-     * @param left the left factor (not null, unaffected)
-     * @param right the right factor (not null, unaffected)
+     * @param left the left factor (not {@code null}, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     public static Mat44 star(Mat44Arg left, Mat44Arg right) {
@@ -550,8 +550,8 @@ final public class Op {
      * Return the product of the specified quaternions. (native operator: binary
      * {@code *})
      *
-     * @param left the left factor (not null, unaffected)
-     * @param right the right factor (not null, unaffected)
+     * @param left the left factor (not {@code null}, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new quaternion
      */
     public static Quat star(QuatArg left, QuatArg right) {
@@ -578,8 +578,9 @@ final public class Op {
      * Rotate the specified vector by the specified unit quaternion. (native
      * operator: binary {@code *})
      *
-     * @param left the rotation to apply (not null, normalized, unaffected)
-     * @param right the vector to apply it to (not null, unaffected)
+     * @param left the rotation to apply (not {@code null}, normalized,
+     * unaffected)
+     * @param right the vector to apply it to (not {@code null}, unaffected)
      * @return a new vector
      */
     public static Vec3 star(QuatArg left, Vec3Arg right) {
@@ -613,8 +614,8 @@ final public class Op {
      * Return the product of the specified matrices. (native operator: binary
      * {@code *})
      *
-     * @param left the left factor (not null, unaffected)
-     * @param right the right factor (not null, unaffected)
+     * @param left the left factor (not {@code null}, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     public static RMat44 star(RMat44Arg left, Mat44Arg right) {
@@ -626,8 +627,8 @@ final public class Op {
      * Return the product of the specified matrices. (native operator: binary
      * {@code *})
      *
-     * @param left the left factor (not null, unaffected)
-     * @param right the right factor (not null, unaffected)
+     * @param left the left factor (not {@code null}, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RMat44 star(RMat44Arg left, RMat44Arg right) {
@@ -640,8 +641,8 @@ final public class Op {
      * with the 4th component of the right factor implied to be one. (native
      * operator: binary {@code *})
      *
-     * @param left the left factor (not null, unaffected)
-     * @param right the right factor (not null, unaffected)
+     * @param left the left factor (not {@code null}, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RVec3 star(RMat44Arg left, RVec3Arg right) {
@@ -654,8 +655,8 @@ final public class Op {
      * with the 4th component of the right factor implied to be one. (native
      * operator: binary {@code *})
      *
-     * @param left the left factor (not null, unaffected)
-     * @param right the right factor (not null, unaffected)
+     * @param left the left factor (not {@code null}, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     public static RVec3 star(RMat44Arg left, Vec3Arg right) {
@@ -667,7 +668,7 @@ final public class Op {
      * Return a scaled version of the specified vector. (native operator: binary
      * {@code *})
      *
-     * @param left the input vector (not null, unaffected)
+     * @param left the input vector (not {@code null}, unaffected)
      * @param right the scale to apply
      * @return a new vector
      */
@@ -680,8 +681,8 @@ final public class Op {
      * Rotate the specified vector by the conjugate of the specified unit
      * quaternion. (native operator: binary {@code *})
      *
-     * @param left the input vector (not null, unaffected)
-     * @param right the conjugate of the rotation to apply (not null,
+     * @param left the input vector (not {@code null}, unaffected)
+     * @param right the conjugate of the rotation to apply (not {@code null},
      * normalized, unaffected)
      * @return a new vector
      */
@@ -716,8 +717,8 @@ final public class Op {
      * Return the component-wise product of the specified vectors. (native
      * operator: binary {@code *})
      *
-     * @param left the first vector (not null, unaffected)
-     * @param right the 2nd vector (not null, unaffected)
+     * @param left the first vector (not {@code null}, unaffected)
+     * @param right the 2nd vector (not {@code null}, unaffected)
      * @return a new vector
      */
     public static Vec3 star(Vec3Arg left, Vec3Arg right) {
@@ -733,8 +734,8 @@ final public class Op {
      * Scale the left argument by the right argument. (native operator: binary
      * {@code *=})
      *
-     * @param left the accumulating vector (not null, modified)
-     * @param right the scale factor to apply (not null, unaffected)
+     * @param left the accumulating vector (not {@code null}, modified)
+     * @param right the scale factor to apply (not {@code null}, unaffected)
      */
     public static void starEquals(Vec3 left, float right) {
         left.setX(left.getX() * right);

@@ -50,7 +50,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Instantiate a matrix with the specified elements.
      *
-     * @param elementArray in column-major order (not null)
+     * @param elementArray in column-major order (not {@code null})
      */
     public Mat44(float... elementArray) {
         long matrixVa = createFromColumnMajor(elementArray);
@@ -84,7 +84,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Instantiate a copy of the specified matrix.
      *
-     * @param original the matrix to duplicate (not null, unaffected)
+     * @param original the matrix to duplicate (not {@code null}, unaffected)
      */
     public Mat44(Mat44Arg original) {
         long originalVa = original.targetVa();
@@ -93,9 +93,9 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     }
 
     /**
-     * Instantiate from a location-transform matrix.
+     * Instantiate from the specified location-transform matrix.
      *
-     * @param rMatrix the matrix to copy (not null, unaffected)
+     * @param rMatrix the matrix to copy (not {@code null}, unaffected)
      */
     public Mat44(RMat44Arg rMatrix) {
         long rMatrixVa = rMatrix.targetVa();
@@ -106,10 +106,11 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Instantiate a matrix with the specified columns.
      *
-     * @param c1 the desired first/leftmost column (not null, unaffected)
-     * @param c2 the desired 2nd column (not null, unaffected)
-     * @param c3 the desired 3rd column (not null, unaffected)
-     * @param c4 the desired 4th/rightmost column (not null, unaffected)
+     * @param c1 the desired first/leftmost column (not {@code null},
+     * unaffected)
+     * @param c2 the desired 2nd column (not {@code null}, unaffected)
+     * @param c3 the desired 3rd column (not {@code null}, unaffected)
+     * @param c4 the desired 4th/rightmost column (not {@code null}, unaffected)
      */
     public Mat44(Vec4Arg c1, Vec4Arg c2, Vec4Arg c3, Vec4Arg c4) {
         this(c1.getX(), c1.getY(), c1.getZ(), c1.getW(),
@@ -123,7 +124,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Left-multiply the current matrix by the argument.
      *
-     * @param leftFactor the left factor (not null, unaffected)
+     * @param leftFactor the left factor (not {@code null}, unaffected)
      */
     public void leftMultiplyInPlace(Mat44Arg leftFactor) {
         long currentVa = va();
@@ -142,7 +143,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Return the product of the specified matrices.
      *
-     * @param mArray an array of input matrices (not null, unaffected)
+     * @param mArray an array of input matrices (not {@code null}, unaffected)
      * @return a new matrix
      */
     public static Mat44 product(Mat44Arg... mArray) {
@@ -167,7 +168,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Right-multiply the current matrix by the argument.
      *
-     * @param rightFactor the right factor (not null, unaffected)
+     * @param rightFactor the right factor (not {@code null}, unaffected)
      */
     public void rightMultiplyInPlace(Mat44Arg rightFactor) {
         long currentVa = va();
@@ -178,7 +179,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Copy all elements of the argument to the current matrix.
      *
-     * @param source the matrix to copy (not null, unaffected)
+     * @param source the matrix to copy (not {@code null}, unaffected)
      */
     public void set(Mat44Arg source) {
         long targetVa = va();
@@ -189,7 +190,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Set the first column to the specified vector.
      *
-     * @param vec the vector to use (not null, unaffected)
+     * @param vec the vector to use (not {@code null}, unaffected)
      */
     public void setAxisX(Vec3Arg vec) {
         long matrixVa = va();
@@ -202,7 +203,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Set the 2nd column to the specified vector.
      *
-     * @param vec the vector to use (not null, unaffected)
+     * @param vec the vector to use (not {@code null}, unaffected)
      */
     public void setAxisY(Vec3Arg vec) {
         long matrixVa = va();
@@ -215,7 +216,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Set the 3rd column to the specified vector.
      *
-     * @param vec the vector to use (not null, unaffected)
+     * @param vec the vector to use (not {@code null}, unaffected)
      */
     public void setAxisZ(Vec3Arg vec) {
         long matrixVa = va();
@@ -228,7 +229,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Set the diagonal to the specified vector.
      *
-     * @param vec the vector to use (not null, unaffected)
+     * @param vec the vector to use (not {@code null}, unaffected)
      */
     public void setDiagonal3(Vec3Arg vec) {
         long matrixVa = va();
@@ -256,7 +257,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Alter the translation component.
      *
-     * @param offset the desired translation (not null, unaffected)
+     * @param offset the desired translation (not {@code null}, unaffected)
      */
     public void setTranslation(Vec3Arg offset) {
         long matrixVa = va();
@@ -281,7 +282,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Create a rotation matrix from the specified quaternion.
      *
-     * @param rotation the rotation quaternion to use (not null, unaffected)
+     * @param rotation the rotation quaternion to use (not {@code null},
+     * unaffected)
      * @return a new matrix
      */
     public static Mat44 sRotation(QuatArg rotation) {
@@ -298,7 +300,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Create a matrix for the specified rotation.
      *
-     * @param axis the rotation axis (not null, unaffected)
+     * @param axis the rotation axis (not {@code null}, unaffected)
      * @param angle the desired rotation angle (in radians)
      * @return a new matrix
      */
@@ -315,8 +317,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Create a translation-and-rotation matrix.
      *
-     * @param rotation the amount to rotate (not null, unaffected)
-     * @param offset the amount to translate (not null, unaffected)
+     * @param rotation the amount to rotate (not {@code null}, unaffected)
+     * @param offset the amount to translate (not {@code null}, unaffected)
      * @return a new matrix
      */
     public static Mat44 sRotationTranslation(QuatArg rotation, Vec3Arg offset) {
@@ -386,7 +388,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Create a pure scaling matrix.
      *
-     * @param factors the amount to scale each axis (not null, unaffected)
+     * @param factors the amount to scale each axis (not {@code null},
+     * unaffected)
      * @return a new matrix
      */
     public static Mat44 sScale(ConstFloat3 factors) {
@@ -402,7 +405,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Create a pure scaling matrix.
      *
-     * @param factors the amount to scale each axis (not null, unaffected)
+     * @param factors the amount to scale each axis (not {@code null},
+     * unaffected)
      * @return a new matrix
      */
     public static Mat44 sScale(Vec3Arg factors) {
@@ -418,7 +422,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
     /**
      * Create a pure translation matrix.
      *
-     * @param offset the amount to translate (not null, unaffected)
+     * @param offset the amount to translate (not {@code null}, unaffected)
      * @return a new matrix
      */
     public static Mat44 sTranslation(Vec3Arg offset) {
@@ -605,7 +609,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Test whether the current matrix is equal to the argument. The current
      * matrix is unaffected.
      *
-     * @param m2 the 2nd matrix to test (not null, unaffected)
+     * @param m2 the 2nd matrix to test (not {@code null}, unaffected)
      * @return {@code true} if equal, {@code false} if unequal
      */
     @Override
@@ -635,7 +639,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Multiply the current matrix by the argument. The current matrix is
      * unaffected.
      *
-     * @param right the right factor (not null, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     @Override
@@ -652,7 +656,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Multiply the current 3x3 matrix by the specified 3x3 matrix. The current
      * matrix is unaffected.
      *
-     * @param right the right factor (not null, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     @Override
@@ -669,7 +673,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Multiply the 3x3 matrix by the specified column vector. The matrix is
      * unaffected.
      *
-     * @param vec3Arg the right factor (not null, unaffected)
+     * @param vec3Arg the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
@@ -687,7 +691,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Multiply the transpose of the 3x3 matrix by the specified column vector.
      * The matrix is unaffected.
      *
-     * @param vec3Arg the right factor (not null, unaffected)
+     * @param vec3Arg the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
@@ -706,7 +710,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param vec3Arg the right factor (not null, unaffected)
+     * @param vec3Arg the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
@@ -725,7 +729,8 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * component of the right factor implied to be one. Store the result in the
      * argument vector. The matrix is unaffected.
      *
-     * @param storeVec the right factor and storage for the result (not null)
+     * @param storeVec the right factor and storage for the result (not
+     * {@code null})
      */
     @Override
     public void multiply3x4InPlace(Vec3 storeVec) {
@@ -740,7 +745,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *
-     * @param vec3 the left factor (not null, unaffected)
+     * @param vec3 the left factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     @Override
@@ -759,7 +764,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * Write all 16 components to the specified buffer in column-major order and
      * advance the buffer's position by 16. The matrix is unaffected.
      *
-     * @param storeFloats the destination buffer (not null)
+     * @param storeFloats the destination buffer (not {@code null})
      */
     @Override
     public void putColumnMajor(FloatBuffer storeFloats) {
@@ -783,7 +788,7 @@ final public class Mat44 extends JoltPhysicsObject implements Mat44Arg {
      * ]
      * </pre>
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {

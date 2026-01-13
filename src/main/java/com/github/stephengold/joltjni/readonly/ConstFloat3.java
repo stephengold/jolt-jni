@@ -62,8 +62,7 @@ public interface ConstFloat3 {
     float y();
 
     /**
-     * Return the 3rd (Z) component in single precision. The vector is
-     * unaffected.
+     * Return the 3rd (Z) component. The vector is unaffected.
      *
      * @return the component value
      */

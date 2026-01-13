@@ -88,7 +88,7 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     /**
      * Alter the initial location of the vertex. (native attribute: mPosition)
      *
-     * @param location the desired location (not null, unaffected
+     * @param location the desired location (not {@code null}, unaffected
      * default=(0,0,0))
      * @return the modified settings, for chaining
      */
@@ -105,7 +105,7 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     /**
      * Alter the initial location of the vertex. (native attribute: mPosition)
      *
-     * @param location the desired location (not null, unaffected
+     * @param location the desired location (not {@code null}, unaffected
      * default=(0,0,0))
      * @return the modified settings, for chaining
      */
@@ -137,8 +137,8 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     /**
      * Alter the initial velocity of the vertex. (native attribute: mVelocity)
      *
-     * @param velocity the desired velocity (in meters per second, not null,
-     * unaffected default=(0,0,0))
+     * @param velocity the desired velocity (in meters per second, not
+     * {@code null}, unaffected default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public Vertex setVelocity(ConstFloat3 velocity) {
@@ -154,8 +154,8 @@ public class Vertex extends JoltPhysicsObject implements ConstVertex {
     /**
      * Alter the initial velocity of the vertex. (native attribute: mVelocity)
      *
-     * @param velocity the desired velocity (in meters per second, not null,
-     * unaffected, default=(0,0,0))
+     * @param velocity the desired velocity (in meters per second, not
+     * {@code null}, unaffected, default=(0,0,0))
      * @return the modified settings, for chaining
      */
     public Vertex setVelocity(Vec3Arg velocity) {

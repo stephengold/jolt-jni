@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -108,7 +108,7 @@ final public class Vec4 implements Vec4Arg {
     }
 
     /**
-     * Instantiate from a 3-D vector.
+     * Instantiate from the specified 3-D vector.
      *
      * @param vec the vector to copy (not null, unaffected)
      * @param w the desired W component

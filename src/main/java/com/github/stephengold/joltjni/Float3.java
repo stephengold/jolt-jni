@@ -82,7 +82,7 @@ final public class Float3 implements ConstFloat3 {
     }
 
     /**
-     * Instantiate from a buffer.
+     * Instantiate from the specified buffer.
      *
      * @param buffer the desired component values (not {@code null}, unaffected,
      * capacity&ge;3)

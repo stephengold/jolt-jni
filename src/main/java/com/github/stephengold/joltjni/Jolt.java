@@ -190,18 +190,18 @@ final public class Jolt {
     /**
      * Append a message to the determinism log. (native macro: JPH_DET_LOG)
      *
-     * @param message (not null)
+     * @param message (not {@code null})
      */
     native public static void detLog(String message);
 
     /**
      * Estimate the contact impulses and body velocity changes resulting from a
-     * collision.
+     * collision. (see Physics/Collision/EstimateCollisionResponse.cpp)
      *
-     * @param body1 the first colliding body (not null, unaffected)
-     * @param body2 the 2nd colliding body (not null, unaffected)
-     * @param manifold the collision manifold (not null, unaffected)
-     * @param storeResult storage for impulses and velocities (not null,
+     * @param body1 the first colliding body (not {@code null}, unaffected)
+     * @param body2 the 2nd colliding body (not {@code null}, unaffected)
+     * @param manifold the collision manifold (not {@code null}, unaffected)
+     * @param storeResult storage for impulses and velocities (not {@code null},
      * modified)
      * @param combinedFriction the combined friction of the 2 bodies
      * @param combinedRestitution the combined restitution of the 2 bodies
@@ -216,12 +216,12 @@ final public class Jolt {
 
     /**
      * Estimate the contact impulses and body velocity changes resulting from a
-     * collision.
+     * collision. (see Physics/Collision/EstimateCollisionResponse.cpp)
      *
-     * @param body1 the first colliding body (not null, unaffected)
-     * @param body2 the 2nd colliding body (not null, unaffected)
-     * @param manifold the collision manifold (not null, unaffected)
-     * @param storeResult storage for impulses and velocities (not null,
+     * @param body1 the first colliding body (not {@code null}, unaffected)
+     * @param body2 the 2nd colliding body (not {@code null}, unaffected)
+     * @param manifold the collision manifold (not {@code null}, unaffected)
+     * @param storeResult storage for impulses and velocities (not {@code null},
      * modified)
      * @param combinedFriction the combined friction of the 2 bodies
      * @param combinedRestitution the combined restitution of the 2 bodies
@@ -238,12 +238,12 @@ final public class Jolt {
 
     /**
      * Estimate the contact impulses and body velocity changes resulting from a
-     * collision.
+     * collision. (see Physics/Collision/EstimateCollisionResponse.cpp)
      *
-     * @param body1 the first colliding body (not null, unaffected)
-     * @param body2 the 2nd colliding body (not null, unaffected)
-     * @param manifold the collision manifold (not null, unaffected)
-     * @param storeResult storage for impulses and velocities (not null,
+     * @param body1 the first colliding body (not {@code null}, unaffected)
+     * @param body2 the 2nd colliding body (not {@code null}, unaffected)
+     * @param manifold the collision manifold (not {@code null}, unaffected)
+     * @param storeResult storage for impulses and velocities (not {@code null},
      * modified)
      * @param combinedFriction the combined friction of the 2 bodies
      * @param combinedRestitution the combined restitution of the 2 bodies
@@ -284,7 +284,8 @@ final public class Jolt {
     /**
      * Combine the specified quaternion with the specified hash code.
      *
-     * @param quaternion the quaternion to combine (not null, unaffected)
+     * @param quaternion the quaternion to combine (not {@code null},
+     * unaffected)
      * @param oldHash the old hash code
      * @return the new hash code
      */
@@ -301,7 +302,7 @@ final public class Jolt {
     /**
      * Combine the specified vector with the specified hash code.
      *
-     * @param vector the vector to combine (not null, unaffected)
+     * @param vector the vector to combine (not {@code null}, unaffected)
      * @param oldHash the old hash code
      * @return the new hash code
      */
@@ -335,7 +336,7 @@ final public class Jolt {
     /**
      * Combine the specified location vector with the specified hash code.
      *
-     * @param vector the vector to combine (not null, unaffected)
+     * @param vector the vector to combine (not {@code null}, unaffected)
      * @param oldHash the old hash code
      * @return the new hash code
      */
@@ -351,7 +352,7 @@ final public class Jolt {
     /**
      * Combine the specified vector with the specified hash code.
      *
-     * @param vector the vector to combine (not null, unaffected)
+     * @param vector the vector to combine (not {@code null}, unaffected)
      * @param oldHash the old hash code
      * @return the new hash code
      */
@@ -398,7 +399,7 @@ final public class Jolt {
     /**
      * Install a trace callback that uses a {@code PrintStream}.
      *
-     * @param stream where to send trace output (not null)
+     * @param stream where to send trace output (not {@code null})
      */
     native public static void installJavaTraceCallback(PrintStream stream);
 
@@ -600,7 +601,7 @@ final public class Jolt {
     /**
      * Dump profiler data. (native macro: JPH_PROFILE_DUMP)
      *
-     * @param message (not null)
+     * @param message (not {@code null})
      */
     native public static void profileDump(String message);
 
@@ -618,7 +619,7 @@ final public class Jolt {
     /**
      * Start an instrumented code section. (native macro: JPH_PROFILE_START)
      *
-     * @param name the section name (not null)
+     * @param name the section name (not {@code null})
      */
     native public static void profileStart(String name);
 
@@ -636,11 +637,13 @@ final public class Jolt {
     /**
      * Intersect the specified axis-aligned box with the specified ray.
      *
-     * @param rayOrigin the origin of the ray (not null, unaffected)
-     * @param invDirection the inverse direction of the ray (not null,
+     * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
+     * @param invDirection the inverse direction of the ray (not {@code null},
      * unaffected)
-     * @param minimum the minimum coordinates of the box (not null, unaffected)
-     * @param maximum the maximum coordinates of the box (not null, unaffected)
+     * @param minimum the minimum coordinates of the box (not {@code null},
+     * unaffected)
+     * @param maximum the maximum coordinates of the box (not {@code null},
+     * unaffected)
      * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
      * misses the box
      */
@@ -665,12 +668,14 @@ final public class Jolt {
     /**
      * Intersect the specified axis-aligned box with the specified ray.
      *
-     * @param startLocation the desired start location of the ray (not null,
+     * @param startLocation the desired start location of the ray (not
+     * {@code null}, unaffected)
+     * @param offset the desired end offset from the start location (not
+     * {@code null}, unaffected)
+     * @param minimum the minimum coordinates of the box (not {@code null},
      * unaffected)
-     * @param offset the desired end offset from the start location (not null,
+     * @param maximum the maximum coordinates of the box (not {@code null},
      * unaffected)
-     * @param minimum the minimum coordinates of the box (not null, unaffected)
-     * @param maximum the maximum coordinates of the box (not null, unaffected)
      * @return {@code true} if there is a hit, otherwise {@code false}
      */
     public static boolean rayAaBoxHits(Vec3Arg startLocation, Vec3Arg offset,
@@ -696,8 +701,9 @@ final public class Jolt {
     /**
      * Intersect the specified capsule with the specified ray.
      *
-     * @param rayOrigin the origin of the ray (not null, unaffected)
-     * @param rayDirection the direction of the ray (not null, unaffected)
+     * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
+     * @param rayDirection the direction of the ray (not {@code null},
+     * unaffected)
      * @param capsuleHalfHeight half the height of the capsule
      * @param capsuleRadius the radius of the capsule
      * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
@@ -720,8 +726,9 @@ final public class Jolt {
     /**
      * Intersect the specified infinite cylinder with the specified ray.
      *
-     * @param rayOrigin the origin of the ray (not null, unaffected)
-     * @param rayDirection the direction of the ray (not null, unaffected)
+     * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
+     * @param rayDirection the direction of the ray (not {@code null},
+     * unaffected)
      * @param cylinderRadius the radius of the cylinder
      * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
      * misses the cylinder
@@ -743,8 +750,9 @@ final public class Jolt {
     /**
      * Intersect the specified finite cylinder with the specified ray.
      *
-     * @param rayOrigin the origin of the ray (not null, unaffected)
-     * @param rayDirection the direction of the ray (not null, unaffected)
+     * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
+     * @param rayDirection the direction of the ray (not {@code null},
+     * unaffected)
      * @param cylinderHalfHeight half of the height of the cylinder
      * @param cylinderRadius the radius of the cylinder
      * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
@@ -767,9 +775,11 @@ final public class Jolt {
     /**
      * Intersect the specified sphere with the specified ray.
      *
-     * @param rayOrigin the origin of the ray (not null, unaffected)
-     * @param rayDirection the direction of the ray (not null, unaffected)
-     * @param sphereCenter the center of the sphere (not null, unaffected)
+     * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
+     * @param rayDirection the direction of the ray (not {@code null},
+     * unaffected)
+     * @param sphereCenter the center of the sphere (not {@code null},
+     * unaffected)
      * @param sphereRadius the radius of the sphere
      * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
      * misses the sphere
@@ -795,11 +805,12 @@ final public class Jolt {
     /**
      * Intersect the specified triangle with the specified ray.
      *
-     * @param rayOrigin the origin of the ray (not null, unaffected)
-     * @param rayDirection the direction of the ray (not null, unaffected)
-     * @param v0 the first vertex of the triangle (not null, unaffected)
-     * @param v1 the 2nd vertex of the triangle (not null, unaffected)
-     * @param v2 the 3rd vertex of the triangle (not null, unaffected)
+     * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
+     * @param rayDirection the direction of the ray (not {@code null},
+     * unaffected)
+     * @param v0 the first vertex of the triangle (not {@code null}, unaffected)
+     * @param v1 the 2nd vertex of the triangle (not {@code null}, unaffected)
+     * @param v2 the 3rd vertex of the triangle (not {@code null}, unaffected)
      * @return the minimum distance along ray, or {@code FLT_MAX} if the ray
      * misses the triangle
      */
@@ -956,7 +967,7 @@ final public class Jolt {
      * Return the Jolt-JNI version string that's hard-coded into the native
      * library.
      *
-     * @return the version string (not null, not empty)
+     * @return the version string (not {@code null}, not empty)
      */
     native public static String versionString();
     // *************************************************************************
