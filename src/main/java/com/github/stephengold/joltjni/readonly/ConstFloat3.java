@@ -46,4 +46,26 @@ public interface ConstFloat3 {
      * @param storeBuffer the destination buffer (not {@code null})
      */
     void put(FloatBuffer storeBuffer);
+
+    /**
+     * Return the first (X) component. The vector is unaffected.
+     *
+     * @return the component value
+     */
+    float x();
+
+    /**
+     * Return the 2nd (Y) component. The vector is unaffected.
+     *
+     * @return the component value
+     */
+    float y();
+
+    /**
+     * Return the 3rd (Z) component in single precision. The vector is
+     * unaffected.
+     *
+     * @return the component value
+     */
+    float z();
 }
