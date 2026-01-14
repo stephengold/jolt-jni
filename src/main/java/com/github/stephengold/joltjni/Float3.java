@@ -92,6 +92,18 @@ final public class Float3 implements ConstFloat3 {
         this.y = buffer.get(1);
         this.z = buffer.get(2);
     }
+
+    /**
+     * Instantiate from the specified position in the specified buffer.
+     *
+     * @param buffer the desired component values (not {@code null}, unaffected)
+     * @param startPos the starting position in the buffer (&ge;0)
+     */
+    public Float3(FloatBuffer buffer, int startPos) {
+        this.x = buffer.get(startPos);
+        this.y = buffer.get(startPos + 1);
+        this.z = buffer.get(startPos + 2);
+    }
     // *************************************************************************
     // new methods exposed
 
