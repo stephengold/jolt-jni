@@ -215,7 +215,7 @@ final public class StreamInWrapper extends StreamIn {
         int numMats = storeResult.length;
         for (int i = 0; i < numMats; ++i) {
             long storeWeightVa = storeResult[i].va();
-            readMat44(streamVa, storeWeightVa);
+            readSkinWeight(streamVa, storeWeightVa);
         }
     }
 
