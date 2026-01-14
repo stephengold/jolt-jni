@@ -153,6 +153,7 @@ $(N)/glue/g/GroupFilter.cpp \
 $(N)/glue/g/GroupFilterResult.cpp \
 $(N)/glue/g/GroupFilterTable.cpp \
 $(N)/glue/g/GroupFilterToIdMap.cpp \
+$(N)/glue/h/HairSkinWeight.cpp \
 $(N)/glue/h/HeightFieldShape.cpp \
 $(N)/glue/h/HeightFieldShapeSettings.cpp \
 $(N)/glue/h/HingeConstraint.cpp \

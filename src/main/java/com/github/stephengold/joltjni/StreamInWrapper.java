@@ -147,6 +147,21 @@ final public class StreamInWrapper extends StreamIn {
     }
 
     /**
+     * Read hair skinning weights from the stream.
+     *
+     * @param storeResult storage for the values that will be read (not
+     * {@code null}, modified)
+     */
+    public void readHairSkinWeights(HairSkinWeight[] storeResult) {
+        long streamVa = va();
+        int numMats = storeResult.length;
+        for (int i = 0; i < numMats; ++i) {
+            long storeWeightVa = storeResult[i].va();
+            readHairSkinWeight(streamVa, storeWeightVa);
+        }
+    }
+
+    /**
      * Read indexed triangles from the stream.
      *
      * @param storeResult storage for the values that will be read (not
