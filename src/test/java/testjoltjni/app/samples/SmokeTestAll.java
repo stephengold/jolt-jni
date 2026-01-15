@@ -73,7 +73,7 @@ final public class SmokeTestAll {
     /**
      * Main entry point for the SmokeTestAll application.
      *
-     * @param arguments array of command-line arguments (not null)
+     * @param arguments array of command-line arguments (not {@code null})
      */
     public static void main(String... arguments) {
         TestUtils.loadNativeLibrary();
@@ -124,7 +124,7 @@ final public class SmokeTestAll {
     /**
      * Invoke key methods of the specified Test to see whether they crash.
      *
-     * @param test the Test instance to use (not null)
+     * @param test the Test instance to use (not {@code null})
      */
     static private void smokeTest(Test test) {
         smokeTest(test, defaultNumSteps);
@@ -133,7 +133,7 @@ final public class SmokeTestAll {
     /**
      * Invoke key methods of the specified Test to see whether they crash.
      *
-     * @param test the Test instance to use (not null)
+     * @param test the Test instance to use (not {@code null})
      * @param numSteps the number of physics steps to simulate (&ge;0,
      * default=defaultNumSteps)
      */

@@ -61,7 +61,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     /**
      * Add the specified body to the scene.
      *
-     * @param body the body settings (not null, unaffected)
+     * @param body the body settings (not {@code null}, unaffected)
      */
     public void addBody(ConstBodyCreationSettings body) {
         long sceneVa = va();
@@ -72,7 +72,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     /**
      * Add the specified constraint to the scene.
      *
-     * @param constraint the constraint settings (not null, unaffected)
+     * @param constraint the constraint settings (not {@code null}, unaffected)
      * @param body1 the index of the first body in the bodies list
      * @param body2 the index of the 2nd body in the bodies list
      */
@@ -86,7 +86,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     /**
      * Add the specified soft body to the scene.
      *
-     * @param softBody the soft-body settings (not null, unaffected)
+     * @param softBody the soft-body settings (not {@code null}, unaffected)
      */
     public void addSoftBody(ConstSoftBodyCreationSettings softBody) {
         long sceneVa = va();
@@ -97,7 +97,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     /**
      * Instantiate the bodies in the scene.
      *
-     * @param system where to add the bodies (not null, modified)
+     * @param system where to add the bodies (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean createBodies(PhysicsSystem system) {
@@ -123,7 +123,8 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     /**
      * Load the current state of the specified physics system.
      *
-     * @param system the physics system to load from (not null, unaffected)
+     * @param system the physics system to load from (not {@code null},
+     * unaffected)
      */
     public void fromPhysicsSystem(PhysicsSystem system) {
         long sceneVa = va();
@@ -171,7 +172,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     /**
      * Save the scene to the specified binary stream. The scene is unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      * @param saveShapes if true, save the shapes
      * @param saveGroupFilter if true, save the group filter
      */
@@ -185,7 +186,7 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
     /**
      * Attempt to de-serialize a saved scene from the specified stream.
      *
-     * @param stream the stream to read (not null)
+     * @param stream the stream to read (not {@code null})
      * @return a new object
      */
     public static PhysicsSceneResult sRestoreFromBinaryState(StreamIn stream) {

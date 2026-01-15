@@ -56,7 +56,7 @@ final public class Plane implements ConstPlane {
     /**
      * Instantiate a copy of the argument.
      *
-     * @param original the plane to copy (not null, unaffected)
+     * @param original the plane to copy (not {@code null}, unaffected)
      */
     public Plane(ConstPlane original) {
         this.nx = original.getNormalX();
@@ -83,7 +83,7 @@ final public class Plane implements ConstPlane {
     /**
      * Instantiate from the specified buffer.
      *
-     * @param buffer the desired component values (not null, unaffected,
+     * @param buffer the desired component values (not {@code null}, unaffected,
      * capacity&ge;4)
      */
     public Plane(FloatBuffer buffer) {
@@ -96,7 +96,7 @@ final public class Plane implements ConstPlane {
     /**
      * Instantiate a plane with specified components.
      *
-     * @param normal the desired normal direction (not null, unaffected)
+     * @param normal the desired normal direction (not {@code null}, unaffected)
      * @param c the desired constant
      */
     public Plane(Vec3Arg normal, float c) {
@@ -111,7 +111,7 @@ final public class Plane implements ConstPlane {
     /**
      * Set all 4 components from the argument.
      *
-     * @param source the plane to copy (not null, unaffected)
+     * @param source the plane to copy (not {@code null}, unaffected)
      */
     public void set(ConstPlane source) {
         this.nx = source.getNormalX();
@@ -138,8 +138,8 @@ final public class Plane implements ConstPlane {
     /**
      * Set all 4 components from the specified buffer.
      *
-     * @param buffer the desired component values (not null, length&ge;4,
-     * unaffected)
+     * @param buffer the desired component values (not {@code null},
+     * length&ge;4, unaffected)
      */
     public void set(FloatBuffer buffer) {
         this.nx = buffer.get(0);
@@ -160,7 +160,7 @@ final public class Plane implements ConstPlane {
     /**
      * Alter the normal direction.
      *
-     * @param normal the desired direction (not null, unaffected)
+     * @param normal the desired direction (not {@code null}, unaffected)
      */
     public void setNormal(Vec3Arg normal) {
         this.nx = normal.getX();
@@ -174,7 +174,8 @@ final public class Plane implements ConstPlane {
      * Write all 4 components to the start of the specified buffer. The plane is
      * unaffected.
      *
-     * @param storeFloats the destination buffer (not null, capacity&ge;4)
+     * @param storeFloats the destination buffer (not {@code null},
+     * capacity&ge;4)
      */
     @Override
     public void copyTo(FloatBuffer storeFloats) {
@@ -242,7 +243,7 @@ final public class Plane implements ConstPlane {
      * Write all 4 components to the specified buffer and advance the buffer's
      * position by 4. The plane is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeBuffer the destination buffer (not {@code null})
      */
     @Override
     public void put(FloatBuffer storeBuffer) {
@@ -255,7 +256,7 @@ final public class Plane implements ConstPlane {
     /**
      * Return the signed distance of the specified point.
      *
-     * @param point the point to measure (not null, unaffected)
+     * @param point the point to measure (not {@code null}, unaffected)
      * @return the signed distance
      */
     @Override
@@ -274,7 +275,7 @@ final public class Plane implements ConstPlane {
      * Plane{(0.0 1.0 0.0) 0.0}
      * </pre>
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {

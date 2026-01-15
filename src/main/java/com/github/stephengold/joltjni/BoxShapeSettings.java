@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -69,12 +69,9 @@ public class BoxShapeSettings
     /**
      * Instantiate a shape with the specified half extents.
      *
-     * @param xHalfExtent the desired half extent on the local X axis
-     * (&gt;0)
-     * @param yHalfExtent the desired half extent on the local Y axis
-     * (&gt;0)
-     * @param zHalfExtent the desired half extent on the local Z axis
-     * (&gt;0)
+     * @param xHalfExtent the desired half extent on the local X axis (&gt;0)
+     * @param yHalfExtent the desired half extent on the local Y axis (&gt;0)
+     * @param zHalfExtent the desired half extent on the local Z axis (&gt;0)
      */
     public BoxShapeSettings(
             float xHalfExtent, float yHalfExtent, float zHalfExtent) {
@@ -101,8 +98,8 @@ public class BoxShapeSettings
     /**
      * Instantiate settings for the specified half extents.
      *
-     * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &ge;0, unaffected)
+     * @param halfExtents the desired half extents on each local axis (not
+     * {@code null}, all components &ge;0, unaffected)
      */
     public BoxShapeSettings(Vec3Arg halfExtents) {
         this(halfExtents, Jolt.cDefaultConvexRadius);
@@ -111,8 +108,8 @@ public class BoxShapeSettings
     /**
      * Instantiate settings for the specified half extents and convex radius.
      *
-     * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &gt;0, unaffected)
+     * @param halfExtents the desired half extents on each local axis (not
+     * {@code null}, all components &gt;0, unaffected)
      * @param convexRadius the desired convex radius (&ge;0, default=0.05)
      */
     public BoxShapeSettings(Vec3Arg halfExtents, float convexRadius) {
@@ -123,11 +120,11 @@ public class BoxShapeSettings
      * Instantiate settings for the specified half extents, convex radius, and
      * material.
      *
-     * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &gt;0, unaffected)
+     * @param halfExtents the desired half extents on each local axis (not
+     * {@code null}, all components &gt;0, unaffected)
      * @param convexRadius the desired convex radius (&ge;0, default=0.05)
-     * @param material the desired surface properties (not null, unaffected) or
-     * {@code null} for default properties (default=null)
+     * @param material the desired surface properties (not {@code null},
+     * unaffected) or {@code null} for default properties (default=null)
      */
     public BoxShapeSettings(Vec3Arg halfExtents, float convexRadius,
             ConstPhysicsMaterial material) {
@@ -155,8 +152,8 @@ public class BoxShapeSettings
     /**
      * Alter the extent of the box. (native attribute: mHalfExtent)
      *
-     * @param halfExtents the desired half extents on each local axis (not null,
-     * all components &ge;0, unaffected, default=(0,0,0))
+     * @param halfExtents the desired half extents on each local axis (not
+     * {@code null}, all components &ge;0, unaffected, default=(0,0,0))
      */
     public void setHalfExtent(Vec3Arg halfExtents) {
         long settingsVa = va();

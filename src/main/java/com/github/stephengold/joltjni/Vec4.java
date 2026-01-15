@@ -97,7 +97,7 @@ final public class Vec4 implements Vec4Arg {
     /**
      * Instantiate a vector from the specified array.
      *
-     * @param array the desired component values (not null, length&ge;4,
+     * @param array the desired component values (not {@code null}, length&ge;4,
      * unaffected)
      */
     public Vec4(float[] array) {
@@ -110,7 +110,7 @@ final public class Vec4 implements Vec4Arg {
     /**
      * Instantiate from the specified 3-D vector.
      *
-     * @param vec the vector to copy (not null, unaffected)
+     * @param vec the vector to copy (not {@code null}, unaffected)
      * @param w the desired W component
      */
     public Vec4(Vec3Arg vec, float w) {
@@ -123,7 +123,7 @@ final public class Vec4 implements Vec4Arg {
     /**
      * Instantiate a copy of the argument.
      *
-     * @param vec the vector to copy (not null, unaffected)
+     * @param vec the vector to copy (not {@code null}, unaffected)
      */
     public Vec4(Vec4Arg vec) {
         this.w = vec.getW();
@@ -152,7 +152,7 @@ final public class Vec4 implements Vec4Arg {
     /**
      * Set all 4 components from the specified array.
      *
-     * @param array the desired component values (not null, length&ge;4,
+     * @param array the desired component values (not {@code null}, length&ge;4,
      * unaffected)
      */
     public void set(float[] array) {
@@ -165,7 +165,7 @@ final public class Vec4 implements Vec4Arg {
     /**
      * Set all 4 components from the argument.
      *
-     * @param source the vector to copy (not null, unaffected)
+     * @param source the vector to copy (not {@code null}, unaffected)
      */
     public void set(Vec4Arg source) {
         this.x = source.getX();
@@ -273,7 +273,7 @@ final public class Vec4 implements Vec4Arg {
      * Return the dot product with the specified vector. The current vector is
      * unaffected.
      *
-     * @param factor the vector to dot with the current one (not null,
+     * @param factor the vector to dot with the current one (not {@code null},
      * unaffected)
      * @return the dot product
      */
@@ -416,7 +416,7 @@ final public class Vec4 implements Vec4Arg {
      * Vec4(0.0 0.0 0.0 0.0)
      * </pre>
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {

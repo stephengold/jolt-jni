@@ -595,7 +595,7 @@ public class Test007 {
     /**
      * Test the getters and defaults of the specified {@code BoxShape}.
      *
-     * @param shape the settings to test (not null, unaffected)
+     * @param shape the settings to test (not {@code null}, unaffected)
      */
     private static void testBoxDefaults(BoxShape shape) {
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
@@ -611,7 +611,7 @@ public class Test007 {
     /**
      * Test the getters and defaults of the specified {@code CapsuleShape}.
      *
-     * @param shape the settings to test (not null, unaffected)
+     * @param shape the settings to test (not {@code null}, unaffected)
      */
     private static void testCapsuleDefaults(CapsuleShape shape) {
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
@@ -627,7 +627,7 @@ public class Test007 {
     /**
      * Test the getters and defaults of the specified {@code ConvexHullShape}.
      *
-     * @param shape the shape to test (not null, unaffected)
+     * @param shape the shape to test (not {@code null}, unaffected)
      */
     private static void testConvexHullDefaults(ConvexHullShape shape) {
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
@@ -647,7 +647,7 @@ public class Test007 {
     /**
      * Test the getters and defaults of the specified {@code CylinderShape}.
      *
-     * @param shape the shape to test (not null, unaffected)
+     * @param shape the shape to test (not {@code null}, unaffected)
      */
     private static void testCylinderDefaults(CylinderShape shape) {
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
@@ -664,7 +664,7 @@ public class Test007 {
     /**
      * Test the getters and defaults of the specified {@code HeightFieldShape}.
      *
-     * @param shape the shape to test (not null, unaffected)
+     * @param shape the shape to test (not {@code null}, unaffected)
      */
     private static void testHeightFieldDefaults(HeightFieldShape shape) {
         Assert.assertEquals(2, shape.getBlockSize());
@@ -682,7 +682,7 @@ public class Test007 {
     /**
      * Test the getters and defaults of the specified {@code MeshShape}.
      *
-     * @param shape the shape to test (not null, unaffected)
+     * @param shape the shape to test (not {@code null}, unaffected)
      */
     private static void testMeshDefaults(MeshShape shape) {
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);
@@ -698,7 +698,7 @@ public class Test007 {
      * Test the getters and defaults of the specified
      * {@code OffsetCenterOfMassShape}.
      *
-     * @param shape the shape to test (not null, unaffected)
+     * @param shape the shape to test (not {@code null}, unaffected)
      */
     private static void testOffsetCenterOfMassDefaults(
             OffsetCenterOfMassShape shape) {
@@ -716,7 +716,7 @@ public class Test007 {
     /**
      * Test the getters and defaults of the specified {@code SphereShape}.
      *
-     * @param shape the shape to test (not null, unaffected)
+     * @param shape the shape to test (not {@code null}, unaffected)
      */
     private static void testSphereDefaults(SphereShape shape) {
         TestUtils.assertEquals(0f, 0f, 0f, shape.getCenterOfMass(), 0f);

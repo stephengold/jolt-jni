@@ -92,8 +92,8 @@ final public class Quat implements QuatArg {
     /**
      * Instantiate a quaternion from the specified array.
      *
-     * @param array the desired component values (in XYZW order, not null,
-     * length&ge;4, unaffected)
+     * @param array the desired component values (in XYZW order, not
+     * {@code null}, length&ge;4, unaffected)
      */
     public Quat(float[] array) {
         this.x = array[0];
@@ -105,7 +105,7 @@ final public class Quat implements QuatArg {
     /**
      * Instantiate from the specified buffer.
      *
-     * @param buffer the desired component values (not null, unaffected,
+     * @param buffer the desired component values (not {@code null}, unaffected,
      * capacity&ge;4)
      */
     public Quat(FloatBuffer buffer) {
@@ -118,7 +118,7 @@ final public class Quat implements QuatArg {
     /**
      * Instantiate a copy of the argument.
      *
-     * @param original the quaternion to copy (not null, unaffected)
+     * @param original the quaternion to copy (not {@code null}, unaffected)
      */
     public Quat(QuatArg original) {
         this.x = original.getX();
@@ -130,7 +130,7 @@ final public class Quat implements QuatArg {
     /**
      * Instantiate a quaternion based on a {@code Vec3Arg}.
      *
-     * @param v the desired XYZ components
+     * @param v the desired XYZ components (not {@code null}, unaffected)
      * @param w the desired W component
      */
     public Quat(Vec3Arg v, float w) {
@@ -170,8 +170,8 @@ final public class Quat implements QuatArg {
     /**
      * Set all 4 components from the specified array.
      *
-     * @param array the desired component values (in XYZW order, not null,
-     * length&ge;4, unaffected)
+     * @param array the desired component values (in XYZW order, not
+     * {@code null}, length&ge;4, unaffected)
      */
     public void set(float[] array) {
         this.x = array[0];
@@ -183,8 +183,8 @@ final public class Quat implements QuatArg {
     /**
      * Set all 4 components from the specified buffer.
      *
-     * @param buffer the desired component values (not null, length&ge;4,
-     * unaffected)
+     * @param buffer the desired component values (not {@code null},
+     * length&ge;4, unaffected)
      */
     public void set(FloatBuffer buffer) {
         this.x = buffer.get(0);
@@ -196,7 +196,7 @@ final public class Quat implements QuatArg {
     /**
      * Copy all 4 components from the argument.
      *
-     * @param source the quaternion to copy (not null, unaffected)
+     * @param source the quaternion to copy (not {@code null}, unaffected)
      */
     public void set(QuatArg source) {
         this.w = source.getW();
@@ -242,7 +242,7 @@ final public class Quat implements QuatArg {
      * order.
      *
      * @param angles the desired rotation around each axis (in radians, not
-     * null, unaffected)
+     * {@code null}, unaffected)
      * @return a new quaternion
      */
     public static Quat sEulerAngles(Vec3Arg angles) {
@@ -257,8 +257,8 @@ final public class Quat implements QuatArg {
     /**
      * Create a rotation quaternion that rotates {@code from} to {@code to}.
      *
-     * @param from the first direction vector (not null, unaffected)
-     * @param to the 2nd direction vector (not null, unaffected)
+     * @param from the first direction vector (not {@code null}, unaffected)
+     * @param to the 2nd direction vector (not {@code null}, unaffected)
      * @return a new quaternion
      */
     public static Quat sFromTo(Vec3Arg from, Vec3Arg to) {
@@ -292,7 +292,7 @@ final public class Quat implements QuatArg {
     /**
      * Generate a pseudo-random unit quaternion.
      *
-     * @param engine the generator to use (not null)
+     * @param engine the generator to use (not {@code null})
      * @return a new unit quaternion
      */
     public static Quat sRandom(RandomNumberEngine engine) {
@@ -320,7 +320,8 @@ final public class Quat implements QuatArg {
     /**
      * Create a rotation quaternion from the specified normalized rotation axis.
      *
-     * @param axis the desired rotation axis (not null, normalized)
+     * @param axis the desired rotation axis (not {@code null}, normalized,
+     * unaffected))
      * @param angle the desired rotation angle (in radians)
      * @return a new quaternion
      */
@@ -343,7 +344,8 @@ final public class Quat implements QuatArg {
      * Write all 4 components to the start of the specified buffer. The current
      * object is unaffected.
      *
-     * @param storeFloats the destination buffer (not null, capacity&ge;4)
+     * @param storeFloats the destination buffer (not {@code null},
+     * capacity&ge;4)
      */
     @Override
     public void copyTo(FloatBuffer storeFloats) {
@@ -365,8 +367,7 @@ final public class Quat implements QuatArg {
     }
 
     /**
-     * Return the real (W) component in single precision. The quaternion is
-     * unaffected.
+     * Return the real (W) component. The quaternion is unaffected.
      *
      * @return the component value
      */
@@ -376,8 +377,7 @@ final public class Quat implements QuatArg {
     }
 
     /**
-     * Return the first imaginary (X) component in single precision. The
-     * quaternion is unaffected.
+     * Return the first imaginary (X) component. The quaternion is unaffected.
      *
      * @return the component value
      */
@@ -387,8 +387,7 @@ final public class Quat implements QuatArg {
     }
 
     /**
-     * Return the 2nd imaginary (Y) component in single precision. The
-     * quaternion is unaffected.
+     * Return the 2nd imaginary (Y) component. The quaternion is unaffected.
      *
      * @return the component value
      */
@@ -398,8 +397,7 @@ final public class Quat implements QuatArg {
     }
 
     /**
-     * Return the 3rd imaginary (Z) component in single precision. The
-     * quaternion is unaffected.
+     * Return the 3rd imaginary (Z) component. The quaternion is unaffected.
      *
      * @return the component value
      */
@@ -518,7 +516,7 @@ final public class Quat implements QuatArg {
      * Write all 4 components to the specified buffer in XYZW order and advance
      * the buffer's position by 4. The quaternion is unaffected.
      *
-     * @param storeBuffer the destination buffer (not null)
+     * @param storeBuffer the destination buffer (not {@code null})
      */
     @Override
     public void put(FloatBuffer storeBuffer) {
@@ -597,7 +595,7 @@ final public class Quat implements QuatArg {
      * Quat(0.0 0.0 0.0 1.0)
      * </pre>
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {

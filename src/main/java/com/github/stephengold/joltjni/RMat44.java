@@ -74,7 +74,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Instantiate from the specified single-precision matrix.
      *
-     * @param spMatrix the matrix to copy (not null, unaffected)
+     * @param spMatrix the matrix to copy (not {@code null}, unaffected)
      */
     public RMat44(Mat44Arg spMatrix) {
         long spMatrixVa = spMatrix.targetVa();
@@ -85,7 +85,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Instantiate a copy of the specified matrix.
      *
-     * @param original the matrix to duplicate (not null, unaffected)
+     * @param original the matrix to duplicate (not {@code null}, unaffected)
      */
     public RMat44(RMat44Arg original) {
         long originalVa = original.targetVa();
@@ -96,10 +96,11 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Instantiate a matrix with the specified columns.
      *
-     * @param c1 the desired first/leftmost column (not null, unaffected)
-     * @param c2 the desired 2nd column (not null, unaffected)
-     * @param c3 the desired 3rd column (not null, unaffected)
-     * @param c4 the desired 4th/rightmost column (not null, unaffected)
+     * @param c1 the desired first/leftmost column (not {@code null},
+     * unaffected)
+     * @param c2 the desired 2nd column (not {@code null}, unaffected)
+     * @param c3 the desired 3rd column (not {@code null}, unaffected)
+     * @param c4 the desired 4th/rightmost column (not {@code null}, unaffected)
      */
     public RMat44(Vec4Arg c1, Vec4Arg c2, Vec4Arg c3, RVec3Arg c4) {
         FloatBuffer floatBuffer = Temporaries.floatBuffer1.get();
@@ -134,7 +135,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Left-multiply the current matrix by the argument.
      *
-     * @param leftFactor the left factor (not null, unaffected)
+     * @param leftFactor the left factor (not {@code null}, unaffected)
      */
     public void leftMultiplyInPlace(RMat44Arg leftFactor) {
         long currentVa = va();
@@ -153,7 +154,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Return the product of the specified matrices.
      *
-     * @param mArray an array of input matrices (not null, unaffected)
+     * @param mArray an array of input matrices (not {@code null}, unaffected)
      * @return a new matrix
      */
     public static RMat44 product(RMat44Arg... mArray) {
@@ -178,7 +179,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Right-multiply the current matrix by the argument.
      *
-     * @param rightFactor the right factor (not null, unaffected)
+     * @param rightFactor the right factor (not {@code null}, unaffected)
      */
     public void rightMultiplyInPlace(RMat44Arg rightFactor) {
         long currentVa = va();
@@ -189,7 +190,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Copy all elements of the argument to the current matrix.
      *
-     * @param source the matrix to copy (not null, unaffected)
+     * @param source the matrix to copy (not {@code null}, unaffected)
      */
     public void set(RMat44Arg source) {
         long targetVa = va();
@@ -200,7 +201,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Set the first column to the specified vector.
      *
-     * @param vec the vector to use (not null, unaffected)
+     * @param vec the vector to use (not {@code null}, unaffected)
      */
     public void setAxisX(Vec3Arg vec) {
         long matrixVa = va();
@@ -213,7 +214,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Set the 2nd column to the specified vector.
      *
-     * @param vec the vector to use (not null, unaffected)
+     * @param vec the vector to use (not {@code null}, unaffected)
      */
     public void setAxisY(Vec3Arg vec) {
         long matrixVa = va();
@@ -226,7 +227,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Set the 3rd column to the specified vector.
      *
-     * @param vec the vector to use (not null, unaffected)
+     * @param vec the vector to use (not {@code null}, unaffected)
      */
     public void setAxisZ(Vec3Arg vec) {
         long matrixVa = va();
@@ -254,7 +255,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Alter the translation component.
      *
-     * @param offset the desired translation (not null, unaffected)
+     * @param offset the desired translation (not {@code null}, unaffected)
      */
     public void setTranslation(RVec3Arg offset) {
         long matrixVa = va();
@@ -279,7 +280,8 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Create a rotation matrix from the specified quaternion.
      *
-     * @param rotation the rotation quaternion to use (not null, unaffected)
+     * @param rotation the rotation quaternion to use (not {@code null},
+     * unaffected)
      * @return a new object
      */
     public static RMat44 sRotation(QuatArg rotation) {
@@ -296,8 +298,8 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Create a translation-and-rotation matrix.
      *
-     * @param rotation the amount to rotate (not null, unaffected)
-     * @param offset the amount to translate (not null, unaffected)
+     * @param rotation the amount to rotate (not {@code null}, unaffected)
+     * @param offset the amount to translate (not {@code null}, unaffected)
      * @return a new object
      */
     public static RMat44 sRotationTranslation(
@@ -331,7 +333,8 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Create a pure scaling matrix.
      *
-     * @param factors the amount to scale each axis (not null, unaffected)
+     * @param factors the amount to scale each axis (not {@code null},
+     * unaffected)
      * @return a new matrix
      */
     public static RMat44 sScale(Vec3Arg factors) {
@@ -347,7 +350,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
     /**
      * Create a pure translation matrix.
      *
-     * @param offset the amount to translate (not null, unaffected)
+     * @param offset the amount to translate (not {@code null}, unaffected)
      * @return a new matrix
      */
     public static RMat44 sTranslation(RVec3Arg offset) {
@@ -521,7 +524,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Test whether the current matrix is equal to the argument. The current
      * matrix is unaffected.
      *
-     * @param m2 the 2nd matrix to test (not null, unaffected)
+     * @param m2 the 2nd matrix to test (not {@code null}, unaffected)
      * @return {@code true} if equal, {@code false} if unequal
      */
     @Override
@@ -551,7 +554,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Multiply the current matrix by the specified single-precision matrix. The
      * current matrix is unaffected.
      *
-     * @param right the right factor (not null, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     @Override
@@ -568,7 +571,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Multiply the current matrix by the argument. The current matrix is
      * unaffected.
      *
-     * @param right the right factor (not null, unaffected)
+     * @param right the right factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     @Override
@@ -585,7 +588,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Multiply the 3x3 matrix by the specified column vector. The matrix is
      * unaffected.
      *
-     * @param vec3Arg the right factor (not null, unaffected)
+     * @param vec3Arg the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
@@ -603,7 +606,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Multiply the transpose of the 3x3 matrix by the specified column vector.
      * The matrix is unaffected.
      *
-     * @param rightVector the right factor (not null, unaffected)
+     * @param rightVector the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
@@ -622,7 +625,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param rightVector the right factor (not null, unaffected)
+     * @param rightVector the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
@@ -641,7 +644,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * component of the right factor implied to be one. The matrix is
      * unaffected.
      *
-     * @param vec3 the right factor (not null, unaffected)
+     * @param vec3 the right factor (not {@code null}, unaffected)
      * @return a new vector
      */
     @Override
@@ -678,7 +681,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *
-     * @param leftVector the left factor (not null, unaffected)
+     * @param leftVector the left factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     @Override
@@ -697,7 +700,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * Post multiply by the specified translation vector. The current matrix is
      * unaffected.
      *
-     * @param vec3 the left factor (not null, unaffected)
+     * @param vec3 the left factor (not {@code null}, unaffected)
      * @return a new matrix
      */
     @Override
@@ -717,7 +720,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * column-major order and advance the buffer's position by 9. The matrix is
      * unaffected.
      *
-     * @param storeFloats the destination buffer (not null)
+     * @param storeFloats the destination buffer (not {@code null})
      */
     @Override
     public void put3x3ColumnMajor(FloatBuffer storeFloats) {
@@ -732,7 +735,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * column-major order and advance the buffer's position by 16. The matrix is
      * unaffected.
      *
-     * @param storeFloats the destination buffer (not null)
+     * @param storeFloats the destination buffer (not {@code null})
      */
     @Override
     public void putColumnMajor(FloatBuffer storeFloats) {
@@ -768,7 +771,7 @@ final public class RMat44 extends JoltPhysicsObject implements RMat44Arg {
      * ]
      * </pre>
      *
-     * @return the string representation (not null, not empty)
+     * @return the string representation (not {@code null}, not empty)
      */
     @Override
     public String toString() {

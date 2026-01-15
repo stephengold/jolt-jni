@@ -222,7 +222,8 @@ public class Test002 {
      * Configuration that occurs after the {@code PhysicsSystem} is created, but
      * before advancing the simulation.
      *
-     * @param physicsSystem the {@code PhysicsSystem} to configure (not null)
+     * @param physicsSystem the {@code PhysicsSystem} to configure (not
+     * {@code null})
      * @param motionQuality the desired motion quality for dynamic bodies (not
      * null)
      */

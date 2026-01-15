@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,8 +68,8 @@ public class ShapeCastSettings extends CollideSettingsBase {
     }
 
     /**
-     * Return the policy for back-facing triangles in triangle-based shapes.
-     * The settings are unaffected. (native attribute: mBackFaceModeTriangles)
+     * Return the policy for back-facing triangles in triangle-based shapes. The
+     * settings are unaffected. (native attribute: mBackFaceModeTriangles)
      *
      * @return the enum value (not null)
      */

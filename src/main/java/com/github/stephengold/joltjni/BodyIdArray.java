@@ -56,7 +56,7 @@ public class BodyIdArray extends JoltPhysicsObject {
     /**
      * Instantiate an array initialized from the specified Java array.
      *
-     * @param idArray the ID values (not null, not empty, unaffected)
+     * @param idArray the ID values (not {@code null}, not empty, unaffected)
      */
     public BodyIdArray(int... idArray) {
         this.length = idArray.length;
@@ -71,8 +71,8 @@ public class BodyIdArray extends JoltPhysicsObject {
     /**
      * Instantiate an array initialized from the specified direct buffer.
      *
-     * @param idBuffer the ID values (not null, direct, positive capacity,
-     * unaffected)
+     * @param idBuffer the ID values (not {@code null}, direct, positive
+     * capacity, unaffected)
      */
     public BodyIdArray(IntBuffer idBuffer) {
         assert idBuffer.isDirect();
@@ -86,7 +86,7 @@ public class BodyIdArray extends JoltPhysicsObject {
     /**
      * Instantiate an array initialized from the specified Java list.
      *
-     * @param idList the ID values (not null, not empty, unaffected)
+     * @param idList the ID values (not {@code null}, not empty, unaffected)
      */
     public BodyIdArray(List<Integer> idList) {
         this.length = idList.size();

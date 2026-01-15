@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -29,8 +29,8 @@ package com.github.stephengold.joltjni.readonly;
  */
 public interface ConstVehicleCollisionTester extends ConstJoltPhysicsObject {
     /**
-     * Return the object layer used for collision detection when no filters
-     * are overridden.
+     * Return the object layer used for collision detection when no filters are
+     * overridden.
      *
      * @return the index of the layer
      */

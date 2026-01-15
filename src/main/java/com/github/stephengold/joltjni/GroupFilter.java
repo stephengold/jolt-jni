@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -72,7 +72,7 @@ public class GroupFilter
     /**
      * Read a filter from the specified binary stream.
      *
-     * @param stream where to read objects (not null)
+     * @param stream where to read objects (not {@code null})
      * @return a new object
      */
     public static GroupFilterResult sRestoreFromBinaryState(StreamIn stream) {
@@ -89,8 +89,8 @@ public class GroupFilter
      * Assign a native object (assuming there's none already assigned) and
      * designate the JVM object as a co-owner.
      *
-     * @param filterVa the virtual address of the native object to assign
-     * (not zero)
+     * @param filterVa the virtual address of the native object to assign (not
+     * zero)
      */
     final protected void setVirtualAddressAsCoOwner(long filterVa) {
         long refVa = toRef(filterVa);
@@ -103,8 +103,8 @@ public class GroupFilter
     /**
      * Test whether the specified groups can collide. The filter is unaffected.
      *
-     * @param group1 the first group (not null, unaffected)
-     * @param group2 the 2nd group (not null, unaffected)
+     * @param group1 the first group (not {@code null}, unaffected)
+     * @param group2 the 2nd group (not {@code null}, unaffected)
      * @return {@code true} if they can collide, otherwise {@code false}
      */
     @Override
@@ -122,7 +122,7 @@ public class GroupFilter
      * Save the settings to the specified binary stream. The filter is
      * unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {

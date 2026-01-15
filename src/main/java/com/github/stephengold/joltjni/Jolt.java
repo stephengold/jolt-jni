@@ -557,7 +557,7 @@ final public class Jolt {
      * Create a direct {@code ShortBuffer} with native byte order and the
      * specified capacity.
      *
-     * @param numShorts the desired capacity (in ints)
+     * @param numShorts the desired capacity (in shorts)
      * @return a new direct buffer, zeroed and rewound but not flipped
      */
     public static ShortBuffer newDirectShortBuffer(int numShorts) {
