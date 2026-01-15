@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,6 +41,7 @@ import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.ContactListenerList;
 import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.FilteredContactListener;
+import com.github.stephengold.joltjni.Gradient;
 import com.github.stephengold.joltjni.GroupFilterTable;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemSingleThreaded;
@@ -79,6 +80,7 @@ import com.github.stephengold.joltjni.readonly.ConstCharacter;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstContactSettings;
+import com.github.stephengold.joltjni.readonly.ConstGradient;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstMotionProperties;
@@ -141,6 +143,7 @@ public class Test003 {
         doContactListenerList();
         doContactSettings();
         doFilteredContactListener();
+        doGradient();
         doJobSystemSingleThreaded();
         doJobSystemThreadPool();
         doMassProperties();
@@ -538,6 +541,19 @@ public class Test003 {
         testFilteredContactListenerSetters(listener);
 
         TestUtils.testClose(listener);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code Gradient} class.
+     */
+    private static void doGradient() {
+        Gradient gradient = new Gradient();
+
+        testGradientDefaults(gradient);
+        testGradientSetters(gradient);
+
+        TestUtils.testClose(gradient);
         System.gc();
     }
 
@@ -1081,6 +1097,38 @@ public class Test003 {
         Assert.assertFalse(listener.getEnableValidate());
 
         TestUtils.testClose(olpFilter, bplFilter, bodyFilter);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code Gradient}.
+     *
+     * @param gradient the gradient to test (not {@code null}, unaffected)
+     */
+    private static void testGradientDefaults(ConstGradient gradient) {
+        Assert.assertTrue(gradient.hasAssignedNativeObject());
+        Assert.assertTrue(gradient.ownsNativeObject());
+
+        Assert.assertEquals(1f, gradient.getMax(), 0f);
+        Assert.assertEquals(1f, gradient.getMaxFraction(), 0f);
+        Assert.assertEquals(0f, gradient.getMin(), 0f);
+        Assert.assertEquals(0f, gradient.getMinFraction(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code Gradient}.
+     *
+     * @param gradient the gradient to test (not {@code null}, modified)
+     */
+    private static void testGradientSetters(Gradient gradient) {
+        gradient.setMax(3f);
+        gradient.setMaxFraction(0.9f);
+        gradient.setMin(-2f);
+        gradient.setMinFraction(0.1f);
+
+        Assert.assertEquals(3f, gradient.getMax(), 0f);
+        Assert.assertEquals(0.9f, gradient.getMaxFraction(), 0f);
+        Assert.assertEquals(-2f, gradient.getMin(), 0f);
+        Assert.assertEquals(0.1f, gradient.getMinFraction(), 0f);
     }
 
     /**
