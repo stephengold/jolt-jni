@@ -122,6 +122,22 @@ final public class TestUtils {
     }
 
     /**
+     * Verify the components of a {@code ConstFloat3} to within some tolerance.
+     *
+     * @param x the expected X component
+     * @param y the expected Y component
+     * @param z the expected Z component
+     * @param actual the vector to test (not {@code null}, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertEquals(
+            float x, float y, float z, ConstFloat3 actual, float tolerance) {
+        Assert.assertEquals("x component", x, actual.x(), tolerance);
+        Assert.assertEquals("y component", y, actual.y(), tolerance);
+        Assert.assertEquals("z component", z, actual.z(), tolerance);
+    }
+
+    /**
      * Verify the components of a {@code ConstGradient} to within some
      * tolerance.
      *
@@ -254,22 +270,6 @@ final public class TestUtils {
         Assert.assertEquals("y component", y, actual.getY(), tolerance);
         Assert.assertEquals("z component", z, actual.getZ(), tolerance);
         Assert.assertEquals("w component", w, actual.getW(), tolerance);
-    }
-
-    /**
-     * Verify the components of a {@code ConstFloat3} to within some tolerance.
-     *
-     * @param x the expected X component
-     * @param y the expected Y component
-     * @param z the expected Z component
-     * @param actual the vector to test (not {@code null}, unaffected)
-     * @param tolerance the allowable difference for each component (&ge;0)
-     */
-    public static void assertEquals(
-            float x, float y, float z, ConstFloat3 actual, float tolerance) {
-        Assert.assertEquals("x component", x, actual.x(), tolerance);
-        Assert.assertEquals("y component", y, actual.y(), tolerance);
-        Assert.assertEquals("z component", z, actual.z(), tolerance);
     }
 
     /**
