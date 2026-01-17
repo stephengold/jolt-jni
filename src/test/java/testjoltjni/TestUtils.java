@@ -33,6 +33,7 @@ import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstColor;
 import com.github.stephengold.joltjni.readonly.ConstFloat3;
+import com.github.stephengold.joltjni.readonly.ConstGradient;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
@@ -118,6 +119,31 @@ final public class TestUtils {
         Assert.assertEquals("h component", g, actual.getG());
         Assert.assertEquals("b component", b, actual.getB());
         Assert.assertEquals("a component", a, actual.getA());
+    }
+
+    /**
+     * Verify the components of a {@code ConstGradient} to within some
+     * tolerance.
+     *
+     * @param min the expected parameter value when the fraction is
+     * {@code minFraction}
+     * @param max the expected parameter value when the fraction is
+     * {@code maxFraction}
+     * @param minFraction the expected fraction at which the value is
+     * {@code min}
+     * @param maxFraction the expected fraction at which the value is
+     * {@code max}
+     * @param actual the gradient to test (not {@code null}, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertEquals(float min, float max, float minFraction,
+            float maxFraction, ConstGradient actual, float tolerance) {
+        Assert.assertEquals("min component", min, actual.getMin(), tolerance);
+        Assert.assertEquals("max component", max, actual.getMax(), tolerance);
+        Assert.assertEquals("minFraction component",
+                minFraction, actual.getMinFraction(), tolerance);
+        Assert.assertEquals("manFraction component",
+                maxFraction, actual.getMaxFraction(), tolerance);
     }
 
     /**
