@@ -55,6 +55,17 @@ public class Gradient extends JoltPhysicsObject implements ConstGradient {
     }
 
     /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param gradientVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    Gradient(JoltPhysicsObject container, long gradientVa) {
+        super(container, gradientVa);
+    }
+
+    /**
      * Instantiate a gradient between the specified parameter values.
      *
      * @param min the parameter value when the fraction is zero (default=0)
