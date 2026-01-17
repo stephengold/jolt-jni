@@ -137,6 +137,7 @@ $(N)/glue/d/DefaultObjectLayerFilter.cpp \
 $(N)/glue/d/DefaultRandomEngine.cpp \
 $(N)/glue/d/DistanceConstraint.cpp \
 $(N)/glue/d/DistanceConstraintSettings.cpp \
+$(N)/glue/d/DrawSettings.cpp \
 $(N)/glue/e/Edge.cpp \
 $(N)/glue/e/EmptyShape.cpp \
 $(N)/glue/e/EmptyShapeSettings.cpp \

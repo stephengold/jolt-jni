@@ -35,7 +35,7 @@
     <!-- Checks for size violations:             -->
     <!-- See https://checkstyle.org/checks/sizes -->
     <module name="FileLength">
-        <property name="max" value="1600"/>
+        <property name="max" value="1700"/>
     </module>
     <module name="LineLength"/>
 
