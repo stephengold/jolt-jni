@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,7 @@ import com.github.stephengold.joltjni.readonly.ConstNarrowPhaseQuery;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
 import com.github.stephengold.joltjni.readonly.ConstObjectVsBroadPhaseLayerFilter;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsSettings;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsSystem;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 import java.util.HashMap;
@@ -43,7 +44,7 @@ import java.util.Map;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class PhysicsSystem extends NonCopyable {
+public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     // *************************************************************************
     // fields
 
@@ -233,21 +234,6 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Test whether the system contains the specified constraint. The system is
-     * unaffected.
-     *
-     * @param constraint the constraint to search for (not null, unaffected)
-     * @return {@code true} if found, otherwise {@code false}
-     */
-    public boolean containsConstraint(ConstConstraint constraint) {
-        long systemVa = va();
-        long constraintVa = constraint.targetVa();
-        boolean result = containsConstraint(systemVa, constraintVa);
-
-        return result;
-    }
-
-    /**
      * Find a pre-existing system given its virtual address.
      *
      * @param systemVa the address to search for
@@ -267,51 +253,6 @@ public class PhysicsSystem extends NonCopyable {
     public void forgetMe() {
         long systemVa = va();
         va2ps.remove(systemVa);
-    }
-
-    /**
-     * Enumerate all bodies of the specified type to the specified vector.
-     *
-     * @param bodyType (not null)
-     * @param storeResult storage for the result (not null)
-     */
-    public void getActiveBodies(EBodyType bodyType, BodyIdVector storeResult) {
-        long systemVa = va();
-        int ordinal = bodyType.ordinal();
-        long vectorVa = storeResult.va();
-        getActiveBodies(systemVa, ordinal, vectorVa);
-    }
-
-    /**
-     * Enumerate all bodies to the specified variable-length vector. The system
-     * is unaffected.
-     *
-     * @param storeResult storage for the result (not null)
-     */
-    public void getBodies(BodyIdVector storeResult) {
-        long systemVa = va();
-        long resultVa = storeResult.va();
-        getBodies(systemVa, resultVa);
-    }
-
-    /**
-     * Access the system's {@code BodyActivationListener}.
-     *
-     * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null} if none
-     */
-    public BodyActivationListener getBodyActivationListener() {
-        long systemVa = va();
-        long listenerVa = getBodyActivationListener(systemVa);
-
-        BodyActivationListener result;
-        if (listenerVa == 0L) {
-            result = null;
-        } else {
-            result = new BodyActivationListener(listenerVa);
-        }
-
-        return result;
     }
 
     /**
@@ -336,48 +277,6 @@ public class PhysicsSystem extends NonCopyable {
     }
 
     /**
-     * Access the system's {@code BodyLockInterfaceLocking}.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public ConstBodyLockInterfaceLocking getBodyLockInterface() {
-        long systemVa = va();
-        long interfaceVa = getBodyLockInterface(systemVa);
-        BodyLockInterfaceLocking result
-                = new BodyLockInterfaceLocking(this, interfaceVa);
-
-        return result;
-    }
-
-    /**
-     * Access the system's {@code BodyLockInterfaceNoLock}.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public ConstBodyLockInterfaceNoLock getBodyLockInterfaceNoLock() {
-        long systemVa = va();
-        long interfaceVa = getBodyLockInterfaceNoLock(systemVa);
-        BodyLockInterfaceNoLock result
-                = new BodyLockInterfaceNoLock(this, interfaceVa);
-
-        return result;
-    }
-
-    /**
-     * Generate a bounding box that contains all the bodies in the system. The
-     * system is unaffected.
-     *
-     * @return a new box
-     */
-    public AaBox getBounds() {
-        long systemVa = va();
-        long boxVa = getBounds(systemVa);
-        AaBox result = new AaBox(boxVa, true);
-
-        return result;
-    }
-
-    /**
      * Access the (application-provided) interface for mapping object layers to
      * broadphase layers.
      *
@@ -385,224 +284,6 @@ public class PhysicsSystem extends NonCopyable {
      */
     public ConstBroadPhaseLayerInterface getBroadPhaseLayerInterface() {
         return layerMap;
-    }
-
-    /**
-     * Access the system's interface for coarse collision queries.
-     *
-     * @return the pre-existing JVM object, or {@code null} if the system hasn't
-     * been initialized yet
-     */
-    public ConstBroadPhaseQuery getBroadPhaseQuery() {
-        long systemVa = va();
-        long broadVa = getBroadPhaseQuery(systemVa);
-        BroadPhaseQuery result;
-        if (broadVa == 0L) {
-            result = null;
-        } else {
-            result = new BroadPhaseQuery(this, broadVa);
-        }
-
-        return result;
-    }
-
-    /**
-     * Access the combining function for friction.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public CombineFunction getCombineFriction() {
-        long systemVa = va();
-        long functionVa = getCombineFriction(systemVa);
-        CombineFunction result = new CombineFunction(functionVa);
-
-        return result;
-    }
-
-    /**
-     * Access the combining function for restitutions.
-     *
-     * @return a new JVM object with the pre-existing native object assigned
-     */
-    public CombineFunction getCombineRestitution() {
-        long systemVa = va();
-        long functionVa = getCombineRestitution(systemVa);
-        CombineFunction result = new CombineFunction(functionVa);
-
-        return result;
-    }
-
-    /**
-     * Enumerate all constraints in the system. The system is unaffected.
-     *
-     * @return a new object
-     */
-    public Constraints getConstraints() {
-        long systemVa = va();
-        long resultVa = getConstraints(systemVa);
-        Constraints result = new Constraints(resultVa, true);
-
-        return result;
-    }
-
-    /**
-     * Access the (application-provided) contact listener.
-     *
-     * @return the pre-existing instance, or {@code null} if none
-     */
-    public ContactListener getContactListener() {
-        return contactListener;
-    }
-
-    /**
-     * Generate a broad-phase layer filter using the current pair filter and the
-     * specified layer index.
-     *
-     * @param objectLayer the index of the object layer to use
-     * @return a new filter
-     */
-    public DefaultBroadPhaseLayerFilter getDefaultBroadPhaseLayerFilter(
-            int objectLayer) {
-        DefaultBroadPhaseLayerFilter result
-                = new DefaultBroadPhaseLayerFilter(ovbFilter, objectLayer);
-        return result;
-    }
-
-    /**
-     * Generate an object layer filter using the current pair filter and the
-     * specified layer index.
-     *
-     * @param objectLayer the index of the object layer to use
-     * @return a new filter
-     */
-    public DefaultObjectLayerFilter getDefaultLayerFilter(int objectLayer) {
-        DefaultObjectLayerFilter result
-                = new DefaultObjectLayerFilter(ovoFilter, objectLayer);
-        return result;
-    }
-
-    /**
-     * Copy the gravity vector. The system is unaffected.
-     *
-     * @return a new acceleration vector (meters per second squared in system
-     * coordinates)
-     */
-    public Vec3 getGravity() {
-        long systemVa = va();
-        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
-        getGravity(systemVa, storeFloats);
-        Vec3 result = new Vec3(storeFloats);
-
-        return result;
-    }
-
-    /**
-     * Return the maximum number of bodies the system supports. The system is
-     * unaffected.
-     *
-     * @return the count (&ge;0)
-     */
-    public int getMaxBodies() {
-        long systemVa = va();
-        int result = getMaxBodies(systemVa);
-
-        return result;
-    }
-
-    /**
-     * Access the system's interface for fine collision queries.
-     *
-     * @return the pre-existing JVM object (not null)
-     */
-    public ConstNarrowPhaseQuery getNarrowPhaseQuery() {
-        return narrowPhaseQuery;
-    }
-
-    /**
-     * Access a version of the system's {@code NarrowPhaseQuery} that does not
-     * lock the bodies.
-     *
-     * @return the pre-existing JVM object (not null)
-     */
-    public ConstNarrowPhaseQuery getNarrowPhaseQueryNoLock() {
-        return narrowQueryNoLock;
-    }
-
-    /**
-     * Count how many active bodies of the specified type there are in the body
-     * manager. The system is unaffected.
-     *
-     * @param bodyType which type of body to count (not null)
-     * @return the count (&ge;0, &le;maxBodies)
-     */
-    public int getNumActiveBodies(EBodyType bodyType) {
-        long systemVa = va();
-        int typeOrdinal = bodyType.ordinal();
-        int result = getNumActiveBodies(systemVa, typeOrdinal);
-
-        return result;
-    }
-
-    /**
-     * Count how many bodies there are in the body manager. The system is
-     * unaffected.
-     *
-     * @return the count (&ge;0, &le;maxBodies)
-     */
-    public int getNumBodies() {
-        long systemVa = va();
-        int result = getNumBodies(systemVa);
-
-        return result;
-    }
-
-    /**
-     * Access the (application-provided) interface for testing whether 2 objects
-     * can collide, based on their object layers.
-     *
-     * @return the pre-existing instance, or {@code null} if none
-     */
-    public ConstObjectLayerPairFilter getObjectLayerPairFilter() {
-        return ovoFilter;
-    }
-
-    /**
-     * Access the (application-provided) interface for testing whether an object
-     * can collide with a broad-phase layer.
-     *
-     * @return the pre-existing instance, or {@code null} if none
-     */
-    public ConstObjectVsBroadPhaseLayerFilter
-            getObjectVsBroadPhaseLayerFilter() {
-        return ovbFilter;
-    }
-
-    /**
-     * Copy the system's settings. The system is unaffected.
-     * <p>
-     * Different semantics from the native {@code GetPhysicsSettings()}, which
-     * returns a const reference, not a copy.
-     *
-     * @return a new JVM object with a new native object assigned
-     *
-     * @see
-     * #setPhysicsSettings(com.github.stephengold.joltjni.ConstPhysicsSettings)
-     */
-    public PhysicsSettings getPhysicsSettings() {
-        long systemVa = va();
-        long settingsVa = getPhysicsSettings(systemVa);
-        PhysicsSettings result = new PhysicsSettings(settingsVa, true);
-
-        return result;
-    }
-
-    /**
-     * Access the (application-provided) soft-body contact listener.
-     *
-     * @return the pre-existing instance, or {@code null} if none
-     */
-    public SoftBodyContactListener getSoftBodyContactListener() {
-        return softContactListener;
     }
 
     /**
@@ -707,40 +388,6 @@ public class PhysicsSystem extends NonCopyable {
         boolean result = restoreState(systemVa, recorderVa);
 
         return result;
-    }
-
-    /**
-     * Save the system's state to be replayed later.
-     *
-     * @param recorder where to save the state (not null)
-     */
-    public void saveState(StateRecorder recorder) {
-        saveState(recorder, EStateRecorderState.All);
-    }
-
-    /**
-     * Save the aspects of the system's state to be replayed later.
-     *
-     * @param recorder where to save the state (not null)
-     * @param bitmask which aspects of the simulation to save
-     */
-    public void saveState(StateRecorder recorder, int bitmask) {
-        saveState(recorder, bitmask, null);
-    }
-
-    /**
-     * Save aspects of the system's state to be replayed later.
-     *
-     * @param recorder where to save the state (not null)
-     * @param bitmask which aspects of the simulation to save
-     * @param filter select which parts to save (unaffected) or {@code null}
-     */
-    public void saveState(
-            StateRecorder recorder, int bitmask, StateRecorderFilter filter) {
-        long systemVa = va();
-        long recorderVa = recorder.va();
-        long filterVa = (filter == null) ? 0L : filter.va();
-        saveState(systemVa, recorderVa, bitmask, filterVa);
     }
 
     /**
@@ -900,6 +547,389 @@ public class PhysicsSystem extends NonCopyable {
     final void setVirtualAddressAsOwner(long systemVa) {
         Runnable freeingAction = () -> free(systemVa);
         setVirtualAddress(systemVa, freeingAction);
+    }
+    // *************************************************************************
+    // ConstPhysicsSystem methods
+
+    /**
+     * Test whether the system contains the specified constraint. The system is
+     * unaffected.
+     *
+     * @param constraint the constraint to search for (not null, unaffected)
+     * @return {@code true} if found, otherwise {@code false}
+     */
+    @Override
+    public boolean containsConstraint(ConstConstraint constraint) {
+        long systemVa = va();
+        long constraintVa = constraint.targetVa();
+        boolean result = containsConstraint(systemVa, constraintVa);
+
+        return result;
+    }
+
+    /**
+     * Enumerate all bodies of the specified type to the specified vector.
+     *
+     * @param bodyType (not null)
+     * @param storeResult storage for the result (not null)
+     */
+    @Override
+    public void getActiveBodies(EBodyType bodyType, BodyIdVector storeResult) {
+        long systemVa = va();
+        int ordinal = bodyType.ordinal();
+        long vectorVa = storeResult.va();
+        getActiveBodies(systemVa, ordinal, vectorVa);
+    }
+
+    /**
+     * Enumerate all bodies to the specified variable-length vector. The system
+     * is unaffected.
+     *
+     * @param storeResult storage for the result (not null)
+     */
+    @Override
+    public void getBodies(BodyIdVector storeResult) {
+        long systemVa = va();
+        long resultVa = storeResult.va();
+        getBodies(systemVa, resultVa);
+    }
+
+    /**
+     * Access the system's {@code BodyActivationListener}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    @Override
+    public BodyActivationListener getBodyActivationListener() {
+        long systemVa = va();
+        long listenerVa = getBodyActivationListener(systemVa);
+
+        BodyActivationListener result;
+        if (listenerVa == 0L) {
+            result = null;
+        } else {
+            result = new BodyActivationListener(listenerVa);
+        }
+
+        return result;
+    }
+
+    /**
+     * Access the system's {@code BodyLockInterfaceLocking}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public ConstBodyLockInterfaceLocking getBodyLockInterface() {
+        long systemVa = va();
+        long interfaceVa = getBodyLockInterface(systemVa);
+        BodyLockInterfaceLocking result
+                = new BodyLockInterfaceLocking(this, interfaceVa);
+
+        return result;
+    }
+
+    /**
+     * Access the system's {@code BodyLockInterfaceNoLock}.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public ConstBodyLockInterfaceNoLock getBodyLockInterfaceNoLock() {
+        long systemVa = va();
+        long interfaceVa = getBodyLockInterfaceNoLock(systemVa);
+        BodyLockInterfaceNoLock result
+                = new BodyLockInterfaceNoLock(this, interfaceVa);
+
+        return result;
+    }
+
+    /**
+     * Generate a bounding box that contains all the bodies in the system. The
+     * system is unaffected.
+     *
+     * @return a new box
+     */
+    @Override
+    public AaBox getBounds() {
+        long systemVa = va();
+        long boxVa = getBounds(systemVa);
+        AaBox result = new AaBox(boxVa, true);
+
+        return result;
+    }
+
+    /**
+     * Access the system's interface for coarse collision queries.
+     *
+     * @return the pre-existing JVM object, or {@code null} if the system hasn't
+     * been initialized yet
+     */
+    @Override
+    public ConstBroadPhaseQuery getBroadPhaseQuery() {
+        long systemVa = va();
+        long broadVa = getBroadPhaseQuery(systemVa);
+        BroadPhaseQuery result;
+        if (broadVa == 0L) {
+            result = null;
+        } else {
+            result = new BroadPhaseQuery(this, broadVa);
+        }
+
+        return result;
+    }
+
+    /**
+     * Access the combining function for friction.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public CombineFunction getCombineFriction() {
+        long systemVa = va();
+        long functionVa = getCombineFriction(systemVa);
+        CombineFunction result = new CombineFunction(functionVa);
+
+        return result;
+    }
+
+    /**
+     * Access the combining function for restitutions.
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public CombineFunction getCombineRestitution() {
+        long systemVa = va();
+        long functionVa = getCombineRestitution(systemVa);
+        CombineFunction result = new CombineFunction(functionVa);
+
+        return result;
+    }
+
+    /**
+     * Enumerate all constraints in the system. The system is unaffected.
+     *
+     * @return a new object
+     */
+    @Override
+    public Constraints getConstraints() {
+        long systemVa = va();
+        long resultVa = getConstraints(systemVa);
+        Constraints result = new Constraints(resultVa, true);
+
+        return result;
+    }
+
+    /**
+     * Access the (application-provided) contact listener.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    @Override
+    public ContactListener getContactListener() {
+        return contactListener;
+    }
+
+    /**
+     * Generate a broad-phase layer filter using the current pair filter and the
+     * specified layer index.
+     *
+     * @param objectLayer the index of the object layer to use
+     * @return a new filter
+     */
+    @Override
+    public DefaultBroadPhaseLayerFilter getDefaultBroadPhaseLayerFilter(
+            int objectLayer) {
+        DefaultBroadPhaseLayerFilter result
+                = new DefaultBroadPhaseLayerFilter(ovbFilter, objectLayer);
+        return result;
+    }
+
+    /**
+     * Generate an object layer filter using the current pair filter and the
+     * specified layer index.
+     *
+     * @param objectLayer the index of the object layer to use
+     * @return a new filter
+     */
+    @Override
+    public DefaultObjectLayerFilter getDefaultLayerFilter(int objectLayer) {
+        DefaultObjectLayerFilter result
+                = new DefaultObjectLayerFilter(ovoFilter, objectLayer);
+        return result;
+    }
+
+    /**
+     * Copy the gravity vector. The system is unaffected.
+     *
+     * @return a new acceleration vector (meters per second squared in system
+     * coordinates)
+     */
+    @Override
+    public Vec3 getGravity() {
+        long systemVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getGravity(systemVa, storeFloats);
+        Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Return the maximum number of bodies the system supports. The system is
+     * unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int getMaxBodies() {
+        long systemVa = va();
+        int result = getMaxBodies(systemVa);
+
+        return result;
+    }
+
+    /**
+     * Access the system's interface for fine collision queries.
+     *
+     * @return the pre-existing JVM object (not null)
+     */
+    @Override
+    public ConstNarrowPhaseQuery getNarrowPhaseQuery() {
+        return narrowPhaseQuery;
+    }
+
+    /**
+     * Access a version of the system's {@code NarrowPhaseQuery} that does not
+     * lock the bodies.
+     *
+     * @return the pre-existing JVM object (not null)
+     */
+    @Override
+    public ConstNarrowPhaseQuery getNarrowPhaseQueryNoLock() {
+        return narrowQueryNoLock;
+    }
+
+    /**
+     * Count how many active bodies of the specified type there are in the body
+     * manager. The system is unaffected.
+     *
+     * @param bodyType which type of body to count (not null)
+     * @return the count (&ge;0, &le;maxBodies)
+     */
+    @Override
+    public int getNumActiveBodies(EBodyType bodyType) {
+        long systemVa = va();
+        int typeOrdinal = bodyType.ordinal();
+        int result = getNumActiveBodies(systemVa, typeOrdinal);
+
+        return result;
+    }
+
+    /**
+     * Count how many bodies there are in the body manager. The system is
+     * unaffected.
+     *
+     * @return the count (&ge;0, &le;maxBodies)
+     */
+    @Override
+    public int getNumBodies() {
+        long systemVa = va();
+        int result = getNumBodies(systemVa);
+
+        return result;
+    }
+
+    /**
+     * Access the (application-provided) interface for testing whether 2 objects
+     * can collide, based on their object layers.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    @Override
+    public ConstObjectLayerPairFilter getObjectLayerPairFilter() {
+        return ovoFilter;
+    }
+
+    /**
+     * Access the (application-provided) interface for testing whether an object
+     * can collide with a broad-phase layer.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    @Override
+    public ConstObjectVsBroadPhaseLayerFilter
+            getObjectVsBroadPhaseLayerFilter() {
+        return ovbFilter;
+    }
+
+    /**
+     * Copy the system's settings. The system is unaffected.
+     * <p>
+     * Different semantics from the native {@code GetPhysicsSettings()}, which
+     * returns a const reference, not a copy.
+     *
+     * @return a new JVM object with a new native object assigned
+     *
+     * @see #setPhysicsSettings(
+     * com.github.stephengold.joltjni.readonly.ConstPhysicsSettings)
+     */
+    @Override
+    public PhysicsSettings getPhysicsSettings() {
+        long systemVa = va();
+        long settingsVa = getPhysicsSettings(systemVa);
+        PhysicsSettings result = new PhysicsSettings(settingsVa, true);
+
+        return result;
+    }
+
+    /**
+     * Access the (application-provided) soft-body contact listener.
+     *
+     * @return the pre-existing instance, or {@code null} if none
+     */
+    @Override
+    public SoftBodyContactListener getSoftBodyContactListener() {
+        return softContactListener;
+    }
+
+    /**
+     * Save the system's state to be replayed later.
+     *
+     * @param recorder where to save the state (not null)
+     */
+    @Override
+    public void saveState(StateRecorder recorder) {
+        saveState(recorder, EStateRecorderState.All);
+    }
+
+    /**
+     * Save the aspects of the system's state to be replayed later.
+     *
+     * @param recorder where to save the state (not null)
+     * @param bitmask which aspects of the simulation to save
+     */
+    @Override
+    public void saveState(StateRecorder recorder, int bitmask) {
+        saveState(recorder, bitmask, null);
+    }
+
+    /**
+     * Save aspects of the system's state to be replayed later.
+     *
+     * @param recorder where to save the state (not null)
+     * @param bitmask which aspects of the simulation to save
+     * @param filter select which parts to save (unaffected) or {@code null}
+     */
+    @Override
+    public void saveState(
+            StateRecorder recorder, int bitmask, StateRecorderFilter filter) {
+        long systemVa = va();
+        long recorderVa = recorder.va();
+        long filterVa = (filter == null) ? 0L : filter.va();
+        saveState(systemVa, recorderVa, bitmask, filterVa);
     }
     // *************************************************************************
     // native private methods
