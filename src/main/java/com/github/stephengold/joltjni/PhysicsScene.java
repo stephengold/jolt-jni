@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstPhysicsSystem;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
 import com.github.stephengold.joltjni.template.RefTarget;
 
@@ -126,9 +127,9 @@ public class PhysicsScene extends JoltPhysicsObject implements RefTarget {
      * @param system the physics system to load from (not {@code null},
      * unaffected)
      */
-    public void fromPhysicsSystem(PhysicsSystem system) {
+    public void fromPhysicsSystem(ConstPhysicsSystem system) {
         long sceneVa = va();
-        long systemVa = system.va();
+        long systemVa = system.targetVa();
         fromPhysicsSystem(sceneVa, systemVa);
     }
 
