@@ -50,6 +50,21 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
     }
 
     /**
+     * Instantiate a geometry with the specified batch and bounding box.
+     *
+     * @param batch the desired batch (not {@code null})
+     * @param bounds the desired bounding box (not {@code null}, unaffected)
+     */
+    public Geometry(Batch batch, ConstAaBox bounds) {
+        long batchVa = batch.va();
+        long boundsVa = bounds.targetVa();
+        long geometryVa = createWithBatch(batchVa, boundsVa);
+        long refVa = toRef(geometryVa);
+        Runnable freeingAction = () -> GeometryRef.free(refVa);
+        setVirtualAddress(geometryVa, freeingAction);
+    }
+
+    /**
      * Instantiate a geometry with the specified native object assigned.
      *
      * @param geometryVa the virtual address of the native object to assign (not
@@ -191,6 +206,8 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
     native private static int countLods(long geometryVa);
 
     native private static long create(long boundsVa);
+
+    native private static long createWithBatch(long batchVa, long boundsVa);
 
     native private static long getBounds(long geometryVa);
 

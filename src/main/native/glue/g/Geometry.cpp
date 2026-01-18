@@ -139,6 +139,26 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Geometry_create
 
 /*
  * Class:     com_github_stephengold_joltjni_Geometry
+ * Method:    createWithBatch
+ * Signature: (JJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Geometry_createWithBatch
+  (JNIEnv *, jclass, jlong batchVa, jlong boundsVa) {
+#ifdef JPH_DEBUG_RENDERER
+    const DebugRenderer::Batch * const pBatch
+            = reinterpret_cast<DebugRenderer::Batch *> (batchVa);
+    const AABox * const pBounds = reinterpret_cast<AABox *> (boundsVa);
+    DebugRenderer::Geometry * const pResult
+            = new DebugRenderer::Geometry(*pBatch, *pBounds);
+    TRACE_NEW("DebugRenderer::Geometry", pResult)
+    return reinterpret_cast<jlong> (pResult);
+#else
+    return 0;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Geometry
  * Method:    getBounds
  * Signature: (J)J
  */
