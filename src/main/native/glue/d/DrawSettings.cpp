@@ -78,6 +78,24 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DrawSettings_free
     delete pSettings;
 #endif
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_DrawSettings
+ * Method:    getDrawAngularVelocity
+ * Signature: (J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_DrawSettings_getDrawAngularVelocity
+  (JNIEnv *, jclass, jlong settingsVa) {
+#ifdef JPH_DEBUG_RENDERER
+    const Hair::DrawSettings * const pSettings
+        = reinterpret_cast<Hair::DrawSettings *> (settingsVa);
+    const bool result = pSettings->mDrawAngularVelocity;
+    return result;
+#else
+    return JNI_FALSE;
+#endif
+}
+
 /*
  * Class:     com_github_stephengold_joltjni_DrawSettings
  * Method:    getDrawGridDensity
@@ -296,6 +314,20 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_DrawSettings_getSimul
     return result;
 #else
     return 0;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DrawSettings
+ * Method:    setDrawAngularVelocity
+ * Signature: (JZ)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DrawSettings_setDrawAngularVelocity
+  (JNIEnv *, jclass, jlong settingsVa, jboolean enable) {
+#ifdef JPH_DEBUG_RENDERER
+    Hair::DrawSettings * const pSettings
+        = reinterpret_cast<Hair::DrawSettings *> (settingsVa);
+    pSettings->mDrawAngularVelocity = enable;
 #endif
 }
 

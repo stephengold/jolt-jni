@@ -31,6 +31,14 @@ import com.github.stephengold.joltjni.enumerate.ERenderStrandColor;
  */
 public interface ConstDrawSettings extends ConstJoltPhysicsObject {
     /**
+     * Test whether to visualize vertex angular velocities. The settings are
+     * unaffected. (native attribute: mDrawAngularVelocity)
+     *
+     * @return {@code true} if enabled, otherwise {@code false}
+     */
+    boolean getDrawAngularVelocity();
+
+    /**
      * Test whether to visualize grid density. The settings are unaffected.
      *
      * @return {@code true} if enabled, otherwise {@code false}

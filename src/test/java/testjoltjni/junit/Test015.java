@@ -107,6 +107,7 @@ public class Test015 {
      * @param settings the settings to test (not {@code null}, unaffected)
      */
     private static void testDrawSettingsDefaults(ConstDrawSettings settings) {
+        Assert.assertFalse(settings.getDrawAngularVelocity());
         Assert.assertFalse(settings.getDrawGridDensity());
         Assert.assertFalse(settings.getDrawGridVelocity());
         Assert.assertTrue(settings.getDrawInitialGravity());
@@ -129,6 +130,7 @@ public class Test015 {
      * @param settings the settings to test (not {@code null})
      */
     private static void testDrawSettingsSetters(DrawSettings settings) {
+        settings.setDrawAngularVelocity(true);
         settings.setDrawGridDensity(true);
         settings.setDrawGridVelocity(true);
         settings.setDrawInitialGravity(false);
@@ -143,6 +145,7 @@ public class Test015 {
         settings.setSimulationStrandBegin(5);
         settings.setSimulationStrandEnd(9);
 
+        Assert.assertTrue(settings.getDrawAngularVelocity());
         Assert.assertTrue(settings.getDrawGridDensity());
         Assert.assertTrue(settings.getDrawGridVelocity());
         Assert.assertFalse(settings.getDrawInitialGravity());

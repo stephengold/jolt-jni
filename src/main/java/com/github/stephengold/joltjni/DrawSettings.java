@@ -70,6 +70,21 @@ final public class DrawSettings
     // new methods exposed
 
     /**
+     * Enable or disable visualization of vertex angular velocities. (native
+     * attribute: mDrawAngularVelocity)
+     *
+     * @param enable {@code true} to enable, or {@code false} to disable
+     * (default=false)
+     * @return the modified settings, for chaining
+     */
+    public DrawSettings setDrawAngularVelocity(boolean enable) {
+        long settingsVa = va();
+        setDrawAngularVelocity(settingsVa, enable);
+
+        return this;
+    }
+
+    /**
      * Enable or disable visualization of grid density. (native attribute:
      * mDrawGridDensity)
      *
@@ -266,6 +281,20 @@ final public class DrawSettings
     // ConstHairSettings methods
 
     /**
+     * Test whether to visualize vertex angular velocities. The settings are
+     * unaffected. (native attribute: mDrawAngularVelocity)
+     *
+     * @return {@code true} if enabled, otherwise {@code false}
+     */
+    @Override
+    public boolean getDrawAngularVelocity() {
+        long settingsVa = va();
+        boolean result = getDrawAngularVelocity(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Test whether to visualize grid density. The settings are unaffected.
      * (native attribute: mDrawGridDensity)
      *
@@ -457,6 +486,8 @@ final public class DrawSettings
 
     native private static void free(long settingsVa);
 
+    native private static boolean getDrawAngularVelocity(long settingsVa);
+
     native private static boolean getDrawGridDensity(long settingsVa);
 
     native private static boolean getDrawGridVelocity(long settingsVa);
@@ -482,6 +513,9 @@ final public class DrawSettings
     native private static int getSimulationStrandBegin(long settingsVa);
 
     native private static int getSimulationStrandEnd(long settingsVa);
+
+    native private static void setDrawAngularVelocity(
+            long settingsVa, boolean enable);
 
     native private static void setDrawGridDensity(
             long settingsVa, boolean enable);
