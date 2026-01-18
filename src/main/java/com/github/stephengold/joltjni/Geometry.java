@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,6 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstLod;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
-import com.github.stephengold.joltjni.template.Ref;
 import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
@@ -179,7 +178,7 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
      * @return a new JVM object with a new native object assigned
      */
     @Override
-    public Ref toRef() {
+    public GeometryRef toRef() {
         long geometryVa = va();
         long refVa = toRef(geometryVa);
         GeometryRef result = new GeometryRef(refVa, true);
