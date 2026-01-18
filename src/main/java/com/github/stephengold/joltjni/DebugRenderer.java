@@ -375,6 +375,21 @@ abstract public class DebugRenderer extends NonCopyable {
     }
 
     /**
+     * Draw a marker at the specified location.
+     *
+     * @param location the desired location (not {@code null}, unaffected)
+     * @param color the desired color (not {@code null}, unaffected)
+     * @param size the desired size
+     */
+    public void drawMarker(RVec3Arg location, ConstColor color, float size) {
+        double locX = location.xx();
+        double locY = location.yy();
+        double locZ = location.zz();
+        int colorInt = color.getUInt32();
+        drawMarker(locX, locY, locZ, colorInt, size);
+    }
+
+    /**
      * Draw the specified open cone.
      *
      * @param top the desired location of the cone's vertex (not {@code null},
@@ -407,21 +422,6 @@ abstract public class DebugRenderer extends NonCopyable {
         int drawModeOrdinal = drawMode.ordinal();
         drawOpenCone(topX, topY, topZ,
                 floatBuffer, colorInt, csOrdinal, drawModeOrdinal);
-    }
-
-    /**
-     * Draw a marker at the specified location.
-     *
-     * @param location the desired location (not {@code null}, unaffected)
-     * @param color the desired color (not {@code null}, unaffected)
-     * @param size the desired size
-     */
-    public void drawMarker(RVec3Arg location, ConstColor color, float size) {
-        double locX = location.xx();
-        double locY = location.yy();
-        double locZ = location.zz();
-        int colorInt = color.getUInt32();
-        drawMarker(locX, locY, locZ, colorInt, size);
     }
 
     /**
