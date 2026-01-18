@@ -41,9 +41,7 @@ import com.github.stephengold.joltjni.CollisionGroup;
 import com.github.stephengold.joltjni.ContactListenerList;
 import com.github.stephengold.joltjni.ContactSettings;
 import com.github.stephengold.joltjni.FilteredContactListener;
-import com.github.stephengold.joltjni.Gradient;
 import com.github.stephengold.joltjni.GroupFilterTable;
-import com.github.stephengold.joltjni.HairMaterial;
 import com.github.stephengold.joltjni.JobSystem;
 import com.github.stephengold.joltjni.JobSystemSingleThreaded;
 import com.github.stephengold.joltjni.JobSystemThreadPool;
@@ -81,9 +79,7 @@ import com.github.stephengold.joltjni.readonly.ConstCharacter;
 import com.github.stephengold.joltjni.readonly.ConstCharacterVirtual;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstContactSettings;
-import com.github.stephengold.joltjni.readonly.ConstGradient;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
-import com.github.stephengold.joltjni.readonly.ConstHairMaterial;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstMotionProperties;
 import com.github.stephengold.joltjni.readonly.ConstShape;
@@ -110,6 +106,8 @@ import testjoltjni.TestUtils;
 /**
  * Automated JUnit4 tests for creation, destruction, accessors, and defaults of
  * miscellaneous Jolt-JNI classes.
+ * <p>
+ * For hair-related classes, see Test015.
  * <p>
  * For {@code PhysicsSettings} and {@code PhysicsSystem}, see Test004.
  * <p>
@@ -145,8 +143,6 @@ public class Test003 {
         doContactListenerList();
         doContactSettings();
         doFilteredContactListener();
-        doGradient();
-        doHairMaterial();
         doJobSystemSingleThreaded();
         doJobSystemThreadPool();
         doMassProperties();
@@ -544,32 +540,6 @@ public class Test003 {
         testFilteredContactListenerSetters(listener);
 
         TestUtils.testClose(listener);
-        System.gc();
-    }
-
-    /**
-     * Test the {@code Gradient} class.
-     */
-    private static void doGradient() {
-        Gradient gradient = new Gradient();
-
-        testGradientDefaults(gradient);
-        testGradientSetters(gradient);
-
-        TestUtils.testClose(gradient);
-        System.gc();
-    }
-
-    /**
-     * Test the {@code HairMaterial} class.
-     */
-    private static void doHairMaterial() {
-        HairMaterial material = new HairMaterial();
-
-        testHairMaterialDefaults(material);
-        testHairMaterialSetters(material);
-
-        TestUtils.testClose(material);
         System.gc();
     }
 
@@ -1113,127 +1083,6 @@ public class Test003 {
         Assert.assertFalse(listener.getEnableValidate());
 
         TestUtils.testClose(olpFilter, bplFilter, bodyFilter);
-    }
-
-    /**
-     * Test the getters and defaults of the specified {@code Gradient}.
-     *
-     * @param gradient the gradient to test (not {@code null}, unaffected)
-     */
-    private static void testGradientDefaults(ConstGradient gradient) {
-        Assert.assertTrue(gradient.hasAssignedNativeObject());
-        Assert.assertTrue(gradient.ownsNativeObject());
-
-        Assert.assertEquals(1f, gradient.getMax(), 0f);
-        Assert.assertEquals(1f, gradient.getMaxFraction(), 0f);
-        Assert.assertEquals(0f, gradient.getMin(), 0f);
-        Assert.assertEquals(0f, gradient.getMinFraction(), 0f);
-    }
-
-    /**
-     * Test the setters of the specified {@code Gradient}.
-     *
-     * @param gradient the gradient to test (not {@code null}, modified)
-     */
-    private static void testGradientSetters(Gradient gradient) {
-        gradient.setMax(3f);
-        gradient.setMaxFraction(0.9f);
-        gradient.setMin(-2f);
-        gradient.setMinFraction(0.1f);
-
-        Assert.assertEquals(3f, gradient.getMax(), 0f);
-        Assert.assertEquals(0.9f, gradient.getMaxFraction(), 0f);
-        Assert.assertEquals(-2f, gradient.getMin(), 0f);
-        Assert.assertEquals(0.1f, gradient.getMinFraction(), 0f);
-    }
-
-    /**
-     * Test the getters and defaults of the specified {@code HairMaterial}.
-     *
-     * @param material the material to test (not {@code null}, unaffected)
-     */
-    private static void testHairMaterialDefaults(ConstHairMaterial material) {
-        Assert.assertTrue(material.hasAssignedNativeObject());
-        Assert.assertTrue(material.ownsNativeObject());
-
-        Assert.assertEquals(2f, material.getAngularDamping(), 0f);
-        Assert.assertEquals(1e-7f, material.getBendCompliance(), 0f);
-        Assert.assertTrue(material.getEnableCollision());
-        Assert.assertTrue(material.getEnableLra());
-        Assert.assertEquals(0.2f, material.getFriction(), 0f);
-        TestUtils.assertEquals(
-                0.01f, 0f, 0f, 0.3f, material.getGlobalPose(), 0f);
-        TestUtils.assertEquals(
-                0.1f, 1f, 0.2f, 0.8f, material.getGravityFactor(), 0f);
-        Assert.assertEquals(0f, material.getGravityPreloadFactor(), 0f);
-        Assert.assertEquals(0f, material.getGridDensityForceFactor(), 0f);
-        TestUtils.assertEquals(0.05f, 0.01f, 0f, 1f,
-                material.getGridVelocityFactor(), 0f);
-        TestUtils.assertEquals(0.001f, 0.001f, 0f, 1f,
-                material.getHairRadius(), 0f);
-        Assert.assertEquals(10f, material.getInertiaMultiplier(), 0f);
-        Assert.assertEquals(2f, material.getLinearDamping(), 0f);
-        Assert.assertEquals(50f, material.getMaxAngularVelocity(), 0f);
-        Assert.assertEquals(10f, material.getMaxLinearVelocity(), 0f);
-        Assert.assertEquals(0.1f, material.getSimulationStrandsFraction(), 0f);
-        TestUtils.assertEquals(1f, 0f, 0f, 0.1f,
-                material.getSkinGlobalPose(), 0f);
-        Assert.assertEquals(1e-8f, material.getStretchCompliance(), 0f);
-        TestUtils.assertEquals(0f, 1f, 0f, 1f,
-                material.getWorldTransformInfluence(), 0f);
-    }
-
-    /**
-     * Test the setters of the specified {@code HairMaterial}.
-     *
-     * @param material the material to test (not {@code null}, modified)
-     */
-    private static void testHairMaterialSetters(HairMaterial material) {
-        material.setAngularDamping(4f);
-        material.setBendCompliance(0.1f);
-        material.setEnableCollision(false);
-        material.setEnableLra(false);
-        material.setFriction(0.7f);
-        material.setGlobalPose(new Gradient(0.06f, 5f, 0.4f, 0.5f));
-        material.setGravityFactor(new Gradient(0.2f, 2f, 0.3f, 0.6f));
-        material.setGravityPreloadFactor(0.5f);
-        material.setGridDensityForceFactor(0.4f);
-        material.setGridVelocityFactor(new Gradient(0.1f, 0.2f, 0.3f, 0.7f));
-        material.setHairRadius(new Gradient(0.4f, 0.6f, 0.8f, 0.9f));
-        material.setInertiaMultiplier(12f);
-        material.setLinearDamping(3);
-        material.setMaxAngularVelocity(80f);
-        material.setMaxLinearVelocity(20f);
-        material.setSimulationStrandsFraction(0.2f);
-        material.setSkinGlobalPose(new Gradient(0.3f, 3f, 0.2f, 0.9f));
-        material.setStretchCompliance(1e-4f);
-        material.setWorldTransformInfluence(new Gradient(0.2f, 3f, 0.2f, 0.9f));
-
-        Assert.assertEquals(4f, material.getAngularDamping(), 0f);
-        Assert.assertEquals(0.1f, material.getBendCompliance(), 0f);
-        Assert.assertFalse(material.getEnableCollision());
-        Assert.assertFalse(material.getEnableLra());
-        Assert.assertEquals(0.7f, material.getFriction(), 0f);
-        TestUtils.assertEquals(
-                0.06f, 5f, 0.4f, 0.5f, material.getGlobalPose(), 0f);
-        TestUtils.assertEquals(
-                0.2f, 2f, 0.3f, 0.6f, material.getGravityFactor(), 0f);
-        Assert.assertEquals(0.5f, material.getGravityPreloadFactor(), 0f);
-        Assert.assertEquals(0.4f, material.getGridDensityForceFactor(), 0f);
-        TestUtils.assertEquals(0.1f, 0.2f, 0.3f, 0.7f,
-                material.getGridVelocityFactor(), 0f);
-        TestUtils.assertEquals(0.4f, 0.6f, 0.8f, 0.9f,
-                material.getHairRadius(), 0f);
-        Assert.assertEquals(12f, material.getInertiaMultiplier(), 0f);
-        Assert.assertEquals(3f, material.getLinearDamping(), 0f);
-        Assert.assertEquals(80f, material.getMaxAngularVelocity(), 0f);
-        Assert.assertEquals(20f, material.getMaxLinearVelocity(), 0f);
-        Assert.assertEquals(0.2f, material.getSimulationStrandsFraction(), 0f);
-        TestUtils.assertEquals(0.3f, 3f, 0.2f, 0.9f,
-                material.getSkinGlobalPose(), 0f);
-        Assert.assertEquals(1e-4f, material.getStretchCompliance(), 0f);
-        TestUtils.assertEquals(0.2f, 3f, 0.2f, 0.9f,
-                material.getWorldTransformInfluence(), 0f);
     }
 
     /**
