@@ -24,6 +24,7 @@ package testjoltjni.junit;
 import com.github.stephengold.joltjni.DrawSettings;
 import com.github.stephengold.joltjni.Gradient;
 import com.github.stephengold.joltjni.HairMaterial;
+import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.enumerate.ERenderStrandColor;
 import com.github.stephengold.joltjni.readonly.ConstDrawSettings;
 import com.github.stephengold.joltjni.readonly.ConstGradient;
@@ -50,7 +51,9 @@ public class Test015 {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
 
-        doDrawSettings();
+        if (Jolt.implementsDebugRendering()) {
+            doDrawSettings();
+        }
         doGradient();
         doHairMaterial();
 
