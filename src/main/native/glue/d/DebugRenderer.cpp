@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,6 +41,42 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_nextFra
   (JNIEnv *, jobject) {
 #ifdef JPH_DEBUG_RENDERER
     DebugRenderer::sInstance->NextFrame();
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_DebugRenderer
+ * Method:    createTriangleBatch
+ * Signature: (Ljava/nio/FloatBuffer;Ljava/nio/IntBuffer;)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_DebugRenderer_createTriangleBatch
+  (JNIEnv *pEnv, jclass, jobject vertexBuffer, jobject indexBuffer) {
+#ifdef JPH_DEBUG_RENDERER
+    const DIRECT_FLOAT_BUFFER(pEnv, vertexBuffer, pFloats, capacityFloats);
+    const jlong numVertices = capacityFloats / 3;
+    const Float3 * const vArray = (Float3 *) pFloats;
+    jint * const pIndices = (jint *) pEnv->GetDirectBufferAddress(indexBuffer);
+    JPH_ASSERT(pIndices != NULL);
+    const jlong numIndices = pEnv->GetDirectBufferCapacity(indexBuffer);
+    JPH_ASSERT(numIndices >= 0);
+    const jlong numTriangles = numIndices / 3;
+    IndexedTriangleNoMaterial * const pTmpTriangles
+            = new IndexedTriangleNoMaterial[numTriangles];
+    TRACE_NEW("IndexedTriangleNoMaterial[]", pTmpTriangles)
+    for (jlong i = 0; i < numTriangles; ++i) {
+        pTmpTriangles[i].mIdx[0] = pIndices[3 * i];
+        pTmpTriangles[i].mIdx[1] = pIndices[3 * i + 1];
+        pTmpTriangles[i].mIdx[2] = pIndices[3 * i + 2];
+    }
+    DebugRenderer::Batch * const pResult = new DebugRenderer::Batch;
+    TRACE_NEW("DebugRenderer::Batch", pResult)
+    *pResult = DebugRenderer::sInstance->CreateTriangleBatch(
+            vArray, numVertices, pTmpTriangles, numTriangles);
+    TRACE_DELETE("IndexedTriangleNoMaterial[]", pTmpTriangles)
+    delete[] pTmpTriangles;
+    return reinterpret_cast<jlong> (pResult);
+#else
+    return 0;
 #endif
 }
 

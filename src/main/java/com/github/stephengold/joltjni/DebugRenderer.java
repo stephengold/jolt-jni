@@ -26,11 +26,13 @@ import com.github.stephengold.joltjni.enumerate.ECullMode;
 import com.github.stephengold.joltjni.enumerate.EDrawMode;
 import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstColor;
+import com.github.stephengold.joltjni.readonly.ConstIndexedTriangleNoMaterial;
 import com.github.stephengold.joltjni.readonly.ConstOrientedBox;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 /**
  * Visualization for debugging purposes.
@@ -66,6 +68,28 @@ abstract public class DebugRenderer extends NonCopyable {
     }
     // *************************************************************************
     // new methods exposed
+
+    /**
+     * Construct a batch of triangles that can be rendered efficiently.
+     *
+     * @param vertexBuffer the vertex positions (not {@code null}, unaffected)
+     * @param triangles the vertex indices of each triangle (not {@code null},
+     * unaffected)
+     * @return a new JVM object with a new native object assigned
+     */
+    public Batch createTriangleBatch(FloatBuffer vertexBuffer,
+            ConstIndexedTriangleNoMaterial[] triangles) {
+        int numTriangles = triangles.length;
+        int numIndices = 3 * numTriangles;
+        IntBuffer indexBuffer = Jolt.newDirectIntBuffer(numIndices);
+        for (ConstIndexedTriangleNoMaterial triangle : triangles) {
+            triangle.put(indexBuffer);
+        }
+        long resultVa = createTriangleBatch(vertexBuffer, indexBuffer);
+        Batch result = new Batch(resultVa);
+
+        return result;
+    }
 
     /**
      * Draw the specified 3-D arrow.
@@ -870,6 +894,9 @@ abstract public class DebugRenderer extends NonCopyable {
     }
     // *************************************************************************
     // native private methods
+
+    native private static long createTriangleBatch(
+            FloatBuffer vertexBuffer, IntBuffer indexBuffer);
 
     native private static void drawArrow(
             double fromX, double fromY, double fromZ, double toX, double toY,
