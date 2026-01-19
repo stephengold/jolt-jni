@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -91,7 +91,7 @@ public:
 
         const jsize len = inString.size();
         jchar * const pTmpChars = new jchar[len];
-        for (int i = 0; i < len; ++i) {
+        for (jsize i = 0; i < len; ++i) {
             pTmpChars[i] = inString[i];
         }
         jstring message = pAttachEnv->NewString(pTmpChars, len);

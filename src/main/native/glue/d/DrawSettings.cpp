@@ -276,7 +276,7 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_DrawSettings_getRende
 #ifdef JPH_DEBUG_RENDERER
     const Hair::DrawSettings * const pSettings
         = reinterpret_cast<Hair::DrawSettings *> (settingsVa);
-    const int result = (int) pSettings->mRenderStrandColor;
+    const jint result = (jint) pSettings->mRenderStrandColor;
     return result;
 #else
     return 0;

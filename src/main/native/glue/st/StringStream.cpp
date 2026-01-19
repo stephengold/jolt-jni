@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -49,7 +49,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_std_StringStream_cre
     const jchar * const pTmpUcs2 = pEnv->GetStringChars(javaString, &isCopy);
     const jsize len = pEnv->GetStringLength(javaString);
     char * const pBuffer = new char[len];
-    for (int i = 0; i < len; ++i) {
+    for (jsize i = 0; i < len; ++i) {
         pBuffer[i] = pTmpUcs2[i];
     }
     pEnv->ReleaseStringChars(javaString, pTmpUcs2);
@@ -81,7 +81,7 @@ JNIEXPORT jstring JNICALL Java_com_github_stephengold_joltjni_std_StringStream_s
     const jsize len = cppString.size();
     // cppString may contain '\0', so don't use cppString.c_str() !
     jchar * const pTmpUcs2 = new jchar[len];
-    for (int i = 0; i < len; ++i) {
+    for (jsize i = 0; i < len; ++i) {
         pTmpUcs2[i] = cppString[i];
     }
     jstring result = pEnv->NewString(pTmpUcs2, len);

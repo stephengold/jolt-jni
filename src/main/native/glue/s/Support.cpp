@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -75,7 +75,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Support_getSupportBul
     JPH_ASSERT((capacityFloatsIn % 3) == 0);
     DIRECT_FLOAT_BUFFER(pEnv, storePoints, pFloatsOut, capacityFloatsOut);
     JPH_ASSERT(capacityFloatsOut == capacityFloatsIn);
-    for (int offset = 0; offset < capacityFloatsIn; offset += 3) {
+    for (jlong offset = 0; offset < capacityFloatsIn; offset += 3) {
         const float dx = pFloatsIn[offset];
         const float dy = pFloatsIn[offset + 1];
         const float dz = pFloatsIn[offset + 2];
