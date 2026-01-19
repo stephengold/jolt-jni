@@ -33,6 +33,7 @@ import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.readonly.ConstBroadPhaseLayerInterface;
 import com.github.stephengold.joltjni.readonly.ConstColor;
 import com.github.stephengold.joltjni.readonly.ConstFloat3;
+import com.github.stephengold.joltjni.readonly.ConstFloat4;
 import com.github.stephengold.joltjni.readonly.ConstGradient;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstObjectLayerPairFilter;
@@ -135,6 +136,24 @@ final public class TestUtils {
         Assert.assertEquals("x component", x, actual.x(), tolerance);
         Assert.assertEquals("y component", y, actual.y(), tolerance);
         Assert.assertEquals("z component", z, actual.z(), tolerance);
+    }
+
+    /**
+     * Verify the components of a {@code ConstFloat4} to within some tolerance.
+     *
+     * @param x the expected X component
+     * @param y the expected Y component
+     * @param z the expected Z component
+     * @param w the expected W component
+     * @param actual the vector to test (not {@code null}, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    public static void assertEquals(float x, float y, float z, float w,
+            ConstFloat4 actual, float tolerance) {
+        Assert.assertEquals("x component", x, actual.x(), tolerance);
+        Assert.assertEquals("y component", y, actual.y(), tolerance);
+        Assert.assertEquals("z component", z, actual.z(), tolerance);
+        Assert.assertEquals("w component", w, actual.w(), tolerance);
     }
 
     /**
