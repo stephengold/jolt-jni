@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,6 @@ abstract public class JoltPhysicsObject
      * A static, non-capturing Runnable for the Cleaner.
      */
     private static class CleanerRunnable implements Runnable {
-
         /**
          * virtual address of the native object
          */
