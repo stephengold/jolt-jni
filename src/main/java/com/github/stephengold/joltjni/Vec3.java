@@ -134,6 +134,18 @@ final public class Vec3 implements Vec3Arg {
     }
 
     /**
+     * Instantiate from the specified position in the specified buffer.
+     *
+     * @param buffer the desired component values (not {@code null}, unaffected)
+     * @param startPos the starting position in the buffer (&ge;0)
+     */
+    public Vec3(FloatBuffer buffer, int startPos) {
+        this.x = buffer.get(startPos);
+        this.y = buffer.get(startPos + 1);
+        this.z = buffer.get(startPos + 2);
+    }
+
+    /**
      * Instantiate from the specified location vector.
      *
      * @param vec the vector to convert (not {@code null}, unaffected)
