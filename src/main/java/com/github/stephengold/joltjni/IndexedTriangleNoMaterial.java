@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstIndexedTriangleNoMaterial;
+import java.nio.IntBuffer;
 
 /**
  * A triangle composed of three 32-bit mesh-vertex indices.
@@ -98,6 +99,23 @@ public class IndexedTriangleNoMaterial
         long triangleVa = va();
         int result = getIdx(triangleVa, cornerIndex);
         return result;
+    }
+
+    /**
+     * Write all 3 indices to the specified buffer and advance the buffer's
+     * position by 3. The triangle is unaffected.
+     *
+     * @param storeBuffer the destination buffer (not {@code null})
+     */
+    @Override
+    public void put(IntBuffer storeBuffer) {
+        long triangleVa = va();
+        int vi0 = getIdx(triangleVa, 0);
+        storeBuffer.put(vi0);
+        int vi1 = getIdx(triangleVa, 1);
+        storeBuffer.put(vi1);
+        int vi2 = getIdx(triangleVa, 2);
+        storeBuffer.put(vi2);
     }
     // *************************************************************************
     // new protected methods
