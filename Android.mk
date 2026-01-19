@@ -246,6 +246,7 @@ $(N)/glue/r/RotatedTranslatedShape.cpp \
 $(N)/glue/r/RotatedTranslatedShapeSettings.cpp \
 $(N)/glue/r/RRayCast.cpp \
 $(N)/glue/r/RShapeCast.cpp \
+$(N)/glue/r/RStrand.cpp \
 $(N)/glue/r/Rtti.cpp \
 $(N)/glue/sh/ShapeCastResult.cpp \
 $(N)/glue/sh/ShapeCastSettings.cpp \

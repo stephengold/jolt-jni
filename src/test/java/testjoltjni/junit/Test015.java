@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.Gradient;
 import com.github.stephengold.joltjni.HairMaterial;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.RStrand;
 import com.github.stephengold.joltjni.SVertex;
 import com.github.stephengold.joltjni.enumerate.ERenderStrandColor;
 import com.github.stephengold.joltjni.readonly.ConstDrawSettings;
@@ -59,6 +60,7 @@ public class Test015 {
         }
         doGradient();
         doHairMaterial();
+        doRStrand();
         doSVertex();
 
         TestUtils.cleanup();
@@ -102,6 +104,20 @@ public class Test015 {
         testHairMaterialSetters(material);
 
         TestUtils.testClose(material);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code RStrand} class.
+     */
+    private static void doRStrand() {
+        RStrand strand = new RStrand();
+        testRStrandDefaults(strand);
+
+        RStrand s2 = new RStrand(0, 0);
+        testRStrandDefaults(s2);
+
+        TestUtils.testClose(s2, strand);
         System.gc();
     }
 
@@ -311,6 +327,20 @@ public class Test015 {
                 material.getWorldTransformInfluence(), 0f);
 
         TestUtils.testClose(g6, g5, g4, g3, g2, g1);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code RStrand}.
+     *
+     * @param strand the material to test (not {@code null}, unaffected)
+     */
+    private static void testRStrandDefaults(RStrand strand) {
+        Assert.assertTrue(strand.hasAssignedNativeObject());
+        Assert.assertTrue(strand.ownsNativeObject());
+
+        Assert.assertEquals(0, strand.getEndVtx());
+        Assert.assertEquals(0, strand.getStartVtx());
+        Assert.assertEquals(0, strand.vertexCount());
     }
 
     /**
