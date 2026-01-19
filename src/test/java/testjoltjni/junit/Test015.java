@@ -22,13 +22,16 @@ SOFTWARE.
 package testjoltjni.junit;
 
 import com.github.stephengold.joltjni.DrawSettings;
+import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.Gradient;
 import com.github.stephengold.joltjni.HairMaterial;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.SVertex;
 import com.github.stephengold.joltjni.enumerate.ERenderStrandColor;
 import com.github.stephengold.joltjni.readonly.ConstDrawSettings;
 import com.github.stephengold.joltjni.readonly.ConstGradient;
 import com.github.stephengold.joltjni.readonly.ConstHairMaterial;
+import com.github.stephengold.joltjni.readonly.ConstSVertex;
 import org.junit.Assert;
 import org.junit.Test;
 import testjoltjni.TestUtils;
@@ -56,6 +59,7 @@ public class Test015 {
         }
         doGradient();
         doHairMaterial();
+        doSVertex();
 
         TestUtils.cleanup();
     }
@@ -98,6 +102,24 @@ public class Test015 {
         testHairMaterialSetters(material);
 
         TestUtils.testClose(material);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code SVertex} class.
+     */
+    private static void doSVertex() {
+        SVertex vertex = new SVertex();
+
+        testSVertexDefaults(vertex);
+        testSVertexSetters(vertex);
+
+        SVertex v2 = new SVertex(new Float3(0f, 0f, 0f), 1f);
+
+        testSVertexDefaults(v2);
+        testSVertexSetters(v2);
+
+        TestUtils.testClose(v2, vertex);
         System.gc();
     }
 
@@ -289,5 +311,39 @@ public class Test015 {
                 material.getWorldTransformInfluence(), 0f);
 
         TestUtils.testClose(g6, g5, g4, g3, g2, g1);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code SVertex}.
+     *
+     * @param vertex the material to test (not {@code null}, unaffected)
+     */
+    private static void testSVertexDefaults(ConstSVertex vertex) {
+        Assert.assertTrue(vertex.hasAssignedNativeObject());
+        Assert.assertTrue(vertex.ownsNativeObject());
+
+        TestUtils.assertEquals(0f, 0f, 0f, 1f, vertex.getBishop(), 0f);
+        Assert.assertEquals(1f, vertex.getInvMass(), 0f);
+        Assert.assertEquals(1f, vertex.getLength(), 1f);
+        TestUtils.assertEquals(0f, 0f, 0f, 1f, vertex.getOmega0(), 0f);
+        TestUtils.assertEquals(0f, 0f, 0f, vertex.getPosition(), 0f);
+        Assert.assertEquals(0f, vertex.getStrandFraction(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code SVertex}.
+     *
+     * @param vertex the material to test (not {@code null}, modified)
+     */
+    private static void testSVertexSetters(SVertex vertex) {
+        vertex.setInvMass(4f);
+        vertex.setPosition(new Float3(1f, 2f, 3f));
+
+        TestUtils.assertEquals(0f, 0f, 0f, 1f, vertex.getBishop(), 0f);
+        Assert.assertEquals(4f, vertex.getInvMass(), 0f);
+        Assert.assertEquals(1f, vertex.getLength(), 1f);
+        TestUtils.assertEquals(0f, 0f, 0f, 1f, vertex.getOmega0(), 0f);
+        TestUtils.assertEquals(1f, 2f, 3f, vertex.getPosition(), 0f);
+        Assert.assertEquals(0f, vertex.getStrandFraction(), 0f);
     }
 }
