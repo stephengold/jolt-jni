@@ -491,10 +491,10 @@ final public class TestUtils {
         }
 
         File file = new File(directory, subdirectory);
-        String bt = firstToLower(buildType);
+        String bt = MyString.firstToLower(buildType);
         file = new File(file, bt);
 
-        String f = firstToLower(flavor);
+        String f = MyString.firstToLower(flavor);
         file = new File(file, f);
 
         file = new File(file, name);
@@ -687,24 +687,6 @@ final public class TestUtils {
     }
     // *************************************************************************
     // private methods
-
-    /**
-     * Convert the first character of the specified text to lower case.
-     *
-     * @param input the input text to convert (not {@code null})
-     * @return the converted text (not {@code null})
-     */
-    private static String firstToLower(String input) {
-        String result = input;
-        if (!input.isEmpty()) {
-            String first = input.substring(0, 1);
-            first = first.toLowerCase(Locale.ROOT);
-            String rest = input.substring(1);
-            result = first + rest;
-        }
-
-        return result;
-    }
 
     /**
      * Test for the presence of four x86_64 ISA extensions that Jolt Physics can
