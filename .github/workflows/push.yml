@@ -342,3 +342,8 @@ jobs:
         run: |
           ./gradlew -Pbt=Release -Pflavor=Sp -Ptarget=Linux64 build install \
             --console=plain
+      - if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: test-report
+          path: build/reports/tests/test/index.html
