@@ -426,6 +426,7 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
     }
 }
 tasks.withType(Test).configureEach {
+    dependsOn('unpackJoltAssets')
     if (enableNativeAccess) {
         jvmArgs('--enable-native-access=ALL-UNNAMED') // suppress System::load() warning
     }
