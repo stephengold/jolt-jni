@@ -588,6 +588,7 @@ final public class TestUtils {
             InputStream is = new FileInputStream(file);
             inputStream = is;
         } catch (IOException exception) {
+            // do nothing
         }
         if (inputStream == null) {
             throw new RuntimeException("no input stream for file:  " + q);
@@ -615,6 +616,7 @@ final public class TestUtils {
             InputStream is = new FileInputStream(file);
             inputStream = is;
         } catch (IOException exception) {
+            // do nothing
         }
         if (inputStream == null) {
             throw new RuntimeException("no input stream for file:  " + q);

@@ -47,8 +47,8 @@ public class Test016 {
 
         Assert.assertNotNull(buffer);
         Assert.assertEquals(432, buffer.capacity());
-        Assert.assertEquals((byte)'T', buffer.get(0));
-        Assert.assertEquals((byte)'e', buffer.get(1));
+        Assert.assertEquals((byte) 'T', buffer.get(0));
+        Assert.assertEquals((byte) 'e', buffer.get(1));
         Assert.assertEquals(0x0A, buffer.get(431));
     }
 }
