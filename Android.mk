@@ -88,6 +88,7 @@ $(N)/glue/ch/ChbFace.cpp \
 $(N)/glue/co/CombineFunction.cpp \
 $(N)/glue/co/CompoundShape.cpp \
 $(N)/glue/co/CompoundShapeSettings.cpp \
+$(N)/glue/co/ComputeQueue.cpp \
 $(N)/glue/co/ConeConstraint.cpp \
 $(N)/glue/co/ConeConstraintSettings.cpp \
 $(N)/glue/co/Constraint.cpp \
