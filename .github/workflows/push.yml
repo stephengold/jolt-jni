@@ -20,6 +20,11 @@ jobs:
         run: |
           ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64 -Ptool=gcc -x checkstyleMain -x checkstyleTest build install \
             --console=plain
+      - if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: test-report
+          path: build/reports/tests/test
 
   Java21-Linux64:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
@@ -346,4 +351,4 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: test-report
-          path: build/reports/tests/test/index.html
+          path: build/reports/tests/test
