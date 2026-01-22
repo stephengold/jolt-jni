@@ -262,6 +262,13 @@ $(N)/glue/sh/ShapeSettingsRefC.cpp \
 $(N)/glue/sh/ShapeToIdMap.cpp \
 $(N)/glue/sh/SharedMutexBase.cpp \
 $(N)/glue/sh/SharedSettingsToIdMap.cpp \
+$(N)/glue/so/SoftBodyContactListener.cpp \
+$(N)/glue/so/SoftBodyContactSettings.cpp \
+$(N)/glue/so/SoftBodyCreationSettings.cpp \
+$(N)/glue/so/SoftBodyManifold.cpp \
+$(N)/glue/so/SoftBodyMotionProperties.cpp \
+$(N)/glue/so/SoftBodySharedSettings.cpp \
+$(N)/glue/so/SoftBodyVertex.cpp \
 $(N)/glue/s/SbcsResult.cpp \
 $(N)/glue/s/ScaledShape.cpp \
 $(N)/glue/s/ScaledShapeSettings.cpp \
@@ -280,13 +287,6 @@ $(N)/glue/s/Skinned.cpp \
 $(N)/glue/s/SkinWeight.cpp \
 $(N)/glue/s/SliderConstraint.cpp \
 $(N)/glue/s/SliderConstraintSettings.cpp \
-$(N)/glue/s/SoftBodyContactListener.cpp \
-$(N)/glue/s/SoftBodyContactSettings.cpp \
-$(N)/glue/s/SoftBodyCreationSettings.cpp \
-$(N)/glue/s/SoftBodyManifold.cpp \
-$(N)/glue/s/SoftBodyMotionProperties.cpp \
-$(N)/glue/s/SoftBodySharedSettings.cpp \
-$(N)/glue/s/SoftBodyVertex.cpp \
 $(N)/glue/s/SpecifiedBroadPhaseLayerFilter.cpp \
 $(N)/glue/s/SpecifiedObjectLayerFilter.cpp \
 $(N)/glue/s/Sphere.cpp \
