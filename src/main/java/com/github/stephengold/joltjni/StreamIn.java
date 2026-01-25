@@ -33,7 +33,7 @@ abstract public class StreamIn extends NonCopyable {
     /**
      * Instantiate with no native object assigned.
      * <p>
-     * This no-arg constructor was made explicit to avoid javadoc warnings from
+     * This no-arg constructor was made explicit to avoid Javadoc warnings from
      * JDK 18+.
      */
     StreamIn() {

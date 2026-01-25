@@ -77,7 +77,7 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Apply the specified angular impulse to the body.
      *
-     * @param impulse the impulse vector (Newton.meter.seconds in system
+     * @param impulse the impulse vector (Newton meter seconds in system
      * coordinates, not {@code null}, unaffected)
      */
     public void addAngularImpulse(Vec3Arg impulse) {
@@ -170,7 +170,7 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Apply the specified torque to the body.
      *
-     * @param torque the torque vector (Newton.meters in system coordinates, not
+     * @param torque the torque vector (Newton meters in system coordinates, not
      * {@code null}, unaffected)
      */
     public void addTorque(Vec3Arg torque) {
@@ -509,7 +509,7 @@ public class Body extends NonCopyable implements ConstBody {
     /**
      * Copy the net torque acting on the body. The body is unaffected.
      *
-     * @return a new torque vector (Newton.meters in system coordinates)
+     * @return a new torque vector (Newton meters in system coordinates)
      */
     @Override
     public Vec3 getAccumulatedTorque() {

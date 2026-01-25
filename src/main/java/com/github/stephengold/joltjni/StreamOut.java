@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ abstract public class StreamOut extends NonCopyable {
     /**
      * Instantiate with no native object assigned.
      * <p>
-     * This no-arg constructor was made explicit to avoid javadoc warnings from
+     * This no-arg constructor was made explicit to avoid Javadoc warnings from
      * JDK 18+.
      */
     StreamOut() {

@@ -321,7 +321,7 @@ final public class Quat implements QuatArg {
      * Create a rotation quaternion from the specified normalized rotation axis.
      *
      * @param axis the desired rotation axis (not {@code null}, normalized,
-     * unaffected))
+     * unaffected)
      * @param angle the desired rotation angle (in radians)
      * @return a new quaternion
      */

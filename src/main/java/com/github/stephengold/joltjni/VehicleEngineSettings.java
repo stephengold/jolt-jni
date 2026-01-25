@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -105,7 +105,7 @@ public class VehicleEngineSettings extends JoltPhysicsObject {
      * Return the maximum torque. The settings are unaffected. (native
      * attribute: mMaxTorque)
      *
-     * @return the limit (in Newton.meters)
+     * @return the limit (in Newton meters)
      */
     public float getMaxTorque() {
         long settingsVa = va();
@@ -160,7 +160,7 @@ public class VehicleEngineSettings extends JoltPhysicsObject {
     /**
      * Alter the maximum torque. (native attribute: mMaxTorque)
      *
-     * @param torque the desired limit (in Newton.meters, default=500)
+     * @param torque the desired limit (in Newton meters, default=500)
      */
     public void setMaxTorque(float torque) {
         long settingsVa = va();

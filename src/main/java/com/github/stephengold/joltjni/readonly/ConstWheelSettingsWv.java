@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@ public interface ConstWheelSettingsWv extends ConstWheelSettings {
      * Return the maximum torque that the main brake can exert on the wheel. The
      * settings are unaffected.
      *
-     * @return the maximum torque (in Newton.meters)
+     * @return the maximum torque (in Newton meters)
      */
     float getMaxBrakeTorque();
 
@@ -40,7 +40,7 @@ public interface ConstWheelSettingsWv extends ConstWheelSettings {
      * Return the maximum torque that the hand brake can exert on the wheel. The
      * settings are unaffected.
      *
-     * @return the maximum torque (in Newton.meters)
+     * @return the maximum torque (in Newton meters)
      */
     float getMaxHandBrakeTorque();
 

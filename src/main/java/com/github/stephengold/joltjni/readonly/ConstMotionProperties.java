@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ public interface ConstMotionProperties extends ConstJoltPhysicsObject {
     /**
      * Copy the net torque acting on the body. The properties are unaffected.
      *
-     * @return a new torque vector (Newton.meters in system coordinates)
+     * @return a new torque vector (Newton meters in system coordinates)
      */
     Vec3 getAccumulatedTorque();
 

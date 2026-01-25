@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -81,7 +81,7 @@ final public class WheelSettingsWvRef
      * Alter the maximum torque that the main brake can exert on the wheel.
      * (native attribute: mMaxBrakeTorque)
      *
-     * @param torque the desired torque (in Newton.meters, default=1500)
+     * @param torque the desired torque (in Newton meters, default=1500)
      * @return the current reference, for chaining
      */
     public WheelSettingsWvRef setMaxBrakeTorque(float torque) {
@@ -95,7 +95,7 @@ final public class WheelSettingsWvRef
      * Alter the maximum torque that the hand brake can exert on the wheel.
      * (native attribute: mMaxHandBrakeTorque)
      *
-     * @param torque the desired torque (in Newton.meters, default=4000)
+     * @param torque the desired torque (in Newton meters, default=4000)
      * @return the current reference, for chaining
      */
     public WheelSettingsWvRef setMaxHandBrakeTorque(float torque) {
@@ -316,7 +316,7 @@ final public class WheelSettingsWvRef
      * Return the maximum torque that the main brake can exert on the wheel. The
      * settings are unaffected. (native attribute: mMaxBrakeTorque)
      *
-     * @return the maximum torque (in Newton.meters)
+     * @return the maximum torque (in Newton meters)
      */
     @Override
     public float getMaxBrakeTorque() {
@@ -330,7 +330,7 @@ final public class WheelSettingsWvRef
      * Return the maximum torque that the hand brake can exert on the wheel. The
      * settings are unaffected. (native attribute: mMaxHandBrakeTorque)
      *
-     * @return the maximum torque (in Newton.meters)
+     * @return the maximum torque (in Newton meters)
      */
     @Override
     public float getMaxHandBrakeTorque() {

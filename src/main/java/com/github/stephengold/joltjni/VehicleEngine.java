@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -68,7 +68,7 @@ public class VehicleEngine extends VehicleEngineSettings {
     /**
      * Apply the specified torque to the engine.
      *
-     * @param torque the torque to apply (in Newton.meters)
+     * @param torque the torque to apply (in Newton meters)
      * @param deltaTime the amount of time between updates (in seconds, &ge;0)
      */
     public void applyTorque(float torque, float deltaTime) {
@@ -113,7 +113,7 @@ public class VehicleEngine extends VehicleEngineSettings {
      * acceleration.
      *
      * @param acceleration the position of the accelerator pedal (&ge;0, &le;1)
-     * @return the available torque (in Newton.meters)
+     * @return the available torque (in Newton meters)
      */
     public float getTorque(float acceleration) {
         long engineVa = va();

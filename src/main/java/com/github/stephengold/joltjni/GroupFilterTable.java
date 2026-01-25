@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -50,7 +50,7 @@ public class GroupFilterTable extends GroupFilter {
 
     /**
      * Create a default filter with the specified number of subgroups.
-     * Collisions will be enabled except when the sub-group IDs are equal.
+     * Collisions will be enabled except when the subgroup IDs are equal.
      *
      * @param numSubGroups the initial number of subgroups (&ge;0)
      */

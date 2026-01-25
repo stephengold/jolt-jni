@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ public enum FillMode {
      */
     SurfaceOnly,
     /**
-     * use raycasting to distinguish inside from outside (native name:
+     * cast a ray to distinguish inside from outside (native name:
      * RAYCAST_FILL)
      */
     RaycastFill

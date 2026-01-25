@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@ public class CollisionGroup
      */
     final public static int cInvalidGroup = -1;
     /**
-     * invalid sub-group
+     * invalid subgroup
      */
     final public static int cInvalidSubGroup = -1;
     // *************************************************************************
@@ -117,7 +117,7 @@ public class CollisionGroup
     }
 
     /**
-     * Alter the sub-group ID. (native function: SetSubGroupID)
+     * Alter the subgroup ID. (native function: SetSubGroupID)
      *
      * @param id the desired ID (default=cInvalidSubGroup)
      */
@@ -158,7 +158,7 @@ public class CollisionGroup
     }
 
     /**
-     * Return the sub-group ID. The group is unaffected. (native function:
+     * Return the subgroup ID. The group is unaffected. (native function:
      * GetSubGroupID)
      *
      * @return the {@code SubGroupID} value

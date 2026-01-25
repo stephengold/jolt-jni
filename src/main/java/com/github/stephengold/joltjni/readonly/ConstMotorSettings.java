@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -56,7 +56,7 @@ public interface ConstMotorSettings extends ConstJoltPhysicsObject {
      * Return the maximum torque to apply in an angular constraint. Ignored in a
      * linear motor. The settings are unaffected.
      *
-     * @return the amount of torque (in Newton.meters, typically positive)
+     * @return the amount of torque (in Newton meters, typically positive)
      */
     float getMaxTorqueLimit();
 
@@ -72,7 +72,7 @@ public interface ConstMotorSettings extends ConstJoltPhysicsObject {
      * Return the minimum torque to apply in an angular constraint. Ignored in a
      * linear motor. The settings are unaffected.
      *
-     * @return the amount of torque (in Newton.meters, typically negative)
+     * @return the amount of torque (in Newton meters, typically negative)
      */
     float getMinTorqueLimit();
 

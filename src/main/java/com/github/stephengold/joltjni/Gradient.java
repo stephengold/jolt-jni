@@ -148,7 +148,7 @@ public class Gradient extends JoltPhysicsObject implements ConstGradient {
     }
 
     /**
-     * Alter the the fraction at which the parameter value reaches {@code max}.
+     * Alter the fraction at which the parameter value reaches {@code max}.
      * (native member: mMaxFraction)
      *
      * @param fraction the desired fraction (default=1)

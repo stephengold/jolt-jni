@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -72,7 +72,7 @@ public class FilteredContactListener extends ContactListener {
     /**
      * Return the body-filter mode.
      *
-     * @return a enum value (not {@code null})
+     * @return an enum value (not {@code null})
      */
     public EFilterMode getBodyFilterMode() {
         long listenerVa = va();
@@ -94,7 +94,7 @@ public class FilteredContactListener extends ContactListener {
     /**
      * Return the broadphase-layer filter mode.
      *
-     * @return a enum value (not {@code null})
+     * @return an enum value (not {@code null})
      */
     public EFilterMode getBroadPhaseLayerFilterMode() {
         long listenerVa = va();
