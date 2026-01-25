@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -125,7 +125,7 @@ final public class ObjectStreamOut {
             result = sWriteRagdollSettings(streamVa, ordinal, objVa);
 
         } else { // TODO: implement for other types
-            Class clas = writeObject.getClass();
+            Class<?> clas = writeObject.getClass();
             String className = clas.getSimpleName();
             throw new IllegalArgumentException(className);
         }

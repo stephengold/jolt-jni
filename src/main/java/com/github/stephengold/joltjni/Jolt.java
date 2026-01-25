@@ -441,8 +441,9 @@ final public class Jolt {
                     int dotPos = line.lastIndexOf('.');
                     String className = line.substring(0, dotPos);
                     try {
-                        Class cl = Class.forName(packageName + "." + className);
-                        result.add(cl);
+                        Class<?> clas
+                                = Class.forName(packageName + "." + className);
+                        result.add(clas);
                     } catch (ClassNotFoundException exception) {
                         System.err.println("className = " + className);
                         System.exit(0);
