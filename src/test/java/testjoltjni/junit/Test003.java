@@ -96,7 +96,6 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import com.github.stephengold.joltjni.vhacd.FillMode;
 import com.github.stephengold.joltjni.vhacd.Parameters;
 import java.nio.IntBuffer;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Assert;
@@ -406,8 +405,7 @@ public class Test003 {
             TestUtils.testClose(bodyIdArray);
         }
         { // List<Integer> constructor:
-            List<Integer> idList = new ArrayList<>();
-            idList.addAll(Arrays.asList(3, 4, 6, 7, 3, 4, 6, 102));
+            List<Integer> idList = Arrays.asList(3, 4, 6, 7, 3, 4, 6, 102);
 
             BodyIdArray bodyIdArray = new BodyIdArray(idList);
             int bodyIdArrayLength = bodyIdArray.length();
