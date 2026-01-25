@@ -21,6 +21,9 @@ SOFTWARE.
  */
 package testjoltjni.junit;
 
+import com.github.stephengold.joltjni.ComputeSystem;
+import com.github.stephengold.joltjni.ComputeSystemCpu;
+import com.github.stephengold.joltjni.ComputeSystemRef;
 import com.github.stephengold.joltjni.DrawSettings;
 import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.Gradient;
@@ -59,6 +62,7 @@ public class Test015 {
         if (Jolt.implementsDebugRendering()) {
             doDrawSettings();
         }
+        doComputeSystem();
         doGradient();
         doHairMaterial();
         doRStrand();
@@ -69,6 +73,19 @@ public class Test015 {
     }
     // *************************************************************************
     // Java private methods
+
+    /**
+     * Test the {@code ComputeSystem} classes.
+     */
+    private static void doComputeSystem() {
+        ComputeSystem system = new ComputeSystemCpu();
+
+        ComputeSystemRef ref = system.toRef();
+        ComputeSystem alias = ref.getPtr();
+
+        TestUtils.testClose(ref);
+        System.gc();
+    }
 
     /**
      * Test the {@code DrawSettings} class.

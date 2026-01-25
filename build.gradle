@@ -173,6 +173,7 @@ model {
                 // always-on preprocessor defines:
                 cppCompiler.define 'JOLT_JNI_VERSION_STRING=' + jjVersion
                 cppCompiler.define 'JPH_OBJECT_STREAM'
+                cppCompiler.define 'JPH_USE_CPU_COMPUTE'
 
                 // platforms with ISA extensions:
                 Boolean use_avx2 = pName.endsWith('_avx2')
