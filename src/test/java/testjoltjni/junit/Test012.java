@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -884,8 +884,7 @@ public class Test012 {
         { // serialize and then deserialize using object streams:
             String serialData = serializeRaw(material);
             PhysicsMaterialRef refCopy = drPhysicsMaterial(serialData);
-            PhysicsMaterialSimple materialCopy
-                    = (PhysicsMaterialSimple) refCopy.getPtrAsSimple();
+            PhysicsMaterialSimple materialCopy = refCopy.getPtrAsSimple();
 
             Assert.assertNotEquals(material.va(), materialCopy.va());
             Equivalent.physicsMaterial(material, materialCopy);
@@ -1314,8 +1313,7 @@ public class Test012 {
 
             VehicleConstraintSettingsRef copy2Ref
                     = drVehicleConstraintSettings(serialData);
-            ConstVehicleConstraintSettings vcsCopy2
-                    = (ConstVehicleConstraintSettings) copy2Ref.getPtr();
+            ConstVehicleConstraintSettings vcsCopy2 = copy2Ref.getPtr();
 
             Assert.assertNotEquals(vcs.va(), vcsCopy2.targetVa());
             Equivalent.vehicleConstraintSettings(vcs, vcsCopy2);
