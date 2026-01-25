@@ -836,7 +836,7 @@ Bugfix:  many `CharacterRefC` and `CharacterVirtualRefC` methods crash the JVM
   + `ECollectFacesMode`
 
 + Added many public methods to the library.
-+ Added package-level javadoc.
++ Added package-level Javadoc.
 + Merged `Ref<>` implementations into corresponding `RefTarget` source files.
 + Updated Jolt source code and assets to 5da6ac8 (=sg240907).
 

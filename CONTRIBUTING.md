@@ -72,7 +72,7 @@ of fields and methods within Java source files.
 Each file is divided into sections that appear a fixed sequence:
 
 + license
-+ class javadoc
++ class Javadoc
 + constants
 + fields
 + constructors
