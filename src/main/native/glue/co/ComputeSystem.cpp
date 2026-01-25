@@ -69,6 +69,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_ComputeSystem_getRefC
 
 /*
  * Class:     com_github_stephengold_joltjni_ComputeSystem
+ * Method:    getRtti
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ComputeSystem_getRtti
+  (JNIEnv *, jclass, jlong systemVa) {
+    const ComputeSystem * const pSystem
+            = reinterpret_cast<ComputeSystem *> (systemVa);
+    const RTTI * const pResult = pSystem->GetRTTI();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ComputeSystem
  * Method:    setEmbedded
  * Signature: (J)V
  */

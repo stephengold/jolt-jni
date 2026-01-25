@@ -63,7 +63,7 @@ abstract public class ComputeSystem extends NonCopyable implements RefTarget {
         if (systemVa == 0L) {
             return null;
         }
-        long rttiVa = SerializableObject.getRtti(systemVa);
+        long rttiVa = getRtti(systemVa);
         String typeName = Rtti.getName(rttiVa);
         ComputeSystem result;
         switch (typeName) {
@@ -153,6 +153,8 @@ abstract public class ComputeSystem extends NonCopyable implements RefTarget {
     native private static long createComputeQueue(long systemVa);
 
     native private static int getRefCount(long systemVa);
+
+    native private static long getRtti(long systemVa);
 
     native private static void setEmbedded(long systemVa);
 
