@@ -64,7 +64,7 @@ final public class ComputeQueueRef extends Ref {
     @Override
     public ComputeQueue getPtr() {
         long queueVa = targetVa();
-        ComputeQueue result = ComputeQueue.newQueue(queueVa);
+        ComputeQueue result = new ComputeQueue(queueVa);
 
         return result;
     }

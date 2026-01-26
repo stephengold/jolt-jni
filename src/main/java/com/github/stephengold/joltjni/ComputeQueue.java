@@ -24,18 +24,25 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.template.RefTarget;
 
 /**
- * A command queue for performing calculations on a GPU.
+ * A command queue for performing calculations on a specific
+ * {@code ComputeSystem}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class ComputeQueue extends NonCopyable implements RefTarget {
+public class ComputeQueue extends NonCopyable implements RefTarget {
     // *************************************************************************
     // constructors
 
     /**
-     * Instantiate a queue with no native object assigned.
+     * Instantiate a queue with the specified native object assigned.
+     *
+     * @param queueVa the virtual address of the native object to assign (not
+     * zero)
      */
-    ComputeQueue() {
+    ComputeQueue(long queueVa) {
+        long refVa = toRef(queueVa);
+        Runnable freeingAction = () -> ComputeQueueRef.free(refVa);
+        setVirtualAddress(queueVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
@@ -46,34 +53,6 @@ abstract public class ComputeQueue extends NonCopyable implements RefTarget {
     public void executeAndWait() {
         long queueVa = va();
         executeAndWait(queueVa);
-    }
-
-    /**
-     * Instantiate a queue from its virtual address.
-     *
-     * @param queueVa the virtual address of the native object, or zero
-     * @return a new JVM object, or {@code null} if the argument was zero
-     */
-    public static ComputeQueue newQueue(long queueVa) {
-        if (queueVa == 0L) {
-            return null;
-        }
-        long rttiVa = SerializableObject.getRtti(queueVa);
-        String typeName = Rtti.getName(rttiVa);
-        ComputeQueue result;
-        switch (typeName) {
-            case "ComputeQueueCPU":
-            case "ComputeQueueDX12":
-            case "ComputeQueueMTL":
-            case "ComputeQueueVK":
-                result = null; // TODO
-                break;
-
-            default:
-                throw new RuntimeException("typeName = " + typeName);
-        }
-
-        return result;
     }
     // *************************************************************************
     // RefTarget methods
@@ -100,6 +79,20 @@ abstract public class ComputeQueue extends NonCopyable implements RefTarget {
         long queueVa = va();
         setEmbedded(queueVa);
     }
+
+    /**
+     * Create a counted reference to the native {@code ComputeQueue}.
+     *
+     * @return a new JVM object with a new native object assigned
+     */
+    @Override
+    public ConstraintRef toRef() {
+        long queueVa = va();
+        long refVa = toRef(queueVa);
+        ConstraintRef result = new ConstraintRef(refVa, true);
+
+        return result;
+    }
     // *************************************************************************
     // native methods
 
@@ -108,4 +101,6 @@ abstract public class ComputeQueue extends NonCopyable implements RefTarget {
     native static int getRefCount(long queueVa);
 
     native private static void setEmbedded(long queueVa);
+
+    native private static long toRef(long queueVa);
 }
