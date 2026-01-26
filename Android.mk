@@ -252,6 +252,7 @@ $(N)/glue/r/RRayCast.cpp \
 $(N)/glue/r/RShapeCast.cpp \
 $(N)/glue/r/RStrand.cpp \
 $(N)/glue/r/Rtti.cpp \
+$(N)/glue/sh/ShaderLoader.cpp \
 $(N)/glue/sh/ShapeCastResult.cpp \
 $(N)/glue/sh/ShapeCastSettings.cpp \
 $(N)/glue/sh/Shape.cpp \
@@ -364,6 +365,7 @@ $(N)/glue/w/WheelSettings.cpp \
 $(N)/glue/w/WheelSettingsTv.cpp \
 $(N)/glue/w/WheelSettingsWv.cpp \
 $(N)/Jolt/AABBTree/AABBTreeBuilder.cpp \
+$(N)/Jolt/Compute/ComputeSystem.cpp \
 $(N)/Jolt/Compute/CPU/ComputeBufferCPU.cpp \
 $(N)/Jolt/Compute/CPU/ComputeQueueCPU.cpp \
 $(N)/Jolt/Compute/CPU/ComputeSystemCPU.cpp \
