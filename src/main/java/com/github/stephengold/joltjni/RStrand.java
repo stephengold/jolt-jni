@@ -21,12 +21,14 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstRStrand;
+
 /**
  * A rendered strand of hair. (native type: {@code HairSettings::RStrand})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class RStrand extends JoltPhysicsObject {
+public class RStrand extends JoltPhysicsObject implements ConstRStrand {
     // *************************************************************************
     // constructors
 
@@ -68,7 +70,7 @@ public class RStrand extends JoltPhysicsObject {
         super(container, strandVa);
     }
     // *************************************************************************
-    // new methods exposed
+    // ConstRStrand methods
 
     /**
      * Return the index of the ending vertex. The strand is unaffected. (native
@@ -76,6 +78,7 @@ public class RStrand extends JoltPhysicsObject {
      *
      * @return the vertex index
      */
+    @Override
     public int getEndVtx() {
         long strandVa = va();
         int result = getEndVtx(strandVa);
@@ -89,6 +92,7 @@ public class RStrand extends JoltPhysicsObject {
      *
      * @return the vertex index
      */
+    @Override
     public int getStartVtx() {
         long strandVa = va();
         int result = getStartVtx(strandVa);
@@ -101,6 +105,7 @@ public class RStrand extends JoltPhysicsObject {
      *
      * @return the count
      */
+    @Override
     public int vertexCount() {
         long strandVa = va();
         int result = vertexCount(strandVa);
