@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -65,8 +65,8 @@ public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
      */
     @Override
     public void erase(int startIndex, int stopIndex) {
-        long vectorVa = va();
-        erase(vectorVa, startIndex, stopIndex);
+        long listVa = va();
+        erase(listVa, startIndex, stopIndex);
     }
 
     /**
@@ -128,7 +128,7 @@ public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
     native private static long createDefault();
 
     native private static void erase(
-            long vectorVa, int startIndex, int stopIndex);
+            long listVa, int startIndex, int stopIndex);
 
     native private static void free(long listVa);
 
