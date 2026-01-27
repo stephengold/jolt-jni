@@ -397,6 +397,89 @@ final public class TestUtils {
     }
 
     /**
+     * Load raw bytes from the specified file.
+     *
+     * @param path a filesystem path to the file (not {@code null})
+     * @return a new direct buffer
+     */
+    public static ByteBuffer loadFileAsBytes(String path) {
+        String q = MyString.quote(path);
+
+        File file = new File(path);
+        if (!file.exists()) {
+            throw new RuntimeException("file doesn't exist:  " + q);
+        } else if (!file.isFile()) {
+            throw new RuntimeException("file isn't normal:  " + q);
+        } else if (!file.canRead()) {
+            throw new RuntimeException("file isn't readable:  " + q);
+        }
+        InputStream inputStream = null;
+
+        // Read the file to determine its size in bytes:
+        try {
+            InputStream is = new FileInputStream(file);
+            inputStream = is;
+        } catch (IOException exception) {
+            // do nothing
+        }
+        if (inputStream == null) {
+            throw new RuntimeException("no input stream for file:  " + q);
+        }
+        int totalBytes = 0;
+        byte[] tmpArray = new byte[4096];
+        try {
+            while (true) {
+                int numBytesRead = inputStream.read(tmpArray);
+                if (numBytesRead < 0) {
+                    break;
+                }
+                totalBytes += numBytesRead;
+            }
+            inputStream.close();
+
+        } catch (IOException exception) {
+            throw new RuntimeException("failed to read file " + q);
+        }
+        ByteBuffer result = Jolt.newDirectByteBuffer(totalBytes);
+
+        // Read the file again to fill the buffer with data:
+        inputStream = null;
+        try {
+            InputStream is = new FileInputStream(file);
+            inputStream = is;
+        } catch (IOException exception) {
+            // do nothing
+        }
+        if (inputStream == null) {
+            throw new RuntimeException("no input stream for file:  " + q);
+        }
+        try {
+            while (true) {
+                int numBytesRead = inputStream.read(tmpArray);
+                if (numBytesRead < 0) {
+                    break;
+
+                } else if (numBytesRead == tmpArray.length) {
+                    result.put(tmpArray);
+
+                } else {
+                    for (int i = 0; i < numBytesRead; ++i) {
+                        byte b = tmpArray[i];
+                        result.put(b);
+                    }
+                }
+            }
+            inputStream.close();
+
+        } catch (IOException exception) {
+            throw new RuntimeException("failed to read file " + q);
+        }
+
+        result.flip();
+        return result;
+    }
+
+    /**
      * Load some flavor of native library, preferably a Debug build.
      * <p>
      * The search order is:
@@ -562,89 +645,6 @@ final public class TestUtils {
             }
         }
         Assert.assertTrue(success);
-    }
-
-    /**
-     * Load raw bytes from the specified file.
-     *
-     * @param path a filesystem path to the file (not {@code null})
-     * @return a new direct buffer
-     */
-    public static ByteBuffer loadFileAsBytes(String path) {
-        String q = MyString.quote(path);
-
-        File file = new File(path);
-        if (!file.exists()) {
-            throw new RuntimeException("file doesn't exist:  " + q);
-        } else if (!file.isFile()) {
-            throw new RuntimeException("file isn't normal:  " + q);
-        } else if (!file.canRead()) {
-            throw new RuntimeException("file isn't readable:  " + q);
-        }
-        InputStream inputStream = null;
-
-        // Read the file to determine its size in bytes:
-        try {
-            InputStream is = new FileInputStream(file);
-            inputStream = is;
-        } catch (IOException exception) {
-            // do nothing
-        }
-        if (inputStream == null) {
-            throw new RuntimeException("no input stream for file:  " + q);
-        }
-        int totalBytes = 0;
-        byte[] tmpArray = new byte[4096];
-        try {
-            while (true) {
-                int numBytesRead = inputStream.read(tmpArray);
-                if (numBytesRead < 0) {
-                    break;
-                }
-                totalBytes += numBytesRead;
-            }
-            inputStream.close();
-
-        } catch (IOException exception) {
-            throw new RuntimeException("failed to read file " + q);
-        }
-        ByteBuffer result = Jolt.newDirectByteBuffer(totalBytes);
-
-        // Read the file again to fill the buffer with data:
-        inputStream = null;
-        try {
-            InputStream is = new FileInputStream(file);
-            inputStream = is;
-        } catch (IOException exception) {
-            // do nothing
-        }
-        if (inputStream == null) {
-            throw new RuntimeException("no input stream for file:  " + q);
-        }
-        try {
-            while (true) {
-                int numBytesRead = inputStream.read(tmpArray);
-                if (numBytesRead < 0) {
-                    break;
-
-                } else if (numBytesRead == tmpArray.length) {
-                    result.put(tmpArray);
-
-                } else {
-                    for (int i = 0; i < numBytesRead; ++i) {
-                        byte b = tmpArray[i];
-                        result.put(b);
-                    }
-                }
-            }
-            inputStream.close();
-
-        } catch (IOException exception) {
-            throw new RuntimeException("failed to read file " + q);
-        }
-
-        result.flip();
-        return result;
     }
 
     /**
