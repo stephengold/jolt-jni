@@ -53,9 +53,9 @@ final public class ObjectStreamOut {
     /**
      * Write the specified object to the specified file.
      *
-     * @param fileName the path to the file (not null)
-     * @param streamType the type of file (not null)
-     * @param writeObject the object to write (not null, unaffected)
+     * @param fileName the path to the file (not {@code null})
+     * @param streamType the type of file (not {@code null})
+     * @param writeObject the object to write (not {@code null}, unaffected)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sWriteObject(String fileName,
@@ -94,9 +94,9 @@ final public class ObjectStreamOut {
     /**
      * Write the specified object to the specified stream.
      *
-     * @param stream the stream to write to (not null)
-     * @param streamType the type of stream (not null)
-     * @param writeObject the object to write (not null, unaffected)
+     * @param stream the stream to write to (not {@code null})
+     * @param streamType the type of stream (not {@code null})
+     * @param writeObject the object to write (not {@code null}, unaffected)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sWriteObject(StringStream stream,

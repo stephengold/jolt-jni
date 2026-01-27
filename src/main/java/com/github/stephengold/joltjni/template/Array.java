@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -110,7 +110,7 @@ abstract public class Array<T extends JoltPhysicsObject>
     abstract public T get(int elementIndex);
 
     /**
-     * Expand or truncate the array.
+     * Extend or truncate the array.
      *
      * @param numElements the desired size (number of elements, &ge;0)
      */
@@ -119,7 +119,7 @@ abstract public class Array<T extends JoltPhysicsObject>
     /**
      * Append the specified object to the end.
      *
-     * @param object the object to append (not null)
+     * @param object the object to append (not {@code null})
      */
     public void pushBack(T object) {
         int numElements = size();
@@ -131,7 +131,7 @@ abstract public class Array<T extends JoltPhysicsObject>
      * Put or duplicate the specified object at the specified index.
      *
      * @param elementIndex the index at which to put the object (&ge;0)
-     * @param object the object to put or duplicate (not null)
+     * @param object the object to put or duplicate (not {@code null})
      */
     abstract public void set(int elementIndex, T object);
 

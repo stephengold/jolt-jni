@@ -68,7 +68,7 @@ public class CollisionGroup
     /**
      * Instantiate a group with the specified filter and IDs.
      *
-     * @param filter the collision-group filter (not null)
+     * @param filter the collision-group filter (not {@code null})
      * @param groupId the main group ID
      * @param subGroupId the ID of the subgroup to which the body belongs
      */
@@ -82,7 +82,7 @@ public class CollisionGroup
      * Instantiate a group with the specified filter and IDs.
      *
      * @param filterRef a counted reference to the desired collision-group
-     * filter (not null)
+     * filter (not {@code null})
      * @param groupId the main group ID
      * @param subGroupId the ID of the subgroup to which the body belongs
      */
@@ -98,7 +98,7 @@ public class CollisionGroup
     /**
      * Replace the group filter.
      *
-     * @param filter the desired filter (not null, alias created)
+     * @param filter the desired filter (not {@code null}, alias created)
      */
     public void setGroupFilter(GroupFilter filter) {
         long groupVa = va();

@@ -77,7 +77,7 @@ final public class VertexList implements ConstVertexList {
     }
 
     /**
-     * Expand or truncate the list, initializing any new vertices to (0,0,0).
+     * Extend or truncate the list, initializing any new vertices to (0,0,0).
      *
      * @param numVertices the desired size (number of vertices)
      */

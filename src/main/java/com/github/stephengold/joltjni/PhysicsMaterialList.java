@@ -85,7 +85,7 @@ public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
     }
 
     /**
-     * Expand or truncate the list.
+     * Extend or truncate the list.
      *
      * @param numElements the desired size (number of references, &ge;0)
      */
@@ -99,7 +99,7 @@ public class PhysicsMaterialList extends Array<PhysicsMaterialRef> {
      * Duplicate the specified reference at the specified index.
      *
      * @param elementIndex the index at which to put the reference (&ge;0)
-     * @param reference the reference to put (not null)
+     * @param reference the reference to put (not {@code null})
      */
     @Override
     public void set(int elementIndex, PhysicsMaterialRef reference) {

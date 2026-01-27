@@ -44,7 +44,8 @@ final public class ShapeList extends Array<ShapeRefC> {
     /**
      * Instantiate a list containing a single shape.
      *
-     * @param shapeRef a counted reference to the desired shape (not null)
+     * @param shapeRef a counted reference to the desired shape (not
+     * {@code null})
      */
     public ShapeList(ShapeRefC shapeRef) {
         this();
@@ -95,7 +96,7 @@ final public class ShapeList extends Array<ShapeRefC> {
     }
 
     /**
-     * Expand or truncate the list.
+     * Extend or truncate the list.
      *
      * @param numElements the desired size (number of shapes, &ge;0)
      */
@@ -109,7 +110,7 @@ final public class ShapeList extends Array<ShapeRefC> {
      * Put a reference to the specified shape at the specified index.
      *
      * @param elementIndex the index at which to put the reference (&ge;0)
-     * @param shapeRef the reference to put (not null)
+     * @param shapeRef the reference to put (not {@code null})
      */
     @Override
     public void set(int elementIndex, ShapeRefC shapeRef) {

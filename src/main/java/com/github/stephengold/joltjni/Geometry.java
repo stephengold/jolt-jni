@@ -39,7 +39,7 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
     /**
      * Instantiate a geometry with the specified bounding box.
      *
-     * @param bounds the desired bounding box (not null, unaffected)
+     * @param bounds the desired bounding box (not {@code null}, unaffected)
      */
     public Geometry(ConstAaBox bounds) {
         long boundsVa = bounds.targetVa();
@@ -124,9 +124,10 @@ public class Geometry extends JoltPhysicsObject implements RefTarget {
      * Access the appropriate level of detail for the specified conditions. The
      * geometry is unaffected. (native function: GetLOD)
      *
-     * @param cameraPosition the location of the camera (not null, unaffected)
+     * @param cameraPosition the location of the camera (not {@code null},
+     * unaffected)
      * @param worldSpaceBounds bounds for this geometry (in system coordinates,
-     * not null, unaffected)
+     * not {@code null}, unaffected)
      * @param lodScaleSq the squared scale of the model matrix
      * @return a pre-existing LOD
      */

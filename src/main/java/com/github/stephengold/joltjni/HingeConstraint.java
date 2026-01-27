@@ -124,7 +124,7 @@ public class HingeConstraint extends TwoBodyConstraint {
     /**
      * Return the state of the motor. The constraint is unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EMotorState getMotorState() {
         long constraintVa = va();
@@ -195,7 +195,7 @@ public class HingeConstraint extends TwoBodyConstraint {
     /**
      * Alter the state of the motor.
      *
-     * @param state the desired state (not null)
+     * @param state the desired state (not {@code null})
      */
     public void setMotorState(EMotorState state) {
         long constraintVa = va();

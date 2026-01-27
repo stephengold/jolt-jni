@@ -73,7 +73,8 @@ abstract public class CompoundShape extends Shape {
      *
      * @param subShapeIndex the index of a subshape within the current compound
      * shape (&ge;0)
-     * @param parent a path to the current compound shape (not null, unaffected)
+     * @param parent a path to the current compound shape (not {@code null},
+     * unaffected)
      * @return a new object
      */
     public SubShapeIdCreator getSubShapeIdFromIndex(
@@ -109,7 +110,7 @@ abstract public class CompoundShape extends Shape {
      * Restore the sub-shape references after invoking
      * {@code sRestoreFromBinaryState()}.
      *
-     * @param subshapes the desired sub-shape references (not null)
+     * @param subshapes the desired sub-shape references (not {@code null})
      */
     public void restoreSubShapeState(ShapeList subshapes) {
         long shapeVa = va();

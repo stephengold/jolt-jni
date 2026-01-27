@@ -84,10 +84,10 @@ public class MotionProperties
     /**
      * Reposition the body, assuming it's kinematic.
      *
-     * @param offset the desired offset (from the current location, not null,
-     * unaffected)
+     * @param offset the desired offset (from the current location, not
+     * {@code null}, unaffected)
      * @param rotation the desired rotation (relative to the current
-     * orientation, not null, unaffected)
+     * orientation, not {@code null}, unaffected)
      * @param deltaTime time until the desired position is reached (in seconds,
      * &gt;0)
      */
@@ -135,7 +135,7 @@ public class MotionProperties
      * Directly alter the angular velocity.
      *
      * @param omega the desired velocity (meters per second in system
-     * coordinates, not null, unaffected, default=(0,0,0))
+     * coordinates, not {@code null}, unaffected, default=(0,0,0))
      */
     public void setAngularVelocity(Vec3Arg omega) {
         long propertiesVa = va();
@@ -159,9 +159,10 @@ public class MotionProperties
      * Alter the diagonal components of the inverse inertia matrix of the body.
      * If inertia changes, mass should probably change as well.
      *
-     * @param diagonal the desired diagonal elements (not null, unaffected)
-     * @param rotation the desired orientation of the principal axes (not null,
+     * @param diagonal the desired diagonal elements (not {@code null},
      * unaffected)
+     * @param rotation the desired orientation of the principal axes (not
+     * {@code null}, unaffected)
      */
     public void setInverseInertia(Vec3Arg diagonal, QuatArg rotation) {
         long propertiesVa = va();
@@ -201,7 +202,7 @@ public class MotionProperties
      * Directly alter the linear velocity.
      *
      * @param velocity the desired velocity (meters per second in system
-     * coordinates, not null, unaffected, default=(0,0,0))
+     * coordinates, not {@code null}, unaffected, default=(0,0,0))
      */
     public void setLinearVelocity(Vec3Arg velocity) {
         long propertiesVa = va();
@@ -216,7 +217,8 @@ public class MotionProperties
      *
      * @param allowedDofs logical OR of values defined in {@code EAllowedDofs}
      * (default=All)
-     * @param massProperties the desired mass properties (not null, unaffected)
+     * @param massProperties the desired mass properties (not {@code null},
+     * unaffected)
      */
     public void setMassProperties(
             int allowedDofs, ConstMassProperties massProperties) {
@@ -525,7 +527,7 @@ public class MotionProperties
     /**
      * Return the motion quality. The properties are unaffected.
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     @Override
     public EMotionQuality getMotionQuality() {

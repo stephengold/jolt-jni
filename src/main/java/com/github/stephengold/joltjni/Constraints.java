@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -90,7 +90,7 @@ public class Constraints extends Array<ConstraintRef> {
     }
 
     /**
-     * Expand or truncate the array.
+     * Extend or truncate the array.
      *
      * @param numReferences the desired size (number of references, &ge;0)
      */
@@ -104,7 +104,7 @@ public class Constraints extends Array<ConstraintRef> {
      * Duplicate the specified reference at the specified index.
      *
      * @param elementIndex the index at which to put the reference (&ge;0)
-     * @param reference the reference to put (not null)
+     * @param reference the reference to put (not {@code null})
      */
     @Override
     public void set(int elementIndex, ConstraintRef reference) {

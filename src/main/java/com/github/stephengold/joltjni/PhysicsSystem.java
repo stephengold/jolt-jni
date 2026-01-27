@@ -126,7 +126,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Add the specified constraint to the system.
      *
-     * @param constraint the constraint to add (not null)
+     * @param constraint the constraint to add (not {@code null})
      */
     public void addConstraint(Constraint constraint) {
         long systemVa = va();
@@ -163,7 +163,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * <p>
      * Step listeners are limited in what actions they can perform.
      *
-     * @param listener the listener to add (not null, alias created)
+     * @param listener the listener to add (not {@code null}, alias created)
      */
     public void addStepListener(PhysicsStepListener listener) {
         long systemVa = va();
@@ -187,8 +187,8 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Render the bodies in the system, for debugging purposes.
      *
-     * @param settings the settings to use (not null)
-     * @param renderer the renderer to use (not null)
+     * @param settings the settings to use (not {@code null})
+     * @param renderer the renderer to use (not {@code null})
      */
     public void drawBodies(
             BodyManagerDrawSettings settings, DebugRenderer renderer) {
@@ -201,7 +201,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Render all constraints in the system, for debugging purposes.
      *
-     * @param renderer the renderer to use (not null)
+     * @param renderer the renderer to use (not {@code null})
      */
     public void drawConstraints(DebugRenderer renderer) {
         long systemVa = va();
@@ -213,7 +213,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * Render the limits of all constraints in the system, for debugging
      * purposes.
      *
-     * @param renderer the renderer to use (not null)
+     * @param renderer the renderer to use (not {@code null})
      */
     public void drawConstraintLimits(DebugRenderer renderer) {
         long systemVa = va();
@@ -225,7 +225,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * Render the reference frames of all constraints in the system, for
      * debugging purposes.
      *
-     * @param renderer the renderer to use (not null)
+     * @param renderer the renderer to use (not {@code null})
      */
     public void drawConstraintReferenceFrame(DebugRenderer renderer) {
         long systemVa = va();
@@ -258,7 +258,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Access the system's {@code BodyInterface}.
      *
-     * @return the pre-existing JVM object (not null)
+     * @return the pre-existing JVM object (not {@code null})
      */
     public BodyInterface getBodyInterface() {
         assert bodyInterface != null;
@@ -297,9 +297,9 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * queued at a time (&ge;3)
      * @param maxContactConstraints the desired capacity of the
      * contact-constraint buffer
-     * @param map (not null, alias created)
-     * @param ovbFilter (not null, alias created)
-     * @param ovoFilter (not null, alias created)
+     * @param map (not {@code null}, alias created)
+     * @param ovbFilter (not {@code null}, alias created)
+     * @param ovoFilter (not {@code null}, alias created)
      * @return the current system (for chaining)
      */
     public PhysicsSystem init(
@@ -356,7 +356,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Remove the specified constraint from the system.
      *
-     * @param constraint the constraint to remove (not null)
+     * @param constraint the constraint to remove (not {@code null})
      */
     public void removeConstraint(Constraint constraint) {
         long systemVa = va();
@@ -367,7 +367,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Remove the specified step listener from the system.
      *
-     * @param listener the listener to remove (not null)
+     * @param listener the listener to remove (not {@code null})
      */
     public void removeStepListener(PhysicsStepListener listener) {
         long systemVa = va();
@@ -379,7 +379,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Restore the system's state from the specified recorder, for replay.
      *
-     * @param recorder where to read the state from (not null)
+     * @param recorder where to read the state from (not {@code null})
      * @return {@code true} if successful, otherwise {@code false}
      */
     public boolean restoreState(StateRecorder recorder) {
@@ -404,7 +404,8 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Replace the combining function for friction.
      *
-     * @param function the desired function (not null, default=geometricMean)
+     * @param function the desired function (not {@code null},
+     * default=geometricMean)
      */
     public void setCombineFriction(CombineFunction function) {
         long systemVa = va();
@@ -555,7 +556,8 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * Test whether the system contains the specified constraint. The system is
      * unaffected.
      *
-     * @param constraint the constraint to search for (not null, unaffected)
+     * @param constraint the constraint to search for (not {@code null},
+     * unaffected)
      * @return {@code true} if found, otherwise {@code false}
      */
     @Override
@@ -570,8 +572,8 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Enumerate all bodies of the specified type to the specified vector.
      *
-     * @param bodyType (not null)
-     * @param storeResult storage for the result (not null)
+     * @param bodyType (not {@code null})
+     * @param storeResult storage for the result (not {@code null})
      */
     @Override
     public void getActiveBodies(EBodyType bodyType, BodyIdVector storeResult) {
@@ -585,7 +587,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * Enumerate all bodies to the specified variable-length vector. The system
      * is unaffected.
      *
-     * @param storeResult storage for the result (not null)
+     * @param storeResult storage for the result (not {@code null})
      */
     @Override
     public void getBodies(BodyIdVector storeResult) {
@@ -794,7 +796,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Access the system's interface for fine collision queries.
      *
-     * @return the pre-existing JVM object (not null)
+     * @return the pre-existing JVM object (not {@code null})
      */
     @Override
     public ConstNarrowPhaseQuery getNarrowPhaseQuery() {
@@ -805,7 +807,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * Access a version of the system's {@code NarrowPhaseQuery} that does not
      * lock the bodies.
      *
-     * @return the pre-existing JVM object (not null)
+     * @return the pre-existing JVM object (not {@code null})
      */
     @Override
     public ConstNarrowPhaseQuery getNarrowPhaseQueryNoLock() {
@@ -816,7 +818,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
      * Count how many active bodies of the specified type there are in the body
      * manager. The system is unaffected.
      *
-     * @param bodyType which type of body to count (not null)
+     * @param bodyType which type of body to count (not {@code null})
      * @return the count (&ge;0, &le;maxBodies)
      */
     @Override
@@ -898,7 +900,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Save the system's state to be replayed later.
      *
-     * @param recorder where to save the state (not null)
+     * @param recorder where to save the state (not {@code null})
      */
     @Override
     public void saveState(StateRecorder recorder) {
@@ -908,7 +910,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Save the aspects of the system's state to be replayed later.
      *
-     * @param recorder where to save the state (not null)
+     * @param recorder where to save the state (not {@code null})
      * @param bitmask which aspects of the simulation to save
      */
     @Override
@@ -919,7 +921,7 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     /**
      * Save aspects of the system's state to be replayed later.
      *
-     * @param recorder where to save the state (not null)
+     * @param recorder where to save the state (not {@code null})
      * @param bitmask which aspects of the simulation to save
      * @param filter select which parts to save (unaffected) or {@code null}
      */

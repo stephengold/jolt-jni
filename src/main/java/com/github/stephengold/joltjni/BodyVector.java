@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -50,7 +50,7 @@ public class BodyVector extends Array<Body> {
     /**
      * Access the underlying {@code BodyManager}.
      *
-     * @return the pre-existing instance (not null)
+     * @return the pre-existing instance (not {@code null})
      */
     public BodyManager getManager() {
         return (BodyManager) getContainingObject();
@@ -107,7 +107,7 @@ public class BodyVector extends Array<Body> {
     }
 
     /**
-     * Expand or truncate the vector.
+     * Extend or truncate the vector.
      *
      * @param numBodies the desired size (number of bodies, &ge;0)
      */

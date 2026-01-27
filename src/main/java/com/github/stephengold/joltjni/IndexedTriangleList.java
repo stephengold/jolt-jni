@@ -85,7 +85,7 @@ final public class IndexedTriangleList extends Array<IndexedTriangle> {
     }
 
     /**
-     * Expand or truncate the list.
+     * Extend or truncate the list.
      *
      * @param numTriangles the desired size (number of triangles, &ge;0)
      */
@@ -99,7 +99,7 @@ final public class IndexedTriangleList extends Array<IndexedTriangle> {
      * Put the specified triangle at the specified index.
      *
      * @param elementIndex the index at which to put the triangle (&ge;0)
-     * @param triangle the triangle to put (not null)
+     * @param triangle the triangle to put (not {@code null})
      */
     @Override
     public void set(int elementIndex, IndexedTriangle triangle) {

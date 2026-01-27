@@ -53,8 +53,8 @@ abstract public class JoltPhysicsObject
         /**
          * Instantiate a cleaner action.
          *
-         * @param actionRef the shared atomic reference (not null)
-         * @param addressRef the shared address reference (not null)
+         * @param actionRef the shared atomic reference (not {@code null})
+         * @param addressRef the shared address reference (not {@code null})
          */
         CleanerRunnable(
                 AtomicReference<Runnable> actionRef, AtomicLong addressRef) {
@@ -228,7 +228,7 @@ abstract public class JoltPhysicsObject
      * Compare (by virtual address) with another physics object. The current
      * instance is unaffected.
      *
-     * @param other (not null, unaffected)
+     * @param other (not {@code null}, unaffected)
      * @return 0 if the objects have the same virtual address; negative if this
      * comes before other; positive if this comes after other
      */
@@ -327,7 +327,7 @@ abstract public class JoltPhysicsObject
      * Represent the physics object as a String. The physics object is
      * unaffected.
      *
-     * @return a descriptive string of text (not null, not empty)
+     * @return a descriptive string of text (not {@code null}, not empty)
      */
     @Override
     public String toString() {
@@ -343,8 +343,10 @@ abstract public class JoltPhysicsObject
      * Atomically retrieve and execute the freeing action, then zero the virtual
      * address.
      *
-     * @param actionRef the atomic reference to the freeing action (not null)
-     * @param addressRef the atomic reference to the virtual address (not null)
+     * @param actionRef the atomic reference to the freeing action (not
+     * {@code null})
+     * @param addressRef the atomic reference to the virtual address (not
+     * {@code null})
      */
     private static void executeCleanup(
             AtomicReference<Runnable> actionRef, AtomicLong addressRef) {
