@@ -57,14 +57,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HairShaders_createDe
 
 /*
  * Class:     com_github_stephengold_joltjni_HairShaders
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairShaders_free
-  BODYOF_FREE(HairShaders)
-
-/*
- * Class:     com_github_stephengold_joltjni_HairShaders
  * Method:    getRefCount
  * Signature: (J)I
  */

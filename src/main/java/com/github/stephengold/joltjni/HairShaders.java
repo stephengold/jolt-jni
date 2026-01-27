@@ -37,7 +37,8 @@ final public class HairShaders extends JoltPhysicsObject implements RefTarget {
      */
     public HairShaders() {
         long shadersVa = createDefault();
-        setVirtualAddress(shadersVa, () -> free(shadersVa));
+        long refVa = toRef(shadersVa);
+        setVirtualAddress(shadersVa, () -> HairShadersRef.free(refVa));
     }
 
     /**
@@ -48,7 +49,8 @@ final public class HairShaders extends JoltPhysicsObject implements RefTarget {
     public HairShaders(HairShaders original) {
         long originalVa = original.va();
         long copyVa = createCopy(originalVa);
-        Runnable freeingAction = () -> free(copyVa);
+        long refVa = toRef(copyVa);
+        Runnable freeingAction = () -> HairShadersRef.free(refVa);
         setVirtualAddress(copyVa, freeingAction);
     }
 
@@ -59,7 +61,8 @@ final public class HairShaders extends JoltPhysicsObject implements RefTarget {
      * zero)
      */
     HairShaders(long shadersVa) {
-        Runnable freeingAction = () -> free(shadersVa);
+        long refVa = toRef(shadersVa);
+        Runnable freeingAction = () -> HairShadersRef.free(refVa);
         setVirtualAddress(shadersVa, freeingAction);
     }
     // *************************************************************************
@@ -122,8 +125,6 @@ final public class HairShaders extends JoltPhysicsObject implements RefTarget {
     native private static long createCopy(long originalVa);
 
     native private static long createDefault();
-
-    native private static void free(long shadersVa);
 
     native private static int getRefCount(long shadersVa);
 
