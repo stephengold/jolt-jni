@@ -298,6 +298,7 @@ $(N)/glue/s/SphereShape.cpp \
 $(N)/glue/s/SphereShapeSettings.cpp \
 $(N)/glue/s/SpringSettings.cpp \
 $(N)/glue/s/SStrand.cpp \
+$(N)/glue/s/SStrandList.cpp \
 $(N)/glue/s/SubShape.cpp \
 $(N)/glue/s/SubShapeIdCreator.cpp \
 $(N)/glue/s/SubShapeIdPair.cpp \
@@ -305,6 +306,7 @@ $(N)/glue/s/SupportBuffer.cpp \
 $(N)/glue/s/Support.cpp \
 $(N)/glue/s/SupportingFace.cpp \
 $(N)/glue/s/SVertex.cpp \
+$(N)/glue/s/SVertexList.cpp \
 $(N)/glue/s/SwingTwistConstraint.cpp \
 $(N)/glue/s/SwingTwistConstraintSettings.cpp \
 $(N)/glue/st/StateRecorder.cpp \
