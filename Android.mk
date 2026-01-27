@@ -160,6 +160,7 @@ $(N)/glue/g/GroupFilterResult.cpp \
 $(N)/glue/g/GroupFilterTable.cpp \
 $(N)/glue/g/GroupFilterToIdMap.cpp \
 $(N)/glue/h/HairMaterial.cpp \
+$(N)/glue/h/HairShaders.cpp \
 $(N)/glue/h/HairSkinWeight.cpp \
 $(N)/glue/h/HeightFieldShape.cpp \
 $(N)/glue/h/HeightFieldShapeSettings.cpp \
