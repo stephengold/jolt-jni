@@ -141,8 +141,8 @@ abstract public class ComputeSystem extends NonCopyable implements RefTarget {
      */
     @Override
     public ComputeSystemRef toRef() {
-        long settingsVa = va();
-        long refVa = toRef(settingsVa);
+        long systemVa = va();
+        long refVa = toRef(systemVa);
         ComputeSystemRef result = new ComputeSystemRef(refVa, true);
 
         return result;
