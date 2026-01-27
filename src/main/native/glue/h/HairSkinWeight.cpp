@@ -36,7 +36,7 @@ using namespace JPH;
  * Signature: (J)J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HairSkinWeight_createCopy
-  BODYOF_CREATE_COPY_TARGET(HairSettings::SkinWeight)
+  BODYOF_CREATE_COPY(HairSettings::SkinWeight)
 
 /*
  * Class:     com_github_stephengold_joltjni_HairSkinWeight
@@ -44,7 +44,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HairSkinWeight_creat
  * Signature: ()J
  */
 JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_createDefault
-  BODYOF_CREATE_DEFAULT_TARGET(HairSettings::SkinWeight)
+  BODYOF_CREATE_DEFAULT(HairSettings::SkinWeight)
 
 /*
  * Class:     com_github_stephengold_joltjni_HairSkinWeight
