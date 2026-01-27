@@ -57,6 +57,17 @@ public class SVertex extends JoltPhysicsObject implements ConstSVertex {
         long vertexVa = create(x, y, z, inverseMass);
         setVirtualAddress(vertexVa, () -> free(vertexVa));
     }
+
+    /**
+     * Instantiate a vertex with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param vertexVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    SVertex(JoltPhysicsObject container, long vertexVa) {
+        super(container, vertexVa);
+    }
     // *************************************************************************
     // new methods exposed
 

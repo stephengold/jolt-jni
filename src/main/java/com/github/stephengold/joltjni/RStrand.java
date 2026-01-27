@@ -56,6 +56,17 @@ public class RStrand extends JoltPhysicsObject {
         long strandVa = create(startVertex, endVertex);
         setVirtualAddress(strandVa, () -> free(strandVa));
     }
+
+    /**
+     * Instantiate a strand with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param strandVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    RStrand(JoltPhysicsObject container, long strandVa) {
+        super(container, strandVa);
+    }
     // *************************************************************************
     // new methods exposed
 
