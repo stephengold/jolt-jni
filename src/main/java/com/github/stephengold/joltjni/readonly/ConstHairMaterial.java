@@ -21,6 +21,8 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.Float4;
+
 /**
  * Read-only access to a {@code HairMaterial}. (native type:
  * {@code const HairSettings::Material})
@@ -43,6 +45,14 @@ public interface ConstHairMaterial extends ConstJoltPhysicsObject {
      * @return the compliance value
      */
     float getBendCompliance();
+
+    /**
+     * Copy the multiples of bend compliance to be applied to the strand at 0%,
+     * 33%, 66% and 100% of its length.
+     *
+     * @return a new object
+     */
+    Float4 getBendComplianceMultiplier();
 
     /**
      * Test whether collisions between hair strands and the environment are

@@ -26,6 +26,7 @@ import com.github.stephengold.joltjni.ComputeSystemCpu;
 import com.github.stephengold.joltjni.ComputeSystemRef;
 import com.github.stephengold.joltjni.DrawSettings;
 import com.github.stephengold.joltjni.Float3;
+import com.github.stephengold.joltjni.Float4;
 import com.github.stephengold.joltjni.Gradient;
 import com.github.stephengold.joltjni.HairMaterial;
 import com.github.stephengold.joltjni.Jolt;
@@ -276,6 +277,8 @@ public class Test015 {
 
         Assert.assertEquals(2f, material.getAngularDamping(), 0f);
         Assert.assertEquals(1e-7f, material.getBendCompliance(), 0f);
+        TestUtils.assertEquals(
+                1f, 100f, 100f, 1f, material.getBendComplianceMultiplier(), 0f);
         Assert.assertTrue(material.getEnableCollision());
         Assert.assertTrue(material.getEnableLra());
         Assert.assertEquals(0.2f, material.getFriction(), 0f);
@@ -309,6 +312,7 @@ public class Test015 {
     private static void testHairMaterialSetters(HairMaterial material) {
         material.setAngularDamping(4f);
         material.setBendCompliance(0.1f);
+        material.setBendComplianceMultiplier(new Float4(2f, 3f, 4f, 6f));
         material.setEnableCollision(false);
         material.setEnableLra(false);
         material.setFriction(0.7f);
@@ -335,6 +339,8 @@ public class Test015 {
 
         Assert.assertEquals(4f, material.getAngularDamping(), 0f);
         Assert.assertEquals(0.1f, material.getBendCompliance(), 0f);
+        TestUtils.assertEquals(
+                2f, 3f, 4f, 6f, material.getBendComplianceMultiplier(), 0f);
         Assert.assertFalse(material.getEnableCollision());
         Assert.assertFalse(material.getEnableLra());
         Assert.assertEquals(0.7f, material.getFriction(), 0f);

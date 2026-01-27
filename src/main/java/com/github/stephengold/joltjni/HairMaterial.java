@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstGradient;
 import com.github.stephengold.joltjni.readonly.ConstHairMaterial;
+import java.nio.FloatBuffer;
 
 /**
  * Simulation parameters for a hair strand. (native type:
@@ -82,6 +83,26 @@ public class HairMaterial
     public HairMaterial setBendCompliance(float compliance) {
         long materialVa = va();
         setBendCompliance(materialVa, compliance);
+
+        return this;
+    }
+
+    /**
+     * Alter the multiples of bend compliance to be applied to the strand at 0%,
+     * 33%, 66% and 100% of its length. (native attribute:
+     * mBendComplianceMultiplier)
+     *
+     * @param multipliers the desired multipliers (not {@code null}, unaffected,
+     * default=(1,100,100,1))
+     * @return the modified material, for chaining
+     */
+    public HairMaterial setBendComplianceMultiplier(Float4 multipliers) {
+        long materialVa = va();
+        float x = multipliers.x;
+        float y = multipliers.y;
+        float z = multipliers.z;
+        float w = multipliers.w;
+        setBendComplianceMultiplier(materialVa, x, y, z, w);
 
         return this;
     }
@@ -370,6 +391,23 @@ public class HairMaterial
     }
 
     /**
+     * Copy the multiples of bend compliance to be applied to the strand at 0%,
+     * 33%, 66% and 100% of its length. (native attribute:
+     * mBendComplianceMultiplier)
+     *
+     * @return a new object
+     */
+    @Override
+    public Float4 getBendComplianceMultiplier() {
+        long materialVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getBendComplianceMultiplier(materialVa, storeFloats);
+        Float4 result = new Float4(storeFloats);
+
+        return result;
+    }
+
+    /**
      * Test whether collisions between hair strands and the environment are
      * enabled. The material is unaffected. (native attribute: mEnableCollision)
      *
@@ -624,6 +662,9 @@ public class HairMaterial
 
     native private static float getBendCompliance(long materialVa);
 
+    native private static void getBendComplianceMultiplier(
+            long materialVa, FloatBuffer storeFloats);
+
     native private static boolean getEnableCollision(long materialVa);
 
     native private static boolean getEnableLra(long materialVa);
@@ -663,6 +704,9 @@ public class HairMaterial
 
     native private static void setBendCompliance(
             long materialVa, float compliance);
+
+    native private static void setBendComplianceMultiplier(
+            long materialVa, float x, float y, float z, float w);
 
     native private static void setEnableCollision(
             long materialVa, boolean setting);

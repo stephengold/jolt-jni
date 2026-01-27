@@ -82,6 +82,24 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_HairMaterial_getBen
 
 /*
  * Class:     com_github_stephengold_joltjni_HairMaterial
+ * Method:    getBendComplianceMultiplier
+ * Signature: (JLjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairMaterial_getBendComplianceMultiplier
+  (JNIEnv *pEnv, jclass, jlong materialVa, jobject storeFloats) {
+    const HairSettings::Material * const pMaterial
+            = reinterpret_cast<HairSettings::Material *> (materialVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 4);
+    const Float4& f4 = pMaterial->mBendComplianceMultiplier;
+    pFloats[0] = f4.x;
+    pFloats[1] = f4.y;
+    pFloats[2] = f4.z;
+    pFloats[3] = f4.w;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HairMaterial
  * Method:    getEnableCollision
  * Signature: (J)Z
  */
@@ -325,6 +343,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairMaterial_setBendC
     HairSettings::Material * const pMaterial
             = reinterpret_cast<HairSettings::Material *> (materialVa);
     pMaterial->mBendCompliance = compliance;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HairMaterial
+ * Method:    setBendComplianceMultiplier
+ * Signature: (JFFFF)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairMaterial_setBendComplianceMultiplier
+  (JNIEnv *, jclass, jlong materialVa, jfloat x, jfloat y, jfloat z, jfloat w) {
+    HairSettings::Material * const pMaterial
+            = reinterpret_cast<HairSettings::Material *> (materialVa);
+    const Float4 f4(x, y, z, w);
+    pMaterial->mBendComplianceMultiplier = f4;
 }
 
 /*
