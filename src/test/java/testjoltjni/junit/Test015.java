@@ -29,14 +29,19 @@ import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.Float4;
 import com.github.stephengold.joltjni.Gradient;
 import com.github.stephengold.joltjni.HairMaterial;
+import com.github.stephengold.joltjni.HairSettings;
+import com.github.stephengold.joltjni.HairSettingsRef;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.RStrand;
 import com.github.stephengold.joltjni.SStrand;
 import com.github.stephengold.joltjni.SVertex;
+import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.ERenderStrandColor;
+import com.github.stephengold.joltjni.readonly.ConstAaBox;
 import com.github.stephengold.joltjni.readonly.ConstDrawSettings;
 import com.github.stephengold.joltjni.readonly.ConstGradient;
 import com.github.stephengold.joltjni.readonly.ConstHairMaterial;
+import com.github.stephengold.joltjni.readonly.ConstHairSettings;
 import com.github.stephengold.joltjni.readonly.ConstSVertex;
 import org.junit.Assert;
 import org.junit.Test;
@@ -66,6 +71,7 @@ public class Test015 {
         doComputeSystem();
         doGradient();
         doHairMaterial();
+        doHairSettings();
         doRStrand();
         doSStrand();
         doSVertex();
@@ -124,6 +130,21 @@ public class Test015 {
         testHairMaterialSetters(material);
 
         TestUtils.testClose(material);
+        System.gc();
+    }
+
+    /**
+     * Test the {@code HairSettings} class.
+     */
+    private static void doHairSettings() {
+        HairSettings settings = new HairSettings();
+
+        testHairSettingsDefaults(settings);
+        HairSettingsRef ref = settings.toRef();
+        testHairSettingsDefaults(ref);
+        testHairSettingsSetters(settings);
+
+        TestUtils.testClose(ref, settings);
         System.gc();
     }
 
@@ -366,6 +387,61 @@ public class Test015 {
                 material.getWorldTransformInfluence(), 0f);
 
         TestUtils.testClose(g6, g5, g4, g3, g2, g1);
+    }
+
+    /**
+     * Test the getters and defaults of the specified {@code HairSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, unaffected)
+     */
+    private static void testHairSettingsDefaults(ConstHairSettings settings) {
+        Assert.assertTrue(settings.hasAssignedNativeObject());
+        Assert.assertTrue(settings.ownsNativeObject());
+
+        Assert.assertEquals(0, settings.countMaterials());
+        Assert.assertEquals(0, settings.countRenderStrands());
+        Assert.assertEquals(0, settings.countScalpTriangles());
+        Assert.assertEquals(0, settings.countScalpVertices());
+        Assert.assertEquals(0, settings.countSimStrands());
+        TestUtils.assertEquals(
+                0f, -9.81f, 0f, settings.getInitialGravity(), 0f);
+        Assert.assertEquals(HairSettings.cDefaultIterationsPerSecond,
+                settings.getNumIterationsPerSecond());
+        Assert.assertEquals(0, settings.getScalpNumSkinWeightsPerVertex());
+
+        ConstAaBox bounds = settings.getSimulationBounds();
+        TestUtils.assertEquals(0f, 0f, 0f, bounds.getCenter(), 0f);
+        TestUtils.assertEquals(1f, 1f, 1f, bounds.getExtent(), 0f);
+    }
+
+    /**
+     * Test the setters of the specified {@code HairSettings}.
+     *
+     * @param settings the settings to test (not {@code null}, modified)
+     */
+    private static void testHairSettingsSetters(HairSettings settings) {
+        HairMaterial material = new HairMaterial();
+        settings.addMaterial(material);
+
+        settings.setInitialGravity(new Vec3(1f, 2f, 3f));
+        settings.setNumIterationsPerSecond(99);
+        settings.setScalpNumSkinWeightsPerVertex(3);
+
+        Assert.assertEquals(1, settings.countMaterials());
+        Assert.assertEquals(0, settings.countRenderStrands());
+        Assert.assertEquals(0, settings.countScalpTriangles());
+        Assert.assertEquals(0, settings.countScalpVertices());
+        Assert.assertEquals(0, settings.countSimStrands());
+        TestUtils.assertEquals(
+                1f, 2f, 3f, settings.getInitialGravity(), 0f);
+        Assert.assertEquals(99, settings.getNumIterationsPerSecond());
+        Assert.assertEquals(3, settings.getScalpNumSkinWeightsPerVertex());
+
+        ConstAaBox bounds = settings.getSimulationBounds();
+        TestUtils.assertEquals(0f, 0f, 0f, bounds.getCenter(), 0f);
+        TestUtils.assertEquals(1f, 1f, 1f, bounds.getExtent(), 0f);
+
+        TestUtils.testClose(material);
     }
 
     /**
