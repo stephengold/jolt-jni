@@ -18,7 +18,7 @@ plugins {
 
 ext {
     joltFork = 'stephengold'
-    joltTag = 'sg260125'
+    joltTag = 'sg260129'
     downloadedJoltZip = "downloads/JoltPhysics-${joltTag}.zip"
     downloadedVhacdZip = 'downloads/v-hacd-4.1.0.zip'
 
