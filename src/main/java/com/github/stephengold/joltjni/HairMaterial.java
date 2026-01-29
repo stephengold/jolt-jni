@@ -56,6 +56,17 @@ public class HairMaterial
         Runnable freeingAction = () -> free(copyVa);
         setVirtualAddress(copyVa, freeingAction);
     }
+
+    /**
+     * Instantiate a strand with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param materialVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    HairMaterial(JoltPhysicsObject container, long materialVa) {
+        super(container, materialVa);
+    }
     // *************************************************************************
     // new methods exposed
 
