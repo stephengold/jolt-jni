@@ -34,7 +34,7 @@ public interface ConstIndexedTriangleNoMaterial extends ConstJoltPhysicsObject {
      * Return the mesh-vertex index of the specified corner.
      *
      * @param cornerIndex which corner to access (0, 1, or 2)
-     * @return the mesh-vertex index
+     * @return the index of the vertex in the mesh
      */
     int getIdx(int cornerIndex);
 

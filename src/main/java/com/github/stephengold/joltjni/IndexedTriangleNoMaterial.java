@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -79,7 +79,7 @@ public class IndexedTriangleNoMaterial
      * Alter the mesh-vertex index of the specified corner.
      *
      * @param cornerIndex which corner to modify (0, 1, or 2)
-     * @param meshVertexIndex the desired mesh-vertex index
+     * @param meshVertexIndex the index of the desired mesh vertex
      */
     public void setIdx(int cornerIndex, int meshVertexIndex) {
         long triangleVa = va();
@@ -92,7 +92,7 @@ public class IndexedTriangleNoMaterial
      * Return the mesh-vertex index of the specified corner.
      *
      * @param cornerIndex which corner to access (0, 1, or 2)
-     * @return the mesh-vertex index
+     * @return the index of the vertex in the mesh
      */
     @Override
     public int getIdx(int cornerIndex) {

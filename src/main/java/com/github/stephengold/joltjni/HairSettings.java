@@ -100,7 +100,7 @@ final public class HairSettings
      * Access the render strands. (native member: mRenderStrands)
      *
      * @return a new array containing new JVM objects with the pre-existing
-     * native object assigned
+     * native objects assigned
      */
     public RStrand[] getRenderStrands() {
         long settingsVa = va();
@@ -119,7 +119,7 @@ final public class HairSettings
      * member: mScalpTriangles)
      *
      * @return a new array containing new JVM objects with the pre-existing
-     * native object assigned
+     * native objects assigned
      */
     public IndexedTriangleNoMaterial[] getScalpTriangles() {
         long settingsVa = va();

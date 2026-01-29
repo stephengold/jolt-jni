@@ -79,7 +79,7 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
      * Access the render strands. (native member: mRenderStrands)
      *
      * @return a new array containing new JVM objects with the pre-existing
-     * native object assigned
+     * native objects assigned
      */
     public RStrand[] getRenderStrands() {
         long settingsVa = targetVa();
@@ -98,7 +98,7 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
      * member: mScalpTriangles)
      *
      * @return a new array containing new JVM objects with the pre-existing
-     * native object assigned
+     * native objects assigned
      */
     public IndexedTriangleNoMaterial[] getScalpTriangles() {
         long settingsVa = targetVa();

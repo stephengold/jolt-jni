@@ -22,8 +22,8 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 /**
- * Load compute shaders. (native type: {@code function<bool(const char
- * inName, Array<uint8> &outData, String &outError)>})
+ * Load compute shaders. (native type:
+ * {@code function<bool(const char*,Array<uint8>&,String&)>})
  *
  * @author Stephen Gold sgold@sonic.net
  */

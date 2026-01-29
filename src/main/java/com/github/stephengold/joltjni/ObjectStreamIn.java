@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -45,9 +45,9 @@ final public class ObjectStreamIn {
     /**
      * Read a ref-counted target from the specified file.
      *
-     * @param fileName the path to the file (not null)
+     * @param fileName the path to the file (not {@code null})
      * @param storeRef where to store the reference to the de-serialized object
-     * (not null, modified)
+     * (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(String fileName, Ref storeRef) {
@@ -80,9 +80,9 @@ final public class ObjectStreamIn {
     /**
      * Read a body-settings object from the specified stream.
      *
-     * @param stream the stream to read from (not null)
-     * @param storeBcs where to store the de-serialized settings (not null,
-     * length&gt;0, modified)
+     * @param stream the stream to read from (not {@code null})
+     * @param storeBcs where to store the de-serialized settings (not
+     * {@code null}, length&gt;0, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -99,9 +99,9 @@ final public class ObjectStreamIn {
     /**
      * Read a constraint-settings object from the specified stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      * @param settingsRef where to store the reference to the de-serialized
-     * settings (not null, modified)
+     * settings (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -117,9 +117,9 @@ final public class ObjectStreamIn {
     /**
      * Read a group-filter table from the specified stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      * @param filterRef where to store the reference to the de-serialized filter
-     * (not null, modified)
+     * (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -134,9 +134,9 @@ final public class ObjectStreamIn {
     /**
      * Read a material from the specified stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      * @param materialRef where to store the reference to the de-serialized
-     * material (not null, modified)
+     * material (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -151,9 +151,9 @@ final public class ObjectStreamIn {
     /**
      * Read a scene from the specified stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      * @param sceneRef where to store the reference to the de-serialized scene
-     * (not null, modified)
+     * (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -168,9 +168,9 @@ final public class ObjectStreamIn {
     /**
      * Read a ragdoll-settings object from the specified stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      * @param settingsRef where to store the reference to the de-serialized
-     * settings (not null, modified)
+     * settings (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -185,9 +185,9 @@ final public class ObjectStreamIn {
     /**
      * Read a shape-settings object from the specified stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      * @param settingsRef where to store the reference to the de-serialized
-     * shape settings (not null, modified)
+     * shape settings (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -202,9 +202,9 @@ final public class ObjectStreamIn {
     /**
      * Read a soft-body settings object from the specified stream.
      *
-     * @param stream the stream to read from (not null)
-     * @param storeSbcs where to store the de-serialized settings (not null,
-     * length&gt;0, modified)
+     * @param stream the stream to read from (not {@code null})
+     * @param storeSbcs where to store the de-serialized settings (not
+     * {@code null}, length&gt;0, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -221,9 +221,9 @@ final public class ObjectStreamIn {
     /**
      * Read a soft-body shared-settings object from the specified stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      * @param settingsRef where to store the reference to the de-serialized
-     * settings (not null, modified)
+     * settings (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -238,9 +238,9 @@ final public class ObjectStreamIn {
     /**
      * Read a two-body constraint settings object from the specified stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      * @param settingsRef where to store the reference to the de-serialized
-     * settings (not null, modified)
+     * settings (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -255,9 +255,9 @@ final public class ObjectStreamIn {
     /**
      * Read a vehicle-constraint settings object from the specified stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      * @param settingsRef where to store the reference to the de-serialized
-     * settings (not null, modified)
+     * settings (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
@@ -272,9 +272,9 @@ final public class ObjectStreamIn {
     /**
      * Read a vehicle-controller settings object from the specified stream.
      *
-     * @param stream the stream to read from (not null)
+     * @param stream the stream to read from (not {@code null})
      * @param settingsRef where to store the reference to the de-serialized
-     * settings (not null, modified)
+     * settings (not {@code null}, modified)
      * @return {@code true} if successful, otherwise {@code false}
      */
     public static boolean sReadObject(
