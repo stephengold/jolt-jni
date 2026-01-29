@@ -21,12 +21,14 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.readonly.ConstSStrand;
+
 /**
  * A single strand of hair. (native type: {@code HairSettings::SStrand})
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class SStrand extends RStrand {
+public class SStrand extends RStrand implements ConstSStrand {
     // *************************************************************************
     // constructors
 
@@ -63,7 +65,7 @@ public class SStrand extends RStrand {
         super(container, strandVa);
     }
     // *************************************************************************
-    // new methods exposed
+    // ConstSStrand methods
 
     /**
      * Return the index of the material. The strand is unaffected. (native
@@ -71,6 +73,7 @@ public class SStrand extends RStrand {
      *
      * @return the material index
      */
+    @Override
     public int getMaterialIndex() {
         long strandVa = va();
         int result = getMaterialIndex(strandVa);
