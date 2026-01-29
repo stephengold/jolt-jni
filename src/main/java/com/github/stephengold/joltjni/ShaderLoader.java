@@ -36,17 +36,6 @@ public class ShaderLoader extends JoltPhysicsObject {
      */
     ShaderLoader() {
     }
-
-    /**
-     * Instantiate a loader with the specified native object assigned but not
-     * owned.
-     *
-     * @param loaderVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    ShaderLoader(long loaderVa) {
-        setVirtualAddress(loaderVa);
-    }
     // *************************************************************************
     // new protected methods
 
