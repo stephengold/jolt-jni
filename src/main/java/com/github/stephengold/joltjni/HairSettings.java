@@ -508,7 +508,7 @@ final public class HairSettings
      * @param streamOut where to write objects (not {@code null})
      */
     @Override
-    public void saveBinaryState(StreamOutWrapper streamOut) {
+    public void saveBinaryState(StreamOut streamOut) {
         long settingsVa = va();
         long streamVa = streamOut.va();
         saveBinaryState(settingsVa, streamVa);

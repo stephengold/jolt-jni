@@ -21,7 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
-import com.github.stephengold.joltjni.StreamOutWrapper;
+import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.Vec3;
 
 /**
@@ -120,5 +120,5 @@ public interface ConstHairSettings extends ConstJoltPhysicsObject {
      *
      * @param streamOut where to write objects (not {@code null})
      */
-    void saveBinaryState(StreamOutWrapper streamOut);
+    void saveBinaryState(StreamOut streamOut);
 }

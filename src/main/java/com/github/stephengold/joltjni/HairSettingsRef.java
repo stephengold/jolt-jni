@@ -474,7 +474,7 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
      * @param streamOut where to write objects (not {@code null})
      */
     @Override
-    public void saveBinaryState(StreamOutWrapper streamOut) {
+    public void saveBinaryState(StreamOut streamOut) {
         long settingsVa = targetVa();
         long streamVa = streamOut.va();
         HairSettings.saveBinaryState(settingsVa, streamVa);
