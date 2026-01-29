@@ -97,6 +97,24 @@ final public class HairSettings
     }
 
     /**
+     * Access the materials. (native member: mMaterial)
+     *
+     * @return a new array containing new JVM objects with the pre-existing
+     * native objects assigned
+     */
+    public HairMaterial[] getMaterials() {
+        long settingsVa = va();
+        int numMaterials = countMaterials(settingsVa);
+        HairMaterial[] result = new HairMaterial[numMaterials];
+        for (int index = 0; index < numMaterials; ++index) {
+            long materialVa = getMaterial(settingsVa, index);
+            result[index] = new HairMaterial(this, materialVa);
+        }
+
+        return result;
+    }
+
+    /**
      * Access the render strands. (native member: mRenderStrands)
      *
      * @return a new array containing new JVM objects with the pre-existing
@@ -370,6 +388,20 @@ final public class HairSettings
     }
 
     /**
+     * Return the number of render vertices. The settings are unaffected.
+     * (native member: mRenderVertices)
+     *
+     * @return the count (&ge;0)
+     */
+    @Override
+    public int countRenderVertices() {
+        long settingsVa = va();
+        int result = countRenderVertices(settingsVa);
+
+        return result;
+    }
+
+    /**
      * Return the number of triangles in the scalp mesh. The settings are
      * unaffected. (native member: mScalpTriangles)
      *
@@ -423,6 +455,21 @@ final public class HairSettings
         FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
         getInitialGravity(settingsVa, storeFloats);
         Vec3 result = new Vec3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Access the specified material. (native member: mMaterial)
+     *
+     * @param index the index of the material to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public HairMaterial getMaterial(int index) {
+        long settingsVa = va();
+        long materialVa = getMaterial(settingsVa, index);
+        HairMaterial result = new HairMaterial(this, materialVa);
 
         return result;
     }
@@ -483,6 +530,38 @@ final public class HairSettings
         long triangleVa = getScalpTriangle(settingsVa, triangleIndex);
         IndexedTriangleNoMaterial result
                 = new IndexedTriangleNoMaterial(this, triangleVa);
+
+        return result;
+    }
+
+    /**
+     * Copy the specified vertex in the scalp mesh. The settings are unaffected.
+     * (native member: mScalpVertices)
+     *
+     * @param vertexIndex the index of the vertex to access (&ge;0)
+     * @return a new vector
+     */
+    @Override
+    public Float3 getScalpVertex(int vertexIndex) {
+        long settingsVa = va();
+        FloatBuffer storeFloats = Temporaries.floatBuffer1.get();
+        getScalpVertex(settingsVa, vertexIndex, storeFloats);
+        Float3 result = new Float3(storeFloats);
+
+        return result;
+    }
+
+    /**
+     * Access the specified simulation strand. (native member: mSimStrands)
+     *
+     * @param strandIndex the index of the strand to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    @Override
+    public SStrand getSimStrand(int strandIndex) {
+        long settingsVa = va();
+        long strandVa = getSimStrand(settingsVa, strandIndex);
+        SStrand result = new SStrand(this, strandVa);
 
         return result;
     }
@@ -561,6 +640,8 @@ final public class HairSettings
 
     native static int countRenderStrands(long settingsVa);
 
+    native static int countRenderVertices(long settingsVa);
+
     native static int countScalpTriangles(long settingsVa);
 
     native static int countScalpVertices(long settingsVa);
@@ -574,6 +655,8 @@ final public class HairSettings
     native static void getInitialGravity(
             long settingsVa, FloatBuffer storeFloats);
 
+    native static long getMaterial(long settingsVa, int index);
+
     native static int getNumIterationsPerSecond(long settingsVa);
 
     native private static int getRefCount(long settingsVa);
@@ -583,6 +666,11 @@ final public class HairSettings
     native static int getScalpNumSkinWeightsPerVertex(long settingsVa);
 
     native static long getScalpTriangle(long settingsVa, int index);
+
+    native static void getScalpVertex(
+            long settingsVa, int vertexIndex, FloatBuffer storeFloats);
+
+    native static long getSimStrand(long settingsVa, int strandIndex);
 
     native static long getSimulationBounds(long settingsVa);
 

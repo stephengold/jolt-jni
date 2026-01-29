@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni.readonly;
 
+import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.Vec3;
 
@@ -44,6 +45,13 @@ public interface ConstHairSettings extends ConstJoltPhysicsObject {
      * @return the count (&ge;0)
      */
     int countRenderStrands();
+
+    /**
+     * Return the number of render vertices. The settings are unaffected.
+     *
+     * @return the count (&ge;0)
+     */
+    int countRenderVertices();
 
     /**
      * Return the number of triangles in the scalp mesh. The settings are
@@ -76,6 +84,14 @@ public interface ConstHairSettings extends ConstJoltPhysicsObject {
     Vec3 getInitialGravity();
 
     /**
+     * Access the specified material. The settings are unaffected.
+     *
+     * @param index the index of the material to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstHairMaterial getMaterial(int index);
+
+    /**
      * Return the iteration rate. The settings are unaffected.
      *
      * @return the number of iterations per second (&ge;1)
@@ -106,6 +122,22 @@ public interface ConstHairSettings extends ConstJoltPhysicsObject {
      * @return a new JVM object with the pre-existing native object assigned
      */
     ConstIndexedTriangleNoMaterial getScalpTriangle(int triangleIndex);
+
+    /**
+     * Copy the specified vertex in the scalp mesh. The settings are unaffected.
+     *
+     * @param vertexIndex the index of the vertex to access (&ge;0)
+     * @return a new vector
+     */
+    Float3 getScalpVertex(int vertexIndex);
+
+    /**
+     * Access the specified simulation strand. The settings are unaffected.
+     *
+     * @param strandIndex the index of the strand to access (&ge;0)
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    ConstSStrand getSimStrand(int strandIndex);
 
     /**
      * Access the simulation bounds. The settings are unaffected.

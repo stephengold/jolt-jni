@@ -81,6 +81,19 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HairSettings_countRen
 
 /*
  * Class:     com_github_stephengold_joltjni_HairSettings
+ * Method:    countRenderVertices
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_HairSettings_countRenderVertices
+  (JNIEnv *, jclass, jlong settingsVa) {
+    const HairSettings * const pSettings
+            = reinterpret_cast<HairSettings *> (settingsVa);
+    const jlong result = pSettings->mRenderVertices.size();
+    return result;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HairSettings
  * Method:    countScalpTriangles
  * Signature: (J)I
  */
@@ -153,6 +166,19 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_getIniti
 
 /*
  * Class:     com_github_stephengold_joltjni_HairSettings
+ * Method:    getMaterial
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HairSettings_getMaterial
+  (JNIEnv *, jclass, jlong settingsVa, jint index) {
+    HairSettings * const pSettings
+            = reinterpret_cast<HairSettings *> (settingsVa);
+    HairSettings::Material& result = pSettings->mMaterials.at(index);
+    return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HairSettings
  * Method:    getNumIterationsPerSecond
  * Signature: (J)I
  */
@@ -213,6 +239,36 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HairSettings_getScal
     HairSettings * const pSettings
             = reinterpret_cast<HairSettings *> (settingsVa);
     IndexedTriangleNoMaterial& result = pSettings->mScalpTriangles.at(index);
+    return reinterpret_cast<jlong> (&result);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HairSettings
+ * Method:    getScalpVertex
+ * Signature: (JILjava/nio/FloatBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_getScalpVertex
+  (JNIEnv *pEnv, jclass, jlong settingsVa, jint index, jobject storeFloats) {
+    const HairSettings * const pSettings
+            = reinterpret_cast<HairSettings *> (settingsVa);
+    DIRECT_FLOAT_BUFFER(pEnv, storeFloats, pFloats, capacityFloats);
+    JPH_ASSERT(capacityFloats >= 3);
+    const Float3& result = pSettings->mScalpVertices.at(index);
+    pFloats[0] = result.x;
+    pFloats[1] = result.y;
+    pFloats[2] = result.z;
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_HairSettings
+ * Method:    getSimStrand
+ * Signature: (JI)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HairSettings_getSimStrand
+  (JNIEnv *, jclass, jlong settingsVa, jint index) {
+    HairSettings * const pSettings
+            = reinterpret_cast<HairSettings *> (settingsVa);
+    const HairSettings::SStrand& result = pSettings->mSimStrands.at(index);
     return reinterpret_cast<jlong> (&result);
 }
 
