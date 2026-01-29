@@ -158,7 +158,7 @@ final public class HairSettingsRef extends Ref implements ConstHairSettings {
      *
      * @param streamIn where to read objects from (not {@code null})
      */
-    public void restoreBinaryState(StreamInWrapper streamIn) {
+    public void restoreBinaryState(StreamIn streamIn) {
         long settingsVa = targetVa();
         long streamVa = streamIn.va();
         HairSettings.restoreBinaryState(settingsVa, streamVa);
