@@ -282,8 +282,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_restoreB
   (JNIEnv *, jclass, jlong settingsVa, jlong streamInVa) {
     HairSettings * const pSettings
             = reinterpret_cast<HairSettings *> (settingsVa);
-    StreamIn * const pStream
-            = reinterpret_cast<StreamIn *> (streamInVa);
+    StreamIn * const pStream = reinterpret_cast<StreamIn *> (streamInVa);
     pSettings->RestoreBinaryState(*pStream);
 }
 
@@ -296,8 +295,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_HairSettings_saveBina
   (JNIEnv *, jclass, jlong settingsVa, jlong streamOutVa) {
     const HairSettings * const pSettings
             = reinterpret_cast<HairSettings *> (settingsVa);
-    StreamOut * const pStream
-            = reinterpret_cast<StreamOut *> (streamOutVa);
+    StreamOut * const pStream = reinterpret_cast<StreamOut *> (streamOutVa);
     pSettings->SaveBinaryState(*pStream);
 }
 
