@@ -178,7 +178,7 @@ final public class HairSettings
      *
      * @param streamIn where to read objects from (not {@code null})
      */
-    public void restoreBinaryState(StreamInWrapper streamIn) {
+    public void restoreBinaryState(StreamIn streamIn) {
         long settingsVa = va();
         long streamVa = streamIn.va();
         restoreBinaryState(settingsVa, streamVa);
