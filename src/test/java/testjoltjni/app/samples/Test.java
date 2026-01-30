@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,6 +35,8 @@ import static com.github.stephengold.joltjni.std.Std.*;
  */
 abstract public class Test {
 protected BodyInterface mBodyInterface;
+protected ComputeQueue mComputeQueue;
+protected ComputeSystem mComputeSystem;
 protected DebugRenderer mDebugRenderer;
 private JobSystem mJobSystem;
 protected PhysicsSystem mPhysicsSystem;
@@ -53,6 +55,7 @@ public void PrePhysicsUpdate(PreUpdateParams params){}
 public void RestoreState(StateRecorder inStream){}
 public void SaveState(StateRecorder inStream){}
 final protected	void SetBodyLabel(int inBodyID,String inLabel){}
+final void SetComputeSystem(ComputeSystem system, ComputeQueue queue){mComputeSystem=system;mComputeQueue=queue;}
 final void SetDebugRenderer(DebugRenderer renderer){mDebugRenderer=renderer;}
 final void SetJobSystem(JobSystem inJobSystem){mJobSystem=inJobSystem;}
 final void SetPhysicsSystem(PhysicsSystem inPhysicsSystem){mPhysicsSystem=inPhysicsSystem;mBodyInterface=inPhysicsSystem.getBodyInterface();}
