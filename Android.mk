@@ -92,6 +92,7 @@ $(N)/glue/co/ComputeQueue.cpp \
 $(N)/glue/co/ComputeQueueResult.cpp \
 $(N)/glue/co/ComputeSystem.cpp \
 $(N)/glue/co/ComputeSystemCpu.cpp \
+$(N)/glue/co/ComputeSystemResult.cpp \
 $(N)/glue/co/ConeConstraint.cpp \
 $(N)/glue/co/ConeConstraintSettings.cpp \
 $(N)/glue/co/Constraint.cpp \
