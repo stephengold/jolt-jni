@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstSVertex;
+import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
 /**
@@ -90,9 +91,24 @@ public class SVertex extends JoltPhysicsObject implements ConstSVertex {
      */
     public void setPosition(ConstFloat3 location) {
         long vertexVa = va();
-        float x = location.get(0);
-        float y = location.get(1);
-        float z = location.get(2);
+        float x = location.x();
+        float y = location.y();
+        float z = location.z();
+        setPosition(vertexVa, x, y, z);
+    }
+
+    /**
+     * Alter the initial location of the vertex in its modeled pose. (native
+     * attribute: mPosition)
+     *
+     * @param location the desired coordinates (not {@code null}, unaffected,
+     * default=(0,0,0))
+     */
+    public void setPosition(Vec3Arg location) {
+        long vertexVa = va();
+        float x = location.getX();
+        float y = location.getY();
+        float z = location.getZ();
         setPosition(vertexVa, x, y, z);
     }
     // *************************************************************************
