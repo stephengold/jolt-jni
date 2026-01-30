@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2025 Stephen Gold
+Copyright (c) 2025-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,7 @@ import com.github.stephengold.joltjni.ObjectStreamOut;
 import com.github.stephengold.joltjni.PointConstraintSettings;
 import com.github.stephengold.joltjni.RMat44;
 import com.github.stephengold.joltjni.RackAndPinionConstraintSettings;
+import com.github.stephengold.joltjni.StreamOut;
 import com.github.stephengold.joltjni.StreamOutWrapper;
 import com.github.stephengold.joltjni.SwingTwistConstraintSettings;
 import com.github.stephengold.joltjni.TrackedVehicleControllerSettings;
@@ -129,8 +130,8 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
-        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        StreamOut sow1 = new StreamOutWrapper(stream1);
+        StreamOut sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
@@ -213,8 +214,8 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
-        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        StreamOut sow1 = new StreamOutWrapper(stream1);
+        StreamOut sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
@@ -222,8 +223,8 @@ final class Equivalent {
 
         StringStream stream3 = new StringStream();
         StringStream stream4 = new StringStream();
-        StreamOutWrapper sow3 = new StreamOutWrapper(stream3);
-        StreamOutWrapper sow4 = new StreamOutWrapper(stream4);
+        StreamOut sow3 = new StreamOutWrapper(stream3);
+        StreamOut sow4 = new StreamOutWrapper(stream4);
         expected.saveWithChildren(sow3, null, null, null);
         actual.saveWithChildren(sow4, null, null, null);
         stringStream(stream3, stream4);
@@ -292,8 +293,8 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
-        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        StreamOut sow1 = new StreamOutWrapper(stream1);
+        StreamOut sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
@@ -339,8 +340,8 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
-        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        StreamOut sow1 = new StreamOutWrapper(stream1);
+        StreamOut sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
@@ -585,8 +586,8 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
-        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        StreamOut sow1 = new StreamOutWrapper(stream1);
+        StreamOut sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
@@ -659,8 +660,8 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
-        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        StreamOut sow1 = new StreamOutWrapper(stream1);
+        StreamOut sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
@@ -668,8 +669,8 @@ final class Equivalent {
 
         StringStream stream3 = new StringStream();
         StringStream stream4 = new StringStream();
-        StreamOutWrapper sow3 = new StreamOutWrapper(stream3);
-        StreamOutWrapper sow4 = new StreamOutWrapper(stream4);
+        StreamOut sow3 = new StreamOutWrapper(stream3);
+        StreamOut sow4 = new StreamOutWrapper(stream4);
         expected.saveWithChildren(sow3, null, null, null);
         actual.saveWithChildren(sow4, null, null, null);
         stringStream(stream3, stream4);
@@ -712,8 +713,8 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
-        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        StreamOut sow1 = new StreamOutWrapper(stream1);
+        StreamOut sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
@@ -721,8 +722,8 @@ final class Equivalent {
 
         StringStream stream3 = new StringStream();
         StringStream stream4 = new StringStream();
-        StreamOutWrapper sow3 = new StreamOutWrapper(stream3);
-        StreamOutWrapper sow4 = new StreamOutWrapper(stream4);
+        StreamOut sow3 = new StreamOutWrapper(stream3);
+        StreamOut sow4 = new StreamOutWrapper(stream4);
         SharedSettingsToIdMap ssMap3 = new SharedSettingsToIdMap();
         SharedSettingsToIdMap ssMap4 = new SharedSettingsToIdMap();
         MaterialToIdMap matMap3 = new MaterialToIdMap();
@@ -754,8 +755,8 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
-        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        StreamOut sow1 = new StreamOutWrapper(stream1);
+        StreamOut sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
@@ -903,8 +904,8 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
-        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        StreamOut sow1 = new StreamOutWrapper(stream1);
+        StreamOut sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
@@ -967,8 +968,8 @@ final class Equivalent {
         // compare serialization results:
         StringStream stream1 = new StringStream();
         StringStream stream2 = new StringStream();
-        StreamOutWrapper sow1 = new StreamOutWrapper(stream1);
-        StreamOutWrapper sow2 = new StreamOutWrapper(stream2);
+        StreamOut sow1 = new StreamOutWrapper(stream1);
+        StreamOut sow2 = new StreamOutWrapper(stream2);
         expected.saveBinaryState(sow1);
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
