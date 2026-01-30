@@ -387,6 +387,7 @@ final public class TestUtils {
             JoltPhysicsObject.startCleaner(); // to reclaim native memory
         }
 
+        // callbacks for memory allocation, assertions, and execution tracing:
         Jolt.registerDefaultAllocator();
         Jolt.installDefaultAssertCallback();
         Jolt.installJavaTraceCallback(System.err);

@@ -159,6 +159,7 @@ final public class SmokeTestAll {
         PhysicsSystem physicsSystem = newPhysicsSystem(maxBodies);
         test.SetPhysicsSystem(physicsSystem);
 
+        // Create a new contact listener for each test:
         ContactListener listener = new SamplesContactListener(test);
         physicsSystem.setContactListener(listener);
 

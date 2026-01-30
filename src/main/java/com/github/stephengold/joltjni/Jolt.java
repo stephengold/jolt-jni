@@ -113,7 +113,8 @@ final public class Jolt {
     // new methods exposed
 
     /**
-     * Return the inverse cosine of the specified single-precision ratio.
+     * Return the inverse cosine of the specified single-precision ratio. (see
+     * Jolt/Math/Trigonometry.h)
      *
      * @param ratio the input cosine ratio (&ge;-1, &le;1)
      * @return the angle (in radians)
@@ -121,7 +122,8 @@ final public class Jolt {
     native public static float aCos(float ratio);
 
     /**
-     * Return the inverse tangent of the specified single-precision ratio.
+     * Return the inverse tangent of the specified single-precision ratio. (see
+     * Jolt/Math/Trigonometry.h)
      *
      * @param ratio the input tangent ratio
      * @return the angle (in radians)
@@ -129,7 +131,8 @@ final public class Jolt {
     native public static float aTan(float ratio);
 
     /**
-     * Return the angle of the specified single-precision right triangle.
+     * Return the angle of the specified single-precision right triangle. (see
+     * Jolt/Math/Trigonometry.h)
      *
      * @param opposite the signed length of the opposite side
      * @param adjacent the signed length of the adjacent side
@@ -146,7 +149,8 @@ final public class Jolt {
     native public static String buildType();
 
     /**
-     * Return the cosine of the specified single-precision angle.
+     * Return the cosine of the specified single-precision angle. (see
+     * Jolt/Math/Trigonometry.h)
      *
      * @param angle the input angle (in radians)
      * @return the cosine ratio
@@ -181,7 +185,7 @@ final public class Jolt {
     }
 
     /**
-     * Destroy the factory for deserialization of saved data.
+     * Destroy the factory for de-serialization of saved data.
      *
      * @see #newFactory()
      */
@@ -266,14 +270,16 @@ final public class Jolt {
     }
 
     /**
-     * Return a string containing important configuration settings.
+     * Return a string describing some important configuration settings of the
+     * native library. (see Jolt/ConfigurationString.h)
      *
      * @return the string value
      */
     native public static String getConfigurationString();
 
     /**
-     * Return a hash code for the specified data bytes.
+     * Return a hash code for the specified data bytes. (see
+     * Jolt/Core/HashCombine.h)
      *
      * @param dataVa the virtual address of the data, or 0 for no data
      * @param inSize the number of data bytes, or 0 for no data
@@ -316,7 +322,8 @@ final public class Jolt {
     }
 
     /**
-     * Combine the specified 32-bit integer with the specified hash code.
+     * Combine the specified 32-bit integer with the specified hash code. (see
+     * Jolt/Core/HashCombine.h)
      *
      * @param oldHash the old hash code
      * @param iValue the integer value to combine
@@ -382,7 +389,7 @@ final public class Jolt {
     native public static boolean implementsDeterminismLog();
 
     /**
-     * Install an alternative trace callback that uses {@code cerr}.
+     * Install an alternative trace callback that writes to {@code cerr}.
      */
     native public static void installCerrTraceCallback();
 
@@ -392,12 +399,13 @@ final public class Jolt {
     native public static void installDefaultAssertCallback();
 
     /**
-     * Install the default trace callback, which uses {@code cout}.
+     * Install the default trace callback, which writes to {@code cout}.
      */
     native public static void installDefaultTraceCallback();
 
     /**
-     * Install a trace callback that uses a {@code PrintStream}.
+     * Install a trace callback that writes to the specified
+     * {@code PrintStream}.
      *
      * @param stream where to send trace output (not {@code null})
      */
@@ -458,7 +466,8 @@ final public class Jolt {
     }
 
     /**
-     * Create a direct {@code ByteBuffer} with the specified capacity.
+     * Create a direct {@code ByteBuffer} with native byte order and the
+     * specified capacity.
      *
      * @param numBytes the desired capacity (in bytes)
      * @return a new direct buffer, zeroed and rewound but not flipped
@@ -583,7 +592,7 @@ final public class Jolt {
     native public static boolean newFactory();
 
     /**
-     * Generate 3-D Perlin noise.
+     * Generate 3-D Perlin noise. (see TestFramework/External/Perlin.cpp)
      *
      * @param x the X coordinate
      * @param y the Y coordinate
@@ -636,7 +645,8 @@ final public class Jolt {
     }
 
     /**
-     * Intersect the specified axis-aligned box with the specified ray.
+     * Intersect the specified axis-aligned box with the specified ray. (see
+     * Jolt/Geometry/RayAABox.h)
      *
      * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
      * @param invDirection the inverse direction of the ray (not {@code null},
@@ -667,7 +677,8 @@ final public class Jolt {
     }
 
     /**
-     * Intersect the specified axis-aligned box with the specified ray.
+     * Intersect the specified axis-aligned box with the specified ray. (see
+     * Jolt/Geometry/RayAABox.h)
      *
      * @param startLocation the desired start location of the ray (not
      * {@code null}, unaffected)
@@ -700,7 +711,8 @@ final public class Jolt {
     }
 
     /**
-     * Intersect the specified capsule with the specified ray.
+     * Intersect the specified capsule with the specified ray. (see
+     * Jolt/Geometry/RayCapsule.h)
      *
      * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
      * @param rayDirection the direction of the ray (not {@code null},
@@ -725,7 +737,8 @@ final public class Jolt {
     }
 
     /**
-     * Intersect the specified infinite cylinder with the specified ray.
+     * Intersect the specified infinite cylinder with the specified ray. (see
+     * Jolt/Geometry/RayCylinder.h)
      *
      * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
      * @param rayDirection the direction of the ray (not {@code null},
@@ -749,7 +762,8 @@ final public class Jolt {
     }
 
     /**
-     * Intersect the specified finite cylinder with the specified ray.
+     * Intersect the specified finite cylinder with the specified ray. (see
+     * Jolt/Geometry/RayCylinder.h)
      *
      * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
      * @param rayDirection the direction of the ray (not {@code null},
@@ -774,7 +788,8 @@ final public class Jolt {
     }
 
     /**
-     * Intersect the specified sphere with the specified ray.
+     * Intersect the specified sphere with the specified ray. (see
+     * Jolt/Geometry/RaySphere.h)
      *
      * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
      * @param rayDirection the direction of the ray (not {@code null},
@@ -804,7 +819,8 @@ final public class Jolt {
     }
 
     /**
-     * Intersect the specified triangle with the specified ray.
+     * Intersect the specified triangle with the specified ray. (see
+     * Jolt/Geometry/RayTriangle.h)
      *
      * @param rayOrigin the origin of the ray (not {@code null}, unaffected)
      * @param rayDirection the direction of the ray (not {@code null},
@@ -858,13 +874,13 @@ final public class Jolt {
 
     /**
      * Register the allocation hook to use malloc/free. This must be done before
-     * any other Jolt function is called.
+     * any other Jolt function is called. (see Jolt/Core/Memory.cpp)
      */
     native public static void registerDefaultAllocator();
 
     /**
      * Register all physics types with the factory and install their collision
-     * handlers.
+     * handlers. (see Jolt/RegisterTypes.h)
      *
      * @see #unregisterTypes()
      */
@@ -879,7 +895,8 @@ final public class Jolt {
     native public static void setTraceAllocations(boolean setting);
 
     /**
-     * Return the (binary) sign of the specified single-precision value.
+     * Return the (binary) sign of the specified single-precision value. (see
+     * Jolt/Math/Math.h)
      *
      * @param input the input value
      * @return -1 if the input is negative, otherwise +1
@@ -890,7 +907,8 @@ final public class Jolt {
     }
 
     /**
-     * Return the sine of the specified single-precision angle.
+     * Return the sine of the specified single-precision angle. (see
+     * Jolt/Math/Trigonometry.h)
      *
      * @param angle the input angle (in radians)
      * @return the sine ratio
@@ -920,7 +938,8 @@ final public class Jolt {
     }
 
     /**
-     * Set the next available character ID to 1.
+     * Set the next available character ID to 1. (see
+     * Jolt/Physics/Character/CharacterID.h)
      */
     public static void sSetNextCharacterId() {
         sSetNextCharacterId(1);
@@ -943,7 +962,8 @@ final public class Jolt {
     native public static boolean supportsObjectStream();
 
     /**
-     * Return the tangent ratio of the specified single-precision angle.
+     * Return the tangent ratio of the specified single-precision angle. (see
+     * Jolt/Math/Trigonometry.h)
      *
      * @param angle the input angle (in radians)
      * @return the tangent ratio
@@ -958,7 +978,7 @@ final public class Jolt {
     native public static void test000(String... args);
 
     /**
-     * Unregister all physics types with the factory.
+     * Unregister all physics types with the factory. (see Jolt/RegisterTypes.h)
      *
      * @see #registerTypes()
      */

@@ -206,7 +206,7 @@ final public class HairSettings
      * Alter the initial gravity vector. (native member: mInitialGravity)
      *
      * @param gravity the desired acceleration vector (meters per second squared
-     * in system coordinates, not {@code null}, default=(0,-9.81,0))
+     * in system coordinates, not {@code null}, unaffected, default=(0,-9.81,0))
      * @return the modified settings, for chaining
      */
     public HairSettings setInitialGravity(Vec3Arg gravity) {

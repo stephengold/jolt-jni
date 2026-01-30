@@ -43,7 +43,7 @@ abstract public class ComputeSystem extends NonCopyable implements RefTarget {
     /**
      * Create a queue for executing compute shaders.
      *
-     * @return a new object
+     * @return a new result object
      */
     public ComputeQueueResult createComputeQueue() {
         long systemVa = va();
@@ -84,7 +84,7 @@ abstract public class ComputeSystem extends NonCopyable implements RefTarget {
     }
 
     /**
-     * Replace the shader loader. (native member: mShaderLoader)
+     * Replace the system's shader loader. (native member: mShaderLoader)
      *
      * @param loader the loader to use (not {@code null})
      */
