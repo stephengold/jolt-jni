@@ -59,7 +59,7 @@ abstract public class ComputeSystem extends NonCopyable implements RefTarget {
      * @param systemVa the virtual address of the native object, or zero
      * @return a new JVM object, or {@code null} if the argument was zero
      */
-    public static ComputeSystem newSystem(long systemVa) {
+    static ComputeSystem newSystem(long systemVa) {
         if (systemVa == 0L) {
             return null;
         }
