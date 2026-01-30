@@ -42,7 +42,9 @@ import com.github.stephengold.joltjni.readonly.ConstColor;
 import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
 import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstFloat4;
+import com.github.stephengold.joltjni.readonly.ConstGradient;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
+import com.github.stephengold.joltjni.readonly.ConstIndexedTriangleNoMaterial;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
@@ -353,6 +355,21 @@ final class Equivalent {
     }
 
     /**
+     * Verify the equivalence of the specified gradients to within the specified
+     * tolerance.
+     *
+     * @param expected the expected value (not {@code null}, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    static void gradient(
+            ConstGradient expected, ConstGradient actual, float tolerance) {
+        TestUtils.assertEquals(
+                expected.getMin(), expected.getMax(), expected.getMinFraction(),
+                expected.getMaxFraction(), actual, tolerance);
+    }
+
+    /**
      * Verify the equivalence of the specified group filters, ignoring their
      * types, virtual addresses, and ownership.
      *
@@ -377,6 +394,23 @@ final class Equivalent {
         stringStream(stream1, stream2);
 
         TestUtils.testClose(sow2, sow1, stream2, stream1, g0);
+    }
+
+    /**
+     * Verify the equivalence of the specified triangles, ignoring their types,
+     * virtual addresses, and ownership.
+     *
+     * @param expected the expected triangle (not {@code null}, unaffected)
+     * @param actual the actual triangle (not {@code null}, unaffected)
+     */
+    static void indexedTriangleNoMaterial(
+            ConstIndexedTriangleNoMaterial expected,
+            ConstIndexedTriangleNoMaterial actual) {
+        joltPhysicsObject(expected, actual);
+
+        Assert.assertEquals(expected.getIdx(0), actual.getIdx(0));
+        Assert.assertEquals(expected.getIdx(1), actual.getIdx(1));
+        Assert.assertEquals(expected.getIdx(2), actual.getIdx(2));
     }
 
     /**
