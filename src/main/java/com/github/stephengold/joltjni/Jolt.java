@@ -879,9 +879,18 @@ final public class Jolt {
     native public static void registerDefaultAllocator();
 
     /**
-     * Register all physics types with the factory and install their collision
-     * handlers. (see Jolt/RegisterTypes.h)
+     * Register {@code HairSettings} with the factory. (see
+     * Jolt/RegisterTypes.h)
      *
+     * @see #unregisterTypes()
+     */
+    native public static void registerHair();
+
+    /**
+     * Register all physics types except {@code HairSettings} with the factory
+     * and install their collision handlers. (see Jolt/RegisterTypes.h)
+     *
+     * @see #registerHair()
      * @see #unregisterTypes()
      */
     native public static void registerTypes();

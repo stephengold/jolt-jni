@@ -513,6 +513,21 @@ bool gTypesAreRegistered = false;
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    registerHair
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_registerHair
+  (JNIEnv *, jclass) {
+    if (!gTypesAreRegistered) {
+        std::cout << "Invoke Jolt.registerTypes() before registerHair()!"
+                << std::endl;
+        return;
+    }
+    RegisterHair();
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    registerTypes
  * Signature: ()V
  */
