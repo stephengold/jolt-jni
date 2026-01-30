@@ -392,9 +392,11 @@ final public class TestUtils {
         Jolt.installDefaultAssertCallback();
         Jolt.installJavaTraceCallback(System.err);
 
+        // Create and configure the factory:
         boolean success = Jolt.newFactory();
         assert success;
         Jolt.registerTypes();
+        Jolt.registerHair();
     }
 
     /**
