@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -34,12 +34,14 @@ SOFTWARE.
 #include "Jolt/Geometry/RayCylinder.h"
 #include "Jolt/Geometry/RaySphere.h"
 #include "Jolt/Geometry/RayTriangle.h"
+#include "Jolt/Math/Swizzle.h"
 #include "Jolt/Physics/Body/Body.h"
 #include "Jolt/Physics/Body/BodyID.h"
 #include "Jolt/Physics/Character/CharacterID.h"
 #include "Jolt/Physics/Collision/ContactListener.h"
 #include "Jolt/Physics/Collision/EstimateCollisionResponse.h"
 #include "Jolt/Physics/DeterminismLog.h"
+#include "Jolt/Physics/PhysicsSettings.h"
 #include "Jolt/RegisterTypes.h"
 #include "TestFramework/External/Perlin.h"
 
@@ -395,6 +397,17 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_isDoublePrec
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_newFactory
   (JNIEnv *, jclass) {
+    // Verify global constants defined in Jolt.java:
+    JPH_ASSERT(com_github_stephengold_joltjni_Jolt_cDefaultConvexRadius == cDefaultConvexRadius);
+    JPH_ASSERT(com_github_stephengold_joltjni_Jolt_JPH_PI == JPH_PI);
+    JPH_ASSERT((int)com_github_stephengold_joltjni_Jolt_cEmptySubShapeId == SubShapeID().GetValue());
+    JPH_ASSERT((int)com_github_stephengold_joltjni_Jolt_cInvalidBodyId == BodyID::cInvalidBodyID);
+    JPH_ASSERT(com_github_stephengold_joltjni_Jolt_cMaxPhysicsBarriers == cMaxPhysicsBarriers);
+    JPH_ASSERT(com_github_stephengold_joltjni_Jolt_cMaxPhysicsJobs == cMaxPhysicsJobs);
+    JPH_ASSERT(com_github_stephengold_joltjni_Jolt_SWIZZLE_X == SWIZZLE_X);
+    JPH_ASSERT(com_github_stephengold_joltjni_Jolt_SWIZZLE_Y == SWIZZLE_Y);
+    JPH_ASSERT(com_github_stephengold_joltjni_Jolt_SWIZZLE_Z == SWIZZLE_Z);
+
 #if defined(JPH_DEBUG) && !defined(JPH_DISABLE_CUSTOM_ALLOCATOR)
     if (!Allocate) {
         std::cerr << "Can't create a Factory because no default allocator is registered!"
