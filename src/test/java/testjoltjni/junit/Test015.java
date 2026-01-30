@@ -400,6 +400,7 @@ public class Test015 {
 
         Assert.assertEquals(0, settings.countMaterials());
         Assert.assertEquals(0, settings.countRenderStrands());
+        Assert.assertEquals(0, settings.countRenderVertices());
         Assert.assertEquals(0, settings.countScalpTriangles());
         Assert.assertEquals(0, settings.countScalpVertices());
         Assert.assertEquals(0, settings.countSimStrands());
@@ -429,6 +430,7 @@ public class Test015 {
 
         Assert.assertEquals(1, settings.countMaterials());
         Assert.assertEquals(0, settings.countRenderStrands());
+        Assert.assertEquals(0, settings.countRenderVertices());
         Assert.assertEquals(0, settings.countScalpTriangles());
         Assert.assertEquals(0, settings.countScalpVertices());
         Assert.assertEquals(0, settings.countSimStrands());
