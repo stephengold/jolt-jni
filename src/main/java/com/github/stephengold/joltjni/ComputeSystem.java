@@ -88,6 +88,20 @@ public class ComputeSystem extends NonCopyable implements RefTarget {
     }
 
     /**
+     * Access the run-time type information of the current system. (native
+     * function: GetRTTI)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public Rtti getRtti() {
+        long systemRa = va();
+        long resultVa = getRtti(systemRa);
+        Rtti result = new Rtti(resultVa);
+
+        return result;
+    }
+
+    /**
      * Instantiate a system from its virtual address.
      *
      * @param systemVa the virtual address of the native object, or zero
