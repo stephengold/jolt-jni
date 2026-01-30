@@ -40,6 +40,8 @@ import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstCollisionGroup;
 import com.github.stephengold.joltjni.readonly.ConstColor;
 import com.github.stephengold.joltjni.readonly.ConstConstraintSettings;
+import com.github.stephengold.joltjni.readonly.ConstFloat3;
+import com.github.stephengold.joltjni.readonly.ConstFloat4;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
@@ -320,6 +322,34 @@ final class Equivalent {
         Assert.assertEquals(expected.mark(), actual.mark());
         Assert.assertEquals(expected.order(), actual.order());
         Assert.assertEquals(expected.position(), actual.position());
+    }
+
+    /**
+     * Verify the equivalence of the specified vectors to within the specified
+     * tolerance.
+     *
+     * @param expected the expected value (not {@code null}, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    static void float3(
+            ConstFloat3 expected, ConstFloat3 actual, float tolerance) {
+        TestUtils.assertEquals(expected.x(), expected.y(),
+                expected.z(), actual, tolerance);
+    }
+
+    /**
+     * Verify the equivalence of the specified vectors to within the specified
+     * tolerance.
+     *
+     * @param expected the expected value (not {@code null}, unaffected)
+     * @param actual the vector to test (not {@code null}, unaffected)
+     * @param tolerance the allowable difference for each component (&ge;0)
+     */
+    static void float4(
+            ConstFloat4 expected, ConstFloat4 actual, float tolerance) {
+        TestUtils.assertEquals(expected.x(), expected.y(),
+                expected.z(), expected.w(), actual, tolerance);
     }
 
     /**
