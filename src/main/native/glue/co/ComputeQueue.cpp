@@ -74,3 +74,16 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ComputeQueue_setEmbed
             = reinterpret_cast<ComputeQueue *> (queueVa);
     pQueue->SetEmbedded();
 }
+
+/*
+ * Class:     com_github_stephengold_joltjni_ComputeQueue
+ * Method:    toRef
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ComputeQueue_toRef
+  (JNIEnv *, jclass, jlong queueVa) {
+    ComputeQueue * const pQueue = reinterpret_cast<ComputeQueue *> (queueVa);
+    Ref<ComputeQueue> * const pResult = new Ref<ComputeQueue>(pQueue);
+    TRACE_NEW("Ref<ComputeQueue>", pResult)
+    return reinterpret_cast<jlong> (pResult);
+}
