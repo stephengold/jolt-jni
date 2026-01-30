@@ -43,7 +43,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HairSkinWeight_creat
  * Method:    createDefault
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HeightFieldShapeSettings_createDefault
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_HairSkinWeight_createDefault
   BODYOF_CREATE_DEFAULT(HairSettings::SkinWeight)
 
 /*
