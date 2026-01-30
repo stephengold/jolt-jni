@@ -752,7 +752,7 @@ final class Equivalent {
         FloatBuffer buffer2 = Jolt.newDirectFloatBuffer(numFloats);
         expected.copyDebugTriangles(buffer1);
         actual.copyDebugTriangles(buffer2);
-        Assert.assertEquals(buffer1, buffer2);
+        floatBuffer(buffer1, buffer2);
 
         vec3(expected.getCenterOfMass(), actual.getCenterOfMass(), 0f);
         Assert.assertEquals(
