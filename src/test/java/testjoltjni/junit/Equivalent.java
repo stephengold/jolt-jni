@@ -44,10 +44,14 @@ import com.github.stephengold.joltjni.readonly.ConstFloat3;
 import com.github.stephengold.joltjni.readonly.ConstFloat4;
 import com.github.stephengold.joltjni.readonly.ConstGradient;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
+import com.github.stephengold.joltjni.readonly.ConstHairMaterial;
+import com.github.stephengold.joltjni.readonly.ConstHairSettings;
 import com.github.stephengold.joltjni.readonly.ConstIndexedTriangleNoMaterial;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstMassProperties;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
+import com.github.stephengold.joltjni.readonly.ConstRStrand;
+import com.github.stephengold.joltjni.readonly.ConstSStrand;
 import com.github.stephengold.joltjni.readonly.ConstSerializableObject;
 import com.github.stephengold.joltjni.readonly.ConstShape;
 import com.github.stephengold.joltjni.readonly.ConstShapeSettings;
@@ -397,6 +401,115 @@ final class Equivalent {
     }
 
     /**
+     * Verify the equivalence of the specified hair materials, ignoring their
+     * types, virtual addresses, and ownership.
+     *
+     * @param expected the expected material (not {@code null}, unaffected)
+     * @param actual the actual material (not {@code null}, unaffected)
+     */
+    static void hairMaterial(
+            ConstHairMaterial expected, ConstHairMaterial actual) {
+        joltPhysicsObject(expected, actual);
+
+        Assert.assertEquals(
+                expected.getAngularDamping(), actual.getAngularDamping(), 0f);
+        Assert.assertEquals(
+                expected.getBendCompliance(), actual.getBendCompliance(), 0f);
+        float4(expected.getBendComplianceMultiplier(),
+                actual.getBendComplianceMultiplier(), 0f);
+        Assert.assertEquals(
+                expected.getEnableCollision(), actual.getEnableCollision());
+        Assert.assertEquals(
+                expected.getEnableLra(), actual.getEnableLra());
+        Assert.assertEquals(
+                expected.getFriction(), actual.getFriction(), 0f);
+        gradient(expected.getGlobalPose(), actual.getGlobalPose(), 0f);
+        gradient(expected.getGravityFactor(), actual.getGravityFactor(), 0f);
+        Assert.assertEquals(expected.getGravityPreloadFactor(),
+                actual.getGravityPreloadFactor(), 0f);
+        Assert.assertEquals(expected.getGridDensityForceFactor(),
+                actual.getGridDensityForceFactor(), 0f);
+        gradient(expected.getGridVelocityFactor(),
+                actual.getGridVelocityFactor(), 0f);
+        gradient(expected.getHairRadius(), actual.getHairRadius(), 0f);
+        Assert.assertEquals(expected.getInertiaMultiplier(),
+                actual.getInertiaMultiplier(), 0f);
+        Assert.assertEquals(
+                expected.getLinearDamping(), actual.getLinearDamping(), 0f);
+        Assert.assertEquals(expected.getMaxAngularVelocity(),
+                actual.getMaxAngularVelocity(), 0f);
+        Assert.assertEquals(expected.getMaxLinearVelocity(),
+                actual.getMaxLinearVelocity(), 0f);
+        Assert.assertEquals(expected.getSimulationStrandsFraction(),
+                actual.getSimulationStrandsFraction(), 0f);
+        gradient(expected.getSkinGlobalPose(), actual.getSkinGlobalPose(), 0f);
+        Assert.assertEquals(expected.getStretchCompliance(),
+                actual.getStretchCompliance(), 0f);
+        gradient(expected.getWorldTransformInfluence(),
+                actual.getWorldTransformInfluence(), 0f);
+    }
+
+    /**
+     * Verify the equivalence of the specified hair settings, ignoring their
+     * types, virtual addresses, and ownership.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    static void hairSettings(
+            ConstHairSettings expected, ConstHairSettings actual) {
+        joltPhysicsObject(expected, actual);
+
+        int numMaterials = actual.countMaterials();
+        Assert.assertEquals(expected.countMaterials(), numMaterials);
+        for (int i = 0; i < numMaterials; ++i) {
+            hairMaterial(expected.getMaterial(i), actual.getMaterial(i));
+        }
+
+        int numRenderStrands = actual.countRenderStrands();
+        Assert.assertEquals(expected.countRenderStrands(), numRenderStrands);
+        for (int i = 0; i < numRenderStrands; ++i) {
+            rStrand(expected.getRenderStrand(i), actual.getRenderStrand(i));
+        }
+
+        int numRenderVertices = actual.countRenderVertices();
+        Assert.assertEquals(expected.countRenderVertices(), numRenderVertices);
+        // TODO verify each vertex
+
+        int numScalpTriangles = actual.countScalpTriangles();
+        Assert.assertEquals(expected.countScalpTriangles(), numScalpTriangles);
+        for (int i = 0; i < numScalpTriangles; ++i) {
+            indexedTriangleNoMaterial(
+                    expected.getScalpTriangle(i), actual.getScalpTriangle(i));
+        }
+
+        int numScalpVertices = actual.countScalpVertices();
+        Assert.assertEquals(expected.countScalpVertices(), numScalpVertices);
+        for (int i = 0; i < numScalpVertices; ++i) {
+            float3(expected.getScalpVertex(i), actual.getScalpVertex(i), 0f);
+        }
+
+        int numSimStrands = actual.countSimStrands();
+        Assert.assertEquals(expected.countSimStrands(), numSimStrands);
+        for (int i = 0; i < numRenderStrands; ++i) {
+            sStrand(expected.getSimStrand(i), actual.getSimStrand(i));
+        }
+
+        vec3(expected.getInitialGravity(), actual.getInitialGravity(), 0f);
+        aaBox(expected.getSimulationBounds(), actual.getSimulationBounds(), 0f);
+
+        // compare serialization results:
+        StringStream stream1 = new StringStream();
+        StringStream stream2 = new StringStream();
+        StreamOut sow1 = new StreamOutWrapper(stream1);
+        StreamOut sow2 = new StreamOutWrapper(stream2);
+        expected.saveBinaryState(sow1);
+        actual.saveBinaryState(sow2);
+        stringStream(stream1, stream2);
+        TestUtils.testClose(sow2, sow1, stream2, stream1);
+    }
+
+    /**
      * Verify the equivalence of the specified triangles, ignoring their types,
      * virtual addresses, and ownership.
      *
@@ -567,6 +680,21 @@ final class Equivalent {
         Assert.assertEquals(expected.getRatio(), actual.getRatio(), 0f);
         vec3(expected.getSliderAxis(), actual.getSliderAxis(), 0f);
         Assert.assertEquals(expected.getSpace(), actual.getSpace());
+    }
+
+    /**
+     * Verify the equivalence of the specified render strands, ignoring their
+     * types, virtual addresses, and ownership.
+     *
+     * @param expected the expected settings (not {@code null}, unaffected)
+     * @param actual the actual settings (not {@code null}, unaffected)
+     */
+    static void rStrand(ConstRStrand expected, ConstRStrand actual) {
+        joltPhysicsObject(expected, actual);
+
+        Assert.assertEquals(expected.getEndVtx(), actual.getEndVtx());
+        Assert.assertEquals(expected.getStartVtx(), actual.getStartVtx());
+        Assert.assertEquals(expected.vertexCount(), actual.vertexCount());
     }
 
     /**
@@ -825,6 +953,19 @@ final class Equivalent {
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
         TestUtils.testClose(sow2, sow1, stream2, stream1);
+    }
+
+    /**
+     * Verify the equivalence of the specified simulation strands, ignoring
+     * their types, virtual addresses, and ownership.
+     *
+     * @param expected the expected strand (not {@code null}, unaffected)
+     * @param actual the actual strand (not {@code null}, unaffected)
+     */
+    static void sStrand(ConstSStrand expected, ConstSStrand actual) {
+        rStrand(expected, actual);
+        Assert.assertEquals(
+                expected.getMaterialIndex(), actual.getMaterialIndex());
     }
 
     /**
