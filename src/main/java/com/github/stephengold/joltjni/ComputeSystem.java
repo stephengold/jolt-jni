@@ -28,7 +28,7 @@ import com.github.stephengold.joltjni.template.RefTarget;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-abstract public class ComputeSystem extends NonCopyable implements RefTarget {
+public class ComputeSystem extends NonCopyable implements RefTarget {
     // *************************************************************************
     // constructors
 
@@ -36,6 +36,16 @@ abstract public class ComputeSystem extends NonCopyable implements RefTarget {
      * Instantiate a system with no native object assigned.
      */
     ComputeSystem() {
+    }
+
+    /**
+     * Instantiate a system with the specified native object assigned.
+     *
+     * @param systemVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    private ComputeSystem(long systemVa) {
+        setVirtualAddressAsCoOwner(systemVa);
     }
     // *************************************************************************
     // new methods exposed
@@ -54,30 +64,39 @@ abstract public class ComputeSystem extends NonCopyable implements RefTarget {
     }
 
     /**
+     * Create a compute system that uses a GPU.
+     *
+     * @return a new result object
+     */
+    public static ComputeSystemResult createComputeSystem() {
+        long resultVa = createSystemGpu();
+        ComputeSystemResult result = new ComputeSystemResult(resultVa, true);
+
+        return result;
+    }
+
+    /**
+     * Create a compute system that doesn't use any GPU.
+     *
+     * @return a new result object
+     */
+    public static ComputeSystemResult createComputeSystemCpu() {
+        long resultVa = createSystemCpu();
+        ComputeSystemResult result = new ComputeSystemResult(resultVa, true);
+
+        return result;
+    }
+
+    /**
      * Instantiate a system from its virtual address.
      *
      * @param systemVa the virtual address of the native object, or zero
      * @return a new JVM object, or {@code null} if the argument was zero
      */
     static ComputeSystem newSystem(long systemVa) {
-        if (systemVa == 0L) {
-            return null;
-        }
-        long rttiVa = getRtti(systemVa);
-        String typeName = Rtti.getName(rttiVa);
-        ComputeSystem result;
-        switch (typeName) {
-            case "ComputeSystemCPU":
-                result = new ComputeSystemCpu(systemVa);
-                break;
-
-            case "ComputeSystemDX12":
-            case "ComputeSystemMTL":
-            case "ComputeSystemVK":
-            // TODO
-
-            default:
-                throw new RuntimeException("typeName = " + typeName);
+        ComputeSystem result = null;
+        if (systemVa != 0L) {
+            result = new ComputeSystem(systemVa);
         }
 
         return result;
@@ -151,6 +170,10 @@ abstract public class ComputeSystem extends NonCopyable implements RefTarget {
     // native methods
 
     native private static long createComputeQueue(long systemVa);
+
+    native private static long createSystemCpu();
+
+    native private static long createSystemGpu();
 
     native private static int getRefCount(long systemVa);
 

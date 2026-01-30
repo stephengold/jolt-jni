@@ -21,9 +21,12 @@ SOFTWARE.
  */
 package testjoltjni.junit;
 
+import com.github.stephengold.joltjni.ComputeQueue;
+import com.github.stephengold.joltjni.ComputeQueueRef;
+import com.github.stephengold.joltjni.ComputeQueueResult;
 import com.github.stephengold.joltjni.ComputeSystem;
-import com.github.stephengold.joltjni.ComputeSystemCpu;
 import com.github.stephengold.joltjni.ComputeSystemRef;
+import com.github.stephengold.joltjni.ComputeSystemResult;
 import com.github.stephengold.joltjni.DrawSettings;
 import com.github.stephengold.joltjni.Float3;
 import com.github.stephengold.joltjni.Float4;
@@ -85,12 +88,11 @@ public class Test015 {
      * Test the {@code ComputeSystem} classes.
      */
     private static void doComputeSystem() {
-        ComputeSystem system = new ComputeSystemCpu();
-
-        ComputeSystemRef ref = system.toRef();
-        ComputeSystem alias = ref.getPtr();
-
-        TestUtils.testClose(ref);
+        ComputeSystemResult cpu = ComputeSystem.createComputeSystemCpu();
+        testComputeSystem(cpu);
+        ComputeSystemResult gpu = ComputeSystem.createComputeSystem();
+        testComputeSystem(gpu);
+        TestUtils.testClose(gpu, cpu);
         System.gc();
     }
 
@@ -192,6 +194,25 @@ public class Test015 {
 
         TestUtils.testClose(v2, vertex);
         System.gc();
+    }
+
+    /**
+     * Test the specified {@code ComputeSystemResult}.
+     *
+     * @param systemResult the result to test (not {@code null})
+     */
+    private static void testComputeSystem(ComputeSystemResult systemResult) {
+        Assert.assertFalse(systemResult.hasError());
+        ComputeSystemRef systemRef = systemResult.get();
+        ComputeSystem system = systemRef.getPtr();
+        ComputeSystemRef systemAlias = system.toRef();
+        TestUtils.testClose(systemAlias, systemRef);
+
+        ComputeQueueResult queueResult = system.createComputeQueue();
+        Assert.assertFalse(queueResult.hasError());
+        ComputeQueueRef queueRef = queueResult.get();
+        ComputeQueue queue = queueRef.getPtr();
+        TestUtils.testClose(queue, queueRef, queueResult, system);
     }
 
     /**

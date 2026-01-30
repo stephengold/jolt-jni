@@ -56,6 +56,32 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ComputeSystem_create
 
 /*
  * Class:     com_github_stephengold_joltjni_ComputeSystem
+ * Method:    createSystemCpu
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ComputeSystem_createSystemCpu
+  (JNIEnv *pEnv, jclass) {
+    ComputeSystemResult * const pResult = new ComputeSystemResult();
+    TRACE_NEW("ComputeSystemResult", pResult)
+    *pResult = CreateComputeSystemCPU();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ComputeSystem
+ * Method:    createSystemGpu
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ComputeSystem_createSystemGpu
+  (JNIEnv *pEnv, jclass) {
+    ComputeSystemResult * const pResult = new ComputeSystemResult();
+    TRACE_NEW("ComputeSystemResult", pResult)
+    *pResult = CreateComputeSystem();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ComputeSystem
  * Method:    getRefCount
  * Signature: (J)I
  */
