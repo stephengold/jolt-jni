@@ -35,6 +35,7 @@ import com.github.stephengold.joltjni.GroupFilterRef;
 import com.github.stephengold.joltjni.GroupFilterResult;
 import com.github.stephengold.joltjni.GroupFilterTable;
 import com.github.stephengold.joltjni.GroupFilterTableRef;
+import com.github.stephengold.joltjni.HairSettings;
 import com.github.stephengold.joltjni.HeightFieldShapeSettings;
 import com.github.stephengold.joltjni.MeshShapeSettings;
 import com.github.stephengold.joltjni.MutableCompoundShapeSettings;
@@ -89,6 +90,7 @@ import com.github.stephengold.joltjni.enumerate.ESpringMode;
 import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
 import com.github.stephengold.joltjni.readonly.ConstGroupFilter;
+import com.github.stephengold.joltjni.readonly.ConstHairSettings;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstPhysicsMaterial;
 import com.github.stephengold.joltjni.readonly.ConstShape;
@@ -131,6 +133,7 @@ public class Test012 {
 
         testBodyCreationSettings();
         testGroupFilterTable();
+        testHairSettings();
         testPhysicsMaterial();
         testPointConstraintSettings();
         testRackAndPinionConstraintSettings();
@@ -187,6 +190,24 @@ public class Test012 {
         GroupFilterRef result = filterResult.get();
 
         TestUtils.testClose(filterResult, streamIn, ss);
+        return result;
+    }
+
+    /**
+     * De-serialize a hair-settings object from the specified data using
+     * {@code restoreBinaryState()}.
+     *
+     * @param serialData the data to de-serialize (not null, unaffected)
+     * @return a new settings object
+     */
+    private static HairSettings dcHairSettings(String serialData) {
+        StringStream ss = new StringStream(serialData);
+        StreamIn streamIn = new StreamInWrapper(ss);
+
+        HairSettings result = new HairSettings();
+        result.restoreBinaryState(streamIn);
+
+        TestUtils.testClose(streamIn, ss);
         return result;
     }
 
@@ -597,6 +618,23 @@ public class Test012 {
     }
 
     /**
+     * Serialize the specified hair settings using {@code saveBinaryState()}.
+     *
+     * @param settings the settings to serialize (not null, unaffected)
+     * @return serialized data
+     */
+    private static String serializeCooked(ConstHairSettings settings) {
+        StringStream ss = new StringStream();
+        StreamOut streamOut = new StreamOutWrapper(ss);
+
+        settings.saveBinaryState(streamOut);
+        String result = ss.str();
+
+        TestUtils.testClose(streamOut, ss);
+        return result;
+    }
+
+    /**
      * Serialize the specified material using {@code saveBinaryState()}.
      *
      * @param material the material to serialize (not null, unaffected)
@@ -862,6 +900,34 @@ public class Test012 {
         }
 
         TestUtils.testClose(filter);
+    }
+
+    /**
+     * Test replication of {@code HairSettings} objects.
+     */
+    private static void testHairSettings() {
+        HairSettings settings = new HairSettings();
+        settings.setInitialGravity(new Vec3(3f, 4f, 2f));
+
+        { // serialize and then deserialize binary state:
+            String serialData = serializeCooked(settings);
+            HairSettings settingsCopy = dcHairSettings(serialData);
+
+            Assert.assertNotEquals(settings.va(), settingsCopy.va());
+            Equivalent.hairSettings(settings, settingsCopy);
+            TestUtils.testClose(settingsCopy);
+        }
+
+        // object-stream serialization not implemented, see issue #1898
+        { // copy constructor:
+            HairSettings settingsCopy = new HairSettings(settings);
+
+            Assert.assertNotEquals(settings.va(), settingsCopy.va());
+            Equivalent.hairSettings(settings, settingsCopy);
+            TestUtils.testClose(settingsCopy);
+        }
+
+        TestUtils.testClose(settings);
     }
 
     /**
