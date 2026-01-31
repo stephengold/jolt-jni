@@ -36,6 +36,7 @@ import com.github.stephengold.joltjni.GroupFilterResult;
 import com.github.stephengold.joltjni.GroupFilterTable;
 import com.github.stephengold.joltjni.GroupFilterTableRef;
 import com.github.stephengold.joltjni.HairSettings;
+import com.github.stephengold.joltjni.HairSettingsRef;
 import com.github.stephengold.joltjni.HeightFieldShapeSettings;
 import com.github.stephengold.joltjni.MeshShapeSettings;
 import com.github.stephengold.joltjni.MutableCompoundShapeSettings;
@@ -372,6 +373,23 @@ public class Test012 {
     private static GroupFilterTableRef drGroupFilterTable(String serialData) {
         StringStream ss = new StringStream(serialData);
         GroupFilterTableRef result = new GroupFilterTableRef();
+        boolean success = ObjectStreamIn.sReadObject(ss, result);
+        assert success;
+
+        TestUtils.testClose(ss);
+        return result;
+    }
+
+    /**
+     * De-serialize a hair-settings object from the specified data using
+     * {@code ObjectStreamIn}.
+     *
+     * @param serialData the data to de-serialize (not null, unaffected)
+     * @return a new settings object
+     */
+    private static HairSettingsRef drHairSettings(String serialData) {
+        StringStream ss = new StringStream(serialData);
+        HairSettingsRef result = new HairSettingsRef();
         boolean success = ObjectStreamIn.sReadObject(ss, result);
         assert success;
 
@@ -918,7 +936,15 @@ public class Test012 {
             TestUtils.testClose(settingsCopy);
         }
 
-        // object-stream serialization not implemented, see issue #1898
+        { // serialize and then deserialize raw settings using object streams:
+            String serialData = serializeRaw(settings);
+            ConstHairSettings settingsCopy = drHairSettings(serialData);
+
+            Assert.assertNotEquals(settings.va(), settingsCopy.targetVa());
+            Equivalent.hairSettings(settings, settingsCopy);
+            TestUtils.testClose(settingsCopy);
+        }
+
         { // copy constructor:
             HairSettings settingsCopy = new HairSettings(settings);
 

@@ -507,6 +507,13 @@ final class Equivalent {
         actual.saveBinaryState(sow2);
         stringStream(stream1, stream2);
         TestUtils.testClose(sow2, sow1, stream2, stream1);
+
+        StringStream stream3 = new StringStream();
+        StringStream stream4 = new StringStream();
+        ObjectStreamOut.sWriteObject(stream3, EStreamType.Text, expected);
+        ObjectStreamOut.sWriteObject(stream4, EStreamType.Text, actual);
+        stringStream(stream3, stream4);
+        TestUtils.testClose(stream4, stream3);
     }
 
     /**
