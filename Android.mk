@@ -131,6 +131,7 @@ $(N)/glue/cu/CustomContactListener.cpp \
 $(N)/glue/cu/CustomDebugRendererSimple.cpp \
 $(N)/glue/cu/CustomPhysicsStepListener.cpp \
 $(N)/glue/cu/CustomRayCastBodyCollector.cpp \
+$(N)/glue/cu/CustomShaderLoader.cpp \
 $(N)/glue/cu/CustomSoftBodyContactListener.cpp \
 $(N)/glue/d/DebugRenderer.cpp \
 $(N)/glue/d/DebugRendererRecorder.cpp \
