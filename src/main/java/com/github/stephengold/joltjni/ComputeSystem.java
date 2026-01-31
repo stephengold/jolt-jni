@@ -102,6 +102,19 @@ public class ComputeSystem extends NonCopyable implements RefTarget {
     }
 
     /**
+     * If the argument is a {@code ComputeSystemCPU}, register its shaders.
+     *
+     * @param system the system to modify (not {@code null})
+     */
+    public static void hairRegisterShaders(ComputeSystem system) {
+        long systemVa = system.va();
+        long rttiVa = getRtti(systemVa);
+        if (Rtti.getName(rttiVa).equals("ComputeSystemCPU")) {
+            hairRegisterShaders(systemVa);
+        }
+    }
+
+    /**
      * Instantiate a system from its virtual address.
      *
      * @param systemVa the virtual address of the native object, or zero
@@ -192,6 +205,8 @@ public class ComputeSystem extends NonCopyable implements RefTarget {
     native private static int getRefCount(long systemVa);
 
     native private static long getRtti(long systemVa);
+
+    native private static void hairRegisterShaders(long systemVa);
 
     native private static void setEmbedded(long systemVa);
 

@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/Compute/ComputeSystem.h"
+#include "Jolt/Shaders/HairWrapper.h"
 
 #include "auto/com_github_stephengold_joltjni_ComputeSystem.h"
 #include "auto/com_github_stephengold_joltjni_ComputeSystemRef.h"
@@ -104,6 +105,20 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_ComputeSystem_getRtt
             = reinterpret_cast<ComputeSystem *> (systemVa);
     const RTTI * const pResult = pSystem->GetRTTI();
     return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_ComputeSystem
+ * Method:    hairRegisterShaders
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ComputeSystem_hairRegisterShaders
+  (JNIEnv *, jclass, jlong systemVa) {
+#ifdef JPH_USE_CPU_COMPUTE
+    ComputeSystemCPU * const pSystem
+            = reinterpret_cast<ComputeSystemCPU *> (systemVa);
+    HairRegisterShaders(pSystem);
+#endif
 }
 
 /*
