@@ -413,7 +413,7 @@ tasks.register('runRagdollSinglePile', JavaExec) {
     mainClass = 'testjoltjni.app.performancetest.PerformanceTest'
 }
 tasks.register('runSmokeTestAll', JavaExec) {
-    dependsOn('unpackJoltAssets')
+    dependsOn('unpackHairStraight', 'unpackJoltAssets')
     mainClass = 'testjoltjni.app.samples.SmokeTestAll'
 }
 

@@ -30,6 +30,7 @@ import testjoltjni.app.samples.character.*;
 import testjoltjni.app.samples.constraints.*;
 import testjoltjni.app.samples.convexcollision.*;
 import testjoltjni.app.samples.general.*;
+import testjoltjni.app.samples.hair.*;
 import testjoltjni.app.samples.rig.*;
 import testjoltjni.app.samples.scaledshapes.*;
 import testjoltjni.app.samples.shapes.*;
@@ -55,6 +56,10 @@ final public class SmokeTestAll {
     // *************************************************************************
     // fields
 
+    /**
+     * result from creating the {@code ComputSystem}
+     */
+    private static ComputeSystemResult systemResult;
     /**
      * renderer shared by all test objects
      */
@@ -89,6 +94,8 @@ final public class SmokeTestAll {
         StreamOut streamOut = new StreamOutWrapper(ofStream);
         renderer = new DebugRendererRecorder(streamOut);
 
+        systemResult = ComputeSystem.createComputeSystemCpu();
+
         int numBytes = 1 << 24; // 16 MiB
         tempAllocator = new TempAllocatorImpl(numBytes);
 
@@ -96,6 +103,49 @@ final public class SmokeTestAll {
     }
     // *************************************************************************
     // private methods
+
+    /**
+     * Install a compute system and queue.
+     *
+     * @param system the system result to install (not {@code null})
+     * @param test the test instance to install it on (not {@code null})
+     */
+    static private void installComputeSystem(
+            ComputeSystemResult systemResult, Test test) {
+        if (systemResult.hasError()) {
+            test.FatalError(systemResult.getError());
+        }
+        ComputeSystemRef ref = systemResult.get();
+        ComputeSystem system = ref.getPtr();
+
+        // Add an appropriate shader loader:
+        Rtti rtti = system.getRtti();
+        String typeName = rtti.getName();
+        ShaderLoader loader;
+        switch (typeName) {
+            case "ComputeSystemCPU":
+                // Create a dummy loader:
+                loader = new CustomShaderLoader();
+                // Register the shaders:
+                ComputeSystem.hairRegisterShaders(system);
+                break;
+
+            default:
+                throw new RuntimeException("typeName = " + typeName);
+        }
+        system.setShaderLoader(loader);
+
+        // Create a compute queue:
+        ComputeQueueResult queueResult = system.createComputeQueue();
+        if (queueResult.hasError()) {
+            test.FatalError(queueResult.getError());
+        }
+        ComputeQueueRef queueRef = queueResult.get();
+        ComputeQueue queue = queueRef.getPtr();
+
+        // Update the test:
+        test.SetComputeSystem(system, queue);
+    }
 
     /**
      * Allocate and initialize a {@code PhysicsSystem} in the customary
@@ -148,6 +198,7 @@ final public class SmokeTestAll {
 
         test.SetDebugRenderer(renderer);
         test.SetTempAllocator(tempAllocator);
+        installComputeSystem(systemResult, test);
 
         // Create new job/physics systems for each test:
         int numThreads = -1; // autodetect
@@ -211,6 +262,12 @@ final public class SmokeTestAll {
         // TODO RandomRayTest (uses templates)
 
         smokeTestGeneral();
+
+        // hair package:
+        smokeTest(new HairCollisionTest());
+        smokeTest(new HairGravityPreloadTest());
+        smokeTest(new HairTest());
+
         smokeTestRig();
         smokeTestScaledShapes();
         smokeTestShapes();
