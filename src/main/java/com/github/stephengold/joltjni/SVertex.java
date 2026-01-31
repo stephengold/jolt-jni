@@ -27,7 +27,7 @@ import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.FloatBuffer;
 
 /**
- * A single vertex in a strand of hair. (native type:
+ * A single vertex used to simulate a strand of hair. (native type:
  * {@code HairSettings::SVertex})
  *
  * @author Stephen Gold sgold@sonic.net

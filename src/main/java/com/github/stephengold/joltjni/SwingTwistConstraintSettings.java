@@ -173,7 +173,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * Return which space the other properties are specified in. The settings
      * are unaffected. (native attribute: mSpace)
      *
-     * @return an enum value (not null)
+     * @return an enum value (not {@code null})
      */
     public EConstraintSpace getSpace() {
         long settingsVa = va();
@@ -200,7 +200,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * Return type of swing constraint. The settings are unaffected. (native
      * attribute: mSwingType)
      *
-     * @return the enum value (not null)
+     * @return the enum value (not {@code null})
      */
     public ESwingType getSwingType() {
         long settingsVa = va();
@@ -304,7 +304,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the plane axis of body 1. (native attribute: mPlaneAxis1)
      *
-     * @param axisDirection the desired direction (not null, unaffected,
+     * @param axisDirection the desired direction (not {@code null}, unaffected,
      * default=(0,1,0))
      * @return the argument, for chaining
      */
@@ -321,7 +321,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the plane axis of body 2. (native attribute: mPlaneAxis2)
      *
-     * @param axisDirection the desired direction (not null, unaffected,
+     * @param axisDirection the desired direction (not {@code null}, unaffected,
      * default=(0,1,0))
      * @return the argument, for chaining
      */
@@ -349,7 +349,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the initial location of the body 1. (native attribute: mPosition1)
      *
-     * @param location the desired location (not null, unaffected,
+     * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      * @return the argument, for chaining
      */
@@ -366,7 +366,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the initial location of body 2. (native attribute: mPosition2)
      *
-     * @param location the desired location (not null, unaffected,
+     * @param location the desired location (not {@code null}, unaffected,
      * default=(0,0,0))
      * @return the argument, for chaining
      */
@@ -384,7 +384,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * Alter which space the other properties are specified in. (native
      * attribute: mSpace)
      *
-     * @param space enum value (not null, default=WorldSpace)
+     * @param space enum value (not {@code null}, default=WorldSpace)
      */
     public void setSpace(EConstraintSpace space) {
         long settingsVa = va();
@@ -396,7 +396,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the settings for the swing motor. (native attribute:
      * mSwingMotorSettings)
      *
-     * @param motorSettings the desired settings (not null, unaffected)
+     * @param motorSettings the desired settings (not {@code null}, unaffected)
      * @return the argument, for chaining
      */
     public MotorSettings setSwingMotorSettings(MotorSettings motorSettings) {
@@ -410,7 +410,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the type of swing constraint. (native attribute: mSwingType)
      *
-     * @param swingType the desired enum value (not null, default=Cone)
+     * @param swingType the desired enum value (not {@code null}, default=Cone)
      */
     public void setSwingType(ESwingType swingType) {
         long settingsVa = va();
@@ -421,7 +421,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the twist axis of the body 1. (native attribute: mTwistAxis1)
      *
-     * @param axisDirection the desired direction (not null, unaffected,
+     * @param axisDirection the desired direction (not {@code null}, unaffected,
      * default=(1,0,0))
      * @return the argument, for chaining
      */
@@ -438,7 +438,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
     /**
      * Alter the twist axis of body 2. (native attribute: mTwistAxis2)
      *
-     * @param axisDirection the desired direction (not null, unaffected,
+     * @param axisDirection the desired direction (not {@code null}, unaffected,
      * default=(1,0,0))
      * @return the argument, for chaining
      */
@@ -476,7 +476,7 @@ public class SwingTwistConstraintSettings extends TwoBodyConstraintSettings {
      * Alter the settings for the twist motor. (native attribute:
      * mTwistMotorSetting)
      *
-     * @param motorSettings the desired settings (not null, unaffected)
+     * @param motorSettings the desired settings (not {@code null}, unaffected)
      * @return the argument, for chaining
      */
     public MotorSettings setTwistMotorSettings(MotorSettings motorSettings) {

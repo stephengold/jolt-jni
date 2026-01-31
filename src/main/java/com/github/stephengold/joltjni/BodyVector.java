@@ -121,7 +121,7 @@ public class BodyVector extends Array<Body> {
      * Put the specified body at the specified index.
      *
      * @param elementIndex the index at which to put the body (&ge;0)
-     * @param body the body to put (not null)
+     * @param body the body to put (not {@code null})
      */
     @Override
     public void set(int elementIndex, Body body) {

@@ -185,7 +185,8 @@ final public class Jolt {
     }
 
     /**
-     * Destroy the factory for de-serialization of saved data.
+     * Destroy the factory used for collision dispatch and object-stream
+     * serialization.
      *
      * @see #newFactory()
      */
@@ -584,7 +585,7 @@ final public class Jolt {
     }
 
     /**
-     * Create a factory for deserialization of saved data.
+     * Create a factory for collision dispatch and object-stream serialization.
      *
      * @return {@code true} if successful, otherwise {@code false}
      * @see #destroyFactory()

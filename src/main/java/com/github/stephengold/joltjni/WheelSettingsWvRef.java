@@ -123,7 +123,7 @@ final public class WheelSettingsWvRef
      * Relocate the attachment point. (native attribute: mPosition)
      *
      * @param position the location of the attachment point (in the body's local
-     * coordinates, not null, unaffected, default=(0,0,0))
+     * coordinates, not {@code null}, unaffected, default=(0,0,0))
      * @return the current reference, for chaining
      */
     public WheelSettingsWvRef setPosition(Vec3Arg position) {
@@ -153,7 +153,7 @@ final public class WheelSettingsWvRef
      * Alter the steering axis (upward direction). (native attribute:
      * mSteeringAxis)
      *
-     * @param direction the desired direction (not null, unaffected,
+     * @param direction the desired direction (not {@code null}, unaffected,
      * default=(0,1,0))
      * @return the current reference, for chaining
      */
@@ -171,7 +171,7 @@ final public class WheelSettingsWvRef
      * Alter the downward direction of the suspension. (native attribute:
      * mSuspensionDirection)
      *
-     * @param direction the desired direction (not null, unaffected,
+     * @param direction the desired direction (not {@code null}, unaffected,
      * default=(0,-1,0))
      * @return the current reference, for chaining
      */
@@ -189,8 +189,8 @@ final public class WheelSettingsWvRef
      * Alter the location where tire forces will be applied if the force-point
      * option is enabled. (native attribute: mSuspensionForcePoint)
      *
-     * @param location the desired location (in the body coordinates, not null,
-     * unaffected, default=(0,0,0))
+     * @param location the desired location (in the body coordinates, not
+     * {@code null}, unaffected, default=(0,0,0))
      * @return the current reference, for chaining
      */
     public WheelSettingsWvRef setSuspensionForcePoint(Vec3Arg location) {
@@ -249,7 +249,7 @@ final public class WheelSettingsWvRef
      * Alter the forward direction when steering is neutral. (native attribute:
      * mWheelForward)
      *
-     * @param direction the desired direction (not null, unaffected,
+     * @param direction the desired direction (not {@code null}, unaffected,
      * default=(0,0,1))
      * @return the current reference, for chaining
      */
@@ -267,7 +267,7 @@ final public class WheelSettingsWvRef
      * Alter the "up" direction when steering is neutral. (native attribute:
      * mWheelUp)
      *
-     * @param direction the desired direction (not null, unaffected,
+     * @param direction the desired direction (not {@code null}, unaffected,
      * default=(0,1,0))
      * @return the current reference, for chaining
      */
@@ -555,7 +555,7 @@ final public class WheelSettingsWvRef
      * Save the settings to the specified binary stream. The settings are
      * unaffected.
      *
-     * @param stream the stream to write to (not null)
+     * @param stream the stream to write to (not {@code null})
      */
     @Override
     public void saveBinaryState(StreamOut stream) {

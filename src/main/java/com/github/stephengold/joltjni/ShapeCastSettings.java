@@ -57,7 +57,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
      * Return the policy for back-facing triangles in convex shapes. The
      * settings are unaffected. (native attribute: mBackFaceModeConvex)
      *
-     * @return the enum value (not null)
+     * @return the enum value (not {@code null})
      */
     public EBackFaceMode getBackFaceModeConvex() {
         long settingsVa = va();
@@ -71,7 +71,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
      * Return the policy for back-facing triangles in triangle-based shapes. The
      * settings are unaffected. (native attribute: mBackFaceModeTriangles)
      *
-     * @return the enum value (not null)
+     * @return the enum value (not {@code null})
      */
     public EBackFaceMode getBackFaceModeTriangles() {
         long settingsVa = va();
@@ -112,7 +112,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
      * Alter the treatment of back-facing triangles in convex shapes. (native
      * attribute: mBackFaceModeConvex)
      *
-     * @param mode the desired mode (not null, default=IgnoreBackFaces)
+     * @param mode the desired mode (not {@code null}, default=IgnoreBackFaces)
      */
     public void setBackFaceModeConvex(EBackFaceMode mode) {
         long settingsVa = va();
@@ -124,7 +124,7 @@ public class ShapeCastSettings extends CollideSettingsBase {
      * Alter the policy for back-facing triangles in triangle-based shapes.
      * (native attribute: mBackFaceModeTriangles)
      *
-     * @param mode the desired mode (not null, default=IgnoreBackFaces)
+     * @param mode the desired mode (not {@code null}, default=IgnoreBackFaces)
      */
     public void setBackFaceModeTriangles(EBackFaceMode mode) {
         long settingsVa = va();
