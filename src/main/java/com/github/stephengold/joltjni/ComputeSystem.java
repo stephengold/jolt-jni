@@ -28,15 +28,9 @@ import com.github.stephengold.joltjni.template.RefTarget;
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ComputeSystem extends NonCopyable implements RefTarget {
+final public class ComputeSystem extends NonCopyable implements RefTarget {
     // *************************************************************************
     // constructors
-
-    /**
-     * Instantiate a system with no native object assigned.
-     */
-    ComputeSystem() {
-    }
 
     /**
      * Instantiate a system with the specified native object assigned.
@@ -45,7 +39,9 @@ public class ComputeSystem extends NonCopyable implements RefTarget {
      * zero)
      */
     private ComputeSystem(long systemVa) {
-        setVirtualAddressAsCoOwner(systemVa);
+        long refVa = toRef(systemVa);
+        Runnable freeingAction = () -> ComputeSystemRef.free(refVa);
+        setVirtualAddress(systemVa, freeingAction);
     }
     // *************************************************************************
     // new methods exposed
@@ -138,21 +134,6 @@ public class ComputeSystem extends NonCopyable implements RefTarget {
         long systemVa = va();
         long loaderVa = loader.va();
         setShaderLoader(systemVa, loaderVa);
-    }
-    // *************************************************************************
-    // new protected methods
-
-    /**
-     * Assign a native object (assuming there's none already assigned) and
-     * designate the JVM object as a co-owner.
-     *
-     * @param systemVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    final protected void setVirtualAddressAsCoOwner(long systemVa) {
-        long refVa = toRef(systemVa);
-        Runnable freeingAction = () -> ComputeSystemRef.free(refVa);
-        setVirtualAddress(systemVa, freeingAction);
     }
     // *************************************************************************
     // RefTarget methods
