@@ -159,6 +159,7 @@ $(N)/glue/g/GroupFilter.cpp \
 $(N)/glue/g/GroupFilterResult.cpp \
 $(N)/glue/g/GroupFilterTable.cpp \
 $(N)/glue/g/GroupFilterToIdMap.cpp \
+$(N)/glue/h/Hair.cpp \
 $(N)/glue/h/HairMaterial.cpp \
 $(N)/glue/h/HairSettings.cpp \
 $(N)/glue/h/HairShaders.cpp \
