@@ -34,6 +34,17 @@ SOFTWARE.
 
 using namespace JPH;
 
+#ifdef JPH_DEBUG_RENDERER
+
+IMPLEMENT_REF(DebugRenderer::Geometry,
+  Java_com_github_stephengold_joltjni_GeometryRef_copy,
+  Java_com_github_stephengold_joltjni_GeometryRef_createDefault,
+  Java_com_github_stephengold_joltjni_GeometryRef_free,
+  Java_com_github_stephengold_joltjni_GeometryRef_getPtr,
+  Java_com_github_stephengold_joltjni_GeometryRef_toRefC)
+
+#endif
+
 /*
  * Class:     com_github_stephengold_joltjni_GeometryRef
  * Method:    copy
