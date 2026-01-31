@@ -23,6 +23,7 @@ package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EStreamType;
 import com.github.stephengold.joltjni.readonly.ConstBodyCreationSettings;
+import com.github.stephengold.joltjni.readonly.ConstHairSettings;
 import com.github.stephengold.joltjni.readonly.ConstJoltPhysicsObject;
 import com.github.stephengold.joltjni.readonly.ConstSerializableObject;
 import com.github.stephengold.joltjni.readonly.ConstSoftBodyCreationSettings;
@@ -70,6 +71,9 @@ final public class ObjectStreamOut {
         } else if (writeObject instanceof ConstBodyCreationSettings) {
             result = sWriteBcsToFile(fileName, ordinal, objVa);
 
+        } else if (writeObject instanceof ConstHairSettings) {
+            result = sWriteHairSettingsToFile(fileName, ordinal, objVa);
+
         } else if (writeObject instanceof ConstSoftBodyCreationSettings) {
             result = sWriteSbcsToFile(fileName, ordinal, objVa);
 
@@ -112,6 +116,9 @@ final public class ObjectStreamOut {
         } else if (writeObject instanceof ConstBodyCreationSettings) {
             result = sWriteBcs(streamVa, ordinal, objVa);
 
+        } else if (writeObject instanceof ConstHairSettings) {
+            result = sWriteHairSettings(streamVa, ordinal, objVa);
+
         } else if (writeObject instanceof ConstSoftBodyCreationSettings) {
             result = sWriteSbcs(streamVa, ordinal, objVa);
 
@@ -139,6 +146,12 @@ final public class ObjectStreamOut {
             long streamVa, int ordinal, long settingsVa);
 
     native private static boolean sWriteBcsToFile(
+            String fileName, int ordinal, long settingsVa);
+
+    native private static boolean sWriteHairSettings(
+            long streamVa, int ordinal, long settingsVa);
+
+    native private static boolean sWriteHairSettingsToFile(
             String fileName, int ordinal, long settingsVa);
 
     native private static boolean sWritePhysicsScene(

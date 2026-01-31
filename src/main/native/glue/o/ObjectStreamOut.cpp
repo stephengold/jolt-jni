@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,7 @@ SOFTWARE.
  */
 #include "Jolt/Jolt.h"
 #include "Jolt/ObjectStream/ObjectStreamOut.h"
+#include "Jolt/Physics/Hair/HairSettings.h"
 #include "Jolt/Physics/PhysicsScene.h"
 #include "Jolt/Physics/Ragdoll/Ragdoll.h"
 #include "auto/com_github_stephengold_joltjni_ObjectStreamOut.h"
@@ -71,6 +72,22 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_s
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteBcsToFile
   BODYOF_SWRITE_TO_FILE(BodyCreationSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteHairSettings
+ * Signature: (JIJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteHairSettings
+  BODYOF_SWRITE_TO_STREAM(HairSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamOut
+ * Method:    sWriteHairSettingsToFile
+ * Signature: (Ljava/lang/String;IJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamOut_sWriteHairSettingsToFile
+  BODYOF_SWRITE_TO_FILE(HairSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamOut

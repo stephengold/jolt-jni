@@ -57,6 +57,8 @@ final public class ObjectStreamIn {
             result = sReadConstraintSettings(fileName, refVa);
         } else if (storeRef instanceof GroupFilterTableRef) {
             result = sReadGroupFilterTable(fileName, refVa);
+        } else if (storeRef instanceof HairSettingsRef) {
+            result = sReadHairSettings(fileName, refVa);
         } else if (storeRef instanceof PhysicsMaterialRef) {
             result = sReadPhysicsMaterial(fileName, refVa);
         } else if (storeRef instanceof PhysicsSceneRef) {
@@ -127,6 +129,23 @@ final public class ObjectStreamIn {
         long streamVa = stream.va();
         long refVa = filterRef.va();
         boolean result = sReadGroupFilterTableFromStream(streamVa, refVa);
+
+        return result;
+    }
+
+    /**
+     * Read a hair-settings object from the specified stream.
+     *
+     * @param stream the stream to read from (not {@code null})
+     * @param settingsRef where to store the reference to the de-serialized
+     * settings (not {@code null}, modified)
+     * @return {@code true} if successful, otherwise {@code false}
+     */
+    public static boolean sReadObject(
+            StringStream stream, HairSettingsRef settingsRef) {
+        long streamVa = stream.va();
+        long refVa = settingsRef.va();
+        boolean result = sReadHairSettingsFromStream(streamVa, refVa);
 
         return result;
     }
@@ -304,6 +323,12 @@ final public class ObjectStreamIn {
             String fileName, long refVa);
 
     native private static boolean sReadGroupFilterTableFromStream(
+            long streamVa, long refVa);
+
+    native private static boolean sReadHairSettings(
+            String fileName, long refVa);
+
+    native private static boolean sReadHairSettingsFromStream(
             long streamVa, long refVa);
 
     native private static boolean sReadPhysicsMaterial(

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,7 @@ SOFTWARE.
 #include "Jolt/ObjectStream/ObjectStreamIn.h"
 #include "Jolt/Physics/Collision/GroupFilterTable.h"
 #include "Jolt/Physics/Constraints/Constraint.h"
+#include "Jolt/Physics/Hair/HairSettings.h"
 #include "Jolt/Physics/PhysicsScene.h"
 #include "Jolt/Physics/Ragdoll/Ragdoll.h"
 #include "Jolt/Physics/Vehicle/VehicleController.h"
@@ -125,6 +126,22 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sR
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadGroupFilterTableFromStream
   BODYOF_SREAD_FROM_STREAM_REF(GroupFilterTable)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadHairSettings
+ * Signature: (Ljava/lang/String;J)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadHairSettingsRef
+  BODYOF_SREAD_FROM_FILE_REF(HairSettings)
+
+/*
+ * Class:     com_github_stephengold_joltjni_ObjectStreamIn
+ * Method:    sReadHairSettingsFromStream
+ * Signature: (JJ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_ObjectStreamIn_sReadHairSettingsFromStream
+  BODYOF_SREAD_FROM_STREAM_REF(HairSettings)
 
 /*
  * Class:     com_github_stephengold_joltjni_ObjectStreamIn
