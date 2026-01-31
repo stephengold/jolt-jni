@@ -382,7 +382,7 @@ final public class Jolt {
 
     /**
      * Test whether the native library implements extra logging to help debug
-     * determinism issues. (native macro: JPH_DET_LOG)
+     * determinism issues. (native macro: JPH_ENABLE_DETERMINISM_LOG)
      *
      * @return {@code true} if implemented, otherwise {@code false}
      */

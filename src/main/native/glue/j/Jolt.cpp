@@ -249,7 +249,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsDe
  */
 JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsDeterminismLog
   (JNIEnv *, jclass) {
-#ifdef JPH_DET_LOG
+#ifdef JPH_ENABLE_DETERMINISM_LOG
     return JNI_TRUE;
 #else
     return JNI_FALSE;
