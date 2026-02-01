@@ -84,8 +84,8 @@ final public class ComputeSystem extends NonCopyable implements RefTarget {
     }
 
     /**
-     * Access the run-time type information of the current system. (native
-     * function: GetRTTI)
+     * Access the run-time type information of the current compute system.
+     * (native function: GetRTTI)
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
@@ -98,7 +98,7 @@ final public class ComputeSystem extends NonCopyable implements RefTarget {
     }
 
     /**
-     * If the argument is a {@code ComputeSystemCPU}, register its shaders.
+     * If the argument is a {@code ComputeSystemCPU}, register its hair shaders.
      *
      * @param system the system to modify (not {@code null})
      */
@@ -111,7 +111,7 @@ final public class ComputeSystem extends NonCopyable implements RefTarget {
     }
 
     /**
-     * Instantiate a system from its virtual address.
+     * Instantiate a compute system from its virtual address.
      *
      * @param systemVa the virtual address of the native object, or zero
      * @return a new JVM object, or {@code null} if the argument was zero
