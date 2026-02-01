@@ -24,6 +24,7 @@ package testjoltjni.app.samples;
 import com.github.stephengold.joltjni.*;
 import com.github.stephengold.joltjni.enumerate.EPhysicsUpdateError;
 import com.github.stephengold.joltjni.std.OfStream;
+import java.nio.ByteBuffer;
 import testjoltjni.TestUtils;
 import testjoltjni.app.samples.broadphase.*;
 import testjoltjni.app.samples.character.*;
@@ -127,6 +128,12 @@ final public class SmokeTestAll {
                 ComputeSystem.hairRegisterShaders(system);
                 break;
 
+            case "ComputeSystemVKImpl":
+                // Add a loader for Vulkan compute shaders:
+                Loader vkLoader = makeLoader("/vk/com/github/stephengold");
+                system.setShaderLoader(vkLoader);
+                break;
+
             default:
                 throw new RuntimeException("typeName = " + typeName);
         }
@@ -141,6 +148,25 @@ final public class SmokeTestAll {
 
         // Update the test:
         test.SetComputeSystem(system, queue);
+    }
+
+    /**
+     * Create a custom loader that loads from the specified resource directory.
+     *
+     * @param resourcePath the path to the resource directory (not {@code null})
+     * @return a new loader
+     */
+    private static Loader makeLoader(String resourcePath) {
+        Loader result = new CustomLoader() {
+            @Override
+            public ByteBuffer loadShader(String shaderName) {
+                String path = resourcePath + "/" + shaderName;
+                ByteBuffer result = TestUtils.loadResourceAsBytes(path);
+                return result;
+            }
+        };
+
+        return result;
     }
 
     /**
