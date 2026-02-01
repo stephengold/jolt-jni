@@ -130,7 +130,7 @@ final public class ComputeSystem extends NonCopyable implements RefTarget {
      *
      * @param loader the loader to use (not {@code null})
      */
-    public void setShaderLoader(ShaderLoader loader) {
+    public void setShaderLoader(Loader loader) {
         long systemVa = va();
         long loaderVa = loader.va();
         setShaderLoader(systemVa, loaderVa);

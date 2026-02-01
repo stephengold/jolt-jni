@@ -24,16 +24,16 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
-#include "Jolt/Compute/ComputeSystem.h"
-#include "auto/com_github_stephengold_joltjni_ShaderLoader.h"
+#include "auto/com_github_stephengold_joltjni_Loader.h"
 #include "glue/glue.h"
+#include "glue/Loader.h"
 
 using namespace JPH;
 
 /*
- * Class:     com_github_stephengold_joltjni_ShaderLoader
+ * Class:     com_github_stephengold_joltjni_Loader
  * Method:    free
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ShaderLoader_free
-  BODYOF_FREE(ComputeSystem::ShaderLoader)
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Loader_free
+  BODYOF_FREE(Loader)

@@ -21,37 +21,39 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import java.nio.ByteBuffer;
+
 /**
- * Load compute shaders. (native type:
- * {@code function<bool(const char*,Array<uint8>&,String&)>})
+ * A customizable {@code Loader}.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class ShaderLoader extends JoltPhysicsObject {
+public class CustomLoader extends Loader {
     // *************************************************************************
     // constructors
 
     /**
-     * Instantiate a loader with no native object assigned.
+     * Instantiate a customizable loader.
      */
-    ShaderLoader() {
+    public CustomLoader() {
+        long loaderVa = create();
+        setVirtualAddressAsOwner(loaderVa);
     }
     // *************************************************************************
-    // new protected methods
+    // new methods exposed
 
     /**
-     * Assign a native object (assuming there's none already assigned) and
-     * designate the JVM object as the owner.
+     * Callback invoked (by native code) each time a load is requested. Meant to
+     * be overridden.
      *
-     * @param loaderVa the virtual address of the native object to assign (not
-     * zero)
+     * @param shaderName the name of the shader to load
+     * @return a new direct buffer, or {@code null} if unsuccessful
      */
-    final void setVirtualAddressAsOwner(long loaderVa) {
-        Runnable freeingAction = () -> free(loaderVa);
-        setVirtualAddress(loaderVa, freeingAction);
+    public ByteBuffer loadShader(String shaderName) {
+        return null;
     }
     // *************************************************************************
     // native private methods
 
-    native private static void free(long loaderVa);
+    native private long create();
 }

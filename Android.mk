@@ -129,9 +129,9 @@ $(N)/glue/cu/CustomCollideShapeBodyCollector.cpp \
 $(N)/glue/cu/CustomCollideShapeCollector.cpp \
 $(N)/glue/cu/CustomContactListener.cpp \
 $(N)/glue/cu/CustomDebugRendererSimple.cpp \
+$(N)/glue/cu/CustomLoader.cpp \
 $(N)/glue/cu/CustomPhysicsStepListener.cpp \
 $(N)/glue/cu/CustomRayCastBodyCollector.cpp \
-$(N)/glue/cu/CustomShaderLoader.cpp \
 $(N)/glue/cu/CustomSoftBodyContactListener.cpp \
 $(N)/glue/d/DebugRenderer.cpp \
 $(N)/glue/d/DebugRendererRecorder.cpp \
@@ -185,6 +185,7 @@ $(N)/glue/j/JobSystemThreadPool.cpp \
 $(N)/glue/j/Joint.cpp \
 $(N)/glue/j/JointState.cpp \
 $(N)/glue/j/Jolt.cpp \
+$(N)/glue/l/Loader.cpp \
 $(N)/glue/l/Lod.cpp \
 $(N)/glue/m/MassProperties.cpp \
 $(N)/glue/m/Mat44Array.cpp \
@@ -256,7 +257,6 @@ $(N)/glue/r/RRayCast.cpp \
 $(N)/glue/r/RShapeCast.cpp \
 $(N)/glue/r/RStrand.cpp \
 $(N)/glue/r/Rtti.cpp \
-$(N)/glue/sh/ShaderLoader.cpp \
 $(N)/glue/sh/ShapeCastResult.cpp \
 $(N)/glue/sh/ShapeCastSettings.cpp \
 $(N)/glue/sh/Shape.cpp \

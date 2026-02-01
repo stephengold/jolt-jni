@@ -121,11 +121,8 @@ final public class SmokeTestAll {
         // Add an appropriate shader loader:
         Rtti rtti = system.getRtti();
         String typeName = rtti.getName();
-        ShaderLoader loader;
         switch (typeName) {
             case "ComputeSystemCPU":
-                // Create a dummy loader:
-                loader = new CustomShaderLoader();
                 // Register the shaders:
                 ComputeSystem.hairRegisterShaders(system);
                 break;
@@ -133,7 +130,6 @@ final public class SmokeTestAll {
             default:
                 throw new RuntimeException("typeName = " + typeName);
         }
-        system.setShaderLoader(loader);
 
         // Create a compute queue:
         ComputeQueueResult queueResult = system.createComputeQueue();

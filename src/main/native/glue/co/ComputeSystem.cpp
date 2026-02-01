@@ -30,6 +30,7 @@ SOFTWARE.
 #include "auto/com_github_stephengold_joltjni_ComputeSystem.h"
 #include "auto/com_github_stephengold_joltjni_ComputeSystemRef.h"
 #include "glue/glue.h"
+#include "glue/Loader.h"
 
 using namespace JPH;
 
@@ -142,9 +143,12 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_ComputeSystem_setShad
   (JNIEnv *, jclass, jlong systemVa, jlong loaderVa) {
     ComputeSystem * const pSystem
             = reinterpret_cast<ComputeSystem *> (systemVa);
-    ComputeSystem::ShaderLoader * const pLoader
-            = reinterpret_cast<ComputeSystem::ShaderLoader *> (loaderVa);
-    pSystem->mShaderLoader = *pLoader;
+    Loader * const pLoader = reinterpret_cast<Loader *> (loaderVa);
+    pSystem->mShaderLoader =
+            [pLoader](const char *inN, Array<uint8> &outD, String &outE) {
+                bool result = pLoader->loadShader(inN, outD, outE);
+                return result;
+            };
 }
 
 /*

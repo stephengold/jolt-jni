@@ -21,43 +21,39 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import java.nio.ByteBuffer;
-
 /**
- * A customizable {@code ShaderLoader}.
+ * Load resources such as compute shaders.
+ * <p>
+ * This class substitutes for the native {@code ShaderLoader}, which is
+ * unfortunately a lambda type and cannot be extended.
  *
  * @author Stephen Gold sgold@sonic.net
  */
-public class CustomShaderLoader extends ShaderLoader {
+public class Loader extends NonCopyable {
     // *************************************************************************
     // constructors
 
     /**
-     * Instantiate a customizable loader.
+     * Instantiate a loader with no native object assigned.
      */
-    public CustomShaderLoader() {
-        long loaderVa = create();
-        setVirtualAddressAsOwner(loaderVa);
+    Loader() {
     }
     // *************************************************************************
-    // new methods exposed
+    // new protected methods
 
     /**
-     * Callback invoked (by native code) each time a load is requested. Meant to
-     * be overridden.
+     * Assign a native object (assuming there's none already assigned) and
+     * designate the JVM object as the owner.
      *
-     * @param shaderName the name of the shader to load
-     * @param data storage for a reference to the loaded bytes (not
-     * {@code null}, length&ge;1)
-     * @param error storage for an error message (not {@code null}, length&ge;1)
-     * @return {@code true} if successful, otherwise {@code false}
+     * @param loaderVa the virtual address of the native object to assign (not
+     * zero)
      */
-    public boolean onLoadRequest(
-            String shaderName, ByteBuffer[] data, String[] error) {
-        return false;
+    final void setVirtualAddressAsOwner(long loaderVa) {
+        Runnable freeingAction = () -> free(loaderVa);
+        setVirtualAddress(loaderVa, freeingAction);
     }
     // *************************************************************************
     // native private methods
 
-    native private long create();
+    native private static void free(long loaderVa);
 }

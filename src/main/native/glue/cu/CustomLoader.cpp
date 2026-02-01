@@ -24,20 +24,20 @@ SOFTWARE.
  * Author: Stephen Gold
  */
 #include "Jolt/Jolt.h"
-#include "Jolt/Compute/ComputeSystem.h"
-#include "auto/com_github_stephengold_joltjni_CustomShaderLoader.h"
+#include "auto/com_github_stephengold_joltjni_CustomLoader.h"
 #include "glue/glue.h"
+#include "glue/Loader.h"
 
 using namespace JPH;
 
-class CustomShaderLoader : ComputeSystem::ShaderLoader {
+class CustomLoader : Loader {
     JavaVM *mpVM;
     jclass mByteBufferClass, mStringClass;
-    jmethodID mStepMethodId;
+    jmethodID mLoadShaderMethodId;
     jobject mJavaObject;
 
 public:
-    CustomShaderLoader(JNIEnv *pEnv, jobject javaObject) {
+    CustomLoader(JNIEnv *pEnv, jobject javaObject) {
         pEnv->GetJavaVM(&mpVM);
 
         mJavaObject = pEnv->NewGlobalRef(javaObject);
@@ -52,19 +52,17 @@ public:
         EXCEPTION_CHECK(pEnv)
 
         const jclass clss = pEnv->FindClass(
-                "com/github/stephengold/joltjni/CustomShaderLoader");
+                "com/github/stephengold/joltjni/CustomLoader");
         JPH_ASSERT(clss);
         EXCEPTION_CHECK(pEnv)
 
-        mStepMethodId = pEnv->GetMethodID(clss, "onLoadRequest",
-                "(Ljava/lang/String;[Ljava/nio/ByteBuffer;[Ljava/lang/String;)Z"
-                );
-        JPH_ASSERT(mStepMethodId);
+        mLoadShaderMethodId = pEnv->GetMethodID(clss, "loadShader",
+                "(Ljava/lang/String;)Ljava/nio/ByteBuffer;");
+        JPH_ASSERT(mLoadShaderMethodId);
         EXCEPTION_CHECK(pEnv)
     }
 
-    bool operator()(
-            const char *inName, Array<uint8> &outData, String &outError) {
+    bool loadShader(const char *inName, Array<uint8> &outData, String &outError) const override {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -73,50 +71,28 @@ public:
         JPH_ASSERT(name);
         EXCEPTION_CHECK(pAttachEnv)
 
-        jobjectArray data
-                = pAttachEnv->NewObjectArray(1, mByteBufferClass, NULL);
-        JPH_ASSERT(data);
+        const jobject data = pAttachEnv->CallObjectMethod(
+                mJavaObject, mLoadShaderMethodId, name);
         EXCEPTION_CHECK(pAttachEnv)
 
-        jobjectArray message
-                 = pAttachEnv->NewObjectArray(1, mStringClass, NULL);
-        JPH_ASSERT(message);
-        EXCEPTION_CHECK(pAttachEnv)
-
-        const jboolean success = pAttachEnv->CallBooleanMethod(
-                mJavaObject, mStepMethodId, name, data, message);
-        EXCEPTION_CHECK(pAttachEnv)
-
-        jobject data0 = pAttachEnv->GetObjectArrayElement(data, 0);
-        JPH_ASSERT(data0);
-        EXCEPTION_CHECK(pAttachEnv)
-        jbyte * bytes = (jbyte *) pAttachEnv->GetDirectBufferAddress(data0);
-        JPH_ASSERT(bytes);
-        jlong numBytes = pAttachEnv->GetDirectBufferCapacity(data0);
-        JPH_ASSERT(numBytes >= 0);
+        bool success = (data != 0);
         outData.clear();
-        for (int i = 0; i < numBytes; ++i) {
-            outData.push_back(bytes[i]);
+        if (success) {
+            jbyte * bytes = (jbyte *) pAttachEnv->GetDirectBufferAddress(data);
+            JPH_ASSERT(bytes);
+            jlong numBytes = pAttachEnv->GetDirectBufferCapacity(data);
+            JPH_ASSERT(numBytes >= 0);
+            for (int i = 0; i < numBytes; ++i) {
+                outData.push_back(bytes[i]);
+            }
         }
-
-        jstring message0
-                = (jstring) pAttachEnv->GetObjectArrayElement(message, 0);
-        JPH_ASSERT(message0);
-        EXCEPTION_CHECK(pAttachEnv)
-        jboolean isCopy;
-        const jchar * chars = pAttachEnv->GetStringChars(message0, &isCopy);
-        JPH_ASSERT(chars);
-        jsize numChars = pAttachEnv->GetStringLength(message0);
         outError.clear();
-        for (int i = 0; i < numChars; ++i) {
-             outError.push_back(chars[i]);
-        }
 
         mpVM->DetachCurrentThread();
         return success;
     }
 
-    ~CustomShaderLoader() {
+    ~CustomLoader() {
         JNIEnv *pAttachEnv;
         jint retCode = ATTACH_CURRENT_THREAD(mpVM, &pAttachEnv);
         JPH_ASSERT(retCode == JNI_OK);
@@ -128,22 +104,13 @@ public:
 };
 
 /*
- * Class:     com_github_stephengold_joltjni_CustomShaderLoader
+ * Class:     com_github_stephengold_joltjni_CustomLoader
  * Method:    create
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CustomShaderLoader_create
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_CustomLoader_create
   (JNIEnv *pEnv, jobject javaObject) {
-    CustomShaderLoader * const pResult
-            = new CustomShaderLoader(pEnv, javaObject);
-    TRACE_NEW("CustomShaderLoader", pResult)
+    CustomLoader * const pResult = new CustomLoader(pEnv, javaObject);
+    TRACE_NEW("CustomLoader", pResult)
     return reinterpret_cast<jlong> (pResult);
 }
-
-/*
- * Class:     com_github_stephengold_joltjni_CustomShaderLoader
- * Method:    free
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_CustomShaderLoader_free
-  BODYOF_FREE(CustomShaderLoader)
