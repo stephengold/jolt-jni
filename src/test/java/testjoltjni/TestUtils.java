@@ -651,6 +651,71 @@ final public class TestUtils {
     }
 
     /**
+     * Load raw bytes from the named classpath resource.
+     *
+     * @param resourceName the name of the resource (not {@code null})
+     * @return a new direct buffer
+     */
+    public static ByteBuffer loadResourceAsBytes(String resourceName) {
+        // Read the resource to determine its size in bytes:
+        InputStream inputStream
+                = TestUtils.class.getResourceAsStream(resourceName);
+        if (inputStream == null) {
+            String q = MyString.quote(resourceName);
+            throw new RuntimeException("resource not found:  " + q);
+        }
+        int totalBytes = 0;
+        byte[] tmpArray = new byte[4096];
+        try {
+            while (true) {
+                int numBytesRead = inputStream.read(tmpArray);
+                if (numBytesRead < 0) {
+                    break;
+                }
+                totalBytes += numBytesRead;
+            }
+            inputStream.close();
+
+        } catch (IOException exception) {
+            String q = MyString.quote(resourceName);
+            throw new RuntimeException("failed to read resource " + q);
+        }
+        ByteBuffer result = Jolt.newDirectByteBuffer(totalBytes);
+
+        // Read the resource again to fill the buffer with data:
+        inputStream = TestUtils.class.getResourceAsStream(resourceName);
+        if (inputStream == null) {
+            String q = MyString.quote(resourceName);
+            throw new RuntimeException("resource not found:  " + q);
+        }
+        try {
+            while (true) {
+                int numBytesRead = inputStream.read(tmpArray);
+                if (numBytesRead < 0) {
+                    break;
+
+                } else if (numBytesRead == tmpArray.length) {
+                    result.put(tmpArray);
+
+                } else {
+                    for (int i = 0; i < numBytesRead; ++i) {
+                        byte b = tmpArray[i];
+                        result.put(b);
+                    }
+                }
+            }
+            inputStream.close();
+
+        } catch (IOException exception) {
+            String q = MyString.quote(resourceName);
+            throw new RuntimeException("failed to read resource " + q);
+        }
+
+        result.flip();
+        return result;
+    }
+
+    /**
      * Execute a test written in native code.
      *
      * @param args command-line arguments
