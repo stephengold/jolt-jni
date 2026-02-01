@@ -331,14 +331,14 @@ jobs:
           ./gradlew -Ptarget=Linux_LoongArch64 assemble \
             --console=plain
 
-  Java24-Linux:
+  Java25-Linux:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
-          java-version: 24
+          java-version: 25
       - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
       - uses: gradle/actions/wrapper-validation@v5
