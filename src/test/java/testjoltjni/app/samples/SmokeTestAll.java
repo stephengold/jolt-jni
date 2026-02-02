@@ -127,12 +127,12 @@ final public class SmokeTestAll {
 
         switch (systemName) {
             case "ComputeSystemCPU":
-                // Register the shaders:
+                // Register CPU compute shaders:
                 ComputeSystem.hairRegisterShaders(computeSystem);
                 break;
 
             case "ComputeSystemVKImpl":
-                // Add a loader for Vulkan compute shaders:
+                // Assign a loader for Vulkan compute shaders:
                 Loader vkLoader = makeLoader("/vk/com/github/stephengold");
                 computeSystem.setShaderLoader(vkLoader);
                 break;
@@ -141,7 +141,7 @@ final public class SmokeTestAll {
                 throw new RuntimeException("typeName = " + systemName);
         }
 
-        // Create a compute queue:
+        // All tests share a single ComputeQueue:
         ComputeQueueResult queueResult = computeSystem.createComputeQueue();
         assert !queueResult.hasError();
         ComputeQueueRef queueRef = queueResult.get();
@@ -194,7 +194,7 @@ final public class SmokeTestAll {
     /**
      * Invoke key methods of the specified Test to see whether they crash.
      *
-     * @param test the Test instance to use (not {@code null})
+     * @param test the Test object to use (not {@code null})
      */
     static private void smokeTest(Test test) {
         smokeTest(test, defaultNumSteps);
@@ -203,7 +203,7 @@ final public class SmokeTestAll {
     /**
      * Invoke key methods of the specified Test to see whether they crash.
      *
-     * @param test the Test instance to use (not {@code null})
+     * @param test the Test object to use (not {@code null})
      * @param numSteps the number of physics steps to simulate (&ge;0,
      * default=defaultNumSteps)
      */
