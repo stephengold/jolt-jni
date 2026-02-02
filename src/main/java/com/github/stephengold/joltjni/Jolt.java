@@ -467,6 +467,69 @@ final public class Jolt {
     }
 
     /**
+     * Load raw bytes from the named classpath resource.
+     *
+     * @param resourceName the name of the resource (not {@code null})
+     * @return a new direct buffer
+     */
+    public static ByteBuffer loadResourceAsBytes(String resourceName) {
+        // Read the resource to determine its size in bytes:
+        InputStream inputStream
+                = Jolt.class.getResourceAsStream(resourceName);
+        if (inputStream == null) {
+            throw new RuntimeException("resource not found:  " + resourceName);
+        }
+        int totalBytes = 0;
+        byte[] tmpArray = new byte[4096];
+        try {
+            while (true) {
+                int numBytesRead = inputStream.read(tmpArray);
+                if (numBytesRead < 0) {
+                    break;
+                }
+                totalBytes += numBytesRead;
+            }
+            inputStream.close();
+
+        } catch (IOException exception) {
+            throw new RuntimeException(
+                    "failed to read resource " + resourceName);
+        }
+        ByteBuffer result = Jolt.newDirectByteBuffer(totalBytes);
+
+        // Read the resource again to fill the buffer with data:
+        inputStream = Jolt.class.getResourceAsStream(resourceName);
+        if (inputStream == null) {
+            throw new RuntimeException("resource not found:  " + resourceName);
+        }
+        try {
+            while (true) {
+                int numBytesRead = inputStream.read(tmpArray);
+                if (numBytesRead < 0) {
+                    break;
+
+                } else if (numBytesRead == tmpArray.length) {
+                    result.put(tmpArray);
+
+                } else {
+                    for (int i = 0; i < numBytesRead; ++i) {
+                        byte b = tmpArray[i];
+                        result.put(b);
+                    }
+                }
+            }
+            inputStream.close();
+
+        } catch (IOException exception) {
+            throw new RuntimeException(
+                    "failed to read resource " + resourceName);
+        }
+
+        result.flip();
+        return result;
+    }
+
+    /**
      * Create a direct {@code ByteBuffer} with native byte order and the
      * specified capacity.
      *

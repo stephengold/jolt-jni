@@ -159,7 +159,7 @@ final public class SmokeTestAll {
             @Override
             public ByteBuffer loadShader(String shaderName) {
                 String path = resourcePath + "/" + shaderName;
-                ByteBuffer result = TestUtils.loadResourceAsBytes(path);
+                ByteBuffer result = Jolt.loadResourceAsBytes(path);
                 return result;
             }
         };
