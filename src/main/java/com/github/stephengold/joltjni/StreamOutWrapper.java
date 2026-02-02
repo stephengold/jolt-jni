@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,13 @@ import com.github.stephengold.joltjni.std.StringStream;
  */
 public class StreamOutWrapper extends StreamOut {
     // *************************************************************************
+    // fields
+
+    /**
+     * protect the wrapped stream from garbage collection
+     */
+    private JoltPhysicsObject stream;
+    // *************************************************************************
     // constructors
 
     /**
@@ -39,6 +46,7 @@ public class StreamOutWrapper extends StreamOut {
      * @param data the underlying stream (not null)
      */
     public StreamOutWrapper(OfStream data) {
+        this.stream = data;
         long dataVa = data.va();
         long streamVa = createFromOfStream(dataVa);
         setVirtualAddressAsOwner(streamVa);
@@ -50,6 +58,7 @@ public class StreamOutWrapper extends StreamOut {
      * @param data the underlying stream (not null)
      */
     public StreamOutWrapper(StringStream data) {
+        this.stream = data;
         long dataVa = data.va();
         long streamVa = createFromStringStream(dataVa);
         setVirtualAddressAsOwner(streamVa);

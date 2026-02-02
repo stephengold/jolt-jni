@@ -31,6 +31,13 @@ import java.nio.FloatBuffer;
  */
 final public class StreamInWrapper extends StreamIn {
     // *************************************************************************
+    // fields
+
+    /**
+     * protect the wrapped stream from garbage collection
+     */
+    private JoltPhysicsObject stream;
+    // *************************************************************************
     // constructors
 
     /**
@@ -49,6 +56,7 @@ final public class StreamInWrapper extends StreamIn {
      * @param data the underlying stream (not {@code null})
      */
     public StreamInWrapper(StringStream data) {
+        this.stream = data;
         long dataVa = data.va();
         long streamVa = createFromStringStream(dataVa);
         setVirtualAddressAsOwner(streamVa);

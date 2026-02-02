@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,13 @@ package com.github.stephengold.joltjni;
  */
 public class DebugRendererRecorder extends DebugRenderer {
     // *************************************************************************
+    // fields
+
+    /**
+     * protect the stream from garbage collection
+     */
+    private StreamOut stream;
+    // *************************************************************************
     // constructors
 
     /**
@@ -37,6 +44,7 @@ public class DebugRendererRecorder extends DebugRenderer {
      */
     public DebugRendererRecorder(StreamOut stream) {
         assert Jolt.implementsDebugRendering();
+        this.stream = stream;
         long streamVa = stream.va();
         long recorderVa = createDebugRendererRecorder(streamVa);
         setVirtualAddressAsOwner(recorderVa);
