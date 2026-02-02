@@ -70,6 +70,20 @@ final public class ComputeSystemRef extends Ref {
     }
 
     /**
+     * Access the run-time type information of the current compute system.
+     * (native function: GetRTTI)
+     *
+     * @return a new JVM object with the pre-existing native object assigned
+     */
+    public Rtti getRtti() {
+        long systemRa = targetVa();
+        long resultVa = ComputeSystem.getRtti(systemRa);
+        Rtti result = new Rtti(resultVa);
+
+        return result;
+    }
+
+    /**
      * Return the address of the native {@code ComputeSystem}. No objects are
      * affected.
      *

@@ -185,7 +185,7 @@ final public class ComputeSystem extends NonCopyable implements RefTarget {
 
     native private static int getRefCount(long systemVa);
 
-    native private static long getRtti(long systemVa);
+    native static long getRtti(long systemVa);
 
     native private static void hairRegisterShaders(long systemVa);
 
