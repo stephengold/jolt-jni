@@ -58,9 +58,13 @@ final public class SmokeTestAll {
     // fields
 
     /**
-     * result from creating the {@code ComputSystem}
+     * compute queue shared by all test objects
      */
-    private static ComputeSystemResult systemResult;
+    private static ComputeQueue queue;
+    /**
+     * compute system shared by all test objects
+     */
+    private static ComputeSystem computeSystem;
     /**
      * renderer shared by all test objects
      */
@@ -85,20 +89,7 @@ final public class SmokeTestAll {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
         System.out.println(Jolt.getConfigurationString());
-        System.out.println();
-        assert Jolt.implementsDebugRendering();
-
-        String fileName = "SmokeTestAll.jor";
-        int mode = StreamOutWrapper.out()
-                | StreamOutWrapper.binary() | StreamOutWrapper.trunc();
-        OfStream ofStream = new OfStream(fileName, mode);
-        StreamOut streamOut = new StreamOutWrapper(ofStream);
-        renderer = new DebugRendererRecorder(streamOut);
-
-        systemResult = ComputeSystem.createComputeSystemCpu();
-
-        int numBytes = 1 << 24; // 16 MiB
-        tempAllocator = new TempAllocatorImpl(numBytes);
+        createSharedObjects();
 
         smokeTestAll();
     }
@@ -106,48 +97,55 @@ final public class SmokeTestAll {
     // private methods
 
     /**
-     * Install a compute system and queue.
-     *
-     * @param system the system result to install (not {@code null})
-     * @param test the test instance to install it on (not {@code null})
+     * Allocate and initialize the shared DebugRenderer, TempAllocator,
+     * ComputeSystem, and ComputeQueue.
      */
-    static private void installComputeSystem(
-            ComputeSystemResult systemResult, Test test) {
-        if (systemResult.hasError()) {
-            test.FatalError(systemResult.getError());
-        }
-        ComputeSystemRef ref = systemResult.get();
-        ComputeSystem system = ref.getPtr();
+    private static void createSharedObjects() {
+        // All tests share a single DebugRenderer:
+        assert Jolt.implementsDebugRendering();
+        String fileName = "SmokeTestAll.jor";
+        int mode = StreamOutWrapper.out()
+                | StreamOutWrapper.binary() | StreamOutWrapper.trunc();
+        OfStream ofStream = new OfStream(fileName, mode);
+        StreamOut streamOut = new StreamOutWrapper(ofStream);
+        renderer = new DebugRendererRecorder(streamOut);
 
-        // Add an appropriate shader loader:
-        Rtti rtti = system.getRtti();
-        String typeName = rtti.getName();
-        switch (typeName) {
+        // All tests share a single TempAllocator:
+        int numBytes = 1 << 24; // 16 MiB
+        tempAllocator = new TempAllocatorImpl(numBytes);
+
+        // All tests share a single ComputeSystem:
+        ComputeSystemResult csResult = ComputeSystem.createComputeSystem();
+        if (csResult.hasError()) {
+            csResult = ComputeSystem.createComputeSystemCpu();
+            assert !csResult.hasError();
+        }
+        computeSystem = csResult.get().getPtr();
+        Rtti rtti = computeSystem.getRtti();
+        String systemName = rtti.getName();
+        System.out.printf(" using a %s compute server%n%n", systemName);
+
+        switch (systemName) {
             case "ComputeSystemCPU":
                 // Register the shaders:
-                ComputeSystem.hairRegisterShaders(system);
+                ComputeSystem.hairRegisterShaders(computeSystem);
                 break;
 
             case "ComputeSystemVKImpl":
                 // Add a loader for Vulkan compute shaders:
                 Loader vkLoader = makeLoader("/vk/com/github/stephengold");
-                system.setShaderLoader(vkLoader);
+                computeSystem.setShaderLoader(vkLoader);
                 break;
 
             default:
-                throw new RuntimeException("typeName = " + typeName);
+                throw new RuntimeException("typeName = " + systemName);
         }
 
         // Create a compute queue:
-        ComputeQueueResult queueResult = system.createComputeQueue();
-        if (queueResult.hasError()) {
-            test.FatalError(queueResult.getError());
-        }
+        ComputeQueueResult queueResult = computeSystem.createComputeQueue();
+        assert !queueResult.hasError();
         ComputeQueueRef queueRef = queueResult.get();
-        ComputeQueue queue = queueRef.getPtr();
-
-        // Update the test:
-        test.SetComputeSystem(system, queue);
+        queue = queueRef.getPtr();
     }
 
     /**
@@ -220,7 +218,7 @@ final public class SmokeTestAll {
 
         test.SetDebugRenderer(renderer);
         test.SetTempAllocator(tempAllocator);
-        installComputeSystem(systemResult, test);
+        test.SetComputeSystem(computeSystem, queue);
 
         // Create new job/physics systems for each test:
         int numThreads = -1; // autodetect
