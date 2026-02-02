@@ -14,8 +14,6 @@ jobs:
           distribution: 'zulu'
           java-version: 11
       - uses: actions/checkout@v6
-      - run: sudo apt-get update
-      - run: sudo apt install vulkan-sdk
       - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64 -Ptool=gcc -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
@@ -37,8 +35,6 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v6
-      - run: sudo apt-get update
-      - run: sudo apt install vulkan-sdk
       - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Linux64 runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
@@ -69,8 +65,6 @@ jobs:
           distribution: 'zulu'
           java-version: 21
       - uses: actions/checkout@v6
-      - run: sudo apt-get update
-      - run: sudo apt install vulkan-sdk
       - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Linux64_fma runSmokeTestAll -x checkstyleMain -x checkstyleTest build install
         if: "!startsWith(github.ref, 'refs/tags/')"
@@ -264,7 +258,6 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt install g++-9-arm-linux-gnueabihf
       - run: arm-linux-gnueabihf-g++-9 --version
-      - run: sudo apt install vulkan-sdk
       - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Linux_ARM32hf install
         if: "!startsWith(github.ref, 'refs/tags/')"
@@ -298,7 +291,6 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt install g++-10-aarch64-linux-gnu
       - run: aarch64-linux-gnu-g++-10 --version
-      - run: sudo apt install vulkan-sdk
       - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Linux_ARM64 assemble
         if: "!startsWith(github.ref, 'refs/tags/')"
@@ -332,7 +324,6 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt install g++-13-loongarch64-linux-gnu
       - run: loongarch64-linux-gnu-g++-13 --version
-      - run: sudo apt install vulkan-sdk
       - uses: gradle/actions/setup-gradle@v5
       - name: gradlew -Ptarget=Linux_LoongArch64 assemble
         if: "!startsWith(github.ref, 'refs/tags/')"
@@ -349,8 +340,6 @@ jobs:
           distribution: 'zulu'
           java-version: 25
       - uses: actions/checkout@v6
-      - run: sudo apt-get update
-      - run: sudo apt install vulkan-sdk
       - uses: gradle/actions/setup-gradle@v5
       - uses: gradle/actions/wrapper-validation@v5
       - name: gradlew -Pbt=Release -Pflavor=Sp -Ptarget=Linux64 build install
