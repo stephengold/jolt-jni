@@ -270,6 +270,11 @@ model {
                     } else {
                         buildable = false
                     }
+
+                    if (project.hasProperty('useVK')) {
+                        cppCompiler.define 'JPH_USE_VK'
+                        linker.args '-lvulkan'
+                    }
                 }
 
                 if (buildable) {
@@ -462,6 +467,9 @@ jar {
     archiveBaseName = baseName
     doLast {
         println "built using Java ${JavaVersion.current()} (${System.getProperty("java.vendor")})"
+    }
+    if (!project.hasProperty('useVK')) {
+        exclude('**/*.spv')
     }
     manifest {
         attributes 'Created-By': "${JavaVersion.current()} (${System.getProperty("java.vendor")})"
