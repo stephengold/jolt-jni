@@ -264,7 +264,9 @@ model {
                         cppCompiler.args '-I', "$javaHome/include/linux"
                         cppCompiler.args '-fPIC'
                         cppCompiler.args '-fvisibility=hidden'
+                        cppCompiler.define 'JPH_USE_VK'
                         linker.args '-fvisibility=hidden'
+                        linker.args '-lvulkan'
                     } else if (os == 'windows') {
                         cppCompiler.args '-I', "$javaHome/include/win32"
                     } else {
