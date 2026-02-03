@@ -20,6 +20,7 @@ jobs:
           vulkan-components: Vulkan-Headers, Vulkan-Loader
           vulkan-query-version: 1.4.335.0
           vulkan-use-cache: true
+      - run: tree $VULKAN_SDK
       - name: gradlew -Ptarget=Linux64_fma -PuseVK=yes -x checkstyleMain -x checkstyleTest build
         run: |
           ./gradlew -Ptarget=Linux64_fma -PuseVK=yes -x checkstyleMain -x checkstyleTest build \
