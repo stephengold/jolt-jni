@@ -37,8 +37,8 @@ tasks.withType(CppCompile).configureEach {
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
 
+String vulkanSdk
 if (project.hasProperty('useVK')) {
-    String vulkanSdk
     if (project.hasProperty('vulkanSdk')) {
         vulkanSdk = project.getProperty('vulkanSdk')
     } else {
