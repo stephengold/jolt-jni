@@ -88,7 +88,15 @@ final public class SmokeTestAll {
     public static void main(String... arguments) {
         TestUtils.loadNativeLibrary();
         TestUtils.initializeNativeLibrary();
+
         System.out.println(Jolt.getConfigurationString());
+        System.out.print(" built-in compute systems:");
+        System.out.print(Jolt.implementsComputeCpu() ? " CPU" : "");
+        System.out.print(Jolt.implementsComputeDx12() ? " DX12" : "");
+        System.out.print(Jolt.implementsComputeMtl() ? " MTL" : "");
+        System.out.print(Jolt.implementsComputeVk() ? " VK" : "");
+        System.out.println();
+
         createSharedObjects();
 
         smokeTestAll();

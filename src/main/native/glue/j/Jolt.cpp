@@ -230,6 +230,62 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_hashCombine__JJ
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    implementsComputeCpu
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsComputeCpu
+  (JNIEnv *, jclass) {
+#ifdef JPH_USE_CPU_COMPUTE
+    return JNI_TRUE;
+#else
+    return JNI_FALSE;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    implementsComputeDx12
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsComputeDx12
+  (JNIEnv *, jclass) {
+#ifdef JPH_USE_DX12
+    return JNI_TRUE;
+#else
+    return JNI_FALSE;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    implementsComputeMtl
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsComputeMtl
+  (JNIEnv *, jclass) {
+#ifdef JPH_USE_MTL
+    return JNI_TRUE;
+#else
+    return JNI_FALSE;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    implementsComputeVk
+ * Signature: ()Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsComputeVk
+  (JNIEnv *, jclass) {
+#ifdef JPH_USE_VK
+    return JNI_TRUE;
+#else
+    return JNI_FALSE;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    implementsDebugRendering
  * Signature: ()Z
  */
