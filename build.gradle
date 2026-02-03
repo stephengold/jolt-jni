@@ -13,7 +13,7 @@ plugins {
     alias(libs.plugins.download) // to retrieve files from URLs
 }
 
-// $artifact and $jjVersion are set in the gradle.properties file
+// $artifact, $jjVersion, and $useVK are set in the gradle.properties file
 // or by -P options on the Gradle command line.
 
 ext {
@@ -36,6 +36,16 @@ tasks.withType(CppCompile).configureEach {
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
+
+String vulkanSdk
+if (project.hasProperty('useVK')) {
+    if (project.hasProperty('vulkanSdk')) {
+        vulkanSdk = project.getProperty('vulkanSdk')
+    } else {
+        vulkanSdk = System.getenv('VULKAN_SDK') // read the environment variable
+    }
+    println 'vulkanSdk = ' + vulkanSdk
+}
 
 model {
     buildTypes {
@@ -272,8 +282,9 @@ model {
                     }
 
                     if (project.hasProperty('useVK')) {
+                        cppCompiler.args '-I', "$vulkanSdk/include"
                         cppCompiler.define 'JPH_USE_VK'
-                        linker.args '-lvulkan'
+                        linker.args '-L', "$vulkanSdk/lib", '-lvulkan'
                     }
                 }
 
