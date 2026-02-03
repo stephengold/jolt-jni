@@ -115,11 +115,9 @@ final public class SmokeTestAll {
         tempAllocator = new TempAllocatorImpl(numBytes);
 
         // All tests share a single ComputeSystem:
-        ComputeSystemResult csResult = ComputeSystem.createComputeSystem();
-        if (csResult.hasError()) {
-            csResult = ComputeSystem.createComputeSystemCpu();
-            assert !csResult.hasError();
-        }
+        ComputeSystemResult csResult = ComputeSystem.createComputeSystemCpu();
+        //ComputeSystemResult csResult = ComputeSystem.createComputeSystem();
+        assert !csResult.hasError();
         computeSystem = csResult.get().getPtr();
         Rtti rtti = computeSystem.getRtti();
         String systemName = rtti.getName();
