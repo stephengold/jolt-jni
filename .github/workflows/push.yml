@@ -24,3 +24,14 @@ jobs:
         run: |
           ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64_fma -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
             --console=plain
+      - if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: build-results
+          path: /home/runner/work/_temp/.gradle-actions/build-results
+      - if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: test-report
+          path: build/reports/tests/test
+
