@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -369,6 +369,18 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getMotionProper
   (JNIEnv *, jclass, jlong bodyVa) {
     const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
     const MotionProperties * const pResult = pBody->GetMotionProperties();
+    return reinterpret_cast<jlong> (pResult);
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Body
+ * Method:    getMotionPropertiesUnchecked
+ * Signature: (J)J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Body_getMotionPropertiesUnchecked
+  (JNIEnv *, jclass, jlong bodyVa) {
+    const Body * const pBody = reinterpret_cast<Body *> (bodyVa);
+    const MotionProperties * const pResult = pBody->GetMotionPropertiesUnchecked();
     return reinterpret_cast<jlong> (pResult);
 }
 

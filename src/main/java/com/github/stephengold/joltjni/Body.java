@@ -749,10 +749,10 @@ public class Body extends NonCopyable implements ConstBody {
     }
 
     /**
-     * Access the body's motion properties.
+     * Access the body's motion properties if it is dynamic or kinematic.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
-     * {@code null} if none
+     * {@code null} if the body is static
      */
     @Override
     public MotionProperties getMotionProperties() {
@@ -768,6 +768,28 @@ public class Body extends NonCopyable implements ConstBody {
             } else {
                 result = new MotionProperties(container, propertiesVa);
             }
+        }
+
+        return result;
+    }
+
+    /**
+     * Access the body's motion properties without checking whether the body is
+     * static. (native member: mMotionProperties)
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if none
+     */
+    @Override
+    public MotionProperties getMotionPropertiesUnchecked() {
+        long bodyVa = va();
+        long propertiesVa = getMotionPropertiesUnchecked(bodyVa);
+        MotionProperties result;
+        JoltPhysicsObject container = getContainingObject();
+        if (isSoftBody(bodyVa)) {
+            result = new SoftBodyMotionProperties(container, propertiesVa);
+        } else {
+            result = new MotionProperties(container, propertiesVa);
         }
 
         return result;
@@ -1165,6 +1187,8 @@ public class Body extends NonCopyable implements ConstBody {
             long bodyVa, FloatBuffer storeFloats);
 
     native private static long getMotionProperties(long bodyVa);
+
+    native private static long getMotionPropertiesUnchecked(long bodyVa);
 
     native private static int getMotionType(long bodyVa);
 

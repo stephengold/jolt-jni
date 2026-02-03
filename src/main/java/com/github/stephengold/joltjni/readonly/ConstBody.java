@@ -178,12 +178,21 @@ public interface ConstBody extends ConstJoltPhysicsObject {
     Vec3 getLinearVelocity();
 
     /**
-     * Access the body's motion properties.
+     * Access the body's motion properties if it is dynamic or kinematic.
+     *
+     * @return a new JVM object with the pre-existing native object assigned, or
+     * {@code null} if the body is static
+     */
+    ConstMotionProperties getMotionProperties();
+
+    /**
+     * Access the body's motion properties without checking whether the body is
+     * static.
      *
      * @return a new JVM object with the pre-existing native object assigned, or
      * {@code null} if none
      */
-    ConstMotionProperties getMotionProperties();
+    ConstMotionProperties getMotionPropertiesUnchecked();
 
     /**
      * Return the body's motion type. The body is unaffected.
