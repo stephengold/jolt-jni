@@ -2,6 +2,7 @@
 set -euo pipefail
 
 [[ $VULKAN_SDK ]]
+echo VULKAN_SDK = $VULKAN_SDK
 
 SRC=./src/main/native/Jolt/Shaders
 DEST=./src/main/resources/vk/com/github/stephengold
@@ -11,7 +12,7 @@ mkdir -p $DEST
 LIST=$(cd $SRC ; find -- *.hlsl -maxdepth 1 | awk '{sub(/.hlsl/,"");print}')
 for NAME in $LIST
 do
-    echo "Compiling $NAME.hlsl to $NAME.spv"
+    echo "  compiling $NAME.hlsl to $NAME.spv"
     "$VULKAN_SDK/bin/dxc" -E main -T cs_6_0 -I $SRC -WX -O3 -all_resources_bound \
             "$SRC/$NAME.hlsl" -spirv -fvk-use-dx-layout -Fo "$DEST/$NAME.spv"
 done
