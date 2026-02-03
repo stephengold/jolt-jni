@@ -396,11 +396,20 @@ public class Body extends NonCopyable implements ConstBody {
 
     /**
      * Alter the body's motion type.
+     * <p>
+     * Unless the body has motion properties, the new motion type must be
+     * {@code Static}. To create static bodies with motion properties, use
+     * {@code BodyCreationSettings.setAllowDynamicOrKinematic(true)}.
      *
      * @param motionType the desired value (not {@code null})
      */
     public void setMotionType(EMotionType motionType) {
         long bodyVa = va();
+        if (motionType != EMotionType.Static
+                && getMotionPropertiesUnchecked(bodyVa) == 0L) {
+            throw new IllegalStateException(
+                    "The body lacks motion properties.");
+        }
         int ordinal = motionType.ordinal();
         setMotionType(bodyVa, ordinal);
     }
