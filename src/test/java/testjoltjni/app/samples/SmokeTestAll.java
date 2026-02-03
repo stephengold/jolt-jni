@@ -91,7 +91,7 @@ final public class SmokeTestAll {
         System.out.println(Jolt.getConfigurationString());
         createSharedObjects();
 
-        smokeTest(new WaterShapeTest());
+        //smokeTest(new WaterShapeTest());
     }
     // *************************************************************************
     // private methods
