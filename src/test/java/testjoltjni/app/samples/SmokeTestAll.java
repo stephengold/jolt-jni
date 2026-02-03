@@ -129,15 +129,17 @@ final public class SmokeTestAll {
         computeSystem = csResult.get().getPtr();
         Rtti rtti = computeSystem.getRtti();
         String systemName = rtti.getName();
-        System.out.printf(" using a %s compute server%n%n", systemName);
+        systemName = systemName.replace("ComputeSystem", "");
+        systemName = systemName.replace("Impl", "");
+        System.out.printf("  using a %s compute system%n%n", systemName);
 
         switch (systemName) {
-            case "ComputeSystemCPU":
+            case "CPU":
                 // Register CPU compute shaders:
                 ComputeSystem.hairRegisterShaders(computeSystem);
                 break;
 
-            case "ComputeSystemVKImpl":
+            case "VK":
                 // Assign a loader for Vulkan compute shaders:
                 Loader vkLoader = makeLoader("/vk/com/github/stephengold");
                 computeSystem.setShaderLoader(vkLoader);
