@@ -483,7 +483,8 @@ final public class TestUtils {
     }
 
     /**
-     * Load some flavor of native library, preferably a Debug build.
+     * Load some flavor of the Jolt-JNI desktop native library, preferably a
+     * Debug build.
      * <p>
      * The search order is:
      * <ol>
@@ -619,7 +620,8 @@ final public class TestUtils {
     }
 
     /**
-     * Load some flavor of native library, preferably a Release build.
+     * Load some flavor of the Jolt-JNI desktop native library, preferably a
+     * Release build.
      * <p>
      * The search order is:
      * <ol>
@@ -684,7 +686,7 @@ final public class TestUtils {
      * <p>
      * This method assumes the VULKAN_SDK environment variable is set.
      *
-     * @param versionSuffix such as ".1" or ".1.4.341" (not {@code null}
+     * @param versionSuffix such as ".1" or ".1.4.341" (not {@code null})
      * @return {@code true} after successful load, otherwise {@code false}
      */
     public static boolean loadVulkanLibrary(String versionSuffix) {
@@ -698,7 +700,7 @@ final public class TestUtils {
             relativePath
                     = String.format("lib/libvulkan%s.dylib", versionSuffix);
         } else if (NativeVariant.Os.isWindows()) {
-            return false; // no dynamic library?
+            return false; // no DLL?
         } else {
             String osName = NativeVariant.OS_NAME.getProperty();
             throw new RuntimeException("osName = " + osName);
