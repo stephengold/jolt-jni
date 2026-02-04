@@ -238,6 +238,12 @@ model {
                         cppCompiler.args '/Ob3'
                     }
 
+                    if (project.hasProperty('useVK')) {
+                        cppCompiler.args "/I$vulkanSdk/Include"
+                        cppCompiler.define 'JPH_USE_VK'
+                        linker.args "$vulkanSdk/Lib/vulkan-1.lib"
+                    }
+
                 } else { // toolChain in Clang or Gcc
                     //cppCompiler.args '-v' // to log compiler details
                     //linker.args '-v' // to log linker details
