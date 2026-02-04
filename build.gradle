@@ -446,12 +446,18 @@ tasks.withType(JavaExec).configureEach { // Java runtime options:
     classpath sourceSets.test.runtimeClasspath
     dependsOn('assemble')
     enableAssertions = true
+    if (project.hasProperty('useVK')) {
+        environment 'VULKAN_SDK', vulkanSdk
+    }
     if (enableNativeAccess) {
         jvmArgs('--enable-native-access=ALL-UNNAMED') // suppress System::load() warning
     }
 }
 tasks.withType(Test).configureEach {
     dependsOn('unpackJoltAssets')
+    if (project.hasProperty('useVK')) {
+        environment 'VULKAN_SDK', vulkanSdk
+    }
     if (enableNativeAccess) {
         jvmArgs('--enable-native-access=ALL-UNNAMED') // suppress System::load() warning
     }
