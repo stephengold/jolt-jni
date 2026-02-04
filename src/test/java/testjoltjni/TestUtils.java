@@ -693,9 +693,10 @@ final public class TestUtils {
         } else if (NativeVariant.Os.isMac()) {
             relativePath = String.format("lib/vulkan%s.dylib", versionSuffix);
         } else if (NativeVariant.Os.isWindows()) {
-            relativePath = "Lib\\vulkan-1.lib"; // no symbolic links here!
+            return false; // no dynamic library?
         } else {
-            throw new RuntimeException("unknown operating system");
+            String osName = NativeVariant.OS_NAME.getProperty();
+            throw new RuntimeException("osName = " + osName);
         }
         file = new File(file, relativePath);
         String absoluteFilename = file.getAbsolutePath();
