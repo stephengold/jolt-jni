@@ -695,7 +695,8 @@ final public class TestUtils {
         if (NativeVariant.Os.isLinux()) {
             relativePath = String.format("lib/libvulkan.so%s", versionSuffix);
         } else if (NativeVariant.Os.isMac()) {
-            relativePath = String.format("lib/vulkan%s.dylib", versionSuffix);
+            relativePath
+                    = String.format("lib/libvulkan%s.dylib", versionSuffix);
         } else if (NativeVariant.Os.isWindows()) {
             return false; // no dynamic library?
         } else {
