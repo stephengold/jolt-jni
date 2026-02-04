@@ -655,10 +655,14 @@ final public class TestUtils {
     }
 
     /**
-     * If the the VULKAN_SDK environment variable is set, explicitly load the
-     * best-matching version of the Vulkan native library.
+     * If the operating system is not Windows and the VULKAN_SDK environment
+     * variable is set, explicitly load the best-matching version of the Vulkan
+     * native library.
      */
     public static void loadVulkanLibrary() {
+        if (NativeVariant.Os.isWindows()) {
+            return;
+        }
         String vulkanSdk = System.getenv("VULKAN_SDK");
         if (vulkanSdk == null) {
             return;
