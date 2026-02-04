@@ -494,6 +494,8 @@ final public class TestUtils {
      * </ol>
      */
     public static void loadNativeLibrary() {
+        loadVulkanLibrary();
+
         boolean success = loadNativeLibrary("Debug", "Sp");
         if (success) {
             Assert.assertFalse(Jolt.isDoublePrecision());
@@ -628,6 +630,8 @@ final public class TestUtils {
      * </ol>
      */
     public static void loadNativeLibraryRelease() {
+        loadVulkanLibrary();
+
         boolean success = loadNativeLibrary("Release", "Sp");
         if (success) {
             Assert.assertFalse(Jolt.isDoublePrecision());
@@ -648,6 +652,63 @@ final public class TestUtils {
             }
         }
         Assert.assertTrue(success);
+    }
+
+    /**
+     * If the the VULKAN_SDK environment variable is set, explicitly load the
+     * best-matching version of the Vulkan native library.
+     */
+    public static void loadVulkanLibrary() {
+        String vulkanSdk = System.getenv("VULKAN_SDK");
+        if (vulkanSdk == null) {
+            return;
+        }
+
+        boolean success = loadVulkanLibrary(".1.4.355");
+        if (!success) {
+            success = loadVulkanLibrary(".1");
+        }
+        if (!success) {
+            success = loadVulkanLibrary("");
+        }
+        Assert.assertTrue(success);
+    }
+
+    /**
+     * Explicitly load the Vulkan native library from the filesystem, using the
+     * OSHI and jSnapLoader libraries to identify the current platform.
+     * <p>
+     * This method assumes the VULKAN_SDK environment variable is set.
+     *
+     * @param versionSuffix such as ".1" or ".1.4.341" (not {@code null}
+     * @return {@code true} after successful load, otherwise {@code false}
+     */
+    public static boolean loadVulkanLibrary(String versionSuffix) {
+        String vulkanSdk = System.getenv("VULKAN_SDK");
+        File file = new File(vulkanSdk);
+
+        String relativePath;
+        if (NativeVariant.Os.isLinux()) {
+            relativePath = String.format("lib/libvulkan.so%s", versionSuffix);
+        } else if (NativeVariant.Os.isMac()) {
+            relativePath = String.format("lib/vulkan%s.dylib", versionSuffix);
+        } else if (NativeVariant.Os.isWindows()) {
+            relativePath = "Lib\\vulkan-1.lib"; // no symbolic links here!
+        } else {
+            throw new RuntimeException("unknown operating system");
+        }
+        file = new File(file, relativePath);
+        String absoluteFilename = file.getAbsolutePath();
+
+        boolean success = false;
+        if (file.exists() && file.canRead()) {
+            System.load(absoluteFilename);
+            String q = MyString.quote(absoluteFilename);
+            System.out.println("loaded Vulkan from " + q);
+            success = true;
+        }
+
+        return success;
     }
 
     /**
