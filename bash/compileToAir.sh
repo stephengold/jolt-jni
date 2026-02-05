@@ -14,6 +14,7 @@ SRC=./src/main/native/Jolt/Shaders
 TMP=./build/metal
 DEST=./src/main/resources/mtl/com/github/stephengold
 
+mkdir -p ${TMP}
 mkdir -p ${DEST}
 
 LIST=$(cd ${SRC} ; find -- *.hlsl -maxdepth 1 | awk '{sub(/.hlsl/,"");print}')
@@ -24,9 +25,9 @@ do
             "${SRC}/${NAME}.hlsl" -spirv -fvk-use-dx-layout \
             -fspv-entrypoint-name=${NAME} -Fo "${TMP}/${NAME}.spv"
 
-    echo "   compiling ${NAME}.spv to ${NAME}.mtl"
-    "${VULKAN_SDK}/bin/spirv-cross" "${TMP}/${NAME}.spv" --msl --output "${TMP}/${NAME}.spv"
+    echo "   compiling ${NAME}.spv -> ${NAME}.metal"
+    "${VULKAN_SDK}/bin/spirv-cross" "${TMP}/${NAME}.spv" --msl --output "${TMP}/${NAME}.metal"
 
-    echo "    compiling ${NAME}.mtl to ${NAME}.air"
-    xcrun -sdk macosx26.2 metal -c "${TMP}/${NAME}.spv" -o "${DEST}/${NAME}.air"
+    echo "    compiling ${NAME}.metal -> ${NAME}.air"
+    xcrun -sdk macosx26.2 metal -c "${TMP}/${NAME}.metal" -o "${DEST}/${NAME}.air"
 done
