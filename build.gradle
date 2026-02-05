@@ -495,6 +495,9 @@ jar {
     doLast {
         println "built using Java ${JavaVersion.current()} (${System.getProperty("java.vendor")})"
     }
+    if (!project.hasProperty('useMTL')) {
+        exclude('**/*.air')
+    }
     if (!project.hasProperty('useVK')) {
         exclude('**/*.spv')
     }
