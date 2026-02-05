@@ -375,16 +375,6 @@ $(N)/Jolt/Compute/ComputeSystem.cpp \
 $(N)/Jolt/Compute/CPU/ComputeBufferCPU.cpp \
 $(N)/Jolt/Compute/CPU/ComputeQueueCPU.cpp \
 $(N)/Jolt/Compute/CPU/ComputeSystemCPU.cpp \
-$(N)/Jolt/Compute/DX12/ComputeBufferDX12.cpp \
-$(N)/Jolt/Compute/DX12/ComputeQueueDX12.cpp \
-$(N)/Jolt/Compute/DX12/ComputeSystemDX12.cpp \
-$(N)/Jolt/Compute/DX12/ComputeSystemDX12Impl.cpp \
-$(N)/Jolt/Compute/VK/ComputeBufferVK.cpp \
-$(N)/Jolt/Compute/VK/ComputeQueueVK.cpp \
-$(N)/Jolt/Compute/VK/ComputeShaderVK.cpp \
-$(N)/Jolt/Compute/VK/ComputeSystemVK.cpp \
-$(N)/Jolt/Compute/VK/ComputeSystemVKImpl.cpp \
-$(N)/Jolt/Compute/VK/ComputeSystemVKWithAllocator.cpp \
 $(N)/Jolt/Core/Color.cpp \
 $(N)/Jolt/Core/Factory.cpp \
 $(N)/Jolt/Core/IssueReporting.cpp \
