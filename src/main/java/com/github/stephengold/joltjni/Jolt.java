@@ -374,32 +374,33 @@ final public class Jolt {
     }
 
     /**
-     * Test whether the native library implements the CPU compute system.
-     * (native macro: JPH_USE_CPU_COMPUTE)
+     * Test whether the native library implements CPU-based compute systems,
+     * which are intended mainly for debugging. (native macro:
+     * JPH_USE_CPU_COMPUTE)
      *
      * @return {@code true} if implemented, otherwise {@code false}
      */
     native public static boolean implementsComputeCpu();
 
     /**
-     * Test whether the native library implements the DX12 compute system.
-     * (native macro: JPH_USE_DX12)
+     * Test whether the native library implements compute systems based on
+     * Microsoft's DirectX 12 API. (native macro: JPH_USE_DX12)
      *
      * @return {@code true} if implemented, otherwise {@code false}
      */
     native public static boolean implementsComputeDx12();
 
     /**
-     * Test whether the native library implements the MTL compute system.
-     * (native macro: JPH_USE_MTL)
+     * Test whether the native library implements compute systems based on
+     * Apple's Metal API. (native macro: JPH_USE_MTL)
      *
      * @return {@code true} if implemented, otherwise {@code false}
      */
     native public static boolean implementsComputeMtl();
 
     /**
-     * Test whether the native library implements the Vulkan compute system.
-     * (native macro: JPH_USE_VK)
+     * Test whether the native library implements compute systems based on
+     * Khronos's Vulkan API. (native macro: JPH_USE_VK)
      *
      * @return {@code true} if implemented, otherwise {@code false}
      */
