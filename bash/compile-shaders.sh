@@ -4,6 +4,8 @@ set -euo pipefail
 [[ $VULKAN_SDK ]]
 echo VULKAN_SDK = $VULKAN_SDK
 
+./gradlew unpackJoltSource
+
 SRC=./src/main/native/Jolt/Shaders
 DEST=./src/main/resources/vk/com/github/stephengold
 
