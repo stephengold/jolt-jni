@@ -13,8 +13,8 @@ plugins {
     alias(libs.plugins.download) // to retrieve files from URLs
 }
 
-// $artifact, $jjVersion, and $useVK are set in the gradle.properties file
-// or by -P options on the Gradle command line.
+// $artifact, $jjVersion, $useMTL, and $useVK are set in
+// the gradle.properties file or by -P options on the Gradle command line.
 
 ext {
     joltFork = 'stephengold'
@@ -213,6 +213,10 @@ model {
                 // flavor-specific preprocessor defines:
                 if (isDp) {
                     cppCompiler.define 'JPH_DOUBLE_PRECISION'
+                }
+
+                if (project.hasProperty('useMTL')) {
+                    cppCompiler.define 'JPH_USE_MTL'
                 }
 
                 String q = pName + buildType.name + flavor.name
