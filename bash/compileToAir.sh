@@ -5,8 +5,8 @@
 
 set -euo pipefail
 
-[[ $VULKAN_SDK ]]
-echo VULKAN_SDK = $VULKAN_SDK
+[[ ${VULKAN_SDK} ]]
+echo VULKAN_SDK = ${VULKAN_SDK}
 
 ./gradlew unpackJoltSource
 
@@ -20,7 +20,7 @@ mkdir -p ${DEST}
 LIST=$(cd ${SRC} ; find -- *.hlsl -maxdepth 1 | awk '{sub(/.hlsl/,"");print}')
 for NAME in ${LIST}
 do
-    echo "  compiling ${NAME}.hlsl to ${NAME}.spv"
+    echo "  compiling ${NAME}.hlsl -> ${NAME}.spv"
     "${VULKAN_SDK}/bin/dxc" -E main -T cs_6_0 -I ${SRC} -WX -O3 -all_resources_bound \
             "${SRC}/${NAME}.hlsl" -spirv -fvk-use-dx-layout \
             -fspv-entrypoint-name=${NAME} -Fo "${TMP}/${NAME}.spv"
