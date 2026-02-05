@@ -139,6 +139,12 @@ final public class SmokeTestAll {
                 ComputeSystem.hairRegisterShaders(computeSystem);
                 break;
 
+            case "MTL":
+                // Assign a loader for Metal compute shaders:
+                Loader mtlLoader = makeLoader("/mtl/com/github/stephengold");
+                computeSystem.setShaderLoader(mtlLoader);
+                break;
+
             case "VK":
                 // Assign a loader for Vulkan compute shaders:
                 Loader vkLoader = makeLoader("/vk/com/github/stephengold");
