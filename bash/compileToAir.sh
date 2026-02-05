@@ -11,7 +11,8 @@ echo VULKAN_SDK = $VULKAN_SDK
 ./gradlew unpackJoltSource
 
 SRC=./src/main/native/Jolt/Shaders
-DEST=./src/main/resources/metal/com/github/stephengold
+TMP=./build/metal
+DEST=./src/main/resources/mtl/com/github/stephengold
 
 mkdir -p ${DEST}
 
@@ -20,13 +21,12 @@ for NAME in ${LIST}
 do
     echo "  compiling ${NAME}.hlsl to ${NAME}.spv"
     "${VULKAN_SDK}/bin/dxc" -E main -T cs_6_0 -I ${SRC} -WX -O3 -all_resources_bound \
-            "${SRC}/$NAME.hlsl" -spirv -fvk-use-dx-layout -fspv-entrypoint-name=${NAME} -Fo "${NAME}.spv"
+            "${SRC}/${NAME}.hlsl" -spirv -fvk-use-dx-layout \
+            -fspv-entrypoint-name=${NAME} -Fo "${TMP}/${NAME}.spv"
 
     echo "   compiling ${NAME}.spv to ${NAME}.mtl"
-    "${VULKAN_SDK}/bin/spirv-cross" "${NAME}.spv" --msl --output "${NAME}.mtl"
-    rm ${NAME}.spv
+    "${VULKAN_SDK}/bin/spirv-cross" "${TMP}/${NAME}.spv" --msl --output "${TMP}/${NAME}.spv"
 
     echo "    compiling ${NAME}.mtl to ${NAME}.air"
-    xcrun -sdk macos metal -c "${NAME}.mtl" -o "${DEST}/${NAME}.air"
-    rm ${NAME}.mtl
+    xcrun -sdk macosx26.2 metal -c "${TMP}/${NAME}.spv" -o "${DEST}/${NAME}.air"
 done
