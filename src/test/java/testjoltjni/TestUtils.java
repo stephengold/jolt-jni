@@ -670,7 +670,7 @@ final public class TestUtils {
             return;
         }
 
-        boolean success = loadVulkanLibrary(".1.4.355");
+        boolean success = loadVulkanLibrary(".1.4.341");
         if (!success) {
             success = loadVulkanLibrary(".1");
         }
