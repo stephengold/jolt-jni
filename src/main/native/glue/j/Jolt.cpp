@@ -411,6 +411,31 @@ static void JavaTrace(const char *inFormat, ...) {
     gpVM->DetachCurrentThread();
 }
 
+#ifdef JPH_ENABLE_ASSERTS
+
+// Callback for asserts that are silently ignored:
+static bool IgnoreAssertFailed(const char *inExpression, const char *inMessage,
+        const char *inFile, uint inLine) {
+    return false;
+};
+
+#endif // JPH_ENABLE_ASSERTS
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    installIgnoreAssertCallback
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installIgnoreAssertCallback
+  (JNIEnv *, jclass) {
+#ifdef JPH_ENABLE_ASSERTS
+    AssertFailed = IgnoreAssertFailed;
+#elif defined(JPH_DEBUG)
+    std::cout << "Jolt.installIgnoreAssertCallback() has no effect unless JPH_ENABLE_ASSERTS is defined."
+            << std::endl;
+#endif
+}
+
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    installJavaTraceCallback

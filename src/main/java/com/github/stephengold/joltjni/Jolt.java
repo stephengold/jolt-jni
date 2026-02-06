@@ -438,6 +438,11 @@ final public class Jolt {
     native public static void installDefaultTraceCallback();
 
     /**
+     * Install an assert callback that silently ignores assertions.
+     */
+    native public static void installIgnoreAssertCallback();
+
+    /**
      * Install a trace callback that writes to the specified
      * {@code PrintStream}.
      *
