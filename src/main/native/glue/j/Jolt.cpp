@@ -364,7 +364,7 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installCerrTrace
 
 #ifdef JPH_ENABLE_ASSERTS
 
-// Callback for asserts
+// Callback for asserts that print to cout and request a breakpoint:
 static bool DefaultAssertFailed(const char *inExpression, const char *inMessage,
         const char *inFile, uint inLine) {
     // Print to the standard output:

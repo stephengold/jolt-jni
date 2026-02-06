@@ -265,9 +265,9 @@ final public class Jolt {
         long body2Va = body2.targetVa();
         long manifoldVa = manifold.targetVa();
         long resultVa = storeResult.va();
-        estimateCollisionResponse(body1Va, body2Va, manifoldVa, resultVa,
-                combinedFriction, combinedRestitution,
-                minVelocity, numIterations);
+        estimateCollisionResponse(
+                body1Va, body2Va, manifoldVa, resultVa, combinedFriction,
+                combinedRestitution, minVelocity, numIterations);
     }
 
     /**
@@ -434,6 +434,7 @@ final public class Jolt {
      * Install the specified assert callback.
      *
      * @param callbackVa the virtual address of the desired callback
+     * @see #getAssertCallback()
      */
     native public static void installAssertCallback(long callbackVa);
 
@@ -443,7 +444,8 @@ final public class Jolt {
     native public static void installCerrTraceCallback();
 
     /**
-     * Install the default assert callback.
+     * Install the default assert callback, which writes to {@code cout} and
+     * triggers a native breakpoint.
      */
     native public static void installDefaultAssertCallback();
 
@@ -453,12 +455,12 @@ final public class Jolt {
     native public static void installDefaultTraceCallback();
 
     /**
-     * Install an assert callback that silently ignores assertions.
+     * Install an alternative assert callback that silently ignores assertions.
      */
     native public static void installIgnoreAssertCallback();
 
     /**
-     * Install a trace callback that writes to the specified
+     * Install an alternative trace callback that writes to the specified
      * {@code PrintStream}.
      *
      * @param stream where to send trace output (not {@code null})
