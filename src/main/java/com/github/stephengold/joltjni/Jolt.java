@@ -271,6 +271,14 @@ final public class Jolt {
     }
 
     /**
+     * Return the installed assert callback.
+     *
+     * @return the virtual address of the callback, or zero if none
+     * @see #installAssertCallback(long)
+     */
+    native public static long getAssertCallback();
+
+    /**
      * Return a string describing some important configuration settings of the
      * native library. (see Jolt/ConfigurationString.h)
      *
@@ -421,6 +429,13 @@ final public class Jolt {
      * @return {@code true} if implemented, otherwise {@code false}
      */
     native public static boolean implementsDeterminismLog();
+
+    /**
+     * Install the specified assert callback.
+     *
+     * @param callbackVa the virtual address of the desired callback
+     */
+    native public static void installAssertCallback(long callbackVa);
 
     /**
      * Install an alternative trace callback that writes to {@code cerr}.

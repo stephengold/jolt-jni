@@ -182,6 +182,20 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_detLog
 
 /*
  * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    getAssertCallback
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_Jolt_getAssertCallback
+  (JNIEnv *, jclass) {
+#ifdef JPH_ENABLE_ASSERTS
+    return reinterpret_cast<jlong> (AssertFailed);
+#else
+    return 0;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
  * Method:    getConfigurationString
  * Signature: ()Ljava/lang/String;
  */
@@ -309,6 +323,21 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsDe
     return JNI_TRUE;
 #else
     return JNI_FALSE;
+#endif
+}
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    installAssertCallback
+ * Signature: (J)V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installAssertCallback
+  (JNIEnv *, jclass, jint callback) {
+#ifdef JPH_ENABLE_ASSERTS
+    AssertFailed = reinterpret_cast<AssertFailedFunction> (callback);
+#elif defined(JPH_DEBUG)
+    std::cout << "Jolt.installAssertCallback() has no effect unless JPH_ENABLE_ASSERTS is defined."
+            << std::endl;
 #endif
 }
 
