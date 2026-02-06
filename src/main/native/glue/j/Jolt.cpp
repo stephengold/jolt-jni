@@ -332,7 +332,7 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_Jolt_implementsDe
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installAssertCallback
-  (JNIEnv *, jclass, jint callback) {
+  (JNIEnv *, jclass, jlong callback) {
 #ifdef JPH_ENABLE_ASSERTS
     AssertFailed = reinterpret_cast<AssertFailedFunction> (callback);
 #elif defined(JPH_DEBUG)
