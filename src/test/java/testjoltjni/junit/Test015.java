@@ -90,6 +90,13 @@ public class Test015 {
     private static void doComputeSystem() {
         ComputeSystemResult cpu = ComputeSystem.createComputeSystemCpu();
         testComputeSystem(cpu);
+
+        ComputeSystemResult gpu = ComputeSystem.createComputeSystem();
+        if (!gpu.hasError()) {
+            testComputeSystem(gpu);
+        }
+        TestUtils.testClose(gpu);
+
         TestUtils.testClose(cpu);
         System.gc();
     }
