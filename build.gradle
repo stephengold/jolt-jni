@@ -8,6 +8,7 @@ plugins {
     id 'cpp'           // to compile C++ code and link native libraries
     id 'java-library'  // to build JVM libraries
     id 'maven-publish' // to publish artifacts to Maven repositories
+    id 'objective-cpp' // to compile Objective C++ code
     id 'signing'       // to sign artifacts for publication
 
     alias(libs.plugins.download) // to retrieve files from URLs
@@ -33,6 +34,9 @@ ext {
 tasks.withType(CppCompile).configureEach {
     dependsOn('classes', 'compileTestJava', \
             'unpackJoltSource', 'unpackTestFramework', 'unpackVhacdSource')
+}
+tasks.withType(ObjectiveCppCompile).configureEach {
+    dependsOn('unpackJoltSource', 'unpackVhacdSource')
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
@@ -153,6 +157,10 @@ model {
                 srcDir 'src/main/native/glue'
                 include '**/*.cpp'
             }
+            sources.objcpp.source {
+                srcDir 'src/main/native/Jolt/Compute/MTL'
+                include '**/*.mm'
+            }
 
             binaries.withType(SharedLibraryBinarySpec) {
                 String pName = targetPlatform.name
@@ -206,9 +214,11 @@ model {
                     //cppCompiler.define 'JPH_DISABLE_CUSTOM_ALLOCATOR'
                     cppCompiler.define 'JPH_ENABLE_ASSERTS'
                     //cppCompiler.define 'JPH_TRACK_NARROWPHASE_STATS' // to collect statistics
+                    objcppCompiler.define 'JPH_ENABLE_ASSERTS'
 
                 } else { // buildTypes.Release
                     cppCompiler.define 'JPH_NO_DEBUG'
+                    objcppCompiler.define 'JPH_NO_DEBUG'
                 }
 
                 // flavor-specific preprocessor defines:
@@ -218,6 +228,9 @@ model {
 
                 if (project.hasProperty('useMTL')) {
                     cppCompiler.define 'JPH_USE_MTL'
+                    linker.args '-framework', 'Foundation'
+                    linker.args '-framework', 'Metal'
+                    objcppCompiler.define 'JPH_USE_MTL'
                 }
 
                 String q = pName + buildType.name + flavor.name
@@ -233,6 +246,8 @@ model {
                     cppCompiler.args "/I$projectDir/src/main/native/TestFramework" // for External/Perlin.h
                     cppCompiler.args '/std:c++17'
                     cppCompiler.args '/wd4577' // disable warnings about using noexcept
+                    objcppCompiler.args "/I$projectDir/src/main/native"
+                    objcppCompiler.args '/std:c++17'
 
                     if (isDebug) {
                         cppCompiler.define 'JPH_FLOATING_POINT_EXCEPTIONS_ENABLED'
@@ -260,6 +275,9 @@ model {
                     cppCompiler.args '-I', "$projectDir/src/main/native/TestFramework" // for External/Perlin.h
                     cppCompiler.args '-std=c++17'
                     cppCompiler.args '-Werror=return-type'
+                    objcppCompiler.args '-fno-rtti'
+                    objcppCompiler.args '-I', "$projectDir/src/main/native"
+                    objcppCompiler.args '-std=c++17'
 
                     if (use_fma) {
                         cppCompiler.args '-msse4.1'
