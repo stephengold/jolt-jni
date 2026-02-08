@@ -47,6 +47,7 @@ SOFTWARE.
 
 #include "auto/com_github_stephengold_joltjni_Jolt.h"
 #include "glue/glue.h"
+#include <execinfo.h>
 #include <iostream>
 
 using namespace JPH;
@@ -264,6 +265,23 @@ static bool DefaultAssertFailed(const char *inExpression, const char *inMessage,
     // Print to the standard output:
     std::cout << inFile << ":" << inLine << ": (" << inExpression << ") "
             << (inMessage != nullptr ? inMessage : "") << std::endl;
+
+#define BT_BUF_SIZE 512
+    int nptrs;
+    void *buffer[BT_BUF_SIZE];
+    char **strings;
+    nptrs = backtrace(buffer, BT_BUF_SIZE);
+    printf("backtrace() returned %d addresses\n", nptrs);
+
+    strings = backtrace_symbols(buffer, nptrs);
+    if (strings == NULL) {
+        perror("backtrace_symbols");
+        exit(EXIT_FAILURE);
+    }
+
+    for (size_t j = 0; j < nptrs; j++)
+        printf("%s\n", strings[j]);
+    fflush(stdout);
 
     // Request a breakpoint:
     return true;
