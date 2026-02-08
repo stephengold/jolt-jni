@@ -283,6 +283,8 @@ static bool DefaultAssertFailed(const char *inExpression, const char *inMessage,
         printf("%s\n", strings[j]);
     fflush(stdout);
 
+    char c = *(char *)0;
+
     // Request a breakpoint:
     return true;
 };
