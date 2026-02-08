@@ -36,7 +36,8 @@ tasks.withType(CppCompile).configureEach {
             'unpackJoltSource', 'unpackTestFramework', 'unpackVhacdSource')
 }
 tasks.withType(ObjectiveCppCompile).configureEach {
-    dependsOn('unpackJoltSource', 'unpackVhacdSource')
+    dependsOn('classes', 'compileTestJava', \
+            'unpackJoltSource', 'unpackTestFramework', 'unpackVhacdSource')
 }
 
 String javaHome = org.gradle.internal.jvm.Jvm.current().javaHome.absolutePath
@@ -194,16 +195,21 @@ model {
                 cppCompiler.define 'JOLT_JNI_VERSION_STRING=' + jjVersion
                 cppCompiler.define 'JPH_OBJECT_STREAM'
                 cppCompiler.define 'JPH_USE_CPU_COMPUTE'
+                objcppCompiler.define 'JOLT_JNI_VERSION_STRING=' + jjVersion
+                objcppCompiler.define 'JPH_OBJECT_STREAM'
+                objcppCompiler.define 'JPH_USE_CPU_COMPUTE'
 
                 // platforms with ISA extensions:
                 Boolean use_avx2 = pName.endsWith('_avx2')
                 Boolean use_fma = pName.endsWith('_fma')
                 if (use_avx2 || use_fma) {
                     cppCompiler.define 'JPH_USE_AVX2'
+                    objcppCompiler.define 'JPH_USE_AVX2'
                     // implies use of AVX, BMI/TZCNT, F16C, LZCNT, SSE4.1, and SSE4.2
                 }
                 if (use_fma) {
                     cppCompiler.define 'JPH_USE_FMADD'
+                    objcppCompiler.define 'JPH_USE_FMADD'
                 }
 
                 // buildtype-specific preprocessor defines:
@@ -214,6 +220,7 @@ model {
                     //cppCompiler.define 'JPH_DISABLE_CUSTOM_ALLOCATOR'
                     cppCompiler.define 'JPH_ENABLE_ASSERTS'
                     //cppCompiler.define 'JPH_TRACK_NARROWPHASE_STATS' // to collect statistics
+                    objcppCompiler.define 'JPH_DEBUG_RENDERER'
                     objcppCompiler.define 'JPH_ENABLE_ASSERTS'
 
                 } else { // buildTypes.Release
@@ -224,6 +231,7 @@ model {
                 // flavor-specific preprocessor defines:
                 if (isDp) {
                     cppCompiler.define 'JPH_DOUBLE_PRECISION'
+                    objcppCompiler.define 'JPH_DOUBLE_PRECISION'
                 }
 
                 if (project.hasProperty('useMTL')) {
@@ -275,9 +283,14 @@ model {
                     cppCompiler.args '-I', "$projectDir/src/main/native/TestFramework" // for External/Perlin.h
                     cppCompiler.args '-std=c++17'
                     cppCompiler.args '-Werror=return-type'
+                    linker.args '-lobjc'
+                    objcppCompiler.args '-fno-exceptions' // disable C++ exceptions
                     objcppCompiler.args '-fno-rtti'
+                    objcppCompiler.args '-I', "$javaHome/include"
                     objcppCompiler.args '-I', "$projectDir/src/main/native"
+                    objcppCompiler.args '-I', "$projectDir/src/main/native/TestFramework" // for External/Perlin.h
                     objcppCompiler.args '-std=c++17'
+                    objcppCompiler.args '-Werror=return-type'
 
                     if (use_fma) {
                         cppCompiler.args '-msse4.1'
@@ -288,25 +301,40 @@ model {
                         cppCompiler.args '-mbmi'
                         cppCompiler.args '-mlzcnt'
                         cppCompiler.args '-mfma'
+                        objcppCompiler.args '-msse4.1'
+                        objcppCompiler.args '-msse4.2'
+                        objcppCompiler.args '-mavx'
+                        objcppCompiler.args '-mf16c'
+                        objcppCompiler.args '-mavx2'
+                        objcppCompiler.args '-mbmi'
+                        objcppCompiler.args '-mlzcnt'
+                        objcppCompiler.args '-mfma'
                     }
 
                     if (isDebug) {
                         cppCompiler.args '-O0', '-g3'
+                        objcppCompiler.args '-O0', '-g3'
                     } else { // buildType == Release
                         cppCompiler.args '-O3'
+                        objcppCompiler.args '-O3'
                     }
 
                     if (os == 'osx') {
                         // workaround when XCode isn't installed:
                         //cppCompiler.args '-I', '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1'
                         cppCompiler.args '-I', "$javaHome/include/darwin"
+                        objcppCompiler.args '-I', "$javaHome/include/darwin"
                     } else if (os == 'linux') {
                         cppCompiler.args '-I', "$javaHome/include/linux"
                         cppCompiler.args '-fPIC'
                         cppCompiler.args '-fvisibility=hidden'
+                        objcppCompiler.args '-I', "$javaHome/include/linux"
+                        objcppCompiler.args '-fPIC'
+                        objcppCompiler.args '-fvisibility=hidden'
                         linker.args '-fvisibility=hidden'
                     } else if (os == 'windows') {
                         cppCompiler.args '-I', "$javaHome/include/win32"
+                        objcppCompiler.args '-I', "$javaHome/include/win32"
                     } else {
                         buildable = false
                     }
@@ -315,6 +343,8 @@ model {
                         cppCompiler.args '-I', "$vulkanSdk/include"
                         cppCompiler.define 'JPH_USE_VK'
                         linker.args '-L', "$vulkanSdk/lib", '-lvulkan'
+                        objcppCompiler.args '-I', "$vulkanSdk/include"
+                        objcppCompiler.define 'JPH_USE_VK'
                     }
                 }
 
