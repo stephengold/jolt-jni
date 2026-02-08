@@ -21,6 +21,6 @@ jobs:
           vulkan-query-version: 1.4.335.0
           vulkan-use-cache: true
       - run: |
-          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64_fma -PuseVK=yes runHelloWorld -x checkstyleMain -x checkstyleTest --console=plain
+          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=Linux64_fma -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest --console=plain
       - if: failure()
         run: nm build/libs/joltjni/shared/linux64_fma/debug/sp/libjoltjni.so | sort | c++filt
