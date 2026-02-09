@@ -65,10 +65,7 @@ final public class ComputeSystem extends NonCopyable implements RefTarget {
      * @return a new result object
      */
     public static ComputeSystemResult createComputeSystem() {
-        long callbackVa = Jolt.getAssertCallback();
-        Jolt.installIgnoreAssertCallback();
         long resultVa = createSystemGpu();
-        Jolt.installAssertCallback(callbackVa);
         ComputeSystemResult result = new ComputeSystemResult(resultVa, true);
 
         return result;
