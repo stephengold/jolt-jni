@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## A bash script to compile Jolt's compute shaders (.hlsl files)
-## to Apple's intermediate representation (.air files)
+## into a Metal library
 
 set -euo pipefail
 
@@ -29,5 +29,8 @@ do
     "${VULKAN_SDK}/bin/spirv-cross" "${TMP}/${NAME}.spv" --msl --output "${TMP}/${NAME}.metal"
 
     echo "    compiling ${NAME}.metal -> ${NAME}.air"
-    xcrun -sdk macosx26.2 metal -c "${TMP}/${NAME}.metal" -o "${DEST}/${NAME}.air"
+    xcrun -sdk macosx26.2 metal -c "${TMP}/${NAME}.metal" -o "${TMP}/${NAME}.air"
 done
+
+echo " linking *.air -> Jolt.metallib"
+xcrun -sdk macosx26.2 metallib -o ${DEST}/Jolt.metallib ${TMP}/*.air
