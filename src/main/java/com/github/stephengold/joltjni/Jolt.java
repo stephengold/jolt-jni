@@ -444,6 +444,12 @@ final public class Jolt {
     native public static void installCerrTraceCallback();
 
     /**
+     * Install an alternative assert callback that crashes the JVM with an
+     * EXCEPTION_ACCESS_VIOLATION or SIGILL. Intended for testing only!
+     */
+    native public static void installCrashAssertCallback();
+
+    /**
      * Install the default assert callback, which writes to {@code cout} and
      * triggers a native breakpoint.
      */

@@ -364,7 +364,38 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installCerrTrace
 
 #ifdef JPH_ENABLE_ASSERTS
 
-// Callback for asserts that print to cout and request a breakpoint:
+// Callback for asserts that print to std::cout and then crash the JVM with an
+// EXCEPTION_ACCESS_VIOLATION or SIGILL
+static bool CrashAssertFailed(const char *inExpression, const char *inMessage,
+        const char *inFile, uint inLine) {
+    // Print to the standard output:
+    std::cout << inFile << ":" << inLine << ": (" << inExpression << ") "
+            << (inMessage != nullptr ? inMessage : "") << std::endl;
+
+    bool result = *(bool *)0;
+    return result;
+};
+
+#endif // JPH_ENABLE_ASSERTS
+
+/*
+ * Class:     com_github_stephengold_joltjni_Jolt
+ * Method:    installCrashAssertCallback
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_Jolt_installCrashAssertCallback
+  (JNIEnv *, jclass) {
+#ifdef JPH_ENABLE_ASSERTS
+    AssertFailed = CrashAssertFailed;
+#elif defined(JPH_DEBUG)
+    std::cout << "Jolt.installCrashAssertCallback() has no effect unless JPH_ENABLE_ASSERTS is defined."
+            << std::endl;
+#endif
+}
+
+#ifdef JPH_ENABLE_ASSERTS
+
+// Callback for asserts that print to std::cout and then request a breakpoint:
 static bool DefaultAssertFailed(const char *inExpression, const char *inMessage,
         const char *inFile, uint inLine) {
     // Print to the standard output:
