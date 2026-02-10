@@ -194,7 +194,9 @@ model {
 
                 // always-on preprocessor defines:
                 cppCompiler.define 'JOLT_JNI_VERSION_STRING=' + jjVersion
+                cppCompiler.define 'JPH_BUILD_SHARED_LIBRARY'; objcppCompiler.define 'JPH_BUILD_SHARED_LIBRARY'
                 cppCompiler.define 'JPH_OBJECT_STREAM'; objcppCompiler.define 'JPH_OBJECT_STREAM'
+                cppCompiler.define 'JPH_SHARED_LIBRARY'; objcppCompiler.define 'JPH_SHARED_LIBRARY'
                 cppCompiler.define 'JPH_USE_CPU_COMPUTE'
 
                 // platforms with ISA extensions:
