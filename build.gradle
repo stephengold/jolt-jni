@@ -157,9 +157,11 @@ model {
                 srcDir 'src/main/native/glue'
                 include '**/*.cpp'
             }
-            sources.objcpp.source {
-                srcDir 'src/main/native/Jolt/Compute/MTL'
-                include '**/*.mm'
+            if (project.hasProperty('useMTL')) {
+                sources.objcpp.source {
+                    srcDir 'src/main/native/Jolt/Compute/MTL'
+                    include '**/*.mm'
+                }
             }
 
             binaries.withType(SharedLibraryBinarySpec) {
