@@ -46,6 +46,8 @@ jobs:
         run: |
           ./gradlew -Ptarget=Linux64 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
             --console=plain
+      - if: failure()
+        run: cat hs_err_pid*.log
       - name: gradlew -Partifact=jolt-jni-Linux64 -Ptarget=Linux64 -PuseVK=yes clean release
         if: startsWith(github.ref, 'refs/tags/')
         run: |
@@ -81,6 +83,8 @@ jobs:
         run: |
           ./gradlew -Ptarget=Linux64_fma -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
             --console=plain
+      - if: failure()
+        run: cat hs_err_pid*.log
       - name: gradlew -Partifact=jolt-jni-Linux64_fma -Ptarget=Linux64_fma -PuseVK=yes clean release
         if: startsWith(github.ref, 'refs/tags/')
         run: |
@@ -187,6 +191,9 @@ jobs:
           ./gradlew -Ptarget=Windows64 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
             --console=plain
         shell: bash
+      - if: failure()
+        run: cat hs_err_pid*.log
+        shell: bash
       - name: gradlew -Partifact=jolt-jni-Windows64 -Ptarget=Windows64 -PuseVK=yes clean release
         if: startsWith(github.ref, 'refs/tags/')
         run: |
@@ -224,6 +231,9 @@ jobs:
         run: |
           ./gradlew -Ptarget=Windows64_avx2 -PuseVK=yes runSmokeTestAll -x checkstyleMain -x checkstyleTest build install \
             --console=plain
+        shell: bash
+      - if: failure()
+        run: cat hs_err_pid*.log
         shell: bash
       - name: gradlew -Partifact=jolt-jni-Windows64_avx2 -Ptarget=Windows64_avx2 -PuseVK=yes clean release
         if: startsWith(github.ref, 'refs/tags/')
