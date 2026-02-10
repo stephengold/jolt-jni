@@ -212,13 +212,11 @@ model {
                     cppCompiler.define 'JPH_DEBUG_RENDERER'
                     //cppCompiler.define 'JPH_DET_LOG' // to implement the determinism log
                     //cppCompiler.define 'JPH_DISABLE_CUSTOM_ALLOCATOR'
-                    cppCompiler.define 'JPH_ENABLE_ASSERTS'
+                    cppCompiler.define 'JPH_ENABLE_ASSERTS'; objcppCompiler.define 'JPH_ENABLE_ASSERTS'
                     //cppCompiler.define 'JPH_TRACK_NARROWPHASE_STATS' // to collect statistics
-                    objcppCompiler.define 'JPH_ENABLE_ASSERTS'
 
                 } else { // buildTypes.Release
-                    cppCompiler.define 'JPH_NO_DEBUG'
-                    objcppCompiler.define 'JPH_NO_DEBUG'
+                    cppCompiler.define 'JPH_NO_DEBUG'; objcppCompiler.define 'JPH_NO_DEBUG'
                 }
 
                 // flavor-specific preprocessor defines:
@@ -227,10 +225,9 @@ model {
                 }
 
                 if (project.hasProperty('useMTL')) {
-                    cppCompiler.define 'JPH_USE_MTL'
+                    cppCompiler.define 'JPH_USE_MTL'; objcppCompiler.define 'JPH_USE_MTL'
                     linker.args '-framework', 'Foundation'
                     linker.args '-framework', 'Metal'
-                    objcppCompiler.define 'JPH_USE_MTL'
                 }
 
                 String q = pName + buildType.name + flavor.name
@@ -272,14 +269,14 @@ model {
                     objcppCompiler.args '-fno-exceptions'
 
                     cppCompiler.args '-fno-rtti' // disable C++ runtime type info
-                    cppCompiler.args '-I', "$javaHome/include"
-                    cppCompiler.args '-I', "$projectDir/src/main/native"
-                    cppCompiler.args '-I', "$projectDir/src/main/native/TestFramework" // for External/Perlin.h
-                    cppCompiler.args '-std=c++17'
-                    cppCompiler.args '-Werror=return-type'; objcppCompiler.args '-Werror=return-type'
                     objcppCompiler.args '-fno-rtti'
-                    objcppCompiler.args '-I', "$projectDir/src/main/native"
-                    objcppCompiler.args '-std=c++17'
+
+                    cppCompiler.args '-I', "$javaHome/include"
+                    cppCompiler.args '-I', "$projectDir/src/main/native"; objcppCompiler.args '-I', "$projectDir/src/main/native"
+                    cppCompiler.args '-I', "$projectDir/src/main/native/TestFramework" // for External/Perlin.h
+
+                    cppCompiler.args '-std=c++17'; objcppCompiler.args '-std=c++17'
+                    cppCompiler.args '-Werror=return-type'; objcppCompiler.args '-Werror=return-type'
 
                     if (use_fma) {
                         cppCompiler.args '-msse4.1'
