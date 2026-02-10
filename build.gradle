@@ -192,7 +192,7 @@ model {
 
                 // always-on preprocessor defines:
                 cppCompiler.define 'JOLT_JNI_VERSION_STRING=' + jjVersion
-                cppCompiler.define 'JPH_OBJECT_STREAM'
+                cppCompiler.define 'JPH_OBJECT_STREAM'; objcppCompiler.define 'JPH_OBJECT_STREAM'
                 cppCompiler.define 'JPH_USE_CPU_COMPUTE'
 
                 // platforms with ISA extensions:
@@ -223,7 +223,7 @@ model {
 
                 // flavor-specific preprocessor defines:
                 if (isDp) {
-                    cppCompiler.define 'JPH_DOUBLE_PRECISION'
+                    cppCompiler.define 'JPH_DOUBLE_PRECISION'; objcppCompiler.define 'JPH_DOUBLE_PRECISION'
                 }
 
                 if (project.hasProperty('useMTL')) {
@@ -269,12 +269,14 @@ model {
                     //linker.args '-v' // to log linker details
 
                     cppCompiler.args '-fno-exceptions' // disable C++ exceptions
+                    objcppCompiler.args '-fno-exceptions'
+
                     cppCompiler.args '-fno-rtti' // disable C++ runtime type info
                     cppCompiler.args '-I', "$javaHome/include"
                     cppCompiler.args '-I', "$projectDir/src/main/native"
                     cppCompiler.args '-I', "$projectDir/src/main/native/TestFramework" // for External/Perlin.h
                     cppCompiler.args '-std=c++17'
-                    cppCompiler.args '-Werror=return-type'
+                    cppCompiler.args '-Werror=return-type'; objcppCompiler.args '-Werror=return-type'
                     objcppCompiler.args '-fno-rtti'
                     objcppCompiler.args '-I', "$projectDir/src/main/native"
                     objcppCompiler.args '-std=c++17'
@@ -291,9 +293,9 @@ model {
                     }
 
                     if (isDebug) {
-                        cppCompiler.args '-O0', '-g3'
+                        cppCompiler.args '-O0', '-g3'; objcppCompiler.args '-O0', '-g3'
                     } else { // buildType == Release
-                        cppCompiler.args '-O3'
+                        cppCompiler.args '-O3'; objcppCompiler.args '-O3'
                     }
 
                     if (os == 'osx') {
