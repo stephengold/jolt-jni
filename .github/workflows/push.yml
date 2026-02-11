@@ -26,6 +26,7 @@ jobs:
       - name: gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -PuseVK -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
+          tree /Users/runner/work/jolt-jni/jolt-jni/VULKAN_SDK
           export VULKAN_SDK=/Users/runner/work/jolt-jni/jolt-jni/VULKAN_SDK/1.4.341.0/macOS
           ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -PuseVK -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain
