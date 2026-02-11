@@ -1,5 +1,97 @@
 # Release log for the Jolt-JNI project
 
+## Version 3.6.0 released on TBD
+
++ Bugfixes:
+  + unsatisfied link for `Geometry.create(long)`
+  + logic error in the `Jolt.implementsDeterminismLog()` method
+  + premature garbage collection of wrapped streams
+
++ Added support for hair simulation.
++ Added support for offloading computation to GPUs.
++ Added Vulkan compute to Linux/Windows x86_64 platforms using v1.4.341.1
+  of the Vulkan SDK.
+
++ Added classes:
+  + `Batch` (for debug rendering)
+  + `ComputeQueue`
+  + `ComputeQueueRef`
+  + `ComputeQueueResult`
+  + `ComputeSystem`
+  + `ComputeSystemRef`
+  + `ComputeSystemResult`
+  + `CustomLoader` (for shaders)
+  + `DrawSettings` (for hair)
+  + `ERenderStrandColor` enum
+  + `Float4`
+  + `Gradient`
+  + `Hair`
+  + `HairMaterial`
+  + `HairSettings`
+  + `HairSettingsRef`
+  + `HairShaders`
+  + `HairShadersRef`
+  + `HairSkinWeight`
+  + `Loader` (for shaders)
+  + `RStrand`
+  + `SStrand`
+  + `SStrandList`
+  + `SVertex`
+  + `SVertexList`
+
++ Added interfaces:
+  + `ConstDrawSettings`
+  + `ConstFloat3`
+  + `ConstFloat4`
+  + `ConstGradient`
+  + `ConstHairMaterial`
+  + `ConstHairSettings`
+  + `ConstPhysicsSystem`
+  + `ConstRStrand`
+  + `ConstSStrand`
+  + `ConstSVertex`
+
++ Added public methods:
+  + `Body.getMotionPropertiesUnchecked()`
+  + `ConstFloat3.x()`
+  + `ConstFloat3.y()`
+  + `ConstFloat3.z()`
+  + `ConstIndexedTriangleNoMaterial.put()`
+  + `ConvexHullShapeSettings.addPoint()`
+  + `ConvexHullShapeSettings.copyPoint()`
+  + `ConvexHullShapeSettings.copyPoints()`
+  + `ConvexHullShapeSettings.setPoint()`
+  + `DebugRenderer.createTriangleBatch()`
+  + `Float3.set(FloatBuffer)`
+  + `Jolt.getAssertCallback()`
+  + `Jolt.installAssertCallback()`
+  + `Jolt.installCrashAssertCallback()`
+  + `Jolt.installIgnoreAssertCallback()`
+  + `Jolt.loadResourceAsBytes()`
+  + `Jolt.newDirectLongBuffer()`
+  + `Jolt.registerHair()`
+  + `ObjectStreamIn.sReadObject(StringStream, HairSettingsRef)`
+  + `Ragdoll.addLinearVelocity()` (2 methods)
+  + `RagdollRef.addLinearVelocity()` (2 methods)
+  + `StreamInWrapper.readBytes(Float3)`
+  + `StreamInWrapper.readIndexedTriangles()`
+  + `StreamInWrapper.readMatrices()`
+  + `StreamInWrapper.readSkinWeights()`
+  + `StreamInWrapper.readVec3()`
+
++ Added public constructors:
+ + `Float3(FloatBuffer, int)`
+ + `Geometry(Batch, ConstAaBox)`
+ + `Vec3(FloatBuffer int)`
+
++ Refined the return type of `Geometry.toRef()`.
++ Added `HairSettings` support to `ObjectStreamIn.sReadObject(String, Ref)`,
+  `ObjectStreamOut.sWriteObject(String, EStreamType, ConstJoltPhysicsObject)`,
+  and `sWriteObject(StringStream, EStreamType, ConstJoltPhysicsObject)`.
++ Added a run-time check for illegal state in `Body.setMotionType()`.
++ Updated the Jolt-Physics source and assets to sg260209 (=49f60cb).
++ Updated the OSHI library v6.9.3 .
+
 ## Version 3.5.2 released on 7 January 2026
 
 + Bugfix:  logic error in `Body.applyBuoyancyImpulse()` (issue #31)
