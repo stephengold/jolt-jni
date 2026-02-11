@@ -67,7 +67,7 @@ final public class ComputeSystem extends NonCopyable implements RefTarget {
     public static ComputeSystemResult createComputeSystem() {
         long callbackVa = Jolt.getAssertCallback();
         Jolt.installIgnoreAssertCallback();
-        long resultVa = createSystemGpu();
+        long resultVa = createSystemGpu(); // asserts fail when missing driver
         Jolt.installAssertCallback(callbackVa);
         ComputeSystemResult result = new ComputeSystemResult(resultVa, true);
 
