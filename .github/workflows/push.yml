@@ -14,6 +14,7 @@ jobs:
           vulkan-components: Vulkan-Headers, Vulkan-Loader
           vulkan-query-version: 1.4.341.0
           vulkan-use-cache: true
+      - run: export VULKAN_SDK=/Users/runner/work/jolt-jni/jolt-jni/VULKAN_SDK/1.4.341.0/macOS
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '26.2.0'
