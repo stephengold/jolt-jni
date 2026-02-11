@@ -110,15 +110,15 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
-      - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 -PuseMTL -x checkstyleMain -x checkstyleTest run runSmokeTestAll build install
+      - name: gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 -x checkstyleMain -x checkstyleTest run runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 -PuseMTL -x checkstyleMain -x checkstyleTest run runSmokeTestAll build install \
+          ./gradlew -Pbt=Debug -Pflavor=Sp -Ptarget=MacOSX64 -x checkstyleMain -x checkstyleTest run runSmokeTestAll build install \
             --console=plain
-      - name: gradlew -Partifact=jolt-jni-MacOSX64 -Ptarget=MacOSX64 -PuseMTL clean release
+      - name: gradlew -Partifact=jolt-jni-MacOSX64 -Ptarget=MacOSX64 clean release
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          ./gradlew -Partifact=jolt-jni-MacOSX64 -Ptarget=MacOSX64 -PuseMTL clean release \
+          ./gradlew -Partifact=jolt-jni-MacOSX64 -Ptarget=MacOSX64 clean release \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
@@ -140,15 +140,15 @@ jobs:
           java-version: 21
       - uses: actions/checkout@v6
       - uses: gradle/actions/setup-gradle@v5
-      - name: gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -PuseMTL -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
+      - name: gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -x checkstyleMain -x checkstyleTest runSmokeTestAll build install
         if: "!startsWith(github.ref, 'refs/tags/')"
         run: |
-          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -PuseMTL -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
+          ./gradlew -Pbt=Debug -Pflavor=Dp -Ptarget=MacOSX_ARM64 -x checkstyleMain -x checkstyleTest runSmokeTestAll build install \
             --console=plain
-      - name: gradlew -Partifact=jolt-jni-MacOSX_ARM64 -Ptarget=MacOSX_ARM64 -PuseMTL clean release
+      - name: gradlew -Partifact=jolt-jni-MacOSX_ARM64 -Ptarget=MacOSX_ARM64 clean release
         if: startsWith(github.ref, 'refs/tags/')
         run: |
-          ./gradlew -Partifact=jolt-jni-MacOSX_ARM64 -Ptarget=MacOSX_ARM64 -PuseMTL clean release \
+          ./gradlew -Partifact=jolt-jni-MacOSX_ARM64 -Ptarget=MacOSX_ARM64 clean release \
             --console=plain \
             -PsigningKeyEncoded='${{ secrets.SIGNING_KEY_ENCODED }}' \
             -PsigningPassword='${{ secrets.SIGNING_PASSWORD }}' \
