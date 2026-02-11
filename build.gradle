@@ -266,8 +266,8 @@ model {
                     }
 
                 } else { // toolChain in Clang or Gcc
-                    //cppCompiler.args '-v' // to log compiler details
-                    //linker.args '-v' // to log linker details
+                    cppCompiler.args '-v' // to log compiler details
+                    linker.args '-v' // to log linker details
 
                     cppCompiler.args '-fno-exceptions' // disable C++ exceptions
                     objcppCompiler.args '-fno-exceptions'
