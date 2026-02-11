@@ -595,6 +595,8 @@ final public class TestUtils {
 
         boolean success = false;
         if (file.exists() && file.canRead()) {
+            String q = MyString.quote(absoluteFilename);
+            System.out.println("load a native library from " + q);
             System.load(absoluteFilename);
             success = true;
         }
@@ -611,6 +613,8 @@ final public class TestUtils {
             file = new File(file, name);
             absoluteFilename = file.getAbsolutePath();
             if (file.exists() && file.canRead()) {
+                String q = MyString.quote(absoluteFilename);
+                System.out.println("load a fallback native library from " + q);
                 System.load(absoluteFilename);
                 success = true;
             }
@@ -712,7 +716,7 @@ final public class TestUtils {
         if (file.exists() && file.canRead()) {
             System.load(absoluteFilename);
             String q = MyString.quote(absoluteFilename);
-            System.out.println("loaded Vulkan from " + q);
+            System.out.println("loaded a Vulkan library from " + q);
             success = true;
         }
 
