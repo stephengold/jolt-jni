@@ -9,6 +9,11 @@ jobs:
     if: contains(toJson(github.event.commits), '[ci skip] ') == false
     runs-on: macos-26
     steps:
+      - uses: humbletim/setup-vulkan-sdk@v1.2.1
+        with:
+          vulkan-components: Vulkan-Headers, Vulkan-Loader
+          vulkan-query-version: 1.4.341.0
+          vulkan-use-cache: true
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '26.2.0'
