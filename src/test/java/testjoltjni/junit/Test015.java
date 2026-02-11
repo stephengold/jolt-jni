@@ -95,9 +95,8 @@ public class Test015 {
         if (!gpu.hasError()) {
             testComputeSystem(gpu);
         }
-        TestUtils.testClose(gpu);
 
-        TestUtils.testClose(cpu);
+        TestUtils.testClose(gpu, cpu);
         System.gc();
     }
 
