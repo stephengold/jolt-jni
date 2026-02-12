@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 3.6.0 released on TBD
+## Version 3.6.0 released on 11 February 2026
 
 + Bugfixes:
   + unsatisfied link for `Geometry.create(long)`
@@ -80,9 +80,9 @@
   + `StreamInWrapper.readVec3()`
 
 + Added public constructors:
- + `Float3(FloatBuffer, int)`
- + `Geometry(Batch, ConstAaBox)`
- + `Vec3(FloatBuffer int)`
+  + `Float3(FloatBuffer, int)`
+  + `Geometry(Batch, ConstAaBox)`
+  + `Vec3(FloatBuffer int)`
 
 + Refined the return type of `Geometry.toRef()`.
 + Added `HairSettings` support to `ObjectStreamIn.sReadObject(String, Ref)`,
