@@ -593,6 +593,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getTra
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID id(bodyId);
     TransformedShape * const pResult = new TransformedShape();
+    TRACE_NEW("TransformedShape", pResult)
     *pResult = pInterface->GetTransformedShape(id);
     return reinterpret_cast<jlong> (pResult);
 }
