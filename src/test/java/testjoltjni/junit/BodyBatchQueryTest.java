@@ -54,7 +54,8 @@ public class BodyBatchQueryTest {
     // new methods exposed
 
     /**
-     * Test all batch getter and status methods in {@code BodyInterface}.
+     * Test all batch getter, setter, and status methods
+     * in {@code BodyInterface}.
      */
     @Test
     public void testBodyBatchQueries() {
@@ -96,6 +97,12 @@ public class BodyBatchQueryTest {
         verifyMatrixGetters(bodyInterface, ids, numBodies);
         verifyIntGetters(bodyInterface, ids, numBodies);
         verifyLongGetters(bodyInterface, ids, numBodies);
+
+        verifyFloatSetters(bodyInterface, ids, numBodies);
+        verifyVec3Setters(bodyInterface, ids, numBodies);
+        verifyDoubleSetters(bodyInterface, ids, numBodies);
+        verifyIntSetters(bodyInterface, ids, numBodies);
+        verifyLongSetters(bodyInterface, ids, numBodies);
 
         TestUtils.testClose(ids);
         TestUtils.cleanupPhysicsSystem(physicsSystem);
@@ -285,6 +292,146 @@ public class BodyBatchQueryTest {
             Assert.assertEquals(q.getY(), quatBuf.get(i * 4 + 1), 1e-6f);
             Assert.assertEquals(q.getZ(), quatBuf.get(i * 4 + 2), 1e-6f);
             Assert.assertEquals(q.getW(), quatBuf.get(i * 4 + 3), 1e-6f);
+        }
+    }
+
+    /**
+     * Verify batch double setters (position).
+     *
+     * @param bi  the interface to use (not null)
+     * @param ids IDs of bodies to modify (not null)
+     * @param n   the number of bodies
+     */
+    private void verifyDoubleSetters(
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
+        DoubleBuffer posBuf = Jolt.newDirectDoubleBuffer(n * 3);
+        for (int i = 0; i < n; ++i) {
+            posBuf.put(i * 3, 100.0 + i);
+            posBuf.put(i * 3 + 1, 200.0 + i);
+            posBuf.put(i * 3 + 2, 300.0 + i);
+        }
+        bi.setPositions(ids, posBuf, EActivation.DontActivate);
+        for (int i = 0; i < n; ++i) {
+            RVec3 p = bi.getPosition(ids.get(i));
+            Assert.assertEquals(100.0 + i, p.xx(), 1e-6);
+            Assert.assertEquals(200.0 + i, p.yy(), 1e-6);
+            Assert.assertEquals(300.0 + i, p.zz(), 1e-6);
+        }
+    }
+
+    /**
+     * Verify batch float setters (friction, gravity factor, restitution).
+     *
+     * @param bi  the interface to use (not null)
+     * @param ids IDs of bodies to modify (not null)
+     * @param n   the number of bodies
+     */
+    private void verifyFloatSetters(
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
+        FloatBuffer floatBuf = Jolt.newDirectFloatBuffer(n);
+
+        for (int i = 0; i < n; ++i) {
+            floatBuf.put(i, 0.5f + 0.01f * i);
+        }
+        bi.setFrictions(ids, floatBuf);
+        for (int i = 0; i < n; ++i) {
+            Assert.assertEquals(0.5f + 0.01f * i,
+                    bi.getFriction(ids.get(i)), 1e-6f);
+        }
+
+        for (int i = 0; i < n; ++i) {
+            floatBuf.put(i, 2.0f + i);
+        }
+        bi.setGravityFactors(ids, floatBuf);
+        for (int i = 0; i < n; ++i) {
+            Assert.assertEquals(2.0f + i,
+                    bi.getGravityFactor(ids.get(i)), 1e-6f);
+        }
+
+        for (int i = 0; i < n; ++i) {
+            floatBuf.put(i, 0.3f + 0.01f * i);
+        }
+        bi.setRestitutions(ids, floatBuf);
+        for (int i = 0; i < n; ++i) {
+            Assert.assertEquals(0.3f + 0.01f * i,
+                    bi.getRestitution(ids.get(i)), 1e-6f);
+        }
+    }
+
+    /**
+     * Verify batch integer setters (object layer).
+     *
+     * @param bi  the interface to use (not null)
+     * @param ids IDs of bodies to modify (not null)
+     * @param n   the number of bodies
+     */
+    private void verifyIntSetters(
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
+        IntBuffer intBuf = Jolt.newDirectIntBuffer(n);
+        for (int i = 0; i < n; ++i) {
+            intBuf.put(i, TestUtils.objLayerMoving);
+        }
+        bi.setObjectLayers(ids, intBuf);
+        for (int i = 0; i < n; ++i) {
+            Assert.assertEquals(TestUtils.objLayerMoving,
+                    bi.getObjectLayer(ids.get(i)));
+        }
+    }
+
+    /**
+     * Verify batch long setters (user data).
+     *
+     * @param bi  the interface to use (not null)
+     * @param ids IDs of bodies to modify (not null)
+     * @param n   the number of bodies
+     */
+    private void verifyLongSetters(
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
+        LongBuffer dataBuf = Jolt.newDirectLongBuffer(n);
+        for (int i = 0; i < n; ++i) {
+            dataBuf.put(i, 9999L + i);
+        }
+        bi.setUserDatas(ids, dataBuf);
+        for (int i = 0; i < n; ++i) {
+            Assert.assertEquals(9999L + i, bi.getUserData(ids.get(i)));
+        }
+    }
+
+    /**
+     * Verify batch Vec3 setters (angular velocity, linear velocity).
+     *
+     * @param bi  the interface to use (not null)
+     * @param ids IDs of bodies to modify (not null)
+     * @param n   the number of bodies
+     */
+    private void verifyVec3Setters(
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
+        FloatBuffer vec3Buf = Jolt.newDirectFloatBuffer(n * 3);
+
+        for (int i = 0; i < n; ++i) {
+            vec3Buf.put(i * 3, 10f + i);
+            vec3Buf.put(i * 3 + 1, 20f + i);
+            vec3Buf.put(i * 3 + 2, 30f + i);
+        }
+        bi.setLinearVelocities(ids, vec3Buf);
+        for (int i = 0; i < n; ++i) {
+            Vec3 v = bi.getLinearVelocity(ids.get(i));
+            Assert.assertEquals(10f + i, v.getX(), 1e-6f);
+            Assert.assertEquals(20f + i, v.getY(), 1e-6f);
+            Assert.assertEquals(30f + i, v.getZ(), 1e-6f);
+        }
+
+        for (int i = 0; i < n; ++i) {
+            vec3Buf.put(i * 3, 1f + i);
+            vec3Buf.put(i * 3 + 1, 2f + i);
+            vec3Buf.put(i * 3 + 2, 3f + i);
+        }
+        bi.setAngularVelocities(ids, vec3Buf);
+        for (int i = 0; i < n; ++i) {
+            Vec3 w = bi.getAngularVelocity(ids.get(i));
+            Assert.assertEquals(1f + i, w.getX(), 1e-6f);
+            Assert.assertEquals(2f + i, w.getY(), 1e-6f);
+            Assert.assertEquals(3f + i, w.getZ(), 1e-6f);
         }
     }
 }

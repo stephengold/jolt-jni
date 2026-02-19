@@ -21,6 +21,7 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
+import com.github.stephengold.joltjni.enumerate.EActivation;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -205,23 +206,6 @@ public class BatchBodyInterface extends BodyInterface {
     }
 
     /**
-     * Copy the linear velocities of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeVelocities storage for the velocities (not null, interleaved
-     * X,Y,Z, size >= 3*numBodies, modified)
-     */
-    public void getLinearVelocities(
-            BodyIdArray bodyIds, FloatBuffer storeVelocities) {
-        int numBodies = bodyIds.length();
-        assert storeVelocities.capacity() >= numBodies * 3;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getLinearVelocities(
-                bodyInterfaceVa, arrayVa, numBodies, storeVelocities);
-    }
-
-    /**
      * Copy the inverses of the inertia tensors in system coordinates.
      *
      * @param bodyIds the IDs of the bodies to query (not null)
@@ -236,6 +220,23 @@ public class BatchBodyInterface extends BodyInterface {
         long arrayVa = bodyIds.va();
         getInverseInertias(
                 bodyInterfaceVa, arrayVa, numBodies, storeMatrices);
+    }
+
+    /**
+     * Copy the linear velocities of the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies (not null)
+     * @param storeVelocities storage for the velocities (not null, interleaved
+     * X,Y,Z, size >= 3*numBodies, modified)
+     */
+    public void getLinearVelocities(
+            BodyIdArray bodyIds, FloatBuffer storeVelocities) {
+        int numBodies = bodyIds.length();
+        assert storeVelocities.capacity() >= numBodies * 3;
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        getLinearVelocities(
+                bodyInterfaceVa, arrayVa, numBodies, storeVelocities);
     }
 
     /**
@@ -406,6 +407,131 @@ public class BatchBodyInterface extends BodyInterface {
                 bodyInterfaceVa, arrayVa, numBodies, storeStatus);
     }
 
+    /**
+     * Alter the angular velocities of the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies (not null)
+     * @param velocities the desired velocities (not null, interleaved
+     * X,Y,Z, size >= 3*numBodies)
+     */
+    public void setAngularVelocities(
+            BodyIdArray bodyIds, FloatBuffer velocities) {
+        int numBodies = bodyIds.length();
+        assert velocities.capacity() >= numBodies * 3;
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        setAngularVelocities(
+                bodyInterfaceVa, arrayVa, numBodies, velocities);
+    }
+
+    /**
+     * Alter the friction ratios of the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies (not null)
+     * @param frictions the desired values (not null, size >= numBodies)
+     */
+    public void setFrictions(BodyIdArray bodyIds, FloatBuffer frictions) {
+        int numBodies = bodyIds.length();
+        assert frictions.capacity() >= numBodies;
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        setFrictions(bodyInterfaceVa, arrayVa, numBodies, frictions);
+    }
+
+    /**
+     * Alter the gravity factors of the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies (not null)
+     * @param factors the desired values (not null, size >= numBodies)
+     */
+    public void setGravityFactors(BodyIdArray bodyIds, FloatBuffer factors) {
+        int numBodies = bodyIds.length();
+        assert factors.capacity() >= numBodies;
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        setGravityFactors(bodyInterfaceVa, arrayVa, numBodies, factors);
+    }
+
+    /**
+     * Alter the linear velocities of the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies (not null)
+     * @param velocities the desired velocities (not null, interleaved
+     * X,Y,Z, size >= 3*numBodies)
+     */
+    public void setLinearVelocities(
+            BodyIdArray bodyIds, FloatBuffer velocities) {
+        int numBodies = bodyIds.length();
+        assert velocities.capacity() >= numBodies * 3;
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        setLinearVelocities(
+                bodyInterfaceVa, arrayVa, numBodies, velocities);
+    }
+
+    /**
+     * Alter the object layers of the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies (not null)
+     * @param layers the desired layers (not null, size >= numBodies)
+     */
+    public void setObjectLayers(BodyIdArray bodyIds, IntBuffer layers) {
+        int numBodies = bodyIds.length();
+        assert layers.capacity() >= numBodies;
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        setObjectLayers(bodyInterfaceVa, arrayVa, numBodies, layers);
+    }
+
+    /**
+     * Relocate the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies (not null)
+     * @param locations the desired locations (not null, interleaved
+     * X,Y,Z, size >= 3*numBodies)
+     * @param activation whether to activate the bodies (not null)
+     */
+    public void setPositions(BodyIdArray bodyIds, DoubleBuffer locations,
+            EActivation activation) {
+        int numBodies = bodyIds.length();
+        assert locations.capacity() >= numBodies * 3;
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        int activationOrdinal = activation.ordinal();
+        setPositions(bodyInterfaceVa, arrayVa, numBodies, locations,
+                activationOrdinal);
+    }
+
+    /**
+     * Alter the restitution ratios of the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies (not null)
+     * @param restitutions the desired values (not null, size >= numBodies)
+     */
+    public void setRestitutions(
+            BodyIdArray bodyIds, FloatBuffer restitutions) {
+        int numBodies = bodyIds.length();
+        assert restitutions.capacity() >= numBodies;
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        setRestitutions(
+                bodyInterfaceVa, arrayVa, numBodies, restitutions);
+    }
+
+    /**
+     * Alter the user data of the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies (not null)
+     * @param data the desired values (not null, size >= numBodies)
+     */
+    public void setUserDatas(BodyIdArray bodyIds, LongBuffer data) {
+        int numBodies = bodyIds.length();
+        assert data.capacity() >= numBodies;
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        setUserDatas(bodyInterfaceVa, arrayVa, numBodies, data);
+    }
+
     // *************************************************************************
     // native private methods
 
@@ -471,4 +597,28 @@ public class BatchBodyInterface extends BodyInterface {
 
     native private static void getUseManifoldReductions(long bodyInterfaceVa,
             long arrayVa, int numBodies, IntBuffer storeStatus);
+
+    native private static void setAngularVelocities(long bodyInterfaceVa,
+            long arrayVa, int numBodies, FloatBuffer velocities);
+
+    native private static void setFrictions(long bodyInterfaceVa, long arrayVa,
+            int numBodies, FloatBuffer frictions);
+
+    native private static void setGravityFactors(long bodyInterfaceVa,
+            long arrayVa, int numBodies, FloatBuffer factors);
+
+    native private static void setLinearVelocities(long bodyInterfaceVa,
+            long arrayVa, int numBodies, FloatBuffer velocities);
+
+    native private static void setObjectLayers(long bodyInterfaceVa,
+            long arrayVa, int numBodies, IntBuffer layers);
+
+    native private static void setPositions(long bodyInterfaceVa, long arrayVa,
+            int numBodies, DoubleBuffer locations, int activationOrdinal);
+
+    native private static void setRestitutions(long bodyInterfaceVa,
+            long arrayVa, int numBodies, FloatBuffer restitutions);
+
+    native private static void setUserDatas(long bodyInterfaceVa, long arrayVa,
+            int numBodies, LongBuffer data);
 }
