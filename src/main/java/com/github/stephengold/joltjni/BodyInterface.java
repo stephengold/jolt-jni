@@ -36,8 +36,6 @@ import com.github.stephengold.joltjni.readonly.RVec3Arg;
 import com.github.stephengold.joltjni.readonly.Vec3Arg;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.LongBuffer;
 
 /**
  * An interface to a {@code PhysicsSystem}, used to create, add, modify, query,
@@ -113,97 +111,6 @@ public class BodyInterface extends NonCopyable {
         float ly = angularImpulse.getY();
         float lz = angularImpulse.getZ();
         addAngularImpulse(bodyInterfaceVa, bodyId, lx, ly, lz);
-    }
-
-    /**
-     * Abort adding bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
-     * @param addState the handle returned by {@code addBodiesPrepare()}
-     */
-    public void addBodiesAbort(BodyIdArray bodyIds, long addState) {
-        int numBodies = bodyIds.length();
-        addBodiesAbort(bodyIds, numBodies, addState);
-    }
-
-    /**
-     * Abort adding bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
-     * @param numBodies the number of bodies to be added (&ge;0)
-     * @param addState the handle returned by {@code addBodiesPrepare()}
-     */
-    public void addBodiesAbort(
-            BodyIdArray bodyIds, int numBodies, long addState) {
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        addBodiesAbort(bodyInterfaceVa, arrayVa, numBodies, addState);
-    }
-
-    /**
-     * Finish adding bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
-     * @param addState the handle returned by {@code addBodiesPrepare()}
-     * @param activation whether to activate the bodies (not null)
-     */
-    public void addBodiesFinalize(
-            BodyIdArray bodyIds, long addState, EActivation activation) {
-        int numBodies = bodyIds.length();
-        addBodiesFinalize(bodyIds, numBodies, addState, activation);
-    }
-
-    /**
-     * Finish adding bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
-     * @param numBodies the number of bodies to be added (&ge;0)
-     * @param addState the handle returned by {@code addBodiesPrepare()}
-     * @param activation whether to activate the bodies (not null)
-     */
-    public void addBodiesFinalize(BodyIdArray bodyIds, int numBodies,
-            long addState, EActivation activation) {
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        int activationOrdinal = activation.ordinal();
-        addBodiesFinalize(bodyInterfaceVa, arrayVa, numBodies, addState,
-                activationOrdinal);
-    }
-
-    /**
-     * Prepare to add a batch of bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, possibly
-     * shuffled)
-     * @return a handle to be passed to {@code addBodiesFinalize()} or
-     * {@code addBodiesAbort()}
-     */
-    public long addBodiesPrepare(BodyIdArray bodyIds) {
-        int numBodies = bodyIds.length();
-        long result = addBodiesPrepare(bodyIds, numBodies);
-
-        return result;
-    }
-
-    /**
-     * Prepare to add a batch of bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, possibly
-     * shuffled)
-     * @param numBodies the number of bodies to be added (&ge;0)
-     * @return a handle to be passed to {@code addBodiesFinalize()} or
-     * {@code addBodiesAbort()}
-     */
-    public long addBodiesPrepare(BodyIdArray bodyIds, int numBodies) {
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        long result = addBodiesPrepare(bodyInterfaceVa, arrayVa, numBodies);
-
-        return result;
     }
 
     /**
@@ -313,51 +220,6 @@ public class BodyInterface extends NonCopyable {
         float y = torque.getY();
         float z = torque.getZ();
         addTorque(bodyInterfaceVa, bodyId, x, y, z);
-    }
-
-    /**
-     * Test whether the specified bodies are active.
-     *
-     * @param bodyIds the IDs of the bodies to test (not null)
-     * @param storeStatus storage for the statuses (not null, 1 for active,
-     * 0 for inactive)
-     */
-    public void areActive(BodyIdArray bodyIds, IntBuffer storeStatus) {
-        int numBodies = bodyIds.length();
-        assert storeStatus.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        areActive(bodyInterfaceVa, arrayVa, numBodies, storeStatus);
-    }
-
-    /**
-     * Test whether the specified bodies are added to the system.
-     *
-     * @param bodyIds the IDs of the bodies to search for (not null)
-     * @param storeStatus storage for the statuses (not null, 1 for added, 0 for
-     * not added)
-     */
-    public void areAdded(BodyIdArray bodyIds, IntBuffer storeStatus) {
-        int numBodies = bodyIds.length();
-        assert storeStatus.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        areAdded(bodyInterfaceVa, arrayVa, numBodies, storeStatus);
-    }
-
-    /**
-     * Test whether the specified bodies are sensors.
-     *
-     * @param bodyIds the IDs of the bodies to test (not null)
-     * @param storeStatus storage for the statuses (not null, 1 for sensor,
-     * 0 for non-sensor)
-     */
-    public void areSensors(BodyIdArray bodyIds, IntBuffer storeStatus) {
-        int numBodies = bodyIds.length();
-        assert storeStatus.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        areSensors(bodyInterfaceVa, arrayVa, numBodies, storeStatus);
     }
 
     /**
@@ -471,30 +333,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Destroy the specified bodies. Don't use this on bodies that have been
-     * added but not removed yet!
-     *
-     * @param bodyIds the IDs of the bodies to destroy (not null)
-     */
-    public void destroyBodies(BodyIdArray bodyIds) {
-        int numBodies = bodyIds.length();
-        destroyBodies(bodyIds, numBodies);
-    }
-
-    /**
-     * Destroy the specified bodies. Don't use this on bodies that have been
-     * added but not removed yet!
-     *
-     * @param bodyIds the IDs of the bodies to destroy (not null)
-     * @param numBodies the number of bodies to destroy (&ge;0)
-     */
-    public void destroyBodies(BodyIdArray bodyIds, int numBodies) {
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        destroyBodies(bodyInterfaceVa, arrayVa, numBodies);
-    }
-
-    /**
      * Destroy the specified body. Don't use this on a body that has been added
      * but not removed yet!
      *
@@ -535,23 +373,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Copy the angular velocities of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeVelocities storage for the velocities (not null, interleaved
-     * X,Y,Z, size >= 3*numBodies, modified)
-     */
-    public void getAngularVelocities(
-            BodyIdArray bodyIds, FloatBuffer storeVelocities) {
-        int numBodies = bodyIds.length();
-        assert storeVelocities.capacity() >= numBodies * 3;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getAngularVelocities(
-                bodyInterfaceVa, arrayVa, numBodies, storeVelocities);
-    }
-
-    /**
      * Return the type of the specified body.
      *
      * @param bodyId the ID of the body to query
@@ -563,21 +384,6 @@ public class BodyInterface extends NonCopyable {
         EBodyType result = EBodyType.values()[ordinal];
 
         return result;
-    }
-
-    /**
-     * Return the types of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeTypes storage for the ordinals (not null, size >= numBodies,
-     * modified)
-     */
-    public void getBodyTypes(BodyIdArray bodyIds, IntBuffer storeTypes) {
-        int numBodies = bodyIds.length();
-        assert storeTypes.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getBodyTypes(bodyInterfaceVa, arrayVa, numBodies, storeTypes);
     }
 
     /**
@@ -596,23 +402,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Locate the centers of mass of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies to locate (not null)
-     * @param storePositions storage for the locations (not null, interleaved
-     * X,Y,Z, size >= 3*numBodies, modified)
-     */
-    public void getCenterOfMassPositions(
-            BodyIdArray bodyIds, DoubleBuffer storePositions) {
-        int numBodies = bodyIds.length();
-        assert storePositions.capacity() >= numBodies * 3;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getCenterOfMassPositions(
-                bodyInterfaceVa, arrayVa, numBodies, storePositions);
-    }
-
-    /**
      * Return the center-of-mass transform of the specified body.
      *
      * @param bodyId the ID of the body to locate
@@ -624,23 +413,6 @@ public class BodyInterface extends NonCopyable {
         RMat44 result = new RMat44(matrixVa, true);
 
         return result;
-    }
-
-    /**
-     * Return the center-of-mass transforms of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies to locate (not null)
-     * @param storeMatrices storage for the matrices (not null, 16 doubles per
-     * body, interleaved, modified)
-     */
-    public void getCenterOfMassTransforms(
-            BodyIdArray bodyIds, DoubleBuffer storeMatrices) {
-        int numBodies = bodyIds.length();
-        assert storeMatrices.capacity() >= numBodies * 16;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getCenterOfMassTransforms(
-                bodyInterfaceVa, arrayVa, numBodies, storeMatrices);
     }
 
     /**
@@ -656,22 +428,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Return the friction ratios of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeFrictions storage for the values
-     * (not null, size >= numBodies, modified)
-     */
-    public void getFrictions(BodyIdArray bodyIds, FloatBuffer storeFrictions) {
-        int numBodies = bodyIds.length();
-        assert storeFrictions.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getFrictions(
-                bodyInterfaceVa, arrayVa, numBodies, storeFrictions);
-    }
-
-    /**
      * Return the gravity factor of the specified body.
      *
      * @param bodyId the ID of the body
@@ -682,23 +438,6 @@ public class BodyInterface extends NonCopyable {
         float result = getGravityFactor(bodyInterfaceVa, bodyId);
 
         return result;
-    }
-
-    /**
-     * Return the gravity factors of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeFactors storage for the values (not null, size >= numBodies,
-     * modified)
-     */
-    public void getGravityFactors(BodyIdArray bodyIds,
-                                  FloatBuffer storeFactors) {
-        int numBodies = bodyIds.length();
-        assert storeFactors.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getGravityFactors(
-                bodyInterfaceVa, arrayVa, numBodies, storeFactors);
     }
 
     /**
@@ -731,23 +470,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Copy the linear velocities of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeVelocities storage for the velocities (not null, interleaved
-     * X,Y,Z, size >= 3*numBodies, modified)
-     */
-    public void getLinearVelocities(
-            BodyIdArray bodyIds, FloatBuffer storeVelocities) {
-        int numBodies = bodyIds.length();
-        assert storeVelocities.capacity() >= numBodies * 3;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getLinearVelocities(
-                bodyInterfaceVa, arrayVa, numBodies, storeVelocities);
-    }
-
-    /**
      * Copy the inverse of the inertia tensor in system coordinates.
      *
      * @param bodyId the ID of the body to query
@@ -759,23 +481,6 @@ public class BodyInterface extends NonCopyable {
         Mat44 result = new Mat44(matrixVa, true);
 
         return result;
-    }
-
-    /**
-     * Copy the inverses of the inertia tensors in system coordinates.
-     *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeMatrices storage for the matrices (not null, 16 floats per
-     * body, interleaved, modified)
-     */
-    public void getInverseInertias(
-            BodyIdArray bodyIds, FloatBuffer storeMatrices) {
-        int numBodies = bodyIds.length();
-        assert storeMatrices.capacity() >= numBodies * 16;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getInverseInertias(
-                bodyInterfaceVa, arrayVa, numBodies, storeMatrices);
     }
 
     /**
@@ -793,23 +498,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Return the motion qualities of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeQualities storage for the ordinals
-     *                       (not null, size >= numBodies, modified)
-     */
-    public void getMotionQualities(
-            BodyIdArray bodyIds, IntBuffer storeQualities) {
-        int numBodies = bodyIds.length();
-        assert storeQualities.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getMotionQualities(
-                bodyInterfaceVa, arrayVa, numBodies, storeQualities);
-    }
-
-    /**
      * Return the motion type of the specified body.
      *
      * @param bodyId the ID of the body to query
@@ -824,21 +512,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Return the motion types of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeTypes storage for the ordinals (not null, size >= numBodies,
-     * modified)
-     */
-    public void getMotionTypes(BodyIdArray bodyIds, IntBuffer storeTypes) {
-        int numBodies = bodyIds.length();
-        assert storeTypes.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getMotionTypes(bodyInterfaceVa, arrayVa, numBodies, storeTypes);
-    }
-
-    /**
      * Return the object layer of the specified body.
      *
      * @param bodyId the ID of the body to query
@@ -849,21 +522,6 @@ public class BodyInterface extends NonCopyable {
         int result = getObjectLayer(bodyInterfaceVa, bodyId);
 
         return result;
-    }
-
-    /**
-     * Return the object layers of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeLayers storage for the layers (not null, size >= numBodies,
-     * modified)
-     */
-    public void getObjectLayers(BodyIdArray bodyIds, IntBuffer storeLayers) {
-        int numBodies = bodyIds.length();
-        assert storeLayers.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getObjectLayers(bodyInterfaceVa, arrayVa, numBodies, storeLayers);
     }
 
     /**
@@ -893,21 +551,6 @@ public class BodyInterface extends NonCopyable {
         DoubleBuffer storeDoubles = Temporaries.doubleBuffer1.get();
         getPosition(bodyInterfaceVa, bodyId, storeDoubles);
         storeLocation.set(storeDoubles);
-    }
-
-    /**
-     * Copy the locations of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies to locate (not null)
-     * @param storeLocations storage for the locations (not null, interleaved
-     * X,Y,Z, size >= 3*numBodies, modified)
-     */
-    public void getPositions(BodyIdArray bodyIds, DoubleBuffer storeLocations) {
-        int numBodies = bodyIds.length();
-        assert storeLocations.capacity() >= numBodies * 3;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getPositions(bodyInterfaceVa, arrayVa, numBodies, storeLocations);
     }
 
     /**
@@ -943,23 +586,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Return the restitution ratios of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeRestitutions storage for the values
-     *                         (not null, size >= numBodies, modified)
-     */
-    public void getRestitutions(
-            BodyIdArray bodyIds, FloatBuffer storeRestitutions) {
-        int numBodies = bodyIds.length();
-        assert storeRestitutions.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getRestitutions(
-                bodyInterfaceVa, arrayVa, numBodies, storeRestitutions);
-    }
-
-    /**
      * Copy the orientation of the specified body.
      *
      * @param bodyId the ID of the body
@@ -990,22 +616,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Copy the orientations of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeOrientations storage for the rotations (not null, interleaved
-     * X,Y,Z,W, size >= 4*numBodies, modified)
-     */
-    public void getRotations(
-            BodyIdArray bodyIds, FloatBuffer storeOrientations) {
-        int numBodies = bodyIds.length();
-        assert storeOrientations.capacity() >= numBodies * 4;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getRotations(bodyInterfaceVa, arrayVa, numBodies, storeOrientations);
-    }
-
-    /**
      * Access the body's shape.
      *
      * @param bodyId the ID of the body
@@ -1016,26 +626,6 @@ public class BodyInterface extends NonCopyable {
         long shapeRefVa = getShape(bodyInterfaceVa, bodyId);
         ShapeRefC result = new ShapeRefC(shapeRefVa, true);
 
-        return result;
-    }
-
-    /**
-     * Access the shapes of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @return a new array of new references
-     */
-    public ShapeRefC[] getShapes(BodyIdArray bodyIds) {
-        int numBodies = bodyIds.length();
-        LongBuffer storeShapeVas = Jolt.newDirectLongBuffer(numBodies);
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getShapes(bodyInterfaceVa, arrayVa, numBodies, storeShapeVas);
-        ShapeRefC[] result = new ShapeRefC[numBodies];
-        for (int i = 0; i < numBodies; ++i) {
-            long va = storeShapeVas.get(i);
-            result[i] = new ShapeRefC(va, true);
-        }
         return result;
     }
 
@@ -1064,27 +654,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Generate transformed shapes for the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @return a new array of new objects
-     */
-    public TransformedShape[] getTransformedShapes(BodyIdArray bodyIds) {
-        int numBodies = bodyIds.length();
-        LongBuffer storeShapeVas = Jolt.newDirectLongBuffer(numBodies);
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getTransformedShapes(
-                bodyInterfaceVa, arrayVa, numBodies, storeShapeVas);
-        TransformedShape[] result = new TransformedShape[numBodies];
-        for (int i = 0; i < numBodies; ++i) {
-            long va = storeShapeVas.get(i);
-            result[i] = new TransformedShape(va, true);
-        }
-        return result;
-    }
-
-    /**
      * Test whether manifold reduction is enabled.
      *
      * @param bodyId the ID of the body
@@ -1098,23 +667,6 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
-     * Test whether manifold reduction is enabled for the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeStatus storage for the statuses (not null, 1 for enabled,
-     * 0 for disabled, size >= numBodies, modified)
-     */
-    public void getUseManifoldReductions(
-            BodyIdArray bodyIds, IntBuffer storeStatus) {
-        int numBodies = bodyIds.length();
-        assert storeStatus.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getUseManifoldReductions(
-                bodyInterfaceVa, arrayVa, numBodies, storeStatus);
-    }
-
-    /**
      * Return the user data of the specified body.
      *
      * @param bodyId the ID of the body
@@ -1125,21 +677,6 @@ public class BodyInterface extends NonCopyable {
         long result = getUserData(bodyInterfaceVa, bodyId);
 
         return result;
-    }
-
-    /**
-     * Return the user data of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeData storage for the values (not null, size >= numBodies,
-     * modified)
-     */
-    public void getUserDatas(BodyIdArray bodyIds, LongBuffer storeData) {
-        int numBodies = bodyIds.length();
-        assert storeData.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getUserDatas(bodyInterfaceVa, arrayVa, numBodies, storeData);
     }
 
     /**
@@ -1218,30 +755,6 @@ public class BodyInterface extends NonCopyable {
         notifyShapeChanged(bodyInterfaceVa, bodyId, prevCom.getX(),
                 prevCom.getY(), prevCom.getZ(), updateMassProperties,
                 activationOrdinal);
-    }
-
-    /**
-     * Remove the specified bodies from the physics system, but don't destroy
-     * them.
-     *
-     * @param bodyIds the IDs of the bodies to remove (not null)
-     */
-    public void removeBodies(BodyIdArray bodyIds) {
-        int numBodies = bodyIds.length();
-        removeBodies(bodyIds, numBodies);
-    }
-
-    /**
-     * Remove the specified bodies from the physics system, but don't destroy
-     * them.
-     *
-     * @param bodyIds the IDs of the bodies to remove (not null)
-     * @param numBodies the number of bodies to remove (&ge;0)
-     */
-    public void removeBodies(BodyIdArray bodyIds, int numBodies) {
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        removeBodies(bodyInterfaceVa, arrayVa, numBodies);
     }
 
     /**
@@ -1490,15 +1003,6 @@ public class BodyInterface extends NonCopyable {
     native private static void addAngularImpulse(
             long bodyInterfaceVa, int bodyId, float lx, float ly, float lz);
 
-    native private static void addBodiesAbort(
-            long bodyInterfaceVa, long arrayVa, int numBodies, long addState);
-
-    native private static void addBodiesFinalize(long bodyInterfaceVa,
-            long arrayVa, int numBodies, long addState, int activationOrdinal);
-
-    native private static long addBodiesPrepare(
-            long bodyInterfaceVa, long arrayVa, int numBodies);
-
     native private static void addBody(
             long bodyInterfaceVa, int bodyId, int activationOrdinal);
 
@@ -1519,15 +1023,6 @@ public class BodyInterface extends NonCopyable {
     native private static void addTorque(
             long bodyInterfaceVa, int bodyId, float x, float y, float z);
 
-    native private static void areActive(long bodyInterfaceVa, long arrayVa,
-            int numBodies, IntBuffer storeStatus);
-
-    native private static void areAdded(long bodyInterfaceVa, long arrayVa,
-            int numBodies, IntBuffer storeStatus);
-
-    native private static void areSensors(long bodyInterfaceVa, long arrayVa,
-            int numBodies, IntBuffer storeStatus);
-
     native private static long createBody(
             long bodyInterfaceVa, long settingsVa);
 
@@ -1539,53 +1034,26 @@ public class BodyInterface extends NonCopyable {
 
     native private static void deactivateBody(long bodyInterfaceVa, int bodyId);
 
-    native private static void destroyBodies(
-            long bodyInterfaceVa, long arrayVa, int numBodies);
-
     native private static void destroyBody(long bodyInterfaceVa, int bodyId);
-
-    native private static void getAngularVelocities(long bodyInterfaceVa,
-            long arrayVa, int numBodies, FloatBuffer storeVelocities);
 
     native private static void getAngularVelocity(
             long bodyInterfaceVa, int bodyId, FloatBuffer storeFloats);
 
     native private static int getBodyType(long bodyInterfaceVa, int bodyId);
 
-    native private static void getBodyTypes(long bodyInterfaceVa, long arrayVa,
-            int numBodies, IntBuffer storeTypes);
-
     native private static void getCenterOfMassPosition(
             long bodyInterfaceVa, int bodyId, DoubleBuffer storeDoubles);
-
-    native private static void getCenterOfMassPositions(long bodyInterfaceVa,
-            long arrayVa, int numBodies, DoubleBuffer storePositions);
 
     native private static long getCenterOfMassTransform(
             long bodyInterfaceVa, int bodyId);
 
-    native private static void getCenterOfMassTransforms(long bodyInterfaceVa,
-            long arrayVa, int numBodies, DoubleBuffer storeMatrices);
-
     native private static float getFriction(long bodyInterfaceVa, int bodyId);
-
-    native private static void getFrictions(long bodyInterfaceVa, long arrayVa,
-            int numBodies, FloatBuffer storeFrictions);
 
     native private static float getGravityFactor(
             long bodyInterfaceVa, int bodyId);
 
-    native private static void getGravityFactors(long bodyInterfaceVa,
-            long arrayVa, int numBodies, FloatBuffer storeFactors);
-
     native private static long getInverseInertia(
             long bodyInterfaceVa, int bodyId);
-
-    native private static void getInverseInertias(long bodyInterfaceVa,
-            long arrayVa, int numBodies, FloatBuffer storeMatrices);
-
-    native private static void getLinearVelocities(long bodyInterfaceVa,
-            long arrayVa, int numBodies, FloatBuffer storeVelocities);
 
     native private static void getLinearVelocity(
             long bodyInterfaceVa, int bodyId, FloatBuffer storeFloats);
@@ -1593,18 +1061,9 @@ public class BodyInterface extends NonCopyable {
     native private static int getMotionQuality(
             long bodyInterfaceVa, int bodyId);
 
-    native private static void getMotionQualities(long bodyInterfaceVa,
-            long arrayVa, int numBodies, IntBuffer storeQualities);
-
     native private static int getMotionType(long bodyInterfaceVa, int bodyId);
 
-    native private static void getMotionTypes(long bodyInterfaceVa,
-            long arrayVa, int numBodies, IntBuffer storeTypes);
-
     native private static int getObjectLayer(long bodyInterfaceVa, int bodyId);
-
-    native private static void getObjectLayers(long bodyInterfaceVa,
-            long arrayVa, int numBodies, IntBuffer storeLayers);
 
     native private static void getPosition(
             long bodyInterfaceVa, int bodyId, DoubleBuffer storeDoubles);
@@ -1612,42 +1071,21 @@ public class BodyInterface extends NonCopyable {
     native private static void getPositionAndRotation(long bodyInterfaceVa,
             int bodyId, DoubleBuffer storeDoubles, FloatBuffer storeFloats);
 
-    native private static void getPositions(long bodyInterfaceVa, long arrayVa,
-            int numBodies, DoubleBuffer storeLocations);
-
     native private static float getRestitution(
             long bodyInterfaceVa, int bodyId);
-
-    native private static void getRestitutions(long bodyInterfaceVa,
-            long arrayVa, int numBodies, FloatBuffer storeRestitutions);
 
     native private static void getRotation(
             long bodyInterfaceVa, int bodyId, FloatBuffer storeFloats);
 
-    native private static void getRotations(long bodyInterfaceVa, long arrayVa,
-            int numBodies, FloatBuffer storeOrientations);
-
     native private static long getShape(long bodyInterfaceVa, int bodyId);
-
-    native private static void getShapes(long bodyInterfaceVa, long arrayVa,
-            int numBodies, LongBuffer storeShapeVas);
 
     native private static long getTransformedShape(
             long bodyInterfaceVa, int bodyId);
 
-    native private static void getTransformedShapes(long bodyInterfaceVa,
-            long arrayVa, int numBodies, LongBuffer storeShapeVas);
-
     native private static long getUserData(long bodyInterfaceVa, int bodyId);
-
-    native private static void getUserDatas(long bodyInterfaceVa, long arrayVa,
-            int numBodies, LongBuffer storeData);
 
     native private static boolean getUseManifoldReduction(
             long bodyInterfaceVa, int bodyId);
-
-    native private static void getUseManifoldReductions(long bodyInterfaceVa,
-            long arrayVa, int numBodies, IntBuffer storeStatus);
 
     native private static boolean isActive(long bodyInterfaceVa, int bodyId);
 
@@ -1662,9 +1100,6 @@ public class BodyInterface extends NonCopyable {
     native private static void notifyShapeChanged(long bodyInterfaceVa,
             int bodyId, float prevX, float prevY, float prevZ,
             boolean updateMassProperties, int activationOrdinal);
-
-    native private static void removeBodies(
-            long bodyInterfaceVa, long arrayVa, int numBodies);
 
     native private static void removeBody(long bodyInterfaceVa, int bodyId);
 

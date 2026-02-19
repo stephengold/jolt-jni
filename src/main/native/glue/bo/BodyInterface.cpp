@@ -96,54 +96,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addAngu
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    addBodiesAbort
- * Signature: (JJIJ)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addBodiesAbort
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jlong addState) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
-    BroadPhase::AddState const handle
-            = reinterpret_cast<BroadPhase::AddState> (addState);
-    pInterface->AddBodiesAbort(pArray, numBodies, handle);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    addBodiesFinalize
- * Signature: (JJIJI)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addBodiesFinalize
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jlong addState, jint activationOrdinal) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
-    BroadPhase::AddState const handle
-            = reinterpret_cast<BroadPhase::AddState> (addState);
-    const EActivation eActivation = (EActivation) activationOrdinal;
-    pInterface->AddBodiesFinalize(pArray, numBodies, handle, eActivation);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    addBodiesPrepare
- * Signature: (JJI)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addBodiesPrepare
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
-    BroadPhase::AddState const handle
-            = pInterface->AddBodiesPrepare(pArray, numBodies);
-    return reinterpret_cast<jlong> (handle);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
  * Method:    addBody
  * Signature: (JII)V
  */
@@ -230,59 +182,8 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_addTorq
     pInterface->AddTorque(id, torque);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    areActive
- * Signature: (JJILjava/nio/IntBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_areActive
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeStatus) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_INT_BUFFER(pEnv, storeStatus, pStatus, capacityStatus);
-    JPH_ASSERT(capacityStatus >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pStatus[i] = pInterface->IsActive(pArray[i]) ? 1 : 0;
-    }
-}
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    areAdded
- * Signature: (JJILjava/nio/IntBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_areAdded
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeStatus) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_INT_BUFFER(pEnv, storeStatus, pStatus, capacityStatus);
-    JPH_ASSERT(capacityStatus >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pStatus[i] = pInterface->IsAdded(pArray[i]) ? 1 : 0;
-    }
-}
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    areSensors
- * Signature: (JJILjava/nio/IntBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_areSensors
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeStatus) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_INT_BUFFER(pEnv, storeStatus, pStatus, capacityStatus);
-    JPH_ASSERT(capacityStatus >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pStatus[i] = pInterface->IsSensor(pArray[i]) ? 1 : 0;
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -346,18 +247,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_deactiv
     pInterface->DeactivateBody(id);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    destroyBodies
- * Signature: (JJI)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_destroyBodies
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    pInterface->DestroyBodies(pArray, numBodies);
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -372,26 +261,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_destroy
     pInterface->DestroyBody(id);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getAngularVelocities
- * Signature: (JJILjava/nio/FloatBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getAngularVelocities
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeVelocities) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_FLOAT_BUFFER(pEnv, storeVelocities, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies * 3);
-    for (int i = 0; i < numBodies; ++i) {
-        const Vec3 result = pInterface->GetAngularVelocity(pArray[i]);
-        pOut[i * 3 + 0] = result.GetX();
-        pOut[i * 3 + 1] = result.GetY();
-        pOut[i * 3 + 2] = result.GetZ();
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -425,23 +294,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getBody
     return (jint) result;
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getBodyTypes
- * Signature: (JJILjava/nio/IntBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getBodyTypes
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeTypes) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_INT_BUFFER(pEnv, storeTypes, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pOut[i] = (jint) pInterface->GetBodyType(pArray[i]);
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -461,26 +313,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getCent
     pDoubles[2] = result.GetZ();
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getCenterOfMassPositions
- * Signature: (JJILjava/nio/DoubleBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getCenterOfMassPositions
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storePositions) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_DOUBLE_BUFFER(pEnv, storePositions, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies * 3);
-    for (int i = 0; i < numBodies; ++i) {
-        const RVec3 result = pInterface->GetCenterOfMassPosition(pArray[i]);
-        pOut[i * 3 + 0] = result.GetX();
-        pOut[i * 3 + 1] = result.GetY();
-        pOut[i * 3 + 2] = result.GetZ();
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -498,36 +330,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getCen
     return reinterpret_cast<jlong> (pResult);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getCenterOfMassTransforms
- * Signature: (JJILjava/nio/DoubleBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getCenterOfMassTransforms
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeMatrices) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_DOUBLE_BUFFER(pEnv, storeMatrices, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies * 16);
-    for (int i = 0; i < numBodies; ++i) {
-        RMat44 m = pInterface->GetCenterOfMassTransform(pArray[i]);
-        int offset = i * 16;
-        for (uint col = 0; col < 3; ++col) {
-            Vec4 v = m.GetColumn4(col);
-            pOut[offset + col * 4 + 0] = (jdouble) v.GetX();
-            pOut[offset + col * 4 + 1] = (jdouble) v.GetY();
-            pOut[offset + col * 4 + 2] = (jdouble) v.GetZ();
-            pOut[offset + col * 4 + 3] = (jdouble) v.GetW();
-        }
-        RVec3 t = m.GetTranslation();
-        pOut[offset + 12] = (jdouble) t.GetX();
-        pOut[offset + 13] = (jdouble) t.GetY();
-        pOut[offset + 14] = (jdouble) t.GetZ();
-        pOut[offset + 15] = 1.0;
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -543,23 +345,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getFr
     return result;
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getFrictions
- * Signature: (JJILjava/nio/FloatBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getFrictions
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeFrictions) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_FLOAT_BUFFER(pEnv, storeFrictions, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pOut[i] = pInterface->GetFriction(pArray[i]);
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -575,23 +360,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getGr
     return result;
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getGravityFactors
- * Signature: (JJILjava/nio/FloatBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getGravityFactors
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeFactors) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_FLOAT_BUFFER(pEnv, storeFactors, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pOut[i] = pInterface->GetGravityFactor(pArray[i]);
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -609,52 +377,7 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getInv
     return reinterpret_cast<jlong> (pResult);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getInverseInertias
- * Signature: (JJILjava/nio/FloatBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getInverseInertias
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeMatrices) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_FLOAT_BUFFER(pEnv, storeMatrices, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies * 16);
-    for (int i = 0; i < numBodies; ++i) {
-        Mat44 m = pInterface->GetInverseInertia(pArray[i]);
-        int offset = i * 16;
-        for (uint col = 0; col < 4; ++col) {
-            Vec4 v = m.GetColumn4(col);
-            pOut[offset + col * 4 + 0] = v.GetX();
-            pOut[offset + col * 4 + 1] = v.GetY();
-            pOut[offset + col * 4 + 2] = v.GetZ();
-            pOut[offset + col * 4 + 3] = v.GetW();
-        }
-    }
-}
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getLinearVelocities
- * Signature: (JJILjava/nio/FloatBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getLinearVelocities
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeVelocities) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_FLOAT_BUFFER(pEnv, storeVelocities, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies * 3);
-    for (int i = 0; i < numBodies; ++i) {
-        const Vec3 result = pInterface->GetLinearVelocity(pArray[i]);
-        pOut[i * 3 + 0] = result.GetX();
-        pOut[i * 3 + 1] = result.GetY();
-        pOut[i * 3 + 2] = result.GetZ();
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -688,23 +411,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getMoti
     return (jint) result;
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getMotionQualities
- * Signature: (JJILjava/nio/IntBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getMotionQualities
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeQualities) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_INT_BUFFER(pEnv, storeQualities, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pOut[i] = (jint) pInterface->GetMotionQuality(pArray[i]);
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -720,23 +426,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getMoti
     return (jint) result;
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getMotionTypes
- * Signature: (JJILjava/nio/IntBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getMotionTypes
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeTypes) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_INT_BUFFER(pEnv, storeTypes, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pOut[i] = (jint) pInterface->GetMotionType(pArray[i]);
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -752,23 +441,6 @@ JNIEXPORT jint JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getObje
     return (jint) result;
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getObjectLayers
- * Signature: (JJILjava/nio/IntBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getObjectLayers
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeLayers) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_INT_BUFFER(pEnv, storeLayers, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pOut[i] = (jint) pInterface->GetObjectLayer(pArray[i]);
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -815,26 +487,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getPosi
     pFloats[3] = orientation.GetW();
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getPositions
- * Signature: (JJILjava/nio/DoubleBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getPositions
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeLocations) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_DOUBLE_BUFFER(pEnv, storeLocations, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies * 3);
-    for (int i = 0; i < numBodies; ++i) {
-        const RVec3 result = pInterface->GetPosition(pArray[i]);
-        pOut[i * 3 + 0] = result.GetX();
-        pOut[i * 3 + 1] = result.GetY();
-        pOut[i * 3 + 2] = result.GetZ();
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -850,23 +502,6 @@ JNIEXPORT jfloat JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getRe
     return result;
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getRestitutions
- * Signature: (JJILjava/nio/FloatBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getRestitutions
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeRestitutions) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_FLOAT_BUFFER(pEnv, storeRestitutions, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pOut[i] = pInterface->GetRestitution(pArray[i]);
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -887,27 +522,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getRota
     pFloats[3] = result.GetW();
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getRotations
- * Signature: (JJILjava/nio/FloatBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getRotations
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeOrientations) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_FLOAT_BUFFER(pEnv, storeOrientations, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies * 4);
-    for (int i = 0; i < numBodies; ++i) {
-        const Quat result = pInterface->GetRotation(pArray[i]);
-        pOut[i * 4 + 0] = result.GetX();
-        pOut[i * 4 + 1] = result.GetY();
-        pOut[i * 4 + 2] = result.GetZ();
-        pOut[i * 4 + 3] = result.GetW();
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -925,26 +539,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getSha
     return reinterpret_cast<jlong> (pResult);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getShapes
- * Signature: (JJILjava/nio/LongBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getShapes
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeShapeVas) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_LONG_BUFFER(pEnv, storeShapeVas, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        ShapeRefC * const pResult = new ShapeRefC();
-        TRACE_NEW("ShapeRefC", pResult)
-        *pResult = pInterface->GetShape(pArray[i]);
-        pOut[i] = reinterpret_cast<jlong> (pResult);
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -962,26 +556,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getTra
     return reinterpret_cast<jlong> (pResult);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getTransformedShapes
- * Signature: (JJILjava/nio/LongBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getTransformedShapes
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeShapeVas) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_LONG_BUFFER(pEnv, storeShapeVas, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        TransformedShape * const pResult = new TransformedShape();
-        TRACE_NEW("TransformedShape", pResult)
-        *pResult = pInterface->GetTransformedShape(pArray[i]);
-        pOut[i] = reinterpret_cast<jlong> (pResult);
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -997,23 +571,6 @@ JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getUse
     return result;
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getUserDatas
- * Signature: (JJILjava/nio/LongBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getUserDatas
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeData) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_LONG_BUFFER(pEnv, storeData, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pOut[i] = pInterface->GetUserData(pArray[i]);
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -1029,23 +586,6 @@ JNIEXPORT jboolean JNICALL Java_com_github_stephengold_joltjni_BodyInterface_get
     return result;
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    getUseManifoldReductions
- * Signature: (JJILjava/nio/IntBuffer;)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_getUseManifoldReductions
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeStatus) {
-    const BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_INT_BUFFER(pEnv, storeStatus, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
-    for (int i = 0; i < numBodies; ++i) {
-        pOut[i] = pInterface->GetUseManifoldReduction(pArray[i]) ? 1 : 0;
-    }
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface
@@ -1122,18 +662,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_notifyS
             id, previous, updateMassProperties, activationMode);
 }
 
-/*
- * Class:     com_github_stephengold_joltjni_BodyInterface
- * Method:    removeBodies
- * Signature: (JJI)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BodyInterface_removeBodies
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
-    pInterface->RemoveBodies(pArray, numBodies);
-}
 
 /*
  * Class:     com_github_stephengold_joltjni_BodyInterface

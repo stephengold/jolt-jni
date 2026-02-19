@@ -21,9 +21,9 @@ SOFTWARE.
  */
 package testjoltjni.junit;
 
+import com.github.stephengold.joltjni.BatchBodyInterface;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BodyIdArray;
-import com.github.stephengold.joltjni.BodyInterface;
 import com.github.stephengold.joltjni.Jolt;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Quat;
@@ -63,7 +63,7 @@ public class BodyBatchQueryTest {
 
         final int numBodies = 5;
         PhysicsSystem physicsSystem = TestUtils.newPhysicsSystem(100);
-        BodyInterface bodyInterface = physicsSystem.getBodyInterface();
+        BatchBodyInterface bodyInterface = physicsSystem.getBodyInterface();
         BodyIdArray ids = new BodyIdArray(numBodies);
 
         for (int i = 0; i < numBodies; ++i) {
@@ -113,7 +113,7 @@ public class BodyBatchQueryTest {
      * @param n   the number of bodies
      */
     private void verifyDoubleGetters(
-            BodyInterface bi, BodyIdArray ids, int n) {
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
         DoubleBuffer posBuf = Jolt.newDirectDoubleBuffer(n * 3);
         bi.getPositions(ids, posBuf);
         for (int i = 0; i < n; ++i) {
@@ -130,7 +130,7 @@ public class BodyBatchQueryTest {
      * @param n   the number of bodies
      */
     private void verifyFloatGetters(
-            BodyInterface bi, BodyIdArray ids, int n) {
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
         FloatBuffer floatBuf = Jolt.newDirectFloatBuffer(n);
 
         bi.getFrictions(ids, floatBuf);
@@ -160,7 +160,7 @@ public class BodyBatchQueryTest {
      * @param n   the number of bodies
      */
     private void verifyIntGetters(
-            BodyInterface bi, BodyIdArray ids, int n) {
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
         IntBuffer intBuf = Jolt.newDirectIntBuffer(n);
         bi.getObjectLayers(ids, intBuf);
         for (int i = 0; i < n; ++i) {
@@ -182,7 +182,7 @@ public class BodyBatchQueryTest {
      * @param n   the number of bodies (&ge;0)
      */
     private void verifyLongGetters(
-            BodyInterface bi, BodyIdArray ids, int n) {
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
         LongBuffer dataBuf = Jolt.newDirectLongBuffer(n);
 
         // Verify UserData
@@ -220,7 +220,7 @@ public class BodyBatchQueryTest {
      * @param n   the number of bodies
      */
     private void verifyMatrixGetters(
-            BodyInterface bi, BodyIdArray ids, int n) {
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
         DoubleBuffer matBuf = Jolt.newDirectDoubleBuffer(n * 16);
         bi.getCenterOfMassTransforms(ids, matBuf);
         for (int i = 0; i < n; ++i) {
@@ -238,7 +238,7 @@ public class BodyBatchQueryTest {
      * @param n   the number of bodies
      */
     private void verifyStatusBatch(
-            BodyInterface bi, BodyIdArray ids, int n) {
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
         IntBuffer statusBuf = Jolt.newDirectIntBuffer(n);
 
         bi.areActive(ids, statusBuf);
@@ -268,7 +268,7 @@ public class BodyBatchQueryTest {
      * @param n   the number of bodies
      */
     private void verifyVec3QuatGetters(
-            BodyInterface bi, BodyIdArray ids, int n) {
+            BatchBodyInterface bi, BodyIdArray ids, int n) {
         FloatBuffer vec3Buf = Jolt.newDirectFloatBuffer(n * 3);
         FloatBuffer quatBuf = Jolt.newDirectFloatBuffer(n * 4);
 

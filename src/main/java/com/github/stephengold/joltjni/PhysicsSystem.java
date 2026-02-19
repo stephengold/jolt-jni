@@ -49,13 +49,13 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     // fields
 
     /**
-     * cached reference to the system's locking {@code BodyInterface}
+     * cached reference to the system's locking {@code BatchBodyInterface}
      */
-    final private BodyInterface bodyInterface;
+    final private BatchBodyInterface bodyInterface;
     /**
-     * cached reference to the system's no-lock {@code BodyInterface}
+     * cached reference to the system's no-lock {@code BatchBodyInterface}
      */
-    final private BodyInterface bodyInterfaceNoLock;
+    final private BatchBodyInterface bodyInterfaceNoLock;
     /**
      * protect the BroadPhaseLayerInterface from garbage collection
      */
@@ -109,10 +109,10 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
         va2ps.put(systemVa, this);
 
         long lockingVa = getBodyInterface(systemVa);
-        this.bodyInterface = new BodyInterface(this, lockingVa);
+        this.bodyInterface = new BatchBodyInterface(this, lockingVa);
 
         long noLockVa = getBodyInterfaceNoLock(systemVa);
-        this.bodyInterfaceNoLock = new BodyInterface(this, noLockVa);
+        this.bodyInterfaceNoLock = new BatchBodyInterface(this, noLockVa);
 
         lockingVa = getNarrowPhaseQuery(systemVa);
         this.narrowPhaseQuery = new NarrowPhaseQuery(this, lockingVa);
@@ -256,22 +256,22 @@ public class PhysicsSystem extends NonCopyable implements ConstPhysicsSystem {
     }
 
     /**
-     * Access the system's {@code BodyInterface}.
+     * Access the system's {@code BatchBodyInterface}.
      *
      * @return the pre-existing JVM object (not {@code null})
      */
-    public BodyInterface getBodyInterface() {
+    public BatchBodyInterface getBodyInterface() {
         assert bodyInterface != null;
         return bodyInterface;
     }
 
     /**
-     * Access a version of the system's {@code BodyInterface} that does not use
-     * locks.
+     * Access a version of the system's {@code BatchBodyInterface} that does not
+     * use locks.
      *
      * @return a new JVM object with the pre-existing native object assigned
      */
-    public BodyInterface getBodyInterfaceNoLock() {
+    public BatchBodyInterface getBodyInterfaceNoLock() {
         assert bodyInterfaceNoLock != null;
         return bodyInterfaceNoLock;
     }
