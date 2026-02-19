@@ -36,54 +36,6 @@ using namespace JPH;
 
 /*
  * Class:     com_github_stephengold_joltjni_BatchBodyInterface
- * Method:    addBodiesAbort
- * Signature: (JJIJ)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_addBodiesAbort
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jlong addState) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
-    BroadPhase::AddState const handle
-            = reinterpret_cast<BroadPhase::AddState> (addState);
-    pInterface->AddBodiesAbort(pArray, numBodies, handle);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BatchBodyInterface
- * Method:    addBodiesFinalize
- * Signature: (JJIJI)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_addBodiesFinalize
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jlong addState, jint activationOrdinal) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
-    BroadPhase::AddState const handle
-            = reinterpret_cast<BroadPhase::AddState> (addState);
-    const EActivation eActivation = (EActivation) activationOrdinal;
-    pInterface->AddBodiesFinalize(pArray, numBodies, handle, eActivation);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BatchBodyInterface
- * Method:    addBodiesPrepare
- * Signature: (JJI)J
- */
-JNIEXPORT jlong JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_addBodiesPrepare
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
-    BroadPhase::AddState const handle
-            = pInterface->AddBodiesPrepare(pArray, numBodies);
-    return reinterpret_cast<jlong> (handle);
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BatchBodyInterface
  * Method:    areActive
  * Signature: (JJILjava/nio/IntBuffer;)V
  */
@@ -134,19 +86,6 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_ar
     for (int i = 0; i < numBodies; ++i) {
         pStatus[i] = pInterface->IsSensor(pArray[i]) ? 1 : 0;
     }
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BatchBodyInterface
- * Method:    destroyBodies
- * Signature: (JJI)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_destroyBodies
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    pInterface->DestroyBodies(pArray, numBodies);
 }
 
 /*
@@ -514,17 +453,4 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_ge
     for (int i = 0; i < numBodies; ++i) {
         pOut[i] = pInterface->GetUseManifoldReduction(pArray[i]) ? 1 : 0;
     }
-}
-
-/*
- * Class:     com_github_stephengold_joltjni_BatchBodyInterface
- * Method:    removeBodies
- * Signature: (JJI)V
- */
-JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_removeBodies
-  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies) {
-    BodyInterface * const pInterface
-            = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
-    BodyID * const pArray = reinterpret_cast<BodyID *> (arrayVa);
-    pInterface->RemoveBodies(pArray, numBodies);
 }

@@ -114,6 +114,97 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Abort adding bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
+     * @param addState the handle returned by {@code addBodiesPrepare()}
+     */
+    public void addBodiesAbort(BodyIdArray bodyIds, long addState) {
+        int numBodies = bodyIds.length();
+        addBodiesAbort(bodyIds, numBodies, addState);
+    }
+
+    /**
+     * Abort adding bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
+     * @param numBodies the number of bodies to be added (&ge;0)
+     * @param addState the handle returned by {@code addBodiesPrepare()}
+     */
+    public void addBodiesAbort(
+            BodyIdArray bodyIds, int numBodies, long addState) {
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        addBodiesAbort(bodyInterfaceVa, arrayVa, numBodies, addState);
+    }
+
+    /**
+     * Finish adding bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
+     * @param addState the handle returned by {@code addBodiesPrepare()}
+     * @param activation whether to activate the bodies (not null)
+     */
+    public void addBodiesFinalize(
+            BodyIdArray bodyIds, long addState, EActivation activation) {
+        int numBodies = bodyIds.length();
+        addBodiesFinalize(bodyIds, numBodies, addState, activation);
+    }
+
+    /**
+     * Finish adding bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
+     * since the handle was created)
+     * @param numBodies the number of bodies to be added (&ge;0)
+     * @param addState the handle returned by {@code addBodiesPrepare()}
+     * @param activation whether to activate the bodies (not null)
+     */
+    public void addBodiesFinalize(BodyIdArray bodyIds, int numBodies,
+            long addState, EActivation activation) {
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        int activationOrdinal = activation.ordinal();
+        addBodiesFinalize(bodyInterfaceVa, arrayVa, numBodies, addState,
+                activationOrdinal);
+    }
+
+    /**
+     * Prepare to add a batch of bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, possibly
+     * shuffled)
+     * @return a handle to be passed to {@code addBodiesFinalize()} or
+     * {@code addBodiesAbort()}
+     */
+    public long addBodiesPrepare(BodyIdArray bodyIds) {
+        int numBodies = bodyIds.length();
+        long result = addBodiesPrepare(bodyIds, numBodies);
+
+        return result;
+    }
+
+    /**
+     * Prepare to add a batch of bodies to the physics system.
+     *
+     * @param bodyIds the IDs of the bodies to be added (not null, possibly
+     * shuffled)
+     * @param numBodies the number of bodies to be added (&ge;0)
+     * @return a handle to be passed to {@code addBodiesFinalize()} or
+     * {@code addBodiesAbort()}
+     */
+    public long addBodiesPrepare(BodyIdArray bodyIds, int numBodies) {
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        long result = addBodiesPrepare(bodyInterfaceVa, arrayVa, numBodies);
+
+        return result;
+    }
+
+    /**
      * Add the specified body to the physics system.
      * <p>
      * To add many bodies at once, use {@code addBodiesPrepare()} followed by
@@ -330,6 +421,30 @@ public class BodyInterface extends NonCopyable {
     public void deactivateBody(int bodyId) {
         long bodyInterfaceVa = va();
         deactivateBody(bodyInterfaceVa, bodyId);
+    }
+
+    /**
+     * Destroy the specified bodies. Don't use this on bodies that have been
+     * added but not removed yet!
+     *
+     * @param bodyIds the IDs of the bodies to destroy (not null)
+     */
+    public void destroyBodies(BodyIdArray bodyIds) {
+        int numBodies = bodyIds.length();
+        destroyBodies(bodyIds, numBodies);
+    }
+
+    /**
+     * Destroy the specified bodies. Don't use this on bodies that have been
+     * added but not removed yet!
+     *
+     * @param bodyIds the IDs of the bodies to destroy (not null)
+     * @param numBodies the number of bodies to destroy (&ge;0)
+     */
+    public void destroyBodies(BodyIdArray bodyIds, int numBodies) {
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        destroyBodies(bodyInterfaceVa, arrayVa, numBodies);
     }
 
     /**
@@ -758,6 +873,30 @@ public class BodyInterface extends NonCopyable {
     }
 
     /**
+     * Remove the specified bodies from the physics system, but don't destroy
+     * them.
+     *
+     * @param bodyIds the IDs of the bodies to remove (not null)
+     */
+    public void removeBodies(BodyIdArray bodyIds) {
+        int numBodies = bodyIds.length();
+        removeBodies(bodyIds, numBodies);
+    }
+
+    /**
+     * Remove the specified bodies from the physics system, but don't destroy
+     * them.
+     *
+     * @param bodyIds the IDs of the bodies to remove (not null)
+     * @param numBodies the number of bodies to remove (&ge;0)
+     */
+    public void removeBodies(BodyIdArray bodyIds, int numBodies) {
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        removeBodies(bodyInterfaceVa, arrayVa, numBodies);
+    }
+
+    /**
      * Remove the specified body from the physics system, but don't destroy it.
      *
      * @param bodyId the ID of the body to remove
@@ -1003,6 +1142,15 @@ public class BodyInterface extends NonCopyable {
     native private static void addAngularImpulse(
             long bodyInterfaceVa, int bodyId, float lx, float ly, float lz);
 
+    native private static void addBodiesAbort(
+            long bodyInterfaceVa, long arrayVa, int numBodies, long addState);
+
+    native private static void addBodiesFinalize(long bodyInterfaceVa,
+            long arrayVa, int numBodies, long addState, int activationOrdinal);
+
+    native private static long addBodiesPrepare(
+            long bodyInterfaceVa, long arrayVa, int numBodies);
+
     native private static void addBody(
             long bodyInterfaceVa, int bodyId, int activationOrdinal);
 
@@ -1033,6 +1181,9 @@ public class BodyInterface extends NonCopyable {
             long bodyInterfaceVa, long settingsVa);
 
     native private static void deactivateBody(long bodyInterfaceVa, int bodyId);
+
+    native private static void destroyBodies(
+            long bodyInterfaceVa, long arrayVa, int numBodies);
 
     native private static void destroyBody(long bodyInterfaceVa, int bodyId);
 
@@ -1100,6 +1251,9 @@ public class BodyInterface extends NonCopyable {
     native private static void notifyShapeChanged(long bodyInterfaceVa,
             int bodyId, float prevX, float prevY, float prevZ,
             boolean updateMassProperties, int activationOrdinal);
+
+    native private static void removeBodies(
+            long bodyInterfaceVa, long arrayVa, int numBodies);
 
     native private static void removeBody(long bodyInterfaceVa, int bodyId);
 

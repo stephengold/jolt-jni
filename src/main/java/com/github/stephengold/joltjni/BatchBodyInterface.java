@@ -21,27 +21,23 @@ SOFTWARE.
  */
 package com.github.stephengold.joltjni;
 
-import com.github.stephengold.joltjni.enumerate.EActivation;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.LongBuffer;
 
 /**
- * Extended interface of {@link BodyInterface} providing batch-based
- * query and manipulation operations.
+ * Extended interface of {@link BodyInterface} providing additional batch-based
+ * query operations.
  *
  * <p>
- * This interface inherits all single-body operations from
- * {@code BodyInterface} and adds methods that allow performing the
- * same actions on multiple bodies in a single call.
+ * This interface inherits all operations from {@code BodyInterface} and adds
+ * methods that allow performing multiple body queries in a single call.
  * </p>
  *
  * <p>
- * The primary purpose of these batch operations is to reduce the
- * number of JNI calls by grouping multiple body interactions into
- * one native invocation, improving performance compared to
- * repeatedly invoking the single-body methods.
+ * The primary purpose of these operations is to reduce the number of JNI calls
+ * by grouping multiple body interactions into one native invocation.
  * </p>
  *
  * @author xI-Mx-Ix
@@ -63,95 +59,6 @@ public class BatchBodyInterface extends BodyInterface {
 
     // *************************************************************************
     // new methods exposed
-
-    /**
-     * Abort adding bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
-     * @param addState the handle returned by {@code addBodiesPrepare()}
-     */
-    public void addBodiesAbort(BodyIdArray bodyIds, long addState) {
-        int numBodies = bodyIds.length();
-        addBodiesAbort(bodyIds, numBodies, addState);
-    }
-
-    /**
-     * Abort adding bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
-     * @param numBodies the number of bodies to be added (&ge;0)
-     * @param addState the handle returned by {@code addBodiesPrepare()}
-     */
-    public void addBodiesAbort(
-            BodyIdArray bodyIds, int numBodies, long addState) {
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        addBodiesAbort(bodyInterfaceVa, arrayVa, numBodies, addState);
-    }
-
-    /**
-     * Finish adding bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
-     * @param addState the handle returned by {@code addBodiesPrepare()}
-     * @param activation whether to activate the bodies (not null)
-     */
-    public void addBodiesFinalize(
-            BodyIdArray bodyIds, long addState, EActivation activation) {
-        int numBodies = bodyIds.length();
-        addBodiesFinalize(bodyIds, numBodies, addState, activation);
-    }
-
-    /**
-     * Finish adding bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, unmodified
-     * since the handle was created)
-     * @param numBodies the number of bodies to be added (&ge;0)
-     * @param addState the handle returned by {@code addBodiesPrepare()}
-     * @param activation whether to activate the bodies (not null)
-     */
-    public void addBodiesFinalize(BodyIdArray bodyIds, int numBodies,
-            long addState, EActivation activation) {
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        int activationOrdinal = activation.ordinal();
-        addBodiesFinalize(bodyInterfaceVa, arrayVa, numBodies, addState,
-                activationOrdinal);
-    }
-
-    /**
-     * Prepare to add a batch of bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, possibly
-     * shuffled)
-     * @return a handle to be passed to {@code addBodiesFinalize()} or
-     * {@code addBodiesAbort()}
-     */
-    public long addBodiesPrepare(BodyIdArray bodyIds) {
-        int numBodies = bodyIds.length();
-        long result = addBodiesPrepare(bodyIds, numBodies);
-        return result;
-    }
-
-    /**
-     * Prepare to add a batch of bodies to the physics system.
-     *
-     * @param bodyIds the IDs of the bodies to be added (not null, possibly
-     * shuffled)
-     * @param numBodies the number of bodies to be added (&ge;0)
-     * @return a handle to be passed to {@code addBodiesFinalize()} or
-     * {@code addBodiesAbort()}
-     */
-    public long addBodiesPrepare(BodyIdArray bodyIds, int numBodies) {
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        long result = addBodiesPrepare(bodyInterfaceVa, arrayVa, numBodies);
-        return result;
-    }
 
     /**
      * Test whether the specified bodies are active.
@@ -196,30 +103,6 @@ public class BatchBodyInterface extends BodyInterface {
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.va();
         areSensors(bodyInterfaceVa, arrayVa, numBodies, storeStatus);
-    }
-
-    /**
-     * Destroy the specified bodies. Don't use this on bodies that have been
-     * added but not removed yet!
-     *
-     * @param bodyIds the IDs of the bodies to destroy (not null)
-     */
-    public void destroyBodies(BodyIdArray bodyIds) {
-        int numBodies = bodyIds.length();
-        destroyBodies(bodyIds, numBodies);
-    }
-
-    /**
-     * Destroy the specified bodies. Don't use this on bodies that have been
-     * added but not removed yet!
-     *
-     * @param bodyIds the IDs of the bodies to destroy (not null)
-     * @param numBodies the number of bodies to destroy (&ge;0)
-     */
-    public void destroyBodies(BodyIdArray bodyIds, int numBodies) {
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        destroyBodies(bodyInterfaceVa, arrayVa, numBodies);
     }
 
     /**
@@ -523,41 +406,8 @@ public class BatchBodyInterface extends BodyInterface {
                 bodyInterfaceVa, arrayVa, numBodies, storeStatus);
     }
 
-    /**
-     * Remove the specified bodies from the physics system, but don't destroy
-     * them.
-     *
-     * @param bodyIds the IDs of the bodies to remove (not null)
-     */
-    public void removeBodies(BodyIdArray bodyIds) {
-        int numBodies = bodyIds.length();
-        removeBodies(bodyIds, numBodies);
-    }
-
-    /**
-     * Remove the specified bodies from the physics system, but don't destroy
-     * them.
-     *
-     * @param bodyIds the IDs of the bodies to remove (not null)
-     * @param numBodies the number of bodies to remove (&ge;0)
-     */
-    public void removeBodies(BodyIdArray bodyIds, int numBodies) {
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        removeBodies(bodyInterfaceVa, arrayVa, numBodies);
-    }
-
     // *************************************************************************
     // native private methods
-
-    native private static void addBodiesAbort(
-            long bodyInterfaceVa, long arrayVa, int numBodies, long addState);
-
-    native private static void addBodiesFinalize(long bodyInterfaceVa,
-            long arrayVa, int numBodies, long addState, int activationOrdinal);
-
-    native private static long addBodiesPrepare(
-            long bodyInterfaceVa, long arrayVa, int numBodies);
 
     native private static void areActive(long bodyInterfaceVa, long arrayVa,
             int numBodies, IntBuffer storeStatus);
@@ -567,9 +417,6 @@ public class BatchBodyInterface extends BodyInterface {
 
     native private static void areSensors(long bodyInterfaceVa, long arrayVa,
             int numBodies, IntBuffer storeStatus);
-
-    native private static void destroyBodies(
-            long bodyInterfaceVa, long arrayVa, int numBodies);
 
     native private static void getAngularVelocities(long bodyInterfaceVa,
             long arrayVa, int numBodies, FloatBuffer storeVelocities);
@@ -624,7 +471,4 @@ public class BatchBodyInterface extends BodyInterface {
 
     native private static void getUseManifoldReductions(long bodyInterfaceVa,
             long arrayVa, int numBodies, IntBuffer storeStatus);
-
-    native private static void removeBodies(
-            long bodyInterfaceVa, long arrayVa, int numBodies);
 }
