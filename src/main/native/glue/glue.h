@@ -94,6 +94,15 @@ const jlong capacityInts = (pEnv)->GetDirectBufferCapacity(intBuffer); \
 JPH_ASSERT(capacityInts >= 0)
 
 /*
+ * pre-processor macro to generate code to access a direct ByteBuffer:
+ */
+#define DIRECT_BYTE_BUFFER(pEnv, byteBuffer, pBytes, capacityBytes) \
+jbyte * const pBytes = (jbyte *) (pEnv)->GetDirectBufferAddress(byteBuffer); \
+JPH_ASSERT(pBytes != NULL); \
+const jlong capacityBytes = (pEnv)->GetDirectBufferCapacity(byteBuffer); \
+JPH_ASSERT(capacityBytes >= 0)
+
+/*
  * pre-processor macro to generate code to access a direct LongBuffer:
  */
 #define DIRECT_LONG_BUFFER(pEnv, longBuffer, pLongs, capacityLongs) \
