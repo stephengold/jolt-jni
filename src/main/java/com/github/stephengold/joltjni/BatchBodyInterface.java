@@ -22,6 +22,7 @@ SOFTWARE.
 package com.github.stephengold.joltjni;
 
 import com.github.stephengold.joltjni.enumerate.EActivation;
+import java.nio.ByteBuffer;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -68,7 +69,7 @@ public class BatchBodyInterface extends BodyInterface {
      * @param storeStatus storage for the statuses (not null, 1 for active,
      * 0 for inactive)
      */
-    public void areActive(BodyIdArray bodyIds, IntBuffer storeStatus) {
+    public void areActive(BodyIdArray bodyIds, ByteBuffer storeStatus) {
         int numBodies = bodyIds.length();
         assert storeStatus.capacity() >= numBodies;
         long bodyInterfaceVa = va();
@@ -83,7 +84,7 @@ public class BatchBodyInterface extends BodyInterface {
      * @param storeStatus storage for the statuses (not null, 1 for added, 0 for
      * not added)
      */
-    public void areAdded(BodyIdArray bodyIds, IntBuffer storeStatus) {
+    public void areAdded(BodyIdArray bodyIds, ByteBuffer storeStatus) {
         int numBodies = bodyIds.length();
         assert storeStatus.capacity() >= numBodies;
         long bodyInterfaceVa = va();
@@ -98,7 +99,7 @@ public class BatchBodyInterface extends BodyInterface {
      * @param storeStatus storage for the statuses (not null, 1 for sensor,
      * 0 for non-sensor)
      */
-    public void areSensors(BodyIdArray bodyIds, IntBuffer storeStatus) {
+    public void areSensors(BodyIdArray bodyIds, ByteBuffer storeStatus) {
         int numBodies = bodyIds.length();
         assert storeStatus.capacity() >= numBodies;
         long bodyInterfaceVa = va();
@@ -130,7 +131,7 @@ public class BatchBodyInterface extends BodyInterface {
      * @param storeTypes storage for the ordinals (not null, size >= numBodies,
      * modified)
      */
-    public void getBodyTypes(BodyIdArray bodyIds, IntBuffer storeTypes) {
+    public void getBodyTypes(BodyIdArray bodyIds, ByteBuffer storeTypes) {
         int numBodies = bodyIds.length();
         assert storeTypes.capacity() >= numBodies;
         long bodyInterfaceVa = va();
@@ -247,7 +248,7 @@ public class BatchBodyInterface extends BodyInterface {
      * (not null, size >= numBodies, modified)
      */
     public void getMotionQualities(
-            BodyIdArray bodyIds, IntBuffer storeQualities) {
+            BodyIdArray bodyIds, ByteBuffer storeQualities) {
         int numBodies = bodyIds.length();
         assert storeQualities.capacity() >= numBodies;
         long bodyInterfaceVa = va();
@@ -263,7 +264,7 @@ public class BatchBodyInterface extends BodyInterface {
      * @param storeTypes storage for the ordinals (not null, size >= numBodies,
      * modified)
      */
-    public void getMotionTypes(BodyIdArray bodyIds, IntBuffer storeTypes) {
+    public void getMotionTypes(BodyIdArray bodyIds, ByteBuffer storeTypes) {
         int numBodies = bodyIds.length();
         assert storeTypes.capacity() >= numBodies;
         long bodyInterfaceVa = va();
@@ -376,21 +377,6 @@ public class BatchBodyInterface extends BodyInterface {
     }
 
     /**
-     * Return the user data of the specified bodies.
-     *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeData storage for the values (not null, size >= numBodies,
-     * modified)
-     */
-    public void getUserDatas(BodyIdArray bodyIds, LongBuffer storeData) {
-        int numBodies = bodyIds.length();
-        assert storeData.capacity() >= numBodies;
-        long bodyInterfaceVa = va();
-        long arrayVa = bodyIds.va();
-        getUserDatas(bodyInterfaceVa, arrayVa, numBodies, storeData);
-    }
-
-    /**
      * Test whether manifold reduction is enabled for the specified bodies.
      *
      * @param bodyIds the IDs of the bodies (not null)
@@ -398,13 +384,28 @@ public class BatchBodyInterface extends BodyInterface {
      * 0 for disabled, size >= numBodies, modified)
      */
     public void getUseManifoldReductions(
-            BodyIdArray bodyIds, IntBuffer storeStatus) {
+            BodyIdArray bodyIds, ByteBuffer storeStatus) {
         int numBodies = bodyIds.length();
         assert storeStatus.capacity() >= numBodies;
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.va();
         getUseManifoldReductions(
                 bodyInterfaceVa, arrayVa, numBodies, storeStatus);
+    }
+
+    /**
+     * Return the user data of the specified bodies.
+     *
+     * @param bodyIds the IDs of the bodies (not null)
+     * @param storeData storage for the values (not null, size >= numBodies,
+     * modified)
+     */
+    public void getUserData(BodyIdArray bodyIds, LongBuffer storeData) {
+        int numBodies = bodyIds.length();
+        assert storeData.capacity() >= numBodies;
+        long bodyInterfaceVa = va();
+        long arrayVa = bodyIds.va();
+        getUserData(bodyInterfaceVa, arrayVa, numBodies, storeData);
     }
 
     /**
@@ -524,31 +525,31 @@ public class BatchBodyInterface extends BodyInterface {
      * @param bodyIds the IDs of the bodies (not null)
      * @param data the desired values (not null, size >= numBodies)
      */
-    public void setUserDatas(BodyIdArray bodyIds, LongBuffer data) {
+    public void setUserData(BodyIdArray bodyIds, LongBuffer data) {
         int numBodies = bodyIds.length();
         assert data.capacity() >= numBodies;
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.va();
-        setUserDatas(bodyInterfaceVa, arrayVa, numBodies, data);
+        setUserData(bodyInterfaceVa, arrayVa, numBodies, data);
     }
 
     // *************************************************************************
     // native private methods
 
     native private static void areActive(long bodyInterfaceVa, long arrayVa,
-            int numBodies, IntBuffer storeStatus);
+            int numBodies, ByteBuffer storeStatus);
 
     native private static void areAdded(long bodyInterfaceVa, long arrayVa,
-            int numBodies, IntBuffer storeStatus);
+            int numBodies, ByteBuffer storeStatus);
 
     native private static void areSensors(long bodyInterfaceVa, long arrayVa,
-            int numBodies, IntBuffer storeStatus);
+            int numBodies, ByteBuffer storeStatus);
 
     native private static void getAngularVelocities(long bodyInterfaceVa,
             long arrayVa, int numBodies, FloatBuffer storeVelocities);
 
     native private static void getBodyTypes(long bodyInterfaceVa, long arrayVa,
-            int numBodies, IntBuffer storeTypes);
+            int numBodies, ByteBuffer storeTypes);
 
     native private static void getCenterOfMassPositions(long bodyInterfaceVa,
             long arrayVa, int numBodies, DoubleBuffer storePositions);
@@ -569,10 +570,10 @@ public class BatchBodyInterface extends BodyInterface {
             long arrayVa, int numBodies, FloatBuffer storeVelocities);
 
     native private static void getMotionQualities(long bodyInterfaceVa,
-            long arrayVa, int numBodies, IntBuffer storeQualities);
+            long arrayVa, int numBodies, ByteBuffer storeQualities);
 
     native private static void getMotionTypes(long bodyInterfaceVa,
-            long arrayVa, int numBodies, IntBuffer storeTypes);
+            long arrayVa, int numBodies, ByteBuffer storeTypes);
 
     native private static void getObjectLayers(long bodyInterfaceVa,
             long arrayVa, int numBodies, IntBuffer storeLayers);
@@ -592,11 +593,11 @@ public class BatchBodyInterface extends BodyInterface {
     native private static void getTransformedShapes(long bodyInterfaceVa,
             long arrayVa, int numBodies, LongBuffer storeShapeVas);
 
-    native private static void getUserDatas(long bodyInterfaceVa, long arrayVa,
-            int numBodies, LongBuffer storeData);
-
     native private static void getUseManifoldReductions(long bodyInterfaceVa,
-            long arrayVa, int numBodies, IntBuffer storeStatus);
+            long arrayVa, int numBodies, ByteBuffer storeStatus);
+
+    native private static void getUserData(long bodyInterfaceVa, long arrayVa,
+            int numBodies, LongBuffer storeData);
 
     native private static void setAngularVelocities(long bodyInterfaceVa,
             long arrayVa, int numBodies, FloatBuffer velocities);
@@ -619,6 +620,6 @@ public class BatchBodyInterface extends BodyInterface {
     native private static void setRestitutions(long bodyInterfaceVa,
             long arrayVa, int numBodies, FloatBuffer restitutions);
 
-    native private static void setUserDatas(long bodyInterfaceVa, long arrayVa,
+    native private static void setUserData(long bodyInterfaceVa, long arrayVa,
             int numBodies, LongBuffer data);
 }

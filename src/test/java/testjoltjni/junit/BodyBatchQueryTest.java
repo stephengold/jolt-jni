@@ -36,6 +36,7 @@ import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
 import com.github.stephengold.joltjni.readonly.ConstShape;
+import java.nio.ByteBuffer;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -168,16 +169,17 @@ public class BodyBatchQueryTest {
      */
     private void verifyIntGetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
-        IntBuffer intBuf = Jolt.newDirectIntBuffer(n);
-        bi.getObjectLayers(ids, intBuf);
+        IntBuffer layerBuf = Jolt.newDirectIntBuffer(n);
+        bi.getObjectLayers(ids, layerBuf);
         for (int i = 0; i < n; ++i) {
-            Assert.assertEquals(bi.getObjectLayer(ids.get(i)), intBuf.get(i));
+            Assert.assertEquals(bi.getObjectLayer(ids.get(i)), layerBuf.get(i));
         }
 
-        bi.getBodyTypes(ids, intBuf);
+        ByteBuffer typeBuf = Jolt.newDirectByteBuffer(n);
+        bi.getBodyTypes(ids, typeBuf);
         for (int i = 0; i < n; ++i) {
             Assert.assertEquals(bi.getBodyType(ids.get(i)).ordinal(),
-                    intBuf.get(i));
+                    typeBuf.get(i));
         }
     }
 
@@ -193,7 +195,7 @@ public class BodyBatchQueryTest {
         LongBuffer dataBuf = Jolt.newDirectLongBuffer(n);
 
         // Verify UserData
-        bi.getUserDatas(ids, dataBuf);
+        bi.getUserData(ids, dataBuf);
         for (int i = 0; i < n; ++i) {
             Assert.assertEquals(bi.getUserData(ids.get(i)), dataBuf.get(i));
         }
@@ -246,7 +248,7 @@ public class BodyBatchQueryTest {
      */
     private void verifyStatusBatch(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
-        IntBuffer statusBuf = Jolt.newDirectIntBuffer(n);
+        ByteBuffer statusBuf = Jolt.newDirectByteBuffer(n);
 
         bi.areActive(ids, statusBuf);
         for (int i = 0; i < n; ++i) {
@@ -391,7 +393,7 @@ public class BodyBatchQueryTest {
         for (int i = 0; i < n; ++i) {
             dataBuf.put(i, 9999L + i);
         }
-        bi.setUserDatas(ids, dataBuf);
+        bi.setUserData(ids, dataBuf);
         for (int i = 0; i < n; ++i) {
             Assert.assertEquals(9999L + i, bi.getUserData(ids.get(i)));
         }
