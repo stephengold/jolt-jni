@@ -43,6 +43,7 @@ $(N)/glue/b/BroadPhaseLayerInterface.cpp \
 $(N)/glue/b/BroadPhaseLayerInterfaceTable.cpp \
 $(N)/glue/b/BroadPhaseQuadTree.cpp \
 $(N)/glue/b/BroadPhaseQuery.cpp \
+$(N)/glue/ba/BatchBodyInterface.cpp \
 $(N)/glue/bo/BodyActivationListener.cpp \
 $(N)/glue/bo/Body.cpp \
 $(N)/glue/bo/BodyCreationSettings.cpp \

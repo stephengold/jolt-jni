@@ -85,6 +85,32 @@ extern std::atomic<JPH::uint32> gDeleteCount;
   const jlong capacityFloats = (pEnv)->GetDirectBufferCapacity(floatBuffer); \
   JPH_ASSERT(capacityFloats >= 0)
 /*
+ * pre-processor macro to generate code to access a direct IntBuffer:
+ */
+#define DIRECT_INT_BUFFER(pEnv, intBuffer, pInts, capacityInts) \
+jint * const pInts = (jint *) (pEnv)->GetDirectBufferAddress(intBuffer); \
+JPH_ASSERT(pInts != NULL); \
+const jlong capacityInts = (pEnv)->GetDirectBufferCapacity(intBuffer); \
+JPH_ASSERT(capacityInts >= 0)
+
+/*
+ * pre-processor macro to generate code to access a direct ByteBuffer:
+ */
+#define DIRECT_BYTE_BUFFER(pEnv, byteBuffer, pBytes, capacityBytes) \
+jbyte * const pBytes = (jbyte *) (pEnv)->GetDirectBufferAddress(byteBuffer); \
+JPH_ASSERT(pBytes != NULL); \
+const jlong capacityBytes = (pEnv)->GetDirectBufferCapacity(byteBuffer); \
+JPH_ASSERT(capacityBytes >= 0)
+
+/*
+ * pre-processor macro to generate code to access a direct LongBuffer:
+ */
+#define DIRECT_LONG_BUFFER(pEnv, longBuffer, pLongs, capacityLongs) \
+jlong * const pLongs = (jlong *) (pEnv)->GetDirectBufferAddress(longBuffer); \
+JPH_ASSERT(pLongs != NULL); \
+const jlong capacityLongs = (pEnv)->GetDirectBufferCapacity(longBuffer); \
+JPH_ASSERT(capacityLongs >= 0)
+/*
  * pre-processor macros to generate the body of a static createCopy() method
  * to implement a copy constructor:
  */
