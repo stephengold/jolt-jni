@@ -250,6 +250,7 @@ $(N)/glue/ra/RayCastResult.cpp \
 $(N)/glue/ra/RayCastSettings.cpp \
 $(N)/glue/ra/RayInvDirection.cpp \
 $(N)/glue/r/RMat44.cpp \
+$(N)/glue/r/RMat44Array.cpp \
 $(N)/glue/r/RodBendTwist.cpp \
 $(N)/glue/r/RodStretchShear.cpp \
 $(N)/glue/r/RotatedTranslatedShape.cpp \
@@ -264,6 +265,7 @@ $(N)/glue/sh/Shape.cpp \
 $(N)/glue/sh/ShapeFilter.cpp \
 $(N)/glue/sh/ShapeList.cpp \
 $(N)/glue/sh/ShapeRefC.cpp \
+$(N)/glue/sh/ShapeRefCArray.cpp \
 $(N)/glue/sh/ShapeResult.cpp \
 $(N)/glue/sh/ShapeSettings.cpp \
 $(N)/glue/sh/ShapeSettingsRefC.cpp \
@@ -329,6 +331,7 @@ $(N)/glue/tr/TrackedVehicleControllerSettings.cpp \
 $(N)/glue/tr/TransformedAaBox.cpp \
 $(N)/glue/tr/TransformedShapeCollector.cpp \
 $(N)/glue/tr/TransformedShape.cpp \
+$(N)/glue/tr/TransformedShapeArray.cpp \
 $(N)/glue/tr/TransformedSphere.cpp \
 $(N)/glue/tr/TriangleConvexSupport.cpp \
 $(N)/glue/tr/Triangle.cpp \

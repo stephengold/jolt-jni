@@ -54,6 +54,17 @@ public class TransformedShape
         Runnable freeingAction = owner ? () -> free(shapeVa) : null;
         setVirtualAddress(shapeVa, freeingAction);
     }
+
+    /**
+     * Instantiate with the specified container and native object.
+     *
+     * @param container the containing object, or {@code null} if none
+     * @param shapeVa the virtual address of the native object to assign (not
+     * zero)
+     */
+    TransformedShape(JoltPhysicsObject container, long shapeVa) {
+        super(container, shapeVa);
+    }
     // *************************************************************************
     // ConstTransformedShape methods
 
