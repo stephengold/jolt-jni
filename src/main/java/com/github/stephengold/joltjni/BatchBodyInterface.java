@@ -160,17 +160,16 @@ public class BatchBodyInterface extends BodyInterface {
      * Return the center-of-mass transforms of the specified bodies.
      *
      * @param bodyIds the IDs of the bodies to locate (not null)
-     * @param storeMatrices storage for the matrices (not null, 16 doubles per
-     * body, interleaved, modified)
+     * @param storeMatrices storage for the matrices (not null, modified)
      */
     public void getCenterOfMassTransforms(
-            BodyIdArray bodyIds, DoubleBuffer storeMatrices) {
+            BodyIdArray bodyIds, RMat44Array storeMatrices) {
         int numBodies = bodyIds.length();
-        assert storeMatrices.capacity() >= numBodies * 16;
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.va();
+        long matricesVa = storeMatrices.va();
         getCenterOfMassTransforms(
-                bodyInterfaceVa, arrayVa, numBodies, storeMatrices);
+                bodyInterfaceVa, arrayVa, numBodies, matricesVa);
     }
 
     /**
@@ -210,17 +209,16 @@ public class BatchBodyInterface extends BodyInterface {
      * Copy the inverses of the inertia tensors in system coordinates.
      *
      * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeMatrices storage for the matrices (not null, 16 floats per
-     * body, interleaved, modified)
+     * @param storeMatrices storage for the matrices (not null, modified)
      */
     public void getInverseInertias(
-            BodyIdArray bodyIds, FloatBuffer storeMatrices) {
+            BodyIdArray bodyIds, Mat44Array storeMatrices) {
         int numBodies = bodyIds.length();
-        assert storeMatrices.capacity() >= numBodies * 16;
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.va();
+        long matricesVa = storeMatrices.va();
         getInverseInertias(
-                bodyInterfaceVa, arrayVa, numBodies, storeMatrices);
+                bodyInterfaceVa, arrayVa, numBodies, matricesVa);
     }
 
     /**
@@ -339,41 +337,31 @@ public class BatchBodyInterface extends BodyInterface {
      * Access the shapes of the specified bodies.
      *
      * @param bodyIds the IDs of the bodies (not null)
-     * @return a new array of new references
+     * @param storeShapes storage for the references (not null, modified)
      */
-    public ShapeRefC[] getShapes(BodyIdArray bodyIds) {
+    public void getShapes(BodyIdArray bodyIds, ShapeRefCArray storeShapes) {
         int numBodies = bodyIds.length();
-        LongBuffer storeShapeVas = Jolt.newDirectLongBuffer(numBodies);
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.va();
-        getShapes(bodyInterfaceVa, arrayVa, numBodies, storeShapeVas);
-        ShapeRefC[] result = new ShapeRefC[numBodies];
-        for (int i = 0; i < numBodies; ++i) {
-            long va = storeShapeVas.get(i);
-            result[i] = new ShapeRefC(va, true);
-        }
-        return result;
+        long shapesVa = storeShapes.va();
+        getShapes(bodyInterfaceVa, arrayVa, numBodies, shapesVa);
     }
 
     /**
      * Generate transformed shapes for the specified bodies.
      *
      * @param bodyIds the IDs of the bodies (not null)
-     * @return a new array of new objects
+     * @param storeShapes storage for the transformed shapes (not null,
+     * modified)
      */
-    public TransformedShape[] getTransformedShapes(BodyIdArray bodyIds) {
+    public void getTransformedShapes(
+            BodyIdArray bodyIds, TransformedShapeArray storeShapes) {
         int numBodies = bodyIds.length();
-        LongBuffer storeShapeVas = Jolt.newDirectLongBuffer(numBodies);
         long bodyInterfaceVa = va();
         long arrayVa = bodyIds.va();
+        long shapesVa = storeShapes.va();
         getTransformedShapes(
-                bodyInterfaceVa, arrayVa, numBodies, storeShapeVas);
-        TransformedShape[] result = new TransformedShape[numBodies];
-        for (int i = 0; i < numBodies; ++i) {
-            long va = storeShapeVas.get(i);
-            result[i] = new TransformedShape(va, true);
-        }
-        return result;
+                bodyInterfaceVa, arrayVa, numBodies, shapesVa);
     }
 
     /**
@@ -555,7 +543,7 @@ public class BatchBodyInterface extends BodyInterface {
             long arrayVa, int numBodies, DoubleBuffer storePositions);
 
     native private static void getCenterOfMassTransforms(long bodyInterfaceVa,
-            long arrayVa, int numBodies, DoubleBuffer storeMatrices);
+            long arrayVa, int numBodies, long matricesVa);
 
     native private static void getFrictions(long bodyInterfaceVa, long arrayVa,
             int numBodies, FloatBuffer storeFrictions);
@@ -564,7 +552,7 @@ public class BatchBodyInterface extends BodyInterface {
             long arrayVa, int numBodies, FloatBuffer storeFactors);
 
     native private static void getInverseInertias(long bodyInterfaceVa,
-            long arrayVa, int numBodies, FloatBuffer storeMatrices);
+            long arrayVa, int numBodies, long matricesVa);
 
     native private static void getLinearVelocities(long bodyInterfaceVa,
             long arrayVa, int numBodies, FloatBuffer storeVelocities);
@@ -588,10 +576,10 @@ public class BatchBodyInterface extends BodyInterface {
             int numBodies, FloatBuffer storeOrientations);
 
     native private static void getShapes(long bodyInterfaceVa, long arrayVa,
-            int numBodies, LongBuffer storeShapeVas);
+            int numBodies, long shapesVa);
 
     native private static void getTransformedShapes(long bodyInterfaceVa,
-            long arrayVa, int numBodies, LongBuffer storeShapeVas);
+            long arrayVa, int numBodies, long shapesVa);
 
     native private static void getUseManifoldReductions(long bodyInterfaceVa,
             long arrayVa, int numBodies, ByteBuffer storeStatus);
