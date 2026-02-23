@@ -34,9 +34,11 @@ public class ShapeRefCArray extends JoltPhysicsObject {
     /**
      * Instantiate an array with the specified length.
      *
-     * @param length the desired number of references (&ge;0)
+     * @param length the desired number of references (&gt;0)
      */
     public ShapeRefCArray(int length) {
+        assert length > 0 : "length=" + length;
+
         long arrayVa = create(length);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }

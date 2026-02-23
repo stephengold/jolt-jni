@@ -36,9 +36,11 @@ public class TransformedShapeArray extends JoltPhysicsObject {
     /**
      * Instantiate an array with the specified length.
      *
-     * @param length the desired number of shapes (&ge;0)
+     * @param length the desired number of shapes (&gt;0)
      */
     public TransformedShapeArray(int length) {
+        assert length > 0 : "length=" + length;
+
         long arrayVa = create(length);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }

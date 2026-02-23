@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2024-2025 Stephen Gold
+Copyright (c) 2024-2026 Stephen Gold
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,9 +36,11 @@ public class Mat44Array extends JoltPhysicsObject {
     /**
      * Instantiate an array with the specified length.
      *
-     * @param length the desired number of matrices (&ge;0)
+     * @param length the desired number of matrices (&gt;0)
      */
     public Mat44Array(int length) {
+        assert length > 0 : "length=" + length;
+
         long arrayVa = create(length);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
