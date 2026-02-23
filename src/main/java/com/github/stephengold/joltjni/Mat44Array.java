@@ -31,6 +31,13 @@ import com.github.stephengold.joltjni.readonly.Mat44Arg;
  */
 public class Mat44Array extends JoltPhysicsObject {
     // *************************************************************************
+    // fields
+
+    /**
+     * length (in matrices)
+     */
+    final private int length;
+    // *************************************************************************
     // constructors
 
     /**
@@ -41,6 +48,7 @@ public class Mat44Array extends JoltPhysicsObject {
     public Mat44Array(int length) {
         assert length > 0 : "length=" + length;
 
+        this.length = length;
         long arrayVa = create(length);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
@@ -51,9 +59,12 @@ public class Mat44Array extends JoltPhysicsObject {
      * @param container the containing object, or {@code null} if none
      * @param arrayVa the virtual address of the native object to assign (not
      * zero)
+     * @param length the number of matrices (&gt;0)
      */
-    Mat44Array(JoltPhysicsObject container, long arrayVa) {
+    Mat44Array(JoltPhysicsObject container, long arrayVa, int length) {
         super(container, arrayVa);
+        assert length > 0 : "length=" + length;
+        this.length = length;
     }
     // *************************************************************************
     // new methods exposed
@@ -61,10 +72,13 @@ public class Mat44Array extends JoltPhysicsObject {
     /**
      * Access the matrix at the specified index.
      *
-     * @param elementIndex the index (&ge;0)
+     * @param elementIndex the index (&ge;0, &lt;length)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public Mat44 get(int elementIndex) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         long matrixVa = getMatrix(arrayVa, elementIndex);
         Mat44 result = new Mat44(this, matrixVa);
@@ -73,12 +87,25 @@ public class Mat44Array extends JoltPhysicsObject {
     }
 
     /**
+     * Return the length of the array.
+     *
+     * @return the length (in matrices, &gt;0)
+     */
+    public int length() {
+        return length;
+    }
+
+    /**
      * Store the specified matrix at the specified index.
      *
-     * @param elementIndex the index at which to store the matrix (&ge;0)
-     * @param matrix the matrix to store (not null, unaffected)
+     * @param elementIndex the index at which to store the matrix (&ge;0,
+     * &lt;length)
+     * @param matrix the matrix to store (not {@code null}, unaffected)
      */
     public void set(int elementIndex, Mat44Arg matrix) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         long matrixVa = matrix.targetVa();
         setMatrix(arrayVa, elementIndex, matrixVa);
