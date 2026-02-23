@@ -31,14 +31,24 @@ import com.github.stephengold.joltjni.readonly.RMat44Arg;
  */
 public class RMat44Array extends JoltPhysicsObject {
     // *************************************************************************
+    // fields
+
+    /**
+     * length (in matrices)
+     */
+    final private int length;
+    // *************************************************************************
     // constructors
 
     /**
      * Instantiate an array with the specified length.
      *
-     * @param length the desired number of matrices (&ge;0)
+     * @param length the desired number of matrices (&gt;0)
      */
     public RMat44Array(int length) {
+        assert length > 0 : "length=" + length;
+
+        this.length = length;
         long arrayVa = create(length);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
@@ -48,10 +58,13 @@ public class RMat44Array extends JoltPhysicsObject {
     /**
      * Access the matrix at the specified index.
      *
-     * @param elementIndex the index (&ge;0)
+     * @param elementIndex the index (&ge;0, &lt;length)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public RMat44 get(int elementIndex) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         long matrixVa = getMatrix(arrayVa, elementIndex);
         RMat44 result = new RMat44(this, matrixVa);
@@ -60,12 +73,25 @@ public class RMat44Array extends JoltPhysicsObject {
     }
 
     /**
+     * Return the length of the array.
+     *
+     * @return the length (in matrices, &gt;0)
+     */
+    public int length() {
+        return length;
+    }
+
+    /**
      * Store the specified matrix at the specified index.
      *
-     * @param elementIndex the index at which to store the matrix (&ge;0)
+     * @param elementIndex the index at which to store the matrix (&ge;0,
+     * &lt;length)
      * @param matrix the matrix to store (not {@code null}, unaffected)
      */
     public void set(int elementIndex, RMat44Arg matrix) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         long matrixVa = matrix.targetVa();
         setMatrix(arrayVa, elementIndex, matrixVa);
