@@ -42,18 +42,6 @@ public class RMat44Array extends JoltPhysicsObject {
         long arrayVa = create(length);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
-
-    /**
-     * Instantiate with the specified container and native object.
-     *
-     * @param container the containing object, or {@code null} if none
-     * @param arrayVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    RMat44Array(JoltPhysicsObject container, long arrayVa) {
-        super(container, arrayVa);
-    }
-
     // *************************************************************************
     // new methods exposed
 

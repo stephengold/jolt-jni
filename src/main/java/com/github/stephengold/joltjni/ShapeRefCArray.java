@@ -40,18 +40,6 @@ public class ShapeRefCArray extends JoltPhysicsObject {
         long arrayVa = create(length);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
-
-    /**
-     * Instantiate with the specified container and native object.
-     *
-     * @param container the containing object, or {@code null} if none
-     * @param arrayVa the virtual address of the native object to assign (not
-     * zero)
-     */
-    ShapeRefCArray(JoltPhysicsObject container, long arrayVa) {
-        super(container, arrayVa);
-    }
-
     // *************************************************************************
     // new methods exposed
 
