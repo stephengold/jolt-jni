@@ -25,13 +25,18 @@ import com.github.stephengold.joltjni.BatchBodyInterface;
 import com.github.stephengold.joltjni.BodyCreationSettings;
 import com.github.stephengold.joltjni.BodyIdArray;
 import com.github.stephengold.joltjni.Jolt;
+import com.github.stephengold.joltjni.Mat44;
+import com.github.stephengold.joltjni.Mat44Array;
 import com.github.stephengold.joltjni.PhysicsSystem;
 import com.github.stephengold.joltjni.Quat;
 import com.github.stephengold.joltjni.RMat44;
+import com.github.stephengold.joltjni.RMat44Array;
 import com.github.stephengold.joltjni.RVec3;
 import com.github.stephengold.joltjni.ShapeRefC;
+import com.github.stephengold.joltjni.ShapeRefCArray;
 import com.github.stephengold.joltjni.SphereShape;
 import com.github.stephengold.joltjni.TransformedShape;
+import com.github.stephengold.joltjni.TransformedShapeArray;
 import com.github.stephengold.joltjni.Vec3;
 import com.github.stephengold.joltjni.enumerate.EActivation;
 import com.github.stephengold.joltjni.enumerate.EMotionType;
@@ -201,28 +206,33 @@ public class BodyBatchQueryTest {
         }
 
         // Verify Shapes
-        ShapeRefC[] batchShapes = bi.getShapes(ids);
+        ShapeRefCArray batchShapes = new ShapeRefCArray(n);
+        bi.getShapes(ids, batchShapes);
         for (int i = 0; i < n; ++i) {
             ShapeRefC singularRef = bi.getShape(ids.get(i));
-            Assert.assertEquals(
-                    singularRef.targetVa(), batchShapes[i].targetVa());
-            TestUtils.testClose(singularRef, batchShapes[i]);
+            ShapeRefC arrayRef = batchShapes.get(i);
+            Assert.assertEquals(singularRef.targetVa(), arrayRef.targetVa());
+            TestUtils.testClose(singularRef, arrayRef);
         }
+        TestUtils.testClose(batchShapes);
 
         // Verify TransformedShapes
-        TransformedShape[] batchTs = bi.getTransformedShapes(ids);
+        TransformedShapeArray batchTs = new TransformedShapeArray(n);
+        bi.getTransformedShapes(ids, batchTs);
         for (int i = 0; i < n; ++i) {
             TransformedShape singularTs = bi.getTransformedShape(ids.get(i));
+            TransformedShape arrayTs = batchTs.get(i);
             ConstShape s1 = singularTs.getShape();
-            ConstShape s2 = batchTs[i].getShape();
+            ConstShape s2 = arrayTs.getShape();
 
             Assert.assertEquals(s1.targetVa(), s2.targetVa());
-            TestUtils.testClose(s1, s2, singularTs, batchTs[i]);
+            TestUtils.testClose(s1, s2, singularTs, arrayTs);
         }
+        TestUtils.testClose(batchTs);
     }
 
     /**
-     * Verify batch matrix getters (COM transform).
+     * Verify batch matrix getters (COM transform and inverse inertia).
      *
      * @param bi  the interface to use (not null)
      * @param ids IDs of bodies to query (not null)
@@ -230,13 +240,27 @@ public class BodyBatchQueryTest {
      */
     private void verifyMatrixGetters(
             BatchBodyInterface bi, BodyIdArray ids, int n) {
-        DoubleBuffer matBuf = Jolt.newDirectDoubleBuffer(n * 16);
-        bi.getCenterOfMassTransforms(ids, matBuf);
+        // Verify COM Transforms (Real precision)
+        RMat44Array comBuf = new RMat44Array(n);
+        bi.getCenterOfMassTransforms(ids, comBuf);
         for (int i = 0; i < n; ++i) {
-            RMat44 m = bi.getCenterOfMassTransform(ids.get(i));
-            Assert.assertEquals(m.getElement(0, 0), matBuf.get(i * 16), 1e-6);
-            TestUtils.testClose(m);
+            RMat44 singularM = bi.getCenterOfMassTransform(ids.get(i));
+            RMat44 arrayM = comBuf.get(i);
+            Assert.assertTrue(singularM.isEqual(arrayM));
+            TestUtils.testClose(singularM, arrayM);
         }
+        TestUtils.testClose(comBuf);
+
+        // Verify Inverse Inertias (Single precision)
+        Mat44Array inertiaBuf = new Mat44Array(n);
+        bi.getInverseInertias(ids, inertiaBuf);
+        for (int i = 0; i < n; ++i) {
+            Mat44 singularM = bi.getInverseInertia(ids.get(i));
+            Mat44 arrayM = inertiaBuf.get(i);
+            Assert.assertTrue(singularM.isEqual(arrayM));
+            TestUtils.testClose(singularM, arrayM);
+        }
+        TestUtils.testClose(inertiaBuf);
     }
 
     /**

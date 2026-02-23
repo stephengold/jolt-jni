@@ -151,31 +151,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_ge
 /*
  * Class:     com_github_stephengold_joltjni_BatchBodyInterface
  * Method:    getCenterOfMassTransforms
- * Signature: (JJILjava/nio/DoubleBuffer;)V
+ * Signature: (JJIJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_getCenterOfMassTransforms
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeMatrices) {
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
+  jlong matricesVa) {
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_DOUBLE_BUFFER(pEnv, storeMatrices, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies * 16);
+    RMat44 * const pMatrices = reinterpret_cast<RMat44 *> (matricesVa);
     for (jlong i = 0; i < numBodies; ++i) {
-        RMat44 m = pInterface->GetCenterOfMassTransform(pArray[i]);
-        jlong offset = i * 16;
-        for (uint col = 0; col < 3; ++col) {
-            Vec4 v = m.GetColumn4(col);
-            pOut[offset + col * 4 + 0] = (jdouble) v.GetX();
-            pOut[offset + col * 4 + 1] = (jdouble) v.GetY();
-            pOut[offset + col * 4 + 2] = (jdouble) v.GetZ();
-            pOut[offset + col * 4 + 3] = (jdouble) v.GetW();
-        }
-        RVec3 t = m.GetTranslation();
-        pOut[offset + 12] = (jdouble) t.GetX();
-        pOut[offset + 13] = (jdouble) t.GetY();
-        pOut[offset + 14] = (jdouble) t.GetZ();
-        pOut[offset + 15] = 1.0;
+        pMatrices[i] = pInterface->GetCenterOfMassTransform(pArray[i]);
     }
 }
 
@@ -218,26 +204,17 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_ge
 /*
  * Class:     com_github_stephengold_joltjni_BatchBodyInterface
  * Method:    getInverseInertias
- * Signature: (JJILjava/nio/FloatBuffer;)V
+ * Signature: (JJIJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_getInverseInertias
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeMatrices) {
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
+  jlong matricesVa) {
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_FLOAT_BUFFER(pEnv, storeMatrices, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies * 16);
+    Mat44 * const pMatrices = reinterpret_cast<Mat44 *> (matricesVa);
     for (jlong i = 0; i < numBodies; ++i) {
-        Mat44 m = pInterface->GetInverseInertia(pArray[i]);
-        jlong offset = i * 16;
-        for (uint col = 0; col < 4; ++col) {
-            Vec4 v = m.GetColumn4(col);
-            pOut[offset + col * 4 + 0] = v.GetX();
-            pOut[offset + col * 4 + 1] = v.GetY();
-            pOut[offset + col * 4 + 2] = v.GetZ();
-            pOut[offset + col * 4 + 3] = v.GetW();
-        }
+        pMatrices[i] = pInterface->GetInverseInertia(pArray[i]);
     }
 }
 
@@ -380,42 +357,34 @@ JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_ge
 /*
  * Class:     com_github_stephengold_joltjni_BatchBodyInterface
  * Method:    getShapes
- * Signature: (JJILjava/nio/LongBuffer;)V
+ * Signature: (JJIJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_getShapes
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeShapeVas) {
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
+  jlong shapesVa) {
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_LONG_BUFFER(pEnv, storeShapeVas, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
+    ShapeRefC * const pShapes = reinterpret_cast<ShapeRefC *> (shapesVa);
     for (jlong i = 0; i < numBodies; ++i) {
-        ShapeRefC * const pResult = new ShapeRefC();
-        TRACE_NEW("ShapeRefC", pResult)
-        *pResult = pInterface->GetShape(pArray[i]);
-        pOut[i] = reinterpret_cast<jlong> (pResult);
+        pShapes[i] = pInterface->GetShape(pArray[i]);
     }
 }
 
 /*
  * Class:     com_github_stephengold_joltjni_BatchBodyInterface
  * Method:    getTransformedShapes
- * Signature: (JJILjava/nio/LongBuffer;)V
+ * Signature: (JJIJ)V
  */
 JNIEXPORT void JNICALL Java_com_github_stephengold_joltjni_BatchBodyInterface_getTransformedShapes
-  (JNIEnv *pEnv, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
-  jobject storeShapeVas) {
+  (JNIEnv *, jclass, jlong bodyInterfaceVa, jlong arrayVa, jint numBodies,
+  jlong shapesVa) {
     const BodyInterface * const pInterface
             = reinterpret_cast<BodyInterface *> (bodyInterfaceVa);
     const BodyID * const pArray = reinterpret_cast<const BodyID *> (arrayVa);
-    DIRECT_LONG_BUFFER(pEnv, storeShapeVas, pOut, capacity);
-    JPH_ASSERT(capacity >= numBodies);
+    TransformedShape * const pShapes = reinterpret_cast<TransformedShape *> (shapesVa);
     for (jlong i = 0; i < numBodies; ++i) {
-        TransformedShape * const pResult = new TransformedShape();
-        TRACE_NEW("TransformedShape", pResult)
-        *pResult = pInterface->GetTransformedShape(pArray[i]);
-        pOut[i] = reinterpret_cast<jlong> (pResult);
+        pShapes[i] = pInterface->GetTransformedShape(pArray[i]);
     }
 }
 
