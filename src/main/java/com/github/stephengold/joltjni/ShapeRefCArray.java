@@ -73,14 +73,13 @@ public class ShapeRefCArray extends JoltPhysicsObject {
      * Store the specified reference at the specified index.
      *
      * @param elementIndex the index at which to store the reference (&ge;0)
-     * @param ref the reference to store (not null, unaffected)
+     * @param ref the reference to store (not {@code null}, unaffected)
      */
     public void set(int elementIndex, ShapeRefC ref) {
         long arrayVa = va();
         long refVa = ref.va();
         setRef(arrayVa, elementIndex, refVa);
     }
-
     // *************************************************************************
     // native private methods
 

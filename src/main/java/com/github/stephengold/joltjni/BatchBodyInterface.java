@@ -58,16 +58,16 @@ public class BatchBodyInterface extends BodyInterface {
     BatchBodyInterface(PhysicsSystem system, long bodyInterfaceVa) {
         super(system, bodyInterfaceVa);
     }
-
     // *************************************************************************
     // new methods exposed
 
     /**
      * Test whether the specified bodies are active.
      *
-     * @param bodyIds the IDs of the bodies to test (not null)
-     * @param storeStatus storage for the statuses (not null, 1 for active,
-     * 0 for inactive)
+     * @param bodyIds the IDs of the bodies to test (not {@code null},
+     * unaffected)
+     * @param storeStatus storage for the statuses (not {@code null}, 1 for
+     * active, 0 for inactive, modified)
      */
     public void areActive(BodyIdArray bodyIds, ByteBuffer storeStatus) {
         int numBodies = bodyIds.length();
@@ -80,9 +80,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Test whether the specified bodies are added to the system.
      *
-     * @param bodyIds the IDs of the bodies to search for (not null)
-     * @param storeStatus storage for the statuses (not null, 1 for added, 0 for
-     * not added)
+     * @param bodyIds the IDs of the bodies to search for (not {@code null},
+     * unaffected)
+     * @param storeStatus storage for the statuses (not {@code null}, 1 for
+     * added, 0 for not added, modified)
      */
     public void areAdded(BodyIdArray bodyIds, ByteBuffer storeStatus) {
         int numBodies = bodyIds.length();
@@ -95,9 +96,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Test whether the specified bodies are sensors.
      *
-     * @param bodyIds the IDs of the bodies to test (not null)
-     * @param storeStatus storage for the statuses (not null, 1 for sensor,
-     * 0 for non-sensor)
+     * @param bodyIds the IDs of the bodies to test (not {@code null},
+     * unaffected)
+     * @param storeStatus storage for the statuses (not {@code null}, 1 for
+     * sensor, 0 for non-sensor, modified)
      */
     public void areSensors(BodyIdArray bodyIds, ByteBuffer storeStatus) {
         int numBodies = bodyIds.length();
@@ -110,9 +112,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Copy the angular velocities of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeVelocities storage for the velocities (not null, interleaved
-     * X,Y,Z, size&ge;3*numBodies, modified)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param storeVelocities storage for the velocities (not {@code null},
+     * interleaved X,Y,Z, capacity&ge;3*numBodies, modified)
      */
     public void getAngularVelocities(
             BodyIdArray bodyIds, FloatBuffer storeVelocities) {
@@ -127,9 +129,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Return the types of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeTypes storage for the ordinals (not null, size&ge;numBodies,
-     * modified)
+     * @param bodyIds the IDs of the bodies to query (not {@code null},
+     * unaffected)
+     * @param storeTypes storage for the ordinals (not {@code null},
+     * capacity&ge;numBodies, modified)
      */
     public void getBodyTypes(BodyIdArray bodyIds, ByteBuffer storeTypes) {
         int numBodies = bodyIds.length();
@@ -142,9 +145,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Locate the centers of mass of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies to locate (not null)
-     * @param storePositions storage for the locations (not null, interleaved
-     * X,Y,Z, size&ge;3*numBodies, modified)
+     * @param bodyIds the IDs of the bodies to locate (not {@code null},
+     * unaffected)
+     * @param storePositions storage for the locations (not {@code null},
+     * interleaved X,Y,Z, capacity&ge;3*numBodies, modified)
      */
     public void getCenterOfMassPositions(
             BodyIdArray bodyIds, DoubleBuffer storePositions) {
@@ -159,8 +163,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Return the center-of-mass transforms of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies to locate (not null)
-     * @param storeMatrices storage for the matrices (not null, modified)
+     * @param bodyIds the IDs of the bodies to locate (not {@code null},
+     * unaffected)
+     * @param storeMatrices storage for the matrices (not {@code null},
+     * modified)
      */
     public void getCenterOfMassTransforms(
             BodyIdArray bodyIds, RMat44Array storeMatrices) {
@@ -175,9 +181,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Return the friction ratios of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeFrictions storage for the values
-     * (not null, size&ge;numBodies, modified)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param storeFrictions storage for the values (not {@code null},
+     * capacity&ge;numBodies, modified)
      */
     public void getFrictions(BodyIdArray bodyIds, FloatBuffer storeFrictions) {
         int numBodies = bodyIds.length();
@@ -191,12 +197,12 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Return the gravity factors of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeFactors storage for the values (not null, size&ge;numBodies,
-     * modified)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param storeFactors storage for the values (not {@code null},
+     * capacity&ge;numBodies, modified)
      */
-    public void getGravityFactors(BodyIdArray bodyIds,
-            FloatBuffer storeFactors) {
+    public void getGravityFactors(
+            BodyIdArray bodyIds, FloatBuffer storeFactors) {
         int numBodies = bodyIds.length();
         assert storeFactors.capacity() >= numBodies;
         long bodyInterfaceVa = va();
@@ -208,8 +214,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Copy the inverses of the inertia tensors in system coordinates.
      *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeMatrices storage for the matrices (not null, modified)
+     * @param bodyIds the IDs of the bodies to query (not {@code null},
+     * unaffected)
+     * @param storeMatrices storage for the matrices (not {@code null},
+     * modified)
      */
     public void getInverseInertias(
             BodyIdArray bodyIds, Mat44Array storeMatrices) {
@@ -224,9 +232,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Copy the linear velocities of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeVelocities storage for the velocities (not null, interleaved
-     * X,Y,Z, size&ge;3*numBodies, modified)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param storeVelocities storage for the velocities (not {@code null},
+     * interleaved X,Y,Z, capacity&ge;3*numBodies, modified)
      */
     public void getLinearVelocities(
             BodyIdArray bodyIds, FloatBuffer storeVelocities) {
@@ -241,9 +249,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Return the motion qualities of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeQualities storage for the ordinals
-     * (not null, size&ge;numBodies, modified)
+     * @param bodyIds the IDs of the bodies to query (not {@code null},
+     * unaffected)
+     * @param storeQualities storage for the ordinals (not {@code null},
+     * capacity&ge;numBodies, modified)
      */
     public void getMotionQualities(
             BodyIdArray bodyIds, ByteBuffer storeQualities) {
@@ -258,9 +267,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Return the motion types of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeTypes storage for the ordinals (not null, size&ge;numBodies,
-     * modified)
+     * @param bodyIds the IDs of the bodies to query (not {@code null},
+     * unaffected)
+     * @param storeTypes storage for the ordinals (not {@code null},
+     * capacity&ge;numBodies, modified)
      */
     public void getMotionTypes(BodyIdArray bodyIds, ByteBuffer storeTypes) {
         int numBodies = bodyIds.length();
@@ -273,9 +283,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Return the object layers of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeLayers storage for the layers (not null, size&ge;numBodies,
-     * modified)
+     * @param bodyIds the IDs of the bodies to query (not {@code null},
+     * unaffected)
+     * @param storeLayers storage for the layers (not {@code null},
+     * capacity&ge;numBodies, modified)
      */
     public void getObjectLayers(BodyIdArray bodyIds, IntBuffer storeLayers) {
         int numBodies = bodyIds.length();
@@ -288,9 +299,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Copy the locations of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies to locate (not null)
-     * @param storeLocations storage for the locations (not null, interleaved
-     * X,Y,Z, size&ge;3*numBodies, modified)
+     * @param bodyIds the IDs of the bodies to locate (not {@code null},
+     * unaffected)
+     * @param storeLocations storage for the locations (not {@code null},
+     * interleaved X,Y,Z, capacity&ge;3*numBodies, modified)
      */
     public void getPositions(BodyIdArray bodyIds, DoubleBuffer storeLocations) {
         int numBodies = bodyIds.length();
@@ -303,9 +315,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Return the restitution ratios of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies to query (not null)
-     * @param storeRestitutions storage for the values
-     * (not null, size&ge;numBodies, modified)
+     * @param bodyIds the IDs of the bodies to query (not {@code null},
+     * unaffected)
+     * @param storeRestitutions storage for the values (not {@code null},
+     * capacity&ge;numBodies, modified)
      */
     public void getRestitutions(
             BodyIdArray bodyIds, FloatBuffer storeRestitutions) {
@@ -320,9 +333,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Copy the orientations of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeOrientations storage for the rotations (not null, interleaved
-     * X,Y,Z,W, size&ge;4*numBodies, modified)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param storeOrientations storage for the rotations (not {@code null},
+     * interleaved X,Y,Z,W, capacity&ge;4*numBodies, modified)
      */
     public void getRotations(
             BodyIdArray bodyIds, FloatBuffer storeOrientations) {
@@ -336,8 +349,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Access the shapes of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeShapes storage for the references (not null, modified)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param storeShapes storage for the references (not {@code null},
+     * modified)
      */
     public void getShapes(BodyIdArray bodyIds, ShapeRefCArray storeShapes) {
         int numBodies = bodyIds.length();
@@ -350,8 +364,8 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Generate transformed shapes for the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeShapes storage for the transformed shapes (not null,
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param storeShapes storage for the transformed shapes (not {@code null},
      * modified)
      */
     public void getTransformedShapes(
@@ -367,9 +381,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Test whether manifold reduction is enabled for the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeStatus storage for the statuses (not null, 1 for enabled,
-     * 0 for disabled, size&ge;numBodies, modified)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param storeStatus storage for the statuses (not {@code null}, 1 for
+     * enabled, 0 for disabled, capacity&ge;numBodies, modified)
      */
     public void getUseManifoldReductions(
             BodyIdArray bodyIds, ByteBuffer storeStatus) {
@@ -384,9 +398,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Return the user data of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param storeData storage for the values (not null, size&ge;numBodies,
-     * modified)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param storeData storage for the values (not {@code null},
+     * capacity&ge;numBodies, modified)
      */
     public void getUserData(BodyIdArray bodyIds, LongBuffer storeData) {
         int numBodies = bodyIds.length();
@@ -399,9 +413,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Alter the angular velocities of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param velocities the desired velocities (not null, interleaved
-     * X,Y,Z, size&ge;3*numBodies)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param velocities the desired velocities (not {@code null}, interleaved
+     * X,Y,Z, capacity&ge;3*numBodies, unaffected)
      */
     public void setAngularVelocities(
             BodyIdArray bodyIds, FloatBuffer velocities) {
@@ -416,8 +430,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Alter the friction ratios of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param frictions the desired values (not null, size&ge;numBodies)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param frictions the desired values (not {@code null},
+     * capacity&ge;numBodies)
      */
     public void setFrictions(BodyIdArray bodyIds, FloatBuffer frictions) {
         int numBodies = bodyIds.length();
@@ -430,8 +445,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Alter the gravity factors of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param factors the desired values (not null, size&ge;numBodies)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param factors the desired values (not {@code null},
+     * capacity&ge;numBodies, unaffected)
      */
     public void setGravityFactors(BodyIdArray bodyIds, FloatBuffer factors) {
         int numBodies = bodyIds.length();
@@ -444,9 +460,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Alter the linear velocities of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param velocities the desired velocities (not null, interleaved
-     * X,Y,Z, size&ge;3*numBodies)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param velocities the desired velocities (not {@code null}, interleaved
+     * X,Y,Z, capacity&ge;3*numBodies, unaffected)
      */
     public void setLinearVelocities(
             BodyIdArray bodyIds, FloatBuffer velocities) {
@@ -461,8 +477,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Alter the object layers of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param layers the desired layers (not null, size&ge;numBodies)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param layers the desired layers (not {@code null},
+     * capacity&ge;numBodies, unaffected)
      */
     public void setObjectLayers(BodyIdArray bodyIds, IntBuffer layers) {
         int numBodies = bodyIds.length();
@@ -475,10 +492,10 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Relocate the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param locations the desired locations (not null, interleaved
-     * X,Y,Z, size&ge;3*numBodies)
-     * @param activation whether to activate the bodies (not null)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param locations the desired locations (not {@code null}, interleaved
+     * X,Y,Z, capacity&ge;3*numBodies, unaffected)
+     * @param activation whether to activate the bodies (not {@code null})
      */
     public void setPositions(BodyIdArray bodyIds, DoubleBuffer locations,
             EActivation activation) {
@@ -494,8 +511,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Alter the restitution ratios of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param restitutions the desired values (not null, size&ge;numBodies)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param restitutions the desired values (not {@code null},
+     * capacity&ge;numBodies, unaffected)
      */
     public void setRestitutions(
             BodyIdArray bodyIds, FloatBuffer restitutions) {
@@ -510,8 +528,9 @@ public class BatchBodyInterface extends BodyInterface {
     /**
      * Alter the user data of the specified bodies.
      *
-     * @param bodyIds the IDs of the bodies (not null)
-     * @param data the desired values (not null, size&ge;numBodies)
+     * @param bodyIds the IDs of the bodies (not {@code null}, unaffected)
+     * @param data the desired values (not {@code null}, capacity&ge;numBodies,
+     * unaffected)
      */
     public void setUserData(BodyIdArray bodyIds, LongBuffer data) {
         int numBodies = bodyIds.length();
@@ -520,7 +539,6 @@ public class BatchBodyInterface extends BodyInterface {
         long arrayVa = bodyIds.va();
         setUserData(bodyInterfaceVa, arrayVa, numBodies, data);
     }
-
     // *************************************************************************
     // native private methods
 
@@ -542,8 +560,8 @@ public class BatchBodyInterface extends BodyInterface {
     native private static void getCenterOfMassPositions(long bodyInterfaceVa,
             long arrayVa, int numBodies, DoubleBuffer storePositions);
 
-    native private static void getCenterOfMassTransforms(long bodyInterfaceVa,
-            long arrayVa, int numBodies, long matricesVa);
+    native private static void getCenterOfMassTransforms(
+            long bodyInterfaceVa, long arrayVa, int numBodies, long matricesVa);
 
     native private static void getFrictions(long bodyInterfaceVa, long arrayVa,
             int numBodies, FloatBuffer storeFrictions);
@@ -551,8 +569,8 @@ public class BatchBodyInterface extends BodyInterface {
     native private static void getGravityFactors(long bodyInterfaceVa,
             long arrayVa, int numBodies, FloatBuffer storeFactors);
 
-    native private static void getInverseInertias(long bodyInterfaceVa,
-            long arrayVa, int numBodies, long matricesVa);
+    native private static void getInverseInertias(
+            long bodyInterfaceVa, long arrayVa, int numBodies, long matricesVa);
 
     native private static void getLinearVelocities(long bodyInterfaceVa,
             long arrayVa, int numBodies, FloatBuffer storeVelocities);
@@ -575,8 +593,8 @@ public class BatchBodyInterface extends BodyInterface {
     native private static void getRotations(long bodyInterfaceVa, long arrayVa,
             int numBodies, FloatBuffer storeOrientations);
 
-    native private static void getShapes(long bodyInterfaceVa, long arrayVa,
-            int numBodies, long shapesVa);
+    native private static void getShapes(
+            long bodyInterfaceVa, long arrayVa, int numBodies, long shapesVa);
 
     native private static void getTransformedShapes(long bodyInterfaceVa,
             long arrayVa, int numBodies, long shapesVa);
@@ -608,6 +626,6 @@ public class BatchBodyInterface extends BodyInterface {
     native private static void setRestitutions(long bodyInterfaceVa,
             long arrayVa, int numBodies, FloatBuffer restitutions);
 
-    native private static void setUserData(long bodyInterfaceVa, long arrayVa,
-            int numBodies, LongBuffer data);
+    native private static void setUserData(
+            long bodyInterfaceVa, long arrayVa, int numBodies, LongBuffer data);
 }

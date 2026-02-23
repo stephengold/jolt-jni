@@ -75,14 +75,13 @@ public class RMat44Array extends JoltPhysicsObject {
      * Store the specified matrix at the specified index.
      *
      * @param elementIndex the index at which to store the matrix (&ge;0)
-     * @param matrix the matrix to store (not null, unaffected)
+     * @param matrix the matrix to store (not {@code null}, unaffected)
      */
     public void set(int elementIndex, RMat44Arg matrix) {
         long arrayVa = va();
         long matrixVa = matrix.targetVa();
         setMatrix(arrayVa, elementIndex, matrixVa);
     }
-
     // *************************************************************************
     // native private methods
 

@@ -41,8 +41,7 @@ public enum FillMode {
      */
     SurfaceOnly,
     /**
-     * cast a ray to distinguish inside from outside (native name:
-     * RAYCAST_FILL)
+     * cast a ray to distinguish inside from outside (native name: RAYCAST_FILL)
      */
     RaycastFill
 }

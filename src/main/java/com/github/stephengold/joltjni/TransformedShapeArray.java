@@ -75,14 +75,13 @@ public class TransformedShapeArray extends JoltPhysicsObject {
      * Store the specified shape at the specified index.
      *
      * @param elementIndex the index at which to store the shape (&ge;0)
-     * @param shape the shape to store (not null, unaffected)
+     * @param shape the shape to store (not {@code null}, unaffected)
      */
     public void set(int elementIndex, ConstTransformedShape shape) {
         long arrayVa = va();
         long shapeVa = shape.targetVa();
         setShape(arrayVa, elementIndex, shapeVa);
     }
-
     // *************************************************************************
     // native private methods
 
