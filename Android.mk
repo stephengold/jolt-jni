@@ -34,6 +34,7 @@ $(N)/glue/al/AllHitCollideShapeBodyCollector.cpp \
 $(N)/glue/al/AllHitCollideShapeCollector.cpp \
 $(N)/glue/al/AllHitRayCastBodyCollector.cpp \
 $(N)/glue/al/AllHitTransformedShapeCollector.cpp \
+$(N)/glue/b/BatchBodyInterface.cpp \
 $(N)/glue/b/BcsResult.cpp \
 $(N)/glue/b/BroadPhaseBruteForce.cpp \
 $(N)/glue/b/BroadPhaseCastResult.cpp \
@@ -43,7 +44,6 @@ $(N)/glue/b/BroadPhaseLayerInterface.cpp \
 $(N)/glue/b/BroadPhaseLayerInterfaceTable.cpp \
 $(N)/glue/b/BroadPhaseQuadTree.cpp \
 $(N)/glue/b/BroadPhaseQuery.cpp \
-$(N)/glue/ba/BatchBodyInterface.cpp \
 $(N)/glue/bo/BodyActivationListener.cpp \
 $(N)/glue/bo/Body.cpp \
 $(N)/glue/bo/BodyCreationSettings.cpp \
