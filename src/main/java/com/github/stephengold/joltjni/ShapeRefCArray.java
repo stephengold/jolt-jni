@@ -29,6 +29,13 @@ package com.github.stephengold.joltjni;
  */
 public class ShapeRefCArray extends JoltPhysicsObject {
     // *************************************************************************
+    // fields
+
+    /**
+     * length (in references)
+     */
+    final private int length;
+    // *************************************************************************
     // constructors
 
     /**
@@ -39,6 +46,7 @@ public class ShapeRefCArray extends JoltPhysicsObject {
     public ShapeRefCArray(int length) {
         assert length > 0 : "length=" + length;
 
+        this.length = length;
         long arrayVa = create(length);
         setVirtualAddress(arrayVa, () -> free(arrayVa));
     }
@@ -48,10 +56,13 @@ public class ShapeRefCArray extends JoltPhysicsObject {
     /**
      * Access the reference at the specified index.
      *
-     * @param elementIndex the index (&ge;0)
+     * @param elementIndex the index (&ge;0, &lt;length)
      * @return a new JVM object with the pre-existing native object assigned
      */
     public ShapeRefC get(int elementIndex) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         long refVa = getRef(arrayVa, elementIndex);
         ShapeRefC result = new ShapeRefC(this, refVa);
@@ -60,12 +71,25 @@ public class ShapeRefCArray extends JoltPhysicsObject {
     }
 
     /**
+     * Return the length of the array.
+     *
+     * @return the length (in references, &gt;0)
+     */
+    public int length() {
+        return length;
+    }
+
+    /**
      * Store the specified reference at the specified index.
      *
-     * @param elementIndex the index at which to store the reference (&ge;0)
+     * @param elementIndex the index at which to store the reference (&ge;0,
+     * &lt;length)
      * @param ref the reference to store (not {@code null}, unaffected)
      */
     public void set(int elementIndex, ShapeRefC ref) {
+        assert elementIndex >= 0 && elementIndex < length :
+                "Out of range:  index=" + elementIndex + " length=" + length;
+
         long arrayVa = va();
         long refVa = ref.va();
         setRef(arrayVa, elementIndex, refVa);
