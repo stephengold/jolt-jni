@@ -1,6 +1,6 @@
 # Release log for the Jolt-JNI project
 
-## Version 3.7.0 released on TBD
+## Version 3.7.0 released on 23 February 2026
 
 + Bugfix:  missing `TRACE_NEW` in `BodyInterface_getTransformedShape`
   (issue #37)
