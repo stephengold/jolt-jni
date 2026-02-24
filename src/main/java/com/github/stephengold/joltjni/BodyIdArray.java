@@ -106,7 +106,8 @@ public class BodyIdArray extends JoltPhysicsObject {
     /**
      * Return the ID at the specified index.
      *
-     * @param elementIndex the index from which to copy the ID (&ge;0)
+     * @param elementIndex the index from which to copy the ID (&ge;0,
+     * &lt;length)
      * @return the {@code BodyID} value
      */
     public int get(int elementIndex) {
@@ -131,7 +132,8 @@ public class BodyIdArray extends JoltPhysicsObject {
     /**
      * Store the specified ID at the specified index.
      *
-     * @param elementIndex the index at which to store the ID (&ge;0)
+     * @param elementIndex the index at which to store the ID (&ge;0,
+     * &lt;length)
      * @param bodyId the ID to store
      */
     public void set(int elementIndex, int bodyId) {

@@ -24,7 +24,7 @@ package com.github.stephengold.joltjni;
 import com.github.stephengold.joltjni.readonly.RMat44Arg;
 
 /**
- * A fixed-length array of double-precision coordinate transforms. (native type:
+ * A fixed-length array of coordinate transforms. (native type:
  * {@code RMat44[]})
  *
  * @author xI-Mx-Ix
